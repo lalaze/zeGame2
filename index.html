@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#6e4128" />
+    <meta name="description" content="A cozy pixel-art coffee shop: plan the menu, stock the pantry, open for the day and grow your café." />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Bean Café" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" id="favicon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icon-192.png" />
+    <title>Tiny Bean Café</title>
+    <style>
+      /* Shown until the game is ready (main.ts adds .ready to <body>); kept inline so it
+         works before the stylesheet and fonts load. */
+      html, body { background: #3a2216; }
+      body:not(.ready) #app { visibility: hidden; }
+      #loader {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        place-items: center;
+        background: #3a2216;
+        transition: opacity 0.25s;
+      }
+      body.ready #loader { opacity: 0; pointer-events: none; }
+      #loader i {
+        width: 12px;
+        height: 12px;
+        animation: loader-spin 0.8s steps(1) infinite;
+      }
+      @keyframes loader-spin {
+        0% { box-shadow: -16px -16px #ffd84a, 0px -16px #6b3a22, 16px -16px #6b3a22, 16px 0px #6b3a22, 16px 16px #6b3a22, 0px 16px #c0601f, -16px 16px #e3913f, -16px 0px #f7b25e; }
+        12.5% { box-shadow: -16px -16px #f7b25e, 0px -16px #ffd84a, 16px -16px #6b3a22, 16px 0px #6b3a22, 16px 16px #6b3a22, 0px 16px #6b3a22, -16px 16px #c0601f, -16px 0px #e3913f; }
+        25% { box-shadow: -16px -16px #e3913f, 0px -16px #f7b25e, 16px -16px #ffd84a, 16px 0px #6b3a22, 16px 16px #6b3a22, 0px 16px #6b3a22, -16px 16px #6b3a22, -16px 0px #c0601f; }
+        37.5% { box-shadow: -16px -16px #c0601f, 0px -16px #e3913f, 16px -16px #f7b25e, 16px 0px #ffd84a, 16px 16px #6b3a22, 0px 16px #6b3a22, -16px 16px #6b3a22, -16px 0px #6b3a22; }
+        50% { box-shadow: -16px -16px #6b3a22, 0px -16px #c0601f, 16px -16px #e3913f, 16px 0px #f7b25e, 16px 16px #ffd84a, 0px 16px #6b3a22, -16px 16px #6b3a22, -16px 0px #6b3a22; }
+        62.5% { box-shadow: -16px -16px #6b3a22, 0px -16px #6b3a22, 16px -16px #c0601f, 16px 0px #e3913f, 16px 16px #f7b25e, 0px 16px #ffd84a, -16px 16px #6b3a22, -16px 0px #6b3a22; }
+        75% { box-shadow: -16px -16px #6b3a22, 0px -16px #6b3a22, 16px -16px #6b3a22, 16px 0px #c0601f, 16px 16px #e3913f, 0px 16px #f7b25e, -16px 16px #ffd84a, -16px 0px #6b3a22; }
+        87.5% { box-shadow: -16px -16px #6b3a22, 0px -16px #6b3a22, 16px -16px #6b3a22, 16px 0px #6b3a22, 16px 16px #c0601f, 0px 16px #e3913f, -16px 16px #f7b25e, -16px 0px #ffd84a; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #loader i { animation-duration: 2.4s; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loader" role="progressbar" aria-label="Loading"><i></i></div>
+    <div id="app">
+      <header class="hud">
+        <div class="brand">
+          <img src="./icon.svg" alt="" class="brand-icon" width="32" height="32" />
+          <span class="brand-name" id="hud-cafe-name">Tiny Bean Café</span>
+        </div>
+        <div class="money">
+          <div class="coins" id="coins">$0</div>
+          <div class="rate" id="rate">$0/s</div>
+        </div>
+        <div class="hud-buttons">
+          <button id="boss-btn" class="pixel-btn small" data-i18n="hud.hide" data-i18n-title="hud.hideTitle">Hide</button>
+          <button id="settings-btn" class="pixel-btn small ghost" data-i18n-title="hud.settings">···</button>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="stage" id="stage">
+          <div class="stage-sign" id="stage-sign" hidden><span id="stage-sign-name"></span></div>
+          <div class="scene-wrap">
+            <canvas id="scene" aria-label="Your café"></canvas>
+            <div class="day-hud" id="day-hud">
+              <span class="day-clock" id="day-clock"></span>
+              <span class="day-speed" id="day-speed">
+                <button class="chip" data-speed="1">1×</button>
+                <button class="chip" data-speed="2">2×</button>
+                <button class="chip" data-speed="4">4×</button>
+              </span>
+            </div>
+            <button class="pixel-btn open-btn" id="open-btn" hidden></button>
+          </div>
+          <div class="stage-stats" id="stage-stats" hidden></div>
+          <div class="hint" id="hint" data-i18n="hint.tap" hidden>Tap the café to help brew faster!</div>
+        </section>
+
+        <aside class="panel">
+          <nav class="tabs" role="tablist">
+            <button role="tab" data-tab="menu" class="tab active" data-i18n="tab.menu">Menu</button>
+            <button role="tab" data-tab="pantry" class="tab" data-i18n="tab.pantry">Pantry</button>
+            <button role="tab" data-tab="upgrades" class="tab" data-i18n="tab.upgrades">Upgrades</button>
+            <button role="tab" data-tab="decor" class="tab" data-i18n="tab.decor">Decor</button>
+          </nav>
+          <div class="goal" id="goal" hidden></div>
+          <div class="buy-amount">
+            <span data-i18n="buy.label">Buy</span>
+            <button data-amount="1" class="chip active">x1</button>
+            <button data-amount="10" class="chip">x10</button>
+            <button data-amount="max" class="chip" data-i18n="buy.max">Max</button>
+          </div>
+          <div class="menu-filter">
+            <button data-cat="all" class="chip active" data-i18n="cat.all">All</button>
+            <button data-cat="coffee" class="chip" data-i18n="catShort.coffee">Coffee</button>
+            <button data-cat="tea" class="chip" data-i18n="catShort.tea">Tea</button>
+            <button data-cat="bread" class="chip" data-i18n="catShort.bread">Bread</button>
+            <button data-cat="pastry" class="chip" data-i18n="catShort.pastry">Sweets</button>
+          </div>
+          <div class="buy-amount pantry-amount" hidden>
+            <span data-i18n="buy.label">Buy</span>
+            <button data-pantry-amount="10" class="chip active">10</button>
+            <button data-pantry-amount="50" class="chip">50</button>
+            <button data-pantry-amount="200" class="chip">200</button>
+          </div>
+          <div class="list" id="list"></div>
+        </aside>
+      </main>
+    </div>
+
+    <div id="boss" hidden></div>
+    <div id="modal-root"></div>
+    <div id="toast" class="toast" hidden></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

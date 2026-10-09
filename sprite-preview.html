@@ -1,0 +1,19 @@
+<!doctype html><body style="background:#e9d3a8;margin:0;padding:16px">
+<canvas id="c" width="420" height="300" style="width:1680px;image-rendering:pixelated"></canvas>
+<script type="module">
+import { character, itemIcon, ingredientIcon, catFrames, upgradeIcon } from '/src/render/sprites.ts';
+import { MENU, INGREDIENTS } from '/src/game/data.ts';
+const ctx = document.getElementById('c').getContext('2d');
+const looks = [[0,0,0,0,0],[1,2,1,1,1],[2,3,2,2,2],[3,4,3,3,0],[0,5,2,5,1],[1,1,0,6,2]];
+looks.forEach(([skin,hair,hairStyle,shirt,pants], i) => {
+  const f = character({skin,hair,hairStyle,shirt,pants}, i === 0 ? 'owner' : i === 1 ? 'barista' : 'customer');
+  [...f.down, ...f.up, ...f.right, f.left[0], f.sitRight].forEach((s, j) => ctx.drawImage(s, 4 + j * 19, 4 + i * 30));
+});
+// Menu items, one row per category.
+const cats = ['coffee', 'tea', 'bread', 'pastry'];
+cats.forEach((cat, r) => MENU.filter((m) => m.category === cat).forEach((m, i) => ctx.drawImage(itemIcon(m.id), 224 + i * 16, 4 + r * 16)));
+INGREDIENTS.forEach((ing, i) => ctx.drawImage(ingredientIcon(ing.id), 224 + i * 16, 74));
+['marketing','machine','tables','manager','barista'].forEach((id, i) => ctx.drawImage(upgradeIcon(id), 224 + i * 18, 94));
+const cat = catFrames();
+['idle','swish','blink','happy'].forEach((k, i) => ctx.drawImage(cat[k], 224 + i * 22, 120));
+</script>
