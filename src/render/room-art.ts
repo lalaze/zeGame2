@@ -5,8 +5,10 @@ import { isDrink } from '../game/data';
 import { menuItems } from '../game/economy';
 import {
   BACK_BAR,
+  BAR_AISLE,
   COUNTER,
   COUNTER_GATE,
+  COUNTER_RETURN,
   DOOR_W,
   DOOR_X,
   FLOOR_Y,
@@ -85,7 +87,8 @@ function espressoMachine(finish: string): HTMLCanvasElement {
 const FRONT_WALL = 7;
 
 /** Where the espresso machine stands, at the left end of the counter. */
-export const MACHINE_X = COUNTER.x + 8;
+export const MACHINE_X = COUNTER_RETURN.x + COUNTER_RETURN.w + 8;
+export const MACHINE_Y = COUNTER.top - 17;
 
 const lazy = (make: () => HTMLCanvasElement) => {
   let c: HTMLCanvasElement | null = null;
@@ -474,8 +477,8 @@ export class RoomPainter {
     // Left of the menu board: the grinder and jars of beans and tea.
     const grinder = GRINDER();
     ctx.drawImage(grinder, x + 2, sit - grinder.height + 1);
-    this.jar(x + 18, sit, 11, '#6e3f24', '#9c6538');
-    this.jar(x + 29, sit, 9, '#6f9a52', '#9fc47e');
+    this.jar(x + 15, sit, 11, '#6e3f24', '#9c6538');
+    this.jar(x + 26, sit, 9, '#6f9a52', '#9fc47e');
     // Under the board: cups on saucers, a milk pitcher, then the bread basket (a sack
     // of beans when there are no breads today) and a cake under a glass dome. The
     // pass stands beyond them.
@@ -568,6 +571,7 @@ export class RoomPainter {
       ctx.fill();
       ctx.restore();
     }
+    this.drawBarMat();
     // Shadow cast by the counter, and the room darkening toward its edges.
     ctx.save();
     ctx.globalAlpha = 0.2;
@@ -580,6 +584,19 @@ export class RoomPainter {
       this.r(SCENE_W - 3 * (4 - i), FLOOR_Y, 3 * (4 - i), H - FLOOR_Y, '#2a1410');
     }
     ctx.restore();
+  }
+
+  /** The rubber mat the baristas stand on inside the bar, between the back bar and the counter. */
+  private drawBarMat(): void {
+    const { x, w, top, bottom } = BAR_AISLE;
+    const y = top + 2;
+    const h = bottom - y;
+    this.r(x, y, w, h, '#4a403b');
+    this.r(x, y, w, 1, '#655852');
+    // Drainage holes in a staggered grid.
+    for (let hy = y + 2; hy < y + h; hy += 3) {
+      for (let hx = x + 1 + (((hy - y) / 3) % 2 ? 2 : 0); hx < x + w - 1; hx += 4) this.r(hx, hy, 2, 1, '#382f2b');
+    }
   }
 
   /** Welcome mat just inside the front door. */
@@ -646,6 +663,7 @@ export class RoomPainter {
   /** The counter and everything on it; `cups` are the drinks being made right now. */
   drawCounter(state: GameState, counter: string, t: number, cups: CounterCup[]): void {
     const { x, w, top, front, bottom } = COUNTER;
+    this.drawReturn(counter);
     paintCounter(this.ctx, counter, x, top, w, front - top, bottom - front);
 
     // Espresso machine; its finish gets fancier with upgrades.
@@ -653,7 +671,7 @@ export class RoomPainter {
     const finish = lvl >= 15 ? '#e7b84a' : lvl >= 10 ? '#c9814f' : lvl >= 5 ? '#d9574a' : '#9fb3bd';
     const brewing = cups.length > 0;
     const mx = MACHINE_X;
-    const my = 71;
+    const my = MACHINE_Y;
     const chrome = ramp('#c9d3d8');
     // Steam wand.
     this.r(mx - 3, my + 9, 3, 1, OUTLINE);
@@ -686,7 +704,7 @@ export class RoomPainter {
     this.r(px + 2, top - 3, 2, 1, '#8fe38a');
     this.r(px + 6, top - 2, 2, 1, '#9aa4ad');
 
-    // Cups being made in front of each busy barista.
+    // Orders brought forward from the back bar, waiting in front of their barista.
     for (const { x: cx, fill } of cups) {
       this.r(cx + 9, top - 1, 7, 7, OUTLINE);
       this.r(cx + 10, top, 5, 5, '#fdf6ec');
@@ -694,6 +712,23 @@ export class RoomPainter {
       this.r(cx + 10, top + 5 - level, 5, level, '#6e3f24');
       this.r(cx + 15, top + 1, 1, 2, OUTLINE);
     }
+  }
+
+  /**
+   * The short arm of counter at the bar's left end, running back to the wall so
+   * the bar is closed off from the dining room. Only its worktop shows from above.
+   */
+  private drawReturn(counter: string): void {
+    const { x, w } = COUNTER_RETURN;
+    const top = BACK_BAR.top;
+    const h = COUNTER.top - top + 2;
+    const colors = counterColors(counter);
+    const slab = ramp(colors.top);
+    this.r(x - 1, top - 1, w + 2, h + 1, OUTLINE);
+    this.r(x, top, w, h, slab.base);
+    this.r(x, top, 1, h, slab.lo);
+    this.r(x + w - 2, top, 1, h, slab.hi);
+    this.r(x + w - 1, top, 1, h, colors.trim ?? slab.dark);
   }
 
   /**

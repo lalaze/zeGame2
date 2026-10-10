@@ -381,8 +381,9 @@ export class CafeScene extends Phaser.Scene {
       this.drawBaristas(state, t, o);
       this.drawPass(t, o);
       const cups: CounterCup[] = [];
-      this.sim.baristas.forEach((b, i) => {
-        if (this.sim.isBrewing(i)) cups.push({ x: baristaSpot(i).x, fill: 1 - Math.max(0, b.remaining) / b.total });
+      // A finished table order the barista is holding until the pass has room.
+      this.sim.baristas.forEach((_, i) => {
+        if (this.sim.isHolding(i)) cups.push({ x: baristaSpot(i).x, fill: 1 });
       });
       const counter = this.layer('room-main-counter', DEPTH.counter);
       const shelf = state.phase === 'open' ? state.shelf : state.bakePlan;
@@ -444,25 +445,34 @@ export class CafeScene extends Phaser.Scene {
   private drawBaristas(state: GameState, t: number, o: { x: number; y: number }): void {
     this.sim.baristas.forEach((b, i) => {
       if (i >= 1 + state.upgrades.barista) return;
-      const p = baristaSpot(i);
-      const x = o.x + p.x;
+      const pose = this.sim.baristaPose(i);
+      const x = o.x + pose.x;
       const brewing = this.sim.isBrewing(i);
-      const bob = brewing ? Math.floor(t * 6 + i) % 2 : Math.floor(t * 1.2 + i * 0.7) % 2;
       // The first spot behind the counter is always the owner.
       const frames = i === 0 && state.profile ? character(state.profile.look, 'owner') : character(b.look, 'barista');
-      const depth = DEPTH.baristas + i * 0.01;
-      this.image(frames.stand, x - 9, o.y + p.y - (CHAR_H - 1) + bob, depth);
+      const dir = frames[pose.facing];
+      let sprite = dir[0];
+      let bob = 0;
+      if (pose.walking) sprite = dir[1 + (Math.floor(t * 8) % 2)];
+      else if (pose.working) bob = Math.floor(t * 6 + i) % 2;
+      else if (!brewing) bob = Math.floor(t * 1.2 + i * 0.7) % 2;
+      // Nearer the counter draws in front, but everyone in the bar stays behind it.
+      const depth = DEPTH.baristas + pose.y * 0.01 + i * 0.001;
+      const top = o.y + pose.y - (CHAR_H - 1);
+      this.image(sprite, x - 9, top + bob, depth);
+      // Carrying the order forward from the back bar.
+      if (brewing && pose.facing === 'down' && pose.walking) this.cup(x - 3, o.y + pose.y - 10, depth + 0.0005);
       if (brewing) {
         const progress = 1 - Math.max(0, b.remaining) / b.total;
         const w = Math.max(1, Math.round(18 * progress));
-        const y = o.y + 64;
+        const y = top - 5;
         this.rect(x - 10, y, 20, 5, OUTLINE, depth + 0.001);
         this.rect(x - 9, y + 1, 18, 3, '#5a3a2a', depth + 0.002);
         this.rect(x - 9, y + 1, w, 3, '#7fc45e', depth + 0.003);
         this.rect(x - 9, y + 1, w, 1, '#b6e59a', depth + 0.004);
       }
       // "Order up!": calling a server over to the pass.
-      if (b.calling > 0) this.image(this.callBubble(), x - 8, o.y + 44, DEPTH.overlay);
+      if (b.calling > 0) this.image(this.callBubble(), x - 8, top - 25, DEPTH.overlay);
     });
   }
 

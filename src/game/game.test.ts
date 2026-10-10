@@ -39,7 +39,7 @@ import {
   placeFurniture,
   storeFurniture,
 } from './furniture';
-import { MAX_SCENE_H, MAX_TABLES, MIN_SCENE_H, SCENE_W, roomRoute, serverHome, setSceneHeight, tableArea, tablePos } from './layout';
+import { COUNTER, FLOOR_Y, MAX_SCENE_H, MAX_TABLES, MIN_SCENE_H, SCENE_W, baristaSpot, baristaWorkSpot, roomRoute, serverHome, setSceneHeight, tableArea, tablePos } from './layout';
 import { DECOR, DECOR_SLOTS, STARTER_THEMES, applyTheme, comfort, decorDef, useDecor, type DecorSlot } from './decor';
 import { formatDuration, formatNumber } from './format';
 import { GOALS, claimGoal, currentGoal, goalDone } from './goals';
@@ -223,6 +223,31 @@ describe('simulation', () => {
     const before = sim.baristas[0].remaining;
     expect(sim.boost()).toBe(true);
     expect(sim.baristas[0].remaining).toBeLessThan(before);
+  });
+
+  it('sends a barista back to the back bar to make an order, and forward again as it is done', () => {
+    const s = openState();
+    const sim = new Sim(seeded(2));
+    expect(sim.baristaPose(0)).toEqual({ ...baristaSpot(0), facing: 'down', walking: false, working: false });
+    while (!sim.isBrewing(0)) sim.update(s, 0.05);
+    const b = sim.baristas[0];
+    const poses = [];
+    for (const left of [b.total, b.total * 0.98, b.total / 2, 0.02, 0]) {
+      b.remaining = left;
+      poses.push(sim.baristaPose(0));
+    }
+    const [start, going, working, coming, done] = poses;
+    expect(start).toMatchObject({ ...baristaSpot(0), facing: 'up' });
+    expect(going.y).toBeLessThan(baristaSpot(0).y);
+    expect(going.y).toBeGreaterThan(baristaWorkSpot(0).y);
+    expect(working).toEqual({ ...baristaWorkSpot(0), facing: 'up', walking: false, working: true });
+    expect(coming).toMatchObject({ facing: 'down', walking: true });
+    expect(done).toEqual({ ...baristaSpot(0), facing: 'down', walking: false, working: false });
+    // Everyone stays inside the bar: in front of the back bar and behind the counter.
+    for (const p of poses) {
+      expect(p.y).toBeGreaterThan(FLOOR_Y);
+      expect(p.y).toBeLessThan(COUNTER.top + (COUNTER.bottom - COUNTER.front));
+    }
   });
 });
 

@@ -24,13 +24,20 @@ export function setSceneHeight(h: number): void {
 
 /** The back wall runs from the ceiling down to FLOOR_Y. */
 export const FLOOR_Y = 80;
-/** The service counter; a glass case in its front shows today's bakes. */
-export const COUNTER = { x: 72, w: 162, top: 88, front: 99, bottom: 123 };
+/**
+ * The service counter; a glass case in its front shows today's bakes. It stands
+ * forward of the back bar, leaving an aisle inside the bar for the baristas to
+ * work in, and a short return at its left end closes the bar off from the room.
+ */
+export const COUNTER = { x: 64, w: 170, top: 96, front: 107, bottom: 127 };
+export const COUNTER_RETURN = { x: 64, w: 8 };
 /** The hinged flap at the counter's right end that staff walk through. */
 export const COUNTER_GATE = { x: COUNTER.x + COUNTER.w, w: 16 };
 export const PASTRY_CASE = { x: 148, w: 72 };
 /** The low cabinet against the wall behind the baristas. */
-export const BACK_BAR = { x: 66, w: 188, top: 57, front: 63 };
+export const BACK_BAR = { x: 72, w: 182, top: 57, front: 63 };
+/** The floor inside the bar, between the back bar and the counter. */
+export const BAR_AISLE = { x: COUNTER_RETURN.x + COUNTER_RETURN.w, w: COUNTER_GATE.x + COUNTER_GATE.w - COUNTER_RETURN.x - COUNTER_RETURN.w, top: FLOOR_Y, bottom: COUNTER.top };
 
 /** The front door: an opening in the bottom wall, centered. */
 export const DOOR_W = 32;
@@ -98,7 +105,7 @@ export function roomRoute(from: AreaId, to: AreaId): { x: number; y: number }[] 
  * Baristas set finished table orders on it and ring the bell on its header;
  * servers collect them from the floor side.
  */
-export const PASS = { x: 210, w: 40, top: 52 };
+export const PASS = { x: 210, w: 40, top: 60 };
 /** Plates sit three across, on the steel ledge first, then the heated shelf above. */
 export const PASS_COLUMNS = 3;
 export const PASS_SLOT_W = 12;
@@ -115,8 +122,10 @@ export const serverHome = (i: number) => ({ x: 264 + i * 13, y: 94 + (i % 2) * 6
 
 export const MAX_BARISTAS = 4;
 /** Baristas stand close enough that the fourth leaves room for the pass. */
-export const baristaSpot = (i: number) => ({ x: 116 + i * 25, y: 96 });
-export const serviceSpot = (i: number) => ({ x: 116 + i * 25, y: 141 });
+export const baristaSpot = (i: number) => ({ x: 116 + i * 25, y: 100 });
+/** Where a barista works at the back bar, making an order, with their back to the room. */
+export const baristaWorkSpot = (i: number) => ({ x: baristaSpot(i).x, y: 87 });
+export const serviceSpot = (i: number) => ({ x: 116 + i * 25, y: 145 });
 /** Moves a y position down by a share of the floor added beyond the minimum height. */
 const spread = (y: number, share: number) => y + Math.round((sceneH - MIN_SCENE_H) * share);
 /** The line runs across the runner, between the two lobby tables. */

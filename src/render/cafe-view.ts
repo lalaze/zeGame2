@@ -8,7 +8,7 @@ import { areaAtX, regionOffset, type AreaId } from '../game/regions';
 import type { Sim, SimEvent } from '../game/sim';
 import type { GameState } from '../game/state';
 import { floorFurnitureBounds } from './furniture-art';
-import { MACHINE_X } from './room-art';
+import { MACHINE_X, MACHINE_Y } from './room-art';
 import { RoomCamera } from './room-camera';
 
 /** A piece of furniture being placed or moved, and where it would go. */
@@ -112,7 +112,13 @@ export class CafeView {
     this.steamTimer -= dt;
     if (this.steamTimer <= 0) {
       this.steamTimer = 0.3;
-      if (sim.baristas.some((_, i) => sim.isBrewing(i))) this.effects.push({ kind: 'steam', x: MACHINE_X + 8 + Math.random() * 14, y: 62 });
+      if (sim.baristas.some((_, i) => sim.isBrewing(i))) this.effects.push({ kind: 'steam', x: MACHINE_X + 8 + Math.random() * 14, y: MACHINE_Y - 9 });
+      // Drinks being made at the back bar steam up past the barista's shoulder.
+      sim.baristas.forEach((b, i) => {
+        const pose = sim.baristaPose(i);
+        const c = pose.working && sim.customers.find((c) => c.id === b.customerId);
+        if (c && !isBakery(c.order) && Math.random() < 0.5) this.effects.push({ kind: 'steam', x: pose.x + (Math.random() < 0.5 ? -9 : 7), y: pose.y - 26 });
+      });
       for (const c of sim.customers) {
         if (c.phase === 'sitting' && Math.random() < 0.25) {
           const table = tablePos(Math.floor(c.seat / 2));

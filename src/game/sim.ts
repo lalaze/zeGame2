@@ -17,6 +17,8 @@ import {
   TOTAL_TABLE_SPOTS,
   areaAtPoint,
   areaOrigin,
+  baristaSpot,
+  baristaWorkSpot,
   doorSpot,
   passSpot,
   queueSpot,
@@ -601,6 +603,34 @@ export class Sim {
     const b = this.baristas[i];
     return !!b && b.customerId !== null && b.total > 0;
   }
+
+  /**
+   * Where a barista is inside the bar. Taking an order they face the room at the
+   * counter; then they step back to the back bar to make it, and bring it forward
+   * just as it's ready. Follows the order's progress, so a boost hurries them too.
+   */
+  baristaPose(i: number): BaristaPose {
+    const front = baristaSpot(i);
+    const b = this.baristas[i];
+    if (!b || !this.isBrewing(i)) return { ...front, facing: 'down', walking: false, working: false };
+    const back = baristaWorkSpot(i);
+    const depth = front.y - back.y;
+    const trip = Math.min(depth / WALK_SPEED, b.total / 4);
+    const elapsed = b.total - b.remaining;
+    const left = Math.max(0, b.remaining);
+    if (elapsed < trip) return { x: front.x, y: Math.round(front.y - (depth * elapsed) / trip), facing: 'up', walking: true, working: false };
+    if (left > trip) return { ...back, facing: 'up', walking: false, working: true };
+    return { x: front.x, y: Math.round(front.y - (depth * left) / trip), facing: 'down', walking: left > 0, working: false };
+  }
+}
+
+export interface BaristaPose {
+  x: number;
+  y: number;
+  facing: 'up' | 'down';
+  walking: boolean;
+  /** At the back bar, making the order. */
+  working: boolean;
 }
 
 /** At a table, whether still waiting for the order or eating it. */
