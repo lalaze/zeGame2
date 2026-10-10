@@ -107,7 +107,7 @@ export const MENU: readonly MenuItemDef[] = [
   { id: 'macaron', category: 'pastry', basePrice: 260_000, prepTime: 1.5, baseCost: 3_200_000_000 },
 ];
 
-export type UpgradeId = 'barista' | 'server' | 'machine' | 'marketing' | 'tables' | 'manager';
+export type UpgradeId = 'barista' | 'server' | 'cook' | 'machine' | 'marketing' | 'tables' | 'manager';
 
 export interface UpgradeDef {
   id: UpgradeId;
@@ -121,6 +121,8 @@ export const UPGRADES: readonly UpgradeDef[] = [
   { id: 'machine', baseCost: 60, growth: 1.9, max: 20 },
   { id: 'barista', baseCost: 150, growth: 12, max: 3 },
   { id: 'server', baseCost: 250, growth: 10, max: 2 },
+  // Needs the kitchen, which comes with its first cook.
+  { id: 'cook', baseCost: 900, growth: 10, max: 2 },
   { id: 'tables', baseCost: 300, growth: 8, max: 6 },
   { id: 'manager', baseCost: 500, growth: 4, max: 5 },
 ];
@@ -225,6 +227,8 @@ export const RECIPES: Record<ItemId, Partial<Record<IngredientId, number>>> = {
 
 /** Morning-bake amounts change in steps of this many. */
 export const BAKE_STEP = 5;
+/** How many of a bread or pastry a cook bakes at a time. */
+export const COOK_BATCH = BAKE_STEP;
 
 /** Chance a customer adds a bakery item to a drink order, or a drink to a bakery order. */
 export const COMBO_CHANCE = 0.35;

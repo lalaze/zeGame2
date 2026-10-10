@@ -229,7 +229,8 @@ function holdPiece(id: string, moving: number, fromBrowse: boolean): void {
 }
 
 function startArrange(request: ArrangeRequest): void {
-  if (!isAreaOpen(state, scene.area)) regionsUI.select('main');
+  // Decorations go in the dining rooms, never the kitchen.
+  if (!isAreaOpen(state, scene.area) || scene.area === 'kitchen') regionsUI.select('main');
   if (request.kind === 'place') holdPiece(request.id, -1, arrange?.mode === 'browse');
   else {
     arrange = { mode: 'browse' };

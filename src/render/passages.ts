@@ -5,6 +5,8 @@ import type { GameState } from '../game/state';
 
 /** Physical thresholds and circulation belong to the building, not to the camera. */
 export function paintPassageFloor(ctx: CanvasRenderingContext2D, area: AreaId): void {
+  // The kitchen's tiled floor needs no runner.
+  if (area === 'kitchen') return;
   const y = passageY();
   // The same jute runner as the entrance; the glasshouse and garden get a paler, sun-bleached one.
   const jute = area === 'main' || area === 'reading' ? '#d6b382' : '#d9d7b8';
@@ -32,7 +34,12 @@ export function paintPassageFloor(ctx: CanvasRenderingContext2D, area: AreaId): 
   }
 }
 
-export function paintRoomBoundaries(ctx: CanvasRenderingContext2D, area: AreaId, state: GameState): void {
+/**
+ * The walls along a room's sides, with gaps for the shared doors, and bars across
+ * any door into a room that isn't open yet. The kitchen door has a swinging leaf,
+ * `kitchenDoor` open (0 to 1).
+ */
+export function paintRoomBoundaries(ctx: CanvasRenderingContext2D, area: AreaId, state: GameState, kitchenDoor = 0): void {
   const height = sceneHeight();
   const y = passageY();
   const r = (x: number, top: number, w: number, h: number, color: string) => {
@@ -40,7 +47,7 @@ export function paintRoomBoundaries(ctx: CanvasRenderingContext2D, area: AreaId,
     ctx.fillRect(x, top, w, h);
   };
   const garden = area === 'terrace';
-  const base = garden ? '#7a8b61' : area === 'greenhouse' ? '#58796b' : '#a67450';
+  const base = garden ? '#7a8b61' : area === 'greenhouse' ? '#58796b' : area === 'kitchen' ? '#7c8790' : '#a67450';
   const ink = '#493127';
   const blocked = (direction: Direction) => {
     const to = adjacentArea(area, direction);
@@ -64,6 +71,19 @@ export function paintRoomBoundaries(ctx: CanvasRenderingContext2D, area: AreaId,
       r(x, y - 12, 5, 24, '#916444');
       for (let top = y - 10; top < y + 12; top += 7) r(x, top, 5, 2, '#efcf94');
       r(x + 1, y - 2, 3, 4, '#e6b34d');
+    } else if (area === 'kitchen' || connected === 'kitchen') {
+      // A steel swing door with a porthole, folding away from its top hinge as it opens.
+      const leaf = Math.round(26 * (1 - kitchenDoor));
+      if (leaf >= 2) {
+        r(x, y - 13, 5, leaf, ink);
+        r(x + 1, y - 13, 3, leaf - 1, '#b9c4cb');
+        r(x + 1, y - 13, 1, leaf - 1, '#e3e9ec');
+        if (leaf > 12) {
+          r(x + 1, y - 7, 3, 4, ink);
+          r(x + 2, y - 6, 1, 2, '#ffcf7a');
+        }
+        if (leaf > 22) r(x + 1, y + 7, 3, 4, '#8d969e');
+      }
     }
   }
   // A real rear doorway replaces the window's middle, meeting the glasshouse threshold.

@@ -7,16 +7,22 @@ export const REGIONS = [
 ] as const;
 
 export type RegionId = (typeof REGIONS)[number]['id'];
-export type AreaId = 'main' | RegionId;
-export const AREA_IDS: readonly AreaId[] = ['main', ...REGIONS.map((r) => r.id)];
+/** The dining rooms, and the kitchen behind the scenes. */
+export type AreaId = 'main' | RegionId | 'kitchen';
+// The kitchen comes last so the furniture grid's columns for the other rooms never move.
+export const AREA_IDS: readonly AreaId[] = ['main', ...REGIONS.map((r) => r.id), 'kitchen'];
 export type Direction = 'left' | 'right' | 'up' | 'down';
-/** The front rooms face the street; the glasshouse and garden sit behind them. */
+/**
+ * The front rooms face the street; the glasshouse and garden sit behind them, and
+ * the kitchen is off the main café's left side.
+ */
 export const AREA_GRID: Record<AreaId, { col: number; row: number }> = {
-  main: { col: 0, row: 1 }, reading: { col: 1, row: 1 },
+  kitchen: { col: -1, row: 1 }, main: { col: 0, row: 1 }, reading: { col: 1, row: 1 },
   greenhouse: { col: 1, row: 0 }, terrace: { col: 0, row: 0 },
 };
 /** Shared doorways, rather than an ordering of screens. The garden has no street entrance. */
 export const AREA_LINKS: readonly { from: AreaId; to: AreaId; direction: Direction }[] = [
+  { from: 'main', to: 'kitchen', direction: 'left' },
   { from: 'main', to: 'reading', direction: 'right' },
   { from: 'reading', to: 'greenhouse', direction: 'up' },
   { from: 'greenhouse', to: 'terrace', direction: 'left' },
@@ -39,7 +45,9 @@ export const areaConnections = (id: AreaId) =>
 export const regionOffset = (id: AreaId) => AREA_IDS.indexOf(id) * 320;
 export const areaAtX = (x: number): AreaId | undefined => AREA_IDS[Math.floor(x / 320)];
 export const regionDef = (id: RegionId) => REGIONS.find((r) => r.id === id)!;
-export const isAreaOpen = (state: GameState, id: AreaId) => id === 'main' || state.regions.includes(id);
+export const isAreaOpen = (state: GameState, id: AreaId) =>
+  id === 'main' || (id === 'kitchen' ? state.kitchen : state.regions.includes(id));
+export const isRegion = (id: AreaId): id is RegionId => REGIONS.some((r) => r.id === id);
 export const mainTableCount = (state: GameState) => 2 + state.upgrades.tables;
 export const regionTableStart = (id: RegionId) => 8 + REGIONS.findIndex((r) => r.id === id) * 4;
 export const regionDemand = (state: GameState) =>

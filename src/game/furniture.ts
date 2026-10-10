@@ -113,7 +113,8 @@ function fits(state: GameState, def: FurnitureDef, col: number, row: number, tab
   const rows = def.surface === 'wall' ? WALL_ROWS : FLOOR_ROWS;
   if (!Number.isInteger(col) || !Number.isInteger(row)) return false;
   const area = areaAtX(col * CELL);
-  if (!area || !isAreaOpen(state, area)) return false;
+  // The kitchen is fitted out for work, with no room for decorations.
+  if (!area || area === 'kitchen' || !isAreaOpen(state, area)) return false;
   const start = regionOffset(area) / CELL;
   if (col < start || row < 0 || col + def.w > start + COLS || row + def.h > rows) return false;
   const box = footprint(def, col, row);

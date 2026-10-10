@@ -12,7 +12,6 @@ import {
   DOOR_W,
   DOOR_X,
   FLOOR_Y,
-  KITCHEN_DOOR,
   PASS,
   PASS_COLUMNS,
   PASS_SLOT_W,
@@ -20,6 +19,7 @@ import {
   SCENE_W,
   WINDOWS,
   baristaSpot,
+  passageY,
 } from '../game/layout';
 import type { GameState } from '../game/state';
 import { paintPassageFloor } from './passages';
@@ -332,86 +332,6 @@ export class RoomPainter {
   }
 
 
-  /**
-   * The swinging door to the kitchen. The oven glows through its porthole while the
-   * morning bake is fresh, and the door swings open whenever a bread or pastry is fetched.
-   */
-  drawKitchenDoor(state: GameState, t: number): void {
-    const { x, w, top } = KITCHEN_DOOR;
-    const h = FLOOR_Y - top;
-    const frame = ramp('#9a6740');
-    // Preheating before opening; after the bake the oven cools to embers over the first half minute.
-    const heat = state.phase === 'prep' ? 0.7 : Math.max(0.2, 1 - state.dayTime / 30);
-    const flicker = Math.sin(t * 9) * 0.06 + Math.sin(t * 23) * 0.04;
-    const glow = mix('#5a3426', '#ffb04a', Math.max(0, Math.min(1, heat + flicker)));
-    // Casing, with a little plaque of a loaf above it.
-    this.r(x - 4, top - 4, w + 8, h + 4, OUTLINE);
-    this.r(x - 3, top - 3, w + 6, h + 3, frame.base);
-    this.r(x - 3, top - 3, w + 6, 1, frame.hi);
-    this.r(x - 3, top - 3, 1, h + 3, frame.hi);
-    const px = x + w / 2 - 7;
-    this.r(px, top - 13, 14, 9, OUTLINE);
-    this.r(px + 1, top - 12, 12, 7, '#f3e3c3');
-    this.r(px + 3, top - 10, 8, 3, '#c98a45');
-    this.r(px + 4, top - 11, 6, 1, '#c98a45');
-    this.r(px + 4, top - 10, 6, 1, '#e3b36b');
-    this.r(px + 5, top - 9, 1, 1, '#9a6234');
-    this.r(px + 8, top - 9, 1, 1, '#9a6234');
-    this.r(px + 4, top - 4, 1, 1, '#4a2e1e');
-    this.r(px + 9, top - 4, 1, 1, '#4a2e1e');
-    // The kitchen beyond: tiled wall, a shelf of loaves and the oven.
-    this.r(x, top, w, h, '#e9e1cf');
-    for (let ty = top + 3; ty < FLOOR_Y; ty += 5) this.r(x, ty, w, 1, '#d2c7b0');
-    for (let ty = top; ty < FLOOR_Y; ty += 5) for (let tx = x + ((ty - top) % 10 ? 2 : 5); tx < x + w; tx += 6) this.r(tx, ty, 1, 3, '#d2c7b0');
-    this.r(x + 2, top + 9, w - 4, 2, frame.lo);
-    for (let i = 0; i < 3; i++) {
-      this.r(x + 4 + i * 8, top + 5, 6, 4, '#c98a45');
-      this.r(x + 5 + i * 8, top + 5, 4, 1, '#e3b36b');
-    }
-    const ox = x + 3;
-    const oy = top + 18;
-    this.r(ox, oy, w - 6, FLOOR_Y - oy, OUTLINE);
-    this.r(ox + 1, oy + 1, w - 8, FLOOR_Y - oy - 1, '#4b4f57');
-    this.r(ox + 1, oy + 1, w - 8, 1, '#6c727c');
-    this.r(ox + 4, oy + 6, w - 14, 12, OUTLINE);
-    this.r(ox + 5, oy + 7, w - 16, 10, glow);
-    this.r(ox + 5, oy + 7, w - 16, 2, mix(glow, '#fff2c8', 0.4));
-    this.r(ox + 4, oy + 3, w - 14, 1, '#9aa1aa');
-    this.r(ox + 2, FLOOR_Y - 8, w - 10, 1, '#2f3237');
-    // The warm light of the kitchen washes over everything in the doorway.
-    this.ctx.save();
-    this.ctx.globalAlpha = 0.12 + heat * 0.12;
-    this.r(x, top, w, h, '#ffb04a');
-    this.ctx.restore();
-    // The door leaf, hinged on the left; swung open, it narrows to an edge.
-    const leafW = Math.round(w - (w - 5) * this.kitchenDoor);
-    const leaf = ramp('#b07a4a');
-    this.r(x, top, leafW, h, OUTLINE);
-    if (leafW < 3) return;
-    this.r(x + 1, top + 1, leafW - 2, h - 1, leaf.base);
-    this.r(x + 1, top + 1, leafW - 2, 1, leaf.hi);
-    this.r(x + 1, top + 1, 1, h - 1, leaf.hi);
-    this.r(x + leafW - 2, top + 1, 1, h - 1, leaf.lo);
-    if (leafW < 10) return;
-    // Lower panel, a brass push plate and a steel kick plate.
-    this.r(x + 4, top + 28, leafW - 8, h - 38, leaf.lo);
-    this.r(x + 5, top + 29, leafW - 10, h - 40, mix(leaf.base, leaf.lo, 0.4));
-    this.r(x + leafW - 7, top + 20, 3, 6, '#e7b84a');
-    this.r(x + 1, FLOOR_Y - 7, leafW - 2, 7, '#8d969e');
-    this.r(x + 1, FLOOR_Y - 7, leafW - 2, 1, '#c3cbd1');
-    // The porthole, squashed as the door turns.
-    const pw = Math.max(2, Math.round((leafW - 10) * 0.6));
-    const pcx = x + Math.round(leafW / 2);
-    const pcy = top + 12;
-    this.r(pcx - pw / 2 - 1, pcy - 6, pw + 2, 12, OUTLINE);
-    this.r(pcx - pw / 2 - 2, pcy - 4, pw + 4, 8, OUTLINE);
-    this.r(pcx - pw / 2, pcy - 5, pw, 10, '#9aa1aa');
-    this.r(pcx - pw / 2 - 1, pcy - 3, pw + 2, 6, '#9aa1aa');
-    this.r(pcx - pw / 2 + 1, pcy - 4, pw - 2, 8, glow);
-    this.r(pcx - pw / 2, pcy - 2, pw, 4, glow);
-    this.r(pcx - pw / 2 + 1, pcy - 3, 1, 2, '#fff2c8');
-  }
-
   drawMenuBoard(state: GameState): void {
     const x = 110;
     const y = 7;
@@ -557,17 +477,17 @@ export class RoomPainter {
     const { lean, length } = beam(light.sun);
     for (const win of WINDOWS) paintSunbeam(ctx, light.sun, win.x, win.x + win.w, FLOOR_Y, lean, length);
     paintSunbeam(ctx, light.sun, DOOR_X, DOOR_X + DOOR_W, H, Math.round(lean / 3), -Math.round(length * 0.9));
-    // Kitchen light spilling out of the open door.
+    // Kitchen light spilling in through the door in the left wall while it's open.
     if (this.kitchenDoor > 0.05) {
-      const { x, w } = KITCHEN_DOOR;
+      const y = passageY();
       ctx.save();
-      ctx.globalAlpha = 0.16 * this.kitchenDoor;
+      ctx.globalAlpha = 0.18 * this.kitchenDoor;
       ctx.fillStyle = '#ffcf8a';
       ctx.beginPath();
-      ctx.moveTo(x, FLOOR_Y);
-      ctx.lineTo(x + w, FLOOR_Y);
-      ctx.lineTo(x + w + 6, FLOOR_Y + 14);
-      ctx.lineTo(x - 6, FLOOR_Y + 14);
+      ctx.moveTo(0, y - 14);
+      ctx.lineTo(0, y + 14);
+      ctx.lineTo(26, y + 22);
+      ctx.lineTo(26, y - 8);
       ctx.fill();
       ctx.restore();
     }

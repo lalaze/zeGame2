@@ -1,4 +1,5 @@
-import { AREA_IDS, REGIONS, adjacentArea, isAreaOpen, regionBlock, regionDef, unlockRegion, type AreaId, type Direction } from '../game/regions';
+import { KITCHEN_COST, kitchenBlock, unlockKitchen } from '../game/kitchen';
+import { AREA_IDS, REGIONS, adjacentArea, isAreaOpen, isRegion, regionBlock, regionDef, unlockRegion, type AreaId, type Direction } from '../game/regions';
 import { passageSpot, sceneHeight } from '../game/layout';
 import { formatMoney } from '../game/format';
 import type { GameState } from '../game/state';
@@ -32,7 +33,8 @@ export class RegionsUI {
     });
     card.addEventListener('click', (e) => {
       if (!(e.target as HTMLElement).closest('button[data-expand]') || this.area === 'main') return;
-      if (unlockRegion(this.getState(), this.area)) {
+      const state = this.getState();
+      if (isRegion(this.area) ? unlockRegion(state, this.area) : unlockKitchen(state)) {
         this.onUnlock();
         this.update();
       }
@@ -55,8 +57,8 @@ export class RegionsUI {
 
   update(): void {
     const state = this.getState();
-    const block = this.area === 'main' ? null : regionBlock(state, this.area);
-    const signature = [this.area, this.overview, state.regions.join(','), sceneHeight(), block, ...AREA_IDS.map(areaName)].join('|');
+    const block = isRegion(this.area) ? regionBlock(state, this.area) : this.area === 'kitchen' ? kitchenBlock(state) : null;
+    const signature = [this.area, this.overview, state.regions.join(','), state.kitchen, sceneHeight(), block, ...AREA_IDS.map(areaName)].join('|');
     if (signature === this.signature) return;
     this.signature = signature;
     this.edges.setAttribute('aria-label', t('area.nav'));
@@ -80,8 +82,8 @@ export class RegionsUI {
     for (const direction of ['left', 'right', 'up', 'down'] as const) {
       const button = this.edges.querySelector<HTMLButtonElement>(`[data-direction="${direction}"]`)!;
       const next = adjacentArea(this.area, direction);
-      const previous = AREA_IDS[AREA_IDS.indexOf(this.area) - 1];
-      button.hidden = next === null || (!isAreaOpen(state, this.area) && next !== previous);
+      // From a room that isn't open yet, the only way is back to an open one.
+      button.hidden = next === null || (!isAreaOpen(state, this.area) && !isAreaOpen(state, next));
       if (!next || button.hidden) continue;
       button.classList.toggle('locked', !isAreaOpen(state, next));
       button.setAttribute('aria-label', t(`area.${isAreaOpen(state, next) ? 'go' : 'preview'}.${direction}` as MessageKey, { name: areaName(next) }));
@@ -93,6 +95,10 @@ export class RegionsUI {
     }
     this.card.hidden = isAreaOpen(state, this.area);
     if (this.area === 'main' || this.card.hidden) return;
+    if (!isRegion(this.area)) {
+      this.showKitchenCard(block);
+      return;
+    }
     const def = regionDef(this.area);
     const previous = REGIONS[REGIONS.indexOf(def) - 1];
     const reason = block === 'previous' ? t('area.previous', { name: areaName(previous.id) })
@@ -101,6 +107,15 @@ export class RegionsUI {
       <h2>${areaName(this.area)}</h2><p>${t(`area.${this.area}.desc` as MessageKey)}</p>
       <div class="region-benefits"><span>${t('area.addTables', { n: def.tables })}</span><span>${t('area.demand', { n: Math.round(def.demand * 100) })}</span></div>
       <button class="pixel-btn" data-expand ${block ? 'disabled' : ''}>${t('area.unlock')} · ${formatMoney(def.cost)}</button>
+      <small class="region-reason">${reason}</small>`;
+  }
+
+  private showKitchenCard(block: string | null): void {
+    const reason = block === 'open' ? t('area.closedOnly') : block === 'coins' ? t('area.saveUp') : t('area.kitchen.ready');
+    this.card.innerHTML = `<div class="region-kicker">${t('area.kitchen.kicker')}</div>
+      <h2>${areaName('kitchen')}</h2><p>${t('area.kitchen.desc')}</p>
+      <div class="region-benefits"><span>${t('area.kitchen.cook')}</span><span>${t('area.kitchen.fresh')}</span></div>
+      <button class="pixel-btn" data-expand ${block ? 'disabled' : ''}>${t('area.kitchen.unlock')} · ${formatMoney(KITCHEN_COST)}</button>
       <small class="region-reason">${reason}</small>`;
   }
 }

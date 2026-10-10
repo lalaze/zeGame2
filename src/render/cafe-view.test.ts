@@ -51,8 +51,9 @@ describe('café view', () => {
   it('zooms out for the floor plan and back in to the chosen room', () => {
     const view = new CafeView();
     view.setOverview(true, true);
-    expect(view.zoom).toBe(0.5);
-    expect(view.viewWidth).toBe(640);
+    expect(view.zoom).toBe(1 / 3);
+    expect(view.viewWidth).toBe(960);
+    expect(view.viewX).toBe(areaOrigin('kitchen').x);
     view.moveToArea('greenhouse', true);
     expect(view.overview).toBe(false);
     expect({ x: view.viewX, y: view.viewY }).toEqual(areaOrigin('greenhouse'));

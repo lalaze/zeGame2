@@ -176,6 +176,15 @@ const APRON_BACK = [...Array(14).fill(''), '', '', '', '', '', '....rQQQQQQr....
 
 type HairSet = { front: string[]; side: string[]; back: string[] };
 
+/** A cook's skull cap, worn over any hairstyle. */
+const CAP = [
+  '....cCCCCCCc....',
+  '..cCCCCCCCCCCc..',
+  '.cCCCCCCCCCCCCc.',
+  '.cCCCCCCCCCCCCc.',
+  '.cccccccccccccc.',
+];
+
 const SHORT_BACK = [
   '.....hHHHHh.....',
   '...hHHLLHHHHh...',
@@ -343,7 +352,7 @@ export const HAIR: HairSet[] = [
   },
 ];
 
-export type Role = 'customer' | 'barista' | 'owner' | 'server';
+export type Role = 'customer' | 'barista' | 'owner' | 'server' | 'cook';
 export type Facing = 'down' | 'up' | 'left' | 'right';
 
 export interface CharacterFrames {
@@ -364,7 +373,10 @@ export const CHAR_H = FRONT.length + LEGS_FRONT[0].length + 2;
 
 const charCache = new Map<string, CharacterFrames>();
 
-/** Staff wear an apron: green for hired baristas, navy for servers, the outfit color for the owner. */
+/**
+ * Staff wear an apron: green for hired baristas, navy for servers, the outfit color
+ * for the owner. Cooks wear a white jacket, a slate apron and a skull cap.
+ */
 export function character(look: Look, role: Role = 'customer'): CharacterFrames {
   const key = `${look.skin}.${look.hair}.${look.hairStyle}.${look.shirt}.${look.pants}.${role}`;
   let frames = charCache.get(key);
@@ -373,8 +385,9 @@ export function character(look: Look, role: Role = 'customer'): CharacterFrames 
   const skin = ramp(SKINS[look.skin % SKINS.length]);
   const hair = ramp(HAIRS[look.hair % HAIRS.length]);
   const staff = role !== 'customer';
-  const shirt = ramp(staff ? '#f2ead8' : SHIRTS[look.shirt % SHIRTS.length]);
-  const apron = ramp(role === 'owner' ? SHIRTS[look.shirt % SHIRTS.length] : role === 'server' ? '#3d4b6b' : '#4f8a5b');
+  const cook = role === 'cook';
+  const shirt = ramp(cook ? '#fbfaf5' : staff ? '#f2ead8' : SHIRTS[look.shirt % SHIRTS.length]);
+  const apron = ramp(role === 'owner' ? SHIRTS[look.shirt % SHIRTS.length] : role === 'server' ? '#3d4b6b' : cook ? '#5e7385' : '#4f8a5b');
   const pants = ramp(PANTS[look.pants % PANTS.length]);
   const hat = ramp(SHIRTS[(look.shirt + 3) % SHIRTS.length]);
   const palette: Palette = {
@@ -384,8 +397,10 @@ export function character(look: Look, role: Role = 'customer'): CharacterFrames 
     H: hair.base, h: hair.lo, L: hair.hi,
     A: hat.base, a: hat.lo, Y: hat.hi, W: '#f2ead8', w: '#cdbfa8',
     R: apron.base, r: apron.lo, Q: apron.dark,
+    C: '#fbfaf5', c: '#d9d6cc',
   };
-  const style = HAIR[look.hairStyle % HAIR.length];
+  const hairStyle = HAIR[look.hairStyle % HAIR.length];
+  const style = cook ? { front: layer(hairStyle.front, CAP), side: layer(hairStyle.side, CAP), back: layer(hairStyle.back, CAP) } : hairStyle;
   const dress = (rows: string[], apronRows: string[]) => (staff ? layer(rows, apronRows) : rows);
 
   const build = (body: string[], hairRows: string[], legs: string[]) =>
@@ -1186,7 +1201,7 @@ export function ingredientIcon(id: IngredientId): HTMLCanvasElement {
 
 // ---------------------------------------------------------------- upgrades
 
-const UPGRADE_ART: Record<Exclude<UpgradeId, 'barista' | 'server'>, { rows: string[]; palette: Palette }> = {
+const UPGRADE_ART: Record<Exclude<UpgradeId, 'barista' | 'server' | 'cook'>, { rows: string[]; palette: Palette }> = {
   marketing: {
     rows: [
       '.kkkkkkkkkk.',
@@ -1245,8 +1260,8 @@ const UPGRADE_ART: Record<Exclude<UpgradeId, 'barista' | 'server'>, { rows: stri
 };
 
 export function upgradeIcon(id: UpgradeId): HTMLCanvasElement {
-  if (id === 'barista' || id === 'server') {
-    const full = character({ skin: id === 'server' ? 2 : 0, hair: id === 'server' ? 0 : 1, hairStyle: 1, shirt: 0, pants: 0 }, id).stand;
+  if (id === 'barista' || id === 'server' || id === 'cook') {
+    const full = character({ skin: id === 'server' ? 2 : id === 'cook' ? 1 : 0, hair: id === 'server' ? 0 : 1, hairStyle: 1, shirt: 0, pants: 0 }, id).stand;
     const c = document.createElement('canvas');
     c.width = full.width;
     c.height = HEAD_ROWS + 2;

@@ -80,6 +80,8 @@ export interface GameState {
   upgrades: Record<UpgradeId, number>;
   /** Connected rooms opened in order, in addition to the original café. */
   regions: RegionId[];
+  /** Whether the kitchen has been built, where cooks bake fresh batches during the day. */
+  kitchen: boolean;
   profile: Profile | null;
   decor: DecorState;
   /** Index of the next guided goal to complete. */
@@ -127,6 +129,7 @@ export function createInitialState(now: number): GameState {
     items,
     upgrades,
     regions: [],
+    kitchen: false,
     profile: null,
     decor: defaultDecor(),
     goal: 0,
@@ -237,6 +240,7 @@ export function deserialize(raw: string | null, now: number): GameState {
       base.regions.push(r.id);
     }
   }
+  base.kitchen = data.kitchen === true;
 
   base.coins = num(data.coins, 0);
   base.totalEarned = num(data.totalEarned, base.coins);

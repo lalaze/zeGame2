@@ -2,8 +2,9 @@
 // room in view, the piece being arranged, the cat and kitchen door, and effects
 // waiting to be spawned. The Phaser scene (render/phaser/) reads this every frame.
 import { isBakery } from '../game/economy';
+import { stationSpot } from '../game/kitchen';
 import { CELL, WALL_TOP, furnitureDef, type FurnitureDef } from '../game/furniture';
-import { CAT_SPOT, FLOOR_Y, SCENE_W, areaOrigin, floorY, floorYMin, sceneHeight, tablePos } from '../game/layout';
+import { CAT_SPOT, COUNTER, FLOOR_Y, PASTRY_CASE, SCENE_W, areaOrigin, floorY, floorYMin, sceneHeight, tablePos } from '../game/layout';
 import { areaAtX, regionOffset, type AreaId } from '../game/regions';
 import type { Sim, SimEvent } from '../game/sim';
 import type { GameState } from '../game/state';
@@ -52,7 +53,7 @@ export class CafeView {
   ghost: Ghost | null = null;
   /** Seconds the cat stays happy after being petted. */
   catHappy = 0;
-  /** How far the kitchen door has swung open, 0 to 1. */
+  /** How far the kitchen door has swung open, 0 to 1: it opens as a cook brings a batch through. */
   kitchenDoor = 0;
   /** Particles and sales waiting for the renderer to show them. */
   readonly effects: Effect[] = [];
@@ -71,9 +72,11 @@ export class CafeView {
     this.camera.moveTo(areaOrigin(area), immediate);
   }
 
+  /** The map shows the whole building, three rooms across and two deep, centered. */
   setOverview(show: boolean, immediate = false): void {
     this.overview = show;
-    this.camera.moveTo(show ? { x: 0, y: -sceneHeight() } : areaOrigin(this.area), immediate, show ? 0.5 : 1);
+    const H = sceneHeight();
+    this.camera.moveTo(show ? { x: -SCENE_W, y: -H * 1.5 } : areaOrigin(this.area), immediate, show ? 1 / 3 : 1);
   }
 
   // ------------------------------------------------------------ effects
@@ -82,6 +85,10 @@ export class CafeView {
     for (const e of events) {
       if (e.type === 'sale') this.sales.push(e);
       else if (e.type === 'bell') this.effects.push({ kind: 'bell', x: e.x, y: e.y });
+      else if (e.type === 'restock') {
+        // A fresh batch lands in the pastry case.
+        for (let i = 0; i < 4; i++) this.effects.push({ kind: 'sparkle', x: PASTRY_CASE.x + 8 + i * 18, y: COUNTER.front + 6 });
+      }
     }
   }
 
@@ -102,12 +109,11 @@ export class CafeView {
   update(dt: number, sim: Sim): void {
     this.camera.update(dt);
     this.catHappy = Math.max(0, this.catHappy - dt);
-    // The kitchen door swings open while someone fetches a bread or pastry.
-    const fetching = sim.baristas.some((b, i) => {
-      const c = sim.isBrewing(i) && sim.customers.find((c) => c.id === b.customerId);
-      return !!c && isBakery(c.order);
+    const through = sim.cooks.some((_, i) => {
+      const at = sim.cookStation(i);
+      return at?.station === 'door' && at.working;
     });
-    this.kitchenDoor += ((fetching ? 1 : 0) - this.kitchenDoor) * Math.min(1, dt * 10);
+    this.kitchenDoor += ((through ? 1 : 0) - this.kitchenDoor) * Math.min(1, dt * 10);
 
     this.steamTimer -= dt;
     if (this.steamTimer <= 0) {
@@ -118,6 +124,13 @@ export class CafeView {
         const pose = sim.baristaPose(i);
         const c = pose.working && sim.customers.find((c) => c.id === b.customerId);
         if (c && !isBakery(c.order) && Math.random() < 0.5) this.effects.push({ kind: 'steam', x: pose.x + (Math.random() < 0.5 ? -9 : 7), y: pose.y - 26 });
+      });
+      // The bagel pot and the fryer steam while a cook is at them.
+      sim.cooks.forEach((_, i) => {
+        const at = sim.cookStation(i);
+        if (!at?.working || (at.station !== 'kettle' && at.station !== 'fryer')) return;
+        const spot = stationSpot(at.station);
+        this.effects.push({ kind: 'steam', x: spot.x - 6 + Math.random() * 12, y: areaOrigin('kitchen').y + (at.station === 'kettle' ? 42 : 56) });
       });
       for (const c of sim.customers) {
         if (c.phase === 'sitting' && Math.random() < 0.25) {

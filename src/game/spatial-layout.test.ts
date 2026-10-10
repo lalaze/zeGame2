@@ -22,7 +22,8 @@ describe('physical café floor plan', () => {
       setSceneHeight(height);
       expect(areaOrigin('terrace')).toEqual({ x: 0, y: -height });
       expect(areaOrigin('greenhouse')).toEqual({ x: 320, y: -height });
-      expect(areaConnections('main')).toEqual([{ direction: 'right', to: 'reading' }]);
+      expect(areaOrigin('kitchen')).toEqual({ x: -320, y: 0 });
+      expect(areaConnections('main')).toEqual([{ direction: 'left', to: 'kitchen' }, { direction: 'right', to: 'reading' }]);
       for (const area of AREA_IDS) {
         for (const { to, direction } of areaConnections(area)) {
           const a = areaOrigin(area), b = areaOrigin(to);
@@ -74,7 +75,8 @@ describe('physical café floor plan', () => {
         crossings.add(`${a}>${b}`);
       }
     }
-    expect(seated).toEqual(new Set(AREA_IDS));
+    // Customers sit in every dining room, and never go into the kitchen.
+    expect(seated).toEqual(new Set(AREA_IDS.filter((area) => area !== 'kitchen')));
     expect(crossings).toEqual(new Set(['main>reading', 'reading>main', 'reading>greenhouse', 'greenhouse>reading', 'greenhouse>terrace', 'terrace>greenhouse']));
   });
 

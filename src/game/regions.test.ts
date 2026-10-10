@@ -3,7 +3,7 @@ import { openShop } from './day';
 import { arrivalRate, buyUpgrade, tableCount } from './economy';
 import { canPlace, placeFurniture } from './furniture';
 import { MAX_SCENE_H, MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, setSceneHeight, tablePos } from './layout';
-import { AREA_IDS, REGIONS, activeTableIndices, mainTableCount, regionBlock, unlockRegion } from './regions';
+import { REGIONS, activeTableIndices, mainTableCount, regionBlock, unlockRegion } from './regions';
 import { Sim } from './sim';
 import { createInitialState, deserialize, serialize } from './state';
 
@@ -68,7 +68,7 @@ describe('connected café areas', () => {
     for (const r of REGIONS) unlockRegion(s, r.id);
     for (const h of [MIN_SCENE_H, MAX_SCENE_H]) {
       setSceneHeight(h);
-      for (const id of AREA_IDS.slice(1)) {
+      for (const { id } of REGIONS) {
         const spots = activeTableIndices(s).map(tablePos).filter((p) => areaAtPoint(p.x, p.y) === id);
         expect(spots).toHaveLength(4);
         for (const p of spots) {

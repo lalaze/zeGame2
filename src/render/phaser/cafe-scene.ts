@@ -3,9 +3,10 @@ import { clockHours } from '../../game/day';
 import { menuItems } from '../../game/economy';
 import { formatMoney } from '../../game/format';
 import { COLS, FLOOR_ROWS, WALL_ROWS, WALL_TOP, CELL, canPlace, cellFree, furnitureDef } from '../../game/furniture';
-import { CAT_SPOT, FLOOR_Y, KITCHEN_DOOR, MAX_TABLES, PASS, PASS_BELL, PASS_SLOT_W, passSlot, SCENE_W, WINDOWS, areaOrigin, baristaSpot, doorPlantSpots, floorY, sceneHeight, seatSpot, tablePos } from '../../game/layout';
+import { BENCH, BINS, DISH_PIT, PASTRY_FRIDGE, RACK, cookHome, installedEquipment, stationSpot, STATION_SECONDS, type Station } from '../../game/kitchen';
+import { CAT_SPOT, MAX_TABLES, PASS, PASS_BELL, PASS_SLOT_W, passSlot, SCENE_W, WINDOWS, areaOrigin, baristaSpot, doorPlantSpots, floorY, passageY, sceneHeight, seatSpot, tablePos } from '../../game/layout';
 import { AREA_IDS, activeTableIndices, areaAtX, isAreaOpen, mainTableCount, regionOffset, type AreaId } from '../../game/regions';
-import { seated, type Customer, type Server, type Sim, type SimEvent, type Walker } from '../../game/sim';
+import { seated, type Cook, type Customer, type Server, type Sim, type SimEvent, type Walker } from '../../game/sim';
 import type { GameState } from '../../game/state';
 import { cellRect, floorAnchor, type CafeView, type Ghost } from '../cafe-view';
 import { paintCeiling, paintNeon, paintSill, shadow } from '../decor-art';
@@ -13,6 +14,7 @@ import { drawText, textWidth } from '../font';
 import { GHOST_BAD, GHOST_OK, floorFurnitureBounds, paintFloorFurniture, paintWallFurniture } from '../furniture-art';
 import { paintPassageFloor, paintRoomBoundaries } from '../passages';
 import { lightingAt, roomAmbient, type Lighting } from '../lighting';
+import { BENCH_RISE, BINS_RISE, DISH_PIT_RISE, FRIDGE_RISE, RACK_RISE, paintBench, paintBins, paintDishPit, paintKitchen, paintPastryFridge, paintRack } from '../kitchen-art';
 import { paintRegion } from '../region-art';
 import { CHAIR_LEFT, CHAIR_RIGHT, RoomPainter, TABLE, TABLE_CX, TABLE_TOP_DY, type CounterCup } from '../room-art';
 import { CHAR_H, OUTLINE, catFrames, character, crownSprite, dropSprite, heartSprite, itemIcon, pixelSprite, type CharacterFrames, type Facing } from '../sprites';
@@ -74,9 +76,14 @@ function lampsIn(area: AreaId, state: GameState): Lamp[] {
     if (ceiling === 'ceiling_pendants') for (const x of [36, 132, 188, 284]) add(x, 13, 26);
     if (ceiling === 'ceiling_chandelier') add(SCENE_W / 2, 9, 46);
     if (ceiling === 'ceiling_lights') for (let x = 8; x < SCENE_W; x += 32) add(x, 11, 14, 0.8);
-    // The oven glows through the kitchen doorway, and the heat lamp over the pass.
-    add(KITCHEN_DOOR.x + KITCHEN_DOOR.w / 2, FLOOR_Y - 12, 22, 0.7, '#ffa64a');
+    // Kitchen light through the door in the left wall, and the heat lamps over the pass.
+    if (state.kitchen) add(6, passageY(), 20, 0.6, '#ffa64a');
     for (const dx of [9, PASS.w - 10]) add(PASS.x + dx, PASS.top + 12, 14, 0.6, '#ffb060');
+  } else if (area === 'kitchen') {
+    // Tube lights, the strip under the hood, and the deck oven's glow.
+    for (const x of [74, 218]) add(x, 12, 44, 0.8, '#fbf6e4');
+    for (const x of [182, 236, 290]) add(x, 30, 16, 0.7);
+    add(218, 56, 26, 0.6, '#ffa64a');
   } else if (area === 'reading') {
     add(100, floorFurnitureBounds('lamp', 100, floorY(98)).y + 4, 30);
   } else if (area === 'terrace') {
@@ -364,7 +371,7 @@ export class CafeScene extends Phaser.Scene {
         p.drawWall(decor.wallpaper, t);
         const sill = WINDOWS[0];
         p.drawWindow(sill, light, t, state.phase === 'open');
-        p.drawKitchenDoor(state, t);
+        for (const win of WINDOWS.slice(1)) p.drawWindow(win, light, t, null);
         paintSill(ctx, decor.sill, sill.x + sill.w - 8, sill.y + sill.h + 1);
         // The neon sign glows in the left window, facing the street.
         paintNeon(ctx, decor.neon, sill.x + sill.w / 2, sill.y + 4, t);
@@ -397,6 +404,13 @@ export class CafeScene extends Phaser.Scene {
         Math.min(4, 1 + Math.floor(state.today.served / 15)),
       ].join('|');
       this.paint(counter, o.x, o.y, counterSig, (p) => p.drawCounter(state, decor.counter, t, cups));
+    } else if (area === 'kitchen') {
+      const locked = !isAreaOpen(state, area);
+      const installed = installedEquipment(state);
+      const active = this.activeStations();
+      this.paint(back, o.x, o.y, [tick, H, locked, [...installed].join(','), [...active].join(',')].join('|'), (p) => {
+        paintKitchen(p.ctx, H, t, locked, installed, active);
+      });
     } else {
       const offset = regionOffset(area);
       const locked = !isAreaOpen(state, area);
@@ -412,10 +426,11 @@ export class CafeScene extends Phaser.Scene {
       });
     }
 
-    const wallpaper = area === 'main' ? decor.wallpaper : area === 'reading' ? 'wall_cream' : 'wall_mint';
-    this.paint(front, o.x, o.y, [H, wallpaper, state.regions.join(',')].join('|'), (p) => {
+    const wallpaper = area === 'main' ? decor.wallpaper : area === 'reading' ? 'wall_cream' : area === 'kitchen' ? 'wall_dots' : 'wall_mint';
+    const door = Math.round(this.view.kitchenDoor * 4) / 4;
+    this.paint(front, o.x, o.y, [H, wallpaper, state.regions.join(','), state.kitchen, door].join('|'), (p) => {
       p.drawFrontWall(wallpaper, H, area === 'main' || area === 'greenhouse', area === 'terrace');
-      paintRoomBoundaries(p.ctx, area, state);
+      paintRoomBoundaries(p.ctx, area, state, door);
     });
   }
 
@@ -527,6 +542,8 @@ export class CafeScene extends Phaser.Scene {
     const skip = this.view.ghost?.skip ?? -1;
     for (const c of this.sim.customers) if (!seated(c)) this.drawCustomer(c, DEPTH.floor + c.y);
     for (const server of this.sim.servers) this.drawServer(server, DEPTH.floor + server.y);
+    this.sim.cooks.forEach((cook, i) => this.drawCook(cook, i, DEPTH.floor + cook.y));
+    this.drawKitchenFloor(state);
     for (const i of activeTableIndices(state)) this.drawTable(i, t, DEPTH.floor + tablePos(i).y + 0.1);
     // Crates on the spot the next expansion will open up.
     const built = mainTableCount(state);
@@ -620,6 +637,79 @@ export class CafeScene extends Phaser.Scene {
         ctx.fillRect(3, 9, 1, 1);
       });
       this.image(ack, x - 3, y - CHAR_H - 11, DEPTH.overlay);
+    }
+  }
+
+  // ------------------------------------------------------------ the kitchen
+
+  /** Stations with a cook working at them right now. */
+  private activeStations(): Set<Station> {
+    const active = new Set<Station>();
+    this.sim.cooks.forEach((_, i) => {
+      const at = this.sim.cookStation(i);
+      if (at?.working) active.add(at.station);
+    });
+    return active;
+  }
+
+  /** The pieces standing out on the kitchen floor, sorted with the cooks by their feet. */
+  private drawKitchenFloor(state: GameState): void {
+    // Until it's built, the kitchen is only chalked out on the floor.
+    if (!state.kitchen) return;
+    const o = areaOrigin('kitchen');
+    const installed = installedEquipment(state);
+    const piece = (name: string, x: number, foot: number, w: number, rise: number, paint: (ctx: CanvasRenderingContext2D) => void) => {
+      const key = baked(this.textures, `kitchen-${name}`, w + 20, rise + 1, paint);
+      this.image(key, o.x + x - 10, o.y + foot - rise, DEPTH.floor + o.y + foot);
+    };
+    const benchFoot = floorY(BENCH.front);
+    const tools = `${installed.has('sheeter')}-${installed.has('standMixer')}`;
+    piece(`bench-${tools}`, BENCH.x, benchFoot, BENCH.w, BENCH_RISE, (ctx) =>
+      paintBench(ctx, 10 + BENCH.w / 2, BENCH_RISE, installed.has('sheeter'), installed.has('standMixer')));
+    const rack = this.sim.rack;
+    piece(`rack-${rack.join(',')}`, RACK.x, floorY(RACK.foot), RACK.w, RACK_RISE, (ctx) => paintRack(ctx, 10, RACK_RISE, rack));
+    piece('bins', BINS.x, floorY(BINS.foot), BINS.w, BINS_RISE, (ctx) => paintBins(ctx, 10, BINS_RISE));
+    piece('dishpit', DISH_PIT.x, floorY(DISH_PIT.foot), DISH_PIT.w + 10, DISH_PIT_RISE, (ctx) => paintDishPit(ctx, 10, DISH_PIT_RISE));
+    if (installed.has('pastryFridge')) {
+      const cakes = (['cheesecake', 'cake', 'eggtart'] as const).filter((id) => state.items[id] > 0);
+      piece(`fridge-${cakes.join(',')}`, PASTRY_FRIDGE.x, floorY(PASTRY_FRIDGE.foot), PASTRY_FRIDGE.w, FRIDGE_RISE, (ctx) =>
+        paintPastryFridge(ctx, 10, FRIDGE_RISE, cakes));
+    }
+  }
+
+  /**
+   * A cook: at their station, facing it, with a bar showing how long it has left
+   * there; carrying the batch between stations, dough before the oven and the
+   * finished bake after it.
+   */
+  private drawCook(cook: Cook, i: number, depth: number): void {
+    const at = this.sim.cookStation(i);
+    const standing = at ? stationSpot(at.station).facing : cookHome(i).facing;
+    const { x, y, bob, facing } = this.drawWalker(cook, character(cook.look, 'cook'), standing, depth);
+    const batch = cook.batch;
+    if (!batch || !at) return;
+    if (at.working) {
+      const total = STATION_SECONDS[at.station];
+      const w = Math.max(1, Math.round(18 * (1 - Math.max(0, batch.timer) / total)));
+      // The same bar the baristas show while brewing.
+      const by = y - CHAR_H - 6;
+      this.rect(x - 10, by, 20, 5, OUTLINE, DEPTH.overlay);
+      this.rect(x - 9, by + 1, 18, 3, '#5a3a2a', DEPTH.overlay + 0.001);
+      this.rect(x - 9, by + 1, w, 3, '#7fc45e', DEPTH.overlay + 0.002);
+      this.rect(x - 9, by + 1, w, 1, '#b6e59a', DEPTH.overlay + 0.003);
+      return;
+    }
+    if (facing === 'up') return;
+    // Out of the oven once a hot station is behind them.
+    const baked = batch.steps.slice(0, batch.step).some((s) => s === 'deckOven' || s === 'convection' || s === 'fryer');
+    const tray = baked ? itemIcon(batch.item, false) : null;
+    const ty = y - 17 - bob;
+    this.rect(x - 7, ty, 14, 2, OUTLINE, depth + 0.003);
+    this.rect(x - 6, ty, 12, 1, '#d7a35a', depth + 0.004);
+    if (tray) this.image(tray, x - Math.floor(tray.width / 2), ty - tray.height + 1, depth + 0.002);
+    else {
+      this.rect(x - 5, ty - 3, 10, 3, OUTLINE, depth + 0.002);
+      this.rect(x - 4, ty - 2, 8, 2, '#f1e3c4', depth + 0.0025);
     }
   }
 

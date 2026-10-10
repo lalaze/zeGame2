@@ -2,8 +2,8 @@
 // Characters are positioned by their feet.
 //
 // Floor plan: the counter stands in the middle of the back wall, with a dining
-// nook on each side (one under the window, one by the kitchen door) and two more
-// tables by the front door.
+// nook on each side, each under a window, and two more tables by the front door.
+// The kitchen door is in the left wall.
 // Customers come in through the door in the middle of the bottom edge, line up
 // in front of the counter, then sit down or head back out the way they came.
 import { AREA_GRID, AREA_IDS, REGIONS, areaConnections, regionOffset, type AreaId, type Direction } from './regions';
@@ -116,7 +116,7 @@ export const passSlot = (i: number) => ({
 export const PASS_BELL = { x: PASS.x + PASS.w - 6, y: PASS.top - 1 };
 /** Where a server stands to take plates off the pass. */
 export const passSpot = () => ({ x: PASS.x + PASS.w / 2 + 6, y: COUNTER.bottom + 8 });
-/** Servers wait by the kitchen door between deliveries. */
+/** Servers wait beside the pass between deliveries. */
 export const MAX_SERVERS = 3;
 export const serverHome = (i: number) => ({ x: 264 + i * 13, y: 94 + (i % 2) * 6 });
 
@@ -237,9 +237,8 @@ export const seatApproach = (table: number, side: 0 | 1) => {
   return { x: s.x, y: Math.min(s.y + 12, areaOrigin(tableArea(table)).y + sceneH - 12) };
 };
 
-export const WINDOWS = [{ x: 12, y: 12, w: 46, h: 38 }] as const;
-/** The swinging door to the kitchen, in the back wall beside the staff gate. */
-export const KITCHEN_DOOR = { x: 271, w: 28, top: 22 };
+/** The first window has the cat, the neon sign and the OPEN sign. */
+export const WINDOWS = [{ x: 12, y: 12, w: 46, h: 38 }, { x: 262, y: 12, w: 46, h: 38 }] as const;
 export const CAT_SPOT = { x: 26, y: 53 };
 /** Potted figs flank the front door. */
 export const doorPlantSpots = () => [

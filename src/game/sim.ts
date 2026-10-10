@@ -4,6 +4,7 @@ import {
   arrivalRate,
   baristaCount,
   consumeServing,
+  cookCount,
   earn,
   menuItems,
   patienceSeconds,
@@ -30,6 +31,7 @@ import {
   serviceSpot,
   tableArea,
 } from './layout';
+import { batchSteps, cookHome, kitchenPath, nextBatch, shelveBatch, startBatch, stationSpot, STATION_SECONDS, type Station } from './kitchen';
 import { activeTableIndices, type AreaId } from './regions';
 import type { GameState, Look } from './state';
 
@@ -96,7 +98,22 @@ export interface Plate {
   waited: number;
 }
 
-/** Idle by the kitchen door, heading to the pass, carrying a plate out, or walking back. */
+/** A batch a cook is baking: the stations it visits in turn, and seconds left at the current one. */
+export interface Batch {
+  item: ItemId;
+  n: number;
+  steps: Station[];
+  step: number;
+  timer: number;
+}
+
+/** A cook in the kitchen, free or seeing a batch through. */
+export interface Cook extends Walker {
+  look: Look;
+  batch: Batch | null;
+}
+
+/** Idle by the pass, heading to it, carrying a plate out, or walking back. */
 export type ServerPhase = 'idle' | 'toPass' | 'delivering' | 'returning';
 
 export interface Server extends Walker {
@@ -113,6 +130,7 @@ export type SimEvent =
   | { type: 'bell'; x: number; y: number }
   | { type: 'walkout'; x: number; y: number }
   | { type: 'soldout'; item: ItemId; x: number; y: number }
+  | { type: 'restock'; item: ItemId; n: number }
   | { type: 'dayEnd'; report: DayReport };
 
 export const WALK_SPEED = 62;
@@ -136,6 +154,9 @@ export class Sim {
   servers: Server[] = [];
   /** Table orders on the pass, oldest first. */
   pass: Plate[] = [];
+  cooks: Cook[] = [];
+  /** The last few batches out of the oven, newest first, cooling on the rack by the kitchen door. */
+  rack: ItemId[] = [];
   private spawnTimer = 1.5;
   private nextId = 1;
 
@@ -150,6 +171,7 @@ export class Sim {
       w.via = w.via.map((point) => resizeRoomPoint(point, fromHeight));
     };
     this.servers.forEach(move);
+    this.cooks.forEach(move);
     for (const c of this.customers) {
       move(c);
       if (c.seat >= 0) {
@@ -184,6 +206,10 @@ export class Sim {
     while (this.servers.length < serverCount(state)) {
       const home = serverHome(this.servers.length);
       this.servers.push({ ...home, tx: home.x, ty: home.y, stride: 0, via: [], look: this.randomLook(), phase: 'idle', plates: [], ack: 0 });
+    }
+    while (this.cooks.length < cookCount(state)) {
+      const home = cookHome(this.cooks.length);
+      this.cooks.push({ x: home.x, y: home.y, tx: home.x, ty: home.y, stride: 0, via: [], look: this.randomLook(), batch: null });
     }
     while (this.seats.length < TOTAL_TABLE_SPOTS * 2) this.seats.push(null);
   }
@@ -469,6 +495,49 @@ export class Sim {
     });
   }
 
+  /**
+   * A free cook starts on whatever is running low in the pastry case, fetching its
+   * ingredients and taking it from station to station; the finished batch cools on
+   * the rack and goes out through the door into the case.
+   */
+  private updateCooks(state: GameState, dt: number, events: SimEvent[]): void {
+    this.cooks.forEach((cook, i) => {
+      step(cook, dt);
+      if (!resting(cook)) return;
+      const batch = cook.batch;
+      if (!batch) {
+        const next = nextBatch(state, this.cooks.flatMap((c) => (c.batch ? [c.batch.item] : [])));
+        if (!next) return;
+        startBatch(state, next.item, next.n);
+        const steps = batchSteps(next.item);
+        cook.batch = { ...next, steps, step: 0, timer: STATION_SECONDS[steps[0]] };
+        this.walk(cook, ...kitchenPath(cook, stationSpot(steps[0])));
+        return;
+      }
+      batch.timer -= dt;
+      if (batch.timer > 0) return;
+      const station = batch.steps[++batch.step];
+      if (station) {
+        batch.timer = STATION_SECONDS[station];
+        this.walk(cook, ...kitchenPath(cook, stationSpot(station)));
+        return;
+      }
+      shelveBatch(state, batch.item, batch.n);
+      this.rack = [batch.item, ...this.rack].slice(0, 3);
+      events.push({ type: 'restock', item: batch.item, n: batch.n });
+      cook.batch = null;
+      this.walk(cook, ...kitchenPath(cook, cookHome(i)));
+    });
+  }
+
+  /** Where a cook's batch is: the station they're at or heading to, and whether they've started there. */
+  cookStation(i: number): { station: Station; working: boolean } | null {
+    const cook = this.cooks[i];
+    const batch = cook?.batch;
+    if (!batch) return null;
+    return { station: batch.steps[batch.step], working: resting(cook) };
+  }
+
   update(state: GameState, dt: number): SimEvent[] {
     const events: SimEvent[] = [];
     this.sync(state);
@@ -541,6 +610,7 @@ export class Sim {
     });
 
     this.updateServers(state, dt, events);
+    this.updateCooks(state, dt, events);
 
     this.customers = this.customers.filter(
       (c) => !(c.phase === 'exiting' && c.via.length === 0 && c.x === c.tx && c.y === c.ty),
@@ -572,6 +642,10 @@ export class Sim {
       b.remaining = b.total = 0;
       b.calling = 0;
     }
+    this.cooks.forEach((cook, i) => {
+      cook.batch = null;
+      this.walk(cook, ...kitchenPath(cook, cookHome(i)));
+    });
     this.servers.forEach((server, i) => {
       if (server.phase === 'idle') return;
       server.plates = [];

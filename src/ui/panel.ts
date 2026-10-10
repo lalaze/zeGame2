@@ -28,6 +28,8 @@ import {
   restock,
   restockQuote,
   serverCount,
+  cookCount,
+  upgradeLocked,
   servingsLeft,
   setBakePlan,
   setOnMenu,
@@ -110,6 +112,8 @@ function upgradeEffect(state: GameState, id: UpgradeId): string {
       return t('effect.barista', { n: baristaCount(state) });
     case 'server':
       return t('effect.server', { n: serverCount(state) });
+    case 'cook':
+      return upgradeLocked(state, id) ? t('effect.cookLocked') : t('effect.cook', { n: cookCount(state) });
     case 'tables':
       return t('effect.tables', { n: mainTableCount(state) });
     case 'manager':

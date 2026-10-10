@@ -1,5 +1,6 @@
 import {
   BAKE_STEP,
+  COOK_BATCH,
   BASE_ARRIVAL_RATE,
   COMBO_CHANCE,
   MAX_VARIETY_BONUS,
@@ -89,10 +90,14 @@ export function quoteItem(state: GameState, id: ItemId, amount: BuyAmount): Quot
   return quote(def.baseCost, ITEM_COST_GROWTH, state.items[id], state.coins, amount, Infinity);
 }
 
+/** Cooks work in the kitchen, so there's no hiring them until it's built. */
+export const upgradeLocked = (state: GameState, id: UpgradeId) => id === 'cook' && !state.kitchen;
+
 export function quoteUpgrade(state: GameState, id: UpgradeId, amount: BuyAmount): Quote {
   const def = upgradeDef(id);
   const level = state.upgrades[id];
-  return quote(def.baseCost, def.growth, level, state.coins, amount, def.max - level);
+  const q = quote(def.baseCost, def.growth, level, state.coins, amount, def.max - level);
+  return upgradeLocked(state, id) ? { ...q, affordable: false } : q;
 }
 
 /** The item unlocked just before this one in its category, if any. */
@@ -135,6 +140,8 @@ export function unlockedItems(state: GameState): MenuItemDef[] {
 export const baristaCount = (s: GameState) => 1 + s.upgrades.barista;
 /** Servers carry orders from the pass to the tables; the café opens with one. */
 export const serverCount = (s: GameState) => 1 + s.upgrades.server;
+/** The kitchen comes with one cook. */
+export const cookCount = (s: GameState) => (s.kitchen ? 1 + s.upgrades.cook : 0);
 export const prepMultiplier = (s: GameState) => 0.9 ** s.upgrades.machine;
 /** Extra customers drawn by a varied menu, as a share (0.12 = +12%). */
 export const varietyBonus = (s: GameState) =>
@@ -377,8 +384,9 @@ export function dayDemand(state: GameState): Map<ItemId, number> {
 export function dayNeeds(state: GameState): Partial<Record<IngredientId, number>> {
   const needs: Partial<Record<IngredientId, number>> = {};
   for (const [id, servings] of dayDemand(state)) {
-    // Breads and pastries need exactly the planned morning bake; drinks a bit of spare.
-    const amount = isBakery(id) ? (state.bakePlan[id] ?? 0) : servings * 1.15;
+    // Breads and pastries need exactly the planned morning bake, plus a batch per cook
+    // for baking fresh during the day; drinks a bit of spare.
+    const amount = isBakery(id) ? (state.bakePlan[id] ?? 0) + cookCount(state) * COOK_BATCH : servings * 1.15;
     for (const [ing, n] of recipe(id)) needs[ing] = (needs[ing] ?? 0) + amount * n;
   }
   for (const k of Object.keys(needs) as IngredientId[]) needs[k] = Math.ceil(needs[k]!);
