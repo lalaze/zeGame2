@@ -2,23 +2,15 @@ import '@fontsource/pixelify-sans/400.css';
 import '@fontsource/pixelify-sans/600.css';
 import './style.css';
 
-import { CLOSING_GRACE, DAY_SECONDS, SPEEDS, type ItemId } from './game/data';
-import { checkOpen, clockHours, formatClock, isClosingTime, openShop, type DayReport } from './game/day';
-import {
-  awayCapSeconds,
-  awayEarnings,
-  awayEfficiency,
-  earn,
-  expectedCustomers,
-  readyServings,
-  tipMultiplier,
-} from './game/economy';
+import { SPEEDS, type ItemId } from './game/data';
+import { formatOpenTime, openShop, type DayReport } from './game/day';
+import { expectedCustomers, tipMultiplier } from './game/economy';
 import { canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
-import { formatDuration, formatMoney } from './game/format';
+import { formatMoney } from './game/format';
 import { MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
 import { adjacentArea, isAreaOpen, mainTableCount, regionOffset } from './game/regions';
 import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, furnitureDef } from './game/furniture';
-import { Sim, type SimEvent } from './game/sim';
+import { Sim } from './game/sim';
 import { applyTheme, comfort } from './game/decor';
 import { SAVE_KEY, createInitialState, loadState, saveState, type GameState } from './game/state';
 import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale, t, type Locale } from './i18n';
@@ -28,6 +20,7 @@ import { character, itemIcon, toDataURL } from './render/sprites';
 import { closeModal, isModalOpen, showModal, toast } from './ui/modal';
 import { showOnboarding, type OnboardingResult } from './ui/onboarding';
 import { Panel, decorName, itemName, type ArrangeRequest } from './ui/panel';
+import { showPrepare } from './ui/prepare';
 import { RegionsUI, areaName } from './ui/regions';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -40,14 +33,12 @@ const SIM_STEP = 0.05;
 setLocale(detectLocale(localStorage.getItem(LOCALE_KEY), navigator.languages ?? [navigator.language]));
 
 let state: GameState = loadState(localStorage, Date.now());
-// Measured before the loop starts, since the loop keeps lastSeen current.
-const closedSeconds = (Date.now() - state.lastSeen) / 1000;
 const sim = new Sim();
 const scene = new CafeView();
 
 // Resuming a day in progress: let the shop fill up a little before the first frame,
 // without paying for it.
-if (state.phase === 'open' && !isClosingTime(state)) {
+if (state.phase === 'open') {
   const scratch = structuredClone(state);
   for (let t = 0; t < 12; t += SIM_STEP) sim.update(scratch, SIM_STEP);
 }
@@ -316,14 +307,17 @@ function updateStats(): void {
 
 const dayClock = $('day-clock');
 const openBtn = $<HTMLButtonElement>('open-btn');
+const closeBtn = $<HTMLButtonElement>('close-btn');
 const speedBtns = [...document.querySelectorAll<HTMLButtonElement>('[data-speed]')];
 
 function updateDayHud(): void {
   const open = state.phase === 'open';
-  const time = open ? (isClosingTime(state) ? t('day.closing') : formatClock(clockHours(state))) : t('day.closed');
+  const time = open ? t('day.openFor', { time: formatOpenTime(state.dayTime) }) : t('day.closed');
   const text = `${t('day.label', { n: state.day })} · ${time}`;
   if (dayClock.textContent !== text) dayClock.textContent = text;
   $('day-speed').hidden = !open;
+  closeBtn.hidden = !open;
+  if (closeBtn.textContent !== t('day.close')) closeBtn.textContent = t('day.close');
   $('day-hud').hidden = !isAreaOpen(state, scene.area);
   for (const b of speedBtns) b.classList.toggle('active', Number(b.dataset.speed) === state.speed);
   openBtn.hidden = open || !state.profile || scene.area !== 'main';
@@ -340,6 +334,7 @@ for (const b of speedBtns) {
 }
 
 function startDay(): void {
+  if (state.phase !== 'prep' || menuEmpty()) return;
   const baked = openShop(state);
   saveState(localStorage, state);
   toast(baked > 0 ? t('toast.openedBaked', { n: state.day, baked }) : t('toast.opened', { n: state.day }));
@@ -348,32 +343,24 @@ function startDay(): void {
   updateDayHud();
 }
 
-function tryOpen(): void {
-  const check = checkOpen(state);
-  if (check.ok) return startDay();
-  if (check.reason === 'emptyMenu') {
-    showModal({
-      title: t('open.emptyTitle'),
-      body: `<p>${t('open.emptyBody')}</p>`,
-      buttons: [{ label: t('settings.back'), primary: true, onClick: () => showPanelTab('menu') }],
-    });
-    return;
-  }
-  showModal({
-    title: t('open.soldOutTitle'),
-    body: `<p>${t('open.soldOutBody', {
-      items: check.items.map((id) => `${itemName(id)} (${readyServings(state, id)})`).join(t('list.sep')),
-    })}</p>`,
-    buttons: [
-      { label: t('open.toPantry'), primary: true, onClick: () => showPanelTab('pantry') },
-      { label: t('open.anyway'), onClick: startDay },
-    ],
+const menuEmpty = () => !state.onMenu.some((id) => state.items[id] > 0);
+
+/** The only way to open: prepare today's menu, then confirm. */
+function prepareDay(): void {
+  if (state.phase !== 'prep') return;
+  showPrepare(state, startDay, () => {
+    saveState(localStorage, state);
+    panel.refresh();
   });
 }
-openBtn.addEventListener('click', tryOpen);
+openBtn.addEventListener('click', prepareDay);
 
-/** Shown once the player dismisses the next day report (e.g. the Shift Manager's earnings). */
-let afterReport: (() => void) | null = null;
+/** The player ends the day: the doors shut and the books are settled. */
+function closeDay(): void {
+  const report = sim.closeShop(state);
+  if (report) showReport(report);
+}
+closeBtn.addEventListener('click', closeDay);
 
 function showReport(report: DayReport): void {
   saveState(localStorage, state);
@@ -425,39 +412,12 @@ function showReport(report: DayReport): void {
       {
         label: t('report.next'),
         primary: true,
-        onClick: () => {
-          showPanelTab(report.outOfStock.length ? 'pantry' : 'menu');
-          const next = afterReport;
-          afterReport = null;
-          next?.();
-        },
+        onClick: () => showPanelTab(report.outOfStock.length ? 'pantry' : 'menu'),
       },
     ],
   });
 }
 
-let closingAnnounced = false;
-/** Feeds simulation events to the scene and reacts to the day closing. */
-function handleEvents(events: SimEvent[], show = true): void {
-  if (show) scene.addEvents(events);
-  for (const e of events) if (e.type === 'dayEnd') showReport(e.report);
-  if (isClosingTime(state) && !closingAnnounced) {
-    closingAnnounced = true;
-    if (show) toast(t('toast.closed'));
-  } else if (!isClosingTime(state)) closingAnnounced = false;
-}
-
-/**
- * Runs the shop for up to `seconds` of game time in one go (e.g. while the tab was
- * hidden or the browser was closed). Stops when the day ends; returns the time run.
- */
-function fastForward(seconds: number): number {
-  const left = DAY_SECONDS + CLOSING_GRACE + 1 - state.dayTime;
-  const run = Math.min(seconds, left);
-  let t = 0;
-  for (; t < run && state.phase === 'open'; t += SIM_STEP) handleEvents(sim.update(state, SIM_STEP), false);
-  return t;
-}
 
 function applyStaticText(): void {
   document.documentElement.lang = LOCALES.find((l) => l.id === getLocale())!.htmlLang;
@@ -506,10 +466,10 @@ function startOnboarding(then?: () => void): void {
     onDone: (result) => {
       applyProfile(result);
       for (let i = 0; i < 24; i++) scene.sparkle(10 + Math.random() * 172, 20 + Math.random() * 90);
-      // "Open the café!" really opens it: day 1 starts right away.
-      if (state.phase === 'prep' && checkOpen(state).ok) openShop(state);
       updateDayHud();
       toast(t('ob.opened', { cafe: result.profile.cafeName }));
+      // Day 1 opens like every other day: from preparing the menu.
+      prepareDay();
       then?.();
     },
   });
@@ -549,10 +509,7 @@ function openSettings(): void {
         <dt>${t('settings.days')}</dt><dd>${state.day - 1}</dd>
       </dl>
       <p class="note">${t('settings.shortcuts')}</p>
-      <p class="note">${t('settings.away', {
-        pct: Math.round(awayEfficiency(state) * 100),
-        hours: awayCapSeconds(state) / 3600,
-      })}</p>
+      <p class="note">${t('settings.pause')}</p>
       <p class="note">${t('settings.saves')}</p>`,
     buttons: [
       { label: t('settings.back'), primary: true },
@@ -661,73 +618,14 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
-// ------------------------------------------------------------ away time
+// ------------------------------------------------------------ saving
 
-/**
- * Coming back from a fully closed game. If the shop was open, the day kept going:
- * it's played out for real (ingredients, sales, the report). Any time left after
- * that goes to the Shift Manager.
- */
-function collectClosedTime(elapsed: number): void {
-  state.lastSeen = Date.now();
-  let away = elapsed;
-  if (state.phase === 'open' && elapsed >= 2) {
-    const before = state.totalEarned;
-    away = Math.max(0, elapsed - fastForward(elapsed * state.speed) / state.speed);
-    saveState(localStorage, state);
-    const earned = state.totalEarned - before;
-    // Still mid-day: just say what came in. Otherwise the day report is already up.
-    if (state.phase === 'open') {
-      if (earned > 0) toast(t('toast.busy', { money: formatMoney(earned) }));
-      return;
-    }
-  }
-  if (isModalOpen()) afterReport = () => showAwayEarnings(away);
-  else showAwayEarnings(away);
-}
-
-/** The Shift Manager's earnings for time away while the shop was closed. */
-function showAwayEarnings(elapsed: number): void {
-  const report = awayEarnings(state, elapsed);
-  if (report.earned <= 0 || elapsed < 60) return;
-  earn(state, report.earned);
-  saveState(localStorage, state);
-  const capped = report.seconds > report.countedSeconds;
-  showModal({
-    title: state.profile?.ownerName ? t('away.titleNamed', { name: state.profile.ownerName }) : t('away.title'),
-    icon: ownerIcon(),
-    body: `
-      <p>${t('away.body', { time: formatDuration(report.seconds) })}</p>
-      <p class="big-money">${formatMoney(report.earned)}</p>
-      <p class="note">${t('away.rate', { pct: Math.round(awayEfficiency(state) * 100) })}${
-        capped ? t('away.capped', { time: formatDuration(report.countedSeconds) }) : ''
-      }<br />${t('away.tip')}</p>`,
-    buttons: [{ label: t('away.collect'), primary: true }],
-  });
-}
-
-/** The tab was only hidden (you were working): the day kept running at full speed. */
-let hiddenAt = 0;
+// Nothing runs while you're away: the shop pauses with the game and picks up where it
+// left off. Save on the way out so nothing is lost.
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) {
-    hiddenAt = Date.now();
-    state.lastSeen = hiddenAt;
-    saveState(localStorage, state);
-    return;
-  }
-  if (!hiddenAt) return;
-  const seconds = (Date.now() - hiddenAt) / 1000;
-  hiddenAt = 0;
-  if (seconds < 2 || state.phase !== 'open') return;
-  const before = state.totalEarned;
-  fastForward(seconds * state.speed);
-  const earned = state.totalEarned - before;
-  if (seconds > 10 && earned > 0 && state.phase === 'open') toast(t('toast.busy', { money: formatMoney(earned) }));
+  if (document.hidden) saveState(localStorage, state);
 });
-window.addEventListener('pagehide', () => {
-  state.lastSeen = Date.now();
-  saveState(localStorage, state);
-});
+window.addEventListener('pagehide', () => saveState(localStorage, state));
 setInterval(() => saveState(localStorage, state), AUTOSAVE_MS);
 
 // ------------------------------------------------------------ loop
@@ -738,12 +636,13 @@ let shownRate = '';
 
 /** Runs once per frame, from the Phaser game loop, before the café is drawn. */
 function frame(dt: number): void {
-  // Paused while a dialog (like the day report) is up; sped up when the player asks.
-  const simDt = isModalOpen() || document.querySelector('.onboard-overlay') ? 0 : state.phase === 'open' ? dt * state.speed : dt;
+  // Paused while a dialog (like the day report) is up or the tab is hidden; sped up
+  // when the player asks.
+  const paused = isModalOpen() || document.hidden || !!document.querySelector('.onboard-overlay');
+  const simDt = paused ? 0 : state.phase === 'open' ? dt * state.speed : dt;
   for (let remaining = simDt; remaining > 1e-6; remaining -= SIM_STEP) {
-    handleEvents(sim.update(state, Math.min(SIM_STEP, remaining)));
+    scene.addEvents(sim.update(state, Math.min(SIM_STEP, remaining)));
   }
-  if (!document.hidden) state.lastSeen = Date.now();
 
   scene.update(dt, sim);
   sceneWrap.classList.toggle('is-panning', scene.panning);
@@ -771,9 +670,8 @@ fitCanvas();
 panel.update();
 regionsUI.select('main');
 updateDayHud();
-// Saves from before the opening flow existed go through it first, then collect.
-if (state.profile) collectClosedTime(closedSeconds);
-else startOnboarding(() => collectClosedTime(closedSeconds));
+// Saves from before the opening flow existed go through it first.
+if (!state.profile) startOnboarding();
 
 // The page starts behind a loading spinner (see index.html). Lift it once the pixel
 // fonts are in (or after 2s at most) and the café has drawn its first frame.

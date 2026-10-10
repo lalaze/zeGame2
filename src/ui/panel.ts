@@ -13,8 +13,6 @@ import { DECOR_SLOTS, comfort, decorDef, decorForSlot, ownsDecor, useDecor } fro
 import { FURNITURE, buyFurniture, furnitureDef, placedCount, storedCount } from '../game/furniture';
 import {
   arrivalRate,
-  awayCapSeconds,
-  awayEfficiency,
   bakeForForecast,
   baristaCount,
   buyIngredient,
@@ -116,11 +114,6 @@ function upgradeEffect(state: GameState, id: UpgradeId): string {
       return upgradeLocked(state, id) ? t('effect.cookLocked') : t('effect.cook', { n: cookCount(state) });
     case 'tables':
       return t('effect.tables', { n: mainTableCount(state) });
-    case 'manager':
-      return t('effect.manager', {
-        pct: Math.round(awayEfficiency(state) * 100),
-        hours: awayCapSeconds(state) / 3600,
-      });
   }
 }
 

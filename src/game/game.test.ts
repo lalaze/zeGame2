@@ -1,19 +1,15 @@
 import { describe, expect, it } from 'vitest';
-import { CLOSING_GRACE, COMBO_CHANCE, DAY_SECONDS, MENU, PASS_SLOTS, UPGRADES, VARIETY_BONUS, VIP_CHANCE, VIP_MULTIPLIER } from './data';
-import { checkOpen, clockHours, finishDay, openShop, type DayReport } from './day';
+import { COMBO_CHANCE, DAY_SECONDS, MENU, PASS_SLOTS, UPGRADES, VARIETY_BONUS } from './data';
+import { checkOpen, finishDay, formatOpenTime, openShop, type DayReport } from './day';
 import {
   arrivalRate,
-  awayCapSeconds,
-  dayProfit,
   orderShares,
   recipe,
   serviceCapacity,
   servingCost,
-  awayEarnings,
   bulkCost,
   buyItem,
   buyUpgrade,
-  incomePerSecond,
   isItemAvailable,
   itemPrice,
   maxAffordable,
@@ -115,25 +111,6 @@ describe('economy', () => {
     expect(q.affordable).toBe(false);
   });
 
-  it('caps away earnings and scales with manager level', () => {
-    const s = createInitialState(0);
-    const full = awayEarnings(s, 1e9);
-    expect(full.countedSeconds).toBe(awayCapSeconds(s));
-    expect(full.earned).toBeGreaterThan(0);
-    s.upgrades.manager = 5;
-    // At 100% efficiency an hour away is worth one day's profit, far below full-speed income.
-    expect(awayEarnings(s, 3600).earned).toBeCloseTo(dayProfit(s), 6);
-    expect(awayEarnings(s, 3600).earned).toBeLessThan(incomePerSecond(s) * 3600);
-    expect(awayEarnings(s, -50).earned).toBe(0);
-  });
-
-  it('a day\'s profit is sales minus ingredients', () => {
-    const s = createInitialState(0);
-    // Espresso Lv 1 sells for $3 and uses $1 of beans.
-    const customers = Math.min(arrivalRate(s), serviceCapacity(s)) * DAY_SECONDS;
-    const vip = 1 + VIP_CHANCE * (VIP_MULTIPLIER - 1);
-    expect(dayProfit(s)).toBeCloseTo(customers * (3 * vip - 1), 6);
-  });
 });
 
 describe('save data', () => {
@@ -152,14 +129,19 @@ describe('save data', () => {
   it('recovers from corrupt or hostile data', () => {
     expect(deserialize('not json', 5).coins).toBe(0);
     const s = deserialize(
-      JSON.stringify({ coins: -5, items: { espresso: 0, latte: 'x' }, upgrades: { barista: 99 }, lastSeen: 1e15 }),
+      JSON.stringify({ coins: -5, items: { espresso: 0, latte: 'x' }, upgrades: { barista: 99 } }),
       100,
     );
     expect(s.coins).toBe(0);
     expect(s.items.espresso).toBe(1);
     expect(s.items.latte).toBe(0);
     expect(s.upgrades.barista).toBe(3);
-    expect(s.lastSeen).toBe(100);
+  });
+
+  it('refunds the retired Shift Manager once', () => {
+    const s = deserialize(JSON.stringify({ coins: 10, upgrades: { manager: 2 } }), 0);
+    expect(s.coins).toBe(10 + bulkCost(500, 4, 0, 2));
+    expect(deserialize(serialize(s), 0).coins).toBe(s.coins);
   });
 });
 
@@ -178,7 +160,7 @@ describe('simulation', () => {
     expect(s.totalEarned).toBe(s.coins);
   });
 
-  it('real throughput roughly matches the income estimate', () => {
+  it('real throughput roughly matches the forecast', () => {
     const s = openState();
     s.items.latte = 5;
     s.items.espresso = 12;
@@ -187,17 +169,14 @@ describe('simulation', () => {
     s.upgrades.barista = 2;
     const sim = new Sim(seeded(7));
     const run = (seconds: number) => {
-      for (let t = 0; t < seconds; t += 0.05) {
-        s.dayTime = 0;
-        sim.update(s, 0.05);
-      }
+      for (let t = 0; t < seconds; t += 0.05) sim.update(s, 0.05);
     };
     run(120);
-    const before = s.totalEarned;
+    const before = s.served;
     const duration = 1200;
     run(duration);
-    const actual = (s.totalEarned - before) / duration;
-    const expected = incomePerSecond(s);
+    const actual = (s.served - before) / duration;
+    const expected = Math.min(arrivalRate(s), serviceCapacity(s));
     expect(actual / expected).toBeGreaterThan(0.75);
     expect(actual / expected).toBeLessThan(1.25);
   });
@@ -207,7 +186,6 @@ describe('simulation', () => {
     s.upgrades.marketing = 25;
     const sim = new Sim(seeded(3));
     for (let t = 0; t < 200; t += 0.05) {
-      s.dayTime = 0;
       sim.update(s, 0.05);
       expect(sim.queue.length).toBeLessThanOrEqual(6);
     }
@@ -536,11 +514,8 @@ describe('table service', () => {
 
 describe('business day', () => {
   function runDay(s: GameState, sim: Sim): DayReport {
-    for (let t = 0; t < DAY_SECONDS + CLOSING_GRACE + 5; t += 0.05) {
-      const end = sim.update(s, 0.05).find((e) => e.type === 'dayEnd');
-      if (end && end.type === 'dayEnd') return end.report;
-    }
-    throw new Error('the day never ended');
+    for (let t = 0; t < DAY_SECONDS; t += 0.05) sim.update(s, 0.05);
+    return sim.closeShop(s)!;
   }
 
   it('stays closed until opened, then runs one day and reports it', () => {
@@ -556,10 +531,12 @@ describe('business day', () => {
     expect(report.day).toBe(1);
     expect(report.served).toBeGreaterThan(10);
     expect(report.revenue).toBeCloseTo(s.coins);
-    expect(report.ingredientCost).toBe(report.served);
+    // A drink that was being made when the doors shut used its beans but wasn't sold.
+    expect(report.ingredientCost).toBeGreaterThanOrEqual(report.served);
+    expect(report.ingredientCost).toBeLessThanOrEqual(report.served + 1);
     expect(report.profit).toBeCloseTo(report.revenue - report.ingredientCost);
     expect(report.bestSeller).toBe('espresso');
-    expect(s.pantry.beans).toBe(STARTER_BEANS - report.served);
+    expect(s.pantry.beans).toBe(STARTER_BEANS - report.ingredientCost);
     expect(s.phase).toBe('prep');
     expect(s.day).toBe(2);
     expect(s.today.served).toBe(0);
@@ -615,13 +592,21 @@ describe('business day', () => {
     expect(poor.coins).toBe(0);
   });
 
-  it('runs the shop clock from 8:00 to 20:00 and saves a day in progress', () => {
+  it('stays open until closed, however long, and saves a day in progress', () => {
     const s = createInitialState(0);
-    expect(clockHours(s)).toBeLessThan(8);
+    s.pantry.beans = 1e6;
+    const sim = new Sim(seeded(9));
+    expect(sim.closeShop(s)).toBeNull();
     openShop(s);
-    expect(clockHours(s)).toBe(8);
+    for (let t = 0; t < DAY_SECONDS * 2; t += 0.05) sim.update(s, 0.05);
+    expect(s.phase).toBe('open');
+    // Customers keep coming long after a typical day.
+    const served = s.today.served;
+    for (let t = 0; t < 60; t += 0.05) sim.update(s, 0.05);
+    expect(s.today.served).toBeGreaterThan(served);
+    expect(formatOpenTime(s.dayTime)).toMatch(/^7:0\d$/);
+    expect(formatOpenTime(3725)).toBe('1:02:05');
     s.dayTime = DAY_SECONDS / 2;
-    expect(clockHours(s)).toBe(14);
     s.today.served = 7;
     s.today.sales.espresso = 7;
     const back = deserialize(serialize(s), 0);
@@ -717,11 +702,8 @@ describe('morning bake', () => {
 
   function runDay(s: GameState, seed: number): DayReport {
     const sim = new Sim(seeded(seed));
-    for (let t = 0; t < DAY_SECONDS + CLOSING_GRACE + 5; t += 0.05) {
-      const end = sim.update(s, 0.05).find((e) => e.type === 'dayEnd');
-      if (end && end.type === 'dayEnd') return end.report;
-    }
-    throw new Error('the day never ended');
+    for (let t = 0; t < DAY_SECONDS; t += 0.05) sim.update(s, 0.05);
+    return sim.closeShop(s)!;
   }
 
   it('suggests a bake amount when a bread goes on the menu', () => {

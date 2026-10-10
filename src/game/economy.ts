@@ -14,7 +14,6 @@ import {
   PRICE_MILESTONES,
   SERVICE_OVERHEAD,
   UPGRADES,
-  VIP_CHANCE,
   VIP_MULTIPLIER,
   type IngredientDef,
   type IngredientId,
@@ -199,63 +198,12 @@ export function orderShares(items: readonly MenuItemDef[]): Map<ItemId, number> 
   return shares;
 }
 
-/** Today's menu, or every unlocked dish if nothing is on it (for estimates while planning). */
-const estimateItems = (state: GameState) => {
-  const onMenu = menuItems(state);
-  return onMenu.length > 0 ? onMenu : unlockedItems(state);
-};
-
 /** Customers per second the staff can actually serve. */
 export function serviceCapacity(state: GameState, items = menuItems(state)): number {
   if (items.length === 0) return 0;
   let prep = 0;
   for (const [id, share] of orderShares(items)) prep += share * prepTime(state, id);
   return baristaCount(state) / (prep + SERVICE_OVERHEAD);
-}
-
-const VIP_BOOST = 1 + VIP_CHANCE * (VIP_MULTIPLIER - 1);
-
-/** Expected steady-state income, used for the HUD and for away earnings. */
-export function incomePerSecond(state: GameState): number {
-  const items = estimateItems(state);
-  if (items.length === 0) return 0;
-  let perCustomer = 0;
-  for (const [id, share] of orderShares(items)) perCustomer += share * salePrice(state, id);
-  return Math.min(arrivalRate(state), serviceCapacity(state, items)) * perCustomer * VIP_BOOST;
-}
-
-export const awayCapSeconds = (s: GameState) => (4 + 2 * s.upgrades.manager) * 3600;
-export const awayEfficiency = (s: GameState) => Math.min(1, 0.25 + 0.15 * s.upgrades.manager);
-
-export interface AwayReport {
-  seconds: number;
-  countedSeconds: number;
-  earned: number;
-}
-
-/**
- * While the game is closed, the Shift Manager runs about one business day per real
- * hour (a real day is only a few minutes long, so paying for every second away would
- * be worth far more than playing).
- */
-export const AWAY_DAYS_PER_HOUR = 1;
-
-/** Expected profit of one full day on today's menu: sales minus ingredient costs. */
-export function dayProfit(state: GameState): number {
-  const items = estimateItems(state);
-  if (items.length === 0) return 0;
-  let perCustomer = 0;
-  for (const [id, share] of orderShares(items)) perCustomer += share * (salePrice(state, id) * VIP_BOOST - servingCost(id));
-  const customers = Math.min(arrivalRate(state), serviceCapacity(state, items)) * DAY_SECONDS;
-  return Math.max(0, customers * perCustomer);
-}
-
-export function awayEarnings(state: GameState, elapsedSeconds: number): AwayReport {
-  const seconds = Math.max(0, elapsedSeconds);
-  const countedSeconds = Math.min(seconds, awayCapSeconds(state));
-  const days = (countedSeconds / 3600) * AWAY_DAYS_PER_HOUR;
-  const earned = dayProfit(state) * awayEfficiency(state) * days;
-  return { seconds, countedSeconds, earned };
 }
 
 export function earn(state: GameState, amount: number): void {

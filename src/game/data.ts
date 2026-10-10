@@ -107,7 +107,7 @@ export const MENU: readonly MenuItemDef[] = [
   { id: 'macaron', category: 'pastry', basePrice: 260_000, prepTime: 1.5, baseCost: 3_200_000_000 },
 ];
 
-export type UpgradeId = 'barista' | 'server' | 'cook' | 'machine' | 'marketing' | 'tables' | 'manager';
+export type UpgradeId = 'barista' | 'server' | 'cook' | 'machine' | 'marketing' | 'tables';
 
 export interface UpgradeDef {
   id: UpgradeId;
@@ -124,7 +124,6 @@ export const UPGRADES: readonly UpgradeDef[] = [
   // Needs the kitchen, which comes with its first cook.
   { id: 'cook', baseCost: 900, growth: 10, max: 2 },
   { id: 'tables', baseCost: 300, growth: 8, max: 6 },
-  { id: 'manager', baseCost: 500, growth: 4, max: 5 },
 ];
 
 export const ITEM_COST_GROWTH = 1.12;
@@ -238,11 +237,10 @@ export const MAX_VARIETY_BONUS = 0.6;
 
 // ---------------------------------------------------------------- the business day
 
-/** Real seconds the shop is open each day at 1× speed (08:00 to 20:00 on the clock). */
+/**
+ * The shop stays open until the player closes it. Forecasts (the suggested morning
+ * bake, stocking up for a day) plan for a typical day of this many seconds at 1×.
+ */
 export const DAY_SECONDS = 180;
-export const OPEN_HOUR = 8;
-export const CLOSE_HOUR = 20;
-/** After closing time the staff finish the line; this is how long they get at most. */
-export const CLOSING_GRACE = 25;
 export const SPEEDS = [1, 2, 4] as const;
 export type Speed = (typeof SPEEDS)[number];

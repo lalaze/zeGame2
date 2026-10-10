@@ -1,4 +1,4 @@
-import { CLOSING_GRACE, COMBO_CHANCE, DAY_SECONDS, MAX_QUEUE, PASS_SLOTS, RING_AGAIN, VIP_CHANCE, isDrink, type ItemId } from './data';
+import { COMBO_CHANCE, MAX_QUEUE, PASS_SLOTS, RING_AGAIN, VIP_CHANCE, isDrink, type ItemId } from './data';
 import { finishDay, type DayReport } from './day';
 import {
   arrivalRate,
@@ -130,8 +130,7 @@ export type SimEvent =
   | { type: 'bell'; x: number; y: number }
   | { type: 'walkout'; x: number; y: number }
   | { type: 'soldout'; item: ItemId; x: number; y: number }
-  | { type: 'restock'; item: ItemId; n: number }
-  | { type: 'dayEnd'; report: DayReport };
+  | { type: 'restock'; item: ItemId; n: number };
 
 export const WALK_SPEED = 62;
 /** Servers walk briskly. */
@@ -548,7 +547,7 @@ export class Sim {
     if (this.spawnTimer <= 0) {
       // Jittered so customers don't march in like clockwork.
       this.spawnTimer = (0.5 + this.rng()) / arrivalRate(state);
-      if (open && state.dayTime < DAY_SECONDS && this.queue.length < MAX_QUEUE) this.spawn(state);
+      if (open && this.queue.length < MAX_QUEUE) this.spawn(state);
     }
 
     this.callNext();
@@ -615,19 +614,18 @@ export class Sim {
     this.customers = this.customers.filter(
       (c) => !(c.phase === 'exiting' && c.via.length === 0 && c.x === c.tx && c.y === c.ty),
     );
-
-    // After closing time the staff finish whoever is still in line, then close up.
-    if (open && state.dayTime >= DAY_SECONDS) {
-      const busy =
-        this.customers.some((c) => c.phase !== 'sitting' && c.phase !== 'exiting') ||
-        this.pass.length > 0 ||
-        this.servers.some((server) => server.plates.length > 0);
-      if (!busy || state.dayTime >= DAY_SECONDS + CLOSING_GRACE) {
-        this.sendHome();
-        events.push({ type: 'dayEnd', report: finishDay(state) });
-      }
-    }
     return events;
+  }
+
+  /**
+   * The player closes the shop: the doors shut on anyone still waiting (they leave
+   * without paying, and aren't counted as lost), the staff stop, and the day's
+   * books are settled.
+   */
+  closeShop(state: GameState): DayReport | null {
+    if (state.phase !== 'open') return null;
+    this.sendHome();
+    return finishDay(state);
   }
 
   /** Closing up: anyone still waiting leaves, the baristas stop, and the servers head back. */

@@ -1,6 +1,4 @@
 import {
-  CLOSING_GRACE,
-  DAY_SECONDS,
   INGREDIENTS,
   MENU,
   SPEEDS,
@@ -89,7 +87,7 @@ export interface GameState {
   phase: Phase;
   /** The day being planned or run, starting at 1. */
   day: number;
-  /** Seconds since today's opening; the shop closes at DAY_SECONDS. */
+  /** Seconds the shop has been open today (game time, so faster at 2× and 4×). */
   dayTime: number;
   speed: Speed;
   /** Unlocked items the player chose to sell today, in menu order. */
@@ -100,8 +98,6 @@ export interface GameState {
   /** Today's baked goods still on the shelf; whatever is left at closing goes stale. */
   shelf: Partial<Record<ItemId, number>>;
   today: DayStats;
-  /** Wall-clock ms of the last moment the player had the game open. */
-  lastSeen: number;
   createdAt: number;
 }
 
@@ -142,7 +138,6 @@ export function createInitialState(now: number): GameState {
     bakePlan: {},
     shelf: {},
     today: emptyDay(),
-    lastSeen: now,
     createdAt: now,
   };
 }
@@ -246,15 +241,13 @@ export function deserialize(raw: string | null, now: number): GameState {
   base.totalEarned = num(data.totalEarned, base.coins);
   base.served = Math.floor(num(data.served, 0));
   base.createdAt = num(data.createdAt, now);
-  // A lastSeen in the future (clock changes) must not grant negative or bogus time.
-  base.lastSeen = Math.min(num(data.lastSeen, now), now);
   base.profile = parseProfile(data.profile);
   base.decor = parseDecor(data.decor, base.decor);
   base.goal = Math.floor(num(data.goal, 0));
 
   base.day = Math.max(1, Math.floor(num(data.day, 1)));
   base.phase = data.phase === 'open' ? 'open' : 'prep';
-  base.dayTime = base.phase === 'open' ? Math.min(DAY_SECONDS + CLOSING_GRACE, num(data.dayTime, 0)) : 0;
+  base.dayTime = base.phase === 'open' ? num(data.dayTime, 0) : 0;
   base.speed = SPEEDS.find((v) => v === data.speed) ?? 1;
   const pantry = (data.pantry ?? {}) as Record<string, unknown>;
   for (const i of INGREDIENTS) base.pantry[i.id] = Math.floor(num(pantry[i.id], base.pantry[i.id]));
@@ -278,6 +271,10 @@ export function deserialize(raw: string | null, now: number): GameState {
     base.coins += bulkCost(200, 2.2, 0, oldDecor);
     base.upgrades.tables = Math.max(base.upgrades.tables, [3, 6, 10].filter((l) => oldDecor >= l).length);
   }
+  // The Shift Manager, who earned while the game was closed, has retired: what was
+  // spent hiring them comes back. The upgrade isn't saved any more, so this happens once.
+  const manager = Math.min(5, Math.floor(num(upgrades.manager, 0)));
+  if (manager > 0) base.coins += bulkCost(500, 4, 0, manager);
   // Anything placed off the grid or in a table's way goes to storage.
   evictBlocked(base, mainTableCount(base));
   // Every bread and pastry on the menu gets a morning-bake amount. Before v5 nothing was

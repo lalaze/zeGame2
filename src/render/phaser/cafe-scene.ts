@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-import { clockHours } from '../../game/day';
 import { menuItems } from '../../game/economy';
 import { formatMoney } from '../../game/format';
 import { COLS, FLOOR_ROWS, WALL_ROWS, WALL_TOP, CELL, canPlace, cellFree, furnitureDef } from '../../game/furniture';
@@ -260,9 +259,10 @@ export class CafeScene extends Phaser.Scene {
     const view = this.view;
     const state = this.getState();
     const t = time / 1000;
-    const hours = clockHours(state);
-    const now = new Date(2000, 0, 1, Math.floor(hours), (hours % 1) * 60);
-    const light = lightingAt(hours);
+    // The light (and the wall clock) follow the player's own local time, to the minute.
+    const real = new Date();
+    const now = new Date(2000, 0, 1, real.getHours(), real.getMinutes());
+    const light = lightingAt(real.getHours() + real.getMinutes() / 60);
     const viewX = Math.round(view.viewX);
     const viewY = Math.round(view.viewY);
 

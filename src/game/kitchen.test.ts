@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { COOK_BATCH, DAY_SECONDS, MENU } from './data';
+import { COOK_BATCH, MENU } from './data';
 import { openShop } from './day';
 import { buyUpgrade, cookCount, dayNeeds, isBakery } from './economy';
 import { canPlace } from './furniture';
@@ -148,7 +148,7 @@ describe('the kitchen', () => {
     expect(areaAtPoint(sim.cooks[0].x, sim.cooks[0].y)).toBe('kitchen');
   });
 
-  it('leaves a well-stocked case alone, and starts nothing it cannot finish before closing', () => {
+  it('leaves a well-stocked case alone, and bakes what the pantry allows', () => {
     const s = bakingState();
     s.shelf.roll = RESTOCK_AT + 1;
     expect(nextBatch(s, [])).toBeNull();
@@ -160,9 +160,6 @@ describe('the kitchen', () => {
     s.pantry.butter = 2;
     expect(nextBatch(s, [])).toEqual({ item: 'roll', n: 2 });
     s.pantry.butter = 0;
-    expect(nextBatch(s, [])).toBeNull();
-    s.pantry.butter = 40;
-    s.dayTime = DAY_SECONDS - 5;
     expect(nextBatch(s, [])).toBeNull();
   });
 

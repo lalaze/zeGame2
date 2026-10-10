@@ -1,4 +1,4 @@
-import { CLOSE_HOUR, DAY_SECONDS, OPEN_HOUR, type ItemId } from './data';
+import type { ItemId } from './data';
 import { bakeMorning, dayDemand, menuItems, readyServings, servingCost, soldOutItems } from './economy';
 import { emptyDay, type DayStats, type GameState } from './state';
 
@@ -78,16 +78,11 @@ export function finishDay(state: GameState): DayReport {
   return report;
 }
 
-/** Hours on the shop clock (8.0 to 20.0); before opening it reads early morning. */
-export function clockHours(state: GameState): number {
-  if (state.phase === 'prep') return OPEN_HOUR - 0.5;
-  return OPEN_HOUR + (Math.min(state.dayTime, DAY_SECONDS) / DAY_SECONDS) * (CLOSE_HOUR - OPEN_HOUR);
-}
-
-export const isClosingTime = (state: GameState) => state.phase === 'open' && state.dayTime >= DAY_SECONDS;
-
-export function formatClock(hours: number): string {
-  const h = Math.floor(hours);
-  const m = Math.floor((hours - h) * 60);
-  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+/** How long the shop has been open today, as m:ss (or h:mm:ss), for the day HUD. */
+export function formatOpenTime(seconds: number): string {
+  const total = Math.max(0, Math.floor(seconds));
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = String(total % 60).padStart(2, '0');
+  return h > 0 ? `${h}:${String(m).padStart(2, '0')}:${s}` : `${m}:${s}`;
 }

@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import { CLOSE_HOUR, OPEN_HOUR } from '../game/data';
 import { beam, lightingAt, roomAmbient } from './lighting';
 
 const rgb = (hex: string) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
@@ -35,9 +34,9 @@ describe('lighting through the day', () => {
 
   it('switches the lamps on as it gets dark while the shop is open', () => {
     expect(lightingAt(12).lamps).toBe(0);
-    expect(lightingAt(OPEN_HOUR + 1).lamps).toBe(0);
-    for (let h = 16; h < CLOSE_HOUR; h += 0.25) expect(lightingAt(h + 0.25).lamps).toBeGreaterThanOrEqual(lightingAt(h).lamps);
-    expect(lightingAt(CLOSE_HOUR).lamps).toBe(1);
+    expect(lightingAt(9).lamps).toBe(0);
+    for (let h = 16; h < 20; h += 0.25) expect(lightingAt(h + 0.25).lamps).toBeGreaterThanOrEqual(lightingAt(h).lamps);
+    expect(lightingAt(20).lamps).toBe(1);
   });
 
   it('moves the sun across the sky, slanting the beams the other way after noon', () => {

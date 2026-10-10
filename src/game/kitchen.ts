@@ -9,7 +9,7 @@
 //   pastry fridge where cakes set, and the door to the pastry case).
 // The hand sink sits between storage and prep, and the dish pit is by the door,
 // where dirty plates come back in, away from the food.
-import { COOK_BATCH, DAY_SECONDS, type IngredientId, type ItemId } from './data';
+import { COOK_BATCH, type IngredientId, type ItemId } from './data';
 import { isBakery, menuItems, recipe, servingCost, servingsLeft, unlockedItems } from './economy';
 import { FLOOR_Y, areaOrigin, floorY, passageY } from './layout';
 import type { GameState } from './state';
@@ -205,9 +205,6 @@ export const ZONES: Record<Station, number> = {
   rack: 3, pastryFridge: 3, door: 3,
 };
 
-/** About how long a batch takes, walking included. */
-export const batchSeconds = (item: ItemId) => batchSteps(item).reduce((sum, s) => sum + STATION_SECONDS[s], 0) + 8;
-
 /** The equipment this café's unlocked dishes call for, plus the basics. */
 export function installedEquipment(state: GameState): Set<Equipment> {
   const set = new Set<Equipment>(BASE_EQUIPMENT);
@@ -223,8 +220,7 @@ export function installedEquipment(state: GameState): Set<Equipment> {
 /**
  * What a free cook should bake next, if anything: the bread or pastry on today's
  * menu that's lowest on the shelf, once it's down to RESTOCK_AT. Nothing that
- * another cook is already making, that the pantry can't stretch to, or that
- * wouldn't be out before closing.
+ * another cook is already making, or that the pantry can't stretch to.
  */
 export function nextBatch(state: GameState, baking: readonly ItemId[]): { item: ItemId; n: number } | null {
   if (state.phase !== 'open') return null;
@@ -232,7 +228,7 @@ export function nextBatch(state: GameState, baking: readonly ItemId[]): { item: 
   for (const m of menuItems(state)) {
     if (!isBakery(m.id) || baking.includes(m.id)) continue;
     const left = state.shelf[m.id] ?? 0;
-    if (left > RESTOCK_AT || state.dayTime + batchSeconds(m.id) > DAY_SECONDS) continue;
+    if (left > RESTOCK_AT) continue;
     const n = Math.min(COOK_BATCH, servingsLeft(state, m.id));
     if (n >= 1 && (!best || left < best.left)) best = { item: m.id, n, left };
   }

@@ -1244,19 +1244,6 @@ const UPGRADE_ART: Record<Exclude<UpgradeId, 'barista' | 'server' | 'cook'>, { r
     ],
     palette: { k: '#c28a52', K: '#7f5232', w: '#fdf6ec' },
   },
-  manager: {
-    rows: [
-      '...yyyy.....',
-      '..yyY.......',
-      '.yyY......s.',
-      '.yy......sss',
-      '.yy.......s.',
-      '.yyY........',
-      '..yyY.......',
-      '...yyyy.....',
-    ],
-    palette: { y: '#f2c14e', Y: '#d99a2b', s: '#fdf6ec' },
-  },
 };
 
 export function upgradeIcon(id: UpgradeId): HTMLCanvasElement {
