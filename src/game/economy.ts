@@ -133,6 +133,8 @@ export function unlockedItems(state: GameState): MenuItemDef[] {
 }
 
 export const baristaCount = (s: GameState) => 1 + s.upgrades.barista;
+/** Servers carry orders from the pass to the tables; the café opens with one. */
+export const serverCount = (s: GameState) => 1 + s.upgrades.server;
 export const prepMultiplier = (s: GameState) => 0.9 ** s.upgrades.machine;
 /** Extra customers drawn by a varied menu, as a share (0.12 = +12%). */
 export const varietyBonus = (s: GameState) =>
@@ -143,6 +145,8 @@ export const tipMultiplier = (s: GameState) => 1 + comfort(s) / 100;
 /** The café opens with a table in each nook; Expand the Shop adds the rest. */
 export const tableCount = (s: GameState) => activeTableIndices(s).length;
 export const patienceSeconds = (s: GameState) => 40 + comfort(s) / 5;
+/** How long a seated guest waits for their order to be brought over before giving up. */
+export const tablePatience = (s: GameState) => 50 + comfort(s) / 4;
 
 export function salePrice(state: GameState, id: ItemId, vip = false): number {
   return itemPrice(menuItem(id), state.items[id]) * tipMultiplier(state) * (vip ? VIP_MULTIPLIER : 1);

@@ -598,6 +598,8 @@ function resetGame(): void {
   sim.baristas = [];
   sim.queue = [];
   sim.seats = [];
+  sim.servers = [];
+  sim.pass = [];
   panel.setState(state);
   regionsUI.select('main');
   updateBrand();

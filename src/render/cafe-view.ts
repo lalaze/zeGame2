@@ -21,7 +21,7 @@ export interface Ghost {
 }
 
 export interface Effect {
-  kind: 'steam' | 'sparkle' | 'heart';
+  kind: 'steam' | 'sparkle' | 'heart' | 'bell';
   x: number;
   y: number;
 }
@@ -79,7 +79,10 @@ export class CafeView {
   // ------------------------------------------------------------ effects
 
   addEvents(events: SimEvent[]): void {
-    for (const e of events) if (e.type === 'sale') this.sales.push(e);
+    for (const e of events) {
+      if (e.type === 'sale') this.sales.push(e);
+      else if (e.type === 'bell') this.effects.push({ kind: 'bell', x: e.x, y: e.y });
+    }
   }
 
   sparkle(x: number, y: number): void {

@@ -27,6 +27,7 @@ import {
   recipe,
   restock,
   restockQuote,
+  serverCount,
   servingsLeft,
   setBakePlan,
   setOnMenu,
@@ -107,6 +108,8 @@ function upgradeEffect(state: GameState, id: UpgradeId): string {
       return t('effect.machine', { n: (1 / prepMultiplier(state)).toFixed(2) });
     case 'barista':
       return t('effect.barista', { n: baristaCount(state) });
+    case 'server':
+      return t('effect.server', { n: serverCount(state) });
     case 'tables':
       return t('effect.tables', { n: mainTableCount(state) });
     case 'manager':

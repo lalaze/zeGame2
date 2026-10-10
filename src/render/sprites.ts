@@ -343,7 +343,7 @@ export const HAIR: HairSet[] = [
   },
 ];
 
-export type Role = 'customer' | 'barista' | 'owner';
+export type Role = 'customer' | 'barista' | 'owner' | 'server';
 export type Facing = 'down' | 'up' | 'left' | 'right';
 
 export interface CharacterFrames {
@@ -364,7 +364,7 @@ export const CHAR_H = FRONT.length + LEGS_FRONT[0].length + 2;
 
 const charCache = new Map<string, CharacterFrames>();
 
-/** Staff wear an apron: green for hired baristas, the outfit color for the owner. */
+/** Staff wear an apron: green for hired baristas, navy for servers, the outfit color for the owner. */
 export function character(look: Look, role: Role = 'customer'): CharacterFrames {
   const key = `${look.skin}.${look.hair}.${look.hairStyle}.${look.shirt}.${look.pants}.${role}`;
   let frames = charCache.get(key);
@@ -374,7 +374,7 @@ export function character(look: Look, role: Role = 'customer'): CharacterFrames 
   const hair = ramp(HAIRS[look.hair % HAIRS.length]);
   const staff = role !== 'customer';
   const shirt = ramp(staff ? '#f2ead8' : SHIRTS[look.shirt % SHIRTS.length]);
-  const apron = ramp(role === 'owner' ? SHIRTS[look.shirt % SHIRTS.length] : '#4f8a5b');
+  const apron = ramp(role === 'owner' ? SHIRTS[look.shirt % SHIRTS.length] : role === 'server' ? '#3d4b6b' : '#4f8a5b');
   const pants = ramp(PANTS[look.pants % PANTS.length]);
   const hat = ramp(SHIRTS[(look.shirt + 3) % SHIRTS.length]);
   const palette: Palette = {
@@ -1186,7 +1186,7 @@ export function ingredientIcon(id: IngredientId): HTMLCanvasElement {
 
 // ---------------------------------------------------------------- upgrades
 
-const UPGRADE_ART: Record<Exclude<UpgradeId, 'barista'>, { rows: string[]; palette: Palette }> = {
+const UPGRADE_ART: Record<Exclude<UpgradeId, 'barista' | 'server'>, { rows: string[]; palette: Palette }> = {
   marketing: {
     rows: [
       '.kkkkkkkkkk.',
@@ -1245,8 +1245,8 @@ const UPGRADE_ART: Record<Exclude<UpgradeId, 'barista'>, { rows: string[]; palet
 };
 
 export function upgradeIcon(id: UpgradeId): HTMLCanvasElement {
-  if (id === 'barista') {
-    const full = character({ skin: 0, hair: 1, hairStyle: 1, shirt: 0, pants: 0 }, 'barista').stand;
+  if (id === 'barista' || id === 'server') {
+    const full = character({ skin: id === 'server' ? 2 : 0, hair: id === 'server' ? 0 : 1, hairStyle: 1, shirt: 0, pants: 0 }, id).stand;
     const c = document.createElement('canvas');
     c.width = full.width;
     c.height = HEAD_ROWS + 2;

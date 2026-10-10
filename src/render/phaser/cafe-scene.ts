@@ -3,19 +3,19 @@ import { clockHours } from '../../game/day';
 import { menuItems } from '../../game/economy';
 import { formatMoney } from '../../game/format';
 import { COLS, FLOOR_ROWS, WALL_ROWS, WALL_TOP, CELL, canPlace, cellFree, furnitureDef } from '../../game/furniture';
-import { CAT_SPOT, FLOOR_Y, KITCHEN_DOOR, MAX_TABLES, SCENE_W, WINDOWS, areaOrigin, baristaSpot, doorPlantSpots, floorY, sceneHeight, seatSpot, tablePos } from '../../game/layout';
+import { CAT_SPOT, FLOOR_Y, KITCHEN_DOOR, MAX_TABLES, PASS, PASS_BELL, PASS_SLOT_W, passSlot, SCENE_W, WINDOWS, areaOrigin, baristaSpot, doorPlantSpots, floorY, sceneHeight, seatSpot, tablePos } from '../../game/layout';
 import { AREA_IDS, activeTableIndices, areaAtX, isAreaOpen, mainTableCount, regionOffset, type AreaId } from '../../game/regions';
-import type { Customer, Sim, SimEvent } from '../../game/sim';
+import { seated, type Customer, type Server, type Sim, type SimEvent, type Walker } from '../../game/sim';
 import type { GameState } from '../../game/state';
 import { cellRect, floorAnchor, type CafeView, type Ghost } from '../cafe-view';
 import { paintCeiling, paintNeon, paintSill, shadow } from '../decor-art';
-import { textWidth } from '../font';
+import { drawText, textWidth } from '../font';
 import { GHOST_BAD, GHOST_OK, floorFurnitureBounds, paintFloorFurniture, paintWallFurniture } from '../furniture-art';
 import { paintPassageFloor, paintRoomBoundaries } from '../passages';
 import { lightingAt, roomAmbient, type Lighting } from '../lighting';
 import { paintRegion } from '../region-art';
 import { CHAIR_LEFT, CHAIR_RIGHT, RoomPainter, TABLE, TABLE_CX, TABLE_TOP_DY, type CounterCup } from '../room-art';
-import { CHAR_H, OUTLINE, catFrames, character, crownSprite, dropSprite, heartSprite, itemIcon, type Facing } from '../sprites';
+import { CHAR_H, OUTLINE, catFrames, character, crownSprite, dropSprite, heartSprite, itemIcon, pixelSprite, type CharacterFrames, type Facing } from '../sprites';
 import { PIXEL_FONT, PIXEL_FONT_HALO, addPixelFonts } from './pixel-font';
 import { baked, canvasKey } from './textures';
 
@@ -74,8 +74,9 @@ function lampsIn(area: AreaId, state: GameState): Lamp[] {
     if (ceiling === 'ceiling_pendants') for (const x of [36, 132, 188, 284]) add(x, 13, 26);
     if (ceiling === 'ceiling_chandelier') add(SCENE_W / 2, 9, 46);
     if (ceiling === 'ceiling_lights') for (let x = 8; x < SCENE_W; x += 32) add(x, 11, 14, 0.8);
-    // The oven glows through the kitchen doorway.
+    // The oven glows through the kitchen doorway, and the heat lamp over the pass.
     add(KITCHEN_DOOR.x + KITCHEN_DOOR.w / 2, FLOOR_Y - 12, 22, 0.7, '#ffa64a');
+    for (const dx of [9, PASS.w - 10]) add(PASS.x + dx, PASS.top + 12, 14, 0.6, '#ffb060');
   } else if (area === 'reading') {
     add(100, floorFurnitureBounds('lamp', 100, floorY(98)).y + 4, 30);
   } else if (area === 'terrace') {
@@ -157,6 +158,9 @@ export class CafeScene extends Phaser.Scene {
   private rects!: Pool<Phaser.GameObjects.Rectangle>;
   private emitters!: Record<'sparkle' | 'steam' | 'heart', Phaser.GameObjects.Particles.ParticleEmitter>;
   private floaters: Floater[] = [];
+  private bell: HTMLCanvasElement | null = null;
+  /** When the bell on the pass last rang, in seconds of game time. */
+  private bellRang = -1;
   private grades = new Map<AreaId, Phaser.GameObjects.Rectangle>();
   private glows!: Pool<Phaser.GameObjects.Image>;
   private overviewFrame!: Phaser.GameObjects.Graphics;
@@ -375,6 +379,7 @@ export class CafeScene extends Phaser.Scene {
       });
       this.drawCat(t, o);
       this.drawBaristas(state, t, o);
+      this.drawPass(t, o);
       const cups: CounterCup[] = [];
       this.sim.baristas.forEach((b, i) => {
         if (this.sim.isBrewing(i)) cups.push({ x: baristaSpot(i).x, fill: 1 - Math.max(0, b.remaining) / b.total });
@@ -456,7 +461,53 @@ export class CafeScene extends Phaser.Scene {
         this.rect(x - 9, y + 1, w, 3, '#7fc45e', depth + 0.003);
         this.rect(x - 9, y + 1, w, 1, '#b6e59a', depth + 0.004);
       }
+      // "Order up!": calling a server over to the pass.
+      if (b.calling > 0) this.image(this.callBubble(), x - 8, o.y + 44, DEPTH.overlay);
     });
+  }
+
+  /** A speech bubble with the service bell in it. */
+  private callBubble(): string {
+    return baked(this.textures, 'bubble-bell', 17, 15, (ctx) => {
+      const r = (x: number, y: number, w: number, h: number, fill: string) => {
+        ctx.fillStyle = fill;
+        ctx.fillRect(x, y, w, h);
+      };
+      r(1, 0, 15, 12, OUTLINE);
+      r(0, 1, 17, 10, OUTLINE);
+      r(1, 1, 15, 10, '#fdf6ec');
+      r(7, 12, 3, 1, OUTLINE);
+      r(8, 13, 1, 1, OUTLINE);
+      r(8, 11, 1, 1, '#fdf6ec');
+      ctx.drawImage(this.bellSprite(), 5, 2);
+    });
+  }
+
+  /** The brass service bell on the pass. */
+  private bellSprite(): HTMLCanvasElement {
+    return (this.bell ??= pixelSprite(['..k..', '.yYy.', 'yYyyy', 'yyyyy', 'ddddd'], { k: '#7a5a2a', y: '#e7b84a', Y: '#fff3a0', d: '#9a6a2a' }));
+  }
+
+  /** Plates waiting on the pass, and its bell, which jiggles when rung. */
+  private drawPass(t: number, o: { x: number; y: number }): void {
+    this.sim.pass.forEach((plate, i) => {
+      const slot = passSlot(i);
+      const depth = DEPTH.counter + 0.5 + i * 0.01;
+      const dish = baked(this.textures, 'pass-plate', PASS_SLOT_W, 2, (ctx) => {
+        ctx.fillStyle = OUTLINE;
+        ctx.fillRect(0, 1, PASS_SLOT_W, 1);
+        ctx.fillStyle = '#fdf6ec';
+        ctx.fillRect(1, 0, PASS_SLOT_W - 2, 1);
+      });
+      // Unoutlined icons, like the menu board's, so three fit side by side.
+      const icon = itemIcon(plate.items[0], false);
+      this.image(icon, o.x + slot.x + Math.floor((PASS_SLOT_W - icon.width) / 2), o.y + slot.y - 2 - icon.height, depth);
+      this.image(dish, o.x + slot.x, o.y + slot.y - 3, depth + 0.001);
+    });
+    const ringing = t - this.bellRang < 0.6;
+    const shake = ringing ? (Math.floor(t * 20) % 2 ? 1 : -1) : 0;
+    const bell = this.bellSprite();
+    this.image(bell, o.x + PASS_BELL.x - 3 + shake, o.y + PASS_BELL.y - bell.height + 1, DEPTH.counter + 0.6);
   }
 
   // ------------------------------------------------------------ the floor
@@ -464,7 +515,8 @@ export class CafeScene extends Phaser.Scene {
   /** Customers, tables, crates and furniture, each sorted by where its feet are. */
   private drawFloorStanding(state: GameState, t: number): void {
     const skip = this.view.ghost?.skip ?? -1;
-    for (const c of this.sim.customers) if (c.phase !== 'sitting') this.drawCustomer(c, DEPTH.floor + c.y);
+    for (const c of this.sim.customers) if (!seated(c)) this.drawCustomer(c, DEPTH.floor + c.y);
+    for (const server of this.sim.servers) this.drawServer(server, DEPTH.floor + server.y);
     for (const i of activeTableIndices(state)) this.drawTable(i, t, DEPTH.floor + tablePos(i).y + 0.1);
     // Crates on the spot the next expansion will open up.
     const built = mainTableCount(state);
@@ -500,14 +552,65 @@ export class CafeScene extends Phaser.Scene {
     this.image(key, cx + dx, foot + dy, depth);
   }
 
-  private facing(c: Customer): Facing {
-    const dx = c.tx - c.x;
-    const dy = c.ty - c.y;
+  /** Which way someone faces: where they're walking, or `standing` when still. */
+  private facing(w: Walker, standing: Facing): Facing {
+    const dx = w.tx - w.x;
+    const dy = w.ty - w.y;
     if (dx !== 0 || dy !== 0) {
       if (Math.abs(dx) > Math.abs(dy)) return dx > 0 ? 'right' : 'left';
       return dy > 0 ? 'down' : 'up';
     }
-    return c.phase === 'queue' || c.phase === 'ordering' ? 'up' : 'down';
+    return standing;
+  }
+
+  /** Someone on their feet, with their shadow; returns where their feet are and how they're turned. */
+  private drawWalker(w: Walker, frames: CharacterFrames, standing: Facing, depth: number) {
+    const facing = this.facing(w, standing);
+    const walking = w.x !== w.tx || w.y !== w.ty;
+    const step = Math.floor(w.stride / 5);
+    let idx = 0;
+    if (walking) idx = facing === 'left' || facing === 'right' ? step % 2 : [1, 0, 2, 0][step % 4];
+    const x = Math.round(w.x);
+    const y = Math.round(w.y);
+    this.shadow(x, y, 12, depth);
+    const bob = walking && idx !== 0 ? 1 : 0;
+    this.image(frames[facing][idx], x - 9, y - (CHAR_H - 1) - bob, depth + 0.001);
+    return { x, y, bob, facing };
+  }
+
+  /** A server, carrying a tray of orders at shoulder height, with a "!" when they answer the bell. */
+  private drawServer(server: Server, depth: number): void {
+    const { x, y, bob } = this.drawWalker(server, character(server.look, 'server'), 'down', depth);
+    if (server.plates.length > 0 && server.phase !== 'toPass') {
+      const tray = baked(this.textures, 'tray', 22, 3, (ctx) => {
+        ctx.fillStyle = OUTLINE;
+        ctx.fillRect(0, 0, 22, 3);
+        ctx.fillStyle = '#d6dde2';
+        ctx.fillRect(1, 1, 20, 1);
+      });
+      const ty = y - 17 - bob;
+      const n = server.plates.length;
+      server.plates.forEach((plate, i) => {
+        const icon = itemIcon(plate.items[0], false);
+        const cx = x + Math.round((i - (n - 1) / 2) * 7);
+        this.image(icon, cx - Math.floor(icon.width / 2), ty - icon.height, depth + 0.002 + i * 0.0001);
+      });
+      this.image(tray, x - 11, ty, depth + 0.003);
+    }
+    if (server.ack > 0) {
+      const ack = baked(this.textures, 'bubble-ack', 7, 10, (ctx) => {
+        ctx.fillStyle = OUTLINE;
+        ctx.fillRect(0, 0, 7, 9);
+        ctx.fillStyle = '#fdf6ec';
+        ctx.fillRect(1, 1, 5, 7);
+        ctx.fillStyle = '#d9384a';
+        ctx.fillRect(3, 2, 1, 3);
+        ctx.fillRect(3, 6, 1, 1);
+        ctx.fillStyle = OUTLINE;
+        ctx.fillRect(3, 9, 1, 1);
+      });
+      this.image(ack, x - 3, y - CHAR_H - 11, DEPTH.overlay);
+    }
   }
 
   private cup(x: number, y: number, depth: number): void {
@@ -523,17 +626,8 @@ export class CafeScene extends Phaser.Scene {
   }
 
   private drawCustomer(c: Customer, depth: number): void {
-    const frames = character(c.look);
-    const facing = this.facing(c);
-    const walking = c.x !== c.tx || c.y !== c.ty;
-    const step = Math.floor(c.stride / 5);
-    let idx = 0;
-    if (walking) idx = facing === 'left' || facing === 'right' ? step % 2 : [1, 0, 2, 0][step % 4];
-    const x = Math.round(c.x);
-    const y = Math.round(c.y);
-    this.shadow(x, y, 12, depth);
-    const bob = walking && idx !== 0 ? 1 : 0;
-    this.image(frames[facing][idx], x - 9, y - (CHAR_H - 1) - bob, depth + 0.001);
+    const standing = c.phase === 'queue' || c.phase === 'ordering' ? 'up' : 'down';
+    const { x, y, bob, facing } = this.drawWalker(c, character(c.look), standing, depth);
     if (c.hasCup && facing !== 'up') this.cup(facing === 'left' ? x - 8 : x + 4, y - 10 - bob, depth + 0.002);
   }
 
@@ -543,10 +637,10 @@ export class CafeScene extends Phaser.Scene {
     let d = depth;
     const next = () => (d += 0.001);
     this.shadow(table.x, table.y, 30, next(), 0.2);
-    const seated = ([0, 1] as const).map((side) => {
+    const diners = ([0, 1] as const).map((side) => {
       const id = this.sim.seats[index * 2 + side];
       const c = id != null ? this.sim.customers.find((cc) => cc.id === id) : undefined;
-      return c && c.phase === 'sitting' ? c : undefined;
+      return c && seated(c) ? c : undefined;
     });
     const sitter = (side: 0 | 1, c: Customer) => {
       const s = seatSpot(index, side);
@@ -560,7 +654,7 @@ export class CafeScene extends Phaser.Scene {
       this.shadow(s.x, s.y, 14, next(), 0.15);
       const chair = side === 0 ? CHAIR_RIGHT() : CHAIR_LEFT();
       this.image(chair, side === 0 ? s.x - 9 : s.x - chair.width + 9, s.y - chair.height + 1, next());
-      const c = seated[side];
+      const c = diners[side];
       if (c) {
         const { sprite, x, y } = sitter(side, c);
         this.image(sprite, x, y, next());
@@ -586,12 +680,30 @@ export class CafeScene extends Phaser.Scene {
     this.image(vase, table.x - 2, cy - 13, next());
     // Seated customers lean over the table: their upper body goes on top again.
     for (const side of [0, 1] as const) {
-      const c = seated[side];
+      const c = diners[side];
       if (!c) continue;
       const { sprite, x, y } = sitter(side, c);
       this.image(sprite, x, y, next()).setCrop(0, 0, sprite.width, CHAR_H - 8);
     }
-    for (const side of [0, 1] as const) if (seated[side]) this.cup(table.x + (side === 0 ? -9 : 4), cy - 5, next());
+    // Their order once it's arrived; until then, the table number for the server to find.
+    for (const side of [0, 1] as const) {
+      const c = diners[side];
+      if (c?.phase === 'sitting') this.cup(table.x + (side === 0 ? -9 : 4), cy - 5, next());
+      else if (c) this.image(this.tableTent(index + 1), table.x + (side === 0 ? -11 : 3), cy - 7, next());
+    }
+  }
+
+  /** A little folded card with the table's number on it. */
+  private tableTent(n: number): string {
+    const text = String(n);
+    const w = textWidth(text) + 4;
+    return baked(this.textures, `tent-${n}`, w, 7, (ctx) => {
+      ctx.fillStyle = OUTLINE;
+      ctx.fillRect(0, 0, w, 7);
+      ctx.fillStyle = '#fdf6ec';
+      ctx.fillRect(1, 1, w - 2, 5);
+      drawText(ctx, text, 2, 1, '#3f5f93');
+    });
   }
 
   // ------------------------------------------------------------ above the room
@@ -599,7 +711,7 @@ export class CafeScene extends Phaser.Scene {
   private drawCustomerOverlay(c: Customer, t: number, depth: number): void {
     const x = Math.round(c.x);
     let top = Math.round(c.y) - CHAR_H;
-    if (c.phase === 'sitting') top = seatSpot(Math.floor(c.seat / 2), (c.seat % 2) as 0 | 1).y - CHAR_H - 5;
+    if (seated(c)) top = seatSpot(Math.floor(c.seat / 2), (c.seat % 2) as 0 | 1).y - CHAR_H - 5;
     if (c.vip) this.image(crownSprite(), x - 4, top - 5, depth);
     if (c.phase === 'ordering') {
       const icons = [itemIcon(c.order), ...(c.extra ? [itemIcon(c.extra)] : [])];
@@ -653,13 +765,20 @@ export class CafeScene extends Phaser.Scene {
       this.image(heartSprite(), x - 4, top - 10 - lift, depth + 0.0001);
     } else if (c.mood === 'sad') {
       this.image(dropSprite(), x + 5, top + 2, depth + 0.0001);
-    } else if (c.phase === 'queue' && c.patience < 12 && Math.floor(t * 2) % 2 === 0) {
+    } else if (((c.phase === 'queue' && c.patience < 12) || (c.phase === 'waiting' && c.timer < 15)) && Math.floor(t * 2) % 2 === 0) {
       for (let i = 0; i < 3; i++) this.rect(x - 4 + i * 4, top - 4, 2, 2, OUTLINE, depth + 0.0001);
     }
   }
 
   private spawnEffects(): void {
-    for (const e of this.view.effects.splice(0)) this.emitters[e.kind].emitParticleAt(e.x, e.y, 1);
+    for (const e of this.view.effects.splice(0)) {
+      if (e.kind !== 'bell') this.emitters[e.kind].emitParticleAt(e.x, e.y, 1);
+      else {
+        // Ding: the bell jiggles and throws off a few sparkles.
+        this.bellRang = this.time.now / 1000;
+        for (let i = 0; i < 3; i++) this.emitters.sparkle.emitParticleAt(e.x - 2 + Math.random() * 4, e.y - 6, 1);
+      }
+    }
     for (const sale of this.view.sales.splice(0)) this.addFloater(sale);
   }
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CLOSING_GRACE, COMBO_CHANCE, DAY_SECONDS, MENU, UPGRADES, VARIETY_BONUS, VIP_CHANCE, VIP_MULTIPLIER } from './data';
+import { CLOSING_GRACE, COMBO_CHANCE, DAY_SECONDS, MENU, PASS_SLOTS, UPGRADES, VARIETY_BONUS, VIP_CHANCE, VIP_MULTIPLIER } from './data';
 import { checkOpen, clockHours, finishDay, openShop, type DayReport } from './day';
 import {
   arrivalRate,
@@ -39,10 +39,11 @@ import {
   placeFurniture,
   storeFurniture,
 } from './furniture';
-import { MAX_SCENE_H, MAX_TABLES, MIN_SCENE_H, SCENE_W, setSceneHeight, tablePos } from './layout';
+import { MAX_SCENE_H, MAX_TABLES, MIN_SCENE_H, SCENE_W, roomRoute, serverHome, setSceneHeight, tableArea, tablePos } from './layout';
 import { DECOR, DECOR_SLOTS, STARTER_THEMES, applyTheme, comfort, decorDef, useDecor, type DecorSlot } from './decor';
 import { formatDuration, formatNumber } from './format';
 import { GOALS, claimGoal, currentGoal, goalDone } from './goals';
+import { REGIONS, unlockRegion } from './regions';
 import { Sim } from './sim';
 import { NAME_MAX, STARTER_BEANS, createInitialState, deserialize, serialize, type GameState } from './state';
 
@@ -326,6 +327,185 @@ describe('goals', () => {
     expect(currentGoal(s)).toBeNull();
     expect(goalDone(s)).toBe(false);
     for (const g of GOALS) expect(g.progress(createInitialState(0))[1]).toBeGreaterThan(0);
+  });
+});
+
+describe('table service', () => {
+  const tick = (s: GameState, sim: Sim) => {
+    s.dayTime = 0;
+    return sim.update(s, 0.05);
+  };
+
+  it('dine-in guests order at the counter, sit down, and a server brings the order over when the bell rings', () => {
+    const s = openState();
+    const sim = new Sim(seeded(21));
+    const waited = new Set<number>();
+    let bells = 0;
+    let delivered = 0;
+    for (let t = 0; t < 300 && delivered < 3; t += 0.05) {
+      const before = new Map(sim.customers.map((c) => [c.id, c.phase]));
+      const servedBefore = s.served;
+      const events = tick(s, sim);
+      bells += events.filter((e) => e.type === 'bell').length;
+      for (const c of sim.customers) {
+        if (c.phase === 'waiting') {
+          waited.add(c.id);
+          // Paid for on delivery, so nothing in hand yet.
+          expect(c.hasCup).toBe(false);
+        }
+        if (before.get(c.id) === 'waiting' && c.phase === 'sitting') {
+          delivered++;
+          expect(s.served).toBe(servedBefore + 1);
+          expect(c.hasCup).toBe(true);
+          // A server is standing right there.
+          expect(sim.servers.some((server) => Math.hypot(server.x - c.x, server.y - c.y) < 20)).toBe(true);
+        }
+      }
+    }
+    expect(delivered).toBe(3);
+    expect(bells).toBeGreaterThanOrEqual(3);
+    // Back by the kitchen door once there's nothing to carry.
+    for (let t = 0; t < 30 && sim.servers[0].phase !== 'idle'; t += 0.05) tick(s, sim);
+  });
+
+  it('takeaway guests are handed their order over the counter, with no bell', () => {
+    const s = openState();
+    const sim = new Sim(seeded(22));
+    tick(s, sim);
+    sim.seats = sim.seats.map(() => -1);
+    let bells = 0;
+    for (let t = 0; t < 120; t += 0.05) {
+      bells += tick(s, sim).filter((e) => e.type === 'bell').length;
+      expect(sim.customers.some((c) => c.dineIn || c.phase === 'waiting')).toBe(false);
+    }
+    expect(bells).toBe(0);
+    expect(s.served).toBeGreaterThan(5);
+  });
+
+  it('with the pass full, the barista holds the order and keeps calling until there is room', () => {
+    const s = openState();
+    const sim = new Sim(seeded(23));
+    tick(s, sim);
+    // Four orders already up, each spoken for.
+    const full = Array.from({ length: PASS_SLOTS }, () => ({ customerId: -1, items: ['espresso' as const], barista: 0, server: 0, waited: 0 }));
+    sim.pass = [...full];
+    let t = 0;
+    for (; t < 120 && !sim.isHolding(0); t += 0.05) {
+      sim.pass = [...full];
+      expect(tick(s, sim).some((e) => e.type === 'bell')).toBe(false);
+    }
+    expect(sim.isHolding(0)).toBe(true);
+    expect(sim.baristas[0].calling).toBeGreaterThan(0);
+    sim.pass = [];
+    expect(tick(s, sim).some((e) => e.type === 'bell')).toBe(true);
+    expect(sim.pass).toHaveLength(1);
+    expect(sim.isHolding(0)).toBe(false);
+  });
+
+  it('guests left waiting too long give up without paying', () => {
+    const s = openState();
+    const sim = new Sim(seeded(24));
+    let guest: ReturnType<typeof sim.customers.find>;
+    for (let t = 0; t < 120 && !guest; t += 0.05) {
+      tick(s, sim);
+      guest = sim.customers.find((c) => c.phase === 'waiting');
+    }
+    expect(guest).toBeDefined();
+    const seat = guest!.seat;
+    const served = s.served;
+    const missed = s.today.missed;
+    guest!.timer = 0.01;
+    tick(s, sim);
+    expect(guest!.phase).toBe('exiting');
+    expect(guest!.mood).toBe('sad');
+    expect(sim.seats[seat]).toBeNull();
+    expect(s.today.missed).toBe(missed + 1);
+    expect(s.served).toBe(served);
+    expect(sim.pass.some((p) => p.customerId === guest!.id && p.server === null)).toBe(false);
+  });
+
+  /** An open shop with every room built and a busy day ahead. */
+  function expanded(): GameState {
+    const s = createInitialState(0);
+    for (const k of Object.keys(s.pantry) as (keyof GameState['pantry'])[]) s.pantry[k] = 1e6;
+    s.coins = 1e9;
+    for (const region of REGIONS) expect(unlockRegion(s, region.id)).toBe(true);
+    openShop(s);
+    s.upgrades.marketing = 25;
+    s.upgrades.barista = 3;
+    return s;
+  }
+
+  it('batches up to three orders a trip and delivers them nearest room first', () => {
+    const s = expanded();
+    const sim = new Sim(seeded(25));
+    tick(s, sim);
+    const depth = (seat: number) => roomRoute('main', tableArea(Math.floor(seat / 2))).length;
+    let trips = 0;
+    let acrossRooms = false;
+    let carried: number[] = [];
+    let delivered: number[] = [];
+    for (let t = 0; t < 900 && (trips < 3 || !acrossRooms); t += 0.05) {
+      const server = sim.servers[0];
+      const before = server.plates.map((p) => p.customerId);
+      tick(s, sim);
+      expect(server.plates.length).toBeLessThanOrEqual(3);
+      if (server.phase === 'toPass' && before.length === 0) {
+        carried = server.plates.map((p) => p.customerId);
+        delivered = [];
+      }
+      // Whoever just came off the tray was served.
+      for (const id of before) {
+        if (server.plates.some((p) => p.customerId === id)) continue;
+        const c = sim.customers.find((cc) => cc.id === id);
+        if (c?.phase === 'sitting') delivered.push(depth(c.seat));
+      }
+      if (server.phase === 'returning' && carried.length >= 2 && delivered.length >= 2) {
+        expect(delivered).toEqual([...delivered].sort((a, b) => a - b));
+        acrossRooms ||= new Set(delivered).size > 1;
+        trips++;
+        carried = [];
+      }
+    }
+    expect(trips).toBeGreaterThanOrEqual(3);
+    // At least one trip dropped orders in two rooms on the way.
+    expect(acrossRooms).toBe(true);
+  });
+
+  it('answers the guest closest to giving up first', () => {
+    const s = expanded();
+    const sim = new Sim(seeded(26));
+    tick(s, sim);
+    const server = () => sim.servers[0];
+    // Keep the server busy elsewhere until two guests are waiting on plates.
+    const hold = () => {
+      server().phase = 'returning';
+      server().via = [];
+      server().tx = server().x + 1000;
+    };
+    let waiting: typeof sim.pass = [];
+    for (let t = 0; t < 300 && waiting.length < 2; t += 0.05) {
+      hold();
+      tick(s, sim);
+      waiting = sim.pass.filter((p) => sim.customers.find((c) => c.id === p.customerId)?.phase === 'waiting');
+    }
+    expect(waiting.length).toBeGreaterThanOrEqual(2);
+    const [older, newer] = waiting;
+    sim.customers.find((c) => c.id === older.customerId)!.timer = 40;
+    sim.customers.find((c) => c.id === newer.customerId)!.timer = 5;
+    Object.assign(server(), { ...serverHome(0), tx: serverHome(0).x, ty: serverHome(0).y, via: [], phase: 'idle' });
+    tick(s, sim);
+    expect(server().plates[0]).toBe(newer);
+  });
+
+  it('hires servers with the upgrade', () => {
+    const s = openState();
+    const sim = new Sim(seeded(27));
+    tick(s, sim);
+    expect(sim.servers).toHaveLength(1);
+    s.upgrades.server = 2;
+    tick(s, sim);
+    expect(sim.servers).toHaveLength(3);
   });
 });
 

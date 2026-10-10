@@ -1,4 +1,4 @@
-import { CLOSING_GRACE, COMBO_CHANCE, DAY_SECONDS, MAX_QUEUE, VIP_CHANCE, isDrink, type ItemId } from './data';
+import { CLOSING_GRACE, COMBO_CHANCE, DAY_SECONDS, MAX_QUEUE, PASS_SLOTS, RING_AGAIN, VIP_CHANCE, isDrink, type ItemId } from './data';
 import { finishDay, type DayReport } from './day';
 import {
   arrivalRate,
@@ -9,21 +9,51 @@ import {
   patienceSeconds,
   prepTime,
   salePrice,
+  serverCount,
+  tablePatience,
 } from './economy';
-import { TOTAL_TABLE_SPOTS, areaAtPoint, areaOrigin, doorSpot, queueSpot, resizeRoomPoint, roomRoute, seatApproach, seatSpot, serviceSpot, tableArea } from './layout';
-import { activeTableIndices } from './regions';
+import {
+  PASS_BELL,
+  TOTAL_TABLE_SPOTS,
+  areaAtPoint,
+  areaOrigin,
+  doorSpot,
+  passSpot,
+  queueSpot,
+  resizeRoomPoint,
+  roomRoute,
+  seatApproach,
+  seatSpot,
+  serverHome,
+  serviceSpot,
+  tableArea,
+} from './layout';
+import { activeTableIndices, type AreaId } from './regions';
 import type { GameState, Look } from './state';
 
 export type { Look };
 
-export type CustomerPhase = 'queue' | 'toCounter' | 'ordering' | 'toSeat' | 'sitting' | 'exiting';
+/**
+ * A customer's visit. Takeaway: queue, walk up, order, wait at the counter, leave
+ * with it. Dining in: order, take a seat ('toSeat'), wait for a server to bring the
+ * order over ('waiting'), then eat ('sitting') and leave.
+ */
+export type CustomerPhase = 'queue' | 'toCounter' | 'ordering' | 'toSeat' | 'waiting' | 'sitting' | 'exiting';
 
-export interface Customer {
-  id: number;
+/** Anyone who walks: a position, where they're heading, and the stops after that. */
+export interface Walker {
   x: number;
   y: number;
   tx: number;
   ty: number;
+  /** Distance walked, drives the walk animation. */
+  stride: number;
+  /** Points still to walk through after reaching the current target. */
+  via: { x: number; y: number }[];
+}
+
+export interface Customer extends Walker {
+  id: number;
   phase: CustomerPhase;
   look: Look;
   order: ItemId;
@@ -39,10 +69,8 @@ export interface Customer {
   hasCup: boolean;
   /** Their order was sold out; they leave without buying. */
   soldOut: boolean;
-  /** Distance walked, drives the walk animation. */
-  stride: number;
-  /** Points still to walk through after reaching the current target. */
-  via: { x: number; y: number }[];
+  /** Having it at a table, brought over by a server, rather than to take away. */
+  dineIn: boolean;
 }
 
 export interface Barista {
@@ -50,17 +78,51 @@ export interface Barista {
   customerId: number | null;
   remaining: number;
   total: number;
+  /** Seconds left on their "order up!" call for a server. */
+  calling: number;
+}
+
+/** A finished table order waiting on the pass, and the server coming for it. */
+export interface Plate {
+  customerId: number;
+  items: ItemId[];
+  /** The barista who made it, who calls for a server. */
+  barista: number;
+  /** The server who has taken it on, or null while it waits for one. */
+  server: number | null;
+  /** Seconds since the bell last rang for it. */
+  waited: number;
+}
+
+/** Idle by the kitchen door, heading to the pass, carrying a plate out, or walking back. */
+export type ServerPhase = 'idle' | 'toPass' | 'delivering' | 'returning';
+
+export interface Server extends Walker {
+  look: Look;
+  phase: ServerPhase;
+  /** Orders they're fetching or carrying: one, or two bound for the same room. */
+  plates: Plate[];
+  /** Seconds left showing that they heard the bell. */
+  ack: number;
 }
 
 export type SimEvent =
   | { type: 'sale'; amount: number; x: number; y: number; vip: boolean }
+  | { type: 'bell'; x: number; y: number }
   | { type: 'walkout'; x: number; y: number }
   | { type: 'soldout'; item: ItemId; x: number; y: number }
   | { type: 'dayEnd'; report: DayReport };
 
 export const WALK_SPEED = 62;
+/** Servers walk briskly. */
+export const SERVER_SPEED = WALK_SPEED * 1.5;
+/** A tray holds this many orders, delivered nearest room first. */
+const TRAY_PLATES = 3;
 const SEAT_CHANCE = 0.6;
 const BOOST_SECONDS = 0.3;
+/** How long a dine-in customer stands at the counter ordering before taking a seat. */
+const ORDER_SECONDS = 0.8;
+const CALL_SECONDS = 1.4;
 
 export class Sim {
   customers: Customer[] = [];
@@ -69,21 +131,28 @@ export class Sim {
   queue: number[] = [];
   /** Customer id occupying each seat (2 per table). */
   seats: (number | null)[] = [];
+  servers: Server[] = [];
+  /** Table orders on the pass, oldest first. */
+  pass: Plate[] = [];
   private spawnTimer = 1.5;
   private nextId = 1;
 
   constructor(private rng: () => number = Math.random) {}
 
   resizeScene(fromHeight: number): void {
+    const move = (w: Walker) => {
+      const position = resizeRoomPoint(w, fromHeight);
+      const target = resizeRoomPoint({ x: w.tx, y: w.ty }, fromHeight);
+      w.x = position.x; w.y = position.y;
+      w.tx = target.x; w.ty = target.y;
+      w.via = w.via.map((point) => resizeRoomPoint(point, fromHeight));
+    };
+    this.servers.forEach(move);
     for (const c of this.customers) {
-      const position = resizeRoomPoint(c, fromHeight);
-      const target = resizeRoomPoint({ x: c.tx, y: c.ty }, fromHeight);
-      c.x = position.x; c.y = position.y;
-      c.tx = target.x; c.ty = target.y;
-      c.via = c.via.map((point) => resizeRoomPoint(point, fromHeight));
+      move(c);
       if (c.seat >= 0) {
         const seat = seatSpot(Math.floor(c.seat / 2), c.seat % 2 as 0 | 1);
-        if (c.phase === 'sitting') { c.x = c.tx = seat.x; c.y = c.ty = seat.y; }
+        if (seated(c)) { c.x = c.tx = seat.x; c.y = c.ty = seat.y; }
         else if (c.phase === 'toSeat') {
           if (c.via.length) c.via[c.via.length - 1] = seat;
           else { c.tx = seat.x; c.ty = seat.y; }
@@ -108,7 +177,11 @@ export class Sim {
 
   private sync(state: GameState): void {
     while (this.baristas.length < baristaCount(state)) {
-      this.baristas.push({ look: this.randomLook(), customerId: null, remaining: 0, total: 0 });
+      this.baristas.push({ look: this.randomLook(), customerId: null, remaining: 0, total: 0, calling: 0 });
+    }
+    while (this.servers.length < serverCount(state)) {
+      const home = serverHome(this.servers.length);
+      this.servers.push({ ...home, tx: home.x, ty: home.y, stride: 0, via: [], look: this.randomLook(), phase: 'idle', plates: [], ack: 0 });
     }
     while (this.seats.length < TOTAL_TABLE_SPOTS * 2) this.seats.push(null);
   }
@@ -144,6 +217,7 @@ export class Sim {
       moodTimer: 0,
       hasCup: false,
       soldOut: false,
+      dineIn: false,
       stride: 0,
       via: [],
     };
@@ -159,8 +233,8 @@ export class Sim {
     });
   }
 
-  /** Sets a customer walking through `points` in order. */
-  private walk(c: Customer, ...points: { x: number; y: number }[]): void {
+  /** Sets someone walking through `points` in order. */
+  private walk(c: Walker, ...points: { x: number; y: number }[]): void {
     let previous = { x: c.x, y: c.y };
     const unique = points.filter((point) => {
       const different = point.x !== previous.x || point.y !== previous.y;
@@ -175,10 +249,41 @@ export class Sim {
 
   private exit(c: Customer): void {
     // Someone getting up from a table steps out in front of it first.
-    const from = c.phase === 'sitting' ? [seatApproach(Math.floor(c.seat / 2), (c.seat % 2) as 0 | 1)] : [];
-    const area = c.phase === 'sitting' ? tableArea(Math.floor(c.seat / 2)) : areaAtPoint(c.x, c.y) ?? 'main';
+    const from = seated(c) ? [seatApproach(Math.floor(c.seat / 2), (c.seat % 2) as 0 | 1)] : [];
+    const area = seated(c) ? tableArea(Math.floor(c.seat / 2)) : areaAtPoint(c.x, c.y) ?? 'main';
+    if (c.seat >= 0) this.seats[c.seat] = null;
+    c.seat = -1;
     c.phase = 'exiting';
     this.walk(c, ...from, ...roomRoute(area, 'main'), doorSpot());
+  }
+
+  /** From a room to the spot in front of a seat, through the shared doors. */
+  private toTable(seat: number, from: AreaId = 'main'): { x: number; y: number }[] {
+    const table = Math.floor(seat / 2);
+    const approach = seatApproach(table, (seat % 2) as 0 | 1);
+    const area = tableArea(table);
+    if (area === from) return [approach];
+    return [...roomRoute(from, area), { x: areaOrigin(area).x + 160, y: approach.y }, approach];
+  }
+
+  private freeSeat(state: GameState): number {
+    const available = activeTableIndices(state).flatMap((i) => [i * 2, i * 2 + 1]).filter((i) => this.seats[i] === null);
+    return available.length > 0 ? available[this.randInt(available.length)] : -1;
+  }
+
+  /** The customer pays for their order, wherever they get it. */
+  private charge(state: GameState, c: Customer, events: SimEvent[]): void {
+    const bought = c.extra ? [c.order, c.extra] : [c.order];
+    const amount = bought.reduce((sum, id) => sum + salePrice(state, id, c.vip), 0);
+    earn(state, amount);
+    state.served++;
+    state.today.served++;
+    state.today.revenue += amount;
+    for (const id of bought) state.today.sales[id] = (state.today.sales[id] ?? 0) + 1;
+    events.push({ type: 'sale', amount, x: c.x, y: c.y - 52, vip: c.vip });
+    c.hasCup = true;
+    c.mood = 'happy';
+    c.moodTimer = 1.5;
   }
 
   private callNext(): void {
@@ -217,40 +322,149 @@ export class Sim {
       if (c.extra && !consumeServing(state, c.extra, state.today)) c.extra = null;
       c.phase = 'ordering';
       b.total = b.remaining = prepTime(state, c.order) + (c.extra ? prepTime(state, c.extra) : 0);
+      // With a table free, some stay: they take a seat and the order is brought over.
+      const seat = this.freeSeat(state);
+      if (seat >= 0 && this.rng() < SEAT_CHANCE) {
+        this.seats[seat] = c.id;
+        c.seat = seat;
+        c.dineIn = true;
+        c.timer = ORDER_SECONDS;
+      }
     } else if (c.phase === 'toSeat') {
-      c.phase = 'sitting';
-      c.timer = 6 + this.rng() * 8;
+      c.phase = 'waiting';
+      c.timer = tablePatience(state);
     }
   }
 
-  private serve(state: GameState, b: Barista, c: Customer, events: SimEvent[]): void {
-    const bought = c.extra ? [c.order, c.extra] : [c.order];
-    const amount = bought.reduce((sum, id) => sum + salePrice(state, id, c.vip), 0);
-    earn(state, amount);
-    state.served++;
-    state.today.served++;
-    state.today.revenue += amount;
-    for (const id of bought) state.today.sales[id] = (state.today.sales[id] ?? 0) + 1;
-    events.push({ type: 'sale', amount, x: c.x, y: c.y - 52, vip: c.vip });
+  /** Takeaway: handed over the counter, paid for, and out the door. */
+  private serveAtCounter(state: GameState, b: Barista, c: Customer, events: SimEvent[]): void {
+    this.charge(state, c, events);
     b.customerId = null;
-    c.hasCup = true;
-    c.mood = 'happy';
-    c.moodTimer = 1.5;
     c.spot = -1;
-    const available = activeTableIndices(state).flatMap((i) => [i * 2, i * 2 + 1]).filter((i) => this.seats[i] === null);
-    const free = available.length > 0 ? available[this.randInt(available.length)] : -1;
-    if (free >= 0 && this.rng() < SEAT_CHANCE) {
-      this.seats[free] = c.id;
-      c.seat = free;
-      c.phase = 'toSeat';
-      const table = Math.floor(free / 2);
-      const side = (free % 2) as 0 | 1;
-      const approach = seatApproach(table, side);
-      const area = tableArea(table);
-      this.walk(c, ...roomRoute('main', area), ...(area === 'main' ? [] : [{ x: areaOrigin(area).x + 160, y: approach.y }]), approach, seatSpot(table, side));
-    } else {
-      this.exit(c);
+    this.exit(c);
+  }
+
+  /**
+   * A table order is ready: onto the pass, and ring for a server. With the pass
+   * full the barista holds on to it, and keeps calling, until there's room.
+   */
+  private sendToPass(c: Customer, i: number, events: SimEvent[]): void {
+    const b = this.baristas[i];
+    if (this.pass.length >= PASS_SLOTS) {
+      if (b.calling <= 0) b.calling = CALL_SECONDS;
+      return;
     }
+    this.pass.push({ customerId: c.id, items: c.extra ? [c.order, c.extra] : [c.order], barista: i, server: null, waited: 0 });
+    b.customerId = null;
+    b.calling = CALL_SECONDS;
+    events.push({ type: 'bell', ...PASS_BELL });
+  }
+
+  /**
+   * A server at a guest's table hands over the order and the guest pays, then they
+   * go on to the next table on their tray or head back. Returns false while the
+   * guest hasn't sat down yet.
+   */
+  private deliver(state: GameState, server: Server, events: SimEvent[]): boolean {
+    const c = this.find(server.plates[0].customerId);
+    // Their order can beat them to the table; the server waits for them to sit down.
+    if (c && (c.phase === 'ordering' || c.phase === 'toSeat')) return false;
+    if (c && c.phase === 'waiting') {
+      this.charge(state, c, events);
+      c.phase = 'sitting';
+      c.timer = 6 + this.rng() * 8;
+    }
+    server.plates.shift();
+    this.headOut(server);
+    return true;
+  }
+
+  /**
+   * On to the next table on the tray, or back to the kitchen door when it's empty.
+   * The rooms run in a line from the main café, so the tray is delivered nearest
+   * room first, and within a room, nearest table first.
+   */
+  private headOut(server: Server): void {
+    // Orders for guests who gave up waiting are cleared away.
+    server.plates = server.plates.filter((p) => {
+      const c = this.find(p.customerId);
+      return !!c && c.seat >= 0 && c.phase !== 'exiting';
+    });
+    const area = areaAtPoint(server.x, server.y) ?? 'main';
+    if (server.plates.length > 0) {
+      const distance = (p: Plate) => {
+        const c = this.find(p.customerId)!;
+        const spot = seatApproach(Math.floor(c.seat / 2), (c.seat % 2) as 0 | 1);
+        return roomDepth(this.plateRoom(p)) * 1e6 + Math.hypot(spot.x - server.x, spot.y - server.y);
+      };
+      server.plates.sort((a, b) => distance(a) - distance(b));
+      server.phase = 'delivering';
+      this.walk(server, ...this.toTable(this.find(server.plates[0].customerId)!.seat, area));
+      return;
+    }
+    server.phase = 'returning';
+    const exitSide = area === 'main' ? [] : [{ x: areaOrigin(area).x + 160, y: server.y }];
+    this.walk(server, ...exitSide, ...roomRoute(area, 'main'), serverHome(this.servers.indexOf(server)));
+  }
+
+  /**
+   * What a server answering the bell takes: the order whose guest is closest to
+   * giving up, plus whatever else fits on the tray, preferring orders for the same
+   * room, then rooms on the way there, then rooms beyond it.
+   */
+  private loadTray(): Plate[] {
+    const open = this.pass.filter((p) => p.server === null);
+    if (open.length === 0) return [];
+    const patience = (p: Plate) => {
+      const c = this.find(p.customerId);
+      return c?.phase === 'waiting' ? c.timer : Infinity;
+    };
+    const first = open.reduce((best, p) => (patience(p) < patience(best) ? p : best));
+    const room = this.plateRoom(first);
+    const rank = (p: Plate) => (this.plateRoom(p) === room ? 0 : roomDepth(this.plateRoom(p)) < roomDepth(room) ? 1 : 2);
+    const rest = open.filter((p) => p !== first).sort((a, b) => rank(a) - rank(b));
+    return [first, ...rest].slice(0, TRAY_PLATES);
+  }
+
+  /** The room a plate's table is in. */
+  private plateRoom(plate: Plate) {
+    const c = this.find(plate.customerId);
+    return c && c.seat >= 0 ? tableArea(Math.floor(c.seat / 2)) : null;
+  }
+
+  private updateServers(state: GameState, dt: number, events: SimEvent[]): void {
+    // Plates nobody has come for: the barista rings again.
+    for (const plate of this.pass) {
+      if (plate.server !== null) continue;
+      plate.waited += dt;
+      if (plate.waited >= RING_AGAIN) {
+        plate.waited = 0;
+        const b = this.baristas[plate.barista];
+        if (b) b.calling = CALL_SECONDS;
+        events.push({ type: 'bell', ...PASS_BELL });
+      }
+    }
+    this.servers.forEach((server, i) => {
+      server.ack = Math.max(0, server.ack - dt);
+      step(server, dt, SERVER_SPEED);
+      const there = resting(server);
+      if (server.phase === 'idle') {
+        const tray = this.loadTray();
+        if (tray.length === 0) return;
+        for (const plate of tray) plate.server = i;
+        server.plates = tray;
+        server.phase = 'toPass';
+        server.ack = 0.9;
+        this.walk(server, passSpot());
+      } else if (server.phase === 'toPass' && there) {
+        this.pass = this.pass.filter((p) => !server.plates.includes(p));
+        this.headOut(server);
+      } else if (server.phase === 'delivering' && there) {
+        this.deliver(state, server, events);
+      } else if (server.phase === 'returning' && there) {
+        server.phase = 'idle';
+      }
+    });
   }
 
   update(state: GameState, dt: number): SimEvent[] {
@@ -269,26 +483,7 @@ export class Sim {
     this.callNext();
 
     for (const c of this.customers) {
-      const dx = c.tx - c.x;
-      const dy = c.ty - c.y;
-      const dist = Math.hypot(dx, dy);
-      const step = WALK_SPEED * dt;
-      if (dist > 0) {
-        if (dist <= step) {
-          c.x = c.tx;
-          c.y = c.ty;
-          c.stride += dist;
-          const next = c.via.shift();
-          if (next) {
-            c.tx = next.x;
-            c.ty = next.y;
-          } else this.arrive(state, c, events);
-        } else {
-          c.x += (dx / dist) * step;
-          c.y += (dy / dist) * step;
-          c.stride += step;
-        }
-      }
+      if (step(c, dt)) this.arrive(state, c, events);
 
       if (c.moodTimer > 0) {
         c.moodTimer -= dt;
@@ -306,25 +501,44 @@ export class Sim {
           events.push({ type: 'walkout', x: c.x, y: c.y - 30 });
           this.exit(c);
         }
-      } else if (c.phase === 'sitting') {
+      } else if (c.phase === 'ordering' && c.dineIn) {
+        // Ordered and paid up front; off to the table to wait.
         c.timer -= dt;
         if (c.timer <= 0) {
-          this.seats[c.seat] = null;
-          this.exit(c);
-          c.seat = -1;
+          c.phase = 'toSeat';
+          c.spot = -1;
+          this.walk(c, ...this.toTable(c.seat), seatSpot(Math.floor(c.seat / 2), (c.seat % 2) as 0 | 1));
         }
+      } else if (c.phase === 'waiting') {
+        c.timer -= dt;
+        if (c.timer <= 0) {
+          // Nobody brought it over: they leave without paying, and the order is wasted.
+          this.pass = this.pass.filter((p) => p.customerId !== c.id || p.server !== null);
+          c.mood = 'sad';
+          c.moodTimer = 2;
+          if (open) state.today.missed++;
+          events.push({ type: 'walkout', x: c.x, y: c.y - 30 });
+          this.exit(c);
+        }
+      } else if (c.phase === 'sitting') {
+        c.timer -= dt;
+        if (c.timer <= 0) this.exit(c);
       }
     }
 
-    for (const b of this.baristas) {
-      if (b.customerId === null || b.total === 0) continue;
+    this.baristas.forEach((b, i) => {
+      b.calling = Math.max(0, b.calling - dt);
+      if (b.customerId === null || b.total === 0) return;
       b.remaining -= dt;
-      if (b.remaining <= 0) {
-        const c = this.find(b.customerId);
-        if (c) this.serve(state, b, c, events);
-        else b.customerId = null;
-      }
-    }
+      if (b.remaining > 0) return;
+      const c = this.find(b.customerId);
+      if (!c || c.phase === 'exiting') b.customerId = null;
+      else if (c.dineIn) this.sendToPass(c, i, events);
+      // A takeaway order waits for its customer to reach the counter.
+      else if (c.phase === 'ordering') this.serveAtCounter(state, b, c, events);
+    });
+
+    this.updateServers(state, dt, events);
 
     this.customers = this.customers.filter(
       (c) => !(c.phase === 'exiting' && c.via.length === 0 && c.x === c.tx && c.y === c.ty),
@@ -332,7 +546,10 @@ export class Sim {
 
     // After closing time the staff finish whoever is still in line, then close up.
     if (open && state.dayTime >= DAY_SECONDS) {
-      const busy = this.customers.some((c) => c.phase !== 'sitting' && c.phase !== 'exiting');
+      const busy =
+        this.customers.some((c) => c.phase !== 'sitting' && c.phase !== 'exiting') ||
+        this.pass.length > 0 ||
+        this.servers.some((server) => server.plates.length > 0);
       if (!busy || state.dayTime >= DAY_SECONDS + CLOSING_GRACE) {
         this.sendHome();
         events.push({ type: 'dayEnd', report: finishDay(state) });
@@ -341,16 +558,25 @@ export class Sim {
     return events;
   }
 
-  /** Closing up: anyone still waiting leaves, and the baristas stop. */
+  /** Closing up: anyone still waiting leaves, the baristas stop, and the servers head back. */
   sendHome(): void {
     for (const c of this.customers) {
       if (c.phase !== 'sitting' && c.phase !== 'exiting') this.exit(c);
     }
     this.queue = [];
+    this.pass = [];
     for (const b of this.baristas) {
       b.customerId = null;
       b.remaining = b.total = 0;
+      b.calling = 0;
     }
+    this.servers.forEach((server, i) => {
+      if (server.phase === 'idle') return;
+      server.plates = [];
+      server.phase = 'returning';
+      const area = areaAtPoint(server.x, server.y) ?? 'main';
+      this.walk(server, ...roomRoute(area, 'main'), serverHome(i));
+    });
   }
 
   /** Player taps to help: every brewing barista jumps ahead a bit. */
@@ -365,8 +591,49 @@ export class Sim {
     return any;
   }
 
+  /** A barista is done but the pass is full, so they're holding a table order. */
+  isHolding(i: number): boolean {
+    const b = this.baristas[i];
+    return !!b && b.customerId !== null && b.total > 0 && b.remaining <= 0;
+  }
+
   isBrewing(i: number): boolean {
     const b = this.baristas[i];
     return !!b && b.customerId !== null && b.total > 0;
   }
+}
+
+/** At a table, whether still waiting for the order or eating it. */
+export const seated = (c: Customer) => c.phase === 'waiting' || c.phase === 'sitting';
+
+/** How far a room is from the main café along the shared doors; 0 for the main café. */
+const roomDepth = (area: AreaId | null) => (area ? roomRoute('main', area).length : 0);
+
+/** Standing still at the end of their path. */
+const resting = (w: Walker) => w.x === w.tx && w.y === w.ty && w.via.length === 0;
+
+/** Moves a walker along its path; true on the step it reaches the end. */
+function step(w: Walker, dt: number, speed = WALK_SPEED): boolean {
+  let left = speed * dt;
+  while (left > 0) {
+    const dx = w.tx - w.x;
+    const dy = w.ty - w.y;
+    const dist = Math.hypot(dx, dy);
+    if (dist === 0) return false;
+    if (dist > left) {
+      w.x += (dx / dist) * left;
+      w.y += (dy / dist) * left;
+      w.stride += left;
+      return false;
+    }
+    w.x = w.tx;
+    w.y = w.ty;
+    w.stride += dist;
+    left = 0;
+    const next = w.via.shift();
+    if (!next) return true;
+    w.tx = next.x;
+    w.ty = next.y;
+  }
+  return false;
 }

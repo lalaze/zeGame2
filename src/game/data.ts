@@ -107,7 +107,7 @@ export const MENU: readonly MenuItemDef[] = [
   { id: 'macaron', category: 'pastry', basePrice: 260_000, prepTime: 1.5, baseCost: 3_200_000_000 },
 ];
 
-export type UpgradeId = 'barista' | 'machine' | 'marketing' | 'tables' | 'manager';
+export type UpgradeId = 'barista' | 'server' | 'machine' | 'marketing' | 'tables' | 'manager';
 
 export interface UpgradeDef {
   id: UpgradeId;
@@ -120,6 +120,7 @@ export const UPGRADES: readonly UpgradeDef[] = [
   { id: 'marketing', baseCost: 40, growth: 1.75, max: 25 },
   { id: 'machine', baseCost: 60, growth: 1.9, max: 20 },
   { id: 'barista', baseCost: 150, growth: 12, max: 3 },
+  { id: 'server', baseCost: 250, growth: 10, max: 2 },
   { id: 'tables', baseCost: 300, growth: 8, max: 6 },
   { id: 'manager', baseCost: 500, growth: 4, max: 5 },
 ];
@@ -132,6 +133,10 @@ export const MAX_QUEUE = 6;
 export const BASE_ARRIVAL_RATE = 0.2; // customers per second
 export const VIP_CHANCE = 0.03;
 export const VIP_MULTIPLIER = 5;
+/** How many finished orders fit on the pass at the end of the counter: two shelves of three. */
+export const PASS_SLOTS = 6;
+/** Seconds before a barista rings again for an order nobody has picked up. */
+export const RING_AGAIN = 6;
 /** Average seconds a service spot is busy on walking, beyond brewing. */
 export const SERVICE_OVERHEAD = 1.2;
 

@@ -11,6 +11,9 @@ import {
   DOOR_X,
   FLOOR_Y,
   KITCHEN_DOOR,
+  PASS,
+  PASS_COLUMNS,
+  PASS_SLOT_W,
   PASTRY_CASE,
   SCENE_W,
   WINDOWS,
@@ -473,8 +476,10 @@ export class RoomPainter {
     ctx.drawImage(grinder, x + 2, sit - grinder.height + 1);
     this.jar(x + 18, sit, 11, '#6e3f24', '#9c6538');
     this.jar(x + 29, sit, 9, '#6f9a52', '#9fc47e');
-    // Under the board, only low things: cups on saucers, a milk pitcher, plates.
-    for (let i = 0; i < 5; i++) {
+    // Under the board: cups on saucers, a milk pitcher, then the bread basket (a sack
+    // of beans when there are no breads today) and a cake under a glass dome. The
+    // pass stands beyond them.
+    for (let i = 0; i < 3; i++) {
       const cx = 116 + i * 11;
       this.r(cx - 1, sit - 1, 10, 2, OUTLINE);
       this.r(cx, sit - 1, 8, 1, '#e9dcc8');
@@ -484,19 +489,16 @@ export class RoomPainter {
       this.r(cx + 7, sit - 5, 1, 2, OUTLINE);
     }
     const pitcher = ramp('#c9d3d8');
-    this.r(173, sit - 9, 8, 9, OUTLINE);
-    this.r(174, sit - 8, 6, 8, pitcher.base);
-    this.r(174, sit - 8, 1, 8, pitcher.hi);
-    this.r(172, sit - 9, 2, 2, OUTLINE);
-    this.r(181, sit - 7, 1, 4, OUTLINE);
-    for (let i = 0; i < 4; i++) {
-      this.r(188, sit - 2 - i * 2, 16, 2, OUTLINE);
-      this.r(189, sit - 2 - i * 2, 14, 1, i === 3 ? '#ffffff' : '#fdf6ec');
-    }
-    // Right of the board: a bread basket with today's breads (a sack of beans when
-    // there are none) and a cake under a glass dome.
+    const jx = 151;
+    this.r(jx, sit - 9, 8, 9, OUTLINE);
+    this.r(jx + 1, sit - 8, 6, 8, pitcher.base);
+    this.r(jx + 1, sit - 8, 1, 8, pitcher.hi);
+    this.r(jx - 1, sit - 9, 2, 2, OUTLINE);
+    this.r(jx + 8, sit - 7, 1, 4, OUTLINE);
+    const dome = CAKE_DOME();
+    ctx.drawImage(dome, 188, sit - dome.height + 1);
     const breads = menuItems(state).filter((m) => m.category === 'bread').slice(0, 2);
-    const bx = 213;
+    const bx = 164;
     if (breads.length > 0) {
       breads.forEach((m, i) => {
         const icon = itemIcon(m.id);
@@ -518,8 +520,6 @@ export class RoomPainter {
       this.r(bx + 7, sit - 13, 2, 1, '#9c6538');
       this.r(bx + 7, sit - 7, 6, 3, sack.lo);
     }
-    const dome = CAKE_DOME();
-    ctx.drawImage(dome, x + w - dome.width - 1, sit - dome.height + 1);
   }
 
   private jar(x: number, base: number, h: number, fill: string, fleck: string): void {
@@ -666,6 +666,7 @@ export class RoomPainter {
 
     this.drawPastryCase(state);
     this.drawGate(counter);
+    this.drawPass(counter);
 
     // Tip jar, in the gap between the first two baristas.
     const coins = Math.min(4, 1 + Math.floor(state.today.served / 15));
@@ -677,17 +678,13 @@ export class RoomPainter {
     this.r(jx, top - 3, 1, 9, '#f6fbfc');
     this.r(jx - 1, top - 5, 9, 2, '#c97d34');
 
-    // Register at the end of the counter, by the gate.
-    const rx = x + w - 26;
-    const ry = top - 13;
-    const reg = ramp('#7d8c96');
-    this.r(rx - 1, ry, 26, 19, OUTLINE);
-    this.r(rx, ry + 7, 24, 11, reg.base);
-    this.r(rx, ry + 7, 24, 1, reg.hi);
-    for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++) this.r(rx + 3 + i * 4, ry + 10 + j * 3, 2, 1, '#e9eef0');
-    this.r(rx + 16, ry + 9, 6, 7, reg.lo);
-    this.r(rx + 4, ry + 1, 16, 6, '#2d4a3a');
-    this.r(rx + 5, ry + 2, 6, 1, '#8fe38a');
+    // A card reader lying flat on the counter, low enough not to hide the first barista.
+    const px = MACHINE_X + 32;
+    this.r(px - 1, top - 4, 11, 5, OUTLINE);
+    this.r(px, top - 3, 9, 3, '#55606b');
+    this.r(px + 1, top - 3, 4, 1, '#2d4a3a');
+    this.r(px + 2, top - 3, 2, 1, '#8fe38a');
+    this.r(px + 6, top - 2, 2, 1, '#9aa4ad');
 
     // Cups being made in front of each busy barista.
     for (const { x: cx, fill } of cups) {
@@ -696,6 +693,54 @@ export class RoomPainter {
       const level = Math.ceil(fill * 4);
       this.r(cx + 10, top + 5 - level, 5, level, '#6e3f24');
       this.r(cx + 15, top + 1, 1, 2, OUTLINE);
+    }
+  }
+
+  /**
+   * The pass: a pickup window standing on the counter's right end. Table orders
+   * wait three across on a steel ledge and a heated shelf above, under two heat
+   * lamps; each slot is marked so it's easy to see how much room is left. The bell
+   * on its header and the plates are drawn live.
+   */
+  private drawPass(counter: string): void {
+    const { x, w, top } = PASS;
+    const base = COUNTER.top;
+    const shelf = top + 21;
+    const wood = ramp(counterColors(counter).front);
+    const steel = ramp('#b9c4cb');
+    const inner = x + 2;
+    const innerW = PASS_COLUMNS * PASS_SLOT_W;
+    // A warm wash from the heat lamps over both shelves.
+    this.ctx.save();
+    this.ctx.globalAlpha = 0.16;
+    this.r(inner, top + 8, innerW, base - top - 8, '#ffb060');
+    this.ctx.restore();
+    // Slot marks: a pale tick at each slot's edge, on the ledge and the shelf.
+    for (const y of [shelf - 1, base - 2]) {
+      for (let i = 1; i < PASS_COLUMNS; i++) this.r(inner + i * PASS_SLOT_W, y - 2, 1, 3, steel.lo);
+    }
+    // The heated shelf, and the steel ledge over the gate.
+    this.r(inner - 1, shelf, innerW + 2, 3, OUTLINE);
+    this.r(inner, shelf, innerW, 1, steel.hi);
+    this.r(inner, shelf + 1, innerW, 1, steel.base);
+    this.r(x - 1, base - 2, w + 2, 3, OUTLINE);
+    this.r(x, base - 2, w, 1, steel.hi);
+    this.r(x, base - 1, w, 1, steel.base);
+    // Posts either side.
+    for (const px of [x, x + w - 2]) {
+      this.r(px - 1, top + 6, 4, base - top - 7, OUTLINE);
+      this.r(px, top + 6, 2, base - top - 7, wood.base);
+      this.r(px, top + 6, 1, base - top - 7, wood.hi);
+    }
+    // The header, signed PASS, with two heat lamps under it.
+    this.r(x - 2, top - 1, w + 4, 8, OUTLINE);
+    this.r(x - 1, top, w + 2, 6, wood.lo);
+    this.r(x - 1, top, w + 2, 1, wood.hi);
+    drawText(this.ctx, 'PASS', x + 6, top + 1, '#f5e6c4');
+    for (const lx of [inner + 4, inner + innerW - 11]) {
+      this.r(lx, top + 7, 7, 2, '#7a5a2a');
+      this.r(lx + 1, top + 7, 5, 1, '#a67c3a');
+      this.r(lx + 1, top + 9, 5, 1, '#ffd27a');
     }
   }
 
