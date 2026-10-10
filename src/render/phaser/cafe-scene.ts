@@ -19,6 +19,7 @@ import { CHAIR_LEFT, CHAIR_RIGHT, RoomPainter, TABLE, TABLE_CX, TABLE_TOP_DY, ty
 import { CHAR_H, OUTLINE, catFrames, character, crownSprite, dropSprite, heartSprite, itemIcon, pixelSprite, type CharacterFrames, type Facing } from '../sprites';
 import { PIXEL_FONT, PIXEL_FONT_HALO, addPixelFonts } from './pixel-font';
 import { baked, canvasKey } from './textures';
+import { prepareCanvasMultiply } from './canvas-lighting';
 
 /** Called every frame before the scene is drawn: runs the simulation and the page around it. */
 export interface CafeHooks {
@@ -167,6 +168,7 @@ export class CafeScene extends Phaser.Scene {
   private bell: HTMLCanvasElement | null = null;
   /** When the bell on the pass last rang, in seconds of game time. */
   private bellRang = -1;
+  private canGrade = false;
   private grades = new Map<AreaId, Phaser.GameObjects.Rectangle>();
   private glows!: Pool<Phaser.GameObjects.Image>;
   private overviewFrame!: Phaser.GameObjects.Graphics;
@@ -229,6 +231,11 @@ export class CafeScene extends Phaser.Scene {
       }),
     };
 
+    const renderer = this.game.renderer;
+    this.canGrade = renderer.type !== Phaser.CANVAS || prepareCanvasMultiply(
+      (renderer as Phaser.Renderer.Canvas.CanvasRenderer).blendModes,
+      Phaser.BlendModes.MULTIPLY,
+    );
     for (const area of AREA_IDS) {
       const grade = this.add.rectangle(0, 0, SCENE_W, 1, 0xffffff).setOrigin(0, 0).setDepth(DEPTH.grade);
       this.grades.set(area, grade.setBlendMode(Phaser.BlendModes.MULTIPLY));
@@ -441,7 +448,7 @@ export class CafeScene extends Phaser.Scene {
   private drawLight(area: AreaId, visible: boolean, state: GameState, light: Lighting): void {
     const o = areaOrigin(area);
     const ambient = roomAmbient(light, area);
-    this.grades.get(area)!.setVisible(ambient !== '#ffffff').setPosition(o.x, o.y).setSize(SCENE_W, sceneHeight()).setFillStyle(color(ambient));
+    this.grades.get(area)!.setVisible(this.canGrade && ambient !== '#ffffff').setPosition(o.x, o.y).setSize(SCENE_W, sceneHeight()).setFillStyle(color(ambient));
     if (!visible || light.lamps < 0.01 || !isAreaOpen(state, area)) return;
     for (const lamp of lampsIn(area, state)) {
       const key = baked(this.textures, `glow-${lamp.radius}-${lamp.color}`, lamp.radius * 2, lamp.radius * 2, (ctx) => paintGlow(ctx, lamp.radius, lamp.color));
