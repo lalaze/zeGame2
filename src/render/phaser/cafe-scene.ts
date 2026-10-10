@@ -1,4 +1,8 @@
 import Phaser from 'phaser';
+import { getLocale, t as translate } from '../../i18n';
+import { thoughtCandidates } from '../thoughts';
+import { thoughtTextRaster } from '../thought-text';
+import { ThoughtBubbles, placeThought, thoughtBubbleWidth, type ThoughtRect } from '../thought-bubbles';
 import { menuItems } from '../../game/economy';
 import { formatMoney } from '../../game/format';
 import { COLS, FLOOR_ROWS, WALL_ROWS, WALL_TOP, CELL, canPlace, cellFree, furnitureDef } from '../../game/furniture';
@@ -165,6 +169,8 @@ export class CafeScene extends Phaser.Scene {
   private rects!: Pool<Phaser.GameObjects.Rectangle>;
   private emitters!: Record<'sparkle' | 'steam' | 'heart', Phaser.GameObjects.Particles.ParticleEmitter>;
   private floaters: Floater[] = [];
+  private thoughts = new ThoughtBubbles();
+  private thoughtFontsReady = false;
   private bell: HTMLCanvasElement | null = null;
   /** When the bell on the pass last rang, in seconds of game time. */
   private bellRang = -1;
@@ -188,6 +194,11 @@ export class CafeScene extends Phaser.Scene {
 
   create(): void {
     addPixelFonts(this);
+    // Canvas text does not trigger CSS font loading on its own. Load both scripts
+    // even for returning English players who never opened the language dialog.
+    Promise.all([document.fonts.load('12px "Pixel ZH"'), document.fonts.load('12px "Pixelify Sans"')])
+      .then(() => { this.thoughtFontsReady = true; })
+      .catch(() => { this.thoughtFontsReady = true; });
     const camera = this.cameras.main;
     camera.setOrigin(0, 0);
     camera.setRoundPixels(true);
@@ -289,6 +300,7 @@ export class CafeScene extends Phaser.Scene {
     this.glows.end();
     this.drawFloorStanding(state, t);
     this.sim.customers.forEach((c, i) => this.drawCustomerOverlay(c, t, DEPTH.overlay + i * 0.001));
+    this.drawThoughts(state, dt);
     this.images.end();
     this.rects.end();
 
@@ -814,6 +826,89 @@ export class CafeScene extends Phaser.Scene {
   }
 
   // ------------------------------------------------------------ above the room
+
+  /** Quiet, static thought clouds: no extra motion even with reduced-motion enabled. */
+  private drawThoughts(state: GameState, dt: number): void {
+    const view = this.view;
+    const bounds = areaBounds(view.area);
+    const inRoom = (p: { x: number; y: number }) => p.x >= bounds.x && p.x < bounds.x + bounds.w && p.y >= bounds.y && p.y < bounds.y + bounds.h;
+    const candidates = thoughtCandidates(this.sim, state).filter(inRoom);
+    const enabled = !view.paused && !view.panning && !view.overview && !view.ghost && state.phase === 'open' && !document.hidden;
+    const selected = this.thoughts.update(dt, `${view.area}:${getLocale()}:${bounds.h}`, enabled, candidates);
+    if (!selected.length || !this.thoughtFontsReady) return;
+    // Real head bounds and real task indicators are separate blockers. Generic
+    // head padding used to sever the trail and lift thoughts away from their owner.
+    const occupied: ThoughtRect[] = [];
+    for (const c of this.sim.customers.filter(inRoom)) {
+      const top = c.y - CHAR_H - (seated(c) ? 5 : 0);
+      occupied.push({ x: c.x - 9, y: top, w: 18, h: 18 });
+      if (c.phase === 'ordering' || (c.soldOut && c.moodTimer > 0))
+        occupied.push({ x: c.x - 19, y: top - (c.vip ? 27 : 22), w: 38, h: c.vip ? 27 : 22 });
+      if (c.vip) occupied.push({ x: c.x - 5, y: top - 6, w: 10, h: 6 });
+      if (c.mood === 'happy') occupied.push({ x: c.x - 5, y: top - 19, w: 10, h: 17 });
+      if ((c.phase === 'queue' && c.patience < 12) || (c.phase === 'waiting' && c.timer < 15))
+        occupied.push({ x: c.x - 5, y: top - 5, w: 12, h: 3 });
+    }
+    this.sim.baristas.forEach((b, i) => {
+      const p = this.sim.baristaPose(i);
+      const top = p.y - CHAR_H;
+      occupied.push({ x: p.x - 9, y: top, w: 18, h: 18 });
+      if (this.sim.isBrewing(i)) occupied.push({ x: p.x - 10, y: top - 5, w: 20, h: 6 });
+      if (b.calling > 0) occupied.push({ x: p.x - 9, y: top - 26, w: 18, h: 26 });
+    });
+    this.sim.servers.forEach(p => {
+      occupied.push({ x: p.x - 9, y: p.y - CHAR_H, w: 18, h: 18 });
+      if (p.ack > 0) occupied.push({ x: p.x - 4, y: p.y - CHAR_H - 12, w: 8, h: 12 });
+    });
+    this.sim.cooks.forEach((p, i) => {
+      occupied.push({ x: p.x - 9, y: p.y - CHAR_H, w: 18, h: 18 });
+      if (this.sim.cookStation(i)?.working) occupied.push({ x: p.x - 10, y: p.y - CHAR_H - 6, w: 20, h: 5 });
+    });
+    for (const f of this.floaters) occupied.push({ x: f.x - 24, y: f.pos.y - 10, w: 48, h: 20 });
+    for (const c of selected) {
+      const text = translate(c.key);
+      const key = `thought-${getLocale()}-${c.key}`;
+      if (!this.textures.exists(key)) {
+        const measure = document.createElement('canvas').getContext('2d')!;
+        const font = '12px "Pixel ZH", "Pixelify Sans", sans-serif';
+        measure.font = font;
+        const units = getLocale() === 'zh' ? [...text] : text.split(' ');
+        const join = getLocale() === 'zh' ? '' : ' ';
+        const lines: string[] = [];
+        let line = '';
+        for (const unit of units) {
+          const next = line ? line + join + unit : unit;
+          if (line && measure.measureText(next).width > 96) { lines.push(line); line = unit; }
+          else line = next;
+        }
+        if (line) lines.push(line);
+        const w = thoughtBubbleWidth(Math.max(...lines.map(l => measure.measureText(l).width)));
+        const lettering = thoughtTextRaster(lines, font, w);
+        const h = lettering.height;
+        baked(this.textures, key, w, h, ctx => {
+          // Stepped, soft ivory cloud, deliberately distinct from pointed order speech.
+          ctx.fillStyle = '#947763';
+          ctx.fillRect(4, 0, w - 8, h); ctx.fillRect(0, 4, w, h - 8);
+          ctx.fillRect(2, 2, w - 4, h - 4);
+          ctx.fillStyle = '#fff9ed';
+          ctx.fillRect(4, 1, w - 8, h - 2); ctx.fillRect(1, 4, w - 2, h - 8);
+          ctx.fillRect(3, 3, w - 6, h - 6);
+          // Center the painted ink itself, not the font's invisible ascent/descent.
+          ctx.drawImage(lettering.canvas, 0, lettering.sourceY, w, lettering.inkHeight, 0, lettering.textY, w, lettering.inkHeight);
+        });
+      }
+      const texture = this.textures.get(key).getSourceImage();
+      const placement = placeThought(c, texture.width, texture.height, bounds, occupied);
+      if (!placement) continue;
+      occupied.push(placement, ...placement.dots);
+      this.image(key, placement.x, placement.y, DEPTH.overlay + 10);
+      // The planner validated the complete chain. Never omit individual dots.
+      for (const dot of placement.dots) {
+        this.rect(dot.x, dot.y, dot.w, dot.h, '#614536', DEPTH.overlay + 10);
+        if (dot.w > 2) this.rect(dot.x + 1, dot.y + 1, dot.w - 2, dot.h - 2, '#fff9ed', DEPTH.overlay + 10.001);
+      }
+    }
+  }
 
   private drawCustomerOverlay(c: Customer, t: number, depth: number): void {
     const x = Math.round(c.x);

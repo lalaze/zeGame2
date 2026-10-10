@@ -56,6 +56,8 @@ export class CafeView {
   }
   area: AreaId = 'main';
   overview = false;
+  /** Mirrors the page's pause state, so transient thoughts disappear behind dialogs. */
+  paused = false;
   /** Set while the player is placing or moving a piece. */
   ghost: Ghost | null = null;
   /** Seconds the cat stays happy after being petted. */

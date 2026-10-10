@@ -57,6 +57,10 @@ What to spend the day's revenue on:
 - The game is silent. The light follows your own clock through the day: a pale dawn, bright mornings, a golden late afternoon and a blue dusk, with sunbeams that slant and stretch as the sun crosses the sky. As it gets dark the lamps come on: ceiling lights, floor lamps and sconces you placed, the reading lamp, the patio bulbs, and the kitchen's tube lights and ovens. The garden patio and glasshouse feel the sky most; the walled rooms keep more of their own light.
 - Progress saves automatically to `localStorage`.
 
+### Little thoughts
+
+Customers and staff occasionally share short, localized thought clouds about what they are doing. Dine-in guests have consistent cosmetic flavor preferences, with affectionate likes and gentle dislikes after their order arrives. These thoughts never change orders, prices, tips, patience, or save data. At most two clouds appear at once; they avoid service indicators and disappear during dialogs, room transitions, the map, and furniture placement. Thought clouds add no animation.
+
 ### Languages
 
 The game comes in English and Simplified Chinese (简体中文). It picks the language from the browser and you can change it in Settings (`···`). Chinese uses the [Fusion Pixel](https://github.com/TakWolf/fusion-pixel-font) font (OFL 1.1). `scripts/subset-font.mjs` cuts that font down to only the characters in `src/locales/zh.json`, which brings it from 600 KB to about 12 KB. The script runs automatically before `dev` and `build`.

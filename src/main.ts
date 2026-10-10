@@ -700,6 +700,7 @@ function frame(dt: number): void {
   // Paused while a dialog (like the day report) is up or the tab is hidden; sped up
   // when the player asks.
   const paused = !session.active || !!document.getElementById('save-session-notice') || isModalOpen() || document.hidden || !!document.querySelector('.onboard-overlay');
+  scene.paused = paused;
   const simDt = paused ? 0 : state.phase === 'open' ? dt * state.speed : dt;
   for (let remaining = simDt; remaining > 1e-6; remaining -= SIM_STEP) {
     scene.addEvents(sim.update(state, Math.min(SIM_STEP, remaining)));
