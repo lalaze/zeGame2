@@ -3,8 +3,8 @@ import { clockHours } from '../../game/day';
 import { menuItems } from '../../game/economy';
 import { formatMoney } from '../../game/format';
 import { COLS, FLOOR_ROWS, WALL_ROWS, WALL_TOP, CELL, canPlace, cellFree, furnitureDef } from '../../game/furniture';
-import { CAT_SPOT, MAX_TABLES, SCENE_W, WINDOWS, areaOrigin, baristaSpot, doorPlantSpots, sceneHeight, seatSpot, tablePos } from '../../game/layout';
-import { AREA_IDS, activeTableIndices, isAreaOpen, mainTableCount, regionOffset, type AreaId } from '../../game/regions';
+import { CAT_SPOT, FLOOR_Y, KITCHEN_DOOR, MAX_TABLES, SCENE_W, WINDOWS, areaOrigin, baristaSpot, doorPlantSpots, floorY, sceneHeight, seatSpot, tablePos } from '../../game/layout';
+import { AREA_IDS, activeTableIndices, areaAtX, isAreaOpen, mainTableCount, regionOffset, type AreaId } from '../../game/regions';
 import type { Customer, Sim, SimEvent } from '../../game/sim';
 import type { GameState } from '../../game/state';
 import { cellRect, floorAnchor, type CafeView, type Ghost } from '../cafe-view';
@@ -12,6 +12,7 @@ import { paintCeiling, paintNeon, paintSill, shadow } from '../decor-art';
 import { textWidth } from '../font';
 import { GHOST_BAD, GHOST_OK, floorFurnitureBounds, paintFloorFurniture, paintWallFurniture } from '../furniture-art';
 import { paintPassageFloor, paintRoomBoundaries } from '../passages';
+import { lightingAt, roomAmbient, type Lighting } from '../lighting';
 import { paintRegion } from '../region-art';
 import { CHAIR_LEFT, CHAIR_RIGHT, RoomPainter, TABLE, TABLE_CX, TABLE_TOP_DY, type CounterCup } from '../room-art';
 import { CHAR_H, OUTLINE, catFrames, character, crownSprite, dropSprite, heartSprite, itemIcon, type Facing } from '../sprites';
@@ -34,10 +35,12 @@ const DEPTH = {
   counter: 30,
   floor: 1000,
   frontWall: 100000,
+  /** The time-of-day color grade over each room, and lamp light on top of it. */
+  grade: 100000.5,
+  glow: 100000.6,
   overlay: 100001,
   particles: 100002,
   floaters: 100003,
-  night: 100004,
   overview: 100005,
   ghost: 100006,
 };
@@ -50,6 +53,62 @@ const MAX_FLOATERS = 14;
 const PAD = 20;
 
 const color = (hex: string) => parseInt(hex.slice(1, 7), 16);
+
+const LAMP = '#ffcf7a';
+
+/** A light in a room, in that room's coordinates. */
+interface Lamp {
+  x: number;
+  y: number;
+  radius: number;
+  color: string;
+  strength: number;
+}
+
+/** Every light in a room: its ceiling fixtures and built-in lamps, and lamps the player placed. */
+function lampsIn(area: AreaId, state: GameState): Lamp[] {
+  const lamps: Lamp[] = [];
+  const add = (x: number, y: number, radius: number, strength = 1, tint = LAMP) => lamps.push({ x, y, radius, color: tint, strength });
+  if (area === 'main') {
+    const ceiling = state.decor.equipped.ceiling;
+    if (ceiling === 'ceiling_pendants') for (const x of [36, 132, 188, 284]) add(x, 13, 26);
+    if (ceiling === 'ceiling_chandelier') add(SCENE_W / 2, 9, 46);
+    if (ceiling === 'ceiling_lights') for (let x = 8; x < SCENE_W; x += 32) add(x, 11, 14, 0.8);
+    // The oven glows through the kitchen doorway.
+    add(KITCHEN_DOOR.x + KITCHEN_DOOR.w / 2, FLOOR_Y - 12, 22, 0.7, '#ffa64a');
+  } else if (area === 'reading') {
+    add(100, floorFurnitureBounds('lamp', 100, floorY(98)).y + 4, 30);
+  } else if (area === 'terrace') {
+    for (let x = 22; x < SCENE_W; x += 34) add(x, 19 + Math.round(Math.sin((x / SCENE_W) * Math.PI) * 12), 14, 0.9);
+  }
+  for (const piece of state.decor.placed) {
+    const def = furnitureDef(piece.id);
+    if (!def || (piece.id !== 'lamp' && piece.id !== 'sconce') || areaAtX(piece.col * CELL) !== area) continue;
+    const o = areaOrigin(area);
+    if (def.surface === 'wall') {
+      const cell = cellRect('wall', piece.col, piece.row, def.w, def.h);
+      add(cell.x - o.x + cell.w / 2, cell.y - o.y + 4, 22);
+    } else {
+      const { cx, foot } = floorAnchor(def, piece.col, piece.row);
+      add(cx - o.x, floorFurnitureBounds(piece.id, cx, foot).y - o.y + 4, 30);
+    }
+  }
+  return lamps;
+}
+
+/** A pool of lamplight fading out in a few flat steps, so it stays pixel art. */
+function paintGlow(ctx: CanvasRenderingContext2D, radius: number, tint: string): void {
+  const STEPS = 5;
+  ctx.fillStyle = tint;
+  for (let y = 0; y < radius * 2; y++) {
+    for (let x = 0; x < radius * 2; x++) {
+      const d = Math.hypot(x + 0.5 - radius, y + 0.5 - radius) / radius;
+      if (d >= 1) continue;
+      ctx.globalAlpha = (0.36 * Math.ceil((1 - d) ** 1.6 * STEPS)) / STEPS;
+      ctx.fillRect(x, y, 1, 1);
+    }
+  }
+}
 
 /** Game objects handed out afresh each frame; ones not used this frame are hidden. */
 class Pool<T extends Phaser.GameObjects.GameObject & Phaser.GameObjects.Components.Visible> {
@@ -98,7 +157,8 @@ export class CafeScene extends Phaser.Scene {
   private rects!: Pool<Phaser.GameObjects.Rectangle>;
   private emitters!: Record<'sparkle' | 'steam' | 'heart', Phaser.GameObjects.Particles.ParticleEmitter>;
   private floaters: Floater[] = [];
-  private night!: Phaser.GameObjects.Rectangle;
+  private grades = new Map<AreaId, Phaser.GameObjects.Rectangle>();
+  private glows!: Pool<Phaser.GameObjects.Image>;
   private overviewFrame!: Phaser.GameObjects.Graphics;
   private ghostCells!: Phaser.GameObjects.Graphics;
   private ghostPiece!: Phaser.GameObjects.Image;
@@ -159,7 +219,11 @@ export class CafeScene extends Phaser.Scene {
       }),
     };
 
-    this.night = this.add.rectangle(0, 0, 1, 1, 0x1c1d4a, 0.1).setOrigin(0, 0).setDepth(DEPTH.night);
+    for (const area of AREA_IDS) {
+      const grade = this.add.rectangle(0, 0, SCENE_W, 1, 0xffffff).setOrigin(0, 0).setDepth(DEPTH.grade);
+      this.grades.set(area, grade.setBlendMode(Phaser.BlendModes.MULTIPLY));
+    }
+    this.glows = new Pool(() => this.add.image(0, 0, '__WHITE').setDepth(DEPTH.glow).setBlendMode(Phaser.BlendModes.ADD));
     this.overviewFrame = this.add.graphics().setDepth(DEPTH.overview);
     this.ghostCells = this.add.graphics().setDepth(DEPTH.ghost);
     this.ghostPiece = this.add.image(0, 0, '__WHITE').setOrigin(0, 0).setDepth(DEPTH.ghost + 0.1).setAlpha(0.8);
@@ -187,8 +251,7 @@ export class CafeScene extends Phaser.Scene {
     const t = time / 1000;
     const hours = clockHours(state);
     const now = new Date(2000, 0, 1, Math.floor(hours), (hours % 1) * 60);
-    const hour = now.getHours() + now.getMinutes() / 60;
-    const night = hour >= 19 || hour < 6;
+    const light = lightingAt(hours);
     const viewX = Math.round(view.viewX);
     const viewY = Math.round(view.viewY);
 
@@ -198,19 +261,21 @@ export class CafeScene extends Phaser.Scene {
 
     this.images.begin();
     this.rects.begin();
+    this.glows.begin();
     const H = sceneHeight();
     for (const area of AREA_IDS) {
       const o = areaOrigin(area);
       const visible = o.x < viewX + view.viewWidth && o.x + SCENE_W > viewX && o.y < viewY + view.viewHeight && o.y + H > viewY;
-      this.drawRoom(area, visible, state, t, now, night);
+      this.drawRoom(area, visible, state, t, now, light);
+      this.drawLight(area, visible, state, light);
     }
+    this.glows.end();
     this.drawFloorStanding(state, t);
     this.sim.customers.forEach((c, i) => this.drawCustomerOverlay(c, t, DEPTH.overlay + i * 0.001));
     this.images.end();
     this.rects.end();
 
     this.spawnEffects();
-    this.night.setVisible(night).setPosition(viewX, viewY).setSize(view.viewWidth, view.viewHeight);
     this.drawOverviewFrame();
     this.drawGhost(state, view.ghost && !view.panning && !view.overview ? view.ghost : null, t, now);
   }
@@ -273,7 +338,7 @@ export class CafeScene extends Phaser.Scene {
    * in the main café, and the front wall along the bottom edge. Rooms out of view
    * keep their last picture rather than repainting.
    */
-  private drawRoom(area: AreaId, visible: boolean, state: GameState, t: number, now: Date, night: boolean): void {
+  private drawRoom(area: AreaId, visible: boolean, state: GameState, t: number, now: Date, light: Lighting): void {
     const o = areaOrigin(area);
     const H = sceneHeight();
     const decor = state.decor.equipped;
@@ -287,16 +352,14 @@ export class CafeScene extends Phaser.Scene {
       front.image.setPosition(o.x, o.y);
       return;
     }
-    const hour = now.getHours() + now.getMinutes() / 60;
-
     if (area === 'main') {
-      const backSig = [tick, H, Object.values(decor).join(','), menuItems(state).map((m) => m.id).join(','), state.phase, placed, hour, this.view.kitchenDoor.toFixed(2)].join('|');
+      const backSig = [tick, H, Object.values(decor).join(','), menuItems(state).map((m) => m.id).join(','), state.phase, placed, now.getTime(), this.view.kitchenDoor.toFixed(2)].join('|');
       this.paint(back, o.x, o.y, backSig, (p) => {
         p.kitchenDoor = this.view.kitchenDoor;
         const ctx = p.ctx;
         p.drawWall(decor.wallpaper, t);
         const sill = WINDOWS[0];
-        p.drawWindow(sill, hour, t, state.phase === 'open');
+        p.drawWindow(sill, light, t, state.phase === 'open');
         p.drawKitchenDoor(state, t);
         paintSill(ctx, decor.sill, sill.x + sill.w - 8, sill.y + sill.h + 1);
         // The neon sign glows in the left window, facing the street.
@@ -306,7 +369,7 @@ export class CafeScene extends Phaser.Scene {
           const def = furnitureDef(piece.id);
           if (def?.surface === 'wall' && piece.col < COLS && i !== skip) paintWallFurniture(ctx, piece.id, piece.col * CELL, WALL_TOP + piece.row * CELL, t, now);
         });
-        p.drawFloor(decor.floor, decor.rug, hour, H);
+        p.drawFloor(decor.floor, decor.rug, light, H);
         p.drawBackBar(state, decor.counter);
         paintCeiling(ctx, decor.ceiling, SCENE_W, t);
       });
@@ -331,9 +394,9 @@ export class CafeScene extends Phaser.Scene {
     } else {
       const offset = regionOffset(area);
       const locked = !isAreaOpen(state, area);
-      this.paint(back, o.x, o.y, [tick, H, placed, night, locked].join('|'), (p) => {
+      this.paint(back, o.x, o.y, [tick, H, placed, now.getTime(), locked].join('|'), (p) => {
         const ctx = p.ctx;
-        paintRegion(ctx, area, H, t, night, locked);
+        paintRegion(ctx, area, H, t, light, locked);
         state.decor.placed.forEach((piece, i) => {
           const def = furnitureDef(piece.id);
           const x = piece.col * CELL;
@@ -348,6 +411,21 @@ export class CafeScene extends Phaser.Scene {
       p.drawFrontWall(wallpaper, H, area === 'main' || area === 'greenhouse', area === 'terrace');
       paintRoomBoundaries(p.ctx, area, state);
     });
+  }
+
+  /**
+   * The time of day over a room: its color grade, and warm pools around each light
+   * that come up as it gets dark. Locked rooms stay unlit.
+   */
+  private drawLight(area: AreaId, visible: boolean, state: GameState, light: Lighting): void {
+    const o = areaOrigin(area);
+    const ambient = roomAmbient(light, area);
+    this.grades.get(area)!.setVisible(ambient !== '#ffffff').setPosition(o.x, o.y).setSize(SCENE_W, sceneHeight()).setFillStyle(color(ambient));
+    if (!visible || light.lamps < 0.01 || !isAreaOpen(state, area)) return;
+    for (const lamp of lampsIn(area, state)) {
+      const key = baked(this.textures, `glow-${lamp.radius}-${lamp.color}`, lamp.radius * 2, lamp.radius * 2, (ctx) => paintGlow(ctx, lamp.radius, lamp.color));
+      this.glows.next().setTexture(key).setPosition(o.x + lamp.x, o.y + lamp.y).setAlpha(light.lamps * lamp.strength);
+    }
   }
 
   private drawCat(t: number, o: { x: number; y: number }): void {

@@ -50,7 +50,7 @@ What to spend the day's revenue on:
 - **Background tab = full speed.** Leave the tab open behind your work and the day keeps running; when you come back it catches up, and the report is waiting if the day ended.
 - **Closed browser = the day goes on.** Close the game mid-day and the day keeps running to closing time; when you come back it has played out (sales, ingredients used) and the end-of-day report is waiting.
 - **Shift Manager.** Time away beyond that (or while the shop was closed) is run by your Shift Manager at about one business day per hour, paying 25% of a normal day's profit (sales minus ingredients) for up to 4h. Upgrades raise this to 100% for up to 14h.
-- The game is silent. The window sky and the wall clock follow the shop's clock through the day.
+- The game is silent. The light follows the shop's clock through the day: a pale dawn, bright mornings, a golden late afternoon and a blue dusk, with sunbeams that slant and stretch as the sun crosses the sky. As it gets dark the lamps come on: ceiling lights, floor lamps and sconces you placed, the reading lamp, the patio bulbs and the oven through the kitchen door. The garden patio and glasshouse feel the sky most; the walled rooms keep more of their own light.
 - Progress saves automatically to `localStorage`.
 
 ### Languages
@@ -71,6 +71,7 @@ To add or change text, edit `src/locales/en.json` and `src/locales/zh.json`. The
 | `src/game/sim.ts` | Customer and barista simulation |
 | `src/game/state.ts` | Save format, loading and validation |
 | `src/render/phaser/` | The [Phaser 4](https://phaser.io) game that draws the café: game loop, camera, input, baked room textures, characters and props as sprites sorted by depth, particles and pop-up text |
+| `src/render/lighting.ts` | Time-of-day lighting: keyframed sky, sun, color grade and lamp levels that every part of the scene reads from |
 | `src/render/cafe-view.ts` | What the café shows, independent of Phaser: the camera between rooms, the piece being arranged, tap targets and queued effects |
 | `src/render/` | Pixel sprites defined as text grids, a 3×5 bitmap font, and the canvas painters for rooms, decor and furniture (`room-art.ts`, `decor-art.ts`, `furniture-art.ts`) |
 | `src/ui/` | Side panel, opening flow (`onboarding.ts`), modals |

@@ -21,6 +21,7 @@ import { paintPassageFloor } from './passages';
 import { mix, ramp } from './color';
 import { counterColors, grain, paintCounter, paintFloor, paintRug, paintRunner, paintWainscot, paintWall, shadow, wainscotColor } from './decor-art';
 import { drawText, textWidth } from './font';
+import { beam, type Lighting, type Sun } from './lighting';
 import { OUTLINE, itemIcon, pixelSprite } from './sprites';
 
 const WOOD = ramp('#8a5a3c');
@@ -205,6 +206,24 @@ export const TABLE = lazy(() => {
   return c;
 });
 
+/**
+ * A shaft of sunlight on the floor through an opening from x0 to x1 at y, slanting
+ * by `lean` over `length` (negative to fall upward, from the front of the room).
+ */
+export function paintSunbeam(ctx: CanvasRenderingContext2D, sun: Sun, x0: number, x1: number, y: number, lean: number, length: number): void {
+  if (sun.elevation <= 0 || sun.strength <= 0.02) return;
+  ctx.save();
+  ctx.globalAlpha = 0.16 * sun.strength;
+  ctx.fillStyle = sun.color;
+  ctx.beginPath();
+  ctx.moveTo(x0, y);
+  ctx.lineTo(x1, y);
+  ctx.lineTo(x1 + lean, y + length);
+  ctx.lineTo(x0 + lean, y + length);
+  ctx.fill();
+  ctx.restore();
+}
+
 /** A brewing barista's cup on the counter: where it stands and how full it is. */
 export interface CounterCup {
   x: number;
@@ -238,18 +257,10 @@ export class RoomPainter {
   }
 
   /** A window onto the street; `sign` hangs the OPEN (true) or CLOSED (false) sign in it. */
-  drawWindow(win: { x: number; y: number; w: number; h: number }, hour: number, t: number, sign: boolean | null): void {
+  drawWindow(win: { x: number; y: number; w: number; h: number }, light: Lighting, t: number, sign: boolean | null): void {
     const { x, y, w, h } = win;
-    const night = hour >= 19 || hour < 6;
-    const sunset = hour >= 17 && hour < 19;
-    const dawn = hour >= 6 && hour < 8;
-    const bands = night
-      ? ['#1e2452', '#262d63', '#2f3874']
-      : sunset
-        ? ['#f08a5d', '#f6a96b', '#fbc98a']
-        : dawn
-          ? ['#f6b9a0', '#f9cfae', '#fbe2c3']
-          : ['#79c1ea', '#97d0f0', '#b8e0f5'];
+    const night = light.dark > 0.6;
+    const bands = light.sky;
     const frame = ramp('#9a6740');
     this.r(x - 4, y - 4, w + 8, h + 8, OUTLINE);
     this.r(x - 3, y - 3, w + 6, h + 6, frame.base);
@@ -268,18 +279,21 @@ export class RoomPainter {
       this.r(x + 38, y + 4, 6, 6, '#f6eec2');
       this.r(x + 40, y + 4, 5, 5, bands[0]);
     } else {
-      this.r(x + 38, y + 5, 6, 6, sunset ? '#ffd27a' : '#fff6b0');
+      // The sun crosses the window and sinks behind the hills.
+      const { sun } = light;
+      if (sun.elevation > 0) this.r(x + 2 + sun.x * (w - 10), y + 3 + (1 - sun.elevation) * (h - 14), 6, 6, sun.disc);
       for (const [offset, cy] of [[0, 7], [34, 15]]) {
         const cx = x - 16 + ((t * 2.5 + offset) % (w + 24));
-        this.r(cx, y + cy, 14, 3, '#ffffff');
-        this.r(cx + 3, y + cy - 2, 8, 2, '#ffffff');
-        this.r(cx + 1, y + cy + 3, 12, 1, '#e3f1fa');
+        this.r(cx, y + cy, 14, 3, light.cloud);
+        this.r(cx + 3, y + cy - 2, 8, 2, light.cloud);
+        this.r(cx + 1, y + cy + 3, 12, 1, mix(light.cloud, light.sky[2], 0.5));
       }
     }
-    // Hills and a tree line outside.
-    this.r(x, y + h - 10, w, 10, night ? '#243d33' : '#7cbf5e');
-    this.r(x, y + h - 4, w, 4, night ? '#1b3029' : '#5ea24a');
-    for (let i = 0; i < w; i += 7) this.r(x + i, y + h - 14 + ((i * 3) % 5), 6, 5, night ? '#1f3a30' : '#4f9a48');
+    // Hills and a tree line outside, falling into shadow at dusk.
+    const land = (day: string, dark: string) => mix(day, dark, light.dark);
+    this.r(x, y + h - 10, w, 10, land('#7cbf5e', '#243d33'));
+    this.r(x, y + h - 4, w, 4, land('#5ea24a', '#1b3029'));
+    for (let i = 0; i < w; i += 7) this.r(x + i, y + h - 14 + ((i * 3) % 5), 6, 5, land('#4f9a48', '#1f3a30'));
     ctx.restore();
     // Mullions and the sill.
     this.r(x + w / 2 - 1, y, 3, h, frame.base);
@@ -519,7 +533,7 @@ export class RoomPainter {
     this.r(x - 1, y - 3, 10, 1, '#e8a95a');
   }
 
-  drawFloor(floor: string, rug: string, hour: number, H: number): void {
+  drawFloor(floor: string, rug: string, light: Lighting, H: number): void {
     paintFloor(this.ctx, floor, 0, FLOOR_Y, SCENE_W, H - FLOOR_Y);
     // Shadow where the floor meets the wall.
     this.ctx.save();
@@ -536,29 +550,10 @@ export class RoomPainter {
     else paintRug(this.ctx, rug, 110, COUNTER.bottom + 6, 100, H - 18 - COUNTER.bottom);
     this.drawDoormat(H);
     const ctx = this.ctx;
-    if (hour >= 7 && hour < 18) {
-      ctx.save();
-      ctx.globalAlpha = 0.12;
-      ctx.fillStyle = '#fff4c8';
-      // Sunlight falling through both windows...
-      for (const win of WINDOWS) {
-        const lean = win.x < SCENE_W / 2 ? 18 : -18;
-        ctx.beginPath();
-        ctx.moveTo(win.x, FLOOR_Y);
-        ctx.lineTo(win.x + win.w, FLOOR_Y);
-        ctx.lineTo(win.x + win.w + lean, FLOOR_Y + 36);
-        ctx.lineTo(win.x + lean, FLOOR_Y + 36);
-        ctx.fill();
-      }
-      // ...and in through the open front door.
-      ctx.beginPath();
-      ctx.moveTo(DOOR_X, H);
-      ctx.lineTo(DOOR_X + DOOR_W, H);
-      ctx.lineTo(DOOR_X + DOOR_W + 8, H - 34);
-      ctx.lineTo(DOOR_X - 8, H - 34);
-      ctx.fill();
-      ctx.restore();
-    }
+    // Sunlight falling through the window, and in through the open front door.
+    const { lean, length } = beam(light.sun);
+    for (const win of WINDOWS) paintSunbeam(ctx, light.sun, win.x, win.x + win.w, FLOOR_Y, lean, length);
+    paintSunbeam(ctx, light.sun, DOOR_X, DOOR_X + DOOR_W, H, Math.round(lean / 3), -Math.round(length * 0.9));
     // Kitchen light spilling out of the open door.
     if (this.kitchenDoor > 0.05) {
       const { x, w } = KITCHEN_DOOR;

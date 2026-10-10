@@ -2,10 +2,13 @@ import { FLOOR_Y, SCENE_W, floorY } from '../game/layout';
 import type { RegionId } from '../game/regions';
 import { paintFloor, paintWall } from './decor-art';
 import { drawText, textWidth } from './font';
+import { mix } from './color';
 import { paintFloorFurniture } from './furniture-art';
+import { beam, type Lighting } from './lighting';
+import { paintSunbeam } from './room-art';
 
 /** Each extension has its own architecture; coordinates are local to that room. */
-export function paintRegion(ctx: CanvasRenderingContext2D, id: RegionId, height: number, t: number, night: boolean, locked: boolean): void {
+export function paintRegion(ctx: CanvasRenderingContext2D, id: RegionId, height: number, t: number, light: Lighting, locked: boolean): void {
   const r = (x: number, y: number, w: number, h: number, color: string) => {
     ctx.fillStyle = color;
     ctx.fillRect(Math.round(x), Math.round(y), w, h);
@@ -16,6 +19,7 @@ export function paintRegion(ctx: CanvasRenderingContext2D, id: RegionId, height:
   const terrace = id === 'terrace';
   paintWall(ctx, reading ? 'wall_cream' : 'wall_mint', 0, 0, SCENE_W, FLOOR_Y, t);
   paintFloor(ctx, terrace ? 'floor_terrazzo' : reading ? 'floor_herringbone' : 'floor_mint', 0, FLOOR_Y, SCENE_W, height - FLOOR_Y);
+  const sky = (painted: string) => mix(painted, light.sky[1], 0.55);
 
   if (reading) {
     r(0, 0, 320, 6, '#6a3d2c');
@@ -33,8 +37,8 @@ export function paintRegion(ctx: CanvasRenderingContext2D, id: RegionId, height:
       }
     }
     r(109, 20, 102, 49, ink);
-    r(113, 24, 94, 41, '#a1b6bd');
-    r(113, 48, 94, 17, '#6f8865');
+    r(113, 24, 94, 41, sky('#a1b6bd'));
+    r(113, 48, 94, 17, mix('#6f8865', '#1f3a30', light.dark));
     r(158, 24, 4, 41, '#d6b088');
     r(113, 44, 94, 3, '#d6b088');
     r(106, 69, 108, 4, '#6a3d2c');
@@ -46,11 +50,11 @@ export function paintRegion(ctx: CanvasRenderingContext2D, id: RegionId, height:
     paintFloorFurniture(ctx, 'armchair', 206, floorY(102));
     paintFloorFurniture(ctx, 'lamp', 100, floorY(98));
   } else {
-    r(0, 0, 320, 80, night ? '#34475a' : '#b7d7d2');
+    r(0, 0, 320, 80, sky('#b7d7d2'));
     for (let i = 0; i < 16; i++) {
       const x = i * 23;
       const top = 42 + ((i * 17) % 23);
-      r(x, top, 27, 80 - top, i % 2 ? '#729577' : '#87a67d');
+      r(x, top, 27, 80 - top, mix(i % 2 ? '#729577' : '#87a67d', '#243d33', light.dark * 0.8));
     }
     if (terrace) {
       // Open sky, a low garden wall and hanging bulbs.
@@ -73,7 +77,7 @@ export function paintRegion(ctx: CanvasRenderingContext2D, id: RegionId, height:
     } else {
       // Glass roof and tall mullions, with soft reflected light.
       ctx.save();
-      ctx.globalAlpha = 0.25;
+      ctx.globalAlpha = 0.25 * (1 - light.dark * 0.7);
       for (const x of [20, 128, 236]) {
         r(x, 8, 25, 68, '#ffffff');
         r(x + 29, 8, 5, 68, '#ffffff');
@@ -112,6 +116,11 @@ export function paintRegion(ctx: CanvasRenderingContext2D, id: RegionId, height:
     r(148, y, 1, 4, '#bba37f');
     r(171, y, 1, 4, '#bba37f');
   }
+
+  // Sun through the reading room's window, and down through the glasshouse roof.
+  const { lean, length } = beam(light.sun);
+  if (reading) paintSunbeam(ctx, light.sun, 113, 207, FLOOR_Y, lean, length);
+  else if (!terrace) for (const x of [20, 128, 236]) paintSunbeam(ctx, light.sun, x, x + 34, FLOOR_Y, lean, length + 24);
 
   if (locked) {
     ctx.save();
