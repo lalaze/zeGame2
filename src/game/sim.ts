@@ -1,10 +1,13 @@
 import { CustomerCastCycle } from './customer-cast';
 import { COMBO_CHANCE, MAX_QUEUE, PASS_SLOTS, RING_AGAIN, VIP_CHANCE, isDrink, type ItemId } from './data';
 import { finishDay, type DayReport } from './day';
+import { CELL, furnitureDef } from './furniture';
+import { routeFloorSegment, segmentCrossesObstacle, type FloorObstacle, type FloorPoint } from './navigation';
 import {
   arrivalRate,
   baristaCount,
   consumeServing,
+  canPrepareItem,
   cookCount,
   earn,
   menuItems,
@@ -16,24 +19,36 @@ import {
 } from './economy';
 import {
   PASS_BELL,
+  COUNTER,
+  COUNTER_GATE,
+  FLOOR_Y,
+  MAIN_CUPBOARDS,
+  SCENE_W,
   TOTAL_TABLE_SPOTS,
   areaAtPoint,
   areaOrigin,
   baristaSpot,
   baristaWorkSpot,
   doorSpot,
+  doorPlantSpots,
+  floorY,
+  doorwayY,
+  kitchenFloorY,
+  setKitchenLevel,
   passSpot,
   queueSpot,
   resizeRoomPoint,
   roomRoute,
+  sceneHeight,
   seatApproach,
   seatSpot,
   serverHome,
   serviceSpot,
   tableArea,
+  tablePos,
 } from './layout';
 import { batchSteps, cookHome, kitchenPath, nextBatch, shelveBatch, startBatch, stationSpot, STATION_SECONDS, type Station } from './kitchen';
-import { activeTableIndices, type AreaId } from './regions';
+import { AREA_IDS, activeTableIndices, adjacentArea, areaAtX, areaConnections, regionOffset, type AreaId } from './regions';
 import type { GameState, Look } from './state';
 
 export type { Look };
@@ -55,6 +70,10 @@ export interface Walker {
   stride: number;
   /** Points still to walk through after reaching the current target. */
   via: { x: number; y: number }[];
+  /** A blocked route waits for the floor plan to change; it must not count as arrival. */
+  pathBlocked?: boolean;
+  /** Remaining semantic stops, separate from generated obstacle-corner waypoints. */
+  journey?: FloorPoint[];
 }
 
 export interface Customer extends Walker {
@@ -145,6 +164,7 @@ const BOOST_SECONDS = 0.3;
 /** How long a dine-in customer stands at the counter ordering before taking a seat. */
 const ORDER_SECONDS = 0.8;
 const CALL_SECONDS = 1.4;
+const WALK_CLEARANCE = 8;
 
 export class Sim {
   customers: Customer[] = [];
@@ -163,6 +183,11 @@ export class Sim {
   private nextId = 1;
   private readonly customerCast: CustomerCastCycle;
   private castRandomState = 1;
+  private floorState: GameState | null = null;
+  private navigationSignature = '';
+  private kitchenStage = -1;
+  private navigationTables: number[] = [];
+  private navigationObstacles = new Map<AreaId, FloorObstacle[]>();
 
   constructor(private rng: () => number = Math.random) {
     this.customerCast = new CustomerCastCycle(() => {
@@ -178,9 +203,10 @@ export class Sim {
       w.x = position.x; w.y = position.y;
       w.tx = target.x; w.ty = target.y;
       w.via = w.via.map((point) => resizeRoomPoint(point, fromHeight));
+      w.journey = w.journey?.map((point) => resizeRoomPoint(point, fromHeight));
     };
     this.servers.forEach(move);
-    this.cooks.forEach(move);
+    // Kitchen geometry and its delivery lane are independent of viewport height.
     for (const c of this.customers) {
       move(c);
       if (c.seat >= 0) {
@@ -189,7 +215,30 @@ export class Sim {
         else if (c.phase === 'toSeat') {
           if (c.via.length) c.via[c.via.length - 1] = seat;
           else { c.tx = seat.x; c.ty = seat.y; }
+          if (c.journey?.length) c.journey[c.journey.length - 1] = seat;
         }
+      }
+    }
+    if (this.floorState) {
+      this.refreshNavigation(this.floorState);
+      // Restore semantic destinations. Service positions stay attached to the
+      // counter and doorway margins stay 12px, rather than stretching with floor.
+      for (const c of this.customers) {
+        const area = areaAtPoint(c.x, c.y) ?? 'main';
+        if (c.phase === 'queue') this.walk(c, queueSpot(this.queue.indexOf(c.id)));
+        else if (c.phase === 'toCounter') this.walk(c, serviceSpot(c.spot));
+        else if (c.phase === 'ordering') {
+          const p = serviceSpot(c.spot);
+          c.x = c.tx = p.x; c.y = c.ty = p.y; c.via = []; c.journey = [];
+        } else if (c.phase === 'toSeat') this.walk(c, ...this.toTable(c.seat, area), seatSpot(Math.floor(c.seat / 2), c.seat % 2 as 0 | 1));
+        else if (c.phase === 'exiting') this.walk(c, ...roomRoute(area, 'main'), doorSpot());
+      }
+      for (const [i, server] of this.servers.entries()) {
+        if (server.phase === 'idle') {
+          const home = serverHome(i);
+          server.x = server.tx = home.x; server.y = server.ty = home.y;
+        } else if (server.phase === 'toPass') this.walk(server, passSpot());
+        else this.headOut(server);
       }
     }
   }
@@ -209,6 +258,25 @@ export class Sim {
   }
 
   private sync(state: GameState): void {
+    const stage = state.kitchen ? state.upgrades.cook : 0;
+    setKitchenLevel(stage);
+    if (this.kitchenStage >= 0 && this.kitchenStage !== stage) {
+      // Keep cooks attached to their part of the floor as an expansion shifts
+      // storage and washing forward, then rebuild routes around the new fixtures.
+      const previous = this.kitchenStage;
+      for (const [i, cook] of this.cooks.entries()) {
+        if (cook.x < 0 && cook.y > 134) {
+          const oldEnd = kitchenFloorY(168, previous);
+          const anchor = cook.y >= oldEnd ? cook.y + 168 - oldEnd :
+            134 + (cook.y - 134) * 34 / (oldEnd - 134);
+          cook.y = kitchenFloorY(anchor);
+        }
+        const target = cook.batch ? stationSpot(cook.batch.steps[cook.batch.step]) : cookHome(i);
+        this.walk(cook, ...kitchenPath(cook, target));
+      }
+    }
+    this.kitchenStage = stage;
+    this.refreshNavigation(state);
     while (this.baristas.length < baristaCount(state)) {
       this.baristas.push({ look: this.randomLook(), customerId: null, remaining: 0, total: 0, calling: 0 });
     }
@@ -221,6 +289,145 @@ export class Sim {
       this.cooks.push({ x: home.x, y: home.y, tx: home.x, ty: home.y, stride: 0, via: [], look: this.randomLook(), batch: null });
     }
     while (this.seats.length < TOTAL_TABLE_SPOTS * 2) this.seats.push(null);
+  }
+
+  /** Cache static floor geometry; ordering and walking do not rebuild it. */
+  private refreshNavigation(state: GameState): void {
+    this.floorState = state;
+    const tables = activeTableIndices(state);
+    const signature = `${sceneHeight()}:${tables.join(',')}:${state.decor.placed.map((p) => `${p.id},${p.col},${p.row}`).join(';')}`;
+    if (signature === this.navigationSignature) return;
+    this.navigationSignature = signature;
+    this.navigationTables = tables;
+    this.navigationObstacles = new Map(AREA_IDS.map((area) => [area, []]));
+    for (const area of AREA_IDS) {
+      const origin = areaOrigin(area);
+      const boxes = this.navigationObstacles.get(area)!;
+      if (area === 'main') {
+        boxes.push({ x: COUNTER.x, y: FLOOR_Y, w: COUNTER.w + COUNTER_GATE.w, h: COUNTER.bottom - FLOOR_Y });
+        boxes.push(...MAIN_CUPBOARDS.map((r) => ({ ...r })));
+        boxes.push(...doorPlantSpots().map((p) => ({ x: p.x - 5, y: p.y - 4, w: 10, h: 6 })));
+      } else if (adjacentArea(area, 'up')) {
+        // The north passage is the only walkable part of the back wall.
+        boxes.push({ x: origin.x, y: origin.y, w: 142, h: FLOOR_Y },
+          { x: origin.x + 178, y: origin.y, w: 142, h: FLOOR_Y });
+      }
+    }
+    for (const i of tables) {
+      const p = tablePos(i);
+      this.navigationObstacles.get(tableArea(i))!.push({ x: p.x - 23, y: p.y - 10, w: 46, h: 13 });
+    }
+    for (const p of state.decor.placed) {
+      const def = furnitureDef(p.id), area = areaAtX(p.col * CELL);
+      if (!def || def.surface !== 'floor' || !area) continue;
+      const origin = areaOrigin(area), y = floorY(FLOOR_Y + p.row * CELL);
+      this.navigationObstacles.get(area)!.push({
+        x: origin.x + p.col * CELL - regionOffset(area), y: origin.y + y,
+        w: def.w * CELL, h: floorY(FLOOR_Y + (p.row + def.h) * CELL) - y,
+      });
+    }
+    for (const w of [...this.customers.filter((c) => !seated(c)), ...this.servers])
+      if (w.journey?.length) this.walk(w, ...w.journey);
+  }
+
+  /** Keep Arrange from placing solid furniture on a customer's or staff member's feet. */
+  furnitureSpaceClear(id: string, col: number, row: number): boolean {
+    const def = furnitureDef(id);
+    if (!def) return false;
+    if (def.surface === 'wall') return true;
+    const area = areaAtX(col * CELL);
+    if (!area || !Number.isFinite(col) || !Number.isFinite(row)) return false;
+    const origin = areaOrigin(area);
+    const left = origin.x + col * CELL - regionOffset(area) - WALK_CLEARANCE;
+    const right = left + def.w * CELL + WALK_CLEARANCE * 2;
+    const top = origin.y + floorY(FLOOR_Y + row * CELL) - WALK_CLEARANCE;
+    const bottom = origin.y + floorY(FLOOR_Y + (row + def.h) * CELL) + WALK_CLEARANCE;
+    return [...this.customers, ...this.servers, ...this.cooks].every((w) =>
+      w.x < left || w.x > right || w.y < top || w.y > bottom);
+  }
+
+  /** The only exemptions for table footprints are the short steps out of chairs. */
+  private chairApproach(point: FloorPoint, exact: boolean): FloorPoint | undefined {
+    for (const table of this.navigationTables) {
+      const p = tablePos(table);
+      for (const side of [0, 1] as const) {
+        const seat = seatSpot(table, side);
+        if (exact ? Math.abs(point.x - seat.x) < 0.001 && Math.abs(point.y - seat.y) < 0.001 :
+          Math.abs(point.x - seat.x) < 2 && point.y >= p.y - 1 && point.y <= p.y + 6) return seatApproach(table, side);
+      }
+    }
+    return undefined;
+  }
+
+  /** Route one already-selected room/door segment without inventing wall shortcuts. */
+  private floorRoute(from: FloorPoint, to: FloorPoint): FloorPoint[] | null {
+    const H = sceneHeight();
+    const street = (p: FloorPoint) => Math.abs(p.x - 160) < 0.001 && p.y > H - 8 + 0.001;
+    const threshold = { x: 160, y: H - 8 };
+    if (street(from) && street(to)) return [to];
+    if (street(from)) {
+      const rest = this.floorRoute(threshold, to);
+      return rest && [threshold, ...rest];
+    }
+    if (street(to)) {
+      const rest = this.floorRoute(from, threshold);
+      return rest && [...rest, to];
+    }
+    const a = areaAtPoint(from.x, from.y), b = areaAtPoint(to.x, to.y);
+    // Guest/server routes never use the staff-only production room.
+    if (!a || !b || a === 'kitchen' || b === 'kitchen') return null;
+    if (a !== b) {
+      const connection = areaConnections(a).find((edge) => edge.to === b);
+      if (!connection) return null;
+      const origin = areaOrigin(a);
+      if (connection.direction === 'left' || connection.direction === 'right') {
+        const boundary = origin.x + (connection.direction === 'right' ? SCENE_W : 0);
+        return Math.abs(from.y - origin.y - doorwayY(a, connection.direction)) < 0.001 && Math.abs(to.y - from.y) < 0.001 &&
+          Math.abs(from.x - boundary) <= 12.001 && Math.abs(to.x - boundary) <= 12.001 ? [to] : null;
+      }
+      const boundary = origin.y + (connection.direction === 'down' ? H : 0);
+      return Math.abs(from.x - origin.x - 160) < 0.001 && Math.abs(to.x - from.x) < 0.001 &&
+        Math.abs(from.y - boundary) <= 12.001 && Math.abs(to.y - boundary) <= 12.001 ? [to] : null;
+    }
+    const origin = areaOrigin(a);
+    const north = !!adjacentArea(a, 'up');
+    const bounds = { x: origin.x + 5, y: origin.y + (north ? 0 : FLOOR_Y), w: 310, h: H - 8 - (north ? 0 : FLOOR_Y) };
+    // A reroute may happen while feet are actually inside an open doorway.
+    const inset = (point: FloorPoint): FloorPoint | null => {
+      if (point.x < bounds.x || point.x > bounds.x + bounds.w) {
+        const direction = point.x < bounds.x ? 'left' : 'right';
+        if (!adjacentArea(a, direction) || Math.abs(point.y - origin.y - doorwayY(a, direction)) > 0.001) return null;
+        return { x: origin.x + (direction === 'left' ? 12 : 308), y: point.y };
+      }
+      if (point.y > bounds.y + bounds.h) {
+        if (!adjacentArea(a, 'down') || Math.abs(point.x - origin.x - 160) > 0.001) return null;
+        return { x: point.x, y: origin.y + H - 12 };
+      }
+      return point;
+    };
+    const start = inset(from), end = inset(to);
+    if (!start || !end) return null;
+    const boxes = this.navigationObstacles.get(a) ?? [];
+    let startApproach = this.chairApproach(start, false);
+    // Resizing may consume some clearance without moving feet into furniture.
+    // Recover by walking outward to the nearest clear margin, never teleporting
+    // or granting a pass through the furniture's actual footprint.
+    if (!startApproach && !boxes.some((r) => segmentCrossesObstacle(start, start, r))) {
+      const padded = boxes.map((r) => ({ x: r.x - WALK_CLEARANCE, y: r.y - WALK_CLEARANCE, w: r.w + WALK_CLEARANCE * 2, h: r.h + WALK_CLEARANCE * 2 }));
+      if (padded.some((r) => segmentCrossesObstacle(start, start, r))) {
+        const candidates = padded.flatMap((r) => [
+          { x: r.x, y: start.y }, { x: r.x + r.w, y: start.y },
+          { x: start.x, y: r.y }, { x: start.x, y: r.y + r.h },
+        ]).filter((p) => p.x >= bounds.x && p.x <= bounds.x + bounds.w && p.y >= bounds.y && p.y <= bounds.y + bounds.h &&
+          !padded.some((r) => segmentCrossesObstacle(p, p, r)) && !boxes.some((r) => segmentCrossesObstacle(start, p, r)));
+        candidates.sort((p, q) => Math.hypot(p.x - start.x, p.y - start.y) - Math.hypot(q.x - start.x, q.y - start.y));
+        startApproach = candidates[0];
+      }
+    }
+    const path = routeFloorSegment(start, end, boxes, {
+      bounds, clearance: WALK_CLEARANCE, startApproach, endApproach: this.chairApproach(end, true),
+    });
+    return path && [start, ...path, to];
   }
 
   private find(id: number): Customer | undefined {
@@ -266,6 +473,7 @@ export class Sim {
     };
     this.customers.push(c);
     this.queue.push(c.id);
+    this.walk(c, pos);
   }
 
   private relayoutQueue(): void {
@@ -278,8 +486,22 @@ export class Sim {
 
   /** Sets someone walking through `points` in order. */
   private walk(c: Walker, ...points: { x: number; y: number }[]): void {
+    c.journey = points.map((p) => ({ ...p }));
+    c.pathBlocked = false;
+    const routed: FloorPoint[] = [];
+    let start = { x: c.x, y: c.y };
+    for (const point of points) {
+      const path = this.cooks.includes(c as Cook) ? [point] : this.floorRoute(start, point);
+      if (!path) {
+        c.pathBlocked = true;
+        c.tx = c.x; c.ty = c.y; c.via = [];
+        return;
+      }
+      routed.push(...path);
+      start = point;
+    }
     let previous = { x: c.x, y: c.y };
-    const unique = points.filter((point) => {
+    const unique = routed.filter((point) => {
       const different = point.x !== previous.x || point.y !== previous.y;
       previous = point;
       return different;
@@ -316,7 +538,8 @@ export class Sim {
 
   /** The customer pays for their order, wherever they get it. */
   private charge(state: GameState, c: Customer, events: SimEvent[]): void {
-    const bought = c.extra ? [c.order, c.extra] : [c.order];
+    const bought = (c.extra ? [c.order, c.extra] : [c.order]).filter((id) => canPrepareItem(state, id));
+    if (bought.length === 0) return;
     const amount = bought.reduce((sum, id) => sum + salePrice(state, id, c.vip), 0);
     earn(state, amount);
     state.served++;
@@ -628,7 +851,7 @@ export class Sim {
     this.updateCooks(state, dt, events);
 
     this.customers = this.customers.filter(
-      (c) => !(c.phase === 'exiting' && c.via.length === 0 && c.x === c.tx && c.y === c.ty),
+      (c) => !(c.phase === 'exiting' && resting(c)),
     );
     return events;
   }
@@ -728,16 +951,22 @@ export const seated = (c: Customer) => c.phase === 'waiting' || c.phase === 'sit
 const roomDepth = (area: AreaId | null) => (area ? roomRoute('main', area).length : 0);
 
 /** Standing still at the end of their path. */
-const resting = (w: Walker) => w.x === w.tx && w.y === w.ty && w.via.length === 0;
+const resting = (w: Walker) => !w.pathBlocked && w.x === w.tx && w.y === w.ty && w.via.length === 0;
 
 /** Moves a walker along its path; true on the step it reaches the end. */
 function step(w: Walker, dt: number, speed = WALK_SPEED): boolean {
+  if (w.pathBlocked) return false;
   let left = speed * dt;
   while (left > 0) {
     const dx = w.tx - w.x;
     const dy = w.ty - w.y;
     const dist = Math.hypot(dx, dy);
-    if (dist === 0) return false;
+    if (dist === 0) {
+      const next = w.via.shift();
+      if (!next) return false;
+      w.tx = next.x; w.ty = next.y;
+      continue;
+    }
     if (dist > left) {
       w.x += (dx / dist) * left;
       w.y += (dy / dist) * left;
@@ -746,6 +975,7 @@ function step(w: Walker, dt: number, speed = WALK_SPEED): boolean {
     }
     w.x = w.tx;
     w.y = w.ty;
+    while (w.journey?.length && Math.abs(w.journey[0].x - w.x) < 0.001 && Math.abs(w.journey[0].y - w.y) < 0.001) w.journey.shift();
     w.stride += dist;
     left = 0;
     const next = w.via.shift();

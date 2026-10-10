@@ -81,7 +81,13 @@ const WALL_FREE: readonly Rect[] = [
 /** Floor that always stays clear: the counter and the walkway from the door to it. */
 const FLOOR_RESERVED: readonly Rect[] = [
   { x: 64, y: FLOOR_Y, w: 192, h: 48 },
-  { x: 104, y: FLOOR_Y + 48, w: 112, h: MIN_SCENE_H },
+  { x: 128, y: FLOOR_Y + 48, w: 64, h: MIN_SCENE_H },
+  // Fitted service cupboards and the staff waiting bay beneath the windows.
+  { x: 8, y: FLOOR_Y, w: 56, h: 46 },
+  { x: 256, y: FLOOR_Y, w: 56, h: 46 },
+  // Built-in pots flank the street entrance.
+  { x: 122, y: MIN_SCENE_H - 15, w: 12, h: 9 },
+  { x: 186, y: MIN_SCENE_H - 15, w: 12, h: 9 },
 ];
 
 /** The space a table needs: its chairs, and room in front to walk up to them. */

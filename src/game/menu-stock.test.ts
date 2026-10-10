@@ -9,6 +9,7 @@ import { createInitialState, deserialize, serialize } from './state';
 
 function menuState(ids: ItemId[]) {
   const state = createInitialState(0);
+  state.kitchen = true;
   state.onMenu = ids;
   for (const id of ids) state.items[id] = 1;
   return state;
@@ -18,9 +19,10 @@ describe('unlocking dishes without changing an open menu', () => {
   it.each(['roll', 'americano'] as const)('keeps a live %s unlock off-menu until explicitly selected in prep', (id) => {
     const state = createInitialState(0);
     state.coins = 1e6;
+    state.kitchen = id === 'roll';
     openShop(state);
     const pantry = { ...state.pantry };
-    expect(state.kitchen).toBe(false);
+    expect(state.kitchen).toBe(id === 'roll');
     expect(buyItem(state, id, 1)).toBe(true);
     expect(state.items[id]).toBe(1);
     expect(state.onMenu).toEqual(['espresso']);
@@ -39,6 +41,7 @@ describe('unlocking dishes without changing an open menu', () => {
   it('preserves prep auto-enabling and bake plans', () => {
     const state = createInitialState(0);
     state.coins = 1e6;
+    state.kitchen = true;
     expect(buyItem(state, 'roll', 1)).toBe(true);
     expect(buyItem(state, 'americano', 1)).toBe(true);
     expect(state.onMenu).toEqual(['espresso', 'americano', 'roll']);
@@ -48,6 +51,7 @@ describe('unlocking dishes without changing an open menu', () => {
   it.each(['prep', 'open'] as const)('does not re-enable a previously unlocked, disabled dish on a %s upgrade', (phase) => {
     const state = createInitialState(0);
     state.coins = 1e6;
+    state.kitchen = true;
     buyItem(state, 'roll', 1);
     setOnMenu(state, 'roll', false);
     state.phase = phase;
@@ -73,7 +77,8 @@ describe('opening-stock projection', () => {
     expect(openShop(state)).toBe(30);
     expect(state.shelf).toEqual(projected.shelf);
     expect(state.pantry).toEqual(projected.pantry);
-    expect(state.today.baked).toEqual(projected.shelf);
+    // The report counts actual production, omitting recipes that baked nothing.
+    expect(state.today.baked).toEqual({ roll: 30 });
   });
 
   it('checks drinks after reserving the morning bake, even though drinks come first in MENU', () => {

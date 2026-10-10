@@ -1,6 +1,6 @@
 import { KITCHEN_COST, kitchenBlock, unlockKitchen } from '../game/kitchen';
 import { AREA_IDS, REGIONS, adjacentArea, isAreaOpen, isRegion, regionBlock, regionDef, unlockRegion, type AreaId, type Direction } from '../game/regions';
-import { passageSpot, sceneHeight } from '../game/layout';
+import { passageSpot, sceneHeight, kitchenHeight } from '../game/layout';
 import { formatMoney } from '../game/format';
 import type { GameState } from '../game/state';
 import { t, type MessageKey } from '../i18n';
@@ -58,7 +58,7 @@ export class RegionsUI {
   update(): void {
     const state = this.getState();
     const block = isRegion(this.area) ? regionBlock(state, this.area) : this.area === 'kitchen' ? kitchenBlock(state) : null;
-    const signature = [this.area, this.overview, state.regions.join(','), state.kitchen, sceneHeight(), block, ...AREA_IDS.map(areaName)].join('|');
+    const signature = [this.area, this.overview, state.regions.join(','), state.kitchen, kitchenHeight(), sceneHeight(), block, ...AREA_IDS.map(areaName)].join('|');
     if (signature === this.signature) return;
     this.signature = signature;
     this.edges.setAttribute('aria-label', t('area.nav'));
@@ -87,7 +87,8 @@ export class RegionsUI {
       if (!next || button.hidden) continue;
       button.classList.toggle('locked', !isAreaOpen(state, next));
       button.setAttribute('aria-label', t(`area.${isAreaOpen(state, next) ? 'go' : 'preview'}.${direction}` as MessageKey, { name: areaName(next) }));
-      const point = passageSpot(direction);
+      const point = passageSpot(direction, this.area);
+      if (this.area === 'kitchen') point.y += (sceneHeight() - kitchenHeight()) / 2;
       button.style.left = `${point.x / 320 * 100}%`;
       button.style.top = `${point.y / sceneHeight() * 100}%`;
       button.title = button.getAttribute('aria-label')!;

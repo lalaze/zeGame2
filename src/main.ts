@@ -269,7 +269,7 @@ function holdPiece(id: string, moving: number, fromBrowse: boolean): void {
     const rows = furnitureDef(id)?.surface === 'wall' ? WALL_ROWS : FLOOR_ROWS;
     outer: for (let row = 0; row < rows; row++) {
       for (let col = start; col < start + COLS; col++) {
-        if (canPlace(state, id, col, row, tables, moving)) {
+        if (canPlace(state, id, col, row, tables, moving) && sim.furnitureSpaceClear(id, col, row)) {
           at = { id, col, row };
           break outer;
         }
@@ -310,10 +310,10 @@ function arrangeTap(x: number, y: number): void {
   }
   const { col, row } = scene.cellAt(arrange.id, x, y);
   const tables = mainTableCount(state);
-  const ok =
+  const ok = sim.furnitureSpaceClear(arrange.id, col, row) && (
     arrange.moving >= 0
       ? moveFurniture(state, arrange.moving, col, row, tables)
-      : placeFurniture(state, arrange.id, col, row, tables);
+      : placeFurniture(state, arrange.id, col, row, tables));
   if (!ok) {
     // Show where it was tapped, in red, so it's clear why.
     scene.ghost = { ...scene.ghost!, col, row };

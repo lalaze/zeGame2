@@ -2,7 +2,8 @@
 // wall) is baked into one layer; the pieces standing out on the floor are painted
 // separately so cooks can walk in front of and behind them. Coordinates are local
 // to the kitchen. Equipment the menu doesn't call for yet shows as a marked-out
-// space with its hookups capped, so the plan of the room reads from day one.
+// space with its hookups capped after the kitchen is built. Before purchase the
+// room is an unfitted shell, not a working kitchen hidden under a tint.
 import type { ItemId } from '../game/data';
 import {
   BENCH,
@@ -17,7 +18,7 @@ import {
   type Equipment,
   type Station,
 } from '../game/kitchen';
-import { FLOOR_Y, SCENE_W, floorY } from '../game/layout';
+import { FLOOR_Y, SCENE_W, kitchenFloorY } from '../game/layout';
 import { mix, ramp } from './color';
 import { drawText, textWidth } from './font';
 import { OUTLINE, itemIcon } from './sprites';
@@ -95,6 +96,27 @@ function plaque(ctx: Ctx, word: string, cx: number, y: number, color: string): v
  */
 export function paintKitchen(ctx: Ctx, H: number, t: number, locked: boolean, installed: ReadonlySet<Equipment>, active: ReadonlySet<Station>): void {
   const r = painter(ctx);
+  if (locked) {
+    // An unfitted room, deliberately separate from every appliance/fixture pass.
+    // Even stale equipment data cannot make an unpurchased kitchen look usable.
+    r(0, 0, SCENE_W, FLOOR_Y, '#c4b7a5');
+    r(0, FLOOR_Y, SCENE_W, H - FLOOR_Y, '#a49887');
+    r(0, 0, SCENE_W, 6, '#746959');
+    r(0, FLOOR_Y - 3, SCENE_W, 3, '#847666');
+    for (let y = FLOOR_Y + 16; y < H; y += 20) r(0, y, SCENE_W, 1, '#998c7b');
+    // A closed construction notice is legible in room and whole-building views.
+    r(111, 25, 98, 30, OUTLINE);
+    r(113, 27, 94, 26, '#e7d9ba');
+    drawText(ctx, 'FUTURE KITCHEN', (SCENE_W - textWidth('FUTURE KITCHEN')) / 2, 32, '#685b49');
+    drawText(ctx, 'CLOSED', (SCENE_W - textWidth('CLOSED')) / 2, 43, '#8b563b');
+    // Packed building materials, not ingredient crates or installed equipment.
+    r(30, H - 30, 48, 14, '#736552');
+    r(32, H - 32, 44, 14, '#bca37b');
+    r(32, H - 28, 44, 1, '#dcc49b');
+    r(44, H - 32, 3, 14, '#8e795e');
+    r(63, H - 32, 3, 14, '#8e795e');
+    return;
+  }
   // White subway tile to the ceiling, with a steel skirting.
   r(0, 0, SCENE_W, FLOOR_Y, TILE);
   for (let y = 8; y < FLOOR_Y; y += 5) {
@@ -126,7 +148,7 @@ export function paintKitchen(ctx: Ctx, H: number, t: number, locked: boolean, in
   }
   ctx.restore();
   // A drain in the middle of the floor, and rubber mats where the cooks stand all day.
-  const drain = { x: 150, y: floorY(152) };
+  const drain = { x: 150, y: kitchenFloorY(152) };
   r(drain.x - 6, drain.y - 3, 12, 6, OUTLINE);
   r(drain.x - 5, drain.y - 2, 10, 4, DARK_STEEL.base);
   for (let i = -4; i < 5; i += 2) r(drain.x + i, drain.y - 2, 1, 4, OUTLINE);
@@ -174,16 +196,6 @@ export function paintKitchen(ctx: Ctx, H: number, t: number, locked: boolean, in
     for (let ly = 33; ly < 39; ly += 2) r(tx + 2, ly, 4, 1, '#9aa1aa');
   }
 
-  if (locked) {
-    // Still being fitted out: the floor plan is chalked on the floor, under dust sheets.
-    ctx.save();
-    ctx.globalAlpha = 0.25;
-    r(0, 0, SCENE_W, H, '#584b38');
-    ctx.restore();
-    reserved(ctx, BENCH.x, floorY(BENCH.front) - BENCH.depth, BENCH.w, BENCH.depth);
-    reserved(ctx, RACK.x, floorY(RACK.foot) - 8, RACK.w, 8);
-    reserved(ctx, DISH_PIT.x, floorY(DISH_PIT.foot) - 10, DISH_PIT.w, 10);
-  }
 }
 
 /** An anti-fatigue mat, black rubber with drainage holes. */

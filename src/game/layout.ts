@@ -1,9 +1,9 @@
 // Scene geometry in logical pixels (16px tiles, Stardew-style 3/4 view).
 // Characters are positioned by their feet.
 //
-// Floor plan: the counter stands in the middle of the back wall, with a dining
-// nook on each side, each under a window, and two more tables by the front door.
-// The kitchen door is in the left wall.
+// Floor plan: production runs along the back wall. A cross-aisle connects the
+// dining rooms; two compact dining bays flank the entrance forecourt.
+// The kitchen has a separate staff connection behind the counter in the left wall.
 // Customers come in through the door in the middle of the bottom edge, line up
 // in front of the counter, then sit down or head back out the way they came.
 import { AREA_GRID, AREA_IDS, REGIONS, areaConnections, regionOffset, type AreaId, type Direction } from './regions';
@@ -14,7 +14,7 @@ export const SCENE_W = 320;
  * The café is always 320 wide; extra height becomes extra floor so the room fills
  * tall screens. The tables and the queue spread out over it (see `spread`).
  */
-export const MIN_SCENE_H = 192;
+export const MIN_SCENE_H = 240;
 export const MAX_SCENE_H = 360;
 let sceneH = MIN_SCENE_H;
 export const sceneHeight = () => sceneH;
@@ -22,12 +22,28 @@ export function setSceneHeight(h: number): void {
   sceneH = Math.max(MIN_SCENE_H, Math.min(MAX_SCENE_H, Math.round(h)));
 }
 
+/** Kitchen expansion follows the existing cook upgrade, independently of viewport height. */
+const KITCHEN_HEIGHTS = [184, 216, 240] as const;
+let kitchenStage = 0;
+export const kitchenLevel = () => kitchenStage;
+export function setKitchenLevel(level: number): void {
+  kitchenStage = Number.isFinite(level) ? Math.max(0, Math.min(2, Math.floor(level))) : 0;
+}
+export const kitchenHeight = () => KITCHEN_HEIGHTS[kitchenStage];
+/** Equipment anchors in the compact kitchen. Storage and washing move forward
+ * when expanded; the production aisle, prep bench and hot line stay in place. */
+export function kitchenFloorY(anchorY: number, level = kitchenStage): number {
+  const shift = (2 - Math.max(0, Math.min(2, level))) * 8;
+  return anchorY - shift * Math.max(0, Math.min(1, (anchorY - 134) / 34));
+}
+
 /** The back wall runs from the ceiling down to FLOOR_Y. */
 export const FLOOR_Y = 80;
 /**
  * The service counter; a glass case in its front shows today's bakes. It stands
  * forward of the back bar, leaving an aisle inside the bar for the baristas to
- * work in, and a short return at its left end closes the bar off from the room.
+ * work in. The left return stops at the countertop, leaving a staff opening
+ * aligned with the kitchen door behind the counter.
  */
 export const COUNTER = { x: 64, w: 170, top: 96, front: 107, bottom: 127 };
 export const COUNTER_RETURN = { x: 64, w: 8 };
@@ -39,6 +55,11 @@ export const BACK_BAR = { x: 72, w: 182, top: 57, front: 63 };
 /** The floor inside the bar, between the back bar and the counter. */
 export const BAR_AISLE = { x: COUNTER_RETURN.x + COUNTER_RETURN.w, w: COUNTER_GATE.x + COUNTER_GATE.w - COUNTER_RETURN.x - COUNTER_RETURN.w, top: FLOOR_Y, bottom: COUNTER.top };
 
+/** Fitted crockery cabinets below the windows (no gameplay capacity/comfort). */
+export const MAIN_CUPBOARDS = [
+  { x: 266, y: 80, w: 40, h: 28 },
+] as const;
+
 /** The front door: an opening in the bottom wall, centered. */
 export const DOOR_W = 32;
 export const DOOR_X = SCENE_W / 2 - DOOR_W / 2;
@@ -47,20 +68,27 @@ export const doorSpot = () => ({ x: SCENE_W / 2, y: sceneH + 12 });
 export const areaOrigin = (area: AreaId, height = sceneH) => ({
   x: AREA_GRID[area].col * SCENE_W, y: (AREA_GRID[area].row - 1) * height,
 });
+/** Actual room footprint, including the shorter kitchen and the void below it. */
+export const areaBounds = (area: AreaId, height = sceneH) => ({
+  ...areaOrigin(area, height), w: SCENE_W, h: area === 'kitchen' ? kitchenHeight() : height,
+});
 export function areaAtPoint(x: number, y: number, height = sceneH): AreaId | undefined {
   return AREA_IDS.find((area) => {
-    const o = areaOrigin(area, height);
-    return x >= o.x && x < o.x + SCENE_W && y >= o.y && y < o.y + height;
+    const bounds = areaBounds(area, height);
+    return x >= bounds.x && x < bounds.x + bounds.w && y >= bounds.y && y < bounds.y + bounds.h;
   });
 }
 
 /** A doorway's position in its room. North doors cut through the back wall. */
-export function passageSpot(direction: Direction): { x: number; y: number } {
+export function passageSpot(direction: Direction, area: AreaId = 'main'): { x: number; y: number } {
   if (direction === 'up') return { x: 160, y: 48 };
-  if (direction === 'down') return { x: 160, y: sceneH - 5 };
-  return { x: direction === 'left' ? 5 : SCENE_W - 5, y: floorY(138) };
+  if (direction === 'down') return { x: 160, y: areaBounds(area).h - 5 };
+  return { x: direction === 'left' ? 5 : SCENE_W - 5, y: doorwayY(area, direction) };
 }
 export const passageY = () => floorY(138);
+/** The service door is aligned with the bar aisle, separate from guest circulation. */
+export const doorwayY = (area: AreaId, direction: Direction) =>
+  (area === 'main' && direction === 'left') || (area === 'kitchen' && direction === 'right') ? 88 : passageY();
 
 /** Walk through the same shared doors that are drawn and used for navigation. */
 export function roomRoute(from: AreaId, to: AreaId): { x: number; y: number }[] {
@@ -79,14 +107,15 @@ export function roomRoute(from: AreaId, to: AreaId): { x: number; y: number }[] 
   return (path ?? []).flatMap(({ from: a, to: b, direction }) => {
     const source = areaOrigin(a);
     const dest = areaOrigin(b);
-    const y = passageY();
+    const y = doorwayY(a, direction);
     if (direction === 'left' || direction === 'right') {
       const boundary = direction === 'right' ? source.x + SCENE_W : source.x;
       const sign = direction === 'right' ? 1 : -1;
-      return [{ x: source.x + 160, y: source.y + y },
+      const service = a === 'kitchen' || b === 'kitchen';
+      return [{ x: source.x + (service && a === 'main' ? 202 : 160), y: source.y + y },
         { x: boundary - sign * 12, y: source.y + y },
         { x: boundary + sign * 12, y: source.y + y },
-        { x: dest.x + 160, y: dest.y + y }];
+        { x: dest.x + (service && b === 'main' ? 202 : 160), y: dest.y + y }];
     }
     const boundary = direction === 'up' ? source.y : source.y + sceneH;
     const north = direction === 'up' ? dest : source;
@@ -118,7 +147,7 @@ export const PASS_BELL = { x: PASS.x + PASS.w - 6, y: PASS.top - 1 };
 export const passSpot = () => ({ x: PASS.x + PASS.w / 2 + 6, y: COUNTER.bottom + 8 });
 /** Servers wait beside the pass between deliveries. */
 export const MAX_SERVERS = 3;
-export const serverHome = (i: number) => ({ x: 264 + i * 13, y: 94 + (i % 2) * 6 });
+export const serverHome = (i: number) => ({ x: 264 + i * 17, y: 119 });
 
 export const MAX_BARISTAS = 4;
 /** Baristas stand close enough that the fourth leaves room for the pass. */
@@ -126,10 +155,12 @@ export const baristaSpot = (i: number) => ({ x: 116 + i * 25, y: 100 });
 /** Where a barista works at the back bar, making an order, with their back to the room. */
 export const baristaWorkSpot = (i: number) => ({ x: baristaSpot(i).x, y: 87 });
 export const serviceSpot = (i: number) => ({ x: 116 + i * 25, y: 145 });
-/** Moves a y position down by a share of the floor added beyond the minimum height. */
-const spread = (y: number, share: number) => y + Math.round((sceneH - MIN_SCENE_H) * share);
-/** The line runs across the runner, between the two lobby tables. */
-export const queueSpot = (i: number) => ({ x: 120 + i * 16, y: spread(165, 0.3) });
+/** Six waiting positions form a compact horseshoe in the entrance forecourt.
+ * The centre stays open for arrivals and departures; the head faces the till. */
+export const queueSpot = (i: number) => ({
+  x: i < 3 ? 144 : 176,
+  y: floorY(158 + (i < 3 ? i : 5 - i) * 21),
+});
 
 /**
  * Floor positions are designed at the minimum height. On taller screens the floor
@@ -139,14 +170,16 @@ export const queueSpot = (i: number) => ({ x: 120 + i * 16, y: spread(165, 0.3) 
  */
 const FLOOR_SHARES: readonly [number, number][] = [
   [FLOOR_Y, 0],
-  [112, 0.15],
-  [146, 0.45],
-  [180, 0.8],
+  [128, 0.05],
+  [150, 0.15],
+  [174, 0.35],
+  [218, 0.85],
   [MIN_SCENE_H - 7, 1],
 ];
 /** Keep a walking customer in the same part of their room when the canvas resizes. */
 export function resizeRoomPoint(point: { x: number; y: number }, fromHeight: number): { x: number; y: number } {
   const area = areaAtPoint(point.x, point.y, fromHeight) ?? 'main';
+  if (area === 'kitchen') return { ...point };
   const oldOrigin = areaOrigin(area, fromHeight);
   const newOrigin = areaOrigin(area);
   const localY = point.y - oldOrigin.y;
@@ -187,24 +220,16 @@ export function floorYMin(y: number): number {
   return best;
 }
 
-/** Three rows of tables, at their minimum-height positions. */
+/** Extension rooms retain their original stable table arrangement. */
 const ROW_Y_MIN = [112, 146, 180];
 export const tableRowY = (row: number) => floorY(ROW_Y_MIN[row]);
-const NOOK_X = [36, 284];
-const LOBBY_X = [88, 234];
-/**
- * Every table spot, in the order they're built: down each nook a row at a time,
- * alternating left and right, then one on each side of the front door.
- */
-const TABLE_SPOTS: readonly { x: number; row: number }[] = [
-  { x: NOOK_X[0], row: 0 },
-  { x: NOOK_X[1], row: 0 },
-  { x: NOOK_X[0], row: 1 },
-  { x: NOOK_X[1], row: 1 },
-  { x: NOOK_X[0], row: 2 },
-  { x: NOOK_X[1], row: 2 },
-  { x: LOBBY_X[0], row: 2 },
-  { x: LOBBY_X[1], row: 2 },
+/** Main dining bays fill from the two intimate starter tables outward. Stable
+ * indices preserve reservations, table upgrades and save capacity. */
+const TABLE_SPOTS: readonly { x: number; y: number }[] = [
+  { x: 100, y: 174 }, { x: 220, y: 174 },
+  { x: 40, y: 174 }, { x: 280, y: 174 },
+  { x: 100, y: 218 }, { x: 220, y: 218 },
+  { x: 40, y: 218 }, { x: 280, y: 218 },
 ];
 export const MAX_TABLES = TABLE_SPOTS.length;
 export const TOTAL_TABLE_SPOTS = MAX_TABLES + REGIONS.reduce((n, r) => n + r.tables, 0);
@@ -223,7 +248,7 @@ export function tableSpotMin(i: number): { x: number; y: number } {
     return { x: regionOffset(region.id) + (index % 2 === 0 ? 64 : 256), y: ROW_Y_MIN[index % 4 < 2 ? 0 : 2] };
   }
   const spot = TABLE_SPOTS[i];
-  return { x: spot.x, y: ROW_Y_MIN[spot.row] };
+  return { ...spot };
 }
 export const SEAT_OFFSET = 15;
 /** Seat 0 is left of the table (facing right), seat 1 is right of it. */
@@ -234,7 +259,7 @@ export const seatSpot = (table: number, side: 0 | 1) => ({
 /** The spot just in front of a seat, so people walk around the table rather than through it. */
 export const seatApproach = (table: number, side: 0 | 1) => {
   const s = seatSpot(table, side);
-  return { x: s.x, y: Math.min(s.y + 12, areaOrigin(tableArea(table)).y + sceneH - 12) };
+  return { x: s.x, y: Math.min(s.y + 12, areaOrigin(tableArea(table)).y + sceneH - 9) };
 };
 
 /** The first window has the cat, the neon sign and the OPEN sign. */

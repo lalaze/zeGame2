@@ -1,8 +1,10 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { CELL, WALL_TOP, furnitureDef } from '../game/furniture';
-import { CAT_SPOT, FLOOR_Y, areaOrigin } from '../game/layout';
+import { CAT_SPOT, FLOOR_Y, MIN_SCENE_H, MAX_SCENE_H, areaOrigin, areaBounds, kitchenHeight, setKitchenLevel, setSceneHeight } from '../game/layout';
 import { regionOffset } from '../game/regions';
 import { CafeView, cellRect } from './cafe-view';
+
+afterEach(() => { setKitchenLevel(0); setSceneHeight(MIN_SCENE_H); });
 
 describe('café view', () => {
   it('queues effects and sales for the renderer', () => {
@@ -57,5 +59,25 @@ describe('café view', () => {
     view.moveToArea('greenhouse', true);
     expect(view.overview).toBe(false);
     expect({ x: view.viewX, y: view.viewY }).toEqual(areaOrigin('greenhouse'));
+  });
+});
+
+
+describe('compact kitchen camera', () => {
+  it('centres the actual kitchen at every stage and screen height, including map return', () => {
+    for (const height of [MIN_SCENE_H, MAX_SCENE_H]) for (let stage = 0; stage < 3; stage++) {
+      setSceneHeight(height);
+      setKitchenLevel(stage);
+      const view = new CafeView();
+      view.moveToArea('kitchen', true);
+      const room = areaBounds('kitchen');
+      expect(view.viewX).toBe(room.x);
+      expect(view.viewY + view.viewHeight / 2).toBe(room.y + kitchenHeight() / 2);
+      view.setOverview(true, true);
+      view.setOverview(false, true);
+      expect(view.viewY + view.viewHeight / 2).toBe(room.y + room.h / 2);
+      view.moveToArea('main', true);
+      expect(view.viewY).toBe(0);
+    }
   });
 });

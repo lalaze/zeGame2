@@ -12,19 +12,23 @@ import {
   DOOR_W,
   DOOR_X,
   FLOOR_Y,
+  floorY,
+  queueSpot,
   PASS,
   PASS_COLUMNS,
   PASS_SLOT_W,
   PASTRY_CASE,
+  MAIN_CUPBOARDS,
   SCENE_W,
   WINDOWS,
   baristaSpot,
+  doorwayY,
   passageY,
 } from '../game/layout';
 import type { GameState } from '../game/state';
 import { paintPassageFloor } from './passages';
 import { mix, ramp } from './color';
-import { counterColors, grain, paintCounter, paintFloor, paintRug, paintRunner, paintWainscot, paintWall, shadow, wainscotColor } from './decor-art';
+import { counterColors, grain, paintCounter, paintFloor, paintRug, paintRunner, paintRunnerJoin, paintWainscot, paintWall, wainscotColor } from './decor-art';
 import { drawText, textWidth } from './font';
 import { beam, type Lighting, type Sun } from './lighting';
 import { OUTLINE, itemIcon, pixelSprite } from './sprites';
@@ -465,12 +469,14 @@ export class RoomPainter {
       this.r(0, FLOOR_Y + i, SCENE_W, 1, '#2a1410');
     }
     this.ctx.restore();
-    // The path to the next room runs under the rug rather than across it.
+    this.drawDiningBays();
+    // The guest cross-aisle connects the entry and reading room.
     paintPassageFloor(this.ctx, 'main');
     // The rug lies in the open floor between the counter and the front door;
     // without one there's a plain runner leading in from the door.
     if (rug === 'rug_none') this.drawRunner(H);
-    else paintRug(this.ctx, rug, 110, COUNTER.bottom + 6, 100, H - 18 - COUNTER.bottom);
+    else paintRug(this.ctx, rug, 133, floorY(150), 54, H - 20 - floorY(150));
+    this.drawQueueMarks();
     this.drawDoormat(H);
     const ctx = this.ctx;
     // Sunlight falling through the window, and in through the open front door.
@@ -479,7 +485,7 @@ export class RoomPainter {
     paintSunbeam(ctx, light.sun, DOOR_X, DOOR_X + DOOR_W, H, Math.round(lean / 3), -Math.round(length * 0.9));
     // Kitchen light spilling in through the door in the left wall while it's open.
     if (this.kitchenDoor > 0.05) {
-      const y = passageY();
+      const y = doorwayY('main', 'left');
       ctx.save();
       ctx.globalAlpha = 0.18 * this.kitchenDoor;
       ctx.fillStyle = '#ffcf8a';
@@ -492,6 +498,8 @@ export class RoomPainter {
       ctx.restore();
     }
     this.drawBarMat();
+    // The staff opening shares the room's floor; its short threshold is painted
+    // with the doorway frame, rather than a separate arrow-marked path.
     // Shadow cast by the counter, and the room darkening toward its edges.
     ctx.save();
     ctx.globalAlpha = 0.2;
@@ -504,6 +512,69 @@ export class RoomPainter {
       this.r(SCENE_W - 3 * (4 - i), FLOOR_Y, 3 * (4 - i), H - FLOOR_Y, '#2a1410');
     }
     ctx.restore();
+  }
+
+  /** Shallow inlaid borders define two dining bays without granting paid rugs. */
+  private drawDiningBays(): void {
+    const top = floorY(151), bottom = floorY(230);
+    const ctx = this.ctx;
+    ctx.save();
+    for (const x of [13, 193]) {
+      ctx.globalAlpha = 0.15;
+      this.r(x, top, 114, bottom - top, '#9b6747');
+      ctx.globalAlpha = 0.35;
+      this.r(x, top, 114, 1, '#a97954');
+      this.r(x, bottom - 1, 114, 1, '#a97954');
+      this.r(x, top, 1, bottom - top, '#a97954');
+      this.r(x + 113, top, 1, bottom - top, '#a97954');
+      ctx.globalAlpha = 0.45;
+      for (const cx of [x + 3, x + 108]) for (const cy of [top + 3, bottom - 6]) {
+        this.r(cx, cy, 3, 3, '#f2d6aa');
+        this.r(cx + 1, cy + 1, 1, 1, '#9b6747');
+      }
+    }
+    ctx.restore();
+  }
+
+  /** Small brass queue dots leave the shared cross-aisle and central exit clear. */
+  private drawQueueMarks(): void {
+    for (let i = 0; i < 6; i++) {
+      const { x, y } = queueSpot(i);
+      this.r(x - 2, y - 1, 5, 2, '#b79b70');
+      this.r(x - 1, y - 1, 3, 1, '#ecd8ac');
+    }
+  }
+
+  /** Fitted crockery stations belong to the architecture, not purchased decor. */
+  drawServiceCupboards(counter: string): void {
+    const colors = counterColors(counter);
+    const wood = ramp(colors.front);
+    for (const { x } of MAIN_CUPBOARDS) {
+      this.r(x - 1, 80, 42, 27, OUTLINE);
+      this.r(x, 81, 40, 23, wood.base);
+      this.r(x + 2, 85, 17, 16, wood.lo);
+      this.r(x + 21, 85, 17, 16, wood.lo);
+      this.r(x + 3, 86, 15, 1, wood.hi);
+      this.r(x + 22, 86, 15, 1, wood.hi);
+      this.r(x + 15, 91, 2, 2, '#e7c477');
+      this.r(x + 23, 91, 2, 2, '#e7c477');
+      this.r(x - 2, 78, 44, 5, OUTLINE);
+      this.r(x - 1, 78, 42, 3, '#d8c5a8');
+      this.r(x - 1, 78, 42, 1, '#f4e3c8');
+      this.r(x + 2, 105, 3, 3, wood.dark);
+      this.r(x + 35, 105, 3, 3, wood.dark);
+    }
+    // Right: water carafe, glasses and a small tray ready for table service.
+    this.r(273, 64, 7, 14, '#86a9af');
+    this.r(274, 65, 4, 11, '#d2e7dc');
+    this.r(274, 71, 4, 5, '#90bcc6');
+    this.r(275, 61, 3, 4, '#b9d1c9');
+    this.r(281, 67, 2, 7, '#a0c7ce');
+    this.r(287, 76, 15, 2, '#947b55');
+    for (const x of [288, 296]) {
+      this.r(x, 70, 5, 6, '#d7e9df');
+      this.r(x + 1, 71, 2, 3, '#9fc7c9');
+    }
   }
 
   /** The rubber mat the baristas stand on inside the bar, between the back bar and the counter. */
@@ -534,17 +605,13 @@ export class RoomPainter {
 
   /** A woven runner from the front door up to the counter. */
   private drawRunner(H: number): void {
-    const w = 52;
+    const w = 30;
     const x = SCENE_W / 2 - w / 2;
-    const y = COUNTER.bottom + 6;
+    const y = passageY() - 7;
     const h = H - FRONT_WALL - 9 - y;
-    // Jute, close to the floor's tone so it marks the aisle without shouting.
+    // One T-shaped jute runner: no separate head fringe or exposed floor gap.
     paintRunner(this.ctx, x, y, w, h, 'v');
-    // Finished head end: a trim across the top and a fringe.
-    const field = ramp('#d6b382');
-    this.r(x, y, w, 1, field.lo);
-    this.r(x + 3, y + 3, w - 6, 1, '#9a6a45');
-    for (let fx = x + 2; fx < x + w - 2; fx += 3) this.r(fx, y - 2, 1, 2, field.hi);
+    paintRunnerJoin(this.ctx, x, y, w, 14);
   }
 
   /**
@@ -605,6 +672,10 @@ export class RoomPainter {
     this.drawPastryCase(state);
     this.drawGate(counter);
     this.drawPass(counter);
+    // Distinct customer-facing order and pickup plaques.
+    this.r(108, 112, 31, 10, OUTLINE);
+    this.r(109, 113, 29, 8, '#466958');
+    drawText(this.ctx, 'ORDER', 113, 115, '#f8e8bc');
 
     // Tip jar, in the gap between the first two baristas.
     const coins = Math.min(4, 1 + Math.floor(state.today.served / 15));
@@ -641,7 +712,8 @@ export class RoomPainter {
   private drawReturn(counter: string): void {
     const { x, w } = COUNTER_RETURN;
     const top = BACK_BAR.top;
-    const h = COUNTER.top - top + 2;
+    // The lower return is a staff opening aligned with the kitchen door.
+    const h = FLOOR_Y - top - 2;
     const colors = counterColors(counter);
     const slab = ramp(colors.top);
     this.r(x - 1, top - 1, w + 2, h + 1, OUTLINE);
@@ -691,7 +763,7 @@ export class RoomPainter {
     this.r(x - 2, top - 1, w + 4, 8, OUTLINE);
     this.r(x - 1, top, w + 2, 6, wood.lo);
     this.r(x - 1, top, w + 2, 1, wood.hi);
-    drawText(this.ctx, 'PASS', x + 6, top + 1, '#f5e6c4');
+    drawText(this.ctx, 'PICKUP', x + 7, top + 1, '#f5e6c4');
     for (const lx of [inner + 4, inner + innerW - 11]) {
       this.r(lx, top + 7, 7, 2, '#7a5a2a');
       this.r(lx + 1, top + 7, 5, 1, '#a67c3a');
@@ -783,26 +855,21 @@ export class RoomPainter {
 
   /** A table spot the shop hasn't expanded into yet: crates and a barrier, standing at (x, y). */
   drawUnbuilt(x: number, y: number): void {
-    const crate = ramp('#a8763f');
-    shadow(this.ctx, x, y, 34, 0.18);
-    const box = (bx: number, by: number, w: number, h: number) => {
-      this.r(bx - 1, by - 1, w + 2, h + 2, OUTLINE);
-      this.r(bx, by, w, h, crate.base);
-      this.r(bx, by, w, 1, crate.hi);
-      this.r(bx, by + h - 1, w, 1, crate.lo);
-      this.r(bx, by + Math.floor(h / 2), w, 1, crate.lo);
-      this.r(bx + 1, by + 1, 1, h - 2, crate.lo);
-      this.r(bx + w - 2, by + 1, 1, h - 2, crate.lo);
-    };
-    box(x - 15, y - 12, 14, 11);
-    box(x + 1, y - 9, 11, 8);
-    box(x - 11, y - 21, 11, 8);
-    // Striped barrier on two legs.
-    const bx = x - 4;
-    const by = y - 16;
-    this.r(bx + 2, by + 3, 2, 12, OUTLINE);
-    this.r(bx + 18, by + 3, 2, 12, OUTLINE);
-    this.r(bx - 1, by - 1, 24, 5, OUTLINE);
-    for (let i = 0; i < 22; i++) this.r(bx + i, by, 1, 3, Math.floor((i + 1) / 3) % 2 ? '#f2b33d' : '#fdf6ec');
+    // One discreet planning marker, rather than crates blocking the cross-aisle.
+    this.ctx.save();
+    this.ctx.globalAlpha = 0.6;
+    for (const dx of [-22, 16]) {
+      this.r(x + dx, y - 26, 6, 1, '#b3915e');
+      this.r(x + dx, y + 2, 6, 1, '#b3915e');
+    }
+    for (const dx of [-22, 21]) {
+      this.r(x + dx, y - 26, 1, 5, '#b3915e');
+      this.r(x + dx, y - 2, 1, 5, '#b3915e');
+    }
+    this.ctx.restore();
+    this.r(x - 10, y - 16, 21, 12, OUTLINE);
+    this.r(x - 9, y - 15, 19, 10, '#b99061');
+    this.r(x - 8, y - 14, 17, 1, '#dec395');
+    drawText(this.ctx, '+', x - 1, y - 12, '#fff0cf');
   }
 }

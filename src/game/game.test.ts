@@ -89,7 +89,10 @@ describe('economy', () => {
     expect(buyItem(s, 'americano', 1)).toBe(true);
     expect(buyItem(s, 'latte', 1)).toBe(true);
     expect(isItemAvailable(s, 'cappuccino')).toBe(true);
-    // Every category starts unlockable on its own and unlocks in order.
+    // Food categories require a kitchen, then unlock independently in order.
+    expect(isItemAvailable(s, 'roll')).toBe(false);
+    expect(isItemAvailable(s, 'donut')).toBe(false);
+    s.kitchen = true;
     expect(isItemAvailable(s, 'roll')).toBe(true);
     expect(isItemAvailable(s, 'blacktea')).toBe(true);
     expect(isItemAvailable(s, 'donut')).toBe(true);
@@ -557,6 +560,7 @@ describe('business day', () => {
   it('only sells dishes on today\'s menu and checks before opening', () => {
     const s = createInitialState(0);
     s.coins = 1000;
+    s.kitchen = true;
     buyItem(s, 'roll', 1);
     expect(s.onMenu).toEqual(['espresso', 'roll']);
     expect(checkOpen(s)).toEqual({ ok: false, reason: 'lowStock', items: ['roll'] });
@@ -655,6 +659,7 @@ describe('menu', () => {
 
   it('serves combos and records both items', () => {
     const s = createInitialState(0);
+    s.kitchen = true;
     for (const k of Object.keys(s.pantry) as (keyof GameState['pantry'])[]) s.pantry[k] = 1e6;
     s.items.roll = 1;
     setOnMenu(s, 'roll', true);
@@ -671,6 +676,7 @@ describe('menu', () => {
 
   it('a wider menu draws more customers', () => {
     const s = createInitialState(0);
+    s.kitchen = true;
     const before = arrivalRate(s);
     s.items.roll = 1;
     s.items.donut = 1;
@@ -692,6 +698,7 @@ describe('morning bake', () => {
   function bakeryState(rollPlan: number): GameState {
     const s = createInitialState(0);
     s.coins = 1000;
+    s.kitchen = true;
     buyItem(s, 'roll', 1);
     s.pantry.flour = 100;
     s.pantry.butter = 100;
@@ -709,6 +716,7 @@ describe('morning bake', () => {
   it('suggests a bake amount when a bread goes on the menu', () => {
     const s = createInitialState(0);
     s.coins = 1000;
+    s.kitchen = true;
     buyItem(s, 'roll', 1);
     expect(s.bakePlan.roll).toBe(suggestedBake(s, 'roll'));
     expect(s.bakePlan.roll! % 5).toBe(0);
@@ -723,12 +731,24 @@ describe('morning bake', () => {
     expect(s.pantry.flour).toBe(70);
     expect(s.pantry.butter).toBe(70);
     expect(s.today.ingredientCost).toBe(30 * servingCost('roll'));
+    // Exhaust butter so cooks cannot replenish this opening batch.
+    s.pantry.butter = 0;
     // Selling a roll takes it off the shelf; no more flour is used.
-    const report = runDay(s, 21);
+    const sim = new Sim(seeded(21));
+    // Count portions removed from the shelf, including any customer still waiting
+    // when closing cancels their order. Table routes must not change this invariant.
+    let removed = 0;
+    for (let t = 0; t < DAY_SECONDS; t += 0.05) {
+      const before = s.shelf.roll ?? 0;
+      sim.update(s, 0.05);
+      removed += before - (s.shelf.roll ?? 0);
+    }
+    const report = sim.closeShop(s)!;
     expect(s.pantry.flour).toBe(70);
     const sold = report.sales.roll ?? 0;
     expect(sold).toBeGreaterThan(0);
-    expect(sold + (report.stale.roll ?? 0)).toBe(30);
+    expect(sold).toBeLessThanOrEqual(removed);
+    expect(removed + (report.stale.roll ?? 0)).toBe(30);
     expect(s.shelf).toEqual({});
   });
 
@@ -742,6 +762,8 @@ describe('morning bake', () => {
   it('a small bake sells out on the shelf', () => {
     const s = bakeryState(5);
     openShop(s);
+    // Keep this a fixed batch: no ingredients remain for live replenishment.
+    s.pantry.flour = s.pantry.butter = 0;
     const report = runDay(s, 23);
     expect(report.sales.roll).toBe(5);
     expect(report.shelfSoldOut).toEqual(['roll']);
@@ -870,9 +892,9 @@ describe('furniture', () => {
   it('sends pieces to storage when a new table needs their spot', () => {
     const s = rich();
     buyFurniture(s, 'plant_fern');
-    placeFurniture(s, 'plant_fern', 34, 10, 2);
+    placeFurniture(s, 'plant_fern', 26, 16, 2);
     expect(evictBlocked(s, 3)).toBe(0);
-    // With five tables built, the sixth spot (front of the right nook) is reserved.
+    // With five tables built, the sixth spot (front of the right bay) is reserved.
     expect(evictBlocked(s, 5)).toBe(1);
     expect(s.decor.stored.plant_fern).toBe(1);
   });

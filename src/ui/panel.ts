@@ -36,6 +36,8 @@ import {
   varietyBonus,
   isBakery,
   isItemAvailable,
+  canPrepareItem,
+  previousInCategory,
   itemPrice,
   menuItems,
   nextMilestone,
@@ -120,7 +122,16 @@ function upgradeEffect(state: GameState, id: UpgradeId): string {
 export const itemName = (id: ItemId) => t(`item.${id}` as MessageKey);
 export const ingredientName = (id: IngredientId) => t(`ing.${id}` as MessageKey);
 const upgradeName = (id: UpgradeId) => t(`upgrade.${id}.name` as MessageKey);
-const upgradeDesc = (id: UpgradeId) => t(`upgrade.${id}.desc` as MessageKey);
+const upgradeDesc = (id: UpgradeId) => {
+  if (id === 'cook') {
+    const def = upgradeDef(id);
+    return t('upgrade.cook.desc', {
+      first: formatMoney(def.baseCost),
+      second: formatMoney(def.baseCost * def.growth),
+    });
+  }
+  return t(`upgrade.${id}.desc` as MessageKey);
+};
 export const decorName = (id: string) => t(`decor.${id}` as MessageKey);
 
 export class Panel {
@@ -299,7 +310,7 @@ export class Panel {
       keys.push(`cat:${cat}`);
       // Each category: what's unlocked, the one you can unlock next, then a mystery row.
       for (const m of MENU.filter((d) => d.category === cat)) {
-        if (this.state.items[m.id] > 0 || isItemAvailable(this.state, m.id)) keys.push(`item:${m.id}`);
+        if (this.state.items[m.id] > 0 || isItemAvailable(this.state, m.id) || !canPrepareItem(this.state, m.id) && (!previousInCategory(m.id) || this.state.items[previousInCategory(m.id)!.id] > 0)) keys.push(`item:${m.id}`);
         else {
           keys.push(`teaser:${m.id}`);
           break;
@@ -592,19 +603,22 @@ export class Panel {
         refs.btnCost.textContent = formatMoney(q.cost);
         refs.btn.disabled = !q.affordable;
         refs.el.classList.toggle('new', level === 0);
-        const on = s.onMenu.includes(def.id);
+        const eligible = canPrepareItem(s, def.id);
+        const on = eligible && s.onMenu.includes(def.id);
+        if (!eligible) refs.sub.textContent = t('menu.requiresKitchen');
         refs.el.classList.toggle('off-menu', level > 0 && !on);
         if (refs.toggle) {
           refs.toggle.hidden = level === 0;
           refs.toggle.textContent = on ? t('menu.on') : t('menu.off');
           refs.toggle.classList.toggle('active', on);
-          refs.toggle.disabled = !prep;
-          refs.toggle.title = prep ? '' : t('menu.lockedOpen');
+          refs.toggle.disabled = !prep || !eligible;
+          refs.toggle.title = !eligible ? t('menu.requiresKitchen') : prep ? '' : t('menu.lockedOpen');
         }
         const bakery = isBakery(def.id);
         if (refs.recipe) {
+          refs.recipe.hidden = !eligible;
           const left = servingsLeft(s, def.id);
-          refs.recipe.textContent = t(bakery ? 'bake.canBake' : 'menu.left', { n: formatNumber(left) });
+          refs.recipe.textContent = eligible ? t(bakery ? 'bake.canBake' : 'menu.left', { n: formatNumber(left) }) : t('menu.requiresKitchen');
           refs.recipe.classList.toggle('empty', left < 1);
         }
         if (refs.bake) {
@@ -633,7 +647,9 @@ export class Panel {
         const level = s.upgrades[def.id];
         const q = quoteUpgrade(s, def.id, this.amount);
         const maxed = level >= def.max;
-        refs.level.textContent = `${level}/${def.max}`;
+        refs.level.textContent = def.id === 'cook'
+          ? s.kitchen ? t('upgrade.cook.stage', { n: level + 1, total: def.max + 1 }) : ''
+          : `${level}/${def.max}`;
         refs.sub.textContent = `${upgradeDesc(def.id)} · ${upgradeEffect(s, def.id)}`;
         refs.btnLabel.textContent = maxed ? t('btn.maxed') : q.count > 1 ? `+${q.count}` : t('btn.buy');
         refs.btnCost.textContent = maxed ? '' : formatMoney(q.cost);

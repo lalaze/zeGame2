@@ -4,7 +4,7 @@
 import { isBakery } from '../game/economy';
 import { stationSpot } from '../game/kitchen';
 import { CELL, WALL_TOP, furnitureDef, type FurnitureDef } from '../game/furniture';
-import { CAT_SPOT, COUNTER, FLOOR_Y, PASTRY_CASE, SCENE_W, areaOrigin, floorY, floorYMin, sceneHeight, tablePos } from '../game/layout';
+import { CAT_SPOT, COUNTER, FLOOR_Y, PASTRY_CASE, SCENE_W, areaOrigin, areaBounds, kitchenHeight, floorY, floorYMin, sceneHeight, tablePos } from '../game/layout';
 import { areaAtX, regionOffset, type AreaId } from '../game/regions';
 import type { Sim, SimEvent } from '../game/sim';
 import type { GameState } from '../game/state';
@@ -47,6 +47,13 @@ export function cellRect(surface: 'floor' | 'wall', col: number, row: number, w:
 export class CafeView {
   private camera = new RoomCamera();
   private steamTimer = 0;
+  private focusedKitchenHeight = 0;
+
+  /** Frame the physical room, rather than the unused remainder of its grid cell. */
+  private roomFocus() {
+    const b = areaBounds(this.area);
+    return { x: b.x, y: b.y + (b.h - sceneHeight()) / 2 };
+  }
   area: AreaId = 'main';
   overview = false;
   /** Set while the player is placing or moving a piece. */
@@ -69,14 +76,16 @@ export class CafeView {
   moveToArea(area: AreaId, immediate = false): void {
     this.area = area;
     this.overview = false;
-    this.camera.moveTo(areaOrigin(area), immediate);
+    this.focusedKitchenHeight = kitchenHeight();
+    this.camera.moveTo(this.roomFocus(), immediate);
   }
 
   /** The map shows the whole building, three rooms across and two deep, centered. */
   setOverview(show: boolean, immediate = false): void {
     this.overview = show;
     const H = sceneHeight();
-    this.camera.moveTo(show ? { x: -SCENE_W, y: -H * 1.5 } : areaOrigin(this.area), immediate, show ? 1 / 3 : 1);
+    this.focusedKitchenHeight = kitchenHeight();
+    this.camera.moveTo(show ? { x: -SCENE_W, y: -H * 1.5 } : this.roomFocus(), immediate, show ? 1 / 3 : 1);
   }
 
   // ------------------------------------------------------------ effects
@@ -107,11 +116,16 @@ export class CafeView {
   }
 
   update(dt: number, sim: Sim): void {
+    if (this.area === 'kitchen' && !this.overview && this.focusedKitchenHeight !== kitchenHeight()) {
+      this.focusedKitchenHeight = kitchenHeight();
+      this.camera.moveTo(this.roomFocus());
+    }
     this.camera.update(dt);
     this.catHappy = Math.max(0, this.catHappy - dt);
     const through = sim.cooks.some((_, i) => {
       const at = sim.cookStation(i);
-      return at?.station === 'door' && at.working;
+      const cook = sim.cooks[i];
+      return (cook.x > -26 && cook.x < 26 && Math.abs(cook.y - 88) < 14) || (at?.station === 'door' && at.working);
     });
     this.kitchenDoor += ((through ? 1 : 0) - this.kitchenDoor) * Math.min(1, dt * 10);
 

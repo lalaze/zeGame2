@@ -10,8 +10,9 @@
 // The hand sink sits between storage and prep, and the dish pit is by the door,
 // where dirty plates come back in, away from the food.
 import { COOK_BATCH, type IngredientId, type ItemId } from './data';
-import { isBakery, menuItems, recipe, servingCost, servingsLeft, unlockedItems } from './economy';
-import { FLOOR_Y, areaOrigin, floorY, passageY } from './layout';
+import { fillBakePlan, isBakery, menuItems, recipe, servingCost, servingsLeft, unlockedItems } from './economy';
+import { FLOOR_Y, areaOrigin, doorwayY, kitchenFloorY, kitchenHeight } from './layout';
+import { routeFloorSegment, type FloorObstacle, type FloorPoint } from './navigation';
 import type { GameState } from './state';
 
 export const KITCHEN_COST = 800;
@@ -32,6 +33,7 @@ export function unlockKitchen(state: GameState): boolean {
   if (kitchenBlock(state)) return false;
   state.coins -= KITCHEN_COST;
   state.kitchen = true;
+  fillBakePlan(state);
   return true;
 }
 
@@ -89,8 +91,8 @@ export type Facing = 'up' | 'down' | 'left' | 'right';
 
 /**
  * Where a cook stands at a piece of equipment, and which way they face: `dy` from
- * the front edge (`foot`, at the minimum height) of what they're working at, so
- * they stay at it as the floor stretches on taller screens.
+ * the front edge (`foot`, at the fully expanded size) of their equipment. The
+ * kitchen stays compact on tall screens and grows only with its cook upgrades.
  */
 interface Spot {
   x: number;
@@ -98,7 +100,7 @@ interface Spot {
   dy: number;
   facing: Facing;
 }
-// The back wall doesn't move as the floor stretches, so neither does anyone working at it.
+// The production aisle stays fixed across kitchen expansions and screen resizes.
 const atWall = (x: number): Spot => ({ x, foot: FLOOR_Y, dy: 14, facing: 'up' });
 // Behind the bench, facing into the room, with the worktop at their waist.
 const atBench = (x: number): Spot => ({ x, foot: BENCH.front, dy: -BENCH.depth - 6, facing: 'down' });
@@ -128,12 +130,11 @@ const HOMES: readonly Spot[] = [
 /** A spot in the kitchen at the current height, in building coordinates. */
 function place(spot: Spot) {
   const o = areaOrigin('kitchen');
-  return { x: o.x + spot.x, y: o.y + floorY(spot.foot) + spot.dy, facing: spot.facing };
+  return { x: o.x + spot.x, y: o.y + kitchenFloorY(spot.foot) + spot.dy, facing: spot.facing };
 }
-/** Just inside the door to the café, wherever the shared doorway is. */
+/** The actual delivery point behind the counter beside the pickup pass. */
 function doorSpot() {
-  const o = areaOrigin('kitchen');
-  return { x: o.x + 302, y: o.y + passageY(), facing: 'right' as Facing };
+  return { x: 202, y: doorwayY('main', 'left'), facing: 'down' as Facing };
 }
 export const stationSpot = (station: Station) => (station === 'door' ? doorSpot() : place(STATION_SPOTS[station]));
 export const cookHome = (i: number) => place(HOMES[i % HOMES.length]);
@@ -207,6 +208,7 @@ export const ZONES: Record<Station, number> = {
 
 /** The equipment this café's unlocked dishes call for, plus the basics. */
 export function installedEquipment(state: GameState): Set<Equipment> {
+  if (!state.kitchen) return new Set();
   const set = new Set<Equipment>(BASE_EQUIPMENT);
   for (const m of unlockedItems(state)) {
     if (!isBakery(m.id)) continue;
@@ -223,7 +225,7 @@ export function installedEquipment(state: GameState): Set<Equipment> {
  * another cook is already making, or that the pantry can't stretch to.
  */
 export function nextBatch(state: GameState, baking: readonly ItemId[]): { item: ItemId; n: number } | null {
-  if (state.phase !== 'open') return null;
+  if (!state.kitchen || state.phase !== 'open') return null;
   let best: { item: ItemId; n: number; left: number } | null = null;
   for (const m of menuItems(state)) {
     if (!isBakery(m.id) || baking.includes(m.id)) continue;
@@ -237,52 +239,68 @@ export function nextBatch(state: GameState, baking: readonly ItemId[]): { item: 
 
 /** A cook takes the ingredients for a batch out of the pantry. */
 export function startBatch(state: GameState, item: ItemId, n: number): void {
+  if (!state.kitchen || state.phase !== 'open' || !isBakery(item) || !menuItems(state).some((m) => m.id === item) || !Number.isInteger(n) || n <= 0 || n > servingsLeft(state, item)) return;
   for (const [ing, k] of recipe(item)) state.pantry[ing] -= k * n;
   state.today.ingredientCost += servingCost(item) * n;
 }
 
 /** A finished batch goes into the pastry case. */
 export function shelveBatch(state: GameState, item: ItemId, n: number): void {
-  if (state.phase !== 'open') return;
+  if (!state.kitchen || state.phase !== 'open' || !isBakery(item) || state.items[item] <= 0 || !Number.isInteger(n) || n <= 0) return;
   state.shelf[item] = (state.shelf[item] ?? 0) + n;
   state.today.baked[item] = (state.today.baked[item] ?? 0) + n;
 }
 
 // ---------------------------------------------------------------- getting around
 
-/**
- * The points a cook walks through to get from `from` to `to` without cutting
- * through the bench: the back of the kitchen (the wall stations, behind the bench,
- * the rack and the door) is one open aisle, and the front (pastry fridge and dish
- * pit) is reached down either end of the bench.
- */
-export function kitchenPath(from: { x: number; y: number }, to: { x: number; y: number }): { x: number; y: number }[] {
+/** Physical floor footprints, shared by all cook routes. Reserved appliance
+ * spaces stay clear too, so adding a menu item never strands a moving cook. */
+export function kitchenObstacles(): FloorObstacle[] {
   const o = areaOrigin('kitchen');
-  const front = (p: { y: number }) => p.y - o.y > floorY(145);
-  if (front(from) === front(to)) {
-    // Down the back aisle to the door, round the end of the bench rather than over its corner.
-    if (!crossesBench(from, to)) return [to];
-    const right = Math.max(from.x, to.x) - o.x > BENCH.x + BENCH.w;
-    return [{ x: o.x + (right ? BENCH.x + BENCH.w + 6 : BENCH.x - 6), y: o.y + floorY(112) }, to];
-  }
-  const local = (from.x + to.x) / 2 - o.x;
-  // Down the left end of the bench, or between its right end and the dish pit.
-  const x = o.x + (local < BENCH.x + BENCH.w / 2 ? 66 : 212);
-  const back = { x, y: o.y + floorY(108) };
-  const ahead = { x, y: o.y + floorY(182) };
-  return front(from) ? [ahead, back, to] : [back, ahead, to];
+  return [
+    { x: 0, y: 0, w: 320, h: FLOOR_Y + 4 },
+    { x: BENCH.x, y: kitchenFloorY(BENCH.front) - BENCH.depth, w: BENCH.w, h: BENCH.depth },
+    { x: RACK.x, y: kitchenFloorY(RACK.foot) - 8, w: RACK.w, h: 8 },
+    { x: PASTRY_FRIDGE.x, y: kitchenFloorY(PASTRY_FRIDGE.foot) - 8, w: PASTRY_FRIDGE.w, h: 8 },
+    { x: BINS.x, y: kitchenFloorY(BINS.foot) - 7, w: BINS.w, h: 7 },
+    { x: DISH_PIT.x, y: kitchenFloorY(DISH_PIT.foot) - 10, w: DISH_PIT.w + 10, h: 10 },
+  ].map((r) => ({ ...r, x: o.x + r.x, y: o.y + r.y }));
 }
 
-/** Whether walking straight from `a` to `b` would go through the bench. */
-function crossesBench(a: { x: number; y: number }, b: { x: number; y: number }): boolean {
+/** Route within real kitchen walls, round every floor fixture, then through the
+ * shared staff door and along the clear aisle behind the café counter. */
+export function kitchenPath(from: FloorPoint, to: FloorPoint): FloorPoint[] {
   const o = areaOrigin('kitchen');
-  const x0 = o.x + BENCH.x;
-  const y1 = o.y + floorY(BENCH.front);
-  const y0 = y1 - BENCH.depth;
-  for (let k = 0; k <= 24; k++) {
-    const x = a.x + ((b.x - a.x) * k) / 24;
-    const y = a.y + ((b.y - a.y) * k) / 24;
-    if (x > x0 && x < x0 + BENCH.w && y > y0 && y < y1) return true;
+  const y = o.y + doorwayY('kitchen', 'right');
+  const inside = { x: -12, y };
+  const outside = { x: 12, y };
+  const inKitchen = (p: FloorPoint) => p.x < 0;
+  const localRoute = (a: FloorPoint, b: FloorPoint): FloorPoint[] => {
+    const path = routeFloorSegment(a, b, kitchenObstacles(), {
+      bounds: { x: o.x + 5, y: o.y + FLOOR_Y, w: 310, h: kitchenHeight() - FLOOR_Y - 8 },
+      clearance: 3,
+    });
+    // Stations and homes are tested against this geometry. A malformed input
+    // must never silently turn into a shortcut through a fixture or a wall.
+    if (!path) throw new Error('No clear kitchen route between the supplied points');
+    return path;
+  };
+  const mainRoute = (a: FloorPoint, b: FloorPoint): FloorPoint[] => {
+    // Cook positions in main are exclusively on this staff-only service lane.
+    if (Math.abs(a.y - y) > 0.001 || Math.abs(b.y - y) > 0.001)
+      throw new Error('Kitchen delivery must use the staff aisle behind the counter');
+    return a.x === b.x ? [] : [{ x: b.x, y: b.y }];
+  };
+  // A close/resume can replan a cook while its feet straddle the door threshold.
+  const routeFromKitchen = (a: FloorPoint, b: FloorPoint) => {
+    if (a.x > inside.x && Math.abs(a.y - y) < 0.001) return [inside, ...localRoute(inside, b)];
+    return localRoute(a, b);
+  };
+  if (inKitchen(from) && inKitchen(to)) return routeFromKitchen(from, to);
+  if (!inKitchen(from) && !inKitchen(to)) return mainRoute(from, to);
+  if (inKitchen(from)) {
+    const approach = from.x > inside.x && Math.abs(from.y - y) < 0.001 ? [] : localRoute(from, inside);
+    return [...approach, outside, ...mainRoute(outside, to)];
   }
-  return false;
+  return [...mainRoute(from, outside), inside, ...localRoute(inside, to)];
 }

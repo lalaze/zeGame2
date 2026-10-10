@@ -3,7 +3,7 @@ import { menuItems } from '../../game/economy';
 import { formatMoney } from '../../game/format';
 import { COLS, FLOOR_ROWS, WALL_ROWS, WALL_TOP, CELL, canPlace, cellFree, furnitureDef } from '../../game/furniture';
 import { BENCH, BINS, DISH_PIT, PASTRY_FRIDGE, RACK, cookHome, installedEquipment, stationSpot, STATION_SECONDS, type Station } from '../../game/kitchen';
-import { CAT_SPOT, MAX_TABLES, PASS, PASS_BELL, PASS_SLOT_W, passSlot, SCENE_W, WINDOWS, areaOrigin, baristaSpot, doorPlantSpots, floorY, passageY, sceneHeight, seatSpot, tablePos } from '../../game/layout';
+import { CAT_SPOT, MAX_TABLES, PASS, PASS_BELL, PASS_SLOT_W, passSlot, SCENE_W, WINDOWS, areaOrigin, areaBounds, kitchenFloorY, doorwayY, baristaSpot, doorPlantSpots, floorY, sceneHeight, seatSpot, tablePos } from '../../game/layout';
 import { AREA_IDS, activeTableIndices, areaAtX, isAreaOpen, mainTableCount, regionOffset, type AreaId } from '../../game/regions';
 import { seated, type Cook, type Customer, type Server, type Sim, type SimEvent, type Walker } from '../../game/sim';
 import type { GameState } from '../../game/state';
@@ -77,7 +77,7 @@ function lampsIn(area: AreaId, state: GameState): Lamp[] {
     if (ceiling === 'ceiling_chandelier') add(SCENE_W / 2, 9, 46);
     if (ceiling === 'ceiling_lights') for (let x = 8; x < SCENE_W; x += 32) add(x, 11, 14, 0.8);
     // Kitchen light through the door in the left wall, and the heat lamps over the pass.
-    if (state.kitchen) add(6, passageY(), 20, 0.6, '#ffa64a');
+    if (state.kitchen) add(6, doorwayY('main', 'left'), 20, 0.6, '#ffa64a');
     for (const dx of [9, PASS.w - 10]) add(PASS.x + dx, PASS.top + 12, 14, 0.6, '#ffb060');
   } else if (area === 'kitchen') {
     // Tube lights, the strip under the hood, and the deck oven's glow.
@@ -280,10 +280,9 @@ export class CafeScene extends Phaser.Scene {
     this.images.begin();
     this.rects.begin();
     this.glows.begin();
-    const H = sceneHeight();
     for (const area of AREA_IDS) {
-      const o = areaOrigin(area);
-      const visible = o.x < viewX + view.viewWidth && o.x + SCENE_W > viewX && o.y < viewY + view.viewHeight && o.y + H > viewY;
+      const o = areaBounds(area);
+      const visible = o.x < viewX + view.viewWidth && o.x + o.w > viewX && o.y < viewY + view.viewHeight && o.y + o.h > viewY;
       this.drawRoom(area, visible, state, t, now, light);
       this.drawLight(area, visible, state, light);
     }
@@ -332,12 +331,12 @@ export class CafeScene extends Phaser.Scene {
   }
 
   /** Repaints a layer if `signature` (everything it depends on) has changed. */
-  private paint(layer: Layer, x: number, y: number, signature: string, paint: (painter: RoomPainter) => void): void {
+  private paint(layer: Layer, x: number, y: number, signature: string, paint: (painter: RoomPainter) => void, height = sceneHeight()): void {
     layer.image.setPosition(x, y).setVisible(true);
     if (layer.shown === signature) return;
     layer.shown = signature;
     const { texture } = layer;
-    const H = sceneHeight();
+    const H = height;
     if (texture.height !== H) {
       texture.setSize(SCENE_W, H);
       layer.image.setSizeToFrame();
@@ -358,7 +357,7 @@ export class CafeScene extends Phaser.Scene {
    */
   private drawRoom(area: AreaId, visible: boolean, state: GameState, t: number, now: Date, light: Lighting): void {
     const o = areaOrigin(area);
-    const H = sceneHeight();
+    const H = areaBounds(area).h;
     const decor = state.decor.equipped;
     const tick = Math.floor(t * ROOM_FPS);
     const skip = this.view.ghost?.skip ?? -1;
@@ -389,6 +388,7 @@ export class CafeScene extends Phaser.Scene {
         });
         p.drawFloor(decor.floor, decor.rug, light, H);
         p.drawBackBar(state, decor.counter);
+        p.drawServiceCupboards(decor.counter);
         paintCeiling(ctx, decor.ceiling, SCENE_W, t);
       });
       this.drawCat(t, o);
@@ -417,7 +417,7 @@ export class CafeScene extends Phaser.Scene {
       const active = this.activeStations();
       this.paint(back, o.x, o.y, [tick, H, locked, [...installed].join(','), [...active].join(',')].join('|'), (p) => {
         paintKitchen(p.ctx, H, t, locked, installed, active);
-      });
+      }, H);
     } else {
       const offset = regionOffset(area);
       const locked = !isAreaOpen(state, area);
@@ -438,7 +438,7 @@ export class CafeScene extends Phaser.Scene {
     this.paint(front, o.x, o.y, [H, wallpaper, state.regions.join(','), state.kitchen, door].join('|'), (p) => {
       p.drawFrontWall(wallpaper, H, area === 'main' || area === 'greenhouse', area === 'terrace');
       paintRoomBoundaries(p.ctx, area, state, door);
-    });
+    }, H);
   }
 
   /**
@@ -448,7 +448,7 @@ export class CafeScene extends Phaser.Scene {
   private drawLight(area: AreaId, visible: boolean, state: GameState, light: Lighting): void {
     const o = areaOrigin(area);
     const ambient = roomAmbient(light, area);
-    this.grades.get(area)!.setVisible(this.canGrade && ambient !== '#ffffff').setPosition(o.x, o.y).setSize(SCENE_W, sceneHeight()).setFillStyle(color(ambient));
+    this.grades.get(area)!.setVisible(this.canGrade && ambient !== '#ffffff').setPosition(o.x, o.y).setSize(SCENE_W, areaBounds(area).h).setFillStyle(color(ambient));
     if (!visible || light.lamps < 0.01 || !isAreaOpen(state, area)) return;
     for (const lamp of lampsIn(area, state)) {
       const key = baked(this.textures, `glow-${lamp.radius}-${lamp.color}`, lamp.radius * 2, lamp.radius * 2, (ctx) => paintGlow(ctx, lamp.radius, lamp.color));
@@ -549,15 +549,15 @@ export class CafeScene extends Phaser.Scene {
     const skip = this.view.ghost?.skip ?? -1;
     for (const c of this.sim.customers) if (!seated(c)) this.drawCustomer(c, DEPTH.floor + c.y);
     for (const server of this.sim.servers) this.drawServer(server, DEPTH.floor + server.y);
-    this.sim.cooks.forEach((cook, i) => this.drawCook(cook, i, DEPTH.floor + cook.y));
+    this.sim.cooks.forEach((cook, i) => this.drawCook(cook, i, cook.x >= 0 && cook.y <= 100 ? DEPTH.baristas + cook.y * 0.01 + 0.01 : DEPTH.floor + cook.y));
     this.drawKitchenFloor(state);
     for (const i of activeTableIndices(state)) this.drawTable(i, t, DEPTH.floor + tablePos(i).y + 0.1);
-    // Crates on the spot the next expansion will open up.
+    // A planning marker shows the next paid table without obstructing circulation.
     const built = mainTableCount(state);
     if (built < MAX_TABLES) {
       const { x, y } = tablePos(built);
-      const key = baked(this.textures, 'crates', 44, 32, (ctx) => new RoomPainter(ctx).drawUnbuilt(20, 28));
-      this.image(key, x - 20, y - 28, DEPTH.floor + y + 0.2);
+      const key = baked(this.textures, 'table-plan', 52, 36, (ctx) => new RoomPainter(ctx).drawUnbuilt(26, 30));
+      this.image(key, x - 26, y - 30, DEPTH.floor + y + 0.2);
     }
     // Furniture the player placed, and the potted figs either side of the front door.
     state.decor.placed.forEach((p, i) => {
@@ -669,17 +669,17 @@ export class CafeScene extends Phaser.Scene {
       const key = baked(this.textures, `kitchen-${name}`, w + 20, rise + 1, paint);
       this.image(key, o.x + x - 10, o.y + foot - rise, DEPTH.floor + o.y + foot);
     };
-    const benchFoot = floorY(BENCH.front);
+    const benchFoot = kitchenFloorY(BENCH.front);
     const tools = `${installed.has('sheeter')}-${installed.has('standMixer')}`;
     piece(`bench-${tools}`, BENCH.x, benchFoot, BENCH.w, BENCH_RISE, (ctx) =>
       paintBench(ctx, 10 + BENCH.w / 2, BENCH_RISE, installed.has('sheeter'), installed.has('standMixer')));
     const rack = this.sim.rack;
-    piece(`rack-${rack.join(',')}`, RACK.x, floorY(RACK.foot), RACK.w, RACK_RISE, (ctx) => paintRack(ctx, 10, RACK_RISE, rack));
-    piece('bins', BINS.x, floorY(BINS.foot), BINS.w, BINS_RISE, (ctx) => paintBins(ctx, 10, BINS_RISE));
-    piece('dishpit', DISH_PIT.x, floorY(DISH_PIT.foot), DISH_PIT.w + 10, DISH_PIT_RISE, (ctx) => paintDishPit(ctx, 10, DISH_PIT_RISE));
+    piece(`rack-${rack.join(',')}`, RACK.x, kitchenFloorY(RACK.foot), RACK.w, RACK_RISE, (ctx) => paintRack(ctx, 10, RACK_RISE, rack));
+    piece('bins', BINS.x, kitchenFloorY(BINS.foot), BINS.w, BINS_RISE, (ctx) => paintBins(ctx, 10, BINS_RISE));
+    piece('dishpit', DISH_PIT.x, kitchenFloorY(DISH_PIT.foot), DISH_PIT.w + 10, DISH_PIT_RISE, (ctx) => paintDishPit(ctx, 10, DISH_PIT_RISE));
     if (installed.has('pastryFridge')) {
       const cakes = (['cheesecake', 'cake', 'eggtart'] as const).filter((id) => state.items[id] > 0);
-      piece(`fridge-${cakes.join(',')}`, PASTRY_FRIDGE.x, floorY(PASTRY_FRIDGE.foot), PASTRY_FRIDGE.w, FRIDGE_RISE, (ctx) =>
+      piece(`fridge-${cakes.join(',')}`, PASTRY_FRIDGE.x, kitchenFloorY(PASTRY_FRIDGE.foot), PASTRY_FRIDGE.w, FRIDGE_RISE, (ctx) =>
         paintPastryFridge(ctx, 10, FRIDGE_RISE, cakes));
     }
   }
@@ -930,8 +930,8 @@ export class CafeScene extends Phaser.Scene {
   private drawOverviewFrame(): void {
     const g = this.overviewFrame.clear();
     if (!this.view.overview) return;
-    const o = areaOrigin(this.view.area);
-    const H = sceneHeight();
+    const o = areaBounds(this.view.area);
+    const H = o.h;
     g.lineStyle(3, color('#f5ce7d'));
     for (const [x, y, dx, dy] of [[o.x + 7, o.y + 7, 1, 1], [o.x + SCENE_W - 7, o.y + 7, -1, 1], [o.x + 7, o.y + H - 7, 1, -1], [o.x + SCENE_W - 7, o.y + H - 7, -1, -1]]) {
       g.beginPath();
@@ -976,7 +976,7 @@ export class CafeScene extends Phaser.Scene {
       const { key, dx, dy } = this.floorTexture(ghost.id);
       this.ghostPiece.setTexture(key).setPosition(cx + dx, foot + dy);
     }
-    const fill = color(canPlace(state, ghost.id, ghost.col, ghost.row, tables, ghost.skip) ? GHOST_OK : GHOST_BAD);
+    const fill = color(canPlace(state, ghost.id, ghost.col, ghost.row, tables, ghost.skip) && this.sim.furnitureSpaceClear(ghost.id, ghost.col, ghost.row) ? GHOST_OK : GHOST_BAD);
     box.fillStyle(fill, 0.3 + Math.sin(t * 6) * 0.08);
     box.fillRect(rect.x, rect.y, rect.w, rect.h);
     box.fillStyle(fill, 1);

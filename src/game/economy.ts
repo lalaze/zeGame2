@@ -32,6 +32,10 @@ const MENU_BY_ID = Object.fromEntries(MENU.map((m) => [m.id, m])) as Record<Item
 const UPGRADE_BY_ID = Object.fromEntries(UPGRADES.map((u) => [u.id, u])) as Record<UpgradeId, UpgradeDef>;
 
 export const menuItem = (id: ItemId) => MENU_BY_ID[id];
+// Affogato is an ice-cream dessert despite its coffee menu placement.
+export const requiresKitchen = (id: ItemId) => id === 'affogato' || !isDrink(menuItem(id).category);
+export const canPrepareItem = (state: GameState, id: ItemId) => !requiresKitchen(id) || state.kitchen;
+
 export const upgradeDef = (id: UpgradeId) => UPGRADE_BY_ID[id];
 
 export function milestoneMultiplier(level: number): number {
@@ -86,7 +90,8 @@ function quote(base: number, growth: number, level: number, coins: number, amoun
 
 export function quoteItem(state: GameState, id: ItemId, amount: BuyAmount): Quote {
   const def = menuItem(id);
-  return quote(def.baseCost, ITEM_COST_GROWTH, state.items[id], state.coins, amount, Infinity);
+  const q = quote(def.baseCost, ITEM_COST_GROWTH, state.items[id], state.coins, amount, Infinity);
+  return isItemAvailable(state, id) ? q : { ...q, affordable: false };
 }
 
 /** Cooks work in the kitchen, so there's no hiring them until it's built. */
@@ -108,6 +113,7 @@ export function previousInCategory(id: ItemId): MenuItemDef | null {
 
 /** Each category unlocks in order; only its first locked item can be bought. */
 export function isItemAvailable(state: GameState, id: ItemId): boolean {
+  if (!canPrepareItem(state, id)) return false;
   const prev = previousInCategory(id);
   return !prev || state.items[prev.id] > 0;
 }
@@ -155,6 +161,7 @@ export const patienceSeconds = (s: GameState) => 40 + comfort(s) / 5;
 export const tablePatience = (s: GameState) => 50 + comfort(s) / 4;
 
 export function salePrice(state: GameState, id: ItemId, vip = false): number {
+  if (!canPrepareItem(state, id)) return 0;
   return itemPrice(menuItem(id), state.items[id]) * tipMultiplier(state) * (vip ? VIP_MULTIPLIER : 1);
 }
 
@@ -164,10 +171,11 @@ export function prepTime(state: GameState, id: ItemId): number {
 
 /** Today's menu: unlocked items the player chose to sell. */
 export function menuItems(state: GameState): MenuItemDef[] {
-  return MENU.filter((m) => state.items[m.id] > 0 && state.onMenu.includes(m.id));
+  return MENU.filter((m) => state.items[m.id] > 0 && canPrepareItem(state, m.id) && state.onMenu.includes(m.id));
 }
 
 export function setOnMenu(state: GameState, id: ItemId, on: boolean): void {
+  if (state.phase !== 'prep' || !canPrepareItem(state, id)) return;
   const set = new Set(state.onMenu);
   if (on && state.items[id] > 0) set.add(id);
   else set.delete(id);
@@ -232,6 +240,7 @@ export function servingsLeft(state: GameState, id: ItemId): number {
  * after reserving that bake. Drink counts are individual capacities, not additive.
  */
 export function readyServings(state: GameState, id: ItemId): number {
+  if (!canPrepareItem(state, id)) return 0;
   if (state.phase === 'open') return isBakery(id) ? state.shelf[id] ?? 0 : servingsLeft(state, id);
   const projected = projectMorningBake(state);
   return isBakery(id) ? projected.shelf[id] ?? 0 : servingsLeft({ ...state, pantry: projected.pantry }, id);
@@ -242,6 +251,7 @@ export function readyServings(state: GameState, id: ItemId): number {
  * used at the morning bake); a drink uses its ingredients now. Returns false if none left.
  */
 export function consumeServing(state: GameState, id: ItemId, today?: DayStats): boolean {
+  if (!canPrepareItem(state, id) || state.items[id] <= 0) return false;
   if (isBakery(id) && state.phase === 'open') {
     if ((state.shelf[id] ?? 0) < 1) return false;
     state.shelf[id]!--;
@@ -257,6 +267,7 @@ export function consumeServing(state: GameState, id: ItemId, today?: DayStats): 
 
 /** A bake amount that should cover a normal day's sales of an item, in BAKE_STEP steps. */
 export function suggestedBake(state: GameState, id: ItemId): number {
+  if (!canPrepareItem(state, id) || !isBakery(id)) return 0;
   const demand = dayDemand(state).get(id) ?? 0;
   return Math.max(BAKE_STEP, Math.ceil(demand / BAKE_STEP) * BAKE_STEP);
 }
@@ -269,23 +280,26 @@ export function fillBakePlan(state: GameState): void {
 }
 
 export function setBakePlan(state: GameState, id: ItemId, n: number): void {
+  if (state.phase !== 'prep' || !canPrepareItem(state, id) || !isBakery(id) || state.items[id] <= 0 || !Number.isFinite(n)) return;
   state.bakePlan[id] = Math.max(0, Math.min(9_999, Math.round(n)));
 }
 
 /** Sets every bread and pastry on the menu to bake what a normal day sells. */
 export function bakeForForecast(state: GameState): void {
+  if (state.phase !== 'prep') return;
   for (const m of menuItems(state)) if (isBakery(m.id)) state.bakePlan[m.id] = suggestedBake(state, m.id);
 }
 
 /** Projects the real bake order against a shared pantry without changing the game. */
 export function projectMorningBake(state: GameState): Pick<GameState, 'pantry' | 'shelf'> {
   const pantry = { ...state.pantry };
-  const shelf: GameState['shelf'] = {};
+  // Preserve suspended legacy stock; it becomes usable only when the kitchen is built.
+  const shelf: GameState['shelf'] = { ...state.shelf };
   for (const m of menuItems(state)) {
     if (!isBakery(m.id)) continue;
     const n = Math.min(state.bakePlan[m.id] ?? 0, servingsLeft({ ...state, pantry }, m.id));
     for (const [ing, k] of recipe(m.id)) pantry[ing] -= k * n;
-    shelf[m.id] = n;
+    shelf[m.id] = (shelf[m.id] ?? 0) + n;
   }
   return { pantry, shelf };
 }
@@ -295,12 +309,16 @@ export function projectMorningBake(state: GameState): Pick<GameState, 'pantry' |
  * amount as the ingredients allow. Returns how many items were baked in all.
  */
 export function bakeMorning(state: GameState): number {
+  if (!state.kitchen) return 0;
+  const previousShelf = state.shelf;
   const projected = projectMorningBake(state);
   Object.assign(state.pantry, projected.pantry);
   state.shelf = projected.shelf;
   let total = 0;
-  for (const [id, n] of Object.entries(state.shelf) as [ItemId, number][]) {
-    state.today.baked[id] = n;
+  for (const [id, stock] of Object.entries(state.shelf) as [ItemId, number][]) {
+    const n = stock - (previousShelf[id] ?? 0);
+    if (n <= 0) continue;
+    state.today.baked[id] = (state.today.baked[id] ?? 0) + n;
     state.today.ingredientCost += servingCost(id) * n;
     total += n;
   }
@@ -309,13 +327,13 @@ export function bakeMorning(state: GameState): number {
 
 /** Ingredients that any unlocked dish needs; the pantry only lists these. */
 export function neededIngredients(state: GameState): IngredientDef[] {
-  const used = new Set(unlockedItems(state).flatMap((m) => recipe(m.id).map(([ing]) => ing)));
+  const used = new Set(unlockedItems(state).filter((m) => canPrepareItem(state, m.id)).flatMap((m) => recipe(m.id).map(([ing]) => ing)));
   return INGREDIENTS.filter((i) => used.has(i.id));
 }
 
 /** Dishes (unlocked) that use an ingredient. */
 export const usedBy = (state: GameState, ing: IngredientId) =>
-  unlockedItems(state).filter((m) => RECIPES[m.id][ing]);
+  unlockedItems(state).filter((m) => canPrepareItem(state, m.id) && RECIPES[m.id][ing]);
 
 export function buyIngredient(state: GameState, id: IngredientId, count: number): boolean {
   const cost = ingredientDef(id).cost * count;

@@ -62,6 +62,7 @@ export function finishDay(state: GameState): DayReport {
   let staleCost = 0;
   const shelfSoldOut: ItemId[] = [];
   for (const [id, baked] of Object.entries(today.baked) as [ItemId, number][]) {
+    if (!state.kitchen) continue;
     const left = state.shelf[id] ?? 0;
     if (left > 0) {
       stale[id] = left;
@@ -80,7 +81,7 @@ export function finishDay(state: GameState): DayReport {
     stale,
     staleCost,
   };
-  state.shelf = {};
+  if (state.kitchen) state.shelf = {};
   state.phase = 'prep';
   state.day++;
   state.dayTime = 0;

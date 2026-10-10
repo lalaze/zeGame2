@@ -603,6 +603,26 @@ export function paintRunner(ctx: Ctx, x: number, y: number, w: number, h: number
   }
 }
 
+/** Open the entrance stem into a cross runner, with continuous inset borders.
+ * Paint after the two runners. The only capped edge is the far/top edge of the T.
+ */
+export function paintRunnerJoin(ctx: Ctx, x: number, y: number, w: number, h: number, base = '#d6b382'): void {
+  const field = ramp(base);
+  const trim = '#9a6a45';
+  rect(ctx, x, y, w, h, field.base);
+  const weave = mix(field.base, field.lo, 0.45);
+  for (let yy = y + 5; yy < y + h; yy += 2) {
+    for (let xx = x + 2 + ((yy - y) % 4 === 1 ? 2 : 0); xx < x + w - 2; xx += 4) rect(ctx, xx, yy, 1, 1, weave);
+  }
+  rect(ctx, x, y, w, 1, field.lo);
+  rect(ctx, x, y + 3, w, 1, trim);
+  // The lower cross-runner border turns down into the stem's two side borders.
+  rect(ctx, x, y + h - 4, 4, 1, trim);
+  rect(ctx, x + w - 4, y + h - 4, 4, 1, trim);
+  rect(ctx, x + 3, y + h - 4, 1, 4, trim);
+  rect(ctx, x + w - 4, y + h - 4, 1, 4, trim);
+}
+
 export function paintRug(ctx: Ctx, id: string, x: number, y: number, w: number, h: number): void {
   if (id === 'rug_round') {
     const cx = x + w / 2;

@@ -4,6 +4,7 @@
 import { BAKE_STEP, type ItemId } from '../game/data';
 import { checkOpen } from '../game/day';
 import {
+  canPrepareItem,
   dayDemand,
   expectedCustomers,
   isBakery,
@@ -37,22 +38,23 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
     const low = new Set<ItemId>(!check.ok && check.reason === 'lowStock' ? check.items : []);
     const rows = unlockedItems(state)
       .map((m) => {
+        const eligible = canPrepareItem(state, m.id);
         const on = onMenu.has(m.id);
         const ready = readyServings(state, m.id);
-        const bake = isBakery(m.id)
+        const bake = eligible && isBakery(m.id)
           ? `<span class="bake">
               <button class="chip bake-btn" data-bake="${m.id}:-1" aria-label="−${BAKE_STEP}" ${on ? '' : 'disabled'}>−</button>
               <span class="bake-n">${state.bakePlan[m.id] ?? 0}</span>
               <button class="chip bake-btn" data-bake="${m.id}:1" aria-label="+${BAKE_STEP}" ${on ? '' : 'disabled'}>+</button>
             </span>`
           : '';
-        const note = on
+        const note = !eligible ? t('menu.requiresKitchen') : on
           ? isBakery(m.id)
             ? t('bake.forecast', { n: Math.round(demand.get(m.id) ?? 0) })
             : t('prep.ready', { n: formatNumber(ready) })
           : t('menu.off');
         return `<label class="prep-row${on ? '' : ' off'}${on && low.has(m.id) ? ' low' : ''}">
-            <input type="checkbox" data-dish="${m.id}" ${on ? 'checked' : ''} />
+            <input type="checkbox" data-dish="${m.id}" ${on ? 'checked' : ''} ${eligible ? '' : 'disabled'} />
             <img src="${toDataURL(itemIcon(m.id), 3)}" alt="" />
             <span class="prep-name"><b>${itemName(m.id)}</b><small>${note}</small></span>
             ${bake}
@@ -62,7 +64,7 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
     const quote = restockQuote(state);
     const full = quote.cost <= 0;
     body.innerHTML = `
-      <p>${t('prep.intro')}</p>
+      <p>${t(state.kitchen ? 'prep.intro' : 'prep.barOnly')}</p>
       <div class="prep-list">${rows}</div>
       <p class="note">${t('pantry.forecast', { n: formatNumber(expectedCustomers(state)) })} · ${t('prep.count', { n: onMenu.size })}</p>
       ${low.size ? `<p class="note warn">${t('prep.low')}</p>` : ''}

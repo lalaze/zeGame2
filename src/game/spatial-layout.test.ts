@@ -98,3 +98,39 @@ describe('physical café floor plan', () => {
     expect(state.served).toBeGreaterThan(0);
   });
 });
+
+describe('compact main café zoning', () => {
+  it('keeps every queue position between dining bays and below the cross-aisle', async () => {
+    const { queueSpot, tablePos, MAX_TABLES, COUNTER } = await import('./layout');
+    for (const height of [MIN_SCENE_H, 280, MAX_SCENE_H]) {
+      setSceneHeight(height);
+      const spots = Array.from({ length: 6 }, (_, i) => queueSpot(i));
+      expect(new Set(spots.map(({ x, y }) => `${x},${y}`)).size).toBe(6);
+      for (const spot of spots) {
+        expect(spot.x).toBeGreaterThanOrEqual(136);
+        expect(spot.x).toBeLessThanOrEqual(184);
+        expect(spot.y).toBeGreaterThan(passageY() + 10);
+        expect(spot.y).toBeLessThan(height - 20);
+        expect(spot.y).toBeGreaterThan(COUNTER.bottom);
+        for (let i = 0; i < MAX_TABLES; i++) expect(Math.abs(spot.x - tablePos(i).x)).toBeGreaterThan(30);
+      }
+    }
+  });
+
+  it('preserves table capacity, purchases and existing save fields across every upgrade', async () => {
+    const { activeTableIndices } = await import('./regions');
+    for (let upgrade = 0; upgrade <= 6; upgrade++) {
+      const state = createInitialState(0);
+      state.profile = { cafeName: '暖暖咖啡', ownerName: '店长', look: { skin: 1, hair: 2, hairStyle: 3, shirt: 4, pants: 0 } };
+      state.coins = 147;
+      state.upgrades.tables = upgrade;
+      const restored = deserialize(serialize(state), 0);
+      expect(activeTableIndices(restored)).toHaveLength(2 + upgrade);
+      expect(restored.coins).toBe(147);
+      expect(restored.day).toBe(1);
+      expect(restored.upgrades).toEqual(state.upgrades);
+      expect(restored.decor).toEqual(state.decor);
+      expect(restored.profile).toEqual(state.profile);
+    }
+  });
+});

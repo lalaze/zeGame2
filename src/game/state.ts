@@ -262,7 +262,8 @@ export function deserialize(raw: string | null, now: number): GameState {
     : unlocked;
   base.today = parseDay(data.today);
   base.bakePlan = parseCounts(data.bakePlan);
-  base.shelf = base.phase === 'open' ? parseCounts(data.shelf) : {};
+  // Suspended pre-kitchen stock survives saves and a later kitchen purchase.
+  base.shelf = parseCounts(data.shelf);
 
   // v1 had a leveled "Cozy Decor" upgrade. It became the decor shop (refund
   // what was spent) and the Add Table upgrade (keep the tables it had built).
