@@ -70,9 +70,11 @@ To add or change text, edit `src/locales/en.json` and `src/locales/zh.json`. The
 | `src/game/day.ts` | Opening checks, the shop clock, and closing a day into its report |
 | `src/game/sim.ts` | Customer and barista simulation |
 | `src/game/state.ts` | Save format, loading and validation |
-| `src/render/` | Pixel sprites defined as text grids, a 3×5 bitmap font, the scene renderer, and decor and furniture art (`decor-art.ts`, `furniture-art.ts`) |
+| `src/render/phaser/` | The [Phaser 4](https://phaser.io) game that draws the café: game loop, camera, input, baked room textures, characters and props as sprites sorted by depth, particles and pop-up text |
+| `src/render/cafe-view.ts` | What the café shows, independent of Phaser: the camera between rooms, the piece being arranged, tap targets and queued effects |
+| `src/render/` | Pixel sprites defined as text grids, a 3×5 bitmap font, and the canvas painters for rooms, decor and furniture (`room-art.ts`, `decor-art.ts`, `furniture-art.ts`) |
 | `src/ui/` | Side panel, opening flow (`onboarding.ts`), modals |
 | `src/i18n.ts`, `src/locales/` | Translations |
 | `scripts/gen-icons.mjs` | Builds the app icons from a pixel map (`npm run icons`) |
 
-All art is drawn in code from character grids (see `src/render/sprites.ts`), so there are no image files to manage. To add a drink, add an entry to `MENU` and its recipe to `RECIPES` in `data.ts`, and its art in `ITEM_ART`.
+All art is drawn in code from character grids (see `src/render/sprites.ts`), so there are no image files to manage. The Phaser scene turns those canvases into textures; rooms are painted into canvas textures that repaint a dozen times a second for their ambient animation. The side panel, dialogs and HUD are plain HTML over the canvas. To add a drink, add an entry to `MENU` and its recipe to `RECIPES` in `data.ts`, and its art in `ITEM_ART`.

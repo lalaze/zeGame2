@@ -22,7 +22,8 @@ import { Sim, type SimEvent } from './game/sim';
 import { applyTheme, comfort } from './game/decor';
 import { SAVE_KEY, createInitialState, loadState, saveState, type GameState } from './game/state';
 import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale, t, type Locale } from './i18n';
-import { SceneRenderer } from './render/scene';
+import { CafeView } from './render/cafe-view';
+import { CafeGame } from './render/phaser/game';
 import { character, itemIcon, toDataURL } from './render/sprites';
 import { closeModal, isModalOpen, showModal, toast } from './ui/modal';
 import { showOnboarding, type OnboardingResult } from './ui/onboarding';
@@ -42,7 +43,7 @@ let state: GameState = loadState(localStorage, Date.now());
 // Measured before the loop starts, since the loop keeps lastSeen current.
 const closedSeconds = (Date.now() - state.lastSeen) / 1000;
 const sim = new Sim();
-const scene = new SceneRenderer();
+const scene = new CafeView();
 
 // Resuming a day in progress: let the shop fill up a little before the first frame,
 // without paying for it.
@@ -54,7 +55,6 @@ if (state.phase === 'open' && !isClosingTime(state)) {
 // ------------------------------------------------------------ display
 
 const canvas = $<HTMLCanvasElement>('scene');
-const display = canvas.getContext('2d')!;
 const stage = $('stage');
 
 const sign = $('stage-sign');
@@ -92,11 +92,14 @@ function fitCanvas(): void {
   // and the browser shrinks it smoothly, which keeps every pixel the same size.
   const shown = Math.max(0.1, fit);
   const backing = shown >= 3 ? shown : Math.ceil(shown);
-  canvas.width = Math.round(SCENE_W * backing);
-  canvas.height = Math.round(sceneHeight() * backing);
-  canvas.style.width = `${(SCENE_W * shown) / dpr}px`;
-  canvas.style.height = `${(sceneHeight() * shown) / dpr}px`;
-  canvas.style.imageRendering = backing === shown ? 'pixelated' : 'auto';
+  cafe.resize({
+    width: Math.round(SCENE_W * backing),
+    height: Math.round(sceneHeight() * backing),
+    cssWidth: (SCENE_W * shown) / dpr,
+    cssHeight: (sceneHeight() * shown) / dpr,
+    backing,
+    smooth: backing !== shown,
+  });
 }
 new ResizeObserver(fitCanvas).observe(stage);
 
@@ -618,18 +621,9 @@ function tapAt(x: number, y: number): void {
   }
 }
 
-/** A pointer event's position in scene pixels. */
-function scenePoint(e: PointerEvent): { x: number; y: number } {
-  const rect = canvas.getBoundingClientRect();
-  return {
-    x: ((e.clientX - rect.left) / rect.width) * scene.viewWidth + scene.viewX,
-    y: ((e.clientY - rect.top) / rect.height) * scene.viewHeight + scene.viewY,
-  };
-}
-
-canvas.addEventListener('pointerdown', (e) => {
+/** A tap or click on the café, at (x, y) in scene pixels. */
+function pointerDown(x: number, y: number): void {
   if (scene.panning) return;
-  const { x, y } = scenePoint(e);
   if (scene.overview) {
     const area = areaAtPoint(x, y);
     if (area) regionsUI.select(area);
@@ -637,14 +631,13 @@ canvas.addEventListener('pointerdown', (e) => {
   }
   if (arrange) arrangeTap(x, y);
   else tapAt(x, y);
-});
+}
 
-// With a mouse, the piece being placed follows the pointer.
-canvas.addEventListener('pointermove', (e) => {
-  if (scene.panning || scene.overview || arrange?.mode !== 'place' || e.pointerType === 'touch') return;
-  const { x, y } = scenePoint(e);
+/** With a mouse, the piece being placed follows the pointer. */
+function pointerMove(x: number, y: number): void {
+  if (scene.panning || scene.overview || arrange?.mode !== 'place') return;
   scene.ghost = { ...scene.ghost!, ...scene.cellAt(arrange.id, x, y) };
-});
+}
 
 window.addEventListener('keydown', (e) => {
   // Letters typed into a name field are not shortcuts; Esc can close a dialog.
@@ -722,7 +715,6 @@ document.addEventListener('visibilitychange', () => {
   if (!hiddenAt) return;
   const seconds = (Date.now() - hiddenAt) / 1000;
   hiddenAt = 0;
-  last = performance.now();
   if (seconds < 2 || state.phase !== 'open') return;
   const before = state.totalEarned;
   fastForward(seconds * state.speed);
@@ -737,15 +729,12 @@ setInterval(() => saveState(localStorage, state), AUTOSAVE_MS);
 
 // ------------------------------------------------------------ loop
 
-let last = performance.now();
 let uiTimer = 0;
 let shownCoins = '';
 let shownRate = '';
 
-function frame(nowMs: number): void {
-  const dt = Math.min(0.25, Math.max(0, (nowMs - last) / 1000));
-  last = nowMs;
-
+/** Runs once per frame, from the Phaser game loop, before the café is drawn. */
+function frame(dt: number): void {
   // Paused while a dialog (like the day report) is up; sped up when the player asks.
   const simDt = isModalOpen() || document.querySelector('.onboard-overlay') ? 0 : state.phase === 'open' ? dt * state.speed : dt;
   for (let remaining = simDt; remaining > 1e-6; remaining -= SIM_STEP) {
@@ -756,10 +745,6 @@ function frame(nowMs: number): void {
   scene.update(dt, sim);
   sceneWrap.classList.toggle('is-panning', scene.panning);
   sceneWrap.classList.toggle('is-overview', scene.overview);
-  const hours = clockHours(state);
-  scene.draw(sim, state, nowMs / 1000, new Date(2000, 0, 1, Math.floor(hours), (hours % 1) * 60));
-  display.imageSmoothingEnabled = false;
-  display.drawImage(scene.buffer, 0, 0, canvas.width, canvas.height);
 
   const coins = formatMoney(state.coins);
   if (coins !== shownCoins) coinsEl.textContent = shownCoins = coins;
@@ -776,9 +761,9 @@ function frame(nowMs: number): void {
     updateStats();
     updateDayHud();
   }
-  requestAnimationFrame(frame);
 }
 
+const cafe = new CafeGame(canvas, scene, sim, () => state, { tick: frame, pointerDown, pointerMove });
 fitCanvas();
 panel.update();
 regionsUI.select('main');
@@ -786,11 +771,11 @@ updateDayHud();
 // Saves from before the opening flow existed go through it first, then collect.
 if (state.profile) collectClosedTime(closedSeconds);
 else startOnboarding(() => collectClosedTime(closedSeconds));
-requestAnimationFrame(frame);
 
 // The page starts behind a loading spinner (see index.html). Lift it once the pixel
-// fonts are in (or after 2s at most) and the first frame is drawn.
-Promise.race([document.fonts.ready, new Promise((done) => setTimeout(done, 2000))]).then(() =>
+// fonts are in (or after 2s at most) and the café has drawn its first frame.
+const atMost = (ms: number, wait: Promise<unknown>) => Promise.race([wait, new Promise((done) => setTimeout(done, ms))]);
+Promise.all([atMost(4000, cafe.ready), atMost(2000, document.fonts.ready)]).then(() =>
   requestAnimationFrame(() => {
     document.body.classList.add('ready');
     setTimeout(() => $('loader').remove(), 300);

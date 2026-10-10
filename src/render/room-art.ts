@@ -1,85 +1,28 @@
+// Canvas painters for the parts of a room that are baked into textures: the main
+// café's back wall, floor, back bar and counter, the front wall along the bottom
+// edge, and the props (tables, chairs, crates) that the Phaser scene places.
 import { isDrink } from '../game/data';
-import { isBakery, menuItems } from '../game/economy';
-import { formatMoney } from '../game/format';
+import { menuItems } from '../game/economy';
 import {
   BACK_BAR,
-  CAT_SPOT,
   COUNTER,
   COUNTER_GATE,
   DOOR_W,
   DOOR_X,
   FLOOR_Y,
   KITCHEN_DOOR,
-  MAX_TABLES,
   PASTRY_CASE,
   SCENE_W,
   WINDOWS,
-  areaOrigin,
   baristaSpot,
-  doorPlantSpots,
-  floorY,
-  floorYMin,
-  sceneHeight,
-  seatSpot,
-  tablePos,
 } from '../game/layout';
-import {
-  CELL,
-  COLS,
-  FLOOR_ROWS,
-  WALL_ROWS,
-  WALL_TOP,
-  canPlace,
-  cellFree,
-  furnitureDef,
-  type FurnitureDef,
-} from '../game/furniture';
-import type { Customer, Sim, SimEvent } from '../game/sim';
 import type { GameState } from '../game/state';
-import { AREA_IDS, activeTableIndices, areaAtX, isAreaOpen, mainTableCount, regionOffset, type AreaId } from '../game/regions';
-import { paintRegion } from './region-art';
-import { paintPassageFloor, paintRoomBoundaries } from './passages';
-import { RoomCamera } from './room-camera';
+import { paintPassageFloor } from './passages';
 import { mix, ramp } from './color';
-import {
-  paintCeiling,
-  paintCounter,
-  paintFloor,
-  paintNeon,
-  paintRug,
-  paintRunner,
-  paintSill,
-  paintWainscot,
-  paintWall,
-  counterColors,
-  grain,
-  wainscotColor,
-  shadow,
-} from './decor-art';
+import { counterColors, grain, paintCounter, paintFloor, paintRug, paintRunner, paintWainscot, paintWall, shadow, wainscotColor } from './decor-art';
 import { drawText, textWidth } from './font';
-import { GHOST_BAD, GHOST_OK, floorFurnitureBounds, paintFloorFurniture, paintWallFurniture } from './furniture-art';
-import { CHAR_H, OUTLINE, catFrames, pixelSprite, character, crownSprite, dropSprite, heartSprite, itemIcon, type Facing } from './sprites';
+import { OUTLINE, itemIcon, pixelSprite } from './sprites';
 
-interface Particle {
-  kind: 'steam' | 'sparkle' | 'heart';
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  life: number;
-  max: number;
-}
-
-interface Floater {
-  text: string;
-  x: number;
-  y: number;
-  life: number;
-  color: string;
-}
-
-const FLOATER_LIFE = 1.4;
-const MAX_FLOATERS = 14;
 const WOOD = ramp('#8a5a3c');
 
 /** Draws `text` with the bitmap font at 2x for signs and headings. */
@@ -138,24 +81,7 @@ function espressoMachine(finish: string): HTMLCanvasElement {
 const FRONT_WALL = 7;
 
 /** Where the espresso machine stands, at the left end of the counter. */
-const MACHINE_X = COUNTER.x + 8;
-
-/** Where a floor piece at (col, row) stands: its middle, and its feet at the front of its footprint. */
-function floorAnchor(def: FurnitureDef, col: number, row: number): { cx: number; foot: number } {
-  const area = areaAtX(col * CELL) ?? 'main';
-  const o = areaOrigin(area);
-  return { cx: o.x + (col + def.w / 2) * CELL - regionOffset(area), foot: o.y + floorY(FLOOR_Y + (row + def.h) * CELL) - 1 };
-}
-
-/** Grid cells as drawn on screen; floor rows stretch with the room. */
-function cellRect(surface: 'floor' | 'wall', col: number, row: number, w: number, h: number) {
-  const area = areaAtX(col * CELL) ?? 'main';
-  const o = areaOrigin(area);
-  const x = o.x + col * CELL - regionOffset(area);
-  if (surface === 'wall') return { x, y: o.y + WALL_TOP + row * CELL, w: w * CELL, h: h * CELL };
-  const top = floorY(FLOOR_Y + row * CELL);
-  return { x, y: o.y + top, w: w * CELL, h: floorY(FLOOR_Y + (row + h) * CELL) - top };
-}
+export const MACHINE_X = COUNTER.x + 8;
 
 const lazy = (make: () => HTMLCanvasElement) => {
   let c: HTMLCanvasElement | null = null;
@@ -197,8 +123,8 @@ const CHAIR_ROWS = [
   'dWwwwwwwwwwwd', '.wd..d....dw.', '.wd..d....dw.', '.wdddddddddw.', '.w..d......w.', '.d.........d.',
 ];
 const CHAIR_PALETTE = { w: '#8a5a3c', W: '#b07a4a', d: '#5f3a25', c: '#7fae8a', C: '#a6cfae', k: '#5d8a6a' };
-const CHAIR_RIGHT = lazy(() => pixelSprite(CHAIR_ROWS, CHAIR_PALETTE));
-const CHAIR_LEFT = lazy(() => pixelSprite(CHAIR_ROWS.map((r) => [...r].reverse().join('')), CHAIR_PALETTE));
+export const CHAIR_RIGHT = lazy(() => pixelSprite(CHAIR_ROWS, CHAIR_PALETTE));
+export const CHAIR_LEFT = lazy(() => pixelSprite(CHAIR_ROWS.map((r) => [...r].reverse().join('')), CHAIR_PALETTE));
 
 /** Gingham tablecloth colors: [lit top, drape, drape edge] x [white, stripe, crossing]. */
 const GINGHAM = [
@@ -210,11 +136,11 @@ const TABLE_RX = 14;
 const TABLE_RY = 6;
 const TABLE_DROP = 6;
 /** The table sprite's center column, and how far the middle of the top sits above the feet. */
-const TABLE_CX = TABLE_RX + 2;
-const TABLE_TOP_DY = 19;
+export const TABLE_CX = TABLE_RX + 2;
+export const TABLE_TOP_DY = 19;
 
 /** A round bistro table under a gingham cloth, on an iron pedestal. */
-const TABLE = lazy(() => {
+export const TABLE = lazy(() => {
   const RX = TABLE_RX;
   const RY = TABLE_RY;
   const DROP = TABLE_DROP;
@@ -279,129 +205,18 @@ const TABLE = lazy(() => {
   return c;
 });
 
-/** A piece of furniture being placed or moved, and where it would go. */
-export interface Ghost {
-  id: string;
-  col: number;
-  row: number;
-  /** The placed item being moved, which doesn't count as in its own way. */
-  skip: number;
+/** A brewing barista's cup on the counter: where it stands and how full it is. */
+export interface CounterCup {
+  x: number;
+  fill: number;
 }
 
-export class SceneRenderer {
-  readonly buffer: HTMLCanvasElement;
-  private ctx: CanvasRenderingContext2D;
-  private particles: Particle[] = [];
-  private floaters: Floater[] = [];
-  private catHappy = 0;
-  private steamTimer = 0;
+/** Paints a room's baked layers into a canvas whose top-left is the room's top-left. */
+export class RoomPainter {
   /** How far the kitchen door has swung open, 0 to 1. */
-  private kitchenDoor = 0;
-  private camera = new RoomCamera();
-  area: AreaId = 'main';
-  overview = false;
+  kitchenDoor = 0;
 
-  get viewX(): number { return this.camera.x; }
-  get viewY(): number { return this.camera.y; }
-  get viewWidth(): number { return SCENE_W / this.camera.zoom; }
-  get viewHeight(): number { return sceneHeight() / this.camera.zoom; }
-  get panning(): boolean { return this.camera.moving; }
-
-  moveToArea(area: AreaId, immediate = false): void {
-    this.area = area;
-    this.overview = false;
-    this.camera.moveTo(areaOrigin(area), immediate);
-  }
-
-  setOverview(show: boolean, immediate = false): void {
-    this.overview = show;
-    this.camera.moveTo(show ? { x: 0, y: -sceneHeight() } : areaOrigin(this.area), immediate, show ? 0.5 : 1);
-  }
-
-  constructor() {
-    this.buffer = document.createElement('canvas');
-    this.buffer.width = SCENE_W;
-    this.buffer.height = sceneHeight();
-    this.ctx = this.buffer.getContext('2d')!;
-  }
-
-  // ------------------------------------------------------------ effects
-
-  addEvents(events: SimEvent[]): void {
-    for (const e of events) {
-      if (e.type !== 'sale') continue;
-      // Stack pop-ups that would land on top of a fresh one.
-      let y = e.y;
-      while (this.floaters.some((f) => Math.abs(f.x - e.x) < 28 && Math.abs(f.y - y) < 8)) y -= 8;
-      this.floaters.push({
-        text: '+' + formatMoney(e.amount),
-        x: e.x,
-        y,
-        life: FLOATER_LIFE,
-        color: e.vip ? '#ff9fcb' : '#ffd95a',
-      });
-      if (e.vip) for (let i = 0; i < 8; i++) this.sparkle(e.x + (Math.random() - 0.5) * 24, e.y + Math.random() * 14);
-    }
-    if (this.floaters.length > MAX_FLOATERS) this.floaters.splice(0, this.floaters.length - MAX_FLOATERS);
-  }
-
-  sparkle(x: number, y: number): void {
-    this.particles.push({ kind: 'sparkle', x, y, vx: (Math.random() - 0.5) * 30, vy: -14 - Math.random() * 20, life: 0.7, max: 0.7 });
-  }
-
-  private heart(x: number, y: number): void {
-    this.particles.push({ kind: 'heart', x, y, vx: (Math.random() - 0.5) * 12, vy: -18, life: 1.3, max: 1.3 });
-  }
-
-  private steam(x: number, y: number): void {
-    this.particles.push({ kind: 'steam', x, y, vx: (Math.random() - 0.5) * 4, vy: -10, life: 1.2, max: 1.2 });
-  }
-
-  /** Returns true if the tap landed on the cat. */
-  hitCat(x: number, y: number): boolean {
-    return this.area === 'main' && x >= CAT_SPOT.x - 10 && x <= CAT_SPOT.x + 10 && y >= CAT_SPOT.y - 16 && y <= CAT_SPOT.y + 2;
-  }
-
-  petCat(): void {
-    this.catHappy = 2;
-    for (let i = 0; i < 3; i++) this.heart(CAT_SPOT.x - 4 + i * 4, CAT_SPOT.y - 16 - i * 4);
-  }
-
-  update(dt: number, sim: Sim): void {
-    this.camera.update(dt);
-    this.catHappy = Math.max(0, this.catHappy - dt);
-    // The kitchen door swings open while someone fetches a bread or pastry.
-    const fetching = sim.baristas.some((b, i) => {
-      const c = sim.isBrewing(i) && sim.customers.find((c) => c.id === b.customerId);
-      return !!c && isBakery(c.order);
-    });
-    this.kitchenDoor += ((fetching ? 1 : 0) - this.kitchenDoor) * Math.min(1, dt * 10);
-    for (const p of this.particles) {
-      p.x += p.vx * dt;
-      p.y += p.vy * dt;
-      p.life -= dt;
-    }
-    this.particles = this.particles.filter((p) => p.life > 0);
-    for (const f of this.floaters) {
-      f.y -= 16 * dt;
-      f.life -= dt;
-    }
-    this.floaters = this.floaters.filter((f) => f.life > 0);
-
-    this.steamTimer -= dt;
-    if (this.steamTimer <= 0) {
-      this.steamTimer = 0.3;
-      if (sim.baristas.some((_, i) => sim.isBrewing(i))) this.steam(MACHINE_X + 8 + Math.random() * 14, 62);
-      for (const c of sim.customers) {
-        if (c.phase === 'sitting' && Math.random() < 0.25) {
-          const table = tablePos(Math.floor(c.seat / 2));
-          this.steam(table.x + (c.seat % 2 === 0 ? -7 : 7), table.y - 26);
-        }
-      }
-    }
-  }
-
-  // ------------------------------------------------------------ drawing
+  constructor(readonly ctx: CanvasRenderingContext2D) {}
 
   private r(x: number, y: number, w: number, h: number, color: string): void {
     if (w <= 0 || h <= 0) return;
@@ -409,192 +224,7 @@ export class SceneRenderer {
     this.ctx.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
   }
 
-  draw(sim: Sim, state: GameState, t: number, now: Date): void {
-    const ctx = this.ctx;
-    const H = sceneHeight();
-    if (this.buffer.height !== H) this.buffer.height = H;
-    ctx.imageSmoothingEnabled = false;
-    ctx.clearRect(0, 0, SCENE_W, H);
-    const decor = state.decor.equipped;
-    const hour = now.getHours() + now.getMinutes() / 60;
-    const night = hour >= 19 || hour < 6;
-    const viewX = Math.round(this.viewX);
-    const viewY = Math.round(this.viewY);
-    const visibleAreas = AREA_IDS.filter((area) => {
-      const o = areaOrigin(area);
-      return o.x < viewX + this.viewWidth && o.x + SCENE_W > viewX && o.y < viewY + this.viewHeight && o.y + H > viewY;
-    });
-    ctx.save();
-    ctx.scale(this.camera.zoom, this.camera.zoom);
-    ctx.translate(-viewX, -viewY);
-
-    for (const area of visibleAreas) {
-      const offset = regionOffset(area);
-      const origin = areaOrigin(area);
-      ctx.save();
-      ctx.translate(origin.x, origin.y);
-      if (area === 'main') {
-        this.drawWall(decor.wallpaper, t);
-        const sill = WINDOWS[0];
-        this.drawWindow(sill, hour, t, state.phase === 'open');
-        this.drawKitchenDoor(state, t);
-        paintSill(ctx, decor.sill, sill.x + sill.w - 8, sill.y + sill.h + 1);
-        this.drawCat(t);
-        // The neon sign glows in the left window, facing the street.
-        paintNeon(ctx, decor.neon, sill.x + sill.w / 2, sill.y + 4, t);
-        this.drawMenuBoard(state);
-        state.decor.placed.forEach((p, i) => {
-          const def = furnitureDef(p.id);
-          if (def?.surface === 'wall' && p.col < COLS && i !== this.ghost?.skip) paintWallFurniture(ctx, p.id, p.col * CELL, WALL_TOP + p.row * CELL, t, now);
-        });
-        this.drawFloor(decor.floor, decor.rug, hour, H);
-        this.drawBackBar(state, decor.counter);
-        paintCeiling(ctx, decor.ceiling, SCENE_W, t);
-        this.drawBaristas(sim, state, t);
-        this.drawCounter(sim, state, decor.counter, t);
-      } else {
-        paintRegion(ctx, area, H, t, night, !isAreaOpen(state, area));
-        state.decor.placed.forEach((p, i) => {
-          const def = furnitureDef(p.id);
-          if (def?.surface === 'wall' && p.col * CELL >= offset && p.col * CELL < offset + SCENE_W && i !== this.ghost?.skip) paintWallFurniture(ctx, p.id, p.col * CELL - offset, WALL_TOP + p.row * CELL, t, now);
-        });
-      }
-      if (area !== 'main') paintPassageFloor(ctx, area);
-      ctx.restore();
-    }
-
-    // Everything standing on the floor is sorted by feet position.
-    const drawables: { y: number; draw: () => void }[] = [];
-    for (const c of sim.customers) {
-      if (c.phase !== 'sitting') drawables.push({ y: c.y, draw: () => this.drawCustomer(c) });
-    }
-    // Built tables, and crates on the spot the next expansion will open up.
-    for (const i of activeTableIndices(state)) drawables.push({ y: tablePos(i).y, draw: () => this.drawTable(sim, i, t) });
-    const built = mainTableCount(state);
-    if (built < MAX_TABLES) drawables.push({ y: tablePos(built).y, draw: () => this.drawUnbuilt(built) });
-    // Furniture the player placed, and the potted figs either side of the front door.
-    state.decor.placed.forEach((p, i) => {
-      const def = furnitureDef(p.id);
-      if (def?.surface !== 'floor' || i === this.ghost?.skip) return;
-      const { cx, foot } = floorAnchor(def, p.col, p.row);
-      drawables.push({ y: foot, draw: () => paintFloorFurniture(ctx, p.id, cx, foot) });
-    });
-    for (const spot of doorPlantSpots()) drawables.push({ y: spot.y, draw: () => paintFloorFurniture(ctx, 'plant_fig', spot.x, spot.y) });
-    drawables.sort((a, b) => a.y - b.y);
-    for (const d of drawables) d.draw();
-
-    for (const area of visibleAreas) {
-      ctx.save();
-      const origin = areaOrigin(area);
-      ctx.translate(origin.x, origin.y);
-      this.drawFrontWall(area === 'main' ? decor.wallpaper : area === 'reading' ? 'wall_cream' : 'wall_mint', H, area === 'main' || area === 'greenhouse', area === 'terrace');
-      paintRoomBoundaries(ctx, area, state);
-      ctx.restore();
-    }
-    for (const c of sim.customers) this.drawCustomerOverlay(c, t);
-    this.drawParticles();
-    for (const f of this.floaters) {
-      const w = textWidth(f.text);
-      if (f.x < viewX || f.x >= viewX + this.viewWidth || f.y < viewY || f.y >= viewY + this.viewHeight) continue;
-      const x = Math.min(viewX + this.viewWidth - w - 2, Math.max(viewX + 2, f.x - w / 2));
-      ctx.globalAlpha = Math.min(1, f.life / 0.4);
-      drawText(ctx, f.text, x, f.y, f.color, OUTLINE);
-      ctx.globalAlpha = 1;
-    }
-    if (night) {
-      // Evening: the room gets a little cozier and darker.
-      ctx.save();
-      ctx.globalAlpha = 0.1;
-      this.r(viewX, viewY, this.viewWidth, this.viewHeight, '#1c1d4a');
-      ctx.restore();
-    }
-    if (this.overview) {
-      const o = areaOrigin(this.area);
-      ctx.strokeStyle = '#f5ce7d';
-      ctx.lineWidth = 3;
-      for (const [x, y, dx, dy] of [[o.x + 7, o.y + 7, 1, 1], [o.x + SCENE_W - 7, o.y + 7, -1, 1], [o.x + 7, o.y + H - 7, 1, -1], [o.x + SCENE_W - 7, o.y + H - 7, -1, -1]]) {
-        ctx.beginPath();
-        ctx.moveTo(x + dx * 16, y);
-        ctx.lineTo(x, y);
-        ctx.lineTo(x, y + dy * 16);
-        ctx.stroke();
-      }
-    }
-    if (this.ghost && !this.panning && !this.overview) this.drawGhost(state, this.ghost, t, now);
-    ctx.restore();
-  }
-
-  // ------------------------------------------------------------ arranging furniture
-
-  /** Set while the player is placing or moving a piece. */
-  ghost: Ghost | null = null;
-
-  /** The grid cell a piece would go in if dropped with its middle at (x, y). */
-  cellAt(id: string, x: number, y: number): { col: number; row: number } {
-    const def = furnitureDef(id)!;
-    const o = areaOrigin(this.area);
-    x = x - o.x + regionOffset(this.area);
-    y -= o.y;
-    const col = Math.round(x / CELL - def.w / 2);
-    if (def.surface === 'wall') return { col, row: Math.round((y - WALL_TOP) / CELL - def.h / 2) };
-    // On the floor the pointer marks the front edge, where the piece stands.
-    const bottom = Math.floor((floorYMin(Math.max(FLOOR_Y, y)) - FLOOR_Y) / CELL);
-    return { col, row: bottom - def.h + 1 };
-  }
-
-  /** Which placed piece is drawn at (x, y), front-most first; -1 if none. */
-  furnitureAt(state: GameState, x: number, y: number): number {
-    const hits = state.decor.placed
-      .map((p, i) => ({ p, i, def: furnitureDef(p.id) }))
-      .filter(({ p, def }) => {
-        if (!def) return false;
-        const b =
-          def.surface === 'wall'
-            ? cellRect('wall', p.col, p.row, def.w, def.h)
-            : floorFurnitureBounds(p.id, floorAnchor(def, p.col, p.row).cx, floorAnchor(def, p.col, p.row).foot);
-        return x >= b.x && x < b.x + b.w && y >= b.y && y < b.y + b.h;
-      })
-      .sort((a, b) => (b.def!.surface === 'floor' ? b.p.row : -1) - (a.def!.surface === 'floor' ? a.p.row : -1));
-    return hits[0]?.i ?? -1;
-  }
-
-  private drawGhost(state: GameState, ghost: Ghost, t: number, now: Date): void {
-    const ctx = this.ctx;
-    const def = furnitureDef(ghost.id);
-    if (!def) return;
-    const tables = mainTableCount(state);
-    // Shade every cell it can't go on, so the free space stands out.
-    ctx.save();
-    ctx.globalAlpha = 0.3;
-    const rows = def.surface === 'wall' ? WALL_ROWS : FLOOR_ROWS;
-    for (let row = 0; row < rows; row++) {
-      const start = regionOffset(this.area) / CELL;
-      for (let col = start; col < start + COLS; col++) {
-        if (cellFree(state, def.surface, col, row, tables, ghost.skip)) continue;
-        const cell = cellRect(def.surface, col, row, 1, 1);
-        this.r(cell.x, cell.y, cell.w, cell.h, '#2a1410');
-      }
-    }
-    // The piece itself, then its footprint: green if it fits there, red if not.
-    ctx.globalAlpha = 0.8;
-    const box = cellRect(def.surface, ghost.col, ghost.row, def.w, def.h);
-    if (def.surface === 'wall') paintWallFurniture(ctx, ghost.id, box.x, box.y, t, now);
-    else {
-      const { cx, foot } = floorAnchor(def, ghost.col, ghost.row);
-      paintFloorFurniture(ctx, ghost.id, cx, foot);
-    }
-    const color = canPlace(state, ghost.id, ghost.col, ghost.row, tables, ghost.skip) ? GHOST_OK : GHOST_BAD;
-    ctx.globalAlpha = 0.3 + Math.sin(t * 6) * 0.08;
-    this.r(box.x, box.y, box.w, box.h, color);
-    ctx.globalAlpha = 1;
-    this.r(box.x, box.y, box.w, 1, color);
-    this.r(box.x, box.y + box.h - 1, box.w, 1, color);
-    this.r(box.x, box.y, 1, box.h, color);
-    this.r(box.x + box.w - 1, box.y, 1, box.h, color);
-    ctx.restore();
-  }
-
-  private drawWall(wallpaper: string, t: number): void {
+  drawWall(wallpaper: string, t: number): void {
     paintWall(this.ctx, wallpaper, 0, 6, SCENE_W, 54, t);
     // Ceiling beam.
     this.r(0, 0, SCENE_W, 6, WOOD.lo);
@@ -608,7 +238,7 @@ export class SceneRenderer {
   }
 
   /** A window onto the street; `sign` hangs the OPEN (true) or CLOSED (false) sign in it. */
-  private drawWindow(win: { x: number; y: number; w: number; h: number }, hour: number, t: number, sign: boolean | null): void {
+  drawWindow(win: { x: number; y: number; w: number; h: number }, hour: number, t: number, sign: boolean | null): void {
     const { x, y, w, h } = win;
     const night = hour >= 19 || hour < 6;
     const sunset = hour >= 17 && hour < 19;
@@ -686,7 +316,7 @@ export class SceneRenderer {
    * The swinging door to the kitchen. The oven glows through its porthole while the
    * morning bake is fresh, and the door swings open whenever a bread or pastry is fetched.
    */
-  private drawKitchenDoor(state: GameState, t: number): void {
+  drawKitchenDoor(state: GameState, t: number): void {
     const { x, w, top } = KITCHEN_DOOR;
     const h = FLOOR_Y - top;
     const frame = ramp('#9a6740');
@@ -762,7 +392,7 @@ export class SceneRenderer {
     this.r(pcx - pw / 2 + 1, pcy - 3, 1, 2, '#fff2c8');
   }
 
-  private drawMenuBoard(state: GameState): void {
+  drawMenuBoard(state: GameState): void {
     const x = 110;
     const y = 7;
     const w = 100;
@@ -798,7 +428,7 @@ export class SceneRenderer {
 
 
   /** The low cabinet behind the baristas with the café's odds and ends on top. */
-  private drawBackBar(state: GameState, counter: string): void {
+  drawBackBar(state: GameState, counter: string): void {
     const { x, w, top, front } = BACK_BAR;
     const colors = counterColors(counter);
     const body = ramp(colors.front);
@@ -889,7 +519,7 @@ export class SceneRenderer {
     this.r(x - 1, y - 3, 10, 1, '#e8a95a');
   }
 
-  private drawFloor(floor: string, rug: string, hour: number, H: number): void {
+  drawFloor(floor: string, rug: string, hour: number, H: number): void {
     paintFloor(this.ctx, floor, 0, FLOOR_Y, SCENE_W, H - FLOOR_Y);
     // Shadow where the floor meets the wall.
     this.ctx.save();
@@ -989,7 +619,7 @@ export class SceneRenderer {
    * The top of the front wall along the bottom edge, with the doorway in the middle,
    * so the room reads as a box seen from above.
    */
-  private drawFrontWall(wallpaper: string, H: number, doorway = true, garden = false): void {
+  drawFrontWall(wallpaper: string, H: number, doorway = true, garden = false): void {
     const wood = ramp(wainscotColor(wallpaper));
     const y = H - FRONT_WALL;
     if (!doorway) {
@@ -1018,33 +648,15 @@ export class SceneRenderer {
     }
   }
 
-  private drawBaristas(sim: Sim, state: GameState, t: number): void {
-    sim.baristas.forEach((b, i) => {
-      if (i >= 1 + state.upgrades.barista) return;
-      const p = baristaSpot(i);
-      const brewing = sim.isBrewing(i);
-      const bob = brewing ? Math.floor(t * 6 + i) % 2 : Math.floor(t * 1.2 + i * 0.7) % 2;
-      // The first spot behind the counter is always the owner.
-      const frames = i === 0 && state.profile ? character(state.profile.look, 'owner') : character(b.look, 'barista');
-      this.ctx.drawImage(frames.stand, p.x - 9, p.y - (CHAR_H - 1) + bob);
-      if (brewing) {
-        const progress = 1 - Math.max(0, b.remaining) / b.total;
-        this.r(p.x - 10, 64, 20, 5, OUTLINE);
-        this.r(p.x - 9, 65, 18, 3, '#5a3a2a');
-        this.r(p.x - 9, 65, Math.max(1, Math.round(18 * progress)), 3, '#7fc45e');
-        this.r(p.x - 9, 65, Math.max(1, Math.round(18 * progress)), 1, '#b6e59a');
-      }
-    });
-  }
-
-  private drawCounter(sim: Sim, state: GameState, counter: string, t: number): void {
+  /** The counter and everything on it; `cups` are the drinks being made right now. */
+  drawCounter(state: GameState, counter: string, t: number, cups: CounterCup[]): void {
     const { x, w, top, front, bottom } = COUNTER;
     paintCounter(this.ctx, counter, x, top, w, front - top, bottom - front);
 
     // Espresso machine; its finish gets fancier with upgrades.
     const lvl = state.upgrades.machine;
     const finish = lvl >= 15 ? '#e7b84a' : lvl >= 10 ? '#c9814f' : lvl >= 5 ? '#d9574a' : '#9fb3bd';
-    const brewing = sim.baristas.some((_, i) => sim.isBrewing(i));
+    const brewing = cups.length > 0;
     const mx = MACHINE_X;
     const my = 71;
     const chrome = ramp('#c9d3d8');
@@ -1083,16 +695,13 @@ export class SceneRenderer {
     this.r(rx + 5, ry + 2, 6, 1, '#8fe38a');
 
     // Cups being made in front of each busy barista.
-    sim.baristas.forEach((b, i) => {
-      if (!sim.isBrewing(i)) return;
-      const p = baristaSpot(i);
-      const fill = 1 - Math.max(0, b.remaining) / b.total;
-      this.r(p.x + 9, top - 1, 7, 7, OUTLINE);
-      this.r(p.x + 10, top, 5, 5, '#fdf6ec');
+    for (const { x: cx, fill } of cups) {
+      this.r(cx + 9, top - 1, 7, 7, OUTLINE);
+      this.r(cx + 10, top, 5, 5, '#fdf6ec');
       const level = Math.ceil(fill * 4);
-      this.r(p.x + 10, top + 5 - level, 5, level, '#6e3f24');
-      this.r(p.x + 15, top + 1, 1, 2, OUTLINE);
-    });
+      this.r(cx + 10, top + 5 - level, 5, level, '#6e3f24');
+      this.r(cx + 15, top + 1, 1, 2, OUTLINE);
+    }
   }
 
   /** The hinged flap at the end of the counter: a lift-up top and a little swing door. */
@@ -1177,94 +786,8 @@ export class SceneRenderer {
     this.r(x + w - 1, cy, 1, ch, brass.lo);
   }
 
-  private facing(c: Customer): Facing {
-    const dx = c.tx - c.x;
-    const dy = c.ty - c.y;
-    if (dx !== 0 || dy !== 0) {
-      if (Math.abs(dx) > Math.abs(dy)) return dx > 0 ? 'right' : 'left';
-      return dy > 0 ? 'down' : 'up';
-    }
-    return c.phase === 'queue' || c.phase === 'ordering' ? 'up' : 'down';
-  }
-
-  private drawCustomer(c: Customer): void {
-    const frames = character(c.look);
-    const facing = this.facing(c);
-    const walking = c.x !== c.tx || c.y !== c.ty;
-    const step = Math.floor(c.stride / 5);
-    let idx = 0;
-    if (walking) idx = facing === 'left' || facing === 'right' ? step % 2 : [1, 0, 2, 0][step % 4];
-    const sprite = frames[facing][idx];
-    const x = Math.round(c.x);
-    const y = Math.round(c.y);
-    shadow(this.ctx, x, y, 12);
-    const bob = walking && idx !== 0 ? 1 : 0;
-    this.ctx.drawImage(sprite, x - 9, y - (CHAR_H - 1) - bob);
-    if (c.hasCup && facing !== 'up') {
-      const cx = facing === 'left' ? x - 8 : x + 4;
-      this.cup(cx, y - 10 - bob);
-    }
-  }
-
-  private cup(x: number, y: number): void {
-    this.r(x, y, 5, 5, OUTLINE);
-    this.r(x + 1, y + 1, 3, 3, '#fdf6ec');
-    this.r(x + 1, y + 1, 3, 1, '#c48a55');
-  }
-
-  private drawCustomerOverlay(c: Customer, t: number): void {
-    const x = Math.round(c.x);
-    let top = Math.round(c.y) - CHAR_H;
-    if (c.phase === 'sitting') {
-      const seat = seatSpot(Math.floor(c.seat / 2), (c.seat % 2) as 0 | 1);
-      top = seat.y - CHAR_H - 5;
-    }
-    if (c.vip) this.ctx.drawImage(crownSprite(), x - 4, top - 5);
-    if (c.phase === 'ordering') {
-      const icons = [itemIcon(c.order), ...(c.extra ? [itemIcon(c.extra)] : [])];
-      const bw = icons.length > 1 ? 34 : 20;
-      const bh = 18;
-      const bx = x - Math.floor(bw / 2);
-      const by = top - bh - (c.vip ? 6 : 2);
-      this.r(bx - 1, by, bw + 2, bh, OUTLINE);
-      this.r(bx, by - 1, bw, bh + 2, OUTLINE);
-      this.r(bx, by, bw, bh, '#fdf6ec');
-      this.r(bx, by + bh - 2, bw, 2, '#e9dcc8');
-      this.r(x - 2, by + bh + 1, 5, 1, OUTLINE);
-      this.r(x - 1, by + bh, 3, 1, '#e9dcc8');
-      this.r(x - 1, by + bh + 1, 3, 1, '#fdf6ec');
-      this.r(x, by + bh + 2, 1, 1, OUTLINE);
-      icons.forEach((icon, i) => {
-        const slot = bw / icons.length;
-        this.ctx.drawImage(icon, bx + Math.floor(slot * i + (slot - icon.width) / 2), by + Math.floor((bh - icon.height) / 2));
-      });
-    } else if (c.soldOut && c.moodTimer > 0) {
-      // "Sorry, we're out": the order with a red cross over it.
-      const icon = itemIcon(c.order);
-      const bx = x - 10;
-      const by = top - 20;
-      this.r(bx - 1, by - 1, 22, 20, OUTLINE);
-      this.r(bx, by, 20, 18, '#fdf6ec');
-      this.ctx.globalAlpha = 0.5;
-      this.ctx.drawImage(icon, bx + Math.floor((20 - icon.width) / 2), by + Math.floor((18 - icon.height) / 2));
-      this.ctx.globalAlpha = 1;
-      for (let i = 0; i < 12; i++) {
-        this.r(bx + 4 + i, by + 3 + i, 2, 1, '#d9384a');
-        this.r(bx + 15 - i, by + 3 + i, 2, 1, '#d9384a');
-      }
-    } else if (c.mood === 'happy') {
-      const lift = Math.round((1.5 - c.moodTimer) * 5);
-      this.ctx.drawImage(heartSprite(), x - 4, top - 10 - lift);
-    } else if (c.mood === 'sad') {
-      this.ctx.drawImage(dropSprite(), x + 5, top + 2);
-    } else if (c.phase === 'queue' && c.patience < 12 && Math.floor(t * 2) % 2 === 0) {
-      for (let i = 0; i < 3; i++) this.r(x - 4 + i * 4, top - 4, 2, 2, OUTLINE);
-    }
-  }
-
-  /** A table spot the shop hasn't expanded into yet: crates and a barrier. */
-  private drawUnbuilt(index: number): void {
-    const { x, y } = tablePos(index);
+  /** A table spot the shop hasn't expanded into yet: crates and a barrier, standing at (x, y). */
+  drawUnbuilt(x: number, y: number): void {
     const crate = ramp('#a8763f');
     shadow(this.ctx, x, y, 34, 0.18);
     const box = (bx: number, by: number, w: number, h: number) => {
@@ -1286,83 +809,5 @@ export class SceneRenderer {
     this.r(bx + 18, by + 3, 2, 12, OUTLINE);
     this.r(bx - 1, by - 1, 24, 5, OUTLINE);
     for (let i = 0; i < 22; i++) this.r(bx + i, by, 1, 3, Math.floor((i + 1) / 3) % 2 ? '#f2b33d' : '#fdf6ec');
-  }
-
-  private drawTable(sim: Sim, index: number, t: number): void {
-    const table = tablePos(index);
-    shadow(this.ctx, table.x, table.y, 30, 0.2);
-    const seated: (Customer | undefined)[] = [0, 1].map((side) => {
-      const id = sim.seats[index * 2 + side];
-      const c = id != null ? sim.customers.find((cc) => cc.id === id) : undefined;
-      return c && c.phase === 'sitting' ? c : undefined;
-    });
-    // Chairs (backs on the outside) and anyone sitting in them.
-    for (const side of [0, 1] as const) {
-      const s = seatSpot(index, side);
-      shadow(this.ctx, s.x, s.y, 14, 0.15);
-      const chair = side === 0 ? CHAIR_RIGHT() : CHAIR_LEFT();
-      this.ctx.drawImage(chair, side === 0 ? s.x - 9 : s.x - chair.width + 9, s.y - chair.height + 1);
-      const c = seated[side];
-      if (c) {
-        const frames = character(c.look);
-        const sprite = side === 0 ? frames.sitRight : frames.sitLeft;
-        const bob = Math.floor(t * 1.1 + c.id) % 3 === 0 ? 1 : 0;
-        this.ctx.drawImage(sprite, s.x - 9, s.y - (CHAR_H + 5) + bob);
-      }
-    }
-    const top = TABLE();
-    this.ctx.drawImage(top, table.x - TABLE_CX, table.y - top.height + 1);
-    const cy = table.y - TABLE_TOP_DY;
-    // A bud vase in the middle.
-    const bloom = ['#ef5d7a', '#f2c14e', '#ffffff', '#9f78d2'][index % 4];
-    this.r(table.x - 2, cy - 7, 4, 5, OUTLINE);
-    this.r(table.x - 1, cy - 6, 2, 4, '#cfe6ea');
-    this.r(table.x, cy - 10, 1, 4, '#4e8a4f');
-    this.r(table.x - 1, cy - 12, 3, 2, bloom);
-    this.r(table.x, cy - 13, 1, 1, bloom);
-    this.r(table.x + 1, cy - 9, 1, 1, '#6fb26a');
-    // Seated customers lean over the table: redraw their upper body on top.
-    for (const side of [0, 1] as const) {
-      const c = seated[side];
-      if (!c) continue;
-      const s = seatSpot(index, side);
-      const frames = character(c.look);
-      const sprite = side === 0 ? frames.sitRight : frames.sitLeft;
-      const bob = Math.floor(t * 1.1 + c.id) % 3 === 0 ? 1 : 0;
-      const rows = CHAR_H - 8;
-      this.ctx.drawImage(sprite, 0, 0, sprite.width, rows, s.x - 9, s.y - (CHAR_H + 5) + bob, sprite.width, rows);
-    }
-    for (const side of [0, 1] as const) {
-      if (seated[side]) this.cup(table.x + (side === 0 ? -9 : 4), cy - 5);
-    }
-  }
-
-  private drawCat(t: number): void {
-    const frames = catFrames();
-    let sprite = Math.floor(t / 0.7) % 2 ? frames.swish : frames.idle;
-    if (t % 4 < 0.15) sprite = frames.blink;
-    if (this.catHappy > 0) sprite = frames.happy;
-    this.ctx.drawImage(sprite, CAT_SPOT.x - 8, CAT_SPOT.y - sprite.height + 2);
-  }
-
-  private drawParticles(): void {
-    const ctx = this.ctx;
-    for (const p of this.particles) {
-      const a = p.life / p.max;
-      ctx.globalAlpha = Math.min(1, a * 1.5);
-      if (p.kind === 'steam') {
-        const s = a > 0.6 ? 2 : 1;
-        ctx.globalAlpha = Math.min(0.8, a);
-        this.r(p.x + Math.sin(p.life * 6) * 1.5, p.y, s, s, '#ffffff');
-      } else if (p.kind === 'sparkle') {
-        const color = a > 0.5 ? '#fff6c8' : '#ffd95a';
-        this.r(p.x, p.y - 2, 1, 5, color);
-        this.r(p.x - 2, p.y, 5, 1, color);
-        this.r(p.x, p.y, 1, 1, '#ffffff');
-      } else {
-        ctx.drawImage(heartSprite(), Math.round(p.x) - 4, Math.round(p.y) - 3);
-      }
-    }
-    ctx.globalAlpha = 1;
   }
 }

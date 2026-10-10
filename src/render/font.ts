@@ -21,7 +21,11 @@ const WIDE: Record<string, string> = {
   W: '1000110001101011101110001',
 };
 
-const glyph = (ch: string) => {
+/** Every character the font draws (letters in either case). */
+export const FONT_CHARS = [...Object.keys(GLYPHS), ...Object.keys(WIDE)];
+
+/** A character's bits, row by row, and its width; glyphs are all 5 rows tall. */
+export const glyph = (ch: string) => {
   const c = ch.toUpperCase();
   const bits = WIDE[c] ?? GLYPHS[c] ?? GLYPHS['?'];
   return { bits, w: bits.length / 5 };
