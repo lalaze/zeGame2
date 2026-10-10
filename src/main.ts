@@ -12,6 +12,8 @@ import { adjacentArea, isAreaOpen, mainTableCount, regionOffset } from './game/r
 import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, furnitureDef } from './game/furniture';
 import { acquireSaveSession, watchSavePage, type SaveSession } from './game/save-session';
 import { applyTheme, comfort } from './game/decor';
+import { GuardedStorage } from './game/storage';
+import { isComposingKey, usesNativeKeyboard } from './ui/keyboard';
 import { createInitialState, type GameState } from './game/state';
 import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale, t, type Locale } from './i18n';
 import { CafeView } from './render/cafe-view';
@@ -30,8 +32,8 @@ const PANEL_COLLAPSED_KEY = 'tiny-bean-cafe/panel-collapsed';
 const AUTOSAVE_MS = 5000;
 const SIM_STEP = 0.05;
 
-let storedLocale: string | null = null;
-try { storedLocale = localStorage.getItem(LOCALE_KEY); } catch { /* The startup notice handles unavailable storage. */ }
+const storage = new GuardedStorage(() => window.localStorage);
+const storedLocale = storage.preference(LOCALE_KEY);
 setLocale(detectLocale(storedLocale, navigator.languages ?? [navigator.language]));
 
 // A waiting tab must not load or simulate a stale copy of the café.
@@ -52,7 +54,7 @@ const chinese = () => getLocale() === 'zh';
 sessionNotice(chinese()
   ? '正在打开咖啡馆…\n如果另一个标签页已打开游戏，请先关闭它。本页会自动载入最新进度。'
   : 'Opening your café…\nIf the game is open in another tab, close that tab. This page will then load your latest progress.');
-void Promise.resolve().then(() => acquireSaveSession(localStorage, navigator.locks, savePage.signal)).then((session) => {
+void Promise.resolve().then(() => acquireSaveSession(storage, navigator.locks, savePage.signal)).then((session) => {
   if (savePage.signal.aborted) { session.close(); return; }
   document.getElementById('save-session-notice')?.remove();
   try { startGame(session); } catch (error) { session.close(); throw error; }
@@ -67,6 +69,20 @@ function startGame(session: SaveSession): void {
 let state: GameState = session.state;
 const sim = session.sim;
 const scene = new CafeView();
+
+function updateTemporaryNotice(): void {
+  if (session.mode !== 'temporary') return;
+  let notice = document.getElementById('temporary-save-notice');
+  if (!notice) {
+    notice = document.createElement('div');
+    notice.id = 'temporary-save-notice';
+    notice.setAttribute('role', 'status');
+    notice.style.cssText = 'position:relative;flex-shrink:0;z-index:10001;padding:8px 16px;background:#fff0c2;color:#493728;text-align:center;font:14px sans-serif';
+    $('app').prepend(notice);
+  }
+  notice.textContent = t('save.temporary');
+}
+updateTemporaryNotice();
 
 function saveGame(): void {
   const result = session.save(state);
@@ -147,7 +163,7 @@ const hint = $('hint');
 const panelRoot = $('management-panel');
 const panelToggle = $<HTMLButtonElement>('panel-toggle');
 const layout = document.querySelector<HTMLElement>('.layout')!;
-let panelCollapsed = localStorage.getItem(PANEL_COLLAPSED_KEY) === '1';
+let panelCollapsed = storage.preference(PANEL_COLLAPSED_KEY) === '1';
 
 function updatePanelVisibility(): void {
   panelRoot.hidden = panelCollapsed;
@@ -161,7 +177,7 @@ function updatePanelVisibility(): void {
 
 function setPanelCollapsed(collapsed: boolean): void {
   panelCollapsed = collapsed;
-  localStorage.setItem(PANEL_COLLAPSED_KEY, collapsed ? '1' : '0');
+  storage.setPreference(PANEL_COLLAPSED_KEY, collapsed ? '1' : '0');
   updatePanelVisibility();
 }
 panelToggle.addEventListener('click', () => setPanelCollapsed(!panelCollapsed));
@@ -368,7 +384,7 @@ function updateDayHud(): void {
   openBtn.hidden = open || !state.profile || scene.area !== 'main';
   const label = t('day.open', { n: state.day });
   if (openBtn.textContent !== label) openBtn.textContent = label;
-  hint.hidden = !open || !!localStorage.getItem(HINT_KEY);
+  hint.hidden = !open || !!storage.preference(HINT_KEY);
 }
 
 for (const b of speedBtns) {
@@ -480,6 +496,7 @@ function applyStaticText(): void {
 applyStaticText();
 onLocaleChange(() => {
   applyStaticText();
+  updateTemporaryNotice();
   shownStats = '';
   panel.refresh();
 });
@@ -493,7 +510,7 @@ const ownerIcon = () =>
   );
 
 function rememberLocale(locale: Locale): void {
-  localStorage.setItem(LOCALE_KEY, locale);
+  storage.setPreference(LOCALE_KEY, locale);
 }
 
 function applyProfile(result: OnboardingResult): void {
@@ -555,7 +572,7 @@ function openSettings(): void {
       </dl>
       <p class="note">${t('settings.shortcuts')}</p>
       <p class="note">${t('settings.pause')}</p>
-      <p class="note">${t('settings.saves')}</p>`,
+      <p class="note">${t(session.mode === 'temporary' ? 'save.temporary' : 'settings.saves')}</p>`,
     buttons: [
       { label: t('settings.back'), primary: true },
       {
@@ -621,7 +638,7 @@ function tapAt(x: number, y: number): void {
   for (let i = 0; i < 3; i++) scene.sparkle(x + (Math.random() - 0.5) * 6, y + (Math.random() - 0.5) * 6);
   if (!hint.hidden) {
     hint.hidden = true;
-    localStorage.setItem(HINT_KEY, '1');
+    storage.setPreference(HINT_KEY, '1');
   }
 }
 
@@ -644,12 +661,10 @@ function pointerMove(x: number, y: number): void {
 }
 
 window.addEventListener('keydown', (e) => {
-  // Letters typed into a name field are not shortcuts; Esc can close a dialog.
-  const typing = e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement;
+  // Preserve native activation and editing; Esc can still close a dialog.
+  if (isComposingKey(e)) return;
   const onboarding = !!document.querySelector('.onboard-overlay');
-  if (typing && e.key !== 'Escape') return;
-  // Let navigation buttons keep their native keyboard activation.
-  if (e.key === ' ' && e.target instanceof HTMLElement && e.target.closest('.area-arrow, .area-plan-toggle, #panel-toggle')) return;
+  if (usesNativeKeyboard(e.target) && e.key !== 'Escape') return;
   if (e.key === 'Escape' && isModalOpen()) {
     e.preventDefault();
     closeModal();
@@ -728,9 +743,4 @@ Promise.all([atMost(4000, cafe.ready), atMost(2000, document.fonts.ready)]).then
     setTimeout(() => $('loader').remove(), 300);
   }),
 );
-
-if (import.meta.env.PROD && 'serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js').catch(() => {});
-}
-
 }

@@ -6,6 +6,12 @@ import { LOCALES, getLocale, setLocale, t, tList, type Locale, type MessageKey }
 import { paintCounter, paintFloor, paintWainscot, paintWall } from '../render/decor-art';
 import { HAIRS, HEAD_ROWS, SHIRTS, SKINS, character } from '../render/sprites';
 
+import { containDialogFocus, focusDialog } from './dialog-focus';
+import { isComposingKey } from './keyboard';
+
+let dismissOnboarding: (() => void) | null = null;
+let headingId = 0;
+
 type Step = 'welcome' | 'name' | 'character' | 'style' | 'opening';
 
 export interface OnboardingResult {
@@ -59,6 +65,7 @@ function themePreview(themeId: string): HTMLCanvasElement {
 }
 
 export function showOnboarding(opts: Options): void {
+  dismissOnboarding?.();
   const steps: Step[] = opts.mode === 'new' ? ['welcome', 'name', 'character', 'style', 'opening'] : ['name', 'character'];
   const draft = {
     cafeName: opts.initial?.cafeName ?? randomOf(tList('ob.names')),
@@ -77,11 +84,18 @@ export function showOnboarding(opts: Options): void {
   overlay.append(card);
   document.body.append(overlay);
 
+  let closed = false;
+  let releaseFocus: (() => void) | undefined;
   const close = () => {
+    if (closed) return;
+    closed = true;
     overlay.remove();
+    releaseFocus?.();
+    dismissOnboarding = null;
     document.removeEventListener('keydown', onKey, true);
   };
   const finish = () => {
+    if (closed) return;
     close();
     opts.onDone({
       profile: { cafeName: cleanName(draft.cafeName) || tList('ob.names')[0], ownerName: cleanName(draft.ownerName), look: draft.look },
@@ -89,6 +103,7 @@ export function showOnboarding(opts: Options): void {
     });
   };
   const next = () => {
+    if (closed) return;
     if (steps[index] === 'name' && !cleanName(draft.cafeName)) {
       card.querySelector<HTMLInputElement>('#cafe-name')?.focus();
       return;
@@ -100,6 +115,7 @@ export function showOnboarding(opts: Options): void {
     }
   };
   const back = () => {
+    if (closed) return;
     if (index === 0) {
       close();
       opts.onCancel?.();
@@ -110,10 +126,16 @@ export function showOnboarding(opts: Options): void {
   };
   // Enter advances; captured so the game's own shortcuts don't fire underneath.
   const onKey = (e: KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key !== 'Enter' || !card.contains(document.activeElement) || isComposingKey(e)) return;
+    if (e.repeat) {
       e.preventDefault();
-      next();
+      return;
     }
+    // Let focused buttons activate themselves (Back, locale, appearance, etc.).
+    if (e.target instanceof Element && e.target.closest('button, a[href], select, textarea, [contenteditable="true"]')) return;
+    e.preventDefault();
+    e.stopPropagation();
+    next();
   };
   document.addEventListener('keydown', onKey, true);
 
@@ -135,6 +157,12 @@ export function showOnboarding(opts: Options): void {
     card.querySelector('[data-next]')!.addEventListener('click', next);
     card.querySelector('[data-back]')?.addEventListener('click', back);
     ({ welcome, name, character: characterStep, style, opening })[step](body);
+    const heading = body.querySelector('h2');
+    if (heading) {
+      heading.id = `onboard-title-${++headingId}`;
+      card.setAttribute('aria-labelledby', heading.id);
+    }
+    focusDialog(card);
   }
 
   function welcome(body: HTMLElement): void {
@@ -285,5 +313,7 @@ export function showOnboarding(opts: Options): void {
     body.querySelector('.opening-owner')!.append(scaledSprite(character(draft.look, 'owner').stand, 6, 'char-sprite'));
   }
 
+  dismissOnboarding = close;
+  releaseFocus = containDialogFocus(card, overlay);
   render();
 }

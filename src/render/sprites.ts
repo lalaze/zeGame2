@@ -1,3 +1,4 @@
+import { CUSTOMER_CAST, type CustomerDesign } from '../game/customer-cast';
 import type { IngredientId, ItemId, UpgradeId } from '../game/data';
 import type { Look } from '../game/state';
 import { edge, ramp } from './color';
@@ -74,343 +75,557 @@ function layer(base: readonly string[], top: readonly string[]): string[] {
 }
 
 // ---------------------------------------------------------------- characters
-// 16x26 sprites in Stardew proportions: a big round head (rows 0-13), a short
-// torso with arms (14-21) and stubby legs (22-25). With the outline the canvas
-// is 18x28 and the feet sit on its second-to-last row.
-// S/s/Z skin, E eyes, e eye shine, B blush, m mouth, T/t/U/V shirt,
-// P/p pants, K/k shoes, H/h/L hair, A/a/Y hat, W/w hat band, R/r/Q apron.
-
-export const SKINS = ['#fcd9b8', '#eab48a', '#c88a58', '#8d5a3a'];
-export const HAIRS = ['#5a3a2a', '#9a5f34', '#f0c868', '#d4603a', '#4a5a96', '#ec9cc0'];
-export const SHIRTS = ['#d65a4a', '#5a92d4', '#78b45a', '#f2b33d', '#9f78d2', '#f08fb2', '#4cb4a6', '#efe6d2'];
-export const PANTS = ['#3f4f80', '#6e4a32', '#46404f'];
-
-/** Height of the head in a character canvas, for cropping portraits. */
+// A hand-pixelled 16×26 cast, framed at 18×28 by the selective outline.
+// Rounded cheeks, open negative space around the arms, and restrained clusters
+// stay legible at the café's native scale. All old Look indexes remain valid.
+export const SKINS = ['#f4cfad', '#dfaa7d', '#b67c55', '#80533f'];
+export const HAIRS = ['#594237', '#976546', '#dfb96f', '#b9674e', '#626782', '#cc8c9f'];
+export const SHIRTS = ['#bb6b58', '#799ba7', '#8ba477', '#d3a453', '#9b87af', '#cf929e', '#69a295', '#e5d7ba'];
+export const PANTS = ['#53637b', '#85664f', '#585464'];
 export const HEAD_ROWS = 16;
 
 export const FRONT = [
   '................',
   '................',
+  '.....SSSSSS.....',
   '....SSSSSSSS....',
   '...SSSSSSSSSS...',
-  '..SSSSSSSSSSSS..',
-  '..SSSSSSSSSSSs..',
-  '..SSSSSSSSSSSs..',
-  '..SSSSSSSSSSSs..',
+  '...SSSSSSSSSS...',
+  '...SSSSSSSSSS...',
+  '...SSSSSSSSSS...',
   '..SSSESSSSESSs..',
-  '..SSSESSSSESSs..',
-  '..SSBSSSSSSBSs..',
-  '...SSSSmmSSSs...',
+  '..sSSESSSSESss..',
+  '...SBSSSSSBSs...',
+  '....SSmmSSSs....',
   '....sSSSSSSs....',
-  '......ssss......',
-  '....tTTVVTTt....',
+  '......SSss......',
+  '.....TWWWWt.....',
+  '....UTTWWTTt....',
   '...UTTTTTTTTt...',
-  '..UTtTTTTTTtTt..',
-  '..UTtTTTTTTtTt..',
-  '..TTtTTTTTTtTt..',
-  '..TttTTTTTTttt..',
-  '..SZ.tTTTTt.Zs..',
-  '....pPPPPPPp....',
+  '...UTtTTTTtTt...',
+  '...STtTTTTtTs...',
+  '...SsTTTTTTss...',
+  '.....TTTTTt.....',
+  '.....pPPPPp.....',
 ];
-const BACK = FRONT.map((row, y) => (y >= 8 && y <= 11 ? row.replace(/[EBm]/g, 'S') : y === 14 ? '....tTTTTTTt....' : row));
+const BACK = FRONT.map((row, y) => y >= 8 && y <= 11 ? row.replace(/[EBm]/g, 'S') :
+  y === 14 ? '.....TTTTTt.....' : y === 15 ? '....UTTTTTTt....' : row);
 export const SIDE = [
   '................',
   '................',
+  '......SSSSS.....',
   '.....SSSSSSS....',
   '....SSSSSSSSS...',
-  '...SSSSSSSSSSS..',
-  '...SSSSSSSSSSS..',
-  '...SSSSSSSSSSS..',
-  '...SSSSSSSSSSSS.',
-  '...SSSSSSSSESSS.',
-  '...SSSSSSSSESSS.',
-  '...sSSSSSSSSBSS.',
-  '....sSSSSSSSSm..',
-  '.....sSSSSSSs...',
-  '.......sss......',
-  '......tTTTVt....',
-  '.....tTTTTTTt...',
-  '.....tTUUTTTt...',
-  '.....tTUUTTTt...',
-  '.....tTUUTTTt...',
-  '.....tTUUTTTt...',
-  '......tZSTTt....',
-  '......pPPPPp....',
+  '....SSSSSSSSS...',
+  '....SSSSSSSSS...',
+  '....SSSSSSSSS...',
+  '....SSSSSSSESs..',
+  '....SSSSSSSESs..',
+  '....sSSSSSBSS...',
+  '.....sSSSSSm....',
+  '......sSSSs.....',
+  '.......Sss......',
+  '......TTWWt.....',
+  '.....UTTTWTt....',
+  '.....tTUUTTt....',
+  '.....tTUTTTt....',
+  '.....tTUTTTt....',
+  '......TZSTTt....',
+  '......TTTTt.....',
+  '......pPPPp.....',
 ];
-
 export const LEGS_FRONT = [
-  ['....PPp..PPp....', '....PPp..PPp....', '....KKk..KKk....', '...KKKk..KKKk...'],
-  ['....PPp..PPp....', '....PPp..KKk....', '....KKk..KKKk...', '...KKKk.........'],
-  ['....PPp..PPp....', '....KKk..PPp....', '...KKKk..KKk....', '.........KKKk...'],
+  ['.....PPpPPp.....', '.....PPpPPp.....', '.....KK.KKk.....', '....kWK.kWKk....'],
+  ['.....PPpPPp.....', '.....PPpKKk.....', '.....KK.kWKk....', '....kWK.........'],
+  ['.....PPpPPp.....', '.....KK.PPp.....', '....kWK.KKk.....', '........kWKk....'],
 ];
 export const LEGS_SIDE = [
-  ['.......PPp......', '.......PPp......', '.......KKk......', '.......KKKKk....'],
-  ['......PPp.PPp...', '.....PPp...PPp..', '.....KKk....KKk.', '....KKk.....KKKk'],
+  ['.......PPp......', '.......PPp......', '.......KKk......', '.......kWWKk....'],
+  ['......PPpPPp....', '.....PPp..PPp...', '.....KK....KKk..', '....kWK....kWKk.'],
+  ['......pPPPPp....', '......KK.PPp....', '......kK..KK....', '..........kWKk..'],
 ];
-// Sitting sideways: thighs point forward and the table hides the rest.
-const LEGS_SEATED = ['......PPPPPPPP..', '......pPPPPPPKk.'];
-
+const LEGS_SEATED = ['......PPPPPPPp..', '......ppppPPPKk.'];
 const APRON_FRONT = [
   ...Array(14).fill(''),
   '.....Q....Q.....',
-  '.....Q....Q.....',
-  '.....RRRRRR.....',
+  '.....Q.WW.Q.....',
   '.....RRRRRr.....',
-  '.....RQQQRr.....',
-  '....RRRRRRRr....',
-  '....RRRRRRRr....',
-  '....rRRRRRRr....',
+  '.....RYRRRr.....',
+  '.....RRRRRr.....',
+  '.....RWWWRr.....',
+  '.....RRRRRr.....',
+  '.....rrrrrr.....',
 ];
 const APRON_SIDE = [
   ...Array(14).fill(''),
   '..........Q.....',
-  '..........RQ....',
-  '..........RRr...',
-  '..........RRr...',
-  '..........RRr...',
-  '.........RRRr...',
-  '.........RRRr...',
-  '.........rRRr...',
+  '..........Q.....',
+  '..........Rr....',
+  '..........Rr....',
+  '..........Rr....',
+  '..........Wr....',
+  '.........RRr....',
+  '.........rrr....',
 ];
-const APRON_BACK = [...Array(14).fill(''), '', '', '', '', '', '....rQQQQQQr....'];
-
+const APRON_BACK = [...Array(14).fill(''), '.....Q....Q.....', '......Q..Q......', '.......QQ.......', '......Q..Q......', '', '.....rrWWrr.....', '.......WW.......'];
 type HairSet = { front: string[]; side: string[]; back: string[] };
-
-/** A cook's skull cap, worn over any hairstyle. */
-const CAP = [
-  '....cCCCCCCc....',
-  '..cCCCCCCCCCCc..',
-  '.cCCCCCCCCCCCCc.',
-  '.cCCCCCCCCCCCCc.',
-  '.cccccccccccccc.',
-];
-
 const SHORT_BACK = [
-  '.....hHHHHh.....',
-  '...hHHLLHHHHh...',
-  '..hHHLLHHHHHHh..',
-  '.hHHLLHHHHHHHHh.',
-  '.HHHHHHHHHHHHHh.',
-  '.HHHHHHHHHHHHHh.',
-  '.HHHHHHHHHHHHHh.',
-  '.HHHHHHHHHHHHHh.',
-  '.hHHHHHHHHHHHhh.',
-  '.hHHHHHHHHHHHhh.',
-  '..hHHHHHHHHHhh..',
-  '...hhHHHHHHhh...',
-  '....hhhhhhhh....',
+  '................',
+  '......HHHh......',
+  '....HLLHHHHh....',
+  '...HLLHHHHHHh...',
+  '...HLHHHHHHHh...',
+  '..HHHHHHHHHHHh..',
+  '..HHHHHHHHHHHh..',
+  '..HHHHHHHHHHHh..',
+  '...HHHHHHHHHh...',
+  '...hHHHHHHHhh...',
+  '....hHHHHHhh....',
+  '.....hhhhhh.....',
 ];
-
 export const HAIR: HairSet[] = [
-  // short, swept bangs
-  {
+  { // soft side-part; a clean forehead instead of a solid block of fringe
     front: [
-      '.....hHHHHh.....',
-      '...hHHLLHHHHh...',
-      '..hHHLLHHHHHHh..',
-      '.hHHLLHHHHHHHHh.',
-      '.HHHLHHHHHHHHHh.',
-      '.HHHHHHHHhHHHHh.',
-      '.HHHHHhHHhhHHHh.',
-      '.HHh.hH.hh.hHHh.',
-      '.Hh.........Hh..',
-      '.h...........h..',
+      '................',
+      '......HHHh......',
+      '....HLLHHHHh....',
+      '...HLLHHHHHHh...',
+      '...HLHHHHHHHh...',
+      '..HHHHHHhhHHHh..',
+      '..HHHHh...hHHh..',
+      '...HH.......Hh..',
+      '...h........h...',
     ],
     side: [
-      '......hHHHh.....',
-      '....hHHLLHHh....',
-      '...hHHLLHHHHH...',
-      '..hHHLHHHHHHHH..',
-      '..HHHHHHHHHHHHH.',
-      '..HHHHHHHHHhHHH.',
-      '..HHHHHHHhh.hH..',
-      '..hHHHHHH.......',
-      '..hHHHHh........',
-      '...hHHh.........',
+      '................',
+      '.......HHh......',
+      '.....HLLHHHh....',
+      '....HLLHHHHHh...',
+      '...HHLHHHHHHHh..',
+      '...HHHHHHHHHh...',
+      '...HHHHHhh.Hh...',
+      '...HHHHh........',
+      '...HHHS.........',
       '....hh..........',
     ],
     back: SHORT_BACK,
   },
-  // bun
-  {
+  { // loosely tied bun, with a ribbon and curled face-framing wisps
     front: [
-      '......hLLh......',
-      '.....hHLHHh.....',
-      '....hHHHHHHh....',
-      '..hHHLLHHHHHhh..',
-      '.hHHLHHHHHHHHHh.',
-      '.HHHHHHHHHHHHHh.',
-      '.HHHHHhhHHHHHHh.',
-      '.HHh.......hHHh.',
-      '.Hh.........Hh..',
-      '..h..........h..',
+      '......HLLh......',
+      '.....HLLHHh.....',
+      '.....hHHHHh.....',
+      '....HHWWHHHh....',
+      '...HLLHHHHHHh...',
+      '...HHHHHHHHHh...',
+      '...HHh..hhHHh...',
+      '...H.......Hh...',
+      '...h........h...',
+      '...h............',
     ],
     side: [
       '................',
-      '......hHHHh.....',
-      '.hh.hHHLLHHh....',
-      'hLHhHHLLHHHHH...',
-      'hHHhHLHHHHHHHH..',
-      '.hhHHHHHHHHHHHH.',
-      '..HHHHHHHHHhHHH.',
-      '..HHHHHHHhh.....',
-      '..hHHHHHH.......',
-      '..hHHHHh........',
-      '...hhhh.........',
-    ],
-    back: ['......hLLh......', '.....hHLHHh.....', ...SHORT_BACK.slice(1)],
-  },
-  // long
-  {
-    front: [
-      '.....hHHHHh.....',
-      '...hHHLLHHHHh...',
-      '..hHHLLHHHHHHh..',
-      '.hHHLLHHHHHHHHh.',
-      '.HHHLHHHHHHHHHh.',
-      '.HHHHHHHHHHHHHh.',
-      '.HHHHhHHHHhHHHh.',
-      '.HHH........HHh.',
-      '.HHh........hHh.',
-      '.HHh........hHh.',
-      '.HHh........hHh.',
-      '.HHH........HHh.',
-      '.HHh........hHh.',
-      '.HHh........hHh.',
-      '.hHh........hhh.',
-      '..hh........hh..',
-    ],
-    side: [
-      '......hHHHh.....',
-      '....hHHLLHHh....',
-      '...hHHLLHHHHH...',
-      '..hHHLHHHHHHHH..',
-      '..HHHHHHHHHHHHH.',
-      '..HHHHHHHHHhHHH.',
-      '..HHHHHHHhh.hH..',
-      '..HHHHHHH.......',
-      '..HHHHHHH.......',
-      '..HHHHHH........',
-      '..HHHHHH........',
-      '..hHHHHH........',
-      '..hHHHHh........',
-      '..hHHHHh........',
-      '...hHHh.........',
-      '...hhh..........',
+      '..HLLh..........',
+      '.HLLHHhHHHh.....',
+      '.hHHHHHLLHHHh...',
+      '..hhWWHLHHHHHh..',
+      '...HHHHHHHHHh...',
+      '...HHHHHhh.Hh...',
+      '...HHHHh........',
+      '....HHS.........',
+      '.....h..........',
     ],
     back: [
-      ...SHORT_BACK.slice(0, 10),
-      '.HHHHHHHHHHHHHh.',
-      '.HHHHHHHHHHHHHh.',
-      '.HHHHHHHHHHHHhh.',
-      '.hHHHHHHHHHHHhh.',
-      '..hHHHHHHHHHhh..',
-      '...hhhhhhhhhh...',
+      '......HLLh......',
+      '.....HLLHHh.....',
+      '.....hHHHHh.....',
+      '....HHWWHHHh....',
+      ...SHORT_BACK.slice(4, 10),
+      '.....hHHHHh.....',
+      '......hhhh......',
     ],
   },
-  // beanie
-  {
+  { // rounded shoulder-length waves; space around the face remains open
     front: [
-      '.......Y........',
-      '.....aAYAAa.....',
-      '...aAAYAAAAAa...',
-      '..aAYAAAAAAAAa..',
-      '.aAAAAAAAAAAAAa.',
-      '.WWwWWwWWwWWwWW.',
-      '.wwwwwwwwwwwwww.',
-      '.HHh.hH.hh.hHHh.',
-      '.Hh.........Hh..',
+      '................',
+      '.....HHHHHh.....',
+      '....HLLHHHHh....',
+      '...HLLHHHHHHh...',
+      '..HHLHHHHHHHHh..',
+      '..HHHHhhHHHHHh..',
+      '..HHH....hHHHh..',
+      '..HHh.....hHHh..',
+      '..HH.......HHh..',
+      '..Hh.......hHh..',
+      '..HH.......HHh..',
+      '..HH.......HHh..',
+      '..HHh.....hHHh..',
+      '...Hh.....hHh...',
+      '...hh......hh...',
     ],
     side: [
-      '........Y.......',
-      '.....aAAYAa.....',
-      '....aAAYAAAAa...',
-      '...aAYAAAAAAAa..',
-      '..aAAAAAAAAAAAa.',
-      '..WWwWWwWWwWWwW.',
-      '..wwwwwwwwwwwww.',
-      '..hHHHHHH.hH....',
-      '..hHHHHh........',
+      '................',
+      '......HHHHh.....',
+      '....HLLHHHHh....',
+      '...HLLHHHHHHh...',
+      '..HHLHHHHHHHHh..',
+      '..HHHHHHHHHHh...',
+      '..HHHHHHhh.Hh...',
+      '..HHHHHH........',
+      '..HHHHS.........',
+      '..HHHHh.........',
+      '..HHHHh.........',
+      '..HHHHh.........',
+      '..hHHHh.........',
       '...hHHh.........',
       '....hh..........',
     ],
-    back: [
-      '.......Y........',
-      '.....aAYAAa.....',
-      '...aAAYAAAAAa...',
-      '..aAYAAAAAAAAa..',
-      '.aAAAAAAAAAAAAa.',
-      '.WWwWWwWWwWWwWW.',
-      '.wwwwwwwwwwwwww.',
-      '.HHHHHHHHHHHHHh.',
-      '.hHHHHHHHHHHHhh.',
-      '.hHHHHHHHHHHHhh.',
+    back: [...SHORT_BACK.slice(0, 9),
+      '..HHHHHHHHHHHh..',
+      '..HHHHHHHHHHHh..',
+      '..HHHHHHHHHHHh..',
       '..hHHHHHHHHHhh..',
-      '...hhHHHHHHhh...',
-      '....hhhhhhhh....',
+      '...hHHHHHHHhh...',
+      '....hhhhh.hh....',
+    ],
+  },
+  { // slouchy knit hat, continuous folded cuff, a tiny cream label
+    front: [
+      '................',
+      '......AAAa......',
+      '....AAYAAAaa....',
+      '...AAYAAAAAAa...',
+      '..AAYAAAAAAAaa..',
+      '..AAAAAAAAAAaa..',
+      '..YYYYAAAWWAAa..',
+      '..aaaaaaaaaaaa..',
+      '...H........H...',
+    ],
+    side: [
+      '................',
+      '.......AAa......',
+      '.....AAYAAAa....',
+      '....AAYAAAAAa...',
+      '...AAYAAAAAAAa..',
+      '...AAAAAAAAAAa..',
+      '...YYYAAAAWWAa..',
+      '...aaaaaaaaaaa..',
+      '...HHHS.........',
+      '....hh..........',
+    ],
+    back: [
+      '................',
+      '......AAAa......',
+      '....AAYAAAaa....',
+      '...AAYAAAAAAa...',
+      '..AAYAAAAAAAaa..',
+      '..AAAAAAAAAAaa..',
+      '..YYYYAAAAAAAa..',
+      '..aaaaaaaaaaaa..',
+      ...SHORT_BACK.slice(8),
     ],
   },
 ];
-
+// Four additional silhouettes belong to the visiting cast, not the profile picker.
+const CUSTOMER_HAIR: HairSet[] = [
+  ...HAIR,
+  { // high ponytail, ribbon and swept temple
+    front: HAIR[1].front.map((r, y) => y < 3 ? HAIR[0].front[y] : r),
+    side: [
+      '................', '......HHHH......', '....HLLHHHHh....',
+      '..HHLLHHHHHHh...', '.HhHHHHHHHHHHh..', '.HhHHHHHHHHHh...',
+      '.HhHHHHHhh.Hh...', '.HhHHHHh........', '.Hh.HHS.........',
+      '.HH..h..........', '.HHh............', '..Hh............',
+      '..Hh............', '..hh............',
+    ],
+    back: [
+      ...SHORT_BACK.slice(0, 5), '...HHHWWWHHHh...', '...HHHHHHHHHh...',
+      '....HHHHHHHh....', '.....HHHHHh.....', '.....HHHHHh.....',
+      '.....HHHHHh.....', '......HHHh......', '......HHHh......',
+      '.......hh.......',
+    ],
+  },
+  { // clustered curls, round rather than long and straight
+    front: [
+      '................', '....HH..HHh.....', '...HLLHHLLHHh...',
+      '..HLLHHHHHHHHh..', '..HHHHHHHHHHHh..', '.HHHhHHhHHhHHHh.',
+      '..HHh.HHh..HHh..', '..HH.......HHh..', '..Hh........Hh..',
+      '...h........h...',
+    ],
+    side: [
+      '................', '.....HH.HHh.....', '...HLLHHLLHHh...',
+      '..HLLHHHHHHHHh..', '..HHHHHHHHHHHh..', '.HHHHHHHHHHHHHh.',
+      '..HHHHHhh..HHh..', '..HHHHHh........', '...HHHS.........',
+      '..HHhh..........', '...hh...........',
+    ],
+    back: [
+      '................', '....HH..HHh.....', '...HLLHHLLHHh...',
+      '..HLLHHHHHHHHh..', '..HHHHHHHHHHHh..', '.HHHHHHHHHHHHHh.',
+      '..HHHHHHHHHHHh..', '.HHHHHHHHHHHHHh.', '..HHHHHHHHHHHh..',
+      '...hHHHHHHHhh...', '....hhHHHhhh....', '......hhh.......',
+    ],
+  },
+  { // chin-length bob with a neat straight fringe
+    front: [
+      '................', '.....HHHHHh.....', '....HLLHHHHh....',
+      '...HLLHHHHHHh...', '..HHLHHHHHHHHh..', '..HHHHHHHHHHHh..',
+      '..HHhhhhhhhhHh..', '..HH.......HHh..', '..HH.......HHh..',
+      '..HH.......HHh..', '..HH.......HHh..', '..hHh.....hHhh..',
+      '...hh.....hhh...',
+    ],
+    side: [
+      ...HAIR[2].side.slice(0, 9), '..HHHHh.........', '..HHHHh.........',
+      '..hHHHh.........', '...hhhh.........',
+    ],
+    back: [...SHORT_BACK.slice(0, 9), '..HHHHHHHHHHHh..', '..HHHHHHHHHHHh..', '..hHHHHHHHHHhh..', '...hhhhhhhhhh...'],
+  },
+  { // cropped pixie with a small asymmetric quiff
+    front: [
+      '................', '.......HHh......', '.....HLLHHh.....',
+      '....HLLHHHHh....', '...HHHHHHHHHh...', '...HHHhh..HHh...',
+      '...HH......Hh...', '...h........h...',
+    ],
+    side: [
+      '................', '........HH......', '......HLLHh.....',
+      '.....HLLHHHH....', '....HHHHHHHHh...', '...HHHHHHHHHh...',
+      '...HHHHHhh......', '....HHHh........', '.....HS.........',
+    ],
+    back: ['................', '.......HHh......', ...SHORT_BACK.slice(2, 10), '.....hhhhhh.....'],
+  },
+];
+// A small baker's toque. Its silhouette is shared across all three views.
+const CAP = [
+  '.....CCCCCC.....',
+  '...CCCCCCCCCC...',
+  '...CCWCCCCWCc...',
+  '....CCCCCCCc....',
+  '....cccccccc....',
+];
 export type Role = 'customer' | 'barista' | 'owner' | 'server' | 'cook';
 export type Facing = 'down' | 'up' | 'left' | 'right';
-
 export interface CharacterFrames {
   /** [stand, stepA, stepB] for each direction. */
   down: HTMLCanvasElement[];
   up: HTMLCanvasElement[];
   left: HTMLCanvasElement[];
   right: HTMLCanvasElement[];
-  /** Seated, facing left or right. */
   sitLeft: HTMLCanvasElement;
   sitRight: HTMLCanvasElement;
-  /** Front-facing idle frame (for portraits and the shop counter). */
   stand: HTMLCanvasElement;
 }
-
-/** Character canvases are this tall; feet rest on row CHAR_H - 2. */
-export const CHAR_H = FRONT.length + LEGS_FRONT[0].length + 2;
-
+export const CHAR_H = 28;
 const charCache = new Map<string, CharacterFrames>();
 
-/**
- * Staff wear an apron: green for hired baristas, navy for servers, the outfit color
- * for the owner. Cooks wear a white jacket, a slate apron and a skull cap.
- */
-export function character(look: Look, role: Role = 'customer'): CharacterFrames {
-  const key = `${look.skin}.${look.hair}.${look.hairStyle}.${look.shirt}.${look.pants}.${role}`;
-  let frames = charCache.get(key);
-  if (frames) return frames;
+/** Immutable source grids become pose-specific garments before hair is added. */
+function outfit(body: string[], role: Role, view: 'front' | 'side' | 'back', look: Look, step: number, design?: CustomerDesign): string[] {
+  let rows = body.slice();
+  const garment = design ? ['cardigan', 'stripe', 'overalls', 'scarf'].indexOf(design.outfit) : look.shirt % 4;
+  if (role !== 'customer') rows = layer(rows, view === 'front' ? APRON_FRONT : view === 'side' ? APRON_SIDE : APRON_BACK);
+  else if (view === 'front') {
+    // Four everyday silhouettes from the existing shirt choice: cardigan,
+    // striped sweater, overalls, and a light neck scarf. No new save fields.
+    const detail = Array<string>(22).fill('');
+    const style = garment;
+    if (style === 0) {
+      detail[16] = '.......WW.......';
+      detail[17] = '.......Wt.......';
+      detail[18] = '.......WW.......';
+      detail[19] = '.......Wt.......';
+    } else if (style === 1) {
+      detail[17] = '......WWWW......';
+      detail[19] = '.....WWWWWW.....';
+    } else if (style === 2) {
+      detail[15] = '.....P....P.....';
+      detail[16] = '.....PPPPPP.....';
+      detail[17] = '.....PWWPPp.....';
+      detail[18] = '.....PPPPPp.....';
+      detail[19] = '.....PPPPPp.....';
+      detail[20] = '.....PPPPPp.....';
+    } else if (style === 3) {
+      detail[14] = '.....WWWWW......';
+      detail[15] = '......wWW.......';
+      detail[16] = '........W.......';
+      detail[17] = '........w.......';
+    }
+    rows = layer(rows, detail);
+  } else if (role === 'customer') {
+    const detail = Array<string>(22).fill('');
+    if (view === 'side') {
+      if (garment === 1) {
+        detail[17] = '.........WW.....';
+        detail[19] = '.........WW.....';
+      } else if (garment === 2) {
+        detail[15] = '..........P.....';
+        detail[16] = '..........Pp....';
+        detail[17] = '..........Pp....';
+        detail[18] = '..........Pp....';
+        detail[19] = '..........Pp....';
+        detail[20] = '......PPPPp.....';
+      } else if (garment === 3) {
+        detail[14] = '......WWWWW.....';
+        detail[15] = '..........W.....';
+        detail[16] = '..........w.....';
+      }
+    } else {
+      if (garment === 1) {
+        detail[17] = '......WWWW......';
+        detail[19] = '.....WWWWWW.....';
+      } else if (garment === 2) {
+        detail[15] = '.....P....P.....';
+        detail[16] = '.....P....P.....';
+        detail[17] = '.....PPPPPP.....';
+        detail[18] = '.....PPPPPp.....';
+        detail[19] = '.....PPPPPp.....';
+        detail[20] = '.....PPPPPp.....';
+      } else if (garment === 3) {
+        detail[14] = '.....WWWWWW.....';
+        detail[15] = '......wwww......';
+      }
+    }
+    rows = layer(rows, detail);
+  }
+  if (role === 'cook' && view === 'front') {
+    rows[15] = '....UTQWWQTt....';
+  }
+  if (role === 'server' && view === 'front') rows[15] = '....UTQYQTTt....';
+  // Opposing arms lift by one pixel, not a whole rigid torso. Feet keep their
+  // old baseline so counter occlusion, seats, trays and hit targets stay put.
+  if (step && view !== 'side') {
+    const left = step === 1 ? 3 : 12;
+    const cells = rows.map(r => [...r]);
+    cells[18][left] = 'S';
+    cells[19][left] = '.';
+    rows = cells.map(r => r.join(''));
+  } else if (step && view === 'side') {
+    rows[18] = step === 1 ? '.....tTZSTTt....' : '.....tTUTTTt....';
+    rows[19] = step === 1 ? '......TTTTTt....' : '.......ZSTTt....';
+  }
+  return rows;
+}
 
+/** Draw customer-only garments in registered pixel coordinates. */
+function customerDetails(rows: string[], design: CustomerDesign, view: 'front' | 'side' | 'back', accessories: boolean): string[] {
+  const grid = rows.map(r => [...r]);
+  const put = (x: number, y: number, text: string) => {
+    if (!grid[y]) return;
+    [...text].forEach((ch, dx) => { if (x + dx < 16 && ch !== '.') grid[y][x + dx] = ch; });
+  };
+  const front = view === 'front';
+  const side = view === 'side';
+  if (!accessories) {
+    switch (design.outfit) {
+      case 'jacket':
+        if (front) {
+          put(5, 14, 'WTTTTW'); put(5, 15, 'TWTTWt'); put(7, 16, 'WW');
+          put(7, 17, 'WQ'); put(7, 18, 'WW'); put(5, 19, 'ww..ww');
+          put(7, 19, 'WQ'); put(7, 20, 'WW');
+        } else if (side) { put(10, 14, 'W'); put(10, 15, 'W'); put(9, 20, 'ww'); }
+        else put(5, 20, 'wwwwww');
+        break;
+      case 'vest':
+        if (front) {
+          put(5, 15, 'qWTTWq'); put(5, 16, 'qqWWqq'); put(5, 17, 'qqYqqq');
+          put(5, 18, 'qqqqqq'); put(5, 19, 'qqYqqq'); put(5, 20, 'qq..qq');
+        } else if (side) for (let y = 16; y <= 20; y++) put(9, y, 'qq');
+        else for (let y = 15; y <= 20; y++) put(5, y, 'qqqqqq');
+        break;
+      case 'dress':
+        if (front) { put(5, 19, 'wwwwww'); put(7, 16, 'YY'); }
+        else if (side) put(9, 19, 'ww');
+        else put(5, 19, 'wwwwww');
+        put(side ? 5 : 4, 20, side ? 'TTTTTTt' : 'TTTTTTTt');
+        put(side ? 5 : 4, 21, side ? 'TTTTTTt' : 'TTTTTTTt');
+        put(4, 22, 'TTtTTtTTt'); put(4, 23, 'wwwwwwwww');
+        break;
+      case 'hoodie':
+        if (front) {
+          put(4, 14, 'tWWTTWWt'); put(5, 15, 'TWTTWt'); put(6, 16, 'w..w');
+          put(6, 17, 'Y..Y'); put(6, 19, 'tttt'); put(6, 20, 'UUUt');
+        } else if (side) { put(5, 14, 'tW'); put(5, 15, 'tW'); put(10, 16, 'w'); }
+        else { put(5, 14, 'WWWWWW'); put(5, 15, 'wWWWWw'); put(6, 16, 'wwww'); }
+        break;
+      case 'sailor':
+        if (front) {
+          put(5, 14, 'WWTTWW'); put(5, 15, 'tWWWWt'); put(7, 16, 'qq');
+          put(7, 17, 'YY'); put(7, 18, 'qY');
+        } else if (side) { put(6, 14, 'WWWWW'); put(6, 15, 'w'); put(10, 15, 'W'); }
+        else { put(5, 14, 'WWWWWW'); put(5, 15, 'WTTTTW'); put(5, 16, 'WWWWWW'); }
+        break;
+      case 'duffle':
+        if (front) {
+          put(5, 14, 'wWTTWw');
+          for (let y = 16; y <= 20; y += 2) put(6, y, 'wYYw');
+          put(4, 21, 'TTTTTTTt');
+        } else if (side) { put(10, 14, 'W'); put(10, 17, 'Y'); put(10, 19, 'Y'); }
+        else put(5, 20, 'wwwwww');
+        break;
+    }
+  } else {
+    switch (design.accessory) {
+      case 'glasses':
+        if (front) { put(4, 8, 'ggg..ggg'); put(4, 9, 'gEggggEg'); put(4, 10, 'ggg..ggg'); }
+        else if (side) { put(9, 8, 'gggg'); put(10, 9, 'gEg'); put(10, 10, 'ggg'); }
+        break;
+      case 'bow':
+        if (front) { put(11, 4, 'q.q'); put(11, 5, 'qqq'); put(11, 6, 'q.q'); }
+        else if (side) { put(3, 5, 'qq'); put(2, 6, 'qYq'); }
+        else { put(6, 6, 'q..q'); put(6, 7, 'qYYq'); }
+        break;
+      case 'headband':
+        if (side) { put(7, 3, 'q'); put(6, 4, 'q'); put(5, 5, 'q'); }
+        else { put(4, 4, 'qqqqqqqq'); put(3, 5, 'q'); put(12, 5, 'q'); }
+        break;
+      case 'satchel':
+        if (front || view === 'back') {
+          for (let y = 15; y <= 20; y++) put(4 + y - 15, y, 'q');
+          put(10, 19, 'qqq'); put(10, 20, 'qYq'); put(10, 21, 'qqq'); put(10, 22, 'www');
+        } else {
+          for (let y = 15; y <= 19; y++) put(7, y, 'q');
+          put(5, 19, 'qqq'); put(5, 20, 'qYq'); put(5, 21, 'qqq'); put(5, 22, 'www');
+        }
+        break;
+    }
+  }
+  return grid.map(r => r.join(''));
+}
+
+export function character(look: Look, role: Role = 'customer', appearanceId?: number): CharacterFrames {
+  const design = role === 'customer' && Number.isInteger(appearanceId) ? CUSTOMER_CAST[appearanceId!] : undefined;
+  const key = `${look.skin}.${look.hair}.${look.hairStyle}.${look.shirt}.${look.pants}.${role}.${design?.id ?? 'base'}`;
+  const cached = charCache.get(key);
+  if (cached) return cached;
   const skin = ramp(SKINS[look.skin % SKINS.length]);
   const hair = ramp(HAIRS[look.hair % HAIRS.length]);
   const staff = role !== 'customer';
   const cook = role === 'cook';
-  const shirt = ramp(cook ? '#fbfaf5' : staff ? '#f2ead8' : SHIRTS[look.shirt % SHIRTS.length]);
-  const apron = ramp(role === 'owner' ? SHIRTS[look.shirt % SHIRTS.length] : role === 'server' ? '#3d4b6b' : cook ? '#5e7385' : '#4f8a5b');
+  const shirt = ramp(cook ? '#f0e7d3' : staff ? '#eee0c2' : SHIRTS[look.shirt % SHIRTS.length]);
+  const apron = ramp(role === 'owner' ? SHIRTS[look.shirt % SHIRTS.length] : role === 'server' ? '#61758a' : cook ? '#78878b' : '#749078');
   const pants = ramp(PANTS[look.pants % PANTS.length]);
   const hat = ramp(SHIRTS[(look.shirt + 3) % SHIRTS.length]);
   const palette: Palette = {
-    S: skin.base, s: skin.lo, Z: skin.hi, E: '#2b1d2e', B: '#f09a86', m: '#a4503f',
-    T: shirt.base, t: shirt.lo, U: shirt.hi, V: ramp(shirt.lo).lo,
-    P: pants.base, p: pants.lo, K: '#6a4430', k: '#452a1e',
+    S: skin.base, s: skin.lo, Z: skin.hi, E: '#42332f',
+    B: look.skin < 2 ? '#db9b83' : '#af7565', m: '#9c6253',
+    T: shirt.base, t: shirt.lo, U: shirt.hi, V: shirt.dark,
+    P: pants.base, p: pants.lo, K: '#795d4b', k: '#554536',
     H: hair.base, h: hair.lo, L: hair.hi,
-    A: hat.base, a: hat.lo, Y: hat.hi, W: '#f2ead8', w: '#cdbfa8',
+    A: hat.base, a: hat.lo, Y: '#e8c783', W: '#eee1bd', w: '#c5b397',
     R: apron.base, r: apron.lo, Q: apron.dark,
-    C: '#fbfaf5', c: '#d9d6cc',
+    C: '#f7eddb', c: '#c7bfae', q: design?.accent ?? '#d4ac78', g: '#86684e',
   };
-  const hairStyle = HAIR[look.hairStyle % HAIR.length];
+  const hairStyle = design ? CUSTOMER_HAIR[design.hairstyle] : HAIR[cook && look.hairStyle % HAIR.length === 3 ? 0 : look.hairStyle % HAIR.length];
   const style = cook ? { front: layer(hairStyle.front, CAP), side: layer(hairStyle.side, CAP), back: layer(hairStyle.back, CAP) } : hairStyle;
-  const dress = (rows: string[], apronRows: string[]) => (staff ? layer(rows, apronRows) : rows);
-
-  const build = (body: string[], hairRows: string[], legs: string[]) =>
-    pixelSprite(layer([...body, ...legs], hairRows), palette);
-  const down = LEGS_FRONT.map((legs) => build(dress(FRONT, APRON_FRONT), style.front, legs));
-  const up = LEGS_FRONT.map((legs) => build(dress(BACK, APRON_BACK), style.back, legs));
-  const side = dress(SIDE, APRON_SIDE);
-  const right = [LEGS_SIDE[0], LEGS_SIDE[1], LEGS_SIDE[0]].map((legs) => build(side, style.side, legs));
-  const sitRight = build(side, style.side, LEGS_SEATED);
-  frames = { down, up, right, left: right.map(flipped), sitRight, sitLeft: flipped(sitRight), stand: down[0] };
+  const build = (body: string[], view: 'front' | 'side' | 'back', legs: string[], step: number) => {
+    let rows = [...outfit(body, role, view, look, step, design), ...legs];
+    if (design) rows = customerDetails(rows, design, view, false);
+    rows = layer(rows, style[view]);
+    if (design) rows = customerDetails(rows, design, view, true);
+    return pixelSprite(rows, palette);
+  };
+  const down = LEGS_FRONT.map((legs, step) => build(FRONT, 'front', legs, step));
+  const up = LEGS_FRONT.map((legs, step) => build(BACK, 'back', legs, step));
+  const right = LEGS_SIDE.map((legs, step) => build(SIDE, 'side', legs, step));
+  const sitRight = build(SIDE, 'side', LEGS_SEATED, 0);
+  const frames = { down, up, right, left: right.map(flipped), sitRight, sitLeft: flipped(sitRight), stand: down[0] };
   charCache.set(key, frames);
   return frames;
 }

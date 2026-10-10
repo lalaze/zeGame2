@@ -603,7 +603,7 @@ export class CafeScene extends Phaser.Scene {
     const walking = w.x !== w.tx || w.y !== w.ty;
     const step = Math.floor(w.stride / 5);
     let idx = 0;
-    if (walking) idx = facing === 'left' || facing === 'right' ? step % 2 : [1, 0, 2, 0][step % 4];
+    if (walking) idx = [1, 0, 2, 0][step % 4];
     const x = Math.round(w.x);
     const y = Math.round(w.y);
     this.shadow(x, y, 12, depth);
@@ -734,7 +734,7 @@ export class CafeScene extends Phaser.Scene {
 
   private drawCustomer(c: Customer, depth: number): void {
     const standing = c.phase === 'queue' || c.phase === 'ordering' ? 'up' : 'down';
-    const { x, y, bob, facing } = this.drawWalker(c, character(c.look), standing, depth);
+    const { x, y, bob, facing } = this.drawWalker(c, character(c.look, 'customer', c.appearanceId), standing, depth);
     if (c.hasCup && facing !== 'up') this.cup(facing === 'left' ? x - 8 : x + 4, y - 10 - bob, depth + 0.002);
   }
 
@@ -751,7 +751,7 @@ export class CafeScene extends Phaser.Scene {
     });
     const sitter = (side: 0 | 1, c: Customer) => {
       const s = seatSpot(index, side);
-      const frames = character(c.look);
+      const frames = character(c.look, 'customer', c.appearanceId);
       const bob = Math.floor(t * 1.1 + c.id) % 3 === 0 ? 1 : 0;
       return { sprite: side === 0 ? frames.sitRight : frames.sitLeft, x: s.x - 9, y: s.y - (CHAR_H + 5) + bob };
     };

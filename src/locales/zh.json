@@ -1,4 +1,5 @@
 {
+  "save.temporary": "临时咖啡馆：本次进度不会保存，已有存档不会更改。启用浏览器存储和 Web Locks 后，请刷新以恢复存档游戏。",
   "app.title": "小豆咖啡馆",
   "hud.settings": "设置",
   "panel.title": "经营面板",

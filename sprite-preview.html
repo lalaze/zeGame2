@@ -1,19 +1,13 @@
-<!doctype html><body style="background:#e9d3a8;margin:0;padding:16px">
-<canvas id="c" width="420" height="300" style="width:1680px;image-rendering:pixelated"></canvas>
+<!doctype html><html lang="zh"><meta charset="utf-8"><title>小豆咖啡馆 · 30 位常客</title>
+<style>body{margin:0;background:#f7eedc;color:#534337;font-family:system-ui,sans-serif;padding:18px}h1{font-size:25px;margin:0 0 6px}p{color:#8b7560;margin:0 0 14px;font-size:14px}canvas{display:block;width:1152px;height:1160px;image-rendering:pixelated;border-radius:12px;background:#f2e4ce}button{margin:4px 8px 16px 0;padding:8px 16px;border:1px solid #c5ae8a;border-radius:6px;background:#fff9ec;color:#534337;font-size:14px}</style>
+<h1>小豆咖啡馆 · 30 位常客</h1><p>8 种发型 · 10 种服装 · 眼镜、发带、蝴蝶结与旅行包 · 每轮不重复出场</p>
+<button id="motion">暂停走路</button><canvas id="cast" width="576" height="580"></canvas>
 <script type="module">
-import { character, itemIcon, ingredientIcon, catFrames, upgradeIcon } from '/src/render/sprites.ts';
-import { MENU, INGREDIENTS } from '/src/game/data.ts';
-const ctx = document.getElementById('c').getContext('2d');
-const looks = [[0,0,0,0,0],[1,2,1,1,1],[2,3,2,2,2],[3,4,3,3,0],[0,5,2,5,1],[1,1,0,6,2]];
-looks.forEach(([skin,hair,hairStyle,shirt,pants], i) => {
-  const f = character({skin,hair,hairStyle,shirt,pants}, i === 0 ? 'owner' : i === 1 ? 'barista' : 'customer');
-  [...f.down, ...f.up, ...f.right, f.left[0], f.sitRight].forEach((s, j) => ctx.drawImage(s, 4 + j * 19, 4 + i * 30));
-});
-// Menu items, one row per category.
-const cats = ['coffee', 'tea', 'bread', 'pastry'];
-cats.forEach((cat, r) => MENU.filter((m) => m.category === cat).forEach((m, i) => ctx.drawImage(itemIcon(m.id), 224 + i * 16, 4 + r * 16)));
-INGREDIENTS.forEach((ing, i) => ctx.drawImage(ingredientIcon(ing.id), 224 + i * 16, 74));
-['marketing','machine','tables','manager','barista'].forEach((id, i) => ctx.drawImage(upgradeIcon(id), 224 + i * 18, 94));
-const cat = catFrames();
-['idle','swish','blink','happy'].forEach((k, i) => ctx.drawImage(cat[k], 224 + i * 22, 120));
-</script>
+import { character } from './src/render/sprites.ts';
+import { CUSTOMER_CAST } from './src/game/customer-cast.ts';
+const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;
+let moving=true;
+document.querySelector('#motion').onclick=()=>{moving=!moving;document.querySelector('#motion').textContent=moving?'暂停走路':'播放走路'};
+function draw(t){ctx.clearRect(0,0,576,580);
+ CUSTOMER_CAST.forEach((design,i)=>{const x=6+(i%6)*95,y=7+Math.floor(i/6)*114;const f=character(design.look,'customer',design.id);ctx.fillStyle='#dfcdb0';ctx.fillRect(x,y,89,108);ctx.fillStyle='#fff5df';ctx.fillRect(x+1,y+1,87,106);ctx.fillStyle='#b9a58a';ctx.font='7px sans-serif';ctx.fillText(String(i+1).padStart(2,'0'),x+6,y+11);ctx.fillStyle='#d5bfa0';ctx.beginPath();ctx.ellipse(x+44,y+57,15,3,0,0,Math.PI*2);ctx.fill();ctx.drawImage(f.stand,x+26,y+3,36,56);ctx.fillStyle='#594638';ctx.textAlign='center';ctx.font='8px sans-serif';ctx.fillText(design.name,x+44,y+70);ctx.textAlign='start';const idx=moving?[0,1,0,2][Math.floor(t/180)%4]:0;[f.down[idx],f.right[idx],f.up[idx],f.sitLeft].forEach((c,j)=>ctx.drawImage(c,x+4+j*21,y+77));});requestAnimationFrame(draw)}requestAnimationFrame(draw);
+</script></html>

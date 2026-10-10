@@ -1,3 +1,4 @@
+import { CustomerCastCycle } from './customer-cast';
 import { COMBO_CHANCE, MAX_QUEUE, PASS_SLOTS, RING_AGAIN, VIP_CHANCE, isDrink, type ItemId } from './data';
 import { finishDay, type DayReport } from './day';
 import {
@@ -59,6 +60,8 @@ export interface Walker {
 export interface Customer extends Walker {
   id: number;
   phase: CustomerPhase;
+  /** Transient visual design, never written into the player save. */
+  appearanceId?: number;
   look: Look;
   order: ItemId;
   /** A bakery item with a drink, or a drink with a bakery item. */
@@ -158,8 +161,15 @@ export class Sim {
   rack: ItemId[] = [];
   private spawnTimer = 1.5;
   private nextId = 1;
+  private readonly customerCast: CustomerCastCycle;
+  private castRandomState = 1;
 
-  constructor(private rng: () => number = Math.random) {}
+  constructor(private rng: () => number = Math.random) {
+    this.customerCast = new CustomerCastCycle(() => {
+      this.castRandomState = (Math.imul(this.castRandomState, 1664525) + 1013904223) >>> 0;
+      return this.castRandomState / 2 ** 32;
+    });
+  }
 
   resizeScene(fromHeight: number): void {
     const move = (w: Walker) => {
@@ -225,6 +235,11 @@ export class Sim {
     const extra = pairs.length > 0 && this.rng() < COMBO_CHANCE ? pairs[this.randInt(pairs.length)].id : null;
     const pos = queueSpot(this.queue.length);
     const door = doorSpot();
+    // Keep exactly the old five appearance RNG draws: adding a visual cast must
+    // not perturb orders, VIP rolls, arrival timing, or economic simulation.
+    const seedLook = this.randomLook();
+    this.castRandomState = 1 + ((((seedLook.skin * 6 + seedLook.hair) * 4 + seedLook.hairStyle) * 8 + seedLook.shirt) * 3 + seedLook.pants);
+    const appearance = this.customerCast.next();
     const c: Customer = {
       id: this.nextId++,
       x: door.x,
@@ -232,7 +247,8 @@ export class Sim {
       tx: pos.x,
       ty: pos.y,
       phase: 'queue',
-      look: this.randomLook(),
+      appearanceId: appearance.id,
+      look: { ...appearance.look },
       order: main.id,
       extra,
       vip: this.rng() < VIP_CHANCE,

@@ -14,6 +14,7 @@
     "font": "node scripts/subset-font.mjs"
   },
   "devDependencies": {
+    "happy-dom": "^20.14.6",
     "subset-font": "^2.9.0",
     "typescript": "^7.0.2",
     "vite": "^8.3.3",

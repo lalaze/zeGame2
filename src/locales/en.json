@@ -1,4 +1,5 @@
 {
+  "save.temporary": "Temporary café: progress won’t be saved. Existing saves are unchanged. Reload after enabling browser storage and Web Locks to return to saved play.",
   "app.title": "Tiny Bean Café",
   "hud.settings": "Settings",
   "panel.title": "Management panel",

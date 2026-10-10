@@ -1,9 +1,9 @@
 import { Sim } from './sim';
+import { GuardedStorage, type KeyValueStorage } from './storage';
 import { SAVE_KEY, deserialize, serialize, type GameState } from './state';
 
 export const SAVE_LOCK = `${SAVE_KEY}/writer`;
-export type SaveResult = 'saved' | 'inactive' | 'conflict' | 'unavailable';
-type SaveStorage = Pick<Storage, 'getItem' | 'setItem'>;
+export type SaveResult = 'saved' | 'inactive' | 'conflict' | 'unavailable' | 'temporary';
 
 /** One live simulation owns the save until the page closes. Never warm up on a
  * cloned state: cooks and orders in Sim would retain unpaid work from the clone. */
@@ -13,22 +13,32 @@ export class SaveSession {
   active = true;
   private expected: string | null;
 
-  constructor(private storage: SaveStorage, now: number, private release: () => void) {
-    this.expected = storage.getItem(SAVE_KEY);
+  readonly mode: 'persistent' | 'temporary';
+
+  constructor(private storage: GuardedStorage | null, now: number, private release: () => void) {
+    this.mode = storage ? 'persistent' : 'temporary';
+    const result = storage?.read(SAVE_KEY);
+    if (result && !result.ok) throw new Error('Save storage is unavailable');
+    this.expected = result?.ok ? result.value : null;
     this.state = deserialize(this.expected, now);
   }
 
   save(state: GameState): SaveResult {
     if (!this.active) return 'inactive';
+    // Temporary sessions never upgrade themselves, even if access later recovers.
+    // Reacquire a lock and reload the actual durable save on a fresh page instead.
+    if (!this.storage) return 'temporary';
     try {
       // Also reject an external edit (or an older app version that lacks the lock).
       // The Web Lock, not this comparison alone, makes cooperating writes exclusive.
-      if (this.storage.getItem(SAVE_KEY) !== this.expected) {
+      const current = this.storage.read(SAVE_KEY);
+      if (!current.ok) return 'unavailable';
+      if (current.value !== this.expected) {
         this.close();
         return 'conflict';
       }
       const raw = serialize(state);
-      this.storage.setItem(SAVE_KEY, raw);
+      if (!this.storage.write(SAVE_KEY, raw).ok) return 'unavailable';
       this.expected = raw;
       return 'saved';
     } catch {
@@ -45,22 +55,32 @@ export class SaveSession {
 
 /** Queue behind any other open game tab, then read its final save only after it
  * releases ownership. Browser-managed locks also release after a crash/closure. */
-export function acquireSaveSession(
-  storage: SaveStorage,
+export async function acquireSaveSession(
+  storage: KeyValueStorage | GuardedStorage,
   locks: Pick<LockManager, 'request'> | undefined,
   signal: AbortSignal,
   now: () => number = Date.now,
 ): Promise<SaveSession> {
-  if (!locks) return Promise.reject(new Error('Exclusive save locks are unavailable'));
-  return new Promise((resolve, reject) => {
-    void locks.request(SAVE_LOCK, { mode: 'exclusive', signal }, async () => {
-      let release!: () => void;
-      const closed = new Promise<void>((done) => { release = done; });
-      const session = new SaveSession(storage, now(), release);
-      resolve(session);
-      await closed;
-    }).catch(reject);
-  });
+  if (signal.aborted) throw new DOMException('Aborted', 'AbortError');
+  const temporary = () => new SaveSession(null, now(), () => {});
+  if (!locks) return temporary();
+  const guarded = storage instanceof GuardedStorage ? storage : new GuardedStorage(() => storage);
+  try {
+    return await new Promise<SaveSession>((resolve, reject) => {
+      void locks.request(SAVE_LOCK, { mode: 'exclusive', signal }, async () => {
+        let release!: () => void;
+        const closed = new Promise<void>((done) => { release = done; });
+        if (signal.aborted) throw new DOMException('Aborted', 'AbortError');
+        const session = new SaveSession(guarded, now(), release);
+        resolve(session);
+        await closed;
+      }).catch(reject);
+    });
+  } catch (error) {
+    if (signal.aborted) throw error;
+    // No readable save or no usable lock: keep the old save entirely untouched.
+    return temporary();
+  }
 }
 
 /** Cancel queued acquisition on navigation, save/release an acquired session,

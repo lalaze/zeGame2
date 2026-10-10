@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite';
+import { offlinePrecache } from './scripts/precache.mjs';
 
 export default defineConfig({
   base: './',
+  plugins: [offlinePrecache()],
   server: {
     // Allow opening the dev server through Tailscale MagicDNS names.
     allowedHosts: ['.ts.net'],

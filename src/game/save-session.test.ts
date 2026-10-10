@@ -3,6 +3,7 @@ import { COOK_BATCH } from './data';
 import { openShop } from './day';
 import { recipe, servingCost } from './economy';
 import { acquireSaveSession, watchSavePage, SAVE_LOCK } from './save-session';
+import { GuardedStorage } from './storage';
 import { SAVE_KEY, createInitialState, serialize } from './state';
 
 function memoryStorage(raw: string | null = null) {
@@ -140,8 +141,86 @@ describe('exclusive save sessions', () => {
   it('preserves an existing save when Web Locks are unavailable', async () => {
     const raw = serialize({ ...createInitialState(1), coins: 500 });
     const storage = memoryStorage(raw);
-    await expect(acquireSaveSession(storage, undefined, signal())).rejects.toThrow('unavailable');
+    const temporary = await acquireSaveSession(storage, undefined, signal());
+    expect(temporary.mode).toBe('temporary');
+    expect(temporary.state.coins).toBe(0);
+    temporary.state.coins = 99;
+    expect(temporary.save(temporary.state)).toBe('temporary');
+    expect(temporary.save(createInitialState(2))).toBe('temporary');
     expect(storage.getItem(SAVE_KEY)).toBe(raw);
+    temporary.close();
+    expect(temporary.save(temporary.state)).toBe('inactive');
+  });
+
+  it('starts temporary play when acquiring storage throws and never writes after recovery', async () => {
+    const raw = serialize({ ...createInitialState(1), coins: 500 });
+    const durable = memoryStorage(raw);
+    let denied = true;
+    const guarded = new GuardedStorage(() => {
+      if (denied) throw new DOMException('Blocked', 'SecurityError');
+      return durable;
+    });
+    const locks = exclusiveLocks();
+    const temporary = await acquireSaveSession(guarded, locks, signal());
+    expect(temporary.mode).toBe('temporary');
+    temporary.state.coins = 321;
+    denied = false;
+    expect(temporary.save(temporary.state)).toBe('temporary');
+    expect(durable.getItem(SAVE_KEY)).toBe(raw);
+    // Failed acquisition releases its Web Lock; a fresh page can load safely.
+    const restored = await acquireSaveSession(guarded, locks, signal());
+    expect(restored.mode).toBe('persistent');
+    expect(restored.state.coins).toBe(500);
+    restored.close();
+    temporary.close();
+  });
+
+  it('handles getItem and lock API failures without writing an unreadable old save', async () => {
+    let writes = 0;
+    const unreadable = {
+      getItem: () => { throw new DOMException('Denied', 'SecurityError'); },
+      setItem: () => { writes++; },
+    };
+    const session = await acquireSaveSession(unreadable, exclusiveLocks(), signal());
+    expect(session.mode).toBe('temporary');
+    expect(session.save(session.state)).toBe('temporary');
+    expect(writes).toBe(0);
+    session.close();
+    for (const request of [
+      () => { throw new Error('Locks denied'); },
+      () => Promise.reject(new Error('Locks denied')),
+    ]) {
+      const deniedLocks = { request: request as LockManager['request'] };
+      const fallback = await acquireSaveSession(unreadable, deniedLocks, signal());
+      expect(fallback.mode).toBe('temporary');
+      fallback.close();
+    }
+  });
+
+  it('does not start temporary play after pagehide aborts acquisition', async () => {
+    const abort = new AbortController();
+    abort.abort();
+    await expect(acquireSaveSession(memoryStorage(), undefined, abort.signal)).rejects.toMatchObject({ name: 'AbortError' });
+  });
+
+  it('checks for conflicts after a persistent read failure recovers', async () => {
+    const storage = memoryStorage();
+    let fail = false;
+    const guarded = new GuardedStorage(() => ({
+      getItem: (key) => {
+        if (fail) throw new DOMException('Denied', 'SecurityError');
+        return storage.getItem(key);
+      },
+      setItem: storage.setItem,
+    }));
+    const session = await acquireSaveSession(guarded, exclusiveLocks(), signal());
+    fail = true;
+    expect(session.save(session.state)).toBe('unavailable');
+    const newer = serialize({ ...createInitialState(2), coins: 777 });
+    storage.setItem(SAVE_KEY, newer);
+    fail = false;
+    expect(session.save(session.state)).toBe('conflict');
+    expect(storage.getItem(SAVE_KEY)).toBe(newer);
   });
 
   it('can retry a storage failure without changing the expected save or losing ownership', async () => {

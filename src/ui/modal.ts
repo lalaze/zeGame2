@@ -1,3 +1,5 @@
+import { containDialogFocus } from './dialog-focus';
+
 export interface ModalButton {
   label: string;
   primary?: boolean;
@@ -13,12 +15,17 @@ export interface ModalOptions {
 }
 
 let open: HTMLElement | null = null;
+let releaseFocus: (() => void) | null = null;
+let titleId = 0;
 
 export const isModalOpen = () => open !== null;
 
 export function closeModal(): void {
   open?.remove();
   open = null;
+  const release = releaseFocus;
+  releaseFocus = null;
+  release?.();
 }
 
 export function showModal(opts: ModalOptions): void {
@@ -32,6 +39,8 @@ export function showModal(opts: ModalOptions): void {
   box.setAttribute('aria-modal', 'true');
 
   const title = document.createElement('h2');
+  title.id = `modal-title-${++titleId}`;
+  box.setAttribute('aria-labelledby', title.id);
   if (opts.icon) {
     const img = document.createElement('img');
     img.src = opts.icon;
@@ -52,6 +61,7 @@ export function showModal(opts: ModalOptions): void {
     btn.className = 'pixel-btn' + (b.primary ? '' : b.danger ? ' danger' : ' ghost');
     btn.textContent = b.label;
     btn.addEventListener('click', () => {
+      if (open !== overlay) return;
       closeModal();
       b.onClick?.();
     });
@@ -62,7 +72,7 @@ export function showModal(opts: ModalOptions): void {
   overlay.append(box);
   root.append(overlay);
   open = overlay;
-  (actions.querySelector('button') as HTMLButtonElement | null)?.focus();
+  releaseFocus = containDialogFocus(box, overlay);
 }
 
 let toastTimer = 0;

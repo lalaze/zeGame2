@@ -833,6 +833,10 @@ html:lang(zh) body {
 
 .modal {
   width: min(380px, 100%);
+  max-height: calc(100vh - 48px);
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 18px 20px;
 }
 
@@ -1354,6 +1358,10 @@ html:lang(zh) body {
 
 .onboard {
   width: min(460px, 100%);
+  max-height: calc(100vh - 48px);
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 18px 22px;
 }
 
