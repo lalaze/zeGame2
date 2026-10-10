@@ -199,7 +199,7 @@ export function paintFloor(ctx: Ctx, id: string, x0: number, y0: number, w: numb
       return;
     }
     case 'floor_mint':
-      return tiles('#dff2e4', '#b4dcc4', 16);
+      return tiles('#dff2e4', '#c3e3cf', 16);
     case 'floor_terrazzo': {
       tiles('#ece5d8', '#e6ddcd', 32, 0);
       const chips = ['#d98c7a', '#7fb2a0', '#e8c06a', '#9a8f86', '#ffffff'];
@@ -235,7 +235,7 @@ export function paintFloor(ctx: Ctx, id: string, x0: number, y0: number, w: numb
       return;
     }
     default:
-      return tiles('#f3dfbd', '#d7b086', 16);
+      return tiles('#f2e0c2', '#e4c9a0', 16, 0.012);
   }
 }
 
@@ -255,6 +255,11 @@ const COUNTERS: Record<string, CounterStyle> = {
   counter_pink: { top: '#f7c3cf', front: '#e98fa6' },
   counter_gold: { top: '#f3dfa6', front: '#363c5c', trim: '#e7b84a' },
 };
+
+/** The top and front colors of a counter style, for furniture that should match it. */
+export function counterColors(id: string): { top: string; front: string; trim?: string } {
+  return COUNTERS[id] ?? COUNTERS.counter_oak;
+}
 
 /** Draws a counter in 3/4 view: a top surface of height topH, then the front face. */
 export function paintCounter(ctx: Ctx, id: string, x: number, y: number, w: number, topH: number, frontH: number): void {
@@ -462,6 +467,9 @@ export function shadow(ctx: Ctx, cx: number, y: number, w: number, alpha = 0.22)
   ctx.restore();
 }
 
+/** A potted plant's sprite, if `id` is one. */
+export const plantSprite = (id: string): HTMLCanvasElement | undefined => PLANTS[id]?.();
+
 /** Floor plant standing with its pot bottom at (cx, footY). */
 export function paintPlant(ctx: Ctx, id: string, cx: number, footY: number): void {
   const s = PLANTS[id]?.();
@@ -549,21 +557,51 @@ export function paintCeiling(ctx: Ctx, id: string, sceneW: number, t: number): v
         if (drop > 3) rect(ctx, x, 8 + drop, 2, 1, '#9fd47e');
       }
       const sway = Math.round(Math.sin(t * 1.2));
-      for (const hx of [140, 276]) {
+      for (const hx of [70, 250]) {
         rect(ctx, hx, 6, 1, 6, '#4a2e1e');
         ctx.drawImage(HANGING_PLANT(), hx - 6 + sway, 10);
       }
       return;
     }
     case 'ceiling_pendants':
-      for (const x of [62, 134, 246, 296]) pendant(ctx, x, 7, Math.floor(t * 0.5 + x) % 9 !== 0);
+      for (const x of [36, 132, 188, 284]) pendant(ctx, x, 7, Math.floor(t * 0.5 + x) % 9 !== 0);
       return;
     case 'ceiling_chandelier':
-      return chandelier(ctx, 196, t);
+      return chandelier(ctx, sceneW / 2, t);
   }
 }
 
 // ---------------------------------------------------------------- rugs
+
+/**
+ * A woven jute runner, laid either down the room ('v') or across it ('h'), so the
+ * entrance runner and the corridors between rooms are one continuous carpet.
+ */
+export function paintRunner(ctx: Ctx, x: number, y: number, w: number, h: number, dir: 'h' | 'v', base = '#d6b382'): void {
+  const along = dir === 'v' ? h : w;
+  const across = dir === 'v' ? w : h;
+  // Paint in runner-local coordinates: a runs along the carpet, b across it.
+  const at = (a: number, b: number, la: number, lb: number, color: string) =>
+    dir === 'v' ? rect(ctx, x + b, y + a, lb, la, color) : rect(ctx, x + a, y + b, la, lb, color);
+  const field = ramp(base);
+  const trim = '#9a6a45';
+  at(0, 0, along, across, field.lo);
+  at(0, 1, along, across - 2, field.base);
+  at(0, 3, along, 1, trim);
+  at(0, across - 4, along, 1, trim);
+  const weave = mix(field.base, field.lo, 0.45);
+  for (let a = 1; a < along; a += 2) {
+    for (let b = 5 + (a % 4 === 1 ? 2 : 0); b < across - 5; b += 4) at(a, b, 1, 1, weave);
+  }
+  // Diamonds down the middle.
+  const mid = Math.floor(across / 2);
+  for (let c = 10; c < along - 4; c += 20) {
+    for (let i = -2; i <= 2; i++) {
+      const half = 2 - Math.abs(i);
+      at(c + i, mid - half, 1, half * 2 + 1, i === 0 ? '#b5453a' : field.lo);
+    }
+  }
+}
 
 export function paintRug(ctx: Ctx, id: string, x: number, y: number, w: number, h: number): void {
   if (id === 'rug_round') {
@@ -680,14 +718,6 @@ export function decorIcon(id: string): HTMLCanvasElement {
     paintFloor(ctx, id, 0, 0, ICON_W, ICON_H);
   } else if (slot === 'counter') {
     paintCounter(ctx, id, 1, 3, ICON_W - 2, 6, 15);
-  } else if (slot === 'art') {
-    paintArt(ctx, id, 1, 1);
-  } else if (slot === 'plant') {
-    const s = PLANTS[id]();
-    const k = Math.min(1, (ICON_H - 1) / s.height);
-    const w = Math.round(s.width * k);
-    const h = Math.round(s.height * k);
-    ctx.drawImage(s, Math.round((ICON_W - w) / 2), ICON_H - h, w, h);
   } else if (slot === 'sill') {
     rect(ctx, 2, 18, 24, 3, '#a46a3c');
     rect(ctx, 2, 18, 24, 1, '#c98f5e');

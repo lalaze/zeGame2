@@ -1,38 +1,63 @@
 import { isDrink } from '../game/data';
-import { menuItems, tableCount } from '../game/economy';
+import { isBakery, menuItems } from '../game/economy';
 import { formatMoney } from '../game/format';
 import {
+  BACK_BAR,
   CAT_SPOT,
   COUNTER,
-  DOOR,
-  DOOR_SPOT,
+  COUNTER_GATE,
+  DOOR_W,
+  DOOR_X,
   FLOOR_Y,
+  KITCHEN_DOOR,
+  MAX_TABLES,
+  PASTRY_CASE,
   SCENE_W,
-  WINDOW,
+  WINDOWS,
+  areaOrigin,
   baristaSpot,
-  backRowY,
-  frontRowY,
+  doorPlantSpots,
+  floorY,
+  floorYMin,
   sceneHeight,
   seatSpot,
   tablePos,
 } from '../game/layout';
+import {
+  CELL,
+  COLS,
+  FLOOR_ROWS,
+  WALL_ROWS,
+  WALL_TOP,
+  canPlace,
+  cellFree,
+  furnitureDef,
+  type FurnitureDef,
+} from '../game/furniture';
 import type { Customer, Sim, SimEvent } from '../game/sim';
 import type { GameState } from '../game/state';
+import { AREA_IDS, activeTableIndices, areaAtX, isAreaOpen, mainTableCount, regionOffset, type AreaId } from '../game/regions';
+import { paintRegion } from './region-art';
+import { paintPassageFloor, paintRoomBoundaries } from './passages';
+import { RoomCamera } from './room-camera';
 import { mix, ramp } from './color';
 import {
-  paintArt,
   paintCeiling,
   paintCounter,
   paintFloor,
   paintNeon,
-  paintPlant,
   paintRug,
+  paintRunner,
   paintSill,
   paintWainscot,
   paintWall,
+  counterColors,
+  grain,
+  wainscotColor,
   shadow,
 } from './decor-art';
 import { drawText, textWidth } from './font';
+import { GHOST_BAD, GHOST_OK, floorFurnitureBounds, paintFloorFurniture, paintWallFurniture } from './furniture-art';
 import { CHAR_H, OUTLINE, catFrames, pixelSprite, character, crownSprite, dropSprite, heartSprite, itemIcon, type Facing } from './sprites';
 
 interface Particle {
@@ -54,7 +79,6 @@ interface Floater {
 }
 
 const FLOATER_LIFE = 1.4;
-const MAX_TABLES = 4;
 const MAX_FLOATERS = 14;
 const WOOD = ramp('#8a5a3c');
 
@@ -110,6 +134,160 @@ function espressoMachine(finish: string): HTMLCanvasElement {
   return c;
 }
 
+/** How much of the front wall's top shows along the bottom edge. */
+const FRONT_WALL = 7;
+
+/** Where the espresso machine stands, at the left end of the counter. */
+const MACHINE_X = COUNTER.x + 8;
+
+/** Where a floor piece at (col, row) stands: its middle, and its feet at the front of its footprint. */
+function floorAnchor(def: FurnitureDef, col: number, row: number): { cx: number; foot: number } {
+  const area = areaAtX(col * CELL) ?? 'main';
+  const o = areaOrigin(area);
+  return { cx: o.x + (col + def.w / 2) * CELL - regionOffset(area), foot: o.y + floorY(FLOOR_Y + (row + def.h) * CELL) - 1 };
+}
+
+/** Grid cells as drawn on screen; floor rows stretch with the room. */
+function cellRect(surface: 'floor' | 'wall', col: number, row: number, w: number, h: number) {
+  const area = areaAtX(col * CELL) ?? 'main';
+  const o = areaOrigin(area);
+  const x = o.x + col * CELL - regionOffset(area);
+  if (surface === 'wall') return { x, y: o.y + WALL_TOP + row * CELL, w: w * CELL, h: h * CELL };
+  const top = floorY(FLOOR_Y + row * CELL);
+  return { x, y: o.y + top, w: w * CELL, h: floorY(FLOOR_Y + (row + h) * CELL) - top };
+}
+
+const lazy = (make: () => HTMLCanvasElement) => {
+  let c: HTMLCanvasElement | null = null;
+  return () => (c ??= make());
+};
+
+/** Burr grinder on the back bar, its hopper full of beans. */
+const GRINDER = lazy(() =>
+  pixelSprite(
+    [
+      '..gggggg..', '..gbBbbg..', '..gbbBbg..', '..gbbbbg..', '...gbbg...', '....mm....',
+      '..MMMMMM..', '..MmmmmK..', '..MmrrmK..', '..MmmmmK..', '..MKKKKK..', '...k..k...',
+      '..........', '.MMMMMMMM.', '.KKKKKKKK.',
+    ],
+    { g: '#d6ecf2', b: '#6e3f24', B: '#9c6538', M: '#5d6672', m: '#7c8794', K: '#3f4650', k: '#2a2a30', r: '#d9574a' },
+  ),
+);
+
+/** A layer cake under a glass dome. */
+const CAKE_DOME = lazy(() =>
+  pixelSprite(
+    [
+      '.......kk.......', '......dkkd......', '....ddggggdd....', '...dWgggggggd...', '..dWgggggggggd..',
+      '..dWggrgrggrgd..', '.dWggPPPPPPPggd.', '.dWggpppppppggd.', '.dgggcccccccggd.', '.dgggPPPPPPPggd.',
+      '.dgggpppppppggd.', '.ssssssssssssss.', '......SSSS......', '....SSSSSSSS....',
+    ],
+    {
+      k: '#c9d3d8', d: '#9fc3cf', g: '#e4f3f6', W: '#ffffff', r: '#e2434b',
+      P: '#f6b3c4', p: '#ef8fa8', c: '#fdf6ec', s: '#e8edf0', S: '#b9c4cb',
+    },
+  ),
+);
+
+// A bistro chair seen from the side, facing right: a ladder back, a cushion and splayed legs.
+const CHAIR_ROWS = [
+  '.wWw.........', 'wWWwd........', 'wWwwd........', 'wWddd........', 'wWwwd........', 'wWwwd........',
+  'wWddd........', 'wWwwd........', 'wWwwd........', 'wWddd........', 'wW.wd........', 'wW.wd........',
+  'wW.wd........', 'wW.wd........', 'wW.wd........', 'wWcCCCCCCCCc.', 'wWccccccccccc', 'wwkkkkkkkkkkk',
+  'dWwwwwwwwwwwd', '.wd..d....dw.', '.wd..d....dw.', '.wdddddddddw.', '.w..d......w.', '.d.........d.',
+];
+const CHAIR_PALETTE = { w: '#8a5a3c', W: '#b07a4a', d: '#5f3a25', c: '#7fae8a', C: '#a6cfae', k: '#5d8a6a' };
+const CHAIR_RIGHT = lazy(() => pixelSprite(CHAIR_ROWS, CHAIR_PALETTE));
+const CHAIR_LEFT = lazy(() => pixelSprite(CHAIR_ROWS.map((r) => [...r].reverse().join('')), CHAIR_PALETTE));
+
+/** Gingham tablecloth colors: [lit top, drape, drape edge] x [white, stripe, crossing]. */
+const GINGHAM = [
+  ['#fbf3e6', '#ef9c8f', '#d9675d'],
+  ['#e0cbb6', '#cf776d', '#b14c46'],
+  ['#c9b29d', '#b25f5a', '#93403d'],
+];
+const TABLE_RX = 14;
+const TABLE_RY = 6;
+const TABLE_DROP = 6;
+/** The table sprite's center column, and how far the middle of the top sits above the feet. */
+const TABLE_CX = TABLE_RX + 2;
+const TABLE_TOP_DY = 19;
+
+/** A round bistro table under a gingham cloth, on an iron pedestal. */
+const TABLE = lazy(() => {
+  const RX = TABLE_RX;
+  const RY = TABLE_RY;
+  const DROP = TABLE_DROP;
+  const c = document.createElement('canvas');
+  c.width = TABLE_CX * 2 + 1;
+  c.height = TABLE_TOP_DY + RY + 2;
+  const ctx = c.getContext('2d')!;
+  const r = (x: number, y: number, w: number, h: number, color: string) => {
+    if (w <= 0 || h <= 0) return;
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, w, h);
+  };
+  const cx = TABLE_CX;
+  const foot = c.height - 1;
+  const cy = foot - TABLE_TOP_DY;
+  const hem = cy + RY + DROP;
+  // Pedestal and a round foot peeking out under the cloth.
+  const iron = ramp('#4a3a36');
+  r(cx - 2, hem, 5, foot - hem - 1, OUTLINE);
+  r(cx - 1, hem, 3, foot - hem - 1, iron.base);
+  r(cx - 1, hem, 1, foot - hem - 1, iron.hi);
+  r(cx - 7, foot - 2, 15, 3, OUTLINE);
+  r(cx - 6, foot - 2, 13, 1, iron.hi);
+  r(cx - 6, foot - 1, 13, 1, iron.base);
+  const half = (dy: number) => Math.round(Math.sqrt(Math.max(0, 1 - (dy / RY) ** 2)) * RX);
+  const check = (x: number, y: number, shade: number) =>
+    GINGHAM[shade][(Math.floor((x - cx + 64) / 2) % 2) + (Math.floor(y / 2) % 2)];
+  // Outline: the top ellipse, the sides and the hem.
+  for (let dy = -RY - 1; dy <= RY + 1; dy++) {
+    const h = Math.round(Math.sqrt(Math.max(0, 1 - (dy / (RY + 1)) ** 2)) * (RX + 1));
+    r(cx - h, cy + dy, h * 2 + 1, 1, OUTLINE);
+  }
+  r(cx - RX - 1, cy, RX * 2 + 3, DROP + 1, OUTLINE);
+  for (let dy = 0; dy <= RY; dy++) {
+    const h = half(dy) + 1;
+    r(cx - h, cy + dy + DROP + 1, h * 2 + 1, 1, OUTLINE);
+  }
+  // The drape: the front half of the ellipse pushed down, in shade, darker at the sides.
+  for (let dy = 0; dy <= RY; dy++) {
+    const h = half(dy);
+    for (let y = cy + dy; y <= cy + dy + DROP; y++) {
+      for (let x = cx - h; x <= cx + h; x++) r(x, y, 1, 1, check(x, y, Math.abs(x - cx) > RX - 4 ? 2 : 1));
+    }
+  }
+  // Scalloped hem.
+  for (let x = cx - RX; x <= cx + RX; x++) {
+    const dy = Math.round(Math.sqrt(Math.max(0, 1 - ((x - cx) / RX) ** 2)) * RY);
+    if ((x - cx + 64) % 3 === 0) r(x, cy + dy + DROP, 1, 1, OUTLINE);
+  }
+  // The flat top, lit from above, with a soft sheen.
+  for (let dy = -RY; dy <= RY; dy++) {
+    const h = half(dy);
+    for (let x = cx - h; x <= cx + h; x++) r(x, cy + dy, 1, 1, check(x, cy + dy, 0));
+  }
+  // A crease where the cloth folds over the edge.
+  for (let x = cx - RX + 1; x <= cx + RX - 1; x++) {
+    const dy = Math.round(Math.sqrt(Math.max(0, 1 - ((x - cx) / RX) ** 2)) * RY);
+    r(x, cy + dy + 1, 1, 1, check(x, cy + dy + 1, 2));
+  }
+  r(cx - 8, cy - RY, 6, 1, '#ffffff');
+  r(cx - 11, cy - RY + 1, 3, 1, '#ffffff');
+  return c;
+});
+
+/** A piece of furniture being placed or moved, and where it would go. */
+export interface Ghost {
+  id: string;
+  col: number;
+  row: number;
+  /** The placed item being moved, which doesn't count as in its own way. */
+  skip: number;
+}
+
 export class SceneRenderer {
   readonly buffer: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
@@ -117,6 +295,28 @@ export class SceneRenderer {
   private floaters: Floater[] = [];
   private catHappy = 0;
   private steamTimer = 0;
+  /** How far the kitchen door has swung open, 0 to 1. */
+  private kitchenDoor = 0;
+  private camera = new RoomCamera();
+  area: AreaId = 'main';
+  overview = false;
+
+  get viewX(): number { return this.camera.x; }
+  get viewY(): number { return this.camera.y; }
+  get viewWidth(): number { return SCENE_W / this.camera.zoom; }
+  get viewHeight(): number { return sceneHeight() / this.camera.zoom; }
+  get panning(): boolean { return this.camera.moving; }
+
+  moveToArea(area: AreaId, immediate = false): void {
+    this.area = area;
+    this.overview = false;
+    this.camera.moveTo(areaOrigin(area), immediate);
+  }
+
+  setOverview(show: boolean, immediate = false): void {
+    this.overview = show;
+    this.camera.moveTo(show ? { x: 0, y: -sceneHeight() } : areaOrigin(this.area), immediate, show ? 0.5 : 1);
+  }
 
   constructor() {
     this.buffer = document.createElement('canvas');
@@ -159,7 +359,7 @@ export class SceneRenderer {
 
   /** Returns true if the tap landed on the cat. */
   hitCat(x: number, y: number): boolean {
-    return x >= CAT_SPOT.x - 10 && x <= CAT_SPOT.x + 10 && y >= CAT_SPOT.y - 16 && y <= CAT_SPOT.y + 2;
+    return this.area === 'main' && x >= CAT_SPOT.x - 10 && x <= CAT_SPOT.x + 10 && y >= CAT_SPOT.y - 16 && y <= CAT_SPOT.y + 2;
   }
 
   petCat(): void {
@@ -168,7 +368,14 @@ export class SceneRenderer {
   }
 
   update(dt: number, sim: Sim): void {
+    this.camera.update(dt);
     this.catHappy = Math.max(0, this.catHappy - dt);
+    // The kitchen door swings open while someone fetches a bread or pastry.
+    const fetching = sim.baristas.some((b, i) => {
+      const c = sim.isBrewing(i) && sim.customers.find((c) => c.id === b.customerId);
+      return !!c && isBakery(c.order);
+    });
+    this.kitchenDoor += ((fetching ? 1 : 0) - this.kitchenDoor) * Math.min(1, dt * 10);
     for (const p of this.particles) {
       p.x += p.vx * dt;
       p.y += p.vy * dt;
@@ -184,7 +391,7 @@ export class SceneRenderer {
     this.steamTimer -= dt;
     if (this.steamTimer <= 0) {
       this.steamTimer = 0.3;
-      if (sim.baristas.some((_, i) => sim.isBrewing(i))) this.steam(22 + Math.random() * 14, 64);
+      if (sim.baristas.some((_, i) => sim.isBrewing(i))) this.steam(MACHINE_X + 8 + Math.random() * 14, 62);
       for (const c of sim.customers) {
         if (c.phase === 'sitting' && Math.random() < 0.25) {
           const table = tablePos(Math.floor(c.seat / 2));
@@ -211,40 +418,85 @@ export class SceneRenderer {
     const decor = state.decor.equipped;
     const hour = now.getHours() + now.getMinutes() / 60;
     const night = hour >= 19 || hour < 6;
+    const viewX = Math.round(this.viewX);
+    const viewY = Math.round(this.viewY);
+    const visibleAreas = AREA_IDS.filter((area) => {
+      const o = areaOrigin(area);
+      return o.x < viewX + this.viewWidth && o.x + SCENE_W > viewX && o.y < viewY + this.viewHeight && o.y + H > viewY;
+    });
+    ctx.save();
+    ctx.scale(this.camera.zoom, this.camera.zoom);
+    ctx.translate(-viewX, -viewY);
 
-    this.drawWall(decor.wallpaper, t);
-    this.drawWindow(hour, t);
-    paintSill(ctx, decor.sill, WINDOW.x + WINDOW.w - 8, WINDOW.y + WINDOW.h + 1);
-    this.drawCat(t);
-    this.drawClock(now);
-    this.drawMenuBoard(state);
-    paintArt(ctx, decor.art, 150, 12, t);
-    this.drawShelf(state);
-    this.drawDoor(sim, night, state.phase === 'open');
-    paintNeon(ctx, decor.neon, DOOR.x + DOOR.w / 2, 8, t);
-    paintCeiling(ctx, decor.ceiling, SCENE_W, t);
-    this.drawFloor(decor.floor, decor.rug, hour, H);
-    this.drawBaristas(sim, state, t);
-    this.drawCounter(sim, state, decor.counter, t);
+    for (const area of visibleAreas) {
+      const offset = regionOffset(area);
+      const origin = areaOrigin(area);
+      ctx.save();
+      ctx.translate(origin.x, origin.y);
+      if (area === 'main') {
+        this.drawWall(decor.wallpaper, t);
+        const sill = WINDOWS[0];
+        this.drawWindow(sill, hour, t, state.phase === 'open');
+        this.drawKitchenDoor(state, t);
+        paintSill(ctx, decor.sill, sill.x + sill.w - 8, sill.y + sill.h + 1);
+        this.drawCat(t);
+        // The neon sign glows in the left window, facing the street.
+        paintNeon(ctx, decor.neon, sill.x + sill.w / 2, sill.y + 4, t);
+        this.drawMenuBoard(state);
+        state.decor.placed.forEach((p, i) => {
+          const def = furnitureDef(p.id);
+          if (def?.surface === 'wall' && p.col < COLS && i !== this.ghost?.skip) paintWallFurniture(ctx, p.id, p.col * CELL, WALL_TOP + p.row * CELL, t, now);
+        });
+        this.drawFloor(decor.floor, decor.rug, hour, H);
+        this.drawBackBar(state, decor.counter);
+        paintCeiling(ctx, decor.ceiling, SCENE_W, t);
+        this.drawBaristas(sim, state, t);
+        this.drawCounter(sim, state, decor.counter, t);
+      } else {
+        paintRegion(ctx, area, H, t, night, !isAreaOpen(state, area));
+        state.decor.placed.forEach((p, i) => {
+          const def = furnitureDef(p.id);
+          if (def?.surface === 'wall' && p.col * CELL >= offset && p.col * CELL < offset + SCENE_W && i !== this.ghost?.skip) paintWallFurniture(ctx, p.id, p.col * CELL - offset, WALL_TOP + p.row * CELL, t, now);
+        });
+      }
+      if (area !== 'main') paintPassageFloor(ctx, area);
+      ctx.restore();
+    }
 
     // Everything standing on the floor is sorted by feet position.
     const drawables: { y: number; draw: () => void }[] = [];
     for (const c of sim.customers) {
       if (c.phase !== 'sitting') drawables.push({ y: c.y, draw: () => this.drawCustomer(c) });
     }
-    for (let i = 0; i < MAX_TABLES; i++) {
-      const built = i < tableCount(state);
-      drawables.push({ y: tablePos(i).y, draw: () => (built ? this.drawTable(sim, i, t) : this.drawUnbuilt(i)) });
-    }
-    drawables.push({ y: 92, draw: () => paintPlant(ctx, decor.plant, 270, 92) });
+    // Built tables, and crates on the spot the next expansion will open up.
+    for (const i of activeTableIndices(state)) drawables.push({ y: tablePos(i).y, draw: () => this.drawTable(sim, i, t) });
+    const built = mainTableCount(state);
+    if (built < MAX_TABLES) drawables.push({ y: tablePos(built).y, draw: () => this.drawUnbuilt(built) });
+    // Furniture the player placed, and the potted figs either side of the front door.
+    state.decor.placed.forEach((p, i) => {
+      const def = furnitureDef(p.id);
+      if (def?.surface !== 'floor' || i === this.ghost?.skip) return;
+      const { cx, foot } = floorAnchor(def, p.col, p.row);
+      drawables.push({ y: foot, draw: () => paintFloorFurniture(ctx, p.id, cx, foot) });
+    });
+    for (const spot of doorPlantSpots()) drawables.push({ y: spot.y, draw: () => paintFloorFurniture(ctx, 'plant_fig', spot.x, spot.y) });
     drawables.sort((a, b) => a.y - b.y);
     for (const d of drawables) d.draw();
 
+    for (const area of visibleAreas) {
+      ctx.save();
+      const origin = areaOrigin(area);
+      ctx.translate(origin.x, origin.y);
+      this.drawFrontWall(area === 'main' ? decor.wallpaper : area === 'reading' ? 'wall_cream' : 'wall_mint', H, area === 'main' || area === 'greenhouse', area === 'terrace');
+      paintRoomBoundaries(ctx, area, state);
+      ctx.restore();
+    }
     for (const c of sim.customers) this.drawCustomerOverlay(c, t);
     this.drawParticles();
     for (const f of this.floaters) {
       const w = textWidth(f.text);
-      const x = Math.min(SCENE_W - w - 2, Math.max(2, f.x - w / 2));
+      if (f.x < viewX || f.x >= viewX + this.viewWidth || f.y < viewY || f.y >= viewY + this.viewHeight) continue;
+      const x = Math.min(viewX + this.viewWidth - w - 2, Math.max(viewX + 2, f.x - w / 2));
       ctx.globalAlpha = Math.min(1, f.life / 0.4);
       drawText(ctx, f.text, x, f.y, f.color, OUTLINE);
       ctx.globalAlpha = 1;
@@ -253,9 +505,93 @@ export class SceneRenderer {
       // Evening: the room gets a little cozier and darker.
       ctx.save();
       ctx.globalAlpha = 0.1;
-      this.r(0, 0, SCENE_W, H, '#1c1d4a');
+      this.r(viewX, viewY, this.viewWidth, this.viewHeight, '#1c1d4a');
       ctx.restore();
     }
+    if (this.overview) {
+      const o = areaOrigin(this.area);
+      ctx.strokeStyle = '#f5ce7d';
+      ctx.lineWidth = 3;
+      for (const [x, y, dx, dy] of [[o.x + 7, o.y + 7, 1, 1], [o.x + SCENE_W - 7, o.y + 7, -1, 1], [o.x + 7, o.y + H - 7, 1, -1], [o.x + SCENE_W - 7, o.y + H - 7, -1, -1]]) {
+        ctx.beginPath();
+        ctx.moveTo(x + dx * 16, y);
+        ctx.lineTo(x, y);
+        ctx.lineTo(x, y + dy * 16);
+        ctx.stroke();
+      }
+    }
+    if (this.ghost && !this.panning && !this.overview) this.drawGhost(state, this.ghost, t, now);
+    ctx.restore();
+  }
+
+  // ------------------------------------------------------------ arranging furniture
+
+  /** Set while the player is placing or moving a piece. */
+  ghost: Ghost | null = null;
+
+  /** The grid cell a piece would go in if dropped with its middle at (x, y). */
+  cellAt(id: string, x: number, y: number): { col: number; row: number } {
+    const def = furnitureDef(id)!;
+    const o = areaOrigin(this.area);
+    x = x - o.x + regionOffset(this.area);
+    y -= o.y;
+    const col = Math.round(x / CELL - def.w / 2);
+    if (def.surface === 'wall') return { col, row: Math.round((y - WALL_TOP) / CELL - def.h / 2) };
+    // On the floor the pointer marks the front edge, where the piece stands.
+    const bottom = Math.floor((floorYMin(Math.max(FLOOR_Y, y)) - FLOOR_Y) / CELL);
+    return { col, row: bottom - def.h + 1 };
+  }
+
+  /** Which placed piece is drawn at (x, y), front-most first; -1 if none. */
+  furnitureAt(state: GameState, x: number, y: number): number {
+    const hits = state.decor.placed
+      .map((p, i) => ({ p, i, def: furnitureDef(p.id) }))
+      .filter(({ p, def }) => {
+        if (!def) return false;
+        const b =
+          def.surface === 'wall'
+            ? cellRect('wall', p.col, p.row, def.w, def.h)
+            : floorFurnitureBounds(p.id, floorAnchor(def, p.col, p.row).cx, floorAnchor(def, p.col, p.row).foot);
+        return x >= b.x && x < b.x + b.w && y >= b.y && y < b.y + b.h;
+      })
+      .sort((a, b) => (b.def!.surface === 'floor' ? b.p.row : -1) - (a.def!.surface === 'floor' ? a.p.row : -1));
+    return hits[0]?.i ?? -1;
+  }
+
+  private drawGhost(state: GameState, ghost: Ghost, t: number, now: Date): void {
+    const ctx = this.ctx;
+    const def = furnitureDef(ghost.id);
+    if (!def) return;
+    const tables = mainTableCount(state);
+    // Shade every cell it can't go on, so the free space stands out.
+    ctx.save();
+    ctx.globalAlpha = 0.3;
+    const rows = def.surface === 'wall' ? WALL_ROWS : FLOOR_ROWS;
+    for (let row = 0; row < rows; row++) {
+      const start = regionOffset(this.area) / CELL;
+      for (let col = start; col < start + COLS; col++) {
+        if (cellFree(state, def.surface, col, row, tables, ghost.skip)) continue;
+        const cell = cellRect(def.surface, col, row, 1, 1);
+        this.r(cell.x, cell.y, cell.w, cell.h, '#2a1410');
+      }
+    }
+    // The piece itself, then its footprint: green if it fits there, red if not.
+    ctx.globalAlpha = 0.8;
+    const box = cellRect(def.surface, ghost.col, ghost.row, def.w, def.h);
+    if (def.surface === 'wall') paintWallFurniture(ctx, ghost.id, box.x, box.y, t, now);
+    else {
+      const { cx, foot } = floorAnchor(def, ghost.col, ghost.row);
+      paintFloorFurniture(ctx, ghost.id, cx, foot);
+    }
+    const color = canPlace(state, ghost.id, ghost.col, ghost.row, tables, ghost.skip) ? GHOST_OK : GHOST_BAD;
+    ctx.globalAlpha = 0.3 + Math.sin(t * 6) * 0.08;
+    this.r(box.x, box.y, box.w, box.h, color);
+    ctx.globalAlpha = 1;
+    this.r(box.x, box.y, box.w, 1, color);
+    this.r(box.x, box.y + box.h - 1, box.w, 1, color);
+    this.r(box.x, box.y, 1, box.h, color);
+    this.r(box.x + box.w - 1, box.y, 1, box.h, color);
+    ctx.restore();
   }
 
   private drawWall(wallpaper: string, t: number): void {
@@ -271,8 +607,9 @@ export class SceneRenderer {
     this.r(0, 76, SCENE_W, 1, WOOD.base);
   }
 
-  private drawWindow(hour: number, t: number): void {
-    const { x, y, w, h } = WINDOW;
+  /** A window onto the street; `sign` hangs the OPEN (true) or CLOSED (false) sign in it. */
+  private drawWindow(win: { x: number; y: number; w: number; h: number }, hour: number, t: number, sign: boolean | null): void {
+    const { x, y, w, h } = win;
     const night = hour >= 19 || hour < 6;
     const sunset = hour >= 17 && hour < 19;
     const dawn = hour >= 6 && hour < 8;
@@ -330,45 +667,106 @@ export class SceneRenderer {
     this.r(x - 8, y + h + 1, w + 16, 4, frame.base);
     this.r(x - 8, y + h + 1, w + 16, 1, frame.hi);
     this.r(x - 8, y + h + 5, w + 16, 1, OUTLINE);
+    if (sign === null) return;
+    // The OPEN / CLOSED sign hangs on two strings from the crossbar, below the neon.
+    const word = sign ? 'OPEN' : 'CLOSED';
+    const sw = textWidth(word) + 6;
+    const sx = Math.round(x + (w - sw) / 2);
+    const bar = y + h / 2 + 2;
+    const sy = bar + 3;
+    this.r(sx + 2, bar, 1, sy - bar, '#4a2e1e');
+    this.r(sx + sw - 3, bar, 1, sy - bar, '#4a2e1e');
+    this.r(sx, sy, sw, 9, OUTLINE);
+    this.r(sx + 1, sy + 1, sw - 2, 7, sign ? '#fdf6ec' : '#3f5f93');
+    drawText(this.ctx, word, sx + 3, sy + 2, sign ? '#d9384a' : '#fdf6ec');
   }
 
-  private drawClock(now: Date): void {
-    const cx = 24;
-    const cy = 26;
-    const ring = ramp('#9a6740');
-    for (let dy = -10; dy <= 10; dy++) {
-      const half = Math.round(Math.sqrt(Math.max(0, 100 - dy * dy)));
-      this.r(cx - half, cy + dy, half * 2 + 1, 1, OUTLINE);
+
+  /**
+   * The swinging door to the kitchen. The oven glows through its porthole while the
+   * morning bake is fresh, and the door swings open whenever a bread or pastry is fetched.
+   */
+  private drawKitchenDoor(state: GameState, t: number): void {
+    const { x, w, top } = KITCHEN_DOOR;
+    const h = FLOOR_Y - top;
+    const frame = ramp('#9a6740');
+    // Preheating before opening; after the bake the oven cools to embers over the first half minute.
+    const heat = state.phase === 'prep' ? 0.7 : Math.max(0.2, 1 - state.dayTime / 30);
+    const flicker = Math.sin(t * 9) * 0.06 + Math.sin(t * 23) * 0.04;
+    const glow = mix('#5a3426', '#ffb04a', Math.max(0, Math.min(1, heat + flicker)));
+    // Casing, with a little plaque of a loaf above it.
+    this.r(x - 4, top - 4, w + 8, h + 4, OUTLINE);
+    this.r(x - 3, top - 3, w + 6, h + 3, frame.base);
+    this.r(x - 3, top - 3, w + 6, 1, frame.hi);
+    this.r(x - 3, top - 3, 1, h + 3, frame.hi);
+    const px = x + w / 2 - 7;
+    this.r(px, top - 13, 14, 9, OUTLINE);
+    this.r(px + 1, top - 12, 12, 7, '#f3e3c3');
+    this.r(px + 3, top - 10, 8, 3, '#c98a45');
+    this.r(px + 4, top - 11, 6, 1, '#c98a45');
+    this.r(px + 4, top - 10, 6, 1, '#e3b36b');
+    this.r(px + 5, top - 9, 1, 1, '#9a6234');
+    this.r(px + 8, top - 9, 1, 1, '#9a6234');
+    this.r(px + 4, top - 4, 1, 1, '#4a2e1e');
+    this.r(px + 9, top - 4, 1, 1, '#4a2e1e');
+    // The kitchen beyond: tiled wall, a shelf of loaves and the oven.
+    this.r(x, top, w, h, '#e9e1cf');
+    for (let ty = top + 3; ty < FLOOR_Y; ty += 5) this.r(x, ty, w, 1, '#d2c7b0');
+    for (let ty = top; ty < FLOOR_Y; ty += 5) for (let tx = x + ((ty - top) % 10 ? 2 : 5); tx < x + w; tx += 6) this.r(tx, ty, 1, 3, '#d2c7b0');
+    this.r(x + 2, top + 9, w - 4, 2, frame.lo);
+    for (let i = 0; i < 3; i++) {
+      this.r(x + 4 + i * 8, top + 5, 6, 4, '#c98a45');
+      this.r(x + 5 + i * 8, top + 5, 4, 1, '#e3b36b');
     }
-    for (let dy = -9; dy <= 9; dy++) {
-      const half = Math.round(Math.sqrt(Math.max(0, 81 - dy * dy)));
-      this.r(cx - half, cy + dy, half * 2 + 1, 1, dy < -4 ? ring.hi : ring.base);
-    }
-    for (let dy = -7; dy <= 7; dy++) {
-      const half = Math.round(Math.sqrt(Math.max(0, 49 - dy * dy)));
-      this.r(cx - half, cy + dy, half * 2 + 1, 1, '#fbf3e4');
-    }
-    for (let i = 0; i < 12; i++) {
-      const a = (i / 12) * Math.PI * 2;
-      this.r(cx + Math.round(Math.sin(a) * 6), cy - Math.round(Math.cos(a) * 6), 1, 1, i % 3 === 0 ? '#6e4128' : '#c9a882');
-    }
-    const line = (angle: number, len: number, color: string) => {
-      for (let i = 0; i <= len; i += 0.5) {
-        this.r(cx + Math.round(Math.sin(angle) * i), cy - Math.round(Math.cos(angle) * i), 1, 1, color);
-      }
-    };
-    const min = now.getMinutes() + now.getSeconds() / 60;
-    const hr = (now.getHours() % 12) + min / 60;
-    line((min / 60) * Math.PI * 2, 5, '#6e4128');
-    line((hr / 12) * Math.PI * 2, 3.5, OUTLINE);
-    this.r(cx, cy, 1, 1, '#d9574a');
+    const ox = x + 3;
+    const oy = top + 18;
+    this.r(ox, oy, w - 6, FLOOR_Y - oy, OUTLINE);
+    this.r(ox + 1, oy + 1, w - 8, FLOOR_Y - oy - 1, '#4b4f57');
+    this.r(ox + 1, oy + 1, w - 8, 1, '#6c727c');
+    this.r(ox + 4, oy + 6, w - 14, 12, OUTLINE);
+    this.r(ox + 5, oy + 7, w - 16, 10, glow);
+    this.r(ox + 5, oy + 7, w - 16, 2, mix(glow, '#fff2c8', 0.4));
+    this.r(ox + 4, oy + 3, w - 14, 1, '#9aa1aa');
+    this.r(ox + 2, FLOOR_Y - 8, w - 10, 1, '#2f3237');
+    // The warm light of the kitchen washes over everything in the doorway.
+    this.ctx.save();
+    this.ctx.globalAlpha = 0.12 + heat * 0.12;
+    this.r(x, top, w, h, '#ffb04a');
+    this.ctx.restore();
+    // The door leaf, hinged on the left; swung open, it narrows to an edge.
+    const leafW = Math.round(w - (w - 5) * this.kitchenDoor);
+    const leaf = ramp('#b07a4a');
+    this.r(x, top, leafW, h, OUTLINE);
+    if (leafW < 3) return;
+    this.r(x + 1, top + 1, leafW - 2, h - 1, leaf.base);
+    this.r(x + 1, top + 1, leafW - 2, 1, leaf.hi);
+    this.r(x + 1, top + 1, 1, h - 1, leaf.hi);
+    this.r(x + leafW - 2, top + 1, 1, h - 1, leaf.lo);
+    if (leafW < 10) return;
+    // Lower panel, a brass push plate and a steel kick plate.
+    this.r(x + 4, top + 28, leafW - 8, h - 38, leaf.lo);
+    this.r(x + 5, top + 29, leafW - 10, h - 40, mix(leaf.base, leaf.lo, 0.4));
+    this.r(x + leafW - 7, top + 20, 3, 6, '#e7b84a');
+    this.r(x + 1, FLOOR_Y - 7, leafW - 2, 7, '#8d969e');
+    this.r(x + 1, FLOOR_Y - 7, leafW - 2, 1, '#c3cbd1');
+    // The porthole, squashed as the door turns.
+    const pw = Math.max(2, Math.round((leafW - 10) * 0.6));
+    const pcx = x + Math.round(leafW / 2);
+    const pcy = top + 12;
+    this.r(pcx - pw / 2 - 1, pcy - 6, pw + 2, 12, OUTLINE);
+    this.r(pcx - pw / 2 - 2, pcy - 4, pw + 4, 8, OUTLINE);
+    this.r(pcx - pw / 2, pcy - 5, pw, 10, '#9aa1aa');
+    this.r(pcx - pw / 2 - 1, pcy - 3, pw + 2, 6, '#9aa1aa');
+    this.r(pcx - pw / 2 + 1, pcy - 4, pw - 2, 8, glow);
+    this.r(pcx - pw / 2, pcy - 2, pw, 4, glow);
+    this.r(pcx - pw / 2 + 1, pcy - 3, 1, 2, '#fff2c8');
   }
 
   private drawMenuBoard(state: GameState): void {
-    const x = 46;
-    const y = 8;
-    const w = 92;
-    const h = 46;
+    const x = 110;
+    const y = 7;
+    const w = 100;
+    const h = 44;
     const frame = ramp('#9a6740');
     this.r(x - 1, y - 1, w + 2, h + 2, OUTLINE);
     this.r(x, y, w, h, frame.base);
@@ -380,7 +778,7 @@ export class SceneRenderer {
     this.r(x + 8, y + h - 7, 14, 1, '#4f6e5c');
     this.r(x + w - 22, y + 7, 12, 1, '#4f6e5c');
     this.r(x + w - 14, y + h - 9, 6, 1, '#4f6e5c');
-    bigText(this.ctx, 'MENU', x + w / 2, y + 5, '#f5efe0');
+    bigText(this.ctx, 'MENU', x + w / 2, y + 4, '#f5efe0');
     // Today's menu, as many as fit.
     const today = menuItems(state);
     const rows = [today.slice(0, 5), today.slice(5, 10)];
@@ -389,7 +787,7 @@ export class SceneRenderer {
       row.forEach((m, i) => {
         const icon = itemIcon(m.id, false);
         const ix = x + w / 2 - total / 2 + i * 16 + (12 - icon.width) / 2;
-        const iy = y + 19 + ri * 13 + (12 - icon.height);
+        const iy = y + 18 + ri * 12 + (12 - icon.height);
         this.ctx.drawImage(icon, Math.round(ix), iy);
       });
     });
@@ -398,72 +796,97 @@ export class SceneRenderer {
     this.r(x + 14, y + h - 1, 5, 1, '#f5efe0');
   }
 
-  private drawShelf(state: GameState): void {
-    const shelf = ramp('#9a6740');
-    this.r(146, 48, 60, 3, shelf.base);
-    this.r(146, 48, 60, 1, shelf.hi);
-    this.r(146, 51, 60, 1, OUTLINE);
-    this.r(150, 51, 2, 4, shelf.lo);
-    this.r(200, 51, 2, 4, shelf.lo);
-    // Today's breads and pastries on display; jars of beans if there are none.
-    const bakery = menuItems(state).filter((m) => !isDrink(m.category)).slice(0, 3);
-    bakery.forEach((m, i) => {
-      const icon = itemIcon(m.id);
-      this.ctx.drawImage(icon, 147 + i * 13 + Math.floor((14 - icon.width) / 2), 49 - icon.height);
-    });
-    for (const [jx, jh] of bakery.length > 0 ? [] : [[150, 10], [161, 12], [172, 9]]) {
-      this.r(jx - 1, 48 - jh - 1, 10, jh + 1, OUTLINE);
-      this.r(jx, 48 - jh, 8, jh, '#cfe6ee');
-      this.r(jx, 48 - jh + 3, 8, jh - 3, '#6e3f24');
-      for (let i = 0; i < 5; i++) this.r(jx + 1 + ((i * 3) % 6), 48 - jh + 4 + ((i * 2) % (jh - 4)), 1, 1, '#9c6538');
-      this.r(jx + 1, 48 - jh, 1, jh, '#f6fbfc');
-      this.r(jx - 1, 48 - jh - 3, 10, 2, '#c97d34');
+
+  /** The low cabinet behind the baristas with the café's odds and ends on top. */
+  private drawBackBar(state: GameState, counter: string): void {
+    const { x, w, top, front } = BACK_BAR;
+    const colors = counterColors(counter);
+    const body = ramp(colors.front);
+    const slab = ramp(colors.top);
+    const bottom = FLOOR_Y;
+    // Worktop and cupboard doors.
+    this.r(x, top - 1, w + 1, 1, OUTLINE);
+    this.r(x, top, w, front - top, slab.base);
+    this.r(x, top, w, 1, slab.lo);
+    this.r(x, front - 2, w, 1, slab.hi);
+    this.r(x, front - 1, w, 1, colors.trim ?? slab.dark);
+    this.r(x - 1, top - 1, 1, bottom - top + 1, OUTLINE);
+    this.r(x + w, top - 1, 1, bottom - top + 1, OUTLINE);
+    this.r(x, front, w, bottom - front, body.lo);
+    for (let dx = x + 3; dx + 22 <= x + w - 2; dx += 25) {
+      this.r(dx, front + 2, 22, bottom - front - 5, body.dark);
+      this.r(dx + 1, front + 3, 20, bottom - front - 7, body.base);
+      this.r(dx + 1, front + 3, 20, 1, body.hi);
+      this.r(dx + 3, front + 5, 16, bottom - front - 11, mix(body.base, body.lo, 0.5));
+      this.r(dx + (dx % 2 ? 2 : 18), front + 8, 2, 2, colors.trim ?? '#e7b84a');
     }
-    // A stack of cups.
-    for (let i = 0; i < 3; i++) {
-      this.r(185, 44 - i * 4, 10, 4, OUTLINE);
-      this.r(186, 45 - i * 4, 8, 2, '#fdf6ec');
-      this.r(186, 46 - i * 4, 8, 1, '#dccdb9');
+    this.r(x, bottom - 2, w, 2, body.dark);
+
+    const sit = top + 4; // Items stand a little back from the front edge.
+    const ctx = this.ctx;
+    // Left of the menu board: the grinder and jars of beans and tea.
+    const grinder = GRINDER();
+    ctx.drawImage(grinder, x + 2, sit - grinder.height + 1);
+    this.jar(x + 18, sit, 11, '#6e3f24', '#9c6538');
+    this.jar(x + 29, sit, 9, '#6f9a52', '#9fc47e');
+    // Under the board, only low things: cups on saucers, a milk pitcher, plates.
+    for (let i = 0; i < 5; i++) {
+      const cx = 116 + i * 11;
+      this.r(cx - 1, sit - 1, 10, 2, OUTLINE);
+      this.r(cx, sit - 1, 8, 1, '#e9dcc8');
+      this.r(cx + 1, sit - 6, 6, 5, OUTLINE);
+      this.r(cx + 2, sit - 5, 4, 4, '#fdf6ec');
+      this.r(cx + 2, sit - 5, 4, 1, '#dccdb9');
+      this.r(cx + 7, sit - 5, 1, 2, OUTLINE);
     }
+    const pitcher = ramp('#c9d3d8');
+    this.r(173, sit - 9, 8, 9, OUTLINE);
+    this.r(174, sit - 8, 6, 8, pitcher.base);
+    this.r(174, sit - 8, 1, 8, pitcher.hi);
+    this.r(172, sit - 9, 2, 2, OUTLINE);
+    this.r(181, sit - 7, 1, 4, OUTLINE);
+    for (let i = 0; i < 4; i++) {
+      this.r(188, sit - 2 - i * 2, 16, 2, OUTLINE);
+      this.r(189, sit - 2 - i * 2, 14, 1, i === 3 ? '#ffffff' : '#fdf6ec');
+    }
+    // Right of the board: a bread basket with today's breads (a sack of beans when
+    // there are none) and a cake under a glass dome.
+    const breads = menuItems(state).filter((m) => m.category === 'bread').slice(0, 2);
+    const bx = 213;
+    if (breads.length > 0) {
+      breads.forEach((m, i) => {
+        const icon = itemIcon(m.id);
+        ctx.drawImage(icon, bx + 1 + i * 9, sit - 6 - icon.height + 3);
+      });
+      const wicker = ramp('#c98f4e');
+      this.r(bx - 1, sit - 7, 22, 8, OUTLINE);
+      this.r(bx, sit - 6, 20, 6, wicker.base);
+      for (let i = 0; i < 20; i += 2) this.r(bx + i, sit - 6 + (i % 4 ? 0 : 1), 1, 5, wicker.lo);
+      this.r(bx, sit - 6, 20, 1, wicker.hi);
+    } else {
+      const sack = ramp('#c9a873');
+      this.r(bx + 1, sit - 13, 18, 14, OUTLINE);
+      this.r(bx + 2, sit - 12, 16, 12, sack.base);
+      this.r(bx + 2, sit - 12, 2, 12, sack.hi);
+      this.r(bx + 15, sit - 11, 3, 11, sack.lo);
+      this.r(bx + 4, sit - 14, 12, 3, OUTLINE);
+      this.r(bx + 5, sit - 13, 10, 2, '#6e3f24');
+      this.r(bx + 7, sit - 13, 2, 1, '#9c6538');
+      this.r(bx + 7, sit - 7, 6, 3, sack.lo);
+    }
+    const dome = CAKE_DOME();
+    ctx.drawImage(dome, x + w - dome.width - 1, sit - dome.height + 1);
   }
 
-  private drawDoor(sim: Sim, night: boolean, open: boolean): void {
-    const { x, y, w, h } = DOOR;
-    const frame = ramp('#7a4e33');
-    this.r(x - 4, y - 4, w + 8, h + 4, OUTLINE);
-    this.r(x - 3, y - 3, w + 6, h + 3, frame.base);
-    this.r(x - 3, y - 3, w + 6, 1, frame.hi);
-    const door = ramp('#b07a4a');
-    const ajar = sim.customers.some((c) => Math.hypot(c.x - DOOR_SPOT.x, c.y - DOOR_SPOT.y) < 12);
-    if (ajar) {
-      this.r(x, y, w, h, '#2a1a14');
-      this.r(x, y + h - 10, w, 10, night ? '#2b3a4a' : '#9fc79a');
-      this.r(x, y, 6, h, door.base);
-      this.r(x, y, 1, h, door.hi);
-      return;
-    }
-    this.r(x, y, w, h, door.base);
-    this.r(x, y, w, 1, door.hi);
-    // Glass at the top, panels below.
-    this.r(x + 3, y + 3, w - 6, 16, OUTLINE);
-    this.r(x + 4, y + 4, w - 8, 14, night ? '#2f3874' : '#a8d8f0');
-    this.r(x + 5, y + 5, 3, 6, night ? '#3f4a8a' : '#e3f4fb');
-    for (const py of [y + 23, y + 37]) {
-      this.r(x + 3, py, w - 6, 11, door.lo);
-      this.r(x + 4, py + 1, w - 8, 9, door.base);
-      this.r(x + 4, py + 1, w - 8, 1, door.hi);
-    }
-    this.r(x + w - 6, y + 30, 3, 3, '#f2c14e');
-    this.r(x + w - 6, y + 30, 1, 1, '#fff3a0');
-    // Hanging OPEN / CLOSED sign.
-    const word = open ? 'OPEN' : 'CLOSED';
-    const sw = Math.max(w - 4, textWidth(word) + 4);
-    const sx = Math.round(x + (w - sw) / 2);
-    this.r(x + 7, y + 1, 1, 4, '#4a2e1e');
-    this.r(x + w - 8, y + 1, 1, 4, '#4a2e1e');
-    this.r(sx, y + 5, sw, 9, OUTLINE);
-    this.r(sx + 1, y + 6, sw - 2, 7, open ? '#fdf6ec' : '#3f5f93');
-    drawText(this.ctx, word, sx + Math.round((sw - textWidth(word)) / 2), y + 7, open ? '#d9384a' : '#fdf6ec');
+  private jar(x: number, base: number, h: number, fill: string, fleck: string): void {
+    const y = base - h;
+    this.r(x - 1, y - 1, 10, h + 1, OUTLINE);
+    this.r(x, y, 8, h, '#d6ecf2');
+    this.r(x, y + 3, 8, h - 3, fill);
+    for (let i = 0; i < 5; i++) this.r(x + 1 + ((i * 3) % 6), y + 4 + ((i * 2) % Math.max(1, h - 5)), 1, 1, fleck);
+    this.r(x + 1, y, 1, h, '#f6fbfc');
+    this.r(x - 1, y - 3, 10, 2, '#c97d34');
+    this.r(x - 1, y - 3, 10, 1, '#e8a95a');
   }
 
   private drawFloor(floor: string, rug: string, hour: number, H: number): void {
@@ -475,30 +898,124 @@ export class SceneRenderer {
       this.r(0, FLOOR_Y + i, SCENE_W, 1, '#2a1410');
     }
     this.ctx.restore();
-    // The rug stretches to cover both rows of tables.
-    const rugTop = backRowY() - 26;
-    const rugH = frontRowY() + 8 - rugTop;
-    if (rug === 'rug_round') paintRug(this.ctx, rug, 214, rugTop, 104, rugH);
-    else if (rug !== 'rug_none') paintRug(this.ctx, rug, 218, rugTop, 98, rugH);
-    // Sunlight from the window during the day.
+    // The path to the next room runs under the rug rather than across it.
+    paintPassageFloor(this.ctx, 'main');
+    // The rug lies in the open floor between the counter and the front door;
+    // without one there's a plain runner leading in from the door.
+    if (rug === 'rug_none') this.drawRunner(H);
+    else paintRug(this.ctx, rug, 110, COUNTER.bottom + 6, 100, H - 18 - COUNTER.bottom);
+    this.drawDoormat(H);
+    const ctx = this.ctx;
     if (hour >= 7 && hour < 18) {
-      const ctx = this.ctx;
       ctx.save();
       ctx.globalAlpha = 0.12;
       ctx.fillStyle = '#fff4c8';
+      // Sunlight falling through both windows...
+      for (const win of WINDOWS) {
+        const lean = win.x < SCENE_W / 2 ? 18 : -18;
+        ctx.beginPath();
+        ctx.moveTo(win.x, FLOOR_Y);
+        ctx.lineTo(win.x + win.w, FLOOR_Y);
+        ctx.lineTo(win.x + win.w + lean, FLOOR_Y + 36);
+        ctx.lineTo(win.x + lean, FLOOR_Y + 36);
+        ctx.fill();
+      }
+      // ...and in through the open front door.
       ctx.beginPath();
-      ctx.moveTo(WINDOW.x, FLOOR_Y);
-      ctx.lineTo(WINDOW.x + WINDOW.w, FLOOR_Y);
-      ctx.lineTo(WINDOW.x + WINDOW.w - 26, FLOOR_Y + 40);
-      ctx.lineTo(WINDOW.x - 26, FLOOR_Y + 40);
+      ctx.moveTo(DOOR_X, H);
+      ctx.lineTo(DOOR_X + DOOR_W, H);
+      ctx.lineTo(DOOR_X + DOOR_W + 8, H - 34);
+      ctx.lineTo(DOOR_X - 8, H - 34);
       ctx.fill();
       ctx.restore();
     }
-    // Shadow cast by the counter.
-    this.ctx.save();
-    this.ctx.globalAlpha = 0.2;
-    this.r(COUNTER.x, COUNTER.bottom, COUNTER.w, 3, '#2a1410');
-    this.ctx.restore();
+    // Kitchen light spilling out of the open door.
+    if (this.kitchenDoor > 0.05) {
+      const { x, w } = KITCHEN_DOOR;
+      ctx.save();
+      ctx.globalAlpha = 0.16 * this.kitchenDoor;
+      ctx.fillStyle = '#ffcf8a';
+      ctx.beginPath();
+      ctx.moveTo(x, FLOOR_Y);
+      ctx.lineTo(x + w, FLOOR_Y);
+      ctx.lineTo(x + w + 6, FLOOR_Y + 14);
+      ctx.lineTo(x - 6, FLOOR_Y + 14);
+      ctx.fill();
+      ctx.restore();
+    }
+    // Shadow cast by the counter, and the room darkening toward its edges.
+    ctx.save();
+    ctx.globalAlpha = 0.2;
+    this.r(COUNTER.x, COUNTER.bottom, COUNTER.w + COUNTER_GATE.w, 3, '#2a1410');
+    for (let i = 0; i < 4; i++) {
+      ctx.globalAlpha = 0.11 - i * 0.025;
+      this.r(0, H - 6 * (i + 1), SCENE_W, 6, '#2a1410');
+      ctx.globalAlpha = 0.05;
+      this.r(0, FLOOR_Y, 3 * (4 - i), H - FLOOR_Y, '#2a1410');
+      this.r(SCENE_W - 3 * (4 - i), FLOOR_Y, 3 * (4 - i), H - FLOOR_Y, '#2a1410');
+    }
+    ctx.restore();
+  }
+
+  /** Welcome mat just inside the front door. */
+  private drawDoormat(H: number): void {
+    const x = DOOR_X + 2;
+    const y = H - FRONT_WALL - 9;
+    const w = DOOR_W - 4;
+    const mat = ramp('#c98f4e');
+    this.r(x, y, w, 8, mat.lo);
+    this.r(x + 1, y, w - 2, 7, mat.base);
+    for (let i = 2; i < w - 2; i += 2) this.r(x + i, y + 2 + ((i / 2) % 2), 1, 3, mix(mat.base, mat.lo, 0.6));
+    this.r(x + 3, y + 1, w - 6, 1, '#b5453a');
+    this.r(x + 3, y + 5, w - 6, 1, '#b5453a');
+  }
+
+  /** A woven runner from the front door up to the counter. */
+  private drawRunner(H: number): void {
+    const w = 52;
+    const x = SCENE_W / 2 - w / 2;
+    const y = COUNTER.bottom + 6;
+    const h = H - FRONT_WALL - 9 - y;
+    // Jute, close to the floor's tone so it marks the aisle without shouting.
+    paintRunner(this.ctx, x, y, w, h, 'v');
+    // Finished head end: a trim across the top and a fringe.
+    const field = ramp('#d6b382');
+    this.r(x, y, w, 1, field.lo);
+    this.r(x + 3, y + 3, w - 6, 1, '#9a6a45');
+    for (let fx = x + 2; fx < x + w - 2; fx += 3) this.r(fx, y - 2, 1, 2, field.hi);
+  }
+
+  /**
+   * The top of the front wall along the bottom edge, with the doorway in the middle,
+   * so the room reads as a box seen from above.
+   */
+  private drawFrontWall(wallpaper: string, H: number, doorway = true, garden = false): void {
+    const wood = ramp(wainscotColor(wallpaper));
+    const y = H - FRONT_WALL;
+    if (!doorway) {
+      this.r(0, y - 1, SCENE_W, FRONT_WALL + 1, OUTLINE);
+      this.r(1, y, SCENE_W - 2, FRONT_WALL, garden ? '#7a8b61' : wood.base);
+      this.r(1, y, SCENE_W - 2, 1, garden ? '#b8c28b' : wood.hi);
+      return;
+    }
+    for (const [x, w] of [[0, DOOR_X - 3], [DOOR_X + DOOR_W + 3, SCENE_W - DOOR_X - DOOR_W - 3]]) {
+      this.r(x, y - 1, w, 1, OUTLINE);
+      this.r(x, y, w, FRONT_WALL, wood.lo);
+      this.r(x, y, w, 1, wood.hi);
+      this.r(x, y + 1, w, 2, wood.base);
+      grain(this.ctx, x, y + 1, w, 2, wood, 'h', 5);
+    }
+    // The doorway: stone step outside, a threshold, and chunky frame posts.
+    this.r(DOOR_X, y, DOOR_W, FRONT_WALL, '#a89a8c');
+    this.r(DOOR_X, y, DOOR_W, 1, '#d6cabd');
+    this.r(DOOR_X, y + 1, DOOR_W, 1, '#c4b7a9');
+    for (let i = 4; i < DOOR_W; i += 8) this.r(DOOR_X + i, y + 2, 1, FRONT_WALL - 2, '#8f8174');
+    for (const px of [DOOR_X - 4, DOOR_X + DOOR_W]) {
+      this.r(px - 1, y - 8, 6, FRONT_WALL + 8, OUTLINE);
+      this.r(px, y - 7, 4, FRONT_WALL + 7, wood.base);
+      this.r(px, y - 7, 4, 1, wood.hi);
+      this.r(px + 3, y - 6, 1, FRONT_WALL + 6, wood.lo);
+    }
   }
 
   private drawBaristas(sim: Sim, state: GameState, t: number): void {
@@ -528,8 +1045,8 @@ export class SceneRenderer {
     const lvl = state.upgrades.machine;
     const finish = lvl >= 15 ? '#e7b84a' : lvl >= 10 ? '#c9814f' : lvl >= 5 ? '#d9574a' : '#9fb3bd';
     const brewing = sim.baristas.some((_, i) => sim.isBrewing(i));
-    const mx = 14;
-    const my = 73;
+    const mx = MACHINE_X;
+    const my = 71;
     const chrome = ramp('#c9d3d8');
     // Steam wand.
     this.r(mx - 3, my + 9, 3, 1, OUTLINE);
@@ -540,28 +1057,124 @@ export class SceneRenderer {
     this.r(mx + 24, my + 9, 2, 2, light);
     this.r(mx + 24, my + 9, 1, 1, '#ffffff');
 
-    // Register.
-    const rx = 178;
+    this.drawPastryCase(state);
+    this.drawGate(counter);
+
+    // Tip jar, in the gap between the first two baristas.
+    const coins = Math.min(4, 1 + Math.floor(state.today.served / 15));
+    const jx = baristaSpot(0).x + 11;
+    this.r(jx - 1, top - 4, 9, 11, OUTLINE);
+    this.r(jx, top - 3, 7, 9, '#d6ecf2');
+    this.r(jx, top + 6 - coins, 7, coins, '#f2c14e');
+    this.r(jx + 1, top + 6 - coins, 2, 1, '#fff3a0');
+    this.r(jx, top - 3, 1, 9, '#f6fbfc');
+    this.r(jx - 1, top - 5, 9, 2, '#c97d34');
+
+    // Register at the end of the counter, by the gate.
+    const rx = x + w - 26;
+    const ry = top - 13;
     const reg = ramp('#7d8c96');
-    this.r(rx - 1, 77, 26, 19, OUTLINE);
-    this.r(rx, 84, 24, 11, reg.base);
-    this.r(rx, 84, 24, 1, reg.hi);
-    for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++) this.r(rx + 3 + i * 4, 87 + j * 3, 2, 1, '#e9eef0');
-    this.r(rx + 16, 86, 6, 7, reg.lo);
-    this.r(rx + 4, 78, 16, 6, '#2d4a3a');
-    this.r(rx + 5, 79, 6, 1, '#8fe38a');
+    this.r(rx - 1, ry, 26, 19, OUTLINE);
+    this.r(rx, ry + 7, 24, 11, reg.base);
+    this.r(rx, ry + 7, 24, 1, reg.hi);
+    for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++) this.r(rx + 3 + i * 4, ry + 10 + j * 3, 2, 1, '#e9eef0');
+    this.r(rx + 16, ry + 9, 6, 7, reg.lo);
+    this.r(rx + 4, ry + 1, 16, 6, '#2d4a3a');
+    this.r(rx + 5, ry + 2, 6, 1, '#8fe38a');
 
     // Cups being made in front of each busy barista.
     sim.baristas.forEach((b, i) => {
       if (!sim.isBrewing(i)) return;
       const p = baristaSpot(i);
       const fill = 1 - Math.max(0, b.remaining) / b.total;
-      this.r(p.x + 9, 89, 7, 7, OUTLINE);
-      this.r(p.x + 10, 90, 5, 5, '#fdf6ec');
+      this.r(p.x + 9, top - 1, 7, 7, OUTLINE);
+      this.r(p.x + 10, top, 5, 5, '#fdf6ec');
       const level = Math.ceil(fill * 4);
-      this.r(p.x + 10, 94 - level + 1, 5, level, '#6e3f24');
-      this.r(p.x + 15, 91, 1, 2, OUTLINE);
+      this.r(p.x + 10, top + 5 - level, 5, level, '#6e3f24');
+      this.r(p.x + 15, top + 1, 1, 2, OUTLINE);
     });
+  }
+
+  /** The hinged flap at the end of the counter: a lift-up top and a little swing door. */
+  private drawGate(counter: string): void {
+    const { top, front, bottom } = COUNTER;
+    const { x, w } = COUNTER_GATE;
+    const colors = counterColors(counter);
+    const slab = ramp(colors.top);
+    const body = ramp(colors.front);
+    // The flap: same top as the counter, with a seam and two brass hinges.
+    this.r(x, top - 1, w, 1, OUTLINE);
+    this.r(x, top, w, front - top, slab.base);
+    this.r(x, top, w, 1, slab.lo);
+    this.r(x, front - 3, w, 1, slab.hi);
+    this.r(x, front - 1, w, 1, colors.trim ?? slab.dark);
+    this.r(x, top, 1, front - top, slab.dark);
+    for (const hy of [top + 2, front - 5]) this.r(x + 1, hy, 2, 2, '#d9a441');
+    // Below it, an opening and a half-height swing door.
+    this.r(x, front, w, bottom - front, '#3a2418');
+    const dy = front + 5;
+    this.r(x + 1, dy, w - 2, bottom - dy - 1, body.dark);
+    this.r(x + 2, dy + 1, w - 4, bottom - dy - 3, body.base);
+    this.r(x + 2, dy + 1, w - 4, 1, body.hi);
+    this.r(x + 4, dy + 4, w - 8, bottom - dy - 9, body.lo);
+    this.r(x + w - 5, dy + 6, 2, 2, colors.trim ?? '#e7b84a');
+    this.r(x + w, top - 1, 1, bottom - top + 1, OUTLINE);
+  }
+
+  /**
+   * The glass case in the counter front. It shows today's breads and pastries:
+   * what's left on the shelf while open, the planned bake while closed.
+   */
+  private drawPastryCase(state: GameState): void {
+    const { top, front, bottom } = COUNTER;
+    const { x, w } = PASTRY_CASE;
+    const ctx = this.ctx;
+    // Glass top over the case.
+    this.r(x, top + 1, w, front - top - 4, '#cfe6ea');
+    this.r(x, top + 1, w, 1, '#eef8fa');
+    for (let i = 0; i < w - 6; i += 9) this.r(x + 3 + i, top + 3, 4, 1, '#ffffff');
+    this.r(x, top + 1, 1, front - top - 4, '#9fc3cf');
+    this.r(x + w - 1, top + 1, 1, front - top - 4, '#9fc3cf');
+    // The case itself: a lit cream interior with one shelf.
+    const cy = front + 2;
+    const ch = bottom - front - 6;
+    const brass = ramp('#d9a441');
+    this.r(x - 1, cy - 1, w + 2, ch + 2, OUTLINE);
+    this.r(x, cy, w, ch, '#f6e6c6');
+    this.r(x, cy, w, 3, '#fff4d8');
+    this.r(x, cy + ch - 4, w, 4, '#e8cfa4');
+    const shelfY = cy + ch - 4;
+    this.r(x, shelfY, w, 1, '#c9a873');
+
+    const bakery = menuItems(state).filter((m) => !isDrink(m.category)).slice(0, 5);
+    const slots = Math.max(3, bakery.length);
+    const slot = w / slots;
+    for (let i = 0; i < slots; i++) {
+      const sx = Math.round(x + slot * i + slot / 2);
+      // Doily plate.
+      this.r(sx - 5, shelfY - 1, 11, 1, '#ffffff');
+      this.r(sx - 4, shelfY, 9, 1, '#e9dcc8');
+      const m = bakery[i];
+      if (!m) continue;
+      const count = state.phase === 'open' ? (state.shelf[m.id] ?? 0) : (state.bakePlan[m.id] ?? 0);
+      if (count <= 0) continue;
+      const icon = itemIcon(m.id);
+      const ix = Math.round(sx - icon.width / 2);
+      const iy = shelfY - icon.height + 1;
+      if (count >= 8) ctx.drawImage(icon, ix - 2, iy - 2);
+      ctx.drawImage(icon, ix, iy);
+    }
+    // Reflections on the glass, then the brass frame.
+    ctx.save();
+    ctx.globalAlpha = 0.45;
+    for (const gx of [x + 6, x + w / 2 + 4]) {
+      for (let i = 0; i < ch - 2; i++) this.r(gx + i * 0.6, cy + 1 + i, 2, 1, '#ffffff');
+    }
+    ctx.restore();
+    this.r(x, cy, w, 1, brass.hi);
+    this.r(x, cy + ch - 1, w, 1, brass.lo);
+    this.r(x, cy, 1, ch, brass.base);
+    this.r(x + w - 1, cy, 1, ch, brass.lo);
   }
 
   private facing(c: Customer): Facing {
@@ -677,8 +1290,6 @@ export class SceneRenderer {
 
   private drawTable(sim: Sim, index: number, t: number): void {
     const table = tablePos(index);
-    const wood = ramp('#b07a4a');
-    const chairWood = ramp('#8a5a3c');
     shadow(this.ctx, table.x, table.y, 30, 0.2);
     const seated: (Customer | undefined)[] = [0, 1].map((side) => {
       const id = sim.seats[index * 2 + side];
@@ -688,21 +1299,9 @@ export class SceneRenderer {
     // Chairs (backs on the outside) and anyone sitting in them.
     for (const side of [0, 1] as const) {
       const s = seatSpot(index, side);
-      const outer = side === 0 ? s.x - 7 : s.x + 5;
       shadow(this.ctx, s.x, s.y, 14, 0.15);
-      // Ladder-back chair: two posts with rails, then the seat.
-      this.r(outer - 1, s.y - 26, 4, 26, OUTLINE);
-      this.r(outer, s.y - 25, 2, 25, chairWood.base);
-      this.r(side === 0 ? outer : outer + 1, s.y - 25, 1, 25, chairWood.hi);
-      this.r(outer - 1, s.y - 27, 4, 2, chairWood.lo);
-      this.r(outer, s.y - 27, 2, 1, chairWood.hi);
-      this.r(s.x - 7, s.y - 11, 14, 5, OUTLINE);
-      this.r(s.x - 6, s.y - 10, 12, 2, chairWood.hi);
-      this.r(s.x - 6, s.y - 8, 12, 1, chairWood.lo);
-      this.r(s.x - 6, s.y - 7, 2, 7, OUTLINE);
-      this.r(s.x + 4, s.y - 7, 2, 7, OUTLINE);
-      this.r(s.x - 6, s.y - 7, 1, 6, chairWood.lo);
-      this.r(s.x + 4, s.y - 7, 1, 6, chairWood.lo);
+      const chair = side === 0 ? CHAIR_RIGHT() : CHAIR_LEFT();
+      this.ctx.drawImage(chair, side === 0 ? s.x - 9 : s.x - chair.width + 9, s.y - chair.height + 1);
       const c = seated[side];
       if (c) {
         const frames = character(c.look);
@@ -711,28 +1310,17 @@ export class SceneRenderer {
         this.ctx.drawImage(sprite, s.x - 9, s.y - (CHAR_H + 5) + bob);
       }
     }
-    // Pedestal with a cross foot.
-    this.r(table.x - 2, table.y - 14, 5, 13, OUTLINE);
-    this.r(table.x - 1, table.y - 14, 3, 13, wood.lo);
-    this.r(table.x - 1, table.y - 14, 1, 13, wood.base);
-    this.r(table.x - 8, table.y - 4, 17, 4, OUTLINE);
-    this.r(table.x - 7, table.y - 3, 15, 1, wood.base);
-    this.r(table.x - 7, table.y - 2, 15, 1, wood.lo);
-    // Round top in 3/4 view: a thick rim, then the boards on top.
-    const cy = table.y - 19;
-    const R = 13;
-    const ellipse = (y: number, rx: number, ry: number, color: (dy: number) => string) => {
-      for (let dy = -ry; dy <= ry; dy++) {
-        const half = Math.round(Math.sqrt(Math.max(0, 1 - (dy / ry) ** 2)) * rx);
-        this.r(table.x - half, y + dy, half * 2 + 1, 1, color(dy));
-      }
-    };
-    ellipse(cy - 1, R + 1, 6, () => OUTLINE);
-    ellipse(cy + 2, R + 1, 6, () => OUTLINE);
-    ellipse(cy + 2, R, 5, (dy) => (dy >= 3 ? wood.dark : wood.lo));
-    ellipse(cy - 1, R, 5, (dy) => (dy <= -4 ? wood.hi : dy % 3 === 2 ? mix(wood.base, wood.lo, 0.5) : wood.base));
-    this.r(table.x - 7, cy - 4, 5, 1, ramp(wood.hi).hi);
-    this.r(table.x - 9, cy - 3, 2, 1, wood.hi);
+    const top = TABLE();
+    this.ctx.drawImage(top, table.x - TABLE_CX, table.y - top.height + 1);
+    const cy = table.y - TABLE_TOP_DY;
+    // A bud vase in the middle.
+    const bloom = ['#ef5d7a', '#f2c14e', '#ffffff', '#9f78d2'][index % 4];
+    this.r(table.x - 2, cy - 7, 4, 5, OUTLINE);
+    this.r(table.x - 1, cy - 6, 2, 4, '#cfe6ea');
+    this.r(table.x, cy - 10, 1, 4, '#4e8a4f');
+    this.r(table.x - 1, cy - 12, 3, 2, bloom);
+    this.r(table.x, cy - 13, 1, 1, bloom);
+    this.r(table.x + 1, cy - 9, 1, 1, '#6fb26a');
     // Seated customers lean over the table: redraw their upper body on top.
     for (const side of [0, 1] as const) {
       const c = seated[side];

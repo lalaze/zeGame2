@@ -120,7 +120,7 @@ export const UPGRADES: readonly UpgradeDef[] = [
   { id: 'marketing', baseCost: 40, growth: 1.75, max: 25 },
   { id: 'machine', baseCost: 60, growth: 1.9, max: 20 },
   { id: 'barista', baseCost: 150, growth: 12, max: 3 },
-  { id: 'tables', baseCost: 300, growth: 8, max: 3 },
+  { id: 'tables', baseCost: 300, growth: 8, max: 6 },
   { id: 'manager', baseCost: 500, growth: 4, max: 5 },
 ];
 

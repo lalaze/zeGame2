@@ -23,6 +23,7 @@ import {
   type UpgradeId,
 } from './data';
 import { comfort } from './decor';
+import { activeTableIndices, regionDemand } from './regions';
 import type { DayStats, GameState } from './state';
 
 export type BuyAmount = 1 | 10 | 'max';
@@ -137,9 +138,10 @@ export const prepMultiplier = (s: GameState) => 0.9 ** s.upgrades.machine;
 export const varietyBonus = (s: GameState) =>
   Math.min(MAX_VARIETY_BONUS, VARIETY_BONUS * Math.max(0, menuItems(s).length - 1));
 export const arrivalRate = (s: GameState) =>
-  BASE_ARRIVAL_RATE * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables) * (1 + varietyBonus(s));
+  BASE_ARRIVAL_RATE * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * (1 + varietyBonus(s));
 export const tipMultiplier = (s: GameState) => 1 + comfort(s) / 100;
-export const tableCount = (s: GameState) => 1 + s.upgrades.tables;
+/** The café opens with a table in each nook; Expand the Shop adds the rest. */
+export const tableCount = (s: GameState) => activeTableIndices(s).length;
 export const patienceSeconds = (s: GameState) => 40 + comfort(s) / 5;
 
 export function salePrice(state: GameState, id: ItemId, vip = false): number {

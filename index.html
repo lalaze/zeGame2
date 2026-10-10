@@ -60,7 +60,7 @@
           <div class="rate" id="rate">$0/s</div>
         </div>
         <div class="hud-buttons">
-          <button id="boss-btn" class="pixel-btn small" data-i18n="hud.hide" data-i18n-title="hud.hideTitle">Hide</button>
+          <button id="panel-toggle" class="pixel-btn small ghost" aria-controls="management-panel" aria-expanded="true">Collapse</button>
           <button id="settings-btn" class="pixel-btn small ghost" data-i18n-title="hud.settings">···</button>
         </div>
       </header>
@@ -68,8 +68,11 @@
       <main class="layout">
         <section class="stage" id="stage">
           <div class="stage-sign" id="stage-sign" hidden><span id="stage-sign-name"></span></div>
-          <div class="scene-wrap">
+          <div class="scene-wrap" id="scene-area">
             <canvas id="scene" aria-label="Your café"></canvas>
+            <div class="area-nav" id="area-nav"></div>
+            <nav class="area-edges" id="area-edges"></nav>
+            <div class="region-card" id="region-card" hidden></div>
             <div class="day-hud" id="day-hud">
               <span class="day-clock" id="day-clock"></span>
               <span class="day-speed" id="day-speed">
@@ -79,12 +82,19 @@
               </span>
             </div>
             <button class="pixel-btn open-btn" id="open-btn" hidden></button>
+            <div class="arrange-bar" id="arrange-bar" hidden>
+              <span class="arrange-text" id="arrange-text"></span>
+              <span class="arrange-actions">
+                <button class="chip" id="arrange-store"></button>
+                <button class="chip active" id="arrange-done"></button>
+              </span>
+            </div>
           </div>
           <div class="stage-stats" id="stage-stats" hidden></div>
           <div class="hint" id="hint" data-i18n="hint.tap" hidden>Tap the café to help brew faster!</div>
         </section>
 
-        <aside class="panel">
+        <aside class="panel" id="management-panel">
           <nav class="tabs" role="tablist">
             <button role="tab" data-tab="menu" class="tab active" data-i18n="tab.menu">Menu</button>
             <button role="tab" data-tab="pantry" class="tab" data-i18n="tab.pantry">Pantry</button>
@@ -116,7 +126,6 @@
       </main>
     </div>
 
-    <div id="boss" hidden></div>
     <div id="modal-root"></div>
     <div id="toast" class="toast" hidden></div>
 

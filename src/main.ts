@@ -13,22 +13,26 @@ import {
   readyServings,
   tipMultiplier,
 } from './game/economy';
+import { canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
 import { formatDuration, formatMoney } from './game/format';
-import { MIN_SCENE_H, SCENE_W, sceneHeight, setSceneHeight } from './game/layout';
+import { MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
+import { adjacentArea, isAreaOpen, mainTableCount, regionOffset } from './game/regions';
+import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, furnitureDef } from './game/furniture';
 import { Sim, type SimEvent } from './game/sim';
 import { applyTheme, comfort } from './game/decor';
 import { SAVE_KEY, createInitialState, loadState, saveState, type GameState } from './game/state';
 import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale, t, type Locale } from './i18n';
 import { SceneRenderer } from './render/scene';
 import { character, itemIcon, toDataURL } from './render/sprites';
-import { BossMode } from './ui/boss';
 import { closeModal, isModalOpen, showModal, toast } from './ui/modal';
 import { showOnboarding, type OnboardingResult } from './ui/onboarding';
-import { Panel, itemName } from './ui/panel';
+import { Panel, decorName, itemName, type ArrangeRequest } from './ui/panel';
+import { RegionsUI, areaName } from './ui/regions';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 
 const HINT_KEY = 'tiny-bean-cafe/hint-done';
+const PANEL_COLLAPSED_KEY = 'tiny-bean-cafe/panel-collapsed';
 const AUTOSAVE_MS = 5000;
 const SIM_STEP = 0.05;
 
@@ -72,7 +76,12 @@ function fitCanvas(): void {
   const roomH = rect.height - (stats.hidden ? 0 : STATS_SPACE);
   // The café grows taller (more floor) to match the stage's shape. Height it can't
   // use goes to the sign, if there's enough for it.
+  const previousHeight = sceneHeight();
   setSceneHeight((SCENE_W * roomH) / Math.max(1, rect.width));
+  if (previousHeight !== sceneHeight()) {
+    sim.resizeScene(previousHeight);
+    scene.setOverview(scene.overview, true);
+  }
   const spare = roomH - sceneHeight() * Math.min(rect.width / SCENE_W, roomH / sceneHeight());
   sign.hidden = spare < SIGN_SPACE;
   const availH = roomH - (sign.hidden ? 0 : SIGN_SPACE);
@@ -81,7 +90,7 @@ function fitCanvas(): void {
   // pixels, a fractional nearest-neighbor scale looks even. Below that, rounding down
   // would waste up to half the space, so the art is upscaled to the next whole number
   // and the browser shrinks it smoothly, which keeps every pixel the same size.
-  const shown = Math.max(1, fit);
+  const shown = Math.max(0.1, fit);
   const backing = shown >= 3 ? shown : Math.ceil(shown);
   canvas.width = Math.round(SCENE_W * backing);
   canvas.height = Math.round(sceneHeight() * backing);
@@ -96,21 +105,180 @@ new ResizeObserver(fitCanvas).observe(stage);
 const coinsEl = $('coins');
 const rateEl = $('rate');
 const hint = $('hint');
+const panelRoot = $('management-panel');
+const panelToggle = $<HTMLButtonElement>('panel-toggle');
+const layout = document.querySelector<HTMLElement>('.layout')!;
+let panelCollapsed = localStorage.getItem(PANEL_COLLAPSED_KEY) === '1';
 
-const panel = new Panel(document.querySelector('.panel')!, $('list'), $('goal'), state, (kind, id) => {
+function updatePanelVisibility(): void {
+  panelRoot.hidden = panelCollapsed;
+  panelRoot.setAttribute('aria-label', t('panel.title'));
+  layout.classList.toggle('panel-collapsed', panelCollapsed);
+  panelToggle.textContent = t(panelCollapsed ? 'panel.expand' : 'panel.collapse');
+  panelToggle.title = t(panelCollapsed ? 'panel.expandTitle' : 'panel.collapseTitle');
+  panelToggle.setAttribute('aria-label', panelToggle.title);
+  panelToggle.setAttribute('aria-expanded', String(!panelCollapsed));
+}
+
+function setPanelCollapsed(collapsed: boolean): void {
+  panelCollapsed = collapsed;
+  localStorage.setItem(PANEL_COLLAPSED_KEY, collapsed ? '1' : '0');
+  updatePanelVisibility();
+}
+panelToggle.addEventListener('click', () => setPanelCollapsed(!panelCollapsed));
+updatePanelVisibility();
+
+const panel = new Panel(
+  panelRoot,
+  $('list'),
+  $('goal'),
+  state,
+  (kind, id) => {
+    // A new table takes its spot (and the next one is reserved): clear any furniture in the way.
+    if (kind === 'upgrade' && id === 'tables') {
+      if (arrange) startArrange({ kind: 'arrange' });
+      const moved = evictBlocked(state, mainTableCount(state));
+      if (moved > 0) toast(t('toast.evicted', { n: moved }));
+    }
+    saveState(localStorage, state);
+    const burst = kind === 'goal' ? 14 : 5;
+    for (let i = 0; i < burst; i++) scene.sparkle(20 + Math.random() * 150, 30 + Math.random() * 40);
+    if (kind === 'goal') toast(t('goal.claimed', { reward: formatMoney(Number(id)) }));
+  },
+  (request) => startArrange(request),
+);
+
+/** Opening a management task also reveals the panel if the player folded it away. */
+function showPanelTab(tab: 'menu' | 'pantry'): void {
+  setPanelCollapsed(false);
+  panel.showTab(tab);
+}
+
+// ------------------------------------------------------------ arranging furniture
+
+/**
+ * Arranging: 'browse' waits for the player to pick up a placed piece; 'place' has a
+ * piece following the pointer, either a new one from storage (moving = -1) or a
+ * placed one being moved (its index).
+ */
+type Arrange = { mode: 'browse' } | { mode: 'place'; id: string; moving: number; fromBrowse: boolean };
+let arrange: Arrange | null = null;
+const arrangeBar = $('arrange-bar');
+const arrangeText = $('arrange-text');
+const arrangeStore = $<HTMLButtonElement>('arrange-store');
+const arrangeDone = $<HTMLButtonElement>('arrange-done');
+const sceneWrap = document.querySelector<HTMLElement>('.scene-wrap')!;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const regionsUI = new RegionsUI($('area-nav'), $('area-edges'), $('region-card'), () => state, (area) => {
+  scene.moveToArea(area, reducedMotion.matches);
+  sceneWrap.classList.toggle('has-front-passage', !!adjacentArea(area, 'down'));
+  canvas.setAttribute('aria-label', areaName(area));
+  if (arrange && !isAreaOpen(state, area)) {
+    arrange = null;
+    scene.ghost = null;
+    showArrange();
+  } else if (arrange?.mode === 'place') holdPiece(arrange.id, arrange.moving, arrange.fromBrowse);
+  updateDayHud();
+}, () => {
   saveState(localStorage, state);
-  const burst = kind === 'goal' ? 14 : 5;
-  for (let i = 0; i < burst; i++) scene.sparkle(20 + Math.random() * 150, 30 + Math.random() * 40);
-  if (kind === 'goal') toast(t('goal.claimed', { reward: formatMoney(Number(id)) }));
+  panel.refresh();
+  toast(t('area.opened', { name: areaName(scene.area) }));
+  const origin = areaOrigin(scene.area);
+  for (let i = 0; i < 16; i++) scene.sparkle(origin.x + 40 + Math.random() * 240, origin.y + 70 + Math.random() * 60);
+  updateDayHud();
+}, (show) => {
+  scene.setOverview(show, reducedMotion.matches);
+  canvas.setAttribute('aria-label', show ? t('area.overviewHint') : areaName(scene.area));
 });
 
-const boss = new BossMode($('boss'), $('app'), (active) => {
-  if (!active) {
-    last = performance.now();
-    fitCanvas();
+function showArrange(): void {
+  sceneWrap.classList.toggle('arranging', !!arrange);
+  arrangeBar.hidden = !arrange;
+  if (!arrange) return;
+  const moving = arrange.mode === 'place' && arrange.moving >= 0;
+  arrangeText.textContent =
+    arrange.mode === 'browse' ? t('arrange.browse') : t('arrange.place', { name: decorName(arrange.id) });
+  arrangeStore.hidden = !moving;
+  arrangeStore.textContent = t('arrange.store');
+  arrangeDone.textContent = arrange.mode === 'browse' ? t('arrange.done') : t('arrange.cancel');
+}
+
+/** Picks a piece up: the ghost starts where it is, or at the first free spot for a new one. */
+function holdPiece(id: string, moving: number, fromBrowse: boolean): void {
+  arrange = { mode: 'place', id, moving, fromBrowse };
+  let at = moving >= 0 ? state.decor.placed[moving] : null;
+  const start = regionOffset(scene.area) / CELL;
+  if (at && (at.col < start || at.col >= start + COLS)) at = null;
+  if (!at) {
+    const tables = mainTableCount(state);
+    const rows = furnitureDef(id)?.surface === 'wall' ? WALL_ROWS : FLOOR_ROWS;
+    outer: for (let row = 0; row < rows; row++) {
+      for (let col = start; col < start + COLS; col++) {
+        if (canPlace(state, id, col, row, tables, moving)) {
+          at = { id, col, row };
+          break outer;
+        }
+      }
+    }
+  }
+  scene.ghost = { id, col: at?.col ?? -99, row: at?.row ?? -99, skip: moving };
+  showArrange();
+}
+
+function startArrange(request: ArrangeRequest): void {
+  if (!isAreaOpen(state, scene.area)) regionsUI.select('main');
+  if (request.kind === 'place') holdPiece(request.id, -1, arrange?.mode === 'browse');
+  else {
+    arrange = { mode: 'browse' };
+    scene.ghost = null;
+    showArrange();
+  }
+}
+
+/** Back to browsing if the player came from there, otherwise done arranging. */
+function releasePiece(): void {
+  const back = arrange?.mode === 'place' && arrange.fromBrowse;
+  arrange = back ? { mode: 'browse' } : null;
+  scene.ghost = null;
+  saveState(localStorage, state);
+  showArrange();
+  panel.update();
+}
+
+function arrangeTap(x: number, y: number): void {
+  if (!arrange) return;
+  if (arrange.mode === 'browse') {
+    const index = scene.furnitureAt(state, x, y);
+    if (index >= 0) holdPiece(state.decor.placed[index].id, index, true);
+    return;
+  }
+  const { col, row } = scene.cellAt(arrange.id, x, y);
+  const tables = mainTableCount(state);
+  const ok =
+    arrange.moving >= 0
+      ? moveFurniture(state, arrange.moving, col, row, tables)
+      : placeFurniture(state, arrange.id, col, row, tables);
+  if (!ok) {
+    // Show where it was tapped, in red, so it's clear why.
+    scene.ghost = { ...scene.ghost!, col, row };
+    toast(t('arrange.blocked'));
+    return;
+  }
+  for (let i = 0; i < 6; i++) scene.sparkle(x + (Math.random() - 0.5) * 16, y - Math.random() * 16);
+  releasePiece();
+}
+
+arrangeStore.addEventListener('click', () => {
+  if (arrange?.mode === 'place' && arrange.moving >= 0) storeFurniture(state, arrange.moving);
+  releasePiece();
+});
+arrangeDone.addEventListener('click', () => {
+  if (arrange?.mode === 'place') releasePiece();
+  else {
+    arrange = null;
+    showArrange();
   }
 });
-$('boss-btn').addEventListener('click', () => boss.toggle(true));
 
 /** The HUD shows the player's café name once it has one. */
 function updateBrand(): void {
@@ -152,8 +320,9 @@ function updateDayHud(): void {
   const text = `${t('day.label', { n: state.day })} · ${time}`;
   if (dayClock.textContent !== text) dayClock.textContent = text;
   $('day-speed').hidden = !open;
+  $('day-hud').hidden = !isAreaOpen(state, scene.area);
   for (const b of speedBtns) b.classList.toggle('active', Number(b.dataset.speed) === state.speed);
-  openBtn.hidden = open || !state.profile;
+  openBtn.hidden = open || !state.profile || scene.area !== 'main';
   const label = t('day.open', { n: state.day });
   if (openBtn.textContent !== label) openBtn.textContent = label;
   hint.hidden = !open || !!localStorage.getItem(HINT_KEY);
@@ -182,7 +351,7 @@ function tryOpen(): void {
     showModal({
       title: t('open.emptyTitle'),
       body: `<p>${t('open.emptyBody')}</p>`,
-      buttons: [{ label: t('settings.back'), primary: true, onClick: () => panel.showTab('menu') }],
+      buttons: [{ label: t('settings.back'), primary: true, onClick: () => showPanelTab('menu') }],
     });
     return;
   }
@@ -192,7 +361,7 @@ function tryOpen(): void {
       items: check.items.map((id) => `${itemName(id)} (${readyServings(state, id)})`).join(t('list.sep')),
     })}</p>`,
     buttons: [
-      { label: t('open.toPantry'), primary: true, onClick: () => panel.showTab('pantry') },
+      { label: t('open.toPantry'), primary: true, onClick: () => showPanelTab('pantry') },
       { label: t('open.anyway'), onClick: startDay },
     ],
   });
@@ -253,7 +422,7 @@ function showReport(report: DayReport): void {
         label: t('report.next'),
         primary: true,
         onClick: () => {
-          panel.showTab(report.outOfStock.length ? 'pantry' : 'menu');
+          showPanelTab(report.outOfStock.length ? 'pantry' : 'menu');
           const next = afterReport;
           afterReport = null;
           next?.();
@@ -289,7 +458,7 @@ function fastForward(seconds: number): number {
 function applyStaticText(): void {
   document.documentElement.lang = LOCALES.find((l) => l.id === getLocale())!.htmlLang;
   updateBrand();
-  if (!boss.active) document.title = t('app.title');
+  document.title = t('app.title');
   document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
     el.textContent = t(el.dataset.i18n as Parameters<typeof t>[0]);
   });
@@ -297,13 +466,13 @@ function applyStaticText(): void {
     el.title = t(el.dataset.i18nTitle as Parameters<typeof t>[0]);
     el.setAttribute('aria-label', el.title);
   });
+  updatePanelVisibility();
 }
 applyStaticText();
 onLocaleChange(() => {
   applyStaticText();
   shownStats = '';
   panel.refresh();
-  boss.build();
 });
 
 const ownerIcon = () =>
@@ -427,6 +596,7 @@ function resetGame(): void {
   sim.queue = [];
   sim.seats = [];
   panel.setState(state);
+  regionsUI.select('main');
   updateBrand();
   saveState(localStorage, state);
   startOnboarding();
@@ -448,23 +618,50 @@ function tapAt(x: number, y: number): void {
   }
 }
 
-canvas.addEventListener('pointerdown', (e) => {
+/** A pointer event's position in scene pixels. */
+function scenePoint(e: PointerEvent): { x: number; y: number } {
   const rect = canvas.getBoundingClientRect();
-  tapAt(((e.clientX - rect.left) / rect.width) * SCENE_W, ((e.clientY - rect.top) / rect.height) * sceneHeight());
+  return {
+    x: ((e.clientX - rect.left) / rect.width) * scene.viewWidth + scene.viewX,
+    y: ((e.clientY - rect.top) / rect.height) * scene.viewHeight + scene.viewY,
+  };
+}
+
+canvas.addEventListener('pointerdown', (e) => {
+  if (scene.panning) return;
+  const { x, y } = scenePoint(e);
+  if (scene.overview) {
+    const area = areaAtPoint(x, y);
+    if (area) regionsUI.select(area);
+    return;
+  }
+  if (arrange) arrangeTap(x, y);
+  else tapAt(x, y);
+});
+
+// With a mouse, the piece being placed follows the pointer.
+canvas.addEventListener('pointermove', (e) => {
+  if (scene.panning || scene.overview || arrange?.mode !== 'place' || e.pointerType === 'touch') return;
+  const { x, y } = scenePoint(e);
+  scene.ghost = { ...scene.ghost!, ...scene.cellAt(arrange.id, x, y) };
 });
 
 window.addEventListener('keydown', (e) => {
-  // Letters typed into a name field are not shortcuts; Esc still hides the game.
+  // Letters typed into a name field are not shortcuts; Esc can close a dialog.
   const typing = e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement;
   const onboarding = !!document.querySelector('.onboard-overlay');
   if (typing && e.key !== 'Escape') return;
-  if (e.key === 'Escape' || e.key === 'b' || e.key === 'B' || e.key === '`') {
+  // Let navigation buttons keep their native keyboard activation.
+  if (e.key === ' ' && e.target instanceof HTMLElement && e.target.closest('.area-arrow, .area-plan-toggle, #panel-toggle')) return;
+  if (e.key === 'Escape' && isModalOpen()) {
     e.preventDefault();
-    if (isModalOpen() && !boss.active && e.key === 'Escape') closeModal();
-    else boss.toggle();
-  } else if (e.key === ' ' && !boss.active && !isModalOpen() && !onboarding) {
+    closeModal();
+  } else if (e.key === ' ' && !isModalOpen() && !onboarding) {
     e.preventDefault();
-    if (!e.repeat) tapAt(24 + Math.random() * 72, 50);
+    if (!e.repeat) tapAt(areaOrigin(scene.area).x + 110 + Math.random() * 100, areaOrigin(scene.area).y + 70);
+  } else if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key) && !isModalOpen() && !onboarding) {
+    e.preventDefault();
+    if (!e.repeat) regionsUI.move(({ ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'up', ArrowDown: 'down' } as const)[e.key as 'ArrowLeft' | 'ArrowRight' | 'ArrowUp' | 'ArrowDown']);
   }
 });
 
@@ -556,35 +753,35 @@ function frame(nowMs: number): void {
   }
   if (!document.hidden) state.lastSeen = Date.now();
 
-  if (boss.active) {
-    boss.update(state.coins);
-  } else {
-    scene.update(dt, sim);
-    const hours = clockHours(state);
-    scene.draw(sim, state, nowMs / 1000, new Date(2000, 0, 1, Math.floor(hours), (hours % 1) * 60));
-    display.imageSmoothingEnabled = false;
-    display.drawImage(scene.buffer, 0, 0, canvas.width, canvas.height);
+  scene.update(dt, sim);
+  sceneWrap.classList.toggle('is-panning', scene.panning);
+  sceneWrap.classList.toggle('is-overview', scene.overview);
+  const hours = clockHours(state);
+  scene.draw(sim, state, nowMs / 1000, new Date(2000, 0, 1, Math.floor(hours), (hours % 1) * 60));
+  display.imageSmoothingEnabled = false;
+  display.drawImage(scene.buffer, 0, 0, canvas.width, canvas.height);
 
-    const coins = formatMoney(state.coins);
-    if (coins !== shownCoins) coinsEl.textContent = shownCoins = coins;
-    uiTimer -= dt;
-    if (uiTimer <= 0) {
-      uiTimer = 0.25;
-      const rate =
-        state.phase === 'open'
-          ? t('hud.today', { money: formatMoney(state.today.revenue) })
-          : t('hud.closed', { n: state.day });
-      if (rate !== shownRate) rateEl.textContent = shownRate = rate;
-      panel.update();
-      updateStats();
-      updateDayHud();
-    }
+  const coins = formatMoney(state.coins);
+  if (coins !== shownCoins) coinsEl.textContent = shownCoins = coins;
+  uiTimer -= dt;
+  if (uiTimer <= 0) {
+    uiTimer = 0.25;
+    const rate =
+      state.phase === 'open'
+        ? t('hud.today', { money: formatMoney(state.today.revenue) })
+        : t('hud.closed', { n: state.day });
+    if (rate !== shownRate) rateEl.textContent = shownRate = rate;
+    panel.update();
+    regionsUI.update();
+    updateStats();
+    updateDayHud();
   }
   requestAnimationFrame(frame);
 }
 
 fitCanvas();
 panel.update();
+regionsUI.select('main');
 updateDayHud();
 // Saves from before the opening flow existed go through it first, then collect.
 if (state.profile) collectClosedTime(closedSeconds);

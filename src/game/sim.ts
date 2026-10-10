@@ -9,9 +9,9 @@ import {
   patienceSeconds,
   prepTime,
   salePrice,
-  tableCount,
 } from './economy';
-import { DOOR_SPOT, queueSpot, seatSpot, serviceSpot } from './layout';
+import { TOTAL_TABLE_SPOTS, areaAtPoint, areaOrigin, doorSpot, queueSpot, resizeRoomPoint, roomRoute, seatApproach, seatSpot, serviceSpot, tableArea } from './layout';
+import { activeTableIndices } from './regions';
 import type { GameState, Look } from './state';
 
 export type { Look };
@@ -41,6 +41,8 @@ export interface Customer {
   soldOut: boolean;
   /** Distance walked, drives the walk animation. */
   stride: number;
+  /** Points still to walk through after reaching the current target. */
+  via: { x: number; y: number }[];
 }
 
 export interface Barista {
@@ -72,6 +74,24 @@ export class Sim {
 
   constructor(private rng: () => number = Math.random) {}
 
+  resizeScene(fromHeight: number): void {
+    for (const c of this.customers) {
+      const position = resizeRoomPoint(c, fromHeight);
+      const target = resizeRoomPoint({ x: c.tx, y: c.ty }, fromHeight);
+      c.x = position.x; c.y = position.y;
+      c.tx = target.x; c.ty = target.y;
+      c.via = c.via.map((point) => resizeRoomPoint(point, fromHeight));
+      if (c.seat >= 0) {
+        const seat = seatSpot(Math.floor(c.seat / 2), c.seat % 2 as 0 | 1);
+        if (c.phase === 'sitting') { c.x = c.tx = seat.x; c.y = c.ty = seat.y; }
+        else if (c.phase === 'toSeat') {
+          if (c.via.length) c.via[c.via.length - 1] = seat;
+          else { c.tx = seat.x; c.ty = seat.y; }
+        }
+      }
+    }
+  }
+
   private randInt(n: number): number {
     return Math.floor(this.rng() * n);
   }
@@ -90,7 +110,7 @@ export class Sim {
     while (this.baristas.length < baristaCount(state)) {
       this.baristas.push({ look: this.randomLook(), customerId: null, remaining: 0, total: 0 });
     }
-    while (this.seats.length < tableCount(state) * 2) this.seats.push(null);
+    while (this.seats.length < TOTAL_TABLE_SPOTS * 2) this.seats.push(null);
   }
 
   private find(id: number): Customer | undefined {
@@ -104,10 +124,11 @@ export class Sim {
     const pairs = menu.filter((m) => isDrink(m.category) !== isDrink(main.category));
     const extra = pairs.length > 0 && this.rng() < COMBO_CHANCE ? pairs[this.randInt(pairs.length)].id : null;
     const pos = queueSpot(this.queue.length);
+    const door = doorSpot();
     const c: Customer = {
       id: this.nextId++,
-      x: DOOR_SPOT.x,
-      y: DOOR_SPOT.y,
+      x: door.x,
+      y: door.y,
       tx: pos.x,
       ty: pos.y,
       phase: 'queue',
@@ -124,6 +145,7 @@ export class Sim {
       hasCup: false,
       soldOut: false,
       stride: 0,
+      via: [],
     };
     this.customers.push(c);
     this.queue.push(c.id);
@@ -133,16 +155,30 @@ export class Sim {
     this.queue.forEach((id, i) => {
       const c = this.find(id);
       if (!c) return;
-      const p = queueSpot(i);
-      c.tx = p.x;
-      c.ty = p.y;
+      this.walk(c, queueSpot(i));
     });
   }
 
+  /** Sets a customer walking through `points` in order. */
+  private walk(c: Customer, ...points: { x: number; y: number }[]): void {
+    let previous = { x: c.x, y: c.y };
+    const unique = points.filter((point) => {
+      const different = point.x !== previous.x || point.y !== previous.y;
+      previous = point;
+      return different;
+    });
+    const [first, ...rest] = unique;
+    c.tx = first?.x ?? c.x;
+    c.ty = first?.y ?? c.y;
+    c.via = rest;
+  }
+
   private exit(c: Customer): void {
+    // Someone getting up from a table steps out in front of it first.
+    const from = c.phase === 'sitting' ? [seatApproach(Math.floor(c.seat / 2), (c.seat % 2) as 0 | 1)] : [];
+    const area = c.phase === 'sitting' ? tableArea(Math.floor(c.seat / 2)) : areaAtPoint(c.x, c.y) ?? 'main';
     c.phase = 'exiting';
-    c.tx = DOOR_SPOT.x;
-    c.ty = DOOR_SPOT.y;
+    this.walk(c, ...from, ...roomRoute(area, 'main'), doorSpot());
   }
 
   private callNext(): void {
@@ -151,11 +187,9 @@ export class Sim {
       if (b.customerId !== null) continue;
       const c = this.find(this.queue.shift()!);
       if (!c) continue;
-      const p = serviceSpot(i);
       c.phase = 'toCounter';
       c.spot = i;
-      c.tx = p.x;
-      c.ty = p.y;
+      this.walk(c, serviceSpot(i));
       b.customerId = c.id;
       b.remaining = 0;
       b.total = 0;
@@ -203,14 +237,17 @@ export class Sim {
     c.mood = 'happy';
     c.moodTimer = 1.5;
     c.spot = -1;
-    const free = this.seats.findIndex((s) => s === null);
+    const available = activeTableIndices(state).flatMap((i) => [i * 2, i * 2 + 1]).filter((i) => this.seats[i] === null);
+    const free = available.length > 0 ? available[this.randInt(available.length)] : -1;
     if (free >= 0 && this.rng() < SEAT_CHANCE) {
       this.seats[free] = c.id;
       c.seat = free;
       c.phase = 'toSeat';
-      const p = seatSpot(Math.floor(free / 2), (free % 2) as 0 | 1);
-      c.tx = p.x;
-      c.ty = p.y;
+      const table = Math.floor(free / 2);
+      const side = (free % 2) as 0 | 1;
+      const approach = seatApproach(table, side);
+      const area = tableArea(table);
+      this.walk(c, ...roomRoute('main', area), ...(area === 'main' ? [] : [{ x: areaOrigin(area).x + 160, y: approach.y }]), approach, seatSpot(table, side));
     } else {
       this.exit(c);
     }
@@ -241,7 +278,11 @@ export class Sim {
           c.x = c.tx;
           c.y = c.ty;
           c.stride += dist;
-          this.arrive(state, c, events);
+          const next = c.via.shift();
+          if (next) {
+            c.tx = next.x;
+            c.ty = next.y;
+          } else this.arrive(state, c, events);
         } else {
           c.x += (dx / dist) * step;
           c.y += (dy / dist) * step;
@@ -269,8 +310,8 @@ export class Sim {
         c.timer -= dt;
         if (c.timer <= 0) {
           this.seats[c.seat] = null;
-          c.seat = -1;
           this.exit(c);
+          c.seat = -1;
         }
       }
     }
@@ -286,7 +327,7 @@ export class Sim {
     }
 
     this.customers = this.customers.filter(
-      (c) => !(c.phase === 'exiting' && c.x === c.tx && c.y === c.ty),
+      (c) => !(c.phase === 'exiting' && c.via.length === 0 && c.x === c.tx && c.y === c.ty),
     );
 
     // After closing time the staff finish whoever is still in line, then close up.

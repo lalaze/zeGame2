@@ -1,18 +1,11 @@
+// Room styles: each slot holds one item (wallpaper, floor, counter, ...).
+// Furniture and props that go anywhere are in furniture.ts.
+import { furnitureComfort, furnitureDef } from './furniture';
 import type { GameState } from './state';
 
-export type DecorSlot = 'wallpaper' | 'floor' | 'counter' | 'art' | 'plant' | 'sill' | 'ceiling' | 'rug' | 'neon';
+export type DecorSlot = 'wallpaper' | 'floor' | 'counter' | 'sill' | 'ceiling' | 'rug' | 'neon';
 
-export const DECOR_SLOTS: readonly DecorSlot[] = [
-  'wallpaper',
-  'floor',
-  'counter',
-  'art',
-  'plant',
-  'sill',
-  'ceiling',
-  'rug',
-  'neon',
-];
+export const DECOR_SLOTS: readonly DecorSlot[] = ['wallpaper', 'floor', 'counter', 'sill', 'ceiling', 'rug', 'neon'];
 
 export interface DecorDef {
   id: string;
@@ -44,17 +37,6 @@ export const DECOR: readonly DecorDef[] = [
   { id: 'counter_marble', slot: 'counter', cost: 40_000, comfort: 12 },
   { id: 'counter_pink', slot: 'counter', cost: 1_500_000, comfort: 22 },
   { id: 'counter_gold', slot: 'counter', cost: 60_000_000, comfort: 35 },
-
-  { id: 'art_none', slot: 'art', cost: 0, comfort: 0 },
-  { id: 'art_landscape', slot: 'art', cost: 250, comfort: 4 },
-  { id: 'art_cat', slot: 'art', cost: 5_000, comfort: 8 },
-  { id: 'art_bean', slot: 'art', cost: 150_000, comfort: 15 },
-  { id: 'art_starry', slot: 'art', cost: 5_000_000, comfort: 26 },
-
-  { id: 'plant_none', slot: 'plant', cost: 0, comfort: 0 },
-  { id: 'plant_fern', slot: 'plant', cost: 100, comfort: 3 },
-  { id: 'plant_monstera', slot: 'plant', cost: 2_500, comfort: 8 },
-  { id: 'plant_lemon', slot: 'plant', cost: 100_000, comfort: 15 },
 
   { id: 'sill_none', slot: 'sill', cost: 0, comfort: 0 },
   { id: 'sill_cactus', slot: 'sill', cost: 60, comfort: 2 },
@@ -90,12 +72,14 @@ export const STARTER_THEMES: readonly { id: string; equip: Partial<Record<DecorS
 ];
 
 export function comfort(state: GameState): number {
-  return DECOR_SLOTS.reduce((sum, slot) => sum + (decorDef(state.decor.equipped[slot])?.comfort ?? 0), 0);
+  const room = DECOR_SLOTS.reduce((sum, slot) => sum + (decorDef(state.decor.equipped[slot])?.comfort ?? 0), 0);
+  return room + furnitureComfort(state);
 }
 
 export const ownsDecor = (state: GameState, id: string) => state.decor.owned.includes(id);
 export const hasBoughtDecor = (state: GameState) =>
-  state.decor.owned.some((id) => (decorDef(id)?.cost ?? 0) > 0);
+  state.decor.owned.some((id) => (decorDef(id)?.cost ?? 0) > 0) ||
+  [...state.decor.placed.map((p) => p.id), ...Object.keys(state.decor.stored)].some((id) => (furnitureDef(id)?.cost ?? 0) > 0);
 
 /** Buys (if needed) and puts an item in its slot. Returns false if unaffordable. */
 export function useDecor(state: GameState, id: string): boolean {

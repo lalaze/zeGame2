@@ -10,6 +10,7 @@ import {
   type UpgradeId,
 } from '../game/data';
 import { DECOR_SLOTS, comfort, decorDef, decorForSlot, ownsDecor, useDecor } from '../game/decor';
+import { FURNITURE, buyFurniture, furnitureDef, placedCount, storedCount } from '../game/furniture';
 import {
   arrivalRate,
   awayCapSeconds,
@@ -41,7 +42,6 @@ import {
   prepTime,
   quoteItem,
   quoteUpgrade,
-  tableCount,
   tipMultiplier,
   upgradeDef,
   type BuyAmount,
@@ -49,8 +49,10 @@ import {
 import { formatMoney, formatNumber } from '../game/format';
 import { GOALS, claimGoal, currentGoal, goalDone } from '../game/goals';
 import type { GameState } from '../game/state';
+import { mainTableCount } from '../game/regions';
 import { t, type MessageKey } from '../i18n';
 import { decorIcon } from '../render/decor-art';
+import { furnitureIcon } from '../render/furniture-art';
 import { ingredientIcon, itemIcon, toDataURL, upgradeIcon } from '../render/sprites';
 
 type Tab = 'menu' | 'pantry' | 'upgrades' | 'decor';
@@ -77,6 +79,16 @@ interface TileRefs {
   btn: HTMLButtonElement;
 }
 
+interface FurnitureTileRefs {
+  el: HTMLElement;
+  buy: HTMLButtonElement;
+  place: HTMLButtonElement;
+  count: HTMLElement;
+}
+
+/** What the Decor tab asks the café to do: start placing a piece, or rearrange what's out. */
+export type ArrangeRequest = { kind: 'place'; id: string } | { kind: 'arrange' };
+
 const iconUrls = new Map<string, string>();
 function iconUrl(key: string, make: () => HTMLCanvasElement): string {
   let url = iconUrls.get(key);
@@ -96,7 +108,7 @@ function upgradeEffect(state: GameState, id: UpgradeId): string {
     case 'barista':
       return t('effect.barista', { n: baristaCount(state) });
     case 'tables':
-      return t('effect.tables', { n: tableCount(state) });
+      return t('effect.tables', { n: mainTableCount(state) });
     case 'manager':
       return t('effect.manager', {
         pct: Math.round(awayEfficiency(state) * 100),
@@ -123,6 +135,7 @@ export class Panel {
   private signature = '';
   private rows = new Map<string, RowRefs>();
   private tiles = new Map<string, TileRefs>();
+  private furnitureTiles = new Map<string, FurnitureTileRefs>();
   private slotNotes = new Map<string, HTMLElement>();
   private comfortNote: HTMLElement | null = null;
   private goalSig = '';
@@ -133,6 +146,7 @@ export class Panel {
     private goalEl: HTMLElement,
     private state: GameState,
     private onPurchase: (kind: PurchaseKind, id: string) => void,
+    private onArrange: (request: ArrangeRequest) => void,
   ) {
     root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((b) =>
       b.addEventListener('click', () => this.showTab(b.dataset.tab as Tab)),
@@ -183,6 +197,19 @@ export class Panel {
 
   private onListClick(e: Event): void {
     const target = e.target as HTMLElement;
+    const furniture = target.closest<HTMLButtonElement>('button[data-furniture]');
+    if (furniture && !furniture.disabled) {
+      const [action, id] = furniture.dataset.furniture!.split(':');
+      if (action === 'buy') {
+        if (!buyFurniture(this.state, id)) return;
+        this.pop(furniture.closest('.tile'));
+        this.onPurchase('decor', id);
+        this.onArrange({ kind: 'place', id });
+      } else if (action === 'place') this.onArrange({ kind: 'place', id });
+      else this.onArrange({ kind: 'arrange' });
+      this.update();
+      return;
+    }
     const decorBtn = target.closest<HTMLButtonElement>('button[data-decor]');
     if (decorBtn && !decorBtn.disabled) {
       const id = decorBtn.dataset.decor!;
@@ -286,6 +313,7 @@ export class Panel {
     this.list.replaceChildren();
     this.rows.clear();
     this.tiles.clear();
+    this.furnitureTiles.clear();
     this.slotNotes.clear();
     this.comfortNote = null;
     this.pantryNote = null;
@@ -404,9 +432,39 @@ export class Panel {
   private buildDecor(): void {
     const intro = document.createElement('div');
     intro.className = 'decor-intro';
-    intro.innerHTML = `<div class="comfort"></div><div class="note">${t('decor.intro')}</div>`;
+    intro.innerHTML = `<div class="comfort"></div>`;
     this.comfortNote = intro.querySelector('.comfort');
     this.list.append(intro);
+
+    // Furniture: buy pieces, then place them anywhere free in the café.
+    const furniture = document.createElement('section');
+    furniture.className = 'decor-slot furniture';
+    furniture.innerHTML = `
+      <h3 class="menu-cat">${t('furn.title')}</h3>
+      <div class="decor-intro note">${t('furn.intro')}</div>
+      <button class="pixel-btn small ghost arrange-btn" data-furniture="arrange:">${t('furn.arrange')}</button>
+      <div class="decor-grid"></div>`;
+    const fgrid = furniture.querySelector('.decor-grid')!;
+    for (const def of FURNITURE) {
+      const tile = document.createElement('div');
+      tile.className = 'tile';
+      tile.innerHTML = `
+        <img class="tile-icon" alt="" src="${iconUrl(`furniture:${def.id}`, () => furnitureIcon(def.id))}" />
+        <div class="tile-name">${decorName(def.id)}</div>
+        <div class="tile-comfort">${def.comfort > 0 ? t('decor.comfort', { n: def.comfort }) : '&nbsp;'}</div>
+        <div class="tile-count"></div>
+        <button class="pixel-btn tile-btn" data-furniture="buy:${def.id}"></button>
+        <button class="pixel-btn tile-btn ghost" data-furniture="place:${def.id}">${t('furn.place')}</button>`;
+      fgrid.append(tile);
+      const [buy, place] = tile.querySelectorAll('button');
+      this.furnitureTiles.set(def.id, { el: tile, buy, place, count: tile.querySelector('.tile-count')! });
+    }
+    this.list.append(furniture);
+
+    const room = document.createElement('div');
+    room.className = 'decor-intro';
+    room.innerHTML = `<h3 class="menu-cat">${t('decor.room')}</h3><div class="note">${t('decor.intro')}</div>`;
+    this.list.append(room);
 
     for (const slot of DECOR_SLOTS) {
       const section = document.createElement('section');
@@ -478,6 +536,19 @@ export class Panel {
         refs.btn.textContent = equipped ? t('decor.inUse') : owned ? t('decor.use') : formatMoney(def.cost);
         refs.btn.disabled = equipped || (!owned && s.coins < def.cost);
         refs.btn.classList.toggle('ghost', owned && !equipped);
+      }
+      for (const [id, refs] of this.furnitureTiles) {
+        const def = furnitureDef(id)!;
+        const placed = placedCount(s, id);
+        const stored = storedCount(s, id);
+        refs.count.textContent =
+          stored > 0 ? t('furn.count', { placed, stored }) : placed > 0 ? t('furn.out', { n: placed }) : '';
+        // Starter pieces can't be bought again, only moved.
+        refs.buy.hidden = def.cost === 0;
+        refs.buy.textContent = formatMoney(def.cost);
+        refs.buy.disabled = s.coins < def.cost;
+        refs.place.hidden = stored === 0;
+        refs.el.classList.toggle('equipped', placed > 0);
       }
       return;
     }

@@ -159,6 +159,21 @@ html:lang(zh) body {
   grid-template-columns: minmax(0, 1fr) clamp(330px, 32vw, 400px);
 }
 
+.layout.panel-collapsed {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+#panel-toggle {
+  min-height: 36px;
+}
+
+#settings-btn {
+  width: 36px;
+  padding: 4px 0;
+  font-family: 'Pixelify Sans', ui-monospace, monospace;
+  flex-shrink: 0;
+}
+
 .stage {
   position: relative;
   display: flex;
@@ -174,6 +189,124 @@ html:lang(zh) body {
 .scene-wrap {
   position: relative;
   flex-shrink: 0;
+}
+
+.area-nav { position: absolute; top: 8px; left: 8px; z-index: 6; }
+.area-plan-toggle { display: flex; align-items: center; gap: 6px; min-height: 32px; padding: 4px 8px; border: 0; background: var(--cream); color: var(--ink); box-shadow: var(--frame); font: inherit; font-size: 13px; cursor: pointer; }
+.area-plan-toggle svg { width: 16px; height: 14px; flex-shrink: 0; }
+.area-plan-toggle:hover { background: #fff2ce; }
+.area-plan-toggle[aria-pressed="true"] { background: var(--green); color: #fff6da; }
+.area-plan-toggle:focus-visible { outline: 3px solid var(--green-dark); outline-offset: 4px; }
+
+.area-edges { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+
+.area-arrow {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.area-arrow-sign { display: flex; align-items: center; justify-content: center; width: 38px; height: 42px; background: var(--cream); box-shadow: var(--frame), 3px 4px 0 #40281938; }
+.area-arrow-sign svg { width: 12px; height: 19px; }
+.area-left svg { transform: rotate(180deg); }
+.area-up svg { transform: rotate(-90deg); }
+.area-down svg { transform: rotate(90deg); }
+.area-arrow.locked .area-arrow-sign { background: #e7c89b; }
+.area-arrow:hover .area-arrow-sign { background: #fff2ce; }
+.area-arrow:active .area-arrow-sign { transform: translateY(2px); }
+.area-arrow:focus-visible { outline: 3px solid var(--green-dark); outline-offset: 4px; }
+.area-destination { position: absolute; top: calc(100% + 7px); left: 0; padding: 3px 5px; background: var(--cream); border: 2px solid var(--ink); font-size: 12px; line-height: 1.25; white-space: nowrap; }
+.area-right .area-destination { left: auto; right: 0; }
+.area-up .area-destination, .area-down .area-destination { left: 50%; transform: translateX(-50%); }
+.area-down .area-destination { top: auto; bottom: calc(100% + 7px); }
+
+.scene-wrap.is-overview .area-edges,
+.scene-wrap.is-overview .region-card,
+.scene-wrap.is-overview .day-hud,
+.scene-wrap.is-overview .open-btn,
+.scene-wrap.is-overview .arrange-bar,
+.scene-wrap.is-panning .area-edges,
+.scene-wrap.is-panning .region-card,
+.scene-wrap.is-panning .day-hud,
+.scene-wrap.is-panning .open-btn,
+.scene-wrap.is-panning .arrange-bar { visibility: hidden; pointer-events: none; }
+
+.region-card {
+  position: absolute;
+  left: 50%;
+  top: 51%;
+  transform: translate(-50%, -50%);
+  width: min(330px, 76%);
+  padding: 19px 20px 16px;
+  background: #f9e4bf;
+  color: var(--ink);
+  box-shadow: var(--frame), 5px 9px 0 #40281938;
+  text-align: center;
+}
+
+.region-kicker {
+  color: #8b6847;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+.region-card h2 {
+  margin: 6px 0 8px;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.region-card p {
+  margin: 0 0 13px;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #825c40;
+}
+
+.region-benefits {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: var(--green-dark);
+}
+
+.region-card .pixel-btn {
+  width: 100%;
+  padding: 9px 6px;
+  font-size: 17px;
+}
+
+.region-reason {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #8b6847;
+}
+
+@media (max-width: 860px) {
+  .area-nav { top: 6px; left: 6px; }
+  .area-plan-toggle { min-height: 28px; gap: 5px; padding: 3px 6px; font-size: 12px; }
+  .area-plan-toggle svg { width: 14px; height: 12px; }
+  .area-arrow { width: 30px; }
+  .area-arrow-sign { width: 30px; height: 38px; }
+  .area-arrow-sign svg { width: 10px; height: 16px; }
+  .area-destination { display: none; }
+  .region-card { top: 50%; padding: 8px 12px; width: min(320px, 84%); max-height: calc(100% - 12px); overflow-y: auto; }
+  .region-kicker { font-size: 10px; }
+  .region-card h2 { font-size: 18px; margin: 2px 0 3px; }
+  .region-card p { font-size: 12px; margin-bottom: 6px; }
+  .region-benefits { font-size: 12px; margin-bottom: 6px; gap: 8px; }
+  .region-card .pixel-btn { padding: 5px; font-size: 14px; }
+  .region-reason { margin-top: 6px; font-size: 11px; }
 }
 
 /* Day and clock, over the bottom-left corner of the café. */
@@ -214,6 +347,12 @@ html:lang(zh) body {
   font-weight: 600;
   white-space: nowrap;
   animation: open-bob 1.4s steps(2) infinite;
+}
+
+@keyframes open-bob-corner {
+  50% {
+    transform: translateY(-3px);
+  }
 }
 
 @keyframes open-bob {
@@ -756,6 +895,7 @@ html:lang(zh) body {
 }
 
 .toast {
+  pointer-events: none;
   position: fixed;
   left: 50%;
   top: calc(64px + env(safe-area-inset-top));
@@ -801,6 +941,11 @@ html:lang(zh) body {
     padding: 8px;
   }
 
+  .layout.panel-collapsed .stage {
+    flex: 1;
+    height: auto;
+  }
+
   .panel {
     flex: 1;
     border-left: none;
@@ -809,201 +954,66 @@ html:lang(zh) body {
 
   .hud {
     padding: 6px 10px;
+    gap: 8px;
   }
 
-  .brand,
+  .brand {
+    gap: 4px;
+  }
+
+  .brand-icon {
+    flex-shrink: 0;
+  }
+
+  .money {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
   .hud-buttons {
-    flex: 1;
+    flex: 0 0 auto;
+    gap: 4px;
+  }
+
+  .hud-buttons .pixel-btn {
+    min-height: 44px;
   }
 
   .coins {
     font-size: 22px;
   }
 
+  /* Top-right keeps the front door (bottom middle) and the menu board in view. */
   .day-hud {
     top: 6px;
     bottom: auto;
-    left: 6px;
+    left: auto;
+    right: 6px;
     padding: 2px 6px;
     font-size: 12px;
   }
 
   .open-btn {
-    bottom: 8px;
+    left: auto;
+    right: 6px;
+    bottom: 6px;
+    transform: none;
     padding: 6px 14px;
     font-size: 15px;
+    animation-name: open-bob-corner;
   }
-}
 
-/* ------------------------------------------------------------ boss key */
+  .hint {
+    font-size: 12px;
+  }
 
-body.boss {
-  background: #fff;
-  user-select: text;
-}
+  .arrange-bar {
+    bottom: 4px;
+  }
 
-#boss {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  background: #fff;
-  color: #222;
-  font: 13px 'Segoe UI', Calibri, DengXian, 'Microsoft YaHei', 'PingFang SC', Arial, sans-serif;
-}
-
-.xl-title {
-  background: #1e7145;
-  color: #fff;
-  padding: 6px 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.xl-logo {
-  width: 14px;
-  height: 14px;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: inset 0 0 0 3px #1e7145, inset 0 0 0 4px #fff;
-}
-
-.xl-ribbon {
-  display: flex;
-  gap: 18px;
-  padding: 6px 12px 0;
-  background: #f3f3f3;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-.xl-ribbon span {
-  padding-bottom: 4px;
-}
-
-.xl-ribbon .on {
-  color: #1e7145;
-  border-bottom: 2px solid #1e7145;
-  font-weight: 600;
-}
-
-.xl-tools {
-  display: flex;
-  gap: 4px;
-  padding: 6px 12px;
-  background: #f3f3f3;
-  border-bottom: 1px solid #d4d4d4;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-.xl-tools .tool {
-  padding: 2px 8px;
-  border: 1px solid #d4d4d4;
-  background: #fff;
-}
-
-.xl-tools .sep {
-  width: 1px;
-  background: #d4d4d4;
-  margin: 0 4px;
-}
-
-.xl-formula {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 4px 8px;
-  border-bottom: 1px solid #d4d4d4;
-}
-
-.xl-formula .ref {
-  width: 60px;
-  border-right: 1px solid #d4d4d4;
-}
-
-.xl-formula .fx {
-  font-style: italic;
-  color: #777;
-}
-
-.xl-grid {
-  flex: 1;
-  overflow: auto;
-}
-
-.xl-grid table {
-  border-collapse: collapse;
-  min-width: 100%;
-}
-
-.xl-grid th,
-.xl-grid td {
-  border: 1px solid #e1e1e1;
-  padding: 2px 6px;
-  height: 21px;
-  white-space: nowrap;
-}
-
-.xl-grid th {
-  background: #f3f3f3;
-  color: #555;
-  font-weight: 400;
-  min-width: 34px;
-  position: sticky;
-  top: 0;
-}
-
-.xl-grid tr th:first-child {
-  position: sticky;
-  left: 0;
-  z-index: 1;
-}
-
-.xl-grid td {
-  min-width: 96px;
-}
-
-.xl-grid .b {
-  font-weight: 600;
-}
-
-.xl-grid .r {
-  text-align: right;
-}
-
-.xl-grid .neg {
-  color: #c00;
-}
-
-.xl-grid .sel {
-  outline: 2px solid #1e7145;
-  outline-offset: -2px;
-}
-
-.xl-sheets {
-  display: flex;
-  background: #f3f3f3;
-  border-top: 1px solid #d4d4d4;
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-.xl-sheets span {
-  padding: 6px 14px;
-  border-right: 1px solid #d4d4d4;
-  cursor: default;
-}
-
-.xl-sheets .on {
-  background: #fff;
-  color: #1e7145;
-  font-weight: 600;
-  border-bottom: 2px solid #1e7145;
-}
-
-.xl-sheets [data-return] {
-  cursor: pointer;
+  .arrange-text {
+    font-size: 12px;
+  }
 }
 
 /* ------------------------------------------------------------ goal card */
@@ -1147,6 +1157,66 @@ body.boss {
 .tile.equipped .tile-btn:disabled {
   background: var(--green-dark);
   color: #fff;
+}
+
+.tile-count {
+  font-size: 11px;
+  color: var(--muted);
+  min-height: 1.2em;
+}
+
+.tile-btn + .tile-btn {
+  margin-top: 4px;
+}
+
+.furniture .arrange-btn {
+  margin: 0 3px 10px;
+}
+
+/*
+ * Arranging furniture: instructions and buttons sit at the bottom, over the walkway
+ * where nothing can be placed anyway. Only the buttons take taps; the rest of the
+ * café stays tappable underneath.
+ */
+.arrange-bar {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.scene-wrap.has-front-passage .arrange-bar { bottom: 58px; }
+
+.arrange-text {
+  padding: 3px 8px;
+  background: var(--cream);
+  box-shadow: var(--border);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0.92;
+}
+
+.arrange-actions {
+  display: flex;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+.scene-wrap.arranging .day-hud,
+.scene-wrap.arranging .open-btn,
+.scene-wrap.arranging ~ .hint {
+  display: none;
+}
+
+.scene-wrap.arranging canvas {
+  cursor: crosshair;
 }
 
 /* ------------------------------------------------------------ forms */

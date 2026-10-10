@@ -12,9 +12,11 @@ import {
 } from './data';
 import { DECOR, DECOR_SLOTS, STARTER_THEMES, decorDef, type DecorSlot } from './decor';
 import { bakeMorning, bulkCost, dayNeeds, fillBakePlan } from './economy';
+import { DEFAULT_ART_SPOT, STARTER_FURNITURE, evictBlocked, furnitureDef, type Placed } from './furniture';
+import { REGIONS, mainTableCount, type RegionId } from './regions';
 
 export const SAVE_KEY = 'tiny-bean-cafe/save';
-export const SAVE_VERSION = 5;
+export const SAVE_VERSION = 7;
 
 export interface Look {
   skin: number;
@@ -34,8 +36,12 @@ export interface Profile {
 }
 
 export interface DecorState {
+  /** Room styles bought, and which one is in each slot. */
   owned: string[];
   equipped: Record<DecorSlot, string>;
+  /** Furniture out in the café, and how many of each are in storage. */
+  placed: Placed[];
+  stored: Record<string, number>;
 }
 
 /** Running totals for the business day in progress, shown in the end-of-day report. */
@@ -72,6 +78,8 @@ export interface GameState {
   served: number;
   items: Record<ItemId, number>;
   upgrades: Record<UpgradeId, number>;
+  /** Connected rooms opened in order, in addition to the original café. */
+  regions: RegionId[];
   profile: Profile | null;
   decor: DecorState;
   /** Index of the next guided goal to complete. */
@@ -101,7 +109,7 @@ function defaultDecor(): DecorState {
   const owned = DECOR.filter((d) => d.cost === 0).map((d) => d.id);
   const equipped = { ...STARTER_THEMES[0].equip } as Record<DecorSlot, string>;
   for (const slot of DECOR_SLOTS) equipped[slot] ??= DECOR.find((d) => d.slot === slot && d.cost === 0)!.id;
-  return { owned, equipped };
+  return { owned, equipped, placed: STARTER_FURNITURE.map((p) => ({ ...p })), stored: {} };
 }
 
 export function createInitialState(now: number): GameState {
@@ -118,6 +126,7 @@ export function createInitialState(now: number): GameState {
     served: 0,
     items,
     upgrades,
+    regions: [],
     profile: null,
     decor: defaultDecor(),
     goal: 0,
@@ -177,7 +186,29 @@ function parseDecor(value: unknown, base: DecorState): DecorState {
     const id = eq[slot];
     if (typeof id === 'string' && owned.has(id) && decorDef(id)?.slot === slot) equipped[slot] = id;
   }
-  return { owned: [...owned], equipped };
+  let placed = base.placed;
+  const stored: Record<string, number> = {};
+  if (Array.isArray(d.placed)) {
+    // Spots are checked against the tables once the whole save is read (see deserialize).
+    placed = d.placed
+      .filter((p): p is Placed => !!p && typeof p === 'object' && !!furnitureDef((p as Placed).id))
+      .map((p) => ({ id: p.id, col: Math.floor(num(p.col, -1, -1)), row: Math.floor(num(p.row, -1, -1)) }));
+    const st = (d.stored ?? {}) as Record<string, unknown>;
+    for (const [id, n] of Object.entries(st)) {
+      const count = Math.floor(num(n, 0));
+      if (furnitureDef(id) && count > 0) stored[id] = count;
+    }
+  } else if (Array.isArray(d.owned)) {
+    // Before v6, wall art and floor plants were slots. What was bought becomes furniture;
+    // the painting that was up goes back on the wall.
+    placed = base.placed.map((p) => ({ ...p }));
+    for (const id of d.owned) {
+      if (typeof id !== 'string' || !furnitureDef(id)) continue;
+      if (eq.art === id) placed.push({ id, ...DEFAULT_ART_SPOT });
+      else stored[id] = (stored[id] ?? 0) + 1;
+    }
+  }
+  return { owned: [...owned], equipped, placed, stored };
 }
 
 /** Parses a save, falling back to defaults for anything missing or malformed. */
@@ -199,6 +230,12 @@ export function deserialize(raw: string | null, now: number): GameState {
   const upgrades = (data.upgrades ?? {}) as Record<string, unknown>;
   for (const u of UPGRADES) {
     base.upgrades[u.id] = Math.min(u.max, Math.floor(num(upgrades[u.id], 0)));
+  }
+  if (Array.isArray(data.regions)) {
+    for (const r of REGIONS) {
+      if (!data.regions.includes(r.id)) break;
+      base.regions.push(r.id);
+    }
   }
 
   base.coins = num(data.coins, 0);
@@ -237,6 +274,8 @@ export function deserialize(raw: string | null, now: number): GameState {
     base.coins += bulkCost(200, 2.2, 0, oldDecor);
     base.upgrades.tables = Math.max(base.upgrades.tables, [3, 6, 10].filter((l) => oldDecor >= l).length);
   }
+  // Anything placed off the grid or in a table's way goes to storage.
+  evictBlocked(base, mainTableCount(base));
   // Every bread and pastry on the menu gets a morning-bake amount. Before v5 nothing was
   // baked ahead, so a day in progress bakes its batch now.
   fillBakePlan(base);

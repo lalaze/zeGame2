@@ -43,6 +43,6 @@ describe('i18n', () => {
     expect(t('item.latte')).toBe('拿铁');
     expect(t('row.sellsFor', { price: '$10' })).toBe('售价 $10');
     expect(formatDuration(3725)).toBe('1小时2分');
-    expect(tList('boss.sheets')).toEqual(['汇总', '预测', '假设']);
+    expect(tList('ob.names')).toEqual(['云朵咖啡', '慢慢咖啡', '猫爪咖啡屋', '月光拿铁', '小满咖啡', '日落咖啡馆', '暖暖咖啡', '豆子研究所']);
   });
 });

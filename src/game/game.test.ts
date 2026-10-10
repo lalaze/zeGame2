@@ -26,8 +26,20 @@ import {
   setBakePlan,
   setOnMenu,
   suggestedBake,
+  tableCount,
   tipMultiplier,
 } from './economy';
+import {
+  DEFAULT_ART_SPOT,
+  FURNITURE,
+  buyFurniture,
+  canPlace,
+  evictBlocked,
+  moveFurniture,
+  placeFurniture,
+  storeFurniture,
+} from './furniture';
+import { MAX_SCENE_H, MAX_TABLES, MIN_SCENE_H, SCENE_W, setSceneHeight, tablePos } from './layout';
 import { DECOR, DECOR_SLOTS, STARTER_THEMES, applyTheme, comfort, decorDef, useDecor, type DecorSlot } from './decor';
 import { formatDuration, formatNumber } from './format';
 import { GOALS, claimGoal, currentGoal, goalDone } from './goals';
@@ -241,7 +253,7 @@ describe('save migration and profile', () => {
       JSON.stringify({
         version: 2,
         profile: { cafeName: '  ' + 'x'.repeat(40), ownerName: 7, look: { skin: 99, hair: -2, hairStyle: 'a' } },
-        decor: { owned: ['rug_blue', 'not_a_thing'], equipped: { rug: 'rug_blue', floor: 'floor_marble', art: 'rug_blue' } },
+        decor: { owned: ['rug_blue', 'not_a_thing'], equipped: { rug: 'rug_blue', floor: 'floor_marble', neon: 'rug_blue' } },
       }),
       0,
     );
@@ -252,7 +264,7 @@ describe('save migration and profile', () => {
     expect(s.decor.owned).not.toContain('not_a_thing');
     expect(s.decor.equipped.rug).toBe('rug_blue');
     expect(s.decor.equipped.floor).toBe('floor_checker'); // not owned
-    expect(s.decor.equipped.art).toBe('art_none'); // wrong slot
+    expect(s.decor.equipped.neon).toBe('neon_none'); // wrong slot
     expect(deserialize(JSON.stringify({ profile: { cafeName: '   ' } }), 0).profile).toBeNull();
   });
 });
@@ -575,5 +587,151 @@ describe('morning bake', () => {
     expect(back.bakePlan.roll).toBe(25);
     expect(back.shelf.roll).toBe(9);
     expect(back.today.baked.roll).toBe(25);
+  });
+});
+
+describe('floor plan', () => {
+  it('opens with two tables and expands to fill every table spot', () => {
+    const s = createInitialState(0);
+    expect(tableCount(s)).toBe(2);
+    s.upgrades.tables = UPGRADES.find((u) => u.id === 'tables')!.max;
+    expect(tableCount(s)).toBe(MAX_TABLES);
+  });
+
+  it('fits every table, chairs included, in the room without overlaps', () => {
+    // A table with its chairs spans 46 x 28 pixels above its feet position.
+    const HALF_W = 23;
+    const H = 28;
+    for (const sceneH of [MIN_SCENE_H, 240, MAX_SCENE_H]) {
+      setSceneHeight(sceneH);
+      const boxes = Array.from({ length: MAX_TABLES }, (_, i) => tablePos(i));
+      for (const b of boxes) {
+        expect(b.x - HALF_W).toBeGreaterThanOrEqual(0);
+        expect(b.x + HALF_W).toBeLessThanOrEqual(SCENE_W);
+        // Clear of the front wall along the bottom edge.
+        expect(b.y).toBeLessThanOrEqual(sceneH - 8);
+      }
+      boxes.forEach((a, i) =>
+        boxes.slice(i + 1).forEach((b) => {
+          const apart = Math.abs(a.x - b.x) >= HALF_W * 2 || Math.abs(a.y - b.y) >= H;
+          expect(apart).toBe(true);
+        }),
+      );
+    }
+    setSceneHeight(MIN_SCENE_H);
+  });
+});
+
+describe('furniture', () => {
+  const rich = () => {
+    const s = createInitialState(0);
+    s.coins = 1e9;
+    return s;
+  };
+
+  it('opens with the clock and mug rack on the wall, adding no comfort', () => {
+    const s = createInitialState(0);
+    expect(s.decor.placed.map((p) => p.id)).toEqual(['clock', 'mugrack']);
+    expect(comfort(s)).toBe(0);
+    for (const p of s.decor.placed) expect(canPlace(s, p.id, p.col, p.row, tableCount(s), s.decor.placed.indexOf(p))).toBe(true);
+  });
+
+  it('buys into storage, places on a free spot, and counts each kind once', () => {
+    const s = rich();
+    expect(buyFurniture(s, 'plant_fern')).toBe(true);
+    expect(buyFurniture(s, 'plant_fern')).toBe(true);
+    expect(s.decor.stored.plant_fern).toBe(2);
+    expect(comfort(s)).toBe(0); // stored pieces don't count
+    expect(placeFurniture(s, 'plant_fern', 34, 10, 2)).toBe(true);
+    expect(placeFurniture(s, 'plant_fern', 36, 10, 2)).toBe(true);
+    expect(s.decor.stored.plant_fern).toBeUndefined();
+    expect(comfort(s)).toBe(3);
+    expect(placeFurniture(s, 'plant_fern', 30, 10, 2)).toBe(false); // none left in storage
+    const poor = createInitialState(0);
+    expect(buyFurniture(poor, 'plant_fern')).toBe(false);
+  });
+
+  it('keeps the counter, the walkway, tables and other pieces clear', () => {
+    const s = rich();
+    buyFurniture(s, 'bench');
+    expect(canPlace(s, 'bench', 12, 2, 2)).toBe(false); // the counter
+    expect(canPlace(s, 'bench', 18, 8, 2)).toBe(false); // the walkway to the door
+    expect(canPlace(s, 'bench', 2, 1, 2)).toBe(false); // a built table
+    expect(canPlace(s, 'bench', 2, 5, 2)).toBe(false); // where the next table goes
+    expect(canPlace(s, 'plant_snake', 35, 0, 2)).toBe(false); // in front of the kitchen door
+    expect(canPlace(s, 'bench', -1, 10, 2)).toBe(false); // off the grid
+    expect(canPlace(s, 'bench', 33, 10, 2)).toBe(true);
+    placeFurniture(s, 'bench', 33, 10, 2);
+    buyFurniture(s, 'plant_fern');
+    expect(canPlace(s, 'plant_fern', 34, 10, 2)).toBe(false); // on the bench
+    // Wall pieces only go on the free wall either side of the menu board.
+    expect(canPlace(s, 'art_cat', 15, 0, 2)).toBe(false);
+    expect(canPlace(s, 'sconce', 9, 0, 2)).toBe(true);
+    expect(canPlace(s, 'sconce', 10, 0, 2)).toBe(false); // the clock
+  });
+
+  it('moves and stores placed pieces', () => {
+    const s = rich();
+    const clock = s.decor.placed.findIndex((p) => p.id === 'clock');
+    expect(moveFurniture(s, clock, 9, 2, 2)).toBe(true);
+    expect(moveFurniture(s, clock, 27, 3, 2)).toBe(false); // the mug rack is there
+    storeFurniture(s, clock);
+    expect(s.decor.placed.some((p) => p.id === 'clock')).toBe(false);
+    expect(s.decor.stored.clock).toBe(1);
+  });
+
+  it('sends pieces to storage when a new table needs their spot', () => {
+    const s = rich();
+    buyFurniture(s, 'plant_fern');
+    placeFurniture(s, 'plant_fern', 34, 10, 2);
+    expect(evictBlocked(s, 3)).toBe(0);
+    // With five tables built, the sixth spot (front of the right nook) is reserved.
+    expect(evictBlocked(s, 5)).toBe(1);
+    expect(s.decor.stored.plant_fern).toBe(1);
+  });
+
+  it('every piece has a spot it fits in a new café', () => {
+    const s = createInitialState(0);
+    s.decor.placed = [];
+    for (const f of FURNITURE) {
+      let fits = false;
+      for (let row = 0; row < 16 && !fits; row++) for (let col = 0; col < 40 && !fits; col++) fits = canPlace(s, f.id, col, row, 2);
+      expect(fits, f.id).toBe(true);
+    }
+  });
+
+  it('turns old wall art and plant slots into furniture', () => {
+    const v5 = JSON.stringify({
+      version: 5,
+      decor: {
+        owned: ['art_landscape', 'art_cat', 'plant_fern', 'rug_red'],
+        equipped: { art: 'art_cat', plant: 'plant_fern', rug: 'rug_red' },
+      },
+    });
+    const s = deserialize(v5, 0);
+    expect(s.decor.placed).toContainEqual({ id: 'art_cat', ...DEFAULT_ART_SPOT });
+    expect(s.decor.stored).toEqual({ art_landscape: 1, plant_fern: 1 });
+    expect(s.decor.equipped.rug).toBe('rug_red');
+    expect(comfort(s)).toBe(5 + 8);
+  });
+
+  it('drops placed pieces that are unknown, overlapping or off the grid', () => {
+    const s = deserialize(
+      JSON.stringify({
+        version: 6,
+        decor: {
+          placed: [
+            { id: 'clock', col: 10, row: 0 },
+            { id: 'sconce', col: 10, row: 0 },
+            { id: 'nope', col: 30, row: 10 },
+            { id: 'bench', col: 99, row: 0 },
+          ],
+          stored: { lamp: 2, nope: 3, bench: -4 },
+        },
+      }),
+      0,
+    );
+    expect(s.decor.placed).toEqual([{ id: 'clock', col: 10, row: 0 }]);
+    expect(s.decor.stored).toEqual({ lamp: 2, sconce: 1, bench: 1 });
   });
 });
