@@ -119,8 +119,8 @@ export function buyItem(state: GameState, id: ItemId, amount: BuyAmount): boolea
   const unlocking = state.items[id] === 0;
   state.coins -= q.cost;
   state.items[id] += q.count;
-  // A newly unlocked dish goes straight onto the menu.
-  if (unlocking) setOnMenu(state, id, true);
+  // Keep today's menu fixed while open; new dishes can be planned after closing.
+  if (unlocking && state.phase === 'prep') setOnMenu(state, id, true);
   return true;
 }
 
@@ -228,12 +228,13 @@ export function servingsLeft(state: GameState, id: ItemId): number {
 
 /**
  * Servings ready to sell today: for breads and pastries, what's on the shelf (or,
- * before opening, what the morning bake will make); for drinks, what the pantry allows.
+ * before opening, what the morning bake will make); for drinks, what the pantry allows
+ * after reserving that bake. Drink counts are individual capacities, not additive.
  */
 export function readyServings(state: GameState, id: ItemId): number {
-  if (!isBakery(id)) return servingsLeft(state, id);
-  if (state.phase === 'open') return state.shelf[id] ?? 0;
-  return Math.min(state.bakePlan[id] ?? 0, servingsLeft(state, id));
+  if (state.phase === 'open') return isBakery(id) ? state.shelf[id] ?? 0 : servingsLeft(state, id);
+  const projected = projectMorningBake(state);
+  return isBakery(id) ? projected.shelf[id] ?? 0 : servingsLeft({ ...state, pantry: projected.pantry }, id);
 }
 
 /**
@@ -276,20 +277,31 @@ export function bakeForForecast(state: GameState): void {
   for (const m of menuItems(state)) if (isBakery(m.id)) state.bakePlan[m.id] = suggestedBake(state, m.id);
 }
 
+/** Projects the real bake order against a shared pantry without changing the game. */
+export function projectMorningBake(state: GameState): Pick<GameState, 'pantry' | 'shelf'> {
+  const pantry = { ...state.pantry };
+  const shelf: GameState['shelf'] = {};
+  for (const m of menuItems(state)) {
+    if (!isBakery(m.id)) continue;
+    const n = Math.min(state.bakePlan[m.id] ?? 0, servingsLeft({ ...state, pantry }, m.id));
+    for (const [ing, k] of recipe(m.id)) pantry[ing] -= k * n;
+    shelf[m.id] = n;
+  }
+  return { pantry, shelf };
+}
+
 /**
  * Bakes the morning batch from the pantry onto the shelf, as much of each planned
  * amount as the ingredients allow. Returns how many items were baked in all.
  */
 export function bakeMorning(state: GameState): number {
-  state.shelf = {};
+  const projected = projectMorningBake(state);
+  Object.assign(state.pantry, projected.pantry);
+  state.shelf = projected.shelf;
   let total = 0;
-  for (const m of menuItems(state)) {
-    if (!isBakery(m.id)) continue;
-    const n = Math.min(state.bakePlan[m.id] ?? 0, servingsLeft(state, m.id));
-    for (const [ing, k] of recipe(m.id)) state.pantry[ing] -= k * n;
-    state.shelf[m.id] = n;
-    state.today.baked[m.id] = n;
-    state.today.ingredientCost += servingCost(m.id) * n;
+  for (const [id, n] of Object.entries(state.shelf) as [ItemId, number][]) {
+    state.today.baked[id] = n;
+    state.today.ingredientCost += servingCost(id) * n;
     total += n;
   }
   return total;

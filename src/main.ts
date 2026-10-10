@@ -10,9 +10,9 @@ import { formatMoney } from './game/format';
 import { MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
 import { adjacentArea, isAreaOpen, mainTableCount, regionOffset } from './game/regions';
 import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, furnitureDef } from './game/furniture';
-import { Sim } from './game/sim';
+import { acquireSaveSession, watchSavePage, type SaveSession } from './game/save-session';
 import { applyTheme, comfort } from './game/decor';
-import { SAVE_KEY, createInitialState, loadState, saveState, type GameState } from './game/state';
+import { createInitialState, type GameState } from './game/state';
 import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale, t, type Locale } from './i18n';
 import { CafeView } from './render/cafe-view';
 import { CafeGame } from './render/phaser/game';
@@ -30,17 +30,62 @@ const PANEL_COLLAPSED_KEY = 'tiny-bean-cafe/panel-collapsed';
 const AUTOSAVE_MS = 5000;
 const SIM_STEP = 0.05;
 
-setLocale(detectLocale(localStorage.getItem(LOCALE_KEY), navigator.languages ?? [navigator.language]));
+let storedLocale: string | null = null;
+try { storedLocale = localStorage.getItem(LOCALE_KEY); } catch { /* The startup notice handles unavailable storage. */ }
+setLocale(detectLocale(storedLocale, navigator.languages ?? [navigator.language]));
 
-let state: GameState = loadState(localStorage, Date.now());
-const sim = new Sim();
+// A waiting tab must not load or simulate a stale copy of the café.
+const savePage = watchSavePage(window, () => window.location.reload());
+
+function sessionNotice(message: string): void {
+  let notice = document.getElementById('save-session-notice');
+  if (!notice) {
+    notice = document.createElement('div');
+    notice.id = 'save-session-notice';
+    notice.setAttribute('role', 'status');
+    notice.style.cssText = 'position:fixed;inset:0;z-index:100000;display:grid;place-content:center;padding:32px;background:#fff7e8;color:#493728;text-align:center;white-space:pre-line;font:20px sans-serif';
+    document.body.append(notice);
+  }
+  notice.textContent = message;
+}
+const chinese = () => getLocale() === 'zh';
+sessionNotice(chinese()
+  ? '正在打开咖啡馆…\n如果另一个标签页已打开游戏，请先关闭它。本页会自动载入最新进度。'
+  : 'Opening your café…\nIf the game is open in another tab, close that tab. This page will then load your latest progress.');
+void Promise.resolve().then(() => acquireSaveSession(localStorage, navigator.locks, savePage.signal)).then((session) => {
+  if (savePage.signal.aborted) { session.close(); return; }
+  document.getElementById('save-session-notice')?.remove();
+  try { startGame(session); } catch (error) { session.close(); throw error; }
+}).catch(() => {
+  if (savePage.signal.aborted) return;
+  sessionNotice(chinese()
+    ? '无法安全打开存档。请使用支持 Web Locks 的浏览器，通过 HTTPS 或 localhost 打开游戏，并允许本地存储。存档未被修改。'
+    : 'Your save could not be opened safely. Use a browser with Web Locks over HTTPS or localhost, and allow local storage. Your save has not been changed.');
+});
+
+function startGame(session: SaveSession): void {
+let state: GameState = session.state;
+const sim = session.sim;
 const scene = new CafeView();
 
-// Resuming a day in progress: let the shop fill up a little before the first frame,
-// without paying for it.
-if (state.phase === 'open') {
-  const scratch = structuredClone(state);
-  for (let t = 0; t < 12; t += SIM_STEP) sim.update(scratch, SIM_STEP);
+function saveGame(): void {
+  const result = session.save(state);
+  if (result === 'conflict') sessionNotice(chinese()
+    ? '存档已在别处更改。为保护进度，此标签页已暂停。请刷新以载入最新存档。'
+    : 'Your save changed elsewhere. This tab is paused to protect your progress. Reload to load the latest save.');
+  if (result === 'unavailable') sessionNotice(chinese()
+    ? '无法保存进度。请检查浏览器的存储权限和可用空间；恢复后进度会自动保存。'
+    : 'Progress could not be saved. Check browser storage permissions and free space; saving will retry automatically.');
+  if (result === 'saved') document.getElementById('save-session-notice')?.remove();
+}
+// A released/stale session must not accept keyboard shortcuts or modal actions.
+for (const type of ['click', 'pointerdown', 'keydown']) {
+  window.addEventListener(type, (event) => {
+    if (!session.active || document.getElementById('save-session-notice')) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }, true);
 }
 
 // ------------------------------------------------------------ display
@@ -134,7 +179,7 @@ const panel = new Panel(
       const moved = evictBlocked(state, mainTableCount(state));
       if (moved > 0) toast(t('toast.evicted', { n: moved }));
     }
-    saveState(localStorage, state);
+    saveGame();
     const burst = kind === 'goal' ? 14 : 5;
     for (let i = 0; i < burst; i++) scene.sparkle(20 + Math.random() * 150, 30 + Math.random() * 40);
     if (kind === 'goal') toast(t('goal.claimed', { reward: formatMoney(Number(id)) }));
@@ -174,7 +219,7 @@ const regionsUI = new RegionsUI($('area-nav'), $('area-edges'), $('region-card')
   } else if (arrange?.mode === 'place') holdPiece(arrange.id, arrange.moving, arrange.fromBrowse);
   updateDayHud();
 }, () => {
-  saveState(localStorage, state);
+  saveGame();
   panel.refresh();
   toast(t('area.opened', { name: areaName(scene.area) }));
   const origin = areaOrigin(scene.area);
@@ -235,7 +280,7 @@ function releasePiece(): void {
   const back = arrange?.mode === 'place' && arrange.fromBrowse;
   arrange = back ? { mode: 'browse' } : null;
   scene.ghost = null;
-  saveState(localStorage, state);
+  saveGame();
   showArrange();
   panel.update();
 }
@@ -336,7 +381,7 @@ for (const b of speedBtns) {
 function startDay(): void {
   if (state.phase !== 'prep' || menuEmpty()) return;
   const baked = openShop(state);
-  saveState(localStorage, state);
+  saveGame();
   toast(baked > 0 ? t('toast.openedBaked', { n: state.day, baked }) : t('toast.opened', { n: state.day }));
   for (let i = 0; i < 16; i++) scene.sparkle(280 + Math.random() * 30, 30 + Math.random() * 50);
   panel.refresh();
@@ -349,7 +394,7 @@ const menuEmpty = () => !state.onMenu.some((id) => state.items[id] > 0);
 function prepareDay(): void {
   if (state.phase !== 'prep') return;
   showPrepare(state, startDay, () => {
-    saveState(localStorage, state);
+    saveGame();
     panel.refresh();
   });
 }
@@ -363,7 +408,7 @@ function closeDay(): void {
 closeBtn.addEventListener('click', closeDay);
 
 function showReport(report: DayReport): void {
-  saveState(localStorage, state);
+  saveGame();
   panel.refresh();
   updateDayHud();
   const row = (label: string, value: string) => `<dt>${label}</dt><dd>${value}</dd>`;
@@ -454,7 +499,7 @@ function rememberLocale(locale: Locale): void {
 function applyProfile(result: OnboardingResult): void {
   state.profile = result.profile;
   if (result.theme) applyTheme(state, result.theme);
-  saveState(localStorage, state);
+  saveGame();
   updateBrand();
   panel.refresh();
 }
@@ -550,7 +595,6 @@ function openSettings(): void {
 $('settings-btn').addEventListener('click', openSettings);
 
 function resetGame(): void {
-  localStorage.removeItem(SAVE_KEY);
   state = createInitialState(Date.now());
   sim.customers = [];
   sim.baristas = [];
@@ -561,7 +605,7 @@ function resetGame(): void {
   panel.setState(state);
   regionsUI.select('main');
   updateBrand();
-  saveState(localStorage, state);
+  saveGame();
   startOnboarding();
 }
 
@@ -623,10 +667,12 @@ window.addEventListener('keydown', (e) => {
 // Nothing runs while you're away: the shop pauses with the game and picks up where it
 // left off. Save on the way out so nothing is lost.
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) saveState(localStorage, state);
+  if (document.hidden) saveGame();
 });
-window.addEventListener('pagehide', () => saveState(localStorage, state));
-setInterval(() => saveState(localStorage, state), AUTOSAVE_MS);
+savePage.onClose(() => {
+  try { saveGame(); } finally { session.close(); }
+});
+setInterval(() => saveGame(), AUTOSAVE_MS);
 
 // ------------------------------------------------------------ loop
 
@@ -638,7 +684,7 @@ let shownRate = '';
 function frame(dt: number): void {
   // Paused while a dialog (like the day report) is up or the tab is hidden; sped up
   // when the player asks.
-  const paused = isModalOpen() || document.hidden || !!document.querySelector('.onboard-overlay');
+  const paused = !session.active || !!document.getElementById('save-session-notice') || isModalOpen() || document.hidden || !!document.querySelector('.onboard-overlay');
   const simDt = paused ? 0 : state.phase === 'open' ? dt * state.speed : dt;
   for (let remaining = simDt; remaining > 1e-6; remaining -= SIM_STEP) {
     scene.addEvents(sim.update(state, Math.min(SIM_STEP, remaining)));
@@ -685,4 +731,6 @@ Promise.all([atMost(4000, cafe.ready), atMost(2000, document.fonts.ready)]).then
 
 if (import.meta.env.PROD && 'serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
+
 }

@@ -1,5 +1,5 @@
 import type { ItemId } from './data';
-import { bakeMorning, dayDemand, menuItems, readyServings, servingCost, soldOutItems } from './economy';
+import { bakeMorning, dayDemand, isBakery, menuItems, projectMorningBake, recipe, servingsLeft, servingCost, soldOutItems } from './economy';
 import { emptyDay, type DayStats, type GameState } from './state';
 
 export interface DayReport extends DayStats {
@@ -20,14 +20,24 @@ export type OpenCheck = { ok: true } | { ok: false; reason: 'emptyMenu' } | { ok
 
 /**
  * Whether the shop can open: something must be on the menu. Also warns about dishes
- * whose ingredients won't last half a day.
+ * whose stock won't last half a day, accounting for shared ingredients after baking.
  */
 export function checkOpen(state: GameState): OpenCheck {
   if (state.phase !== 'prep') return { ok: true };
   const items = menuItems(state);
   if (items.length === 0) return { ok: false, reason: 'emptyMenu' };
   const demand = dayDemand(state);
-  const low = items.filter((m) => readyServings(state, m.id) < Math.max(1, (demand.get(m.id) ?? 0) * 0.5)).map((m) => m.id);
+  const projected = { ...state, ...projectMorningBake(state) };
+  const low: ItemId[] = [];
+  for (const m of items) {
+    const needed = Math.max(1, Math.ceil((demand.get(m.id) ?? 0) * 0.5));
+    const ready = isBakery(m.id) ? projected.shelf[m.id] ?? 0 : servingsLeft(projected, m.id);
+    if (ready < needed) low.push(m.id);
+    // Reserve the warning's half-day target, so drinks don't reuse each other's stock.
+    if (!isBakery(m.id)) {
+      for (const [ing, n] of recipe(m.id)) projected.pantry[ing] -= n * Math.min(ready, needed);
+    }
+  }
   return low.length > 0 ? { ok: false, reason: 'lowStock', items: low } : { ok: true };
 }
 

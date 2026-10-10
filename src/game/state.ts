@@ -316,15 +316,3 @@ function parseDay(value: unknown): DayStats {
   day.baked = parseCounts(d.baked);
   return day;
 }
-
-export function loadState(storage: Storage, now: number): GameState {
-  return deserialize(storage.getItem(SAVE_KEY), now);
-}
-
-export function saveState(storage: Storage, state: GameState): void {
-  try {
-    storage.setItem(SAVE_KEY, serialize(state));
-  } catch {
-    // Storage full or disabled (private mode); the game keeps running.
-  }
-}
