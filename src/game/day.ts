@@ -9,7 +9,7 @@ export interface DayReport extends DayStats {
   ratingTraffic: number;
   day: number;
   duration: number;
-  /** Revenue minus what the ingredients used cost. */
+  /** Revenue minus consumed ingredients and cat-care supplies. */
   profit: number;
   bestSeller: ItemId | null;
   /** Menu dishes the pantry can't make anymore, for tomorrow's shopping list. */
@@ -85,7 +85,7 @@ export function finishDay(state: GameState): DayReport {
     baked: { ...today.baked },
     day: state.day,
     duration: state.dayTime,
-    profit: today.revenue - today.ingredientCost,
+    profit: today.revenue - today.ingredientCost - today.petCost,
     bestSeller,
     outOfStock: soldOutItems(state).map((m) => m.id),
     shelfSoldOut,

@@ -4,7 +4,7 @@
 import { isBakery } from '../game/economy';
 import { stationSpot } from '../game/kitchen';
 import { CELL, WALL_TOP, furnitureDef, type FurnitureDef } from '../game/furniture';
-import { CAT_SPOT, COUNTER, FLOOR_Y, PASTRY_CASE, SCENE_W, areaOrigin, floorY, floorYMin, sceneHeight, tablePos } from '../game/layout';
+import { CAT_SPOT, CAT_SPOTS, COUNTER, FLOOR_Y, PASTRY_CASE, SCENE_W, areaOrigin, floorY, floorYMin, sceneHeight, tablePos } from '../game/layout';
 import { areaAtX, regionOffset, type AreaId } from '../game/regions';
 import type { Sim, SimEvent } from '../game/sim';
 import type { GameState } from '../game/state';
@@ -53,6 +53,7 @@ export class CafeView {
   ghost: Ghost | null = null;
   /** Seconds the cat stays happy after being petted. */
   catHappy = 0;
+  catSpot: { x: number; y: number } = CAT_SPOT;
   /** How far the kitchen door has swung open, 0 to 1: it opens as a cook brings a batch through. */
   kitchenDoor = 0;
   /** Particles and sales waiting for the renderer to show them. */
@@ -97,13 +98,17 @@ export class CafeView {
   }
 
   /** Returns true if the tap landed on the cat. */
-  hitCat(x: number, y: number): boolean {
-    return this.area === 'main' && x >= CAT_SPOT.x - 10 && x <= CAT_SPOT.x + 10 && y >= CAT_SPOT.y - 16 && y <= CAT_SPOT.y + 2;
+  hitCat(x: number, y: number, count = 1): boolean {
+    if (this.area !== 'main') return false;
+    const spot = CAT_SPOTS.slice(0, count).find((p) => x >= p.x - 10 && x <= p.x + 10 && y >= p.y - 16 && y <= p.y + 2);
+    if (!spot) return false;
+    this.catSpot = spot;
+    return true;
   }
 
   petCat(): void {
     this.catHappy = 2;
-    for (let i = 0; i < 3; i++) this.effects.push({ kind: 'heart', x: CAT_SPOT.x - 4 + i * 4, y: CAT_SPOT.y - 16 - i * 4 });
+    for (let i = 0; i < 3; i++) this.effects.push({ kind: 'heart', x: this.catSpot.x - 4 + i * 4, y: this.catSpot.y - 16 - i * 4 });
   }
 
   update(dt: number, sim: Sim): void {

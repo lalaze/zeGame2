@@ -240,6 +240,7 @@ export const seatApproach = (table: number, side: 0 | 1) => {
 /** The first window has the cat, the neon sign and the OPEN sign. */
 export const WINDOWS = [{ x: 12, y: 12, w: 46, h: 38 }, { x: 262, y: 12, w: 46, h: 38 }] as const;
 export const CAT_SPOT = { x: 26, y: 53 };
+export const CAT_SPOTS = [CAT_SPOT, { x: 48, y: 53 }, { x: 284, y: 53 }] as const;
 /** Potted figs flank the front door. */
 export const doorPlantSpots = () => [
   { x: DOOR_X - 16, y: sceneH - 9 },

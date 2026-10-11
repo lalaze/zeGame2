@@ -33,6 +33,33 @@
   color-scheme: light;
 }
 
+.pet-intro { padding: 4px 6px 12px; }
+.pet-intro h3, .pet-card h3 { margin: 4px 0; font-size: 17px; }
+.pet-intro p, .pet-card p { margin: 8px 0; line-height: 1.6; }
+.pet-summary { color: var(--green-dark); }
+.pet-card { margin: 4px 3px 14px; padding: 12px; border: 2px solid var(--wood-light); background: var(--cream); }
+.pet-card.adopted { border-color: var(--green); }
+.pet-heading { display: flex; align-items: center; gap: 10px; }
+.pet-heading img { width: 64px; height: 48px; image-rendering: pixelated; flex-shrink: 0; }
+.pet-heading > div { flex: 1; min-width: 0; }
+.pet-bonus { color: var(--green-dark); white-space: nowrap; }
+.pet-card progress { width: 100%; height: 8px; accent-color: var(--green); margin-bottom: 12px; }
+.pet-status { font-size: 13px; }
+.pet-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.pet-auto { display: flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 13px; line-height: 1.5; }
+.pet-auto input { accent-color: var(--green); width: 18px; height: 18px; }
+.pet-tabs, .pet-filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 4px 4px 12px; }
+.pet-tabs .chip { flex: 1; }
+.pet-tabs [aria-pressed="true"], .pet-filters [aria-pressed="true"] { background: var(--green-dark); color: var(--cream); }
+.pet-catalog { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 4px 4px 16px; }
+.pet-choice { min-width: 0; padding: 8px 3px; border: 2px solid var(--wood-light); color: var(--ink); background: var(--cream); display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.pet-choice[aria-pressed="true"] { border-color: var(--green-dark); box-shadow: inset 0 0 0 2px var(--green); background: #e3e8cb; }
+.pet-choice img { width: 64px; height: 48px; image-rendering: pixelated; }
+.pet-choice b { font-size: 12px; line-height: 1.5; }
+.pet-choice span, .pet-choice small { font-size: 11px; line-height: 1.4; }
+.pet-choice small { color: var(--green-dark); }
+.pet-intro details summary { cursor: pointer; }
+
 * {
   box-sizing: border-box;
 }

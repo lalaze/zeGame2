@@ -1,11 +1,219 @@
 {
   "frames": {
+    "cat/american/blink": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 933,
+        "y": 3115
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/american/happy": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 1061,
+        "y": 3115
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/american/idle": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 677,
+        "y": 3115
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/american/swish": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 805,
+        "y": 3115
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/black/blink": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 677,
+        "y": 2987
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/black/happy": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 805,
+        "y": 2987
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/black/idle": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 421,
+        "y": 2987
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/black/swish": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 549,
+        "y": 2987
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
     "cat/blink": {
       "frame": {
         "h": 42,
         "w": 54,
         "x": 1189,
         "y": 2731
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/british/blink": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 421,
+        "y": 3115
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/british/happy": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 549,
+        "y": 3115
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/british/idle": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 165,
+        "y": 3115
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/british/swish": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 293,
+        "y": 3115
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/calico/blink": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 933,
+        "y": 2859
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/calico/happy": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 1061,
+        "y": 2859
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/calico/idle": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 677,
+        "y": 2859
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/calico/swish": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 805,
+        "y": 2859
       },
       "scale": 3,
       "sourceSize": {
@@ -39,12 +247,376 @@
         "w": 18
       }
     },
+    "cat/mainecoon/blink": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 421,
+        "y": 3371
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/mainecoon/happy": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 549,
+        "y": 3371
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/mainecoon/idle": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 165,
+        "y": 3371
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/mainecoon/swish": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 293,
+        "y": 3371
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/persian/blink": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 1189,
+        "y": 3243
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/persian/happy": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 37,
+        "y": 3371
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/persian/idle": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 933,
+        "y": 3243
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/persian/swish": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 1061,
+        "y": 3243
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/ragdoll/blink": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 677,
+        "y": 3243
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/ragdoll/happy": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 805,
+        "y": 3243
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/ragdoll/idle": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 421,
+        "y": 3243
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/ragdoll/swish": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 549,
+        "y": 3243
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/siamese/blink": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 165,
+        "y": 3243
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/siamese/happy": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 293,
+        "y": 3243
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/siamese/idle": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 1189,
+        "y": 3115
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/siamese/swish": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 37,
+        "y": 3243
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
     "cat/swish": {
       "frame": {
         "h": 42,
         "w": 54,
         "x": 1061,
         "y": 2731
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/tabby/blink": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 165,
+        "y": 2987
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/tabby/happy": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 293,
+        "y": 2987
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/tabby/idle": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 1189,
+        "y": 2859
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/tabby/swish": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 37,
+        "y": 2987
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/tuxedo/blink": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 421,
+        "y": 2859
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/tuxedo/happy": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 549,
+        "y": 2859
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/tuxedo/idle": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 165,
+        "y": 2859
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/tuxedo/swish": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 293,
+        "y": 2859
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/white/blink": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 1189,
+        "y": 2987
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/white/happy": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 37,
+        "y": 3115
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/white/idle": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 933,
+        "y": 2987
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/white/swish": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 1061,
+        "y": 2987
       },
       "scale": 3,
       "sourceSize": {
@@ -2876,7 +3448,7 @@
   },
   "image": "tiny-bean-art.png",
   "size": {
-    "h": 2944,
+    "h": 3456,
     "w": 1280
   }
 }

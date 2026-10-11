@@ -1,3 +1,4 @@
+import { PetPanel } from './pets';
 import {
   BAKE_STEP,
   CATEGORIES,
@@ -59,8 +60,8 @@ import { decorIcon } from '../render/decor-art';
 import { furnitureIcon } from '../render/furniture-art';
 import { ingredientIcon, itemArtwork, toDataURL, upgradeIcon } from '../render/sprites';
 
-type Tab = 'menu' | 'pantry' | 'upgrades' | 'decor';
-export type PurchaseKind = 'item' | 'upgrade' | 'decor' | 'goal' | 'ingredient' | 'menu' | 'recipe';
+type Tab = 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets';
+export type PurchaseKind = 'item' | 'upgrade' | 'decor' | 'goal' | 'ingredient' | 'menu' | 'recipe' | 'pet';
 
 /** How many units one tap buys in the pantry. */
 const PANTRY_AMOUNTS = [10, 50, 200] as const;
@@ -129,6 +130,7 @@ export const decorName = (id: string) => t(`decor.${id}` as MessageKey);
 
 export class Panel {
   private tab: Tab = 'menu';
+  private petPanel: PetPanel | null = null;
   private amount: BuyAmount = 1;
   private pantryAmount: number = PANTRY_AMOUNTS[0];
   private category: Category | 'all' = 'all';
@@ -193,7 +195,7 @@ export class Panel {
   showTab(tab: Tab): void {
     this.tab = tab;
     this.root.querySelectorAll<HTMLElement>('[data-tab]').forEach((o) => o.classList.toggle('active', o.dataset.tab === tab));
-    this.root.querySelector<HTMLElement>('.buy-amount')!.hidden = tab === 'decor' || tab === 'pantry';
+    this.root.querySelector<HTMLElement>('.buy-amount')!.hidden = tab === 'decor' || tab === 'pantry' || tab === 'pets';
     this.root.querySelector<HTMLElement>('.pantry-amount')!.hidden = tab !== 'pantry';
     this.root.querySelector<HTMLElement>('.menu-filter')!.hidden = tab !== 'menu';
     this.list.scrollTop = 0;
@@ -312,6 +314,7 @@ export class Panel {
 
   /** Which rows are visible; the DOM is rebuilt only when this changes. */
   private visibleKeys(): string[] {
+    if (this.tab === 'pets') return ['pets'];
     if (this.tab === 'upgrades') return UPGRADES.map((u) => `upgrade:${u.id}`);
     if (this.tab === 'decor') return ['decor', this.decorCategory];
     if (this.tab === 'pantry') return ['pantry', ...neededIngredients(this.state).map((i) => `ing:${i.id}`)];
@@ -333,6 +336,7 @@ export class Panel {
 
   private build(keys: string[]): void {
     this.list.replaceChildren();
+    this.petPanel = null;
     this.rows.clear();
     this.tiles.clear();
     this.furnitureTiles.clear();
@@ -342,6 +346,10 @@ export class Panel {
     this.restockBtn = null;
     this.varietyNote = null;
     this.bakeAllBtn = null;
+    if (this.tab === 'pets') {
+      this.petPanel = new PetPanel(this.list, this.state, (id) => { this.onPurchase('pet', id); this.update(); });
+      return;
+    }
     if (this.tab === 'decor') {
       this.buildDecor();
       return;
@@ -561,6 +569,7 @@ export class Panel {
       this.build(keys);
     }
     const s = this.state;
+    if (this.tab === 'pets') { this.petPanel?.update(); return; }
 
     if (this.tab === 'decor') {
       const c = comfort(s);

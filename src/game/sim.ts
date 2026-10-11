@@ -1,3 +1,4 @@
+import { updatePetCare } from './pets';
 import { COMBO_CHANCE, MAX_QUEUE, PASS_SLOTS, RING_AGAIN, VIP_CHANCE, isDrink, type ItemId } from './data';
 import { finishDay, type DayReport } from './day';
 import {
@@ -620,6 +621,7 @@ export class Sim {
     const open = state.phase === 'open';
     const running = state.phase !== 'prep';
     if (running) state.dayTime += dt;
+    updatePetCare(state, dt);
     this.spawnTimer -= dt;
     if (this.spawnTimer <= 0) {
       // Jittered so customers don't march in like clockwork.

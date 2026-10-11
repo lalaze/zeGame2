@@ -1,9 +1,10 @@
+import { petActive } from '../../game/pets';
 import Phaser from 'phaser';
 import { menuItems } from '../../game/economy';
 import { formatMoney } from '../../game/format';
 import { COLS, FLOOR_ROWS, WALL_ROWS, WALL_TOP, CELL, canPlace, cellFree, furnitureDef } from '../../game/furniture';
 import { BENCH, BINS, DISH_PIT, PASTRY_FRIDGE, RACK, cookHome, installedEquipment, stationSpot, STATION_SECONDS, type Station } from '../../game/kitchen';
-import { CAT_SPOT, MAX_TABLES, PASS, PASS_BELL, PASS_SLOT_W, passSlot, SCENE_W, WINDOWS, areaOrigin, baristaSpot, doorPlantSpots, floorY, passageY, sceneHeight, seatSpot, tablePos } from '../../game/layout';
+import { CAT_SPOTS, MAX_TABLES, PASS, PASS_BELL, PASS_SLOT_W, passSlot, SCENE_W, WINDOWS, areaOrigin, baristaSpot, doorPlantSpots, floorY, passageY, sceneHeight, seatSpot, tablePos } from '../../game/layout';
 import { AREA_IDS, activeTableIndices, areaAtX, isAreaOpen, mainTableCount, regionOffset, type AreaId } from '../../game/regions';
 import { seated, type Cook, type Customer, type Server, type Sim, type SimEvent, type Walker } from '../../game/sim';
 import type { GameState } from '../../game/state';
@@ -395,7 +396,7 @@ export class CafeScene extends Phaser.Scene {
         roomDepth(ctx, SCENE_W, H, 80);
         for (const win of WINDOWS) dustMotes(ctx, win.x, win.y + win.h, win.w, 44, this.motionPreference.matches ? 0 : t, light.sun.strength);
       });
-      this.drawCat(t, o);
+      this.drawCat(state, t, o);
       this.drawBaristas(state, t, o);
       this.drawPass(t, o);
       const cups: CounterCup[] = [];
@@ -462,12 +463,18 @@ export class CafeScene extends Phaser.Scene {
     }
   }
 
-  private drawCat(t: number, o: { x: number; y: number }): void {
-    const frames = catFrames();
-    let sprite = Math.floor(t / 0.7) % 2 ? frames.swish : frames.idle;
-    if (t % 4 < 0.15) sprite = frames.blink;
-    if (this.view.catHappy > 0) sprite = frames.happy;
-    this.image(sprite, o.x + CAT_SPOT.x - 8, o.y + CAT_SPOT.y - sprite.height + 2, DEPTH.cat);
+  private drawCat(state: GameState, t: number, o: { x: number; y: number }): void {
+    // Keep the original visiting cat until a resident is adopted.
+    const cats = state.pets.length ? state.pets : [{ id: 'ginger' as const, careSeconds: 1, autoRefill: false }];
+    cats.forEach((cat, i) => {
+      const spot = CAT_SPOTS[i];
+      const frames = catFrames(cat.id);
+      const time = t + i * 0.8;
+      let sprite = Math.floor(time / 0.7) % 2 ? frames.swish : frames.idle;
+      if (!petActive(cat) || time % 4 < 0.15) sprite = frames.blink;
+      if (this.view.catHappy > 0 && this.view.catSpot.x === spot.x) sprite = frames.happy;
+      this.image(sprite, o.x + spot.x - 8, o.y + spot.y - sprite.height + 2, DEPTH.cat);
+    });
   }
 
   private drawBaristas(state: GameState, t: number, o: { x: number; y: number }): void {

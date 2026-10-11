@@ -6,7 +6,7 @@ import { SPEEDS, type ItemId } from './game/data';
 import { formatOpenTime, openShop, type DayReport } from './game/day';
 import { expectedCustomers, tipMultiplier } from './game/economy';
 import { canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
-import { formatMoney } from './game/format';
+import { formatAccountMoney, formatMoney } from './game/format';
 import { MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
 import { adjacentArea, isAreaOpen, mainTableCount, regionOffset } from './game/regions';
 import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, furnitureDef } from './game/furniture';
@@ -481,11 +481,12 @@ function showReport(report: DayReport): void {
         ${row(t('report.extraLost'), report.extraLost.toLocaleString())}
         ${row(t('report.doorLost'), report.doorLost.toLocaleString())}
         ${row(t('report.duration'), formatOpenTime(report.duration))}
-        ${row(t('report.revenue'), formatMoney(report.revenue))}
-        ${row(t('report.ingredients'), '−' + formatMoney(report.ingredientCost))}
+        ${row(t('report.revenue'), formatAccountMoney(report.revenue))}
+        ${row(t('report.ingredients'), '−' + formatAccountMoney(report.ingredientCost))}
+        ${report.petCost > 0 ? row(t('pet.expense'), '−' + formatAccountMoney(report.petCost)) : ''}
         ${bakeRows}
       </dl>
-      <div class="report-profit"><span>${t('report.profit')}</span><b class="big-money">${report.profit < 0 ? '−' : '+'}${formatMoney(Math.abs(report.profit))}</b></div>
+      <div class="report-profit"><span>${t('report.profit')}</span><b class="big-money">${report.profit < 0 ? '−' : '+'}${formatAccountMoney(Math.abs(report.profit))}</b></div>
       <p class="note">${report.duration >= 60 ? t('report.perMinute', { money: formatMoney(report.profit * 60 / report.duration) }) : t('report.shortSample')}</p>
       <p class="note">${t(report.soldOut || report.extraLost ? 'report.adviceStock' : report.tableLost ? 'report.adviceDelivery' : report.queueLost || report.doorLost ? 'report.adviceCounter' : staleCount ? 'report.adviceBake' : 'report.adviceGood')}</p>
       ${ratingReportHtml(report)}
@@ -654,7 +655,7 @@ function resetGame(): void {
 // ------------------------------------------------------------ input
 
 function tapAt(x: number, y: number): void {
-  if (scene.hitCat(x, y)) {
+  if (scene.hitCat(x, y, Math.max(1, state.pets.length))) {
     scene.petCat();
     return;
   }

@@ -1,3 +1,4 @@
+import type { CatId } from '../game/pets';
 import type { IngredientId, ItemId, UpgradeId } from '../game/data';
 import type { Look } from '../game/state';
 import { edge, mix, ramp } from './color';
@@ -1529,6 +1530,20 @@ export function upgradeIcon(id: UpgradeId): HTMLCanvasElement {
 // ---------------------------------------------------------------- the café cat
 
 const CAT_PALETTE: Palette = { o: '#ef9f4c', O: '#f8c27e', d: '#c06a2c', e: '#2a1a1f', n: '#f08f8f', W: '#fdf1e0', w: '#e9d6bd' };
+const CAT_COATS: Record<CatId, Palette> = {
+  ginger: CAT_PALETTE,
+  tuxedo: { ...CAT_PALETTE, o: '#41434b', O: '#686977', d: '#252831', e: '#a9c982' },
+  calico: { ...CAT_PALETTE, o: '#f5e9d5', O: '#efac66', d: '#554039' },
+  tabby: { ...CAT_PALETTE, o: '#9e8870', O: '#c4ad8c', d: '#584635', W: '#d8c7a8', w: '#b7a081', e: '#2b492a' },
+  black: { ...CAT_PALETTE, o: '#343641', O: '#585d6c', d: '#22232d', W: '#3f4350', w: '#292d38', e: '#c4d879' },
+  white: { ...CAT_PALETTE, o: '#f5f2e7', O: '#ffffff', d: '#c4c8cb', W: '#ffffff', w: '#dbe0e2', e: '#477fa5' },
+  british: { ...CAT_PALETTE, o: '#8595aa', O: '#aebaca', d: '#55647a', W: '#a0aec0', w: '#6b7d94', e: '#ecb866' },
+  american: { ...CAT_PALETTE, o: '#b8bec4', O: '#e3e5e4', d: '#5c6671', W: '#f2eee6', w: '#b4b6b9', e: '#42634c' },
+  siamese: { ...CAT_PALETTE, o: '#e4cfaa', O: '#f9e4bf', d: '#675047', W: '#f5e4ca', w: '#9e8470', e: '#68bde7' },
+  ragdoll: { ...CAT_PALETTE, o: '#e6ded2', O: '#ffffff', d: '#918075', W: '#ffffff', w: '#c4b9ac', e: '#4a9acb' },
+  persian: { ...CAT_PALETTE, o: '#efc9a1', O: '#ffe8c8', d: '#c59174', W: '#fff0d8', w: '#dfb58f', e: '#967237' },
+  mainecoon: { ...CAT_PALETTE, o: '#867060', O: '#ac9279', d: '#493e39', W: '#ccb89b', w: '#aa927b', e: '#d6bc63' },
+};
 const CAT_BASE = [
   '.d......d.......',
   '.dd....dd.......',
@@ -1547,19 +1562,32 @@ const withTail = (rows: string[], tail: [number, number][]) =>
   rows.map((r, y) => [...r].map((ch, x) => (tail.some(([tx, ty]) => tx === x && ty === y) ? 'd' : ch)).join(''));
 
 export const catFrames = (() => {
-  let frames: Record<'idle' | 'swish' | 'blink' | 'happy', HTMLCanvasElement> | null = null;
-  return () => {
-    if (frames) return frames;
-    const idle = withTail(CAT_BASE, [[12, 10], [13, 9], [13, 8], [14, 7]]);
-    const swish = withTail(CAT_BASE, [[12, 10], [13, 10], [14, 10], [15, 9]]);
+  const cache = new Map<CatId, Record<'idle' | 'swish' | 'blink' | 'happy', HTMLCanvasElement>>();
+  return (coat: CatId = 'ginger') => {
+    const cached = cache.get(coat);
+    if (cached) return cached;
+    const palette = CAT_COATS[coat];
+    const body = CAT_BASE.map((row, y) => [...row].map((ch, x) => {
+      if (coat === 'calico' && ch === 'o' && ((x < 4 && y < 6) || (x > 5 && y > 7))) return 'O';
+      if (['tabby', 'american', 'mainecoon'].includes(coat) && ch === 'o' && ((y === 3 && x % 2 === 0) || (y >= 7 && x % 3 === 0))) return 'd';
+      if (['siamese', 'ragdoll'].includes(coat) && ch === 'o' && y < 6) return 'd';
+      return ch;
+    }).join(''));
+    if (['ragdoll', 'persian', 'mainecoon'].includes(coat)) {
+      body[6] = '.ooWWWWoo.......';
+      body[7] = 'oOoWWWWoOo......';
+      body[8] = 'ooWWWWWWoo......';
+      body[9] = 'oOWWWWWWOoo.....';
+    }
+    if (coat === 'british' || coat === 'persian') body[3] = 'ooOooooooo......';
+    if (coat === 'mainecoon') { body[0] = 'dd......dd......'; body[1] = '.dd....dd.......'; }
+    const idle = withTail(body, [[12, 10], [13, 9], [13, 8], [14, 7]]);
+    const swish = withTail(body, [[12, 10], [13, 10], [14, 10], [15, 9]]);
     const blink = idle.map((r, y) => (y === 4 ? '.oodoooddo......' : r));
     const happy = idle.map((r, y) => (y === 5 ? '.oooenWeo.......' : r));
-    frames = {
-      idle: pixelSprite(idle, CAT_PALETTE),
-      swish: pixelSprite(swish, CAT_PALETTE),
-      blink: pixelSprite(blink, CAT_PALETTE),
-      happy: pixelSprite(happy, CAT_PALETTE),
-    };
+    const paint = (rows: string[]) => pixelSprite(rows, palette);
+    const frames = { idle: paint(idle), swish: paint(swish), blink: paint(blink), happy: paint(happy) };
+    cache.set(coat, frames);
     return frames;
   };
 })();

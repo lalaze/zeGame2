@@ -1,3 +1,4 @@
+import { CATS } from './game/pets';
 import { INGREDIENTS, MENU, UPGRADES } from './game/data';
 import { DECOR } from './game/decor';
 import { FURNITURE } from './game/furniture';
@@ -30,7 +31,7 @@ roles.forEach(([role, name], i) => {
   add(`character/${role}/sit-left`, '人物', `${name} · 坐姿左`, frames.sitLeft);
   add(`character/${role}/sit-right`, '人物', `${name} · 坐姿右`, frames.sitRight);
 });
-Object.entries(catFrames()).forEach(([frame, canvas]) => add(`cat/${frame}`, '人物', `猫咪 · ${frame}`, canvas));
+for (const cat of CATS) Object.entries(catFrames(cat.id)).forEach(([frame, canvas]) => add(cat.id === 'ginger' ? `cat/${frame}` : `cat/${cat.id}/${frame}`, '人物', `${t(`pet.${cat.id}.name`)} · ${frame}`, canvas));
 
 const sheet = document.createElement('canvas');
 const cell = 128, columns = 10;

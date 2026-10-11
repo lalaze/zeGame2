@@ -13,11 +13,12 @@ import { bakeMorning, bulkCost, dayNeeds, fillBakePlan } from './economy';
 import { DEFAULT_ART_SPOT, STARTER_FURNITURE, evictBlocked, furnitureDef, type Placed } from './furniture';
 import { REGIONS, mainTableCount, type RegionId } from './regions';
 
+import { parsePets, type Pet } from './pets';
 import { parseTaste, type TasteState } from './taste';
 import { emptyReviews, parseReputation, parseReviews, type Reputation, type ReviewSummary } from './reputation';
 
 export const SAVE_KEY = 'tiny-bean-cafe/save';
-export const SAVE_VERSION = 10;
+export const SAVE_VERSION = 11;
 
 export interface Look {
   skin: number;
@@ -60,6 +61,8 @@ export interface DayStats {
   revenue: number;
   /** What the ingredients used today cost when they were bought. */
   ingredientCost: number;
+  /** Value of cat-care supplies consumed while open. */
+  petCost: number;
   sales: Partial<Record<ItemId, number>>;
   /** Breads and pastries baked this morning. */
   baked: Partial<Record<ItemId, number>>;
@@ -73,6 +76,7 @@ export const emptyDay = (): DayStats => ({
   queueLost: 0, tableLost: 0, extraLost: 0, doorLost: 0, shortages: {},
   revenue: 0,
   ingredientCost: 0,
+  petCost: 0,
   sales: {},
   baked: {},
 });
@@ -81,6 +85,7 @@ export const emptyDay = (): DayStats => ({
 export type Phase = 'prep' | 'open' | 'closing';
 
 export interface GameState {
+  pets: Pet[];
   reputation: Reputation;
   taste: TasteState;
   version: number;
@@ -133,6 +138,7 @@ export function createInitialState(now: number): GameState {
   pantry.beans = STARTER_BEANS;
   return {
     version: SAVE_VERSION,
+    pets: [],
     reputation: { recent: [] },
     taste: { served: {}, signature: [] },
     coins: 0,
@@ -278,6 +284,7 @@ export function deserialize(raw: string | null, now: number): GameState {
     ? unlocked.filter((id) => (data.onMenu as unknown[]).includes(id))
     : unlocked;
   base.today = parseDay(data.today);
+  base.pets = parsePets(data.pets);
   // Older saves only retain per-dish sales for the current day; carry that
   // evidence forward without inventing a split of the lifetime customer total.
   base.taste = parseTaste(data.taste, num(data.version, 1) < 10 ? base.today.sales : {});
@@ -334,6 +341,7 @@ function parseDay(value: unknown): DayStats {
   day.shortages = parseCounts(d.shortages);
   day.revenue = num(d.revenue, 0);
   day.ingredientCost = num(d.ingredientCost, 0);
+  day.petCost = num(d.petCost, 0);
   const sales = (d.sales ?? {}) as Record<string, unknown>;
   for (const m of MENU) {
     const n = Math.floor(num(sales[m.id], 0));

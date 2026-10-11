@@ -100,10 +100,40 @@ Open `sprite-preview.html` on the development or built site for the asset galler
 It uses the same painters as the game, with category filters, light/dark preview,
 individual PNG downloads, a transparent atlas and its frame manifest. It does not
 read or write game saves. Exported copies live in `public/art/`; `tiny-bean-assets.zip` includes individual
-PNGs, the atlas, coordinates and backgrounds: 221 sprite frames
+PNGs, the atlas, coordinates and backgrounds: 265 sprite frames
 (including all 55 dishes) and five room backgrounds. Character exports show one
 sample appearance per role; the game still generates all player appearances.
 Room exports contain background layers only; movable furniture and characters
 are separate. After changing artwork, re-export the atlas, JSON and room PNGs
 from the gallery to refresh these copies. Atlas coordinates use physical pixels;
 `sourceSize` and `scale` describe each source canvas and its integer export scale.
+
+## Café cats
+
+The Cats tab offers a catalog of 12 breeds and coats, filtered into domestic
+coats, shorthairs and longhairs. Select a portrait to compare its details, then
+adopt explicitly; browsing does not spend coins. My cats shows adopted residents
+and their care controls. Choose any three distinct kinds while closed. The limit
+is enforced in both purchases and save parsing; existing cats and supplies remain.
+
+Choices include ginger, tuxedo, calico, tabby, black, white, British Shorthair,
+American Shorthair, Siamese, Ragdoll, Persian and Maine Coon. Adoption costs
+300–2,400 coins including an initial care pack. Individual traffic bonuses range
+from +8% to +16%, adding up to at most +48% for three cats, then multiplying with
+reputation and existing demand factors. Cats do not change prices, tips, ratings
+or capacity, so extra traffic needs enough service and stock. All 12 kinds have
+distinct pixel portraits and four scene animation frames.
+
+Care packs cost 8–20 coins depending on the cat and last 180 seconds of open game
+time, following the speed setting. Store up to ten packs per cat. Auto-refill is
+on by default and can be switched off individually. No care is consumed in prep,
+closing or offline. Empty supplies make a cat rest and suspend its bonus; manual
+refill, or auto-refill once affordable, restores it. There is no debt or pet loss.
+Refills deduct cash immediately; daily profit subtracts only the care consumed,
+like ingredient costs. Unused supplies carry over. Adoption's remaining cost is
+a capital purchase and is not charged again in daily profit.
+
+Save version 11 persists residents, care, auto-refill preferences and today's care
+expense. Older saves have no paid residents; the original visiting window cat
+remains decorative and free until adoption. Residents use their selected breed or coat
+sprites and can be petted in the scene.
