@@ -106,10 +106,10 @@ export function previousInCategory(id: ItemId): MenuItemDef | null {
   return chain[chain.indexOf(def) - 1] ?? null;
 }
 
-/** Each category unlocks in order; only its first locked item can be bought. */
+/** Unlock after the preceding dish; owned dishes stay upgradeable as the menu grows. */
 export function isItemAvailable(state: GameState, id: ItemId): boolean {
   const prev = previousInCategory(id);
-  return !prev || state.items[prev.id] > 0;
+  return state.items[id] > 0 || !prev || state.items[prev.id] > 0;
 }
 
 export function buyItem(state: GameState, id: ItemId, amount: BuyAmount): boolean {

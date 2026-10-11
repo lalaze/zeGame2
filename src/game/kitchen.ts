@@ -161,30 +161,38 @@ const METHODS: Partial<Record<ItemId, readonly Station[]>> = {
   roll: ['mixer', 'deckOven'],
   bagel: ['mixer', 'kettle', 'deckOven'],
   baguette: ['mixer', 'deckOven'],
+  cheesebun: ['mixer', 'proofer', 'deckOven'],
   pretzel: ['mixer', 'kettle', 'deckOven'],
   focaccia: ['mixer', 'deckOven'],
   ciabatta: ['mixer', 'deckOven'],
+  raisinbread: ['mixer', 'proofer', 'deckOven'],
   sourdough: ['mixer', 'deckOven'],
   rye: ['mixer', 'deckOven'],
+  chocobread: ['mixer', 'proofer', 'deckOven'],
   shokupan: ['mixer', 'proofer', 'deckOven'],
   brioche: ['mixer', 'proofer', 'deckOven'],
+  fruitbrioche: ['mixer', 'bench', 'proofer', 'deckOven'],
   garlicbread: ['mixer', 'deckOven'],
   donut: ['bench', 'proofer', 'fryer'],
   scone: ['bench', 'convection'],
+  cookie: ['bench', 'convection'],
   croissant: ['sheeter', 'proofer', 'convection'],
   painchoc: ['sheeter', 'proofer', 'convection'],
+  brownie: ['standMixer', 'convection'],
   cinnamon: ['bench', 'proofer', 'convection'],
   muffin: ['standMixer', 'convection'],
+  creampuff: ['standMixer', 'convection'],
   melonpan: ['mixer', 'proofer', 'convection'],
   eggtart: ['bench', 'convection'],
   cake: ['standMixer', 'convection'],
+  swissroll: ['standMixer', 'convection'],
   cheesecake: ['standMixer', 'convection'],
   macaron: ['standMixer', 'convection'],
 };
 
 const CHILLED: readonly IngredientId[] = ['milk', 'butter', 'eggs', 'cream', 'fruit'];
 /** Bakes that set in the pastry fridge after cooling. */
-const SET_IN_FRIDGE: readonly ItemId[] = ['cake', 'cheesecake'];
+const SET_IN_FRIDGE: readonly ItemId[] = ['cake', 'cheesecake', 'creampuff', 'swissroll'];
 
 /**
  * Every stop a batch makes: ingredients from the cold room if anything in it is
