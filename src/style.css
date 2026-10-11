@@ -59,6 +59,19 @@
 .pet-choice span, .pet-choice small { font-size: 11px; line-height: 1.4; }
 .pet-choice small { color: var(--green-dark); }
 .pet-intro details summary { cursor: pointer; }
+.promo-intro { padding: 4px 6px 12px; }
+.promo-intro h3, .promo-active h3, .promo-platform h3 { margin: 4px 0; font-size: 17px; }
+.promo-intro p, .promo-active p, .promo-card p { margin: 8px 0; line-height: 1.6; }
+.promo-intro summary { cursor: pointer; }
+.promo-summary, .promo-offer { color: var(--green-dark); }
+.promo-active { margin: 4px 3px 16px; padding: 12px; border: 2px solid var(--green); background: #e3e8cb; }
+.promo-active progress { width: 100%; height: 8px; margin-bottom: 12px; accent-color: var(--green); }
+.promo-platform { display: flex; align-items: center; gap: 12px; margin: 16px 4px 10px; }
+.promo-platform > span { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; background: #60506d; color: #fff1d8; font-family: sans-serif; font-size: 24px; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--wood-light); }
+.promo-platform.orange > span { background: #b95f39; }
+.promo-platform p { margin: 4px 0; line-height: 1.5; }
+.promo-card { margin: 4px 3px 14px; padding: 12px; border: 2px solid var(--wood-light); background: var(--cream); }
+.promo-card h4 { margin: 0; font-size: 16px; }
 
 * {
   box-sizing: border-box;

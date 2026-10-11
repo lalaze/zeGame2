@@ -1,3 +1,4 @@
+import { promotionTraffic } from './promotion';
 import { petTraffic } from './pets';
 import {
   BASE_ARRIVAL_RATE,
@@ -151,8 +152,9 @@ export const prepMultiplier = (s: GameState) => 0.9 ** s.upgrades.machine;
 /** Extra customers drawn by a varied menu, as a share (0.12 = +12%). */
 export const varietyBonus = (s: GameState) =>
   Math.min(MAX_VARIETY_BONUS, VARIETY_BONUS * Math.max(0, menuItems(s).length - 1));
-export const arrivalRate = (s: GameState) =>
+export const baseArrivalRate = (s: GameState) =>
   BASE_ARRIVAL_RATE * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * (1 + varietyBonus(s)) * reputationTraffic(s.reputation) * petTraffic(s);
+export const arrivalRate = (s: GameState) => baseArrivalRate(s) * promotionTraffic(s);
 export const tipMultiplier = (s: GameState) => 1 + comfort(s) / 100;
 /** The café opens with a table in each nook; Expand the Shop adds the rest. */
 export const tableCount = (s: GameState) => activeTableIndices(s).length;
@@ -339,7 +341,10 @@ export function buyIngredient(state: GameState, id: IngredientId, count: number)
 export function expectedCustomers(state: GameState): number {
   const items = menuItems(state);
   if (items.length === 0) return 0;
-  return Math.ceil(Math.min(arrivalRate(state), serviceCapacity(state, items)) * DAY_SECONDS);
+  const capacity = serviceCapacity(state, items);
+  const promotedSeconds = state.promotion && !state.promotion.paused ? Math.min(DAY_SECONDS, state.promotion.remaining) : 0;
+  return Math.ceil(Math.min(arrivalRate(state), capacity) * promotedSeconds
+    + Math.min(baseArrivalRate(state), capacity) * (DAY_SECONDS - promotedSeconds));
 }
 
 /** Servings of each dish a full day on today's menu sells, roughly. */

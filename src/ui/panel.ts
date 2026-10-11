@@ -1,3 +1,4 @@
+import { PromotionPanel } from './promotion';
 import { PetPanel } from './pets';
 import {
   BAKE_STEP,
@@ -60,8 +61,8 @@ import { decorIcon } from '../render/decor-art';
 import { furnitureIcon } from '../render/furniture-art';
 import { ingredientIcon, itemArtwork, toDataURL, upgradeIcon } from '../render/sprites';
 
-type Tab = 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets';
-export type PurchaseKind = 'item' | 'upgrade' | 'decor' | 'goal' | 'ingredient' | 'menu' | 'recipe' | 'pet';
+type Tab = 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | 'promotion';
+export type PurchaseKind = 'item' | 'upgrade' | 'decor' | 'goal' | 'ingredient' | 'menu' | 'recipe' | 'pet' | 'promotion';
 
 /** How many units one tap buys in the pantry. */
 const PANTRY_AMOUNTS = [10, 50, 200] as const;
@@ -130,6 +131,7 @@ export const decorName = (id: string) => t(`decor.${id}` as MessageKey);
 
 export class Panel {
   private tab: Tab = 'menu';
+  private promotionPanel: PromotionPanel | null = null;
   private petPanel: PetPanel | null = null;
   private amount: BuyAmount = 1;
   private pantryAmount: number = PANTRY_AMOUNTS[0];
@@ -195,7 +197,7 @@ export class Panel {
   showTab(tab: Tab): void {
     this.tab = tab;
     this.root.querySelectorAll<HTMLElement>('[data-tab]').forEach((o) => o.classList.toggle('active', o.dataset.tab === tab));
-    this.root.querySelector<HTMLElement>('.buy-amount')!.hidden = tab === 'decor' || tab === 'pantry' || tab === 'pets';
+    this.root.querySelector<HTMLElement>('.buy-amount')!.hidden = tab === 'decor' || tab === 'pantry' || tab === 'pets' || tab === 'promotion';
     this.root.querySelector<HTMLElement>('.pantry-amount')!.hidden = tab !== 'pantry';
     this.root.querySelector<HTMLElement>('.menu-filter')!.hidden = tab !== 'menu';
     this.list.scrollTop = 0;
@@ -314,6 +316,7 @@ export class Panel {
 
   /** Which rows are visible; the DOM is rebuilt only when this changes. */
   private visibleKeys(): string[] {
+    if (this.tab === 'promotion') return ['promotion'];
     if (this.tab === 'pets') return ['pets'];
     if (this.tab === 'upgrades') return UPGRADES.map((u) => `upgrade:${u.id}`);
     if (this.tab === 'decor') return ['decor', this.decorCategory];
@@ -337,6 +340,7 @@ export class Panel {
   private build(keys: string[]): void {
     this.list.replaceChildren();
     this.petPanel = null;
+    this.promotionPanel = null;
     this.rows.clear();
     this.tiles.clear();
     this.furnitureTiles.clear();
@@ -346,6 +350,10 @@ export class Panel {
     this.restockBtn = null;
     this.varietyNote = null;
     this.bakeAllBtn = null;
+    if (this.tab === 'promotion') {
+      this.promotionPanel = new PromotionPanel(this.list, this.state, () => { this.onPurchase('promotion', 'campaign'); this.update(); });
+      return;
+    }
     if (this.tab === 'pets') {
       this.petPanel = new PetPanel(this.list, this.state, (id) => { this.onPurchase('pet', id); this.update(); });
       return;
@@ -569,6 +577,7 @@ export class Panel {
       this.build(keys);
     }
     const s = this.state;
+    if (this.tab === 'promotion') { this.promotionPanel?.update(); return; }
     if (this.tab === 'pets') { this.petPanel?.update(); return; }
 
     if (this.tab === 'decor') {

@@ -137,3 +137,29 @@ Save version 11 persists residents, care, auto-refill preferences and today's ca
 expense. Older saves have no paid residents; the original visiting window cat
 remains decorative and free until adoption. Residents use their selected breed or coat
 sprites and can be petted in the scene.
+
+## Creator promotion
+
+The Promote tab books creators on 豆音 (Douyin) and 小红薯 (Xiaohongshu). Douyin (豆音) offers
+180-second bursts: a local video costs 60 coins for +50% arrivals, and a popular
+creator costs 180 for +100%. 小红薯 offers 360-second lifestyle features:
+50 coins for +25%, or 150 for +60%. Bonuses multiply with existing demand, cats
+and reputation; they do not alter prices, tips, flavor or ratings directly.
+
+Only one booking can exist at a time, including while paused. Book in preparation
+or during service, pay the full fee once, and optionally pause/resume. Airtime
+runs only while open at the selected game speed; prep, closing and offline time
+consume nothing. Unused time carries across days. Campaigns expire without
+renewal, stacking or refunds. Daily reports subtract the cost of airtime delivered
+that day from profit, without deducting cash a second time. Save version 12
+persists remaining time, pause state and today's promotion expense; older saves
+start without a campaign or charges.
+
+Package cards compare arrival rates with estimated counter capacity and flag
+stockouts and overload risks. This estimate excludes seating and delivery
+bottlenecks. More visits can exhaust supplies, lengthen queues and cause bad
+reviews through the existing service rules; there is no random promotion penalty.
+Stock forecasts account for only the remaining campaign time within the forecast
+window and retain the existing service-capacity limit. Traffic is not guaranteed
+sales or profit. Integration tests cover real extra visits and resulting stockout
+reviews, alongside booking, expiry, pause, settlement and save behavior.

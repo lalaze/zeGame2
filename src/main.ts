@@ -484,6 +484,7 @@ function showReport(report: DayReport): void {
         ${row(t('report.revenue'), formatAccountMoney(report.revenue))}
         ${row(t('report.ingredients'), '−' + formatAccountMoney(report.ingredientCost))}
         ${report.petCost > 0 ? row(t('pet.expense'), '−' + formatAccountMoney(report.petCost)) : ''}
+        ${report.promotionCost > 0 ? row(t('promo.expense'), '−' + formatAccountMoney(report.promotionCost)) : ''}
         ${bakeRows}
       </dl>
       <div class="report-profit"><span>${t('report.profit')}</span><b class="big-money">${report.profit < 0 ? '−' : '+'}${formatAccountMoney(Math.abs(report.profit))}</b></div>

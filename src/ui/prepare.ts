@@ -1,3 +1,4 @@
+import { promotionPlan } from '../game/promotion';
 import { petTraffic } from '../game/pets';
 import { BAKE_STEP, type ItemId } from '../game/data';
 import { checkOpen } from '../game/day';
@@ -43,6 +44,7 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
     body.innerHTML = `<p>${t('prep.intro')}</p>
       <p class="note">${t('pantry.forecast', { n: formatNumber(expectedCustomers(state)) })}</p>
       <p class="note">${t('rating.prep', { pct: trafficPercent(reputationTraffic(state.reputation)) })}</p>
+      ${state.promotion ? `<p class="note">${t(state.promotion.paused ? 'promo.prepPaused' : 'promo.prep', { pct: Math.round(promotionPlan(state.promotion.id)!.boost * 100), seconds: Math.ceil(state.promotion.remaining) })}</p>` : ''}
       ${state.pets.length ? `<p class="note">${t('pet.forecast', { pct: Math.round((petTraffic(state) - 1) * 100) })}</p>` : ''}
       ${state.kitchen ? `<p class="note">${t('prep.kitchen')}</p>` : ''}
       ${kitchenLoad(state) > 1 ? `<p class="note warn">${t('prep.capacity')}</p>` : ''}
