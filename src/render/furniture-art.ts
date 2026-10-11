@@ -1,8 +1,9 @@
 // Pixel art for placeable furniture. Wall pieces are drawn into their footprint;
 // floor pieces stand on the floor, centered on their footprint, and may rise above it.
 import { CELL, furnitureDef } from '../game/furniture';
+import { collectionSprite } from './furnishing-collection';
 import { mix, ramp } from './color';
-import { paintArt, plantSprite, shadow } from './decor-art';
+import { grain, paintArt, plantSprite, shadow } from './decor-art';
 import { OUTLINE, pixelSprite } from './sprites';
 
 type Ctx = CanvasRenderingContext2D;
@@ -14,6 +15,9 @@ const filler =
     if (w <= 0 || h <= 0) return;
     ctx.fillStyle = color;
     ctx.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+    if (w >= 6 && h >= 4 && (color === WOOD.base || color === LIGHT_WOOD.base)) {
+      grain(ctx, Math.round(x + 1), Math.round(y + 1), Math.round(w - 2), Math.round(h - 2), ramp(color), w > h ? 'h' : 'v', Math.round(x + y));
+    }
   };
 
 const lazy = (make: () => HTMLCanvasElement) => {
@@ -365,7 +369,7 @@ const SPRITES: Record<string, () => HTMLCanvasElement> = {
 };
 
 function spriteFor(id: string): HTMLCanvasElement | undefined {
-  return SPRITES[id]?.() ?? plantSprite(id);
+  return SPRITES[id]?.() ?? plantSprite(id) ?? collectionSprite(id);
 }
 
 /** An analog clock face showing `now`, centered on (cx, cy). */
@@ -432,7 +436,7 @@ export function paintFloorFurniture(ctx: Ctx, id: string, cx: number, footY: num
   shadow(ctx, cx, footY, Math.max(10, sprite.width * 0.8));
   const x = Math.round(cx - sprite.width / 2);
   ctx.drawImage(sprite, x, footY - sprite.height + 1);
-  if (id === 'lamp') glow(ctx, cx, footY - sprite.height + 4, 18);
+  if (id === 'lamp' || id === 'lantern') glow(ctx, cx, footY - sprite.height + 4, 18);
 }
 
 /** The drawn bounds of a floor piece, for tapping it. */

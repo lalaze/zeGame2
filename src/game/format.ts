@@ -18,6 +18,9 @@ export function formatNumber(n: number): string {
 
 export const formatMoney = (n: number) => '$' + formatNumber(n);
 
+/** Ledger values retain cents so partial care consumption is visible. */
+export const formatAccountMoney = (n: number) => Math.abs(n) < 1_000_000 ? '$' + n.toFixed(2) : formatMoney(n);
+
 /** Like formatMoney, but keeps a decimal for small rates so $0.6/s isn't shown as $0/s. */
 export const formatRate = (n: number) => (n > 0 && n < 100 ? '$' + (Math.floor(n * 10) / 10).toString() : formatMoney(n));
 

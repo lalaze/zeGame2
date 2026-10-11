@@ -114,6 +114,21 @@ describe('production offline app shell', () => {
     }
   });
 
+  it('reopens the merged artwork page offline without replacing it with the game', async () => {
+    const { dir } = await buildFixture();
+    await writeFile(join(dir, 'sprite-preview.html'), '<main>Artwork and 30 customers</main>');
+    const { source, manifest } = await generateServiceWorker(dir, templatePath);
+    expect(manifest).toContain('./sprite-preview.html');
+    const app = worker(source);
+    await app.lifecycle('install');
+    app.goOffline();
+    for (const path of ['./sprite-preview.html', './sprite-preview.html?view=customers']) {
+      const response = await app.request(path, 'navigate');
+      expect(response.status).toBe(200);
+      expect(await response.text()).toBe('https://example.test/games/cafe/sprite-preview.html');
+    }
+  });
+
   it('holds installation open until the final shell asset has downloaded', async () => {
     const { source } = await buildFixture();
     const app = worker(source);

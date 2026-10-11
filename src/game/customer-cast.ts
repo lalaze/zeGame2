@@ -51,11 +51,35 @@ export const CUSTOMER_CAST: readonly CustomerDesign[] = Object.freeze(rows.map((
   hairstyle: r[3], outfit: r[6], accessory: r[7], accent: r[8],
 })));
 
+export interface CustomerCastSnapshot {
+  remaining: number[];
+  previous: number;
+}
+
+/** Saved visual state never changes the random stream used for café economics. */
+export function validCustomerCastSnapshot(value: unknown): value is CustomerCastSnapshot {
+  if (!value || typeof value !== 'object') return false;
+  const s = value as CustomerCastSnapshot;
+  return Number.isInteger(s.previous) && s.previous >= -1 && s.previous < CUSTOMER_CAST.length &&
+    Array.isArray(s.remaining) && s.remaining.length <= CUSTOMER_CAST.length &&
+    s.remaining.every((id) => Number.isInteger(id) && id >= 0 && id < CUSTOMER_CAST.length && id !== s.previous) &&
+    new Set(s.remaining).size === s.remaining.length;
+}
+
 /** Each cast member visits once per shuffled cycle; this controls appearance only. */
 export class CustomerCastCycle {
   private remaining: number[] = [];
   private previous = -1;
   constructor(private readonly random: () => number = Math.random) {}
+  snapshot(): CustomerCastSnapshot {
+    return { remaining: [...this.remaining], previous: this.previous };
+  }
+  restore(value: unknown): boolean {
+    if (!validCustomerCastSnapshot(value)) return false;
+    this.remaining = [...value.remaining];
+    this.previous = value.previous;
+    return true;
+  }
   next(): CustomerDesign {
     if (!this.remaining.length) {
       this.remaining = CUSTOMER_CAST.map(c => c.id);

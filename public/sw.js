@@ -37,6 +37,13 @@ self.addEventListener('fetch', (event) => {
         if (response.ok) return response;
       } catch { /* Use the complete installed shell when offline. */ }
       const cache = await caches.open(CACHE);
+      // Multi-page builds include the artwork gallery as well as the game shell.
+      // Prefer the matching precached page instead of redirecting its offline visit.
+      const page = new URL(req.url);
+      page.search = '';
+      page.hash = '';
+      const cachedPage = await cache.match(page.href);
+      if (cachedPage) return cachedPage;
       const shell = await cache.match(SHELL);
       if (!shell) return Response.error();
       // A relative-base build must reopen at its app root. Serving its HTML at

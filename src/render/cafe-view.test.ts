@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { CELL, WALL_TOP, furnitureDef } from '../game/furniture';
-import { CAT_SPOT, FLOOR_Y, MIN_SCENE_H, MAX_SCENE_H, areaOrigin, areaBounds, kitchenHeight, setKitchenLevel, setSceneHeight } from '../game/layout';
+import { CAT_SPOT, CAT_SPOTS, FLOOR_Y, MIN_SCENE_H, MAX_SCENE_H, areaOrigin, areaBounds, kitchenHeight, setKitchenLevel, setSceneHeight } from '../game/layout';
 import { regionOffset } from '../game/regions';
 import { CafeView, cellRect } from './cafe-view';
 
@@ -27,6 +27,16 @@ describe('café view', () => {
     expect(view.hitCat(CAT_SPOT.x + 40, CAT_SPOT.y)).toBe(false);
     view.moveToArea('reading', true);
     expect(view.hitCat(CAT_SPOT.x, CAT_SPOT.y - 4)).toBe(false);
+  });
+
+  it('pets the selected resident at its own spot and ignores empty spots', () => {
+    const view = new CafeView();
+    const spot = CAT_SPOTS[2];
+    expect(view.hitCat(spot.x, spot.y - 4, 2)).toBe(false);
+    expect(view.hitCat(spot.x, spot.y - 4, 3)).toBe(true);
+    view.petCat();
+    expect(view.catSpot).toEqual(spot);
+    expect(view.effects[0]).toEqual({ kind: 'heart', x: spot.x - 4, y: spot.y - 16 });
   });
 
   it('maps a pointer to the grid cell of the room in view', () => {

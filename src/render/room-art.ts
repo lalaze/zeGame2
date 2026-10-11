@@ -27,6 +27,7 @@ import {
 } from '../game/layout';
 import type { GameState } from '../game/state';
 import { paintPassageFloor } from './passages';
+import { glassReflection, treeLine } from './materials';
 import { mix, ramp } from './color';
 import { counterColors, grain, paintCounter, paintFloor, paintRug, paintRunner, paintRunnerJoin, paintWainscot, paintWall, wainscotColor } from './decor-art';
 import { drawText, textWidth } from './font';
@@ -223,14 +224,19 @@ export const TABLE = lazy(() => {
 export function paintSunbeam(ctx: CanvasRenderingContext2D, sun: Sun, x0: number, x1: number, y: number, lean: number, length: number): void {
   if (sun.elevation <= 0 || sun.strength <= 0.02) return;
   ctx.save();
-  ctx.globalAlpha = 0.16 * sun.strength;
   ctx.fillStyle = sun.color;
-  ctx.beginPath();
-  ctx.moveTo(x0, y);
-  ctx.lineTo(x1, y);
-  ctx.lineTo(x1 + lean, y + length);
-  ctx.lineTo(x0 + lean, y + length);
-  ctx.fill();
+  // Four panes, with the frame's shadow between them. Light disperses and
+  // fades along its reach rather than ending in one hard rectangle.
+  const width = x1 - x0;
+  const reach = Math.max(1, Math.abs(length));
+  for (let step = 0; step < reach; step++) {
+    const p = step / reach;
+    ctx.globalAlpha = 0.22 * sun.strength * (1 - p * 0.85);
+    for (let pane = 0; pane < 2; pane++) {
+      const start = x0 + pane * width / 2 + lean * p;
+      ctx.fillRect(Math.round(start + 1), Math.round(y + Math.sign(length) * step), Math.max(1, Math.round(width / 2 - 3)), 1);
+    }
+  }
   ctx.restore();
 }
 
@@ -303,7 +309,8 @@ export class RoomPainter {
     const land = (day: string, dark: string) => mix(day, dark, light.dark);
     this.r(x, y + h - 10, w, 10, land('#7cbf5e', '#243d33'));
     this.r(x, y + h - 4, w, 4, land('#5ea24a', '#1b3029'));
-    for (let i = 0; i < w; i += 7) this.r(x + i, y + h - 14 + ((i * 3) % 5), 6, 5, land('#4f9a48', '#1f3a30'));
+    treeLine(ctx, x, y + h - 21, w, 17, light.dark);
+    glassReflection(ctx, x, y, w, h, 0.13);
     ctx.restore();
     // Mullions and the sill.
     this.r(x + w / 2 - 1, y, 3, h, frame.base);
@@ -311,12 +318,14 @@ export class RoomPainter {
     this.r(x, y + h / 2 - 1, w, 3, frame.base);
     this.r(x, y + h / 2 - 1, w, 1, frame.hi);
     // Curtains.
-    const curtain = ramp('#d9574a');
+    const curtain = ramp('#b96555');
     for (const [cx, dir] of [[x - 6, 1], [x + w - 1, -1]] as const) {
       this.r(cx, y - 5, 7, h + 4, curtain.base);
       this.r(dir === 1 ? cx : cx + 5, y - 5, 2, h + 4, curtain.lo);
       this.r(cx + 3, y - 5, 1, h + 4, curtain.hi);
       this.r(cx - 1, y - 6, 9, 2, '#e7b84a');
+      this.r(cx, y + h - 9, 7, 2, '#d9b77a');
+      this.r(cx + 2, y + h - 7, 1, 3, '#f2dca2');
     }
     this.r(x - 8, y + h + 1, w + 16, 4, frame.base);
     this.r(x - 8, y + h + 1, w + 16, 1, frame.hi);
@@ -346,7 +355,13 @@ export class RoomPainter {
     this.r(x, y, w, h, frame.base);
     this.r(x, y, w, 1, frame.hi);
     this.r(x, y + h - 1, w, 1, frame.lo);
-    this.r(x + 3, y + 3, w - 6, h - 6, '#2d4a3a');
+    this.r(x + 3, y + 3, w - 6, h - 6, '#28463e');
+    this.r(x + 5, y + 5, w - 10, 1, '#567365');
+    for (let i = 0; i < 4; i++) {
+      this.r(x + 7 + i * 23, y + h - 5, 10, 1, '#36564b');
+    }
+    // Brass corner pins and a double moulded frame.
+    for (const dx of [1, w - 2]) for (const dy of [1, h - 2]) this.r(x + dx, y + dy, 1, 1, '#f1cf8c');
     this.r(x + 3, y + 3, w - 6, 1, '#1f3529');
     // Chalk dust and doodles.
     this.r(x + 8, y + h - 7, 14, 1, '#4f6e5c');
@@ -799,7 +814,7 @@ export class RoomPainter {
 
   /**
    * The glass case in the counter front. It shows today's breads and pastries:
-   * what's left on the shelf while open, the planned bake while closed.
+   * the planned bake during prep, actual shelf stock while open or closing.
    */
   private drawPastryCase(state: GameState): void {
     const { top, front, bottom } = COUNTER;
@@ -832,7 +847,7 @@ export class RoomPainter {
       this.r(sx - 4, shelfY, 9, 1, '#e9dcc8');
       const m = bakery[i];
       if (!m) continue;
-      const count = state.phase === 'open' ? (state.shelf[m.id] ?? 0) : (state.bakePlan[m.id] ?? 0);
+      const count = state.phase === 'prep' ? (state.bakePlan[m.id] ?? 0) : (state.shelf[m.id] ?? 0);
       if (count <= 0) continue;
       const icon = itemIcon(m.id);
       const ix = Math.round(sx - icon.width / 2);

@@ -1,6 +1,6 @@
+import { promotionTraffic } from './promotion';
+import { petTraffic } from './pets';
 import {
-  BAKE_STEP,
-  COOK_BATCH,
   BASE_ARRIVAL_RATE,
   COMBO_CHANCE,
   MAX_VARIETY_BONUS,
@@ -25,6 +25,8 @@ import {
 import { comfort } from './decor';
 import { activeTableIndices, regionDemand } from './regions';
 import type { DayStats, GameState } from './state';
+import { bakeryPlan } from './kitchen';
+import { reputationTraffic } from './reputation';
 
 export type BuyAmount = 1 | 10 | 'max';
 
@@ -32,8 +34,8 @@ const MENU_BY_ID = Object.fromEntries(MENU.map((m) => [m.id, m])) as Record<Item
 const UPGRADE_BY_ID = Object.fromEntries(UPGRADES.map((u) => [u.id, u])) as Record<UpgradeId, UpgradeDef>;
 
 export const menuItem = (id: ItemId) => MENU_BY_ID[id];
-// Affogato is an ice-cream dessert despite its coffee menu placement.
-export const requiresKitchen = (id: ItemId) => id === 'affogato' || !isDrink(menuItem(id).category);
+// These ice-cream desserts need the kitchen despite their drinks-menu placement.
+export const requiresKitchen = (id: ItemId) => id === 'affogato' || id === 'matchafloat' || !isDrink(menuItem(id).category);
 export const canPrepareItem = (state: GameState, id: ItemId) => !requiresKitchen(id) || state.kitchen;
 
 export const upgradeDef = (id: UpgradeId) => UPGRADE_BY_ID[id];
@@ -49,12 +51,17 @@ export function nextMilestone(level: number): number | null {
 }
 
 export function itemPrice(def: MenuItemDef, level: number): number {
-  return level <= 0 ? 0 : def.basePrice * level * milestoneMultiplier(level);
+  if (level <= 0) return 0;
+  const next = nextMilestone(level);
+  const previous = [...PRICE_MILESTONES].reverse().find((m) => m <= level) ?? 1;
+  const progress = next ? (level - previous) / (next - previous) : 0;
+  return def.basePrice * level * milestoneMultiplier(level) * (1 + 0.8 * progress);
 }
 
 /** Total cost of `n` purchases of something priced base * growth^level. */
 export function bulkCost(base: number, growth: number, level: number, n: number): number {
   if (n <= 0) return 0;
+  if (n === 1) return base * growth ** level;
   return (base * growth ** level * (growth ** n - 1)) / (growth - 1);
 }
 
@@ -111,11 +118,11 @@ export function previousInCategory(id: ItemId): MenuItemDef | null {
   return chain[chain.indexOf(def) - 1] ?? null;
 }
 
-/** Each category unlocks in order; only its first locked item can be bought. */
+/** Unlock after the preceding dish; owned dishes stay upgradeable as the menu grows. */
 export function isItemAvailable(state: GameState, id: ItemId): boolean {
   if (!canPrepareItem(state, id)) return false;
   const prev = previousInCategory(id);
-  return !prev || state.items[prev.id] > 0;
+  return state.items[id] > 0 || !prev || state.items[prev.id] > 0;
 }
 
 export function buyItem(state: GameState, id: ItemId, amount: BuyAmount): boolean {
@@ -151,8 +158,9 @@ export const prepMultiplier = (s: GameState) => 0.9 ** s.upgrades.machine;
 /** Extra customers drawn by a varied menu, as a share (0.12 = +12%). */
 export const varietyBonus = (s: GameState) =>
   Math.min(MAX_VARIETY_BONUS, VARIETY_BONUS * Math.max(0, menuItems(s).length - 1));
-export const arrivalRate = (s: GameState) =>
-  BASE_ARRIVAL_RATE * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * (1 + varietyBonus(s));
+export const baseArrivalRate = (s: GameState) =>
+  BASE_ARRIVAL_RATE * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * (1 + varietyBonus(s)) * reputationTraffic(s.reputation) * petTraffic(s);
+export const arrivalRate = (s: GameState) => baseArrivalRate(s) * promotionTraffic(s);
 export const tipMultiplier = (s: GameState) => 1 + comfort(s) / 100;
 /** The café opens with a table in each nook; Expand the Shop adds the rest. */
 export const tableCount = (s: GameState) => activeTableIndices(s).length;
@@ -241,7 +249,7 @@ export function servingsLeft(state: GameState, id: ItemId): number {
  */
 export function readyServings(state: GameState, id: ItemId): number {
   if (!canPrepareItem(state, id)) return 0;
-  if (state.phase === 'open') return isBakery(id) ? state.shelf[id] ?? 0 : servingsLeft(state, id);
+  if (state.phase !== 'prep') return isBakery(id) ? state.shelf[id] ?? 0 : servingsLeft(state, id);
   const projected = projectMorningBake(state);
   return isBakery(id) ? projected.shelf[id] ?? 0 : servingsLeft({ ...state, pantry: projected.pantry }, id);
 }
@@ -252,7 +260,7 @@ export function readyServings(state: GameState, id: ItemId): number {
  */
 export function consumeServing(state: GameState, id: ItemId, today?: DayStats): boolean {
   if (!canPrepareItem(state, id) || state.items[id] <= 0) return false;
-  if (isBakery(id) && state.phase === 'open') {
+  if (isBakery(id) && state.phase !== 'prep') {
     if ((state.shelf[id] ?? 0) < 1) return false;
     state.shelf[id]!--;
     return true;
@@ -265,11 +273,12 @@ export function consumeServing(state: GameState, id: ItemId, today?: DayStats): 
 
 // ---------------------------------------------------------------- the morning bake
 
-/** A bake amount that should cover a normal day's sales of an item, in BAKE_STEP steps. */
+/** Exact forecast portions, or enough shelf stock to bridge kitchen replenishment. */
 export function suggestedBake(state: GameState, id: ItemId): number {
   if (!canPrepareItem(state, id) || !isBakery(id)) return 0;
   const demand = dayDemand(state).get(id) ?? 0;
-  return Math.max(BAKE_STEP, Math.ceil(demand / BAKE_STEP) * BAKE_STEP);
+  if (!state.kitchen) return Math.ceil(demand);
+  return bakeryPlan(state).get(id)?.morning ?? Math.ceil(demand);
 }
 
 /** Gives every bread and pastry on the menu a bake amount if it doesn't have one yet. */
@@ -347,7 +356,10 @@ export function buyIngredient(state: GameState, id: IngredientId, count: number)
 export function expectedCustomers(state: GameState): number {
   const items = menuItems(state);
   if (items.length === 0) return 0;
-  return Math.ceil(Math.min(arrivalRate(state), serviceCapacity(state, items)) * DAY_SECONDS);
+  const capacity = serviceCapacity(state, items);
+  const promotedSeconds = state.promotion && !state.promotion.paused ? Math.min(DAY_SECONDS, state.promotion.remaining) : 0;
+  return Math.ceil(Math.min(arrivalRate(state), capacity) * promotedSeconds
+    + Math.min(baseArrivalRate(state), capacity) * (DAY_SECONDS - promotedSeconds));
 }
 
 /** Servings of each dish a full day on today's menu sells, roughly. */
@@ -362,9 +374,16 @@ export function dayDemand(state: GameState): Map<ItemId, number> {
 export function dayNeeds(state: GameState): Partial<Record<IngredientId, number>> {
   const needs: Partial<Record<IngredientId, number>> = {};
   for (const [id, servings] of dayDemand(state)) {
-    // Breads and pastries need exactly the planned morning bake, plus a batch per cook
-    // for baking fresh during the day; drinks a bit of spare.
-    const amount = isBakery(id) ? (state.bakePlan[id] ?? 0) + cookCount(state) * COOK_BATCH : servings * 1.15;
+    // Cover planned morning production or forecast consumption, never both twice.
+    // Live shelf stock and paid in-flight batches reduce future ingredient needs.
+    const morning = state.phase === 'prep' ? state.bakePlan[id] ?? 0 : 0;
+    const shelf = state.phase === 'prep' ? 0 : state.shelf[id] ?? 0;
+    const inProgress = state.phase === 'prep' ? 0 : state.inProduction[id] ?? 0;
+    const amount = isBakery(id)
+      ? state.kitchen
+        ? Math.max(morning, Math.ceil(servings * 1.1) - shelf - inProgress)
+        : morning
+      : servings * 1.15;
     for (const [ing, n] of recipe(id)) needs[ing] = (needs[ing] ?? 0) + amount * n;
   }
   for (const k of Object.keys(needs) as IngredientId[]) needs[k] = Math.ceil(needs[k]!);

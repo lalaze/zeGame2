@@ -103,7 +103,7 @@ export function lightingAt(hour: number): Lighting {
  * sky and the glasshouse nearly so, while the walled rooms keep some of their own light,
  * and the windowless kitchen runs on its tube lights.
  */
-const EXPOSURE: Record<AreaId, number> = { main: 0.65, reading: 0.55, greenhouse: 0.9, terrace: 1, kitchen: 0.35 };
+const EXPOSURE: Record<AreaId, number> = { main: 0.48, reading: 0.45, greenhouse: 0.9, terrace: 1, kitchen: 0.35 };
 
 /** The color a room is multiplied by. */
 export const roomAmbient = (light: Lighting, area: AreaId) => mix('#ffffff', light.ambient, EXPOSURE[area]);

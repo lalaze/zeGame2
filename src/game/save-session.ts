@@ -15,12 +15,18 @@ export class SaveSession {
 
   readonly mode: 'persistent' | 'temporary';
 
-  constructor(private storage: GuardedStorage | null, now: number, private release: () => void) {
-    this.mode = storage ? 'persistent' : 'temporary';
-    const result = storage?.read(SAVE_KEY);
+  private readonly storage: GuardedStorage | null;
+
+  constructor(storage: KeyValueStorage | GuardedStorage | null, now: number, private release: () => void) {
+    this.storage = storage === null || storage instanceof GuardedStorage ? storage : new GuardedStorage(() => storage);
+    this.mode = this.storage ? 'persistent' : 'temporary';
+    const result = this.storage?.read(SAVE_KEY);
     if (result && !result.ok) throw new Error('Save storage is unavailable');
     this.expected = result?.ok ? result.value : null;
     this.state = deserialize(this.expected, now);
+    let runtime: unknown;
+    try { runtime = JSON.parse(this.expected ?? '{}').runtime; } catch { /* invalid save uses defaults */ }
+    if (!this.sim.restore(runtime, this.state)) this.state.inProduction = {};
   }
 
   save(state: GameState): SaveResult {
@@ -37,7 +43,8 @@ export class SaveSession {
         this.close();
         return 'conflict';
       }
-      const raw = serialize(state);
+      const payload = { ...state, runtime: state.phase === 'prep' ? undefined : this.sim.snapshot(state) };
+      const raw = serialize(payload);
       if (!this.storage.write(SAVE_KEY, raw).ok) return 'unavailable';
       this.expected = raw;
       return 'saved';

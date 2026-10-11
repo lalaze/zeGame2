@@ -16,7 +16,8 @@ function customer(patch: Partial<Customer> = {}): Customer {
     tx: 80, ty: 160, stride: 60, via: [], phase: 'queue',
     order: 'espresso', extra: null, vip: false, patience: 40,
     spot: -1, seat: -1, timer: 35, mood: null, moodTimer: 0,
-    hasCup: false, soldOut: false, dineIn: false, ...patch,
+    hasCup: false, soldOut: false, dineIn: false,
+    reviewed: false, waitSeconds: 0, missingExtra: false, ...patch,
   };
 }
 const barista = (patch: Partial<Barista> = {}): Barista => ({

@@ -1,3 +1,4 @@
+import { parsePromotion, type Promotion } from './promotion';
 import {
   INGREDIENTS,
   MENU,
@@ -13,8 +14,12 @@ import { bakeMorning, bulkCost, dayNeeds, fillBakePlan } from './economy';
 import { DEFAULT_ART_SPOT, STARTER_FURNITURE, evictBlocked, furnitureDef, type Placed } from './furniture';
 import { REGIONS, mainTableCount, type RegionId } from './regions';
 
+import { parsePets, type Pet } from './pets';
+import { parseTaste, type TasteState } from './taste';
+import { emptyReviews, parseReputation, parseReviews, type Reputation, type ReviewSummary } from './reputation';
+
 export const SAVE_KEY = 'tiny-bean-cafe/save';
-export const SAVE_VERSION = 7;
+export const SAVE_VERSION = 12;
 
 export interface Look {
   skin: number;
@@ -44,32 +49,50 @@ export interface DecorState {
 
 /** Running totals for the business day in progress, shown in the end-of-day report. */
 export interface DayStats {
+  reviews: ReviewSummary;
   served: number;
   /** Customers who left without buying: the line was too slow or their order was sold out. */
   missed: number;
   soldOut: number;
+  queueLost: number;
+  tableLost: number;
+  extraLost: number;
+  doorLost: number;
+  shortages: Partial<Record<ItemId, number>>;
   revenue: number;
   /** What the ingredients used today cost when they were bought. */
   ingredientCost: number;
+  /** Value of cat-care supplies consumed while open. */
+  petCost: number;
+  /** Prepaid promotion airtime delivered today. */
+  promotionCost: number;
   sales: Partial<Record<ItemId, number>>;
   /** Breads and pastries baked this morning. */
   baked: Partial<Record<ItemId, number>>;
 }
 
 export const emptyDay = (): DayStats => ({
+  reviews: emptyReviews(),
   served: 0,
   missed: 0,
   soldOut: 0,
+  queueLost: 0, tableLost: 0, extraLost: 0, doorLost: 0, shortages: {},
   revenue: 0,
   ingredientCost: 0,
+  petCost: 0,
+  promotionCost: 0,
   sales: {},
   baked: {},
 });
 
-/** 'prep': the shop is closed and the player plans the day. 'open': the day is running. */
-export type Phase = 'prep' | 'open';
+/** Preparation, open service, or closed doors while accepted orders finish. */
+export type Phase = 'prep' | 'open' | 'closing';
 
 export interface GameState {
+  promotion: Promotion | null;
+  pets: Pet[];
+  reputation: Reputation;
+  taste: TasteState;
   version: number;
   coins: number;
   totalEarned: number;
@@ -98,6 +121,7 @@ export interface GameState {
   /** Today's baked goods still on the shelf; whatever is left at closing goes stale. */
   shelf: Partial<Record<ItemId, number>>;
   today: DayStats;
+  inProduction: Partial<Record<ItemId, number>>;
   createdAt: number;
 }
 
@@ -119,6 +143,10 @@ export function createInitialState(now: number): GameState {
   pantry.beans = STARTER_BEANS;
   return {
     version: SAVE_VERSION,
+    pets: [],
+    promotion: null,
+    reputation: { recent: [] },
+    taste: { served: {}, signature: [] },
     coins: 0,
     totalEarned: 0,
     served: 0,
@@ -138,6 +166,7 @@ export function createInitialState(now: number): GameState {
     bakePlan: {},
     shelf: {},
     today: emptyDay(),
+    inProduction: {},
     createdAt: now,
   };
 }
@@ -246,8 +275,8 @@ export function deserialize(raw: string | null, now: number): GameState {
   base.goal = Math.floor(num(data.goal, 0));
 
   base.day = Math.max(1, Math.floor(num(data.day, 1)));
-  base.phase = data.phase === 'open' ? 'open' : 'prep';
-  base.dayTime = base.phase === 'open' ? num(data.dayTime, 0) : 0;
+  base.phase = data.phase === 'closing' ? 'closing' : data.phase === 'open' ? 'open' : 'prep';
+  base.dayTime = base.phase !== 'prep' ? num(data.dayTime, 0) : 0;
   base.speed = SPEEDS.find((v) => v === data.speed) ?? 1;
   const pantry = (data.pantry ?? {}) as Record<string, unknown>;
   for (const i of INGREDIENTS) base.pantry[i.id] = Math.floor(num(pantry[i.id], base.pantry[i.id]));
@@ -261,7 +290,15 @@ export function deserialize(raw: string | null, now: number): GameState {
     ? unlocked.filter((id) => (data.onMenu as unknown[]).includes(id))
     : unlocked;
   base.today = parseDay(data.today);
+  base.pets = parsePets(data.pets);
+  base.promotion = parsePromotion(data.promotion);
+  // Older saves only retain per-dish sales for the current day; carry that
+  // evidence forward without inventing a split of the lifetime customer total.
+  base.taste = parseTaste(data.taste, num(data.version, 1) < 10 ? base.today.sales : {});
+  base.taste.signature = base.taste.signature.filter((id) => base.items[id] > 0);
+  base.reputation = parseReputation(data.reputation);
   base.bakePlan = parseCounts(data.bakePlan);
+  base.inProduction = base.phase === 'prep' ? {} : parseCounts(data.inProduction);
   // Suspended pre-kitchen stock survives saves and a later kitchen purchase.
   base.shelf = parseCounts(data.shelf);
 
@@ -304,11 +341,16 @@ function parseDay(value: unknown): DayStats {
   const day = emptyDay();
   if (!value || typeof value !== 'object') return day;
   const d = value as Record<string, unknown>;
+  day.reviews = parseReviews(d.reviews);
   day.served = Math.floor(num(d.served, 0));
   day.missed = Math.floor(num(d.missed, 0));
   day.soldOut = Math.floor(num(d.soldOut, 0));
+  for (const key of ['queueLost', 'tableLost', 'extraLost', 'doorLost'] as const) day[key] = Math.floor(num(d[key], 0));
+  day.shortages = parseCounts(d.shortages);
   day.revenue = num(d.revenue, 0);
   day.ingredientCost = num(d.ingredientCost, 0);
+  day.petCost = num(d.petCost, 0);
+  day.promotionCost = num(d.promotionCost, 0);
   const sales = (d.sales ?? {}) as Record<string, unknown>;
   for (const m of MENU) {
     const n = Math.floor(num(sales[m.id], 0));

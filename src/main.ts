@@ -6,7 +6,7 @@ import { SPEEDS, type ItemId } from './game/data';
 import { formatOpenTime, openShop, type DayReport } from './game/day';
 import { expectedCustomers, tipMultiplier } from './game/economy';
 import { canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
-import { formatMoney } from './game/format';
+import { formatAccountMoney, formatMoney } from './game/format';
 import { MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
 import { adjacentArea, isAreaOpen, mainTableCount, regionOffset } from './game/regions';
 import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, furnitureDef } from './game/furniture';
@@ -18,10 +18,13 @@ import { createInitialState, type GameState } from './game/state';
 import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale, t, type Locale } from './i18n';
 import { CafeView } from './render/cafe-view';
 import { CafeGame } from './render/phaser/game';
-import { character, itemIcon, toDataURL } from './render/sprites';
+import { character, itemArtwork, toDataURL } from './render/sprites';
 import { closeModal, isModalOpen, showModal, toast } from './ui/modal';
 import { showOnboarding, type OnboardingResult } from './ui/onboarding';
 import { Panel, decorName, itemName, type ArrangeRequest } from './ui/panel';
+import { OperationMonitor } from './game/operations';
+import { ingredientName } from './ui/panel';
+import { ratingReportHtml, updateReputationButton, showReputation } from './ui/reputation';
 import { showPrepare } from './ui/prepare';
 import { RegionsUI, areaName } from './ui/regions';
 
@@ -121,7 +124,7 @@ function fitCanvas(): void {
   // Room inside the stage padding, minus the canvas's frame and drop shadow.
   const rect = {
     width: stage.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) - 8,
-    height: stage.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom) - 12,
+    height: stage.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom) - 12 - 44,
   };
   // The stats strip only shows if the café could still be as wide as the stage under it.
   stats.hidden = rect.height - STATS_SPACE < MIN_SCENE_H * (rect.width / SCENE_W);
@@ -204,7 +207,7 @@ const panel = new Panel(
 );
 
 /** Opening a management task also reveals the panel if the player folded it away. */
-function showPanelTab(tab: 'menu' | 'pantry'): void {
+function showPanelTab(tab: 'menu' | 'pantry' | 'upgrades'): void {
   setPanelCollapsed(false);
   panel.showTab(tab);
 }
@@ -348,7 +351,7 @@ function updateStats(): void {
   if (stats.hidden) return;
   const tips = t('stats.tips', { n: Math.round((tipMultiplier(state) - 1) * 100) });
   const chips =
-    state.phase === 'open'
+    state.phase !== 'prep'
       ? [
           t('stats.servedToday', { n: state.today.served.toLocaleString() }),
           t('stats.missed', { n: state.today.missed.toLocaleString() }),
@@ -367,18 +370,27 @@ function updateStats(): void {
 // ------------------------------------------------------------ the business day
 
 const dayClock = $('day-clock');
+const operationMonitor = new OperationMonitor();
+const operationBtn = $<HTMLButtonElement>('operation-status');
 const openBtn = $<HTMLButtonElement>('open-btn');
 const closeBtn = $<HTMLButtonElement>('close-btn');
 const speedBtns = [...document.querySelectorAll<HTMLButtonElement>('[data-speed]')];
 
 function updateDayHud(): void {
-  const open = state.phase === 'open';
-  const time = open ? t('day.openFor', { time: formatOpenTime(state.dayTime) }) : t('day.closed');
+  updateReputationButton(state);
+  const open = state.phase !== 'prep';
+  const closing = state.phase === 'closing';
+  const time = closing ? t('day.closing') : open ? t('day.openFor', { time: formatOpenTime(state.dayTime) }) : t('day.closed');
   const text = `${t('day.label', { n: state.day })} · ${time}`;
   if (dayClock.textContent !== text) dayClock.textContent = text;
   $('day-speed').hidden = !open;
   closeBtn.hidden = !open;
-  if (closeBtn.textContent !== t('day.close')) closeBtn.textContent = t('day.close');
+  closeBtn.textContent = t(closing ? 'day.finishNow' : 'day.close');
+  closeBtn.title = closing ? t('day.discard') : t('day.closeHelp');
+  operationBtn.hidden = !open;
+  const status = operationMonitor.update(state, sim);
+  operationBtn.textContent = t(`ops.${status.kind}`);
+  if (!open) operationMonitor.reset();
   $('day-hud').hidden = !isAreaOpen(state, scene.area);
   for (const b of speedBtns) b.classList.toggle('active', Number(b.dataset.speed) === state.speed);
   openBtn.hidden = open || !state.profile || scene.area !== 'main';
@@ -418,19 +430,39 @@ openBtn.addEventListener('click', prepareDay);
 
 /** The player ends the day: the doors shut and the books are settled. */
 function closeDay(): void {
-  const report = sim.closeShop(state);
-  if (report) showReport(report);
+  if (state.phase === 'open') {
+    sim.beginClosing(state);
+    saveGame(); updateDayHud();
+  } else if (state.phase === 'closing') {
+    showModal({ title: t('day.finishNow'), body: t('day.discard'), buttons: [
+      { label: t('day.keepServing') },
+      { label: t('day.finishNow'), danger: true, onClick: () => { const report = sim.closeShop(state); if (report) showReport(report); } },
+    ] });
+  }
 }
 closeBtn.addEventListener('click', closeDay);
+$('reputation-btn').addEventListener('click', () => showReputation(state));
+operationBtn.addEventListener('click', () => {
+  const status = operationMonitor.current;
+  const detail = t(`ops.${status.kind}.detail`);
+  const extra = status.item ? `<p>${itemName(status.item)}${status.ingredients?.length ? ` · ${status.ingredients.map(ingredientName).join(t('list.sep'))}` : ''}${status.seconds !== undefined ? ` · ${t('ops.workRemaining', { n: status.seconds })}` : ''}</p>` : '';
+  const pantry = status.kind === 'ingredients';
+  showModal({ title: t(`ops.${status.kind}`), body: `<p>${detail}</p>${extra}`, buttons: [
+    { label: t('settings.back'), primary: true },
+    ...(status.kind === 'closing' || status.kind === 'steady' ? [] : [{ label: t(pantry ? 'tab.pantry' : 'tab.upgrades'), onClick: () => showPanelTab(pantry ? 'pantry' : 'upgrades') }]),
+  ] });
+});
 
 function showReport(report: DayReport): void {
+  $('toast').hidden = true;
   saveGame();
   panel.refresh();
   updateDayHud();
   const row = (label: string, value: string) => `<dt>${label}</dt><dd>${value}</dd>`;
+  const reportTab = report.soldOut || report.extraLost || report.outOfStock.length ? 'pantry' : report.tableLost || report.queueLost || report.doorLost ? 'upgrades' : 'menu';
   const best = report.bestSeller;
   const bestHtml = best
-    ? `<p class="report-best"><img src="${toDataURL(itemIcon(best), 3)}" alt="" />${t('report.best', {
+    ? `<p class="report-best"><img src="${toDataURL(itemArtwork(best), 1)}" alt="" />${t('report.best', {
         item: itemName(best),
         n: report.sales[best] ?? 0,
       })}</p>`
@@ -460,12 +492,23 @@ function showReport(report: DayReport): void {
       <dl class="stats">
         ${row(t('report.served'), report.served.toLocaleString())}
         ${row(t('report.missed'), t('report.missedValue', { n: report.missed, sold: report.soldOut }))}
-        ${row(t('report.revenue'), formatMoney(report.revenue))}
-        ${row(t('report.ingredients'), '−' + formatMoney(report.ingredientCost))}
+        ${row(t('report.queueLost'), report.queueLost.toLocaleString())}
+        ${row(t('report.tableLost'), report.tableLost.toLocaleString())}
+        ${row(t('report.extraLost'), report.extraLost.toLocaleString())}
+        ${row(t('report.doorLost'), report.doorLost.toLocaleString())}
+        ${row(t('report.duration'), formatOpenTime(report.duration))}
+        ${row(t('report.revenue'), formatAccountMoney(report.revenue))}
+        ${row(t('report.ingredients'), '−' + formatAccountMoney(report.ingredientCost))}
+        ${report.petCost > 0 ? row(t('pet.expense'), '−' + formatAccountMoney(report.petCost)) : ''}
+        ${report.promotionCost > 0 ? row(t('promo.expense'), '−' + formatAccountMoney(report.promotionCost)) : ''}
         ${bakeRows}
       </dl>
-      <div class="report-profit"><span>${t('report.profit')}</span><b class="big-money">${report.profit < 0 ? '−' : '+'}${formatMoney(Math.abs(report.profit))}</b></div>
+      <div class="report-profit"><span>${t('report.profit')}</span><b class="big-money">${report.profit < 0 ? '−' : '+'}${formatAccountMoney(Math.abs(report.profit))}</b></div>
+      <p class="note">${report.duration >= 60 ? t('report.perMinute', { money: formatMoney(report.profit * 60 / report.duration) }) : t('report.shortSample')}</p>
+      <p class="note">${t(report.soldOut || report.extraLost ? 'report.adviceStock' : report.tableLost ? 'report.adviceDelivery' : report.queueLost || report.doorLost ? 'report.adviceCounter' : staleCount ? 'report.adviceBake' : 'report.adviceGood')}</p>
+      ${ratingReportHtml(report)}
       ${bestHtml}
+      ${Object.keys(report.shortages).length ? `<p class="note">${t('report.shortages', { items: Object.entries(report.shortages).map(([id, n]) => `${itemName(id as ItemId)} ×${n}`).join(t('list.sep')) })}</p>` : ''}
       ${shelfNote}
       ${staleNote}
       ${out}`,
@@ -473,8 +516,9 @@ function showReport(report: DayReport): void {
       {
         label: t('report.next'),
         primary: true,
-        onClick: () => showPanelTab(report.outOfStock.length ? 'pantry' : 'menu'),
+        onClick: prepareDay,
       },
+      { label: t(`tab.${reportTab}`), onClick: () => showPanelTab(reportTab) },
     ],
   });
 }
@@ -613,12 +657,8 @@ $('settings-btn').addEventListener('click', openSettings);
 
 function resetGame(): void {
   state = createInitialState(Date.now());
-  sim.customers = [];
-  sim.baristas = [];
-  sim.queue = [];
-  sim.seats = [];
-  sim.servers = [];
-  sim.pass = [];
+  sim.reset();
+  operationMonitor.reset();
   panel.setState(state);
   regionsUI.select('main');
   updateBrand();
@@ -629,13 +669,12 @@ function resetGame(): void {
 // ------------------------------------------------------------ input
 
 function tapAt(x: number, y: number): void {
-  if (scene.hitCat(x, y)) {
+  if (scene.hitCat(x, y, Math.max(1, state.pets.length))) {
     scene.petCat();
     return;
   }
-  if (state.phase !== 'open') return;
-  sim.boost();
-  for (let i = 0; i < 3; i++) scene.sparkle(x + (Math.random() - 0.5) * 6, y + (Math.random() - 0.5) * 6);
+  if (state.phase === 'prep' || !sim.boost()) return;
+  sim.baristas.forEach((_, i) => { if (sim.isBrewing(i) && !sim.isHolding(i)) { const p = sim.baristaPose(i); scene.sparkle(p.x, p.y - 15); } });
   if (!hint.hidden) {
     hint.hidden = true;
     storage.setPreference(HINT_KEY, '1');
@@ -701,11 +740,18 @@ function frame(dt: number): void {
   // when the player asks.
   const paused = !session.active || !!document.getElementById('save-session-notice') || isModalOpen() || document.hidden || !!document.querySelector('.onboard-overlay');
   scene.paused = paused;
-  const simDt = paused ? 0 : state.phase === 'open' ? dt * state.speed : dt;
+  const simDt = paused ? 0 : state.phase !== 'prep' ? dt * state.speed : dt;
   for (let remaining = simDt; remaining > 1e-6; remaining -= SIM_STEP) {
     scene.addEvents(sim.update(state, Math.min(SIM_STEP, remaining)));
   }
 
+  if (!paused && state.phase === 'closing' && sim.finishedService) {
+    const report = sim.closeShop(state);
+    if (report) showReport(report);
+  }
+
+  // Settlement can open a dialog in this frame; hide thoughts immediately.
+  scene.paused = paused || isModalOpen();
   scene.update(dt, sim);
   sceneWrap.classList.toggle('is-panning', scene.panning);
   sceneWrap.classList.toggle('is-overview', scene.overview);
@@ -716,7 +762,7 @@ function frame(dt: number): void {
   if (uiTimer <= 0) {
     uiTimer = 0.25;
     const rate =
-      state.phase === 'open'
+      state.phase !== 'prep'
         ? t('hud.today', { money: formatMoney(state.today.revenue) })
         : t('hud.closed', { n: state.day });
     if (rate !== shownRate) rateEl.textContent = shownRate = rate;

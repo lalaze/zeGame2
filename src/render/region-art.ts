@@ -2,6 +2,7 @@ import { FLOOR_Y, SCENE_W, floorY } from '../game/layout';
 import type { RegionId } from '../game/regions';
 import { paintFloor, paintWall } from './decor-art';
 import { drawText, textWidth } from './font';
+import { glassReflection, treeLine } from './materials';
 import { mix } from './color';
 import { paintFloorFurniture } from './furniture-art';
 import { beam, type Lighting } from './lighting';
@@ -32,13 +33,16 @@ export function paintRegion(ctx: CanvasRenderingContext2D, id: RegionId, height:
           const colors = ['#728b70', '#bd6c54', '#e3be79', '#62798c', '#a8839a'];
           r(x + 3 + i * 5, y + i % 3, 4, 11 - i % 3, colors[(i + row * 2) % colors.length]);
           r(x + 4 + i * 5, y + 3 + i % 3, 2, 1, '#f4dcb0');
+          r(x + 3 + i * 5, y + 1 + i % 3, 1, 10 - i % 3, '#ffffff22');
+          r(x + 3 + i * 5, y + 9, 3, 1, '#332d352e');
         }
         r(x, y + 12, 65, 3, '#d39a62');
       }
     }
     r(109, 20, 102, 49, ink);
     r(113, 24, 94, 41, sky('#a1b6bd'));
-    r(113, 48, 94, 17, mix('#6f8865', '#1f3a30', light.dark));
+    treeLine(ctx, 113, 35, 94, 30, light.dark);
+    glassReflection(ctx, 113, 24, 94, 41, 0.16);
     r(158, 24, 4, 41, '#d6b088');
     r(113, 44, 94, 3, '#d6b088');
     r(106, 69, 108, 4, '#6a3d2c');
@@ -51,11 +55,7 @@ export function paintRegion(ctx: CanvasRenderingContext2D, id: RegionId, height:
     paintFloorFurniture(ctx, 'lamp', 100, floorY(98));
   } else {
     r(0, 0, 320, 80, sky('#b7d7d2'));
-    for (let i = 0; i < 16; i++) {
-      const x = i * 23;
-      const top = 42 + ((i * 17) % 23);
-      r(x, top, 27, 80 - top, mix(i % 2 ? '#729577' : '#87a67d', '#243d33', light.dark * 0.8));
-    }
+    treeLine(ctx, 0, 28, SCENE_W, 52, light.dark);
     if (terrace) {
       // Open sky, a low garden wall and hanging bulbs.
       r(0, 62, 320, 18, '#b8a084');
@@ -70,12 +70,21 @@ export function paintRegion(ctx: CanvasRenderingContext2D, id: RegionId, height:
         r(x - 2, y + 5, 5, 6, '#9c7448');
         r(x - 1, y + 5, 3, 4, '#ffe0a0');
       }
+      for (const x of [43, 255]) {
+        r(x, 66, 23, 8, '#966b55'); r(x - 1, 65, 25, 2, '#c89971');
+        for (let i = 0; i < 5; i++) {
+          r(x + 2 + i * 4, 61, 1, 4, '#577958');
+          r(x + 1 + i * 4, 59 + i % 2, 3, 2, i % 2 ? '#e8c178' : '#cd8791');
+          r(x + 2 + i * 4, 59 + i % 2, 1, 1, '#fff0bc');
+        }
+      }
       for (const x of [12, 308]) {
         r(x - 3, 0, 6, 90, ink);
         r(x - 1, 0, 2, 90, '#a98a60');
       }
     } else {
       // Glass roof and tall mullions, with soft reflected light.
+      for (let gx = 4; gx < 320; gx += 53) glassReflection(ctx, gx, 3, 49, 71, 0.15);
       ctx.save();
       ctx.globalAlpha = 0.25 * (1 - light.dark * 0.7);
       for (const x of [20, 128, 236]) {
@@ -93,6 +102,10 @@ export function paintRegion(ctx: CanvasRenderingContext2D, id: RegionId, height:
         const x = 12 + i * 40;
         r(x, 0, 1, 13 + i % 3 * 3, '#547452');
         r(x - 5, 12 + i % 3 * 3, 11, 5, '#748b54');
+        for (let leaf = 0; leaf < 3; leaf++) {
+          r(x - 7 + leaf * 5, 12 + i % 3 * 3 + leaf % 2, 4, 2, '#a5bb77');
+          r(x - 6 + leaf * 5, 15 + i % 3 * 3 + leaf % 2, 2, 3, '#4f785c');
+        }
         r(x - 4, 17 + i % 3 * 3, 9, 5, '#ab7850');
         r(x - 2, 22 + i % 3 * 3, 5, 1, '#674c39');
       }

@@ -9,16 +9,14 @@
 //   pastry fridge where cakes set, and the door to the pastry case).
 // The hand sink sits between storage and prep, and the dish pit is by the door,
 // where dirty plates come back in, away from the food.
-import { COOK_BATCH, type IngredientId, type ItemId } from './data';
-import { fillBakePlan, isBakery, menuItems, recipe, servingCost, servingsLeft, unlockedItems } from './economy';
+import { DAY_SECONDS, COOK_BATCH, type IngredientId, type ItemId } from './data';
+import { cookCount, dayDemand, fillBakePlan, isBakery, menuItems, recipe, servingCost, servingsLeft, unlockedItems } from './economy';
 import { FLOOR_Y, areaOrigin, doorwayY, kitchenFloorY, kitchenHeight } from './layout';
 import { routeFloorSegment, type FloorObstacle, type FloorPoint } from './navigation';
 import type { GameState } from './state';
 
 export const KITCHEN_COST = 800;
 export const MAX_COOKS = 3;
-/** Cooks start another batch of anything on the menu with this many or fewer left on the shelf. */
-export const RESTOCK_AT = 3;
 
 export type KitchenBlock = 'owned' | 'open' | 'coins' | null;
 export function kitchenBlock(state: GameState): KitchenBlock {
@@ -162,30 +160,38 @@ const METHODS: Partial<Record<ItemId, readonly Station[]>> = {
   roll: ['mixer', 'deckOven'],
   bagel: ['mixer', 'kettle', 'deckOven'],
   baguette: ['mixer', 'deckOven'],
+  cheesebun: ['mixer', 'proofer', 'deckOven'],
   pretzel: ['mixer', 'kettle', 'deckOven'],
   focaccia: ['mixer', 'deckOven'],
   ciabatta: ['mixer', 'deckOven'],
+  raisinbread: ['mixer', 'proofer', 'deckOven'],
   sourdough: ['mixer', 'deckOven'],
   rye: ['mixer', 'deckOven'],
+  chocobread: ['mixer', 'proofer', 'deckOven'],
   shokupan: ['mixer', 'proofer', 'deckOven'],
   brioche: ['mixer', 'proofer', 'deckOven'],
+  fruitbrioche: ['mixer', 'bench', 'proofer', 'deckOven'],
   garlicbread: ['mixer', 'deckOven'],
   donut: ['bench', 'proofer', 'fryer'],
   scone: ['bench', 'convection'],
+  cookie: ['bench', 'convection'],
   croissant: ['sheeter', 'proofer', 'convection'],
   painchoc: ['sheeter', 'proofer', 'convection'],
+  brownie: ['standMixer', 'convection'],
   cinnamon: ['bench', 'proofer', 'convection'],
   muffin: ['standMixer', 'convection'],
+  creampuff: ['standMixer', 'convection'],
   melonpan: ['mixer', 'proofer', 'convection'],
   eggtart: ['bench', 'convection'],
   cake: ['standMixer', 'convection'],
+  swissroll: ['standMixer', 'convection'],
   cheesecake: ['standMixer', 'convection'],
   macaron: ['standMixer', 'convection'],
 };
 
 const CHILLED: readonly IngredientId[] = ['milk', 'butter', 'eggs', 'cream', 'fruit'];
 /** Bakes that set in the pastry fridge after cooling. */
-const SET_IN_FRIDGE: readonly ItemId[] = ['cake', 'cheesecake'];
+const SET_IN_FRIDGE: readonly ItemId[] = ['cake', 'cheesecake', 'creampuff', 'swissroll'];
 
 /**
  * Every stop a batch makes: ingredients from the cold room if anything in it is
@@ -219,20 +225,54 @@ export function installedEquipment(state: GameState): Set<Equipment> {
 
 // ---------------------------------------------------------------- batches
 
-/**
- * What a free cook should bake next, if anything: the bread or pastry on today's
- * menu that's lowest on the shelf, once it's down to RESTOCK_AT. Nothing that
- * another cook is already making, or that the pantry can't stretch to.
- */
+/** Includes station work and the actual aisle route at the current room size. */
+export function batchSeconds(item: ItemId): number {
+  let from = cookHome(0);
+  let seconds = 0;
+  for (const station of batchSteps(item)) {
+    for (const point of kitchenPath(from, stationSpot(station))) {
+      seconds += Math.hypot(point.x - from.x, point.y - from.y) / 62;
+      from = { ...point, facing: 'right' };
+    }
+    seconds += STATION_SECONDS[station];
+  }
+  for (const point of kitchenPath(from, cookHome(0))) {
+    seconds += Math.hypot(point.x - from.x, point.y - from.y) / 62;
+    from = { ...point, facing: 'right' };
+  }
+  return seconds;
+}
+
+/** One shared estimate for the morning shelf, reorder level and kitchen workload. */
+export function bakeryPlan(state: GameState): Map<ItemId, { rate: number; lead: number; morning: number; trigger: number }> {
+  const demand = dayDemand(state);
+  const dishes = menuItems(state).filter((m) => isBakery(m.id));
+  const cooks = Math.max(1, cookCount(state));
+  const cycle = dishes.reduce((sum, m) => sum + batchSeconds(m.id), 0) / cooks;
+  return new Map(dishes.map((m) => {
+    const rate = (demand.get(m.id) ?? 0) / DAY_SECONDS;
+    const lead = Math.max(batchSeconds(m.id), cycle);
+    // At most a forecast's worth; slow-selling dishes need only one spare serving.
+    const trigger = Math.min(Math.ceil(rate * DAY_SECONDS), Math.max(1, Math.ceil(rate * lead) + 1));
+    return [m.id, { rate, lead, trigger, morning: trigger }];
+  }));
+}
+
+export function kitchenLoad(state: GameState): number {
+  if (!state.kitchen) return 0;
+  return [...bakeryPlan(state)].reduce((sum, [id, p]) => sum + p.rate * batchSeconds(id) / COOK_BATCH, 0) / cookCount(state);
+}
+
 export function nextBatch(state: GameState, baking: readonly ItemId[]): { item: ItemId; n: number } | null {
   if (!state.kitchen || state.phase !== 'open') return null;
-  let best: { item: ItemId; n: number; left: number } | null = null;
-  for (const m of menuItems(state)) {
-    if (!isBakery(m.id) || baking.includes(m.id)) continue;
-    const left = state.shelf[m.id] ?? 0;
-    if (left > RESTOCK_AT) continue;
-    const n = Math.min(COOK_BATCH, servingsLeft(state, m.id));
-    if (n >= 1 && (!best || left < best.left)) best = { item: m.id, n, left };
+  let best: { item: ItemId; n: number; urgency: number } | null = null;
+  for (const [item, plan] of bakeryPlan(state)) {
+    if (baking.includes(item)) continue;
+    const left = state.shelf[item] ?? 0;
+    if (left > plan.trigger) continue;
+    const n = Math.min(COOK_BATCH, servingsLeft(state, item), Math.max(1, Math.ceil(plan.rate * DAY_SECONDS)));
+    const urgency = left / Math.max(plan.rate, 0.001) - plan.lead;
+    if (n >= 1 && (!best || urgency < best.urgency)) best = { item, n, urgency };
   }
   return best && { item: best.item, n: best.n };
 }
@@ -240,13 +280,15 @@ export function nextBatch(state: GameState, baking: readonly ItemId[]): { item: 
 /** A cook takes the ingredients for a batch out of the pantry. */
 export function startBatch(state: GameState, item: ItemId, n: number): void {
   if (!state.kitchen || state.phase !== 'open' || !isBakery(item) || !menuItems(state).some((m) => m.id === item) || !Number.isInteger(n) || n <= 0 || n > servingsLeft(state, item)) return;
+  state.inProduction[item] = (state.inProduction[item] ?? 0) + n;
   for (const [ing, k] of recipe(item)) state.pantry[ing] -= k * n;
   state.today.ingredientCost += servingCost(item) * n;
 }
 
 /** A finished batch goes into the pastry case. */
 export function shelveBatch(state: GameState, item: ItemId, n: number): void {
-  if (!state.kitchen || state.phase !== 'open' || !isBakery(item) || state.items[item] <= 0 || !Number.isInteger(n) || n <= 0) return;
+  if (!state.kitchen || state.phase === 'prep' || !isBakery(item) || state.items[item] <= 0 || !Number.isInteger(n) || n <= 0) return;
+  state.inProduction[item] = Math.max(0, (state.inProduction[item] ?? 0) - n);
   state.shelf[item] = (state.shelf[item] ?? 0) + n;
   state.today.baked[item] = (state.today.baked[item] ?? 0) + n;
 }

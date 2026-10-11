@@ -1,4 +1,6 @@
-import { CustomerCastCycle } from './customer-cast';
+import { CUSTOMER_CAST, CustomerCastCycle } from './customer-cast';
+import { updatePromotion } from './promotion';
+import { updatePetCare } from './pets';
 import { COMBO_CHANCE, MAX_QUEUE, PASS_SLOTS, RING_AGAIN, VIP_CHANCE, isDrink, type ItemId } from './data';
 import { finishDay, type DayReport } from './day';
 import { CELL, furnitureDef } from './furniture';
@@ -47,9 +49,13 @@ import {
   tableArea,
   tablePos,
 } from './layout';
-import { batchSteps, cookHome, kitchenPath, nextBatch, shelveBatch, startBatch, stationSpot, STATION_SECONDS, type Station } from './kitchen';
+import { batchSteps, cookHome, kitchenPath, nextBatch, shelveBatch, startBatch, stationSpot, kitchenObstacles, STATION_SECONDS, type Station } from './kitchen';
 import { AREA_IDS, activeTableIndices, adjacentArea, areaAtX, areaConnections, regionOffset, type AreaId } from './regions';
 import type { GameState, Look } from './state';
+import { validSnapshot, type SimSnapshot } from './sim-snapshot';
+
+import { recordReview, mealReview, type ReviewInput } from './reputation';
+import { recordServings } from './taste';
 
 export type { Look };
 
@@ -77,9 +83,13 @@ export interface Walker {
 }
 
 export interface Customer extends Walker {
+  /** One review per visit, persisted with in-flight orders. */
+  reviewed: boolean;
+  waitSeconds: number;
+  missingExtra: boolean;
   id: number;
   phase: CustomerPhase;
-  /** Transient visual design, never written into the player save. */
+  /** Visual cast identity, kept with the live visit when service is saved. */
   appearanceId?: number;
   look: Look;
   order: ItemId;
@@ -181,19 +191,146 @@ export class Sim {
   rack: ItemId[] = [];
   private spawnTimer = 1.5;
   private nextId = 1;
-  private readonly customerCast: CustomerCastCycle;
+  private customerCast: CustomerCastCycle;
   private castRandomState = 1;
   private floorState: GameState | null = null;
   private navigationSignature = '';
   private kitchenStage = -1;
   private navigationTables: number[] = [];
   private navigationObstacles = new Map<AreaId, FloorObstacle[]>();
+  private boostCooldown = 0;
 
   constructor(private rng: () => number = Math.random) {
     this.customerCast = new CustomerCastCycle(() => {
       this.castRandomState = (Math.imul(this.castRandomState, 1664525) + 1013904223) >>> 0;
       return this.castRandomState / 2 ** 32;
     });
+  }
+
+  /** A new café starts with no staff jobs, customer visits, or cached routes. */
+  reset(): void {
+    this.customers = []; this.baristas = []; this.queue = []; this.seats = [];
+    this.servers = []; this.pass = []; this.cooks = []; this.rack = [];
+    this.spawnTimer = 1.5; this.nextId = 1; this.boostCooldown = 0;
+    this.castRandomState = 1;
+    this.customerCast = new CustomerCastCycle(() => {
+      this.castRandomState = (Math.imul(this.castRandomState, 1664525) + 1013904223) >>> 0;
+      return this.castRandomState / 2 ** 32;
+    });
+    this.floorState = null; this.navigationSignature = ''; this.kitchenStage = -1;
+    this.navigationTables = []; this.navigationObstacles.clear();
+    setKitchenLevel(0);
+  }
+
+  snapshot(state: GameState): SimSnapshot {
+    // Capture routes and cook positions against the same layout as the economic save.
+    this.sync(state);
+    return structuredClone({
+      version: 2, kitchenLevel: this.kitchenStage, day: state.day, phase: state.phase, served: state.today.served, height: sceneHeight(),
+      customers: this.customers, baristas: this.baristas, servers: this.servers, cooks: this.cooks,
+      queue: this.queue, seats: this.seats, pass: this.pass, rack: this.rack,
+      spawnTimer: this.spawnTimer, nextId: this.nextId, boostCooldown: this.boostCooldown,
+      customerCast: this.customerCast.snapshot(), castRandomState: this.castRandomState,
+    });
+  }
+
+  restore(raw: unknown, state: GameState): boolean {
+    if (!validSnapshot(raw, state)) return false;
+    const saved = structuredClone(raw);
+    saved.kitchenLevel = state.kitchen ? state.upgrades.cook : 0;
+    setKitchenLevel(saved.kitchenLevel);
+    if (saved.version === 1) {
+      // v1 used a different counter, kitchen footprint and unchecked straight
+      // paths. Migrate visits and paid work at safe semantic anchors rather than
+      // replaying obsolete coordinates or discarding already-consumed stock.
+      const place = (w: Walker, point: FloorPoint) => {
+        w.x = w.tx = point.x; w.y = w.ty = point.y;
+        w.via = []; w.journey = []; w.pathBlocked = false;
+      };
+      for (const c of saved.customers) {
+        const point = seated(c) && c.seat >= 0 ? seatSpot(Math.floor(c.seat / 2), c.seat % 2 as 0 | 1)
+          : c.phase === 'queue' ? queueSpot(saved.queue.indexOf(c.id))
+          : c.phase === 'exiting' ? doorSpot()
+          : c.phase === 'toCounter' ? queueSpot(0)
+          : serviceSpot(Math.max(0, c.spot));
+        place(c, point);
+      }
+      saved.servers.forEach((server, i) => place(server, server.phase === 'delivering' ? passSpot() : serverHome(i)));
+      saved.cooks.forEach((cook, i) => place(cook, cook.batch ? stationSpot(cook.batch.steps[cook.batch.step]) : cookHome(i)));
+      saved.height = sceneHeight();
+    }
+    // A layout-incompatible runtime is discarded atomically; economic progress
+    // remains valid. Do not carry old coordinates through counters or appliances.
+    const geometry = new Sim(this.rng);
+    geometry.refreshNavigation(state, false);
+    const guestPositionClear = (w: Walker) => {
+      const p = resizeRoomPoint(w, saved.height);
+      if (Math.abs(p.x - 160) < 0.001 && p.y >= sceneHeight() - 8 && p.y <= sceneHeight() + 12) return true;
+      const area = areaAtPoint(p.x, p.y);
+      if (!area || area === 'kitchen' || area !== 'main' && !state.regions.includes(area)) return false;
+      if (geometry.chairApproach(p, false)) return true;
+      return !(geometry.navigationObstacles.get(area) ?? []).some((r) => segmentCrossesObstacle(p, p, r));
+    };
+    if ([...saved.customers, ...saved.servers].some((w) => !guestPositionClear(w))) return false;
+    if (saved.cooks.some((w) => {
+      if (w.x >= -12 && w.x <= 202 && Math.abs(w.y - doorwayY('main', 'left')) < 0.001) return false;
+      const area = areaAtPoint(w.x, w.y);
+      return area !== 'kitchen' || kitchenObstacles().some((r) => segmentCrossesObstacle(w, w, r));
+    })) return false;
+    let cookRoutes: FloorPoint[][];
+    try {
+      cookRoutes = saved.cooks.map((cook, i) => kitchenPath(cook,
+        cook.batch ? stationSpot(cook.batch.steps[cook.batch.step]) : cookHome(i)));
+    } catch {
+      return false;
+    }
+    this.customers = saved.customers.map((c) => ({
+      ...c,
+      reviewed: c.reviewed ?? (c.hasCup || c.soldOut || c.phase === 'sitting' || c.phase === 'exiting'),
+      waitSeconds: c.waitSeconds ?? 0,
+      missingExtra: c.missingExtra ?? false,
+    }));
+    this.baristas = saved.baristas;
+    this.servers = saved.servers;
+    this.cooks = saved.cooks;
+    this.queue = saved.queue;
+    this.seats = saved.seats;
+    this.pass = saved.pass;
+    this.rack = saved.rack;
+    this.spawnTimer = saved.spawnTimer;
+    this.nextId = saved.nextId;
+    this.boostCooldown = saved.boostCooldown;
+    this.castRandomState = saved.version === 1 ? 1 : saved.castRandomState;
+    if (saved.version === 1) {
+      const known = saved.customers.flatMap((c) => c.appearanceId === undefined ? [] : [c.appearanceId]);
+      this.customerCast.restore({
+        remaining: known.length ? CUSTOMER_CAST.map((c) => c.id).filter((id) => !known.includes(id)) : [],
+        previous: known.at(-1) ?? -1,
+      });
+    } else this.customerCast.restore(saved.customerCast);
+    // JSON duplicates tray objects that also live on the pass. Restore shared identity.
+    for (const server of this.servers) server.plates = server.plates.map((p) => this.pass.find((plate) => plate.customerId === p.customerId) ?? p);
+    this.kitchenStage = saved.kitchenLevel;
+    this.navigationSignature = '';
+    this.refreshNavigation(state, false);
+    // Rebuild semantic destinations against the current viewport and furniture;
+    // never trust saved obstacle-corner waypoints from a stale arrangement.
+    this.resizeScene(saved.height);
+    for (const [i, cook] of this.cooks.entries()) this.walk(cook, ...cookRoutes[i]);
+    state.inProduction = {};
+    for (const cook of this.cooks) if (cook.batch) state.inProduction[cook.batch.item] = (state.inProduction[cook.batch.item] ?? 0) + cook.batch.n;
+    return true;
+  }
+
+  beginClosing(state: GameState): void {
+    if (state.phase !== 'open') return;
+    state.phase = 'closing';
+    for (const c of this.customers) if (c.phase === 'queue') this.exit(c);
+    this.queue = [];
+  }
+
+  get finishedService(): boolean {
+    return !this.customers.some((c) => !['sitting', 'exiting'].includes(c.phase)) && !this.cooks.some((c) => c.batch);
   }
 
   resizeScene(fromHeight: number): void {
@@ -292,7 +429,7 @@ export class Sim {
   }
 
   /** Cache static floor geometry; ordering and walking do not rebuild it. */
-  private refreshNavigation(state: GameState): void {
+  private refreshNavigation(state: GameState, replan = true): void {
     this.floorState = state;
     const tables = activeTableIndices(state);
     const signature = `${sceneHeight()}:${tables.join(',')}:${state.decor.placed.map((p) => `${p.id},${p.col},${p.row}`).join(';')}`;
@@ -327,7 +464,7 @@ export class Sim {
       });
     }
     for (const w of [...this.customers.filter((c) => !seated(c)), ...this.servers])
-      if (w.journey?.length) this.walk(w, ...w.journey);
+      if (replan && w.journey?.length) this.walk(w, ...w.journey);
   }
 
   /** Keep Arrange from placing solid furniture on a customer's or staff member's feet. */
@@ -449,6 +586,9 @@ export class Sim {
     const appearance = this.customerCast.next();
     const c: Customer = {
       id: this.nextId++,
+      reviewed: false,
+      waitSeconds: 0,
+      missingExtra: false,
       x: door.x,
       y: door.y,
       tx: pos.x,
@@ -536,6 +676,12 @@ export class Sim {
     return available.length > 0 ? available[this.randInt(available.length)] : -1;
   }
 
+  private review(state: GameState, c: Customer, review: ReviewInput): void {
+    if (c.reviewed) return;
+    c.reviewed = true;
+    recordReview(state, review);
+  }
+
   /** The customer pays for their order, wherever they get it. */
   private charge(state: GameState, c: Customer, events: SimEvent[]): void {
     const bought = (c.extra ? [c.order, c.extra] : [c.order]).filter((id) => canPrepareItem(state, id));
@@ -547,6 +693,8 @@ export class Sim {
     state.today.revenue += amount;
     for (const id of bought) state.today.sales[id] = (state.today.sales[id] ?? 0) + 1;
     events.push({ type: 'sale', amount, x: c.x, y: c.y - 52, vip: c.vip });
+    this.review(state, c, mealReview(state, bought, c.waitSeconds, c.missingExtra));
+    recordServings(state, bought);
     c.hasCup = true;
     c.mood = 'happy';
     c.moodTimer = 1.5;
@@ -580,12 +728,19 @@ export class Sim {
         c.moodTimer = 2.2;
         state.today.missed++;
         state.today.soldOut++;
+        this.review(state, c, { stars: 1, reason: 'soldOut' });
+        state.today.shortages[c.order] = (state.today.shortages[c.order] ?? 0) + 1;
         events.push({ type: 'soldout', item: c.order, x: c.x, y: c.y - 30 });
         this.exit(c);
         return;
       }
       // The add-on is skipped (not a deal breaker) if it has sold out.
-      if (c.extra && !consumeServing(state, c.extra, state.today)) c.extra = null;
+      if (c.extra && !consumeServing(state, c.extra, state.today)) {
+        state.today.extraLost++;
+        c.missingExtra = true;
+        state.today.shortages[c.extra] = (state.today.shortages[c.extra] ?? 0) + 1;
+        c.extra = null;
+      }
       c.phase = 'ordering';
       b.total = b.remaining = prepTime(state, c.order) + (c.extra ? prepTime(state, c.extra) : 0);
       // With a table free, some stay: they take a seat and the order is brought over.
@@ -779,19 +934,27 @@ export class Sim {
   update(state: GameState, dt: number): SimEvent[] {
     const events: SimEvent[] = [];
     this.sync(state);
+    this.boostCooldown = Math.max(0, this.boostCooldown - dt);
 
     const open = state.phase === 'open';
-    if (open) state.dayTime += dt;
+    const running = state.phase !== 'prep';
+    if (running) state.dayTime += dt;
+    updatePetCare(state, dt);
+    updatePromotion(state, dt);
     this.spawnTimer -= dt;
     if (this.spawnTimer <= 0) {
       // Jittered so customers don't march in like clockwork.
       this.spawnTimer = (0.5 + this.rng()) / arrivalRate(state);
-      if (open && this.queue.length < MAX_QUEUE) this.spawn(state);
+      if (open) {
+        if (this.queue.length < MAX_QUEUE) this.spawn(state);
+        else state.today.doorLost++;
+      }
     }
 
     this.callNext();
 
     for (const c of this.customers) {
+      if (running && !c.reviewed && c.phase !== 'sitting' && c.phase !== 'exiting') c.waitSeconds += dt;
       if (step(c, dt)) this.arrive(state, c, events);
 
       if (c.moodTimer > 0) {
@@ -806,12 +969,15 @@ export class Sim {
           this.relayoutQueue();
           c.mood = 'sad';
           c.moodTimer = 2;
-          if (open) state.today.missed++;
+          if (running) {
+            state.today.missed++; state.today.queueLost++;
+            this.review(state, c, { stars: 2, reason: 'queueWait' });
+          }
           events.push({ type: 'walkout', x: c.x, y: c.y - 30 });
           this.exit(c);
         }
       } else if (c.phase === 'ordering' && c.dineIn) {
-        // Ordered and paid up front; off to the table to wait.
+        // Ordered; payment happens when the server delivers.
         c.timer -= dt;
         if (c.timer <= 0) {
           c.phase = 'toSeat';
@@ -825,7 +991,10 @@ export class Sim {
           this.pass = this.pass.filter((p) => p.customerId !== c.id || p.server !== null);
           c.mood = 'sad';
           c.moodTimer = 2;
-          if (open) state.today.missed++;
+          if (running) {
+            state.today.missed++; state.today.tableLost++;
+            this.review(state, c, { stars: 1, reason: 'tableWait' });
+          }
           events.push({ type: 'walkout', x: c.x, y: c.y - 30 });
           this.exit(c);
         }
@@ -862,7 +1031,12 @@ export class Sim {
    * books are settled.
    */
   closeShop(state: GameState): DayReport | null {
-    if (state.phase !== 'open') return null;
+    if (state.phase === 'prep') return null;
+    for (const c of this.customers) {
+      if (c.phase === 'toCounter' || c.phase === 'ordering' || c.phase === 'toSeat' || c.phase === 'waiting') {
+        this.review(state, c, { stars: 1, reason: 'cancelled' });
+      }
+    }
     this.sendHome();
     return finishDay(state);
   }
@@ -894,6 +1068,7 @@ export class Sim {
 
   /** Player taps to help: every brewing barista jumps ahead a bit. */
   boost(): boolean {
+    if (this.boostCooldown > 0) return false;
     let any = false;
     for (const b of this.baristas) {
       if (b.customerId !== null && b.total > 0 && b.remaining > 0) {
@@ -901,6 +1076,7 @@ export class Sim {
         any = true;
       }
     }
+    if (any) this.boostCooldown = 1;
     return any;
   }
 

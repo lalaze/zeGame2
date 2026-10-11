@@ -7,7 +7,7 @@ import { Panel } from './panel';
 
 vi.mock('../render/sprites', () => ({
   ingredientIcon: () => document.createElement('canvas'),
-  itemIcon: () => document.createElement('canvas'),
+  itemArtwork: () => document.createElement('canvas'),
   upgradeIcon: () => document.createElement('canvas'),
   toDataURL: () => 'data:image/png;base64,',
 }));

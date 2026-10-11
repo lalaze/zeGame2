@@ -1,7 +1,8 @@
 import { CUSTOMER_CAST, type CustomerDesign } from '../game/customer-cast';
+import type { CatId } from '../game/pets';
 import type { IngredientId, ItemId, UpgradeId } from '../game/data';
 import type { Look } from '../game/state';
-import { edge, ramp } from './color';
+import { edge, mix, ramp } from './color';
 
 /** Warm near-black used for outlines, like Stardew's, rather than pure black. */
 export const OUTLINE = '#2e1c16';
@@ -20,13 +21,13 @@ export type Outline = string | 'sel' | false;
  * character is looked up in the palette. With an outline, a 1px border is
  * traced around the shape.
  */
-export function pixelSprite(rows: readonly string[], palette: Palette, outline: Outline = 'sel'): HTMLCanvasElement {
+export function pixelSprite(rows: readonly string[], palette: Palette, outline: Outline = 'sel', density = 1): HTMLCanvasElement {
   const pad = outline ? 1 : 0;
   const h = rows.length;
   const w = Math.max(...rows.map((r) => r.length));
   const canvas = document.createElement('canvas');
-  canvas.width = w + pad * 2;
-  canvas.height = h + pad * 2;
+  canvas.width = (w + pad * 2) * density;
+  canvas.height = (h + pad * 2) * density;
   const ctx = canvas.getContext('2d')!;
   const at = (x: number, y: number) => (y >= 0 && y < h && x >= 0 && x < w ? (rows[y][x] ?? '.') : '.');
   const color = (ch: string) => palette[ch] ?? '#ff00ff';
@@ -39,7 +40,7 @@ export function pixelSprite(rows: readonly string[], palette: Palette, outline: 
         const n = [at(x, y + 1), at(x - 1, y), at(x + 1, y), at(x, y - 1)].find((ch) => ch !== '.');
         if (!n) continue;
         ctx.fillStyle = outline === 'sel' ? edge(color(n)) : outline;
-        ctx.fillRect(x + pad, y + pad, 1, 1);
+        ctx.fillRect((x + pad) * density, (y + pad) * density, density, density);
       }
     }
   }
@@ -47,8 +48,28 @@ export function pixelSprite(rows: readonly string[], palette: Palette, outline: 
     for (let x = 0; x < w; x++) {
       const ch = at(x, y);
       if (ch === '.') continue;
-      ctx.fillStyle = color(ch);
-      ctx.fillRect(x + pad, y + pad, 1, 1);
+      const base = color(ch);
+      // A consistent upper-left key light gives all silhouettes volume.
+      const top = at(x, y - 1) === '.';
+      const left = at(x - 1, y) === '.';
+      const bottom = at(x, y + 1) === '.';
+      const right = at(x + 1, y) === '.';
+      const lit = top || left ? mix(base, '#fff1cf', 0.13) : bottom || right ? mix(base, '#493951', 0.16) : base;
+      const dx = (x + pad) * density, dy = (y + pad) * density;
+      ctx.fillStyle = lit;
+      ctx.fillRect(dx, dy, density, density);
+      if (density > 1) {
+        // Subpixel strokes follow material boundaries, rather than adding a
+        // bevel to every pixel. This creates finer art, not a blurred upscale.
+        if (at(x, y - 1) !== ch) {
+          ctx.fillStyle = mix(lit, '#fff5df', 0.24);
+          ctx.fillRect(dx, dy, density, 1);
+        }
+        if (at(x + 1, y) !== ch) {
+          ctx.fillStyle = mix(lit, '#453344', 0.16);
+          ctx.fillRect(dx + density - 1, dy + 1, 1, density - 1);
+        }
+      }
     }
   }
   return canvas;
@@ -1209,6 +1230,241 @@ export const ITEM_ART: Record<ItemId, { rows: string[]; palette: Palette }> = {
     ],
     palette: { p: '#ef8fb4', P: '#ffc6dc', g: '#9fd47e', G: '#cdeeb4', y: '#f2d14e', Y: '#fff0a0', w: '#fdf6ec' },
   },
+  cortado: {
+    rows: [
+      '............',
+      '............',
+      '..gGGGGGg...',
+      '..gcccccg...',
+      '..gCCCCCppp.',
+      '..gmmmmmg.p.',
+      '..gmmmmmgpp.',
+      '...ggggg....',
+      '..ddddddd...',
+      '...DDDDD....',
+    ],
+    palette: { g: '#a9d5dc', G: '#eefbff', c: '#563022', C: '#bd8554', m: '#eacaa4', p: '#94bac2', d: '#f3e6d3', D: '#c4b096' },
+  },
+  vienna: {
+    rows: [
+      '.....w......',
+      '....wWw.....',
+      '...wWWww....',
+      '..wwWkWww...',
+      '..gkkkkkg...',
+      '..gcccccgpp.',
+      '..gcccccg.p.',
+      '..gCCCCCgpp.',
+      '...ggggg....',
+      '..ddddddd...',
+    ],
+    palette: { w: '#f8e9d2', W: '#fffaf0', k: '#976342', g: '#b1d7df', c: '#532d22', C: '#865035', p: '#91b9c5', d: '#e8d5bb' },
+  },
+  dirty: {
+    rows: [
+      '............',
+      '..gGGGGGGg..',
+      '..gccCCccg..',
+      '..gccCcccg..',
+      '..gmcCmmmg..',
+      '..gmmCmmmg..',
+      '..gmmmmmmg..',
+      '..gMmmmmMg..',
+      '...gggggg...',
+      '............',
+    ],
+    palette: { g: '#a6cbd3', G: '#eafaff', c: '#4b2d26', C: '#986440', m: '#fff0d9', M: '#e0ceb3' },
+  },
+  creamcoffee: {
+    rows: [
+      '.....s......',
+      '....www.....',
+      '..gwWswWwg..',
+      '..gwwwwwwg..',
+      '..gccccccg..',
+      '..gccccccg..',
+      '..gCccccCg..',
+      '..gCCCCCCg..',
+      '...gggggg...',
+      '............',
+    ],
+    palette: { s: '#c3e3e8', w: '#f5e9d5', W: '#ffffff', g: '#89b9c6', c: '#56392c', C: '#966744' },
+  },
+  lemontea: {
+    rows: [
+      '........p...',
+      '..yy...p....',
+      '.yYyy.p.....',
+      '..yggpGGg...',
+      '...gaiaag...',
+      '...gaaIag...',
+      '...gaiaag...',
+      '...gAAAAg...',
+      '....gggg....',
+      '............',
+    ],
+    palette: { p: '#f1d579', y: '#efbd35', Y: '#fff3a5', g: '#aacfd4', G: '#f0fcff', a: '#ce893b', A: '#a9652c', i: '#e7f6e9', I: '#cbe4dd' },
+  },
+  fruittea: {
+    rows: [
+      '........p...',
+      '.......p....',
+      '..gGGGpGGg..',
+      '..giAAAiAg..',
+      '..gArAyyAg..',
+      '..gArrAyAg..',
+      '..gAAoAAAg..',
+      '..gAooArAg..',
+      '...gggggg...',
+      '............',
+    ],
+    palette: { p: '#6ca677', g: '#a7d8dc', G: '#f3ffff', i: '#e5f8ef', A: '#efb36b', r: '#dd5e6d', y: '#fce78a', o: '#e88837' },
+  },
+  hojicha: {
+    rows: [
+      '....s..s....',
+      '...s..s.....',
+      '............',
+      '..ttttttt...',
+      '..tffxffttt.',
+      '..tTTTTTt.t.',
+      '..tTTTTTttt.',
+      '..ttttttt...',
+      '...ttttt....',
+      '..ddddddd...',
+    ],
+    palette: { s: '#e9dfce', t: '#867653', T: '#ae9e72', f: '#ead4ad', x: '#846044', d: '#cfc2a5' },
+  },
+  matchafloat: {
+    rows: [
+      '.....www....',
+      '....wWWww...',
+      '...wWWWWww..',
+      '..gwwwwwwg..',
+      '..gMMfMMMg..',
+      '..gMMfMMMg..',
+      '..gMMMMMMg..',
+      '..gmmmmmmg..',
+      '...gggggg...',
+      '............',
+    ],
+    palette: { w: '#f4e2c5', W: '#fff7e3', g: '#a4cfd3', M: '#89af55', m: '#5e813b', f: '#e9ecc9' },
+  },
+  cheesebun: {
+    rows: [
+      '............',
+      '....cccc....',
+      '..ccYYYYcc..',
+      '.cCYYyyYYCc.',
+      '.cYyYYYYyCc.',
+      'cCYYYhYYYYCc',
+      'cCCYYYYYYCco',
+      '.ocCCCCCCoo.',
+      '..oooooooo..',
+    ],
+    palette: { c: '#b96d2f', C: '#db9747', Y: '#f5cb65', y: '#fff0a0', h: '#edac43', o: '#88461f' },
+  },
+  raisinbread: {
+    rows: [
+      '............',
+      '...cccccc...',
+      '..cChyhhyc..',
+      '.cChrhhhrCc.',
+      '.cChhhhrhCc.',
+      '.cCrhhhhhCc.',
+      '.cChhrhhhCo.',
+      '..cooooooo..',
+      '............',
+    ],
+    palette: { c: '#a46632', C: '#ce9651', h: '#efd09a', y: '#ffe1ad', r: '#66413e', o: '#784925' },
+  },
+  chocobread: {
+    rows: [
+      '............',
+      '..cccccccc..',
+      '.cCmmCmmCCc.',
+      '.cCmmCmmCCc.',
+      '.cCmmCmmCCc.',
+      '.cCCCCCCCCc.',
+      '.cMMMMMMMMo.',
+      '..oooooooo..',
+      '............',
+    ],
+    palette: { c: '#683e2d', C: '#a26e46', m: '#f0c88d', M: '#865735', o: '#4d2d25' },
+  },
+  fruitbrioche: {
+    rows: [
+      '....cc......',
+      '...cYYcc....',
+      '..ccYrYYc...',
+      '.cYYcYYcc...',
+      '..cYYccYYc..',
+      '.cYrcYYcYc..',
+      '..ccYrcYcc..',
+      '...cYYcc....',
+      '....oo......',
+    ],
+    palette: { c: '#bd7833', Y: '#f1c16b', r: '#b35446', o: '#895025' },
+  },
+  cookie: {
+    rows: [
+      '............',
+      '...cccccc...',
+      '..cYYkYYCc..',
+      '.cYkYYYYYCc.',
+      '.cYYYYkYYCc.',
+      '.cYYkYYYkCc.',
+      '..cYYYYYCo..',
+      '...oooooo...',
+      '............',
+    ],
+    palette: { c: '#bd813f', Y: '#e7bc79', C: '#d19a50', k: '#56372c', o: '#925d30' },
+  },
+  brownie: {
+    rows: [
+      '............',
+      '....cccccc..',
+      '..ccKhKKhKc.',
+      '.cKKKKhKKKc.',
+      '.cKhKKKKhKc.',
+      '.cbbbbbbbbc.',
+      '.cBbbBbbBbc.',
+      '.cbbbbbbbbo.',
+      '..oooooooo..',
+    ],
+    palette: { c: '#69402f', K: '#8d553b', h: '#c48b5b', b: '#563126', B: '#7a4a34', o: '#3d261f' },
+  },
+  creampuff: {
+    rows: [
+      '............',
+      '....yyyy....',
+      '..yyYhhYyy..',
+      '.yYYhYYYyyc.',
+      '.yYYYYYYycc.',
+      '..wwWwwWww..',
+      '.cwwwwwwwwc.',
+      '.cYYYYYYYCc.',
+      '..cooooooc..',
+      '............',
+    ],
+    palette: { y: '#d69c52', Y: '#efbf78', h: '#ffdda0', c: '#ae713a', w: '#f9eed7', W: '#ffffff', C: '#dba15a', o: '#946033' },
+  },
+  swissroll: {
+    rows: [
+      '.....l......',
+      '....rrr.....',
+      '...rRrr.....',
+      '..yyyyyyy...',
+      '.ywwwwwwwy..',
+      'ywyyrryywwy.',
+      'ywywwwwywwy.',
+      'ywywrrwywwy.',
+      'ywwyyyywwwy.',
+      '.yyyyyyyyy..',
+      '..oooooooo..',
+    ],
+    palette: { l: '#65944b', r: '#dd5568', R: '#ff9b9f', y: '#e9bc7e', w: '#fff1db', o: '#b7864e' },
+  },
 };
 
 const itemCache = new Map<string, HTMLCanvasElement>();
@@ -1222,6 +1478,18 @@ export function itemIcon(id: ItemId, outline = true): HTMLCanvasElement {
     itemCache.set(key, c);
   }
   return c;
+}
+
+/** Three-times-density artwork for menus, reports and transparent PNG export. */
+export function itemArtwork(id: ItemId): HTMLCanvasElement {
+  const key = `${id}.artwork`;
+  let canvas = itemCache.get(key);
+  if (!canvas) {
+    const art = ITEM_ART[id];
+    canvas = pixelSprite(art.rows, art.palette, 'sel', 3);
+    itemCache.set(key, canvas);
+  }
+  return canvas;
 }
 
 // ---------------------------------------------------------------- ingredients (12x10)
@@ -1477,6 +1745,20 @@ export function upgradeIcon(id: UpgradeId): HTMLCanvasElement {
 // ---------------------------------------------------------------- the café cat
 
 const CAT_PALETTE: Palette = { o: '#ef9f4c', O: '#f8c27e', d: '#c06a2c', e: '#2a1a1f', n: '#f08f8f', W: '#fdf1e0', w: '#e9d6bd' };
+const CAT_COATS: Record<CatId, Palette> = {
+  ginger: CAT_PALETTE,
+  tuxedo: { ...CAT_PALETTE, o: '#41434b', O: '#686977', d: '#252831', e: '#a9c982' },
+  calico: { ...CAT_PALETTE, o: '#f5e9d5', O: '#efac66', d: '#554039' },
+  tabby: { ...CAT_PALETTE, o: '#9e8870', O: '#c4ad8c', d: '#584635', W: '#d8c7a8', w: '#b7a081', e: '#2b492a' },
+  black: { ...CAT_PALETTE, o: '#343641', O: '#585d6c', d: '#22232d', W: '#3f4350', w: '#292d38', e: '#c4d879' },
+  white: { ...CAT_PALETTE, o: '#f5f2e7', O: '#ffffff', d: '#c4c8cb', W: '#ffffff', w: '#dbe0e2', e: '#477fa5' },
+  british: { ...CAT_PALETTE, o: '#8595aa', O: '#aebaca', d: '#55647a', W: '#a0aec0', w: '#6b7d94', e: '#ecb866' },
+  american: { ...CAT_PALETTE, o: '#b8bec4', O: '#e3e5e4', d: '#5c6671', W: '#f2eee6', w: '#b4b6b9', e: '#42634c' },
+  siamese: { ...CAT_PALETTE, o: '#e4cfaa', O: '#f9e4bf', d: '#675047', W: '#f5e4ca', w: '#9e8470', e: '#68bde7' },
+  ragdoll: { ...CAT_PALETTE, o: '#e6ded2', O: '#ffffff', d: '#918075', W: '#ffffff', w: '#c4b9ac', e: '#4a9acb' },
+  persian: { ...CAT_PALETTE, o: '#efc9a1', O: '#ffe8c8', d: '#c59174', W: '#fff0d8', w: '#dfb58f', e: '#967237' },
+  mainecoon: { ...CAT_PALETTE, o: '#867060', O: '#ac9279', d: '#493e39', W: '#ccb89b', w: '#aa927b', e: '#d6bc63' },
+};
 const CAT_BASE = [
   '.d......d.......',
   '.dd....dd.......',
@@ -1495,19 +1777,32 @@ const withTail = (rows: string[], tail: [number, number][]) =>
   rows.map((r, y) => [...r].map((ch, x) => (tail.some(([tx, ty]) => tx === x && ty === y) ? 'd' : ch)).join(''));
 
 export const catFrames = (() => {
-  let frames: Record<'idle' | 'swish' | 'blink' | 'happy', HTMLCanvasElement> | null = null;
-  return () => {
-    if (frames) return frames;
-    const idle = withTail(CAT_BASE, [[12, 10], [13, 9], [13, 8], [14, 7]]);
-    const swish = withTail(CAT_BASE, [[12, 10], [13, 10], [14, 10], [15, 9]]);
+  const cache = new Map<CatId, Record<'idle' | 'swish' | 'blink' | 'happy', HTMLCanvasElement>>();
+  return (coat: CatId = 'ginger') => {
+    const cached = cache.get(coat);
+    if (cached) return cached;
+    const palette = CAT_COATS[coat];
+    const body = CAT_BASE.map((row, y) => [...row].map((ch, x) => {
+      if (coat === 'calico' && ch === 'o' && ((x < 4 && y < 6) || (x > 5 && y > 7))) return 'O';
+      if (['tabby', 'american', 'mainecoon'].includes(coat) && ch === 'o' && ((y === 3 && x % 2 === 0) || (y >= 7 && x % 3 === 0))) return 'd';
+      if (['siamese', 'ragdoll'].includes(coat) && ch === 'o' && y < 6) return 'd';
+      return ch;
+    }).join(''));
+    if (['ragdoll', 'persian', 'mainecoon'].includes(coat)) {
+      body[6] = '.ooWWWWoo.......';
+      body[7] = 'oOoWWWWoOo......';
+      body[8] = 'ooWWWWWWoo......';
+      body[9] = 'oOWWWWWWOoo.....';
+    }
+    if (coat === 'british' || coat === 'persian') body[3] = 'ooOooooooo......';
+    if (coat === 'mainecoon') { body[0] = 'dd......dd......'; body[1] = '.dd....dd.......'; }
+    const idle = withTail(body, [[12, 10], [13, 9], [13, 8], [14, 7]]);
+    const swish = withTail(body, [[12, 10], [13, 10], [14, 10], [15, 9]]);
     const blink = idle.map((r, y) => (y === 4 ? '.oodoooddo......' : r));
     const happy = idle.map((r, y) => (y === 5 ? '.oooenWeo.......' : r));
-    frames = {
-      idle: pixelSprite(idle, CAT_PALETTE),
-      swish: pixelSprite(swish, CAT_PALETTE),
-      blink: pixelSprite(blink, CAT_PALETTE),
-      happy: pixelSprite(happy, CAT_PALETTE),
-    };
+    const paint = (rows: string[]) => pixelSprite(rows, palette);
+    const frames = { idle: paint(idle), swish: paint(swish), blink: paint(blink), happy: paint(happy) };
+    cache.set(coat, frames);
     return frames;
   };
 })();

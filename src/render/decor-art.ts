@@ -26,8 +26,8 @@ export const hash = (x: number, y: number) => {
  * the boards ('h' horizontal, 'v' vertical), plus the odd knot.
  */
 export function grain(ctx: Ctx, x0: number, y0: number, w: number, h: number, wood: Ramp, dir: 'h' | 'v', seed = 0): void {
-  const lo = mix(wood.base, wood.lo, 0.7);
-  const hi = mix(wood.base, wood.hi, 0.6);
+  const lo = mix(wood.base, wood.lo, 0.42);
+  const hi = mix(wood.base, wood.hi, 0.48);
   const along = dir === 'h' ? w : h;
   const across = dir === 'h' ? h : w;
   for (let a = 0; a < across; a++) {
@@ -53,7 +53,7 @@ interface WallStyle {
 }
 
 const WALLS: Record<string, WallStyle> = {
-  wall_cream: { base: '#f2d9ae', accent: '#e8c891', pattern: 'stripes', wainscot: '#a8693d' },
+  wall_cream: { base: '#eee2c7', accent: '#e2d4b3', pattern: 'stripes', wainscot: '#8c6950' },
   wall_mint: { base: '#cfe8d3', accent: '#b6dbbf', pattern: 'stripes', wainscot: '#5f9479' },
   wall_rose: { base: '#f6d6d6', accent: '#ecbcc0', pattern: 'stripes', wainscot: '#b9707d' },
   wall_dots: { base: '#d5e6f4', accent: '#f4f8fb', pattern: 'flowers', wainscot: '#5d7fa8' },
@@ -163,7 +163,7 @@ export function paintFloor(ctx: Ctx, id: string, x0: number, y0: number, w: numb
         rect(ctx, x + 1, y + 1, 1, th - 2, r.hi);
         rect(ctx, x + 1, y + th - 2, tw - 2, 1, r.lo);
         rect(ctx, x + tw - 2, y + 1, 1, th - 2, r.lo);
-        const grout = mix(c, '#5a3a2a', 0.4);
+        const grout = mix(c, '#6c645b', 0.3);
         rect(ctx, x, y + th - 1, tw, 1, grout);
         rect(ctx, x + tw - 1, y, 1, th, grout);
         for (let sy = y + 2; sy < y + th - 2; sy++) {
@@ -177,7 +177,7 @@ export function paintFloor(ctx: Ctx, id: string, x0: number, y0: number, w: numb
   };
   switch (id) {
     case 'floor_planks': {
-      const tones = ['#c9894f', '#bd7d45', '#d29558'];
+      const tones = ['#b98c62', '#ad805a', '#c49a70'];
       for (let y = y0, row = 0; y < y0 + h; y += 8, row++) {
         const offset = (row * 23) % 48;
         for (let x = x0 - offset, i = 0; x < x0 + w; x += 48, i++) {
@@ -235,7 +235,7 @@ export function paintFloor(ctx: Ctx, id: string, x0: number, y0: number, w: numb
       return;
     }
     default:
-      return tiles('#f2e0c2', '#e4c9a0', 16, 0.012);
+      return tiles('#ede3ce', '#d3c5ae', 16, 0.012);
   }
 }
 
@@ -249,7 +249,7 @@ interface CounterStyle {
 }
 
 const COUNTERS: Record<string, CounterStyle> = {
-  counter_oak: { top: '#d49a5e', front: '#a46a3c' },
+  counter_oak: { top: '#c99d70', front: '#8f664c' },
   counter_walnut: { top: '#8c5a3b', front: '#5e3a26' },
   counter_marble: { top: '#f3efe8', front: '#e2dace', veins: '#c9c0b2' },
   counter_pink: { top: '#f7c3cf', front: '#e98fa6' },
@@ -459,11 +459,13 @@ const HANGING_PLANT = lazy(() =>
 /** Soft oval shadow on the floor. */
 export function shadow(ctx: Ctx, cx: number, y: number, w: number, alpha = 0.22): void {
   ctx.save();
-  ctx.globalAlpha = alpha;
+  ctx.globalAlpha = alpha * 0.5;
   const half = Math.round(w / 2);
   rect(ctx, cx - half + 2, y - 2, half * 2 - 4, 1, '#2a1410');
   rect(ctx, cx - half, y - 1, half * 2, 2, '#2a1410');
   rect(ctx, cx - half + 2, y + 1, half * 2 - 4, 1, '#2a1410');
+  ctx.globalAlpha = alpha * 0.65;
+  rect(ctx, cx - half + 3, y - 1, half * 2 - 6, 2, '#352a3c');
   ctx.restore();
 }
 

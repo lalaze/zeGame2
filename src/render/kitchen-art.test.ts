@@ -9,7 +9,7 @@ function render(locked: boolean, installed: ReadonlySet<Equipment>, active: Read
   const ctx = {
     fillStyle: '', globalAlpha: 1,
     fillRect(this: { fillStyle: string }, x: number, y: number, w: number, h: number) { rectangles.push([x, y, w, h, this.fillStyle]); },
-    save() {}, restore() {},
+    save() {}, restore() {}, beginPath() {}, rect() {}, clip() {},
   } as unknown as CanvasRenderingContext2D;
   paintKitchen(ctx, 184, 0, locked, installed, active);
   return rectangles;

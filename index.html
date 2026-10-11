@@ -64,6 +64,10 @@
           <button id="settings-btn" class="pixel-btn small ghost" data-i18n-title="hud.settings">···</button>
         </div>
       </header>
+      <button id="reputation-btn" class="reputation-bar" aria-haspopup="dialog">
+        <span id="reputation-score"></span><span id="reputation-traffic"></span>
+        <span class="reputation-more" aria-hidden="true">›</span>
+      </button>
 
       <main class="layout">
         <section class="stage" id="stage">
@@ -92,6 +96,7 @@
             </div>
           </div>
           <div class="stage-stats" id="stage-stats" hidden></div>
+          <button class="operation-status chip" id="operation-status" hidden></button>
           <div class="hint" id="hint" data-i18n="hint.tap" hidden>Tap the café to help brew faster!</div>
         </section>
 
@@ -100,7 +105,9 @@
             <button role="tab" data-tab="menu" class="tab active" data-i18n="tab.menu">Menu</button>
             <button role="tab" data-tab="pantry" class="tab" data-i18n="tab.pantry">Pantry</button>
             <button role="tab" data-tab="upgrades" class="tab" data-i18n="tab.upgrades">Upgrades</button>
-            <button role="tab" data-tab="decor" class="tab" data-i18n="tab.decor">Decor</button>
+            <button role="tab" data-tab="decor" class="tab" data-i18n="tab.decor">Furnish</button>
+            <button role="tab" data-tab="pets" class="tab" data-i18n="tab.pets">Cats</button>
+            <button role="tab" data-tab="promotion" class="tab" data-i18n="tab.promotion">Promote</button>
           </nav>
           <div class="goal" id="goal" hidden></div>
           <div class="buy-amount">

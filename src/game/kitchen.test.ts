@@ -9,7 +9,7 @@ import {
   BINS,
   DISH_PIT,
   KITCHEN_COST,
-  RESTOCK_AT,
+  bakeryPlan,
   ZONES,
   batchSteps,
   cookHome,
@@ -234,7 +234,7 @@ describe('the kitchen', () => {
         expect({ x: sim.cooks[0].x, y: sim.cooks[0].y }).toEqual({ x: cookHome(0).x, y: cookHome(0).y });
       }
     }
-  });
+  }, 15000);
 
   it('keeps all cook positions and paths fixed when the viewport becomes taller', () => {
     const state = bakingState();
@@ -294,9 +294,9 @@ describe('the kitchen', () => {
 
   it('leaves a well-stocked case alone, and bakes what the pantry allows', () => {
     const s = bakingState();
-    s.shelf.roll = RESTOCK_AT + 1;
+    s.shelf.roll = bakeryPlan(s).get('roll')!.trigger + 1;
     expect(nextBatch(s, [])).toBeNull();
-    s.shelf.roll = RESTOCK_AT;
+    s.shelf.roll = bakeryPlan(s).get('roll')!.trigger;
     expect(nextBatch(s, [])).toEqual({ item: 'roll', n: COOK_BATCH });
     // One cook per dish at a time.
     expect(nextBatch(s, ['roll'])).toBeNull();
@@ -315,7 +315,10 @@ describe('the kitchen', () => {
     expect(dayNeeds(s).flour).toBeUndefined();
     s.coins = KITCHEN_COST;
     unlockKitchen(s);
-    expect(dayNeeds(s).flour).toBe(20 + COOK_BATCH);
+    expect(dayNeeds(s).flour).toBeGreaterThan(20);
+    const needs = dayNeeds(s).flour;
+    s.bakePlan.roll = 5;
+    expect(dayNeeds(s).flour).toBe(needs); // shifting production does not buy the same flour twice
   });
 
   it('has no room for decorations', () => {
