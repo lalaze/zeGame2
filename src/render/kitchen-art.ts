@@ -18,6 +18,7 @@ import {
   type Station,
 } from '../game/kitchen';
 import { FLOOR_Y, SCENE_W, floorY } from '../game/layout';
+import { brushedMetal } from './materials';
 import { mix, ramp } from './color';
 import { drawText, textWidth } from './font';
 import { OUTLINE, itemIcon } from './sprites';
@@ -46,6 +47,7 @@ function steelBox(ctx: Ctx, x: number, y: number, w: number, h: number, metal = 
   const r = painter(ctx);
   r(x - 1, y - 1, w + 2, h + 2, OUTLINE);
   r(x, y, w, h, metal.base);
+  brushedMetal(ctx, x, y, w, h, metal.base);
   r(x, y, w, 1, metal.hi);
   r(x, y, 1, h, metal.hi);
   r(x + w - 1, y + 1, 1, h - 1, metal.lo);

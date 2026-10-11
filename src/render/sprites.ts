@@ -1,6 +1,6 @@
 import type { IngredientId, ItemId, UpgradeId } from '../game/data';
 import type { Look } from '../game/state';
-import { edge, ramp } from './color';
+import { edge, mix, ramp } from './color';
 
 /** Warm near-black used for outlines, like Stardew's, rather than pure black. */
 export const OUTLINE = '#2e1c16';
@@ -19,13 +19,13 @@ export type Outline = string | 'sel' | false;
  * character is looked up in the palette. With an outline, a 1px border is
  * traced around the shape.
  */
-export function pixelSprite(rows: readonly string[], palette: Palette, outline: Outline = 'sel'): HTMLCanvasElement {
+export function pixelSprite(rows: readonly string[], palette: Palette, outline: Outline = 'sel', density = 1): HTMLCanvasElement {
   const pad = outline ? 1 : 0;
   const h = rows.length;
   const w = Math.max(...rows.map((r) => r.length));
   const canvas = document.createElement('canvas');
-  canvas.width = w + pad * 2;
-  canvas.height = h + pad * 2;
+  canvas.width = (w + pad * 2) * density;
+  canvas.height = (h + pad * 2) * density;
   const ctx = canvas.getContext('2d')!;
   const at = (x: number, y: number) => (y >= 0 && y < h && x >= 0 && x < w ? (rows[y][x] ?? '.') : '.');
   const color = (ch: string) => palette[ch] ?? '#ff00ff';
@@ -38,7 +38,7 @@ export function pixelSprite(rows: readonly string[], palette: Palette, outline: 
         const n = [at(x, y + 1), at(x - 1, y), at(x + 1, y), at(x, y - 1)].find((ch) => ch !== '.');
         if (!n) continue;
         ctx.fillStyle = outline === 'sel' ? edge(color(n)) : outline;
-        ctx.fillRect(x + pad, y + pad, 1, 1);
+        ctx.fillRect((x + pad) * density, (y + pad) * density, density, density);
       }
     }
   }
@@ -46,8 +46,28 @@ export function pixelSprite(rows: readonly string[], palette: Palette, outline: 
     for (let x = 0; x < w; x++) {
       const ch = at(x, y);
       if (ch === '.') continue;
-      ctx.fillStyle = color(ch);
-      ctx.fillRect(x + pad, y + pad, 1, 1);
+      const base = color(ch);
+      // A consistent upper-left key light gives all silhouettes volume.
+      const top = at(x, y - 1) === '.';
+      const left = at(x - 1, y) === '.';
+      const bottom = at(x, y + 1) === '.';
+      const right = at(x + 1, y) === '.';
+      const lit = top || left ? mix(base, '#fff1cf', 0.13) : bottom || right ? mix(base, '#493951', 0.16) : base;
+      const dx = (x + pad) * density, dy = (y + pad) * density;
+      ctx.fillStyle = lit;
+      ctx.fillRect(dx, dy, density, density);
+      if (density > 1) {
+        // Subpixel strokes follow material boundaries, rather than adding a
+        // bevel to every pixel. This creates finer art, not a blurred upscale.
+        if (at(x, y - 1) !== ch) {
+          ctx.fillStyle = mix(lit, '#fff5df', 0.24);
+          ctx.fillRect(dx, dy, density, 1);
+        }
+        if (at(x + 1, y) !== ch) {
+          ctx.fillStyle = mix(lit, '#453344', 0.16);
+          ctx.fillRect(dx + density - 1, dy + 1, 1, density - 1);
+        }
+      }
     }
   }
   return canvas;
@@ -97,7 +117,7 @@ export const FRONT = [
   '..SSSSSSSSSSSs..',
   '..SSSSSSSSSSSs..',
   '..SSSSSSSSSSSs..',
-  '..SSSESSSSESSs..',
+  '..SSSeSSSSeSSs..',
   '..SSSESSSSESSs..',
   '..SSBSSSSSSBSs..',
   '...SSSSmmSSSs...',
@@ -112,7 +132,7 @@ export const FRONT = [
   '..SZ.tTTTTt.Zs..',
   '....pPPPPPPp....',
 ];
-const BACK = FRONT.map((row, y) => (y >= 8 && y <= 11 ? row.replace(/[EBm]/g, 'S') : y === 14 ? '....tTTTTTTt....' : row));
+const BACK = FRONT.map((row, y) => (y >= 8 && y <= 11 ? row.replace(/[EeBm]/g, 'S') : y === 14 ? '....tTTTTTTt....' : row));
 export const SIDE = [
   '................',
   '................',
@@ -156,7 +176,7 @@ const APRON_FRONT = [
   '.....Q....Q.....',
   '.....RRRRRR.....',
   '.....RRRRRr.....',
-  '.....RQQQRr.....',
+  '.....RJQJRr.....',
   '....RRRRRRRr....',
   '....RRRRRRRr....',
   '....rRRRRRRr....',
@@ -391,12 +411,12 @@ export function character(look: Look, role: Role = 'customer'): CharacterFrames 
   const pants = ramp(PANTS[look.pants % PANTS.length]);
   const hat = ramp(SHIRTS[(look.shirt + 3) % SHIRTS.length]);
   const palette: Palette = {
-    S: skin.base, s: skin.lo, Z: skin.hi, E: '#2b1d2e', B: '#f09a86', m: '#a4503f',
+    S: skin.base, s: skin.lo, Z: skin.hi, E: '#2b1d2e', e: '#fff8ed', B: '#f09a86', m: '#a4503f',
     T: shirt.base, t: shirt.lo, U: shirt.hi, V: ramp(shirt.lo).lo,
     P: pants.base, p: pants.lo, K: '#6a4430', k: '#452a1e',
     H: hair.base, h: hair.lo, L: hair.hi,
     A: hat.base, a: hat.lo, Y: hat.hi, W: '#f2ead8', w: '#cdbfa8',
-    R: apron.base, r: apron.lo, Q: apron.dark,
+    R: apron.base, r: apron.lo, Q: apron.dark, J: '#e9c68e',
     C: '#fbfaf5', c: '#d9d6cc',
   };
   const hairStyle = HAIR[look.hairStyle % HAIR.length];
@@ -1242,6 +1262,18 @@ export function itemIcon(id: ItemId, outline = true): HTMLCanvasElement {
     itemCache.set(key, c);
   }
   return c;
+}
+
+/** Three-times-density artwork for menus, reports and transparent PNG export. */
+export function itemArtwork(id: ItemId): HTMLCanvasElement {
+  const key = `${id}.artwork`;
+  let canvas = itemCache.get(key);
+  if (!canvas) {
+    const art = ITEM_ART[id];
+    canvas = pixelSprite(art.rows, art.palette, 'sel', 3);
+    itemCache.set(key, canvas);
+  }
+  return canvas;
 }
 
 // ---------------------------------------------------------------- ingredients (12x10)

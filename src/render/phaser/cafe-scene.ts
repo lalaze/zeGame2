@@ -19,6 +19,7 @@ import { CHAIR_LEFT, CHAIR_RIGHT, RoomPainter, TABLE, TABLE_CX, TABLE_TOP_DY, ty
 import { CHAR_H, OUTLINE, catFrames, character, crownSprite, dropSprite, heartSprite, itemIcon, pixelSprite, type CharacterFrames, type Facing } from '../sprites';
 import { PIXEL_FONT, PIXEL_FONT_HALO, addPixelFonts } from './pixel-font';
 import { baked, canvasKey } from './textures';
+import { dustMotes, roomDepth } from '../materials';
 import { prepareCanvasMultiply } from './canvas-lighting';
 
 /** Called every frame before the scene is drawn: runs the simulation and the page around it. */
@@ -175,6 +176,7 @@ export class CafeScene extends Phaser.Scene {
   private ghostCells!: Phaser.GameObjects.Graphics;
   private ghostPiece!: Phaser.GameObjects.Image;
   private ghostBox!: Phaser.GameObjects.Graphics;
+  private motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
 
   constructor(
     private view: CafeView,
@@ -216,10 +218,10 @@ export class CafeScene extends Phaser.Scene {
         tint: { onEmit: () => 0xfff6c8, onUpdate: (_p, _k, t) => (t < 0.5 ? 0xfff6c8 : 0xffd95a) },
       }),
       steam: emitter(dot, {
-        lifespan: 1200,
-        speedX: { min: -2, max: 2 },
-        speedY: -10,
-        alpha: { onEmit: () => 0.8, onUpdate: (_p, _k, t) => Math.min(0.8, 1 - t) },
+        lifespan: 1600,
+        speedX: { min: -3, max: 3 },
+        speedY: { min: -13, max: -8 },
+        alpha: { onEmit: () => 0.45, onUpdate: (_p, _k, t) => 0.45 * (1 - t) },
         // Puffs start as 2x2 and thin out to a single pixel.
         scale: { onEmit: () => 2, onUpdate: (_p, _k, t) => (t < 0.4 ? 2 : 1) },
       }),
@@ -390,6 +392,8 @@ export class CafeScene extends Phaser.Scene {
         p.drawFloor(decor.floor, decor.rug, light, H);
         p.drawBackBar(state, decor.counter);
         paintCeiling(ctx, decor.ceiling, SCENE_W, t);
+        roomDepth(ctx, SCENE_W, H, 80);
+        for (const win of WINDOWS) dustMotes(ctx, win.x, win.y + win.h, win.w, 44, this.motionPreference.matches ? 0 : t, light.sun.strength);
       });
       this.drawCat(t, o);
       this.drawBaristas(state, t, o);
@@ -417,6 +421,7 @@ export class CafeScene extends Phaser.Scene {
       const active = this.activeStations();
       this.paint(back, o.x, o.y, [tick, H, locked, [...installed].join(','), [...active].join(',')].join('|'), (p) => {
         paintKitchen(p.ctx, H, t, locked, installed, active);
+        roomDepth(p.ctx, SCENE_W, H, 80);
       });
     } else {
       const offset = regionOffset(area);
@@ -430,6 +435,7 @@ export class CafeScene extends Phaser.Scene {
           if (def?.surface === 'wall' && x >= offset && x < offset + SCENE_W && i !== skip) paintWallFurniture(ctx, piece.id, x - offset, WALL_TOP + piece.row * CELL, t, now);
         });
         paintPassageFloor(ctx, area);
+        roomDepth(ctx, SCENE_W, H, 80, area === 'terrace');
       });
     }
 

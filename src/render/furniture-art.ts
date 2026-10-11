@@ -2,7 +2,7 @@
 // floor pieces stand on the floor, centered on their footprint, and may rise above it.
 import { CELL, furnitureDef } from '../game/furniture';
 import { mix, ramp } from './color';
-import { paintArt, plantSprite, shadow } from './decor-art';
+import { grain, paintArt, plantSprite, shadow } from './decor-art';
 import { OUTLINE, pixelSprite } from './sprites';
 
 type Ctx = CanvasRenderingContext2D;
@@ -14,6 +14,9 @@ const filler =
     if (w <= 0 || h <= 0) return;
     ctx.fillStyle = color;
     ctx.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+    if (w >= 6 && h >= 4 && (color === WOOD.base || color === LIGHT_WOOD.base)) {
+      grain(ctx, Math.round(x + 1), Math.round(y + 1), Math.round(w - 2), Math.round(h - 2), ramp(color), w > h ? 'h' : 'v', Math.round(x + y));
+    }
   };
 
 const lazy = (make: () => HTMLCanvasElement) => {

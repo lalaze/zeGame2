@@ -8,20 +8,20 @@
 }
 
 :root {
-  /* Stardew-style menu colors: deep red-brown ink, orange wooden frames, parchment. */
-  --ink: #4a1d12;
-  --brown: #8c3f1a;
-  --wood: #c0601f;
-  --wood-light: #e3913f;
-  --wood-hi: #f7b25e;
-  --wood-lo: #9a4417;
-  --paper: #f4c47c;
-  --cream: #fde4b0;
-  --green: #5ca14a;
-  --green-dark: #3d7a35;
+  /* Walnut, warm ivory, sage and brass match the café materials. */
+  --ink: #49382e;
+  --brown: #886448;
+  --wood: #806047;
+  --wood-light: #b98e64;
+  --wood-hi: #dfbf8f;
+  --wood-lo: #654b39;
+  --paper: #e8dcc1;
+  --cream: #faf1d9;
+  --green: #66865c;
+  --green-dark: #446849;
   --pink: #ef5d7a;
-  --gold: #ffd84a;
-  --muted: #94532a;
+  --gold: #f3cf7d;
+  --muted: #80694f;
   --px: 3px;
   --border: calc(-1 * var(--px)) 0 0 0 var(--ink), var(--px) 0 0 0 var(--ink), 0 calc(-1 * var(--px)) 0 0 var(--ink),
     0 var(--px) 0 0 var(--ink);
@@ -52,7 +52,7 @@ body {
   font-family: 'Pixelify Sans', 'Pixel ZH', ui-monospace, monospace;
   font-size: 16px;
   color: var(--ink);
-  background-color: #3a2216;
+  background-color: #302b28;
   background-image: repeating-linear-gradient(180deg, transparent 0 30px, #00000033 30px 33px),
     repeating-linear-gradient(90deg, transparent 0 93px, #0000002a 93px 96px),
     repeating-linear-gradient(90deg, transparent 0 47px, #ffffff08 47px 49px);
@@ -490,7 +490,7 @@ html:lang(zh) body {
 }
 
 .row.new {
-  background: #fff3cf;
+  background: #f7edd5;
 }
 
 .row.locked {
@@ -548,7 +548,7 @@ html:lang(zh) body {
 .bar {
   height: 6px;
   margin-top: 4px;
-  background: #c98a4a;
+  background: #bca583;
   box-shadow: 0 0 0 2px var(--ink);
 }
 
@@ -589,8 +589,8 @@ html:lang(zh) body {
 }
 
 .pixel-btn:disabled {
-  background: #d3a670;
-  color: #fbe8c4;
+  background: #b5a487;
+  color: #fff6e0;
   cursor: default;
   text-shadow: none;
 }
@@ -1744,3 +1744,22 @@ html:lang(zh) body {
 .modal:has(.taste-overview) { max-height: calc(100dvh - 64px); display: flex; flex-direction: column; }
 .modal:has(.taste-overview) .modal-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
 .modal:has(.taste-overview) > h2, .modal:has(.taste-overview) .modal-actions { flex-shrink: 0; }
+
+/* Fine paper and enamel finishes, kept light enough for small pixel type. */
+.row, .pixel-box {
+  background-image: linear-gradient(110deg, #ffffff30, transparent 55%);
+}
+.row .icon {
+  width: 44px;
+  height: 44px;
+  padding: 3px;
+  background: radial-gradient(ellipse at 50% 75%, #93755320, transparent 68%);
+  filter: drop-shadow(0 2px 0 #70503926);
+}
+.reputation-bar { background-image: linear-gradient(90deg, #ffffff25, transparent); }
+.row .recipe { opacity: 0.9; }
+.taste-chip { background: #ede8d4; border-color: #bca583; }
+@media (prefers-reduced-motion: reduce) {
+  .row.pop { animation: none; }
+  .bar i { transition: none; }
+}

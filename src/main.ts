@@ -16,7 +16,7 @@ import { createInitialState, type GameState } from './game/state';
 import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale, t, type Locale } from './i18n';
 import { CafeView } from './render/cafe-view';
 import { CafeGame } from './render/phaser/game';
-import { character, itemIcon, toDataURL } from './render/sprites';
+import { character, itemArtwork, toDataURL } from './render/sprites';
 import { closeModal, isModalOpen, showModal, toast } from './ui/modal';
 import { showOnboarding, type OnboardingResult } from './ui/onboarding';
 import { Panel, decorName, itemName, type ArrangeRequest } from './ui/panel';
@@ -446,7 +446,7 @@ function showReport(report: DayReport): void {
   const reportTab = report.soldOut || report.extraLost || report.outOfStock.length ? 'pantry' : report.tableLost || report.queueLost || report.doorLost ? 'upgrades' : 'menu';
   const best = report.bestSeller;
   const bestHtml = best
-    ? `<p class="report-best"><img src="${toDataURL(itemIcon(best), 3)}" alt="" />${t('report.best', {
+    ? `<p class="report-best"><img src="${toDataURL(itemArtwork(best), 1)}" alt="" />${t('report.best', {
         item: itemName(best),
         n: report.sales[best] ?? 0,
       })}</p>`

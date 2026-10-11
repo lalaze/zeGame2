@@ -57,7 +57,7 @@ import { toast } from './modal';
 import { showTaste, tasteLabel, tasteProgressLabel } from './taste';
 import { decorIcon } from '../render/decor-art';
 import { furnitureIcon } from '../render/furniture-art';
-import { ingredientIcon, itemIcon, toDataURL, upgradeIcon } from '../render/sprites';
+import { ingredientIcon, itemArtwork, toDataURL, upgradeIcon } from '../render/sprites';
 
 type Tab = 'menu' | 'pantry' | 'upgrades' | 'decor';
 export type PurchaseKind = 'item' | 'upgrade' | 'decor' | 'goal' | 'ingredient' | 'menu' | 'recipe';
@@ -98,7 +98,7 @@ const iconUrls = new Map<string, string>();
 function iconUrl(key: string, make: () => HTMLCanvasElement): string {
   let url = iconUrls.get(key);
   if (!url) {
-    url = toDataURL(make(), 4);
+    url = toDataURL(make(), key.startsWith('item:') ? 1 : 4);
     iconUrls.set(key, url);
   }
   return url;
@@ -378,7 +378,7 @@ export class Panel {
           ? ingredientName(id as IngredientId)
           : upgradeName(id as UpgradeId);
       const src = isItem
-        ? iconUrl(`item:${id}`, () => itemIcon(id as ItemId))
+        ? iconUrl(`item:${id}`, () => itemArtwork(id as ItemId))
         : isIng
           ? iconUrl(`ing:${id}`, () => ingredientIcon(id as IngredientId))
           : iconUrl(`upgrade:${id}`, () => upgradeIcon(id as UpgradeId));

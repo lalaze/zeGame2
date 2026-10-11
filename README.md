@@ -86,3 +86,24 @@ To add or change text, edit `src/locales/en.json` and `src/locales/zh.json`. The
 | `scripts/gen-icons.mjs` | Builds the app icons from a pixel map (`npm run icons`) |
 
 All art is drawn in code from character grids (see `src/render/sprites.ts`), so there are no image files to manage. The Phaser scene turns those canvases into textures; rooms are painted into canvas textures that repaint a dozen times a second for their ambient animation. The side panel, dialogs and HUD are plain HTML over the canvas. To add a drink, add an entry to `MENU` and its recipe to `RECIPES` in `data.ts`, and its art in `ITEM_ART`.
+
+### Artwork and exports
+
+The café uses code-drawn pixel art with a shared upper-left light direction,
+warm wood, ivory ceramics, sage accents and brass fittings. Menu dishes have
+3×-density artwork with fine material-edge highlights; in-world sprites retain
+their original dimensions. Window reflections, fading pane-shaped sunbeams,
+subtle daylight dust, layered contact shadows and brushed kitchen steel add depth.
+Indoor night lighting preserves legibility. Added dust animation respects reduced motion.
+
+Open `sprite-preview.html` on the development or built site for the asset gallery.
+It uses the same painters as the game, with category filters, light/dark preview,
+individual PNG downloads, a transparent atlas and its frame manifest. It does not
+read or write game saves. Exported copies live in `public/art/`; `tiny-bean-assets.zip` includes individual
+PNGs, the atlas, coordinates and backgrounds: 205 sprite frames
+(including all 55 dishes) and five room backgrounds. Character exports show one
+sample appearance per role; the game still generates all player appearances.
+Room exports contain background layers only; movable furniture and characters
+are separate. After changing artwork, re-export the atlas, JSON and room PNGs
+from the gallery to refresh these copies. Atlas coordinates use physical pixels;
+`sourceSize` and `scale` describe each source canvas and its integer export scale.

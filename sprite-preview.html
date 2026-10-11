@@ -1,19 +1,17 @@
-<!doctype html><body style="background:#e9d3a8;margin:0;padding:16px">
-<canvas id="c" width="480" height="300" style="width:1920px;image-rendering:pixelated"></canvas>
-<script type="module">
-import { character, itemIcon, ingredientIcon, catFrames, upgradeIcon } from '/src/render/sprites.ts';
-import { MENU, INGREDIENTS } from '/src/game/data.ts';
-const ctx = document.getElementById('c').getContext('2d');
-const looks = [[0,0,0,0,0],[1,2,1,1,1],[2,3,2,2,2],[3,4,3,3,0],[0,5,2,5,1],[1,1,0,6,2]];
-looks.forEach(([skin,hair,hairStyle,shirt,pants], i) => {
-  const f = character({skin,hair,hairStyle,shirt,pants}, i === 0 ? 'owner' : i === 1 ? 'barista' : 'customer');
-  [...f.down, ...f.up, ...f.right, f.left[0], f.sitRight].forEach((s, j) => ctx.drawImage(s, 4 + j * 19, 4 + i * 30));
-});
-// Menu items, one row per category.
-const cats = ['coffee', 'tea', 'bread', 'pastry'];
-cats.forEach((cat, r) => MENU.filter((m) => m.category === cat).forEach((m, i) => ctx.drawImage(itemIcon(m.id), 224 + i * 16, 4 + r * 16)));
-INGREDIENTS.forEach((ing, i) => ctx.drawImage(ingredientIcon(ing.id), 224 + i * 16, 74));
-['marketing','machine','tables','manager','barista'].forEach((id, i) => ctx.drawImage(upgradeIcon(id), 224 + i * 18, 94));
-const cat = catFrames();
-['idle','swish','blink','happy'].forEach((k, i) => ctx.drawImage(cat[k], 224 + i * 22, 120));
-</script>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>小豆咖啡馆 · 素材图鉴</title>
+  <style>
+    *{box-sizing:border-box} body{margin:0;background:#f2ecdc;color:#49382e;font:15px/1.6 system-ui,sans-serif}main{max-width:1180px;margin:auto;padding:40px 24px}header{border-bottom:1px solid #c5b596;padding-bottom:24px}small{color:#80694f}h1{font-size:32px;margin:8px 0}p{max-width:720px}a{color:inherit}nav,.downloads{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}button,.downloads a{font:inherit;border:1px solid #b8a482;padding:9px 16px;background:#fff8e7;color:#49382e;cursor:pointer;text-decoration:none;border-radius:4px}button[aria-pressed=true],.downloads a{background:#496b55;color:#fff8e7;border-color:#496b55}button:focus-visible,a:focus-visible{outline:3px solid #b88240;outline-offset:3px}.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}.asset{margin:0;min-width:0;border:1px solid #d2c4a8;border-radius:5px;overflow:hidden;background:#fff8e9;text-decoration:none}.art{height:108px;display:grid;place-items:center;background:repeating-conic-gradient(#eee9dc 0 25%,#e5dfd0 0 50%) 0/16px 16px}.art img{image-rendering:pixelated;max-width:88%;max-height:96px;object-fit:contain}body.dark .art{background:repeating-conic-gradient(#302f30 0 25%,#383637 0 50%) 0/16px 16px}.caption{padding:9px 12px}.caption b{display:block;font-size:14px}.caption small{font-size:10px;word-break:break-all}.rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}.rooms canvas{display:block;width:100%;height:auto;image-rendering:pixelated}.rooms figcaption{padding:8px 12px}.rooms figure{margin:0;background:#e8dcc1;border:1px solid #b8a482}h2{margin-top:32px;font-size:20px}footer{margin-top:36px;color:#80694f;font-size:13px}@media(max-width:500px){main{padding:24px 16px}h1{font-size:26px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  </style>
+</head>
+<body><main>
+  <header><small>TINY BEAN CAFÉ / ART COLLECTION</small><h1>小豆咖啡馆 · 素材图鉴</h1><p>暖木、奶油瓷器、鼠尾草绿与黄铜。游戏同源绘制的食物、人物、家具和房间素材；点击单张素材即可下载透明 PNG。</p><div class="downloads"><a href="./art/tiny-bean-assets.zip" download>下载整包 ZIP</a><a id="sheet">下载完整 PNG 图集</a><a id="manifest">下载坐标 JSON</a><button id="background" aria-pressed="false">深色底预览</button></div><small id="count" role="status"></small></header>
+  <nav id="filters" aria-label="素材分类"></nav><section id="gallery" class="gallery" aria-label="可下载素材"></section>
+  <h2>空间与材质</h2><p>五个房间的固定日光预览，使用游戏内同一套绘制代码。点击房间可下载原尺寸背景。</p><section id="rooms" class="rooms"></section>
+  <footer>PNG 使用透明底与整数像素；JSON 的 frame 是图集坐标，sourceSize 是原素材尺寸。此页面不读取或改写游戏存档。<a href="./">返回游戏</a></footer>
+</main><script type="module" src="/src/art-preview.ts"></script></body>
+</html>

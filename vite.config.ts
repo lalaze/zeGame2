@@ -10,6 +10,7 @@ export default defineConfig({
     // Phaser alone is about 1.2 MB; it gets its own chunk so game updates don't re-download it.
     chunkSizeWarningLimit: 1400,
     rolldownOptions: {
+      input: { game: 'index.html', artwork: 'sprite-preview.html' },
       output: { codeSplitting: { groups: [{ name: 'phaser', test: /node_modules[\\/]phaser/ }] } },
     },
   },

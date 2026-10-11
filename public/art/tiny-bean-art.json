@@ -1,0 +1,2674 @@
+{
+  "frames": {
+    "cat/blink": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 421,
+        "y": 2603
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/happy": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 549,
+        "y": 2603
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/idle": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 165,
+        "y": 2603
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "cat/swish": {
+      "frame": {
+        "h": 42,
+        "w": 54,
+        "x": 293,
+        "y": 2603
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 14,
+        "w": 18
+      }
+    },
+    "character/barista/down-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 677,
+        "y": 1814
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/barista/down-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 805,
+        "y": 1814
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/barista/down-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 933,
+        "y": 1814
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/barista/left-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 165,
+        "y": 1942
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/barista/left-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 293,
+        "y": 1942
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/barista/left-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 421,
+        "y": 1942
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/barista/right-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 549,
+        "y": 1942
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/barista/right-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 677,
+        "y": 1942
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/barista/right-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 805,
+        "y": 1942
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/barista/sit-left": {
+      "frame": {
+        "h": 78,
+        "w": 54,
+        "x": 933,
+        "y": 1945
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 26,
+        "w": 18
+      }
+    },
+    "character/barista/sit-right": {
+      "frame": {
+        "h": 78,
+        "w": 54,
+        "x": 1061,
+        "y": 1945
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 26,
+        "w": 18
+      }
+    },
+    "character/barista/up-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 1061,
+        "y": 1814
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/barista/up-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 1189,
+        "y": 1814
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/barista/up-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 37,
+        "y": 1942
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/cook/down-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 421,
+        "y": 2198
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/cook/down-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 549,
+        "y": 2198
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/cook/down-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 677,
+        "y": 2198
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/cook/left-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 1189,
+        "y": 2198
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/cook/left-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 37,
+        "y": 2326
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/cook/left-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 165,
+        "y": 2326
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/cook/right-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 293,
+        "y": 2326
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/cook/right-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 421,
+        "y": 2326
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/cook/right-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 549,
+        "y": 2326
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/cook/sit-left": {
+      "frame": {
+        "h": 78,
+        "w": 54,
+        "x": 677,
+        "y": 2329
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 26,
+        "w": 18
+      }
+    },
+    "character/cook/sit-right": {
+      "frame": {
+        "h": 78,
+        "w": 54,
+        "x": 805,
+        "y": 2329
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 26,
+        "w": 18
+      }
+    },
+    "character/cook/up-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 805,
+        "y": 2198
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/cook/up-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 933,
+        "y": 2198
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/cook/up-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 1061,
+        "y": 2198
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/customer/down-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 933,
+        "y": 2326
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/customer/down-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 1061,
+        "y": 2326
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/customer/down-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 1189,
+        "y": 2326
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/customer/left-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 421,
+        "y": 2454
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/customer/left-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 549,
+        "y": 2454
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/customer/left-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 677,
+        "y": 2454
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/customer/right-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 805,
+        "y": 2454
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/customer/right-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 933,
+        "y": 2454
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/customer/right-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 1061,
+        "y": 2454
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/customer/sit-left": {
+      "frame": {
+        "h": 78,
+        "w": 54,
+        "x": 1189,
+        "y": 2457
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 26,
+        "w": 18
+      }
+    },
+    "character/customer/sit-right": {
+      "frame": {
+        "h": 78,
+        "w": 54,
+        "x": 37,
+        "y": 2585
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 26,
+        "w": 18
+      }
+    },
+    "character/customer/up-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 37,
+        "y": 2454
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/customer/up-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 165,
+        "y": 2454
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/customer/up-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 293,
+        "y": 2454
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/owner/down-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 165,
+        "y": 1686
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/owner/down-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 293,
+        "y": 1686
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/owner/down-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 421,
+        "y": 1686
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/owner/left-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 933,
+        "y": 1686
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/owner/left-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 1061,
+        "y": 1686
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/owner/left-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 1189,
+        "y": 1686
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/owner/right-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 37,
+        "y": 1814
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/owner/right-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 165,
+        "y": 1814
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/owner/right-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 293,
+        "y": 1814
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/owner/sit-left": {
+      "frame": {
+        "h": 78,
+        "w": 54,
+        "x": 421,
+        "y": 1817
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 26,
+        "w": 18
+      }
+    },
+    "character/owner/sit-right": {
+      "frame": {
+        "h": 78,
+        "w": 54,
+        "x": 549,
+        "y": 1817
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 26,
+        "w": 18
+      }
+    },
+    "character/owner/up-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 549,
+        "y": 1686
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/owner/up-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 677,
+        "y": 1686
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/owner/up-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 805,
+        "y": 1686
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/server/down-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 1189,
+        "y": 1942
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/server/down-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 37,
+        "y": 2070
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/server/down-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 165,
+        "y": 2070
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/server/left-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 677,
+        "y": 2070
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/server/left-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 805,
+        "y": 2070
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/server/left-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 933,
+        "y": 2070
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/server/right-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 1061,
+        "y": 2070
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/server/right-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 1189,
+        "y": 2070
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/server/right-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 37,
+        "y": 2198
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/server/sit-left": {
+      "frame": {
+        "h": 78,
+        "w": 54,
+        "x": 165,
+        "y": 2201
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 26,
+        "w": 18
+      }
+    },
+    "character/server/sit-right": {
+      "frame": {
+        "h": 78,
+        "w": 54,
+        "x": 293,
+        "y": 2201
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 26,
+        "w": 18
+      }
+    },
+    "character/server/up-0": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 293,
+        "y": 2070
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/server/up-1": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 421,
+        "y": 2070
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "character/server/up-2": {
+      "frame": {
+        "h": 84,
+        "w": 54,
+        "x": 549,
+        "y": 2070
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 28,
+        "w": 18
+      }
+    },
+    "decor/ceiling_chandelier": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1174,
+        "y": 1180
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/ceiling_lights": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 790,
+        "y": 1180
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/ceiling_none": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 662,
+        "y": 1180
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/ceiling_pendants": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1046,
+        "y": 1180
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/ceiling_vines": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 918,
+        "y": 1180
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/counter_gold": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 22,
+        "y": 1180
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/counter_marble": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1046,
+        "y": 1052
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/counter_oak": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 790,
+        "y": 1052
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/counter_pink": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1174,
+        "y": 1052
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/counter_walnut": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 918,
+        "y": 1052
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/floor_checker": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 22,
+        "y": 1052
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/floor_herringbone": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 534,
+        "y": 1052
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/floor_marble": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 662,
+        "y": 1052
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/floor_mint": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 278,
+        "y": 1052
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/floor_planks": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 150,
+        "y": 1052
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/floor_terrazzo": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 406,
+        "y": 1052
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/neon_cafe": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 662,
+        "y": 1308
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/neon_cup": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 918,
+        "y": 1308
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/neon_heart": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 790,
+        "y": 1308
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/neon_none": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 534,
+        "y": 1308
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/rug_blue": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 278,
+        "y": 1308
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/rug_none": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 22,
+        "y": 1308
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/rug_red": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 150,
+        "y": 1308
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/rug_round": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 406,
+        "y": 1308
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/sill_bonsai": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 534,
+        "y": 1180
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/sill_cactus": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 278,
+        "y": 1180
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/sill_none": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 150,
+        "y": 1180
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/sill_tulips": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 406,
+        "y": 1180
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/wall_brick": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 918,
+        "y": 924
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/wall_cream": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 406,
+        "y": 924
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/wall_dots": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 790,
+        "y": 924
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/wall_mint": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 534,
+        "y": 924
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/wall_rose": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 662,
+        "y": 924
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/wall_stars": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1174,
+        "y": 924
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "decor/wall_walnut": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1046,
+        "y": 924
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "food/affogato": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 406,
+        "y": 156
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/americano": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 150,
+        "y": 28
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/bagel": {
+      "frame": {
+        "h": 60,
+        "w": 84,
+        "x": 790,
+        "y": 290
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 30,
+        "w": 42
+      }
+    },
+    "food/baguette": {
+      "frame": {
+        "h": 78,
+        "w": 84,
+        "x": 918,
+        "y": 281
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 39,
+        "w": 42
+      }
+    },
+    "food/blacktea": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 534,
+        "y": 156
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/brioche": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 918,
+        "y": 415
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/brownie": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 662,
+        "y": 543
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/cake": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 150,
+        "y": 668
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/cappuccino": {
+      "frame": {
+        "h": 78,
+        "w": 84,
+        "x": 406,
+        "y": 25
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 39,
+        "w": 42
+      }
+    },
+    "food/chai": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 918,
+        "y": 156
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/cheesebun": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 1046,
+        "y": 287
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/cheesecake": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 406,
+        "y": 668
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/chocobread": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 662,
+        "y": 415
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/ciabatta": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 150,
+        "y": 415
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/cinnamon": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 790,
+        "y": 543
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/coldbrew": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1174,
+        "y": 28
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/cookie": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 278,
+        "y": 543
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/cortado": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 662,
+        "y": 28
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/creamcoffee": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 278,
+        "y": 156
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/creampuff": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1046,
+        "y": 540
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/croissant": {
+      "frame": {
+        "h": 60,
+        "w": 84,
+        "x": 406,
+        "y": 546
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 30,
+        "w": 42
+      }
+    },
+    "food/dirty": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 22,
+        "y": 156
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/donut": {
+      "frame": {
+        "h": 60,
+        "w": 84,
+        "x": 22,
+        "y": 546
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 30,
+        "w": 42
+      }
+    },
+    "food/eggtart": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 22,
+        "y": 671
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/espresso": {
+      "frame": {
+        "h": 84,
+        "w": 84,
+        "x": 22,
+        "y": 22
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 42,
+        "w": 42
+      }
+    },
+    "food/flatwhite": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 534,
+        "y": 28
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/focaccia": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 22,
+        "y": 415
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/frappe": {
+      "frame": {
+        "h": 78,
+        "w": 84,
+        "x": 150,
+        "y": 281
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 39,
+        "w": 42
+      }
+    },
+    "food/fruitbrioche": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 1046,
+        "y": 415
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/fruittea": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1046,
+        "y": 156
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/garlicbread": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 1174,
+        "y": 415
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/hojicha": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1174,
+        "y": 156
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/hotchoc": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 662,
+        "y": 156
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/latte": {
+      "frame": {
+        "h": 78,
+        "w": 84,
+        "x": 278,
+        "y": 25
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 39,
+        "w": 42
+      }
+    },
+    "food/lemontea": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 790,
+        "y": 156
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/macaron": {
+      "frame": {
+        "h": 84,
+        "w": 84,
+        "x": 534,
+        "y": 662
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 42,
+        "w": 42
+      }
+    },
+    "food/macchiato": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1046,
+        "y": 28
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/matcha": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 22,
+        "y": 284
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/matchafloat": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 534,
+        "y": 284
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/melonpan": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 1174,
+        "y": 543
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/milktea": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 406,
+        "y": 284
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/mocha": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 790,
+        "y": 28
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/muffin": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 918,
+        "y": 543
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/painchoc": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 534,
+        "y": 543
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/pourover": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 150,
+        "y": 156
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/pretzel": {
+      "frame": {
+        "h": 78,
+        "w": 84,
+        "x": 1174,
+        "y": 281
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 39,
+        "w": 42
+      }
+    },
+    "food/raisinbread": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 278,
+        "y": 415
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/roll": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 662,
+        "y": 287
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/rye": {
+      "frame": {
+        "h": 60,
+        "w": 84,
+        "x": 534,
+        "y": 418
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 30,
+        "w": 42
+      }
+    },
+    "food/scone": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 150,
+        "y": 543
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/shokupan": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 790,
+        "y": 412
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/smoothie": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 278,
+        "y": 284
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "food/sourdough": {
+      "frame": {
+        "h": 66,
+        "w": 84,
+        "x": 406,
+        "y": 415
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 33,
+        "w": 42
+      }
+    },
+    "food/swissroll": {
+      "frame": {
+        "h": 78,
+        "w": 84,
+        "x": 278,
+        "y": 665
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 39,
+        "w": 42
+      }
+    },
+    "food/vienna": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 918,
+        "y": 28
+      },
+      "scale": 2,
+      "sourceSize": {
+        "h": 36,
+        "w": 42
+      }
+    },
+    "furniture/aframe": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 406,
+        "y": 1436
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/armchair": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 662,
+        "y": 1564
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/art_bean": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 918,
+        "y": 1564
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/art_cat": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 278,
+        "y": 1564
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/art_landscape": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 278,
+        "y": 1436
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/art_starry": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1174,
+        "y": 1564
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/bench": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 150,
+        "y": 1564
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/bookshelf": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 534,
+        "y": 1564
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/catbed": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 406,
+        "y": 1564
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/clock": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1046,
+        "y": 1308
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/coatrack": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1046,
+        "y": 1436
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/garland": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 790,
+        "y": 1436
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/gramophone": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1046,
+        "y": 1564
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/lamp": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 918,
+        "y": 1436
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/mugrack": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1174,
+        "y": 1308
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/piano": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 22,
+        "y": 1692
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/plant_fern": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 22,
+        "y": 1436
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/plant_fig": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 534,
+        "y": 1436
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/plant_lemon": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 790,
+        "y": 1564
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/plant_monstera": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 1174,
+        "y": 1436
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/plant_snake": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 150,
+        "y": 1436
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/sconce": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 662,
+        "y": 1436
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "furniture/shelf": {
+      "frame": {
+        "h": 72,
+        "w": 84,
+        "x": 22,
+        "y": 1564
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 24,
+        "w": 28
+      }
+    },
+    "ingredient/beans": {
+      "frame": {
+        "h": 36,
+        "w": 42,
+        "x": 683,
+        "y": 686
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 12,
+        "w": 14
+      }
+    },
+    "ingredient/butter": {
+      "frame": {
+        "h": 33,
+        "w": 42,
+        "x": 1067,
+        "y": 687
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 11,
+        "w": 14
+      }
+    },
+    "ingredient/cocoa": {
+      "frame": {
+        "h": 36,
+        "w": 42,
+        "x": 427,
+        "y": 814
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 12,
+        "w": 14
+      }
+    },
+    "ingredient/cream": {
+      "frame": {
+        "h": 33,
+        "w": 42,
+        "x": 555,
+        "y": 815
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 11,
+        "w": 14
+      }
+    },
+    "ingredient/eggs": {
+      "frame": {
+        "h": 33,
+        "w": 42,
+        "x": 1195,
+        "y": 687
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 11,
+        "w": 14
+      }
+    },
+    "ingredient/flour": {
+      "frame": {
+        "h": 36,
+        "w": 42,
+        "x": 939,
+        "y": 686
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 12,
+        "w": 14
+      }
+    },
+    "ingredient/fruit": {
+      "frame": {
+        "h": 36,
+        "w": 42,
+        "x": 683,
+        "y": 814
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 12,
+        "w": 14
+      }
+    },
+    "ingredient/matcha": {
+      "frame": {
+        "h": 36,
+        "w": 42,
+        "x": 811,
+        "y": 814
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 12,
+        "w": 14
+      }
+    },
+    "ingredient/milk": {
+      "frame": {
+        "h": 36,
+        "w": 42,
+        "x": 811,
+        "y": 686
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 12,
+        "w": 14
+      }
+    },
+    "ingredient/spice": {
+      "frame": {
+        "h": 36,
+        "w": 42,
+        "x": 299,
+        "y": 814
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 12,
+        "w": 14
+      }
+    },
+    "ingredient/sugar": {
+      "frame": {
+        "h": 30,
+        "w": 42,
+        "x": 43,
+        "y": 817
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 10,
+        "w": 14
+      }
+    },
+    "ingredient/tea": {
+      "frame": {
+        "h": 36,
+        "w": 42,
+        "x": 171,
+        "y": 814
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 12,
+        "w": 14
+      }
+    },
+    "upgrade/barista": {
+      "frame": {
+        "h": 54,
+        "w": 54,
+        "x": 1189,
+        "y": 805
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 18,
+        "w": 18
+      }
+    },
+    "upgrade/cook": {
+      "frame": {
+        "h": 54,
+        "w": 54,
+        "x": 165,
+        "y": 933
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 18,
+        "w": 18
+      }
+    },
+    "upgrade/machine": {
+      "frame": {
+        "h": 33,
+        "w": 42,
+        "x": 1067,
+        "y": 815
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 11,
+        "w": 14
+      }
+    },
+    "upgrade/marketing": {
+      "frame": {
+        "h": 36,
+        "w": 42,
+        "x": 939,
+        "y": 814
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 12,
+        "w": 14
+      }
+    },
+    "upgrade/server": {
+      "frame": {
+        "h": 54,
+        "w": 54,
+        "x": 37,
+        "y": 933
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 18,
+        "w": 18
+      }
+    },
+    "upgrade/tables": {
+      "frame": {
+        "h": 30,
+        "w": 42,
+        "x": 299,
+        "y": 945
+      },
+      "scale": 3,
+      "sourceSize": {
+        "h": 10,
+        "w": 14
+      }
+    }
+  },
+  "image": "tiny-bean-art.png",
+  "size": {
+    "h": 2688,
+    "w": 1280
+  }
+}
