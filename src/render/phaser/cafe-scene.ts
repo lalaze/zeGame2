@@ -92,7 +92,7 @@ function lampsIn(area: AreaId, state: GameState): Lamp[] {
   }
   for (const piece of state.decor.placed) {
     const def = furnitureDef(piece.id);
-    if (!def || (piece.id !== 'lamp' && piece.id !== 'sconce') || areaAtX(piece.col * CELL) !== area) continue;
+    if (!def || (piece.id !== 'lamp' && piece.id !== 'sconce' && piece.id !== 'lantern') || areaAtX(piece.col * CELL) !== area) continue;
     const o = areaOrigin(area);
     if (def.surface === 'wall') {
       const cell = cellRect('wall', piece.col, piece.row, def.w, def.h);

@@ -8,10 +8,12 @@ import type { GameState } from './state';
 import { activeTableIndices, adjacentArea, areaAtX, isAreaOpen, regionOffset } from './regions';
 
 export type Surface = 'floor' | 'wall';
+export type FurnishingCategory = 'decoration' | 'furniture';
 
 export interface FurnitureDef {
   /** Doubles as the translation key suffix: decor.<id> */
   id: string;
+  category: FurnishingCategory;
   surface: Surface;
   /** Footprint in grid cells. On the floor, h is the depth it takes up. */
   w: number;
@@ -22,29 +24,45 @@ export interface FurnitureDef {
 }
 
 export const FURNITURE: readonly FurnitureDef[] = [
-  { id: 'clock', surface: 'wall', w: 3, h: 3, cost: 0, comfort: 0 },
-  { id: 'mugrack', surface: 'wall', w: 4, h: 2, cost: 0, comfort: 0 },
-  { id: 'plant_fern', surface: 'floor', w: 2, h: 1, cost: 100, comfort: 3 },
-  { id: 'plant_snake', surface: 'floor', w: 1, h: 1, cost: 180, comfort: 3 },
-  { id: 'art_landscape', surface: 'wall', w: 4, h: 3, cost: 250, comfort: 4 },
-  { id: 'aframe', surface: 'floor', w: 2, h: 1, cost: 400, comfort: 4 },
-  { id: 'plant_fig', surface: 'floor', w: 2, h: 1, cost: 600, comfort: 5 },
-  { id: 'sconce', surface: 'wall', w: 1, h: 2, cost: 800, comfort: 4 },
-  { id: 'garland', surface: 'wall', w: 4, h: 1, cost: 1_200, comfort: 5 },
-  { id: 'lamp', surface: 'floor', w: 2, h: 1, cost: 1_500, comfort: 6 },
-  { id: 'coatrack', surface: 'floor', w: 1, h: 1, cost: 2_000, comfort: 6 },
-  { id: 'plant_monstera', surface: 'floor', w: 3, h: 1, cost: 2_500, comfort: 8 },
-  { id: 'shelf', surface: 'wall', w: 4, h: 2, cost: 3_000, comfort: 7 },
-  { id: 'bench', surface: 'floor', w: 4, h: 1, cost: 4_000, comfort: 8 },
-  { id: 'art_cat', surface: 'wall', w: 4, h: 3, cost: 5_000, comfort: 8 },
-  { id: 'catbed', surface: 'floor', w: 2, h: 1, cost: 8_000, comfort: 10 },
-  { id: 'bookshelf', surface: 'floor', w: 4, h: 1, cost: 20_000, comfort: 12 },
-  { id: 'armchair', surface: 'floor', w: 3, h: 1, cost: 60_000, comfort: 14 },
-  { id: 'plant_lemon', surface: 'floor', w: 3, h: 1, cost: 100_000, comfort: 15 },
-  { id: 'art_bean', surface: 'wall', w: 4, h: 3, cost: 150_000, comfort: 15 },
-  { id: 'gramophone', surface: 'floor', w: 2, h: 1, cost: 1_500_000, comfort: 22 },
-  { id: 'art_starry', surface: 'wall', w: 4, h: 3, cost: 5_000_000, comfort: 26 },
-  { id: 'piano', surface: 'floor', w: 5, h: 2, cost: 25_000_000, comfort: 35 },
+  { id: 'clock', category: 'decoration', surface: 'wall', w: 3, h: 3, cost: 0, comfort: 0 },
+  { id: 'mugrack', category: 'furniture', surface: 'wall', w: 4, h: 2, cost: 0, comfort: 0 },
+  { id: 'plant_fern', category: 'decoration', surface: 'floor', w: 2, h: 1, cost: 100, comfort: 3 },
+  { id: 'plant_snake', category: 'decoration', surface: 'floor', w: 1, h: 1, cost: 180, comfort: 3 },
+  { id: 'art_landscape', category: 'decoration', surface: 'wall', w: 4, h: 3, cost: 250, comfort: 4 },
+  { id: 'aframe', category: 'decoration', surface: 'floor', w: 2, h: 1, cost: 400, comfort: 4 },
+  { id: 'plant_fig', category: 'decoration', surface: 'floor', w: 2, h: 1, cost: 600, comfort: 5 },
+  { id: 'sconce', category: 'decoration', surface: 'wall', w: 1, h: 2, cost: 800, comfort: 4 },
+  { id: 'garland', category: 'decoration', surface: 'wall', w: 4, h: 1, cost: 1_200, comfort: 5 },
+  { id: 'lamp', category: 'decoration', surface: 'floor', w: 2, h: 1, cost: 1_500, comfort: 6 },
+  { id: 'coatrack', category: 'furniture', surface: 'floor', w: 1, h: 1, cost: 2_000, comfort: 6 },
+  { id: 'plant_monstera', category: 'decoration', surface: 'floor', w: 3, h: 1, cost: 2_500, comfort: 8 },
+  { id: 'shelf', category: 'furniture', surface: 'wall', w: 4, h: 2, cost: 3_000, comfort: 7 },
+  { id: 'bench', category: 'furniture', surface: 'floor', w: 4, h: 1, cost: 4_000, comfort: 8 },
+  { id: 'art_cat', category: 'decoration', surface: 'wall', w: 4, h: 3, cost: 5_000, comfort: 8 },
+  { id: 'catbed', category: 'furniture', surface: 'floor', w: 2, h: 1, cost: 8_000, comfort: 10 },
+  { id: 'bookshelf', category: 'furniture', surface: 'floor', w: 4, h: 1, cost: 20_000, comfort: 12 },
+  { id: 'armchair', category: 'furniture', surface: 'floor', w: 3, h: 1, cost: 60_000, comfort: 14 },
+  { id: 'plant_lemon', category: 'decoration', surface: 'floor', w: 3, h: 1, cost: 100_000, comfort: 15 },
+  { id: 'art_bean', category: 'decoration', surface: 'wall', w: 4, h: 3, cost: 150_000, comfort: 15 },
+  { id: 'gramophone', category: 'furniture', surface: 'floor', w: 2, h: 1, cost: 1_500_000, comfort: 22 },
+  { id: 'art_starry', category: 'decoration', surface: 'wall', w: 4, h: 3, cost: 5_000_000, comfort: 26 },
+  { id: 'piano', category: 'furniture', surface: 'floor', w: 5, h: 2, cost: 25_000_000, comfort: 35 },
+  { id: 'plant_lavender', category: 'decoration', surface: 'floor', w: 2, h: 1, cost: 120, comfort: 3 },
+  { id: 'plant_succulent', category: 'decoration', surface: 'floor', w: 1, h: 1, cost: 80, comfort: 2 },
+  { id: 'vase_daisies', category: 'decoration', surface: 'floor', w: 2, h: 1, cost: 220, comfort: 4 },
+  { id: 'poster_coffee', category: 'decoration', surface: 'wall', w: 3, h: 3, cost: 160, comfort: 3 },
+  { id: 'poster_bakery', category: 'decoration', surface: 'wall', w: 3, h: 3, cost: 280, comfort: 4 },
+  { id: 'wreath_season', category: 'decoration', surface: 'wall', w: 3, h: 3, cost: 480, comfort: 5 },
+  { id: 'hanging_ivy', category: 'decoration', surface: 'wall', w: 2, h: 3, cost: 350, comfort: 4 },
+  { id: 'wall_pennants', category: 'decoration', surface: 'wall', w: 4, h: 1, cost: 200, comfort: 3 },
+  { id: 'lantern', category: 'decoration', surface: 'floor', w: 2, h: 1, cost: 650, comfort: 5 },
+  { id: 'bean_display', category: 'decoration', surface: 'floor', w: 3, h: 1, cost: 950, comfort: 6 },
+  { id: 'sideboard', category: 'furniture', surface: 'floor', w: 4, h: 2, cost: 1800, comfort: 6 },
+  { id: 'sofa', category: 'furniture', surface: 'floor', w: 4, h: 2, cost: 3500, comfort: 8 },
+  { id: 'round_stool', category: 'furniture', surface: 'floor', w: 2, h: 1, cost: 320, comfort: 3 },
+  { id: 'display_cabinet', category: 'furniture', surface: 'floor', w: 3, h: 2, cost: 6500, comfort: 9 },
+  { id: 'magazine_rack', category: 'furniture', surface: 'floor', w: 2, h: 1, cost: 750, comfort: 4 },
+  { id: 'coffee_cart', category: 'furniture', surface: 'floor', w: 4, h: 2, cost: 12000, comfort: 11 },
 ];
 
 const BY_ID = new Map(FURNITURE.map((f) => [f.id, f]));
@@ -147,7 +165,7 @@ function fits(state: GameState, def: FurnitureDef, col: number, row: number, tab
 
 /** Whether a single cell is free, for drawing the grid while placing. */
 export function cellFree(state: GameState, surface: Surface, col: number, row: number, tables: number, skip = -1): boolean {
-  return fits(state, { id: '', surface, w: 1, h: 1, cost: 0, comfort: 0 }, col, row, tables, skip);
+  return fits(state, { id: '', category: 'decoration', surface, w: 1, h: 1, cost: 0, comfort: 0 }, col, row, tables, skip);
 }
 
 export const storedCount = (state: GameState, id: string) => state.decor.stored[id] ?? 0;

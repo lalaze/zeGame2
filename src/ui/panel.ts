@@ -9,8 +9,8 @@ import {
   type ItemId,
   type UpgradeId,
 } from '../game/data';
-import { DECOR_SLOTS, comfort, decorDef, decorForSlot, ownsDecor, useDecor } from '../game/decor';
-import { FURNITURE, buyFurniture, furnitureDef, placedCount, storedCount } from '../game/furniture';
+import { DECOR_SLOTS, comfort, decorDef, decorForSlot, ownsDecor, useDecor, type DecorSlot } from '../game/decor';
+import { FURNITURE, buyFurniture, furnitureDef, placedCount, storedCount, type FurnishingCategory } from '../game/furniture';
 import {
   arrivalRate,
   bakeForForecast,
@@ -132,6 +132,7 @@ export class Panel {
   private amount: BuyAmount = 1;
   private pantryAmount: number = PANTRY_AMOUNTS[0];
   private category: Category | 'all' = 'all';
+  private decorCategory: FurnishingCategory | 'renovation' = 'decoration';
   private varietyNote: HTMLElement | null = null;
   private bakeAllBtn: HTMLButtonElement | null = null;
   private pantryNote: HTMLElement | null = null;
@@ -140,7 +141,7 @@ export class Panel {
   private rows = new Map<string, RowRefs>();
   private tiles = new Map<string, TileRefs>();
   private furnitureTiles = new Map<string, FurnitureTileRefs>();
-  private slotNotes = new Map<string, HTMLElement>();
+  private slotNotes = new Map<DecorSlot, HTMLElement>();
   private comfortNote: HTMLElement | null = null;
   private goalSig = '';
 
@@ -201,6 +202,14 @@ export class Panel {
 
   private onListClick(e: Event): void {
     const target = e.target as HTMLElement;
+    const categoryButton = target.closest<HTMLButtonElement>('button[data-decor-category]');
+    if (categoryButton) {
+      this.decorCategory = categoryButton.dataset.decorCategory as typeof this.decorCategory;
+      this.list.scrollTop = 0;
+      this.update();
+      this.list.querySelector<HTMLButtonElement>(`[data-decor-category="${this.decorCategory}"]`)?.focus();
+      return;
+    }
     const taste = target.closest<HTMLButtonElement>('button[data-taste]');
     if (taste) {
       const id = taste.dataset.taste as ItemId;
@@ -304,7 +313,7 @@ export class Panel {
   /** Which rows are visible; the DOM is rebuilt only when this changes. */
   private visibleKeys(): string[] {
     if (this.tab === 'upgrades') return UPGRADES.map((u) => `upgrade:${u.id}`);
-    if (this.tab === 'decor') return ['decor'];
+    if (this.tab === 'decor') return ['decor', this.decorCategory];
     if (this.tab === 'pantry') return ['pantry', ...neededIngredients(this.state).map((i) => `ing:${i.id}`)];
     const keys: string[] = ['variety'];
     const cats = this.category === 'all' ? CATEGORIES : [this.category];
@@ -451,30 +460,44 @@ export class Panel {
     this.comfortNote = intro.querySelector('.comfort');
     this.list.append(intro);
 
-    // Furniture: buy pieces, then place them anywhere free in the café.
-    const furniture = document.createElement('section');
-    furniture.className = 'decor-slot furniture';
-    furniture.innerHTML = `
-      <h3 class="menu-cat">${t('furn.title')}</h3>
-      <div class="decor-intro note">${t('furn.intro')}</div>
-      <button class="pixel-btn small ghost arrange-btn" data-furniture="arrange:">${t('furn.arrange')}</button>
-      <div class="decor-grid"></div>`;
-    const fgrid = furniture.querySelector('.decor-grid')!;
-    for (const def of FURNITURE) {
-      const tile = document.createElement('div');
-      tile.className = 'tile';
-      tile.innerHTML = `
-        <img class="tile-icon" alt="" src="${iconUrl(`furniture:${def.id}`, () => furnitureIcon(def.id))}" />
-        <div class="tile-name">${decorName(def.id)}</div>
-        <div class="tile-comfort">${def.comfort > 0 ? t('decor.comfort', { n: def.comfort }) : '&nbsp;'}</div>
-        <div class="tile-count"></div>
-        <button class="pixel-btn tile-btn" data-furniture="buy:${def.id}"></button>
-        <button class="pixel-btn tile-btn ghost" data-furniture="place:${def.id}">${t('furn.place')}</button>`;
-      fgrid.append(tile);
-      const [buy, place] = tile.querySelectorAll('button');
-      this.furnitureTiles.set(def.id, { el: tile, buy, place, count: tile.querySelector('.tile-count')! });
+    const filters = document.createElement('nav');
+    filters.className = 'decor-filter';
+    filters.setAttribute('aria-label', t('decor.categories'));
+    filters.innerHTML = (['decoration', 'furniture', 'renovation'] as const).map((category) =>
+      `<button class="chip${this.decorCategory === category ? ' active' : ''}" data-decor-category="${category}" aria-pressed="${this.decorCategory === category}">${t(`decor.category.${category}`)}</button>`,
+    ).join('');
+    this.list.append(filters);
+
+    if (this.decorCategory !== 'renovation') {
+      const catalog = FURNITURE.filter((d) => d.category === this.decorCategory).sort((a, b) => a.cost - b.cost);
+      // Buy into storage, then choose a free wall or floor position.
+      const furniture = document.createElement('section');
+      furniture.className = 'decor-slot furniture';
+      furniture.innerHTML = `
+        <h3 class="menu-cat">${t(`decor.category.${this.decorCategory}`)} <small>${t('decor.catalogCount', { n: catalog.length })}</small></h3>
+        <div class="decor-intro note">${t(this.decorCategory === 'decoration' ? 'decor.decorationIntro' : 'furn.intro')}</div>
+        <button class="pixel-btn small ghost arrange-btn" data-furniture="arrange:">${t('furn.arrange')}</button>
+        <div class="decor-grid"></div>`;
+      const fgrid = furniture.querySelector('.decor-grid')!;
+      for (const def of catalog) {
+        const tile = document.createElement('div');
+        tile.className = 'tile';
+        tile.dataset.furnishing = def.id;
+        tile.innerHTML = `
+          <img class="tile-icon" alt="" src="${iconUrl(`furniture:${def.id}`, () => furnitureIcon(def.id))}" />
+          <div class="tile-name">${decorName(def.id)}</div>
+          <div class="tile-footprint">${t(`furn.surface.${def.surface}`)} · ${def.w}×${def.h}</div>
+          <div class="tile-comfort">${def.comfort > 0 ? t('decor.comfort', { n: def.comfort }) : '&nbsp;'}</div>
+          <div class="tile-count"></div>
+          <button class="pixel-btn tile-btn" data-furniture="buy:${def.id}"></button>
+          <button class="pixel-btn tile-btn ghost" data-furniture="place:${def.id}">${t('furn.place')}</button>`;
+        fgrid.append(tile);
+        const [buy, place] = tile.querySelectorAll('button');
+        this.furnitureTiles.set(def.id, { el: tile, buy, place, count: tile.querySelector('.tile-count')! });
+      }
+      this.list.append(furniture);
+      return;
     }
-    this.list.append(furniture);
 
     const room = document.createElement('div');
     room.className = 'decor-intro';
@@ -542,7 +565,7 @@ export class Panel {
     if (this.tab === 'decor') {
       const c = comfort(s);
       if (this.comfortNote) this.comfortNote.textContent = t('decor.summary', { n: c, pct: Math.round((tipMultiplier(s) - 1) * 100) });
-      for (const slot of DECOR_SLOTS) this.slotNotes.get(slot)!.textContent = decorName(s.decor.equipped[slot]);
+      for (const [slot, note] of this.slotNotes) note.textContent = decorName(s.decor.equipped[slot]);
       for (const [id, refs] of this.tiles) {
         const def = decorDef(id)!;
         const equipped = s.decor.equipped[def.slot] === id;
@@ -560,7 +583,7 @@ export class Panel {
           stored > 0 ? t('furn.count', { placed, stored }) : placed > 0 ? t('furn.out', { n: placed }) : '';
         // Starter pieces can't be bought again, only moved.
         refs.buy.hidden = def.cost === 0;
-        refs.buy.textContent = formatMoney(def.cost);
+        refs.buy.textContent = t('furn.buy', { price: formatMoney(def.cost) });
         refs.buy.disabled = s.coins < def.cost;
         refs.place.hidden = stored === 0;
         refs.el.classList.toggle('equipped', placed > 0);

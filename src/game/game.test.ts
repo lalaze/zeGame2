@@ -887,6 +887,33 @@ describe('furniture', () => {
     }
   });
 
+  it('keeps new furnishings through purchase, placement, storage and reload without adding seats', () => {
+    const s = rich();
+    const seats = tableCount(s);
+    for (const id of ['plant_lavender', 'poster_coffee', 'sofa', 'lantern']) {
+      const def = FURNITURE.find((f) => f.id === id)!;
+      const before = s.coins;
+      expect(buyFurniture(s, id)).toBe(true);
+      expect(s.coins).toBe(before - def.cost);
+      let spot: { col: number; row: number } | undefined;
+      for (let row = 0; row < 16 && !spot; row++) for (let col = 0; col < 40 && !spot; col++) {
+        if (canPlace(s, id, col, row, seats)) spot = { col, row };
+      }
+      expect(spot, id).toBeDefined();
+      expect(placeFurniture(s, id, spot!.col, spot!.row, seats)).toBe(true);
+    }
+    expect(tableCount(s)).toBe(seats);
+    const saved = deserialize(serialize(s), 0);
+    expect(saved.decor.placed).toEqual(s.decor.placed);
+    expect(comfort(saved)).toBe(19);
+    const sofa = saved.decor.placed.findIndex((p) => p.id === 'sofa');
+    storeFurniture(saved, sofa);
+    const restored = deserialize(serialize(saved), 0);
+    expect(restored.decor.stored.sofa).toBe(1);
+    expect(comfort(restored)).toBe(11);
+    expect(tableCount(restored)).toBe(seats);
+  });
+
   it('turns old wall art and plant slots into furniture', () => {
     const v5 = JSON.stringify({
       version: 5,

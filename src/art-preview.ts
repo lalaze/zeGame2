@@ -22,7 +22,7 @@ for (const item of MENU) add(`food/${item.id}`, '餐点', t(`item.${item.id}` as
 for (const item of INGREDIENTS) add(`ingredient/${item.id}`, '食材', t(`ing.${item.id}` as MessageKey), ingredientIcon(item.id));
 for (const item of UPGRADES) add(`upgrade/${item.id}`, '设备', t(`upgrade.${item.id}.name` as MessageKey), upgradeIcon(item.id));
 for (const item of DECOR) add(`decor/${item.id}`, '装修', t(`decor.${item.id}` as MessageKey), decorIcon(item.id));
-for (const item of FURNITURE) add(`furniture/${item.id}`, '家具', t(`decor.${item.id}` as MessageKey), furnitureIcon(item.id));
+for (const item of FURNITURE) add(`furniture/${item.id}`, item.category === 'decoration' ? '装饰' : '家具', t(`decor.${item.id}` as MessageKey), furnitureIcon(item.id));
 const roles: [Role, string][] = [['owner','店主'],['barista','咖啡师'],['server','服务员'],['cook','厨师'],['customer','顾客']];
 roles.forEach(([role, name], i) => {
   const frames = character({ skin: i % 4, hair: i, hairStyle: i % 4, shirt: i, pants: i % 3 }, role);

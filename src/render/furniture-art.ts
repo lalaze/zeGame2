@@ -1,6 +1,7 @@
 // Pixel art for placeable furniture. Wall pieces are drawn into their footprint;
 // floor pieces stand on the floor, centered on their footprint, and may rise above it.
 import { CELL, furnitureDef } from '../game/furniture';
+import { collectionSprite } from './furnishing-collection';
 import { mix, ramp } from './color';
 import { grain, paintArt, plantSprite, shadow } from './decor-art';
 import { OUTLINE, pixelSprite } from './sprites';
@@ -368,7 +369,7 @@ const SPRITES: Record<string, () => HTMLCanvasElement> = {
 };
 
 function spriteFor(id: string): HTMLCanvasElement | undefined {
-  return SPRITES[id]?.() ?? plantSprite(id);
+  return SPRITES[id]?.() ?? plantSprite(id) ?? collectionSprite(id);
 }
 
 /** An analog clock face showing `now`, centered on (cx, cy). */
@@ -435,7 +436,7 @@ export function paintFloorFurniture(ctx: Ctx, id: string, cx: number, footY: num
   shadow(ctx, cx, footY, Math.max(10, sprite.width * 0.8));
   const x = Math.round(cx - sprite.width / 2);
   ctx.drawImage(sprite, x, footY - sprite.height + 1);
-  if (id === 'lamp') glow(ctx, cx, footY - sprite.height + 4, 18);
+  if (id === 'lamp' || id === 'lantern') glow(ctx, cx, footY - sprite.height + 4, 18);
 }
 
 /** The drawn bounds of a floor piece, for tapping it. */

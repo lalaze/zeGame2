@@ -1763,3 +1763,8 @@ html:lang(zh) body {
   .row.pop { animation: none; }
   .bar i { transition: none; }
 }
+
+.decor-filter { display: flex; gap: 8px; padding: 4px 3px 8px; }
+.decor-filter .chip { flex: 1; min-width: 0; margin: 0; padding: 7px 3px; }
+.tile-footprint { font-size: 11px; color: var(--muted); margin-bottom: 3px; }
+.decor-slot > .note { margin-bottom: 10px; line-height: 1.5; }
