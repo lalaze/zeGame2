@@ -400,7 +400,7 @@ export class CafeScene extends Phaser.Scene {
         if (this.sim.isHolding(i)) cups.push({ x: baristaSpot(i).x, fill: 1 });
       });
       const counter = this.layer('room-main-counter', DEPTH.counter);
-      const shelf = state.phase === 'open' ? state.shelf : state.bakePlan;
+      const shelf = state.phase !== 'prep' ? state.shelf : state.bakePlan;
       const counterSig = [
         decor.counter,
         state.upgrades.machine,

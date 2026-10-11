@@ -29,11 +29,16 @@ import {
   seatSpot,
   serverHome,
   serviceSpot,
+  sceneHeight,
   tableArea,
 } from './layout';
 import { batchSteps, cookHome, kitchenPath, nextBatch, shelveBatch, startBatch, stationSpot, STATION_SECONDS, type Station } from './kitchen';
 import { activeTableIndices, type AreaId } from './regions';
 import type { GameState, Look } from './state';
+import { validSnapshot, type SimSnapshot } from './sim-snapshot';
+
+import { recordReview, mealReview, type ReviewInput } from './reputation';
+import { recordServings } from './taste';
 
 export type { Look };
 
@@ -57,6 +62,10 @@ export interface Walker {
 }
 
 export interface Customer extends Walker {
+  /** One review per visit, persisted with in-flight orders. */
+  reviewed: boolean;
+  waitSeconds: number;
+  missingExtra: boolean;
   id: number;
   phase: CustomerPhase;
   look: Look;
@@ -158,8 +167,56 @@ export class Sim {
   rack: ItemId[] = [];
   private spawnTimer = 1.5;
   private nextId = 1;
+  private boostCooldown = 0;
 
   constructor(private rng: () => number = Math.random) {}
+
+  snapshot(state: GameState): SimSnapshot {
+    return structuredClone({
+      version: 1, day: state.day, phase: state.phase, served: state.today.served, height: sceneHeight(),
+      customers: this.customers, baristas: this.baristas, servers: this.servers, cooks: this.cooks,
+      queue: this.queue, seats: this.seats, pass: this.pass, rack: this.rack,
+      spawnTimer: this.spawnTimer, nextId: this.nextId, boostCooldown: this.boostCooldown,
+    });
+  }
+
+  restore(raw: unknown, state: GameState): boolean {
+    if (!validSnapshot(raw, state)) return false;
+    const saved = structuredClone(raw);
+    this.customers = saved.customers.map((c) => ({
+      ...c,
+      reviewed: c.reviewed ?? (c.hasCup || c.soldOut || c.phase === 'sitting' || c.phase === 'exiting'),
+      waitSeconds: c.waitSeconds ?? 0,
+      missingExtra: c.missingExtra ?? false,
+    }));
+    this.baristas = saved.baristas;
+    this.servers = saved.servers;
+    this.cooks = saved.cooks;
+    this.queue = saved.queue;
+    this.seats = saved.seats;
+    this.pass = saved.pass;
+    this.rack = saved.rack;
+    this.spawnTimer = saved.spawnTimer;
+    this.nextId = saved.nextId;
+    this.boostCooldown = saved.boostCooldown;
+    // JSON duplicates tray objects that also live on the pass. Restore shared identity.
+    for (const server of this.servers) server.plates = server.plates.map((p) => this.pass.find((plate) => plate.customerId === p.customerId) ?? p);
+    this.resizeScene(saved.height);
+    state.inProduction = {};
+    for (const cook of this.cooks) if (cook.batch) state.inProduction[cook.batch.item] = (state.inProduction[cook.batch.item] ?? 0) + cook.batch.n;
+    return true;
+  }
+
+  beginClosing(state: GameState): void {
+    if (state.phase !== 'open') return;
+    state.phase = 'closing';
+    for (const c of this.customers) if (c.phase === 'queue') this.exit(c);
+    this.queue = [];
+  }
+
+  get finishedService(): boolean {
+    return !this.customers.some((c) => !['sitting', 'exiting'].includes(c.phase)) && !this.cooks.some((c) => c.batch);
+  }
 
   resizeScene(fromHeight: number): void {
     const move = (w: Walker) => {
@@ -227,6 +284,9 @@ export class Sim {
     const door = doorSpot();
     const c: Customer = {
       id: this.nextId++,
+      reviewed: false,
+      waitSeconds: 0,
+      missingExtra: false,
       x: door.x,
       y: door.y,
       tx: pos.x,
@@ -298,6 +358,12 @@ export class Sim {
     return available.length > 0 ? available[this.randInt(available.length)] : -1;
   }
 
+  private review(state: GameState, c: Customer, review: ReviewInput): void {
+    if (c.reviewed) return;
+    c.reviewed = true;
+    recordReview(state, review);
+  }
+
   /** The customer pays for their order, wherever they get it. */
   private charge(state: GameState, c: Customer, events: SimEvent[]): void {
     const bought = c.extra ? [c.order, c.extra] : [c.order];
@@ -308,6 +374,8 @@ export class Sim {
     state.today.revenue += amount;
     for (const id of bought) state.today.sales[id] = (state.today.sales[id] ?? 0) + 1;
     events.push({ type: 'sale', amount, x: c.x, y: c.y - 52, vip: c.vip });
+    this.review(state, c, mealReview(state, bought, c.waitSeconds, c.missingExtra));
+    recordServings(state, bought);
     c.hasCup = true;
     c.mood = 'happy';
     c.moodTimer = 1.5;
@@ -341,12 +409,19 @@ export class Sim {
         c.moodTimer = 2.2;
         state.today.missed++;
         state.today.soldOut++;
+        this.review(state, c, { stars: 1, reason: 'soldOut' });
+        state.today.shortages[c.order] = (state.today.shortages[c.order] ?? 0) + 1;
         events.push({ type: 'soldout', item: c.order, x: c.x, y: c.y - 30 });
         this.exit(c);
         return;
       }
       // The add-on is skipped (not a deal breaker) if it has sold out.
-      if (c.extra && !consumeServing(state, c.extra, state.today)) c.extra = null;
+      if (c.extra && !consumeServing(state, c.extra, state.today)) {
+        state.today.extraLost++;
+        c.missingExtra = true;
+        state.today.shortages[c.extra] = (state.today.shortages[c.extra] ?? 0) + 1;
+        c.extra = null;
+      }
       c.phase = 'ordering';
       b.total = b.remaining = prepTime(state, c.order) + (c.extra ? prepTime(state, c.extra) : 0);
       // With a table free, some stay: they take a seat and the order is brought over.
@@ -540,19 +615,25 @@ export class Sim {
   update(state: GameState, dt: number): SimEvent[] {
     const events: SimEvent[] = [];
     this.sync(state);
+    this.boostCooldown = Math.max(0, this.boostCooldown - dt);
 
     const open = state.phase === 'open';
-    if (open) state.dayTime += dt;
+    const running = state.phase !== 'prep';
+    if (running) state.dayTime += dt;
     this.spawnTimer -= dt;
     if (this.spawnTimer <= 0) {
       // Jittered so customers don't march in like clockwork.
       this.spawnTimer = (0.5 + this.rng()) / arrivalRate(state);
-      if (open && this.queue.length < MAX_QUEUE) this.spawn(state);
+      if (open) {
+        if (this.queue.length < MAX_QUEUE) this.spawn(state);
+        else state.today.doorLost++;
+      }
     }
 
     this.callNext();
 
     for (const c of this.customers) {
+      if (running && !c.reviewed && c.phase !== 'sitting' && c.phase !== 'exiting') c.waitSeconds += dt;
       if (step(c, dt)) this.arrive(state, c, events);
 
       if (c.moodTimer > 0) {
@@ -567,12 +648,15 @@ export class Sim {
           this.relayoutQueue();
           c.mood = 'sad';
           c.moodTimer = 2;
-          if (open) state.today.missed++;
+          if (running) {
+            state.today.missed++; state.today.queueLost++;
+            this.review(state, c, { stars: 2, reason: 'queueWait' });
+          }
           events.push({ type: 'walkout', x: c.x, y: c.y - 30 });
           this.exit(c);
         }
       } else if (c.phase === 'ordering' && c.dineIn) {
-        // Ordered and paid up front; off to the table to wait.
+        // Ordered; payment happens when the server delivers.
         c.timer -= dt;
         if (c.timer <= 0) {
           c.phase = 'toSeat';
@@ -586,7 +670,10 @@ export class Sim {
           this.pass = this.pass.filter((p) => p.customerId !== c.id || p.server !== null);
           c.mood = 'sad';
           c.moodTimer = 2;
-          if (open) state.today.missed++;
+          if (running) {
+            state.today.missed++; state.today.tableLost++;
+            this.review(state, c, { stars: 1, reason: 'tableWait' });
+          }
           events.push({ type: 'walkout', x: c.x, y: c.y - 30 });
           this.exit(c);
         }
@@ -623,7 +710,12 @@ export class Sim {
    * books are settled.
    */
   closeShop(state: GameState): DayReport | null {
-    if (state.phase !== 'open') return null;
+    if (state.phase === 'prep') return null;
+    for (const c of this.customers) {
+      if (c.phase === 'toCounter' || c.phase === 'ordering' || c.phase === 'toSeat' || c.phase === 'waiting') {
+        this.review(state, c, { stars: 1, reason: 'cancelled' });
+      }
+    }
     this.sendHome();
     return finishDay(state);
   }
@@ -655,6 +747,7 @@ export class Sim {
 
   /** Player taps to help: every brewing barista jumps ahead a bit. */
   boost(): boolean {
+    if (this.boostCooldown > 0) return false;
     let any = false;
     for (const b of this.baristas) {
       if (b.customerId !== null && b.total > 0 && b.remaining > 0) {
@@ -662,6 +755,7 @@ export class Sim {
         any = true;
       }
     }
+    if (any) this.boostCooldown = 1;
     return any;
   }
 

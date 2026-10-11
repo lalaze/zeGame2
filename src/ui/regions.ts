@@ -106,6 +106,7 @@ export class RegionsUI {
     this.card.innerHTML = `<div class="region-kicker">${t('area.future', { n: AREA_IDS.indexOf(this.area) })}</div>
       <h2>${areaName(this.area)}</h2><p>${t(`area.${this.area}.desc` as MessageKey)}</p>
       <div class="region-benefits"><span>${t('area.addTables', { n: def.tables })}</span><span>${t('area.demand', { n: Math.round(def.demand * 100) })}</span></div>
+      <p class="note">${t('area.serviceDistance')}</p>
       <button class="pixel-btn" data-expand ${block ? 'disabled' : ''}>${t('area.unlock')} · ${formatMoney(def.cost)}</button>
       <small class="region-reason">${reason}</small>`;
   }

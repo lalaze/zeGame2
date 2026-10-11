@@ -1,6 +1,4 @@
 import {
-  BAKE_STEP,
-  COOK_BATCH,
   BASE_ARRIVAL_RATE,
   COMBO_CHANCE,
   MAX_VARIETY_BONUS,
@@ -25,6 +23,8 @@ import {
 import { comfort } from './decor';
 import { activeTableIndices, regionDemand } from './regions';
 import type { DayStats, GameState } from './state';
+import { bakeryPlan } from './kitchen';
+import { reputationTraffic } from './reputation';
 
 export type BuyAmount = 1 | 10 | 'max';
 
@@ -45,12 +45,17 @@ export function nextMilestone(level: number): number | null {
 }
 
 export function itemPrice(def: MenuItemDef, level: number): number {
-  return level <= 0 ? 0 : def.basePrice * level * milestoneMultiplier(level);
+  if (level <= 0) return 0;
+  const next = nextMilestone(level);
+  const previous = [...PRICE_MILESTONES].reverse().find((m) => m <= level) ?? 1;
+  const progress = next ? (level - previous) / (next - previous) : 0;
+  return def.basePrice * level * milestoneMultiplier(level) * (1 + 0.8 * progress);
 }
 
 /** Total cost of `n` purchases of something priced base * growth^level. */
 export function bulkCost(base: number, growth: number, level: number, n: number): number {
   if (n <= 0) return 0;
+  if (n === 1) return base * growth ** level;
   return (base * growth ** level * (growth ** n - 1)) / (growth - 1);
 }
 
@@ -146,7 +151,7 @@ export const prepMultiplier = (s: GameState) => 0.9 ** s.upgrades.machine;
 export const varietyBonus = (s: GameState) =>
   Math.min(MAX_VARIETY_BONUS, VARIETY_BONUS * Math.max(0, menuItems(s).length - 1));
 export const arrivalRate = (s: GameState) =>
-  BASE_ARRIVAL_RATE * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * (1 + varietyBonus(s));
+  BASE_ARRIVAL_RATE * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * (1 + varietyBonus(s)) * reputationTraffic(s.reputation);
 export const tipMultiplier = (s: GameState) => 1 + comfort(s) / 100;
 /** The café opens with a table in each nook; Expand the Shop adds the rest. */
 export const tableCount = (s: GameState) => activeTableIndices(s).length;
@@ -168,6 +173,7 @@ export function menuItems(state: GameState): MenuItemDef[] {
 }
 
 export function setOnMenu(state: GameState, id: ItemId, on: boolean): void {
+  if (state.phase !== 'prep') return;
   const set = new Set(state.onMenu);
   if (on && state.items[id] > 0) set.add(id);
   else set.delete(id);
@@ -232,7 +238,7 @@ export function servingsLeft(state: GameState, id: ItemId): number {
  * after reserving that bake. Drink counts are individual capacities, not additive.
  */
 export function readyServings(state: GameState, id: ItemId): number {
-  if (state.phase === 'open') return isBakery(id) ? state.shelf[id] ?? 0 : servingsLeft(state, id);
+  if (state.phase !== 'prep') return isBakery(id) ? state.shelf[id] ?? 0 : servingsLeft(state, id);
   const projected = projectMorningBake(state);
   return isBakery(id) ? projected.shelf[id] ?? 0 : servingsLeft({ ...state, pantry: projected.pantry }, id);
 }
@@ -242,7 +248,7 @@ export function readyServings(state: GameState, id: ItemId): number {
  * used at the morning bake); a drink uses its ingredients now. Returns false if none left.
  */
 export function consumeServing(state: GameState, id: ItemId, today?: DayStats): boolean {
-  if (isBakery(id) && state.phase === 'open') {
+  if (isBakery(id) && state.phase !== 'prep') {
     if ((state.shelf[id] ?? 0) < 1) return false;
     state.shelf[id]!--;
     return true;
@@ -255,10 +261,11 @@ export function consumeServing(state: GameState, id: ItemId, today?: DayStats): 
 
 // ---------------------------------------------------------------- the morning bake
 
-/** A bake amount that should cover a normal day's sales of an item, in BAKE_STEP steps. */
+/** Exact forecast portions, or enough shelf stock to bridge kitchen replenishment. */
 export function suggestedBake(state: GameState, id: ItemId): number {
   const demand = dayDemand(state).get(id) ?? 0;
-  return Math.max(BAKE_STEP, Math.ceil(demand / BAKE_STEP) * BAKE_STEP);
+  if (!state.kitchen) return Math.ceil(demand);
+  return bakeryPlan(state).get(id)?.morning ?? Math.ceil(demand);
 }
 
 /** Gives every bread and pastry on the menu a bake amount if it doesn't have one yet. */
@@ -269,11 +276,13 @@ export function fillBakePlan(state: GameState): void {
 }
 
 export function setBakePlan(state: GameState, id: ItemId, n: number): void {
+  if (!Number.isFinite(n) || state.phase !== 'prep') return;
   state.bakePlan[id] = Math.max(0, Math.min(9_999, Math.round(n)));
 }
 
 /** Sets every bread and pastry on the menu to bake what a normal day sells. */
 export function bakeForForecast(state: GameState): void {
+  if (state.phase !== 'prep') return;
   for (const m of menuItems(state)) if (isBakery(m.id)) state.bakePlan[m.id] = suggestedBake(state, m.id);
 }
 
@@ -344,9 +353,16 @@ export function dayDemand(state: GameState): Map<ItemId, number> {
 export function dayNeeds(state: GameState): Partial<Record<IngredientId, number>> {
   const needs: Partial<Record<IngredientId, number>> = {};
   for (const [id, servings] of dayDemand(state)) {
-    // Breads and pastries need exactly the planned morning bake, plus a batch per cook
-    // for baking fresh during the day; drinks a bit of spare.
-    const amount = isBakery(id) ? (state.bakePlan[id] ?? 0) + cookCount(state) * COOK_BATCH : servings * 1.15;
+    // Cover planned morning production or forecast consumption, never both twice.
+    // Live shelf stock and paid in-flight batches reduce future ingredient needs.
+    const morning = state.phase === 'prep' ? state.bakePlan[id] ?? 0 : 0;
+    const shelf = state.phase === 'prep' ? 0 : state.shelf[id] ?? 0;
+    const inProgress = state.phase === 'prep' ? 0 : state.inProduction[id] ?? 0;
+    const amount = isBakery(id)
+      ? state.kitchen
+        ? Math.max(morning, Math.ceil(servings * 1.1) - shelf - inProgress)
+        : morning
+      : servings * 1.15;
     for (const [ing, n] of recipe(id)) needs[ing] = (needs[ing] ?? 0) + amount * n;
   }
   for (const k of Object.keys(needs) as IngredientId[]) needs[k] = Math.ceil(needs[k]!);

@@ -16,6 +16,9 @@ export class SaveSession {
   constructor(private storage: SaveStorage, now: number, private release: () => void) {
     this.expected = storage.getItem(SAVE_KEY);
     this.state = deserialize(this.expected, now);
+    let runtime: unknown;
+    try { runtime = JSON.parse(this.expected ?? '{}').runtime; } catch { /* invalid save uses defaults */ }
+    if (!this.sim.restore(runtime, this.state)) this.state.inProduction = {};
   }
 
   save(state: GameState): SaveResult {
@@ -27,7 +30,8 @@ export class SaveSession {
         this.close();
         return 'conflict';
       }
-      const raw = serialize(state);
+      const payload = { ...state, runtime: state.phase === 'prep' ? undefined : this.sim.snapshot(state) };
+      const raw = serialize(payload);
       this.storage.setItem(SAVE_KEY, raw);
       this.expected = raw;
       return 'saved';

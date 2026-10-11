@@ -1,9 +1,14 @@
+import { reputationScore, reputationTraffic } from './reputation';
 import type { ItemId } from './data';
-import { bakeMorning, dayDemand, isBakery, menuItems, projectMorningBake, recipe, servingsLeft, servingCost, soldOutItems } from './economy';
+import { bakeMorning, dayDemand, isBakery, menuItems, projectMorningBake, recipe, servingsLeft, servingCost, soldOutItems, suggestedBake } from './economy';
 import { emptyDay, type DayStats, type GameState } from './state';
 
 export interface DayReport extends DayStats {
+  rating: number;
+  ratingCount: number;
+  ratingTraffic: number;
   day: number;
+  duration: number;
   /** Revenue minus what the ingredients used cost. */
   profit: number;
   bestSeller: ItemId | null;
@@ -20,7 +25,7 @@ export type OpenCheck = { ok: true } | { ok: false; reason: 'emptyMenu' } | { ok
 
 /**
  * Whether the shop can open: something must be on the menu. Also warns about dishes
- * whose stock won't last half a day, accounting for shared ingredients after baking.
+ * with insufficient opening stock, reserving shared ingredients after baking.
  */
 export function checkOpen(state: GameState): OpenCheck {
   if (state.phase !== 'prep') return { ok: true };
@@ -30,10 +35,12 @@ export function checkOpen(state: GameState): OpenCheck {
   const projected = { ...state, ...projectMorningBake(state) };
   const low: ItemId[] = [];
   for (const m of items) {
-    const needed = Math.max(1, Math.ceil((demand.get(m.id) ?? 0) * 0.5));
+    const needed = isBakery(m.id) && state.kitchen
+      ? Math.max(1, suggestedBake(state, m.id))
+      : Math.max(1, Math.ceil((demand.get(m.id) ?? 0) * 0.5));
     const ready = isBakery(m.id) ? projected.shelf[m.id] ?? 0 : servingsLeft(projected, m.id);
     if (ready < needed) low.push(m.id);
-    // Reserve the warning's half-day target, so drinks don't reuse each other's stock.
+    // Reserve each drink's target, so they do not reuse the same ingredients.
     if (!isBakery(m.id)) {
       for (const [ing, n] of recipe(m.id)) projected.pantry[ing] -= n * Math.min(ready, needed);
     }
@@ -70,9 +77,14 @@ export function finishDay(state: GameState): DayReport {
   }
   const report: DayReport = {
     ...today,
+    reviews: structuredClone(today.reviews),
+    rating: reputationScore(state.reputation),
+    ratingCount: state.reputation.recent.length,
+    ratingTraffic: reputationTraffic(state.reputation),
     sales: { ...today.sales },
     baked: { ...today.baked },
     day: state.day,
+    duration: state.dayTime,
     profit: today.revenue - today.ingredientCost,
     bestSeller,
     outOfStock: soldOutItems(state).map((m) => m.id),
@@ -81,6 +93,7 @@ export function finishDay(state: GameState): DayReport {
     staleCost,
   };
   state.shelf = {};
+  state.inProduction = {};
   state.phase = 'prep';
   state.day++;
   state.dayTime = 0;

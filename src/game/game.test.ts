@@ -711,7 +711,7 @@ describe('morning bake', () => {
     s.coins = 1000;
     buyItem(s, 'roll', 1);
     expect(s.bakePlan.roll).toBe(suggestedBake(s, 'roll'));
-    expect(s.bakePlan.roll! % 5).toBe(0);
+    expect(Number.isInteger(s.bakePlan.roll)).toBe(true);
     expect(s.bakePlan.roll).toBeGreaterThan(0);
   });
 

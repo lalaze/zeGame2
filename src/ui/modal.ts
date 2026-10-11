@@ -2,6 +2,7 @@ export interface ModalButton {
   label: string;
   primary?: boolean;
   danger?: boolean;
+  disabled?: boolean;
   onClick?: () => void;
 }
 
@@ -51,6 +52,7 @@ export function showModal(opts: ModalOptions): void {
     const btn = document.createElement('button');
     btn.className = 'pixel-btn' + (b.primary ? '' : b.danger ? ' danger' : ' ghost');
     btn.textContent = b.label;
+    btn.disabled = b.disabled ?? false;
     btn.addEventListener('click', () => {
       closeModal();
       b.onClick?.();

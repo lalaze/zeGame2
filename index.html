@@ -64,6 +64,10 @@
           <button id="settings-btn" class="pixel-btn small ghost" data-i18n-title="hud.settings">···</button>
         </div>
       </header>
+      <button id="reputation-btn" class="reputation-bar" aria-haspopup="dialog">
+        <span id="reputation-score"></span><span id="reputation-traffic"></span>
+        <span class="reputation-more" aria-hidden="true">›</span>
+      </button>
 
       <main class="layout">
         <section class="stage" id="stage">
@@ -92,6 +96,7 @@
             </div>
           </div>
           <div class="stage-stats" id="stage-stats" hidden></div>
+          <button class="operation-status chip" id="operation-status" hidden></button>
           <div class="hint" id="hint" data-i18n="hint.tap" hidden>Tap the café to help brew faster!</div>
         </section>
 

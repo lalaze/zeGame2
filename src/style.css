@@ -996,7 +996,7 @@ html:lang(zh) body {
 
   .stage {
     flex: 0 0 auto;
-    height: min(calc((100vw - 16px) * 2 / 3 + 16px), 46dvh);
+    height: min(calc((100vw - 16px) * 2 / 3 + 60px), 46dvh);
     padding: 8px;
   }
 
@@ -1653,3 +1653,94 @@ html:lang(zh) body {
 .stage-stats:not([hidden]) ~ .hint {
   bottom: 98px;
 }
+
+/* Preparation keeps selection and production controls separate on small screens. */
+.prep-row { flex-wrap: wrap; }
+.prep-select { display: flex; align-items: center; gap: 8px; flex: 1 1 170px; min-width: 0; cursor: pointer; }
+.prep-select img { width: 36px; height: 36px; object-fit: contain; image-rendering: pixelated; }
+.prep-row .bake { flex-wrap: wrap; }
+.bake-input { width: 64px; min-height: 32px; padding: 3px; border: 2px solid #b9936c; border-radius: 4px; background: #fff9ec; color: #493728; font: inherit; text-align: center; }
+.operation-status { display: block; flex-shrink: 0; height: 32px; max-width: calc(100% - 16px); margin: 6px auto; padding: 5px 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.operation-status[hidden] { display: none; }
+.prep [role="status"]:empty { display: none; }
+@media (max-width: 480px) { .prep-row .bake { flex-basis: 100%; padding-left: 28px; } }
+
+@media (max-width: 760px) { .day-hud { max-width: calc(100% - 76px); flex-wrap: wrap; justify-content: flex-end; } }
+
+.toast { max-width: calc(100vw - 32px); white-space: normal; text-align: center; pointer-events: none; }
+
+/* Reputation stays visible even when the management panel is collapsed. */
+.reputation-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-shrink: 0;
+  min-height: 36px;
+  padding: 6px 14px;
+  border: 0;
+  border-bottom: 3px solid var(--ink);
+  color: var(--ink);
+  background: var(--cream);
+  font-size: 14px;
+}
+.reputation-bar:hover { background: #fff0cf; }
+.reputation-bar:focus-visible { outline: 3px solid var(--green-dark); outline-offset: -3px; }
+#reputation-score { font-weight: bold; }
+#reputation-traffic { color: var(--brown); }
+.reputation-more { font-size: 20px; line-height: 1; }
+.rating-overview { display: grid; gap: 6px; padding: 12px; background: var(--paper); border: 2px solid var(--brown); }
+.rating-overview strong { font-size: 24px; }
+.guest-reviews, .review-reasons { list-style: none; margin: 8px 0; padding: 0; }
+.guest-review { padding: 10px 0; border-bottom: 1px solid #94532a55; }
+.guest-review > div, .review-reasons li { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.guest-review p { font-size: 14px; }
+.review-stars { color: #92510e; white-space: nowrap; }
+.review-reasons li { font-size: 14px; margin: 6px 0; }
+.review-reasons b { flex-shrink: 0; }
+.rating-rules { margin-top: 12px; }
+.rating-rules summary { cursor: pointer; }
+.rating-report { margin: 14px 0; padding: 10px; border: 2px solid var(--brown); background: #fff0cf; }
+.rating-report h3 { margin: 0 0 8px; font-size: 16px; }
+.rating-result { font-weight: bold; }
+@media (max-width: 480px) {
+  .reputation-bar { min-height: 40px; gap: 8px; padding: 6px 8px; font-size: 12px; }
+  .reputation-more { margin-left: auto; }
+}
+.modal:has(.rating-overview), .modal:has(.rating-report) {
+  max-height: calc(100dvh - 64px);
+  display: flex;
+  flex-direction: column;
+}
+.modal:has(.rating-overview) .modal-body, .modal:has(.rating-report) .modal-body {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.modal:has(.rating-overview) > h2, .modal:has(.rating-report) > h2,
+.modal:has(.rating-overview) .modal-actions, .modal:has(.rating-report) .modal-actions { flex-shrink: 0; }
+
+.taste-chip {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  margin: 7px 0 3px;
+  padding: 6px;
+  text-align: left;
+  line-height: 1.3;
+  font-size: 12px;
+  color: var(--ink);
+  border: 1px solid var(--brown);
+  background: #fff0cf;
+}
+.taste-chip:hover, .taste-chip:focus-visible { background: #fff8e7; outline: 2px solid var(--brown); }
+.taste-progress { color: var(--muted); font-size: 11px; }
+.taste-overview { padding: 10px; border: 2px solid var(--brown); background: var(--paper); }
+.taste-overview strong { font-size: 18px; }
+.taste-levels { padding-left: 20px; line-height: 1.5; }
+.review-stars { position: relative; color: #baaa88; }
+.review-stars > span { position: absolute; left: 0; top: 0; overflow: hidden; color: #92510e; white-space: nowrap; }
+.review-dishes { overflow-wrap: anywhere; }
+.modal:has(.taste-overview) { max-height: calc(100dvh - 64px); display: flex; flex-direction: column; }
+.modal:has(.taste-overview) .modal-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.modal:has(.taste-overview) > h2, .modal:has(.taste-overview) .modal-actions { flex-shrink: 0; }

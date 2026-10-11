@@ -32,6 +32,7 @@ import {
   setBakePlan,
   setOnMenu,
   suggestedBake,
+  servingCost,
   usedBy,
   varietyBonus,
   isBakery,
@@ -52,12 +53,14 @@ import { GOALS, claimGoal, currentGoal, goalDone } from '../game/goals';
 import type { GameState } from '../game/state';
 import { mainTableCount } from '../game/regions';
 import { t, type MessageKey } from '../i18n';
+import { toast } from './modal';
+import { showTaste, tasteLabel, tasteProgressLabel } from './taste';
 import { decorIcon } from '../render/decor-art';
 import { furnitureIcon } from '../render/furniture-art';
 import { ingredientIcon, itemIcon, toDataURL, upgradeIcon } from '../render/sprites';
 
 type Tab = 'menu' | 'pantry' | 'upgrades' | 'decor';
-export type PurchaseKind = 'item' | 'upgrade' | 'decor' | 'goal' | 'ingredient' | 'menu';
+export type PurchaseKind = 'item' | 'upgrade' | 'decor' | 'goal' | 'ingredient' | 'menu' | 'recipe';
 
 /** How many units one tap buys in the pantry. */
 const PANTRY_AMOUNTS = [10, 50, 200] as const;
@@ -73,6 +76,7 @@ interface RowRefs {
   toggle: HTMLButtonElement | null;
   recipe: HTMLElement | null;
   bake: HTMLElement | null;
+  taste: HTMLButtonElement | null;
 }
 
 interface TileRefs {
@@ -197,6 +201,12 @@ export class Panel {
 
   private onListClick(e: Event): void {
     const target = e.target as HTMLElement;
+    const taste = target.closest<HTMLButtonElement>('button[data-taste]');
+    if (taste) {
+      const id = taste.dataset.taste as ItemId;
+      showTaste(this.state, id, () => { this.onPurchase('recipe', id); this.update(); });
+      return;
+    }
     const furniture = target.closest<HTMLButtonElement>('button[data-furniture]');
     if (furniture && !furniture.disabled) {
       const [action, id] = furniture.dataset.furniture!.split(':');
@@ -243,7 +253,10 @@ export class Panel {
       return;
     }
     if (target.closest('button[data-restock]')) {
+      const before = { ...this.state.pantry };
       if (restock(this.state)) {
+        const bought = Object.entries(this.state.pantry).filter(([id, n]) => n > before[id as IngredientId]).map(([id, n]) => `${ingredientName(id as IngredientId)} ×${n - before[id as IngredientId]}`).join(t('list.sep'));
+        toast(t('prep.bought', { items: bought }));
         this.onPurchase('ingredient', 'restock');
         this.update();
       }
@@ -384,6 +397,7 @@ export class Panel {
           <div class="name">${name} <span class="lv"></span></div>
           <div class="sub"></div>
           ${recipeHtml}
+          ${isItem ? `<button class="taste-chip" data-taste="${id}" aria-haspopup="dialog"><span class="taste-label"></span><small class="taste-progress"></small></button>` : ''}
           ${
             isItem && isBakery(id as ItemId)
               ? `<div class="bake"><span class="bake-label"></span>
@@ -413,6 +427,7 @@ export class Panel {
         toggle: el.querySelector('button[data-menu]'),
         recipe: el.querySelector('.recipe .left'),
         bake: el.querySelector('.bake'),
+        taste: el.querySelector('button[data-taste]'),
       });
     }
   }
@@ -580,8 +595,10 @@ export class Panel {
             ? t('row.each', {
                 price: formatMoney(itemPrice(def, level) * tipMultiplier(s)),
                 time: prepTime(s, def.id).toFixed(1),
+                cost: formatMoney(servingCost(def.id)),
               })
             : t('row.sellsFor', { price: formatMoney(def.basePrice * tipMultiplier(s)) });
+        refs.sub.textContent += ` · ${t('row.after', { before: formatMoney(itemPrice(def, level) * tipMultiplier(s)), after: formatMoney(itemPrice(def, level + q.count) * tipMultiplier(s)) })}`;
         const next = nextMilestone(level);
         if (refs.bar) {
           const prev = [0, ...PRICE_MILESTONES].filter((m) => m <= level).pop() ?? 0;
@@ -590,6 +607,7 @@ export class Panel {
         }
         refs.btnLabel.textContent = level === 0 ? t('btn.unlock') : q.count > 1 ? `+${q.count}` : t('btn.levelUp');
         refs.btnCost.textContent = formatMoney(q.cost);
+        refs.btn.title = t('row.after', { before: formatMoney(itemPrice(def, level) * tipMultiplier(s)), after: formatMoney(itemPrice(def, level + q.count) * tipMultiplier(s)) });
         refs.btn.disabled = !q.affordable;
         refs.el.classList.toggle('new', level === 0);
         const on = s.onMenu.includes(def.id);
@@ -600,6 +618,12 @@ export class Panel {
           refs.toggle.classList.toggle('active', on);
           refs.toggle.disabled = !prep;
           refs.toggle.title = prep ? '' : t('menu.lockedOpen');
+        }
+        if (refs.taste) {
+          refs.taste.hidden = level === 0;
+          refs.taste.querySelector('.taste-label')!.textContent = tasteLabel(s, def.id);
+          refs.taste.querySelector('.taste-progress')!.textContent = tasteProgressLabel(s, def.id);
+          refs.taste.setAttribute('aria-label', `${itemName(def.id)} · ${tasteLabel(s, def.id)} · ${tasteProgressLabel(s, def.id)}`);
         }
         const bakery = isBakery(def.id);
         if (refs.recipe) {
@@ -618,7 +642,7 @@ export class Panel {
             const plan = s.bakePlan[def.id] ?? 0;
             label.textContent = t('bake.label');
             n.textContent = String(plan);
-            note.textContent = t('bake.forecast', { n: suggestedBake(s, def.id) });
+            note.textContent = t('bake.suggested', { n: suggestedBake(s, def.id) });
             refs.bake.classList.toggle('short', plan > servingsLeft(s, def.id));
           } else {
             const left = s.shelf[def.id] ?? 0;
@@ -634,7 +658,8 @@ export class Panel {
         const q = quoteUpgrade(s, def.id, this.amount);
         const maxed = level >= def.max;
         refs.level.textContent = `${level}/${def.max}`;
-        refs.sub.textContent = `${upgradeDesc(def.id)} · ${upgradeEffect(s, def.id)}`;
+        const after = { ...s, upgrades: { ...s.upgrades, [def.id]: Math.min(def.max, level + q.count) } };
+        refs.sub.textContent = `${upgradeDesc(def.id)} · ${upgradeEffect(s, def.id)}${maxed ? '' : ` → ${upgradeEffect(after, def.id)}`}`;
         refs.btnLabel.textContent = maxed ? t('btn.maxed') : q.count > 1 ? `+${q.count}` : t('btn.buy');
         refs.btnCost.textContent = maxed ? '' : formatMoney(q.cost);
         refs.btn.disabled = maxed || !q.affordable;
@@ -646,7 +671,7 @@ export class Panel {
     const s = this.state;
     const needs = dayNeeds(s);
     const restockQ = restockQuote(s);
-    if (this.pantryNote) this.pantryNote.textContent = t('pantry.forecast', { n: formatNumber(expectedCustomers(s)) });
+    if (this.pantryNote) this.pantryNote.textContent = t('pantry.forecast', { n: formatNumber(expectedCustomers(s)) }) + (restockQ.cost > s.coins ? ` · ${t('prep.partial', { money: formatMoney(s.coins) })}` : '');
     if (this.restockBtn) {
       const full = restockQ.cost <= 0;
       this.restockBtn.textContent = full ? t('pantry.full') : t('pantry.restock', { price: formatMoney(restockQ.cost) });

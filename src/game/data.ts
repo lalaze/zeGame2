@@ -79,9 +79,9 @@ export interface MenuItemDef {
 // Each category unlocks in the order listed. New recipes fill gaps across the
 // progression, with different ingredient costs and serving times at each tier.
 export const MENU: readonly MenuItemDef[] = [
-  { id: 'espresso', category: 'coffee', basePrice: 3, prepTime: 2, baseCost: 8 },
-  { id: 'americano', category: 'coffee', basePrice: 5, prepTime: 2.2, baseCost: 40 },
-  { id: 'latte', category: 'coffee', basePrice: 10, prepTime: 3, baseCost: 120 },
+  { id: 'espresso', category: 'coffee', basePrice: 3, prepTime: 1.2, baseCost: 8 },
+  { id: 'americano', category: 'coffee', basePrice: 5, prepTime: 2.4, baseCost: 40 },
+  { id: 'latte', category: 'coffee', basePrice: 10, prepTime: 5, baseCost: 120 },
   { id: 'cappuccino', category: 'coffee', basePrice: 35, prepTime: 3.5, baseCost: 1_200 },
   { id: 'flatwhite', category: 'coffee', basePrice: 60, prepTime: 3.2, baseCost: 4_000 },
   { id: 'cortado', category: 'coffee', basePrice: 150, prepTime: 2.6, baseCost: 16_000 },
@@ -94,7 +94,7 @@ export const MENU: readonly MenuItemDef[] = [
   { id: 'creamcoffee', category: 'coffee', basePrice: 130_000, prepTime: 5, baseCost: 950_000_000 },
   { id: 'affogato', category: 'coffee', basePrice: 240_000, prepTime: 3.5, baseCost: 2_800_000_000 },
 
-  { id: 'blacktea', category: 'tea', basePrice: 9, prepTime: 2.5, baseCost: 90 },
+  { id: 'blacktea', category: 'tea', basePrice: 9, prepTime: 4, baseCost: 90 },
   { id: 'hotchoc', category: 'tea', basePrice: 30, prepTime: 3, baseCost: 900 },
   { id: 'lemontea', category: 'tea', basePrice: 55, prepTime: 2.5, baseCost: 2_800 },
   { id: 'chai', category: 'tea', basePrice: 100, prepTime: 3.5, baseCost: 8_000 },
@@ -106,8 +106,8 @@ export const MENU: readonly MenuItemDef[] = [
   { id: 'milktea', category: 'tea', basePrice: 65_000, prepTime: 4.5, baseCost: 300_000_000 },
   { id: 'matchafloat', category: 'tea', basePrice: 230_000, prepTime: 5.5, baseCost: 2_500_000_000 },
 
-  { id: 'roll', category: 'bread', basePrice: 5, prepTime: 1, baseCost: 30 },
-  { id: 'bagel', category: 'bread', basePrice: 12, prepTime: 1.5, baseCost: 150 },
+  { id: 'roll', category: 'bread', basePrice: 8, prepTime: 0.8, baseCost: 30 },
+  { id: 'bagel', category: 'bread', basePrice: 12, prepTime: 2.8, baseCost: 150 },
   { id: 'baguette', category: 'bread', basePrice: 30, prepTime: 1.2, baseCost: 1_000 },
   { id: 'cheesebun', category: 'bread', basePrice: 55, prepTime: 1.8, baseCost: 3_200 },
   { id: 'pretzel', category: 'bread', basePrice: 100, prepTime: 1.2, baseCost: 7_000 },
@@ -122,7 +122,7 @@ export const MENU: readonly MenuItemDef[] = [
   { id: 'fruitbrioche', category: 'bread', basePrice: 125_000, prepTime: 2.2, baseCost: 900_000_000 },
   { id: 'garlicbread', category: 'bread', basePrice: 230_000, prepTime: 2.5, baseCost: 2_600_000_000 },
 
-  { id: 'donut', category: 'pastry', basePrice: 20, prepTime: 1, baseCost: 300 },
+  { id: 'donut', category: 'pastry', basePrice: 20, prepTime: 4.5, baseCost: 300 },
   { id: 'scone', category: 'pastry', basePrice: 32, prepTime: 1.2, baseCost: 1_100 },
   { id: 'cookie', category: 'pastry', basePrice: 60, prepTime: 0.8, baseCost: 3_500 },
   { id: 'croissant', category: 'pastry', basePrice: 110, prepTime: 1.5, baseCost: 9_000 },
