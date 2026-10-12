@@ -1,0 +1,26 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+DOMException [NotSupportedError]: Failed to load module "/src/main.ts". JavaScript file loading is disabled.
+    at HTMLScriptElement.#loadModule (file:///workspace/shared/zeGame2/node_modules/happy-dom/lib/nodes/html-script-element/HTMLScriptElement.js:484:31)
+    at HTMLScriptElement.[connectedToDocument] (file:///workspace/shared/zeGame2/node_modules/happy-dom/lib/nodes/html-script-element/HTMLScriptElement.js:312:33)
+    at HTMLScriptElement.[connectedToNode] (file:///workspace/shared/zeGame2/node_modules/happy-dom/lib/nodes/node/Node.js:801:53)
+    at HTMLBodyElement.[appendChild] (file:///workspace/shared/zeGame2/node_modules/happy-dom/lib/nodes/node/Node.js:421:45)
+    at HTMLBodyElement.[appendChild] (file:///workspace/shared/zeGame2/node_modules/happy-dom/lib/nodes/element/Element.js:1102:62)
+    at HTMLParser.parseEndOfStartTag (file:///workspace/shared/zeGame2/node_modules/happy-dom/lib/html-parser/HTMLParser.js:497:57)
+    at HTMLParser.parse (file:///workspace/shared/zeGame2/node_modules/happy-dom/lib/html-parser/HTMLParser.js:213:34)
+    at HTMLBodyElement.set innerHTML [as innerHTML] (file:///workspace/shared/zeGame2/node_modules/happy-dom/lib/nodes/element/Element.js:359:53)
+    at /workspace/shared/zeGame2/src/ui/cafe-styles.test.ts:145:19
+    at file:///workspace/shared/zeGame2/node_modules/vitest/dist/chunks/run.BTlFXlnv.js:1628:35
+
+ Test Files  7 passed (7)
+      Tests  122 passed (122)
+   Start at  02:42:08
+   Duration  5.85s (tests 74%, transform 20%, import 4%, environment 2%)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

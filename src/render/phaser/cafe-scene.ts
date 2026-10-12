@@ -1,3 +1,4 @@
+import { styleStationMultiplier } from '../../game/styles';
 import { petActive } from '../../game/pets';
 import { residentCatFlipX } from '../living-cat-pose';
 import Phaser from 'phaser';
@@ -781,7 +782,7 @@ export class CafeScene extends Phaser.Scene {
     const batch = cook.batch;
     if (!batch || !at) return;
     if (at.working) {
-      const total = STATION_SECONDS[at.station];
+      const total = STATION_SECONDS[at.station] * styleStationMultiplier(this.getState());
       const w = Math.max(1, Math.round(18 * (1 - Math.max(0, batch.timer) / total)));
       // The same bar the baristas show while brewing.
       const by = y - CHAR_H - 6;

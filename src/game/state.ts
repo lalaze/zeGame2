@@ -1,3 +1,4 @@
+import { parseCafeStyle, type CafeStyleState } from './styles';
 import { emptyRegularGuests, parseRegularGuests, type RegularGuestState } from './regular-guests';
 import { parsePromotion, type Promotion } from './promotion';
 import {
@@ -20,7 +21,7 @@ import { parseTaste, type TasteState } from './taste';
 import { emptyReviews, parseReputation, parseReviews, type Reputation, type ReviewSummary } from './reputation';
 
 export const SAVE_KEY = 'tiny-bean-cafe/save';
-export const SAVE_VERSION = 13;
+export const SAVE_VERSION = 14;
 
 export interface Look {
   skin: number;
@@ -90,6 +91,7 @@ export const emptyDay = (): DayStats => ({
 export type Phase = 'prep' | 'open' | 'closing';
 
 export interface GameState {
+  cafeStyle: CafeStyleState;
   regularGuests: RegularGuestState;
   promotion: Promotion | null;
   pets: Pet[];
@@ -145,6 +147,7 @@ export function createInitialState(now: number): GameState {
   pantry.beans = STARTER_BEANS;
   return {
     version: SAVE_VERSION,
+    cafeStyle: parseCafeStyle(null),
     regularGuests: emptyRegularGuests(),
     pets: [],
     promotion: null,
@@ -175,6 +178,15 @@ export function createInitialState(now: number): GameState {
 }
 
 export const STARTER_BEANS = 50;
+
+// A load-only notice, not save data or a migration reward. Consume once after the
+// café is visible; another load of the normalized arrangement has no new moves.
+const furnitureMovesOnLoad = new WeakMap<GameState, number>();
+export function consumeFurnitureMovesOnLoad(state: GameState): number {
+  const moved = furnitureMovesOnLoad.get(state) ?? 0;
+  furnitureMovesOnLoad.delete(state);
+  return moved;
+}
 
 export function serialize(state: GameState): string {
   return JSON.stringify(state);
@@ -269,6 +281,7 @@ export function deserialize(raw: string | null, now: number): GameState {
   }
   base.kitchen = data.kitchen === true;
 
+  base.cafeStyle = parseCafeStyle(data.cafeStyle);
   base.coins = num(data.coins, 0);
   base.totalEarned = num(data.totalEarned, base.coins);
   base.served = Math.floor(num(data.served, 0));
@@ -318,7 +331,8 @@ export function deserialize(raw: string | null, now: number): GameState {
   const manager = Math.min(5, Math.floor(num(upgrades.manager, 0)));
   if (manager > 0) base.coins += bulkCost(500, 4, 0, manager);
   // Anything placed off the grid or in a table's way goes to storage.
-  evictBlocked(base, mainTableCount(base));
+  const movedFurniture = evictBlocked(base, mainTableCount(base));
+  if (movedFurniture > 0) furnitureMovesOnLoad.set(base, movedFurniture);
   // Every bread and pastry on the menu gets a morning-bake amount. Before v5 nothing was
   // baked ahead, so a day in progress bakes its batch now.
   fillBakePlan(base);

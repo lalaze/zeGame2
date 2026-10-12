@@ -1,0 +1,35 @@
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+xxxx·······················
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/ui/cafe-styles.test.ts > coffee UI first-route gate > scrolls the first preview into view from header with initial focus null
+ FAIL  src/ui/cafe-styles.test.ts > coffee UI first-route gate > scrolls the first preview into view from header with initial focus coffee
+ FAIL  src/ui/cafe-styles.test.ts > coffee UI first-route gate > scrolls the first preview into view from preparation with initial focus null
+ FAIL  src/ui/cafe-styles.test.ts > coffee UI first-route gate > scrolls the first preview into view from preparation with initial focus coffee
+AssertionError: expected 480 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 480
+
+ ❯ src/ui/cafe-styles.test.ts:38:30
+     36|       body.scrollTop = 480;
+     37|       click(`[data-style-choice="${id}"]`);
+     38|       expect(body.scrollTop).toBe(0);
+       |                              ^
+     39|       expect(document.activeElement).toBe(select('.style-current h3'));
+     40|       expect(select('.style-current').dataset.styleView).toBe(id);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 23 passed (27)
+   Start at  07:03:34
+   Duration  1.24s (transform 35%, tests 32%, environment 25%, import 8%)
+

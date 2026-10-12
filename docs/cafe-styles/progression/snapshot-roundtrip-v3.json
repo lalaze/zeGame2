@@ -1,0 +1,384 @@
+{
+  "count": 54,
+  "passed": true,
+  "results": [
+    {
+      "name": "all-six-v3-chair-care-corrected-bakery-1592594996-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-bakery-1592594996-late.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-bakery-1592594996-mid.json",
+      "phase": "open",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-bakery-2606499222-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-bakery-2606499222-late.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-bakery-2606499222-mid.json",
+      "phase": "open",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-bakery-4247030757-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-bakery-4247030757-late.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-bakery-4247030757-mid.json",
+      "phase": "open",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-cats-1592594996-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-cats-1592594996-late.json",
+      "phase": "open",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-cats-1592594996-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-cats-2606499222-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-cats-2606499222-late.json",
+      "phase": "open",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-cats-2606499222-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-cats-4247030757-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-cats-4247030757-late.json",
+      "phase": "open",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-cats-4247030757-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-coffee-1592594996-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-coffee-1592594996-late.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-coffee-1592594996-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-coffee-2606499222-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-coffee-2606499222-late.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-coffee-2606499222-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-coffee-4247030757-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-coffee-4247030757-late.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-coffee-4247030757-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-community-1592594996-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-community-1592594996-late.json",
+      "phase": "open",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-community-1592594996-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-community-2606499222-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-community-2606499222-late.json",
+      "phase": "open",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-community-2606499222-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-community-4247030757-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-community-4247030757-late.json",
+      "phase": "open",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-community-4247030757-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-garden-1592594996-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-garden-1592594996-late.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-garden-1592594996-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-garden-2606499222-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-garden-2606499222-late.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-garden-2606499222-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-garden-4247030757-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-garden-4247030757-late.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-garden-4247030757-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-takeaway-1592594996-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-takeaway-1592594996-late.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-takeaway-1592594996-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-takeaway-2606499222-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-takeaway-2606499222-late.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-takeaway-2606499222-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-takeaway-4247030757-early.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-takeaway-4247030757-late.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    },
+    {
+      "name": "all-six-v3-chair-care-corrected-takeaway-4247030757-mid.json",
+      "phase": "prep",
+      "restored": true,
+      "stageQualifies": true,
+      "identicalEconomy": true
+    }
+  ]
+}

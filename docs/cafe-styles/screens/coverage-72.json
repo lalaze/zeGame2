@@ -1,0 +1,1439 @@
+{
+  "description": "Actual built game via native dot-cloud browser; earned-stage saves from real zero-coin progression, cosmetic profile only",
+  "cases": [
+    {
+      "route": "coffee",
+      "earnedStage": "early",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 9,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "Next gentle stepResearch 1 signature coffee · 0/1Serve 100 portions of a recipe, then research its signature version from Menu while closed.",
+      "scrollWidth": 1120,
+      "stage": "Finding your rhythm · 2/3 steps",
+      "view": "coffee",
+      "width": 1120
+    },
+    {
+      "route": "bakery",
+      "earnedStage": "early",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 9,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "Next gentle stepDonut · level 3 · 0/3Find this recipe in Menu and invest in its level. Menu selection stays manual.",
+      "scrollWidth": 1120,
+      "stage": "Finding your rhythm · 0/3 steps",
+      "view": "bakery",
+      "width": 1120
+    },
+    {
+      "route": "cats",
+      "earnedStage": "early",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 9,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "Next gentle stepWelcome 2 resident cats · 1/2Visit Cats to adopt a resident. Keep water, food and play care stocked.",
+      "scrollWidth": 1120,
+      "stage": "Finding your rhythm · 0/3 steps",
+      "view": "cats",
+      "width": 1120
+    },
+    {
+      "route": "takeaway",
+      "earnedStage": "early",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 10,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "Next gentle stepHire 1 barista · 0/1Look in Upgrades. Save a little for ingredients before you invest.",
+      "scrollWidth": 1120,
+      "stage": "Finding your rhythm · 1/3 steps",
+      "view": "takeaway",
+      "width": 1120
+    },
+    {
+      "route": "garden",
+      "earnedStage": "early",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 10,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "Next gentle stepBuild the kitchen · 0/1Use the kitchen door to check its requirements. Build it when you are ready to bake.",
+      "scrollWidth": 1120,
+      "stage": "Finding your rhythm · 1/3 steps",
+      "view": "garden",
+      "width": 1120
+    },
+    {
+      "route": "community",
+      "earnedStage": "early",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 10,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "Next gentle stepOpen the reading room · 0/1Use the café map to see room connections, requirements and costs.",
+      "scrollWidth": 1120,
+      "stage": "Finding your rhythm · 2/3 steps",
+      "view": "community",
+      "width": 1120
+    },
+    {
+      "route": "coffee",
+      "earnedStage": "mid",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "Next gentle stepFlat White · level 10 · 0/10Find this recipe in Menu and invest in its level. Menu selection stays manual.",
+      "scrollWidth": 1120,
+      "stage": "A café with character · 1/3 steps",
+      "view": "coffee",
+      "width": 1120
+    },
+    {
+      "route": "bakery",
+      "earnedStage": "mid",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "Next gentle stepCroissant · level 5 · 0/5Find this recipe in Menu and invest in its level. Menu selection stays manual.",
+      "scrollWidth": 1120,
+      "stage": "A café with character · 0/3 steps",
+      "view": "bakery",
+      "width": 1120
+    },
+    {
+      "route": "cats",
+      "earnedStage": "mid",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "Next gentle stepReach 30 comfort · 20/30Furnish the café with comfort-giving pieces. Placed furniture and equipped décor count.",
+      "scrollWidth": 1120,
+      "stage": "A café with character · 1/3 steps",
+      "view": "cats",
+      "width": 1120
+    },
+    {
+      "route": "takeaway",
+      "earnedStage": "mid",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "Next gentle stepCortado · level 3 · 0/3Find this recipe in Menu and invest in its level. Menu selection stays manual.",
+      "scrollWidth": 1120,
+      "stage": "A café with character · 0/4 steps",
+      "view": "takeaway",
+      "width": 1120
+    },
+    {
+      "route": "garden",
+      "earnedStage": "mid",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "Next gentle stepOpen the glasshouse · 0/1Use the café map to see room connections, requirements and costs.",
+      "scrollWidth": 1120,
+      "stage": "A café with character · 0/4 steps",
+      "view": "garden",
+      "width": 1120
+    },
+    {
+      "route": "community",
+      "earnedStage": "mid",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "Next gentle stepPlace a bookshelf · 0/1Buy and place a bookshelf in Furnish. A stored bookshelf does not count.",
+      "scrollWidth": 1120,
+      "stage": "A café with character · 1/4 steps",
+      "view": "community",
+      "width": 1120
+    },
+    {
+      "route": "coffee",
+      "earnedStage": "late",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "CompleteYour path is established. Keep your stock, care and service steady.",
+      "scrollWidth": 1120,
+      "stage": "A café with character · 3/3 steps",
+      "view": "coffee",
+      "width": 1120
+    },
+    {
+      "route": "bakery",
+      "earnedStage": "late",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "CompleteYour path is established. Keep your stock, care and service steady.",
+      "scrollWidth": 1120,
+      "stage": "A café with character · 3/3 steps",
+      "view": "bakery",
+      "width": 1120
+    },
+    {
+      "route": "cats",
+      "earnedStage": "late",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "CompleteYour path is established. Keep your stock, care and service steady.",
+      "scrollWidth": 1120,
+      "stage": "A café with character · 3/3 steps",
+      "view": "cats",
+      "width": 1120
+    },
+    {
+      "route": "takeaway",
+      "earnedStage": "late",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "CompleteYour path is established. Keep your stock, care and service steady.",
+      "scrollWidth": 1120,
+      "stage": "A café with character · 4/4 steps",
+      "view": "takeaway",
+      "width": 1120
+    },
+    {
+      "route": "garden",
+      "earnedStage": "late",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "CompleteYour path is established. Keep your stock, care and service steady.",
+      "scrollWidth": 1120,
+      "stage": "A café with character · 4/4 steps",
+      "view": "garden",
+      "width": 1120
+    },
+    {
+      "route": "community",
+      "earnedStage": "late",
+      "language": "en",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "CompleteYour path is established. Keep your stock, care and service steady.",
+      "scrollWidth": 1120,
+      "stage": "A café with character · 4/4 steps",
+      "view": "community",
+      "width": 1120
+    },
+    {
+      "route": "coffee",
+      "earnedStage": "early",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "下一小步研究 1 款招牌咖啡 · 0/1一款配方累计出餐 100 份后，可在打烊时从「菜单」研究招牌配方。",
+      "scrollWidth": 1120,
+      "stage": "渐入佳境 · 已完成 2/3 步",
+      "view": "coffee",
+      "width": 1120
+    },
+    {
+      "route": "bakery",
+      "earnedStage": "early",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "下一小步甜甜圈 · 3 级 · 0/3在「菜单」中提升这款配方等级，是否上架仍由你决定。",
+      "scrollWidth": 1120,
+      "stage": "渐入佳境 · 已完成 0/3 步",
+      "view": "bakery",
+      "width": 1120
+    },
+    {
+      "route": "cats",
+      "earnedStage": "early",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "下一小步迎接 2 只常住猫咪 · 1/2到「猫咪」领养住客，并备好饮水、食物和玩耍用品。",
+      "scrollWidth": 1120,
+      "stage": "渐入佳境 · 已完成 0/3 步",
+      "view": "cats",
+      "width": 1120
+    },
+    {
+      "route": "takeaway",
+      "earnedStage": "early",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "下一小步雇用 1 位咖啡师 · 0/1到「升级」里看看，投入前留一些进货钱。",
+      "scrollWidth": 1120,
+      "stage": "渐入佳境 · 已完成 1/3 步",
+      "view": "takeaway",
+      "width": 1120
+    },
+    {
+      "route": "garden",
+      "earnedStage": "early",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "下一小步建好厨房 · 0/1从厨房门查看条件，准备经营烘焙时再建厨房。",
+      "scrollWidth": 1120,
+      "stage": "渐入佳境 · 已完成 1/3 步",
+      "view": "garden",
+      "width": 1120
+    },
+    {
+      "route": "community",
+      "earnedStage": "early",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "下一小步开放阅读室 · 0/1在店铺地图查看房间的连接、条件和费用。",
+      "scrollWidth": 1120,
+      "stage": "渐入佳境 · 已完成 2/3 步",
+      "view": "community",
+      "width": 1120
+    },
+    {
+      "route": "coffee",
+      "earnedStage": "mid",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "下一小步澳白 · 10 级 · 0/10在「菜单」中提升这款配方等级，是否上架仍由你决定。",
+      "scrollWidth": 1120,
+      "stage": "自成一格 · 已完成 1/3 步",
+      "view": "coffee",
+      "width": 1120
+    },
+    {
+      "route": "bakery",
+      "earnedStage": "mid",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "下一小步可颂 · 5 级 · 0/5在「菜单」中提升这款配方等级，是否上架仍由你决定。",
+      "scrollWidth": 1120,
+      "stage": "自成一格 · 已完成 0/3 步",
+      "view": "bakery",
+      "width": 1120
+    },
+    {
+      "route": "cats",
+      "earnedStage": "mid",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "下一小步舒适度达到 30 · 20/30摆放舒适家具、搭配装饰；已摆出的家具和已使用的装饰才计入舒适度。",
+      "scrollWidth": 1120,
+      "stage": "自成一格 · 已完成 1/3 步",
+      "view": "cats",
+      "width": 1120
+    },
+    {
+      "route": "takeaway",
+      "earnedStage": "mid",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "下一小步科尔塔多 · 3 级 · 0/3在「菜单」中提升这款配方等级，是否上架仍由你决定。",
+      "scrollWidth": 1120,
+      "stage": "自成一格 · 已完成 0/4 步",
+      "view": "takeaway",
+      "width": 1120
+    },
+    {
+      "route": "garden",
+      "earnedStage": "mid",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "下一小步开放温室 · 0/1在店铺地图查看房间的连接、条件和费用。",
+      "scrollWidth": 1120,
+      "stage": "自成一格 · 已完成 0/4 步",
+      "view": "garden",
+      "width": 1120
+    },
+    {
+      "route": "community",
+      "earnedStage": "mid",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "下一小步摆放一个书架 · 0/1在「布置」中购买并摆放书架，收进仓库的不计入。",
+      "scrollWidth": 1120,
+      "stage": "自成一格 · 已完成 1/4 步",
+      "view": "community",
+      "width": 1120
+    },
+    {
+      "route": "coffee",
+      "earnedStage": "late",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "已完成这个方向已经成形，继续照顾好库存、猫咪和服务。",
+      "scrollWidth": 1120,
+      "stage": "自成一格 · 已完成 3/3 步",
+      "view": "coffee",
+      "width": 1120
+    },
+    {
+      "route": "bakery",
+      "earnedStage": "late",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "已完成这个方向已经成形，继续照顾好库存、猫咪和服务。",
+      "scrollWidth": 1120,
+      "stage": "自成一格 · 已完成 3/3 步",
+      "view": "bakery",
+      "width": 1120
+    },
+    {
+      "route": "cats",
+      "earnedStage": "late",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 9,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "已完成这个方向已经成形，继续照顾好库存、猫咪和服务。",
+      "scrollWidth": 1120,
+      "stage": "自成一格 · 已完成 3/3 步",
+      "view": "cats",
+      "width": 1120
+    },
+    {
+      "route": "takeaway",
+      "earnedStage": "late",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "已完成这个方向已经成形，继续照顾好库存、猫咪和服务。",
+      "scrollWidth": 1120,
+      "stage": "自成一格 · 已完成 4/4 步",
+      "view": "takeaway",
+      "width": 1120
+    },
+    {
+      "route": "garden",
+      "earnedStage": "late",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "已完成这个方向已经成形，继续照顾好库存、猫咪和服务。",
+      "scrollWidth": 1120,
+      "stage": "自成一格 · 已完成 4/4 步",
+      "view": "garden",
+      "width": 1120
+    },
+    {
+      "route": "community",
+      "earnedStage": "late",
+      "language": "zh",
+      "viewport": "desktop",
+      "goals": 10,
+      "height": 760,
+      "missing": false,
+      "modal": {
+        "h": 712,
+        "w": 540,
+        "x": 290,
+        "y": 24
+      },
+      "next": "已完成这个方向已经成形，继续照顾好库存、猫咪和服务。",
+      "scrollWidth": 1120,
+      "stage": "自成一格 · 已完成 4/4 步",
+      "view": "community",
+      "width": 1120
+    },
+    {
+      "route": "coffee",
+      "earnedStage": "early",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "Next gentle stepResearch 1 signature coffee · 0/1Serve 100 portions of a recipe, then research its signature version from Menu while closed.",
+      "scrollWidth": 390,
+      "stage": "Finding your rhythm · 2/3 steps",
+      "view": "coffee",
+      "width": 390
+    },
+    {
+      "route": "bakery",
+      "earnedStage": "early",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "Next gentle stepDonut · level 3 · 0/3Find this recipe in Menu and invest in its level. Menu selection stays manual.",
+      "scrollWidth": 390,
+      "stage": "Finding your rhythm · 0/3 steps",
+      "view": "bakery",
+      "width": 390
+    },
+    {
+      "route": "cats",
+      "earnedStage": "early",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "Next gentle stepWelcome 2 resident cats · 1/2Visit Cats to adopt a resident. Keep water, food and play care stocked.",
+      "scrollWidth": 390,
+      "stage": "Finding your rhythm · 0/3 steps",
+      "view": "cats",
+      "width": 390
+    },
+    {
+      "route": "takeaway",
+      "earnedStage": "early",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "Next gentle stepHire 1 barista · 0/1Look in Upgrades. Save a little for ingredients before you invest.",
+      "scrollWidth": 390,
+      "stage": "Finding your rhythm · 1/3 steps",
+      "view": "takeaway",
+      "width": 390
+    },
+    {
+      "route": "garden",
+      "earnedStage": "early",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "Next gentle stepBuild the kitchen · 0/1Use the kitchen door to check its requirements. Build it when you are ready to bake.",
+      "scrollWidth": 390,
+      "stage": "Finding your rhythm · 1/3 steps",
+      "view": "garden",
+      "width": 390
+    },
+    {
+      "route": "community",
+      "earnedStage": "early",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "Next gentle stepOpen the reading room · 0/1Use the café map to see room connections, requirements and costs.",
+      "scrollWidth": 390,
+      "stage": "Finding your rhythm · 2/3 steps",
+      "view": "community",
+      "width": 390
+    },
+    {
+      "route": "coffee",
+      "earnedStage": "mid",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "Next gentle stepFlat White · level 10 · 0/10Find this recipe in Menu and invest in its level. Menu selection stays manual.",
+      "scrollWidth": 390,
+      "stage": "A café with character · 1/3 steps",
+      "view": "coffee",
+      "width": 390
+    },
+    {
+      "route": "bakery",
+      "earnedStage": "mid",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "Next gentle stepCroissant · level 5 · 0/5Find this recipe in Menu and invest in its level. Menu selection stays manual.",
+      "scrollWidth": 390,
+      "stage": "A café with character · 0/3 steps",
+      "view": "bakery",
+      "width": 390
+    },
+    {
+      "route": "cats",
+      "earnedStage": "mid",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "Next gentle stepReach 30 comfort · 20/30Furnish the café with comfort-giving pieces. Placed furniture and equipped décor count.",
+      "scrollWidth": 390,
+      "stage": "A café with character · 1/3 steps",
+      "view": "cats",
+      "width": 390
+    },
+    {
+      "route": "takeaway",
+      "earnedStage": "mid",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "Next gentle stepCortado · level 3 · 0/3Find this recipe in Menu and invest in its level. Menu selection stays manual.",
+      "scrollWidth": 390,
+      "stage": "A café with character · 0/4 steps",
+      "view": "takeaway",
+      "width": 390
+    },
+    {
+      "route": "garden",
+      "earnedStage": "mid",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "Next gentle stepOpen the glasshouse · 0/1Use the café map to see room connections, requirements and costs.",
+      "scrollWidth": 390,
+      "stage": "A café with character · 0/4 steps",
+      "view": "garden",
+      "width": 390
+    },
+    {
+      "route": "community",
+      "earnedStage": "mid",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "Next gentle stepPlace a bookshelf · 0/1Buy and place a bookshelf in Furnish. A stored bookshelf does not count.",
+      "scrollWidth": 390,
+      "stage": "A café with character · 1/4 steps",
+      "view": "community",
+      "width": 390
+    },
+    {
+      "route": "coffee",
+      "earnedStage": "late",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "CompleteYour path is established. Keep your stock, care and service steady.",
+      "scrollWidth": 390,
+      "stage": "A café with character · 3/3 steps",
+      "view": "coffee",
+      "width": 390
+    },
+    {
+      "route": "bakery",
+      "earnedStage": "late",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "CompleteYour path is established. Keep your stock, care and service steady.",
+      "scrollWidth": 390,
+      "stage": "A café with character · 3/3 steps",
+      "view": "bakery",
+      "width": 390
+    },
+    {
+      "route": "cats",
+      "earnedStage": "late",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "CompleteYour path is established. Keep your stock, care and service steady.",
+      "scrollWidth": 390,
+      "stage": "A café with character · 3/3 steps",
+      "view": "cats",
+      "width": 390
+    },
+    {
+      "route": "takeaway",
+      "earnedStage": "late",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "CompleteYour path is established. Keep your stock, care and service steady.",
+      "scrollWidth": 390,
+      "stage": "A café with character · 4/4 steps",
+      "view": "takeaway",
+      "width": 390
+    },
+    {
+      "route": "garden",
+      "earnedStage": "late",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "CompleteYour path is established. Keep your stock, care and service steady.",
+      "scrollWidth": 390,
+      "stage": "A café with character · 4/4 steps",
+      "view": "garden",
+      "width": 390
+    },
+    {
+      "route": "community",
+      "earnedStage": "late",
+      "language": "en",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "CompleteYour path is established. Keep your stock, care and service steady.",
+      "scrollWidth": 390,
+      "stage": "A café with character · 4/4 steps",
+      "view": "community",
+      "width": 390
+    },
+    {
+      "route": "coffee",
+      "earnedStage": "early",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "下一小步研究 1 款招牌咖啡 · 0/1一款配方累计出餐 100 份后，可在打烊时从「菜单」研究招牌配方。",
+      "scrollWidth": 390,
+      "stage": "渐入佳境 · 已完成 2/3 步",
+      "view": "coffee",
+      "width": 390
+    },
+    {
+      "route": "bakery",
+      "earnedStage": "early",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "下一小步甜甜圈 · 3 级 · 0/3在「菜单」中提升这款配方等级，是否上架仍由你决定。",
+      "scrollWidth": 390,
+      "stage": "渐入佳境 · 已完成 0/3 步",
+      "view": "bakery",
+      "width": 390
+    },
+    {
+      "route": "cats",
+      "earnedStage": "early",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "下一小步迎接 2 只常住猫咪 · 1/2到「猫咪」领养住客，并备好饮水、食物和玩耍用品。",
+      "scrollWidth": 390,
+      "stage": "渐入佳境 · 已完成 0/3 步",
+      "view": "cats",
+      "width": 390
+    },
+    {
+      "route": "takeaway",
+      "earnedStage": "early",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "下一小步雇用 1 位咖啡师 · 0/1到「升级」里看看，投入前留一些进货钱。",
+      "scrollWidth": 390,
+      "stage": "渐入佳境 · 已完成 1/3 步",
+      "view": "takeaway",
+      "width": 390
+    },
+    {
+      "route": "garden",
+      "earnedStage": "early",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "下一小步建好厨房 · 0/1从厨房门查看条件，准备经营烘焙时再建厨房。",
+      "scrollWidth": 390,
+      "stage": "渐入佳境 · 已完成 1/3 步",
+      "view": "garden",
+      "width": 390
+    },
+    {
+      "route": "community",
+      "earnedStage": "early",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "下一小步开放阅读室 · 0/1在店铺地图查看房间的连接、条件和费用。",
+      "scrollWidth": 390,
+      "stage": "渐入佳境 · 已完成 2/3 步",
+      "view": "community",
+      "width": 390
+    },
+    {
+      "route": "coffee",
+      "earnedStage": "mid",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "下一小步澳白 · 10 级 · 0/10在「菜单」中提升这款配方等级，是否上架仍由你决定。",
+      "scrollWidth": 390,
+      "stage": "自成一格 · 已完成 1/3 步",
+      "view": "coffee",
+      "width": 390
+    },
+    {
+      "route": "bakery",
+      "earnedStage": "mid",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "下一小步可颂 · 5 级 · 0/5在「菜单」中提升这款配方等级，是否上架仍由你决定。",
+      "scrollWidth": 390,
+      "stage": "自成一格 · 已完成 0/3 步",
+      "view": "bakery",
+      "width": 390
+    },
+    {
+      "route": "cats",
+      "earnedStage": "mid",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "下一小步舒适度达到 30 · 20/30摆放舒适家具、搭配装饰；已摆出的家具和已使用的装饰才计入舒适度。",
+      "scrollWidth": 390,
+      "stage": "自成一格 · 已完成 1/3 步",
+      "view": "cats",
+      "width": 390
+    },
+    {
+      "route": "takeaway",
+      "earnedStage": "mid",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "下一小步科尔塔多 · 3 级 · 0/3在「菜单」中提升这款配方等级，是否上架仍由你决定。",
+      "scrollWidth": 390,
+      "stage": "自成一格 · 已完成 0/4 步",
+      "view": "takeaway",
+      "width": 390
+    },
+    {
+      "route": "garden",
+      "earnedStage": "mid",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "下一小步开放温室 · 0/1在店铺地图查看房间的连接、条件和费用。",
+      "scrollWidth": 390,
+      "stage": "自成一格 · 已完成 0/4 步",
+      "view": "garden",
+      "width": 390
+    },
+    {
+      "route": "community",
+      "earnedStage": "mid",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "下一小步摆放一个书架 · 0/1在「布置」中购买并摆放书架，收进仓库的不计入。",
+      "scrollWidth": 390,
+      "stage": "自成一格 · 已完成 1/4 步",
+      "view": "community",
+      "width": 390
+    },
+    {
+      "route": "coffee",
+      "earnedStage": "late",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "已完成这个方向已经成形，继续照顾好库存、猫咪和服务。",
+      "scrollWidth": 390,
+      "stage": "自成一格 · 已完成 3/3 步",
+      "view": "coffee",
+      "width": 390
+    },
+    {
+      "route": "bakery",
+      "earnedStage": "late",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "已完成这个方向已经成形，继续照顾好库存、猫咪和服务。",
+      "scrollWidth": 390,
+      "stage": "自成一格 · 已完成 3/3 步",
+      "view": "bakery",
+      "width": 390
+    },
+    {
+      "route": "cats",
+      "earnedStage": "late",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 9,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "已完成这个方向已经成形，继续照顾好库存、猫咪和服务。",
+      "scrollWidth": 390,
+      "stage": "自成一格 · 已完成 3/3 步",
+      "view": "cats",
+      "width": 390
+    },
+    {
+      "route": "takeaway",
+      "earnedStage": "late",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "已完成这个方向已经成形，继续照顾好库存、猫咪和服务。",
+      "scrollWidth": 390,
+      "stage": "自成一格 · 已完成 4/4 步",
+      "view": "takeaway",
+      "width": 390
+    },
+    {
+      "route": "garden",
+      "earnedStage": "late",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "已完成这个方向已经成形，继续照顾好库存、猫咪和服务。",
+      "scrollWidth": 390,
+      "stage": "自成一格 · 已完成 4/4 步",
+      "view": "garden",
+      "width": 390
+    },
+    {
+      "route": "community",
+      "earnedStage": "late",
+      "language": "zh",
+      "viewport": "mobile",
+      "goals": 10,
+      "height": 844,
+      "missing": false,
+      "modal": {
+        "h": 796,
+        "w": 350,
+        "x": 20,
+        "y": 24
+      },
+      "next": "已完成这个方向已经成形，继续照顾好库存、猫咪和服务。",
+      "scrollWidth": 390,
+      "stage": "自成一格 · 已完成 4/4 步",
+      "view": "community",
+      "width": 390
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+ ❯ src/game/style-operations.test.ts (12 tests | 6 failed) 203ms
+   ❯ cat lifestyle handoff and care (2)
+     × requires actual cared cats, comfort and table service; care expiry removes both effects 19ms
+     × caps per-cat stacking and cannot stack with another focus 1ms
+   ❯ garden tea and pastry service (3)
+     × needs genuine planted surroundings, not a stored decoration or late room 1ms
+     × pays pairs once at actual table delivery and keeps counter/bread distinction 1ms
+     × uses the same directed tea/pastry pairing for simulation and forecasts 3ms
+   ❯ bookish community reliability (1)
+     × trades arrivals for physical server speed and patience, with no manufactured review quality 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/game/style-operations.test.ts > cat lifestyle handoff and care > requires actual cared cats, comfort and table service; care expiry removes both effects
+AssertionError: expected 1 to be 1.04 // Object.is equality
+
+- Expected
++ Received
+
+- 1.04
++ 1
+
+ ❯ src/game/style-operations.test.ts:59:108
+     57|     const s=createInitialState(0);s.coins=10000;adoptCat(s,'ginger');s…
+     58|     expect(styleSaleMultiplier(s,'espresso',true)).toBe(1);cozy(s);
+     59|     expect(styleSaleMultiplier(s,'espresso',false)).toBe(1);expect(sty…
+       |                                                                                                            ^
+     60|     s.pets[0].autoRefill=false;s.phase='open';updatePetCare(s,180);
+     61|     expect(styleSaleMultiplier(s,'espresso',true)).toBe(1);expect(styl…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  src/game/style-operations.test.ts > cat lifestyle handoff and care > caps per-cat stacking and cannot stack with another focus
+AssertionError: expected 1 to be 1.12 // Object.is equality
+
+- Expected
++ Received
+
+- 1.12
++ 1
+
+ ❯ src/game/style-operations.test.ts:65:52
+     63|   it('caps per-cat stacking and cannot stack with another focus',()=>{
+     64|     const s=createInitialState(0);cozy(s);for(const cat of ['ginger','…
+     65|     expect(styleSaleMultiplier(s,'espresso',true)).toBe(1.12);expect(s…
+       |                                                    ^
+     66|     setCafeStyle(s,'coffee');expect(styleSaleMultiplier(s,'espresso',t…
+     67|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+ FAIL  src/game/style-operations.test.ts > garden tea and pastry service > needs genuine planted surroundings, not a stored decoration or late room
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/game/style-operations.test.ts:73:28
+     71|     const s=createInitialState(0);s.coins=100000;useDecor(s,'rug_rose'…
+     72|     expect(gardenReady(s)).toBe(false);expect(styleSaleMultiplier(s,'b…
+     73|     expect(gardenReady(s)).toBe(true);expect(s.regions).toEqual([]);ex…
+       |                            ^
+     74|   });
+     75|   it('pays pairs once at actual table delivery and keeps counter/bread…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯
+
+ FAIL  src/game/style-operations.test.ts > garden tea and pastry service > pays pairs once at actual table delivery and keeps counter/bread distinction
+AssertionError: expected 1 to be 1.12 // Object.is equality
+
+- Expected
++ Received
+
+- 1.12
++ 1
+
+ ❯ src/game/style-operations.test.ts:77:57
+     75|   it('pays pairs once at actual table delivery and keeps counter/bread…
+     76|     const s=createInitialState(0);cozy(s);setCafeStyle(s,'garden');con…
+     77|     expect(styleSaleMultiplier(s,'blacktea',true,meal)).toBe(1.12);exp…
+       |                                                         ^
+     78|     expect(styleSaleMultiplier(s,'blacktea',false,meal)).toBe(1);expec…
+     79|     expect(styleDwellExtra(s,meal)).toBe(6);expect(styleSeatChance(s,m…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯
+
+ FAIL  src/game/style-operations.test.ts > garden tea and pastry service > uses the same directed tea/pastry pairing for simulation and forecasts
+AssertionError: expected [ 'roll', 'donut' ] to deeply equal [ 'donut' ]
+
+- Expected
++ Received
+
+  [
++   "roll",
+    "donut",
+  ]
+
+ ❯ src/game/style-operations.test.ts:84:67
+     82|   it('uses the same directed tea/pastry pairing for simulation and for…
+     83|     const s=createInitialState(0);cozy(s);setCafeStyle(s,'garden');con…
+     84|     expect(styleOrderPairs(s,def('blacktea'),items).map(m=>m.id)).toEq…
+       |                                                                   ^
+     85|     const shares=orderShares(items,s);expect([...shares.values()].redu…
+     86|     expect(shares.get('donut')).toBeGreaterThan(shares.get('roll')!);e…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯
+
+ FAIL  src/game/style-operations.test.ts > bookish community reliability > trades arrivals for physical server speed and patience, with no manufactured review quality
+AssertionError: expected 0.2 to be close to 0.18000000000000002, received difference is 0.01999999999999999, but expected 0.005
+ ❯ src/game/style-operations.test.ts:93:32
+     91|     const s=createInitialState(0);setCafeStyle(s,'community');expect(s…
+     92|     const arrivals=baseArrivalRate(s),patience=tablePatience(s),rating…
+     93|     expect(baseArrivalRate(s)).toBeCloseTo(arrivals*.9);expect(tablePa…
+       |                                ^
+     94|     expect(mealReview(s,['espresso'],35,false)).toEqual(rating);expect…
+     95|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯
+
+
+ Test Files  1 failed | 8 passed (9)
+      Tests  6 failed | 153 passed (159)
+   Start at  02:44:35
+   Duration  5.71s (tests 72%, transform 22%, import 4%, environment 2%)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

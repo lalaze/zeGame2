@@ -1,0 +1,13 @@
+
+ RUN  v5.0.3 /tmp/cafe-style-earned-union-1791804425
+
+earned-union-v1-holdout-shard7: earned-union/late/base/espresso+roll+croissant/plain: 30/30
+earned-union-v1-holdout-shard7: earned-union/late/base/espresso+blacktea/coffee: 30/30
+earned-union-v1-holdout-shard7: earned-union/late/base/americano+cortado/bakery: 30/30
+earned-union-v1-holdout-shard7: earned-union/late/base/blacktea+scone/cats: 30/30
+
+ Test Files  1 passed (1)
+      Tests  3 passed | 1 skipped (4)
+   Start at  04:46:01
+   Duration  975.66s (tests 100%)
+

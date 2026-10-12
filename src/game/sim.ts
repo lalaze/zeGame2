@@ -1,8 +1,9 @@
+import { recordStyleHandoff, styleOrderPairs, styleComboChance, styleSeatChance, styleStationMultiplier, styleDwellExtra, styleServerMultiplier } from './styles';
 import { recordRegularGuestArrival, recordRegularGuestDeparture, recordRegularGuestService, regularGuestForAppearance, regularGuestOrder } from './regular-guests';
 import { CUSTOMER_CAST, CustomerCastCycle } from './customer-cast';
 import { updatePromotion } from './promotion';
 import { updatePetCare } from './pets';
-import { COMBO_CHANCE, MAX_QUEUE, PASS_SLOTS, RING_AGAIN, VIP_CHANCE, isDrink, type ItemId } from './data';
+import { MAX_QUEUE, PASS_SLOTS, RING_AGAIN, VIP_CHANCE, type ItemId } from './data';
 import { finishDay, type DayReport } from './day';
 import { CELL, furnitureDef } from './furniture';
 import { routeFloorSegment, segmentCrossesObstacle, type FloorObstacle, type FloorPoint } from './navigation';
@@ -173,7 +174,6 @@ export const WALK_SPEED = 62;
 export const SERVER_SPEED = WALK_SPEED * 1.5;
 /** A tray holds this many orders, delivered nearest room first. */
 const TRAY_PLATES = 3;
-const SEAT_CHANCE = 0.6;
 const BOOST_SECONDS = 0.3;
 /** How long a dine-in customer stands at the counter ordering before taking a seat. */
 const ORDER_SECONDS = 0.8;
@@ -579,8 +579,8 @@ export class Sim {
     const menu = menuItems(state);
     if (menu.length === 0) return;
     const main = menu[this.randInt(menu.length)];
-    const pairs = menu.filter((m) => isDrink(m.category) !== isDrink(main.category));
-    const extra = pairs.length > 0 && this.rng() < COMBO_CHANCE ? pairs[this.randInt(pairs.length)].id : null;
+    const pairs = styleOrderPairs(state, main, menu);
+    const extra = pairs.length > 0 && this.rng() < styleComboChance(state, main, pairs) ? pairs[this.randInt(pairs.length)].id : null;
     const pos = queueSpot(this.queue.length);
     const door = doorSpot();
     // Keep exactly the old five appearance RNG draws: adding a visual cast must
@@ -697,7 +697,7 @@ export class Sim {
   private charge(state: GameState, c: Customer, events: SimEvent[]): void {
     const bought = (c.extra ? [c.order, c.extra] : [c.order]).filter((id) => canPrepareItem(state, id));
     if (bought.length === 0) return;
-    const amount = bought.reduce((sum, id) => sum + salePrice(state, id, c.vip), 0);
+    const amount = bought.reduce((sum, id) => sum + salePrice(state, id, c.vip, c.dineIn, bought), 0);
     earn(state, amount);
     state.served++;
     state.today.served++;
@@ -706,6 +706,7 @@ export class Sim {
     events.push({ type: 'sale', amount, x: c.x, y: c.y - 52, vip: c.vip });
     this.review(state, c, mealReview(state, bought, c.waitSeconds, c.missingExtra));
     recordServings(state, bought);
+    recordStyleHandoff(state, bought, c.dineIn);
     if (c.regularGuestId && c.regularGuestVisitId !== undefined) recordRegularGuestService(state, c.regularGuestId, c.regularGuestVisitId);
     c.hasCup = true;
     c.mood = 'happy';
@@ -757,7 +758,7 @@ export class Sim {
       b.total = b.remaining = prepTime(state, c.order) + (c.extra ? prepTime(state, c.extra) : 0);
       // With a table free, some stay: they take a seat and the order is brought over.
       const seat = this.freeSeat(state);
-      if (seat >= 0 && this.rng() < SEAT_CHANCE) {
+      if (seat >= 0 && this.rng() < styleSeatChance(state, c.extra ? [c.order, c.extra] : [c.order])) {
         this.seats[seat] = c.id;
         c.seat = seat;
         c.dineIn = true;
@@ -805,7 +806,7 @@ export class Sim {
     if (c && c.phase === 'waiting') {
       this.charge(state, c, events);
       c.phase = 'sitting';
-      c.timer = 6 + this.rng() * 8;
+      c.timer = 6 + this.rng() * 8 + styleDwellExtra(state, c.extra ? [c.order, c.extra] : [c.order]);
     }
     server.plates.shift();
     this.headOut(server);
@@ -879,7 +880,7 @@ export class Sim {
     }
     this.servers.forEach((server, i) => {
       server.ack = Math.max(0, server.ack - dt);
-      step(server, dt, SERVER_SPEED);
+      step(server, dt, SERVER_SPEED * styleServerMultiplier(state));
       const there = resting(server);
       if (server.phase === 'idle') {
         const tray = this.loadTray();
@@ -915,7 +916,7 @@ export class Sim {
         if (!next) return;
         startBatch(state, next.item, next.n);
         const steps = batchSteps(next.item);
-        cook.batch = { ...next, steps, step: 0, timer: STATION_SECONDS[steps[0]] };
+        cook.batch = { ...next, steps, step: 0, timer: STATION_SECONDS[steps[0]] * styleStationMultiplier(state) };
         this.walk(cook, ...kitchenPath(cook, stationSpot(steps[0])));
         return;
       }
@@ -923,7 +924,7 @@ export class Sim {
       if (batch.timer > 0) return;
       const station = batch.steps[++batch.step];
       if (station) {
-        batch.timer = STATION_SECONDS[station];
+        batch.timer = STATION_SECONDS[station] * styleStationMultiplier(state);
         this.walk(cook, ...kitchenPath(cook, stationSpot(station)));
         return;
       }

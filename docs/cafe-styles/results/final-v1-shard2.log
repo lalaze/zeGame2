@@ -1,0 +1,36 @@
+
+ RUN  v5.0.3 /tmp/cafe-style-final-1791798758
+
+final-v1-shard2: common-assets/early/base/bakery/plain: 30/30
+final-v1-shard2: common-assets/early/base/community/plain: 30/30
+final-v1-shard2: common-assets/early/feature/takeaway/plain: 30/30
+final-v1-shard2: common-assets/early/rush/bakery/plain: 30/30
+final-v1-shard2: common-assets/early/rush/community/plain: 30/30
+final-v1-shard2: common-assets/mid/base/takeaway/plain: 30/30
+final-v1-shard2: common-assets/mid/feature/bakery/plain: 30/30
+final-v1-shard2: common-assets/mid/feature/community/plain: 30/30
+final-v1-shard2: common-assets/mid/rush/takeaway/plain: 30/30
+final-v1-shard2: common-assets/late/base/bakery/plain: 30/30
+final-v1-shard2: common-assets/late/base/community/plain: 30/30
+final-v1-shard2: common-assets/late/feature/takeaway/plain: 30/30
+final-v1-shard2: common-assets/late/rush/bakery/plain: 30/30
+final-v1-shard2: common-assets/late/rush/community/plain: 30/30
+final-v1-shard2: route-purchases/early/base/takeaway/plain: 30/30
+final-v1-shard2: route-purchases/early/feature/bakery/plain: 30/30
+final-v1-shard2: route-purchases/early/feature/community/plain: 30/30
+final-v1-shard2: route-purchases/early/rush/takeaway/plain: 30/30
+final-v1-shard2: route-purchases/mid/base/bakery/plain: 30/30
+final-v1-shard2: route-purchases/mid/base/community/plain: 30/30
+final-v1-shard2: route-purchases/mid/feature/takeaway/plain: 30/30
+final-v1-shard2: route-purchases/mid/rush/bakery/plain: 30/30
+final-v1-shard2: route-purchases/mid/rush/community/plain: 30/30
+final-v1-shard2: route-purchases/late/base/takeaway/plain: 30/30
+final-v1-shard2: route-purchases/late/feature/bakery/plain: 30/30
+final-v1-shard2: route-purchases/late/feature/community/plain: 30/30
+final-v1-shard2: route-purchases/late/rush/takeaway/plain: 30/30
+
+ Test Files  1 passed (1)
+      Tests  7 passed | 1 skipped (8)
+   Start at  02:58:38
+   Duration  1995.52s (tests 100%)
+

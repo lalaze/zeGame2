@@ -1,0 +1,205 @@
+{
+  "generatedAt": "2026-10-12T11:45:12.855Z",
+  "status": "candidate frozen; independent holdout still required",
+  "frozen": {
+    "label": "earned-union-v1-training",
+    "sourceHash": "9c47eab7d2f2b1fe47e094df3f22c41f6a6a51043c338e952a6de37a27352c4d",
+    "designHash": "c949700064750634c205c18d05729a91875c17129cff3e57fd3fbcc839d600ef",
+    "readerHash": "14c399527028fa34d482b7de280b8accc5fef97c41b8ec95482e418b30f6c44a",
+    "trainingDataHash": "10dbfda4e3c2886af23686d811b160865adc14938d69b1e09f5335dcfe2fa57e",
+    "route": {
+      "id": "earned-union/late/base/blacktea+scone/garden",
+      "menu": "blacktea+scone",
+      "items": [
+        "blacktea",
+        "scone"
+      ],
+      "style": "garden",
+      "pressure": "base"
+    },
+    "ownPlain": {
+      "comparator": "earned-union/late/base/blacktea+scone/plain",
+      "metric": "netLiquidProfit"
+    },
+    "headline": {
+      "comparator": "earned-union/late/base/blacktea+scone/cats",
+      "metric": "netLiquidProfit"
+    },
+    "downside": {
+      "comparator": "earned-union/late/base/latte+flatwhite/community",
+      "metric": "lossRate"
+    },
+    "edges": [
+      {
+        "comparator": "earned-union/late/base/latte+flatwhite/plain",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/latte+flatwhite/coffee",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/latte+flatwhite/bakery",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/latte+flatwhite/cats",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/latte+flatwhite/takeaway",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/latte+flatwhite/garden",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/latte+flatwhite/community",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/espresso+roll+croissant/plain",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/espresso+roll+croissant/coffee",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/espresso+roll+croissant/bakery",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/espresso+roll+croissant/cats",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/espresso+roll+croissant/takeaway",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/espresso+roll+croissant/garden",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/espresso+roll+croissant/community",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/espresso+blacktea/plain",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/espresso+blacktea/coffee",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/espresso+blacktea/bakery",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/espresso+blacktea/cats",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/espresso+blacktea/takeaway",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/espresso+blacktea/garden",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/espresso+blacktea/community",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/americano+cortado/plain",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/americano+cortado/coffee",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/americano+cortado/bakery",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/americano+cortado/cats",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/americano+cortado/takeaway",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/americano+cortado/garden",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/americano+cortado/community",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/blacktea+scone/plain",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/blacktea+scone/coffee",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/blacktea+scone/bakery",
+        "metric": "wasteCost",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/blacktea+scone/cats",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/blacktea+scone/takeaway",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      },
+      {
+        "comparator": "earned-union/late/base/blacktea+scone/community",
+        "metric": "netLiquidProfit",
+        "equivalent": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+
+ RUN  v5.0.3 /tmp/cafe-style-earned-union-1791804425
+
+earned-union-v1-pressure-shard3: earned-union/late/feature/latte+flatwhite/cats: 30/30
+earned-union-v1-pressure-shard3: earned-union/late/feature/espresso+roll+croissant/takeaway: 30/30
+earned-union-v1-pressure-shard3: earned-union/late/feature/espresso+blacktea/garden: 30/30
+earned-union-v1-pressure-shard3: earned-union/late/feature/americano+cortado/community: 30/30
+earned-union-v1-pressure-shard3: earned-union/late/rush/latte+flatwhite/plain: 30/30
+earned-union-v1-pressure-shard3: earned-union/late/rush/espresso+roll+croissant/coffee: 30/30
+earned-union-v1-pressure-shard3: earned-union/late/rush/espresso+blacktea/bakery: 30/30
+earned-union-v1-pressure-shard3: earned-union/late/rush/americano+cortado/cats: 30/30
+earned-union-v1-pressure-shard3: earned-union/late/rush/blacktea+scone/takeaway: 30/30
+
+ Test Files  1 passed (1)
+      Tests  3 passed | 1 skipped (4)
+   Start at  05:10:25
+   Duration  1478.22s (tests 100%)
+

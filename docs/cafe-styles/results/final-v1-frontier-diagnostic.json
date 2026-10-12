@@ -1,0 +1,870 @@
+{
+  "sourceHash": "9c47eab7d2f2b1fe47e094df3f22c41f6a6a51043c338e952a6de37a27352c4d",
+  "designHash": "547d41cd492f63746f333ce8c70612bdbd3bed17d79aa1852a5c2dfb14387b1e",
+  "inputSha256": "1db6a1bce65036202413854d3effabf40eb16bcc269fdefcb033676a62365668",
+  "method": "Post-completion descriptive mean diagnostic, not a preregistered acceptance gate or significance test. A mean-dominator is at least as good on all five recorded means and better on at least one (absolute numerical tolerance 1e-7). No uncertainty or multiplicity correction; no claim outside the nine common-asset cells.",
+  "cells": [
+    {
+      "scenario": "common-assets/early/base/coffee/focus",
+      "style": "coffee",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "netLiquidProfit"
+      ],
+      "means": {
+        "netLiquidProfit": 8810.639450749715,
+        "lossRate": 0.0010184171343378269,
+        "wasteCost": 0,
+        "rating": 4.5,
+        "served": 422.9
+      }
+    },
+    {
+      "scenario": "common-assets/early/base/bakery/focus",
+      "style": "bakery",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway",
+        "garden"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 3846.112628527401,
+        "lossRate": 0.08310412127735348,
+        "wasteCost": 217.73333333333332,
+        "rating": 4.227,
+        "served": 347.43333333333334
+      }
+    },
+    {
+      "scenario": "common-assets/early/base/cats/focus",
+      "style": "cats",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 8286.673569268156,
+        "lossRate": 0.0007004325756225939,
+        "wasteCost": 0,
+        "rating": 4.5,
+        "served": 423.73333333333335
+      }
+    },
+    {
+      "scenario": "common-assets/early/base/takeaway/focus",
+      "style": "takeaway",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "lossRate",
+        "served"
+      ],
+      "means": {
+        "netLiquidProfit": 7557.526550749674,
+        "lossRate": 0.000542888399694357,
+        "wasteCost": 0,
+        "rating": 4.5,
+        "served": 426.76666666666665
+      }
+    },
+    {
+      "scenario": "common-assets/early/base/garden/focus",
+      "style": "garden",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 5327.156950749577,
+        "lossRate": 0.022314715466887146,
+        "wasteCost": 135.46666666666667,
+        "rating": 4.403999999999999,
+        "served": 413.3666666666667
+      }
+    },
+    {
+      "scenario": "common-assets/early/base/community/focus",
+      "style": "community",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 1561.4080359347959,
+        "lossRate": 0.010594891632818368,
+        "wasteCost": 0,
+        "rating": 4.487,
+        "served": 373.26666666666665
+      }
+    },
+    {
+      "scenario": "common-assets/early/feature/coffee/focus",
+      "style": "coffee",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "netLiquidProfit"
+      ],
+      "means": {
+        "netLiquidProfit": 11141.87394889794,
+        "lossRate": 0.0027061629526606633,
+        "wasteCost": 0,
+        "rating": 4.5,
+        "served": 526
+      }
+    },
+    {
+      "scenario": "common-assets/early/feature/bakery/focus",
+      "style": "bakery",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway",
+        "garden"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 3992.4094433422065,
+        "lossRate": 0.18311925597295098,
+        "wasteCost": 190.4,
+        "rating": 3.7859999999999996,
+        "served": 366.4
+      }
+    },
+    {
+      "scenario": "common-assets/early/feature/cats/focus",
+      "style": "cats",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "lossRate"
+      ],
+      "means": {
+        "netLiquidProfit": 10396.806215564455,
+        "lossRate": 0.001505771692763692,
+        "wasteCost": 0,
+        "rating": 4.5,
+        "served": 527.5333333333333
+      }
+    },
+    {
+      "scenario": "common-assets/early/feature/takeaway/focus",
+      "style": "takeaway",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "served"
+      ],
+      "means": {
+        "netLiquidProfit": 9361.055104453331,
+        "lossRate": 0.0017532341453272574,
+        "wasteCost": 0,
+        "rating": 4.5,
+        "served": 530.0333333333333
+      }
+    },
+    {
+      "scenario": "common-assets/early/feature/garden/focus",
+      "style": "garden",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 5864.813282231041,
+        "lossRate": 0.07951194915657744,
+        "wasteCost": 64.13333333333334,
+        "rating": 4.120333333333333,
+        "served": 462.7
+      }
+    },
+    {
+      "scenario": "common-assets/early/feature/community/focus",
+      "style": "community",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 1712.794498897747,
+        "lossRate": 0.060943056830929536,
+        "wasteCost": 0,
+        "rating": 4.197000000000001,
+        "served": 419.93333333333334
+      }
+    },
+    {
+      "scenario": "common-assets/early/rush/coffee/focus",
+      "style": "coffee",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "netLiquidProfit"
+      ],
+      "means": {
+        "netLiquidProfit": 15977.455169268513,
+        "lossRate": 0.047903166551154674,
+        "wasteCost": 0,
+        "rating": 4.5,
+        "served": 784.7
+      }
+    },
+    {
+      "scenario": "common-assets/early/rush/bakery/focus",
+      "style": "bakery",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway",
+        "garden"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 1013.2465914903684,
+        "lossRate": 0.5709745442658196,
+        "wasteCost": 74.66666666666667,
+        "rating": 3.0253333333333337,
+        "served": 251.83333333333334
+      }
+    },
+    {
+      "scenario": "common-assets/early/rush/cats/focus",
+      "style": "cats",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "lossRate"
+      ],
+      "means": {
+        "netLiquidProfit": 14943.984561860798,
+        "lossRate": 0.0434796330059228,
+        "wasteCost": 0,
+        "rating": 4.5,
+        "served": 790.6666666666666
+      }
+    },
+    {
+      "scenario": "common-assets/early/rush/takeaway/focus",
+      "style": "takeaway",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "served"
+      ],
+      "means": {
+        "netLiquidProfit": 13447.095580379153,
+        "lossRate": 0.0435271460126184,
+        "wasteCost": 0,
+        "rating": 4.5,
+        "served": 793.1666666666666
+      }
+    },
+    {
+      "scenario": "common-assets/early/rush/garden/focus",
+      "style": "garden",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 3012.898147045907,
+        "lossRate": 0.4347313207274103,
+        "wasteCost": 26.666666666666668,
+        "rating": 3.6006666666666667,
+        "served": 387.53333333333336
+      }
+    },
+    {
+      "scenario": "common-assets/early/rush/community/focus",
+      "style": "community",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -135.20755665777503,
+        "lossRate": 0.38131408391256744,
+        "wasteCost": 0,
+        "rating": 3.3316666666666657,
+        "served": 375.23333333333335
+      }
+    },
+    {
+      "scenario": "common-assets/mid/base/coffee/focus",
+      "style": "coffee",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "netLiquidProfit"
+      ],
+      "means": {
+        "netLiquidProfit": 42415.70158518486,
+        "lossRate": 0.00012269176938010747,
+        "wasteCost": 0,
+        "rating": 4.4176666666666655,
+        "served": 540.4666666666667
+      }
+    },
+    {
+      "scenario": "common-assets/mid/base/bakery/focus",
+      "style": "bakery",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 2886.094074073978,
+        "lossRate": 0.015280955879956475,
+        "wasteCost": 416.8666666666667,
+        "rating": 4.388,
+        "served": 546.5666666666667
+      }
+    },
+    {
+      "scenario": "common-assets/mid/base/cats/focus",
+      "style": "cats",
+      "meanDominators": [
+        "coffee"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 2724.995536296291,
+        "lossRate": 0.014095249456264876,
+        "wasteCost": 184.93333333333334,
+        "rating": 4.302666666666667,
+        "served": 532.4666666666667
+      }
+    },
+    {
+      "scenario": "common-assets/mid/base/takeaway/focus",
+      "style": "takeaway",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "lossRate",
+        "rating",
+        "served"
+      ],
+      "means": {
+        "netLiquidProfit": -6407.830585185123,
+        "lossRate": 0,
+        "wasteCost": 0,
+        "rating": 4.5,
+        "served": 568.7
+      }
+    },
+    {
+      "scenario": "common-assets/mid/base/garden/focus",
+      "style": "garden",
+      "meanDominators": [
+        "coffee"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 7628.511518518378,
+        "lossRate": 0.02293884667053696,
+        "wasteCost": 902.9333333333333,
+        "rating": 4.235,
+        "served": 525.7
+      }
+    },
+    {
+      "scenario": "common-assets/mid/base/community/focus",
+      "style": "community",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -4084.9320740740736,
+        "lossRate": 0.008615750820627053,
+        "wasteCost": 178.53333333333333,
+        "rating": 4.425999999999999,
+        "served": 504.3666666666667
+      }
+    },
+    {
+      "scenario": "common-assets/mid/feature/coffee/focus",
+      "style": "coffee",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "netLiquidProfit"
+      ],
+      "means": {
+        "netLiquidProfit": 54457.01254999966,
+        "lossRate": 0.0010966502259716455,
+        "wasteCost": 0,
+        "rating": 4.386666666666666,
+        "served": 659
+      }
+    },
+    {
+      "scenario": "common-assets/mid/feature/bakery/focus",
+      "style": "bakery",
+      "meanDominators": [
+        "coffee"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 4724.91124999987,
+        "lossRate": 0.05108859373338526,
+        "wasteCost": 783.3333333333334,
+        "rating": 4.243666666666668,
+        "served": 621.6666666666666
+      }
+    },
+    {
+      "scenario": "common-assets/mid/feature/cats/focus",
+      "style": "cats",
+      "meanDominators": [
+        "coffee"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 4958.941985555507,
+        "lossRate": 0.05055728047308759,
+        "wasteCost": 238.66666666666666,
+        "rating": 4.180666666666666,
+        "served": 617.5666666666667
+      }
+    },
+    {
+      "scenario": "common-assets/mid/feature/takeaway/focus",
+      "style": "takeaway",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "lossRate",
+        "rating",
+        "served"
+      ],
+      "means": {
+        "netLiquidProfit": -5053.7874777777815,
+        "lossRate": 0.0001426604788177767,
+        "wasteCost": 0,
+        "rating": 4.5,
+        "served": 705.1
+      }
+    },
+    {
+      "scenario": "common-assets/mid/feature/garden/focus",
+      "style": "garden",
+      "meanDominators": [
+        "coffee"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 10244.559999999827,
+        "lossRate": 0.06643049480705918,
+        "wasteCost": 773.8666666666667,
+        "rating": 4.0923333333333325,
+        "served": 599.5
+      }
+    },
+    {
+      "scenario": "common-assets/mid/feature/community/focus",
+      "style": "community",
+      "meanDominators": [
+        "coffee"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -3005.356101851855,
+        "lossRate": 0.03309049013971588,
+        "wasteCost": 246.93333333333334,
+        "rating": 4.274333333333334,
+        "served": 582.3666666666667
+      }
+    },
+    {
+      "scenario": "common-assets/mid/rush/coffee/focus",
+      "style": "coffee",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "netLiquidProfit"
+      ],
+      "means": {
+        "netLiquidProfit": 83121.1937925936,
+        "lossRate": 0.03656757657215345,
+        "wasteCost": 0,
+        "rating": 4.140000000000001,
+        "served": 954.9
+      }
+    },
+    {
+      "scenario": "common-assets/mid/rush/bakery/focus",
+      "style": "bakery",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "garden"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 5344.087407407265,
+        "lossRate": 0.2472947074959599,
+        "wasteCost": 885.4666666666667,
+        "rating": 3.5580000000000007,
+        "served": 698.3
+      }
+    },
+    {
+      "scenario": "common-assets/mid/rush/cats/focus",
+      "style": "cats",
+      "meanDominators": [
+        "coffee"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 8377.319893333206,
+        "lossRate": 0.17694938261164714,
+        "wasteCost": 192.26666666666668,
+        "rating": 3.8446666666666673,
+        "served": 790.9333333333333
+      }
+    },
+    {
+      "scenario": "common-assets/mid/rush/takeaway/focus",
+      "style": "takeaway",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "lossRate",
+        "rating",
+        "served"
+      ],
+      "means": {
+        "netLiquidProfit": -1506.366400000189,
+        "lossRate": 0.0030773448817957086,
+        "wasteCost": 0,
+        "rating": 4.5,
+        "served": 1120.6666666666667
+      }
+    },
+    {
+      "scenario": "common-assets/mid/rush/garden/focus",
+      "style": "garden",
+      "meanDominators": [
+        "coffee"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": 13930.2692148146,
+        "lossRate": 0.18941610246366172,
+        "wasteCost": 725.8666666666667,
+        "rating": 3.727333333333333,
+        "served": 773.4666666666667
+      }
+    },
+    {
+      "scenario": "common-assets/mid/rush/community/focus",
+      "style": "community",
+      "meanDominators": [
+        "coffee",
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -1633.2185185185012,
+        "lossRate": 0.13293867619062397,
+        "wasteCost": 193.73333333333332,
+        "rating": 4.122999999999999,
+        "served": 773.5333333333333
+      }
+    },
+    {
+      "scenario": "common-assets/late/base/coffee/focus",
+      "style": "coffee",
+      "meanDominators": [
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -252156.51505555678,
+        "lossRate": 0.010692268572936018,
+        "wasteCost": 0,
+        "rating": 3.881666666666667,
+        "served": 631.8333333333334
+      }
+    },
+    {
+      "scenario": "common-assets/late/base/bakery/focus",
+      "style": "bakery",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -269541.13588888844,
+        "lossRate": 0.10602385293312909,
+        "wasteCost": 1600.8333333333333,
+        "rating": 3.490333333333333,
+        "served": 602.5333333333333
+      }
+    },
+    {
+      "scenario": "common-assets/late/base/cats/focus",
+      "style": "cats",
+      "meanDominators": [
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -242943.08435555382,
+        "lossRate": 0.07584203429596552,
+        "wasteCost": 680,
+        "rating": 3.6289999999999996,
+        "served": 615.7333333333333
+      }
+    },
+    {
+      "scenario": "common-assets/late/base/takeaway/focus",
+      "style": "takeaway",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "netLiquidProfit",
+        "lossRate",
+        "rating",
+        "served"
+      ],
+      "means": {
+        "netLiquidProfit": -149035.96511111595,
+        "lossRate": 0.0004419825205257885,
+        "wasteCost": 0,
+        "rating": 4.5,
+        "served": 824.2666666666667
+      }
+    },
+    {
+      "scenario": "common-assets/late/base/garden/focus",
+      "style": "garden",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -255627.96675185155,
+        "lossRate": 0.10919180945902097,
+        "wasteCost": 693.7666666666667,
+        "rating": 3.2896666666666663,
+        "served": 542.8
+      }
+    },
+    {
+      "scenario": "common-assets/late/base/community/focus",
+      "style": "community",
+      "meanDominators": [
+        "coffee",
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -259296.93837037092,
+        "lossRate": 0.05143850982477554,
+        "wasteCost": 765,
+        "rating": 3.847000000000001,
+        "served": 601.8333333333334
+      }
+    },
+    {
+      "scenario": "common-assets/late/feature/coffee/focus",
+      "style": "coffee",
+      "meanDominators": [
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -248853.24073333468,
+        "lossRate": 0.09774930618101602,
+        "wasteCost": 0.26666666666666666,
+        "rating": 3.5646666666666667,
+        "served": 679.1666666666666
+      }
+    },
+    {
+      "scenario": "common-assets/late/feature/bakery/focus",
+      "style": "bakery",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway",
+        "community"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -266880.22341666615,
+        "lossRate": 0.20894524604370462,
+        "wasteCost": 1449.2666666666667,
+        "rating": 2.9770000000000008,
+        "served": 642.5666666666667
+      }
+    },
+    {
+      "scenario": "common-assets/late/feature/cats/focus",
+      "style": "cats",
+      "meanDominators": [
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -238446.70408333142,
+        "lossRate": 0.15250109194890074,
+        "wasteCost": 658,
+        "rating": 3.4963333333333333,
+        "served": 668.1666666666666
+      }
+    },
+    {
+      "scenario": "common-assets/late/feature/takeaway/focus",
+      "style": "takeaway",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "netLiquidProfit",
+        "lossRate",
+        "wasteCost",
+        "rating",
+        "served"
+      ],
+      "means": {
+        "netLiquidProfit": -109423.16341667298,
+        "lossRate": 0.002474814420640778,
+        "wasteCost": 0,
+        "rating": 4.5,
+        "served": 1030.2
+      }
+    },
+    {
+      "scenario": "common-assets/late/feature/garden/focus",
+      "style": "garden",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -253822.55331666634,
+        "lossRate": 0.227164029050489,
+        "wasteCost": 717.7666666666667,
+        "rating": 3.0953333333333335,
+        "served": 567.3
+      }
+    },
+    {
+      "scenario": "common-assets/late/feature/community/focus",
+      "style": "community",
+      "meanDominators": [
+        "coffee",
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -254568.9629166674,
+        "lossRate": 0.10889591041972448,
+        "wasteCost": 663.5,
+        "rating": 3.5093333333333327,
+        "served": 677.8333333333334
+      }
+    },
+    {
+      "scenario": "common-assets/late/rush/coffee/focus",
+      "style": "coffee",
+      "meanDominators": [
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -247006.62146666812,
+        "lossRate": 0.37886118243610567,
+        "wasteCost": 0,
+        "rating": 3.4423333333333335,
+        "served": 714.4
+      }
+    },
+    {
+      "scenario": "common-assets/late/rush/bakery/focus",
+      "style": "bakery",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway",
+        "community"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -264875.1336296292,
+        "lossRate": 0.4231570272030799,
+        "wasteCost": 1383.1333333333334,
+        "rating": 2.745333333333333,
+        "served": 699.9
+      }
+    },
+    {
+      "scenario": "common-assets/late/rush/cats/focus",
+      "style": "cats",
+      "meanDominators": [
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -235623.25180370166,
+        "lossRate": 0.38381289793277606,
+        "wasteCost": 675,
+        "rating": 3.266333333333333,
+        "served": 720.8
+      }
+    },
+    {
+      "scenario": "common-assets/late/rush/takeaway/focus",
+      "style": "takeaway",
+      "meanDominators": [],
+      "strictBestMeanMetrics": [
+        "netLiquidProfit",
+        "lossRate",
+        "rating",
+        "served"
+      ],
+      "means": {
+        "netLiquidProfit": -49486.426666674975,
+        "lossRate": 0.1273907616207943,
+        "wasteCost": 0,
+        "rating": 4.215333333333334,
+        "served": 1348.8666666666666
+      }
+    },
+    {
+      "scenario": "common-assets/late/rush/garden/focus",
+      "style": "garden",
+      "meanDominators": [
+        "coffee",
+        "cats",
+        "takeaway",
+        "community"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -253424.26246666635,
+        "lossRate": 0.48707672101407196,
+        "wasteCost": 799.3666666666667,
+        "rating": 2.838999999999999,
+        "served": 576.7666666666667
+      }
+    },
+    {
+      "scenario": "common-assets/late/rush/community/focus",
+      "style": "community",
+      "meanDominators": [
+        "takeaway"
+      ],
+      "strictBestMeanMetrics": [],
+      "means": {
+        "netLiquidProfit": -249182.05574074172,
+        "lossRate": 0.286638630759455,
+        "wasteCost": 631,
+        "rating": 3.0883333333333334,
+        "served": 791.9333333333333
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "baseCommit": "3d9c6b95914a52f100db582608f424a9af2bd683",
+  "patchSha256": "d94e5035a14f89c514ffc02a7277eff78cf9a013fe424d0d57605a954df4d1e9",
+  "sourceFiles": 34,
+  "newSourceFiles": 17,
+  "cleanBaseApplyCheck": true,
+  "appliedFilesByteMatch": true
+}

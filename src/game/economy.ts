@@ -1,8 +1,8 @@
+import { stylePrepMultiplier, styleSaleMultiplier, styleOrderPairs, styleComboChance, styleArrivalMultiplier, styleTablePatienceExtra } from './styles';
 import { promotionTraffic } from './promotion';
-import { petTraffic } from './pets';
+import { petTraffic, forecastPetTraffic } from './pets';
 import {
   BASE_ARRIVAL_RATE,
-  COMBO_CHANCE,
   MAX_VARIETY_BONUS,
   VARIETY_BONUS,
   isDrink,
@@ -159,22 +159,22 @@ export const prepMultiplier = (s: GameState) => 0.9 ** s.upgrades.machine;
 export const varietyBonus = (s: GameState) =>
   Math.min(MAX_VARIETY_BONUS, VARIETY_BONUS * Math.max(0, menuItems(s).length - 1));
 export const baseArrivalRate = (s: GameState) =>
-  BASE_ARRIVAL_RATE * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * (1 + varietyBonus(s)) * reputationTraffic(s.reputation) * petTraffic(s);
+  BASE_ARRIVAL_RATE * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * (1 + varietyBonus(s)) * reputationTraffic(s.reputation) * petTraffic(s) * styleArrivalMultiplier(s);
 export const arrivalRate = (s: GameState) => baseArrivalRate(s) * promotionTraffic(s);
 export const tipMultiplier = (s: GameState) => 1 + comfort(s) / 100;
 /** The café opens with a table in each nook; Expand the Shop adds the rest. */
 export const tableCount = (s: GameState) => activeTableIndices(s).length;
 export const patienceSeconds = (s: GameState) => 40 + comfort(s) / 5;
 /** How long a seated guest waits for their order to be brought over before giving up. */
-export const tablePatience = (s: GameState) => 50 + comfort(s) / 4;
+export const tablePatience = (s: GameState) => 50 + comfort(s) / 4 + styleTablePatienceExtra(s);
 
-export function salePrice(state: GameState, id: ItemId, vip = false): number {
+export function salePrice(state: GameState, id: ItemId, vip = false, dineIn = false, meal: readonly ItemId[] = [id]): number {
   if (!canPrepareItem(state, id)) return 0;
-  return itemPrice(menuItem(id), state.items[id]) * tipMultiplier(state) * (vip ? VIP_MULTIPLIER : 1);
+  return itemPrice(menuItem(id), state.items[id]) * tipMultiplier(state) * (vip ? VIP_MULTIPLIER : 1) * styleSaleMultiplier(state, id, dineIn, meal);
 }
 
 export function prepTime(state: GameState, id: ItemId): number {
-  return menuItem(id).prepTime * prepMultiplier(state);
+  return menuItem(id).prepTime * prepMultiplier(state) * stylePrepMultiplier(state, id);
 }
 
 /** Today's menu: unlocked items the player chose to sell. */
@@ -198,18 +198,13 @@ export const isBakery = (id: ItemId) => !isDrink(menuItem(id).category);
  * How many of each dish an average customer buys. Everyone picks one dish from the
  * menu at random; some also add a bakery item to a drink (or a drink to a bakery item).
  */
-export function orderShares(items: readonly MenuItemDef[]): Map<ItemId, number> {
+export function orderShares(items: readonly MenuItemDef[], state?: GameState): Map<ItemId, number> {
   const shares = new Map<ItemId, number>();
   if (items.length === 0) return shares;
-  const drinks = items.filter((m) => isDrink(m.category));
-  const bakery = items.filter((m) => !isDrink(m.category));
-  const n = items.length;
-  for (const m of items) {
-    const others = isDrink(m.category) ? bakery : drinks;
-    const mine = isDrink(m.category) ? drinks : bakery;
-    // Picked as the main order, plus picked as the extra for someone else's main.
-    const asExtra = others.length > 0 ? (COMBO_CHANCE * others.length) / n / mine.length : 0;
-    shares.set(m.id, 1 / n + asExtra);
+  for (const m of items) shares.set(m.id, 1 / items.length);
+  for (const main of items) {
+    const pairs = styleOrderPairs(state, main, items);
+    if (pairs.length) for (const extra of pairs) shares.set(extra.id, shares.get(extra.id)! + styleComboChance(state, main, pairs) / items.length / pairs.length);
   }
   return shares;
 }
@@ -218,7 +213,7 @@ export function orderShares(items: readonly MenuItemDef[]): Map<ItemId, number> 
 export function serviceCapacity(state: GameState, items = menuItems(state)): number {
   if (items.length === 0) return 0;
   let prep = 0;
-  for (const [id, share] of orderShares(items)) prep += share * prepTime(state, id);
+  for (const [id, share] of orderShares(items, state)) prep += share * prepTime(state, id);
   return baristaCount(state) / (prep + SERVICE_OVERHEAD);
 }
 
@@ -359,15 +354,16 @@ export function expectedCustomers(state: GameState): number {
   if (items.length === 0) return 0;
   const capacity = serviceCapacity(state, items);
   const promotedSeconds = state.promotion && !state.promotion.paused ? Math.min(DAY_SECONDS, state.promotion.remaining) : 0;
-  return Math.ceil(Math.min(arrivalRate(state), capacity) * promotedSeconds
-    + Math.min(baseArrivalRate(state), capacity) * (DAY_SECONDS - promotedSeconds));
+  const careForecast = forecastPetTraffic(state) / petTraffic(state);
+  return Math.ceil(Math.min(arrivalRate(state) * careForecast, capacity) * promotedSeconds
+    + Math.min(baseArrivalRate(state) * careForecast, capacity) * (DAY_SECONDS - promotedSeconds));
 }
 
 /** Servings of each dish a full day on today's menu sells, roughly. */
 export function dayDemand(state: GameState): Map<ItemId, number> {
   const customers = expectedCustomers(state);
   const demand = new Map<ItemId, number>();
-  for (const [id, share] of orderShares(menuItems(state))) demand.set(id, customers * share);
+  for (const [id, share] of orderShares(menuItems(state), state)) demand.set(id, customers * share);
   return demand;
 }
 

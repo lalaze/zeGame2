@@ -1,0 +1,79 @@
+{
+  "scope": "Independent verification of first-style-selection scroll fix; no game startup or player saves accessed",
+  "cases": [
+    {
+      "entry": "header",
+      "initialFocus": null,
+      "first": {
+        "scrollTop": 0,
+        "focusedTag": "H3",
+        "viewed": "community"
+      },
+      "second": {
+        "scrollTop": 0,
+        "focusedTag": "H3",
+        "viewed": "garden"
+      }
+    },
+    {
+      "entry": "header",
+      "initialFocus": "coffee",
+      "first": {
+        "scrollTop": 0,
+        "focusedTag": "H3",
+        "viewed": "community"
+      },
+      "second": {
+        "scrollTop": 0,
+        "focusedTag": "H3",
+        "viewed": "garden"
+      }
+    },
+    {
+      "entry": "preparation",
+      "initialFocus": null,
+      "first": {
+        "scrollTop": 0,
+        "focusedTag": "H3",
+        "viewed": "community"
+      },
+      "second": {
+        "scrollTop": 0,
+        "focusedTag": "H3",
+        "viewed": "garden"
+      }
+    },
+    {
+      "entry": "preparation",
+      "initialFocus": "coffee",
+      "first": {
+        "scrollTop": 0,
+        "focusedTag": "H3",
+        "viewed": "community"
+      },
+      "second": {
+        "scrollTop": 0,
+        "focusedTag": "H3",
+        "viewed": "garden"
+      }
+    }
+  ],
+  "domCommand": "node /tmp/cafe-style-scroll-review.mjs",
+  "focusedTests": {
+    "command": "npx vitest run src/ui/cafe-styles.test.ts src/ui/cafe-style-prices.test.ts src/ui/prepare-guidance.test.ts src/ui/dialog.test.ts --reporter=dot",
+    "filesPassed": 4,
+    "testsPassed": 71
+  },
+  "nativeBrowser": {
+    "status": "blocked; not a pass",
+    "browser": "dot-cloud Chromium",
+    "origin": "http://127.0.0.1:5294/p3-qa.html",
+    "attempts": [
+      "Sandboxed Vite server: browser net::ERR_CONNECTION_REFUSED",
+      "Approved outside-sandbox Vite server: browser net::ERR_CONNECTION_REFUSED"
+    ],
+    "impact": "Native first-selection scrolling, heading visibility and focus could not be observed. No screenshots captured.",
+    "harness": "/tmp/cafe-p3-native-harness.mjs",
+    "notes": "Harness imports current style/preparation modules and production CSS into a 390 by 700 iframe, uses in-memory initial state, and does not import main.ts or use save APIs."
+  }
+}

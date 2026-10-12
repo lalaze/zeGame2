@@ -1,0 +1,105 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> tiny-bean-cafe@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+ ❯ scripts/economy-lab.test.ts (5 tests | 1 failed | 1 skipped) 7228ms
+   ❯ economy lab design and accounting (4)
+     × resets global layout before expanded forecasts regardless of previous sample 6976ms
+ ❯ src/render/living-cat-art.test.ts (10 tests | 1 failed) 10779ms
+   ❯ cat and seated guest affection artwork (3)
+     × preserves cast heads and seat anchors while adding a mirrored lowered hand 7845ms
+ ❯ src/render/characters.test.ts (8 tests | 1 failed) 12552ms
+   ❯ redesigned café cast (8)
+     × renders thirty unique designs in every direction without palette or anchor regressions 6836ms
+ ❯ src/game/kitchen.test.ts (12 tests | 1 failed) 17457ms
+   ❯ the kitchen (12)
+     × restocks every bakery recipe only after carrying it to pickup, then walks back 15033ms
+ ❯ scripts/living-cats-evidence.test.ts (7 tests | 1 failed | 1 skipped) 17797ms
+   ❯ independent living-cat evidence (7)
+     × measures three cats observing actual Sim guests and preserves each service update 9367ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  scripts/economy-lab.test.ts > economy lab design and accounting > resets global layout before expanded forecasts regardless of previous sample
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ scripts/economy-lab.test.ts:15:3
+     13|     expect(scenarios().filter((s) => s.stage === 'early' && s.promotio…
+     14|   });
+     15|   it('resets global layout before expanded forecasts regardless of pre…
+       |   ^
+     16|     const scenario = scenarios().find((s) => s.id === 'expanded/all/no…
+     17|     setSceneHeight(240); setKitchenLevel(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  scripts/living-cats-evidence.test.ts > independent living-cat evidence > measures three cats observing actual Sim guests and preserves each service update
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ scripts/living-cats-evidence.test.ts:167:3
+    165|   });
+    166|
+    167|   it('measures three cats observing actual Sim guests and preserves ea…
+       |   ^
+    168|     const state = fixture(); state.pets.forEach(p => { p.preferredArea…
+    169|     const sim = new Sim(rng(13)); openShop(state);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  src/game/kitchen.test.ts > the kitchen > restocks every bakery recipe only after carrying it to pickup, then walks back
+Error: Test timed out in 15000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/game/kitchen.test.ts:198:3
+    196|   });
+    197|
+    198|   it('restocks every bakery recipe only after carrying it to pickup, t…
+       |   ^
+    199|     for (const level of [0, 1, 2]) {
+    200|       for (const item of MENU.filter((m) => isBakery(m.id))) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  src/render/characters.test.ts > redesigned café cast > renders thirty unique designs in every direction without palette or anchor regressions
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/render/characters.test.ts:93:3
+     91|     expect(saved).toEqual({ ...look, hairStyle: 2, shirt: 6 });
+     92|   });
+     93|   it('renders thirty unique designs in every direction without palette…
+       |   ^
+     94|     const signatures = new Set<string>();
+     95|     for (const design of CUSTOMER_CAST) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  src/render/living-cat-art.test.ts > cat and seated guest affection artwork > preserves cast heads and seat anchors while adding a mirrored lowered hand
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/render/living-cat-art.test.ts:117:3
+    115|   });
+    116|
+    117|   it('preserves cast heads and seat anchors while adding a mirrored lo…
+       |   ^
+    118|     const signatures = new Set<string>();
+    119|     for (const design of CUSTOMER_CAST) {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  5 failed | 81 passed | 1 skipped (87)
+      Tests  5 failed | 900 passed | 17 skipped (922)
+   Start at  05:10:45
+   Duration  71.52s (tests 86%, environment 6%, transform 4%, import 4%)
+
+    Isolate  87 workers spawned · ~602ms startup each (spawn + environment, per file)
+             at least ~5.94s faster with isolate: false — reuses workers across files instead of one per file
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

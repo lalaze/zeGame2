@@ -64,6 +64,21 @@ export const catDef = (id: string) => CATS.find((cat) => cat.id === id);
 export const petActive = (pet: Pet) => pet.careSeconds > EPSILON;
 export const petTraffic = (state: GameState) => 1 + state.pets.reduce((sum, pet) => sum + (petActive(pet) ? catDef(pet.id)!.traffic : 0), 0);
 
+/** Stocking can anticipate the first affordable automatic refill on opening.
+ * This is a forecast only: never spends money or activates actual cat traffic.
+ * Share the current cash reserve in the same pet order as updatePetCare. */
+export function forecastPetTraffic(state: GameState): number {
+  let reserve = state.coins;
+  return 1 + state.pets.reduce((sum, pet) => {
+    if (petActive(pet)) return sum + catDef(pet.id)!.traffic;
+    const cat = catDef(pet.id)!;
+    if (!pet.autoRefill || reserve < cat.careCost) return sum;
+    reserve -= cat.careCost;
+    return sum + cat.traffic;
+  }, 0);
+}
+
+
 /** Adoption includes the first care pack. Its supplies are expensed as consumed. */
 export function adoptCat(state: GameState, id: string): boolean {
   const cat = catDef(id);

@@ -1,0 +1,47 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> tiny-bean-cafe@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+ ❯ src/game/regular-guests.test.ts (15 tests | 1 failed) 407ms
+   ❯ regular guest progression (9)
+     × starts empty and never infers old-save meetings or unlocks from café totals 19ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/game/regular-guests.test.ts > regular guest progression > starts empty and never infers old-save meetings or unlocks from café totals
+AssertionError: expected 14 to be 13 // Object.is equality
+
+- Expected
++ Received
+
+- 13
++ 14
+
+ ❯ src/game/regular-guests.test.ts:41:28
+     39|     const legacy = deserialize(JSON.stringify({ version: 12, day: 100,…
+     40|     expect(legacy.regularGuests).toEqual(emptyRegularGuests());
+     41|     expect(legacy.version).toBe(13);
+       |                            ^
+     42|     expect(regularGuestProgress(legacy, 'mina')).toBeUndefined();
+     43|     expect(regularGuestUnreadCount(legacy)).toBe(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 78 passed | 1 skipped (80)
+      Tests  1 failed | 874 passed | 11 skipped (886)
+   Start at  02:45:23
+   Duration  43.97s (tests 85%, environment 6%, transform 5%, import 4%)
+
+    Isolate  80 workers spawned · ~368ms startup each (spawn + environment, per file)
+             at least ~3.31s faster with isolate: false — reuses workers across files instead of one per file
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

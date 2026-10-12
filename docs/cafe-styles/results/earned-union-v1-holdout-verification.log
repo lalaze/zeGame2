@@ -1,0 +1,33 @@
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+ ❯ scripts/cafe-style-frontier-verify.test.ts (4 tests | 1 failed | 1 skipped) 183ms
+   × verifies every frozen candidate edge on independent seeds and reports pressure regressions 176ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  scripts/cafe-style-frontier-verify.test.ts > verifies every frozen candidate edge on independent seeds and reports pressure regressions
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ scripts/cafe-style-frontier-verify.test.ts:244:72
+    242|   const result = analyzeHoldout(process.env.FRONTIER_VERIFY_LABEL, pro…
+    243|   expect(result.positiveOperations).toBe(true);
+    244|   if (process.env.FRONTIER_VERIFY === 'holdout') { expect(result.pass)…
+       |                                                                        ^
+    245| });
+    246|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed | 1 skipped (4)
+   Start at  05:04:03
+   Duration  600ms (transform 50%, tests 40%, import 10%, worker 1%)
+

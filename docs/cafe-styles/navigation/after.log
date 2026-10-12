@@ -1,0 +1,19 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+ ✓ src/game/chair-access.test.ts > chair-access placement guard > rejects the previously legal fern that covers table 2 left-chair approach 4ms
+ ✓ src/game/chair-access.test.ts > chair-access placement guard > stores the historical obstruction on load, retaining the asset and all purchases 8ms
+ ✓ src/game/chair-access.test.ts > chair-access placement guard > has no load notice for new cafés or unchanged valid arrangements 1ms
+ ✓ src/game/chair-access.test.ts > chair-access placement guard > keeps every permitted floor cell outside chair approach clearance in every dining room 316ms
+stdout | src/game/chair-access.test.ts > chair-access placement guard > naturally finishes the exact historical paid fixture after obstruction repair
+{"seed":1592594996,"openSeconds":180,"closingSeconds":12.150000000000038,"finishedService":true,"served":58,"storedFern":1}
+
+ ✓ src/game/chair-access.test.ts > chair-access placement guard > resumes an already blocked saved visit after safely storing the old obstruction 194ms
+ ✓ src/game/chair-access.test.ts > chair-access placement guard > naturally finishes the exact historical paid fixture after obstruction repair 150ms
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  02:51:30
+   Duration  1.35s (tests 59%, transform 36%, import 5%)
+

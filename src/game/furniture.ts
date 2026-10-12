@@ -108,10 +108,14 @@ const FLOOR_RESERVED: readonly Rect[] = [
   { x: 186, y: MIN_SCENE_H - 15, w: 12, h: 9 },
 ];
 
-/** The space a table needs: its chairs, and room in front to walk up to them. */
+/** The space a table needs: its chairs and the clear apron in front of them.
+ * The approach is 13px below the table center (seat +1, then +12). Navigation
+ * pads furniture by 8px, so reserving only through +14 allowed a legal plant
+ * to cover the approach and leave a customer unable to finish walking.
+ * Reserve through +21 at minimum height; floor stretching only widens the gap. */
 function tableRect(i: number): Rect {
   const t = tableSpotMin(i);
-  return { x: t.x - 24, y: t.y - 30, w: 48, h: 44 };
+  return { x: t.x - 24, y: t.y - 30, w: 48, h: 30 + 13 + 8 };
 }
 
 const overlaps = (a: Rect, b: Rect) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;

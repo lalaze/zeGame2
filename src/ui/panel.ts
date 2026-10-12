@@ -440,15 +440,16 @@ export class Panel {
     if (this.tab === 'upgrades') return UPGRADES.map((u) => `upgrade:${u.id}`);
     if (this.tab === 'decor') return ['decor', this.decorCategory];
     if (this.tab === 'pantry') return ['pantry', ...neededIngredients(this.state).map((i) => `ing:${i.id}`)];
+    const stylePriceNote = this.state.cafeStyle.focus ? ['style-prices'] : [];
     if (this.introMode) {
       // Show every owned recipe, even if a full-view filter was previously selected.
       // Older/purchased food remains available, with its existing kitchen gates intact.
-      return CATEGORIES.flatMap((cat) => {
+      return [...stylePriceNote, ...CATEGORIES.flatMap((cat) => {
         const owned = MENU.filter((m) => m.category === cat && this.state.items[m.id] > 0);
         return owned.length ? [`cat:${cat}`, ...owned.map((m) => `item:${m.id}`)] : [];
-      });
+      })];
     }
-    const keys: string[] = ['variety'];
+    const keys: string[] = [...stylePriceNote, 'variety'];
     const cats = this.category === 'all' ? CATEGORIES : [this.category];
     for (const cat of cats) {
       keys.push(`cat:${cat}`);
@@ -497,6 +498,13 @@ export class Panel {
     }
     for (const key of keys) {
       const [kind, id] = key.split(':');
+      if (kind === 'style-prices') {
+        const note = document.createElement('p');
+        note.className = 'menu-style-prices note';
+        note.textContent = t('style.menu.prices');
+        this.list.append(note);
+        continue;
+      }
       if (kind === 'pantry') {
         this.buildPantryIntro();
         continue;

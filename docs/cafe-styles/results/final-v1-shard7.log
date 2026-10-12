@@ -1,0 +1,36 @@
+
+ RUN  v5.0.3 /tmp/cafe-style-final-1791798758
+
+final-v1-shard7: common-assets/early/base/takeaway/focus: 30/30
+final-v1-shard7: common-assets/early/feature/bakery/focus: 30/30
+final-v1-shard7: common-assets/early/feature/community/focus: 30/30
+final-v1-shard7: common-assets/early/rush/takeaway/focus: 30/30
+final-v1-shard7: common-assets/mid/base/bakery/focus: 30/30
+final-v1-shard7: common-assets/mid/base/community/focus: 30/30
+final-v1-shard7: common-assets/mid/feature/takeaway/focus: 30/30
+final-v1-shard7: common-assets/mid/rush/bakery/focus: 30/30
+final-v1-shard7: common-assets/mid/rush/community/focus: 30/30
+final-v1-shard7: common-assets/late/base/takeaway/focus: 30/30
+final-v1-shard7: common-assets/late/feature/bakery/focus: 30/30
+final-v1-shard7: common-assets/late/feature/community/focus: 30/30
+final-v1-shard7: common-assets/late/rush/takeaway/focus: 30/30
+final-v1-shard7: route-purchases/early/base/bakery/focus: 30/30
+final-v1-shard7: route-purchases/early/base/community/focus: 30/30
+final-v1-shard7: route-purchases/early/feature/takeaway/focus: 30/30
+final-v1-shard7: route-purchases/early/rush/bakery/focus: 30/30
+final-v1-shard7: route-purchases/early/rush/community/focus: 30/30
+final-v1-shard7: route-purchases/mid/base/takeaway/focus: 30/30
+final-v1-shard7: route-purchases/mid/feature/bakery/focus: 30/30
+final-v1-shard7: route-purchases/mid/feature/community/focus: 30/30
+final-v1-shard7: route-purchases/mid/rush/takeaway/focus: 30/30
+final-v1-shard7: route-purchases/late/base/bakery/focus: 30/30
+final-v1-shard7: route-purchases/late/base/community/focus: 30/30
+final-v1-shard7: route-purchases/late/feature/takeaway/focus: 30/30
+final-v1-shard7: route-purchases/late/rush/bakery/focus: 30/30
+final-v1-shard7: route-purchases/late/rush/community/focus: 30/30
+
+ Test Files  1 passed (1)
+      Tests  7 passed | 1 skipped (8)
+   Start at  03:32:20
+   Duration  1847.75s (tests 100%)
+

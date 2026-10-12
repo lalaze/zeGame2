@@ -1,0 +1,260 @@
+{
+  "version": 1,
+  "sourceSeed": 1592594996,
+  "gameSourceHash": "9c47eab7d2f2b1fe47e094df3f22c41f6a6a51043c338e952a6de37a27352c4d",
+  "sources": [
+    {
+      "style": "coffee",
+      "snapshotFile": "all-six-v3-chair-care-corrected-coffee-1592594996-late.json",
+      "sha256": "0a02094f014c9e4c575c928360ad89231135333870091e431de51c5a3c4cdf2f",
+      "onMenu": [
+        "latte",
+        "flatwhite"
+      ],
+      "day": 10
+    },
+    {
+      "style": "bakery",
+      "snapshotFile": "all-six-v3-chair-care-corrected-bakery-1592594996-late.json",
+      "sha256": "1c678d3c53d2ceec348cc3c124c36fb370cf52a063aa85047420328cd63b5f3a",
+      "onMenu": [
+        "espresso",
+        "roll",
+        "croissant"
+      ],
+      "day": 10
+    },
+    {
+      "style": "cats",
+      "snapshotFile": "all-six-v3-chair-care-corrected-cats-1592594996-late.json",
+      "sha256": "cb24576f2da7b463a42e205d147353959a9356f808e5ba2e26698d87a7d76f02",
+      "onMenu": [
+        "espresso",
+        "blacktea"
+      ],
+      "day": 9
+    },
+    {
+      "style": "takeaway",
+      "snapshotFile": "all-six-v3-chair-care-corrected-takeaway-1592594996-late.json",
+      "sha256": "0e9e9065011ca3f730bda4993416d020b48345013887b36a515d79a84623e085",
+      "onMenu": [
+        "americano",
+        "cortado"
+      ],
+      "day": 9
+    },
+    {
+      "style": "garden",
+      "snapshotFile": "all-six-v3-chair-care-corrected-garden-1592594996-late.json",
+      "sha256": "2d3187d61b4adfbe55db30375851d74f23335f497d8ecf99d82582ca9c8706fa",
+      "onMenu": [
+        "blacktea",
+        "scone"
+      ],
+      "day": 13
+    },
+    {
+      "style": "community",
+      "snapshotFile": "all-six-v3-chair-care-corrected-community-1592594996-late.json",
+      "sha256": "49b6085ffb2027210530e156af2ad5dedef71386c8c5aaaaf7763c614e488238",
+      "onMenu": [
+        "espresso",
+        "blacktea"
+      ],
+      "day": 13
+    }
+  ],
+  "items": {
+    "affogato": 0,
+    "americano": 25,
+    "bagel": 0,
+    "baguette": 0,
+    "blacktea": 25,
+    "brioche": 0,
+    "brownie": 0,
+    "cake": 0,
+    "cappuccino": 1,
+    "chai": 0,
+    "cheesebun": 0,
+    "cheesecake": 0,
+    "chocobread": 0,
+    "ciabatta": 0,
+    "cinnamon": 0,
+    "coldbrew": 0,
+    "cookie": 1,
+    "cortado": 3,
+    "creamcoffee": 0,
+    "creampuff": 0,
+    "croissant": 5,
+    "dirty": 0,
+    "donut": 24,
+    "eggtart": 0,
+    "espresso": 10,
+    "flatwhite": 10,
+    "focaccia": 0,
+    "frappe": 0,
+    "fruitbrioche": 0,
+    "fruittea": 0,
+    "garlicbread": 0,
+    "hojicha": 0,
+    "hotchoc": 0,
+    "latte": 25,
+    "lemontea": 0,
+    "macaron": 0,
+    "macchiato": 0,
+    "matcha": 0,
+    "matchafloat": 0,
+    "melonpan": 0,
+    "milktea": 0,
+    "mocha": 0,
+    "muffin": 0,
+    "painchoc": 0,
+    "pourover": 0,
+    "pretzel": 0,
+    "raisinbread": 0,
+    "roll": 25,
+    "rye": 0,
+    "scone": 25,
+    "shokupan": 0,
+    "smoothie": 0,
+    "sourdough": 0,
+    "swissroll": 0,
+    "vienna": 0
+  },
+  "upgrades": {
+    "barista": 2,
+    "cook": 2,
+    "machine": 8,
+    "marketing": 0,
+    "server": 2,
+    "tables": 0
+  },
+  "regions": [
+    "greenhouse",
+    "reading",
+    "terrace"
+  ],
+  "pets": [
+    "black",
+    "ginger",
+    "tuxedo"
+  ],
+  "decorOwned": [
+    "ceiling_lights",
+    "ceiling_none",
+    "counter_oak",
+    "counter_walnut",
+    "floor_checker",
+    "floor_mint",
+    "floor_planks",
+    "floor_terrazzo",
+    "neon_none",
+    "rug_none",
+    "rug_red",
+    "sill_cactus",
+    "sill_none",
+    "wall_cream",
+    "wall_dots",
+    "wall_mint",
+    "wall_rose"
+  ],
+  "furnitureCounts": {
+    "bookshelf": 1,
+    "clock": 1,
+    "mugrack": 1,
+    "poster_coffee": 1
+  },
+  "signatures": [
+    "americano",
+    "blacktea",
+    "donut",
+    "espresso",
+    "latte",
+    "roll",
+    "scone"
+  ],
+  "experience": {
+    "americano": 196,
+    "blacktea": 355,
+    "cortado": 39,
+    "donut": 101,
+    "espresso": 300,
+    "flatwhite": 39,
+    "latte": 148,
+    "roll": 127,
+    "scone": 224
+  },
+  "day": 13,
+  "served": 517,
+  "handoffs": {
+    "tableServed": 353,
+    "catServed": 300,
+    "fastServed": 307,
+    "teaPairs": 125
+  },
+  "kitchen": true,
+  "menus": [
+    {
+      "id": "latte+flatwhite",
+      "items": [
+        "latte",
+        "flatwhite"
+      ],
+      "sourceStyles": [
+        "coffee"
+      ]
+    },
+    {
+      "id": "espresso+roll+croissant",
+      "items": [
+        "espresso",
+        "roll",
+        "croissant"
+      ],
+      "sourceStyles": [
+        "bakery"
+      ]
+    },
+    {
+      "id": "espresso+blacktea",
+      "items": [
+        "espresso",
+        "blacktea"
+      ],
+      "sourceStyles": [
+        "cats",
+        "community"
+      ]
+    },
+    {
+      "id": "americano+cortado",
+      "items": [
+        "americano",
+        "cortado"
+      ],
+      "sourceStyles": [
+        "takeaway"
+      ]
+    },
+    {
+      "id": "blacktea+scone",
+      "items": [
+        "blacktea",
+        "scone"
+      ],
+      "sourceStyles": [
+        "garden"
+      ]
+    }
+  ],
+  "expectedPurchaseCash": 724296.378105,
+  "funding": 823065,
+  "rules": {
+    "ownership": "Maximum item/upgrade levels and per-ID furniture count; union regions/cats/decor/signatures. Every nonstarter asset is purchased again; no imported cash/pantry/runtime.",
+    "equipment": "Highest comfort owned item in each slot; lexicographically smallest id on ties.",
+    "placement": "Keep existing starter clock/mugrack; place new furniture by sorted id, first legal main-room grid coordinate in row-major order. Fail if none; no results-based layout changes.",
+    "progress": "Shared per-item maximum factual experience, maximum day/served/handoffs; neutral empty reviews; synthetic fixture, not a single earned save.",
+    "reserve": "Funding = ceil(exact independent quoted purchase cash / .88); all remainder retained; 12% minimum starting working cash."
+  }
+}

@@ -1,0 +1,27 @@
+
+ RUN  v5.0.3 /tmp/cafe-style-baseline-1791797523
+
+untouched-v4-shard0: common-assets/early/base/coffee/plain: 30/30
+untouched-v4-shard0: common-assets/early/feature/coffee/plain: 30/30
+untouched-v4-shard0: common-assets/early/rush/coffee/plain: 30/30
+untouched-v4-shard0: common-assets/mid/base/coffee/plain: 30/30
+untouched-v4-shard0: common-assets/mid/feature/coffee/plain: 30/30
+untouched-v4-shard0: common-assets/mid/rush/coffee/plain: 30/30
+untouched-v4-shard0: common-assets/late/base/coffee/plain: 30/30
+untouched-v4-shard0: common-assets/late/feature/coffee/plain: 30/30
+untouched-v4-shard0: common-assets/late/rush/coffee/plain: 30/30
+untouched-v4-shard0: route-purchases/early/base/coffee/plain: 30/30
+untouched-v4-shard0: route-purchases/early/feature/coffee/plain: 30/30
+untouched-v4-shard0: route-purchases/early/rush/coffee/plain: 30/30
+untouched-v4-shard0: route-purchases/mid/base/coffee/plain: 30/30
+untouched-v4-shard0: route-purchases/mid/feature/coffee/plain: 30/30
+untouched-v4-shard0: route-purchases/mid/rush/coffee/plain: 30/30
+untouched-v4-shard0: route-purchases/late/base/coffee/plain: 30/30
+untouched-v4-shard0: route-purchases/late/feature/coffee/plain: 30/30
+untouched-v4-shard0: route-purchases/late/rush/coffee/plain: 30/30
+
+ Test Files  1 passed (1)
+      Tests  7 passed | 1 skipped (8)
+   Start at  02:46:38
+   Duration  413.48s (tests 100%)
+

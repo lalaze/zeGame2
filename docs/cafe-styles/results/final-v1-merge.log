@@ -1,0 +1,9 @@
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+
+ Test Files  1 passed (1)
+      Tests  7 passed | 1 skipped (8)
+   Start at  04:04:27
+   Duration  1.25s (tests 73%, transform 23%, import 4%)
+

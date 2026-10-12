@@ -1,0 +1,19 @@
+{
+  "startedAt": "2026-10-12T12:10:25.256Z",
+  "selectionFile": "docs/cafe-styles/results/earned-union-v1-training-selection.json",
+  "selectionSha256": "0f9361c183d690a3f933526a03b335405d838b26350c93c512ab306f3c7799a8",
+  "holdoutVerificationFile": "docs/cafe-styles/results/earned-union-v1-holdout-verification.json",
+  "holdoutVerificationSha256": "4e152847c72d4966c9577872cd09b9a885772265b7afc6c20112282cd9ad0ce4",
+  "cohort": "holdout",
+  "pressures": [
+    "feature",
+    "rush"
+  ],
+  "shards": 8,
+  "expectedSamples": 2100,
+  "authorizedSequencingDeparture": {
+    "decisionAt": "2026-10-12T12:10:07Z",
+    "reason": "Root authorized the originally planned full-policy paid-pressure sustainability regression despite the strict auxiliary holdout gate failing one frozen cats-profit edge. Preserve that failure and uncertainty; no metric switch, gameplay adjustment or replacement candidate. The user does not require significant net-profit victory over every opponent.",
+    "unchanged": "All five menus, all seven focuses/plain, all 30 held-out seeds, funding, assets, clock, accounting, selection, source and protocol remain frozen. This record changes conditional execution sequencing only; it does not rewrite the preregistration."
+  }
+}

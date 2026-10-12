@@ -1,0 +1,76 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+ × src/game/chair-access.test.ts > chair-access placement guard > rejects the previously legal fern that covers table 2 left-chair approach 8ms
+   → expected true to be false // Object.is equality
+ × src/game/chair-access.test.ts > chair-access placement guard > stores the historical obstruction on load, retaining the asset and all purchases 3ms
+   → expected true to be false // Object.is equality
+ × src/game/chair-access.test.ts > chair-access placement guard > naturally finishes the exact historical paid fixture after obstruction repair 179ms
+   → [{"id":18,"phase":"toSeat","seat":4,"pathBlocked":true,"x":141,"y":145,"journey":[{"x":25,"y":187},{"x":25,"y":175}]}]: expected false to be true // Object.is equality
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/game/chair-access.test.ts > chair-access placement guard > rejects the previously legal fern that covers table 2 left-chair approach
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ src/game/chair-access.test.ts:40:73
+     38|   it('rejects the previously legal fern that covers table 2 left-chair…
+     39|     const state = createInitialState(0); state.upgrades.tables = 1;
+     40|     expect(canPlace(state, 'plant_fern', 1, 14, mainTableCount(state))…
+       |                                                                         ^
+     41|     // A nearby genuinely clear location remains available for the sam…
+     42|     expect(canPlace(state, 'plant_fern', 1, 15, mainTableCount(state))…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/game/chair-access.test.ts > chair-access placement guard > stores the historical obstruction on load, retaining the asset and all purchases
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ src/game/chair-access.test.ts:51:68
+     49|     const original = legacyFixture();
+     50|     const restored = deserialize(serialize(original), 0);
+     51|     expect(restored.decor.placed.some(p => p.id === 'plant_fern')).toB…
+       |                                                                    ^
+     52|     expect(restored.decor.stored.plant_fern).toBe(1);
+     53|     expect(restored.coins).toBe(original.coins);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/game/chair-access.test.ts > chair-access placement guard > naturally finishes the exact historical paid fixture after obstruction repair
+AssertionError: [{"id":18,"phase":"toSeat","seat":4,"pathBlocked":true,"x":141,"y":145,"journey":[{"x":25,"y":187},{"x":25,"y":175}]}]: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/game/chair-access.test.ts:64:183
+     62|     evictBlocked(state, mainTableCount(state));
+     63|     const { sim, closingSeconds } = runDay(state);
+     64|     expect(sim.finishedService, JSON.stringify(sim.customers.map(c => …
+       |                                                                                                                                                                                       ^
+     65|     expect(sim.customers.some(c => c.pathBlocked)).toBe(false);
+     66|     expect(closingSeconds).toBeLessThan(300);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  02:46:16
+   Duration  574ms (transform 46%, tests 44%, import 8%, worker 1%)
+

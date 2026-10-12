@@ -1,0 +1,36 @@
+
+ RUN  v5.0.3 /tmp/cafe-style-final-1791798758
+
+final-v1-shard0: common-assets/early/base/coffee/plain: 30/30
+final-v1-shard0: common-assets/early/base/garden/plain: 30/30
+final-v1-shard0: common-assets/early/feature/cats/plain: 30/30
+final-v1-shard0: common-assets/early/rush/coffee/plain: 30/30
+final-v1-shard0: common-assets/early/rush/garden/plain: 30/30
+final-v1-shard0: common-assets/mid/base/cats/plain: 30/30
+final-v1-shard0: common-assets/mid/feature/coffee/plain: 30/30
+final-v1-shard0: common-assets/mid/feature/garden/plain: 30/30
+final-v1-shard0: common-assets/mid/rush/cats/plain: 30/30
+final-v1-shard0: common-assets/late/base/coffee/plain: 30/30
+final-v1-shard0: common-assets/late/base/garden/plain: 30/30
+final-v1-shard0: common-assets/late/feature/cats/plain: 30/30
+final-v1-shard0: common-assets/late/rush/coffee/plain: 30/30
+final-v1-shard0: common-assets/late/rush/garden/plain: 30/30
+final-v1-shard0: route-purchases/early/base/cats/plain: 30/30
+final-v1-shard0: route-purchases/early/feature/coffee/plain: 30/30
+final-v1-shard0: route-purchases/early/feature/garden/plain: 30/30
+final-v1-shard0: route-purchases/early/rush/cats/plain: 30/30
+final-v1-shard0: route-purchases/mid/base/coffee/plain: 30/30
+final-v1-shard0: route-purchases/mid/base/garden/plain: 30/30
+final-v1-shard0: route-purchases/mid/feature/cats/plain: 30/30
+final-v1-shard0: route-purchases/mid/rush/coffee/plain: 30/30
+final-v1-shard0: route-purchases/mid/rush/garden/plain: 30/30
+final-v1-shard0: route-purchases/late/base/cats/plain: 30/30
+final-v1-shard0: route-purchases/late/feature/coffee/plain: 30/30
+final-v1-shard0: route-purchases/late/feature/garden/plain: 30/30
+final-v1-shard0: route-purchases/late/rush/cats/plain: 30/30
+
+ Test Files  1 passed (1)
+      Tests  7 passed | 1 skipped (8)
+   Start at  02:58:39
+   Duration  2521.12s (tests 100%)
+

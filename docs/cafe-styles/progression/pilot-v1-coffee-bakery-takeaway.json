@@ -1,0 +1,7073 @@
+{
+  "metadata": {
+    "policyVersion": 1,
+    "gameFingerprint": "08689a0a8413201456044fdd2136e331dff84acca1d14a330f7effb6eefbbefd",
+    "runnerFingerprint": "9a3af71eaaefe5978ec4af9f3bc712f7b0a38bc0392d85d47eeda8246f143521",
+    "seeds": [
+      1592594996
+    ],
+    "styles": [
+      "coffee",
+      "bakery",
+      "takeaway"
+    ],
+    "maxDays": 120,
+    "dt": 0.05,
+    "initialEndowment": "Exactly createInitialState(0): 0 coins, 50 beans, starter espresso and furniture; no fixture subsidy."
+  },
+  "complete": true,
+  "rows": [
+    {
+      "style": "coffee",
+      "seed": 1592594996,
+      "policyVersion": 1,
+      "observationBound": {
+        "maxDays": 120,
+        "openSecondsPerDay": 180,
+        "maxClosingSeconds": 300
+      },
+      "status": "complete",
+      "blocker": null,
+      "initial": {
+        "assets": {
+          "cash": 0,
+          "pantry": 50,
+          "care": 0
+        },
+        "coins": 0,
+        "served": 0,
+        "pantry": {
+          "beans": 50,
+          "milk": 0,
+          "flour": 0,
+          "butter": 0,
+          "eggs": 0,
+          "sugar": 0,
+          "tea": 0,
+          "spice": 0,
+          "cocoa": 0,
+          "cream": 0,
+          "fruit": 0,
+          "matcha": 0
+        },
+        "items": {
+          "espresso": 1,
+          "americano": 0,
+          "latte": 0,
+          "cappuccino": 0,
+          "flatwhite": 0,
+          "cortado": 0,
+          "mocha": 0,
+          "vienna": 0,
+          "macchiato": 0,
+          "coldbrew": 0,
+          "dirty": 0,
+          "pourover": 0,
+          "creamcoffee": 0,
+          "affogato": 0,
+          "blacktea": 0,
+          "hotchoc": 0,
+          "lemontea": 0,
+          "chai": 0,
+          "fruittea": 0,
+          "hojicha": 0,
+          "matcha": 0,
+          "frappe": 0,
+          "smoothie": 0,
+          "milktea": 0,
+          "matchafloat": 0,
+          "roll": 0,
+          "bagel": 0,
+          "baguette": 0,
+          "cheesebun": 0,
+          "pretzel": 0,
+          "focaccia": 0,
+          "ciabatta": 0,
+          "raisinbread": 0,
+          "sourdough": 0,
+          "rye": 0,
+          "chocobread": 0,
+          "shokupan": 0,
+          "brioche": 0,
+          "fruitbrioche": 0,
+          "garlicbread": 0,
+          "donut": 0,
+          "scone": 0,
+          "cookie": 0,
+          "croissant": 0,
+          "painchoc": 0,
+          "brownie": 0,
+          "cinnamon": 0,
+          "muffin": 0,
+          "creampuff": 0,
+          "melonpan": 0,
+          "eggtart": 0,
+          "cake": 0,
+          "swissroll": 0,
+          "cheesecake": 0,
+          "macaron": 0
+        },
+        "stages": [
+          {
+            "id": "early",
+            "done": false,
+            "goals": [
+              {
+                "id": "espresso5",
+                "current": 1,
+                "target": 5,
+                "done": false
+              },
+              {
+                "id": "machine1",
+                "current": 0,
+                "target": 1,
+                "done": false
+              },
+              {
+                "id": "coffee30",
+                "current": 0,
+                "target": 30,
+                "done": false
+              }
+            ]
+          },
+          {
+            "id": "mid",
+            "done": false,
+            "goals": [
+              {
+                "id": "latte5",
+                "current": 0,
+                "target": 5,
+                "done": false
+              },
+              {
+                "id": "barista1",
+                "current": 0,
+                "target": 1,
+                "done": false
+              },
+              {
+                "id": "coffeeSignature1",
+                "current": 0,
+                "target": 1,
+                "done": false
+              }
+            ]
+          },
+          {
+            "id": "late",
+            "done": false,
+            "goals": [
+              {
+                "id": "flatwhite10",
+                "current": 0,
+                "target": 10,
+                "done": false
+              },
+              {
+                "id": "machine4",
+                "current": 0,
+                "target": 4,
+                "done": false
+              },
+              {
+                "id": "coffeeSignature2",
+                "current": 0,
+                "target": 2,
+                "done": false
+              }
+            ]
+          }
+        ]
+      },
+      "elapsedSeconds": 1655.7,
+      "completedDays": 9,
+      "completions": {
+        "early": {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "served": 75,
+          "capital": 1144.731564,
+          "goalRewards": 70,
+          "assets": {
+            "cash": 52.98843624372074,
+            "pantry": 99,
+            "care": 0
+          },
+          "goals": [
+            {
+              "id": "espresso5",
+              "current": 5,
+              "target": 5,
+              "done": true
+            },
+            {
+              "id": "machine1",
+              "current": 1,
+              "target": 1,
+              "done": true
+            },
+            {
+              "id": "coffee30",
+              "current": 30,
+              "target": 30,
+              "done": true
+            }
+          ]
+        },
+        "mid": {
+          "day": 5,
+          "elapsedSeconds": 734.4,
+          "served": 154,
+          "capital": 5370.505873,
+          "goalRewards": 70,
+          "assets": {
+            "cash": 3490.236349118968,
+            "pantry": 96,
+            "care": 0
+          },
+          "goals": [
+            {
+              "id": "latte5",
+              "current": 5,
+              "target": 5,
+              "done": true
+            },
+            {
+              "id": "barista1",
+              "current": 1,
+              "target": 1,
+              "done": true
+            },
+            {
+              "id": "coffeeSignature1",
+              "current": 1,
+              "target": 1,
+              "done": true
+            }
+          ]
+        },
+        "late": {
+          "day": 10,
+          "elapsedSeconds": 1655.7,
+          "served": 363,
+          "capital": 88869.534565,
+          "goalRewards": 70,
+          "assets": {
+            "cash": 40536.90365688293,
+            "pantry": 178,
+            "care": 0
+          },
+          "goals": [
+            {
+              "id": "flatwhite10",
+              "current": 10,
+              "target": 10,
+              "done": true
+            },
+            {
+              "id": "machine4",
+              "current": 4,
+              "target": 4,
+              "done": true
+            },
+            {
+              "id": "coffeeSignature2",
+              "current": 2,
+              "target": 2,
+              "done": true
+            }
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "early",
+          "done": true,
+          "goals": [
+            {
+              "id": "espresso5",
+              "current": 5,
+              "target": 5,
+              "done": true
+            },
+            {
+              "id": "machine1",
+              "current": 1,
+              "target": 1,
+              "done": true
+            },
+            {
+              "id": "coffee30",
+              "current": 30,
+              "target": 30,
+              "done": true
+            }
+          ]
+        },
+        {
+          "id": "mid",
+          "done": true,
+          "goals": [
+            {
+              "id": "latte5",
+              "current": 5,
+              "target": 5,
+              "done": true
+            },
+            {
+              "id": "barista1",
+              "current": 1,
+              "target": 1,
+              "done": true
+            },
+            {
+              "id": "coffeeSignature1",
+              "current": 1,
+              "target": 1,
+              "done": true
+            }
+          ]
+        },
+        {
+          "id": "late",
+          "done": true,
+          "goals": [
+            {
+              "id": "flatwhite10",
+              "current": 10,
+              "target": 10,
+              "done": true
+            },
+            {
+              "id": "machine4",
+              "current": 4,
+              "target": 4,
+              "done": true
+            },
+            {
+              "id": "coffeeSignature2",
+              "current": 2,
+              "target": 2,
+              "done": true
+            }
+          ]
+        }
+      ],
+      "nextGoal": null,
+      "receipts": [
+        {
+          "day": 2,
+          "elapsedSeconds": 184.9,
+          "kind": "goal",
+          "action": "tutorial goal 0",
+          "cash": -30,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 184.9,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 28,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 184.9,
+          "kind": "capital",
+          "action": "espresso level 2",
+          "cash": 8.96,
+          "capital": 8.96,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 184.9,
+          "kind": "capital",
+          "action": "espresso level 3",
+          "cash": 10.0352,
+          "capital": 10.0352,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 184.9,
+          "kind": "capital",
+          "action": "espresso level 4",
+          "cash": 11.239424,
+          "capital": 11.239424,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 184.9,
+          "kind": "capital",
+          "action": "espresso level 5",
+          "cash": 12.588155,
+          "capital": 12.588155,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 184.9,
+          "kind": "goal",
+          "action": "tutorial goal 1",
+          "cash": -40,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 45,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "capital",
+          "action": "espresso level 6",
+          "cash": 14.098733,
+          "capital": 14.098733,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "capital",
+          "action": "espresso level 7",
+          "cash": 15.790581,
+          "capital": 15.790581,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "capital",
+          "action": "espresso level 8",
+          "cash": 17.685451,
+          "capital": 17.685451,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "capital",
+          "action": "espresso level 9",
+          "cash": 19.807705,
+          "capital": 19.807705,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "capital",
+          "action": "espresso level 10",
+          "cash": 22.18463,
+          "capital": 22.18463,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "capital",
+          "action": "machine upgrade 1",
+          "cash": 60,
+          "capital": 60,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "capital",
+          "action": "americano level 1",
+          "cash": 40,
+          "capital": 40,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "capital",
+          "action": "latte level 1",
+          "cash": 120,
+          "capital": 120,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "capital",
+          "action": "latte level 2",
+          "cash": 134.4,
+          "capital": 134.4,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "capital",
+          "action": "latte level 3",
+          "cash": 150.528,
+          "capital": 150.528,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "capital",
+          "action": "latte level 4",
+          "cash": 168.59136,
+          "capital": 168.59136,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "capital",
+          "action": "latte level 5",
+          "cash": 188.822323,
+          "capital": 188.822323,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "capital",
+          "action": "barista upgrade 1",
+          "cash": 150,
+          "capital": 150,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 364.9,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 51,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 550.3,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 76,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 550.3,
+          "kind": "capital",
+          "action": "latte level 6",
+          "cash": 211.481002,
+          "capital": 211.481002,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 550.3,
+          "kind": "capital",
+          "action": "latte level 7",
+          "cash": 236.858722,
+          "capital": 236.858722,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 550.3,
+          "kind": "capital",
+          "action": "latte level 8",
+          "cash": 265.281769,
+          "capital": 265.281769,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 550.3,
+          "kind": "capital",
+          "action": "cappuccino level 1",
+          "cash": 1200,
+          "capital": 1200,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 550.3,
+          "kind": "capital",
+          "action": "machine upgrade 2",
+          "cash": 114,
+          "capital": 114,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 550.3,
+          "kind": "capital",
+          "action": "machine upgrade 3",
+          "cash": 216.6,
+          "capital": 216.6,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 550.3,
+          "kind": "capital",
+          "action": "machine upgrade 4",
+          "cash": 411.54,
+          "capital": 411.54,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 734.4,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 72,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 734.4,
+          "kind": "capital",
+          "action": "latte level 9",
+          "cash": 297.115581,
+          "capital": 297.115581,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 734.4,
+          "kind": "capital",
+          "action": "latte level 10",
+          "cash": 332.769451,
+          "capital": 332.769451,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 734.4,
+          "kind": "capital",
+          "action": "latte level 11",
+          "cash": 372.701785,
+          "capital": 372.701785,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 734.4,
+          "kind": "capital",
+          "action": "latte level 12",
+          "cash": 417.425999,
+          "capital": 417.425999,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 734.4,
+          "kind": "capital",
+          "action": "signature espresso",
+          "cash": 150,
+          "capital": 150,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 921.1,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 93,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 921.1,
+          "kind": "capital",
+          "action": "latte level 13",
+          "cash": 467.517119,
+          "capital": 467.517119,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 921.1,
+          "kind": "capital",
+          "action": "latte level 14",
+          "cash": 523.619173,
+          "capital": 523.619173,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 921.1,
+          "kind": "capital",
+          "action": "latte level 15",
+          "cash": 586.453474,
+          "capital": 586.453474,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 921.1,
+          "kind": "capital",
+          "action": "latte level 16",
+          "cash": 656.827891,
+          "capital": 656.827891,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 921.1,
+          "kind": "capital",
+          "action": "latte level 17",
+          "cash": 735.647238,
+          "capital": 735.647238,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 921.1,
+          "kind": "capital",
+          "action": "flatwhite level 1",
+          "cash": 4000,
+          "capital": 4000,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1101.1,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 95,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1101.1,
+          "kind": "capital",
+          "action": "latte level 18",
+          "cash": 823.924907,
+          "capital": 823.924907,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1101.1,
+          "kind": "capital",
+          "action": "latte level 19",
+          "cash": 922.795895,
+          "capital": 922.795895,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1101.1,
+          "kind": "capital",
+          "action": "latte level 20",
+          "cash": 1033.531403,
+          "capital": 1033.531403,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1101.1,
+          "kind": "capital",
+          "action": "latte level 21",
+          "cash": 1157.555171,
+          "capital": 1157.555171,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1101.1,
+          "kind": "capital",
+          "action": "latte level 22",
+          "cash": 1296.461792,
+          "capital": 1296.461792,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1101.1,
+          "kind": "capital",
+          "action": "flatwhite level 2",
+          "cash": 4480,
+          "capital": 4480,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1101.1,
+          "kind": "capital",
+          "action": "flatwhite level 3",
+          "cash": 5017.6,
+          "capital": 5017.6,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1285.75,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 79,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1285.75,
+          "kind": "capital",
+          "action": "latte level 23",
+          "cash": 1452.037207,
+          "capital": 1452.037207,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1285.75,
+          "kind": "capital",
+          "action": "latte level 24",
+          "cash": 1626.281672,
+          "capital": 1626.281672,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1285.75,
+          "kind": "capital",
+          "action": "latte level 25",
+          "cash": 1821.435472,
+          "capital": 1821.435472,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1285.75,
+          "kind": "capital",
+          "action": "flatwhite level 4",
+          "cash": 5619.712,
+          "capital": 5619.712,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1285.75,
+          "kind": "capital",
+          "action": "flatwhite level 5",
+          "cash": 6294.07744,
+          "capital": 6294.07744,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1285.75,
+          "kind": "capital",
+          "action": "signature latte",
+          "cash": 200,
+          "capital": 200,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1285.75,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 78,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.55,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 140,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.55,
+          "kind": "capital",
+          "action": "flatwhite level 6",
+          "cash": 7049.366733,
+          "capital": 7049.366733,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.55,
+          "kind": "capital",
+          "action": "flatwhite level 7",
+          "cash": 7895.290741,
+          "capital": 7895.290741,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.55,
+          "kind": "capital",
+          "action": "flatwhite level 8",
+          "cash": 8842.72563,
+          "capital": 8842.72563,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.55,
+          "kind": "capital",
+          "action": "flatwhite level 9",
+          "cash": 9903.852705,
+          "capital": 9903.852705,
+          "includedCare": 0
+        },
+        {
+          "day": 10,
+          "elapsedSeconds": 1655.7,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 147,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 10,
+          "elapsedSeconds": 1655.7,
+          "kind": "capital",
+          "action": "flatwhite level 10",
+          "cash": 11092.31503,
+          "capital": 11092.31503,
+          "includedCare": 0
+        }
+      ],
+      "daily": [
+        {
+          "day": 1,
+          "elapsedSeconds": 184.9,
+          "openSeconds": 180,
+          "closingSeconds": 4.9,
+          "closingRevenue": 6.47999999999999,
+          "closingIngredientCost": 1,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "espresso"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                30,
+                5
+              ],
+              "reasons": {
+                "standardTaste": 30,
+                "skilledTaste": 5
+              },
+              "totalScore": 142.5
+            },
+            "served": 35,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 109.8,
+            "ingredientCost": 35,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "espresso": 35
+            },
+            "baked": {},
+            "rating": 4.071428571428571,
+            "ratingCount": 35,
+            "ratingTraffic": 1.0178571428571428,
+            "day": 1,
+            "duration": 184.9000000000078,
+            "profit": 74.8,
+            "bestSeller": "espresso",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 0,
+          "carePurchases": 0,
+          "capital": 0,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 109.8,
+            "pantry": 15,
+            "care": 0
+          },
+          "reconciliationError": 0,
+          "checklist": [
+            {
+              "id": "early",
+              "done": false,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 1,
+                  "target": 5,
+                  "done": false
+                },
+                {
+                  "id": "machine1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "coffee30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": false,
+              "goals": [
+                {
+                  "id": "latte5",
+                  "current": 0,
+                  "target": 5,
+                  "done": false
+                },
+                {
+                  "id": "barista1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "coffeeSignature1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "flatwhite10",
+                  "current": 0,
+                  "target": 10,
+                  "done": false
+                },
+                {
+                  "id": "machine4",
+                  "current": 0,
+                  "target": 4,
+                  "done": false
+                },
+                {
+                  "id": "coffeeSignature2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 364.9,
+          "openSeconds": 180,
+          "closingSeconds": 0,
+          "closingRevenue": 0,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "espresso"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                0,
+                40
+              ],
+              "reasons": {
+                "skilledTaste": 40
+              },
+              "totalScore": 180
+            },
+            "served": 40,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 1141.9200000000008,
+            "ingredientCost": 40,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "espresso": 40
+            },
+            "baked": {},
+            "rating": 4.45,
+            "ratingCount": 50,
+            "ratingTraffic": 1.1125,
+            "day": 2,
+            "duration": 180.00000000000668,
+            "profit": 1101.9200000000008,
+            "bestSeller": "espresso",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 28,
+          "carePurchases": -4.547473508864641e-13,
+          "capital": 42.822778880000016,
+          "goalRewards": 70,
+          "assets": {
+            "cash": 1250.8972211200012,
+            "pantry": 3,
+            "care": 0
+          },
+          "reconciliationError": 4.547473508864641e-13,
+          "checklist": [
+            {
+              "id": "early",
+              "done": false,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "coffee30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": false,
+              "goals": [
+                {
+                  "id": "latte5",
+                  "current": 0,
+                  "target": 5,
+                  "done": false
+                },
+                {
+                  "id": "barista1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "coffeeSignature1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "flatwhite10",
+                  "current": 0,
+                  "target": 10,
+                  "done": false
+                },
+                {
+                  "id": "machine4",
+                  "current": 0,
+                  "target": 4,
+                  "done": false
+                },
+                {
+                  "id": "coffeeSignature2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 550.3,
+          "openSeconds": 180,
+          "closingSeconds": 5.4,
+          "closingRevenue": 70.48888888888905,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "espresso",
+            "latte"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                19,
+                22
+              ],
+              "reasons": {
+                "standardTaste": 19,
+                "skilledTaste": 22
+              },
+              "totalScore": 175
+            },
+            "served": 41,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 3024.08888888889,
+            "ingredientCost": 79,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "latte": 19,
+              "espresso": 22
+            },
+            "baked": {},
+            "rating": 4.31,
+            "ratingCount": 50,
+            "ratingTraffic": 1.0775,
+            "day": 3,
+            "duration": 185.4000000000079,
+            "profit": 2945.08888888889,
+            "bestSeller": "espresso",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 96,
+          "carePurchases": 0,
+          "capital": 1101.9087848762804,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 3077.0773251326104,
+            "pantry": 20,
+            "care": 0
+          },
+          "reconciliationError": 4.547473508864641e-13,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "coffee30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": false,
+              "goals": [
+                {
+                  "id": "latte5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "barista1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "coffeeSignature1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "flatwhite10",
+                  "current": 0,
+                  "target": 10,
+                  "done": false
+                },
+                {
+                  "id": "machine4",
+                  "current": 1,
+                  "target": 4,
+                  "done": false
+                },
+                {
+                  "id": "coffeeSignature2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 734.4,
+          "openSeconds": 180,
+          "closingSeconds": 4.1000000000000005,
+          "closingRevenue": 140.15999999999985,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "espresso",
+            "latte"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                11,
+                27
+              ],
+              "reasons": {
+                "standardTaste": 11,
+                "skilledTaste": 27
+              },
+              "totalScore": 165.5
+            },
+            "served": 38,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 4786.933333333335,
+            "ingredientCost": 72,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "latte": 17,
+              "espresso": 21
+            },
+            "baked": {},
+            "rating": 4.34,
+            "ratingCount": 50,
+            "ratingTraffic": 1.085,
+            "day": 4,
+            "duration": 184.1000000000076,
+            "profit": 4714.933333333335,
+            "bestSeller": "espresso",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 76,
+          "carePurchases": -9.094947017729282e-13,
+          "capital": 2655.7614930948102,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 5132.249165371136,
+            "pantry": 24,
+            "care": 0
+          },
+          "reconciliationError": -9.094947017729282e-13,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "coffee30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": false,
+              "goals": [
+                {
+                  "id": "latte5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "barista1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "coffeeSignature1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "flatwhite10",
+                  "current": 0,
+                  "target": 10,
+                  "done": false
+                },
+                {
+                  "id": "machine4",
+                  "current": 4,
+                  "target": 4,
+                  "done": true
+                },
+                {
+                  "id": "coffeeSignature2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 921.1,
+          "openSeconds": 180,
+          "closingSeconds": 6.7,
+          "closingRevenue": 640.8959999999997,
+          "closingIngredientCost": 3,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "espresso",
+            "latte"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                0,
+                40
+              ],
+              "reasons": {
+                "skilledTaste": 23,
+                "signatureTaste": 17
+              },
+              "totalScore": 188.5
+            },
+            "served": 40,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 7739.903999999998,
+            "ingredientCost": 86,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "latte": 23,
+              "espresso": 17
+            },
+            "baked": {},
+            "rating": 4.67,
+            "ratingCount": 50,
+            "ratingTraffic": 1.1675,
+            "day": 5,
+            "duration": 186.7000000000082,
+            "profit": 7653.903999999998,
+            "bestSeller": "latte",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 72,
+          "carePurchases": -3.637978807091713e-12,
+          "capital": 1570.0128162521682,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 11230.14034911897,
+            "pantry": 10,
+            "care": 0
+          },
+          "reconciliationError": 3.637978807091713e-12,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "coffee30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": true,
+              "goals": [
+                {
+                  "id": "latte5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "barista1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "coffeeSignature1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "flatwhite10",
+                  "current": 0,
+                  "target": 10,
+                  "done": false
+                },
+                {
+                  "id": "machine4",
+                  "current": 4,
+                  "target": 4,
+                  "done": true
+                },
+                {
+                  "id": "coffeeSignature2",
+                  "current": 1,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 1101.1,
+          "openSeconds": 180,
+          "closingSeconds": 0,
+          "closingRevenue": 0,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "espresso",
+            "latte"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                1,
+                0,
+                0,
+                0,
+                43
+              ],
+              "reasons": {
+                "skilledTaste": 26,
+                "signatureTaste": 17,
+                "soldOut": 1
+              },
+              "totalScore": 203
+            },
+            "served": 43,
+            "missed": 1,
+            "soldOut": 1,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {
+              "latte": 1
+            },
+            "revenue": 14522.688000000015,
+            "ingredientCost": 95,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "latte": 26,
+              "espresso": 17
+            },
+            "baked": {},
+            "rating": 4.61,
+            "ratingCount": 50,
+            "ratingTraffic": 1.1525,
+            "day": 6,
+            "duration": 180.00000000000668,
+            "profit": 14427.688000000015,
+            "bestSeller": "latte",
+            "outOfStock": [
+              "latte"
+            ],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 93,
+          "carePurchases": -3.637978807091713e-12,
+          "capital": 6970.064895865056,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 18689.763453253934,
+            "pantry": 8,
+            "care": 0
+          },
+          "reconciliationError": 7.275957614183426e-12,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "coffee30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": true,
+              "goals": [
+                {
+                  "id": "latte5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "barista1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "coffeeSignature1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "flatwhite10",
+                  "current": 1,
+                  "target": 10,
+                  "done": false
+                },
+                {
+                  "id": "machine4",
+                  "current": 4,
+                  "target": 4,
+                  "done": true
+                },
+                {
+                  "id": "coffeeSignature2",
+                  "current": 1,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1285.75,
+          "openSeconds": 180,
+          "closingSeconds": 4.65,
+          "closingRevenue": 846.5280000000002,
+          "closingIngredientCost": 1,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "espresso",
+            "latte"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                0,
+                42
+              ],
+              "reasons": {
+                "signatureTaste": 24,
+                "skilledTaste": 18
+              },
+              "totalScore": 201
+            },
+            "served": 42,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 15909.504000000008,
+            "ingredientCost": 78,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "espresso": 24,
+              "latte": 18
+            },
+            "baked": {},
+            "rating": 4.71,
+            "ratingCount": 50,
+            "ratingTraffic": 1.1775,
+            "day": 7,
+            "duration": 184.65000000000774,
+            "profit": 15831.504000000008,
+            "bestSeller": "espresso",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 95,
+          "carePurchases": -7.275957614183426e-12,
+          "capital": 14731.869167792061,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 19772.398285461888,
+            "pantry": 25,
+            "care": 0
+          },
+          "reconciliationError": 1.4551915228366852e-11,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "coffee30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": true,
+              "goals": [
+                {
+                  "id": "latte5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "barista1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "coffeeSignature1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "flatwhite10",
+                  "current": 3,
+                  "target": 10,
+                  "done": false
+                },
+                {
+                  "id": "machine4",
+                  "current": 4,
+                  "target": 4,
+                  "done": true
+                },
+                {
+                  "id": "coffeeSignature2",
+                  "current": 1,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1472.55,
+          "openSeconds": 180,
+          "closingSeconds": 6.800000000000001,
+          "closingRevenue": 2240.0000000000036,
+          "closingIngredientCost": 3,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "latte",
+            "flatwhite"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                18,
+                24
+              ],
+              "reasons": {
+                "signatureTaste": 24,
+                "standardTaste": 18
+              },
+              "totalScore": 192
+            },
+            "served": 42,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 34492.80000000002,
+            "ingredientCost": 144,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "latte": 24,
+              "flatwhite": 18
+            },
+            "baked": {},
+            "rating": 4.61,
+            "ratingCount": 50,
+            "ratingTraffic": 1.1525,
+            "day": 8,
+            "duration": 186.80000000000823,
+            "profit": 34348.80000000002,
+            "bestSeller": "latte",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 157,
+          "carePurchases": 7.275957614183426e-12,
+          "capital": 17013.54379043862,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 37094.65449502328,
+            "pantry": 38,
+            "care": 0
+          },
+          "reconciliationError": 0,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "coffee30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": true,
+              "goals": [
+                {
+                  "id": "latte5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "barista1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "coffeeSignature1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "flatwhite10",
+                  "current": 5,
+                  "target": 10,
+                  "done": false
+                },
+                {
+                  "id": "machine4",
+                  "current": 4,
+                  "target": 4,
+                  "done": true
+                },
+                {
+                  "id": "coffeeSignature2",
+                  "current": 2,
+                  "target": 2,
+                  "done": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1655.7,
+          "openSeconds": 180,
+          "closingSeconds": 3.1500000000000004,
+          "closingRevenue": 1120,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "latte",
+            "flatwhite"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                12,
+                30
+              ],
+              "reasons": {
+                "standardTaste": 12,
+                "signatureTaste": 21,
+                "skilledTaste": 9
+              },
+              "totalScore": 193.5
+            },
+            "served": 42,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 48512.799999999996,
+            "ingredientCost": 147,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "flatwhite": 21,
+              "latte": 21
+            },
+            "baked": {},
+            "rating": 4.65,
+            "ratingCount": 50,
+            "ratingTraffic": 1.1625,
+            "day": 9,
+            "duration": 183.1500000000074,
+            "profit": 48365.799999999996,
+            "bestSeller": "flatwhite",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 140,
+          "carePurchases": 7.275957614183426e-12,
+          "capital": 33691.23580833958,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 51776.21868668369,
+            "pantry": 31,
+            "care": 0
+          },
+          "reconciliationError": 7.275957614183426e-12,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "coffee30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": true,
+              "goals": [
+                {
+                  "id": "latte5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "barista1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "coffeeSignature1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "flatwhite10",
+                  "current": 9,
+                  "target": 10,
+                  "done": false
+                },
+                {
+                  "id": "machine4",
+                  "current": 4,
+                  "target": 4,
+                  "done": true
+                },
+                {
+                  "id": "coffeeSignature2",
+                  "current": 2,
+                  "target": 2,
+                  "done": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "final": {
+        "assets": {
+          "cash": 40536.90365688293,
+          "pantry": 178,
+          "care": 0
+        },
+        "served": 363,
+        "items": {
+          "espresso": 10,
+          "americano": 1,
+          "latte": 25,
+          "cappuccino": 1,
+          "flatwhite": 10,
+          "cortado": 0,
+          "mocha": 0,
+          "vienna": 0,
+          "macchiato": 0,
+          "coldbrew": 0,
+          "dirty": 0,
+          "pourover": 0,
+          "creamcoffee": 0,
+          "affogato": 0,
+          "blacktea": 0,
+          "hotchoc": 0,
+          "lemontea": 0,
+          "chai": 0,
+          "fruittea": 0,
+          "hojicha": 0,
+          "matcha": 0,
+          "frappe": 0,
+          "smoothie": 0,
+          "milktea": 0,
+          "matchafloat": 0,
+          "roll": 0,
+          "bagel": 0,
+          "baguette": 0,
+          "cheesebun": 0,
+          "pretzel": 0,
+          "focaccia": 0,
+          "ciabatta": 0,
+          "raisinbread": 0,
+          "sourdough": 0,
+          "rye": 0,
+          "chocobread": 0,
+          "shokupan": 0,
+          "brioche": 0,
+          "fruitbrioche": 0,
+          "garlicbread": 0,
+          "donut": 0,
+          "scone": 0,
+          "cookie": 0,
+          "croissant": 0,
+          "painchoc": 0,
+          "brownie": 0,
+          "cinnamon": 0,
+          "muffin": 0,
+          "creampuff": 0,
+          "melonpan": 0,
+          "eggtart": 0,
+          "cake": 0,
+          "swissroll": 0,
+          "cheesecake": 0,
+          "macaron": 0
+        },
+        "upgrades": {
+          "marketing": 0,
+          "machine": 4,
+          "barista": 1,
+          "server": 0,
+          "cook": 0,
+          "tables": 0
+        },
+        "kitchen": false,
+        "regions": [],
+        "pets": [],
+        "taste": {
+          "served": {
+            "espresso": 176,
+            "latte": 148,
+            "flatwhite": 39
+          },
+          "signature": [
+            "espresso",
+            "latte"
+          ]
+        },
+        "comfort": 0,
+        "capital": 88869.53456533933,
+        "goalRewards": 70,
+        "operatingProfit": 129464.43822222226,
+        "netLiquidChange": 40664.90365688293,
+        "reconciliationError": 0
+      },
+      "limitations": [
+        "A reproducible legal purchasing policy, not an optimal player or a guarantee for every player.",
+        "Censoring at the explicit observation bound does not establish impossibility.",
+        "First-passage stage times are retained; final checklists are separately revalidated.",
+        "No manual boosts, emergency grants, injected capital, fixture assets, taste or stock. Tutorial rewards are claimed only when legally earned.",
+        "Menus and investments change only in preparation. All time is actual simulated open and closing time; preparation clicks take no simulated time."
+      ]
+    },
+    {
+      "style": "bakery",
+      "seed": 1592594996,
+      "policyVersion": 1,
+      "observationBound": {
+        "maxDays": 120,
+        "openSecondsPerDay": 180,
+        "maxClosingSeconds": 300
+      },
+      "status": "complete",
+      "blocker": null,
+      "initial": {
+        "assets": {
+          "cash": 0,
+          "pantry": 50,
+          "care": 0
+        },
+        "coins": 0,
+        "served": 0,
+        "pantry": {
+          "beans": 50,
+          "milk": 0,
+          "flour": 0,
+          "butter": 0,
+          "eggs": 0,
+          "sugar": 0,
+          "tea": 0,
+          "spice": 0,
+          "cocoa": 0,
+          "cream": 0,
+          "fruit": 0,
+          "matcha": 0
+        },
+        "items": {
+          "espresso": 1,
+          "americano": 0,
+          "latte": 0,
+          "cappuccino": 0,
+          "flatwhite": 0,
+          "cortado": 0,
+          "mocha": 0,
+          "vienna": 0,
+          "macchiato": 0,
+          "coldbrew": 0,
+          "dirty": 0,
+          "pourover": 0,
+          "creamcoffee": 0,
+          "affogato": 0,
+          "blacktea": 0,
+          "hotchoc": 0,
+          "lemontea": 0,
+          "chai": 0,
+          "fruittea": 0,
+          "hojicha": 0,
+          "matcha": 0,
+          "frappe": 0,
+          "smoothie": 0,
+          "milktea": 0,
+          "matchafloat": 0,
+          "roll": 0,
+          "bagel": 0,
+          "baguette": 0,
+          "cheesebun": 0,
+          "pretzel": 0,
+          "focaccia": 0,
+          "ciabatta": 0,
+          "raisinbread": 0,
+          "sourdough": 0,
+          "rye": 0,
+          "chocobread": 0,
+          "shokupan": 0,
+          "brioche": 0,
+          "fruitbrioche": 0,
+          "garlicbread": 0,
+          "donut": 0,
+          "scone": 0,
+          "cookie": 0,
+          "croissant": 0,
+          "painchoc": 0,
+          "brownie": 0,
+          "cinnamon": 0,
+          "muffin": 0,
+          "creampuff": 0,
+          "melonpan": 0,
+          "eggtart": 0,
+          "cake": 0,
+          "swissroll": 0,
+          "cheesecake": 0,
+          "macaron": 0
+        },
+        "stages": [
+          {
+            "id": "early",
+            "done": false,
+            "goals": [
+              {
+                "id": "espresso5",
+                "current": 1,
+                "target": 5,
+                "done": false
+              },
+              {
+                "id": "kitchen",
+                "current": 0,
+                "target": 1,
+                "done": false
+              },
+              {
+                "id": "roll3",
+                "current": 0,
+                "target": 3,
+                "done": false
+              }
+            ]
+          },
+          {
+            "id": "mid",
+            "done": false,
+            "goals": [
+              {
+                "id": "donut3",
+                "current": 0,
+                "target": 3,
+                "done": false
+              },
+              {
+                "id": "cook1",
+                "current": 0,
+                "target": 1,
+                "done": false
+              },
+              {
+                "id": "bakery100",
+                "current": 0,
+                "target": 100,
+                "done": false
+              }
+            ]
+          },
+          {
+            "id": "late",
+            "done": false,
+            "goals": [
+              {
+                "id": "croissant5",
+                "current": 0,
+                "target": 5,
+                "done": false
+              },
+              {
+                "id": "cook2",
+                "current": 0,
+                "target": 2,
+                "done": false
+              },
+              {
+                "id": "bakerySignature2",
+                "current": 0,
+                "target": 2,
+                "done": false
+              }
+            ]
+          }
+        ]
+      },
+      "elapsedSeconds": 1654.15,
+      "completedDays": 9,
+      "completions": {
+        "early": {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "served": 73,
+          "capital": 1207.621881,
+          "goalRewards": 130,
+          "assets": {
+            "cash": 0.37811944371895834,
+            "pantry": 218,
+            "care": 0
+          },
+          "goals": [
+            {
+              "id": "espresso5",
+              "current": 5,
+              "target": 5,
+              "done": true
+            },
+            {
+              "id": "kitchen",
+              "current": 1,
+              "target": 1,
+              "done": true
+            },
+            {
+              "id": "roll3",
+              "current": 3,
+              "target": 3,
+              "done": true
+            }
+          ]
+        },
+        "mid": {
+          "day": 6,
+          "elapsedSeconds": 911.95,
+          "served": 185,
+          "capital": 6719.671947,
+          "goalRewards": 130,
+          "assets": {
+            "cash": 2525.7413866600664,
+            "pantry": 244,
+            "care": 0
+          },
+          "goals": [
+            {
+              "id": "donut3",
+              "current": 3,
+              "target": 3,
+              "done": true
+            },
+            {
+              "id": "cook1",
+              "current": 1,
+              "target": 1,
+              "done": true
+            },
+            {
+              "id": "bakery100",
+              "current": 100,
+              "target": 100,
+              "done": true
+            }
+          ]
+        },
+        "late": {
+          "day": 10,
+          "elapsedSeconds": 1654.15,
+          "served": 350,
+          "capital": 99107.764955,
+          "goalRewards": 130,
+          "assets": {
+            "cash": 6114.475044595676,
+            "pantry": 406,
+            "care": 0
+          },
+          "goals": [
+            {
+              "id": "croissant5",
+              "current": 5,
+              "target": 5,
+              "done": true
+            },
+            {
+              "id": "cook2",
+              "current": 2,
+              "target": 2,
+              "done": true
+            },
+            {
+              "id": "bakerySignature2",
+              "current": 2,
+              "target": 2,
+              "done": true
+            }
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "early",
+          "done": true,
+          "goals": [
+            {
+              "id": "espresso5",
+              "current": 5,
+              "target": 5,
+              "done": true
+            },
+            {
+              "id": "kitchen",
+              "current": 1,
+              "target": 1,
+              "done": true
+            },
+            {
+              "id": "roll3",
+              "current": 3,
+              "target": 3,
+              "done": true
+            }
+          ]
+        },
+        {
+          "id": "mid",
+          "done": true,
+          "goals": [
+            {
+              "id": "donut3",
+              "current": 3,
+              "target": 3,
+              "done": true
+            },
+            {
+              "id": "cook1",
+              "current": 1,
+              "target": 1,
+              "done": true
+            },
+            {
+              "id": "bakery100",
+              "current": 100,
+              "target": 100,
+              "done": true
+            }
+          ]
+        },
+        {
+          "id": "late",
+          "done": true,
+          "goals": [
+            {
+              "id": "croissant5",
+              "current": 5,
+              "target": 5,
+              "done": true
+            },
+            {
+              "id": "cook2",
+              "current": 2,
+              "target": 2,
+              "done": true
+            },
+            {
+              "id": "bakerySignature2",
+              "current": 2,
+              "target": 2,
+              "done": true
+            }
+          ]
+        }
+      ],
+      "nextGoal": null,
+      "receipts": [
+        {
+          "day": 2,
+          "elapsedSeconds": 182.6,
+          "kind": "goal",
+          "action": "tutorial goal 0",
+          "cash": -30,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 182.6,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 26,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 182.6,
+          "kind": "capital",
+          "action": "espresso level 2",
+          "cash": 8.96,
+          "capital": 8.96,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 182.6,
+          "kind": "capital",
+          "action": "espresso level 3",
+          "cash": 10.0352,
+          "capital": 10.0352,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 182.6,
+          "kind": "capital",
+          "action": "espresso level 4",
+          "cash": 11.239424,
+          "capital": 11.239424,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 182.6,
+          "kind": "capital",
+          "action": "espresso level 5",
+          "cash": 12.588155,
+          "capital": 12.588155,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 182.6,
+          "kind": "goal",
+          "action": "tutorial goal 1",
+          "cash": -40,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 43,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "kind": "capital",
+          "action": "espresso level 6",
+          "cash": 14.098733,
+          "capital": 14.098733,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "kind": "capital",
+          "action": "espresso level 7",
+          "cash": 15.790581,
+          "capital": 15.790581,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "kind": "capital",
+          "action": "espresso level 8",
+          "cash": 17.685451,
+          "capital": 17.685451,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "kind": "capital",
+          "action": "espresso level 9",
+          "cash": 19.807705,
+          "capital": 19.807705,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "kind": "capital",
+          "action": "espresso level 10",
+          "cash": 22.18463,
+          "capital": 22.18463,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "kind": "capital",
+          "action": "kitchen with first cook",
+          "cash": 800,
+          "capital": 800,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "kind": "capital",
+          "action": "roll level 1",
+          "cash": 30,
+          "capital": 30,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "kind": "capital",
+          "action": "roll level 2",
+          "cash": 33.6,
+          "capital": 33.6,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "kind": "capital",
+          "action": "roll level 3",
+          "cash": 37.632,
+          "capital": 37.632,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "kind": "capital",
+          "action": "machine upgrade 1",
+          "cash": 60,
+          "capital": 60,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "kind": "capital",
+          "action": "machine upgrade 2",
+          "cash": 114,
+          "capital": 114,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "kind": "goal",
+          "action": "tutorial goal 2",
+          "cash": -60,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 366.55,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 172,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 551.95,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 168,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 551.95,
+          "kind": "capital",
+          "action": "roll level 4",
+          "cash": 42.14784,
+          "capital": 42.14784,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 551.95,
+          "kind": "capital",
+          "action": "roll level 5",
+          "cash": 47.205581,
+          "capital": 47.205581,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 551.95,
+          "kind": "capital",
+          "action": "roll level 6",
+          "cash": 52.87025,
+          "capital": 52.87025,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 551.95,
+          "kind": "capital",
+          "action": "roll level 7",
+          "cash": 59.214681,
+          "capital": 59.214681,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 551.95,
+          "kind": "capital",
+          "action": "donut level 1",
+          "cash": 300,
+          "capital": 300,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 551.95,
+          "kind": "capital",
+          "action": "barista upgrade 1",
+          "cash": 150,
+          "capital": 150,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 551.95,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 90,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 731.95,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 138,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 731.95,
+          "kind": "capital",
+          "action": "roll level 8",
+          "cash": 66.320442,
+          "capital": 66.320442,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 731.95,
+          "kind": "capital",
+          "action": "roll level 9",
+          "cash": 74.278895,
+          "capital": 74.278895,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 731.95,
+          "kind": "capital",
+          "action": "roll level 10",
+          "cash": 83.192363,
+          "capital": 83.192363,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 731.95,
+          "kind": "capital",
+          "action": "roll level 11",
+          "cash": 93.175446,
+          "capital": 93.175446,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 731.95,
+          "kind": "capital",
+          "action": "roll level 12",
+          "cash": 104.3565,
+          "capital": 104.3565,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 731.95,
+          "kind": "capital",
+          "action": "roll level 13",
+          "cash": 116.87928,
+          "capital": 116.87928,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 731.95,
+          "kind": "capital",
+          "action": "donut level 2",
+          "cash": 336,
+          "capital": 336,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 731.95,
+          "kind": "capital",
+          "action": "donut level 3",
+          "cash": 376.32,
+          "capital": 376.32,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 911.95,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 198,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 911.95,
+          "kind": "capital",
+          "action": "roll level 14",
+          "cash": 130.904793,
+          "capital": 130.904793,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 911.95,
+          "kind": "capital",
+          "action": "roll level 15",
+          "cash": 146.613369,
+          "capital": 146.613369,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 911.95,
+          "kind": "capital",
+          "action": "roll level 16",
+          "cash": 164.206973,
+          "capital": 164.206973,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 911.95,
+          "kind": "capital",
+          "action": "roll level 17",
+          "cash": 183.91181,
+          "capital": 183.91181,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 911.95,
+          "kind": "capital",
+          "action": "roll level 18",
+          "cash": 205.981227,
+          "capital": 205.981227,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 911.95,
+          "kind": "capital",
+          "action": "roll level 19",
+          "cash": 230.698974,
+          "capital": 230.698974,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 911.95,
+          "kind": "capital",
+          "action": "roll level 20",
+          "cash": 258.382851,
+          "capital": 258.382851,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 911.95,
+          "kind": "capital",
+          "action": "roll level 21",
+          "cash": 289.388793,
+          "capital": 289.388793,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 911.95,
+          "kind": "capital",
+          "action": "cook upgrade 1",
+          "cash": 900,
+          "capital": 900,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 911.95,
+          "kind": "capital",
+          "action": "scone level 1",
+          "cash": 1100,
+          "capital": 1100,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1094.05,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 216,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1094.05,
+          "kind": "capital",
+          "action": "roll level 22",
+          "cash": 324.115448,
+          "capital": 324.115448,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1094.05,
+          "kind": "capital",
+          "action": "roll level 23",
+          "cash": 363.009302,
+          "capital": 363.009302,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1094.05,
+          "kind": "capital",
+          "action": "roll level 24",
+          "cash": 406.570418,
+          "capital": 406.570418,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1094.05,
+          "kind": "capital",
+          "action": "roll level 25",
+          "cash": 455.358868,
+          "capital": 455.358868,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1094.05,
+          "kind": "capital",
+          "action": "donut level 4",
+          "cash": 421.4784,
+          "capital": 421.4784,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1094.05,
+          "kind": "capital",
+          "action": "donut level 5",
+          "cash": 472.055808,
+          "capital": 472.055808,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1094.05,
+          "kind": "capital",
+          "action": "donut level 6",
+          "cash": 528.702505,
+          "capital": 528.702505,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1094.05,
+          "kind": "capital",
+          "action": "donut level 7",
+          "cash": 592.146806,
+          "capital": 592.146806,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1094.05,
+          "kind": "capital",
+          "action": "cookie level 1",
+          "cash": 3500,
+          "capital": 3500,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1277.05,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 216,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1277.05,
+          "kind": "capital",
+          "action": "donut level 8",
+          "cash": 663.204422,
+          "capital": 663.204422,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1277.05,
+          "kind": "capital",
+          "action": "donut level 9",
+          "cash": 742.788953,
+          "capital": 742.788953,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1277.05,
+          "kind": "capital",
+          "action": "donut level 10",
+          "cash": 831.923627,
+          "capital": 831.923627,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1277.05,
+          "kind": "capital",
+          "action": "donut level 11",
+          "cash": 931.754463,
+          "capital": 931.754463,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1277.05,
+          "kind": "capital",
+          "action": "donut level 12",
+          "cash": 1043.564998,
+          "capital": 1043.564998,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1277.05,
+          "kind": "capital",
+          "action": "donut level 13",
+          "cash": 1168.792798,
+          "capital": 1168.792798,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1277.05,
+          "kind": "capital",
+          "action": "donut level 14",
+          "cash": 1309.047933,
+          "capital": 1309.047933,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1277.05,
+          "kind": "capital",
+          "action": "donut level 15",
+          "cash": 1466.133686,
+          "capital": 1466.133686,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1277.05,
+          "kind": "capital",
+          "action": "croissant level 1",
+          "cash": 9000,
+          "capital": 9000,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1277.05,
+          "kind": "capital",
+          "action": "croissant level 2",
+          "cash": 10080,
+          "capital": 10080,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1277.05,
+          "kind": "capital",
+          "action": "signature roll",
+          "cash": 160,
+          "capital": 160,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.4,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 216,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.4,
+          "kind": "capital",
+          "action": "donut level 16",
+          "cash": 1642.069728,
+          "capital": 1642.069728,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.4,
+          "kind": "capital",
+          "action": "donut level 17",
+          "cash": 1839.118095,
+          "capital": 1839.118095,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.4,
+          "kind": "capital",
+          "action": "donut level 18",
+          "cash": 2059.812267,
+          "capital": 2059.812267,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.4,
+          "kind": "capital",
+          "action": "donut level 19",
+          "cash": 2306.989739,
+          "capital": 2306.989739,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.4,
+          "kind": "capital",
+          "action": "donut level 20",
+          "cash": 2583.828507,
+          "capital": 2583.828507,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.4,
+          "kind": "capital",
+          "action": "croissant level 3",
+          "cash": 11289.6,
+          "capital": 11289.6,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.4,
+          "kind": "capital",
+          "action": "croissant level 4",
+          "cash": 12644.352,
+          "capital": 12644.352,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.4,
+          "kind": "capital",
+          "action": "signature donut",
+          "cash": 400,
+          "capital": 400,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1472.4,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 144,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 10,
+          "elapsedSeconds": 1654.15,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 262,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 10,
+          "elapsedSeconds": 1654.15,
+          "kind": "capital",
+          "action": "croissant level 5",
+          "cash": 14161.67424,
+          "capital": 14161.67424,
+          "includedCare": 0
+        },
+        {
+          "day": 10,
+          "elapsedSeconds": 1654.15,
+          "kind": "capital",
+          "action": "cook upgrade 2",
+          "cash": 9000,
+          "capital": 9000,
+          "includedCare": 0
+        }
+      ],
+      "daily": [
+        {
+          "day": 1,
+          "elapsedSeconds": 182.6,
+          "openSeconds": 180,
+          "closingSeconds": 2.6,
+          "closingRevenue": 3,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "espresso"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                30,
+                3
+              ],
+              "reasons": {
+                "standardTaste": 30,
+                "skilledTaste": 3
+              },
+              "totalScore": 133.5
+            },
+            "served": 33,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 99,
+            "ingredientCost": 33,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "espresso": 33
+            },
+            "baked": {},
+            "rating": 4.045454545454546,
+            "ratingCount": 33,
+            "ratingTraffic": 1.0113636363636365,
+            "day": 1,
+            "duration": 182.60000000000727,
+            "profit": 66,
+            "bestSeller": "espresso",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 0,
+          "carePurchases": 0,
+          "capital": 0,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 99,
+            "pantry": 17,
+            "care": 0
+          },
+          "reconciliationError": 0,
+          "checklist": [
+            {
+              "id": "early",
+              "done": false,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 1,
+                  "target": 5,
+                  "done": false
+                },
+                {
+                  "id": "kitchen",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "roll3",
+                  "current": 0,
+                  "target": 3,
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": false,
+              "goals": [
+                {
+                  "id": "donut3",
+                  "current": 0,
+                  "target": 3,
+                  "done": false
+                },
+                {
+                  "id": "cook1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "bakery100",
+                  "current": 0,
+                  "target": 100,
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "croissant5",
+                  "current": 0,
+                  "target": 5,
+                  "done": false
+                },
+                {
+                  "id": "cook2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                },
+                {
+                  "id": "bakerySignature2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 366.55,
+          "openSeconds": 180,
+          "closingSeconds": 3.95,
+          "closingRevenue": 20.333333333333258,
+          "closingIngredientCost": 1,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "espresso"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                0,
+                40
+              ],
+              "reasons": {
+                "skilledTaste": 40
+              },
+              "totalScore": 180
+            },
+            "served": 40,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 1219.9999999999998,
+            "ingredientCost": 40,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "espresso": 40
+            },
+            "baked": {},
+            "rating": 4.43,
+            "ratingCount": 50,
+            "ratingTraffic": 1.1075,
+            "day": 2,
+            "duration": 183.95000000000758,
+            "profit": 1179.9999999999998,
+            "bestSeller": "espresso",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 26,
+          "carePurchases": 4.547473508864641e-13,
+          "capital": 42.822778880000016,
+          "goalRewards": 70,
+          "assets": {
+            "cash": 1320.1772211199993,
+            "pantry": 3,
+            "care": 0
+          },
+          "reconciliationError": -4.547473508864641e-13,
+          "checklist": [
+            {
+              "id": "early",
+              "done": false,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "kitchen",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "roll3",
+                  "current": 0,
+                  "target": 3,
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": false,
+              "goals": [
+                {
+                  "id": "donut3",
+                  "current": 0,
+                  "target": 3,
+                  "done": false
+                },
+                {
+                  "id": "cook1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "bakery100",
+                  "current": 0,
+                  "target": 100,
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "croissant5",
+                  "current": 0,
+                  "target": 5,
+                  "done": false
+                },
+                {
+                  "id": "cook2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                },
+                {
+                  "id": "bakerySignature2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 551.95,
+          "openSeconds": 180,
+          "closingSeconds": 5.4,
+          "closingRevenue": 28.26666666666665,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "roll"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                30,
+                7
+              ],
+              "reasons": {
+                "standardTaste": 30,
+                "skilledTaste": 7
+              },
+              "totalScore": 151.5
+            },
+            "served": 37,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 1158.933333333333,
+            "ingredientCost": 172,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "roll": 37
+            },
+            "baked": {
+              "roll": 43
+            },
+            "rating": 4.2,
+            "ratingCount": 50,
+            "ratingTraffic": 1.05,
+            "day": 3,
+            "duration": 185.4000000000079,
+            "profit": 986.9333333333329,
+            "bestSeller": "roll",
+            "outOfStock": [
+              "roll"
+            ],
+            "shelfSoldOut": [],
+            "stale": {
+              "roll": 6
+            },
+            "staleCost": 24
+          },
+          "wasteCost": 24,
+          "stockPurchases": 215,
+          "carePurchases": 2.2737367544323206e-13,
+          "capital": 1164.7991016762803,
+          "goalRewards": 60,
+          "assets": {
+            "cash": 1159.3114527770517,
+            "pantry": 46,
+            "care": 0
+          },
+          "reconciliationError": -4.547473508864641e-13,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "kitchen",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "roll3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": false,
+              "goals": [
+                {
+                  "id": "donut3",
+                  "current": 0,
+                  "target": 3,
+                  "done": false
+                },
+                {
+                  "id": "cook1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "bakery100",
+                  "current": 37,
+                  "target": 100,
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "croissant5",
+                  "current": 0,
+                  "target": 5,
+                  "done": false
+                },
+                {
+                  "id": "cook2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                },
+                {
+                  "id": "bakerySignature2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 731.95,
+          "openSeconds": 180,
+          "closingSeconds": 0,
+          "closingRevenue": 0,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "roll",
+            "donut"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                1,
+                0,
+                0,
+                17,
+                20
+              ],
+              "reasons": {
+                "skilledTaste": 20,
+                "standardTaste": 17,
+                "soldOut": 1
+              },
+              "totalScore": 159
+            },
+            "served": 37,
+            "missed": 1,
+            "soldOut": 1,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {
+              "roll": 1
+            },
+            "revenue": 2057.333333333332,
+            "ingredientCost": 198,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "roll": 20,
+              "donut": 17
+            },
+            "baked": {
+              "roll": 22,
+              "donut": 22
+            },
+            "rating": 4.21,
+            "ratingCount": 50,
+            "ratingTraffic": 1.0525,
+            "day": 4,
+            "duration": 180.00000000000668,
+            "profit": 1859.3333333333321,
+            "bestSeller": "roll",
+            "outOfStock": [
+              "roll",
+              "donut"
+            ],
+            "shelfSoldOut": [],
+            "stale": {
+              "roll": 2,
+              "donut": 5
+            },
+            "staleCost": 33
+          },
+          "wasteCost": 33,
+          "stockPurchases": 258,
+          "carePurchases": -4.547473508864641e-13,
+          "capital": 651.4383518515203,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 2307.206434258864,
+            "pantry": 106,
+            "care": 0
+          },
+          "reconciliationError": 4.547473508864641e-13,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "kitchen",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "roll3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": false,
+              "goals": [
+                {
+                  "id": "donut3",
+                  "current": 1,
+                  "target": 3,
+                  "done": false
+                },
+                {
+                  "id": "cook1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "bakery100",
+                  "current": 74,
+                  "target": 100,
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "croissant5",
+                  "current": 0,
+                  "target": 5,
+                  "done": false
+                },
+                {
+                  "id": "cook2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                },
+                {
+                  "id": "bakerySignature2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 911.95,
+          "openSeconds": 180,
+          "closingSeconds": 0,
+          "closingRevenue": 0,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "roll",
+            "donut"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                1,
+                0,
+                0,
+                13,
+                25
+              ],
+              "reasons": {
+                "skilledTaste": 25,
+                "standardTaste": 13,
+                "soldOut": 1
+              },
+              "totalScore": 165.5
+            },
+            "served": 38,
+            "missed": 1,
+            "soldOut": 1,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {
+              "donut": 1
+            },
+            "revenue": 5415.146666666667,
+            "ingredientCost": 198,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "roll": 16,
+              "donut": 22
+            },
+            "baked": {
+              "roll": 22,
+              "donut": 22
+            },
+            "rating": 4.21,
+            "ratingCount": 50,
+            "ratingTraffic": 1.0525,
+            "day": 5,
+            "duration": 180.00000000000668,
+            "profit": 5217.146666666667,
+            "bestSeller": "donut",
+            "outOfStock": [
+              "roll",
+              "donut"
+            ],
+            "shelfSoldOut": [
+              "donut"
+            ],
+            "stale": {
+              "roll": 6
+            },
+            "staleCost": 24
+          },
+          "wasteCost": 24,
+          "stockPurchases": 138,
+          "carePurchases": 0,
+          "capital": 1250.5229260616336,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 6333.830174863898,
+            "pantry": 46,
+            "care": 0
+          },
+          "reconciliationError": 0,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "kitchen",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "roll3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": false,
+              "goals": [
+                {
+                  "id": "donut3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                },
+                {
+                  "id": "cook1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "bakery100",
+                  "current": 100,
+                  "target": 100,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "croissant5",
+                  "current": 0,
+                  "target": 5,
+                  "done": false
+                },
+                {
+                  "id": "cook2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                },
+                {
+                  "id": "bakerySignature2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 1094.05,
+          "openSeconds": 180,
+          "closingSeconds": 2.1,
+          "closingRevenue": 70.66666666666606,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "roll",
+            "donut"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                0,
+                40
+              ],
+              "reasons": {
+                "skilledTaste": 40
+              },
+              "totalScore": 180
+            },
+            "served": 40,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 11150.826666666668,
+            "ingredientCost": 198,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "donut": 22,
+              "roll": 18
+            },
+            "baked": {
+              "roll": 22,
+              "donut": 22
+            },
+            "rating": 4.43,
+            "ratingCount": 50,
+            "ratingTraffic": 1.1075,
+            "day": 6,
+            "duration": 182.10000000000716,
+            "profit": 10952.826666666668,
+            "bestSeller": "donut",
+            "outOfStock": [
+              "roll",
+              "donut"
+            ],
+            "shelfSoldOut": [
+              "donut"
+            ],
+            "stale": {
+              "roll": 4
+            },
+            "staleCost": 16
+          },
+          "wasteCost": 16,
+          "stockPurchases": 198,
+          "carePurchases": -3.637978807091713e-12,
+          "capital": 3610.0887882038314,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 13676.568053326737,
+            "pantry": 46,
+            "care": 0
+          },
+          "reconciliationError": 3.637978807091713e-12,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "kitchen",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "roll3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": true,
+              "goals": [
+                {
+                  "id": "donut3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                },
+                {
+                  "id": "cook1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "bakery100",
+                  "current": 100,
+                  "target": 100,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "croissant5",
+                  "current": 0,
+                  "target": 5,
+                  "done": false
+                },
+                {
+                  "id": "cook2",
+                  "current": 1,
+                  "target": 2,
+                  "done": false
+                },
+                {
+                  "id": "bakerySignature2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1277.05,
+          "openSeconds": 180,
+          "closingSeconds": 3,
+          "closingRevenue": 429.33333333333576,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "roll",
+            "donut"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                1,
+                0,
+                0,
+                0,
+                42
+              ],
+              "reasons": {
+                "skilledTaste": 42,
+                "soldOut": 1
+              },
+              "totalScore": 190
+            },
+            "served": 42,
+            "missed": 1,
+            "soldOut": 1,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {
+              "roll": 1
+            },
+            "revenue": 26264.000000000015,
+            "ingredientCost": 216,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "roll": 24,
+              "donut": 18
+            },
+            "baked": {
+              "roll": 24,
+              "donut": 24
+            },
+            "rating": 4.43,
+            "ratingCount": 50,
+            "ratingTraffic": 1.1075,
+            "day": 7,
+            "duration": 183.00000000000736,
+            "profit": 26048.000000000015,
+            "bestSeller": "roll",
+            "outOfStock": [
+              "roll",
+              "donut"
+            ],
+            "shelfSoldOut": [
+              "roll"
+            ],
+            "stale": {
+              "donut": 6
+            },
+            "staleCost": 30
+          },
+          "wasteCost": 30,
+          "stockPurchases": 216,
+          "carePurchases": 3.637978807091713e-12,
+          "capital": 7063.437554058893,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 32661.130499267856,
+            "pantry": 46,
+            "care": 0
+          },
+          "reconciliationError": 0,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "kitchen",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "roll3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": true,
+              "goals": [
+                {
+                  "id": "donut3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                },
+                {
+                  "id": "cook1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "bakery100",
+                  "current": 100,
+                  "target": 100,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "croissant5",
+                  "current": 0,
+                  "target": 5,
+                  "done": false
+                },
+                {
+                  "id": "cook2",
+                  "current": 1,
+                  "target": 2,
+                  "done": false
+                },
+                {
+                  "id": "bakerySignature2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1472.4,
+          "openSeconds": 180,
+          "closingSeconds": 15.350000000000001,
+          "closingRevenue": 760,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "roll",
+            "donut"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                0,
+                39
+              ],
+              "reasons": {
+                "skilledTaste": 24,
+                "signatureTaste": 15
+              },
+              "totalScore": 183
+            },
+            "served": 39,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 30240,
+            "ingredientCost": 216,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "donut": 24,
+              "roll": 15
+            },
+            "baked": {
+              "roll": 24,
+              "donut": 24
+            },
+            "rating": 4.58,
+            "ratingCount": 50,
+            "ratingTraffic": 1.145,
+            "day": 8,
+            "duration": 195.35000000001017,
+            "profit": 30024,
+            "bestSeller": "donut",
+            "outOfStock": [
+              "roll",
+              "donut"
+            ],
+            "shelfSoldOut": [
+              "donut"
+            ],
+            "stale": {
+              "roll": 9
+            },
+            "staleCost": 36
+          },
+          "wasteCost": 36,
+          "stockPurchases": 216,
+          "carePurchases": 0,
+          "capital": 27397.21087962741,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 35287.91961964045,
+            "pantry": 46,
+            "care": 0
+          },
+          "reconciliationError": 0,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "kitchen",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "roll3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": true,
+              "goals": [
+                {
+                  "id": "donut3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                },
+                {
+                  "id": "cook1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "bakery100",
+                  "current": 100,
+                  "target": 100,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "croissant5",
+                  "current": 2,
+                  "target": 5,
+                  "done": false
+                },
+                {
+                  "id": "cook2",
+                  "current": 1,
+                  "target": 2,
+                  "done": false
+                },
+                {
+                  "id": "bakerySignature2",
+                  "current": 1,
+                  "target": 2,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1654.15,
+          "openSeconds": 180,
+          "closingSeconds": 1.75,
+          "closingRevenue": 557.3333333333321,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "roll",
+            "croissant"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                24,
+                20
+              ],
+              "reasons": {
+                "standardTaste": 24,
+                "signatureTaste": 20
+              },
+              "totalScore": 196
+            },
+            "served": 44,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 29375.99999999999,
+            "ingredientCost": 262,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "croissant": 24,
+              "roll": 20
+            },
+            "baked": {
+              "roll": 20,
+              "croissant": 26
+            },
+            "rating": 4.48,
+            "ratingCount": 50,
+            "ratingTraffic": 1.12,
+            "day": 9,
+            "duration": 181.75000000000708,
+            "profit": 29113.99999999999,
+            "bestSeller": "croissant",
+            "outOfStock": [
+              "roll",
+              "croissant"
+            ],
+            "shelfSoldOut": [
+              "roll"
+            ],
+            "stale": {
+              "croissant": 2
+            },
+            "staleCost": 14
+          },
+          "wasteCost": 14,
+          "stockPurchases": 360,
+          "carePurchases": 0,
+          "capital": 34765.770335044755,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 29538.149284595682,
+            "pantry": 144,
+            "care": 0
+          },
+          "reconciliationError": 0,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "kitchen",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "roll3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": true,
+              "goals": [
+                {
+                  "id": "donut3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                },
+                {
+                  "id": "cook1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "bakery100",
+                  "current": 100,
+                  "target": 100,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "croissant5",
+                  "current": 4,
+                  "target": 5,
+                  "done": false
+                },
+                {
+                  "id": "cook2",
+                  "current": 1,
+                  "target": 2,
+                  "done": false
+                },
+                {
+                  "id": "bakerySignature2",
+                  "current": 2,
+                  "target": 2,
+                  "done": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "final": {
+        "assets": {
+          "cash": 6114.475044595676,
+          "pantry": 406,
+          "care": 0
+        },
+        "served": 350,
+        "items": {
+          "espresso": 10,
+          "americano": 0,
+          "latte": 0,
+          "cappuccino": 0,
+          "flatwhite": 0,
+          "cortado": 0,
+          "mocha": 0,
+          "vienna": 0,
+          "macchiato": 0,
+          "coldbrew": 0,
+          "dirty": 0,
+          "pourover": 0,
+          "creamcoffee": 0,
+          "affogato": 0,
+          "blacktea": 0,
+          "hotchoc": 0,
+          "lemontea": 0,
+          "chai": 0,
+          "fruittea": 0,
+          "hojicha": 0,
+          "matcha": 0,
+          "frappe": 0,
+          "smoothie": 0,
+          "milktea": 0,
+          "matchafloat": 0,
+          "roll": 25,
+          "bagel": 0,
+          "baguette": 0,
+          "cheesebun": 0,
+          "pretzel": 0,
+          "focaccia": 0,
+          "ciabatta": 0,
+          "raisinbread": 0,
+          "sourdough": 0,
+          "rye": 0,
+          "chocobread": 0,
+          "shokupan": 0,
+          "brioche": 0,
+          "fruitbrioche": 0,
+          "garlicbread": 0,
+          "donut": 20,
+          "scone": 1,
+          "cookie": 1,
+          "croissant": 5,
+          "painchoc": 0,
+          "brownie": 0,
+          "cinnamon": 0,
+          "muffin": 0,
+          "creampuff": 0,
+          "melonpan": 0,
+          "eggtart": 0,
+          "cake": 0,
+          "swissroll": 0,
+          "cheesecake": 0,
+          "macaron": 0
+        },
+        "upgrades": {
+          "marketing": 0,
+          "machine": 2,
+          "barista": 1,
+          "server": 0,
+          "cook": 2,
+          "tables": 0
+        },
+        "kitchen": true,
+        "regions": [],
+        "pets": [],
+        "taste": {
+          "served": {
+            "espresso": 73,
+            "roll": 150,
+            "donut": 103,
+            "croissant": 24
+          },
+          "signature": [
+            "roll",
+            "donut"
+          ]
+        },
+        "comfort": 0,
+        "capital": 99107.76495540433,
+        "goalRewards": 130,
+        "operatingProfit": 105448.24,
+        "netLiquidChange": 6470.475044595676,
+        "reconciliationError": 1.8189894035458565e-12
+      },
+      "limitations": [
+        "A reproducible legal purchasing policy, not an optimal player or a guarantee for every player.",
+        "Censoring at the explicit observation bound does not establish impossibility.",
+        "First-passage stage times are retained; final checklists are separately revalidated.",
+        "No manual boosts, emergency grants, injected capital, fixture assets, taste or stock. Tutorial rewards are claimed only when legally earned.",
+        "Menus and investments change only in preparation. All time is actual simulated open and closing time; preparation clicks take no simulated time."
+      ]
+    },
+    {
+      "style": "takeaway",
+      "seed": 1592594996,
+      "policyVersion": 1,
+      "observationBound": {
+        "maxDays": 120,
+        "openSecondsPerDay": 180,
+        "maxClosingSeconds": 300
+      },
+      "status": "complete",
+      "blocker": null,
+      "initial": {
+        "assets": {
+          "cash": 0,
+          "pantry": 50,
+          "care": 0
+        },
+        "coins": 0,
+        "served": 0,
+        "pantry": {
+          "beans": 50,
+          "milk": 0,
+          "flour": 0,
+          "butter": 0,
+          "eggs": 0,
+          "sugar": 0,
+          "tea": 0,
+          "spice": 0,
+          "cocoa": 0,
+          "cream": 0,
+          "fruit": 0,
+          "matcha": 0
+        },
+        "items": {
+          "espresso": 1,
+          "americano": 0,
+          "latte": 0,
+          "cappuccino": 0,
+          "flatwhite": 0,
+          "cortado": 0,
+          "mocha": 0,
+          "vienna": 0,
+          "macchiato": 0,
+          "coldbrew": 0,
+          "dirty": 0,
+          "pourover": 0,
+          "creamcoffee": 0,
+          "affogato": 0,
+          "blacktea": 0,
+          "hotchoc": 0,
+          "lemontea": 0,
+          "chai": 0,
+          "fruittea": 0,
+          "hojicha": 0,
+          "matcha": 0,
+          "frappe": 0,
+          "smoothie": 0,
+          "milktea": 0,
+          "matchafloat": 0,
+          "roll": 0,
+          "bagel": 0,
+          "baguette": 0,
+          "cheesebun": 0,
+          "pretzel": 0,
+          "focaccia": 0,
+          "ciabatta": 0,
+          "raisinbread": 0,
+          "sourdough": 0,
+          "rye": 0,
+          "chocobread": 0,
+          "shokupan": 0,
+          "brioche": 0,
+          "fruitbrioche": 0,
+          "garlicbread": 0,
+          "donut": 0,
+          "scone": 0,
+          "cookie": 0,
+          "croissant": 0,
+          "painchoc": 0,
+          "brownie": 0,
+          "cinnamon": 0,
+          "muffin": 0,
+          "creampuff": 0,
+          "melonpan": 0,
+          "eggtart": 0,
+          "cake": 0,
+          "swissroll": 0,
+          "cheesecake": 0,
+          "macaron": 0
+        },
+        "stages": [
+          {
+            "id": "early",
+            "done": false,
+            "goals": [
+              {
+                "id": "espresso5",
+                "current": 1,
+                "target": 5,
+                "done": false
+              },
+              {
+                "id": "machine1",
+                "current": 0,
+                "target": 1,
+                "done": false
+              },
+              {
+                "id": "fastServed30",
+                "current": 0,
+                "target": 30,
+                "done": false
+              }
+            ]
+          },
+          {
+            "id": "mid",
+            "done": false,
+            "goals": [
+              {
+                "id": "americano10",
+                "current": 0,
+                "target": 10,
+                "done": false
+              },
+              {
+                "id": "barista1",
+                "current": 0,
+                "target": 1,
+                "done": false
+              },
+              {
+                "id": "machine3",
+                "current": 0,
+                "target": 3,
+                "done": false
+              }
+            ]
+          },
+          {
+            "id": "late",
+            "done": false,
+            "goals": [
+              {
+                "id": "cortado3",
+                "current": 0,
+                "target": 3,
+                "done": false
+              },
+              {
+                "id": "barista2",
+                "current": 0,
+                "target": 2,
+                "done": false
+              },
+              {
+                "id": "machine8",
+                "current": 0,
+                "target": 8,
+                "done": false
+              },
+              {
+                "id": "fastServed300",
+                "current": 0,
+                "target": 300,
+                "done": false
+              }
+            ]
+          }
+        ]
+      },
+      "elapsedSeconds": 1445.7,
+      "completedDays": 8,
+      "completions": {
+        "early": {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "served": 72,
+          "capital": 1008.339283,
+          "goalRewards": 70,
+          "assets": {
+            "cash": 56.48738332898239,
+            "pantry": 46,
+            "care": 0
+          },
+          "goals": [
+            {
+              "id": "espresso5",
+              "current": 5,
+              "target": 5,
+              "done": true
+            },
+            {
+              "id": "machine1",
+              "current": 1,
+              "target": 1,
+              "done": true
+            },
+            {
+              "id": "fastServed30",
+              "current": 30,
+              "target": 30,
+              "done": true
+            }
+          ]
+        },
+        "mid": {
+          "day": 4,
+          "elapsedSeconds": 540.55,
+          "served": 110,
+          "capital": 4114.661097,
+          "goalRewards": 70,
+          "assets": {
+            "cash": 486.16556932109006,
+            "pantry": 44,
+            "care": 0
+          },
+          "goals": [
+            {
+              "id": "americano10",
+              "current": 10,
+              "target": 10,
+              "done": true
+            },
+            {
+              "id": "barista1",
+              "current": 1,
+              "target": 1,
+              "done": true
+            },
+            {
+              "id": "machine3",
+              "current": 3,
+              "target": 3,
+              "done": true
+            }
+          ]
+        },
+        "late": {
+          "day": 9,
+          "elapsedSeconds": 1445.7,
+          "served": 307,
+          "capital": 78131.853377,
+          "goalRewards": 70,
+          "assets": {
+            "cash": 2849.6186232294713,
+            "pantry": 100,
+            "care": 0
+          },
+          "goals": [
+            {
+              "id": "cortado3",
+              "current": 3,
+              "target": 3,
+              "done": true
+            },
+            {
+              "id": "barista2",
+              "current": 2,
+              "target": 2,
+              "done": true
+            },
+            {
+              "id": "machine8",
+              "current": 8,
+              "target": 8,
+              "done": true
+            },
+            {
+              "id": "fastServed300",
+              "current": 300,
+              "target": 300,
+              "done": true
+            }
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "early",
+          "done": true,
+          "goals": [
+            {
+              "id": "espresso5",
+              "current": 5,
+              "target": 5,
+              "done": true
+            },
+            {
+              "id": "machine1",
+              "current": 1,
+              "target": 1,
+              "done": true
+            },
+            {
+              "id": "fastServed30",
+              "current": 30,
+              "target": 30,
+              "done": true
+            }
+          ]
+        },
+        {
+          "id": "mid",
+          "done": true,
+          "goals": [
+            {
+              "id": "americano10",
+              "current": 10,
+              "target": 10,
+              "done": true
+            },
+            {
+              "id": "barista1",
+              "current": 1,
+              "target": 1,
+              "done": true
+            },
+            {
+              "id": "machine3",
+              "current": 3,
+              "target": 3,
+              "done": true
+            }
+          ]
+        },
+        {
+          "id": "late",
+          "done": true,
+          "goals": [
+            {
+              "id": "cortado3",
+              "current": 3,
+              "target": 3,
+              "done": true
+            },
+            {
+              "id": "barista2",
+              "current": 2,
+              "target": 2,
+              "done": true
+            },
+            {
+              "id": "machine8",
+              "current": 8,
+              "target": 8,
+              "done": true
+            },
+            {
+              "id": "fastServed300",
+              "current": 300,
+              "target": 300,
+              "done": true
+            }
+          ]
+        }
+      ],
+      "nextGoal": null,
+      "receipts": [
+        {
+          "day": 2,
+          "elapsedSeconds": 180,
+          "kind": "goal",
+          "action": "tutorial goal 0",
+          "cash": -30,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 180,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 27,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 180,
+          "kind": "capital",
+          "action": "espresso level 2",
+          "cash": 8.96,
+          "capital": 8.96,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 180,
+          "kind": "capital",
+          "action": "espresso level 3",
+          "cash": 10.0352,
+          "capital": 10.0352,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 180,
+          "kind": "capital",
+          "action": "espresso level 4",
+          "cash": 11.239424,
+          "capital": 11.239424,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 180,
+          "kind": "capital",
+          "action": "espresso level 5",
+          "cash": 12.588155,
+          "capital": 12.588155,
+          "includedCare": 0
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 180,
+          "kind": "goal",
+          "action": "tutorial goal 1",
+          "cash": -40,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 41,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "espresso level 6",
+          "cash": 14.098733,
+          "capital": 14.098733,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "espresso level 7",
+          "cash": 15.790581,
+          "capital": 15.790581,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "espresso level 8",
+          "cash": 17.685451,
+          "capital": 17.685451,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "espresso level 9",
+          "cash": 19.807705,
+          "capital": 19.807705,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "espresso level 10",
+          "cash": 22.18463,
+          "capital": 22.18463,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "machine upgrade 1",
+          "cash": 60,
+          "capital": 60,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "americano level 1",
+          "cash": 40,
+          "capital": 40,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "americano level 2",
+          "cash": 44.8,
+          "capital": 44.8,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "americano level 3",
+          "cash": 50.176,
+          "capital": 50.176,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "americano level 4",
+          "cash": 56.19712,
+          "capital": 56.19712,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "americano level 5",
+          "cash": 62.940774,
+          "capital": 62.940774,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "americano level 6",
+          "cash": 70.493667,
+          "capital": 70.493667,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "americano level 7",
+          "cash": 78.952907,
+          "capital": 78.952907,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "americano level 8",
+          "cash": 88.427256,
+          "capital": 88.427256,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "americano level 9",
+          "cash": 99.038527,
+          "capital": 99.038527,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "americano level 10",
+          "cash": 110.92315,
+          "capital": 110.92315,
+          "includedCare": 0
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 360.55,
+          "kind": "capital",
+          "action": "machine upgrade 2",
+          "cash": 114,
+          "capital": 114,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 540.55,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 36,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 540.55,
+          "kind": "capital",
+          "action": "americano level 11",
+          "cash": 124.233928,
+          "capital": 124.233928,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 540.55,
+          "kind": "capital",
+          "action": "americano level 12",
+          "cash": 139.142,
+          "capital": 139.142,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 540.55,
+          "kind": "capital",
+          "action": "americano level 13",
+          "cash": 155.83904,
+          "capital": 155.83904,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 540.55,
+          "kind": "capital",
+          "action": "americano level 14",
+          "cash": 174.539724,
+          "capital": 174.539724,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 540.55,
+          "kind": "capital",
+          "action": "americano level 15",
+          "cash": 195.484491,
+          "capital": 195.484491,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 540.55,
+          "kind": "capital",
+          "action": "americano level 16",
+          "cash": 218.94263,
+          "capital": 218.94263,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 540.55,
+          "kind": "capital",
+          "action": "barista upgrade 1",
+          "cash": 150,
+          "capital": 150,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 540.55,
+          "kind": "capital",
+          "action": "machine upgrade 3",
+          "cash": 216.6,
+          "capital": 216.6,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 540.55,
+          "kind": "capital",
+          "action": "latte level 1",
+          "cash": 120,
+          "capital": 120,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 540.55,
+          "kind": "capital",
+          "action": "cappuccino level 1",
+          "cash": 1200,
+          "capital": 1200,
+          "includedCare": 0
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 540.55,
+          "kind": "capital",
+          "action": "machine upgrade 4",
+          "cash": 411.54,
+          "capital": 411.54,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 721.65,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 38,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 721.65,
+          "kind": "capital",
+          "action": "americano level 17",
+          "cash": 245.215746,
+          "capital": 245.215746,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 721.65,
+          "kind": "capital",
+          "action": "americano level 18",
+          "cash": 274.641636,
+          "capital": 274.641636,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 721.65,
+          "kind": "capital",
+          "action": "americano level 19",
+          "cash": 307.598632,
+          "capital": 307.598632,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 721.65,
+          "kind": "capital",
+          "action": "americano level 20",
+          "cash": 344.510468,
+          "capital": 344.510468,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 721.65,
+          "kind": "capital",
+          "action": "americano level 21",
+          "cash": 385.851724,
+          "capital": 385.851724,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 721.65,
+          "kind": "capital",
+          "action": "americano level 22",
+          "cash": 432.153931,
+          "capital": 432.153931,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 721.65,
+          "kind": "capital",
+          "action": "americano level 23",
+          "cash": 484.012402,
+          "capital": 484.012402,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 721.65,
+          "kind": "capital",
+          "action": "flatwhite level 1",
+          "cash": 4000,
+          "capital": 4000,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 721.65,
+          "kind": "capital",
+          "action": "barista upgrade 2",
+          "cash": 1800,
+          "capital": 1800,
+          "includedCare": 0
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 721.65,
+          "kind": "capital",
+          "action": "machine upgrade 5",
+          "cash": 781.926,
+          "capital": 781.926,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 901.65,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 42,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 901.65,
+          "kind": "capital",
+          "action": "americano level 24",
+          "cash": 542.093891,
+          "capital": 542.093891,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 901.65,
+          "kind": "capital",
+          "action": "americano level 25",
+          "cash": 607.145157,
+          "capital": 607.145157,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 901.65,
+          "kind": "capital",
+          "action": "machine upgrade 6",
+          "cash": 1485.6594,
+          "capital": 1485.6594,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 901.65,
+          "kind": "capital",
+          "action": "machine upgrade 7",
+          "cash": 2822.75286,
+          "capital": 2822.75286,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 901.65,
+          "kind": "capital",
+          "action": "machine upgrade 8",
+          "cash": 5363.230434,
+          "capital": 5363.230434,
+          "includedCare": 0
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 901.65,
+          "kind": "capital",
+          "action": "signature americano",
+          "cash": 150,
+          "capital": 150,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1083.75,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 44,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1083.75,
+          "kind": "capital",
+          "action": "cortado level 1",
+          "cash": 16000,
+          "capital": 16000,
+          "includedCare": 0
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1083.75,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 55,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1265.7,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 70,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1265.7,
+          "kind": "capital",
+          "action": "cortado level 2",
+          "cash": 17920,
+          "capital": 17920,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1445.7,
+          "kind": "stock",
+          "action": "forecast pantry restock",
+          "cash": 82,
+          "capital": 0,
+          "includedCare": 0
+        },
+        {
+          "day": 9,
+          "elapsedSeconds": 1445.7,
+          "kind": "capital",
+          "action": "cortado level 3",
+          "cash": 20070.4,
+          "capital": 20070.4,
+          "includedCare": 0
+        }
+      ],
+      "daily": [
+        {
+          "day": 1,
+          "elapsedSeconds": 180,
+          "openSeconds": 180,
+          "closingSeconds": 0,
+          "closingRevenue": 0,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "espresso"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                30,
+                4
+              ],
+              "reasons": {
+                "standardTaste": 30,
+                "skilledTaste": 4
+              },
+              "totalScore": 138
+            },
+            "served": 34,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 107.1599999999999,
+            "ingredientCost": 34,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "espresso": 34
+            },
+            "baked": {},
+            "rating": 4.0588235294117645,
+            "ratingCount": 34,
+            "ratingTraffic": 1.0147058823529411,
+            "day": 1,
+            "duration": 180.00000000000668,
+            "profit": 73.1599999999999,
+            "bestSeller": "espresso",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 0,
+          "carePurchases": 0,
+          "capital": 0,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 107.1599999999999,
+            "pantry": 16,
+            "care": 0
+          },
+          "reconciliationError": 0,
+          "checklist": [
+            {
+              "id": "early",
+              "done": false,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 1,
+                  "target": 5,
+                  "done": false
+                },
+                {
+                  "id": "machine1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "fastServed30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": false,
+              "goals": [
+                {
+                  "id": "americano10",
+                  "current": 0,
+                  "target": 10,
+                  "done": false
+                },
+                {
+                  "id": "barista1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "machine3",
+                  "current": 0,
+                  "target": 3,
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "cortado3",
+                  "current": 0,
+                  "target": 3,
+                  "done": false
+                },
+                {
+                  "id": "barista2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                },
+                {
+                  "id": "machine8",
+                  "current": 0,
+                  "target": 8,
+                  "done": false
+                },
+                {
+                  "id": "fastServed300",
+                  "current": 34,
+                  "target": 300,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "elapsedSeconds": 360.55,
+          "openSeconds": 180,
+          "closingSeconds": 0.55,
+          "closingRevenue": 19.113333333333344,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "espresso"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                0,
+                38
+              ],
+              "reasons": {
+                "skilledTaste": 38
+              },
+              "totalScore": 171
+            },
+            "served": 38,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 955.6666666666671,
+            "ingredientCost": 38,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "espresso": 38
+            },
+            "baked": {},
+            "rating": 4.42,
+            "ratingCount": 50,
+            "ratingTraffic": 1.105,
+            "day": 2,
+            "duration": 180.5500000000068,
+            "profit": 917.6666666666671,
+            "bestSeller": "espresso",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 27,
+          "carePurchases": 4.547473508864641e-13,
+          "capital": 42.822778880000016,
+          "goalRewards": 70,
+          "assets": {
+            "cash": 1063.0038877866666,
+            "pantry": 5,
+            "care": 0
+          },
+          "reconciliationError": -2.2737367544323206e-13,
+          "checklist": [
+            {
+              "id": "early",
+              "done": false,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "fastServed30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": false,
+              "goals": [
+                {
+                  "id": "americano10",
+                  "current": 0,
+                  "target": 10,
+                  "done": false
+                },
+                {
+                  "id": "barista1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "machine3",
+                  "current": 0,
+                  "target": 3,
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "cortado3",
+                  "current": 0,
+                  "target": 3,
+                  "done": false
+                },
+                {
+                  "id": "barista2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                },
+                {
+                  "id": "machine8",
+                  "current": 0,
+                  "target": 8,
+                  "done": false
+                },
+                {
+                  "id": "fastServed300",
+                  "current": 72,
+                  "target": 300,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "elapsedSeconds": 540.55,
+          "openSeconds": 180,
+          "closingSeconds": 0,
+          "closingRevenue": 0,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "americano"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                30,
+                8
+              ],
+              "reasons": {
+                "standardTaste": 30,
+                "skilledTaste": 8
+              },
+              "totalScore": 156
+            },
+            "served": 38,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 3572,
+            "ingredientCost": 38,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "americano": 38
+            },
+            "baked": {},
+            "rating": 4.2,
+            "ratingCount": 50,
+            "ratingTraffic": 1.05,
+            "day": 3,
+            "duration": 180.00000000000668,
+            "profit": 3534,
+            "bestSeller": "americano",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 41,
+          "carePurchases": 4.547473508864641e-13,
+          "capital": 965.5165044576843,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 3628.487383328982,
+            "pantry": 8,
+            "care": 0
+          },
+          "reconciliationError": -4.547473508864641e-13,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "fastServed30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": false,
+              "goals": [
+                {
+                  "id": "americano10",
+                  "current": 10,
+                  "target": 10,
+                  "done": true
+                },
+                {
+                  "id": "barista1",
+                  "current": 0,
+                  "target": 1,
+                  "done": false
+                },
+                {
+                  "id": "machine3",
+                  "current": 2,
+                  "target": 3,
+                  "done": false
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "cortado3",
+                  "current": 0,
+                  "target": 3,
+                  "done": false
+                },
+                {
+                  "id": "barista2",
+                  "current": 0,
+                  "target": 2,
+                  "done": false
+                },
+                {
+                  "id": "machine8",
+                  "current": 2,
+                  "target": 8,
+                  "done": false
+                },
+                {
+                  "id": "fastServed300",
+                  "current": 110,
+                  "target": 300,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 4,
+          "elapsedSeconds": 721.65,
+          "openSeconds": 180,
+          "closingSeconds": 1.1,
+          "closingRevenue": 198.52800000000025,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "americano"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                0,
+                36
+              ],
+              "reasons": {
+                "skilledTaste": 36
+              },
+              "totalScore": 162
+            },
+            "served": 36,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 8735.232000000004,
+            "ingredientCost": 36,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "americano": 36
+            },
+            "baked": {},
+            "rating": 4.44,
+            "ratingCount": 50,
+            "ratingTraffic": 1.11,
+            "day": 4,
+            "duration": 181.10000000000693,
+            "profit": 8699.232000000004,
+            "bestSeller": "americano",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 36,
+          "carePurchases": 0,
+          "capital": 3106.321814007892,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 9221.397569321094,
+            "pantry": 8,
+            "care": 0
+          },
+          "reconciliationError": -1.8189894035458565e-12,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "fastServed30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": true,
+              "goals": [
+                {
+                  "id": "americano10",
+                  "current": 10,
+                  "target": 10,
+                  "done": true
+                },
+                {
+                  "id": "barista1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "machine3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "cortado3",
+                  "current": 0,
+                  "target": 3,
+                  "done": false
+                },
+                {
+                  "id": "barista2",
+                  "current": 1,
+                  "target": 2,
+                  "done": false
+                },
+                {
+                  "id": "machine8",
+                  "current": 4,
+                  "target": 8,
+                  "done": false
+                },
+                {
+                  "id": "fastServed300",
+                  "current": 146,
+                  "target": 300,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 5,
+          "elapsedSeconds": 901.65,
+          "openSeconds": 180,
+          "closingSeconds": 0,
+          "closingRevenue": 0,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "americano"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                0,
+                40
+              ],
+              "reasons": {
+                "skilledTaste": 40
+              },
+              "totalScore": 180
+            },
+            "served": 40,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 14643.946666666669,
+            "ingredientCost": 40,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "americano": 40
+            },
+            "baked": {},
+            "rating": 4.5,
+            "ratingCount": 50,
+            "ratingTraffic": 1.125,
+            "day": 5,
+            "duration": 180.00000000000668,
+            "profit": 14603.946666666669,
+            "bestSeller": "americano",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 38,
+          "carePurchases": 0,
+          "capital": 9055.9105375269,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 14771.433698460864,
+            "pantry": 6,
+            "care": 0
+          },
+          "reconciliationError": -3.637978807091713e-12,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "fastServed30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": true,
+              "goals": [
+                {
+                  "id": "americano10",
+                  "current": 10,
+                  "target": 10,
+                  "done": true
+                },
+                {
+                  "id": "barista1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "machine3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "cortado3",
+                  "current": 0,
+                  "target": 3,
+                  "done": false
+                },
+                {
+                  "id": "barista2",
+                  "current": 2,
+                  "target": 2,
+                  "done": true
+                },
+                {
+                  "id": "machine8",
+                  "current": 5,
+                  "target": 8,
+                  "done": false
+                },
+                {
+                  "id": "fastServed300",
+                  "current": 186,
+                  "target": 300,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 6,
+          "elapsedSeconds": 1083.75,
+          "openSeconds": 180,
+          "closingSeconds": 2.1,
+          "closingRevenue": 470,
+          "closingIngredientCost": 1,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "americano"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                0,
+                40
+              ],
+              "reasons": {
+                "signatureTaste": 40
+              },
+              "totalScore": 200
+            },
+            "served": 40,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 20680,
+            "ingredientCost": 40,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "americano": 40
+            },
+            "baked": {},
+            "rating": 4.9,
+            "ratingCount": 50,
+            "ratingTraffic": 1.225,
+            "day": 6,
+            "duration": 182.10000000000716,
+            "profit": 20640,
+            "bestSeller": "americano",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 42,
+          "carePurchases": 0,
+          "capital": 10970.88174189804,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 24438.551956562824,
+            "pantry": 8,
+            "care": 0
+          },
+          "reconciliationError": -3.637978807091713e-12,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "fastServed30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": true,
+              "goals": [
+                {
+                  "id": "americano10",
+                  "current": 10,
+                  "target": 10,
+                  "done": true
+                },
+                {
+                  "id": "barista1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "machine3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "cortado3",
+                  "current": 0,
+                  "target": 3,
+                  "done": false
+                },
+                {
+                  "id": "barista2",
+                  "current": 2,
+                  "target": 2,
+                  "done": true
+                },
+                {
+                  "id": "machine8",
+                  "current": 8,
+                  "target": 8,
+                  "done": true
+                },
+                {
+                  "id": "fastServed300",
+                  "current": 226,
+                  "target": 300,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 7,
+          "elapsedSeconds": 1265.7,
+          "openSeconds": 180,
+          "closingSeconds": 1.9500000000000002,
+          "closingRevenue": 470,
+          "closingIngredientCost": 1,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "americano",
+            "cortado"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                17,
+                23
+              ],
+              "reasons": {
+                "signatureTaste": 23,
+                "standardTaste": 17
+              },
+              "totalScore": 183
+            },
+            "served": 40,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 13207,
+            "ingredientCost": 74,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "americano": 23,
+              "cortado": 17
+            },
+            "baked": {},
+            "rating": 4.66,
+            "ratingCount": 50,
+            "ratingTraffic": 1.165,
+            "day": 7,
+            "duration": 181.95000000000712,
+            "profit": 13133,
+            "bestSeller": "americano",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 99,
+          "carePurchases": 0,
+          "capital": 16000,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 21546.551956562824,
+            "pantry": 33,
+            "care": 0
+          },
+          "reconciliationError": -3.637978807091713e-12,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "fastServed30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": true,
+              "goals": [
+                {
+                  "id": "americano10",
+                  "current": 10,
+                  "target": 10,
+                  "done": true
+                },
+                {
+                  "id": "barista1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "machine3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "cortado3",
+                  "current": 1,
+                  "target": 3,
+                  "done": false
+                },
+                {
+                  "id": "barista2",
+                  "current": 2,
+                  "target": 2,
+                  "done": true
+                },
+                {
+                  "id": "machine8",
+                  "current": 8,
+                  "target": 8,
+                  "done": true
+                },
+                {
+                  "id": "fastServed300",
+                  "current": 266,
+                  "target": 300,
+                  "done": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "day": 8,
+          "elapsedSeconds": 1445.7,
+          "openSeconds": 180,
+          "closingSeconds": 0,
+          "closingRevenue": 0,
+          "closingIngredientCost": 0,
+          "queueRemovedAtClosing": 0,
+          "menu": [
+            "americano",
+            "cortado"
+          ],
+          "report": {
+            "reviews": {
+              "stars": [
+                0,
+                0,
+                0,
+                13,
+                28
+              ],
+              "reasons": {
+                "signatureTaste": 19,
+                "standardTaste": 13,
+                "skilledTaste": 9
+              },
+              "totalScore": 187.5
+            },
+            "served": 41,
+            "missed": 0,
+            "soldOut": 0,
+            "queueLost": 0,
+            "tableLost": 0,
+            "extraLost": 0,
+            "doorLost": 0,
+            "shortages": {},
+            "revenue": 19445.46666666665,
+            "ingredientCost": 85,
+            "petCost": 0,
+            "promotionCost": 0,
+            "sales": {
+              "americano": 19,
+              "cortado": 22
+            },
+            "baked": {},
+            "rating": 4.59,
+            "ratingCount": 50,
+            "ratingTraffic": 1.1475,
+            "day": 8,
+            "duration": 180.00000000000668,
+            "profit": 19360.46666666665,
+            "bestSeller": "cortado",
+            "outOfStock": [],
+            "shelfSoldOut": [],
+            "stale": {},
+            "staleCost": 0
+          },
+          "wasteCost": 0,
+          "stockPurchases": 70,
+          "carePurchases": 0,
+          "capital": 17920,
+          "goalRewards": 0,
+          "assets": {
+            "cash": 23002.018623229473,
+            "pantry": 18,
+            "care": 0
+          },
+          "reconciliationError": -7.275957614183426e-12,
+          "checklist": [
+            {
+              "id": "early",
+              "done": true,
+              "goals": [
+                {
+                  "id": "espresso5",
+                  "current": 5,
+                  "target": 5,
+                  "done": true
+                },
+                {
+                  "id": "machine1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "fastServed30",
+                  "current": 30,
+                  "target": 30,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "mid",
+              "done": true,
+              "goals": [
+                {
+                  "id": "americano10",
+                  "current": 10,
+                  "target": 10,
+                  "done": true
+                },
+                {
+                  "id": "barista1",
+                  "current": 1,
+                  "target": 1,
+                  "done": true
+                },
+                {
+                  "id": "machine3",
+                  "current": 3,
+                  "target": 3,
+                  "done": true
+                }
+              ]
+            },
+            {
+              "id": "late",
+              "done": false,
+              "goals": [
+                {
+                  "id": "cortado3",
+                  "current": 2,
+                  "target": 3,
+                  "done": false
+                },
+                {
+                  "id": "barista2",
+                  "current": 2,
+                  "target": 2,
+                  "done": true
+                },
+                {
+                  "id": "machine8",
+                  "current": 8,
+                  "target": 8,
+                  "done": true
+                },
+                {
+                  "id": "fastServed300",
+                  "current": 300,
+                  "target": 300,
+                  "done": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "final": {
+        "assets": {
+          "cash": 2849.6186232294713,
+          "pantry": 100,
+          "care": 0
+        },
+        "served": 307,
+        "items": {
+          "espresso": 10,
+          "americano": 25,
+          "latte": 1,
+          "cappuccino": 1,
+          "flatwhite": 1,
+          "cortado": 3,
+          "mocha": 0,
+          "vienna": 0,
+          "macchiato": 0,
+          "coldbrew": 0,
+          "dirty": 0,
+          "pourover": 0,
+          "creamcoffee": 0,
+          "affogato": 0,
+          "blacktea": 0,
+          "hotchoc": 0,
+          "lemontea": 0,
+          "chai": 0,
+          "fruittea": 0,
+          "hojicha": 0,
+          "matcha": 0,
+          "frappe": 0,
+          "smoothie": 0,
+          "milktea": 0,
+          "matchafloat": 0,
+          "roll": 0,
+          "bagel": 0,
+          "baguette": 0,
+          "cheesebun": 0,
+          "pretzel": 0,
+          "focaccia": 0,
+          "ciabatta": 0,
+          "raisinbread": 0,
+          "sourdough": 0,
+          "rye": 0,
+          "chocobread": 0,
+          "shokupan": 0,
+          "brioche": 0,
+          "fruitbrioche": 0,
+          "garlicbread": 0,
+          "donut": 0,
+          "scone": 0,
+          "cookie": 0,
+          "croissant": 0,
+          "painchoc": 0,
+          "brownie": 0,
+          "cinnamon": 0,
+          "muffin": 0,
+          "creampuff": 0,
+          "melonpan": 0,
+          "eggtart": 0,
+          "cake": 0,
+          "swissroll": 0,
+          "cheesecake": 0,
+          "macaron": 0
+        },
+        "upgrades": {
+          "marketing": 0,
+          "machine": 8,
+          "barista": 2,
+          "server": 0,
+          "cook": 0,
+          "tables": 0
+        },
+        "kitchen": false,
+        "regions": [],
+        "pets": [],
+        "taste": {
+          "served": {
+            "espresso": 72,
+            "americano": 196,
+            "cortado": 39
+          },
+          "signature": [
+            "americano"
+          ]
+        },
+        "comfort": 0,
+        "capital": 78131.85337677051,
+        "goalRewards": 70,
+        "operatingProfit": 80961.472,
+        "netLiquidChange": 2899.6186232294713,
+        "reconciliationError": -1.4551915228366852e-11
+      },
+      "limitations": [
+        "A reproducible legal purchasing policy, not an optimal player or a guarantee for every player.",
+        "Censoring at the explicit observation bound does not establish impossibility.",
+        "First-passage stage times are retained; final checklists are separately revalidated.",
+        "No manual boosts, emergency grants, injected capital, fixture assets, taste or stock. Tutorial rewards are claimed only when legally earned.",
+        "Menus and investments change only in preparation. All time is actual simulated open and closing time; preparation clicks take no simulated time."
+      ]
+    }
+  ]
+}

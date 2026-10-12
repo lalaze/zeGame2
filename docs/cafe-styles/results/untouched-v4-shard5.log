@@ -1,0 +1,27 @@
+
+ RUN  v5.0.3 /tmp/cafe-style-baseline-1791797523
+
+untouched-v4-shard5: common-assets/early/base/community/plain: 30/30
+untouched-v4-shard5: common-assets/early/feature/community/plain: 30/30
+untouched-v4-shard5: common-assets/early/rush/community/plain: 30/30
+untouched-v4-shard5: common-assets/mid/base/community/plain: 30/30
+untouched-v4-shard5: common-assets/mid/feature/community/plain: 30/30
+untouched-v4-shard5: common-assets/mid/rush/community/plain: 30/30
+untouched-v4-shard5: common-assets/late/base/community/plain: 30/30
+untouched-v4-shard5: common-assets/late/feature/community/plain: 30/30
+untouched-v4-shard5: common-assets/late/rush/community/plain: 30/30
+untouched-v4-shard5: route-purchases/early/base/community/plain: 30/30
+untouched-v4-shard5: route-purchases/early/feature/community/plain: 30/30
+untouched-v4-shard5: route-purchases/early/rush/community/plain: 30/30
+untouched-v4-shard5: route-purchases/mid/base/community/plain: 30/30
+untouched-v4-shard5: route-purchases/mid/feature/community/plain: 30/30
+untouched-v4-shard5: route-purchases/mid/rush/community/plain: 30/30
+untouched-v4-shard5: route-purchases/late/base/community/plain: 30/30
+untouched-v4-shard5: route-purchases/late/feature/community/plain: 30/30
+untouched-v4-shard5: route-purchases/late/rush/community/plain: 30/30
+
+ Test Files  1 passed (1)
+      Tests  7 passed | 1 skipped (8)
+   Start at  02:46:38
+   Duration  1365.70s (tests 100%)
+

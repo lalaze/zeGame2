@@ -1,3 +1,4 @@
+import { styleStationMultiplier } from './styles';
 import { isBakery, menuItems, recipe, servingsLeft } from './economy';
 import { batchSteps, STATION_SECONDS } from './kitchen';
 import type { IngredientId, ItemId } from './data';
@@ -18,7 +19,7 @@ export function operationStatus(state: GameState, sim: Sim): OperationStatus {
     const cook = sim.cooks.find((c) => c.batch?.item === empty.id);
     if (cook?.batch) {
       // Remaining station work is a lower bound: movement also takes time.
-      const work = Math.max(0, cook.batch.timer) + batchSteps(empty.id).slice(cook.batch.step + 1).reduce((n, s) => n + STATION_SECONDS[s], 0);
+      const work = Math.max(0, cook.batch.timer) + batchSteps(empty.id).slice(cook.batch.step + 1).reduce((n, s) => n + STATION_SECONDS[s] * styleStationMultiplier(state), 0);
       return { kind: 'baking', item: empty.id, seconds: Math.ceil(work) };
     }
     return { kind: 'shelf', item: empty.id };

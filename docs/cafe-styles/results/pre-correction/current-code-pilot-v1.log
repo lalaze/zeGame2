@@ -1,0 +1,46 @@
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+untouched-pilot-v1: common-assets/early/base/coffee/plain: 1/1
+untouched-pilot-v1: common-assets/early/base/bakery/plain: 1/1
+untouched-pilot-v1: common-assets/early/base/cats/plain: 1/1
+untouched-pilot-v1: common-assets/early/base/takeaway/plain: 1/1
+untouched-pilot-v1: common-assets/early/base/garden/plain: 1/1
+untouched-pilot-v1: common-assets/early/base/community/plain: 1/1
+untouched-pilot-v1: common-assets/early/feature/coffee/plain: 1/1
+untouched-pilot-v1: common-assets/early/feature/bakery/plain: 1/1
+untouched-pilot-v1: common-assets/early/feature/cats/plain: 1/1
+untouched-pilot-v1: common-assets/early/feature/takeaway/plain: 1/1
+untouched-pilot-v1: common-assets/early/feature/garden/plain: 1/1
+untouched-pilot-v1: common-assets/early/feature/community/plain: 1/1
+untouched-pilot-v1: common-assets/early/rush/coffee/plain: 1/1
+untouched-pilot-v1: common-assets/early/rush/bakery/plain: 1/1
+untouched-pilot-v1: common-assets/early/rush/cats/plain: 1/1
+untouched-pilot-v1: common-assets/early/rush/takeaway/plain: 1/1
+untouched-pilot-v1: common-assets/early/rush/garden/plain: 1/1
+untouched-pilot-v1: common-assets/early/rush/community/plain: 1/1
+ ❯ scripts/cafe-style-balance.test.ts (7 tests | 1 failed) 12271ms
+   × writes the resumable real-Sim six-style matrix 11731ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  scripts/cafe-style-balance.test.ts > writes the resumable real-Sim six-style matrix
+Error: Drain exceeded 300 seconds: common-assets/mid/base/coffee/plain
+ ❯ styleSample scripts/cafe-style-lab.ts:214:45
+    212|     sim.update(s, STYLE_DT);
+    213|     if (open) { openTicks++; liveOpen++; } else { closingTicks++; live…
+    214|     if (liveClosing > 300 / STYLE_DT) throw new Error(`Drain exceeded …
+       |                                             ^
+    215|     const operating = rolling.revenue + s.today.revenue - rolling.ingr…
+    216|     if (paybackSeconds === null && operating >= setup.capital) payback…
+ ❯ runStyleLab scripts/cafe-style-lab.ts:306:17
+ ❯ scripts/cafe-style-balance.test.ts:58:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 6 passed (7)
+   Start at  02:39:46
+   Duration  12.65s (tests 98%, transform 2%)
+

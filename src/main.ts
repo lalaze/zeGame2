@@ -16,7 +16,7 @@ import { acquireSaveSession, watchSavePage, type SaveSession } from './game/save
 import { applyTheme, comfort } from './game/decor';
 import { GuardedStorage } from './game/storage';
 import { isComposingKey, usesNativeKeyboard } from './ui/keyboard';
-import { createInitialState, type GameState } from './game/state';
+import { consumeFurnitureMovesOnLoad, createInitialState, type GameState } from './game/state';
 import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale, t, type Locale } from './i18n';
 import { CafeView } from './render/cafe-view';
 import { CafeGame } from './render/phaser/game';
@@ -30,6 +30,7 @@ import { ingredientName } from './ui/panel';
 import { updateReputationButton, showReputation } from './ui/reputation';
 import { showRegularGuests, updateRegularGuestsButton } from './ui/regular-guests';
 import { showPrepare } from './ui/prepare';
+import { showCafeStyles, updateCafeStyleButton } from './ui/cafe-styles';
 import { RegionsUI, areaName } from './ui/regions';
 import { FirstServiceGuide } from './ui/first-service';
 import { cafeInteractionEnabled } from './ui/cafe-interaction';
@@ -137,7 +138,9 @@ function fitCanvas(): void {
   const mobileDock = stage.querySelector<HTMLElement>('.mobile-stage-controls');
   const dockHeight = mobileDock ? mobileDock.offsetHeight + 12 : 0;
   const operation = $('operation-status');
-  const statusHeight = mobileDock && !operation.hidden ? operation.offsetHeight + 12 : mobileDock ? 0 : 44;
+  // Mobile service status shares the dock's second row; its height is already
+  // included above. Counting it twice would squeeze the café during first service.
+  const statusHeight = mobileDock?.contains(operation) ? 0 : mobileDock && !operation.hidden ? operation.offsetHeight + 12 : mobileDock ? 0 : 44;
   const rect = {
     width: stage.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) - 8,
     height: stage.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom) - 12 - statusHeight - dockHeight,
@@ -274,7 +277,7 @@ const arrangeStore = $<HTMLButtonElement>('arrange-store');
 const arrangeDone = $<HTMLButtonElement>('arrange-done');
 const arrangeFocus = new ArrangeFocus(panelRoot, arrangeDone);
 const sceneWrap = document.querySelector<HTMLElement>('.scene-wrap')!;
-dockMobileControls(stage, sceneWrap, [$('day-hud'), $('open-btn'), arrangeBar], fitCanvas);
+dockMobileControls(stage, sceneWrap, [$('day-hud'), $('cafe-style-btn'), $('open-btn'), arrangeBar, $('operation-status')], fitCanvas);
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const regionsUI = new RegionsUI($('area-nav'), $('area-edges'), $('region-card'), () => state, (area) => {
   scene.moveToArea(area, reducedMotion.matches);
@@ -430,6 +433,7 @@ const speedBtns = [...document.querySelectorAll<HTMLButtonElement>('[data-speed]
 function updateDayHud(): void {
   updateReputationButton(state);
   updateRegularGuestsButton(state);
+  updateCafeStyleButton(state);
   const open = state.phase !== 'prep';
   const closing = state.phase === 'closing';
   const time = closing ? t('day.closing') : open ? t('day.openFor', { time: formatOpenTime(state.dayTime) }) : t('day.closed');
@@ -496,6 +500,7 @@ function closeDay(): void {
 closeBtn.addEventListener('click', closeDay);
 $('reputation-btn').addEventListener('click', () => showReputation(state));
 $('regular-guests-btn').addEventListener('click', () => showRegularGuests(state, saveGame));
+$('cafe-style-btn').addEventListener('click', () => showCafeStyles(state, () => { saveGame(); panel.refresh(); updateDayHud(); }));
 operationBtn.addEventListener('click', () => {
   const status = operationMonitor.current;
   const detail = t(`ops.${status.kind}.detail`);
@@ -829,6 +834,11 @@ Promise.all([atMost(4000, cafe.ready), atMost(2000, document.fonts.ready)]).then
   requestAnimationFrame(() => {
     document.body.classList.add('ready');
     setTimeout(() => $('loader').remove(), 300);
+    const movedFurniture = consumeFurnitureMovesOnLoad(state);
+    if (movedFurniture > 0) {
+      saveGame();
+      toast(t('toast.furnitureMovedOnLoad', { n: movedFurniture }));
+    }
   }),
 );
 }

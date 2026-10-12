@@ -1,0 +1,22 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> tiny-bean-cafe@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+
+ Test Files  84 passed | 1 skipped (85)
+      Tests  901 passed | 13 skipped (914)
+   Start at  03:55:47
+   Duration  40.66s (tests 85%, transform 5%, environment 5%, import 4%)
+
+    Isolate  85 workers spawned · ~336ms startup each (spawn + environment, per file)
+             at least ~3.23s faster with isolate: false — reuses workers across files instead of one per file
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

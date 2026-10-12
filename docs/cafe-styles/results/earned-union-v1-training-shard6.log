@@ -1,0 +1,13 @@
+
+ RUN  v5.0.3 /tmp/cafe-style-earned-union-1791804425
+
+earned-union-v1-training-shard6: earned-union/late/base/latte+flatwhite/community: 30/30
+earned-union-v1-training-shard6: earned-union/late/base/espresso+blacktea/plain: 30/30
+earned-union-v1-training-shard6: earned-union/late/base/americano+cortado/coffee: 30/30
+earned-union-v1-training-shard6: earned-union/late/base/blacktea+scone/bakery: 30/30
+
+ Test Files  1 passed (1)
+      Tests  3 passed | 1 skipped (4)
+   Start at  04:27:05
+   Duration  614.35s (tests 100%)
+

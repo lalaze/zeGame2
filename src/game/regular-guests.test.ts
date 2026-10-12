@@ -10,7 +10,7 @@ import {
 import { openShop } from './day';
 import { Sim } from './sim';
 import { validSnapshot } from './sim-snapshot';
-import { createInitialState, deserialize, serialize, type GameState } from './state';
+import { createInitialState, deserialize, serialize, SAVE_VERSION, type GameState } from './state';
 
 const seeded = (initial: number) => {
   let seed = initial;
@@ -38,7 +38,7 @@ describe('regular guest progression', () => {
     expect(createInitialState(0).regularGuests).toEqual(emptyRegularGuests());
     const legacy = deserialize(JSON.stringify({ version: 12, day: 100, served: 99999, today: { served: 30, sales: { espresso: 50 } } }), 0);
     expect(legacy.regularGuests).toEqual(emptyRegularGuests());
-    expect(legacy.version).toBe(13);
+    expect(legacy.version).toBe(SAVE_VERSION);
     expect(regularGuestProgress(legacy, 'mina')).toBeUndefined();
     expect(regularGuestUnreadCount(legacy)).toBe(0);
   });

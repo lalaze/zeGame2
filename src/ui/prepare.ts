@@ -1,6 +1,6 @@
 import { canEmergencyRestock, emergencyRestock } from '../game/recovery';
 import { promotionPlan } from '../game/promotion';
-import { petTraffic } from '../game/pets';
+import { forecastPetTraffic } from '../game/pets';
 import { BAKE_STEP, type ItemId } from '../game/data';
 import { checkOpen } from '../game/day';
 import { canPrepareItem, bakeForForecast, dayDemand, expectedCustomers, isBakery, menuItems, readyServings, recipe, restock, restockQuote, setBakePlan, setOnMenu, suggestedBake, unlockedItems } from '../game/economy';
@@ -13,6 +13,7 @@ import { t } from '../i18n';
 import { tasteLabel } from './taste';
 import { itemArtwork, toDataURL } from '../render/sprites';
 import { showModal } from './modal';
+import { prepStyleSummary, showCafeStyles } from './cafe-styles';
 import { ingredientName, itemName } from './panel';
 
 export function showPrepare(state: GameState, onStart: () => void, onChange: () => void): void {
@@ -104,9 +105,10 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
         <p class="note">${t('prep.sharedIngredients')}</p>
         <p class="note">${t('rating.prep', { pct: trafficPercent(reputationTraffic(state.reputation)) })}</p>
         ${state.promotion ? `<p class="note">${t(state.promotion.paused ? 'promo.prepPaused' : 'promo.prep', { pct: Math.round(promotionPlan(state.promotion.id)!.boost * 100), seconds: Math.ceil(state.promotion.remaining) })}</p>` : ''}
-        ${state.pets.length ? `<p class="note">${t('pet.forecast', { pct: Math.round((petTraffic(state) - 1) * 100) })}</p>` : ''}
+        ${state.pets.length ? `<p class="note">${t('pet.forecast', { pct: Math.round((forecastPetTraffic(state) - 1) * 100) })}</p>` : ''}
         ${hasBakery ? `<p class="note">${t('prep.kitchen')}</p>` : ''}
       </details>`;
+    body.prepend(prepStyleSummary(state, () => showCafeStyles(state, onChange, () => showPrepare(state, onStart, onChange))));
     const start = document.querySelector<HTMLButtonElement>('.modal-actions [data-start]');
     if (start) {
       start.disabled = onMenu.size === 0;

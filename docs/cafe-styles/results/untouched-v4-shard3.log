@@ -1,0 +1,27 @@
+
+ RUN  v5.0.3 /tmp/cafe-style-baseline-1791797523
+
+untouched-v4-shard3: common-assets/early/base/takeaway/plain: 30/30
+untouched-v4-shard3: common-assets/early/feature/takeaway/plain: 30/30
+untouched-v4-shard3: common-assets/early/rush/takeaway/plain: 30/30
+untouched-v4-shard3: common-assets/mid/base/takeaway/plain: 30/30
+untouched-v4-shard3: common-assets/mid/feature/takeaway/plain: 30/30
+untouched-v4-shard3: common-assets/mid/rush/takeaway/plain: 30/30
+untouched-v4-shard3: common-assets/late/base/takeaway/plain: 30/30
+untouched-v4-shard3: common-assets/late/feature/takeaway/plain: 30/30
+untouched-v4-shard3: common-assets/late/rush/takeaway/plain: 30/30
+untouched-v4-shard3: route-purchases/early/base/takeaway/plain: 30/30
+untouched-v4-shard3: route-purchases/early/feature/takeaway/plain: 30/30
+untouched-v4-shard3: route-purchases/early/rush/takeaway/plain: 30/30
+untouched-v4-shard3: route-purchases/mid/base/takeaway/plain: 30/30
+untouched-v4-shard3: route-purchases/mid/feature/takeaway/plain: 30/30
+untouched-v4-shard3: route-purchases/mid/rush/takeaway/plain: 30/30
+untouched-v4-shard3: route-purchases/late/base/takeaway/plain: 30/30
+untouched-v4-shard3: route-purchases/late/feature/takeaway/plain: 30/30
+untouched-v4-shard3: route-purchases/late/rush/takeaway/plain: 30/30
+
+ Test Files  1 passed (1)
+      Tests  7 passed | 1 skipped (8)
+   Start at  02:46:38
+   Duration  390.67s (tests 100%)
+

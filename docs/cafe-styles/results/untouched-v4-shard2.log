@@ -1,0 +1,27 @@
+
+ RUN  v5.0.3 /tmp/cafe-style-baseline-1791797523
+
+untouched-v4-shard2: common-assets/early/base/cats/plain: 30/30
+untouched-v4-shard2: common-assets/early/feature/cats/plain: 30/30
+untouched-v4-shard2: common-assets/early/rush/cats/plain: 30/30
+untouched-v4-shard2: common-assets/mid/base/cats/plain: 30/30
+untouched-v4-shard2: common-assets/mid/feature/cats/plain: 30/30
+untouched-v4-shard2: common-assets/mid/rush/cats/plain: 30/30
+untouched-v4-shard2: common-assets/late/base/cats/plain: 30/30
+untouched-v4-shard2: common-assets/late/feature/cats/plain: 30/30
+untouched-v4-shard2: common-assets/late/rush/cats/plain: 30/30
+untouched-v4-shard2: route-purchases/early/base/cats/plain: 30/30
+untouched-v4-shard2: route-purchases/early/feature/cats/plain: 30/30
+untouched-v4-shard2: route-purchases/early/rush/cats/plain: 30/30
+untouched-v4-shard2: route-purchases/mid/base/cats/plain: 30/30
+untouched-v4-shard2: route-purchases/mid/feature/cats/plain: 30/30
+untouched-v4-shard2: route-purchases/mid/rush/cats/plain: 30/30
+untouched-v4-shard2: route-purchases/late/base/cats/plain: 30/30
+untouched-v4-shard2: route-purchases/late/feature/cats/plain: 30/30
+untouched-v4-shard2: route-purchases/late/rush/cats/plain: 30/30
+
+ Test Files  1 passed (1)
+      Tests  7 passed | 1 skipped (8)
+   Start at  02:46:38
+   Duration  1583.16s (tests 100%)
+

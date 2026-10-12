@@ -1,3 +1,4 @@
+import { styleStationMultiplier } from './styles';
 // The kitchen: a back-of-house room off the main café's left side, where cooks bake
 // fresh batches of breads and pastries while the shop is open.
 //
@@ -226,7 +227,7 @@ export function installedEquipment(state: GameState): Set<Equipment> {
 // ---------------------------------------------------------------- batches
 
 /** Includes station work and the actual aisle route at the current room size. */
-export function batchSeconds(item: ItemId): number {
+export function batchSeconds(item: ItemId, state?: GameState): number {
   let from = cookHome(0);
   let seconds = 0;
   for (const station of batchSteps(item)) {
@@ -234,7 +235,7 @@ export function batchSeconds(item: ItemId): number {
       seconds += Math.hypot(point.x - from.x, point.y - from.y) / 62;
       from = { ...point, facing: 'right' };
     }
-    seconds += STATION_SECONDS[station];
+    seconds += STATION_SECONDS[station] * styleStationMultiplier(state);
   }
   for (const point of kitchenPath(from, cookHome(0))) {
     seconds += Math.hypot(point.x - from.x, point.y - from.y) / 62;
@@ -248,10 +249,10 @@ export function bakeryPlan(state: GameState): Map<ItemId, { rate: number; lead: 
   const demand = dayDemand(state);
   const dishes = menuItems(state).filter((m) => isBakery(m.id));
   const cooks = Math.max(1, cookCount(state));
-  const cycle = dishes.reduce((sum, m) => sum + batchSeconds(m.id), 0) / cooks;
+  const cycle = dishes.reduce((sum, m) => sum + batchSeconds(m.id, state), 0) / cooks;
   return new Map(dishes.map((m) => {
     const rate = (demand.get(m.id) ?? 0) / DAY_SECONDS;
-    const lead = Math.max(batchSeconds(m.id), cycle);
+    const lead = Math.max(batchSeconds(m.id, state), cycle);
     // At most a forecast's worth; slow-selling dishes need only one spare serving.
     const trigger = Math.min(Math.ceil(rate * DAY_SECONDS), Math.max(1, Math.ceil(rate * lead) + 1));
     return [m.id, { rate, lead, trigger, morning: trigger }];
@@ -260,7 +261,7 @@ export function bakeryPlan(state: GameState): Map<ItemId, { rate: number; lead: 
 
 export function kitchenLoad(state: GameState): number {
   if (!state.kitchen) return 0;
-  return [...bakeryPlan(state)].reduce((sum, [id, p]) => sum + p.rate * batchSeconds(id) / COOK_BATCH, 0) / cookCount(state);
+  return [...bakeryPlan(state)].reduce((sum, [id, p]) => sum + p.rate * batchSeconds(id, state) / COOK_BATCH, 0) / cookCount(state);
 }
 
 export function nextBatch(state: GameState, baking: readonly ItemId[]): { item: ItemId; n: number } | null {

@@ -1,0 +1,27 @@
+
+ RUN  v5.0.3 /tmp/cafe-style-baseline-1791797523
+
+untouched-v4-shard1: common-assets/early/base/bakery/plain: 30/30
+untouched-v4-shard1: common-assets/early/feature/bakery/plain: 30/30
+untouched-v4-shard1: common-assets/early/rush/bakery/plain: 30/30
+untouched-v4-shard1: common-assets/mid/base/bakery/plain: 30/30
+untouched-v4-shard1: common-assets/mid/feature/bakery/plain: 30/30
+untouched-v4-shard1: common-assets/mid/rush/bakery/plain: 30/30
+untouched-v4-shard1: common-assets/late/base/bakery/plain: 30/30
+untouched-v4-shard1: common-assets/late/feature/bakery/plain: 30/30
+untouched-v4-shard1: common-assets/late/rush/bakery/plain: 30/30
+untouched-v4-shard1: route-purchases/early/base/bakery/plain: 30/30
+untouched-v4-shard1: route-purchases/early/feature/bakery/plain: 30/30
+untouched-v4-shard1: route-purchases/early/rush/bakery/plain: 30/30
+untouched-v4-shard1: route-purchases/mid/base/bakery/plain: 30/30
+untouched-v4-shard1: route-purchases/mid/feature/bakery/plain: 30/30
+untouched-v4-shard1: route-purchases/mid/rush/bakery/plain: 30/30
+untouched-v4-shard1: route-purchases/late/base/bakery/plain: 30/30
+untouched-v4-shard1: route-purchases/late/feature/bakery/plain: 30/30
+untouched-v4-shard1: route-purchases/late/rush/bakery/plain: 30/30
+
+ Test Files  1 passed (1)
+      Tests  7 passed | 1 skipped (8)
+   Start at  02:46:38
+   Duration  2649.67s (tests 100%)
+

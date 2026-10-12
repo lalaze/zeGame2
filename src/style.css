@@ -270,11 +270,13 @@ html:lang(zh) body {
 .scene-wrap.is-overview .area-edges,
 .scene-wrap.is-overview .region-card,
 .scene-wrap.is-overview .day-hud,
+.scene-wrap.is-overview .cafe-style-button,
 .scene-wrap.is-overview .open-btn,
 .scene-wrap.is-overview .arrange-bar,
 .scene-wrap.is-panning .area-edges,
 .scene-wrap.is-panning .region-card,
 .scene-wrap.is-panning .day-hud,
+.scene-wrap.is-panning .cafe-style-button,
 .scene-wrap.is-panning .open-btn,
 .scene-wrap.is-panning .arrange-bar { visibility: hidden; pointer-events: none; }
 
@@ -2080,4 +2082,68 @@ button.coins { display: block; width: 100%; min-height: 32px; padding: 0; border
   .money .coins { min-height: 44px; font-size: 19px; overflow-wrap: anywhere; }
   .money .rate { font-size: 12px; line-height: 1.25; }
   .row .buy .cost { font-size: 14px; }
+}
+
+/* Operating styles are a quiet café control, separate from ratings and regulars. */
+.cafe-style-button { position: absolute; top: 8px; right: 8px; left: auto; bottom: auto; z-index: 6; margin: 0; min-height: 36px; padding: 6px 10px; background: var(--cream); color: var(--green-dark); border: 0; box-shadow: var(--frame); font-size: 13px; }
+.scene-wrap.arranging .cafe-style-button { display: none; }
+.cafe-styles-modal { width: min(540px, 100%); }
+.cafe-styles, .cafe-styles > *, .prep-style, .prep-style > * { min-width: 0; overflow-wrap: anywhere; }
+.cafe-styles p { line-height: 1.5; }
+.style-intro { color: var(--muted); }
+.style-current { padding: 12px; border: 2px solid var(--wood-light); background: #fff8e8; }
+.style-current h3 { margin: 4px 0 8px; font-size: 19px; }
+.style-current h3:focus { outline: 2px solid var(--green-dark); outline-offset: 3px; }
+.style-eyebrow, .style-stage { font-size: 13px; color: var(--green-dark); }
+.style-next { margin: 12px 0; padding: 10px; background: #e3e8cb; border-left: 3px solid var(--green); }
+.style-next > b { font-size: 13px; color: var(--green-dark); }
+.style-next p:last-child { margin-bottom: 0; }
+.style-current > button { margin: 8px 3px 3px; }
+.style-picker, .style-details { margin-top: 12px; border: 1px solid var(--wood-light); padding: 6px 10px; }
+.style-picker summary, .style-details summary { min-height: 44px; align-content: center; cursor: pointer; color: var(--green-dark); }
+.style-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 4px 0 8px; }
+.style-choice { display: flex; flex-direction: column; gap: 5px; min-width: 0; min-height: 68px; padding: 10px; text-align: left; border: 2px solid var(--wood-light); color: var(--ink); background: var(--cream); }
+.style-choice b { font-size: 14px; line-height: 1.4; }
+.style-choice small { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.style-choice.style-mixed { grid-column: 1 / -1; min-height: 44px; }
+.style-choice[aria-pressed="true"] { background: #e3e8cb; border-color: var(--green-dark); box-shadow: inset 0 0 0 1px var(--green); }
+.style-choice .style-active-label { color: var(--green-dark); }
+.cafe-styles button, .cafe-styles-modal .modal-actions button { min-height: 44px; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.style-details h4 { margin: 12px 0 4px; font-size: 15px; }
+.style-stage-details ul { margin: 6px 0 12px; padding-left: 18px; font-size: 14px; line-height: 1.6; }
+.style-stage-details li { margin: 5px 0; }
+.style-stage-details .done { color: var(--green-dark); }
+.style-keep { padding: 4px 0; }
+.prep-style { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 12px; padding: 10px; background: #e3e8cb; border-left: 3px solid var(--green); }
+.prep-style > div { flex: 1 1 160px; }
+.prep-style b { font-size: 14px; }
+.prep-style p { margin-bottom: 0; }
+.prep-style button { flex: 0 1 auto; max-width: 100%; white-space: normal; }
+@media (max-width: 860px) {
+  .mobile-stage-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .mobile-stage-controls .day-hud { flex: 1 1 240px; width: auto; }
+  .mobile-stage-controls .cafe-style-button { position: static; flex: 0 0 auto; min-height: 44px; margin: 0 3px; }
+  .mobile-stage-controls:has(#open-btn:not([hidden])) { flex-wrap: nowrap; }
+  .mobile-stage-controls:has(#open-btn:not([hidden])) .day-hud { flex-basis: 85px; }
+  .mobile-stage-controls:has(#open-btn:not([hidden])) .open-btn { min-width: 0; margin-top: 3px; padding-inline: 8px; }
+  .mobile-stage-controls:has(.arrange-bar:not([hidden])) .cafe-style-button { display: none; }
+  .mobile-stage-controls .arrange-bar { flex-basis: 100%; }
+}
+@media (max-width: 480px) {
+  .style-current { padding: 10px; }
+  .style-choice { padding: 8px; }
+  .style-choice b { font-size: 13px; }
+  .cafe-styles-modal { padding: 14px 12px; }
+}
+
+.menu-style-prices { margin: 0 3px 12px; line-height: 1.5; overflow-wrap: anywhere; }
+
+/* During mobile service the clock/speed/close controls get their full row.
+   Style and service status share the second row, leaving the café a useful height. */
+@media (max-width: 860px) {
+  .mobile-stage-controls:not(:has(#open-btn:not([hidden]))) .day-hud { flex: 1 0 100%; width: 100%; }
+  .mobile-stage-controls .operation-status { flex: 1 1 200px; min-width: 0; max-width: none; margin: 0 3px; }
+}
+@media (max-width: 860px) and (min-height: 501px) {
+  .has-guide .stage { height: min(350px, 43dvh); }
 }

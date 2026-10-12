@@ -1,0 +1,14 @@
+
+ RUN  v5.0.3 /tmp/cafe-style-earned-union-1791804425
+
+earned-union-v1-training-shard2: earned-union/late/base/latte+flatwhite/bakery: 30/30
+earned-union-v1-training-shard2: earned-union/late/base/espresso+roll+croissant/cats: 30/30
+earned-union-v1-training-shard2: earned-union/late/base/espresso+blacktea/takeaway: 30/30
+earned-union-v1-training-shard2: earned-union/late/base/americano+cortado/garden: 30/30
+earned-union-v1-training-shard2: earned-union/late/base/blacktea+scone/community: 30/30
+
+ Test Files  1 passed (1)
+      Tests  3 passed | 1 skipped (4)
+   Start at  04:27:05
+   Duration  1071.45s (tests 100%)
+

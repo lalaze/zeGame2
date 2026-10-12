@@ -1,0 +1,63 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> tiny-bean-cafe@0.1.0 test
+> vitest run --reporter=dot
+
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+·····································································-···················································--···········-··········-······················································-························································stdout | src/game/living-cats.test.ts > bounded service yielding > keeps moving through 1200 seconds of the real seeded default-server simulation
+default-server yielding regression {
+  samples: [
+    { time: 300, lastMotion: 296.8 },
+    { time: 600, lastMotion: 588.3000000000001 },
+    { time: 1200, lastMotion: 1200 }
+  ],
+  longestBlocked: 2.0000000000000004,
+  sleepAt: 3.3000000000000003
+}
+
+······································································································-···--····························································-······················································································································-···················································································································································································································································································-·································--···································································-·-···-·····stdout | scripts/balance.test.ts > offers a different profitable menu when production, rather than arrivals, limits service
+┌─────────┬──────────┬───────────┬─────────┬────────┬──────┬───────┬────────┐
+│ (index) │ version  │ marketing │ menu    │ profit │ lost │ stale │ served │
+├─────────┼──────────┼───────────┼─────────┼────────┼──────┼───────┼────────┤
+│ 0       │ 'before' │ 0         │ 'fast'  │ 182    │ 0    │ 0     │ 72     │
+│ 1       │ 'before' │ 0         │ 'high'  │ 630    │ 0    │ 0     │ 72     │
+│ 2       │ 'before' │ 0         │ 'mixed' │ 147    │ 0    │ 5     │ 75     │
+│ 3       │ 'before' │ 0         │ 'all'   │ 762    │ 0    │ 21    │ 86     │
+│ 4       │ 'before' │ 25        │ 'fast'  │ 351    │ 0    │ 0     │ 145    │
+│ 5       │ 'before' │ 25        │ 'high'  │ 832    │ 0    │ 0     │ 101    │
+│ 6       │ 'before' │ 25        │ 'mixed' │ 331    │ 41   │ 0     │ 135    │
+│ 7       │ 'before' │ 25        │ 'all'   │ 1139   │ 7    │ 9     │ 120    │
+│ 8       │ 'after'  │ 0         │ 'fast'  │ 181    │ 0    │ 0     │ 72     │
+│ 9       │ 'after'  │ 0         │ 'high'  │ 538    │ 0    │ 0     │ 64     │
+│ 10      │ 'after'  │ 0         │ 'mixed' │ 317    │ 0    │ 6     │ 75     │
+│ 11      │ 'after'  │ 0         │ 'all'   │ 759    │ 0    │ 20    │ 80     │
+│ 12      │ 'after'  │ 25        │ 'fast'  │ 507    │ 0    │ 0     │ 215    │
+│ 13      │ 'after'  │ 25        │ 'high'  │ 498    │ 0    │ 0     │ 64     │
+│ 14      │ 'after'  │ 25        │ 'mixed' │ 652    │ 78   │ 0     │ 183    │
+│ 15      │ 'after'  │ 25        │ 'all'   │ 852    │ 1    │ 19    │ 79     │
+└─────────┴──────────┴───────────┴─────────┴────────┴──────┴───────┴────────┘
+┌─────────┬──────────┬────────┬──────┬───────┬────────┐
+│ (index) │ clicks   │ profit │ lost │ stale │ served │
+├─────────┼──────────┼────────┼──────┼───────┼────────┤
+│ 0       │ 'none'   │ 852    │ 1    │ 19    │ 79     │
+│ 1       │ '1/sec'  │ 1087   │ 2    │ 12    │ 102    │
+│ 2       │ '10/sec' │ 1152   │ 4    │ 12    │ 100    │
+└─────────┴──────────┴────────┴──────┴───────┴────────┘
+
+·
+
+ Test Files  87 passed | 1 skipped (88)
+      Tests  919 passed | 17 skipped (936)
+   Start at  07:04:34
+   Duration  37.20s (tests 86%, environment 5%, transform 5%, import 4%)
+
+    Isolate  88 workers spawned · ~275ms startup each (spawn + environment, per file)
+             at least ~2.75s faster with isolate: false — reuses workers across files instead of one per file
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

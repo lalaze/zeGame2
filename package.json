@@ -20,7 +20,10 @@
     "balance:long-supplement": "ECONOMY_LONG_HORIZON_SUPPLEMENT=1 vitest run scripts/economy-long-horizon-supplement.test.ts --silent=false --disableConsoleIntercept",
     "balance:fixed-clock": "FIXED_CLOCK=1 vitest run scripts/economy-fixed-clock.test.ts --silent=false --disableConsoleIntercept",
     "balance:recovery": "EMERGENCY_RECOVERY=1 EMERGENCY_RECOVERY_LABEL=emergency-recovery-v2 vitest run scripts/economy-recovery.test.ts --silent=false --disableConsoleIntercept",
-    "balance:restore": "node scripts/restore-economy-evidence.mjs"
+    "balance:restore": "node scripts/restore-economy-evidence.mjs",
+    "balance:routes": "vitest run scripts/cafe-style-balance.test.ts --silent=false --disableConsoleIntercept",
+    "balance:routes:full": "CAFE_STYLE_LAB=1 vitest run scripts/cafe-style-balance.test.ts --silent=false --disableConsoleIntercept",
+    "balance:routes:progression": "CAFESTYLE_PROGRESSION=1 vitest run scripts/cafe-style-progression.test.ts --silent=false --disableConsoleIntercept"
   },
   "devDependencies": {
     "happy-dom": "^20.14.6",

@@ -1,0 +1,76 @@
+{
+  "before": {
+    "viewport": [
+      390,
+      844
+    ],
+    "overflow": false,
+    "focus": "cats",
+    "phase": "prep",
+    "coins": 11.470599443718584,
+    "handOffs": {
+      "tableServed": 45,
+      "catServed": 0,
+      "fastServed": 28,
+      "teaPairs": 0
+    },
+    "boxes": {
+      "#cafe-style-btn": {
+        "x": 108,
+        "y": 145.1875,
+        "w": 53.765625,
+        "h": 44
+      },
+      ".day-controls": null,
+      ".modal": null,
+      ".modal-body": null,
+      ".cafe-styles": null,
+      ".style-detail": null,
+      ".prep-style": null,
+      "#canvas-wrap": null,
+      ".stage": {
+        "x": 0,
+        "y": 128,
+        "w": 390,
+        "h": 360
+      }
+    }
+  },
+  "after": {
+    "viewport": [
+      390,
+      844
+    ],
+    "overflow": false,
+    "focus": "takeaway",
+    "phase": "prep",
+    "coins": 11.470599443718584,
+    "handOffs": {
+      "tableServed": 45,
+      "catServed": 0,
+      "fastServed": 28,
+      "teaPairs": 0
+    },
+    "boxes": {
+      "#cafe-style-btn": {
+        "x": 108,
+        "y": 145.1875,
+        "w": 53.765625,
+        "h": 44
+      },
+      ".day-controls": null,
+      ".modal": null,
+      ".modal-body": null,
+      ".cafe-styles": null,
+      ".style-detail": null,
+      ".prep-style": null,
+      "#canvas-wrap": null,
+      ".stage": {
+        "x": 0,
+        "y": 128,
+        "w": 390,
+        "h": 360
+      }
+    }
+  }
+}

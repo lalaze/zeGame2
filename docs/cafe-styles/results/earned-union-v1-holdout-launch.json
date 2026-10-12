@@ -1,0 +1,11 @@
+{
+  "startedAt": "2026-10-12T11:46:00.524Z",
+  "selectionFile": "docs/cafe-styles/results/earned-union-v1-training-selection.json",
+  "selectionSha256": "0f9361c183d690a3f933526a03b335405d838b26350c93c512ab306f3c7799a8",
+  "cohort": "holdout",
+  "pressures": [
+    "base"
+  ],
+  "shards": 8,
+  "expectedSamples": 1050
+}
