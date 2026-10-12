@@ -1,0 +1,138 @@
+{
+  "baselineCommit": "57df94e60899a3067d1313a2980d32b4d591be48",
+  "allBaselineFilesMatchGitCommit": true,
+  "files": [
+    {
+      "file": "src/game/customer-cast.ts",
+      "baselineSha256": "3bd0c0b3e368b00c2616b6b20773ebcf9ed6704e157607311204cab603557a1c",
+      "candidateSha256": "3bd0c0b3e368b00c2616b6b20773ebcf9ed6704e157607311204cab603557a1c",
+      "changed": false
+    },
+    {
+      "file": "src/game/data.ts",
+      "baselineSha256": "78b1528caed738256bc6d5c7ad3ded384c82a0d2490dacf1f9fe6bec79450a4f",
+      "candidateSha256": "78b1528caed738256bc6d5c7ad3ded384c82a0d2490dacf1f9fe6bec79450a4f",
+      "changed": false
+    },
+    {
+      "file": "src/game/day.ts",
+      "baselineSha256": "1ad7b98d19d9d3962ec58473eba55a8a7bec331e2c52e895a98f23a883ad18ef",
+      "candidateSha256": "1ad7b98d19d9d3962ec58473eba55a8a7bec331e2c52e895a98f23a883ad18ef",
+      "changed": false
+    },
+    {
+      "file": "src/game/decor.ts",
+      "baselineSha256": "0fd08f6c76ff8c333c5e75637ac810b6c0a824ed708ee19d66e696a56171124f",
+      "candidateSha256": "0fd08f6c76ff8c333c5e75637ac810b6c0a824ed708ee19d66e696a56171124f",
+      "changed": false
+    },
+    {
+      "file": "src/game/economy.ts",
+      "baselineSha256": "36e3f4972aac509f7c4428a80b7bcca4daebfa730836cf5c6acbe5db420713aa",
+      "candidateSha256": "d8adc48404eeff7c8d8165fcaa262eb46d35054ec64689a79c9bfd681604cd94",
+      "changed": true
+    },
+    {
+      "file": "src/game/format.ts",
+      "baselineSha256": "405318cf19634d0582acb06599354147ef00192c1650345c25b5f90d8ff8812e",
+      "candidateSha256": "405318cf19634d0582acb06599354147ef00192c1650345c25b5f90d8ff8812e",
+      "changed": false
+    },
+    {
+      "file": "src/game/furniture.ts",
+      "baselineSha256": "596813af1848e20e003ee3f36b82a4b4e64283bd4c77c454b07f9d8c9a17f678",
+      "candidateSha256": "596813af1848e20e003ee3f36b82a4b4e64283bd4c77c454b07f9d8c9a17f678",
+      "changed": false
+    },
+    {
+      "file": "src/game/goals.ts",
+      "baselineSha256": "52957bbbf0f6a0ae723f86e7b8f12a305e684eae0605157ecdf25205cdd0f141",
+      "candidateSha256": "52957bbbf0f6a0ae723f86e7b8f12a305e684eae0605157ecdf25205cdd0f141",
+      "changed": false
+    },
+    {
+      "file": "src/game/kitchen.ts",
+      "baselineSha256": "c0c3057b178333dec1921788825c1a92da7effb3dd509e5c70c3c2b821e1f3a3",
+      "candidateSha256": "1af821481a600366a0f0e0713ce9d71f92ebd73bcb1938c4e1fce9deef5be112",
+      "changed": true
+    },
+    {
+      "file": "src/game/layout.ts",
+      "baselineSha256": "3d267eb647a3a6b03f5be74249bd09dd750093ba73c1e104f7d4e51e0dfd1835",
+      "candidateSha256": "3d267eb647a3a6b03f5be74249bd09dd750093ba73c1e104f7d4e51e0dfd1835",
+      "changed": false
+    },
+    {
+      "file": "src/game/navigation.ts",
+      "baselineSha256": "2433f3aceedf54b2acf35ab2c27621b04cf921a900d79ee53226f634f38885f2",
+      "candidateSha256": "2433f3aceedf54b2acf35ab2c27621b04cf921a900d79ee53226f634f38885f2",
+      "changed": false
+    },
+    {
+      "file": "src/game/operations.ts",
+      "baselineSha256": "4c8dcc404950ba463fe80b043eabb39480d809ae3c18bdb641bc165012ce16cc",
+      "candidateSha256": "4c8dcc404950ba463fe80b043eabb39480d809ae3c18bdb641bc165012ce16cc",
+      "changed": false
+    },
+    {
+      "file": "src/game/pets.ts",
+      "baselineSha256": "2eefb75e6cc9a597eec8787cb73c0636cfb0365cdd0ac288f26d3804602f282e",
+      "candidateSha256": "2eefb75e6cc9a597eec8787cb73c0636cfb0365cdd0ac288f26d3804602f282e",
+      "changed": false
+    },
+    {
+      "file": "src/game/promotion.ts",
+      "baselineSha256": "e53a5d73f34f5ca080fa4b4bf60c32fe3fa27687dbe585df9fba6cfd1f05522e",
+      "candidateSha256": "e53a5d73f34f5ca080fa4b4bf60c32fe3fa27687dbe585df9fba6cfd1f05522e",
+      "changed": false
+    },
+    {
+      "file": "src/game/regions.ts",
+      "baselineSha256": "4a96195839a66a47181bb957c1b8d36a27ec4c84903ed4109b070f3fe4dbed3f",
+      "candidateSha256": "4a96195839a66a47181bb957c1b8d36a27ec4c84903ed4109b070f3fe4dbed3f",
+      "changed": false
+    },
+    {
+      "file": "src/game/reputation.ts",
+      "baselineSha256": "b5f49e9f7f9c0812d393b6c7b3fd10bc4292c3b21cbd0be66940156705bd4e4c",
+      "candidateSha256": "b5f49e9f7f9c0812d393b6c7b3fd10bc4292c3b21cbd0be66940156705bd4e4c",
+      "changed": false
+    },
+    {
+      "file": "src/game/save-session.ts",
+      "baselineSha256": "10ec6952f497a058eb655c609c8b61a342f0b10b33e2952a16d5e5bcce6e62df",
+      "candidateSha256": "10ec6952f497a058eb655c609c8b61a342f0b10b33e2952a16d5e5bcce6e62df",
+      "changed": false
+    },
+    {
+      "file": "src/game/sim-snapshot.ts",
+      "baselineSha256": "0c7708db74b3bce5dac8cebf9b77dc9d4624b47c60a70e83c78808eb49230644",
+      "candidateSha256": "0c7708db74b3bce5dac8cebf9b77dc9d4624b47c60a70e83c78808eb49230644",
+      "changed": false
+    },
+    {
+      "file": "src/game/sim.ts",
+      "baselineSha256": "30c6de0905282c55cf604d90bbfa0e7df056c583e0bdb9318bd74c71f3bf17ac",
+      "candidateSha256": "30c6de0905282c55cf604d90bbfa0e7df056c583e0bdb9318bd74c71f3bf17ac",
+      "changed": false
+    },
+    {
+      "file": "src/game/state.ts",
+      "baselineSha256": "ce935b6a29274c4787ce2db375e8cc811d7548a0c4994d5e7d4d3e9ccc275fa1",
+      "candidateSha256": "ce935b6a29274c4787ce2db375e8cc811d7548a0c4994d5e7d4d3e9ccc275fa1",
+      "changed": false
+    },
+    {
+      "file": "src/game/storage.ts",
+      "baselineSha256": "558558813a393d102903bd14113afb231e495b47ddbe46b184d17b031bdb1b68",
+      "candidateSha256": "558558813a393d102903bd14113afb231e495b47ddbe46b184d17b031bdb1b68",
+      "changed": false
+    },
+    {
+      "file": "src/game/taste.ts",
+      "baselineSha256": "cf24e2cdf4c50cc22cf686123c0abef2a1fdad1029fc990a813e9ccebf104ccc",
+      "candidateSha256": "cf24e2cdf4c50cc22cf686123c0abef2a1fdad1029fc990a813e9ccebf104ccc",
+      "changed": false
+    }
+  ]
+}

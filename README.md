@@ -11,6 +11,9 @@ npm run dev       # http://localhost:5173 (also reachable from your phone on the
 npm run build     # static site in dist/ that you can host anywhere (GitHub Pages, Netlify, …)
 npm test
 npm run balance   # seeded menu and clicking comparisons
+npm run balance:restore   # restore checksum-verified audit JSON from tracked gzip
+npm run balance:recovery  # current one-bean recovery, 30 fixed seeds per case
+npm run balance:compare   # verify matched baseline/candidate experiment artifacts
 ```
 
 ## How it works
@@ -169,3 +172,16 @@ Stock forecasts account for only the remaining campaign time within the forecast
 window and retain the existing service-capacity limit. Traffic is not guaranteed
 sales or profit. Integration tests cover real extra visits and resulting stockout
 reviews, alongside booking, expiry, pause, settlement and save behavior.
+
+
+## Reproducible economic audit
+
+The fixed-seed audit, raw evidence, recovery constraints and exact reproduction commands are in [docs/long-task](docs/long-task/README.md). It separates operating profit from purchase cash flow, charges recipe/kitchen/cat capital, values unused inventory and prepaid care/promotion, and records unrecovered investment as censored. Long experiments are opt-in; ordinary `npm test` includes fast economic-invariant and runner-design tests.
+
+Cash-constrained forecast restocking now avoids buying unusable fragments when an affordable complete selected recipe is available. If no complete recipe can be funded, it preserves the available cash. Existing ready shelf or paid in-production stock retains the normal proportional restocking path. Ingredient purchases reject invalid quantities, and bakery completion cannot create stock without an already-paid batch. These safeguards do not alter menu prices, cat/promotion bonuses or progression milestones.
+
+Historical strict equal-total-simulation-time supplement: `balance:fixed-clock` ran30 fixed seeds per representative route for exactly1800 seconds each, including closing time. Reproduce older generators only in a disposable copy using the source instructions in `docs/long-task/README.md`; do not overwrite restored historical evidence. See `docs/long-task/FIXED-CLOCK.md`; the larger original matrix equalizes open windows instead.
+
+One-bean emergency recovery is available from preparation only when normal stock, buying and reward paths cannot help. Run `npm run balance:recovery` for 30-seed exact-clock rescue and unaffected-normal-play comparisons; see `docs/long-task/EMERGENCY-RECOVERY.md` and `RECOVERY-DECISION.md`.
+
+Audit data is committed losslessly compressed; run `npm run balance:restore` before replay/comparison commands. Checksums and details: `docs/long-task/COMPRESSED-EVIDENCE.json`.

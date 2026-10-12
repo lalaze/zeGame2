@@ -345,8 +345,9 @@ export const usedBy = (state: GameState, ing: IngredientId) =>
   unlockedItems(state).filter((m) => canPrepareItem(state, m.id) && RECIPES[m.id][ing]);
 
 export function buyIngredient(state: GameState, id: IngredientId, count: number): boolean {
+  if (!Number.isSafeInteger(count) || count <= 0) return false;
   const cost = ingredientDef(id).cost * count;
-  if (count <= 0 || cost > state.coins) return false;
+  if (cost > state.coins) return false;
   state.coins -= cost;
   state.pantry[id] += count;
   return true;
@@ -403,14 +404,31 @@ export function restockQuote(state: GameState): { buy: Partial<Record<Ingredient
   return { buy, cost };
 }
 
-/** Tops up the pantry for a day; if money is short, every shortfall is filled by the same share. */
+/** Tops up a forecast proportionally, prioritizing one complete recipe when cash is scarce. */
 export function restock(state: GameState): boolean {
   const q = restockQuote(state);
   if (q.cost <= 0 || state.coins <= 0) return false;
   const share = Math.min(1, state.coins / q.cost);
+  let buy = (Object.entries(q.buy) as [IngredientId, number][])
+    .map(([ing, n]) => [ing, Math.floor(n * share)] as [IngredientId, number]);
+  const projected = { ...state, pantry: { ...state.pantry } };
+  for (const [ing, count] of buy) projected.pantry[ing] += count;
+  const items = menuItems(state);
+  const hasSupply = items.some(({ id }) => servingsLeft(projected, id) >= 1 ||
+    isBakery(id) && ((state.shelf[id] ?? 0) >= 1 || (state.inProduction[id] ?? 0) >= 1));
+  if (!hasSupply) {
+    // Rounding a small budget across ingredients can buy fragments of several
+    // recipes while completing none. Keep a route back to earning revenue.
+    const recipes = items.map(({ id }) => {
+      const deficits = recipe(id).map(([ing, n]) => [ing, Math.max(0, n - state.pantry[ing])] as [IngredientId, number]);
+      const cost = deficits.reduce((sum, [ing, n]) => sum + ingredientDef(ing).cost * n, 0);
+      return { deficits, cost };
+    }).filter(({ cost }) => cost > 0 && cost <= state.coins).sort((a, b) => a.cost - b.cost);
+    if (!recipes.length) return false;
+    buy = recipes[0].deficits;
+  }
   let bought = false;
-  for (const [ing, n] of Object.entries(q.buy) as [IngredientId, number][]) {
-    const count = Math.floor(n * share);
+  for (const [ing, count] of buy) {
     if (count > 0 && buyIngredient(state, ing, count)) bought = true;
   }
   return bought;

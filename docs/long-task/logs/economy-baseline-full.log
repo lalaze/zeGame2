@@ -1,0 +1,131 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2-baseline-57df94e
+
+baseline: early/initial/none: 30 seeds in 3.5s (1/98)
+baseline: early/initial/cat: 30 seeds in 3.7s (2/98)
+baseline: early/initial/clipLocal: 30 seeds in 4.4s (3/98)
+baseline: early/initial/cat-clipLocal: 30 seeds in 4.6s (4/98)
+baseline: early/initial/clipStar: 30 seeds in 5.0s (5/98)
+baseline: early/initial/cat-clipStar: 30 seeds in 5.4s (6/98)
+baseline: early/initial/noteLocal: 30 seeds in 4.0s (7/98)
+baseline: early/initial/cat-noteLocal: 30 seeds in 4.3s (8/98)
+baseline: early/initial/noteStar: 30 seeds in 4.0s (9/98)
+baseline: early/initial/cat-noteStar: 30 seeds in 4.8s (10/98)
+baseline: early/initial/latte-unlock: 30 seeds in 3.5s (11/98)
+baseline: early/initial/kitchen-roll: 30 seeds in 21.7s (12/98)
+baseline: early/initial/espresso-ten: 30 seeds in 3.6s (13/98)
+baseline: early/initial/upgrade-espresso: 30 seeds in 3.6s (14/98)
+baseline: early/initial/upgrade-machine: 30 seeds in 3.4s (15/98)
+baseline: early/initial/upgrade-marketing: 30 seeds in 3.8s (16/98)
+baseline: early/initial/scarce-recover: 30 seeds in 3.0s (17/98)
+baseline: early/initial/poor-rating: 30 seeds in 3.5s (18/98)
+baseline: early/initial/zero-stock: 30 seeds in 1.9s (19/98)
+baseline: early/initial/one-bean: 30 seeds in 3.3s (20/98)
+baseline: early/initial/one-coin-shared: 30 seeds in 2.4s (21/98)
+baseline: early/initial/nine-coin-complex: 30 seeds in 2.2s (22/98)
+baseline: mid/fast/none: 30 seeds in 12.0s (23/98)
+baseline: mid/fast/cat: 30 seeds in 13.2s (24/98)
+baseline: mid/fast/clipLocal: 30 seeds in 12.7s (25/98)
+baseline: mid/fast/cat-clipLocal: 30 seeds in 14.4s (26/98)
+baseline: mid/fast/clipStar: 30 seeds in 15.9s (27/98)
+baseline: mid/fast/cat-clipStar: 30 seeds in 14.2s (28/98)
+baseline: mid/fast/noteLocal: 30 seeds in 10.5s (29/98)
+baseline: mid/fast/cat-noteLocal: 30 seeds in 11.7s (30/98)
+baseline: mid/fast/noteStar: 30 seeds in 12.1s (31/98)
+baseline: mid/fast/cat-noteStar: 30 seeds in 12.2s (32/98)
+baseline: mid/high/none: 30 seeds in 10.4s (33/98)
+baseline: mid/drinks/none: 30 seeds in 12.6s (34/98)
+baseline: mid/bakery/none: 30 seeds in 35.1s (35/98)
+baseline: mid/mixed/none: 30 seeds in 22.2s (36/98)
+baseline: mid/mixed/cat: 30 seeds in 22.2s (37/98)
+baseline: mid/mixed/clipLocal: 30 seeds in 6.0s (38/98)
+baseline: mid/mixed/cat-clipLocal: 30 seeds in 6.3s (39/98)
+baseline: mid/mixed/clipStar: 30 seeds in 6.3s (40/98)
+baseline: mid/mixed/cat-clipStar: 30 seeds in 5.9s (41/98)
+baseline: mid/mixed/noteLocal: 30 seeds in 8.7s (42/98)
+baseline: mid/mixed/cat-noteLocal: 30 seeds in 6.9s (43/98)
+baseline: mid/mixed/noteStar: 30 seeds in 5.7s (44/98)
+baseline: mid/mixed/cat-noteStar: 30 seeds in 5.1s (45/98)
+baseline: mid/all/none: 30 seeds in 214.2s (46/98)
+baseline: mid/all/cat: 30 seeds in 211.3s (47/98)
+baseline: mid/all/premium-cat: 30 seeds in 214.5s (48/98)
+baseline: mid/all/three-cats: 30 seeds in 202.4s (49/98)
+baseline: mid/all/three-cats-noteStar: 30 seeds in 201.0s (50/98)
+baseline: mid/all/clipLocal: 30 seeds in 202.2s (51/98)
+baseline: mid/all/cat-clipLocal: 30 seeds in 214.8s (52/98)
+baseline: mid/all/clipStar: 30 seeds in 201.5s (53/98)
+baseline: mid/all/cat-clipStar: 30 seeds in 203.8s (54/98)
+baseline: mid/all/noteLocal: 30 seeds in 211.4s (55/98)
+baseline: mid/all/cat-noteLocal: 30 seeds in 204.7s (56/98)
+baseline: mid/all/noteStar: 30 seeds in 202.0s (57/98)
+baseline: mid/all/cat-noteStar: 30 seeds in 223.8s (58/98)
+baseline: mid/all/scarce-recover: 30 seeds in 281.3s (59/98)
+baseline: mid/all/poor-rating: 30 seeds in 198.3s (60/98)
+baseline: expanded/fast/none: 30 seeds in 35.5s (61/98)
+baseline: expanded/fast/cat: 30 seeds in 34.6s (62/98)
+baseline: expanded/fast/clipLocal: 30 seeds in 34.3s (63/98)
+baseline: expanded/fast/cat-clipLocal: 30 seeds in 38.5s (64/98)
+baseline: expanded/fast/clipStar: 30 seeds in 35.6s (65/98)
+baseline: expanded/fast/cat-clipStar: 30 seeds in 36.3s (66/98)
+baseline: expanded/fast/noteLocal: 30 seeds in 34.6s (67/98)
+baseline: expanded/fast/cat-noteLocal: 30 seeds in 36.7s (68/98)
+baseline: expanded/fast/noteStar: 30 seeds in 34.9s (69/98)
+baseline: expanded/fast/cat-noteStar: 30 seeds in 37.7s (70/98)
+baseline: expanded/high/none: 30 seeds in 32.3s (71/98)
+baseline: expanded/drinks/none: 30 seeds in 36.6s (72/98)
+baseline: expanded/bakery/none: 30 seeds in 15.7s (73/98)
+baseline: expanded/mixed/none: 30 seeds in 107.1s (74/98)
+baseline: expanded/mixed/cat: 30 seeds in 105.0s (75/98)
+baseline: expanded/mixed/clipLocal: 30 seeds in 102.0s (76/98)
+baseline: expanded/mixed/cat-clipLocal: 30 seeds in 113.3s (77/98)
+baseline: expanded/mixed/clipStar: 30 seeds in 104.4s (78/98)
+baseline: expanded/mixed/cat-clipStar: 30 seeds in 105.1s (79/98)
+baseline: expanded/mixed/noteLocal: 30 seeds in 114.8s (80/98)
+baseline: expanded/mixed/cat-noteLocal: 30 seeds in 116.5s (81/98)
+baseline: expanded/mixed/noteStar: 30 seeds in 107.7s (82/98)
+baseline: expanded/mixed/cat-noteStar: 30 seeds in 116.3s (83/98)
+baseline: expanded/all/none: 30 seeds in 191.1s (84/98)
+baseline: expanded/all/cat: 30 seeds in 180.4s (85/98)
+baseline: expanded/all/premium-cat: 30 seeds in 197.4s (86/98)
+baseline: expanded/all/three-cats: 30 seeds in 189.7s (87/98)
+baseline: expanded/all/three-cats-noteStar: 30 seeds in 190.9s (88/98)
+baseline: expanded/all/clipLocal: 30 seeds in 196.6s (89/98)
+baseline: expanded/all/cat-clipLocal: 30 seeds in 196.4s (90/98)
+baseline: expanded/all/clipStar: 30 seeds in 210.8s (91/98)
+baseline: expanded/all/cat-clipStar: 30 seeds in 201.6s (92/98)
+baseline: expanded/all/noteLocal: 30 seeds in 195.8s (93/98)
+baseline: expanded/all/cat-noteLocal: 30 seeds in 186.5s (94/98)
+baseline: expanded/all/noteStar: 30 seeds in 188.7s (95/98)
+baseline: expanded/all/cat-noteStar: 30 seeds in 174.9s (96/98)
+baseline: expanded/all/scarce-recover: 30 seeds in 724.6s (97/98)
+baseline: expanded/all/poor-rating: 30 seeds in 198.8s (98/98)
+ ❯ scripts/economy-lab.test.ts (5 tests | 1 failed) 8530487ms
+   × writes complete reproducible economy experiment batches 8528670ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  scripts/economy-lab.test.ts > writes complete reproducible economy experiment batches
+Error: Test timed out in 7200000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ scripts/economy-lab.test.ts:43:43
+     41| // and resumable. Full command: ECONOMY_LAB=1 ECONOMY_LABEL=baseline n…
+     42| // scripts/economy-lab.test.ts --silent=false --disableConsoleIntercept
+     43| it.skipIf(process.env.ECONOMY_LAB !== '1')('writes complete reproducib…
+       |                                           ^
+     44|   const result = runLab();
+     45|   if (!process.env.ECONOMY_FILTER) expect(result.completed).toBe(resul…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 4 passed (5)
+   Start at  10:56:01
+   Duration  8530.98s (tests 100%)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

@@ -1,0 +1,134 @@
+
+ RUN  v5.0.3 /tmp/cafe-accounting-baseline-57df94e
+
+ ✓ economy-invariants.test.ts > economy accounting invariants > reconciles cash, unused stock, prepayments and capital to full-day operating profit 298ms
+ ✓ economy-invariants.test.ts > economy accounting invariants > expenses bought ingredients once when consumed, including an unsold paid batch 1ms
+ ✓ economy-invariants.test.ts > economy accounting invariants > preserves promotion prepayment over closing and reload and allocates the fee exactly once 2ms
+ ✓ economy-invariants.test.ts > economy accounting invariants > splits adoption into capital and included care, and carries unused refill value 1ms
+ × economy-invariants.test.ts > economy accounting invariants > rejects invalid ingredient quantity NaN without mutating cash or inventory 6ms
+   → expected true to be false // Object.is equality
+ ✓ economy-invariants.test.ts > economy accounting invariants > rejects invalid ingredient quantity Infinity without mutating cash or inventory 1ms
+ ✓ economy-invariants.test.ts > economy accounting invariants > rejects invalid ingredient quantity -Infinity without mutating cash or inventory 1ms
+ ✓ economy-invariants.test.ts > economy accounting invariants > rejects invalid ingredient quantity -1 without mutating cash or inventory 0ms
+ ✓ economy-invariants.test.ts > economy accounting invariants > rejects invalid ingredient quantity 0 without mutating cash or inventory 1ms
+ × economy-invariants.test.ts > economy accounting invariants > rejects invalid ingredient quantity 0.5 without mutating cash or inventory 1ms
+   → expected true to be false // Object.is equality
+ × economy-invariants.test.ts > economy accounting invariants > rejects invalid ingredient quantity 1.5 without mutating cash or inventory 0ms
+   → expected true to be false // Object.is equality
+ × economy-invariants.test.ts > economy accounting invariants > cannot shelve an unpaid batch or credit the same batch twice 1ms
+   → expected 2 to be +0 // Object.is equality
+ × economy-invariants.test.ts > economy accounting invariants > rejects shelving more than the quantity paid into production 1ms
+   → expected 3 to be +0 // Object.is equality
+ × economy-invariants.test.ts > economy accounting invariants > uses a tiny available budget to complete an affordable menu recipe 1ms
+   → expected false to be true // Object.is equality
+ × economy-invariants.test.ts > economy accounting invariants > does not spend a scarce budget on unusable fragments of several recipes 1ms
+   → expected 7 to be 6 // Object.is equality
+ ✓ economy-invariants.test.ts > economy accounting invariants > preserves scarce cash when no selected recipe can be completed 0ms
+ ✓ economy-invariants.test.ts > economy accounting invariants > keeps proportional ordering when paid shelf supply is already available 0ms
+ ✓ economy-invariants.test.ts > economy accounting invariants > keeps proportional ordering when paid inProduction supply is already available 0ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  economy-invariants.test.ts > economy accounting invariants > rejects invalid ingredient quantity NaN without mutating cash or inventory
+ FAIL  economy-invariants.test.ts > economy accounting invariants > rejects invalid ingredient quantity 0.5 without mutating cash or inventory
+ FAIL  economy-invariants.test.ts > economy accounting invariants > rejects invalid ingredient quantity 1.5 without mutating cash or inventory
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ economy-invariants.test.ts:110:46
+    108|   it.each([NaN, Infinity, -Infinity, -1, 0, 0.5, 1.5])('rejects invali…
+    109|     const s = emptyShop(); const before = structuredClone(s);
+    110|     expect(buyIngredient(s, 'beans', count)).toBe(false);
+       |                                              ^
+    111|     expect(s).toEqual(before);
+    112|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  economy-invariants.test.ts > economy accounting invariants > cannot shelve an unpaid batch or credit the same batch twice
+AssertionError: expected 2 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 2
+
+ ❯ economy-invariants.test.ts:118:31
+    116|     buyIngredient(s, 'flour', 2); buyIngredient(s, 'butter', 2); openS…
+    117|     shelveBatch(s, 'roll', 2);
+    118|     expect(s.shelf.roll ?? 0).toBe(0);
+       |                               ^
+    119|     startBatch(s, 'roll', 2); shelveBatch(s, 'roll', 2); shelveBatch(s…
+    120|     expect(s.shelf.roll).toBe(2);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  economy-invariants.test.ts > economy accounting invariants > rejects shelving more than the quantity paid into production
+AssertionError: expected 3 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 3
+
+ ❯ economy-invariants.test.ts:129:31
+    127|     buyIngredient(s, 'flour', 2); buyIngredient(s, 'butter', 2); openS…
+    128|     startBatch(s, 'roll', 2); shelveBatch(s, 'roll', 3);
+    129|     expect(s.shelf.roll ?? 0).toBe(0);
+       |                               ^
+    130|     expect(s.inProduction.roll).toBe(2);
+    131|     expect(s.today.ingredientCost).toBe(8);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  economy-invariants.test.ts > economy accounting invariants > uses a tiny available budget to complete an affordable menu recipe
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ economy-invariants.test.ts:137:24
+    135|     const s = emptyShop(); s.coins = 1; s.items.latte = 1; s.onMenu = …
+    136|     expect(restockQuote(s)).toEqual({ buy: { beans: 44, milk: 22 }, co…
+    137|     expect(restock(s)).toBe(true);
+       |                        ^
+    138|     expect(servingsLeft(s, 'espresso')).toBeGreaterThanOrEqual(1);
+    139|     expect(s.coins).toBeGreaterThanOrEqual(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  economy-invariants.test.ts > economy accounting invariants > does not spend a scarce budget on unusable fragments of several recipes
+AssertionError: expected 7 to be 6 // Object.is equality
+
+- Expected
++ Received
+
+- 6
++ 7
+
+ ❯ economy-invariants.test.ts:146:21
+    144|     expect(restockQuote(s)).toEqual({ buy: { beans: 21, milk: 41, coco…
+    145|     expect(restock(s)).toBe(true);
+    146|     expect(s.coins).toBe(6);
+       |                     ^
+    147|     expect(s.pantry.beans).toBe(1);
+    148|     expect(s.pantry.milk).toBe(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  7 failed | 11 passed (18)
+   Start at  10:38:20
+   Duration  661ms (tests 62%, transform 32%, import 6%, worker 1%)
+

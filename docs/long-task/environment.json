@@ -1,0 +1,18 @@
+{
+  "node": "v24.19.0",
+  "platform": "linux",
+  "arch": "x64",
+  "lockfileSha256": "863f88f58dd773f375f8c9daff55d1bf14b6ac52a894323e76a48d612a0c7fa3",
+  "dependencies": {
+    "@fontsource/fusion-pixel-12px-proportional-sc": "^5.3.0",
+    "@fontsource/pixelify-sans": "^5.3.0",
+    "phaser": "^4.2.1"
+  },
+  "devDependencies": {
+    "happy-dom": "^20.14.6",
+    "subset-font": "^2.9.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.3",
+    "vitest": "^5.0.3"
+  }
+}

@@ -1,0 +1,3 @@
+# Frozen audit runners/logs retain exact provenance bytes, including terminal blank lines.
+/scripts/economy-lab.ts whitespace=-blank-at-eof
+/docs/long-task/logs/* whitespace=-blank-at-eof

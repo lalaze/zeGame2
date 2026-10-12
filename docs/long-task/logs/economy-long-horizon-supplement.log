@@ -1,0 +1,43 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+early/initial/espresso-ten: 5/30 seeds, 2.1s
+early/initial/espresso-ten: 10/30 seeds, 3.8s
+early/initial/espresso-ten: 15/30 seeds, 5.2s
+early/initial/espresso-ten: 20/30 seeds, 6.9s
+early/initial/espresso-ten: 25/30 seeds, 8.4s
+early/initial/espresso-ten: 30/30 seeds, 9.9s
+{"scenario":"early/initial/espresso-ten","operating":{"n":30,"mean":92536.23466666667,"sd":1741.6636317944424,"ci95Low":91912.98834030282,"ci95High":93159.48099303052,"min":88768.87999999999,"p10":90356.84,"median":92478.69999999998,"p90":94874.63999999998,"max":95551.84},"netLiquid":{"n":30,"mean":92378.99800044394,"sd":1741.663631794544,"ci95Low":91755.75167408005,"ci95High":93002.24432680784,"min":88611.64333377706,"p10":90199.60333377721,"median":92321.46333377728,"p90":94717.40333377715,"max":95394.60333377757},"pairedNetAdvantage":null,"capitalRecovered":0,"capitalCensored":0,"terminalPositive":0}
+early/initial/espresso-ten-cat: 5/30 seeds, 1.6s
+early/initial/espresso-ten-cat: 10/30 seeds, 3.0s
+early/initial/espresso-ten-cat: 15/30 seeds, 4.6s
+early/initial/espresso-ten-cat: 20/30 seeds, 6.1s
+early/initial/espresso-ten-cat: 25/30 seeds, 7.7s
+early/initial/espresso-ten-cat: 30/30 seeds, 9.4s
+{"scenario":"early/initial/espresso-ten-cat","operating":{"n":30,"mean":99329.93466666665,"sd":1801.9231713112777,"ci95Low":98685.12474102528,"ci95High":99974.74459230802,"min":96493.20000000001,"p10":97053.35999999999,"median":98889.13999999998,"p90":101897.75999999998,"max":102385.4},"netLiquid":{"n":30,"mean":98880.69800044429,"sd":1801.923171311339,"ci95Low":98235.88807480289,"ci95High":99525.50792608569,"min":96043.96333377749,"p10":96604.12333377736,"median":98439.90333377756,"p90":101448.52333377772,"max":101936.16333377777},"pairedNetAdvantage":{"n":30,"mean":6501.700000000335,"sd":2300.112862448387,"ci95Low":5678.615182947439,"ci95High":7324.784817053232,"min":2229.3200000001816,"p10":3974.320000000269,"median":6180.960000000385,"p90":9322.36000000035,"max":11377.960000000618},"capitalRecovered":30,"capitalCensored":0,"terminalPositive":30}
+early/initial/espresso-ten-noteLocal: 5/30 seeds, 2.1s
+early/initial/espresso-ten-noteLocal: 10/30 seeds, 3.8s
+early/initial/espresso-ten-noteLocal: 15/30 seeds, 5.8s
+early/initial/espresso-ten-noteLocal: 20/30 seeds, 7.5s
+early/initial/espresso-ten-noteLocal: 25/30 seeds, 9.1s
+early/initial/espresso-ten-noteLocal: 30/30 seeds, 11.0s
+{"scenario":"early/initial/espresso-ten-noteLocal","operating":{"n":30,"mean":114049.35733333346,"sd":1691.4921441772487,"ci95Low":113444.06464323714,"ci95High":114654.65002342979,"min":109683.20000000016,"p10":111770.80000000016,"median":114205.00000000016,"p90":116063.04000000017,"max":117856.56000000017},"netLiquid":{"n":30,"mean":113892.12066711178,"sd":1691.4921441773017,"ci95Low":113286.82797701543,"ci95High":114497.41335720813,"min":109525.96333377826,"p10":111613.5633337784,"median":114047.76333377845,"p90":115905.80333377859,"max":117699.32333377855},"pairedNetAdvantage":{"n":30,"mean":21513.12266666783,"sd":2433.1090712502373,"ci95Low":20642.445767514288,"ci95High":22383.799565821373,"min":17178.240000000922,"p10":18294.560000000987,"median":21435.96000000114,"p90":23965.20000000125,"max":27024.08000000166},"capitalRecovered":0,"capitalCensored":0,"terminalPositive":30}
+early/initial/espresso-ten-cat-noteLocal: 5/30 seeds, 2.1s
+early/initial/espresso-ten-cat-noteLocal: 10/30 seeds, 3.9s
+early/initial/espresso-ten-cat-noteLocal: 15/30 seeds, 5.8s
+early/initial/espresso-ten-cat-noteLocal: 20/30 seeds, 7.7s
+early/initial/espresso-ten-cat-noteLocal: 25/30 seeds, 9.6s
+early/initial/espresso-ten-cat-noteLocal: 30/30 seeds, 11.5s
+{"scenario":"early/initial/espresso-ten-cat-noteLocal","operating":{"n":30,"mean":122367.68533333349,"sd":2004.1965577425758,"ci95Low":121650.49280595827,"ci95High":123084.8778607087,"min":118721.40000000014,"p10":120168.32000000014,"median":122364.70000000016,"p90":125169.7600000002,"max":126765.72000000019},"netLiquid":{"n":30,"mean":121918.44866711221,"sd":2004.1965577426602,"ci95Low":121201.25613973697,"ci95High":122635.64119448746,"min":118272.16333377866,"p10":119719.08333377888,"median":121915.46333377891,"p90":124720.52333377913,"max":126316.48333377908},"pairedNetAdvantage":{"n":30,"mean":29539.450666668265,"sd":2333.185107726647,"ci95Low":28704.531098634754,"ci95High":30374.370234701775,"min":25565.84000000135,"p10":26625.640000001455,"median":29489.220000001667,"p90":31816.640000001673,"max":37704.84000000202},"capitalRecovered":30,"capitalCensored":0,"terminalPositive":30}
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  10:59:44
+   Duration  42.33s (tests 99%, transform 1%)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

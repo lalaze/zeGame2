@@ -105,6 +105,20 @@ describe('merged preparation and progression', () => {
     expect(change).toHaveBeenCalledTimes(1);
   });
 
+  it('lets a one-coin mixed-menu budget buy a complete espresso through preparation', () => {
+    const state = createInitialState(0); state.coins = 1;
+    state.items.latte = 1; state.onMenu = ['espresso', 'latte'];
+    for (const id of Object.keys(state.pantry) as (keyof GameState['pantry'])[]) state.pantry[id] = 0;
+    const change = vi.fn(); showPrepare(state, vi.fn(), change);
+    expect(query<HTMLButtonElement>('[data-restock]').disabled).toBe(false);
+    query<HTMLButtonElement>('[data-restock]').click();
+    expect(state.coins).toBe(0);
+    expect(state.pantry.beans).toBe(1);
+    expect(state.pantry.milk).toBe(0);
+    expect(query('.prep [role="status"]').textContent).toContain(t('prep.bought', { items: `${t('ing.beans')} ×1` }));
+    expect(change).toHaveBeenCalledTimes(1);
+  });
+
   it.each(['en', 'zh'] as const)('includes taste, reputation, pet and promotion forecasts in %s', (locale) => {
     setLocale(locale);
     const state = createInitialState(0); state.coins = 10000;

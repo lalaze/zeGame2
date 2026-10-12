@@ -1,0 +1,66 @@
+Independent exact-clock accounting probe, 2026-10-11.
+Source: working checkout based on HEAD 57df94e with the audited economy/kitchen fixes.
+No production writes, close/settlement at final tick, or invented salvage.
+Replay: save the JavaScript below as an .mjs file and run node FILE from this environment; adjust the two absolute checkout paths when relocating.
+
+CODE:
+import {createServer} from '/workspace/shared/zeGame2/node_modules/vite/dist/node/index.js';
+const v=await createServer({root:'/workspace/shared/zeGame2',server:{middlewareMode:true}});
+try {
+  const st=await v.ssrLoadModule('/src/game/state.ts'), e=await v.ssrLoadModule('/src/game/economy.ts'), k=await v.ssrLoadModule('/src/game/kitchen.ts'), d=await v.ssrLoadModule('/src/game/day.ts'), p=await v.ssrLoadModule('/src/game/pets.ts'), pr=await v.ssrLoadModule('/src/game/promotion.ts'), sm=await v.ssrLoadModule('/src/game/sim.ts'), data=await v.ssrLoadModule('/src/game/data.ts');
+  const s=st.createInitialState(0); s.coins=5000; for(const i of data.INGREDIENTS)s.pantry[i.id]=0;
+  const assets=()=>s.coins+data.INGREDIENTS.reduce((n,i)=>n+s.pantry[i.id]*i.cost,0)+s.pets.reduce((n,x)=>n+x.careSeconds/p.CARE_SECONDS*p.catDef(x.id).careCost,0)+(s.promotion?s.promotion.remaining/pr.promotionPlan(s.promotion.id).seconds*pr.promotionPlan(s.promotion.id).cost:0);
+  const initial=assets();k.unlockKitchen(s);e.buyItem(s,'roll',1);p.adoptCat(s,'ginger');const capital=800+30+300-8;
+  let seed=7;const sim=new sm.Sim(()=>{seed=(seed*1664525+1013904223)>>>0;return seed/2**32});let settled=0,maxError=0,days=0,maxWip=0,maxOrders=0;
+  for(let tick=0;tick<36000;tick++){
+    if(s.phase==='prep'){if(!s.promotion)pr.bookPromotion(s,'noteLocal');e.bakeForForecast(s);e.restock(s);d.openShop(s);}
+    sim.update(s,0.05);
+    const live=s.today.revenue-s.today.ingredientCost-s.today.petCost-s.today.promotionCost;
+    maxError=Math.max(maxError,Math.abs(assets()-initial-(settled+live-capital)));
+    const batches={};for(const c of sim.cooks)if(c.batch)batches[c.batch.item]=(batches[c.batch.item]??0)+c.batch.n;
+    for(const id of new Set([...Object.keys(batches),...Object.keys(s.inProduction)]))if((batches[id]??0)!==(s.inProduction[id]??0))throw new Error('WIP mismatch');
+    maxWip=Math.max(maxWip,Object.values(batches).reduce((a,b)=>a+b,0));maxOrders=Math.max(maxOrders,sim.customers.filter(c=>!c.hasCup&&['ordering','toSeat','waiting'].includes(c.phase)).length);
+    if(tick<35999){if(s.phase==='open'&&s.dayTime>=180-1e-8)sim.beginClosing(s);if(s.phase==='closing'&&sim.finishedService){settled+=sim.closeShop(s).profit;days++;}}
+  }
+  const accepted=sim.customers.filter(c=>!c.hasCup&&['ordering','toSeat','waiting'].includes(c.phase));
+  const pending=Object.entries(s.shelf).reduce((n,[id,x])=>n+x*e.servingCost(id),0)+Object.entries(s.inProduction).reduce((n,[id,x])=>n+x*e.servingCost(id),0)+accepted.reduce((n,c)=>n+e.servingCost(c.order)+(c.extra?e.servingCost(c.extra):0),0);
+  console.log(JSON.stringify({ticks:36000,totalSeconds:1800,maxLedgerError:maxError,completedDays:days,phase:s.phase,currentDayTime:s.dayTime,terminalShelf:s.shelf,terminalWip:s.inProduction,terminalUndeliveredOrders:accepted.length,terminalAlreadyExpensedPendingCost:pending,maxWip,maxOrders},null,2));
+}finally{await v.close()}
+
+OUTPUT:
+{
+  "ticks": 36000,
+  "totalSeconds": 1800,
+  "maxLedgerError": 4.75210981676355e-11,
+  "completedDays": 9,
+  "phase": "open",
+  "currentDayTime": 37.25000000000002,
+  "terminalShelf": {
+    "roll": 3
+  },
+  "terminalWip": {
+    "roll": 5
+  },
+  "terminalUndeliveredOrders": 0,
+  "terminalAlreadyExpensedPendingCost": 32,
+  "maxWip": 5,
+  "maxOrders": 3
+}
+
+INTERPRETATION:
+At each tick, cash plus raw pantry plus unused care/promotion minus initial liquid assets equals settled operating profit plus current unclosed-day operating profit minus capital.
+Initial cat pack is included in adoption: capital = 800 kitchen + 30 recipe unlock + 300 adoption - 8 included care.
+Shelf, kitchen batches and accepted undelivered orders are already expensed. Their ingredient cost is a separate diagnostic, not liquid assets, salvage or guaranteed future revenue.
+Accepted unpaid orders use unique customers in ordering/toSeat/waiting with hasCup=false. Never sum pass plus server trays because those may share a fetching plate.
+At an unclosed horizon, consumed ingredient cost minus sold ingredient cost contains both realized waste and unfinished stock; subtract pending ingredient cost before calling the residual waste.
+
+INDEPENDENT IMPLEMENTATION REVIEW (2026-10-11):
+Read scripts/economy-fixed-clock.test.ts against source gameplay semantics.
+- Exact horizon executes its last Sim.update without any subsequent close, reopen, purchase, promotion booking or extra drain.
+- Primary ledger includes every settled report plus current state.today exactly once, expenses consumed ingredients without WIP credit, and subtracts actual capital net of included cat care.
+- Separate cash ledger allocates investment, ingredient purchases, promotion bookings and care purchases correctly.
+- paidLiveFood separates kitchen inProduction, shelf and unique accepted unpaid customers. Fetching pass/tray overlap is deduplicated; abandoned orders are excluded from eligible live food.
+- ingredientsNotSoldOrLiveCost subtracts both sold ingredient cost and terminal pending ingredient cost; current unfinished food is not mislabeled as waste.
+- No material accounting correction required.
+Verification command: npx vitest run scripts/economy-fixed-clock.test.ts --reporter=verbose
+Result: 4 passed; 1 opt-in full supplement test skipped. This is focused verification, not a claim that the full 20-route/30-seed supplement has completed.

@@ -1,0 +1,35 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+fixed-clock-balanced: early/none: 30 seeds in 3.9s (1/20)
+fixed-clock-balanced: early/espresso-ten: 30 seeds in 3.6s (2/20)
+fixed-clock-balanced: early/espresso-ten-cat: 30 seeds in 3.5s (3/20)
+fixed-clock-balanced: early/espresso-ten-noteLocal: 30 seeds in 3.7s (4/20)
+fixed-clock-balanced: early/espresso-ten-cat-noteLocal: 30 seeds in 3.9s (5/20)
+fixed-clock-balanced: mid/fast: 30 seeds in 14.0s (6/20)
+fixed-clock-balanced: mid/high: 30 seeds in 12.4s (7/20)
+fixed-clock-balanced: mid/bakery: 30 seeds in 22.3s (8/20)
+fixed-clock-balanced: mid/mixed: 30 seeds in 16.9s (9/20)
+fixed-clock-balanced: mid/all: 30 seeds in 133.8s (10/20)
+fixed-clock-balanced: expanded/fast: 30 seeds in 34.2s (11/20)
+fixed-clock-balanced: expanded/high: 30 seeds in 34.8s (12/20)
+fixed-clock-balanced: expanded/bakery: 30 seeds in 15.0s (13/20)
+fixed-clock-balanced: expanded/mixed: 30 seeds in 74.7s (14/20)
+fixed-clock-balanced: expanded/all: 30 seeds in 108.6s (15/20)
+fixed-clock-balanced: expanded/high-cat: 30 seeds in 35.7s (16/20)
+fixed-clock-balanced: expanded/high-noteLocal: 30 seeds in 35.0s (17/20)
+fixed-clock-balanced: expanded/high-cat-noteLocal: 30 seeds in 37.1s (18/20)
+fixed-clock-balanced: recovery/one-coin-shared: 30 seeds in 3.0s (19/20)
+fixed-clock-balanced: recovery/nine-coin-complex: 30 seeds in 2.9s (20/20)
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  13:33:12
+   Duration  599.39s (tests 100%)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

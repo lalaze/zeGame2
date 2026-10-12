@@ -1,0 +1,220 @@
+Independent exact emergency-layout performance audit
+Mon Oct 12 01:10:55 UTC 2026
+COMMAND: npx vitest run scripts/emergency-layout-performance.tmp.test.ts --silent=false --disableConsoleIntercept
+BENCHMARK SOURCE BEGIN
+import { it, expect } from 'vitest';
+import { performance } from 'node:perf_hooks';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { createInitialState, type GameState } from '../src/game/state';
+import { canEmergencyRestock } from '../src/game/recovery';
+import { FURNITURE } from '../src/game/furniture';
+import { DECOR } from '../src/game/decor';
+import { GOALS } from '../src/game/goals';
+import { REGIONS } from '../src/game/regions';
+function fixture(ids: string[], tables = 0, regions = 0): GameState {
+  const s = createInitialState(0); s.pantry.beans = 0; s.goal = GOALS.findIndex(g => g.id === 'comfort');
+  s.decor.placed = []; s.decor.stored = Object.fromEntries(ids.map(id => [id, 1]));
+  s.upgrades.tables = tables; s.regions = REGIONS.slice(0, regions).map(r => r.id); return s;
+}
+function timed(s: GameState, repetitions = 100) {
+  const before = JSON.stringify(s); const start = performance.now(); const eligible = canEmergencyRestock(s); const coldMs = performance.now() - start;
+  const values: number[] = [];
+  for (let i = 0; i < repetitions; i++) { const t = performance.now(); expect(canEmergencyRestock(s)).toBe(eligible); values.push(performance.now() - t); }
+  expect(JSON.stringify(s)).toBe(before); values.sort((a,b) => a-b);
+  return { eligible, coldMs, repetitions, meanMs: values.reduce((a,b)=>a+b,0)/values.length, medianMs: values[Math.floor(values.length*.5)], p95Ms: values[Math.floor(values.length*.95)], maxMs: values.at(-1) };
+}
+it('benchmarks exact layout eligibility without mutating game state', () => {
+  console.log('RECOVERY_SHA256',createHash('sha256').update(readFileSync('src/game/recovery.ts')).digest('hex'));
+  console.log('Node',process.version,'platform',process.platform,'arch',process.arch);
+  const hard = ['art_cat','art_landscape','poster_bakery'];
+  const cases: [string,GameState,boolean][] = [
+    ['main_wall_16_owned_max12_placeable',fixture(hard),true],
+    ['main_wall_plus_garland_feasible',fixture([...hard,'garland']),false],
+    ['wall_reading_unlock_feasible',fixture(hard,0,1),false],
+    ['piano_main_max_tables_impossible',fixture(['piano'],6),true],
+    ['piano_main_base_tables_feasible',fixture(['piano']),false],
+    ['all_furniture_max_regions_max_tables',fixture(FURNITURE.map(f=>f.id),6,3),false],
+    ['all_sub15_furniture_max_regions_max_tables',fixture(FURNITURE.filter(f=>f.comfort<15).map(f=>f.id),6,3),false],
+    ['all_sub15_furniture_main_max_tables',fixture(FURNITURE.filter(f=>f.comfort<15).map(f=>f.id),6),false],
+    ['wall_many_tall_kinds_impossible',fixture(['art_cat','art_landscape','poster_coffee','poster_bakery','wreath_season','hanging_ivy']),true],
+  ];
+  const all = fixture(FURNITURE.map(f=>f.id),6,3);all.decor.owned=DECOR.map(d=>d.id);cases.push(['all_owned_styles_and_furniture_max_regions_tables',all,false]);
+  for(const [name,s,expected] of cases){const r=timed(s);console.log('CASE',name,JSON.stringify(r));expect(r.eligible,name).toBe(expected)}
+  // Enumerate every subset of low/mid wall kinds: a deterministic hard-negative search.
+  const wall = FURNITURE.filter(f=>f.surface==='wall'&&f.comfort>0&&f.comfort<15);
+  const sweep: {ids:string[];eligible:boolean;ms:number}[]=[];
+  for(let mask=0;mask<2**wall.length;mask++) {const ids=wall.filter((_,i)=>mask&(1<<i)).map(f=>f.id);const s=fixture(ids);const t=performance.now();const eligible=canEmergencyRestock(s);sweep.push({ids,eligible,ms:performance.now()-t});}
+  sweep.sort((a,b)=>b.ms-a.ms);console.log('WALL_SUBSET_SWEEP',JSON.stringify({kinds:wall.length,subsets:sweep.length,totalMs:sweep.reduce((a,b)=>a+b.ms,0),slowest:sweep.slice(0,10)}));
+  for(const row of sweep.slice(0,3)) console.log('WORST_SUBSET_REPEATED',JSON.stringify({ids:row.ids,...timed(fixture(row.ids))}));
+  // No cache exists in the implementation; mutate every reachability dependency on the same object.
+  const s=fixture(hard);expect(canEmergencyRestock(s)).toBe(true);
+  s.regions=['reading'];expect(canEmergencyRestock(s)).toBe(false);s.regions=[];expect(canEmergencyRestock(s)).toBe(true);
+  s.decor.stored.garland=1;expect(canEmergencyRestock(s)).toBe(false);delete s.decor.stored.garland;expect(canEmergencyRestock(s)).toBe(true);
+  s.decor.owned.push('sill_tulips');expect(canEmergencyRestock(s)).toBe(false);s.decor.owned.pop();expect(canEmergencyRestock(s)).toBe(true);
+  s.decor.stored={piano:1};s.upgrades.tables=6;expect(canEmergencyRestock(s)).toBe(true);s.upgrades.tables=0;expect(canEmergencyRestock(s)).toBe(false);
+  s.decor.stored={};expect(canEmergencyRestock(s)).toBe(true);s.decor.placed=[{id:'art_bean',col:9,row:0}];expect(canEmergencyRestock(s)).toBe(false);s.decor.placed=[];expect(canEmergencyRestock(s)).toBe(true);
+  s.decor.owned.push('wall_brick');s.decor.equipped.wallpaper='wall_brick';s.decor.stored={plant_snake:1};expect(canEmergencyRestock(s)).toBe(false);
+  s.goal=GOALS.length;expect(canEmergencyRestock(s)).toBe(true);s.coins=1;expect(canEmergencyRestock(s)).toBe(false);s.coins=0;s.pantry.beans=1;expect(canEmergencyRestock(s)).toBe(false);
+  console.log('Same-object dependency mutations passed; no persistent cache and no search cutoff in reviewed implementation.');
+},120000);
+BENCHMARK SOURCE END
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+RECOVERY_SHA256 cf50597575a9a6c43df3285c69076dedcbf17ecec03e033e3c01af958b0ddfd1
+Node v24.19.0 platform linux arch x64
+CASE main_wall_16_owned_max12_placeable {"eligible":true,"coldMs":2.0438390000000197,"repetitions":100,"meanMs":0.6138117499999993,"medianMs":0.5598480000000166,"p95Ms":0.8637630000000058,"maxMs":1.1478679999999883}
+CASE main_wall_plus_garland_feasible {"eligible":false,"coldMs":0.21069499999998698,"repetitions":100,"meanMs":0.14148909999999545,"medianMs":0.12468599999999697,"p95Ms":0.2872000000000412,"maxMs":0.33914699999996856}
+CASE wall_reading_unlock_feasible {"eligible":false,"coldMs":1.0381439999999884,"repetitions":100,"meanMs":0.44627927,"medianMs":0.39794599999999036,"p95Ms":0.707569000000035,"maxMs":1.4382929999999874}
+CASE piano_main_max_tables_impossible {"eligible":true,"coldMs":0.7201880000000074,"repetitions":100,"meanMs":0.16021722999999896,"medianMs":0.15068600000000743,"p95Ms":0.28854200000000674,"maxMs":0.682262000000037}
+CASE piano_main_base_tables_feasible {"eligible":false,"coldMs":0.08964400000002115,"repetitions":100,"meanMs":0.029214289999998186,"medianMs":0.026179000000013275,"p95Ms":0.056383999999980006,"maxMs":0.06287400000002208}
+CASE all_furniture_max_regions_max_tables {"eligible":false,"coldMs":0.4998679999999922,"repetitions":100,"meanMs":0.20062761000000193,"medianMs":0.1826239999999757,"p95Ms":0.3616519999999923,"maxMs":0.45539200000001756}
+CASE all_sub15_furniture_max_regions_max_tables {"eligible":false,"coldMs":76.35315600000001,"repetitions":100,"meanMs":72.66101643999997,"medianMs":72.02104300000065,"p95Ms":80.15150499999982,"maxMs":98.45808899999975}
+CASE all_sub15_furniture_main_max_tables {"eligible":false,"coldMs":2.8176480000001902,"repetitions":100,"meanMs":2.725632990000004,"medianMs":2.543788000000859,"p95Ms":4.780486999999994,"maxMs":4.96338999999989}
+CASE wall_many_tall_kinds_impossible {"eligible":true,"coldMs":10.701841000000059,"repetitions":100,"meanMs":10.302185760000011,"medianMs":10.192558000000645,"p95Ms":10.870413000000553,"maxMs":13.776452999999492}
+CASE all_owned_styles_and_furniture_max_regions_tables {"eligible":false,"coldMs":0.08707099999992352,"repetitions":100,"meanMs":0.027289219999984196,"medianMs":0.02503700000124809,"p95Ms":0.04381599999942409,"maxMs":0.058757999999215826}
+WALL_SUBSET_SWEEP {"kinds":10,"subsets":1024,"totalMs":940.7354870000072,"slowest":[{"ids":["art_landscape","sconce","poster_coffee","poster_bakery","wreath_season","hanging_ivy"],"eligible":true,"ms":107.5881759999993},{"ids":["sconce","poster_coffee","poster_bakery","wreath_season","hanging_ivy"],"eligible":true,"ms":79.24242400000003},{"ids":["art_landscape","sconce","poster_coffee","wreath_season","hanging_ivy"],"eligible":true,"ms":55.31462399999873},{"ids":["art_landscape","sconce","poster_coffee","poster_bakery","hanging_ivy"],"eligible":true,"ms":54.86794700000064},{"ids":["art_landscape","garland","poster_coffee","poster_bakery","wreath_season","hanging_ivy"],"eligible":true,"ms":52.48493899999994},{"ids":["sconce","poster_coffee","poster_bakery","hanging_ivy"],"eligible":true,"ms":34.357522000000245},{"ids":["sconce","poster_coffee","wreath_season","hanging_ivy"],"eligible":true,"ms":33.90355199999976},{"ids":["garland","poster_coffee","poster_bakery","wreath_season","hanging_ivy"],"eligible":true,"ms":32.23618700000043},{"ids":["art_landscape","sconce","poster_coffee","poster_bakery","wreath_season"],"eligible":true,"ms":24.554137000000992},{"ids":["art_landscape","garland","poster_coffee","wreath_season","hanging_ivy"],"eligible":true,"ms":22.12247699999898}]}
+WORST_SUBSET_REPEATED {"ids":["art_landscape","sconce","poster_coffee","poster_bakery","wreath_season","hanging_ivy"],"eligible":true,"coldMs":108.36382799999956,"repetitions":100,"meanMs":109.40321003000012,"medianMs":108.41826400000173,"p95Ms":119.80694900000162,"maxMs":121.05130199999985}
+WORST_SUBSET_REPEATED {"ids":["sconce","poster_coffee","poster_bakery","wreath_season","hanging_ivy"],"eligible":true,"coldMs":82.45684399999664,"repetitions":100,"meanMs":81.13828941000007,"medianMs":80.91609699999754,"p95Ms":84.2301609999995,"maxMs":88.67594699999972}
+WORST_SUBSET_REPEATED {"ids":["art_landscape","sconce","poster_coffee","wreath_season","hanging_ivy"],"eligible":true,"coldMs":58.61784500000067,"repetitions":100,"meanMs":57.49013871000014,"medianMs":57.31055500000002,"p95Ms":60.03575400000409,"maxMs":62.373773999999685}
+Same-object dependency mutations passed; no persistent cache and no search cutoff in reviewed implementation.
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  18:10:55
+   Duration  35.09s (tests 100%)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+
+AUDIT INTERPRETATION (initial exact solver, cf505975...):
+Correctness expectations and same-object mutation checks passed. No persistent cache exists.
+Repeated performance is NOT suitable for frequent prep UI eligibility polling in this build:
+- All positive/mid furniture kinds with individual comfort <15, three regions and six table upgrades: mean72.66ms/p95 80.15ms.
+- Hard impossible six-kind main-wall subset: mean109.40ms/p95 119.81ms/max121.05ms over100 calls.
+These are synchronous measured calls, not simulated frame-rate measurements. Host timings may vary.
+No node/time cutoff was used to classify any layout; the sweep and all calls completed exactly.
+Production owner notified; further exact optimization and rebenchmark pending.
+
+OPTIMIZED SOLVER REBENCHMARK
+Mon Oct 12 01:14:10 UTC 2026
+BENCHMARK SOURCE BEGIN
+import { it, expect } from 'vitest';
+import { performance } from 'node:perf_hooks';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { createInitialState, type GameState } from '../src/game/state';
+import { canEmergencyRestock } from '../src/game/recovery';
+import { FURNITURE } from '../src/game/furniture';
+import { DECOR } from '../src/game/decor';
+import { GOALS } from '../src/game/goals';
+import { REGIONS } from '../src/game/regions';
+function fixture(ids: string[], tables = 0, regions = 0): GameState {
+  const s = createInitialState(0); s.pantry.beans = 0; s.goal = GOALS.findIndex(g => g.id === 'comfort');
+  s.decor.placed = []; s.decor.stored = Object.fromEntries(ids.map(id => [id, 1]));
+  s.upgrades.tables = tables; s.regions = REGIONS.slice(0, regions).map(r => r.id); return s;
+}
+function timed(s: GameState, repetitions = 100) {
+  const before = JSON.stringify(s); const start = performance.now(); const eligible = canEmergencyRestock(s); const firstMeasuredCallMs = performance.now() - start;
+  const values: number[] = [];
+  for (let i = 0; i < repetitions; i++) { const t = performance.now(); expect(canEmergencyRestock(s)).toBe(eligible); values.push(performance.now() - t); }
+  expect(JSON.stringify(s)).toBe(before); values.sort((a,b) => a-b);
+  return { eligible, firstMeasuredCallMs, repetitions, meanMs: values.reduce((a,b)=>a+b,0)/values.length, medianMs: values[Math.floor(values.length*.5)], p95Ms: values[Math.floor(values.length*.95)], maxMs: values.at(-1) };
+}
+it('benchmarks exact layout eligibility without mutating game state', () => {
+  console.log('RECOVERY_SHA256',createHash('sha256').update(readFileSync('src/game/recovery.ts')).digest('hex'));
+  console.log('Node',process.version,'platform',process.platform,'arch',process.arch);
+  const hard = ['art_cat','art_landscape','poster_bakery'];
+  const cases: [string,GameState,boolean][] = [
+    ['main_wall_16_owned_max12_placeable',fixture(hard),true],
+    ['main_wall_plus_garland_feasible',fixture([...hard,'garland']),false],
+    ['wall_reading_unlock_feasible',fixture(hard,0,1),false],
+    ['piano_main_max_tables_impossible',fixture(['piano'],6),true],
+    ['piano_main_base_tables_feasible',fixture(['piano']),false],
+    ['all_furniture_max_regions_max_tables',fixture(FURNITURE.map(f=>f.id),6,3),false],
+    ['all_sub15_furniture_max_regions_max_tables',fixture(FURNITURE.filter(f=>f.comfort<15).map(f=>f.id),6,3),false],
+    ['all_sub15_furniture_main_max_tables',fixture(FURNITURE.filter(f=>f.comfort<15).map(f=>f.id),6),false],
+    ['wall_many_tall_kinds_impossible',fixture(['art_cat','art_landscape','poster_coffee','poster_bakery','wreath_season','hanging_ivy']),true],
+  ];
+  const all = fixture(FURNITURE.map(f=>f.id),6,3);all.decor.owned=DECOR.map(d=>d.id);cases.push(['all_owned_styles_and_furniture_max_regions_tables',all,false]);
+  for(const [name,s,expected] of cases){const r=timed(s);console.log('CASE',name,JSON.stringify(r));expect(r.eligible,name).toBe(expected)}
+  // Enumerate every subset of low/mid wall kinds: a deterministic hard-negative search.
+  const wall = FURNITURE.filter(f=>f.surface==='wall'&&f.comfort>0&&f.comfort<15);
+  const sweep: {ids:string[];eligible:boolean;ms:number}[]=[];
+  for(let mask=0;mask<2**wall.length;mask++) {const ids=wall.filter((_,i)=>mask&(1<<i)).map(f=>f.id);const s=fixture(ids);const t=performance.now();const eligible=canEmergencyRestock(s);sweep.push({ids,eligible,ms:performance.now()-t});}
+  sweep.sort((a,b)=>b.ms-a.ms);console.log('WALL_SUBSET_SWEEP',JSON.stringify({kinds:wall.length,subsets:sweep.length,totalMs:sweep.reduce((a,b)=>a+b.ms,0),slowest:sweep.slice(0,10)}));
+  for(const row of sweep.slice(0,3)) console.log('WORST_SUBSET_REPEATED',JSON.stringify({ids:row.ids,...timed(fixture(row.ids))}));
+  // Defeat the bounded32-entry exact-result cache without including thrash time in call timing.
+  const evict = () => {const extra=['plant_fern','plant_snake','plant_fig','lamp','coatrack','catbed'];for(let bits=0;bits<40;bits++)canEmergencyRestock(fixture([...hard,...extra.filter((_,i)=>bits&(1<<i))]));};
+  const hardSix=['art_landscape','sconce','poster_coffee','poster_bakery','wreath_season','hanging_ivy'];
+  for(const [name,state] of [['hard_six_wall_cold',fixture(hardSix)], ['all_sub15_max_regions_cold',fixture(FURNITURE.filter(f=>f.comfort<15).map(f=>f.id),6,3)], ['hard_three_wall_cold',fixture(hard)]] as const) {
+    const measurements:number[]=[];let answer:boolean|undefined;
+    for(let repeat=0;repeat<30;repeat++){evict();const t=performance.now();const result=canEmergencyRestock(state);measurements.push(performance.now()-t);if(answer!==undefined)expect(result).toBe(answer);answer=result;}
+    measurements.sort((a,b)=>a-b);console.log('EVICTED_COLD',JSON.stringify({name,eligible:answer,n:30,meanMs:measurements.reduce((a,b)=>a+b,0)/30,medianMs:measurements[15],p95Ms:measurements[28],maxMs:measurements.at(-1)}));
+  }
+  // Same-object mutations exercise pure layout cache keys and live eligibility gates.
+  const s=fixture(hard);expect(canEmergencyRestock(s)).toBe(true);
+  s.regions=['reading'];expect(canEmergencyRestock(s)).toBe(false);s.regions=[];expect(canEmergencyRestock(s)).toBe(true);
+  s.decor.stored.garland=1;expect(canEmergencyRestock(s)).toBe(false);delete s.decor.stored.garland;expect(canEmergencyRestock(s)).toBe(true);
+  s.decor.owned.push('sill_tulips');expect(canEmergencyRestock(s)).toBe(false);s.decor.owned.pop();expect(canEmergencyRestock(s)).toBe(true);
+  s.decor.stored={piano:1};s.upgrades.tables=6;expect(canEmergencyRestock(s)).toBe(true);s.upgrades.tables=0;expect(canEmergencyRestock(s)).toBe(false);
+  s.decor.stored={};expect(canEmergencyRestock(s)).toBe(true);s.decor.placed=[{id:'art_bean',col:9,row:0}];expect(canEmergencyRestock(s)).toBe(false);s.decor.placed=[];expect(canEmergencyRestock(s)).toBe(true);
+  s.decor.owned.push('wall_brick');s.decor.equipped.wallpaper='wall_brick';s.decor.stored={plant_snake:1};expect(canEmergencyRestock(s)).toBe(false);
+  s.goal=GOALS.length;expect(canEmergencyRestock(s)).toBe(true);s.coins=1;expect(canEmergencyRestock(s)).toBe(false);s.coins=0;s.pantry.beans=1;expect(canEmergencyRestock(s)).toBe(false);
+  s.pantry.beans=0;s.phase='open';expect(canEmergencyRestock(s)).toBe(false);s.phase='prep';expect(canEmergencyRestock(s)).toBe(true);
+  s.inProduction.espresso=1;expect(canEmergencyRestock(s)).toBe(false);s.inProduction={};expect(canEmergencyRestock(s)).toBe(true);
+  s.kitchen=true;s.items.roll=1;s.pantry.flour=1;s.pantry.butter=1;expect(canEmergencyRestock(s)).toBe(false);s.pantry.flour=0;s.pantry.butter=0;expect(canEmergencyRestock(s)).toBe(true);
+  s.shelf.roll=1;expect(canEmergencyRestock(s)).toBe(false);s.shelf={};expect(canEmergencyRestock(s)).toBe(true);
+  s.coins=NaN;expect(canEmergencyRestock(s)).toBe(false);
+  console.log('Same-object cache dependency and live gate mutations passed; eviction only limits cache memory, never exact search.');
+},120000);
+BENCHMARK SOURCE END
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+RECOVERY_SHA256 fb4b7c3d135eaca7d53c765a52409ad91d769439fa8e043d5fc6b129c8f74cc0
+Node v24.19.0 platform linux arch x64
+CASE main_wall_16_owned_max12_placeable {"eligible":true,"firstMeasuredCallMs":8.308267,"repetitions":100,"meanMs":0.055684830000002135,"medianMs":0.040030000000001564,"p95Ms":0.1389080000000149,"maxMs":0.4034240000000011}
+CASE main_wall_plus_garland_feasible {"eligible":false,"firstMeasuredCallMs":0.4023719999999571,"repetitions":100,"meanMs":0.05559668000000329,"medianMs":0.039188999999964835,"p95Ms":0.12255300000003899,"maxMs":0.832917000000009}
+CASE wall_reading_unlock_feasible {"eligible":false,"firstMeasuredCallMs":0.9340689999999654,"repetitions":100,"meanMs":0.047551869999996936,"medianMs":0.03472199999998793,"p95Ms":0.09862800000001926,"maxMs":0.1685019999999895}
+CASE piano_main_max_tables_impossible {"eligible":true,"firstMeasuredCallMs":0.8717149999999947,"repetitions":100,"meanMs":0.037696140000002175,"medianMs":0.029393999999967946,"p95Ms":0.07271900000000642,"maxMs":0.3931690000000003}
+CASE piano_main_base_tables_feasible {"eligible":false,"firstMeasuredCallMs":0.06322499999998854,"repetitions":100,"meanMs":0.027175689999998552,"medianMs":0.02201300000001538,"p95Ms":0.05714499999999134,"maxMs":0.11806699999999637}
+CASE all_furniture_max_regions_max_tables {"eligible":false,"firstMeasuredCallMs":0.886306999999988,"repetitions":100,"meanMs":0.053511899999999744,"medianMs":0.03966000000002623,"p95Ms":0.12308500000000322,"maxMs":0.25580300000001444}
+CASE all_sub15_furniture_max_regions_max_tables {"eligible":false,"firstMeasuredCallMs":5.956356999999969,"repetitions":100,"meanMs":0.04614744000000257,"medianMs":0.03474199999999428,"p95Ms":0.08754099999998743,"maxMs":0.2498340000000212}
+CASE all_sub15_furniture_main_max_tables {"eligible":false,"firstMeasuredCallMs":1.2141469999999686,"repetitions":100,"meanMs":0.043542750000000296,"medianMs":0.03363000000001648,"p95Ms":0.08905300000003535,"maxMs":0.1264089999999669}
+CASE wall_many_tall_kinds_impossible {"eligible":true,"firstMeasuredCallMs":0.942260000000033,"repetitions":100,"meanMs":0.027081710000001636,"medianMs":0.021301999999991494,"p95Ms":0.060130000000015116,"maxMs":0.12926400000003468}
+CASE all_owned_styles_and_furniture_max_regions_tables {"eligible":false,"firstMeasuredCallMs":0.041792999999984204,"repetitions":100,"meanMs":0.0333009299999992,"medianMs":0.026870000000030814,"p95Ms":0.057116000000007716,"maxMs":0.24798099999998158}
+WALL_SUBSET_SWEEP {"kinds":10,"subsets":1024,"totalMs":162.019933000001,"slowest":[{"ids":["art_landscape","sconce","garland","poster_coffee","poster_bakery","wreath_season","hanging_ivy"],"eligible":false,"ms":3.2683620000000246},{"ids":["art_landscape","sconce","garland","poster_coffee","poster_bakery","hanging_ivy"],"eligible":false,"ms":3.2217830000000163},{"ids":["art_landscape","garland","poster_coffee","poster_bakery","wreath_season","hanging_ivy"],"eligible":true,"ms":3.168993999999998},{"ids":["art_landscape","garland","poster_coffee","poster_bakery","hanging_ivy"],"eligible":true,"ms":3.1121689999999944},{"ids":["art_landscape","garland","poster_coffee","wreath_season","hanging_ivy"],"eligible":true,"ms":2.433784000000003},{"ids":["art_landscape","sconce","garland","poster_bakery","wreath_season","hanging_ivy"],"eligible":false,"ms":2.4176990000000274},{"ids":["art_landscape","garland","poster_bakery","wreath_season","hanging_ivy"],"eligible":true,"ms":2.390007999999966},{"ids":["art_landscape","sconce","garland","poster_coffee","wreath_season","hanging_ivy"],"eligible":false,"ms":2.3693759999999884},{"ids":["art_landscape","garland","poster_coffee","poster_bakery","wreath_season"],"eligible":true,"ms":1.8082969999999818},{"ids":["garland","poster_coffee","poster_bakery","wreath_season","hanging_ivy"],"eligible":true,"ms":1.7150680000000307}]}
+WORST_SUBSET_REPEATED {"ids":["art_landscape","sconce","garland","poster_coffee","poster_bakery","wreath_season","hanging_ivy"],"eligible":false,"firstMeasuredCallMs":3.423235000000034,"repetitions":100,"meanMs":0.02677938000000097,"medianMs":0.021331999999972595,"p95Ms":0.052098000000000866,"maxMs":0.213279}
+WORST_SUBSET_REPEATED {"ids":["art_landscape","sconce","garland","poster_coffee","poster_bakery","hanging_ivy"],"eligible":false,"firstMeasuredCallMs":3.3126589999999965,"repetitions":100,"meanMs":0.025481409999998733,"medianMs":0.020660999999961405,"p95Ms":0.06747099999995498,"maxMs":0.0972449999999867}
+WORST_SUBSET_REPEATED {"ids":["art_landscape","garland","poster_coffee","poster_bakery","wreath_season","hanging_ivy"],"eligible":true,"firstMeasuredCallMs":3.282312999999988,"repetitions":100,"meanMs":0.025817599999998605,"medianMs":0.020952000000022508,"p95Ms":0.05758599999995795,"maxMs":0.0887019999999552}
+EVICTED_COLD {"name":"hard_six_wall_cold","eligible":true,"n":30,"meanMs":0.7685071333333326,"medianMs":0.7728469999999561,"p95Ms":0.9331070000000636,"maxMs":0.9796559999999772}
+EVICTED_COLD {"name":"all_sub15_max_regions_cold","eligible":false,"n":30,"meanMs":2.8167628333333257,"medianMs":2.694513999999913,"p95Ms":3.8463580000000093,"maxMs":4.903780999999981}
+EVICTED_COLD {"name":"hard_three_wall_cold","eligible":true,"n":30,"meanMs":0.09356969999999667,"medianMs":0.09213799999997718,"p95Ms":0.10299399999985326,"maxMs":0.11952899999982947}
+Same-object cache dependency and live gate mutations passed; eviction only limits cache memory, never exact search.
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  18:14:10
+   Duration  1.31s (tests 88%, transform 9%, import 2%)
+
+
+FINAL PERFORMANCE INTERPRETATION (optimized solver):
+Exact audited production source SHA256: fb4b7c3d135eaca7d53c765a52409ad91d769439fa8e043d5fc6b129c8f74cc0.
+Independent cache-cold measurement method: invoke40distinct owned-kind sets reaching the exact search/cache before every measured call, exceeding the32-entry FIFO. The fixture itself is either absent or evicted by later distinct sets. Thrash time excluded. Thirty such measured cold calls per fixture.
+- Six-kind impossible main wall: cold mean0.769ms,p950.933ms,max0.980ms; previous uncached mean109.40ms.
+- All sub15-comfort furniture, maxregions/maxmain tables: cold mean2.817ms,p953.846ms,max4.904ms; previous mean72.66ms.
+- Three-kind impossible main wall: cold mean0.094ms,p950.103ms,max0.120ms.
+- Warm100-call case means ~0.025–0.056ms. First fresh-process/JIT eligibility call8.308ms.
+- Full1024 low/mid-wall subsets: total162.02ms, slowest measured3.268ms. This enumerates that bounded subset family only; it is not an absolute worst-case proof over every possible inventory/catalog.
+- Ownership/region/table/style/placed-kind dependency changes and live phase/goal/cash/pantry/production/shelf/invalid-number gates passed on same objects.
+- Cache boundedness evicts memoized results; it never cuts off exact search or treats unknown as unreachable.
+- These are synchronous host benchmark timings, not a mobile-browser frame-time guarantee. No measured fixture remained above a16.7ms frame budget after optimization; cold costs and concurrent rendering still matter.
+Temporary Vitest runner source is preserved above and can be restored to the exact stated path for reproduction. No production source or core tests were changed by this audit.
+Actual UI call-site audit: src/ui/prepare.ts render() calls canEmergencyRestock once when the modal opens and once per handled click/change rerender. emergencyRestock itself rechecks eligibility at the click boundary, then the rerender checks again. No animation-loop, per-frame polling, or per-menu-row eligibility loop was found; the eligibility call is outside the unlocked-items map. The modal's render closure is not returned to a ticking caller. Thus repeated100-call tests are deliberately stronger than normal synchronous UI usage.

@@ -1,0 +1,4 @@
+Fresh temp checkout: restored19files, all originalSHA256match.
+Idempotent second run: pass.
+Modified original evidence: correctly refused overwrite before writing.
+Restored/verified 19 exact audit evidence files.

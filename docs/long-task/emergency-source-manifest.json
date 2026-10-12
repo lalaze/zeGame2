@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-12",
+  "baseCommit": "57df94e60899a3067d1313a2980d32b4d591be48",
+  "productionSourceHash": "4b3bbcd6bde58bd65e86851f465292e28b477d0b2b6e78fd7b04b5cecc2cc220",
+  "historicalProductionHash": "0b73358c463ed8805ac4d16e7d0c831eec28bfed99fb0b5b19b7156422bd76cf",
+  "noCommitPushOrDeploy": true,
+  "files": [
+    {
+      "path": "src/game/recovery.ts",
+      "sha256": "fb4b7c3d135eaca7d53c765a52409ad91d769439fa8e043d5fc6b129c8f74cc0"
+    },
+    {
+      "path": "src/game/recovery.test.ts",
+      "sha256": "1708f67349ddc43018e53a4b342f0820976d037e402b68ca3a7676677935dc4c"
+    },
+    {
+      "path": "src/ui/prepare.ts",
+      "sha256": "4c96b8a70ae011a61b7f57532aa0a52005e260a4fc2f060a2a8a3f2144510026"
+    },
+    {
+      "path": "src/ui/recovery.test.ts",
+      "sha256": "d100e271b2a299e6656a7798510dd7bb34dbb2e24be26151bae887e6125a15dd"
+    },
+    {
+      "path": "src/locales/en.json",
+      "sha256": "47d6e08f3ca65fedd2adb39f8513eab4f1dc0436bdbcce96380e0c610e922f0a"
+    },
+    {
+      "path": "src/locales/zh.json",
+      "sha256": "197cf4cba5d7cb6bd5675e6f68569db5a9378a4b5c00ede672ab0eccd2208110"
+    },
+    {
+      "path": "scripts/economy-recovery.test.ts",
+      "sha256": "7cffe055ed046c33a6cebf156d4071318c2faa377a0cb1ff6fa3a6c254627482"
+    }
+  ],
+  "historicalV1ProductionSourceHash": "9866eacb3962a968dfd53f648a8d2cb8d251ecd2f9bd1292b617c155204fc847",
+  "version": 2,
+  "exactFurnitureReachability": true
+}

@@ -1,0 +1,8 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> tiny-bean-cafe@0.1.0 balance:compare
+> node scripts/compare-economy.mjs
+
+Validated 98 matched scenarios × 30 seeds × 8 days; 2 changed, 96 unchanged.
+early/initial/nine-coin-complex: net-liquid Δ2211.80, served Δ156.07, waste Δ0.00
+early/initial/one-coin-shared: net-liquid Δ755.10, served Δ147.63, waste Δ0.00

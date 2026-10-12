@@ -1,0 +1,175 @@
+{
+  "baselineCommit": "57df94e60899a3067d1313a2980d32b4d591be48",
+  "currentHead": "57df94e60899a3067d1313a2980d32b4d591be48",
+  "mainScenariosPerVariant": 98,
+  "mainSeedsPerScenario": 30,
+  "mainDaysPerSeed": 8,
+  "totalRecordedCafeDaysIncludingRepeatedControl": 62940,
+  "absoluteInsolvencyPolicy": "approved2026-10-12; narrow one-bean recovery implemented and validated; no debt/cash grants",
+  "files": [
+    {
+      "file": "results/baseline.json",
+      "bytes": 27333177,
+      "sha256": "09fd5cba28da17e8f05a3753adde370168892194bf16a448dc01aeef78187b64",
+      "complete": true,
+      "completedScenarios": 98
+    },
+    {
+      "file": "results/baseline-summary.json",
+      "bytes": 2579826,
+      "sha256": "35c7c59df4b4e9f455aa38ef59a99fac9f948f751bd4687c922ec36ef2e01e01",
+      "complete": null,
+      "completedScenarios": 98
+    },
+    {
+      "file": "results/balanced.json",
+      "bytes": 27359695,
+      "sha256": "14dc93f402092166266182200449ffa0700140f80e01a246b66e2cc53414c3de",
+      "complete": true,
+      "completedScenarios": 98
+    },
+    {
+      "file": "results/balanced-summary.json",
+      "bytes": 2583993,
+      "sha256": "0cfddbe7414df3eda6d7480818526cc11522a4ed92e3cacb2b19205cae4b7da0",
+      "complete": null,
+      "completedScenarios": 98
+    },
+    {
+      "file": "results/comparison.json",
+      "bytes": 3469907,
+      "sha256": "d676c84d45bf69233de56382f9ef27ee5e748d71a31fa1a8b848121551c1401d",
+      "complete": null,
+      "completedScenarios": 98
+    },
+    {
+      "file": "results/investment-frontier.json",
+      "bytes": 557585,
+      "sha256": "022a97dff0f8bab3b5b52311a70f7119e48ba6f04ae6f5e8eee7ea2af12b9e4c",
+      "complete": true,
+      "completedScenarios": 10
+    },
+    {
+      "file": "results/economy-long-horizon.json",
+      "bytes": 10717348,
+      "sha256": "9b53d01543decd8a7fc6d26ef3a8301fab5399ef3a1ba9fcdb59a57c951ac507",
+      "complete": true,
+      "completedScenarios": 11
+    },
+    {
+      "file": "results/economy-long-horizon-supplement.json",
+      "bytes": 4238565,
+      "sha256": "845a508c3bbc31bc7359f2899af9f427f97452f686d61546882aaa8169f87274",
+      "complete": true,
+      "completedScenarios": 4
+    },
+    {
+      "file": "results/fixed-clock-balanced.json",
+      "bytes": 5888268,
+      "sha256": "c13dc212237c9a77213d63d6c1f7cfae9c4d146d7a59d715cb2ab38afe7f20b5",
+      "complete": true,
+      "completedScenarios": 20
+    },
+    {
+      "file": "results/fixed-clock-balanced-summary.json",
+      "bytes": 86193,
+      "sha256": "7be884396f35fd3e4961f291a308be9979a0585ac8020bfc6e3e69d48131506e",
+      "complete": true,
+      "completedScenarios": 20
+    },
+    {
+      "file": "results/fixed-clock-baseline.json",
+      "bytes": 508193,
+      "sha256": "e668629c1a3efcf234623c3676031a9c89c54845f3a7a05b489c52508ad95ffb",
+      "complete": true,
+      "completedScenarios": 2
+    },
+    {
+      "file": "results/fixed-clock-baseline-summary.json",
+      "bytes": 15612,
+      "sha256": "e0f37c7ddb2bac4d5f31205e7a28e4885cb6f8e665339364303b3cfbacb8b313",
+      "complete": true,
+      "completedScenarios": 2
+    },
+    {
+      "file": "results/fixed-clock-verification.json",
+      "bytes": 3490,
+      "sha256": "a8e80ac6598d95496060b95554ab2d9dccb4b6fde63494475c290164b07f38f2",
+      "complete": true,
+      "completedScenarios": null
+    },
+    {
+      "file": "results/emergency-recovery.json",
+      "bytes": 5106214,
+      "sha256": "17892fe043e7abf1629f29b8de4c5ee28f645ea665cb1812fe3d87c058177e21",
+      "complete": true
+    },
+    {
+      "file": "results/emergency-recovery-summary.json",
+      "bytes": 29928,
+      "sha256": "8e971ca188b78763303b61198bbde5cd3e9ee76afad05fb9678cffa2a4bafd60",
+      "complete": true
+    },
+    {
+      "file": "results/emergency-recovery-verification.json",
+      "bytes": 488,
+      "sha256": "f4c703879316470a008b82c3e4170c2c2cbbc37a2018fa473b186175a5727d4b",
+      "complete": true
+    },
+    {
+      "file": "results/emergency-recovery-v2.json",
+      "bytes": 5975056,
+      "sha256": "89c684ba3f23fa953af2c79eb629f7a10d4f88c703dcdf5415ed1fb627c046c1",
+      "complete": true
+    },
+    {
+      "file": "results/emergency-recovery-v2-summary.json",
+      "bytes": 34191,
+      "sha256": "fdada7c1e23feaad587e44ae642a86da3868d5e9dc03400e16e46a0d8df7bf7f",
+      "complete": true
+    },
+    {
+      "file": "results/emergency-recovery-v2-verification.json",
+      "bytes": 488,
+      "sha256": "e447a07c23478a692aed2606f048e5be0f158239a4ff29d21d4115a221ad4479",
+      "complete": true
+    }
+  ],
+  "strictTotalClock": {
+    "candidateRoutes": 20,
+    "baselineRecoveryRoutes": 2,
+    "seedsPerRoute": 30,
+    "totalTrajectories": 660,
+    "secondsPerTrajectory": 1800,
+    "ticksPerTrajectory": 36000,
+    "coverage": "Representative supplement; original98 scenarios remain equal-open-window experiments",
+    "firstPaybackTimestampMeasured": false
+  },
+  "historicalAbsoluteInsolvencyPolicyAsOf2026-10-11": "pending user decision; not implemented",
+  "emergencyRecovery": {
+    "complete": true,
+    "trajectories": 360,
+    "pairedCases": 180,
+    "secondsPerTrajectory": 1800,
+    "ticksPerTrajectory": 36000,
+    "normalByteEquivalentPairs": 90,
+    "successfulGrants": 90,
+    "maxLedgerResidual": 0,
+    "sourceHash": "4b3bbcd6bde58bd65e86851f465292e28b477d0b2b6e78fd7b04b5cecc2cc220",
+    "runnerHash": "79a3428846e53cc878a7914085dd4581d21c30203dc2e2dbd19e881609f9cac5",
+    "previousFixedClockSourceHash": "0b73358c463ed8805ac4d16e7d0c831eec28bfed99fb0b5b19b7156422bd76cf"
+  },
+  "historicalEmergencyRecoveryV1": {
+    "complete": true,
+    "trajectories": 300,
+    "pairedCases": 150,
+    "secondsPerTrajectory": 1800,
+    "ticksPerTrajectory": 36000,
+    "normalByteEquivalentPairs": 90,
+    "successfulGrants": 60,
+    "maxLedgerResidual": 0,
+    "sourceHash": "9866eacb3962a968dfd53f648a8d2cb8d251ecd2f9bd1292b617c155204fc847",
+    "runnerHash": "9fe90898603ed7d2ce2a629bc596dc7a9f652a4eba70c93f40eaa00308beb94d",
+    "previousFixedClockSourceHash": "0b73358c463ed8805ac4d16e7d0c831eec28bfed99fb0b5b19b7156422bd76cf"
+  }
+}

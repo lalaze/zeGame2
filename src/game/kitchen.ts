@@ -287,8 +287,8 @@ export function startBatch(state: GameState, item: ItemId, n: number): void {
 
 /** A finished batch goes into the pastry case. */
 export function shelveBatch(state: GameState, item: ItemId, n: number): void {
-  if (!state.kitchen || state.phase === 'prep' || !isBakery(item) || state.items[item] <= 0 || !Number.isInteger(n) || n <= 0) return;
-  state.inProduction[item] = Math.max(0, (state.inProduction[item] ?? 0) - n);
+  if (!state.kitchen || state.phase === 'prep' || !isBakery(item) || state.items[item] <= 0 || !Number.isInteger(n) || n <= 0 || n > (state.inProduction[item] ?? 0)) return;
+  state.inProduction[item] = (state.inProduction[item] ?? 0) - n;
   state.shelf[item] = (state.shelf[item] ?? 0) + n;
   state.today.baked[item] = (state.today.baked[item] ?? 0) + n;
 }

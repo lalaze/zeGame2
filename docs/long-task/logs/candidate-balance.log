@@ -1,0 +1,46 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> tiny-bean-cafe@0.1.0 balance
+> vitest run scripts/balance.test.ts --silent=false --disableConsoleIntercept
+
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+┌─────────┬──────────┬───────────┬─────────┬────────┬──────┬───────┬────────┐
+│ (index) │ version  │ marketing │ menu    │ profit │ lost │ stale │ served │
+├─────────┼──────────┼───────────┼─────────┼────────┼──────┼───────┼────────┤
+│ 0       │ 'before' │ 0         │ 'fast'  │ 182    │ 0    │ 0     │ 72     │
+│ 1       │ 'before' │ 0         │ 'high'  │ 630    │ 0    │ 0     │ 72     │
+│ 2       │ 'before' │ 0         │ 'mixed' │ 147    │ 0    │ 5     │ 75     │
+│ 3       │ 'before' │ 0         │ 'all'   │ 758    │ 0    │ 21    │ 87     │
+│ 4       │ 'before' │ 25        │ 'fast'  │ 351    │ 0    │ 0     │ 145    │
+│ 5       │ 'before' │ 25        │ 'high'  │ 832    │ 0    │ 0     │ 101    │
+│ 6       │ 'before' │ 25        │ 'mixed' │ 331    │ 41   │ 0     │ 135    │
+│ 7       │ 'before' │ 25        │ 'all'   │ 1161   │ 7    │ 8     │ 119    │
+│ 8       │ 'after'  │ 0         │ 'fast'  │ 181    │ 0    │ 0     │ 72     │
+│ 9       │ 'after'  │ 0         │ 'high'  │ 538    │ 0    │ 0     │ 64     │
+│ 10      │ 'after'  │ 0         │ 'mixed' │ 317    │ 0    │ 6     │ 75     │
+│ 11      │ 'after'  │ 0         │ 'all'   │ 807    │ 0    │ 19    │ 76     │
+│ 12      │ 'after'  │ 25        │ 'fast'  │ 507    │ 0    │ 0     │ 215    │
+│ 13      │ 'after'  │ 25        │ 'high'  │ 498    │ 0    │ 0     │ 64     │
+│ 14      │ 'after'  │ 25        │ 'mixed' │ 652    │ 78   │ 0     │ 183    │
+│ 15      │ 'after'  │ 25        │ 'all'   │ 853    │ 1    │ 18    │ 79     │
+└─────────┴──────────┴───────────┴─────────┴────────┴──────┴───────┴────────┘
+┌─────────┬──────────┬────────┬──────┬───────┬────────┐
+│ (index) │ clicks   │ profit │ lost │ stale │ served │
+├─────────┼──────────┼────────┼──────┼───────┼────────┤
+│ 0       │ 'none'   │ 853    │ 1    │ 18    │ 79     │
+│ 1       │ '1/sec'  │ 1049   │ 2    │ 13    │ 100    │
+│ 2       │ '10/sec' │ 1145   │ 5    │ 11    │ 103    │
+└─────────┴──────────┴────────┴──────┴───────┴────────┘
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  10:42:25
+   Duration  34.32s (tests 99%, transform 1%)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

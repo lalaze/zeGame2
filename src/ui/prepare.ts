@@ -1,3 +1,4 @@
+import { canEmergencyRestock, emergencyRestock } from '../game/recovery';
 import { promotionPlan } from '../game/promotion';
 import { petTraffic } from '../game/pets';
 import { BAKE_STEP, type ItemId } from '../game/data';
@@ -55,10 +56,15 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
       ${missing ? `<p class="note">${t('prep.missing', { items: missing })}</p>` : ''}
       ${quote.cost > state.coins ? `<p class="note warn">${t('prep.partial', { money: formatMoney(state.coins) })}</p>` : ''}
       <button class="pixel-btn small ghost" data-focus="restock" data-restock ${full || state.coins <= 0 ? 'disabled' : ''}>${full ? t('pantry.full') : t('pantry.restock', { price: formatMoney(quote.cost) })}</button>
+      ${canEmergencyRestock(state) ? `<p class="note warn">${t('prep.emergencyHint')}</p><button class="pixel-btn small" data-focus="emergency" data-emergency-restock>${t('prep.emergency')}</button>` : ''}
       <p class="note" role="status">${receipt}</p>`;
     const start = document.querySelector<HTMLButtonElement>('.modal-actions [data-start]');
     if (start) start.disabled = onMenu.size === 0;
-    if (focus) body.querySelector<HTMLElement>(`[data-focus="${focus}"]`)?.focus();
+    if (focus) {
+      const next = body.querySelector<HTMLElement>(`[data-focus="${focus}"]`)
+        ?? (focus === 'emergency' ? body.querySelector<HTMLElement>('[data-focus="dish-espresso"]') : null);
+      next?.focus();
+    }
   };
   body.addEventListener('change', (e) => {
     const input = e.target as HTMLInputElement;
@@ -80,6 +86,8 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
       restock(state);
       const bought = Object.entries(state.pantry).filter(([id, n]) => n > before[id as keyof typeof before]).map(([id, n]) => `${ingredientName(id as keyof typeof before)} ×${n - before[id as keyof typeof before]}`).join(t('list.sep'));
       receipt = bought ? t('prep.bought', { items: bought }) : t('prep.noPurchase');
+    } else if (target.closest('button[data-emergency-restock]')) {
+      receipt = emergencyRestock(state) ? t('prep.emergencyReceived') : t('prep.emergencyUnavailable');
     } else return;
     onChange(); render();
   });

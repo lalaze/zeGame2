@@ -12,7 +12,15 @@
     "test": "vitest run",
     "icons": "node scripts/gen-icons.mjs",
     "font": "node scripts/subset-font.mjs",
-    "balance": "vitest run scripts/balance.test.ts --silent=false --disableConsoleIntercept"
+    "balance": "vitest run scripts/balance.test.ts --silent=false --disableConsoleIntercept",
+    "balance:lab": "ECONOMY_LAB=1 vitest run scripts/economy-lab.test.ts --silent=false --disableConsoleIntercept",
+    "balance:compare": "node scripts/compare-economy.mjs",
+    "balance:frontier": "INVESTMENT_FRONTIER=1 vitest run scripts/investment-frontier.test.ts --silent=false --disableConsoleIntercept",
+    "balance:long": "ECONOMY_LONG_HORIZON=1 vitest run scripts/economy-long-horizon.test.ts --silent=false --disableConsoleIntercept",
+    "balance:long-supplement": "ECONOMY_LONG_HORIZON_SUPPLEMENT=1 vitest run scripts/economy-long-horizon-supplement.test.ts --silent=false --disableConsoleIntercept",
+    "balance:fixed-clock": "FIXED_CLOCK=1 vitest run scripts/economy-fixed-clock.test.ts --silent=false --disableConsoleIntercept",
+    "balance:recovery": "EMERGENCY_RECOVERY=1 EMERGENCY_RECOVERY_LABEL=emergency-recovery-v2 vitest run scripts/economy-recovery.test.ts --silent=false --disableConsoleIntercept",
+    "balance:restore": "node scripts/restore-economy-evidence.mjs"
   },
   "devDependencies": {
     "happy-dom": "^20.14.6",

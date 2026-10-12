@@ -1,0 +1,92 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+early/initial/none: 5/30 seeds, 1.7s
+early/initial/none: 10/30 seeds, 3.5s
+early/initial/none: 15/30 seeds, 5.6s
+early/initial/none: 20/30 seeds, 7.3s
+early/initial/none: 25/30 seeds, 9.0s
+early/initial/none: 30/30 seeds, 10.6s
+{"scenario":"early/initial/none","operating":{"n":30,"mean":2840.6666666666665,"sd":70.61568319179302,"ci95Low":2815.397168969448,"ci95High":2865.936164363885,"min":2692,"p10":2750,"median":2843,"p90":2942,"max":2964},"netLiquid":{"n":30,"mean":2840.6666666666665,"sd":70.61568319179302,"ci95Low":2815.397168969448,"ci95High":2865.936164363885,"min":2692,"p10":2750,"median":2843,"p90":2942,"max":2964},"pairedNetAdvantage":null,"capitalRecovered":0,"capitalCensored":0,"terminalPositive":0}
+early/initial/cat: 5/30 seeds, 1.7s
+early/initial/cat: 10/30 seeds, 3.6s
+early/initial/cat: 15/30 seeds, 5.2s
+early/initial/cat: 20/30 seeds, 6.7s
+early/initial/cat: 25/30 seeds, 8.2s
+early/initial/cat: 30/30 seeds, 9.6s
+{"scenario":"early/initial/cat","operating":{"n":30,"mean":2816.0666666666625,"sd":73.86937834767048,"ci95Low":2789.6328491111262,"ci95High":2842.500484222199,"min":2699.999999999995,"p10":2727.999999999995,"median":2799.9999999999955,"p90":2917.9999999999955,"max":2937.9999999999955},"netLiquid":{"n":30,"mean":2524.0666666666666,"sd":73.86937834767032,"ci95Low":2497.6328491111303,"ci95High":2550.500484222203,"min":2408,"p10":2436,"median":2508,"p90":2626,"max":2646},"pairedNetAdvantage":{"n":30,"mean":-316.6,"sd":92.88799335944786,"ci95Low":-349.8395415324483,"ci95High":-283.3604584675517,"min":-498,"p10":-416,"median":-333,"p90":-190,"max":-130},"capitalRecovered":0,"capitalCensored":30,"terminalPositive":0}
+early/initial/espresso-ten: 5/30 seeds, 1.7s
+early/initial/espresso-ten: 10/30 seeds, 3.1s
+early/initial/espresso-ten: 15/30 seeds, 5.1s
+early/initial/espresso-ten: 20/30 seeds, 6.8s
+early/initial/espresso-ten: 25/30 seeds, 8.5s
+early/initial/espresso-ten: 30/30 seeds, 10.0s
+{"scenario":"early/initial/espresso-ten","operating":{"n":30,"mean":92536.23466666667,"sd":1741.6636317944424,"ci95Low":91912.98834030282,"ci95High":93159.48099303052,"min":88768.87999999999,"p10":90356.84,"median":92478.69999999998,"p90":94874.63999999998,"max":95551.84},"netLiquid":{"n":30,"mean":92378.99800044394,"sd":1741.663631794544,"ci95Low":91755.75167408005,"ci95High":93002.24432680784,"min":88611.64333377706,"p10":90199.60333377721,"median":92321.46333377728,"p90":94717.40333377715,"max":95394.60333377757},"pairedNetAdvantage":{"n":30,"mean":89538.3313337773,"sd":1671.520259054819,"ci95Low":88940.18549098598,"ci95High":90136.47717656862,"min":85919.64333377706,"p10":87449.60333377721,"median":89478.46333377728,"p90":91773.40333377742,"max":92438.60333377757},"capitalRecovered":30,"capitalCensored":0,"terminalPositive":30}
+mid/high/none: 5/30 seeds, 6.1s
+mid/high/none: 10/30 seeds, 12.6s
+mid/high/none: 15/30 seeds, 18.7s
+mid/high/none: 20/30 seeds, 25.6s
+mid/high/none: 25/30 seeds, 31.8s
+mid/high/none: 30/30 seeds, 37.7s
+{"scenario":"mid/high/none","operating":{"n":30,"mean":7921.3,"sd":210.1641640767259,"ci95Low":7846.093719749894,"ci95High":7996.506280250106,"min":7381,"p10":7595,"median":7916,"p90":8148,"max":8341},"netLiquid":{"n":30,"mean":7921.3,"sd":210.1641640767259,"ci95Low":7846.093719749894,"ci95High":7996.506280250106,"min":7381,"p10":7595,"median":7916,"p90":8148,"max":8341},"pairedNetAdvantage":null,"capitalRecovered":0,"capitalCensored":0,"terminalPositive":0}
+mid/high/cat: 5/30 seeds, 6.4s
+mid/high/cat: 10/30 seeds, 13.2s
+mid/high/cat: 15/30 seeds, 20.2s
+mid/high/cat: 20/30 seeds, 26.9s
+mid/high/cat: 25/30 seeds, 34.5s
+mid/high/cat: 30/30 seeds, 41.4s
+{"scenario":"mid/high/cat","operating":{"n":30,"mean":7746.066666666666,"sd":210.4838323438665,"ci95Low":7670.745994596283,"ci95High":7821.387338737049,"min":7316.999999999998,"p10":7422.999999999998,"median":7740.499999999998,"p90":8024.999999999998,"max":8102.999999999998},"netLiquid":{"n":30,"mean":7454.066666666667,"sd":210.48383234386654,"ci95Low":7378.745994596284,"ci95High":7529.3873387370495,"min":7025,"p10":7131,"median":7448.5,"p90":7733,"max":7811},"pairedNetAdvantage":{"n":30,"mean":-467.23333333333335,"sd":262.455997406637,"ci95Low":-561.1520058196598,"ci95High":-373.31466084700685,"min":-984,"p10":-937,"median":-419.5,"p90":-170,"max":-5},"capitalRecovered":1,"capitalCensored":29,"terminalPositive":0}
+mid/high/noteLocal: 5/30 seeds, 7.1s
+mid/high/noteLocal: 10/30 seeds, 13.6s
+mid/high/noteLocal: 15/30 seeds, 21.8s
+mid/high/noteLocal: 20/30 seeds, 29.4s
+mid/high/noteLocal: 25/30 seeds, 37.0s
+mid/high/noteLocal: 30/30 seeds, 44.7s
+{"scenario":"mid/high/noteLocal","operating":{"n":30,"mean":7185.233333333481,"sd":191.02223797845846,"ci95Low":7116.876903365879,"ci95High":7253.589763301083,"min":6849.000000000149,"p10":6882.00000000015,"median":7152.500000000149,"p90":7414.000000000149,"max":7569.000000000149},"netLiquid":{"n":30,"mean":7185.233333333334,"sd":191.02223797845852,"ci95Low":7116.876903365732,"ci95High":7253.589763300935,"min":6849,"p10":6882,"median":7152.5,"p90":7414,"max":7569},"pairedNetAdvantage":{"n":30,"mean":-736.0666666666667,"sd":293.6485036198225,"ci95Low":-841.1474341480067,"ci95High":-630.9858991853267,"min":-1445,"p10":-1108,"median":-747,"p90":-365,"max":-177},"capitalRecovered":0,"capitalCensored":0,"terminalPositive":0}
+mid/high/cat-noteLocal: 5/30 seeds, 6.6s
+mid/high/cat-noteLocal: 10/30 seeds, 12.7s
+mid/high/cat-noteLocal: 15/30 seeds, 18.6s
+mid/high/cat-noteLocal: 20/30 seeds, 25.3s
+mid/high/cat-noteLocal: 25/30 seeds, 31.4s
+mid/high/cat-noteLocal: 30/30 seeds, 37.8s
+{"scenario":"mid/high/cat-noteLocal","operating":{"n":30,"mean":7015.966666666812,"sd":217.89233078768964,"ci95Low":6937.994897476013,"ci95High":7093.938435857611,"min":6614.0000000001455,"p10":6668.0000000001455,"median":7035.0000000001455,"p90":7216.000000000146,"max":7456.0000000001455},"netLiquid":{"n":30,"mean":6723.966666666666,"sd":217.89233078768962,"ci95Low":6645.994897475867,"ci95High":6801.938435857465,"min":6322,"p10":6376,"median":6743,"p90":6924,"max":7164},"pairedNetAdvantage":{"n":30,"mean":-1197.3333333333333,"sd":230.00544721185722,"ci95Low":-1279.6397255675051,"ci95High":-1115.0269410991614,"min":-1725,"p10":-1626,"median":-1166,"p90":-979,"max":-824},"capitalRecovered":0,"capitalCensored":30,"terminalPositive":0}
+expanded/high/none: 5/30 seeds, 20.2s
+expanded/high/none: 10/30 seeds, 40.2s
+expanded/high/none: 15/30 seeds, 60.8s
+expanded/high/none: 20/30 seeds, 81.0s
+expanded/high/none: 25/30 seeds, 101.3s
+expanded/high/none: 30/30 seeds, 120.5s
+{"scenario":"expanded/high/none","operating":{"n":30,"mean":214113.33333333334,"sd":4732.337392388913,"ci95Low":212419.88814616945,"ci95High":215806.77852049723,"min":203544,"p10":207640,"median":214404,"p90":220248,"max":221776},"netLiquid":{"n":30,"mean":214113.33333333334,"sd":4732.337392388913,"ci95Low":212419.88814616945,"ci95High":215806.77852049723,"min":203544,"p10":207640,"median":214404,"p90":220248,"max":221776},"pairedNetAdvantage":null,"capitalRecovered":0,"capitalCensored":0,"terminalPositive":0}
+expanded/high/cat: 5/30 seeds, 22.4s
+expanded/high/cat: 10/30 seeds, 43.2s
+expanded/high/cat: 15/30 seeds, 64.8s
+expanded/high/cat: 20/30 seeds, 85.7s
+expanded/high/cat: 25/30 seeds, 106.7s
+expanded/high/cat: 30/30 seeds, 127.4s
+{"scenario":"expanded/high/cat","operating":{"n":30,"mean":216160.8,"sd":3972.838734934141,"ci95Low":214739.13791693022,"ci95High":217582.46208306975,"min":208744,"p10":210112,"median":217024,"p90":220000,"max":225264},"netLiquid":{"n":30,"mean":215868.8,"sd":3972.838734934141,"ci95Low":214447.13791693022,"ci95High":217290.46208306975,"min":208452,"p10":209820,"median":216732,"p90":219708,"max":224972},"pairedNetAdvantage":{"n":30,"mean":1755.4666666666667,"sd":6066.541159242358,"ci95Low":-415.4172067810455,"ci95High":3926.350540114379,"min":-11612,"p10":-6460,"median":2060,"p90":9196,"max":13404},"capitalRecovered":28,"capitalCensored":2,"terminalPositive":19}
+expanded/high/noteLocal: 5/30 seeds, 20.2s
+expanded/high/noteLocal: 10/30 seeds, 42.4s
+expanded/high/noteLocal: 15/30 seeds, 64.7s
+expanded/high/noteLocal: 20/30 seeds, 90.2s
+expanded/high/noteLocal: 25/30 seeds, 115.5s
+expanded/high/noteLocal: 30/30 seeds, 138.3s
+{"scenario":"expanded/high/noteLocal","operating":{"n":30,"mean":217157.20000000004,"sd":4741.511518056458,"ci95Low":215460.47189412813,"ci95High":218853.92810587195,"min":205242.00000000012,"p10":210738.00000000012,"median":217838.00000000012,"p90":221642.00000000012,"max":229938.00000000012},"netLiquid":{"n":30,"mean":217157.2,"sd":4741.511518056459,"ci95Low":215460.4718941281,"ci95High":218853.92810587192,"min":205242,"p10":210738,"median":217838,"p90":221642,"max":229938},"pairedNetAdvantage":{"n":30,"mean":3043.866666666667,"sd":7004.129204451021,"ci95Low":537.4712201737552,"ci95High":5550.262113159579,"min":-16534,"p10":-8702,"median":3950,"p90":10306,"max":14674},"capitalRecovered":0,"capitalCensored":0,"terminalPositive":22}
+expanded/high/cat-noteLocal: 5/30 seeds, 21.7s
+expanded/high/cat-noteLocal: 10/30 seeds, 44.0s
+expanded/high/cat-noteLocal: 15/30 seeds, 67.2s
+expanded/high/cat-noteLocal: 20/30 seeds, 89.2s
+expanded/high/cat-noteLocal: 25/30 seeds, 112.3s
+expanded/high/cat-noteLocal: 30/30 seeds, 135.7s
+{"scenario":"expanded/high/cat-noteLocal","operating":{"n":30,"mean":218375.8666666667,"sd":3420.5299421372506,"ci95Low":217151.8457468188,"ci95High":219599.88758651458,"min":210154.00000000012,"p10":214082.00000000012,"median":219246.00000000012,"p90":222082.00000000012,"max":224802.00000000012},"netLiquid":{"n":30,"mean":218083.86666666667,"sd":3420.529942137252,"ci95Low":216859.84574681878,"ci95High":219307.88758651455,"min":209862,"p10":213790,"median":218954,"p90":221790,"max":224510},"pairedNetAdvantage":{"n":30,"mean":3970.5333333333333,"sd":5436.489205191243,"ci95Low":2025.110656073171,"ci95High":5915.956010593496,"min":-5506,"p10":-2842,"median":2830,"p90":11486,"max":15990},"capitalRecovered":28,"capitalCensored":2,"terminalPositive":23}
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  10:56:22
+   Duration  714.59s (tests 100%)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
