@@ -1,3 +1,4 @@
+import { emptyRegularGuests, parseRegularGuests, type RegularGuestState } from './regular-guests';
 import { parsePromotion, type Promotion } from './promotion';
 import {
   INGREDIENTS,
@@ -19,7 +20,7 @@ import { parseTaste, type TasteState } from './taste';
 import { emptyReviews, parseReputation, parseReviews, type Reputation, type ReviewSummary } from './reputation';
 
 export const SAVE_KEY = 'tiny-bean-cafe/save';
-export const SAVE_VERSION = 12;
+export const SAVE_VERSION = 13;
 
 export interface Look {
   skin: number;
@@ -89,6 +90,7 @@ export const emptyDay = (): DayStats => ({
 export type Phase = 'prep' | 'open' | 'closing';
 
 export interface GameState {
+  regularGuests: RegularGuestState;
   promotion: Promotion | null;
   pets: Pet[];
   reputation: Reputation;
@@ -143,6 +145,7 @@ export function createInitialState(now: number): GameState {
   pantry.beans = STARTER_BEANS;
   return {
     version: SAVE_VERSION,
+    regularGuests: emptyRegularGuests(),
     pets: [],
     promotion: null,
     reputation: { recent: [] },
@@ -275,6 +278,7 @@ export function deserialize(raw: string | null, now: number): GameState {
   base.goal = Math.floor(num(data.goal, 0));
 
   base.day = Math.max(1, Math.floor(num(data.day, 1)));
+  base.regularGuests = parseRegularGuests(data.regularGuests, base.day);
   base.phase = data.phase === 'closing' ? 'closing' : data.phase === 'open' ? 'open' : 'prep';
   base.dayTime = base.phase !== 'prep' ? num(data.dayTime, 0) : 0;
   base.speed = SPEEDS.find((v) => v === data.speed) ?? 1;

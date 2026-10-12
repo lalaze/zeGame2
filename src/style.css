@@ -2025,3 +2025,48 @@ html:lang(zh) body {
 .pet-living p { margin: 6px 0; overflow-wrap: anywhere; }
 .living-cat-detail p { line-height: 1.5; }
 .modal:has(.living-cat-detail) .modal-actions .pixel-btn { min-height: 44px; }
+
+/* The journal shares the existing status strip so mobile café space stays intact. */
+.cafe-status-bar { display: flex; flex-shrink: 0; min-width: 0; background: var(--cream); border-bottom: 3px solid var(--ink); }
+.cafe-status-bar .reputation-bar { flex: 1; min-width: 0; border-bottom: 0; flex-wrap: wrap; }
+.regular-guests-button { display: flex; align-items: center; justify-content: center; flex: 0 0 auto; gap: 6px; min-height: 44px; padding: 6px 12px; color: var(--green-dark); background: var(--cream); border: 0; border-left: 2px solid var(--wood-light); font-size: 14px; }
+.regular-guests-button:hover { background: #fff0cf; }
+.regular-guests-button:focus-visible { outline: 3px solid var(--green-dark); outline-offset: -3px; }
+.regular-unread-badge { min-width: 21px; padding: 2px 5px; background: var(--green-dark); color: var(--cream); font-size: 12px; text-align: center; }
+.regular-unread-badge[hidden] { display: none; }
+.regular-journal-modal { width: min(580px, 100%); }
+.regular-journal, .regular-journal > *, .regular-identity { min-width: 0; }
+.regular-journal { overflow-wrap: anywhere; }
+.regular-journal h3 { margin: 6px 0; font-size: 18px; }
+.regular-journal h3:focus { outline: 2px solid var(--green-dark); outline-offset: 3px; }
+.regular-journal p { line-height: 1.55; }
+.regular-intro { margin-bottom: 14px; }
+.regular-cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.regular-profile { padding: 12px; border: 2px solid var(--wood-light); background: #fff8e8; }
+.regular-heading { display: flex; align-items: center; gap: 14px; }
+.regular-portrait { width: 48px; height: 78px; object-fit: contain; image-rendering: pixelated; flex-shrink: 0; }
+.regular-role, .regular-preference { color: var(--green-dark); }
+.regular-unknown, .regular-empty { padding: 12px; border: 2px dashed var(--wood-light); color: var(--muted); }
+.regular-journal .pixel-btn, .regular-journal-modal .modal-actions .pixel-btn { min-height: 44px; max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.regular-journal > .pixel-btn { margin: 2px 3px 14px; }
+.regular-profile > .pixel-btn { margin: 8px 3px 3px; }
+.regular-chapters { list-style: none; margin: 14px 0; padding: 0 3px; display: grid; gap: 12px; }
+.regular-chapter-choice { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; text-align: left; gap: 4px 10px; }
+.regular-chapter-choice > .note { grid-column: 1 / -1; }
+.regular-chapter-choice strong { font-weight: 600; }
+.regular-new { color: var(--green-dark); font-size: 13px; }
+.regular-read { color: var(--muted); font-size: 13px; }
+.regular-story { margin: 18px 0; padding: 0 3px; }
+.regular-story p { white-space: pre-wrap; }
+.regular-story p:not(.note) { margin: 14px 0; line-height: 1.75; }
+.regular-reading-actions, .regular-page-nav { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 3px; }
+.regular-reading-actions > button { flex: 1 1 140px; }
+.regular-page-nav { justify-content: space-between; }
+.regular-read-hint { padding: 8px 2px; }
+@media (max-width: 480px) {
+  .regular-guests-button { padding: 6px 8px; font-size: 13px; gap: 5px; }
+  .cafe-status-bar .reputation-bar { gap: 5px 8px; }
+  .cafe-status-bar .reputation-more { margin-left: 0; }
+  .regular-journal-modal { padding: 14px 12px; }
+  .regular-profile { padding: 10px; }
+}

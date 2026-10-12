@@ -1,0 +1,53 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+ ✓ src/i18n.test.ts > i18n > Chinese has every English key with the same placeholders and list lengths 56ms
+ ✓ src/i18n.test.ts > i18n > has names for every menu item, ingredient and upgrade 5ms
+ ✓ src/i18n.test.ts > i18n > detects the locale from a saved choice or the browser languages 0ms
+ ✓ src/i18n.test.ts > i18n > translates and interpolates 1ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > starts empty and never infers old-save meetings or unlocks from café totals 8ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > records meeting separately and unlocks once per day on successful handoff only 3ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > uses absolute debut-day gates and daily caps even for a very late first meeting 1ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > reading is explicit, idempotent and independent of service and future chapters 2ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > rejects unissued, duplicate, failed and wrong-guest service receipts 1ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > bounds completed receipts while retaining an earlier active visit, including across save/load 5ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > sanitizes unknown guests, malformed counts, chapter gaps, duplicates and receipt bounds 1ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > does not unlock on loading, even if all current-day requirements are already met 1ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > makes every chapter independently reachable without reading or cross-character dependencies 10ms
+ ✓ src/game/regular-guests.test.ts > regular guest orders and natural visits > uses a preference only when unlocked, on-menu and actually in stock, preserving combo structure 4ms
+ ✓ src/game/regular-guests.test.ts > regular guest orders and natural visits > meets Mina naturally, advances at a real handoff, persists identity, and never recounts after refresh 23ms
+ ✓ src/game/regular-guests.test.ts > regular guest orders and natural visits > opens all five Mina chapters through nine real business days without reading or synthetic service 143ms
+ ✓ src/game/regular-guests.test.ts > regular guest orders and natural visits > leaves a cancelled named visit unmet by service and rejects malformed narrative snapshots 3ms
+ ✓ src/game/regular-guests.test.ts > regular guest orders and natural visits > restores old in-flight visits without inferring narrative identity or retroactive progress 3ms
+ ✓ src/game/regular-guests.test.ts > regular guest orders and natural visits > does not perturb economic RNG, arrivals, orders, reviews or payments when preferences fall back 25ms
+ ✓ src/game/regular-guests-review.test.ts > independent regular-guest content contracts > defines twelve unique cast identities, five real bilingual chapters each, without missing keys 14ms
+ ✓ src/game/regular-guests-review.test.ts > independent regular-guest content contracts > never assigns an identity before debut and all sixty chapters are reachable without reading 18ms
+ ✓ src/game/regular-guests-review.test.ts > independent narrative durability and preference review > reads and replayed/abandoned service tokens are idempotent across saved reloads 2ms
+ ✓ src/game/regular-guests-review.test.ts > independent narrative durability and preference review > does not lose late-start chapters or accept a retired receipt after hundreds of later services 4ms
+ ✓ src/game/regular-guests-review.test.ts > independent narrative durability and preference review > never counts one guest’s receipt for another or backfills old saves and malformed unlocks 2ms
+ ✓ src/game/regular-guests-review.test.ts > independent narrative durability and preference review > uses only supplyable on-menu unlocked drinks, preserves bakery-only orders, and changes no economics 2ms
+ ✓ src/game/regular-guests-review.test.ts > independent narrative durability and preference review > real sold-out Sim arrivals discover guests but cannot earn chapters 50ms
+ ✓ src/game/regular-guests-review.test.ts > independent narrative durability and preference review > resumes a real in-service guest and credits its successful handoff exactly once 20ms
+ ✓ src/game/regular-guests-review.test.ts > independent narrative durability and preference review > restores actual legacy live customers without inventing narrative history 12ms
+ ✓ src/game/regular-guests-review.test.ts > independent journal dismissal and no-spoiler review > does not expose unknown identities or locked chapter text in en 19ms
+ ✓ src/game/regular-guests-review.test.ts > independent journal dismissal and no-spoiler review > does not expose unknown identities or locked chapter text in zh 6ms
+ ✓ src/game/regular-guests-review.test.ts > independent journal dismissal and no-spoiler review > keeps one blocking modal across pages, preserves unread on Later/Escape, and rejects stale buttons 14ms
+ ✓ src/ui/regular-guests.test.ts > regular journal discovery and privacy > reveals only an unknown total until a real encounter, without mutating the save 21ms
+ ✓ src/ui/regular-guests.test.ts > regular journal discovery and privacy > shows an encountered profile and fixed portrait before service, but no chapter titles 9ms
+ ✓ src/ui/regular-guests.test.ts > regular journal discovery and privacy > lists only unlocked titles and never exposes other guests in attributes or text 7ms
+ ✓ src/ui/regular-guests.test.ts > intentional reads and uninterrupted paging > keeps the same paused modal for chapter navigation and later, without marking read 11ms
+ ✓ src/ui/regular-guests.test.ts > intentional reads and uninterrupted paging > saves one explicit read, updates the badge and makes rereads idempotent 13ms
+ ✓ src/ui/regular-guests.test.ts > intentional reads and uninterrupted paging > ignores read and navigation controls from a dismissed or replaced dialog 8ms
+ ✓ src/ui/regular-guests.test.ts > journal keyboard and quiet HUD > traps focus after page changes and restores the opener on Escape without marking read 10ms
+ ✓ src/ui/regular-guests.test.ts > journal keyboard and quiet HUD > leaves Enter and Space to native buttons and closes by its persistent close action 10ms
+ ✓ src/ui/regular-guests.test.ts > journal keyboard and quiet HUD > updates translated numeric badges without opening a modal or live-announcing every tick 1ms
+ ✓ src/ui/regular-guests.test.ts > bilingual and long journal construction > renders all seen profiles and stories in en with no missing text 213ms
+ ✓ src/ui/regular-guests.test.ts > bilingual and long journal construction > renders all seen profiles and stories in zh with no missing text 174ms
+ ✓ src/ui/regular-guests.test.ts > bilingual and long journal construction > keeps long text in a keyboard-scrollable body with an independent close row and wrap-safe CSS 10ms
+
+ Test Files  4 passed (4)
+      Tests  43 passed (43)
+   Start at  00:35:37
+   Duration  1.32s (transform 39%, tests 32%, environment 20%, import 8%, worker 1%)
+

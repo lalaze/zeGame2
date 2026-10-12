@@ -1,3 +1,4 @@
+import { recordRegularGuestArrival, recordRegularGuestDeparture, recordRegularGuestService, regularGuestForAppearance, regularGuestOrder } from './regular-guests';
 import { CUSTOMER_CAST, CustomerCastCycle } from './customer-cast';
 import { updatePromotion } from './promotion';
 import { updatePetCare } from './pets';
@@ -91,6 +92,9 @@ export interface Customer extends Walker {
   phase: CustomerPhase;
   /** Visual cast identity, kept with the live visit when service is saved. */
   appearanceId?: number;
+  /** Narrative identity is fixed at arrival, never inferred for an older live visit. */
+  regularGuestId?: string;
+  regularGuestVisitId?: number;
   look: Look;
   order: ItemId;
   /** A bakery item with a drink, or a drink with a bakery item. */
@@ -584,6 +588,9 @@ export class Sim {
     const seedLook = this.randomLook();
     this.castRandomState = 1 + ((((seedLook.skin * 6 + seedLook.hair) * 4 + seedLook.hairStyle) * 8 + seedLook.shirt) * 3 + seedLook.pants);
     const appearance = this.customerCast.next();
+    const regularGuest = regularGuestForAppearance(appearance.id, state.day);
+    const visitId = regularGuest ? recordRegularGuestArrival(state, regularGuest.id) : null;
+    const chosen = regularGuestOrder(state, regularGuest?.id, main.id, extra);
     const c: Customer = {
       id: this.nextId++,
       reviewed: false,
@@ -595,9 +602,10 @@ export class Sim {
       ty: pos.y,
       phase: 'queue',
       appearanceId: appearance.id,
+      ...(regularGuest && visitId !== null ? { regularGuestId: regularGuest.id, regularGuestVisitId: visitId } : {}),
       look: { ...appearance.look },
-      order: main.id,
-      extra,
+      order: chosen.order,
+      extra: chosen.extra,
       vip: this.rng() < VIP_CHANCE,
       patience: patienceSeconds(state),
       spot: -1,
@@ -653,6 +661,9 @@ export class Sim {
   }
 
   private exit(c: Customer): void {
+    if (this.floorState && c.regularGuestId && c.regularGuestVisitId !== undefined) {
+      recordRegularGuestDeparture(this.floorState, c.regularGuestId, c.regularGuestVisitId);
+    }
     // Someone getting up from a table steps out in front of it first.
     const from = seated(c) ? [seatApproach(Math.floor(c.seat / 2), (c.seat % 2) as 0 | 1)] : [];
     const area = seated(c) ? tableArea(Math.floor(c.seat / 2)) : areaAtPoint(c.x, c.y) ?? 'main';
@@ -695,6 +706,7 @@ export class Sim {
     events.push({ type: 'sale', amount, x: c.x, y: c.y - 52, vip: c.vip });
     this.review(state, c, mealReview(state, bought, c.waitSeconds, c.missingExtra));
     recordServings(state, bought);
+    if (c.regularGuestId && c.regularGuestVisitId !== undefined) recordRegularGuestService(state, c.regularGuestId, c.regularGuestVisitId);
     c.hasCup = true;
     c.mood = 'happy';
     c.moodTimer = 1.5;

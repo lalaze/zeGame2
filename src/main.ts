@@ -27,6 +27,7 @@ import { Panel, decorName, itemName, type ArrangeRequest } from './ui/panel';
 import { OperationMonitor } from './game/operations';
 import { ingredientName } from './ui/panel';
 import { updateReputationButton, showReputation } from './ui/reputation';
+import { showRegularGuests, updateRegularGuestsButton } from './ui/regular-guests';
 import { showPrepare } from './ui/prepare';
 import { RegionsUI, areaName } from './ui/regions';
 import { FirstServiceGuide } from './ui/first-service';
@@ -426,6 +427,7 @@ const speedBtns = [...document.querySelectorAll<HTMLButtonElement>('[data-speed]
 
 function updateDayHud(): void {
   updateReputationButton(state);
+  updateRegularGuestsButton(state);
   const open = state.phase !== 'prep';
   const closing = state.phase === 'closing';
   const time = closing ? t('day.closing') : open ? t('day.openFor', { time: formatOpenTime(state.dayTime) }) : t('day.closed');
@@ -491,6 +493,7 @@ function closeDay(): void {
 }
 closeBtn.addEventListener('click', closeDay);
 $('reputation-btn').addEventListener('click', () => showReputation(state));
+$('regular-guests-btn').addEventListener('click', () => showRegularGuests(state, saveGame));
 operationBtn.addEventListener('click', () => {
   const status = operationMonitor.current;
   const detail = t(`ops.${status.kind}.detail`);

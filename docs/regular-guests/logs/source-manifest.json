@@ -1,0 +1,25 @@
+{
+  "baseline": "9576d9110a8e2a0e1fed2954af5cc0297935dbf1",
+  "branch": "joyful-sloth",
+  "status": "Local uncommitted changes; no push",
+  "sha256": {
+    "README.md": "9af25edacd7c035e5c00420f1c9b0f04bc117bd1bd77a99a63cf3ee3bde53a57",
+    "index.html": "5e178f1c20f62e9705825082fa89b56a991379c54f4e393298a5014d0d15b31e",
+    "src/main.ts": "4fee68e9528828dcfb15c421b26847ebf861982f98aaca07da6f4b6261f2ab87",
+    "src/style.css": "0552f1ce852cbf3d8a3d288ca1e2d8a139e7d5922ac41493d76d911949334462",
+    "src/game/state.ts": "48d472a3ca6ffffb03eefcb7ca5e14513b37092bbb5bcf775e92d03caf036860",
+    "src/game/sim.ts": "944ae7d950db7db9012849a3bc73783fc2d37a5d2fe92f44ef47208cc64313a9",
+    "src/game/sim-snapshot.ts": "dd3e2ae7310cd04acdf85df7dd199ebf99fa68c5adeeed18ebba1415e0d38af0",
+    "src/game/regular-guests.ts": "d9875a433b0caf11ece2210b262790410e5f100a3ce0efd8eb0d8f1631b3748b",
+    "src/game/regular-guests-content.ts": "bd41ce10eaa23e07b43779ec68888595d823c62b14472e67fd83fe911418c334",
+    "src/game/regular-guests.test.ts": "9e2e589d01b22970d871c81c424a85aa5d1f5f362347c9051af89603c657cf46",
+    "src/game/regular-guests-review.test.ts": "03b33adb352f40e791a51dd6ca2c48098511296842d12ac690188e1421295987",
+    "src/ui/regular-guests.ts": "508e2d882aeb310a3a2a7f6a95c26dee1dd77f5ac07859ac8768975a80943caf",
+    "src/ui/regular-guests.test.ts": "460b83ea4d10f49454f7688c47f7ff0ec59346f6db57311f4032a70d53806402",
+    "src/locales/en.json": "9dcaa89fa24cb656c32e57f5880b3cfc84af7316e7100d57ceb0dde2134121bd",
+    "src/locales/zh.json": "f8863cee6769b52f5fe20be94912675902e5fb46de0047dd3273acea6d80a4c4",
+    "scripts/regular-guests-evidence.test.ts": "770927c4e116ffae85b086b4f181b60c347c27c5dd1fa421ff23293cb3406f69",
+    "scripts/regular-guests-qa.html": "f9766ac4e4c97045d6c821b2f23c58891aa1bb188f9303af7c74506e80358780"
+  },
+  "builtIndexSha256": "5231e1b8b39ff86350bd11f9e097ae945c2d92290d50b8af43342d0bbe27c6ae"
+}

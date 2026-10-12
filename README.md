@@ -69,6 +69,16 @@ What to spend the day's revenue on:
 
 Customers and staff occasionally share short, localized thought clouds about what they are doing. Dine-in guests have consistent cosmetic flavor preferences, with affectionate likes and gentle dislikes after their order arrives. These thoughts never change orders, prices, tips, patience, or save data. At most two clouds appear at once; they avoid service indicators and disappear during dialogs, room transitions, the map, and furniture placement. Thought clouds add no animation.
 
+### Neighborhood regulars
+
+Twelve named regulars bring five short story chapters each, in English and Chinese. They use fixed pixel appearances from the existing customer cast and arrive in the ordinary queue: no extra arrivals or reward multipliers. Two become eligible on each of café days 1, 3, 5, 7, 9 and 11. A cast member returns once per shuffled 30-arrival cycle; eligibility is not a guaranteed visit that day.
+
+Each chapter needs another successful handoff and a minimum business day (debut day, then +2, +4, +6 and +8); at most one chapter unlocks per person per day. Failed visits, reading and reopening the game do not advance a story. You never need to log in on consecutive real-world days, unlock a favorite drink, or finish someone else's story. When a preferred drink is selected, unlocked and currently supplyable, it replaces the drink slot in that regular's order; otherwise ordinary menu selection remains. Food-only orders, combo rules, stock consumption, reviews and payment formulas remain unchanged.
+
+The quiet **Regulars** badge opens a journal of people you've actually met. Reading pauses service through the same safe dialog behavior used elsewhere. **Read later**, page navigation and closing leave a chapter unread; only **Finished reading** marks it read. Unlocked chapters can be reread. Save version 13 preserves identities, encounters, successful handoffs and separate unlocked/read progress; older saves start meeting people naturally without invented history.
+
+Implementation plan, all 60 bilingual stories and reproducible evidence are in [docs/regular-guests](docs/regular-guests/PLAN.md).
+
 ### Languages
 
 The game comes in English and Simplified Chinese (简体中文). It picks the language from the browser and you can change it in Settings (`···`). Chinese uses the [Fusion Pixel](https://github.com/TakWolf/fusion-pixel-font) font (OFL 1.1). `scripts/subset-font.mjs` cuts that font down to only the characters in `src/locales/zh.json`, which brings it from 600 KB to about 12 KB. The script runs automatically before `dev` and `build`.

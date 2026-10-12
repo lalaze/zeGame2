@@ -1,0 +1,28 @@
+{
+  "label": "Actual browser built game in live service; seeded funded QA fixture; no real player save",
+  "observedAt": "2026-10-12T07:39:05.900Z",
+  "minimumMeasuredWallMs": 23966,
+  "before": {
+    "day": 20,
+    "phase": "open",
+    "dayTime": 7.2631133333333135,
+    "served": 2525,
+    "coins": 18451
+  },
+  "after": {
+    "day": 20,
+    "phase": "open",
+    "dayTime": 7.2631133333333135,
+    "served": 2525,
+    "coins": 18451
+  },
+  "journalUnchanged": true,
+  "pendingOtto": [
+    744
+  ],
+  "viewport": {
+    "width": 1000,
+    "height": 740,
+    "scrollWidth": 1000
+  }
+}

@@ -10,3 +10,6 @@ src/assets/pixel-zh.woff2
 /docs/long-task/results/*.tmp
 /docs/long-task/logs/*pilot*
 /docs/long-task/changes.patch
+
+# Generated regular-guest QA saves, never player or release data.
+/docs/regular-guests/fixtures/

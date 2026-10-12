@@ -1,0 +1,25 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+ ✓ src/game/regular-guests.test.ts > regular guest progression > starts empty and never infers old-save meetings or unlocks from café totals 4ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > records meeting separately and unlocks once per day on successful handoff only 2ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > uses absolute debut-day gates and daily caps even for a very late first meeting 2ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > reading is explicit, idempotent and independent of service and future chapters 1ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > rejects unissued, duplicate, failed and wrong-guest service receipts 1ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > bounds completed receipts while retaining an earlier active visit, including across save/load 2ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > sanitizes unknown guests, malformed counts, chapter gaps, duplicates and receipt bounds 1ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > does not unlock on loading, even if all current-day requirements are already met 1ms
+ ✓ src/game/regular-guests.test.ts > regular guest progression > makes every chapter independently reachable without reading or cross-character dependencies 3ms
+ ✓ src/game/regular-guests.test.ts > regular guest orders and natural visits > uses a preference only when unlocked, on-menu and actually in stock, preserving combo structure 1ms
+ ✓ src/game/regular-guests.test.ts > regular guest orders and natural visits > meets Mina naturally, advances at a real handoff, persists identity, and never recounts after refresh 19ms
+ ✓ src/game/regular-guests.test.ts > regular guest orders and natural visits > opens all five Mina chapters through nine real business days without reading or synthetic service 96ms
+ ✓ src/game/regular-guests.test.ts > regular guest orders and natural visits > leaves a cancelled named visit unmet by service and rejects malformed narrative snapshots 2ms
+ ✓ src/game/regular-guests.test.ts > regular guest orders and natural visits > restores old in-flight visits without inferring narrative identity or retroactive progress 3ms
+ ✓ src/game/regular-guests.test.ts > regular guest orders and natural visits > does not perturb economic RNG, arrivals, orders, reviews or payments when preferences fall back 18ms
+
+ Test Files  1 passed (1)
+      Tests  15 passed (15)
+   Start at  00:30:33
+   Duration  522ms (transform 49%, tests 41%, import 9%, worker 1%)
+

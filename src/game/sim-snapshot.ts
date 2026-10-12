@@ -1,3 +1,4 @@
+import { regularGuestDefinition } from './regular-guests';
 import { MENU, PASS_SLOTS } from './data';
 import { MAX_SCENE_H, MIN_SCENE_H, TOTAL_TABLE_SPOTS } from './layout';
 import { CUSTOMER_CAST, validCustomerCastSnapshot, type CustomerCastSnapshot } from './customer-cast';
@@ -30,6 +31,8 @@ const nullableId = (x: unknown) => x === null || integer(x);
 const plate = (x: unknown) => obj(x) && integer(x.customerId) && list(x.items, 2, item) && integer(x.barista) && x.barista < 4 && (x.server === null || integer(x.server) && x.server < 3) && finite(x.waited);
 const customer = (x: unknown) => obj(x) && walker(x) && look(x.look) && integer(x.id) && item(x.order) && (x.extra === null || item(x.extra)) &&
   (x.appearanceId === undefined || integer(x.appearanceId) && x.appearanceId < CUSTOMER_CAST.length) &&
+  (x.regularGuestId === undefined || typeof x.regularGuestId === 'string') &&
+  (x.regularGuestVisitId === undefined || integer(x.regularGuestVisitId) && x.regularGuestVisitId > 0) &&
   (x.reviewed === undefined || typeof x.reviewed === 'boolean') &&
   (x.waitSeconds === undefined || positive(x.waitSeconds)) &&
   (x.missingExtra === undefined || typeof x.missingExtra === 'boolean') &&
@@ -50,6 +53,20 @@ export function validSnapshot(value: unknown, state: GameState): value is SimSna
   if (value.version === 2 && (!validCustomerCastSnapshot(value.customerCast) || !integer(value.castRandomState) || value.castRandomState > 0xffffffff)) return false;
   const s = value as unknown as SimSnapshot;
   if (!state.kitchen && s.cooks.length > 0) return false;
+  // Legacy live customers without narrative fields retain their original identity.
+  // Present fields must agree with their saved appearance, debut and visit receipt.
+  for (const c of s.customers) {
+    if (c.regularGuestId === undefined && c.regularGuestVisitId === undefined) continue;
+    const guest = c.regularGuestId ? regularGuestDefinition(c.regularGuestId) : undefined;
+    if (!guest || guest.appearanceId !== c.appearanceId || state.day < guest.debutDay ||
+      c.regularGuestVisitId === undefined || c.regularGuestVisitId >= state.regularGuests.nextVisitId ||
+      !state.regularGuests.guests[guest.id]) return false;
+    const progress = state.regularGuests.guests[guest.id]!;
+    if (!c.hasCup && c.phase !== 'exiting' &&
+      (progress.pendingDay !== state.day || !progress.pendingVisitIds.includes(c.regularGuestVisitId))) return false;
+  }
+  const visitIds = s.customers.flatMap((c) => c.regularGuestVisitId === undefined ? [] : [c.regularGuestVisitId]);
+  if (new Set(visitIds).size !== visitIds.length) return false;
   const ids = new Set(s.customers.map((c) => c.id));
   if (ids.size !== s.customers.length || s.customers.some((c) => c.id >= s.nextId)) return false;
   if (s.queue.some((id) => !s.customers.some((c) => c.id === id && c.phase === 'queue')) || new Set(s.queue).size !== s.queue.length) return false;

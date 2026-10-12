@@ -1,0 +1,16 @@
+<!doctype html><meta charset="utf-8"><title>Regular Guests isolated QA harness</title>
+<style>body{margin:12px;background:#edf0f1;font:14px sans-serif}button,select{min-height:36px;margin:4px}iframe{display:block;border:1px solid #333;background:white}pre{white-space:pre-wrap;max-width:1000px;max-height:120px;overflow:auto}</style>
+<h1>Regular Guests QA: synthetic save only</h1>
+<p>Independent origin 5216. This harness never accesses the user's 5173 origin. Actual iframe viewport, not a physical phone.</p>
+<label>Fixture <select id="fixture"><option value="all-stories">All stories: natural multi-day Sim from funded fixture</option><option value="live-service">Live service: natural Sim, funded fixture</option><option value="first-day">First day: natural Sim, two met guests</option><option value="fresh">New café: no meetings</option></select></label>
+<label>Language <select id="language"><option value="en">English</option><option value="zh">中文</option></select></label>
+<button id="load">Load QA café</button><button id="mobile">390 × 844 CSS viewport</button><button id="desktop">1000 × 740 CSS viewport</button><button id="inspect">Inspect saved counters</button>
+<pre id="status">Ready. Use Load QA café.</pre><div id="host"></div>
+<script>
+const host=document.querySelector('#host');
+let width=1000,height=740;
+function mount(){ const f=document.createElement('iframe');f.id='game';f.title='Tiny Bean Café QA';f.width=width;f.height=height;f.src='/index.html';host.replaceChildren(f); }
+document.querySelector('#load').onclick=async()=>{host.replaceChildren();const pick=document.querySelector('#fixture').value; const fixture=JSON.parse(await(await fetch(`/fixtures/${pick}.json`)).text());localStorage.setItem('tiny-bean-cafe/save',JSON.stringify(fixture));localStorage.setItem('tiny-bean-cafe/locale',document.querySelector('#language').value);document.querySelector('#status').textContent='Loaded test fixture: '+pick;mount();};
+for(const [id,w,h] of [['mobile',390,844],['desktop',1000,740]])document.querySelector('#'+id).onclick=()=>{width=w;height=h;const f=document.querySelector('#game');if(f){f.width=w;f.height=h;}document.querySelector('#status').textContent=`Actual iframe CSS viewport ${w} × ${h}`;};
+document.querySelector('#inspect').onclick=()=>{const s=JSON.parse(localStorage.getItem('tiny-bean-cafe/save')||'{}');const f=document.querySelector('#game');document.querySelector('#status').textContent=JSON.stringify({viewport:f?{width:f.contentWindow.innerWidth,height:f.contentWindow.innerHeight,scrollWidth:f.contentDocument.documentElement.scrollWidth}:null,day:s.day,phase:s.phase,dayTime:s.dayTime,served:s.served,coins:s.coins,guests:s.regularGuests},null,2);};
+</script>
