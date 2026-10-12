@@ -2,11 +2,11 @@ import '@fontsource/pixelify-sans/400.css';
 import '@fontsource/pixelify-sans/600.css';
 import './style.css';
 
-import { SPEEDS, type ItemId } from './game/data';
+import { SPEEDS } from './game/data';
 import { formatOpenTime, openShop, type DayReport } from './game/day';
 import { expectedCustomers, tipMultiplier } from './game/economy';
 import { canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
-import { formatAccountMoney, formatMoney } from './game/format';
+import { formatMoney } from './game/format';
 import { MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
 import { adjacentArea, isAreaOpen, mainTableCount, regionOffset } from './game/regions';
 import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, furnitureDef } from './game/furniture';
@@ -18,15 +18,17 @@ import { createInitialState, type GameState } from './game/state';
 import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale, t, type Locale } from './i18n';
 import { CafeView } from './render/cafe-view';
 import { CafeGame } from './render/phaser/game';
-import { character, itemArtwork, toDataURL } from './render/sprites';
+import { character, toDataURL } from './render/sprites';
 import { closeModal, isModalOpen, showModal, toast } from './ui/modal';
 import { showOnboarding, type OnboardingResult } from './ui/onboarding';
 import { Panel, decorName, itemName, type ArrangeRequest } from './ui/panel';
 import { OperationMonitor } from './game/operations';
 import { ingredientName } from './ui/panel';
-import { ratingReportHtml, updateReputationButton, showReputation } from './ui/reputation';
+import { updateReputationButton, showReputation } from './ui/reputation';
 import { showPrepare } from './ui/prepare';
 import { RegionsUI, areaName } from './ui/regions';
+import { FirstServiceGuide } from './ui/first-service';
+import { settlementHtml } from './ui/settlement';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 
@@ -207,9 +209,34 @@ const panel = new Panel(
 );
 
 /** Opening a management task also reveals the panel if the player folded it away. */
-function showPanelTab(tab: 'menu' | 'pantry' | 'upgrades'): void {
+function showPanelTab(tab: 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | 'promotion'): void {
   setPanelCollapsed(false);
   panel.showTab(tab);
+}
+
+// Intro preferences never write or migrate the café save itself.
+let introMode = false;
+function revealAllTools(): void {
+  introMode = false;
+  panel.setIntroMode(false);
+  $('app').classList.remove('guided-focus');
+}
+const guide = new FirstServiceGuide(() => state, storage, {
+  pantry: () => showPanelTab('pantry'),
+  prepare: () => prepareDay(),
+  close: () => closeDay(),
+  status: () => operationBtn.click(),
+  allTools: revealAllTools,
+});
+layout.before(guide.element);
+function updateGuide(): void {
+  guide.update();
+  if (introMode !== guide.simplify) {
+    introMode = guide.simplify;
+    panel.setIntroMode(introMode);
+    $('app').classList.toggle('guided-focus', introMode);
+  }
+  $('app').classList.toggle('has-guide', !guide.element.hidden);
 }
 
 // ------------------------------------------------------------ arranging furniture
@@ -396,7 +423,8 @@ function updateDayHud(): void {
   openBtn.hidden = open || !state.profile || scene.area !== 'main';
   const label = t('day.open', { n: state.day });
   if (openBtn.textContent !== label) openBtn.textContent = label;
-  hint.hidden = !open || !!storage.preference(HINT_KEY);
+  hint.hidden = !open || guide.simplify || !!storage.preference(HINT_KEY);
+  updateGuide();
 }
 
 for (const b of speedBtns) {
@@ -458,67 +486,15 @@ function showReport(report: DayReport): void {
   saveGame();
   panel.refresh();
   updateDayHud();
-  const row = (label: string, value: string) => `<dt>${label}</dt><dd>${value}</dd>`;
-  const reportTab = report.soldOut || report.extraLost || report.outOfStock.length ? 'pantry' : report.tableLost || report.queueLost || report.doorLost ? 'upgrades' : 'menu';
-  const best = report.bestSeller;
-  const bestHtml = best
-    ? `<p class="report-best"><img src="${toDataURL(itemArtwork(best), 1)}" alt="" />${t('report.best', {
-        item: itemName(best),
-        n: report.sales[best] ?? 0,
-      })}</p>`
-    : `<p>${t('report.none')}</p>`;
-  const totalBaked = Object.values(report.baked).reduce((a, b) => a + (b ?? 0), 0);
-  const staleCount = Object.values(report.stale).reduce((a, b) => a + (b ?? 0), 0);
-  const list = (ids: ItemId[]) => ids.map((id) => itemName(id)).join(t('list.sep'));
-  const bakeRows = totalBaked
-    ? row(t('report.baked'), totalBaked.toLocaleString()) +
-      row(t('report.stale'), staleCount ? t('report.staleValue', { n: staleCount, money: formatMoney(report.staleCost) }) : '0')
-    : '';
-  const staleNote = staleCount
-    ? `<p class="note">${t('report.staleItems', {
-        items: (Object.entries(report.stale) as [ItemId, number][]).map(([id, n]) => `${itemName(id)} ×${n}`).join(t('list.sep')),
-      })}</p>`
-    : '';
-  const shelfNote = report.shelfSoldOut.length
-    ? `<p class="note">${t('report.shelfOut', { items: list(report.shelfSoldOut) })}</p>`
-    : '';
-  const out = report.outOfStock.length
-    ? `<p class="note warn">${t('report.outOfStock', { items: report.outOfStock.map((id: ItemId) => itemName(id)).join(t('list.sep')) })}</p>`
-    : '';
+  const { body, recommendedTab, advice } = settlementHtml(report, state);
   showModal({
-    title: t('report.title', { n: report.day }),
-    icon: ownerIcon(),
-    body: `
-      <dl class="stats">
-        ${row(t('report.served'), report.served.toLocaleString())}
-        ${row(t('report.missed'), t('report.missedValue', { n: report.missed, sold: report.soldOut }))}
-        ${row(t('report.queueLost'), report.queueLost.toLocaleString())}
-        ${row(t('report.tableLost'), report.tableLost.toLocaleString())}
-        ${row(t('report.extraLost'), report.extraLost.toLocaleString())}
-        ${row(t('report.doorLost'), report.doorLost.toLocaleString())}
-        ${row(t('report.duration'), formatOpenTime(report.duration))}
-        ${row(t('report.revenue'), formatAccountMoney(report.revenue))}
-        ${row(t('report.ingredients'), '−' + formatAccountMoney(report.ingredientCost))}
-        ${report.petCost > 0 ? row(t('pet.expense'), '−' + formatAccountMoney(report.petCost)) : ''}
-        ${report.promotionCost > 0 ? row(t('promo.expense'), '−' + formatAccountMoney(report.promotionCost)) : ''}
-        ${bakeRows}
-      </dl>
-      <div class="report-profit"><span>${t('report.profit')}</span><b class="big-money">${report.profit < 0 ? '−' : '+'}${formatAccountMoney(Math.abs(report.profit))}</b></div>
-      <p class="note">${report.duration >= 60 ? t('report.perMinute', { money: formatMoney(report.profit * 60 / report.duration) }) : t('report.shortSample')}</p>
-      <p class="note">${t(report.soldOut || report.extraLost ? 'report.adviceStock' : report.tableLost ? 'report.adviceDelivery' : report.queueLost || report.doorLost ? 'report.adviceCounter' : staleCount ? 'report.adviceBake' : 'report.adviceGood')}</p>
-      ${ratingReportHtml(report)}
-      ${bestHtml}
-      ${Object.keys(report.shortages).length ? `<p class="note">${t('report.shortages', { items: Object.entries(report.shortages).map(([id, n]) => `${itemName(id as ItemId)} ×${n}`).join(t('list.sep')) })}</p>` : ''}
-      ${shelfNote}
-      ${staleNote}
-      ${out}`,
+    title: t('report.title', { n: report.day }), icon: ownerIcon(), body,
     buttons: [
-      {
-        label: t('report.next'),
-        primary: true,
-        onClick: prepareDay,
-      },
-      { label: t(`tab.${reportTab}`), onClick: () => showPanelTab(reportTab) },
+      { label: t('report.next'), primary: true, onClick: prepareDay },
+      { label: advice.claimableGoal ? t('guide.viewReward') : t(`tab.${recommendedTab}`), onClick: () => {
+        showPanelTab(recommendedTab);
+        if (advice.claimableGoal) $('goal').querySelector<HTMLButtonElement>('[data-claim]')?.focus();
+      } },
     ],
   });
 }
@@ -527,6 +503,7 @@ function showReport(report: DayReport): void {
 function applyStaticText(): void {
   document.documentElement.lang = LOCALES.find((l) => l.id === getLocale())!.htmlLang;
   updateBrand();
+  canvas.setAttribute('aria-label', scene.overview ? t('area.overviewHint') : areaName(scene.area));
   document.title = t('app.title');
   document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
     el.textContent = t(el.dataset.i18n as Parameters<typeof t>[0]);
@@ -575,7 +552,8 @@ function startOnboarding(then?: () => void): void {
       updateDayHud();
       toast(t('ob.opened', { cafe: result.profile.cafeName }));
       // Day 1 opens like every other day: from preparing the menu.
-      prepareDay();
+      if (!guide.simplify) prepareDay();
+      else updateGuide();
       then?.();
     },
   });
@@ -608,6 +586,7 @@ function openSettings(): void {
              <button class="pixel-btn ghost small" data-edit-profile>${t('settings.edit')}</button></div>`
           : ''
       }
+      <button class="pixel-btn ghost small" data-guide-replay>${t('guide.replay')}</button>
       <div class="lang-row"><span>${t('settings.language')}</span>${languages}</div>
       <dl class="stats">
         <dt>${t('settings.served')}</dt><dd>${state.served.toLocaleString()}</dd>
@@ -640,6 +619,7 @@ function openSettings(): void {
     cafeEl.textContent = profile.cafeName;
     document.querySelector('.profile-owner')!.textContent = profile.ownerName || t('ob.char.defaultName');
   }
+  document.querySelector('[data-guide-replay]')?.addEventListener('click', () => guide.showHelp());
   document.querySelector('[data-edit-profile]')?.addEventListener('click', () => {
     closeModal();
     editProfile();
@@ -657,6 +637,7 @@ $('settings-btn').addEventListener('click', openSettings);
 
 function resetGame(): void {
   state = createInitialState(Date.now());
+  guide.reset();
   sim.reset();
   operationMonitor.reset();
   panel.setState(state);

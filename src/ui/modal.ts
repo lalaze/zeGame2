@@ -13,6 +13,8 @@ export interface ModalOptions {
   body: string | Node;
   buttons: ModalButton[];
   icon?: string;
+  /** Text-only long dialogs need a keyboard-scrollable body within the focus trap. */
+  focusableBody?: boolean;
 }
 
 let open: HTMLElement | null = null;
@@ -52,6 +54,11 @@ export function showModal(opts: ModalOptions): void {
   title.append(opts.title);
   const body = document.createElement('div');
   body.className = 'modal-body';
+  if (opts.focusableBody) {
+    body.tabIndex = 0;
+    body.setAttribute('role', 'region');
+    body.setAttribute('aria-labelledby', title.id);
+  }
   if (typeof opts.body === 'string') body.innerHTML = opts.body;
   else body.append(opts.body);
 

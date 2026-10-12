@@ -1816,3 +1816,46 @@ html:lang(zh) body {
 .decor-filter .chip { flex: 1; min-width: 0; margin: 0; padding: 7px 3px; }
 .tile-footprint { font-size: 11px; color: var(--muted); margin-bottom: 3px; }
 .decor-slot > .note { margin-bottom: 10px; line-height: 1.5; }
+
+/* First service guidance lives in layout, never on top of café controls. */
+.first-service {
+  flex-shrink: 0; display: flex; align-items: center; gap: 16px;
+  margin: 8px 14px 2px; padding: 10px 12px;
+  background: var(--cream); border: 2px solid var(--wood-light);
+  box-shadow: 0 2px 0 var(--wood-lo); font-size: 14px;
+}
+.guide-copy { flex: 1; min-width: 0; }
+.guide-copy b { color: var(--green-dark); }
+.guide-copy p { margin: 4px 0 0; line-height: 1.4; }
+.guide-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; max-width: 440px; }
+.guide-actions button { min-height: 32px; }
+.guide-reference h3 { font-size: 16px; margin: 14px 0 4px; }
+.guided-focus #area-edges, .guided-focus #area-nav { display: none; }
+.prep-details, .report-details { margin: 12px 0 4px; padding: 8px; border: 1px solid var(--wood-light); }
+.prep-details summary, .report-details summary { cursor: pointer; color: var(--green-dark); }
+.prep-starter, .prep-bakery-hint { padding: 8px; background: #e3e8cb; }
+/* Keep primary actions reachable even when explanations expand on a phone. */
+.modal { display: flex; flex-direction: column; overflow: hidden; }
+.modal > h2, .modal-actions { flex-shrink: 0; }
+.modal-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 2px; }
+@media (max-width: 860px) {
+  .first-service { display: block; margin: 5px 8px 0; padding: 8px; font-size: 12px; }
+  .guide-actions { margin-top: 6px; gap: 6px; max-width: none; }
+  .guide-actions button { min-height: 32px; font-size: 12px; }
+  .has-guide .stage { height: min(calc((100vw - 16px) * 0.6 + 30px), 32dvh); }
+  .has-guide .layout.panel-collapsed .stage { height: auto; }
+  .guide-copy p { line-height: 1.35; }
+}
+@media (max-width: 480px) {
+  .modal { padding: 14px 12px; max-height: calc(100dvh - 40px); }
+  .modal h2 { font-size: 19px; }
+  .modal-actions { gap: 8px; flex-wrap: wrap; }
+  .modal-actions button { min-height: 40px; }
+}
+/* Keep receipts/errors in a separate row instead of covering the guide. */
+#app.has-guide > .toast {
+  position: relative; left: auto; top: auto; z-index: auto;
+  align-self: center; flex-shrink: 0; margin: 8px 14px 3px;
+  max-width: calc(100% - 28px); transform: none; animation: none;
+  font-size: 13px; padding: 6px 10px;
+}

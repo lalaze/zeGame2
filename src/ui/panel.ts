@@ -142,6 +142,7 @@ export const decorName = (id: string) => t(`decor.${id}` as MessageKey);
 
 export class Panel {
   private tab: Tab = 'menu';
+  private introMode = false;
   private promotionPanel: PromotionPanel | null = null;
   private petPanel: PetPanel | null = null;
   private amount: BuyAmount = 1;
@@ -205,14 +206,58 @@ export class Panel {
     });
   }
 
+  /** A temporary first-shift view; saved progress and the full-view choices stay untouched. */
+  setIntroMode(enabled: boolean): void {
+    if (this.introMode === enabled) return;
+    const focused = this.focusedControl();
+    this.introMode = enabled;
+    if (enabled && this.tab !== 'menu' && this.tab !== 'pantry') this.tab = 'menu';
+    this.updateControls();
+    this.update();
+    this.restoreVisibleFocus(focused);
+  }
+
   showTab(tab: Tab): void {
+    const focused = this.focusedControl();
+    // Direct navigation, including scene shortcuts, must always reach every tool.
+    if (tab !== 'menu' && tab !== 'pantry') this.introMode = false;
     this.tab = tab;
-    this.root.querySelectorAll<HTMLElement>('[data-tab]').forEach((o) => o.classList.toggle('active', o.dataset.tab === tab));
-    this.root.querySelector<HTMLElement>('.buy-amount')!.hidden = tab === 'decor' || tab === 'pantry' || tab === 'pets' || tab === 'promotion';
-    this.root.querySelector<HTMLElement>('.pantry-amount')!.hidden = tab !== 'pantry';
-    this.root.querySelector<HTMLElement>('.menu-filter')!.hidden = tab !== 'menu';
+    this.updateControls();
     this.list.scrollTop = 0;
     this.update();
+    this.restoreVisibleFocus(focused);
+  }
+
+  private updateControls(): void {
+    const tab = this.tab;
+    this.root.classList.toggle('intro-mode', this.introMode);
+    this.root.querySelectorAll<HTMLElement>('[data-tab]').forEach((o) => {
+      o.hidden = this.introMode && o.dataset.tab !== 'menu' && o.dataset.tab !== 'pantry';
+      o.classList.toggle('active', o.dataset.tab === tab);
+      o.setAttribute('aria-selected', String(o.dataset.tab === tab));
+    });
+    this.root.querySelector<HTMLElement>('.buy-amount')!.hidden = this.introMode || tab === 'decor' || tab === 'pantry' || tab === 'pets' || tab === 'promotion';
+    this.root.querySelector<HTMLElement>('.pantry-amount')!.hidden = this.introMode || tab !== 'pantry';
+    this.root.querySelector<HTMLElement>('.menu-filter')!.hidden = this.introMode || tab !== 'menu';
+  }
+
+  private focusedControl(): HTMLElement | null {
+    const active = this.root.ownerDocument.activeElement;
+    return active instanceof HTMLElement && this.root.contains(active) ? active : null;
+  }
+
+  private restoreVisibleFocus(previous: HTMLElement | null): void {
+    if (previous && (!this.root.contains(previous) || previous.closest('[hidden]'))) {
+      this.root.querySelector<HTMLButtonElement>(`[data-tab="${this.tab}"]`)?.focus();
+    }
+  }
+
+  private get buyAmount(): BuyAmount {
+    return this.introMode ? 1 : this.amount;
+  }
+
+  private get ingredientAmount(): number {
+    return this.introMode ? PANTRY_AMOUNTS[0] : this.pantryAmount;
   }
 
   private onListClick(e: Event): void {
@@ -290,7 +335,7 @@ export class Panel {
     if (!btn || btn.disabled) return;
     if (btn.dataset.buy!.startsWith('ing:')) {
       const id = btn.dataset.buy!.slice(4) as IngredientId;
-      if (buyIngredient(this.state, id, this.pantryAmount)) {
+      if (buyIngredient(this.state, id, this.ingredientAmount)) {
         this.pop(btn.closest('.row'));
         this.onPurchase('ingredient', id);
         this.update();
@@ -299,7 +344,7 @@ export class Panel {
     }
     const [kind, id] = btn.dataset.buy!.split(':') as ['item' | 'upgrade', string];
     const ok =
-      kind === 'item' ? buyItem(this.state, id as ItemId, this.amount) : buyUpgrade(this.state, id as UpgradeId, this.amount);
+      kind === 'item' ? buyItem(this.state, id as ItemId, this.buyAmount) : buyUpgrade(this.state, id as UpgradeId, this.buyAmount);
     if (!ok) return;
     this.pop(btn.closest('.row'));
     this.onPurchase(kind, id);
@@ -332,6 +377,14 @@ export class Panel {
     if (this.tab === 'upgrades') return UPGRADES.map((u) => `upgrade:${u.id}`);
     if (this.tab === 'decor') return ['decor', this.decorCategory];
     if (this.tab === 'pantry') return ['pantry', ...neededIngredients(this.state).map((i) => `ing:${i.id}`)];
+    if (this.introMode) {
+      // Show every owned recipe, even if a full-view filter was previously selected.
+      // Older/purchased food remains available, with its existing kitchen gates intact.
+      return CATEGORIES.flatMap((cat) => {
+        const owned = MENU.filter((m) => m.category === cat && this.state.items[m.id] > 0);
+        return owned.length ? [`cat:${cat}`, ...owned.map((m) => `item:${m.id}`)] : [];
+      });
+    }
     const keys: string[] = ['variety'];
     const cats = this.category === 'all' ? CATEGORIES : [this.category];
     for (const cat of cats) {
@@ -394,7 +447,7 @@ export class Panel {
         const owned = chain.filter((m) => this.state.items[m.id] > 0).length;
         const h = document.createElement('h3');
         h.className = 'menu-cat';
-        h.innerHTML = `${t(`cat.${cat}` as MessageKey)} <small>${owned}/${chain.length}</small>`;
+        h.innerHTML = `${t(`cat.${cat}` as MessageKey)}${this.introMode ? '' : ` <small>${owned}/${chain.length}</small>`}`;
         this.list.append(h);
         continue;
       }
@@ -473,7 +526,7 @@ export class Panel {
     intro.className = 'pantry-intro';
     intro.innerHTML = `
       <div class="pantry-forecast"></div>
-      <div class="note">${t('pantry.intro')}</div>
+      <div class="note">${t(this.introMode ? 'guide.pantryIntro' : 'pantry.intro')}</div>
       <button class="pixel-btn restock" data-restock></button>`;
     this.pantryNote = intro.querySelector('.pantry-forecast');
     this.restockBtn = intro.querySelector('button');
@@ -582,7 +635,7 @@ export class Panel {
   update(): void {
     this.updateGoal();
     const keys = this.visibleKeys();
-    const sig = this.tab + '|' + keys.join(',');
+    const sig = this.tab + '|' + this.introMode + '|' + keys.join(',');
     if (sig !== this.signature) {
       this.signature = sig;
       this.build(keys);
@@ -640,7 +693,7 @@ export class Panel {
       if (kind === 'item') {
         const def = MENU.find((m) => m.id === id)!;
         const level = s.items[def.id];
-        const q = quoteItem(s, def.id, this.amount);
+        const q = quoteItem(s, def.id, this.buyAmount);
         refs.level.textContent = level > 0 ? `Lv ${level}` : '';
         refs.sub.textContent =
           level > 0
@@ -710,7 +763,7 @@ export class Panel {
       } else {
         const def = upgradeDef(id as UpgradeId);
         const level = s.upgrades[def.id];
-        const q = quoteUpgrade(s, def.id, this.amount);
+        const q = quoteUpgrade(s, def.id, this.buyAmount);
         const maxed = level >= def.max;
         refs.level.textContent = def.id === 'cook'
           ? s.kitchen ? t('upgrade.cook.stage', { n: level + 1, total: def.max + 1 }) : ''
@@ -739,7 +792,7 @@ export class Panel {
       const def = ingredientDef(id);
       const stock = s.pantry[id];
       const need = needs[id] ?? 0;
-      const cost = def.cost * this.pantryAmount;
+      const cost = def.cost * this.ingredientAmount;
       refs.level.textContent = '';
       refs.sub.innerHTML = `${t('pantry.stock', { n: formatNumber(stock), price: formatMoney(def.cost) })}<br />${t('pantry.usedBy', {
         items: usedBy(s, id)
@@ -751,7 +804,7 @@ export class Panel {
         refs.bar.parentElement!.title = t('pantry.need', { n: formatNumber(need) });
       }
       refs.el.classList.toggle('low', need > 0 && stock < need);
-      refs.btnLabel.textContent = t('pantry.buy', { n: this.pantryAmount });
+      refs.btnLabel.textContent = t('pantry.buy', { n: this.ingredientAmount });
       refs.btnCost.textContent = formatMoney(cost);
       refs.btn.disabled = cost > s.coins;
     }

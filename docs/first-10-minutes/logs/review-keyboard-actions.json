@@ -1,0 +1,14 @@
+{
+  "method": "Agent-operated cloud Chromium using documented CUA Playwright locator presses; values read from rendered modal-body DOM. This log transcribes the actual tool outputs at 2026-10-12 02:58–03:00 UTC; it is not a simulation or human novice test.",
+  "origin": "http://localhost:5185",
+  "save": "independent QA cafe 晨光小豆",
+  "before": {"locale":"zh","viewport":[390,720],"initialFocus":"Back to work button (回去工作)","clientHeight":552,"scrollHeight":766,"scrollTop":0,"keys":["PageDown on focused Back button","Tab on Back button"],"afterFocus":"Back to work button (AX active)","afterScrollTop":0},
+  "after": [
+    {"locale":"zh","viewport":[390,720],"focusableBodyTabindex":"0","initialBodyFocused":true,"clientHeight":552,"scrollHeight":766,"initialScrollTop":0,"key":"End on modal-body","afterScrollTop":214,"additionalKeys":["Tab -> Back focused true","Shift+Tab -> modal-body focused true","Tab -> Back","Enter -> help closed"]},
+    {"locale":"en","viewport":[390,720],"initialBodyFocused":true,"clientHeight":558,"scrollHeight":1027,"initialScrollTop":0,"key":"End on modal-body","afterScrollTop":469,"additionalKeys":["Tab -> Back","Enter -> help closed"]},
+    {"locale":"en","viewport":[1180,757],"initialBodyFocused":true,"clientHeight":585,"scrollHeight":986,"initialScrollTop":0,"key":"End on modal-body","afterScrollTop":401,"additionalKeys":["Tab -> Back","Enter -> help closed"]},
+    {"locale":"zh","viewport":[1180,757],"initialBodyFocused":true,"clientHeight":578,"scrollHeight":704,"initialScrollTop":0,"key":"End on modal-body","afterScrollTop":126,"additionalKeys":["Tab -> Back","Enter -> help closed"]}
+  ],
+  "otherDialogRegression": {"locale":"zh","viewport":[390,720],"normalCloseDay":2,"closingGuide":"6/6","settlementInitialFocus":"details summary","action":"Enter on Prepare tomorrow","prepareInitialFocus":"Start business","prepDay":3,"prepGuide":"6/6","reloadGuide":"6/6"},
+  "cacheNote":"Initial reload used a cached pre-fix index and was detected because tabindex was null. After qa-review.html/index.html?review=20261012 was used, tabindex=0 and focused=true were verified before all after tests. QA wrappers are outside shipped source."
+}

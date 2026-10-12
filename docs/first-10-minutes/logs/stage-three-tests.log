@@ -1,0 +1,14 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> tiny-bean-cafe@0.1.0 test
+> vitest run src/game/settlement-advice.test.ts src/ui/settlement.test.ts src/ui/first-service.test.ts src/game/first-service.test.ts src/ui/prepare-guidance.test.ts src/ui/first-tools.test.ts src/ui/merge-integration.test.ts src/i18n.test.ts
+
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+
+ Test Files  7 passed (7)
+      Tests  61 passed (61)
+   Start at  19:16:46
+   Duration  863ms (transform 45%, environment 24%, tests 22%, import 8%, worker 1%)
+

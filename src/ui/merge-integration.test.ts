@@ -126,7 +126,7 @@ describe('merged preparation and progression', () => {
     expect(bookPromotion(state, 'clipLocal')).toBe(true);
     showPrepare(state, vi.fn(), vi.fn());
     const text = query('.prep').textContent!;
-    expect(text).toContain(t('prep.barOnly'));
+    expect(text).toContain(t('prep.menuHint'));
     expect(text).toContain(t('rating.prep', { pct: '±0' }));
     expect(text).toContain(t('pet.forecast', { pct: 8 }));
     expect(text).toContain(t('promo.prep', { pct: 50, seconds: 180 }));

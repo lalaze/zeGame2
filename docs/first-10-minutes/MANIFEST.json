@@ -1,0 +1,366 @@
+{
+  "baseCommit": "6331eec229f54417d8e068375b98ba5138591eb8",
+  "branch": "joyful-sloth",
+  "committed": false,
+  "pushed": false,
+  "sourceFiles": [
+    {
+      "path": "src/game/first-service.test.ts",
+      "sha256": "a07b00738eaaa7aa0c68e357f723c066041b241d298ad5eee7610daaa1cbf5fe"
+    },
+    {
+      "path": "src/game/first-service.ts",
+      "sha256": "7a155e855795aa3b19a6640706887f37b75501b724d001063e33b2a33a93bc45"
+    },
+    {
+      "path": "src/game/settlement-advice.test.ts",
+      "sha256": "6f7c70fb1a8f468185c9f5f620095bf93856df60e26819ecf50d87167012e3c9"
+    },
+    {
+      "path": "src/game/settlement-advice.ts",
+      "sha256": "5915c791025ba0598e86cbb93e05c0989cf93a1de141432370ff6a9890fb659a"
+    },
+    {
+      "path": "src/locales/en.json",
+      "sha256": "043c682bf06d95b0dee0d7623fc198365999119e6b1fb4d1985e3c178f575cbf"
+    },
+    {
+      "path": "src/locales/zh.json",
+      "sha256": "45695ee6356d3adc91d5f2a6d9230d0e912038e986a1a9ccb5ffa8a43b176863"
+    },
+    {
+      "path": "src/main.ts",
+      "sha256": "ede392b0d6e754bcba8a10e866f0c5286b8e37a85d38e613850d5eca6cf56412"
+    },
+    {
+      "path": "src/style.css",
+      "sha256": "fb3ea7f37c61547125596e8f975ddcdeafd19fed80e112696163c19671ae449e"
+    },
+    {
+      "path": "src/ui/first-service.test.ts",
+      "sha256": "df88443afc264bc62b49211c60939979130b5d0da5b4e9fbb5981552a2ae9ba9"
+    },
+    {
+      "path": "src/ui/first-service.ts",
+      "sha256": "d111a5cecd128641c7e1dee291bc3b7b19913e13c6a8df8c9fbd5cf4ec23e05d"
+    },
+    {
+      "path": "src/ui/first-tools.test.ts",
+      "sha256": "a54814b64ed97027f0a8c35fc363cdfd64aa730d4ec122a1960e12ef7f2c474c"
+    },
+    {
+      "path": "src/ui/merge-integration.test.ts",
+      "sha256": "0acaec1bde15963706ae0e4a04b0fb8f85492c5448af35181d20f2fb42239059"
+    },
+    {
+      "path": "src/ui/modal.ts",
+      "sha256": "a71a726f51c00f72fb15192c930ac4cd38becd06f08049071c6a4f8b60c99ef1"
+    },
+    {
+      "path": "src/ui/panel.ts",
+      "sha256": "da96d403dc0b3d17db2c2db90ea634427f5e97446848df737144f004d755e091"
+    },
+    {
+      "path": "src/ui/prepare-guidance.test.ts",
+      "sha256": "2a6824d9d92c1a97a7d7995c62b6dab2a63fa4ed844a51c4c8428b2c6bafca13"
+    },
+    {
+      "path": "src/ui/prepare.ts",
+      "sha256": "1f497e475a6e6487ba5010e44b57adb44d9313570afa713773339f4481aad2d5"
+    },
+    {
+      "path": "src/ui/settlement.test.ts",
+      "sha256": "a88297d5f16db331dad3d1bbbef4294668655e87381a2b8e3b221afe45cd06b6"
+    },
+    {
+      "path": "src/ui/settlement.ts",
+      "sha256": "edc8ab7041f160555569c8d1b5d88005eb22313eba67a10afb7607008efff459"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "ACCEPTANCE.md",
+      "bytes": 12472,
+      "sha256": "84ff714d9fe57dacd3e75c3073e932ecb20c37982af1d088061fa656644eba83"
+    },
+    {
+      "path": "PLAN.md",
+      "bytes": 1940,
+      "sha256": "40ded8f169ea42c8a2681e1fccb76d1288c709f1d4acfb7402f8c50f27240a71"
+    },
+    {
+      "path": "PROGRESS.md",
+      "bytes": 10214,
+      "sha256": "fe1fc886cb8e0c8c4670b4862cc26ad9a099c70e0cd52b651652c854515baf31"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1595,
+      "sha256": "5b1228f90cfb1d4976d557da6d1cad84bf923c9b75221e214d62a8dd2c282434"
+    },
+    {
+      "path": "logs/baseline-build.log",
+      "bytes": 1927,
+      "sha256": "dbfc45fb1256d3d82201a8b5d874bb4a61203cf81d90b28ea0f681094ec7c477"
+    },
+    {
+      "path": "logs/final-build.log",
+      "bytes": 1927,
+      "sha256": "bbdff48c13f4b47600fd856b619bf6f1c52e53d730298b8474c56fbd3513188b"
+    },
+    {
+      "path": "logs/final-tests.log",
+      "bytes": 558,
+      "sha256": "625f33e0361b276c3dec0bb6893f8baac4dee214edd079ee18d680ed8e0bd69b"
+    },
+    {
+      "path": "logs/layout-fix-build.log",
+      "bytes": 1927,
+      "sha256": "255b14c264f8a40f190061ddaaec77f6f75778c9bab9a4e40ef1700196e30ca4"
+    },
+    {
+      "path": "logs/review-build.log",
+      "bytes": 1927,
+      "sha256": "991b5664ddfe857ffc164b79ecc68faf1d7b1dc0f2e914ae4dcffd2ff2c9ab0f"
+    },
+    {
+      "path": "logs/review-keyboard-actions.json",
+      "bytes": 2205,
+      "sha256": "ec32c770421cc662977dcd540752cb98333c6947e38a64911e36e624733093cf"
+    },
+    {
+      "path": "logs/review-tests.log",
+      "bytes": 558,
+      "sha256": "eeae8aca4b19e67627cffc55b4306bf7073d423c412ba03e69e81dc39a2e1f45"
+    },
+    {
+      "path": "logs/stage-three-build.log",
+      "bytes": 1927,
+      "sha256": "953bba633901cbe05eb12346bb8e8931b7eef18ad1e216e40cd7255561f4819e"
+    },
+    {
+      "path": "logs/stage-three-tests.log",
+      "bytes": 576,
+      "sha256": "4d8576d309c687197142184817a0a34dfc68025e0c2dbc0035664666c3fac1e0"
+    },
+    {
+      "path": "logs/stage-two-build.log",
+      "bytes": 1927,
+      "sha256": "11ae87576e572619f68d4ecdec544fab2c2b8be4a6277fa6a2e5d9b2dab78f4a"
+    },
+    {
+      "path": "logs/stage-two-tests.log",
+      "bytes": 558,
+      "sha256": "16e7c94820407b9ee0ebf3a57d5175b7d2e681d336214bd7d03a3c4df7a5f114"
+    },
+    {
+      "path": "logs/ui-actions.json",
+      "bytes": 212098,
+      "sha256": "f06abb9ae226b8c39867fc0bb1bf4f43f3e6c4117e7b4e7f53c6e2533b4f93d3"
+    },
+    {
+      "path": "logs/ui-runs.json",
+      "bytes": 7231,
+      "sha256": "6d289eae067612d50f0e247b3d5ad8cd10a6bface4d04731c88092c17093a3fc"
+    },
+    {
+      "path": "screenshots/baseline-open.jpg",
+      "bytes": 158273,
+      "sha256": "bde39378ff23e91ead12d01469904bcd9878acb374dd4a1f22b697417599f557"
+    },
+    {
+      "path": "screenshots/baseline-settlement.jpg",
+      "bytes": 94424,
+      "sha256": "e10feacd406665d8dbcde16d9c4e671f3a78eb2ed281078adf9300f8bf357f50"
+    },
+    {
+      "path": "screenshots/completion-day3-prep.jpg",
+      "bytes": 51788,
+      "sha256": "2bf0ddda195915e198dd8499804c9926bbe7c9721d1512ac65b65c57e1a5c130"
+    },
+    {
+      "path": "screenshots/en-desktop-open.jpg",
+      "bytes": 138069,
+      "sha256": "d4fca00a1fca4e1a836500b7d05d1f4a9bae8354c9b203ab2f39c1f7b16b1f06"
+    },
+    {
+      "path": "screenshots/en-desktop-prepare.jpg",
+      "bytes": 84759,
+      "sha256": "40c2017e91fee7dc9d4e204b4142541c99caceca8efb5bc954aa8dee346e4d85"
+    },
+    {
+      "path": "screenshots/en-desktop-reopened.jpg",
+      "bytes": 150923,
+      "sha256": "12855921cf16aa266c86ab407d9761d2f532fd9b6e863f96b93f6dae7ed05f13"
+    },
+    {
+      "path": "screenshots/en-desktop-settlement.jpg",
+      "bytes": 95399,
+      "sha256": "9a88c1b8647725f9281a1a0eafe164c593d980bc27ed1f310fe3728e8f1374f0"
+    },
+    {
+      "path": "screenshots/en-desktop-starter.jpg",
+      "bytes": 133194,
+      "sha256": "faa605f21c2e75c6cfd9806ca565da4a28687004a2691b58b1921b8aed2da75e"
+    },
+    {
+      "path": "screenshots/en-mobile-final-feedback.jpg",
+      "bytes": 69131,
+      "sha256": "0d9100e092ae41605e9f2f2db0f7587d6249285b198dfb373067b8a7db765a7d"
+    },
+    {
+      "path": "screenshots/en-mobile-open.jpg",
+      "bytes": 75062,
+      "sha256": "42377c1291e2a60f9d3fb247ab874eaac702ba5fcd5f5ee708ef494a84ac3eff"
+    },
+    {
+      "path": "screenshots/en-mobile-prepare-expanded.jpg",
+      "bytes": 63279,
+      "sha256": "cb5de685a1afc803386ad9402197bc588c019d0698f9ba3b187a774d69dbffed"
+    },
+    {
+      "path": "screenshots/en-mobile-reopened.jpg",
+      "bytes": 83403,
+      "sha256": "e567f4669db9eafb3aea27ddc8d8c1274683ce919bd5744ce70bebb00d0d5e86"
+    },
+    {
+      "path": "screenshots/en-mobile-settlement-expanded.jpg",
+      "bytes": 69404,
+      "sha256": "df09d178ce8f840917db4065866001860a9fea2c3ce0abfbc96912758bb74b34"
+    },
+    {
+      "path": "screenshots/en-mobile-settlement.jpg",
+      "bytes": 64391,
+      "sha256": "97506d74ce8d0a8d2bf03448837affec45eb23f8a40ac0ea9c5972147bd7c32e"
+    },
+    {
+      "path": "screenshots/final-en-desktop-reopened.jpg",
+      "bytes": 158337,
+      "sha256": "399670fe83f6e9c8015b061278d8a4ef04898ab7f117d002be7699841de1b0de"
+    },
+    {
+      "path": "screenshots/final-en-desktop-settlement.jpg",
+      "bytes": 96731,
+      "sha256": "4a0f457cc90972b1d8f846d948ef75272148b675dfd268448689f6dc8eb0849a"
+    },
+    {
+      "path": "screenshots/final-en-desktop-starter.jpg",
+      "bytes": 132152,
+      "sha256": "269298b425559cd988c295250351d15f5f15fa1359b0a94fcd816f99fac9f888"
+    },
+    {
+      "path": "screenshots/keyboard-help-before.jpg",
+      "bytes": 69214,
+      "sha256": "23ee27781dc4ac083f36db2d7ab45e99aa04ce984df55c1a3355f6006f92bd98"
+    },
+    {
+      "path": "screenshots/keyboard-help-desktop-after.jpg",
+      "bytes": 125700,
+      "sha256": "1e4202a6484fc97c059ed526404a378824793ca9757ceb83d360ef7dc8ec9852"
+    },
+    {
+      "path": "screenshots/keyboard-help-en-after.jpg",
+      "bytes": 71239,
+      "sha256": "51d5ba2b7f1cdf56faa084db1494395b21d75e32730f4b74797adf127d2a5f58"
+    },
+    {
+      "path": "screenshots/keyboard-help-zh-after.jpg",
+      "bytes": 74273,
+      "sha256": "9e4d538f7fed0fb8ca6f85fe4a48aabf759418b8d979a5edcb20341c015c3ec4"
+    },
+    {
+      "path": "screenshots/legacy-resume.jpg",
+      "bytes": 157213,
+      "sha256": "142f388984d1f2dd4c2bb13718e6a2a21faa43bf78ce01e28800b1b2f37edd1e"
+    },
+    {
+      "path": "screenshots/native-pause-before.png",
+      "bytes": 228290,
+      "sha256": "843ddaf8c27fd43a4f0d17714d3e18d5f2d83029668c0cf168011d1b6a6b343d"
+    },
+    {
+      "path": "screenshots/native-pause-resumed.png",
+      "bytes": 226079,
+      "sha256": "30ec79e2021f6e108c575b4e5b7057ddd1058dc325df493de5471598bb263bf8"
+    },
+    {
+      "path": "screenshots/native-pause-return.png",
+      "bytes": 226024,
+      "sha256": "18778495f81a8bf90f6fc26d92575dbb9cc9c2a4f1a0e16ebae7ce34cb8b323e"
+    },
+    {
+      "path": "screenshots/stockout-explanation.jpg",
+      "bytes": 85111,
+      "sha256": "cf9453c6f8a3dd07b04475e894684383a1c0e724667bdf97613ff1e2a5f83001"
+    },
+    {
+      "path": "screenshots/stockout-settlement.jpg",
+      "bytes": 96578,
+      "sha256": "8c66ff66fafe844c1bef88aa8e97815849a834faf42c5ef0ac9f5baaf7dcc892"
+    },
+    {
+      "path": "screenshots/tiny-bean-final-chinese-390px.jpg",
+      "bytes": 43099,
+      "sha256": "2a40eb37bdca194d98b9ece29d6a32af100901aa03166471af14fe8aadee4f1b"
+    },
+    {
+      "path": "screenshots/zh-desktop-prepare.jpg",
+      "bytes": 83769,
+      "sha256": "e50795064803dfb4a9dafb24bbfdcd19f00df97888a1e3a798efa1bd5bfed0a6"
+    },
+    {
+      "path": "screenshots/zh-desktop-reopened.jpg",
+      "bytes": 155686,
+      "sha256": "a63b1ab75beb9c24244c2afa66b6b8629307ebbd0b186ff03a32103a7905c555"
+    },
+    {
+      "path": "screenshots/zh-desktop-settlement-details.jpg",
+      "bytes": 100485,
+      "sha256": "e12ed4dd15bdff8d7e075876862973938ecf679f773998629126487f0fd35dad"
+    },
+    {
+      "path": "screenshots/zh-mobile-720-help.jpg",
+      "bytes": 68798,
+      "sha256": "e59e455bedde40d64ff4d186c2cd56ef017aa1b07ae5c9fcd7181c3543091253"
+    },
+    {
+      "path": "screenshots/zh-mobile-final-open-feedback.jpg",
+      "bytes": 60195,
+      "sha256": "6a1cc2f2d74679d3be42ff9920394b25be098abbc2662f5b42b73ba0a0339654"
+    },
+    {
+      "path": "screenshots/zh-mobile-final-starter-feedback.jpg",
+      "bytes": 60710,
+      "sha256": "0c8217996a63b0761a3a88984a4cbf0f5a768916288d4b5638976b6643c1351c"
+    },
+    {
+      "path": "screenshots/zh-mobile-reopened.jpg",
+      "bytes": 80064,
+      "sha256": "b39e1604b411e1ee367bde82b767c64497aa567f6645454f86214f5f4b9b8c41"
+    },
+    {
+      "path": "screenshots/zh-mobile-replay-help.jpg",
+      "bytes": 80876,
+      "sha256": "3aba46015f7a213f095288fe858b627bfccd0432886a6cff1e18f786bb70c0d7"
+    },
+    {
+      "path": "screenshots/zh-mobile-settlement-expanded.jpg",
+      "bytes": 72604,
+      "sha256": "3e851bdc72bb725761103a331393deddc87c52c339e701b4961661bf47818851"
+    },
+    {
+      "path": "screenshots/zh-mobile-starter.jpg",
+      "bytes": 70906,
+      "sha256": "696fa4b3538dfd7f94fb62f768de11117843f673362ec8d422e6fb7a27cb9b4f"
+    }
+  ],
+  "reviewRepairVerification": {
+    "testsPassed": 583,
+    "testsSkipped": 6,
+    "suitesPassed": 55,
+    "build": "pass",
+    "independentReview": "pass",
+    "dateUTC": "2026-10-12T03:03:00Z"
+  },
+  "snapshotNote": "Pre-commit verification snapshot; publication authorized afterward on 2026-10-12. Final commit and remote verification reported separately."
+}

@@ -1,0 +1,70 @@
+{
+  "enDesktop": {
+    "start": 1791771460277,
+    "events": [
+      {
+        "event": "opened",
+        "at": "2026-10-12T02:18:45.605Z"
+      },
+      {
+        "event": "close requested",
+        "at": "2026-10-12T02:19:22.638Z",
+        "clock": "Day 1 · Open 0:37"
+      },
+      {
+        "event": "reopened",
+        "at": "2026-10-12T02:19:42.669Z",
+        "clock": "Day 2 · Open 0:00"
+      }
+    ],
+    "open": 1791771525605,
+    "end": 1791771582669
+  },
+  "pause": {
+    "beforeAt": 1791771613207,
+    "before": "Day 2 · Open 0:30",
+    "afterAt": 1791771640831,
+    "after": "Day 2 · Open 0:55"
+  },
+  "zhDesktop": {
+    "start": 1791771676170,
+    "events": [],
+    "open": 1791771707824,
+    "closeClock": "第 1 天 · 已营业 0:44",
+    "report": "第 1 天营业结算\n接待顾客\n8\n营业额\n$24.00\n本次消耗成本\n−$8.00\n利润\n+$16.00\n\n咖啡店顺利完成了订单，没有记录到缺货、等待或浪费损失。\n\n目标已完成：开门营业，完成第一天。规划明天前，先在目标卡片领取 $30。\n\n下一步: 先领取 $30 目标奖励，再检查明天的原料。\n\n先留出补原料的钱，再考虑升级或解锁新品。\n\n营业详情与成本明细\n流失顾客\n0（0 位因售罄）\n排队放弃\n0\n等餐放弃\n0\n缺货未售出的配餐\n0\n队满未能进店\n0\n营业时间（含收尾）\n0:44\n食材成本\n−$8.00\n\n成本只计算今天消耗的原料、猫咪用品与推广时长。仓库剩余原料和升级支出不计入今日成本；变质烘焙的成本已包含在原料消耗中。\n\n本次不足 1 分钟，暂不比较每分钟利润。\n\n本次顾客评价\n\n8 条 · 平均 4.00 星\n\n味道稳定，餐点齐全\n×8\n\n★ 4.00 / 5 · 口碑客流 ±0%\n\n今日最受欢迎：\n浓缩咖啡\n× 8\n\n准备明天\n查看目标奖励",
+    "end": 1791771764262
+  },
+  "enMobile": {
+    "start": 1791771775177,
+    "events": [],
+    "open": 1791771819299,
+    "closeClock": "Day 1 · Open 0:46",
+    "report": "Day 1 settlement\nCustomers served\n9\nRevenue\n$27.00\nCosts used\n−$9.00\nProfit\n+$18.00\n\nYour café completed orders without recorded stock, waiting or waste losses.\n\nGoal complete: Open the shop and finish your first day. Claim $30 from the goal card before planning tomorrow.\n\nNext step: Claim the $30 goal reward first, then check tomorrow's ingredients.\n\nKeep ingredient money aside before buying upgrades or adding new dishes.\n\nDay details & cost breakdown\nCustomers lost\n0 (0 sold out)\nLeft the queue\n0\nLeft while waiting for service\n0\nUnavailable add-ons\n0\nCould not join the full queue\n0\nService time, including closing\n0:46\nIngredients used\n−$9.00\n\nCosts count supplies and promotion time used today. Stock still in the pantry and upgrade purchases are not today's expenses. Stale stock is already included in ingredients used.\n\nUnder 1 minute: too short to compare profit rates reliably.\n\nReviews this session\n\n9 reviews · Average 4.00 stars\n\nReliable flavor and a complete order\n×9\n\n★ 4.00 / 5 · Review traffic ±0%\n\nBest seller:\nEspresso\n× 9\n\nPlan tomorrow\nView goal reward",
+    "end": 1791771888700
+  },
+  "zhMobile": {
+    "start": 1791771909085,
+    "events": [],
+    "open": 1791771992251,
+    "closeClock": "第 1 天 · 已营业 0:47",
+    "report": "第 1 天营业结算\n接待顾客\n8\n营业额\n$24.00\n本次消耗成本\n−$8.00\n利润\n+$16.00\n\n咖啡店顺利完成了订单，没有记录到缺货、等待或浪费损失。\n\n目标已完成：开门营业，完成第一天。规划明天前，先在目标卡片领取 $30。\n\n下一步: 先领取 $30 目标奖励，再检查明天的原料。\n\n先留出补原料的钱，再考虑升级或解锁新品。\n\n营业详情与成本明细\n流失顾客\n0（0 位因售罄）\n排队放弃\n0\n等餐放弃\n0\n缺货未售出的配餐\n0\n队满未能进店\n0\n营业时间（含收尾）\n0:48\n食材成本\n−$8.00\n\n成本只计算今天消耗的原料、猫咪用品与推广时长。仓库剩余原料和升级支出不计入今日成本；变质烘焙的成本已包含在原料消耗中。\n\n本次不足 1 分钟，暂不比较每分钟利润。\n\n本次顾客评价\n\n8 条 · 平均 4.00 星\n\n味道稳定，餐点齐全\n×8\n\n★ 4.00 / 5 · 口碑客流 ±0%\n\n今日最受欢迎：\n浓缩咖啡\n× 8\n\n准备明天\n查看目标奖励",
+    "end": 1791772055614
+  },
+  "nativePause": {
+    "beforeAt": 1791772080648,
+    "returnAt": 1791772121672,
+    "resumedAt": 1791772153941
+  },
+  "legacyStockout": {
+    "report": "第 2 天营业结算\n接待顾客\n46\n营业额\n$138.00\n本次消耗成本\n−$46.00\n利润\n+$92.00\n\n缺货导致 30 笔订单流失，另有 0 份加购未能供应。\n\n目标已完成：开门营业，完成第一天。规划明天前，先在目标卡片领取 $30。\n\n下一步: 先领取 $30 目标奖励，再检查明天的原料。\n\n先留出补原料的钱，再考虑升级或解锁新品。\n\n营业详情与成本明细\n流失顾客\n30（30 位因售罄）\n排队放弃\n0\n等餐放弃\n0\n缺货未售出的配餐\n0\n队满未能进店\n0\n营业时间（含收尾）\n6:27\n食材成本\n−$46.00\n\n成本只计算今天消耗的原料、猫咪用品与推广时长。仓库剩余原料和升级支出不计入今日成本；变质烘焙的成本已包含在原料消耗中。\n\n每游戏分钟利润：$14\n\n本次顾客评价\n\n76 条 · 平均 2.95 星\n\n点的主餐已经售罄\n×30\n味道稳定，餐点齐全\n×26\n味道不错，制作很熟练\n×20\n\n★ 2.40 / 5 · 口碑客流 −13%\n\n今日最受欢迎：\n浓缩咖啡\n× 46\n\n订单中缺货的菜品：浓缩咖啡 ×30\n\n当前原料无法制作：浓缩咖啡。下次开店前请检查备货。\n\n准备明天\n查看目标奖励"
+  },
+  "finalEnDesktop": {
+    "start": 1791772329056,
+    "events": [],
+    "open": 1791772359481,
+    "preReload": "Day 1 · Open 0:43",
+    "closeClock": "Day 1 · Open 1:56",
+    "report": "Day 1 settlement\nCustomers served\n23\nRevenue\n$69.00\nCosts used\n−$23.00\nProfit\n+$46.00\n\nYour café completed orders without recorded stock, waiting or waste losses.\n\nGoal complete: Open the shop and finish your first day. Claim $30 from the goal card before planning tomorrow.\n\nNext step: Claim the $30 goal reward first, then check tomorrow's ingredients.\n\nKeep ingredient money aside before buying upgrades or adding new dishes.\n\nDay details & cost breakdown\nCustomers lost\n0 (0 sold out)\nLeft the queue\n0\nLeft while waiting for service\n0\nUnavailable add-ons\n0\nCould not join the full queue\n0\nService time, including closing\n1:56\nIngredients used\n−$23.00\n\nCosts count supplies and promotion time used today. Stock still in the pantry and upgrade purchases are not today's expenses. Stale stock is already included in ingredients used.\n\nProfit per game minute: $23\n\nReviews this session\n\n23 reviews · Average 4.00 stars\n\nReliable flavor and a complete order\n×23\n\n★ 4.00 / 5 · Review traffic ±0%\n\nBest seller:\nEspresso\n× 23\n\nPlan tomorrow\nView goal reward",
+    "end": 1791772521613
+  }
+}
