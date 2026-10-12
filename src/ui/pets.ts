@@ -3,6 +3,7 @@ import { formatAccountMoney, formatMoney } from '../game/format';
 import type { GameState } from '../game/state';
 import { t } from '../i18n';
 import { catFrames, toDataURL } from '../render/sprites';
+import { livingCatActivity, livingCatPersonality, livingCatPreference, type LivingCatControls } from './living-cats';
 
 export class PetPanel {
   private summary: HTMLElement;
@@ -16,7 +17,7 @@ export class PetPanel {
   private empty: HTMLElement;
   private tabs: HTMLButtonElement[];
 
-  constructor(root: HTMLElement, private state: GameState, onChange: (id: string) => void) {
+  constructor(root: HTMLElement, private state: GameState, onChange: (id: string) => void, private living: LivingCatControls = {}) {
     this.selected = CATS.find((cat) => !state.pets.some((pet) => pet.id === cat.id))?.id ?? CATS[0].id;
     const intro = document.createElement('div');
     intro.className = 'pet-intro';
@@ -66,6 +67,24 @@ export class PetPanel {
         <p class="pet-status"></p><progress max="${MAX_CARE_SECONDS}" value="0" aria-label="${t('pet.supplies')}"></progress>
         <div class="pet-actions"><button class="pixel-btn small" data-adopt>${t('pet.adopt', { cost: formatMoney(cat.adoption) })}</button><button class="pixel-btn small ghost" data-refill>${t('pet.refill', { cost: formatMoney(cat.careCost) })}</button></div>
         <label class="pet-auto"><input type="checkbox" /> ${t('pet.auto')}</label>`;
+      const life = document.createElement('div');
+      life.className = 'pet-living';
+      const personality = document.createElement('p'); personality.className = 'note';
+      const preference = document.createElement('p'); preference.className = 'note';
+      const activity = document.createElement('p'); activity.className = 'pet-living-activity';
+      const actions = document.createElement('div'); actions.className = 'pet-actions';
+      const locate = document.createElement('button');
+      locate.className = 'pixel-btn small ghost'; locate.dataset.locateCat = cat.id;
+      locate.textContent = t('pet.living.locate');
+      const interact = document.createElement('button');
+      interact.className = 'pixel-btn small'; interact.dataset.petCat = cat.id;
+      interact.textContent = t('pet.living.pet'); interact.title = t('pet.living.petHint');
+      for (const button of [locate, interact]) { button.style.minHeight = '44px'; button.style.minWidth = '44px'; }
+      locate.addEventListener('click', () => this.living.locate?.(cat.id));
+      interact.addEventListener('click', () => { this.living.interact?.(cat.id); this.update(); });
+      actions.append(locate, interact);
+      life.append(personality, preference, activity, actions);
+      el.append(life);
       root.append(el);
       const adopt = el.querySelector<HTMLButtonElement>('[data-adopt]')!;
       const refill = el.querySelector<HTMLButtonElement>('[data-refill]')!;
@@ -76,7 +95,7 @@ export class PetPanel {
         const pet = state.pets.find((pet) => pet.id === cat.id);
         if (pet) { pet.autoRefill = auto.checked; onChange(cat.id); }
       });
-      return { cat, el, adopt, refill, auto, status: el.querySelector<HTMLElement>('.pet-status')!, progress: el.querySelector('progress')! };
+      return { cat, el, adopt, refill, auto, life, personality, preference, activity, locate, interact, status: el.querySelector<HTMLElement>('.pet-status')!, progress: el.querySelector('progress')! };
     });
     this.update();
   }
@@ -102,10 +121,19 @@ export class PetPanel {
       r.auto.parentElement!.hidden = !pet;
       r.progress.hidden = !pet;
       r.el.classList.toggle('adopted', !!pet);
+      r.life.hidden = !pet;
+      r.el.querySelector('h3')!.textContent = `${pet ? `${s.pets.indexOf(pet) + 1}. ` : ''}${t(`pet.${r.cat.id}.name`)}`;
       if (!pet) {
         r.status.textContent = t(s.pets.length >= MAX_PETS ? 'pet.full' : s.phase !== 'prep' ? 'pet.closedOnly' : s.coins < r.cat.adoption ? 'pet.unaffordable' : 'pet.included', { max: MAX_PETS });
         continue;
       }
+      const actor = this.living.getActor?.(pet.id);
+      r.personality.textContent = livingCatPersonality(pet);
+      r.preference.textContent = livingCatPreference(pet);
+      r.activity.textContent = livingCatActivity(actor);
+      r.locate.disabled = !this.living.locate || !actor;
+      r.interact.disabled = !this.living.interact || !actor || !petActive(pet);
+      r.interact.title = t(petActive(pet) ? 'pet.living.petHint' : 'pet.living.needsCare');
       const seconds = Math.ceil(pet.careSeconds);
       const time = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
       r.status.textContent = petActive(pet) ? t('pet.ready', { time }) : t('pet.resting');

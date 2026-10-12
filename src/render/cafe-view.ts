@@ -1,6 +1,8 @@
 // What the café scene is showing, independent of how it's drawn: the camera, the
 // room in view, the piece being arranged, the cat and kitchen door, and effects
 // waiting to be spawned. The Phaser scene (render/phaser/) reads this every frame.
+import { LivingCats } from '../game/living-cats';
+import type { CatId } from '../game/pets';
 import { isBakery } from '../game/economy';
 import { stationSpot } from '../game/kitchen';
 import { CELL, WALL_TOP, furnitureDef, type FurnitureDef } from '../game/furniture';
@@ -46,6 +48,9 @@ export function cellRect(surface: 'floor' | 'wall', col: number, row: number, w:
 
 export class CafeView {
   private camera = new RoomCamera();
+  readonly livingCats = new LivingCats();
+  selectedCat: CatId | null = null;
+  catSelectionSeconds = 0;
   private steamTimer = 0;
   private focusedKitchenHeight = 0;
 
@@ -108,6 +113,39 @@ export class CafeView {
     this.effects.push({ kind: 'sparkle', x, y });
   }
 
+  /** Resident hit targets are slightly larger than the pixel art, nearest wins. */
+  hitResidentCat(x: number, y: number, radius = 12): CatId | null {
+    if (this.overview || this.panning || this.paused) return null;
+    const candidates = [...this.livingCats.actors.values()].filter((cat) =>
+      cat.area === this.area && Math.abs(x - cat.x) <= radius && y >= cat.y - Math.max(22, radius + 8) && y <= cat.y + Math.max(5, radius - 8));
+    candidates.sort((a, b) => Math.hypot(x - a.x, y - a.y + 8) - Math.hypot(x - b.x, y - b.y + 8));
+    return candidates[0]?.id ?? null;
+  }
+
+  selectResidentCat(id: CatId): void {
+    if (!this.livingCats.actors.has(id)) return;
+    this.selectedCat = id;
+    this.catSelectionSeconds = 6;
+  }
+
+  petResidentCat(id: CatId): boolean {
+    const cat = this.livingCats.actors.get(id);
+    if (!cat || !this.livingCats.interact(id)) return false;
+    this.selectResidentCat(id);
+    this.catSpot = { x: cat.x, y: cat.y };
+    this.petCat();
+    return true;
+  }
+
+  /** Cats yield to people, but solid furniture must not be placed on a resident. */
+  catSpaceClear(id: string, col: number, row: number): boolean {
+    const def = furnitureDef(id);
+    if (!def || def.surface !== 'floor') return true;
+    const rect = cellRect('floor', col, row, def.w, def.h);
+    return [...this.livingCats.actors.values()].every((cat) =>
+      cat.x < rect.x - 4 || cat.x > rect.x + rect.w + 4 || cat.y < rect.y - 4 || cat.y > rect.y + rect.h + 4);
+  }
+
   /** Returns true if the tap landed on the cat. */
   hitCat(x: number, y: number, count = 1): boolean {
     if (this.area !== 'main') return false;
@@ -128,7 +166,10 @@ export class CafeView {
       this.camera.moveTo(this.roomFocus());
     }
     this.camera.update(dt);
-    this.catHappy = Math.max(0, this.catHappy - dt);
+    if (!this.paused) {
+      this.catHappy = Math.max(0, this.catHappy - dt);
+      this.catSelectionSeconds = Math.max(0, this.catSelectionSeconds - dt);
+    }
     const through = sim.cooks.some((_, i) => {
       const at = sim.cookStation(i);
       const cook = sim.cooks[i];

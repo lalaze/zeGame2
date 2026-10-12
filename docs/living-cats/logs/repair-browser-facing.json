@@ -1,0 +1,24 @@
+{
+  "method": "Actual cloud Chromium production game, isolated synthetic origin5214, one ginger cat and default idle server, no RNG/actor manipulation. Screenshots show live rightward movement with head right; separate leftward pair shows head left. Exact deterministic1200s deadlock recovery is separately engine-tested.",
+  "rightwardFrames": [
+    {
+      "file": "screenshots/cat-repair-rightward-38.png",
+      "time": "2026-10-12T07:03:56.580Z",
+      "status": "Main caf\u00e9 \u00b7 Strolling"
+    },
+    {
+      "file": "screenshots/cat-repair-rightward-40.png",
+      "time": "2026-10-12T07:03:58.183Z",
+      "status": "Main caf\u00e9 \u00b7 Strolling"
+    },
+    {
+      "file": "screenshots/cat-repair-rightward-42.png",
+      "time": "2026-10-12T07:03:59.780Z",
+      "status": "Main caf\u00e9 \u00b7 Strolling"
+    }
+  ],
+  "leftwardTimes": [
+    "2026-10-12T06:56:24.595Z",
+    "2026-10-12T06:56:25.233Z"
+  ]
+}

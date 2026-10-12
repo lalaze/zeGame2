@@ -71,8 +71,8 @@ describe('adoptable cat artwork', () => {
       const frames = catFrames(cat.id);
       expect(catFrames(cat.id)).toBe(frames);
       signatures.add(signature(frames.idle));
-      expect(new Set(Object.values(frames).map(signature)).size, cat.id).toBe(4);
-      for (const frame of Object.values(frames)) {
+      expect(new Set([frames.idle, frames.swish, frames.blink, frames.happy].map(signature)).size, cat.id).toBe(4);
+      for (const frame of [frames.idle, frames.swish, frames.blink, frames.happy]) {
         expect([frame.width, frame.height]).toEqual([18, 14]);
         expect(pixels(frame).size).toBeGreaterThan(100);
         for (const color of pixels(frame).values()) expect(missingColors).not.toContain(color);

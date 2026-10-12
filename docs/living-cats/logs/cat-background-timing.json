@@ -1,0 +1,7 @@
+{
+  "method": "Native Chromium tab switch only; no background page probing",
+  "elapsedSeconds": 68.591,
+  "beforeClock": "2:48",
+  "afterClock": "2:48",
+  "result": "Paused; no catch-up burst on return"
+}

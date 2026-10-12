@@ -1,0 +1,33 @@
+{
+  "origin": "http://127.0.0.1:5211",
+  "version": 12,
+  "pets": [
+    {
+      "id": "ginger",
+      "careSeconds": 180,
+      "autoRefill": false,
+      "personality": "playful",
+      "preferredArea": "main",
+      "preferredSpot": "explore"
+    },
+    {
+      "id": "tuxedo",
+      "careSeconds": 0,
+      "autoRefill": false,
+      "personality": "quiet",
+      "preferredArea": "reading",
+      "preferredSpot": "cozy"
+    },
+    {
+      "id": "calico",
+      "careSeconds": 0,
+      "autoRefill": false,
+      "personality": "affectionate",
+      "preferredArea": "greenhouse",
+      "preferredSpot": "window"
+    }
+  ],
+  "coins": 97092,
+  "phase": "prep",
+  "day": 8
+}

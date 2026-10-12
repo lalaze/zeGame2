@@ -1,0 +1,564 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> tiny-bean-cafe@0.1.0 test
+> vitest run --reporter=dot --maxWorkers=2
+
+
+ RUN  v5.0.3 /workspace/shared/zeGame2-cats-final-audit
+
+········-·stdout | scripts/living-cats-evidence.test.ts > independent living-cat evidence > writes isolated QA fixtures and structured evidence
+{
+  "schemaVersion": 2,
+  "createdAt": "2026-10-12T06:57:15.359Z",
+  "sourceHash": "90fc9e359d4fa87913810eba1c38cfa9e8dbe93c428e01d7c923e3961dd8d491",
+  "save": {
+    "legacyVersion": 11,
+    "ids": [
+      "ginger",
+      "tuxedo",
+      "calico"
+    ],
+    "personalized": {
+      "id": "ginger",
+      "careSeconds": 180,
+      "autoRefill": true,
+      "personality": "quiet",
+      "preferredArea": "terrace",
+      "preferredSpot": "window"
+    },
+    "duplicateActors": false
+  },
+  "performance": {
+    "cpuBatch": {
+      "updates": 12000,
+      "wallMs": 152.31753600000013,
+      "userMs": 192.856,
+      "systemMs": 17.295,
+      "averageCpuMsPerUpdate": 0.017512583333333335
+    },
+    "environment": "v24.19.0",
+    "dt": 0.05,
+    "actors": 3,
+    "updates": 12000,
+    "simulatedSeconds": 600,
+    "totalMeasuredMs": 143.8223040000081,
+    "meanUpdateMs": 0.011985192000000675,
+    "medianUpdateMs": 0.006639999999947577,
+    "p95UpdateMs": 0.0161939999999845,
+    "p99UpdateMs": 0.10989599999993516,
+    "maxUpdateMs": 2.774248,
+    "note": "Per-update Node wall-clock timing excludes test assertions and rendering. CPU batch measures process user+system CPU around a separate update-only loop, including VM overhead. Machine-dependent descriptive evidence, no timing pass threshold."
+  },
+  "behavior": {
+    "counts": {
+      "ginger": {
+        "patrol": 6862,
+        "sleep": 372,
+        "groom": 801,
+        "stretch": 566,
+        "watch": 3399
+      },
+      "tuxedo": {
+        "patrol": 1975,
+        "sleep": 7371,
+        "groom": 713,
+        "stretch": 623,
+        "watch": 1318
+      },
+      "calico": {
+        "patrol": 4978,
+        "sleep": 1332,
+        "groom": 1202,
+        "stretch": 760,
+        "watch": 3728
+      }
+    },
+    "transitions": {
+      "ginger": 37,
+      "tuxedo": 31,
+      "calico": 42
+    },
+    "rooms": {
+      "ginger": [
+        "main",
+        "reading",
+        "greenhouse",
+        "terrace"
+      ],
+      "tuxedo": [
+        "reading"
+      ],
+      "calico": [
+        "greenhouse",
+        "reading",
+        "main"
+      ]
+    },
+    "pausedUpdates": 200,
+    "frozen": true,
+    "stateUnmodified": true
+  },
+  "arrangement": {
+    "noTeleportOnFurnitureRemoval": true,
+    "visited": [
+      "main",
+      "reading",
+      "greenhouse"
+    ],
+    "destination": "greenhouse"
+  },
+  "economy": {
+    "methodology": "Same adopted cats (calico preferred area main in both arms), care, traffic bonuses, furniture and economy state in both arms. Only LivingCats visual updates differ, with a separate seeded RNG. Deep equality includes full GameState and customer/server/cook/pass state, not merely aggregate finances.",
+    "pairedRuns": [
+      {
+        "seed": 13,
+        "seconds": 360,
+        "interactions": {
+          "frames": {
+            "approach": 300,
+            "nuzzle": 80,
+            "response": 122,
+            "leave": 116
+          },
+          "guestIds": [
+            39,
+            61,
+            99
+          ],
+          "catIds": [
+            "calico"
+          ],
+          "maxConcurrent": 1
+        },
+        "stateAndServiceHash": "195e5c3c37b6ac96a554e3b00f7d5ca36dfce32f0a3f55d8bc1fc00e19b4c8af",
+        "exactEquality": true,
+        "coins": 104520,
+        "served": 93,
+        "revenue": 7458,
+        "petCost": 75.9999999999815
+      },
+      {
+        "seed": 517,
+        "seconds": 360,
+        "interactions": {
+          "frames": {
+            "approach": 66,
+            "nuzzle": 80,
+            "response": 122,
+            "leave": 67
+          },
+          "guestIds": [
+            21,
+            34,
+            73
+          ],
+          "catIds": [
+            "calico",
+            "ginger"
+          ],
+          "maxConcurrent": 1
+        },
+        "stateAndServiceHash": "cbd303228bdc8756e8e0a7b7f686998156a608a70508440efdf7e1c78b41a6df",
+        "exactEquality": true,
+        "coins": 102144,
+        "served": 69,
+        "revenue": 5082,
+        "petCost": 75.9999999999815
+      },
+      {
+        "seed": 2026,
+        "seconds": 360,
+        "interactions": {
+          "frames": {
+            "approach": 368,
+            "nuzzle": 160,
+            "response": 244,
+            "leave": 260
+          },
+          "guestIds": [
+            32,
+            39,
+            59,
+            90
+          ],
+          "catIds": [
+            "calico"
+          ],
+          "maxConcurrent": 1
+        },
+        "stateAndServiceHash": "e4dd23264aedee518c03002ec112e880b59eff009743c281a7f7f6327a8fe9f8",
+        "exactEquality": true,
+        "coins": 103596,
+        "served": 95,
+        "revenue": 6534,
+        "petCost": 75.9999999999815
+      }
+    ]
+  },
+  "syntheticGuestInteraction": {
+    "label": "Synthetic stationary seated guests, not human testing",
+    "seconds": 600,
+    "frames": {
+      "approach": 252,
+      "nuzzle": 160,
+      "response": 244,
+      "leave": 256
+    },
+    "guestIds": [
+      1003,
+      1000,
+      1002,
+      1001
+    ],
+    "catIds": [
+      "calico"
+    ],
+    "maxConcurrent": 1,
+    "stateAndInputsUnmodified": true,
+    "pausedResponseFrames": 100
+  },
+  "guestInputPerformance": {
+    "label": "Automated Node evidence using actual advancing Sim guests; not human testing",
+    "actors": 3,
+    "customers": 14,
+    "servers": 1,
+    "seated": 0,
+    "dt": 0.05,
+    "updates": 12000,
+    "meanUpdateMs": 0.019913953583331704,
+    "p95UpdateMs": 0.03076599999985774,
+    "p99UpdateMs": 0.12149399999998423,
+    "maxUpdateMs": 3.736931999999797,
+    "cpuBatch": {
+      "updates": 12000,
+      "wallMs": 151.15826800000013,
+      "userMs": 188.739,
+      "systemMs": 4.23
+    },
+    "interactions": {
+      "frames": {
+        "approach": 217,
+        "nuzzle": 120,
+        "response": 183,
+        "leave": 220
+      },
+      "guestIds": [
+        32,
+        128,
+        160
+      ],
+      "catIds": [
+        "calico"
+      ],
+      "maxConcurrent": 1
+    },
+    "fullStateAndServiceUnmodified": true,
+    "caveat": "Per-update timing uses advancing service; separate CPU batch holds the final guest snapshot fixed. Engine-only timing, no renderer; descriptive, no machine-dependent pass threshold. CPU batch includes VM overhead."
+  },
+  "guestFixture": {
+    "synthetic": true,
+    "seededServiceSeconds": 710.9999999999011,
+    "seatedGuests": [
+      {
+        "id": 184,
+        "seat": 22,
+        "timer": 2.860953858494727
+      },
+      {
+        "id": 188,
+        "seat": 1,
+        "timer": 6.772147597372533
+      },
+      {
+        "id": 191,
+        "seat": 0,
+        "timer": 10.618060296401381
+      }
+    ],
+    "productionSaveSessionRestoreVerified": true
+  }
+}
+
+······················································································stdout | scripts/balance.test.ts > offers a different profitable menu when production, rather than arrivals, limits service
+┌─────────┬──────────┬───────────┬─────────┬────────┬──────┬───────┬────────┐
+│ (index) │ version  │ marketing │ menu    │ profit │ lost │ stale │ served │
+├─────────┼──────────┼───────────┼─────────┼────────┼──────┼───────┼────────┤
+│ 0       │ 'before' │ 0         │ 'fast'  │ 182    │ 0    │ 0     │ 72     │
+│ 1       │ 'before' │ 0         │ 'high'  │ 630    │ 0    │ 0     │ 72     │
+│ 2       │ 'before' │ 0         │ 'mixed' │ 147    │ 0    │ 5     │ 75     │
+│ 3       │ 'before' │ 0         │ 'all'   │ 758    │ 0    │ 21    │ 87     │
+│ 4       │ 'before' │ 25        │ 'fast'  │ 351    │ 0    │ 0     │ 145    │
+│ 5       │ 'before' │ 25        │ 'high'  │ 832    │ 0    │ 0     │ 101    │
+│ 6       │ 'before' │ 25        │ 'mixed' │ 331    │ 41   │ 0     │ 135    │
+│ 7       │ 'before' │ 25        │ 'all'   │ 1161   │ 7    │ 8     │ 119    │
+│ 8       │ 'after'  │ 0         │ 'fast'  │ 181    │ 0    │ 0     │ 72     │
+│ 9       │ 'after'  │ 0         │ 'high'  │ 538    │ 0    │ 0     │ 64     │
+│ 10      │ 'after'  │ 0         │ 'mixed' │ 317    │ 0    │ 6     │ 75     │
+│ 11      │ 'after'  │ 0         │ 'all'   │ 807    │ 0    │ 19    │ 76     │
+│ 12      │ 'after'  │ 25        │ 'fast'  │ 507    │ 0    │ 0     │ 215    │
+│ 13      │ 'after'  │ 25        │ 'high'  │ 498    │ 0    │ 0     │ 64     │
+│ 14      │ 'after'  │ 25        │ 'mixed' │ 652    │ 78   │ 0     │ 183    │
+│ 15      │ 'after'  │ 25        │ 'all'   │ 853    │ 1    │ 18    │ 79     │
+└─────────┴──────────┴───────────┴─────────┴────────┴──────┴───────┴────────┘
+┌─────────┬──────────┬────────┬──────┬───────┬────────┐
+│ (index) │ clicks   │ profit │ lost │ stale │ served │
+├─────────┼──────────┼────────┼──────┼───────┼────────┤
+│ 0       │ 'none'   │ 853    │ 1    │ 18    │ 79     │
+│ 1       │ '1/sec'  │ 1049   │ 2    │ 13    │ 100    │
+│ 2       │ '10/sec' │ 1145   │ 5    │ 11    │ 103    │
+└─────────┴──────────┴────────┴──────┴───────┴────────┘
+
+·····························································stdout | scripts/living-cats-repair-evidence.test.ts > independent idle-server cat repair evidence > writes structured repair evidence
+{
+  "schemaVersion": 1,
+  "label": "Automated deterministic Node simulation evidence, not human playtesting",
+  "generatedAt": "2026-10-12T06:57:48.605Z",
+  "sourceHash": "90fc9e359d4fa87913810eba1c38cfa9e8dbe93c428e01d7c923e3961dd8d491",
+  "prepScenarios": [
+    {
+      "serverLevel": 0,
+      "seconds": 1200,
+      "dt": 0.1,
+      "servers": [
+        {
+          "x": 264,
+          "y": 119,
+          "phase": "idle"
+        }
+      ],
+      "movementPer120Seconds": [
+        734.7184519547343,
+        798.779295149704,
+        499.92773882125203,
+        673.4481017286976,
+        886.4483961732461,
+        700.4530720675051,
+        739.1377853526664,
+        643.3479414313163,
+        653.423921245025,
+        660.9659657937339
+      ],
+      "behaviors": {
+        "watch": 6075,
+        "patrol": 3035,
+        "stretch": 1110,
+        "groom": 944,
+        "sleep": 836
+      },
+      "after1200Seconds": {
+        "x": 261.95724754608386,
+        "y": 161.58740212103982,
+        "behavior": "patrol",
+        "routePoints": 2,
+        "lastMotion": 1200,
+        "maximumRouteStall": 2.0000000000000004,
+        "totalDistance": 6990.650669717874
+      },
+      "emptyCare": {
+        "firstSleepAt": 3.3000000000000003,
+        "after60Seconds": {
+          "behavior": "sleep",
+          "resting": true,
+          "routePoints": 0
+        },
+        "remainsStillWithoutBlocker": true
+      },
+      "stateAndServiceInputsUnmodified": true
+    },
+    {
+      "serverLevel": 1,
+      "seconds": 1200,
+      "dt": 0.1,
+      "servers": [
+        {
+          "x": 264,
+          "y": 119,
+          "phase": "idle"
+        },
+        {
+          "x": 281,
+          "y": 119,
+          "phase": "idle"
+        }
+      ],
+      "movementPer120Seconds": [
+        734.7184519547343,
+        809.2924202272778,
+        499.92773882125203,
+        580.9481017286976,
+        992.7025688749289,
+        705.2134781620591,
+        745.9852053201716,
+        646.9252961027016,
+        573.1843273395789,
+        696.9338509968276
+      ],
+      "behaviors": {
+        "watch": 6075,
+        "patrol": 3100,
+        "stretch": 1010,
+        "groom": 979,
+        "sleep": 836
+      },
+      "after1200Seconds": {
+        "x": 294,
+        "y": 120,
+        "behavior": "groom",
+        "routePoints": 0,
+        "lastMotion": 1179.8,
+        "maximumRouteStall": 2.0000000000000004,
+        "totalDistance": 6985.831439528222
+      },
+      "emptyCare": {
+        "firstSleepAt": 0.1,
+        "after60Seconds": {
+          "behavior": "sleep",
+          "resting": true,
+          "routePoints": 0
+        },
+        "remainsStillWithoutBlocker": true
+      },
+      "stateAndServiceInputsUnmodified": true
+    },
+    {
+      "serverLevel": 2,
+      "seconds": 1200,
+      "dt": 0.1,
+      "servers": [
+        {
+          "x": 264,
+          "y": 119,
+          "phase": "idle"
+        },
+        {
+          "x": 281,
+          "y": 119,
+          "phase": "idle"
+        },
+        {
+          "x": 298,
+          "y": 119,
+          "phase": "idle"
+        }
+      ],
+      "movementPer120Seconds": [
+        734.7184519547343,
+        825.2344088977342,
+        595.6004965569522,
+        597.4933115667454,
+        912.0899898556501,
+        646.2776831732441,
+        815.2378751670201,
+        745.7722233664371,
+        519.5827590406316,
+        778.8959446042614
+      ],
+      "behaviors": {
+        "watch": 6157,
+        "patrol": 3130,
+        "stretch": 1017,
+        "groom": 662,
+        "sleep": 1034
+      },
+      "after1200Seconds": {
+        "x": 26,
+        "y": 112,
+        "behavior": "groom",
+        "routePoints": 0,
+        "lastMotion": 1173,
+        "maximumRouteStall": 2.0000000000000004,
+        "totalDistance": 7170.903144183411
+      },
+      "emptyCare": {
+        "firstSleepAt": 0.1,
+        "after60Seconds": {
+          "behavior": "sleep",
+          "resting": true,
+          "routePoints": 0
+        },
+        "remainsStillWithoutBlocker": true
+      },
+      "stateAndServiceInputsUnmodified": true
+    }
+  ],
+  "openServicePairs": [
+    {
+      "seed": 13,
+      "serverLevel": 0,
+      "simulatedSeconds": 1200,
+      "dt": 0.1,
+      "exactStateAndRuntimeEquality": true,
+      "outcomeHash": "b1e3ac5a16de2786c49f271cbd6bef0bb2eb69eda14516c29c905fbc7e16041b",
+      "served": 353,
+      "coins": 120692,
+      "distanceByCat": {
+        "ginger": 5651.393561726786,
+        "tuxedo": 3140.1163391962386,
+        "calico": 7871.364317447846
+      },
+      "maximumRouteStall": 2.0000000000000004,
+      "interactionFrames": 997
+    },
+    {
+      "seed": 517,
+      "serverLevel": 1,
+      "simulatedSeconds": 1200,
+      "dt": 0.1,
+      "exactStateAndRuntimeEquality": true,
+      "outcomeHash": "daa743bc6408eec6a5736d48f6f65971136b4feb5b96a2024f71b5df3513fd2c",
+      "served": 356,
+      "coins": 121592,
+      "distanceByCat": {
+        "ginger": 6132.949152388105,
+        "tuxedo": 3594.2091256247572,
+        "calico": 7722.868298553789
+      },
+      "maximumRouteStall": 2.0000000000000004,
+      "interactionFrames": 994
+    },
+    {
+      "seed": 2026,
+      "serverLevel": 2,
+      "simulatedSeconds": 1200,
+      "dt": 0.1,
+      "exactStateAndRuntimeEquality": true,
+      "outcomeHash": "805aa548bb56c71d5232163573874c8ce9c388a9cf280b496e74387c17c87264",
+      "served": 365,
+      "coins": 121652,
+      "distanceByCat": {
+        "ginger": 7554.464648647602,
+        "tuxedo": 3480.7619917495826,
+        "calico": 6836.110717827412
+      },
+      "maximumRouteStall": 2.1000000000000005,
+      "interactionFrames": 1026
+    }
+  ]
+}
+
+···-···········································································stdout | src/game/living-cats.test.ts > bounded service yielding > keeps moving through 1200 seconds of the real seeded default-server simulation
+default-server yielding regression {
+  samples: [
+    { time: 300, lastMotion: 296.8 },
+    { time: 600, lastMotion: 588.3000000000001 },
+    { time: 1200, lastMotion: 1200 }
+  ],
+  longestBlocked: 2.0000000000000004,
+  sleepAt: 3.3000000000000003
+}
+
+··········································································································································-············································-·························································································································································································································································································································································-·-
+
+ Test Files  67 passed (67)
+      Tests  762 passed | 6 skipped (768)
+   Start at  23:57:09
+   Duration  49.07s (tests 91%, environment 4%, import 2%, transform 2%)
+
+    Isolate  67 workers spawned · ~173ms startup each (spawn + environment, per file)
+             at least ~5.62s faster with isolate: false — reuses workers across files instead of one per file
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

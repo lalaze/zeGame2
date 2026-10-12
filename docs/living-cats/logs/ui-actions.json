@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-12",
+  "origins": [
+    "http://127.0.0.1:5210",
+    "http://127.0.0.1:5211"
+  ],
+  "user5173Untouched": true,
+  "method": "Actual CUA Chromium native and DOM interactions; QA-only fixture controls; desktop viewport simulation",
+  "checks": [
+    "Three cats independently tracked; live room changes observed from greenhouse to reading room to main café and terrace.",
+    "Clicking the scene tuxedo opens the correct Quiet / Napping details.",
+    "The dialog greeting closes and produces purring text, a happy pose and hearts.",
+    "A version 11 empty-care save migrates to three unique identities and valid preferences.",
+    "Refilling ginger changes cash from 97,100 to 97,092, grants 180 seconds, leaves other cats at zero, and changes traffic bonus from 0% to 8%.",
+    "Chinese dialog buttons are all 44px high at 360, 390 and 430 CSS pixels; body width equals viewport width.",
+    "Reading-room catbed moved through scene select/place and stored through Arrange; quiet cat was refilled and resumed grooming/activity.",
+    "Native background interval of 68.591 seconds preserves clock 2:48; normal foreground activity later reaches 3:28.",
+    "Normal closing serves 49 guests, with revenue 4,026, costs 99.03 and profit 3,926.97; day 9 preparation opens."
+  ],
+  "console": "Observed errors were browser extension metadata transport messages; no http://127.0.0.1:5210 application error returned by filtered log query.",
+  "crossRoomEvidence": {
+    "engine": "Deterministic engine tests establish all four public-room reachability, shared doorway traversal and obstacle-safe segments. This is automated engine evidence, not human playtesting.",
+    "browser": "Actual browser observations show changing room labels and Find cat changing camera rooms. These observations do not independently verify every route segment."
+  },
+  "artSheet": "Five-behavior contact sheet is a clearly labeled composed QA page using production catFrames canvases, not a live scene."
+}

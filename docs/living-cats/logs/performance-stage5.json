@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 2,
+  "createdAt": "2026-10-12T06:28:07.213Z",
+  "sourceHash": "e747ff69e6f58193f4b64f3ce6cfc19b5eeabfb8b6b9c6ec4e30b4425ab59344",
+  "save": {
+    "legacyVersion": 11,
+    "ids": [
+      "ginger",
+      "tuxedo",
+      "calico"
+    ],
+    "personalized": {
+      "id": "ginger",
+      "careSeconds": 180,
+      "autoRefill": true,
+      "personality": "quiet",
+      "preferredArea": "terrace",
+      "preferredSpot": "window"
+    },
+    "duplicateActors": false
+  },
+  "performance": {
+    "cpuBatch": {
+      "updates": 12000,
+      "wallMs": 115.69408900000008,
+      "userMs": 159.698,
+      "systemMs": 6.826,
+      "averageCpuMsPerUpdate": 0.013877
+    },
+    "environment": "v24.19.0",
+    "dt": 0.05,
+    "actors": 3,
+    "updates": 12000,
+    "simulatedSeconds": 600,
+    "totalMeasuredMs": 138.70284599998593,
+    "meanUpdateMs": 0.011558570499998828,
+    "medianUpdateMs": 0.006649999999922329,
+    "p95UpdateMs": 0.01609500000006392,
+    "p99UpdateMs": 0.07032600000002276,
+    "maxUpdateMs": 3.5900100000001203,
+    "note": "Per-update Node wall-clock timing excludes test assertions and rendering. CPU batch measures process user+system CPU around a separate update-only loop, including VM overhead. Machine-dependent descriptive evidence, no timing pass threshold."
+  },
+  "behavior": {
+    "counts": {
+      "ginger": {
+        "patrol": 6862,
+        "sleep": 372,
+        "groom": 801,
+        "stretch": 566,
+        "watch": 3399
+      },
+      "tuxedo": {
+        "patrol": 1975,
+        "sleep": 7371,
+        "groom": 713,
+        "stretch": 623,
+        "watch": 1318
+      },
+      "calico": {
+        "patrol": 4978,
+        "sleep": 1332,
+        "groom": 1202,
+        "stretch": 760,
+        "watch": 3728
+      }
+    },
+    "transitions": {
+      "ginger": 37,
+      "tuxedo": 31,
+      "calico": 42
+    },
+    "rooms": {
+      "ginger": [
+        "main",
+        "reading",
+        "greenhouse",
+        "terrace"
+      ],
+      "tuxedo": [
+        "reading"
+      ],
+      "calico": [
+        "greenhouse",
+        "reading",
+        "main"
+      ]
+    },
+    "pausedUpdates": 200,
+    "frozen": true,
+    "stateUnmodified": true
+  },
+  "arrangement": {
+    "noTeleportOnFurnitureRemoval": true,
+    "visited": [
+      "main",
+      "reading",
+      "greenhouse"
+    ],
+    "destination": "greenhouse"
+  },
+  "economy": {
+    "methodology": "Same adopted cats (calico preferred area main in both arms), care, traffic bonuses, furniture and economy state in both arms. Only LivingCats visual updates differ, with a separate seeded RNG. Deep equality includes full GameState and customer/server/cook/pass state, not merely aggregate finances.",
+    "pairedRuns": [
+      {
+        "seed": 13,
+        "seconds": 360,
+        "interactions": {
+          "frames": {
+            "approach": 167,
+            "nuzzle": 120,
+            "response": 183,
+            "leave": 174
+          },
+          "guestIds": [
+            39,
+            85,
+            97
+          ],
+          "catIds": [
+            "calico"
+          ],
+          "maxConcurrent": 1
+        },
+        "stateAndServiceHash": "195e5c3c37b6ac96a554e3b00f7d5ca36dfce32f0a3f55d8bc1fc00e19b4c8af",
+        "exactEquality": true,
+        "coins": 104520,
+        "served": 93,
+        "revenue": 7458,
+        "petCost": 75.9999999999815
+      },
+      {
+        "seed": 517,
+        "seconds": 360,
+        "interactions": {
+          "frames": {
+            "approach": 152,
+            "nuzzle": 114,
+            "response": 122,
+            "leave": 90
+          },
+          "guestIds": [
+            21,
+            44,
+            73
+          ],
+          "catIds": [
+            "calico",
+            "ginger"
+          ],
+          "maxConcurrent": 1
+        },
+        "stateAndServiceHash": "cbd303228bdc8756e8e0a7b7f686998156a608a70508440efdf7e1c78b41a6df",
+        "exactEquality": true,
+        "coins": 102144,
+        "served": 69,
+        "revenue": 5082,
+        "petCost": 75.9999999999815
+      },
+      {
+        "seed": 2026,
+        "seconds": 360,
+        "interactions": {
+          "frames": {
+            "approach": 342,
+            "nuzzle": 80,
+            "response": 122,
+            "leave": 97
+          },
+          "guestIds": [
+            32,
+            39,
+            59
+          ],
+          "catIds": [
+            "calico"
+          ],
+          "maxConcurrent": 1
+        },
+        "stateAndServiceHash": "e4dd23264aedee518c03002ec112e880b59eff009743c281a7f7f6327a8fe9f8",
+        "exactEquality": true,
+        "coins": 103596,
+        "served": 95,
+        "revenue": 6534,
+        "petCost": 75.9999999999815
+      }
+    ]
+  },
+  "syntheticGuestInteraction": {
+    "label": "Synthetic stationary seated guests, not human testing",
+    "seconds": 600,
+    "frames": {
+      "approach": 205,
+      "nuzzle": 120,
+      "response": 183,
+      "leave": 208
+    },
+    "guestIds": [
+      1003,
+      1002,
+      1000
+    ],
+    "catIds": [
+      "calico"
+    ],
+    "maxConcurrent": 1,
+    "stateAndInputsUnmodified": true,
+    "pausedResponseFrames": 100
+  },
+  "guestInputPerformance": {
+    "label": "Automated Node evidence using actual advancing Sim guests; not human testing",
+    "actors": 3,
+    "customers": 14,
+    "servers": 1,
+    "seated": 0,
+    "dt": 0.05,
+    "updates": 12000,
+    "meanUpdateMs": 0.022309371333333463,
+    "p95UpdateMs": 0.041621999999733816,
+    "p99UpdateMs": 0.16104300000006333,
+    "maxUpdateMs": 3.143782000000101,
+    "cpuBatch": {
+      "updates": 12000,
+      "wallMs": 154.2486939999999,
+      "userMs": 154.928,
+      "systemMs": 0
+    },
+    "interactions": {
+      "frames": {
+        "approach": 296,
+        "nuzzle": 200,
+        "response": 305,
+        "leave": 295
+      },
+      "guestIds": [
+        32,
+        95,
+        127,
+        142,
+        158
+      ],
+      "catIds": [
+        "calico",
+        "ginger"
+      ],
+      "maxConcurrent": 1
+    },
+    "fullStateAndServiceUnmodified": true,
+    "caveat": "Per-update timing uses advancing service; separate CPU batch holds the final guest snapshot fixed. Engine-only timing, no renderer; descriptive, no machine-dependent pass threshold. CPU batch includes VM overhead."
+  },
+  "guestFixture": {
+    "synthetic": true,
+    "seededServiceSeconds": 710.9999999999011,
+    "seatedGuests": [
+      {
+        "id": 184,
+        "seat": 22,
+        "timer": 2.860953858494727
+      },
+      {
+        "id": 188,
+        "seat": 1,
+        "timer": 6.772147597372533
+      },
+      {
+        "id": 191,
+        "seat": 0,
+        "timer": 10.618060296401381
+      }
+    ],
+    "productionSaveSessionRestoreVerified": true
+  }
+}

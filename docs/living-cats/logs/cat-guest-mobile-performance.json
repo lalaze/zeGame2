@@ -1,0 +1,9 @@
+{
+  "method": "Desktop Chromium iframe rAF, not mobile hardware",
+  "viewport": "390,720",
+  "frames": 552,
+  "medianMs": 16.699999999982538,
+  "p95Ms": 33.30000000001746,
+  "over50ms": 0,
+  "longTasks": []
+}

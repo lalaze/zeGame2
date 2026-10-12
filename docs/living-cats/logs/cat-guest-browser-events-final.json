@@ -1,0 +1,20 @@
+[
+  {
+    "time": "2026-10-12T06:38:56.236Z",
+    "phase": "approach",
+    "status": "Terrace · Walking over to a guest",
+    "catIndex": 0
+  },
+  {
+    "time": "2026-10-12T06:39:01.007Z",
+    "phase": "nuzzle",
+    "status": "Terrace · Nuzzling gently",
+    "catIndex": 0
+  },
+  {
+    "time": "2026-10-12T06:39:03.159Z",
+    "phase": "response",
+    "status": "Terrace · Enjoying a gentle pet · Purring happily",
+    "catIndex": 0
+  }
+]

@@ -1,6 +1,7 @@
 import { readPanelScroll, restorePanelScroll } from './panel-scroll';
 import { PromotionPanel } from './promotion';
 import { PetPanel } from './pets';
+import type { LivingCatControls } from './living-cats';
 import {
   BAKE_STEP,
   CATEGORIES,
@@ -170,6 +171,7 @@ export class Panel {
     private state: GameState,
     private onPurchase: (kind: PurchaseKind, id: string) => void,
     private onArrange: (request: ArrangeRequest) => void,
+    private livingCats: LivingCatControls = {},
   ) {
     root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((b) =>
       b.addEventListener('click', () => this.showTab(b.dataset.tab as Tab)),
@@ -476,7 +478,7 @@ export class Panel {
       return;
     }
     if (this.tab === 'pets') {
-      this.petPanel = new PetPanel(this.list, this.state, (id) => { this.onPurchase('pet', id); this.update(); });
+      this.petPanel = new PetPanel(this.list, this.state, (id) => { this.onPurchase('pet', id); this.update(); }, this.livingCats);
       return;
     }
     if (this.tab === 'decor') {

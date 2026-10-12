@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "label": "Automated deterministic Node simulation evidence, not human playtesting",
+  "generatedAt": "2026-10-12T06:55:21.626Z",
+  "sourceHash": "90fc9e359d4fa87913810eba1c38cfa9e8dbe93c428e01d7c923e3961dd8d491",
+  "prepScenarios": [
+    {
+      "serverLevel": 0,
+      "seconds": 1200,
+      "dt": 0.1,
+      "servers": [
+        {
+          "x": 264,
+          "y": 119,
+          "phase": "idle"
+        }
+      ],
+      "movementPer120Seconds": [
+        734.7184519547343,
+        798.779295149704,
+        499.92773882125203,
+        673.4481017286976,
+        886.4483961732461,
+        700.4530720675051,
+        739.1377853526664,
+        643.3479414313163,
+        653.423921245025,
+        660.9659657937339
+      ],
+      "behaviors": {
+        "watch": 6075,
+        "patrol": 3035,
+        "stretch": 1110,
+        "groom": 944,
+        "sleep": 836
+      },
+      "after1200Seconds": {
+        "x": 261.95724754608386,
+        "y": 161.58740212103982,
+        "behavior": "patrol",
+        "routePoints": 2,
+        "lastMotion": 1200,
+        "maximumRouteStall": 2.0000000000000004,
+        "totalDistance": 6990.650669717874
+      },
+      "emptyCare": {
+        "firstSleepAt": 3.3000000000000003,
+        "after60Seconds": {
+          "behavior": "sleep",
+          "resting": true,
+          "routePoints": 0
+        },
+        "remainsStillWithoutBlocker": true
+      },
+      "stateAndServiceInputsUnmodified": true
+    },
+    {
+      "serverLevel": 1,
+      "seconds": 1200,
+      "dt": 0.1,
+      "servers": [
+        {
+          "x": 264,
+          "y": 119,
+          "phase": "idle"
+        },
+        {
+          "x": 281,
+          "y": 119,
+          "phase": "idle"
+        }
+      ],
+      "movementPer120Seconds": [
+        734.7184519547343,
+        809.2924202272778,
+        499.92773882125203,
+        580.9481017286976,
+        992.7025688749289,
+        705.2134781620591,
+        745.9852053201716,
+        646.9252961027016,
+        573.1843273395789,
+        696.9338509968276
+      ],
+      "behaviors": {
+        "watch": 6075,
+        "patrol": 3100,
+        "stretch": 1010,
+        "groom": 979,
+        "sleep": 836
+      },
+      "after1200Seconds": {
+        "x": 294,
+        "y": 120,
+        "behavior": "groom",
+        "routePoints": 0,
+        "lastMotion": 1179.8,
+        "maximumRouteStall": 2.0000000000000004,
+        "totalDistance": 6985.831439528222
+      },
+      "emptyCare": {
+        "firstSleepAt": 0.1,
+        "after60Seconds": {
+          "behavior": "sleep",
+          "resting": true,
+          "routePoints": 0
+        },
+        "remainsStillWithoutBlocker": true
+      },
+      "stateAndServiceInputsUnmodified": true
+    },
+    {
+      "serverLevel": 2,
+      "seconds": 1200,
+      "dt": 0.1,
+      "servers": [
+        {
+          "x": 264,
+          "y": 119,
+          "phase": "idle"
+        },
+        {
+          "x": 281,
+          "y": 119,
+          "phase": "idle"
+        },
+        {
+          "x": 298,
+          "y": 119,
+          "phase": "idle"
+        }
+      ],
+      "movementPer120Seconds": [
+        734.7184519547343,
+        825.2344088977342,
+        595.6004965569522,
+        597.4933115667454,
+        912.0899898556501,
+        646.2776831732441,
+        815.2378751670201,
+        745.7722233664371,
+        519.5827590406316,
+        778.8959446042614
+      ],
+      "behaviors": {
+        "watch": 6157,
+        "patrol": 3130,
+        "stretch": 1017,
+        "groom": 662,
+        "sleep": 1034
+      },
+      "after1200Seconds": {
+        "x": 26,
+        "y": 112,
+        "behavior": "groom",
+        "routePoints": 0,
+        "lastMotion": 1173,
+        "maximumRouteStall": 2.0000000000000004,
+        "totalDistance": 7170.903144183411
+      },
+      "emptyCare": {
+        "firstSleepAt": 0.1,
+        "after60Seconds": {
+          "behavior": "sleep",
+          "resting": true,
+          "routePoints": 0
+        },
+        "remainsStillWithoutBlocker": true
+      },
+      "stateAndServiceInputsUnmodified": true
+    }
+  ],
+  "openServicePairs": [
+    {
+      "seed": 13,
+      "serverLevel": 0,
+      "simulatedSeconds": 1200,
+      "dt": 0.1,
+      "exactStateAndRuntimeEquality": true,
+      "outcomeHash": "b1e3ac5a16de2786c49f271cbd6bef0bb2eb69eda14516c29c905fbc7e16041b",
+      "served": 353,
+      "coins": 120692,
+      "distanceByCat": {
+        "ginger": 5651.393561726786,
+        "tuxedo": 3140.1163391962386,
+        "calico": 7871.364317447846
+      },
+      "maximumRouteStall": 2.0000000000000004,
+      "interactionFrames": 997
+    },
+    {
+      "seed": 517,
+      "serverLevel": 1,
+      "simulatedSeconds": 1200,
+      "dt": 0.1,
+      "exactStateAndRuntimeEquality": true,
+      "outcomeHash": "daa743bc6408eec6a5736d48f6f65971136b4feb5b96a2024f71b5df3513fd2c",
+      "served": 356,
+      "coins": 121592,
+      "distanceByCat": {
+        "ginger": 6132.949152388105,
+        "tuxedo": 3594.2091256247572,
+        "calico": 7722.868298553789
+      },
+      "maximumRouteStall": 2.0000000000000004,
+      "interactionFrames": 994
+    },
+    {
+      "seed": 2026,
+      "serverLevel": 2,
+      "simulatedSeconds": 1200,
+      "dt": 0.1,
+      "exactStateAndRuntimeEquality": true,
+      "outcomeHash": "805aa548bb56c71d5232163573874c8ce9c388a9cf280b496e74387c17c87264",
+      "served": 365,
+      "coins": 121652,
+      "distanceByCat": {
+        "ginger": 7554.464648647602,
+        "tuxedo": 3480.7619917495826,
+        "calico": 6836.110717827412
+      },
+      "maximumRouteStall": 2.1000000000000005,
+      "interactionFrames": 1026
+    }
+  ]
+}

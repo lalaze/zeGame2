@@ -1,0 +1,147 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+stdout | scripts/living-cats-evidence.test.ts > independent living-cat evidence > writes isolated QA fixtures and structured evidence
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-12T04:37:55.168Z",
+  "sourceHash": "b00ff3250edae7e82247464bebbc23e5a2175a5b224bd6f73a3ebeea0901b92d",
+  "save": {
+    "legacyVersion": 11,
+    "ids": [
+      "ginger",
+      "tuxedo",
+      "calico"
+    ],
+    "personalized": {
+      "id": "ginger",
+      "careSeconds": 180,
+      "autoRefill": true,
+      "personality": "quiet",
+      "preferredArea": "terrace",
+      "preferredSpot": "window"
+    },
+    "duplicateActors": false
+  },
+  "performance": {
+    "cpuBatch": {
+      "updates": 12000,
+      "wallMs": 63.44228399999997,
+      "userMs": 96.111,
+      "systemMs": 3.814,
+      "averageCpuMsPerUpdate": 0.008327083333333334
+    },
+    "environment": "v24.19.0",
+    "dt": 0.05,
+    "actors": 3,
+    "updates": 12000,
+    "simulatedSeconds": 600,
+    "totalMeasuredMs": 77.76228999999637,
+    "meanUpdateMs": 0.0064801908333330304,
+    "medianUpdateMs": 0.004416999999989457,
+    "p95UpdateMs": 0.007512000000019725,
+    "p99UpdateMs": 0.03385000000002947,
+    "maxUpdateMs": 1.9060029999999983,
+    "note": "Per-update Node wall-clock timing excludes test assertions and rendering. CPU batch measures process user+system CPU around a separate update-only loop, including VM overhead. Machine-dependent descriptive evidence, no timing pass threshold."
+  },
+  "behavior": {
+    "counts": {
+      "ginger": {
+        "patrol": 7095,
+        "sleep": 1149,
+        "groom": 438,
+        "stretch": 469,
+        "watch": 2849
+      },
+      "tuxedo": {
+        "patrol": 2331,
+        "sleep": 6773,
+        "groom": 761,
+        "stretch": 675,
+        "watch": 1460
+      },
+      "calico": {
+        "patrol": 5100,
+        "sleep": 1769,
+        "groom": 759,
+        "stretch": 925,
+        "watch": 3447
+      }
+    },
+    "transitions": {
+      "ginger": 33,
+      "tuxedo": 32,
+      "calico": 44
+    },
+    "rooms": {
+      "ginger": [
+        "main",
+        "reading",
+        "greenhouse",
+        "terrace"
+      ],
+      "tuxedo": [
+        "reading"
+      ],
+      "calico": [
+        "greenhouse",
+        "reading",
+        "main"
+      ]
+    },
+    "pausedUpdates": 200,
+    "frozen": true,
+    "stateUnmodified": true
+  },
+  "arrangement": {
+    "noTeleportOnFurnitureRemoval": true,
+    "visited": [
+      "main",
+      "reading",
+      "greenhouse"
+    ],
+    "destination": "greenhouse"
+  },
+  "economy": {
+    "methodology": "Same adopted cats, care, traffic bonuses, furniture and economy state in both arms. Only LivingCats visual updates differ, with a separate seeded RNG. Deep equality includes full GameState and customer/server/cook/pass state, not merely aggregate finances.",
+    "pairedRuns": [
+      {
+        "seed": 13,
+        "seconds": 360,
+        "stateAndServiceHash": "ec896b64a0036ddba8814d864a20d9cadb7f096a639c539ecb14b9c228062a06",
+        "exactEquality": true,
+        "coins": 104520,
+        "served": 93,
+        "revenue": 7458,
+        "petCost": 75.9999999999815
+      },
+      {
+        "seed": 517,
+        "seconds": 360,
+        "stateAndServiceHash": "8233762e223c4dce1bf11824e5f00ae1bf379c11d41e6c856bc1821dfcc34766",
+        "exactEquality": true,
+        "coins": 102144,
+        "served": 69,
+        "revenue": 5082,
+        "petCost": 75.9999999999815
+      },
+      {
+        "seed": 2026,
+        "seconds": 360,
+        "stateAndServiceHash": "7ff4632c0413844b9cd3c8ee03b77e2f51c642356f502eff870f659a3e89481c",
+        "exactEquality": true,
+        "coins": 103596,
+        "served": 95,
+        "revenue": 6534,
+        "petCost": 75.9999999999815
+      }
+    ]
+  }
+}
+
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  21:37:53
+   Duration  1.50s (tests 85%, transform 12%, import 2%)

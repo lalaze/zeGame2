@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createInitialState, deserialize, serialize } from './state';
-import { CATS, CARE_SECONDS, MAX_CARE_SECONDS, MAX_PETS, adoptCat, parsePets, petTraffic, refillPet, updatePetCare } from './pets';
+import { CATS, CARE_SECONDS, MAX_CARE_SECONDS, MAX_PETS, adoptCat, parsePets, petPreferences, petTraffic, refillPet, updatePetCare } from './pets';
 import { arrivalRate, tipMultiplier } from './economy';
 import { finishDay, openShop } from './day';
 import { Sim } from './sim';
@@ -46,7 +46,7 @@ describe('café cats', () => {
     expect(adoptCat(s, 'unknown')).toBe(false);
     expect(adoptCat(s, 'ginger')).toBe(true);
     expect(s.coins).toBe(0);
-    expect(s.pets).toEqual([{ id: 'ginger', careSeconds: CARE_SECONDS, autoRefill: true }]);
+    expect(s.pets).toEqual([{ id: 'ginger', careSeconds: CARE_SECONDS, autoRefill: true, ...petPreferences({ id: 'ginger' }) }]);
     s.coins = 10000;
     expect(adoptCat(s, 'ginger')).toBe(false);
     for (const phase of ['open', 'closing'] as const) {
@@ -159,9 +159,9 @@ describe('café cats', () => {
   it('validates save entries, duplicate cats, supplies and automatic spending opt-in', () => {
     expect(parsePets({})).toEqual([]);
     expect(parsePets([null, { id: 'dog' }, { id: 'ginger', careSeconds: 99999, autoRefill: 'yes' }, { id: 'ginger' }, { id: 'tuxedo', careSeconds: -1 }, { id: 'calico', careSeconds: Infinity, autoRefill: true }])).toEqual([
-      { id: 'ginger', careSeconds: MAX_CARE_SECONDS, autoRefill: false },
-      { id: 'tuxedo', careSeconds: 0, autoRefill: false },
-      { id: 'calico', careSeconds: 0, autoRefill: true },
+      { id: 'ginger', careSeconds: MAX_CARE_SECONDS, autoRefill: false, ...petPreferences({ id: 'ginger' }) },
+      { id: 'tuxedo', careSeconds: 0, autoRefill: false, ...petPreferences({ id: 'tuxedo' }) },
+      { id: 'calico', careSeconds: 0, autoRefill: true, ...petPreferences({ id: 'calico' }) },
     ]);
   });
 });

@@ -18,7 +18,45 @@ export const CATS = [
   { id: 'mainecoon', group: 'longhair', adoption: 2400, careCost: 20, traffic: 0.16 },
 ] as const;
 export type CatId = typeof CATS[number]['id'];
-export interface Pet { id: CatId; careSeconds: number; autoRefill: boolean }
+export const CAT_PERSONALITIES = ['playful', 'quiet', 'affectionate'] as const;
+export const CAT_AREAS = ['main', 'reading', 'greenhouse', 'terrace'] as const;
+export const CAT_SPOTS = ['cozy', 'window', 'explore'] as const;
+export type CatPersonality = typeof CAT_PERSONALITIES[number];
+export type CatArea = typeof CAT_AREAS[number];
+export type CatSpot = typeof CAT_SPOTS[number];
+export interface PetPreferences {
+  personality: CatPersonality;
+  preferredArea: CatArea;
+  preferredSpot: CatSpot;
+}
+export interface Pet extends Partial<PetPreferences> { id: CatId; careSeconds: number; autoRefill: boolean }
+
+// Explicit ID-based defaults remain stable when the catalog order changes. Every
+// resident has its own combination, including cats adopted from legacy saves.
+const DEFAULT_PREFERENCES: Record<CatId, readonly [CatPersonality, CatArea, CatSpot]> = {
+  ginger: ['playful', 'main', 'explore'],
+  tuxedo: ['quiet', 'reading', 'cozy'],
+  calico: ['affectionate', 'greenhouse', 'window'],
+  tabby: ['playful', 'terrace', 'explore'],
+  black: ['quiet', 'greenhouse', 'cozy'],
+  white: ['affectionate', 'reading', 'window'],
+  british: ['quiet', 'main', 'cozy'],
+  american: ['playful', 'greenhouse', 'explore'],
+  siamese: ['affectionate', 'main', 'window'],
+  ragdoll: ['affectionate', 'terrace', 'cozy'],
+  persian: ['quiet', 'terrace', 'window'],
+  mainecoon: ['playful', 'reading', 'explore'],
+};
+
+/** Resolve each field independently, retaining valid preferences in older saves. */
+export function petPreferences(pet: Pick<Pet, 'id'> & Partial<PetPreferences>): PetPreferences {
+  const [personality, preferredArea, preferredSpot] = DEFAULT_PREFERENCES[pet.id];
+  return {
+    personality: CAT_PERSONALITIES.includes(pet.personality as CatPersonality) ? pet.personality! : personality,
+    preferredArea: CAT_AREAS.includes(pet.preferredArea as CatArea) ? pet.preferredArea! : preferredArea,
+    preferredSpot: CAT_SPOTS.includes(pet.preferredSpot as CatSpot) ? pet.preferredSpot! : preferredSpot,
+  };
+}
 export const CARE_SECONDS = 180;
 export const MAX_CARE_SECONDS = CARE_SECONDS * 10;
 const EPSILON = 1e-8;
@@ -31,7 +69,7 @@ export function adoptCat(state: GameState, id: string): boolean {
   const cat = catDef(id);
   if (!cat || state.pets.length >= MAX_PETS || state.phase !== 'prep' || state.pets.some((pet) => pet.id === id) || state.coins < cat.adoption) return false;
   state.coins -= cat.adoption;
-  state.pets.push({ id: cat.id, careSeconds: CARE_SECONDS, autoRefill: true });
+  state.pets.push({ id: cat.id, careSeconds: CARE_SECONDS, autoRefill: true, ...petPreferences({ id: cat.id }) });
   return true;
 }
 
@@ -73,7 +111,9 @@ export function parsePets(value: unknown): Pet[] {
     const cat = typeof p.id === 'string' ? catDef(p.id) : undefined;
     if (!cat || result.some((pet) => pet.id === cat.id)) continue;
     const care = typeof p.careSeconds === 'number' && Number.isFinite(p.careSeconds) ? p.careSeconds : 0;
-    result.push({ id: cat.id, careSeconds: Math.max(0, Math.min(MAX_CARE_SECONDS, care)), autoRefill: p.autoRefill === true });
+    result.push({ id: cat.id, careSeconds: Math.max(0, Math.min(MAX_CARE_SECONDS, care)), autoRefill: p.autoRefill === true,
+      ...petPreferences({ id: cat.id, personality: p.personality as CatPersonality, preferredArea: p.preferredArea as CatArea, preferredSpot: p.preferredSpot as CatSpot }),
+    });
   }
   return result;
 }

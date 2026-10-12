@@ -1,0 +1,77 @@
+[
+  {
+    "width": 360,
+    "buttons": [
+      {
+        "height": 44,
+        "text": "轻轻摸摸",
+        "width": 84
+      },
+      {
+        "height": 44,
+        "text": "找到猫咪",
+        "width": 84
+      },
+      {
+        "height": 44,
+        "text": "让它休息",
+        "width": 84
+      }
+    ],
+    "layout": {
+      "bodyWidth": 360,
+      "dialogWidth": 320,
+      "viewportWidth": 360
+    }
+  },
+  {
+    "width": 390,
+    "buttons": [
+      {
+        "height": 44,
+        "text": "轻轻摸摸",
+        "width": 84
+      },
+      {
+        "height": 44,
+        "text": "找到猫咪",
+        "width": 84
+      },
+      {
+        "height": 44,
+        "text": "让它休息",
+        "width": 84
+      }
+    ],
+    "layout": {
+      "bodyWidth": 390,
+      "dialogWidth": 350,
+      "viewportWidth": 390
+    }
+  },
+  {
+    "width": 430,
+    "buttons": [
+      {
+        "height": 44,
+        "text": "轻轻摸摸",
+        "width": 84
+      },
+      {
+        "height": 44,
+        "text": "找到猫咪",
+        "width": 84
+      },
+      {
+        "height": 44,
+        "text": "让它休息",
+        "width": 84
+      }
+    ],
+    "layout": {
+      "bodyWidth": 430,
+      "dialogWidth": 380,
+      "viewportWidth": 430
+    }
+  }
+]

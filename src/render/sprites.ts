@@ -432,6 +432,9 @@ export interface CharacterFrames {
   right: HTMLCanvasElement[];
   sitLeft: HTMLCanvasElement;
   sitRight: HTMLCanvasElement;
+  /** Original seated anchor, with the reaching hand extending below the feet. */
+  sitPetRight: readonly [HTMLCanvasElement, HTMLCanvasElement];
+  sitPetLeft: readonly [HTMLCanvasElement, HTMLCanvasElement];
   stand: HTMLCanvasElement;
 }
 export const CHAR_H = 28;
@@ -635,18 +638,34 @@ export function character(look: Look, role: Role = 'customer', appearanceId?: nu
   };
   const hairStyle = design ? CUSTOMER_HAIR[design.hairstyle] : HAIR[cook && look.hairStyle % HAIR.length === 3 ? 0 : look.hairStyle % HAIR.length];
   const style = cook ? { front: layer(hairStyle.front, CAP), side: layer(hairStyle.side, CAP), back: layer(hairStyle.back, CAP) } : hairStyle;
-  const build = (body: string[], view: 'front' | 'side' | 'back', legs: string[], step: number) => {
+  const build = (body: string[], view: 'front' | 'side' | 'back', legs: string[], step: number, petStep?: number) => {
     let rows = [...outfit(body, role, view, look, step, design), ...legs];
     if (design) rows = customerDetails(rows, design, view, false);
     rows = layer(rows, style[view]);
     if (design) rows = customerDetails(rows, design, view, true);
+    if (petStep !== undefined) {
+      // Keep the seated head, garment and shoes registered exactly as before.
+      // A bent sleeve and forearm reach down in front of the chair, not across
+      // the tabletop. Extra transparent rows leave the original anchor intact.
+      const grid = [...rows, ...Array<string>(8).fill('................')].map(row => [...row]);
+      grid[19][7] = 'T'; grid[19][8] = 'T';
+      const put = (x: number, y: number, text: string) => [...text].forEach((ch, dx) => { grid[y][x + dx] = ch; });
+      put(5, 17, 'UTt'); put(5, 18, 'UTt'); put(5, 19, 'Tt');
+      put(5, 20, 'Tt'); put(5, 21, 'Tt'); put(5, 22, 'Ss');
+      put(5, 23, 'Ss'); put(5, 24, 'Ss'); put(6, 25, 'Ss');
+      put(6, 26, 'Ss'); put(7, 27, 'Ss'); put(7, 28, 'Ss');
+      put(7 + petStep, 29, 'ZS'); put(7 + petStep, 30, 'Ss');
+      rows = grid.map(row => row.join(''));
+    }
     return pixelSprite(rows, palette);
   };
   const down = LEGS_FRONT.map((legs, step) => build(FRONT, 'front', legs, step));
   const up = LEGS_FRONT.map((legs, step) => build(BACK, 'back', legs, step));
   const right = LEGS_SIDE.map((legs, step) => build(SIDE, 'side', legs, step));
   const sitRight = build(SIDE, 'side', LEGS_SEATED, 0);
-  const frames = { down, up, right, left: right.map(flipped), sitRight, sitLeft: flipped(sitRight), stand: down[0] };
+  const sitPetRight = [build(SIDE, 'side', LEGS_SEATED, 0, 0), build(SIDE, 'side', LEGS_SEATED, 0, 1)] as const;
+  const sitPetLeft = [flipped(sitPetRight[0]), flipped(sitPetRight[1])] as const;
+  const frames = { down, up, right, left: right.map(flipped), sitRight, sitLeft: flipped(sitRight), sitPetRight, sitPetLeft, stand: down[0] };
   charCache.set(key, frames);
   return frames;
 }
@@ -1776,8 +1795,24 @@ const CAT_BASE = [
 const withTail = (rows: string[], tail: [number, number][]) =>
   rows.map((r, y) => [...r].map((ch, x) => (tail.some(([tx, ty]) => tx === x && ty === y) ? 'd' : ch)).join(''));
 
+export interface CatFrames {
+  idle: HTMLCanvasElement;
+  swish: HTMLCanvasElement;
+  blink: HTMLCanvasElement;
+  happy: HTMLCanvasElement;
+  /** A quiet two-step gait, registered to the same ground line as idle. */
+  walk: readonly [HTMLCanvasElement, HTMLCanvasElement];
+  sleep: HTMLCanvasElement;
+  groom: readonly [HTMLCanvasElement, HTMLCanvasElement];
+  stretch: HTMLCanvasElement;
+  watch: HTMLCanvasElement;
+  /** Taller chest, same ground anchor, for a seated guest's lowered hand. */
+  lookUp: HTMLCanvasElement;
+  nuzzle: readonly [HTMLCanvasElement, HTMLCanvasElement];
+}
+
 export const catFrames = (() => {
-  const cache = new Map<CatId, Record<'idle' | 'swish' | 'blink' | 'happy', HTMLCanvasElement>>();
+  const cache = new Map<CatId, CatFrames>();
   return (coat: CatId = 'ginger') => {
     const cached = cache.get(coat);
     if (cached) return cached;
@@ -1798,10 +1833,64 @@ export const catFrames = (() => {
     if (coat === 'mainecoon') { body[0] = 'dd......dd......'; body[1] = '.dd....dd.......'; }
     const idle = withTail(body, [[12, 10], [13, 9], [13, 8], [14, 7]]);
     const swish = withTail(body, [[12, 10], [13, 10], [14, 10], [15, 9]]);
-    const blink = idle.map((r, y) => (y === 4 ? '.oodoooddo......' : r));
-    const happy = idle.map((r, y) => (y === 5 ? '.oooenWeo.......' : r));
+    // Expressions replace only the eyes/mouth, preserving each coat's markings.
+    const edit = (rows: readonly string[], changes: readonly [number, number, string][]) => {
+      const grid = rows.map(row => [...row]);
+      for (const [x, y, text] of changes) [...text].forEach((ch, dx) => { grid[y][x + dx] = ch; });
+      return grid.map(row => row.join(''));
+    };
+    const blink = edit(idle, [[3, 4, 'd'], [7, 4, 'd']]);
+    const happy = edit(blink, [[5, 5, 'n'], [5, 6, 'e']]);
+    const watch = edit(idle, [[3, 4, 'oe'], [7, 4, 'oe']]);
+    const groomA = edit(blink, [[2, 6, 'WW'], [2, 7, 'wW'], [3, 8, 'w']]);
+    const groomB = edit(blink, [[2, 5, 'WW'], [2, 6, 'wW'], [3, 7, 'w'], [4, 5, 'n']]);
+
+    // Low, four-footed silhouettes, with the original breed head transplanted
+    // intact. These grids are built only on the first request for a coat.
+    const quadruped = (torso: string[], headY: number, eyesClosed: boolean) => {
+      const grid = torso.map((row, y) => [...row].map((ch, x) => {
+        if (coat === 'calico' && ch === 'o' && x > 9) return 'O';
+        if (['tabby', 'american', 'mainecoon'].includes(coat) && ch === 'o' && y < 10 && x % 3 === 0) return 'd';
+        return ch;
+      }));
+      for (let y = 0; y < 7; y++) for (let x = 0; x < 10; x++) {
+        const ch = body[y][x];
+        if (ch !== '.' && y + headY < 12) grid[y + headY][x] = eyesClosed && ch === 'e' ? 'd' : ch;
+      }
+      return grid.map(row => row.join(''));
+    };
+    const blank = '................';
+    const walking = quadruped([
+      blank, blank, blank, blank, blank, blank,
+      '........ooooo...', '.....ooooOOood..', '...ooWWWWoooood.',
+      '...oowwwwwoood..', '...wo....ow.od..', '...ww....ww.....',
+    ], 2, false);
+    const walkA = edit(walking, [[3, 10, 'wo....ow.'], [2, 11, 'ww.....ww...']]);
+    const walkB = edit(walking, [[3, 10, '.wo..ow..'], [2, 11, '...ww.ww....']]);
+    const sleep = quadruped([
+      blank, blank, blank, blank, blank, blank,
+      '.........oooo...', '.......ooOOooo..', '......ooWWooooo.',
+      '....oooWWoooooo.', '..oooWWoooooodd.', '..wwwwdddddddd..',
+    ], 4, true);
+    const stretch = quadruped([
+      blank, blank, blank, blank, blank, '..........ooo...',
+      '........ooOOood.', '.......ooWWoo.d.', '......ooWWoo..d.',
+      '.....ooWWwo...d.', '...oWWw..ow.....', '.wwwww...www....',
+    ], 3, true);
+    // Four extra rows raise the head while keeping the original paws/haunches
+    // on the ground. Retain the breed's ears, cheek fluff and face markings.
+    const tallBody = [...body.slice(0, 7), body[6], body[7], body[7], body[8], ...body.slice(7)];
+    const raised = withTail(tallBody, [[12, 14], [13, 13], [13, 12], [14, 11]]);
+    const lookUp = edit(raised, [[3, 4, 'o'], [7, 4, 'o'], [3, 3, 'e'], [7, 3, 'e'], [5, 5, 'W'], [5, 4, 'n']]);
+    const nuzzleA = edit(raised, [[3, 4, 'd'], [7, 4, 'd'], [5, 6, 'e']]);
+    const nuzzleB = nuzzleA.map((row, y) => y < 7 ? '.' + row.slice(0, -1) : row);
     const paint = (rows: string[]) => pixelSprite(rows, palette);
-    const frames = { idle: paint(idle), swish: paint(swish), blink: paint(blink), happy: paint(happy) };
+    const frames: CatFrames = {
+      idle: paint(idle), swish: paint(swish), blink: paint(blink), happy: paint(happy),
+      walk: [paint(walkA), paint(walkB)], sleep: paint(sleep),
+      groom: [paint(groomA), paint(groomB)], stretch: paint(stretch), watch: paint(watch),
+      lookUp: paint(lookUp), nuzzle: [paint(nuzzleA), paint(nuzzleB)],
+    };
     cache.set(coat, frames);
     return frames;
   };

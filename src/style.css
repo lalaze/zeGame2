@@ -2019,3 +2019,9 @@ html:lang(zh) body {
     font-size: 13px; padding: 6px 10px;
   }
 }
+
+/* Living residents: comfortable controls and quiet readable details. */
+.pet-living { border-top: 1px solid var(--wood-light); margin-top: 8px; padding-top: 4px; }
+.pet-living p { margin: 6px 0; overflow-wrap: anywhere; }
+.living-cat-detail p { line-height: 1.5; }
+.modal:has(.living-cat-detail) .modal-actions .pixel-btn { min-height: 44px; }

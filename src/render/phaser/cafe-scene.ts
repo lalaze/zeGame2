@@ -1,4 +1,5 @@
 import { petActive } from '../../game/pets';
+import { residentCatFlipX } from '../living-cat-pose';
 import Phaser from 'phaser';
 import { getLocale, t as translate } from '../../i18n';
 import { thoughtCandidates } from '../thoughts';
@@ -336,7 +337,7 @@ export class CafeScene extends Phaser.Scene {
   private image(canvasOrKey: HTMLCanvasElement | string, x: number, y: number, depth: number): Phaser.GameObjects.Image {
     const key = typeof canvasOrKey === 'string' ? canvasOrKey : canvasKey(this.textures, canvasOrKey);
     const image = this.images.next();
-    image.setTexture(key).setPosition(Math.round(x), Math.round(y)).setDepth(depth).setAlpha(1);
+    image.setTexture(key).setPosition(Math.round(x), Math.round(y)).setDepth(depth).setAlpha(1).setFlipX(false);
     if (image.isCropped) image.setCrop();
     return image;
   }
@@ -495,6 +496,7 @@ export class CafeScene extends Phaser.Scene {
   }
 
   private drawCat(state: GameState, t: number, o: { x: number; y: number }): void {
+    if (state.pets.length) return;
     // Keep the original visiting cat until a resident is adopted.
     const cats = state.pets.length ? state.pets : [{ id: 'ginger' as const, careSeconds: 1, autoRefill: false }];
     cats.forEach((cat, i) => {
@@ -590,6 +592,7 @@ export class CafeScene extends Phaser.Scene {
 
   /** Customers, tables, crates and furniture, each sorted by where its feet are. */
   private drawFloorStanding(state: GameState, t: number): void {
+    this.drawResidents(state);
     const skip = this.view.ghost?.skip ?? -1;
     for (const c of this.sim.customers) if (!seated(c)) this.drawCustomer(c, DEPTH.floor + c.y);
     for (const server of this.sim.servers) this.drawServer(server, DEPTH.floor + server.y);
@@ -611,6 +614,44 @@ export class CafeScene extends Phaser.Scene {
       this.floorPiece(p.id, cx, foot, DEPTH.floor + foot + 0.3);
     });
     for (const spot of doorPlantSpots()) this.floorPiece('plant_fig', spot.x, spot.y, DEPTH.floor + spot.y + 0.4);
+  }
+
+  /** Residents share the existing feet-based floor depth and cached breed art. */
+  private drawResidents(state: GameState): void {
+    let index = 0;
+    for (const cat of this.view.livingCats.actors.values()) {
+      const frames = catFrames(cat.id);
+      const quiet = this.motionPreference.matches;
+      const walking = cat.route.length > 0;
+      let sprite = frames.idle;
+      if (walking) sprite = frames.walk[quiet ? 0 : Math.floor(cat.stride / 5) % 2];
+      else if (cat.interaction?.phase === 'nuzzle') sprite = quiet ? frames.lookUp : frames.nuzzle[Math.floor(cat.interaction.elapsed / 0.65) % 2];
+      else if (cat.interaction?.phase === 'response') sprite = frames.lookUp;
+      else if (cat.affection > 0) sprite = frames.happy;
+      else if (cat.behavior === 'sleep') sprite = frames.sleep;
+      else if (cat.behavior === 'groom') sprite = frames.groom[quiet ? 0 : Math.floor(cat.elapsed / 0.7) % 2];
+      else if (cat.behavior === 'stretch') sprite = frames.stretch;
+      else if (cat.behavior === 'watch') sprite = frames.watch;
+      const depth = DEPTH.floor + cat.y + 0.005;
+      this.shadow(cat.x, cat.y, 10, depth);
+      this.image(sprite, cat.x - 9, cat.y - sprite.height + 2, depth + 0.001).setFlipX(residentCatFlipX(walking, cat.facing));
+      const selected = this.view.selectedCat === cat.id && this.view.catSelectionSeconds > 0;
+      // A tiny numbered tag matches the owned list; never covers the cat's face.
+      const label = String(++index);
+      const key = baked(this.textures, `resident-tag-${label}-${selected}`, 7, 7, ctx => {
+        ctx.fillStyle = selected ? '#f8d68a' : '#fff4d9'; ctx.fillRect(0, 0, 7, 7);
+        drawText(ctx, label, 1, 1, '#5a4031');
+      });
+      if (!this.view.overview) this.image(key, cat.x + 7, cat.y - 17, DEPTH.overlay + 0.5);
+      if (selected) {
+        this.rect(cat.x - 11, cat.y + 2, 22, 1, '#f8d68a', depth + 0.003);
+      }
+      // A real visual-only pair owns this response; proximity alone never pets.
+      if (!this.view.overview && cat.interaction?.phase === 'response' && state.pets.some(p => p.id === cat.id && petActive(p))) {
+        const guest = this.sim.customers.find(c => c.id === cat.interaction!.guestId && seated(c));
+        if (guest) this.image(heartSprite(), guest.x + 8, guest.y - CHAR_H - 8, DEPTH.overlay);
+      }
+    }
   }
 
   /**
@@ -796,8 +837,12 @@ export class CafeScene extends Phaser.Scene {
     const sitter = (side: 0 | 1, c: Customer) => {
       const s = seatSpot(index, side);
       const frames = character(c.look, 'customer', c.appearanceId);
-      const bob = Math.floor(t * 1.1 + c.id) % 3 === 0 ? 1 : 0;
-      return { sprite: side === 0 ? frames.sitRight : frames.sitLeft, x: s.x - 9, y: s.y - (CHAR_H + 5) + bob };
+      const pair = [...this.view.livingCats.actors.values()].find(cat => cat.interaction?.guestId === c.id && cat.interaction.phase === 'response');
+      const still = this.motionPreference.matches || this.view.paused;
+      const petFrame = pair ? (still ? 0 : Math.floor(pair.interaction!.elapsed / 0.65) % 2) : 0;
+      const sprite = pair ? (side === 0 ? frames.sitPetRight : frames.sitPetLeft)[petFrame] : side === 0 ? frames.sitRight : frames.sitLeft;
+      const bob = pair || still ? 0 : Math.floor(t * 1.1 + c.id) % 3 === 0 ? 1 : 0;
+      return { sprite, x: s.x - 9, y: s.y - (CHAR_H + 5) + bob };
     };
     // Chairs (backs on the outside) and anyone sitting in them.
     for (const side of [0, 1] as const) {
@@ -864,7 +909,18 @@ export class CafeScene extends Phaser.Scene {
     const view = this.view;
     const bounds = areaBounds(view.area);
     const inRoom = (p: { x: number; y: number }) => p.x >= bounds.x && p.x < bounds.x + bounds.w && p.y >= bounds.y && p.y < bounds.y + bounds.h;
-    const candidates = thoughtCandidates(this.sim, state).filter(inRoom);
+    let candidates = thoughtCandidates(this.sim, state).filter(inRoom);
+    // Share the existing two-cloud/collision budget. A short response may remain
+    // silent when the guest already spoke recently or there is no clear space.
+    for (const cat of view.livingCats.actors.values()) {
+      if (cat.interaction?.phase !== 'response') continue;
+      const guest = this.sim.customers.find(c => c.id === cat.interaction!.guestId && seated(c));
+      if (!guest || !inRoom(guest)) continue;
+      const id = `customer:${guest.id}`;
+      candidates = candidates.filter(c => c.id !== id);
+      candidates.push({ id, key: 'pet.living.thought.response', x: guest.x, y: guest.y - CHAR_H - 5,
+        priority: 8, context: `cat-response:${cat.id}` });
+    }
     const enabled = !view.paused && !view.panning && !view.overview && !view.ghost && state.phase === 'open' && !document.hidden;
     const selected = this.thoughts.update(dt, `${view.area}:${getLocale()}:${bounds.h}`, enabled, candidates);
     if (!selected.length || !this.thoughtFontsReady) return;
@@ -896,6 +952,14 @@ export class CafeScene extends Phaser.Scene {
       occupied.push({ x: p.x - 9, y: p.y - CHAR_H, w: 18, h: 18 });
       if (this.sim.cookStation(i)?.working) occupied.push({ x: p.x - 10, y: p.y - CHAR_H - 6, w: 20, h: 5 });
     });
+    // Keep every cloud away from the small paired gesture, not just human heads.
+    // Otherwise a neighboring guest's thought can cover the entire cat and hand.
+    for (const cat of view.livingCats.actors.values()) {
+      if (!cat.interaction || !inRoom(cat)) continue;
+      occupied.push({ x: cat.x - 11, y: cat.y - 20, w: 22, h: 24 });
+      const guest = this.sim.customers.find(c => c.id === cat.interaction!.guestId && seated(c));
+      if (guest) occupied.push({ x: guest.x - 10, y: guest.y - 14, w: 20, h: 30 });
+    }
     for (const f of this.floaters) occupied.push({ x: f.x - 24, y: f.pos.y - 10, w: 48, h: 20 });
     for (const c of selected) {
       const text = translate(c.key);
@@ -1006,6 +1070,7 @@ export class CafeScene extends Phaser.Scene {
 
   private spawnEffects(): void {
     for (const e of this.view.effects.splice(0)) {
+      if (e.kind === 'heart' && this.motionPreference.matches) continue;
       if (e.kind !== 'bell') this.emitters[e.kind].emitParticleAt(e.x, e.y, 1);
       else {
         // Ding: the bell jiggles and throws off a few sparkles.
@@ -1103,7 +1168,7 @@ export class CafeScene extends Phaser.Scene {
       const { key, dx, dy } = this.floorTexture(ghost.id);
       this.ghostPiece.setTexture(key).setPosition(cx + dx, foot + dy);
     }
-    const fill = color(canPlace(state, ghost.id, ghost.col, ghost.row, tables, ghost.skip) && this.sim.furnitureSpaceClear(ghost.id, ghost.col, ghost.row) ? GHOST_OK : GHOST_BAD);
+    const fill = color(canPlace(state, ghost.id, ghost.col, ghost.row, tables, ghost.skip) && this.sim.furnitureSpaceClear(ghost.id, ghost.col, ghost.row) && this.view.catSpaceClear(ghost.id, ghost.col, ghost.row) ? GHOST_OK : GHOST_BAD);
     box.fillStyle(fill, 0.3 + Math.sin(t * 6) * 0.08);
     box.fillRect(rect.x, rect.y, rect.w, rect.h);
     box.fillStyle(fill, 1);

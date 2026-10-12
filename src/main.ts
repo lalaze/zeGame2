@@ -2,6 +2,8 @@ import '@fontsource/pixelify-sans/400.css';
 import '@fontsource/pixelify-sans/600.css';
 import './style.css';
 
+import { showLivingCat } from './ui/living-cats';
+import type { CatId } from './game/pets';
 import { SPEEDS } from './game/data';
 import { formatOpenTime, openShop, type DayReport } from './game/day';
 import { expectedCustomers, tipMultiplier } from './game/economy';
@@ -216,6 +218,11 @@ const panel = new Panel(
     if (kind === 'goal') toast(t('goal.claimed', { reward: formatMoney(Number(id)) }));
   },
   (request) => startArrange(request),
+  {
+    getActor: (id) => scene.livingCats.actors.get(id),
+    locate: (id) => locateResident(id),
+    interact: (id) => greetResident(id),
+  },
 );
 
 /** Opening a management task also reveals the panel if the player folded it away. */
@@ -311,7 +318,7 @@ function holdPiece(id: string, moving: number, fromBrowse: boolean): void {
     const rows = furnitureDef(id)?.surface === 'wall' ? WALL_ROWS : FLOOR_ROWS;
     outer: for (let row = 0; row < rows; row++) {
       for (let col = start; col < start + COLS; col++) {
-        if (canPlace(state, id, col, row, tables, moving) && sim.furnitureSpaceClear(id, col, row)) {
+        if (canPlace(state, id, col, row, tables, moving) && sim.furnitureSpaceClear(id, col, row) && scene.catSpaceClear(id, col, row)) {
           at = { id, col, row };
           break outer;
         }
@@ -354,7 +361,7 @@ function arrangeTap(x: number, y: number): void {
   }
   const { col, row } = scene.cellAt(arrange.id, x, y);
   const tables = mainTableCount(state);
-  const ok = sim.furnitureSpaceClear(arrange.id, col, row) && (
+  const ok = sim.furnitureSpaceClear(arrange.id, col, row) && scene.catSpaceClear(arrange.id, col, row) && (
     arrange.moving >= 0
       ? moveFurniture(state, arrange.moving, col, row, tables)
       : placeFurniture(state, arrange.id, col, row, tables));
@@ -653,6 +660,8 @@ function resetGame(): void {
   state = createInitialState(Date.now());
   guide.reset();
   sim.reset();
+  scene.livingCats.reset();
+  scene.selectedCat = null;
   operationMonitor.reset();
   panel.setState(state);
   regionsUI.select('main');
@@ -663,8 +672,34 @@ function resetGame(): void {
 
 // ------------------------------------------------------------ input
 
+function locateResident(id: CatId): void {
+  scene.livingCats.update(state, 0, sim);
+  const actor = scene.livingCats.actors.get(id);
+  if (!actor) return;
+  regionsUI.select(actor.area);
+  scene.selectResidentCat(id);
+  toast(t('pet.living.located', { name: t(`pet.${id}.name`) }));
+}
+
+function greetResident(id: CatId): void {
+  if (!scene.petResidentCat(id)) {
+    toast(t('pet.living.needsCare'));
+    return;
+  }
+  toast(t('pet.living.greeted', { name: t(`pet.${id}.name`) }));
+}
+
 function tapAt(x: number, y: number): void {
-  if (scene.hitCat(x, y, Math.max(1, state.pets.length))) {
+  // Keep scene residents touchable at 44 CSS pixels even in a compact café.
+  const catHitRadius = Math.max(12, 22 * SCENE_W / Math.max(1, canvas.getBoundingClientRect().width));
+  const residentId = scene.hitResidentCat(x, y, catHitRadius);
+  if (residentId) {
+    const pet = state.pets.find(p => p.id === residentId)!;
+    scene.selectResidentCat(residentId);
+    showLivingCat(pet, scene.livingCats.actors.get(residentId), () => greetResident(residentId), () => locateResident(residentId));
+    return;
+  }
+  if (!state.pets.length && scene.hitCat(x, y, Math.max(1, state.pets.length))) {
     scene.petCat();
     return;
   }
@@ -747,6 +782,7 @@ function frame(dt: number): void {
 
   // Settlement can open a dialog in this frame; hide thoughts immediately.
   scene.paused = paused || isModalOpen();
+  scene.livingCats.update(state, scene.paused ? 0 : dt, sim);
   scene.update(dt, sim);
   sceneWrap.classList.toggle('is-panning', scene.panning);
   sceneWrap.classList.toggle('is-overview', scene.overview);
