@@ -1,0 +1,12 @@
+
+ RUN  v5.0.3 /tmp/tiny-bean-story-review.1ZqsHH
+
+stdout | scripts/regular-guests-evidence.test.ts > regular guest natural multi-day evidence > reaches all sixty chapters through actual arrivals and handoffs across business days
+[{"seed":13,"days":19,"chapters":60},{"seed":517,"days":19,"chapters":60},{"seed":2026,"days":19,"chapters":60}]
+
+ ✓ scripts/regular-guests-evidence.test.ts > regular guest natural multi-day evidence > reaches all sixty chapters through actual arrivals and handoffs across business days 2954ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  01:27:02
+   Duration  3.41s (tests 90%, transform 8%, import 1%)

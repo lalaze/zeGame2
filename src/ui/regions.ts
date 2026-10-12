@@ -1,7 +1,7 @@
 import { KITCHEN_COST, kitchenBlock, unlockKitchen } from '../game/kitchen';
 import { AREA_IDS, REGIONS, adjacentArea, isAreaOpen, isRegion, regionBlock, regionDef, unlockRegion, type AreaId, type Direction } from '../game/regions';
 import { passageSpot, sceneHeight, kitchenHeight } from '../game/layout';
-import { formatMoney } from '../game/format';
+import { formatTransactionMoney as formatMoney } from '../game/format';
 import type { GameState } from '../game/state';
 import { t, type MessageKey } from '../i18n';
 

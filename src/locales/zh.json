@@ -213,7 +213,7 @@
   "day.closed": "休息中",
   "day.open": "准备菜单 · 第 {n} 天",
   "day.speed": "速度",
-  "hud.today": "今日 +{money}",
+  "hud.today": "今日营业额 {money}",
   "hud.closed": "休息中 · 第 {n} 天",
   "toast.opened": "第 {n} 天：开门营业啦！",
   "report.title": "第 {n} 天营业结算",
@@ -954,5 +954,13 @@
   "regular.guest.luz.chapter5.title": "两间厨房",
   "regular.guest.luz.chapter5.text": "表亲寄来做好的薄饼照片，还写了她换用另一种面粉的心得。祖母想把那段话也加到下一页，两种语言都写。小册子终于有了名字：《那个蓝碗》，现在它同时住在两间厨房里。",
   "regular.ui.nextRequirement": "下一段：第 {day} 天起，成功接待累计达到 {served} 次时，在送达订单后解锁。",
-  "regular.ui.dailyLimit": "每位熟客每天最多解锁一段；阅读不会影响后续解锁。"
+  "regular.ui.dailyLimit": "每位熟客每天最多解锁一段；阅读不会影响后续解锁。",
+  "money.details": "金额详情",
+  "money.balanceDetails": "余额 {money}，查看精确金额",
+  "money.title": "精确金额",
+  "money.balance": "余额：{money}",
+  "money.price": "价格：{money}",
+  "money.short": "还差 {money}",
+  "money.shortfall": "还差：{money}",
+  "money.precision": "≈ 表示显示值经过取舍，购买按此处完整金额计算。"
 }

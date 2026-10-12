@@ -213,7 +213,7 @@
   "day.closed": "Closed",
   "day.open": "Prepare menu · Day {n}",
   "day.speed": "Speed",
-  "hud.today": "Today +{money}",
+  "hud.today": "Revenue today {money}",
   "hud.closed": "Closed · Day {n}",
   "toast.opened": "Day {n}: the shop is open!",
   "report.title": "Day {n} settlement",
@@ -954,5 +954,13 @@
   "regular.guest.luz.chapter5.title": "Two Kitchens",
   "regular.guest.luz.chapter5.text": "My cousin sent a photo of the finished flatbreads, along with a note about the different flour she used. Grandmother wants that note on the next page, in both languages. The booklet finally has a title: 'The Blue Bowl', which now belongs in two kitchens.",
   "regular.ui.nextRequirement": "Next chapter: from Day {day}, complete an order with at least {served} successful services in total.",
-  "regular.ui.dailyLimit": "Each regular unlocks at most one chapter per day. Reading does not affect later unlocks."
+  "regular.ui.dailyLimit": "Each regular unlocks at most one chapter per day. Reading does not affect later unlocks.",
+  "money.details": "Amounts",
+  "money.balanceDetails": "Balance {money}. View exact amount",
+  "money.title": "Exact amounts",
+  "money.balance": "Balance: {money}",
+  "money.price": "Price: {money}",
+  "money.short": "Need {money}",
+  "money.shortfall": "Shortfall: {money}",
+  "money.precision": "≈ means a rounded display. Purchases use the full amounts shown here."
 }

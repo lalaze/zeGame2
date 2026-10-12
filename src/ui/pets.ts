@@ -1,24 +1,41 @@
 import { CATS, CAT_GROUPS, CARE_SECONDS, MAX_CARE_SECONDS, MAX_PETS, adoptCat, petActive, petTraffic, refillPet, type CatGroup, type CatId } from '../game/pets';
-import { formatAccountMoney, formatMoney } from '../game/format';
+import { formatAccountMoney, formatTransactionMoney as formatMoney } from '../game/format';
 import type { GameState } from '../game/state';
 import { t } from '../i18n';
 import { catFrames, toDataURL } from '../render/sprites';
 import { livingCatActivity, livingCatPersonality, livingCatPreference, type LivingCatControls } from './living-cats';
 
+/** Transient browsing choices, owned by Panel rather than the game save. */
+export interface PetBrowsingState {
+  mode: 'catalog' | 'owned';
+  group: CatGroup | 'all';
+  selected: CatId;
+}
+
+export function createPetBrowsingState(state: GameState): PetBrowsingState {
+  return {
+    mode: 'catalog',
+    group: 'all',
+    selected: CATS.find((cat) => !state.pets.some((pet) => pet.id === cat.id))?.id ?? CATS[0].id,
+  };
+}
+
 export class PetPanel {
   private summary: HTMLElement;
   private rows;
-  private mode: 'catalog' | 'owned' = 'catalog';
-  private group: CatGroup | 'all' = 'all';
-  private selected: CatId;
   private tiles;
   private filters: HTMLElement;
   private grid: HTMLElement;
   private empty: HTMLElement;
   private tabs: HTMLButtonElement[];
 
-  constructor(root: HTMLElement, private state: GameState, onChange: (id: string) => void, private living: LivingCatControls = {}) {
-    this.selected = CATS.find((cat) => !state.pets.some((pet) => pet.id === cat.id))?.id ?? CATS[0].id;
+  constructor(
+    root: HTMLElement,
+    private state: GameState,
+    onChange: (id: string) => void,
+    private living: LivingCatControls = {},
+    private browsing: PetBrowsingState = createPetBrowsingState(state),
+  ) {
     const intro = document.createElement('div');
     intro.className = 'pet-intro';
     intro.innerHTML = `<h3>${t('pet.title')}</h3><p class="note">${t('pet.intro', { count: CATS.length, max: MAX_PETS })}</p><p class="pet-summary" role="status"></p><details class="note"><summary>${t('pet.careHelp')}</summary><p>${t('pet.accounting')}</p></details>`;
@@ -29,7 +46,7 @@ export class PetPanel {
     this.tabs = (['catalog', 'owned'] as const).map((mode) => {
       const btn = document.createElement('button');
       btn.className = 'chip'; btn.textContent = t(`pet.${mode}`); btn.dataset.petView = mode;
-      btn.addEventListener('click', () => { this.mode = mode; this.update(); });
+      btn.addEventListener('click', () => { this.browsing.mode = mode; this.update(); });
       nav.append(btn); return btn;
     });
     root.append(nav);
@@ -38,8 +55,7 @@ export class PetPanel {
       const btn = document.createElement('button');
       btn.className = 'chip'; btn.textContent = t(`pet.group.${group}`); btn.dataset.petGroup = group;
       btn.addEventListener('click', () => {
-        this.group = group;
-        if (group !== 'all' && CATS.find((cat) => cat.id === this.selected)!.group !== group) this.selected = CATS.find((cat) => cat.group === group)!.id;
+        this.browsing.group = group;
         this.update();
       });
       this.filters.append(btn);
@@ -51,7 +67,7 @@ export class PetPanel {
       const btn = document.createElement('button'); btn.className = 'pet-choice'; btn.dataset.chooseCat = cat.id;
       btn.innerHTML = `<img src="${toDataURL(catFrames(cat.id).idle, 4)}" alt="" /><b>${t(`pet.${cat.id}.name`)}</b><span>${formatMoney(cat.adoption)} · +${Math.round(cat.traffic * 100)}%</span><small></small>`;
       btn.addEventListener('click', () => {
-        this.selected = cat.id; this.update();
+        this.browsing.selected = cat.id; this.update();
         this.rows.find((row) => row.cat.id === cat.id)!.el.scrollIntoView({ block: 'nearest' });
       });
       this.grid.append(btn); return { cat, btn, badge: btn.querySelector('small')! };
@@ -102,19 +118,26 @@ export class PetPanel {
 
   update(): void {
     const s = this.state;
+    // A catalog change or stale selection must never leave the detail pane empty.
+    // Adoption does not invalidate a catalog entry: keep showing that cat's care.
+    if (this.browsing.mode !== 'catalog' && this.browsing.mode !== 'owned') this.browsing.mode = 'catalog';
+    if (this.browsing.group !== 'all' && !CAT_GROUPS.includes(this.browsing.group)) this.browsing.group = 'all';
+    const candidates = CATS.filter((cat) => this.browsing.group === 'all' || cat.group === this.browsing.group);
+    if (!candidates.some((cat) => cat.id === this.browsing.selected)) this.browsing.selected = candidates[0].id;
+    const { mode, group, selected } = this.browsing;
     this.summary.textContent = t('pet.summary', { n: s.pets.length, max: MAX_PETS, pct: Math.round((petTraffic(s) - 1) * 100), cost: formatAccountMoney(s.today.petCost) });
-    this.grid.hidden = this.filters.hidden = this.mode !== 'catalog';
-    this.empty.hidden = this.mode !== 'owned' || s.pets.length > 0;
-    for (const btn of this.tabs) btn.setAttribute('aria-pressed', String(btn.dataset.petView === this.mode));
-    for (const btn of this.filters.querySelectorAll('button')) btn.setAttribute('aria-pressed', String(btn.dataset.petGroup === this.group));
+    this.grid.hidden = this.filters.hidden = mode !== 'catalog';
+    this.empty.hidden = mode !== 'owned' || s.pets.length > 0;
+    for (const btn of this.tabs) btn.setAttribute('aria-pressed', String(btn.dataset.petView === mode));
+    for (const btn of this.filters.querySelectorAll('button')) btn.setAttribute('aria-pressed', String(btn.dataset.petGroup === group));
     for (const tile of this.tiles) {
-      tile.btn.hidden = this.group !== 'all' && tile.cat.group !== this.group;
-      tile.btn.setAttribute('aria-pressed', String(tile.cat.id === this.selected));
+      tile.btn.hidden = group !== 'all' && tile.cat.group !== group;
+      tile.btn.setAttribute('aria-pressed', String(tile.cat.id === selected));
       tile.badge.textContent = s.pets.some((pet) => pet.id === tile.cat.id) ? t('pet.adopted') : t('pet.choose');
     }
     for (const r of this.rows) {
       const pet = s.pets.find((pet) => pet.id === r.cat.id);
-      r.el.hidden = this.mode === 'owned' ? !pet : r.cat.id !== this.selected;
+      r.el.hidden = mode === 'owned' ? !pet : r.cat.id !== selected;
       r.adopt.hidden = !!pet;
       r.adopt.disabled = s.pets.length >= MAX_PETS || s.phase !== 'prep' || s.coins < r.cat.adoption;
       r.refill.hidden = !pet;

@@ -1,0 +1,1400 @@
+- heading "Isolated café QA · desktop Chromium CSS viewport simulation" [level=1]
+- paragraph: Synthetic fixtures are labeled. Funded start grants only money; upgrades can be purchased through normal UI. Advanced fixture injects recipes, stock, rooms and day 19. This is not a naturally earned progression or physical-phone test.
+- text: Fixture
+- combobox "Fixture":
+  - option "Fresh, $0, ordinary starter"
+  - option "Synthetic $1M, otherwise ordinary starter"
+  - option "Synthetic genuine insolvency, no rewards"
+  - option "Synthetic legacy v10, $1234.50, day5"
+  - 'option "Synthetic advanced: all recipes/rooms, kitchen, 2000 ingredients, day19" [selected]'
+  - 'option "Existing story evidence: all chapters"'
+  - 'option "Existing story evidence: after first day"'
+  - 'option "Existing story evidence: live service"'
+- text: Language
+- combobox "Language":
+  - option "English"
+  - option "中文" [selected]
+- button "Replace disposable QA café"
+- button "Resume current QA save"
+- text: Viewport
+- combobox "Viewport":
+  - option "1000×740 desktop"
+  - option "1180×757 desktop"
+  - option "360×720" [selected]
+  - option "390×720"
+  - option "430×720"
+  - option "720×390 landscape"
+  - option "360×320 reduced height"
+- button "Read saved counters"
+- button "Download QA saved JSON"
+- generic: Loaded disposable fixture advanced on http://127.0.0.1:5223
+- iframe [active] [id="game"]:
+  - banner:
+    - generic: Advanced synthetic Q
+    - generic: $1.00M
+    - generic: 休息中 · 第 19 天
+    - button "收起经营面板" [expanded]: 收起
+    - button "设置": ···
+  - button "★ 新店 · 暂无评价 · 口碑客流 ±0% · 查看顾客评价":
+    - generic: ★ 新店 · 暂无评价
+    - generic: 口碑客流 ±0%
+    - generic: ›
+  - button "熟客记录":
+    - generic: 熟客
+  - main:
+    - generic: 第 19 天 · 休息中
+    - button "准备菜单 · 第 19 天"
+    - generic "主店"
+    - button "地图":
+      - generic: 地图
+    - navigation "咖啡馆区域":
+      - button "从左侧门前往后厨":
+      - button "从右侧门前往阅读休息室":
+    - complementary "经营面板":
+      - tablist:
+        - tab "菜单" [selected]
+        - tab "食材"
+        - tab "升级"
+        - tab "装扮"
+        - tab "猫咪"
+        - tab "推广"
+      - generic: 购买
+      - button "x1" [pressed]
+      - button "x10"
+      - button "最大"
+      - button "全部" [pressed]
+      - button "咖啡"
+      - button "茶饮"
+      - button "面包"
+      - button "甜点"
+      - generic: 菜单上有 55 道餐点 · 种类丰富让顾客 +60%。有些顾客会点一杯饮品再配一份烘焙。
+      - button "按预计销量设定烘焙量"
+      - heading "咖啡 14/14" [level=3]:
+        - text: 咖啡
+        - generic: 14/14
+      - generic: 浓缩咖啡 Lv 1
+      - generic: 售价 $3 · 原料 $1 · 1.2秒 · 售价 $3 → $6
+      - img "咖啡豆"
+      - generic: 可做 2.00K 份
+      - button "浓缩咖啡 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $8":
+        - generic: 升级
+        - generic: $8
+      - generic: 美式咖啡 Lv 1
+      - generic: 售价 $5 · 原料 $1 · 2.4秒 · 售价 $5 → $10
+      - img "咖啡豆"
+      - generic: 可做 2.00K 份
+      - button "美式咖啡 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $44":
+        - generic: 升级
+        - generic: $44
+      - generic: 拿铁 Lv 1
+      - generic: 售价 $10 · 原料 $3 · 5.0秒 · 售价 $10 → $21
+      - img "咖啡豆"
+      - img "牛奶"
+      - generic: 可做 2.00K 份
+      - button "拿铁 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $134":
+        - generic: 升级
+        - generic: $134
+      - generic: 卡布奇诺 Lv 1
+      - generic: 售价 $35 · 原料 $3 · 3.5秒 · 售价 $35 → $76
+      - img "咖啡豆"
+      - img "牛奶"
+      - generic: 可做 2.00K 份
+      - button "卡布奇诺 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $1.34K":
+        - generic: 升级
+        - generic: $1.34K
+      - generic: 澳白 Lv 1
+      - generic: 售价 $60 · 原料 $4 · 3.2秒 · 售价 $60 → $130
+      - img "咖啡豆"
+      - generic: ×2
+      - img "牛奶"
+      - generic: 可做 1.00K 份
+      - button "澳白 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $4.48K":
+        - generic: 升级
+        - generic: $4.48K
+      - generic: 科尔塔多 Lv 1
+      - generic: 售价 $150 · 原料 $3 · 2.6秒 · 售价 $150 → $326
+      - img "咖啡豆"
+      - img "牛奶"
+      - generic: 可做 2.00K 份
+      - button "科尔塔多 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $17.9K":
+        - generic: 升级
+        - generic: $17.9K
+      - generic: 摩卡 Lv 1
+      - generic: 售价 $400 · 原料 $13 · 4.0秒 · 售价 $400 → $871
+      - img "咖啡豆"
+      - img "牛奶"
+      - img "可可粉"
+      - generic: 可做 2.00K 份
+      - button "摩卡 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $78.4K":
+        - generic: 升级
+        - generic: $78.4K
+      - generic: 维也纳咖啡 Lv 1
+      - generic: 售价 $750 · 原料 $35 · 4.8秒 · 售价 $750 → $1.63K
+      - img "咖啡豆"
+      - img "奶油奶酪"
+      - generic: ×2
+      - img "可可粉"
+      - generic: 可做 1.00K 份
+      - button "维也纳咖啡 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $201K":
+        - generic: 升级
+        - generic: $201K
+      - generic: 焦糖玛奇朵 Lv 1
+      - generic: 售价 $1.30K · 原料 $16 · 4.2秒 · 售价 $1.30K → $2.83K
+      - img "咖啡豆"
+      - img "牛奶"
+      - img "糖"
+      - img "奶油奶酪"
+      - generic: 可做 2.00K 份
+      - button "焦糖玛奇朵 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $504K":
+        - generic: 升级
+        - generic: $504K
+      - generic: 冷萃咖啡 Lv 1
+      - generic: 售价 $4.50K · 原料 $3 · 2.5秒 · 售价 $4.50K → $9.80K
+      - img "咖啡豆"
+      - generic: ×2
+      - img "糖"
+      - generic: 可做 1.00K 份
+      - button "冷萃咖啡 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $3.92M" [disabled]:
+        - generic: 升级
+        - generic: $3.92M
+      - generic: 脏咖啡 Lv 1
+      - generic: 售价 $16.0K · 原料 $6 · 2.2秒 · 售价 $16.0K → $34.8K
+      - img "咖啡豆"
+      - generic: ×2
+      - img "牛奶"
+      - generic: ×2
+      - generic: 可做 1.00K 份
+      - button "脏咖啡 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $35.8M" [disabled]:
+        - generic: 升级
+        - generic: $35.8M
+      - generic: 精品手冲 Lv 1
+      - generic: 售价 $70.0K · 原料 $2 · 6.0秒 · 售价 $70.0K → $152K
+      - img "咖啡豆"
+      - generic: ×2
+      - generic: 可做 1.00K 份
+      - button "精品手冲 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $392M" [disabled]:
+        - generic: 升级
+        - generic: $392M
+      - generic: 海盐奶盖咖啡 Lv 1
+      - generic: 售价 $130K · 原料 $27 · 5.0秒 · 售价 $130K → $283K
+      - img "咖啡豆"
+      - generic: ×2
+      - img "奶油奶酪"
+      - generic: ×2
+      - img "糖"
+      - generic: 可做 1.00K 份
+      - button "海盐奶盖咖啡 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $1.06B" [disabled]:
+        - generic: 升级
+        - generic: $1.06B
+      - generic: 阿芙佳朵 Lv 1
+      - generic: 售价 $240K · 原料 $14 · 3.5秒 · 售价 $240K → $522K
+      - img "咖啡豆"
+      - img "奶油奶酪"
+      - img "糖"
+      - generic: 可做 2.00K 份
+      - button "阿芙佳朵 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $3.13B" [disabled]:
+        - generic: 升级
+        - generic: $3.13B
+      - heading "茶与饮品 11/11" [level=3]:
+        - text: 茶与饮品
+        - generic: 11/11
+      - generic: 伯爵红茶 Lv 1
+      - generic: 售价 $9 · 原料 $2 · 4.0秒 · 售价 $9 → $19
+      - img "茶叶"
+      - generic: 可做 2.00K 份
+      - button "伯爵红茶 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $100":
+        - generic: 升级
+        - generic: $100
+      - generic: 热巧克力 Lv 1
+      - generic: 售价 $30 · 原料 $13 · 3.0秒 · 售价 $30 → $65
+      - img "可可粉"
+      - img "牛奶"
+      - img "糖"
+      - generic: 可做 2.00K 份
+      - button "热巧克力 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $1.00K":
+        - generic: 升级
+        - generic: $1.00K
+      - generic: 柠檬红茶 Lv 1
+      - generic: 售价 $55 · 原料 $23 · 2.5秒 · 售价 $55 → $119
+      - img "茶叶"
+      - img "新鲜水果"
+      - img "糖"
+      - generic: 可做 2.00K 份
+      - button "柠檬红茶 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $3.13K":
+        - generic: 升级
+        - generic: $3.13K
+      - generic: 香料奶茶 Lv 1
+      - generic: 售价 $100 · 原料 $10 · 3.5秒 · 售价 $100 → $217
+      - img "茶叶"
+      - img "牛奶"
+      - img "香料"
+      - generic: 可做 2.00K 份
+      - button "香料奶茶 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $8.96K":
+        - generic: 升级
+        - generic: $8.96K
+      - generic: 缤纷水果茶 Lv 1
+      - generic: 售价 $350 · 原料 $43 · 3.8秒 · 售价 $350 → $762
+      - img "茶叶"
+      - img "新鲜水果"
+      - generic: ×2
+      - img "糖"
+      - generic: 可做 1.00K 份
+      - button "缤纷水果茶 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $56.0K":
+        - generic: 升级
+        - generic: $56.0K
+      - generic: 焙茶拿铁 Lv 1
+      - generic: 售价 $750 · 原料 $6 · 3.2秒 · 售价 $750 → $1.63K
+      - img "茶叶"
+      - generic: ×2
+      - img "牛奶"
+      - generic: 可做 1.00K 份
+      - button "焙茶拿铁 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $201K":
+        - generic: 升级
+        - generic: $201K
+      - generic: 抹茶拿铁 Lv 1
+      - generic: 售价 $1.40K · 原料 $42 · 4.5秒 · 售价 $1.40K → $3.04K
+      - img "抹茶粉"
+      - img "牛奶"
+      - generic: 可做 2.00K 份
+      - button "抹茶拿铁 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $616K":
+        - generic: 升级
+        - generic: $616K
+      - generic: 焦糖冰沙 Lv 1
+      - generic: 售价 $5.00K · 原料 $18 · 5.0秒 · 售价 $5.00K → $10.8K
+      - img "咖啡豆"
+      - img "牛奶"
+      - generic: ×2
+      - img "糖"
+      - img "奶油奶酪"
+      - generic: 可做 1.00K 份
+      - button "焦糖冰沙 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $5.04M" [disabled]:
+        - generic: 升级
+        - generic: $5.04M
+      - generic: 草莓奶昔 Lv 1
+      - generic: 售价 $16.0K · 原料 $23 · 4.0秒 · 售价 $16.0K → $34.8K
+      - img "新鲜水果"
+      - img "牛奶"
+      - img "糖"
+      - generic: 可做 2.00K 份
+      - button "草莓奶昔 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $39.2M" [disabled]:
+        - generic: 升级
+        - generic: $39.2M
+      - generic: 皇家奶茶 Lv 1
+      - generic: 售价 $65.0K · 原料 $16 · 4.5秒 · 售价 $65.0K → $141K
+      - img "茶叶"
+      - img "牛奶"
+      - img "奶油奶酪"
+      - generic: 可做 2.00K 份
+      - button "皇家奶茶 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $336M" [disabled]:
+        - generic: 升级
+        - generic: $336M
+      - generic: 抹茶冰淇淋浮乐朵 Lv 1
+      - generic: 售价 $230K · 原料 $107 · 5.5秒 · 售价 $230K → $500K
+      - img "抹茶粉"
+      - generic: ×2
+      - img "牛奶"
+      - img "奶油奶酪"
+      - generic: ×2
+      - img "糖"
+      - generic: 可做 1.00K 份
+      - button "抹茶冰淇淋浮乐朵 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $2.80B" [disabled]:
+        - generic: 升级
+        - generic: $2.80B
+      - heading "面包 15/15" [level=3]:
+        - text: 面包
+        - generic: 15/15
+      - generic: 黄油小餐包 Lv 1
+      - generic: 售价 $8 · 原料 $4 · 0.8秒 · 售价 $8 → $17
+      - img "面粉"
+      - img "黄油"
+      - generic: 食材够做 2.00K 份
+      - button "黄油小餐包 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "10"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $33":
+        - generic: 升级
+        - generic: $33
+      - generic: 芝麻贝果 Lv 1
+      - generic: 售价 $12 · 原料 $2 · 2.8秒 · 售价 $12 → $26
+      - img "面粉"
+      - img "糖"
+      - generic: 食材够做 2.00K 份
+      - button "芝麻贝果 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "4"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $168":
+        - generic: 升级
+        - generic: $168
+      - generic: 法棍 Lv 1
+      - generic: 售价 $30 · 原料 $2 · 1.2秒 · 售价 $30 → $65
+      - img "面粉"
+      - generic: ×2
+      - generic: 食材够做 1.00K 份
+      - button "法棍 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "4"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $1.12K":
+        - generic: 升级
+        - generic: $1.12K
+      - generic: 芝士餐包 Lv 1
+      - generic: 售价 $55 · 原料 $16 · 1.8秒 · 售价 $55 → $119
+      - img "面粉"
+      - img "黄油"
+      - img "奶油奶酪"
+      - generic: 食材够做 2.00K 份
+      - button "芝士餐包 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "4"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $3.58K":
+        - generic: 升级
+        - generic: $3.58K
+      - generic: 碱水结 Lv 1
+      - generic: 售价 $100 · 原料 $10 · 1.2秒 · 售价 $100 → $217
+      - img "面粉"
+      - img "黄油"
+      - img "香料"
+      - generic: 食材够做 2.00K 份
+      - button "碱水结 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "3"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $7.84K":
+        - generic: 升级
+        - generic: $7.84K
+      - generic: 香草佛卡夏 Lv 1
+      - generic: 售价 $200 · 原料 $7 · 1.5秒 · 售价 $200 → $435
+      - img "面粉"
+      - img "香料"
+      - generic: 食材够做 2.00K 份
+      - button "香草佛卡夏 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "3"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $28.0K":
+        - generic: 升级
+        - generic: $28.0K
+      - generic: 恰巴塔 Lv 1
+      - generic: 售价 $380 · 原料 $2 · 1.5秒 · 售价 $380 → $827
+      - img "面粉"
+      - generic: ×2
+      - generic: 食材够做 1.00K 份
+      - button "恰巴塔 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "3"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $67.2K":
+        - generic: 升级
+        - generic: $67.2K
+      - generic: 葡萄干面包 Lv 1
+      - generic: 售价 $750 · 原料 $23 · 1.2秒 · 售价 $750 → $1.63K
+      - img "面粉"
+      - generic: ×2
+      - img "新鲜水果"
+      - img "糖"
+      - generic: 食材够做 1.00K 份
+      - button "葡萄干面包 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "3"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $201K":
+        - generic: 升级
+        - generic: $201K
+      - generic: 酸种面包 Lv 1
+      - generic: 售价 $1.30K · 原料 $2 · 1.5秒 · 售价 $1.30K → $2.83K
+      - img "面粉"
+      - generic: ×2
+      - generic: 食材够做 1.00K 份
+      - button "酸种面包 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $560K":
+        - generic: 升级
+        - generic: $560K
+      - generic: 黑麦面包 Lv 1
+      - generic: 售价 $4.80K · 原料 $8 · 1.5秒 · 售价 $4.80K → $10.4K
+      - img "面粉"
+      - generic: ×2
+      - img "香料"
+      - generic: 食材够做 1.00K 份
+      - button "黑麦面包 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $4.48M" [disabled]:
+        - generic: 升级
+        - generic: $4.48M
+      - generic: 巧克力牛奶面包 Lv 1
+      - generic: 售价 $9.00K · 原料 $16 · 2.0秒 · 售价 $9.00K → $19.6K
+      - img "面粉"
+      - img "牛奶"
+      - img "黄油"
+      - img "可可粉"
+      - generic: 食材够做 2.00K 份
+      - button "巧克力牛奶面包 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $13.4M" [disabled]:
+        - generic: 升级
+        - generic: $13.4M
+      - generic: 生吐司 Lv 1
+      - generic: 售价 $17.0K · 原料 $7 · 1.5秒 · 售价 $17.0K → $37.0K
+      - img "面粉"
+      - img "牛奶"
+      - img "黄油"
+      - img "糖"
+      - generic: 食材够做 2.00K 份
+      - button "生吐司 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $42.5M" [disabled]:
+        - generic: 升级
+        - generic: $42.5M
+      - generic: 布里欧修 Lv 1
+      - generic: 售价 $66.0K · 原料 $8 · 1.5秒 · 售价 $66.0K → $143K
+      - img "面粉"
+      - img "黄油"
+      - img "鸡蛋"
+      - img "糖"
+      - generic: 食材够做 2.00K 份
+      - button "布里欧修 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $358M" [disabled]:
+        - generic: 升级
+        - generic: $358M
+      - generic: 果干奶油辫子包 Lv 1
+      - generic: 售价 $125K · 原料 $51 · 2.2秒 · 售价 $125K → $272K
+      - img "面粉"
+      - img "黄油"
+      - generic: ×2
+      - img "鸡蛋"
+      - img "新鲜水果"
+      - generic: ×2
+      - img "糖"
+      - generic: 食材够做 1.00K 份
+      - button "果干奶油辫子包 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $1.00B" [disabled]:
+        - generic: 升级
+        - generic: $1.00B
+      - generic: 芝士蒜香面包 Lv 1
+      - generic: 售价 $230K · 原料 $22 · 2.5秒 · 售价 $230K → $500K
+      - img "面粉"
+      - img "黄油"
+      - img "奶油奶酪"
+      - img "香料"
+      - generic: 食材够做 2.00K 份
+      - button "芝士蒜香面包 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $2.91B" [disabled]:
+        - generic: 升级
+        - generic: $2.91B
+      - heading "甜点与蛋糕 15/15" [level=3]:
+        - text: 甜点与蛋糕
+        - generic: 15/15
+      - generic: 糖霜甜甜圈 Lv 1
+      - generic: 售价 $20 · 原料 $5 · 4.5秒 · 售价 $20 → $43
+      - img "面粉"
+      - img "糖"
+      - img "鸡蛋"
+      - generic: 食材够做 2.00K 份
+      - button "糖霜甜甜圈 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "10"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $336":
+        - generic: 升级
+        - generic: $336
+      - generic: 葡萄干司康 Lv 1
+      - generic: 售价 $32 · 原料 $16 · 1.2秒 · 售价 $32 → $69
+      - img "面粉"
+      - img "黄油"
+      - img "奶油奶酪"
+      - generic: 食材够做 2.00K 份
+      - button "葡萄干司康 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $1.23K":
+        - generic: 升级
+        - generic: $1.23K
+      - generic: 巧克力曲奇 Lv 1
+      - generic: 售价 $60 · 原料 $15 · 0.8秒 · 售价 $60 → $130
+      - img "面粉"
+      - img "黄油"
+      - img "糖"
+      - img "可可粉"
+      - generic: 食材够做 2.00K 份
+      - button "巧克力曲奇 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $3.92K":
+        - generic: 升级
+        - generic: $3.92K
+      - generic: 可颂 Lv 1
+      - generic: 售价 $110 · 原料 $7 · 1.5秒 · 售价 $110 → $239
+      - img "面粉"
+      - img "黄油"
+      - generic: ×2
+      - generic: 食材够做 1.00K 份
+      - button "可颂 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $10.0K":
+        - generic: 升级
+        - generic: $10.0K
+      - generic: 巧克力可颂 Lv 1
+      - generic: 售价 $180 · 原料 $14 · 1.5秒 · 售价 $180 → $391
+      - img "面粉"
+      - img "黄油"
+      - img "可可粉"
+      - generic: 食材够做 2.00K 份
+      - button "巧克力可颂 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $22.4K":
+        - generic: 升级
+        - generic: $22.4K
+      - generic: 浓巧布朗尼 Lv 1
+      - generic: 售价 $260 · 原料 $28 · 1.2秒 · 售价 $260 → $566
+      - img "面粉"
+      - img "黄油"
+      - img "鸡蛋"
+      - img "糖"
+      - img "可可粉"
+      - generic: ×2
+      - generic: 食材够做 1.00K 份
+      - button "浓巧布朗尼 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $42.5K":
+        - generic: 升级
+        - generic: $42.5K
+      - generic: 肉桂卷 Lv 1
+      - generic: 售价 $420 · 原料 $11 · 1.5秒 · 售价 $420 → $914
+      - img "面粉"
+      - img "黄油"
+      - img "糖"
+      - img "香料"
+      - generic: 食材够做 2.00K 份
+      - button "肉桂卷 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $84.0K":
+        - generic: 升级
+        - generic: $84.0K
+      - generic: 蓝莓玛芬 Lv 1
+      - generic: 售价 $750 · 原料 $25 · 1.2秒 · 售价 $750 → $1.63K
+      - img "面粉"
+      - img "鸡蛋"
+      - img "糖"
+      - img "新鲜水果"
+      - generic: 食材够做 2.00K 份
+      - button "蓝莓玛芬 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $224K":
+        - generic: 升级
+        - generic: $224K
+      - generic: 香草奶油泡芙 Lv 1
+      - generic: 售价 $1.05K · 原料 $34 · 2.5秒 · 售价 $1.05K → $2.28K
+      - img "面粉"
+      - img "黄油"
+      - img "鸡蛋"
+      - generic: ×2
+      - img "奶油奶酪"
+      - generic: ×2
+      - generic: 食材够做 1.00K 份
+      - button "香草奶油泡芙 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $369K":
+        - generic: 升级
+        - generic: $369K
+      - generic: 菠萝包 Lv 1
+      - generic: 售价 $1.50K · 原料 $8 · 1.2秒 · 售价 $1.50K → $3.26K
+      - img "面粉"
+      - img "黄油"
+      - img "鸡蛋"
+      - img "糖"
+      - generic: 食材够做 2.00K 份
+      - button "菠萝包 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "2"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $672K":
+        - generic: 升级
+        - generic: $672K
+      - generic: 葡式蛋挞 Lv 1
+      - generic: 售价 $5.20K · 原料 $20 · 1.5秒 · 售价 $5.20K → $11.3K
+      - img "面粉"
+      - img "鸡蛋"
+      - generic: ×2
+      - img "奶油奶酪"
+      - img "糖"
+      - generic: 食材够做 1.00K 份
+      - button "葡式蛋挞 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "1"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $5.60M" [disabled]:
+        - generic: 升级
+        - generic: $5.60M
+      - generic: 草莓蛋糕 Lv 1
+      - generic: 售价 $18.0K · 原料 $36 · 2.0秒 · 售价 $18.0K → $39.2K
+      - img "面粉"
+      - img "鸡蛋"
+      - img "奶油奶酪"
+      - img "新鲜水果"
+      - generic: 食材够做 2.00K 份
+      - button "草莓蛋糕 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "1"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $44.8M" [disabled]:
+        - generic: 升级
+        - generic: $44.8M
+      - generic: 草莓瑞士卷 Lv 1
+      - generic: 售价 $36.0K · 原料 $52 · 2.5秒 · 售价 $36.0K → $78.4K
+      - img "面粉"
+      - img "鸡蛋"
+      - generic: ×2
+      - img "奶油奶酪"
+      - generic: ×2
+      - img "新鲜水果"
+      - img "糖"
+      - generic: 食材够做 1.00K 份
+      - button "草莓瑞士卷 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "1"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $134M" [disabled]:
+        - generic: 升级
+        - generic: $134M
+      - generic: 芝士蛋糕 Lv 1
+      - generic: 售价 $72.0K · 原料 $29 · 2.0秒 · 售价 $72.0K → $156K
+      - img "奶油奶酪"
+      - generic: ×2
+      - img "鸡蛋"
+      - img "糖"
+      - img "面粉"
+      - generic: 食材够做 1.00K 份
+      - button "芝士蛋糕 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "1"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $425M" [disabled]:
+        - generic: 升级
+        - generic: $425M
+      - generic: 马卡龙 Lv 1
+      - generic: 售价 $260K · 原料 $25 · 1.5秒 · 售价 $260K → $566K
+      - img "鸡蛋"
+      - img "糖"
+      - generic: ×2
+      - img "新鲜水果"
+      - generic: 食材够做 1.00K 份
+      - button "马卡龙 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic: 烘焙
+      - button "−5": −
+      - generic: "1"
+      - button "+5": +
+      - generic: 建议晨烤 1 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "在售"
+      - button "升级 $3.58B" [disabled]:
+        - generic: 升级
+        - generic: $3.58B
+  - dialog "准备菜单 · 第 19 天":
+    - heading "准备菜单 · 第 19 天" [level=2]
+    - paragraph: 勾选的餐品会列入今日菜单。至少选一种，就能开始营业。
+    - paragraph: 晨烤数量会在开店时变成货架库存。营业中厨师会继续补货；收店时卖剩的烘焙品会报废，未使用的原料可以留到明天。
+    - checkbox "浓缩咖啡 库存可做 2.00K 份 现点现做 · 每杯消耗：咖啡豆 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 浓缩咖啡
+    - generic: 库存可做 2.00K 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "美式咖啡 库存可做 2.00K 份 现点现做 · 每杯消耗：咖啡豆 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 美式咖啡
+    - generic: 库存可做 2.00K 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "拿铁 库存可做 1.99K 份 现点现做 · 每杯消耗：咖啡豆 ×1、牛奶 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 拿铁
+    - generic: 库存可做 1.99K 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×1、牛奶 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "卡布奇诺 库存可做 1.99K 份 现点现做 · 每杯消耗：咖啡豆 ×1、牛奶 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 卡布奇诺
+    - generic: 库存可做 1.99K 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×1、牛奶 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "澳白 库存可做 1.00K 份 现点现做 · 每杯消耗：咖啡豆 ×2、牛奶 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 澳白
+    - generic: 库存可做 1.00K 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×2、牛奶 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "科尔塔多 库存可做 1.99K 份 现点现做 · 每杯消耗：咖啡豆 ×1、牛奶 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 科尔塔多
+    - generic: 库存可做 1.99K 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×1、牛奶 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "摩卡 库存可做 1.99K 份 现点现做 · 每杯消耗：咖啡豆 ×1、牛奶 ×1、可可粉 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 摩卡
+    - generic: 库存可做 1.99K 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×1、牛奶 ×1、可可粉 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "维也纳咖啡 库存可做 991 份 现点现做 · 每杯消耗：咖啡豆 ×1、奶油奶酪 ×2、可可粉 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 维也纳咖啡
+    - generic: 库存可做 991 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×1、奶油奶酪 ×2、可可粉 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "焦糖玛奇朵 库存可做 1.96K 份 现点现做 · 每杯消耗：咖啡豆 ×1、牛奶 ×1、糖 ×1、奶油奶酪 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 焦糖玛奇朵
+    - generic: 库存可做 1.96K 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×1、牛奶 ×1、糖 ×1、奶油奶酪 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "冷萃咖啡 库存可做 1.00K 份 现点现做 · 每杯消耗：咖啡豆 ×2、糖 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 冷萃咖啡
+    - generic: 库存可做 1.00K 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×2、糖 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "脏咖啡 库存可做 998 份 现点现做 · 每杯消耗：咖啡豆 ×2、牛奶 ×2 味道 4.0 · 标准配方" [checked]
+    - generic: 脏咖啡
+    - generic: 库存可做 998 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×2、牛奶 ×2
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "精品手冲 库存可做 1.00K 份 现点现做 · 每杯消耗：咖啡豆 ×2 味道 4.0 · 标准配方" [checked]
+    - generic: 精品手冲
+    - generic: 库存可做 1.00K 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×2
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "海盐奶盖咖啡 库存可做 991 份 现点现做 · 每杯消耗：咖啡豆 ×2、奶油奶酪 ×2、糖 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 海盐奶盖咖啡
+    - generic: 库存可做 991 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×2、奶油奶酪 ×2、糖 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "阿芙佳朵 库存可做 1.96K 份 现点现做 · 每杯消耗：咖啡豆 ×1、奶油奶酪 ×1、糖 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 阿芙佳朵
+    - generic: 库存可做 1.96K 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×1、奶油奶酪 ×1、糖 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "伯爵红茶 库存可做 2.00K 份 现点现做 · 每杯消耗：茶叶 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 伯爵红茶
+    - generic: 库存可做 2.00K 份
+    - generic: 现点现做 · 每杯消耗：茶叶 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "热巧克力 库存可做 1.96K 份 现点现做 · 每杯消耗：可可粉 ×1、牛奶 ×1、糖 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 热巧克力
+    - generic: 库存可做 1.96K 份
+    - generic: 现点现做 · 每杯消耗：可可粉 ×1、牛奶 ×1、糖 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "柠檬红茶 库存可做 1.96K 份 现点现做 · 每杯消耗：茶叶 ×1、新鲜水果 ×1、糖 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 柠檬红茶
+    - generic: 库存可做 1.96K 份
+    - generic: 现点现做 · 每杯消耗：茶叶 ×1、新鲜水果 ×1、糖 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "香料奶茶 库存可做 1.98K 份 现点现做 · 每杯消耗：茶叶 ×1、牛奶 ×1、香料 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 香料奶茶
+    - generic: 库存可做 1.98K 份
+    - generic: 现点现做 · 每杯消耗：茶叶 ×1、牛奶 ×1、香料 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "缤纷水果茶 库存可做 994 份 现点现做 · 每杯消耗：茶叶 ×1、新鲜水果 ×2、糖 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 缤纷水果茶
+    - generic: 库存可做 994 份
+    - generic: 现点现做 · 每杯消耗：茶叶 ×1、新鲜水果 ×2、糖 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "焙茶拿铁 库存可做 1.00K 份 现点现做 · 每杯消耗：茶叶 ×2、牛奶 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 焙茶拿铁
+    - generic: 库存可做 1.00K 份
+    - generic: 现点现做 · 每杯消耗：茶叶 ×2、牛奶 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "抹茶拿铁 库存可做 1.99K 份 现点现做 · 每杯消耗：抹茶粉 ×1、牛奶 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 抹茶拿铁
+    - generic: 库存可做 1.99K 份
+    - generic: 现点现做 · 每杯消耗：抹茶粉 ×1、牛奶 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "焦糖冰沙 库存可做 998 份 现点现做 · 每杯消耗：咖啡豆 ×1、牛奶 ×2、糖 ×1、奶油奶酪 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 焦糖冰沙
+    - generic: 库存可做 998 份
+    - generic: 现点现做 · 每杯消耗：咖啡豆 ×1、牛奶 ×2、糖 ×1、奶油奶酪 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "草莓奶昔 库存可做 1.96K 份 现点现做 · 每杯消耗：新鲜水果 ×1、牛奶 ×1、糖 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 草莓奶昔
+    - generic: 库存可做 1.96K 份
+    - generic: 现点现做 · 每杯消耗：新鲜水果 ×1、牛奶 ×1、糖 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "皇家奶茶 库存可做 1.98K 份 现点现做 · 每杯消耗：茶叶 ×1、牛奶 ×1、奶油奶酪 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 皇家奶茶
+    - generic: 库存可做 1.98K 份
+    - generic: 现点现做 · 每杯消耗：茶叶 ×1、牛奶 ×1、奶油奶酪 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "抹茶冰淇淋浮乐朵 库存可做 991 份 现点现做 · 每杯消耗：抹茶粉 ×2、牛奶 ×1、奶油奶酪 ×2、糖 ×1 味道 4.0 · 标准配方" [checked]
+    - generic: 抹茶冰淇淋浮乐朵
+    - generic: 库存可做 991 份
+    - generic: 现点现做 · 每杯消耗：抹茶粉 ×2、牛奶 ×1、奶油奶酪 ×2、糖 ×1
+    - generic: 味道 4.0 · 标准配方
+    - checkbox "黄油小餐包 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 黄油小餐包
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "黄油小餐包 −5": −5
+    - spinbutton "黄油小餐包 · 烘焙"
+    - button "黄油小餐包 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "芝麻贝果 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 芝麻贝果
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "芝麻贝果 −5": −5
+    - spinbutton "芝麻贝果 · 烘焙"
+    - button "芝麻贝果 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "法棍 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 法棍
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "法棍 −5": −5
+    - spinbutton "法棍 · 烘焙"
+    - button "法棍 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "芝士餐包 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 芝士餐包
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "芝士餐包 −5": −5
+    - spinbutton "芝士餐包 · 烘焙"
+    - button "芝士餐包 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "碱水结 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 碱水结
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "碱水结 −5": −5
+    - spinbutton "碱水结 · 烘焙"
+    - button "碱水结 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "香草佛卡夏 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 香草佛卡夏
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "香草佛卡夏 −5": −5
+    - spinbutton "香草佛卡夏 · 烘焙"
+    - button "香草佛卡夏 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "恰巴塔 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 恰巴塔
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "恰巴塔 −5": −5
+    - spinbutton "恰巴塔 · 烘焙"
+    - button "恰巴塔 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "葡萄干面包 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 葡萄干面包
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "葡萄干面包 −5": −5
+    - spinbutton "葡萄干面包 · 烘焙"
+    - button "葡萄干面包 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "酸种面包 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 酸种面包
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "酸种面包 −5": −5
+    - spinbutton "酸种面包 · 烘焙"
+    - button "酸种面包 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "黑麦面包 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 黑麦面包
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "黑麦面包 −5": −5
+    - spinbutton "黑麦面包 · 烘焙"
+    - button "黑麦面包 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "巧克力牛奶面包 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 巧克力牛奶面包
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "巧克力牛奶面包 −5": −5
+    - spinbutton "巧克力牛奶面包 · 烘焙"
+    - button "巧克力牛奶面包 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "生吐司 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 生吐司
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "生吐司 −5": −5
+    - spinbutton "生吐司 · 烘焙"
+    - button "生吐司 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "布里欧修 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 布里欧修
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "布里欧修 −5": −5
+    - spinbutton "布里欧修 · 烘焙"
+    - button "布里欧修 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "果干奶油辫子包 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 果干奶油辫子包
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "果干奶油辫子包 −5": −5
+    - spinbutton "果干奶油辫子包 · 烘焙"
+    - button "果干奶油辫子包 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "芝士蒜香面包 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 芝士蒜香面包
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "芝士蒜香面包 −5": −5
+    - spinbutton "芝士蒜香面包 · 烘焙"
+    - button "芝士蒜香面包 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "糖霜甜甜圈 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 糖霜甜甜圈
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "糖霜甜甜圈 −5": −5
+    - spinbutton "糖霜甜甜圈 · 烘焙"
+    - button "糖霜甜甜圈 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "葡萄干司康 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 葡萄干司康
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "葡萄干司康 −5": −5
+    - spinbutton "葡萄干司康 · 烘焙"
+    - button "葡萄干司康 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "巧克力曲奇 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 巧克力曲奇
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "巧克力曲奇 −5": −5
+    - spinbutton "巧克力曲奇 · 烘焙"
+    - button "巧克力曲奇 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "可颂 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 可颂
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "可颂 −5": −5
+    - spinbutton "可颂 · 烘焙"
+    - button "可颂 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "巧克力可颂 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 巧克力可颂
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "巧克力可颂 −5": −5
+    - spinbutton "巧克力可颂 · 烘焙"
+    - button "巧克力可颂 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "浓巧布朗尼 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 浓巧布朗尼
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "浓巧布朗尼 −5": −5
+    - spinbutton "浓巧布朗尼 · 烘焙"
+    - button "浓巧布朗尼 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "肉桂卷 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 肉桂卷
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "肉桂卷 −5": −5
+    - spinbutton "肉桂卷 · 烘焙"
+    - button "肉桂卷 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "蓝莓玛芬 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 蓝莓玛芬
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "蓝莓玛芬 −5": −5
+    - spinbutton "蓝莓玛芬 · 烘焙"
+    - button "蓝莓玛芬 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "香草奶油泡芙 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 香草奶油泡芙
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "香草奶油泡芙 −5": −5
+    - spinbutton "香草奶油泡芙 · 烘焙"
+    - button "香草奶油泡芙 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "菠萝包 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 菠萝包
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "菠萝包 −5": −5
+    - spinbutton "菠萝包 · 烘焙"
+    - button "菠萝包 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "葡式蛋挞 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 葡式蛋挞
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "葡式蛋挞 −5": −5
+    - spinbutton "葡式蛋挞 · 烘焙"
+    - button "葡式蛋挞 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "草莓蛋糕 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 草莓蛋糕
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "草莓蛋糕 −5": −5
+    - spinbutton "草莓蛋糕 · 烘焙"
+    - button "草莓蛋糕 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "草莓瑞士卷 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 草莓瑞士卷
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "草莓瑞士卷 −5": −5
+    - spinbutton "草莓瑞士卷 · 烘焙"
+    - button "草莓瑞士卷 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "芝士蛋糕 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked]
+    - generic: 芝士蛋糕
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "芝士蛋糕 −5": −5
+    - spinbutton "芝士蛋糕 · 烘焙"
+    - button "芝士蛋糕 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - checkbox "马卡龙 3 分钟游戏时间预计售出 1 份 味道 4.0 · 标准配方" [checked] [active]
+    - generic: 马卡龙
+    - generic: 3 分钟游戏时间预计售出 1 份
+    - generic: 味道 4.0 · 标准配方
+    - button "马卡龙 −5": −5
+    - spinbutton "马卡龙 · 烘焙"
+    - button "马卡龙 +5": "+5"
+    - generic: 建议晨烤 1 份
+    - button "按预计销量设定烘焙量"
+    - button "预测所需原料已备齐 ✓" [disabled]
+    - generic "客流预测与库存说明"
+    - button "开始营业"
+    - button "稍后再说"

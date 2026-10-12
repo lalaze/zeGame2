@@ -18,6 +18,28 @@ export function formatNumber(n: number): string {
 
 export const formatMoney = (n: number) => '$' + formatNumber(n);
 
+/** Transactions keep useful fractional precision; an approximation is never unmarked.
+ * Exact values remain available through the amount-details controls. */
+export function formatTransactionMoney(n: number): string {
+  if (!Number.isFinite(n)) return formatMoney(n);
+  if (Math.abs(n) < 1000 || Number.isInteger(n) && Math.abs(n) < 100000) {
+    const shown = Number(n.toFixed(4));
+    if (n !== 0 && shown === 0) {
+      const tiny = n.toExponential(2).replace('+', '');
+      return `${Number(tiny) === n ? '' : '≈'}$${tiny}`;
+    }
+    return `${shown === n ? '' : '≈'}$${shown}`;
+  }
+  const compact = formatNumber(n);
+  const parts = compact.match(/^(-?[\d.]+)([A-Za-z]*)$/);
+  const tier = parts ? SUFFIXES.indexOf(parts[2]) : -1;
+  const exact = parts && tier >= 0 && Number(parts[1]) * 1000 ** tier === n;
+  return `${exact ? '' : '≈'}$${compact}`;
+}
+
+/** Shortest round-trip representation of the actual amount used by the economy. */
+export const formatExactMoney = (n: number) => '$' + String(n);
+
 /** Ledger values retain cents so partial care consumption is visible. */
 export const formatAccountMoney = (n: number) => Math.abs(n) < 1_000_000 ? '$' + n.toFixed(2) : formatMoney(n);
 

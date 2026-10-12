@@ -8,7 +8,7 @@ import { SPEEDS } from './game/data';
 import { formatOpenTime, openShop, type DayReport } from './game/day';
 import { expectedCustomers, tipMultiplier } from './game/economy';
 import { canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
-import { formatMoney } from './game/format';
+import { formatMoney, formatTransactionMoney } from './game/format';
 import { MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
 import { adjacentArea, isAreaOpen, mainTableCount, regionOffset } from './game/regions';
 import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, furnitureDef } from './game/furniture';
@@ -21,6 +21,7 @@ import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale
 import { CafeView } from './render/cafe-view';
 import { CafeGame } from './render/phaser/game';
 import { character, toDataURL } from './render/sprites';
+import { showMoneyDetails } from './ui/money-details';
 import { closeModal, isModalOpen, showModal, toast } from './ui/modal';
 import { showOnboarding, type OnboardingResult } from './ui/onboarding';
 import { Panel, decorName, itemName, type ArrangeRequest } from './ui/panel';
@@ -176,6 +177,7 @@ new ResizeObserver(fitCanvas).observe(stage);
 // ------------------------------------------------------------ UI
 
 const coinsEl = $('coins');
+coinsEl.addEventListener('click', () => showMoneyDetails(state.coins));
 const rateEl = $('rate');
 const hint = $('hint');
 const panelRoot = $('management-panel');
@@ -791,7 +793,8 @@ function frame(dt: number): void {
   sceneWrap.classList.toggle('is-overview', scene.overview);
   arrangeFocus.update(!!arrange, !scene.panning && !scene.overview && !scene.paused);
 
-  const coins = formatMoney(state.coins);
+  const coins = formatTransactionMoney(state.coins);
+  coinsEl.setAttribute('aria-label', t('money.balanceDetails', { money: coins }));
   if (coins !== shownCoins) coinsEl.textContent = shownCoins = coins;
   uiTimer -= dt;
   if (uiTimer <= 0) {

@@ -1,0 +1,46 @@
+[
+  {
+    "size": "360,720",
+    "document": {
+      "scrollWidth": 360,
+      "width": 360
+    },
+    "dialog": {
+      "scrollWidth": 320,
+      "width": 320
+    }
+  },
+  {
+    "size": "390,720",
+    "document": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "dialog": {
+      "scrollWidth": 350,
+      "width": 350
+    }
+  },
+  {
+    "size": "430,720",
+    "document": {
+      "scrollWidth": 430,
+      "width": 430
+    },
+    "dialog": {
+      "scrollWidth": 380,
+      "width": 380
+    }
+  },
+  {
+    "size": "720,390",
+    "document": {
+      "scrollWidth": 720,
+      "width": 720
+    },
+    "dialog": {
+      "scrollWidth": 380,
+      "width": 380
+    }
+  }
+]

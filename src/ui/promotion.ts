@@ -1,5 +1,5 @@
 import { arrivalRate, baseArrivalRate, menuItems, serviceCapacity, servingsLeft } from '../game/economy';
-import { formatAccountMoney, formatDuration, formatMoney } from '../game/format';
+import { formatAccountMoney, formatDuration, formatTransactionMoney as formatMoney } from '../game/format';
 import { PROMOTION_PLANS, bookPromotion, promotionPlan, togglePromotion } from '../game/promotion';
 import type { GameState } from '../game/state';
 import { t } from '../i18n';

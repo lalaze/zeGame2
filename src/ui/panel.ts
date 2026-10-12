@@ -1,6 +1,7 @@
 import { readPanelScroll, restorePanelScroll } from './panel-scroll';
+import { showMoneyDetails } from './money-details';
 import { PromotionPanel } from './promotion';
-import { PetPanel } from './pets';
+import { PetPanel, createPetBrowsingState, type PetBrowsingState } from './pets';
 import type { LivingCatControls } from './living-cats';
 import {
   BAKE_STEP,
@@ -54,7 +55,7 @@ import {
   upgradeDef,
   type BuyAmount,
 } from '../game/economy';
-import { formatMoney, formatNumber } from '../game/format';
+import { formatTransactionMoney as formatMoney, formatNumber } from '../game/format';
 import { GOALS, claimGoal, currentGoal, goalDone } from '../game/goals';
 import type { GameState } from '../game/state';
 import { mainTableCount } from '../game/regions';
@@ -79,6 +80,7 @@ interface RowRefs {
   btn: HTMLButtonElement;
   btnLabel: HTMLElement;
   btnCost: HTMLElement;
+  moneyDetails: HTMLButtonElement;
   toggle: HTMLButtonElement | null;
   recipe: HTMLElement | null;
   bake: HTMLElement | null;
@@ -148,6 +150,8 @@ export class Panel {
   private introMode = false;
   private promotionPanel: PromotionPanel | null = null;
   private petPanel: PetPanel | null = null;
+  // Keep browsing choices across DOM rebuilds without adding them to GameState.
+  private petBrowsing: PetBrowsingState | null = null;
   private amount: BuyAmount = 1;
   private pantryAmount: number = PANTRY_AMOUNTS[0];
   private category: Category | 'all' = 'all';
@@ -478,7 +482,13 @@ export class Panel {
       return;
     }
     if (this.tab === 'pets') {
-      this.petPanel = new PetPanel(this.list, this.state, (id) => { this.onPurchase('pet', id); this.update(); }, this.livingCats);
+      this.petBrowsing ??= createPetBrowsingState(this.state);
+      this.petPanel = new PetPanel(this.list, this.state, (id) => {
+        const focused = this.focusedControl();
+        this.onPurchase('pet', id);
+        this.update();
+        this.restoreVisibleFocus(focused);
+      }, this.livingCats, this.petBrowsing);
       return;
     }
     if (this.tab === 'decor') {
@@ -544,6 +554,7 @@ export class Panel {
         <div class="info">
           <div class="name">${name} <span class="lv"></span></div>
           <div class="sub"></div>
+          <button type="button" class="money-details" data-price-details="${kind}:${id}" aria-haspopup="dialog"></button>
           ${recipeHtml}
           ${isItem ? `<button class="taste-chip" data-taste="${id}" aria-haspopup="dialog"><span class="taste-label"></span><small class="taste-progress"></small></button>` : ''}
           ${
@@ -572,6 +583,7 @@ export class Panel {
         btn: el.querySelector('button[data-buy]')!,
         btnLabel: el.querySelector('.label')!,
         btnCost: el.querySelector('.cost')!,
+        moneyDetails: el.querySelector('[data-price-details]')!,
         toggle: el.querySelector('button[data-menu]'),
         recipe: el.querySelector('.recipe .left'),
         bake: el.querySelector('.bake'),
@@ -783,6 +795,7 @@ export class Panel {
         }
         refs.btnLabel.textContent = level === 0 ? t('btn.unlock') : q.count > 1 ? `+${q.count}` : t('btn.levelUp');
         refs.btnCost.textContent = formatMoney(q.cost);
+        this.updateMoneyDetails(refs, q.cost);
         refs.btn.title = t('row.after', { before: formatMoney(itemPrice(def, level) * tipMultiplier(s)), after: formatMoney(itemPrice(def, level + q.count) * tipMultiplier(s)) });
         refs.btn.disabled = !q.affordable;
         refs.el.classList.toggle('new', level === 0);
@@ -843,6 +856,7 @@ export class Panel {
         refs.sub.textContent = `${upgradeDesc(def.id)} · ${upgradeEffect(s, def.id)}${maxed ? '' : ` → ${upgradeEffect(after, def.id)}`}`;
         refs.btnLabel.textContent = maxed ? t('btn.maxed') : q.count > 1 ? `+${q.count}` : t('btn.buy');
         refs.btnCost.textContent = maxed ? '' : formatMoney(q.cost);
+        this.updateMoneyDetails(refs, q.cost, maxed);
         refs.btn.disabled = maxed || !q.affordable;
       }
     }
@@ -877,7 +891,24 @@ export class Panel {
       refs.el.classList.toggle('low', need > 0 && stock < need);
       refs.btnLabel.textContent = t('pantry.buy', { n: this.ingredientAmount });
       refs.btnCost.textContent = formatMoney(cost);
+      this.updateMoneyDetails(refs, cost);
       refs.btn.disabled = cost > s.coins;
     }
+  }
+
+  private updateMoneyDetails(refs: RowRefs, cost: number, hidden = false): void {
+    refs.moneyDetails.hidden = hidden;
+    refs.moneyDetails.textContent = cost > this.state.coins
+      ? t('money.short', { money: formatMoney(cost - this.state.coins) })
+      : t('money.details');
+    refs.moneyDetails.onclick = () => {
+      // Max can change between the throttled UI refresh and this click as sales arrive.
+      // Use the same live quote that the purchase handler would use now.
+      const [kind, id] = refs.btn.dataset.buy!.split(':');
+      const currentCost = kind === 'item' ? quoteItem(this.state, id as ItemId, this.buyAmount).cost
+        : kind === 'upgrade' ? quoteUpgrade(this.state, id as UpgradeId, this.buyAmount).cost
+        : ingredientDef(id as IngredientId).cost * this.ingredientAmount;
+      showMoneyDetails(this.state.coins, currentCost);
+    };
   }
 }

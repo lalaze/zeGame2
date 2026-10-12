@@ -1,0 +1,130 @@
+[
+  {
+    "at": "2026-10-12T08:07:32.919Z",
+    "note": "Fresh independent origin 127.0.0.1:5220; new cafe, no save/cash injection; choose English."
+  },
+  {
+    "at": "2026-10-12T08:08:41.231Z",
+    "note": "Normal setup completed: Full QA Fresh / QA Owner, customized skin3 hairstyle3 hair4 apron6 Mint Fresh."
+  },
+  {
+    "at": "2026-10-12T08:09:49.579Z",
+    "note": "Starter pantry inspected; $0 purchase disabled. Empty menu blocks Start and explains recovery; restore Espresso and expand forecast. Opened day1 normally at 1x."
+  },
+  {
+    "at": "2026-10-12T08:10:33.891Z",
+    "note": "During service clicked scene and Space for optional help. Service status opens/closes. All tools expanded."
+  },
+  {
+    "at": "2026-10-12T08:11:16.269Z",
+    "note": "Natural Mina encounter unlocked chapter1. Read later preserved Unread, Finished reading marks Read. Modal HUD remained Open0:26 across reading actions."
+  },
+  {
+    "at": "2026-10-12T08:12:08.796Z",
+    "note": "Day1 normal 1x close drained accepted orders; settlement 12 served, $36 revenue, $12 ingredients, +$24 profit, no recorded losses."
+  },
+  {
+    "at": "2026-10-12T08:13:57.119Z",
+    "note": "Claimed first reward30 and Lv5 reward40; bought10beans; day2 opened normally. Upgrade labels truncate exact costs; $66 displayed→$57 after button $8 (actual8.96), confirmed separately from source."
+  },
+  {
+    "at": "2026-10-12T08:14:30.908Z",
+    "note": "Day2 speed2x then4x visibly accelerates. Live menu toggle disabled; Americano unlock permitted during service. Reloaded live service to verify persistence."
+  },
+  {
+    "at": "2026-10-12T08:14:44.343Z",
+    "note": "Native Ctrl+T switched away from running5220 for background pause check."
+  },
+  {
+    "at": "2026-10-12T08:16:28.674Z",
+    "note": "Natural stockout at day2 4:07,0beans. Missing ingredients dialog named Espresso/Coffee Beans and Pantry. Forecast restock purchased through UI; extra staff does not fix stock warning."
+  },
+  {
+    "at": "2026-10-12T08:17:20.047Z",
+    "note": "Second same-origin tab blocked with close-other-tab message. Closed original tab; second continued with latest day3 $1.01K,78totalEspresso handoffs. Closing request had already completed by refresh, so not proof of mid-closing restore."
+  },
+  {
+    "at": "2026-10-12T08:19:31.827Z",
+    "note": "Normal earnings financed kitchen800 and ButterRoll30. Native key entry23→Tab→+5=28; negative−5→0; forecast reset5; bought6beans27flour27butter $114, startedday3 bakery. Browser locator fill23 failed to commit but real keys pass (automation-method limitation, not labeled bug)."
+  },
+  {
+    "at": "2026-10-12T08:20:33.605Z",
+    "note": "Bakery closing→Settle now warning displayed correct consumed-cost/1star consequence. Chose Continue finishing orders, then reload while production/drain expected."
+  },
+  {
+    "at": "2026-10-12T08:20:58.584Z",
+    "note": "Closing reload visibly resumed Day3 Closing. Natural drain final:11served,198.33revenue,67cost,131.33profit;8stale worth32ingredients."
+  },
+  {
+    "at": "2026-10-12T08:22:07.496Z",
+    "note": "Advanced UI testing starts separate origin5221 funded-start: synthetic1M money only, purchases use normalUI. Natural5220 remains intact Day4."
+  },
+  {
+    "at": "2026-10-12T08:23:40.091Z",
+    "note": "12cat catalog detail headings checked; adoptedGinger/Calico/MaineCoon; fourthTuxedo disabled3/3; Longhairs3correct; Ginger auto-refilloff, MaineCoon9carepurchases hits30min cap; Find/Pet controls exercised."
+  },
+  {
+    "at": "2026-10-12T08:28:28.692Z",
+    "note": "Funded:all3rooms bought through correct doors;map-mainclick; kitchenstage1→2→3; table1 purchased. Furniture:succulent illegalaisle rejected,validfloorplaced comfort2,moved,stored comfort0;wallposter floor rejected andwallplaced."
+  },
+  {
+    "at": "2026-10-12T08:30:47.183Z",
+    "note": "Cats Mycats→Pantry→Cats resets Choose-a-cat confirmed actualUI, losing browsing subview but residents unchanged (P3)."
+  },
+  {
+    "at": "2026-10-12T08:32:11.480Z",
+    "note": "Funded combined service: Gingerautooff exhausted and slept,traffic40→32;Calicoautoboughtcare;Ginger manualrefill restores40. Douyin60 campaign expired delivered60; bookedXiaohongshu50,closed with5m59left,confirmedSettleNow;ledger includes consumedcare/promo/cancelledreview."
+  },
+  {
+    "at": "2026-10-12T08:35:03.041Z",
+    "note": "Fresh5222 origin mounted WITHOUT fixtureLoad. Normal Chinese onboarding at360x720."
+  },
+  {
+    "at": "2026-10-12T08:38:24.823Z",
+    "note": "Normal Chinese5222 one full1xloop with responsive360→390→430 changes:8served24revenue8cost16profit,claimed30,upgradedEspresso2,bought10beans,reopenedDay2. This is one resized run, not three independent width runs."
+  },
+  {
+    "at": "2026-10-12T08:40:21.476Z",
+    "note": "Legacyv10fixture keptprofile/day5,1234.50;buy10→1224.50;reloadversion13,nofakeRegulars. Insolvencyfixture preparationshowsonebean rescue;doubleclick gives1serving and rescuebuttonremoved, no cashgrant."
+  },
+  {
+    "at": "2026-10-12T08:43:51.642Z",
+    "note": "All60English+60Chinese chapter pages actually opened through journal Next/Back controls at360px; text present; Next onlastdisabled. Englishfullbrowse left48unread unchanged. All-story fixture syntheticfundedSim-derivedprogress, not earned currentUI."
+  },
+  {
+    "at": "2026-10-12T08:46:01.202Z",
+    "note": "All-storyfixture:readMina2 changes48→47;re-read+reload stays47. SignatureEspressoresearch150→taste5.0,ownedresearchdisabled. x10 purchaseLv1→11;Max+38→49 withnonnegativecash."
+  },
+  {
+    "at": "2026-10-12T08:48:25.337Z",
+    "note": "Advancedfixture55checkboxes toggledon throughUI,forecast applied; Chinese prep actual widths360/390/430/720 all documentwidth=scrollwidth;dialog320/350/380/380. Allmenu4xservicebegun."
+  },
+  {
+    "at": "2026-10-12T08:55:13.315Z",
+    "note": "Advanced synthetic all55 menu: resumed normal closing after Settings pause."
+  },
+  {
+    "at": "2026-10-12T08:55:23.865Z",
+    "note": "Stopped disposable 5220 Python HTTP server via Ctrl+C. Reloaded normal-earned Day4 café successfully from cache; cash332, 21 beans, owned kitchen and rolls preserved. Pantry tab responds. This is server-unavailable cache test, not OS network-off test."
+  },
+  {
+    "at": "2026-10-12T08:55:57.242Z",
+    "note": "Advanced fixture all55 menu closed naturally:69 guests, displayed revenue3.00M,cost1296;34 missing-item lost orders,8 unfulfilled additions. Final recipe mastery UI saved to count delivered recipes separately."
+  },
+  {
+    "at": "2026-10-12T08:56:29.147Z",
+    "note": "Price QA isolated fixture66 cash: UI Level up $8 clicked once, HUD becomes57 (not58). Before/after screenshots23/24. Prior natural-earned occurrence corroborated."
+  },
+  {
+    "at": "2026-10-12T08:58:27.485Z",
+    "note": "360x720 synthetic funded café: stored succulent Place enters full scene, click free floor273649 succeeded; stock1->0, placed0->1, comfort48->50. Direct cat sprite clicks attempted twice after Find cat; moving target not conclusively hit, do not mark direct-cat-click pass."
+  },
+  {
+    "at": "2026-10-12T08:58:28.759Z",
+    "note": "Repeated Cats/Mycats->Pantry->Cats: resets catalog again, screenshots26/27."
+  },
+  {
+    "at": "2026-10-12T08:59:47.975Z",
+    "note": "Price QA recaptured after scrolling recipe into view: menu off/on restored, cash66 unchanged, upgrade8 again leads57. Third observed reproduction including natural run."
+  }
+]

@@ -7,7 +7,7 @@ import { canPrepareItem, bakeForForecast, dayDemand, expectedCustomers, isBakery
 import { reputationTraffic } from '../game/reputation';
 import { trafficPercent } from './reputation';
 import { kitchenLoad } from '../game/kitchen';
-import { formatMoney, formatNumber } from '../game/format';
+import { formatTransactionMoney as formatMoney, formatNumber } from '../game/format';
 import type { GameState } from '../game/state';
 import { t } from '../i18n';
 import { tasteLabel } from './taste';

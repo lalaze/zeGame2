@@ -1,0 +1,33 @@
+
+ RUN  v5.0.3 /tmp/tiny-bean-story-review.1ZqsHH
+
+ ✓ src/ui/panel-browsing.test.ts > panel browsing position > keeps a deeply scrolled Furnish list intact when its active tab is selected again 57ms
+ ✓ src/ui/panel-browsing.test.ts > panel browsing position > remembers each tab independently and starts unvisited tabs at the top 113ms
+ ✓ src/ui/panel-browsing.test.ts > panel browsing position > keeps active menu-filter clicks stable but resets an explicit category change 36ms
+ ✓ src/ui/panel-browsing.test.ts > panel browsing position > keeps repeated furnishing filters stable and focuses changed filters without scrolling 29ms
+ ✓ src/ui/panel-browsing.test.ts > panel browsing position > preserves scroll and the purchased control when unlocking rebuilds the en menu 30ms
+ ✓ src/ui/panel-browsing.test.ts > panel browsing position > preserves scroll and the purchased control when unlocking rebuilds the zh menu 14ms
+ ✓ src/ui/panel-browsing.test.ts > panel browsing position > preserves a surviving pantry control when a recipe adds ingredients 12ms
+ ✓ src/ui/panel-browsing.test.ts > panel browsing position > leaves ordinary purchases, quantities and updates on the same DOM and scroll position 13ms
+ ✓ src/ui/panel-browsing.test.ts > panel browsing position > restores the matching action after a locale refresh without changing game data 16ms
+ ✓ src/ui/panel-browsing.test.ts > panel browsing position > uses the active tab as a reachable fallback when the purchased control becomes disabled 18ms
+ ✓ src/ui/panel-browsing.test.ts > panel browsing position > does not focus a hidden or removed action after replacing game state 204ms
+ ✓ src/ui/panel-browsing.test.ts > panel browsing position > keeps guide navigation and explicit goal focus in control after returning to a scrolled tab 47ms
+ ✓ src/ui/panel-browsing.test.ts > mobile panel scroll wrapper > preserves wrapper positions through repeated tabs and returning to previous tabs 30ms
+ ✓ src/ui/panel-browsing.test.ts > mobile panel scroll wrapper > restores a surviving unlock action and wrapper scroll after rebuild 12ms
+ ✓ src/ui/panel-browsing.test.ts > mobile panel scroll wrapper > resets only changed filters and keeps refreshes on the wrapper scroll owner 21ms
+ ✓ src/ui/panel-browsing.test.ts > mobile panel scroll wrapper > continues using the list on desktop even when a wrapper is present 13ms
+ ✓ src/ui/panel-browsing.test.ts > panel accessible selected state > initializes Menu selection and quantity/filter state before the first showTab call 3ms
+ ✓ src/ui/panel-browsing.test.ts > panel accessible selected state > keeps aria-pressed and visual states synchronized after repeated quantity/filter clicks 26ms
+ ✓ src/ui/panel-browsing.test.ts > panel accessible selected state > retains full-view selections when intro mode hides controls and direct navigation reveals them 32ms
+ ✓ src/ui/panel-browsing.test.ts > catalog-relative positions across responsive scroll owners > restores an inactive desktop Menu at its list-relative position on mobile 27ms
+ ✓ src/ui/panel-browsing.test.ts > catalog-relative positions across responsive scroll owners > restores an inactive mobile Menu on desktop without its former header prefix 26ms
+ ✓ src/ui/panel-browsing.test.ts > catalog-relative positions across responsive scroll owners > uses the current header geometry after an inactive tab crosses widths repeatedly 61ms
+ ✓ src/ui/panel-browsing.test.ts > catalog-relative positions across responsive scroll owners > retains the actually clamped catalog position after rebuilding and returning 33ms
+ ✓ src/ui/panel-browsing.test.ts > catalog-relative positions across responsive scroll owners > preserves a header-visible mobile position without a negative desktop scroll 43ms
+ ✓ src/ui/panel-browsing.test.ts > QA reproduces Cats subview reset on refresh without changing saved pet state 35ms
+
+ Test Files  1 passed (1)
+      Tests  25 passed (25)
+   Start at  01:28:25
+   Duration  1.69s (tests 62%, transform 20%, environment 14%, import 4%)

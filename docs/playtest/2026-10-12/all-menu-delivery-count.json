@@ -1,0 +1,239 @@
+{
+  "method": "Count only per-recipe mastery button rows, not duplicate child generic text. Advanced fixture started all taste.served empty.",
+  "totalRecipeRows": 55,
+  "recipesWithDelivery": 46,
+  "deliveredDishPortions": 81,
+  "notDelivered": [
+    "焦糖玛奇朵",
+    "脏咖啡",
+    "香料奶茶",
+    "抹茶拿铁",
+    "草莓奶昔",
+    "芝士餐包",
+    "酸种面包",
+    "肉桂卷",
+    "马卡龙"
+  ],
+  "rows": [
+    {
+      "dish": "浓缩咖啡",
+      "delivered": 4
+    },
+    {
+      "dish": "美式咖啡",
+      "delivered": 2
+    },
+    {
+      "dish": "拿铁",
+      "delivered": 3
+    },
+    {
+      "dish": "卡布奇诺",
+      "delivered": 2
+    },
+    {
+      "dish": "澳白",
+      "delivered": 4
+    },
+    {
+      "dish": "科尔塔多",
+      "delivered": 4
+    },
+    {
+      "dish": "摩卡",
+      "delivered": 1
+    },
+    {
+      "dish": "维也纳咖啡",
+      "delivered": 1
+    },
+    {
+      "dish": "焦糖玛奇朵",
+      "delivered": 0
+    },
+    {
+      "dish": "冷萃咖啡",
+      "delivered": 3
+    },
+    {
+      "dish": "脏咖啡",
+      "delivered": 0
+    },
+    {
+      "dish": "精品手冲",
+      "delivered": 1
+    },
+    {
+      "dish": "海盐奶盖咖啡",
+      "delivered": 3
+    },
+    {
+      "dish": "阿芙佳朵",
+      "delivered": 2
+    },
+    {
+      "dish": "伯爵红茶",
+      "delivered": 7
+    },
+    {
+      "dish": "热巧克力",
+      "delivered": 1
+    },
+    {
+      "dish": "柠檬红茶",
+      "delivered": 2
+    },
+    {
+      "dish": "香料奶茶",
+      "delivered": 0
+    },
+    {
+      "dish": "缤纷水果茶",
+      "delivered": 3
+    },
+    {
+      "dish": "焙茶拿铁",
+      "delivered": 3
+    },
+    {
+      "dish": "抹茶拿铁",
+      "delivered": 0
+    },
+    {
+      "dish": "焦糖冰沙",
+      "delivered": 1
+    },
+    {
+      "dish": "草莓奶昔",
+      "delivered": 0
+    },
+    {
+      "dish": "皇家奶茶",
+      "delivered": 1
+    },
+    {
+      "dish": "抹茶冰淇淋浮乐朵",
+      "delivered": 2
+    },
+    {
+      "dish": "黄油小餐包",
+      "delivered": 2
+    },
+    {
+      "dish": "芝麻贝果",
+      "delivered": 3
+    },
+    {
+      "dish": "法棍",
+      "delivered": 1
+    },
+    {
+      "dish": "芝士餐包",
+      "delivered": 0
+    },
+    {
+      "dish": "碱水结",
+      "delivered": 2
+    },
+    {
+      "dish": "香草佛卡夏",
+      "delivered": 1
+    },
+    {
+      "dish": "恰巴塔",
+      "delivered": 2
+    },
+    {
+      "dish": "葡萄干面包",
+      "delivered": 1
+    },
+    {
+      "dish": "酸种面包",
+      "delivered": 0
+    },
+    {
+      "dish": "黑麦面包",
+      "delivered": 1
+    },
+    {
+      "dish": "巧克力牛奶面包",
+      "delivered": 1
+    },
+    {
+      "dish": "生吐司",
+      "delivered": 1
+    },
+    {
+      "dish": "布里欧修",
+      "delivered": 1
+    },
+    {
+      "dish": "果干奶油辫子包",
+      "delivered": 1
+    },
+    {
+      "dish": "芝士蒜香面包",
+      "delivered": 1
+    },
+    {
+      "dish": "糖霜甜甜圈",
+      "delivered": 1
+    },
+    {
+      "dish": "葡萄干司康",
+      "delivered": 1
+    },
+    {
+      "dish": "巧克力曲奇",
+      "delivered": 1
+    },
+    {
+      "dish": "可颂",
+      "delivered": 1
+    },
+    {
+      "dish": "巧克力可颂",
+      "delivered": 1
+    },
+    {
+      "dish": "浓巧布朗尼",
+      "delivered": 1
+    },
+    {
+      "dish": "肉桂卷",
+      "delivered": 0
+    },
+    {
+      "dish": "蓝莓玛芬",
+      "delivered": 1
+    },
+    {
+      "dish": "香草奶油泡芙",
+      "delivered": 1
+    },
+    {
+      "dish": "菠萝包",
+      "delivered": 1
+    },
+    {
+      "dish": "葡式蛋挞",
+      "delivered": 1
+    },
+    {
+      "dish": "草莓蛋糕",
+      "delivered": 1
+    },
+    {
+      "dish": "草莓瑞士卷",
+      "delivered": 1
+    },
+    {
+      "dish": "芝士蛋糕",
+      "delivered": 1
+    },
+    {
+      "dish": "马卡龙",
+      "delivered": 0
+    }
+  ]
+}

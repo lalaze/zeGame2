@@ -2070,3 +2070,14 @@ html:lang(zh) body {
   .regular-journal-modal { padding: 14px 12px; }
   .regular-profile { padding: 10px; }
 }
+
+/* Precise money is available by touch and keyboard, without widening price buttons. */
+button.coins { display: block; width: 100%; min-height: 32px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.money-details { display: block; max-width: 100%; min-height: 44px; padding: 4px 0; border: 0; background: transparent; color: var(--muted); font-size: 12px; text-align: left; text-decoration: underline; overflow-wrap: anywhere; cursor: pointer; }
+.money-detail-body { overflow-wrap: anywhere; }
+@media (max-width: 860px) {
+  .money { flex: 0 1 136px; min-width: 0; }
+  .money .coins { min-height: 44px; font-size: 19px; overflow-wrap: anywhere; }
+  .money .rate { font-size: 12px; line-height: 1.25; }
+  .row .buy .cost { font-size: 14px; }
+}

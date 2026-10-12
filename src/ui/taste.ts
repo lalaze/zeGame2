@@ -1,7 +1,7 @@
 import { researchBlock, researchSignature, signatureCost, tasteScore, tasteTier, SKILLED_SERVINGS, SIGNATURE_SERVINGS } from '../game/taste';
 import type { ItemId } from '../game/data';
 import type { GameState } from '../game/state';
-import { formatMoney } from '../game/format';
+import { formatTransactionMoney as formatMoney } from '../game/format';
 import { t } from '../i18n';
 import { showModal, toast } from './modal';
 

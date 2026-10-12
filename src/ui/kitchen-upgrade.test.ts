@@ -48,7 +48,7 @@ describe('kitchen expansion upgrade', () => {
     expect(cookRow().querySelector('.lv')!.textContent).toBe('');
     expect(cookRow().textContent).toContain('Open the kitchen first');
     expect(cookRow().textContent).toContain('More floor space and +1 cook');
-    expect(cookRow().textContent).toContain('3 stages; expand for $900, then $9.00K');
+    expect(cookRow().textContent).toContain('3 stages; expand for $900, then $9000');
     expect(buyUpgrade(state, 'cook', 1)).toBe(false);
     expect(state.upgrades.cook).toBe(0);
   });
