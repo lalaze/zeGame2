@@ -1,0 +1,25 @@
+{
+  "controls": {
+    "bottom": 229.890625,
+    "height": 52,
+    "left": 12,
+    "right": 348,
+    "top": 177.890625,
+    "width": 336,
+    "x": 12,
+    "y": 177.890625
+  },
+  "hidden": false,
+  "parent": "app",
+  "rect": {
+    "bottom": 161,
+    "height": 44,
+    "left": 14,
+    "right": 346,
+    "top": 117,
+    "width": 332,
+    "x": 14,
+    "y": 117
+  },
+  "text": "Day 6: 19 fresh breads and pastries are out. We're open!"
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "width": 360,
+    "lang": "en",
+    "port": 5193,
+    "start": "2026-10-12T03:34:41.860Z",
+    "finish": "2026-10-12T03:36:53.956Z",
+    "beforeReload": "$56",
+    "afterReload": "$56"
+  },
+  {
+    "width": 390,
+    "lang": "zh",
+    "port": 5194,
+    "start": "2026-10-12T03:34:48.089Z",
+    "finish": "2026-10-12T03:36:56.491Z",
+    "beforeReload": "$74",
+    "afterReload": "$74"
+  },
+  {
+    "width": 430,
+    "lang": "en",
+    "port": 5195,
+    "start": "2026-10-12T03:34:54.997Z",
+    "finish": "2026-10-12T03:36:59.071Z",
+    "beforeReload": "$59",
+    "afterReload": "$59"
+  },
+  {
+    "width": 360,
+    "lang": "zh",
+    "port": 5196,
+    "start": "2026-10-12T03:35:12.508Z",
+    "finish": "2026-10-12T03:37:01.617Z",
+    "beforeReload": "$47",
+    "afterReload": "$47"
+  },
+  {
+    "width": 390,
+    "lang": "en",
+    "port": 5197,
+    "start": "2026-10-12T03:35:19.033Z",
+    "finish": "2026-10-12T03:37:04.150Z",
+    "beforeReload": "$65",
+    "afterReload": "$65"
+  },
+  {
+    "width": 430,
+    "lang": "zh",
+    "port": 5198,
+    "start": "2026-10-12T03:35:26.926Z",
+    "finish": "2026-10-12T03:37:06.731Z",
+    "beforeReload": "$50",
+    "afterReload": "$50"
+  }
+]

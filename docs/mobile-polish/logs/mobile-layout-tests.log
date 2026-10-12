@@ -1,0 +1,9 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+
+ Test Files  2 passed (2)
+      Tests  8 passed (8)
+   Start at  20:28:43
+   Duration  379ms (environment 72%, transform 15%, import 7%, tests 6%, worker 1%)

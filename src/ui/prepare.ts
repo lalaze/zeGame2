@@ -19,7 +19,40 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
   const body = document.createElement('div');
   body.className = 'prep';
   let receipt = '';
+  let delayedRender: number | null = null;
+  let needsRender = false;
+  const heldPointers = new Set<number>();
+  const scheduleRender = () => {
+    needsRender = true;
+    if (delayedRender !== null) cancelAnimationFrame(delayedRender);
+    delayedRender = null;
+    if (heldPointers.size) return;
+    delayedRender = requestAnimationFrame(() => {
+      delayedRender = null;
+      if (needsRender && body.isConnected) render();
+    });
+  };
+  const releasePointer = (event: PointerEvent | Event) => {
+    if (event.type === 'blur') heldPointers.clear();
+    else heldPointers.delete((event as PointerEvent).pointerId);
+    if (heldPointers.size) return;
+    window.removeEventListener('pointerup', releasePointer, true);
+    window.removeEventListener('pointercancel', releasePointer, true);
+    window.removeEventListener('blur', releasePointer);
+    if (needsRender) scheduleRender();
+  };
+  body.addEventListener('pointerdown', (event) => {
+    heldPointers.add(event.pointerId);
+    window.addEventListener('pointerup', releasePointer, true);
+    window.addEventListener('pointercancel', releasePointer, true);
+    window.addEventListener('blur', releasePointer);
+    if (needsRender) scheduleRender();
+  });
   const render = () => {
+    needsRender = false;
+    if (delayedRender !== null) { cancelAnimationFrame(delayedRender); delayedRender = null; }
+    const scroller = body.closest<HTMLElement>('.modal-body');
+    const scrollTop = scroller?.scrollTop ?? 0;
     const focus = document.activeElement?.getAttribute('data-focus');
     const detailsOpen = body.querySelector<HTMLDetailsElement>('.prep-details')?.open ?? false;
     const demand = dayDemand(state);
@@ -84,15 +117,24 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
       const same = body.querySelector<HTMLElement>(`[data-focus="${focus}"]`);
       const next = same && !same.matches(':disabled') ? same
         : body.querySelector<HTMLElement>('[data-focus="dish-espresso"]:not(:disabled), [data-dish]:not(:disabled)');
-      next?.focus();
+      next?.focus({ preventScroll: true });
     }
+    if (scroller) scroller.scrollTop = scrollTop;
   };
   body.addEventListener('change', (e) => {
     const input = e.target as HTMLInputElement;
     if (input.dataset.dish) setOnMenu(state, input.dataset.dish as ItemId, input.checked);
     else if (input.dataset.amount) setBakePlan(state, input.dataset.amount as ItemId, Number(input.value));
     else return;
-    receipt = ''; onChange(); render();
+    receipt = ''; onChange();
+    // A number field emits change while it is blurring. Replacing it during that
+    // event interrupts native Tab/click focus navigation. Commit now, redraw after
+    // the browser has focused the next control, and preserve that control/scroll.
+    if (input.dataset.amount && document.activeElement !== input) {
+      // A held pointer must keep its original target until pointerup/click.
+      // Release schedules a frame; the normal click can render and cancel it first.
+      scheduleRender();
+    } else render();
   });
   body.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;

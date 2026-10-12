@@ -1,3 +1,4 @@
+import { readPanelScroll, restorePanelScroll } from './panel-scroll';
 import { PromotionPanel } from './promotion';
 import { PetPanel } from './pets';
 import {
@@ -142,6 +143,7 @@ export const decorName = (id: string) => t(`decor.${id}` as MessageKey);
 
 export class Panel {
   private tab: Tab = 'menu';
+  private scrollPositions = new Map<Tab, number>();
   private introMode = false;
   private promotionPanel: PromotionPanel | null = null;
   private petPanel: PetPanel | null = null;
@@ -176,22 +178,24 @@ export class Panel {
       b.addEventListener('click', () => {
         const v = b.dataset.amount!;
         this.amount = v === 'max' ? 'max' : (Number(v) as 1 | 10);
-        root.querySelectorAll('[data-amount]').forEach((o) => o.classList.toggle('active', o === b));
+        this.updateChoices();
         this.update();
       }),
     );
     root.querySelectorAll<HTMLButtonElement>('[data-pantry-amount]').forEach((b) =>
       b.addEventListener('click', () => {
         this.pantryAmount = Number(b.dataset.pantryAmount);
-        root.querySelectorAll('[data-pantry-amount]').forEach((o) => o.classList.toggle('active', o === b));
+        this.updateChoices();
         this.update();
       }),
     );
     root.querySelectorAll<HTMLButtonElement>('[data-cat]').forEach((b) =>
       b.addEventListener('click', () => {
-        this.category = b.dataset.cat as Category | 'all';
-        root.querySelectorAll('[data-cat]').forEach((o) => o.classList.toggle('active', o === b));
-        this.list.scrollTop = 0;
+        const category = b.dataset.cat as Category | 'all';
+        if (category === this.category) return;
+        this.category = category;
+        this.updateChoices();
+        this.scroller.scrollTop = 0;
         this.update();
       }),
     );
@@ -204,6 +208,7 @@ export class Panel {
         this.update();
       }
     });
+    this.updateControls();
   }
 
   /** A temporary first-shift view; saved progress and the full-view choices stay untouched. */
@@ -211,21 +216,34 @@ export class Panel {
     if (this.introMode === enabled) return;
     const focused = this.focusedControl();
     this.introMode = enabled;
-    if (enabled && this.tab !== 'menu' && this.tab !== 'pantry') this.tab = 'menu';
+    const previousTab = this.tab;
+    if (enabled && this.tab !== 'menu' && this.tab !== 'pantry') {
+      this.scrollPositions.set(this.tab, readPanelScroll(this.list, this.scroller));
+      this.tab = 'menu';
+    }
     this.updateControls();
     this.update();
+    if (previousTab !== this.tab) this.restoreTabScroll(this.tab);
     this.restoreVisibleFocus(focused);
   }
 
   showTab(tab: Tab): void {
     const focused = this.focusedControl();
+    const previousTab = this.tab;
+    if (tab !== previousTab) this.scrollPositions.set(previousTab, readPanelScroll(this.list, this.scroller));
     // Direct navigation, including scene shortcuts, must always reach every tool.
     if (tab !== 'menu' && tab !== 'pantry') this.introMode = false;
     this.tab = tab;
     this.updateControls();
-    this.list.scrollTop = 0;
     this.update();
+    if (tab !== previousTab) this.restoreTabScroll(tab);
     this.restoreVisibleFocus(focused);
+  }
+
+  private restoreTabScroll(tab: Tab): void {
+    const position = this.scrollPositions.get(tab);
+    if (position === undefined) this.scroller.scrollTop = 0;
+    else restorePanelScroll(this.list, this.scroller, position);
   }
 
   private updateControls(): void {
@@ -239,6 +257,28 @@ export class Panel {
     this.root.querySelector<HTMLElement>('.buy-amount')!.hidden = this.introMode || tab === 'decor' || tab === 'pantry' || tab === 'pets' || tab === 'promotion';
     this.root.querySelector<HTMLElement>('.pantry-amount')!.hidden = this.introMode || tab !== 'pantry';
     this.root.querySelector<HTMLElement>('.menu-filter')!.hidden = this.introMode || tab !== 'menu';
+    this.updateChoices();
+  }
+
+  private updateChoices(): void {
+    for (const [attribute, value] of [
+      ['data-amount', this.amount],
+      ['data-pantry-amount', this.pantryAmount],
+      ['data-cat', this.category],
+    ] as const) {
+      this.root.querySelectorAll<HTMLButtonElement>(`button[${attribute}]`).forEach((button) => {
+        const active = button.getAttribute(attribute) === String(value);
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+    }
+  }
+
+  /** Mobile keeps the filters and goal in the same scroll area as the catalog. */
+  private get scroller(): HTMLElement {
+    return this.root.classList.contains('mobile-panel')
+      ? this.root.querySelector<HTMLElement>('.panel-scroll') ?? this.list
+      : this.list;
   }
 
   private focusedControl(): HTMLElement | null {
@@ -246,10 +286,24 @@ export class Panel {
     return active instanceof HTMLElement && this.root.contains(active) ? active : null;
   }
 
+  /** Existing action data identifies a control even when an unlock rebuilds its row. */
+  private controlKey(control: HTMLElement): string | null {
+    const action = Object.entries(control.dataset).sort(([a], [b]) => a.localeCompare(b));
+    const pet = control.closest<HTMLElement>('[data-pet]')?.dataset.pet;
+    // Pet care actions repeat per card; its checkbox has no action data of its own.
+    if (!action.length && !(pet && control.matches('input[type="checkbox"]'))) return null;
+    return JSON.stringify([control.tagName, pet, action]);
+  }
+
   private restoreVisibleFocus(previous: HTMLElement | null): void {
-    if (previous && (!this.root.contains(previous) || previous.closest('[hidden]'))) {
-      this.root.querySelector<HTMLButtonElement>(`[data-tab="${this.tab}"]`)?.focus();
-    }
+    if (!previous) return;
+    const available = (control: HTMLElement) => this.root.contains(control) && !control.closest('[hidden]') && !control.matches(':disabled');
+    if (available(previous)) return;
+    const key = this.controlKey(previous);
+    const replacement = key && Array.from(this.root.querySelectorAll<HTMLElement>('button, input, select, textarea'))
+      .find((control) => this.controlKey(control) === key && available(control));
+    const next = replacement || this.root.querySelector<HTMLButtonElement>(`[data-tab="${this.tab}"]`);
+    if (next && this.root.ownerDocument.activeElement !== next) next.focus({ preventScroll: true });
   }
 
   private get buyAmount(): BuyAmount {
@@ -264,10 +318,13 @@ export class Panel {
     const target = e.target as HTMLElement;
     const categoryButton = target.closest<HTMLButtonElement>('button[data-decor-category]');
     if (categoryButton) {
-      this.decorCategory = categoryButton.dataset.decorCategory as typeof this.decorCategory;
-      this.list.scrollTop = 0;
-      this.update();
-      this.list.querySelector<HTMLButtonElement>(`[data-decor-category="${this.decorCategory}"]`)?.focus();
+      const category = categoryButton.dataset.decorCategory as typeof this.decorCategory;
+      if (category !== this.decorCategory) {
+        this.decorCategory = category;
+        this.scroller.scrollTop = 0;
+        this.update();
+      }
+      this.list.querySelector<HTMLButtonElement>(`[data-decor-category="${this.decorCategory}"]`)?.focus({ preventScroll: true });
       return;
     }
     const taste = target.closest<HTMLButtonElement>('button[data-taste]');
@@ -633,13 +690,25 @@ export class Panel {
   }
 
   update(): void {
-    this.updateGoal();
     const keys = this.visibleKeys();
     const sig = this.tab + '|' + this.introMode + '|' + keys.join(',');
-    if (sig !== this.signature) {
+    const rebuilt = sig !== this.signature;
+    const focused = rebuilt ? this.focusedControl() : null;
+    const scrollPosition = rebuilt ? readPanelScroll(this.list, this.scroller) : 0;
+    this.updateGoal();
+    if (rebuilt) {
       this.signature = sig;
       this.build(keys);
     }
+    this.updateContents();
+    if (rebuilt) {
+      // Restore only after hidden/disabled states and row heights are up to date.
+      this.restoreVisibleFocus(focused);
+      restorePanelScroll(this.list, this.scroller, scrollPosition);
+    }
+  }
+
+  private updateContents(): void {
     const s = this.state;
     if (this.tab === 'promotion') { this.promotionPanel?.update(); return; }
     if (this.tab === 'pets') { this.petPanel?.update(); return; }

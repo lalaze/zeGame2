@@ -1859,3 +1859,163 @@ html:lang(zh) body {
   max-width: calc(100% - 28px); transform: none; animation: none;
   font-size: 13px; padding: 6px 10px;
 }
+
+/* Mobile polish: comfortable hit boxes without scaling the pixel artwork. */
+@media (max-width: 860px), (pointer: coarse) {
+  button, .pixel-btn, .pixel-btn.small, .chip, .menu-toggle, .bake .bake-btn,
+  .styles .swatch, .swatch, .guide-actions button, .modal-actions button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  input, select { min-height: 44px; }
+  .prep-select, .pet-auto, summary { min-height: 44px; }
+  summary { align-content: center; }
+  .swatches { gap: 8px; }
+  .styles .swatch, .swatch { width: 44px; height: 44px; }
+  .pet-auto { padding-block: 6px; }
+  .prep-select input, .pet-auto input { min-height: 0; }
+  .pixel-input, .bake-input { font-size: 16px; }
+}
+
+@media (max-width: 860px) {
+  #settings-btn { width: 44px; }
+  .hud { padding: 6px 8px; }
+  .brand-icon { width: 26px; height: 26px; }
+  .reputation-bar { min-height: 44px; }
+  .layout { min-width: 0; }
+  .stage { height: min(290px, 39dvh); padding: 8px 12px; }
+  .has-guide .stage { height: min(250px, 34dvh); }
+  .layout.panel-collapsed .stage, .has-guide .layout.panel-collapsed .stage { height: auto; }
+  .panel { min-width: 0; }
+  .tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 6px 6px 4px; gap: 6px; }
+  .intro-mode .tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tab { margin: 0; min-height: 44px; font-size: 14px; padding: 8px 3px; }
+  .goal { margin: 7px 12px 3px; padding: 6px 9px; flex-shrink: 0; }
+  .goal-head { font-size: 11px; }
+  .goal-text { font-size: 14px; }
+  .goal .bar { height: 4px; margin-top: 4px; }
+  .buy-amount, .menu-filter { flex-shrink: 0; padding: 6px 8px; gap: 4px; }
+  .buy-amount .chip, .menu-filter .chip { margin: 2px; font-size: 13px; padding-inline: 8px; }
+  .menu-filter { flex-wrap: nowrap; }
+  .menu-filter .chip { flex: 1; padding-inline: 4px; }
+  .list { min-height: 0; padding: 8px 10px 18px; scroll-padding-block: 8px; }
+  .row { gap: 8px; padding: 10px 8px; }
+  .row-actions { gap: 8px; }
+  .sub { line-height: 1.4; }
+  .first-service { padding: 7px 8px; }
+  .guide-actions { gap: 4px; }
+  .guide-actions .chip { margin-inline: 2px; padding-inline: 6px; }
+  .area-plan-toggle { min-height: 44px; }
+  .area-arrow { width: 44px; min-height: 44px; }
+  .area-arrow-sign { width: 44px; height: 44px; }
+  .hint { max-width: calc(100% - 24px); white-space: normal; text-align: center; bottom: 58px; }
+  .operation-status { height: auto; min-height: 44px; margin: 6px auto; font-size: 13px; }
+
+  /* The dock is independent of canvas coordinates: no tiny clock/close buttons
+     floating over map, furniture, or the main room's brewing target. */
+  .mobile-stage-controls { align-self: stretch; flex-shrink: 0; margin-bottom: 12px; }
+  .mobile-stage-controls .day-hud {
+    position: static; width: 100%; max-width: none; min-height: 44px;
+    display: flex; justify-content: space-between; flex-wrap: wrap;
+    margin: 0; padding: 4px 6px; gap: 5px; font-size: 12px;
+  }
+  .mobile-stage-controls .day-clock { flex: 1 1 100%; line-height: 1.2; }
+  .mobile-stage-controls .day-speed { gap: 6px; }
+  .mobile-stage-controls .day-speed .chip { margin: 0; }
+  .mobile-stage-controls .close-btn { margin: 0; padding: 4px 10px; }
+  .mobile-stage-controls .open-btn {
+    position: static; display: block; width: calc(100% - 6px); margin: 8px 3px 3px;
+    transform: none; animation: none; font-size: 15px; white-space: normal;
+  }
+  .mobile-stage-controls .arrange-bar {
+    position: static; transform: none; width: 100%; gap: 8px;
+    align-items: stretch; pointer-events: auto;
+  }
+  .mobile-stage-controls .arrange-text { white-space: normal; overflow-wrap: anywhere; font-size: 13px; line-height: 1.4; padding: 6px 8px; }
+  .mobile-stage-controls .arrange-actions { justify-content: flex-end; gap: 8px; }
+  .mobile-stage-controls:has(.arrange-bar:not([hidden])) .day-hud,
+  .mobile-stage-controls:has(.arrange-bar:not([hidden])) .open-btn { display: none; }
+  .stage:has(.scene-wrap.is-panning) .mobile-stage-controls,
+  .stage:has(.scene-wrap.is-overview) .mobile-stage-controls { visibility: hidden; pointer-events: none; }
+
+  /* Onboarding and ordinary dialogs share a scroll body and fixed action row. */
+  .onboard { display: flex; flex-direction: column; overflow: hidden; padding: 14px; }
+  .ob-dots, .ob-actions { flex-shrink: 0; }
+  .ob-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 5px; }
+  .ob-actions { margin-top: 12px; }
+  .char-options { width: 100%; }
+  .char-preview { height: 110px; }
+  .themes { flex-wrap: wrap; gap: 10px; }
+  .theme { flex: 1 1 80px; min-width: 0; }
+  .theme-preview { max-width: 100%; height: auto; }
+  .modal, .onboard { max-height: calc(var(--usable-viewport-height, 100dvh) - 48px); }
+  .modal-overlay, .onboard-overlay {
+    top: var(--usable-viewport-top, 0px); bottom: auto;
+    height: var(--usable-viewport-height, 100dvh);
+    padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+  }
+}
+
+.panel-scroll { display: contents; }
+@media (max-width: 860px) {
+  .stage { height: min(360px, 44dvh); }
+  .has-guide .stage { height: min(270px, 36dvh); }
+  /* A furniture gesture deserves the whole café; finishing/cancelling restores
+     management exactly where it was, without changing its saved collapse choice. */
+  .layout:has(.scene-wrap.arranging) .panel { display: none; }
+  .layout:has(.scene-wrap.arranging) .stage { flex: 1; height: auto; }
+  .stage:has(.scene-wrap.arranging) .operation-status,
+  .stage:has(.scene-wrap.arranging) .hint { display: none; }
+  .modal:has(.rating-overview), .modal:has(.rating-report), .modal:has(.taste-overview) {
+    max-height: calc(var(--usable-viewport-height, 100dvh) - 48px);
+  }
+  .hint { display: none; } /* Optional brewing is explained by help; never cover the room. */
+}
+@media (max-width: 860px) {
+  .mobile-stage-controls .day-clock { flex: 1 1 60px; min-width: 0; }
+}
+@media (max-width: 860px) {
+  .mobile-stage-controls:has(#open-btn:not([hidden])) { display: flex; align-items: center; gap: 8px; }
+  .mobile-stage-controls:has(#open-btn:not([hidden])) .day-hud { flex: 0 1 105px; width: auto; background: none; box-shadow: none; }
+  .mobile-stage-controls .open-btn { flex: 1; }
+  .stage-stats { display: none; }
+}
+/* Scroll ownership follows the same explicit class as Panel, including during
+   breakpoint changes; desktop keeps its original independent list viewport. */
+.panel.mobile-panel .panel-scroll { display: block; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scroll-padding-block: 8px; }
+.panel.mobile-panel .panel-scroll > .list { overflow: visible; flex: none; }
+@media (max-width: 860px) and (max-height: 500px) {
+  #app { overflow-y: auto; overscroll-behavior: contain; }
+  .layout { flex: 0 0 auto; min-height: 560px; }
+  .panel { min-height: 240px; }
+  .has-guide .stage, .stage { height: 260px; }
+  .layout.panel-collapsed { min-height: 420px; }
+}
+@media (min-width: 600px) and (max-width: 860px) and (max-height: 500px) {
+  .layout { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); min-height: 280px; height: 280px; }
+  .panel { border-top: none; border-left: 3px solid var(--ink); }
+  .has-guide .stage, .stage { height: auto; }
+  .layout.panel-collapsed, .layout:has(.scene-wrap.arranging) { grid-template-columns: minmax(0, 1fr); min-height: 400px; height: 400px; }
+}
+@media (max-width: 860px) {
+  .guide-actions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .guide-actions button { margin: 0; padding: 4px; overflow-wrap: anywhere; }
+  .mobile-stage-controls:has(#open-btn:not([hidden])) .day-hud { background: var(--cream); color: var(--ink); }
+}
+@media (max-width: 860px) {
+  /* Bakery quantities are a separate task from menu/purchase buttons. Keep the
+     stepper and its forecast inside the card, even with long bilingual copy. */
+  .row:has(.bake:not([hidden])) { display: grid; grid-template-columns: 40px minmax(0, 1fr); align-items: start; }
+  .row:has(.bake:not([hidden])) .row-actions { grid-column: 1 / -1; flex-direction: row; gap: 10px; }
+  .row:has(.bake:not([hidden])) .row-actions > button { flex: 1; }
+  .row .bake { flex-wrap: wrap; white-space: normal; gap: 6px; }
+  .row .bake-label, .row .bake-note { flex-basis: 100%; margin: 0; line-height: 1.4; }
+}
+@media (max-width: 860px) {
+  #app > .toast {
+    position: relative; left: auto; top: auto; z-index: auto;
+    align-self: center; flex-shrink: 0; margin: 8px 14px 3px;
+    max-width: calc(100% - 28px); transform: none; animation: none;
+    font-size: 13px; padding: 6px 10px;
+  }
+}

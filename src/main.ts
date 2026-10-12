@@ -28,6 +28,12 @@ import { updateReputationButton, showReputation } from './ui/reputation';
 import { showPrepare } from './ui/prepare';
 import { RegionsUI, areaName } from './ui/regions';
 import { FirstServiceGuide } from './ui/first-service';
+import { cafeInteractionEnabled } from './ui/cafe-interaction';
+import { dockMobileControls } from './ui/mobile-layout';
+import { ArrangeFocus } from './ui/arrange-focus';
+import { trackVisualViewport } from './ui/viewport';
+
+trackVisualViewport();
 import { settlementHtml } from './ui/settlement';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -124,12 +130,16 @@ function fitCanvas(): void {
   const dpr = window.devicePixelRatio || 1;
   const style = getComputedStyle(stage);
   // Room inside the stage padding, minus the canvas's frame and drop shadow.
+  const mobileDock = stage.querySelector<HTMLElement>('.mobile-stage-controls');
+  const dockHeight = mobileDock ? mobileDock.offsetHeight + 12 : 0;
+  const operation = $('operation-status');
+  const statusHeight = mobileDock && !operation.hidden ? operation.offsetHeight + 12 : mobileDock ? 0 : 44;
   const rect = {
     width: stage.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) - 8,
-    height: stage.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom) - 12 - 44,
+    height: stage.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom) - 12 - statusHeight - dockHeight,
   };
   // The stats strip only shows if the café could still be as wide as the stage under it.
-  stats.hidden = rect.height - STATS_SPACE < MIN_SCENE_H * (rect.width / SCENE_W);
+  stats.hidden = !!mobileDock || rect.height - STATS_SPACE < MIN_SCENE_H * (rect.width / SCENE_W);
   const roomH = rect.height - (stats.hidden ? 0 : STATS_SPACE);
   // The café grows taller (more floor) to match the stage's shape. Height it can't
   // use goes to the sign, if there's enough for it.
@@ -252,7 +262,9 @@ const arrangeBar = $('arrange-bar');
 const arrangeText = $('arrange-text');
 const arrangeStore = $<HTMLButtonElement>('arrange-store');
 const arrangeDone = $<HTMLButtonElement>('arrange-done');
+const arrangeFocus = new ArrangeFocus(panelRoot, arrangeDone);
 const sceneWrap = document.querySelector<HTMLElement>('.scene-wrap')!;
+dockMobileControls(stage, sceneWrap, [$('day-hud'), $('open-btn'), arrangeBar], fitCanvas);
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const regionsUI = new RegionsUI($('area-nav'), $('area-edges'), $('region-card'), () => state, (area) => {
   scene.moveToArea(area, reducedMotion.matches);
@@ -311,8 +323,10 @@ function holdPiece(id: string, moving: number, fromBrowse: boolean): void {
 }
 
 function startArrange(request: ArrangeRequest): void {
+  if (!arrange) arrangeFocus.capture();
   // Decorations go in the dining rooms, never the kitchen.
   if (!isAreaOpen(state, scene.area) || scene.area === 'kitchen') regionsUI.select('main');
+  else if (scene.overview) regionsUI.select(scene.area);
   if (request.kind === 'place') holdPiece(request.id, -1, arrange?.mode === 'browse');
   else {
     arrange = { mode: 'browse' };
@@ -736,6 +750,7 @@ function frame(dt: number): void {
   scene.update(dt, sim);
   sceneWrap.classList.toggle('is-panning', scene.panning);
   sceneWrap.classList.toggle('is-overview', scene.overview);
+  arrangeFocus.update(!!arrange, !scene.panning && !scene.overview && !scene.paused);
 
   const coins = formatMoney(state.coins);
   if (coins !== shownCoins) coinsEl.textContent = shownCoins = coins;
@@ -754,7 +769,10 @@ function frame(dt: number): void {
   }
 }
 
-const cafe = new CafeGame(canvas, scene, sim, () => state, { tick: frame, pointerDown, pointerMove });
+const cafe = new CafeGame(canvas, scene, sim, () => state, {
+  tick: frame, pointerDown, pointerMove, interactionState: () => arrange,
+  interactionEnabled: () => cafeInteractionEnabled(session.active, isModalOpen()),
+});
 fitCanvas();
 panel.update();
 regionsUI.select('main');

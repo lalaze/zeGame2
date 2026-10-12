@@ -26,13 +26,19 @@ import { PIXEL_FONT, PIXEL_FONT_HALO, addPixelFonts } from './pixel-font';
 import { baked, canvasKey } from './textures';
 import { dustMotes, roomDepth } from '../materials';
 import { prepareCanvasMultiply } from './canvas-lighting';
+import { bindCanvasTaps, type CanvasTaps } from './canvas-taps';
 
 /** Called every frame before the scene is drawn: runs the simulation and the page around it. */
 export interface CafeHooks {
   tick(dt: number): void;
+  /** A completed tap or click; never the initial pointer press. */
   pointerDown(x: number, y: number): void;
   /** The mouse moved over the café (touch doesn't hover). */
   pointerMove(x: number, y: number): void;
+  /** Changes when the page enters, changes or leaves its furniture interaction. */
+  interactionState?(): unknown;
+  /** Live page guard; pause state alone may be one animation frame behind. */
+  interactionEnabled?(): boolean;
 }
 
 // Back to front. Everything standing on the floor sorts by where its feet are.
@@ -184,6 +190,7 @@ export class CafeScene extends Phaser.Scene {
   private ghostPiece!: Phaser.GameObjects.Image;
   private ghostBox!: Phaser.GameObjects.Graphics;
   private motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+  private tapInput?: CanvasTaps;
 
   constructor(
     private view: CafeView,
@@ -260,22 +267,34 @@ export class CafeScene extends Phaser.Scene {
     this.ghostPiece = this.add.image(0, 0, '__WHITE').setOrigin(0, 0).setDepth(DEPTH.ghost + 0.1).setAlpha(0.8);
     this.ghostBox = this.add.graphics().setDepth(DEPTH.ghost + 0.2);
 
-    const world = (p: Phaser.Input.Pointer) => camera.getWorldPoint(p.x, p.y);
-    this.input.on('pointerdown', (p: Phaser.Input.Pointer) => {
-      const { x, y } = world(p);
-      this.hooks.pointerDown(x, y);
+    this.tapInput = bindCanvasTaps(this.game.canvas, {
+      enabled: () => !this.view.panning && !this.view.paused && this.hooks.interactionEnabled?.() !== false,
+      context: () => [this.view.area, this.view.overview, this.view.viewX, this.view.viewY, this.view.zoom,
+        this.view.ghost?.id, this.view.ghost?.skip, this.getState(), this.getState().phase, this.hooks.interactionState?.()],
+      tap: (screenX, screenY) => {
+        const { x, y } = camera.getWorldPoint(screenX, screenY);
+        this.hooks.pointerDown(x, y);
+      },
+      hover: (screenX, screenY) => {
+        const { x, y } = camera.getWorldPoint(screenX, screenY);
+        this.hooks.pointerMove(x, y);
+      },
     });
-    this.input.on('pointermove', (p: Phaser.Input.Pointer) => {
-      if (p.wasTouch) return;
-      const { x, y } = world(p);
-      this.hooks.pointerMove(x, y);
-    });
+    const clearInput = () => {
+      this.tapInput?.destroy();
+      this.tapInput = undefined;
+      this.events.off(Phaser.Scenes.Events.SHUTDOWN, clearInput);
+      this.events.off(Phaser.Scenes.Events.DESTROY, clearInput);
+    };
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, clearInput);
+    this.events.once(Phaser.Scenes.Events.DESTROY, clearInput);
     this.onCreate();
   }
 
   update(time: number, delta: number): void {
     const dt = Math.min(0.25, Math.max(0, delta / 1000));
     this.hooks.tick(dt);
+    this.tapInput?.refresh();
 
     const view = this.view;
     const state = this.getState();

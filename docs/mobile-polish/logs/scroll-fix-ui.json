@@ -1,0 +1,30 @@
+[
+  {
+    "label": "desktop menu before inactive switch",
+    "mobile": false,
+    "prefix": 0,
+    "raw": 1118,
+    "relative": 1118
+  },
+  {
+    "label": "mobile menu restored from inactive desktop",
+    "mobile": true,
+    "prefix": 205,
+    "raw": 1323,
+    "relative": 1118
+  },
+  {
+    "label": "mobile before reverse inactive switch",
+    "mobile": true,
+    "prefix": 205,
+    "raw": 566,
+    "relative": 361
+  },
+  {
+    "label": "desktop restored from inactive mobile",
+    "mobile": false,
+    "prefix": 0,
+    "raw": 361,
+    "relative": 361
+  }
+]

@@ -166,3 +166,56 @@ it('keeps the purchase receipt and returns focus to a usable control after resto
   espresso().click();
   expect(document.querySelector('[role="status"]')!.textContent).toBe('');
 });
+
+
+it('commits numeric blur without removing the native next focus target mid-Tab', () => {
+  const state = createInitialState(0); state.kitchen = true; state.items.roll = 1; setOnMenu(state, 'roll', true);
+  showPrepare(state, vi.fn(), vi.fn());
+  const frames: FrameRequestCallback[] = [];
+  vi.spyOn(window, 'requestAnimationFrame').mockImplementation(callback => { frames.push(callback); return frames.length; });
+  const input = document.querySelector<HTMLInputElement>('[data-amount="roll"]')!;
+  const plus = document.querySelector<HTMLButtonElement>('[data-bake="roll:1"]')!;
+  const scroll = document.querySelector<HTMLElement>('.modal-body')!; scroll.scrollTop = 200;
+  input.focus(); input.value = '17'; input.blur();
+  input.dispatchEvent(new Event('change', { bubbles: true }));
+  expect(state.bakePlan.roll).toBe(17); expect(plus.isConnected).toBe(true);
+  plus.focus(); frames.at(-1)!(0);
+  expect(document.activeElement?.getAttribute('data-focus')).toBe('plus-roll');
+  expect(scroll.scrollTop).toBe(200);
+});
+
+it.each(['pointerup', 'pointercancel', 'blur'])('keeps a held quantity target connected until %s', (release) => {
+  const state = createInitialState(0); state.kitchen = true; state.items.roll = 1; setOnMenu(state, 'roll', true);
+  showPrepare(state, vi.fn(), vi.fn());
+  const frames: FrameRequestCallback[] = [];
+  vi.spyOn(window, 'requestAnimationFrame').mockImplementation(callback => { frames.push(callback); return frames.length; });
+  const input = document.querySelector<HTMLInputElement>('[data-amount="roll"]')!;
+  const plus = document.querySelector<HTMLButtonElement>('[data-bake="roll:1"]')!;
+  input.focus(); input.value = '21';
+  plus.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, pointerId: 7 }));
+  input.blur(); input.dispatchEvent(new Event('change', { bubbles: true })); plus.focus();
+  expect(state.bakePlan.roll).toBe(21);
+  expect(frames).toHaveLength(0); expect(plus.isConnected).toBe(true);
+  window.dispatchEvent(release === 'blur' ? new Event('blur') : new PointerEvent(release, { pointerId: 7 }));
+  expect(frames).toHaveLength(1);
+  if (release === 'pointerup') plus.click();
+  frames.at(-1)!(0);
+  expect(state.bakePlan.roll).toBe(release === 'pointerup' ? 26 : 21);
+  expect(document.activeElement?.getAttribute('data-focus')).toBe('plus-roll');
+});
+
+it('does not redraw a closed preparation dialog when a held pointer releases', () => {
+  const state = createInitialState(0); state.kitchen = true; state.items.roll = 1; setOnMenu(state, 'roll', true);
+  showPrepare(state, vi.fn(), vi.fn());
+  const frames: FrameRequestCallback[] = [];
+  vi.spyOn(window, 'requestAnimationFrame').mockImplementation(callback => { frames.push(callback); return frames.length; });
+  const input = document.querySelector<HTMLInputElement>('[data-amount="roll"]')!;
+  const plus = document.querySelector<HTMLButtonElement>('[data-bake="roll:1"]')!;
+  input.focus(); input.value = '21';
+  plus.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, pointerId: 7 }));
+  input.blur(); input.dispatchEvent(new Event('change', { bubbles: true }));
+  closeModal(); window.dispatchEvent(new PointerEvent('pointerup', { pointerId: 7 }));
+  frames.at(-1)!(0);
+  expect(document.querySelector('.modal')).toBeNull();
+  expect(state.bakePlan.roll).toBe(21);
+});

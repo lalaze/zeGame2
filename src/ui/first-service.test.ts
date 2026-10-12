@@ -80,6 +80,18 @@ describe('skippable and replayable first service guidance', () => {
     click('skip');
     expect(toast.parentElement).toBe(document.body);
   });
+  it('keeps dismissed-guide mobile receipts in flow, and restores desktop placement', () => {
+    const { guide, click } = setup();
+    const app = document.createElement('div'); app.id = 'app';
+    app.innerHTML = '<main class="layout"><aside id="management-panel" class="mobile-panel"></aside></main>';
+    document.body.append(app);
+    const toast = document.createElement('div'); toast.id = 'toast'; toast.textContent = 'Bakery is open';
+    document.body.append(toast); guide.update(); click('skip');
+    expect(app.querySelector('.layout')!.previousElementSibling).toBe(toast);
+    expect(toast.textContent).toBe('Bakery is open'); expect(toast.hidden).toBe(false);
+    document.getElementById('management-panel')!.classList.remove('mobile-panel'); guide.update();
+    expect(toast.parentElement).toBe(document.body);
+  });
   it('includes the help scroll region in the keyboard focus loop', () => {
     const { guide } = setup(); guide.showHelp();
     const body = document.querySelector<HTMLElement>('.modal-body')!;

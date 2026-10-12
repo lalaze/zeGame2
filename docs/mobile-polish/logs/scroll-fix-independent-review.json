@@ -1,0 +1,34 @@
+{
+  "method": "Independent cloud Chromium UI: native mouse scroll, locator clicks, QA viewport selector; no state injection",
+  "origin": "http://127.0.0.1:5199/qa-390.html",
+  "fixture": "Sunday Roast EN, fresh café, first-day preparation",
+  "baselineDesktop": 757,
+  "results": [
+    {
+      "transition": "1180 Menu → Furnish →390 →Menu",
+      "raw": 970,
+      "prefix": 212.59375,
+      "relative": 757.40625
+    },
+    {
+      "transition": "390 Menu →Furnish →1180 →Menu",
+      "raw": 757,
+      "prefix": 0,
+      "relative": 757
+    },
+    {
+      "transition": "1180 Menu →Furnish →360 →Menu",
+      "raw": 970,
+      "prefix": 212.59375,
+      "relative": 757.40625
+    },
+    {
+      "transition": "360 Menu →Furnish →430 →Menu",
+      "raw": 953,
+      "prefix": 195.796875,
+      "relative": 757.203125
+    }
+  ],
+  "verdict": "Pass; less than0.5px integer-scroll quantization",
+  "independentTests": "666 passed /6 existing skips; build passed; preview matches isolated build byte-for-byte"
+}

@@ -68,7 +68,12 @@ export class FirstServiceGuide {
     // the guide is present. It must not float over guidance or mobile controls.
     const toast = document.getElementById('toast');
     if (toast) {
-      if (this.element.hidden && toast.parentElement !== document.body) document.body.append(toast);
+      if (this.element.hidden) {
+        const layout = document.querySelector<HTMLElement>('#app > .layout');
+        const mobile = document.getElementById('management-panel')?.classList.contains('mobile-panel');
+        if (mobile && layout) { if (layout.previousElementSibling !== toast) layout.before(toast); }
+        else if (toast.parentElement !== document.body) document.body.append(toast);
+      }
       else if (!this.element.hidden && this.element.parentElement && this.element.nextElementSibling !== toast) this.element.after(toast);
     }
     const signature = `${this.element.hidden}:${step}:${getLocale()}:${this.expandedTools}`;

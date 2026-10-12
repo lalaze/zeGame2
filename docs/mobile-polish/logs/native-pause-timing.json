@@ -1,0 +1,6 @@
+{
+  "beforeAt": 1791776529132,
+  "returnAt": 1791776608166,
+  "wallSeconds": 79.034,
+  "method": "Native Chromium Ctrl+T away, Ctrl+3 return; no tab DOM calls while hidden"
+}
