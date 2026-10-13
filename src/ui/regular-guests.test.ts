@@ -243,3 +243,31 @@ describe('bilingual and long journal construction', () => {
     } finally { messages[key] = original; }
   });
 });
+
+
+describe('generated regular portrait identity', () => {
+  it('replaces an already cached legacy portrait with the same generated stand used in the scene', async () => {
+    const { setGeneratedCustomerAdapter } = await import('../render/generated-main-art');
+    const { registerFineSpriteArt } = await import('../render/fine-sprite-art');
+    const state = createInitialState(0); unlock(state, 1);
+    setGeneratedCustomerAdapter(null);
+    showRegularGuests(state, () => {});
+    expect(select<HTMLImageElement>('.regular-portrait').src).toBe('data:image/png;base64,portrait-0');
+    closeModal();
+    const logical = document.createElement('canvas'); logical.width = 18; logical.height = 28;
+    const backing = document.createElement('canvas'); backing.width = 72; backing.height = 112;
+    backing.toString = () => 'generated-mina';
+    registerFineSpriteArt(logical, backing, 4);
+    setGeneratedCustomerAdapter({ ready: true, scales: {walking: 1, seated: 1},
+      resolve: (identity, fallback) => identity.appearanceId === 0 ? { frames: {...fallback, stand: logical}, generated: true } : {frames: fallback, generated: false},
+      drawOffset: () => ({x: 0, y: 0}), contactPoints: () => null });
+    try {
+      showRegularGuests(state, () => {});
+      expect(select<HTMLImageElement>('.regular-portrait').src).toBe('data:image/png;base64,portrait-generated-mina');
+      closeModal();
+      setGeneratedCustomerAdapter(null);
+      showRegularGuests(state, () => {});
+      expect(select<HTMLImageElement>('.regular-portrait').src).toBe('data:image/png;base64,portrait-0');
+    } finally { closeModal(); setGeneratedCustomerAdapter(null); }
+  });
+});

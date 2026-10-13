@@ -1,0 +1,25 @@
+{
+  "id": 11,
+  "name": "杏黄毛衣",
+  "look": {
+    "skin": 2,
+    "hair": 0,
+    "hairStyle": 1,
+    "shirt": 3,
+    "pants": 2
+  },
+  "hairstyle": 5,
+  "outfit": "stripe",
+  "accessory": "glasses",
+  "accent": "#eee1c0",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#b67c55",
+    "hair": "#594237",
+    "shirt": "#d3a453",
+    "pants": "#585464"
+  },
+  "hatPalette": "#69a295",
+  "description": "Fixed customer cast 11 (杏黄毛衣): warm skin #b67c55; hair #594237 in short exuberant SPIKY TOUSLED hair with separate upward tufts and outward side tips, no braid or bun. Outfit: #d3a453 knitted sweater with exactly two broad cream horizontal stripes around torso and sleeves. Lower clothing color #585464; warm dark brown leather shoes. Accent #eee1c0. Round dark-brown eyeglasses in every front/side/seated view; back shows temples near ears."
+}

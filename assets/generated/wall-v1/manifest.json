@@ -1,0 +1,156 @@
+{
+  "bboxAlphaThreshold": "alpha > 128; excludes faint fringe, not all nonzero-alpha",
+  "assets": [
+    {
+      "name": "window-gingham-frame",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-main-wall-v1/window-gingham-frame.png",
+      "source_crop": [
+        35,
+        74,
+        668,
+        588
+      ],
+      "size": [
+        633,
+        514
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 613,
+        "h": 494
+      },
+      "anchor": {
+        "x": 316.5,
+        "y": 503
+      },
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "apertureQA": [
+        {
+          "safeInteriorBox": {
+            "x": 165,
+            "y": 111,
+            "w": 120,
+            "h": 95
+          },
+          "alphaExtrema": [
+            0,
+            0
+          ],
+          "fractionFullyTransparent": 1.0
+        },
+        {
+          "safeInteriorBox": {
+            "x": 345,
+            "y": 111,
+            "w": 125,
+            "h": 95
+          },
+          "alphaExtrema": [
+            0,
+            0
+          ],
+          "fractionFullyTransparent": 1.0
+        },
+        {
+          "safeInteriorBox": {
+            "x": 155,
+            "y": 266,
+            "w": 130,
+            "h": 105
+          },
+          "alphaExtrema": [
+            0,
+            1
+          ],
+          "fractionFullyTransparent": 0.9998534798534798
+        },
+        {
+          "safeInteriorBox": {
+            "x": 345,
+            "y": 266,
+            "w": 135,
+            "h": 105
+          },
+          "alphaExtrema": [
+            0,
+            1
+          ],
+          "fractionFullyTransparent": 0.999647266313933
+        }
+      ],
+      "apertureUnionApprox": {
+        "x": 125,
+        "y": 87,
+        "w": 386,
+        "h": 296
+      },
+      "note": "Curtains partially overlap outer opening. Draw animated village behind complete apertureUnion; mullions are opaque overlay."
+    },
+    {
+      "name": "blank-chalkboard",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-main-wall-v1/blank-chalkboard.png",
+      "source_crop": [
+        689,
+        155,
+        1507,
+        567
+      ],
+      "size": [
+        818,
+        412
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 798,
+        "h": 392
+      },
+      "anchor": {
+        "x": 409.0,
+        "y": 401
+      },
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "writingArea": {
+        "x": 61,
+        "y": 53,
+        "w": 697,
+        "h": 264
+      }
+    },
+    {
+      "name": "brass-wall-lamp",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-main-wall-v1/brass-wall-lamp.png",
+      "source_crop": [
+        659,
+        658,
+        865,
+        952
+      ],
+      "size": [
+        206,
+        294
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 186,
+        "h": 274
+      },
+      "anchor": {
+        "x": 103.0,
+        "y": 283
+      },
+      "alpha_extrema": [
+        0,
+        254
+      ]
+    }
+  ]
+}

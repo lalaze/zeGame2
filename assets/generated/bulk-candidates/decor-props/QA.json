@@ -1,0 +1,28 @@
+{
+  "all13CropsPixelExact": true,
+  "all13HaveZeroAlpha": true,
+  "transparentInteriorSamples": {
+    "neon_heart": {
+      "sourceCoordinate": [
+        625,
+        625
+      ],
+      "alpha": 0
+    },
+    "neon_cup": {
+      "sourceCoordinate": [
+        570,
+        850
+      ],
+      "alpha": 0
+    },
+    "ceiling_vines": {
+      "sourceCoordinate": [
+        1090,
+        650
+      ],
+      "alpha": 0
+    }
+  },
+  "runtimeValidated": false
+}

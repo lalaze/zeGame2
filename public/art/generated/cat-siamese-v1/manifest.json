@@ -1,0 +1,514 @@
+{
+  "breed": "siamese",
+  "name": "Mocha / \u6469\u5361",
+  "bboxAlphaThreshold": "alpha > 128; excludes faint fringe, not all-nonzero-alpha",
+  "oldCanvasSizes": {
+    "normal": [
+      18,
+      14
+    ],
+    "lookUpAndNuzzle": [
+      18,
+      18
+    ]
+  },
+  "facingConvention": {
+    "walkA": "head-left",
+    "walkB": "head-left",
+    "other": "front-three-quarter head slightly left; interaction may tilt"
+  },
+  "scaleNote": "Sheet-level scale estimate matches physical head width, not individual bbox height. All frames on each sheet share scale. Runtime refinement needed; no image distortion applied.",
+  "anchorNote": "Manual source-pixel estimates for grounded support midpoint and forehead/crown between ears, not ear tips. Verify pet contact in runtime.",
+  "frames": [
+    {
+      "state": "idle",
+      "file": "siamese-idle.png",
+      "source": "core-source.png",
+      "source_crop": [
+        253,
+        105,
+        649,
+        523
+      ],
+      "size": [
+        396,
+        418
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 376,
+        "h": 398
+      },
+      "foot": {
+        "x": 149,
+        "y": 399
+      },
+      "headContact": {
+        "x": 113,
+        "y": 87
+      },
+      "sourceToWorldScale": 0.03275,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 67925
+    },
+    {
+      "state": "lookUp",
+      "file": "siamese-lookUp.png",
+      "source": "core-source.png",
+      "source_crop": [
+        973,
+        45,
+        1352,
+        523
+      ],
+      "size": [
+        379,
+        478
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 359,
+        "h": 458
+      },
+      "foot": {
+        "x": 136,
+        "y": 459
+      },
+      "headContact": {
+        "x": 127,
+        "y": 75
+      },
+      "sourceToWorldScale": 0.03275,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 74744
+    },
+    {
+      "state": "walkA",
+      "file": "siamese-walkA.png",
+      "source": "core-source.png",
+      "source_crop": [
+        150,
+        612,
+        730,
+        959
+      ],
+      "size": [
+        580,
+        347
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 560,
+        "h": 327
+      },
+      "foot": {
+        "x": 268,
+        "y": 326
+      },
+      "headContact": {
+        "x": 106,
+        "y": 83
+      },
+      "sourceToWorldScale": 0.03275,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 84844
+    },
+    {
+      "state": "walkB",
+      "file": "siamese-walkB.png",
+      "source": "core-source.png",
+      "source_crop": [
+        858,
+        609,
+        1434,
+        959
+      ],
+      "size": [
+        576,
+        350
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 556,
+        "h": 330
+      },
+      "foot": {
+        "x": 291,
+        "y": 329
+      },
+      "headContact": {
+        "x": 104,
+        "y": 79
+      },
+      "sourceToWorldScale": 0.03275,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 85871
+    },
+    {
+      "state": "swish",
+      "file": "siamese-swish.png",
+      "source": "behaviors-source.png",
+      "source_crop": [
+        129,
+        68,
+        578,
+        525
+      ],
+      "size": [
+        449,
+        457
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 429,
+        "h": 437
+      },
+      "foot": {
+        "x": 163,
+        "y": 436
+      },
+      "headContact": {
+        "x": 139,
+        "y": 76
+      },
+      "sourceToWorldScale": 0.02948,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 98435
+    },
+    {
+      "state": "blink",
+      "file": "siamese-blink.png",
+      "source": "behaviors-source.png",
+      "source_crop": [
+        608,
+        68,
+        1029,
+        525
+      ],
+      "size": [
+        421,
+        457
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 401,
+        "h": 437
+      },
+      "foot": {
+        "x": 163,
+        "y": 436
+      },
+      "headContact": {
+        "x": 140,
+        "y": 76
+      },
+      "sourceToWorldScale": 0.02948,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 83372
+    },
+    {
+      "state": "happy",
+      "file": "siamese-happy.png",
+      "source": "behaviors-source.png",
+      "source_crop": [
+        1084,
+        68,
+        1510,
+        525
+      ],
+      "size": [
+        426,
+        457
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 406,
+        "h": 437
+      },
+      "foot": {
+        "x": 165,
+        "y": 436
+      },
+      "headContact": {
+        "x": 140,
+        "y": 76
+      },
+      "sourceToWorldScale": 0.02948,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 84860
+    },
+    {
+      "state": "sleep",
+      "file": "siamese-sleep.png",
+      "source": "behaviors-source.png",
+      "source_crop": [
+        25,
+        666,
+        495,
+        940
+      ],
+      "size": [
+        470,
+        274
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 450,
+        "h": 254
+      },
+      "foot": {
+        "x": 235,
+        "y": 254
+      },
+      "headContact": {
+        "x": 148,
+        "y": 69
+      },
+      "sourceToWorldScale": 0.02948,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 32180
+    },
+    {
+      "state": "groomA",
+      "file": "siamese-groomA.png",
+      "source": "behaviors-source.png",
+      "source_crop": [
+        584,
+        532,
+        1027,
+        980
+      ],
+      "size": [
+        443,
+        448
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 423,
+        "h": 428
+      },
+      "foot": {
+        "x": 183,
+        "y": 426
+      },
+      "headContact": {
+        "x": 146,
+        "y": 75
+      },
+      "sourceToWorldScale": 0.02948,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 86360
+    },
+    {
+      "state": "groomB",
+      "file": "siamese-groomB.png",
+      "source": "behaviors-source.png",
+      "source_crop": [
+        1099,
+        534,
+        1511,
+        976
+      ],
+      "size": [
+        412,
+        442
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 392,
+        "h": 422
+      },
+      "foot": {
+        "x": 150,
+        "y": 424
+      },
+      "headContact": {
+        "x": 139,
+        "y": 80
+      },
+      "sourceToWorldScale": 0.02948,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 74133
+    },
+    {
+      "state": "stretch",
+      "file": "siamese-stretch.png",
+      "source": "interaction-source.png",
+      "source_crop": [
+        126,
+        45,
+        769,
+        521
+      ],
+      "size": [
+        643,
+        476
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 623,
+        "h": 456
+      },
+      "foot": {
+        "x": 306,
+        "y": 452
+      },
+      "headContact": {
+        "x": 224,
+        "y": 258
+      },
+      "sourceToWorldScale": 0.02721,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 157373
+    },
+    {
+      "state": "watch",
+      "file": "siamese-watch.png",
+      "source": "interaction-source.png",
+      "source_crop": [
+        979,
+        35,
+        1413,
+        522
+      ],
+      "size": [
+        434,
+        487
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 414,
+        "h": 467
+      },
+      "foot": {
+        "x": 160,
+        "y": 468
+      },
+      "headContact": {
+        "x": 157,
+        "y": 83
+      },
+      "sourceToWorldScale": 0.02721,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 90622
+    },
+    {
+      "state": "nuzzleA",
+      "file": "siamese-nuzzleA.png",
+      "source": "nuzzle-raised-source.png",
+      "source_crop": [
+        179,
+        125,
+        785,
+        920
+      ],
+      "size": [
+        606,
+        795
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 586,
+        "h": 775
+      },
+      "foot": {
+        "x": 213,
+        "y": 772
+      },
+      "headContact": {
+        "x": 181,
+        "y": 111
+      },
+      "sourceToWorldScale": 0.0188,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 194395
+    },
+    {
+      "state": "nuzzleB",
+      "file": "siamese-nuzzleB.png",
+      "source": "nuzzle-raised-source.png",
+      "source_crop": [
+        878,
+        126,
+        1452,
+        920
+      ],
+      "size": [
+        574,
+        794
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 554,
+        "h": 774
+      },
+      "foot": {
+        "x": 166,
+        "y": 771
+      },
+      "headContact": {
+        "x": 202,
+        "y": 120
+      },
+      "sourceToWorldScale": 0.0188,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 168879
+    }
+  ]
+}

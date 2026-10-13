@@ -1,0 +1,5 @@
+Create exactly TWO spacious separate sprites of the SAME MAINE COON cat in reference. Preserve large shaggy brown tabbybody, gold eyes,squaredmuzzle,tallLYNX-TUFTEDears, palechestmane, largepawtufts andbushyringedtail. Finecozy2Dpixelclusters anddarkwarmcontours.
+1536x1024 transparent RGBA, TWO cells sidebyside,100pxclear gap between anysilhouettepoints,60pxoutermargins. Same headsize about250pxwide.
+LEFT groomB: compact sitting, nearforepaw liftedtoCHEEK rubbingface, headleansto paw, otherforepawplanted, tailcurledRIGHT fullyvisible.
+RIGHT nuzzleA: visiblyTALLER upright SITTING with raised BROAD CHEST andlongerforelegs, NOTlongneck; eyesaffectionatelyclosed, headforehead tiltedUP-LEFT forimaginedhand. Bothforepawsandhaunchgrounded. SAME physicalheadsize asleftsprite, butcatbody taller. FluffytailcurledRIGHT complete.
+Nootherposes, nohumans,hands,props,floor,shadows,glow,haze,text,labels. Realtransparentalpha.

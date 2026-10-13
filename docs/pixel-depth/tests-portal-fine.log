@@ -1,0 +1,37 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+ ❯ src/render/passages.test.ts (10 tests | 2 failed) 77ms
+   ❯ kitchen doorway threshold (8)
+     × keeps the sill within eight pixels on both sides (built: false) 13ms
+     × keeps the sill within eight pixels on both sides (built: true) 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/render/passages.test.ts > kitchen doorway threshold > keeps the sill within eight pixels on both sides (built: false)
+ FAIL  src/render/passages.test.ts > kitchen doorway threshold > keeps the sill within eight pixels on both sides (built: true)
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/render/passages.test.ts:59:58
+     57|           ]);
+     58|           // Frames may overhang by two pixels, but no boundary become…
+     59|           expect(rectangles.every(rect => rect[2] <= 9)).toBe(true);
+       |                                                          ^
+     60|         }
+     61|       }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 8 passed (10)
+   Start at  21:17:21
+   Duration  661ms (transform 70%, tests 15%, import 15%, worker 1%)
+

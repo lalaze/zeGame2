@@ -1,0 +1,518 @@
+{
+  "scope": "File existence, dimensions, alpha bounds, exact source RGBA crop, duplicate pixel evidence only; no runtime or aesthetic pass",
+  "manifests": [
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/manifest.json",
+      "count": 36,
+      "assets": [
+        {
+          "id": "empty-cup-saucer/base",
+          "size": [
+            378,
+            367
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "826a82f8d817572cf1bc715204d43a11cae31e18f8611a4b8ba3e5406e2f97c9",
+          "file_sha256": "b114e146e05150ae45a35d5098d86c0a60f54eb5f017a87b979acedd8e82b281",
+          "exact_source_crop": true
+        },
+        {
+          "id": "empty-tray/base",
+          "size": [
+            390,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4ad8292e270f3fb0e0a6e17fd7af6b4b96eadde71b7a443d219e64419ff25608",
+          "file_sha256": "30512194eff3ae73c33b3023a9bd1635d28c55b5591832b700d790cdf28bc405",
+          "exact_source_crop": true
+        },
+        {
+          "id": "water-carafe-glass/base",
+          "size": [
+            325,
+            375
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cb02f0acf01367b9ff4a2d9a16d1b674d3ed65f58a91a08f6d76a264cba03fb0",
+          "file_sha256": "0ba7f7aa1d396e56dadca61a26cbe8e33c576265cf3c67db31bccf9e4fcc2b9a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "empty-plate/base",
+          "size": [
+            348,
+            350
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ea98137ac21b23e1415d6e40cd82b8e0e6254d5df60990616eda524715a605a9",
+          "file_sha256": "08fe8241926899053f6b72fb9d0e6cd7d220ec53a461ce142d8da1c11ce44c52",
+          "exact_source_crop": true
+        },
+        {
+          "id": "coin-star/base",
+          "size": [
+            333,
+            307
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3599faa5435ed1fb6149ca864626ea1f58788f15ab7a30f2b6a3729767e00502",
+          "file_sha256": "22f6b4feec2e72c6f3b36158bcd2cb213ee80275ce167707b6926f4b01e0fb3b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "heart/base",
+          "size": [
+            310,
+            304
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1006b835ed4139d39a81001f8d5eb0bf0b7bd0060717a3422314b739ecde88f5",
+          "file_sha256": "559c3bc3b963886ddc3eb2c9db095b17809bd735a7b47fc04a3ae51ff8131817",
+          "exact_source_crop": true
+        },
+        {
+          "id": "drop/base",
+          "size": [
+            305,
+            305
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "eeb32a0cc0cb413db0494f575bf5599315e82588f35b55c145298e55623bf490",
+          "file_sha256": "5e43e64152ae4b00109ca24f41af6325a10fa109b13f2a7e558f7d7a6563de99",
+          "exact_source_crop": true
+        },
+        {
+          "id": "crown/base",
+          "size": [
+            348,
+            305
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "99fe418f2deeeaae1d100a274be8b6bc4d28154737a19cc024819719c26df5f3",
+          "file_sha256": "6c0fca051d0a443379b8a291f9f05e85e53385ca856130a98bc10a377730dc44",
+          "exact_source_crop": true
+        },
+        {
+          "id": "map-location/base",
+          "size": [
+            387,
+            305
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "12149c668ba905ac5907fd978c55908786129d4510fe06139ffb1e209247fe1c",
+          "file_sha256": "87551c1b60fc304cc9193b3c2cad43fc8228276a862a483ae74504942c6dab34",
+          "exact_source_crop": true
+        },
+        {
+          "id": "arrow-right/base",
+          "size": [
+            338,
+            305
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "101de75d47dd6bb96d2a92f77fde2dc0c2e897f2f7be15a6fde4d022d02bbed9",
+          "file_sha256": "76b7076f61c34624e7c032510b051de5c9c1a9df114c7a46c4247ee2ab828eee",
+          "exact_source_crop": true
+        },
+        {
+          "id": "film/base",
+          "size": [
+            371,
+            305
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c51ff5ad46881e8e75e4dbae3f3a425da12ad94568e43392fe63f645bcb2da39",
+          "file_sha256": "3a143ae2589fcc0634102d72ff63f7079e9c27dea8ac9ab8cad0bee09af9e9e6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "spark/base",
+          "size": [
+            333,
+            305
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "acaab5f0e77d1b6f52c3b07e6363a23dddd5cad6b48bee6501b208c00baf8784",
+          "file_sha256": "d3d1c9d3f41a92a3fe1c0e28ebc0e37f1205770fb507f52f7711b8512d833c05",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cup-coffee/base",
+          "size": [
+            415,
+            369
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e23957aa060ec4d3bc3aeac21621a711cdbf92c50115b443def4abde55ddbe43",
+          "file_sha256": "3653eb01b166628fbb746d29355b3201d05eb4cf51c16a8651b804ebfa4822fc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cup-tea/base",
+          "size": [
+            357,
+            369
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6e6aa7636e185f894d9d650dc698cae74b6172d8ef76dd20fc4512fbaf298206",
+          "file_sha256": "01d1c6116743f9ef8dff5c6abe639e3c4c35ca28fb77569e97c2698d1efabf08",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cup-milk/base",
+          "size": [
+            250,
+            374
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f0b02ae1855cd47ef8be7625bf7b5615ccdc4066793cae359181e3f5f3b2a117",
+          "file_sha256": "bea8262c01cc92cde5ec22b3164378f74c431f10d3bba60c8771a76b191f0510",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cup-fruit/base",
+          "size": [
+            310,
+            374
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8a21fdcd7d293eafc943b3058bd84791eac97bb946284670ac61d6632642964f",
+          "file_sha256": "2a67c5dad6e291e301b119baea540b8a973c8d9aacd524012ef919f9197e1be8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "liquid-coffee/base",
+          "size": [
+            368,
+            199
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8491d29ec08f29cb9681302f6f102b04da147b47ab9090caddc9f50a101c33ac",
+          "file_sha256": "93cd35cb94aa7e424487f51421ed933effc7291a486995f7941b78f2642cd350",
+          "exact_source_crop": true
+        },
+        {
+          "id": "liquid-tea/base",
+          "size": [
+            336,
+            199
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6912ef90dfe6c3207507a8535c4c167b14ec8c10f744c9c763cdcfd7a73cc1ff",
+          "file_sha256": "e6151aa471b7e920c903b5eebd1ca901c54b2172954e2bab64ac4dbca35761dc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "liquid-milk/base",
+          "size": [
+            336,
+            199
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bc41b1c55903a3692bb17188e6be59174c8a0733632922f18269e79881797348",
+          "file_sha256": "a7f1a333a626ee84429c89ee474c7b0a0c873c1feb8cbac78aa1d4b99faf68fe",
+          "exact_source_crop": true
+        },
+        {
+          "id": "liquid-fruit/base",
+          "size": [
+            340,
+            199
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0829fc201f6e1826661d83b4cdfdf667cf9e479a2053ead38d7dc50575cddafd",
+          "file_sha256": "75f4d6661543041bb47d23be6b46358dce85aa8da38788e69317d84c8dbf63cd",
+          "exact_source_crop": true
+        },
+        {
+          "id": "topping-milk/base",
+          "size": [
+            355,
+            221
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a5b4ac8826e10b885ca2070e02513cb3c04dbcfd2a38564f4857304388c8369a",
+          "file_sha256": "8381b2bff65b9f4a965a72573907822828c1a1a484ace918dd513757e16826fd",
+          "exact_source_crop": true
+        },
+        {
+          "id": "topping-sugar/base",
+          "size": [
+            315,
+            214
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "15e37b254e955af9475cd98294127b556e317b703bd55e5bce22b9aa6dee47cf",
+          "file_sha256": "a3fadd34c71487cf68a086c9dee4f4b8cbc4dd8d231a3d5b16568e332babfba9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "topping-spice/base",
+          "size": [
+            311,
+            214
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a4894ac7c828421f72051136f9d2d6f0bc5cd9036928b5db04f5192664dd39b8",
+          "file_sha256": "041cb1135f1af32055128b20f2be98ed2becb1e04990ae389ce58392fd7daf68",
+          "exact_source_crop": true
+        },
+        {
+          "id": "topping-cocoa/base",
+          "size": [
+            327,
+            224
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "726cc546240b5cf11d52e99225b49ee44ceba9be3d547ea61adc3fc4a67a007d",
+          "file_sha256": "0ba7ac0cfaecb8d32704db2a3a82d366a5c3d20925a5e4e0831de5faeb26c131",
+          "exact_source_crop": true
+        },
+        {
+          "id": "topping-cream/base",
+          "size": [
+            361,
+            274
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1246d8e42d91b37c36e0d391065ff2d0208051e47c6c2a9748eef21e4ee218b1",
+          "file_sha256": "b45014b2eaa1da960fae980f15dbe3af777fad11cf0a53c473e75e24b0448b15",
+          "exact_source_crop": true
+        },
+        {
+          "id": "topping-fruit/base",
+          "size": [
+            320,
+            265
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "49ec1a9388b8188800f9537443e8f10d1d780ca2aa8ec6366b2fbd87ce8d9d7d",
+          "file_sha256": "efecc30c4d609788b57622d0c2f021ff76fcbb9d25fc2d700560b062cd2bb991",
+          "exact_source_crop": true
+        },
+        {
+          "id": "topping-matcha/base",
+          "size": [
+            351,
+            239
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cbcf445ce39c74c7abd5fb6393bb3141df47348a30128363d1c67377e369cb5b",
+          "file_sha256": "f90301b72a69ff2dca6d05686ff16082a8f75f38073d48658386d286e752c076",
+          "exact_source_crop": true
+        },
+        {
+          "id": "glass-glints/base",
+          "size": [
+            332,
+            265
+          ],
+          "alpha_extrema": [
+            0,
+            250
+          ],
+          "rgba_sha256": "9a0674061bf73a15ce4ecb8d5a3e4c6458dad97fb221db931dc7c905e0276d47",
+          "file_sha256": "9364cf41d5783d14dd17ab3da45bb174587d296aa18f191c0c1eb600042dc5cc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "barista/base",
+          "size": [
+            396,
+            600
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "e46738a75f05d4b6404e09dad0a142b978a3239ea43cf6b0f789c5f301090ba9",
+          "file_sha256": "382c980b538099a0149df9b8da60e01c2b6429ed94a9ca6fcee0d1f0ac86fee9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server/base",
+          "size": [
+            365,
+            600
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "7c98210ea97b58841aa66fe48c665ed70cbb1d195651c45c52ed4ee5ff7b311e",
+          "file_sha256": "3d7eec41d994f9ead80c0c64c6e744d9fbc471ea97b6f48bbaa4d8e32904ae90",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook/base",
+          "size": [
+            375,
+            605
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "f89094cf47122ae8a6f2f36084b7c39f4bec20695a19b84ec588ad4eb7625a68",
+          "file_sha256": "d35b8daa16dae42bcf931d81ad2bd83d5465a80deb91f1a162e6e8865114175c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "marketing/base",
+          "size": [
+            380,
+            480
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "2b42fd6882dda896224ed93b7d1de24f24568fe2c257583e491dd4a326c941b8",
+          "file_sha256": "3f12deab5b9ccc0ef422acc6ba1e040c5197d7d00756f4687634fd29dc4db140",
+          "exact_source_crop": true
+        },
+        {
+          "id": "order-waiting/base",
+          "size": [
+            278,
+            375
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "33d426bbbc17a5f08febffda61e225ded41ebcbad63922de98b694252121080f",
+          "file_sha256": "f701558580e12828f56cb6a949183176bd8849b5902f505eb625f1fbf6092a7e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "order-ready/base",
+          "size": [
+            346,
+            375
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "39f066750ad18b2bfec3ae43ee70fba297b7fc60de36465d64f450f9008d10c9",
+          "file_sha256": "7991d8e7edbd6bd493abcb80008bcf83d5d8863a66ae5a26178472c4770a4b92",
+          "exact_source_crop": true
+        },
+        {
+          "id": "order-served/base",
+          "size": [
+            353,
+            375
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "13c58b20284dfbde96097fdd5bb2c14d283f62b994283ac4e00b84d3b73608cc",
+          "file_sha256": "4b0f232e9b99c798298da4480402d57af277241fde18a95dca6cefbabf3fb9fa",
+          "exact_source_crop": true
+        },
+        {
+          "id": "star/base",
+          "size": [
+            360,
+            375
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "f83d6099ec436bec6500ad187831fe82d9bc376f9ef94282ff7c4d0ee75fe110",
+          "file_sha256": "c3d546c904fe05d5f54f984c2cc06ac1498202b2f31844a944419edf27c9853a",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "total_assets": 36,
+  "errors": 0
+}

@@ -1,0 +1,25 @@
+{
+  "id": 6,
+  "name": "薄荷骑手",
+  "look": {
+    "skin": 1,
+    "hair": 0,
+    "hairStyle": 3,
+    "shirt": 6,
+    "pants": 2
+  },
+  "hairstyle": 7,
+  "outfit": "hoodie",
+  "accessory": "none",
+  "accent": "#eddbb8",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#dfaa7d",
+    "hair": "#594237",
+    "shirt": "#69a295",
+    "pants": "#585464"
+  },
+  "hatPalette": "#799ba7",
+  "description": "Fixed customer cast 6 (薄荷骑手): warm skin #dfaa7d; hair #594237 in short tapered sides and a tall swept-up pointed QUIFF rising asymmetrically, no hat. Outfit: #69a295 hooded sweatshirt with cream hood lining, drawstrings and kangaroo pocket, hood down. Lower clothing color #585464; warm dark brown leather shoes. Accent #eddbb8. No glasses, headband, bow or bag."
+}

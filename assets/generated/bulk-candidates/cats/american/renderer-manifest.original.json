@@ -1,0 +1,535 @@
+{
+  "breed": "american",
+  "version": 1,
+  "generator": "built-in image_gen",
+  "sourceSheetDimensions": [
+    1254,
+    1254
+  ],
+  "bboxAlphaThreshold": "alpha > 128, excludes faint fringe; original alpha preserved in lossless crops",
+  "facingConvention": {
+    "walkA": "head-left",
+    "walkB": "head-left",
+    "other": "front-three-quarter slightly left; nuzzle head tilts independently"
+  },
+  "scaleNote": "One calibrated sourceToWorldScale for every frame from each source sheet. Estimated from common head width, never frame-height fit; runtime head/contact verification required.",
+  "anchorNote": "Manually visually estimated grounded front-paw/support midpoint and crown/forehead between ears, not ear tips. Contact/flip verification remains runtime work.",
+  "qa": {
+    "status": "source-and-crops-inspected",
+    "checks": [
+      "Fourteen complete actions",
+      "Visually distinct gait phases",
+      "Closed blink versus open-mouth happy expression",
+      "Grooming paw chest versus cheek",
+      "Raised broad chest and grounded haunch",
+      "One consistent breed identity and source scale"
+    ],
+    "raisedPoseHeightNote": "Raised poses naturally taller than idle; height/contact still require runtime petting QA."
+  },
+  "frames": [
+    {
+      "state": "idle",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/american-idle.png",
+      "source": "source.png",
+      "source_crop": [
+        63,
+        27,
+        319,
+        303
+      ],
+      "size": [
+        256,
+        276
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 243,
+        "h": 260
+      },
+      "foot": {
+        "x": 72,
+        "y": 259
+      },
+      "headContact": {
+        "x": 88,
+        "y": 47
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26839,
+      "sha256": "73f4e1a17a89a53d20c4d0b8935787a4b06e536f93978553dab4b289f7545cf6"
+    },
+    {
+      "state": "swish",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/american-swish.png",
+      "source": "source.png",
+      "source_crop": [
+        355,
+        27,
+        653,
+        303
+      ],
+      "size": [
+        298,
+        276
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 285,
+        "h": 260
+      },
+      "foot": {
+        "x": 70,
+        "y": 259
+      },
+      "headContact": {
+        "x": 87,
+        "y": 48
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 38893,
+      "sha256": "a91ec1072271749c83c73605dc7c6dfb3a12852a50d4a2522ad3ec7f005c0887"
+    },
+    {
+      "state": "blink",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/american-blink.png",
+      "source": "source.png",
+      "source_crop": [
+        688,
+        27,
+        943,
+        303
+      ],
+      "size": [
+        255,
+        276
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 239,
+        "h": 260
+      },
+      "foot": {
+        "x": 66,
+        "y": 259
+      },
+      "headContact": {
+        "x": 87,
+        "y": 47
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26735,
+      "sha256": "445c794681b550f55c4b2d1816598e419d81a0933449f349072fff48a3dbfa1e"
+    },
+    {
+      "state": "happy",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/american-happy.png",
+      "source": "source.png",
+      "source_crop": [
+        1000,
+        27,
+        1250,
+        303
+      ],
+      "size": [
+        250,
+        276
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 234,
+        "h": 260
+      },
+      "foot": {
+        "x": 79,
+        "y": 259
+      },
+      "headContact": {
+        "x": 94,
+        "y": 47
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26988,
+      "sha256": "9afbd66ba4df5d261dea5a55cf63f0c83b3c55e9521353a395ba75ebe15dca85"
+    },
+    {
+      "state": "walkA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/american-walkA.png",
+      "source": "source.png",
+      "source_crop": [
+        10,
+        358,
+        340,
+        585
+      ],
+      "size": [
+        330,
+        227
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 319,
+        "h": 211
+      },
+      "foot": {
+        "x": 149,
+        "y": 210
+      },
+      "headContact": {
+        "x": 83,
+        "y": 45
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 27692,
+      "sha256": "610b8a2947bb85dbb20255a8934a69d13cb89870ec2a6cc2fc9a51176d79d010"
+    },
+    {
+      "state": "walkB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/american-walkB.png",
+      "source": "source.png",
+      "source_crop": [
+        340,
+        358,
+        685,
+        587
+      ],
+      "size": [
+        345,
+        229
+      ],
+      "bbox": {
+        "x": 3,
+        "y": 8,
+        "w": 334,
+        "h": 213
+      },
+      "foot": {
+        "x": 149,
+        "y": 212
+      },
+      "headContact": {
+        "x": 75,
+        "y": 45
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 30819,
+      "sha256": "3049a720b93dea6c3dd91c4529e2636bec1366c9820ea7f35a9eba0218b54637"
+    },
+    {
+      "state": "sleep",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/american-sleep.png",
+      "source": "source.png",
+      "source_crop": [
+        697,
+        407,
+        973,
+        580
+      ],
+      "size": [
+        276,
+        173
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 260,
+        "h": 157
+      },
+      "foot": {
+        "x": 121,
+        "y": 156
+      },
+      "headContact": {
+        "x": 91,
+        "y": 53
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 10482,
+      "sha256": "991134ceb09f56ba534119af4f7324c5c5e4e38b8ae56b9cc0ddf25afed731b5"
+    },
+    {
+      "state": "groomA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/american-groomA.png",
+      "source": "source.png",
+      "source_crop": [
+        1012,
+        344,
+        1253,
+        592
+      ],
+      "size": [
+        241,
+        248
+      ],
+      "bbox": {
+        "x": 4,
+        "y": 8,
+        "w": 229,
+        "h": 232
+      },
+      "foot": {
+        "x": 74,
+        "y": 231
+      },
+      "headContact": {
+        "x": 84,
+        "y": 41
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 18725,
+      "sha256": "62a204a02d7bd56f9b0e4b0a4dd802c9d5b9be6ec44964f564f8cd4e2f8e35eb"
+    },
+    {
+      "state": "groomB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/american-groomB.png",
+      "source": "source.png",
+      "source_crop": [
+        53,
+        639,
+        303,
+        912
+      ],
+      "size": [
+        250,
+        273
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 234,
+        "h": 259
+      },
+      "foot": {
+        "x": 72,
+        "y": 258
+      },
+      "headContact": {
+        "x": 81,
+        "y": 45
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 23244,
+      "sha256": "be0f3ee48c2efa38873a37ef40e067873a15b938b140d1588a3e0a0fdf150e80"
+    },
+    {
+      "state": "stretch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/american-stretch.png",
+      "source": "source.png",
+      "source_crop": [
+        314,
+        644,
+        651,
+        914
+      ],
+      "size": [
+        337,
+        270
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 321,
+        "h": 257
+      },
+      "foot": {
+        "x": 167,
+        "y": 256
+      },
+      "headContact": {
+        "x": 104,
+        "y": 165
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 41612,
+      "sha256": "9fb36123027851bde57052941153a80a7f133d6b0ae204874081f039e2ad4438"
+    },
+    {
+      "state": "watch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/american-watch.png",
+      "source": "source.png",
+      "source_crop": [
+        688,
+        643,
+        946,
+        915
+      ],
+      "size": [
+        258,
+        272
+      ],
+      "bbox": {
+        "x": 7,
+        "y": 8,
+        "w": 243,
+        "h": 256
+      },
+      "foot": {
+        "x": 68,
+        "y": 255
+      },
+      "headContact": {
+        "x": 89,
+        "y": 44
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26387,
+      "sha256": "5b0a03dc646cc1b4f070e3a1e1ecf578730ac90af17abb384d276b0c685d4f49"
+    },
+    {
+      "state": "lookUp",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/american-lookUp.png",
+      "source": "source.png",
+      "source_crop": [
+        998,
+        612,
+        1248,
+        920
+      ],
+      "size": [
+        250,
+        308
+      ],
+      "bbox": {
+        "x": 4,
+        "y": 8,
+        "w": 238,
+        "h": 292
+      },
+      "foot": {
+        "x": 78,
+        "y": 291
+      },
+      "headContact": {
+        "x": 94,
+        "y": 46
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 27685,
+      "sha256": "85a42d2aef0f8eec2487a6240640cb1dedfa7909815b81a14761e9349b67d315"
+    },
+    {
+      "state": "nuzzleA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/american-nuzzleA.png",
+      "source": "source.png",
+      "source_crop": [
+        67,
+        912,
+        321,
+        1223
+      ],
+      "size": [
+        254,
+        311
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 6,
+        "w": 241,
+        "h": 297
+      },
+      "foot": {
+        "x": 69,
+        "y": 294
+      },
+      "headContact": {
+        "x": 77,
+        "y": 46
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 25818,
+      "sha256": "de9a136576a00a354670980571ea94cb6c55d134fed08bf033cf9d156e1e72e9"
+    },
+    {
+      "state": "nuzzleB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/american-nuzzleB.png",
+      "source": "source.png",
+      "source_crop": [
+        396,
+        914,
+        647,
+        1223
+      ],
+      "size": [
+        251,
+        309
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 5,
+        "w": 235,
+        "h": 296
+      },
+      "foot": {
+        "x": 73,
+        "y": 292
+      },
+      "headContact": {
+        "x": 86,
+        "y": 53
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26400,
+      "sha256": "c818d95ef54e804ef41e9fd81f27dfdf6eaea2db8a89fbf339b716fa4038d762"
+    }
+  ]
+}

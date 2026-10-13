@@ -24,6 +24,8 @@ import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale
 import { CafeView } from './render/cafe-view';
 import { CafeGame } from './render/phaser/game';
 import { character, toDataURL } from './render/sprites';
+import { getGeneratedStaffAdapter } from './render/generated-main-art';
+import { fineSpriteArt } from './render/fine-sprite-art';
 import { showMoneyDetails } from './ui/money-details';
 import { closeModal, isModalOpen, showModal, toast } from './ui/modal';
 import { showOnboarding, type OnboardingResult } from './ui/onboarding';
@@ -40,6 +42,7 @@ import { cafeInteractionEnabled } from './ui/cafe-interaction';
 import { dockMobileControls } from './ui/mobile-layout';
 import { ArrangeFocus } from './ui/arrange-focus';
 import { trackVisualViewport } from './ui/viewport';
+import { waitForStartupReady } from './ui/startup-ready';
 
 trackVisualViewport();
 import { settlementHtml } from './ui/settlement';
@@ -151,10 +154,11 @@ function fitCanvas(): void {
   // The stats strip only shows if the café could still be as wide as the stage under it.
   stats.hidden = !!mobileDock || rect.height - STATS_SPACE < MIN_SCENE_H * (rect.width / SCENE_W);
   const roomH = rect.height - (stats.hidden ? 0 : STATS_SPACE);
-  // The café grows taller (more floor) to match the stage's shape. Height it can't
-  // use goes to the sign, if there's enough for it.
+  // A fixed-view illustration retains the established 320×240 floor plan.
+  // Tall phone viewports get breathing room around the café rather than more
+  // empty forecourt. Existing session/resize migration still owns saved feet.
   const previousHeight = sceneHeight();
-  setSceneHeight((SCENE_W * roomH) / Math.max(1, rect.width));
+  setSceneHeight(MIN_SCENE_H);
   if (previousHeight !== sceneHeight()) {
     sim.resizeScene(previousHeight);
     scene.setOverview(scene.overview, true);
@@ -599,13 +603,13 @@ onLocaleChange(() => {
   panel.refresh();
 });
 
-const ownerIcon = () =>
-  toDataURL(
-    state.profile
-      ? character(state.profile.look, 'owner').stand
-      : character({ skin: 0, hair: 1, hairStyle: 1, shirt: 0, pants: 0 }, 'barista').stand,
-    3,
-  );
+const ownerIcon = () => {
+  if (!state.profile) return toDataURL(character({ skin: 0, hair: 1, hairStyle: 1, shirt: 0, pants: 0 }, 'barista').stand, 3);
+  const fallback = character(state.profile.look, 'owner');
+  const frames = getGeneratedStaffAdapter()?.resolve({ role: 'owner', look: state.profile.look }, fallback).frames ?? fallback;
+  const art = fineSpriteArt(frames.stand);
+  return toDataURL(art.canvas, 3 / art.density);
+};
 
 function rememberLocale(locale: Locale): void {
   storage.setPreference(LOCALE_KEY, locale);
@@ -884,8 +888,7 @@ if (!state.profile) startOnboarding();
 
 // The page starts behind a loading spinner (see index.html). Lift it once the pixel
 // fonts are in (or after 2s at most) and the café has drawn its first frame.
-const atMost = (ms: number, wait: Promise<unknown>) => Promise.race([wait, new Promise((done) => setTimeout(done, ms))]);
-Promise.all([atMost(4000, cafe.ready), atMost(2000, document.fonts.ready)]).then(() =>
+waitForStartupReady(cafe.ready, document.fonts.ready).then(() =>
   requestAnimationFrame(() => {
     document.body.classList.add('ready');
     setTimeout(() => $('loader').remove(), 300);

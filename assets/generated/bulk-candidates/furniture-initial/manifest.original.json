@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "generation": "Built-in imagegen; four independent calls. Sources and crops unchanged RGBA. Sheet is lossless packing only.",
+  "bboxAlphaThreshold": "alpha > 128",
+  "sheet": "/workspace/scratch/30a3201ff9cd/cafe-movable-v1/movable-source-sheet.png",
+  "sheetSize": [
+    2607,
+    3306
+  ],
+  "assets": [
+    {
+      "id": "clock",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-movable-v1/clock.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-movable-v1/sources/clock-source.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceCrop": [
+        82,
+        79,
+        1171,
+        1181
+      ],
+      "size": [
+        1089,
+        1102
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 1069,
+        "h": 1082
+      },
+      "bboxAlphaThreshold": ">128",
+      "surface": "wall",
+      "logicalEnvelope": [
+        21,
+        21
+      ],
+      "footprintCells": [
+        3,
+        3
+      ],
+      "anchor": {
+        "x": 544.5,
+        "y": 1091,
+        "kind": "wall-bottom-center"
+      },
+      "aspectPreservingFit": {
+        "visibleWidth": 20.748,
+        "visibleHeight": 21.0
+      },
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "fc7a41bfec4a2625281d45405a9c5c765cf11a3206171296f64a0ce0c3c53e2e",
+      "cropSha256": "7fd76782da46a093067265497bb026ee4e9db3a5687e2aba817905ee4f7e3dec",
+      "dialCenter": {
+        "x": 544,
+        "y": 545
+      },
+      "dynamicHandsRequired": true,
+      "handsBakedIn": false,
+      "recommendedHandLengthsInSourcePixels": {
+        "minute": 254,
+        "hour": 178
+      },
+      "note": "Face center is visual measurement; preserve dynamic local-time hands. Native outer silhouette is about 1.2% taller than wide; scale uniformly.",
+      "sheetRect": {
+        "x": 64,
+        "y": 503,
+        "w": 1089,
+        "h": 1102
+      }
+    },
+    {
+      "id": "coatrack",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-movable-v1/coatrack.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-movable-v1/sources/coatrack-source.png",
+      "sourceSize": [
+        749,
+        2098
+      ],
+      "sourceCrop": [
+        71,
+        51,
+        633,
+        2031
+      ],
+      "size": [
+        562,
+        1980
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 542,
+        "h": 1960
+      },
+      "bboxAlphaThreshold": ">128",
+      "surface": "floor",
+      "logicalEnvelope": [
+        10,
+        28
+      ],
+      "footprintCells": [
+        1,
+        1
+      ],
+      "anchor": {
+        "x": 281.0,
+        "y": 1969,
+        "kind": "foot-bottom-center"
+      },
+      "aspectPreservingFit": {
+        "visibleWidth": 7.743,
+        "visibleHeight": 28.0
+      },
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "8e04ad0c46ed108e4a32be4ff0942a2f40ee704c14ce4a5f423fcc10048b68f2",
+      "cropSha256": "07fd4afdfa0442cc0d9ccbcd317c8f31b704b3e3bcd226f3c5691592c2556fa0",
+      "note": "Narrower than old 10x28 envelope. Uniform-fit result is 7.74x28; center on floor footprint, never horizontally stretch.",
+      "sheetRect": {
+        "x": 1599,
+        "y": 64,
+        "w": 562,
+        "h": 1980
+      }
+    },
+    {
+      "id": "bookshelf",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-movable-v1/bookshelf.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-movable-v1/sources/bookshelf-source.png",
+      "sourceSize": [
+        1217,
+        1293
+      ],
+      "sourceCrop": [
+        66,
+        82,
+        1148,
+        1216
+      ],
+      "size": [
+        1082,
+        1134
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 1062,
+        "h": 1114
+      },
+      "bboxAlphaThreshold": ">128",
+      "surface": "floor",
+      "logicalEnvelope": [
+        32,
+        34
+      ],
+      "footprintCells": [
+        4,
+        1
+      ],
+      "anchor": {
+        "x": 541.0,
+        "y": 1123,
+        "kind": "foot-bottom-center"
+      },
+      "aspectPreservingFit": {
+        "visibleWidth": 32.0,
+        "visibleHeight": 33.567
+      },
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "a72529c729c5440a1fe3db5ced9b0633f5dbc3a18b8e1a396155e6c95c30d081",
+      "cropSha256": "34a7a9e0b0e1b4a3a4976f9d0c8503cab79ca21456f766bee4ed00a2be6aeb27",
+      "sheetRect": {
+        "x": 67,
+        "y": 2108,
+        "w": 1082,
+        "h": 1134
+      }
+    },
+    {
+      "id": "catbed",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-movable-v1/catbed.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-movable-v1/sources/catbed-source.png",
+      "sourceSize": [
+        1606,
+        979
+      ],
+      "sourceCrop": [
+        141,
+        205,
+        1467,
+        828
+      ],
+      "size": [
+        1326,
+        623
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 1306,
+        "h": 603
+      },
+      "bboxAlphaThreshold": ">128",
+      "surface": "floor",
+      "logicalEnvelope": [
+        18,
+        11
+      ],
+      "footprintCells": [
+        2,
+        1
+      ],
+      "anchor": {
+        "x": 663.0,
+        "y": 612,
+        "kind": "foot-bottom-center"
+      },
+      "aspectPreservingFit": {
+        "visibleWidth": 18.0,
+        "visibleHeight": 8.311
+      },
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "cebf05df85133a2be12841ced7c4952e0a2a80b6fe56e4009ff47417ce696322",
+      "cropSha256": "cab8be94990c5e58e91cbb69256096a91df41cb42afbb5c53dd008ea29b4c9a3",
+      "empty": true,
+      "note": "No baked cat. Generated bed is wider/flatter than old 18x11 art. Uniform-fit result is 18x8.31; bottom-align inside unchanged footprint, never vertically stretch.",
+      "sheetRect": {
+        "x": 1217,
+        "y": 2363,
+        "w": 1326,
+        "h": 623
+      }
+    }
+  ],
+  "limitations": [
+    "No source code changed or integration tested.",
+    "Generated alpha has very faint sparse fringe outside the >128 silhouette. 10px-padded crops preserve pixels within their crop; original full source files also retained. No masking, cleanup, recoloring or redraw used.",
+    "Artwork must be uniformly scaled by visible bbox into logical envelopes, with foot/center anchored as documented. Detail will simplify at the old tiny logical resolution."
+  ]
+}

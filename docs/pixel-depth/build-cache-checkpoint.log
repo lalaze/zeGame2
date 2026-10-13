@@ -1,0 +1,12 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> tiny-bean-cafe@0.1.0 prebuild
+> node scripts/subset-font.mjs
+
+src/assets/pixel-zh.woff2: 1410 glyphs, 44.8 KB
+
+> tiny-bean-cafe@0.1.0 build
+> tsc --noEmit && vite build
+
+src/render/fine-plant-art.ts(155,15): error TS6133: 'bx' is declared but its value is never read.
+src/render/fine-plant-art.ts(155,18): error TS6133: 'by' is declared but its value is never read.

@@ -1,0 +1,25 @@
+{
+  "id": 26,
+  "name": "橄榄学者",
+  "look": {
+    "skin": 1,
+    "hair": 1,
+    "hairStyle": 3,
+    "shirt": 2,
+    "pants": 1
+  },
+  "hairstyle": 7,
+  "outfit": "vest",
+  "accessory": "glasses",
+  "accent": "#e2bd77",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#dfaa7d",
+    "hair": "#976546",
+    "shirt": "#8ba477",
+    "pants": "#85664f"
+  },
+  "hatPalette": "#cf929e",
+  "description": "Fixed customer cast 26 (橄榄学者): warm skin #dfaa7d; hair #976546 in short tapered sides and a tall swept-up pointed QUIFF rising asymmetrically, no hat. Outfit: #e2bd77 buttoned sleeveless waistcoat over #8ba477 long-sleeve collared shirt with cream collar. Lower clothing color #85664f; warm dark brown leather shoes. Accent #e2bd77. Round dark-brown eyeglasses in every front/side/seated view; back shows temples near ears."
+}

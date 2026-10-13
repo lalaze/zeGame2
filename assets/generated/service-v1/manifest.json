@@ -1,0 +1,336 @@
+{
+  "source_sheet": "tiny-bean-service-props-sheet-v1.png",
+  "source_size_px": [
+    1536,
+    1024
+  ],
+  "source_sha256": "473db5c3293bd20468271cf89e94275e618b194e782cf7220fd35585b4ee5b87",
+  "generation": "OpenAI built-in image_gen, transparent_background=true",
+  "content_edits": "None. Output PNG crops preserve source pixels exactly; no recoloring, resizing, cleanup or alpha modification.",
+  "bounds_convention": "All boxes are [left, top, right, bottom], right and bottom EXCLUSIVE. Visible bbox is derived from alpha > 128. Crops include 8px of unchanged surrounding source alpha when cell boundaries permit.",
+  "alpha_notes": "Real RGBA alpha; faint generated low-alpha fringe is preserved. Alpha range of source: 0\u2013254. Bbox extraction does not change alpha.",
+  "anchor_convention": "Foot anchor is bottom center of the alpha>128 visible bounding box, measured from cropped image top-left; coordinate may land on an exclusive lower boundary. Use as bottom-center visual baseline.",
+  "sizing_notes": "Target logical sizes are fitting ENVELOPES. Preserve native aspect ratio; do not stretch sprites to envelope. Shelf is taller/narrower than envelope.",
+  "assets": [
+    {
+      "name": "espresso-machine",
+      "file": "espresso-machine.png",
+      "crop_sheet_bbox_px": [
+        22,
+        189,
+        510,
+        622
+      ],
+      "size_px": [
+        488,
+        433
+      ],
+      "visible_alpha_gt_128_sheet_bbox_px": [
+        30,
+        197,
+        502,
+        614
+      ],
+      "visible_alpha_gt_128_local_bbox_px": [
+        8,
+        8,
+        480,
+        425
+      ],
+      "foot_anchor_px": [
+        244.0,
+        425
+      ],
+      "foot_anchor_uv": [
+        0.5,
+        0.981524
+      ],
+      "logical_fit_envelope_px": [
+        24,
+        22
+      ],
+      "max_border_alpha": 1,
+      "lossless_source_pixel_match": true
+    },
+    {
+      "name": "open-pickup-shelf",
+      "file": "open-pickup-shelf.png",
+      "crop_sheet_bbox_px": [
+        545,
+        20,
+        953,
+        615
+      ],
+      "size_px": [
+        408,
+        595
+      ],
+      "visible_alpha_gt_128_sheet_bbox_px": [
+        553,
+        28,
+        945,
+        607
+      ],
+      "visible_alpha_gt_128_local_bbox_px": [
+        8,
+        8,
+        400,
+        587
+      ],
+      "foot_anchor_px": [
+        204.0,
+        587
+      ],
+      "foot_anchor_uv": [
+        0.5,
+        0.986555
+      ],
+      "logical_fit_envelope_px": [
+        36,
+        42
+      ],
+      "max_border_alpha": 1,
+      "lossless_source_pixel_match": true
+    },
+    {
+      "name": "low-service-cupboard",
+      "file": "low-service-cupboard.png",
+      "crop_sheet_bbox_px": [
+        981,
+        244,
+        1517,
+        633
+      ],
+      "size_px": [
+        536,
+        389
+      ],
+      "visible_alpha_gt_128_sheet_bbox_px": [
+        989,
+        252,
+        1509,
+        625
+      ],
+      "visible_alpha_gt_128_local_bbox_px": [
+        8,
+        8,
+        528,
+        381
+      ],
+      "foot_anchor_px": [
+        268.0,
+        381
+      ],
+      "foot_anchor_uv": [
+        0.5,
+        0.979434
+      ],
+      "logical_fit_envelope_px": [
+        36,
+        24
+      ],
+      "max_border_alpha": 2,
+      "lossless_source_pixel_match": true
+    },
+    {
+      "name": "cups-stack",
+      "file": "cups-stack.png",
+      "crop_sheet_bbox_px": [
+        147,
+        681,
+        369,
+        975
+      ],
+      "size_px": [
+        222,
+        294
+      ],
+      "visible_alpha_gt_128_sheet_bbox_px": [
+        155,
+        689,
+        361,
+        967
+      ],
+      "visible_alpha_gt_128_local_bbox_px": [
+        8,
+        8,
+        214,
+        286
+      ],
+      "foot_anchor_px": [
+        111.0,
+        286
+      ],
+      "foot_anchor_uv": [
+        0.5,
+        0.972789
+      ],
+      "logical_fit_envelope_px": [
+        10,
+        13
+      ],
+      "max_border_alpha": 2,
+      "lossless_source_pixel_match": true
+    },
+    {
+      "name": "glass-jars-pair",
+      "file": "glass-jars-pair.png",
+      "crop_sheet_bbox_px": [
+        579,
+        656,
+        930,
+        960
+      ],
+      "size_px": [
+        351,
+        304
+      ],
+      "visible_alpha_gt_128_sheet_bbox_px": [
+        587,
+        664,
+        922,
+        952
+      ],
+      "visible_alpha_gt_128_local_bbox_px": [
+        8,
+        8,
+        343,
+        296
+      ],
+      "foot_anchor_px": [
+        175.5,
+        296
+      ],
+      "foot_anchor_uv": [
+        0.5,
+        0.973684
+      ],
+      "logical_fit_envelope_px": [
+        17,
+        15
+      ],
+      "max_border_alpha": 3,
+      "lossless_source_pixel_match": true
+    },
+    {
+      "name": "empty-wicker-basket",
+      "file": "empty-wicker-basket.png",
+      "crop_sheet_bbox_px": [
+        1034,
+        729,
+        1464,
+        964
+      ],
+      "size_px": [
+        430,
+        235
+      ],
+      "visible_alpha_gt_128_sheet_bbox_px": [
+        1042,
+        737,
+        1456,
+        956
+      ],
+      "visible_alpha_gt_128_local_bbox_px": [
+        8,
+        8,
+        422,
+        227
+      ],
+      "foot_anchor_px": [
+        215.0,
+        227
+      ],
+      "foot_anchor_uv": [
+        0.5,
+        0.965957
+      ],
+      "logical_fit_envelope_px": [
+        18,
+        10
+      ],
+      "max_border_alpha": 0,
+      "lossless_source_pixel_match": true
+    },
+    {
+      "name": "glass-jar-tall",
+      "file": "glass-jar-tall.png",
+      "crop_sheet_bbox_px": [
+        579,
+        656,
+        760,
+        949
+      ],
+      "size_px": [
+        181,
+        293
+      ],
+      "visible_alpha_gt_128_sheet_bbox_px": [
+        587,
+        664,
+        757,
+        941
+      ],
+      "visible_alpha_gt_128_local_bbox_px": [
+        8,
+        8,
+        178,
+        285
+      ],
+      "foot_anchor_px": [
+        93.0,
+        285
+      ],
+      "foot_anchor_uv": [
+        0.513812,
+        0.972696
+      ],
+      "logical_fit_envelope_px": [
+        8,
+        13
+      ],
+      "max_border_alpha": 24,
+      "lossless_source_pixel_match": true
+    },
+    {
+      "name": "glass-jar-short",
+      "file": "glass-jar-short.png",
+      "crop_sheet_bbox_px": [
+        760,
+        750,
+        930,
+        960
+      ],
+      "size_px": [
+        170,
+        210
+      ],
+      "visible_alpha_gt_128_sheet_bbox_px": [
+        763,
+        758,
+        922,
+        952
+      ],
+      "visible_alpha_gt_128_local_bbox_px": [
+        3,
+        8,
+        162,
+        202
+      ],
+      "foot_anchor_px": [
+        82.5,
+        202
+      ],
+      "foot_anchor_uv": [
+        0.485294,
+        0.961905
+      ],
+      "logical_fit_envelope_px": [
+        8,
+        10
+      ],
+      "max_border_alpha": 26,
+      "lossless_source_pixel_match": true
+    }
+  ]
+}

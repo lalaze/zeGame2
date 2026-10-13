@@ -1,0 +1,535 @@
+{
+  "breed": "black",
+  "version": 1,
+  "generator": "built-in image_gen",
+  "sourceSheetDimensions": [
+    1254,
+    1254
+  ],
+  "bboxAlphaThreshold": "alpha > 128, excludes faint fringe; original alpha preserved in lossless crops",
+  "facingConvention": {
+    "walkA": "head-left",
+    "walkB": "head-left",
+    "other": "front-three-quarter slightly left; nuzzle head tilts independently"
+  },
+  "scaleNote": "One calibrated sourceToWorldScale for every frame from each source sheet. Estimated from common head width, never frame-height fit; runtime head/contact verification required.",
+  "anchorNote": "Manually visually estimated grounded front-paw/support midpoint and crown/forehead between ears, not ear tips. Contact/flip verification remains runtime work.",
+  "qa": {
+    "status": "source-and-crops-inspected",
+    "checks": [
+      "Fourteen complete actions",
+      "Visually distinct gait phases",
+      "Closed blink versus open-mouth happy expression",
+      "Grooming paw chest versus cheek",
+      "Raised broad chest and grounded haunch",
+      "One consistent breed identity and source scale"
+    ],
+    "raisedPoseHeightNote": "Raised poses naturally taller than idle; height/contact still require runtime petting QA."
+  },
+  "frames": [
+    {
+      "state": "idle",
+      "file": "black-idle.png",
+      "source": "source.png",
+      "source_crop": [
+        60,
+        40,
+        321,
+        334
+      ],
+      "size": [
+        261,
+        294
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 248,
+        "h": 278
+      },
+      "foot": {
+        "x": 75,
+        "y": 277
+      },
+      "headContact": {
+        "x": 88,
+        "y": 54
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 32665,
+      "sha256": "f49bba97192981587eb6a01d094ea4fe0537bb07f99d07785b0cdbb43b6b876c"
+    },
+    {
+      "state": "swish",
+      "file": "black-swish.png",
+      "source": "source.png",
+      "source_crop": [
+        362,
+        41,
+        663,
+        334
+      ],
+      "size": [
+        301,
+        293
+      ],
+      "bbox": {
+        "x": 4,
+        "y": 8,
+        "w": 289,
+        "h": 277
+      },
+      "foot": {
+        "x": 77,
+        "y": 276
+      },
+      "headContact": {
+        "x": 90,
+        "y": 53
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 45747,
+      "sha256": "7383931e42800f58b7d39deb58a773ed53175997d809bc49dd3a0423899d8525"
+    },
+    {
+      "state": "blink",
+      "file": "black-blink.png",
+      "source": "source.png",
+      "source_crop": [
+        677,
+        41,
+        941,
+        334
+      ],
+      "size": [
+        264,
+        293
+      ],
+      "bbox": {
+        "x": 4,
+        "y": 8,
+        "w": 252,
+        "h": 277
+      },
+      "foot": {
+        "x": 82,
+        "y": 276
+      },
+      "headContact": {
+        "x": 92,
+        "y": 53
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 32990,
+      "sha256": "06439aff631be984cb93af76d85a32bc83b78bbfdb45cc3531b26fa7ac1c3605"
+    },
+    {
+      "state": "happy",
+      "file": "black-happy.png",
+      "source": "source.png",
+      "source_crop": [
+        987,
+        41,
+        1251,
+        334
+      ],
+      "size": [
+        264,
+        293
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 248,
+        "h": 277
+      },
+      "foot": {
+        "x": 90,
+        "y": 276
+      },
+      "headContact": {
+        "x": 94,
+        "y": 53
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 33377,
+      "sha256": "4d5e8085a304441b3daf38cd691ca54c8b19cf6aae29bf34368eaeb23b45900f"
+    },
+    {
+      "state": "walkA",
+      "file": "black-walkA.png",
+      "source": "source.png",
+      "source_crop": [
+        10,
+        378,
+        339,
+        619
+      ],
+      "size": [
+        329,
+        241
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 314,
+        "h": 225
+      },
+      "foot": {
+        "x": 159,
+        "y": 224
+      },
+      "headContact": {
+        "x": 83,
+        "y": 43
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 32874,
+      "sha256": "2d6970289cbd4880436b311874bfa3ed230a32a1b6c7a0357c9fe7cc68b1b320"
+    },
+    {
+      "state": "walkB",
+      "file": "black-walkB.png",
+      "source": "source.png",
+      "source_crop": [
+        339,
+        378,
+        660,
+        619
+      ],
+      "size": [
+        321,
+        241
+      ],
+      "bbox": {
+        "x": 7,
+        "y": 8,
+        "w": 306,
+        "h": 225
+      },
+      "foot": {
+        "x": 135,
+        "y": 224
+      },
+      "headContact": {
+        "x": 78,
+        "y": 43
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 32867,
+      "sha256": "d0ed29fc907795300978697e1342b02821a116c3b7152f4b99fda88c668d393a"
+    },
+    {
+      "state": "sleep",
+      "file": "black-sleep.png",
+      "source": "source.png",
+      "source_crop": [
+        675,
+        448,
+        958,
+        619
+      ],
+      "size": [
+        283,
+        171
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 267,
+        "h": 155
+      },
+      "foot": {
+        "x": 139,
+        "y": 154
+      },
+      "headContact": {
+        "x": 90,
+        "y": 52
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 12234,
+      "sha256": "3c133a3008f337e83e03812b63eccd071518a2cee813791a108d7791b0eae499"
+    },
+    {
+      "state": "groomA",
+      "file": "black-groomA.png",
+      "source": "source.png",
+      "source_crop": [
+        987,
+        354,
+        1251,
+        622
+      ],
+      "size": [
+        264,
+        268
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 248,
+        "h": 252
+      },
+      "foot": {
+        "x": 102,
+        "y": 251
+      },
+      "headContact": {
+        "x": 97,
+        "y": 59
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 30220,
+      "sha256": "df07ed115ff31a1707981b6fb66c0094575973d8be49c3ef5a17785c8e3cfca1"
+    },
+    {
+      "state": "groomB",
+      "file": "black-groomB.png",
+      "source": "source.png",
+      "source_crop": [
+        37,
+        637,
+        297,
+        928
+      ],
+      "size": [
+        260,
+        291
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 247,
+        "h": 279
+      },
+      "foot": {
+        "x": 88,
+        "y": 278
+      },
+      "headContact": {
+        "x": 94,
+        "y": 49
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 31538,
+      "sha256": "cbee11cf7c9e496a26037c8b31854d9c05b2737df7c63624d2b41392a8cd6448"
+    },
+    {
+      "state": "stretch",
+      "file": "black-stretch.png",
+      "source": "source.png",
+      "source_crop": [
+        305,
+        650,
+        647,
+        926
+      ],
+      "size": [
+        342,
+        276
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 326,
+        "h": 263
+      },
+      "foot": {
+        "x": 175,
+        "y": 262
+      },
+      "headContact": {
+        "x": 119,
+        "y": 148
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 46040,
+      "sha256": "eb732cc32e2818e8a64a8ab4b0ead429d447c1b8e5d709f2591db38759f6256f"
+    },
+    {
+      "state": "watch",
+      "file": "black-watch.png",
+      "source": "source.png",
+      "source_crop": [
+        676,
+        654,
+        948,
+        936
+      ],
+      "size": [
+        272,
+        282
+      ],
+      "bbox": {
+        "x": 7,
+        "y": 8,
+        "w": 257,
+        "h": 266
+      },
+      "foot": {
+        "x": 87,
+        "y": 265
+      },
+      "headContact": {
+        "x": 97,
+        "y": 52
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 33819,
+      "sha256": "638f2fd15534ec80d1e53d55848525d7d2969d07e895a358d6f18342e26ebae8"
+    },
+    {
+      "state": "lookUp",
+      "file": "black-lookUp.png",
+      "source": "source.png",
+      "source_crop": [
+        1000,
+        626,
+        1252,
+        937
+      ],
+      "size": [
+        252,
+        311
+      ],
+      "bbox": {
+        "x": 3,
+        "y": 8,
+        "w": 241,
+        "h": 295
+      },
+      "foot": {
+        "x": 76,
+        "y": 294
+      },
+      "headContact": {
+        "x": 94,
+        "y": 48
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 32009,
+      "sha256": "e0eb8bed64403986c121d9e23befdb2902118b6e9abe9529f45f5d9aaf5740f5"
+    },
+    {
+      "state": "nuzzleA",
+      "file": "black-nuzzleA.png",
+      "source": "source.png",
+      "source_crop": [
+        51,
+        928,
+        300,
+        1230
+      ],
+      "size": [
+        249,
+        302
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 4,
+        "w": 233,
+        "h": 290
+      },
+      "foot": {
+        "x": 72,
+        "y": 285
+      },
+      "headContact": {
+        "x": 85,
+        "y": 42
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 28257,
+      "sha256": "aa5470b3ee9ddb8f0368c18c44beac08f5d5da12f8b7ff1862325748135ce3c4"
+    },
+    {
+      "state": "nuzzleB",
+      "file": "black-nuzzleB.png",
+      "source": "source.png",
+      "source_crop": [
+        367,
+        927,
+        622,
+        1230
+      ],
+      "size": [
+        255,
+        303
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 5,
+        "w": 239,
+        "h": 290
+      },
+      "foot": {
+        "x": 122,
+        "y": 286
+      },
+      "headContact": {
+        "x": 113,
+        "y": 51
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 31251,
+      "sha256": "d29c2d2d9ec4350c078ee3621c6d151415fa17cd66a06053e47dcb985c5c452f"
+    }
+  ]
+}

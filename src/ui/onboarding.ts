@@ -8,6 +8,7 @@ import { HAIRS, HEAD_ROWS, SHIRTS, SKINS, character } from '../render/sprites';
 
 import { containDialogFocus, focusDialog } from './dialog-focus';
 import { isComposingKey } from './keyboard';
+import { createGeneratedOwnerPreview } from './generated-owner-preview';
 
 let dismissOnboarding: (() => void) | null = null;
 let headingId = 0;
@@ -37,17 +38,6 @@ function randomLook(): Look {
   return Object.fromEntries(
     (Object.keys(LOOK_RANGES) as (keyof Look)[]).map((k) => [k, Math.floor(Math.random() * LOOK_RANGES[k])]),
   ) as unknown as Look;
-}
-
-function scaledSprite(sprite: HTMLCanvasElement, scale: number, className: string): HTMLCanvasElement {
-  const c = document.createElement('canvas');
-  c.width = sprite.width;
-  c.height = sprite.height;
-  c.getContext('2d')!.drawImage(sprite, 0, 0);
-  c.className = className;
-  c.style.width = `${sprite.width * scale}px`;
-  c.style.height = `${sprite.height * scale}px`;
-  return c;
 }
 
 function themePreview(themeId: string): HTMLCanvasElement {
@@ -86,9 +76,12 @@ export function showOnboarding(opts: Options): void {
 
   let closed = false;
   let releaseFocus: (() => void) | undefined;
+  let releasePreview: (() => void) | undefined;
   const close = () => {
     if (closed) return;
     closed = true;
+    releasePreview?.();
+    releasePreview = undefined;
     overlay.remove();
     releaseFocus?.();
     dismissOnboarding = null;
@@ -140,6 +133,8 @@ export function showOnboarding(opts: Options): void {
   document.addEventListener('keydown', onKey, true);
 
   function render(): void {
+    releasePreview?.();
+    releasePreview = undefined;
     const step = steps[index];
     const dots = steps.map((_, i) => `<i class="${i === index ? 'on' : i < index ? 'done' : ''}"></i>`).join('');
     const isLast = index === steps.length - 1;
@@ -233,10 +228,13 @@ export function showOnboarding(opts: Options): void {
         <button class="pixel-btn ghost small" data-random>${t('ob.random')}</button>
       </div>`;
     const preview = body.querySelector<HTMLElement>('.char-preview')!;
+    const ownerPreview = createGeneratedOwnerPreview(draft.look, 5);
+    preview.append(ownerPreview.canvas);
+    releasePreview = ownerPreview.dispose;
     const palettes: Partial<Record<keyof Look, string[]>> = { skin: SKINS, hair: HAIRS, shirt: SHIRTS };
 
-    const paint = () => {
-      preview.replaceChildren(scaledSprite(character(draft.look, 'owner').stand, 5, 'char-sprite'));
+    const paint = (repaintOwner = true) => {
+      if (repaintOwner) ownerPreview.update(draft.look);
       body.querySelectorAll<HTMLElement>('.swatches').forEach((group) => {
         const key = group.dataset.key as keyof Look;
         group.replaceChildren(
@@ -271,7 +269,7 @@ export function showOnboarding(opts: Options): void {
       draft.look = randomLook();
       paint();
     });
-    paint();
+    paint(false);
   }
 
   function style(body: HTMLElement): void {
@@ -310,7 +308,9 @@ export function showOnboarding(opts: Options): void {
         <div class="opening-owner"></div>
       </div>
       <p>${t('ob.open.body', { owner, cafe })}</p>`;
-    body.querySelector('.opening-owner')!.append(scaledSprite(character(draft.look, 'owner').stand, 6, 'char-sprite'));
+    const ownerPreview = createGeneratedOwnerPreview(draft.look, 6);
+    body.querySelector('.opening-owner')!.append(ownerPreview.canvas);
+    releasePreview = ownerPreview.dispose;
   }
 
   dismissOnboarding = close;

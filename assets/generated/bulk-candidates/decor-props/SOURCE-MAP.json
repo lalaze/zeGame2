@@ -1,0 +1,16 @@
+{
+  "sill_cactus": "sources/sill_cactus-source.png",
+  "sill_tulips": "sources/sill_tulips-source.png",
+  "ceiling_lights": "sources/ceiling_lights-source.png",
+  "sill_bonsai": "sources/sill_bonsai-source.png",
+  "ceiling_chandelier": "sources/ceiling_chandelier-source.png",
+  "rug_red": "sources/rug_red-source.png",
+  "rug_blue": "sources/rug_blue-source.png",
+  "rug_round": "sources/rug_round-source.png",
+  "ceiling_pendants": "sources/ceiling_pendants-source.png",
+  "ceiling_vines": "sources/ceiling_vines-source.png",
+  "neon_heart": "sources/neon_heart-source.png",
+  "neon_cafe": "sources/neon_cafe-source.png",
+  "neon_cup": "sources/neon_cup-source.png",
+  "sill_cactus-correction": "/workspace/scratch/30a3201ff9cd/generated_images/exec-50b91ee4-1839-4cf1-8551-e58931c56abf.png"
+}

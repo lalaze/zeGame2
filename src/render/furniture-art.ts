@@ -4,7 +4,8 @@ import { CELL, furnitureDef } from '../game/furniture';
 import { collectionSprite } from './furnishing-collection';
 import { mix, ramp } from './color';
 import { grain, paintArt, plantSprite, shadow } from './decor-art';
-import { OUTLINE, pixelSprite } from './sprites';
+// Reference A: one warm ink, crisp upper-left light, solid material clusters.
+const OUTLINE = '#39281f';
 
 type Ctx = CanvasRenderingContext2D;
 type Fill = (x: number, y: number, w: number, h: number, color: string) => void;
@@ -35,320 +36,223 @@ function canvas(w: number, h: number, draw: (r: Fill, ctx: Ctx) => void): HTMLCa
   return c;
 }
 
-const WOOD = ramp('#8a5a3c');
-const LIGHT_WOOD = ramp('#b07a4a');
+const WOOD = { base: '#865332', hi: '#c98c4d', lo: '#543425', dark: '#39281f' };
+const LIGHT_WOOD = { base: '#aa7241', hi: '#e4b777', lo: '#74462d', dark: '#543425' };
+const CREAM = '#f4e6c7', BRASS = '#c8a15e', SAGE = '#627451';
 
-/** A tall fiddle-leaf fig in a terracotta pot. Also stands by the front door. */
-export const FIG = lazy(() =>
-  pixelSprite(
-    [
-      '.....lg.......', '...lgGg..lg....', '..gGGg..gGgl...', '..gGg.lgGGg....', '...g.gGGgg.lg..',
-      '.lgg..gGg..gGg.', 'gGGgl..b.lgGGg.', '.gGGg..b.gGGg..', '..gg..lbgg.g...', '..lgg.gb.......',
-      '.gGGgggb.lgg...', '.gGGg..bgGGGg..', '..gg...bgGGg...', '.......b.gg....', '.......b.......',
-      '....qqqqqq.....', '...rrrrrrrr....', '...rRrrrrRr....', '...rRrrrrRr....', '....rrrrrr.....',
-      '....RRRRRR.....',
-    ],
-    { g: '#6fb26a', G: '#4e8a4f', l: '#9fd47e', b: '#6b4630', r: '#d2774f', R: '#a8553a', q: '#e8936a' },
-  ),
-);
+/** Raised timber panel with a recessed field, mitres and an upper-left bevel. */
+function panel(r: Fill, x: number, y: number, w: number, h: number): void {
+  r(x, y, w, h, OUTLINE); r(x + 1, y + 1, w - 2, h - 2, WOOD.base);
+  r(x + 1, y + 1, w - 2, 1, WOOD.hi); r(x + 1, y + 1, 1, h - 2, LIGHT_WOOD.base);
+  if (w > 6 && h > 5) {
+    r(x + 3, y + 3, w - 6, h - 6, WOOD.lo);
+    r(x + 4, y + 4, w - 8, h - 7, LIGHT_WOOD.base);
+  }
+}
+
+/** Leaf clusters keep negative space, broad leaves and sunlit tips readable. */
+function leaves(r: Fill, x: number, y: number, w: number): void {
+  r(x + 1, y, w - 2, 1, '#aab36b'); r(x, y + 1, w, 2, SAGE);
+  r(x + 1, y + 3, w - 2, 1, '#3f5437'); r(x + 1, y + 1, 2, 1, '#91a35c');
+}
+
+/** Fiddle-leaf fig: forked branches, cupped leaves and a fluted terracotta pot. */
+export const FIG = lazy(() => canvas(16, 23, (r) => {
+  r(7, 7, 2, 10, OUTLINE); r(7, 8, 1, 9, WOOD.hi);
+  r(3, 11, 5, 1, WOOD.base); r(9, 10, 4, 1, WOOD.base);
+  // Dense overlapping crowns, each with a warm lit lobe and a dark lower cup.
+  // The tiny fork of trunk remains visible under the canopy, never a bare stalk.
+  for (const [x, y, w] of [[4, 0, 7], [9, 2, 6], [1, 3, 7], [5, 5, 7], [0, 8, 7], [9, 8, 7], [4, 10, 7]] as const) {
+    r(x + 1, y, w - 2, 1, '#405137'); r(x, y + 1, w, 3, '#405137');
+    r(x + 1, y + 4, w - 2, 1, '#405137'); r(x + 1, y + 1, w - 2, 3, SAGE);
+    r(x + 1, y + 1, w - 3, 1, '#a5b177'); r(x + 1, y + 2, 2, 1, '#889e5c');
+    r(x + 3, y + 2, 1, 2, '#778d51');
+  }
+  r(3, 6, 1, 1, '#c7cb87'); r(9, 2, 1, 1, '#c7cb87'); r(10, 10, 1, 1, '#a5b177');
+  r(3, 16, 10, 2, OUTLINE); r(4, 16, 8, 1, '#ddb47a'); r(4, 18, 8, 4, OUTLINE);
+  r(5, 18, 6, 4, '#b8653e'); r(5, 18, 1, 3, '#e6a569'); r(10, 18, 1, 3, '#85452f');
+  r(6, 19, 1, 2, '#d88c56'); r(4, 22, 8, 1, WOOD.lo);
+}));
 
 // ---------------------------------------------------------------- floor pieces
 
-const LAMP = lazy(() =>
-  pixelSprite(
-    [
-      '...sssss...', '..sSSSSSs..', '.sSSSSSSSs.', 'sSSSSSSSSSs', 'kkkkkkkkkkk', '.....l.....',
-      '.....p.....', '.....p.....', '.....p.....', '.....p.....', '.....p.....', '.....p.....',
-      '.....p.....', '.....p.....', '.....p.....', '.....p.....', '.....p.....', '.....p.....',
-      '.....p.....', '.....p.....', '....ppp....', '..PPPPPPP..',
-    ],
-    { s: '#e8b45a', S: '#f6d58a', k: '#c0843a', l: '#fff6c8', p: '#4a3a36', P: '#2e2422' },
-  ),
-);
+const LAMP = lazy(() => canvas(13, 24, (r) => {
+  // Scalloped linen shade, stitched ribs and turned brass stem.
+  r(4, 0, 5, 1, OUTLINE); r(3, 1, 7, 1, OUTLINE); r(2, 2, 9, 2, OUTLINE);
+  r(1, 4, 11, 3, OUTLINE); r(3, 2, 7, 2, CREAM); r(2, 4, 9, 2, '#d8bb82');
+  r(4, 1, 4, 1, '#fff4d8'); r(3, 4, 1, 2, '#fff4d8'); r(6, 2, 1, 4, '#b98c50');
+  r(9, 4, 1, 2, '#b98c50'); r(2, 6, 3, 1, BRASS); r(6, 6, 4, 1, BRASS);
+  r(5, 7, 3, 2, OUTLINE); r(6, 7, 1, 2, '#e8c47e');
+  r(5, 9, 3, 12, OUTLINE); r(5, 9, 1, 11, BRASS);
+  r(4, 12, 1, 1, WOOD.hi); r(7, 8, 1, 4, BRASS); r(7, 11, 2, 1, OUTLINE);
+  r(3, 20, 7, 2, OUTLINE); r(2, 22, 9, 2, OUTLINE); r(3, 22, 7, 1, BRASS);
+}));
 
-const SNAKE_PLANT = lazy(() =>
-  pixelSprite(
-    [
-      '.l..g..', '.g..gl.', 'lg.lGg.', 'gG.gGg.', 'gGlgGgl', 'gGgGgGg', 'gGgGgGg', '.gGgGg.', '.gGgGg.',
-      'qqqqqqq', 'rrrrrrr', 'rRrrrRr', 'rRrrrRr', '.rrrrr.', '.RRRRR.',
-    ],
-    { g: '#5f9a5a', G: '#3f6f42', l: '#c9d97e', r: '#e8e0d0', R: '#b9ad98', q: '#f4efe4' },
-  ),
-);
+const SNAKE_PLANT = lazy(() => canvas(9, 17, (r) => {
+  r(1, 2, 2, 8, OUTLINE); r(4, 0, 2, 10, OUTLINE); r(7, 3, 2, 7, OUTLINE);
+  r(0, 6, 2, 4, SAGE); r(2, 3, 1, 7, '#91a35c'); r(4, 1, 1, 9, SAGE);
+  r(5, 4, 1, 6, '#c4c789'); r(7, 4, 1, 6, '#879654');
+  for (let y = 4; y < 10; y += 3) { r(2, y, 1, 1, '#d5d694'); r(4, y + 1, 1, 1, '#aab36b'); }
+  r(0, 10, 9, 2, OUTLINE); r(1, 10, 7, 1, '#fff3d9');
+  r(1, 12, 7, 4, OUTLINE); r(2, 12, 5, 4, CREAM); r(2, 12, 1, 3, '#fff5de');
+  r(6, 12, 1, 4, '#c0ad87'); r(2, 14, 4, 1, '#d4bb8d'); r(2, 16, 5, 1, WOOD.lo);
+}));
 
-const COAT_RACK = lazy(() =>
-  canvas(10, 28, (r) => {
-    r(4, 3, 2, 22, OUTLINE);
-    r(4, 3, 1, 22, WOOD.base);
-    // Hooks, a scarf and a hat.
-    r(1, 4, 8, 1, OUTLINE);
-    r(0, 3, 2, 1, OUTLINE);
-    r(8, 3, 2, 1, OUTLINE);
-    r(3, 0, 4, 3, OUTLINE);
-    r(4, 1, 2, 1, WOOD.hi);
-    r(6, 5, 3, 9, '#d9574a');
-    r(6, 5, 1, 9, '#f08a7a');
-    r(6, 13, 3, 1, '#fdf6ec');
-    r(0, 5, 4, 3, '#3f5f93');
-    r(1, 4, 2, 1, '#3f5f93');
-    // Splayed feet.
-    r(1, 25, 8, 1, OUTLINE);
-    r(0, 26, 3, 2, OUTLINE);
-    r(7, 26, 3, 2, OUTLINE);
-  }),
-);
+const COAT_RACK = lazy(() => canvas(10, 28, (r) => {
+  r(4, 1, 2, 24, OUTLINE); r(4, 2, 1, 23, WOOD.hi); r(3, 0, 4, 2, OUTLINE);
+  r(4, 0, 2, 1, BRASS); r(1, 4, 8, 2, OUTLINE); r(1, 3, 1, 1, BRASS); r(8, 3, 1, 1, BRASS);
+  // A plaid scarf threaded through a hook; a felt hat with a stitched band.
+  r(6, 6, 3, 11, '#aa5944'); r(6, 6, 1, 10, '#d38c66');
+  for (let y = 8; y < 16; y += 3) r(6, y, 3, 1, CREAM);
+  r(6, 17, 1, 2, '#aa5944'); r(8, 17, 1, 2, '#aa5944');
+  r(1, 6, 3, 3, SAGE); r(0, 9, 5, 1, OUTLINE); r(1, 8, 3, 1, BRASS); r(1, 6, 2, 1, '#95a175');
+  r(2, 24, 6, 2, OUTLINE); r(0, 26, 3, 2, OUTLINE); r(7, 26, 3, 2, OUTLINE);
+  r(1, 26, 2, 1, WOOD.hi); r(7, 26, 2, 1, WOOD.base);
+}));
 
-const AFRAME = lazy(() =>
-  canvas(16, 19, (r) => {
-    for (let y = 0; y < 15; y++) {
-      const inset = Math.round(((14 - y) * 2) / 14);
-      r(inset, y, 16 - inset * 2, 1, OUTLINE);
-      if (y > 0 && y < 14) {
-        r(inset + 1, y, 14 - inset * 2, 1, WOOD.base);
-        if (y > 1 && y < 13) r(inset + 2, y, 12 - inset * 2, 1, '#2d4a3a');
-      }
+const AFRAME = lazy(() => canvas(16, 19, (r) => {
+  // Split rear leg and visibly tapering frame, with a chain across the opening.
+  r(11, 3, 2, 13, WOOD.lo); r(13, 15, 2, 4, OUTLINE);
+  for (let y = 0; y < 15; y++) {
+    const inset = y < 4 ? 2 : y < 10 ? 1 : 0;
+    r(inset, y, 15 - inset * 2, 1, OUTLINE);
+    if (y > 0 && y < 14) r(inset + 1, y, 13 - inset * 2, 1, y < 2 ? WOOD.hi : WOOD.base);
+    if (y > 2 && y < 12) r(inset + 2, y, 11 - inset * 2, 1, '#304535');
+  }
+  r(5, 4, 5, 3, CREAM); r(10, 5, 1, 1, CREAM); r(4, 7, 7, 1, '#b9c19a');
+  r(6, 3, 1, 1, '#b9c19a'); r(3, 10, 8, 1, CREAM); r(5, 9, 5, 1, '#91a17a');
+  r(2, 2, 1, 1, BRASS); r(11, 2, 1, 1, BRASS); r(1, 14, 13, 1, WOOD.hi);
+  r(1, 15, 3, 4, OUTLINE); r(2, 15, 1, 3, WOOD.hi); r(4, 16, 9, 1, BRASS);
+}));
+
+const BENCH = lazy(() => canvas(32, 16, (r) => {
+  r(1, 0, 3, 15, OUTLINE); r(28, 0, 3, 15, OUTLINE);
+  r(2, 1, 1, 12, WOOD.hi); r(29, 1, 1, 12, WOOD.base);
+  r(4, 0, 24, 2, OUTLINE); r(4, 0, 24, 1, WOOD.hi);
+  // Individually shaped spindle back, rather than a flat rectangular rail.
+  for (let x = 6; x < 28; x += 5) { r(x, 2, 2, 5, WOOD.lo); r(x, 2, 1, 4, WOOD.hi); }
+  r(0, 7, 32, 4, OUTLINE); r(1, 8, 30, 2, WOOD.base);
+  r(3, 5, 26, 3, OUTLINE); r(4, 5, 24, 2, SAGE); r(5, 5, 22, 1, '#a4ad7a');
+  r(9, 6, 1, 1, '#3f5437'); r(21, 6, 1, 1, '#3f5437');
+  r(2, 11, 3, 5, OUTLINE); r(27, 11, 3, 5, OUTLINE); r(3, 11, 1, 4, WOOD.hi);
+  r(5, 12, 22, 2, WOOD.lo); r(5, 12, 22, 1, WOOD.base); r(28, 11, 1, 4, WOOD.base);
+  r(2, 2, 1, 1, BRASS); r(29, 2, 1, 1, BRASS);
+}));
+
+const CAT_BED = lazy(() => canvas(18, 11, (r) => {
+  r(3, 2, 12, 1, OUTLINE); r(1, 3, 16, 6, OUTLINE); r(3, 9, 12, 2, OUTLINE);
+  r(2, 3, 14, 5, '#a56f42'); r(3, 8, 12, 2, '#865332');
+  for (let x = 3; x < 15; x += 3) { r(x, 3, 1, 2, '#d8ae6e'); r(x + 1, 8, 1, 2, '#d8ae6e'); }
+  r(4, 4, 10, 4, CREAM); r(3, 5, 12, 2, '#ead4ad');
+  // Curled ginger cat: joined tail, cream muzzle, separate ears and closed eyes.
+  r(6, 3, 7, 4, '#c98545'); r(8, 2, 4, 2, '#d99c54'); r(12, 4, 3, 3, '#b66b36');
+  r(4, 3, 5, 4, '#d99c54'); r(4, 2, 2, 2, '#c98545'); r(7, 2, 2, 2, '#c98545');
+  r(4, 5, 3, 2, CREAM); r(5, 4, 2, 1, OUTLINE); r(10, 6, 4, 1, '#edbb73');
+  r(9, 3, 1, 2, '#aa6035'); r(11, 3, 1, 2, '#aa6035');
+}));
+
+const BOOKSHELF = lazy(() => canvas(32, 34, (r) => {
+  panel(r, 1, 5, 30, 28); r(0, 3, 32, 3, OUTLINE); r(1, 3, 30, 1, WOOD.hi);
+  r(2, 4, 28, 1, LIGHT_WOOD.base);
+  const books = ['#aa5944', '#627451', '#c8a15e', '#708d8e', '#a48071', '#e4c495', '#f4e6c7'];
+  for (let shelf = 0; shelf < 3; shelf++) {
+    const y = 7 + shelf * 8; r(4, y, 24, 7, WOOD.dark);
+    for (let i = 0; i < 6; i++) {
+      const x = 4 + i * 4, h = 4 + ((i + shelf) % 3), color = books[(i + shelf * 2) % books.length];
+      r(x, y + 7 - h, 3, h, color); r(x, y + 7 - h, 1, h, mix(color, CREAM, 0.3));
+      r(x + 1, y + 8 - h, 2, 1, BRASS); r(x + 1, y + 5, 2, 1, '#543425');
     }
-    r(5, 0, 6, 1, WOOD.hi);
-    // Chalk: a cup and a couple of lines of writing.
-    r(6, 3, 4, 3, '#f5efe0');
-    r(10, 4, 1, 1, '#f5efe0');
-    r(7, 2, 1, 1, '#c9d8cc');
-    r(4, 8, 8, 1, '#f5efe0');
-    r(5, 10, 6, 1, '#c9d8cc');
-    r(1, 15, 3, 4, OUTLINE);
-    r(12, 15, 3, 4, OUTLINE);
-    r(2, 15, 1, 3, WOOD.lo);
-    r(13, 15, 1, 3, WOOD.lo);
-  }),
-);
+    r(3, y + 7, 26, 1, WOOD.hi);
+  }
+  r(3, 32, 4, 2, OUTLINE); r(25, 32, 4, 2, OUTLINE);
+  r(6, 1, 9, 2, '#aa5944'); r(7, 1, 7, 1, CREAM); r(22, 1, 6, 3, '#ad683f');
+  leaves(r, 20, 0, 6); r(24, 0, 4, 2, SAGE);
+}));
 
-const BENCH = lazy(() =>
-  canvas(32, 16, (r) => {
-    // Backrest: two rails between end posts.
-    r(1, 0, 4, 12, OUTLINE);
-    r(27, 0, 4, 12, OUTLINE);
-    r(2, 1, 2, 11, WOOD.base);
-    r(28, 1, 2, 11, WOOD.base);
-    for (const y of [1, 4]) {
-      r(4, y - 1, 24, 3, OUTLINE);
-      r(4, y, 24, 1, LIGHT_WOOD.base);
-    }
-    // Seat with a mint cushion, apron and legs.
-    r(0, 6, 32, 5, OUTLINE);
-    r(1, 7, 30, 2, LIGHT_WOOD.hi);
-    r(1, 9, 30, 1, LIGHT_WOOD.lo);
-    r(3, 5, 26, 3, OUTLINE);
-    r(4, 5, 24, 2, '#a6cfae');
-    r(4, 5, 24, 1, '#c8e6cd');
-    r(2, 11, 3, 5, OUTLINE);
-    r(27, 11, 3, 5, OUTLINE);
-    r(3, 11, 1, 4, WOOD.lo);
-    r(28, 11, 1, 4, WOOD.lo);
-  }),
-);
+const ARMCHAIR = lazy(() => canvas(24, 22, (r) => {
+  // Carved timber wings frame a tailored terracotta back and loose seat cushion.
+  r(4, 0, 16, 1, OUTLINE); r(2, 1, 20, 11, OUTLINE); r(3, 2, 18, 10, WOOD.base);
+  r(4, 2, 16, 10, '#ad6045'); r(5, 2, 14, 1, '#dda077'); r(5, 3, 1, 7, '#c8815d');
+  r(18, 3, 1, 8, '#784333'); r(7, 5, 1, 1, '#784333'); r(15, 5, 1, 1, '#784333');
+  r(0, 9, 5, 10, OUTLINE); r(19, 9, 5, 10, OUTLINE);
+  r(1, 10, 3, 7, '#ad6045'); r(20, 10, 3, 7, '#8d4939');
+  r(1, 10, 3, 2, '#dda077'); r(20, 10, 3, 1, '#c8815d');
+  r(5, 12, 14, 6, OUTLINE); r(5, 12, 13, 2, '#dda077'); r(6, 14, 12, 3, '#b66b4d');
+  r(6, 16, 12, 1, '#8d4939'); r(1, 18, 22, 1, WOOD.hi);
+  r(2, 19, 3, 3, OUTLINE); r(19, 19, 3, 3, OUTLINE); r(3, 19, 1, 2, WOOD.base);
+  // Cream knitted throw over the left arm, with a fringe.
+  r(2, 12, 4, 6, CREAM); r(3, 13, 1, 4, '#c4af86'); r(2, 18, 1, 1, CREAM); r(5, 18, 1, 1, CREAM);
+}));
 
-const CAT_BED = lazy(() =>
-  canvas(18, 11, (r) => {
-    const rim = ramp('#c0443c');
-    for (let y = 0; y < 9; y++) {
-      const half = Math.round(Math.sqrt(1 - ((y - 4.5) / 5) ** 2) * 9);
-      r(9 - half, y + 2, half * 2, 1, OUTLINE);
-      if (half > 1) r(10 - half, y + 2, half * 2 - 2, 1, y < 2 || y > 6 ? rim.base : '#f2d9b8');
-    }
-    // A curled-up ginger cat, asleep.
-    r(5, 4, 9, 4, '#e8914a');
-    r(4, 5, 11, 2, '#e8914a');
-    r(6, 4, 6, 1, '#f2b57a');
-    r(4, 3, 2, 2, '#e8914a');
-    r(7, 3, 2, 1, '#e8914a');
-    r(5, 5, 2, 1, OUTLINE);
-    r(11, 7, 4, 1, '#c86f36');
-    r(9, 6, 1, 1, '#c86f36');
-  }),
-);
+const GRAMOPHONE = lazy(() => canvas(18, 22, (r) => {
+  // Wide scalloped bell with a dark throat, curving neck and brass ridges.
+  r(1, 0, 8, 1, OUTLINE); r(0, 1, 10, 5, OUTLINE); r(1, 1, 8, 4, BRASS);
+  r(1, 2, 5, 2, '#543425'); r(2, 1, 5, 1, '#edd394'); r(6, 4, 5, 3, '#b48849');
+  r(8, 6, 4, 3, OUTLINE); r(9, 6, 2, 3, BRASS); r(10, 8, 3, 4, OUTLINE); r(10, 8, 1, 4, '#e4b777');
+  r(2, 11, 14, 3, OUTLINE); r(4, 11, 10, 1, '#675541'); r(3, 12, 12, 1, '#251f19');
+  r(7, 12, 4, 1, '#b76b46'); r(12, 10, 3, 1, BRASS); r(14, 10, 1, 3, BRASS);
+  panel(r, 1, 14, 16, 8); r(4, 17, 9, 3, WOOD.lo);
+  for (let x = 5; x < 13; x += 2) r(x, 17, 1, 3, BRASS);
+  r(16, 15, 2, 2, OUTLINE); r(17, 15, 1, 1, BRASS); r(2, 14, 14, 1, LIGHT_WOOD.hi);
+}));
 
-const BOOKSHELF = lazy(() =>
-  canvas(32, 34, (r) => {
-    r(0, 4, 32, 30, OUTLINE);
-    r(1, 5, 30, 28, WOOD.base);
-    r(1, 5, 30, 1, WOOD.hi);
-    const books = ['#d9574a', '#5f9479', '#f2c14e', '#7d9ac4', '#9f78d2', '#e8936a', '#fdf6ec'];
-    for (let shelf = 0; shelf < 3; shelf++) {
-      const y = 7 + shelf * 9;
-      r(3, y, 26, 7, WOOD.dark);
-      let x = 3;
-      for (let i = 0; x < 27; i++) {
-        const w = Math.min(2 + ((i * 7 + shelf * 3) % 3), 29 - x);
-        const h = 5 + ((i + shelf) % 3);
-        const c = books[(i * 3 + shelf * 2) % books.length];
-        if ((i + shelf) % 5 !== 4) {
-          r(x, y + 7 - h, w, h, c);
-          r(x, y + 7 - h, 1, h, ramp(c).hi);
-        }
-        x += w + (i % 4 === 3 ? 2 : 0);
-      }
-      r(1, y + 7, 30, 2, WOOD.lo);
-      r(1, y + 7, 30, 1, WOOD.hi);
-    }
-    // A little plant on top.
-    r(23, 2, 6, 3, '#d2774f');
-    r(22, 0, 2, 3, '#6fb26a');
-    r(24, 0, 3, 2, '#4e8a4f');
-    r(27, 1, 2, 1, '#9fd47e');
-  }),
-);
-
-const ARMCHAIR = lazy(() =>
-  canvas(24, 22, (r) => {
-    const v = ramp('#c0674a');
-    // Rounded back.
-    r(3, 0, 18, 13, OUTLINE);
-    r(2, 1, 20, 12, OUTLINE);
-    r(4, 1, 16, 11, v.base);
-    r(3, 2, 18, 10, v.base);
-    r(5, 2, 6, 1, v.hi);
-    for (const bx of [8, 15]) r(bx, 5, 1, 1, v.lo);
-    // Arms, seat cushion, skirt and legs.
-    r(0, 9, 6, 9, OUTLINE);
-    r(18, 9, 6, 9, OUTLINE);
-    r(1, 10, 4, 7, v.base);
-    r(19, 10, 4, 7, v.lo);
-    r(1, 10, 4, 1, v.hi);
-    r(19, 10, 4, 1, v.hi);
-    r(5, 12, 14, 6, OUTLINE);
-    r(6, 12, 12, 2, v.hi);
-    r(6, 14, 12, 3, v.base);
-    r(1, 17, 22, 2, v.lo);
-    r(0, 17, 24, 1, OUTLINE);
-    r(2, 19, 2, 3, OUTLINE);
-    r(20, 19, 2, 3, OUTLINE);
-  }),
-);
-
-const GRAMOPHONE = lazy(() =>
-  canvas(18, 22, (r) => {
-    const brass = ramp('#d9a441');
-    // The horn flares up and to the left.
-    for (let i = 0; i < 9; i++) {
-      const half = 1 + Math.floor(i * 0.7);
-      r(9 - i - half, 1 + i, half * 2 + 2, 1, OUTLINE);
-      r(10 - i - half, 1 + i, half * 2, 1, i < 2 ? brass.hi : i > 6 ? brass.lo : brass.base);
-    }
-    r(1, 2, 4, 1, '#3a2418');
-    r(9, 9, 3, 4, OUTLINE);
-    r(10, 9, 1, 4, brass.base);
-    // Record and box.
-    r(2, 12, 14, 2, OUTLINE);
-    r(3, 12, 12, 1, '#2a2a30');
-    r(8, 12, 2, 1, '#d9574a');
-    r(1, 14, 16, 8, OUTLINE);
-    r(2, 15, 14, 6, WOOD.base);
-    r(2, 15, 14, 1, WOOD.hi);
-    r(4, 17, 10, 2, WOOD.lo);
-    r(15, 16, 2, 2, brass.base);
-  }),
-);
-
-const PIANO = lazy(() =>
-  canvas(40, 30, (r) => {
-    const body = ramp('#3d2a2a');
-    r(0, 0, 40, 26, OUTLINE);
-    r(1, 1, 38, 12, body.base);
-    r(1, 1, 38, 2, body.hi);
-    r(4, 5, 32, 6, body.lo);
-    // Sheet music on the stand.
-    r(14, 3, 12, 7, OUTLINE);
-    r(15, 4, 10, 5, '#fdf6ec');
-    for (const y of [5, 7]) r(16, y, 8, 1, '#9a8f86');
-    // Keys.
-    r(1, 13, 38, 1, body.dark);
-    r(2, 14, 36, 4, '#fdf6ec');
-    for (let x = 4; x < 37; x += 3) if (x % 7 !== 0) r(x, 14, 2, 2, OUTLINE);
-    r(1, 18, 38, 8, body.base);
-    r(1, 18, 38, 1, body.hi);
-    r(6, 20, 28, 4, body.lo);
-    r(3, 26, 3, 4, OUTLINE);
-    r(34, 26, 3, 4, OUTLINE);
-    r(18, 26, 4, 2, '#d9a441');
-  }),
-);
+const PIANO = lazy(() => canvas(40, 30, (r) => {
+  r(1, 1, 38, 24, OUTLINE); r(0, 0, 40, 3, OUTLINE); r(1, 0, 38, 1, WOOD.hi);
+  panel(r, 2, 3, 36, 10); r(4, 4, 7, 7, WOOD.lo); r(29, 4, 7, 7, WOOD.lo);
+  r(5, 5, 5, 5, WOOD.base); r(30, 5, 5, 5, WOOD.base);
+  // Open two-page score with fold, staves and notes.
+  r(13, 3, 14, 8, OUTLINE); r(14, 4, 12, 6, CREAM); r(20, 4, 1, 6, '#b79e77');
+  for (const y of [5, 7, 9]) { r(15, y, 4, 1, '#b79e77'); r(22, y, 3, 1, '#b79e77'); }
+  r(17, 5, 1, 2, OUTLINE); r(23, 7, 1, 2, OUTLINE);
+  r(0, 12, 40, 7, OUTLINE); r(1, 12, 38, 1, BRASS); r(2, 14, 36, 4, CREAM);
+  for (let x = 4; x < 37; x += 3) { r(x, 14, 1, 4, '#c5b18c'); if (x % 7 !== 0) r(x, 14, 2, 2, OUTLINE); }
+  panel(r, 2, 19, 36, 7); r(4, 21, 32, 2, WOOD.lo);
+  r(3, 26, 3, 4, OUTLINE); r(34, 26, 3, 4, OUTLINE); r(3, 26, 1, 3, WOOD.hi);
+  r(17, 26, 2, 2, BRASS); r(21, 26, 2, 2, BRASS); r(34, 26, 1, 3, WOOD.base);
+}));
 
 // ---------------------------------------------------------------- wall pieces
 
-const MUG_RACK = lazy(() =>
-  canvas(32, 16, (r) => {
-    const wood = ramp('#9a6740');
-    r(0, 0, 32, 5, OUTLINE);
-    r(1, 1, 30, 3, wood.base);
-    r(1, 1, 30, 1, wood.hi);
-    ['#d9574a', '#5f9479', '#f2c14e'].forEach((c, i) => {
-      const mx = 4 + i * 10;
-      const mug = ramp(c);
-      r(mx + 2, 4, 1, 2, OUTLINE);
-      r(mx - 1, 6, 8, 7, OUTLINE);
-      r(mx + 7, 7, 2, 4, OUTLINE);
-      r(mx, 7, 6, 5, mug.base);
-      r(mx, 7, 1, 5, mug.hi);
-      r(mx + 5, 7, 1, 5, mug.lo);
-      r(mx + 7, 8, 1, 2, mug.lo);
-    });
-  }),
-);
+const MUG_RACK = lazy(() => canvas(32, 16, (r) => {
+  panel(r, 0, 0, 32, 5); r(3, 2, 1, 1, BRASS); r(28, 2, 1, 1, BRASS);
+  const colors = ['#aa5944', '#627451', '#c8a15e'];
+  for (let i = 0; i < 3; i++) {
+    const mx = 3 + i * 10, c = colors[i];
+    r(mx + 2, 4, 1, 3, BRASS); r(mx, 7, 7, 6, OUTLINE); r(mx + 1, 13, 5, 1, OUTLINE);
+    r(mx + 1, 8, 5, 5, c); r(mx + 1, 8, 1, 4, mix(c, CREAM, 0.45));
+    r(mx + 1, 7, 5, 1, CREAM); r(mx + 7, 8, 2, 4, OUTLINE); r(mx + 7, 9, 1, 2, c);
+    r(mx + 2, 11, 3, 1, mix(c, CREAM, 0.2));
+  }
+}));
 
-const SCONCE = lazy(() =>
-  canvas(8, 16, (r) => {
-    const brass = ramp('#d9a441');
-    r(2, 9, 4, 6, OUTLINE);
-    r(3, 10, 2, 4, brass.base);
-    r(3, 6, 2, 4, OUTLINE);
-    r(0, 0, 8, 7, OUTLINE);
-    r(1, 1, 6, 5, '#f6d58a');
-    r(1, 1, 6, 1, '#fff3c4');
-    r(1, 5, 6, 1, '#e8b45a');
-  }),
-);
+const SCONCE = lazy(() => canvas(8, 16, (r) => {
+  r(2, 0, 4, 1, OUTLINE); r(1, 1, 6, 1, BRASS); r(0, 2, 8, 6, OUTLINE);
+  r(1, 2, 6, 5, '#e8c47e'); r(2, 2, 3, 5, '#fff2c8'); r(5, 3, 1, 4, '#bb8c4d');
+  r(1, 8, 6, 1, BRASS); r(3, 9, 2, 3, OUTLINE); r(3, 9, 1, 2, BRASS);
+  r(2, 11, 4, 5, OUTLINE); r(3, 12, 2, 3, WOOD.base); r(3, 12, 1, 1, BRASS);
+}));
 
-const GARLAND = lazy(() =>
-  canvas(32, 8, (r) => {
-    const colors = ['#d9574a', '#f2c14e', '#5f9479', '#7d9ac4', '#ef8fa8'];
-    const sag = (x: number) => Math.round(Math.sin((x / 31) * Math.PI) * 2);
-    for (let x = 0; x < 32; x++) r(x, sag(x), 1, 1, '#4a2e1e');
-    for (let i = 0; i < 5; i++) {
-      const x = 2 + i * 6;
-      const y = sag(x + 2) + 1;
-      for (let row = 0; row < 5; row++) r(x + Math.floor(row / 2), y + row, 5 - Math.floor(row / 2) * 2, 1, colors[i]);
-      r(x, y, 5, 1, ramp(colors[i]).hi);
-    }
-  }),
-);
+const GARLAND = lazy(() => canvas(32, 8, (r) => {
+  const colors = ['#aa5944', '#c8a15e', '#627451', '#708d8e', '#b98470'];
+  for (let x = 0; x < 32; x++) r(x, x < 5 || x > 26 ? 0 : x < 11 || x > 20 ? 1 : 2, 1, 1, WOOD.lo);
+  for (let i = 0; i < 5; i++) {
+    const x = 2 + i * 6, y = i === 0 || i === 4 ? 1 : 2;
+    r(x, y, 5, 3, colors[i]); r(x + 1, y + 3, 3, 1, colors[i]); r(x + 2, y + 4, 1, 1, colors[i]);
+    r(x, y, 5, 1, mix(colors[i], CREAM, 0.4)); r(x + 1, y + 1, 1, 2, CREAM);
+    r(x + 3, y + 1, 1, 1, mix(colors[i], WOOD.lo, 0.3));
+  }
+}));
 
-const SHELF = lazy(() =>
-  canvas(32, 16, (r) => {
-    const wood = ramp('#9a6740');
-    // Bracket shelf with a pot of ivy, books and a jar on it.
-    r(0, 11, 32, 4, OUTLINE);
-    r(1, 12, 30, 2, wood.base);
-    r(1, 12, 30, 1, wood.hi);
-    for (const bx of [4, 26]) {
-      r(bx, 15, 2, 1, OUTLINE);
-      r(bx + 1, 15, 1, 1, OUTLINE);
-    }
-    r(3, 6, 7, 6, OUTLINE);
-    r(4, 7, 5, 4, '#d2774f');
-    r(2, 3, 3, 4, '#6fb26a');
-    r(5, 2, 3, 4, '#4e8a4f');
-    r(8, 4, 3, 3, '#9fd47e');
-    r(1, 7, 2, 5, '#6fb26a');
-    ['#7d9ac4', '#d9574a', '#f2c14e'].forEach((c, i) => {
-      r(13 + i * 3, 3 + (i % 2), 3, 8 - (i % 2), OUTLINE);
-      r(13 + i * 3, 4 + (i % 2), 2, 7 - (i % 2), c);
-    });
-    r(23, 5, 6, 6, OUTLINE);
-    r(24, 6, 4, 5, '#d6ecf2');
-    r(24, 8, 4, 3, '#6e3f24');
-    r(23, 4, 6, 1, '#c97d34');
-  }),
-);
+const SHELF = lazy(() => canvas(32, 16, (r) => {
+  r(0, 11, 32, 3, OUTLINE); r(1, 11, 30, 1, LIGHT_WOOD.hi); r(1, 12, 30, 1, WOOD.base);
+  r(3, 14, 3, 2, OUTLINE); r(26, 14, 3, 2, OUTLINE); r(4, 14, 1, 1, BRASS); r(27, 14, 1, 1, BRASS);
+  r(3, 6, 7, 5, OUTLINE); r(4, 7, 5, 4, '#ad683f'); r(4, 7, 1, 3, '#e0aa70');
+  leaves(r, 2, 2, 6); leaves(r, 7, 4, 5); r(1, 6, 1, 6, SAGE); r(0, 9, 3, 2, SAGE);
+  const colors = ['#708d8e', '#aa5944', '#c8a15e'];
+  for (let i = 0; i < 3; i++) { const x = 13 + i * 3, y = 2 + i % 2; r(x, y, 3, 9 - y, OUTLINE); r(x, y + 1, 2, 9 - y, colors[i]); r(x, y + 2, 2, 1, CREAM); }
+  r(24, 3, 5, 2, BRASS); r(23, 5, 7, 6, OUTLINE); r(24, 5, 5, 6, '#b2bca0');
+  r(24, 8, 5, 3, '#6d472f'); r(25, 6, 1, 4, CREAM); r(26, 8, 2, 2, '#ddc695');
+}));
 
 const SPRITES: Record<string, () => HTMLCanvasElement> = {
   plant_fig: FIG,
@@ -375,7 +279,7 @@ function spriteFor(id: string): HTMLCanvasElement | undefined {
 /** An analog clock face showing `now`, centered on (cx, cy). */
 export function paintClock(ctx: Ctx, cx: number, cy: number, now: Date): void {
   const r = filler(ctx);
-  const ring = ramp('#9a6740');
+  const ring = WOOD;
   const disc = (radius: number, color: (dy: number) => string) => {
     for (let dy = -radius; dy <= radius; dy++) {
       const half = Math.round(Math.sqrt(Math.max(0, radius * radius - dy * dy)));
@@ -383,8 +287,10 @@ export function paintClock(ctx: Ctx, cx: number, cy: number, now: Date): void {
     }
   };
   disc(10, () => OUTLINE);
-  disc(9, (dy) => (dy < -4 ? ring.hi : ring.base));
-  disc(7, () => '#fbf3e4');
+  disc(9, (dy) => (dy < -4 ? ring.hi : dy > 5 ? ring.lo : ring.base));
+  disc(8, () => BRASS); disc(7, () => '#f4e6c7');
+  r(cx - 3, cy - 6, 5, 1, '#fff4d8'); r(cx + 5, cy - 3, 1, 6, '#d3bd94');
+  r(cx - 1, cy - 10, 3, 1, '#e4b777');
   for (let i = 0; i < 12; i++) {
     const a = (i / 12) * Math.PI * 2;
     r(cx + Math.round(Math.sin(a) * 6), cy - Math.round(Math.cos(a) * 6), 1, 1, i % 3 === 0 ? '#6e4128' : '#c9a882');

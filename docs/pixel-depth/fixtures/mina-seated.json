@@ -1,0 +1,535 @@
+{
+  "version": 15,
+  "signatureDrinks": {
+    "recipes": [],
+    "tested": [],
+    "served": {}
+  },
+  "cafeStyle": {
+    "focus": null,
+    "handoffs": {
+      "tableServed": 1,
+      "catServed": 0,
+      "fastServed": 0,
+      "teaPairs": 0
+    }
+  },
+  "regularGuests": {
+    "guests": {
+      "mina": {
+        "firstMetDay": 8,
+        "served": 1,
+        "unlockedChapters": [
+          0
+        ],
+        "readChapters": [],
+        "lastUnlockDay": 8,
+        "servedVisitIds": [
+          1
+        ],
+        "pendingVisitIds": [],
+        "pendingDay": 8
+      }
+    },
+    "nextVisitId": 2
+  },
+  "pets": [],
+  "promotion": null,
+  "reputation": {
+    "recent": [
+      {
+        "stars": 4,
+        "reason": "standardTaste",
+        "taste": 4,
+        "items": [
+          "eggtart",
+          "espresso"
+        ],
+        "day": 8
+      }
+    ]
+  },
+  "taste": {
+    "served": {
+      "eggtart": 1,
+      "espresso": 1
+    },
+    "signature": []
+  },
+  "coins": 15203,
+  "totalEarned": 5203,
+  "served": 1,
+  "items": {
+    "espresso": 1,
+    "americano": 1,
+    "latte": 1,
+    "cappuccino": 1,
+    "flatwhite": 1,
+    "cortado": 1,
+    "mocha": 1,
+    "vienna": 1,
+    "macchiato": 1,
+    "coldbrew": 1,
+    "dirty": 1,
+    "pourover": 1,
+    "creamcoffee": 1,
+    "affogato": 1,
+    "blacktea": 1,
+    "hotchoc": 1,
+    "lemontea": 1,
+    "chai": 1,
+    "fruittea": 1,
+    "hojicha": 1,
+    "matcha": 1,
+    "frappe": 1,
+    "smoothie": 1,
+    "milktea": 1,
+    "matchafloat": 1,
+    "roll": 1,
+    "bagel": 1,
+    "baguette": 1,
+    "cheesebun": 1,
+    "pretzel": 1,
+    "focaccia": 1,
+    "ciabatta": 1,
+    "raisinbread": 1,
+    "sourdough": 1,
+    "rye": 1,
+    "chocobread": 1,
+    "shokupan": 1,
+    "brioche": 1,
+    "fruitbrioche": 1,
+    "garlicbread": 1,
+    "donut": 1,
+    "scone": 1,
+    "cookie": 1,
+    "croissant": 1,
+    "painchoc": 1,
+    "brownie": 1,
+    "cinnamon": 1,
+    "muffin": 1,
+    "creampuff": 1,
+    "melonpan": 1,
+    "eggtart": 1,
+    "cake": 1,
+    "swissroll": 1,
+    "cheesecake": 1,
+    "macaron": 1
+  },
+  "upgrades": {
+    "marketing": 0,
+    "machine": 0,
+    "barista": 0,
+    "server": 0,
+    "cook": 0,
+    "tables": 0
+  },
+  "regions": [],
+  "kitchen": true,
+  "profile": {
+    "cafeName": "Tiny Bean Art QA",
+    "ownerName": "QA",
+    "look": {
+      "skin": 0,
+      "hair": 0,
+      "hairStyle": 0,
+      "shirt": 0,
+      "pants": 0
+    }
+  },
+  "decor": {
+    "owned": [
+      "wall_cream",
+      "wall_mint",
+      "wall_rose",
+      "floor_checker",
+      "floor_planks",
+      "floor_mint",
+      "counter_oak",
+      "sill_none",
+      "ceiling_none",
+      "rug_none",
+      "neon_none"
+    ],
+    "equipped": {
+      "wallpaper": "wall_cream",
+      "floor": "floor_checker",
+      "counter": "counter_oak",
+      "sill": "sill_none",
+      "ceiling": "ceiling_none",
+      "rug": "rug_none",
+      "neon": "neon_none"
+    },
+    "placed": [
+      {
+        "id": "clock",
+        "col": 10,
+        "row": 0
+      },
+      {
+        "id": "mugrack",
+        "col": 27,
+        "row": 3
+      }
+    ],
+    "stored": {}
+  },
+  "goal": 15,
+  "phase": "open",
+  "day": 8,
+  "dayTime": 8.649999999999988,
+  "speed": 1,
+  "onMenu": [
+    "espresso",
+    "latte",
+    "croissant",
+    "eggtart",
+    "cake"
+  ],
+  "pantry": {
+    "beans": 299,
+    "milk": 300,
+    "flour": 286,
+    "butter": 284,
+    "eggs": 291,
+    "sugar": 297,
+    "tea": 300,
+    "spice": 300,
+    "cocoa": 300,
+    "cream": 294,
+    "fruit": 297,
+    "matcha": 300
+  },
+  "bakePlan": {
+    "croissant": 3,
+    "eggtart": 3,
+    "cake": 3
+  },
+  "shelf": {
+    "croissant": 3,
+    "eggtart": 2,
+    "cake": 3
+  },
+  "today": {
+    "reviews": {
+      "stars": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "reasons": {
+        "standardTaste": 1
+      },
+      "totalScore": 4
+    },
+    "served": 1,
+    "missed": 0,
+    "soldOut": 0,
+    "queueLost": 0,
+    "tableLost": 0,
+    "extraLost": 0,
+    "doorLost": 0,
+    "shortages": {},
+    "revenue": 5203,
+    "ingredientCost": 225,
+    "petCost": 0,
+    "promotionCost": 0,
+    "sales": {
+      "eggtart": 1,
+      "espresso": 1
+    },
+    "baked": {
+      "croissant": 3,
+      "eggtart": 3,
+      "cake": 3
+    }
+  },
+  "inProduction": {
+    "croissant": 5
+  },
+  "createdAt": 0,
+  "runtime": {
+    "version": 2,
+    "kitchenLevel": 0,
+    "day": 8,
+    "phase": "open",
+    "served": 1,
+    "height": 240,
+    "customers": [
+      {
+        "id": 1,
+        "reviewed": true,
+        "waitSeconds": 6.999999999999983,
+        "missingExtra": false,
+        "x": 85,
+        "y": 175,
+        "tx": 85,
+        "ty": 175,
+        "phase": "sitting",
+        "appearanceId": 0,
+        "regularGuestId": "mina",
+        "regularGuestVisitId": 1,
+        "look": {
+          "skin": 0,
+          "hair": 0,
+          "hairStyle": 0,
+          "shirt": 0,
+          "pants": 1
+        },
+        "order": "eggtart",
+        "extra": "espresso",
+        "vip": false,
+        "patience": 40,
+        "spot": -1,
+        "seat": 0,
+        "timer": 13.331290114670992,
+        "mood": "happy",
+        "moodTimer": 1.5,
+        "hasCup": true,
+        "soldOut": false,
+        "dineIn": true,
+        "stride": 225.34060880530512,
+        "via": [],
+        "journey": [],
+        "pathBlocked": false
+      },
+      {
+        "id": 2,
+        "reviewed": false,
+        "waitSeconds": 1.0000000000000002,
+        "missingExtra": false,
+        "x": 145.63278877618532,
+        "y": 194.34799817207212,
+        "tx": 131,
+        "ty": 156,
+        "phase": "toCounter",
+        "appearanceId": 22,
+        "look": {
+          "skin": 1,
+          "hair": 0,
+          "hairStyle": 2,
+          "shirt": 6,
+          "pants": 1
+        },
+        "order": "croissant",
+        "extra": "latte",
+        "vip": false,
+        "patience": 40,
+        "spot": 0,
+        "seat": -1,
+        "timer": 0,
+        "mood": null,
+        "moodTimer": 0,
+        "hasCup": false,
+        "soldOut": false,
+        "dineIn": false,
+        "stride": 60.300000000000054,
+        "via": [
+          {
+            "x": 116,
+            "y": 145
+          }
+        ],
+        "journey": [
+          {
+            "x": 116,
+            "y": 145
+          }
+        ],
+        "pathBlocked": false
+      }
+    ],
+    "baristas": [
+      {
+        "look": {
+          "skin": 1,
+          "hair": 5,
+          "hairStyle": 1,
+          "shirt": 4,
+          "pants": 0
+        },
+        "customerId": 2,
+        "remaining": 0,
+        "total": 0,
+        "calling": 0
+      }
+    ],
+    "servers": [
+      {
+        "x": 85,
+        "y": 187,
+        "tx": 131,
+        "ty": 185,
+        "stride": 201.4555872759494,
+        "via": [
+          {
+            "x": 189,
+            "y": 156
+          },
+          {
+            "x": 258,
+            "y": 135
+          },
+          {
+            "x": 264,
+            "y": 119
+          }
+        ],
+        "look": {
+          "skin": 2,
+          "hair": 4,
+          "hairStyle": 1,
+          "shirt": 7,
+          "pants": 1
+        },
+        "phase": "returning",
+        "plates": [],
+        "ack": 0,
+        "journey": [
+          {
+            "x": 264,
+            "y": 119
+          }
+        ],
+        "pathBlocked": false
+      }
+    ],
+    "cooks": [
+      {
+        "x": -176,
+        "y": 94,
+        "tx": -176,
+        "ty": 94,
+        "stride": 258.31060287687257,
+        "via": [],
+        "look": {
+          "skin": 1,
+          "hair": 2,
+          "hairStyle": 1,
+          "shirt": 3,
+          "pants": 2
+        },
+        "batch": {
+          "item": "croissant",
+          "n": 5,
+          "steps": [
+            "cooler",
+            "sheeter",
+            "proofer",
+            "convection",
+            "rack",
+            "door"
+          ],
+          "step": 2,
+          "timer": 2.5500000000000016
+        },
+        "journey": [],
+        "pathBlocked": false
+      }
+    ],
+    "queue": [],
+    "seats": [
+      1,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "pass": [],
+    "rack": [],
+    "spawnTimer": 3.4559762321772185,
+    "nextId": 3,
+    "boostCooldown": 0,
+    "customerCast": {
+      "remaining": [
+        12,
+        13,
+        7,
+        18,
+        23,
+        16,
+        17,
+        4,
+        6,
+        3,
+        1,
+        10,
+        21,
+        15,
+        2,
+        28,
+        8,
+        5,
+        29,
+        14,
+        11,
+        9,
+        24,
+        20,
+        26,
+        27,
+        19,
+        25
+      ],
+      "previous": 22
+    },
+    "castRandomState": 281
+  },
+  "_qa": {
+    "label": "Synthetic accelerated simulation; not a player save",
+    "source": "docs/pixel-depth/fixtures/main-art.json",
+    "sourceSha256": "13e870dad9970aeb13c4141ac7d01218d806fc0203d35b3d10ee93aa1b0c8284",
+    "generator": "docs/pixel-depth/generate-mina-fixture.mjs",
+    "seed": 52,
+    "stepSeconds": 0.05,
+    "steps": 173,
+    "simulatedSeconds": 8.65,
+    "rngStateAtCapture": 3935956410,
+    "expected": {
+      "customerId": 1,
+      "appearanceId": 0,
+      "regularGuestId": "mina",
+      "seat": 0,
+      "phase": "sitting",
+      "pose": "sitRight"
+    },
+    "note": "Economic state and runtime are captured together after ordinary openShop/Sim.update. Cat visual state is not serialized by the game."
+  }
+}

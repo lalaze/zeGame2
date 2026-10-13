@@ -1,0 +1,25 @@
+{
+  "id": 3,
+  "name": "蜂蜜围巾",
+  "look": {
+    "skin": 0,
+    "hair": 2,
+    "hairStyle": 3,
+    "shirt": 3,
+    "pants": 2
+  },
+  "hairstyle": 3,
+  "outfit": "scarf",
+  "accessory": "none",
+  "accent": "#e4c873",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#f4cfad",
+    "hair": "#dfb96f",
+    "shirt": "#d3a453",
+    "pants": "#585464"
+  },
+  "hatPalette": "#69a295",
+  "description": "Fixed customer cast 3 (蜂蜜围巾): warm skin #f4cfad; hair #dfb96f in a clearly knitted cuffed beanie hat in #69a295 with cream-and-gold stitched stripe; short #dfb96f hair visible beneath the rim. Outfit: #d3a453 pullover with a cream neck scarf and short hanging end. Lower clothing color #585464; warm dark brown leather shoes. Accent #e4c873. No glasses, headband, bow or bag."
+}

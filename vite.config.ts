@@ -17,6 +17,9 @@ export default defineConfig({
     },
   },
   test: {
+    // Bound concurrent simulation/asset workers so complete-day economy checks
+    // keep their original timeout and assertions on constrained cloud runners.
+    maxWorkers: 2,
     environment: 'node',
   },
 });

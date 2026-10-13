@@ -1,0 +1,25 @@
+{
+  "id": 16,
+  "name": "砖红背心",
+  "look": {
+    "skin": 2,
+    "hair": 0,
+    "hairStyle": 2,
+    "shirt": 0,
+    "pants": 0
+  },
+  "hairstyle": 6,
+  "outfit": "vest",
+  "accessory": "none",
+  "accent": "#eddbb6",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#b67c55",
+    "hair": "#594237",
+    "shirt": "#bb6b58",
+    "pants": "#53637b"
+  },
+  "hatPalette": "#d3a453",
+  "description": "Fixed customer cast 16 (砖红背心): warm skin #b67c55; hair #594237 in a neat chin-length BLUNT BOB with a straight full eyebrow-level fringe and even straight side ends. Outfit: #eddbb6 buttoned sleeveless waistcoat over #bb6b58 long-sleeve collared shirt with cream collar. Lower clothing color #53637b; warm dark brown leather shoes. Accent #eddbb6. No glasses, headband, bow or bag."
+}

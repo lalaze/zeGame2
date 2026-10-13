@@ -1,0 +1,25 @@
+{
+  "id": 17,
+  "name": "雨天风衣",
+  "look": {
+    "skin": 1,
+    "hair": 4,
+    "hairStyle": 0,
+    "shirt": 1,
+    "pants": 1
+  },
+  "hairstyle": 0,
+  "outfit": "duffle",
+  "accessory": "glasses",
+  "accent": "#e5c483",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#dfaa7d",
+    "hair": "#626782",
+    "shirt": "#799ba7",
+    "pants": "#85664f"
+  },
+  "hatPalette": "#9b87af",
+  "description": "Fixed customer cast 17 (雨天风衣): warm skin #dfaa7d; hair #626782 in short softly tousled hair with a side-swept fringe. Outfit: #799ba7 hip-length duffle coat with three cream/gold toggle fastenings and cream collar. Lower clothing color #85664f; warm dark brown leather shoes. Accent #e5c483. Round dark-brown eyeglasses in every front/side/seated view; back shows temples near ears."
+}

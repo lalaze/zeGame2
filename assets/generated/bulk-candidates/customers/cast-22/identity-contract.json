@@ -1,0 +1,25 @@
+{
+  "id": 22,
+  "name": "松石背带",
+  "look": {
+    "skin": 1,
+    "hair": 0,
+    "hairStyle": 2,
+    "shirt": 6,
+    "pants": 1
+  },
+  "hairstyle": 6,
+  "outfit": "overalls",
+  "accessory": "headband",
+  "accent": "#e7ca90",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#dfaa7d",
+    "hair": "#594237",
+    "shirt": "#69a295",
+    "pants": "#85664f"
+  },
+  "hatPalette": "#799ba7",
+  "description": "Fixed customer cast 22 (松石背带): warm skin #dfaa7d; hair #594237 in a neat chin-length BLUNT BOB with a straight full eyebrow-level fringe and even straight side ends. Outfit: #85664f full trousers-overalls with bib, shoulder straps and small cream bib pocket, worn over #69a295 long-sleeve shirt; genuine customer overalls, no service apron. Lower clothing color #85664f; warm dark brown leather shoes. Accent #e7ca90. An #e7ca90 narrow headband crossing the crown, preserved in every pose."
+}

@@ -1,3 +1,4 @@
+import { uiIcon } from './pixel-icons';
 import { KITCHEN_COST, kitchenBlock, unlockKitchen } from '../game/kitchen';
 import { AREA_IDS, REGIONS, adjacentArea, isAreaOpen, isRegion, regionBlock, regionDef, unlockRegion, type AreaId, type Direction } from '../game/regions';
 import { passageSpot, sceneHeight, kitchenHeight } from '../game/layout';
@@ -64,13 +65,13 @@ export class RegionsUI {
     this.edges.setAttribute('aria-label', t('area.nav'));
     // Stable controls preserve focus while money and room status update.
     if (!this.nav.children.length) {
-      this.nav.innerHTML = '<button class="area-plan-toggle" aria-controls="scene-area"><svg viewBox="0 0 16 14" aria-hidden="true"><path d="M0 2h2V1h3V0h2v1h3v1h2V1h2V0h2v12h-2v1h-3v1H9v-1H6v-1H4v1H2v1H0z" fill="currentColor"/><path d="M2 3h3v7H4v1H2zm5 0h2v1h2v7H9v-1H7zm6-1h1v9h-1v1h-1V3h1z" fill="#f9e4bf"/></svg><span class="area-map-label"></span></button>';
+      this.nav.innerHTML = `<button class="area-plan-toggle" aria-controls="scene-area">${uiIcon('map')}<span class="area-map-label"></span></button>`;
       for (const direction of ['left', 'right', 'up', 'down'] as const) {
         const button = document.createElement('button');
         button.className = `area-arrow area-${direction}`;
         button.dataset.direction = String(direction);
         button.setAttribute('aria-controls', 'scene-area');
-        button.innerHTML = '<span class="area-arrow-sign"><svg viewBox="0 0 7 11" aria-hidden="true"><path d="M0 0h2v2h2v2h2v3H4v2H2v2H0V8h2V6h2V5H2V3H0z" fill="currentColor"/></svg></span><span class="area-destination"></span>';
+        button.innerHTML = `<span class="area-arrow-sign">${uiIcon('arrow')}</span><span class="area-destination"></span>`;
         this.edges.append(button);
       }
     }

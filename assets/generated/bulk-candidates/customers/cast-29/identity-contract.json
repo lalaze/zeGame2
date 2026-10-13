@@ -1,0 +1,25 @@
+{
+  "id": 29,
+  "name": "蜜桃旅行包",
+  "look": {
+    "skin": 1,
+    "hair": 5,
+    "hairStyle": 2,
+    "shirt": 5,
+    "pants": 1
+  },
+  "hairstyle": 2,
+  "outfit": "scarf",
+  "accessory": "satchel",
+  "accent": "#ae7159",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#dfaa7d",
+    "hair": "#cc8c9f",
+    "shirt": "#cf929e",
+    "pants": "#85664f"
+  },
+  "hatPalette": "#bb6b58",
+  "description": "Fixed customer cast 29 (蜜桃旅行包): warm skin #dfaa7d; hair #cc8c9f in long straight hair falling to the lower back, long straight side locks, side-part fringe. Outfit: #cf929e pullover with a cream neck scarf and short hanging end. Lower clothing color #85664f; warm dark brown leather shoes. Accent #ae7159. A small #ae7159 cross-body shoulder satchel with diagonal strap and gold clasp, resting at hip in EVERY pose including seated; it is a worn accessory, never held."
+}

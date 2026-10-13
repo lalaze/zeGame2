@@ -1,0 +1,617 @@
+{
+  "identity": "customer-cast-1-海盐条纹",
+  "appearanceId": 1,
+  "look": {
+    "skin": 1,
+    "hair": 1,
+    "hairStyle": 2,
+    "shirt": 1,
+    "pants": 0
+  },
+  "hairstyle": 2,
+  "outfit": "stripe",
+  "accessory": "none",
+  "accent": "#ecdfba",
+  "paletteTargets": {
+    "skin": "#dfaa7d",
+    "hair": "#976546",
+    "shirt": "#799ba7",
+    "pants": "#53637b"
+  },
+  "hatPaletteTarget": "#9b87af",
+  "bboxAlphaThreshold": "alpha >128; excludes faint fringe, not all-nonzero alpha",
+  "frames": [
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-down-stand.png",
+      "source": "source.png",
+      "source_crop": [
+        96,
+        11,
+        300,
+        353
+      ],
+      "size": [
+        204,
+        342
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 184,
+        "h": 322
+      },
+      "foot": {
+        "x": 102.0,
+        "y": 331
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "down",
+      "state": "stand",
+      "frame": "stand",
+      "group": "walk",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "2e0ca989a621a0650e77e8b0ad8e496c436a6104c002494ca26905087828acb2"
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-down-stepA.png",
+      "source": "source.png",
+      "source_crop": [
+        378,
+        11,
+        595,
+        353
+      ],
+      "size": [
+        217,
+        342
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 197,
+        "h": 330
+      },
+      "foot": {
+        "x": 108.5,
+        "y": 339
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "down",
+      "state": "stepA",
+      "frame": "stride",
+      "group": "walk",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "9c2d944c39f5abab56594344d68ce9934a425e0c70edbd3b77b6839b2fdaddd8"
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-down-stepB.png",
+      "source": "source.png",
+      "source_crop": [
+        680,
+        11,
+        894,
+        353
+      ],
+      "size": [
+        214,
+        342
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 194,
+        "h": 325
+      },
+      "foot": {
+        "x": 107.0,
+        "y": 334
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "down",
+      "state": "stepB",
+      "frame": "passing",
+      "group": "walk",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "caaa6dca7c7dae0bf2ad25a7490877dbe1ed1ed1e030276710068fa0f625466e"
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-up-stand.png",
+      "source": "source.png",
+      "source_crop": [
+        97,
+        353,
+        302,
+        682
+      ],
+      "size": [
+        205,
+        329
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 3,
+        "w": 185,
+        "h": 318
+      },
+      "foot": {
+        "x": 102.5,
+        "y": 320
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "up",
+      "state": "stand",
+      "frame": "stand",
+      "group": "walk",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "440a1c99013b551fd6ffeb931a3a31c505c3557edc2638e2a0613f8783d226b5"
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-up-stepA.png",
+      "source": "source.png",
+      "source_crop": [
+        391,
+        353,
+        603,
+        682
+      ],
+      "size": [
+        212,
+        329
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 4,
+        "w": 192,
+        "h": 323
+      },
+      "foot": {
+        "x": 106.0,
+        "y": 326
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "up",
+      "state": "stepA",
+      "frame": "stride",
+      "group": "walk",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "40de6cecf57e31f0f042104f87dbf0c7b21da2b06c39f8d2572449908901c1fe"
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-up-stepB.png",
+      "source": "source.png",
+      "source_crop": [
+        692,
+        353,
+        905,
+        682
+      ],
+      "size": [
+        213,
+        329
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 3,
+        "w": 193,
+        "h": 319
+      },
+      "foot": {
+        "x": 106.5,
+        "y": 321
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "up",
+      "state": "stepB",
+      "frame": "passing",
+      "group": "walk",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "acec6b46d9df4dce78be157c23ca8048b133c885ab8f81fba6936e0c2560710e"
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-right-stand.png",
+      "source": "source.png",
+      "source_crop": [
+        86,
+        682,
+        277,
+        1019
+      ],
+      "size": [
+        191,
+        337
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 2,
+        "w": 171,
+        "h": 328
+      },
+      "foot": {
+        "x": 95.5,
+        "y": 329
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "right",
+      "state": "stand",
+      "frame": "stand",
+      "group": "walk",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "9dd4f2e0d70dab5191188727642ff7d4793ae22fd4e7b35a36f084deac2d9bfe"
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-right-stepA.png",
+      "source": "source.png",
+      "source_crop": [
+        369,
+        682,
+        616,
+        1019
+      ],
+      "size": [
+        247,
+        337
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 4,
+        "w": 227,
+        "h": 323
+      },
+      "foot": {
+        "x": 123.5,
+        "y": 326
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "right",
+      "state": "stepA",
+      "frame": "stride",
+      "group": "walk",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "193afc7fbedc5e21f3b01101a4fe6127dfc9bbe104642d48ad1aa9439ab8171d"
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-right-stepB.png",
+      "source": "source.png",
+      "source_crop": [
+        672,
+        682,
+        883,
+        1019
+      ],
+      "size": [
+        211,
+        337
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 4,
+        "w": 191,
+        "h": 331
+      },
+      "foot": {
+        "x": 105.5,
+        "y": 334
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "right",
+      "state": "stepB",
+      "frame": "passing",
+      "group": "walk",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "9d28cb9effe8be6d6326286a68984568b1e35bda1f2f1ebe128c2fd22ff50388"
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-right-sit.png",
+      "source": "source.png",
+      "source_crop": [
+        87,
+        1019,
+        294,
+        1303
+      ],
+      "size": [
+        207,
+        284
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 3,
+        "w": 187,
+        "h": 275
+      },
+      "foot": {
+        "x": 144.0,
+        "y": 277
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "right",
+      "state": "sit",
+      "frame": "sit",
+      "group": "seated",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "3721ffe2820aa9968ed877c443da13e0c27ffa14b9da9baed3243d780ab90e78",
+      "seatContact": {
+        "x": 71.71,
+        "y": 212.0
+      },
+      "anchorBasis": "Shoe baseline center measured from bottom8 opaque source rows; seat hip provisionally estimated from inspected silhouette; fingertip manually estimated in source coordinates. All contacts require runtime refinement."
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-right-sitPetA.png",
+      "source": "source.png",
+      "source_crop": [
+        374,
+        1019,
+        585,
+        1303
+      ],
+      "size": [
+        211,
+        284
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 3,
+        "w": 191,
+        "h": 276
+      },
+      "foot": {
+        "x": 119.0,
+        "y": 278
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "right",
+      "state": "sitPetA",
+      "frame": "sitPetA",
+      "group": "seated",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "06c75af3311c3977cb8269ac758fa13828db408319679a25a8a97654fca76fcd",
+      "seatContact": {
+        "x": 73.03,
+        "y": 212.76
+      },
+      "petContact": {
+        "x": 183,
+        "y": 241
+      },
+      "petContactSource": [
+        557,
+        1260
+      ],
+      "petContactBasis": "Manually inspected approximate fingertip in the final authored source sheet; runtime target placement must be refined.",
+      "anchorBasis": "Shoe baseline center measured from bottom8 opaque source rows; seat hip provisionally estimated from inspected silhouette; fingertip manually estimated in source coordinates. All contacts require runtime refinement."
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-right-sitPetB.png",
+      "source": "source.png",
+      "source_crop": [
+        673,
+        1019,
+        899,
+        1303
+      ],
+      "size": [
+        226,
+        284
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 206,
+        "h": 271
+      },
+      "foot": {
+        "x": 114.0,
+        "y": 280
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "right",
+      "state": "sitPetB",
+      "frame": "sitPetB",
+      "group": "seated",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "03af5047dbf0473f5aecbd2be3b3ec7b67ec157a9f85c4d901b779a9fed34ee7",
+      "seatContact": {
+        "x": 77.98,
+        "y": 215.96
+      },
+      "petContact": {
+        "x": 187,
+        "y": 251
+      },
+      "petContactSource": [
+        860,
+        1270
+      ],
+      "petContactBasis": "Manually inspected approximate fingertip in the final authored source sheet; runtime target placement must be refined.",
+      "anchorBasis": "Shoe baseline center measured from bottom8 opaque source rows; seat hip provisionally estimated from inspected silhouette; fingertip manually estimated in source coordinates. All contacts require runtime refinement."
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-left-sit.png",
+      "source": "source.png",
+      "source_crop": [
+        85,
+        1303,
+        303,
+        1596
+      ],
+      "size": [
+        218,
+        293
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 4,
+        "w": 198,
+        "h": 279
+      },
+      "foot": {
+        "x": 64.0,
+        "y": 282
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "left",
+      "state": "sit",
+      "frame": "sit",
+      "group": "seated",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "fe9b1e282715137e2a3ca7cb2991a5562a7834eaeb51a8b7c0555f779bcdcd88",
+      "seatContact": {
+        "x": 146.62,
+        "y": 216.04
+      },
+      "anchorBasis": "Shoe baseline center measured from bottom8 opaque source rows; seat hip provisionally estimated from inspected silhouette; fingertip manually estimated in source coordinates. All contacts require runtime refinement."
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-left-sitPetA.png",
+      "source": "source.png",
+      "source_crop": [
+        381,
+        1303,
+        602,
+        1596
+      ],
+      "size": [
+        221,
+        293
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 6,
+        "w": 201,
+        "h": 277
+      },
+      "foot": {
+        "x": 100.0,
+        "y": 282
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "left",
+      "state": "sitPetA",
+      "frame": "sitPetA",
+      "group": "seated",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "e97535c0eb2b5c82fe2798a15e495e049e82c92d1abc7369a4b4a3eb26bdef9a",
+      "seatContact": {
+        "x": 148.69,
+        "y": 216.52
+      },
+      "petContact": {
+        "x": 31,
+        "y": 242
+      },
+      "petContactSource": [
+        412,
+        1545
+      ],
+      "petContactBasis": "Manually inspected approximate fingertip in the final authored source sheet; runtime target placement must be refined.",
+      "anchorBasis": "Shoe baseline center measured from bottom8 opaque source rows; seat hip provisionally estimated from inspected silhouette; fingertip manually estimated in source coordinates. All contacts require runtime refinement."
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/customer-1-left-sitPetB.png",
+      "source": "source.png",
+      "source_crop": [
+        665,
+        1303,
+        900,
+        1596
+      ],
+      "size": [
+        235,
+        293
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 7,
+        "w": 215,
+        "h": 276
+      },
+      "foot": {
+        "x": 118.0,
+        "y": 282
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "left",
+      "state": "sitPetB",
+      "frame": "sitPetB",
+      "group": "seated",
+      "sourceToWorldScale": 0.08695652173913043,
+      "sourceRGBA_SHA256": "f4f0afe67cab5d66333cfc3759236499f34df5c22775993f26fae3e8ff1c2fd7",
+      "seatContact": {
+        "x": 158.35,
+        "y": 216.76
+      },
+      "petContact": {
+        "x": 45,
+        "y": 247
+      },
+      "petContactSource": [
+        710,
+        1550
+      ],
+      "petContactBasis": "Manually inspected approximate fingertip in the final authored source sheet; runtime target placement must be refined.",
+      "anchorBasis": "Shoe baseline center measured from bottom8 opaque source rows; seat hip provisionally estimated from inspected silhouette; fingertip manually estimated in source coordinates. All contacts require runtime refinement."
+    }
+  ],
+  "sourceSize": [
+    971,
+    1619
+  ],
+  "leftWalk": "mirror right",
+  "scaleBasis": "One shared source-to-world scale across the entire 15-frame sheet, from the standing reference height 28. Head size remains authored, never per-frame body-height normalization.",
+  "status": "source inspected; crops and shared scale prepared; runtime validation pending",
+  "issues": [],
+  "runtimeValidation": [
+    "palette appearance at game scale",
+    "gait timing and foot jitter",
+    "seat contact and head scale",
+    "pet contact and arm continuity",
+    "occlusion and edge alpha"
+  ],
+  "contentEdits": "Built-in imagegen only. Python performs lossless independent-frame RGBA crops and metadata, no content edits."
+}

@@ -1,0 +1,1229 @@
+{
+  "version": 1,
+  "status": "Generated source candidates only, no code integration.",
+  "generation": "Built-in imagegen; one call per material ID or related two-module counter set.",
+  "processing": "Only source copy, rectangular lossless cropping, measurements and native unscaled 2x2 packing.",
+  "assets": [
+    {
+      "id": "wall_cream",
+      "state": "tile",
+      "kind": "tile",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_cream.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/wall_cream-source.png",
+      "source_crop": [
+        489,
+        137,
+        1116,
+        1181
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        627,
+        1044
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 627,
+        "h": 1044
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 0.6005747126436781,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "d5fd35c7051ac20f7d4621d2b105813be4913e18e366f13cfbf6651bd7a99935",
+      "fileSha256": "1c648d4c5e6f051f8996138a56cda07578ce133fba51ed46d2abc19594c5917d",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        20,
+        15
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 0.701,
+        "topBottomMeanAbsoluteRGB": 1.072
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 2.47,
+        "topBottomMeanAbsoluteRGB": 6.858
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_cream-repeat-proof.png",
+      "estimatedSourcePeriod": [
+        627,
+        261
+      ]
+    },
+    {
+      "id": "wall_mint",
+      "state": "tile",
+      "kind": "tile",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_mint.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/wall_mint-source.png",
+      "source_crop": [
+        169,
+        219,
+        1180,
+        1227
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1011,
+        1008
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1011,
+        "h": 1008
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.0029761904761905,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "c0732e2986d0759d6820a3357e5dda548356092ac99a42ae0ac206e9c0df8569",
+      "fileSha256": "49c0c4aac680e924fba6d08eb2635cd5567c70813b4b7a588c633bb54a7a9ca8",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        20,
+        15
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 1.078,
+        "topBottomMeanAbsoluteRGB": 2.183
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 35.739,
+        "topBottomMeanAbsoluteRGB": 5.93
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_mint-repeat-proof.png",
+      "estimatedSourcePeriod": [
+        337,
+        336
+      ]
+    },
+    {
+      "id": "wall_rose",
+      "state": "tile",
+      "kind": "tile",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_rose.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/wall_rose-source.png",
+      "source_crop": [
+        186,
+        128,
+        1022,
+        1143
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        836,
+        1015
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 836,
+        "h": 1015
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 0.8236453201970443,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "8d93ff296d38242f25776a6a112a31e9a4289c0b963ac95bc3aa4f5155e97b4d",
+      "fileSha256": "7847c5b7e5f8b14eac41d553323984b014ade0d98068178f6edb8ff1fa17854d",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        20,
+        15
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 1.317,
+        "topBottomMeanAbsoluteRGB": 2.301
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 12.409,
+        "topBottomMeanAbsoluteRGB": 5.625
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_rose-repeat-proof.png",
+      "estimatedSourcePeriod": [
+        418,
+        145
+      ]
+    },
+    {
+      "id": "wall_dots",
+      "state": "tile",
+      "kind": "tile",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_dots.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/wall_dots-source.png",
+      "source_crop": [
+        112,
+        94,
+        739,
+        1206
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        627,
+        1112
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 627,
+        "h": 1112
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 0.5638489208633094,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "3b6f5e959b1e841b35332ef4326d8791691546116561d55b29ddbabc8b4ad2ee",
+      "fileSha256": "4fb6b1c059db77f30898bbf1b00599e6ea7c507deb7608cebb7ffb527ab7ff17",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        16,
+        12
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 1.682,
+        "topBottomMeanAbsoluteRGB": 1.749
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 6.983,
+        "topBottomMeanAbsoluteRGB": 21.759
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_dots-repeat-proof.png",
+      "estimatedSourcePeriod": [
+        627,
+        278
+      ]
+    },
+    {
+      "id": "wall_brick",
+      "state": "tile",
+      "kind": "tile",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_brick.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/wall_brick-source.png",
+      "source_crop": [
+        312,
+        100,
+        894,
+        1110
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        582,
+        1010
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 582,
+        "h": 1010
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 0.5762376237623762,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "881e0faa807aa308ba6b48c61db18889be31aeeff99c80962c2c913304fbb3e1",
+      "fileSha256": "470c9e7d737d95f8dfb1a95351b131dbeb58287d778bb92868613e983a1f17a3",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        32,
+        16
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 5.047,
+        "topBottomMeanAbsoluteRGB": 4.363
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 30.933,
+        "topBottomMeanAbsoluteRGB": 59.101
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_brick-repeat-proof.png",
+      "estimatedSourcePeriod": [
+        582,
+        202
+      ]
+    },
+    {
+      "id": "wall_walnut",
+      "state": "tile",
+      "kind": "tile",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_walnut.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/wall_walnut-source.png",
+      "source_crop": [
+        60,
+        121,
+        1212,
+        905
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1152,
+        784
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1152,
+        "h": 784
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.469387755102041,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "75cc278b07d7fc60b91fe6c0feb244e10fd418faec8444a66cfa0b29b84f6256",
+      "fileSha256": "44f8cf02686c1324910c9a32c3a6958804e01722dd9bce3e81e1f736e8182a01",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        24,
+        26
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 3.656,
+        "topBottomMeanAbsoluteRGB": 2.111
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 14.305,
+        "topBottomMeanAbsoluteRGB": 8.277
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_walnut-repeat-proof.png",
+      "estimatedSourcePeriod": [
+        384,
+        392
+      ]
+    },
+    {
+      "id": "wall_stars",
+      "state": "tile",
+      "kind": "tile",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_stars.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/wall_stars-source.png",
+      "source_crop": [
+        113,
+        306,
+        923,
+        1168
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        810,
+        862
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 810,
+        "h": 862
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 0.9396751740139211,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "506511658573d9228a05c323ad8747034ac9de64988a81a105163a1925811e0a",
+      "fileSha256": "5f9af47573c40e15471a3fc95f2198079dda8cae8621127e9ee8bef31863db11",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        62,
+        46
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 2.168,
+        "topBottomMeanAbsoluteRGB": 3.011
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 4.244,
+        "topBottomMeanAbsoluteRGB": 4.519
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_stars-repeat-proof.png",
+      "estimatedSourcePeriod": [
+        405,
+        431
+      ]
+    },
+    {
+      "id": "floor_checker",
+      "state": "tile",
+      "kind": "tile",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_checker.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/floor_checker-source.png",
+      "source_crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1254,
+        "h": 1254
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.0,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "cdd679d561606ab99acdf0d82c2721ae024ef7ca5578462da8373518cf3e3dd6",
+      "fileSha256": "3525a4b63f513091778f48198908db33eaa4745f5ae433f3371782d1327c8729",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        32,
+        32
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 2.207,
+        "topBottomMeanAbsoluteRGB": 2.972
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 2.207,
+        "topBottomMeanAbsoluteRGB": 2.972
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_checker-repeat-proof.png",
+      "estimatedSourcePeriod": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "floor_planks",
+      "state": "tile",
+      "kind": "tile",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_planks.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/floor_planks-source.png",
+      "source_crop": [
+        2,
+        192,
+        1247,
+        925
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1245,
+        733
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1245,
+        "h": 733
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.6984993178717598,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "ea4134ef64b173eec199d8196e4dc73d39a6afcd4aeedf9d7970e4835b264c2f",
+      "fileSha256": "b299c7dd9a56c775c732dc6adad09ffebab33705abacd90a06e937bdbe042d5e",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        96,
+        24
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 3.985,
+        "topBottomMeanAbsoluteRGB": 6.059
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 4.778,
+        "topBottomMeanAbsoluteRGB": 71.911
+      },
+      "edgeSelection": "Lossless rectangle chosen by matching opposite 4px source strips; no edge blending, mirroring, repaint or synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_planks-repeat-proof.png"
+    },
+    {
+      "id": "floor_mint",
+      "state": "tile",
+      "kind": "tile",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_mint.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/floor_mint-source.png",
+      "source_crop": [
+        75,
+        196,
+        1014,
+        1135
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        939,
+        939
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 939,
+        "h": 939
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.0,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "38ebee9b73b9ae2d5c501e2c0a57fd5b9a17cebcdfccef921b16feabe6cbec04",
+      "fileSha256": "4209d61aed6234be9cc80ba993688b02b60337d64639c4bad8bfc4d982ab6b44",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        32,
+        32
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 1.044,
+        "topBottomMeanAbsoluteRGB": 0.905
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 5.37,
+        "topBottomMeanAbsoluteRGB": 18.699
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_mint-repeat-proof.png",
+      "estimatedSourcePeriod": [
+        313,
+        313
+      ]
+    },
+    {
+      "id": "floor_terrazzo",
+      "state": "tile",
+      "kind": "tile",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_terrazzo.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/floor_terrazzo-source.png",
+      "source_crop": [
+        6,
+        164,
+        1245,
+        1103
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1239,
+        939
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1239,
+        "h": 939
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.3194888178913737,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "363cc957d7903493fc6ce9f93ff17fb1de5f017f02c4cc0a0561d89afde6a05d",
+      "fileSha256": "0581adc2fba68b616f0d2ac593afa9a3d479490c603a166946f92eb19e4c4f3f",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        32,
+        32
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 4.118,
+        "topBottomMeanAbsoluteRGB": 4.326
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 10.178,
+        "topBottomMeanAbsoluteRGB": 9.116
+      },
+      "edgeSelection": "Lossless rectangle chosen by matching opposite 4px source strips; no edge blending, mirroring, repaint or synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_terrazzo-repeat-proof.png"
+    },
+    {
+      "id": "floor_herringbone",
+      "state": "tile",
+      "kind": "tile",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_herringbone.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/floor_herringbone-source.png",
+      "source_crop": [
+        47,
+        185,
+        1109,
+        1229
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1062,
+        1044
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1062,
+        "h": 1044
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.0172413793103448,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "3ac434795478b4021e69e92e5c995f0e595d587977c50b9ec68b0dca7d93aa5a",
+      "fileSha256": "ca27f6e047168ac7b0f2fd302213a019274bb473cb866ac6903909ea90189d15",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        32,
+        32
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 13.742,
+        "topBottomMeanAbsoluteRGB": 10.624
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 21.011,
+        "topBottomMeanAbsoluteRGB": 21.344
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_herringbone-repeat-proof.png",
+      "estimatedSourcePeriod": [
+        531,
+        261
+      ]
+    },
+    {
+      "id": "floor_marble",
+      "state": "tile",
+      "kind": "tile",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_marble.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/floor_marble-source.png",
+      "source_crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1254,
+        "h": 1254
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.0,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "6ee8ace630c31f7d6739c7108a675cd88f7402204b5931cf8b5f4b374e700dd4",
+      "fileSha256": "b3d8ceae17337c47dbbbb003fed320eff3ee31abfde482391679ce3b1aa71ac6",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        64,
+        64
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 3.98,
+        "topBottomMeanAbsoluteRGB": 7.243
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 3.98,
+        "topBottomMeanAbsoluteRGB": 7.243
+      },
+      "edgeSelection": "Lossless rectangle chosen by matching opposite 4px source strips; no edge blending, mirroring, repaint or synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_marble-repeat-proof.png"
+    },
+    {
+      "id": "counter_walnut",
+      "state": "top",
+      "kind": "counter",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/counter_walnut-top.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/counter_walnut-source.png",
+      "source_crop": [
+        7,
+        210,
+        1529,
+        382
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        1522,
+        172
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 1502,
+        "h": 152
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 9.881578947368421,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "1447675b7a8464482d752d899d67f3243e99cf24d843fd88100b723f3151ff86",
+      "fileSha256": "7d632f724303fc6305e6f34671709f3b74249852becde565232e174a0136a134",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 761.0,
+        "y": 161,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze."
+    },
+    {
+      "id": "counter_walnut",
+      "state": "front",
+      "kind": "counter",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/counter_walnut-front.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/counter_walnut-source.png",
+      "source_crop": [
+        377,
+        502,
+        1159,
+        911
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        782,
+        409
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 762,
+        "h": 389
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.9588688946015425,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "1447675b7a8464482d752d899d67f3243e99cf24d843fd88100b723f3151ff86",
+      "fileSha256": "fbbaadce726e821a09c3a2c91fc81aba4e2e5a079bdd2e56bcb817fd98055ad0",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 391.0,
+        "y": 398,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze."
+    },
+    {
+      "id": "counter_marble",
+      "state": "top",
+      "kind": "counter",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/counter_marble-top.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/counter_marble-source.png",
+      "source_crop": [
+        0,
+        179,
+        1536,
+        363
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        1536,
+        184
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 10,
+        "w": 1526,
+        "h": 164
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 9.304878048780488,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "39acc293b841bb5d84bb1962e867da3bfb7cfff0ab975aec8b72a4156afe744e",
+      "fileSha256": "8d503fe4d2b7778654b1104562cbe71692089e2cadf6d3999d51fce69fc11a01",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 768.0,
+        "y": 173,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze."
+    },
+    {
+      "id": "counter_marble",
+      "state": "front",
+      "kind": "counter",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/counter_marble-front.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/counter_marble-source.png",
+      "source_crop": [
+        334,
+        500,
+        1202,
+        920
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        868,
+        420
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 848,
+        "h": 400
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 2.12,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "39acc293b841bb5d84bb1962e867da3bfb7cfff0ab975aec8b72a4156afe744e",
+      "fileSha256": "8dacdbd6c7a753178dffbbfdb7c5dc4e5d754161f8bf12d3f482876398f5cb07",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 434.0,
+        "y": 409,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze."
+    },
+    {
+      "id": "counter_pink",
+      "state": "top",
+      "kind": "counter",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/counter_pink-top.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/counter_pink-source.png",
+      "source_crop": [
+        1,
+        152,
+        1535,
+        344
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        1534,
+        192
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 1514,
+        "h": 172
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 8.80232558139535,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "9a12538a56f22a497009c962853bb9a90b626b6d0a630033811b3a2a51eb2dc6",
+      "fileSha256": "185226a12c9a596a9d503d9ca820052357982dd701d2dd402fe12457d93b2501",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 767.0,
+        "y": 181,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze."
+    },
+    {
+      "id": "counter_pink",
+      "state": "front",
+      "kind": "counter",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/counter_pink-front.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/counter_pink-source.png",
+      "source_crop": [
+        301,
+        492,
+        1236,
+        925
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        935,
+        433
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 915,
+        "h": 413
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 2.2154963680387407,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "9a12538a56f22a497009c962853bb9a90b626b6d0a630033811b3a2a51eb2dc6",
+      "fileSha256": "5cd1cea230936888266e5fecd97b71359ac4f80675322d94bf70987f3e1a3c80",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 467.5,
+        "y": 422,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze."
+    },
+    {
+      "id": "counter_gold",
+      "state": "top",
+      "kind": "counter",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/counter_gold-top.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/counter_gold-source.png",
+      "source_crop": [
+        0,
+        161,
+        1536,
+        312
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        1536,
+        151
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 10,
+        "w": 1520,
+        "h": 131
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 11.603053435114504,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "41a64a7d069b6f0e76825db802695a1d04986307f60a135f3ae7763d1f118112",
+      "fileSha256": "ea4bb90b1540f07b6af3ecad94b979cd056ea2c2ce2b7a29bd92c650105a7e94",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 768.0,
+        "y": 140,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze."
+    },
+    {
+      "id": "counter_gold",
+      "state": "front",
+      "kind": "counter",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/counter_gold-front.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/sources/counter_gold-source.png",
+      "source_crop": [
+        337,
+        447,
+        1201,
+        888
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        864,
+        441
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 844,
+        "h": 421
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 2.004750593824228,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "41a64a7d069b6f0e76825db802695a1d04986307f60a135f3ae7763d1f118112",
+      "fileSha256": "cdd4e9e9178cd7dd1ba0b45cdaa194cce3238f4afa5debd513cfc2f50a3cb232",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 432.0,
+        "y": 430,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze."
+    }
+  ],
+  "excludedNoBitmap": [
+    "sill_none",
+    "ceiling_none",
+    "rug_none",
+    "neon_none"
+  ],
+  "aliases": [
+    {
+      "id": "counter_oak",
+      "state": "top",
+      "file": "/workspace/shared/zeGame2/public/art/generated/main-v1/cabinet-top.png",
+      "source": "/workspace/shared/zeGame2/public/art/generated/main-v1/cabinet-top.png",
+      "source_crop": [
+        0,
+        0,
+        580,
+        60
+      ],
+      "size": [
+        580,
+        60
+      ],
+      "status": "reuse_candidate_pending_integration_review",
+      "fileSha256": "118756f1d6200e6979579fe8e8e0cb252b7f63499c830a84e4347078f77e56b5"
+    },
+    {
+      "id": "counter_oak",
+      "state": "front",
+      "file": "/workspace/shared/zeGame2/public/art/generated/main-v1/cabinet-front.png",
+      "source": "/workspace/shared/zeGame2/public/art/generated/main-v1/cabinet-front.png",
+      "source_crop": [
+        0,
+        0,
+        190,
+        138
+      ],
+      "size": [
+        190,
+        138
+      ],
+      "status": "reuse_candidate_pending_integration_review",
+      "fileSha256": "ab1bc35048d20990612ffcffefcf556ead17fe647f429f2c079a1e5be1e5dd54"
+    }
+  ]
+}

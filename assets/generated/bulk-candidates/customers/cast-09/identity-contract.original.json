@@ -1,0 +1,25 @@
+{
+  "id": 9,
+  "name": "蓝莓水手",
+  "look": {
+    "skin": 3,
+    "hair": 0,
+    "hairStyle": 2,
+    "shirt": 1,
+    "pants": 0
+  },
+  "hairstyle": 6,
+  "outfit": "sailor",
+  "accessory": "bow",
+  "accent": "#e8d9b6",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#80533f",
+    "hair": "#594237",
+    "shirt": "#799ba7",
+    "pants": "#53637b"
+  },
+  "hatPalette": "#9b87af",
+  "description": "Fixed customer cast 9 (蓝莓水手): warm skin #80533f; hair #594237 in a neat chin-length BLUNT BOB with a straight full eyebrow-level fringe and even straight side ends. Outfit: #799ba7 sailor top with wide cream sailor collar, #e8d9b6 necktie and tiny gold knot. Lower clothing color #53637b; warm dark brown leather shoes. Accent #e8d9b6. A visible #e8d9b6 hair bow attached at side/back, preserved in every angle and pose."
+}

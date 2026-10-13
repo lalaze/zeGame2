@@ -1,0 +1,535 @@
+{
+  "breed": "british",
+  "version": 1,
+  "generator": "built-in image_gen",
+  "sourceSheetDimensions": [
+    1254,
+    1254
+  ],
+  "bboxAlphaThreshold": "alpha > 128, excludes faint fringe; original alpha preserved in lossless crops",
+  "facingConvention": {
+    "walkA": "head-left",
+    "walkB": "head-left",
+    "other": "front-three-quarter slightly left; nuzzle head tilts independently"
+  },
+  "scaleNote": "One calibrated sourceToWorldScale for every frame from each source sheet. Estimated from common head width, never frame-height fit; runtime head/contact verification required.",
+  "anchorNote": "Manually visually estimated grounded front-paw/support midpoint and crown/forehead between ears, not ear tips. Contact/flip verification remains runtime work.",
+  "qa": {
+    "status": "source-and-crops-inspected",
+    "checks": [
+      "Fourteen complete actions",
+      "Visually distinct gait phases",
+      "Closed blink versus open-mouth happy expression",
+      "Grooming paw chest versus cheek",
+      "Raised broad chest and grounded haunch",
+      "One consistent breed identity and source scale"
+    ],
+    "raisedPoseHeightNote": "Raised poses naturally taller than idle; height/contact still require runtime petting QA."
+  },
+  "frames": [
+    {
+      "state": "idle",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/british-idle.png",
+      "source": "source.png",
+      "source_crop": [
+        48,
+        57,
+        321,
+        329
+      ],
+      "size": [
+        273,
+        272
+      ],
+      "bbox": {
+        "x": 2,
+        "y": 8,
+        "w": 263,
+        "h": 256
+      },
+      "foot": {
+        "x": 82,
+        "y": 255
+      },
+      "headContact": {
+        "x": 97,
+        "y": 32
+      },
+      "sourceToWorldScale": 0.048,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26449,
+      "sha256": "d7ddb491722f346ca117f60699e97773b081eaf55a3315fbd4d34220e5b4c008"
+    },
+    {
+      "state": "swish",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/british-swish.png",
+      "source": "source.png",
+      "source_crop": [
+        357,
+        57,
+        674,
+        328
+      ],
+      "size": [
+        317,
+        271
+      ],
+      "bbox": {
+        "x": 2,
+        "y": 8,
+        "w": 309,
+        "h": 255
+      },
+      "foot": {
+        "x": 86,
+        "y": 254
+      },
+      "headContact": {
+        "x": 100,
+        "y": 33
+      },
+      "sourceToWorldScale": 0.048,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 38252,
+      "sha256": "01404ca17ae6c774a7a3ef1c8b505dee950b15abe0bfd95c3662deb34c8d14d3"
+    },
+    {
+      "state": "blink",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/british-blink.png",
+      "source": "source.png",
+      "source_crop": [
+        675,
+        57,
+        944,
+        328
+      ],
+      "size": [
+        269,
+        271
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 8,
+        "w": 261,
+        "h": 255
+      },
+      "foot": {
+        "x": 81,
+        "y": 254
+      },
+      "headContact": {
+        "x": 95,
+        "y": 33
+      },
+      "sourceToWorldScale": 0.048,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 25013,
+      "sha256": "29081bf5dba87c3c04e940d5982bd3839abb72dd5d84f0d0f2f1ef82b6f42acf"
+    },
+    {
+      "state": "happy",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/british-happy.png",
+      "source": "source.png",
+      "source_crop": [
+        988,
+        57,
+        1252,
+        328
+      ],
+      "size": [
+        264,
+        271
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 8,
+        "w": 256,
+        "h": 255
+      },
+      "foot": {
+        "x": 85,
+        "y": 254
+      },
+      "headContact": {
+        "x": 96,
+        "y": 33
+      },
+      "sourceToWorldScale": 0.048,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 25187,
+      "sha256": "6edc88728fb28038207a5e2a865b53ba47b1d288bafd0f63783ee3672713d3af"
+    },
+    {
+      "state": "walkA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/british-walkA.png",
+      "source": "source.png",
+      "source_crop": [
+        16,
+        378,
+        351,
+        615
+      ],
+      "size": [
+        335,
+        237
+      ],
+      "bbox": {
+        "x": 2,
+        "y": 8,
+        "w": 326,
+        "h": 221
+      },
+      "foot": {
+        "x": 146,
+        "y": 220
+      },
+      "headContact": {
+        "x": 68,
+        "y": 45
+      },
+      "sourceToWorldScale": 0.048,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26533,
+      "sha256": "cb38908338288119896d149b4bab8409071d28c3ea43222752b33a3ec0b5b0c7"
+    },
+    {
+      "state": "walkB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/british-walkB.png",
+      "source": "source.png",
+      "source_crop": [
+        351,
+        377,
+        688,
+        617
+      ],
+      "size": [
+        337,
+        240
+      ],
+      "bbox": {
+        "x": 1,
+        "y": 8,
+        "w": 331,
+        "h": 224
+      },
+      "foot": {
+        "x": 136,
+        "y": 223
+      },
+      "headContact": {
+        "x": 68,
+        "y": 45
+      },
+      "sourceToWorldScale": 0.048,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 28324,
+      "sha256": "0448dd0cd4d7fefee427e135a3cb20012a8107c9b69b17b1520114e347019544"
+    },
+    {
+      "state": "sleep",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/british-sleep.png",
+      "source": "source.png",
+      "source_crop": [
+        689,
+        423,
+        965,
+        617
+      ],
+      "size": [
+        276,
+        194
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 263,
+        "h": 178
+      },
+      "foot": {
+        "x": 124,
+        "y": 177
+      },
+      "headContact": {
+        "x": 116,
+        "y": 53
+      },
+      "sourceToWorldScale": 0.048,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 10381,
+      "sha256": "79ea057d9da94888e6715cebd4fc9f92fac05f7c4a2bf4184f8ed6f905db1e36"
+    },
+    {
+      "state": "groomA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/british-groomA.png",
+      "source": "source.png",
+      "source_crop": [
+        1005,
+        361,
+        1254,
+        620
+      ],
+      "size": [
+        249,
+        259
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 234,
+        "h": 243
+      },
+      "foot": {
+        "x": 82,
+        "y": 242
+      },
+      "headContact": {
+        "x": 81,
+        "y": 46
+      },
+      "sourceToWorldScale": 0.048,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 18184,
+      "sha256": "03e0675556a017e75603dbd07b59dacf5a91c869c87da33464ed8c757f601f64"
+    },
+    {
+      "state": "groomB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/british-groomB.png",
+      "source": "source.png",
+      "source_crop": [
+        45,
+        649,
+        314,
+        929
+      ],
+      "size": [
+        269,
+        280
+      ],
+      "bbox": {
+        "x": 4,
+        "y": 8,
+        "w": 260,
+        "h": 264
+      },
+      "foot": {
+        "x": 78,
+        "y": 263
+      },
+      "headContact": {
+        "x": 85,
+        "y": 33
+      },
+      "sourceToWorldScale": 0.048,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 27164,
+      "sha256": "913850c23b3d529b6c80ffb86563a1b3ff35127e16170fdd78a05751496d9b99"
+    },
+    {
+      "state": "stretch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/british-stretch.png",
+      "source": "source.png",
+      "source_crop": [
+        314,
+        652,
+        671,
+        933
+      ],
+      "size": [
+        357,
+        281
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 344,
+        "h": 265
+      },
+      "foot": {
+        "x": 178,
+        "y": 264
+      },
+      "headContact": {
+        "x": 117,
+        "y": 169
+      },
+      "sourceToWorldScale": 0.048,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 43658,
+      "sha256": "bfde4a6ca56b50ad461b6007c5ab448b4219d977c74e48c7483342c9bb23bb6e"
+    },
+    {
+      "state": "watch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/british-watch.png",
+      "source": "source.png",
+      "source_crop": [
+        682,
+        669,
+        956,
+        933
+      ],
+      "size": [
+        274,
+        264
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 8,
+        "w": 266,
+        "h": 248
+      },
+      "foot": {
+        "x": 80,
+        "y": 247
+      },
+      "headContact": {
+        "x": 92,
+        "y": 41
+      },
+      "sourceToWorldScale": 0.048,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26069,
+      "sha256": "cce8f1762b0ad36d85b034402038b8bb9943cbfb9004b8ef550be13130018435"
+    },
+    {
+      "state": "lookUp",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/british-lookUp.png",
+      "source": "source.png",
+      "source_crop": [
+        1008,
+        620,
+        1252,
+        933
+      ],
+      "size": [
+        244,
+        313
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 228,
+        "h": 297
+      },
+      "foot": {
+        "x": 75,
+        "y": 296
+      },
+      "headContact": {
+        "x": 85,
+        "y": 40
+      },
+      "sourceToWorldScale": 0.048,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 24292,
+      "sha256": "db64aadafd9824f9b6a4ba91f06dbe250cfe8909582f0e4fbfd3b2f9ebef044c"
+    },
+    {
+      "state": "nuzzleA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/british-nuzzleA.png",
+      "source": "source.png",
+      "source_crop": [
+        58,
+        938,
+        315,
+        1234
+      ],
+      "size": [
+        257,
+        296
+      ],
+      "bbox": {
+        "x": 1,
+        "y": 8,
+        "w": 248,
+        "h": 280
+      },
+      "foot": {
+        "x": 67,
+        "y": 279
+      },
+      "headContact": {
+        "x": 79,
+        "y": 35
+      },
+      "sourceToWorldScale": 0.048,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 24369,
+      "sha256": "237dad4444ce35746eca0280fbe9775010170c43e433bd9b2980ed0bf1ca43c8"
+    },
+    {
+      "state": "nuzzleB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/british-nuzzleB.png",
+      "source": "source.png",
+      "source_crop": [
+        384,
+        938,
+        641,
+        1234
+      ],
+      "size": [
+        257,
+        296
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 241,
+        "h": 280
+      },
+      "foot": {
+        "x": 92,
+        "y": 279
+      },
+      "headContact": {
+        "x": 96,
+        "y": 42
+      },
+      "sourceToWorldScale": 0.048,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 25272,
+      "sha256": "647f68e8ba5a8355c633d357f961e603a607f4a4d46c03be46e47ced1a63698f"
+    }
+  ]
+}

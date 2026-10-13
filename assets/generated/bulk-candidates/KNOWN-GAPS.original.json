@@ -1,0 +1,80 @@
+[
+  {
+    "domain": "signature",
+    "id": "glass-liquid-body-fill",
+    "status": "missing",
+    "reason": "Surface layers exist but transparent tall glasses require renderer clipping/fill below surface; authored registered liquid body not generated."
+  },
+  {
+    "domain": "signature",
+    "id": "dose-1-vs-2-variants",
+    "status": "review_required",
+    "reason": "Sugar/spice garnish sources include two pieces; runtime exact dose remains pips/count text until independent one-piece cutout registration is reviewed."
+  },
+  {
+    "domain": "parameter",
+    "id": "server-style1-and-style3",
+    "states": [
+      "up-stand",
+      "up-stepA",
+      "up-stepB"
+    ],
+    "status": "failed",
+    "reason": "Six coded frames incorrectly show front bowtie on back; excluded from usable coverage."
+  },
+  {
+    "domain": "parameter",
+    "id": "boundary-flags",
+    "status": "review_required",
+    "count": 23,
+    "reason": "Tight gutters or potential edge overlap; eligibleRuntimeLooks remains zero pending compositor and identity validation."
+  },
+  {
+    "domain": "kitchen",
+    "id": "hood",
+    "status": "review_required",
+    "reason": "Source ratio4.72 versus target6.70; uniform width-fit height32.6 vs23 requires layout decision."
+  },
+  {
+    "domain": "kitchen",
+    "id": "cooler-opening",
+    "status": "review_required",
+    "reason": "Active door-gap needs overlay/occlusion integration; static body alone does not prove moving geometry."
+  },
+  {
+    "domain": "actors",
+    "id": "foot-seat-pet-contact",
+    "status": "pending_runtime_review",
+    "reason": "Source anchors are explicit estimates; full pose chains require scale/contact runtime calibration."
+  },
+  {
+    "domain": "menu",
+    "id": "halos-and-tall-cup-readability",
+    "status": "pending_runtime_review",
+    "reason": "Faint alpha edge and native aspect readability at12\u201314px need in-game verification."
+  },
+  {
+    "domain": "decor",
+    "id": "repeat-phase-and-density",
+    "status": "pending_runtime_review",
+    "reason": "13 generated wall/floor material crops have measured edge differences/repeat proofs; herringbone and marble particularly require seam/phase validation, no guaranteed seamlessness."
+  },
+  {
+    "domain": "decor",
+    "id": "counter-panel-aspect",
+    "status": "pending_runtime_review",
+    "reason": "Independent top/front modules preserve source aspect; old narrow-panel mapping needs repeat or geometry adaptation, not arbitrary stretching."
+  },
+  {
+    "domain": "environment",
+    "id": "module-aspect-and-apertures",
+    "status": "pending_runtime_review",
+    "reason": "Transparent apertures numerically checked, but window/door/module placement and aspect-preserving fit still require world composition validation."
+  },
+  {
+    "domain": "decor",
+    "id": "props-boundaries-and-aspect",
+    "status": "pending_runtime_review",
+    "reason": "Chandelier silhouette touches source edge; neon mounting frame is slender; red/blue rug fringe extends laterally. Preserve source alpha and native aspect; verify complete intended silhouette and target placement."
+  }
+]

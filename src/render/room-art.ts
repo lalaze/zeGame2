@@ -12,6 +12,7 @@ import {
   DOOR_W,
   DOOR_X,
   FLOOR_Y,
+  sceneHeight,
   floorY,
   queueSpot,
   PASS,
@@ -27,63 +28,109 @@ import {
 } from '../game/layout';
 import type { GameState } from '../game/state';
 import { paintPassageFloor } from './passages';
-import { glassReflection, treeLine } from './materials';
+import { cabinetPanel, glassReflection, leafySprig, timberBeam, treeLine, wallLantern } from './materials';
 import { mix, ramp } from './color';
 import { counterColors, grain, paintCounter, paintFloor, paintRug, paintRunner, paintRunnerJoin, paintWainscot, paintWall, wainscotColor } from './decor-art';
 import { drawText, textWidth } from './font';
 import { beam, type Lighting, type Sun } from './lighting';
 import { OUTLINE, itemIcon, pixelSprite } from './sprites';
+import { paintPixelFloorDepth } from './pixel-floor-depth';
+import { paintFineCabinet, paintFineBeam } from './pixel-joinery';
+import { paintPixelWindowVillage } from './pixel-window-village';
+import { pixelFloorDoorLight, projectFloorLayer } from './pixel-floor-projection';
+import { mainPixelProjection, projectMainPlaneWorld } from './main-pixel-presentation';
+import { paintPixelRoomShell } from './pixel-room-shell';
+import { fineTableCanvas, fineChairCanvas } from './fine-dining-art';
+import { fineSpriteArt, registerFineSpriteArt } from './fine-sprite-art';
+import { paintFineBreadBasket, paintFineCakeDome, paintFineCupStack, paintFineStorageJar, FINE_COUNTER_PROP_BOUNDS } from './fine-counter-props-art';
+import { paintFineTrailingPlant } from './fine-plant-art';
+import { generatedMainSource, paintGeneratedMain, paintGeneratedCabinetBand } from './generated-main-art';
 
-const WOOD = ramp('#8a5a3c');
+const WOOD = { base: '#865332', hi: '#c98c4d', lo: '#67432b', dark: '#543425' };
+type WindowBounds = { x: number; y: number; w: number; h: number };
 
-/** Draws `text` with the bitmap font at 2x for signs and headings. */
+// Alpha-visible foot anchors from the selected, unchanged service PNG manifest.
+// Each prop is fitted uniformly; its transparent padding never shifts its foot.
+const SERVICE_FOOT_Y = {
+  'service-machine': 425 / 433,
+  'service-cupboard': 381 / 389,
+  'service-cups': 286 / 294,
+  'service-jars': 296 / 304,
+} as const;
+
+/** A tiny bounded cache for the room's bitmap headings, reused on lighting updates. */
+const headingCache = new Map<string, HTMLCanvasElement>();
 function bigText(ctx: CanvasRenderingContext2D, text: string, cx: number, y: number, color: string, outline?: string): void {
-  const tmp = document.createElement('canvas');
-  tmp.width = textWidth(text) + 2;
-  tmp.height = 7;
-  drawText(tmp.getContext('2d')!, text, 1, 1, color, outline);
+  const key = `${text}:${color}:${outline ?? ''}`;
+  let tmp = headingCache.get(key);
+  if (!tmp) {
+    tmp = document.createElement('canvas');
+    tmp.width = textWidth(text) + 2; tmp.height = 7;
+    drawText(tmp.getContext('2d')!, text, 1, 1, color, outline);
+    headingCache.set(key, tmp);
+  }
   ctx.drawImage(tmp, Math.round(cx - tmp.width), y, tmp.width * 2, tmp.height * 2);
 }
 
 const ESPRESSO = [
   '..wwww..wwww..wwww............',
   '..wWWw..wWWw..wWWw............',
-  '.XXXXXXXXXXXXXXXXXXXXXXXXXXXX.',
-  '.CCCCCCCCCCCCCCCCCCCCCCCCCCCc.',
-  '.cccccccccccccccccccccccccccc.',
-  '.LLLLLLLLLLLLLLLLLLLLLLLLLLLb.',
-  '.LBBBBBBBBBBBBBBBBBBBBBBBBBBb.',
-  '.LBBBBBBBBBBkkkkkkBBBBBBBBBBb.',
-  '.LBBBBBBBBBkggggggkBBBBBBBBBb.',
-  '.LBBBBBBBBBkgggrggkBBBBBBBBBb.',
-  '.LBBBBBBBBBkggrgggkBBBBBBBBBb.',
-  '.LBBBBBBBBBBkkkkkkBBBBBBBBBBb.',
-  '.LBBBBBBBBBBBBBBBBBBBBBBBBBBb.',
-  '.bbbbbbbbbbbbbbbbbbbbbbbbbbbb.',
+  '.XXXXXXXXXXXXXXCXXXXXXXXXXXXX.',
+  '.CLLLLLLLLLLLLLLLLLLLLLLLLLLc.',
+  '.Cccccccccccccccccccccccccccc.',
+  '.CLBBBBBBBBBBBBBBBBBBBBBBBBBb.',
+  '.CLBBBBBBBkkkkkkkkBBBBBBBBBBb.',
+  '.CLBBBBBBkgWWWWWWgkBBBBBBBBBb.',
+  '.CLBBBBBBkgWrrWWWgkBBBBBggBBb.',
+  '.CLBBBBBBkgWWWrrWgkBBBBBrrBBb.',
+  '.CLBBBBBBBkkkkkkkkBBBBBBBBBBb.',
+  '.CLBBBBBBBBBBBBBBBBBBBBBBBBBb.',
+  '.CLLLLLLLLLLLLLLLLLLLLLLLLLLb.',
   '.DDDDDDDDDDDDDDDDDDDDDDDDDDDD.',
-  '.DDDCCCCDDDDDDDDDDDDDCCCCDDDD.',
-  '.nkkkCCknnnnnnnnnnnnkkkCCknnn.',
-  '.nnnnccnnnnnnnnnnnnnnnnccnnnn.',
-  '.nnnnnnnnnnnnnnnnnnnnnnnnnnnn.',
-  '.nnnwwwwnnnnnnnnnnnnnwwwwnnnn.',
-  '.nnnwWWwnnnnnnnnnnnnnwWWwnnnn.',
-  '.nnnWWWWnnnnnnnnnnnnnWWWWnnnn.',
-  '.XXXXXXXXXXXXXXXXXXXXXXXXXXXX.',
-  '.ccXcXcXcXcXcXcXcXcXcXcXcXccc.',
-  '..cccccccccccccccccccccccccc..',
+  '.DnnCCCknnnnnnnnnnnnCCCknnnnD.',
+  '.DnnCCckkkkkkkknnnnnCCckkkkkD.',
+  '.DnnnccnnnnnnnnnnnnnnccnnnnnD.',
+  '.DnnnCCnnnnnnnnnnnnnnCCnnnnnD.',
+  '.DnnnWWnnnnnnnnnnnnnnWWnnnnnD.',
+  '.DnnwwwwnnnnnnnnnnnnwwwwnnnnD.',
+  '.DnnwWWwnnnnnnnnnnnnwWWwnnnnD.',
+  '.DnnWWWWnnnnnnnnnnnnWWWWnnnnD.',
+  '.XCCCCCCCCCCCCCCCCCCCCCCCCCCX.',
+  '.cXcXcXcXcXcXcXcXcXcXcXcXcXcc.',
+  '..kkkkkkkkkkkkkkkkkkkkkkkkkk..',
 ];
+
 const machineCache = new Map<string, HTMLCanvasElement>();
-function espressoMachine(finish: string): HTMLCanvasElement {
-  let c = machineCache.get(finish);
+function espressoMachine(finish: string, density = 1): HTMLCanvasElement {
+  const key = `${finish}:${density}`;
+  let c = machineCache.get(key);
   if (!c) {
     const body = ramp(finish);
-    const chrome = ramp('#c9d3d8');
+    const chrome = ramp('#c6c6af');
     c = pixelSprite(ESPRESSO, {
       B: body.base, b: body.lo, L: body.hi, D: body.dark,
       C: chrome.base, c: chrome.lo, X: chrome.hi,
       k: '#3a2a2a', n: '#4a3434', g: '#fdf6ec', r: '#d9384a', w: '#fdf6ec', W: '#dccdb9',
-    });
-    machineCache.set(finish, c);
+    }, 'sel', density);
+    if (density > 1) {
+      const ctx = c.getContext('2d')!;
+      const metal = (x: number, y: number, w: number, h: number, color: string) => {
+        ctx.fillStyle = color; ctx.fillRect(x * density, y * density, w * density, h * density);
+      };
+      // Fine authored hardware: folded steel lip, vent slots, cup rims and a gauge needle.
+      metal(3, 4.5, 26, .5, '#f6f2d9');
+      metal(3, 5, 26, .5, '#6f7a72');
+      for (let x = 4; x < 29; x += 2) metal(x, 23.5, .5, 1.5, '#65736d');
+      for (const x of [4, 12, 20]) {
+        metal(x, 1.5, 3, .5, '#fff9e8');
+        metal(x + .5, 2, 2, .5, '#a29d85');
+      }
+      metal(14, 8.5, .5, 2, '#a5503c');
+      metal(14.5, 8, 1.5, .5, '#a5503c');
+      metal(7, 16, .5, 3.5, '#edf1df');
+      metal(22, 16, .5, 3.5, '#edf1df');
+    }
+    machineCache.set(key, c);
   }
   return c;
 }
@@ -100,49 +147,56 @@ const lazy = (make: () => HTMLCanvasElement) => {
   return () => (c ??= make());
 };
 
-/** Burr grinder on the back bar, its hopper full of beans. */
-const GRINDER = lazy(() =>
-  pixelSprite(
-    [
-      '..gggggg..', '..gbBbbg..', '..gbbBbg..', '..gbbbbg..', '...gbbg...', '....mm....',
-      '..MMMMMM..', '..MmmmmK..', '..MmrrmK..', '..MmmmmK..', '..MKKKKK..', '...k..k...',
-      '..........', '.MMMMMMMM.', '.KKKKKKKK.',
-    ],
-    { g: '#d6ecf2', b: '#6e3f24', B: '#9c6538', M: '#5d6672', m: '#7c8794', K: '#3f4650', k: '#2a2a30', r: '#d9574a' },
-  ),
-);
+/** Fine countertop vine is rasterized once, then composited at its original footprint. */
+const COUNTER_VINE = lazy(() => {
+  const canvas = document.createElement('canvas'); canvas.width = 30; canvas.height = 68;
+  const ctx = canvas.getContext('2d')!; ctx.scale(2, 2);
+  paintFineTrailingPlant(ctx, 0, 0, 15, 34, 29);
+  return canvas;
+});
 
-/** A layer cake under a glass dome. */
-const CAKE_DOME = lazy(() =>
-  pixelSprite(
-    [
-      '.......kk.......', '......dkkd......', '....ddggggdd....', '...dWgggggggd...', '..dWgggggggggd..',
-      '..dWggrgrggrgd..', '.dWggPPPPPPPggd.', '.dWggpppppppggd.', '.dgggcccccccggd.', '.dgggPPPPPPPggd.',
-      '.dgggpppppppggd.', '.ssssssssssssss.', '......SSSS......', '....SSSSSSSS....',
-    ],
-    {
-      k: '#c9d3d8', d: '#9fc3cf', g: '#e4f3f6', W: '#ffffff', r: '#e2434b',
-      P: '#f6b3c4', p: '#ef8fa8', c: '#fdf6ec', s: '#e8edf0', S: '#b9c4cb',
-    },
-  ),
-);
+/** Burr grinder on the back bar, its hopper full of beans. */
+const GRINDER = lazy(() => pixelSprite([
+  '...MMMM...', '..gggggg..', '..gWbBbg..', '..gbBbbg..', '...gbbg...',
+  '....cc....', '..MLLLLL..', '..LMmmMK..', '..LMggMK..', '..LMrrMK..',
+  '..LMMMMK..', '...cC.k...', '...wW.w...', '.CCCCCCCC.', '.kkkkkkkk.',
+], { g: '#acc9bd', W: '#f4e6c7', b: '#543425', B: '#986339', M: '#566352', L: '#a8b39a',
+  m: '#788572', K: '#354331', k: '#39281f', r: '#bc6b43', c: '#aca788', C: '#e0d6b7', w: '#f4e6c7' }));
+
+/** Layer cake on a turned brass stand, inside stepped domed glazing. */
+const CAKE_DOME = lazy(() => pixelSprite([
+  '.......kk.......', '......dkkd......', '....ddggggdd....', '...dWgggggggd...',
+  '..dWggggrggggd..', '..dWggrcrggrgd..', '.dWggPPPPPPPggd.', '.dWggpcpcpcpggd.',
+  '.dgggcccccccggd.', '.dgggpppppppggd.', '.dgggPPPPPPPggd.', '.ssssssssssssss.',
+  '......SSSS......', '....SSSSSSSS....',
+], { k: '#c8a15e', d: '#7baca2', g: '#d7e7d7', W: '#fff5df', r: '#b65b46',
+  P: '#f3d8b1', p: '#c98967', c: '#fff0cf', s: '#e4c687', S: '#a88753' }));
 
 // A bistro chair seen from the side, facing right: a ladder back, a cushion and splayed legs.
 const CHAIR_ROWS = [
-  '.wWw.........', 'wWWwd........', 'wWwwd........', 'wWddd........', 'wWwwd........', 'wWwwd........',
-  'wWddd........', 'wWwwd........', 'wWwwd........', 'wWddd........', 'wW.wd........', 'wW.wd........',
-  'wW.wd........', 'wW.wd........', 'wW.wd........', 'wWcCCCCCCCCc.', 'wWccccccccccc', 'wwkkkkkkkkkkk',
-  'dWwwwwwwwwwwd', '.wd..d....dw.', '.wd..d....dw.', '.wdddddddddw.', '.w..d......w.', '.d.........d.',
+  '..wWW........', '.wWHwd.......', 'wWHwwd.......', 'wWwkwd.......', 'wWwwwd.......', 'wWHwwd.......',
+  'wWkkwd.......', 'wWw.wd.......', 'wWw.wd.......', 'wWkkwd.......', 'wWwwwd.......', 'wWw.wd.......',
+  'wWw.wd.......', 'wWw.wd.......', 'wWwwwd.......', 'wWcCCCCCCCCc.', 'wWccclcclcccc', 'wwkkkkkkkkkkk',
+  'dWWwwwwwwwwwd', '.wd..d....dw.', '.wd..d....dw.', '.wdddddddddw.', '.w..d......w.', '.d.........d.',
 ];
-const CHAIR_PALETTE = { w: '#8a5a3c', W: '#b07a4a', d: '#5f3a25', c: '#7fae8a', C: '#a6cfae', k: '#5d8a6a' };
-export const CHAIR_RIGHT = lazy(() => pixelSprite(CHAIR_ROWS, CHAIR_PALETTE));
-export const CHAIR_LEFT = lazy(() => pixelSprite(CHAIR_ROWS.map((r) => [...r].reverse().join('')), CHAIR_PALETTE));
+const CHAIR_PALETTE = { w: '#865332', W: '#c98c4d', H: '#e0ab65', d: '#543425', c: '#627451', C: '#94a56d', l: '#b1bd7e', k: '#39281f' };
+
+export const CHAIR_RIGHT = lazy(() => {
+  const c = pixelSprite(CHAIR_ROWS, CHAIR_PALETTE);
+  registerFineSpriteArt(c, fineChairCanvas('right'));
+  return c;
+});
+export const CHAIR_LEFT = lazy(() => {
+  const c = pixelSprite(CHAIR_ROWS.map((r) => [...r].reverse().join('')), CHAIR_PALETTE);
+  registerFineSpriteArt(c, fineChairCanvas('left'));
+  return c;
+});
 
 /** Gingham tablecloth colors: [lit top, drape, drape edge] x [white, stripe, crossing]. */
 const GINGHAM = [
-  ['#fbf3e6', '#ef9c8f', '#d9675d'],
-  ['#e0cbb6', '#cf776d', '#b14c46'],
-  ['#c9b29d', '#b25f5a', '#93403d'],
+  ['#fff0cf', '#dc9980', '#b64c3d'],
+  ['#e1c9a4', '#c57e64', '#973e32'],
+  ['#c0a17c', '#a7604b', '#75372c'],
 ];
 const TABLE_RX = 14;
 const TABLE_RY = 6;
@@ -179,7 +233,7 @@ export const TABLE = lazy(() => {
   r(cx - 6, foot - 1, 13, 1, iron.base);
   const half = (dy: number) => Math.round(Math.sqrt(Math.max(0, 1 - (dy / RY) ** 2)) * RX);
   const check = (x: number, y: number, shade: number) =>
-    GINGHAM[shade][(Math.floor((x - cx + 64) / 2) % 2) + (Math.floor(y / 2) % 2)];
+    GINGHAM[shade][(Math.floor((x - cx + 63) / 3) % 2) + (Math.floor(y / 3) % 2)];
   // Outline: the top ellipse, the sides and the hem.
   for (let dy = -RY - 1; dy <= RY + 1; dy++) {
     const h = Math.round(Math.sqrt(Math.max(0, 1 - (dy / (RY + 1)) ** 2)) * (RX + 1));
@@ -213,7 +267,15 @@ export const TABLE = lazy(() => {
     r(x, cy + dy + 1, 1, 1, check(x, cy + dy + 1, 2));
   }
   r(cx - 8, cy - RY, 6, 1, '#ffffff');
-  r(cx - 11, cy - RY + 1, 3, 1, '#ffffff');
+  r(cx - 11, cy - RY + 1, 3, 1, '#fff6dd');
+  // Stitched hem and tiny fabric folds on the hanging front, not a flat ellipse.
+  for (let dx = -10; dx <= 10; dx += 4) {
+    const dy = Math.round(Math.sqrt(1 - (dx / RX) ** 2) * RY);
+    r(cx + dx, cy + dy + DROP - 1, 1, 1, '#f7dbae');
+    r(cx + dx + 1, cy + dy + 2, 1, 2, '#8e493a');
+  }
+  r(cx - 4, foot - 2, 3, 1, '#9b805c');
+  registerFineSpriteArt(c, fineTableCanvas());
   return c;
 });
 
@@ -221,7 +283,7 @@ export const TABLE = lazy(() => {
  * A shaft of sunlight on the floor through an opening from x0 to x1 at y, slanting
  * by `lean` over `length` (negative to fall upward, from the front of the room).
  */
-export function paintSunbeam(ctx: CanvasRenderingContext2D, sun: Sun, x0: number, x1: number, y: number, lean: number, length: number): void {
+export function paintSunbeam(ctx: CanvasRenderingContext2D, sun: Sun, x0: number, x1: number, y: number, lean: number, length: number, detail?: { opacity: number; pixelSize: number }): void {
   if (sun.elevation <= 0 || sun.strength <= 0.02) return;
   ctx.save();
   ctx.fillStyle = sun.color;
@@ -229,12 +291,15 @@ export function paintSunbeam(ctx: CanvasRenderingContext2D, sun: Sun, x0: number
   // fades along its reach rather than ending in one hard rectangle.
   const width = x1 - x0;
   const reach = Math.max(1, Math.abs(length));
-  for (let step = 0; step < reach; step++) {
+  const pixel = detail?.pixelSize === 0.5 ? 0.5 : 1;
+  const snap = (v: number) => Math.round(v / pixel) * pixel;
+  for (let step = 0; step < reach; step += pixel) {
     const p = step / reach;
-    ctx.globalAlpha = 0.22 * sun.strength * (1 - p * 0.85);
+    ctx.globalAlpha = Math.max(0, Math.min(1, detail?.opacity ?? 0.44)) * sun.strength * (1 - p * (detail ? 0.48 : 0.64));
+    if (p > 0.43 && p < 0.48) continue;
     for (let pane = 0; pane < 2; pane++) {
       const start = x0 + pane * width / 2 + lean * p;
-      ctx.fillRect(Math.round(start + 1), Math.round(y + Math.sign(length) * step), Math.max(1, Math.round(width / 2 - 3)), 1);
+      ctx.fillRect(snap(start + 1), snap(y + Math.sign(length) * step), Math.max(pixel, snap(width / 2 - 3)), pixel);
     }
   }
   ctx.restore();
@@ -251,7 +316,143 @@ export class RoomPainter {
   /** How far the kitchen door has swung open, 0 to 1. */
   kitchenDoor = 0;
 
-  constructor(readonly ctx: CanvasRenderingContext2D) {}
+  constructor(public ctx: CanvasRenderingContext2D, readonly density = 1, private readonly project = true) {}
+
+  private wallWindow(win: WindowBounds) {
+    const source = this.density > 1 ? generatedMainSource('wall-window') : undefined;
+    if (!source || source.width <= 20 || source.height <= 20) return null;
+    // Selected manifest: visible [10,10,623,504], aperture [125,87,386,296].
+    // Anchor the actual sill plane (source y420) at the old y+h+1 surface so the
+    // cat, botanical accent and OPEN sign keep their established attachments.
+    const scale = (win.w + 16) / (source.width - 20);
+    const x = win.x - 8, y = win.y + win.h + 1 - 410 * scale;
+    return { source, x, y, w: win.w + 16, h: (source.height - 20) * scale,
+      aperture: { x: x + 115 * scale, y: y + 77 * scale, w: 386 * scale, h: 296 * scale } };
+  }
+
+  private wallLamp(x: number, y: number): boolean {
+    const source = this.density > 1 ? generatedMainSource('wall-lamp') : undefined;
+    if (!source || source.width <= 20 || source.height <= 20) return false;
+    const sw = source.width - 20, sh = source.height - 20, height = 15, width = sw * height / sh;
+    this.ctx.save(); this.ctx.imageSmoothingEnabled = false;
+    this.ctx.drawImage(source, 10, 10, sw, sh, x + 4.5 - width / 2, y, width, height);
+    this.ctx.restore(); return true;
+  }
+
+  private generatedMenuBoard(state: GameState, x: number, y: number, width: number): boolean {
+    const source = this.density > 1 ? generatedMainSource('wall-board') : undefined;
+    if (!source || source.width <= 20 || source.height <= 20) return false;
+    const sw = source.width - 20, sh = source.height - 20, scale = width / sw;
+    const ctx = this.ctx;
+    ctx.save();
+    try {
+      ctx.imageSmoothingEnabled = false;
+      // At width 100 the full frame is 49.123 high, ending above the y57 bar.
+      // Its source-derived writing area remains clear of the carved frame.
+      ctx.drawImage(source, 10, 10, sw, sh, x, y, width, sh * scale);
+      ctx.beginPath(); ctx.rect(x + 51 * scale, y + 43 * scale, 697 * scale, 264 * scale); ctx.clip();
+      bigText(ctx, 'MENU', x + width / 2, y + 4, '#f5efe0');
+      const today = menuItems(state);
+      [today.slice(0,5), today.slice(5,10)].forEach((row,ri) => {
+        const total = row.length * 16 - 4;
+        row.forEach((item,i) => {
+          const icon = itemIcon(item.id,false), iconScale = Math.min(9 / icon.width,9 / icon.height);
+          const iw = icon.width * iconScale, ih = icon.height * iconScale;
+          ctx.drawImage(fineSpriteArt(icon).canvas, x + width / 2 - total / 2 + i * 16 + (12 - iw) / 2, y + 18 + ri * 10 + (9 - ih), iw, ih);
+        });
+      });
+    } finally { ctx.restore(); }
+    return true;
+  }
+
+  private serviceBitmap(id: keyof typeof SERVICE_FOOT_Y, counter: string, cx: number, foot: number, maxWidth: number, maxHeight: number): boolean {
+    if (this.density <= 1 || counter !== 'counter_oak') return false;
+    const source = generatedMainSource(id);
+    if (!source) return false;
+    const scale = Math.min(maxWidth / source.width, maxHeight / source.height);
+    const width = source.width * scale, height = source.height * scale;
+    return paintGeneratedMain(this.ctx, id, cx - width / 2, foot - height * SERVICE_FOOT_Y[id], width, height);
+  }
+
+  private servicePickup(counter: string): boolean {
+    if (this.density <= 1 || counter !== 'counter_oak') return false;
+    const source = generatedMainSource('service-pickup');
+    if (!source || source.width <= 16 || source.height <= 16) return false;
+    // Selected v2 manifest: visible [8,8,1289,1110] inside 1297×1118.
+    // Fit the visible footprint, excluding only its unchanged external padding.
+    // Its native ledges land at y80.923/y93.881; all six live plate slots and the
+    // separately rendered bell keep their existing gameplay coordinates.
+    const sw = source.width - 16, sh = source.height - 16;
+    this.ctx.save();
+    this.ctx.imageSmoothingEnabled = false;
+    this.ctx.drawImage(source, 8, 8, sw, sh, PASS.x, PASS.top + 2, PASS.w, PASS.w * sh / sw);
+    this.ctx.restore();
+    return true;
+  }
+
+  private serviceBreadBasket(counter: string, bx: number, foot: number, foreground = false): boolean {
+    if (this.density <= 1 || counter !== 'counter_oak') return false;
+    const source = generatedMainSource('service-basket');
+    if (!source) return false;
+    const scale = Math.min(22 / source.width, 15 / source.height);
+    const width = source.width * scale, height = source.height * scale;
+    const x = bx + 10 - width / 2, y = foot - height * 227 / 235;
+    if (!foreground) return paintGeneratedMain(this.ctx, 'service-basket', x, y, width, height);
+
+    // Renderer-only occlusion follows the selected 430×235 PNG's sloping rope
+    // rim. A horizontal cut would hide bread above the actual middle/front lip.
+    // The PNG is unchanged: only its original lower front face is redrawn over
+    // the menu-driven icons. Rear wall and interior remain behind the food.
+    const frontEdge = [[0,80],[80,94],[180,114],[280,134],[310,137],[420,65],[430,65],[430,235],[0,235]] as const;
+    const ctx = this.ctx;
+    ctx.save();
+    try {
+      ctx.imageSmoothingEnabled = false;
+      ctx.beginPath();
+      frontEdge.forEach(([px,py],i) => {
+        const dx = x + px / 430 * width, dy = y + py / 235 * height;
+        if (i === 0) ctx.moveTo(dx,dy); else ctx.lineTo(dx,dy);
+      });
+      ctx.closePath();
+      ctx.clip();
+      const cropTop = source.height * 65 / 235;
+      ctx.drawImage(source, 0, cropTop, source.width, source.height - cropTop,
+        x, y + height * 65 / 235, width, height * (1 - 65 / 235));
+    } finally {
+      ctx.restore();
+    }
+    return true;
+  }
+
+  private planeCanvas: HTMLCanvasElement | null = null;
+  private floorCanvas: HTMLCanvasElement | null = null;
+  private projectedFloor: HTMLCanvasElement | null = null;
+  private floorSignature = '';
+
+  /** Upright architecture stays upright; raster scaling keeps the fine pixel edges crisp. */
+  withPlane(footY: number, paint: () => void): void {
+    if (this.density === 1 || !this.project) { paint(); return; }
+    const source = this.planeCanvas ??= document.createElement('canvas');
+    const H = sceneHeight();
+    if (source.width !== SCENE_W * 2 || source.height !== H * 2) {
+      source.width = SCENE_W * 2; source.height = H * 2;
+    }
+    const target = this.ctx, ctx = source.getContext('2d')!;
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, source.width, source.height);
+    ctx.setTransform(2, 0, 0, 2, 0, 0); ctx.imageSmoothingEnabled = false;
+    this.ctx = ctx;
+    try { paint(); } finally { this.ctx = target; }
+    const a = projectMainPlaneWorld({ x: 0, y: footY }, footY);
+    const b = projectMainPlaneWorld({ x: SCENE_W, y: footY }, footY);
+    target.save(); target.imageSmoothingEnabled = false;
+    target.drawImage(source, Math.round(a.x * 2) / 2, 0, Math.round((b.x - a.x) * 2) / 2, H);
+    target.restore();
+  }
+
+
+  private cabinet(x: number, y: number, w: number, h: number, base: string, handle = false): void {
+    (this.density > 1 ? paintFineCabinet : cabinetPanel)(this.ctx, x, y, w, h, base, handle);
+  }
 
   private r(x: number, y: number, w: number, h: number, color: string): void {
     if (w <= 0 || h <= 0) return;
@@ -260,76 +461,124 @@ export class RoomPainter {
   }
 
   drawWall(wallpaper: string, t: number): void {
+    this.withPlane(80, () => this.drawWallLogical(wallpaper, t));
+  }
+
+  private drawWallLogical(wallpaper: string, t: number): void {
     paintWall(this.ctx, wallpaper, 0, 6, SCENE_W, 54, t);
-    // Ceiling beam.
-    this.r(0, 0, SCENE_W, 6, WOOD.lo);
-    this.r(0, 1, SCENE_W, 1, WOOD.base);
-    this.r(0, 4, SCENE_W, 1, WOOD.base);
-    this.r(0, 5, SCENE_W, 1, OUTLINE);
+    // A deep crown beam with laminated timber returns and pegged end blocks.
+    const beamPainter = this.density > 1 ? paintFineBeam : timberBeam;
+    beamPainter(this.ctx, 0, 0, SCENE_W, 8);
+    for (const x of [0, SCENE_W - 7]) {
+      beamPainter(this.ctx, x, 0, 7, 79, true);
+      for (let i = 0; i < 7; i++) this.r(x === 0 ? 7 + i : x - i - 1, 7 + i, 1, 7 - i, '#67432b');
+      this.r(x === 0 ? 7 : x - 6, 8, 6, 1, '#c98c4d');
+    }
     paintWainscot(this.ctx, wallpaper, 0, 61, SCENE_W, 15);
     // Baseboard.
     this.r(0, 76, SCENE_W, 4, WOOD.dark);
     this.r(0, 76, SCENE_W, 1, WOOD.base);
+    // Small permanent lanterns and trailing herbs are part of the architecture.
+    if (!this.wallLamp(76,10)) wallLantern(this.ctx, 76, 10);
+    if (!this.wallLamp(219,8)) wallLantern(this.ctx, 219, 8);
+    for (const x of [10, 310]) {
+      this.r(x - 3, 9, 6, 3, '#815638');
+      leafySprig(this.ctx, x, 13, 4, x);
+      leafySprig(this.ctx, x - 1, 18, 3, x + 2);
+      this.r(x - 1, 21, 1, 3, '#627451');
+    }
   }
 
   /** A window onto the street; `sign` hangs the OPEN (true) or CLOSED (false) sign in it. */
   drawWindow(win: { x: number; y: number; w: number; h: number }, light: Lighting, t: number, sign: boolean | null): void {
+    this.withPlane(80, () => this.drawWindowLogical(win, light, t, sign));
+  }
+
+  private drawWindowLogical(win: { x: number; y: number; w: number; h: number }, light: Lighting, t: number, sign: boolean | null): void {
     const { x, y, w, h } = win;
     const night = light.dark > 0.6;
     const bands = light.sky;
     const frame = ramp('#9a6740');
-    this.r(x - 4, y - 4, w + 8, h + 8, OUTLINE);
-    this.r(x - 3, y - 3, w + 6, h + 6, frame.base);
-    this.r(x - 3, y - 3, w + 6, 1, frame.hi);
-    bands.forEach((c, i) => this.r(x, y + (i * h) / 3, w, h / 3 + 1, c));
+    const generated = this.wallWindow(win);
     const ctx = this.ctx;
-    ctx.save();
-    ctx.beginPath();
-    ctx.rect(x, y, w, h);
-    ctx.clip();
-    if (night) {
-      const stars = [[4, 4], [15, 9], [27, 3], [38, 11], [9, 16], [33, 20], [21, 14], [46, 6]];
-      stars.forEach(([sx, sy], i) => {
-        if ((Math.floor(t * 1.5) + i) % 4 !== 0) this.r(x + sx, y + sy, 1, 1, '#fff6c8');
-      });
-      this.r(x + 38, y + 4, 6, 6, '#f6eec2');
-      this.r(x + 40, y + 4, 5, 5, bands[0]);
-    } else {
-      // The sun crosses the window and sinks behind the hills.
-      const { sun } = light;
-      if (sun.elevation > 0) this.r(x + 2 + sun.x * (w - 10), y + 3 + (1 - sun.elevation) * (h - 14), 6, 6, sun.disc);
-      for (const [offset, cy] of [[0, 7], [34, 15]]) {
-        const cx = x - 16 + ((t * 2.5 + offset) % (w + 24));
-        this.r(cx, y + cy, 14, 3, light.cloud);
-        this.r(cx + 3, y + cy - 2, 8, 2, light.cloud);
-        this.r(cx + 1, y + cy + 3, 12, 1, mix(light.cloud, light.sky[2], 0.5));
+    if (!generated) {
+      this.r(x - 4, y - 4, w + 8, h + 8, OUTLINE);
+      this.r(x - 3, y - 3, w + 6, h + 6, frame.base);
+      this.r(x - 3, y - 3, w + 6, 1, frame.hi);
+    }
+    {
+      const { x, y, w, h } = generated?.aperture ?? win;
+      bands.forEach((c, i) => this.r(x, y + (i * h) / 3, w, h / 3 + 1, c));
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(x, y, w, h);
+      ctx.clip();
+      if (night) {
+        const stars = [[4, 4], [15, 9], [27, 3], [38, 11], [9, 16], [33, 20], [21, 14], [46, 6]];
+        stars.forEach(([sx, sy], i) => {
+          if ((Math.floor(t * 1.5) + i) % 4 !== 0) this.r(x + sx / 46 * w, y + sy / 38 * h, 1, 1, '#fff6c8');
+        });
+        this.r(x + w - 8, y + 4, 6, 6, '#f6eec2');
+        this.r(x + w - 6, y + 4, 5, 5, bands[0]);
+      } else {
+        // The sun crosses the window and sinks behind the hills.
+        const { sun } = light;
+        if (sun.elevation > 0) this.r(x + 2 + sun.x * (w - 10), y + 3 + (1 - sun.elevation) * (h - 14), 6, 6, sun.disc);
+        for (const [offset, cy] of [[0, 7], [34, 15]]) {
+          const cx = x - 16 + ((t * 2.5 + offset) % (w + 24));
+          this.r(cx, y + cy, 14, 3, light.cloud);
+          this.r(cx + 3, y + cy - 2, 8, 2, light.cloud);
+          this.r(cx + 1, y + cy + 3, 12, 1, mix(light.cloud, light.sky[2], 0.5));
+        }
       }
+      // Hills and a tree line outside, falling into shadow at dusk.
+      const land = (day: string, dark: string) => mix(day, dark, light.dark);
+      if (this.density > 1) paintPixelWindowVillage(ctx, x, y, w, h, light.dark);
+      else {
+        this.r(x, y + h - 10, w, 10, land('#7cbf5e', '#243d33'));
+        this.r(x, y + h - 4, w, 4, land('#5ea24a', '#1b3029'));
+        treeLine(ctx, x, y + h - 21, w, 17, light.dark);
+      }
+      glassReflection(ctx, x, y, w, h, 0.13);
+      ctx.restore();
     }
-    // Hills and a tree line outside, falling into shadow at dusk.
-    const land = (day: string, dark: string) => mix(day, dark, light.dark);
-    this.r(x, y + h - 10, w, 10, land('#7cbf5e', '#243d33'));
-    this.r(x, y + h - 4, w, 4, land('#5ea24a', '#1b3029'));
-    treeLine(ctx, x, y + h - 21, w, 17, light.dark);
-    glassReflection(ctx, x, y, w, h, 0.13);
-    ctx.restore();
-    // Mullions and the sill.
-    this.r(x + w / 2 - 1, y, 3, h, frame.base);
-    this.r(x + w / 2 - 1, y, 1, h, frame.hi);
-    this.r(x, y + h / 2 - 1, w, 3, frame.base);
-    this.r(x, y + h / 2 - 1, w, 1, frame.hi);
-    // Curtains.
-    const curtain = ramp('#b96555');
-    for (const [cx, dir] of [[x - 6, 1], [x + w - 1, -1]] as const) {
-      this.r(cx, y - 5, 7, h + 4, curtain.base);
-      this.r(dir === 1 ? cx : cx + 5, y - 5, 2, h + 4, curtain.lo);
-      this.r(cx + 3, y - 5, 1, h + 4, curtain.hi);
-      this.r(cx - 1, y - 6, 9, 2, '#e7b84a');
-      this.r(cx, y + h - 9, 7, 2, '#d9b77a');
-      this.r(cx + 2, y + h - 7, 1, 3, '#f2dca2');
+    if (generated) {
+      ctx.save(); ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(generated.source, 10, 10, generated.source.width - 20, generated.source.height - 20,
+        generated.x, generated.y, generated.w, generated.h);
+      ctx.restore();
+    } else {
+      // Mullions and the sill.
+      this.r(x + w / 2 - 1, y, 3, h, frame.base);
+      this.r(x + w / 2 - 1, y, 1, h, frame.hi);
+      this.r(x, y + h / 2 - 1, w, 3, frame.base);
+      this.r(x, y + h / 2 - 1, w, 1, frame.hi);
+      // Gathered gingham curtains: cream checks, dark fold valleys and a brass tie.
+      for (const [cx, dir] of [[x - 6, 1], [x + w - 1, -1]] as const) {
+        for (let yy = -5; yy < h; yy++) for (let xx = 0; xx < 7; xx++) {
+          const check = (Math.floor((xx + 1) / 2) % 2) + (Math.floor((yy + 8) / 3) % 2);
+          const fold = xx === (dir === 1 ? 0 : 6) || xx === 3;
+          const color = ['#f4dfb7', '#cf8970', '#a64c3e'][check];
+          this.r(cx + xx, y + yy, 1, 1, fold ? mix(color, '#653628', 0.24) : color);
+        }
+        this.r(cx - 1, y - 6, 9, 1, '#543425');
+        this.r(cx, y - 5, 7, 1, '#e5b568');
+        this.r(cx, y + h - 9, 7, 2, '#b78b4f');
+        this.r(cx, y + h - 9, 6, 1, '#edc682');
+        this.r(cx + 2, y + h - 7, 1, 3, '#f2dca2');
+        this.r(cx + 3, y + h - 5, 2, 1, '#ae6d3c');
+      }
+      this.r(x - 8, y + h + 1, w + 16, 4, frame.base);
+      this.r(x - 8, y + h + 1, w + 16, 1, frame.hi);
+      this.r(x - 8, y + h + 5, w + 16, 1, OUTLINE);
+      grain(ctx, x - 6, y + h + 2, w + 12, 2, WOOD, 'h', x);
+      this.r(x - 6, y + h + 5, 4, 2, WOOD.dark);
+      this.r(x + w + 2, y + h + 5, 4, 2, WOOD.dark);
     }
-    this.r(x - 8, y + h + 1, w + 16, 4, frame.base);
-    this.r(x - 8, y + h + 1, w + 16, 1, frame.hi);
-    this.r(x - 8, y + h + 5, w + 16, 1, OUTLINE);
+    // A botanical accent on each return, clear of the hanging OPEN sign.
+    this.r(x + w - 9, y + h - 3, 5, 4, '#bc7149');
+    this.r(x + w - 9, y + h - 3, 5, 1, '#e5a463');
+    leafySprig(ctx, x + w - 7, y + h - 6, 3, x);
     if (sign === null) return;
     // The OPEN / CLOSED sign hangs on two strings from the crossbar, below the neon.
     const word = sign ? 'OPEN' : 'CLOSED';
@@ -346,10 +595,15 @@ export class RoomPainter {
 
 
   drawMenuBoard(state: GameState): void {
+    this.withPlane(80, () => this.drawMenuBoardLogical(state));
+  }
+
+  private drawMenuBoardLogical(state: GameState): void {
     const x = 110;
     const y = 7;
     const w = 100;
     const h = 44;
+    if (this.generatedMenuBoard(state,x,y,w)) return;
     const frame = ramp('#9a6740');
     this.r(x - 1, y - 1, w + 2, h + 2, OUTLINE);
     this.r(x, y, w, h, frame.base);
@@ -363,6 +617,16 @@ export class RoomPainter {
     // Brass corner pins and a double moulded frame.
     for (const dx of [1, w - 2]) for (const dy of [1, h - 2]) this.r(x + dx, y + dy, 1, 1, '#f1cf8c');
     this.r(x + 3, y + 3, w - 6, 1, '#1f3529');
+    this.r(x + 2, y + 2, w - 4, 1, '#c48c52');
+    this.r(x + 2, y + 2, 1, h - 4, '#bf8750');
+    this.r(x + w - 3, y + 2, 1, h - 4, '#543425');
+    // Hand-drawn chalk sprigs bracket the real menu, leaving item slots clear.
+    for (const side of [1, -1]) for (let leaf = 0; leaf < 5; leaf++) {
+      const vx = side > 0 ? x + 7 : x + w - 8, vy = y + 14 + leaf * 4;
+      this.r(vx, vy, 1, 4, '#68806a');
+      this.r(vx + side, vy + 1, 2, 1, '#68806a');
+      this.r(vx - side * 2, vy + 2, 2, 1, '#4c6854');
+    }
     // Chalk dust and doodles.
     this.r(x + 8, y + h - 7, 14, 1, '#4f6e5c');
     this.r(x + w - 22, y + 7, 12, 1, '#4f6e5c');
@@ -377,7 +641,7 @@ export class RoomPainter {
         const icon = itemIcon(m.id, false);
         const ix = x + w / 2 - total / 2 + i * 16 + (12 - icon.width) / 2;
         const iy = y + 18 + ri * 12 + (12 - icon.height);
-        this.ctx.drawImage(icon, Math.round(ix), iy);
+        this.ctx.drawImage(fineSpriteArt(icon).canvas, Math.round(ix), iy, icon.width, icon.height);
       });
     });
     // Chalk tray.
@@ -388,6 +652,10 @@ export class RoomPainter {
 
   /** The low cabinet behind the baristas with the café's odds and ends on top. */
   drawBackBar(state: GameState, counter: string): void {
+    this.withPlane(80, () => this.drawBackBarLogical(state, counter));
+  }
+
+  private drawBackBarLogical(state: GameState, counter: string): void {
     const { x, w, top, front } = BACK_BAR;
     const colors = counterColors(counter);
     const body = ramp(colors.front);
@@ -402,33 +670,53 @@ export class RoomPainter {
     this.r(x - 1, top - 1, 1, bottom - top + 1, OUTLINE);
     this.r(x + w, top - 1, 1, bottom - top + 1, OUTLINE);
     this.r(x, front, w, bottom - front, body.lo);
+    grain(this.ctx, x + 1, top + 1, w - 2, front - top - 3, slab, 'h', 52);
     for (let dx = x + 3; dx + 22 <= x + w - 2; dx += 25) {
-      this.r(dx, front + 2, 22, bottom - front - 5, body.dark);
-      this.r(dx + 1, front + 3, 20, bottom - front - 7, body.base);
-      this.r(dx + 1, front + 3, 20, 1, body.hi);
-      this.r(dx + 3, front + 5, 16, bottom - front - 11, mix(body.base, body.lo, 0.5));
-      this.r(dx + (dx % 2 ? 2 : 18), front + 8, 2, 2, colors.trim ?? '#e7b84a');
+      this.cabinet(dx, front + 2, 22, bottom - front - 5, colors.front, true);
+      this.r(dx + 3, front + 4, 1, 2, '#b77d45');
     }
     this.r(x, bottom - 2, w, 2, body.dark);
+
+    if (this.density > 1 && counter === 'counter_oak') {
+      paintGeneratedCabinetBand(this.ctx, 'cabinet-top', x + 1, top + 1, w - 2, front - top - 2);
+      paintGeneratedCabinetBand(this.ctx, 'cabinet-front', x + 2, front + 2, w - 4, bottom - front - 4);
+    }
 
     const sit = top + 4; // Items stand a little back from the front edge.
     const ctx = this.ctx;
     // Left of the menu board: the grinder and jars of beans and tea.
     const grinder = GRINDER();
     ctx.drawImage(grinder, x + 2, sit - grinder.height + 1);
-    this.jar(x + 15, sit, 11, '#6e3f24', '#9c6538');
-    this.jar(x + 26, sit, 9, '#6f9a52', '#9fc47e');
+    if (this.serviceBitmap('service-jars', counter, x + 25.5, sit + 1, 21, 15)) {
+      // Empty glass storage props are decorative; they imply no ingredient count.
+    } else if (this.density > 1) {
+      paintFineStorageJar(ctx, x + 15, sit + 1 - FINE_COUNTER_PROP_BOUNDS.storageJar.beans.h, 'beans');
+      paintFineStorageJar(ctx, x + 26, sit + 1 - FINE_COUNTER_PROP_BOUNDS.storageJar.tea.h, 'tea');
+    } else {
+      this.jar(x + 15, sit, 11, '#6e3f24', '#9c6538');
+      this.jar(x + 26, sit, 9, '#6f9a52', '#9fc47e');
+    }
     // Under the board: cups on saucers, a milk pitcher, then the bread basket (a sack
     // of beans when there are no breads today) and a cake under a glass dome. The
     // pass stands beyond them.
     for (let i = 0; i < 3; i++) {
       const cx = 116 + i * 11;
-      this.r(cx - 1, sit - 1, 10, 2, OUTLINE);
-      this.r(cx, sit - 1, 8, 1, '#e9dcc8');
-      this.r(cx + 1, sit - 6, 6, 5, OUTLINE);
-      this.r(cx + 2, sit - 5, 4, 4, '#fdf6ec');
-      this.r(cx + 2, sit - 5, 4, 1, '#dccdb9');
-      this.r(cx + 7, sit - 5, 1, 2, OUTLINE);
+      if (this.serviceBitmap('service-cups', counter, cx + 5, sit + 1, 10, 13)) continue;
+      if (this.density > 1) {
+        paintFineCupStack(ctx, cx, sit + 1 - FINE_COUNTER_PROP_BOUNDS.cupStack.h, (i + 1) as 1 | 2 | 3);
+        continue;
+      }
+      // A tapered porcelain bowl, open dark rim and an ear-shaped handle.
+      this.r(cx, sit - 1, 9, 1, '#a89779');
+      this.r(cx + 1, sit - 2, 7, 1, '#fff2d7');
+      this.r(cx + 1, sit - 7, 6, 2, '#543425');
+      this.r(cx + 1, sit - 7, 6, 1, '#f4e6c7');
+      this.r(cx + 1, sit - 5, 6, 2, '#f4e6c7');
+      this.r(cx + 2, sit - 3, 4, 1, '#d5c5a4');
+      this.r(cx + 2, sit - 5, 1, 2, '#fff8e4');
+      this.r(cx + 6, sit - 6, 3, 3, '#ad9d81');
+      this.r(cx + 7, sit - 5, 1, 1, '#624731');
+      this.r(cx + 6, sit - 6, 2, 1, '#fff0cf');
     }
     const pitcher = ramp('#c9d3d8');
     const jx = 151;
@@ -437,20 +725,39 @@ export class RoomPainter {
     this.r(jx + 1, sit - 8, 1, 8, pitcher.hi);
     this.r(jx - 1, sit - 9, 2, 2, OUTLINE);
     this.r(jx + 8, sit - 7, 1, 4, OUTLINE);
-    const dome = CAKE_DOME();
-    ctx.drawImage(dome, 188, sit - dome.height + 1);
+    this.r(jx + 2, sit - 7, 1, 6, '#eef0d6');
+    this.r(jx + 5, sit - 6, 2, 5, '#939b84');
+    this.r(jx + 2, sit - 2, 4, 1, '#b7b9a0');
+    if (this.density > 1) paintFineCakeDome(ctx, 188, sit + 1 - FINE_COUNTER_PROP_BOUNDS.cakeDome.h);
+    else {
+      const dome = CAKE_DOME();
+      ctx.drawImage(dome, 188, sit - dome.height + 1);
+    }
     const breads = menuItems(state).filter((m) => m.category === 'bread').slice(0, 2);
     const bx = 164;
     if (breads.length > 0) {
+      const generatedBasket = this.serviceBreadBasket(counter, bx, sit + 1);
       breads.forEach((m, i) => {
         const icon = itemIcon(m.id);
-        ctx.drawImage(icon, bx + 1 + i * 9, sit - 6 - icon.height + 3);
+        ctx.drawImage(fineSpriteArt(icon).canvas, bx + 1 + i * 9, sit - 6 - icon.height + 3, icon.width, icon.height);
       });
-      const wicker = ramp('#c98f4e');
-      this.r(bx - 1, sit - 7, 22, 8, OUTLINE);
-      this.r(bx, sit - 6, 20, 6, wicker.base);
-      for (let i = 0; i < 20; i += 2) this.r(bx + i, sit - 6 + (i % 4 ? 0 : 1), 1, 5, wicker.lo);
-      this.r(bx, sit - 6, 20, 1, wicker.hi);
+      if (generatedBasket) this.serviceBreadBasket(counter, bx, sit + 1, true);
+      else if (this.density > 1) paintFineBreadBasket(ctx, bx - 1, sit + 1 - FINE_COUNTER_PROP_BOUNDS.breadBasket.h, false);
+      else {
+        const wicker = ramp('#b58145');
+        this.r(bx - 1, sit - 7, 22, 2, '#543425');
+        this.r(bx, sit - 7, 20, 1, '#e3bb78');
+        for (let row = 0; row < 5; row++) {
+          const inset = row > 2 ? 1 : 0;
+          this.r(bx + inset, sit - 5 + row, 20 - inset * 2, 1, row % 2 ? wicker.base : '#d0a05c');
+          for (let column = 1 + row % 2; column < 19 - inset; column += 3) this.r(bx + column, sit - 5 + row, 1, 1, '#815a32');
+        }
+        this.r(bx + 2, sit, 16, 1, '#785030');
+        for (const hx of [bx, bx + 17]) {
+          this.r(hx, sit - 9, 3, 2, '#aa7d46');
+          this.r(hx + 1, sit - 8, 1, 1, '#eed49b');
+        }
+      }
     } else {
       const sack = ramp('#c9a873');
       this.r(bx + 1, sit - 13, 18, 14, OUTLINE);
@@ -460,23 +767,57 @@ export class RoomPainter {
       this.r(bx + 4, sit - 14, 12, 3, OUTLINE);
       this.r(bx + 5, sit - 13, 10, 2, '#6e3f24');
       this.r(bx + 7, sit - 13, 2, 1, '#9c6538');
-      this.r(bx + 7, sit - 7, 6, 3, sack.lo);
+      this.r(bx + 6, sit - 8, 8, 5, '#e7d5a9');
+      this.r(bx + 8, sit - 7, 4, 3, '#87633c');
+      this.r(bx + 10, sit - 7, 1, 3, '#c6a367');
+      this.r(bx + 3, sit - 9, 1, 6, '#b6935b');
+      this.r(bx + 13, sit - 11, 2, 7, '#ad8650');
+      for (let sy = sit - 11; sy < sit - 1; sy += 2) this.r(bx + 5, sy, 1, 1, '#e8d3a2');
     }
   }
 
   private jar(x: number, base: number, h: number, fill: string, fleck: string): void {
     const y = base - h;
-    this.r(x - 1, y - 1, 10, h + 1, OUTLINE);
-    this.r(x, y, 8, h, '#d6ecf2');
-    this.r(x, y + 3, 8, h - 3, fill);
-    for (let i = 0; i < 5; i++) this.r(x + 1 + ((i * 3) % 6), y + 4 + ((i * 2) % Math.max(1, h - 5)), 1, 1, fleck);
-    this.r(x + 1, y, 1, h, '#f6fbfc');
-    this.r(x - 1, y - 3, 10, 2, '#c97d34');
-    this.r(x - 1, y - 3, 10, 1, '#e8a95a');
+    // Square storage jar with rounded shoulders, visible glass lip and cork lid.
+    this.r(x + 1, y - 1, 6, 1, '#8da595');
+    this.r(x, y, 8, h - 1, '#6e8375');
+    this.r(x + 1, y, 6, h, '#cbd8bb');
+    this.r(x + 1, y + 3, 6, h - 4, fill);
+    for (let i = 0; i < 5; i++) this.r(x + 1 + ((i * 3) % 6), y + 4 + ((i * 2) % Math.max(1, h - 6)), 1, 1, fleck);
+    this.r(x + 1, y + 1, 1, h - 3, '#f8f0d6');
+    this.r(x + 6, y + 2, 1, h - 3, '#9daf95');
+    this.r(x + 2, y + 4, 4, 4, '#f4e6c7');
+    this.r(x + 3, y + 5, 2, 1, '#98764c');
+    this.r(x + 3, y + 6, 1, 1, '#bc9361');
+    this.r(x - 1, y - 3, 10, 2, '#91613b');
+    this.r(x, y - 4, 8, 1, '#543425');
+    this.r(x, y - 3, 8, 1, '#d0a261');
+    for (const lx of [x + 1, x + 4, x + 7]) this.r(lx, y - 2, 1, 1, '#b5814a');
   }
 
   drawFloor(floor: string, rug: string, light: Lighting, H: number): void {
-    paintFloor(this.ctx, floor, 0, FLOOR_Y, SCENE_W, H - FLOOR_Y);
+    if (this.density > 1 && this.project) {
+      const doorLight = pixelFloorDoorLight(this.kitchenDoor);
+      const signature = JSON.stringify([floor, rug, light, H, doorLight, !!generatedMainSource('wall-window')]);
+      const source = this.floorCanvas ??= document.createElement('canvas');
+      const projected = this.projectedFloor ??= document.createElement('canvas');
+      if (this.floorSignature !== signature) {
+        this.floorSignature = signature;
+        source.width = projected.width = SCENE_W * 2;
+        source.height = projected.height = H * 2;
+        const ctx = source.getContext('2d')!, out = projected.getContext('2d')!;
+        ctx.setTransform(2, 0, 0, 2, 0, 0); ctx.imageSmoothingEnabled = false;
+        const painter = new RoomPainter(ctx, 2, false); painter.kitchenDoor = doorLight;
+        painter.drawFloor(floor, rug, light, H);
+        out.setTransform(2, 0, 0, 2, 0, 0);
+        projectFloorLayer(out, source, mainPixelProjection(H));
+      }
+      paintPixelRoomShell(this.ctx, H, mainPixelProjection(H));
+      this.ctx.drawImage(projected, 0, 0, SCENE_W, H);
+      return;
+    }
+    if (floor === 'floor_checker') paintPixelFloorDepth(this.ctx, 0, FLOOR_Y, SCENE_W, H - FLOOR_Y, 17, { pixelSize: 0.5, horizontalBackScale: this.density > 1 ? 1 : 0.8 });
+    else paintFloor(this.ctx, floor, 0, FLOOR_Y, SCENE_W, H - FLOOR_Y);
     // Shadow where the floor meets the wall.
     this.ctx.save();
     for (let i = 0; i < 3; i++) {
@@ -496,7 +837,10 @@ export class RoomPainter {
     const ctx = this.ctx;
     // Sunlight falling through the window, and in through the open front door.
     const { lean, length } = beam(light.sun);
-    for (const win of WINDOWS) paintSunbeam(ctx, light.sun, win.x, win.x + win.w, FLOOR_Y, lean, length);
+    for (const win of WINDOWS) {
+      const opening = this.wallWindow(win)?.aperture ?? win;
+      paintSunbeam(ctx, light.sun, opening.x, opening.x + opening.w, FLOOR_Y, lean * 1.8, length * 1.2, { opacity: 0.78, pixelSize: 0.5 });
+    }
     paintSunbeam(ctx, light.sun, DOOR_X, DOOR_X + DOOR_W, H, Math.round(lean / 3), -Math.round(length * 0.9));
     // Kitchen light spilling in through the door in the left wall while it's open.
     if (this.kitchenDoor > 0.05) {
@@ -562,9 +906,21 @@ export class RoomPainter {
 
   /** Fitted crockery stations belong to the architecture, not purchased decor. */
   drawServiceCupboards(counter: string): void {
+    this.withPlane(108, () => this.drawServiceCupboardsLogical(counter));
+  }
+
+  private drawServiceCupboardsLogical(counter: string): void {
     const colors = counterColors(counter);
     const wood = ramp(colors.front);
+    let attachmentOffsetY = 0;
     for (const { x } of MAIN_CUPBOARDS) {
+      // Retain the established floor/contact anchor and countertop back edge.
+      if (this.serviceBitmap('service-cupboard', counter, x + 20, 108, 44, 31)) {
+        // The selected bitmap's sloped wood plane is below the old flat slab.
+        // Move only its loose attachments; the cabinet foot and world stay put.
+        attachmentOffsetY = 4;
+        continue;
+      }
       this.r(x - 1, 80, 42, 27, OUTLINE);
       this.r(x, 81, 40, 23, wood.base);
       this.r(x + 2, 85, 17, 16, wood.lo);
@@ -573,22 +929,42 @@ export class RoomPainter {
       this.r(x + 22, 86, 15, 1, wood.hi);
       this.r(x + 15, 91, 2, 2, '#e7c477');
       this.r(x + 23, 91, 2, 2, '#e7c477');
+      this.cabinet(x + 2, 85, 17, 18, colors.front, true);
+      this.cabinet(x + 21, 85, 17, 18, colors.front, true);
       this.r(x - 2, 78, 44, 5, OUTLINE);
       this.r(x - 1, 78, 42, 3, '#d8c5a8');
       this.r(x - 1, 78, 42, 1, '#f4e3c8');
       this.r(x + 2, 105, 3, 3, wood.dark);
       this.r(x + 35, 105, 3, 3, wood.dark);
     }
-    // Right: water carafe, glasses and a small tray ready for table service.
-    this.r(273, 64, 7, 14, '#86a9af');
-    this.r(274, 65, 4, 11, '#d2e7dc');
-    this.r(274, 71, 4, 5, '#90bcc6');
-    this.r(275, 61, 3, 4, '#b9d1c9');
-    this.r(281, 67, 2, 7, '#a0c7ce');
-    this.r(287, 76, 15, 2, '#947b55');
-    for (const x of [288, 296]) {
-      this.r(x, 70, 5, 6, '#d7e9df');
-      this.r(x + 1, 71, 2, 3, '#9fc7c9');
+    this.ctx.save();
+    try {
+      if (attachmentOffsetY) this.ctx.translate(0, attachmentOffsetY);
+      // Glass carafe with a turned neck, stepped shoulders, open handle and water line.
+      this.r(272, 69, 9, 9, '#638a81');
+      this.r(273, 66, 7, 12, '#98baaa');
+      this.r(274, 65, 5, 12, '#dae8cb');
+      this.r(275, 61, 3, 5, '#acc6af');
+      this.r(274, 61, 5, 1, '#f1ebd0');
+      this.r(274, 70, 5, 7, '#83b2a7');
+      this.r(274, 70, 5, 1, '#d4e3c5');
+      this.r(274, 66, 1, 10, '#f6f3db');
+      this.r(278, 68, 1, 8, '#639c94');
+      this.r(280, 67, 3, 1, '#afcabb');
+      this.r(282, 68, 1, 5, '#afcabb');
+      this.r(280, 73, 3, 1, '#759c8f');
+      this.r(286, 76, 17, 2, '#674b31');
+      this.r(286, 75, 17, 1, '#c8a15e');
+      this.r(287, 76, 15, 1, '#ac8c54');
+      for (const x of [288, 296]) {
+        this.r(x, 70, 5, 1, '#90a995');
+        this.r(x, 71, 1, 4, '#eef0d4');
+        this.r(x + 1, 72, 3, 3, '#b0c9b5');
+        this.r(x + 4, 71, 1, 4, '#81a393');
+        this.r(x + 1, 74, 3, 1, '#e1e9ca');
+      }
+    } finally {
+      this.ctx.restore();
     }
   }
 
@@ -640,6 +1016,7 @@ export class RoomPainter {
       this.r(0, y - 1, SCENE_W, FRONT_WALL + 1, OUTLINE);
       this.r(1, y, SCENE_W - 2, FRONT_WALL, garden ? '#7a8b61' : wood.base);
       this.r(1, y, SCENE_W - 2, 1, garden ? '#b8c28b' : wood.hi);
+      timberBeam(this.ctx, 0, y - 1, SCENE_W, FRONT_WALL + 1, false, garden ? '#627451' : wainscotColor(wallpaper));
       return;
     }
     for (const [x, w] of [[0, DOOR_X - 3], [DOOR_X + DOOR_W + 3, SCENE_W - DOOR_X - DOOR_W - 3]]) {
@@ -647,7 +1024,7 @@ export class RoomPainter {
       this.r(x, y, w, FRONT_WALL, wood.lo);
       this.r(x, y, w, 1, wood.hi);
       this.r(x, y + 1, w, 2, wood.base);
-      grain(this.ctx, x, y + 1, w, 2, wood, 'h', 5);
+      timberBeam(this.ctx, x, y - 1, w, FRONT_WALL + 1, false, wainscotColor(wallpaper));
     }
     // The doorway: stone step outside, a threshold, and chunky frame posts.
     this.r(DOOR_X, y, DOOR_W, FRONT_WALL, '#a89a8c');
@@ -664,9 +1041,22 @@ export class RoomPainter {
 
   /** The counter and everything on it; `cups` are the drinks being made right now. */
   drawCounter(state: GameState, counter: string, t: number, cups: CounterCup[]): void {
+    this.withPlane(127, () => this.drawCounterLogical(state, counter, t, cups));
+  }
+
+  private drawCounterLogical(state: GameState, counter: string, t: number, cups: CounterCup[]): void {
     const { x, w, top, front, bottom } = COUNTER;
     this.drawReturn(counter);
     paintCounter(this.ctx, counter, x, top, w, front - top, bottom - front);
+    if (this.density > 1 && counter === 'counter_oak') {
+      const base = counterColors(counter).front;
+      for (let px = x + 2; px < x + w - 3; px += 28) {
+        const panelW = Math.min(26, x + w - 2 - px);
+        if (panelW >= 8) this.cabinet(px, front + 2, panelW, bottom - front - 5, base);
+      }
+      paintGeneratedCabinetBand(this.ctx, 'cabinet-top', x + 1, top + 1, w - 2, front - top - 2);
+      paintGeneratedCabinetBand(this.ctx, 'cabinet-front', x + 2, front + 1, w - 4, bottom - front - 3);
+    }
 
     // Espresso machine; its finish gets fancier with upgrades.
     const lvl = state.upgrades.machine;
@@ -674,17 +1064,55 @@ export class RoomPainter {
     const brewing = cups.length > 0;
     const mx = MACHINE_X;
     const my = MACHINE_Y;
-    const chrome = ramp('#c9d3d8');
-    // Steam wand.
-    this.r(mx - 3, my + 9, 3, 1, OUTLINE);
-    this.r(mx - 3, my + 10, 2, 9, OUTLINE);
-    this.r(mx - 2, my + 10, 1, 8, chrome.base);
-    this.ctx.drawImage(espressoMachine(finish), mx - 2, my - 1);
+    if (!this.serviceBitmap('service-machine', counter, mx + 13, my + 24, 30, 25)) {
+      const chrome = ramp('#c9d3d8');
+      // The selected bitmap already includes both steam wands; legacy art needs
+      // its separate wand. Live brew streams and upgrade cues remain below.
+      this.r(mx - 3, my + 9, 3, 1, OUTLINE);
+      this.r(mx - 3, my + 10, 2, 9, OUTLINE);
+      this.r(mx - 2, my + 10, 1, 8, chrome.base);
+      const machine = espressoMachine(finish, this.density);
+      this.ctx.drawImage(machine, mx - 2, my - 1, machine.width / this.density, machine.height / this.density);
+    }
     const light = brewing && Math.floor(t * 4) % 2 ? '#7fe36a' : '#e2434b';
     this.r(mx + 24, my + 9, 2, 2, light);
-    this.r(mx + 24, my + 9, 1, 1, '#ffffff');
+    this.r(mx + 24, my + 9, 1, 1, '#fff5db');
+    // Upgraded machines expose a second gauge, copper plumbing and a brass badge.
+    if (lvl >= 5) {
+      this.r(mx + 3, my + 6, 4, 4, '#39281f');
+      this.r(mx + 4, my + 7, 2, 2, '#f4e6c7');
+      this.r(mx + 5, my + 7, 1, 1, '#b65b41');
+    }
+    if (lvl >= 10) {
+      this.r(mx + 1, my + 4, 1, 8, '#e4ad6a');
+      this.r(mx + 26, my + 4, 1, 8, '#985934');
+    }
+    if (lvl >= 15) {
+      this.r(mx + 10, my + 10, 7, 2, '#c8a15e');
+      this.r(mx + 11, my + 10, 5, 1, '#f6d694');
+    }
+    if (brewing) for (const bx of [mx + 5, mx + 21]) {
+      this.r(bx, my + 18, 1, 2, Math.floor(t * 8) % 2 ? '#925b2f' : '#c28f5a');
+    }
 
     this.drawPastryCase(state);
+    // A fitted terracotta herb pot trails over the unused left end of the bar.
+    if (this.density > 1) {
+      if (!paintGeneratedMain(this.ctx, 'vine', 60, 86, 19, 19 * 453 / 388)) this.ctx.drawImage(COUNTER_VINE(), 62, 84, 15, 34);
+    }
+    else {
+      this.r(66, top - 5, 8, 5, '#543425');
+      this.r(67, top - 4, 6, 4, '#ba7547');
+      this.r(66, top - 5, 8, 1, '#e6aa68');
+      this.r(67, top - 4, 1, 3, '#dd985b');
+      leafySprig(this.ctx, 70, top - 8, 4, 5);
+      for (let ly = top - 2; ly < front + 9; ly += 4) {
+        this.r(65, ly, 1, 4, '#52683c');
+        this.r(63, ly + 1, 3, 2, '#71854a');
+        this.r(65, ly + 3, 3, 2, '#415833');
+        this.r(63, ly + 1, 1, 1, '#b1bb69');
+      }
+    }
     this.drawGate(counter);
     this.drawPass(counter);
     // Distinct customer-facing order and pickup plaques.
@@ -695,12 +1123,17 @@ export class RoomPainter {
     // Tip jar, in the gap between the first two baristas.
     const coins = Math.min(4, 1 + Math.floor(state.today.served / 15));
     const jx = baristaSpot(0).x + 11;
-    this.r(jx - 1, top - 4, 9, 11, OUTLINE);
-    this.r(jx, top - 3, 7, 9, '#d6ecf2');
-    this.r(jx, top + 6 - coins, 7, coins, '#f2c14e');
-    this.r(jx + 1, top + 6 - coins, 2, 1, '#fff3a0');
-    this.r(jx, top - 3, 1, 9, '#f6fbfc');
-    this.r(jx - 1, top - 5, 9, 2, '#c97d34');
+    this.r(jx, top - 4, 7, 1, '#758c79');
+    this.r(jx - 1, top - 3, 9, 9, '#6e8471');
+    this.r(jx, top - 3, 7, 10, '#c8d6b7');
+    this.r(jx + 1, top - 2, 5, 7, '#e1e8ca');
+    this.r(jx, top + 6 - coins, 7, coins, '#c8a15e');
+    this.r(jx + 1, top + 6 - coins, 2, 1, '#f6d88f');
+    this.r(jx, top - 2, 1, 7, '#fff4d7');
+    this.r(jx + 2, top, 3, 3, '#f4e6c7');
+    this.r(jx + 3, top + 1, 1, 1, '#a68145');
+    this.r(jx - 1, top - 5, 9, 2, '#a77941');
+    this.r(jx, top - 5, 7, 1, '#ddba78');
 
     // A card reader lying flat on the counter, low enough not to hide the first barista.
     const px = MACHINE_X + 32;
@@ -752,27 +1185,32 @@ export class RoomPainter {
     const steel = ramp('#b9c4cb');
     const inner = x + 2;
     const innerW = PASS_COLUMNS * PASS_SLOT_W;
-    // A warm wash from the heat lamps over both shelves.
-    this.ctx.save();
-    this.ctx.globalAlpha = 0.16;
-    this.r(inner, top + 8, innerW, base - top - 8, '#ffb060');
-    this.ctx.restore();
-    // Slot marks: a pale tick at each slot's edge, on the ledge and the shelf.
-    for (const y of [shelf - 1, base - 2]) {
-      for (let i = 1; i < PASS_COLUMNS; i++) this.r(inner + i * PASS_SLOT_W, y - 2, 1, 3, steel.lo);
-    }
-    // The heated shelf, and the steel ledge over the gate.
-    this.r(inner - 1, shelf, innerW + 2, 3, OUTLINE);
-    this.r(inner, shelf, innerW, 1, steel.hi);
-    this.r(inner, shelf + 1, innerW, 1, steel.base);
-    this.r(x - 1, base - 2, w + 2, 3, OUTLINE);
-    this.r(x, base - 2, w, 1, steel.hi);
-    this.r(x, base - 1, w, 1, steel.base);
-    // Posts either side.
-    for (const px of [x, x + w - 2]) {
-      this.r(px - 1, top + 6, 4, base - top - 7, OUTLINE);
-      this.r(px, top + 6, 2, base - top - 7, wood.base);
-      this.r(px, top + 6, 1, base - top - 7, wood.hi);
+    if (!this.servicePickup(counter)) {
+      // A warm wash from the heat lamps over both shelves.
+      this.ctx.save();
+      this.ctx.globalAlpha = 0.16;
+      this.r(inner, top + 8, innerW, base - top - 8, '#ffb060');
+      this.ctx.restore();
+      // Slot marks: a pale tick at each slot's edge, on the ledge and the shelf.
+      for (const y of [shelf - 1, base - 2]) {
+        for (let i = 1; i < PASS_COLUMNS; i++) this.r(inner + i * PASS_SLOT_W, y - 2, 1, 3, steel.lo);
+      }
+      // The heated shelf, and the steel ledge over the gate.
+      this.r(inner - 1, shelf, innerW + 2, 3, OUTLINE);
+      this.r(inner, shelf, innerW, 1, steel.hi);
+      this.r(inner, shelf + 1, innerW, 1, steel.base);
+      this.r(inner + 1, shelf + 3, innerW - 2, 1, '#73624e');
+      for (const sx of [inner + 2, inner + innerW - 4]) this.r(sx, shelf + 3, 2, 3, '#8c7b5e');
+      this.r(x - 1, base - 2, w + 2, 3, OUTLINE);
+      this.r(x, base - 2, w, 1, steel.hi);
+      this.r(x, base - 1, w, 1, steel.base);
+      // Posts either side.
+      for (const px of [x, x + w - 2]) {
+        this.r(px - 1, top + 6, 4, base - top - 7, OUTLINE);
+        this.r(px, top + 6, 2, base - top - 7, wood.base);
+        this.r(px, top + 6, 1, base - top - 7, wood.hi);
+        for (const hy of [top + 10, base - 8]) this.r(px, hy, 1, 1, '#e2c17d');
+      }
     }
     // The header, signed PASS, with two heat lamps under it.
     this.r(x - 2, top - 1, w + 4, 8, OUTLINE);
@@ -820,6 +1258,37 @@ export class RoomPainter {
     const { top, front, bottom } = COUNTER;
     const { x, w } = PASTRY_CASE;
     const ctx = this.ctx;
+    // The generated cabinet is genuinely empty. All food is still determined by
+    // the current menu and prep plan/live shelf, never painted into its bitmap.
+    if (this.density > 1 && generatedMainSource('display')) {
+      const displayY = front - 2, displayH = w * 521 / 1941;
+      paintGeneratedMain(ctx, 'display', x, displayY, w, displayH);
+      const shelfY = displayY + displayH * 0.84;
+      const bakery = menuItems(state).filter(m => !isDrink(m.category)).slice(0, 5);
+      const slots = Math.max(3, bakery.length);
+      bakery.forEach((m, i) => {
+        const count = state.phase === 'prep' ? (state.bakePlan[m.id] ?? 0) : (state.shelf[m.id] ?? 0);
+        if (count <= 0) return;
+        const sx = x + w / slots * (i + 0.5);
+        this.r(sx - 5, shelfY, 10, 0.5, '#f4ead6');
+        if (m.id === 'croissant' || m.id === 'cake') {
+          const food = generatedMainSource(m.id);
+          if (food) {
+            const scale = Math.min((m.id === 'croissant' ? 12 : 8) / food.width, 8 / food.height);
+            const width = food.width * scale, height = food.height * scale;
+            if (paintGeneratedMain(ctx, m.id, sx - width / 2, shelfY - height, width, height)) return;
+          }
+        }
+        const icon = itemIcon(m.id);
+        const ix = Math.round(sx - icon.width / 2), iy = shelfY - icon.height + 1;
+        if (count >= 8) ctx.drawImage(fineSpriteArt(icon).canvas, ix - 2, iy - 2, icon.width, icon.height);
+        ctx.drawImage(fineSpriteArt(icon).canvas, ix, iy, icon.width, icon.height);
+      });
+      ctx.save(); ctx.globalAlpha = 0.14;
+      for (const gx of [x + 7, x + w / 2 + 2]) for (let i = 0; i < 9; i++) this.r(gx + i, displayY + 7 + i, 0.5, 0.5, '#fff8de');
+      ctx.restore();
+      return;
+    }
     // Glass top over the case.
     this.r(x, top + 1, w, front - top - 4, '#cfe6ea');
     this.r(x, top + 1, w, 1, '#eef8fa');
@@ -852,8 +1321,8 @@ export class RoomPainter {
       const icon = itemIcon(m.id);
       const ix = Math.round(sx - icon.width / 2);
       const iy = shelfY - icon.height + 1;
-      if (count >= 8) ctx.drawImage(icon, ix - 2, iy - 2);
-      ctx.drawImage(icon, ix, iy);
+      if (count >= 8) ctx.drawImage(fineSpriteArt(icon).canvas, ix - 2, iy - 2, icon.width, icon.height);
+      ctx.drawImage(fineSpriteArt(icon).canvas, ix, iy, icon.width, icon.height);
     }
     // Reflections on the glass, then the brass frame.
     ctx.save();
@@ -885,6 +1354,10 @@ export class RoomPainter {
     this.r(x - 10, y - 16, 21, 12, OUTLINE);
     this.r(x - 9, y - 15, 19, 10, '#b99061');
     this.r(x - 8, y - 14, 17, 1, '#dec395');
+    this.r(x - 8, y - 7, 17, 1, '#805a36');
+    for (const dx of [-7, 7]) this.r(x + dx, y - 13, 1, 1, '#f1d192');
+    this.r(x - 8, y - 4, 2, 2, '#543425');
+    this.r(x + 7, y - 4, 2, 2, '#543425');
     drawText(this.ctx, '+', x - 1, y - 12, '#fff0cf');
   }
 }

@@ -1,12 +1,15 @@
+import { menuMiniature, ingredientMiniature, upgradeMiniature, miniatureSource, menuMiniatureGrid, ingredientMiniatureGrid } from './menu-miniatures';
 import { signatureDrinkCanvas, signatureDrinkIcon } from './signature-drink-art';
 import { CUSTOMER_CAST, type CustomerDesign } from '../game/customer-cast';
 import type { CatId } from '../game/pets';
 import type { IngredientId, ItemId, StaticItemId, UpgradeId } from '../game/data';
 import type { Look } from '../game/state';
 import { edge, mix, ramp } from './color';
+import { mirrorFineSpriteArt, registerFineCharacterArt } from './fine-sprite-art';
+import { getGeneratedFoodAdapter } from './generated-main-art';
 
 /** Warm near-black used for outlines, like Stardew's, rather than pure black. */
-export const OUTLINE = '#2e1c16';
+export const OUTLINE = '#39281f';
 
 export type Palette = Record<string, string>;
 
@@ -76,7 +79,10 @@ export function pixelSprite(rows: readonly string[], palette: Palette, outline: 
   return canvas;
 }
 
+const flippedCache = new WeakMap<HTMLCanvasElement, HTMLCanvasElement>();
 function flipped(src: HTMLCanvasElement): HTMLCanvasElement {
+  const cached = flippedCache.get(src);
+  if (cached) return cached;
   const c = document.createElement('canvas');
   c.width = src.width;
   c.height = src.height;
@@ -84,6 +90,8 @@ function flipped(src: HTMLCanvasElement): HTMLCanvasElement {
   ctx.translate(src.width, 0);
   ctx.scale(-1, 1);
   ctx.drawImage(src, 0, 0);
+  mirrorFineSpriteArt(src, c);
+  flippedCache.set(src, c);
   return c;
 }
 
@@ -110,318 +118,545 @@ export const FRONT = [
   '................',
   '................',
   '.....SSSSSS.....',
-  '....SSSSSSSS....',
-  '...SSSSSSSSSS...',
-  '...SSSSSSSSSS...',
-  '...SSSSSSSSSS...',
-  '...SSSSSSSSSS...',
+  '....SZZSSSSs....',
+  '...SZZZSSSSss...',
+  '...SZZSSSSSSs...',
+  '...SSSSSSSSSs...',
+  '..SSSSSSSSSSSs..',
   '..SSSESSSSESSs..',
   '..sSSESSSSESss..',
-  '...SBSSSSSBSs...',
-  '....SSmmSSSs....',
-  '....sSSSSSSs....',
-  '......SSss......',
-  '.....TWWWWt.....',
+  '...SBSSZSSBSs...',
+  '....SSSmSSSs....',
+  '.....sSSSSs.....',
+  '......SssS......',
+  '.....TWSSWt.....',
   '....UTTWWTTt....',
-  '...UTTTTTTTTt...',
+  '...UUTTTTTTTt...',
   '...UTtTTTTtTt...',
-  '...STtTTTTtTs...',
-  '...SsTTTTTTss...',
-  '.....TTTTTt.....',
+  '...ZS.tTTt.Ss...',
+  '...Ss.TTTT.ss...',
+  '.....tTTTTt.....',
   '.....pPPPPp.....',
 ];
-const BACK = FRONT.map((row, y) => y >= 8 && y <= 11 ? row.replace(/[EBm]/g, 'S') :
-  y === 14 ? '.....TTTTTt.....' : y === 15 ? '....UTTTTTTt....' : row);
+const BACK = FRONT.map((row, y) => y >= 8 && y <= 11 ? row.replace(/[EBmZ]/g, 'S') : y === 14 ? '.....TTTTTt.....' : y === 15 ? '....UTTTTTTt....' : row);
 export const SIDE = [
   '................',
   '................',
   '......SSSSS.....',
-  '.....SSSSSSS....',
-  '....SSSSSSSSS...',
-  '....SSSSSSSSS...',
-  '....SSSSSSSSS...',
-  '....SSSSSSSSS...',
+  '.....SZZSSSs....',
+  '....SZZSSSSSs...',
+  '....SZZSSSSSs...',
+  '....SSSSSSSSs...',
+  '....SSSSSSSSs...',
   '....SSSSSSSESs..',
-  '....SSSSSSSESs..',
-  '....sSSSSSBSS...',
+  '....SSSSSSSESSs.',
+  '....sSSSSSBSSs..',
   '.....sSSSSSm....',
   '......sSSSs.....',
   '.......Sss......',
-  '......TTWWt.....',
-  '.....UTTTWTt....',
+  '......TWSWt.....',
+  '.....UTTWTTt....',
+  '.....UTUTTTt....',
   '.....tTUUTTt....',
   '.....tTUTTTt....',
-  '.....tTUTTTt....',
   '......TZSTTt....',
-  '......TTTTt.....',
+  '......tTTTt.....',
   '......pPPPp.....',
 ];
-export const LEGS_FRONT = [
-  ['.....PPpPPp.....', '.....PPpPPp.....', '.....KK.KKk.....', '....kWK.kWKk....'],
-  ['.....PPpPPp.....', '.....PPpKKk.....', '.....KK.kWKk....', '....kWK.........'],
-  ['.....PPpPPp.....', '.....KK.PPp.....', '....kWK.KKk.....', '........kWKk....'],
-];
-export const LEGS_SIDE = [
-  ['.......PPp......', '.......PPp......', '.......KKk......', '.......kWWKk....'],
-  ['......PPpPPp....', '.....PPp..PPp...', '.....KK....KKk..', '....kWK....kWKk.'],
-  ['......pPPPPp....', '......KK.PPp....', '......kK..KK....', '..........kWKk..'],
-];
+export const LEGS_FRONT = [[
+  '.....PPpPPp.....',
+  '.....PPpPPp.....',
+  '.....KK.KKk.....',
+  '....KWK.KWKk....',
+],[
+  '.....PPpPPp.....',
+  '.....PPpKKk.....',
+  '.....KK.KWKk....',
+  '....KWK.........',
+],[
+  '.....PPpPPp.....',
+  '.....KK.PPp.....',
+  '....KWK.KKk.....',
+  '........KWKk....',
+]];
+export const LEGS_SIDE = [[
+  '.......PPp......',
+  '.......PPp......',
+  '.......KKk......',
+  '......KKWKkk....',
+],[
+  '......PPpPPp....',
+  '.....PPp..PPp...',
+  '.....KK....KKk..',
+  '....KWK....KWKk.',
+],[
+  '......pPPPPp....',
+  '......KK.PPp....',
+  '.....KWK..KK....',
+  '..........KWKk..',
+]];
 const LEGS_SEATED = ['......PPPPPPPp..', '......ppppPPPKk.'];
 const APRON_FRONT = [
   ...Array(14).fill(''),
-  '.....Q....Q.....',
-  '.....Q.WW.Q.....',
-  '.....RRRRRr.....',
+  '.....q....q.....',
+  '.....q.WW.q.....',
+  '.....JRRRRr.....',
   '.....RYRRRr.....',
-  '.....RRRRRr.....',
-  '.....RWWWRr.....',
-  '.....RRRRRr.....',
-  '.....rrrrrr.....',
+  '.....JRRRrr.....',
+  '.....JWWWRr.....',
+  '....RJRrRRRr....',
+  '....rrrrrrrr....',
 ];
 const APRON_SIDE = [
   ...Array(14).fill(''),
-  '..........Q.....',
-  '..........Q.....',
+  '..........q.....',
+  '..........q.....',
+  '..........Jr....',
   '..........Rr....',
-  '..........Rr....',
-  '..........Rr....',
+  '..........Jr....',
   '..........Wr....',
-  '.........RRr....',
-  '.........rrr....',
+  '.........JRRr...',
+  '.........rrrr...',
 ];
 const APRON_BACK = [...Array(14).fill(''), '.....Q....Q.....', '......Q..Q......', '.......QQ.......', '......Q..Q......', '', '.....rrWWrr.....', '.......WW.......'];
 type HairSet = { front: string[]; side: string[]; back: string[] };
-const SHORT_BACK = [
-  '................',
-  '......HHHh......',
-  '....HLLHHHHh....',
-  '...HLLHHHHHHh...',
-  '...HLHHHHHHHh...',
-  '..HHHHHHHHHHHh..',
-  '..HHHHHHHHHHHh..',
-  '..HHHHHHHHHHHh..',
-  '...HHHHHHHHHh...',
-  '...hHHHHHHHhh...',
-  '....hHHHHHhh....',
-  '.....hhhhhh.....',
-];
+// A collection of separately authored warm-pixel hair silhouettes.
 export const HAIR: HairSet[] = [
-  { // soft side-part; a clean forehead instead of a solid block of fringe
+  {
     front: [
-      '................',
-      '......HHHh......',
-      '....HLLHHHHh....',
-      '...HLLHHHHHHh...',
-      '...HLHHHHHHHh...',
-      '..HHHHHHhhHHHh..',
-      '..HHHHh...hHHh..',
-      '...HH.......Hh..',
-      '...h........h...',
-    ],
+  '................',
+  '.....HLLHHh.....',
+  '...HLLLHHHHHh...',
+  '..HLLHHHHHHHhh..',
+  '..HLHHHHHHHHHh..',
+  '..HHHHHhhHHHHh..',
+  '..HHHh..hhHHHh..',
+  '..HH.......HHh..',
+  '...h........Hh..',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+],
     side: [
-      '................',
-      '.......HHh......',
-      '.....HLLHHHh....',
-      '....HLLHHHHHh...',
-      '...HHLHHHHHHHh..',
-      '...HHHHHHHHHh...',
-      '...HHHHHhh.Hh...',
-      '...HHHHh........',
-      '...HHHS.........',
-      '....hh..........',
-    ],
-    back: SHORT_BACK,
-  },
-  { // loosely tied bun, with a ribbon and curled face-framing wisps
-    front: [
-      '......HLLh......',
-      '.....HLLHHh.....',
-      '.....hHHHHh.....',
-      '....HHWWHHHh....',
-      '...HLLHHHHHHh...',
-      '...HHHHHHHHHh...',
-      '...HHh..hhHHh...',
-      '...H.......Hh...',
-      '...h........h...',
-      '...h............',
-    ],
-    side: [
-      '................',
-      '..HLLh..........',
-      '.HLLHHhHHHh.....',
-      '.hHHHHHLLHHHh...',
-      '..hhWWHLHHHHHh..',
-      '...HHHHHHHHHh...',
-      '...HHHHHhh.Hh...',
-      '...HHHHh........',
-      '....HHS.........',
-      '.....h..........',
-    ],
+  '................',
+  '......HLLHh.....',
+  '....HLLLHHHh....',
+  '...HLLHHHHHHh...',
+  '...HLHHHHHHHHh..',
+  '...HHHHHhhHHHh..',
+  '...HHHHHh..Hh...',
+  '...HHHHh........',
+  '...HHS..........',
+  '....h...........',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+],
     back: [
-      '......HLLh......',
-      '.....HLLHHh.....',
-      '.....hHHHHh.....',
-      '....HHWWHHHh....',
-      ...SHORT_BACK.slice(4, 10),
-      '.....hHHHHh.....',
-      '......hhhh......',
-    ],
+  '................',
+  '.....HLLHHh.....',
+  '...HLLLHHHHHh...',
+  '..HLLHHHHHHHhh..',
+  '..HLHHHHHHHHHh..',
+  '..HHHHHhhHHHHh..',
+  '..HHLHHhHHHHHh..',
+  '..HHLHHhHHHHHh..',
+  '..HHLHHhHHHHHh..',
+  '..HHLHHhHHHHHh..',
+  '...HHHhHHHHhh...',
+  '....hhhhhhhh....',
+  '................',
+  '................',
+  '................',
+],
   },
-  { // rounded shoulder-length waves; space around the face remains open
+  {
     front: [
-      '................',
-      '.....HHHHHh.....',
-      '....HLLHHHHh....',
-      '...HLLHHHHHHh...',
-      '..HHLHHHHHHHHh..',
-      '..HHHHhhHHHHHh..',
-      '..HHH....hHHHh..',
-      '..HHh.....hHHh..',
-      '..HH.......HHh..',
-      '..Hh.......hHh..',
-      '..HH.......HHh..',
-      '..HH.......HHh..',
-      '..HHh.....hHHh..',
-      '...Hh.....hHh...',
-      '...hh......hh...',
-    ],
+  '......HLLHh.....',
+  '.....HLhHHh.....',
+  '...HLLhHHhhHh...',
+  '..HLLHWYWHHHhh..',
+  '..HLHHHHHHHHHh..',
+  '..HHHHHhhHHHHh..',
+  '..HHHh..hhHHHh..',
+  '..HH.......HHh..',
+  '...h........Hh..',
+  '..h.............',
+  '............h...',
+  '................',
+  '................',
+  '................',
+  '................',
+],
     side: [
-      '................',
-      '......HHHHh.....',
-      '....HLLHHHHh....',
-      '...HLLHHHHHHh...',
-      '..HHLHHHHHHHHh..',
-      '..HHHHHHHHHHh...',
-      '..HHHHHHhh.Hh...',
-      '..HHHHHH........',
-      '..HHHHS.........',
-      '..HHHHh.........',
-      '..HHHHh.........',
-      '..HHHHh.........',
-      '..hHHHh.........',
-      '...hHHh.........',
-      '....hh..........',
-    ],
-    back: [...SHORT_BACK.slice(0, 9),
-      '..HHHHHHHHHHHh..',
-      '..HHHHHHHHHHHh..',
-      '..HHHHHHHHHHHh..',
-      '..hHHHHHHHHHhh..',
-      '...hHHHHHHHhh...',
-      '....hhhhh.hh....',
-    ],
-  },
-  { // slouchy knit hat, continuous folded cuff, a tiny cream label
-    front: [
-      '................',
-      '......AAAa......',
-      '....AAYAAAaa....',
-      '...AAYAAAAAAa...',
-      '..AAYAAAAAAAaa..',
-      '..AAAAAAAAAAaa..',
-      '..YYYYAAAWWAAa..',
-      '..aaaaaaaaaaaa..',
-      '...H........H...',
-    ],
-    side: [
-      '................',
-      '.......AAa......',
-      '.....AAYAAAa....',
-      '....AAYAAAAAa...',
-      '...AAYAAAAAAAa..',
-      '...AAAAAAAAAAa..',
-      '...YYYAAAAWWAa..',
-      '...aaaaaaaaaaa..',
-      '...HHHS.........',
-      '....hh..........',
-    ],
+  '..HLLHh.........',
+  '.HLhHHhLLHh.....',
+  '..hHHhhLHHHh....',
+  '..WYWLHHHHHHh...',
+  '...HLHHHHHHHHh..',
+  '...HHHHHhhHHHh..',
+  '...HHHHHh..Hh...',
+  '...HHHHh........',
+  '...HHS..........',
+  '....h...........',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+],
     back: [
-      '................',
-      '......AAAa......',
-      '....AAYAAAaa....',
-      '...AAYAAAAAAa...',
-      '..AAYAAAAAAAaa..',
-      '..AAAAAAAAAAaa..',
-      '..YYYYAAAAAAAa..',
-      '..aaaaaaaaaaaa..',
-      ...SHORT_BACK.slice(8),
-    ],
+  '......HLLHh.....',
+  '.....HLhHHh.....',
+  '...HLLhHHhhHh...',
+  '..HLLHWYWHHHhh..',
+  '..HLHHHHHHHHHh..',
+  '..HHHHHhhHHHHh..',
+  '..HHLHHhHHHHHh..',
+  '..HHLHHhHHHHHh..',
+  '..HHLHHhHHHHHh..',
+  '..HHLHHhHHHHHh..',
+  '...HHHhHHHHhh...',
+  '....hhhhhhhh....',
+  '................',
+  '................',
+  '................',
+],
+  },
+  {
+    front: [
+  '................',
+  '.....HLLHHh.....',
+  '...HLLLHHHHHh...',
+  '..HLLHHHHHHHhh..',
+  '..HLHHHHHHHHHh..',
+  '..HHHHHhhHHHHh..',
+  '..LHhh..hhHHhh..',
+  '..LHh......Hhh..',
+  '..LHh......Hhh..',
+  '..LHh......Hhh..',
+  '..LHh......Hhh..',
+  '..LHh......Hhh..',
+  '..LHh......Hhh..',
+  '..LHh......Hhh..',
+  '...hh......hh...',
+],
+    side: [
+  '................',
+  '......HLLHh.....',
+  '....HLLLHHHh....',
+  '...HLLHHHHHHh...',
+  '...HLHHHHHHHHh..',
+  '...HHHHHhhHHHh..',
+  '..HLHHhHh..Hh...',
+  '..HLHHhh........',
+  '..HLHHh.........',
+  '..HLHHh.........',
+  '..HLHHh.........',
+  '..HLHHh.........',
+  '..HLHHh.........',
+  '..HLHHh.........',
+  '...hhhh.........',
+],
+    back: [
+  '................',
+  '.....HLLHHh.....',
+  '...HLLLHHHHHh...',
+  '..HLLHHHHHHHhh..',
+  '..HLHHHHHHHHHh..',
+  '..HHHHHhhHHHHh..',
+  '..HLHHhHHhHHHh..',
+  '..HLHHhHHhHHHh..',
+  '..HLHHhHHhHHHh..',
+  '..HLHHhHHhHHHh..',
+  '..HLHHhHHhHHHh..',
+  '..HLHHhHHhHHHh..',
+  '..HLHHhHHhHHHh..',
+  '..HLHHhHHhHHHh..',
+  '...hhhhhhhhh....',
+],
+  },
+  {
+    front: [
+  '................',
+  '......AYAAa.....',
+  '....AYAYAAAa....',
+  '...AYAYAAAAAa...',
+  '..AYAAAAAAAaa...',
+  '..AAYAAAAAAAaa..',
+  '..AYAYAYAYAYaa..',
+  '..aaAaaaWWaaaa..',
+  '...H........H...',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+],
+    side: [
+  '................',
+  '.......AYAAa....',
+  '.....AYAYAAAa...',
+  '....AYAYAAAAAa..',
+  '...AYAAAAAAAaa..',
+  '...AAYAAAAAAAaa.',
+  '...AYAYAYAYAYaa.',
+  '...aaAaaaWWaaaa.',
+  '...HH...........',
+  '....h...........',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+],
+    back: [
+  '................',
+  '......AYAAa.....',
+  '....AYAYAAAa....',
+  '...AYAYAAAAAa...',
+  '..AYAAAAAAAaa...',
+  '..AAYAAAAAAAaa..',
+  '..AYAYAYAYAYaa..',
+  '..aaAaaaWWaaaa..',
+  '...HHHHHHHHhH...',
+  '.....hhhhhh.....',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+],
   },
 ];
-// Four additional silhouettes belong to the visiting cast, not the profile picker.
 const CUSTOMER_HAIR: HairSet[] = [
   ...HAIR,
-  { // high ponytail, ribbon and swept temple
-    front: HAIR[1].front.map((r, y) => y < 3 ? HAIR[0].front[y] : r),
+  {
+    front: [
+  '................',
+  '.....HLLHHh.....',
+  '...HLLLHHHHHHh..',
+  '..HLLHHHHHHHhHh.',
+  '..HLHHHHHHHHHHh.',
+  '..HHHHHhhHHHHW..',
+  '..HHHh..hhHHHHh.',
+  '..HH.......HHLh.',
+  '...h........HHh.',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+],
     side: [
-      '................', '......HHHH......', '....HLLHHHHh....',
-      '..HHLLHHHHHHh...', '.HhHHHHHHHHHHh..', '.HhHHHHHHHHHh...',
-      '.HhHHHHHhh.Hh...', '.HhHHHHh........', '.Hh.HHS.........',
-      '.HH..h..........', '.HHh............', '..Hh............',
-      '..Hh............', '..hh............',
-    ],
+  '................',
+  '......HLLHh.....',
+  '....HLLLHHHh....',
+  '.LHhLLHHHHHHh...',
+  '.LHhLHHHHHHHHh..',
+  '.WYWHHHHhhHHHh..',
+  '.LHhHHHHh..Hh...',
+  '.LHhHHHh........',
+  '.LHhHS..........',
+  '.LHhh...........',
+  '.LHh............',
+  '.LHh............',
+  '..hh............',
+  '................',
+  '................',
+],
     back: [
-      ...SHORT_BACK.slice(0, 5), '...HHHWWWHHHh...', '...HHHHHHHHHh...',
-      '....HHHHHHHh....', '.....HHHHHh.....', '.....HHHHHh.....',
-      '.....HHHHHh.....', '......HHHh......', '......HHHh......',
-      '.......hh.......',
-    ],
+  '................',
+  '.....HLLHHh.....',
+  '...HLLLHHHHHh...',
+  '..HLLHHHHHHHhh..',
+  '..HLHHHHHHHHHh..',
+  '..HHHHWYWHHHHh..',
+  '..HHLHHHLhHHHh..',
+  '..HHLHHLHhHHHh..',
+  '..HHLHHHLhHHHh..',
+  '..HHLHHLHhHHHh..',
+  '...HHHHHLhHhh...',
+  '....hhHLHhhh....',
+  '......HHLh......',
+  '.......hh.......',
+  '................',
+],
   },
-  { // clustered curls, round rather than long and straight
+  {
     front: [
-      '................', '....HH..HHh.....', '...HLLHHLLHHh...',
-      '..HLLHHHHHHHHh..', '..HHHHHHHHHHHh..', '.HHHhHHhHHhHHHh.',
-      '..HHh.HHh..HHh..', '..HH.......HHh..', '..Hh........Hh..',
-      '...h........h...',
-    ],
+  '....HH..HH......',
+  '...HLLHHLLHh....',
+  '...HLLLHHHHHh...',
+  '.HLHLHHHHHHHhh..',
+  '..HLHHHHHHHHHHh.',
+  '.HhHHHHhhHHHHh..',
+  '..HHHh..hhHHHHh.',
+  '..Lh.......HHh..',
+  '...h........Hh..',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+],
     side: [
-      '................', '.....HH.HHh.....', '...HLLHHLLHHh...',
-      '..HLLHHHHHHHHh..', '..HHHHHHHHHHHh..', '.HHHHHHHHHHHHHh.',
-      '..HHHHHhh..HHh..', '..HHHHHh........', '...HHHS.........',
-      '..HHhh..........', '...hh...........',
-    ],
+  '....HH..HH......',
+  '...HLLHHLLHh....',
+  '....HLLLHHHh....',
+  '.HLHLLHHHHHHh...',
+  '...HLHHHHHHHHHh.',
+  '.HhHHHHHhhHHHh..',
+  '...HHHHHh..HhHh.',
+  '..LhHHHh........',
+  '...HHS..........',
+  '....h...........',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+],
     back: [
-      '................', '....HH..HHh.....', '...HLLHHLLHHh...',
-      '..HLLHHHHHHHHh..', '..HHHHHHHHHHHh..', '.HHHHHHHHHHHHHh.',
-      '..HHHHHHHHHHHh..', '.HHHHHHHHHHHHHh.', '..HHHHHHHHHHHh..',
-      '...hHHHHHHHhh...', '....hhHHHhhh....', '......hhh.......',
-    ],
+  '....HH..HH......',
+  '...HLLHHLLHh....',
+  '...HLLLHHHHHh...',
+  '.HLHLHHHHHHHhh..',
+  '..HLHHHHHHHHHHh.',
+  '.HhHHHHhhHHHHh..',
+  '..HHLHHhHHHHHHh.',
+  '..LhLHHhHHHHHh..',
+  '.HhHLHHhHHHHHh..',
+  '..HHLHHhHHHHHh..',
+  '...HHHhHHHHhh...',
+  '....hHHHhhhh....',
+  '................',
+  '................',
+  '................',
+],
   },
-  { // chin-length bob with a neat straight fringe
+  {
     front: [
-      '................', '.....HHHHHh.....', '....HLLHHHHh....',
-      '...HLLHHHHHHh...', '..HHLHHHHHHHHh..', '..HHHHHHHHHHHh..',
-      '..HHhhhhhhhhHh..', '..HH.......HHh..', '..HH.......HHh..',
-      '..HH.......HHh..', '..HH.......HHh..', '..hHh.....hHhh..',
-      '...hh.....hhh...',
-    ],
+  '................',
+  '.....HLLHHh.....',
+  '...HLLLHHHHHh...',
+  '..HLLHHHHHHHhh..',
+  '..HLHHHHHHHHHh..',
+  '..HHHLHHLHHHHh..',
+  '..Lhhhhhhhhhhh..',
+  '..LHh......Hhh..',
+  '..LHh......Hhh..',
+  '..LHh......Hhh..',
+  '..LHh......Hhh..',
+  '...hh......hh...',
+  '................',
+  '................',
+  '................',
+],
     side: [
-      ...HAIR[2].side.slice(0, 9), '..HHHHh.........', '..HHHHh.........',
-      '..hHHHh.........', '...hhhh.........',
-    ],
-    back: [...SHORT_BACK.slice(0, 9), '..HHHHHHHHHHHh..', '..HHHHHHHHHHHh..', '..hHHHHHHHHHhh..', '...hhhhhhhhhh...'],
+  '................',
+  '......HLLHh.....',
+  '....HLLLHHHh....',
+  '...HLLHHHHHHh...',
+  '...HLHHHHHHHHh..',
+  '...HHLHHLHHHHh..',
+  '..Hhhhhhh..Hh...',
+  '..HLHHhh........',
+  '..HLHHh.........',
+  '..HLHHh.........',
+  '..HLHHh.........',
+  '...hhhh.........',
+  '................',
+  '................',
+  '................',
+],
+    back: [
+  '................',
+  '.....HLLHHh.....',
+  '...HLLLHHHHHh...',
+  '..HLLHHHHHHHhh..',
+  '..HLHHHHHHHHHh..',
+  '..HHHLHHLHHHHh..',
+  '..HhhhhhhhhhHh..',
+  '..HLHHhHHhHHHh..',
+  '..HLHHhHHhHHHh..',
+  '..HLHHhHHhHHHh..',
+  '..HLHHhHHhHHHh..',
+  '...hhhhhhhhh....',
+  '................',
+  '................',
+  '................',
+],
   },
-  { // cropped pixie with a small asymmetric quiff
+  {
     front: [
-      '................', '.......HHh......', '.....HLLHHh.....',
-      '....HLLHHHHh....', '...HHHHHHHHHh...', '...HHHhh..HHh...',
-      '...HH......Hh...', '...h........h...',
-    ],
+  '................',
+  '........LHh.....',
+  '......HLLHh.....',
+  '....HLLHHHHh....',
+  '...HLHHHHHHHh...',
+  '...HHHhhHHHHh...',
+  '...HHh...Hhh....',
+  '...h............',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+],
     side: [
-      '................', '........HH......', '......HLLHh.....',
-      '.....HLLHHHH....', '....HHHHHHHHh...', '...HHHHHHHHHh...',
-      '...HHHHHhh......', '....HHHh........', '.....HS.........',
-    ],
-    back: ['................', '.......HHh......', ...SHORT_BACK.slice(2, 10), '.....hhhhhh.....'],
+  '................',
+  '........LHh.....',
+  '......HLLHh.....',
+  '....HLLHHHHh....',
+  '...HLHHHHHHHh...',
+  '...HHHhhHHHHh...',
+  '...HHHHHhHhh....',
+  '...hHHh.........',
+  '.....HS.........',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+],
+    back: [
+  '................',
+  '........LHh.....',
+  '......HLLHh.....',
+  '....HLLHHHHh....',
+  '...HLHHHHHHHh...',
+  '...HHHhhHHHHh...',
+  '...HLHHHHHhh....',
+  '...HLHHHHHhh....',
+  '...HLHHHHHhh....',
+  '...HLHHHHHhh....',
+  '.....hhhhh......',
+  '................',
+  '................',
+  '................',
+  '................',
+],
   },
 ];
 // A small baker's toque. Its silhouette is shared across all three views.
 const CAP = [
-  '.....CCCCCC.....',
+  '.....CC.CC......',
   '...CCCCCCCCCC...',
-  '...CCWCCCCWCc...',
-  '....CCCCCCCc....',
-  '....cccccccc....',
+  '..CCWCCWCCWCCc..',
+  '...CCCCCCCCcc...',
+  '....CWCCWCcc....',
 ];
 export type Role = 'customer' | 'barista' | 'owner' | 'server' | 'cook';
 export type Facing = 'down' | 'up' | 'left' | 'right';
@@ -624,17 +859,17 @@ export function character(look: Look, role: Role = 'customer', appearanceId?: nu
   const staff = role !== 'customer';
   const cook = role === 'cook';
   const shirt = ramp(cook ? '#f0e7d3' : staff ? '#eee0c2' : SHIRTS[look.shirt % SHIRTS.length]);
-  const apron = ramp(role === 'owner' ? SHIRTS[look.shirt % SHIRTS.length] : role === 'server' ? '#61758a' : cook ? '#78878b' : '#749078');
+  const apron = ramp(role === 'owner' ? SHIRTS[look.shirt % SHIRTS.length] : role === 'server' ? '#536f78' : cook ? '#865332' : '#627451');
   const pants = ramp(PANTS[look.pants % PANTS.length]);
   const hat = ramp(SHIRTS[(look.shirt + 3) % SHIRTS.length]);
   const palette: Palette = {
     S: skin.base, s: skin.lo, Z: skin.hi, E: '#42332f',
     B: look.skin < 2 ? '#db9b83' : '#af7565', m: '#9c6253',
     T: shirt.base, t: shirt.lo, U: shirt.hi, V: shirt.dark,
-    P: pants.base, p: pants.lo, K: '#795d4b', k: '#554536',
+    P: pants.base, p: pants.lo, K: '#865332', k: '#543425',
     H: hair.base, h: hair.lo, L: hair.hi,
-    A: hat.base, a: hat.lo, Y: '#e8c783', W: '#eee1bd', w: '#c5b397',
-    R: apron.base, r: apron.lo, Q: apron.dark,
+    A: hat.base, a: hat.lo, Y: '#c8a15e', W: '#f4e6c7', w: '#c8b18c',
+    R: apron.base, r: apron.lo, Q: apron.dark, J: apron.hi,
     C: '#f7eddb', c: '#c7bfae', q: design?.accent ?? '#d4ac78', g: '#86684e',
   };
   const hairStyle = design ? CUSTOMER_HAIR[design.hairstyle] : HAIR[cook && look.hairStyle % HAIR.length === 3 ? 0 : look.hairStyle % HAIR.length];
@@ -658,7 +893,9 @@ export function character(look: Look, role: Role = 'customer', appearanceId?: nu
       put(7 + petStep, 29, 'ZS'); put(7 + petStep, 30, 'Ss');
       rows = grid.map(row => row.join(''));
     }
-    return pixelSprite(rows, palette);
+    const original = pixelSprite(rows, palette, OUTLINE);
+    registerFineCharacterArt(original, rows, palette, view, OUTLINE);
+    return original;
   };
   const down = LEGS_FRONT.map((legs, step) => build(FRONT, 'front', legs, step));
   const up = LEGS_FRONT.map((legs, step) => build(BACK, 'back', legs, step));
@@ -673,829 +910,83 @@ export function character(look: Look, role: Role = 'customer', appearanceId?: nu
 
 // ---------------------------------------------------------------- items (12x12)
 
-const CUP = { w: '#fdf6ec', W: '#dccdb9', d: '#efe2cf', D: '#c4b096', s: '#ece6de' };
-
-export const ITEM_ART: Record<StaticItemId, { rows: string[]; palette: Palette }> = {
-  espresso: {
-    rows: [
-      '....s..s....',
-      '...s..s.....',
-      '....s..s....',
-      '............',
-      '..wwwwwww...',
-      '..wCCCCCwww.',
-      '..wcccccw.w.',
-      '..wwwwwwwww.',
-      '..WwwwwwW...',
-      '...WWWWW....',
-      '.dddddddddD.',
-      '..DDDDDDDD..',
-    ],
-    palette: { ...CUP, C: '#c48a55', c: '#5e3420' },
-  },
-  latte: {
-    rows: [
-      '...gGGGGg...',
-      '...gffffg...',
-      '...gffffg...',
-      '...gmmmmg...',
-      '...gmmmmg...',
-      '...gMMMMg...',
-      '...gMMMMg...',
-      '...gccccg...',
-      '...gccccg...',
-      '...gccccg...',
-      '....gggg....',
-    ],
-    palette: { g: '#cfe6ee', G: '#f6fbfc', f: '#fff5e6', m: '#e2b98e', M: '#c48a55', c: '#6e3f24' },
-  },
-  cappuccino: {
-    rows: [
-      '....s.s.....',
-      '...s.s......',
-      '............',
-      '.rrrrrrrrr..',
-      '.rffffffffrr',
-      '.rffhfhfffr.',
-      '.rfffhffffrr',
-      '.Rrrrrrrrrr.',
-      '..RRrrrrRR..',
-      'ddddddddddD.',
-      '.DDDDDDDDD..',
-    ],
-    palette: { ...CUP, r: '#e0685a', R: '#b24a40', f: '#f6dfc2', h: '#b07a4a' },
-  },
-  croissant: {
-    rows: [
-      '............',
-      '....yyyy....',
-      '..yYyyyyYy..',
-      '.yYyOyyOyYy.',
-      'yYyyOyyOyyYy',
-      'yYyOyyyyOyYy',
-      'YyO......OyY',
-      'YY........YY',
-    ],
-    palette: { y: '#f2bb62', Y: '#c97d34', O: '#e39a45' },
-  },
-  mocha: {
-    rows: [
-      '....wwww....',
-      '...wwwWww...',
-      '..wwkwwkww..',
-      '..BBBBBBBB..',
-      '..BbbbbbbBBB',
-      '..BbbbbbbB.B',
-      '..BbbbbbbBBB',
-      '..BBBBBBBB..',
-      '...BBBBBB...',
-      '.dddddddddd.',
-    ],
-    palette: { ...CUP, k: '#6e3f24', B: '#8d5a3c', b: '#a86f4c' },
-  },
-  matcha: {
-    rows: [
-      '...gGGGGg...',
-      '...gffffg...',
-      '...gffffg...',
-      '...gmmmmg...',
-      '...gmmmmg...',
-      '...gMMMMg...',
-      '...gMMMMg...',
-      '...gMMMMg...',
-      '...gMMMMg...',
-      '....gggg....',
-    ],
-    palette: { g: '#cfe6ee', G: '#f6fbfc', f: '#e6f2c8', m: '#a9cf7a', M: '#6f9e45' },
-  },
-  frappe: {
-    rows: [
-      '.......p....',
-      '......p.....',
-      '....wwpww...',
-      '...wwwwwww..',
-      '..wwwwWwwww.',
-      '...gccccg...',
-      '...gCCCCg...',
-      '...gccccg...',
-      '...gCCCCg...',
-      '...gccccg...',
-      '....gggg....',
-    ],
-    palette: { p: '#ef6f9c', w: '#fdf6ec', W: '#e9c48c', g: '#cfe6ee', c: '#e7b06a', C: '#c47a3a' },
-  },
-  cake: {
-    rows: [
-      '.....rR.....',
-      '....rrrR....',
-      '.....gG.....',
-      '..wwwwwwww..',
-      '.wwwwwwwwwW.',
-      '.yyyyyyyyyY.',
-      '.ppppppppppP',
-      '.yyyyyyyyyY.',
-      '.wwwwwwwwwW.',
-      'dddddddddddD',
-    ],
-    palette: { ...CUP, r: '#e2434b', R: '#a52a36', g: '#6fb26a', G: '#4e8a4f', y: '#f6d58e', Y: '#d9ad5c', p: '#f49ac1', P: '#d26b98' },
-  },
-  pourover: {
-    rows: [
-      '.tttttttttt.',
-      '..tTTTTTTt..',
-      '...tTTTTt...',
-      '....tttt....',
-      '.....cc.....',
-      '..gggggggg..',
-      '..gccccccg..',
-      '..gCCCCCCg..',
-      '..gccccccg..',
-      '...gggggg...',
-    ],
-    palette: { t: '#d9714f', T: '#f09572', c: '#6e3f24', C: '#8b5532', g: '#cfe6ee' },
-  },
-  americano: {
-    rows: [
-      '...s...s....',
-      '....s...s...',
-      '...s...s....',
-      '.wwwwwwww...',
-      '.wkkkkkkwww.',
-      '.wwwwwwwwW.w',
-      '.wwwwwwwwW.w',
-      '.wwwwwwwwWww',
-      '.wwwwwwwwW..',
-      '..WWWWWWW...',
-    ],
-    palette: { ...CUP, k: '#3a2016' },
-  },
-  flatwhite: {
-    rows: [
-      '............',
-      '...wwwwww...',
-      '..wmmffmmw..',
-      '..wmfffffmww',
-      '..wmmffmmw.w',
-      '..wwmmmmwwww',
-      '...wwwwww...',
-      '....WWWW....',
-      '.dddddddddd.',
-      '..DDDDDDDD..',
-    ],
-    palette: { ...CUP, m: '#c48a55', f: '#f6e6cc' },
-  },
-  macchiato: {
-    rows: [
-      '....y.y.....',
-      '...gyyyyg...',
-      '...gffffg...',
-      '...gffffg...',
-      '...gMMMMg...',
-      '...gMmMMg...',
-      '...gmmmmg...',
-      '...gmmmmg...',
-      '...gmmmmg...',
-      '....gggg....',
-    ],
-    palette: { g: '#cfe6ee', G: '#f6fbfc', y: '#e0a040', f: '#fdf6ec', M: '#7a4a2a', m: '#f3e6d0' },
-  },
-  coldbrew: {
-    rows: [
-      '.......p....',
-      '......p.....',
-      '...gGGpGgg..',
-      '...gkIkkkg..',
-      '...gkkkIkg..',
-      '...gIkkkkg..',
-      '...gkkIkkg..',
-      '...gkkkkkg..',
-      '...gkkkkkg..',
-      '....ggggg...',
-    ],
-    palette: { g: '#cfe6ee', G: '#f6fbfc', k: '#4a2a1a', I: '#e8f4f8', p: '#4fb3a8' },
-  },
-  affogato: {
-    rows: [
-      '....hhhh....',
-      '...hhHhhh...',
-      '..hhhhhhhh..',
-      '..gkhhhhkg..',
-      '..gkkhhkkg..',
-      '..gkkkkkkg..',
-      '...gkkkkg...',
-      '....gggg....',
-      '.....gg.....',
-      '....gggg....',
-    ],
-    palette: { g: '#cfe6ee', G: '#f6fbfc', h: '#fbf0d6', H: '#ffffff', k: '#5e3420' },
-  },
-  blacktea: {
-    rows: [
-      '.....s......',
-      '....s.......',
-      '.....s......',
-      '..wwwwwwww..',
-      '..wttttttwww',
-      '..wwwwwwww.w',
-      '.ywwwwwwwwww',
-      '.y.wwwwwww..',
-      '.dddddddddd.',
-      '..DDDDDDDD..',
-    ],
-    palette: { ...CUP, t: '#b5532c', y: '#f2c14e' },
-  },
-  hotchoc: {
-    rows: [
-      '....hhh.....',
-      '...hkHhh....',
-      '..hhhhkhh...',
-      '.rrrrrrrrr..',
-      '.rRrrrrrrrrr',
-      '.rRrrrrrrr.r',
-      '.rRrrrrrrr.r',
-      '.rRrrrrrrrrr',
-      '.rrrrrrrrr..',
-      '..rrrrrrr...',
-    ],
-    palette: { h: '#fdf6ec', H: '#ffffff', k: '#6e3f24', r: '#d65a4a', R: '#f08a7a' },
-  },
-  chai: {
-    rows: [
-      '........n...',
-      '.......nN...',
-      '..tttttnNt..',
-      '..tfxffnft..',
-      '..tffxfffttt',
-      '..tTtttttt.t',
-      '..tTtttttt.t',
-      '..tTttttttt.',
-      '..tttttttt..',
-      '...tttttt...',
-    ],
-    palette: { t: '#4cb4a6', T: '#8fdccf', f: '#f3dcc0', x: '#a0602c', n: '#8a4a20', N: '#c47a3a' },
-  },
-  smoothie: {
-    rows: [
-      '........p...',
-      '.......p....',
-      '..rR..p.....',
-      '.rrrgGpGGg..',
-      '..r.gPPPPg..',
-      '....gPPPPg..',
-      '....gPpPPg..',
-      '....gPPPPg..',
-      '....gPPPPg..',
-      '.....gggg...',
-    ],
-    palette: { g: '#cfe6ee', G: '#f6fbfc', p: '#ef6f9c', P: '#f49ac1', r: '#e2434b', R: '#ff8a8a' },
-  },
-  milktea: {
-    rows: [
-      '............',
-      '..gGGGGGGg..',
-      '..gffffffg..',
-      '..gqqqqqqggg',
-      '..gqqqqqqg.g',
-      '..gqqqqqqg.g',
-      '..gqqqqqqggg',
-      '..gqqqqqqg..',
-      '...gggggg...',
-      '..dddddddd..',
-    ],
-    palette: { g: '#cfe6ee', G: '#f6fbfc', f: '#fdf6ec', q: '#d9a877', d: '#efe2cf' },
-  },
-  roll: {
-    rows: [
-      '............',
-      '....cccc....',
-      '..ccCyyCcc..',
-      '.cCyhhyyCcc.',
-      '.cCyhyyyCcc.',
-      'cCCyyyyCCCcc',
-      'cCCCCCCCCcco',
-      '.occcccccoo.',
-      '..oooooooo..',
-    ],
-    palette: { o: '#7a3f1c', c: '#b8682c', C: '#d98f45', y: '#f0b866', h: '#fbe0a8', f: '#fdf4e0' },
-  },
-  bagel: {
-    rows: [
-      '...cccccc...',
-      '..cCyfyCCc..',
-      '.cCyCCCyfCc.',
-      '.cCc....cCc.',
-      '.cCo....cCc.',
-      '.cfCcccCCCo.',
-      '..cCfCCfCo..',
-      '...oooooo...',
-    ],
-    palette: { o: '#7a3f1c', c: '#b8682c', C: '#d98f45', y: '#f0b866', h: '#fbe0a8', f: '#fdf4e0' },
-  },
-  baguette: {
-    rows: [
-      '.........cc.',
-      '........cCyc',
-      '.......cCyCc',
-      '......cCoCco',
-      '.....cCyCco.',
-      '....cCoCco..',
-      '...cCyCco...',
-      '..cCoCco....',
-      '.cCyCco.....',
-      'cCCCco......',
-      'occco.......',
-    ],
-    palette: { o: '#7a3f1c', c: '#b8682c', C: '#d98f45', y: '#f0b866', h: '#fbe0a8', f: '#fdf4e0' },
-  },
-  pretzel: {
-    rows: [
-      '.ccc....ccc.',
-      'cfyCc..cCyfc',
-      'cC..cCCc..Cc',
-      'cC...cc...Cc',
-      'cC..cCCc..Cc',
-      '.cCcC..CcCc.',
-      '.cC......Cc.',
-      'cC........Cc',
-      'cC........Cc',
-      '.cCCCCCCCCc.',
-      '..cccccccc..',
-    ],
-    palette: { c: '#9a5226', C: '#c9793a', y: '#e8a060', f: '#ffffff' },
-  },
-  focaccia: {
-    rows: [
-      '............',
-      '............',
-      '.yyyyyyyyyy.',
-      'yhyoyhyoyhyc',
-      'yyyyGyyyyGyc',
-      'yoyhyyoyhyyc',
-      'yyGyyyyGyyyc',
-      'cccccccccccc',
-      '.oooooooooo.',
-    ],
-    palette: { o: '#7a3f1c', c: '#b8682c', C: '#d98f45', y: '#f0b866', h: '#fbe0a8', f: '#fdf4e0', G: '#6fa255' },
-  },
-  ciabatta: {
-    rows: [
-      '............',
-      '............',
-      '...ffcffc...',
-      '.cCfCCfCCc..',
-      'cCCCfCCCCfc.',
-      'cCfCCCfCCCcc',
-      'cCCCCCCCCCco',
-      '.cccccccccoo',
-      '..ooooooooo.',
-    ],
-    palette: { o: '#7a3f1c', c: '#b8682c', C: '#d98f45', y: '#f0b866', h: '#fbe0a8', f: '#fdf4e0' },
-  },
-  sourdough: {
-    rows: [
-      '....cccc....',
-      '..cfCCfCcc..',
-      '.cCfhhyCfCc.',
-      '.cfCyhoyCCc.',
-      'cCCCyooCCfCc',
-      'cfCCCCoCCCCc',
-      'cCCfCCCCfCCo',
-      '.cCCCCCCCCo.',
-      '..oooooooo..',
-    ],
-    palette: { o: '#7a3f1c', c: '#b8682c', C: '#d98f45', y: '#f0b866', h: '#fbe0a8', f: '#fdf4e0' },
-  },
-  rye: {
-    rows: [
-      '............',
-      '...rrrrrr...',
-      '.rrRxRRxRrr.',
-      'rRRRRxRRRRxr',
-      'rRxRRRRxRRRr',
-      'rRRRxRRRRxRr',
-      '.rrRRRRRRrro',
-      '..oooooooo..',
-    ],
-    palette: { r: '#6b3f26', R: '#8a5636', x: '#d8c08a', o: '#3e2618' },
-  },
-  shokupan: {
-    rows: [
-      '.cccc..cccc.',
-      'cCyyCccCyyCc',
-      'cyhhyCCyhhyc',
-      'cyyyyyyyyyyc',
-      'chhhhhhhhhhc',
-      'chhhhhhhhhhc',
-      'chhhhhhhhhhc',
-      'chhhhhhhhhhc',
-      'cCCCCCCCCCCc',
-      '.oooooooooo.',
-    ],
-    palette: { o: '#7a3f1c', c: '#b8682c', C: '#d98f45', y: '#e8a85a', h: '#fbe8c4' },
-  },
-  brioche: {
-    rows: [
-      '.....oo.....',
-      '....oyyo....',
-      '....oyho....',
-      '..oooyyooo..',
-      '.oyyyooyyyo.',
-      'oyhyyyyyyyyo',
-      'oyyyyyyyyyyo',
-      '.oCyCyCyCyo.',
-      '..oCoCoCoo..',
-    ],
-    palette: { o: '#8a4a1c', y: '#e09a3a', h: '#f7c46a', C: '#b8682c' },
-  },
-  garlicbread: {
-    rows: [
-      '............',
-      '.cccccccccc.',
-      'cCyyyyyyyyCc',
-      'cyYYGYYYGYyc',
-      'cyYGYYYYYYyc',
-      'cyYYYYGYYYyc',
-      'cyYYYGYYGYyc',
-      'cCyyyyyyyyCc',
-      '.oooooooooo.',
-    ],
-    palette: { o: '#7a3f1c', c: '#b8682c', C: '#d98f45', y: '#f0b866', h: '#fbe0a8', f: '#fdf4e0', Y: '#f6d45e', G: '#6fa255' },
-  },
-  donut: {
-    rows: [
-      '...cccccc...',
-      '..cppppppc..',
-      '.cpPpxpppPc.',
-      '.cpp....pbc.',
-      '.cpx....ppc.',
-      '.cppppbpppc.',
-      '..cCppppCc..',
-      '...oooooo...',
-    ],
-    palette: { o: '#7a3f1c', c: '#c47a3a', C: '#e0a050', p: '#f49ac1', P: '#ffc6dc', x: '#fff3a0', b: '#7fc4e8' },
-  },
-  scone: {
-    rows: [
-      '............',
-      '.....cc.....',
-      '....cyyc....',
-      '...cyhyyc...',
-      '..cyyyxyyc..',
-      '.cyxyyyyyyc.',
-      'cCCCCCCCCCCc',
-      'cCCCCCCCCCCo',
-      '.oooooooooo.',
-    ],
-    palette: { o: '#7a3f1c', c: '#b8682c', C: '#d98f45', y: '#f0b866', h: '#fbe0a8', f: '#fdf4e0', x: '#6b3a3a' },
-  },
-  painchoc: {
-    rows: [
-      '............',
-      '..cccccccc..',
-      '.cyyhyyhyyc.',
-      '.cCCCCCCCCc.',
-      '.kyyyyyyyyk.',
-      '.cCCCCCCCCc.',
-      '.kyyyyyyyyk.',
-      '.cCCCCCCCCo.',
-      '..oooooooo..',
-    ],
-    palette: { o: '#7a3f1c', c: '#b8682c', C: '#d98f45', y: '#f0b866', h: '#fbe0a8', f: '#fdf4e0', k: '#4a2a1a' },
-  },
-  cinnamon: {
-    rows: [
-      '...cccccc...',
-      '..cCwwyyCc..',
-      '.cCyCCCCwyc.',
-      '.cyCyyyyCyc.',
-      '.cyCyCCyCwc.',
-      '.cwCyyCCyCc.',
-      '.cyCCCCyCyc.',
-      '..cCyywwCc..',
-      '...oooooo...',
-    ],
-    palette: { o: '#7a3f1c', c: '#b8682c', C: '#d98f45', y: '#f0b866', h: '#fbe0a8', f: '#fdf4e0', w: '#fdf6ec' },
-  },
-  muffin: {
-    rows: [
-      '...ffffff...',
-      '..fyyByyyf..',
-      '.fyByyyByyf.',
-      '.fyyyByyyyf.',
-      '..pPpPpPpP..',
-      '..PpPpPpPp..',
-      '..pPpPpPpP..',
-      '...PpPpPpP..',
-      '...pppppp...',
-    ],
-    palette: { f: '#c47a3a', y: '#e8b060', B: '#4a5a96', p: '#5a92d4', P: '#8fb8e8' },
-  },
-  melonpan: {
-    rows: [
-      '....cccc....',
-      '..cyhyyhyc..',
-      '.cyhyyhyyhc.',
-      '.chyyhyyhyc.',
-      'cyyhyyhyyhyc',
-      'chyyhyyhyyyc',
-      'cyyhyyhyyhyo',
-      '.oCCCCCCCCo.',
-      '..oooooooo..',
-    ],
-    palette: { o: '#7a3f1c', c: '#c48a3a', C: '#d9a84a', y: '#f6dc8a', h: '#d9a84a' },
-  },
-  eggtart: {
-    rows: [
-      '............',
-      '............',
-      '..cccccccc..',
-      '.cYYYYYYYYc.',
-      'cCYyYYoYYYCc',
-      'cCYYYYYYyYCc',
-      'cCYoYYYYYYCc',
-      '.cCCCCCCCCo.',
-      '..oooooooo..',
-    ],
-    palette: { o: '#a8622c', c: '#b8682c', C: '#d98f45', Y: '#f6d45e', y: '#fff0a0' },
-  },
-  cheesecake: {
-    rows: [
-      '..........b.',
-      '........bbb.',
-      '......bbhhb.',
-      '....bbhhhhb.',
-      '..bbhhhhhhb.',
-      'bbhhhhhhhhb.',
-      'hhhhhhhhhhh.',
-      'hhhhhhhhhhh.',
-      'ccccccccccc.',
-      'ooooooooooo.',
-    ],
-    palette: { b: '#d9a05a', h: '#fbeec6', c: '#b8682c', o: '#8a4a20' },
-  },
-  macaron: {
-    rows: [
-      '...pppppp...',
-      '..pPPPPPPp..',
-      '..wwwwwwww..',
-      '..pppppppp..',
-      '...gggggg...',
-      '..gGGGGGGg..',
-      '..wwwwwwww..',
-      '..gggggggg..',
-      '...yyyyyy...',
-      '..yYYYYYYy..',
-      '..wwwwwwww..',
-      '..yyyyyyyy..',
-    ],
-    palette: { p: '#ef8fb4', P: '#ffc6dc', g: '#9fd47e', G: '#cdeeb4', y: '#f2d14e', Y: '#fff0a0', w: '#fdf6ec' },
-  },
-  cortado: {
-    rows: [
-      '............',
-      '............',
-      '..gGGGGGg...',
-      '..gcccccg...',
-      '..gCCCCCppp.',
-      '..gmmmmmg.p.',
-      '..gmmmmmgpp.',
-      '...ggggg....',
-      '..ddddddd...',
-      '...DDDDD....',
-    ],
-    palette: { g: '#a9d5dc', G: '#eefbff', c: '#563022', C: '#bd8554', m: '#eacaa4', p: '#94bac2', d: '#f3e6d3', D: '#c4b096' },
-  },
-  vienna: {
-    rows: [
-      '.....w......',
-      '....wWw.....',
-      '...wWWww....',
-      '..wwWkWww...',
-      '..gkkkkkg...',
-      '..gcccccgpp.',
-      '..gcccccg.p.',
-      '..gCCCCCgpp.',
-      '...ggggg....',
-      '..ddddddd...',
-    ],
-    palette: { w: '#f8e9d2', W: '#fffaf0', k: '#976342', g: '#b1d7df', c: '#532d22', C: '#865035', p: '#91b9c5', d: '#e8d5bb' },
-  },
-  dirty: {
-    rows: [
-      '............',
-      '..gGGGGGGg..',
-      '..gccCCccg..',
-      '..gccCcccg..',
-      '..gmcCmmmg..',
-      '..gmmCmmmg..',
-      '..gmmmmmmg..',
-      '..gMmmmmMg..',
-      '...gggggg...',
-      '............',
-    ],
-    palette: { g: '#a6cbd3', G: '#eafaff', c: '#4b2d26', C: '#986440', m: '#fff0d9', M: '#e0ceb3' },
-  },
-  creamcoffee: {
-    rows: [
-      '.....s......',
-      '....www.....',
-      '..gwWswWwg..',
-      '..gwwwwwwg..',
-      '..gccccccg..',
-      '..gccccccg..',
-      '..gCccccCg..',
-      '..gCCCCCCg..',
-      '...gggggg...',
-      '............',
-    ],
-    palette: { s: '#c3e3e8', w: '#f5e9d5', W: '#ffffff', g: '#89b9c6', c: '#56392c', C: '#966744' },
-  },
-  lemontea: {
-    rows: [
-      '........p...',
-      '..yy...p....',
-      '.yYyy.p.....',
-      '..yggpGGg...',
-      '...gaiaag...',
-      '...gaaIag...',
-      '...gaiaag...',
-      '...gAAAAg...',
-      '....gggg....',
-      '............',
-    ],
-    palette: { p: '#f1d579', y: '#efbd35', Y: '#fff3a5', g: '#aacfd4', G: '#f0fcff', a: '#ce893b', A: '#a9652c', i: '#e7f6e9', I: '#cbe4dd' },
-  },
-  fruittea: {
-    rows: [
-      '........p...',
-      '.......p....',
-      '..gGGGpGGg..',
-      '..giAAAiAg..',
-      '..gArAyyAg..',
-      '..gArrAyAg..',
-      '..gAAoAAAg..',
-      '..gAooArAg..',
-      '...gggggg...',
-      '............',
-    ],
-    palette: { p: '#6ca677', g: '#a7d8dc', G: '#f3ffff', i: '#e5f8ef', A: '#efb36b', r: '#dd5e6d', y: '#fce78a', o: '#e88837' },
-  },
-  hojicha: {
-    rows: [
-      '....s..s....',
-      '...s..s.....',
-      '............',
-      '..ttttttt...',
-      '..tffxffttt.',
-      '..tTTTTTt.t.',
-      '..tTTTTTttt.',
-      '..ttttttt...',
-      '...ttttt....',
-      '..ddddddd...',
-    ],
-    palette: { s: '#e9dfce', t: '#867653', T: '#ae9e72', f: '#ead4ad', x: '#846044', d: '#cfc2a5' },
-  },
-  matchafloat: {
-    rows: [
-      '.....www....',
-      '....wWWww...',
-      '...wWWWWww..',
-      '..gwwwwwwg..',
-      '..gMMfMMMg..',
-      '..gMMfMMMg..',
-      '..gMMMMMMg..',
-      '..gmmmmmmg..',
-      '...gggggg...',
-      '............',
-    ],
-    palette: { w: '#f4e2c5', W: '#fff7e3', g: '#a4cfd3', M: '#89af55', m: '#5e813b', f: '#e9ecc9' },
-  },
-  cheesebun: {
-    rows: [
-      '............',
-      '....cccc....',
-      '..ccYYYYcc..',
-      '.cCYYyyYYCc.',
-      '.cYyYYYYyCc.',
-      'cCYYYhYYYYCc',
-      'cCCYYYYYYCco',
-      '.ocCCCCCCoo.',
-      '..oooooooo..',
-    ],
-    palette: { c: '#b96d2f', C: '#db9747', Y: '#f5cb65', y: '#fff0a0', h: '#edac43', o: '#88461f' },
-  },
-  raisinbread: {
-    rows: [
-      '............',
-      '...cccccc...',
-      '..cChyhhyc..',
-      '.cChrhhhrCc.',
-      '.cChhhhrhCc.',
-      '.cCrhhhhhCc.',
-      '.cChhrhhhCo.',
-      '..cooooooo..',
-      '............',
-    ],
-    palette: { c: '#a46632', C: '#ce9651', h: '#efd09a', y: '#ffe1ad', r: '#66413e', o: '#784925' },
-  },
-  chocobread: {
-    rows: [
-      '............',
-      '..cccccccc..',
-      '.cCmmCmmCCc.',
-      '.cCmmCmmCCc.',
-      '.cCmmCmmCCc.',
-      '.cCCCCCCCCc.',
-      '.cMMMMMMMMo.',
-      '..oooooooo..',
-      '............',
-    ],
-    palette: { c: '#683e2d', C: '#a26e46', m: '#f0c88d', M: '#865735', o: '#4d2d25' },
-  },
-  fruitbrioche: {
-    rows: [
-      '....cc......',
-      '...cYYcc....',
-      '..ccYrYYc...',
-      '.cYYcYYcc...',
-      '..cYYccYYc..',
-      '.cYrcYYcYc..',
-      '..ccYrcYcc..',
-      '...cYYcc....',
-      '....oo......',
-    ],
-    palette: { c: '#bd7833', Y: '#f1c16b', r: '#b35446', o: '#895025' },
-  },
-  cookie: {
-    rows: [
-      '............',
-      '...cccccc...',
-      '..cYYkYYCc..',
-      '.cYkYYYYYCc.',
-      '.cYYYYkYYCc.',
-      '.cYYkYYYkCc.',
-      '..cYYYYYCo..',
-      '...oooooo...',
-      '............',
-    ],
-    palette: { c: '#bd813f', Y: '#e7bc79', C: '#d19a50', k: '#56372c', o: '#925d30' },
-  },
-  brownie: {
-    rows: [
-      '............',
-      '....cccccc..',
-      '..ccKhKKhKc.',
-      '.cKKKKhKKKc.',
-      '.cKhKKKKhKc.',
-      '.cbbbbbbbbc.',
-      '.cBbbBbbBbc.',
-      '.cbbbbbbbbo.',
-      '..oooooooo..',
-    ],
-    palette: { c: '#69402f', K: '#8d553b', h: '#c48b5b', b: '#563126', B: '#7a4a34', o: '#3d261f' },
-  },
-  creampuff: {
-    rows: [
-      '............',
-      '....yyyy....',
-      '..yyYhhYyy..',
-      '.yYYhYYYyyc.',
-      '.yYYYYYYycc.',
-      '..wwWwwWww..',
-      '.cwwwwwwwwc.',
-      '.cYYYYYYYCc.',
-      '..cooooooc..',
-      '............',
-    ],
-    palette: { y: '#d69c52', Y: '#efbf78', h: '#ffdda0', c: '#ae713a', w: '#f9eed7', W: '#ffffff', C: '#dba15a', o: '#946033' },
-  },
-  swissroll: {
-    rows: [
-      '.....l......',
-      '....rrr.....',
-      '...rRrr.....',
-      '..yyyyyyy...',
-      '.ywwwwwwwy..',
-      'ywyyrryywwy.',
-      'ywywwwwywwy.',
-      'ywywrrwywwy.',
-      'ywwyyyywwwy.',
-      '.yyyyyyyyy..',
-      '..oooooooo..',
-    ],
-    palette: { l: '#65944b', r: '#dd5568', R: '#ff9b9f', y: '#e9bc7e', w: '#fff1db', o: '#b7864e' },
-  },
+/** Stable source envelopes: asset dimensions are part of the room and UI API. */
+const MENU_ENVELOPES: Record<StaticItemId, readonly [number, number]> = {
+  espresso: [12, 12],
+  latte: [12, 11],
+  cappuccino: [12, 11],
+  croissant: [12, 8],
+  mocha: [12, 10],
+  matcha: [12, 10],
+  frappe: [12, 11],
+  cake: [12, 10],
+  pourover: [12, 10],
+  americano: [12, 10],
+  flatwhite: [12, 10],
+  macchiato: [12, 10],
+  coldbrew: [12, 10],
+  affogato: [12, 10],
+  blacktea: [12, 10],
+  hotchoc: [12, 10],
+  chai: [12, 10],
+  smoothie: [12, 10],
+  milktea: [12, 10],
+  roll: [12, 9],
+  bagel: [12, 8],
+  baguette: [12, 11],
+  pretzel: [12, 11],
+  focaccia: [12, 9],
+  ciabatta: [12, 9],
+  sourdough: [12, 9],
+  rye: [12, 8],
+  shokupan: [12, 10],
+  brioche: [12, 9],
+  garlicbread: [12, 9],
+  donut: [12, 8],
+  scone: [12, 9],
+  painchoc: [12, 9],
+  cinnamon: [12, 9],
+  muffin: [12, 9],
+  melonpan: [12, 9],
+  eggtart: [12, 9],
+  cheesecake: [12, 10],
+  macaron: [12, 12],
+  cortado: [12, 10],
+  vienna: [12, 10],
+  dirty: [12, 10],
+  creamcoffee: [12, 10],
+  lemontea: [12, 10],
+  fruittea: [12, 10],
+  hojicha: [12, 10],
+  matchafloat: [12, 10],
+  cheesebun: [12, 9],
+  raisinbread: [12, 9],
+  chocobread: [12, 9],
+  fruitbrioche: [12, 9],
+  cookie: [12, 9],
+  brownie: [12, 9],
+  creampuff: [12, 10],
+  swissroll: [12, 11],
 };
+
+export const ITEM_ART = Object.fromEntries(
+  (Object.keys(MENU_ENVELOPES) as StaticItemId[]).map(id => {
+    const [w, h] = MENU_ENVELOPES[id];
+    return [id, miniatureSource(menuMiniatureGrid(id), w, h)];
+  }),
+) as Record<StaticItemId, { rows: string[]; palette: Palette }>;
 
 const itemCache = new Map<string, HTMLCanvasElement>();
 
 export function itemIcon(id: ItemId, outline = true): HTMLCanvasElement {
   if (id.startsWith('sig:')) return signatureDrinkIcon(id);
+  const generated = getGeneratedFoodAdapter()?.icon(id, outline);
+  if (generated) return generated;
   const key = `${id}.${outline}`;
   let c = itemCache.get(key);
   if (!c) {
     const art = ITEM_ART[id as StaticItemId];
-    c = pixelSprite(art.rows, art.palette, outline ? 'sel' : false);
+    c = menuMiniature(id as StaticItemId, Math.max(...art.rows.map(row => row.length)), art.rows.length, outline);
     itemCache.set(key, c);
   }
   return c;
@@ -1504,11 +995,13 @@ export function itemIcon(id: ItemId, outline = true): HTMLCanvasElement {
 /** Three-times-density artwork for menus, reports and transparent PNG export. */
 export function itemArtwork(id: ItemId): HTMLCanvasElement {
   if (id.startsWith('sig:')) return signatureDrinkCanvas(id, 3);
+  const generated = getGeneratedFoodAdapter()?.artwork(id);
+  if (generated) return generated;
   const key = `${id}.artwork`;
   let canvas = itemCache.get(key);
   if (!canvas) {
     const art = ITEM_ART[id as StaticItemId];
-    canvas = pixelSprite(art.rows, art.palette, 'sel', 3);
+    canvas = menuMiniature(id as StaticItemId, Math.max(...art.rows.map(row => row.length)), art.rows.length, true, 3);
     itemCache.set(key, canvas);
   }
   return canvas;
@@ -1516,189 +1009,34 @@ export function itemArtwork(id: ItemId): HTMLCanvasElement {
 
 // ---------------------------------------------------------------- ingredients (12x10)
 
-const INGREDIENT_ART: Record<IngredientId, { rows: string[]; palette: Palette }> = {
-  beans: {
-    rows: [
-      '....tt......',
-      '...tTTt.....',
-      '..sSSSSSs...',
-      '.sSSSSSSSs..',
-      '.SSSSbbSSs..',
-      '.SSSbBBbSs..',
-      '.SSSbBbbSs..',
-      '.SSSSbbSSs..',
-      '.SSSSSSSSs..',
-      '..sssssss...',
-    ],
-    palette: { s: '#a8814f', S: '#c9a06a', t: '#7a5634', T: '#9c7044', b: '#5e3420', B: '#8b5532' },
-  },
-  milk: {
-    rows: [
-      '....wW......',
-      '...wwWW.....',
-      '..wwwWWW....',
-      '..WWWWWW....',
-      '..wbbbbW....',
-      '..wbBBbW....',
-      '..wbbbbW....',
-      '..wwwwwW....',
-      '..wwwwwW....',
-      '..WWWWWW....',
-    ],
-    palette: { w: '#fdf6ec', W: '#dccdb9', b: '#5a92d4', B: '#cfe6f6' },
-  },
-  cocoa: {
-    rows: [
-      '..kkkkkkk...',
-      '..KKKKKKK...',
-      '..ccccccc...',
-      '..cCCCCCc...',
-      '..cCwwwCc...',
-      '..cCwCwCc...',
-      '..cCwwwCc...',
-      '..cCCCCCc...',
-      '..ccccccc...',
-      '..kkkkkkk...',
-    ],
-    palette: { k: '#8b5532', K: '#c48a55', c: '#6e3f24', C: '#a86f4c', w: '#f6dfc2' },
-  },
-  matcha: {
-    rows: [
-      '..kkkkkkk...',
-      '..KKKKKKK...',
-      '..ggggggg...',
-      '..gGGGGGg...',
-      '..gGwwwGg...',
-      '..gGwgwGg...',
-      '..gGwwwGg...',
-      '..gGGGGGg...',
-      '..ggggggg...',
-      '..kkkkkkk...',
-    ],
-    palette: { k: '#3f6f3a', K: '#6f9e45', g: '#4e8a4f', G: '#7fbf5e', w: '#e6f2c8' },
-  },
-  fruit: {
-    rows: [
-      '....g..g....',
-      '...gGggGg...',
-      '..rRrgrRr...',
-      '.rRrrrrRrr..',
-      '.rrryrrryr..',
-      '.rrrrrrrrr..',
-      '..ryrrrrr...',
-      '..rrrryr....',
-      '...rrrr.....',
-      '....rr......',
-    ],
-    palette: { r: '#e2434b', R: '#ff8a8a', y: '#f6d58e', g: '#4e8a4f', G: '#7fbf5e' },
-  },
-  flour: {
-    rows: [
-      '....tt......',
-      '...tTTt.....',
-      '..fFFFFFf...',
-      '.fFFFFFFFf..',
-      '.FFFwwwFFf..',
-      '.FFwwwwwFf..',
-      '.FFFwwwFFf..',
-      '.FFFFFFFFf..',
-      '.FFFFFFFFf..',
-      '..fffffff...',
-    ],
-    palette: { t: '#a8814f', T: '#c9a06a', f: '#d9c3a0', F: '#f4e8d2', w: '#f2c14e' },
-  },
-  butter: {
-    rows: [
-      '............',
-      '............',
-      '...yyyyyyy..',
-      '..yYYYYYYy..',
-      '.yYYYYYYyy..',
-      '.wwwwwwwwyy.',
-      '.wbbbbbbwy..',
-      '.wwwwwwwwy..',
-      '.wwwwwwww...',
-    ],
-    palette: { y: '#f2c14e', Y: '#fff0a0', w: '#fdf6ec', b: '#5a92d4' },
-  },
-  eggs: {
-    rows: [
-      '............',
-      '..ee........',
-      '.eEEe..ee...',
-      'eEEEee.eEEe.',
-      'eEEEEeeEEEEe',
-      'eEEEEeeEEEEe',
-      'eEEEe.eEEEEe',
-      '.eee...eEEe.',
-      '........ee..',
-    ],
-    palette: { e: '#e8cfa8', E: '#fbf0dc' },
-  },
-  sugar: {
-    rows: [
-      '............',
-      '....wwww....',
-      '....wWWw....',
-      '....wWWw....',
-      '.wwwwwwwww..',
-      '.wWWwwWWWw..',
-      '.wWWwwWWWw..',
-      '.wwwwwwwww..',
-    ],
-    palette: { w: '#e6e0d6', W: '#ffffff' },
-  },
-  tea: {
-    rows: [
-      '..kkkkkkk...',
-      '..KKKKKKK...',
-      '..rrrrrrr...',
-      '..rRRRRRr...',
-      '..rRgGgRr...',
-      '..rRGgGRr...',
-      '..rRRgRRr...',
-      '..rRRRRRr...',
-      '..rrrrrrr...',
-      '..kkkkkkk...',
-    ],
-    palette: { k: '#8a6a2a', K: '#d9b04a', r: '#b5432c', R: '#d65a4a', g: '#4e8a4f', G: '#7fbf5e' },
-  },
-  spice: {
-    rows: [
-      '............',
-      '..nN........',
-      '..nNnN......',
-      '...nNnN.....',
-      '....nNnN....',
-      '.....nNnN...',
-      '......nNnN..',
-      '.......nNn..',
-      '..ss........',
-      '.sSSs.......',
-    ],
-    palette: { n: '#8a4a20', N: '#c47a3a', s: '#6b3f26', S: '#a0602c' },
-  },
-  cream: {
-    rows: [
-      '............',
-      '........yy..',
-      '......yyYy..',
-      '....yyYYYy..',
-      '..yyYYYYYy..',
-      'yyYYYYYYYy..',
-      'YYoYYYYoYY..',
-      'YYYYYoYYYY..',
-      'YYYYYYYYYY..',
-    ],
-    palette: { y: '#e8b84a', Y: '#f6d45e', o: '#d9a038' },
-  },
+const INGREDIENT_ENVELOPES: Record<IngredientId, readonly [number, number]> = {
+  beans: [12, 10],
+  milk: [12, 10],
+  cocoa: [12, 10],
+  matcha: [12, 10],
+  fruit: [12, 10],
+  flour: [12, 10],
+  butter: [12, 9],
+  eggs: [12, 9],
+  sugar: [12, 8],
+  tea: [12, 10],
+  spice: [12, 10],
+  cream: [12, 9],
 };
+
+const INGREDIENT_ART = Object.fromEntries(
+  (Object.keys(INGREDIENT_ENVELOPES) as IngredientId[]).map(id => {
+    const [w, h] = INGREDIENT_ENVELOPES[id];
+    return [id, miniatureSource(ingredientMiniatureGrid(id), w, h)];
+  }),
+) as Record<IngredientId, { rows: string[]; palette: Palette }>;
 
 const ingredientCache = new Map<IngredientId, HTMLCanvasElement>();
 export function ingredientIcon(id: IngredientId): HTMLCanvasElement {
   let c = ingredientCache.get(id);
   if (!c) {
-    c = pixelSprite(INGREDIENT_ART[id].rows, INGREDIENT_ART[id].palette);
+    const art = INGREDIENT_ART[id];
+    c = ingredientMiniature(id, Math.max(...art.rows.map(row => row.length)), art.rows.length);
     ingredientCache.set(id, c);
   }
   return c;
@@ -1706,67 +1044,29 @@ export function ingredientIcon(id: IngredientId): HTMLCanvasElement {
 
 // ---------------------------------------------------------------- upgrades
 
-const UPGRADE_ART: Record<Exclude<UpgradeId, 'barista' | 'server' | 'cook'>, { rows: string[]; palette: Palette }> = {
-  marketing: {
-    rows: [
-      '.kkkkkkkkkk.',
-      '.kGGGGGGGGk.',
-      '.kGwwwGGGGk.',
-      '.kGGGGwwGGk.',
-      '.kGwwGGGGGk.',
-      '.kGGGGGGGGk.',
-      '.kkkkkkkkkk.',
-      '..K......K..',
-      '.K........K.',
-      'K..........K',
-    ],
-    palette: { k: '#a46d41', K: '#7f5232', G: '#2f4f3a', w: '#f4ece0' },
-  },
-  machine: {
-    rows: [
-      'LLLLLLLLLLLL',
-      'LmmmmmmmmmmL',
-      'LLLLLLLLLLLL',
-      'LllllllllllL',
-      'Ll.kk..kk.lL',
-      'Ll..k...k.lL',
-      'Ll.ww.....lL',
-      'Ll.ww...r.lL',
-      'LLLLLLLLLLLL',
-    ],
-    palette: { L: '#8796a0', l: '#b6c3cb', m: '#e2e9ec', k: '#3a3f44', w: '#fdf6ec', r: '#e2434b' },
-  },
-  tables: {
-    rows: [
-      '...ww.......',
-      '.kkkkkkkkkk.',
-      'kKKKKKKKKKKk',
-      '.kkkkkkkkkk.',
-      '.....KK.....',
-      '.....KK.....',
-      '.....KK.....',
-      '...KKKKKK...',
-    ],
-    palette: { k: '#c28a52', K: '#7f5232', w: '#fdf6ec' },
-  },
-};
+const UPGRADE_ENVELOPES = { marketing: [12, 10], machine: [12, 9], tables: [12, 8] } as const;
 
+const upgradeCache = new Map<UpgradeId, HTMLCanvasElement>();
 export function upgradeIcon(id: UpgradeId): HTMLCanvasElement {
+  const cached = upgradeCache.get(id); if (cached) return cached;
   if (id === 'barista' || id === 'server' || id === 'cook') {
     const full = character({ skin: id === 'server' ? 2 : id === 'cook' ? 1 : 0, hair: id === 'server' ? 0 : 1, hairStyle: 1, shirt: 0, pants: 0 }, id).stand;
     const c = document.createElement('canvas');
     c.width = full.width;
     c.height = HEAD_ROWS + 2;
     c.getContext('2d')!.drawImage(full, 0, 0);
+    upgradeCache.set(id, c);
     return c;
   }
-  const art = UPGRADE_ART[id];
-  return pixelSprite(art.rows, art.palette);
+  const [width, height] = UPGRADE_ENVELOPES[id];
+  const canvas = upgradeMiniature(id, width, height);
+  upgradeCache.set(id, canvas);
+  return canvas;
 }
 
 // ---------------------------------------------------------------- the café cat
 
-const CAT_PALETTE: Palette = { o: '#ef9f4c', O: '#f8c27e', d: '#c06a2c', e: '#2a1a1f', n: '#f08f8f', W: '#fdf1e0', w: '#e9d6bd' };
+const CAT_PALETTE: Palette = { o: '#d99954', O: '#f1bd78', d: '#9b633b', e: '#39281f', n: '#cc8373', W: '#f4e6c7', w: '#ccb99a', p: '#e7a495', l: '#ffdab0' };
 const CAT_COATS: Record<CatId, Palette> = {
   ginger: CAT_PALETTE,
   tuxedo: { ...CAT_PALETTE, o: '#41434b', O: '#686977', d: '#252831', e: '#a9c982' },
@@ -1781,19 +1081,20 @@ const CAT_COATS: Record<CatId, Palette> = {
   persian: { ...CAT_PALETTE, o: '#efc9a1', O: '#ffe8c8', d: '#c59174', W: '#fff0d8', w: '#dfb58f', e: '#967237' },
   mainecoon: { ...CAT_PALETTE, o: '#867060', O: '#ac9279', d: '#493e39', W: '#ccb89b', w: '#aa927b', e: '#d6bc63' },
 };
+// Rounded cheeks, inner ears, two separate front paws and a curled haunch.
 const CAT_BASE = [
   '.d......d.......',
-  '.dd....dd.......',
-  '.dOoooooo.......',
-  '.oOdooodo.......',
+  '.dp....pd.......',
+  '.oOOooodo.......',
+  'ooOdooodoo......',
   '.ooeoooeo.......',
-  '.oooWnWoo.......',
+  '.ooWWnWWo.......',
   '..oWWWWo........',
-  '..oooooo........',
-  '.ooWWWWoo.......',
-  'ooWWWWWWoo......',
-  'oowwWWwwoooo....',
-  '.oooooooooooo...',
+  '..OowWoo........',
+  '.oOWWWWoo.......',
+  'ooOWWWWWoo......',
+  'ooWWoWWwodoo....',
+  '.wWWowWWoddoo...',
 ];
 const withTail = (rows: string[], tail: [number, number][]) =>
   rows.map((r, y) => [...r].map((ch, x) => (tail.some(([tx, ty]) => tx === x && ty === y) ? 'd' : ch)).join(''));
@@ -1821,21 +1122,26 @@ export const catFrames = (() => {
     if (cached) return cached;
     const palette = CAT_COATS[coat];
     const body = CAT_BASE.map((row, y) => [...row].map((ch, x) => {
-      if (coat === 'calico' && ch === 'o' && ((x < 4 && y < 6) || (x > 5 && y > 7))) return 'O';
+      if (coat === 'calico' && ch === 'o' && ((x < 4 && y < 5) || (x > 6 && y > 7))) return 'O';
+      if (coat === 'calico' && ch === 'o' && x > 6 && y < 5) return 'd';
+      if (coat === 'tuxedo' && ch === 'o' && x === 5 && y < 4) return 'W';
+      if (coat === 'ginger' && ch === 'o' && y === 7 && x > 5) return 'd';
       if (['tabby', 'american', 'mainecoon'].includes(coat) && ch === 'o' && ((y === 3 && x % 2 === 0) || (y >= 7 && x % 3 === 0))) return 'd';
       if (['siamese', 'ragdoll'].includes(coat) && ch === 'o' && y < 6) return 'd';
       return ch;
     }).join(''));
     if (['ragdoll', 'persian', 'mainecoon'].includes(coat)) {
-      body[6] = '.ooWWWWoo.......';
-      body[7] = 'oOoWWWWoOo......';
-      body[8] = 'ooWWWWWWoo......';
-      body[9] = 'oOWWWWWWOoo.....';
+      body[6] = 'ooOWWWWoo.......';
+      body[7] = '.oOWWWWwOo......';
+      body[8] = 'oOWWWWWWoo......';
+      body[9] = 'oOWwWWWwOoo.....';
     }
-    if (coat === 'british' || coat === 'persian') body[3] = 'ooOooooooo......';
+    if (coat === 'british' || coat === 'persian') { body[3] = 'oOOooooooo......'; body[7] = '.oOoooooo.......'; }
+    if (coat === 'persian') body[5] = '.oWWWnWWW.......';
+    if (coat === 'siamese') { body[2] = '.dOooooOd.......'; body[6] = '..wWWWWw........'; }
     if (coat === 'mainecoon') { body[0] = 'dd......dd......'; body[1] = '.dd....dd.......'; }
-    const idle = withTail(body, [[12, 10], [13, 9], [13, 8], [14, 7]]);
-    const swish = withTail(body, [[12, 10], [13, 10], [14, 10], [15, 9]]);
+    const idle = withTail(body, [[12, 10], [13, 9], [13, 8], [14, 7], [15, 7]]);
+    const swish = withTail(body, [[12, 10], [13, 10], [14, 10], [15, 9], [15, 8]]);
     // Expressions replace only the eyes/mouth, preserving each coat's markings.
     const edit = (rows: readonly string[], changes: readonly [number, number, string][]) => {
       const grid = rows.map(row => [...row]);
@@ -1865,29 +1171,45 @@ export const catFrames = (() => {
     const blank = '................';
     const walking = quadruped([
       blank, blank, blank, blank, blank, blank,
-      '........ooooo...', '.....ooooOOood..', '...ooWWWWoooood.',
-      '...oowwwwwoood..', '...wo....ow.od..', '...ww....ww.....',
+      '.......oOOooo...', '.....ooOOooodd..', '...ooWWWWoooo.d.',
+      '...oWWwwwwooo.d.', '...wo....ow..d..', '..WWW....WW.....',
     ], 2, false);
-    const walkA = edit(walking, [[3, 10, 'wo....ow.'], [2, 11, 'ww.....ww...']]);
-    const walkB = edit(walking, [[3, 10, '.wo..ow..'], [2, 11, '...ww.ww....']]);
+    const walkA = edit(walking, [[3, 10, 'wo....ow.'], [2, 11, 'WW.....WW...']]);
+    const walkB = edit(walking, [[3, 10, '.wo..ow..'], [2, 11, '...WW.WW....']]);
     const sleep = quadruped([
       blank, blank, blank, blank, blank, blank,
-      '.........oooo...', '.......ooOOooo..', '......ooWWooooo.',
-      '....oooWWoooooo.', '..oooWWoooooodd.', '..wwwwdddddddd..',
+      '.........OOoo...', '.......oOOoooo..', '......oOWWooooo.',
+      '....oOOWWoooodo.', '..oWWWWoooooOdd.', '..wWWWdddddddd..',
     ], 4, true);
     const stretch = quadruped([
-      blank, blank, blank, blank, blank, '..........ooo...',
-      '........ooOOood.', '.......ooWWoo.d.', '......ooWWoo..d.',
-      '.....ooWWwo...d.', '...oWWw..ow.....', '.wwwww...www....',
+      blank, blank, blank, blank, blank, '..........OOo...',
+      '........oOOoood.', '.......oOWWoo.d.', '......oOWWoo..d.',
+      '.....oWWWWo...d.', '...oWWW..ow.....', '.wWWWW...WWW....',
     ], 3, true);
-    // Four extra rows raise the head while keeping the original paws/haunches
-    // on the ground. Retain the breed's ears, cheek fluff and face markings.
-    const tallBody = [...body.slice(0, 7), body[6], body[7], body[7], body[8], ...body.slice(7)];
+    // Raised interaction is a rising chest, not a lengthened neck. The head
+    // stays high enough to meet the guest's hand; shoulders broaden directly
+    // below the jaw, two forelegs descend separately, and a shaded side
+    // haunch carries the weight. Last two paw rows keep their exact anchor.
+    const chest = [
+      '.oOWWWWoo.......',
+      '.oOWWWWWOo......',
+      'ooOWWWWWOoo.....',
+      'oOWWwWWwoOoo....',
+      'ooWWoWWwoOoo....',
+      'ooWWoWWwoooo....',
+      '.owWoWWwwoo.....',
+    ].map((row, y) => [...row].map((ch, x) => {
+      if (coat === 'calico' && ch === 'o' && x > 8) return 'O';
+      if (['tabby', 'american', 'mainecoon'].includes(coat) && ch === 'o' && (x + y) % 3 === 0) return 'd';
+      if (['siamese', 'ragdoll'].includes(coat) && ch === 'w' && y > 3) return 'd';
+      return ch;
+    }).join(''));
+    const tallBody = [...body.slice(0, 7), ...chest, ...body.slice(10)];
     const raised = withTail(tallBody, [[12, 14], [13, 13], [13, 12], [14, 11]]);
     const lookUp = edit(raised, [[3, 4, 'o'], [7, 4, 'o'], [3, 3, 'e'], [7, 3, 'e'], [5, 5, 'W'], [5, 4, 'n']]);
     const nuzzleA = edit(raised, [[3, 4, 'd'], [7, 4, 'd'], [5, 6, 'e']]);
     const nuzzleB = nuzzleA.map((row, y) => y < 7 ? '.' + row.slice(0, -1) : row);
-    const paint = (rows: string[]) => pixelSprite(rows, palette);
+    const paint = (rows: string[]) => pixelSprite(rows, palette, OUTLINE);
     const frames: CatFrames = {
       idle: paint(idle), swish: paint(swish), blink: paint(blink), happy: paint(happy),
       walk: [paint(walkA), paint(walkB)], sleep: paint(sleep),
@@ -1906,15 +1228,12 @@ const lazySprite = (rows: string[], palette: Palette) => {
   return () => (c ??= pixelSprite(rows, palette));
 };
 
-export const heartSprite = lazySprite(['.rr.rr.', 'rRrrrrr', 'rrrrrrr', '.rrrrr.', '..rrr..', '...r...'], {
-  r: '#ef5d7a',
-  R: '#ffb3c1',
+export const heartSprite = lazySprite(['.rr.rr.', 'rRRrrrs', 'rRrrrss', '.rrrss.', '..rss..', '...s...'], {
+  r: '#c96761', R: '#f4b29b', s: '#9d4f49',
 });
-export const dropSprite = lazySprite(['..b..', '.bbb.', 'bBbbb', 'bbbbb', '.bbb.'], { b: '#6fa8e8', B: '#d7ecff' });
-export const crownSprite = lazySprite(['y..y..y', 'yy.y.yy', 'yyyyyyy', 'yRyByRy'], {
-  y: '#f2c14e',
-  R: '#e2434b',
-  B: '#5b93d1',
+export const dropSprite = lazySprite(['..b..', '.Bbb.', 'bBbbs', 'bbbss', '.sss.'], { b: '#81aeb4', B: '#deeee0', s: '#537982' });
+export const crownSprite = lazySprite(['Y..Y..Y', 'yY.Y.Yy', 'yYyyyyy', 'yRyByRy'], {
+  y: '#c8a15e', Y: '#f0ce85', R: '#ba5d50', B: '#627451',
 });
 
 export function toDataURL(canvas: HTMLCanvasElement, scale: number): string {

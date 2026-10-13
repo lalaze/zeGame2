@@ -1,0 +1,339 @@
+{
+  "identities": 29,
+  "frames": 435,
+  "expectedFrames": 435,
+  "errors": [],
+  "allChecksPassed": true,
+  "checks": [
+    "exact identity metadata",
+    "15-state pose key coverage",
+    "one shared sheet scale",
+    "byte-equal source RGBA crops",
+    "alpha>128 bbox",
+    "real transparent/opaque alpha extrema",
+    "anchor bounds",
+    "unique frame pixels"
+  ],
+  "scope": "Metadata and source integrity; visual sheet inspection recorded separately; no runtime rendering claim",
+  "cast": [
+    {
+      "id": 1,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "739c33b0094986948ca6a328a7ae804ad9dbfd33b169c8f369723e5015f79364",
+      "oneSharedScale": 0.08695652173913043,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 2,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "d2c3fe62d8a6b7b2793a065984b70ad62315087ade4943e1ed1cd7cc766753f9",
+      "oneSharedScale": 0.08832807570977919,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 3,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "101ee6969f34bfcd0e987e0e726baa4a06c01f522a0994203b01b1ccc46194e1",
+      "oneSharedScale": 0.08383233532934131,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 4,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "2b2e86c23cc1ee3af25a5cd4a1181f3d9ea5e0868c92d7a21d0d75fa8b37578d",
+      "oneSharedScale": 0.09180327868852459,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 5,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "bd529d97790e2c031b1e95bd2d782e046b4e2c1a738ad0eec8f0b9cef48bc78e",
+      "oneSharedScale": 0.09271523178807947,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 6,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "b8eee79b91676c3250ec6b715bc8e48052454483ae184ae17107275e8e17556e",
+      "oneSharedScale": 0.08668730650154799,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 7,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "c23a1b64ff07fa213c2e8c2b3c26e405aca8a6499dac3b793e99629f13850c17",
+      "oneSharedScale": 0.09061488673139159,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 8,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "0ea85b952bf8a5d6ecbbce8af9d5c55f80a5e02abe96dfed5d606bc759864bf1",
+      "oneSharedScale": 0.08722741433021806,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 9,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "8016eb4bdc1d19546f5a3da76516a9b79f69fedb52624f098315694ee31e7007",
+      "oneSharedScale": 0.08945686900958466,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 10,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "8bda3eb9e5ef953ccf056cd3933ece20611b001ba84bf147b421812a6e9f9788",
+      "oneSharedScale": 0.08832807570977919,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 11,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "7f0f2c2364e86bea1ce5a20c2864fadd0d4089c44230213fd50393fb266db706",
+      "oneSharedScale": 0.08408408408408409,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 12,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "398c158eb41683f94c6c967f833c9681bdeb33182dce9fe581748b31dc904b5d",
+      "oneSharedScale": 0.09180327868852459,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 13,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "9c77563c875c82d38b956c529e73d7ce98bc864e839d3402c56e8c9de9ffa0dc",
+      "oneSharedScale": 0.08860759493670886,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 14,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "e3b0967ee8725248e1c35a369de7eac47e8908611a9ad2764a090f16e41d445b",
+      "oneSharedScale": 0.08945686900958466,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 15,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "abea5bcde71bf29172019158b86fe2d898fd166733ce01b29f368306cb8d577a",
+      "oneSharedScale": 0.0877742946708464,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 16,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "2736ca878fc6320a2f6eebd331d90b73f6db3fcf3ed28e23865989636dae13a2",
+      "oneSharedScale": 0.09180327868852459,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 17,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "57fd8a6716658351e7224f2578dc1c5a3151a3fae151f745a3b07ac9863d6a3b",
+      "oneSharedScale": 0.08588957055214724,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 18,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "100e941eb9eccb22c971b417c18e2cfd66185d0521c9bd205ef521102cf826bf",
+      "oneSharedScale": 0.08695652173913043,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 19,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "19d36268e2b6a0ad3481574eb28a3d843ba621fc0728ea68b299a474a32cb18c",
+      "oneSharedScale": 0.08722741433021806,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 20,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "bd77b15f3363d677e6f55f1098ae85acaa98177279aea55e79cc7166e048e9b6",
+      "oneSharedScale": 0.08668730650154799,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 21,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "a2326ef091e22ffe433f1f264b2aff7afa3fcdee8fcd9eb28934aad2262d343d",
+      "oneSharedScale": 0.08888888888888889,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 22,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "edcc1c33fd16661fcb4f9e5371feabc54197e38c17c0616f2d0a7f4fe989e687",
+      "oneSharedScale": 0.0877742946708464,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 23,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "34ecd536ba96b5a13e759831829ceef9423b4d8acbfb123020673cfe973d2d04",
+      "oneSharedScale": 0.0851063829787234,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 24,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "fb5005d18a98e3a296d8e60d0b20db23d659612cb110e1654de00634d1ae6b23",
+      "oneSharedScale": 0.09427609427609428,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 25,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "b78db9b563b7013e80a00b662970eda7c49757e292d02a08e29ab4640bf7fd28",
+      "oneSharedScale": 0.0877742946708464,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 26,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "3665f7807cbf7ed94e4c6bf287900d4715305f0f0a217eafd64955ec43862e1f",
+      "oneSharedScale": 0.0851063829787234,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 27,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1620
+      ],
+      "sourceSHA256": "0602f3629e0ad0674f154d469d65e0d6462ccf9616b6aed1837bdfe739a45d7b",
+      "oneSharedScale": 0.08536585365853659,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 28,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "b011db10f082b6afc81939d10fec29f451d98ae6469fd7e18266a138abc68e43",
+      "oneSharedScale": 0.09003215434083602,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    },
+    {
+      "id": 29,
+      "frames": 15,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "sourceSHA256": "81bbec88d1c3e19745bee4eeb0a661f6af7082d4f1c18be8419790af8574087c",
+      "oneSharedScale": 0.09210526315789473,
+      "status": "source visually reviewed; lossless crops audited; runtime pending"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": 2,
+  "name": "花店姑娘",
+  "look": {
+    "skin": 2,
+    "hair": 0,
+    "hairStyle": 0,
+    "shirt": 2,
+    "pants": 1
+  },
+  "hairstyle": 4,
+  "outfit": "overalls",
+  "accessory": "bow",
+  "accent": "#d58e98",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#b67c55",
+    "hair": "#594237",
+    "shirt": "#8ba477",
+    "pants": "#85664f"
+  },
+  "hatPalette": "#cf929e",
+  "description": "Fixed customer cast 2 (花店姑娘): warm skin #b67c55; hair #594237 in a long narrow tied BRAID down the back, cream-and-gold tie near nape, side-swept fringe; braid visible behind neck from side. Outfit: #85664f full trousers-overalls with bib, shoulder straps and small cream bib pocket, worn over #8ba477 long-sleeve shirt; genuine customer overalls, no service apron. Lower clothing color #85664f; warm dark brown leather shoes. Accent #d58e98. A visible #d58e98 hair bow attached at side/back, preserved in every angle and pose."
+}

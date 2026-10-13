@@ -1,0 +1,57 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> tiny-bean-cafe@0.1.0 prebuild
+> node scripts/subset-font.mjs
+
+src/assets/pixel-zh.woff2: 1410 glyphs, 44.8 KB
+
+> tiny-bean-cafe@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.3 building client environment for production...
+transforming...
+✓ 128 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/sprite-preview.html                                           3.86 kB │ gzip:   2.15 kB
+dist/assets/pixelify-sans-cyrillic-400-normal-DfOZNMlW.woff        4.41 kB
+dist/assets/pixelify-sans-cyrillic-600-normal-B3EuUOZG.woff        4.47 kB
+dist/assets/pixelify-sans-latin-ext-400-normal-DdH6zlBQ.woff2      5.36 kB
+dist/assets/pixelify-sans-latin-ext-600-normal-Dha6RiOG.woff2      5.56 kB
+dist/assets/pixelify-sans-latin-ext-400-normal-BkfTUL4s.woff       7.44 kB
+dist/assets/pixelify-sans-latin-ext-600-normal-CDaIumwU.woff       7.65 kB
+dist/assets/pixelify-sans-latin-400-normal-DLrIX9QE.woff2          7.69 kB
+dist/assets/pixelify-sans-latin-600-normal-Dd_Dy7u5.woff2          8.21 kB
+dist/index.html                                                    8.28 kB │ gzip:   2.33 kB
+dist/assets/pixelify-sans-latin-400-normal-JapMNN6Z.woff          10.26 kB
+dist/assets/pixelify-sans-latin-600-normal-BNlgYbDL.woff          10.77 kB
+dist/assets/pixel-zh-FEzZjWD0.woff2                               45.84 kB
+dist/assets/game-DegZ4Mf4.css                                     77.30 kB │ gzip:  21.89 kB
+dist/assets/artwork-DtQQfdg3.js                                    8.86 kB │ gzip:   3.98 kB
+dist/assets/game-BFPU8psV.js                                     251.97 kB │ gzip:  84.25 kB
+dist/assets/region-art-CpD9fzaW.js                               403.85 kB │ gzip: 147.31 kB
+dist/assets/phaser-D8EC1TLR.js                                 1,374.10 kB │ gzip: 357.33 kB
+
+✓ built in 880ms
+vite v8.3.3 building client environment for production...
+transforming...
+✓ 86 modules transformed.
+rendering chunks...
+computing gzip size...
+docs/pixel-depth/replay-dist/index.html                                                              1.66 kB │ gzip:   0.84 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/pixelify-sans-cyrillic-400-normal-DfOZNMlW.woff        4.41 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/pixelify-sans-latin-ext-400-normal-DdH6zlBQ.woff2      5.36 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/pixelify-sans-latin-ext-400-normal-BkfTUL4s.woff       7.44 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/pixelify-sans-latin-400-normal-DLrIX9QE.woff2          7.69 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/pixelify-sans-latin-400-normal-JapMNN6Z.woff          10.26 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/pixel-zh-FEzZjWD0.woff2                               45.84 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/index-CdYWV5SP.css                                     6.43 kB │ gzip:   4.23 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/index-ChGnE4_b.js                                  1,880.26 kB │ gzip: 540.15 kB
+
+✓ built in 894ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 1600 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Published only dist/qa-replay. Open /qa-replay/?qa-light=10.

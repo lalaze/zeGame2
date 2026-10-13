@@ -1,0 +1,25 @@
+{
+  "id": 28,
+  "name": "紫苏小领衫",
+  "look": {
+    "skin": 3,
+    "hair": 0,
+    "hairStyle": 1,
+    "shirt": 4,
+    "pants": 2
+  },
+  "hairstyle": 1,
+  "outfit": "sailor",
+  "accessory": "headband",
+  "accent": "#eeddb6",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#80533f",
+    "hair": "#594237",
+    "shirt": "#9b87af",
+    "pants": "#585464"
+  },
+  "hatPalette": "#e5d7ba",
+  "description": "Fixed customer cast 28 (紫苏小领衫): warm skin #80533f; hair #594237 in a compact high tied bun with a small cream-and-gold tie, loose wisps near ears. Outfit: #9b87af sailor top with wide cream sailor collar, #eeddb6 necktie and tiny gold knot. Lower clothing color #585464; warm dark brown leather shoes. Accent #eeddb6. An #eeddb6 narrow headband crossing the crown, preserved in every pose."
+}

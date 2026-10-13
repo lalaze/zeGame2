@@ -1,0 +1,25 @@
+{
+  "id": 25,
+  "name": "雾蓝发辫",
+  "look": {
+    "skin": 2,
+    "hair": 0,
+    "hairStyle": 0,
+    "shirt": 1,
+    "pants": 2
+  },
+  "hairstyle": 4,
+  "outfit": "cardigan",
+  "accessory": "bow",
+  "accent": "#cea0ac",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#b67c55",
+    "hair": "#594237",
+    "shirt": "#799ba7",
+    "pants": "#585464"
+  },
+  "hatPalette": "#9b87af",
+  "description": "Fixed customer cast 25 (雾蓝发辫): warm skin #b67c55; hair #594237 in a long narrow tied BRAID down the back, cream-and-gold tie near nape, side-swept fringe; braid visible behind neck from side. Outfit: #799ba7 open cardigan over a cream shirt, small gold buttons. Lower clothing color #585464; warm dark brown leather shoes. Accent #cea0ac. A visible #cea0ac hair bow attached at side/back, preserved in every angle and pose."
+}

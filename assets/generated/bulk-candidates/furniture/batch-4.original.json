@@ -1,0 +1,88 @@
+[
+  {
+    "id": "art_bean",
+    "logical": [
+      26,
+      22
+    ],
+    "surface": "wall",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One horizontal dark walnut frame containing a cream vintage botanical PRINT of one large rich-brown coffee bean with curved center crease, tiny green coffee sprig and two terracotta coffee cherries below. Complete frame ratio26:22. No text, no typography. Outside frame transparent.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-96746f93-5257-4fd8-b507-f4b5fbaf46fc.png"
+  },
+  {
+    "id": "art_starry",
+    "logical": [
+      26,
+      22
+    ],
+    "surface": "wall",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One horizontal gilt-walnut frame containing a miniature NIGHT LANDSCAPE painting: muted indigo sky, soft pale crescent moon, a few tiny static star specks, winding blue cloud band, distant village roofs and dark slender cypress silhouette. Complete frame ratio26:22. No exterior glow; game may add twinkle overlay later. No text.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-0b6a6033-a944-427e-8220-4597e3063c46.png"
+  },
+  {
+    "id": "lantern",
+    "logical": [
+      12,
+      24
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One freestanding antique brass lantern with small closed ring handle at top, pagoda cap, tall cream glass body revealing a single pale candle and tiny warm flame, brass vertical frame ribs and stepped base. Complete width:height1:2. No glowing halo or ground shadow.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-39cbe402-95e9-40fd-85e4-131727468fe5.png",
+    "revisionPrompt": "Edit this lantern only to make it UNLIT. Remove the candle flame, hot glowing halo and bright emitted interior light; leave one cream unlit candle with short dark wick visible behind clear lightly cream-tinted glass. Keep all brass geometry, ring handle, cap, glass reflection clusters, frame, base, silhouette, perspective, and source scale unchanged. Warm upper-left ambient highlights only, no emitted light. Genuine transparent alpha outside lantern. No background or exterior glow.",
+    "rejectedSource": "/workspace/scratch/30a3201ff9cd/generated_images/exec-0ffedf74-17ac-4ee3-a86d-a56e14e5b1da.png"
+  },
+  {
+    "id": "bean_display",
+    "logical": [
+      22,
+      24
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One compact walnut coffee-bean display stand: low carved plinth on short feet with three sealed upright kraft paper coffee bags of varied heights. Every bag has a BLANK cream label with only one tiny coffee-bean pictogram, no letters. Front plinth has narrow brass ornament. Complete ratio22:24. No countertop or surrounding display.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-f8647028-5a57-47ff-a9e7-6c310abb8270.png"
+  },
+  {
+    "id": "sideboard",
+    "logical": [
+      30,
+      26
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One walnut cafe sideboard with two paneled doors, small brass handles, molded top edge and short legs. On top only: a small orderly stack of cream plates at left and one small sage ceramic bowl at right. Complete ratio30:26. No text, no attached wall.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-a32a171f-6e0e-4090-9bd8-4d0357e32a7e.png"
+  },
+  {
+    "id": "display_cabinet",
+    "logical": [
+      24,
+      36
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One tall narrow carved walnut display cabinet with two glass doors, brass handles/hinges, crown molding, short legs and recessed lower apron. Inside three shelves of cream ceramic teacups and saucers, subdued sage backing. Glass doors have a few crisp reflection clusters. Complete width:height2:3. No readable labels or exterior props.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-f270b1ea-19a1-4fe9-ad17-b4bfb7170225.png",
+    "revisionPrompt": "Edit ONLY the contents of this cabinet: remove ALL cups, saucers, plates, pottery, food, stock and small props from all three inside shelves. Leave each shelf completely EMPTY with visible muted sage back panel. Keep the full walnut cabinet shape, wood grain, brass handles, glass door frames and reflections, feet, perspective and scale exactly unchanged. Transparent alpha outside cabinet. No surrounding halo or shadow. This is an empty storage body for inventory drawn separately.",
+    "rejectedSource": "/workspace/scratch/30a3201ff9cd/generated_images/exec-4838b532-79e1-4fd3-92c0-a301d9608153.png"
+  },
+  {
+    "id": "magazine_rack",
+    "logical": [
+      16,
+      24
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One slim floor-standing walnut magazine rack with angled back, short feet, two front wooden crossbars and three overlapping thin magazines colored sage, ochre and terracotta. Magazine covers show only blank cream rectangles or geometric marks, NO text. Complete width:height2:3.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-40816760-b127-472b-95c3-9ceec9c18e67.png"
+  },
+  {
+    "id": "coffee_cart",
+    "logical": [
+      30,
+      28
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One compact antique walnut and brass coffee service cart, two side push handles and small visible caster wheels, two shelves. Top shelf carries a small muted-sage espresso machine with two cream cups and a neat stack of cream plates. Bottom shelf holds two small sealed coffee jars. Complete width:height30:28. Decorative fixed appliance, no text, no extra loose items outside cart.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-54b9bf7b-3104-4358-9cf9-a5fe44e1f530.png",
+    "revisionPrompt": "Edit ONLY the items carried on this cart: REMOVE the espresso machine, cups, plates, jars, coffee, all appliances and all stock from BOTH shelves. Both wood shelves must be fully EMPTY clean walnut surfaces. Keep the complete cart body, brass rails, two push handles, four wheels, walnut texture, perspective and scale unchanged. Genuine transparent alpha outside silhouette and between struts. No exterior shadow. Empty cart only for gameplay items drawn separately.",
+    "rejectedSource": "/workspace/scratch/30a3201ff9cd/generated_images/exec-c0974a83-6a0f-4b83-af45-feb928b804b5.png"
+  }
+]

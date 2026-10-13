@@ -1,0 +1,365 @@
+{
+  "assets": [
+    {
+      "name": "barista-down-stand",
+      "file": "barista-down-stand.png",
+      "source": "barista-poses-source.png",
+      "source_crop": [
+        151,
+        28,
+        320,
+        430
+      ],
+      "size": [
+        169,
+        402
+      ],
+      "body_bbox": [
+        12,
+        12,
+        157,
+        390
+      ],
+      "body_size": [
+        145,
+        378
+      ],
+      "foot_anchor_px": [
+        84.5,
+        389
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 18662,
+      "identity": "barista-default",
+      "direction": "down",
+      "state": "stand",
+      "pose": "idle",
+      "target_body_height": 28,
+      "integration_status": "candidate-awaits-runtime-review"
+    },
+    {
+      "name": "barista-down-stepA",
+      "file": "barista-down-stepA.png",
+      "source": "barista-poses-source.png",
+      "source_crop": [
+        547,
+        29,
+        722,
+        436
+      ],
+      "size": [
+        175,
+        407
+      ],
+      "body_bbox": [
+        12,
+        12,
+        163,
+        395
+      ],
+      "body_size": [
+        151,
+        383
+      ],
+      "foot_anchor_px": [
+        87.5,
+        394
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 21785,
+      "identity": "barista-default",
+      "direction": "down",
+      "state": "stepA",
+      "pose": "stride",
+      "target_body_height": 28,
+      "integration_status": "candidate-awaits-runtime-review"
+    },
+    {
+      "name": "barista-down-stepB",
+      "file": "barista-down-stepB.png",
+      "source": "barista-poses-source.png",
+      "source_crop": [
+        944,
+        28,
+        1121,
+        430
+      ],
+      "size": [
+        177,
+        402
+      ],
+      "body_bbox": [
+        12,
+        12,
+        165,
+        390
+      ],
+      "body_size": [
+        153,
+        378
+      ],
+      "foot_anchor_px": [
+        88.5,
+        389
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 23662,
+      "identity": "barista-default",
+      "direction": "down",
+      "state": "stepB",
+      "pose": "passing-knee",
+      "target_body_height": 28,
+      "integration_status": "candidate-awaits-runtime-review"
+    },
+    {
+      "name": "barista-up-stand",
+      "file": "barista-up-stand.png",
+      "source": "barista-poses-source.png",
+      "source_crop": [
+        150,
+        437,
+        317,
+        822
+      ],
+      "size": [
+        167,
+        385
+      ],
+      "body_bbox": [
+        12,
+        12,
+        155,
+        373
+      ],
+      "body_size": [
+        143,
+        361
+      ],
+      "foot_anchor_px": [
+        83.5,
+        372
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 16861,
+      "identity": "barista-default",
+      "direction": "up",
+      "state": "stand",
+      "pose": "idle",
+      "target_body_height": 28,
+      "integration_status": "candidate-awaits-runtime-review"
+    },
+    {
+      "name": "barista-up-stepA",
+      "file": "barista-up-stepA.png",
+      "source": "barista-poses-source.png",
+      "source_crop": [
+        531,
+        437,
+        711,
+        831
+      ],
+      "size": [
+        180,
+        394
+      ],
+      "body_bbox": [
+        12,
+        12,
+        168,
+        382
+      ],
+      "body_size": [
+        156,
+        370
+      ],
+      "foot_anchor_px": [
+        90.0,
+        381
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 23737,
+      "identity": "barista-default",
+      "direction": "up",
+      "state": "stepA",
+      "pose": "stride",
+      "target_body_height": 28,
+      "integration_status": "candidate-awaits-runtime-review"
+    },
+    {
+      "name": "barista-up-stepB",
+      "file": "barista-up-stepB.png",
+      "source": "barista-poses-source.png",
+      "source_crop": [
+        938,
+        437,
+        1121,
+        822
+      ],
+      "size": [
+        183,
+        385
+      ],
+      "body_bbox": [
+        12,
+        12,
+        171,
+        373
+      ],
+      "body_size": [
+        159,
+        361
+      ],
+      "foot_anchor_px": [
+        91.5,
+        372
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 23735,
+      "identity": "barista-default",
+      "direction": "up",
+      "state": "stepB",
+      "pose": "passing-knee",
+      "target_body_height": 28,
+      "integration_status": "candidate-awaits-runtime-review"
+    },
+    {
+      "name": "barista-right-stand",
+      "file": "barista-right-stand.png",
+      "source": "barista-poses-source.png",
+      "source_crop": [
+        130,
+        828,
+        321,
+        1230
+      ],
+      "size": [
+        191,
+        402
+      ],
+      "body_bbox": [
+        12,
+        12,
+        179,
+        390
+      ],
+      "body_size": [
+        167,
+        378
+      ],
+      "foot_anchor_px": [
+        95.5,
+        389
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 28301,
+      "identity": "barista-default",
+      "direction": "right",
+      "state": "stand",
+      "pose": "idle",
+      "target_body_height": 28,
+      "integration_status": "candidate-awaits-runtime-review"
+    },
+    {
+      "name": "barista-right-stepA",
+      "file": "barista-right-stepA.png",
+      "source": "barista-poses-source.png",
+      "source_crop": [
+        519,
+        834,
+        756,
+        1230
+      ],
+      "size": [
+        237,
+        396
+      ],
+      "body_bbox": [
+        12,
+        12,
+        225,
+        384
+      ],
+      "body_size": [
+        213,
+        372
+      ],
+      "foot_anchor_px": [
+        118.5,
+        383
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 36846,
+      "identity": "barista-default",
+      "direction": "right",
+      "state": "stepA",
+      "pose": "stride",
+      "target_body_height": 28,
+      "integration_status": "candidate-awaits-runtime-review"
+    },
+    {
+      "name": "barista-right-stepB",
+      "file": "barista-right-stepB.png",
+      "source": "barista-poses-source.png",
+      "source_crop": [
+        944,
+        828,
+        1138,
+        1230
+      ],
+      "size": [
+        194,
+        402
+      ],
+      "body_bbox": [
+        12,
+        12,
+        182,
+        390
+      ],
+      "body_size": [
+        170,
+        378
+      ],
+      "foot_anchor_px": [
+        97.0,
+        389
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26721,
+      "identity": "barista-default",
+      "direction": "right",
+      "state": "stepB",
+      "pose": "passing-knee",
+      "target_body_height": 28,
+      "integration_status": "candidate-awaits-runtime-review"
+    }
+  ],
+  "status": "default-owner-minimum-directions-walk-only"
+}

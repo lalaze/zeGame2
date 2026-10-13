@@ -12,8 +12,8 @@
   <header><small>TINY BEAN CAFÉ / ART COLLECTION</small><h1>小豆咖啡馆 · 素材图鉴</h1><p>暖木、奶油瓷器、鼠尾草绿与黄铜。游戏同源绘制的食物、人物、家具和房间素材；点击单张素材即可下载透明 PNG。</p><div class="downloads"><a id="archive">下载整包 ZIP</a><a id="sheet">下载完整 PNG 图集</a><a id="manifest">下载坐标 JSON</a><button id="background" aria-pressed="false">深色底预览</button></div><small id="count" role="status"></small></header>
   <nav id="filters" aria-label="素材分类"></nav><section id="gallery" class="gallery" aria-label="可下载素材"></section>
   <h2>空间与材质</h2><p>五个房间的固定日光预览，使用游戏内同一套绘制代码。点击房间可下载原尺寸背景。</p><section id="rooms" class="rooms"></section>
-  <h2>30 位常客</h2><p>8 种发型、10 种服装与专属配饰；每轮不重复出场。下方预览包括站立、行走和坐姿。</p>
-  <button id="motion">暂停走路</button><canvas id="cast" width="576" height="580" aria-label="30 位常客动态预览" style="display:block;width:100%;max-width:1152px;height:auto;image-rendering:pixelated;background:#f2e4ce"></canvas>
+  <h2>30 种顾客造型</h2><p>8 种发型、10 种服装与专属配饰；每轮不重复出场。下方预览包括站立、行走、坐姿与抚猫动作。12 位剧情熟客沿用各自固定造型。</p>
+  <button id="motion">暂停走路</button><canvas id="cast" width="576" height="580" aria-label="30 种顾客造型动态预览" style="display:block;width:100%;max-width:1152px;height:auto;image-rendering:pixelated;background:#f2e4ce"></canvas>
   <footer>PNG 使用透明底与整数像素；JSON 的 frame 是图集坐标，sourceSize 是原素材尺寸。此页面不读取或改写游戏存档。<a href="./">返回游戏</a></footer>
 </main><script type="module" src="/src/art-preview.ts"></script><script type="module">
 import { character } from './src/render/sprites.ts';

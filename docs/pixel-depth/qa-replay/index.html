@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mina + cat component replay</title>
+</head>
+<body>
+  <main>
+    <h1>Synthetic seeded component replay, not live player save</h1>
+    <p>Real CafeGame / CafeScene. Normal seeded simulation, frozen at a naturally reached pose. No save storage is read or written.</p>
+    <div class="controls" aria-label="Replay controls">
+      <button data-stop="idle" disabled>Seated idle · 8.65 s</button>
+      <button data-stop="nuzzleA" disabled>Nuzzle A · 16.90 s</button>
+      <button data-stop="nuzzleB" disabled>Nuzzle B · 17.55 s</button>
+      <button data-stop="petA" disabled>Pet A · 18.90 s</button>
+      <button data-stop="petB" disabled>Pet B · 19.55 s</button>
+      <button id="step" disabled>Step +0.05 s</button>
+      <button id="run" disabled>Run</button>
+      <button id="reset" disabled>Reset to Pet A</button>
+      <label><input id="reduced" type="checkbox" /> Reduced-motion pose (forces Pet A)</label>
+    </div>
+    <p id="loading" role="status">Loading the production renderer and current generated images…</p>
+    <div id="stage"><canvas id="cafe" aria-label="Synthetic Mina and Siamese cat replay"></canvas></div>
+    <pre id="status" aria-live="polite"></pre>
+    <p class="note">Simulation pause does not use the page’s modal-pause flag, which would force Pet A. Pet B is selected by the real interaction elapsed time. Ambient renderer effects may still animate. Use ?qa-light=10 for the production localhost daylight override.</p>
+  </main>
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

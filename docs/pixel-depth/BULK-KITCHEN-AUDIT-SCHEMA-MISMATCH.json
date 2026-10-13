@@ -1,0 +1,105 @@
+{
+  "scope": "File existence, dimensions, alpha bounds, exact source RGBA crop, duplicate pixel evidence only; no runtime or aesthetic pass",
+  "manifests": [
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-kitchen-v1/renderer-manifest.json",
+      "count": 18,
+      "assets": [
+        {
+          "id": "cooler",
+          "error": "'bbox'"
+        },
+        {
+          "id": "dryStore",
+          "error": "'bbox'"
+        },
+        {
+          "id": "handSink",
+          "error": "'bbox'"
+        },
+        {
+          "id": "mixer",
+          "error": "'bbox'"
+        },
+        {
+          "id": "proofer",
+          "error": "'bbox'"
+        },
+        {
+          "id": "pastryFridge",
+          "error": "'bbox'"
+        },
+        {
+          "id": "kettle",
+          "error": "'bbox'"
+        },
+        {
+          "id": "deckOven",
+          "error": "'bbox'"
+        },
+        {
+          "id": "convection",
+          "error": "'bbox'"
+        },
+        {
+          "id": "fryer",
+          "error": "'bbox'"
+        },
+        {
+          "id": "hood",
+          "error": "'bbox'"
+        },
+        {
+          "id": "hookup",
+          "error": "'bbox'"
+        },
+        {
+          "id": "bench",
+          "error": "'bbox'"
+        },
+        {
+          "id": "sheeter",
+          "error": "'bbox'"
+        },
+        {
+          "id": "standMixer",
+          "error": "'bbox'"
+        },
+        {
+          "id": "rack",
+          "error": "'bbox'"
+        },
+        {
+          "id": "bins",
+          "error": "'bbox'"
+        },
+        {
+          "id": "dishPit",
+          "error": "'bbox'"
+        }
+      ],
+      "errors": [
+        "cooler: 'bbox'",
+        "dryStore: 'bbox'",
+        "handSink: 'bbox'",
+        "mixer: 'bbox'",
+        "proofer: 'bbox'",
+        "pastryFridge: 'bbox'",
+        "kettle: 'bbox'",
+        "deckOven: 'bbox'",
+        "convection: 'bbox'",
+        "fryer: 'bbox'",
+        "hood: 'bbox'",
+        "hookup: 'bbox'",
+        "bench: 'bbox'",
+        "sheeter: 'bbox'",
+        "standMixer: 'bbox'",
+        "rack: 'bbox'",
+        "bins: 'bbox'",
+        "dishPit: 'bbox'"
+      ]
+    }
+  ],
+  "total_assets": 18,
+  "errors": 18
+}

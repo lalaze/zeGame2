@@ -4,16 +4,24 @@ import type Phaser from 'phaser';
 // those canvases into Phaser textures. Sprite canvases are cached by their makers,
 // so each one is uploaded once.
 
-const keys = new WeakMap<HTMLCanvasElement, string>();
+// A sprite may be shown by the game and an independent preview/game instance.
+// Texture keys belong to a manager; a global canvas-only cache can return a key
+// that was never uploaded in the second instance.
+const keys = new WeakMap<Phaser.Textures.TextureManager, WeakMap<HTMLCanvasElement, string>>();
 let next = 0;
 
 /** The texture key for a sprite canvas, registering it with Phaser the first time. */
 export function canvasKey(textures: Phaser.Textures.TextureManager, canvas: HTMLCanvasElement): string {
-  let key = keys.get(canvas);
-  if (!key) {
+  let canvases = keys.get(textures);
+  if (!canvases) {
+    canvases = new WeakMap<HTMLCanvasElement, string>();
+    keys.set(textures, canvases);
+  }
+  let key = canvases.get(canvas);
+  if (!key || !textures.exists(key)) {
     key = `canvas-${next++}`;
     textures.addCanvas(key, canvas);
-    keys.set(canvas, key);
+    canvases.set(canvas, key);
   }
   return key;
 }

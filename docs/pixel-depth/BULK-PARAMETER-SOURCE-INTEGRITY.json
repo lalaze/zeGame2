@@ -1,0 +1,1470 @@
+{
+  "scope": "File existence, dimensions, alpha bounds, exact source RGBA crop, duplicate pixel evidence only; no runtime or aesthetic pass",
+  "manifests": [
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/renderer-manifest.json",
+      "count": 9,
+      "assets": [
+        {
+          "id": "cook-style0/down-down-stand",
+          "size": [
+            176,
+            429
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "65e4a95f054de5ed7ac1b739015e08320765bb27226931e588a7c81653560e03",
+          "file_sha256": "192af1d017848a059b32db4c913675b9e138f973e94bc1c6d7731a522f440444",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style0/down-down-stepA",
+          "size": [
+            178,
+            433
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a4e8d58c6ebb1fbeab747ab33378ba487a215be8f10ecc2347554eae380b8d4a",
+          "file_sha256": "2d37bfe1308dc2a62fecfb5b375e7c01831984e0b7998f952d37cee8c3a7dec8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style0/down-down-stepB",
+          "size": [
+            184,
+            432
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c6953f1148900881c5196f30f24729e9e162ce76a859631cace506cba77d17ae",
+          "file_sha256": "82ac3e055e8cefa9bfffd6e6a464677f2e9b0a2a70fdc21fc6f3883534019c0b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style0/up-up-stand",
+          "size": [
+            177,
+            417
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e80eac7f10d759ac13d0d89b10443f067467c639071133105f380cfd5eee88fc",
+          "file_sha256": "7227c0ee92b425698c38431848c01380b799e3519b87050963c65ec6e5ff0341",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style0/up-up-stepA",
+          "size": [
+            189,
+            417
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d3cd57b27c5269dabe319b8dfdf106d84f1536773185d4e60de2bbcaa9cc5298",
+          "file_sha256": "febfadf7a65c1852437bac0e0259790d0c144e58a5a50222ee89732a5f620404",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style0/up-up-stepB",
+          "size": [
+            183,
+            414
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "472ddd38a0b458f792b1e6e33760af44e384d9a90a85887294a88cedca9edfe2",
+          "file_sha256": "0f0646be3057102b61b1f68cd222241161fb6db3db193447a3a493151e1542c6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style0/right-right-stand",
+          "size": [
+            196,
+            393
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cf74412fe322f569663452317873e2e28786c93efde40af48dae7adf625f0302",
+          "file_sha256": "1e2c8a85778d0ff2b465061a9f926d80606276ffa5a7d2d076db8f1b66a52601",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style0/right-right-stepA",
+          "size": [
+            246,
+            392
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e1e4a1357a767ccec762fc45d0c5c72e55c5a395a303962c04b3286ee330ca70",
+          "file_sha256": "0c5a29bb02acd833ee42db47465208549f5ff0348273de760c743f9403ef5b0d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style0/right-right-stepB",
+          "size": [
+            206,
+            393
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4b0c4464d9854a41d3603a719af750adb6c31123b59a43416a4af9fdab15454b",
+          "file_sha256": "58074341a9e845b0f3c43ed1cbd012edae8ba6f0952b20fb174f356dd42246e5",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style1/renderer-manifest.json",
+      "count": 9,
+      "assets": [
+        {
+          "id": "cook-style1/down-down-stand",
+          "size": [
+            175,
+            436
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b0682c7700591e96c13163ad9d32c69102f8c096a621cc724f2495f0f46dbf5c",
+          "file_sha256": "4022703d732628652e9819929ed4683e2afda1f7cec70edf5f82f7c36c159ab4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style1/down-down-stepA",
+          "size": [
+            188,
+            436
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e404a578a6f741002ff713ced338f38f009c6ba99eb4132549a120ab7d259444",
+          "file_sha256": "4782f35cbce60afec1219ecd62d0ff55382468abf4f195051f13b4ad6ea344ab",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style1/down-down-stepB",
+          "size": [
+            187,
+            436
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d0f630a3394edc4dc51218725e400d47cce668349dae0d5a86f3c63bfd9b01aa",
+          "file_sha256": "63a190a1e599b1763278f1579b02e3fd4447eef815f3203126eb5edae3fbfb0a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style1/up-up-stand",
+          "size": [
+            166,
+            405
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "30fd0d00ab118d637e8e866015e33d34efe831e3b5fc114a4f38a7241a0138cf",
+          "file_sha256": "e6ba004114d1b96b1883659d98c126b3a8c38a749729cf79011dae177d036236",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style1/up-up-stepA",
+          "size": [
+            184,
+            405
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "40f8b17ebfe78ecd1d8f479b049cceb3b7c448c4ab92b43f25b734dc33023a6e",
+          "file_sha256": "7a6f08eb65572e2d518f7cc58dbc1d41046be04534ae7182c4eda9c8bb139934",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style1/up-up-stepB",
+          "size": [
+            189,
+            405
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "935742f58350d035ec54e8459b91bf5fda824e859c727971c6ae4bbf17dad7ac",
+          "file_sha256": "51bf8fdfbc925ae74bef7ef7474de09697627127dcd61e1f3f9af6c6371eee93",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style1/right-right-stand",
+          "size": [
+            191,
+            412
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ec271340b833c7b72675c072ede203ca66c665c252133e6d59919dd5397e5eb9",
+          "file_sha256": "9cd2477cb63224163271b380f73125f8afab80276238ffc6a2835000e2feae66",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style1/right-right-stepA",
+          "size": [
+            254,
+            409
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "97e8c63ae833b14b54711064be0baac1be96595b5b905d03849c3b13c2a6c46b",
+          "file_sha256": "435d2342fb5a57831b9a66e31ebf6e32fcf6c585cb56ca9f9e5064c6f8ff3101",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style1/right-right-stepB",
+          "size": [
+            197,
+            412
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5eafb5d174c77a7491e8d91705bcd887b66da9cdbf646d42e672411584dbafab",
+          "file_sha256": "b0bbe50729b762ec2b8b9506943144876d02f735c81c7b5af9694514ef5e9047",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style2/renderer-manifest.json",
+      "count": 9,
+      "assets": [
+        {
+          "id": "cook-style2/down-down-stand",
+          "size": [
+            203,
+            424
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "05261dcbad8c03dd1df410f1cafc45cd96fc397021685c90acb9238ff691df34",
+          "file_sha256": "49bcf86ba760179f9f0b9cca9df03f03119caca9376620818274e7cffe9388cb",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style2/down-down-stepA",
+          "size": [
+            210,
+            424
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0a6926c6154d8f1c9d4a685072a60d68fb97a76a76083396b74d5b2679b4bb0e",
+          "file_sha256": "0a49644a6880f2c7b3fb4f09aea128284bf6aa4bf9d8c4f06b134b5e2f19f92d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style2/down-down-stepB",
+          "size": [
+            213,
+            424
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "96ff0f582311f1f78a316785af376704e7b03e906ced181071c3fe04a90e5dcd",
+          "file_sha256": "1408a6f45f5bd7e524504047b8de38a7b133400d2f80c7370bfc695c62557010",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style2/up-up-stand",
+          "size": [
+            207,
+            405
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5f4561881ce3050325b162ec1b2206a681b203d0dc514674cf140c191715efe9",
+          "file_sha256": "8a2aa30a346e6ff074e03666544b40b68b04732661c10996b8fef14c4ea4d0a2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style2/up-up-stepA",
+          "size": [
+            212,
+            405
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6f26791c99c2c4cfbc35ee3f18ab99cb3449ebdcc26dd30061d0e914b1058b54",
+          "file_sha256": "8be89b07de420ed3b31aee86a2d202a992d086c5f611551d10166050f68e4c5d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style2/up-up-stepB",
+          "size": [
+            216,
+            405
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ea232912ba1e7754666cd15d2118a2d387a0158fdd4c765eea51b01902116aaf",
+          "file_sha256": "ca94f430f4df5f7714d45edabde504cc69788d25532e11eff6c03eb38ecd47ff",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style2/right-right-stand",
+          "size": [
+            209,
+            402
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "21bac698628b788712288509f36dc1cc591497da12a4e3177aec72e42cfafe64",
+          "file_sha256": "3743f97232da7faea130cc0f8dd14a59bab349586b28502acf0f03e50515cdad",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style2/right-right-stepA",
+          "size": [
+            236,
+            399
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5d6124751b329b558f2943b1b2f30ce4241805d4618a1e1c0d1b42d6f2ee1e3c",
+          "file_sha256": "ce8d88499577df3009ad0cb0eb06edd6a60a2face4f5aeac991398f034b5045c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cook-style2/right-right-stepB",
+          "size": [
+            213,
+            403
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3f5c0243bdd17a95aee138a926ece6811e40440a14760bad42e405dedabae74a",
+          "file_sha256": "81d1ab8a81621cfa1897cdf427127815a88f27ad249fec90dbbde9a543217715",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/server-style0/renderer-manifest.json",
+      "count": 9,
+      "assets": [
+        {
+          "id": "server-style0/down-down-stand",
+          "size": [
+            182,
+            406
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c7f0a4d017dc5f4ede5412eba00ab11bea3614854aec2e2314166de99717078a",
+          "file_sha256": "3656739704b451526295c45d06322d4ce2739fbc03606970534cb525eee6d72d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style0/down-down-stepA",
+          "size": [
+            187,
+            410
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0d74497f857adb573004581d649577c94978fb329f57bdeebe25bc99f8db8d32",
+          "file_sha256": "8a171714b8a8c6a1ba046179b479e7ea2c6420a84c557db26728cf0870199575",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style0/down-down-stepB",
+          "size": [
+            184,
+            409
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "eaf097ed98221313c31de55432e2636bad0c28582bd6ed57e8b34ce28514f6d6",
+          "file_sha256": "082811e9491bedc7fca7fbfb4df18a47e124968e3455f0020e775e1776829ee4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style0/up-up-stand",
+          "size": [
+            181,
+            402
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "457fedfaf13c73af896f7b964f184b9847e0ee3647d736614d70d0f4c337699d",
+          "file_sha256": "b2bdf2f80c4b1f7055b102acdca17ab3ac71b9ffd2f2ba8a77775a74fbecdb40",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style0/up-up-stepA",
+          "size": [
+            193,
+            409
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "23739a2d947689d2c4515fc08e3122bd9e303fe2a70fb5e0de095e4ad9ebeaf8",
+          "file_sha256": "5abd3929d1fd0bed008dac5748b30cb8b553aedb774f8a318329d4cfb8ccdd13",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style0/up-up-stepB",
+          "size": [
+            187,
+            404
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8a9b72a74ecc447abda98151da0b26f18fc74dae0ea12234bd611bcc7f174ede",
+          "file_sha256": "7152178ce1a8d33f2e84a40edcc010351463cc5d7ad8de2c1d27a4ffe5f56c02",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style0/right-right-stand",
+          "size": [
+            183,
+            400
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cc273944b407187de06c9131e006a0e08da3c860093a6d89daf93cd44f3af039",
+          "file_sha256": "2b5398d571f75f1593090034dc1b242059aea8fe0cfde3a3ba8d0cbf727ca7dc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style0/right-right-stepA",
+          "size": [
+            252,
+            399
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5b3e18a107b1fd6f5259ed17fb6a29af653a36b36a52a38ba59f327ef4d877fa",
+          "file_sha256": "4f81aa9fb11b67c39326842db70fd1fd705a51b912450457d5a37e075ac47e72",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style0/right-right-stepB",
+          "size": [
+            189,
+            401
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "38711cad9d57296f3e323b5aab8de19020309aa89bb8d899e56b8cf7d5a7a677",
+          "file_sha256": "df31dbd91cba93fda78d80733522deb5b6ea4b89d1fbc10704018d3910bb5b8a",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/server-style1/renderer-manifest.json",
+      "count": 9,
+      "assets": [
+        {
+          "id": "server-style1/down-down-stand",
+          "size": [
+            177,
+            428
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bd829d2e616454cd58256474f09493f193bc9f1b5756e6b110bf61a1401c6dd3",
+          "file_sha256": "536dd22279c26f7cb9fc3126590519a536379cdf8283233205d80c031340b68c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style1/down-down-stepA",
+          "size": [
+            183,
+            431
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "866c93d5dd36ffff00c262d881a48eb6782235fc8a29da0ac349d3e3a013b4d0",
+          "file_sha256": "0e2348a7c5c4268900e2486f90e9e3aa7e2df0c490060b8decb29156cf8d3be9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style1/down-down-stepB",
+          "size": [
+            183,
+            431
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1bcb9b8fea8f3098c2e2012a64b1a4cf767b590297196f1b9fe19df2e6caa2e8",
+          "file_sha256": "3ab15a644b67c9c521d1f38a13d9daf87a306bc25d1c49aae70818af015dc6eb",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style1/up-up-stand",
+          "size": [
+            178,
+            405
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "eb4e8339ebc0b1cf18ab7e7eaa4dfec9bb0f8e7de5bf4f5b0784cdc264787236",
+          "file_sha256": "6a07f355a283b39f4227234a2f5bcc37f51dd6dfb755049777c8d7299bd19009",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style1/up-up-stepA",
+          "size": [
+            194,
+            405
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "87288fb42a1f26557395fd4197a6e5fe7c50da85ec84a12090be640092457825",
+          "file_sha256": "7ff6f5ca1f3b76efe2aa4a451be641b2cd79bfe65c7b6cddae6ab86f4a6caca2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style1/up-up-stepB",
+          "size": [
+            195,
+            405
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "026b17d745bdf244d33214c59b85583a389ca664d86d9e86f134f322ae4fcce8",
+          "file_sha256": "5ada4d797585579a082a3688414cd9b8562bc989a9c3ffbdaf57ee65a82ba925",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style1/right-right-stand",
+          "size": [
+            206,
+            401
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c80b529c60b8ad42e8457baf83e87a95eb8950e097ae4a89e1aea18b238cc246",
+          "file_sha256": "ad3c752a4dfcd26e98a2ef5f5e6d7b806d010267fb6f0658012c076d1fcc2ded",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style1/right-right-stepA",
+          "size": [
+            266,
+            400
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a86cf37cd0310bb3c669a085ef67fc3632cdb7697a0b76275a1d695c58326b36",
+          "file_sha256": "1808aab107f566249670ee69cad287cc5d0d198a38b42fad642a113f19d547a7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style1/right-right-stepB",
+          "size": [
+            212,
+            401
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6e0e0f4eb23f27bb4c40da84a70c6affe1fc41edc8fdd01797a4525e23fa85be",
+          "file_sha256": "8056e58029c28a02f4d6e7443d29772ef8d2e108d9100cd92cf9206ce21e637c",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/server-style2/renderer-manifest.json",
+      "count": 9,
+      "assets": [
+        {
+          "id": "server-style2/down-down-stand",
+          "size": [
+            210,
+            404
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e101b58b7f5a56ae2ef284e5e75d3335d1497ceb7b7ef31ba925e22e153d2e2f",
+          "file_sha256": "036c1cc439d704e6d93bde72e99788c1c32da90a90b7e95c32d8299da814ef40",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style2/down-down-stepA",
+          "size": [
+            221,
+            409
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d9db89d88b902967d608d035562afb5c59b9e63fa1901dc00b83d1a11f4e44b0",
+          "file_sha256": "31b9c3f520659613f98d09abba0506f552983530a4be39137162a3c7526864ba",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style2/down-down-stepB",
+          "size": [
+            219,
+            408
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "17a978a0c0031525f0333fc018901d70b6217d935a9cb3087bfaf05f30c1e399",
+          "file_sha256": "963fb8cbaf809ba36e2652fedc0e4bb27f1d6772aeb45dcb6a51521109c6ca08",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style2/up-up-stand",
+          "size": [
+            215,
+            402
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "34fe602e4a487e25a02842b88f9ff10ba9fc5a5ee60f672c113950854f0e9eee",
+          "file_sha256": "e17410e34c1a22341c9ac86c3ebcceaf93d6d214aa747e0f9b5d3dd52715a75f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style2/up-up-stepA",
+          "size": [
+            225,
+            408
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c04e3925b4b9cbb763ee9e209eb6c0d58e5da55e65a711175246757eafd5a875",
+          "file_sha256": "9da17c6b971a12e323e3176942a92f0afd1ff2eeac3c017bd62b7631e2e9357b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style2/up-up-stepB",
+          "size": [
+            224,
+            405
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5c4cbf35fa3e86ad727d43420b4e4fe25fd040ffe02e6d7326f5ed7680464dd2",
+          "file_sha256": "a7f8fbb0223df499d63988bc1d00d53588d1eed30b738c09b78c5a23f6a214d4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style2/right-right-stand",
+          "size": [
+            219,
+            400
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c583b7e4e41e80f760505a4d0aa879ad185ddbb3acaf373482191fa2abffd769",
+          "file_sha256": "eb9620840fbf32e5ae0cc47fbd6c68ca4015d883a36c0b16ec689ff0e76a74d6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style2/right-right-stepA",
+          "size": [
+            258,
+            400
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "61167f72173d8b56ce4f9678424db6e18412e9a5a78233602488c7a828818a1a",
+          "file_sha256": "e37503fb12154c86dadf4be0d72306206a0a622784f94bd111e1f1b3750a188d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style2/right-right-stepB",
+          "size": [
+            225,
+            402
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2cf1fe854fccebb8a5a823e49501d3a9d6006a44d9b3a4d82fe89bead6bf9990",
+          "file_sha256": "41fbee91ba2723795b07dd8ff5ca944602113c63c50191a71edd81e267277ba3",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/server-style3/renderer-manifest.json",
+      "count": 9,
+      "assets": [
+        {
+          "id": "server-style3/down-down-stand",
+          "size": [
+            189,
+            413
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "328cc84041a16240b0c0559378d3dc902008170291a3ed1c2cf76b66cac61122",
+          "file_sha256": "ee58853a57e8161b2c05bd1456f4121ce11f66a8fc3b5edbc81d28c8c3c01bb0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style3/down-down-stepA",
+          "size": [
+            190,
+            420
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3509e1b98b67bb953c2cdf73d55dafd90eb57a620dba65bb38fbcf6a655f1118",
+          "file_sha256": "2b8fbf34cce45794cb435c9887d7e48dde600d70941f3a19ac04dc26dbe4c158",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style3/down-down-stepB",
+          "size": [
+            190,
+            419
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "aefa41077c6569355262f37f6edceefd0b771cb7325a9bebe909dab3fe85112c",
+          "file_sha256": "e0eac9e88568db7097d1cc572d692ad81a757e1b00f73afda63e599d3f7efdd2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style3/up-up-stand",
+          "size": [
+            188,
+            396
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1fc4ed78ac79fae16822934c038eed82fff06756e2547aeddda56c12b86dfef0",
+          "file_sha256": "70a885eb85653c05ab2261d40d52d890f3e293f019c7ca9fd209c73f5aaa14c1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style3/up-up-stepA",
+          "size": [
+            200,
+            402
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c77dc1b75b696522f6ca02bd00af733d64df43a32f871485a252f044aa86d394",
+          "file_sha256": "9089a6407f75c1f0416e3b674387481f140c58f30e4e324a9cfdda033b499ea9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style3/up-up-stepB",
+          "size": [
+            193,
+            399
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e1347229ca7fc495d6f27dce64dc331ac214cbcdb437e28c620d7208ba0d58bf",
+          "file_sha256": "da6a5e7b6c39468008fad677488232758228a2b0c0d4105134581fbe460ebf72",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style3/right-right-stand",
+          "size": [
+            186,
+            402
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3855d5b8b87007a6fdd2f637afd4b123a1053c49a8d36f26b2715b974ef7a45d",
+          "file_sha256": "8a47cbfb994c3d7288e8e7e383d9dcacde32c4931132cf4302b51bb5c0ea74cc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style3/right-right-stepA",
+          "size": [
+            255,
+            400
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "deb6ae1cdc91c18434ebaa2793274cb18b35e8e5c54dbacb878e5b53c52c1f6a",
+          "file_sha256": "38090031c3a10d8f78e09e4f85396fc69bc4112666561f904646b63c7d03cec8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "server-style3/right-right-stepB",
+          "size": [
+            189,
+            403
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c249797123b31d2147cead45474492dcaa3bda7952ec99d2a17f080635063891",
+          "file_sha256": "f2eed439ca477d64088f7e82d2c3387d39784f2f99ebeb073dbdfb501c7288bd",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/renderer-manifest.json",
+      "count": 9,
+      "assets": [
+        {
+          "id": "shared-owner-barista-style0/down-down-stand",
+          "size": [
+            178,
+            404
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7c19016ab6a7d1b2e2454a342759c924634059900bc71cd9220f75d882ea8f75",
+          "file_sha256": "9676b1a1c9971fc6aca3b97d4d507c715bf7b5d797eef23928985b900be7cf93",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style0/down-down-stepA",
+          "size": [
+            184,
+            407
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ff38f5eb8c2312c5274e70c13fc2f2fd07b13ca5f6c017eea22591b7814a2457",
+          "file_sha256": "e55a2a4778bdd93bd92028154d050c6c9e68a6a484a6b33e80e68db763d0342b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style0/down-down-stepB",
+          "size": [
+            183,
+            407
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9d16534d710b49b81173b35b38e138b24ae0d8936f1e598b476b5490642f7140",
+          "file_sha256": "85c8f72f48d776b847eb795e9628468fc2381a6e9b6365cfdddff354d2988010",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style0/up-up-stand",
+          "size": [
+            178,
+            399
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0fcd0351e2571af031388dc061fff41f451786a02759c0d8729667737d07840c",
+          "file_sha256": "5c0b4894c1c13795c98874f2a77fed24be5ae7acef70a136359873e992aacc96",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style0/up-up-stepA",
+          "size": [
+            190,
+            407
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "66dddd81179fa6a37b58410d96cf1e4a4a57ac6b6eb7ba27cb9b0730d9dc02b9",
+          "file_sha256": "a8143483d6fefb2738fa0a0daf28f91e3aea1d2ef349cd90225247b2532d519b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style0/up-up-stepB",
+          "size": [
+            184,
+            402
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4342c90ad646dfdd86a08b6cf933c79b0ea768766355003d940325bd56f21424",
+          "file_sha256": "fda78d54ddfd7203e8b41b5100c8118a3c282f8beeeca2e971be2b0326760e1a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style0/right-right-stand",
+          "size": [
+            180,
+            399
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "882a4cad3239a493f696673a59e2aeb7ee8944eccb21df728b61ae1d3df63e70",
+          "file_sha256": "c809a1b1a2d077fbf64c50af210d00d3d61a489287f8365fdf4213951fe948aa",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style0/right-right-stepA",
+          "size": [
+            249,
+            397
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "23aa46aa17a31677eb328be55e034de6e995ae579ed565e3b74ef902388d2cc1",
+          "file_sha256": "d1af62dac7381f29e25f90157ec451365c33e3e071e9622b2877722e80e13208",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style0/right-right-stepB",
+          "size": [
+            185,
+            399
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3e03b8621506fbcadd4bb65b6c45d77e990264d2d4a64ec89570e1e47dc34c98",
+          "file_sha256": "8c439ddab949eb90ae6799c010bf37625910b2e66ed1fcb37c51b23bb9f4ad10",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style1/renderer-manifest.json",
+      "count": 9,
+      "assets": [
+        {
+          "id": "shared-owner-barista-style1/down-down-stand",
+          "size": [
+            174,
+            428
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ef80cf7da1052b5b032c3ed18f75691d67ddc8902cf63b311e4c9b3634f23c98",
+          "file_sha256": "b26bd61f2b1c3af3061e7fb5b2c4c0884b1917134c93608b5f251c87544864bc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style1/down-down-stepA",
+          "size": [
+            180,
+            431
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "55a9ab351468fdc1b67c9862dc219fc7afcaa1f400cc780260294afe56760267",
+          "file_sha256": "9e8e1281cf0d1f3e88e3c73d78303d80e19f00234529815e617392a89ecd9d59",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style1/down-down-stepB",
+          "size": [
+            181,
+            431
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4fa56f7220ae4c2fe7f17f386ad8ad8502d5c3c2e21d38d9c6759487f2de7f69",
+          "file_sha256": "e17defffbc9c465b0edc8009c580594a2ccc45c05e983bdccb4e2f88c50a64b8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style1/up-up-stand",
+          "size": [
+            173,
+            405
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e32c7b42e67dd03665649694f968109b90136e7816d0e96433b844169f2b1984",
+          "file_sha256": "a0eeecde5be8e5a72d9d65edd79d42698d80cd28e18b35de07e6062cdfea6765",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style1/up-up-stepA",
+          "size": [
+            192,
+            405
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "20c1dec2fbd191ef7a73347674c947f4aa61e4b3b85c825bbbdae7b123b0f7f8",
+          "file_sha256": "7d6fa468481cf55c02e1af293dad1e5a787ad41f198924df46da423485473da3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style1/up-up-stepB",
+          "size": [
+            192,
+            405
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fc4a82c2a70db76fe8f490e5f179e96804b0c44308867decfaaf252dcc8a259d",
+          "file_sha256": "13d864f2802b90e810c20ec13db28edb1e05a636a6a2e0f17a09aee97c8a4481",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style1/right-right-stand",
+          "size": [
+            201,
+            400
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "70f66232d159b08b468abe0bfda9abed16048cc6de21971b59a8430c95f5542e",
+          "file_sha256": "7367c93f3dcad96f92902cf5a3029ee8f476bcdff3b736be3d6c2b83a458ab21",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style1/right-right-stepA",
+          "size": [
+            263,
+            399
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e186b1245e22ff9f19875f488efab57fafba6d8cd8d5dfd545cf5f0e488e2a0a",
+          "file_sha256": "163aba0ff2444c46aaaf2d0b6d84c71e4a90538ea249416f99741e365b3c3f52",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style1/right-right-stepB",
+          "size": [
+            208,
+            400
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "57f4d31550b905b6da0a64d913bc74135d436ffc042a835384d05e8d73d91083",
+          "file_sha256": "48ac51c33ebc16a9a59d9d9f5c7102d064027dae81d77f055d18d77f05dddeef",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style2/renderer-manifest.json",
+      "count": 9,
+      "assets": [
+        {
+          "id": "shared-owner-barista-style2/down-down-stand",
+          "size": [
+            206,
+            403
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4ff8310c2478bfbfb08a346c6569d68719b202f4667fc81bd29c9fa2ec407e19",
+          "file_sha256": "5b0060cdc49f3c690906f298de7b57292003fb1f015ddecdfbf193bd643c21ab",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style2/down-down-stepA",
+          "size": [
+            221,
+            407
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e00b00020e57a51fe3ced8e0687f3a4ac9b525db3de000e420d166a0b02a59ee",
+          "file_sha256": "4a04d75ccc40cc93d56e1c28eab06345ece86274fb55044866758abbc5d65cfe",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style2/down-down-stepB",
+          "size": [
+            215,
+            406
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0af08147a809399f9e0e6afa4f8e6ca301255ab154d88b9baadca72461c7b28d",
+          "file_sha256": "c37666f305ec7900d7bdefd0728d44d77581da0af0e03ca4af7fa2ff0ea13b4d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style2/up-up-stand",
+          "size": [
+            211,
+            400
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "105db522b0fba31a8bcc9e7e8186fd46c0c62633128227944b4bfe1e3918b2fb",
+          "file_sha256": "c844e259e713de5bfea5b3e571c042a1b42780e732c06e9ef89090631d55b7d1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style2/up-up-stepA",
+          "size": [
+            223,
+            407
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a041bd4d098785116320b15af8d6e05961534ae1f7e459f7d687b180f46214a8",
+          "file_sha256": "15b5fcae69129ccb318a329f3664e47a411e256b11043a2ec5fc33fc1a8e36c5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style2/up-up-stepB",
+          "size": [
+            219,
+            404
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "44fd0525c40cb7af600f917032dadc3abdb988c0bd7f798a0161db68d6a8ca12",
+          "file_sha256": "0dcb54f5975110266a83b9ee2cfe2fe1f916f5e864e4120357302bb38c6c7af9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style2/right-right-stand",
+          "size": [
+            215,
+            399
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ad80dc9648ae73b9303b12d5b48c7d8e7308ca54d9192bfa94665ed90f77bcb0",
+          "file_sha256": "ea0ef68472bf3dbd7bb9fdd7710c015305c8cca31f8336b12142692de5f05b28",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style2/right-right-stepA",
+          "size": [
+            256,
+            398
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3f895c05981f9a8b1c1229393f866c08226d14a9dd7f955a39b7a9994a6b1c08",
+          "file_sha256": "45440f23d7c9147494a7bdc19536869863ea641e5f39073e19e0b570a1c35761",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style2/right-right-stepB",
+          "size": [
+            223,
+            400
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5c864e069850d2ce92b95470ae594ca54a9ad530f587697ddd7a99a0931b222e",
+          "file_sha256": "d35a2f6360d28f413dccd6c2de8c0af32be16ec6f01179f21e8dc2fbc52b8c5e",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style3/renderer-manifest.json",
+      "count": 9,
+      "assets": [
+        {
+          "id": "shared-owner-barista-style3/down-down-stand",
+          "size": [
+            184,
+            411
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a1f91c315198e98b2dad55e3bd25698272af0bd999f7230bd8e1fbf26edaf342",
+          "file_sha256": "e4266b45883683c6aa6b51b3f935977c0873511f5c43e92083299aec9e1fd79c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style3/down-down-stepA",
+          "size": [
+            188,
+            417
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fcb03aa9a931d206bc6c331bb0c54a1828f13db5f2ec0ae7b0a4bdf553c443b7",
+          "file_sha256": "85f2afd83dac30950db7b1d86ce0a2461f146819923b16d4fdf18ab880a5fbc5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style3/down-down-stepB",
+          "size": [
+            186,
+            416
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c89a52e4e5094944d8cfbdb5bddd326b18f1eee44543a98939ece646bdfde5f8",
+          "file_sha256": "2597e20674285030e1640d9872bb45dde2190de0d1ba9ecf41ae1876ef25cc21",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style3/up-up-stand",
+          "size": [
+            181,
+            393
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "91b4afaa343043a090f517079a222e3eda2ea3961ed9a77a2e2d541f1fe51dfa",
+          "file_sha256": "a1a729b6836cc3fbc0340494036518d23d79e9949f2fabc14d78e5dd9cbcb272",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style3/up-up-stepA",
+          "size": [
+            195,
+            400
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "009c8c2c444297c003500cec8191268b0d3914b485d5877e2a2a9db978260c22",
+          "file_sha256": "8b02b997b1ba8417f6c0b8701a8f8eacd2336237a1e06c1a2fe99c28f567e9d2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style3/up-up-stepB",
+          "size": [
+            188,
+            396
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6d1b865586a8364becee843b84d378e1c7b27e514b465172089c3acbaa934c72",
+          "file_sha256": "860cfefaacc21cb5760ffff076e1c58896d69abaa901a7c01a4cecf39cac2c7e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style3/right-right-stand",
+          "size": [
+            180,
+            401
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3efa7ce2873cc88810d596c900240b62bdf92a8dcca767f8f4bd366000c09ea2",
+          "file_sha256": "56b9921e340f746bd74b3378e09b5ca76cc791311dcacd9a27831a85e2f068c3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style3/right-right-stepA",
+          "size": [
+            251,
+            399
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e50b138657123b3b756ad6193f343057c3e29dd03788b32218ed2af0e34eaee1",
+          "file_sha256": "0f84343f01faaebf7a5b0e02e06b071279db79f5a1e4c980d62ecbcbba714628",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shared-owner-barista-style3/right-right-stepB",
+          "size": [
+            186,
+            402
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bda4d2fbea6e5689169e573c0dc0d65e6664b73e208216c00b0226cf8a03ad40",
+          "file_sha256": "e1b504857d491e79bbb7730beb84256fe3fb12bf17c613747ceb2a5d2e39e056",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "total_assets": 99,
+  "errors": 0
+}

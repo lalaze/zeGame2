@@ -1,0 +1,132 @@
+{
+  "totalBreeds": 11,
+  "totalFrames": 154,
+  "checks": [
+    {
+      "breed": "american",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "american/source.png"
+      ]
+    },
+    {
+      "breed": "black",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "black/source.png"
+      ]
+    },
+    {
+      "breed": "british",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "british/source.png"
+      ]
+    },
+    {
+      "breed": "calico",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "calico/source.png"
+      ]
+    },
+    {
+      "breed": "ginger",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "ginger/source.png",
+        "ginger/walk-correction-source.png"
+      ]
+    },
+    {
+      "breed": "mainecoon",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "mainecoon/action-correction-source.png",
+        "mainecoon/source.png"
+      ]
+    },
+    {
+      "breed": "persian",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "persian/source.png",
+        "persian/vertical-correction-source.png"
+      ]
+    },
+    {
+      "breed": "ragdoll",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "ragdoll/action-correction-source.png",
+        "ragdoll/source.png"
+      ]
+    },
+    {
+      "breed": "tabby",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "tabby/source.png",
+        "tabby/walk-correction-source.png"
+      ]
+    },
+    {
+      "breed": "tuxedo",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "tuxedo/source.png"
+      ]
+    },
+    {
+      "breed": "white",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "white/source.png"
+      ]
+    }
+  ]
+}

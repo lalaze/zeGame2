@@ -3,6 +3,8 @@ import { formatAccountMoney, formatTransactionMoney as formatMoney } from '../ga
 import type { GameState } from '../game/state';
 import { t } from '../i18n';
 import { catFrames, toDataURL } from '../render/sprites';
+import { fineSpriteArt } from '../render/fine-sprite-art';
+import { getGeneratedCatAdapter } from '../render/generated-main-art';
 import { livingCatActivity, livingCatPersonality, livingCatPreference, type LivingCatControls } from './living-cats';
 
 /** Transient browsing choices, owned by Panel rather than the game save. */
@@ -28,6 +30,7 @@ export class PetPanel {
   private grid: HTMLElement;
   private empty: HTMLElement;
   private tabs: HTMLButtonElement[];
+  private portraitUrls = new WeakMap<HTMLCanvasElement, { scale: number; url: string }>();
 
   constructor(
     root: HTMLElement,
@@ -65,12 +68,12 @@ export class PetPanel {
     this.grid.setAttribute('aria-label', t('pet.catalog'));
     this.tiles = CATS.map((cat) => {
       const btn = document.createElement('button'); btn.className = 'pet-choice'; btn.dataset.chooseCat = cat.id;
-      btn.innerHTML = `<img src="${toDataURL(catFrames(cat.id).idle, 4)}" alt="" /><b>${t(`pet.${cat.id}.name`)}</b><span>${formatMoney(cat.adoption)} · +${Math.round(cat.traffic * 100)}%</span><small></small>`;
+      btn.innerHTML = `<img alt="" /><b>${t(`pet.${cat.id}.name`)}</b><span>${formatMoney(cat.adoption)} · +${Math.round(cat.traffic * 100)}%</span><small></small>`;
       btn.addEventListener('click', () => {
         this.browsing.selected = cat.id; this.update();
         this.rows.find((row) => row.cat.id === cat.id)!.el.scrollIntoView({ block: 'nearest' });
       });
-      this.grid.append(btn); return { cat, btn, badge: btn.querySelector('small')! };
+      this.grid.append(btn); return { cat, btn, frames: catFrames(cat.id), portrait: btn.querySelector('img')!, badge: btn.querySelector('small')! };
     });
     root.append(this.grid);
     this.empty = document.createElement('p'); this.empty.className = 'note'; this.empty.textContent = t('pet.empty'); root.append(this.empty);
@@ -78,7 +81,7 @@ export class PetPanel {
       const el = document.createElement('section');
       el.className = 'pet-card';
       el.dataset.pet = cat.id;
-      el.innerHTML = `<div class="pet-heading"><img src="${toDataURL(catFrames(cat.id).idle, 4)}" alt="" /><div><h3>${t(`pet.${cat.id}.name`)}</h3><p class="note">${t(`pet.${cat.id}.desc`)}</p></div><span class="pet-bonus">+${Math.round(cat.traffic * 100)}%</span></div>
+      el.innerHTML = `<div class="pet-heading"><img alt="" /><div><h3>${t(`pet.${cat.id}.name`)}</h3><p class="note">${t(`pet.${cat.id}.desc`)}</p></div><span class="pet-bonus">+${Math.round(cat.traffic * 100)}%</span></div>
         <p class="note">${t('pet.cost', { cost: formatMoney(cat.careCost), min: CARE_SECONDS / 60 })}</p>
         <p class="pet-status"></p><progress max="${MAX_CARE_SECONDS}" value="0" aria-label="${t('pet.supplies')}"></progress>
         <div class="pet-actions"><button class="pixel-btn small" data-adopt>${t('pet.adopt', { cost: formatMoney(cat.adoption) })}</button><button class="pixel-btn small ghost" data-refill>${t('pet.refill', { cost: formatMoney(cat.careCost) })}</button></div>
@@ -111,12 +114,34 @@ export class PetPanel {
         const pet = state.pets.find((pet) => pet.id === cat.id);
         if (pet) { pet.autoRefill = auto.checked; onChange(cat.id); }
       });
-      return { cat, el, adopt, refill, auto, life, personality, preference, activity, locate, interact, status: el.querySelector<HTMLElement>('.pet-status')!, progress: el.querySelector('progress')! };
+      return { cat, el, portrait: el.querySelector('img')!, adopt, refill, auto, life, personality, preference, activity, locate, interact, status: el.querySelector<HTMLElement>('.pet-status')!, progress: el.querySelector('progress')! };
     });
     this.update();
   }
 
+  private updatePortraits(): void {
+    const adapter = getGeneratedCatAdapter();
+    this.tiles.forEach((tile, index) => {
+      const resolved = adapter?.ready ? adapter.resolve(tile.cat.id, tile.frames) : { frames: tile.frames, generated: false };
+      // Keep legacy portraits exact, but export generated pixels from their
+      // detailed backing rather than upscaling the low-resolution logical frame.
+      const art = resolved.generated ? fineSpriteArt(resolved.frames.idle) : { canvas: resolved.frames.idle, density: 1 };
+      const scale = Math.max(1, 4 / art.density);
+      let cached = this.portraitUrls.get(art.canvas);
+      if (!cached || cached.scale !== scale) {
+        cached = { scale, url: toDataURL(art.canvas, scale) };
+        this.portraitUrls.set(art.canvas, cached);
+      }
+      // Readiness can change after construction or a Scene reload. Only a new
+      // backing needs encoding; both views reuse its URL on ordinary updates.
+      for (const portrait of [tile.portrait, this.rows[index].portrait]) {
+        if (portrait.src !== cached.url) portrait.src = cached.url;
+      }
+    });
+  }
+
   update(): void {
+    this.updatePortraits();
     const s = this.state;
     // A catalog change or stale selection must never leave the detail pane empty.
     // Adoption does not invalidate a catalog entry: keep showing that cat's care.

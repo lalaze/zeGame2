@@ -1,0 +1,290 @@
+[
+  {
+    "id": "mugrack",
+    "logical": [
+      32,
+      16
+    ],
+    "surface": "wall",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. A horizontal carved walnut wall rail with three brass hooks holding three glazed coffee mugs in terracotta, sage and antique ochre. Each mug has visible cream inner lip and handle. Entire piece ratio 2:1. No shelf above, nothing behind."
+  },
+  {
+    "id": "aframe",
+    "logical": [
+      16,
+      19
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. An antique walnut A-frame sidewalk chalkboard with rounded top corners, folding rear support and thin brass safety chain. Matte dark forest-green board with a completely BLANK surface for dynamic content: no drawing, text, chalk marks or cup graphic. Entire silhouette ratio16:19."
+  },
+  {
+    "id": "lamp",
+    "logical": [
+      13,
+      24
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. A tall standing brass floor lamp with turned stem, round shallow heavy base and cream scalloped linen shade with stitched ribs. Entire silhouette ratio13:24. Opaque warm lampshade, no glow halo or cast-light cone."
+  },
+  {
+    "id": "bench",
+    "logical": [
+      32,
+      16
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. A long walnut cafe bench, carved slender upright posts and multiple turned spindle back rods, muted sage upholstered seat cushion, two front legs and sturdy stretcher. Complete piece wide, width:height2:1. Empty seating, no props."
+  },
+  {
+    "id": "armchair",
+    "logical": [
+      24,
+      22
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. A compact walnut-framed cafe armchair with terracotta upholstery, softly rolled upholstered arms, button-tufted back and loose seat cushion. A cream knitted throw rests over the left arm with short fringe. Complete silhouette ratio24:22. Empty chair."
+  },
+  {
+    "id": "gramophone",
+    "logical": [
+      18,
+      22
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. An antique tabletop gramophone, broad scalloped antique brass acoustic horn with dark opening angled toward upper-left, curved brass neck, black vinyl on turntable and carved walnut box base with tiny brass crank and slatted front grille. Entire ratio18:22. No table beneath and no text."
+  },
+  {
+    "id": "piano",
+    "logical": [
+      40,
+      30
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. A compact upright walnut cafe piano, carved side panels, brass details and one clearly separated keyboard of ivory and ebony keys. Small open music score above keyboard, showing only tiny abstract musical staff strokes, no letters or words. Short feet and two brass pedals. Whole silhouette width:height4:3. No piano stool or extra prop."
+  },
+  {
+    "id": "sofa",
+    "logical": [
+      32,
+      26
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. A two-seat cozy cafe sofa with muted sage fabric, walnut trim and short walnut feet, rolled arms, separate piped seat/back cushions, one small cream pillow and one terracotta pillow, cream throw with subtle terracotta bands over right arm. Entire silhouette ratio32:26. Empty seats, no people."
+  },
+  {
+    "id": "plant_fern",
+    "logical": [
+      16,
+      15
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One lush low spreading potted FERN with arcing fronds and many slender small pointed leaflets, dark/sage green leaves and yellow-green highlights. Warm terracotta flowerpot with rolled lip and visible dark soil. Complete width:height16:15. Clearly fern leaflets, not broad tropical leaves."
+  },
+  {
+    "id": "plant_snake",
+    "logical": [
+      9,
+      17
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One potted snake plant with five to seven upright spear leaves, muted dark green with pale sage/yellow vertical edges and faint horizontal stripes, varied heights. Cream glazed ceramic tapered pot with simple rim. Complete width:height9:17. No loose leaves."
+  },
+  {
+    "id": "plant_fig",
+    "logical": [
+      16,
+      23
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One compact fiddle-leaf fig tree in a fluted terracotta pot, visible forked woody trunk and dense crown of rounded violin-shaped veined dark sage leaves. Complete width:height16:23, tree taller than broad. Empty soil surface."
+  },
+  {
+    "id": "plant_monstera",
+    "logical": [
+      22,
+      19
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One lush potted MONSTERA with multiple glossy heart-shaped dark sage leaves with clearly visible split edges and characteristic oval leaf holes, slender green stems, warm terracotta pot with rolled lip. Complete width:height22:19, wide foliage, no random flowers."
+  },
+  {
+    "id": "plant_lemon",
+    "logical": [
+      21,
+      22
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One compact potted lemon tree with forked woody trunk, oval deep green leaves and five small golden-yellow lemons. Terracotta pot with a subtle glazed ochre rim. Complete width:height21:22, rounded compact canopy. No other fruit."
+  },
+  {
+    "id": "plant_lavender",
+    "logical": [
+      14,
+      25
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One tall slender potted lavender plant, three to five slender green stems with narrow leaves and textured dusty-purple flower spikes. Weathered terracotta pot with small blank cream inset. Complete width:height14:25. Purple flowers must clearly read lavender, no text."
+  },
+  {
+    "id": "plant_succulent",
+    "logical": [
+      8,
+      13
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One small potted echeveria succulent rosette with thick sage-green pointed fleshy leaves in a warm terracotta tapered pot. Keep whole object fairly tall including pot, complete width:height8:13. No separate loose plant or props."
+  },
+  {
+    "id": "round_stool",
+    "logical": [
+      14,
+      18
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One simple antique round walnut cafe stool, oval visible wooden seat top, four turned short legs and connecting stretchers with restrained brass screw details. Complete width:height14:18. No upholstery, backrest, cushion, mug or prop."
+  },
+  {
+    "id": "shelf",
+    "logical": [
+      32,
+      16
+    ],
+    "surface": "wall",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One horizontal walnut wall shelf with two small carved brackets. On shelf: a small trailing green plant in terracotta pot on left, three muted teal/terracotta/ochre upright books in middle and one clear closed glass coffee-bean jar on right with a blank cream label. Complete width:height2:1. Decorative fixed contents, no readable labels."
+  },
+  {
+    "id": "garland",
+    "logical": [
+      32,
+      8
+    ],
+    "surface": "wall",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One wide draped thin walnut-brown cord bearing five small stitched triangular fabric pennants in muted terracotta, sage, antique gold, dusty teal and warm rose. Each flag plain apart from tiny cream stitching. Complete width:height4:1. Slightly sagging strand, no wall, no lettering, no flowers or lights."
+  },
+  {
+    "id": "wall_pennants",
+    "logical": [
+      32,
+      8
+    ],
+    "surface": "wall",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One straight taut horizontal dark cord with five short pointed downward cloth pennants, alternating terracotta, sage, ochre, teal, dusty rose. Every pennant has a cream vertical seam and a small cream stitched cross, clear geometric bunting different from sagging garland. Complete width:height4:1, no letters."
+  },
+  {
+    "id": "wreath_season",
+    "logical": [
+      22,
+      22
+    ],
+    "surface": "wall",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One round seasonal sage-green leafy wreath of small eucalyptus and ivy leaves, tiny muted terracotta berries and a red-cream gingham fabric bow at bottom. Complete shape approximately square. Large empty transparent hole in center, not a solid green disc. No wall or backdrop."
+  },
+  {
+    "id": "poster_coffee",
+    "logical": [
+      22,
+      22
+    ],
+    "surface": "wall",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One square walnut frame containing a vintage cream PAPER ART PRINT of a terracotta coffee cup on saucer with steam, two delicate green botanical sprigs at sides and fine ochre decorative border. No text or typography whatsoever. Opaque paper inside frame, transparent outside frame."
+  },
+  {
+    "id": "poster_bakery",
+    "logical": [
+      22,
+      22
+    ],
+    "surface": "wall",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One square walnut frame containing a vintage cream PAPER ART PRINT of a golden croissant with buttery layered texture, small green botanical sprigs at sides and fine ochre decorative border. No text or typography whatsoever. Opaque paper inside frame, transparent outside frame."
+  },
+  {
+    "id": "art_landscape",
+    "logical": [
+      26,
+      22
+    ],
+    "surface": "wall",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One horizontal gilt-walnut frame containing a charming miniature painted country landscape: pale blue sky, warm sun, rolling sage-green hills, one cream cottage with terracotta roof and winding ochre path. Complete frame ratio26:22. Art is fully inside frame; outside transparent. No readable text."
+  },
+  {
+    "id": "art_cat",
+    "logical": [
+      26,
+      22
+    ],
+    "surface": "wall",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One horizontal walnut frame containing a charming flat decorative PORTRAIT PRINT of a front-facing seated ginger tabby cat with small cream muzzle and chest against muted rose background. Cat is purely printed picture inside frame, not separate game animal. Complete frame ratio26:22. Outside transparent."
+  },
+  {
+    "id": "art_bean",
+    "logical": [
+      26,
+      22
+    ],
+    "surface": "wall",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One horizontal dark walnut frame containing a cream vintage botanical PRINT of one large rich-brown coffee bean with curved center crease, tiny green coffee sprig and two terracotta coffee cherries below. Complete frame ratio26:22. No text, no typography. Outside frame transparent."
+  },
+  {
+    "id": "art_starry",
+    "logical": [
+      26,
+      22
+    ],
+    "surface": "wall",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One horizontal gilt-walnut frame containing a miniature NIGHT LANDSCAPE painting: muted indigo sky, soft pale crescent moon, a few tiny static star specks, winding blue cloud band, distant village roofs and dark slender cypress silhouette. Complete frame ratio26:22. No exterior glow; game may add twinkle overlay later. No text."
+  },
+  {
+    "id": "lantern",
+    "logical": [
+      12,
+      24
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One freestanding antique brass lantern with small closed ring handle at top, pagoda cap, tall cream glass body revealing a single pale candle and tiny warm flame, brass vertical frame ribs and stepped base. Complete width:height1:2. No glowing halo or ground shadow."
+  },
+  {
+    "id": "bean_display",
+    "logical": [
+      22,
+      24
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One compact walnut coffee-bean display stand: low carved plinth on short feet with three sealed upright kraft paper coffee bags of varied heights. Every bag has a BLANK cream label with only one tiny coffee-bean pictogram, no letters. Front plinth has narrow brass ornament. Complete ratio22:24. No countertop or surrounding display."
+  },
+  {
+    "id": "sideboard",
+    "logical": [
+      30,
+      26
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One walnut cafe sideboard with two paneled doors, small brass handles, molded top edge and short legs. On top only: a small orderly stack of cream plates at left and one small sage ceramic bowl at right. Complete ratio30:26. No text, no attached wall."
+  },
+  {
+    "id": "display_cabinet",
+    "logical": [
+      24,
+      36
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One tall narrow carved walnut display cabinet with two glass doors, brass handles/hinges, crown molding, short legs and recessed lower apron. Inside three shelves of cream ceramic teacups and saucers, subdued sage backing. Glass doors have a few crisp reflection clusters. Complete width:height2:3. No readable labels or exterior props."
+  },
+  {
+    "id": "magazine_rack",
+    "logical": [
+      16,
+      24
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One slim floor-standing walnut magazine rack with angled back, short feet, two front wooden crossbars and three overlapping thin magazines colored sage, ochre and terracotta. Magazine covers show only blank cream rectangles or geometric marks, NO text. Complete width:height2:3."
+  },
+  {
+    "id": "coffee_cart",
+    "logical": [
+      30,
+      28
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One compact antique walnut and brass coffee service cart, two side push handles and small visible caster wheels, two shelves. Top shelf carries a small muted-sage espresso machine with two cream cups and a neat stack of cream plates. Bottom shelf holds two small sealed coffee jars. Complete width:height30:28. Decorative fixed appliance, no text, no extra loose items outside cart."
+  }
+]

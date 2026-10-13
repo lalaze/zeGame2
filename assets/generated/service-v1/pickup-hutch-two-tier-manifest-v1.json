@@ -1,0 +1,62 @@
+{
+  "file": "pickup-hutch-two-tier-v1.png",
+  "source": "pickup-hutch-two-tier-source-v1.png",
+  "source_size_px": [
+    1254,
+    1254
+  ],
+  "crop_source_bbox_px": [
+    62,
+    124,
+    1190,
+    1146
+  ],
+  "size_px": [
+    1128,
+    1022
+  ],
+  "visible_alpha_gt_128_source_bbox_px": [
+    70,
+    132,
+    1182,
+    1138
+  ],
+  "visible_alpha_gt_128_local_bbox_px": [
+    8,
+    8,
+    1120,
+    1014
+  ],
+  "foot_anchor_px": [
+    564.0,
+    1014
+  ],
+  "foot_anchor_uv": [
+    0.5,
+    0.9921722113502935
+  ],
+  "bounds_convention": "[left,top,right,bottom], right and bottom EXCLUSIVE; bbox uses alpha>128, crops retain 8px unchanged margin",
+  "native_visible_aspect_ratio": 1.1053677932405566,
+  "logical_target_size_px": [
+    40,
+    36
+  ],
+  "lossless_crop": true,
+  "generation": "Built-in imagegen substantive edit; original tall shelf unchanged; no RGB/alpha postprocessing",
+  "approx_geometry": {
+    "source_front_ledge_y_px": [
+      707,
+      1054
+    ],
+    "source_front_inner_x_px": [
+      123,
+      1079
+    ]
+  },
+  "approx_front_ledge_fraction_y": [
+    0.5715705765407555,
+    0.9165009940357853
+  ],
+  "approx_inner_opening_fraction_width": 0.8597122302158273,
+  "caveat": "Generated inner opening is about 86% of total width rather than requested 90%. Near-square exterior ratio matches 40x36 closely. Ledge lines are approximately 57% and 92% of silhouette height; verify visual fit against engine slot coordinates."
+}

@@ -1,0 +1,25 @@
+{
+  "id": 8,
+  "name": "枫叶邮差",
+  "look": {
+    "skin": 0,
+    "hair": 3,
+    "hairStyle": 0,
+    "shirt": 0,
+    "pants": 1
+  },
+  "hairstyle": 4,
+  "outfit": "duffle",
+  "accessory": "satchel",
+  "accent": "#e8c68c",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#f4cfad",
+    "hair": "#b9674e",
+    "shirt": "#bb6b58",
+    "pants": "#85664f"
+  },
+  "hatPalette": "#d3a453",
+  "description": "Fixed customer cast 8 (枫叶邮差): warm skin #f4cfad; hair #b9674e in a long narrow tied BRAID down the back, cream-and-gold tie near nape, side-swept fringe; braid visible behind neck from side. Outfit: #bb6b58 hip-length duffle coat with three cream/gold toggle fastenings and cream collar. Lower clothing color #85664f; warm dark brown leather shoes. Accent #e8c68c. A small #e8c68c cross-body shoulder satchel with diagonal strap and gold clasp, resting at hip in EVERY pose including seated; it is a worn accessory, never held."
+}

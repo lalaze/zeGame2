@@ -1,0 +1,535 @@
+{
+  "breed": "calico",
+  "version": 1,
+  "generator": "built-in image_gen",
+  "sourceSheetDimensions": [
+    1254,
+    1254
+  ],
+  "bboxAlphaThreshold": "alpha > 128, excludes faint fringe; original alpha preserved in lossless crops",
+  "facingConvention": {
+    "walkA": "head-left",
+    "walkB": "head-left",
+    "other": "front-three-quarter slightly left; nuzzle head tilts independently"
+  },
+  "scaleNote": "One calibrated sourceToWorldScale for every frame from each source sheet. Estimated from common head width, never frame-height fit; runtime head/contact verification required.",
+  "anchorNote": "Manually visually estimated grounded front-paw/support midpoint and crown/forehead between ears, not ear tips. Contact/flip verification remains runtime work.",
+  "qa": {
+    "status": "source-and-crops-inspected",
+    "checks": [
+      "14 distinct action drawings",
+      "Opposite gait phases visibly differ",
+      "Asymmetric orange/dark calico patches with white chest/paws",
+      "Transparent alpha, complete paws/tails",
+      "Grooming chest vs cheek",
+      "Raised broad chest and separate grounded forelegs"
+    ],
+    "raisedPoseHeightNote": "Raised poses roughly 13\u201316% taller than idle at unchanged head scale; runtime petting/contact QA pending."
+  },
+  "frames": [
+    {
+      "state": "idle",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/calico-idle.png",
+      "source": "source.png",
+      "source_crop": [
+        55,
+        37,
+        310,
+        312
+      ],
+      "size": [
+        255,
+        275
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 239,
+        "h": 259
+      },
+      "foot": {
+        "x": 72,
+        "y": 258
+      },
+      "headContact": {
+        "x": 85,
+        "y": 52
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26733,
+      "sha256": "75650bbe0a85fd6972efa2f0c4cd400c940e0880f5e35ae1fa2b4931697e2b12"
+    },
+    {
+      "state": "swish",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/calico-swish.png",
+      "source": "source.png",
+      "source_crop": [
+        346,
+        37,
+        653,
+        312
+      ],
+      "size": [
+        307,
+        275
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 291,
+        "h": 259
+      },
+      "foot": {
+        "x": 72,
+        "y": 258
+      },
+      "headContact": {
+        "x": 83,
+        "y": 53
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 42197,
+      "sha256": "f665ee14543be01ddddbe1fc725934021c4c36505b34313c322a928c50d0a254"
+    },
+    {
+      "state": "blink",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/calico-blink.png",
+      "source": "source.png",
+      "source_crop": [
+        681,
+        37,
+        935,
+        312
+      ],
+      "size": [
+        254,
+        275
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 241,
+        "h": 259
+      },
+      "foot": {
+        "x": 78,
+        "y": 258
+      },
+      "headContact": {
+        "x": 92,
+        "y": 54
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 25181,
+      "sha256": "a18e509e60fd81c4a8a9a3bbe02c1c89a9490ab96a6e99b9a124fef1cbb0f0b4"
+    },
+    {
+      "state": "happy",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/calico-happy.png",
+      "source": "source.png",
+      "source_crop": [
+        997,
+        35,
+        1246,
+        312
+      ],
+      "size": [
+        249,
+        277
+      ],
+      "bbox": {
+        "x": 6,
+        "y": 8,
+        "w": 235,
+        "h": 261
+      },
+      "foot": {
+        "x": 91,
+        "y": 260
+      },
+      "headContact": {
+        "x": 98,
+        "y": 57
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 25118,
+      "sha256": "99b5fe7f959966fe3c9bb097765f392ae4e8bb94ebc38586f85dd01b2e3ef6d2"
+    },
+    {
+      "state": "walkA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/calico-walkA.png",
+      "source": "source.png",
+      "source_crop": [
+        8,
+        354,
+        346,
+        594
+      ],
+      "size": [
+        338,
+        240
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 323,
+        "h": 224
+      },
+      "foot": {
+        "x": 157,
+        "y": 225
+      },
+      "headContact": {
+        "x": 83,
+        "y": 54
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 30802,
+      "sha256": "95f42aab8f52f62f57ce2734c910283f615a239f1c3df2dccf3841587b0fceee"
+    },
+    {
+      "state": "walkB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/calico-walkB.png",
+      "source": "source.png",
+      "source_crop": [
+        346,
+        354,
+        681,
+        594
+      ],
+      "size": [
+        335,
+        240
+      ],
+      "bbox": {
+        "x": 4,
+        "y": 8,
+        "w": 323,
+        "h": 224
+      },
+      "foot": {
+        "x": 149,
+        "y": 225
+      },
+      "headContact": {
+        "x": 79,
+        "y": 54
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 31725,
+      "sha256": "55a1e26ec097b8d3fa87b574cc4c6954a1ae7102d740e1e48065500d52dc45bd"
+    },
+    {
+      "state": "sleep",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/calico-sleep.png",
+      "source": "source.png",
+      "source_crop": [
+        690,
+        415,
+        942,
+        590
+      ],
+      "size": [
+        252,
+        175
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 236,
+        "h": 159
+      },
+      "foot": {
+        "x": 116,
+        "y": 158
+      },
+      "headContact": {
+        "x": 82,
+        "y": 57
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 9704,
+      "sha256": "6c92b6b395e73818737edbbde73ccb99867977d4d576969fdb5410165c35e25d"
+    },
+    {
+      "state": "groomA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/calico-groomA.png",
+      "source": "source.png",
+      "source_crop": [
+        993,
+        344,
+        1254,
+        598
+      ],
+      "size": [
+        261,
+        254
+      ],
+      "bbox": {
+        "x": 6,
+        "y": 8,
+        "w": 249,
+        "h": 238
+      },
+      "foot": {
+        "x": 77,
+        "y": 236
+      },
+      "headContact": {
+        "x": 93,
+        "y": 49
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 23763,
+      "sha256": "1cc0c3daa4d7dde123c4e0002a18b3b1f1a48bdc79be2dcbc33052989c9f3ff4"
+    },
+    {
+      "state": "groomB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/calico-groomB.png",
+      "source": "source.png",
+      "source_crop": [
+        49,
+        629,
+        307,
+        910
+      ],
+      "size": [
+        258,
+        281
+      ],
+      "bbox": {
+        "x": 6,
+        "y": 8,
+        "w": 245,
+        "h": 265
+      },
+      "foot": {
+        "x": 86,
+        "y": 263
+      },
+      "headContact": {
+        "x": 76,
+        "y": 48
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 27302,
+      "sha256": "3300f9f3cb24914332ff5b115d37f250e9585c7ea615742e789a3764a98d5bb7"
+    },
+    {
+      "state": "stretch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/calico-stretch.png",
+      "source": "source.png",
+      "source_crop": [
+        308,
+        621,
+        653,
+        910
+      ],
+      "size": [
+        345,
+        289
+      ],
+      "bbox": {
+        "x": 7,
+        "y": 8,
+        "w": 330,
+        "h": 273
+      },
+      "foot": {
+        "x": 178,
+        "y": 271
+      },
+      "headContact": {
+        "x": 107,
+        "y": 164
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 44892,
+      "sha256": "3dfcefcea45d3b14513e35c659dd69ae20a5f105eade78347fa2b593ba143fb5"
+    },
+    {
+      "state": "watch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/calico-watch.png",
+      "source": "source.png",
+      "source_crop": [
+        672,
+        637,
+        935,
+        913
+      ],
+      "size": [
+        263,
+        276
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 250,
+        "h": 260
+      },
+      "foot": {
+        "x": 84,
+        "y": 258
+      },
+      "headContact": {
+        "x": 98,
+        "y": 54
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 27327,
+      "sha256": "a717fa0ad4723eb5b0f49e2519274b592d4f7cd66c6c4e3bc1c66396e3db90c8"
+    },
+    {
+      "state": "lookUp",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/calico-lookUp.png",
+      "source": "source.png",
+      "source_crop": [
+        1007,
+        603,
+        1244,
+        913
+      ],
+      "size": [
+        237,
+        310
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 224,
+        "h": 294
+      },
+      "foot": {
+        "x": 87,
+        "y": 292
+      },
+      "headContact": {
+        "x": 93,
+        "y": 47
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 23459,
+      "sha256": "fffefe1ddd5c6aa9538841035ec85afc90df4cb6b636e1a7cf86a649cc97e19d"
+    },
+    {
+      "state": "nuzzleA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/calico-nuzzleA.png",
+      "source": "source.png",
+      "source_crop": [
+        70,
+        917,
+        321,
+        1227
+      ],
+      "size": [
+        251,
+        310
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 235,
+        "h": 294
+      },
+      "foot": {
+        "x": 70,
+        "y": 290
+      },
+      "headContact": {
+        "x": 81,
+        "y": 51
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 23817,
+      "sha256": "e3f8ae2b02a6018bc96f6b0f64b1d450626dbeedbe5df979fe2102d8b5c4d929"
+    },
+    {
+      "state": "nuzzleB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/calico-nuzzleB.png",
+      "source": "source.png",
+      "source_crop": [
+        365,
+        917,
+        628,
+        1227
+      ],
+      "size": [
+        263,
+        310
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 247,
+        "h": 294
+      },
+      "foot": {
+        "x": 124,
+        "y": 290
+      },
+      "headContact": {
+        "x": 120,
+        "y": 53
+      },
+      "sourceToWorldScale": 0.047,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 25947,
+      "sha256": "153472b53667145da8b1dec4c656dca2091d2d6fa08791138d8538b940398c87"
+    }
+  ]
+}

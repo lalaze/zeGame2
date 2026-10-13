@@ -1,0 +1,25 @@
+{
+  "id": 20,
+  "name": "葡萄连帽衫",
+  "look": {
+    "skin": 2,
+    "hair": 4,
+    "hairStyle": 1,
+    "shirt": 4,
+    "pants": 0
+  },
+  "hairstyle": 5,
+  "outfit": "hoodie",
+  "accessory": "none",
+  "accent": "#dfbd83",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#b67c55",
+    "hair": "#626782",
+    "shirt": "#9b87af",
+    "pants": "#53637b"
+  },
+  "hatPalette": "#e5d7ba",
+  "description": "Fixed customer cast 20 (葡萄连帽衫): warm skin #b67c55; hair #626782 in short exuberant SPIKY TOUSLED hair with separate upward tufts and outward side tips, no braid or bun. Outfit: #9b87af hooded sweatshirt with cream hood lining, drawstrings and kangaroo pocket, hood down. Lower clothing color #53637b; warm dark brown leather shoes. Accent #dfbd83. No glasses, headband, bow or bag."
+}

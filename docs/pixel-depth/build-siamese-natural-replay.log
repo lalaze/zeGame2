@@ -1,0 +1,22 @@
+vite v8.3.3 building client environment for production...
+transforming...
+✓ 86 modules transformed.
+rendering chunks...
+computing gzip size...
+docs/pixel-depth/replay-dist/index.html                                                              1.80 kB │ gzip:   0.86 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/pixelify-sans-cyrillic-400-normal-DfOZNMlW.woff        4.41 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/pixelify-sans-latin-ext-400-normal-DdH6zlBQ.woff2      5.36 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/pixelify-sans-latin-ext-400-normal-BkfTUL4s.woff       7.44 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/pixelify-sans-latin-400-normal-DLrIX9QE.woff2          7.69 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/pixelify-sans-latin-400-normal-JapMNN6Z.woff          10.26 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/pixel-zh-FEzZjWD0.woff2                               45.84 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/index-CdYWV5SP.css                                     6.43 kB │ gzip:   4.23 kB
+docs/pixel-depth/replay-dist/qa-replay/assets/index-BrmHgPMA.js                                  1,880.43 kB │ gzip: 540.21 kB
+
+✓ built in 894ms
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 1600 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+Published only dist/qa-replay. Open /qa-replay/?qa-light=10.

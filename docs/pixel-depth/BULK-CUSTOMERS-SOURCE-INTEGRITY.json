@@ -1,0 +1,6300 @@
+{
+  "scope": "File existence, dimensions, alpha bounds, exact source RGBA crop, duplicate pixel evidence only; no runtime or aesthetic pass",
+  "manifests": [
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            204,
+            342
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2e0ca989a621a0650e77e8b0ad8e496c436a6104c002494ca26905087828acb2",
+          "file_sha256": "3f065dc9b54ea8da2bd65d2515439c9b82e68e895faffe0d9277aefeb533bcd2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            217,
+            342
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9c2d944c39f5abab56594344d68ce9934a425e0c70edbd3b77b6839b2fdaddd8",
+          "file_sha256": "7c56e071fadccdeee565d88af63772abd59dc1fc8b9b4ac5a8545e7b40a799b2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            214,
+            342
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "caaa6dca7c7dae0bf2ad25a7490877dbe1ed1ed1e030276710068fa0f625466e",
+          "file_sha256": "bb36a628965fa381225d77e900e143acab03ed695480a99f87f92cb808a07da8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            205,
+            329
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "440a1c99013b551fd6ffeb931a3a31c505c3557edc2638e2a0613f8783d226b5",
+          "file_sha256": "09d8e950cd364811967e575e5ede29a6a427005294e376c7b733f8ccb6bdbfce",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            212,
+            329
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "40de6cecf57e31f0f042104f87dbf0c7b21da2b06c39f8d2572449908901c1fe",
+          "file_sha256": "501ff96988d01cfe420b73906cc1ef109057f6f95c05476129b652c42c967a20",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            213,
+            329
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "acec6b46d9df4dce78be157c23ca8048b133c885ab8f81fba6936e0c2560710e",
+          "file_sha256": "695632a7f1170ef06681585ac001129091d1c5831511bc2a176d1eb2ceb4419a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            191,
+            337
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9dd4f2e0d70dab5191188727642ff7d4793ae22fd4e7b35a36f084deac2d9bfe",
+          "file_sha256": "abedbb14b52f9dea8889c91cbde43738b0e5cfb3dde23eb2d4fd4191dc30936f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            247,
+            337
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "193afc7fbedc5e21f3b01101a4fe6127dfc9bbe104642d48ad1aa9439ab8171d",
+          "file_sha256": "89e3b5a49f35e163f18b48961ebae19dfe2515b64f6ea0f0374867f5a38753c3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            211,
+            337
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9d28cb9effe8be6d6326286a68984568b1e35bda1f2f1ebe128c2fd22ff50388",
+          "file_sha256": "6bfd4f4db9d49eb95f136d4b531156229e0b7e150e19f9bd0dd760b4e1df74f9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            207,
+            284
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3721ffe2820aa9968ed877c443da13e0c27ffa14b9da9baed3243d780ab90e78",
+          "file_sha256": "d6a398468d52830b7abbb9f565e5cb79988a03cfc996eb1884a05bf2135e3ce8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            211,
+            284
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "06c75af3311c3977cb8269ac758fa13828db408319679a25a8a97654fca76fcd",
+          "file_sha256": "25e5c7b8de1bff33d87f5367c101cdfd97fdfac55cab435d8597047c461d9070",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            226,
+            284
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "03af5047dbf0473f5aecbd2be3b3ec7b67ec157a9f85c4d901b779a9fed34ee7",
+          "file_sha256": "cdbb91b06312b7a7c81bd59aa50b639d9c0178256b588c5293c614e0d7ff9b45",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            218,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fe9b1e282715137e2a3ca7cb2991a5562a7834eaeb51a8b7c0555f779bcdcd88",
+          "file_sha256": "9fa8494bdc59ea78ca60cfd3d414126c301db309e579e6a6347ec919760acc05",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            221,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e97535c0eb2b5c82fe2798a15e495e049e82c92d1abc7369a4b4a3eb26bdef9a",
+          "file_sha256": "089fd5d4ddce2f173ac32df187c8c90618fa53a6428239a4a29d19d719b4b188",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            235,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f4f0afe67cab5d66333cfc3759236499f34df5c22775993f26fae3e8ff1c2fd7",
+          "file_sha256": "8cf8f0f5c7bfeaa854ac5b7f163f313c5c181fe673b1cdb2ab6cfcbae5eda86c",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-02/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            173,
+            337
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2d179c3fc316ac0bf49cbedaf3b8f6c9e549735b30bb568c5837f4987dc900fa",
+          "file_sha256": "f3dcd94bb426f09a31009d2c8646456e213488b262c58b07a257039e32bd8cdc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            171,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "044569f5ee3cb6efc9b23bf6e4606e8420a90519f19c4c2bb6110e0efe6dd70d",
+          "file_sha256": "dd90720a859683c74db7652ef8cc115259099db8b775f91d4cfb49cea328787a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            175,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b3a8a85c632f37d17d6750b8019423fcb2490422df890ab014feed69d790b432",
+          "file_sha256": "604c30423e03b45d20d22752a4c2f21052078149a725e68e1a72da976bb3ee3f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            171,
+            336
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "16d0f7c0f394b6773e1e87ddf025b771ae00a37d277dcc41d77c19aab67e9f2b",
+          "file_sha256": "3901b9f9a08dc45408a6c3257afbf422f4cb999167c3efc1c025e249ac9493fe",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            176,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "89a041a8ee19f3f37c83adf1e177933f0be9f4b74da6451ca1e7bdabf917fbda",
+          "file_sha256": "ebf826d9a3d392ec880a80616de4a9c2299cee2cc1414c9bc8d504c934dc5565",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            169,
+            337
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c05d01eb099017bce3e832670edb297e0a07c0ac5cc65b4545e2ca16be21b06a",
+          "file_sha256": "d20979ecfd3aee461f27b8b8de263c940911bfb55a5171d7c6ea08218a52e767",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            181,
+            330
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "02bfd4b06212dbb383a884d9733f2579437f1a33903968f64bb4610e16618e35",
+          "file_sha256": "2d125d09f428551f65c290cf33d02d2328e6f583be71c9d6d76db7e2760ab4a6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            217,
+            330
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8850cdbbaac5922f0679038c45f6dd38b243950a9a1fce5e07e5da754133db27",
+          "file_sha256": "fcf29275752529f48d3ccb13b7bef84e6494e5a9f0be409f65debbe0f6aca81e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            178,
+            330
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4414d905da08ddf20dae5435581b079416942a4c7a086f399f26e382babd918b",
+          "file_sha256": "db2fc37e6d6217b25882efaca8ec9b168f46a778b35ec7620ca1906b1a307e1b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            196,
+            289
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fce70ad9ba3bfb4e13948f0491565c448f60bea0cc124299fe342b4eb75b97e2",
+          "file_sha256": "f502826f10d2ccada400814962ec4bcbd480be54da46bc63ce57d77c7a3a0955",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            195,
+            289
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "16d2358dfb6183dc0f6641940f03a3cfc0108443617acfa014ee30537b56f281",
+          "file_sha256": "f984b816bc5902285be5ee25a8faaeff8f797806d7bcd965624c30c851ed2c23",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            200,
+            274
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "af30cae8d764fda80047295cd8f70ded3c99b67668d094352b856b9d70efe91c",
+          "file_sha256": "ad69932b59ac4e8a92c44372e289cde63e233e0457eb78a8826e68c435fe0f15",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            201,
+            307
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5adee10adb5c19d37b7cefe107c01322c07c83589e7d5d6f2af4b239ac511851",
+          "file_sha256": "8756c53a402b8f984c0e5d54b253ee231441af623a5d7a4929d9d39bfdd2f14d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            194,
+            305
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2d7a364ad0fab355b3dba9dbd004ffb1f0557a6c2c2e4b440f47afdbed7310b0",
+          "file_sha256": "e7c1970d5edc242a835025ad2d91c11b05164901b4c0020a31374be60058ed8d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            200,
+            299
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "17e923172528615a83dbdadd7dd2d415913d3fd00013f5ca0767bcdf85fb0491",
+          "file_sha256": "052252a157cba8d77ab32277a21022ad7d7e66d6747a860416d36939fdc978e9",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-03/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            181,
+            352
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "173bc7c68557b3d3e30964864c5dac5ed48a82155945dda04f53e1b98eae25af",
+          "file_sha256": "630982dd1b1bd82ae3ccbbbb8af234a9f3b2a838e19df5ae6b49b5015324a0df",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            179,
+            353
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a983277c26d703738ae2cfb2fbd543ce605160ddf3abc4382c496cde1e5ded5e",
+          "file_sha256": "71a8cfaeea833d15d6ac601b52409756fd4a2d923331b40007aafe94647c164d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            181,
+            353
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "355a9542092ab81cc3743b3d50d8bde6ca4b4dad17da86882524aeeec8dc39e2",
+          "file_sha256": "619997b7efba480788a6f97d5322db2ef735ee04becd3d193b68ba7b491cf49f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            178,
+            347
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0c0600185142a7db18a85bfdfd0b87eef5a89e195fa07ad7299f440352a8846b",
+          "file_sha256": "7de9a8ccb90fdcf4e1d8f742e5e2b2b91096c20b115d1ff041befd0fc78f1e60",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            181,
+            348
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d0161ab9ece26eab3519aebda26b460744ea5140bec261a106884895af15b45d",
+          "file_sha256": "af9e631e37808ab727c49074cf1e54ec8fe19cfc85ee0e01a0bc6699888abe2f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            178,
+            345
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "389d2ac57ab1b83105823d0342ce7ce72f3c8fc276e0150056054dd5c7180bad",
+          "file_sha256": "26b533cd4c9ea8eebabc75a4a9657feaa7b2656917cae3b59b1d8fbe8742e416",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            194,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "892e4291d7e116f92bce7d28a94f46d75b0d20a63c76330f48c5baf5a4418191",
+          "file_sha256": "d6d3bdfcb41934ff7f7ab86ccf85ed6e75c3afd6a724c78443ac678d83fbfec1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            219,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f6f1c183c534a0b6979ba2bab55a14b64ab03c532e625bc8636c38fe36544feb",
+          "file_sha256": "ea79728fc18b172cc285ecc437455122efefabe2c11a8fad724de0f9f0670f42",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            195,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "10827747c2f454be0eda0c84ee2a37f9582851aca57a10c543952c47652bcd82",
+          "file_sha256": "87f0e997e0f3c833f5bb0aca5195b6ca0ba32596123c169636f533a144c4bdad",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            197,
+            286
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e3fa75e151358f80f812520892edd8af23665fb2fb69af7963e10a3b2d352d1a",
+          "file_sha256": "9320143db42cd1c24ec8108c4c1d813b29ad2d934f6a21d01ec26dd0b26e460d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            187,
+            286
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9cc3eb9cdab8aef76b52813823341ac8c6232b34c9c633ec60bf0c8b184daf5d",
+          "file_sha256": "32be27cc7e96b18defb2d14c6eb44393609ec2c76ad4679223069917160ac738",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            211,
+            282
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "29bf567721b53a16a090f7f58c40f442ad7cb50df31c789c47ddf7d766230299",
+          "file_sha256": "4a946726a995e21aa9efb6ddc080011c9e85fb6bb0c9ad5a3d709481814edb69",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            197,
+            281
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cc4907d2bd13f87251ad78ec1b3eb555ac91d82f301e372927cb54b2441fb032",
+          "file_sha256": "878d0d1de3c4320f23c65fa4ada7939f592cab42a8fb29f6ce707e33a3a3257e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            186,
+            279
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5f380a61deafcb47b49f0b9420b03814e2426e3e645e14bb542890d2e31c890b",
+          "file_sha256": "1b9791f3dc0fc3957881fb2d7a37737a514119921206e6f657af7ee254b7f6ca",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            220,
+            278
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6dee81fc6af5d6120b4728c6216fecc10f4d0b094def0024ad78edd6e59edf37",
+          "file_sha256": "1a4ac7bb568071f49cd2e88fcb279014a302c2a6d480c66e33a7cf5fa8664e24",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-04/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            169,
+            325
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2871123708a76b62ef25cc516bc2b229c058132e9747ff59f68b0dbae91443c4",
+          "file_sha256": "dbfe9d1f88491ec44473b2fd913e389dd9ab58c07d2f69780b9c5438b3a146fe",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            168,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1b6d5b56d8d075194080938bef1c5fb52229cfd7098440f2671e39640f98c084",
+          "file_sha256": "33763325fa6ef6bff59aa16ec4a0cb691c80ec76e2e2fa61ae66302d16e85060",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            169,
+            326
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e83479fba4dc66c69287400a55b5d0b4b1ecb9d9debbe482bfa4fc6cace9f6ee",
+          "file_sha256": "2b112414a1c0dd64aedd79b8ad658b6e5c5960b383212225bea1b78261fc9b4e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            169,
+            322
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d026a654b5cc77b1b4cd6aa01f9e9454c087f9f6e7994e0ca89bd07ec41e428f",
+          "file_sha256": "54cbae0090eb318e114da4d2ee408ccd17002187b675134b558120d0b1653643",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            168,
+            323
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "108457ccad54b0877e00368d036e2dd22098a8ca5ae0e1261cb7ac766420d367",
+          "file_sha256": "e585b377478ecd2b31f49ea625f1f2c3bf868f94e34e2e7c9ce830e7c0a83cb3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            167,
+            323
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7728b6c78a687904477898c3b95820be86a0e51abc262403131297283832d979",
+          "file_sha256": "74d16393d1f9e087a27dca8be163af677c6f9756ba0a674ed9276c578f173bb3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            174,
+            330
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "236a3d68c6d3215a3d73679cad1b7de27ec0f0257e4b68f49cbb3e8eaee6427a",
+          "file_sha256": "28cb2904b36e695ad5a77a57890a4ac0381e0fc2ffe4b7ef234b9ad79be2edab",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            215,
+            330
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d2ff9fbed7c9216c877796f1c8427a73144ed6d96032d2f8d6c3b28c358d1e45",
+          "file_sha256": "87cd7bb55348e3ffe4b01d204a274318e4f63e9d74324675ce9fe03b8a976bbc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            174,
+            330
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2a7f985cc481344050557c49727a16042734957a6bd6c3d3919aca70e580f1ed",
+          "file_sha256": "aba9844466d12a374f09a31939fa5d8818ad6167d49f67396f463393e6c2bea3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            192,
+            301
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4a9a66d602de3bfee979918eaca7c6730b9eaa31a3dc6219a1f3a89bbd854c8e",
+          "file_sha256": "e7ef3ec5b285ea601c4988fe00df2c61ffadd081c32026caa550b6cc250391e8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            205,
+            299
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3b5792d6035b12c1b5b04d04717be1a1a84642c63ce2ff9615196e74022ed38a",
+          "file_sha256": "24cf978b7ff2764c0525f4ca53b300e054a63b0c27618b89e4bd5030e3c67907",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            220,
+            290
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0d1ea26f0e38a906f868334eddc7e8f2c7824aa4f2d7917f715b659c264d5e1a",
+          "file_sha256": "f559e3a81bef9b40d170bc16547fcf90e712966e235d5b4f3f6a37f28818407d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            193,
+            300
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7c52064b19210a5d8e354115baa4cc4b6e6788a9ac935e1633911d44ed038ea6",
+          "file_sha256": "064f4eab8413072624aa250250d1d9fa196ada33af2120e09c5392cf54e7e4e2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            200,
+            294
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "855a1f446343974f3c5410c34aacf263e539f26993df33d0d4db73f5ecd0cf1e",
+          "file_sha256": "690623b88d198ea773a8f4e6e051811b86cd393263e82dbc19eb3780b77a1554",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            223,
+            289
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d6e03784c3162b7a24a126081e5fc67fc54ddc455498296a9cd557b21b053960",
+          "file_sha256": "928eac98ebe13dc33c1b00557458de2329bb02004f4c518d37f5af3026f55477",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-05/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            178,
+            322
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ab4a8436e71f0011be10c1df004d437948a10f9660ad3c6a48c68c421de6fa94",
+          "file_sha256": "736514ee81dbe509fd45e2b8aaad3e837a6f6ad8a200f06afa6664938d16f41b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            182,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "db311d92ecfb826cddf962fc0383fa6c44e5f66490d9dfa4189659d3965ff32d",
+          "file_sha256": "76763d9f1173109c17ef9b49101f7ee3defed1c68f4f072ae8b4d3b2aa26db57",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            179,
+            329
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "67c074f289ec5c1881ae0cf21b9bff9cf919a7b80bdc73d696199d0120c117bb",
+          "file_sha256": "e14af82e9e88ccd02ef2ff953605b178953b7392be5551675baab3ecd8e46094",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            177,
+            319
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "63c0a037a2227b1256671ce474281665f4f7998e1fe6aad7a359605a4535c87e",
+          "file_sha256": "7d195208a2d6aee1bca37f6584f1c95a11b8dc1526d0f1e69353d085cd061818",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            179,
+            321
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6eaa373df2569af66331d07af4b7e446cfccdf949a067f477f92a3ae7cb29af4",
+          "file_sha256": "b275a096c6cd654047ae7de8a3bfbaa6396f8ab0c4e76293498efe8665f1f8c3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            178,
+            320
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d45442e1bece92d5ec30bd8b0752da4cfa1b3d990ce8bea3fea10d12f2c26573",
+          "file_sha256": "d6a89594f115edfe2b3a1739cb0369d35434cf03a279cc28b5ee25654d26b27b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            179,
+            346
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0557f95c19a8f065f9a872f1cc7aec6facc32c157e782b5b6333dab1b53e9383",
+          "file_sha256": "c5dddfc22534fd7c6b6a34fb257679552e99025913e9ecc0089fe353109f34ae",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            211,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "44d32eb864a482a4102d08093fd5dd6bc0ca95379d5ff7ae60f6f0603dcc22e9",
+          "file_sha256": "dc516bc64865b0c3419aed99921a2d001e8e15f47e9be634f9193402ca6c2b5b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            183,
+            343
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "577cf0d3bfd3eb47eca2746a974d9a220b05c5a9194b392a086cd103df191755",
+          "file_sha256": "e781b4525c505bdfbc08bcb199156e2d3c17617bd79b241e7271c8f9e385a5fb",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            202,
+            290
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "54d0832660176d6dae6dfc1b9f3f72f89666ad2318b34cdca0d343f09e96ef12",
+          "file_sha256": "b9b33a99c0549b523e053495b3a6700c0fa3ecdd925848daa3f2821bb284cbcd",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            192,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a66de525c5f85801225aa3b51e8522e172165447cace2ab2deb35c5b9956acee",
+          "file_sha256": "fc2bdb6845f0d3e64aa5d2c6d828a692e65400c18bd7441f68b4b1cd6f305f69",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            201,
+            281
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "50e00062868bd665bab969a7591ddd1b7caca978cc8e818107ee72c49467105c",
+          "file_sha256": "5456eae24ea48400d58d5c8edd02390b9e5db25e21e2579f28947cb67d060ea8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            204,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9128593cfd7a1546768bdfc7ffe698b84bdde9df466b7c840fb90c9de9d37056",
+          "file_sha256": "1288ae5a2aa65f3f312604763ad95cab578922e8965282cb66cb30e94f63220a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            195,
+            292
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1af011d35cec421e9842f4bb1ddd61d6512cbad6bb51adfcf92b18199cb4773e",
+          "file_sha256": "b2b6fc633011c26aea0f6e485aac70c048dd8e46f38490ef3916a05366495321",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            209,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e5327ef039f09189e2470e1228fd14df6acd90638b6042d61626ceabebc8e955",
+          "file_sha256": "7e2df585212fc55649f6eee837e611cec00f3cab72a7b6fa3c1865a11127b48d",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-06/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            159,
+            343
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "08571f4cfddb97fa14431dcfe522080af0ff0624687d34efd90c5ad7e397644b",
+          "file_sha256": "29a26c6b758b03f01c46841cac9401ba3bdf8dbea56ceb10b0a0dd17e05b607e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            163,
+            348
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1f3bfa8a4eb9166f489e7918eaa2401636a02a356ff98d639c16a390108a7c14",
+          "file_sha256": "9ac2fe03fa38b03d32a00ed92fa475f606b8329d9061e890bff18b73d18bdf82",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            166,
+            347
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b716dee00aa6e25c5db47ec49450122ef574b46617a615b3febbda9eafc38f9f",
+          "file_sha256": "def38fa19056e358b20774965ed2037c815dc0640d1d307bae3dd77412ec0109",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            155,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d78ebcfc41ddfd41c85f66d5475a1bd8ed64d6acc3b1cf8f94e9dc519764d2b7",
+          "file_sha256": "c492728bd0171f60fc174d5c0f795b4edc492be4eff583bac4388fac446967ef",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            171,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3710ef5cf18abd28e18b4b419148c3deda1a212f6ecadc232ecc8b625d6d0832",
+          "file_sha256": "b6f6fe61ae0e6f8c554284852b43193a9c82dcfecd41a4dec26b893b2dffba94",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            168,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "16b65078136f9ec61aa7fcf9feedc4fc4ea2d4123384ff0fa90d2d711f502576",
+          "file_sha256": "8057a81fcbbc9a430f052ff8aa530415b300441f4239cc103a33c3dfc6d8c6dd",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            163,
+            335
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e30e279dc777bd821a95a1062ac80c6cbd2226a9f95c8a1f34b3aba1c3b4fd42",
+          "file_sha256": "f7d8a102d8d68ca5fe2d1137dd8a2a902c8080fafd62767784b14b229d18fef3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            213,
+            334
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "16929d0317746afdec6553b844d9e7d6e5448f01bcdbdc70bfa19978225c109b",
+          "file_sha256": "f6781f30e96aea9b4091e383f219d6c2dd84c0f81a6351a9e88570da969c9a2c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            158,
+            335
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7e65562e159ed39def3d94e58a513033f4f361e0dc86eec74286dd46eb4d62ea",
+          "file_sha256": "5bebe0ba88216ce2bc0b5d096b21d983666043111e128026c833c6f247868067",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            171,
+            292
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9491478aec78338e395039167491fa77fb92a8723abec5b744979a851f9f9974",
+          "file_sha256": "866accb05633ed9ebdd239d6fbb1d436a9022d2c5330e9b672642d7e657f311c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            169,
+            292
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "965d599d6e56fc7b1b227446e40cac6b1c8bbb6c5ead76686b67683565d24ca8",
+          "file_sha256": "2c9d4b3431088637a3c363a265a4a6e366bfaf229d23e1b7d026771fa051ce34",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            190,
+            282
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9fbb4845e0c419d5026fb66094dde64cf6b04240a31797c1c39ad2fded3cffb4",
+          "file_sha256": "cf00af5b8961137635a6ebf3cf390cbec577b1e6b593291697380f286f5646f7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            178,
+            292
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "62ed5859396fd3bcd882edc7df5b6f4d868201fa40e6008f4da4c5b66773c839",
+          "file_sha256": "14cebb023cb634b99c8aca26faf7efdebcf8000d9e1359cc238873b90240ff18",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            171,
+            292
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7456e73013bb3b55f16907709ac07526069ab6dcdb60f72a69604f9cf58bd6cf",
+          "file_sha256": "d038ae72a0562f27ce6470c8d4acfba5ea2cd8c33c249e6b26230fc054854798",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            189,
+            282
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cdceb389b9c9e9dfc3139fa517751ba7ca12b109904a0cddcf3120352b4402af",
+          "file_sha256": "9af1733a10854379a5d4fb70b7a1900fac80a49f309d7d0d0ee08d081d1dd74f",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-07/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            167,
+            329
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "308e1cf4b87601029a9faeb52b10ab25b27e3b7f5b8c6b6a3dfebdcd99358269",
+          "file_sha256": "3809b3e09acad5ae9b48fcbb0e2de6c319833884045f6d52b62f46c4c7605a66",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            168,
+            331
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5afda0ce85edeb91c3fd3b278253839ad32a08b72b1e3e03bb1ba3832ce400d3",
+          "file_sha256": "78d3537254d3195b73938f96262e80bf49a83d535f939cbc7806a5a131eff2f8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            165,
+            329
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "650c1e0ba9a2ac0700caa3400df8f5091832a995d48239c6b716eb88c77e7816",
+          "file_sha256": "0803fe067c31fd847f908ebec2151eea538cb1ebcca39e1921e50ee96e3e7bac",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            168,
+            327
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "08ef1485b7d3f59ca690f51dc75d0c244f2fa043c373f450173dff8fc9ef7a65",
+          "file_sha256": "b164ef6217a9deb8d743a5a247ca10708988090670086ad74fd3b9cf78a06a1c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            180,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4e7e96958fb0d0e05275683577c7fdc4da1509641c88fff30efbbca9fa2581f8",
+          "file_sha256": "b1fa84e61af1386f24312462ff58c9ebe6ab24d57d47655ce9fc15c6a3d432c1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            174,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "48b33bd6ed264c196fd506e09afa3baf61992cebc2a6c179cdfbb106b1893a03",
+          "file_sha256": "2e78ba650295690805d8a70e56183a16afc946012a782f1a1a56eef15348817d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            182,
+            337
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0f6062acaea1b6fa2ae4ed1c8796959b8d306475e0b843f1e714a4ab945b23d8",
+          "file_sha256": "e7cdd9acd1a088a52d16bd70e1d9c0778455cf6a68c6552f7ead68fd08c5aa79",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            234,
+            337
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7b2485c4d162efe6fcb58c0a27e6b476fd1c2a761a834cbf24d31710553b1772",
+          "file_sha256": "ac56a796a7433a5dc39f916259d4741c65ae39245eb5fdf06eebe21b5974d97d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            176,
+            335
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a1dd37f2ff6008d32e11adc665f23d00a0571780c02b38dc990802acc57528df",
+          "file_sha256": "856eb3ee6f3853f3fd7105b4a0ac973d61bb47504359c44304bffc6599a7f855",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            198,
+            297
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "31bc151ac57291d5fa6bae4be529d0d05487596824ea743234e24853687d1410",
+          "file_sha256": "6e37366d55950b2c56979f85460ba63ef6530e335deaa68c6b16be0855f651f2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            175,
+            295
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "02817f0d7d4373c3f4c16709c45a59962579629e08e6313e1c8130b5cb9de13e",
+          "file_sha256": "399732be6440ff105ed50c4016e8d7d9b54339ed5c18d99c108b151817a0670a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            202,
+            285
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3478cdd34032db7dbb2a7c184e3ea4a1c1e36995ff44e8c3c5b62813b1e852cc",
+          "file_sha256": "848c6e5094f7769c6d8bb85440952432cf068cb6969a5710de060cc2ee04e616",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            205,
+            303
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "aaf2106e8c64c9a8bbdbfcddb420d74008662e0e84a06bbb76bbda9a7a065007",
+          "file_sha256": "0f6342c751474915f14e77e42d86135916c66913771fb5cb571b5c8dde9b5be3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            184,
+            303
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d9c546ac4f30ea5581261b29fc7a563b498dd1f0a6b1748fc61056e98c6c340f",
+          "file_sha256": "caa5f15e529b79019baab7d8e2a40e1f48ed7e6696bde50e76c62dbc0bfcb3da",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            204,
+            298
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "365e6d9e51cc67a31783469d3de77e2a8cae1c3330e42a51210d9676b5bf74a2",
+          "file_sha256": "fec3def4e52073dbd4248358cb6d9b81a395476426145b24513caf062891561c",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-08/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            162,
+            337
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "94726e7361d2674bcd62b8dfad83bbb74d5fc2ef4520c693d2f9b80a7251c03d",
+          "file_sha256": "ffb5281d16ea7423b43ce78033bf5d657da5312c9a09b926dd025252617eb567",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            174,
+            337
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "20af6c48b4a3d7dada6a28e0dcacbbe8ee946eb9e00d7192b86819123ee200c3",
+          "file_sha256": "a01e49bb65bbd3f6b541cd468cd451455b3a60dec3c88628fbaf7ae17d782c90",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            178,
+            336
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "af51f3a2984ebc83230868d61082211d0d7531f58f2e37e00f8ffc3d1c17c27c",
+          "file_sha256": "1d6e928d705dcb10fa79c5bd69fc63be9a1b170d28605a6139610cffb9d1915c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            160,
+            337
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d89216ea17cedef43f0f3546e93a0f8bfd8a335c35c7e4fda983eebeaaff6da3",
+          "file_sha256": "90041e0ae965666c5e69fd514bec073ffb0515a78425a385bc2269455121c013",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            179,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "45b45ee122cf69fb211858792cda71fee5780c105c2055b0d54cf9b7208a90aa",
+          "file_sha256": "ba229da7bf788b41c4e5eec4d2dfdddf62d8561b9a66189477e8d0ad571910a2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            175,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8e9aafdd21f958e1274c7759f4be7baa539ae67b5e38a6f291db4fb27cf8c0a7",
+          "file_sha256": "e279d486455a71df6be1053587421bfce6cb1db546d9ae89ddff57cabbca42e6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            174,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a7f0d36717989b2595a009e35c9cb44b9899499879ec0d63bab9f6f3a1e0fbe0",
+          "file_sha256": "f76efe82484f83402933c18957cd5960245b62e40b7698ae9148df4ea26e6cca",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            227,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4c0d06b8abaeda72800b324d429841e10308bf50ffeb7985d92ca0e7d33e6041",
+          "file_sha256": "7c6f544cf1b9d416e3f55b4f5c25e97069e65d1d20bf31b2b2679f98812d2b66",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            191,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f857e8db0303fbdd519897bd87b84b57b843ca9df32508a9b23778726e7c11b0",
+          "file_sha256": "02e3ccd81e0030526fe9394cf6b7066b58fa7d6e310921c0bc31242b538d7e57",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            191,
+            285
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5289220a4cd16865c51c5d4c9e8f8916c995dd6863228832e9af3cd2f03df897",
+          "file_sha256": "960d369f834b4d97fb5a868405d28457159c1a34ac63a7720840ca3c8e0e4f91",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            214,
+            285
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "672c67b35f0d5e4f889422cf95c35375c33626f23f349df01988fe15217ec682",
+          "file_sha256": "3c57e99af90b6e988566bd61331f4f5942bab897ec8413debeda2a1f8b20eb02",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            235,
+            276
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0744afc71a47372e01e4733a7c96bf163d59e78d001354c989933b959d062100",
+          "file_sha256": "eb55e1856eed23dfd3b23d4ffc7fcd0624b7e9002105fd5f83d7379d15dab53e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            196,
+            294
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "df2120a4ccac6df91956a9ab7674fc06732741485711749f46ade6b4ac39bc8d",
+          "file_sha256": "d8d63d78f406187c894a0bd1da17643e012eb2007fd6e59867c21bbed3a39625",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            216,
+            294
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "aa25cc6e3d8f9d8c18c07f230541679acbfe73bb92c6992547a6c292b965798d",
+          "file_sha256": "f3c03aa00b66d41f3a982bc27574f3a627134af11212c8399f9ccee21947f12e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            232,
+            284
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0a1b6795b72e2fd11cfb774ea8d4827dcc09da6eaca433324eecbda57ca7527a",
+          "file_sha256": "7d4868dba81de26bd4550b55b6ba52b1cc58e2cf3dd6e9c1ec780f788c48d760",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-09/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            183,
+            332
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "539b86a67364c6266a283e06f7e85a45f730a984c49592d395311709be18f59c",
+          "file_sha256": "0f18810c3f0735c5bc8b75d1ecc932df1b8bccf06d1bdc59ee966277f6c4d2a8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            183,
+            333
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d36e9826e2916b241312ab860ab2735d3545d530e0995947ca7539eb9bc683e7",
+          "file_sha256": "6fa1e5806fb368ff7c88a523a97030b7933671bc42f38788fb40db95fe84e35f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            186,
+            333
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6b59720b770fd4f499d0127d65f83465cf0205a10db8f940c8cb5086642340df",
+          "file_sha256": "ba79e2a49498392f2ea4069777aed50bbca65334eca85d1d994b9dab426522df",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            180,
+            322
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "772a4a7f7520745952b44135baf374dace220c4d7b1a758cb47ed6d19b5230c0",
+          "file_sha256": "8fb85c6a1884d8640a04e154fa3b3c6bf1241f61acc8e74b1ca215b6001f5edb",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            188,
+            322
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "878672f51b6d59b73e64057abd16cec7b8a949f51d5452491c86400579a057c0",
+          "file_sha256": "6e27a57c48d41e6d9c2f7ce4e289bf59e4e5ed5d4200df094e50c3960829a860",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            181,
+            322
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ca3c0f4e182d82bfb32f561bcfd3d9ea9845726975848d10d93b79979d20c427",
+          "file_sha256": "6b8c049554916af2d826fc20d2c21e42b0684bb3bbb4eb59049c7e5fd78b4dd9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            172,
+            327
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "85b20aa896a0e2df02dcba989ff074eb29a2f11a77d1e34da31d60ba186c05ef",
+          "file_sha256": "4a81e7c1db9c5e18c9e0e8c3cf109567238dc4882c0894df827c139cc01d16b6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            221,
+            327
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "253efc791f598c54185a44281e5f15286e4abc47423f541d55e1836a665d6051",
+          "file_sha256": "e9c88ae2713cb0a08bd3da3701e6c428b81a0ac0ba52fe58c4e755bd55f32c83",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            174,
+            327
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cff161767536ed4c6dddee7ac38b68728c8a9555885d15c2003ca6aa62e0ce51",
+          "file_sha256": "d3e19cd3117e3a58d9b9a02d73b7cc694ef6f7091ce986ffe697aa412d7845ed",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            201,
+            295
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2c3553eb180c491683d6803f2f6c524668dfc43039561108e142442d5ba6752c",
+          "file_sha256": "a95a07a1f5ef17974f52bac24a143069ca067b7efcb29206957e1b289acf193c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            195,
+            295
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d237b6a8708b78a887ce557841c3f5b4d3d0f05f4e6701750ce96c292c5a5758",
+          "file_sha256": "60420e3dac2e674f550e0822eb1e747e6db1400cc1d10749bcd7a74f72646e08",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            175,
+            289
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2b1df7d08e2962b6a67f64f09da1966d5513d55a86e41bd359401fed2d80543f",
+          "file_sha256": "101dd7891f7e77eedc30efe8c83a7ca7fb707fa6bcda6d0b7eba322e60bd6598",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            198,
+            294
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "da60a9162d89f5985a4bb70ba499e20f753145da5de7dc3a08b00320faf77448",
+          "file_sha256": "d203ea08d4a02105b1ba938ff6cd8bc3c4bf084beecdcd9248454bcec7095b60",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            192,
+            296
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "aa10a6a3c6895cdc52a129daf4580c72af20a049813ae381463ce2f8c19458a0",
+          "file_sha256": "3ba6e9c9b4898ecf4694735fbc2fa5030c038462717afc9f2e283d9a9de33f8a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            179,
+            297
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "af5d412e30e3512803b5341cf262c27a71a215d23101ad7fb00b7e2126e6c4b2",
+          "file_sha256": "0e1cf4f1105742418e1b272c3f24ff1ac210a0005d4f924810df93fcb4e83748",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-10/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            178,
+            337
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6c1bd941b141909d6c6289d28ba86c0eb4bce4ebe3cbe1f66420cbb42f89151e",
+          "file_sha256": "5517e35cc78e195500089335f87e8b1cb794022ad4bb60755a12fb9d8855af9c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            179,
+            335
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c739d0b247bd07e033438761e5f42771ca0c869d2692f8c7d6c6ef9b60363d74",
+          "file_sha256": "78add5272c6e38851b8a0a75cf1c6277ba8550314891b924809644074bc2e58b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            179,
+            335
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "41a779d4606cb25a5035e6ff41be18813a26822e2ccc36f555431a88176d2940",
+          "file_sha256": "320d5e0f7928b781e8a702406e33e73d357020a2d2ae40c6211b6bc2bd96e961",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            178,
+            326
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4deac990865ad1ac159ae932da0a7bf729af440ba6681dde5d0ceca93c18984e",
+          "file_sha256": "75b0b62ebe4a26c2901281f227a17aabe2de545cefbcfd363289611d306826ce",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            177,
+            326
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "990e83de40ff2b92f662cb517ff9cc8f6c5f05394e8b2220d7d5697d0e974a31",
+          "file_sha256": "6a421183f67eeb2eae730dd9d1e4dd4a9f1da8f689fc767d2a9fd0d7bfcd1c16",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            177,
+            326
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ccde1692f6de8b49d1b4c087c1857903f45c485d88ee3dbf90f47886d7b00988",
+          "file_sha256": "d65cd0288ebbfdcf9b3a1eed21ab6fd610ca939c2521d095bbecde5f36940366",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            179,
+            323
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "26d54400d0c0ff5ab1fe4c6e11f2ff7e89647912fe496b48ef3c8d0b8ca8648d",
+          "file_sha256": "0ce2da7d4e0a7145b1ade2535feb01a5bfc47d497a70de8558cc9c47b4455a4c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            211,
+            323
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "86567a0d1b6bca5e0d2bb54744196b4f3ffc4f74a75d86a76d3cc78b919cec37",
+          "file_sha256": "d04c72eb25e8cad5f16f2aec82212346e1914c3776a3123ecb94faa1390ea1a3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            181,
+            323
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6b13f6e4b89c3bef8f7e7cc096695dd0e1ef9bc227d9599f8b9716bdded66841",
+          "file_sha256": "5ef980bd8ea365f78fda2b39b4f98f6c5ad217c2ae045d1edb7e24e708a621e9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            203,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "279f30dd907566e956bd11cb18e909a861f6302442a02fab10ba44444f3a40e9",
+          "file_sha256": "470c0f613d5c1af57e0bde5a63a2b5e9630e977bd1e8cdb42ce91a5a734a6195",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            200,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "73011183a8584a2c715d0dbf0dce682af4bae59bcf9c79e8eea6de89b259c0a3",
+          "file_sha256": "190c3bec9d01aff740285c76a9982d0dd5ed6f01fa103a63bf02f72dd4ac091a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            218,
+            286
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "449b092f89e1cbe7053745632b921b8be2962b010628754a5104c53bc734601b",
+          "file_sha256": "674c59b644784638a268dcbfcd019c5096760ba78e2b15af84245dc0c1507f3e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            206,
+            296
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ee75a45518d12e68fad2eb5d876dea4d94f85e069acc973cb43a44ee8f970ef6",
+          "file_sha256": "420d74142da73a025c09dddb5e28cdf20eec03d045e195fd37f38311311adc0f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            198,
+            296
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4e8e05079fecb7457b287704eac0edbd93f62118eab82c237caa8ae35caa6806",
+          "file_sha256": "dfe171d67c8102640ab9ef6b7dd78dc340df89437bcfa4a3b906485bd94a7fef",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            222,
+            294
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "881f2b0b38e59cef4c29c37e07497a9751c25d34b9e8b4ad6a49e8cfb8d25337",
+          "file_sha256": "8b77477f7e09059422d3749376acab34a73a8bc066a6873ba5d575ec10c72bb3",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-11/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            170,
+            351
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4543452016b294c49e58f37f30d8f50333e86c3846d84e642c41e53f6a8127fd",
+          "file_sha256": "77606ba30ce36d7ca9543267d16b45d0296f48b7fa16589aa7a2a6986b453726",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            172,
+            352
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bbd170f35fcb70138c13d5796abae599a5e05ca14269f28339f65dad44a72fb0",
+          "file_sha256": "bdc3ec2fbb06aa4d4eee6ee04e2d90a3e85009e89947b9887005284235a2bf39",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            172,
+            352
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "584ba91cafd7620307df1051aa68f0640dfc8ee9fb7b49597f700944c479db4b",
+          "file_sha256": "3f1780dd1b634921ab79f346d133871440f9dad6ddd0b11ca100b102a8a812ad",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            170,
+            335
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "38d49bbc4732125317c98bb67f841a8c44e5340707825a37bc6b95fcea7e924a",
+          "file_sha256": "2ad0f9da8de867089958d9bfa80075db8c3fd2d245cdb1e49017b4f5e643332a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            172,
+            335
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "388fee948d15e5d37cc2fe8284e6c328ac00717ce7628dbbac4cac9afa000a75",
+          "file_sha256": "355e1eeb87f011bf4fc6ebe0b97343b66305fb3f4eefab51bb3f3ad39901ffa8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            176,
+            335
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "adda81283ac6240648b2fdeb7955ef286a9a3cbbff0e6cbb5463ba86a1840387",
+          "file_sha256": "8318bacef0f96a86121a162a2ae5cb711a495eb5e2de46301ca6c069581c777f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            171,
+            351
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "71571efcc5eb03f2ade3e445a18a95d959a15ae8d46fbb7157d0ae76d079b786",
+          "file_sha256": "5a0c0ff3c03390a02cd13912418e6cfced2963266b1ea9389d5a2cc309a911ae",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            209,
+            349
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "78f09c36c77614ce8e9d0c23325fbca4187d9137e6b8239287656db0c0c280d6",
+          "file_sha256": "694e0e0a1193a7cbd1963f43757786c05af710950716236b7324112c12275144",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            174,
+            351
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "23ad68e6270c1920ec1f479db4a32981748c8ce36f555182ac2b65418b01cc13",
+          "file_sha256": "85db272d22a7ee6f3604918185d1a0649fa3a0458d7405647dd4c95d5da47db9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            186,
+            286
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "53ad0853bce06671c1459e810560c7c92f38686aa44a05a30cf446a9804ac4d5",
+          "file_sha256": "73eb9082554acc7fc1e1ccc4ba73fee9775be0a608ff09654961a73bff2e07bd",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            195,
+            286
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "39db276e6ef6206dcc6d421200c18ba591efa5990628c4fdfb6c9280f2d8a527",
+          "file_sha256": "b71ce3a1a4ccb1ed2365be3a392bd0c895d2a14dec6052e4f008e07fa6b73c10",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            199,
+            274
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9195030417b3a122451e7054505099cf91bbcafeba9b7bddb678915ec7439f3b",
+          "file_sha256": "b97babdd5e8008fcae20bfd4942b5b95b07f79230d023dd2af1cc3cedaa5d7d4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            192,
+            285
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c0bea6a384ff15c6fa6f9d54777f9b22c27e887127f6ffaaa4926b29457f42e4",
+          "file_sha256": "d33b5c51bcd91524d94cc8c94e7d01a379586341cb2626ae9fd766fcc1411aaf",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            190,
+            278
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a530cc02fadb6e3f031c0f4ba8083704bbfae970510e563af8e6861b74b75e10",
+          "file_sha256": "74bf97a2990f742dcee675238f0f4caf4f1a3468f20fea28121134148a4c9697",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            206,
+            272
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c9e8ac92a911cecc509fa7f77f4b19ae748821ff450013657625688c90aaadf6",
+          "file_sha256": "63db4d211a13e8f30c2f1b4f855edadc2b506284fb5988cce1f0759c5e8ac525",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-12/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            183,
+            325
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3bf6b297e2d6fd8910e5de42a3acf04e9bce55d6fda6ccdcc093def802abd779",
+          "file_sha256": "aaa961978a764ed4cb5cb621d55a471e0e61d0e894c8fa7970cf0a0b3e26f934",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            192,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f6018ca4d1bc68b1655b4e2dda93472088f631533e8b48f7334195cbbc6a6dd5",
+          "file_sha256": "e57fd8f7c1e9647ac66fb7f257aae3923e7ee1a3f9bf432cee3561d927b151a5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            190,
+            325
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9918274e472f7849aa07dc2feed6688cfea5d57ba7c4705f53a3dcf7ae20f141",
+          "file_sha256": "290152449b0ee7c5de2d6f353555147c9592c91ae08bed47f3948140544b83ba",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            181,
+            316
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "981f07b4e36e3f8b5e5e77cd75223dcf9313dff458d4bd4521a67d70ea62bd76",
+          "file_sha256": "e5301c72c8222b12739f5240603564b3dbd7d78772898b5a084cdeaf624c0eda",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            204,
+            316
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2a1c818c9cf621f3e51573a1f702c45bd6fe717e813943f5dc454e67b15d6f04",
+          "file_sha256": "7dd1b77d1db20eb93cca08c5d1aa0cfbcd11497515251a4a12eb48fb47b04f16",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            198,
+            316
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b4b8b7d660dace91d21e2e4ee729d3a3d9add5979d3fbb633469de8195ddf5e3",
+          "file_sha256": "429c8d049d4e4ac0f422760ffd624a4f092bba2af9dd890435f76f719869d410",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            180,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "88f4fca1861657247b501e20fedd32cdd1e9a8181abeb7864685ee9df7c403c1",
+          "file_sha256": "76098ec6bc7228a61e05a6e24568e7677e9008bffe515074f1ac064b9915a498",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            228,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ba60787c3519c7cdb0428ea936f0d45e8f89add4110b86ef82ecbec29a1aa4f7",
+          "file_sha256": "0c2944e4b116d37d96c1404c7661ef40fce3eddda35fa25d1874e0a26bfbc1e3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            201,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "183f4eb17ec46e3bad5108ae678514e6205b392dbbc13029e260c3a772ca3436",
+          "file_sha256": "979c5075a27e20ccf9c3b6adca70fc9fd93b8e9dd8b11248192f61799fd0f917",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            212,
+            302
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1a7dd16812fed0379206d5c3d6bcb99d75047eef63c626c731c78e291a70ff19",
+          "file_sha256": "4a06153a1977e9aff8b230f51079dd039699d9e4aaa3c61690c3c466378e1ade",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            221,
+            301
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4d641f4e969653bafbe1eace916fbb98c22b4c05684609f26847d929d5aae4a7",
+          "file_sha256": "3e9ebb14d9cc4bac41a01621db7a4b8ce9fecfdf13dc95b9b1976aae30d5b327",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            226,
+            288
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "042c8fc0c324911522be1aade5450106254893e2e22ea0e7e3aa6261f8d56757",
+          "file_sha256": "957d4fa1ed4deb374477decb43df7f4f539fd3fbcac03988f7cfdbd43b305e17",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            223,
+            313
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c9cf004dce44c4220cf3d02307ae94dcf837c93cee4a1c0ec554aae9a865f604",
+          "file_sha256": "c7314be0bd3321327e3ec285018a15eaa1d3838810f4b856e14ed10b791cb28f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            240,
+            314
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d317bd34c9df3841dd6ab37d13de5ee7636ab33b0de2341987e28355ca6c1171",
+          "file_sha256": "58676cab060f673594e4496760109c4a51b1d4e566eeb2528c1c5e49462a3d6b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            241,
+            306
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "dced63c75bcb525e446946877e4bd883f17f6645b280f84f55b75139b893784a",
+          "file_sha256": "e21c116303a5d66c593a46e1d5a3e1da10df0db8b2b74209ed3085aa3adae974",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-13/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            160,
+            335
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "15432fb948e5b06b89d25e940c660368887904349bb532a04766b749bf941ea7",
+          "file_sha256": "5b256d6e1047e99bff47d988eeb5a252d425c52062283de218e729f4a6eed9f7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            170,
+            334
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c30083d0e226deee439e76adb994a536ad698a811109fe4bc6af61dcf52fdcbc",
+          "file_sha256": "5a900497c82bf870d5185142eb9d1f25b782ea812e0249c5c7d3c856d1beb74a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            167,
+            335
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "700cc3a1e454b4673e913a68853054253a0181063d7141c3876d11d5a7001bfb",
+          "file_sha256": "82bb29f15a0dda8239849e377009d3c5275f2215332f23e5b26c98bf06037d35",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            158,
+            327
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bb339646d555b6463aec46a8ca13a722d152439511043a335aaa9fc3239ae083",
+          "file_sha256": "97d3b11574dcb6a75d40423d29eceafa97b043dd39d10a770653310a9c66cfab",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            169,
+            327
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a33f6b7a0f38cf85a26e7a2e24b9928f77fe6de3172d4f0ef7f1e68bb2c43eb4",
+          "file_sha256": "00c03d8f729a4cf346acd17df0655a4bfa1ef9f9b66a740550fa20a2c804bef5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            162,
+            327
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "18c8098c827834ea506844ed50ac49f990ac55458ecbf340f6c0489c00e343a6",
+          "file_sha256": "beda0bf8bec3b7e46e01212582aa514cf2f1a34693a58b61e7108c5019d42686",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            179,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f664099f68ff11368bb43aabc903e4b73649ad7b31ddb7ae0390391ce8c0e4e2",
+          "file_sha256": "2d55215a7df74031e208b1aa4a8a7ad24c4f554bf69ae65c587cbd9f23fb1fd8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            218,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "96e73804c0c6030837a2a027a18469dc49daa3efaf6d896f640800aa37d2aa39",
+          "file_sha256": "d18f3c0ecdba38ee19e7c2db292b2ebdde0099a69391cf3f5f48bb7d8a7225de",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            180,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3fa70f11a4ce2384b9eb7a82e46fc1fc16ad93e1a8cc61516bd48aff62bddab3",
+          "file_sha256": "3450bc89a9c52d3a18d7362d451a16c4fcd7144edefd5b56b528ff03e2964275",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            209,
+            290
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cfbc001c236275f9a03f182d194bd151ac6c810db28b14301466917cad1cde52",
+          "file_sha256": "3dc621b7255bed047a2fd9c66eb4abeac79ba1ad1f03878baf8aa7f5e9872123",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            194,
+            290
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4ed94d3cff4909766be3029306a15755c5fc8bc39caf140cd7ebd074201e0d5f",
+          "file_sha256": "1cb5edc43a5fc9c44ddb5ac569fdf8089ac1802c9ca3b2e2e2cc251a2e45074c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            191,
+            290
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fadb31eb02b67d615d798df6dfa4c568d0eb3b35659c65069d01f5c698f4fb1f",
+          "file_sha256": "818cc19f212c4f69bcdfb6d6dd0b16b05a6f32bd33bcb302d93ba65c7a8fa52a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            212,
+            304
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d3387c879dc527b3c77da91f070903b072ffd187ac305139188905a0ec2f3d4a",
+          "file_sha256": "e34db1fa4e90a67ba8abb7ef02010c238e8f159952bb1dc35e5f1490edb029d5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            192,
+            304
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6b7e912c345fbafcfa3283f41e2acb630a2b6bc89d78a761741f144d1858c007",
+          "file_sha256": "eaf0236130fff97de1ab48083519505aa84dd4dca16bee046a1a84c8e5b6a997",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            206,
+            304
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b409933d5eac7dc68e9976b4b6abed8de97b3d653f91ecba4ebcb8547404401e",
+          "file_sha256": "1b0dacd2fa2f4c03b64ba29cc14857731a33ea06648e0ab530642052d6a7ce14",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-14/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            148,
+            332
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "713087d1e20bbccd907f3f740f89cc9745f4f804fc2fc023ffd39e83c76e387e",
+          "file_sha256": "970d080b57c500c7c8488bb9432bb1dcae5781f934f3e242b2f64201b2abde4c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            159,
+            331
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "90c0926b0de1ce6de008df1126e48147f44ed1b715af90e5bb3f8756aaf40161",
+          "file_sha256": "cdf0db1c9b11f32df6bec39343d28501984e9a99b832ddc1b7c703e28fcf1aa2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            156,
+            332
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "230897afeb44309ab9f92c8af78ef82ed8615ee386161a0e6ed613bb52b969c3",
+          "file_sha256": "6084d363d8ef9caafb242e117b9c219654ebe81666625c84267f3eca7abb4f8f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            144,
+            326
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9e0a1954394f1174d7cd499aa949081b48c1bbc13ac0b4aa714362367a7baa1e",
+          "file_sha256": "32ced610a36890cb887498831fa1d53c49d91ee41c3f1dc166621468bbcc4d1b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            163,
+            326
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bebda552c8af718289668193fc9bdc64500ee14b251288d8f85ea42a40d3af93",
+          "file_sha256": "3d3c866bacb4258716358d284a8303ed1866d16e65559697314fa95317dc5919",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            160,
+            326
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8013ed83ee86e5c8fdf67aac83e2a0dceadb8828d689ade95f036208168be731",
+          "file_sha256": "349cac51c836180eb9977da5b31b8b44836af3579a1b04faccdb8f006b7a7f38",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            159,
+            330
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b32b4857fbe714dd5d6789955bea645577cd86d4706e7c861505f03af31ad462",
+          "file_sha256": "53272dc8bae705ca4d3e3df374cec8e2ce3bcbe0c9a7738f7f7e4886297c853f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            196,
+            330
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3f7f6397579f31b7012b920b24daf541bf3b3d8a70cc673e3dd2bedd96e1be5d",
+          "file_sha256": "51ac1b05505ac2b0eb28f7fd76512ab8e3c00458fdd89a592511f37c188a602f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            157,
+            330
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a29b34858ac14f1a58dbc814f7d04b08af792c58c953aede9b1c418c08cd5adc",
+          "file_sha256": "b219d9743c12bf25ddb20150479c44d784b083623a96d67356085e66b0ea9898",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            184,
+            295
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5cc1b9503f788df5d8a177421727de781b8cdebe7e125bb37a4062f5c18fd5f1",
+          "file_sha256": "8ccb51ae5bfa0ec659445af2adb2f653ce81bee737363776e99a53eed12345ed",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            194,
+            278
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "641e6a85203ffe18ff55f66e19b92df38554977627cef69acca6b61b0938cab8",
+          "file_sha256": "86860bb28eca774d408178ecc79c150500a6aa30b37b962570e5b5d22ae31e92",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            216,
+            271
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1cf3bc99cbac529498dd6c850c6398433178f03fbd15bb01c6ff1003decde2c6",
+          "file_sha256": "42321d5a2eb9e6d754ec37e6752127fa4d813980668e1a2df7b0e11ab6da7db5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            190,
+            296
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "45c1c6cb295de8ab5d42730482ca725a69526f2475bae7338096af0fe804a0ab",
+          "file_sha256": "c5eadfb26c3f7f76c1fb8d441a5aa6cfe4316b2e0006a574372a57a7944d6e5f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            196,
+            284
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "45e3267486ff801fb8e0c94dae891f9a3844e020e4aaa1f734a5d324052d3df5",
+          "file_sha256": "1fb3fbebd8f45a17d4b98afaedd3ce97a7215ac8989e93c9767066ea612b46b6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            217,
+            276
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ccc2ae53812df58ec2aa5b160f64c8806aba935d4a836112f809a8942f85926a",
+          "file_sha256": "e7d900d13508404bf0e298209c6c03baeee981df56beeb49b1d40b7cfb6d20cc",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-15/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            166,
+            339
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1655f399fbda38258e7f472f37e794e7178c7f84d541c2ae8faee698edf477ac",
+          "file_sha256": "57e7be798f6fac3a05b9bb482a3f56de48bfeef9712e1fa2c6f49bb3dc94ccae",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            167,
+            339
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bc6997ff0220d4d79e3feccae6deac69ab738472b12030960a305a4c4499b96d",
+          "file_sha256": "eb6611e09b13214194758aea5f5f3ee32f3fd816e1d4c04abdbc53378c5ed015",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            167,
+            339
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "aebf50db23aa17f25184e0d753df133fd13abe62a718e477ca84c153902acbcb",
+          "file_sha256": "935067e36783b8b3c2f2d486a6e6c54c9b55c55c09485ab7a499798163ad1ac2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            166,
+            335
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d696c18449e40e1948dac3f9e58b5a1d092f53dcb64c9d5c560f70ca4dcf3b0e",
+          "file_sha256": "939abf6da0a96f6ba6284afc338dbf863d4aa6fef5fd707fdb125df78a1d017b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            166,
+            335
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ebe243df39ac70767c325d9fa09624b726f7529cc725fad1f064bb449d384ce5",
+          "file_sha256": "f236f2d72d5d03fd409f496057f030aba3b9a9c7a5fd42f484a198a42657580d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            166,
+            335
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "473249bb8358b21064b1e367d536ebb2311d52ec6113668a92fa9a104b772b6a",
+          "file_sha256": "acd9d3eebd91af188106087b6e6dff34ed35d005de148ff4ab5ce2a3d04f07a5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            168,
+            334
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7695df852e833565261f02c4be0c301320fc9f0650e278e6e30b69451bf9029e",
+          "file_sha256": "447bc8c04d73e563d7b2abc05cb65ebe40224dcbb08575b5b3b5b26a028486e8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            214,
+            334
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ab87ebd52c1add14c8730e4b66af48917a48fe21a7d9ed14777cb0e2283e4e39",
+          "file_sha256": "2bf0de878d53ea66dc45aaf17f82f729fbf54975e22cae84fd58b4ebb827a49e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            172,
+            334
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1f3c53438dd4228b527973a2d3ff7dbd37339f331f716a61550fe4e62fabefab",
+          "file_sha256": "5027ddf99e84fc2e560990d16135816af9a5818e6647ba0b1922c474f3ecceda",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            195,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "db7b425acb988483e10d8be4e878e47a6b318d1dbd7f18a0be8399d357dc080d",
+          "file_sha256": "6c5459a2764b01c4e5f7ea237537b4898f179c0df308cedcd14e8e4cdd9e4074",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            188,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d77d5360c60aad5dfc6f3141acafdd1a871df914dd896273a76decd5fac0902e",
+          "file_sha256": "e9b913835d1db4a8606378dded941f7842ae2ffb2ea15f45cec74678592cb5b0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            201,
+            289
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3a0fd09b8a11c487057c2fceadefe9d058a19554e950ba779fced4683e678a63",
+          "file_sha256": "1e0aaee1348ec0ff4805c503fce9c551d932193390aebfccdee8a4f0ece12ed9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            194,
+            299
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b589a8d940bb38c7c585b8330b44ce8f18d5b64d6acb23274026c1bc66b1c073",
+          "file_sha256": "f47ae3739cb32a990648c72bdf0841a6eb255347f2716ad127881bc1579c692c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            201,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "58adcf7e38e5f7cfebfbd310db7bee32c7b63734e1d2d9492d77220fb83c0a20",
+          "file_sha256": "53396d8d174815e82c3947f555ac9f34dad36ef5a586c66e331f8b3b150d8452",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            218,
+            291
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "95eaf9fa0f3e135d63254368d5ddbed4768999792a1a76cb322219170641a476",
+          "file_sha256": "8c70d2f4b903d6a52ca0f18c2f46f4eaf52cf3f107868d6c3a80123af09ff262",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-16/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            160,
+            325
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "38bcae022cfc2157f6da8e58fc4f969c02bef6b7e67ff49ae0968020f0d05c6b",
+          "file_sha256": "1e3cd793949a94e3b5e715c1d394a4dcc838c3b7015261400276e84363b74769",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            165,
+            329
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "96bcdcc9d380c5edb834a9eb9330f2a0b73556198bbb36eae4c36e230cea6de3",
+          "file_sha256": "c010cfb56b0dad077a7f96098ea35f9c85e6c9dbe02abfbcd92f155c6a7d18e6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            166,
+            330
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "165fcd2213caee2ed9980e1a979b0f8005dcc31f16d6f5dd0528f00c19748b31",
+          "file_sha256": "1e47ce6c80f3da02b8345ec8d95735b29db71a59d2c3c05b71e2c657b05e3879",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            159,
+            316
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "80032b97501b4f976ef4045646852f6add3ebaafdb140b29d4be8399942b556b",
+          "file_sha256": "680951aee2b3db98e16037ed2fe1b1197b6ef8f0d4c592b6e86c8c3686c79777",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            174,
+            322
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9340681b2e8d79993a2a877347073023b7188fc09ce4ec373e00a734d9921eec",
+          "file_sha256": "b93d65a4241fb2f6130e65c67e8db14f22bbfb980a5b83d7a099d0f811a10c0b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            162,
+            317
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "48381155db419fb8a81be0d198846f8aedad9999177ddad94a76f37f3cea1823",
+          "file_sha256": "7de69cbce7c1295c26396028ca027316758bdaf5bb7e9a7fe9b065de4962f85e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            153,
+            326
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "30e035e0bd5c0f539a7bc6c43cfb5e2339b49be85ab18fccb392bb37a9a8f7d5",
+          "file_sha256": "421fa65718ee8af8f2723c3dac90597b7b945f9a008f6362cec84656550853ef",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            211,
+            326
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c7b28f4812730e3cfeaeaa50ea87e51e2e712eccf902b2af22c49402833b611a",
+          "file_sha256": "77808a4c73ac70030f4a6ef6495f80b095132ca6ea616a68b56a820ae9e8a0c1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            161,
+            326
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fbae07a7a4b86502914525329f3fda25cd668c4d9460c4da4bca57dea783bd8c",
+          "file_sha256": "0ebe11b80d66fc048275db90d29e940453b70a21a16519fda9aef9e15d2f8aa2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            194,
+            285
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "03c38cf5231dd21f17603257b9d4fa1bb91b3b0592a3966af72555ab7c8a8b01",
+          "file_sha256": "7f3c7a98204f866deec9845392f8c4c5da607602ff19a898230c10b8cc004727",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            184,
+            284
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "794b01b10974df66e6ffb28d2bfc1ec8565eed28985fe9c418067a9bef53ee50",
+          "file_sha256": "c6de4ee70e98e409ff446fe26c353f3f1882aa6a4088aac501c3b95571a925ce",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            188,
+            274
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "635f4c4737e7b9fbff7d4571c0b0807cacf857542d4f110a1e9cfea817d2718f",
+          "file_sha256": "9a35f700244c447ce42e5c181fba9910f1a84b100351af9a0c921cab8ead620a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            194,
+            291
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "30fa1d7a04b4dd5b42c1336fef951a66f72236762823aa9295634ff458d96c0d",
+          "file_sha256": "bccc3dd6641bf63656b6940c1af68b9c5a7be088ddd5def3b3f300e6fbb70a54",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            175,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "37a6ba100c1071cbf1148c1a2cd05faed190af61b309996b01ae5bab9ba77efe",
+          "file_sha256": "f78e32a175e5b27b690aaa0f75dd2f3bff277fcbd07f088a95da777ecd246639",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            189,
+            281
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "18b05880e6799f608e501f38967bae81c9557a1a21d3a5a5440469835c48c392",
+          "file_sha256": "c5ca13bfc17945fa5e5edc2af875a686bac4b1cd6ee68b246816641f04a1fca8",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-17/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            175,
+            344
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b8f1dded0ceeb7cfe41f378a6a065bda5c6211ae840a69f92d3483dfad47ec52",
+          "file_sha256": "a0918164c64ffe0f9d5d1d17c36e16a237a5fdb5f9a99c2b2f7a96a85841a441",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            174,
+            344
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f804c87823ad2283af6dc7baf53491b233a025faee3035826bea96710ea6ef36",
+          "file_sha256": "c7d4bd4c2db5ec7dec856684dd88e730c2a9ffcea9570cc06b1d509c6b624469",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            174,
+            344
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ca99e4a6dcb57909b218e7cc8edaea0a017053b8f77fcc1c808c48f7950f2cc4",
+          "file_sha256": "d69aa7788fcaa2b8764c336af099eb81ffc6985f273d24602eaea0423e64eaec",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            171,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b5558956d1faa55bfb8d952e2346724e0d9904cd3f335b3516ef5deb1eee22a6",
+          "file_sha256": "698c4b78a44d401afad4ba91b2c46984ee790a5bfe9e1592956ea83878364f4d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            170,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "398e9ad215e32aa28c5a488ff77119d12a7a985fa7a5fc248fa8747e912973df",
+          "file_sha256": "21f7313392b13e546d56e475debf16ef18f45bcd3abbd73367e1b196bfc36a4e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            176,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1020e09739e5f694980b99af5201c775349bcb63c4784d97e07a4c0fce137906",
+          "file_sha256": "ac5448898897313058c5b6832514c17c3de67505a485d76c43ba58a8e07ceb19",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            176,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "51806d140ae3f94b62ec369fe8591599fca17c3a8ee2b82b358cac2ec1a8246a",
+          "file_sha256": "695e17b2df6c0653fc2f6932dbd7a1dfdcb45645fd2ddd6a4363c778c9e8ddca",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            215,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cdacf56cfc812b3c024d94b7b003cc295467236eb44434ff097cc189802f623d",
+          "file_sha256": "6bd1ea42fa9d0de4a9434274956342678da3419f05db4fb14d9450a3db245c17",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            181,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1c2d302798300d3f16a087175f0f6cb2be852533f72b273eef7bc0da8d1aa148",
+          "file_sha256": "86bf0abe780aaede666f4b5e2cb91fd4571f76d4358f8147bdb49aefd80a0268",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            185,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5565fd1e8633b5d1eeadfafcf18a484a815f3bb8aa485e241a438f393647a075",
+          "file_sha256": "46a6174ec40c989bf009a17dcff4ca1491b2fd1be349683e174df407e3ceafd8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            191,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6c83b6255fa3dd6eaf7eb8bffa2e7faada353f86051717ed84758736af927119",
+          "file_sha256": "f3dec779034b1d8c246173ed4fee8fe153c27ca4ba9c5194af1014b410836e84",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            213,
+            282
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9acef906799db8fae108d5a39edfd1e53c93d0b9973d01ddbc0dcb70b2a8571c",
+          "file_sha256": "bb0691f48f8313a0270364b080109f003ac674a03724dd2d98a0e60502934a4a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            195,
+            292
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "26e46a61e738693f8978e8e23a27c9871057cbea32ff405576ffaf209bf7e210",
+          "file_sha256": "efd0058b517ea0ee3d541dcffbbfae16801eaa7ee5a0a2e85d8115a35a215478",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            188,
+            292
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "881c9aa0fba899590f4d5ed86ba01e15c4a4616310efc0f5964ef27bacc2049d",
+          "file_sha256": "a514c57caa0eb2c2d4288a18800449a714ea967f44c40f26ccaeb3712cb21fce",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            207,
+            288
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c75406de5a85e0850cee051fcba9977ed679577e9641df9a66ed45752b0cca27",
+          "file_sha256": "5f41fdd01050d16ac7e204f494515ac28193612fd86e38c6ffdd849db648e0ac",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-18/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            176,
+            339
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "65308ea5ee17414238139051573e382d2646f7d33b7c39815a5013c57ee49638",
+          "file_sha256": "76d8f37b3c6dc0f908e3ebbe96dba2dab82c433aae65720b2346a839fc3fda95",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            176,
+            339
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1ecff4943bb7b3bd890f0f4316652bc37a6086b86dfbc9ebd3d06a38c50b5872",
+          "file_sha256": "2fdee9891daa7454219085f58ba29bf576879856f17629c1323fdb93c9e2e08c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            178,
+            339
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1172beb330db145a7d99224f7407996dbb2a8fa11c38216aba57b7637775a567",
+          "file_sha256": "59786ddf4447ff9e82a389ccfc3eae5ff15da36133a942f504ae3e67345bf785",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            169,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "19b26933e71da6255f54f4c0b529962074d3bfaa947c305bc3d904aafdfb148d",
+          "file_sha256": "bf564cbd5944450358dc2a70a04b1f0743b4a8d3ea6fdb38d60143820abe1941",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            174,
+            331
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "01fbce44d35c3520c5afaa8c04119d4250bdb6ef3aefee4422b06553711ca7f9",
+          "file_sha256": "475eb2fe6ae653475991066c0f106092bda69c0f3275f0a8338fb65820205c29",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            175,
+            331
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8062a853d4218578c37dfc21c31fbfdbe01ee1de497a03dcb5cb29fb5a4eba1e",
+          "file_sha256": "1ec35e7a53232e59fc8b3c10079a1f82a88ffca114617d360034ed22d717f395",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            189,
+            336
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1c3c8b44b90dbf48ec139a0998a973d972a842d196534d85db2c8a5516d81431",
+          "file_sha256": "4f0e253438dd0c45c799bbb40d4e7455986ba7e4b110205bab70939de3335b84",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            221,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ef802b0981b99c5247a8675eef6816f84b35a0d532b4f868c7e2a2774424d5c7",
+          "file_sha256": "e2f173b515aa026f028babbc614958ca32fa437bac1cec19da26b86feecf1af4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            189,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f8c8c98a38576d6a1afc531433d0ca8c807209a81ad39ef2173c0fa2be768d41",
+          "file_sha256": "c165012f2a94bcc4b5ff8297ccd0dfc9602843156ee993355662d2b377ba871e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            203,
+            296
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d0bec42d121920d49eec739cb2fc84fcce03720d66efc6cbf3cae15f6ebd90ab",
+          "file_sha256": "3967afea692e370c251294729df6da18382816cdb18d5d197b4f2ef2e8ecc6b3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            224,
+            296
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9197d38a951d739d6a638403f4af53d230cd7afa083e257502a62d42c0546f93",
+          "file_sha256": "ffa7c79792d933fb6919794a744eef9c3ae9322894985a51ebf192721c86387d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            227,
+            291
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5cd614f167436573936b562b3c8194d4f7619663cb2f8da0760409a641a05719",
+          "file_sha256": "ca79b742290691feef8ef5ea7cbe291b7724a01dbfa76e7dc9e8d499a95124b8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            209,
+            295
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2e42e95838298b8a530848dc306ca83c5808520f79496e9458db41f01af0bd2b",
+          "file_sha256": "f48bdf8b8eacf68075e3dc8e372d87710ff7c76e9fe6925943c10f8e3c26301d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            231,
+            298
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cf80e8b1ab1ac2341fb02c9d239b99f570b50c438849bfa07406161e615d0888",
+          "file_sha256": "228e3531aff223bd583efc7db84ead51c15ccaf0b622161389b922d600fa3526",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            228,
+            301
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ead75ceff0bd43306bc906d02c3845b98481739c79c12a9a67e9fd260a938071",
+          "file_sha256": "7d1d7ffd6af20b28b869a13b66a2099d298c82e4f479e3f71a388a96bcbb745f",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-19/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            143,
+            331
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9f94aafcc65c7f1dcf34706979c62d14fd7027ea351579cb77bce3d1c61d6ddf",
+          "file_sha256": "ceb05810783f1c94d0c59a37a69dbe9f94b19dd343535f47dc2cace5df0e1fa2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            152,
+            331
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e0a2c4065fc251af40eb2fbef0e78de813573e27b80350ed5be0ed328ee37422",
+          "file_sha256": "aa70e972e4b4a9e0a95b2bbbeafbc928e80f89b7a2abe783bf7f6d100932a22f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            157,
+            331
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "46826e850e7514e0868262eb8a09a3ac6fbc4523cc636d683ad33542feff1e28",
+          "file_sha256": "d9679da27941ba5f044a7ceae11a4f220cc1ff7c20b03f842a7dfac7a2698525",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            139,
+            319
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3979a6e8c1d00dae209c2aaa463b96ec7f459550c4caebce5b25841e06dd1fb3",
+          "file_sha256": "bdbee35080f19bbbe99548f148284342906037c183012b45378b0eec92c48d96",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            169,
+            319
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0c7e68ab8db4281a4108856fc70b57461969a16a35332c20ade145cb48f4ac3c",
+          "file_sha256": "27b497e584b969f074da21c1e44e388960315008123df487bc662006ece4ca33",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            154,
+            319
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "246bfe52f00891e60493d271ba1ab109bb294ca060da51c0c185df2a8b5e38e4",
+          "file_sha256": "28e4b61034c83703a3bae109e5b7e80d722b4d9a6e38dd9f27d8a475bced1012",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            177,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "36361ff55d8ea7432243d7cb45c6ad9a1720f4a5c696e09fe0151df7dd116ee8",
+          "file_sha256": "59abd0d1fe2984d88e905f2bd4f2f0827d34bfc34cc528a1b792c8881858f76c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            187,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "19f2b1e6641ef6fc3bb88457a53e0685d5203e13682826def6a6d7c2c76155dd",
+          "file_sha256": "4c05e9e8c59c92efb4a17459e1da68a824e5975c0d797410bb3a81497e5a4287",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            178,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0e8c47a82f0f8d1bcb10148dc20d90e1da45bddbac2cc82e68c4034176c0c8a3",
+          "file_sha256": "c1aac797e58aae5e68100f0d0c7b7b81523bc6a8f563be48967d94cdb1f11631",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            193,
+            297
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2bb8f19c19369d2f020d602d32cd42e09442197f287a5aac2623c3170a36eece",
+          "file_sha256": "64cb333a99ce20d72de12a2317c5cca706c86c0b41ca124c36340b1db9f0c595",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            194,
+            297
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e29f25bd50165198af299173ab7632bc7999e2b7049e085bd0bade784fa1ffa4",
+          "file_sha256": "059feda014c278dc3145e18b7b1960b8c8f75e31d7ae5e5e61cc8ac9185f3668",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            212,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bf93fb27c3164f12714e3a0c1c700caf970116102fab82e47d7b86d5cef441a4",
+          "file_sha256": "b276c917260575ebc52eb22ea1d3188a38ae7ece1c1e46cba1bb260ee7f233fc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            195,
+            304
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9de9c3b04a4f75c67e3bcad0922729968abbb39b93f98552d1e5d28284014e92",
+          "file_sha256": "ae59ed652cec4e99d55f548f8f084f0dc68030e090141bd9e7a7e24584cab6b2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            195,
+            304
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "611fc3e2000d1314b3b02afcce2196d6881a78f7d4189ff7e3c8df80850f5ba3",
+          "file_sha256": "3d0e3bf6ca66caef70eb257017cbfd320ab33f463477c092bf56a01e6a580cb5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            221,
+            299
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ced51dcc5351cc260f084b62b0961586a87a7dda00b6e784125a67e16c3c63cd",
+          "file_sha256": "5ec0ae62c904541ae85cb6d0ffb78544e8a896d370c5e6be54e61d60c6f46ab6",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-20/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            169,
+            339
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "42bba47887e62959558ef8eb656796552c576f14fdbb23f7fd3fe9a70caaf003",
+          "file_sha256": "1221cc250dd49bbc3049a81daeb2255676f98c7fb541dd5e3d7ba901bceffdc3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            169,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4c17d2ba98811ead7c9b911466c13bd6c869cdcf843485caf67e72df14fbb60c",
+          "file_sha256": "8e729feadf08cea8ffef6bc4b95595d860ec3bb604252beb3aa5e61d218678f4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            168,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f85d8dd34cb30b12d893237fb76faf385660b3a9768d0561bb8733a7c4630bb0",
+          "file_sha256": "15a092102c6e1ed88f297dc3faf56d6f1dd2972f5e053f342a2dae1ba40e13f8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            168,
+            334
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "26d13aa6419cde17f05439731ff29ba9b7cf05d3b5a7e5493e9b51b2c850e869",
+          "file_sha256": "3ba27a5a4f55d43e9b03e19fe95b20de0d667f3e46f04c7cae6080767e6c56f9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            178,
+            334
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a39b64b788c682863f65b0310da312af37ad24f3d7b869203a8ac68b3be92d0e",
+          "file_sha256": "2952a643164718d1a52504dd9cebca61834ad675df437df8115042e25dea8bc3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            171,
+            334
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "374a47d73d3d7cb40d0ae5494fa21d946d9c5b25a289fbb6633f944c8b13e0b5",
+          "file_sha256": "4ef7dc1df6c84cea2d67d20a989009ac6bc6cb44a7f2a14be6efd28989c8b745",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            162,
+            330
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6783f68351ccf3d95f61ee06ee7746771ff9e0e6a4d6937bed4af70b3d153d51",
+          "file_sha256": "f50861ac5e2f0c86f2cb711bda756c59e2aa8ac110598f58eff93dc59d98d3fd",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            213,
+            330
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a594cee0aa88b68fee57a7e898b98ac7543589d937afe54403ae7111e4caaaeb",
+          "file_sha256": "52bf8e917550c0aee64af8e721c731e5df340ed749c25ae977b51fa0aae9b391",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            170,
+            330
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5ec6549cf3456f3004fd3e5d353ad757168b8e79142f3446dd579317f48e830c",
+          "file_sha256": "a7f63d978d84342621a57d0b566dfa24af2e34b2905f085ee56852b9abe62016",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            184,
+            289
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c55669d57b8a9f10729ec9f3006933bf8345da9be237a1c334c910a03ec88bd1",
+          "file_sha256": "afd973ffe1ad8e5238c2b9c981f2a22c41c2c7bcb7fe20bb3672aaec79013814",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            175,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b58ce8abfd494c718a9736ec20c6923150fcf2b1939dcab63abcf3098664cc0f",
+          "file_sha256": "8e85c2709969b665c0fd55092227215e05bc64042867ec97bbf14864b039eb72",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            204,
+            280
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d471aecf55027ec790bc382d88d756d3081431a18ee2f0ca19e68f53e12f58e0",
+          "file_sha256": "b55d7045d23057720ca420b4048bd9161f5a5be57adb346684bb57fdf7ce4d2b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            189,
+            296
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "583ca8c37a579883768f0171e64486254ea638fa8d2ca3c4d12f38e40148d4cd",
+          "file_sha256": "522a33c7242dda655c6a9f17d43760bc3e15fef3ecfb52113508c2389df87aea",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            177,
+            292
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6ac4cb935a8e41fdbb089b74372411b16e72f016162845920c04992d4ad14e0c",
+          "file_sha256": "4e3e220e9fa2419bf2cf9dd83750d44af4d976e94e1321230f99acfdab4ce918",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            205,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d890c076544d4108188c8a8fb6012fb6c9c33c59bdd64f1b2c2bfc99123e4efa",
+          "file_sha256": "ea3951051cd8a6b7c06e57a7bb96686e452c43e778cf44d52cd48d746566329a",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-21/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            161,
+            333
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "50927c05b35f081991c316e82a722a56e0f3755e21f351215f78283d6354e370",
+          "file_sha256": "c9dc2f7e24defb9c97af2b78cc6c1fca91bca78e69eb002d2ad20fd7968c163a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            165,
+            334
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d0ddb4cd08d2026a86eafe5e56a1a2d215c79662a42d07a3764a405b97161296",
+          "file_sha256": "0fb4748926abb81429ea9df11c47522f05e288ea78b9508e02bcf14f624f6260",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            164,
+            334
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ba334330a9a5d37653b542c793bb4d1e58c306d5112ce8b6277c91f3b180dcbc",
+          "file_sha256": "d02524e268e6ad6804b30604edaff6f39566f7a1399399be2e969e89116898ed",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            164,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "08d85d2709d7eff8538b679b26595a8e73096f76b01bd2a8e638d9751fc8a6fe",
+          "file_sha256": "0c9836c78138d124aba7a92dc71917c1d09b236ed178a8f1bb2a5a82bb29f1d5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            170,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e156af7c0937c935cbe19f2efaa76974150156184938bf13206aa7626ec11698",
+          "file_sha256": "f325b66a9f81552589578706a3eedc380308c916adf8d4aeef1d770228efa021",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            167,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9710c84d016f4e7f01919b47a87c0e427989e40aeb3ae7a539770ff9520ec9cd",
+          "file_sha256": "15c4f7b263b0f0145921e32c642fba5714f880a25baf2e12189288f7a3ecdc5e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            181,
+            351
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6f79ae4f5a59646b1df3dd69763cf5ea127d22bab26853a61c49b8f30e3abab8",
+          "file_sha256": "6fa8908fcbd04ae4704610741503240183219c5d31d2bb86b571ddc72a0759ff",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            203,
+            351
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6c5197765e6857f4da11c9e5887c35fe078b32fa1a19649f62984f42fe8c63ac",
+          "file_sha256": "64df2161462e6f8a52593b0276d98aa8abee68e242d26acd6720236283d3e21d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            180,
+            351
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "be067e3d777289f4efb20af68a53248bfac2f7b3ae02239d796df9a47879e2d1",
+          "file_sha256": "3fd193c4ee5f0dd6c0b473116ccf618c5193d5e60a62291696a3e8aad035a447",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            190,
+            292
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0c64a2f812e05b61059f675760ca07d0cce3843a433666798bebe08f7c4d7a0c",
+          "file_sha256": "0f88155dcd9af4cb5adfa6f1d13262a2e78ba62c545910a37c7843f40eb417a9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            195,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d5b28636553780bd2fdb812f08cb4cd924c7d5ef313a18365818e574be36544c",
+          "file_sha256": "1ce8aae64f4dc9c8ba923ca2191357a07cf1fe54fdc2db36b10bccc6f89f1282",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            225,
+            273
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "14bf3ef81ba5ce4d19c3f639dd1bb98c5ed3e552006ff565c1a865f425740692",
+          "file_sha256": "de7503d106bceb484785c31fefa6041b93988ae3ee3da259838eab83d2463eda",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            193,
+            298
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ddd73784bc2d962c6713b28c7e27ae2ce939a985592d1151b218b26f67f99757",
+          "file_sha256": "d50e2b34d2776ccccc9ac7124e00755e4fd24c1f7152165896f35a5b48b8896d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            184,
+            291
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bdb1332fb4b6156ef7b2a4905d2029d8d7fda1dcd02bd74fbfb406cca8bc776c",
+          "file_sha256": "a312977159c5982060bd414b9ab0333907ba60c34fe285bec8871556b5f531d2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            223,
+            282
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f44cb24410f8fd6a26bad4d5357ca85ccb97300636562bd4c7112f9304712308",
+          "file_sha256": "03bfe4dd32b860f5d13f2969e4ffdec9a0f8d3c844ebd655bccc2380348e2cb7",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-22/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            171,
+            339
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f7c8e0e0e42580c9304f20a4e61a17cdea181ed73f2d7af5f5571c632e2e8e8e",
+          "file_sha256": "6ab8a234144e0971e756dd9f041b76b7ee0bea741d6cbe7ed8c14e7320f759be",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            173,
+            339
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3fd0b77410198cf8e379e430b5de92d2ff20d6f6c2b15529d1c0dcab860847bb",
+          "file_sha256": "7c0bb40e9401adc639c83b69e8323add6d5fffb494565c468a5f71c3083e394f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            176,
+            339
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ab4a290f005f0e5ddd64e2782a5f44d86c9ec0afff5b86704e9f1411dcefa576",
+          "file_sha256": "bf8666846b9f8e48132381cf95586ef65c2626892a24ae693214f44ca197717c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            175,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "81af12cf5fd63844e5445c6022f21f1d0fc96dd307b127ce3556edeadbd1b152",
+          "file_sha256": "7bc0e9e1bea647bd84e5b913a1bb8f8c82f0980380af9807a5a184fd4fa50d6e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            177,
+            332
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "92fb9e741c53b3e806a0540ebf5177ca074685fe05849c8431fbfe0d0aa49b96",
+          "file_sha256": "838c0dfabc0dfe22498a0cd90e03728224d59b8db62fae6483ba5ce0661a66b7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            175,
+            332
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f225bda3d2e07016dd3bb68187843071dafb21091d37228f774700281970b627",
+          "file_sha256": "f0ac2319cf57666cd655de12b7ae91ee1a10cb52d520eae3c8733ee8c41d1866",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            169,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9454f181502200adfc9e8486de0f337315c582ca77bd10dc3852836aeb8ef12c",
+          "file_sha256": "9b188db332940964186df6cc74952d8a369cc070941cc80d9fb922ce4680d1e8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            221,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "58bc557d713f811effee668beed9a22c969d4c0b2f82800f22c469b02432464e",
+          "file_sha256": "ab937debc47bafe49564ceea4826503c75a682c3521485861386d2c49f472acb",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            182,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "377e9aaa5accf3b21975a64ab22884d730e6a1e6891f21ba56f8280a6f24bfca",
+          "file_sha256": "76483c1c0abfabab82a16e957eeb83fc5a1e2a313aa62d21cb4ec5bd08712e11",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            199,
+            300
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f0a1a2fac5a05addcb4850706c5e3af3c26c5cf0b7682881e954a456c14cf241",
+          "file_sha256": "820f8a510bdd47f3683e2787e6597329046fe39c1401f143839b125c513da789",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            182,
+            300
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c914268d6e5df2d48f8141371befc93f36c0678a0b9eeae1fe42e2de27e65077",
+          "file_sha256": "64ad063f465e0396dd46488ffc44a80ec630e092024fe6dae7ca0727eee3bf5b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            200,
+            289
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "43d67b2ef59b562c75618eae167f403cb78e50bd21b04a8c95cc8d051b2c4e9a",
+          "file_sha256": "14ead271ad7f89528b3d48061793ed06f58f34997f44d48f8a920ad1bf6a31e6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            202,
+            295
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "13677dac6bcfe7bec6434336dcff1d62471e9a0b725568b9402666d51dac255f",
+          "file_sha256": "ea49c60368448810fee10263d4806891e8de0d3c1391539bce14d5d9681629be",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            179,
+            296
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9aeb10e07ff7851f04678d48211c3e5e0958ceed29c6fcfa29a1a578dedef8f5",
+          "file_sha256": "ca55d84acce182262e7fda6253f15def4a9d48d9b96f46cff0fe4e449bf04a3b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            193,
+            295
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "134237ed5785c635e78f5e5d0f8172b10d0403f04e649c5842729fcde3c40924",
+          "file_sha256": "6aa120d40fdc16793c368bc7ff4175a49e201960bb483dd47e4930325976b645",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-23/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            184,
+            345
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3bce8a8756a86e2bb56a1d00f49e42820b92dd0946081da2f0756a22daa05473",
+          "file_sha256": "60ffd753a97deb497356f40da1edc2abddf248251a954fc82f6a779c79b134ec",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            189,
+            345
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "853ad2c00ccd39d149c9796b671d1c310b1feb2501fbd7a6d4ac4447c693f05f",
+          "file_sha256": "cab6b00b287c881c91f28a193c68692c4d2dccaba4a2fc2f7a21f86fc5b89a49",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            187,
+            345
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b40b15036c7bbf8866cff10cfd23fcba40bd8a25c6b762c6f861b8109bb1717c",
+          "file_sha256": "1405f3cbf50047751b3f5513a0ea7d47c8fe6f5c2840853c1dc43d54f729adbf",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            182,
+            333
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "851220d53e639e297a1029d517db9af1c7c0edec25d0e40dee736ee270938a80",
+          "file_sha256": "53d3c1fb84027e8b922a80e9bd3a31f5136b0a83aa155242a1226ea12a7efc5f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            184,
+            342
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "27868b47ae260ce74bca070d0fa3dc63939df8a4901a2cb73f02b3ad0edd05ab",
+          "file_sha256": "d62b2e6930adaa678160fa43c43ae4cab5e8d2c3f88971064f104df7f71a9495",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            188,
+            338
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e34504d871c9788243ce0a646add7303c39dbabac650dcd7b357377a36352b83",
+          "file_sha256": "42eccbf329fd5d05b387b3e9282d1efcd5c6e6d53af6dc036a818d873929bb43",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            183,
+            336
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2e05c3813814b05c1f6c82988195003343f1960689dfcac7a43db65228e21e7f",
+          "file_sha256": "b90d5d9c903ed5f54b7f4c3f86ad0e17668c6adc74cd0d7e26eeddbac9b24fc1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            218,
+            335
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4c20f0c7f4d86065c0c05699e4cebcb55fe6ca940451e3fa83297d502dbb8940",
+          "file_sha256": "18b25a5070ce83fe4c8dc4f7dcf0c78f639af842a57505e6ce6ca03d940431dc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            195,
+            336
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "95a93ec5dc542a3b6825a4bedaf748500c60bfb32cf5faf0ce9ff727eda34b9f",
+          "file_sha256": "b836fe9ebc6e7401527bf1adcb7d0b54e279673551027b6047da2e6197adfd14",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            215,
+            283
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b28cfee9971a7372c27d0ad636e9ac48c4872b82a5eec48f1caa371fff205517",
+          "file_sha256": "c0038b79042c22c9a2862d7dbf4dd084e10bae0a706ce541f79e958393ff237a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            213,
+            283
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4c52f8eb989d15332c25400010a96196d39032dc94d926b89e2e766d0a818d0b",
+          "file_sha256": "40c1d4f27eadaa9d38137a1ebb7a244b8192cb8afbdf060583f19872ce845c64",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            219,
+            282
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3321e6f6e11245dc0a56e7e48388f6816dc9a19cc7c47e12617b82eae133bf71",
+          "file_sha256": "57864e6025e7c88f2b4fc8c8449f27fcbf2b5d9940495e843b30b94c42a3177f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            209,
+            285
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a464b1b6c263eec84c829cd4fe876c88ae6e8362f65f63ee3d287987a3f7166c",
+          "file_sha256": "a9b30cd13c941c74c2b4545a991b1e470ef62a68c95209fd30395c3ed9fa65e1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            218,
+            280
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "928d039a28ee37cd56dfdbf72db7db13153797058b3d2fe428ff5c3659da9a03",
+          "file_sha256": "5f7ff2b2b5311cdf51c87f85e4a7028cafdda6270182ed4c2594a08f058f57c4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            216,
+            282
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3de375d2282f709ec22741f80889680afbbde53bc9341e306fe4a665f85ca93b",
+          "file_sha256": "6ac620850c17169d917d24ca29c54d104bfe5055278469196f6d344ee9eb01fd",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-24/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            175,
+            317
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "42c4bab465d02cb2344e703c7099accdea0ee121d283ecef918d2188a9007b49",
+          "file_sha256": "354214502d8ed8bc79f2561821cf4bc667e5147ef937a3497b9ceb92784984da",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            175,
+            319
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ea008b4c670209890aebbdac9b483e7ffd633fc5f1013f868d445005b2c406c4",
+          "file_sha256": "fa1ca152005eb49c8e64b2326c2a9895a672876223a541d7c4085a0baa8168a2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            174,
+            319
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "486600d1c27cc8e35b1808bb832deb8196c7f7e6fb3d40c301b6fb5faa9c073c",
+          "file_sha256": "8b7e6ef395f8af1aba9cece9271e71976603ae2852c7744ad43b0e80aaa057a0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            173,
+            327
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e4767e14ffc52416b07359603d9396e1cf014dcc638d4a5cf6419ceb4090ecdf",
+          "file_sha256": "11ee23b3cb757ec34af80ee1efcb004c245d8f99c4a63e2ba1f36ab489ff639c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            174,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "215130fb769e384b7de039f1132359bc77c632a6ef3799d0dd85db457f385a6d",
+          "file_sha256": "ac7d1239691ec17443eac7ae0ea0ef920a57885bdd197ed936a234494844c0c5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            174,
+            328
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5ef11a8f456f8087edb82d60816cae3b1dfafbefb7de351d6f871df5617adc4d",
+          "file_sha256": "ae20b9b46c207cda8967ef7ea1b3310b7625311d6d9efa29d2a3ea66623ef9a5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            174,
+            323
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "966dd80b62233e422be1c5a46bf7086e71ce5494a5c5243dd308bd01d3e19179",
+          "file_sha256": "a1ae858ded73ca04df6e0c0b3355ef9c66c637838cd945bca994ec23b6a6f16b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            213,
+            323
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "43152ef4cfb24ae8a4944543f7b2d012d4d41d6c4bbc1fd60c401b04ff8cc3f6",
+          "file_sha256": "8521d1d2f8b52a8b7d2bf92fe67384a173f8fd49cfb7a2944485f163f9e8844c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            175,
+            323
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d6ec47b45e3ae8eca3c3919fed3038b34030310575eda7b8b7d92cc2768e17e8",
+          "file_sha256": "11990e014b85d0e62d126e561466e5dc6c1d47d4ba6f08fae0ef280835b35226",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            196,
+            297
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b80d0bfe96abde3dff99c9031235524411269e784f6ae55bf2050af0fd0af49f",
+          "file_sha256": "19f34f8e242481ebfd4b553a92b3f873d790f7cc390896aa932bb34452912893",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            183,
+            289
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e1d2a2b336003d2d402544dd6ef0c56ae259326a1716d0eb6cdd799d7a8fc939",
+          "file_sha256": "0f3b2349446b60e845eca6c3890b7159787c1bca1452fac6af128b05399da430",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            213,
+            278
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1b274a6bc0970b59c50572b43868b3e7302cd17409224727d01cd12365bf3dd6",
+          "file_sha256": "7d6f94b45dfe869303a6fcee820c34f51543a9b4b87b735769ad57f5f447d89a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            196,
+            299
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3f39fd1bec213d36e7b6cc071ff575cf251cf84a555adbd182d265c50d26f996",
+          "file_sha256": "7d274bdb632064c7380fce057af17c28a264cbf273e903597ec0dffc6fe90e83",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            183,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5a0953b5110cdd61d430f9e1f2a21f3e17975878481c37eb8ac84b311588ea6f",
+          "file_sha256": "ceab84eceb231f5ffa1871eb0b0006933baebc34fa70b7be6bfc19f33a246bd5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            204,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "11716ebc31aee07e03765afd914d1e8ae66df7174045fb599344828d93dcfb38",
+          "file_sha256": "2a7b119e1dcc428134dea54855cc23adeb826c30efd760dafb09667612918a45",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-25/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            163,
+            339
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "17cb495d7407b86c0b81c7bc1c3572a42f6ccb710bc204a6a6192588e573e128",
+          "file_sha256": "161ae645b090843f813425d29644aa1bd62e792ec23cb33990687c907ef00ea6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            165,
+            342
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f2520845656f1313b7f62b9effd453aa54f915bcf4f75a853f0e67b6fbe165d9",
+          "file_sha256": "f1baba2f5efd5280e637439b4e0bbd7828ab3eae3fee374898f866b89050f969",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            166,
+            341
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "adf28f1fe1acd81ceed80259aa530cb8046e4f50e3e7a9cb7773a7ed94158b6a",
+          "file_sha256": "02e7226d822bcda75c2f84ae6266752ca0af5ee47ffdc002f093416f8663c401",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            164,
+            320
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "31fa8c34b9eff443d8a6de7e7c9baf54419a19b242dd6994bce38d1064cc8778",
+          "file_sha256": "b35863bb8b913b87b4c65e37ebd817419dc855c5c493a82b036b74417cd27c24",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            170,
+            320
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "401f7baadb0701a66b3def2c4da0bd9b14d3ba1f94ab466fe7a5bc069a4b5f8c",
+          "file_sha256": "6cb0576e23ee0c1fd3e9b383332fd63534331fdd9c10fa69d3f7e7d192ffff9a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            171,
+            320
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c5cccea0d59137fe0c2706e9f5b053011456b46d576a56f9050bfeca4775dfb7",
+          "file_sha256": "60009523c69cbadf6ada412ee4d11013bee2624512af45e71285657d1cdc63bf",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            176,
+            331
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "24c84151ba144ec7ecd7336ff229873b8c27a9e9cbd5ec82217878a72840df58",
+          "file_sha256": "702db3962e25ce5867ce486524a5574fe582d3a7886dc841467de8bb23a4d53f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            210,
+            331
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "45de759c06f56208608df12f3b690e0d5ad546be709b10b950f2eb3d420d7c5b",
+          "file_sha256": "4def1bda99199c398b9c7eb8df78a3c10cf01db0e08ec7ae40e525950cbb205c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            178,
+            331
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2a7ca4361910db028ab0f05ae933f15b7ed6f5bfaf2d46e96112ccdaf7738b95",
+          "file_sha256": "6b7e558950159645249cc30c186921834a6e78689446ae15af9338b53d5c8880",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            200,
+            299
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1507a7e10152b19a015ecf1412fb14a3d68d3c41f24c423f9566c311e81ad24a",
+          "file_sha256": "81826c0557fd1a3579fa0137ba951c759e004503f88f102be02fa72f1a34f7a7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            196,
+            296
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0f355c4025648a83f1e26238e99143a77be8a66313f7dd912d3ef0887af99df5",
+          "file_sha256": "03c7006a401394f6cd3c517f53c5bb7d0d6b8fa873443824bf60a43c631aa9e6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            223,
+            283
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6cafc0e07cae40b24426d2b217bfb3a0b66e4819bae49432dd188a1ca4e913f9",
+          "file_sha256": "408166b5ba8ad72eaba9676e16f61c9e93cd46a62b3603415daafc6b283663b7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            196,
+            301
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0769b7375739980ac4203d3a3811cbe7afb7b287f315477d3318b834e5bb0cfa",
+          "file_sha256": "2365c4cf0f64767ff6a9b9c2ad1990136ca00cfb634e347ab4462f132d599db0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            201,
+            301
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "98daa1e8700af5eea6c08093ce0ddc70210780b31701bd48ab0b7be78ae44395",
+          "file_sha256": "a1e4fee6e60b4fbd77fad9d64fb1f0398113d0189b3f5c1e6e5714215e09a223",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            217,
+            296
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5bb8554a38d4a2624737253c65e1f3f559f16fa5182f41c5971e8dca00ca9deb",
+          "file_sha256": "a4696fae527f564a6a755b608734894cd9a2f49714edac47aac92204ccbeb5c8",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-26/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            158,
+            349
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2538716352e257215df93e894f7d56641fa6643018f3a71450a4c6a407ccd99a",
+          "file_sha256": "ce1998eb85c40a39c6af9cae7e1212e85b760fe64ac15481be53ba2dadc684f6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            163,
+            353
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "757c467dc7a0085c9902d3b1b4c8503b514249117cc44055b499d155e7d7c7b4",
+          "file_sha256": "166cbb21341ee79cc15e0e28f7bb8e0a721d2e0f023e1eaeab11e505a9fb9e94",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            160,
+            353
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f266bce0b31f9325e193c837b0c3f9570f367c9c0bf1db4b86faeff9fc753477",
+          "file_sha256": "5500d657f72f1a4ae99f25b710b43ec5bcc58b0bdf6257528c2e2c8684c6b6ad",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            157,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8568deae4fa04150b39c02e217e24f446a0a1499023e6bd654e10fbec0e7c37f",
+          "file_sha256": "ff0f5b1f58de8b6c51a9bfedc41c74e1dbfc745546c2f5a91dcd18d368166b86",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            170,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f92d3a352fcd71c4089311ee010348a5b1a1ee9f9484b31abf1bc94f248f0f9d",
+          "file_sha256": "48c95bdf7cf51bc4e925a6c93980e1785eaa685ce51070242506829d3bc516f3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            159,
+            340
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ea59768e8e047cec3a8483f280b7051cd3174a87e69dca0838abe2bc8291366d",
+          "file_sha256": "cca342687640cf400f149fd6bf8677c4735cf3d8e43238333a6032fb9dffad3e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            172,
+            345
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "865ed807c94f3d7905910a53340b3e8e074f003bb7eac4b6094b7059892f1c8a",
+          "file_sha256": "aa12dfcffb298572184515b1622c43d0d91a55755c5ad53c4c51fe151e127439",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            214,
+            345
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b4e36d45dfb60289c6b09b1d35bad3afab506f14ece3496cf2b045af3f6842a0",
+          "file_sha256": "6c49ff6d60c9b33a0966a839309628148d41958ac27508938263b4183497cd1d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            169,
+            345
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6e5efbd05755e4e97c3dfbe1685c0d84262153e0295196b5374bd265b135d01a",
+          "file_sha256": "e1a29bb9d19ba044519d2fcd48f1384123f414aaeb723239c496c24bca827744",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            194,
+            279
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "11c366bb888a65c4160ed9910a2ae37f90aacbe22e804d7b7b9e0f94abab3009",
+          "file_sha256": "1a8d1f81ca25d0bec49f5cee026b7a2369ef0e9c2dba85f4235cfcf373cad5f5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            186,
+            278
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1854094c71ba07e9ac277003b923e83f0b19331bf56cce33efaba36c6465a16c",
+          "file_sha256": "1117c63c991664e93d064a1ecd290d5120ec81dec75e9785310e6ac01a6e6624",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            188,
+            267
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "048b8ad8c37db3aa09dd89f4866dea29ba973e53122f3ddd11eb566e6358c666",
+          "file_sha256": "440a9b3a132feb8e6e7678cf6f3865ceae122724b255e9659d8dc1f7d84b63e9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            190,
+            280
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3146486534bb815dda26549c3e4f5e52c77b929a7d873e50f7c85aa718d69eb2",
+          "file_sha256": "5199721d126c80ca525f7e0d22c15c353aa3205281b90f3c551c3af840321dd6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            196,
+            280
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "98522cf8fad097f3d3b5b040fb19bd95f4ae26581abc7a2e8d630f936f1c2d5b",
+          "file_sha256": "4bdb40cd8b452ca18529c1fdae73209fff0b517ba146a9e3594fb4880e9a8da8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            197,
+            272
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7bd4e24113d38292faa7fca46e8a0bf467065ea8701f3189f86fee2f904b0b02",
+          "file_sha256": "7ae5937bc223530ebfcc079fcb8895a34e28ba75e10e4552caa814d596438c81",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-27/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            175,
+            346
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e5a856505996b514990a92fe3cf5cd3febb0b9b65e0afa5454ccb26dd902a42e",
+          "file_sha256": "7411dab41b3248ece0975fd4f3a23634c671111a8d8086cda1238e3fa428d6b7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            182,
+            348
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "47f556e3d84a64b193f824245e0d79c7a07f4d2e22a8ffb117d41ca9e926452e",
+          "file_sha256": "bf939378790c22ffa140dff85f073e78ebba91130659295fce7951e5128ca510",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            177,
+            348
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b586356d26b61a3c0470c3e4f40d908448fbe7fe83eaaae673804802479fe736",
+          "file_sha256": "46127abc82b69b2c226859a060e5f056ceef40afe6ad97332790ac89319944b9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            175,
+            332
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ce0a5054d3d22800af2d0722fdd2680484e39c4e1b41c00a7479ed8ae63450be",
+          "file_sha256": "9356006f43ae7820bcb889b0fc86e15f543cab88cb0287a5e3af564ac872c8b4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            182,
+            332
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7d12c721db08ce062ccceaa0908c544de4ee4808ff1b62261e6e1f39b4738bd1",
+          "file_sha256": "286ad19028795edfd3953efc7cb5ff575a338ed7376eef534aadd0704fdd9458",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            179,
+            332
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "09837fc278be58d9758fb1b9259d1d6efb1cdd74e8e8643dbc1abdb01f432a68",
+          "file_sha256": "308fe64b9e4d4a847763368d25f1cfa2c96983679b1344a5a87b2aa1211e2b41",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            184,
+            346
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "08824df0877ffde3dcd78075746afe405adb6d07fa806dcbd86aafef6501248d",
+          "file_sha256": "28fc6b445d295cf7891452e737a31723b98aea957d21bed5bbaffd9a99dda549",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            224,
+            346
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "567baa93730a2d96d74ca160187b63ffb46d1a4b82bb3b196ae185a57e29085c",
+          "file_sha256": "e4e2b89decdeca62256c0ece1a2b2abd580a5aaa0aaacdd0c6cf120749ce62c8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            187,
+            346
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0c1e41899864d166f8ffe92f4db8cded09752cd991c8ddd11866d28fc795499e",
+          "file_sha256": "730a24922eb3fb8ec96767e11b83df711246751138c5d003e17f36e7d48ecfe0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            191,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6759ebe952163c7876bd68ca20f5e45f9c375b693cfa345fe0aa0aaf5cbe3ab0",
+          "file_sha256": "b4411ebbf58daf656e3504a3b9efe9ac0ad1414ad8962fc0ecbb399cae8941ea",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            204,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4028e30b899347b1bb13b82cf9117ec505629915840d5fd4d8c9c1abd83f20d9",
+          "file_sha256": "871084428daaa26326599960f6101829e992b52cfeaac09e9c41e06278d9eebf",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            217,
+            277
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c1d6e53733cca1e7fc2dbe2c2039384bae6395834b406403ebba10387ca5bcc7",
+          "file_sha256": "83b1c866d0673323faca293024722bef2acbf71b080fe0d7c489aaee0eab7500",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            189,
+            295
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "972c4d5d3bb0a3b80dd838e1240c171a23830ebba8d65f2f707ee7976b1708b5",
+          "file_sha256": "0930c7c533a6451c73cf0c0bfcd1e6d8f48e8f3e19a56fc94730b0b1657084c3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            209,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0bc23304a51a42214534b580aba085ffcae3338be5b61916148e26b9b77f6be9",
+          "file_sha256": "1050e4313a10e865d37a6f82fb6ec5415db6870be55bd012df0ce5f9aa8fd396",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            211,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0e5d56dc7855f051d032422b75f983dcbb7340c77db187e80eb37509353ad954",
+          "file_sha256": "d4a7a03ae7f128c34abbaa29da2a3ca729042e6185911e6d3ad8a28140cee2ed",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-28/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            150,
+            329
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a3a43a78bdf3f9a6d7a7e7359c0ac85b86dc480491a4864efb94867953d8be55",
+          "file_sha256": "e64184488549ee96c500c439afdb6dfc8d7daa5f7444d36a25e136d02aad6e67",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            152,
+            329
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9efcd6bde3cd6049d3df0faa3a63d1903044b763b5d3681f3c054696e874c6de",
+          "file_sha256": "cdaa23d55ce478684759d4a2658bb5ac22c5be9ff55c8f4e119850d30d1a04d3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            153,
+            329
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "efb425628a6eca5b7d6c15c0ef49841ca4971f338651917b1ce3fd98349f63a7",
+          "file_sha256": "71388877a808605e7bbb48036b854fcc7e2c532bf8fbeaa029fe92be208119ec",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            144,
+            317
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6639b037d8c3eb26b7ff1b6cdd09e3a193e56de149299a243be39e76690dac25",
+          "file_sha256": "028d5f9e152a03ac13b1e7228323385d784f1584b850b32c3056351f11e873e8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            154,
+            317
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ed020e4a9b82449b5297595e11a2fb158c0390edd55be9da325b37163b4a9738",
+          "file_sha256": "10cd9e21af461b911d6a2ab95e18d8bca5251046c1abfe8e9a13b9e728b8b27b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            149,
+            317
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "83d564e81a89639323474fd444aa08116443ac9a0d8ce6af402c6b43f22e6b7b",
+          "file_sha256": "2e644143eb21d88efc244fb1ef5027f2ac214ed50e0b363ea97ab8ebeac3a90c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            166,
+            331
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3564b79bf0e1354553271f015266f6010b1802b5baba179b3d5e1b429d741ba2",
+          "file_sha256": "e3da475c04ba4cfd44fb8b104d7859755014c5461166779d896a35aac13ffd01",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            206,
+            331
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8825a2a5f76c17c329ba8375ca8a1a72af7e1fb00da4382b2f728d8e2fcd8408",
+          "file_sha256": "7611b6d68487fafa093c7ff5b1d5d1b1fad05f50938435a56508003a5aa30b44",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            167,
+            331
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bc39ab75346d7fbf8ebfd884103c9321acf4e0f285b203862aaa227668f97eb3",
+          "file_sha256": "15a2de3ffb7a88c893caec2b3c9aa2fd8dfddce3335a4741725670c061439b30",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            170,
+            304
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "995ad6f617ebba83b6260cd3cde083b8c2e788d432c6b8764d951320869db633",
+          "file_sha256": "6da60eea14c80797da77096932685414fa559ec43a4db2847e9f912f9e3c5a9d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            166,
+            304
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8f7339ebeedcd80c1523bec760ca0ef2a24056a9be09de437b42e83edc5a28c6",
+          "file_sha256": "440891a516b7f19b1c3d99fd10e25001846f7bff20a991bdcb0251adfea8bd53",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            197,
+            297
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f2e19936041a4c86f5f957c3c90d5b2e0e0da7ee3da479b989ad172dfed63b52",
+          "file_sha256": "c3d6c519ece3ac4d238b0cc397a4dd7fab1ee609b9b2df76d27d361b75597913",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            172,
+            308
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "68decd122c97b29c214248cf601aeaf004fa80d48e5fd6ca04e81eab39bd0d42",
+          "file_sha256": "7a4f6da40e7ae1bc02fae6d5890a5d771da302a49612f92650bb7e7a8f0cb84e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            174,
+            308
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b09e63cc019cece5b47ca77a49bd015b4147777c6cdb3ce30f7a8aa976b46d17",
+          "file_sha256": "cb87efcc1ab754654ab67b690e9c3a0ffe6577bef081a4a28f68dd7d1eef7596",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            197,
+            308
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bf9bc0e667f86762d4dc0c37eff61316c936a3a9310365e75746ae88202205e5",
+          "file_sha256": "f825b2b6fa5ac4ed03d35ad22022ae726fad4fb35dfd38b0807294a647ababd6",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-29/renderer-manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "down-stand",
+          "size": [
+            180,
+            322
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "673a7070d8029fc7533483a8fb1d92a9e502762f20daf034fa90e1078dfd8953",
+          "file_sha256": "bde3182b33d9fe9fcd8947df3529c5fa196176f753d23b2b9ece342d96d7a5cf",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepA",
+          "size": [
+            196,
+            322
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7350793d803f844629c34e8d6b86104ff99ed05a46fb0016e0fb536a99d458d3",
+          "file_sha256": "3d86975a22e8b89ddefecdc886b9eda1b4187616535007a1a8a863ac873cce0f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "down-stepB",
+          "size": [
+            200,
+            322
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a989c7558b70732b01cf239b9437665879ecb31507bd8a648c2efcca870e5b47",
+          "file_sha256": "e83613bdb6b9ac93d08cc11f04f9f9408158b7bb4bd75dadbf7336520ad7c808",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stand",
+          "size": [
+            180,
+            312
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6085afaad58e448d8e8e383ebdf2a35abec5c1a9c069fba1761d9d5fbf241dd5",
+          "file_sha256": "dbec6c4aa4144999295fe579ee9d08260198c1a9777fdfc014915f58aa8e5073",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepA",
+          "size": [
+            199,
+            312
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8c4a09a048b3532dff569212ce3a2c11ae76c926fdba1770c50e90a8c2247054",
+          "file_sha256": "90cf9309c1f742580ed34d7996724ede294e2a89673e07921e55a8bb7feac476",
+          "exact_source_crop": true
+        },
+        {
+          "id": "up-stepB",
+          "size": [
+            204,
+            312
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bb2c6888af460a7b840b3e50f8257e75606d1b35de1fb292f912ea657ad32ca5",
+          "file_sha256": "5e0d3ce8cf4d99656fb21cc7952db9f4fdd79bed511cfdb56e5f970ee6225d15",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stand",
+          "size": [
+            190,
+            334
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9917ab61b69a7f6c23b9fa8c75cdf2aba205b9f315aab0831e876be31b8351f5",
+          "file_sha256": "e7ee5069b3da3b18dfd4058d6a2e5209fc174b84383ea1aa57b2911db2436365",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepA",
+          "size": [
+            246,
+            334
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7c12a2e7106a8bd7364c7e283c56930c9232c8e51ea76e74ce0e31efdce941d3",
+          "file_sha256": "125436e6af1fe0f592d2f16d0873d647a438b2d88c73dd19ad75857cfc434d42",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-stepB",
+          "size": [
+            213,
+            334
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "705586cdc1dcc19524d4552dedca5981bdbd8bb64afb478e9f534c91841b0120",
+          "file_sha256": "31928edd838e8acac0c7ef9c7113a500899a261e4fcd6833c658ac62576082a4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sit",
+          "size": [
+            218,
+            299
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "dc2eac05f869090417c2f91208132b9cfd1d3a1473e1a1ad963a793ffe78165c",
+          "file_sha256": "34a471278c73f93f21a2b1199fc31c54f5c8546b9112a627bd05ec3f28d24f47",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetA",
+          "size": [
+            227,
+            299
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "690020c4dda1d9169c526ad49b6e2629ba94e5a5642710322b29712a7acd4f1a",
+          "file_sha256": "d5c3d863d1adcd97eb3b8f2001736f62bdbdb5f18a9bb018e1300af7b1ca522f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "right-sitPetB",
+          "size": [
+            239,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1ce7e87dc84be4f5336103bbaea461f2142aeeded6b48ecb4c728b6936fb5cd2",
+          "file_sha256": "0bb5acd5ceabd28aa66348c8cbd6f5ea1028f717ebb2683d8fe2bbd9d34feaea",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sit",
+          "size": [
+            215,
+            308
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c9bcd1835a73654bed9739ec58616033a80e3bc4c5fa284b35de642478a05a6b",
+          "file_sha256": "e3911b0ce512327246daaaede6151a30d092e0629b92319167404c6130b60729",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetA",
+          "size": [
+            240,
+            308
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e9da169bbbc45654730dabb82cbd420c67fc0af218de5493d859f40f0ba4f694",
+          "file_sha256": "b97035787e660858181d3fd7bea8c79e8c4b834f21fa022fd7e3e85f782b3d6e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "left-sitPetB",
+          "size": [
+            242,
+            307
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7bf147778b6acb5a14a0910b1fabc92952187a4d985e47008612e42f0ee4de34",
+          "file_sha256": "a6b0c8f5b250636870fe78a1c40ad4d05f99c1bfef55762be9b0efafb2c29462",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "total_assets": 435,
+  "errors": 0
+}

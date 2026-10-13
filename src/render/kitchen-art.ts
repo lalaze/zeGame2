@@ -19,18 +19,22 @@ import {
   type Station,
 } from '../game/kitchen';
 import { FLOOR_Y, SCENE_W, kitchenFloorY } from '../game/layout';
-import { brushedMetal } from './materials';
+import { brushedMetal, cabinetPanel, glassReflection, timberBeam } from './materials';
 import { mix, ramp } from './color';
 import { drawText, textWidth } from './font';
-import { OUTLINE, itemIcon } from './sprites';
+import { itemIcon } from './sprites';
+import { fineSpriteArt } from './fine-sprite-art';
+const OUTLINE = '#39281f';
 
 type Ctx = CanvasRenderingContext2D;
 
-const STEEL = ramp('#b9c4cb');
-const DARK_STEEL = ramp('#6f7880');
-const TILE = '#eef0ea';
-const GROUT = '#d2d8d2';
-const NON_SLIP = ramp('#b9b2a6');
+const STEEL = { base: '#b4b8a5', hi: '#f4e6c7', lo: '#818575', dark: '#515a49' };
+const ENAMEL = { base: '#d7cfaa', hi: '#fff1cf', lo: '#aaa380', dark: '#696b54' };
+const SAGE = '#627451', CREAM = '#f4e6c7', BRASS = '#c8a15e';
+const DARK_STEEL = { base: '#69745f', hi: '#a6af8a', lo: '#495542', dark: '#303a2e' };
+const TILE = '#f4e6c7';
+const GROUT = '#cbb992';
+const NON_SLIP = ramp('#ceb992');
 const GLOW = '#ffb04a';
 /** Where everything against the back wall stands. */
 const BASE = 84;
@@ -99,79 +103,79 @@ function plaque(ctx: Ctx, word: string, cx: number, y: number, color: string): v
 export function paintKitchen(ctx: Ctx, H: number, t: number, locked: boolean, installed: ReadonlySet<Equipment>, active: ReadonlySet<Station>): void {
   const r = painter(ctx);
   if (locked) {
-    // An unfitted room, deliberately separate from every appliance/fixture pass.
-    // Even stale equipment data cannot make an unpurchased kitchen look usable.
-    r(0, 0, SCENE_W, FLOOR_Y, '#c4b7a5');
-    r(0, FLOOR_Y, SCENE_W, H - FLOOR_Y, '#a49887');
-    r(0, 0, SCENE_W, 6, '#746959');
-    r(0, FLOOR_Y - 3, SCENE_W, 3, '#847666');
-    for (let y = FLOOR_Y + 16; y < H; y += 20) r(0, y, SCENE_W, 1, '#998c7b');
-    // A closed construction notice is legible in room and whole-building views.
-    r(111, 25, 98, 30, OUTLINE);
-    r(113, 27, 94, 26, '#e7d9ba');
-    drawText(ctx, 'FUTURE KITCHEN', (SCENE_W - textWidth('FUTURE KITCHEN')) / 2, 32, '#685b49');
-    drawText(ctx, 'CLOSED', (SCENE_W - textWidth('CLOSED')) / 2, 43, '#8b563b');
-    // Packed building materials, not ingredient crates or installed equipment.
-    r(30, H - 30, 48, 14, '#736552');
-    r(32, H - 32, 44, 14, '#bca37b');
-    r(32, H - 28, 44, 1, '#dcc49b');
-    r(44, H - 32, 3, 14, '#8e795e');
-    r(63, H - 32, 3, 14, '#8e795e');
+    // The unpurchased wing is a real boarded alcove, never fitted equipment.
+    r(0, 0, SCENE_W, FLOOR_Y, '#d8c39a');
+    r(0, FLOOR_Y, SCENE_W, H - FLOOR_Y, '#b99b70');
+    timberBeam(ctx, 0, 0, SCENE_W, 7); timberBeam(ctx, 0, 7, 6, FLOOR_Y - 7, true);
+    timberBeam(ctx, SCENE_W - 6, 7, 6, FLOOR_Y - 7, true);
+    r(6, FLOOR_Y - 4, SCENE_W - 12, 4, '#865332');
+    for (let y = FLOOR_Y + 1; y < H; y += 16) {
+      r(0, y, SCENE_W, 1, '#896f4f'); r(0, y + 1, SCENE_W, 1, '#d1b68b');
+      for (let x = 24 + ((y - FLOOR_Y) % 3) * 16; x < SCENE_W; x += 64) r(x, y + 2, 1, 14, '#a08660');
+    }
+    r(110, 25, 100, 32, OUTLINE); r(112, 27, 96, 28, '#865332'); r(114, 29, 92, 24, CREAM);
+    r(117, 31, 1, 1, BRASS); r(202, 31, 1, 1, BRASS);
+    drawText(ctx, 'FUTURE KITCHEN', (SCENE_W - textWidth('FUTURE KITCHEN')) / 2, 33, '#543425');
+    drawText(ctx, 'CLOSED', (SCENE_W - textWidth('CLOSED')) / 2, 44, '#9b563b');
+    // Bundled lengths of carpentry timber and a tied canvas dust cover.
+    r(28, H - 18, 53, 3, '#8e7350');
+    for (let i = 0; i < 3; i++) {
+      r(30 + i % 2 * 2, H - 30 + i * 4, 48, 4, '#865332');
+      r(31 + i % 2 * 2, H - 30 + i * 4, 46, 1, '#c98c4d');
+    }
+    r(41, H - 30, 2, 12, '#c7b68f'); r(64, H - 30, 2, 12, '#c7b68f');
+    r(234, H - 38, 34, 24, '#bdab87'); r(238, H - 42, 25, 5, '#d8c9a7');
+    r(235, H - 36, 2, 22, '#e4d7b7'); r(250, H - 39, 2, 24, '#a1906e');
     return;
   }
-  // White subway tile to the ceiling, with a steel skirting.
+  // Cream glazed subway ceramics, timber cornice and an olive tile dado.
   r(0, 0, SCENE_W, FLOOR_Y, TILE);
-  for (let y = 8; y < FLOOR_Y; y += 5) {
+  for (let y = 8, row = 0; y < FLOOR_Y - 5; y += 8, row++) {
     r(0, y, SCENE_W, 1, GROUT);
-    for (let x = (y / 5) % 2 ? 0 : 5; x < SCENE_W; x += 10) r(x, y + 1, 1, 4, GROUT);
+    for (let x = row % 2 ? -8 : 0; x < SCENE_W; x += 16) {
+      r(Math.max(0, x + 1), y + 1, Math.min(14, SCENE_W - x - 1), 1, '#fff2d8');
+      if (x >= 0) r(x, y + 1, 1, 7, GROUT);
+      if ((x + row * 3) % 7 === 0) r(Math.max(0, x + 3), y + 5, 4, 1, '#e8d7b6');
+    }
   }
-  r(0, 0, SCENE_W, 6, '#5d666e');
-  r(0, 1, SCENE_W, 1, '#7c8790');
-  r(0, 5, SCENE_W, 1, OUTLINE);
-  r(0, FLOOR_Y - 4, SCENE_W, 4, DARK_STEEL.base);
-  r(0, FLOOR_Y - 4, SCENE_W, 1, DARK_STEEL.hi);
+  timberBeam(ctx, 0, 0, SCENE_W, 6);
+  r(0, FLOOR_Y - 5, SCENE_W, 5, SAGE); r(0, FLOOR_Y - 5, SCENE_W, 1, '#9da57c');
+  r(0, FLOOR_Y - 1, SCENE_W, 1, OUTLINE);
 
-  // Square non-slip tiles, grey and gritty, easy to mop.
+  // Warm, heavily bevelled non-slip stone. Small inlays avoid noisy full tiles.
   const top = FLOOR_Y;
   r(0, top, SCENE_W, H - top, NON_SLIP.base);
-  for (let y = top; y < H; y += 12) {
-    for (let x = 0; x < SCENE_W; x += 12) {
-      if (((x + y - top) / 12) % 2) r(x, y, 12, 12, mix(NON_SLIP.base, NON_SLIP.lo, 0.18));
-      r(x + 1, y + 1, 10, 1, mix(NON_SLIP.base, NON_SLIP.hi, 0.5));
-      for (let k = 0; k < 3; k++) r(x + 2 + ((x + k * 5 + y) % 8), y + 3 + ((k * 7 + x) % 7), 1, 1, NON_SLIP.lo);
+  for (let y = top; y < H; y += 16) {
+    const th = Math.min(16, H - y);
+    for (let x = 0; x < SCENE_W; x += 16) {
+      r(x, y, 16, th, '#aa916a');
+      r(x + 1, y + 1, 15, th - 1, ((x + y - top) / 16) % 2 ? '#decbab' : '#e9d6b1');
+      r(x + 2, y + 2, 13, 1, '#f8ebce'); r(x + 2, y + 2, 1, th - 3, '#f8ebce');
+      r(x + 14, y + 3, 1, th - 3, '#c7ae82'); r(x + 3, y + th - 1, 12, 1, '#c7ae82');
+      if (th > 10) { r(x + 5, y + 8, 3, 1, '#d2ba91'); r(x + 6, y + 7, 1, 3, '#d2ba91'); }
     }
-    r(0, y, SCENE_W, 1, mix(NON_SLIP.lo, NON_SLIP.dark, 0.4));
   }
-  for (let x = 0; x < SCENE_W; x += 12) r(x, top, 1, H - top, mix(NON_SLIP.lo, NON_SLIP.dark, 0.4));
-  ctx.save();
-  for (let i = 0; i < 3; i++) {
-    ctx.globalAlpha = 0.18 - i * 0.05;
-    r(0, FLOOR_Y + i, SCENE_W, 1, '#2a1410');
-  }
-  ctx.restore();
-  // A drain in the middle of the floor, and rubber mats where the cooks stand all day.
-  const drain = { x: 150, y: kitchenFloorY(152) };
-  r(drain.x - 6, drain.y - 3, 12, 6, OUTLINE);
-  r(drain.x - 5, drain.y - 2, 10, 4, DARK_STEEL.base);
-  for (let i = -4; i < 5; i += 2) r(drain.x + i, drain.y - 2, 1, 4, OUTLINE);
+  r(0, FLOOR_Y, SCENE_W, 2, '#a88b61');
+  const drainY = kitchenFloorY(152);
+  r(143, drainY - 4, 14, 8, OUTLINE); r(144, drainY - 3, 12, 6, BRASS);
+  for (let i = 0; i < 5; i++) r(145 + i * 2, drainY - 2, 1, 4, '#665942');
   for (const [x, w] of [[104, 54], [190, 118]] as const) mat(ctx, x, FLOOR_Y + 7, w, 10);
 
-  // Tube lights.
-  for (const x of [52, 196]) {
-    r(x - 1, 6, 1, 3, OUTLINE);
-    r(x + 41, 6, 1, 3, OUTLINE);
-    r(x - 2, 9, 46, 4, OUTLINE);
-    r(x - 1, 10, 44, 2, '#fbfbf2');
+  // Enamel task lights on brass suspension rods, not flat fluorescent bars.
+  for (const x of [52, 113]) {
+    r(x, 6, 1, 5, OUTLINE); r(x - 5, 11, 11, 2, OUTLINE);
+    r(x - 6, 13, 13, 3, OUTLINE); r(x - 5, 13, 11, 2, SAGE);
+    r(x - 4, 13, 7, 1, '#a6af8a'); r(x - 4, 16, 9, 1, '#fff1c6');
   }
 
   // Zone plaques: storage, prep, and the hot line under the hood.
-  plaque(ctx, 'STORE', 62, 8, '#3f6f93');
-  plaque(ctx, 'PREP', 120, 16, '#4f8a5b');
+  plaque(ctx, 'STORE', 62, 8, '#627451');
+  plaque(ctx, 'PREP', 120, 16, '#865332');
 
   const has = (e: Equipment) => installed.has(e);
   const at = (e: Equipment) => WALL_EQUIPMENT[e]!;
-  cooler(ctx, at('cooler'));
-  dryStore(ctx, at('dryStore'));
+  cooler(ctx, at('cooler'), active.has('cooler'));
+  dryStore(ctx, at('dryStore'), active.has('dryStore'));
   handSink(ctx, at('handSink'));
   const fit = (e: Equipment, draw: (spot: { x: number; w: number }) => void, height: number) => {
     const spot = at(e);
@@ -182,7 +186,7 @@ export function paintKitchen(ctx: Ctx, H: number, t: number, locked: boolean, in
     }
   };
   fit('mixer', (s) => mixer(ctx, s, t, active.has('mixer')), 38);
-  fit('proofer', (s) => proofer(ctx, s), 58);
+  fit('proofer', (s) => proofer(ctx, s, t, active.has('proofer')), 58);
   hood(ctx);
   fit('kettle', (s) => kettle(ctx, s, t, active.has('kettle')), 38);
   fit('deckOven', (s) => deckOven(ctx, s, t, active.has('deckOven')), 54);
@@ -191,10 +195,12 @@ export function paintKitchen(ctx: Ctx, H: number, t: number, locked: boolean, in
 
   // Order tickets clipped to a rail by the door, so the cooks see what's running low.
   r(250, 30, 58, 2, OUTLINE);
-  r(250, 30, 58, 1, STEEL.hi);
+  r(250, 30, 58, 1, BRASS);
   for (const tx of [256, 271, 290]) {
     r(tx, 31, 8, 9, OUTLINE);
-    r(tx + 1, 31, 6, 8, '#fdf6ec');
+    r(tx + 1, 31, 6, 8, CREAM);
+    r(tx + 3, 30, 2, 2, BRASS);
+    r(tx + 5, 37, 2, 2, '#d4bf96');
     for (let ly = 33; ly < 39; ly += 2) r(tx + 2, ly, 4, 1, '#9aa1aa');
   }
 
@@ -211,104 +217,100 @@ function mat(ctx: Ctx, x: number, y: number, w: number, h: number): void {
 }
 
 /** The walk-in cold room's heavy door, with its thermometer and a frosted window. */
-function cooler(ctx: Ctx, { x, w }: { x: number; w: number }): void {
-  const r = painter(ctx);
-  const top = 18;
-  steelBox(ctx, x, top, w, BASE - top);
-  r(x + 3, top + 3, w - 6, BASE - top - 6, STEEL.lo);
-  r(x + 4, top + 4, w - 8, BASE - top - 8, STEEL.base);
-  for (let y = top + 8; y < BASE - 6; y += 6) r(x + 5, y, w - 10, 1, mix(STEEL.base, STEEL.lo, 0.5));
-  // Frosted window, a snowflake decal, the thermometer and the latch.
-  r(x + 9, top + 8, w - 18, 12, OUTLINE);
-  r(x + 10, top + 9, w - 20, 10, '#cfe6ee');
-  r(x + 10, top + 9, w - 20, 2, '#f1fafc');
-  const sx = x + w / 2;
-  r(sx - 3, top + 26, 7, 1, '#5aa0c8');
-  r(sx, top + 23, 1, 7, '#5aa0c8');
-  r(sx - 2, top + 24, 1, 1, '#5aa0c8');
-  r(sx + 2, top + 28, 1, 1, '#5aa0c8');
-  r(sx + 2, top + 24, 1, 1, '#5aa0c8');
-  r(sx - 2, top + 28, 1, 1, '#5aa0c8');
-  r(x + 3, top - 6, 14, 6, OUTLINE);
-  r(x + 4, top - 5, 12, 4, '#1d2a22');
-  drawText(ctx, '3C', x + 5, top - 5, '#8fe38a');
-  r(x + w - 8, top + 30, 5, 12, OUTLINE);
-  r(x + w - 7, top + 31, 3, 10, DARK_STEEL.hi);
-  r(x + w - 7, top + 31, 1, 10, '#f4f6f6');
+function cooler(ctx: Ctx, { x, w }: { x: number; w: number }, on: boolean): void {
+  const r = painter(ctx), top = 18;
+  steelBox(ctx, x, top, w, BASE - top, ENAMEL);
+  // Rounded enamel door sits in a visibly deep olive seal.
+  r(x + 2, top + 2, w - 4, BASE - top - 5, OUTLINE);
+  r(x + 3, top + 3, w - 6, BASE - top - 7, SAGE);
+  r(x + 4, top + 4, w - 8, BASE - top - 9, '#a8af86');
+  r(x + 4, top + 4, 2, BASE - top - 10, '#d6dab2');
+  r(x + w - 7, top + 5, 2, BASE - top - 11, '#78825d');
+  r(x + 8, top + 9, w - 16, 15, OUTLINE); r(x + 9, top + 10, w - 18, 13, '#9caf9e');
+  r(x + 10, top + 11, w - 20, 10, '#c4d4b9');
+  glassReflection(ctx, x + 9, top + 10, w - 18, 13, 0.4);
+  for (const y of [top + 8, top + 45]) { r(x + 1, y, 4, 6, OUTLINE); r(x + 1, y, 3, 2, BRASS); }
+  r(x + w - 8, top + 30, 5, 13, OUTLINE); r(x + w - 7, top + 31, 2, 10, BRASS);
+  r(x + w - 7, top + 31, 1, 9, CREAM); r(x + 11, top + 30, 9, 8, CREAM);
+  // Tiny snowflake stamped on the door plaque.
+  r(x + 13, top + 34, 5, 1, SAGE); r(x + 15, top + 32, 1, 5, SAGE);
+  r(x + 13, top + 32, 1, 1, SAGE); r(x + 17, top + 36, 1, 1, SAGE);
+  r(x + 5, BASE - 10, 19, 1, '#d6dab2'); r(x + 7, BASE - 9, 4, 1, '#7b8560');
+  r(x + 3, top - 6, 14, 6, OUTLINE); r(x + 4, top - 5, 12, 4, '#304535');
+  drawText(ctx, '3C', x + 5, top - 5, '#e0ddb0');
+  if (on) {
+    // A cook pulls the door ajar; the gap reveals actual cold-room shelves.
+    r(x + 5, top + 5, 5, BASE - top - 11, '#304535');
+    for (let y = top + 18; y < BASE - 8; y += 12) { r(x + 5, y, 5, 1, CREAM); r(x + 6, y - 4, 3, 4, '#c8a15e'); }
+    r(x + 10, top + 5, 1, BASE - top - 11, CREAM);
+  }
 }
 
 /** Wire shelving: flour sacks on the floor, tubs of sugar, jars and boxes above. */
-function dryStore(ctx: Ctx, { x, w }: { x: number; w: number }): void {
-  const r = painter(ctx);
-  const top = 28;
-  for (const px of [x, x + w - 2]) {
-    r(px - 1, top - 1, 4, BASE - top + 1, OUTLINE);
-    r(px, top, 2, BASE - top, STEEL.base);
+function dryStore(ctx: Ctx, { x, w }: { x: number; w: number }, on: boolean): void {
+  const r = painter(ctx), top = 28;
+  // Timber pantry with open, shadowed shelves and pegged uprights.
+  r(x + 2, top, w - 4, BASE - top - 2, '#543425');
+  for (const px of [x, x + w - 3]) { r(px, top - 2, 3, BASE - top + 2, OUTLINE); r(px, top - 1, 1, BASE - top, '#c98c4d'); }
+  for (const y of [top + 2, top + 18, top + 34, BASE - 3]) {
+    r(x, y, w, 3, OUTLINE); r(x + 1, y, w - 2, 1, '#c98c4d'); r(x + 1, y + 1, w - 2, 1, '#865332');
   }
-  const shelves = [top + 2, top + 18, top + 34, BASE - 6];
-  for (const y of shelves) {
-    r(x, y, w, 2, OUTLINE);
-    r(x + 1, y, w - 2, 1, STEEL.hi);
-  }
-  // Top: boxes.
-  for (const [bx, bw, c] of [[x + 3, 12, '#c9a873'], [x + 16, 10, '#b98f5e'], [x + 27, 7, '#d6b98a']] as const) {
-    r(bx, top - 8, bw, 10, OUTLINE);
-    r(bx + 1, top - 7, bw - 2, 8, c);
-    r(bx + 1, top - 7, bw - 2, 1, mix(c, '#ffffff', 0.3));
-  }
-  // Second: tubs of sugar and flour with labels.
+  // Stitched bags with folded paper tops, taped boxes and hand-lettered labels.
   for (let i = 0; i < 3; i++) {
-    const bx = x + 3 + i * 11;
-    r(bx, top + 7, 9, 11, OUTLINE);
-    r(bx + 1, top + 8, 7, 9, '#f4f1ea');
-    r(bx + 1, top + 8, 7, 2, ['#d9574a', '#5a92d4', '#e7b84a'][i]);
+    const bx = x + 3 + i * 10;
+    r(bx + 1, top - 8 + i % 2, 7, 2, '#865332'); r(bx, top - 6 + i % 2, 9, 8 - i % 2, '#c4a170');
+    r(bx + 1, top - 5 + i % 2, 2, 6 - i % 2, '#e6c38e'); r(bx + 3, top - 3, 4, 3, CREAM);
+    r(bx + 4, top - 2, 2, 1, '#865332');
   }
-  // Third: jars of spice, cocoa and vanilla.
+  for (let i = 0; i < 3; i++) {
+    const bx = x + 4 + i * 10;
+    r(bx, top + 7, 8, 11, OUTLINE); r(bx + 1, top + 8, 6, 9, CREAM);
+    r(bx, top + 6, 8, 2, i % 2 ? '#aa5944' : SAGE); r(bx + 1, top + 6, 5, 1, '#d4be84');
+    r(bx + 2, top + 12, 4, 3, '#bba576'); r(bx + 3, top + 13, 2, 1, '#543425');
+  }
   for (let i = 0; i < 5; i++) {
-    const bx = x + 3 + i * 6;
-    r(bx, top + 26, 5, 8, OUTLINE);
-    r(bx + 1, top + 27, 3, 6, '#d6ecf2');
-    r(bx + 1, top + 29, 3, 4, ['#9c6538', '#6e3f24', '#c98f4e', '#6f9a52', '#d9a441'][i]);
-    r(bx, top + 25, 5, 2, '#c97d34');
+    const bx = x + 4 + i * 6;
+    r(bx, top + 26, 5, 8, OUTLINE); r(bx + 1, top + 27, 3, 6, '#b7c3a4');
+    r(bx + 1, top + 30, 3, 3, i % 2 ? '#6d472f' : '#ad7d42');
+    r(bx, top + 25, 5, 2, BRASS); r(bx + 1, top + 28, 1, 4, CREAM);
   }
-  // Floor: sacks of flour.
   for (let i = 0; i < 2; i++) {
-    const bx = x + 2 + i * 16;
-    r(bx, BASE - 19, 15, 14, OUTLINE);
-    r(bx + 1, BASE - 18, 13, 12, '#ece0c4');
-    r(bx + 1, BASE - 18, 3, 12, '#f8f0dc');
-    r(bx + 4, BASE - 14, 7, 4, '#c98f4e');
-    r(bx + 3, BASE - 20, 9, 2, OUTLINE);
+    const bx = x + 3 + i * 16;
+    r(bx + 2, BASE - 19, 9, 2, OUTLINE); r(bx, BASE - 17, 14, 14, OUTLINE);
+    r(bx + 1, BASE - 16, 12, 12, '#dcc89e'); r(bx + 2, BASE - 16, 2, 10, '#f4e6c7');
+    r(bx + 10, BASE - 15, 2, 10, '#b39a6c'); r(bx + 4, BASE - 12, 6, 4, '#a77740');
+    r(bx + 5, BASE - 11, 4, 1, CREAM);
   }
+  if (on) { r(x + 4, top + 6, 8, 2, '#543425'); r(x + 5, top + 7, 6, 1, '#e1cc97'); r(x + 12, top + 11, 3, 2, BRASS); }
 }
 
 /** The hand-wash sink, with soap and paper towels: the first stop from storage to prep. */
 function handSink(ctx: Ctx, { x, w }: { x: number; w: number }): void {
   const r = painter(ctx);
-  steelBox(ctx, x, 56, w, 7);
-  r(x + 2, 57, w - 4, 3, DARK_STEEL.lo);
-  r(x + w / 2 - 1, 50, 2, 7, OUTLINE);
-  r(x + w / 2 - 1, 50, 5, 2, OUTLINE);
-  r(x + w / 2, 51, 3, 1, STEEL.hi);
-  r(x + w / 2 - 2, 63, 4, 14, OUTLINE);
-  r(x + w / 2 - 1, 63, 2, 14, STEEL.lo);
-  // Soap and the towel dispenser.
-  r(x + 1, 38, 5, 9, OUTLINE);
-  r(x + 2, 39, 3, 7, '#8fd0e8');
-  r(x + 8, 34, 8, 12, OUTLINE);
-  r(x + 9, 35, 6, 10, '#f4f1ea');
-  r(x + 10, 45, 4, 3, '#f4f1ea');
+  // Thick ceramic basin with a scooped well and aged brass gooseneck.
+  r(x, 55, w, 9, OUTLINE); r(x + 1, 55, w - 2, 2, '#fff3d9');
+  r(x + 2, 57, w - 4, 4, '#798f79'); r(x + 3, 58, w - 6, 2, '#b7c3a4');
+  r(x + 1, 61, w - 2, 2, CREAM); r(x + 3, 63, w - 6, 2, '#b7ad88');
+  r(x + 7, 48, 2, 7, OUTLINE); r(x + 7, 48, 5, 2, OUTLINE); r(x + 8, 49, 3, 1, BRASS);
+  r(x + 7, 65, 3, 9, OUTLINE); r(x + 8, 65, 1, 7, BRASS); r(x + 8, 72, 5, 2, OUTLINE);
+  r(x + 1, 41, 5, 8, OUTLINE); r(x + 2, 42, 3, 6, '#a5b592'); r(x + 3, 38, 1, 4, BRASS); r(x + 2, 38, 4, 1, BRASS);
+  r(x + 8, 34, 8, 12, OUTLINE); r(x + 9, 35, 6, 9, '#d9cfac');
+  r(x + 10, 43, 4, 6, CREAM); r(x + 13, 44, 1, 5, '#c0ad87');
 }
 
 /** A spiral dough mixer: the hook turns in its bowl while a cook is mixing. */
 function mixer(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: boolean): void {
   const r = painter(ctx);
-  steelBox(ctx, x + 1, 66, w - 2, BASE - 66, ramp('#e2e4de'));
+  steelBox(ctx, x + 1, 66, w - 2, BASE - 66, ENAMEL);
   r(x + 4, BASE - 4, w - 8, 3, '#55606b');
   // Column and head.
-  steelBox(ctx, x + w - 8, 46, 6, 20, ramp('#e2e4de'));
-  steelBox(ctx, x + 3, 46, w - 6, 8, ramp('#e2e4de'));
-  r(x + 6, 48, 4, 2, on ? '#7fe36a' : '#e2434b');
+  steelBox(ctx, x + w - 8, 46, 6, 20, ENAMEL);
+  steelBox(ctx, x + 3, 46, w - 6, 8, ENAMEL);
+  r(x + 4, 45, w - 9, 1, BRASS); r(x + 4, 47, 4, 1, CREAM);
+  r(x + 6, 48, 4, 2, on ? '#b3ce75' : '#aa5944');
+  r(x + w - 6, 57, 2, 5, BRASS); r(x + w - 5, 62, 3, 1, OUTLINE);
+  r(x + 3, 70, w - 6, 7, SAGE); r(x + 4, 71, w - 8, 1, '#a6af8a');
+  for (let i = 0; i < 4; i++) r(x + 5 + i * 3, 74, 1, 2, '#3f5437');
   // Bowl of dough, and the hook.
   r(x + 3, 56, w - 12, 10, OUTLINE);
   r(x + 4, 57, w - 14, 8, STEEL.base);
@@ -317,13 +319,16 @@ function mixer(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: bool
   const hx = x + 8 + (on ? Math.floor(t * 8) % 3 : 1) * 2;
   r(hx, 54, 2, 6, OUTLINE);
   r(hx + 1, 59, 2, 1, OUTLINE);
+  r(x + 4, 65, w - 14, 1, '#68725a'); r(x + 5, 60, 1, 4, CREAM);
+  r(x + 7, 82, 5, 1, '#878c71');
+  if (on) { r(hx - 2, 58, 2, 1, CREAM); r(hx + 2, 60, 2, 1, '#bca170'); }
 }
 
 /** The proofing cabinet: warm and steamy, with dough rising on its trays. */
-function proofer(ctx: Ctx, { x, w }: { x: number; w: number }): void {
+function proofer(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: boolean): void {
   const r = painter(ctx);
   const top = 26;
-  steelBox(ctx, x, top, w, BASE - top);
+  steelBox(ctx, x, top, w, BASE - top, ENAMEL);
   r(x + 2, top + 7, w - 4, BASE - top - 13, OUTLINE);
   r(x + 3, top + 8, w - 6, BASE - top - 15, '#ffe6b0');
   for (let y = top + 14; y < BASE - 8; y += 11) {
@@ -340,26 +345,34 @@ function proofer(ctx: Ctx, { x, w }: { x: number; w: number }): void {
   r(x + 3, top + 2, 10, 4, '#1d2a22');
   r(x + 4, top + 3, 2, 2, '#ffb04a');
   r(x + 7, top + 3, 4, 2, '#8fe38a');
-  r(x + w - 4, top + 20, 2, 10, DARK_STEEL.dark);
+  r(x + w - 4, top + 20, 2, 10, BRASS);
+  r(x + w - 4, top + 20, 1, 9, CREAM);
+  for (const y of [top + 9, BASE - 12]) { r(x, y, 3, 4, '#865332'); r(x, y, 3, 1, BRASS); }
+  glassReflection(ctx, x + 3, top + 8, w - 6, BASE - top - 15, 0.14);
+  r(x + 5, BASE - 5, w - 10, 1, SAGE);
+  if (on) {
+    for (let i = 0; i < 3; i++) { const sx = x + 5 + i * 5; const sy = top + 10 + (Math.floor(t * 3) + i) % 4; r(sx, sy, 1, 3, CREAM); r(sx + 1, sy - 1, 1, 1, CREAM); }
+    r(x + 4, top + 3, 2, 2, '#f7c46d');
+  }
 }
 
 /** The extraction hood over the hot line, with its filters and lights. */
 function hood(ctx: Ctx): void {
-  const r = painter(ctx);
-  const { x, w } = HOOD;
-  r(x - 1, 10, w + 2, 17, OUTLINE);
-  r(x, 11, w, 15, STEEL.base);
-  r(x, 11, w, 1, STEEL.hi);
-  r(x, 24, w, 2, STEEL.lo);
-  for (let fx = x + 4; fx < x + w - 10; fx += 12) {
-    r(fx, 14, 10, 8, DARK_STEEL.base);
-    for (let i = 0; i < 10; i += 2) r(fx + i, 14, 1, 8, DARK_STEEL.lo);
+  const r = painter(ctx), { x, w } = HOOD;
+  // Folded copper canopy widens downwards; seams lead into the filter cavity.
+  r(x + 5, 10, w - 10, 3, OUTLINE); r(x + 6, 10, w - 12, 1, '#e0b678');
+  for (let y = 13; y < 22; y++) {
+    const inset = Math.max(0, 4 - Math.floor((y - 13) / 2));
+    r(x + inset, y, w - inset * 2, 1, OUTLINE);
+    r(x + inset + 1, y, w - inset * 2 - 2, 1, y < 17 ? '#bb8350' : '#926039');
   }
-  // Duct up through the ceiling, and the strip of light underneath.
-  r(x + w / 2 - 10, 5, 20, 6, OUTLINE);
-  r(x + w / 2 - 9, 5, 18, 5, STEEL.lo);
-  r(x + 2, 26, w - 4, 1, '#ffe9b0');
-  plaque(ctx, 'BAKE', x + w / 2, 15, '#b5453a');
+  for (let sx = x + 19; sx < x + w - 6; sx += 25) r(sx, 12, 1, 9, '#75482d');
+  r(x - 1, 22, w + 2, 5, OUTLINE); r(x, 22, w, 1, BRASS); r(x + 1, 24, w - 2, 2, '#48503e');
+  for (let fx = x + 4; fx < x + w - 6; fx += 5) r(fx, 24, 2, 2, '#a3ab84');
+  r(x + w / 2 - 10, 5, 20, 5, OUTLINE); r(x + w / 2 - 9, 5, 18, 4, '#a87746');
+  r(x + w / 2 - 8, 5, 2, 4, '#d6aa6f');
+  r(x + 8, 26, 28, 1, '#ffebbb'); r(x + w - 36, 26, 28, 1, '#ffebbb');
+  plaque(ctx, 'BAKE', x + w / 2, 15, '#627451');
 }
 
 /** A two-burner range with the big pot for boiling bagels and pretzels. */
@@ -374,19 +387,24 @@ function kettle(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: boo
   r(x + 3, 44, w - 6, 18, OUTLINE);
   r(x + 4, 45, w - 8, 16, STEEL.base);
   r(x + 4, 45, 2, 16, STEEL.hi);
+  r(x + 6, 46, 1, 14, '#d8d6b4'); r(x + w - 7, 48, 2, 12, '#77826c');
+  r(x + 6, 59, w - 12, 2, BRASS); r(x + 7, 54, 4, 1, '#d8d6b4');
   r(x + 1, 47, 3, 2, OUTLINE);
   r(x + w - 4, 47, 3, 2, OUTLINE);
   r(x + 4, 45, w - 8, 2, on ? '#c9e6ee' : '#a9c4cc');
   if (on) for (let i = 0; i < 3; i++) if ((Math.floor(t * 6) + i) % 2) r(x + 7 + i * 5, 45, 2, 1, '#ffffff');
   // Flame under it.
-  r(x + 6, 62, w - 12, 1, on ? '#ff8a3a' : '#6c4a3a');
+  r(x + 6, 62, w - 12, 1, on ? '#ffac54' : '#6c4a3a');
+  r(x + 5, 70, w - 10, 6, SAGE); r(x + 8, 72, 8, 1, BRASS);
+  if (on) for (let i = 0; i < 3; i++) { const sy = 39 + (Math.floor(t * 4) + i) % 3; r(x + 6 + i * 6, sy, 1, 3, CREAM); r(x + 7 + i * 6, sy - 1, 1, 1, '#d7d6b6'); }
 }
 
 /** The deck oven: two stone decks, their windows glowing with loaves while a cook bakes. */
 function deckOven(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: boolean): void {
   const r = painter(ctx);
   const top = 32;
-  steelBox(ctx, x, top, w, BASE - 8 - top);
+  steelBox(ctx, x, top, w, BASE - 8 - top, ENAMEL);
+  r(x + 1, top, w - 2, 2, SAGE); r(x + 2, top, w - 4, 1, '#a6af8a');
   const flicker = Math.sin(t * 9) * 0.06 + Math.sin(t * 23) * 0.04;
   const glow = mix('#5a3426', GLOW, on ? 0.85 + flicker : 0.25);
   for (const dy of [top + 4, top + 24]) {
@@ -399,7 +417,11 @@ function deckOven(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: b
       r(x + 10 + i * 10, dy + 8, 7, 3, '#c98a45');
       r(x + 11 + i * 10, dy + 8, 5, 1, '#e3b36b');
     }
-    r(x + 6, dy + 14, w - 22, 2, STEEL.hi);
+    r(x + 6, dy + 14, w - 22, 2, BRASS); r(x + 7, dy + 14, w - 24, 1, CREAM);
+    r(x + 5, dy + 2, 2, 3, BRASS); r(x + 5, dy + 10, 2, 3, BRASS);
+    r(x + 8, dy + 11, w - 26, 1, '#b58b54');
+    if (!on) { r(x + 10, dy + 8, 7, 2, '#8f683f'); r(x + 22, dy + 8, 8, 2, '#8f683f'); }
+    glassReflection(ctx, x + 8, dy + 5, w - 26, 6, 0.15);
     r(x + w - 11, dy + 1, 8, 16, '#3a3f45');
     r(x + w - 9, dy + 3, 4, 2, on ? '#ff6b3a' : '#7a3a2a');
     r(x + w - 9, dy + 8, 4, 4, STEEL.base);
@@ -418,7 +440,8 @@ function deckOven(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: b
 function convection(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: boolean): void {
   const r = painter(ctx);
   const top = 36;
-  steelBox(ctx, x, top, w, 26);
+  steelBox(ctx, x, top, w, 26, ENAMEL);
+  r(x, top, w, 2, SAGE); r(x + 1, top, w - 2, 1, '#a6af8a');
   r(x + 3, top + 3, w - 12, 20, OUTLINE);
   const glow = mix('#3a2a26', '#ffcf7a', on ? 0.8 : 0.2);
   r(x + 4, top + 4, w - 14, 18, glow);
@@ -434,7 +457,10 @@ function convection(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on:
   r(fx - 3 + blade, top + 12, 3 - blade * 2 + 2, 1, mix(glow, OUTLINE, 0.5));
   r(x + w - 8, top + 3, 5, 20, '#3a3f45');
   r(x + w - 7, top + 5, 3, 3, on ? '#8fe38a' : '#4a5a4a');
-  r(x + w - 7, top + 11, 3, 3, STEEL.base);
+  r(x + w - 7, top + 11, 3, 3, BRASS); r(x + w - 6, top + 11, 1, 2, CREAM);
+  r(x + 2, top + 5, 2, 4, BRASS); r(x + 2, top + 16, 2, 4, BRASS);
+  r(x + w - 12, top + 9, 2, 9, BRASS); r(x + w - 12, top + 9, 1, 8, CREAM);
+  glassReflection(ctx, x + 4, top + 4, w - 14, 18, 0.12);
   // The stand, with sheet pans on its shelf.
   for (const lx of [x + 1, x + w - 4]) {
     r(lx - 1, top + 26, 4, BASE - top - 26, OUTLINE);
@@ -460,7 +486,12 @@ function fryer(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: bool
     for (let i = 1; i < 9; i += 2) r(bx + i, 53, 1, 4, STEEL.base);
   }
   r(x + 4, 70, w - 8, 8, STEEL.lo);
-  r(x + w / 2 - 3, 73, 6, 2, OUTLINE);
+  r(x + w / 2 - 3, 73, 6, 2, BRASS);
+  r(x + 5, 70, w - 10, 1, CREAM); r(x + 4, 78, w - 8, 2, SAGE);
+  r(x + 5, 50, 2, 3, BRASS); r(x + w - 8, 50, 2, 3, BRASS);
+  // Woven basket grids, dark doughnut holes and caramel edges read at 1x.
+  for (const bx of [x + 3, x + w / 2 + 1]) { r(bx + 1, 54, 7, 1, CREAM); r(bx + 1, 56, 7, 1, '#7d876d'); }
+  if (on) for (const bx of [x + 5, x + 15]) { r(bx, 60, 5, 3, '#d39847'); r(bx + 1, 60, 3, 1, '#f5cd7b'); r(bx + 2, 61, 1, 1, '#926239'); }
 }
 
 // ---------------------------------------------------------------- the floor
@@ -472,65 +503,57 @@ function fryer(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: bool
  * and trays below. Returns nothing; the bench is BENCH.w wide.
  */
 export function paintBench(ctx: Ctx, cx: number, foot: number, sheeter: boolean, standMixer: boolean): void {
-  const r = painter(ctx);
-  const { w, height, depth } = BENCH;
-  const x = Math.round(cx - w / 2);
-  const front = foot - height;
-  const top = front - depth;
-  r(x - 1, top - 1, w + 2, foot - top + 1, OUTLINE);
-  r(x, top, w, depth, STEEL.base);
-  r(x, top, w, 1, STEEL.lo);
-  r(x, front - 2, w, 1, STEEL.hi);
-  r(x, front - 1, w, 1, STEEL.lo);
-  // Marble slab in the middle, dusted with flour, a ball of dough and a rolling pin.
-  const sx = x + 28;
-  r(sx, top + 2, 40, depth - 5, '#eeeae2');
-  for (let i = 0; i < 40; i += 7) r(sx + i, top + 3 + (i % 3), 3, 1, '#d6d0c4');
-  r(sx + 8, top + 3, 9, 4, '#e8d2a6');
-  r(sx + 9, top + 3, 7, 1, '#f4e6c4');
-  r(sx + 22, top + 5, 14, 2, OUTLINE);
-  r(sx + 23, top + 5, 12, 1, '#c98f4e');
-  // A scale.
-  r(x + 72, top + 2, 8, 5, OUTLINE);
-  r(x + 73, top + 3, 6, 3, '#e2e4de');
-  r(x + 74, top + 4, 3, 1, '#1d2a22');
-  // Front: open shelves of mixing bowls and sheet pans.
-  r(x, front, w, height, STEEL.lo);
-  r(x + 2, front + 2, w - 4, height - 4, DARK_STEEL.lo);
-  r(x + 2, front + 7, w - 4, 1, STEEL.base);
-  for (let i = 0; i < 6; i++) {
-    const bx = x + 6 + i * 16;
-    r(bx, front + 3, 10, 4, STEEL.base);
-    r(bx + 1, front + 3, 8, 1, STEEL.hi);
+  const r = painter(ctx), { w, height, depth } = BENCH;
+  const x = Math.round(cx - w / 2), front = foot - height, top = front - depth;
+  // Thick maple butcher block sits on a framed pantry island with open storage.
+  r(x - 1, top - 1, w + 2, depth + 2, OUTLINE);
+  r(x, top, w, depth, '#c99459'); r(x, top, w, 1, '#efd19b');
+  for (let px = x + 4; px < x + w; px += 10) { r(px, top + 1, 1, depth - 2, '#ab713e'); r(px + 1, top + 1, 1, depth - 3, '#dca96b'); }
+  r(x, front - 2, w, 2, '#865332'); r(x, front - 2, w, 1, '#e2b57b');
+  r(x, front, w, height, OUTLINE); r(x + 1, front + 1, w - 2, height - 2, '#865332');
+  cabinetPanel(ctx, x + 2, front + 2, 22, height - 3, '#865332', true);
+  cabinetPanel(ctx, x + 80, front + 2, 22, height - 3, '#865332', true);
+  r(x + 27, front + 2, 50, height - 4, '#543425'); r(x + 27, front + 7, 50, 1, '#c98c4d');
+  for (let i = 0; i < 4; i++) {
+    const bx = x + 29 + i * 12;
+    r(bx, front + 3, 10, 2, CREAM); r(bx + 1, front + 5, 8, 2, '#a9b398');
+    r(bx + 2, front + 6, 6, 1, '#69745f'); r(bx + 1, front + 3, 7, 1, '#fff1cf');
+    r(bx, front + 9, 10, 2, '#a78e63'); r(bx + 1, front + 9, 8, 1, '#dac295');
   }
-  for (let i = 0; i < w - 8; i += 3) r(x + 4 + i, front + 9, 2, 2, STEEL.base);
-  r(x, foot - 1, w, 1, OUTLINE);
-  for (const lx of [x + 1, x + w - 3]) r(lx, front, 2, height, STEEL.base);
-
+  r(x + 1, foot - 2, w - 2, 1, '#543425'); r(x + 3, foot - 1, 3, 1, OUTLINE); r(x + w - 6, foot - 1, 3, 1, OUTLINE);
+  // Inset marble pastry slab: diagonal mineral veins, a scored dough ball,
+  // turned rolling-pin handles, bench scraper and deliberately scattered flour.
+  const sx = x + 28;
+  r(sx - 1, top + 1, 42, depth - 3, '#7b735b'); r(sx, top + 2, 40, depth - 5, '#e9dfc5');
+  for (let i = 0; i < 5; i++) { r(sx + i * 7, top + 3 + i % 3, 4, 1, '#b8b9a1'); r(sx + i * 7 + 3, top + 4 + i % 3, 2, 1, '#ccd0b4'); }
+  r(sx + 8, top + 4, 10, 4, '#c7a06a'); r(sx + 9, top + 3, 8, 3, '#ebcfa0'); r(sx + 10, top + 3, 5, 1, '#fff0ce');
+  r(sx + 11, top + 4, 1, 2, '#ae8756'); r(sx + 14, top + 4, 1, 2, '#ae8756');
+  r(sx + 21, top + 5, 16, 2, OUTLINE); r(sx + 24, top + 4, 10, 4, '#bc854c'); r(sx + 24, top + 4, 10, 1, '#f0ca8e');
+  r(sx + 2, top + 5, 3, 3, STEEL.base); r(sx + 2, top + 5, 3, 1, '#865332');
+  r(sx + 6, top + 7, 1, 1, CREAM); r(sx + 19, top + 3, 1, 1, CREAM); r(sx + 18, top + 8, 2, 1, CREAM);
+  // Analog scale with a raised pan and dial.
+  r(x + 71, top + 2, 10, 6, OUTLINE); r(x + 72, top + 3, 8, 4, SAGE);
+  r(x + 73, top + 1, 6, 2, STEEL.hi); r(x + 74, top + 4, 4, 2, CREAM); r(x + 76, top + 4, 1, 1, OUTLINE);
   if (sheeter) {
-    // A dough sheeter: two belts either side of the rollers, a sheet of laminated dough on it.
     const lx = SHEETER_X - BENCH.x + x;
-    r(lx - 1, top - 4, 22, 7, OUTLINE);
-    r(lx, top - 3, 20, 5, '#5b6470');
-    r(lx + 1, top - 3, 8, 1, '#f1e3c4');
-    r(lx + 1, top - 2, 8, 1, '#e8d2a6');
-    r(lx + 8, top - 8, 5, 6, OUTLINE);
-    r(lx + 9, top - 7, 3, 4, '#e2e4de');
-    r(lx + 10, top - 6, 1, 1, '#d9384a');
+    r(lx - 1, top - 4, 22, 7, OUTLINE); r(lx, top - 3, 20, 5, SAGE);
+    r(lx + 1, top - 3, 18, 1, '#a6af8a'); r(lx + 1, top - 1, 18, 1, '#3f5437');
+    r(lx + 1, top - 3, 8, 2, '#e8d2a6'); r(lx + 1, top - 3, 8, 1, CREAM);
+    r(lx + 8, top - 8, 5, 7, OUTLINE); r(lx + 9, top - 7, 3, 5, ENAMEL.base);
+    r(lx + 9, top - 7, 2, 1, CREAM); r(lx + 10, top - 5, 1, 1, '#aa5944');
+    r(lx + 14, top - 5, 3, 3, BRASS); r(lx + 15, top - 4, 3, 1, OUTLINE);
+    r(lx + 1, top + 2, 3, 1, OUTLINE); r(lx + 17, top + 2, 3, 1, OUTLINE);
   }
   if (standMixer) {
-    // A stand mixer with its bowl of batter, and a piping bag beside it.
     const mx = STAND_MIXER_X - BENCH.x + x;
-    r(mx - 1, top - 14, 14, 16, OUTLINE);
-    r(mx, top - 13, 12, 4, '#e26a7a');
-    r(mx + 8, top - 13, 4, 14, '#e26a7a');
-    r(mx, top - 13, 12, 1, '#f39aa6');
-    r(mx + 1, top - 8, 7, 7, OUTLINE);
-    r(mx + 2, top - 7, 5, 5, STEEL.base);
-    r(mx + 2, top - 7, 5, 1, '#fdf2e0');
-    r(mx - 1, top, 14, 2, '#b84a5a');
-    r(mx + 15, top - 4, 3, 6, OUTLINE);
-    r(mx + 16, top - 3, 1, 4, '#f4f1ea');
+    // Open negative space under the rounded motor head and curved column.
+    r(mx + 2, top - 14, 8, 1, OUTLINE); r(mx, top - 13, 12, 5, OUTLINE);
+    r(mx + 1, top - 13, 10, 3, '#aa5944'); r(mx + 2, top - 13, 8, 1, '#dd9e78');
+    r(mx + 9, top - 8, 3, 8, OUTLINE); r(mx + 9, top - 8, 2, 8, '#aa5944');
+    r(mx + 4, top - 9, 1, 3, BRASS); r(mx + 1, top - 7, 7, 6, OUTLINE);
+    r(mx + 2, top - 6, 5, 4, STEEL.base); r(mx + 2, top - 6, 5, 1, CREAM);
+    r(mx + 2, top - 5, 1, 3, '#e6e4c8'); r(mx - 1, top, 14, 2, OUTLINE); r(mx, top, 12, 1, '#aa5944');
+    r(mx + 8, top - 11, 2, 1, BRASS); r(mx + 15, top - 4, 3, 5, CREAM); r(mx + 16, top + 1, 1, 1, BRASS);
   }
 }
 
@@ -545,7 +568,7 @@ export const BINS_RISE = 20;
 export function paintBins(ctx: Ctx, x: number, foot: number): void {
   const r = painter(ctx);
   const top = foot - BINS_RISE;
-  for (const [i, label, lid] of [[0, 'F', '#5a92d4'], [1, 'S', '#d9574a']] as const) {
+  for (const [i, label, lid] of [[0, 'F', '#627451'], [1, 'S', '#aa5944']] as const) {
     const bx = x + i * (BINS.w / 2);
     const w = BINS.w / 2 - 2;
     r(bx - 1, top + 3, w + 2, BINS_RISE - 3, OUTLINE);
@@ -555,7 +578,10 @@ export function paintBins(ctx: Ctx, x: number, foot: number): void {
     r(bx - 1, top, w + 2, 5, OUTLINE);
     r(bx, top + 1, w, 3, lid);
     r(bx, top + 1, w, 1, mix(lid, '#ffffff', 0.35));
-    drawText(ctx, label, bx + w / 2 - 2, top + 8, '#7a6a58');
+    r(bx + 4, top + 7, w - 8, 9, '#b49c73'); r(bx + 5, top + 8, w - 10, 7, CREAM);
+    drawText(ctx, label, bx + w / 2 - 2, top + 8, '#543425');
+    r(bx + 4, top + 2, w - 8, 1, BRASS); r(bx + w - 4, top + 7, 2, 4, '#c6b58d');
+    r(bx + 3, foot - 4, 5, 1, '#d3c19c');
     for (const cx of [bx + 1, bx + w - 3]) r(cx, foot - 2, 3, 2, OUTLINE);
   }
 }
@@ -566,21 +592,28 @@ export function paintRack(ctx: Ctx, x: number, foot: number, items: readonly Ite
   const { w } = RACK;
   const top = foot - RACK_RISE;
   for (const px of [x, x + w - 2]) {
-    r(px - 1, top - 1, 4, RACK_RISE + 1, OUTLINE);
+    r(px - 1, top, 4, RACK_RISE, OUTLINE);
     r(px, top, 2, RACK_RISE - 2, STEEL.base);
     r(px, top, 1, RACK_RISE - 2, STEEL.hi);
   }
   for (let i = 0; i < 4; i++) {
     const y = top + 6 + i * 10;
     r(x + 1, y, w - 2, 2, OUTLINE);
-    r(x + 2, y, w - 4, 1, '#d7a35a');
+    r(x + 2, y, w - 4, 1, '#c8a15e');
+    r(x + 2, y + 1, w - 4, 1, '#9e7747'); r(x + 2, y - 1, 1, 1, CREAM);
+    r(x + w - 3, y - 1, 1, 1, CREAM); r(x + 1, y + 2, w - 2, 1, '#69745f');
     const item = items[i];
     if (!item) continue;
     const icon = itemIcon(item, false);
-    for (let k = 0; k < 2; k++) ctx.drawImage(icon, x + 3 + k * 8, y - icon.height + 1, Math.min(icon.width, 8), icon.height);
+    const art = fineSpriteArt(icon), width = Math.min(icon.width, 8);
+    // Generated food keeps its source aspect in this narrow rack slot.
+    const height = art.density > 1 ? icon.height * width / icon.width : icon.height;
+    for (let k = 0; k < 2; k++) ctx.drawImage(art.canvas, x + 3 + k * 8, y - height + 1, width, height);
   }
-  // Casters.
-  for (const px of [x, x + w - 3]) r(px, foot - 2, 3, 2, OUTLINE);
+  // Braced top rail, locking casters and a folded check cloth on one handle.
+  r(x, top, w, 2, OUTLINE); r(x + 1, top, w - 2, 1, BRASS);
+  r(x + 2, top + 1, 4, 4, CREAM); r(x + 3, top + 1, 1, 4, '#aa5944');
+  for (const px of [x, x + w - 3]) { r(px, foot - 2, 3, 2, OUTLINE); r(px + 1, foot - 2, 1, 1, BRASS); }
 }
 
 /** The glass-fronted pastry fridge where cakes set, with a few on its shelves. */
@@ -588,21 +621,25 @@ export function paintPastryFridge(ctx: Ctx, x: number, foot: number, items: read
   const r = painter(ctx);
   const { w } = PASTRY_FRIDGE;
   const top = foot - FRIDGE_RISE;
-  steelBox(ctx, x, top, w, FRIDGE_RISE - 1, ramp('#e2e4de'));
+  steelBox(ctx, x, top, w, FRIDGE_RISE - 1, ENAMEL);
   r(x + 2, top + 5, w - 4, FRIDGE_RISE - 12, OUTLINE);
   r(x + 3, top + 6, w - 6, FRIDGE_RISE - 14, '#dff1f5');
   for (const y of [top + 16, top + 26]) r(x + 3, y, w - 6, 1, STEEL.lo);
-  items.slice(0, 2).forEach((item, i) => {
-    const icon = itemIcon(item, false);
-    ctx.drawImage(icon, x + w / 2 - icon.width / 2, top + 16 + i * 10 - icon.height);
-  });
+  for (let i = 0; i < Math.min(items.length, 2); i++) {
+    const icon = itemIcon(items[i], false);
+    ctx.drawImage(fineSpriteArt(icon).canvas, x + w / 2 - icon.width / 2, top + 16 + i * 10 - icon.height, icon.width, icon.height);
+  }
   ctx.save();
   ctx.globalAlpha = 0.4;
   for (let i = 0; i < 10; i++) r(x + 5 + i * 0.6, top + 8 + i, 2, 1, '#ffffff');
   ctx.restore();
   r(x + 2, top + 1, 10, 3, '#1d2a22');
   r(x + 3, top + 2, 4, 1, '#8fe38a');
-  r(x + w - 5, top + 12, 2, 10, DARK_STEEL.dark);
+  r(x + w - 5, top + 12, 2, 10, BRASS); r(x + w - 5, top + 12, 1, 9, CREAM);
+  r(x, top + 7, 3, 4, BRASS); r(x, top + 24, 3, 4, BRASS);
+  r(x + 2, top + FRIDGE_RISE - 6, w - 4, 3, SAGE);
+  for (let vx = x + 4; vx < x + w - 3; vx += 3) r(vx, top + FRIDGE_RISE - 5, 1, 2, OUTLINE);
+  r(x + 3, top + 7, 1, FRIDGE_RISE - 15, CREAM);
 }
 
 /** The dish pit by the door: a three-bay sink with a sprayer, and a rack of clean plates. */
@@ -617,13 +654,16 @@ export function paintDishPit(ctx: Ctx, x: number, foot: number): void {
   for (let i = 0; i < 3; i++) {
     const bx = x + 3 + i * 14;
     r(bx, top + 2, 12, 6, DARK_STEEL.lo);
-    r(bx + 1, top + 3, 10, 2, '#9fc7d6');
+    r(bx + 1, top + 3, 10, 2, '#aabb9d');
+    r(bx + 2, top + 3, 7, 1, '#e4e8c7'); r(bx + 5, top + 6, 2, 1, '#3f5437');
   }
   // Sprayer arm and faucet.
   r(x + 18, top - 14, 2, 14, OUTLINE);
   r(x + 18, top - 14, 8, 2, OUTLINE);
   r(x + 24, top - 12, 3, 4, OUTLINE);
   r(x + 25, top - 11, 1, 2, STEEL.hi);
+  r(x + 18, top - 13, 1, 12, BRASS); r(x + 20, top - 14, 5, 1, BRASS);
+  for (let sy = top - 11; sy < top - 2; sy += 3) r(x + 17, sy, 4, 1, '#c8a15e');
   // Drying rack with plates on end.
   const rx = x + 45;
   r(rx - 1, top - 9, 18, 11, OUTLINE);
@@ -632,12 +672,15 @@ export function paintDishPit(ctx: Ctx, x: number, foot: number): void {
     r(rx + 1 + i * 3, top - 10, 2, 9, '#fdf6ec');
     r(rx + 1 + i * 3, top - 10, 2, 1, '#dccdb9');
   }
-  r(x, front, w, foot - front, STEEL.lo);
-  r(x + 2, front + 2, w - 4, foot - front - 4, STEEL.base);
-  r(x + w / 3, front + 2, 1, foot - front - 4, OUTLINE);
-  r(x + (w * 2) / 3, front + 2, 1, foot - front - 4, OUTLINE);
+  r(x, front, w, foot - front, OUTLINE);
+  for (let i = 0; i < 3; i++) cabinetPanel(ctx, x + 1 + i * 21, front + 1, 20, 12, SAGE, true);
+  // A striped tea towel hangs from the rail and a brush waits by the basin.
+  r(x + 5, front - 1, 12, 2, BRASS); r(x + 7, front, 7, 10, CREAM);
+  for (let ty = front + 2; ty < front + 10; ty += 3) r(x + 7, ty, 7, 1, '#aa5944');
+  r(x + 8, front + 10, 1, 1, CREAM); r(x + 12, front + 10, 1, 1, CREAM);
+  r(x + 5, top - 2, 6, 2, '#865332'); r(x + 5, top, 6, 1, '#c8a15e');
   // A bin for scraps at the end.
   r(x + w - 2, foot - 16, 10, 16, OUTLINE);
-  r(x + w - 1, foot - 15, 8, 14, '#4f8a5b');
-  r(x + w - 1, foot - 15, 8, 2, '#6fae7a');
+  r(x + w - 1, foot - 15, 8, 14, SAGE);
+  r(x + w - 1, foot - 15, 8, 2, '#a6af8a');
 }

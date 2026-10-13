@@ -1,0 +1,101 @@
+[
+  {
+    "id": "floor_planks",
+    "kind": "tile",
+    "logical": [
+      96,
+      24
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. A flat top-down floor of long horizontal warm honey-oak planks #b98c62/#ad805a/#c49a70, staggered end joints, fine woodgrain and occasional small knots, subtle dark narrow seams. Multiple plank rows, joints periodic across edges, no border.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-15853936-5383-4995-88cb-6f2b655b8cd7.png"
+  },
+  {
+    "id": "floor_mint",
+    "kind": "tile",
+    "logical": [
+      32,
+      32
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. A flat top-down checker floor of alternating pale ivory-green #e5e8d2 and muted mint-sage #c8d4b5 square ceramic tiles, thin gray-beige grout and restrained mineral speckles. Even four by four repeat, no perspective.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-79ac81c1-bb04-44f1-95df-bb3a599d4bb7.png"
+  },
+  {
+    "id": "floor_terrazzo",
+    "kind": "tile",
+    "logical": [
+      32,
+      32
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. A flat top-down pale warm-cream terrazzo floor #ece5d8, sparse tiny irregular chips in terracotta, sage, ochre, taupe and ivory, faint regular square slab grout. Delicate scattered chips at consistent density, not oversized confetti, no perspective.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-46991ed0-f61b-4cff-b794-91a812071768.png"
+  },
+  {
+    "id": "floor_herringbone",
+    "kind": "tile",
+    "logical": [
+      32,
+      32
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. A flat top-down golden honey-oak herringbone parquet floor, narrow wooden rectangular slats interlocked in classic zigzag herringbone arrangement, subtle alternating tan #b88d63 and #b28a60 tones, fine woodgrain, extremely narrow warm-brown seams. Seamless periodic pattern.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-a45fc29c-0a06-470c-812f-d65e99e45955.png"
+  },
+  {
+    "id": "floor_marble",
+    "kind": "tile",
+    "logical": [
+      64,
+      64
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. A flat top-down ivory marble floor of large square slabs #f4f0ea and #ebe4da, very delicate thin taupe/beige winding mineral veins #b8ac95, subtle warm cream highlights and almost invisible thin grout. Soft quiet cafe material, no dramatic dark cracks.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-8738837f-54fa-4919-a749-86f14bde543b.png"
+  },
+  {
+    "id": "counter_walnut",
+    "kind": "counter",
+    "logical": [
+      580,
+      60
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: a TWO-MODULE MATERIAL SET for one cafe counter variant, matching the fine crisp pixel texture, upper-left warm edge highlights and handcrafted detail of input references. True transparent canvas. TOP: one very wide thin perfectly rectangular countertop material strip, native shape width:height about580:60. Flat material surface viewed straight-on for game mapping, no perspective, no legs, NO front apron attached. BOTTOM: one separate rectangular cabinet FRONT PANEL material module, width:height190:138, recessed central panel with clean square outer stiles. No countertop attached to front panel. Keep at least150px transparent gap between modules; centered, complete bounds and ample margins. No text, labels, props, ground, room, background, glow or exterior shadow. Exactly these TWO separate modules only. Material specification: DARK WALNUT: top warm dark walnut #98643e, front deep walnut #543425; rich fine woodgrain, subtle warm amber beveled edges and tiny restrained brass corner detailing.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-b6e0ed07-8e81-41a5-beb8-b4197128043c.png"
+  },
+  {
+    "id": "counter_marble",
+    "kind": "counter",
+    "logical": [
+      580,
+      60
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: a TWO-MODULE MATERIAL SET for one cafe counter variant, matching the fine crisp pixel texture, upper-left warm edge highlights and handcrafted detail of input references. True transparent canvas. TOP: one very wide thin perfectly rectangular countertop material strip, native shape width:height about580:60. Flat material surface viewed straight-on for game mapping, no perspective, no legs, NO front apron attached. BOTTOM: one separate rectangular cabinet FRONT PANEL material module, width:height190:138, recessed central panel with clean square outer stiles. No countertop attached to front panel. Keep at least150px transparent gap between modules; centered, complete bounds and ample margins. No text, labels, props, ground, room, background, glow or exterior shadow. Exactly these TWO separate modules only. Material specification: IVORY MARBLE: top creamy ivory stone #f3efe8 with thin pale taupe veins #c9c0b2; front light warm limestone/ivory #e2dace with carved recessed rectangular panel. Restrained champagne edge details.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-008d4a63-402e-4d35-a049-530adf758f88.png"
+  },
+  {
+    "id": "counter_pink",
+    "kind": "counter",
+    "logical": [
+      580,
+      60
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: a TWO-MODULE MATERIAL SET for one cafe counter variant, matching the fine crisp pixel texture, upper-left warm edge highlights and handcrafted detail of input references. True transparent canvas. TOP: one very wide thin perfectly rectangular countertop material strip, native shape width:height about580:60. Flat material surface viewed straight-on for game mapping, no perspective, no legs, NO front apron attached. BOTTOM: one separate rectangular cabinet FRONT PANEL material module, width:height190:138, recessed central panel with clean square outer stiles. No countertop attached to front panel. Keep at least150px transparent gap between modules; centered, complete bounds and ample margins. No text, labels, props, ground, room, background, glow or exterior shadow. Exactly these TWO separate modules only. Material specification: ROSE COUNTER: top pale blush pink polished painted wood #f7c3cf; front dusty rose #e98fa6 with subtle woodgrain and recessed rectangular cabinetry panel, tiny muted brass detailing. Warm cream highlight edges, no glossy plastic.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-78bfc8e0-dfcf-40a8-883e-b6de39f840b7.png"
+  },
+  {
+    "id": "counter_gold",
+    "kind": "counter",
+    "logical": [
+      580,
+      60
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: a TWO-MODULE MATERIAL SET for one cafe counter variant, matching the fine crisp pixel texture, upper-left warm edge highlights and handcrafted detail of input references. True transparent canvas. TOP: one very wide thin perfectly rectangular countertop material strip, native shape width:height about580:60. Flat material surface viewed straight-on for game mapping, no perspective, no legs, NO front apron attached. BOTTOM: one separate rectangular cabinet FRONT PANEL material module, width:height190:138, recessed central panel with clean square outer stiles. No countertop attached to front panel. Keep at least150px transparent gap between modules; centered, complete bounds and ample margins. No text, labels, props, ground, room, background, glow or exterior shadow. Exactly these TWO separate modules only. Material specification: MIDNIGHT AND GOLD COUNTER: top pale champagne-gold solid surface #f3dfa6, front deep muted indigo #363c5c with a recessed rectangular cabinet panel, thin antique-gold trim #e7b84a. Subtle material texture, not flashy jewelry.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-3c451c9d-2b1a-46d0-9b0f-43f4c7bb8715.png"
+  }
+]

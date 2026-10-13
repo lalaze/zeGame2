@@ -4,6 +4,8 @@ import { markRegularGuestChapterRead, regularGuestChapterRequirement, regularGue
 import type { GameState } from '../game/state';
 import { t } from '../i18n';
 import { character, toDataURL } from '../render/sprites';
+import { getGeneratedCustomerAdapter } from '../render/generated-main-art';
+import { fineSpriteArt } from '../render/fine-sprite-art';
 import { isComposingKey } from './keyboard';
 import { closeModal, showModal } from './modal';
 
@@ -26,14 +28,19 @@ export function updateRegularGuestsButton(state: GameState): void {
   if (button.title !== description) button.title = description;
 }
 
-const portraits = new Map<number, string>();
+const portraits = new Map<number, { frame: HTMLCanvasElement; source: string }>();
 function portrait(guest: RegularGuestDefinition): HTMLImageElement {
-  let source = portraits.get(guest.appearanceId);
-  if (!source) {
-    const design = CUSTOMER_CAST[guest.appearanceId];
-    source = toDataURL(character(design.look, 'customer', guest.appearanceId).stand, 3);
-    portraits.set(guest.appearanceId, source);
+  const design = CUSTOMER_CAST[guest.appearanceId];
+  const fallback = character(design.look, 'customer', guest.appearanceId);
+  const result = getGeneratedCustomerAdapter()?.resolve({ role: 'customer', appearanceId: guest.appearanceId, look: design.look }, fallback);
+  const frame = result?.frames.stand ?? fallback.stand;
+  let cached = portraits.get(guest.appearanceId);
+  if (!cached || cached.frame !== frame) {
+    const art = result?.generated ? fineSpriteArt(frame) : { canvas: frame, density: 1 };
+    cached = { frame, source: toDataURL(art.canvas, 3 / art.density) };
+    portraits.set(guest.appearanceId, cached);
   }
+  const source = cached.source;
   const image = document.createElement('img');
   image.className = 'regular-portrait';
   image.src = source;

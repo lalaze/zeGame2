@@ -1,0 +1,25 @@
+{
+  "id": 10,
+  "name": "苔绿园丁",
+  "look": {
+    "skin": 1,
+    "hair": 1,
+    "hairStyle": 3,
+    "shirt": 2,
+    "pants": 1
+  },
+  "hairstyle": 3,
+  "outfit": "overalls",
+  "accessory": "satchel",
+  "accent": "#e6d39d",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#dfaa7d",
+    "hair": "#976546",
+    "shirt": "#8ba477",
+    "pants": "#85664f"
+  },
+  "hatPalette": "#cf929e",
+  "description": "Fixed customer cast 10 (苔绿园丁): warm skin #dfaa7d; hair #976546 in a clearly knitted cuffed beanie hat in #cf929e with cream-and-gold stitched stripe; short #976546 hair visible beneath the rim. Outfit: #85664f full trousers-overalls with bib, shoulder straps and small cream bib pocket, worn over #8ba477 long-sleeve shirt; genuine customer overalls, no service apron. Lower clothing color #85664f; warm dark brown leather shoes. Accent #e6d39d. A small #e6d39d cross-body shoulder satchel with diagonal strap and gold clasp, resting at hip in EVERY pose including seated; it is a worn accessory, never held."
+}

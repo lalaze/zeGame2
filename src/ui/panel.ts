@@ -122,12 +122,15 @@ interface FurnitureTileRefs {
 /** What the Decor tab asks the café to do: start placing a piece, or rearrange what's out. */
 export type ArrangeRequest = { kind: 'place'; id: string } | { kind: 'arrange' };
 
-const iconUrls = new Map<string, string>();
+const iconUrls = new WeakMap<HTMLCanvasElement, Map<number, string>>();
 function iconUrl(key: string, make: () => HTMLCanvasElement): string {
-  let url = iconUrls.get(key);
+  const canvas = make(), scale = key.startsWith('item:') ? 1 : 4;
+  let urls = iconUrls.get(canvas);
+  if (!urls) { urls = new Map(); iconUrls.set(canvas, urls); }
+  let url = urls.get(scale);
   if (!url) {
-    url = toDataURL(make(), key.startsWith('item:') ? 1 : 4);
-    iconUrls.set(key, url);
+    url = toDataURL(canvas, scale);
+    urls.set(scale, url);
   }
   return url;
 }
@@ -922,6 +925,9 @@ export class Panel {
     for (const [key, refs] of this.rows) {
       const [kind, id] = key.split(':');
       if (kind === 'item') {
+        const icon = refs.el.querySelector<HTMLImageElement>('img.icon');
+        const source = iconUrl(`item:${id}`, () => itemArtwork(id as ItemId));
+        if (icon && icon.getAttribute('src') !== source) icon.src = source;
         const def = MENU.find((m) => m.id === id)!;
         const level = s.items[def.id];
         const q = quoteItem(s, def.id, this.buyAmount);

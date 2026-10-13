@@ -1,0 +1,25 @@
+{
+  "id": 1,
+  "name": "海盐条纹",
+  "look": {
+    "skin": 1,
+    "hair": 1,
+    "hairStyle": 2,
+    "shirt": 1,
+    "pants": 0
+  },
+  "hairstyle": 2,
+  "outfit": "stripe",
+  "accessory": "none",
+  "accent": "#ecdfba",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#dfaa7d",
+    "hair": "#976546",
+    "shirt": "#799ba7",
+    "pants": "#53637b"
+  },
+  "hatPalette": "#9b87af",
+  "description": "Fixed customer cast 1 (海盐条纹): warm skin #dfaa7d; hair #976546 in long straight hair falling to the lower back, long straight side locks, side-part fringe. Outfit: #799ba7 knitted sweater with exactly two broad cream horizontal stripes around torso and sleeves. Lower clothing color #53637b; warm dark brown leather shoes. Accent #ecdfba. No glasses, headband, bow or bag."
+}

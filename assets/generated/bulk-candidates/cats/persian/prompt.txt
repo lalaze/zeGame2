@@ -1,0 +1,24 @@
+Use case: stylized-concept. Asset type: production 2D game sprite sheet.
+Create EXACTLY FOURTEEN distinct action sprites of ONE consistent cat breed, detailed below. Input reference is STYLE ONLY: fine cozy pixel-art clusters and warm dark contours; do NOT copy Siamese colors or dark mask. Change anatomy and markings to the specified breed.
+Canvas 1536x1536 RGBA transparent. Exactly 4 columns x4 rows; all cells384x384. Row4 last2cells EMPTY TRANSPARENT. Generous margins between separate silhouettes, complete ears,paws,tail, no cat crosses its cell. Fixed elevated game view, same physical head and body scale all14poses (never resize poses to fit), fine crisp 2D pixel clusters, no smooth/vector/3D shading, warm upper-left light. Each cat no more than320px wide. Seated standard cat height about270px; raised-chest about315px with SAME head size.
+EXACT positional mapping, row-major:
+R1C1 idle: compact sitting front-three-quarter slightly LEFT, eyes open, 2distinct planted forepaws, tail curled RIGHT.
+R1C2 swish: same sitting body, tail visibly swings out right/down instead of upright curl.
+R1C3 blink: idle with BOTH eyes CLOSED neutral thin eyelids, mouth closed.
+R1C4 happy: same idle eyesclosed cheerful smiling OPEN tiny mouth, distinct expression.
+R2C1 walkA: all4legs walking LEFT, head at LEFT horizontal body toRIGHT tailRIGHT, near foreleg forward/far foreleg back.
+R2C2 walkB: same head-left direction, opposite step with near forelegback/far forelegforward, fourfeet distinguishable. Not mirrored.
+R2C3 sleep: cat curled low asleep in oval with head tucked against paws, tailwrapped.
+R2C4 groomA: seated, near forepaw lifted to CHEST, head down, tongue touches paw; other forepaw planted.
+R3C1 groomB: same seated cat paw raised higher to CHEEK rubbing cheek, headleaninto paw; otherforepaw planted.
+R3C2 stretch: facingLEFT, frontlegs reaching farLEFT, chestlowered, hindquartersHIGH, tailcurveRIGHT, true feline forwardstretch.
+R3C3 watch: standardcompact sitting alert, eyeslookingLEFT, earsperked.
+R3C4 lookUp: taller upright SITTING, broad chestandshoulders raised25percent directlybelowjaw, headtiltsUP, bothforepaws grounded, haunchgrounded; no elongatedneck.
+R4C1 nuzzleA: same TALL raisedchest as lookUp, eyesclosed, forehead lifted/tilted UP-LEFT for unseenhand, bothforepaws andhaunchgrounded.
+R4C2 nuzzleB: same TALL raisedchest andheadsize, eyesclosed, foreheadtilts subtlyUP-RIGHT, visiblydifferentheadangle fromA, groundedpaws.
+R4C3/R4C4 emptytransparent.
+No text,labels,gridlines, humans,hands,collars,accessories,props,effects,hearts,shadows,floor,backgroundhaze,glow or extra limbs. Actual transparentalpha outside silhouettes. No duplicate or missing actions. Onebreedspecificidentity remainsconsistent acrossall14.
+Critical gait difference: in walkA the near/frontmost forepaw extends diagonally forward LEFT; in walkB that same near forepaw is visibly lifted and bent backward underneath the chest, while the far forepaw supports forward. The walking silhouettes must clearly differ. Ensure fulltails with at least12transparentpixels before the canvas edge.
+Important proportion: standard idle sitting cats are compact with short forelegs, about240pxheight; raised sitters lookUp/nuzzleA/nuzzleB about320pxheight with SAME headsize. Raised cats need substantially longer frontlegs supporting taller BROAD CHEST directly belowjaw, never an elongatedneck.
+SUBJECT IDENTITY: Persian longhair: warm apricotcream #efc9a1 fur, palepeach #ffe8c8 highlights, muted caramel #c59174 shadows, extra fluffy palecream bib/chest #fff0d8. VERY ROUND head, small rounded low-setears, gently FLAT shortnoseface, fullcheeks, golden-hazel eyes #967237, pinknose. Cobby shortlegged body, voluminous longfur and bushytail; no darkmask or stripes, no harsh angryexpression.
+This is a genuinely LONGHAIRED breed. Its face shape, ear shape and fur silhouette must differ visibly from the reference shorthaired Siamese. Keep pixel-crafted tufts and clear detailed 2D anatomy.

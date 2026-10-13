@@ -1,4 +1,5 @@
 import { paintRunner } from './decor-art';
+import { mix } from './color';
 import { FLOOR_Y, SCENE_W, passageY, areaBounds, doorwayY } from '../game/layout';
 import { adjacentArea, isAreaOpen, type AreaId, type Direction } from '../game/regions';
 import type { GameState } from '../game/state';
@@ -61,6 +62,17 @@ export function paintRoomBoundaries(ctx: CanvasRenderingContext2D, area: AreaId,
       r(x, top, 5, h, ink);
       r(x + 1, top, 3, h, base);
       r(x + 1, top, 1, h, '#d5b48a');
+      // Raised timber pilaster: alternating polished grain and mortise collars.
+      // The existing five-pixel wall footprint and physical doorway remain exact.
+      for (let yy = top + 8; yy < top + h - 4; yy += 19) {
+        r(x + 2, yy, 1, 7, mix(base, '#543425', 0.42));
+        r(x + 3, yy + 2, 1, 4, mix(base, '#c98c4d', 0.35));
+      }
+      for (let yy = top + 22; yy < top + h - 3; yy += 49) {
+        r(x, yy, 5, 3, '#543425');
+        r(x + 1, yy, 3, 1, '#c98c4d');
+        r(x + 2, yy + 1, 1, 1, '#dfba76');
+      }
     }
     if (!connected) continue;
     if (area === 'kitchen' || connected === 'kitchen') {
@@ -73,11 +85,17 @@ export function paintRoomBoundaries(ctx: CanvasRenderingContext2D, area: AreaId,
     for (const top of [y - 17, y + 13]) {
       r(x - 2, top, 9, 4, ink);
       r(x - 1, top, 7, 2, '#dec19a');
+      r(x - 1, top + 1, 7, 1, '#ad7845');
+      r(x + 1, top + 2, 3, 1, '#6a452d');
+      r(x - 1, top, 1, 1, '#f4e6c7');
     }
     if (blocked(direction)) {
       r(x, y - 12, 5, 24, '#916444');
       for (let top = y - 10; top < y + 12; top += 7) r(x, top, 5, 2, '#efcf94');
       r(x + 1, y - 2, 3, 4, '#e6b34d');
+      r(x + 1, y - 3, 3, 1, '#543425');
+      r(x + 1, y - 2, 1, 3, '#f3d796');
+      r(x + 2, y - 1, 1, 2, '#7d5833');
     } else if (area === 'kitchen' || connected === 'kitchen') {
       // A steel swing door with a porthole, folding away from its top hinge as it opens.
       const leaf = Math.round(26 * (1 - kitchenDoor));
@@ -89,7 +107,15 @@ export function paintRoomBoundaries(ctx: CanvasRenderingContext2D, area: AreaId,
           r(x + 1, y - 7, 3, 4, ink);
           r(x + 2, y - 6, 1, 2, '#ffcf7a');
         }
-        if (leaf > 22) r(x + 1, y + 7, 3, 4, '#8d969e');
+        // Rivets and a brushed kick plate make the service door a small fixture,
+        // rather than a flat grey strip; every mark folds with the same leaf.
+        if (leaf > 8) r(x + 3, y - 11, 1, 1, '#657580');
+        if (leaf > 16) r(x + 3, y, 1, 2, '#657580');
+        if (leaf > 22) {
+          r(x + 1, y + 7, 3, 4, '#8d969e');
+          r(x + 1, y + 7, 3, 1, '#d6dfdf');
+          r(x + 2, y + 9, 2, 1, '#6d7880');
+        }
       }
     }
   }

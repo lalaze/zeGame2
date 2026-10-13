@@ -1,0 +1,82 @@
+[
+  {
+    "id": "plant_fern",
+    "logical": [
+      16,
+      15
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One lush low spreading potted FERN with arcing fronds and many slender small pointed leaflets, dark/sage green leaves and yellow-green highlights. Warm terracotta flowerpot with rolled lip and visible dark soil. Complete width:height16:15. Clearly fern leaflets, not broad tropical leaves.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-51a43cd8-9dbb-4949-99be-c61303deffed.png"
+  },
+  {
+    "id": "plant_snake",
+    "logical": [
+      9,
+      17
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One potted snake plant with five to seven upright spear leaves, muted dark green with pale sage/yellow vertical edges and faint horizontal stripes, varied heights. Cream glazed ceramic tapered pot with simple rim. Complete width:height9:17. No loose leaves.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-b7b96e18-0fdc-4074-9894-a4c1592444d5.png"
+  },
+  {
+    "id": "plant_fig",
+    "logical": [
+      16,
+      23
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One compact fiddle-leaf fig tree in a fluted terracotta pot, visible forked woody trunk and dense crown of rounded violin-shaped veined dark sage leaves. Complete width:height16:23, tree taller than broad. Empty soil surface.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-e3315d21-232f-4bbe-b74f-7cd9be598b01.png"
+  },
+  {
+    "id": "plant_monstera",
+    "logical": [
+      22,
+      19
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One lush potted MONSTERA with multiple glossy heart-shaped dark sage leaves with clearly visible split edges and characteristic oval leaf holes, slender green stems, warm terracotta pot with rolled lip. Complete width:height22:19, wide foliage, no random flowers.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-aefb823f-28be-446d-98fc-637a83ac6003.png"
+  },
+  {
+    "id": "plant_lemon",
+    "logical": [
+      21,
+      22
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One compact potted lemon tree with forked woody trunk, oval deep green leaves and five small golden-yellow lemons. Terracotta pot with a subtle glazed ochre rim. Complete width:height21:22, rounded compact canopy. No other fruit.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-7dc9ca41-698c-4273-b725-6a7c49546fec.png"
+  },
+  {
+    "id": "plant_lavender",
+    "logical": [
+      14,
+      25
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One tall slender potted lavender plant, three to five slender green stems with narrow leaves and textured dusty-purple flower spikes. Weathered terracotta pot with small blank cream inset. Complete width:height14:25. Purple flowers must clearly read lavender, no text.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-3919c529-bb0f-4c5f-9233-7cc8212ef27b.png"
+  },
+  {
+    "id": "plant_succulent",
+    "logical": [
+      8,
+      13
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One small potted echeveria succulent rosette with thick sage-green pointed fleshy leaves in a warm terracotta tapered pot. Keep whole object fairly tall including pot, complete width:height8:13. No separate loose plant or props.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-cfaf6382-aee5-437f-bb15-f83d47c4c230.png"
+  },
+  {
+    "id": "round_stool",
+    "logical": [
+      14,
+      18
+    ],
+    "surface": "floor",
+    "prompt": "Use case: stylized-concept. Asset type: independent production furniture sprite for the cozy fine-pixel cafe in the two input STYLE REFERENCES. Match warm carved walnut and antique brass, muted sage and terracotta, warm cream, fine crisp square pixel clusters, rich gently shaded material detail and dark-brown contours. Same fixed shallow elevated FRONTAL perspective with a small right side visible. Upper-left warm light. No smooth 3D render, photography, low-poly, blur or painted gradient background. One complete isolated object, genuine transparent alpha outside its silhouette, generous margins, ideally on a 1024-pixel square canvas. No floor tile, wall, environment, label, logo, watermark, readable text, animal or person. No cast shadow or glow outside the object. One simple antique round walnut cafe stool, oval visible wooden seat top, four turned short legs and connecting stretchers with restrained brass screw details. Complete width:height14:18. No upholstery, backrest, cushion, mug or prop.",
+    "sourcePath": "/workspace/scratch/30a3201ff9cd/generated_images/exec-1350add4-648e-4856-8230-7799b8ba7835.png"
+  }
+]

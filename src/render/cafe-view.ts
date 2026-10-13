@@ -13,6 +13,8 @@ import type { GameState } from '../game/state';
 import { floorFurnitureBounds } from './furniture-art';
 import { MACHINE_X, MACHINE_Y } from './room-art';
 import { RoomCamera } from './room-camera';
+import { MAIN_COUNTER_PLANE, MAIN_WALL_PLANE, projectMainAttachment, projectMainPlaneWorld, projectMainWorld, unprojectMainPlaneWorld, unprojectMainWorld } from './main-pixel-presentation';
+import type { PixelPoint } from './pixel-projection';
 
 /** A piece of furniture being placed or moved, and where it would go. */
 export interface Ghost {
@@ -53,6 +55,9 @@ export class CafeView {
   catSelectionSeconds = 0;
   private steamTimer = 0;
   private focusedKitchenHeight = 0;
+  private presentedPointer: PixelPoint | null = null;
+  private presentedResidentCatPoints = new Map<CatId, PixelPoint>();
+  private effectAnchors = new WeakMap<Effect, { anchor?: PixelPoint; plane?: number }>();
 
   /** Frame the physical room, rather than the unused remainder of its grid cell. */
   private roomFocus() {
@@ -98,28 +103,64 @@ export class CafeView {
 
   // ------------------------------------------------------------ effects
 
+  /** Keep the raw painted pointer only during its synchronous input dispatch. */
+  withPresentedPointer<T>(point: PixelPoint, dispatch: (logical: PixelPoint) => T): T {
+    const previous = this.presentedPointer;
+    this.presentedPointer = point;
+    try { return dispatch(this.overview ? point : unprojectMainWorld(point)); }
+    finally { this.presentedPointer = previous; }
+  }
+
+  private queueEffect(effect: Effect, anchor?: PixelPoint, plane?: number): void {
+    this.effects.push(effect);
+    this.effectAnchors.set(effect, { anchor, plane });
+  }
+
+  /** Effects keep their owner's displacement even when emitted above its head. */
+  effectPoint(effect: Effect): PixelPoint {
+    const attachment = this.effectAnchors.get(effect);
+    if (attachment?.plane !== undefined) return projectMainPlaneWorld(effect, attachment.plane);
+    return attachment?.anchor ? projectMainAttachment(effect, attachment.anchor) : projectMainWorld(effect);
+  }
+
   addEvents(events: SimEvent[]): void {
     for (const e of events) {
       if (e.type === 'sale') this.sales.push(e);
-      else if (e.type === 'bell') this.effects.push({ kind: 'bell', x: e.x, y: e.y });
+      else if (e.type === 'bell') this.queueEffect({ kind: 'bell', x: e.x, y: e.y }, undefined, MAIN_COUNTER_PLANE);
       else if (e.type === 'restock') {
         // A fresh batch lands in the pastry case.
-        for (let i = 0; i < 4; i++) this.effects.push({ kind: 'sparkle', x: PASTRY_CASE.x + 8 + i * 18, y: COUNTER.front + 6 });
+        for (let i = 0; i < 4; i++) this.queueEffect({ kind: 'sparkle', x: PASTRY_CASE.x + 8 + i * 18, y: COUNTER.front + 6 }, undefined, MAIN_COUNTER_PLANE);
       }
     }
   }
 
-  sparkle(x: number, y: number): void {
-    this.effects.push({ kind: 'sparkle', x, y });
+  sparkle(x: number, y: number, anchor: PixelPoint = { x, y: y + 15 }): void {
+    this.queueEffect({ kind: 'sparkle', x, y }, anchor);
+  }
+
+  /** Clear before each rendered frame, including frames that draw no residents. */
+  clearPresentedResidentCatPoints(): void {
+    this.presentedResidentCatPoints.clear();
+  }
+
+  /** Final painted world-space foot, already projected; never a simulation position. */
+  setPresentedResidentCatPoint(id: CatId, point: PixelPoint): void {
+    if (!this.livingCats.actors.has(id) || !Number.isFinite(point.x) || !Number.isFinite(point.y)) {
+      this.presentedResidentCatPoints.delete(id);
+      return;
+    }
+    this.presentedResidentCatPoints.set(id, { x: point.x, y: point.y });
   }
 
   /** Resident hit targets are slightly larger than the pixel art, nearest wins. */
   hitResidentCat(x: number, y: number, radius = 12): CatId | null {
     if (this.overview || this.panning || this.paused) return null;
-    const candidates = [...this.livingCats.actors.values()].filter((cat) =>
-      cat.area === this.area && Math.abs(x - cat.x) <= radius && y >= cat.y - Math.max(22, radius + 8) && y <= cat.y + Math.max(5, radius - 8));
-    candidates.sort((a, b) => Math.hypot(x - a.x, y - a.y + 8) - Math.hypot(x - b.x, y - b.y + 8));
-    return candidates[0]?.id ?? null;
+    const point = this.presentedPointer ?? { x, y };
+    const candidates = [...this.livingCats.actors.values()].map(cat => ({ cat, at: this.presentedPointer
+      ? this.presentedResidentCatPoints.get(cat.id) ?? projectMainWorld(cat) : cat })).filter(({ cat, at }) =>
+      cat.area === this.area && Math.abs(point.x - at.x) <= radius && point.y >= at.y - Math.max(22, radius + 8) && point.y <= at.y + Math.max(5, radius - 8));
+    candidates.sort((a, b) => Math.hypot(point.x - a.at.x, point.y - a.at.y + 8) - Math.hypot(point.x - b.at.x, point.y - b.at.y + 8));
+    return candidates[0]?.cat.id ?? null;
   }
 
   selectResidentCat(id: CatId): void {
@@ -149,7 +190,11 @@ export class CafeView {
   /** Returns true if the tap landed on the cat. */
   hitCat(x: number, y: number, count = 1): boolean {
     if (this.area !== 'main') return false;
-    const spot = CAT_SPOTS.slice(0, count).find((p) => x >= p.x - 10 && x <= p.x + 10 && y >= p.y - 16 && y <= p.y + 2);
+    const point = this.presentedPointer ?? { x, y };
+    const spot = CAT_SPOTS.slice(0, count).find((p) => {
+      const at = this.presentedPointer ? projectMainPlaneWorld(p, MAIN_WALL_PLANE) : p;
+      return point.x >= at.x - 10 && point.x <= at.x + 10 && point.y >= at.y - 16 && point.y <= at.y + 2;
+    });
     if (!spot) return false;
     this.catSpot = spot;
     return true;
@@ -157,7 +202,8 @@ export class CafeView {
 
   petCat(): void {
     this.catHappy = 2;
-    for (let i = 0; i < 3; i++) this.effects.push({ kind: 'heart', x: this.catSpot.x - 4 + i * 4, y: this.catSpot.y - 16 - i * 4 });
+    const resident = [...this.livingCats.actors.values()].some(cat => cat.x === this.catSpot.x && cat.y === this.catSpot.y);
+    for (let i = 0; i < 3; i++) this.queueEffect({ kind: 'heart', x: this.catSpot.x - 4 + i * 4, y: this.catSpot.y - 16 - i * 4 }, resident ? { ...this.catSpot } : undefined, resident ? undefined : MAIN_WALL_PLANE);
   }
 
   update(dt: number, sim: Sim): void {
@@ -180,12 +226,12 @@ export class CafeView {
     this.steamTimer -= dt;
     if (this.steamTimer <= 0) {
       this.steamTimer = 0.3;
-      if (sim.baristas.some((_, i) => sim.isBrewing(i))) this.effects.push({ kind: 'steam', x: MACHINE_X + 8 + Math.random() * 14, y: MACHINE_Y - 9 });
+      if (sim.baristas.some((_, i) => sim.isBrewing(i))) this.queueEffect({ kind: 'steam', x: MACHINE_X + 8 + Math.random() * 14, y: MACHINE_Y - 9 }, undefined, MAIN_COUNTER_PLANE);
       // Drinks being made at the back bar steam up past the barista's shoulder.
       sim.baristas.forEach((b, i) => {
         const pose = sim.baristaPose(i);
         const c = pose.working && sim.customers.find((c) => c.id === b.customerId);
-        if (c && !isBakery(c.order) && Math.random() < 0.5) this.effects.push({ kind: 'steam', x: pose.x + (Math.random() < 0.5 ? -9 : 7), y: pose.y - 26 });
+        if (c && !isBakery(c.order) && Math.random() < 0.5) this.queueEffect({ kind: 'steam', x: pose.x + (Math.random() < 0.5 ? -9 : 7), y: pose.y - 26 }, { x: pose.x, y: pose.y });
       });
       // The bagel pot and the fryer steam while a cook is at them.
       sim.cooks.forEach((_, i) => {
@@ -197,7 +243,7 @@ export class CafeView {
       for (const c of sim.customers) {
         if (c.phase === 'sitting' && Math.random() < 0.25) {
           const table = tablePos(Math.floor(c.seat / 2));
-          this.effects.push({ kind: 'steam', x: table.x + (c.seat % 2 === 0 ? -7 : 7), y: table.y - 26 });
+          this.queueEffect({ kind: 'steam', x: table.x + (c.seat % 2 === 0 ? -7 : 7), y: table.y - 26 }, table);
         }
       }
     }
@@ -208,6 +254,9 @@ export class CafeView {
   /** The grid cell a piece would go in if dropped with its middle at (x, y). */
   cellAt(id: string, x: number, y: number): { col: number; row: number } {
     const def = furnitureDef(id)!;
+    if (def.surface === 'wall' && this.presentedPointer && this.area === 'main') {
+      ({ x, y } = unprojectMainPlaneWorld(this.presentedPointer, MAIN_WALL_PLANE));
+    }
     const o = areaOrigin(this.area);
     x = x - o.x + regionOffset(this.area);
     y -= o.y;
@@ -220,15 +269,26 @@ export class CafeView {
 
   /** Which placed piece is drawn at (x, y), front-most first; -1 if none. */
   furnitureAt(state: GameState, x: number, y: number): number {
+    const point = this.presentedPointer ?? { x, y };
     const hits = state.decor.placed
       .map((p, i) => ({ p, i, def: furnitureDef(p.id) }))
       .filter(({ p, def }) => {
         if (!def) return false;
-        const b =
+        let b =
           def.surface === 'wall'
             ? cellRect('wall', p.col, p.row, def.w, def.h)
             : floorFurnitureBounds(p.id, floorAnchor(def, p.col, p.row).cx, floorAnchor(def, p.col, p.row).foot);
-        return x >= b.x && x < b.x + b.w && y >= b.y && y < b.y + b.h;
+        if (this.presentedPointer) {
+          if (def.surface === 'wall') {
+            const left = projectMainPlaneWorld(b, MAIN_WALL_PLANE);
+            const right = projectMainPlaneWorld({ x: b.x + b.w, y: b.y }, MAIN_WALL_PLANE);
+            b = { ...b, x: left.x, w: right.x - left.x };
+          } else {
+            const foot = floorAnchor(def, p.col, p.row);
+            b = { ...b, ...projectMainAttachment(b, { x: foot.cx, y: foot.foot }) };
+          }
+        }
+        return point.x >= b.x && point.x < b.x + b.w && point.y >= b.y && point.y < b.y + b.h;
       })
       .sort((a, b) => (b.def!.surface === 'floor' ? b.p.row : -1) - (a.def!.surface === 'floor' ? a.p.row : -1));
     return hits[0]?.i ?? -1;

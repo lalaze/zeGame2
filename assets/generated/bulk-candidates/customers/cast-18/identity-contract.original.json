@@ -1,0 +1,25 @@
+{
+  "id": 18,
+  "name": "青苹果领结",
+  "look": {
+    "skin": 0,
+    "hair": 3,
+    "hairStyle": 0,
+    "shirt": 2,
+    "pants": 2
+  },
+  "hairstyle": 4,
+  "outfit": "sailor",
+  "accessory": "bow",
+  "accent": "#dfaf66",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#f4cfad",
+    "hair": "#b9674e",
+    "shirt": "#8ba477",
+    "pants": "#585464"
+  },
+  "hatPalette": "#cf929e",
+  "description": "Fixed customer cast 18 (青苹果领结): warm skin #f4cfad; hair #b9674e in a long narrow tied BRAID down the back, cream-and-gold tie near nape, side-swept fringe; braid visible behind neck from side. Outfit: #8ba477 sailor top with wide cream sailor collar, #dfaf66 necktie and tiny gold knot. Lower clothing color #585464; warm dark brown leather shoes. Accent #dfaf66. A visible #dfaf66 hair bow attached at side/back, preserved in every angle and pose."
+}

@@ -1,0 +1,546 @@
+{
+  "breed": "ginger",
+  "version": 1,
+  "generator": "built-in image_gen",
+  "sourceSheetDimensions": [
+    1254,
+    1254
+  ],
+  "bboxAlphaThreshold": "alpha > 128, excludes faint fringe; original alpha preserved in lossless crops",
+  "facingConvention": {
+    "walkA": "head-left",
+    "walkB": "head-left",
+    "other": "front-three-quarter slightly left; nuzzle head tilts independently"
+  },
+  "scaleNote": "One calibrated sourceToWorldScale for every frame from each source sheet. Estimated from common head width, never frame-height fit; runtime head/contact verification required.",
+  "anchorNote": "Manually visually estimated grounded front-paw/support midpoint and crown/forehead between ears, not ear tips. Contact/flip verification remains runtime work.",
+  "qa": {
+    "status": "source-and-final-crops-inspected; runtime validation pending",
+    "identifiedIssues": [],
+    "raisedPoseHeightNote": "Raised poses about 7% taller than idle; broad chest present, runtime petting-height QA pending.",
+    "correctionSheets": [
+      {
+        "file": "walk-correction-source.png",
+        "states": [
+          "walkA",
+          "walkB"
+        ],
+        "sharedScale": 0.0247,
+        "note": "Same breed; lossless source crops with independent sheet-level head-size calibration."
+      }
+    ],
+    "remainingRuntimeChecks": [
+      "Game-scale silhouette and breed legibility",
+      "Walking step continuity and physical head/body scale across source sheets",
+      "Head-to-hand contact for lookUp/nuzzle",
+      "Exact state mapping, route flip and reduced motion",
+      "Low-alpha fringe on light/dark scene backgrounds"
+    ]
+  },
+  "frames": [
+    {
+      "state": "idle",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/ginger-idle.png",
+      "source": "source.png",
+      "source_crop": [
+        62,
+        21,
+        321,
+        319
+      ],
+      "size": [
+        259,
+        298
+      ],
+      "bbox": {
+        "x": 1,
+        "y": 8,
+        "w": 250,
+        "h": 282
+      },
+      "foot": {
+        "x": 73,
+        "y": 282
+      },
+      "headContact": {
+        "x": 87,
+        "y": 54
+      },
+      "sourceToWorldScale": 0.043,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 27659,
+      "sha256": "47e656d1e03d6885a3195aa1245d298ac1022e39bf02a3f0ff38bb7cdb34b0c6"
+    },
+    {
+      "state": "swish",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/ginger-swish.png",
+      "source": "source.png",
+      "source_crop": [
+        362,
+        22,
+        661,
+        319
+      ],
+      "size": [
+        299,
+        297
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 283,
+        "h": 281
+      },
+      "foot": {
+        "x": 81,
+        "y": 281
+      },
+      "headContact": {
+        "x": 88,
+        "y": 54
+      },
+      "sourceToWorldScale": 0.043,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 39540,
+      "sha256": "c4e325909528de446daa23964d9a12a780a2896e0eec8c6d9e106d9b07b75bab"
+    },
+    {
+      "state": "blink",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/ginger-blink.png",
+      "source": "source.png",
+      "source_crop": [
+        666,
+        22,
+        936,
+        319
+      ],
+      "size": [
+        270,
+        297
+      ],
+      "bbox": {
+        "x": 4,
+        "y": 8,
+        "w": 258,
+        "h": 281
+      },
+      "foot": {
+        "x": 81,
+        "y": 281
+      },
+      "headContact": {
+        "x": 89,
+        "y": 53
+      },
+      "sourceToWorldScale": 0.043,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 31033,
+      "sha256": "fc729adda3b2d11c24a7c12b4aaba78b0f738784bfc670e37aa38c5e6f24d97c"
+    },
+    {
+      "state": "happy",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/ginger-happy.png",
+      "source": "source.png",
+      "source_crop": [
+        989,
+        20,
+        1253,
+        319
+      ],
+      "size": [
+        264,
+        299
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 248,
+        "h": 283
+      },
+      "foot": {
+        "x": 102,
+        "y": 283
+      },
+      "headContact": {
+        "x": 113,
+        "y": 56
+      },
+      "sourceToWorldScale": 0.043,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 29646,
+      "sha256": "e4771214f2d17a8e339f705093e28722dcb375a13f65d36e632e9c03c55e60a4"
+    },
+    {
+      "state": "walkA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/ginger-walkA.png",
+      "source": "walk-correction-source.png",
+      "source_crop": [
+        31,
+        288,
+        696,
+        767
+      ],
+      "size": [
+        665,
+        479
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 649,
+        "h": 463
+      },
+      "foot": {
+        "x": 336,
+        "y": 461
+      },
+      "headContact": {
+        "x": 153,
+        "y": 120
+      },
+      "sourceToWorldScale": 0.0247,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 132529,
+      "sha256": "89d7fda7e8190ff4eefb7c760b1646899ca8741e3eb80415f1aa973b4e1808a4"
+    },
+    {
+      "state": "walkB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/ginger-walkB.png",
+      "source": "walk-correction-source.png",
+      "source_crop": [
+        802,
+        281,
+        1495,
+        767
+      ],
+      "size": [
+        693,
+        486
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 677,
+        "h": 470
+      },
+      "foot": {
+        "x": 340,
+        "y": 468
+      },
+      "headContact": {
+        "x": 156,
+        "y": 127
+      },
+      "sourceToWorldScale": 0.0247,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 156708,
+      "sha256": "9c81c1af5c0314ac43211a245f88a1ca690884648be88202da53ffe419330d13"
+    },
+    {
+      "state": "sleep",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/ginger-sleep.png",
+      "source": "source.png",
+      "source_crop": [
+        680,
+        413,
+        956,
+        593
+      ],
+      "size": [
+        276,
+        180
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 260,
+        "h": 164
+      },
+      "foot": {
+        "x": 143,
+        "y": 165
+      },
+      "headContact": {
+        "x": 94,
+        "y": 57
+      },
+      "sourceToWorldScale": 0.043,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 10514,
+      "sha256": "3de8c54e867ef2a1f54238c07be97044e26d8010f862263535cadd1367a2f400"
+    },
+    {
+      "state": "groomA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/ginger-groomA.png",
+      "source": "source.png",
+      "source_crop": [
+        995,
+        336,
+        1248,
+        603
+      ],
+      "size": [
+        253,
+        267
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 237,
+        "h": 251
+      },
+      "foot": {
+        "x": 90,
+        "y": 250
+      },
+      "headContact": {
+        "x": 101,
+        "y": 53
+      },
+      "sourceToWorldScale": 0.043,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 23430,
+      "sha256": "49f87a2b1ad3addd6819bc3e16ac61f7679be0f0bfa0de04d8aac35651f6ad5a"
+    },
+    {
+      "state": "groomB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/ginger-groomB.png",
+      "source": "source.png",
+      "source_crop": [
+        34,
+        623,
+        296,
+        916
+      ],
+      "size": [
+        262,
+        293
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 249,
+        "h": 277
+      },
+      "foot": {
+        "x": 98,
+        "y": 277
+      },
+      "headContact": {
+        "x": 90,
+        "y": 55
+      },
+      "sourceToWorldScale": 0.043,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 28549,
+      "sha256": "96a94d808ffd4ecfd37ff98610ca891c8551796baf2791263a4da5751cda9c0c"
+    },
+    {
+      "state": "stretch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/ginger-stretch.png",
+      "source": "source.png",
+      "source_crop": [
+        306,
+        636,
+        665,
+        915
+      ],
+      "size": [
+        359,
+        279
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 343,
+        "h": 264
+      },
+      "foot": {
+        "x": 180,
+        "y": 264
+      },
+      "headContact": {
+        "x": 105,
+        "y": 142
+      },
+      "sourceToWorldScale": 0.043,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 43297,
+      "sha256": "f930205a59394d0f1f32ee46025160897647313d56f3450239d9c2655658d633"
+    },
+    {
+      "state": "watch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/ginger-watch.png",
+      "source": "source.png",
+      "source_crop": [
+        677,
+        633,
+        949,
+        916
+      ],
+      "size": [
+        272,
+        283
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 256,
+        "h": 267
+      },
+      "foot": {
+        "x": 77,
+        "y": 267
+      },
+      "headContact": {
+        "x": 87,
+        "y": 52
+      },
+      "sourceToWorldScale": 0.043,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 31669,
+      "sha256": "3cdc614ce38e2a0f3c014a7bbd9f02f2ddc60d57047f1e1f92ab1c3f1b9dd805"
+    },
+    {
+      "state": "lookUp",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/ginger-lookUp.png",
+      "source": "source.png",
+      "source_crop": [
+        994,
+        614,
+        1253,
+        916
+      ],
+      "size": [
+        259,
+        302
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 243,
+        "h": 286
+      },
+      "foot": {
+        "x": 96,
+        "y": 286
+      },
+      "headContact": {
+        "x": 96,
+        "y": 48
+      },
+      "sourceToWorldScale": 0.043,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26408,
+      "sha256": "e11e8c42827587ad313db55e9243fdd37c31c4d0deabe905474d418c657eb222"
+    },
+    {
+      "state": "nuzzleA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/ginger-nuzzleA.png",
+      "source": "source.png",
+      "source_crop": [
+        69,
+        916,
+        320,
+        1231
+      ],
+      "size": [
+        251,
+        315
+      ],
+      "bbox": {
+        "x": 6,
+        "y": 8,
+        "w": 237,
+        "h": 299
+      },
+      "foot": {
+        "x": 80,
+        "y": 299
+      },
+      "headContact": {
+        "x": 79,
+        "y": 50
+      },
+      "sourceToWorldScale": 0.043,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 24682,
+      "sha256": "ff0a3f7e8b4b5ae181e81609b53bc6dd9ec64311ab43cbcfdf2d31f4e7955285"
+    },
+    {
+      "state": "nuzzleB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/ginger-nuzzleB.png",
+      "source": "source.png",
+      "source_crop": [
+        376,
+        915,
+        642,
+        1230
+      ],
+      "size": [
+        266,
+        315
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 7,
+        "w": 250,
+        "h": 300
+      },
+      "foot": {
+        "x": 124,
+        "y": 300
+      },
+      "headContact": {
+        "x": 113,
+        "y": 59
+      },
+      "sourceToWorldScale": 0.043,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 29283,
+      "sha256": "aa4ea41727f1ac053d814bfcb572a3a79be1fe55da3582f6384d5f28c67a1e1f"
+    }
+  ]
+}

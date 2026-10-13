@@ -1,3 +1,5 @@
+import { UI_ART } from './ui-art';
+
 /** Inclusive vertical bounds of the actual painted glyph pixels, not font em boxes. */
 export interface InkBounds { top: number; bottom: number }
 
@@ -33,7 +35,7 @@ export function thoughtTextRaster(lines: readonly string[], font: string, width:
   ctx.font = font;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'alphabetic';
-  ctx.fillStyle = '#594334';
+  ctx.fillStyle = UI_ART.ink;
   lines.forEach((line, i) => ctx.fillText(line, width / 2, 24 + i * 14));
   const ink = alphaInkBounds(ctx.getImageData(0, 0, canvas.width, canvas.height).data, canvas.width, canvas.height);
   // Translations are non-empty; a harmless transparent row also handles blank input.

@@ -1492,6 +1492,8 @@ html:lang(zh) body {
 }
 
 .char-preview {
+  /* The 28px owner is displayed at 5x, with 8px breathing room per edge. */
+  min-height: 156px;
   display: grid;
   place-items: center;
   width: 110px;
@@ -2232,3 +2234,348 @@ button.coins { display: block; width: 100%; min-height: 32px; padding: 0; border
   .traffic-inline { display: block; }
   .traffic-summary { display: none; }
 }
+
+/* ================================================================
+   Warm Pixel A / interface joinery
+   Material detail is drawn in CSS pixels. Layout, source sprites and
+   the mobile control dock retain their existing ownership and sizing.
+   ================================================================ */
+:root {
+  --ink: #39281f;
+  --brown: #865332;
+  --wood: #865332;
+  --wood-light: #c98c4d;
+  --wood-hi: #ebbd7d;
+  --wood-lo: #543425;
+  --paper: #e9d9b8;
+  --cream: #f4e6c7;
+  --green: #627451;
+  --green-dark: #3d503a;
+  --pink: #b76350;
+  --gold: #c8a15e;
+  --muted: #6d583f;
+  --paper-light: #fff5dc;
+  --paper-shadow: #c7b28b;
+  --brass-light: #f0ce85;
+  --brass-shadow: #866344;
+  --brass-ink: #725235;
+  --terracotta: #ab5543;
+  --frame: var(--border), inset 0 2px 0 var(--paper-light), inset 2px 0 0 var(--wood-hi),
+    inset -2px -2px 0 var(--wood-lo), inset 0 0 0 4px var(--wood-light), inset 0 0 0 5px var(--brass-shadow);
+  --wood-planks: repeating-linear-gradient(0deg, transparent 0 22px, #54342580 22px 24px, #c98c4d60 24px 25px, transparent 25px 48px),
+    repeating-linear-gradient(90deg, transparent 0 118px, #54342570 118px 120px, transparent 120px 238px);
+  --paper-grain: repeating-linear-gradient(0deg, transparent 0 5px, #86634406 5px 6px);
+  --paper-card: 0 0 0 2px var(--brass-shadow), 2px 3px 0 2px #54342524,
+    inset 1px 1px 0 var(--paper-light), inset -1px -1px 0 var(--paper-shadow);
+  --button-edge: var(--border), inset 2px 2px 0 #fff5dc59, inset -2px -2px 0 #39281f66, 0 4px 0 var(--wood-lo);
+}
+
+body {
+  background-color: #e4ceaa;
+  /* Sparse stitched crosses on linen, rather than competing dark floor tiles. */
+  background-image: linear-gradient(90deg, #8653320b 1px, transparent 1px),
+    linear-gradient(#8653320b 1px, transparent 1px), var(--paper-grain);
+  background-size: 24px 24px, 24px 24px, auto;
+}
+
+.hud {
+  background-color: var(--wood);
+  background-image: linear-gradient(90deg, #c98c4d80, transparent 30%), var(--wood-planks);
+  border-bottom-color: var(--wood-lo);
+  box-shadow: inset 0 2px 0 var(--wood-hi), inset 0 4px 0 var(--wood-light),
+    inset 0 -2px 0 var(--ink), inset 0 -5px 0 var(--wood-lo);
+}
+.brand { text-shadow: 1px 2px 0 var(--wood-lo); }
+.brand-icon { filter: none; }
+.money {
+  background: var(--paper-grain), var(--cream);
+  box-shadow: var(--frame), 2px 4px 0 var(--wood-lo);
+}
+.coins { color: var(--brass-light); text-shadow: 1px 0 0 var(--ink), -1px 0 0 var(--ink), 0 1px 0 var(--ink), 0 -1px 0 var(--ink), 1px 2px 0 var(--brass-shadow); }
+.money .rate { color: var(--brass-ink); }
+.cafe-status-bar {
+  background: var(--paper-light);
+  border-bottom-color: var(--brass-shadow);
+  box-shadow: inset 0 1px var(--paper-light), inset 0 -2px var(--paper-shadow);
+}
+.reputation-bar, .regular-guests-button {
+  background: transparent;
+  text-shadow: none;
+}
+.reputation-bar:hover, .regular-guests-button:hover { background: #fff5dc; }
+#reputation-score { color: var(--ink); }
+#reputation-traffic { color: var(--brass-ink); }
+.regular-guests-button { border-left: 2px solid var(--paper-shadow); }
+.regular-unread-badge {
+  background: var(--green-dark);
+  color: var(--paper-light);
+  box-shadow: inset 1px 1px var(--green), 1px 1px var(--paper-shadow);
+}
+
+.stage { background: transparent; }
+#scene {
+  box-shadow: 0 0 0 2px var(--ink), 0 0 0 5px var(--wood-light),
+    0 0 0 6px var(--wood-hi), 0 0 0 8px var(--wood-lo), 0 5px 0 8px #54342540;
+}
+.stage-sign span, .name-sign span {
+  background: var(--wood-planks), var(--wood);
+  color: var(--paper-light);
+  box-shadow: var(--frame), 2px 4px var(--wood-lo);
+  text-shadow: 1px 2px var(--wood-lo);
+}
+.stage-sign::before, .stage-sign::after {
+  background: repeating-linear-gradient(var(--brass-shadow) 0 2px, var(--brass-light) 2px 4px, transparent 4px 7px);
+}
+.area-plan-toggle, .cafe-style-button, .area-arrow-sign {
+  background: var(--cream);
+  box-shadow: var(--frame), 2px 3px 0 #54342538;
+}
+.area-plan-toggle[aria-pressed="true"] {
+  background: var(--green-dark);
+  color: var(--paper-light);
+  box-shadow: var(--frame), inset 6px 0 var(--gold);
+}
+.area-plan-toggle[aria-pressed="true"] .ui-pixel-icon { background: var(--cream); }
+.area-arrow.locked .area-arrow-sign { background: #dbc6a0; }
+.area-destination {
+  background: var(--cream);
+  color: var(--ink);
+  border-color: var(--brass-shadow);
+  box-shadow: inset 1px 1px var(--paper-light), 1px 2px #54342526;
+}
+.region-card { background: var(--paper-grain), var(--cream); }
+.region-kicker, .region-reason { color: var(--brass-ink); }
+.region-card p { color: var(--muted); }
+.day-hud {
+  background: var(--paper-grain), var(--cream);
+  box-shadow: var(--frame), 2px 3px #54342538;
+  font-weight: 400;
+}
+.day-clock { color: var(--ink); }
+.day-hud .close-btn { background: var(--terracotta); color: var(--paper-light); }
+.operation-status { background: var(--cream); color: var(--green-dark); box-shadow: var(--paper-card); }
+.stage-stats span { background: var(--cream); box-shadow: var(--paper-card); }
+.arrange-text, .hint { background: var(--paper-light); box-shadow: var(--paper-card); }
+
+/* The management panel is a cabinet with a cream ledger insert. */
+.panel {
+  background: var(--paper-grain), var(--paper);
+  border-color: var(--wood-lo);
+  box-shadow: inset 3px 0 var(--wood-light), inset 5px 0 var(--wood-hi), inset 7px 0 var(--brass-shadow);
+}
+.tabs {
+  background: var(--wood-planks), var(--wood-lo);
+  border-bottom-color: var(--wood-lo);
+  box-shadow: inset 0 2px var(--wood-light);
+}
+.tab {
+  color: var(--paper-light);
+  background: var(--wood);
+  text-shadow: 1px 1px var(--wood-lo);
+  box-shadow: 0 -2px var(--ink), -2px 0 var(--ink), 2px 0 var(--ink), inset 0 2px var(--wood-light);
+}
+.tab:hover:not(.active) { background: #97623d; }
+.tab.active {
+  background: var(--paper);
+  color: var(--ink);
+  text-shadow: none;
+  box-shadow: 0 -2px var(--ink), -2px 0 var(--ink), 2px 0 var(--ink), inset 0 2px var(--paper-light), 0 3px var(--paper);
+}
+.tab::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  vertical-align: -2px;
+  background: var(--tab-icon) center / 14px 14px no-repeat;
+  image-rendering: pixelated;
+}
+.buy-amount { color: var(--brass-ink); }
+.row, .pet-card, .promo-card, .regular-profile, .signature-card, .style-current,
+.signature-summary, .taste-overview, .rating-overview, .rating-report {
+  background-color: var(--cream);
+  background-image: var(--paper-grain);
+  border-color: var(--brass-shadow);
+  box-shadow: var(--paper-card);
+}
+.row { box-shadow: var(--paper-card); }
+.row.new { background-color: #f7ebcd; }
+.row.locked { opacity: .68; }
+.row .icon, .tile-icon, .pet-choice img {
+  background: linear-gradient(0deg, #c7b28b70 0 2px, transparent 2px), #e9d9b860;
+  box-shadow: inset 1px 1px #fff5dc, inset -1px -1px #c7b28b80;
+  filter: none;
+  image-rendering: pixelated;
+}
+.row .icon { padding: 3px; }
+.icon.mystery { color: var(--brass-shadow); background-color: var(--paper); }
+.name, .tile-name { color: var(--ink); }
+.sub, .note { line-height: 1.4; }
+.row .recipe { opacity: 1; }
+.menu-cat, .decor-slot h3, .promo-platform h3 { color: var(--wood-lo); }
+.menu-cat { border-bottom: 1px solid var(--paper-shadow); padding-bottom: 5px; }
+.row.low { box-shadow: 0 0 0 2px var(--terracotta), 2px 3px 0 2px #54342524, inset 3px 0 var(--terracotta); }
+.recipe .left.empty, .bake.short .bake-n, .note.warn { color: #984533; }
+.bar { background: var(--paper-shadow); box-shadow: 0 0 0 1px var(--brass-shadow), inset 1px 1px var(--brass-shadow); }
+.bar i { background: linear-gradient(180deg, var(--brass-light) 0 2px, var(--gold) 2px 4px, var(--brass-shadow) 4px); }
+.row.low .bar i { background: linear-gradient(180deg, #d88e6b 0 2px, var(--terracotta) 2px 4px, #733c2c 4px); }
+
+/* Raised enamel controls, with a separate dark pressed/selected impression. */
+.pixel-btn {
+  background: var(--green);
+  color: var(--paper-light);
+  text-shadow: 1px 1px var(--green-dark);
+  box-shadow: var(--button-edge);
+}
+.pixel-btn.ghost { background: var(--wood); text-shadow: 1px 1px var(--wood-lo); }
+.pixel-btn.danger { background: var(--terracotta); text-shadow: 1px 1px #733c2c; }
+.pixel-btn:hover:not(:disabled) { filter: none; background: #566946; }
+.pixel-btn.ghost:hover:not(:disabled) { background: #935d37; }
+.pixel-btn.danger:hover:not(:disabled) { background: #a95240; }
+.pixel-btn:active:not(:disabled) { box-shadow: var(--border), inset 2px 2px #39281f55, inset -1px -1px #fff5dc50; }
+.pixel-btn:disabled { background: #bbab8b; color: #57462e; box-shadow: var(--border), inset 1px 1px #e9d9b8; text-shadow: none; }
+.chip {
+  background: var(--cream);
+  color: var(--ink);
+  box-shadow: var(--border), inset 1px 1px var(--paper-light), inset -1px -1px var(--paper-shadow);
+}
+.chip:hover:not(:disabled):not(.active):not([aria-pressed="true"]) { background: var(--paper-light); }
+.chip.active, .menu-toggle.active, .pet-tabs [aria-pressed="true"], .pet-filters [aria-pressed="true"] {
+  background: var(--green-dark);
+  color: var(--paper-light);
+  box-shadow: var(--border), inset 0 -3px var(--gold), inset 1px 1px #273b2d;
+}
+.chip:disabled { color: var(--muted); cursor: default; }
+.pixel-btn:focus-visible, .chip:focus-visible, .tab:focus-visible, .theme:focus-visible,
+.pet-choice:focus-visible, .style-choice:focus-visible {
+  outline: 2px solid var(--paper-light);
+  outline-offset: 3px;
+  box-shadow: var(--border), 0 0 0 5px var(--green-dark);
+}
+.taste-chip { background: #e6e4c9; border-color: #8f956a; box-shadow: inset 1px 1px var(--paper-light); }
+.taste-chip:hover, .taste-chip:focus-visible { background: #f1eed6; outline-color: var(--green-dark); }
+
+/* Dialogs and reports: paper within a carved timber surround. */
+.modal-overlay, .onboard-overlay { background: #39281fbf; }
+.pixel-box {
+  background: var(--paper-grain), var(--cream);
+  box-shadow: inset 0 0 0 2px var(--paper-light), 0 0 0 2px var(--brass-shadow),
+    0 0 0 4px var(--wood-hi), 0 0 0 9px var(--wood), 0 0 0 10px var(--wood-light),
+    0 0 0 12px var(--ink), 4px 9px 0 12px #39281f45;
+}
+.modal h2 { color: var(--wood-lo); border-bottom: 2px solid var(--paper-shadow); padding-bottom: 10px; }
+.modal-actions { border-top: 1px solid var(--paper-shadow); padding-top: 10px; }
+.big-money { color: var(--brass-shadow); text-shadow: 1px 1px var(--brass-light); }
+.report-profit { background: var(--paper); box-shadow: var(--paper-card); }
+.stats { line-height: 1.45; }
+.prep-row { background: var(--cream); box-shadow: 0 0 0 1px var(--brass-shadow), inset 1px 1px var(--paper-light); }
+.prep-row.low { background: #ead1b2; box-shadow: 0 0 0 1px var(--terracotta), inset 3px 0 var(--terracotta); }
+.prep-row.off { opacity: .66; }
+.prep-starter, .prep-bakery-hint, .prep-style, .style-next, .promo-active { background: #e0e2c4; border-color: var(--green); }
+.prep-details, .report-details, .style-picker, .style-details { border-color: var(--paper-shadow); background: #fff5dc35; }
+.toast, .goal { background: var(--paper-grain), var(--cream); box-shadow: var(--frame), 2px 3px #54342538; }
+.goal.done { background-color: #e0e2c4; }
+@keyframes goal-glow { 50% { background-color: #edf0d7; } }
+.pixel-input, .bake-input, .signature-naming input, .signature-research > input, .signature-dose select {
+  background: var(--paper-light);
+  border-radius: 0;
+  color: var(--ink);
+  border-color: var(--brass-shadow);
+  box-shadow: inset 1px 2px var(--paper-shadow);
+}
+.pixel-input:focus, .bake-input:focus, .signature-naming input:focus, .signature-dose select:focus {
+  outline: 2px solid var(--green-dark);
+  outline-offset: 2px;
+}
+.review-stars { color: var(--paper-shadow); text-shadow: 1px 1px var(--brass-shadow); }
+.review-stars > span { color: var(--gold); }
+.guest-review { border-bottom-color: var(--paper-shadow); }
+
+/* Shared collected-object trays, portraits and selection corners. */
+.tile, .pet-choice, .theme, .style-choice {
+  background: var(--paper-grain), var(--cream);
+  border-color: var(--brass-shadow);
+  box-shadow: inset 1px 1px var(--paper-light), inset -1px -1px var(--paper-shadow);
+}
+.tile.equipped, .pet-choice[aria-pressed="true"], .style-choice[aria-pressed="true"] {
+  background-color: #e0e2c4;
+  border-color: var(--green-dark);
+  box-shadow: inset 3px 0 var(--green), inset 0 -2px var(--green), inset 1px 1px var(--paper-light);
+}
+.theme.active { background-color: #e0e2c4; box-shadow: var(--border), 0 0 0 6px var(--gold); }
+.char-preview, .profile-row { background: var(--paper-grain), var(--paper); }
+.char-preview { box-shadow: var(--frame); }
+.ob-dots i { background: var(--paper); box-shadow: 0 0 0 1px var(--brass-shadow); }
+.ob-dots i.done { background: var(--green); }
+.ob-dots i.on { background: var(--gold); box-shadow: 0 0 0 2px var(--ink), inset 1px 1px var(--brass-light); }
+.swatch.active { box-shadow: 0 0 0 2px var(--ink), 0 0 0 5px var(--gold), inset 1px 1px var(--paper-light); }
+.opening-scene { background: linear-gradient(var(--paper) 70%, var(--paper-shadow) 70%); }
+.pet-card.adopted { border-color: var(--green); }
+.pet-card progress, .promo-active progress { accent-color: var(--green); background: var(--paper-shadow); border: 1px solid var(--brass-shadow); border-radius: 0; }
+.pet-card progress::-webkit-progress-bar, .promo-active progress::-webkit-progress-bar { background: var(--paper-shadow); }
+.pet-card progress::-webkit-progress-value, .promo-active progress::-webkit-progress-value { background: linear-gradient(var(--green) 0 2px, var(--green-dark) 2px); }
+.promo-platform > span, .promo-platform.orange > span {
+  background: var(--wood);
+  border-color: var(--ink);
+  box-shadow: inset 2px 2px var(--wood-light), inset -2px -2px var(--wood-lo), 2px 3px var(--paper-shadow);
+}
+.promo-platform .ui-pixel-icon { width: 28px; height: 28px; image-rendering: pixelated; }
+.regular-unknown, .regular-empty { border-color: var(--paper-shadow); }
+.regular-portrait { background: linear-gradient(0deg, var(--paper-shadow) 0 2px, transparent 2px); }
+.regular-new, .style-eyebrow, .style-stage { color: var(--green-dark); }
+.signature-bases [aria-pressed="true"] { background: var(--green-dark); color: var(--paper-light); outline-color: var(--gold); }
+.first-service { background: var(--cream); border-color: var(--brass-shadow); box-shadow: inset 3px 0 var(--gold), 0 2px var(--wood-lo); }
+.play-flow-actions { background: var(--paper-grain), var(--paper); border-top-color: var(--brass-shadow); box-shadow: inset 0 1px var(--paper-light); }
+.pantry-task-context { background: var(--cream); border-bottom-color: var(--paper-shadow); }
+.pantry-shortfall { box-shadow: inset 3px 0 var(--green), var(--paper-card); }
+
+/* Native scrollbars remain usable, with the same quiet wood/paper contrast. */
+.panel-scroll, .list, .modal-body, .ob-body, .region-card { scrollbar-color: var(--brass-shadow) var(--paper); scrollbar-width: thin; }
+
+@media (min-width: 861px) {
+  .tab { padding-inline: 1px; font-size: 13px; }
+  .tab::before { display: block; margin: 0 auto 5px; }
+}
+@media (max-width: 860px) {
+  .panel { box-shadow: inset 0 2px var(--wood-light); }
+  .tabs { gap: 6px; }
+  .tab::before { margin-right: 6px; }
+  .mobile-stage-controls .day-hud { box-shadow: var(--paper-card); }
+  .mobile-stage-controls:has(#open-btn:not([hidden])) .day-hud { box-shadow: none; background: var(--cream); }
+  .mobile-stage-controls .cafe-style-button { box-shadow: var(--frame); }
+  .mobile-stage-controls .operation-status { box-shadow: var(--paper-card); }
+  .brand-name { line-height: 1.4; }
+  .modal h2 { padding-bottom: 8px; }
+  .modal-actions { padding-top: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .goal.done, .open-btn, .hint { animation: none; }
+}
+
+/* Six hand-drawn cabinet-tab pictograms, shared by both locales. */
+.tab[data-tab="menu"] { --tab-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20fill%3D%22%2339281f%22%20d%3D%22M1%205h10v2h3v5h-4v2H3v-2H1z%22%2F%3E%3Cpath%20fill%3D%22%23f4e6c7%22%20d%3D%22M2%206h8v6H3v-1H2zm9%202h2v3h-2z%22%2F%3E%3Cpath%20fill%3D%22%23c8a15e%22%20d%3D%22M2%207h8v2H2zM1%2014h12v1H1z%22%2F%3E%3Cpath%20fill%3D%22%23f4e6c7%22%20d%3D%22M4%201h1v2H4zm3%201h1v2H7z%22%2F%3E%3C%2Fsvg%3E"); }
+.tab[data-tab="pantry"] { --tab-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20fill%3D%22%2339281f%22%20d%3D%22M2%203h4v2h1v10H1V5h1zm7-2h5v3h1v11H8V4h1z%22%2F%3E%3Cpath%20fill%3D%22%23c8a15e%22%20d%3D%22M2%203h4v2H2zm7-2h5v2H9z%22%2F%3E%3Cpath%20fill%3D%22%23f4e6c7%22%20d%3D%22M2%206h4v8H2zm7-2h5v10H9z%22%2F%3E%3Cpath%20fill%3D%22%23627451%22%20d%3D%22M2%209h4v3H2zm7-2h5v4H9z%22%2F%3E%3Cpath%20fill%3D%22%23fff5dc%22%20d%3D%22M2%206h1v2H2zm7-2h1v2H9z%22%2F%3E%3C%2Fsvg%3E"); }
+.tab[data-tab="upgrades"] { --tab-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20fill%3D%22%2339281f%22%20d%3D%22M2%201h2v3h3V1h2v6H7v2H6v6H2V9H1V3h1zM11%208h3v7h-3z%22%2F%3E%3Cpath%20fill%3D%22%23c8a15e%22%20d%3D%22M2%204h2v2h3V4h1v3H6v2H3V7H2zm1%206h2v4H3z%22%2F%3E%3Cpath%20fill%3D%22%23f4e6c7%22%20d%3D%22M11%202h3v1h-1v6h-1V3h-1z%22%2F%3E%3Cpath%20fill%3D%22%23627451%22%20d%3D%22M12%209h1v5h-1z%22%2F%3E%3C%2Fsvg%3E"); }
+.tab[data-tab="decor"] { --tab-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20fill%3D%22%2339281f%22%20d%3D%22M6%202h4v3h3v5h-3v1h2v4H4v-4h2v-1H2V6h2V3h2z%22%2F%3E%3Cpath%20fill%3D%22%23627451%22%20d%3D%22M5%204h3v5H3V7h2zm3-1h1v6h3V6H8z%22%2F%3E%3Cpath%20fill%3D%22%239bb46b%22%20d%3D%22M5%204h2v2H5zm3-1h1v2H8z%22%2F%3E%3Cpath%20fill%3D%22%23c98c4d%22%20d%3D%22M5%2011h6v1H5zm1%201h4v2H6z%22%2F%3E%3C%2Fsvg%3E"); }
+.tab[data-tab="pets"] { --tab-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20fill%3D%22%2339281f%22%20d%3D%22M2%202h3v2h5V2h3v3h1v7h-2v2H3v-2H1V5h1z%22%2F%3E%3Cpath%20fill%3D%22%23c98c4d%22%20d%3D%22M3%203h1v3h7V3h1v3h1v5h-2v2H4v-2H2V6h1z%22%2F%3E%3Cpath%20fill%3D%22%23f4e6c7%22%20d%3D%22M5%209h5v3H5z%22%2F%3E%3Cpath%20fill%3D%22%2339281f%22%20d%3D%22M4%207h1v1H4zm6%200h1v1h-1zm-3%203h1v1H7z%22%2F%3E%3Cpath%20fill%3D%22%23f0ce85%22%20d%3D%22M3%205h1v2H3z%22%2F%3E%3C%2Fsvg%3E"); }
+.tab[data-tab="promotion"] { --tab-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20fill%3D%22%2339281f%22%20d%3D%22M11%201h3v13h-3v-2H8v-1H6v4H3v-4H1V5h3V4h4V3h3z%22%2F%3E%3Cpath%20fill%3D%22%23c8a15e%22%20d%3D%22M2%206h3v4H2zM4%2011h1v3H4z%22%2F%3E%3Cpath%20fill%3D%22%23f4e6c7%22%20d%3D%22M6%205h3V4h3v8H9v-2H6z%22%2F%3E%3Cpath%20fill%3D%22%23627451%22%20d%3D%22M12%202h1v11h-1z%22%2F%3E%3Cpath%20fill%3D%22%23fff5dc%22%20d%3D%22M6%205h3V4h2v1H9v1H6z%22%2F%3E%3C%2Fsvg%3E"); }
+
+#save-session-notice {
+  background: var(--paper-grain), var(--cream) !important;
+  color: var(--ink) !important;
+  font: 18px/1.6 'Pixelify Sans', 'Pixel ZH', ui-monospace, monospace !important;
+  box-shadow: inset 0 0 0 8px var(--wood), inset 0 0 0 10px var(--wood-light);
+}
+html:lang(zh) #save-session-notice { font-family: 'Pixel ZH', 'Pixelify Sans', ui-monospace, monospace !important; }
+
+/* Small brass lettering uses a darker ink than brass material shadows. */
+.decor-intro .comfort, .tile-comfort { color: var(--brass-ink); }
+.day-hud .chip.close-btn:hover:not(:disabled) { background: #a95240; color: var(--paper-light); }
+
+/* Availability is shown by the object and controls, without fading readable copy. */
+.row.locked, .prep-row.off { opacity: 1; }
+.row.locked { background-color: var(--paper); }
+.row.locked .icon, .prep-row.off .prep-select img { opacity: .55; }
+.row.locked .name, .row.off-menu .name, .prep-row.off .prep-name { opacity: 1; color: var(--muted); }
+.prep-row.off { background-color: var(--paper); }

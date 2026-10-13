@@ -1,0 +1,497 @@
+{
+  "scope": "File existence, dimensions, alpha bounds, exact source RGBA crop, duplicate pixel evidence only; no runtime or aesthetic pass",
+  "manifests": [
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/materials-manifest.json",
+      "count": 21,
+      "assets": [
+        {
+          "id": "wall_cream/tile",
+          "size": [
+            627,
+            1044
+          ],
+          "alpha_extrema": [
+            255,
+            255
+          ],
+          "rgba_sha256": "5d6f3dfff3d0dc0272f32eb8b2e3151d549fb7f80381f8c416984285b8129400",
+          "file_sha256": "1c648d4c5e6f051f8996138a56cda07578ce133fba51ed46d2abc19594c5917d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "wall_mint/tile",
+          "size": [
+            1011,
+            1008
+          ],
+          "alpha_extrema": [
+            255,
+            255
+          ],
+          "rgba_sha256": "15427e3396363f4062ce1a4a42476feafafa30b5158dacb1050e5d9a95457e06",
+          "file_sha256": "49c0c4aac680e924fba6d08eb2635cd5567c70813b4b7a588c633bb54a7a9ca8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "wall_rose/tile",
+          "size": [
+            836,
+            1015
+          ],
+          "alpha_extrema": [
+            255,
+            255
+          ],
+          "rgba_sha256": "a065ce0372854d758fa5744d51053321621b318bd65b8d30eb81d3519d1904d3",
+          "file_sha256": "7847c5b7e5f8b14eac41d553323984b014ade0d98068178f6edb8ff1fa17854d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "wall_dots/tile",
+          "size": [
+            627,
+            1112
+          ],
+          "alpha_extrema": [
+            255,
+            255
+          ],
+          "rgba_sha256": "a85ffc8121b58ccc2f990617f0583372b952cc07315af5a3ba24171c1ba6c1e1",
+          "file_sha256": "4fb6b1c059db77f30898bbf1b00599e6ea7c507deb7608cebb7ffb527ab7ff17",
+          "exact_source_crop": true
+        },
+        {
+          "id": "wall_brick/tile",
+          "size": [
+            582,
+            1010
+          ],
+          "alpha_extrema": [
+            255,
+            255
+          ],
+          "rgba_sha256": "060a716e0dcd7ce8de643c980b3275605bfdc5bc71b2b18cfe71d612160bb8fc",
+          "file_sha256": "470c9e7d737d95f8dfb1a95351b131dbeb58287d778bb92868613e983a1f17a3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "wall_walnut/tile",
+          "size": [
+            1152,
+            784
+          ],
+          "alpha_extrema": [
+            255,
+            255
+          ],
+          "rgba_sha256": "ced735e799d0b167f78e3ed956d1e7cbfc8f36989f12695f269ca9b12609559d",
+          "file_sha256": "44f8cf02686c1324910c9a32c3a6958804e01722dd9bce3e81e1f736e8182a01",
+          "exact_source_crop": true
+        },
+        {
+          "id": "wall_stars/tile",
+          "size": [
+            810,
+            862
+          ],
+          "alpha_extrema": [
+            255,
+            255
+          ],
+          "rgba_sha256": "ff44ad5e518663404aba00031018af2c128bcb9f972513039868cf0ac879050e",
+          "file_sha256": "5f9af47573c40e15471a3fc95f2198079dda8cae8621127e9ee8bef31863db11",
+          "exact_source_crop": true
+        },
+        {
+          "id": "floor_checker/tile",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_extrema": [
+            255,
+            255
+          ],
+          "rgba_sha256": "10f93f155b3fefe658ef893b5a2a9abdcc864ff333bd5bbb2a810b7c8910b599",
+          "file_sha256": "3525a4b63f513091778f48198908db33eaa4745f5ae433f3371782d1327c8729",
+          "exact_source_crop": true
+        },
+        {
+          "id": "floor_planks/tile",
+          "size": [
+            1245,
+            733
+          ],
+          "alpha_extrema": [
+            255,
+            255
+          ],
+          "rgba_sha256": "bff9f29e5ffeac06fc9e80ee852bae61dba0800ba8dbcb542f96235b78c86520",
+          "file_sha256": "b299c7dd9a56c775c732dc6adad09ffebab33705abacd90a06e937bdbe042d5e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "floor_mint/tile",
+          "size": [
+            939,
+            939
+          ],
+          "alpha_extrema": [
+            255,
+            255
+          ],
+          "rgba_sha256": "3031e59d168b600c39d49ebb2b6f65fd52fd956042936b86f065236f8498c4ee",
+          "file_sha256": "4209d61aed6234be9cc80ba993688b02b60337d64639c4bad8bfc4d982ab6b44",
+          "exact_source_crop": true
+        },
+        {
+          "id": "floor_terrazzo/tile",
+          "size": [
+            1239,
+            939
+          ],
+          "alpha_extrema": [
+            255,
+            255
+          ],
+          "rgba_sha256": "24171af66b0649ea6d27021c15dfb8cb3b7f40e2d230fbe37972ffacc2a7c6e3",
+          "file_sha256": "0581adc2fba68b616f0d2ac593afa9a3d479490c603a166946f92eb19e4c4f3f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "floor_herringbone/tile",
+          "size": [
+            1062,
+            1044
+          ],
+          "alpha_extrema": [
+            255,
+            255
+          ],
+          "rgba_sha256": "fd5fcd12a36ba66ce5ec55f65f4a50a7abaa4badf5530618b58eb4168cbf0ab6",
+          "file_sha256": "ca27f6e047168ac7b0f2fd302213a019274bb473cb866ac6903909ea90189d15",
+          "exact_source_crop": true
+        },
+        {
+          "id": "floor_marble/tile",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_extrema": [
+            255,
+            255
+          ],
+          "rgba_sha256": "6e34a2327ae4e53868fe816235349ea85a9828385a5f41761af68af8fcaf38b8",
+          "file_sha256": "b3d8ceae17337c47dbbbb003fed320eff3ee31abfde482391679ce3b1aa71ac6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "counter_walnut/top",
+          "size": [
+            1522,
+            172
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "543d2d12dfedf32493b7a49433d17e439b6df0c4c87ba43bea4b91a56dcf2600",
+          "file_sha256": "7d632f724303fc6305e6f34671709f3b74249852becde565232e174a0136a134",
+          "exact_source_crop": true
+        },
+        {
+          "id": "counter_walnut/front",
+          "size": [
+            782,
+            409
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "983365ccf6b90885409f0dfa54ece8e263ada26c60567dc8e1d24beae4db035c",
+          "file_sha256": "fbbaadce726e821a09c3a2c91fc81aba4e2e5a079bdd2e56bcb817fd98055ad0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "counter_marble/top",
+          "size": [
+            1536,
+            184
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "09182243b78a741dc666cef9a3aa2cc784dea2acf584ca80918c8b0e4f2a0b56",
+          "file_sha256": "8d503fe4d2b7778654b1104562cbe71692089e2cadf6d3999d51fce69fc11a01",
+          "exact_source_crop": true
+        },
+        {
+          "id": "counter_marble/front",
+          "size": [
+            868,
+            420
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "c1b3fe733ab292a99565600e3dcf3ac604dd0847a9330a31b44263e4fd7be8fb",
+          "file_sha256": "8dacdbd6c7a753178dffbbfdb7c5dc4e5d754161f8bf12d3f482876398f5cb07",
+          "exact_source_crop": true
+        },
+        {
+          "id": "counter_pink/top",
+          "size": [
+            1534,
+            192
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "ad7b594d3dc21e03f26f1a4a2b280b0f7dabd21744e4a4170b9bb8d6772386f7",
+          "file_sha256": "185226a12c9a596a9d503d9ca820052357982dd701d2dd402fe12457d93b2501",
+          "exact_source_crop": true
+        },
+        {
+          "id": "counter_pink/front",
+          "size": [
+            935,
+            433
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "95bd08cb8859234b8db28303d8434e648e4d4075ec87b13af36cf459e7c4bfce",
+          "file_sha256": "5cd1cea230936888266e5fecd97b71359ac4f80675322d94bf70987f3e1a3c80",
+          "exact_source_crop": true
+        },
+        {
+          "id": "counter_gold/top",
+          "size": [
+            1536,
+            151
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "29a5029bd9793761fd65ecc8c9acdf8a69c31017db4a1251acfa90bf59d107f9",
+          "file_sha256": "ea4bb90b1540f07b6af3ecad94b979cd056ea2c2ce2b7a29bd92c650105a7e94",
+          "exact_source_crop": true
+        },
+        {
+          "id": "counter_gold/front",
+          "size": [
+            864,
+            441
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "be083129e7d970c8cb8d4e1dae2d82da5adbb94fc568573b34840350cba75446",
+          "file_sha256": "cdd4e9e9178cd7dd1ba0b45cdaa194cce3238f4afa5debd513cfc2f50a3cb232",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-decor-props-v1/manifest.json",
+      "count": 13,
+      "assets": [
+        {
+          "id": "sill_cactus/default",
+          "size": [
+            844,
+            1252
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "1ec443de98ca5c029cb0b01ca206051aeee962733f1af17f8d95d050f189a7c3",
+          "file_sha256": "f3d93453e09ef9c78066545de614ac6eeeff9ffc44d10fa401a64021e446f908",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sill_tulips/default",
+          "size": [
+            903,
+            1024
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2fafb2eafb8e81b02ac2b2ca73a2bb365178fa40b31fc45497fedc57e72bdcf2",
+          "file_sha256": "1945ecad3f33e6785057c84f3ceb3876051e0f7bcdb76c35df0ff972f1859e4d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sill_bonsai/default",
+          "size": [
+            1164,
+            1014
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "19cb53b6fdcd3bc8be698268b6969a76e75195d6d10a7c3875d021d4bd213878",
+          "file_sha256": "bae5edb5be2dd67e04790f941ae1154e33a18abbddd662aa61617d030a16edcb",
+          "exact_source_crop": true
+        },
+        {
+          "id": "ceiling_lights/unlit",
+          "size": [
+            2038,
+            387
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d67f88ede66d4c2e7e4ee66a761257e2753d9c394523390b9d74bf45f1dfcfec",
+          "file_sha256": "cb1bdcc96d6de392e255a4625232fec248bba60d5d8a20c9677f09bcd0a02845",
+          "exact_source_crop": true
+        },
+        {
+          "id": "ceiling_vines/default",
+          "size": [
+            2163,
+            547
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "94af5d83bfc5bd1124f47f1a5d782c137c50cf103155ba587f00b2bea0d4080a",
+          "file_sha256": "6ca7f14c796cae17abae502559a2b4ce186bd847b31c06d5d7f6cd0570ed795a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "ceiling_pendants/unlit",
+          "size": [
+            777,
+            1554
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f25a1bafd8cb788cf94338b9ebcac6bd41ea7aee206ecba519ca31cf29c30f83",
+          "file_sha256": "8dd82a30adc4042adaff1c08f770c4b57639dd2ead0ec9195b73b81b1392c6e1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "ceiling_chandelier/unlit",
+          "size": [
+            1543,
+            971
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c23656ed643e660d625925dde64d924a3ba2abe36f645e82114c92d9a0bf2bc5",
+          "file_sha256": "e5faeefc230fdf53c3f8eaeecc08e1f246af91cad83728e423a9cd07318f354d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "rug_red/default",
+          "size": [
+            1513,
+            813
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6333a6feb742dbef78910e9e7c626edafb164544a508100dd9b720a17da520af",
+          "file_sha256": "5e49328961d81c0e3a060449e1dbc8ed27c91f5b75d3a344f936a3eb301210dc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "rug_blue/default",
+          "size": [
+            1465,
+            719
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2621310b67b2efe4de84b2c546856d403c59c847c41ac4770f3200fd301d671d",
+          "file_sha256": "38d98e266817a9429fde1d75c124458fbd47f8076d4dcee03f5cb678ca05491b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "rug_round/default",
+          "size": [
+            1533,
+            882
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b0fca66b80a2819793ab688b4f8bb3fbdd9b5d979a703a903560fe29ef11716b",
+          "file_sha256": "b3b7feb7883588e23dd545205221af5790b3cf98014e6f8cfec1ef15fda16e31",
+          "exact_source_crop": true
+        },
+        {
+          "id": "neon_cafe/unlit",
+          "size": [
+            2091,
+            384
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "df1023976c3219e5ce5cf35e0160f1e216295e424f29911b8485429b95326ab7",
+          "file_sha256": "42b70c9ce411624450ee3f54a0a320a8cdbc46335dd99412478ab0388ad8cd1b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "neon_heart/unlit",
+          "size": [
+            936,
+            841
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ca7cd744bf0c8e8cfa4c33e9471f54f9b7a75010924cd6af6ab1a08dc045adc8",
+          "file_sha256": "858d22942fb29332f5074dc292c5f6832ab634c217cf8ec43361818d4fe37897",
+          "exact_source_crop": true
+        },
+        {
+          "id": "neon_cup/unlit",
+          "size": [
+            1129,
+            1199
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2b6dfc9ef4e2b45792a6e8ac3feeda68ba3f70f52efcc4a45a1cadc99d919549",
+          "file_sha256": "bc40d435da176c84ac07c13f67aa9019b1c8a63db8536cb3e9fad37444da2ea4",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "total_assets": 34,
+  "errors": 0
+}

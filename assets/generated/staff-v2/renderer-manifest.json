@@ -1,0 +1,293 @@
+{
+  "identity": "owner-all-zero-look",
+  "look": {
+    "skin": 0,
+    "hair": 0,
+    "hairStyle": 0,
+    "shirt": 0,
+    "pants": 0
+  },
+  "frames": [
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-owner-default-v2/owner-down-stand.png",
+      "direction": "down",
+      "state": "stand",
+      "frame": "stand",
+      "size": [
+        179,
+        403
+      ],
+      "source_crop": [
+        138,
+        17,
+        317,
+        420
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 159,
+        "h": 383
+      },
+      "foot": {
+        "x": 89.5,
+        "y": 392
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sourceToWorldScale": 0.0731070496083551
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-owner-default-v2/owner-down-stepA.png",
+      "direction": "down",
+      "state": "stepA",
+      "frame": "stride",
+      "size": [
+        187,
+        416
+      ],
+      "source_crop": [
+        533,
+        16,
+        720,
+        432
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 167,
+        "h": 396
+      },
+      "foot": {
+        "x": 93.5,
+        "y": 405
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sourceToWorldScale": 0.0731070496083551
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-owner-default-v2/owner-down-stepB.png",
+      "direction": "down",
+      "state": "stepB",
+      "frame": "passing",
+      "size": [
+        185,
+        407
+      ],
+      "source_crop": [
+        950,
+        17,
+        1135,
+        424
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 165,
+        "h": 387
+      },
+      "foot": {
+        "x": 92.5,
+        "y": 396
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sourceToWorldScale": 0.0731070496083551
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-owner-default-v2/owner-up-stand.png",
+      "direction": "up",
+      "state": "stand",
+      "frame": "stand",
+      "size": [
+        177,
+        400
+      ],
+      "source_crop": [
+        141,
+        427,
+        318,
+        827
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 157,
+        "h": 380
+      },
+      "foot": {
+        "x": 88.5,
+        "y": 389
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sourceToWorldScale": 0.07368421052631578
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-owner-default-v2/owner-up-stepA.png",
+      "direction": "up",
+      "state": "stepA",
+      "frame": "stride",
+      "size": [
+        192,
+        409
+      ],
+      "source_crop": [
+        527,
+        426,
+        719,
+        835
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 172,
+        "h": 389
+      },
+      "foot": {
+        "x": 96.0,
+        "y": 398
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sourceToWorldScale": 0.07368421052631578
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-owner-default-v2/owner-up-stepB.png",
+      "direction": "up",
+      "state": "stepB",
+      "frame": "passing",
+      "size": [
+        185,
+        403
+      ],
+      "source_crop": [
+        954,
+        427,
+        1139,
+        830
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 165,
+        "h": 383
+      },
+      "foot": {
+        "x": 92.5,
+        "y": 392
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sourceToWorldScale": 0.07368421052631578
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-owner-default-v2/owner-right-stand.png",
+      "direction": "right",
+      "state": "stand",
+      "frame": "stand",
+      "size": [
+        178,
+        402
+      ],
+      "source_crop": [
+        138,
+        833,
+        316,
+        1235
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 158,
+        "h": 382
+      },
+      "foot": {
+        "x": 89.0,
+        "y": 391
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sourceToWorldScale": 0.07329842931937172
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-owner-default-v2/owner-right-stepA.png",
+      "direction": "right",
+      "state": "stepA",
+      "frame": "stride",
+      "size": [
+        249,
+        399
+      ],
+      "source_crop": [
+        514,
+        834,
+        763,
+        1233
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 229,
+        "h": 379
+      },
+      "foot": {
+        "x": 124.5,
+        "y": 388
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sourceToWorldScale": 0.07329842931937172
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-owner-default-v2/owner-right-stepB.png",
+      "direction": "right",
+      "state": "stepB",
+      "frame": "passing",
+      "size": [
+        187,
+        403
+      ],
+      "source_crop": [
+        964,
+        833,
+        1151,
+        1236
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 167,
+        "h": 383
+      },
+      "foot": {
+        "x": 93.5,
+        "y": 392
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sourceToWorldScale": 0.07329842931937172
+    }
+  ],
+  "left": "mirror right",
+  "status": "source-checked; runtime pending"
+}

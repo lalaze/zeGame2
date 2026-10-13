@@ -1,0 +1,718 @@
+{
+  "version": 1,
+  "generationTool": "built-in image_gen.imagegen, one distinct asset per call",
+  "bboxAlphaThreshold": "alpha > 128",
+  "cropPolicy": "lossless rectangular crop preserving every nonzero-alpha pixel; alpha>128 is measurement only. No resizing, recoloring, alpha changes, cleanup, or compositing",
+  "assets": [
+    {
+      "ingredientId": "beans",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/ingredient-beans.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/sources/ingredient-beans-source.png",
+      "sourceSize": [
+        1312,
+        1199
+      ],
+      "source_crop": [
+        87,
+        14,
+        1290,
+        1160
+      ],
+      "size": [
+        1203,
+        1146
+      ],
+      "bbox": {
+        "x": 188,
+        "y": 136,
+        "w": 811,
+        "h": 967
+      },
+      "anchor": {
+        "x": 593.5,
+        "y": 1102
+      },
+      "oldEnvelope": [
+        14,
+        12
+      ],
+      "logicalBare": [
+        14,
+        12
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 767477,
+      "alphaBBoxAtSource": [
+        275,
+        150,
+        1086,
+        1117
+      ],
+      "qa": {
+        "fullObject": true,
+        "identityChecked": true,
+        "status": "candidate_pending_runtime_review",
+        "contentEdits": "None. Lossless rectangular crop only; every nonzero-alpha pixel retained.",
+        "sourceUnmodified": true,
+        "losslessCropExact": true,
+        "allNonzeroAlphaRetained": true
+      },
+      "sha256": "8c3f4faca3249227153acc3a09d98a82b53eb20a7be6bd4ac74c46f891f93af0",
+      "sourceSha256": "e58f41857996379be1328fc0e90c81a9915ab70ca5832f761b745d6081870231"
+    },
+    {
+      "ingredientId": "butter",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/ingredient-butter.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/sources/ingredient-butter-source.png",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "source_crop": [
+        0,
+        0,
+        1536,
+        991
+      ],
+      "size": [
+        1536,
+        991
+      ],
+      "bbox": {
+        "x": 195,
+        "y": 109,
+        "w": 1149,
+        "h": 817
+      },
+      "anchor": {
+        "x": 769.5,
+        "y": 925
+      },
+      "oldEnvelope": [
+        14,
+        11
+      ],
+      "logicalBare": [
+        14,
+        11
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 996888,
+      "alphaBBoxAtSource": [
+        195,
+        109,
+        1344,
+        926
+      ],
+      "qa": {
+        "fullObject": true,
+        "identityChecked": true,
+        "status": "candidate_pending_runtime_review",
+        "contentEdits": "None. Lossless rectangular crop only; every nonzero-alpha pixel retained.",
+        "sourceUnmodified": true,
+        "losslessCropExact": true,
+        "allNonzeroAlphaRetained": true
+      },
+      "sha256": "fc8dcb8fddb750c388d72f7e8067f338c03208243e6350bd578dc934ee85d1f5",
+      "sourceSha256": "0125c427551d126460c93a6591f0ece197d3e7c52f65285b16d86fa53df69872"
+    },
+    {
+      "ingredientId": "cocoa",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/ingredient-cocoa.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/sources/ingredient-cocoa-source.png",
+      "sourceSize": [
+        1312,
+        1199
+      ],
+      "source_crop": [
+        23,
+        0,
+        1282,
+        1185
+      ],
+      "size": [
+        1259,
+        1185
+      ],
+      "bbox": {
+        "x": 259,
+        "y": 149,
+        "w": 769,
+        "h": 910
+      },
+      "anchor": {
+        "x": 643.5,
+        "y": 1058
+      },
+      "oldEnvelope": [
+        14,
+        12
+      ],
+      "logicalBare": [
+        14,
+        12
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 940780,
+      "alphaBBoxAtSource": [
+        282,
+        149,
+        1051,
+        1059
+      ],
+      "qa": {
+        "fullObject": true,
+        "identityChecked": true,
+        "status": "candidate_pending_runtime_review",
+        "contentEdits": "None. Lossless rectangular crop only; every nonzero-alpha pixel retained.",
+        "sourceUnmodified": true,
+        "losslessCropExact": true,
+        "allNonzeroAlphaRetained": true
+      },
+      "sha256": "a18789b57e3a3591ab2242e0bae3a3c6bc722107503fea78e8a4615f4ca6688c",
+      "sourceSha256": "1a272e7feb52dd8c17483f6a186f1a63f0d488d3f6230489514e15be3dad951b"
+    },
+    {
+      "ingredientId": "cream",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/ingredient-cream.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/sources/ingredient-cream-source.png",
+      "sourceSize": [
+        1374,
+        1145
+      ],
+      "source_crop": [
+        128,
+        25,
+        1357,
+        1145
+      ],
+      "size": [
+        1229,
+        1120
+      ],
+      "bbox": {
+        "x": 172,
+        "y": 187,
+        "w": 778,
+        "h": 752
+      },
+      "anchor": {
+        "x": 561.0,
+        "y": 938
+      },
+      "oldEnvelope": [
+        14,
+        11
+      ],
+      "logicalBare": [
+        14,
+        11
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 997376,
+      "alphaBBoxAtSource": [
+        300,
+        212,
+        1078,
+        964
+      ],
+      "qa": {
+        "fullObject": true,
+        "identityChecked": true,
+        "status": "candidate_pending_runtime_review",
+        "contentEdits": "None. Lossless rectangular crop only; every nonzero-alpha pixel retained.",
+        "sourceUnmodified": true,
+        "losslessCropExact": true,
+        "allNonzeroAlphaRetained": true
+      },
+      "sha256": "1add44357a0c96370322a0b934ea76231aab8d55b6705fa3f5b0ccd2bf29799f",
+      "sourceSha256": "65023402242b33d2493e3bea706b52f990ab3bab38b9e5f136c83840e69a1a80"
+    },
+    {
+      "ingredientId": "eggs",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/ingredient-eggs.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/sources/ingredient-eggs-source.png",
+      "sourceSize": [
+        1420,
+        1108
+      ],
+      "source_crop": [
+        0,
+        0,
+        1410,
+        1108
+      ],
+      "size": [
+        1410,
+        1108
+      ],
+      "bbox": {
+        "x": 250,
+        "y": 191,
+        "w": 912,
+        "h": 768
+      },
+      "anchor": {
+        "x": 706.0,
+        "y": 958
+      },
+      "oldEnvelope": [
+        14,
+        11
+      ],
+      "logicalBare": [
+        14,
+        11
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 1078476,
+      "alphaBBoxAtSource": [
+        250,
+        191,
+        1162,
+        959
+      ],
+      "qa": {
+        "fullObject": true,
+        "identityChecked": true,
+        "status": "candidate_pending_runtime_review",
+        "contentEdits": "None. Lossless rectangular crop only; every nonzero-alpha pixel retained.",
+        "sourceUnmodified": true,
+        "losslessCropExact": true,
+        "allNonzeroAlphaRetained": true
+      },
+      "sha256": "b6c0a4d07858a6c8027d5a18842893c4310e24f917b842981940c676d9efd4d5",
+      "sourceSha256": "761c4d3a456d7b525dac6e16c54f842794ddb21a6d6407dc99d2db7d9956b22b"
+    },
+    {
+      "ingredientId": "flour",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/ingredient-flour.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/sources/ingredient-flour-source.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "source_crop": [
+        0,
+        22,
+        1246,
+        1254
+      ],
+      "size": [
+        1246,
+        1232
+      ],
+      "bbox": {
+        "x": 227,
+        "y": 145,
+        "w": 799,
+        "h": 966
+      },
+      "anchor": {
+        "x": 626.5,
+        "y": 1110
+      },
+      "oldEnvelope": [
+        14,
+        12
+      ],
+      "logicalBare": [
+        14,
+        12
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 907156,
+      "alphaBBoxAtSource": [
+        227,
+        167,
+        1026,
+        1133
+      ],
+      "qa": {
+        "fullObject": true,
+        "identityChecked": true,
+        "status": "candidate_pending_runtime_review",
+        "contentEdits": "None. Lossless rectangular crop only; every nonzero-alpha pixel retained.",
+        "sourceUnmodified": true,
+        "losslessCropExact": true,
+        "allNonzeroAlphaRetained": true
+      },
+      "sha256": "a5d5b69a8cf46edd8a6efcda51f280d4efb083990d4a098aedc67c694f4c5eb9",
+      "sourceSha256": "9a8189ada97a39328af21a4d34e4a08f813625fd80d5f45bd0047e268712e8e0"
+    },
+    {
+      "ingredientId": "fruit",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/ingredient-fruit.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/sources/ingredient-fruit-source.png",
+      "sourceSize": [
+        1312,
+        1199
+      ],
+      "source_crop": [
+        0,
+        0,
+        1308,
+        1199
+      ],
+      "size": [
+        1308,
+        1199
+      ],
+      "bbox": {
+        "x": 265,
+        "y": 103,
+        "w": 876,
+        "h": 998
+      },
+      "anchor": {
+        "x": 703.0,
+        "y": 1100
+      },
+      "oldEnvelope": [
+        14,
+        12
+      ],
+      "logicalBare": [
+        14,
+        12
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 974589,
+      "alphaBBoxAtSource": [
+        265,
+        103,
+        1141,
+        1101
+      ],
+      "qa": {
+        "fullObject": true,
+        "identityChecked": true,
+        "status": "candidate_pending_runtime_review",
+        "contentEdits": "None. Lossless rectangular crop only; every nonzero-alpha pixel retained.",
+        "sourceUnmodified": true,
+        "losslessCropExact": true,
+        "allNonzeroAlphaRetained": true
+      },
+      "sha256": "4abc5bcf4da7d0be02f3e8c4ca1e80c21f6b20adb4e4a5c4213df925f44e974c",
+      "sourceSha256": "0c8b391d44c5de65f36b895281870e0b8da26eb9f0455375acd9428361e73527"
+    },
+    {
+      "ingredientId": "matcha",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/ingredient-matcha.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/sources/ingredient-matcha-source.png",
+      "sourceSize": [
+        1312,
+        1199
+      ],
+      "source_crop": [
+        0,
+        46,
+        1290,
+        1169
+      ],
+      "size": [
+        1290,
+        1123
+      ],
+      "bbox": {
+        "x": 186,
+        "y": 171,
+        "w": 1013,
+        "h": 801
+      },
+      "anchor": {
+        "x": 692.5,
+        "y": 971
+      },
+      "oldEnvelope": [
+        14,
+        12
+      ],
+      "logicalBare": [
+        14,
+        12
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 879666,
+      "alphaBBoxAtSource": [
+        186,
+        217,
+        1199,
+        1018
+      ],
+      "qa": {
+        "fullObject": true,
+        "identityChecked": true,
+        "status": "candidate_pending_runtime_review",
+        "contentEdits": "None. Lossless rectangular crop only; every nonzero-alpha pixel retained.",
+        "sourceUnmodified": true,
+        "losslessCropExact": true,
+        "allNonzeroAlphaRetained": true
+      },
+      "sha256": "8a529199f1a63194098370e3fb6fefea793a707e2591a882d9b8e43d07f761b4",
+      "sourceSha256": "87fb6cb0b6065850cbd73a1a7e522b950a38b73e6e8512ba117bc6dc02092048"
+    },
+    {
+      "ingredientId": "milk",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/ingredient-milk.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/sources/ingredient-milk-source.png",
+      "sourceSize": [
+        1213,
+        1296
+      ],
+      "source_crop": [
+        0,
+        9,
+        1199,
+        1296
+      ],
+      "size": [
+        1199,
+        1287
+      ],
+      "bbox": {
+        "x": 365,
+        "y": 128,
+        "w": 483,
+        "h": 1024
+      },
+      "anchor": {
+        "x": 606.5,
+        "y": 1151
+      },
+      "oldEnvelope": [
+        14,
+        12
+      ],
+      "logicalBare": [
+        14,
+        12
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 1087035,
+      "alphaBBoxAtSource": [
+        365,
+        137,
+        848,
+        1161
+      ],
+      "qa": {
+        "fullObject": true,
+        "identityChecked": true,
+        "status": "candidate_pending_runtime_review",
+        "contentEdits": "None. Lossless rectangular crop only; every nonzero-alpha pixel retained.",
+        "sourceUnmodified": true,
+        "losslessCropExact": true,
+        "allNonzeroAlphaRetained": true
+      },
+      "sha256": "6027de66fe9a10b4e9071f9e43820681c3a4bb000d9f80a654241055a8605947",
+      "sourceSha256": "95fe361bf9ccae531556013bd9ddc63077ade834c03320ee05380b7cda1dcddb"
+    },
+    {
+      "ingredientId": "spice",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/ingredient-spice.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/sources/ingredient-spice-source.png",
+      "sourceSize": [
+        1383,
+        1137
+      ],
+      "source_crop": [
+        0,
+        30,
+        1383,
+        1137
+      ],
+      "size": [
+        1383,
+        1107
+      ],
+      "bbox": {
+        "x": 131,
+        "y": 121,
+        "w": 1155,
+        "h": 883
+      },
+      "anchor": {
+        "x": 708.5,
+        "y": 1003
+      },
+      "oldEnvelope": [
+        14,
+        12
+      ],
+      "logicalBare": [
+        14,
+        12
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 981533,
+      "alphaBBoxAtSource": [
+        131,
+        151,
+        1286,
+        1034
+      ],
+      "qa": {
+        "fullObject": true,
+        "identityChecked": true,
+        "status": "candidate_pending_runtime_review",
+        "contentEdits": "None. Lossless rectangular crop only; every nonzero-alpha pixel retained.",
+        "sourceUnmodified": true,
+        "losslessCropExact": true,
+        "allNonzeroAlphaRetained": true
+      },
+      "sha256": "20a3e8edd60bed326381755a72737468092d7260d12a66bade985a4fcdd6af07",
+      "sourceSha256": "6d6ebaa09b682f1cb3a5abb60b979fc02ac0b4b7433fb966a7233facc73e676d"
+    },
+    {
+      "ingredientId": "sugar",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/ingredient-sugar.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/sources/ingredient-sugar-source.png",
+      "sourceSize": [
+        1312,
+        1199
+      ],
+      "source_crop": [
+        0,
+        56,
+        1276,
+        1199
+      ],
+      "size": [
+        1276,
+        1143
+      ],
+      "bbox": {
+        "x": 170,
+        "y": 222,
+        "w": 993,
+        "h": 778
+      },
+      "anchor": {
+        "x": 666.5,
+        "y": 999
+      },
+      "oldEnvelope": [
+        14,
+        10
+      ],
+      "logicalBare": [
+        14,
+        10
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 898371,
+      "alphaBBoxAtSource": [
+        170,
+        278,
+        1163,
+        1056
+      ],
+      "qa": {
+        "fullObject": true,
+        "identityChecked": true,
+        "status": "candidate_pending_runtime_review",
+        "contentEdits": "None. Lossless rectangular crop only; every nonzero-alpha pixel retained.",
+        "sourceUnmodified": true,
+        "losslessCropExact": true,
+        "allNonzeroAlphaRetained": true
+      },
+      "sha256": "269a79935b645b33681e0b63e2011c2827e987a10d548dd9285b84ffdb0e1fef",
+      "sourceSha256": "f10ab117d3b2ec5f5063edc23c109a66c390c09b7822c0977bf077d5a8edb360"
+    },
+    {
+      "ingredientId": "tea",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/ingredient-tea.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/sources/ingredient-tea-source.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "source_crop": [
+        23,
+        63,
+        1244,
+        1254
+      ],
+      "size": [
+        1221,
+        1191
+      ],
+      "bbox": {
+        "x": 243,
+        "y": 139,
+        "w": 731,
+        "h": 915
+      },
+      "anchor": {
+        "x": 608.5,
+        "y": 1053
+      },
+      "oldEnvelope": [
+        14,
+        12
+      ],
+      "logicalBare": [
+        14,
+        12
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 893456,
+      "alphaBBoxAtSource": [
+        266,
+        202,
+        997,
+        1117
+      ],
+      "qa": {
+        "fullObject": true,
+        "identityChecked": true,
+        "status": "candidate_pending_runtime_review",
+        "contentEdits": "None. Lossless rectangular crop only; every nonzero-alpha pixel retained.",
+        "sourceUnmodified": true,
+        "losslessCropExact": true,
+        "allNonzeroAlphaRetained": true
+      },
+      "sha256": "20fbf0cc2d03ac5576f6ada8bd10e189f66969c3621c9881270eb386c7b71a46",
+      "sourceSha256": "2b7ee3ef8cde138a27ec451ae0831fce912109630c186d9a1da435bd30055aaa"
+    }
+  ],
+  "status": "generation_frozen_candidate_pending_runtime_review",
+  "frozenAt": "2026-10-13T10:19:00Z"
+}

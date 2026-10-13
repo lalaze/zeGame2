@@ -1,0 +1,25 @@
+{
+  "id": 19,
+  "name": "向日葵裙",
+  "look": {
+    "skin": 3,
+    "hair": 0,
+    "hairStyle": 1,
+    "shirt": 3,
+    "pants": 1
+  },
+  "hairstyle": 1,
+  "outfit": "dress",
+  "accessory": "headband",
+  "accent": "#f0dfb9",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#80533f",
+    "hair": "#594237",
+    "shirt": "#d3a453",
+    "pants": "#85664f"
+  },
+  "hatPalette": "#69a295",
+  "description": "Fixed customer cast 19 (向日葵裙): warm skin #80533f; hair #594237 in a compact high tied bun with a small cream-and-gold tie, loose wisps near ears. Outfit: #d3a453 knee-length A-line dress with cream hem and tiny gold neckline detail, #85664f tights visible below. Lower clothing color #85664f; warm dark brown leather shoes. Accent #f0dfb9. An #f0dfb9 narrow headband crossing the crown, preserved in every pose."
+}

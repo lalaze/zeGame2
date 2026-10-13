@@ -1,0 +1,5 @@
+Create exactly TWO spacious sprites of the SAME apricotcream longhaired PERSIAN cat in reference. Preserve roundflatfriendlyface, tiny roundedears,golden-hazel eyes, longfluffy peachcream coat, huge ruffandtail. Fine cozy 2Dpixelclusters, notsmooth3D.
+1536x1024 transparent RGBA. TWO sidebyside cells,100pxclear gap between allsilhouettepoints,60pxoutermargins. Samephysicalheadsize about250pxwide, fullsilhouettes.
+LEFT walkB: all4legs walkingLEFT, headatLEFT horizontalbodytoright andtailRIGHT. Near/frontmost forepaw LIFTED andbentBACK beneathchest, farforepawplantedforward, hindlegsopposite. Clearwalkingmotion, notstanding.
+RIGHT sleep: catcurledlowasleep, eyesclosed, headtuckedagainstfrontpaws, fluffytailwrappedaroundbody, compactlowoval. Keepfaceandearsconsistentwithwalkingcat.
+Nootherposes, noobjects,text,effects,floor,shadows,haze,humans. Realtransparentalpha outsidecompletecats.

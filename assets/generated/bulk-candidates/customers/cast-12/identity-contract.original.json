@@ -1,0 +1,25 @@
+{
+  "id": 12,
+  "name": "丁香发带",
+  "look": {
+    "skin": 0,
+    "hair": 4,
+    "hairStyle": 2,
+    "shirt": 4,
+    "pants": 0
+  },
+  "hairstyle": 2,
+  "outfit": "dress",
+  "accessory": "headband",
+  "accent": "#d8b168",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#f4cfad",
+    "hair": "#626782",
+    "shirt": "#9b87af",
+    "pants": "#53637b"
+  },
+  "hatPalette": "#e5d7ba",
+  "description": "Fixed customer cast 12 (丁香发带): warm skin #f4cfad; hair #626782 in long straight hair falling to the lower back, long straight side locks, side-part fringe. Outfit: #9b87af knee-length A-line dress with cream hem and tiny gold neckline detail, #53637b tights visible below. Lower clothing color #53637b; warm dark brown leather shoes. Accent #d8b168. An #d8b168 narrow headband crossing the crown, preserved in every pose."
+}

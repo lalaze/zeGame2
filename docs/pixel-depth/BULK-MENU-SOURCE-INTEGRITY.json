@@ -1,0 +1,889 @@
+{
+  "scope": "File existence, dimensions, alpha bounds, exact source RGBA crop, duplicate pixel evidence only; no runtime or aesthetic pass",
+  "manifests": [
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/manifest.json",
+      "count": 50,
+      "assets": [
+        {
+          "id": "affogato",
+          "size": [
+            1244,
+            1254
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "01a6c693c72c56b486aca84b67acc9137752ee69cfc1bba692f01dbd269df41c",
+          "file_sha256": "b8fce227121cd45f1165861de4f5902b2af7e7fdc3b87c7a1aa9c804b5164ae6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "americano",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0d70bc120ad56462f1ba50931ed400a0ee954bce15dfb6bb43505fa0462db619",
+          "file_sha256": "9dceb5f2ba513ff4f9c49edab2035dcc663b341848ae6a0522d2bed3e9767da9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "bagel",
+          "size": [
+            1312,
+            1199
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8dd4c7048c0a69fcc7e7e1424aa9cf0ea665f179754119309f956b8384cd19e0",
+          "file_sha256": "5dd2b9a6898e87f4a5919a0f651d875ee66bbb600803fe457e00ad917dd8664b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "baguette",
+          "size": [
+            1490,
+            1015
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "29456969254785bc5a2647b845c16c95f39dd88d6047ceff0fd449efa76115a6",
+          "file_sha256": "2f193ffb6c3dcdb95667828af4e3e9643b8b023a3aeb3c923418e36b475ddd35",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blacktea",
+          "size": [
+            1302,
+            1177
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e351a6fb026131b07a42615a202932a4e2e2c761e3447cc10f05b8e9040aa418",
+          "file_sha256": "e705ab57a98653c4f527bffdcb89a12ce1b1d52bd2b409b49f0bee830ca2da52",
+          "exact_source_crop": true
+        },
+        {
+          "id": "brioche",
+          "size": [
+            1310,
+            1199
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0ff92e87cbe7a1bea0925961c811b95b39ce2f92fccbfab3dc12393e2b68e707",
+          "file_sha256": "d270ff9f1f8b7fb45fb02b33626fb4aeb4927cab1a9b32b99629151ccdad0bef",
+          "exact_source_crop": true
+        },
+        {
+          "id": "brownie",
+          "size": [
+            1350,
+            1165
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9f6fa71dc806226257c4d5c4ed7f53067727a3acb52f40ec853bb11ff1a0755f",
+          "file_sha256": "1e561f28fd8cdb32784343853c4bf3ae578af6436f4a6d23160b44e30d2cf253",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cappuccino",
+          "size": [
+            1321,
+            1180
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b4b4223fd9dff3370f980d2376efcfad19a7ac4e8e3055806675041cd02357e0",
+          "file_sha256": "b0f89b3c68a062c2e40dd7dd5731b2e0f48c3f21c150fb790438a17aceb43914",
+          "exact_source_crop": true
+        },
+        {
+          "id": "chai",
+          "size": [
+            1248,
+            1215
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "aa4230247e260ad6e2f0c0bc60902d311554cc16dfc68524363b112ee42e4f09",
+          "file_sha256": "ff70682160a3c361aa9f826e63d811333048874bb64ad0517bbb177b056c5824",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cheesebun",
+          "size": [
+            1254,
+            1184
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4eb34fc217b852f9f20eaa21dcf5d874ffe1b7ee0f4b357a800daf08674f51db",
+          "file_sha256": "924273fc94b91082c2e5123f83b46dcd180770bc3cfa580a284de2ce2c3d4e02",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cheesecake",
+          "size": [
+            1389,
+            1103
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cb34578522a42ead2332febee78bc0ce90cc3bf1896c267a02bf8f2c9ac4138b",
+          "file_sha256": "a8566c8897e5b4105b485e1a0035c9696a050e03f1982358ea6af5799d7d39d9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "chocobread",
+          "size": [
+            1482,
+            1024
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "d2067aefb4ea15533a6819db9d00f30da4b53cd0e86b64f7f8020ad946704fec",
+          "file_sha256": "fc164181f226b7c107b5668888d5e6bdd75cd80e37f0636ff85436ebec912d51",
+          "exact_source_crop": true
+        },
+        {
+          "id": "ciabatta",
+          "size": [
+            1526,
+            1024
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "6b726a62b55ffa26ce481e84bcfa636ae44f835a7e94f1796edbedab5ab9ce71",
+          "file_sha256": "996341dd363f12b2bd13a8809d6d65ba617b8bffc4b23babaaa6423e2d264316",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cinnamon",
+          "size": [
+            1324,
+            1188
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f1a76cd06fd59fd23fd7eddb6a13501a26f10b65d20ff23edc5308a3f008f2e2",
+          "file_sha256": "16bd9cbd009ad5caeec46344c694a9cc2c8b0d2f070ef1b067c0ee13c1b2287b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "coldbrew",
+          "size": [
+            1100,
+            1271
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ad902b6ccecf6cb3c06775cd928224ae1e315d305a7891d4e8d117e364d22feb",
+          "file_sha256": "23ffc9290828aebc8a696b233bace8dfaa651f948baa2e193e737b0105847ddd",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cookie",
+          "size": [
+            1302,
+            1184
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "63852f4e1330c5ee5cbeedd5c1edbcb36a1a808dfaa9741662ccf69052e43eac",
+          "file_sha256": "2f92b07a2909af28fad4eb8b06b823d015084746ef54b73c0f61e1394714f76c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cortado",
+          "size": [
+            1147,
+            1127
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ac996aed46e1cd35e8b30f4c4dceff80ae64ec473e1b546c1d3bd5efaa2961a3",
+          "file_sha256": "e909807019cff54a9118df94d2ad19bd826b1cbd0a44c65db9a802775f66c7b2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "creamcoffee",
+          "size": [
+            1240,
+            1254
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bd8fea25a3b94d687bd4ec19b6c0eba4c31cebad33df0f1cf7bec19cd4805ebf",
+          "file_sha256": "78e5e19f466fde9c4510c20eb7b2b27167e6f70a92309b7dcedf8ab8aed6301c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "creampuff",
+          "size": [
+            1308,
+            1199
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "92c914a83b820a49af5b0bf4a1185adda68cc06b23ad9ffd59b845e76131bfc6",
+          "file_sha256": "3867c5254e10fd018b3360480c7aba6355d58c6573d8f6f6390ca6c3ea03d2aa",
+          "exact_source_crop": true
+        },
+        {
+          "id": "dirty",
+          "size": [
+            1244,
+            1243
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bf10cf5b91e5f44343704aeacdd5c6257d6e3cb0d649f1ea487dba43ec8cffc9",
+          "file_sha256": "c51c864da552a532c15763ad6277ecf00e47881007f9521970a1259f9804a2f9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "donut",
+          "size": [
+            1394,
+            1107
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "104623652a834d8c3535465cccac8bcc56548a65992e074f9141049b5c7862db",
+          "file_sha256": "d6cfa4cd47fc54183bcabe3cb9730ef9b229d12c84dd3d82c81c66ca60f2965b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "flatwhite",
+          "size": [
+            1475,
+            985
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "7d5ef6042693b275189b7086a38176c5c8ad4f7d4c369b7cdb79f5d2db3fa6a2",
+          "file_sha256": "fcc0e791fb8e7723208a5d526a08c1612c0548509ba29be8e20479181883f2cc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "focaccia",
+          "size": [
+            1398,
+            1104
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "df5ebe671e9ebe0474114d55632d87aa4d65098f3134b81049e838c53143e321",
+          "file_sha256": "2140ed1eb869f7f970f64328b5ad01cd39f8aa89cd0dd89b121dc45f5084c590",
+          "exact_source_crop": true
+        },
+        {
+          "id": "frappe",
+          "size": [
+            1014,
+            1518
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "40e6aeb2fef997a8ad7a59d61281f2886932455121da861991d6e9aa1a8008e9",
+          "file_sha256": "292fde67d72197392d8ff1afeea94e10ba980beebf4ef35a7420181f0aba91c0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "fruitbrioche",
+          "size": [
+            1304,
+            1168
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "51b6708e8d9ce67891c878986ff8784c081c897fbfc789d5eeb8eebccb3f0406",
+          "file_sha256": "8f27bf52abb993c2760d04ca5d26234018548b6c970307ae383a76f7f7c8e6a7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "fruittea",
+          "size": [
+            1207,
+            1274
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8f8c7676c77bc7111b9fa5089bb671fe6aa0b243ce663160d4f4e0f0a808d429",
+          "file_sha256": "1dc738f808a5256a679341d6553cf8e5fbbd7a2c11bcb0d6d63cd5a4474b3155",
+          "exact_source_crop": true
+        },
+        {
+          "id": "garlicbread",
+          "size": [
+            1516,
+            1024
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "25205b9f70444440622501859738ffa1bf709b5a4f1143c88c76d0c8af4019d3",
+          "file_sha256": "17a368d8aa7dedc52663b27e02a252eba64667da2afa9c08845e08e3f4c47f79",
+          "exact_source_crop": true
+        },
+        {
+          "id": "hojicha",
+          "size": [
+            1169,
+            1217
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b0d25c9082f2bd99efd0c378f734e982a4f0e4708ecc5872c6f9935e9516299e",
+          "file_sha256": "fc115d9c75eedbaba467a631c2e7d7af305a9488cf42443fbb7c4edf3cd15b70",
+          "exact_source_crop": true
+        },
+        {
+          "id": "hotchoc",
+          "size": [
+            1308,
+            1157
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8bca88e1fde3f1ea90e66bcae4c66c962e3039a7049668b73730d87f16dc1797",
+          "file_sha256": "cb8e1499a747abdacc880443f64f7fea01afa25a2119b1bab6528d4141e91322",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lemontea",
+          "size": [
+            1168,
+            1337
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e3ebfb444f826aae87c7d982c9f03c9f1c0e92459350eb9ea0a1ac1b0e16f538",
+          "file_sha256": "ffcb48d016377f5b703483fae5c2d98b87e0d32810de0bfa059982a77a4fc615",
+          "exact_source_crop": true
+        },
+        {
+          "id": "macaron",
+          "size": [
+            1268,
+            1234
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "32d09a826d3a02f4491bfddfeaeb1e1bbd05952868182342d3ae61f8557e8f14",
+          "file_sha256": "b0989e2235fccdd6c32cbfe7d6960cc16eab20209450ab6cea54a838a09255ba",
+          "exact_source_crop": true
+        },
+        {
+          "id": "macchiato",
+          "size": [
+            1473,
+            1001
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "4259d65ff6fcf42a1307e630a73df26f40bc1d90671ff91c67353ce3b3fd68c7",
+          "file_sha256": "bfd7e73bc731998f0ce9d57139bed3fefb009e4a77fafd5127a930eeedacd341",
+          "exact_source_crop": true
+        },
+        {
+          "id": "matcha",
+          "size": [
+            1284,
+            1199
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "95590e588c0728ce46caa35a3e13aca00238337f6bb62f8d8b17297e93059e63",
+          "file_sha256": "1a22cf7c1ff0f4b76a120f1f3481057cd72150a1c21a6b59ac31f38b03bfadfe",
+          "exact_source_crop": true
+        },
+        {
+          "id": "matchafloat",
+          "size": [
+            1143,
+            1374
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4952a8548c606f0f2f99381a5e31b6545774a614cfcd2d6676de77729d3831ac",
+          "file_sha256": "488b510637f503891a2042d459399ebe5043fb7b858f343272776425d16ddc87",
+          "exact_source_crop": true
+        },
+        {
+          "id": "melonpan",
+          "size": [
+            1308,
+            1177
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c5e83d7e43c14a943a57355e225bc19cb236b70f1097dde86f083f268959c883",
+          "file_sha256": "305cdf3bced9a54731342791616a299ee2d39386cdb52ca62f4d88eb718274f1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "milktea",
+          "size": [
+            1210,
+            1295
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "348d11257589f7ce4ae96f5799a998c9f591b677702a2847bee7748f57bf986f",
+          "file_sha256": "160006fdcec6fff9f596d1396df8768a482cf8f975d606df4e2d10a5e3deba3f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "mocha",
+          "size": [
+            1234,
+            1240
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5afff8990574501086b12ad0a180923314a51c60d9fe959c472b1e2b2bdee56a",
+          "file_sha256": "ba4c4d585539ae82ee068dbd11c77b2f3fdbf6e65c053845f664f58578c49f32",
+          "exact_source_crop": true
+        },
+        {
+          "id": "muffin",
+          "size": [
+            1248,
+            1228
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f1b5528c9a7abaec49536dcb9bb3b7a76ba8859e16701ec6be3951b7e294072d",
+          "file_sha256": "7d51e0174c6bdc329b64e1ccae28b3d012607ab7d6b5615a6ddfe9d372d72775",
+          "exact_source_crop": true
+        },
+        {
+          "id": "painchoc",
+          "size": [
+            1448,
+            1076
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6b22f84ea0592ccb7b3d016c001351e3c0ddd794a576945f8491efc7ba3768b6",
+          "file_sha256": "bcafbe58be5f57926058aa0e472060815648e3315a92b585fc995ff80cf20848",
+          "exact_source_crop": true
+        },
+        {
+          "id": "pourover",
+          "size": [
+            1295,
+            1199
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "84fef2906e81878360a62a6875d028b4dcc8025169c980e20f76eb944c274730",
+          "file_sha256": "3302d7f686fc920b4d0571c0760c21fc6b1aa9d19d0c0ba98cc582d0ceb0abb1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "pretzel",
+          "size": [
+            1310,
+            1184
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b8be142c257bca395413b96b8867037856001fb6c665094eda38419b8d9a3994",
+          "file_sha256": "1d70be2e356471327273a53cc79df5b8d9717c405a77c7ce7f171a6624e69997",
+          "exact_source_crop": true
+        },
+        {
+          "id": "raisinbread",
+          "size": [
+            1348,
+            1128
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9debc33e6b1c17d41679696397e589b730156ffa8646ea20129675fe4c975aea",
+          "file_sha256": "17cd4c192084c2a5406e0b684e61bd0de1bed942d765135af4a8e51d17256c82",
+          "exact_source_crop": true
+        },
+        {
+          "id": "roll",
+          "size": [
+            1229,
+            1153
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4358ce033acbf8dd936188d2804c30a2bbe9ca221de1cb41020e5a7c9b9df88b",
+          "file_sha256": "9a1f5915b09bbcd3edca2958dead6da52883762551c4db1011b31b999c2711a9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "rye",
+          "size": [
+            1494,
+            995
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "c3797fbd57b203a51cdcb5e0cc1724e022e7128fb79ccdd981a908e221a7a3ca",
+          "file_sha256": "ef2f5047362311c69ec5e690f00bc390d9d79ca3008e5790825e2d4107057f4b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "scone",
+          "size": [
+            1310,
+            1199
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b54c6dbef83bfd5becc9e8144c8fa1916896f9f1c3ea875a31b4ce97d88ec799",
+          "file_sha256": "8d4e048eef3e50bb0bd0aa53699374dc5bb74fceaaed49f722762cd45a0e9288",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shokupan",
+          "size": [
+            1526,
+            1024
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "4020706c38df22d7a10786c678b329d7ec7d498163eddcd19de3e6d5ee0ad6bc",
+          "file_sha256": "deb6cf54e4b4d6c712bd0db5f9cd3812fd5261ae5b1a57b86b4f3cd97114edc9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "smoothie",
+          "size": [
+            1144,
+            1297
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "be84be5f93737f3cce0f5d53941647cdebb8eedf2a31855c02630176b8779eb1",
+          "file_sha256": "6c63d63bd7de99a2941a115862cb1715567080960c0d42c766fccdd4951a6b8e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sourdough",
+          "size": [
+            1374,
+            1145
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1521dca839412836baefd90b25a75423fe962389c8619e497ed60003d528e623",
+          "file_sha256": "d64ecc5fd51f12ed92a4d9de38a1a3865c7d2da4b664a18e0609cbce08e7ecb8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "swissroll",
+          "size": [
+            1309,
+            1176
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5a0980212f1d9b30ee355723814feb8ce30b4721d2de7c5154ae7375c0049e81",
+          "file_sha256": "2af0db1ec5b444e6eab4f0aaf91b5094adef922a7906da5f90e9ebcfe87f9a54",
+          "exact_source_crop": true
+        },
+        {
+          "id": "vienna",
+          "size": [
+            1234,
+            1245
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6dfa0501395fdf8d34adc5e781b505eba13b543ded9af35170787b0b32f6d30a",
+          "file_sha256": "9359507eaecdedb15dcc95049ff3d5ac208aa3f914885a116caf2a8953777ad7",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/ingredient-manifest.json",
+      "count": 12,
+      "assets": [
+        {
+          "id": "beans",
+          "size": [
+            1203,
+            1146
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "23256fbada3d102f72e796a097fb651b74338f8794224571f9f413f88291717d",
+          "file_sha256": "8c3f4faca3249227153acc3a09d98a82b53eb20a7be6bd4ac74c46f891f93af0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "butter",
+          "size": [
+            1536,
+            991
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "a1e7525b9e32156b3c0cb380fa98ff2db0a1e92b21b0a04bfde0787c4f55e38e",
+          "file_sha256": "fc8dcb8fddb750c388d72f7e8067f338c03208243e6350bd578dc934ee85d1f5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cocoa",
+          "size": [
+            1259,
+            1185
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "659532d4a4d16e3d08df466a891b2153fdf1885f338ab2cd8b70cc86bb63d1e2",
+          "file_sha256": "a18789b57e3a3591ab2242e0bae3a3c6bc722107503fea78e8a4615f4ca6688c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cream",
+          "size": [
+            1229,
+            1120
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "857c85ff1e3e8699694b35d56ce0166f0e74f3f76da66859c65deee2d66fe52c",
+          "file_sha256": "1add44357a0c96370322a0b934ea76231aab8d55b6705fa3f5b0ccd2bf29799f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "eggs",
+          "size": [
+            1410,
+            1108
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5f19348747f14f52af59e9f9bdf8bbc1c25f2cc9e5373281ea0e3d767c1b0a1e",
+          "file_sha256": "b6c0a4d07858a6c8027d5a18842893c4310e24f917b842981940c676d9efd4d5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "flour",
+          "size": [
+            1246,
+            1232
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c08272c373cf6393de7b26ef522944918f305d91a465c903149b5233250c4b02",
+          "file_sha256": "a5d5b69a8cf46edd8a6efcda51f280d4efb083990d4a098aedc67c694f4c5eb9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "fruit",
+          "size": [
+            1308,
+            1199
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fddc4a6aba89f798270356b1d80e6c601b394da75ae8f6bc0a893742f395dc27",
+          "file_sha256": "4abc5bcf4da7d0be02f3e8c4ca1e80c21f6b20adb4e4a5c4213df925f44e974c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "matcha",
+          "size": [
+            1290,
+            1123
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5e3b1933e8f3c12923deafbdb042fcc38670b10750a36b8344fa371e72a84ce6",
+          "file_sha256": "8a529199f1a63194098370e3fb6fefea793a707e2591a882d9b8e43d07f761b4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "milk",
+          "size": [
+            1199,
+            1287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "01b4b8b81d5d446c7559c1a43f829b49ddffffacb236dbd7e06f2528efd04607",
+          "file_sha256": "6027de66fe9a10b4e9071f9e43820681c3a4bb000d9f80a654241055a8605947",
+          "exact_source_crop": true
+        },
+        {
+          "id": "spice",
+          "size": [
+            1383,
+            1107
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f5a96be6a80ab20af2011db0407f563ad6c8e7ec0ea9d3a574b124f7d32a0fb8",
+          "file_sha256": "20a3e8edd60bed326381755a72737468092d7260d12a66bade985a4fcdd6af07",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sugar",
+          "size": [
+            1276,
+            1143
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "916bcbf975161587a2307c6a8596f0ab2111ab610a58e2712172afcfa5004bd0",
+          "file_sha256": "269a79935b645b33681e0b63e2011c2827e987a10d548dd9285b84ffdb0e1fef",
+          "exact_source_crop": true
+        },
+        {
+          "id": "tea",
+          "size": [
+            1221,
+            1191
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "16ab75e84b2090bcb0f33ff3d3f6a8aad46a7d89136db9a8dd38b33f6d5f996f",
+          "file_sha256": "20fbf0cc2d03ac5576f6ada8bd10e189f66969c3621c9881270eb386c7b71a46",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "total_assets": 62,
+  "errors": 0
+}

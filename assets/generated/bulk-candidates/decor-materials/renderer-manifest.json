@@ -1,0 +1,2574 @@
+{
+  "version": 1,
+  "domain": "decor",
+  "status": "Frozen source candidates; runtime integration and aesthetic acceptance pending.",
+  "frozenSourceCandidates": true,
+  "frozenAt": "2026-10-13T10:33:09.606940+00:00",
+  "generatedIdCount": 30,
+  "generatedPngCount": 34,
+  "reusedIdCount": 1,
+  "reusedPngCount": 2,
+  "coveredIdCount": 31,
+  "expectedBitmapIdCount": 31,
+  "missingIds": [],
+  "unexpectedIds": [],
+  "excludedNoBitmap": [
+    {
+      "id": "sill_none",
+      "slot": "sill",
+      "reason": "Explicit none option; no bitmap required."
+    },
+    {
+      "id": "ceiling_none",
+      "slot": "ceiling",
+      "reason": "Explicit none option; no bitmap required."
+    },
+    {
+      "id": "rug_none",
+      "slot": "rug",
+      "reason": "Explicit none option; no bitmap required."
+    },
+    {
+      "id": "neon_none",
+      "slot": "neon",
+      "reason": "Explicit none option; no bitmap required."
+    }
+  ],
+  "assets": [
+    {
+      "id": "wall_cream",
+      "state": "tile",
+      "kind": "tile",
+      "file": "wall_cream.png",
+      "source": "sources/wall_cream-source.png",
+      "source_crop": [
+        489,
+        137,
+        1116,
+        1181
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        627,
+        1044
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 627,
+        "h": 1044
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 0.6005747126436781,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "d5fd35c7051ac20f7d4621d2b105813be4913e18e366f13cfbf6651bd7a99935",
+      "fileSha256": "1c648d4c5e6f051f8996138a56cda07578ce133fba51ed46d2abc19594c5917d",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        20,
+        15
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 0.701,
+        "topBottomMeanAbsoluteRGB": 1.072
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 2.47,
+        "topBottomMeanAbsoluteRGB": 6.858
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "estimatedSourcePeriod": [
+        627,
+        261
+      ],
+      "slot": "wallpaper",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "omittedRegenerableProofMetadata": {
+        "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_cream-repeat-proof.png"
+      }
+    },
+    {
+      "id": "wall_mint",
+      "state": "tile",
+      "kind": "tile",
+      "file": "wall_mint.png",
+      "source": "sources/wall_mint-source.png",
+      "source_crop": [
+        169,
+        219,
+        1180,
+        1227
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1011,
+        1008
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1011,
+        "h": 1008
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.0029761904761905,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "c0732e2986d0759d6820a3357e5dda548356092ac99a42ae0ac206e9c0df8569",
+      "fileSha256": "49c0c4aac680e924fba6d08eb2635cd5567c70813b4b7a588c633bb54a7a9ca8",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        20,
+        15
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 1.078,
+        "topBottomMeanAbsoluteRGB": 2.183
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 35.739,
+        "topBottomMeanAbsoluteRGB": 5.93
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "estimatedSourcePeriod": [
+        337,
+        336
+      ],
+      "slot": "wallpaper",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "omittedRegenerableProofMetadata": {
+        "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_mint-repeat-proof.png"
+      }
+    },
+    {
+      "id": "wall_rose",
+      "state": "tile",
+      "kind": "tile",
+      "file": "wall_rose.png",
+      "source": "sources/wall_rose-source.png",
+      "source_crop": [
+        186,
+        128,
+        1022,
+        1143
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        836,
+        1015
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 836,
+        "h": 1015
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 0.8236453201970443,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "8d93ff296d38242f25776a6a112a31e9a4289c0b963ac95bc3aa4f5155e97b4d",
+      "fileSha256": "7847c5b7e5f8b14eac41d553323984b014ade0d98068178f6edb8ff1fa17854d",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        20,
+        15
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 1.317,
+        "topBottomMeanAbsoluteRGB": 2.301
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 12.409,
+        "topBottomMeanAbsoluteRGB": 5.625
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "estimatedSourcePeriod": [
+        418,
+        145
+      ],
+      "slot": "wallpaper",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "omittedRegenerableProofMetadata": {
+        "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_rose-repeat-proof.png"
+      }
+    },
+    {
+      "id": "wall_dots",
+      "state": "tile",
+      "kind": "tile",
+      "file": "wall_dots.png",
+      "source": "sources/wall_dots-source.png",
+      "source_crop": [
+        112,
+        94,
+        739,
+        1206
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        627,
+        1112
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 627,
+        "h": 1112
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 0.5638489208633094,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "3b6f5e959b1e841b35332ef4326d8791691546116561d55b29ddbabc8b4ad2ee",
+      "fileSha256": "4fb6b1c059db77f30898bbf1b00599e6ea7c507deb7608cebb7ffb527ab7ff17",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        16,
+        12
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 1.682,
+        "topBottomMeanAbsoluteRGB": 1.749
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 6.983,
+        "topBottomMeanAbsoluteRGB": 21.759
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "estimatedSourcePeriod": [
+        627,
+        278
+      ],
+      "slot": "wallpaper",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "omittedRegenerableProofMetadata": {
+        "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_dots-repeat-proof.png"
+      }
+    },
+    {
+      "id": "wall_brick",
+      "state": "tile",
+      "kind": "tile",
+      "file": "wall_brick.png",
+      "source": "sources/wall_brick-source.png",
+      "source_crop": [
+        312,
+        100,
+        894,
+        1110
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        582,
+        1010
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 582,
+        "h": 1010
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 0.5762376237623762,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "881e0faa807aa308ba6b48c61db18889be31aeeff99c80962c2c913304fbb3e1",
+      "fileSha256": "470c9e7d737d95f8dfb1a95351b131dbeb58287d778bb92868613e983a1f17a3",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        32,
+        16
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 5.047,
+        "topBottomMeanAbsoluteRGB": 4.363
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 30.933,
+        "topBottomMeanAbsoluteRGB": 59.101
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "estimatedSourcePeriod": [
+        582,
+        202
+      ],
+      "slot": "wallpaper",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "omittedRegenerableProofMetadata": {
+        "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_brick-repeat-proof.png"
+      }
+    },
+    {
+      "id": "wall_walnut",
+      "state": "tile",
+      "kind": "tile",
+      "file": "wall_walnut.png",
+      "source": "sources/wall_walnut-source.png",
+      "source_crop": [
+        60,
+        121,
+        1212,
+        905
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1152,
+        784
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1152,
+        "h": 784
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.469387755102041,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "75cc278b07d7fc60b91fe6c0feb244e10fd418faec8444a66cfa0b29b84f6256",
+      "fileSha256": "44f8cf02686c1324910c9a32c3a6958804e01722dd9bce3e81e1f736e8182a01",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        24,
+        26
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 3.656,
+        "topBottomMeanAbsoluteRGB": 2.111
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 14.305,
+        "topBottomMeanAbsoluteRGB": 8.277
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "estimatedSourcePeriod": [
+        384,
+        392
+      ],
+      "slot": "wallpaper",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "omittedRegenerableProofMetadata": {
+        "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_walnut-repeat-proof.png"
+      }
+    },
+    {
+      "id": "wall_stars",
+      "state": "tile",
+      "kind": "tile",
+      "file": "wall_stars.png",
+      "source": "sources/wall_stars-source.png",
+      "source_crop": [
+        113,
+        306,
+        923,
+        1168
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        810,
+        862
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 810,
+        "h": 862
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 0.9396751740139211,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "506511658573d9228a05c323ad8747034ac9de64988a81a105163a1925811e0a",
+      "fileSha256": "5f9af47573c40e15471a3fc95f2198079dda8cae8621127e9ee8bef31863db11",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        62,
+        46
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 2.168,
+        "topBottomMeanAbsoluteRGB": 3.011
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 4.244,
+        "topBottomMeanAbsoluteRGB": 4.519
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "estimatedSourcePeriod": [
+        405,
+        431
+      ],
+      "slot": "wallpaper",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "omittedRegenerableProofMetadata": {
+        "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/wall_stars-repeat-proof.png"
+      }
+    },
+    {
+      "id": "floor_checker",
+      "state": "tile",
+      "kind": "tile",
+      "file": "floor_checker.png",
+      "source": "sources/floor_checker-source.png",
+      "source_crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1254,
+        "h": 1254
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.0,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "cdd679d561606ab99acdf0d82c2721ae024ef7ca5578462da8373518cf3e3dd6",
+      "fileSha256": "3525a4b63f513091778f48198908db33eaa4745f5ae433f3371782d1327c8729",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        32,
+        32
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 2.207,
+        "topBottomMeanAbsoluteRGB": 2.972
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 2.207,
+        "topBottomMeanAbsoluteRGB": 2.972
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "estimatedSourcePeriod": [
+        1254,
+        1254
+      ],
+      "slot": "floor",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "omittedRegenerableProofMetadata": {
+        "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_checker-repeat-proof.png"
+      }
+    },
+    {
+      "id": "floor_planks",
+      "state": "tile",
+      "kind": "tile",
+      "file": "floor_planks.png",
+      "source": "sources/floor_planks-source.png",
+      "source_crop": [
+        2,
+        192,
+        1247,
+        925
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1245,
+        733
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1245,
+        "h": 733
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.6984993178717598,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "ea4134ef64b173eec199d8196e4dc73d39a6afcd4aeedf9d7970e4835b264c2f",
+      "fileSha256": "b299c7dd9a56c775c732dc6adad09ffebab33705abacd90a06e937bdbe042d5e",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        96,
+        24
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 3.985,
+        "topBottomMeanAbsoluteRGB": 6.059
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 4.778,
+        "topBottomMeanAbsoluteRGB": 71.911
+      },
+      "edgeSelection": "Lossless rectangle chosen by matching opposite 4px source strips; no edge blending, mirroring, repaint or synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "slot": "floor",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "omittedRegenerableProofMetadata": {
+        "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_planks-repeat-proof.png"
+      }
+    },
+    {
+      "id": "floor_mint",
+      "state": "tile",
+      "kind": "tile",
+      "file": "floor_mint.png",
+      "source": "sources/floor_mint-source.png",
+      "source_crop": [
+        75,
+        196,
+        1014,
+        1135
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        939,
+        939
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 939,
+        "h": 939
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.0,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "38ebee9b73b9ae2d5c501e2c0a57fd5b9a17cebcdfccef921b16feabe6cbec04",
+      "fileSha256": "4209d61aed6234be9cc80ba993688b02b60337d64639c4bad8bfc4d982ab6b44",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        32,
+        32
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 1.044,
+        "topBottomMeanAbsoluteRGB": 0.905
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 5.37,
+        "topBottomMeanAbsoluteRGB": 18.699
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "estimatedSourcePeriod": [
+        313,
+        313
+      ],
+      "slot": "floor",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "omittedRegenerableProofMetadata": {
+        "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_mint-repeat-proof.png"
+      }
+    },
+    {
+      "id": "floor_terrazzo",
+      "state": "tile",
+      "kind": "tile",
+      "file": "floor_terrazzo.png",
+      "source": "sources/floor_terrazzo-source.png",
+      "source_crop": [
+        6,
+        164,
+        1245,
+        1103
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1239,
+        939
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1239,
+        "h": 939
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.3194888178913737,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "363cc957d7903493fc6ce9f93ff17fb1de5f017f02c4cc0a0561d89afde6a05d",
+      "fileSha256": "0581adc2fba68b616f0d2ac593afa9a3d479490c603a166946f92eb19e4c4f3f",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        32,
+        32
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 4.118,
+        "topBottomMeanAbsoluteRGB": 4.326
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 10.178,
+        "topBottomMeanAbsoluteRGB": 9.116
+      },
+      "edgeSelection": "Lossless rectangle chosen by matching opposite 4px source strips; no edge blending, mirroring, repaint or synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "slot": "floor",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "omittedRegenerableProofMetadata": {
+        "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_terrazzo-repeat-proof.png"
+      }
+    },
+    {
+      "id": "floor_herringbone",
+      "state": "tile",
+      "kind": "tile",
+      "file": "floor_herringbone.png",
+      "source": "sources/floor_herringbone-source.png",
+      "source_crop": [
+        47,
+        185,
+        1109,
+        1229
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1062,
+        1044
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1062,
+        "h": 1044
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.0172413793103448,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "3ac434795478b4021e69e92e5c995f0e595d587977c50b9ec68b0dca7d93aa5a",
+      "fileSha256": "ca27f6e047168ac7b0f2fd302213a019274bb473cb866ac6903909ea90189d15",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        32,
+        32
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 13.742,
+        "topBottomMeanAbsoluteRGB": 10.624
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 21.011,
+        "topBottomMeanAbsoluteRGB": 21.344
+      },
+      "edgeSelection": "Lossless crop with whole-motif period estimated from source self-similarity, then low-difference edge phase. No blending/repaint/synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "estimatedSourcePeriod": [
+        531,
+        261
+      ],
+      "slot": "floor",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "omittedRegenerableProofMetadata": {
+        "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_herringbone-repeat-proof.png"
+      }
+    },
+    {
+      "id": "floor_marble",
+      "state": "tile",
+      "kind": "tile",
+      "file": "floor_marble.png",
+      "source": "sources/floor_marble-source.png",
+      "source_crop": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 1254,
+        "h": 1254
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.0,
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "sourceSha256": "6ee8ace630c31f7d6739c7108a675cd88f7402204b5931cf8b5f4b374e700dd4",
+      "fileSha256": "b3d8ceae17337c47dbbbb003fed320eff3ee31abfde482391679ce3b1aa71ac6",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "nominalMotifUnitFromLegacy": [
+        64,
+        64
+      ],
+      "repeatAxes": [
+        "x",
+        "y"
+      ],
+      "tileEdges": {
+        "leftRightMeanAbsoluteRGB": 3.98,
+        "topBottomMeanAbsoluteRGB": 7.243
+      },
+      "sourceEdges": {
+        "leftRightMeanAbsoluteRGB": 3.98,
+        "topBottomMeanAbsoluteRGB": 7.243
+      },
+      "edgeSelection": "Lossless rectangle chosen by matching opposite 4px source strips; no edge blending, mirroring, repaint or synthesis.",
+      "seamStatus": "Edge-score checked; native 2x2 repeat preview provided. Runtime visual repeat/density still requires review.",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "material-origin"
+      },
+      "slot": "floor",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "omittedRegenerableProofMetadata": {
+        "repeatProof": "/workspace/scratch/30a3201ff9cd/cafe-decor-bulk-v1/floor_marble-repeat-proof.png"
+      }
+    },
+    {
+      "id": "counter_walnut",
+      "state": "top",
+      "kind": "counter",
+      "file": "counter_walnut-top.png",
+      "source": "sources/counter_walnut-source.png",
+      "source_crop": [
+        7,
+        210,
+        1529,
+        382
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        1522,
+        172
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 1502,
+        "h": 152
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 8.848837209302326,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "1447675b7a8464482d752d899d67f3243e99cf24d843fd88100b723f3151ff86",
+      "fileSha256": "7d632f724303fc6305e6f34671709f3b74249852becde565232e174a0136a134",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 761.0,
+        "y": 161,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze.",
+      "slot": "counter",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]"
+    },
+    {
+      "id": "counter_walnut",
+      "state": "front",
+      "kind": "counter",
+      "file": "counter_walnut-front.png",
+      "source": "sources/counter_walnut-source.png",
+      "source_crop": [
+        377,
+        502,
+        1159,
+        911
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        782,
+        409
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 762,
+        "h": 389
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.9119804400977995,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "1447675b7a8464482d752d899d67f3243e99cf24d843fd88100b723f3151ff86",
+      "fileSha256": "fbbaadce726e821a09c3a2c91fc81aba4e2e5a079bdd2e56bcb817fd98055ad0",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 391.0,
+        "y": 398,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze.",
+      "slot": "counter",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]"
+    },
+    {
+      "id": "counter_marble",
+      "state": "top",
+      "kind": "counter",
+      "file": "counter_marble-top.png",
+      "source": "sources/counter_marble-source.png",
+      "source_crop": [
+        0,
+        179,
+        1536,
+        363
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        1536,
+        184
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 10,
+        "w": 1526,
+        "h": 164
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 8.347826086956522,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "39acc293b841bb5d84bb1962e867da3bfb7cfff0ab975aec8b72a4156afe744e",
+      "fileSha256": "8d503fe4d2b7778654b1104562cbe71692089e2cadf6d3999d51fce69fc11a01",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 768.0,
+        "y": 173,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze.",
+      "slot": "counter",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]"
+    },
+    {
+      "id": "counter_marble",
+      "state": "front",
+      "kind": "counter",
+      "file": "counter_marble-front.png",
+      "source": "sources/counter_marble-source.png",
+      "source_crop": [
+        334,
+        500,
+        1202,
+        920
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        868,
+        420
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 848,
+        "h": 400
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 2.066666666666667,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "39acc293b841bb5d84bb1962e867da3bfb7cfff0ab975aec8b72a4156afe744e",
+      "fileSha256": "8dacdbd6c7a753178dffbbfdb7c5dc4e5d754161f8bf12d3f482876398f5cb07",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 434.0,
+        "y": 409,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze.",
+      "slot": "counter",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]"
+    },
+    {
+      "id": "counter_pink",
+      "state": "top",
+      "kind": "counter",
+      "file": "counter_pink-top.png",
+      "source": "sources/counter_pink-source.png",
+      "source_crop": [
+        1,
+        152,
+        1535,
+        344
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        1534,
+        192
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 1514,
+        "h": 172
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 7.989583333333333,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "9a12538a56f22a497009c962853bb9a90b626b6d0a630033811b3a2a51eb2dc6",
+      "fileSha256": "185226a12c9a596a9d503d9ca820052357982dd701d2dd402fe12457d93b2501",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 767.0,
+        "y": 181,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze.",
+      "slot": "counter",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]"
+    },
+    {
+      "id": "counter_pink",
+      "state": "front",
+      "kind": "counter",
+      "file": "counter_pink-front.png",
+      "source": "sources/counter_pink-source.png",
+      "source_crop": [
+        301,
+        492,
+        1236,
+        925
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        935,
+        433
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 915,
+        "h": 413
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 2.159353348729792,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "9a12538a56f22a497009c962853bb9a90b626b6d0a630033811b3a2a51eb2dc6",
+      "fileSha256": "5cd1cea230936888266e5fecd97b71359ac4f80675322d94bf70987f3e1a3c80",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 467.5,
+        "y": 422,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze.",
+      "slot": "counter",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]"
+    },
+    {
+      "id": "counter_gold",
+      "state": "top",
+      "kind": "counter",
+      "file": "counter_gold-top.png",
+      "source": "sources/counter_gold-source.png",
+      "source_crop": [
+        0,
+        161,
+        1536,
+        312
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        1536,
+        151
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 10,
+        "w": 1520,
+        "h": 131
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 10.172185430463577,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "41a64a7d069b6f0e76825db802695a1d04986307f60a135f3ae7763d1f118112",
+      "fileSha256": "ea4bb90b1540f07b6af3ecad94b979cd056ea2c2ce2b7a29bd92c650105a7e94",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 768.0,
+        "y": 140,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze.",
+      "slot": "counter",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]"
+    },
+    {
+      "id": "counter_gold",
+      "state": "front",
+      "kind": "counter",
+      "file": "counter_gold-front.png",
+      "source": "sources/counter_gold-source.png",
+      "source_crop": [
+        337,
+        447,
+        1201,
+        888
+      ],
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "size": [
+        864,
+        441
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 844,
+        "h": 421
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 1.9591836734693877,
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "41a64a7d069b6f0e76825db802695a1d04986307f60a135f3ae7763d1f118112",
+      "fileSha256": "cdd4e9e9178cd7dd1ba0b45cdaa194cce3238f4afa5debd513cfc2f50a3cb232",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "anchor": {
+        "x": 432.0,
+        "y": 430,
+        "kind": "module-bottom-center"
+      },
+      "adaptation": "Top/front independent. Maintain native aspect; crop-repeat or scale uniformly. Counter front is wider than old 190:138 module; do not squeeze.",
+      "slot": "counter",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]"
+    },
+    {
+      "id": "sill_cactus",
+      "state": "default",
+      "kind": "sprite",
+      "file": "../decor-props/sprites/sill_cactus.png",
+      "source": "../decor-props/sources/sill_cactus-source.png",
+      "originalGeneratedSource": "../decor-props/sources/sill_cactus-source.png",
+      "source_crop": [
+        116,
+        149,
+        960,
+        1401
+      ],
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "sourceSize": [
+        1024,
+        1536
+      ],
+      "size": [
+        844,
+        1252
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 824,
+        "h": 1232
+      },
+      "sourceOpaqueBBox": [
+        126,
+        159,
+        950,
+        1391
+      ],
+      "bboxAlphaThreshold": ">128",
+      "paddingRequested": 10,
+      "paddingActual": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "nativeAspect": 0.6741214057507987,
+      "opaqueAspect": 0.6688311688311688,
+      "logicalEnvelope": [
+        6,
+        9
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceSha256": "6668d978a5f9c44a9dd83747334821615419bee741d6da8c8bccfb577fcad517",
+      "fileSha256": "f3d93453e09ef9c78066545de614ac6eeeff9ffc44d10fa401a64021e446f908",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "notes": [
+        "Original selected. The apparent brown preview background is RGB under alpha=0; alpha-composited QA confirms no visible exterior halo. Optional imagegen correction retained unused. Maximum authored alpha is 254/255, preserved unchanged."
+      ],
+      "alpha": {
+        "mode": "RGBA",
+        "zeroPixels": 946713,
+        "partialPixels": 626151,
+        "opaque255Pixels": 0,
+        "thresholdUsedForMeasurementOnly": true,
+        "pixelValuesUnmodified": true,
+        "excludedByRectangularCrop": {
+          "nonzeroPixels": 2912,
+          "maxAlpha": 1,
+          "note": "Immutable full source retains all values outside delivery crop."
+        }
+      },
+      "foot": [
+        397.0,
+        1241.0
+      ],
+      "anchor": {
+        "x": 397.0,
+        "y": 1241.0,
+        "kind": "pot-base-contact"
+      },
+      "renderContract": {
+        "preserveNativeAspect": true,
+        "collisionFootprintUnchanged": true,
+        "runtimeLightingSeparate": true,
+        "worldAndShopUseSameArt": true,
+        "renderOverflow": "Not integrated. Fit uniformly inside logical envelope; any later overflow must be declared without changing footprint."
+      },
+      "slot": "sill"
+    },
+    {
+      "id": "sill_tulips",
+      "state": "default",
+      "kind": "sprite",
+      "file": "../decor-props/sprites/sill_tulips.png",
+      "source": "../decor-props/sources/sill_tulips-source.png",
+      "originalGeneratedSource": "../decor-props/sources/sill_tulips-source.png",
+      "source_crop": [
+        143,
+        173,
+        1046,
+        1197
+      ],
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "sourceSize": [
+        1182,
+        1330
+      ],
+      "size": [
+        903,
+        1024
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 883,
+        "h": 1004
+      },
+      "sourceOpaqueBBox": [
+        153,
+        183,
+        1036,
+        1187
+      ],
+      "bboxAlphaThreshold": ">128",
+      "paddingRequested": 10,
+      "paddingActual": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "nativeAspect": 0.8818359375,
+      "opaqueAspect": 0.8794820717131474,
+      "logicalEnvelope": [
+        8,
+        9
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "3ef1c72b8cb4794f09ad7b2c276b366c7dc2e74e66777406a8c8995d877ea98c",
+      "fileSha256": "1945ecad3f33e6785057c84f3ceb3876051e0f7bcdb76c35df0ff972f1859e4d",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "notes": [
+        "Exactly three tulips are present; source authored three broad leaves rather than requested two."
+      ],
+      "alpha": {
+        "mode": "RGBA",
+        "zeroPixels": 984692,
+        "partialPixels": 585045,
+        "opaque255Pixels": 2323,
+        "thresholdUsedForMeasurementOnly": true,
+        "pixelValuesUnmodified": true,
+        "excludedByRectangularCrop": {
+          "nonzeroPixels": 1521,
+          "maxAlpha": 1,
+          "note": "Immutable full source retains all values outside delivery crop."
+        }
+      },
+      "foot": [
+        459.0,
+        1013.0
+      ],
+      "anchor": {
+        "x": 459.0,
+        "y": 1013.0,
+        "kind": "pot-base-contact"
+      },
+      "renderContract": {
+        "preserveNativeAspect": true,
+        "collisionFootprintUnchanged": true,
+        "runtimeLightingSeparate": true,
+        "worldAndShopUseSameArt": true,
+        "renderOverflow": "Not integrated. Fit uniformly inside logical envelope; any later overflow must be declared without changing footprint."
+      },
+      "slot": "sill"
+    },
+    {
+      "id": "sill_bonsai",
+      "state": "default",
+      "kind": "sprite",
+      "file": "../decor-props/sprites/sill_bonsai.png",
+      "source": "../decor-props/sources/sill_bonsai-source.png",
+      "originalGeneratedSource": "../decor-props/sources/sill_bonsai-source.png",
+      "source_crop": [
+        157,
+        36,
+        1321,
+        1050
+      ],
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "sourceSize": [
+        1448,
+        1086
+      ],
+      "size": [
+        1164,
+        1014
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 1144,
+        "h": 994
+      },
+      "sourceOpaqueBBox": [
+        167,
+        46,
+        1311,
+        1040
+      ],
+      "bboxAlphaThreshold": ">128",
+      "paddingRequested": 10,
+      "paddingActual": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "nativeAspect": 1.1479289940828403,
+      "opaqueAspect": 1.1509054325955734,
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "7d174347a6d26dd2897042de1c0c5f71ba1ea37ca0ec1dc5f925b87ed9727b8e",
+      "fileSha256": "bae5edb5be2dd67e04790f941ae1154e33a18abbddd662aa61617d030a16edcb",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "notes": [
+        "Native content is less wide than nominal 12:9 target. Preserve aspect and fit uniformly."
+      ],
+      "alpha": {
+        "mode": "RGBA",
+        "zeroPixels": 958762,
+        "partialPixels": 612949,
+        "opaque255Pixels": 817,
+        "thresholdUsedForMeasurementOnly": true,
+        "pixelValuesUnmodified": true,
+        "excludedByRectangularCrop": {
+          "nonzeroPixels": 2252,
+          "maxAlpha": 1,
+          "note": "Immutable full source retains all values outside delivery crop."
+        }
+      },
+      "foot": [
+        566.5,
+        1003.0
+      ],
+      "anchor": {
+        "x": 566.5,
+        "y": 1003.0,
+        "kind": "pot-base-contact"
+      },
+      "renderContract": {
+        "preserveNativeAspect": true,
+        "collisionFootprintUnchanged": true,
+        "runtimeLightingSeparate": true,
+        "worldAndShopUseSameArt": true,
+        "renderOverflow": "Not integrated. Fit uniformly inside logical envelope; any later overflow must be declared without changing footprint."
+      },
+      "slot": "sill"
+    },
+    {
+      "id": "ceiling_lights",
+      "state": "unlit",
+      "kind": "sprite",
+      "file": "../decor-props/sprites/ceiling_lights.png",
+      "source": "../decor-props/sources/ceiling_lights-source.png",
+      "originalGeneratedSource": "../decor-props/sources/ceiling_lights-source.png",
+      "source_crop": [
+        41,
+        189,
+        2079,
+        576
+      ],
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "sourceSize": [
+        2120,
+        742
+      ],
+      "size": [
+        2038,
+        387
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 2018,
+        "h": 367
+      },
+      "sourceOpaqueBBox": [
+        51,
+        199,
+        2069,
+        566
+      ],
+      "bboxAlphaThreshold": ">128",
+      "paddingRequested": 10,
+      "paddingActual": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "nativeAspect": 5.2661498708010335,
+      "opaqueAspect": 5.498637602179836,
+      "logicalEnvelope": [
+        64,
+        14
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "fdfa3cd032a3692c4de9824ba28f448c1db8bf7d3cb32a017b34c19725315066",
+      "fileSha256": "cb1bdcc96d6de392e255a4625232fec248bba60d5d8a20c9677f09bcd0a02845",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "notes": [
+        "Four unlit cream-glass bulbs. Strong white spots are painted glass reflections, not exterior emission. Complete hanging endpoints. Native sag is shallower than nominal 64:14 target."
+      ],
+      "alpha": {
+        "mode": "RGBA",
+        "zeroPixels": 1382557,
+        "partialPixels": 188831,
+        "opaque255Pixels": 1652,
+        "thresholdUsedForMeasurementOnly": true,
+        "pixelValuesUnmodified": true,
+        "excludedByRectangularCrop": {
+          "nonzeroPixels": 1106,
+          "maxAlpha": 1,
+          "note": "Immutable full source retains all values outside delivery crop."
+        }
+      },
+      "top": [
+        1019.0,
+        10.0
+      ],
+      "anchor": {
+        "x": 1019.0,
+        "y": 10.0,
+        "kind": "ceiling-top-center"
+      },
+      "renderContract": {
+        "preserveNativeAspect": true,
+        "collisionFootprintUnchanged": true,
+        "runtimeLightingSeparate": true,
+        "worldAndShopUseSameArt": true,
+        "renderOverflow": "Not integrated. Fit uniformly inside logical envelope; any later overflow must be declared without changing footprint."
+      },
+      "slot": "ceiling"
+    },
+    {
+      "id": "ceiling_vines",
+      "state": "default",
+      "kind": "sprite",
+      "file": "../decor-props/sprites/ceiling_vines.png",
+      "source": "../decor-props/sources/ceiling_vines-source.png",
+      "originalGeneratedSource": "../decor-props/sources/ceiling_vines-source.png",
+      "source_crop": [
+        6,
+        101,
+        2169,
+        648
+      ],
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "size": [
+        2163,
+        547
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 2143,
+        "h": 527
+      },
+      "sourceOpaqueBBox": [
+        16,
+        111,
+        2159,
+        638
+      ],
+      "bboxAlphaThreshold": ">128",
+      "paddingRequested": 10,
+      "paddingActual": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "nativeAspect": 3.954296160877514,
+      "opaqueAspect": 4.066413662239089,
+      "logicalEnvelope": [
+        64,
+        18
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "e7b0f6b0d5be465f1b26c0647c2b7d106d9c4044d294f46d3d731e5017e6e6e5",
+      "fileSha256": "6ca7f14c796cae17abae502559a2b4ce186bd847b31c06d5d7f6cd0570ed795a",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "notes": [
+        "Overhead vine trim only; no pot. Exact repeatability of vine endpoints was not requested or certified."
+      ],
+      "alpha": {
+        "mode": "RGBA",
+        "zeroPixels": 1043543,
+        "partialPixels": 528634,
+        "opaque255Pixels": 351,
+        "thresholdUsedForMeasurementOnly": true,
+        "pixelValuesUnmodified": true,
+        "excludedByRectangularCrop": {
+          "nonzeroPixels": 8611,
+          "maxAlpha": 1,
+          "note": "Immutable full source retains all values outside delivery crop."
+        }
+      },
+      "top": [
+        1081.5,
+        10.0
+      ],
+      "anchor": {
+        "x": 1081.5,
+        "y": 10.0,
+        "kind": "ceiling-top-center"
+      },
+      "renderContract": {
+        "preserveNativeAspect": true,
+        "collisionFootprintUnchanged": true,
+        "runtimeLightingSeparate": true,
+        "worldAndShopUseSameArt": true,
+        "renderOverflow": "Not integrated. Fit uniformly inside logical envelope; any later overflow must be declared without changing footprint."
+      },
+      "slot": "ceiling"
+    },
+    {
+      "id": "ceiling_pendants",
+      "state": "unlit",
+      "kind": "sprite",
+      "file": "../decor-props/sprites/ceiling_pendants.png",
+      "source": "../decor-props/sources/ceiling_pendants-source.png",
+      "originalGeneratedSource": "../decor-props/sources/ceiling_pendants-source.png",
+      "source_crop": [
+        95,
+        0,
+        872,
+        1554
+      ],
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "size": [
+        777,
+        1554
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 0,
+        "w": 757,
+        "h": 1544
+      },
+      "sourceOpaqueBBox": [
+        105,
+        0,
+        862,
+        1544
+      ],
+      "bboxAlphaThreshold": ">128",
+      "paddingRequested": 10,
+      "paddingActual": [
+        10,
+        0,
+        10,
+        10
+      ],
+      "nativeAspect": 0.5,
+      "opaqueAspect": 0.49028497409326427,
+      "logicalEnvelope": [
+        9,
+        15
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "e5cef16796df3931976c1460cafc4987cd16780d1f2c27337fb3c3499b72b599",
+      "fileSha256": "8dd82a30adc4042adaff1c08f770c4b57639dd2ead0ec9195b73b81b1392c6e1",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "notes": [
+        "Cord reaches source top boundary intentionally usable as ceiling attachment; no upper transparent margin exists in source."
+      ],
+      "alpha": {
+        "mode": "RGBA",
+        "zeroPixels": 1241199,
+        "partialPixels": 328855,
+        "opaque255Pixels": 1995,
+        "thresholdUsedForMeasurementOnly": true,
+        "pixelValuesUnmodified": true,
+        "excludedByRectangularCrop": {
+          "nonzeroPixels": 1,
+          "maxAlpha": 1,
+          "note": "Immutable full source retains all values outside delivery crop."
+        }
+      },
+      "top": [
+        388.5,
+        0.0
+      ],
+      "anchor": {
+        "x": 388.5,
+        "y": 0.0,
+        "kind": "ceiling-top-center"
+      },
+      "renderContract": {
+        "preserveNativeAspect": true,
+        "collisionFootprintUnchanged": true,
+        "runtimeLightingSeparate": true,
+        "worldAndShopUseSameArt": true,
+        "renderOverflow": "Not integrated. Fit uniformly inside logical envelope; any later overflow must be declared without changing footprint."
+      },
+      "slot": "ceiling"
+    },
+    {
+      "id": "ceiling_chandelier",
+      "state": "unlit",
+      "kind": "sprite",
+      "file": "../decor-props/sprites/ceiling_chandelier.png",
+      "source": "../decor-props/sources/ceiling_chandelier-source.png",
+      "originalGeneratedSource": "../decor-props/sources/ceiling_chandelier-source.png",
+      "source_crop": [
+        38,
+        0,
+        1581,
+        971
+      ],
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "sourceSize": [
+        1619,
+        971
+      ],
+      "size": [
+        1543,
+        971
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 0,
+        "w": 1523,
+        "h": 971
+      },
+      "sourceOpaqueBBox": [
+        48,
+        0,
+        1571,
+        971
+      ],
+      "bboxAlphaThreshold": ">128",
+      "paddingRequested": 10,
+      "paddingActual": [
+        10,
+        0,
+        10,
+        0
+      ],
+      "nativeAspect": 1.5890834191555099,
+      "opaqueAspect": 1.568486096807415,
+      "logicalEnvelope": [
+        25,
+        15
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "032592f69928c5f42d2e2c29cd5ab732952a184da845e761912e5affd4bf6123",
+      "fileSha256": "e5faeefc230fdf53c3f8eaeecc08e1f246af91cad83728e423a9cd07318f354d",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "notes": [
+        "Five unlit candles and five crystal drops. Source reaches top and bottom boundaries: ceiling mount top and lowest crystal tip lack transparent margin and may need later integration review. No repair or reconstructed pixels added."
+      ],
+      "alpha": {
+        "mode": "RGBA",
+        "zeroPixels": 1149483,
+        "partialPixels": 422205,
+        "opaque255Pixels": 361,
+        "thresholdUsedForMeasurementOnly": true,
+        "pixelValuesUnmodified": true,
+        "excludedByRectangularCrop": {
+          "nonzeroPixels": 74,
+          "maxAlpha": 1,
+          "note": "Immutable full source retains all values outside delivery crop."
+        }
+      },
+      "top": [
+        771.5,
+        0.0
+      ],
+      "anchor": {
+        "x": 771.5,
+        "y": 0.0,
+        "kind": "ceiling-top-center"
+      },
+      "renderContract": {
+        "preserveNativeAspect": true,
+        "collisionFootprintUnchanged": true,
+        "runtimeLightingSeparate": true,
+        "worldAndShopUseSameArt": true,
+        "renderOverflow": "Not integrated. Fit uniformly inside logical envelope; any later overflow must be declared without changing footprint."
+      },
+      "slot": "ceiling"
+    },
+    {
+      "id": "rug_red",
+      "state": "default",
+      "kind": "sprite",
+      "file": "../decor-props/sprites/rug_red.png",
+      "source": "../decor-props/sources/rug_red-source.png",
+      "originalGeneratedSource": "../decor-props/sources/rug_red-source.png",
+      "source_crop": [
+        43,
+        85,
+        1556,
+        898
+      ],
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "sourceSize": [
+        1599,
+        984
+      ],
+      "size": [
+        1513,
+        813
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 1493,
+        "h": 793
+      },
+      "sourceOpaqueBBox": [
+        53,
+        95,
+        1546,
+        888
+      ],
+      "bboxAlphaThreshold": ">128",
+      "paddingRequested": 10,
+      "paddingActual": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "nativeAspect": 1.861008610086101,
+      "opaqueAspect": 1.8827238335435057,
+      "logicalEnvelope": [
+        26,
+        16
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "eb1ee140cc58cbfbb164d5af0bbc4ae0d57f3c869ed1527690c8e7c3542f8cc5",
+      "fileSha256": "5e49328961d81c0e3a060449e1dbc8ed27c91f5b75d3a344f936a3eb301210dc",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "notes": [
+        "Fringe authored at left/right ends rather than requested top/bottom ends. Rectangular overhead material retained without rotation or stretching."
+      ],
+      "alpha": {
+        "mode": "RGBA",
+        "zeroPixels": 394703,
+        "partialPixels": 1178531,
+        "opaque255Pixels": 182,
+        "thresholdUsedForMeasurementOnly": true,
+        "pixelValuesUnmodified": true,
+        "excludedByRectangularCrop": {
+          "nonzeroPixels": 5,
+          "maxAlpha": 1,
+          "note": "Immutable full source retains all values outside delivery crop."
+        }
+      },
+      "center": [
+        756.5,
+        406.5
+      ],
+      "anchor": {
+        "x": 756.5,
+        "y": 406.5,
+        "kind": "floor-center"
+      },
+      "renderContract": {
+        "preserveNativeAspect": true,
+        "collisionFootprintUnchanged": true,
+        "runtimeLightingSeparate": true,
+        "worldAndShopUseSameArt": true,
+        "renderOverflow": "Not integrated. Fit uniformly inside logical envelope; any later overflow must be declared without changing footprint."
+      },
+      "slot": "rug"
+    },
+    {
+      "id": "rug_blue",
+      "state": "default",
+      "kind": "sprite",
+      "file": "../decor-props/sprites/rug_blue.png",
+      "source": "../decor-props/sources/rug_blue-source.png",
+      "originalGeneratedSource": "../decor-props/sources/rug_blue-source.png",
+      "source_crop": [
+        67,
+        121,
+        1532,
+        840
+      ],
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "sourceSize": [
+        1599,
+        984
+      ],
+      "size": [
+        1465,
+        719
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 1445,
+        "h": 699
+      },
+      "sourceOpaqueBBox": [
+        77,
+        131,
+        1522,
+        830
+      ],
+      "bboxAlphaThreshold": ">128",
+      "paddingRequested": 10,
+      "paddingActual": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "nativeAspect": 2.0375521557719054,
+      "opaqueAspect": 2.067238912732475,
+      "logicalEnvelope": [
+        26,
+        16
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "cfe0f568078a321addb9c6b7cababc138b481aa8e278107dc72fc7ca6803d15f",
+      "fileSha256": "38d98e266817a9429fde1d75c124458fbd47f8076d4dcee03f5cb678ca05491b",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "notes": [
+        "Fringe authored at left/right ends rather than requested top/bottom ends. Rectangular overhead material retained without rotation or stretching."
+      ],
+      "alpha": {
+        "mode": "RGBA",
+        "zeroPixels": 554165,
+        "partialPixels": 1019184,
+        "opaque255Pixels": 67,
+        "thresholdUsedForMeasurementOnly": true,
+        "pixelValuesUnmodified": true,
+        "excludedByRectangularCrop": {
+          "nonzeroPixels": 156,
+          "maxAlpha": 1,
+          "note": "Immutable full source retains all values outside delivery crop."
+        }
+      },
+      "center": [
+        732.5,
+        359.5
+      ],
+      "anchor": {
+        "x": 732.5,
+        "y": 359.5,
+        "kind": "floor-center"
+      },
+      "renderContract": {
+        "preserveNativeAspect": true,
+        "collisionFootprintUnchanged": true,
+        "runtimeLightingSeparate": true,
+        "worldAndShopUseSameArt": true,
+        "renderOverflow": "Not integrated. Fit uniformly inside logical envelope; any later overflow must be declared without changing footprint."
+      },
+      "slot": "rug"
+    },
+    {
+      "id": "rug_round",
+      "state": "default",
+      "kind": "sprite",
+      "file": "../decor-props/sprites/rug_round.png",
+      "source": "../decor-props/sources/rug_round-source.png",
+      "originalGeneratedSource": "../decor-props/sources/rug_round-source.png",
+      "source_crop": [
+        32,
+        52,
+        1565,
+        934
+      ],
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "sourceSize": [
+        1599,
+        984
+      ],
+      "size": [
+        1533,
+        882
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 1513,
+        "h": 862
+      },
+      "sourceOpaqueBBox": [
+        42,
+        62,
+        1555,
+        924
+      ],
+      "bboxAlphaThreshold": ">128",
+      "paddingRequested": 10,
+      "paddingActual": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "nativeAspect": 1.7380952380952381,
+      "opaqueAspect": 1.7552204176334107,
+      "logicalEnvelope": [
+        26,
+        16
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "29ed68a92649b02ac0372a5059b4c8ca9cd0d9a321d48ae616cd84dbb7630542",
+      "fileSha256": "b3b7feb7883588e23dd545205221af5790b3cf98014e6f8cfec1ef15fda16e31",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "notes": [
+        "Oval braided rug preserved at its native aspect; fit uniformly."
+      ],
+      "alpha": {
+        "mode": "RGBA",
+        "zeroPixels": 490089,
+        "partialPixels": 1082774,
+        "opaque255Pixels": 553,
+        "thresholdUsedForMeasurementOnly": true,
+        "pixelValuesUnmodified": true,
+        "excludedByRectangularCrop": {
+          "nonzeroPixels": 782,
+          "maxAlpha": 1,
+          "note": "Immutable full source retains all values outside delivery crop."
+        }
+      },
+      "center": [
+        766.5,
+        441.0
+      ],
+      "anchor": {
+        "x": 766.5,
+        "y": 441.0,
+        "kind": "floor-center"
+      },
+      "renderContract": {
+        "preserveNativeAspect": true,
+        "collisionFootprintUnchanged": true,
+        "runtimeLightingSeparate": true,
+        "worldAndShopUseSameArt": true,
+        "renderOverflow": "Not integrated. Fit uniformly inside logical envelope; any later overflow must be declared without changing footprint."
+      },
+      "slot": "rug"
+    },
+    {
+      "id": "neon_cafe",
+      "state": "unlit",
+      "kind": "sprite",
+      "file": "../decor-props/sprites/neon_cafe.png",
+      "source": "../decor-props/sources/neon_cafe-source.png",
+      "originalGeneratedSource": "../decor-props/sources/neon_cafe-source.png",
+      "source_crop": [
+        41,
+        154,
+        2132,
+        538
+      ],
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "size": [
+        2091,
+        384
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 2071,
+        "h": 364
+      },
+      "sourceOpaqueBBox": [
+        51,
+        164,
+        2122,
+        528
+      ],
+      "bboxAlphaThreshold": ">128",
+      "paddingRequested": 10,
+      "paddingActual": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "nativeAspect": 5.4453125,
+      "opaqueAspect": 5.68956043956044,
+      "logicalEnvelope": [
+        42,
+        14
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "4e062f6985e50aaed6ccb013ccec6be4ca70b59cebc77ac63bdb3822f54cab60",
+      "fileSha256": "42b70c9ce411624450ee3f54a0a320a8cdbc46335dd99412478ab0388ad8cd1b",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "notes": [
+        "Blank center confirmed: no letters, symbol or glass tube. The generated mounting body is substantially slimmer than nominal 3:1; preserve native aspect and review runtime text fit rather than squeezing."
+      ],
+      "alpha": {
+        "mode": "RGBA",
+        "zeroPixels": 845297,
+        "partialPixels": 727088,
+        "opaque255Pixels": 143,
+        "thresholdUsedForMeasurementOnly": true,
+        "pixelValuesUnmodified": true,
+        "excludedByRectangularCrop": {
+          "nonzeroPixels": 2258,
+          "maxAlpha": 1,
+          "note": "Immutable full source retains all values outside delivery crop."
+        }
+      },
+      "center": [
+        1045.5,
+        192.0
+      ],
+      "anchor": {
+        "x": 1045.5,
+        "y": 192.0,
+        "kind": "wall-center"
+      },
+      "renderContract": {
+        "preserveNativeAspect": true,
+        "collisionFootprintUnchanged": true,
+        "runtimeLightingSeparate": true,
+        "worldAndShopUseSameArt": true,
+        "renderOverflow": "Not integrated. Fit uniformly inside logical envelope; any later overflow must be declared without changing footprint."
+      },
+      "slot": "neon"
+    },
+    {
+      "id": "neon_heart",
+      "state": "unlit",
+      "kind": "sprite",
+      "file": "../decor-props/sprites/neon_heart.png",
+      "source": "../decor-props/sources/neon_heart-source.png",
+      "originalGeneratedSource": "../decor-props/sources/neon_heart-source.png",
+      "source_crop": [
+        159,
+        205,
+        1095,
+        1046
+      ],
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "size": [
+        936,
+        841
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 916,
+        "h": 821
+      },
+      "sourceOpaqueBBox": [
+        169,
+        215,
+        1085,
+        1036
+      ],
+      "bboxAlphaThreshold": ">128",
+      "paddingRequested": 10,
+      "paddingActual": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "nativeAspect": 1.112960760998811,
+      "opaqueAspect": 1.1157125456760049,
+      "logicalEnvelope": [
+        8,
+        8
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "ae1d6889bc67372a42fb1da291188884bcb83aa8a660b30ea724764b33aa67ec",
+      "fileSha256": "858d22942fb29332f5074dc292c5f6832ab634c217cf8ec43361818d4fe37897",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "notes": [
+        "Hollow heart interior has genuine alpha. Tube reflections are authored highlights; runtime glow remains separate."
+      ],
+      "alpha": {
+        "mode": "RGBA",
+        "zeroPixels": 1285265,
+        "partialPixels": 286348,
+        "opaque255Pixels": 903,
+        "thresholdUsedForMeasurementOnly": true,
+        "pixelValuesUnmodified": true,
+        "excludedByRectangularCrop": {
+          "nonzeroPixels": 486,
+          "maxAlpha": 1,
+          "note": "Immutable full source retains all values outside delivery crop."
+        }
+      },
+      "center": [
+        468.0,
+        420.5
+      ],
+      "anchor": {
+        "x": 468.0,
+        "y": 420.5,
+        "kind": "wall-center"
+      },
+      "renderContract": {
+        "preserveNativeAspect": true,
+        "collisionFootprintUnchanged": true,
+        "runtimeLightingSeparate": true,
+        "worldAndShopUseSameArt": true,
+        "renderOverflow": "Not integrated. Fit uniformly inside logical envelope; any later overflow must be declared without changing footprint."
+      },
+      "slot": "neon"
+    },
+    {
+      "id": "neon_cup",
+      "state": "unlit",
+      "kind": "sprite",
+      "file": "../decor-props/sprites/neon_cup.png",
+      "source": "../decor-props/sources/neon_cup-source.png",
+      "originalGeneratedSource": "../decor-props/sources/neon_cup-source.png",
+      "source_crop": [
+        48,
+        43,
+        1177,
+        1242
+      ],
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "sourceSize": [
+        1190,
+        1322
+      ],
+      "size": [
+        1129,
+        1199
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 1109,
+        "h": 1179
+      },
+      "sourceOpaqueBBox": [
+        58,
+        53,
+        1167,
+        1232
+      ],
+      "bboxAlphaThreshold": ">128",
+      "paddingRequested": 10,
+      "paddingActual": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "nativeAspect": 0.9416180150125104,
+      "opaqueAspect": 0.9406276505513147,
+      "logicalEnvelope": [
+        9,
+        10
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "858ed4c0175d0782bcd887059cc88a694e5813c4cf1be99bdbff75b172ebd1b4",
+      "fileSha256": "bc40d435da176c84ac07c13f67aa9019b1c8a63db8536cb3e9fad37444da2ea4",
+      "losslessCropVerified": true,
+      "status": "candidate_pending_integration_review",
+      "notes": [
+        "Three steam curls, right handle, hollow cup/saucer with genuine alpha. Tube reflections are authored highlights; runtime glow remains separate."
+      ],
+      "alpha": {
+        "mode": "RGBA",
+        "zeroPixels": 1072425,
+        "partialPixels": 499034,
+        "opaque255Pixels": 1721,
+        "thresholdUsedForMeasurementOnly": true,
+        "pixelValuesUnmodified": true,
+        "excludedByRectangularCrop": {
+          "nonzeroPixels": 47,
+          "maxAlpha": 1,
+          "note": "Immutable full source retains all values outside delivery crop."
+        }
+      },
+      "center": [
+        564.5,
+        599.5
+      ],
+      "anchor": {
+        "x": 564.5,
+        "y": 599.5,
+        "kind": "wall-center"
+      },
+      "renderContract": {
+        "preserveNativeAspect": true,
+        "collisionFootprintUnchanged": true,
+        "runtimeLightingSeparate": true,
+        "worldAndShopUseSameArt": true,
+        "renderOverflow": "Not integrated. Fit uniformly inside logical envelope; any later overflow must be declared without changing footprint."
+      },
+      "slot": "neon"
+    }
+  ],
+  "aliases": [
+    {
+      "id": "counter_oak",
+      "state": "top",
+      "file": "../../../../public/art/generated/main-v1/cabinet-top.png",
+      "source": "../../../../public/art/generated/main-v1/cabinet-top.png",
+      "source_crop": [
+        0,
+        0,
+        580,
+        60
+      ],
+      "size": [
+        580,
+        60
+      ],
+      "status": "reuse_candidate_pending_integration_review",
+      "fileSha256": "118756f1d6200e6979579fe8e8e0cb252b7f63499c830a84e4347078f77e56b5",
+      "slot": "counter",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 580,
+        "h": 60
+      },
+      "bboxAlphaThreshold": ">128",
+      "sourceSize": [
+        580,
+        60
+      ],
+      "nativeAspect": 9.666666666666666,
+      "alphaExtrema": [
+        251,
+        253
+      ],
+      "sourceSha256": "118756f1d6200e6979579fe8e8e0cb252b7f63499c830a84e4347078f77e56b5",
+      "losslessCropVerified": true,
+      "kind": "counter-module",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "module-origin"
+      },
+      "notes": [
+        "Existing oak cabinet art reuse candidate. Preserve native aspect; integration geometry remains unvalidated."
+      ]
+    },
+    {
+      "id": "counter_oak",
+      "state": "front",
+      "file": "../../../../public/art/generated/main-v1/cabinet-front.png",
+      "source": "../../../../public/art/generated/main-v1/cabinet-front.png",
+      "source_crop": [
+        0,
+        0,
+        190,
+        138
+      ],
+      "size": [
+        190,
+        138
+      ],
+      "status": "reuse_candidate_pending_integration_review",
+      "fileSha256": "ab1bc35048d20990612ffcffefcf556ead17fe647f429f2c079a1e5be1e5dd54",
+      "slot": "counter",
+      "sourceCropConvention": "[left, top, right-exclusive, bottom-exclusive]",
+      "bbox": {
+        "x": 0,
+        "y": 0,
+        "w": 190,
+        "h": 138
+      },
+      "bboxAlphaThreshold": ">128",
+      "sourceSize": [
+        190,
+        138
+      ],
+      "nativeAspect": 1.3768115942028984,
+      "alphaExtrema": [
+        252,
+        253
+      ],
+      "sourceSha256": "ab1bc35048d20990612ffcffefcf556ead17fe647f429f2c079a1e5be1e5dd54",
+      "losslessCropVerified": true,
+      "kind": "counter-module",
+      "anchor": {
+        "x": 0,
+        "y": 0,
+        "kind": "module-origin"
+      },
+      "notes": [
+        "Existing oak cabinet art reuse candidate. Preserve native aspect; integration geometry remains unvalidated."
+      ]
+    }
+  ],
+  "inputManifests": [
+    {
+      "file": "materials-manifest.json",
+      "sha256": "94133b0e039da8bd4622db4185c12ec14a547cac82fc63376759d537515c420e"
+    },
+    {
+      "file": "../decor-props/manifest.json",
+      "sha256": "f2e0f38ead31b1d5620acccee9a7a26009ba1ff3f5dd5ad4034653ff8bebfe45"
+    }
+  ],
+  "catalog": {
+    "file": "../../../../docs/pixel-depth/BULK-ASSET-CATALOG.json",
+    "sha256": "2737331090e06112aa28236196bcf85fe7810be7fa805a59d046599fae1fed08"
+  },
+  "processing": "Built-in imagegen for substantive art. Only lossless rectangular crops and unscaled repeat-proof packing; no recolor, redraw, alpha cleanup or resizing.",
+  "knownLimitations": [
+    "Tiles are repeat candidates, not guaranteed mathematically seamless. Herringbone and marble especially need runtime seam/density review; source periods and native 2x2 proofs are provided.",
+    "Use uniform fitting and deliberate material world scale. Nominal legacy motif dimensions are not instructions to squeeze full material crops.",
+    "Counter tops/fronts are independent modules with native ratios different from legacy envelopes; geometry adaptation remains pending.",
+    "Chandelier reaches source top and bottom; pendant cord reaches top. These are source-edge limitations, not crop-induced truncation.",
+    "Blank neon_cafe frame is slimmer than nominal 3:1; dynamic text remains separate. Red/blue rugs have left/right fringe.",
+    "Fine low-alpha fringe is preserved inside rectangles. Full immutable source retains alpha=1 outlier pixels outside some prop crops.",
+    "All world/shop consistency, scale, z-order, animation/glow layers and runtime visual checks remain integration tasks."
+  ]
+}

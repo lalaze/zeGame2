@@ -1,0 +1,413 @@
+{
+  "family": "server-style2",
+  "roles": [
+    "server"
+  ],
+  "hairStyle": 2,
+  "status": "candidate_pending_render_review",
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "rowBoundaries": [
+    0,
+    426,
+    836,
+    1254
+  ],
+  "bboxAlphaThreshold": "alpha>128 not all-nonzero alpha",
+  "frames": [
+    {
+      "domain": "parameter",
+      "id": "server-style2",
+      "state": "down-stand",
+      "direction": "down",
+      "pose": "stand",
+      "status": "candidate_pending_render_review",
+      "file": "down-stand.png",
+      "source": "source.png",
+      "source_crop": [
+        119,
+        17,
+        329,
+        421
+      ],
+      "size": [
+        210,
+        404
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 194,
+        "h": 388
+      },
+      "foot": {
+        "x": 105.0,
+        "y": 395
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.17998819250033327,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "036c1cc439d704e6d93bde72e99788c1c32da90a90b7e95c32d8299da814ef40",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "server-style2",
+      "state": "down-stepA",
+      "direction": "down",
+      "pose": "stepA",
+      "status": "review_required",
+      "file": "down-stepA.png",
+      "source": "source.png",
+      "source_crop": [
+        517,
+        17,
+        738,
+        426
+      ],
+      "size": [
+        221,
+        409
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 205,
+        "h": 401
+      },
+      "foot": {
+        "x": 110.5,
+        "y": 408
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.19564689397477814,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "31b9c3f520659613f98d09abba0506f552983530a4be39137162a3c7526864ba",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction",
+        "tight vertical gutter or silhouette reaches source/cell boundary; inspect clipping"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "server-style2",
+      "state": "down-stepB",
+      "direction": "down",
+      "pose": "stepB",
+      "status": "candidate_pending_render_review",
+      "file": "down-stepB.png",
+      "source": "source.png",
+      "source_crop": [
+        942,
+        18,
+        1161,
+        426
+      ],
+      "size": [
+        219,
+        408
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 203,
+        "h": 392
+      },
+      "foot": {
+        "x": 109.5,
+        "y": 399
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.166612280937482,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "963fb8cbaf809ba36e2652fedc0e4bb27f1d6772aeb45dcb6a51521109c6ca08",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "server-style2",
+      "state": "up-stand",
+      "direction": "up",
+      "pose": "stand",
+      "status": "candidate_pending_render_review",
+      "file": "up-stand.png",
+      "source": "source.png",
+      "source_crop": [
+        125,
+        428,
+        340,
+        830
+      ],
+      "size": [
+        215,
+        402
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 199,
+        "h": 386
+      },
+      "foot": {
+        "x": 107.5,
+        "y": 393
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.10955351773902586,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "e17410e34c1a22341c9ac86c3ebcceaf93d6d214aa747e0f9b5d3dd52715a75f",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "server-style2",
+      "state": "up-stepA",
+      "direction": "up",
+      "pose": "stepA",
+      "status": "candidate_pending_render_review",
+      "file": "up-stepA.png",
+      "source": "source.png",
+      "source_crop": [
+        524,
+        428,
+        749,
+        836
+      ],
+      "size": [
+        225,
+        408
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 209,
+        "h": 392
+      },
+      "foot": {
+        "x": 112.5,
+        "y": 399
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.14064976228209192,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "9da17c6b971a12e323e3176942a92f0afd1ff2eeac3c017bd62b7631e2e9357b",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "server-style2",
+      "state": "up-stepB",
+      "direction": "up",
+      "pose": "stepB",
+      "status": "candidate_pending_render_review",
+      "file": "up-stepB.png",
+      "source": "source.png",
+      "source_crop": [
+        955,
+        428,
+        1179,
+        833
+      ],
+      "size": [
+        224,
+        405
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 208,
+        "h": 389
+      },
+      "foot": {
+        "x": 112.0,
+        "y": 396
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.13959537572254335,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "a7f8fbb0223df499d63988bc1d00d53588d1eed30b738c09b78c5a23f6a214d4",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "server-style2",
+      "state": "right-stand",
+      "direction": "right",
+      "pose": "stand",
+      "status": "candidate_pending_render_review",
+      "file": "right-stand.png",
+      "source": "source.png",
+      "source_crop": [
+        108,
+        836,
+        327,
+        1236
+      ],
+      "size": [
+        219,
+        400
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 5,
+        "w": 203,
+        "h": 387
+      },
+      "foot": {
+        "x": 109.5,
+        "y": 391
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.13626646974231413,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "eb9620840fbf32e5ae0cc47fbd6c68ca4015d883a36c0b16ec689ff0e76a74d6",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "server-style2",
+      "state": "right-stepA",
+      "direction": "right",
+      "pose": "stepA",
+      "status": "candidate_pending_render_review",
+      "file": "right-stepA.png",
+      "source": "source.png",
+      "source_crop": [
+        507,
+        836,
+        765,
+        1236
+      ],
+      "size": [
+        258,
+        400
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 5,
+        "w": 242,
+        "h": 387
+      },
+      "foot": {
+        "x": 129.0,
+        "y": 391
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.14037854889589904,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "e37503fb12154c86dadf4be0d72306206a0a622784f94bd111e1f1b3750a188d",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "server-style2",
+      "state": "right-stepB",
+      "direction": "right",
+      "pose": "stepB",
+      "status": "candidate_pending_render_review",
+      "file": "right-stepB.png",
+      "source": "source.png",
+      "source_crop": [
+        947,
+        836,
+        1172,
+        1238
+      ],
+      "size": [
+        225,
+        402
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 6,
+        "w": 209,
+        "h": 388
+      },
+      "foot": {
+        "x": 112.5,
+        "y": 393
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.1219584735208283,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "41fbee91ba2723795b07dd8ff5ca944602113c63c50191a71edd81e267277ba3",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    }
+  ],
+  "statusCounts": {
+    "candidate_pending_render_review": 8,
+    "review_required": 1
+  }
+}

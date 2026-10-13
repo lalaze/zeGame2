@@ -1,0 +1,417 @@
+{
+  "family": "shared-owner-barista-style1",
+  "roles": [
+    "owner",
+    "barista"
+  ],
+  "hairStyle": 1,
+  "status": "candidate_pending_render_review",
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "rowBoundaries": [
+    0,
+    431,
+    836,
+    1254
+  ],
+  "bboxAlphaThreshold": "alpha>128 not all-nonzero alpha",
+  "frames": [
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style1",
+      "state": "down-stand",
+      "direction": "down",
+      "pose": "stand",
+      "status": "candidate_pending_render_review",
+      "file": "down-stand.png",
+      "source": "source.png",
+      "source_crop": [
+        153,
+        0,
+        327,
+        428
+      ],
+      "size": [
+        174,
+        428
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 5,
+        "w": 158,
+        "h": 415
+      },
+      "foot": {
+        "x": 87.0,
+        "y": 419
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.18784137748989826,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "b26bd61f2b1c3af3061e7fb5b2c4c0884b1917134c93608b5f251c87544864bc",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style1",
+      "state": "down-stepA",
+      "direction": "down",
+      "pose": "stepA",
+      "status": "review_required",
+      "file": "down-stepA.png",
+      "source": "source.png",
+      "source_crop": [
+        551,
+        0,
+        731,
+        431
+      ],
+      "size": [
+        180,
+        431
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 5,
+        "w": 164,
+        "h": 426
+      },
+      "foot": {
+        "x": 90.0,
+        "y": 430
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.21749182811129714,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "9e8e1281cf0d1f3e88e3c73d78303d80e19f00234529815e617392a89ecd9d59",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction",
+        "tight vertical gutter or silhouette reaches source/cell boundary; inspect clipping"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style1",
+      "state": "down-stepB",
+      "direction": "down",
+      "pose": "stepB",
+      "status": "candidate_pending_render_review",
+      "file": "down-stepB.png",
+      "source": "source.png",
+      "source_crop": [
+        959,
+        0,
+        1140,
+        431
+      ],
+      "size": [
+        181,
+        431
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 5,
+        "w": 165,
+        "h": 420
+      },
+      "foot": {
+        "x": 90.5,
+        "y": 424
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.18061348180716208,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "e17defffbc9c465b0edc8009c580594a2ccc45c05e983bdccb4e2f88c50a64b8",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style1",
+      "state": "up-stand",
+      "direction": "up",
+      "pose": "stand",
+      "status": "review_required",
+      "file": "up-stand.png",
+      "source": "source.png",
+      "source_crop": [
+        149,
+        431,
+        322,
+        836
+      ],
+      "size": [
+        173,
+        405
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 0,
+        "w": 157,
+        "h": 403
+      },
+      "foot": {
+        "x": 86.5,
+        "y": 402
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.1507478458787189,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "a0eeecde5be8e5a72d9d65edd79d42698d80cd28e18b35de07e6062cdfea6765",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction",
+        "tight vertical gutter or silhouette reaches source/cell boundary; inspect clipping"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style1",
+      "state": "up-stepA",
+      "direction": "up",
+      "pose": "stepA",
+      "status": "review_required",
+      "file": "up-stepA.png",
+      "source": "source.png",
+      "source_crop": [
+        535,
+        431,
+        727,
+        836
+      ],
+      "size": [
+        192,
+        405
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 2,
+        "w": 176,
+        "h": 403
+      },
+      "foot": {
+        "x": 96.0,
+        "y": 404
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.18089384310865717,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "7d6fa468481cf55c02e1af293dad1e5a787ad41f198924df46da423485473da3",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction",
+        "tight vertical gutter or silhouette reaches source/cell boundary; inspect clipping"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style1",
+      "state": "up-stepB",
+      "direction": "up",
+      "pose": "stepB",
+      "status": "candidate_pending_render_review",
+      "file": "up-stepB.png",
+      "source": "source.png",
+      "source_crop": [
+        951,
+        431,
+        1143,
+        836
+      ],
+      "size": [
+        192,
+        405
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 2,
+        "w": 176,
+        "h": 402
+      },
+      "foot": {
+        "x": 96.0,
+        "y": 403
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.1754400688164824,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "13d864f2802b90e810c20ec13db28edb1e05a636a6a2e0f17a09aee97c8a4481",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style1",
+      "state": "right-stand",
+      "direction": "right",
+      "pose": "stand",
+      "status": "candidate_pending_render_review",
+      "file": "right-stand.png",
+      "source": "source.png",
+      "source_crop": [
+        137,
+        836,
+        338,
+        1236
+      ],
+      "size": [
+        201,
+        400
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 4,
+        "w": 185,
+        "h": 388
+      },
+      "foot": {
+        "x": 100.5,
+        "y": 391
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.17295269847884975,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "7367c93f3dcad96f92902cf5a3029ee8f476bcdff3b736be3d6c2b83a458ab21",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style1",
+      "state": "right-stepA",
+      "direction": "right",
+      "pose": "stepA",
+      "status": "review_required",
+      "file": "right-stepA.png",
+      "source": "source.png",
+      "source_crop": [
+        520,
+        836,
+        783,
+        1235
+      ],
+      "size": [
+        263,
+        399
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 0,
+        "w": 247,
+        "h": 391
+      },
+      "foot": {
+        "x": 131.5,
+        "y": 390
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.156268075425134,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "163aba0ff2444c46aaaf2d0b6d84c71e4a90538ea249416f99741e365b3c3f52",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction",
+        "tight vertical gutter or silhouette reaches source/cell boundary; inspect clipping"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style1",
+      "state": "right-stepB",
+      "direction": "right",
+      "pose": "stepB",
+      "status": "candidate_pending_render_review",
+      "file": "right-stepB.png",
+      "source": "source.png",
+      "source_crop": [
+        964,
+        836,
+        1172,
+        1236
+      ],
+      "size": [
+        208,
+        400
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 2,
+        "w": 192,
+        "h": 390
+      },
+      "foot": {
+        "x": 104.0,
+        "y": 391
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.1493536865379709,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "48ac51c33ebc16a9a59d9d9f5c7102d064027dae81d77f055d18d77f05dddeef",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    }
+  ],
+  "statusCounts": {
+    "candidate_pending_render_review": 5,
+    "review_required": 4
+  }
+}

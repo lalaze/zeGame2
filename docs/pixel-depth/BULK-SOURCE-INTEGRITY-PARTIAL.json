@@ -1,0 +1,693 @@
+{
+  "scope": "File existence, dimensions, alpha bounds, exact source RGBA crop, duplicate pixel evidence only; no runtime or aesthetic pass",
+  "manifests": [
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/renderer-manifest.json",
+      "count": 14,
+      "assets": [
+        {
+          "id": "idle",
+          "size": [
+            260,
+            282
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e1e6ac195df7a56699484d587e295ecc53b9e30a53e44278d176eec42b5921a9",
+          "file_sha256": "cbc85b9e30b5de75b420bf851034b77ed7249c525fa79b9faac93956ed47f813",
+          "exact_source_crop": true
+        },
+        {
+          "id": "swish",
+          "size": [
+            296,
+            281
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2dc8df353d11be0b8583943afca0770a417de9ef511c39908a8ed5bd6434cc08",
+          "file_sha256": "26a5a8cd2be90a6d0d773a63f09d32aa4aeb1873a8031b001b06aa96433483dd",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blink",
+          "size": [
+            255,
+            282
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e006264114a328792e085de630559b381a0532ca0a76ddec2c68791a3c507bc7",
+          "file_sha256": "a2dbedca8a0c7e045c245dc1371e3486f18f697688b5e4e61704dec8c7749e4a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "happy",
+          "size": [
+            253,
+            285
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c983d9acf58c18e40f47d3cad096980b64e8d481ce7a071062d097e93f41b2f1",
+          "file_sha256": "5ca3137ba51f5d6aaf9c3ded865f5e0a98fb6e1e245528757fc6a2196900064d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkA",
+          "size": [
+            329,
+            257
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "98ff5e32fc531a736c80ee9b575a27194c3f16b4ddb482fe4a174ecea0b41a32",
+          "file_sha256": "d338cd8464a9ae3109fc34c95c29473c611de6ff60aa24d5f8f3c1eda247813d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkB",
+          "size": [
+            327,
+            258
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4ddba072c6e1e828da0bcb5a92ad2a42aa8f2ca81ee5ac52fd0e28e0457c4523",
+          "file_sha256": "35c014906cd917f8fc5a1eaaff17263ef112bf4d89bd07e291e0f1656703c508",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sleep",
+          "size": [
+            275,
+            170
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "de6644c66f49c15884d0b2a65ab71a6ed3836bed998818c6d1a2f95d92ca708b",
+          "file_sha256": "a90abc64936ab9a709e0434d3cecde74a4b935d8af45e435bf40e4a40eaf47b0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomA",
+          "size": [
+            248,
+            264
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3879a1fda84dd3f733fe503c66f45a9a081e33c937355b3930322677dfe7b344",
+          "file_sha256": "904eaf6f1ffed1ea7cb8094518dcdc2f70076c14b356d277bf72c396c8b360a2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomB",
+          "size": [
+            267,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "640baafc38494198be07ac9562fba44cd46acdac64488d99fe4595df01538451",
+          "file_sha256": "ed4da5e3d0e68cdf878c5936300c3acc020485c4727497d184ae32e41858e5e9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "stretch",
+          "size": [
+            346,
+            280
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8679ebc52c2989fc648835cfde63605df670dca8928c59e3a6a08db50a56522e",
+          "file_sha256": "13b31eb525e8d349902907a84163315590094192b1008eafee01e5957142330d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "watch",
+          "size": [
+            266,
+            275
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5f786afaf8cd2c191976470c4410efbf6789a50ef8a8eefcd24c5a3c60907526",
+          "file_sha256": "b57a79184ea48485a62fc8eceb5b682997b85c56b0961399168f1b8b51a3fce7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lookUp",
+          "size": [
+            247,
+            305
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f95585cb0a17ca997140994c416b2e79e5416a86a669d55e79e671d943763bc0",
+          "file_sha256": "49aa754e802c51cfabfa422e7533bb79a7d173acfab12b52d421cf6a5ea6ceb8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleA",
+          "size": [
+            262,
+            302
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ca304b942b039672e2e74ba6b8d4e45b0cceb905e4c2c6d92324fa85ddf6abbd",
+          "file_sha256": "1a3fb7d54cd2fe56d72a836f2f40bbda9a7a065cd3615a135b969cd92747292d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleB",
+          "size": [
+            241,
+            299
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "40800c662973bcf390fb10b8fe3f4affa8ca48d26b032fb7139da67bc94375c3",
+          "file_sha256": "dbd42e4dcc85e040739cddf401167cf4031c9f4513f3991596cb7967c0f1ecd4",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/renderer-manifest.json",
+      "count": 14,
+      "assets": [
+        {
+          "id": "idle",
+          "size": [
+            255,
+            275
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f33022177004dd4af01a59de26efd1d0651e2e3cfd5a9a535c2a91c9f07eda1c",
+          "file_sha256": "75650bbe0a85fd6972efa2f0c4cd400c940e0880f5e35ae1fa2b4931697e2b12",
+          "exact_source_crop": true
+        },
+        {
+          "id": "swish",
+          "size": [
+            307,
+            275
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3b049763d7da9bb86c82574514ca678795a653f97f9920cbfee4bd65c192afff",
+          "file_sha256": "f665ee14543be01ddddbe1fc725934021c4c36505b34313c322a928c50d0a254",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blink",
+          "size": [
+            254,
+            275
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bfeca5a6075586a9a7d5672b9b0697d84affe21639185b9d3010b88096c5af15",
+          "file_sha256": "a18e509e60fd81c4a8a9a3bbe02c1c89a9490ab96a6e99b9a124fef1cbb0f0b4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "happy",
+          "size": [
+            249,
+            277
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a3f70ca2a6d5d53163f6ce0ae96846646b22ebb22209fe037c2a2903fa521f35",
+          "file_sha256": "99b5fe7f959966fe3c9bb097765f392ae4e8bb94ebc38586f85dd01b2e3ef6d2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkA",
+          "size": [
+            339,
+            240
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4c6f61bdf5c1263405f4ff443e874c664185d6d36d5ec6271406f91a65b7a675",
+          "file_sha256": "f1f97dc747af3ccda964a7643cae840442433c6ebffdce828e70c95e68b87205",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkB",
+          "size": [
+            336,
+            240
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e4316f4d3a60be895406540caa8366d6736a0a1a9ff6bd83b3fc7796f021f0e0",
+          "file_sha256": "dc8ca0285467d895886dd2674a76a8dfe46efaa337c0e6be43be24322e48d1b5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sleep",
+          "size": [
+            252,
+            175
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "67039900a25dfd1d592142b3e665232f7d7954277acf32600b81faecca1cf849",
+          "file_sha256": "6c92b6b395e73818737edbbde73ccb99867977d4d576969fdb5410165c35e25d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomA",
+          "size": [
+            261,
+            254
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7fc36f51468e5a21f1a1f103ef91cf9f75faf79505dded6e2d4c09fd6acb8193",
+          "file_sha256": "1cc0c3daa4d7dde123c4e0002a18b3b1f1a48bdc79be2dcbc33052989c9f3ff4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomB",
+          "size": [
+            259,
+            281
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "32ead555cf448b653df475170b0479d75ac9632da6becd7d6aba40b9e8f87a3c",
+          "file_sha256": "3037e3bce909b782a4db5e7e7cdf72b0bf4e75f768e5e6e3e9882b8840c72567",
+          "exact_source_crop": true
+        },
+        {
+          "id": "stretch",
+          "size": [
+            346,
+            289
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5af408c498a1da56753258bc1647d1c55f2093b4da2ba140e719641d63ec50ff",
+          "file_sha256": "6a292cb18f110b11bd304f60b0db9f909a4f91256a713dddca4ac83f40cb5475",
+          "exact_source_crop": true
+        },
+        {
+          "id": "watch",
+          "size": [
+            263,
+            276
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "996cd0892d55bbc7c28868fc4259555a2fe31431a6d3c746708f7d9c3e741569",
+          "file_sha256": "a717fa0ad4723eb5b0f49e2519274b592d4f7cd66c6c4e3bc1c66396e3db90c8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lookUp",
+          "size": [
+            237,
+            310
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "daaa70a2fa93e5ec37079584226d46e410ee18bc7a25760ce41889e1b298bbe5",
+          "file_sha256": "fffefe1ddd5c6aa9538841035ec85afc90df4cb6b636e1a7cf86a649cc97e19d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleA",
+          "size": [
+            251,
+            310
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ffd7f03054668e43bc9e077a854c1b9f45a84ea41014d72e9451ca63db118ee2",
+          "file_sha256": "e3f8ae2b02a6018bc96f6b0f64b1d450626dbeedbe5df979fe2102d8b5c4d929",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleB",
+          "size": [
+            263,
+            310
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b9dbd31eccf02286b179b6c94be285d39a8a726ee2ff6fdeb6e5a198cdae9436",
+          "file_sha256": "153472b53667145da8b1dec4c656dca2091d2d6fa08791138d8538b940398c87",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-menu-v1/manifest.json",
+      "count": 15,
+      "assets": [
+        {
+          "id": "affogato",
+          "size": [
+            1244,
+            1254
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "01a6c693c72c56b486aca84b67acc9137752ee69cfc1bba692f01dbd269df41c",
+          "file_sha256": "b8fce227121cd45f1165861de4f5902b2af7e7fdc3b87c7a1aa9c804b5164ae6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "americano",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0d70bc120ad56462f1ba50931ed400a0ee954bce15dfb6bb43505fa0462db619",
+          "file_sha256": "9dceb5f2ba513ff4f9c49edab2035dcc663b341848ae6a0522d2bed3e9767da9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blacktea",
+          "size": [
+            1302,
+            1177
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e351a6fb026131b07a42615a202932a4e2e2c761e3447cc10f05b8e9040aa418",
+          "file_sha256": "e705ab57a98653c4f527bffdcb89a12ce1b1d52bd2b409b49f0bee830ca2da52",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cappuccino",
+          "size": [
+            1321,
+            1180
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b4b4223fd9dff3370f980d2376efcfad19a7ac4e8e3055806675041cd02357e0",
+          "file_sha256": "b0f89b3c68a062c2e40dd7dd5731b2e0f48c3f21c150fb790438a17aceb43914",
+          "exact_source_crop": true
+        },
+        {
+          "id": "coldbrew",
+          "size": [
+            1100,
+            1271
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ad902b6ccecf6cb3c06775cd928224ae1e315d305a7891d4e8d117e364d22feb",
+          "file_sha256": "23ffc9290828aebc8a696b233bace8dfaa651f948baa2e193e737b0105847ddd",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cortado",
+          "size": [
+            1147,
+            1127
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ac996aed46e1cd35e8b30f4c4dceff80ae64ec473e1b546c1d3bd5efaa2961a3",
+          "file_sha256": "e909807019cff54a9118df94d2ad19bd826b1cbd0a44c65db9a802775f66c7b2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "creamcoffee",
+          "size": [
+            1240,
+            1254
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bd8fea25a3b94d687bd4ec19b6c0eba4c31cebad33df0f1cf7bec19cd4805ebf",
+          "file_sha256": "78e5e19f466fde9c4510c20eb7b2b27167e6f70a92309b7dcedf8ab8aed6301c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "dirty",
+          "size": [
+            1244,
+            1243
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bf10cf5b91e5f44343704aeacdd5c6257d6e3cb0d649f1ea487dba43ec8cffc9",
+          "file_sha256": "c51c864da552a532c15763ad6277ecf00e47881007f9521970a1259f9804a2f9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "flatwhite",
+          "size": [
+            1475,
+            985
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "7d5ef6042693b275189b7086a38176c5c8ad4f7d4c369b7cdb79f5d2db3fa6a2",
+          "file_sha256": "fcc0e791fb8e7723208a5d526a08c1612c0548509ba29be8e20479181883f2cc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "hotchoc",
+          "size": [
+            1308,
+            1157
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8bca88e1fde3f1ea90e66bcae4c66c962e3039a7049668b73730d87f16dc1797",
+          "file_sha256": "cb8e1499a747abdacc880443f64f7fea01afa25a2119b1bab6528d4141e91322",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lemontea",
+          "size": [
+            1168,
+            1337
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e3ebfb444f826aae87c7d982c9f03c9f1c0e92459350eb9ea0a1ac1b0e16f538",
+          "file_sha256": "ffcb48d016377f5b703483fae5c2d98b87e0d32810de0bfa059982a77a4fc615",
+          "exact_source_crop": true
+        },
+        {
+          "id": "macchiato",
+          "size": [
+            1473,
+            1001
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "4259d65ff6fcf42a1307e630a73df26f40bc1d90671ff91c67353ce3b3fd68c7",
+          "file_sha256": "bfd7e73bc731998f0ce9d57139bed3fefb009e4a77fafd5127a930eeedacd341",
+          "exact_source_crop": true
+        },
+        {
+          "id": "mocha",
+          "size": [
+            1234,
+            1240
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5afff8990574501086b12ad0a180923314a51c60d9fe959c472b1e2b2bdee56a",
+          "file_sha256": "ba4c4d585539ae82ee068dbd11c77b2f3fdbf6e65c053845f664f58578c49f32",
+          "exact_source_crop": true
+        },
+        {
+          "id": "pourover",
+          "size": [
+            1295,
+            1199
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "84fef2906e81878360a62a6875d028b4dcc8025169c980e20f76eb944c274730",
+          "file_sha256": "3302d7f686fc920b4d0571c0760c21fc6b1aa9d19d0c0ba98cc582d0ceb0abb1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "vienna",
+          "size": [
+            1234,
+            1245
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6dfa0501395fdf8d34adc5e781b505eba13b543ded9af35170787b0b32f6d30a",
+          "file_sha256": "9359507eaecdedb15dcc95049ff3d5ac208aa3f914885a116caf2a8953777ad7",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-movable-v1/manifest.json",
+      "count": 4,
+      "assets": [
+        {
+          "id": "clock",
+          "size": [
+            1089,
+            1102
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fed5cad8b5932bbd6614886cd7ccb95db52a68f9999e7fa85551314d9603e35b",
+          "file_sha256": "7fd76782da46a093067265497bb026ee4e9db3a5687e2aba817905ee4f7e3dec",
+          "exact_source_crop": true
+        },
+        {
+          "id": "coatrack",
+          "size": [
+            562,
+            1980
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "733afa68a00b55912050d0f47afeede7c448397b5e3ee6c990695b3a652d8137",
+          "file_sha256": "07fd4afdfa0442cc0d9ccbcd317c8f31b704b3e3bcd226f3c5691592c2556fa0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "bookshelf",
+          "size": [
+            1082,
+            1134
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1e4ad8a6b5e237f68b72bd2b28124b788ce5fcc4226aea942d8c3d6d7321f9a3",
+          "file_sha256": "34a7a9e0b0e1b4a3a4976f9d0c8503cab79ca21456f766bee4ed00a2be6aeb27",
+          "exact_source_crop": true
+        },
+        {
+          "id": "catbed",
+          "size": [
+            1326,
+            623
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "dfd8c7479b7722172e34ce749fd13642d47bd2736e933b084261e3482f95b37a",
+          "file_sha256": "cab8be94990c5e58e91cbb69256096a91df41cb42afbb5c53dd008ea29b4c9a3",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "total_assets": 47,
+  "errors": 0
+}

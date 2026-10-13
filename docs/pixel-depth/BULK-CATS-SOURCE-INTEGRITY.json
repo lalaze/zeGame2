@@ -1,0 +1,2240 @@
+{
+  "scope": "File existence, dimensions, alpha bounds, exact source RGBA crop, duplicate pixel evidence only; no runtime or aesthetic pass",
+  "manifests": [
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/renderer-manifest.json",
+      "count": 14,
+      "assets": [
+        {
+          "id": "idle",
+          "size": [
+            256,
+            276
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4ffed6dd94b0495c1c06e257e75ac6ce7e2f9a194f4abfca6c9966298051827b",
+          "file_sha256": "73f4e1a17a89a53d20c4d0b8935787a4b06e536f93978553dab4b289f7545cf6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "swish",
+          "size": [
+            298,
+            276
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "335857bddb7d2ef9040bd4f3d4581d1a97084bfcda850a856206bd130fcb9920",
+          "file_sha256": "a91ec1072271749c83c73605dc7c6dfb3a12852a50d4a2522ad3ec7f005c0887",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blink",
+          "size": [
+            255,
+            276
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fece5a53868bea10a70cf379a3281c18ed8ec62b9a74243ad9890832b4779c20",
+          "file_sha256": "445c794681b550f55c4b2d1816598e419d81a0933449f349072fff48a3dbfa1e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "happy",
+          "size": [
+            250,
+            276
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b1e3049799d8fc6758b3c29acde926ea3a9a87c7e3cc842f57bc1e0696cafbb2",
+          "file_sha256": "9afbd66ba4df5d261dea5a55cf63f0c83b3c55e9521353a395ba75ebe15dca85",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkA",
+          "size": [
+            330,
+            227
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "50e9ae454cdba5484068b1547f752c294a49c9536576faab37ff19ec9f97ec2e",
+          "file_sha256": "610b8a2947bb85dbb20255a8934a69d13cb89870ec2a6cc2fc9a51176d79d010",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkB",
+          "size": [
+            345,
+            229
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "aaf6a4c7c280f3246373ba127a98d9f20242f0903d45f0e68770fc9411865499",
+          "file_sha256": "3049a720b93dea6c3dd91c4529e2636bec1366c9820ea7f35a9eba0218b54637",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sleep",
+          "size": [
+            276,
+            173
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "713df08d9ccae47183175ba0c4c03ff020a4573845b9d4a2558665d58ed5b62b",
+          "file_sha256": "991134ceb09f56ba534119af4f7324c5c5e4e38b8ae56b9cc0ddf25afed731b5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomA",
+          "size": [
+            241,
+            248
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f2eecdf1b1638e37efc7b5cdda2c0900c008f08982ba2010f2aa53b9e929a789",
+          "file_sha256": "62a204a02d7bd56f9b0e4b0a4dd802c9d5b9be6ec44964f564f8cd4e2f8e35eb",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomB",
+          "size": [
+            250,
+            273
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "17641d7b49f95469d5a931fc49577bf6b667f809057df5cb2cf1f667f251f135",
+          "file_sha256": "be0f3ee48c2efa38873a37ef40e067873a15b938b140d1588a3e0a0fdf150e80",
+          "exact_source_crop": true
+        },
+        {
+          "id": "stretch",
+          "size": [
+            337,
+            270
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7dca4eea58fb875ca24dddc515d7ce3af96cf775c70293fe4fdfb9d8a239b44e",
+          "file_sha256": "9fb36123027851bde57052941153a80a7f133d6b0ae204874081f039e2ad4438",
+          "exact_source_crop": true
+        },
+        {
+          "id": "watch",
+          "size": [
+            258,
+            272
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "aebfa02fb7713a61e0035e57a2e1b29156c5c6af4f8c5abe902c53f19a2d0fac",
+          "file_sha256": "5b0a03dc646cc1b4f070e3a1e1ecf578730ac90af17abb384d276b0c685d4f49",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lookUp",
+          "size": [
+            250,
+            308
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "95e75f3a767a76b16afee70d252e877764a20f952bc4e92324d587e84f613bd1",
+          "file_sha256": "85a42d2aef0f8eec2487a6240640cb1dedfa7909815b81a14761e9349b67d315",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleA",
+          "size": [
+            254,
+            311
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fd814674d2baf6dedcc0391aa3cd256276c9dad4633157082ec854ab0811c9a6",
+          "file_sha256": "de9a136576a00a354670980571ea94cb6c55d134fed08bf033cf9d156e1e72e9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleB",
+          "size": [
+            251,
+            309
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b5e9fa6049516ac18300faa7ad3bd0acefb678e06b57fdcc33941ab8764307ce",
+          "file_sha256": "c818d95ef54e804ef41e9fd81f27dfdf6eaea2db8a89fbf339b716fa4038d762",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/black/renderer-manifest.json",
+      "count": 14,
+      "assets": [
+        {
+          "id": "idle",
+          "size": [
+            261,
+            294
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b16d784ebab2dd7e48809cafd8a8b7f63aeb811778c4d03afebaacc165699b36",
+          "file_sha256": "f49bba97192981587eb6a01d094ea4fe0537bb07f99d07785b0cdbb43b6b876c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "swish",
+          "size": [
+            301,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "785562a06ef53dbf39419bf3d52ae75330ed1444559838e5c01760bd850457fe",
+          "file_sha256": "7383931e42800f58b7d39deb58a773ed53175997d809bc49dd3a0423899d8525",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blink",
+          "size": [
+            264,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fb521eb7b10fd9fe4824d83d83bef9e3242f070e025e2c0d2b84d5b6f5c10120",
+          "file_sha256": "06439aff631be984cb93af76d85a32bc83b78bbfdb45cc3531b26fa7ac1c3605",
+          "exact_source_crop": true
+        },
+        {
+          "id": "happy",
+          "size": [
+            264,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ffe96d22a507ec9b34b4611ec158d5d48d5dc278c18672d19b0f45a3d257f664",
+          "file_sha256": "4d5e8085a304441b3daf38cd691ca54c8b19cf6aae29bf34368eaeb23b45900f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkA",
+          "size": [
+            329,
+            241
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ba2fb709eccb78bdc1a4ea022316c3f55ca8cf17c0925d4ed620abce1e956865",
+          "file_sha256": "2d6970289cbd4880436b311874bfa3ed230a32a1b6c7a0357c9fe7cc68b1b320",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkB",
+          "size": [
+            321,
+            241
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d91c0c05cbe6a0eeff264b73b9437eb6e11ae02fc02234039edf7b18513d6e8e",
+          "file_sha256": "d0ed29fc907795300978697e1342b02821a116c3b7152f4b99fda88c668d393a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sleep",
+          "size": [
+            283,
+            171
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "54da6d8932e2308b1acbae5782315f6658a648d9f19fa5a19e70375cf4a2c453",
+          "file_sha256": "3c133a3008f337e83e03812b63eccd071518a2cee813791a108d7791b0eae499",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomA",
+          "size": [
+            264,
+            268
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c884209e4ebbfeb78f2dfecd64ac62eb90cea7b1c9e79a2ecb6afb61735b5f0d",
+          "file_sha256": "df07ed115ff31a1707981b6fb66c0094575973d8be49c3ef5a17785c8e3cfca1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomB",
+          "size": [
+            260,
+            291
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6772811ea72efddaf42f3d5d518cdd69e6bf003ab144024447e5154973d3a3a9",
+          "file_sha256": "cbee11cf7c9e496a26037c8b31854d9c05b2737df7c63624d2b41392a8cd6448",
+          "exact_source_crop": true
+        },
+        {
+          "id": "stretch",
+          "size": [
+            342,
+            276
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "17fa4d5c1e7435d09d7df61c928b1d3d1e4b7fd29ab8d9d6246006f7d668465f",
+          "file_sha256": "eb732cc32e2818e8a64a8ab4b0ead429d447c1b8e5d709f2591db38759f6256f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "watch",
+          "size": [
+            272,
+            282
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "27f8d5a8d51e1951bf13d54f37dca9a2bc7c5917562a1480eaa7feca916f3309",
+          "file_sha256": "638f2fd15534ec80d1e53d55848525d7d2969d07e895a358d6f18342e26ebae8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lookUp",
+          "size": [
+            252,
+            311
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bd6ef1a2a524b8b17a079465eac9d92d3972e8190656386dcb4c28979d228be6",
+          "file_sha256": "e0eb8bed64403986c121d9e23befdb2902118b6e9abe9529f45f5d9aaf5740f5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleA",
+          "size": [
+            249,
+            302
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b0faefde1b17657b1d1094bb2d392744dcc3e64ce7b2a7212fc9783ca0d89b44",
+          "file_sha256": "aa5470b3ee9ddb8f0368c18c44beac08f5d5da12f8b7ff1862325748135ce3c4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleB",
+          "size": [
+            255,
+            303
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8f6a9e09e233d1bf0a9078fcdc16653b2bfe97021eb43889c707a4b29a47d7a0",
+          "file_sha256": "d29c2d2d9ec4350c078ee3621c6d151415fa17cd66a06053e47dcb985c5c452f",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/renderer-manifest.json",
+      "count": 14,
+      "assets": [
+        {
+          "id": "idle",
+          "size": [
+            273,
+            272
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "59f549466710c5da450cb933ba363cb5a2787bb2b00c51359d441cac00eeee73",
+          "file_sha256": "d7ddb491722f346ca117f60699e97773b081eaf55a3315fbd4d34220e5b4c008",
+          "exact_source_crop": true
+        },
+        {
+          "id": "swish",
+          "size": [
+            317,
+            271
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5c0a96d1dffb0a947cf931f458d77d476841dea1a530a257a87fb0b0e25c3df4",
+          "file_sha256": "01404ca17ae6c774a7a3ef1c8b505dee950b15abe0bfd95c3662deb34c8d14d3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blink",
+          "size": [
+            269,
+            271
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8c156ee3466f2d65e3a50f46ada9571274db7d79f81d47b6c2dcfcdccd6153de",
+          "file_sha256": "29081bf5dba87c3c04e940d5982bd3839abb72dd5d84f0d0f2f1ef82b6f42acf",
+          "exact_source_crop": true
+        },
+        {
+          "id": "happy",
+          "size": [
+            264,
+            271
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "dec725e662ff3f10f8b91f818cd3dc0cecfa29bef8072f8a32b98fe6436476a0",
+          "file_sha256": "6edc88728fb28038207a5e2a865b53ba47b1d288bafd0f63783ee3672713d3af",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkA",
+          "size": [
+            335,
+            237
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fedfd8c0913a84ccb0d5d1cc9a8c03fa684570938d1c25df88189f1ed1d6f35b",
+          "file_sha256": "cb38908338288119896d149b4bab8409071d28c3ea43222752b33a3ec0b5b0c7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkB",
+          "size": [
+            337,
+            240
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c8c43d81ff25f2322ff7247a1d2b5ed8c291a1387ebec1e7b58d6f77ce352323",
+          "file_sha256": "0448dd0cd4d7fefee427e135a3cb20012a8107c9b69b17b1520114e347019544",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sleep",
+          "size": [
+            276,
+            194
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0da2f6ce4f779f7325b1f23863ba7df72892bee6434ac706538ff5e498213695",
+          "file_sha256": "79ea057d9da94888e6715cebd4fc9f92fac05f7c4a2bf4184f8ed6f905db1e36",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomA",
+          "size": [
+            249,
+            259
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "53dba1254ccb8b75cabc9678e9c4990f4dc29341f34c4016884abc172ca93502",
+          "file_sha256": "03e0675556a017e75603dbd07b59dacf5a91c869c87da33464ed8c757f601f64",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomB",
+          "size": [
+            269,
+            280
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cf74e30e5f108d498d23a45fd55128e7bc71fee5398bfba11b8c0438fa3f5096",
+          "file_sha256": "913850c23b3d529b6c80ffb86563a1b3ff35127e16170fdd78a05751496d9b99",
+          "exact_source_crop": true
+        },
+        {
+          "id": "stretch",
+          "size": [
+            357,
+            281
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "445c5838b766424f042371b32d5652027d86f340d820f15432df29223d42b815",
+          "file_sha256": "bfde4a6ca56b50ad461b6007c5ab448b4219d977c74e48c7483342c9bb23bb6e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "watch",
+          "size": [
+            274,
+            264
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6eeca7284b77236879bff87b121b2e5a27127c7ef0d60a86086925a0ba1ea815",
+          "file_sha256": "cce8f1762b0ad36d85b034402038b8bb9943cbfb9004b8ef550be13130018435",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lookUp",
+          "size": [
+            244,
+            313
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d480ea991afc6034fea84b56ed7895f66ce383f1926ac0356d2df1d0877c6407",
+          "file_sha256": "db64aadafd9824f9b6a4ba91f06dbe250cfe8909582f0e4fbfd3b2f9ebef044c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleA",
+          "size": [
+            257,
+            296
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "87fb768633974fa6d7a8e14acf208ea9aee55d6fb53f993505b346b5165a68b7",
+          "file_sha256": "237dad4444ce35746eca0280fbe9775010170c43e433bd9b2980ed0bf1ca43c8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleB",
+          "size": [
+            257,
+            296
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "58f2d6af7192430a269f40adddf34319d89e9ddaec834343131148aa30a6ba50",
+          "file_sha256": "647f68e8ba5a8355c633d357f961e603a607f4a4d46c03be46e47ced1a63698f",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/renderer-manifest.json",
+      "count": 14,
+      "assets": [
+        {
+          "id": "idle",
+          "size": [
+            255,
+            275
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f33022177004dd4af01a59de26efd1d0651e2e3cfd5a9a535c2a91c9f07eda1c",
+          "file_sha256": "75650bbe0a85fd6972efa2f0c4cd400c940e0880f5e35ae1fa2b4931697e2b12",
+          "exact_source_crop": true
+        },
+        {
+          "id": "swish",
+          "size": [
+            307,
+            275
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3b049763d7da9bb86c82574514ca678795a653f97f9920cbfee4bd65c192afff",
+          "file_sha256": "f665ee14543be01ddddbe1fc725934021c4c36505b34313c322a928c50d0a254",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blink",
+          "size": [
+            254,
+            275
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bfeca5a6075586a9a7d5672b9b0697d84affe21639185b9d3010b88096c5af15",
+          "file_sha256": "a18e509e60fd81c4a8a9a3bbe02c1c89a9490ab96a6e99b9a124fef1cbb0f0b4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "happy",
+          "size": [
+            249,
+            277
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a3f70ca2a6d5d53163f6ce0ae96846646b22ebb22209fe037c2a2903fa521f35",
+          "file_sha256": "99b5fe7f959966fe3c9bb097765f392ae4e8bb94ebc38586f85dd01b2e3ef6d2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkA",
+          "size": [
+            338,
+            240
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cb06c1eeb8e25cceff91be3bd1c9856fd62e1c9c401aba02512d873f61660b80",
+          "file_sha256": "95f42aab8f52f62f57ce2734c910283f615a239f1c3df2dccf3841587b0fceee",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkB",
+          "size": [
+            335,
+            240
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "d0850329237325e319510b77fe7dfd208aac2d73c3601ca440726a32c460f615",
+          "file_sha256": "55a1e26ec097b8d3fa87b574cc4c6954a1ae7102d740e1e48065500d52dc45bd",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sleep",
+          "size": [
+            252,
+            175
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "67039900a25dfd1d592142b3e665232f7d7954277acf32600b81faecca1cf849",
+          "file_sha256": "6c92b6b395e73818737edbbde73ccb99867977d4d576969fdb5410165c35e25d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomA",
+          "size": [
+            261,
+            254
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7fc36f51468e5a21f1a1f103ef91cf9f75faf79505dded6e2d4c09fd6acb8193",
+          "file_sha256": "1cc0c3daa4d7dde123c4e0002a18b3b1f1a48bdc79be2dcbc33052989c9f3ff4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomB",
+          "size": [
+            258,
+            281
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "36fd577c993908933a8b365d9e3d491baf01d45ca70fc4a60d38753da0cdc7ee",
+          "file_sha256": "3300f9f3cb24914332ff5b115d37f250e9585c7ea615742e789a3764a98d5bb7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "stretch",
+          "size": [
+            345,
+            289
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4c1c725379897907f68cd45a2cc70eebf354a7bcbf6ca66cc7aea439dea7c35f",
+          "file_sha256": "3dfcefcea45d3b14513e35c659dd69ae20a5f105eade78347fa2b593ba143fb5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "watch",
+          "size": [
+            263,
+            276
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "996cd0892d55bbc7c28868fc4259555a2fe31431a6d3c746708f7d9c3e741569",
+          "file_sha256": "a717fa0ad4723eb5b0f49e2519274b592d4f7cd66c6c4e3bc1c66396e3db90c8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lookUp",
+          "size": [
+            237,
+            310
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "daaa70a2fa93e5ec37079584226d46e410ee18bc7a25760ce41889e1b298bbe5",
+          "file_sha256": "fffefe1ddd5c6aa9538841035ec85afc90df4cb6b636e1a7cf86a649cc97e19d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleA",
+          "size": [
+            251,
+            310
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ffd7f03054668e43bc9e077a854c1b9f45a84ea41014d72e9451ca63db118ee2",
+          "file_sha256": "e3f8ae2b02a6018bc96f6b0f64b1d450626dbeedbe5df979fe2102d8b5c4d929",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleB",
+          "size": [
+            263,
+            310
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b9dbd31eccf02286b179b6c94be285d39a8a726ee2ff6fdeb6e5a198cdae9436",
+          "file_sha256": "153472b53667145da8b1dec4c656dca2091d2d6fa08791138d8538b940398c87",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/renderer-manifest.json",
+      "count": 14,
+      "assets": [
+        {
+          "id": "idle",
+          "size": [
+            259,
+            298
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0360229cc3bf03b9c01bdea8b0bbdd6d77a219458b56a70c8502b83b5ee5b326",
+          "file_sha256": "47e656d1e03d6885a3195aa1245d298ac1022e39bf02a3f0ff38bb7cdb34b0c6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "swish",
+          "size": [
+            299,
+            297
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a6c245a01ac2a184161a0377b088e7df0e23dede237950a78617d0d805364856",
+          "file_sha256": "c4e325909528de446daa23964d9a12a780a2896e0eec8c6d9e106d9b07b75bab",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blink",
+          "size": [
+            270,
+            297
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "751ebe130f7d1f5d95d89188c652f5e956c3fa76bbf5fd778a56f77ffd552548",
+          "file_sha256": "fc729adda3b2d11c24a7c12b4aaba78b0f738784bfc670e37aa38c5e6f24d97c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "happy",
+          "size": [
+            264,
+            299
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7a72d51a9708b58e95aa12fdf0ca1ee00b012b4807a376a1a72e7598ac9c36da",
+          "file_sha256": "e4771214f2d17a8e339f705093e28722dcb375a13f65d36e632e9c03c55e60a4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkA",
+          "size": [
+            665,
+            479
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "76dd3dbcec11bf84c112f348735f95ff462dea2b73fabeaafcdc197530e01dd9",
+          "file_sha256": "89d7fda7e8190ff4eefb7c760b1646899ca8741e3eb80415f1aa973b4e1808a4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkB",
+          "size": [
+            693,
+            486
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "e8c49af064e786f8a4476ea3123d7a22018de3b89bc70c282a29a2dd6aa5fe38",
+          "file_sha256": "9c81c1af5c0314ac43211a245f88a1ca690884648be88202da53ffe419330d13",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sleep",
+          "size": [
+            276,
+            180
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "eecb322281a9bf05b331a45413245875b8ced1bd41905ab5aeaa1aa8059b7f42",
+          "file_sha256": "3de8c54e867ef2a1f54238c07be97044e26d8010f862263535cadd1367a2f400",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomA",
+          "size": [
+            253,
+            267
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "695dd751243019716b02092b6254b27ee6ebb6919a805356a519287474ea8f9a",
+          "file_sha256": "49f87a2b1ad3addd6819bc3e16ac61f7679be0f0bfa0de04d8aac35651f6ad5a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomB",
+          "size": [
+            262,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1d90aa000e85e49a2a6c585c35da6c6ef8c77f54d2667439ee206e4a196b29a0",
+          "file_sha256": "96a94d808ffd4ecfd37ff98610ca891c8551796baf2791263a4da5751cda9c0c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "stretch",
+          "size": [
+            359,
+            279
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "34a4fe49f284c5d1afd5b9aaedf9531804dc2312e500b693b0b0fca45222af47",
+          "file_sha256": "f930205a59394d0f1f32ee46025160897647313d56f3450239d9c2655658d633",
+          "exact_source_crop": true
+        },
+        {
+          "id": "watch",
+          "size": [
+            272,
+            283
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fd8047ed42d3a924396d965250c5c031f3ecaa629b9a2d582803eb592cd989d2",
+          "file_sha256": "3cdc614ce38e2a0f3c014a7bbd9f02f2ddc60d57047f1e1f92ab1c3f1b9dd805",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lookUp",
+          "size": [
+            259,
+            302
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3ddef8214ebd8cab000fb1a14f35dbe3cff9d363fb75a8d26f186321746aef47",
+          "file_sha256": "e11e8c42827587ad313db55e9243fdd37c31c4d0deabe905474d418c657eb222",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleA",
+          "size": [
+            251,
+            315
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "55ccf0301e616ce1efb43139378475d469dd106549a23f78161f6ccef9229335",
+          "file_sha256": "ff0a3f7e8b4b5ae181e81609b53bc6dd9ec64311ab43cbcfdf2d31f4e7955285",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleB",
+          "size": [
+            266,
+            315
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a3f767831acd0334fc7e2f0714781cd8a5c9ded5216f94af4ac7f853e3109a97",
+          "file_sha256": "aa4ea41727f1ac053d814bfcb572a3a79be1fe55da3582f6384d5f28c67a1e1f",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/renderer-manifest.json",
+      "count": 14,
+      "assets": [
+        {
+          "id": "idle",
+          "size": [
+            272,
+            297
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "db6a130693620e5587806794d9143ab6ae49486bfeb2cbb26f6c11d12b70a02c",
+          "file_sha256": "ba80d54c2b785300303fade829c1a0d117bc9121a758df57dea800a2c283345d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "swish",
+          "size": [
+            321,
+            297
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "31afccb802e717f2df9fb00d4afae443ae97717df25e25fc475b273fefbdf5ce",
+          "file_sha256": "24ccb2a198a10184d98c5f4f92ca9d42ade8fdb2d05df298abcb2312fc8de03f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blink",
+          "size": [
+            257,
+            292
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "311f929f383862ed34c90cca234bcfeb2be8c6c916a085b2c7f6ef0f7b9458f4",
+          "file_sha256": "7f38ca81a9cd509b2f05c4bdac5b3f31659ba1624ea51b306da9c65eb1b50646",
+          "exact_source_crop": true
+        },
+        {
+          "id": "happy",
+          "size": [
+            256,
+            294
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "965440d155a78e0b8c37f7246ea9a8cc39d76477f98d111938276ab9e93e03af",
+          "file_sha256": "b1fc6874984a3c1e1b4b406466d08c3825a87915ef1e7285a966e8e2d1f4cab3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkA",
+          "size": [
+            340,
+            253
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "53ede80970e9dc03256ba3c2cc729e7493aa9f5dd9f7d098eff005d52b333aa3",
+          "file_sha256": "2db233ea4dda3fcd9ac63c82953859dcbb03df3d876550d1d4c7ae1675ea6d20",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkB",
+          "size": [
+            355,
+            243
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ef4417e70c5dae488a3d2164367293eb5f411c40aabd0a27cb0a4fe205b655ab",
+          "file_sha256": "03a4e6dec0f08f9985c27a95a79c1be955287ea66f4203bbd0511f2984eeb6a9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sleep",
+          "size": [
+            265,
+            196
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7e5328e853254d0cae89c073382b9469e911e0cad7b404866b9704e7ba2cd49f",
+          "file_sha256": "b3f64818efa5efae3eb01d7b219d8c752aa44e98638c187f1ae3c0cd07bdccd1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomA",
+          "size": [
+            228,
+            275
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6796b0eb358a21bd2da866235734933f89f65925e7140e9f741f19fdbf4b4d1e",
+          "file_sha256": "b3ac338fbe6b5ac5f83d5bbf90726c5650a11871ba226db043a1bd3b16cc0370",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomB",
+          "size": [
+            708,
+            795
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "ed9bc2d26b06bda124aa2297029042cf3b7adce3c4a656e3cd1d8334dd079dae",
+          "file_sha256": "78c1029800f9c97ef3323c55237c03058c0909cb6993375f9381327d98faf88c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "stretch",
+          "size": [
+            364,
+            283
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f7fc44f7371f4eae82fa2838ae06478b2e5bd6f4bc6b51607e4d093f7d541b4a",
+          "file_sha256": "7af9f8dabe72b3f748ffcbc6b3801d9da09cc2a902973e2c3ed1a4e26b583104",
+          "exact_source_crop": true
+        },
+        {
+          "id": "watch",
+          "size": [
+            263,
+            292
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b364d5ec078bbcf5aa6cf3ae77d90c26faa8edb937f5ffaaca85453a89817ac9",
+          "file_sha256": "9993a40acae69d0e489e85ae31a6a9dc83f4bdeb0280268f295f9a5cc103bd57",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lookUp",
+          "size": [
+            251,
+            316
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "93aea1e0b0db198c7a3719d3de4bb8d38f9ec9635dd8882c2283c532fab3436b",
+          "file_sha256": "42898c3edf81eb0ac3f74b1d3aadbc02b2e0fc340d0515c363c0c68ec42e9b32",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleA",
+          "size": [
+            695,
+            925
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "d3eee32340043721adb1080a192129c801c122ed429298a8b05a38e8f9543ecd",
+          "file_sha256": "e4e2e99c6b9f566224cfb4963fc5790330f46d931a34bd8d2feab07da6fc3ece",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleB",
+          "size": [
+            281,
+            317
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "58294e1e6647f0e3955fd8634e1bbb23fa34ac3c965414a9693248d721ad45d5",
+          "file_sha256": "c5674aac7ac82177e84fb95678c27acceba0edcabab051d79fb98c98adc7f7cc",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/renderer-manifest.json",
+      "count": 14,
+      "assets": [
+        {
+          "id": "idle",
+          "size": [
+            273,
+            265
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4dd545151b933a09237afe0d3f8d950ea7dda9c44d3fe381d18755e7753f20e9",
+          "file_sha256": "8906b462784f20f4f4b76af5fd5696d38446273b29c3a62b5ae819b24ac8f0d4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "swish",
+          "size": [
+            316,
+            261
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "95238e2f24069a05215df92aa515fb50d72dc56326ca473019a26c28e8e95516",
+          "file_sha256": "ef1f76a04901a96e6cd924276af4dc459f1efce8c73f32d46e51a233eee58865",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blink",
+          "size": [
+            266,
+            261
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "83f9110334534cb6a4032955140dc41c950e437ca63d4707408c730bb77a08f8",
+          "file_sha256": "575d3e697fe78ffef6d972d7532b1e0633cd63b571f32d17099f653a23f9edd6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "happy",
+          "size": [
+            254,
+            261
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "deb736e8407ea885ef8221970e14c44b67a893c02b4561382a4bd099864848ba",
+          "file_sha256": "17acec68f6f5cee0c90fcff9ee0ca55457eac80ee65fa0917214a17314ccd4f4",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkA",
+          "size": [
+            353,
+            255
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0f7f5b10a64b233001900b487b4a5bd2189ed6e23f4f6a2e68142e6cb1504a8d",
+          "file_sha256": "f438e5ef333c771770144253bbc289db1e7e7b6c57de2225492526ff00c462d3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkB",
+          "size": [
+            859,
+            542
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "b895033a1abb91aff0dd357ffba9c6225019f4103333c87d0dc4a99909f3dc16",
+          "file_sha256": "02a1351fff6477c393dfe28fedec783b1841478e8a3f01346f85565f6b3b0134",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sleep",
+          "size": [
+            724,
+            437
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "26ecaa5a031c7eec950c379dce1b969f5f017d49e3a881e8f05999130b79b16c",
+          "file_sha256": "5beffad6448fd30cd6acccd7b3a0b62710e72061959d7b8182721241cea5e12e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomA",
+          "size": [
+            261,
+            259
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ae15ef7e52914b3bef06a340289914cfc3be1d1a6828ecbe10c6c814441476df",
+          "file_sha256": "b60d36e50ff1040bdf08c9bf40ba1bacf32bd230c9b1a9e5db896a2997865b16",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomB",
+          "size": [
+            237,
+            280
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5116ba5b4e42a72bc861aaae8f081b5e1b546cbdd02a8079ea6fcef418d8b497",
+          "file_sha256": "a6528e6d3e7a89438e5283cadc8acf6fc90f1325d6ec70141db8adffb37cd997",
+          "exact_source_crop": true
+        },
+        {
+          "id": "stretch",
+          "size": [
+            389,
+            295
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1153c632af39de6548e4786e45b29e582e505c7ad8aa3630211c77908bd8d0fa",
+          "file_sha256": "11fd27443d90f9af49d44831479ace27f5455ebe99c5e9474fe73a4d32c1badf",
+          "exact_source_crop": true
+        },
+        {
+          "id": "watch",
+          "size": [
+            285,
+            254
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "570d116d0ff7a82e9ff35e8edf453a5db4a1805043e35483b1469b84dc3893d6",
+          "file_sha256": "5b8e2a73acbeb9ea0198768408f4dd738f71e38c1323f428ab06e700c139d4f0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lookUp",
+          "size": [
+            266,
+            303
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7273f78db8da44ab5f8254f403436e62c5b4802162025e73178979e5e9d256ec",
+          "file_sha256": "21817ed9b6b9e1ee1f74cdb663e5583ef78d2374ed70531b446287b80cc2c997",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleA",
+          "size": [
+            301,
+            310
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ce652275da53fbdd7db66e30a3807f13ce9bb18e1d4a6a6490e249ff47149a67",
+          "file_sha256": "4b1d441e11aa8b10fbacd4448f3f8470c709a6d08aa8082125ba01b8e6c52646",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleB",
+          "size": [
+            299,
+            311
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a34958d617499fde5fcf9ed1a57260a4996785c21d7cb6488ff51195e71ac3b8",
+          "file_sha256": "6e9b4e7231e04ec77ecf529ce2ca9b54da51fccced455ed8a5e5ecbb5287cc20",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/renderer-manifest.json",
+      "count": 14,
+      "assets": [
+        {
+          "id": "idle",
+          "size": [
+            305,
+            289
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e87cad23f0336fda57cba05125c044643d6819e36a15d6df34719db10015b7e8",
+          "file_sha256": "bbff02f1faf941bab92d1b1f24f89af07ad9ca07ad77cc38bbc1c0a5d7ab3ace",
+          "exact_source_crop": true
+        },
+        {
+          "id": "swish",
+          "size": [
+            316,
+            289
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5a3ea82a06cca282f3ffc18011e4f01659fbdbedd909362bd3eef7630ad5e796",
+          "file_sha256": "edd02eb2e233028eb867240039d1d0c5edb288bde465b95167b7ec0c20846df1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blink",
+          "size": [
+            608,
+            547
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "247d2ff248acf1e81ec868e90a24f86bdccd480c8f9ee427d1698561c6c17000",
+          "file_sha256": "906f02dc5d846a8ab14caa76c01ca8d47598c67e21b0b40c33efb696ff13f848",
+          "exact_source_crop": true
+        },
+        {
+          "id": "happy",
+          "size": [
+            266,
+            289
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3d84176ab75b35ea8dc661e406cc4ac1da19f3a8c82e6d3b86976049cecce626",
+          "file_sha256": "711303143f3319e0af019e0ab1ffb773f6210c60cb257b297c9ba480a7556266",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkA",
+          "size": [
+            357,
+            253
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3fbce923fa325df4b876719c8d6c70e821ed75d3d80d43665a12b546cc1e4f9c",
+          "file_sha256": "a5ff2983e545dc07275a0f5d72818d9c002040f3af176114e04a3885de0ad175",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkB",
+          "size": [
+            340,
+            255
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a07e722df593a7b30e4c5bdc887de40aa6d8c71c7ca5b254f8d7d42d6e7c058d",
+          "file_sha256": "40600cd7ba42e287163a63cc9ff99f184d7fb63b81b78caf1250e95687a81a23",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sleep",
+          "size": [
+            291,
+            194
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6654b75a53125a01e90da024ed0ecc1af6d5ee638bfa7e911e574ab77a0de5a8",
+          "file_sha256": "6ca2c8539157f0a99ef8371fc2b2e95c41d4daf39f6b3b35d068608ce6312a96",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomA",
+          "size": [
+            256,
+            257
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a9343c794a67125c467e351ee97f8ca15a04841051b6034611bc62e180b577d1",
+          "file_sha256": "467cd4ceef50b227af1796f4eaba958ed775c72eaf0d7eea7639cf2874dfcf40",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomB",
+          "size": [
+            619,
+            526
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "92753563b385eb54269943bccbc8e9e55bfbc9f20be2bfa219803cea50831ce2",
+          "file_sha256": "4dcef9e9a3974d98d1bfd5a25e496f2aa3ddb61e8188cd6e542025e3bb4c1957",
+          "exact_source_crop": true
+        },
+        {
+          "id": "stretch",
+          "size": [
+            791,
+            595
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "326f0297932f1d5156624a6fce1ba3e2b75cdbf318b3d8a0261a88d61875646b",
+          "file_sha256": "dede0325f4f04ced052da9d69b7e6d669d05f32dec5047bfc67493d8f61d74d0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "watch",
+          "size": [
+            274,
+            280
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4a5ee0528c51ccd236f039dbb30f03179fc50865a70be6ff896651ccbeeae2fd",
+          "file_sha256": "0e33afc7f72970f28a1df1164140d348f4ccf89efbd1c36fe35f642ef5221f01",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lookUp",
+          "size": [
+            265,
+            296
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e0b790e518b3d0a9848a4c7d5f8314367a3f3d9fdeddc6425feffa13014b3238",
+          "file_sha256": "da37ce6ac5c535c85400204dd414b5259461791040e6d08510be37de72b99aa7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleA",
+          "size": [
+            296,
+            317
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6b34649f84b89ba22e91be12a96aea31720e5b2d42d50153e72cd5c9250c5d4e",
+          "file_sha256": "77db536c95f314ea3269c0c0715c5edad292e6f1bcf642668bf5e544692fd20d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleB",
+          "size": [
+            282,
+            310
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "829e0973544a24a6d19bab74c7eefbca4a97107b9f3eba37f01f51cd8099eae1",
+          "file_sha256": "ad26ab60f0145a53193a8b6670ebafafbb4adc2661cdee0821bdcbf1538d71b4",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/renderer-manifest.json",
+      "count": 14,
+      "assets": [
+        {
+          "id": "idle",
+          "size": [
+            271,
+            306
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3e130b4414eedc395cd6382aef958cb6a323630c100eef5e4467f82414ca80c3",
+          "file_sha256": "a6145756ae5102adc74ea353792284ffcdb5a80c7a63990e86325c0e41e680f6",
+          "exact_source_crop": true
+        },
+        {
+          "id": "swish",
+          "size": [
+            304,
+            305
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8f1abe25d448815cdea5ab993d545f74b2c7f067a2cf1b9372c838eb75b3b51a",
+          "file_sha256": "84486e51856d6853646b359bf333b324c43be411c25c37a658d3829512aa52a5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blink",
+          "size": [
+            279,
+            298
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5ab46471ba5817acec473e965dfe95059c7996d57e5a04a438c132cf9d97b25c",
+          "file_sha256": "d4c54db7ea28226edf675c5d103668feda3c67900a075a6f57467b252ebb9d87",
+          "exact_source_crop": true
+        },
+        {
+          "id": "happy",
+          "size": [
+            276,
+            298
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1dd0df8677d8a3564ee28e39ef1c977043a97f631b41b63e6ecdf5a6b9a7fae4",
+          "file_sha256": "eea75ca27e2e8fe3a607bc028a10b0ff92c9b10947946f56698eb37b2a5b42d1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkA",
+          "size": [
+            663,
+            504
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "7405da34b6924db6a4ba488e141d4b9c5fbfc083e40a3b2fdefac95e20ba5a5b",
+          "file_sha256": "78391b3498890621c805b2cbbb1400fa1a59f36aab8857e3cc017404f665da99",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkB",
+          "size": [
+            667,
+            504
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "d8ec9eb11cd7c4174063f3dc57cae50766de590fc1d3be81f44cb14b81731312",
+          "file_sha256": "7c7e63195d276ed1a42af5aa6606d9f78c2d4753eb7cdbbd72707727f2b37c2c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sleep",
+          "size": [
+            274,
+            178
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9be3a2cd37573d33404291159dd0ab5680146fd3fb296d7d206e19f58d4047cd",
+          "file_sha256": "feaa7bda1268b5ebdb797bdf42c1f6c92ffd59f5c8fd1f63add9924452839526",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomA",
+          "size": [
+            268,
+            269
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "66e4a2565b9ca6ffdb34f60cf3c8eb71d556682b6998c31afc5f9a1117ba0850",
+          "file_sha256": "cf0a3fab1074c739ab11771c4b98e11970bd4bf6786ce0edb228b0743d60420f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomB",
+          "size": [
+            271,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "bc6a60f9334e6b026416813c87d5570be60fe8705bb3f8b90923d2b70d6dd5c9",
+          "file_sha256": "9f34457734f85eaf8d15fae4caf69856f60e57f8af126b98e26d8b1218ae634d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "stretch",
+          "size": [
+            325,
+            286
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e77f8468302a1c8e53b17f54cca877375187b838ef3c63e62c7e2a27900b827c",
+          "file_sha256": "ca31754b878bddd2685781b961b8a3ce08c5d6fdef1b35e554fda957a7f22e93",
+          "exact_source_crop": true
+        },
+        {
+          "id": "watch",
+          "size": [
+            266,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "9c9db2b0df2feebee8bc5045f62925a0c4be9cf669f5d357c79c0c8c5fdb3da6",
+          "file_sha256": "1844e0c84a0e153f6e8ebd0bde2c7e6bf8f457230d0a7a058d8ae7fca849d172",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lookUp",
+          "size": [
+            260,
+            316
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fb7b1d4ca65f0506f6d667c12796f8935874a21e9dcb8897ea2dae282ab08d49",
+          "file_sha256": "d247bbab0eeb5fbbb9a0e94a8c3a2f1405b7dadd20e40fab038ebf4d179183d3",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleA",
+          "size": [
+            268,
+            315
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "362923b9ab64cef7692d06f07588ce5047cd9c75da7dcbeb4dd2aba05b725bea",
+          "file_sha256": "26a0e08e17054153702351ecd37ff7dbb688422c6adae89e7e2152bdcd648f7d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleB",
+          "size": [
+            239,
+            312
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a762132494c01ef4f5f834b3622e8576c4ff3e8d8b6c304af14b0688642f9b73",
+          "file_sha256": "e6aeb6a1f6fbda19308a0b360d9b5241e0f33404cff5e53926479ce72592d215",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/renderer-manifest.json",
+      "count": 14,
+      "assets": [
+        {
+          "id": "idle",
+          "size": [
+            260,
+            282
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e1e6ac195df7a56699484d587e295ecc53b9e30a53e44278d176eec42b5921a9",
+          "file_sha256": "cbc85b9e30b5de75b420bf851034b77ed7249c525fa79b9faac93956ed47f813",
+          "exact_source_crop": true
+        },
+        {
+          "id": "swish",
+          "size": [
+            296,
+            281
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2dc8df353d11be0b8583943afca0770a417de9ef511c39908a8ed5bd6434cc08",
+          "file_sha256": "26a5a8cd2be90a6d0d773a63f09d32aa4aeb1873a8031b001b06aa96433483dd",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blink",
+          "size": [
+            255,
+            282
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e006264114a328792e085de630559b381a0532ca0a76ddec2c68791a3c507bc7",
+          "file_sha256": "a2dbedca8a0c7e045c245dc1371e3486f18f697688b5e4e61704dec8c7749e4a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "happy",
+          "size": [
+            253,
+            285
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c983d9acf58c18e40f47d3cad096980b64e8d481ce7a071062d097e93f41b2f1",
+          "file_sha256": "5ca3137ba51f5d6aaf9c3ded865f5e0a98fb6e1e245528757fc6a2196900064d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkA",
+          "size": [
+            328,
+            257
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1e056aba042f08cda17c7c8ce2f1f162fcd569587d83515d75fb26304ae31b18",
+          "file_sha256": "b3aa0aabe94e2b1755b30c2857fca8ad42cb8e4c61e130727c8a42f26eb4e4c9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkB",
+          "size": [
+            326,
+            258
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "becb206d79cac9cb6ebad86e65614e99407701f1d63592b991567989fedb635b",
+          "file_sha256": "adf8bc0525c203fd152f2444d1a6b730bfbbf3779dd47d60be8f4a0426c315b2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sleep",
+          "size": [
+            275,
+            170
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "de6644c66f49c15884d0b2a65ab71a6ed3836bed998818c6d1a2f95d92ca708b",
+          "file_sha256": "a90abc64936ab9a709e0434d3cecde74a4b935d8af45e435bf40e4a40eaf47b0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomA",
+          "size": [
+            248,
+            264
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3879a1fda84dd3f733fe503c66f45a9a081e33c937355b3930322677dfe7b344",
+          "file_sha256": "904eaf6f1ffed1ea7cb8094518dcdc2f70076c14b356d277bf72c396c8b360a2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomB",
+          "size": [
+            267,
+            287
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "640baafc38494198be07ac9562fba44cd46acdac64488d99fe4595df01538451",
+          "file_sha256": "ed4da5e3d0e68cdf878c5936300c3acc020485c4727497d184ae32e41858e5e9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "stretch",
+          "size": [
+            346,
+            280
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "8679ebc52c2989fc648835cfde63605df670dca8928c59e3a6a08db50a56522e",
+          "file_sha256": "13b31eb525e8d349902907a84163315590094192b1008eafee01e5957142330d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "watch",
+          "size": [
+            266,
+            275
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "5f786afaf8cd2c191976470c4410efbf6789a50ef8a8eefcd24c5a3c60907526",
+          "file_sha256": "b57a79184ea48485a62fc8eceb5b682997b85c56b0961399168f1b8b51a3fce7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lookUp",
+          "size": [
+            247,
+            305
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "f95585cb0a17ca997140994c416b2e79e5416a86a669d55e79e671d943763bc0",
+          "file_sha256": "49aa754e802c51cfabfa422e7533bb79a7d173acfab12b52d421cf6a5ea6ceb8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleA",
+          "size": [
+            262,
+            302
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ca304b942b039672e2e74ba6b8d4e45b0cceb905e4c2c6d92324fa85ddf6abbd",
+          "file_sha256": "1a3fb7d54cd2fe56d72a836f2f40bbda9a7a065cd3615a135b969cd92747292d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleB",
+          "size": [
+            241,
+            299
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "40800c662973bcf390fb10b8fe3f4affa8ca48d26b032fb7139da67bc94375c3",
+          "file_sha256": "dbd42e4dcc85e040739cddf401167cf4031c9f4513f3991596cb7967c0f1ecd4",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/white/renderer-manifest.json",
+      "count": 14,
+      "assets": [
+        {
+          "id": "idle",
+          "size": [
+            270,
+            303
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ed43f0e10db3f73bc6635639748036bb77be4763107d0c20957012ac1ddb0315",
+          "file_sha256": "90b22dbda8438e5257760ecd169fe08fa217db5b1098b732823a47a71863795e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "swish",
+          "size": [
+            318,
+            303
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "791f8deb5a5682c7a24ca11bbe1bf90ae3d5a145a34a4555064b41fec9222ea9",
+          "file_sha256": "127dafab908139c5e23e3617002e35dea6f91829b64d9eb5740aec6913e63b64",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blink",
+          "size": [
+            273,
+            303
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7312535da8edb77145eb8b9dfb8b4cb41a4a9781ddb8d0f599fa8f593cff52ec",
+          "file_sha256": "c97a7e272d41de4b69ea9031255936540e25611fb63175c7f7c28acb330c64bd",
+          "exact_source_crop": true
+        },
+        {
+          "id": "happy",
+          "size": [
+            251,
+            305
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "06c5defb47bf2c01ad68a39cfc56cd3346f327b641982d1210bab2f6559194bf",
+          "file_sha256": "fc330998982bf5b5aa01cf010a4a5c2f4aee1b079dff3c23463c51a20de88d31",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkA",
+          "size": [
+            342,
+            240
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e29d12ee23a9c7c5995dd45960ed03b91c6748ffb72ee24160f18e30abbde200",
+          "file_sha256": "57c02a3d21b9fc60d4bb7b7992faaf74d284e51a86c378e0eb2ec442625254b1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "walkB",
+          "size": [
+            334,
+            247
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "ae43ff8be7c19713ded83078140fc3d1965cdcba045fdefd262e973b0eb4cee3",
+          "file_sha256": "e402b8c3f73fa3f66f10182f785ae7e91970e5f85921b28cd269f6414c9cdb56",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sleep",
+          "size": [
+            283,
+            180
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "43ca39e22fdf534ba230c6604b45c813f9611d9c5a15ff6c4683009f6d0b035f",
+          "file_sha256": "41dd1c74b8e68c04e966aa897f4d25cfea4209e4631a3eacac89e89908fc1c40",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomA",
+          "size": [
+            269,
+            261
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "15d6c9c87cb6abdc0118bcbb06a9ddac15f5bd15319e4044537998fe4d4c58ac",
+          "file_sha256": "7ae954fab5c4cc7d39b4db3355f3d6a56cde45f994c4fe697fe379ec9b786e0c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "groomB",
+          "size": [
+            255,
+            305
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3b8140c7fb578758de29bd2a2ae10dd91ae76232640f021a13600904c7b2af36",
+          "file_sha256": "6dd91e9b1e60d61fd614c6e7680064db0dc93247e72a760a2557bccd7c1a6b67",
+          "exact_source_crop": true
+        },
+        {
+          "id": "stretch",
+          "size": [
+            363,
+            282
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a8471d8b904253b844edadd03bfc3eb7b450b2ad8809ed974cdb25378141061d",
+          "file_sha256": "b1fc1a3c8da26dc5515d633e75cef4f30b39ddae2c57bf8fba85e4679d80b27b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "watch",
+          "size": [
+            289,
+            297
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c50194483b51b859beb09ae6198e33cbfb65262ce63fde0d55254ef625538328",
+          "file_sha256": "ee83d63bcbef0c343384b8cbdd705abe2dca775a6beac11ad5880ccaf7994a96",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lookUp",
+          "size": [
+            265,
+            327
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e76383f1ba26f59e8cb005439a3b0e8fe149d93271aeb1f6f16a7824556f5dda",
+          "file_sha256": "5ea25fe1113f88e6fcb90a1f3cdfa91c8444e9e53eee5b9260419b778fcd9f9a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleA",
+          "size": [
+            274,
+            325
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "dcdd537d0e4fe0f4ad0a858901b1dc0a0556aa911d3c898b660b0ab4e1245f2d",
+          "file_sha256": "83332952cd1b831b39b86a5a7802921c4a4abec843e0dba50044f3e0f2eb7604",
+          "exact_source_crop": true
+        },
+        {
+          "id": "nuzzleB",
+          "size": [
+            267,
+            322
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "00663aa0ec5d185c540abfcb12e324ce977c9a1f4f6b501c1b5b97977247c6e8",
+          "file_sha256": "706563d1fb8fcbc0ce702263c55de93af684225f2fded61a352daaeec1c34dc7",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "total_assets": 154,
+  "errors": 0
+}

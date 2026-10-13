@@ -1,0 +1,25 @@
+{
+  "id": 13,
+  "name": "桃子开衫",
+  "look": {
+    "skin": 1,
+    "hair": 2,
+    "hairStyle": 1,
+    "shirt": 5,
+    "pants": 1
+  },
+  "hairstyle": 1,
+  "outfit": "cardigan",
+  "accessory": "bow",
+  "accent": "#8caa9a",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#dfaa7d",
+    "hair": "#dfb96f",
+    "shirt": "#cf929e",
+    "pants": "#85664f"
+  },
+  "hatPalette": "#bb6b58",
+  "description": "Fixed customer cast 13 (桃子开衫): warm skin #dfaa7d; hair #dfb96f in a compact high tied bun with a small cream-and-gold tie, loose wisps near ears. Outfit: #cf929e open cardigan over a cream shirt, small gold buttons. Lower clothing color #85664f; warm dark brown leather shoes. Accent #8caa9a. A visible #8caa9a hair bow attached at side/back, preserved in every angle and pose."
+}

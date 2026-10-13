@@ -1,0 +1,1291 @@
+{
+  "status": "candidate_pending_render_review",
+  "bboxAlphaThreshold": "alpha>128 measurement only; exact RGBA source rectangles preserved",
+  "assets": [
+    {
+      "domain": "misc",
+      "id": "empty-cup-saucer",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/empty-cup-saucer.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/tableware-ui-source.png",
+      "source_crop": [
+        0,
+        45,
+        378,
+        412
+      ],
+      "size": [
+        378,
+        367
+      ],
+      "bbox": {
+        "x": 26,
+        "y": 53,
+        "w": 339,
+        "h": 284
+      },
+      "anchor": {
+        "x": 195.5,
+        "y": 336
+      },
+      "sha256": "b114e146e05150ae45a35d5098d86c0a60f54eb5f017a87b979acedd8e82b281",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "empty-tray",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/empty-tray.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/tableware-ui-source.png",
+      "source_crop": [
+        380,
+        70,
+        770,
+        410
+      ],
+      "size": [
+        390,
+        340
+      ],
+      "bbox": {
+        "x": 7,
+        "y": 73,
+        "w": 365,
+        "h": 214
+      },
+      "anchor": {
+        "x": 189.5,
+        "y": 286
+      },
+      "sha256": "30512194eff3ae73c33b3023a9bd1635d28c55b5591832b700d790cdf28bc405",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "water-carafe-glass",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/water-carafe-glass.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/tableware-ui-source.png",
+      "source_crop": [
+        775,
+        35,
+        1100,
+        410
+      ],
+      "size": [
+        325,
+        375
+      ],
+      "bbox": {
+        "x": 32,
+        "y": 31,
+        "w": 272,
+        "h": 318
+      },
+      "anchor": {
+        "x": 168.0,
+        "y": 348
+      },
+      "sha256": "0ba7f7aa1d396e56dadca61a26cbe8e33c576265cf3c67db31bccf9e4fcc2b9a",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "empty-plate",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/empty-plate.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/tableware-ui-source.png",
+      "source_crop": [
+        1100,
+        60,
+        1448,
+        410
+      ],
+      "size": [
+        348,
+        350
+      ],
+      "bbox": {
+        "x": 3,
+        "y": 52,
+        "w": 320,
+        "h": 265
+      },
+      "anchor": {
+        "x": 163.0,
+        "y": 316
+      },
+      "sha256": "08fe8241926899053f6b72fb9d0e6cd7d220ec53a461ce142d8da1c11ce44c52",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "coin-star",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/coin-star.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/tableware-ui-source.png",
+      "source_crop": [
+        35,
+        420,
+        368,
+        727
+      ],
+      "size": [
+        333,
+        307
+      ],
+      "bbox": {
+        "x": 42,
+        "y": 29,
+        "w": 257,
+        "h": 254
+      },
+      "anchor": {
+        "x": 170.5,
+        "y": 282
+      },
+      "sha256": "22f6b4feec2e72c6f3b36158bcd2cb213ee80275ce167707b6926f4b01e0fb3b",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "heart",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/heart.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/tableware-ui-source.png",
+      "source_crop": [
+        410,
+        420,
+        720,
+        724
+      ],
+      "size": [
+        310,
+        304
+      ],
+      "bbox": {
+        "x": 65,
+        "y": 76,
+        "w": 196,
+        "h": 177
+      },
+      "anchor": {
+        "x": 163.0,
+        "y": 252
+      },
+      "sha256": "559c3bc3b963886ddc3eb2c9db095b17809bd735a7b47fc04a3ae51ff8131817",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "drop",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/drop.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/tableware-ui-source.png",
+      "source_crop": [
+        775,
+        420,
+        1080,
+        725
+      ],
+      "size": [
+        305,
+        305
+      ],
+      "bbox": {
+        "x": 59,
+        "y": 42,
+        "w": 157,
+        "h": 228
+      },
+      "anchor": {
+        "x": 137.5,
+        "y": 269
+      },
+      "sha256": "5e43e64152ae4b00109ca24f41af6325a10fa109b13f2a7e558f7d7a6563de99",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "crown",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/crown.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/tableware-ui-source.png",
+      "source_crop": [
+        1100,
+        420,
+        1448,
+        725
+      ],
+      "size": [
+        348,
+        305
+      ],
+      "bbox": {
+        "x": 24,
+        "y": 38,
+        "w": 276,
+        "h": 225
+      },
+      "anchor": {
+        "x": 162.0,
+        "y": 262
+      },
+      "sha256": "6c0fca051d0a443379b8a291f9f05e85e53385ca856130a98bc10a377730dc44",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "map-location",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/map-location.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/tableware-ui-source.png",
+      "source_crop": [
+        0,
+        735,
+        387,
+        1040
+      ],
+      "size": [
+        387,
+        305
+      ],
+      "bbox": {
+        "x": 29,
+        "y": 17,
+        "w": 343,
+        "h": 263
+      },
+      "anchor": {
+        "x": 200.5,
+        "y": 279
+      },
+      "sha256": "87551c1b60fc304cc9193b3c2cad43fc8228276a862a483ae74504942c6dab34",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "arrow-right",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/arrow-right.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/tableware-ui-source.png",
+      "source_crop": [
+        395,
+        735,
+        733,
+        1040
+      ],
+      "size": [
+        338,
+        305
+      ],
+      "bbox": {
+        "x": 20,
+        "y": 38,
+        "w": 304,
+        "h": 224
+      },
+      "anchor": {
+        "x": 172.0,
+        "y": 261
+      },
+      "sha256": "76b7076f61c34624e7c032510b051de5c9c1a9df114c7a46c4247ee2ab828eee",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "film",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/film.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/tableware-ui-source.png",
+      "source_crop": [
+        739,
+        735,
+        1110,
+        1040
+      ],
+      "size": [
+        371,
+        305
+      ],
+      "bbox": {
+        "x": 15,
+        "y": 59,
+        "w": 344,
+        "h": 185
+      },
+      "anchor": {
+        "x": 187.0,
+        "y": 243
+      },
+      "sha256": "3a143ae2589fcc0634102d72ff63f7079e9c27dea8ac9ab8cad0bee09af9e9e6",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "spark",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/spark.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/tableware-ui-source.png",
+      "source_crop": [
+        1115,
+        735,
+        1448,
+        1040
+      ],
+      "size": [
+        333,
+        305
+      ],
+      "bbox": {
+        "x": 39,
+        "y": 16,
+        "w": 251,
+        "h": 262
+      },
+      "anchor": {
+        "x": 164.5,
+        "y": 277
+      },
+      "sha256": "d3d1c9d3f41a92a3fe1c0e28ebc0e37f1205770fb507f52f7711b8512d833c05",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": []
+    },
+    {
+      "domain": "signature",
+      "id": "cup-coffee",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/cup-coffee.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        0,
+        20,
+        415,
+        389
+      ],
+      "size": [
+        415,
+        369
+      ],
+      "bbox": {
+        "x": 37,
+        "y": 64,
+        "w": 368,
+        "h": 273
+      },
+      "anchor": {
+        "x": 221.0,
+        "y": 336
+      },
+      "sha256": "3653eb01b166628fbb746d29355b3201d05eb4cf51c16a8651b804ebfa4822fc",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "cup-tea",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/cup-tea.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        415,
+        20,
+        772,
+        389
+      ],
+      "size": [
+        357,
+        369
+      ],
+      "bbox": {
+        "x": 17,
+        "y": 57,
+        "w": 332,
+        "h": 275
+      },
+      "anchor": {
+        "x": 183.0,
+        "y": 331
+      },
+      "sha256": "01d1c6116743f9ef8dff5c6abe639e3c4c35ca28fb77569e97c2698d1efabf08",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "cup-milk",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/cup-milk.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        776,
+        15,
+        1026,
+        389
+      ],
+      "size": [
+        250,
+        374
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 22,
+        "w": 220,
+        "h": 332
+      },
+      "anchor": {
+        "x": 118.0,
+        "y": 353
+      },
+      "sha256": "bea8262c01cc92cde5ec22b3164378f74c431f10d3bba60c8771a76b191f0510",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "cup-fruit",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/cup-fruit.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        1080,
+        15,
+        1390,
+        389
+      ],
+      "size": [
+        310,
+        374
+      ],
+      "bbox": {
+        "x": 30,
+        "y": 29,
+        "w": 241,
+        "h": 329
+      },
+      "anchor": {
+        "x": 150.5,
+        "y": 357
+      },
+      "sha256": "2a67c5dad6e291e301b119baea540b8a973c8d9aacd524012ef919f9197e1be8",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "liquid-coffee",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/liquid-coffee.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        0,
+        401,
+        368,
+        600
+      ],
+      "size": [
+        368,
+        199
+      ],
+      "bbox": {
+        "x": 39,
+        "y": 25,
+        "w": 313,
+        "h": 155
+      },
+      "anchor": {
+        "x": 195.5,
+        "y": 179
+      },
+      "sha256": "93cd35cb94aa7e424487f51421ed933effc7291a486995f7941b78f2642cd350",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "liquid-tea",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/liquid-tea.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        377,
+        401,
+        713,
+        600
+      ],
+      "size": [
+        336,
+        199
+      ],
+      "bbox": {
+        "x": 14,
+        "y": 24,
+        "w": 308,
+        "h": 156
+      },
+      "anchor": {
+        "x": 168.0,
+        "y": 179
+      },
+      "sha256": "e6151aa471b7e920c903b5eebd1ca901c54b2172954e2bab64ac4dbca35761dc",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "liquid-milk",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/liquid-milk.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        724,
+        401,
+        1060,
+        600
+      ],
+      "size": [
+        336,
+        199
+      ],
+      "bbox": {
+        "x": 12,
+        "y": 23,
+        "w": 303,
+        "h": 155
+      },
+      "anchor": {
+        "x": 163.5,
+        "y": 177
+      },
+      "sha256": "a7f1a333a626ee84429c89ee474c7b0a0c873c1feb8cbac78aa1d4b99faf68fe",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "liquid-fruit",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/liquid-fruit.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        1065,
+        401,
+        1405,
+        600
+      ],
+      "size": [
+        340,
+        199
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 23,
+        "w": 308,
+        "h": 155
+      },
+      "anchor": {
+        "x": 162.0,
+        "y": 177
+      },
+      "sha256": "75f4d6661543041bb47d23be6b46358dce85aa8da38788e69317d84c8dbf63cd",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "topping-milk",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/topping-milk.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        20,
+        610,
+        375,
+        831
+      ],
+      "size": [
+        355,
+        221
+      ],
+      "bbox": {
+        "x": 29,
+        "y": 22,
+        "w": 293,
+        "h": 177
+      },
+      "anchor": {
+        "x": 175.5,
+        "y": 198
+      },
+      "sha256": "8381b2bff65b9f4a965a72573907822828c1a1a484ace918dd513757e16826fd",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry.",
+        "Milk cap is visibly peaked; not a flat milk band. Candidate requires recipe-compositor review."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "topping-sugar",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/topping-sugar.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        405,
+        620,
+        720,
+        834
+      ],
+      "size": [
+        315,
+        214
+      ],
+      "bbox": {
+        "x": 31,
+        "y": 28,
+        "w": 250,
+        "h": 183
+      },
+      "anchor": {
+        "x": 156.0,
+        "y": 210
+      },
+      "sha256": "a3fadd34c71487cf68a086c9dee4f4b8cbc4dd8d231a3d5b16568e332babfba9",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "topping-spice",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/topping-spice.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        729,
+        620,
+        1040,
+        834
+      ],
+      "size": [
+        311,
+        214
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 20,
+        "w": 280,
+        "h": 190
+      },
+      "anchor": {
+        "x": 150.0,
+        "y": 209
+      },
+      "sha256": "041cb1135f1af32055128b20f2be98ed2becb1e04990ae389ce58392fd7daf68",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "topping-cocoa",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/topping-cocoa.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        1075,
+        610,
+        1402,
+        834
+      ],
+      "size": [
+        327,
+        224
+      ],
+      "bbox": {
+        "x": 30,
+        "y": 18,
+        "w": 264,
+        "h": 190
+      },
+      "anchor": {
+        "x": 162.0,
+        "y": 207
+      },
+      "sha256": "0ba7ac0cfaecb8d32704db2a3a82d366a5c3d20925a5e4e0831de5faeb26c131",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "topping-cream",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/topping-cream.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        20,
+        831,
+        381,
+        1105
+      ],
+      "size": [
+        361,
+        274
+      ],
+      "bbox": {
+        "x": 22,
+        "y": 3,
+        "w": 318,
+        "h": 239
+      },
+      "anchor": {
+        "x": 181.0,
+        "y": 241
+      },
+      "sha256": "b45014b2eaa1da960fae980f15dbe3af777fad11cf0a53c473e75e24b0448b15",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "topping-fruit",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/topping-fruit.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        390,
+        840,
+        710,
+        1105
+      ],
+      "size": [
+        320,
+        265
+      ],
+      "bbox": {
+        "x": 12,
+        "y": 26,
+        "w": 264,
+        "h": 199
+      },
+      "anchor": {
+        "x": 144.0,
+        "y": 224
+      },
+      "sha256": "efecc30c4d609788b57622d0c2f021ff76fcbb9d25fc2d700560b062cd2bb991",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "topping-matcha",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/topping-matcha.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        710,
+        866,
+        1061,
+        1105
+      ],
+      "size": [
+        351,
+        239
+      ],
+      "bbox": {
+        "x": 7,
+        "y": 24,
+        "w": 323,
+        "h": 171
+      },
+      "anchor": {
+        "x": 168.5,
+        "y": 194
+      },
+      "sha256": "f90301b72a69ff2dca6d05686ff16082a8f75f38073d48658386d286e752c076",
+      "alpha": {
+        "min": 0,
+        "max": 255
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "signature",
+      "id": "glass-glints",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/glass-glints.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/signature-components-source.png",
+      "source_crop": [
+        1074,
+        840,
+        1406,
+        1105
+      ],
+      "size": [
+        332,
+        265
+      ],
+      "bbox": {
+        "x": 16,
+        "y": 26,
+        "w": 266,
+        "h": 188
+      },
+      "anchor": {
+        "x": 149.0,
+        "y": 213
+      },
+      "sha256": "9364cf41d5783d14dd17ab3da45bb174587d296aa18f191c0c1eb600042dc5cc",
+      "alpha": {
+        "min": 0,
+        "max": 250
+      },
+      "limitations": [
+        "Independent authored layer, not pixel-registered to other components. Fit surface to measured vessel rim at integration; no per-layer stretch promised. Glass liquids need runtime body fill/clipping or additional authored fill geometry."
+      ]
+    },
+    {
+      "domain": "upgrade",
+      "id": "barista",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/barista.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/upgrades-feedback-source.png",
+      "source_crop": [
+        10,
+        15,
+        406,
+        615
+      ],
+      "size": [
+        396,
+        600
+      ],
+      "bbox": {
+        "x": 19,
+        "y": 33,
+        "w": 370,
+        "h": 540
+      },
+      "anchor": {
+        "x": 204.0,
+        "y": 572
+      },
+      "sha256": "382c980b538099a0149df9b8da60e01c2b6429ed94a9ca6fcee0d1f0ac86fee9",
+      "alpha": {
+        "min": 0,
+        "max": 254
+      },
+      "limitations": []
+    },
+    {
+      "domain": "upgrade",
+      "id": "server",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/server.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/upgrades-feedback-source.png",
+      "source_crop": [
+        408,
+        15,
+        773,
+        615
+      ],
+      "size": [
+        365,
+        600
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 29,
+        "w": 352,
+        "h": 548
+      },
+      "anchor": {
+        "x": 184.0,
+        "y": 576
+      },
+      "sha256": "3d7eec41d994f9ead80c0c64c6e744d9fbc471ea97b6f48bbaa4d8e32904ae90",
+      "alpha": {
+        "min": 0,
+        "max": 254
+      },
+      "limitations": []
+    },
+    {
+      "domain": "upgrade",
+      "id": "cook",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/cook.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/upgrades-feedback-source.png",
+      "source_crop": [
+        774,
+        10,
+        1149,
+        615
+      ],
+      "size": [
+        375,
+        605
+      ],
+      "bbox": {
+        "x": 3,
+        "y": 21,
+        "w": 363,
+        "h": 560
+      },
+      "anchor": {
+        "x": 184.5,
+        "y": 580
+      },
+      "sha256": "d35b8daa16dae42bcf931d81ad2bd83d5465a80deb91f1a162e6e8865114175c",
+      "alpha": {
+        "min": 0,
+        "max": 254
+      },
+      "limitations": []
+    },
+    {
+      "domain": "upgrade",
+      "id": "marketing",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/marketing.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/upgrades-feedback-source.png",
+      "source_crop": [
+        1150,
+        135,
+        1530,
+        615
+      ],
+      "size": [
+        380,
+        480
+      ],
+      "bbox": {
+        "x": 19,
+        "y": 37,
+        "w": 346,
+        "h": 409
+      },
+      "anchor": {
+        "x": 192.0,
+        "y": 445
+      },
+      "sha256": "3f12deab5b9ccc0ef422acc6ba1e040c5197d7d00756f4687634fd29dc4db140",
+      "alpha": {
+        "min": 0,
+        "max": 254
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "order-waiting",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/order-waiting.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/upgrades-feedback-source.png",
+      "source_crop": [
+        65,
+        615,
+        343,
+        990
+      ],
+      "size": [
+        278,
+        375
+      ],
+      "bbox": {
+        "x": 36,
+        "y": 14,
+        "w": 211,
+        "h": 339
+      },
+      "anchor": {
+        "x": 141.5,
+        "y": 352
+      },
+      "sha256": "f701558580e12828f56cb6a949183176bd8849b5902f505eb625f1fbf6092a7e",
+      "alpha": {
+        "min": 0,
+        "max": 254
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "order-ready",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/order-ready.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/upgrades-feedback-source.png",
+      "source_crop": [
+        407,
+        615,
+        753,
+        990
+      ],
+      "size": [
+        346,
+        375
+      ],
+      "bbox": {
+        "x": 26,
+        "y": 34,
+        "w": 292,
+        "h": 293
+      },
+      "anchor": {
+        "x": 172.0,
+        "y": 326
+      },
+      "sha256": "7991d8e7edbd6bd493abcb80008bcf83d5d8863a66ae5a26178472c4770a4b92",
+      "alpha": {
+        "min": 0,
+        "max": 254
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "order-served",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/order-served.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/upgrades-feedback-source.png",
+      "source_crop": [
+        780,
+        615,
+        1133,
+        990
+      ],
+      "size": [
+        353,
+        375
+      ],
+      "bbox": {
+        "x": 23,
+        "y": 26,
+        "w": 302,
+        "h": 306
+      },
+      "anchor": {
+        "x": 174.0,
+        "y": 331
+      },
+      "sha256": "4b0f232e9b99c798298da4480402d57af277241fde18a95dca6cefbabf3fb9fa",
+      "alpha": {
+        "min": 0,
+        "max": 254
+      },
+      "limitations": []
+    },
+    {
+      "domain": "misc",
+      "id": "star",
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/star.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-ui-v1/upgrades-feedback-source.png",
+      "source_crop": [
+        1150,
+        615,
+        1510,
+        990
+      ],
+      "size": [
+        360,
+        375
+      ],
+      "bbox": {
+        "x": 35,
+        "y": 37,
+        "w": 296,
+        "h": 282
+      },
+      "anchor": {
+        "x": 183.0,
+        "y": 318
+      },
+      "sha256": "c3d546c904fe05d5f54f984c2cc06ac1498202b2f31844a944419edf27c9853a",
+      "alpha": {
+        "min": 0,
+        "max": 254
+      },
+      "limitations": []
+    }
+  ],
+  "aliases": [
+    {
+      "domain": "upgrade",
+      "id": "machine",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-service-props-v1/espresso-machine.png",
+      "status": "reused"
+    },
+    {
+      "domain": "upgrade",
+      "id": "tables",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-assets-v2/table-no-vase.png",
+      "status": "reused"
+    }
+  ],
+  "gaps": [
+    {
+      "domain": "signature",
+      "id": "glass-liquid-body-fill",
+      "status": "missing",
+      "reason": "Surface layers exist but transparent tall glasses require renderer clipping/fill below surface; authored registered liquid body not generated."
+    },
+    {
+      "domain": "signature",
+      "id": "dose-1-vs-2-variants",
+      "status": "review_required",
+      "reason": "Sugar/spice garnish sources include two pieces; runtime exact dose remains pips/count text until independent one-piece cutout registration is reviewed."
+    }
+  ]
+}

@@ -1,0 +1,344 @@
+{
+  "breed": "siamese",
+  "bboxAlphaThreshold": 128,
+  "scaleNote": "Sheet-level scale estimate matches physical head width, not individual bbox height. All frames on each sheet share scale. Runtime refinement needed; no image distortion applied.",
+  "anchorNote": "Manual source-pixel estimates for grounded support midpoint and forehead/crown between ears, not ear tips. Verify pet contact in runtime.",
+  "frames": [
+    {
+      "state": "idle",
+      "file": "siamese-idle.png",
+      "source": "core-source.png",
+      "size": [
+        396,
+        418
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 376,
+        "h": 398
+      },
+      "foot": {
+        "x": 149,
+        "y": 399
+      },
+      "headContact": {
+        "x": 113,
+        "y": 87
+      },
+      "sourceToWorldScale": 0.03275
+    },
+    {
+      "state": "lookUp",
+      "file": "siamese-lookUp.png",
+      "source": "core-source.png",
+      "size": [
+        379,
+        478
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 359,
+        "h": 458
+      },
+      "foot": {
+        "x": 136,
+        "y": 459
+      },
+      "headContact": {
+        "x": 127,
+        "y": 75
+      },
+      "sourceToWorldScale": 0.03275
+    },
+    {
+      "state": "walkA",
+      "file": "siamese-walkA.png",
+      "source": "core-source.png",
+      "size": [
+        580,
+        347
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 560,
+        "h": 327
+      },
+      "foot": {
+        "x": 268,
+        "y": 326
+      },
+      "headContact": {
+        "x": 106,
+        "y": 83
+      },
+      "sourceToWorldScale": 0.03275
+    },
+    {
+      "state": "walkB",
+      "file": "siamese-walkB.png",
+      "source": "core-source.png",
+      "size": [
+        576,
+        350
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 556,
+        "h": 330
+      },
+      "foot": {
+        "x": 291,
+        "y": 329
+      },
+      "headContact": {
+        "x": 104,
+        "y": 79
+      },
+      "sourceToWorldScale": 0.03275
+    },
+    {
+      "state": "swish",
+      "file": "siamese-swish.png",
+      "source": "behaviors-source.png",
+      "size": [
+        449,
+        457
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 429,
+        "h": 437
+      },
+      "foot": {
+        "x": 163,
+        "y": 436
+      },
+      "headContact": {
+        "x": 139,
+        "y": 76
+      },
+      "sourceToWorldScale": 0.02948
+    },
+    {
+      "state": "blink",
+      "file": "siamese-blink.png",
+      "source": "behaviors-source.png",
+      "size": [
+        421,
+        457
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 401,
+        "h": 437
+      },
+      "foot": {
+        "x": 163,
+        "y": 436
+      },
+      "headContact": {
+        "x": 140,
+        "y": 76
+      },
+      "sourceToWorldScale": 0.02948
+    },
+    {
+      "state": "happy",
+      "file": "siamese-happy.png",
+      "source": "behaviors-source.png",
+      "size": [
+        426,
+        457
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 406,
+        "h": 437
+      },
+      "foot": {
+        "x": 165,
+        "y": 436
+      },
+      "headContact": {
+        "x": 140,
+        "y": 76
+      },
+      "sourceToWorldScale": 0.02948
+    },
+    {
+      "state": "sleep",
+      "file": "siamese-sleep.png",
+      "source": "behaviors-source.png",
+      "size": [
+        470,
+        274
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 450,
+        "h": 254
+      },
+      "foot": {
+        "x": 235,
+        "y": 254
+      },
+      "headContact": {
+        "x": 148,
+        "y": 69
+      },
+      "sourceToWorldScale": 0.02948
+    },
+    {
+      "state": "groomA",
+      "file": "siamese-groomA.png",
+      "source": "behaviors-source.png",
+      "size": [
+        443,
+        448
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 423,
+        "h": 428
+      },
+      "foot": {
+        "x": 183,
+        "y": 426
+      },
+      "headContact": {
+        "x": 146,
+        "y": 75
+      },
+      "sourceToWorldScale": 0.02948
+    },
+    {
+      "state": "groomB",
+      "file": "siamese-groomB.png",
+      "source": "behaviors-source.png",
+      "size": [
+        412,
+        442
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 392,
+        "h": 422
+      },
+      "foot": {
+        "x": 150,
+        "y": 424
+      },
+      "headContact": {
+        "x": 139,
+        "y": 80
+      },
+      "sourceToWorldScale": 0.02948
+    },
+    {
+      "state": "stretch",
+      "file": "siamese-stretch.png",
+      "source": "interaction-source.png",
+      "size": [
+        643,
+        476
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 623,
+        "h": 456
+      },
+      "foot": {
+        "x": 306,
+        "y": 452
+      },
+      "headContact": {
+        "x": 224,
+        "y": 258
+      },
+      "sourceToWorldScale": 0.02721
+    },
+    {
+      "state": "watch",
+      "file": "siamese-watch.png",
+      "source": "interaction-source.png",
+      "size": [
+        434,
+        487
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 414,
+        "h": 467
+      },
+      "foot": {
+        "x": 160,
+        "y": 468
+      },
+      "headContact": {
+        "x": 157,
+        "y": 83
+      },
+      "sourceToWorldScale": 0.02721
+    },
+    {
+      "state": "nuzzleA",
+      "file": "siamese-nuzzleA.png",
+      "source": "nuzzle-raised-source.png",
+      "size": [
+        606,
+        795
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 586,
+        "h": 775
+      },
+      "foot": {
+        "x": 213,
+        "y": 772
+      },
+      "headContact": {
+        "x": 181,
+        "y": 111
+      },
+      "sourceToWorldScale": 0.0188
+    },
+    {
+      "state": "nuzzleB",
+      "file": "siamese-nuzzleB.png",
+      "source": "nuzzle-raised-source.png",
+      "size": [
+        574,
+        794
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 554,
+        "h": 774
+      },
+      "foot": {
+        "x": 166,
+        "y": 771
+      },
+      "headContact": {
+        "x": 202,
+        "y": 120
+      },
+      "sourceToWorldScale": 0.0188
+    }
+  ]
+}

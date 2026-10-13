@@ -1,0 +1,322 @@
+{
+  "scope": "File existence, dimensions, alpha bounds, exact source RGBA crop, duplicate pixel evidence only; no runtime or aesthetic pass",
+  "manifests": [
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-environments-v1/manifest.json",
+      "count": 22,
+      "assets": [
+        {
+          "id": "reading-library-shelf/base",
+          "size": [
+            548,
+            565
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "ceeca7086e2edb2ed8a2de244ca17f575ec16d3aebb9ec0be275f35cb5fad69e",
+          "file_sha256": "7e0ea1382100c8acd11751dc0357f81dfb2e11273507cf216eb447ee0781e9a9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "greenhouse-glass-bay/base",
+          "size": [
+            348,
+            610
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "417aeacc5e9c5cbdeb3b6cb0dbe2a47506d13215e78ba0ee3189afca71ebcdba",
+          "file_sha256": "c082f556fc6fc98e15cdc42bd0f081ef17aff78a6852c91966607f65ea18ca39",
+          "exact_source_crop": true
+        },
+        {
+          "id": "greenhouse-empty-potting-bench/base",
+          "size": [
+            874,
+            225
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "0d191edec2804e2576a24d3d9d91f6332cc7be7707e4a7d55449417991aeda05",
+          "file_sha256": "09d3482b8233e4cb1db6b634a90d036a87141619ac3196dbcde8f681688f8545",
+          "exact_source_crop": true
+        },
+        {
+          "id": "greenhouse-hanging-planter/base",
+          "size": [
+            259,
+            370
+          ],
+          "alpha_extrema": [
+            0,
+            253
+          ],
+          "rgba_sha256": "4b7c5caf04baa3d83df92282eaf0d4c91721d84039a4c8b718a186e5b9bf6e31",
+          "file_sha256": "2d99f37bd729a81cc00bb81dcedf3534094f60b084fe9f1b210c825fb039aa90",
+          "exact_source_crop": true
+        },
+        {
+          "id": "reading-book-stack/base",
+          "size": [
+            321,
+            228
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "418be4d7b73623078ba77260edc6e027f567e781eb17d09a82f48de8e89f0573",
+          "file_sha256": "4ac6bbead6b2c7e0c27e5afea173de6a308cdfe3c363c77757f0c2b8d571a235",
+          "exact_source_crop": true
+        },
+        {
+          "id": "pergola-post/base",
+          "size": [
+            195,
+            495
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "804e21b874644bd2eebb65c82b35a0c19568a1383a37b4a72d59d6be740df134",
+          "file_sha256": "4b7095c6204f3aa60ccf55d298fada075a4c93c05f49dc76bd66a16dd96d12c9",
+          "exact_source_crop": true
+        },
+        {
+          "id": "pergola-beam/base",
+          "size": [
+            445,
+            98
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "72f7867bcf567173248d89a81dc5c557d2383224192b6f76dc4a7ec3f4ffd55f",
+          "file_sha256": "5f51b7780196adb52acfed4f34e8f537eed856ee2bc0269ae37332367b7af06e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "terrace-parapet/base",
+          "size": [
+            420,
+            197
+          ],
+          "alpha_extrema": [
+            0,
+            253
+          ],
+          "rgba_sha256": "847133e54aeae64295b3a2491f43ce166d6301c2cb93aad2f34ae61a7166a66c",
+          "file_sha256": "8c473d3975af47ca275986ca927a8b7060a7c134e2642021cd6728db886b99ee",
+          "exact_source_crop": true
+        },
+        {
+          "id": "festoon-three-lamps/base",
+          "size": [
+            350,
+            191
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "9f0af4e7a33955f353c52f6296ba7b298309464d5c7b7dbb31fc869bba3fbb2c",
+          "file_sha256": "64aed9ed5a16b81c9fe11b450d93321abd845dce01e5b903c04ddf2614c70b94",
+          "exact_source_crop": true
+        },
+        {
+          "id": "terrace-flowerbox/base",
+          "size": [
+            490,
+            240
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "afe39c326a9d7fdccb8723129e85760c40a68b499a51d57ebe6b342024b91e9a",
+          "file_sha256": "a502e51ae8fc4f6a2352382a3bd91b37d6ada35ee8364704b8a19d1bff57b15a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "climbing-vine-sprig/base",
+          "size": [
+            235,
+            391
+          ],
+          "alpha_extrema": [
+            0,
+            253
+          ],
+          "rgba_sha256": "0dc8872b9a83a2e2342af159f976b3d999682db7829bf63da7206026704a5dab",
+          "file_sha256": "9d043f8730c5c54a1a7e145f7a28c6c763d80b8338a50318195a2253a8548653",
+          "exact_source_crop": true
+        },
+        {
+          "id": "blank-region-sign/base",
+          "size": [
+            436,
+            158
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "0812ce0aa5b57efa1e08f23907ebea93f4fdb4e7a586c9106c50a12e904cb8cf",
+          "file_sha256": "6780dec5e3ed74eb480346e81843cefa5b6babc38b6918d35a94c3fcfba2511f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "coping-strip/base",
+          "size": [
+            385,
+            83
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "a7c75c65d9f12f4f9777bc5917356372f77e3d4a7705a5b4148c5ca5342336de",
+          "file_sha256": "777381efba5574afe1daf4d557eb367dbcef8ad3be1e45407fede61981af0771",
+          "exact_source_crop": true
+        },
+        {
+          "id": "main-corner-post/base",
+          "size": [
+            147,
+            540
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "f9e47b7a43abb5c3a358c5d063f2b0d194be0af183f47ea8cafa632b647db86d",
+          "file_sha256": "0b2e2d7cf79b40a1899e96aeadaeaafe04e8cde091ead6edc843735e05a75fcc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "main-horizontal-beam/base",
+          "size": [
+            684,
+            118
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "ac85a484487f2ab3b3c71b0b3ae3183e1870281270fb78fb93a514f62434a5b4",
+          "file_sha256": "be93b41579e58636c0e06fb0a2caa14b38cf874abd2d41c2d5c206d6b0bf333b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "main-open-door-frame/base",
+          "size": [
+            320,
+            490
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "73949c966aa54353a61a507945f8f89473ce4acc493fba0558afc2337ccbfb87",
+          "file_sha256": "45821722023aad7d76be36150ac0107c76425c10b5c9600b76d3b4a68e430642",
+          "exact_source_crop": true
+        },
+        {
+          "id": "main-closed-door-leaf/base",
+          "size": [
+            219,
+            430
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "bb316db248a767ff6ac64ff43219e2566f39565a60dc93c220a0e7d7d5e1eda7",
+          "file_sha256": "2f59132944d7be8dfe1f4f4930c2ffaae8a88093ecbae8f55fa9937c899f0eee",
+          "exact_source_crop": true
+        },
+        {
+          "id": "outdoor-tree-line/base",
+          "size": [
+            516,
+            412
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "9ba35ccf213619dc140865e2bdfd07ec84e1a64826b184972dd71b949aae0cab",
+          "file_sha256": "d474a36a9af886362b88e24f44426e642af2d29ef9ec54bb153ecb75e8684571",
+          "exact_source_crop": true
+        },
+        {
+          "id": "village-roof-cluster/base",
+          "size": [
+            404,
+            347
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "9b3a67227b25104508870fadbb02cd9c4bd7dd473d6a546ef5101de19053ce07",
+          "file_sha256": "4ac7cd2355a11a53e7f1e3cbf31e8b4665fdfd03e6f604d088429f37cbf93c69",
+          "exact_source_crop": true
+        },
+        {
+          "id": "cloud/base",
+          "size": [
+            419,
+            220
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "555f294283ee5c21e97ca414405120b3c89d5c4eeee610849e39cd547e11c776",
+          "file_sha256": "f5592754128a076e8ec70f7a1b2797c38fb06953aafd59da17414aecad8f627a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "foreground-threshold/base",
+          "size": [
+            619,
+            122
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "bff9482937e2a50509e63fb0226bda56a5cecd8b8af5919971ca63bb7b1dc9cb",
+          "file_sha256": "4eddb7777c8ab56695287e807b6cf85b6e05b1270405e516a5cfedb5eaf9cdab",
+          "exact_source_crop": true
+        },
+        {
+          "id": "reading-window-ochre/base",
+          "size": [
+            1837,
+            856
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "312646e17979e2b082c5ce4cad834c6504a76510bc62d2bfc8732f466223d186",
+          "file_sha256": "35eea31510fe4182f7513f2cfdd1d25fe822a3575a844aea14239205b21f1ed3",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "total_assets": 22,
+  "errors": 0
+}

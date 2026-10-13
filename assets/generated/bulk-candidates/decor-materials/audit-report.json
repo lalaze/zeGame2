@@ -1,0 +1,701 @@
+{
+  "frozenAt": "2026-10-13T10:33:09.606940+00:00",
+  "manifest": "renderer-manifest.json",
+  "manifestSha256": "dda22999258f7a3774b98131ff3105a1bb38cc1d5aa7067574b9c5f1e9c74ed2",
+  "structuralErrors": [],
+  "generatedPngCount": 34,
+  "aliasPngCount": 2,
+  "coveredIdCount": 31,
+  "expectedIdCount": 31,
+  "excludedNoBitmapCount": 4,
+  "missingIds": [],
+  "unexpectedIds": [],
+  "duplicateIdStates": [],
+  "checkedFiles": [
+    {
+      "id": "wall_cream",
+      "state": "tile",
+      "file": "wall_cream.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cropSize": [
+        627,
+        1044
+      ],
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "fileSha256": "1c648d4c5e6f051f8996138a56cda07578ce133fba51ed46d2abc19594c5917d"
+    },
+    {
+      "id": "wall_mint",
+      "state": "tile",
+      "file": "wall_mint.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cropSize": [
+        1011,
+        1008
+      ],
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "fileSha256": "49c0c4aac680e924fba6d08eb2635cd5567c70813b4b7a588c633bb54a7a9ca8"
+    },
+    {
+      "id": "wall_rose",
+      "state": "tile",
+      "file": "wall_rose.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cropSize": [
+        836,
+        1015
+      ],
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "fileSha256": "7847c5b7e5f8b14eac41d553323984b014ade0d98068178f6edb8ff1fa17854d"
+    },
+    {
+      "id": "wall_dots",
+      "state": "tile",
+      "file": "wall_dots.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cropSize": [
+        627,
+        1112
+      ],
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "fileSha256": "4fb6b1c059db77f30898bbf1b00599e6ea7c507deb7608cebb7ffb527ab7ff17"
+    },
+    {
+      "id": "wall_brick",
+      "state": "tile",
+      "file": "wall_brick.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cropSize": [
+        582,
+        1010
+      ],
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "fileSha256": "470c9e7d737d95f8dfb1a95351b131dbeb58287d778bb92868613e983a1f17a3"
+    },
+    {
+      "id": "wall_walnut",
+      "state": "tile",
+      "file": "wall_walnut.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cropSize": [
+        1152,
+        784
+      ],
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "fileSha256": "44f8cf02686c1324910c9a32c3a6958804e01722dd9bce3e81e1f736e8182a01"
+    },
+    {
+      "id": "wall_stars",
+      "state": "tile",
+      "file": "wall_stars.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cropSize": [
+        810,
+        862
+      ],
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "fileSha256": "5f9af47573c40e15471a3fc95f2198079dda8cae8621127e9ee8bef31863db11"
+    },
+    {
+      "id": "floor_checker",
+      "state": "tile",
+      "file": "floor_checker.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cropSize": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "fileSha256": "3525a4b63f513091778f48198908db33eaa4745f5ae433f3371782d1327c8729"
+    },
+    {
+      "id": "floor_planks",
+      "state": "tile",
+      "file": "floor_planks.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cropSize": [
+        1245,
+        733
+      ],
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "fileSha256": "b299c7dd9a56c775c732dc6adad09ffebab33705abacd90a06e937bdbe042d5e"
+    },
+    {
+      "id": "floor_mint",
+      "state": "tile",
+      "file": "floor_mint.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cropSize": [
+        939,
+        939
+      ],
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "fileSha256": "4209d61aed6234be9cc80ba993688b02b60337d64639c4bad8bfc4d982ab6b44"
+    },
+    {
+      "id": "floor_terrazzo",
+      "state": "tile",
+      "file": "floor_terrazzo.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cropSize": [
+        1239,
+        939
+      ],
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "fileSha256": "0581adc2fba68b616f0d2ac593afa9a3d479490c603a166946f92eb19e4c4f3f"
+    },
+    {
+      "id": "floor_herringbone",
+      "state": "tile",
+      "file": "floor_herringbone.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cropSize": [
+        1062,
+        1044
+      ],
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "fileSha256": "ca27f6e047168ac7b0f2fd302213a019274bb473cb866ac6903909ea90189d15"
+    },
+    {
+      "id": "floor_marble",
+      "state": "tile",
+      "file": "floor_marble.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cropSize": [
+        1254,
+        1254
+      ],
+      "alphaExtrema": [
+        255,
+        255
+      ],
+      "fileSha256": "b3d8ceae17337c47dbbbb003fed320eff3ee31abfde482391679ce3b1aa71ac6"
+    },
+    {
+      "id": "counter_walnut",
+      "state": "top",
+      "file": "counter_walnut-top.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "cropSize": [
+        1522,
+        172
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "fileSha256": "7d632f724303fc6305e6f34671709f3b74249852becde565232e174a0136a134"
+    },
+    {
+      "id": "counter_walnut",
+      "state": "front",
+      "file": "counter_walnut-front.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "cropSize": [
+        782,
+        409
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "fileSha256": "fbbaadce726e821a09c3a2c91fc81aba4e2e5a079bdd2e56bcb817fd98055ad0"
+    },
+    {
+      "id": "counter_marble",
+      "state": "top",
+      "file": "counter_marble-top.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "cropSize": [
+        1536,
+        184
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "fileSha256": "8d503fe4d2b7778654b1104562cbe71692089e2cadf6d3999d51fce69fc11a01"
+    },
+    {
+      "id": "counter_marble",
+      "state": "front",
+      "file": "counter_marble-front.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "cropSize": [
+        868,
+        420
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "fileSha256": "8dacdbd6c7a753178dffbbfdb7c5dc4e5d754161f8bf12d3f482876398f5cb07"
+    },
+    {
+      "id": "counter_pink",
+      "state": "top",
+      "file": "counter_pink-top.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "cropSize": [
+        1534,
+        192
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "fileSha256": "185226a12c9a596a9d503d9ca820052357982dd701d2dd402fe12457d93b2501"
+    },
+    {
+      "id": "counter_pink",
+      "state": "front",
+      "file": "counter_pink-front.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "cropSize": [
+        935,
+        433
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "fileSha256": "5cd1cea230936888266e5fecd97b71359ac4f80675322d94bf70987f3e1a3c80"
+    },
+    {
+      "id": "counter_gold",
+      "state": "top",
+      "file": "counter_gold-top.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "cropSize": [
+        1536,
+        151
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "fileSha256": "ea4bb90b1540f07b6af3ecad94b979cd056ea2c2ce2b7a29bd92c650105a7e94"
+    },
+    {
+      "id": "counter_gold",
+      "state": "front",
+      "file": "counter_gold-front.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "cropSize": [
+        864,
+        441
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "fileSha256": "cdd4e9e9178cd7dd1ba0b45cdaa194cce3238f4afa5debd513cfc2f50a3cb232"
+    },
+    {
+      "id": "sill_cactus",
+      "state": "default",
+      "file": "../decor-props/sprites/sill_cactus.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1024,
+        1536
+      ],
+      "cropSize": [
+        844,
+        1252
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "fileSha256": "f3d93453e09ef9c78066545de614ac6eeeff9ffc44d10fa401a64021e446f908"
+    },
+    {
+      "id": "sill_tulips",
+      "state": "default",
+      "file": "../decor-props/sprites/sill_tulips.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1182,
+        1330
+      ],
+      "cropSize": [
+        903,
+        1024
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fileSha256": "1945ecad3f33e6785057c84f3ceb3876051e0f7bcdb76c35df0ff972f1859e4d"
+    },
+    {
+      "id": "sill_bonsai",
+      "state": "default",
+      "file": "../decor-props/sprites/sill_bonsai.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1448,
+        1086
+      ],
+      "cropSize": [
+        1164,
+        1014
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fileSha256": "bae5edb5be2dd67e04790f941ae1154e33a18abbddd662aa61617d030a16edcb"
+    },
+    {
+      "id": "ceiling_lights",
+      "state": "unlit",
+      "file": "../decor-props/sprites/ceiling_lights.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        2120,
+        742
+      ],
+      "cropSize": [
+        2038,
+        387
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fileSha256": "cb1bdcc96d6de392e255a4625232fec248bba60d5d8a20c9677f09bcd0a02845"
+    },
+    {
+      "id": "ceiling_vines",
+      "state": "default",
+      "file": "../decor-props/sprites/ceiling_vines.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "cropSize": [
+        2163,
+        547
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fileSha256": "6ca7f14c796cae17abae502559a2b4ce186bd847b31c06d5d7f6cd0570ed795a"
+    },
+    {
+      "id": "ceiling_pendants",
+      "state": "unlit",
+      "file": "../decor-props/sprites/ceiling_pendants.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        971,
+        1619
+      ],
+      "cropSize": [
+        777,
+        1554
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fileSha256": "8dd82a30adc4042adaff1c08f770c4b57639dd2ead0ec9195b73b81b1392c6e1"
+    },
+    {
+      "id": "ceiling_chandelier",
+      "state": "unlit",
+      "file": "../decor-props/sprites/ceiling_chandelier.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1619,
+        971
+      ],
+      "cropSize": [
+        1543,
+        971
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fileSha256": "e5faeefc230fdf53c3f8eaeecc08e1f246af91cad83728e423a9cd07318f354d"
+    },
+    {
+      "id": "rug_red",
+      "state": "default",
+      "file": "../decor-props/sprites/rug_red.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1599,
+        984
+      ],
+      "cropSize": [
+        1513,
+        813
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fileSha256": "5e49328961d81c0e3a060449e1dbc8ed27c91f5b75d3a344f936a3eb301210dc"
+    },
+    {
+      "id": "rug_blue",
+      "state": "default",
+      "file": "../decor-props/sprites/rug_blue.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1599,
+        984
+      ],
+      "cropSize": [
+        1465,
+        719
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fileSha256": "38d98e266817a9429fde1d75c124458fbd47f8076d4dcee03f5cb678ca05491b"
+    },
+    {
+      "id": "rug_round",
+      "state": "default",
+      "file": "../decor-props/sprites/rug_round.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1599,
+        984
+      ],
+      "cropSize": [
+        1533,
+        882
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fileSha256": "b3b7feb7883588e23dd545205221af5790b3cf98014e6f8cfec1ef15fda16e31"
+    },
+    {
+      "id": "neon_cafe",
+      "state": "unlit",
+      "file": "../decor-props/sprites/neon_cafe.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "cropSize": [
+        2091,
+        384
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fileSha256": "42b70c9ce411624450ee3f54a0a320a8cdbc46335dd99412478ab0388ad8cd1b"
+    },
+    {
+      "id": "neon_heart",
+      "state": "unlit",
+      "file": "../decor-props/sprites/neon_heart.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cropSize": [
+        936,
+        841
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fileSha256": "858d22942fb29332f5074dc292c5f6832ab634c217cf8ec43361818d4fe37897"
+    },
+    {
+      "id": "neon_cup",
+      "state": "unlit",
+      "file": "../decor-props/sprites/neon_cup.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        1190,
+        1322
+      ],
+      "cropSize": [
+        1129,
+        1199
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "fileSha256": "bc40d435da176c84ac07c13f67aa9019b1c8a63db8536cb3e9fad37444da2ea4"
+    },
+    {
+      "id": "counter_oak",
+      "state": "top",
+      "file": "../../../../public/art/generated/main-v1/cabinet-top.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        580,
+        60
+      ],
+      "cropSize": [
+        580,
+        60
+      ],
+      "alphaExtrema": [
+        251,
+        253
+      ],
+      "fileSha256": "118756f1d6200e6979579fe8e8e0cb252b7f63499c830a84e4347078f77e56b5"
+    },
+    {
+      "id": "counter_oak",
+      "state": "front",
+      "file": "../../../../public/art/generated/main-v1/cabinet-front.png",
+      "rgbaCropExact": true,
+      "sourceSize": [
+        190,
+        138
+      ],
+      "cropSize": [
+        190,
+        138
+      ],
+      "alphaExtrema": [
+        252,
+        253
+      ],
+      "fileSha256": "ab1bc35048d20990612ffcffefcf556ead17fe647f429f2c079a1e5be1e5dd54"
+    }
+  ],
+  "scope": "File existence, source RGBA crop equality, measured bbox, dimensions, hashes, exact catalog coverage. Does not assert runtime aesthetic acceptance."
+}

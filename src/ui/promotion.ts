@@ -1,3 +1,4 @@
+import { uiIcon } from './pixel-icons';
 import { arrivalRate, baseArrivalRate, menuItems, serviceCapacity, servingsLeft } from '../game/economy';
 import { formatAccountMoney, formatDuration, formatTransactionMoney as formatMoney } from '../game/format';
 import { PROMOTION_PLANS, bookPromotion, promotionPlan, togglePromotion } from '../game/promotion';
@@ -33,7 +34,7 @@ export class PromotionPanel {
     this.rows = PROMOTION_PLANS.map((plan, index) => {
       if (index === 0 || PROMOTION_PLANS[index - 1].platform !== plan.platform) {
         const header = document.createElement('header'); header.className = `promo-platform ${plan.platform}`;
-        header.innerHTML = `<span aria-hidden="true">${plan.platform === 'flash' ? '▶' : '✦'}</span><div><h3>${t(`promo.platform.${plan.platform}`)}</h3><p class="note">${t(`promo.platform.${plan.platform}.desc`)}</p></div>`;
+        header.innerHTML = `<span aria-hidden="true">${uiIcon(plan.platform === 'flash' ? 'film' : 'spark')}</span><div><h3>${t(`promo.platform.${plan.platform}`)}</h3><p class="note">${t(`promo.platform.${plan.platform}.desc`)}</p></div>`;
         root.append(header);
       }
       const card = document.createElement('section'); card.className = 'promo-card'; card.dataset.promo = plan.id;

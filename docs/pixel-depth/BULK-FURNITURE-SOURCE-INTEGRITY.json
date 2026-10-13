@@ -1,0 +1,525 @@
+{
+  "scope": "File existence, dimensions, alpha bounds, exact source RGBA crop, duplicate pixel evidence only; no runtime or aesthetic pass",
+  "manifests": [
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-movable-v1/manifest.json",
+      "count": 4,
+      "assets": [
+        {
+          "id": "clock",
+          "size": [
+            1089,
+            1102
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fed5cad8b5932bbd6614886cd7ccb95db52a68f9999e7fa85551314d9603e35b",
+          "file_sha256": "7fd76782da46a093067265497bb026ee4e9db3a5687e2aba817905ee4f7e3dec",
+          "exact_source_crop": true
+        },
+        {
+          "id": "coatrack",
+          "size": [
+            562,
+            1980
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "733afa68a00b55912050d0f47afeede7c448397b5e3ee6c990695b3a652d8137",
+          "file_sha256": "07fd4afdfa0442cc0d9ccbcd317c8f31b704b3e3bcd226f3c5691592c2556fa0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "bookshelf",
+          "size": [
+            1082,
+            1134
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1e4ad8a6b5e237f68b72bd2b28124b788ce5fcc4226aea942d8c3d6d7321f9a3",
+          "file_sha256": "34a7a9e0b0e1b4a3a4976f9d0c8503cab79ca21456f766bee4ed00a2be6aeb27",
+          "exact_source_crop": true
+        },
+        {
+          "id": "catbed",
+          "size": [
+            1326,
+            623
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "dfd8c7479b7722172e34ce749fd13642d47bd2736e933b084261e3482f95b37a",
+          "file_sha256": "cab8be94990c5e58e91cbb69256096a91df41cb42afbb5c53dd008ea29b4c9a3",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-furniture-bulk-v1/manifest.json",
+      "count": 32,
+      "assets": [
+        {
+          "id": "mugrack",
+          "size": [
+            1481,
+            524
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "2152237599d3884f15cf2f01741117bf6f575fc4304c4d481cb6bfc5c13f7206",
+          "file_sha256": "0b3874b9f9a874457cb1cb2be2c4f1800288b5a08af6025a90dc9b5062190dc5",
+          "exact_source_crop": true
+        },
+        {
+          "id": "aframe",
+          "size": [
+            1018,
+            1211
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c850298e9af660cd7bd02ee0ae6b4c3458c1e4bbad9dba00c72a4e528c3cc5fe",
+          "file_sha256": "776c01e07cb97866f98bd57abd1a830635394a48f3e2ae3030db0352c83128c7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lamp",
+          "size": [
+            632,
+            1610
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0920f777e6bc1736260cd1f557f8677e757c87415ead8414c09d342d0713d046",
+          "file_sha256": "12e4cc9dc9e8fc7096fc69861203261a602f899b8057ad362e26bd4fce5a962b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "bench",
+          "size": [
+            1704,
+            738
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6087c404d260c995fe18b2c0df75fac22ddfb41c18e5635ebe3da0f173e17a17",
+          "file_sha256": "5534bab2b780adb66c933738692ed0bcd9ab108356efe81d217c237d695ffc97",
+          "exact_source_crop": true
+        },
+        {
+          "id": "armchair",
+          "size": [
+            1164,
+            1063
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "92efc3c9cbafa74831b570a3b1a024af4fe16dcaefacbbb793d5d2d93ab6ec6c",
+          "file_sha256": "22827218a79c347e6e01b3e1bbdf88b1928a1fe842e64df38a0e83fd453765b0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "gramophone",
+          "size": [
+            1032,
+            1345
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "daa4d28202b958d3da51ec15179eab157d9dfc09cadc6da5e73dd59747018505",
+          "file_sha256": "a93ed850400af8efc9267f35a4f9b3e137586ee8c71f15be2ed3ce742f236a6c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "piano",
+          "size": [
+            1237,
+            930
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a3c0a3ebf98d026f61a0f648e486041e41dd7278c76f2be85eaa8a2d8b53e5a7",
+          "file_sha256": "594fac76c2253912acda3f117a156b829e30058fa7c77774f832dd8c1e228a3a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sofa",
+          "size": [
+            1351,
+            749
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "37a82e54532daab20a5ffbb5b56db3b928b42434a6da26d3de7e34ac5900595c",
+          "file_sha256": "35022513ea5590876b28717cfe5e98b6cb5001af077dfc0f2e982157d7466982",
+          "exact_source_crop": true
+        },
+        {
+          "id": "plant_fern",
+          "size": [
+            1238,
+            1022
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0d1241125eab73eb0ec349b4d45b1166c3f8ad2b882f80062a17bf122978d83e",
+          "file_sha256": "70f3ec1349d2e96eca104820fdc23df80e81880c299c1d10b7678964cdd3a3ab",
+          "exact_source_crop": true
+        },
+        {
+          "id": "plant_snake",
+          "size": [
+            688,
+            1590
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cf79c8bfc0760148279381299c7ad8921395a581face3f266c177a5e2b0be71f",
+          "file_sha256": "551d4b60b5c32f8e12d607ebbac39c0a64a9b78ca8de42d63b9aec9808f98291",
+          "exact_source_crop": true
+        },
+        {
+          "id": "plant_fig",
+          "size": [
+            939,
+            1401
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "46ecc6c497a90e30d1a71ac5bd072fdd086f00c65ce2f2f424163a887a865f1e",
+          "file_sha256": "e59d62e01b953c31ecffc7d1a98a585d8c19cb10eb5c145de8c750146b9a05a0",
+          "exact_source_crop": true
+        },
+        {
+          "id": "plant_monstera",
+          "size": [
+            1302,
+            1092
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "01678ce02d68d404ceab5d10779ea14e36976dfdee213fb003b7b30069cf6623",
+          "file_sha256": "02f7f8863ea093db4ca6860d0955045b7f68d6262992b64bed58aa50cb5617a2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "plant_lemon",
+          "size": [
+            887,
+            1148
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "77b0a313777674bff8d350264fcf2576b33ca40f8d19c637dd757b9faad7d61e",
+          "file_sha256": "63e7d4b77b3715ee2e44548962d9a6922096004a8c7aaca48eda6c88cd634209",
+          "exact_source_crop": true
+        },
+        {
+          "id": "plant_lavender",
+          "size": [
+            700,
+            1555
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "1acbffacf9640a4471656872622185d17908dc0f6ad4cd66c60ffd4e19c0f667",
+          "file_sha256": "bac2fb35cbfa279318e67d849cf2021835e9bc87309e1fdafbcd31eb7a7d075c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "plant_succulent",
+          "size": [
+            852,
+            1238
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "fb5958a4c43469b878ef9a350faf72c7bb3aac60dd7022ff23ca3adc781fe6d5",
+          "file_sha256": "8fb0fe8d3079b4870abb01dfcece486d9872c63838c06df6228f924b75a7770b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "round_stool",
+          "size": [
+            771,
+            1015
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "0b4ec371b627f14ef5327fcab9dfeb77fd5a8ae977bcae03ffd8b905fb2d6705",
+          "file_sha256": "6d3840d52bba3373204e240419a149adb1c074dfd9ac84f3614a0848df4d8631",
+          "exact_source_crop": true
+        },
+        {
+          "id": "shelf",
+          "size": [
+            1488,
+            695
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3772e8dbeacc66668e86eeec3d5f912597c5c0d86531573f2177f481c7b22344",
+          "file_sha256": "50f9586cda7ad1834dab4a2b00f79be295a471d020d6705bc5ebf4141eb68abf",
+          "exact_source_crop": true
+        },
+        {
+          "id": "garland",
+          "size": [
+            2140,
+            609
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4bfebea210f41e38e776015f6004f5f91a93936a6219f1aa5eadaa39e79cb500",
+          "file_sha256": "e8fae6095064222ab199dfa7fe9f5b6cff07ad5fe84d3d02797091cca4ffd5a8",
+          "exact_source_crop": true
+        },
+        {
+          "id": "wall_pennants",
+          "size": [
+            2150,
+            410
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "56b5cbb78edc3f708adba9ede6ca9f53a287a514ac46c9e6591dcf1b72368b3b",
+          "file_sha256": "146b60490eb213b7572725c4e256c73629dc4ff84fb41d2613db3eacd7141e0a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "wreath_season",
+          "size": [
+            1119,
+            1163
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "42ad8054809faf50dbdf428676f6062ac78358f3f70f64fdef8865a8a4e8b0e6",
+          "file_sha256": "c4483a45b679bf59384ee5ab5f202ba2241b6005c9dceb1ca704a9a7158bf255",
+          "exact_source_crop": true
+        },
+        {
+          "id": "poster_coffee",
+          "size": [
+            980,
+            888
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "6e765058bea70ea8e53b5734a227804d216d05876624e2680769124de3060df1",
+          "file_sha256": "8e02180f16c8e051a39586a9a506d6e217e45e983eb475a40965daf019edda98",
+          "exact_source_crop": true
+        },
+        {
+          "id": "poster_bakery",
+          "size": [
+            973,
+            841
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "052a7b78086aa0698a94bfe28439a63e5efbd4f59ef84a6aae12ddc3c9a1e764",
+          "file_sha256": "0fd6c1ab932a2448895ba14b00449b68eda37fb7b123fa36f04420598235012b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "art_landscape",
+          "size": [
+            1137,
+            775
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "c0336ac8f360783e13551f506b33acbc03162089d2b834a2f3367d9f8b4b5260",
+          "file_sha256": "35459aae245ed47278a2606c932e7921911c0ff37791f912a5c402c2046d1a9e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "art_cat",
+          "size": [
+            1108,
+            893
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "3081c349a591f9dbb3058b5f5f923f7d0f91bf47991ccf24c5af48fa65d0cb44",
+          "file_sha256": "5750fcbcca95538cb117506448173f054e7c81957c189184a14aee03eac81886",
+          "exact_source_crop": true
+        },
+        {
+          "id": "art_bean",
+          "size": [
+            1167,
+            891
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cf46644c497d928b3c698d6b5325e76036c8a67c0f2572c8cf402b19eda7d14e",
+          "file_sha256": "f5c6ab239672a16170f357789ee9570000b05cc4677d162340f0f8d4d91962f7",
+          "exact_source_crop": true
+        },
+        {
+          "id": "art_starry",
+          "size": [
+            1206,
+            721
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "cda5c719fdea5e9707b00a1d5c4ec25d7a6f91af52bf4c04c18237b3150b30d8",
+          "file_sha256": "2fcb718cf12869c4513b49fa38423a2219d9bc1a973b2f6662e87b04dc2e1b0c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "lantern",
+          "size": [
+            663,
+            1442
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "e00b6a01dee02faf5e59f05760e7ba643c48ddecf8880e5ae6cb89f70e0441b3",
+          "file_sha256": "31d0b274b7a36bad0d9b4ffdf592a8297d684f54d1db23132634693c96b639dc",
+          "exact_source_crop": true
+        },
+        {
+          "id": "bean_display",
+          "size": [
+            1157,
+            929
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "a4579997238bcb68279281f50897f009195da69e46e8cd474807be250838231a",
+          "file_sha256": "bf72565d18aeb908db998e0572b34eb4eb3d9ebb6aad1537083900292ca9c02e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sideboard",
+          "size": [
+            1226,
+            914
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "7f91aa056f269c4e066af4c906d1948961f3299bca516a6f6f722a66411d5274",
+          "file_sha256": "83b17a87e6e57bb3122bd56645365de1d05ea489994f48301ce9bd298e5d37c2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "display_cabinet",
+          "size": [
+            904,
+            1412
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "61af9641e43ce59ecdcf39197dff3c82db970ee618f1de1856735082f0d67184",
+          "file_sha256": "0513864cd4a007a3fa744ce3ae43ae12e9393779aad0152b1ca9395d69a4a123",
+          "exact_source_crop": true
+        },
+        {
+          "id": "magazine_rack",
+          "size": [
+            797,
+            1240
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "87ff732b6b7767ce052195f5f7378fb19a39fb6ba53c8025f6bb6b0e0875a2a7",
+          "file_sha256": "030a41083e6b23677f71f4d743049f9d212a4010800c322b3f84862b5d971d7f",
+          "exact_source_crop": true
+        },
+        {
+          "id": "coffee_cart",
+          "size": [
+            1212,
+            890
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "4c897c65932ec76fd6890e4933057149c63f3a2fc4662cbca50a92a4fa8ad10d",
+          "file_sha256": "885209274409f8fe135a724bd24832c34d6acc4dbea836b320271fefa9cfc5d6",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "total_assets": 36,
+  "errors": 0
+}

@@ -1,0 +1,25 @@
+{
+  "id": 4,
+  "name": "紫藤画家",
+  "look": {
+    "skin": 3,
+    "hair": 4,
+    "hairStyle": 1,
+    "shirt": 4,
+    "pants": 0
+  },
+  "hairstyle": 5,
+  "outfit": "jacket",
+  "accessory": "satchel",
+  "accent": "#d5ad73",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#80533f",
+    "hair": "#626782",
+    "shirt": "#9b87af",
+    "pants": "#53637b"
+  },
+  "hatPalette": "#e5d7ba",
+  "description": "Fixed customer cast 4 (紫藤画家): warm skin #80533f; hair #626782 in short exuberant SPIKY TOUSLED hair with separate upward tufts and outward side tips, no braid or bun. Outfit: #9b87af short jacket with cream collar, cream zipper/placket and cream welt pocket trim. Lower clothing color #53637b; warm dark brown leather shoes. Accent #d5ad73. A small #d5ad73 cross-body shoulder satchel with diagonal strap and gold clasp, resting at hip in EVERY pose including seated; it is a worn accessory, never held."
+}

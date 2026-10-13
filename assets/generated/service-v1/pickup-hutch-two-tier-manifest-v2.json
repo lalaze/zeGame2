@@ -1,0 +1,82 @@
+{
+  "file": "pickup-hutch-two-tier-v2.png",
+  "source": "pickup-hutch-two-tier-source-v2.png",
+  "source_size_px": [
+    1319,
+    1192
+  ],
+  "crop_source_bbox_px": [
+    11,
+    34,
+    1308,
+    1152
+  ],
+  "size_px": [
+    1297,
+    1118
+  ],
+  "visible_alpha_gt_128_source_bbox_px": [
+    19,
+    42,
+    1300,
+    1144
+  ],
+  "visible_alpha_gt_128_local_bbox_px": [
+    8,
+    8,
+    1289,
+    1110
+  ],
+  "foot_anchor_px": [
+    648.5,
+    1110
+  ],
+  "foot_anchor_uv": [
+    0.5,
+    0.9928443649373881
+  ],
+  "bounds_convention": "[left,top,right,bottom], right and bottom EXCLUSIVE; visible alpha>128",
+  "logical_fit_envelope_px": [
+    40,
+    36
+  ],
+  "native_visible_aspect_ratio": 1.162431941923775,
+  "approx_source_front_ledge_y_px": [
+    648,
+    1063
+  ],
+  "approx_source_front_inner_x_px": [
+    60,
+    1259
+  ],
+  "approx_front_ledge_fraction_y": [
+    0.5499092558983666,
+    0.926497277676951
+  ],
+  "approx_inner_opening_fraction_width": 0.9359875097580016,
+  "lossless_crop": true,
+  "content_edits": "Only imagegen substantive redraw; saved crop pixel-identical to source, original alpha preserved.",
+  "caveat": "Ledge coordinates are visually estimated. Preserve aspect ratio; check against engine placement. V2 has substantially wider front opening and thinner posts than v1.",
+  "recommended_game_placement": {
+    "visible_bounds_xywh": [
+      210,
+      62,
+      40,
+      34.410617
+    ],
+    "foot_anchor_world": [
+      230,
+      96.410617
+    ],
+    "predicted_front_lip_world_y": [
+      80.922717,
+      93.881343
+    ],
+    "target_plate_row_world_y": [
+      81,
+      94
+    ],
+    "clear_inner_width_logical_px": 37.4395,
+    "note": "Preserves native aspect ratio; predictions based on visually measured front lips. Use visible alpha>128 bounds and anchors, not outer crop bounds."
+  }
+}

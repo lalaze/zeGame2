@@ -1,0 +1,2438 @@
+{
+  "version": 1,
+  "status": "Generation-only batch contract; no newly generated assets integrated until approved push readback",
+  "menu": [
+    {
+      "id": "espresso",
+      "category": "coffee",
+      "recipe": {
+        "beans": 1
+      },
+      "logicalBare": [
+        12,
+        12
+      ],
+      "generated": true
+    },
+    {
+      "id": "americano",
+      "category": "coffee",
+      "recipe": {
+        "beans": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "latte",
+      "category": "coffee",
+      "recipe": {
+        "beans": 1,
+        "milk": 1
+      },
+      "logicalBare": [
+        12,
+        11
+      ],
+      "generated": true
+    },
+    {
+      "id": "cappuccino",
+      "category": "coffee",
+      "recipe": {
+        "beans": 1,
+        "milk": 1
+      },
+      "logicalBare": [
+        12,
+        11
+      ],
+      "generated": false
+    },
+    {
+      "id": "flatwhite",
+      "category": "coffee",
+      "recipe": {
+        "beans": 2,
+        "milk": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "cortado",
+      "category": "coffee",
+      "recipe": {
+        "beans": 1,
+        "milk": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "mocha",
+      "category": "coffee",
+      "recipe": {
+        "beans": 1,
+        "milk": 1,
+        "cocoa": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "vienna",
+      "category": "coffee",
+      "recipe": {
+        "beans": 1,
+        "cream": 2,
+        "cocoa": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "macchiato",
+      "category": "coffee",
+      "recipe": {
+        "beans": 1,
+        "milk": 1,
+        "sugar": 1,
+        "cream": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "coldbrew",
+      "category": "coffee",
+      "recipe": {
+        "beans": 2,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "dirty",
+      "category": "coffee",
+      "recipe": {
+        "beans": 2,
+        "milk": 2
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "pourover",
+      "category": "coffee",
+      "recipe": {
+        "beans": 2
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "creamcoffee",
+      "category": "coffee",
+      "recipe": {
+        "beans": 2,
+        "cream": 2,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "affogato",
+      "category": "coffee",
+      "recipe": {
+        "beans": 1,
+        "cream": 1,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "blacktea",
+      "category": "tea",
+      "recipe": {
+        "tea": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "hotchoc",
+      "category": "tea",
+      "recipe": {
+        "cocoa": 1,
+        "milk": 1,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "lemontea",
+      "category": "tea",
+      "recipe": {
+        "tea": 1,
+        "fruit": 1,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "chai",
+      "category": "tea",
+      "recipe": {
+        "tea": 1,
+        "milk": 1,
+        "spice": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "fruittea",
+      "category": "tea",
+      "recipe": {
+        "tea": 1,
+        "fruit": 2,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "hojicha",
+      "category": "tea",
+      "recipe": {
+        "tea": 2,
+        "milk": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "matcha",
+      "category": "tea",
+      "recipe": {
+        "matcha": 1,
+        "milk": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "frappe",
+      "category": "tea",
+      "recipe": {
+        "beans": 1,
+        "milk": 2,
+        "sugar": 1,
+        "cream": 1
+      },
+      "logicalBare": [
+        12,
+        11
+      ],
+      "generated": false
+    },
+    {
+      "id": "smoothie",
+      "category": "tea",
+      "recipe": {
+        "fruit": 1,
+        "milk": 1,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "milktea",
+      "category": "tea",
+      "recipe": {
+        "tea": 1,
+        "milk": 1,
+        "cream": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "matchafloat",
+      "category": "tea",
+      "recipe": {
+        "matcha": 2,
+        "milk": 1,
+        "cream": 2,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "roll",
+      "category": "bread",
+      "recipe": {
+        "flour": 1,
+        "butter": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "bagel",
+      "category": "bread",
+      "recipe": {
+        "flour": 1,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        8
+      ],
+      "generated": false
+    },
+    {
+      "id": "baguette",
+      "category": "bread",
+      "recipe": {
+        "flour": 2
+      },
+      "logicalBare": [
+        12,
+        11
+      ],
+      "generated": false
+    },
+    {
+      "id": "cheesebun",
+      "category": "bread",
+      "recipe": {
+        "flour": 1,
+        "butter": 1,
+        "cream": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "pretzel",
+      "category": "bread",
+      "recipe": {
+        "flour": 1,
+        "butter": 1,
+        "spice": 1
+      },
+      "logicalBare": [
+        12,
+        11
+      ],
+      "generated": false
+    },
+    {
+      "id": "focaccia",
+      "category": "bread",
+      "recipe": {
+        "flour": 1,
+        "spice": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "ciabatta",
+      "category": "bread",
+      "recipe": {
+        "flour": 2
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "raisinbread",
+      "category": "bread",
+      "recipe": {
+        "flour": 2,
+        "fruit": 1,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "sourdough",
+      "category": "bread",
+      "recipe": {
+        "flour": 2
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "rye",
+      "category": "bread",
+      "recipe": {
+        "flour": 2,
+        "spice": 1
+      },
+      "logicalBare": [
+        12,
+        8
+      ],
+      "generated": false
+    },
+    {
+      "id": "chocobread",
+      "category": "bread",
+      "recipe": {
+        "flour": 1,
+        "milk": 1,
+        "butter": 1,
+        "cocoa": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "shokupan",
+      "category": "bread",
+      "recipe": {
+        "flour": 1,
+        "milk": 1,
+        "butter": 1,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "brioche",
+      "category": "bread",
+      "recipe": {
+        "flour": 1,
+        "butter": 1,
+        "eggs": 1,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "fruitbrioche",
+      "category": "bread",
+      "recipe": {
+        "flour": 1,
+        "butter": 2,
+        "eggs": 1,
+        "fruit": 2,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "garlicbread",
+      "category": "bread",
+      "recipe": {
+        "flour": 1,
+        "butter": 1,
+        "cream": 1,
+        "spice": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "donut",
+      "category": "pastry",
+      "recipe": {
+        "flour": 1,
+        "sugar": 1,
+        "eggs": 1
+      },
+      "logicalBare": [
+        12,
+        8
+      ],
+      "generated": false
+    },
+    {
+      "id": "scone",
+      "category": "pastry",
+      "recipe": {
+        "flour": 1,
+        "butter": 1,
+        "cream": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "cookie",
+      "category": "pastry",
+      "recipe": {
+        "flour": 1,
+        "butter": 1,
+        "sugar": 1,
+        "cocoa": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "croissant",
+      "category": "pastry",
+      "recipe": {
+        "flour": 1,
+        "butter": 2
+      },
+      "logicalBare": [
+        12,
+        8
+      ],
+      "generated": true
+    },
+    {
+      "id": "painchoc",
+      "category": "pastry",
+      "recipe": {
+        "flour": 1,
+        "butter": 1,
+        "cocoa": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "brownie",
+      "category": "pastry",
+      "recipe": {
+        "flour": 1,
+        "butter": 1,
+        "eggs": 1,
+        "sugar": 1,
+        "cocoa": 2
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "cinnamon",
+      "category": "pastry",
+      "recipe": {
+        "flour": 1,
+        "butter": 1,
+        "sugar": 1,
+        "spice": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "muffin",
+      "category": "pastry",
+      "recipe": {
+        "flour": 1,
+        "eggs": 1,
+        "sugar": 1,
+        "fruit": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "creampuff",
+      "category": "pastry",
+      "recipe": {
+        "flour": 1,
+        "butter": 1,
+        "eggs": 2,
+        "cream": 2
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "melonpan",
+      "category": "pastry",
+      "recipe": {
+        "flour": 1,
+        "butter": 1,
+        "eggs": 1,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": false
+    },
+    {
+      "id": "eggtart",
+      "category": "pastry",
+      "recipe": {
+        "flour": 1,
+        "eggs": 2,
+        "cream": 1,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        9
+      ],
+      "generated": true
+    },
+    {
+      "id": "cake",
+      "category": "pastry",
+      "recipe": {
+        "flour": 1,
+        "eggs": 1,
+        "cream": 1,
+        "fruit": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": true
+    },
+    {
+      "id": "swissroll",
+      "category": "pastry",
+      "recipe": {
+        "flour": 1,
+        "eggs": 2,
+        "cream": 2,
+        "fruit": 1,
+        "sugar": 1
+      },
+      "logicalBare": [
+        12,
+        11
+      ],
+      "generated": false
+    },
+    {
+      "id": "cheesecake",
+      "category": "pastry",
+      "recipe": {
+        "cream": 2,
+        "eggs": 1,
+        "sugar": 1,
+        "flour": 1
+      },
+      "logicalBare": [
+        12,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "macaron",
+      "category": "pastry",
+      "recipe": {
+        "eggs": 1,
+        "sugar": 2,
+        "fruit": 1
+      },
+      "logicalBare": [
+        12,
+        12
+      ],
+      "generated": false
+    }
+  ],
+  "ingredients": [
+    {
+      "id": "beans",
+      "logical": [
+        14,
+        12
+      ],
+      "generated": false
+    },
+    {
+      "id": "milk",
+      "logical": [
+        14,
+        12
+      ],
+      "generated": false
+    },
+    {
+      "id": "flour",
+      "logical": [
+        14,
+        12
+      ],
+      "generated": false
+    },
+    {
+      "id": "butter",
+      "logical": [
+        14,
+        11
+      ],
+      "generated": false
+    },
+    {
+      "id": "eggs",
+      "logical": [
+        14,
+        11
+      ],
+      "generated": false
+    },
+    {
+      "id": "sugar",
+      "logical": [
+        14,
+        10
+      ],
+      "generated": false
+    },
+    {
+      "id": "tea",
+      "logical": [
+        14,
+        12
+      ],
+      "generated": false
+    },
+    {
+      "id": "spice",
+      "logical": [
+        14,
+        12
+      ],
+      "generated": false
+    },
+    {
+      "id": "cocoa",
+      "logical": [
+        14,
+        12
+      ],
+      "generated": false
+    },
+    {
+      "id": "cream",
+      "logical": [
+        14,
+        11
+      ],
+      "generated": false
+    },
+    {
+      "id": "fruit",
+      "logical": [
+        14,
+        12
+      ],
+      "generated": false
+    },
+    {
+      "id": "matcha",
+      "logical": [
+        14,
+        12
+      ],
+      "generated": false
+    }
+  ],
+  "furniture": [
+    {
+      "id": "clock",
+      "surface": "wall",
+      "footprintCells": [
+        3,
+        3
+      ],
+      "logicalSprite": [
+        21,
+        21
+      ],
+      "generated": false,
+      "pending": "cafe-movable-v1"
+    },
+    {
+      "id": "mugrack",
+      "surface": "wall",
+      "footprintCells": [
+        4,
+        2
+      ],
+      "logicalSprite": [
+        32,
+        16
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "plant_fern",
+      "surface": "floor",
+      "footprintCells": [
+        2,
+        1
+      ],
+      "logicalSprite": [
+        16,
+        15
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "plant_snake",
+      "surface": "floor",
+      "footprintCells": [
+        1,
+        1
+      ],
+      "logicalSprite": [
+        9,
+        17
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "art_landscape",
+      "surface": "wall",
+      "footprintCells": [
+        4,
+        3
+      ],
+      "logicalSprite": [
+        26,
+        22
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "aframe",
+      "surface": "floor",
+      "footprintCells": [
+        2,
+        1
+      ],
+      "logicalSprite": [
+        16,
+        19
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "plant_fig",
+      "surface": "floor",
+      "footprintCells": [
+        2,
+        1
+      ],
+      "logicalSprite": [
+        16,
+        23
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "sconce",
+      "surface": "wall",
+      "footprintCells": [
+        1,
+        2
+      ],
+      "logicalSprite": [
+        8,
+        16
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "garland",
+      "surface": "wall",
+      "footprintCells": [
+        4,
+        1
+      ],
+      "logicalSprite": [
+        32,
+        8
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "lamp",
+      "surface": "floor",
+      "footprintCells": [
+        2,
+        1
+      ],
+      "logicalSprite": [
+        13,
+        24
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "coatrack",
+      "surface": "floor",
+      "footprintCells": [
+        1,
+        1
+      ],
+      "logicalSprite": [
+        10,
+        28
+      ],
+      "generated": false,
+      "pending": "cafe-movable-v1"
+    },
+    {
+      "id": "plant_monstera",
+      "surface": "floor",
+      "footprintCells": [
+        3,
+        1
+      ],
+      "logicalSprite": [
+        22,
+        19
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "shelf",
+      "surface": "wall",
+      "footprintCells": [
+        4,
+        2
+      ],
+      "logicalSprite": [
+        32,
+        16
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "bench",
+      "surface": "floor",
+      "footprintCells": [
+        4,
+        1
+      ],
+      "logicalSprite": [
+        32,
+        16
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "art_cat",
+      "surface": "wall",
+      "footprintCells": [
+        4,
+        3
+      ],
+      "logicalSprite": [
+        26,
+        22
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "catbed",
+      "surface": "floor",
+      "footprintCells": [
+        2,
+        1
+      ],
+      "logicalSprite": [
+        18,
+        11
+      ],
+      "generated": false,
+      "pending": "cafe-movable-v1"
+    },
+    {
+      "id": "bookshelf",
+      "surface": "floor",
+      "footprintCells": [
+        4,
+        1
+      ],
+      "logicalSprite": [
+        32,
+        34
+      ],
+      "generated": false,
+      "pending": "cafe-movable-v1"
+    },
+    {
+      "id": "armchair",
+      "surface": "floor",
+      "footprintCells": [
+        3,
+        1
+      ],
+      "logicalSprite": [
+        24,
+        22
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "plant_lemon",
+      "surface": "floor",
+      "footprintCells": [
+        3,
+        1
+      ],
+      "logicalSprite": [
+        21,
+        22
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "art_bean",
+      "surface": "wall",
+      "footprintCells": [
+        4,
+        3
+      ],
+      "logicalSprite": [
+        26,
+        22
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "gramophone",
+      "surface": "floor",
+      "footprintCells": [
+        2,
+        1
+      ],
+      "logicalSprite": [
+        18,
+        22
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "art_starry",
+      "surface": "wall",
+      "footprintCells": [
+        4,
+        3
+      ],
+      "logicalSprite": [
+        26,
+        22
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "piano",
+      "surface": "floor",
+      "footprintCells": [
+        5,
+        2
+      ],
+      "logicalSprite": [
+        40,
+        30
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "plant_lavender",
+      "surface": "floor",
+      "footprintCells": [
+        2,
+        1
+      ],
+      "logicalSprite": [
+        14,
+        25
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "plant_succulent",
+      "surface": "floor",
+      "footprintCells": [
+        1,
+        1
+      ],
+      "logicalSprite": [
+        8,
+        13
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "vase_daisies",
+      "surface": "floor",
+      "footprintCells": [
+        2,
+        1
+      ],
+      "logicalSprite": [
+        14,
+        25
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "poster_coffee",
+      "surface": "wall",
+      "footprintCells": [
+        3,
+        3
+      ],
+      "logicalSprite": [
+        22,
+        22
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "poster_bakery",
+      "surface": "wall",
+      "footprintCells": [
+        3,
+        3
+      ],
+      "logicalSprite": [
+        22,
+        22
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "wreath_season",
+      "surface": "wall",
+      "footprintCells": [
+        3,
+        3
+      ],
+      "logicalSprite": [
+        22,
+        22
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "hanging_ivy",
+      "surface": "wall",
+      "footprintCells": [
+        2,
+        3
+      ],
+      "logicalSprite": [
+        14,
+        24
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "wall_pennants",
+      "surface": "wall",
+      "footprintCells": [
+        4,
+        1
+      ],
+      "logicalSprite": [
+        32,
+        8
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "lantern",
+      "surface": "floor",
+      "footprintCells": [
+        2,
+        1
+      ],
+      "logicalSprite": [
+        12,
+        24
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "bean_display",
+      "surface": "floor",
+      "footprintCells": [
+        3,
+        1
+      ],
+      "logicalSprite": [
+        22,
+        24
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "sideboard",
+      "surface": "floor",
+      "footprintCells": [
+        4,
+        2
+      ],
+      "logicalSprite": [
+        30,
+        26
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "sofa",
+      "surface": "floor",
+      "footprintCells": [
+        4,
+        2
+      ],
+      "logicalSprite": [
+        32,
+        26
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "round_stool",
+      "surface": "floor",
+      "footprintCells": [
+        2,
+        1
+      ],
+      "logicalSprite": [
+        14,
+        18
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "display_cabinet",
+      "surface": "floor",
+      "footprintCells": [
+        3,
+        2
+      ],
+      "logicalSprite": [
+        24,
+        36
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "magazine_rack",
+      "surface": "floor",
+      "footprintCells": [
+        2,
+        1
+      ],
+      "logicalSprite": [
+        16,
+        24
+      ],
+      "generated": false,
+      "pending": null
+    },
+    {
+      "id": "coffee_cart",
+      "surface": "floor",
+      "footprintCells": [
+        4,
+        2
+      ],
+      "logicalSprite": [
+        30,
+        28
+      ],
+      "generated": false,
+      "pending": null
+    }
+  ],
+  "decor": [
+    {
+      "id": "wall_cream",
+      "slot": "wallpaper",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "wall_mint",
+      "slot": "wallpaper",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "wall_rose",
+      "slot": "wallpaper",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "wall_dots",
+      "slot": "wallpaper",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "wall_brick",
+      "slot": "wallpaper",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "wall_walnut",
+      "slot": "wallpaper",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "wall_stars",
+      "slot": "wallpaper",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "floor_checker",
+      "slot": "floor",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "floor_planks",
+      "slot": "floor",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "floor_mint",
+      "slot": "floor",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "floor_terrazzo",
+      "slot": "floor",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "floor_herringbone",
+      "slot": "floor",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "floor_marble",
+      "slot": "floor",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "counter_oak",
+      "slot": "counter",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "counter_walnut",
+      "slot": "counter",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "counter_marble",
+      "slot": "counter",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "counter_pink",
+      "slot": "counter",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "counter_gold",
+      "slot": "counter",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "sill_none",
+      "slot": "sill",
+      "needsBitmap": false,
+      "generated": false
+    },
+    {
+      "id": "sill_cactus",
+      "slot": "sill",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "sill_tulips",
+      "slot": "sill",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "sill_bonsai",
+      "slot": "sill",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "ceiling_none",
+      "slot": "ceiling",
+      "needsBitmap": false,
+      "generated": false
+    },
+    {
+      "id": "ceiling_lights",
+      "slot": "ceiling",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "ceiling_vines",
+      "slot": "ceiling",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "ceiling_pendants",
+      "slot": "ceiling",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "ceiling_chandelier",
+      "slot": "ceiling",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "rug_none",
+      "slot": "rug",
+      "needsBitmap": false,
+      "generated": false
+    },
+    {
+      "id": "rug_red",
+      "slot": "rug",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "rug_blue",
+      "slot": "rug",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "rug_round",
+      "slot": "rug",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "neon_none",
+      "slot": "neon",
+      "needsBitmap": false,
+      "generated": false
+    },
+    {
+      "id": "neon_cafe",
+      "slot": "neon",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "neon_heart",
+      "slot": "neon",
+      "needsBitmap": true,
+      "generated": false
+    },
+    {
+      "id": "neon_cup",
+      "slot": "neon",
+      "needsBitmap": true,
+      "generated": false
+    }
+  ],
+  "customers": [
+    {
+      "id": 0,
+      "name": "晨读常客",
+      "look": {
+        "skin": 0,
+        "hair": 0,
+        "hairStyle": 0,
+        "shirt": 0,
+        "pants": 1
+      },
+      "hairstyle": 0,
+      "outfit": "cardigan",
+      "accessory": "glasses",
+      "accent": "#d6b66d",
+      "generated": true,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 1,
+      "name": "海盐条纹",
+      "look": {
+        "skin": 1,
+        "hair": 1,
+        "hairStyle": 2,
+        "shirt": 1,
+        "pants": 0
+      },
+      "hairstyle": 2,
+      "outfit": "stripe",
+      "accessory": "none",
+      "accent": "#ecdfba",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 2,
+      "name": "花店姑娘",
+      "look": {
+        "skin": 2,
+        "hair": 0,
+        "hairStyle": 0,
+        "shirt": 2,
+        "pants": 1
+      },
+      "hairstyle": 4,
+      "outfit": "overalls",
+      "accessory": "bow",
+      "accent": "#d58e98",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 3,
+      "name": "蜂蜜围巾",
+      "look": {
+        "skin": 0,
+        "hair": 2,
+        "hairStyle": 3,
+        "shirt": 3,
+        "pants": 2
+      },
+      "hairstyle": 3,
+      "outfit": "scarf",
+      "accessory": "none",
+      "accent": "#e4c873",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 4,
+      "name": "紫藤画家",
+      "look": {
+        "skin": 3,
+        "hair": 4,
+        "hairStyle": 1,
+        "shirt": 4,
+        "pants": 0
+      },
+      "hairstyle": 5,
+      "outfit": "jacket",
+      "accessory": "satchel",
+      "accent": "#d5ad73",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 5,
+      "name": "草莓裙摆",
+      "look": {
+        "skin": 0,
+        "hair": 1,
+        "hairStyle": 2,
+        "shirt": 5,
+        "pants": 1
+      },
+      "hairstyle": 6,
+      "outfit": "dress",
+      "accessory": "headband",
+      "accent": "#efe1c2",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 6,
+      "name": "薄荷骑手",
+      "look": {
+        "skin": 1,
+        "hair": 0,
+        "hairStyle": 3,
+        "shirt": 6,
+        "pants": 2
+      },
+      "hairstyle": 7,
+      "outfit": "hoodie",
+      "accessory": "none",
+      "accent": "#eddbb8",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 7,
+      "name": "奶油书迷",
+      "look": {
+        "skin": 2,
+        "hair": 0,
+        "hairStyle": 0,
+        "shirt": 7,
+        "pants": 0
+      },
+      "hairstyle": 0,
+      "outfit": "vest",
+      "accessory": "glasses",
+      "accent": "#9e7357",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 8,
+      "name": "枫叶邮差",
+      "look": {
+        "skin": 0,
+        "hair": 3,
+        "hairStyle": 0,
+        "shirt": 0,
+        "pants": 1
+      },
+      "hairstyle": 4,
+      "outfit": "duffle",
+      "accessory": "satchel",
+      "accent": "#e8c68c",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 9,
+      "name": "蓝莓水手",
+      "look": {
+        "skin": 3,
+        "hair": 0,
+        "hairStyle": 2,
+        "shirt": 1,
+        "pants": 0
+      },
+      "hairstyle": 6,
+      "outfit": "sailor",
+      "accessory": "bow",
+      "accent": "#e8d9b6",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 10,
+      "name": "苔绿园丁",
+      "look": {
+        "skin": 1,
+        "hair": 1,
+        "hairStyle": 3,
+        "shirt": 2,
+        "pants": 1
+      },
+      "hairstyle": 3,
+      "outfit": "overalls",
+      "accessory": "satchel",
+      "accent": "#e6d39d",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 11,
+      "name": "杏黄毛衣",
+      "look": {
+        "skin": 2,
+        "hair": 0,
+        "hairStyle": 1,
+        "shirt": 3,
+        "pants": 2
+      },
+      "hairstyle": 5,
+      "outfit": "stripe",
+      "accessory": "glasses",
+      "accent": "#eee1c0",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 12,
+      "name": "丁香发带",
+      "look": {
+        "skin": 0,
+        "hair": 4,
+        "hairStyle": 2,
+        "shirt": 4,
+        "pants": 0
+      },
+      "hairstyle": 2,
+      "outfit": "dress",
+      "accessory": "headband",
+      "accent": "#d8b168",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 13,
+      "name": "桃子开衫",
+      "look": {
+        "skin": 1,
+        "hair": 2,
+        "hairStyle": 1,
+        "shirt": 5,
+        "pants": 1
+      },
+      "hairstyle": 1,
+      "outfit": "cardigan",
+      "accessory": "bow",
+      "accent": "#8caa9a",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 14,
+      "name": "湖绿旅人",
+      "look": {
+        "skin": 3,
+        "hair": 0,
+        "hairStyle": 3,
+        "shirt": 6,
+        "pants": 2
+      },
+      "hairstyle": 7,
+      "outfit": "jacket",
+      "accessory": "satchel",
+      "accent": "#d6b175",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 15,
+      "name": "燕麦绒帽",
+      "look": {
+        "skin": 0,
+        "hair": 1,
+        "hairStyle": 3,
+        "shirt": 7,
+        "pants": 1
+      },
+      "hairstyle": 3,
+      "outfit": "hoodie",
+      "accessory": "glasses",
+      "accent": "#bd8663",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 16,
+      "name": "砖红背心",
+      "look": {
+        "skin": 2,
+        "hair": 0,
+        "hairStyle": 2,
+        "shirt": 0,
+        "pants": 0
+      },
+      "hairstyle": 6,
+      "outfit": "vest",
+      "accessory": "none",
+      "accent": "#eddbb6",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 17,
+      "name": "雨天风衣",
+      "look": {
+        "skin": 1,
+        "hair": 4,
+        "hairStyle": 0,
+        "shirt": 1,
+        "pants": 1
+      },
+      "hairstyle": 0,
+      "outfit": "duffle",
+      "accessory": "glasses",
+      "accent": "#e5c483",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 18,
+      "name": "青苹果领结",
+      "look": {
+        "skin": 0,
+        "hair": 3,
+        "hairStyle": 0,
+        "shirt": 2,
+        "pants": 2
+      },
+      "hairstyle": 4,
+      "outfit": "sailor",
+      "accessory": "bow",
+      "accent": "#dfaf66",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 19,
+      "name": "向日葵裙",
+      "look": {
+        "skin": 3,
+        "hair": 0,
+        "hairStyle": 1,
+        "shirt": 3,
+        "pants": 1
+      },
+      "hairstyle": 1,
+      "outfit": "dress",
+      "accessory": "headband",
+      "accent": "#f0dfb9",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 20,
+      "name": "葡萄连帽衫",
+      "look": {
+        "skin": 2,
+        "hair": 4,
+        "hairStyle": 1,
+        "shirt": 4,
+        "pants": 0
+      },
+      "hairstyle": 5,
+      "outfit": "hoodie",
+      "accessory": "none",
+      "accent": "#dfbd83",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 21,
+      "name": "玫瑰围巾",
+      "look": {
+        "skin": 0,
+        "hair": 5,
+        "hairStyle": 3,
+        "shirt": 5,
+        "pants": 2
+      },
+      "hairstyle": 7,
+      "outfit": "scarf",
+      "accessory": "glasses",
+      "accent": "#9e687a",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 22,
+      "name": "松石背带",
+      "look": {
+        "skin": 1,
+        "hair": 0,
+        "hairStyle": 2,
+        "shirt": 6,
+        "pants": 1
+      },
+      "hairstyle": 6,
+      "outfit": "overalls",
+      "accessory": "headband",
+      "accent": "#e7ca90",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 23,
+      "name": "香草针织",
+      "look": {
+        "skin": 3,
+        "hair": 1,
+        "hairStyle": 2,
+        "shirt": 7,
+        "pants": 0
+      },
+      "hairstyle": 2,
+      "outfit": "stripe",
+      "accessory": "satchel",
+      "accent": "#ba8c6a",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 24,
+      "name": "肉桂短夹克",
+      "look": {
+        "skin": 0,
+        "hair": 3,
+        "hairStyle": 1,
+        "shirt": 0,
+        "pants": 1
+      },
+      "hairstyle": 5,
+      "outfit": "jacket",
+      "accessory": "none",
+      "accent": "#ebd4a4",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 25,
+      "name": "雾蓝发辫",
+      "look": {
+        "skin": 2,
+        "hair": 0,
+        "hairStyle": 0,
+        "shirt": 1,
+        "pants": 2
+      },
+      "hairstyle": 4,
+      "outfit": "cardigan",
+      "accessory": "bow",
+      "accent": "#cea0ac",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 26,
+      "name": "橄榄学者",
+      "look": {
+        "skin": 1,
+        "hair": 1,
+        "hairStyle": 3,
+        "shirt": 2,
+        "pants": 1
+      },
+      "hairstyle": 7,
+      "outfit": "vest",
+      "accessory": "glasses",
+      "accent": "#e2bd77",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 27,
+      "name": "金盏牛角扣",
+      "look": {
+        "skin": 0,
+        "hair": 2,
+        "hairStyle": 0,
+        "shirt": 3,
+        "pants": 0
+      },
+      "hairstyle": 0,
+      "outfit": "duffle",
+      "accessory": "none",
+      "accent": "#9c775c",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 28,
+      "name": "紫苏小领衫",
+      "look": {
+        "skin": 3,
+        "hair": 0,
+        "hairStyle": 1,
+        "shirt": 4,
+        "pants": 2
+      },
+      "hairstyle": 1,
+      "outfit": "sailor",
+      "accessory": "headband",
+      "accent": "#eeddb6",
+      "generated": false,
+      "framesPerIdentity": 15
+    },
+    {
+      "id": 29,
+      "name": "蜜桃旅行包",
+      "look": {
+        "skin": 1,
+        "hair": 5,
+        "hairStyle": 2,
+        "shirt": 5,
+        "pants": 1
+      },
+      "hairstyle": 2,
+      "outfit": "scarf",
+      "accessory": "satchel",
+      "accent": "#ae7159",
+      "generated": false,
+      "framesPerIdentity": 15
+    }
+  ],
+  "cats": [
+    {
+      "id": "ginger",
+      "group": "local",
+      "generated": false,
+      "framesPerIdentity": 14
+    },
+    {
+      "id": "tuxedo",
+      "group": "local",
+      "generated": false,
+      "framesPerIdentity": 14
+    },
+    {
+      "id": "calico",
+      "group": "local",
+      "generated": false,
+      "framesPerIdentity": 14
+    },
+    {
+      "id": "tabby",
+      "group": "local",
+      "generated": false,
+      "framesPerIdentity": 14
+    },
+    {
+      "id": "black",
+      "group": "local",
+      "generated": false,
+      "framesPerIdentity": 14
+    },
+    {
+      "id": "white",
+      "group": "local",
+      "generated": false,
+      "framesPerIdentity": 14
+    },
+    {
+      "id": "british",
+      "group": "shorthair",
+      "generated": false,
+      "framesPerIdentity": 14
+    },
+    {
+      "id": "american",
+      "group": "shorthair",
+      "generated": false,
+      "framesPerIdentity": 14
+    },
+    {
+      "id": "siamese",
+      "group": "shorthair",
+      "generated": true,
+      "framesPerIdentity": 14
+    },
+    {
+      "id": "ragdoll",
+      "group": "longhair",
+      "generated": false,
+      "framesPerIdentity": 14
+    },
+    {
+      "id": "persian",
+      "group": "longhair",
+      "generated": false,
+      "framesPerIdentity": 14
+    },
+    {
+      "id": "mainecoon",
+      "group": "longhair",
+      "generated": false,
+      "framesPerIdentity": 14
+    }
+  ],
+  "areas": [
+    "main",
+    "reading",
+    "greenhouse",
+    "terrace",
+    "kitchen"
+  ],
+  "kitchen": {
+    "wallEquipment": {
+      "cooler": {
+        "x": 6,
+        "w": 34
+      },
+      "dryStore": {
+        "x": 44,
+        "w": 36
+      },
+      "handSink": {
+        "x": 84,
+        "w": 16
+      },
+      "mixer": {
+        "x": 104,
+        "w": 24
+      },
+      "proofer": {
+        "x": 132,
+        "w": 24
+      },
+      "kettle": {
+        "x": 160,
+        "w": 26
+      },
+      "deckOven": {
+        "x": 190,
+        "w": 56
+      },
+      "convection": {
+        "x": 250,
+        "w": 28
+      },
+      "fryer": {
+        "x": 282,
+        "w": 26
+      }
+    },
+    "hood": {
+      "x": 158,
+      "w": 152
+    },
+    "bench": {
+      "x": 88,
+      "w": 104,
+      "front": 134,
+      "height": 14,
+      "depth": 12
+    },
+    "rack": {
+      "x": 270,
+      "w": 22,
+      "foot": 118
+    },
+    "pastryFridge": {
+      "x": 294,
+      "w": 20,
+      "foot": 118
+    },
+    "bins": {
+      "x": 14,
+      "w": 40,
+      "foot": 172
+    },
+    "dishPit": {
+      "x": 232,
+      "w": 64,
+      "foot": 168
+    },
+    "sheeterX": 92,
+    "standMixerX": 170
+  },
+  "upgrades": [
+    {
+      "id": "marketing",
+      "logical": [
+        14,
+        12
+      ],
+      "generated": false
+    },
+    {
+      "id": "machine",
+      "logical": [
+        14,
+        11
+      ],
+      "generated": false
+    },
+    {
+      "id": "barista",
+      "logical": [
+        18,
+        18
+      ],
+      "generated": false
+    },
+    {
+      "id": "server",
+      "logical": [
+        18,
+        18
+      ],
+      "generated": false
+    },
+    {
+      "id": "cook",
+      "logical": [
+        18,
+        18
+      ],
+      "generated": false
+    },
+    {
+      "id": "tables",
+      "logical": [
+        14,
+        10
+      ],
+      "generated": false
+    }
+  ],
+  "existingGeneratedAssets": {
+    "cabinet-top": "main-v1/cabinet-top.png",
+    "cabinet-front": "main-v1/cabinet-front.png",
+    "plant": "main-v1/plant.png",
+    "vine": "main-v1/vine.png",
+    "table": "main-v2/table-no-vase.png",
+    "chair-right": "main-v2/chair-facing-right.png",
+    "chair-left": "main-v2/chair-facing-left.png",
+    "vase": "main-v2/flower-vase.png",
+    "croissant": "main-v2/croissant.png",
+    "cake": "main-v2/strawberry-cake.png",
+    "display": "main-v2/empty-wide-display.png",
+    "espresso": "menu-v1/espresso.png",
+    "latte": "menu-v1/latte.png",
+    "eggtart": "menu-v1/eggtart.png",
+    "barista-down-stand": "staff-v2/owner-down-stand.png",
+    "barista-down-stepA": "staff-v2/owner-down-stepA.png",
+    "barista-down-stepB": "staff-v2/owner-down-stepB.png",
+    "barista-up-stand": "staff-v2/owner-up-stand.png",
+    "barista-up-stepA": "staff-v2/owner-up-stepA.png",
+    "barista-up-stepB": "staff-v2/owner-up-stepB.png",
+    "barista-right-stand": "staff-v2/owner-right-stand.png",
+    "barista-right-stepA": "staff-v2/owner-right-stepA.png",
+    "barista-right-stepB": "staff-v2/owner-right-stepB.png",
+    "mina-down-stand": "customer-0-v1/mina-down-stand.png",
+    "mina-down-stepA": "customer-0-v1/mina-down-stepA.png",
+    "mina-down-stepB": "customer-0-v1/mina-down-stepB.png",
+    "mina-up-stand": "customer-0-v1/mina-up-stand.png",
+    "mina-up-stepA": "customer-0-v1/mina-up-stepA.png",
+    "mina-up-stepB": "customer-0-v1/mina-up-stepB.png",
+    "mina-right-stand": "customer-0-v1/mina-right-stand.png",
+    "mina-right-stepA": "customer-0-v1/mina-right-stepA.png",
+    "mina-right-stepB": "customer-0-v1/mina-right-stepB.png",
+    "mina-right-sit": "customer-0-v1/mina-right-sit.png",
+    "mina-right-sitPetA": "customer-0-v1/mina-right-sitPetA.png",
+    "mina-right-sitPetB": "customer-0-v1/mina-right-sitPetB.png",
+    "mina-left-sit": "customer-0-v1/mina-left-sit.png",
+    "mina-left-sitPetA": "customer-0-v1/mina-left-sitPetA.png",
+    "mina-left-sitPetB": "customer-0-v1/mina-left-sitPetB.png",
+    "service-pickup": "service-v1/pickup-hutch-two-tier-v2.png",
+    "service-machine": "service-v1/espresso-machine.png",
+    "service-cupboard": "service-v1/low-service-cupboard.png",
+    "service-cups": "service-v1/cups-stack.png",
+    "service-jars": "service-v1/glass-jars-pair.png",
+    "service-basket": "service-v1/empty-wicker-basket.png",
+    "wall-window": "wall-v1/window-gingham-frame.png",
+    "wall-board": "wall-v1/blank-chalkboard.png",
+    "wall-lamp": "wall-v1/brass-wall-lamp.png",
+    "siamese-idle": "cat-siamese-v1/siamese-idle.png",
+    "siamese-lookUp": "cat-siamese-v1/siamese-lookUp.png",
+    "siamese-walkA": "cat-siamese-v1/siamese-walkA.png",
+    "siamese-walkB": "cat-siamese-v1/siamese-walkB.png",
+    "siamese-swish": "cat-siamese-v1/siamese-swish.png",
+    "siamese-blink": "cat-siamese-v1/siamese-blink.png",
+    "siamese-happy": "cat-siamese-v1/siamese-happy.png",
+    "siamese-sleep": "cat-siamese-v1/siamese-sleep.png",
+    "siamese-groomA": "cat-siamese-v1/siamese-groomA.png",
+    "siamese-groomB": "cat-siamese-v1/siamese-groomB.png",
+    "siamese-stretch": "cat-siamese-v1/siamese-stretch.png",
+    "siamese-watch": "cat-siamese-v1/siamese-watch.png",
+    "siamese-nuzzleA": "cat-siamese-v1/siamese-nuzzleA.png",
+    "siamese-nuzzleB": "cat-siamese-v1/siamese-nuzzleB.png"
+  },
+  "palettes": {
+    "skin": [
+      "#f4cfad",
+      "#dfaa7d",
+      "#b67c55",
+      "#80533f"
+    ],
+    "hair": [
+      "#594237",
+      "#976546",
+      "#dfb96f",
+      "#b9674e",
+      "#626782",
+      "#cc8c9f"
+    ],
+    "shirt": [
+      "#bb6b58",
+      "#799ba7",
+      "#8ba477",
+      "#d3a453",
+      "#9b87af",
+      "#cf929e",
+      "#69a295",
+      "#e5d7ba"
+    ],
+    "pants": [
+      "#53637b",
+      "#85664f",
+      "#585464"
+    ]
+  }
+}

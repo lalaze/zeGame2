@@ -1,0 +1,1237 @@
+{
+  "version": 1,
+  "status": "generation-candidate-only; not integrated or runtime validated",
+  "generator": "built-in image_gen",
+  "bboxRule": "alpha >128 for QA bounds only. All original alpha retained; no masking/repainting/resizing.",
+  "count": 18,
+  "overlayPolicy": "Existing runtime procedural hooks, beater, fan, door-gap, stock, status, labels and effects are explicitly reused. New bodies alone do not prove complete animated geometry. Integrator must calibrate overlay positions and occlusion before acceptance.",
+  "installedHookupState": {
+    "uninstalled": "hookup.png capped pipe/socket visible",
+    "installed": "hookup layer hidden; no blank PNG required",
+    "lockedRoom": "no equipment body rendered"
+  },
+  "frames": [
+    {
+      "id": "cooler",
+      "status": "candidate_pending_runtime_review",
+      "file": "cooler.png",
+      "source": "storage-source.png",
+      "sourceCrop": [
+        145,
+        19,
+        440,
+        490
+      ],
+      "size": [
+        295,
+        471
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 275,
+        "h": 451
+      },
+      "anchor": {
+        "x": 135,
+        "y": 455,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        34,
+        72
+      ],
+      "nativeAspect": 0.6097560975609756,
+      "uniformContainedScale": 0.12363636363636364,
+      "containedOpaqueWorldSize": [
+        34.0,
+        55.760000000000005
+      ],
+      "atLogicalWidthWorldHeight": 55.76,
+      "aspectReviewRequired": true,
+      "overlayRequired": [
+        "cooler-active-door-gap",
+        "cold-room-stock"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "closedDoorFace": [
+          32,
+          81,
+          213,
+          433
+        ],
+        "doorGapEdge": [
+          44,
+          246
+        ],
+        "display": [
+          122,
+          54
+        ]
+      },
+      "notes": [
+        "Closed opaque door has right hinges unlike legacy small drawing. Existing active gap overlay must be positioned/occluded explicitly; open-state geometry not yet validated."
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 11868,
+      "sha256": "22b773b351d57e69f2f077b4ac76dbe88f46fe35c686cfbb307a0c4c4f813585"
+    },
+    {
+      "id": "dryStore",
+      "status": "candidate_pending_runtime_review",
+      "file": "dryStore.png",
+      "source": "storage-source.png",
+      "sourceCrop": [
+        582,
+        41,
+        948,
+        456
+      ],
+      "size": [
+        366,
+        415
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 346,
+        "h": 402
+      },
+      "anchor": {
+        "x": 182,
+        "y": 407,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        36,
+        58
+      ],
+      "nativeAspect": 0.8606965174129353,
+      "uniformContainedScale": 0.10404624277456648,
+      "containedOpaqueWorldSize": [
+        36.0,
+        41.82658959537572
+      ],
+      "atLogicalWidthWorldHeight": 41.82658959537572,
+      "aspectReviewRequired": true,
+      "overlayRequired": [
+        "ingredient-stock"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "shelf1": [
+          178,
+          144
+        ],
+        "shelf2": [
+          178,
+          245
+        ],
+        "shelf3": [
+          178,
+          347
+        ]
+      },
+      "notes": [],
+      "alphaExtrema": [
+        0,
+        253
+      ],
+      "transparentPixels": 16593,
+      "sha256": "3232c8c79aae71383b49ffe0fd9fc2bacad0d1d770ad8ecc7f9a7a1c9832555b"
+    },
+    {
+      "id": "handSink",
+      "status": "candidate_pending_runtime_review",
+      "file": "handSink.png",
+      "source": "storage-source.png",
+      "sourceCrop": [
+        1104,
+        38,
+        1419,
+        479
+      ],
+      "size": [
+        315,
+        441
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 295,
+        "h": 421
+      },
+      "anchor": {
+        "x": 155,
+        "y": 422,
+        "kind": "wall-attachment"
+      },
+      "logicalEnvelope": [
+        16,
+        40
+      ],
+      "nativeAspect": 0.7007125890736342,
+      "uniformContainedScale": 0.05423728813559322,
+      "containedOpaqueWorldSize": [
+        16.0,
+        22.833898305084745
+      ],
+      "atLogicalWidthWorldHeight": 22.833898305084745,
+      "aspectReviewRequired": true,
+      "overlayRequired": [],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "wallMount": [
+          161,
+          219
+        ],
+        "basin": [
+          44,
+          229,
+          236,
+          272
+        ],
+        "faucetTip": [
+          132,
+          146
+        ]
+      },
+      "notes": [
+        "Separate dispenser housings are part of this single wall fixture crop."
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 55905,
+      "sha256": "68193c249b4fdd6f911585c621b33e549d3f3b5fee5ed21259dbb6788596d30c"
+    },
+    {
+      "id": "mixer",
+      "status": "candidate_pending_runtime_review",
+      "file": "mixer.png",
+      "source": "storage-source.png",
+      "sourceCrop": [
+        103,
+        507,
+        486,
+        987
+      ],
+      "size": [
+        383,
+        480
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 363,
+        "h": 460
+      },
+      "anchor": {
+        "x": 195,
+        "y": 455,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        24,
+        39
+      ],
+      "nativeAspect": 0.7891304347826087,
+      "uniformContainedScale": 0.06611570247933884,
+      "containedOpaqueWorldSize": [
+        24.0,
+        30.41322314049587
+      ],
+      "atLogicalWidthWorldHeight": 30.41322314049587,
+      "aspectReviewRequired": true,
+      "overlayRequired": [
+        "spiral-mixer-hook-shaft",
+        "dough-stock",
+        "working-status-light"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "hookPivot": [
+          151,
+          129
+        ],
+        "bowlOpening": [
+          37,
+          175,
+          276,
+          221
+        ],
+        "controlDisplay": [
+          154,
+          78
+        ]
+      },
+      "notes": [
+        "Body leaves head-to-bowl clearance; exact hook motion/occlusion must be calibrated."
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 38686,
+      "sha256": "8c91e5d9399ee92d9f4886c043c44913013a5575395e5388eb03c9ced383d3cb"
+    },
+    {
+      "id": "proofer",
+      "status": "candidate_pending_runtime_review",
+      "file": "proofer.png",
+      "source": "storage-source.png",
+      "sourceCrop": [
+        618,
+        456,
+        936,
+        992
+      ],
+      "size": [
+        318,
+        536
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 3,
+        "w": 298,
+        "h": 523
+      },
+      "anchor": {
+        "x": 146,
+        "y": 516,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        24,
+        58
+      ],
+      "nativeAspect": 0.5697896749521989,
+      "uniformContainedScale": 0.08053691275167785,
+      "containedOpaqueWorldSize": [
+        24.0,
+        42.12080536912752
+      ],
+      "atLogicalWidthWorldHeight": 42.12080536912752,
+      "aspectReviewRequired": true,
+      "overlayRequired": [
+        "proofing-stock",
+        "steam",
+        "working-status-light"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "shelf1": [
+          129,
+          164
+        ],
+        "shelf2": [
+          129,
+          241
+        ],
+        "shelf3": [
+          129,
+          317
+        ],
+        "shelf4": [
+          129,
+          383
+        ],
+        "display": [
+          126,
+          50
+        ]
+      },
+      "notes": [],
+      "alphaExtrema": [
+        0,
+        253
+      ],
+      "transparentPixels": 14509,
+      "sha256": "60dfc8510377da36979bdff13509d2136475d797f88aea01b546f7f576306b6b"
+    },
+    {
+      "id": "pastryFridge",
+      "status": "candidate_pending_runtime_review",
+      "file": "pastryFridge.png",
+      "source": "storage-source.png",
+      "sourceCrop": [
+        1109,
+        515,
+        1410,
+        984
+      ],
+      "size": [
+        301,
+        469
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 281,
+        "h": 449
+      },
+      "anchor": {
+        "x": 148,
+        "y": 450,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        20,
+        38
+      ],
+      "nativeAspect": 0.6258351893095768,
+      "uniformContainedScale": 0.0711743772241993,
+      "containedOpaqueWorldSize": [
+        20.000000000000004,
+        31.957295373665485
+      ],
+      "atLogicalWidthWorldHeight": 31.95729537366548,
+      "aspectReviewRequired": false,
+      "overlayRequired": [
+        "pastry-stock",
+        "working-status-light"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "shelf1": [
+          129,
+          180
+        ],
+        "shelf2": [
+          129,
+          268
+        ],
+        "glass": [
+          44,
+          91,
+          207,
+          339
+        ],
+        "display": [
+          128,
+          51
+        ]
+      },
+      "notes": [],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 13855,
+      "sha256": "8fb17e177344d4862323f3d6260ddfb306f4afaeb0b033f4018d6306e7d14d6a"
+    },
+    {
+      "id": "kettle",
+      "status": "candidate_pending_runtime_review",
+      "file": "kettle.png",
+      "source": "hotline-source.png",
+      "sourceCrop": [
+        47,
+        101,
+        407,
+        519
+      ],
+      "size": [
+        360,
+        418
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 340,
+        "h": 398
+      },
+      "anchor": {
+        "x": 179,
+        "y": 394,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        26,
+        40
+      ],
+      "nativeAspect": 0.8542713567839196,
+      "uniformContainedScale": 0.07647058823529412,
+      "containedOpaqueWorldSize": [
+        26.000000000000004,
+        30.43529411764706
+      ],
+      "atLogicalWidthWorldHeight": 30.435294117647057,
+      "aspectReviewRequired": true,
+      "overlayRequired": [
+        "water-fill",
+        "boiling-bubbles",
+        "steam",
+        "burner-flame"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "potOpening": [
+          80,
+          18,
+          299,
+          69
+        ],
+        "burner": [
+          181,
+          209
+        ]
+      },
+      "notes": [],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 34809,
+      "sha256": "2e78b0aff9e20a1adb0fd1fcfb65c043c0f41b5849c7b09c461c7ebcae307670"
+    },
+    {
+      "id": "deckOven",
+      "status": "candidate_pending_runtime_review",
+      "file": "deckOven.png",
+      "source": "hotline-source.png",
+      "sourceCrop": [
+        490,
+        106,
+        1066,
+        538
+      ],
+      "size": [
+        576,
+        432
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 556,
+        "h": 412
+      },
+      "anchor": {
+        "x": 286,
+        "y": 412,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        56,
+        54
+      ],
+      "nativeAspect": 1.3495145631067962,
+      "uniformContainedScale": 0.10071942446043165,
+      "containedOpaqueWorldSize": [
+        56.0,
+        41.49640287769784
+      ],
+      "atLogicalWidthWorldHeight": 41.49640287769784,
+      "aspectReviewRequired": true,
+      "overlayRequired": [
+        "baking-stock",
+        "oven-hot-glow",
+        "working-status-light"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "upperChamber": [
+          69,
+          113,
+          377,
+          174
+        ],
+        "lowerChamber": [
+          66,
+          266,
+          378,
+          329
+        ],
+        "upperControl": [
+          458,
+          101
+        ],
+        "lowerControl": [
+          458,
+          248
+        ]
+      },
+      "notes": [],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 38561,
+      "sha256": "f9668f1e5c1b8dbedc45cd9a4638b7c36383cfcd9db2db0275878be363f372e1"
+    },
+    {
+      "id": "convection",
+      "status": "candidate_pending_runtime_review",
+      "file": "convection.png",
+      "source": "hotline-source.png",
+      "sourceCrop": [
+        1134,
+        70,
+        1476,
+        548
+      ],
+      "size": [
+        342,
+        478
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 322,
+        "h": 458
+      },
+      "anchor": {
+        "x": 167,
+        "y": 458,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        28,
+        48
+      ],
+      "nativeAspect": 0.7030567685589519,
+      "uniformContainedScale": 0.08695652173913043,
+      "containedOpaqueWorldSize": [
+        28.0,
+        39.826086956521735
+      ],
+      "atLogicalWidthWorldHeight": 39.82608695652174,
+      "aspectReviewRequired": false,
+      "overlayRequired": [
+        "convection-fan-blades",
+        "baking-stock",
+        "oven-hot-glow",
+        "working-status-light"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "fanCenter": [
+          143,
+          168
+        ],
+        "chamber": [
+          47,
+          88,
+          204,
+          241
+        ],
+        "display": [
+          250,
+          88
+        ]
+      },
+      "notes": [
+        "Rear grille is static; fan blades deliberately absent. Add runtime blades over/behind grille under later validated order."
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 30384,
+      "sha256": "c97079d338094988ca916326ad2672561c08cc9fabef0ee095841eb03e1dcc4e"
+    },
+    {
+      "id": "fryer",
+      "status": "candidate_pending_runtime_review",
+      "file": "fryer.png",
+      "source": "hotline-source.png",
+      "sourceCrop": [
+        42,
+        569,
+        408,
+        969
+      ],
+      "size": [
+        366,
+        400
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 346,
+        "h": 380
+      },
+      "anchor": {
+        "x": 180,
+        "y": 379,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        26,
+        34
+      ],
+      "nativeAspect": 0.9105263157894737,
+      "uniformContainedScale": 0.07514450867052024,
+      "containedOpaqueWorldSize": [
+        26.0,
+        28.55491329479769
+      ],
+      "atLogicalWidthWorldHeight": 28.55491329479769,
+      "aspectReviewRequired": false,
+      "overlayRequired": [
+        "oil-fill",
+        "donut-stock",
+        "oil-bubbles",
+        "working-status-light"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "leftVat": [
+          49,
+          113,
+          160,
+          160
+        ],
+        "rightVat": [
+          176,
+          113,
+          302,
+          160
+        ]
+      },
+      "notes": [],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 25692,
+      "sha256": "c57a4b63182c88a0242aa91985177e0c183c56a085a4822c4adfd8f5e2ea46ec"
+    },
+    {
+      "id": "hood",
+      "status": "candidate_pending_runtime_review",
+      "file": "hood.png",
+      "source": "hood-correction-source.png",
+      "sourceCrop": [
+        27,
+        163,
+        2072,
+        612
+      ],
+      "size": [
+        2045,
+        449
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 2025,
+        "h": 429
+      },
+      "anchor": {
+        "x": 1021,
+        "y": 106,
+        "kind": "wall-attachment"
+      },
+      "logicalEnvelope": [
+        154,
+        23
+      ],
+      "nativeAspect": 4.72027972027972,
+      "uniformContainedScale": 0.053613053613053616,
+      "containedOpaqueWorldSize": [
+        108.56643356643357,
+        23.0
+      ],
+      "atLogicalWidthWorldHeight": 32.62518518518519,
+      "aspectReviewRequired": true,
+      "overlayRequired": [
+        "hood-task-light",
+        "runtime-zone-label"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "wallMount": [
+          1021,
+          106
+        ],
+        "plaqueCenter": [
+          1021,
+          226
+        ],
+        "leftLight": [
+          493,
+          384
+        ],
+        "rightLight": [
+          1573,
+          384
+        ]
+      },
+      "notes": [
+        "Corrected wider candidate still has aspect4.72 versus target6.70. At154logical width it is32.6high, about9.6px over the23px envelope. Do not vertically squash; review overflow or use uniform contained fit."
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "transparentPixels": 272437,
+      "sha256": "b0d3a7f8ff1f2e620b6be4ce9c1d31082632092a19a4a282ccb181e83613c458"
+    },
+    {
+      "id": "hookup",
+      "status": "candidate_pending_runtime_review",
+      "file": "hookup.png",
+      "source": "hotline-source.png",
+      "sourceCrop": [
+        1239,
+        710,
+        1492,
+        864
+      ],
+      "size": [
+        253,
+        154
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 233,
+        "h": 134
+      },
+      "anchor": {
+        "x": 131,
+        "y": 84,
+        "kind": "wall-attachment"
+      },
+      "logicalEnvelope": [
+        13,
+        7
+      ],
+      "nativeAspect": 1.7388059701492538,
+      "uniformContainedScale": 0.05223880597014925,
+      "containedOpaqueWorldSize": [
+        12.171641791044776,
+        7.0
+      ],
+      "atLogicalWidthWorldHeight": 7.476394849785407,
+      "aspectReviewRequired": false,
+      "overlayRequired": [],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "wallMount": [
+          131,
+          84
+        ],
+        "pipeCap": [
+          67,
+          39
+        ],
+        "socketCenter": [
+          195,
+          75
+        ]
+      },
+      "notes": [
+        "Only uninstalled/capped state is visible; installed state hides this module and has no separate blank PNG."
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 11332,
+      "sha256": "abc64ea7a618df11b4dda5f79569aa57cd9fd315d07b36755f81322329efd24b"
+    },
+    {
+      "id": "bench",
+      "status": "candidate_pending_runtime_review",
+      "file": "bench.png",
+      "source": "floor-source.png",
+      "sourceCrop": [
+        37,
+        160,
+        707,
+        454
+      ],
+      "size": [
+        670,
+        294
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 650,
+        "h": 274
+      },
+      "anchor": {
+        "x": 328,
+        "y": 270,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        104,
+        42
+      ],
+      "nativeAspect": 2.372262773722628,
+      "uniformContainedScale": 0.15328467153284672,
+      "containedOpaqueWorldSize": [
+        99.63503649635037,
+        42.0
+      ],
+      "atLogicalWidthWorldHeight": 43.84,
+      "aspectReviewRequired": false,
+      "overlayRequired": [
+        "bench-food-tools",
+        "sheeter-body",
+        "standMixer-body"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "topCenter": [
+          333,
+          77
+        ],
+        "worktop": [
+          52,
+          25,
+          612,
+          111
+        ],
+        "sheeterMount": [
+          94,
+          70
+        ],
+        "standMixerMount": [
+          568,
+          89
+        ]
+      },
+      "notes": [
+        "Empty cabinet shelves and bare inset marble slab are intentional. Appliances attach independently."
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 48266,
+      "sha256": "0b42da8410c3ab2b57a350c8c156377b21d8dcbb2f7fd12ffdaf649ebb6397a2"
+    },
+    {
+      "id": "sheeter",
+      "status": "candidate_pending_runtime_review",
+      "file": "sheeter.png",
+      "source": "floor-source.png",
+      "sourceCrop": [
+        722,
+        189,
+        1147,
+        434
+      ],
+      "size": [
+        425,
+        245
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 405,
+        "h": 225
+      },
+      "anchor": {
+        "x": 207,
+        "y": 225,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        22,
+        12
+      ],
+      "nativeAspect": 1.8,
+      "uniformContainedScale": 0.05333333333333334,
+      "containedOpaqueWorldSize": [
+        21.6,
+        12.0
+      ],
+      "atLogicalWidthWorldHeight": 12.222222222222221,
+      "aspectReviewRequired": false,
+      "overlayRequired": [
+        "dough-sheet"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "rollerPivot": [
+          217,
+          93
+        ],
+        "conveyor": [
+          75,
+          130,
+          302,
+          190
+        ]
+      },
+      "notes": [],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 33276,
+      "sha256": "52607786da66950d71e931f8cd22758c6369768e77b9f3a18bb09fd8e65cd236"
+    },
+    {
+      "id": "standMixer",
+      "status": "candidate_pending_runtime_review",
+      "file": "standMixer.png",
+      "source": "floor-source.png",
+      "sourceCrop": [
+        1196,
+        88,
+        1486,
+        448
+      ],
+      "size": [
+        290,
+        360
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 270,
+        "h": 340
+      },
+      "anchor": {
+        "x": 141,
+        "y": 336,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        14,
+        16
+      ],
+      "nativeAspect": 0.7941176470588235,
+      "uniformContainedScale": 0.047058823529411764,
+      "containedOpaqueWorldSize": [
+        12.705882352941176,
+        16.0
+      ],
+      "atLogicalWidthWorldHeight": 17.62962962962963,
+      "aspectReviewRequired": false,
+      "overlayRequired": [
+        "stand-mixer-beater",
+        "ingredients"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "beaterPivot": [
+          94,
+          144
+        ],
+        "bowlOpening": [
+          32,
+          162,
+          184,
+          198
+        ]
+      },
+      "notes": [
+        "Open coupling-to-bowl area deliberately excludes beater/shaft."
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 25797,
+      "sha256": "5d2124818f3c59989dd693ceea96f748e939c91388940a296e478fa4a5c98311"
+    },
+    {
+      "id": "rack",
+      "status": "candidate_pending_runtime_review",
+      "file": "rack.png",
+      "source": "floor-source.png",
+      "sourceCrop": [
+        58,
+        468,
+        305,
+        931
+      ],
+      "size": [
+        247,
+        463
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 227,
+        "h": 443
+      },
+      "anchor": {
+        "x": 123,
+        "y": 436,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        22,
+        46
+      ],
+      "nativeAspect": 0.5124153498871332,
+      "uniformContainedScale": 0.09691629955947137,
+      "containedOpaqueWorldSize": [
+        22.0,
+        42.93392070484582
+      ],
+      "atLogicalWidthWorldHeight": 42.93392070484582,
+      "aspectReviewRequired": false,
+      "overlayRequired": [
+        "cooling-food-stock"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "shelf1": [
+          124,
+          62
+        ],
+        "shelf2": [
+          123,
+          166
+        ],
+        "shelf3": [
+          123,
+          270
+        ],
+        "shelf4": [
+          123,
+          366
+        ]
+      },
+      "notes": [
+        "Real transparent open bays; no stock or cloth baked in."
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 40250,
+      "sha256": "ef96ec4d0e1cb49ba694d3211d391b7e5ffcba45a0bac25197792751092a677d"
+    },
+    {
+      "id": "bins",
+      "status": "candidate_pending_runtime_review",
+      "file": "bins.png",
+      "source": "floor-source.png",
+      "sourceCrop": [
+        362,
+        640,
+        794,
+        933
+      ],
+      "size": [
+        432,
+        293
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 412,
+        "h": 273
+      },
+      "anchor": {
+        "x": 217,
+        "y": 271,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        40,
+        20
+      ],
+      "nativeAspect": 1.5091575091575091,
+      "uniformContainedScale": 0.07326007326007326,
+      "containedOpaqueWorldSize": [
+        30.183150183150186,
+        20.0
+      ],
+      "atLogicalWidthWorldHeight": 26.50485436893204,
+      "aspectReviewRequired": false,
+      "overlayRequired": [
+        "runtime-bin-labels"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "leftLabel": [
+          116,
+          136
+        ],
+        "rightLabel": [
+          278,
+          155
+        ],
+        "leftLid": [
+          130,
+          52
+        ],
+        "rightLid": [
+          292,
+          66
+        ]
+      },
+      "notes": [
+        "Two closed empty bin bodies in one paired module, blank labels."
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 30577,
+      "sha256": "ccf6dfa16cf964deef4847ef2f0138499e2b420b8873faa85c4171294df2f423"
+    },
+    {
+      "id": "dishPit",
+      "status": "candidate_pending_runtime_review",
+      "file": "dishPit.png",
+      "source": "floor-source.png",
+      "sourceCrop": [
+        836,
+        482,
+        1493,
+        957
+      ],
+      "size": [
+        657,
+        475
+      ],
+      "bboxAlpha128": {
+        "x": 10,
+        "y": 10,
+        "w": 637,
+        "h": 455
+      },
+      "anchor": {
+        "x": 328,
+        "y": 450,
+        "kind": "ground-or-counter-support"
+      },
+      "logicalEnvelope": [
+        64,
+        38
+      ],
+      "nativeAspect": 1.4,
+      "uniformContainedScale": 0.08351648351648351,
+      "containedOpaqueWorldSize": [
+        53.199999999999996,
+        38.0
+      ],
+      "atLogicalWidthWorldHeight": 45.714285714285715,
+      "aspectReviewRequired": false,
+      "overlayRequired": [
+        "runtime-dishes",
+        "water-flow"
+      ],
+      "overlayGeometrySourcePixelsRelativeToCrop": {
+        "sink1": [
+          124,
+          216
+        ],
+        "sink2": [
+          254,
+          226
+        ],
+        "sink3": [
+          379,
+          232
+        ],
+        "sprayTip": [
+          282,
+          136
+        ],
+        "drainRack": [
+          534,
+          235
+        ]
+      },
+      "notes": [],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "transparentPixels": 136565,
+      "sha256": "3c5dafd93814f84c7b1eca1f3ad3ad843d8d247f4fb3a3035f595316b66c8352"
+    }
+  ]
+}

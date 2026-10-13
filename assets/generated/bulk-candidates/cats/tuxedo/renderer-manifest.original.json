@@ -1,0 +1,535 @@
+{
+  "breed": "tuxedo",
+  "version": 1,
+  "generator": "built-in image_gen",
+  "sourceSheetDimensions": [
+    1254,
+    1254
+  ],
+  "bboxAlphaThreshold": "alpha > 128, excludes faint fringe; original alpha preserved in lossless crops",
+  "facingConvention": {
+    "walkA": "head-left",
+    "walkB": "head-left",
+    "other": "front-three-quarter slightly left; nuzzle head tilts independently"
+  },
+  "scaleNote": "One calibrated sourceToWorldScale for every frame from each source sheet. Estimated from common head width, never frame-height fit; runtime head/contact verification required.",
+  "anchorNote": "Manually visually estimated grounded front-paw/support midpoint and crown/forehead between ears, not ear tips. Contact/flip verification remains runtime work.",
+  "qa": {
+    "status": "source-and-crops-inspected",
+    "checks": [
+      "14 distinct action drawings",
+      "walkB lifted forepaw distinct from walkA forward stride",
+      "Complete silhouettes and transparent alpha",
+      "Breed-specific white blaze,bib,socks and green eyes",
+      "Grooming paw chest vs cheek",
+      "Raised chest with grounded haunch, no elongated neck"
+    ],
+    "raisedPoseHeightNote": "Raised poses roughly 8% taller than idle, at shared scale; runtime petting/contact QA pending."
+  },
+  "frames": [
+    {
+      "state": "idle",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/tuxedo-idle.png",
+      "source": "source.png",
+      "source_crop": [
+        59,
+        38,
+        319,
+        320
+      ],
+      "size": [
+        260,
+        282
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 244,
+        "h": 266
+      },
+      "foot": {
+        "x": 75,
+        "y": 266
+      },
+      "headContact": {
+        "x": 89,
+        "y": 55
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 29217,
+      "sha256": "cbc85b9e30b5de75b420bf851034b77ed7249c525fa79b9faac93956ed47f813"
+    },
+    {
+      "state": "swish",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/tuxedo-swish.png",
+      "source": "source.png",
+      "source_crop": [
+        368,
+        39,
+        664,
+        320
+      ],
+      "size": [
+        296,
+        281
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 280,
+        "h": 265
+      },
+      "foot": {
+        "x": 83,
+        "y": 265
+      },
+      "headContact": {
+        "x": 89,
+        "y": 53
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 40605,
+      "sha256": "26a5a8cd2be90a6d0d773a63f09d32aa4aeb1873a8031b001b06aa96433483dd"
+    },
+    {
+      "state": "blink",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/tuxedo-blink.png",
+      "source": "source.png",
+      "source_crop": [
+        689,
+        38,
+        944,
+        320
+      ],
+      "size": [
+        255,
+        282
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 239,
+        "h": 266
+      },
+      "foot": {
+        "x": 79,
+        "y": 266
+      },
+      "headContact": {
+        "x": 91,
+        "y": 56
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 27709,
+      "sha256": "a2dbedca8a0c7e045c245dc1371e3486f18f697688b5e4e61704dec8c7749e4a"
+    },
+    {
+      "state": "happy",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/tuxedo-happy.png",
+      "source": "source.png",
+      "source_crop": [
+        991,
+        35,
+        1244,
+        320
+      ],
+      "size": [
+        253,
+        285
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 237,
+        "h": 269
+      },
+      "foot": {
+        "x": 88,
+        "y": 269
+      },
+      "headContact": {
+        "x": 99,
+        "y": 55
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 29571,
+      "sha256": "5ca3137ba51f5d6aaf9c3ded865f5e0a98fb6e1e245528757fc6a2196900064d"
+    },
+    {
+      "state": "walkA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/tuxedo-walkA.png",
+      "source": "source.png",
+      "source_crop": [
+        15,
+        345,
+        343,
+        602
+      ],
+      "size": [
+        328,
+        257
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 316,
+        "h": 241
+      },
+      "foot": {
+        "x": 154,
+        "y": 241
+      },
+      "headContact": {
+        "x": 76,
+        "y": 71
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 32823,
+      "sha256": "b3aa0aabe94e2b1755b30c2857fca8ad42cb8e4c61e130727c8a42f26eb4e4c9"
+    },
+    {
+      "state": "walkB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/tuxedo-walkB.png",
+      "source": "source.png",
+      "source_crop": [
+        343,
+        345,
+        669,
+        603
+      ],
+      "size": [
+        326,
+        258
+      ],
+      "bbox": {
+        "x": 7,
+        "y": 8,
+        "w": 311,
+        "h": 242
+      },
+      "foot": {
+        "x": 154,
+        "y": 241
+      },
+      "headContact": {
+        "x": 77,
+        "y": 75
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 33435,
+      "sha256": "adf8bc0525c203fd152f2444d1a6b730bfbbf3779dd47d60be8f4a0426c315b2"
+    },
+    {
+      "state": "sleep",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/tuxedo-sleep.png",
+      "source": "source.png",
+      "source_crop": [
+        683,
+        425,
+        958,
+        595
+      ],
+      "size": [
+        275,
+        170
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 259,
+        "h": 154
+      },
+      "foot": {
+        "x": 136,
+        "y": 155
+      },
+      "headContact": {
+        "x": 91,
+        "y": 49
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 11677,
+      "sha256": "a90abc64936ab9a709e0434d3cecde74a4b935d8af45e435bf40e4a40eaf47b0"
+    },
+    {
+      "state": "groomA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/tuxedo-groomA.png",
+      "source": "source.png",
+      "source_crop": [
+        1000,
+        339,
+        1248,
+        603
+      ],
+      "size": [
+        248,
+        264
+      ],
+      "bbox": {
+        "x": 6,
+        "y": 8,
+        "w": 234,
+        "h": 248
+      },
+      "foot": {
+        "x": 88,
+        "y": 247
+      },
+      "headContact": {
+        "x": 90,
+        "y": 62
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 25103,
+      "sha256": "904eaf6f1ffed1ea7cb8094518dcdc2f70076c14b356d277bf72c396c8b360a2"
+    },
+    {
+      "state": "groomB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/tuxedo-groomB.png",
+      "source": "source.png",
+      "source_crop": [
+        42,
+        631,
+        309,
+        918
+      ],
+      "size": [
+        267,
+        287
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 251,
+        "h": 271
+      },
+      "foot": {
+        "x": 96,
+        "y": 270
+      },
+      "headContact": {
+        "x": 78,
+        "y": 55
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 31902,
+      "sha256": "ed4da5e3d0e68cdf878c5936300c3acc020485c4727497d184ae32e41858e5e9"
+    },
+    {
+      "state": "stretch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/tuxedo-stretch.png",
+      "source": "source.png",
+      "source_crop": [
+        315,
+        636,
+        661,
+        916
+      ],
+      "size": [
+        346,
+        280
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 330,
+        "h": 264
+      },
+      "foot": {
+        "x": 175,
+        "y": 265
+      },
+      "headContact": {
+        "x": 103,
+        "y": 143
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 43652,
+      "sha256": "13b31eb525e8d349902907a84163315590094192b1008eafee01e5957142330d"
+    },
+    {
+      "state": "watch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/tuxedo-watch.png",
+      "source": "source.png",
+      "source_crop": [
+        681,
+        645,
+        947,
+        920
+      ],
+      "size": [
+        266,
+        275
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 250,
+        "h": 259
+      },
+      "foot": {
+        "x": 91,
+        "y": 259
+      },
+      "headContact": {
+        "x": 94,
+        "y": 53
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 30855,
+      "sha256": "b57a79184ea48485a62fc8eceb5b682997b85c56b0961399168f1b8b51a3fce7"
+    },
+    {
+      "state": "lookUp",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/tuxedo-lookUp.png",
+      "source": "source.png",
+      "source_crop": [
+        1002,
+        617,
+        1249,
+        922
+      ],
+      "size": [
+        247,
+        305
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 234,
+        "h": 289
+      },
+      "foot": {
+        "x": 86,
+        "y": 289
+      },
+      "headContact": {
+        "x": 90,
+        "y": 52
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 29168,
+      "sha256": "49aa754e802c51cfabfa422e7533bb79a7d173acfab12b52d421cf6a5ea6ceb8"
+    },
+    {
+      "state": "nuzzleA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/tuxedo-nuzzleA.png",
+      "source": "source.png",
+      "source_crop": [
+        55,
+        922,
+        317,
+        1224
+      ],
+      "size": [
+        262,
+        302
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 246,
+        "h": 286
+      },
+      "foot": {
+        "x": 81,
+        "y": 286
+      },
+      "headContact": {
+        "x": 91,
+        "y": 47
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 30585,
+      "sha256": "1a3fb7d54cd2fe56d72a836f2f40bbda9a7a065cd3615a135b969cd92747292d"
+    },
+    {
+      "state": "nuzzleB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/tuxedo-nuzzleB.png",
+      "source": "source.png",
+      "source_crop": [
+        384,
+        924,
+        625,
+        1223
+      ],
+      "size": [
+        241,
+        299
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 225,
+        "h": 283
+      },
+      "foot": {
+        "x": 107,
+        "y": 283
+      },
+      "headContact": {
+        "x": 100,
+        "y": 50
+      },
+      "sourceToWorldScale": 0.046,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 24451,
+      "sha256": "dbd42e4dcc85e040739cddf401167cf4031c9f4513f3991596cb7967c0f1ecd4"
+    }
+  ]
+}

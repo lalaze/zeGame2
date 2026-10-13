@@ -1,0 +1,25 @@
+{
+  "id": 21,
+  "name": "玫瑰围巾",
+  "look": {
+    "skin": 0,
+    "hair": 5,
+    "hairStyle": 3,
+    "shirt": 5,
+    "pants": 2
+  },
+  "hairstyle": 7,
+  "outfit": "scarf",
+  "accessory": "glasses",
+  "accent": "#9e687a",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#f4cfad",
+    "hair": "#cc8c9f",
+    "shirt": "#cf929e",
+    "pants": "#585464"
+  },
+  "hatPalette": "#bb6b58",
+  "description": "Fixed customer cast 21 (玫瑰围巾): warm skin #f4cfad; hair #cc8c9f in short tapered sides and a tall swept-up pointed QUIFF rising asymmetrically, no hat. Outfit: #cf929e pullover with a cream neck scarf and short hanging end. Lower clothing color #585464; warm dark brown leather shoes. Accent #9e687a. Round dark-brown eyeglasses in every front/side/seated view; back shows temples near ears."
+}

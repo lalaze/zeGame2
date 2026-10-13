@@ -1,0 +1,1099 @@
+{
+  "bboxAlphaThreshold": "alpha>128 for measurement only; full ROI RGBA preserved",
+  "assets": [
+    {
+      "domain": "environment",
+      "id": "reading-library-shelf",
+      "areas": [
+        "reading"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "reading-library-shelf.png",
+      "source": "reading-greenhouse-source.png",
+      "source_crop": [
+        12,
+        85,
+        560,
+        650
+      ],
+      "size": [
+        548,
+        565
+      ],
+      "bbox": {
+        "x": 20,
+        "y": 19,
+        "w": 516,
+        "h": 535
+      },
+      "anchor": {
+        "x": 278.0,
+        "y": 553
+      },
+      "targetLogicalEnvelope": [
+        73,
+        65
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "7e0ea1382100c8acd11751dc0357f81dfb2e11273507cf216eb447ee0781e9a9",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "greenhouse-glass-bay",
+      "areas": [
+        "greenhouse"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "greenhouse-glass-bay.png",
+      "source": "reading-greenhouse-source.png",
+      "source_crop": [
+        1172,
+        40,
+        1520,
+        650
+      ],
+      "size": [
+        348,
+        610
+      ],
+      "bbox": {
+        "x": 11,
+        "y": 18,
+        "w": 321,
+        "h": 583
+      },
+      "anchor": {
+        "x": 171.5,
+        "y": 600
+      },
+      "targetLogicalEnvelope": [
+        53,
+        80
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "c082f556fc6fc98e15cdc42bd0f081ef17aff78a6852c91966607f65ea18ca39",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ],
+      "apertureQA": [
+        {
+          "box": [
+            45,
+            190,
+            64,
+            330
+          ],
+          "alphaExtrema": [
+            0,
+            0
+          ],
+          "alphaZeroFraction": 1.0
+        },
+        {
+          "box": [
+            99,
+            193,
+            137,
+            330
+          ],
+          "alphaExtrema": [
+            0,
+            1
+          ],
+          "alphaZeroFraction": 0.9998079139454475
+        },
+        {
+          "box": [
+            199,
+            431,
+            230,
+            499
+          ],
+          "alphaExtrema": [
+            0,
+            1
+          ],
+          "alphaZeroFraction": 0.9174573055028463
+        }
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "greenhouse-empty-potting-bench",
+      "areas": [
+        "greenhouse"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "greenhouse-empty-potting-bench.png",
+      "source": "reading-greenhouse-source.png",
+      "source_crop": [
+        10,
+        745,
+        884,
+        970
+      ],
+      "size": [
+        874,
+        225
+      ],
+      "bbox": {
+        "x": 22,
+        "y": 20,
+        "w": 834,
+        "h": 183
+      },
+      "anchor": {
+        "x": 439.0,
+        "y": 202
+      },
+      "targetLogicalEnvelope": [
+        96,
+        18
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "09d3482b8233e4cb1db6b634a90d036a87141619ac3196dbcde8f681688f8545",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "greenhouse-hanging-planter",
+      "areas": [
+        "greenhouse"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "greenhouse-hanging-planter.png",
+      "source": "reading-greenhouse-source.png",
+      "source_crop": [
+        900,
+        625,
+        1159,
+        995
+      ],
+      "size": [
+        259,
+        370
+      ],
+      "bbox": {
+        "x": 24,
+        "y": 10,
+        "w": 216,
+        "h": 342
+      },
+      "anchor": {
+        "x": 132.0,
+        "y": 351
+      },
+      "targetLogicalEnvelope": [
+        11,
+        24
+      ],
+      "alphaExtrema": [
+        0,
+        253
+      ],
+      "sha256": "2d99f37bd729a81cc00bb81dcedf3534094f60b084fe9f1b210c825fb039aa90",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "reading-book-stack",
+      "areas": [
+        "reading"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "reading-book-stack.png",
+      "source": "reading-greenhouse-source.png",
+      "source_crop": [
+        1200,
+        750,
+        1521,
+        978
+      ],
+      "size": [
+        321,
+        228
+      ],
+      "bbox": {
+        "x": 13,
+        "y": 23,
+        "w": 283,
+        "h": 188
+      },
+      "anchor": {
+        "x": 154.5,
+        "y": 210
+      },
+      "targetLogicalEnvelope": [
+        14,
+        8
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "4ac6bbead6b2c7e0c27e5afea173de6a308cdfe3c363c77757f0c2b8d571a235",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "pergola-post",
+      "areas": [
+        "terrace"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "pergola-post.png",
+      "source": "terrace-source.png",
+      "source_crop": [
+        40,
+        70,
+        235,
+        565
+      ],
+      "size": [
+        195,
+        495
+      ],
+      "bbox": {
+        "x": 19,
+        "y": 18,
+        "w": 157,
+        "h": 459
+      },
+      "anchor": {
+        "x": 97.5,
+        "y": 476
+      },
+      "targetLogicalEnvelope": [
+        6,
+        89
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "4b7095c6204f3aa60ccf55d298fada075a4c93c05f49dc76bd66a16dd96d12c9",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "pergola-beam",
+      "areas": [
+        "terrace"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "pergola-beam.png",
+      "source": "terrace-source.png",
+      "source_crop": [
+        265,
+        310,
+        710,
+        408
+      ],
+      "size": [
+        445,
+        98
+      ],
+      "bbox": {
+        "x": 15,
+        "y": 18,
+        "w": 414,
+        "h": 64
+      },
+      "anchor": {
+        "x": 222.0,
+        "y": 81
+      },
+      "targetLogicalEnvelope": [
+        64,
+        7
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "5f51b7780196adb52acfed4f34e8f537eed856ee2bc0269ae37332367b7af06e",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "terrace-parapet",
+      "areas": [
+        "terrace"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "terrace-parapet.png",
+      "source": "terrace-source.png",
+      "source_crop": [
+        730,
+        308,
+        1150,
+        505
+      ],
+      "size": [
+        420,
+        197
+      ],
+      "bbox": {
+        "x": 16,
+        "y": 20,
+        "w": 390,
+        "h": 159
+      },
+      "anchor": {
+        "x": 211.0,
+        "y": 178
+      },
+      "targetLogicalEnvelope": [
+        64,
+        18
+      ],
+      "alphaExtrema": [
+        0,
+        253
+      ],
+      "sha256": "8c473d3975af47ca275986ca927a8b7060a7c134e2642021cd6728db886b99ee",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "festoon-three-lamps",
+      "areas": [
+        "terrace"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "festoon-three-lamps.png",
+      "source": "terrace-source.png",
+      "source_crop": [
+        1170,
+        309,
+        1520,
+        500
+      ],
+      "size": [
+        350,
+        191
+      ],
+      "bbox": {
+        "x": 13,
+        "y": 17,
+        "w": 317,
+        "h": 156
+      },
+      "anchor": {
+        "x": 171.5,
+        "y": 172
+      },
+      "targetLogicalEnvelope": [
+        64,
+        20
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "64aed9ed5a16b81c9fe11b450d93321abd845dce01e5b903c04ddf2614c70b94",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "terrace-flowerbox",
+      "areas": [
+        "terrace"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "terrace-flowerbox.png",
+      "source": "terrace-source.png",
+      "source_crop": [
+        0,
+        680,
+        490,
+        920
+      ],
+      "size": [
+        490,
+        240
+      ],
+      "bbox": {
+        "x": 22,
+        "y": 17,
+        "w": 455,
+        "h": 189
+      },
+      "anchor": {
+        "x": 249.5,
+        "y": 205
+      },
+      "targetLogicalEnvelope": [
+        31,
+        17
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "a502e51ae8fc4f6a2352382a3bd91b37d6ada35ee8364704b8a19d1bff57b15a",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "climbing-vine-sprig",
+      "areas": [
+        "terrace",
+        "greenhouse"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "climbing-vine-sprig.png",
+      "source": "terrace-source.png",
+      "source_crop": [
+        480,
+        590,
+        715,
+        981
+      ],
+      "size": [
+        235,
+        391
+      ],
+      "bbox": {
+        "x": 20,
+        "y": 19,
+        "w": 188,
+        "h": 336
+      },
+      "anchor": {
+        "x": 114.0,
+        "y": 354
+      },
+      "targetLogicalEnvelope": [
+        12,
+        24
+      ],
+      "alphaExtrema": [
+        0,
+        253
+      ],
+      "sha256": "9d043f8730c5c54a1a7e145f7a28c6c763d80b8338a50318195a2253a8548653",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "blank-region-sign",
+      "areas": [
+        "reading",
+        "greenhouse",
+        "terrace"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "blank-region-sign.png",
+      "source": "terrace-source.png",
+      "source_crop": [
+        714,
+        727,
+        1150,
+        885
+      ],
+      "size": [
+        436,
+        158
+      ],
+      "bbox": {
+        "x": 13,
+        "y": 12,
+        "w": 404,
+        "h": 133
+      },
+      "anchor": {
+        "x": 215.0,
+        "y": 144
+      },
+      "targetLogicalEnvelope": [
+        60,
+        15
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "6780dec5e3ed74eb480346e81843cefa5b6babc38b6918d35a94c3fcfba2511f",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "coping-strip",
+      "areas": [
+        "terrace"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "coping-strip.png",
+      "source": "terrace-source.png",
+      "source_crop": [
+        1151,
+        770,
+        1536,
+        853
+      ],
+      "size": [
+        385,
+        83
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 11,
+        "w": 360,
+        "h": 51
+      },
+      "anchor": {
+        "x": 190.0,
+        "y": 61
+      },
+      "targetLogicalEnvelope": [
+        64,
+        8
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "777381efba5574afe1daf4d557eb367dbcef8ad3be1e45407fede61981af0771",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "main-corner-post",
+      "areas": [
+        "main",
+        "reading"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "main-corner-post.png",
+      "source": "main-structure-source.png",
+      "source_crop": [
+        40,
+        40,
+        187,
+        580
+      ],
+      "size": [
+        147,
+        540
+      ],
+      "bbox": {
+        "x": 20,
+        "y": 19,
+        "w": 108,
+        "h": 503
+      },
+      "anchor": {
+        "x": 74.0,
+        "y": 521
+      },
+      "targetLogicalEnvelope": [
+        6,
+        80
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "0b2e2d7cf79b40a1899e96aeadaeaafe04e8cde091ead6edc843735e05a75fcc",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "main-horizontal-beam",
+      "areas": [
+        "main",
+        "reading"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "main-horizontal-beam.png",
+      "source": "main-structure-source.png",
+      "source_crop": [
+        193,
+        262,
+        877,
+        380
+      ],
+      "size": [
+        684,
+        118
+      ],
+      "bbox": {
+        "x": 15,
+        "y": 16,
+        "w": 652,
+        "h": 83
+      },
+      "anchor": {
+        "x": 341.0,
+        "y": 98
+      },
+      "targetLogicalEnvelope": [
+        64,
+        8
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "be93b41579e58636c0e06fb0a2caa14b38cf874abd2d41c2d5c206d6b0bf333b",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "main-open-door-frame",
+      "areas": [
+        "main",
+        "reading",
+        "kitchen"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "main-open-door-frame.png",
+      "source": "main-structure-source.png",
+      "source_crop": [
+        895,
+        70,
+        1215,
+        560
+      ],
+      "size": [
+        320,
+        490
+      ],
+      "bbox": {
+        "x": 13,
+        "y": 16,
+        "w": 294,
+        "h": 459
+      },
+      "anchor": {
+        "x": 160.0,
+        "y": 474
+      },
+      "targetLogicalEnvelope": [
+        24,
+        40
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "45821722023aad7d76be36150ac0107c76425c10b5c9600b76d3b4a68e430642",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ],
+      "apertureQA": [
+        {
+          "box": [
+            80,
+            100,
+            230,
+            410
+          ],
+          "alphaExtrema": [
+            0,
+            1
+          ],
+          "alphaZeroFraction": 0.997247311827957
+        }
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "main-closed-door-leaf",
+      "areas": [
+        "main",
+        "reading",
+        "kitchen"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "main-closed-door-leaf.png",
+      "source": "main-structure-source.png",
+      "source_crop": [
+        1276,
+        130,
+        1495,
+        560
+      ],
+      "size": [
+        219,
+        430
+      ],
+      "bbox": {
+        "x": 16,
+        "y": 17,
+        "w": 185,
+        "h": 397
+      },
+      "anchor": {
+        "x": 108.5,
+        "y": 413
+      },
+      "targetLogicalEnvelope": [
+        18,
+        35
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "2f59132944d7be8dfe1f4f4930c2ffaae8a88093ecbae8f55fa9937c899f0eee",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "outdoor-tree-line",
+      "areas": [
+        "main",
+        "reading",
+        "greenhouse",
+        "terrace"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "outdoor-tree-line.png",
+      "source": "main-structure-source.png",
+      "source_crop": [
+        0,
+        585,
+        516,
+        997
+      ],
+      "size": [
+        516,
+        412
+      ],
+      "bbox": {
+        "x": 20,
+        "y": 14,
+        "w": 485,
+        "h": 376
+      },
+      "anchor": {
+        "x": 262.5,
+        "y": 389
+      },
+      "targetLogicalEnvelope": [
+        94,
+        50
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "d474a36a9af886362b88e24f44426e642af2d29ef9ec54bb153ecb75e8684571",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "village-roof-cluster",
+      "areas": [
+        "main",
+        "reading"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "village-roof-cluster.png",
+      "source": "main-structure-source.png",
+      "source_crop": [
+        516,
+        643,
+        920,
+        990
+      ],
+      "size": [
+        404,
+        347
+      ],
+      "bbox": {
+        "x": 7,
+        "y": 19,
+        "w": 392,
+        "h": 290
+      },
+      "anchor": {
+        "x": 203.0,
+        "y": 308
+      },
+      "targetLogicalEnvelope": [
+        80,
+        48
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "4ac7cd2355a11a53e7f1e3cbf31e8b4665fdfd03e6f604d088429f37cbf93c69",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ],
+      "cropRevision": "Right boundary 923->920 removes neighboring cloud tip; village complete through x914; no image repaint."
+    },
+    {
+      "domain": "environment",
+      "id": "cloud",
+      "areas": [
+        "main",
+        "greenhouse",
+        "terrace"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "cloud.png",
+      "source": "main-structure-source.png",
+      "source_crop": [
+        915,
+        650,
+        1334,
+        870
+      ],
+      "size": [
+        419,
+        220
+      ],
+      "bbox": {
+        "x": 7,
+        "y": 16,
+        "w": 396,
+        "h": 191
+      },
+      "anchor": {
+        "x": 205.0,
+        "y": 206
+      },
+      "targetLogicalEnvelope": [
+        44,
+        20
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "f5592754128a076e8ec70f7a1b2797c38fb06953aafd59da17414aecad8f627a",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "foreground-threshold",
+      "areas": [
+        "main"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "foreground-threshold.png",
+      "source": "main-structure-source.png",
+      "source_crop": [
+        917,
+        870,
+        1536,
+        992
+      ],
+      "size": [
+        619,
+        122
+      ],
+      "bbox": {
+        "x": 11,
+        "y": 5,
+        "w": 585,
+        "h": 93
+      },
+      "anchor": {
+        "x": 303.5,
+        "y": 97
+      },
+      "targetLogicalEnvelope": [
+        64,
+        12
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "4eddb7777c8ab56695287e807b6cf85b6e05b1270405e516a5cfedb5eaf9cdab",
+      "notes": [
+        "Source ROI retained whole, no alpha thresholding, recoloring or resampling",
+        "Target envelope is design reference, preserve aspect and review layout overflow"
+      ]
+    },
+    {
+      "domain": "environment",
+      "id": "reading-window-ochre",
+      "areas": [
+        "reading"
+      ],
+      "state": "base",
+      "status": "candidate_pending_render_review",
+      "file": "reading-window-ochre.png",
+      "source": "reading-window-ochre-source.png",
+      "source_crop": [
+        0,
+        0,
+        1837,
+        856
+      ],
+      "size": [
+        1837,
+        856
+      ],
+      "bbox": {
+        "x": 56,
+        "y": 87,
+        "w": 1725,
+        "h": 690
+      },
+      "anchor": {
+        "x": 918.5,
+        "y": 776
+      },
+      "targetLogicalEnvelope": [
+        108,
+        53
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "notes": [
+        "Corrected to ochre curtains; source aspect may differ from target; no stretching",
+        "Four genuinely transparent apertures; exact placement requires runtime review"
+      ],
+      "apertureQA": [
+        {
+          "box": [
+            404,
+            256,
+            808,
+            368
+          ],
+          "alphaExtrema": [
+            0,
+            1
+          ],
+          "alphaZeroFraction": 0.9898117043847242
+        },
+        {
+          "box": [
+            1028,
+            256,
+            1451,
+            368
+          ],
+          "alphaExtrema": [
+            0,
+            1
+          ],
+          "alphaZeroFraction": 0.9980369807497467
+        },
+        {
+          "box": [
+            404,
+            479,
+            808,
+            573
+          ],
+          "alphaExtrema": [
+            0,
+            1
+          ],
+          "alphaZeroFraction": 0.9850168527491047
+        },
+        {
+          "box": [
+            1028,
+            479,
+            1451,
+            573
+          ],
+          "alphaExtrema": [
+            0,
+            1
+          ],
+          "alphaZeroFraction": 0.9635078718374327
+        }
+      ],
+      "sha256": "35eea31510fe4182f7513f2cfdd1d25fe822a3575a844aea14239205b21f1ed3"
+    }
+  ]
+}

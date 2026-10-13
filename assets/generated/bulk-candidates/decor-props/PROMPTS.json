@@ -1,0 +1,132 @@
+[
+  {
+    "id": "sill_cactus",
+    "kind": "sprite",
+    "logical": [
+      6,
+      9
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. One tiny round prickly-pear cactus with compact branching pads, muted green skin and small pale spine clusters in a squat terracotta pot. Whole aspect6:9. No flower, no sill or other object. Style reference observed: detailed fine-crisp retro pixel-art, shaded square pixel clusters with thin dark brown pixel-stepped outlines, matching warm walnut/brass cafe furniture. This is one newly authored independent sprite, not a scene. Respect prescribed native aspect; do not add a surrounding panel or surface."
+  },
+  {
+    "id": "sill_tulips",
+    "kind": "sprite",
+    "logical": [
+      8,
+      9
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. One small rectangular terracotta planter containing exactly three upright tulips: muted rose, warm yellow and muted rose blooms with slender green stems and two broad leaves. Whole aspect8:9. No sill, no extra props. Style reference observed: detailed fine-crisp retro pixel-art, shaded square pixel clusters with thin dark brown pixel-stepped outlines, matching warm walnut/brass cafe furniture. This is one newly authored independent sprite, not a scene. Respect prescribed native aspect; do not add a surrounding panel or surface."
+  },
+  {
+    "id": "sill_bonsai",
+    "kind": "sprite",
+    "logical": [
+      12,
+      9
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. One tiny bonsai tree with a gracefully bent visible walnut-brown trunk and layered compact sage-green leafy canopy, planted in a low wide rectangular terracotta bonsai dish. Whole aspect12:9. No scenery, no stand. Style reference observed: detailed fine-crisp retro pixel-art, shaded square pixel clusters with thin dark brown pixel-stepped outlines, matching warm walnut/brass cafe furniture. This is one newly authored independent sprite, not a scene. Respect prescribed native aspect; do not add a surrounding panel or surface."
+  },
+  {
+    "id": "ceiling_lights",
+    "kind": "sprite",
+    "logical": [
+      64,
+      14
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. One horizontal reusable festoon-light segment: gently sagging dark-brown wire between left and right endpoints at exactly the same vertical height, with four small evenly spaced UNLIT cream-glass round bulbs and antique brass sockets. Whole aspect64:14. Wire endpoints complete inside canvas margins. Bulbs no bright emission or halos; runtime flicker separate. Style reference observed: detailed fine-crisp retro pixel-art, shaded square pixel clusters with thin dark brown pixel-stepped outlines, matching warm walnut/brass cafe furniture. This is one newly authored independent sprite, not a scene. Respect prescribed native aspect; do not add a surrounding panel or surface."
+  },
+  {
+    "id": "ceiling_vines",
+    "kind": "sprite",
+    "logical": [
+      64,
+      18
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. One wide horizontal overhead trim garland of dangling small sage-green ivy vines and leaves, varied short trailing lengths, continuous subtle woody stem across top. Whole aspect64:18. No pot, flowers, light bulbs or support wall. Small gaps between hanging leafy tendrils are true transparent alpha. Existing hanging pots are separate. Style reference observed: detailed fine-crisp retro pixel-art, shaded square pixel clusters with thin dark brown pixel-stepped outlines, matching warm walnut/brass cafe furniture. This is one newly authored independent sprite, not a scene. Respect prescribed native aspect; do not add a surrounding panel or surface."
+  },
+  {
+    "id": "ceiling_pendants",
+    "kind": "sprite",
+    "logical": [
+      9,
+      15
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE antique brass cafe pendant light with thin dark vertical ceiling cord, small brass collar, shallow bell-shaped cream-glass shade and a brass bottom lip. UNLIT fixture, no bright bulb emission or cone. Whole aspect9:15, cord ends at top margin; game repeats it four times. Style reference observed: detailed fine-crisp retro pixel-art, shaded square pixel clusters with thin dark brown pixel-stepped outlines, matching warm walnut/brass cafe furniture. This is one newly authored independent sprite, not a scene. Respect prescribed native aspect; do not add a surrounding panel or surface."
+  },
+  {
+    "id": "ceiling_chandelier",
+    "kind": "sprite",
+    "logical": [
+      25,
+      15
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE low wide antique brass cafe chandelier with short central hanging chain, five curved arms holding five UNLIT cream candles, tiny clear pale celadon faceted crystal drops beneath. Whole aspect25:15, complete fixture. NO flames or glow anywhere, wick tips visible for runtime flame overlay. Style reference observed: detailed fine-crisp retro pixel-art, shaded square pixel clusters with thin dark brown pixel-stepped outlines, matching warm walnut/brass cafe furniture. This is one newly authored independent sprite, not a scene. Respect prescribed native aspect; do not add a surrounding panel or surface."
+  },
+  {
+    "id": "rug_red",
+    "kind": "sprite",
+    "logical": [
+      26,
+      16
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE flat woven rectangular cafe rug in muted terracotta red: dark brick-red border #814337, dusty terracotta field #bd7760, cream-gold #f3d7a4 small diamond center, tiny botanical motifs at four corners, narrow stitched inner border and short cream fringes at top and bottom ends. FULL DIRECT OVERHEAD FLAT VIEW, no perspective or thickness. Whole aspect26:16. Style reference observed: detailed fine-crisp retro pixel-art, shaded square pixel clusters with thin dark brown pixel-stepped outlines, matching warm walnut/brass cafe furniture. This is one newly authored independent sprite, not a scene. Respect prescribed native aspect; do not add a surrounding panel or surface."
+  },
+  {
+    "id": "rug_blue",
+    "kind": "sprite",
+    "logical": [
+      26,
+      16
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE flat woven rectangular cafe rug in dusty blue-gray teal: slate border #495f68, muted teal-gray field #7e9694, warm cream #efe4bf small diamond center, tiny botanical motifs at four corners, narrow stitched inner border and short cream fringes at top and bottom ends. FULL DIRECT OVERHEAD FLAT VIEW, no perspective or thickness. Whole aspect26:16. Style reference observed: detailed fine-crisp retro pixel-art, shaded square pixel clusters with thin dark brown pixel-stepped outlines, matching warm walnut/brass cafe furniture. This is one newly authored independent sprite, not a scene. Respect prescribed native aspect; do not add a surrounding panel or surface."
+  },
+  {
+    "id": "rug_round",
+    "kind": "sprite",
+    "logical": [
+      26,
+      16
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE flat oval braided woven cafe rug in muted mint/sage: concentric deep green, sage, cream and pale mint rings, a small cream/sage diamond medallion in center. Smooth complete oval silhouette, no fringe. FULL DIRECT OVERHEAD FLAT VIEW, no thickness or cast shadow. Whole aspect26:16. Style reference observed: detailed fine-crisp retro pixel-art, shaded square pixel clusters with thin dark brown pixel-stepped outlines, matching warm walnut/brass cafe furniture. This is one newly authored independent sprite, not a scene. Respect prescribed native aspect; do not add a surrounding panel or surface."
+  },
+  {
+    "id": "neon_cafe",
+    "kind": "sprite",
+    "logical": [
+      42,
+      14
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE very wide low blank antique-brass neon-sign mounting frame with a narrow dark walnut backplate and completely EMPTY dark center reserved for runtime cafe text. Simple rounded rectangle frame, small corner mounting screws. Whole aspect3:1. ABSOLUTELY NO letters, no CAFE word, no logo, no symbol and no glass tubes. No glow. This is a blank mounting body for dynamic text. Style reference observed: detailed fine-crisp retro pixel-art, shaded square pixel clusters with thin dark brown pixel-stepped outlines, matching warm walnut/brass cafe furniture. This is one newly authored independent sprite, not a scene. Respect prescribed native aspect; do not add a surrounding panel or surface."
+  },
+  {
+    "id": "neon_heart",
+    "kind": "sprite",
+    "logical": [
+      8,
+      8
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE small simple heart-shaped neon glass tube, unlit dusty rose/cream glass with a few subtle reflective pixels and tiny dark metal mounting clips. Heart outline only, hollow inside is genuine transparent alpha, no backplate, cord or separate prop. Whole aspect1:1. No glow; runtime lighting separate. Style reference observed: detailed fine-crisp retro pixel-art, shaded square pixel clusters with thin dark brown pixel-stepped outlines, matching warm walnut/brass cafe furniture. This is one newly authored independent sprite, not a scene. Respect prescribed native aspect; do not add a surrounding panel or surface."
+  },
+  {
+    "id": "neon_cup",
+    "kind": "sprite",
+    "logical": [
+      9,
+      10
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE simple coffee-cup-and-saucer neon glass tube motif with three small steam curls above, UNLIT pale sage/cream tubing and tiny dark mounting clips. Cup handle on right; hollow areas and outside are genuine transparent alpha. Whole aspect9:10. No backplate, no text, no glow; runtime lighting separate. Style reference observed: detailed fine-crisp retro pixel-art, shaded square pixel clusters with thin dark brown pixel-stepped outlines, matching warm walnut/brass cafe furniture. This is one newly authored independent sprite, not a scene. Respect prescribed native aspect; do not add a surrounding panel or surface."
+  }
+]

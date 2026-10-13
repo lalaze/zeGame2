@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "aliases": [
+    {
+      "id": "sconce",
+      "status": "reuse_candidate_pending_integration_review",
+      "source": "../../../../public/art/generated/wall-v1/brass-wall-lamp.png",
+      "sourceSha256": "46c2df809c5314c1da44e0a36933a71c4f4f56cc16486bf21cea43a7a4ee3c83",
+      "nativeSize": [
+        206,
+        294
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 186,
+        "h": 274
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 0.6788321167883211,
+      "logicalEnvelope": [
+        8,
+        16
+      ],
+      "footprintCells": [
+        1,
+        2
+      ],
+      "surface": "wall",
+      "anchor": {
+        "x": 103.0,
+        "y": 147.0,
+        "kind": "wall-center"
+      },
+      "aspectPreservingFit": [
+        8.0,
+        11.785
+      ],
+      "note": "Existing self-lit cream glass body may need runtime unlit treatment; independent lamp/mount, no separate wall."
+    },
+    {
+      "id": "vase_daisies",
+      "status": "reuse_candidate_pending_integration_review",
+      "source": "../../../../public/art/generated/main-v2/flower-vase.png",
+      "sourceSha256": "aafb3111785d98acbe9a8e048e9963adac83cb144aa5306bdaf5ecf5e5942c2f",
+      "nativeSize": [
+        264,
+        281
+      ],
+      "bbox": {
+        "x": 12,
+        "y": 12,
+        "w": 240,
+        "h": 257
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 0.933852140077821,
+      "logicalEnvelope": [
+        14,
+        25
+      ],
+      "footprintCells": [
+        2,
+        1
+      ],
+      "surface": "floor",
+      "anchor": {
+        "x": 132.0,
+        "y": 268,
+        "kind": "floor-foot"
+      },
+      "aspectPreservingFit": [
+        14.0,
+        14.992
+      ],
+      "note": "Existing illustrated white/yellow daisies in glass vase. Refit to furniture 14x25 envelope, not previous table prop dimensions."
+    },
+    {
+      "id": "hanging_ivy",
+      "status": "reuse_candidate_pending_integration_review",
+      "source": "../../../../public/art/generated/main-v1/vine.png",
+      "sourceSha256": "e31df5efbcd674539f4ee67116079313e205bda7bdf30264540a58c55224956e",
+      "nativeSize": [
+        388,
+        453
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 372,
+        "h": 435
+      },
+      "bboxAlphaThreshold": ">128",
+      "nativeAspect": 0.8551724137931035,
+      "logicalEnvelope": [
+        14,
+        24
+      ],
+      "footprintCells": [
+        2,
+        3
+      ],
+      "surface": "wall",
+      "anchor": {
+        "x": 194.0,
+        "y": 225.5,
+        "kind": "wall-center"
+      },
+      "aspectPreservingFit": [
+        14.0,
+        16.371
+      ],
+      "note": "Complete independent terracotta pot and trailing variegated ivy. NO hanging rope present. Draw separate attachment rope later to pot-rim anchor; not a baked cabinet corner.",
+      "potRimCenter": {
+        "x": 292,
+        "y": 108
+      },
+      "hangingAttachmentPoints": [
+        {
+          "x": 240,
+          "y": 93
+        },
+        {
+          "x": 341,
+          "y": 97
+        }
+      ],
+      "anchorMeasurement": "visual estimate from 388x453 source; confirm line attachment and occlusion in world render",
+      "ropeRequired": true
+    }
+  ]
+}

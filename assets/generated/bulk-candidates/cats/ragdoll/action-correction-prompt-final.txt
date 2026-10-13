@@ -1,0 +1,6 @@
+Create exactly THREE spacious separate sprites of the SAME longhaired bicolor RAGDOLL cat in reference. This input is identity and pixel-style reference; keep ivorycream longcoat, taupegray facepoints/ears/tail, white inverted noseV, BLUE eyes, whitefluffyruff andpaws, plumedtail. Fine cozy 2D pixel clusters, dark warmcontours.
+1536x1024 transparent RGBA. THREE columns one row, at least100px transparent gaps between all silhouettes and60pxoutermargins. SAME headsize about200pxwide across allthree; completecats, tailsfullyvisible, groundliney850.
+LEFT blink: compact sitting front3quarter slightlyLEFT, BOTH eyesclosed neutral, mouthclosed. Crucial one COMPLETE FLUFFY TAIL curves conspicuously toRIGHT outsidebody, fullyvisible.
+MIDDLE groomB: compact sitting, nearforepaw lifted toCHEEK rubbingface, headleans gentlyinto paw, otherforepawgrounded, fluffytailextendsRIGHT. NOT tonguepaw atchest.
+RIGHT stretch: headfacingLEFT, forelegsreachingLEFT chestlow, hindquartershigh, tailcurvedUPRIGHT. Full paws/tail containedwithinits owncolumn with generousgap.
+Nohumans,objects,labels,text,effects,floor,shadow,haze. Preserve actualtransparentalpha. Never overlap adjacent cats.

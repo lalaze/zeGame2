@@ -1,0 +1,266 @@
+{
+  "scope": "File existence, dimensions, alpha bounds, exact source RGBA crop, duplicate pixel evidence only; no runtime or aesthetic pass",
+  "manifests": [
+    {
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-kitchen-v1/renderer-manifest.json",
+      "count": 18,
+      "assets": [
+        {
+          "id": "cooler",
+          "size": [
+            295,
+            471
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "23180a02a7fa59f51c7232b6db839da5b6f53c32dad5b8d0cb7f46ff3ff26205",
+          "file_sha256": "22b773b351d57e69f2f077b4ac76dbe88f46fe35c686cfbb307a0c4c4f813585",
+          "exact_source_crop": true
+        },
+        {
+          "id": "dryStore",
+          "size": [
+            366,
+            415
+          ],
+          "alpha_extrema": [
+            0,
+            253
+          ],
+          "rgba_sha256": "f819adfc7b2ca13255d01dbc3c2e1ac0778f42f4087dd0767783d49a8d6a04e9",
+          "file_sha256": "3232c8c79aae71383b49ffe0fd9fc2bacad0d1d770ad8ecc7f9a7a1c9832555b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "handSink",
+          "size": [
+            315,
+            441
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "4f0aefbb2ba50098d90e057406ae5fd48103b7666ef51b493a276402574851b7",
+          "file_sha256": "68193c249b4fdd6f911585c621b33e549d3f3b5fee5ed21259dbb6788596d30c",
+          "exact_source_crop": true
+        },
+        {
+          "id": "mixer",
+          "size": [
+            383,
+            480
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "c19367e057e0d1098ccc9cd4caf03c90a783aac488f039939dbdcb0c15a92ebb",
+          "file_sha256": "8c91e5d9399ee92d9f4886c043c44913013a5575395e5388eb03c9ced383d3cb",
+          "exact_source_crop": true
+        },
+        {
+          "id": "proofer",
+          "size": [
+            318,
+            536
+          ],
+          "alpha_extrema": [
+            0,
+            253
+          ],
+          "rgba_sha256": "db877b45807c5f1534888c3123cff7fb42a0cd539e6aa3d390a98619e81de556",
+          "file_sha256": "60dfc8510377da36979bdff13509d2136475d797f88aea01b546f7f576306b6b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "pastryFridge",
+          "size": [
+            301,
+            469
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "5fbdd067cbe91b3f0fd6fb891f8829db765646e2b0a54b981ca51d482fcb5edf",
+          "file_sha256": "8fb17e177344d4862323f3d6260ddfb306f4afaeb0b033f4018d6306e7d14d6a",
+          "exact_source_crop": true
+        },
+        {
+          "id": "kettle",
+          "size": [
+            360,
+            418
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "3af061c550c30a8e13905fe40a9fe5edbe678ddde40ac2830826efe0acb50327",
+          "file_sha256": "2e78b0aff9e20a1adb0fd1fcfb65c043c0f41b5849c7b09c461c7ebcae307670",
+          "exact_source_crop": true
+        },
+        {
+          "id": "deckOven",
+          "size": [
+            576,
+            432
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "b81d70d5947a4eded47f51af3ccef5def084222c6b1a12f8a5a9aaa837709910",
+          "file_sha256": "f9668f1e5c1b8dbedc45cd9a4638b7c36383cfcd9db2db0275878be363f372e1",
+          "exact_source_crop": true
+        },
+        {
+          "id": "convection",
+          "size": [
+            342,
+            478
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "b553861a5aa92b0484d2298fab3474e852d346c6b2d08fe583ef8cfe98598d0d",
+          "file_sha256": "c97079d338094988ca916326ad2672561c08cc9fabef0ee095841eb03e1dcc4e",
+          "exact_source_crop": true
+        },
+        {
+          "id": "fryer",
+          "size": [
+            366,
+            400
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "1da061bd414d2c135190089d338c6b638caf37b9032868643719714fac1c694b",
+          "file_sha256": "c57a4b63182c88a0242aa91985177e0c183c56a085a4822c4adfd8f5e2ea46ec",
+          "exact_source_crop": true
+        },
+        {
+          "id": "hood",
+          "size": [
+            2045,
+            449
+          ],
+          "alpha_extrema": [
+            0,
+            255
+          ],
+          "rgba_sha256": "b7e9a1d06a47a48df0a1fb4feb3e54aa656ec8a924bb4d42dbd2221c43f4f41a",
+          "file_sha256": "b0d3a7f8ff1f2e620b6be4ce9c1d31082632092a19a4a282ccb181e83613c458",
+          "exact_source_crop": true
+        },
+        {
+          "id": "hookup",
+          "size": [
+            253,
+            154
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "be945c943b17c18828327ed38e9c8c4c5c4f7082ac7b9e10658b96bc268c6f62",
+          "file_sha256": "abc64ea7a618df11b4dda5f79569aa57cd9fd315d07b36755f81322329efd24b",
+          "exact_source_crop": true
+        },
+        {
+          "id": "bench",
+          "size": [
+            670,
+            294
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "c2e1a050c1409b4fb661485061b6edcfae40d60ff8055fb124d2e0ebdb1c3ffc",
+          "file_sha256": "0b42da8410c3ab2b57a350c8c156377b21d8dcbb2f7fd12ffdaf649ebb6397a2",
+          "exact_source_crop": true
+        },
+        {
+          "id": "sheeter",
+          "size": [
+            425,
+            245
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "8d3f3c39af09caececafa2f6d74b57051996965aa8a344130bcde788c6a3ab04",
+          "file_sha256": "52607786da66950d71e931f8cd22758c6369768e77b9f3a18bb09fd8e65cd236",
+          "exact_source_crop": true
+        },
+        {
+          "id": "standMixer",
+          "size": [
+            290,
+            360
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "27a10a8849a748e3421d7d6d8377fa6de42e74dfbabf471a276a89ccd4752049",
+          "file_sha256": "5d2124818f3c59989dd693ceea96f748e939c91388940a296e478fa4a5c98311",
+          "exact_source_crop": true
+        },
+        {
+          "id": "rack",
+          "size": [
+            247,
+            463
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "f8c12de67c9f62b87b34a951be7b757ed384c2f69c5700d050ecf1d614b3ab0d",
+          "file_sha256": "ef96ec4d0e1cb49ba694d3211d391b7e5ffcba45a0bac25197792751092a677d",
+          "exact_source_crop": true
+        },
+        {
+          "id": "bins",
+          "size": [
+            432,
+            293
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "a6977959c71339a74c2c18d86cf961f606b4686044a60bc582c745153445283f",
+          "file_sha256": "ccf6dfa16cf964deef4847ef2f0138499e2b420b8873faa85c4171294df2f423",
+          "exact_source_crop": true
+        },
+        {
+          "id": "dishPit",
+          "size": [
+            657,
+            475
+          ],
+          "alpha_extrema": [
+            0,
+            254
+          ],
+          "rgba_sha256": "7575a37ffdcc0fbabeb48e848fb2528710592104021f4f3f30959ae2c8f4868f",
+          "file_sha256": "3c5dafd93814f84c7b1eca1f3ad3ad843d8d247f4fb3a3035f595316b66c8352",
+          "exact_source_crop": true
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "total_assets": 18,
+  "errors": 0
+}

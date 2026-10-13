@@ -1,0 +1,566 @@
+{
+  "identity": "customer-cast-0-Mina",
+  "appearanceId": 0,
+  "look": {
+    "skin": 0,
+    "hair": 0,
+    "hairStyle": 0,
+    "shirt": 0,
+    "pants": 1
+  },
+  "outfit": "cardigan",
+  "accessory": "glasses",
+  "accent": "#d6b66d",
+  "bboxAlphaThreshold": "alpha > 128; excludes faint fringe, not all-nonzero alpha",
+  "frames": [
+    {
+      "file": "mina-down-stand.png",
+      "source": "mina-walk-source.png",
+      "source_crop": [
+        136,
+        15,
+        322,
+        421
+      ],
+      "size": [
+        186,
+        406
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 166,
+        "h": 386
+      },
+      "foot": {
+        "x": 93.0,
+        "y": 395
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "down",
+      "state": "stand",
+      "frame": "stand",
+      "group": "walk",
+      "sourceToWorldScale": 0.07253886010362694
+    },
+    {
+      "file": "mina-down-stepA.png",
+      "source": "mina-walk-source.png",
+      "source_crop": [
+        530,
+        14,
+        723,
+        433
+      ],
+      "size": [
+        193,
+        419
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 173,
+        "h": 399
+      },
+      "foot": {
+        "x": 96.5,
+        "y": 408
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "down",
+      "state": "stepA",
+      "frame": "stride",
+      "group": "walk",
+      "sourceToWorldScale": 0.07253886010362694
+    },
+    {
+      "file": "mina-down-stepB.png",
+      "source": "mina-walk-source.png",
+      "source_crop": [
+        948,
+        15,
+        1137,
+        425
+      ],
+      "size": [
+        189,
+        410
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 169,
+        "h": 390
+      },
+      "foot": {
+        "x": 94.5,
+        "y": 399
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "down",
+      "state": "stepB",
+      "frame": "passing",
+      "group": "walk",
+      "sourceToWorldScale": 0.07253886010362694
+    },
+    {
+      "file": "mina-up-stand.png",
+      "source": "mina-walk-source.png",
+      "source_crop": [
+        139,
+        427,
+        321,
+        828
+      ],
+      "size": [
+        182,
+        401
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 162,
+        "h": 381
+      },
+      "foot": {
+        "x": 91.0,
+        "y": 390
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "up",
+      "state": "stand",
+      "frame": "stand",
+      "group": "walk",
+      "sourceToWorldScale": 0.07349081364829396
+    },
+    {
+      "file": "mina-up-stepA.png",
+      "source": "mina-walk-source.png",
+      "source_crop": [
+        527,
+        426,
+        722,
+        834
+      ],
+      "size": [
+        195,
+        408
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 175,
+        "h": 388
+      },
+      "foot": {
+        "x": 97.5,
+        "y": 397
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "up",
+      "state": "stepA",
+      "frame": "stride",
+      "group": "walk",
+      "sourceToWorldScale": 0.07349081364829396
+    },
+    {
+      "file": "mina-up-stepB.png",
+      "source": "mina-walk-source.png",
+      "source_crop": [
+        951,
+        426,
+        1143,
+        832
+      ],
+      "size": [
+        192,
+        406
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 172,
+        "h": 386
+      },
+      "foot": {
+        "x": 96.0,
+        "y": 395
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "up",
+      "state": "stepB",
+      "frame": "passing",
+      "group": "walk",
+      "sourceToWorldScale": 0.07349081364829396
+    },
+    {
+      "file": "mina-right-stand.png",
+      "source": "mina-walk-source.png",
+      "source_crop": [
+        131,
+        829,
+        319,
+        1237
+      ],
+      "size": [
+        188,
+        408
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 168,
+        "h": 388
+      },
+      "foot": {
+        "x": 94.0,
+        "y": 397
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "right",
+      "state": "stand",
+      "frame": "stand",
+      "group": "walk",
+      "sourceToWorldScale": 0.07216494845360824
+    },
+    {
+      "file": "mina-right-stepA.png",
+      "source": "mina-walk-source.png",
+      "source_crop": [
+        513,
+        832,
+        766,
+        1235
+      ],
+      "size": [
+        253,
+        403
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 233,
+        "h": 383
+      },
+      "foot": {
+        "x": 126.5,
+        "y": 392
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "right",
+      "state": "stepA",
+      "frame": "stride",
+      "group": "walk",
+      "sourceToWorldScale": 0.07216494845360824
+    },
+    {
+      "file": "mina-right-stepB.png",
+      "source": "mina-walk-source.png",
+      "source_crop": [
+        962,
+        832,
+        1154,
+        1237
+      ],
+      "size": [
+        192,
+        405
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 172,
+        "h": 385
+      },
+      "foot": {
+        "x": 96.0,
+        "y": 394
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "direction": "right",
+      "state": "stepB",
+      "frame": "passing",
+      "group": "walk",
+      "sourceToWorldScale": 0.07216494845360824
+    },
+    {
+      "file": "mina-right-sit.png",
+      "source": "mina-seated-source.png",
+      "source_crop": [
+        152,
+        12,
+        422,
+        508
+      ],
+      "size": [
+        270,
+        496
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 250,
+        "h": 476
+      },
+      "foot": {
+        "x": 181,
+        "y": 481
+      },
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "direction": "right",
+      "state": "sit",
+      "frame": "sit",
+      "group": "seated",
+      "sourceToWorldScale": 0.0526,
+      "scaleBasis": "Approximate shared head scale: seated head width ~210 source px vs walk ~150; runtime visual review required.",
+      "anchorBasis": "Manually inspected source shoe-baseline center and seated hip contact, not whole-body bbox midpoint.",
+      "seatContact": {
+        "x": 75,
+        "y": 358
+      }
+    },
+    {
+      "file": "mina-right-sitPetA.png",
+      "source": "mina-seated-source.png",
+      "source_crop": [
+        631,
+        23,
+        957,
+        508
+      ],
+      "size": [
+        326,
+        485
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 306,
+        "h": 465
+      },
+      "foot": {
+        "x": 162,
+        "y": 470
+      },
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "direction": "right",
+      "state": "sitPetA",
+      "frame": "sitPetA",
+      "group": "seated",
+      "sourceToWorldScale": 0.0526,
+      "scaleBasis": "Approximate shared head scale: seated head width ~210 source px vs walk ~150; runtime visual review required.",
+      "anchorBasis": "Manually inspected source shoe-baseline center and seated hip contact, not whole-body bbox midpoint.",
+      "seatContact": {
+        "x": 73,
+        "y": 347
+      },
+      "petContact": {
+        "x": 306,
+        "y": 389
+      }
+    },
+    {
+      "file": "mina-right-sitPetB.png",
+      "source": "mina-seated-source.png",
+      "source_crop": [
+        1126,
+        55,
+        1464,
+        508
+      ],
+      "size": [
+        338,
+        453
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 318,
+        "h": 433
+      },
+      "foot": {
+        "x": 162,
+        "y": 438
+      },
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "direction": "right",
+      "state": "sitPetB",
+      "frame": "sitPetB",
+      "group": "seated",
+      "sourceToWorldScale": 0.0526,
+      "scaleBasis": "Approximate shared head scale: seated head width ~210 source px vs walk ~150; runtime visual review required.",
+      "anchorBasis": "Manually inspected source shoe-baseline center and seated hip contact, not whole-body bbox midpoint.",
+      "seatContact": {
+        "x": 71,
+        "y": 315
+      },
+      "petContact": {
+        "x": 320,
+        "y": 395
+      }
+    },
+    {
+      "file": "mina-left-sit.png",
+      "source": "mina-seated-source.png",
+      "source_crop": [
+        140,
+        519,
+        413,
+        1003
+      ],
+      "size": [
+        273,
+        484
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 253,
+        "h": 464
+      },
+      "foot": {
+        "x": 88,
+        "y": 471
+      },
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "direction": "left",
+      "state": "sit",
+      "frame": "sit",
+      "group": "seated",
+      "sourceToWorldScale": 0.0526,
+      "scaleBasis": "Approximate shared head scale: seated head width ~210 source px vs walk ~150; runtime visual review required.",
+      "anchorBasis": "Manually inspected source shoe-baseline center and seated hip contact, not whole-body bbox midpoint.",
+      "seatContact": {
+        "x": 195,
+        "y": 351
+      }
+    },
+    {
+      "file": "mina-left-sitPetA.png",
+      "source": "mina-seated-source.png",
+      "source_crop": [
+        576,
+        533,
+        898,
+        1003
+      ],
+      "size": [
+        322,
+        470
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 302,
+        "h": 450
+      },
+      "foot": {
+        "x": 164,
+        "y": 457
+      },
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "direction": "left",
+      "state": "sitPetA",
+      "frame": "sitPetA",
+      "group": "seated",
+      "sourceToWorldScale": 0.0526,
+      "scaleBasis": "Approximate shared head scale: seated head width ~210 source px vs walk ~150; runtime visual review required.",
+      "anchorBasis": "Manually inspected source shoe-baseline center and seated hip contact, not whole-body bbox midpoint.",
+      "seatContact": {
+        "x": 265,
+        "y": 337
+      },
+      "petContact": {
+        "x": 16,
+        "y": 383
+      }
+    },
+    {
+      "file": "mina-left-sitPetB.png",
+      "source": "mina-seated-source.png",
+      "source_crop": [
+        1127,
+        561,
+        1460,
+        1003
+      ],
+      "size": [
+        333,
+        442
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 313,
+        "h": 422
+      },
+      "foot": {
+        "x": 174,
+        "y": 429
+      },
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "direction": "left",
+      "state": "sitPetB",
+      "frame": "sitPetB",
+      "group": "seated",
+      "sourceToWorldScale": 0.0526,
+      "scaleBasis": "Approximate shared head scale: seated head width ~210 source px vs walk ~150; runtime visual review required.",
+      "anchorBasis": "Manually inspected source shoe-baseline center and seated hip contact, not whole-body bbox midpoint.",
+      "seatContact": {
+        "x": 271,
+        "y": 309
+      },
+      "petContact": {
+        "x": 20,
+        "y": 388
+      }
+    }
+  ],
+  "leftWalk": "mirror right",
+  "status": "source inspected; runtime gait/seat/contact validation pending"
+}

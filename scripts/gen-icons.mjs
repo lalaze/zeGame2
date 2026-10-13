@@ -2,56 +2,40 @@
 import { writeFileSync } from 'node:fs';
 import { deflateSync } from 'node:zlib';
 
-const ART = [
-  '.....s...s......',
-  '....s...s.......',
-  '.....s...s......',
-  '................',
-  '..wwwwwwwwwww...',
-  '..wcccccccccwww.',
-  '..wwwwwwwwwww.w.',
-  '..wwwwpwpwwww.w.',
-  '..wwwwpppwwwww..',
-  '..wwwwwpwwwww...',
-  '...wwwwwwwww....',
-  '....wwwwwww.....',
-  '.dddddddddddddd.',
-];
-const COLORS = { s: '#fbf5ea', w: '#fbf5ea', c: '#6b3e26', p: '#ef5d7a', d: '#d9cbb8', o: '#3a2418', b: '#c98f5e' };
-const SIZE = 18;
-
-// Center the art on the canvas and add a dark outline around it.
-const grid = Array.from({ length: SIZE }, () => Array(SIZE).fill('b'));
-const ox = 1;
-const oy = 3;
-ART.forEach((row, y) => [...row].forEach((ch, x) => ch !== '.' && (grid[y + oy][x + ox] = ch)));
-const isArt = (x, y) => grid[y]?.[x] !== undefined && grid[y][x] !== 'b' && grid[y][x] !== 'o';
-for (let y = 0; y < SIZE; y++) {
-  for (let x = 0; x < SIZE; x++) {
-    if (grid[y][x] !== 'b') continue;
-    if (grid[y][x] === 'b' && [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => isArt(x + dx, y + dy))) {
-      grid[y][x] = 'o';
-    }
-  }
-}
-// Steam stays soft: no outline around the wisps.
-ART.slice(0, 3).forEach((row, y) =>
-  [...row].forEach((ch, x) => {
-    for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
-      const gx = x + ox + dx;
-      const gy = y + oy + dy;
-      if (ch === 's' && grid[gy][gx] === 'o' && gy < oy + 3) grid[gy][gx] = 'b';
-    }
-  }),
-);
+// A little maker's mark: cream ceramic, sage bean and a brass-rim timber tile.
+// Drawn natively on a 24px grid, matching the interface and the room materials.
+const COLORS = { o: '#39281f', w: '#865332', W: '#c98c4d', h: '#ebbd7d', d: '#543425',
+  b: '#627451', B: '#3d503a', c: '#f4e6c7', C: '#fff5dc', s: '#c7b28b',
+  g: '#c8a15e', G: '#f0ce85', k: '#866344' };
+const SIZE = 24;
+const grid = Array.from({ length: SIZE }, () => Array(SIZE).fill('o'));
+const r = (x, y, w, h, color) => {
+  for (let yy = y; yy < y + h; yy++) for (let xx = x; xx < x + w; xx++) grid[yy][xx] = color;
+};
+r(1, 1, 22, 22, 'w'); r(1, 1, 22, 1, 'h'); r(1, 2, 1, 20, 'W');
+r(2, 22, 21, 1, 'd'); r(22, 2, 1, 20, 'd');
+r(3, 3, 18, 18, 'k'); r(4, 4, 16, 16, 'b'); r(4, 4, 16, 1, 'g');
+r(4, 5, 1, 14, 'g'); r(5, 19, 15, 1, 'B'); r(19, 5, 1, 14, 'B');
+// Four brass corner pins have a one-pixel upper-left gleam.
+for (const [x, y] of [[2, 2], [20, 2], [2, 20], [20, 20]]) { r(x, y, 2, 2, 'g'); r(x, y, 1, 1, 'G'); }
+// Steam, deliberately sparse and without a dark outline.
+r(9, 5, 1, 1, 'C'); r(8, 6, 1, 1, 'c'); r(9, 7, 1, 1, 's');
+r(13, 5, 1, 1, 'C'); r(12, 6, 1, 1, 'c'); r(13, 7, 1, 1, 's');
+// Ceramic cup, dark roast opening, handle, bean stamp, foot and saucer.
+r(5, 8, 12, 8, 'o'); r(6, 16, 10, 1, 'o');
+r(17, 9, 3, 6, 'o'); r(17, 10, 2, 4, 'c'); r(17, 11, 1, 2, 'b');
+r(6, 9, 10, 6, 'c'); r(7, 15, 8, 1, 's');
+r(6, 9, 10, 1, 'C'); r(7, 10, 8, 1, 'd'); r(6, 10, 1, 4, 'C');
+r(10, 11, 3, 3, 'b'); r(9, 12, 1, 2, 'B'); r(12, 12, 1, 2, 'B'); r(11, 11, 1, 1, 'C'); r(10, 13, 1, 1, 'C');
+r(4, 17, 15, 1, 'o'); r(5, 18, 13, 1, 'o'); r(5, 17, 13, 1, 'C'); r(7, 18, 9, 1, 's');
 
 const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 
 let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${SIZE} ${SIZE}" shape-rendering="crispEdges">`;
-svg += `<rect width="${SIZE}" height="${SIZE}" rx="3" fill="${COLORS.b}"/>`;
+svg += `<rect width="${SIZE}" height="${SIZE}" fill="${COLORS.o}"/>`;
 grid.forEach((row, y) =>
   row.forEach((ch, x) => {
-    if (ch !== 'b') svg += `<rect x="${x}" y="${y}" width="1" height="1" fill="${COLORS[ch]}"/>`;
+    svg += `<rect x="${x}" y="${y}" width="1" height="1" fill="${COLORS[ch]}"/>`;
   }),
 );
 svg += '</svg>\n';

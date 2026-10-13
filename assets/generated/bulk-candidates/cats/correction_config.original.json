@@ -1,0 +1,163 @@
+{
+  "ginger": {
+    "source": "walk-correction-source.png",
+    "scale": 0.0247,
+    "states": [
+      "walkA",
+      "walkB"
+    ],
+    "anchors": [
+      [
+        [
+          367,
+          749
+        ],
+        [
+          184,
+          408
+        ]
+      ],
+      [
+        [
+          1142,
+          749
+        ],
+        [
+          958,
+          408
+        ]
+      ]
+    ]
+  },
+  "tabby": {
+    "source": "walk-correction-source.png",
+    "scale": 0.025,
+    "states": [
+      "walkA",
+      "walkB"
+    ],
+    "anchors": [
+      [
+        [
+          382,
+          763
+        ],
+        [
+          216,
+          377
+        ]
+      ],
+      [
+        [
+          1148,
+          763
+        ],
+        [
+          980,
+          377
+        ]
+      ]
+    ]
+  },
+  "ragdoll": {
+    "source": "action-correction-source.png",
+    "scale": 0.023,
+    "states": [
+      "blink",
+      "groomB",
+      "stretch"
+    ],
+    "anchors": [
+      [
+        [
+          213,
+          651
+        ],
+        [
+          240,
+          198
+        ]
+      ],
+      [
+        [
+          864,
+          651
+        ],
+        [
+          924,
+          222
+        ]
+      ],
+      [
+        [
+          1760,
+          651
+        ],
+        [
+          1638,
+          421
+        ]
+      ]
+    ]
+  },
+  "persian": {
+    "source": "vertical-correction-source.png",
+    "scale": 0.021,
+    "states": [
+      "walkB",
+      "sleep"
+    ],
+    "anchors": [
+      [
+        [
+          512,
+          659
+        ],
+        [
+          247,
+          221
+        ]
+      ],
+      [
+        [
+          516,
+          1377
+        ],
+        [
+          346,
+          1066
+        ]
+      ]
+    ]
+  },
+  "mainecoon": {
+    "source": "action-correction-source.png",
+    "scale": 0.0185,
+    "states": [
+      "groomB",
+      "nuzzleA"
+    ],
+    "anchors": [
+      [
+        [
+          251,
+          917
+        ],
+        [
+          273,
+          321
+        ]
+      ],
+      [
+        [
+          1053,
+          917
+        ],
+        [
+          1112,
+          148
+        ]
+      ]
+    ]
+  }
+}

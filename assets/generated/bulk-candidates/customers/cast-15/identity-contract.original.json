@@ -1,0 +1,25 @@
+{
+  "id": 15,
+  "name": "燕麦绒帽",
+  "look": {
+    "skin": 0,
+    "hair": 1,
+    "hairStyle": 3,
+    "shirt": 7,
+    "pants": 1
+  },
+  "hairstyle": 3,
+  "outfit": "hoodie",
+  "accessory": "glasses",
+  "accent": "#bd8663",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#f4cfad",
+    "hair": "#976546",
+    "shirt": "#e5d7ba",
+    "pants": "#85664f"
+  },
+  "hatPalette": "#8ba477",
+  "description": "Fixed customer cast 15 (燕麦绒帽): warm skin #f4cfad; hair #976546 in a clearly knitted cuffed beanie hat in #8ba477 with cream-and-gold stitched stripe; short #976546 hair visible beneath the rim. Outfit: #e5d7ba hooded sweatshirt with cream hood lining, drawstrings and kangaroo pocket, hood down. Lower clothing color #85664f; warm dark brown leather shoes. Accent #bd8663. Round dark-brown eyeglasses in every front/side/seated view; back shows temples near ears."
+}

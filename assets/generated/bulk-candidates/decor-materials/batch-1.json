@@ -1,0 +1,90 @@
+[
+  {
+    "id": "wall_cream",
+    "kind": "tile",
+    "logical": [
+      20,
+      15
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. Warm cream woven wallpaper #f4e6c7 with slightly darker pale beige narrow vertical stripes #ead8b3, sparse tiny paired ochre/cream flower-bud motifs centered in each broad stripe. Small-scale restrained vintage wallpaper, not large floral illustration.",
+    "sourcePath": "sources/wall_cream-source.png"
+  },
+  {
+    "id": "wall_mint",
+    "kind": "tile",
+    "logical": [
+      20,
+      15
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. Pale mint/sage woven wallpaper #dce4c9 with low-contrast sage vertical stripe accents #c4d0ab, sparse tiny cream/olive paired flower-bud motifs centered in broad stripe. Match calm cafe wallpaper scale.",
+    "sourcePath": "sources/wall_mint-source.png"
+  },
+  {
+    "id": "wall_rose",
+    "kind": "tile",
+    "logical": [
+      20,
+      15
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. Warm dusty pale peach-rose woven wallpaper #f0d8c2 with low-contrast muted rose vertical stripes #dfbaa5 and sparse tiny cream/ochre paired flower-bud motifs centered in broad stripe. No large blooms.",
+    "sourcePath": "sources/wall_rose-source.png"
+  },
+  {
+    "id": "wall_dots",
+    "kind": "tile",
+    "logical": [
+      16,
+      12
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. Pale powder-blue vintage wallpaper #d5e6f4 with a regular staggered small repeating pattern of tiny ivory four-petal flowers, ochre centers and tiny muted olive sprig accents, an extremely faint diagonal trellis. Fine fabric texture. Not large polka dots.",
+    "sourcePath": "sources/wall_dots-source.png"
+  },
+  {
+    "id": "wall_brick",
+    "kind": "tile",
+    "logical": [
+      32,
+      16
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. Warm terracotta brick wall material #b9634a, regular staggered horizontal rectangular bricks, narrow pale clay mortar #d9a58b, subtly chipped corners and fine muted variations. Uniform flat surface, no dramatic highlights or grunge.",
+    "sourcePath": "sources/wall_brick-source.png"
+  },
+  {
+    "id": "wall_walnut",
+    "kind": "tile",
+    "logical": [
+      24,
+      26
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. Dark warm walnut wood wall PANEL material #7a4e33, regular repeated recessed rectangular square-ish paneled sections, narrow structural stiles and fine warm amber upper-left bevels. Woodgrain subtle and parallel vertical. Completely flat front view of continuous panel surface, no top edge, room corner, object or exterior outline.",
+    "sourcePath": "sources/wall_walnut-source.png"
+  },
+  {
+    "id": "wall_stars",
+    "kind": "tile",
+    "logical": [
+      62,
+      46
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. Muted deep indigo wallpaper #2c3263 with sparse small pale-cream/gold embroidered stars and tiny soft gray star specks, subtle woven fabric grain. Evenly repeating motif pattern, no moon, no clouds, no skyline or gradients. All stars static material only, no halos.",
+    "sourcePath": "sources/wall_stars-source.png"
+  },
+  {
+    "id": "floor_checker",
+    "kind": "tile",
+    "logical": [
+      32,
+      32
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. A flat top-down classic cafe checker floor of alternating warm ivory #f1e5ca and sandy cream #e4d5b6 square ceramic tiles, thin muted beige grout and very subtle mineral speckles. Even four by four tile repeat, no black squares, no perspective.",
+    "sourcePath": "sources/floor_checker-source.png"
+  }
+]

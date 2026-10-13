@@ -1,0 +1,25 @@
+{
+  "id": 5,
+  "name": "草莓裙摆",
+  "look": {
+    "skin": 0,
+    "hair": 1,
+    "hairStyle": 2,
+    "shirt": 5,
+    "pants": 1
+  },
+  "hairstyle": 6,
+  "outfit": "dress",
+  "accessory": "headband",
+  "accent": "#efe1c2",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#f4cfad",
+    "hair": "#976546",
+    "shirt": "#cf929e",
+    "pants": "#85664f"
+  },
+  "hatPalette": "#bb6b58",
+  "description": "Fixed customer cast 5 (草莓裙摆): warm skin #f4cfad; hair #976546 in a neat chin-length BLUNT BOB with a straight full eyebrow-level fringe and even straight side ends. Outfit: #cf929e knee-length A-line dress with cream hem and tiny gold neckline detail, #85664f tights visible below. Lower clothing color #85664f; warm dark brown leather shoes. Accent #efe1c2. An #efe1c2 narrow headband crossing the crown, preserved in every pose."
+}

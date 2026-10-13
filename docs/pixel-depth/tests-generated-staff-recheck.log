@@ -1,0 +1,17 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> tiny-bean-cafe@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+
+ Test Files  131 passed | 1 skipped (132)
+      Tests  1349 passed | 28 skipped (1377)
+   Start at  23:56:35
+   Duration  38.84s (tests 87%, environment 4%, import 4%, transform 4%)
+
+    Isolate  132 workers spawned · ~246ms startup each (spawn + environment, per file)
+             at least ~3.82s faster with isolate: false — reuses workers across files instead of one per file
+

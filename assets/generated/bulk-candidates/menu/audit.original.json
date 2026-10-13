@@ -1,0 +1,1312 @@
+{
+  "passed": true,
+  "counts": {
+    "newMenu": 50,
+    "newIngredients": 12,
+    "reusedMenu": 5
+  },
+  "checks": [
+    {
+      "id": "affogato",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1244,
+        1254
+      ],
+      "opaqueBBox": [
+        215,
+        138,
+        1038,
+        1142
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "americano",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1254,
+        1254
+      ],
+      "opaqueBBox": [
+        166,
+        186,
+        1147,
+        1071
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "bagel",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1312,
+        1199
+      ],
+      "opaqueBBox": [
+        117,
+        177,
+        1207,
+        1058
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "baguette",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "size": [
+        1490,
+        1015
+      ],
+      "opaqueBBox": [
+        112,
+        169,
+        1469,
+        876
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "blacktea",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1302,
+        1177
+      ],
+      "opaqueBBox": [
+        122,
+        152,
+        1220,
+        1053
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "brioche",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1310,
+        1199
+      ],
+      "opaqueBBox": [
+        188,
+        154,
+        1123,
+        1052
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "brownie",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1350,
+        1165
+      ],
+      "opaqueBBox": [
+        145,
+        141,
+        1215,
+        1026
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "cappuccino",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1321,
+        1180
+      ],
+      "opaqueBBox": [
+        122,
+        146,
+        1247,
+        1070
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "chai",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1248,
+        1215
+      ],
+      "opaqueBBox": [
+        207,
+        131,
+        1178,
+        1073
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "cheesebun",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1254,
+        1184
+      ],
+      "opaqueBBox": [
+        145,
+        184,
+        1190,
+        1024
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "cheesecake",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1389,
+        1103
+      ],
+      "opaqueBBox": [
+        274,
+        123,
+        1203,
+        997
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "chocobread",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "size": [
+        1482,
+        1024
+      ],
+      "opaqueBBox": [
+        354,
+        137,
+        1245,
+        906
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "ciabatta",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "size": [
+        1526,
+        1024
+      ],
+      "opaqueBBox": [
+        145,
+        115,
+        1390,
+        906
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "cinnamon",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1324,
+        1188
+      ],
+      "opaqueBBox": [
+        132,
+        141,
+        1213,
+        1081
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "coldbrew",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1100,
+        1271
+      ],
+      "opaqueBBox": [
+        320,
+        183,
+        879,
+        1095
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "cookie",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1302,
+        1184
+      ],
+      "opaqueBBox": [
+        134,
+        140,
+        1186,
+        1049
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "cortado",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1147,
+        1127
+      ],
+      "opaqueBBox": [
+        271,
+        124,
+        889,
+        922
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "creamcoffee",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1240,
+        1254
+      ],
+      "opaqueBBox": [
+        264,
+        183,
+        991,
+        1107
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "creampuff",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1308,
+        1199
+      ],
+      "opaqueBBox": [
+        192,
+        151,
+        1120,
+        1068
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "dirty",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1244,
+        1243
+      ],
+      "opaqueBBox": [
+        255,
+        148,
+        999,
+        1103
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "donut",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1394,
+        1107
+      ],
+      "opaqueBBox": [
+        276,
+        203,
+        1137,
+        927
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "flatwhite",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "size": [
+        1475,
+        985
+      ],
+      "opaqueBBox": [
+        229,
+        112,
+        1333,
+        899
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "focaccia",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1398,
+        1104
+      ],
+      "opaqueBBox": [
+        97,
+        85,
+        1304,
+        1019
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "frappe",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "size": [
+        1014,
+        1518
+      ],
+      "opaqueBBox": [
+        200,
+        123,
+        834,
+        1375
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "fruitbrioche",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1304,
+        1168
+      ],
+      "opaqueBBox": [
+        127,
+        83,
+        1186,
+        1071
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "fruittea",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1207,
+        1274
+      ],
+      "opaqueBBox": [
+        296,
+        108,
+        919,
+        1141
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "garlicbread",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "size": [
+        1516,
+        1024
+      ],
+      "opaqueBBox": [
+        285,
+        154,
+        1305,
+        900
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "hojicha",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1169,
+        1217
+      ],
+      "opaqueBBox": [
+        157,
+        137,
+        1004,
+        1052
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "hotchoc",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1308,
+        1157
+      ],
+      "opaqueBBox": [
+        196,
+        110,
+        1257,
+        1056
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "lemontea",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1168,
+        1337
+      ],
+      "opaqueBBox": [
+        261,
+        117,
+        1001,
+        1210
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "macaron",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1268,
+        1234
+      ],
+      "opaqueBBox": [
+        350,
+        107,
+        948,
+        1175
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "macchiato",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "size": [
+        1473,
+        1001
+      ],
+      "opaqueBBox": [
+        345,
+        148,
+        1155,
+        872
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "matcha",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1284,
+        1199
+      ],
+      "opaqueBBox": [
+        193,
+        195,
+        1120,
+        1034
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "matchafloat",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1143,
+        1374
+      ],
+      "opaqueBBox": [
+        241,
+        125,
+        905,
+        1245
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "melonpan",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1308,
+        1177
+      ],
+      "opaqueBBox": [
+        127,
+        124,
+        1189,
+        1060
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "milktea",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1210,
+        1295
+      ],
+      "opaqueBBox": [
+        307,
+        21,
+        909,
+        1237
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "mocha",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1234,
+        1240
+      ],
+      "opaqueBBox": [
+        131,
+        162,
+        1194,
+        1134
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "muffin",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1248,
+        1228
+      ],
+      "opaqueBBox": [
+        100,
+        68,
+        1154,
+        1132
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "painchoc",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1448,
+        1076
+      ],
+      "opaqueBBox": [
+        162,
+        134,
+        1305,
+        968
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "pourover",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1295,
+        1199
+      ],
+      "opaqueBBox": [
+        320,
+        90,
+        978,
+        1093
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "pretzel",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1310,
+        1184
+      ],
+      "opaqueBBox": [
+        104,
+        164,
+        1212,
+        1029
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "raisinbread",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1348,
+        1128
+      ],
+      "opaqueBBox": [
+        234,
+        150,
+        1173,
+        999
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "roll",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1229,
+        1153
+      ],
+      "opaqueBBox": [
+        181,
+        183,
+        1048,
+        969
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "rye",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "size": [
+        1494,
+        995
+      ],
+      "opaqueBBox": [
+        193,
+        101,
+        1350,
+        864
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "scone",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1310,
+        1199
+      ],
+      "opaqueBBox": [
+        164,
+        130,
+        1181,
+        1080
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "shokupan",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "size": [
+        1526,
+        1024
+      ],
+      "opaqueBBox": [
+        207,
+        105,
+        1359,
+        944
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "smoothie",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1144,
+        1297
+      ],
+      "opaqueBBox": [
+        249,
+        64,
+        939,
+        1176
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "sourdough",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1374,
+        1145
+      ],
+      "opaqueBBox": [
+        117,
+        106,
+        1265,
+        1047
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "swissroll",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1309,
+        1176
+      ],
+      "opaqueBBox": [
+        181,
+        157,
+        1180,
+        1061
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "vienna",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1234,
+        1245
+      ],
+      "opaqueBBox": [
+        319,
+        79,
+        1006,
+        1140
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "ingredient-beans",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1203,
+        1146
+      ],
+      "opaqueBBox": [
+        188,
+        136,
+        999,
+        1103
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "ingredient-butter",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        254
+      ],
+      "size": [
+        1536,
+        991
+      ],
+      "opaqueBBox": [
+        195,
+        109,
+        1344,
+        926
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "ingredient-cocoa",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1259,
+        1185
+      ],
+      "opaqueBBox": [
+        259,
+        149,
+        1028,
+        1059
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "ingredient-cream",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1229,
+        1120
+      ],
+      "opaqueBBox": [
+        172,
+        187,
+        950,
+        939
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "ingredient-eggs",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1410,
+        1108
+      ],
+      "opaqueBBox": [
+        250,
+        191,
+        1162,
+        959
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "ingredient-flour",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1246,
+        1232
+      ],
+      "opaqueBBox": [
+        227,
+        145,
+        1026,
+        1111
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "ingredient-fruit",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1308,
+        1199
+      ],
+      "opaqueBBox": [
+        265,
+        103,
+        1141,
+        1101
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "ingredient-matcha",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1290,
+        1123
+      ],
+      "opaqueBBox": [
+        186,
+        171,
+        1199,
+        972
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "ingredient-milk",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1199,
+        1287
+      ],
+      "opaqueBBox": [
+        365,
+        128,
+        848,
+        1152
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "ingredient-spice",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1383,
+        1107
+      ],
+      "opaqueBBox": [
+        131,
+        121,
+        1286,
+        1004
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "ingredient-sugar",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1276,
+        1143
+      ],
+      "opaqueBBox": [
+        170,
+        222,
+        1163,
+        1000
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    },
+    {
+      "id": "ingredient-tea",
+      "mode": "RGBA",
+      "alphaRange": [
+        0,
+        255
+      ],
+      "size": [
+        1221,
+        1191
+      ],
+      "opaqueBBox": [
+        243,
+        139,
+        974,
+        1054
+      ],
+      "sourceUnmodified": true,
+      "losslessCropExact": true,
+      "allNonzeroAlphaRetained": true
+    }
+  ]
+}

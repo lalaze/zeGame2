@@ -1,0 +1,414 @@
+{
+  "family": "cook-style0",
+  "roles": [
+    "cook"
+  ],
+  "hairStyle": 0,
+  "status": "candidate_pending_render_review",
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "rowBoundaries": [
+    0,
+    444,
+    861,
+    1254
+  ],
+  "bboxAlphaThreshold": "alpha>128 not all-nonzero alpha",
+  "frames": [
+    {
+      "domain": "parameter",
+      "id": "cook-style0",
+      "state": "down-stand",
+      "direction": "down",
+      "pose": "stand",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/down-stand.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/source.png",
+      "source_crop": [
+        157,
+        15,
+        333,
+        444
+      ],
+      "size": [
+        176,
+        429
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 160,
+        "h": 414
+      },
+      "foot": {
+        "x": 88.0,
+        "y": 421
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.1711939995945672,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "192af1d017848a059b32db4c913675b9e138f973e94bc1c6d7731a522f440444",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "cook-style0",
+      "state": "down-stepA",
+      "direction": "down",
+      "pose": "stepA",
+      "status": "review_required",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/down-stepA.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/source.png",
+      "source_crop": [
+        552,
+        11,
+        730,
+        444
+      ],
+      "size": [
+        178,
+        433
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 162,
+        "h": 425
+      },
+      "foot": {
+        "x": 89.0,
+        "y": 432
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.18026614606159608,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "2d37bfe1308dc2a62fecfb5b375e7c01831984e0b7998f952d37cee8c3a7dec8",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction",
+        "tight vertical gutter or silhouette reaches source/cell boundary; inspect clipping"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "cook-style0",
+      "state": "down-stepB",
+      "direction": "down",
+      "pose": "stepB",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/down-stepB.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/source.png",
+      "source_crop": [
+        966,
+        12,
+        1150,
+        444
+      ],
+      "size": [
+        184,
+        432
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 168,
+        "h": 421
+      },
+      "foot": {
+        "x": 92.0,
+        "y": 428
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.16165664662658652,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "82ac3e055e8cefa9bfffd6e6a464677f2e9b0a2a70fdc21fc6f3883534019c0b",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "cook-style0",
+      "state": "up-stand",
+      "direction": "up",
+      "pose": "stand",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/up-stand.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/source.png",
+      "source_crop": [
+        165,
+        444,
+        342,
+        861
+      ],
+      "size": [
+        177,
+        417
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 161,
+        "h": 404
+      },
+      "foot": {
+        "x": 88.5,
+        "y": 411
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.11678055889245555,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "7227c0ee92b425698c38431848c01380b799e3519b87050963c65ec6e5ff0341",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "cook-style0",
+      "state": "up-stepA",
+      "direction": "up",
+      "pose": "stepA",
+      "status": "review_required",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/up-stepA.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/source.png",
+      "source_crop": [
+        544,
+        444,
+        733,
+        861
+      ],
+      "size": [
+        189,
+        417
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 7,
+        "w": 173,
+        "h": 410
+      },
+      "foot": {
+        "x": 94.5,
+        "y": 416
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.13394558650610225,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "febfadf7a65c1852437bac0e0259790d0c144e58a5a50222ee89732a5f620404",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction",
+        "tight vertical gutter or silhouette reaches source/cell boundary; inspect clipping"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "cook-style0",
+      "state": "up-stepB",
+      "direction": "up",
+      "pose": "stepB",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/up-stepB.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/source.png",
+      "source_crop": [
+        965,
+        447,
+        1148,
+        861
+      ],
+      "size": [
+        183,
+        414
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 167,
+        "h": 401
+      },
+      "foot": {
+        "x": 91.5,
+        "y": 408
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.13013373018333643,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "0f0646be3057102b61b1f68cd222241161fb6db3db193447a3a493151e1542c6",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "cook-style0",
+      "state": "right-stand",
+      "direction": "right",
+      "pose": "stand",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/right-stand.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/source.png",
+      "source_crop": [
+        154,
+        861,
+        350,
+        1254
+      ],
+      "size": [
+        196,
+        393
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 4,
+        "w": 180,
+        "h": 382
+      },
+      "foot": {
+        "x": 98.0,
+        "y": 385
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.12294060639623425,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "1e2c8a85778d0ff2b465061a9f926d80606276ffa5a7d2d076db8f1b66a52601",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "cook-style0",
+      "state": "right-stepA",
+      "direction": "right",
+      "pose": "stepA",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/right-stepA.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/source.png",
+      "source_crop": [
+        534,
+        861,
+        780,
+        1253
+      ],
+      "size": [
+        246,
+        392
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 4,
+        "w": 230,
+        "h": 380
+      },
+      "foot": {
+        "x": 123.0,
+        "y": 383
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.13072437905919948,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "0c5a29bb02acd833ee42db47465208549f5ff0348273de760c743f9403ef5b0d",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "cook-style0",
+      "state": "right-stepB",
+      "direction": "right",
+      "pose": "stepB",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/right-stepB.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/cook-style0/source.png",
+      "source_crop": [
+        977,
+        861,
+        1183,
+        1254
+      ],
+      "size": [
+        206,
+        393
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 7,
+        "w": 190,
+        "h": 380
+      },
+      "foot": {
+        "x": 103.0,
+        "y": 386
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.1238675996402641,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "58074341a9e845b0f3c43ed1cbd012edae8ba6f0952b20fb174f356dd42246e5",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    }
+  ],
+  "statusCounts": {
+    "candidate_pending_render_review": 7,
+    "review_required": 2
+  }
+}

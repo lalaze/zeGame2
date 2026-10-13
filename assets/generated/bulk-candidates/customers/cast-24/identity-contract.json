@@ -1,0 +1,25 @@
+{
+  "id": 24,
+  "name": "肉桂短夹克",
+  "look": {
+    "skin": 0,
+    "hair": 3,
+    "hairStyle": 1,
+    "shirt": 0,
+    "pants": 1
+  },
+  "hairstyle": 5,
+  "outfit": "jacket",
+  "accessory": "none",
+  "accent": "#ebd4a4",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#f4cfad",
+    "hair": "#b9674e",
+    "shirt": "#bb6b58",
+    "pants": "#85664f"
+  },
+  "hatPalette": "#d3a453",
+  "description": "Fixed customer cast 24 (肉桂短夹克): warm skin #f4cfad; hair #b9674e in short exuberant SPIKY TOUSLED hair with separate upward tufts and outward side tips, no braid or bun. Outfit: #bb6b58 short jacket with cream collar, cream zipper/placket and cream welt pocket trim. Lower clothing color #85664f; warm dark brown leather shoes. Accent #ebd4a4. No glasses, headband, bow or bag."
+}

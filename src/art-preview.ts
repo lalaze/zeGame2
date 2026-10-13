@@ -1,4 +1,7 @@
 import { artArchive, type ArchiveFile } from './render/art-archive';
+import { makeSignatureId, type SignatureBase, type SignatureRecipe } from './game/signature-drinks';
+import { paintServiceCup, paintServiceTray, paintTableVase, paintTableTent } from './render/service-props-art';
+import { paintCallBubble, paintAckBubble, paintOrderFrame, paintSoldOutFrame, paintSoldOutCross, paintThoughtFrame } from './render/ui-art';
 import { CUSTOMER_CAST } from './game/customer-cast';
 import { CATS } from './game/pets';
 import { INGREDIENTS, MENU, UPGRADES } from './game/data';
@@ -15,7 +18,7 @@ import { lightingAt } from './render/lighting';
 import { roomDepth } from './render/materials';
 import { paintRegion } from './render/region-art';
 import { RoomPainter } from './render/room-art';
-import { catFrames, character, ingredientIcon, itemArtwork, upgradeIcon, type Role } from './render/sprites';
+import { catFrames, character, ingredientIcon, itemArtwork, upgradeIcon, heartSprite, dropSprite, crownSprite, type Role } from './render/sprites';
 
 setLocale('zh');
 type Asset = { id: string; group: string; name: string; canvas: HTMLCanvasElement };
@@ -34,15 +37,51 @@ roles.forEach(([role, name], i) => {
   for (const direction of ['down', 'up', 'left', 'right'] as const) frames[direction].forEach((canvas, frame) => add(`character/${role}/${direction}-${frame}`, '人物', `${name} · ${direction} ${frame + 1}`, canvas));
   add(`character/${role}/sit-left`, '人物', `${name} · 坐姿左`, frames.sitLeft);
   add(`character/${role}/sit-right`, '人物', `${name} · 坐姿右`, frames.sitRight);
+  for (const side of ['Left', 'Right'] as const) frames[`sitPet${side}`].forEach((canvas, frame) => add(`character/${role}/sit-pet-${side.toLowerCase()}-${frame}`, '人物', `${name} · 抚猫 ${side} ${frame + 1}`, canvas));
 });
 for (const design of CUSTOMER_CAST) {
   const frames = character(design.look, 'customer', design.id);
   for (const direction of ['down', 'up', 'left', 'right'] as const) frames[direction].forEach((canvas, frame) =>
-    add(`customer/${design.id}/${direction}-${frame}`, '常客', `${design.name} · ${direction} ${frame + 1}`, canvas));
-  add(`customer/${design.id}/sit-left`, '常客', `${design.name} · 坐姿左`, frames.sitLeft);
-  add(`customer/${design.id}/sit-right`, '常客', `${design.name} · 坐姿右`, frames.sitRight);
+    add(`customer/${design.id}/${direction}-${frame}`, '顾客造型', `${design.name} · ${direction} ${frame + 1}`, canvas));
+  add(`customer/${design.id}/sit-left`, '顾客造型', `${design.name} · 坐姿左`, frames.sitLeft);
+  add(`customer/${design.id}/sit-right`, '顾客造型', `${design.name} · 坐姿右`, frames.sitRight);
+  for (const side of ['Left', 'Right'] as const) frames[`sitPet${side}`].forEach((canvas, frame) => add(`customer/${design.id}/sit-pet-${side.toLowerCase()}-${frame}`, '顾客造型', `${design.name} · 抚猫 ${side} ${frame + 1}`, canvas));
 }
-for (const cat of CATS) Object.entries(catFrames(cat.id)).forEach(([frame, canvas]) => add(cat.id === 'ginger' ? `cat/${frame}` : `cat/${cat.id}/${frame}`, '人物', `${t(`pet.${cat.id}.name`)} · ${frame}`, canvas));
+for (const cat of CATS) Object.entries(catFrames(cat.id)).forEach(([pose, value]) => {
+  const entries = Array.isArray(value) ? value : [value];
+  entries.forEach((canvas, i) => {
+    const frame = entries.length > 1 ? `${pose}-${i}` : pose;
+    add(`cat/${cat.id}/${frame}`, '猫咪', `${t(`pet.${cat.id}.name`)} · ${frame}`, canvas);
+  });
+});
+// Recipe art is algorithmic; these four representative combinations exercise
+// every base without implying that the finite gallery enumerates all recipes.
+const recipes: [SignatureBase, SignatureRecipe][] = [
+  ['coffee', { beans: 2, milk: 1, sugar: 1, cream: 1 }],
+  ['tea', { tea: 1, milk: 1, spice: 1, sugar: 1 }],
+  ['milk', { milk: 2, cocoa: 1, cream: 1 }],
+  ['fruit', { fruit: 2, milk: 1, sugar: 1, cream: 1 }],
+];
+for (const [base, recipe] of recipes) {
+  const id = makeSignatureId(base, recipe)!;
+  add(`signature/${base}`, '自创饮品', `自创 · ${base}`, itemArtwork(id));
+}
+for (const [id, name, paint] of [['heart', '爱心', heartSprite], ['drop', '水滴', dropSprite], ['crown', '贵宾王冠', crownSprite]] as const) add(`effect/${id}`, '界面', name, paint());
+const addPaint = (id: string, name: string, w: number, h: number, paint: (c: CanvasRenderingContext2D) => void) => {
+  const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
+  paint(canvas.getContext('2d')!); add(id, '界面', name, canvas);
+};
+addPaint('service/cup', '瓷杯与茶碟', 7, 7, paintServiceCup);
+addPaint('service/tray', '黄铜托盘', 22, 3, paintServiceTray);
+addPaint('service/vase', '玻璃花瓶', 5, 14, c => paintTableVase(c, '#ab5543'));
+addPaint('service/tent', '桌号牌', 7, 7, c => paintTableTent(c, 1));
+addPaint('ui/bell', '出餐提示', 17, 15, paintCallBubble);
+addPaint('ui/ack', '接单提示', 7, 10, paintAckBubble);
+addPaint('ui/order', '单品订单', 22, 22, c => paintOrderFrame(c, 20));
+addPaint('ui/order-combo', '组合订单', 36, 22, c => paintOrderFrame(c, 34));
+addPaint('ui/sold-out', '售罄订单', 22, 20, paintSoldOutFrame);
+addPaint('ui/sold-out-cross', '售罄印章', 20, 18, paintSoldOutCross);
+addPaint('ui/thought', '心声云朵', 100, 24, c => paintThoughtFrame(c, 100, 24));
 
 const sheet = document.createElement('canvas');
 const cell = 128, columns = 10;
@@ -60,7 +99,9 @@ const sheetLink = document.querySelector<HTMLAnchorElement>('#sheet')!;
 sheetLink.href = sheet.toDataURL(); sheetLink.download = 'tiny-bean-art.png';
 const manifest = document.querySelector<HTMLAnchorElement>('#manifest')!;
 const manifestText = JSON.stringify({ image: 'tiny-bean-art.png', size: { w: sheet.width, h: sheet.height }, frames }, null, 2);
-manifest.href = URL.createObjectURL(new Blob([manifestText], { type: 'application/json' }));
+// A self-contained download URL also lets offline asset tooling retain the exact
+// manifest beside the native PNGs without fetching ephemeral blob internals.
+manifest.href = `data:application/json;charset=utf-8,${encodeURIComponent(manifestText)}`;
 manifest.download = 'tiny-bean-art.json';
 
 const gallery = document.querySelector('#gallery')!;
@@ -79,7 +120,7 @@ function render(group: string): void {
     const id = document.createElement('small'); id.textContent = `${asset.id} · ${asset.canvas.width} × ${asset.canvas.height}`;
     caption.append(name, id); link.append(art, caption); return link;
   }));
-  count.textContent = `共 ${assets.length} 张素材 · 当前显示 ${visible.length} 张 · 55 道餐点`;
+  count.textContent = `共 ${assets.length} 张素材 · 当前显示 ${visible.length} 张 · ${MENU.length} 道餐点 · 全部动作帧`;
   buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.textContent === group)));
 }
 for (const group of ['全部', ...new Set(assets.map((asset) => asset.group))]) {

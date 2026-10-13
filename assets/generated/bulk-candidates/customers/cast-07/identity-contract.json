@@ -1,0 +1,25 @@
+{
+  "id": 7,
+  "name": "奶油书迷",
+  "look": {
+    "skin": 2,
+    "hair": 0,
+    "hairStyle": 0,
+    "shirt": 7,
+    "pants": 0
+  },
+  "hairstyle": 0,
+  "outfit": "vest",
+  "accessory": "glasses",
+  "accent": "#9e7357",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#b67c55",
+    "hair": "#594237",
+    "shirt": "#e5d7ba",
+    "pants": "#53637b"
+  },
+  "hatPalette": "#8ba477",
+  "description": "Fixed customer cast 7 (奶油书迷): warm skin #b67c55; hair #594237 in short softly tousled hair with a side-swept fringe. Outfit: #9e7357 buttoned sleeveless waistcoat over #e5d7ba long-sleeve collared shirt with cream collar. Lower clothing color #53637b; warm dark brown leather shoes. Accent #9e7357. Round dark-brown eyeglasses in every front/side/seated view; back shows temples near ears."
+}

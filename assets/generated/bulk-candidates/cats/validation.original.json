@@ -1,0 +1,132 @@
+{
+  "totalBreeds": 11,
+  "totalFrames": 154,
+  "checks": [
+    {
+      "breed": "american",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/american/source.png"
+      ]
+    },
+    {
+      "breed": "black",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/black/source.png"
+      ]
+    },
+    {
+      "breed": "british",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/british/source.png"
+      ]
+    },
+    {
+      "breed": "calico",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/calico/source.png"
+      ]
+    },
+    {
+      "breed": "ginger",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/source.png",
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ginger/walk-correction-source.png"
+      ]
+    },
+    {
+      "breed": "mainecoon",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/action-correction-source.png",
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/source.png"
+      ]
+    },
+    {
+      "breed": "persian",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/source.png",
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/vertical-correction-source.png"
+      ]
+    },
+    {
+      "breed": "ragdoll",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/action-correction-source.png",
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/source.png"
+      ]
+    },
+    {
+      "breed": "tabby",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/source.png",
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/walk-correction-source.png"
+      ]
+    },
+    {
+      "breed": "tuxedo",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tuxedo/source.png"
+      ]
+    },
+    {
+      "breed": "white",
+      "frames": 14,
+      "lossless": true,
+      "uniqueImages": 14,
+      "oneMajorCatPerCrop": true,
+      "problems": [],
+      "sources": [
+        "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/white/source.png"
+      ]
+    }
+  ]
+}

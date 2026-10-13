@@ -1,0 +1,551 @@
+{
+  "breed": "ragdoll",
+  "version": 1,
+  "generator": "built-in image_gen",
+  "sourceSheetDimensions": [
+    1254,
+    1254
+  ],
+  "bboxAlphaThreshold": "alpha > 128, excludes faint fringe; original alpha preserved in lossless crops",
+  "facingConvention": {
+    "walkA": "head-left",
+    "walkB": "head-left",
+    "other": "front-three-quarter slightly left; nuzzle head tilts independently"
+  },
+  "scaleNote": "One calibrated sourceToWorldScale for every frame from each source sheet. Estimated from common head width, never frame-height fit; runtime head/contact verification required.",
+  "anchorNote": "Manually visually estimated grounded front-paw/support midpoint and crown/forehead between ears, not ear tips. Contact/flip verification remains runtime work.",
+  "qa": {
+    "status": "source-and-final-crops-inspected; runtime validation pending",
+    "checks": [
+      "Breed-specific longhair morphology inspected",
+      "14 action mapping present"
+    ],
+    "corrections": "Selected crowded or hidden-tail frames replaced from separate spacious correction sheets.",
+    "correctionSheets": [
+      {
+        "file": "action-correction-source.png",
+        "states": [
+          "blink",
+          "groomB",
+          "stretch"
+        ],
+        "sharedScale": 0.023,
+        "note": "Same breed; lossless source crops with independent sheet-level head-size calibration."
+      }
+    ],
+    "identifiedIssues": [],
+    "remainingRuntimeChecks": [
+      "Game-scale silhouette and breed legibility",
+      "Walking step continuity and physical head/body scale across source sheets",
+      "Head-to-hand contact for lookUp/nuzzle",
+      "Exact state mapping, route flip and reduced motion",
+      "Low-alpha fringe on light/dark scene backgrounds"
+    ]
+  },
+  "frames": [
+    {
+      "state": "idle",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/ragdoll-idle.png",
+      "source": "source.png",
+      "source_crop": [
+        53,
+        24,
+        358,
+        313
+      ],
+      "size": [
+        305,
+        289
+      ],
+      "bbox": {
+        "x": 4,
+        "y": 8,
+        "w": 293,
+        "h": 273
+      },
+      "foot": {
+        "x": 75,
+        "y": 272
+      },
+      "headContact": {
+        "x": 89,
+        "y": 51
+      },
+      "sourceToWorldScale": 0.044,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 30848,
+      "sha256": "bbff02f1faf941bab92d1b1f24f89af07ad9ca07ad77cc38bbc1c0a5d7ab3ace"
+    },
+    {
+      "state": "swish",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/ragdoll-swish.png",
+      "source": "source.png",
+      "source_crop": [
+        364,
+        24,
+        680,
+        313
+      ],
+      "size": [
+        316,
+        289
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 309,
+        "h": 273
+      },
+      "foot": {
+        "x": 81,
+        "y": 272
+      },
+      "headContact": {
+        "x": 94,
+        "y": 51
+      },
+      "sourceToWorldScale": 0.044,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 36365,
+      "sha256": "edd02eb2e233028eb867240039d1d0c5edb288bde465b95167b7ec0c20846df1"
+    },
+    {
+      "state": "blink",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/ragdoll-blink.png",
+      "source": "action-correction-source.png",
+      "source_crop": [
+        53,
+        122,
+        661,
+        669
+      ],
+      "size": [
+        608,
+        547
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 592,
+        "h": 531
+      },
+      "foot": {
+        "x": 160,
+        "y": 529
+      },
+      "headContact": {
+        "x": 187,
+        "y": 76
+      },
+      "sourceToWorldScale": 0.023,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 120088,
+      "sha256": "906f02dc5d846a8ab14caa76c01ca8d47598c67e21b0b40c33efb696ff13f848"
+    },
+    {
+      "state": "happy",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/ragdoll-happy.png",
+      "source": "source.png",
+      "source_crop": [
+        987,
+        24,
+        1253,
+        313
+      ],
+      "size": [
+        266,
+        289
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 253,
+        "h": 273
+      },
+      "foot": {
+        "x": 85,
+        "y": 272
+      },
+      "headContact": {
+        "x": 95,
+        "y": 51
+      },
+      "sourceToWorldScale": 0.044,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 25175,
+      "sha256": "711303143f3319e0af019e0ab1ffb773f6210c60cb257b297c9ba480a7556266"
+    },
+    {
+      "state": "walkA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/ragdoll-walkA.png",
+      "source": "source.png",
+      "source_crop": [
+        7,
+        348,
+        364,
+        601
+      ],
+      "size": [
+        357,
+        253
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 344,
+        "h": 237
+      },
+      "foot": {
+        "x": 161,
+        "y": 236
+      },
+      "headContact": {
+        "x": 84,
+        "y": 43
+      },
+      "sourceToWorldScale": 0.044,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 25635,
+      "sha256": "a5ff2983e545dc07275a0f5d72818d9c002040f3af176114e04a3885de0ad175"
+    },
+    {
+      "state": "walkB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/ragdoll-walkB.png",
+      "source": "source.png",
+      "source_crop": [
+        365,
+        346,
+        705,
+        601
+      ],
+      "size": [
+        340,
+        255
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 335,
+        "h": 239
+      },
+      "foot": {
+        "x": 131,
+        "y": 238
+      },
+      "headContact": {
+        "x": 66,
+        "y": 44
+      },
+      "sourceToWorldScale": 0.044,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26211,
+      "sha256": "40600cd7ba42e287163a63cc9ff99f184d7fb63b81b78caf1250e95687a81a23"
+    },
+    {
+      "state": "sleep",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/ragdoll-sleep.png",
+      "source": "source.png",
+      "source_crop": [
+        706,
+        400,
+        997,
+        594
+      ],
+      "size": [
+        291,
+        194
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 8,
+        "w": 283,
+        "h": 178
+      },
+      "foot": {
+        "x": 124,
+        "y": 177
+      },
+      "headContact": {
+        "x": 100,
+        "y": 56
+      },
+      "sourceToWorldScale": 0.044,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 10889,
+      "sha256": "6ca2c8539157f0a99ef8371fc2b2e95c41d4daf39f6b3b35d068608ce6312a96"
+    },
+    {
+      "state": "groomA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/ragdoll-groomA.png",
+      "source": "source.png",
+      "source_crop": [
+        998,
+        344,
+        1254,
+        601
+      ],
+      "size": [
+        256,
+        257
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 243,
+        "h": 241
+      },
+      "foot": {
+        "x": 82,
+        "y": 240
+      },
+      "headContact": {
+        "x": 103,
+        "y": 42
+      },
+      "sourceToWorldScale": 0.044,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 17004,
+      "sha256": "467cd4ceef50b227af1796f4eaba958ed775c72eaf0d7eea7639cf2874dfcf40"
+    },
+    {
+      "state": "groomB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/ragdoll-groomB.png",
+      "source": "action-correction-source.png",
+      "source_crop": [
+        729,
+        143,
+        1348,
+        669
+      ],
+      "size": [
+        619,
+        526
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 603,
+        "h": 510
+      },
+      "foot": {
+        "x": 135,
+        "y": 508
+      },
+      "headContact": {
+        "x": 195,
+        "y": 79
+      },
+      "sourceToWorldScale": 0.023,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 117978,
+      "sha256": "4dcef9e9a3974d98d1bfd5a25e496f2aa3ddb61e8188cd6e542025e3bb4c1957"
+    },
+    {
+      "state": "stretch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/ragdoll-stretch.png",
+      "source": "action-correction-source.png",
+      "source_crop": [
+        1356,
+        74,
+        2147,
+        669
+      ],
+      "size": [
+        791,
+        595
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 775,
+        "h": 579
+      },
+      "foot": {
+        "x": 404,
+        "y": 577
+      },
+      "headContact": {
+        "x": 282,
+        "y": 347
+      },
+      "sourceToWorldScale": 0.023,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 224465,
+      "sha256": "dede0325f4f04ced052da9d69b7e6d669d05f32dec5047bfc67493d8f61d74d0"
+    },
+    {
+      "state": "watch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/ragdoll-watch.png",
+      "source": "source.png",
+      "source_crop": [
+        695,
+        636,
+        969,
+        916
+      ],
+      "size": [
+        274,
+        280
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 258,
+        "h": 264
+      },
+      "foot": {
+        "x": 93,
+        "y": 263
+      },
+      "headContact": {
+        "x": 94,
+        "y": 53
+      },
+      "sourceToWorldScale": 0.044,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 24059,
+      "sha256": "0e33afc7f72970f28a1df1164140d348f4ccf89efbd1c36fe35f642ef5221f01"
+    },
+    {
+      "state": "lookUp",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/ragdoll-lookUp.png",
+      "source": "source.png",
+      "source_crop": [
+        988,
+        620,
+        1253,
+        916
+      ],
+      "size": [
+        265,
+        296
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 249,
+        "h": 280
+      },
+      "foot": {
+        "x": 75,
+        "y": 279
+      },
+      "headContact": {
+        "x": 100,
+        "y": 47
+      },
+      "sourceToWorldScale": 0.044,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 22803,
+      "sha256": "da37ce6ac5c535c85400204dd414b5259461791040e6d08510be37de72b99aa7"
+    },
+    {
+      "state": "nuzzleA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/ragdoll-nuzzleA.png",
+      "source": "source.png",
+      "source_crop": [
+        36,
+        913,
+        332,
+        1230
+      ],
+      "size": [
+        296,
+        317
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 7,
+        "w": 280,
+        "h": 302
+      },
+      "foot": {
+        "x": 89,
+        "y": 300
+      },
+      "headContact": {
+        "x": 100,
+        "y": 48
+      },
+      "sourceToWorldScale": 0.044,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 28913,
+      "sha256": "77db536c95f314ea3269c0c0715c5edad292e6f1bcf642668bf5e544692fd20d"
+    },
+    {
+      "state": "nuzzleB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/ragdoll/ragdoll-nuzzleB.png",
+      "source": "source.png",
+      "source_crop": [
+        368,
+        922,
+        650,
+        1232
+      ],
+      "size": [
+        282,
+        310
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 266,
+        "h": 294
+      },
+      "foot": {
+        "x": 95,
+        "y": 293
+      },
+      "headContact": {
+        "x": 116,
+        "y": 48
+      },
+      "sourceToWorldScale": 0.044,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26181,
+      "sha256": "ad26ab60f0145a53193a8b6670ebafafbb4adc2661cdee0821bdcbf1538d71b4"
+    }
+  ]
+}

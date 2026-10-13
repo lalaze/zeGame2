@@ -1,0 +1,302 @@
+[
+  {
+    "id": "wall_cream",
+    "kind": "tile",
+    "logical": [
+      20,
+      15
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. Warm cream woven wallpaper #f4e6c7 with slightly darker pale beige narrow vertical stripes #ead8b3, sparse tiny paired ochre/cream flower-bud motifs centered in each broad stripe. Small-scale restrained vintage wallpaper, not large floral illustration."
+  },
+  {
+    "id": "wall_mint",
+    "kind": "tile",
+    "logical": [
+      20,
+      15
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. Pale mint/sage woven wallpaper #dce4c9 with low-contrast sage vertical stripe accents #c4d0ab, sparse tiny cream/olive paired flower-bud motifs centered in broad stripe. Match calm cafe wallpaper scale."
+  },
+  {
+    "id": "wall_rose",
+    "kind": "tile",
+    "logical": [
+      20,
+      15
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. Warm dusty pale peach-rose woven wallpaper #f0d8c2 with low-contrast muted rose vertical stripes #dfbaa5 and sparse tiny cream/ochre paired flower-bud motifs centered in broad stripe. No large blooms."
+  },
+  {
+    "id": "wall_dots",
+    "kind": "tile",
+    "logical": [
+      16,
+      12
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. Pale powder-blue vintage wallpaper #d5e6f4 with a regular staggered small repeating pattern of tiny ivory four-petal flowers, ochre centers and tiny muted olive sprig accents, an extremely faint diagonal trellis. Fine fabric texture. Not large polka dots."
+  },
+  {
+    "id": "wall_brick",
+    "kind": "tile",
+    "logical": [
+      32,
+      16
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. Warm terracotta brick wall material #b9634a, regular staggered horizontal rectangular bricks, narrow pale clay mortar #d9a58b, subtly chipped corners and fine muted variations. Uniform flat surface, no dramatic highlights or grunge."
+  },
+  {
+    "id": "wall_walnut",
+    "kind": "tile",
+    "logical": [
+      24,
+      26
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. Dark warm walnut wood wall PANEL material #7a4e33, regular repeated recessed rectangular square-ish paneled sections, narrow structural stiles and fine warm amber upper-left bevels. Woodgrain subtle and parallel vertical. Completely flat front view of continuous panel surface, no top edge, room corner, object or exterior outline."
+  },
+  {
+    "id": "wall_stars",
+    "kind": "tile",
+    "logical": [
+      62,
+      46
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. Muted deep indigo wallpaper #2c3263 with sparse small pale-cream/gold embroidered stars and tiny soft gray star specks, subtle woven fabric grain. Evenly repeating motif pattern, no moon, no clouds, no skyline or gradients. All stars static material only, no halos."
+  },
+  {
+    "id": "floor_checker",
+    "kind": "tile",
+    "logical": [
+      32,
+      32
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. A flat top-down classic cafe checker floor of alternating warm ivory #f1e5ca and sandy cream #e4d5b6 square ceramic tiles, thin muted beige grout and very subtle mineral speckles. Even four by four tile repeat, no black squares, no perspective."
+  },
+  {
+    "id": "floor_planks",
+    "kind": "tile",
+    "logical": [
+      96,
+      24
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. A flat top-down floor of long horizontal warm honey-oak planks #b98c62/#ad805a/#c49a70, staggered end joints, fine woodgrain and occasional small knots, subtle dark narrow seams. Multiple plank rows, joints periodic across edges, no border."
+  },
+  {
+    "id": "floor_mint",
+    "kind": "tile",
+    "logical": [
+      32,
+      32
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. A flat top-down checker floor of alternating pale ivory-green #e5e8d2 and muted mint-sage #c8d4b5 square ceramic tiles, thin gray-beige grout and restrained mineral speckles. Even four by four repeat, no perspective."
+  },
+  {
+    "id": "floor_terrazzo",
+    "kind": "tile",
+    "logical": [
+      32,
+      32
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. A flat top-down pale warm-cream terrazzo floor #ece5d8, sparse tiny irregular chips in terracotta, sage, ochre, taupe and ivory, faint regular square slab grout. Delicate scattered chips at consistent density, not oversized confetti, no perspective."
+  },
+  {
+    "id": "floor_herringbone",
+    "kind": "tile",
+    "logical": [
+      32,
+      32
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. A flat top-down golden honey-oak herringbone parquet floor, narrow wooden rectangular slats interlocked in classic zigzag herringbone arrangement, subtle alternating tan #b88d63 and #b28a60 tones, fine woodgrain, extremely narrow warm-brown seams. Seamless periodic pattern."
+  },
+  {
+    "id": "floor_marble",
+    "kind": "tile",
+    "logical": [
+      64,
+      64
+    ],
+    "transparent": false,
+    "prompt": "Use case: stylized-concept. Asset type: square SEAMLESS REPEATING MATERIAL TILE for a warm fine-pixel cafe game, using the input images only as material/pixel-style reference. Make one flat 1024x1024 square texture filling the entire canvas edge-to-edge. Fine crisp hand-placed pixel clusters; muted rich color; readable low-contrast subtle material detail. Perfect orthographic surface scan, NO perspective, NO object or framed sample, NO border, NO transparent margin, NO lighting gradient, NO cast shadows, NO glow, NO vignette, NO writing. Pattern phase, features and base color must match exactly at opposite edges so it repeats horizontally and vertically without a seam. Lighting is uniform neutral material shading, game adds daylight/shadows. A flat top-down ivory marble floor of large square slabs #f4f0ea and #ebe4da, very delicate thin taupe/beige winding mineral veins #b8ac95, subtle warm cream highlights and almost invisible thin grout. Soft quiet cafe material, no dramatic dark cracks."
+  },
+  {
+    "id": "counter_walnut",
+    "kind": "counter",
+    "logical": [
+      580,
+      60
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: a TWO-MODULE MATERIAL SET for one cafe counter variant, matching the fine crisp pixel texture, upper-left warm edge highlights and handcrafted detail of input references. True transparent canvas. TOP: one very wide thin perfectly rectangular countertop material strip, native shape width:height about580:60. Flat material surface viewed straight-on for game mapping, no perspective, no legs, NO front apron attached. BOTTOM: one separate rectangular cabinet FRONT PANEL material module, width:height190:138, recessed central panel with clean square outer stiles. No countertop attached to front panel. Keep at least150px transparent gap between modules; centered, complete bounds and ample margins. No text, labels, props, ground, room, background, glow or exterior shadow. Exactly these TWO separate modules only. Material specification: DARK WALNUT: top warm dark walnut #98643e, front deep walnut #543425; rich fine woodgrain, subtle warm amber beveled edges and tiny restrained brass corner detailing."
+  },
+  {
+    "id": "counter_marble",
+    "kind": "counter",
+    "logical": [
+      580,
+      60
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: a TWO-MODULE MATERIAL SET for one cafe counter variant, matching the fine crisp pixel texture, upper-left warm edge highlights and handcrafted detail of input references. True transparent canvas. TOP: one very wide thin perfectly rectangular countertop material strip, native shape width:height about580:60. Flat material surface viewed straight-on for game mapping, no perspective, no legs, NO front apron attached. BOTTOM: one separate rectangular cabinet FRONT PANEL material module, width:height190:138, recessed central panel with clean square outer stiles. No countertop attached to front panel. Keep at least150px transparent gap between modules; centered, complete bounds and ample margins. No text, labels, props, ground, room, background, glow or exterior shadow. Exactly these TWO separate modules only. Material specification: IVORY MARBLE: top creamy ivory stone #f3efe8 with thin pale taupe veins #c9c0b2; front light warm limestone/ivory #e2dace with carved recessed rectangular panel. Restrained champagne edge details."
+  },
+  {
+    "id": "counter_pink",
+    "kind": "counter",
+    "logical": [
+      580,
+      60
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: a TWO-MODULE MATERIAL SET for one cafe counter variant, matching the fine crisp pixel texture, upper-left warm edge highlights and handcrafted detail of input references. True transparent canvas. TOP: one very wide thin perfectly rectangular countertop material strip, native shape width:height about580:60. Flat material surface viewed straight-on for game mapping, no perspective, no legs, NO front apron attached. BOTTOM: one separate rectangular cabinet FRONT PANEL material module, width:height190:138, recessed central panel with clean square outer stiles. No countertop attached to front panel. Keep at least150px transparent gap between modules; centered, complete bounds and ample margins. No text, labels, props, ground, room, background, glow or exterior shadow. Exactly these TWO separate modules only. Material specification: ROSE COUNTER: top pale blush pink polished painted wood #f7c3cf; front dusty rose #e98fa6 with subtle woodgrain and recessed rectangular cabinetry panel, tiny muted brass detailing. Warm cream highlight edges, no glossy plastic."
+  },
+  {
+    "id": "counter_gold",
+    "kind": "counter",
+    "logical": [
+      580,
+      60
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: a TWO-MODULE MATERIAL SET for one cafe counter variant, matching the fine crisp pixel texture, upper-left warm edge highlights and handcrafted detail of input references. True transparent canvas. TOP: one very wide thin perfectly rectangular countertop material strip, native shape width:height about580:60. Flat material surface viewed straight-on for game mapping, no perspective, no legs, NO front apron attached. BOTTOM: one separate rectangular cabinet FRONT PANEL material module, width:height190:138, recessed central panel with clean square outer stiles. No countertop attached to front panel. Keep at least150px transparent gap between modules; centered, complete bounds and ample margins. No text, labels, props, ground, room, background, glow or exterior shadow. Exactly these TWO separate modules only. Material specification: MIDNIGHT AND GOLD COUNTER: top pale champagne-gold solid surface #f3dfa6, front deep muted indigo #363c5c with a recessed rectangular cabinet panel, thin antique-gold trim #e7b84a. Subtle material texture, not flashy jewelry."
+  },
+  {
+    "id": "sill_cactus",
+    "kind": "sprite",
+    "logical": [
+      6,
+      9
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. One tiny round prickly-pear cactus with compact branching pads, muted green skin and small pale spine clusters in a squat terracotta pot. Whole aspect6:9. No flower, no sill or other object."
+  },
+  {
+    "id": "sill_tulips",
+    "kind": "sprite",
+    "logical": [
+      8,
+      9
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. One small rectangular terracotta planter containing exactly three upright tulips: muted rose, warm yellow and muted rose blooms with slender green stems and two broad leaves. Whole aspect8:9. No sill, no extra props."
+  },
+  {
+    "id": "sill_bonsai",
+    "kind": "sprite",
+    "logical": [
+      12,
+      9
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. One tiny bonsai tree with a gracefully bent visible walnut-brown trunk and layered compact sage-green leafy canopy, planted in a low wide rectangular terracotta bonsai dish. Whole aspect12:9. No scenery, no stand."
+  },
+  {
+    "id": "ceiling_lights",
+    "kind": "sprite",
+    "logical": [
+      64,
+      14
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. One horizontal reusable festoon-light segment: gently sagging dark-brown wire between left and right endpoints at exactly the same vertical height, with four small evenly spaced UNLIT cream-glass round bulbs and antique brass sockets. Whole aspect64:14. Wire endpoints complete inside canvas margins. Bulbs no bright emission or halos; runtime flicker separate."
+  },
+  {
+    "id": "ceiling_vines",
+    "kind": "sprite",
+    "logical": [
+      64,
+      18
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. One wide horizontal overhead trim garland of dangling small sage-green ivy vines and leaves, varied short trailing lengths, continuous subtle woody stem across top. Whole aspect64:18. No pot, flowers, light bulbs or support wall. Small gaps between hanging leafy tendrils are true transparent alpha. Existing hanging pots are separate."
+  },
+  {
+    "id": "ceiling_pendants",
+    "kind": "sprite",
+    "logical": [
+      9,
+      15
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE antique brass cafe pendant light with thin dark vertical ceiling cord, small brass collar, shallow bell-shaped cream-glass shade and a brass bottom lip. UNLIT fixture, no bright bulb emission or cone. Whole aspect9:15, cord ends at top margin; game repeats it four times."
+  },
+  {
+    "id": "ceiling_chandelier",
+    "kind": "sprite",
+    "logical": [
+      25,
+      15
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE low wide antique brass cafe chandelier with short central hanging chain, five curved arms holding five UNLIT cream candles, tiny clear pale celadon faceted crystal drops beneath. Whole aspect25:15, complete fixture. NO flames or glow anywhere, wick tips visible for runtime flame overlay."
+  },
+  {
+    "id": "rug_red",
+    "kind": "sprite",
+    "logical": [
+      26,
+      16
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE flat woven rectangular cafe rug in muted terracotta red: dark brick-red border #814337, dusty terracotta field #bd7760, cream-gold #f3d7a4 small diamond center, tiny botanical motifs at four corners, narrow stitched inner border and short cream fringes at top and bottom ends. FULL DIRECT OVERHEAD FLAT VIEW, no perspective or thickness. Whole aspect26:16."
+  },
+  {
+    "id": "rug_blue",
+    "kind": "sprite",
+    "logical": [
+      26,
+      16
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE flat woven rectangular cafe rug in dusty blue-gray teal: slate border #495f68, muted teal-gray field #7e9694, warm cream #efe4bf small diamond center, tiny botanical motifs at four corners, narrow stitched inner border and short cream fringes at top and bottom ends. FULL DIRECT OVERHEAD FLAT VIEW, no perspective or thickness. Whole aspect26:16."
+  },
+  {
+    "id": "rug_round",
+    "kind": "sprite",
+    "logical": [
+      26,
+      16
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE flat oval braided woven cafe rug in muted mint/sage: concentric deep green, sage, cream and pale mint rings, a small cream/sage diamond medallion in center. Smooth complete oval silhouette, no fringe. FULL DIRECT OVERHEAD FLAT VIEW, no thickness or cast shadow. Whole aspect26:16."
+  },
+  {
+    "id": "neon_cafe",
+    "kind": "sprite",
+    "logical": [
+      42,
+      14
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE very wide low blank antique-brass neon-sign mounting frame with a narrow dark walnut backplate and completely EMPTY dark center reserved for runtime cafe text. Simple rounded rectangle frame, small corner mounting screws. Whole aspect3:1. ABSOLUTELY NO letters, no CAFE word, no logo, no symbol and no glass tubes. No glow. This is a blank mounting body for dynamic text."
+  },
+  {
+    "id": "neon_heart",
+    "kind": "sprite",
+    "logical": [
+      8,
+      8
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE small simple heart-shaped neon glass tube, unlit dusty rose/cream glass with a few subtle reflective pixels and tiny dark metal mounting clips. Heart outline only, hollow inside is genuine transparent alpha, no backplate, cord or separate prop. Whole aspect1:1. No glow; runtime lighting separate."
+  },
+  {
+    "id": "neon_cup",
+    "kind": "sprite",
+    "logical": [
+      9,
+      10
+    ],
+    "transparent": true,
+    "prompt": "Use case: stylized-concept. Asset type: independent fine-pixel room-decoration sprite, matching input style references: warm carved walnut, antique brass, rich cream, muted sage/terracotta, crisp square pixel clusters, dark-brown contour. Fixed shallow elevated frontal view. Upper-left ambient highlights only. One complete independent object with generous margins and true transparent alpha outside it. NO room, floor tile, wall, background, label, text, watermark, cast shadow or exterior glow. Dynamic lighting is separate: all lights UNLIT, no flame or emitted-light halo. ONE simple coffee-cup-and-saucer neon glass tube motif with three small steam curls above, UNLIT pale sage/cream tubing and tiny dark mounting clips. Cup handle on right; hollow areas and outside are genuine transparent alpha. Whole aspect9:10. No backplate, no text, no glow; runtime lighting separate."
+  }
+]

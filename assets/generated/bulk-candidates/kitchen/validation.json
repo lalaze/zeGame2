@@ -1,0 +1,17 @@
+{
+  "totalBodies": 18,
+  "allLosslessSourceCrops": true,
+  "allTransparent": true,
+  "uniqueHashes": 18,
+  "runtimeValidated": false,
+  "aspectReview": [
+    "cooler",
+    "dryStore",
+    "handSink",
+    "mixer",
+    "proofer",
+    "kettle",
+    "deckOven",
+    "hood"
+  ]
+}

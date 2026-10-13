@@ -1,0 +1,414 @@
+{
+  "family": "shared-owner-barista-style0",
+  "roles": [
+    "owner",
+    "barista"
+  ],
+  "hairStyle": 0,
+  "status": "candidate_pending_render_review",
+  "sourceSize": [
+    1254,
+    1254
+  ],
+  "rowBoundaries": [
+    0,
+    424,
+    836,
+    1254
+  ],
+  "bboxAlphaThreshold": "alpha>128 not all-nonzero alpha",
+  "frames": [
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style0",
+      "state": "down-stand",
+      "direction": "down",
+      "pose": "stand",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/down-stand.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/source.png",
+      "source_crop": [
+        139,
+        16,
+        317,
+        420
+      ],
+      "size": [
+        178,
+        404
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 162,
+        "h": 388
+      },
+      "foot": {
+        "x": 89.0,
+        "y": 395
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.15262205350048558,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "9676b1a1c9971fc6aca3b97d4d507c715bf7b5d797eef23928985b900be7cf93",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style0",
+      "state": "down-stepA",
+      "direction": "down",
+      "pose": "stepA",
+      "status": "review_required",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/down-stepA.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/source.png",
+      "source_crop": [
+        535,
+        17,
+        719,
+        424
+      ],
+      "size": [
+        184,
+        407
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 168,
+        "h": 399
+      },
+      "foot": {
+        "x": 92.0,
+        "y": 406
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.17976377266387727,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "e55a2a4778bdd93bd92028154d050c6c9e68a6a484a6b33e80e68db763d0342b",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction",
+        "tight vertical gutter or silhouette reaches source/cell boundary; inspect clipping"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style0",
+      "state": "down-stepB",
+      "direction": "down",
+      "pose": "stepB",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/down-stepB.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/source.png",
+      "source_crop": [
+        952,
+        17,
+        1135,
+        424
+      ],
+      "size": [
+        183,
+        407
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 167,
+        "h": 392
+      },
+      "foot": {
+        "x": 91.5,
+        "y": 399
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.15445976960270952,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "85c8f72f48d776b847eb795e9628468fc2381a6e9b6365cfdddff354d2988010",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style0",
+      "state": "up-stand",
+      "direction": "up",
+      "pose": "stand",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/up-stand.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/source.png",
+      "source_crop": [
+        140,
+        428,
+        318,
+        827
+      ],
+      "size": [
+        178,
+        399
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 162,
+        "h": 383
+      },
+      "foot": {
+        "x": 89.0,
+        "y": 390
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.11864664595058563,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "5c0b4894c1c13795c98874f2a77fed24be5ae7acef70a136359873e992aacc96",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style0",
+      "state": "up-stepA",
+      "direction": "up",
+      "pose": "stepA",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/up-stepA.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/source.png",
+      "source_crop": [
+        529,
+        427,
+        719,
+        834
+      ],
+      "size": [
+        190,
+        407
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 174,
+        "h": 391
+      },
+      "foot": {
+        "x": 95.0,
+        "y": 398
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.13502746952087027,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "a8143483d6fefb2738fa0a0daf28f91e3aea1d2ef349cd90225247b2532d519b",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style0",
+      "state": "up-stepB",
+      "direction": "up",
+      "pose": "stepB",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/up-stepB.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/source.png",
+      "source_crop": [
+        955,
+        428,
+        1139,
+        830
+      ],
+      "size": [
+        184,
+        402
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 168,
+        "h": 386
+      },
+      "foot": {
+        "x": 92.0,
+        "y": 393
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.12882115643209324,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "fda78d54ddfd7203e8b41b5100c8118a3c282f8beeeca2e971be2b0326760e1a",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style0",
+      "state": "right-stand",
+      "direction": "right",
+      "pose": "stand",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/right-stand.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/source.png",
+      "source_crop": [
+        136,
+        836,
+        316,
+        1235
+      ],
+      "size": [
+        180,
+        399
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 5,
+        "w": 164,
+        "h": 386
+      },
+      "foot": {
+        "x": 90.0,
+        "y": 390
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.13634818914457714,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "c809a1b1a2d077fbf64c50af210d00d3d61a489287f8365fdf4213951fe948aa",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style0",
+      "state": "right-stepA",
+      "direction": "right",
+      "pose": "stepA",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/right-stepA.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/source.png",
+      "source_crop": [
+        514,
+        836,
+        763,
+        1233
+      ],
+      "size": [
+        249,
+        397
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 7,
+        "w": 233,
+        "h": 382
+      },
+      "foot": {
+        "x": 124.5,
+        "y": 388
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.130233519322174,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "d1af62dac7381f29e25f90157ec451365c33e3e071e9622b2877722e80e13208",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    },
+    {
+      "domain": "parameter",
+      "id": "shared-owner-barista-style0",
+      "state": "right-stepB",
+      "direction": "right",
+      "pose": "stepB",
+      "status": "candidate_pending_render_review",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/right-stepB.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-parameter-v1/shared-owner-barista-style0/source.png",
+      "source_crop": [
+        965,
+        836,
+        1150,
+        1235
+      ],
+      "size": [
+        185,
+        399
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 6,
+        "w": 169,
+        "h": 385
+      },
+      "foot": {
+        "x": 92.5,
+        "y": 390
+      },
+      "sourceToWorldScale": 0.0731070496083551,
+      "scaleNote": "Shared initial body family scale from approved base; chef hat/bun may need envelope expansion, never perframe fit.",
+      "coreAlphaThreshold": 16,
+      "strictUnclassifiedFraction": 0.11506613126432087,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "8c439ddab949eb90ae6799c010bf37625910b2e66ed1fcb37c51b23bb9f4ad10",
+      "issues": [
+        "semantic ID mapping not runtime-reviewed",
+        "chromatic dark contours/fixed face may need semantic correction"
+      ]
+    }
+  ],
+  "statusCounts": {
+    "candidate_pending_render_review": 8,
+    "review_required": 1
+  }
+}

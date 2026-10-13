@@ -1,0 +1,554 @@
+{
+  "breed": "tabby",
+  "version": 1,
+  "generator": "built-in image_gen",
+  "sourceSheetDimensions": [
+    1254,
+    1254
+  ],
+  "bboxAlphaThreshold": "alpha > 128, excludes faint fringe; original alpha preserved in lossless crops",
+  "facingConvention": {
+    "walkA": "head-left",
+    "walkB": "head-left",
+    "other": "front-three-quarter slightly left; nuzzle head tilts independently"
+  },
+  "scaleNote": "One calibrated sourceToWorldScale for every frame from each source sheet. Estimated from common head width, never frame-height fit; runtime head/contact verification required.",
+  "anchorNote": "Manually visually estimated grounded front-paw/support midpoint and crown/forehead between ears, not ear tips. Contact/flip verification remains runtime work.",
+  "qa": {
+    "status": "source-and-final-crops-inspected; runtime validation pending",
+    "checks": [
+      "Fourteen actions match assigned sheet locations",
+      "Brown mackerel stripes and green eyes",
+      "Opposite gait phases visibly distinct",
+      "Grooming paw chest vs cheek",
+      "Raised broad chest, no long neck"
+    ],
+    "raisedPoseHeightNote": "Raised variants modestly taller than idle at shared head scale. Contact requires runtime test.",
+    "poseNote": "nuzzleB turns torso and tail slightly with affectionate rightward lean; metadata preserves actual orientation.",
+    "correctionSheets": [
+      {
+        "file": "walk-correction-source.png",
+        "states": [
+          "walkA",
+          "walkB"
+        ],
+        "sharedScale": 0.025,
+        "note": "Same breed; lossless source crops with independent sheet-level head-size calibration."
+      }
+    ],
+    "identifiedIssues": [],
+    "remainingRuntimeChecks": [
+      "Game-scale silhouette and breed legibility",
+      "Walking step continuity and physical head/body scale across source sheets",
+      "Head-to-hand contact for lookUp/nuzzle",
+      "Exact state mapping, route flip and reduced motion",
+      "Low-alpha fringe on light/dark scene backgrounds"
+    ]
+  },
+  "frames": [
+    {
+      "state": "idle",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/tabby-idle.png",
+      "source": "source.png",
+      "source_crop": [
+        53,
+        17,
+        324,
+        323
+      ],
+      "size": [
+        271,
+        306
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 255,
+        "h": 290
+      },
+      "foot": {
+        "x": 85,
+        "y": 289
+      },
+      "headContact": {
+        "x": 93,
+        "y": 55
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 33093,
+      "sha256": "a6145756ae5102adc74ea353792284ffcdb5a80c7a63990e86325c0e41e680f6"
+    },
+    {
+      "state": "swish",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/tabby-swish.png",
+      "source": "source.png",
+      "source_crop": [
+        342,
+        20,
+        646,
+        325
+      ],
+      "size": [
+        304,
+        305
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 291,
+        "h": 289
+      },
+      "foot": {
+        "x": 84,
+        "y": 286
+      },
+      "headContact": {
+        "x": 93,
+        "y": 53
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 44570,
+      "sha256": "84486e51856d6853646b359bf333b324c43be411c25c37a658d3829512aa52a5"
+    },
+    {
+      "state": "blink",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/tabby-blink.png",
+      "source": "source.png",
+      "source_crop": [
+        656,
+        25,
+        935,
+        323
+      ],
+      "size": [
+        279,
+        298
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 263,
+        "h": 282
+      },
+      "foot": {
+        "x": 97,
+        "y": 281
+      },
+      "headContact": {
+        "x": 105,
+        "y": 48
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 34199,
+      "sha256": "d4c54db7ea28226edf675c5d103668feda3c67900a075a6f57467b252ebb9d87"
+    },
+    {
+      "state": "happy",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/tabby-happy.png",
+      "source": "source.png",
+      "source_crop": [
+        970,
+        25,
+        1246,
+        323
+      ],
+      "size": [
+        276,
+        298
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 263,
+        "h": 282
+      },
+      "foot": {
+        "x": 97,
+        "y": 281
+      },
+      "headContact": {
+        "x": 101,
+        "y": 50
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 34069,
+      "sha256": "eea75ca27e2e8fe3a607bc028a10b0ff92c9b10947946f56698eb37b2a5b42d1"
+    },
+    {
+      "state": "walkA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/tabby-walkA.png",
+      "source": "walk-correction-source.png",
+      "source_crop": [
+        57,
+        277,
+        720,
+        781
+      ],
+      "size": [
+        663,
+        504
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 647,
+        "h": 488
+      },
+      "foot": {
+        "x": 325,
+        "y": 486
+      },
+      "headContact": {
+        "x": 159,
+        "y": 100
+      },
+      "sourceToWorldScale": 0.025,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 140145,
+      "sha256": "78391b3498890621c805b2cbbb1400fa1a59f36aab8857e3cc017404f665da99"
+    },
+    {
+      "state": "walkB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/tabby-walkB.png",
+      "source": "walk-correction-source.png",
+      "source_crop": [
+        825,
+        277,
+        1492,
+        781
+      ],
+      "size": [
+        667,
+        504
+      ],
+      "bbox": {
+        "x": 3,
+        "y": 8,
+        "w": 656,
+        "h": 488
+      },
+      "foot": {
+        "x": 323,
+        "y": 486
+      },
+      "headContact": {
+        "x": 155,
+        "y": 100
+      },
+      "sourceToWorldScale": 0.025,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 144282,
+      "sha256": "7c7e63195d276ed1a42af5aa6606d9f78c2d4753eb7cdbbd72707727f2b37c2c"
+    },
+    {
+      "state": "sleep",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/tabby-sleep.png",
+      "source": "source.png",
+      "source_crop": [
+        673,
+        431,
+        947,
+        609
+      ],
+      "size": [
+        274,
+        178
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 258,
+        "h": 162
+      },
+      "foot": {
+        "x": 140,
+        "y": 157
+      },
+      "headContact": {
+        "x": 89,
+        "y": 47
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 11740,
+      "sha256": "feaa7bda1268b5ebdb797bdf42c1f6c92ffd59f5c8fd1f63add9924452839526"
+    },
+    {
+      "state": "groomA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/tabby-groomA.png",
+      "source": "source.png",
+      "source_crop": [
+        983,
+        336,
+        1251,
+        605
+      ],
+      "size": [
+        268,
+        269
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 252,
+        "h": 253
+      },
+      "foot": {
+        "x": 107,
+        "y": 252
+      },
+      "headContact": {
+        "x": 91,
+        "y": 57
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 27126,
+      "sha256": "cf0a3fab1074c739ab11771c4b98e11970bd4bf6786ce0edb228b0743d60420f"
+    },
+    {
+      "state": "groomB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/tabby-groomB.png",
+      "source": "source.png",
+      "source_crop": [
+        45,
+        618,
+        316,
+        911
+      ],
+      "size": [
+        271,
+        293
+      ],
+      "bbox": {
+        "x": 4,
+        "y": 8,
+        "w": 261,
+        "h": 279
+      },
+      "foot": {
+        "x": 86,
+        "y": 281
+      },
+      "headContact": {
+        "x": 85,
+        "y": 51
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 31191,
+      "sha256": "9f34457734f85eaf8d15fae4caf69856f60e57f8af126b98e26d8b1218ae634d"
+    },
+    {
+      "state": "stretch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/tabby-stretch.png",
+      "source": "source.png",
+      "source_crop": [
+        316,
+        629,
+        641,
+        915
+      ],
+      "size": [
+        325,
+        286
+      ],
+      "bbox": {
+        "x": 6,
+        "y": 8,
+        "w": 311,
+        "h": 273
+      },
+      "foot": {
+        "x": 168,
+        "y": 270
+      },
+      "headContact": {
+        "x": 112,
+        "y": 171
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 39589,
+      "sha256": "ca31754b878bddd2685781b961b8a3ce08c5d6fdef1b35e554fda957a7f22e93"
+    },
+    {
+      "state": "watch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/tabby-watch.png",
+      "source": "source.png",
+      "source_crop": [
+        686,
+        632,
+        952,
+        925
+      ],
+      "size": [
+        266,
+        293
+      ],
+      "bbox": {
+        "x": 6,
+        "y": 8,
+        "w": 252,
+        "h": 277
+      },
+      "foot": {
+        "x": 87,
+        "y": 276
+      },
+      "headContact": {
+        "x": 90,
+        "y": 56
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 30848,
+      "sha256": "1844e0c84a0e153f6e8ebd0bde2c7e6bf8f457230d0a7a058d8ae7fca849d172"
+    },
+    {
+      "state": "lookUp",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/tabby-lookUp.png",
+      "source": "source.png",
+      "source_crop": [
+        992,
+        613,
+        1252,
+        929
+      ],
+      "size": [
+        260,
+        316
+      ],
+      "bbox": {
+        "x": 6,
+        "y": 8,
+        "w": 246,
+        "h": 300
+      },
+      "foot": {
+        "x": 81,
+        "y": 295
+      },
+      "headContact": {
+        "x": 104,
+        "y": 42
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 31217,
+      "sha256": "d247bbab0eeb5fbbb9a0e94a8c3a2f1405b7dadd20e40fab038ebf4d179183d3"
+    },
+    {
+      "state": "nuzzleA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/tabby-nuzzleA.png",
+      "source": "source.png",
+      "source_crop": [
+        50,
+        912,
+        318,
+        1227
+      ],
+      "size": [
+        268,
+        315
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 6,
+        "w": 252,
+        "h": 301
+      },
+      "foot": {
+        "x": 83,
+        "y": 297
+      },
+      "headContact": {
+        "x": 79,
+        "y": 55
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 30768,
+      "sha256": "26a0e08e17054153702351ecd37ff7dbb688422c6adae89e7e2152bdcd648f7d"
+    },
+    {
+      "state": "nuzzleB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/tabby/tabby-nuzzleB.png",
+      "source": "source.png",
+      "source_crop": [
+        337,
+        915,
+        576,
+        1227
+      ],
+      "size": [
+        239,
+        312
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 5,
+        "w": 223,
+        "h": 299
+      },
+      "foot": {
+        "x": 181,
+        "y": 294
+      },
+      "headContact": {
+        "x": 163,
+        "y": 50
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 24318,
+      "sha256": "e6aeb6a1f6fbda19308a0b360d9b5241e0f33404cff5e53926479ce72592d215"
+    }
+  ]
+}

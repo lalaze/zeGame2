@@ -1,0 +1,112 @@
+{
+  "bboxAlphaThreshold": "alpha > 128; not full nonzero-alpha box",
+  "identitySource": "src/game/data.ts MENU and RECIPES; src/render/sprites.ts MENU_ENVELOPES",
+  "assets": [
+    {
+      "itemId": "espresso",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-main-menu-v1/espresso.png",
+      "source_crop": [
+        58,
+        193,
+        589,
+        652
+      ],
+      "size": [
+        531,
+        459
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 511,
+        "h": 439
+      },
+      "anchor": {
+        "x": 265.5,
+        "y": 448
+      },
+      "oldMenuEnvelope": [
+        12,
+        12
+      ],
+      "suggestedMaxWidth": 12,
+      "optionalMaxWidth": 14,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 63106
+    },
+    {
+      "itemId": "latte",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-main-menu-v1/latte.png",
+      "source_crop": [
+        709,
+        115,
+        1391,
+        655
+      ],
+      "size": [
+        682,
+        540
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 662,
+        "h": 520
+      },
+      "anchor": {
+        "x": 341.0,
+        "y": 529
+      },
+      "oldMenuEnvelope": [
+        12,
+        11
+      ],
+      "suggestedMaxWidth": 12,
+      "optionalMaxWidth": 14,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 93237
+    },
+    {
+      "itemId": "eggtart",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-main-menu-v1/eggtart.png",
+      "source_crop": [
+        1504,
+        171,
+        2117,
+        644
+      ],
+      "size": [
+        613,
+        473
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 593,
+        "h": 453
+      },
+      "anchor": {
+        "x": 306.5,
+        "y": 462
+      },
+      "oldMenuEnvelope": [
+        12,
+        9
+      ],
+      "suggestedMaxWidth": 12,
+      "optionalMaxWidth": 14,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 74306
+    }
+  ],
+  "renderNote": "Preserve aspect and fit inside appropriate menu/table envelope. Tiny-size recognizability requires runtime review, not guaranteed by high-res source."
+}

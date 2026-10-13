@@ -1,0 +1,271 @@
+{
+  "version": 1,
+  "identityCount": 29,
+  "frameCount": 435,
+  "status": "Frozen source-QA handoff; runtime pending root checkpoint",
+  "frozenAtUTC": "2026-10-13T10:16:06.855263+00:00",
+  "casts": [
+    {
+      "appearanceId": 1,
+      "name": "海盐条纹",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-01/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "984fa2c1d2a5194d1f965007d2cdb20a17ef87cd0f90cfcf41cb0062e4176ac3",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 2,
+      "name": "花店姑娘",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-02/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-02/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "fea112d3d6c698ac4f5333938bd0d8285635feda518de63041c6bcc3d1152637",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 3,
+      "name": "蜂蜜围巾",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-03/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-03/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "2244410720c8bf8fd9828b84eae424158a649f7cca1067b3b733dfcec5f73566",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 4,
+      "name": "紫藤画家",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-04/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-04/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "e60d2ca02ac9ee55b0db6178dafcabb928632c810c59695fe1a877613f3d6066",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 5,
+      "name": "草莓裙摆",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-05/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-05/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "d02b55101b50eea6929f10f8f0e56b0c342c044d03f817af66235d34d7b9da60",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 6,
+      "name": "薄荷骑手",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-06/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-06/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "b2a783f1dce7abfced931a154057d0c1bc62b1b906c87a7eb77282dd84f6113c",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 7,
+      "name": "奶油书迷",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-07/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-07/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "9737b0c49c6eadfd1071df02444d76e496a0bcc4e9e90002d4274d8184918df0",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 8,
+      "name": "枫叶邮差",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-08/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-08/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "7a783fb48b1c6c250f525fb944dfb5786bb000a203243f3d89033f1df3fc4c68",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 9,
+      "name": "蓝莓水手",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-09/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-09/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "172077dcbdc567700d68be90bb6add231ff6de4e7b9d890261c6350b80711d31",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 10,
+      "name": "苔绿园丁",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-10/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-10/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "2e03ba51cfcff749d328e31722b951dfb86b92633546658a4330d77c9cd9b285",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 11,
+      "name": "杏黄毛衣",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-11/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-11/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "67fb3661582f7de6ac3e5892120e01a713d4db862f713e2a4670e3d04c65ec86",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 12,
+      "name": "丁香发带",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-12/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-12/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "d56636e86ab76d5a876ac43791b74745f7f97aad0e0dda9171ed0f3fef10b04e",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 13,
+      "name": "桃子开衫",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-13/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-13/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "dd907677613b19e8887694408e3c306afc58f6aecabf28330a9f2c9203e92e95",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 14,
+      "name": "湖绿旅人",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-14/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-14/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "b56cf37148630a1360164336fde20b2c7c337995532b7736ea1fd4c0f0689124",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 15,
+      "name": "燕麦绒帽",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-15/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-15/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "2f699142f4e2ab9719cf11563df36dab793963148d8d99d295927abaccd54471",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 16,
+      "name": "砖红背心",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-16/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-16/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "db120e697b78586221cee8a96d9293fc9d6deb7e3bd5f2dd2da6aa1311b15c43",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 17,
+      "name": "雨天风衣",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-17/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-17/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "baf521df30e7fb953981bc3c2891e0afe8f3b1bc4f090344aaf8b5e0c13dc1bf",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 18,
+      "name": "青苹果领结",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-18/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-18/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "95dc910e97c4a88d72928d2cf67d8904ff25a2affce28490421df35d01c3db6c",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 19,
+      "name": "向日葵裙",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-19/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-19/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "64fc6b5d4e6e87ebbd8aa32b1c3db2d518376602663b3ab8fd58dbfd45951c23",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 20,
+      "name": "葡萄连帽衫",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-20/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-20/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "8df10f60b10cd099404a67e4406a6e7a8304a65b6fe24af549a6fc16d9817c5d",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 21,
+      "name": "玫瑰围巾",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-21/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-21/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "7cba9262b4d1e27f8e67fe408d4a69f43d36101383137c2ce7b29f263fb6c182",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 22,
+      "name": "松石背带",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-22/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-22/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "7bde1c4ea57fe1115de9e84eaa0ab132ca31674576e119f5e2b697fb131142e6",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 23,
+      "name": "香草针织",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-23/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-23/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "24be72ae0e049da8bea455abc198f5ea1d53709b25456e34271efa410eca4735",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 24,
+      "name": "肉桂短夹克",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-24/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-24/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "e7936a62f5a14106d4fc21322ef016e30c24ca72d2b08d4f40731a152458810e",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 25,
+      "name": "雾蓝发辫",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-25/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-25/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "286e8e47919b961049af43ce9817e1aa17a419d87e2698fd983851e2e0b493f0",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 26,
+      "name": "橄榄学者",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-26/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-26/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "9f2d9760f093b40a881c8d3011d7188dbe342d8fa5a6513f51eca4885b579966",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 27,
+      "name": "金盏牛角扣",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-27/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-27/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "f581342c6d11ded92d066456f7e774a33fcd325c11dcc6e9ad27852b681ff43f",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 28,
+      "name": "紫苏小领衫",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-28/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-28/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "eac751c5c774864b596d13de1417c36d09f553fc40e7f171528ee3c237f9e549",
+      "status": "source QA ready; runtime pending"
+    },
+    {
+      "appearanceId": 29,
+      "name": "蜜桃旅行包",
+      "manifest": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-29/renderer-manifest.json",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-bulk-customers-v1/cast-29/source.png",
+      "frameCount": 15,
+      "manifestSHA256": "bb90f10602ca0fea8b61118ba0cca9e314bdd25f93e0a655faacd699cf3bde5e",
+      "status": "source QA ready; runtime pending"
+    }
+  ],
+  "audit": "audit-report.json"
+}

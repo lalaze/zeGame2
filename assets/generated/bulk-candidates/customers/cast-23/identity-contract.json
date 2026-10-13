@@ -1,0 +1,25 @@
+{
+  "id": 23,
+  "name": "香草针织",
+  "look": {
+    "skin": 3,
+    "hair": 1,
+    "hairStyle": 2,
+    "shirt": 7,
+    "pants": 0
+  },
+  "hairstyle": 2,
+  "outfit": "stripe",
+  "accessory": "satchel",
+  "accent": "#ba8c6a",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#80533f",
+    "hair": "#976546",
+    "shirt": "#e5d7ba",
+    "pants": "#53637b"
+  },
+  "hatPalette": "#8ba477",
+  "description": "Fixed customer cast 23 (香草针织): warm skin #80533f; hair #976546 in long straight hair falling to the lower back, long straight side locks, side-part fringe. Outfit: #e5d7ba knitted sweater with exactly two broad cream horizontal stripes around torso and sleeves. Lower clothing color #53637b; warm dark brown leather shoes. Accent #ba8c6a. A small #ba8c6a cross-body shoulder satchel with diagonal strap and gold clasp, resting at hip in EVERY pose including seated; it is a worn accessory, never held."
+}

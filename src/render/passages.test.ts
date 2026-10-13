@@ -123,8 +123,10 @@ describe('guest doorway rendering', () => {
       ...[-10, -3, 4, 11].map(offset => [315, y + offset, 5, 2, '#efcf94'] as Rect),
       [316, y - 2, 3, 4, '#e6b34d'],
     );
-    expect(guestDoor(false, 0)).toEqual(expected);
-    expect(guestDoor(true, 1)).toEqual(expected);
+    // Joinery highlights can add marks; physical doorway layers and all locked
+    // barrier primitives must still exist, independent of the service door.
+    for (const rect of expected) expect(guestDoor(false, 0)).toContainEqual(rect);
+    expect(guestDoor(true, 1)).toEqual(guestDoor(false, 0));
     for (const area of ['reading', 'greenhouse', 'terrace'] as const) {
       expect(boundaries(area, true, 1, open).some(rect => SILL_COLORS.includes(rect[4]))).toBe(false);
     }

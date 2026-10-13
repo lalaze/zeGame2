@@ -5,6 +5,7 @@ import { decorDef } from '../game/decor';
 import { mix, ramp, type Ramp } from './color';
 import { drawText, textWidth } from './font';
 import { OUTLINE, pixelSprite } from './sprites';
+import { cabinetPanel, leafySprig, timberBeam, WARM_MATERIAL } from './materials';
 
 type Ctx = CanvasRenderingContext2D;
 
@@ -53,9 +54,9 @@ interface WallStyle {
 }
 
 const WALLS: Record<string, WallStyle> = {
-  wall_cream: { base: '#eee2c7', accent: '#e2d4b3', pattern: 'stripes', wainscot: '#8c6950' },
-  wall_mint: { base: '#cfe8d3', accent: '#b6dbbf', pattern: 'stripes', wainscot: '#5f9479' },
-  wall_rose: { base: '#f6d6d6', accent: '#ecbcc0', pattern: 'stripes', wainscot: '#b9707d' },
+  wall_cream: { base: '#f4e6c7', accent: '#ead8b3', pattern: 'stripes', wainscot: '#865332' },
+  wall_mint: { base: '#dce4c9', accent: '#c4d0ab', pattern: 'stripes', wainscot: '#627451' },
+  wall_rose: { base: '#f0d8c2', accent: '#dfbaa5', pattern: 'stripes', wainscot: '#9b6750' },
   wall_dots: { base: '#d5e6f4', accent: '#f4f8fb', pattern: 'flowers', wainscot: '#5d7fa8' },
   wall_brick: { base: '#b9634a', accent: '#d9a58b', pattern: 'brick', wainscot: '#5a3a28' },
   wall_walnut: { base: '#7a4e33', accent: '#5f3a25', pattern: 'panels', wainscot: '#4a2e1e' },
@@ -67,6 +68,16 @@ const wallStyle = (id: string) => WALLS[id] ?? WALLS.wall_cream;
 export function paintWall(ctx: Ctx, id: string, x0: number, y0: number, w: number, h: number, t = 0): void {
   const s = wallStyle(id);
   const r = ramp(s.base);
+  // One small palette per repaint; never parse the same hex in the pixel loop.
+  const seam = mix(s.accent, '#b89a6c', 0.25);
+  const stripeLight = mix(s.base, '#fff8e4', 0.65);
+  const budColor = mix(s.accent, '#be9860', 0.3);
+  const stem = mix(s.accent, '#63775e', 0.4);
+  const trellis = mix(s.base, '#f4e6c7', 0.3);
+  const brickEdge = mix(s.base, '#efa77c', 0.32);
+  const brickChip = mix(s.base, '#edb48b', 0.26);
+  const brickShade = mix(s.base, '#87452e', 0.2);
+  const twinkle = Math.floor(t * 1.5);
   rect(ctx, x0, y0, w, h, s.base);
   for (let y = y0; y < y0 + h; y++) {
     for (let x = x0; x < x0 + w; x++) {
@@ -75,10 +86,14 @@ export function paintWall(ctx: Ctx, id: string, x0: number, y0: number, w: numbe
       let c: string | null = null;
       switch (s.pattern) {
         case 'stripes': {
-          const m = lx % 16;
-          if (m >= 8) c = s.accent;
-          if (m === 8) c = ramp(s.accent).lo;
-          if (m >= 9 && m <= 14 && ly % 12 === 6 && m % 2 === 1) c = r.hi;
+          const m = lx % 20;
+          // Woven wallpaper: broad quiet cream panels, fine seam, paired flower buds.
+          if (m === 0) c = seam;
+          if (m === 1 || m === 18) c = stripeLight;
+          if (m >= 14 && m <= 17) c = s.accent;
+          const bud = ly % 15;
+          if ((m === 8 && (bud === 4 || bud === 6)) || (bud === 5 && (m === 7 || m === 9))) c = budColor;
+          if (m === 8 && bud === 5) c = '#fff4d4';
           break;
         }
         case 'flowers': {
@@ -86,7 +101,9 @@ export function paintWall(ctx: Ctx, id: string, x0: number, y0: number, w: numbe
           const cy = ly % 12;
           if ((cx === 7 && (cy === 5 || cy === 7)) || (cy === 6 && (cx === 6 || cx === 8))) c = s.accent;
           else if (cx === 7 && cy === 6) c = '#f2c14e';
-          else if (cx === 9 && cy === 8) c = r.lo;
+          else if ((cx === 9 && cy === 8) || (cx === 5 && cy === 4)) c = '#9fac92';
+          else if (cx === 7 && cy >= 8 && cy <= 10) c = stem;
+          else if ((cx + cy) % 12 === 0) c = trellis;
           break;
         }
         case 'brick': {
@@ -96,20 +113,25 @@ export function paintWall(ctx: Ctx, id: string, x0: number, y0: number, w: numbe
           if (by === 7 || bx === 15) c = s.accent;
           else if (by === 0) c = r.hi;
           else if (by === 6) c = r.lo;
-          else if (hash(Math.floor((lx + (row % 2) * 8) / 16), row) < 0.3) c = ramp(s.base).lo;
+          else if (bx === 0) c = brickEdge;
+          else if ((bx === 4 || bx === 10) && by === 2) c = brickChip;
+          else if (hash(Math.floor((lx + (row % 2) * 8) / 16), row) < 0.3) c = brickShade;
           break;
         }
         case 'panels': {
-          const m = lx % 10;
-          if (m === 0) c = ramp(s.base).dark;
-          else if (m === 1) c = r.hi;
-          else if (hash(lx, Math.floor(ly / 3)) < 0.08) c = s.accent;
+          const m = lx % 24, py = ly % 26;
+          if (m === 0 || py === 0) c = '#39281f';
+          else if (m === 1 || py === 1) c = '#b88650';
+          else if ((m === 4 || m === 19) && py > 3 && py < 23) c = m === 4 ? '#4e3122' : '#98643e';
+          else if ((py === 4 || py === 22) && m > 3 && m < 20) c = py === 4 ? '#4e3122' : '#98643e';
+          else if (hash(lx, Math.floor(ly / 5)) < 0.06) c = s.accent;
           break;
         }
         case 'stars': {
           const v = hash(lx, ly);
-          if (v < 0.006 && (Math.floor(t * 1.5) + lx) % 5 !== 0) c = s.accent;
-          else if (v > 0.9985) c = '#8fa3e8';
+          if (v < 0.006 && (twinkle + lx) % 5 !== 0) c = s.accent;
+          else if (v > 0.9985) c = '#bcc39d';
+          else if ((lx % 31 === 12 && ly % 23 >= 5 && ly % 23 <= 7) || (ly % 23 === 6 && lx % 31 >= 11 && lx % 31 <= 13)) c = '#d8bb76';
           break;
         }
       }
@@ -126,22 +148,16 @@ export function paintWall(ctx: Ctx, id: string, x0: number, y0: number, w: numbe
 }
 
 export function paintWainscot(ctx: Ctx, id: string, x0: number, y0: number, w: number, h: number): void {
-  const wood = ramp(wallStyle(id).wainscot);
-  rect(ctx, x0, y0, w, h, wood.base);
-  // Vertical boards with grain, a dark gap and a bright bevel on each.
-  for (let bx = x0, i = 0; bx < x0 + w; bx += 8, i++) {
-    const bw = Math.min(8, x0 + w - bx);
-    const tone = hash(i, 7) < 0.3 ? ramp(mix(wood.base, wood.lo, 0.35)) : wood;
-    rect(ctx, bx, y0, bw, h, tone.base);
-    grain(ctx, bx + 1, y0 + 1, bw - 2, h - 2, tone, 'v', i);
-    rect(ctx, bx, y0, 1, h, wood.dark);
-    rect(ctx, bx + 1, y0, 1, h, tone.hi);
+  const base = wallStyle(id).wainscot;
+  rect(ctx, x0, y0, w, h, WARM_MATERIAL.shade);
+  // Recessed cabinet-like panels and square stiles match the timber room frame.
+  for (let bx = x0; bx < x0 + w; bx += 21) {
+    const bw = Math.min(21, x0 + w - bx);
+    cabinetPanel(ctx, bx, y0, bw, h, base);
   }
-  // Chair rail on top, shadow at the bottom.
-  rect(ctx, x0, y0 - 3, w, 1, wood.hi);
-  rect(ctx, x0, y0 - 2, w, 2, wood.base);
-  rect(ctx, x0, y0, w, 1, wood.dark);
-  rect(ctx, x0, y0 + h - 1, w, 1, wood.lo);
+  timberBeam(ctx, x0, y0 - 3, w, 4, false, base);
+  rect(ctx, x0, y0 + h - 2, w, 2, WARM_MATERIAL.shade);
+  rect(ctx, x0, y0 + h - 2, w, 1, mix(base, '#c98c4d', 0.5));
 }
 
 export const wainscotColor = (id: string) => wallStyle(id).wainscot;
@@ -154,22 +170,30 @@ export function paintFloor(ctx: Ctx, id: string, x0: number, y0: number, w: numb
   const tiles = (a: string, b: string, size: number, speckle = 0.02) => {
     for (let y = y0, ty = 0; y < y0 + h; y += size, ty++) {
       for (let x = x0, tx = 0; x < x0 + w; x += size, tx++) {
-        const c = (tx + ty) % 2 ? b : a;
+        const c = mix((tx + ty) % 2 ? b : a, '#e0cda9', hash(tx + 3, ty) * 0.1);
         const r = ramp(c);
         const tw = Math.min(size, x0 + w - x);
         const th = Math.min(size, y0 + h - y);
+        const tileLight = mix(c, '#fff9e8', 0.5);
+        const mineralShade = mix(c, r.lo, 0.6);
         rect(ctx, x, y, tw, th, c);
         rect(ctx, x + 1, y + 1, tw - 2, 1, r.hi);
         rect(ctx, x + 1, y + 1, 1, th - 2, r.hi);
         rect(ctx, x + 1, y + th - 2, tw - 2, 1, r.lo);
-        rect(ctx, x + tw - 2, y + 1, 1, th - 2, r.lo);
+        rect(ctx, x + tw - 2, y + 1, 1, th - 2, mix(c, '#9c8061', 0.34));
+        rect(ctx, x + 2, y + 2, tw - 5, 1, mix(c, '#fff9e8', 0.45));
+        rect(ctx, x + 2, y + 3, 1, Math.max(1, th - 7), mix(c, '#fff9e8', 0.35));
+        if (tw > 9 && th > 9) {
+          rect(ctx, x + 4 + tx % 3, y + th - 5, 3, 1, tileLight);
+          rect(ctx, x + tw - 5, y + 5 + ty % 3, 1, 2, mix(c, '#c4ad82', 0.24));
+        }
         const grout = mix(c, '#6c645b', 0.3);
         rect(ctx, x, y + th - 1, tw, 1, grout);
         rect(ctx, x + tw - 1, y, 1, th, grout);
         for (let sy = y + 2; sy < y + th - 2; sy++) {
           for (let sx = x + 2; sx < x + tw - 2; sx++) {
             const v = hash(sx, sy);
-            if (v < speckle) rect(ctx, sx, sy, 1, 1, v < speckle / 3 ? r.hi : mix(c, r.lo, 0.6));
+            if (v < speckle) rect(ctx, sx, sy, 1, 1, v < speckle / 3 ? r.hi : mineralShade);
           }
         }
       }
@@ -187,7 +211,11 @@ export function paintFloor(ctx: Ctx, id: string, x0: number, y0: number, w: numb
           rect(ctx, bx, y, bw, 8, c);
           rect(ctx, bx, y, bw, 1, ramp(c).hi);
           rect(ctx, bx, y + 7, bw, 1, '#6e4128');
-          if (x >= x0) rect(ctx, x, y, 1, 7, '#6e4128');
+          if (x >= x0) {
+            rect(ctx, x, y, 1, 7, '#6e4128');
+            rect(ctx, x + 2, y + 2, 1, 1, '#795b40');
+            rect(ctx, x + 2, y + 5, 1, 1, '#795b40');
+          }
           // Grain and the odd knot.
           grain(ctx, bx + 1, y + 1, bw - 1, 6, ramp(c), 'h', i * 13 + row);
           if (bw > 24 && hash(i * 7, row) < 0.25) {
@@ -199,28 +227,34 @@ export function paintFloor(ctx: Ctx, id: string, x0: number, y0: number, w: numb
       return;
     }
     case 'floor_mint':
-      return tiles('#dff2e4', '#c3e3cf', 16);
+      return tiles('#e5e8d2', '#c8d4b5', 16, 0.025);
     case 'floor_terrazzo': {
       tiles('#ece5d8', '#e6ddcd', 32, 0);
-      const chips = ['#d98c7a', '#7fb2a0', '#e8c06a', '#9a8f86', '#ffffff'];
+      const chips = ['#b8856b', '#8f9b73', '#d6b573', '#a59980', '#faf0d7'];
       for (let y = y0; y < y0 + h; y += 2) {
         for (let x = x0; x < x0 + w; x += 2) {
           const v = hash(x, y);
-          if (v < 0.07) rect(ctx, x, y, v < 0.02 ? 2 : 1, 1, chips[Math.floor(v * 1000) % chips.length]);
+          if (v < 0.035) {
+            rect(ctx, x, y, v < 0.008 ? 2 : 1, 1, chips[Math.floor(v * 1000) % chips.length]);
+            if (v < 0.006 && y + 1 < y0 + h) rect(ctx, x + 1, y + 1, 1, 1, chips[Math.floor(v * 1000) % chips.length]);
+          }
         }
       }
       return;
     }
     case 'floor_herringbone': {
-      const a = ramp('#c38450');
-      const b = ramp('#a96c3c');
+      const a = ramp('#b88d63');
+      const b = ramp('#b28a60');
+      const speckleA = mix(a.base, '#d6b18a', 0.25);
+      const speckleB = mix(b.base, '#d6b18a', 0.25);
       for (let y = y0; y < y0 + h; y++) {
         for (let x = x0; x < x0 + w; x++) {
           const lx = x - x0;
           const v = lx % 16 < 8 ? lx % 8 : 7 - (lx % 8);
           const k = (y - y0 + v) % 8;
           const tone = Math.floor((y - y0 + v) / 8) % 2 ? b : a;
-          rect(ctx, x, y, 1, 1, k === 0 ? tone.hi : k === 7 ? tone.dark : tone.base);
+          const joint = (Math.floor(lx / 8) + Math.floor((y - y0 + v) / 8)) % 4 === 0 && lx % 8 === 7;
+          rect(ctx, x, y, 1, 1, joint ? '#a17b56' : k === 0 ? '#c6a078' : k === 7 ? '#a8815a' : hash(Math.floor(lx / 3), y) < 0.055 ? (tone === a ? speckleA : speckleB) : tone.base);
         }
       }
       return;
@@ -228,14 +262,17 @@ export function paintFloor(ctx: Ctx, id: string, x0: number, y0: number, w: numb
     case 'floor_marble': {
       tiles('#f4f0ea', '#ebe4da', 32, 0);
       for (let y = y0; y < y0 + h; y++) {
+        const curve = Math.floor(Math.sin(y / 7) * 3);
         for (let x = x0; x < x0 + w; x++) {
-          if ((x + 2 * y) % 53 === 0 || (x * 3 - y) % 89 === 0) rect(ctx, x, y, 1, 1, '#cfc6b8');
+          const vein = x + 2 * y + curve;
+          if (vein % 53 === 0 || (x * 3 - y) % 89 === 0) rect(ctx, x, y, 1, 1, '#b8ac95');
+          else if (vein % 53 === 1) rect(ctx, x, y, 1, 1, '#e0d3b8');
         }
       }
       return;
     }
     default:
-      return tiles('#ede3ce', '#d3c5ae', 16, 0.012);
+      return tiles('#f1e5ca', '#e4d5b6', 16, 0.025);
   }
 }
 
@@ -249,8 +286,8 @@ interface CounterStyle {
 }
 
 const COUNTERS: Record<string, CounterStyle> = {
-  counter_oak: { top: '#c99d70', front: '#8f664c' },
-  counter_walnut: { top: '#8c5a3b', front: '#5e3a26' },
+  counter_oak: { top: '#c98c4d', front: '#865332' },
+  counter_walnut: { top: '#98643e', front: '#543425' },
   counter_marble: { top: '#f3efe8', front: '#e2dace', veins: '#c9c0b2' },
   counter_pink: { top: '#f7c3cf', front: '#e98fa6' },
   counter_gold: { top: '#f3dfa6', front: '#363c5c', trim: '#e7b84a' },
@@ -287,23 +324,20 @@ export function paintCounter(ctx: Ctx, id: string, x: number, y: number, w: numb
   // Front face: vertical boards, or raised panels for the fancy counters.
   const fy = y + topH;
   rect(ctx, x, fy, w, frontH, front.base);
-  if (wooden) {
-    for (let bx = x, i = 0; bx < x + w; bx += 7, i++) {
-      const bw = Math.min(7, x + w - bx);
-      grain(ctx, bx + 1, fy + 1, bw - 1, frontH - 4, front, 'v', i + 3);
-      rect(ctx, bx, fy, 1, frontH, front.dark);
-      rect(ctx, bx + 1, fy + 1, 1, frontH - 4, front.hi);
+  const panelW = Math.min(26, w - 4);
+  if (panelW > 7) for (let px = x + 2; px < x + w - 3; px += panelW + 2) {
+    const pw = Math.min(panelW, x + w - 2 - px);
+    if (pw < 8) continue;
+    cabinetPanel(ctx, px, fy + 2, pw, frontH - 5, front.base);
+    if (s.trim) {
+      rect(ctx, px + 2, fy + 4, pw - 4, 1, s.trim);
+      rect(ctx, px + 2, fy + 4, 1, frontH - 10, s.trim);
     }
-  } else {
-    const panelW = Math.min(30, w - 6);
-    for (let px = x + 4; px + panelW <= x + w - 3; px += panelW + 5) {
-      rect(ctx, px, fy + 4, panelW, frontH - 9, front.lo);
-      rect(ctx, px + 1, fy + 5, panelW - 2, frontH - 11, front.base);
-      rect(ctx, px + 1, fy + 5, panelW - 2, 1, front.hi);
-      if (s.trim) rect(ctx, px, fy + 4, panelW, 1, s.trim);
-    }
-    if (s.veins) for (let vx = x + 2; vx < x + w; vx += 13) rect(ctx, vx, fy + 3 + (vx % 5), 3, 1, s.veins);
+    if (s.veins) for (let vx = px + 5; vx < px + pw - 3; vx += 7) rect(ctx, vx, fy + 5 + vx % 4, 2, 1, s.veins);
   }
+  // Hand-planed end boards and a dimensional bullnose on every worktop.
+  rect(ctx, x, y + topH - 4, w, 1, mix(top.base, '#ffdc97', 0.6));
+  rect(ctx, x + 1, y + topH - 3, w - 2, 1, mix(top.base, '#f3c986', 0.38));
   // Shadow under the lip and a dark kick plate.
   rect(ctx, x, fy, w, 1, front.dark);
   rect(ctx, x, fy + 1, w, 1, front.lo);
@@ -319,12 +353,16 @@ export function paintCounter(ctx: Ctx, id: string, x: number, y: number, w: numb
 
 export function paintArt(ctx: Ctx, id: string, x: number, y: number, t = 0): void {
   if (id === 'art_none') return;
+  // A little hanging wire and a recessed, mitered gilded/timber frame.
   const frameColor = id === 'art_bean' ? '#3e2618' : id === 'art_cat' ? '#8a5a3c' : '#d9a441';
   const frame = ramp(frameColor);
   rect(ctx, x, y, 26, 22, OUTLINE);
   rect(ctx, x + 1, y + 1, 24, 20, frame.base);
   rect(ctx, x + 1, y + 1, 24, 1, frame.hi);
   rect(ctx, x + 1, y + 20, 24, 1, frame.lo);
+  rect(ctx, x + 2, y + 2, 22, 1, '#f0cc87');
+  rect(ctx, x + 23, y + 3, 1, 17, '#66482e');
+  rect(ctx, x + 2, y + 19, 22, 1, '#66482e');
   const ix = x + 3;
   const iy = y + 3;
   const iw = 20;
@@ -339,6 +377,12 @@ export function paintArt(ctx: Ctx, id: string, x: number, y: number, t = 0): voi
       rect(ctx, ix + 8, iy + 8, 12, 4, '#6fa255');
       rect(ctx, ix, iy + 11, iw, 5, '#5e9248');
       rect(ctx, ix + 4, iy + 12, 6, 1, '#7fb55e');
+      rect(ctx, ix + 11, iy + 8, 6, 5, '#dcc49a');
+      rect(ctx, ix + 10, iy + 7, 8, 2, '#ad7250');
+      rect(ctx, ix + 12, iy + 10, 2, 3, '#665642');
+      rect(ctx, ix + 3, iy + 8, 2, 5, '#4c673d');
+      rect(ctx, ix + 2, iy + 7, 4, 2, '#789050');
+      for (let dy = 0; dy < 3; dy++) rect(ctx, ix + 13 - dy, iy + 13 + dy, 3 + dy * 2, 1, '#e0c994');
       return;
     case 'art_cat':
       rect(ctx, ix, iy, iw, ih, '#f6c5d1');
@@ -352,6 +396,12 @@ export function paintArt(ctx: Ctx, id: string, x: number, y: number, t = 0): voi
       rect(ctx, ix + 12, iy + 8, 1, 2, OUTLINE);
       rect(ctx, ix + 9, iy + 10, 2, 1, '#f08f8f');
       rect(ctx, ix + 8, iy + 11, 4, 2, '#fdf1e0');
+      rect(ctx, ix + 5, iy + 6, 2, 1, '#b2753e');
+      rect(ctx, ix + 12, iy + 6, 2, 1, '#b2753e');
+      rect(ctx, ix + 9, iy + 5, 1, 2, '#b2753e');
+      rect(ctx, ix + 3, iy + 10, 3, 1, '#f4e6c7');
+      rect(ctx, ix + 14, iy + 10, 3, 1, '#f4e6c7');
+      rect(ctx, ix + 6, iy + 13, 9, 2, '#c69358');
       return;
     case 'art_bean': {
       rect(ctx, ix, iy, iw, ih, '#fbf1e0');
@@ -361,6 +411,12 @@ export function paintArt(ctx: Ctx, id: string, x: number, y: number, t = 0): voi
         rect(ctx, ix + 10 - half, iy + 2 + row, half * 2, 1, row < 4 ? bean.hi : row > 8 ? bean.lo : bean.base);
       }
       for (let i = 0; i < 10; i++) rect(ctx, ix + 9 + (i % 3 === 1 ? 1 : 0), iy + 3 + i, 1, 1, '#c48a55');
+      for (let i = 0; i < 4; i++) {
+        rect(ctx, ix + 2 + i, iy + 11 - i * 2, 1, 2, '#7b8a55');
+        rect(ctx, ix + 1 + i, iy + 11 - i * 2, 2, 1, '#a3aa6d');
+      }
+      rect(ctx, ix + 15, iy + 12, 3, 2, '#be7650');
+      rect(ctx, ix + 17, iy + 10, 2, 2, '#c79564');
       return;
     }
     case 'art_starry': {
@@ -375,6 +431,10 @@ export function paintArt(ctx: Ctx, id: string, x: number, y: number, t = 0): voi
       rect(ctx, ix + 2, iy + 5, 3, 11, '#1a2a1d');
       rect(ctx, ix + 3, iy + 3, 1, 2, '#1a2a1d');
       rect(ctx, ix + 8, iy + 12, 10, 2, '#3a4f8a');
+      for (let i = 0; i < 4; i++) {
+        rect(ctx, ix + 6 + i * 3, iy + 12 - i % 2, 2, 4 + i % 2, '#4d5e72');
+        rect(ctx, ix + 6 + i * 3, iy + 13 - i % 2, 1, 1, '#e3c585');
+      }
       return;
     }
   }
@@ -383,8 +443,8 @@ export function paintArt(ctx: Ctx, id: string, x: number, y: number, t = 0): voi
 // ---------------------------------------------------------------- sprites
 
 const LEAF = {
-  g: '#6fb26a', G: '#4e8a4f', l: '#9fd47e', r: '#d2774f', R: '#a8553a', q: '#e8936a',
-  y: '#f2d14e', Y: '#d9a72b', p: '#ef5d7a', P: '#c23d5a', b: '#7a4a2a', w: '#fdf6ec',
+  g: '#627451', G: '#374d32', l: '#a4b45f', r: '#bc7149', R: '#81482f', q: '#e6a268',
+  y: '#edc858', Y: '#b88932', p: '#d87769', P: '#a14442', b: '#74502e', w: '#f4e6c7',
 };
 
 const lazy = (make: () => HTMLCanvasElement) => {
@@ -392,69 +452,73 @@ const lazy = (make: () => HTMLCanvasElement) => {
   return () => (c ??= make());
 };
 
+function botanical(w: number, h: number, type: 'fern' | 'monstera' | 'lemon'): HTMLCanvasElement {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  const ctx = c.getContext('2d')!;
+  const cx = Math.floor(w / 2), potY = h - 6;
+  // Terracotta lip, visible soil, tapered body and a reflected warm lower edge.
+  rect(ctx, cx - 4, potY, 8, 2, '#543425');
+  rect(ctx, cx - 4, potY, 8, 1, '#e6a268');
+  rect(ctx, cx - 3, potY + 1, 6, 1, '#624529');
+  rect(ctx, cx - 3, potY + 2, 6, 3, '#ba7147');
+  rect(ctx, cx - 3, potY + 2, 1, 2, '#e7a369');
+  rect(ctx, cx + 2, potY + 2, 1, 3, '#814b31');
+  rect(ctx, cx - 2, potY + 5, 4, 1, '#68442c');
+  if (type === 'fern') {
+    for (let stem = -3; stem <= 3; stem++) for (let i = 0; i < 7 - Math.abs(stem); i++) {
+      const x = cx + Math.round(stem * i / 3), y = potY - i;
+      rect(ctx, x, y, 1, 1, '#485e34');
+      rect(ctx, x - 1, y - 1, 2, 1, i % 2 ? '#a0ae5b' : '#72884b');
+      rect(ctx, x + 1, y, 1, 1, '#354c31');
+    }
+  } else if (type === 'monstera') {
+    rect(ctx, cx, 3, 1, potY - 2, '#6e7540');
+    for (const [dx, dy] of [[-4, 3], [3, 2], [-5, 7], [5, 6], [0, 5]]) {
+      const x = cx + dx, y = dy;
+      rect(ctx, x - 2, y - 1, 5, 3, '#374d32');
+      rect(ctx, x - 1, y - 2, 3, 4, '#627451');
+      rect(ctx, x - 2, y - 1, 3, 1, '#a0ae5b');
+      rect(ctx, x, y - 1, 1, 3, '#8e9a4e');
+      rect(ctx, x + 2, y, 1, 1, '#a4b45f');
+    }
+  } else {
+    rect(ctx, cx - 1, 5, 2, potY - 4, '#735032');
+    rect(ctx, cx - 1, 7, 1, potY - 6, '#b28b4e');
+    leafySprig(ctx, cx, 5, 5, 2);
+    leafySprig(ctx, cx - 2, 7, 4, 5);
+    for (const [dx, dy] of [[-4, 4], [3, 3], [1, 8], [-3, 8]]) {
+      rect(ctx, cx + dx, dy, 2, 2, '#c9952e');
+      rect(ctx, cx + dx, dy, 1, 1, '#f8d66a');
+    }
+  }
+  return c;
+}
+
 const PLANTS: Record<string, () => HTMLCanvasElement> = {
-  plant_fern: lazy(() =>
-    pixelSprite(
-      [
-        '...l....l.....', '..lg...gl...g.', '.lgg..ggl..gl.', 'gGgg.gGgg.gGg.', '.gGggGgGggGg..',
-        '..gGgGgGgGg...', '.gGgGgGgGgGg..', '...gGgGgGg....', '...qqqqqqq....', '...rrrrrrr....',
-        '...rRrrrRr....', '....rrrrr.....', '....RRRRR.....',
-      ],
-      LEAF,
-    ),
-  ),
-  plant_monstera: lazy(() =>
-    pixelSprite(
-      [
-        '.....lgg..ggl.......', '...lggGg..gGggl.....', '..lgg.Gg.gG.ggg.lg..', '.lgGg.gGgGg.gGgggg..',
-        '.ggGgggGgGgggGg.gG..', 'gGg.gGgGgGgGg.gGgg..', 'gG..ggGgGgGgg..gGg..', '.g.lggGgGgGggl..g...',
-        '..lgGg.gGg.gGgl.....', '..gGg..gGg..gGg.....', '.......gGg..........', '......qqqqqq........',
-        '.....rrrrrrrr.......', '.....rRrrrrRr.......', '.....rRrrrrRr.......', '......rrrrrr........',
-        '......RRRRRR........',
-      ],
-      LEAF,
-    ),
-  ),
-  plant_lemon: lazy(() =>
-    pixelSprite(
-      [
-        '.....lgggl........', '...lggGyggGgl.....', '..lgGgggGgYgGl....', '.lgGyGgGgGggGgl...',
-        '.gGgGgGyGgGyGgg...', 'lgGgYgGgGgGgGgGl..', 'gGgGgGgGyGgGgYgg..', '.gGyGgGgGgGgGgg...',
-        '..gGgGgYgGgGgg....', '...ggGgGgGgg......', '......bbb.........', '......bbB.........',
-        '......bBb.........', '......bbB.........', '.....qqqqqqq.......', '....rrrrrrrrr......',
-        '....rRrrrrrRr......', '....rRrrrrrRr......', '.....rrrrrrr.......', '.....RRRRRRR.......',
-      ],
-      { ...LEAF, B: '#5a3420' },
-    ),
-  ),
+  plant_fern: lazy(() => botanical(16, 15, 'fern')),
+  plant_monstera: lazy(() => botanical(22, 19, 'monstera')),
+  plant_lemon: lazy(() => botanical(21, 22, 'lemon')),
 };
 
 const SILLS: Record<string, () => HTMLCanvasElement> = {
-  sill_cactus: lazy(() =>
-    pixelSprite(['..g...', '.gl.g.', '.gGgG.', 'ggGgG.', '.gGgg.', '..gG..', 'qqqqq.', 'rrrrr.', '.rRr..'], {
-      ...LEAF,
-      g: '#5fa86a',
-      G: '#3f7f4f',
-      l: '#a6dd96',
-    }),
-  ),
-  sill_tulips: lazy(() =>
-    pixelSprite(['.p..y..p.', 'pPp.yYpPp', 'pPp.Yy.p.', '.g..g..g.', '.gG.g.Gg.', '..gGgGg..', '.qqqqqqq.', '.rrrrrrr.', '..rRrRr..'], LEAF),
-  ),
-  sill_bonsai: lazy(() =>
-    pixelSprite(
-      ['..lggl.lgl..', '.lgGgGggGgl.', 'gGgGg.gGgGg.', '.gg..b..ggg.', '.....bb.....', '....bb......', 'qqqqqqqqqqq.', 'rrrrrrrrrrr.', '.RRRRRRRRR..'],
-      { ...LEAF, b: '#6b4630' },
-    ),
-  ),
+  sill_cactus: lazy(() => pixelSprite([
+    '..lg..', '.lgG.g', '.gGGgl', 'lgGGgG', '.gGGgG', '..gG..',
+    '.qqqqq', '.rbbrR', '..rrR.',
+  ], LEAF)),
+  sill_tulips: lazy(() => pixelSprite([
+    '.pp..yy..', '.pPp.yY..', '..P..y..p', '.g..g..pP', '.gl.g.gl.', '..gGgGg..',
+    '.qqqqqqq.', '.rbbbbbR.', '..rrrRR..',
+  ], LEAF)),
+  sill_bonsai: lazy(() => pixelSprite([
+    '...llgg.....', '..lgGGglgl..', '.lgGGgGgGGl.', '..gGGbGggG..', '.....bB.....',
+    '....bB......', '.qqqqqqqqqq.', '.rbbbbbbbRr.', '..RRRRRRRR..',
+  ], { ...LEAF, B: '#a8884e' })),
 };
 
-const HANGING_PLANT = lazy(() =>
-  pixelSprite(
-    ['....b.b....', '...b...b...', '..rrrrrrr..', '..rRrrrRr..', '.lgGgGgGgl.', 'lgGgg.gGgGl', 'gG.g...g.Gg', 'g..g...g..g', 'G..l...G..G', '...G.......'],
-    LEAF,
-  ),
-);
+const HANGING_PLANT = lazy(() => pixelSprite([
+  '....b.b....', '...b...b...', '..qqqqqqq..', '..rbbbRrr..', '.llgGgGggl.',
+  'lgGGglgGGGl', 'gG.gl.gG.Gg', 'G..gg.Gl..G', 'l..Gl..g..l', '...G...l...',
+], LEAF));
 
 /** Soft oval shadow on the floor. */
 export function shadow(ctx: Ctx, cx: number, y: number, w: number, alpha = 0.22): void {
@@ -465,7 +529,7 @@ export function shadow(ctx: Ctx, cx: number, y: number, w: number, alpha = 0.22)
   rect(ctx, cx - half, y - 1, half * 2, 2, '#2a1410');
   rect(ctx, cx - half + 2, y + 1, half * 2 - 4, 1, '#2a1410');
   ctx.globalAlpha = alpha * 0.65;
-  rect(ctx, cx - half + 3, y - 1, half * 2 - 6, 2, '#352a3c');
+  rect(ctx, cx - half + 3, y - 1, half * 2 - 6, 2, '#493625');
   ctx.restore();
 }
 
@@ -489,7 +553,7 @@ export function paintSill(ctx: Ctx, id: string, cx: number, y: number): void {
 // ---------------------------------------------------------------- ceiling
 
 export function paintStringLights(ctx: Ctx, x0: number, w: number, t: number, y = 8): void {
-  const colors = ['#ffd95a', '#f49ac1', '#8fd3f4', '#a8e07a'];
+  const colors = ['#f5d58c', '#e6ba79', '#fff0ba', '#d8c993'];
   const sag = (x: number) => y + Math.round(Math.abs(Math.sin((x - x0) / 26)) * 4);
   for (let x = x0; x < x0 + w; x++) rect(ctx, x, sag(x), 1, 1, '#4a2e1e');
   for (let i = 0, x = x0 + 8; x < x0 + w; x += 16, i++) {
@@ -503,17 +567,24 @@ export function paintStringLights(ctx: Ctx, x0: number, w: number, t: number, y 
       ctx.restore();
     }
     rect(ctx, x, by, 2, 1, '#4a2e1e');
-    rect(ctx, x, by + 1, 2, 3, c);
+    rect(ctx, x - 1, by + 2, 4, 2, '#9a7948');
+    rect(ctx, x, by + 1, 2, 4, c);
+    rect(ctx, x - 1, by + 2, 3, 2, c);
+    rect(ctx, x, by + 5, 2, 1, '#b59358');
     rect(ctx, x, by + 1, 1, 1, '#ffffff');
   }
 }
 
 function pendant(ctx: Ctx, x: number, cord: number, lit: boolean): void {
   rect(ctx, x, 0, 1, cord, '#2e1c16');
-  rect(ctx, x - 2, cord, 5, 1, '#2f5a4a');
-  rect(ctx, x - 4, cord + 1, 9, 2, '#3f7a64');
-  rect(ctx, x - 5, cord + 3, 11, 1, '#2f5a4a');
-  rect(ctx, x - 1, cord + 4, 3, 1, lit ? '#fff3a0' : '#e8c06a');
+  rect(ctx, x - 1, cord - 1, 3, 2, '#c8a15e');
+  rect(ctx, x - 2, cord + 1, 5, 1, '#39281f');
+  rect(ctx, x - 3, cord + 2, 7, 4, '#aa8b51');
+  rect(ctx, x - 2, cord + 2, 5, 4, lit ? '#f1d59c' : '#d0bd92');
+  rect(ctx, x - 2, cord + 2, 1, 3, '#fff4d2');
+  rect(ctx, x, cord + 3, 1, 3, lit ? '#fff5d5' : '#e4d6b5');
+  rect(ctx, x - 4, cord + 6, 9, 2, '#543425');
+  rect(ctx, x - 3, cord + 6, 7, 1, '#d1ac66');
   if (lit) {
     ctx.save();
     ctx.globalAlpha = 0.1;
@@ -541,7 +612,15 @@ function chandelier(ctx: Ctx, cx: number, t: number): void {
     rect(ctx, cx + dx, 4, 1, 3, '#fdf6ec');
     rect(ctx, cx + dx, 2, 1, 2, flicker ? '#ffd95a' : '#ff9f43');
   }
-  for (const dx of [-8, -3, 3, 8]) rect(ctx, cx + dx, 10, 1, 2, '#cfe8f0');
+  for (const dx of [-8, -3, 3, 8]) {
+    rect(ctx, cx + dx, 10, 1, 2, '#c8a15e');
+    rect(ctx, cx + dx - 1, 12, 3, 2, '#b7cdbb');
+    rect(ctx, cx + dx, 12, 1, 3, '#f4e6c7');
+  }
+  for (const dx of [-10, 10]) {
+    rect(ctx, cx + dx, 5, 1, 2, '#c8a15e');
+    rect(ctx, cx + dx - 1, 5, 3, 1, '#f1d087');
+  }
   ctx.save();
   ctx.globalAlpha = 0.12;
   rect(ctx, cx - 16, 1, 33, 14, '#fff3a0');
@@ -553,10 +632,11 @@ export function paintCeiling(ctx: Ctx, id: string, sceneW: number, t: number): v
     case 'ceiling_lights':
       return paintStringLights(ctx, 0, sceneW, t);
     case 'ceiling_vines': {
-      for (let x = 0; x < sceneW; x += 3) {
+      for (let x = 4; x < sceneW - 4; x += 9) {
         const drop = Math.round(Math.abs(Math.sin(x * 0.37)) * 5);
-        rect(ctx, x, 6, 2, 2 + drop, (x / 3) % 2 ? '#6fb26a' : '#4e8a4f');
-        if (drop > 3) rect(ctx, x, 8 + drop, 2, 1, '#9fd47e');
+        rect(ctx, x, 6, 1, 3 + drop, '#485b36');
+        leafySprig(ctx, x, 8 + drop, 3, x);
+        if (drop > 3) rect(ctx, x - 1, 11 + drop, 1, 3, '#627451');
       }
       const sway = Math.round(Math.sin(t * 1.2));
       for (const hx of [70, 250]) {
@@ -641,9 +721,14 @@ export function paintRug(ctx: Ctx, id: string, x: number, y: number, w: number, 
         rect(ctx, cx + half - 2, yy, 2, 1, '#3f8a6c');
       }
     }
+    for (let dy = -4; dy <= 4; dy++) {
+      const half = 4 - Math.abs(dy);
+      rect(ctx, cx - half, cy + dy, half * 2 + 1, 1, '#ead9ac');
+      if (half > 1) rect(ctx, cx - half + 1, cy + dy, half * 2 - 1, 1, '#627451');
+    }
     return;
   }
-  const [border, inner, motif] = id === 'rug_blue' ? ['#3f5f93', '#6f93c9', '#e6eef8'] : ['#9c3f36', '#cf5f4f', '#f3c7a0'];
+  const [border, inner, motif] = id === 'rug_blue' ? ['#495f68', '#7e9694', '#efe4bf'] : ['#814337', '#bd7760', '#f3d7a4'];
   rect(ctx, x, y, w, h, border);
   rect(ctx, x + 3, y + 3, w - 6, h - 6, inner);
   // Woven texture and a thin inner border.
@@ -666,6 +751,13 @@ export function paintRug(ctx: Ctx, id: string, x: number, y: number, w: number, 
     rect(ctx, x + 1, dy, 1, 2, motif);
     rect(ctx, x + w - 2, dy, 1, 2, motif);
   }
+  // Four woven botanical corner motifs and interrupted selvedge stitching.
+  for (const [cx, cy] of [[x + 9, y + 9], [x + w - 10, y + 9], [x + 9, y + h - 10], [x + w - 10, y + h - 10]]) {
+    rect(ctx, cx, cy - 2, 1, 5, motif);
+    rect(ctx, cx - 2, cy, 5, 1, motif);
+    rect(ctx, cx - 1, cy - 1, 3, 3, border);
+    rect(ctx, cx, cy, 1, 1, motif);
+  }
   const mid = y + Math.floor(h / 2);
   for (let i = -3; i <= 3; i++) {
     const half = (3 - Math.abs(i)) * 2;
@@ -679,8 +771,13 @@ export function paintRug(ctx: Ctx, id: string, x: number, y: number, w: number, 
 
 // ---------------------------------------------------------------- neon
 
-const NEON_HEART = ['.pp...pp.', 'p..p.p..p', 'p...p...p', 'p.......p', '.p.....p.', '..p...p..', '...p.p...', '....p....'];
-const NEON_CUP = ['..c..c....', '.c..c.....', '..c..c....', '..........', 'cccccccc..', 'c......ccc', 'c......c.c', 'c......ccc', '.c....c...', '..cccc....'];
+const NEON_HEART = ['..pp.pp..', '.p..p..p.', 'p.......p', 'p.......p', '.p.....p.', '..p...p..', '...p.p...', '....p....'];
+const NEON_CUP = ['...c.c....', '..c...c...', '...c.c....', '..........', '.ccccccc..', '.c.....ccc', '.c.....c.c', '..c...cccc', '..ccccc...', '.ccccccc..'];
+const neonHeading = lazy(() => {
+  const c = document.createElement('canvas'); c.width = textWidth('CAFE') + 2; c.height = 7;
+  drawText(c.getContext('2d')!, 'CAFE', 1, 1, '#efbc89', '#71432d');
+  return c;
+});
 
 export function paintNeon(ctx: Ctx, id: string, cx: number, y: number, t: number): void {
   if (id === 'neon_none') return;
@@ -688,14 +785,11 @@ export function paintNeon(ctx: Ctx, id: string, cx: number, y: number, t: number
   ctx.globalAlpha = 0.8 + Math.sin(t * 3) * 0.2;
   if (id === 'neon_cafe') {
     // Doubled bitmap text so the sign reads at this scale.
-    const tmp = document.createElement('canvas');
-    tmp.width = textWidth('CAFE') + 2;
-    tmp.height = 7;
-    drawText(tmp.getContext('2d')!, 'CAFE', 1, 1, '#ff8fc7', '#8a2a5a');
+    const tmp = neonHeading();
     ctx.imageSmoothingEnabled = false;
     ctx.drawImage(tmp, Math.round(cx - tmp.width), y, tmp.width * 2, tmp.height * 2);
   } else {
-    const [rows, color, glow] = id === 'neon_heart' ? [NEON_HEART, '#ff6b9a', '#8a2a5a'] : [NEON_CUP, '#7fe3f0', '#1f5560'];
+    const [rows, color, glow] = id === 'neon_heart' ? [NEON_HEART, '#efb0a0', '#884b42'] : [NEON_CUP, '#d0e3c3', '#4d6347'];
     const w = Math.max(...rows.map((r) => r.length));
     const x0 = Math.round(cx - w / 2);
     rows.forEach((row, ry) =>

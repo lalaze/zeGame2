@@ -1,0 +1,511 @@
+{
+  "schemaVersion": 2,
+  "storageRoots": {
+    "pathBase": "repository root",
+    "runtime": "public/art/generated/main-v1",
+    "archive": "assets/generated/main-v1"
+  },
+  "purpose": "Lossless cutouts from user-selected imagegen assets for the main-room slice only.",
+  "operation": "Rectangular RGBA crop only; no resize, recolor, alpha edits, background removal, interpolation or redrawing.",
+  "coordinateConvention": "Source rectangles: x/y/width/height; bounds are right/bottom exclusive. Anchor suggestions are crop-local source pixels.",
+  "sources": {
+    "furniture": {
+      "originalFilename": "tiny-bean-furniture-sample-v1.png",
+      "storage": "archive",
+      "file": "sources/tiny-bean-furniture-sample-v1.png",
+      "repositoryFile": "assets/generated/main-v1/sources/tiny-bean-furniture-sample-v1.png",
+      "sha256": "de0455009ce45dca677f7aa9a1296891d00f5a84a56feeeb148e3cf241515811",
+      "size": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "alpha": {
+        "pixelCount": 1572864,
+        "minimum": 0,
+        "maximum": 254,
+        "alpha0": 808809,
+        "alpha1to31": 58997,
+        "alpha32to63": 2881,
+        "alpha64to127": 3316,
+        "alpha128to223": 8417,
+        "alpha224to254": 690444,
+        "alpha255": 0,
+        "nonzeroFraction": 0.48577309,
+        "localBoundsExclusive": {
+          "greaterThan0": [
+            0,
+            22,
+            1520,
+            1024
+          ],
+          "greaterThan31": [
+            29,
+            45,
+            1506,
+            973
+          ],
+          "greaterThan127": [
+            30,
+            45,
+            1506,
+            972
+          ],
+          "greaterThan223": [
+            30,
+            46,
+            1505,
+            972
+          ]
+        }
+      }
+    },
+    "characters-plants": {
+      "originalFilename": "tiny-bean-characters-plants-sample-v1.png",
+      "storage": "archive",
+      "file": "sources/tiny-bean-characters-plants-sample-v1.png",
+      "repositoryFile": "assets/generated/main-v1/sources/tiny-bean-characters-plants-sample-v1.png",
+      "sha256": "c1fd8d102e889003fdfb8cbe5f70a3bf8eeb5ea7cb1b8547452a8c4933061435",
+      "size": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "alpha": {
+        "pixelCount": 1572864,
+        "minimum": 0,
+        "maximum": 254,
+        "alpha0": 1156528,
+        "alpha1to31": 58641,
+        "alpha32to63": 4095,
+        "alpha64to127": 5511,
+        "alpha128to223": 12925,
+        "alpha224to254": 335164,
+        "alpha255": 0,
+        "nonzeroFraction": 0.2646993,
+        "localBoundsExclusive": {
+          "greaterThan0": [
+            25,
+            9,
+            1508,
+            1024
+          ],
+          "greaterThan31": [
+            295,
+            12,
+            1232,
+            1015
+          ],
+          "greaterThan127": [
+            295,
+            13,
+            1232,
+            1014
+          ],
+          "greaterThan223": [
+            295,
+            14,
+            1232,
+            1011
+          ]
+        }
+      }
+    }
+  },
+  "assets": [
+    {
+      "id": "cabinet-full",
+      "file": "cabinet-full.png",
+      "storage": "archive",
+      "repositoryFile": "assets/generated/main-v1/cabinet-full.png",
+      "source": "furniture",
+      "sourceSha256": "de0455009ce45dca677f7aa9a1296891d00f5a84a56feeeb148e3cf241515811",
+      "sourceRect": {
+        "x": 24,
+        "y": 72,
+        "width": 808,
+        "height": 360
+      },
+      "size": {
+        "width": 808,
+        "height": 360
+      },
+      "sha256": "aebe2cb1b535c4aba4dfc782c6a0014a498f588cc311e259337971338413728d",
+      "rgbaPixelsSha256": "a8c24df229953501690027247d172c7ea3ca6f29807a4ec8a5af493f57f1d95f",
+      "alpha": {
+        "pixelCount": 290880,
+        "minimum": 0,
+        "maximum": 254,
+        "alpha0": 21739,
+        "alpha1to31": 9912,
+        "alpha32to63": 151,
+        "alpha64to127": 505,
+        "alpha128to223": 1804,
+        "alpha224to254": 256769,
+        "alpha255": 0,
+        "nonzeroFraction": 0.92526471,
+        "localBoundsExclusive": {
+          "greaterThan0": [
+            0,
+            0,
+            808,
+            360
+          ],
+          "greaterThan31": [
+            5,
+            6,
+            800,
+            354
+          ],
+          "greaterThan127": [
+            6,
+            6,
+            799,
+            353
+          ],
+          "greaterThan223": [
+            6,
+            7,
+            798,
+            353
+          ]
+        }
+      },
+      "anchorSuggestion": {
+        "sourcePixels": [
+          416,
+          422
+        ],
+        "localPixels": [
+          392,
+          350
+        ],
+        "normalized": [
+          0.48514851,
+          0.97222222
+        ],
+        "note": "Front floor-contact center; preserve source aspect ratio. Archive/reference full cabinet."
+      },
+      "pixelVerification": "Every output RGBA sample equals the corresponding original source sample, including hidden RGB under alpha zero."
+    },
+    {
+      "id": "cabinet-top",
+      "file": "cabinet-top.png",
+      "storage": "runtime",
+      "repositoryFile": "public/art/generated/main-v1/cabinet-top.png",
+      "url": "/art/generated/main-v1/cabinet-top.png",
+      "source": "furniture",
+      "sourceSha256": "de0455009ce45dca677f7aa9a1296891d00f5a84a56feeeb148e3cf241515811",
+      "sourceRect": {
+        "x": 110,
+        "y": 96,
+        "width": 580,
+        "height": 60
+      },
+      "size": {
+        "width": 580,
+        "height": 60
+      },
+      "sha256": "118756f1d6200e6979579fe8e8e0cb252b7f63499c830a84e4347078f77e56b5",
+      "rgbaPixelsSha256": "0ae7f2a9f5187b732915beed99a640e328dd3de7890e9bf1afde9236548ac5f5",
+      "alpha": {
+        "pixelCount": 34800,
+        "minimum": 251,
+        "maximum": 253,
+        "alpha0": 0,
+        "alpha1to31": 0,
+        "alpha32to63": 0,
+        "alpha64to127": 0,
+        "alpha128to223": 0,
+        "alpha224to254": 34800,
+        "alpha255": 0,
+        "nonzeroFraction": 1.0,
+        "localBoundsExclusive": {
+          "greaterThan0": [
+            0,
+            0,
+            580,
+            60
+          ],
+          "greaterThan31": [
+            0,
+            0,
+            580,
+            60
+          ],
+          "greaterThan127": [
+            0,
+            0,
+            580,
+            60
+          ],
+          "greaterThan223": [
+            0,
+            0,
+            580,
+            60
+          ]
+        }
+      },
+      "anchorSuggestion": {
+        "sourcePixels": [
+          400,
+          126
+        ],
+        "localPixels": [
+          290,
+          30
+        ],
+        "normalized": [
+          0.5,
+          0.5
+        ],
+        "note": "Center of an interior wood-plane tile. Excludes the slab silhouette, diagonal side and black front edge; existing counter geometry supplies its exterior frame."
+      },
+      "pixelVerification": "Every output RGBA sample equals the corresponding original source sample, including hidden RGB under alpha zero."
+    },
+    {
+      "id": "cabinet-front",
+      "file": "cabinet-front.png",
+      "storage": "runtime",
+      "repositoryFile": "public/art/generated/main-v1/cabinet-front.png",
+      "url": "/art/generated/main-v1/cabinet-front.png",
+      "source": "furniture",
+      "sourceSha256": "de0455009ce45dca677f7aa9a1296891d00f5a84a56feeeb148e3cf241515811",
+      "sourceRect": {
+        "x": 312,
+        "y": 226,
+        "width": 190,
+        "height": 138
+      },
+      "size": {
+        "width": 190,
+        "height": 138
+      },
+      "sha256": "ab1bc35048d20990612ffcffefcf556ead17fe647f429f2c079a1e5be1e5dd54",
+      "rgbaPixelsSha256": "3531d2eb4f63fefda52d5b63136433f88e661147c25a3d90954c9dbb462d8ff4",
+      "alpha": {
+        "pixelCount": 26220,
+        "minimum": 252,
+        "maximum": 253,
+        "alpha0": 0,
+        "alpha1to31": 0,
+        "alpha32to63": 0,
+        "alpha64to127": 0,
+        "alpha128to223": 0,
+        "alpha224to254": 26220,
+        "alpha255": 0,
+        "nonzeroFraction": 1.0,
+        "localBoundsExclusive": {
+          "greaterThan0": [
+            0,
+            0,
+            190,
+            138
+          ],
+          "greaterThan31": [
+            0,
+            0,
+            190,
+            138
+          ],
+          "greaterThan127": [
+            0,
+            0,
+            190,
+            138
+          ],
+          "greaterThan223": [
+            0,
+            0,
+            190,
+            138
+          ]
+        }
+      },
+      "anchorSuggestion": {
+        "sourcePixels": [
+          407,
+          361
+        ],
+        "localPixels": [
+          95,
+          135
+        ],
+        "normalized": [
+          0.5,
+          0.97826087
+        ],
+        "note": "Bottom center of the complete central carved panel. Repeat/crop modules horizontally; do not stretch the complete cabinet."
+      },
+      "pixelVerification": "Every output RGBA sample equals the corresponding original source sample, including hidden RGB under alpha zero."
+    },
+    {
+      "id": "plant",
+      "file": "plant.png",
+      "storage": "runtime",
+      "repositoryFile": "public/art/generated/main-v1/plant.png",
+      "url": "/art/generated/main-v1/plant.png",
+      "source": "characters-plants",
+      "sourceSha256": "c1fd8d102e889003fdfb8cbe5f70a3bf8eeb5ea7cb1b8547452a8c4933061435",
+      "sourceRect": {
+        "x": 288,
+        "y": 560,
+        "width": 432,
+        "height": 448
+      },
+      "size": {
+        "width": 432,
+        "height": 448
+      },
+      "sha256": "5ad1254aab22dbb72adadf7530c32c9df28cfbbe2ced75285e9a079fd19482e2",
+      "rgbaPixelsSha256": "8e25e8f62f822ef3d5c283469dda538e9d16fc0ce7129df28620b147e49d6144",
+      "alpha": {
+        "pixelCount": 193536,
+        "minimum": 0,
+        "maximum": 254,
+        "alpha0": 68936,
+        "alpha1to31": 15684,
+        "alpha32to63": 997,
+        "alpha64to127": 1288,
+        "alpha128to223": 2639,
+        "alpha224to254": 103992,
+        "alpha255": 0,
+        "nonzeroFraction": 0.64380787,
+        "localBoundsExclusive": {
+          "greaterThan0": [
+            0,
+            0,
+            432,
+            448
+          ],
+          "greaterThan31": [
+            7,
+            3,
+            427,
+            440
+          ],
+          "greaterThan127": [
+            7,
+            4,
+            426,
+            439
+          ],
+          "greaterThan223": [
+            7,
+            4,
+            426,
+            439
+          ]
+        }
+      },
+      "anchorSuggestion": {
+        "sourcePixels": [
+          500,
+          997
+        ],
+        "localPixels": [
+          212,
+          437
+        ],
+        "normalized": [
+          0.49074074,
+          0.97544643
+        ],
+        "note": "Terracotta pot floor-contact center; scale uniformly and retain existing gameplay foot position."
+      },
+      "pixelVerification": "Every output RGBA sample equals the corresponding original source sample, including hidden RGB under alpha zero."
+    },
+    {
+      "id": "vine",
+      "file": "vine.png",
+      "storage": "runtime",
+      "repositoryFile": "public/art/generated/main-v1/vine.png",
+      "url": "/art/generated/main-v1/vine.png",
+      "source": "characters-plants",
+      "sourceSha256": "c1fd8d102e889003fdfb8cbe5f70a3bf8eeb5ea7cb1b8547452a8c4933061435",
+      "sourceRect": {
+        "x": 852,
+        "y": 571,
+        "width": 388,
+        "height": 453
+      },
+      "size": {
+        "width": 388,
+        "height": 453
+      },
+      "sha256": "e31df5efbcd674539f4ee67116079313e205bda7bdf30264540a58c55224956e",
+      "rgbaPixelsSha256": "0e3a30cbc62d2a1468f632a60e9f35a1d35ab4263bd8bfe0de7c53e0697d7005",
+      "alpha": {
+        "pixelCount": 175764,
+        "minimum": 0,
+        "maximum": 254,
+        "alpha0": 73665,
+        "alpha1to31": 23827,
+        "alpha32to63": 1930,
+        "alpha64to127": 2794,
+        "alpha128to223": 7066,
+        "alpha224to254": 66482,
+        "alpha255": 0,
+        "nonzeroFraction": 0.58088687,
+        "localBoundsExclusive": {
+          "greaterThan0": [
+            1,
+            0,
+            386,
+            453
+          ],
+          "greaterThan31": [
+            8,
+            8,
+            380,
+            444
+          ],
+          "greaterThan127": [
+            8,
+            8,
+            380,
+            443
+          ],
+          "greaterThan223": [
+            11,
+            9,
+            380,
+            440
+          ]
+        }
+      },
+      "anchorSuggestion": {
+        "sourcePixels": [
+          1144,
+          774
+        ],
+        "localPixels": [
+          292,
+          203
+        ],
+        "normalized": [
+          0.75257732,
+          0.44812362
+        ],
+        "note": "Pot bottom/contact point, NOT the trailing-vine tip. Align this point with the counter or shelf; scale uniformly."
+      },
+      "pixelVerification": "Every output RGBA sample equals the corresponding original source sample, including hidden RGB under alpha zero."
+    }
+  ],
+  "risks": [
+    "Source PNGs and the unused complete-cabinet cutout are archived outside public/. Only four runtime PNGs are shipped; archive file references are repository paths, not public URLs.",
+    "Both selected sources have alpha maximum 254, with zero fully opaque alpha-255 pixels. This is preserved exactly.",
+    "Low-alpha colored fringe/glow remains around silhouettes and within rectangular crops. It may produce visible tinted halos on light backgrounds.",
+    "Cabinet modules are literal rectangular cuts. Their crop boundary may cross continuous wood; module joins need visual review at integration.",
+    "Plants are isolated below the people. The right shoe has alpha>127 pixels through source y561; the vine crop starts at y571, above its first solid leaf at y579.",
+    "Anchor suggestions are manual contact-point estimates, not generated hitboxes. Existing gameplay collision/foot positions must remain authoritative."
+  ],
+  "verification": {
+    "passed": true,
+    "assetCount": 5,
+    "rgbaPixelsCompared": 721200,
+    "sourceCopiesByteIdentical": true
+  },
+  "runtimePngBytes": 663656
+}

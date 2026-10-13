@@ -1,0 +1,25 @@
+{
+  "id": 14,
+  "name": "湖绿旅人",
+  "look": {
+    "skin": 3,
+    "hair": 0,
+    "hairStyle": 3,
+    "shirt": 6,
+    "pants": 2
+  },
+  "hairstyle": 7,
+  "outfit": "jacket",
+  "accessory": "satchel",
+  "accent": "#d6b175",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#80533f",
+    "hair": "#594237",
+    "shirt": "#69a295",
+    "pants": "#585464"
+  },
+  "hatPalette": "#799ba7",
+  "description": "Fixed customer cast 14 (湖绿旅人): warm skin #80533f; hair #594237 in short tapered sides and a tall swept-up pointed QUIFF rising asymmetrically, no hat. Outfit: #69a295 short jacket with cream collar, cream zipper/placket and cream welt pocket trim. Lower clothing color #585464; warm dark brown leather shoes. Accent #d6b175. A small #d6b175 cross-body shoulder satchel with diagonal strap and gold clasp, resting at hip in EVERY pose including seated; it is a worn accessory, never held."
+}

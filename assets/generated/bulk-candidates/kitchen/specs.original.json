@@ -1,0 +1,161 @@
+[
+  [
+    "storage",
+    [
+      [
+        "cooler",
+        [
+          34,
+          72
+        ],
+        "TOP LEFT: cooler, a tall narrow walk-in cold-room door body, cream enamel outer frame, sage inset insulated door, small frosted blue-green upper window, brass hinges and vertical pull handle. Dark blank small thermometer panel above. Width:height about34:72. Closed door, no visible stock."
+      ],
+      [
+        "dryStore",
+        [
+          36,
+          58
+        ],
+        "TOP MIDDLE: dryStore, warm walnut pantry shelving frame with two pegged side posts and four open shelves, entirely EMPTY with shadowed empty bays; no sacks, jars, boxes or bowls. Width:height36:58."
+      ],
+      [
+        "handSink",
+        [
+          16,
+          40
+        ],
+        "TOP RIGHT: handSink, compact wall-mounted cream ceramic hand basin with empty dark well, brass gooseneck faucet and exposed short brass drain below, blank wall-mounted dispenser housings above; no flowing water, towel, soap bottle or wall panel. Width:height16:40."
+      ],
+      [
+        "mixer",
+        [
+          24,
+          39
+        ],
+        "BOTTOM LEFT: mixer, industrial floor-standing spiral dough mixer body, cream enamel base and rear vertical motor column, horizontal upper head, sage lower vent panel, empty stainless-steel open bowl. Completely omit the moving spiral hook and shaft between head and bowl. Width:height24:39."
+      ],
+      [
+        "proofer",
+        [
+          24,
+          58
+        ],
+        "BOTTOM MIDDLE: proofer, tall slim cream-and-sage proofing cabinet with glass-front door, four empty internal shelves, brass handle, dark blank control display. No dough, pans, steam, heating light or food. Width:height24:58."
+      ],
+      [
+        "pastryFridge",
+        [
+          20,
+          38
+        ],
+        "BOTTOM RIGHT: pastryFridge, narrow compact cream enamel glass-front refrigerator, pale cold blue empty interior with two empty shelves, sage bottom ventilation grille, brass handle and hinges, dark blank top display. No cakes, plates, food, active lights. Width:height20:38."
+      ]
+    ]
+  ],
+  [
+    "hotline",
+    [
+      [
+        "kettle",
+        [
+          26,
+          40
+        ],
+        "TOP LEFT: kettle, compact two-burner sage/brushed-steel range body with large empty stainless stockpot seated on top. Pot visibly open and EMPTY dark interior, brass band and side handles, no liquid, flame, steam or contents. Width:height26:40."
+      ],
+      [
+        "deckOven",
+        [
+          56,
+          54
+        ],
+        "TOP MIDDLE: deckOven, cream-and-sage commercial double-deck oven with two stacked wide dark glass doors, brass handles, blank right-side controls and short metal supporting legs. Empty dark chambers, no bread, glowing elements or active lights. Width:height56:54."
+      ],
+      [
+        "convection",
+        [
+          28,
+          48
+        ],
+        "TOP RIGHT: convection, single compact cream-and-sage convection oven on tall open metal stand with empty lower shelf; dark glass door, brass handle and blank controls. Interior empty, fan blades ABSENT, no pans or baked items. Width:height28:48."
+      ],
+      [
+        "fryer",
+        [
+          26,
+          34
+        ],
+        "BOTTOM LEFT: fryer, compact brushed-steel deep fryer cabinet with sage lower trim, two empty wire baskets hanging on back rail, empty dark twin vats, brass knob details but no glowing indicator. No oil, donuts or bubbles. Width:height26:34."
+      ],
+      [
+        "hood",
+        [
+          154,
+          23
+        ],
+        "BOTTOM MIDDLE: hood, VERY WIDE LOW copper extraction canopy with dark underside mesh filters, tiny central short chimney, shallow sloped copper panels and seams, blank central sage plaque. Unlit, no light strips or glow. Important aspect ratio154:23, over SIX TIMES WIDER THAN HIGH; an independent horizontal module, no appliances below it."
+      ],
+      [
+        "hookup",
+        [
+          13,
+          7
+        ],
+        "BOTTOM RIGHT: hookup, one small capped brass/steel plumbing pipe on the left and one cream wall power socket on the right, as a single closely spaced installation module. No wall tile/panel/background. Both unused and capped/unconnected, no hose or wire, no machine. Width:height13:7."
+      ]
+    ]
+  ],
+  [
+    "floor",
+    [
+      [
+        "bench",
+        [
+          104,
+          42
+        ],
+        "TOP LEFT: bench, WIDE low freestanding walnut and maple butcher-block prep island, thick bare wooden countertop with empty inset pale marble pastry slab, walnut paneled cupboards at both ends and two EMPTY open central shelves. Absolutely no bowls, trays, tools, scale, rolling pin, dough or appliances. Width:height104:42, about2.5times wider than tall."
+      ],
+      [
+        "sheeter",
+        [
+          22,
+          12
+        ],
+        "TOP MIDDLE: sheeter, small tabletop dough sheeter body with broad flat sage roller/conveyor base, narrow cream upright motor housing, small brass side adjustment wheel. Empty clean conveyor bed, no dough or rolling sheet. Keep machinery stopped and no moving extraneous arm. Width:height22:12."
+      ],
+      [
+        "standMixer",
+        [
+          14,
+          16
+        ],
+        "TOP RIGHT: standMixer, compact terra-cotta red tabletop stand-mixer body with rounded horizontal motor head, curved rear supporting column, flat foot and EMPTY stainless bowl. OMIT the moving whisk, beater and shaft from head to bowl. No ingredients, cups or bottles. Width:height14:16."
+      ],
+      [
+        "rack",
+        [
+          22,
+          46
+        ],
+        "BOTTOM LEFT: rack, tall narrow wheeled cooling speed rack, slender brushed-steel uprights, brass top rail, four EMPTY open shelf/tray-support levels and tiny locking caster wheels. No bread, pastry, pans, cloth or stock. Real transparent open gaps between the metal structure. Width:height22:46."
+      ],
+      [
+        "bins",
+        [
+          40,
+          20
+        ],
+        "BOTTOM MIDDLE: bins, a PAIR of white rolling ingredient bins together, left with sage closed lid, right with muted terracotta closed lid, small brass handles and caster wheels. Each front has a blank cream label plate with NO letters. Contents invisible/empty. Whole paired module width:height40:20."
+      ],
+      [
+        "dishPit",
+        [
+          64,
+          38
+        ],
+        "BOTTOM RIGHT: dishPit, wide three-bay brushed-steel washing sink with three EMPTY basins, tall brass pre-rinse spring faucet, empty dish-draining rack at right, sage lower paneled cabinets, no plates, dishes, towel, brush, water or scraps. Complete legs/base, no extra bin outside the envelope. Width:height64:38."
+      ]
+    ]
+  ]
+]

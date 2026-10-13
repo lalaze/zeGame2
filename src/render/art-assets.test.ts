@@ -53,7 +53,9 @@ describe('expanded menu artwork', () => {
       const icon = itemIcon(item.id), artwork = itemArtwork(item.id), bare = itemIcon(item.id, false);
       expect([artwork.width, artwork.height]).toEqual([icon.width * 3, icon.height * 3]);
       expect([bare.width, bare.height]).toEqual([icon.width - 2, icon.height - 2]);
-      expect(pixels(artwork).size).toBeGreaterThan(pixels(icon).size * 8);
+      // Export contour is one physical pixel, while tiny game icons retain a
+      // legibility contour. The painted area therefore does not scale 9×.
+      expect(pixels(artwork).size).toBeGreaterThan(pixels(icon).size * 6);
       expect(itemIcon(item.id)).toBe(icon);
       expect(itemArtwork(item.id)).toBe(artwork);
       expect(artwork).not.toBe(icon);

@@ -20,14 +20,14 @@ describe('unbuilt kitchen shell', () => {
     const empty = render(true, new Set());
     const stale = render(true, new Set<Equipment>(['cooler', 'dryStore', 'handSink', 'deckOven', 'mixer', 'fryer']), new Set<Station>(['deckOven', 'mixer', 'fryer']));
     expect(stale).toEqual(empty);
-    // Bare plaster and packed materials replace subway tiles, drain, mats and fittings.
-    expect(empty).toContainEqual([0, 0, 320, FLOOR_Y, '#c4b7a5']);
-    expect(empty.some(rect => rect[4] === '#eef0ea')).toBe(false);
-    expect(empty.length).toBeLessThan(300);
+    // Bare plaster, timber bundles and the closed sign stay distinct from fitted tiles.
+    expect(empty).toContainEqual([0, 0, 320, FLOOR_Y, '#d8c39a']);
+    expect(empty).not.toContainEqual([0, 0, 320, FLOOR_Y, '#f4e6c7']);
+    expect(empty.length).toBeLessThan(render(false, new Set()).length / 3);
   });
   it('renders the fitted kitchen only after purchase', () => {
     const built = render(false, new Set<Equipment>(['cooler', 'dryStore', 'handSink']));
-    expect(built.some(rect => rect[4] === '#eef0ea')).toBe(true);
+    expect(built).toContainEqual([0, 0, 320, FLOOR_Y, '#f4e6c7']);
     expect(built.length).toBeGreaterThan(render(true, new Set()).length);
   });
 });

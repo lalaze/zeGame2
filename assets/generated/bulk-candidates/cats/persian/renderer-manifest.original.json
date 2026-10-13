@@ -1,0 +1,550 @@
+{
+  "breed": "persian",
+  "version": 1,
+  "generator": "built-in image_gen",
+  "sourceSheetDimensions": [
+    1254,
+    1254
+  ],
+  "bboxAlphaThreshold": "alpha > 128, excludes faint fringe; original alpha preserved in lossless crops",
+  "facingConvention": {
+    "walkA": "head-left",
+    "walkB": "head-left",
+    "other": "front-three-quarter slightly left; nuzzle head tilts independently"
+  },
+  "scaleNote": "One calibrated sourceToWorldScale for every frame from each source sheet. Estimated from common head width, never frame-height fit; runtime head/contact verification required.",
+  "anchorNote": "Manually visually estimated grounded front-paw/support midpoint and crown/forehead between ears, not ear tips. Contact/flip verification remains runtime work.",
+  "qa": {
+    "status": "source-and-final-crops-inspected; runtime validation pending",
+    "checks": [
+      "Breed-specific longhair morphology inspected",
+      "14 action mapping present"
+    ],
+    "corrections": "Selected crowded or hidden-tail frames replaced from separate spacious correction sheets.",
+    "correctionSheets": [
+      {
+        "file": "vertical-correction-source.png",
+        "states": [
+          "walkB",
+          "sleep"
+        ],
+        "sharedScale": 0.021,
+        "note": "Same breed; lossless source crops with independent sheet-level head-size calibration."
+      }
+    ],
+    "identifiedIssues": [],
+    "remainingRuntimeChecks": [
+      "Game-scale silhouette and breed legibility",
+      "Walking step continuity and physical head/body scale across source sheets",
+      "Head-to-hand contact for lookUp/nuzzle",
+      "Exact state mapping, route flip and reduced motion",
+      "Low-alpha fringe on light/dark scene backgrounds"
+    ]
+  },
+  "frames": [
+    {
+      "state": "idle",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/persian-idle.png",
+      "source": "source.png",
+      "source_crop": [
+        55,
+        47,
+        328,
+        312
+      ],
+      "size": [
+        273,
+        265
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 257,
+        "h": 249
+      },
+      "foot": {
+        "x": 78,
+        "y": 248
+      },
+      "headContact": {
+        "x": 98,
+        "y": 43
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 19838,
+      "sha256": "8906b462784f20f4f4b76af5fd5696d38446273b29c3a62b5ae819b24ac8f0d4"
+    },
+    {
+      "state": "swish",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/persian-swish.png",
+      "source": "source.png",
+      "source_crop": [
+        343,
+        51,
+        659,
+        312
+      ],
+      "size": [
+        316,
+        261
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 300,
+        "h": 245
+      },
+      "foot": {
+        "x": 75,
+        "y": 244
+      },
+      "headContact": {
+        "x": 95,
+        "y": 43
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26622,
+      "sha256": "ef1f76a04901a96e6cd924276af4dc459f1efce8c73f32d46e51a233eee58865"
+    },
+    {
+      "state": "blink",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/persian-blink.png",
+      "source": "source.png",
+      "source_crop": [
+        669,
+        51,
+        935,
+        312
+      ],
+      "size": [
+        266,
+        261
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 250,
+        "h": 245
+      },
+      "foot": {
+        "x": 75,
+        "y": 244
+      },
+      "headContact": {
+        "x": 99,
+        "y": 43
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 17593,
+      "sha256": "575d3e697fe78ffef6d972d7532b1e0633cd63b571f32d17099f653a23f9edd6"
+    },
+    {
+      "state": "happy",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/persian-happy.png",
+      "source": "source.png",
+      "source_crop": [
+        1000,
+        51,
+        1254,
+        312
+      ],
+      "size": [
+        254,
+        261
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 241,
+        "h": 245
+      },
+      "foot": {
+        "x": 79,
+        "y": 244
+      },
+      "headContact": {
+        "x": 99,
+        "y": 43
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 16889,
+      "sha256": "17acec68f6f5cee0c90fcff9ee0ca55457eac80ee65fa0917214a17314ccd4f4"
+    },
+    {
+      "state": "walkA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/persian-walkA.png",
+      "source": "source.png",
+      "source_crop": [
+        2,
+        342,
+        355,
+        597
+      ],
+      "size": [
+        353,
+        255
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 343,
+        "h": 239
+      },
+      "foot": {
+        "x": 150,
+        "y": 238
+      },
+      "headContact": {
+        "x": 93,
+        "y": 44
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 22659,
+      "sha256": "f438e5ef333c771770144253bbc289db1e7e7b6c57de2225492526ff00c462d3"
+    },
+    {
+      "state": "walkB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/persian-walkB.png",
+      "source": "vertical-correction-source.png",
+      "source_crop": [
+        94,
+        135,
+        953,
+        677
+      ],
+      "size": [
+        859,
+        542
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 843,
+        "h": 526
+      },
+      "foot": {
+        "x": 418,
+        "y": 524
+      },
+      "headContact": {
+        "x": 153,
+        "y": 86
+      },
+      "sourceToWorldScale": 0.021,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 157681,
+      "sha256": "02a1351fff6477c393dfe28fedec783b1841478e8a3f01346f85565f6b3b0134"
+    },
+    {
+      "state": "sleep",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/persian-sleep.png",
+      "source": "vertical-correction-source.png",
+      "source_crop": [
+        141,
+        958,
+        865,
+        1395
+      ],
+      "size": [
+        724,
+        437
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 708,
+        "h": 421
+      },
+      "foot": {
+        "x": 375,
+        "y": 419
+      },
+      "headContact": {
+        "x": 205,
+        "y": 108
+      },
+      "sourceToWorldScale": 0.021,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 66960,
+      "sha256": "5beffad6448fd30cd6acccd7b3a0b62710e72061959d7b8182721241cea5e12e"
+    },
+    {
+      "state": "groomA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/persian-groomA.png",
+      "source": "source.png",
+      "source_crop": [
+        993,
+        343,
+        1254,
+        602
+      ],
+      "size": [
+        261,
+        259
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 249,
+        "h": 243
+      },
+      "foot": {
+        "x": 77,
+        "y": 242
+      },
+      "headContact": {
+        "x": 91,
+        "y": 46
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 17008,
+      "sha256": "b60d36e50ff1040bdf08c9bf40ba1bacf32bd230c9b1a9e5db896a2997865b16"
+    },
+    {
+      "state": "groomB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/persian-groomB.png",
+      "source": "source.png",
+      "source_crop": [
+        48,
+        628,
+        285,
+        908
+      ],
+      "size": [
+        237,
+        280
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 222,
+        "h": 265
+      },
+      "foot": {
+        "x": 69,
+        "y": 264
+      },
+      "headContact": {
+        "x": 91,
+        "y": 42
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 14454,
+      "sha256": "a6528e6d3e7a89438e5283cadc8acf6fc90f1325d6ec70141db8adffb37cd997"
+    },
+    {
+      "state": "stretch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/persian-stretch.png",
+      "source": "source.png",
+      "source_crop": [
+        286,
+        613,
+        675,
+        908
+      ],
+      "size": [
+        389,
+        295
+      ],
+      "bbox": {
+        "x": 7,
+        "y": 8,
+        "w": 374,
+        "h": 283
+      },
+      "foot": {
+        "x": 199,
+        "y": 282
+      },
+      "headContact": {
+        "x": 132,
+        "y": 182
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 47978,
+      "sha256": "11fd27443d90f9af49d44831479ace27f5455ebe99c5e9474fe73a4d32c1badf"
+    },
+    {
+      "state": "watch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/persian-watch.png",
+      "source": "source.png",
+      "source_crop": [
+        683,
+        661,
+        968,
+        915
+      ],
+      "size": [
+        285,
+        254
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 269,
+        "h": 238
+      },
+      "foot": {
+        "x": 81,
+        "y": 237
+      },
+      "headContact": {
+        "x": 91,
+        "y": 40
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 23186,
+      "sha256": "5b8e2a73acbeb9ea0198768408f4dd738f71e38c1323f428ab06e700c139d4f0"
+    },
+    {
+      "state": "lookUp",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/persian-lookUp.png",
+      "source": "source.png",
+      "source_crop": [
+        988,
+        610,
+        1254,
+        913
+      ],
+      "size": [
+        266,
+        303
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 256,
+        "h": 287
+      },
+      "foot": {
+        "x": 83,
+        "y": 286
+      },
+      "headContact": {
+        "x": 106,
+        "y": 47
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 21591,
+      "sha256": "21817ed9b6b9e1ee1f74cdb663e5583ef78d2374ed70531b446287b80cc2c997"
+    },
+    {
+      "state": "nuzzleA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/persian-nuzzleA.png",
+      "source": "source.png",
+      "source_crop": [
+        44,
+        910,
+        345,
+        1220
+      ],
+      "size": [
+        301,
+        310
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 6,
+        "w": 285,
+        "h": 296
+      },
+      "foot": {
+        "x": 82,
+        "y": 293
+      },
+      "headContact": {
+        "x": 97,
+        "y": 35
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 26952,
+      "sha256": "4b1d441e11aa8b10fbacd4448f3f8470c709a6d08aa8082125ba01b8e6c52646"
+    },
+    {
+      "state": "nuzzleB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/persian/persian-nuzzleB.png",
+      "source": "source.png",
+      "source_crop": [
+        356,
+        909,
+        655,
+        1220
+      ],
+      "size": [
+        299,
+        311
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 4,
+        "w": 283,
+        "h": 299
+      },
+      "foot": {
+        "x": 124,
+        "y": 294
+      },
+      "headContact": {
+        "x": 126,
+        "y": 36
+      },
+      "sourceToWorldScale": 0.0435,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 24515,
+      "sha256": "6e9b4e7231e04ec77ecf529ce2ca9b54da51fccced455ed8a5e5ecbb5287cc20"
+    }
+  ]
+}

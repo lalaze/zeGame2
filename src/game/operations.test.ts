@@ -1,11 +1,14 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { MENU, PRICE_MILESTONES, type ItemId } from './data';
 import { openShop } from './day';
 import { bakeForForecast, dayDemand, dayNeeds, itemPrice, milestoneMultiplier, restock, setBakePlan, suggestedBake } from './economy';
-import { bakeryPlan, nextBatch } from './kitchen';
+import { bakeryPlan, cookHome, kitchenObstacles, kitchenPath, nextBatch, stationSpot } from './kitchen';
+import { areaBounds, doorwayY, FLOOR_Y } from './layout';
+import { segmentCrossesObstacle, type FloorPoint } from './navigation';
 import { OperationMonitor, operationStatus } from './operations';
 import { SaveSession } from './save-session';
-import { Sim } from './sim';
+import { Sim, type Cook } from './sim';
+import type { SimSnapshot } from './sim-snapshot';
 import { createInitialState, deserialize, SAVE_KEY, serialize, type GameState } from './state';
 
 function ready(ids: ItemId[] = ['espresso', 'roll']) {
@@ -25,6 +28,58 @@ function rng(seed = 12) { return () => { seed = (seed * 1664525 + 1013904223) >>
 function storage() {
   const map = new Map<string, string>();
   return { getItem: (k: string) => map.get(k) ?? null, setItem: (k: string, v: string) => { map.set(k, v); } };
+}
+
+/** Restore rebuilds cook routes from their current feet to the active station.
+ * Canonicalize only those four derived fields; every other runtime field stays exact. */
+function withCanonicalCookRoutes(snapshot: SimSnapshot): SimSnapshot {
+  const expected = structuredClone(snapshot);
+  expected.cooks = expected.cooks.map((cook, i) => {
+    const destination = cook.batch ? stationSpot(cook.batch.steps[cook.batch.step]) : cookHome(i);
+    const journey = kitchenPath(cook, destination);
+    let previous: FloorPoint = cook;
+    const route = journey.filter((point) => {
+      const different = point.x !== previous.x || point.y !== previous.y;
+      previous = point;
+      return different;
+    });
+    const [first, ...via] = route;
+    return { ...cook, tx: first?.x ?? cook.x, ty: first?.y ?? cook.y, via, journey };
+  });
+  return expected;
+}
+
+/** Check actual segments independently of the route builder, including clearance
+ * around fixtures and the only legal crossing into the main café's staff lane. */
+function expectClearCookRoute(cook: Cook, i: number): void {
+  expect(cook.pathBlocked).toBe(false);
+  const target = cook.batch ? stationSpot(cook.batch.steps[cook.batch.step]) : cookHome(i);
+  const destination = { x: target.x, y: target.y };
+  const bounds = areaBounds('kitchen');
+  const laneY = doorwayY('kitchen', 'right');
+  const obstacles = kitchenObstacles().map((r) => ({ x: r.x - 3, y: r.y - 3, w: r.w + 6, h: r.h + 6 }));
+  const pointIsClear = (point: FloorPoint) => {
+    expect(Number.isFinite(point.x) && Number.isFinite(point.y)).toBe(true);
+    if (point.x >= -12 && point.x <= stationSpot('door').x && Math.abs(point.y - laneY) < 0.001) return;
+    expect(point.x).toBeGreaterThanOrEqual(bounds.x + 5);
+    expect(point.x).toBeLessThanOrEqual(bounds.x + bounds.w - 5);
+    expect(point.y).toBeGreaterThanOrEqual(bounds.y + FLOOR_Y);
+    expect(point.y).toBeLessThanOrEqual(bounds.y + bounds.h - 8);
+  };
+  for (const route of [[{ x: cook.tx, y: cook.ty }, ...cook.via], cook.journey ?? []]) {
+    let at: FloorPoint = { x: cook.x, y: cook.y };
+    pointIsClear(at);
+    for (const next of route) {
+      pointIsClear(next);
+      for (const obstacle of obstacles) expect(segmentCrossesObstacle(at, next, obstacle)).toBe(false);
+      if ((at.x < 0) !== (next.x < 0)) {
+        expect(at.y).toBeCloseTo(laneY, 8);
+        expect(next.y).toBeCloseTo(laneY, 8);
+      }
+      at = next;
+    }
+    expect({ x: at.x, y: at.y }).toEqual(destination);
+  }
 }
 
 describe('production planning', () => {
@@ -105,42 +160,69 @@ describe('gentle closing and saved service', () => {
     expect(sim.closeShop(s)).toBeNull();
     expect(s.day).toBe(2);
   });
-  it('refreshes mid-close with in-flight plates and batches without consuming ingredients twice', () => {
-    const store = storage();
-    const s = ready();
-    s.upgrades.marketing = 4;
-    store.setItem(SAVE_KEY, serialize(s));
-    const first = new SaveSession(store, 0, () => {});
-    openShop(first.state);
-    // Stop at a genuine batch plus accepted-order state.
-    let found = false;
-    for (let n = 0; n < 6000; n++) {
-      first.sim.update(first.state, 0.05);
-      if (first.sim.cooks.some((c) => c.batch) && first.sim.customers.some((c) => c.phase === 'waiting')) { found = true; break; }
+  it.each([12, 291])('refreshes mid-close with in-flight plates and batches without consuming ingredients twice (seed %i)', (seed) => {
+    const random = vi.spyOn(Math, 'random').mockImplementation(rng(seed));
+    try {
+      const store = storage();
+      const s = ready();
+      s.upgrades.marketing = 4;
+      store.setItem(SAVE_KEY, serialize(s));
+      const first = new SaveSession(store, 0, () => {});
+      openShop(first.state);
+      // Stop at a genuine batch plus accepted-order state.
+      let found = false;
+      for (let n = 0; n < 6000; n++) {
+        first.sim.update(first.state, 0.05);
+        if (first.sim.cooks.some((c) => c.batch) && first.sim.customers.some((c) => c.phase === 'waiting')) { found = true; break; }
+      }
+      expect(found).toBe(true);
+      first.sim.beginClosing(first.state);
+      expect(first.save(first.state)).toBe('saved');
+      const snapshot = first.sim.snapshot(first.state);
+      const savedPantry = { ...first.state.pantry };
+      const savedCost = first.state.today.ingredientCost;
+      const inProduction = { ...first.state.inProduction };
+      const expected = withCanonicalCookRoutes(snapshot);
+      snapshot.cooks.forEach(expectClearCookRoute);
+      if (seed === 291) {
+        // Preserve the failing doorway case: x >= 0 replans directly to pickup,
+        // omitting the old route's still-unreached x=12 doorway waypoint.
+        const cook = snapshot.cooks[0];
+        expect(cook.x).toBeGreaterThanOrEqual(0);
+        expect(cook.x).toBeLessThan(12);
+        expect(cook.y).toBe(doorwayY('kitchen', 'right'));
+        expect(cook.tx).toBe(12);
+        expect(cook.journey).toEqual([{ x: 12, y: cook.y }, { x: stationSpot('door').x, y: cook.y }]);
+        expect(expected.cooks[0].tx).toBe(stationSpot('door').x);
+      }
+      first.close();
+      // An accepted customer still walking to the counter has not paid ingredients yet.
+      // Compare with uninterrupted service, rather than assuming all costs were consumed.
+      for (let n = 0; n < 4000 && !first.sim.finishedService; n++) first.sim.update(first.state, 0.05);
+      expect(first.sim.finishedService).toBe(true);
+      const pantry = { ...first.state.pantry };
+      const cost = first.state.today.ingredientCost;
+      const second = new SaveSession(store, 0, () => {});
+      expect(second.state.phase).toBe('closing');
+      expect(second.state.pantry).toEqual(savedPantry);
+      expect(second.state.today.ingredientCost).toBe(savedCost);
+      expect(second.state.inProduction).toEqual(inProduction);
+      const restored = second.sim.snapshot(second.state);
+      expect(restored).toEqual(expected);
+      restored.cooks.forEach(expectClearCookRoute);
+      for (let n = 0; n < 4000 && !second.sim.finishedService; n++) second.sim.update(second.state, 0.05);
+      expect(second.sim.finishedService).toBe(true);
+      expect(second.state.pantry).toEqual(pantry);
+      expect(second.state.today.ingredientCost).toBe(cost);
+      second.sim.closeShop(second.state);
+      expect(second.save(second.state)).toBe('saved');
+      const third = new SaveSession(store, 0, () => {});
+      expect(third.state.phase).toBe('prep');
+      expect(third.state.day).toBe(2);
+      expect(third.sim.customers).toEqual([]);
+    } finally {
+      random.mockRestore();
     }
-    expect(found).toBe(true);
-    first.sim.beginClosing(first.state);
-    first.save(first.state);
-    const snapshot = first.sim.snapshot(first.state);
-    first.close();
-    // An accepted customer still walking to the counter has not paid ingredients yet.
-    // Compare with uninterrupted service, rather than assuming all costs were consumed.
-    for (let n = 0; n < 4000 && !first.sim.finishedService; n++) first.sim.update(first.state, 0.05);
-    const pantry = { ...first.state.pantry };
-    const cost = first.state.today.ingredientCost;
-    const second = new SaveSession(store, 0, () => {});
-    expect(second.state.phase).toBe('closing');
-    expect(second.sim.snapshot(second.state)).toEqual(snapshot);
-    for (let n = 0; n < 4000 && !second.sim.finishedService; n++) second.sim.update(second.state, 0.05);
-    expect(second.sim.finishedService).toBe(true);
-    expect(second.state.pantry).toEqual(pantry);
-    expect(second.state.today.ingredientCost).toBe(cost);
-    second.sim.closeShop(second.state);
-    second.save(second.state);
-    const third = new SaveSession(store, 0, () => {});
-    expect(third.state.phase).toBe('prep');
-    expect(third.state.day).toBe(2);
-    expect(third.sim.customers).toEqual([]);
   });
   it('restores shared tray/pass references and keeps service moving', () => {
     const s = ready(); openShop(s);

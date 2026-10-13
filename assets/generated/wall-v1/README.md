@@ -1,0 +1,13 @@
+# Main wall sprites
+New built-in imagegen assets: hollow window/frame/gingham curtain overlay, blank green chalkboard, brass lamp. No sky/menu text baked in. No source code modified.
+
+Window aperture QA in manifest proves all four sampled interior rectangles are fully/nearly fully transparent: top two alpha0, bottom two at most alpha1/255 in tiny fraction. Outer frame/curtain and mullions remain opaque. apertureUnionApprox marks where animated village should render behind overlay; curtains cover portions at outer sides.
+
+BBox uses alpha > 128, not all-nonzero alpha. Independent PNGs are lossless crops with 10pxpadding and preserved RGBA. Geometry differs modestly from requested exact ratios; maintain aspect unless engineering chooses safe frame adaptation. Writing area is marked for real menu overlay. No full game integration or dynamic day/night test claimed.
+
+Prompt:
+Produce three isolated wall-fixture sprites for the warm fine-pixel café in the reference. Match the detailed walnut grain, red-cream gingham cloth, dark green board and brass lamp from the café reference, with crisp hand-placed pixel clusters, dark contours, upper-left warm light and shallow elevated front view. Not smooth 3D, not lowpoly.
+1536x1024 transparent canvas. TOP LEFT: one window FRAME plus gathered red-and-cream gingham curtains and thick wooden sill. Complete outside silhouette aspect ratio62:54. Inner window aperture rectangle ratio46:38. Warm walnut frame with slender vertical and horizontal center mullions forming four panes. Curtains tied back at outer sides, NOT obscuring most openings. MOST IMPORTANT: all FOUR pane interiors are real transparent alpha holes, completely empty, no blue glass, no cream fill, NO SKY, NO landscape, no building, no clouds, no reflections. This is a hollow overlay frame through which game day/night animation will appear. No checkered pattern painted inside panes.
+TOP RIGHT: one wide blank dark forest-green chalkboard in polished walnut frame, full object aspect100:44 (2.27:1), broad empty dark-green matte writable area, mild subtle chalk texture only. Absolutely NO writing, NO letters, NO icons, NO chalk drawings. Standalone frame with tiny chalk ledge.
+BOTTOM CENTER: one small antique brass wall lantern fixture with warm cream opaque glass and compact decorative wall mount. No cast-light cone or halo outside the lantern; game adds dynamic light separately.
+At least100px clear transparent gaps between all objects, 64px safe canvas margins; keep objects complete, no floor or wall panel, no extra props or labels. Genuine transparent alpha outside silhouettes and inside all four window openings. Keep contrast rich but gentle, not harsh black shiny rendering.

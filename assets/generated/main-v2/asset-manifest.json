@@ -1,0 +1,242 @@
+[
+  {
+    "name": "empty-pastry-cabinet",
+    "file": "empty-pastry-cabinet.png",
+    "source": "pastry-production-sheet.png",
+    "source_crop": [
+      254,
+      47,
+      1271,
+      638
+    ],
+    "size": [
+      1017,
+      591
+    ],
+    "visible_alpha_bbox": [
+      12,
+      12,
+      1005,
+      579
+    ],
+    "transparent_pixels": 59907,
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "recommended_anchor_pixel": [
+      508,
+      578
+    ]
+  },
+  {
+    "name": "croissant",
+    "file": "croissant.png",
+    "source": "pastry-production-sheet.png",
+    "source_crop": [
+      283,
+      681,
+      720,
+      974
+    ],
+    "size": [
+      437,
+      293
+    ],
+    "visible_alpha_bbox": [
+      12,
+      12,
+      425,
+      281
+    ],
+    "transparent_pixels": 47777,
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "recommended_anchor_pixel": [
+      218,
+      280
+    ]
+  },
+  {
+    "name": "strawberry-cake",
+    "file": "strawberry-cake.png",
+    "source": "pastry-production-sheet.png",
+    "source_crop": [
+      914,
+      654,
+      1250,
+      981
+    ],
+    "size": [
+      336,
+      327
+    ],
+    "visible_alpha_bbox": [
+      12,
+      12,
+      324,
+      315
+    ],
+    "transparent_pixels": 30297,
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "recommended_anchor_pixel": [
+      168,
+      314
+    ]
+  },
+  {
+    "name": "table-no-vase",
+    "file": "table-no-vase.png",
+    "source": "seating-production-sheet.png",
+    "source_crop": [
+      175,
+      16,
+      738,
+      478
+    ],
+    "size": [
+      563,
+      462
+    ],
+    "visible_alpha_bbox": [
+      12,
+      12,
+      551,
+      450
+    ],
+    "transparent_pixels": 98986,
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "recommended_anchor_pixel": [
+      281,
+      449
+    ]
+  },
+  {
+    "name": "flower-vase",
+    "file": "flower-vase.png",
+    "source": "seating-production-sheet.png",
+    "source_crop": [
+      957,
+      166,
+      1221,
+      447
+    ],
+    "size": [
+      264,
+      281
+    ],
+    "visible_alpha_bbox": [
+      12,
+      12,
+      252,
+      269
+    ],
+    "transparent_pixels": 31615,
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "recommended_anchor_pixel": [
+      132,
+      268
+    ]
+  },
+  {
+    "name": "chair-facing-right",
+    "file": "chair-facing-right.png",
+    "source": "seating-production-sheet.png",
+    "source_crop": [
+      240,
+      475,
+      619,
+      1002
+    ],
+    "size": [
+      379,
+      527
+    ],
+    "visible_alpha_bbox": [
+      12,
+      12,
+      367,
+      515
+    ],
+    "transparent_pixels": 94408,
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "recommended_anchor_pixel": [
+      189,
+      514
+    ]
+  },
+  {
+    "name": "chair-facing-left",
+    "file": "chair-facing-left.png",
+    "source": "seating-production-sheet.png",
+    "source_crop": [
+      931,
+      480,
+      1304,
+      1003
+    ],
+    "size": [
+      373,
+      523
+    ],
+    "visible_alpha_bbox": [
+      12,
+      12,
+      361,
+      511
+    ],
+    "transparent_pixels": 93830,
+    "alpha_extrema": [
+      0,
+      254
+    ],
+    "recommended_anchor_pixel": [
+      186,
+      510
+    ]
+  },
+  {
+    "name": "empty-wide-display",
+    "file": "empty-wide-display.png",
+    "source": "wide-display-source.png",
+    "source_crop": [
+      29,
+      159,
+      1970,
+      680
+    ],
+    "size": [
+      1941,
+      521
+    ],
+    "visible_alpha_bbox": [
+      12,
+      12,
+      1929,
+      509
+    ],
+    "transparent_pixels": 100430,
+    "alpha_extrema": [
+      0,
+      255
+    ],
+    "recommended_anchor_pixel": [
+      970,
+      508
+    ]
+  }
+]

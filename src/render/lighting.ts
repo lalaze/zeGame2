@@ -113,5 +113,5 @@ export const roomAmbient = (light: Lighting, area: AreaId) => mix('#ffffff', lig
  * the sun as it crosses the sky, and stretches out when the sun is low.
  */
 export function beam(sun: Sun): { lean: number; length: number } {
-  return { lean: Math.round((sun.x - 0.5) * -60), length: Math.round(20 + (1 - sun.elevation) * 36) };
+  return { lean: Math.round((sun.x - 0.5) * -60), length: Math.round(78 + (1 - sun.elevation) * 58) };
 }

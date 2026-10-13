@@ -1,0 +1,25 @@
+{
+  "id": 27,
+  "name": "金盏牛角扣",
+  "look": {
+    "skin": 0,
+    "hair": 2,
+    "hairStyle": 0,
+    "shirt": 3,
+    "pants": 0
+  },
+  "hairstyle": 0,
+  "outfit": "duffle",
+  "accessory": "none",
+  "accent": "#9c775c",
+  "generated": false,
+  "framesPerIdentity": 15,
+  "palette": {
+    "skin": "#f4cfad",
+    "hair": "#dfb96f",
+    "shirt": "#d3a453",
+    "pants": "#53637b"
+  },
+  "hatPalette": "#69a295",
+  "description": "Fixed customer cast 27 (金盏牛角扣): warm skin #f4cfad; hair #dfb96f in short softly tousled hair with a side-swept fringe. Outfit: #d3a453 hip-length duffle coat with three cream/gold toggle fastenings and cream collar. Lower clothing color #53637b; warm dark brown leather shoes. Accent #9c775c. No glasses, headband, bow or bag."
+}

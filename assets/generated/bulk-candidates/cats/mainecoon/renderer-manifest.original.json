@@ -1,0 +1,550 @@
+{
+  "breed": "mainecoon",
+  "version": 1,
+  "generator": "built-in image_gen",
+  "sourceSheetDimensions": [
+    1254,
+    1254
+  ],
+  "bboxAlphaThreshold": "alpha > 128, excludes faint fringe; original alpha preserved in lossless crops",
+  "facingConvention": {
+    "walkA": "head-left",
+    "walkB": "head-left",
+    "other": "front-three-quarter slightly left; nuzzle head tilts independently"
+  },
+  "scaleNote": "One calibrated sourceToWorldScale for every frame from each source sheet. Estimated from common head width, never frame-height fit; runtime head/contact verification required.",
+  "anchorNote": "Manually visually estimated grounded front-paw/support midpoint and crown/forehead between ears, not ear tips. Contact/flip verification remains runtime work.",
+  "qa": {
+    "status": "source-and-final-crops-inspected; runtime validation pending",
+    "checks": [
+      "Breed-specific longhair morphology inspected",
+      "14 action mapping present"
+    ],
+    "corrections": "Selected crowded or hidden-tail frames replaced from separate spacious correction sheets.",
+    "correctionSheets": [
+      {
+        "file": "action-correction-source.png",
+        "states": [
+          "groomB",
+          "nuzzleA"
+        ],
+        "sharedScale": 0.0185,
+        "note": "Same breed; lossless source crops with independent sheet-level head-size calibration."
+      }
+    ],
+    "identifiedIssues": [],
+    "remainingRuntimeChecks": [
+      "Game-scale silhouette and breed legibility",
+      "Walking step continuity and physical head/body scale across source sheets",
+      "Head-to-hand contact for lookUp/nuzzle",
+      "Exact state mapping, route flip and reduced motion",
+      "Low-alpha fringe on light/dark scene backgrounds"
+    ]
+  },
+  "frames": [
+    {
+      "state": "idle",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/mainecoon-idle.png",
+      "source": "source.png",
+      "source_crop": [
+        44,
+        15,
+        316,
+        312
+      ],
+      "size": [
+        272,
+        297
+      ],
+      "bbox": {
+        "x": 1,
+        "y": 8,
+        "w": 263,
+        "h": 281
+      },
+      "foot": {
+        "x": 79,
+        "y": 280
+      },
+      "headContact": {
+        "x": 88,
+        "y": 65
+      },
+      "sourceToWorldScale": 0.049,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 33114,
+      "sha256": "ba80d54c2b785300303fade829c1a0d117bc9121a758df57dea800a2c283345d"
+    },
+    {
+      "state": "swish",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/mainecoon-swish.png",
+      "source": "source.png",
+      "source_crop": [
+        354,
+        14,
+        675,
+        311
+      ],
+      "size": [
+        321,
+        297
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 308,
+        "h": 281
+      },
+      "foot": {
+        "x": 90,
+        "y": 280
+      },
+      "headContact": {
+        "x": 92,
+        "y": 65
+      },
+      "sourceToWorldScale": 0.049,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 48005,
+      "sha256": "24ccb2a198a10184d98c5f4f92ca9d42ade8fdb2d05df298abcb2312fc8de03f"
+    },
+    {
+      "state": "blink",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/mainecoon-blink.png",
+      "source": "source.png",
+      "source_crop": [
+        682,
+        20,
+        939,
+        312
+      ],
+      "size": [
+        257,
+        292
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 8,
+        "w": 244,
+        "h": 276
+      },
+      "foot": {
+        "x": 64,
+        "y": 275
+      },
+      "headContact": {
+        "x": 83,
+        "y": 64
+      },
+      "sourceToWorldScale": 0.049,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 29692,
+      "sha256": "7f38ca81a9cd509b2f05c4bdac5b3f31659ba1624ea51b306da9c65eb1b50646"
+    },
+    {
+      "state": "happy",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/mainecoon-happy.png",
+      "source": "source.png",
+      "source_crop": [
+        995,
+        18,
+        1251,
+        312
+      ],
+      "size": [
+        256,
+        294
+      ],
+      "bbox": {
+        "x": 4,
+        "y": 8,
+        "w": 244,
+        "h": 278
+      },
+      "foot": {
+        "x": 78,
+        "y": 277
+      },
+      "headContact": {
+        "x": 85,
+        "y": 64
+      },
+      "sourceToWorldScale": 0.049,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 29771,
+      "sha256": "b1fc6874984a3c1e1b4b406466d08c3825a87915ef1e7285a966e8e2d1f4cab3"
+    },
+    {
+      "state": "walkA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/mainecoon-walkA.png",
+      "source": "source.png",
+      "source_crop": [
+        4,
+        343,
+        344,
+        596
+      ],
+      "size": [
+        340,
+        253
+      ],
+      "bbox": {
+        "x": 7,
+        "y": 8,
+        "w": 325,
+        "h": 237
+      },
+      "foot": {
+        "x": 144,
+        "y": 236
+      },
+      "headContact": {
+        "x": 70,
+        "y": 64
+      },
+      "sourceToWorldScale": 0.049,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 31497,
+      "sha256": "2db233ea4dda3fcd9ac63c82953859dcbb03df3d876550d1d4c7ae1675ea6d20"
+    },
+    {
+      "state": "walkB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/mainecoon-walkB.png",
+      "source": "source.png",
+      "source_crop": [
+        351,
+        353,
+        706,
+        596
+      ],
+      "size": [
+        355,
+        243
+      ],
+      "bbox": {
+        "x": 0,
+        "y": 8,
+        "w": 351,
+        "h": 227
+      },
+      "foot": {
+        "x": 139,
+        "y": 226
+      },
+      "headContact": {
+        "x": 63,
+        "y": 59
+      },
+      "sourceToWorldScale": 0.049,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 34079,
+      "sha256": "03a4e6dec0f08f9985c27a95a79c1be955287ea66f4203bbd0511f2984eeb6a9"
+    },
+    {
+      "state": "sleep",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/mainecoon-sleep.png",
+      "source": "source.png",
+      "source_crop": [
+        706,
+        410,
+        971,
+        606
+      ],
+      "size": [
+        265,
+        196
+      ],
+      "bbox": {
+        "x": 4,
+        "y": 8,
+        "w": 253,
+        "h": 180
+      },
+      "foot": {
+        "x": 113,
+        "y": 179
+      },
+      "headContact": {
+        "x": 88,
+        "y": 50
+      },
+      "sourceToWorldScale": 0.049,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 13763,
+      "sha256": "b3f64818efa5efae3eb01d7b219d8c752aa44e98638c187f1ae3c0cd07bdccd1"
+    },
+    {
+      "state": "groomA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/mainecoon-groomA.png",
+      "source": "source.png",
+      "source_crop": [
+        1016,
+        328,
+        1244,
+        603
+      ],
+      "size": [
+        228,
+        275
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 212,
+        "h": 262
+      },
+      "foot": {
+        "x": 74,
+        "y": 261
+      },
+      "headContact": {
+        "x": 75,
+        "y": 69
+      },
+      "sourceToWorldScale": 0.049,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 22319,
+      "sha256": "b3ac338fbe6b5ac5f83d5bbf90726c5650a11871ba226db043a1bd3b16cc0370"
+    },
+    {
+      "state": "groomB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/mainecoon-groomB.png",
+      "source": "action-correction-source.png",
+      "source_crop": [
+        35,
+        140,
+        743,
+        935
+      ],
+      "size": [
+        708,
+        795
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 692,
+        "h": 779
+      },
+      "foot": {
+        "x": 216,
+        "y": 777
+      },
+      "headContact": {
+        "x": 238,
+        "y": 181
+      },
+      "sourceToWorldScale": 0.0185,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 220448,
+      "sha256": "78c1029800f9c97ef3323c55237c03058c0909cb6993375f9381327d98faf88c"
+    },
+    {
+      "state": "stretch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/mainecoon-stretch.png",
+      "source": "source.png",
+      "source_crop": [
+        308,
+        626,
+        672,
+        909
+      ],
+      "size": [
+        364,
+        283
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 348,
+        "h": 273
+      },
+      "foot": {
+        "x": 170,
+        "y": 272
+      },
+      "headContact": {
+        "x": 115,
+        "y": 179
+      },
+      "sourceToWorldScale": 0.049,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 49479,
+      "sha256": "7af9f8dabe72b3f748ffcbc6b3801d9da09cc2a902973e2c3ed1a4e26b583104"
+    },
+    {
+      "state": "watch",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/mainecoon-watch.png",
+      "source": "source.png",
+      "source_crop": [
+        693,
+        627,
+        956,
+        919
+      ],
+      "size": [
+        263,
+        292
+      ],
+      "bbox": {
+        "x": 6,
+        "y": 8,
+        "w": 249,
+        "h": 276
+      },
+      "foot": {
+        "x": 84,
+        "y": 275
+      },
+      "headContact": {
+        "x": 80,
+        "y": 59
+      },
+      "sourceToWorldScale": 0.049,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 30882,
+      "sha256": "9993a40acae69d0e489e85ae31a6a9dc83f4bdeb0280268f295f9a5cc103bd57"
+    },
+    {
+      "state": "lookUp",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/mainecoon-lookUp.png",
+      "source": "source.png",
+      "source_crop": [
+        1003,
+        603,
+        1254,
+        919
+      ],
+      "size": [
+        251,
+        316
+      ],
+      "bbox": {
+        "x": 5,
+        "y": 5,
+        "w": 238,
+        "h": 303
+      },
+      "foot": {
+        "x": 80,
+        "y": 299
+      },
+      "headContact": {
+        "x": 93,
+        "y": 52
+      },
+      "sourceToWorldScale": 0.049,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 28856,
+      "sha256": "42898c3edf81eb0ac3f74b1d3aadbc02b2e0fc340d0515c363c0c68ec42e9b32"
+    },
+    {
+      "state": "nuzzleA",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/mainecoon-nuzzleA.png",
+      "source": "action-correction-source.png",
+      "source_crop": [
+        841,
+        10,
+        1536,
+        935
+      ],
+      "size": [
+        695,
+        925
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 8,
+        "w": 683,
+        "h": 909
+      },
+      "foot": {
+        "x": 212,
+        "y": 907
+      },
+      "headContact": {
+        "x": 271,
+        "y": 138
+      },
+      "sourceToWorldScale": 0.0185,
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "transparent_pixels": 235917,
+      "sha256": "e4e2e99c6b9f566224cfb4963fc5790330f46d931a34bd8d2feab07da6fc3ece"
+    },
+    {
+      "state": "nuzzleB",
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-bulk-cats-v1/mainecoon/mainecoon-nuzzleB.png",
+      "source": "source.png",
+      "source_crop": [
+        389,
+        911,
+        670,
+        1228
+      ],
+      "size": [
+        281,
+        317
+      ],
+      "bbox": {
+        "x": 8,
+        "y": 3,
+        "w": 265,
+        "h": 306
+      },
+      "foot": {
+        "x": 89,
+        "y": 300
+      },
+      "headContact": {
+        "x": 100,
+        "y": 59
+      },
+      "sourceToWorldScale": 0.049,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "transparent_pixels": 33009,
+      "sha256": "c5674aac7ac82177e84fb95678c27acceba0edcabab051d79fb98c98adc7f7cc"
+    }
+  ]
+}
