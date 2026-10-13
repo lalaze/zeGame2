@@ -1,0 +1,304 @@
+{
+  "note": "Last autosave only; read does not advance or save simulation",
+  "origin": "http://127.0.0.1:5302",
+  "viewport": {
+    "width": 390,
+    "height": 720,
+    "scrollWidth": 390
+  },
+  "version": 15,
+  "day": 9,
+  "phase": "prep",
+  "dayTime": 0,
+  "coins": 11726,
+  "totalEarned": 1726,
+  "served": 36,
+  "pantry": {
+    "beans": 100,
+    "milk": 53.25,
+    "flour": 70,
+    "butter": 70,
+    "eggs": 100,
+    "sugar": 76.5,
+    "tea": 100,
+    "spice": 100,
+    "cocoa": 100,
+    "cream": 100,
+    "fruit": 76.5,
+    "matcha": 100
+  },
+  "signatureDrinks": {
+    "recipes": [
+      {
+        "id": "sig:fruit:fruit=1,milk=2,sugar=1",
+        "name": "莓云二号",
+        "onMenu": true
+      }
+    ],
+    "tested": [
+      "sig:fruit:fruit=1,milk=1,sugar=1",
+      "sig:fruit:fruit=1,milk=2,sugar=1"
+    ],
+    "served": {
+      "sig:fruit:fruit=1,milk=2,sugar=1": 23
+    }
+  },
+  "items": {
+    "espresso": 1,
+    "americano": 1,
+    "latte": 1,
+    "cappuccino": 0,
+    "flatwhite": 0,
+    "cortado": 0,
+    "mocha": 0,
+    "vienna": 0,
+    "macchiato": 0,
+    "coldbrew": 0,
+    "dirty": 0,
+    "pourover": 0,
+    "creamcoffee": 0,
+    "affogato": 0,
+    "blacktea": 1,
+    "hotchoc": 1,
+    "lemontea": 1,
+    "chai": 1,
+    "fruittea": 1,
+    "hojicha": 0,
+    "matcha": 1,
+    "frappe": 0,
+    "smoothie": 0,
+    "milktea": 0,
+    "matchafloat": 0,
+    "roll": 1,
+    "bagel": 0,
+    "baguette": 0,
+    "cheesebun": 0,
+    "pretzel": 0,
+    "focaccia": 0,
+    "ciabatta": 0,
+    "raisinbread": 0,
+    "sourdough": 0,
+    "rye": 0,
+    "chocobread": 0,
+    "shokupan": 0,
+    "brioche": 0,
+    "fruitbrioche": 0,
+    "garlicbread": 0,
+    "donut": 1,
+    "scone": 0,
+    "cookie": 0,
+    "croissant": 0,
+    "painchoc": 0,
+    "brownie": 0,
+    "cinnamon": 0,
+    "muffin": 0,
+    "creampuff": 0,
+    "melonpan": 0,
+    "eggtart": 0,
+    "cake": 0,
+    "swissroll": 0,
+    "cheesecake": 0,
+    "macaron": 0,
+    "sig:fruit:fruit=1,milk=2,sugar=1": 1
+  },
+  "regions": [],
+  "kitchen": true,
+  "today": {
+    "reviews": {
+      "stars": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reasons": {},
+      "totalScore": 0
+    },
+    "served": 0,
+    "missed": 0,
+    "soldOut": 0,
+    "queueLost": 0,
+    "tableLost": 0,
+    "extraLost": 0,
+    "doorLost": 0,
+    "shortages": {},
+    "revenue": 0,
+    "ingredientCost": 0,
+    "petCost": 0,
+    "promotionCost": 0,
+    "sales": {},
+    "baked": {}
+  },
+  "pets": [],
+  "promotion": null,
+  "regularGuests": {
+    "guests": {
+      "june": {
+        "firstMetDay": 8,
+        "served": 1,
+        "unlockedChapters": [
+          0
+        ],
+        "readChapters": [],
+        "lastUnlockDay": 8,
+        "servedVisitIds": [
+          1
+        ],
+        "pendingVisitIds": [],
+        "pendingDay": 8
+      },
+      "nico": {
+        "firstMetDay": 8,
+        "served": 2,
+        "unlockedChapters": [
+          0
+        ],
+        "readChapters": [],
+        "lastUnlockDay": 8,
+        "servedVisitIds": [
+          2,
+          10
+        ],
+        "pendingVisitIds": [],
+        "pendingDay": 8
+      },
+      "ren": {
+        "firstMetDay": 8,
+        "served": 1,
+        "unlockedChapters": [
+          0
+        ],
+        "readChapters": [],
+        "lastUnlockDay": 8,
+        "servedVisitIds": [
+          3
+        ],
+        "pendingVisitIds": [],
+        "pendingDay": 8
+      },
+      "alba": {
+        "firstMetDay": 8,
+        "served": 1,
+        "unlockedChapters": [
+          0
+        ],
+        "readChapters": [],
+        "lastUnlockDay": 8,
+        "servedVisitIds": [
+          4
+        ],
+        "pendingVisitIds": [],
+        "pendingDay": 8
+      },
+      "theo": {
+        "firstMetDay": 8,
+        "served": 2,
+        "unlockedChapters": [
+          0
+        ],
+        "readChapters": [],
+        "lastUnlockDay": 8,
+        "servedVisitIds": [
+          5,
+          9
+        ],
+        "pendingVisitIds": [],
+        "pendingDay": 8
+      },
+      "iris": {
+        "firstMetDay": 8,
+        "served": 2,
+        "unlockedChapters": [
+          0
+        ],
+        "readChapters": [],
+        "lastUnlockDay": 8,
+        "servedVisitIds": [
+          6,
+          11
+        ],
+        "pendingVisitIds": [],
+        "pendingDay": 8
+      },
+      "tess": {
+        "firstMetDay": 8,
+        "served": 1,
+        "unlockedChapters": [
+          0
+        ],
+        "readChapters": [],
+        "lastUnlockDay": 8,
+        "servedVisitIds": [
+          7
+        ],
+        "pendingVisitIds": [],
+        "pendingDay": 8
+      },
+      "mina": {
+        "firstMetDay": 8,
+        "served": 1,
+        "unlockedChapters": [
+          0
+        ],
+        "readChapters": [],
+        "lastUnlockDay": 8,
+        "servedVisitIds": [
+          8
+        ],
+        "pendingVisitIds": [],
+        "pendingDay": 8
+      }
+    },
+    "nextVisitId": 12
+  }
+}[
+  {
+    level: 'error',
+    message: "TypeError: Cannot read properties of undefined (reading 'includes')\n" +
+      '    at eo (http://127.0.0.1:5302/assets/game-BBd-5oH5.js:1:56897)\n' +
+      '    at to (http://127.0.0.1:5302/assets/game-BBd-5oH5.js:1:57809)\n' +
+      '    at no (http://127.0.0.1:5302/assets/game-BBd-5oH5.js:1:58187)\n' +
+      '    at Ao.drawThoughts (http://127.0.0.1:5302/assets/game-BBd-5oH5.js:1:84281)\n' +
+      '    at Ao.update (http://127.0.0.1:5302/assets/game-BBd-5oH5.js:1:71337)\n' +
+      '    at initialize.step (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:98:6678)\n' +
+      '    at initialize.update (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:97:30269)\n' +
+      '    at initialize.step (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:1:80225)\n' +
+      '    at initialize.step (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:1:84534)\n' +
+      '    at t (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:1:146714)',
+    timestamp: '2026-10-12T14:30:50.565Z',
+    url: 'http://127.0.0.1:5302/assets/game-BBd-5oH5.js'
+  },
+  {
+    level: 'error',
+    message: "TypeError: Cannot read properties of undefined (reading 'includes')\n" +
+      '    at eo (http://127.0.0.1:5302/assets/game-DWsnFTfC.js:1:56905)\n' +
+      '    at to (http://127.0.0.1:5302/assets/game-DWsnFTfC.js:1:57817)\n' +
+      '    at no (http://127.0.0.1:5302/assets/game-DWsnFTfC.js:1:58195)\n' +
+      '    at Ao.drawThoughts (http://127.0.0.1:5302/assets/game-DWsnFTfC.js:1:84288)\n' +
+      '    at Ao.update (http://127.0.0.1:5302/assets/game-DWsnFTfC.js:1:71345)\n' +
+      '    at initialize.step (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:98:6678)\n' +
+      '    at initialize.update (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:97:30269)\n' +
+      '    at initialize.step (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:1:80225)\n' +
+      '    at initialize.step (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:1:84534)\n' +
+      '    at t (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:1:146714)',
+    timestamp: '2026-10-12T14:31:33.081Z',
+    url: 'http://127.0.0.1:5302/assets/game-DWsnFTfC.js'
+  },
+  {
+    level: 'error',
+    message: "TypeError: Cannot read properties of undefined (reading 'includes')\n" +
+      '    at eo (http://127.0.0.1:5302/assets/game-Cb5tn3PG.js:1:56905)\n' +
+      '    at to (http://127.0.0.1:5302/assets/game-Cb5tn3PG.js:1:57817)\n' +
+      '    at no (http://127.0.0.1:5302/assets/game-Cb5tn3PG.js:1:58195)\n' +
+      '    at Ao.drawThoughts (http://127.0.0.1:5302/assets/game-Cb5tn3PG.js:1:84288)\n' +
+      '    at Ao.update (http://127.0.0.1:5302/assets/game-Cb5tn3PG.js:1:71345)\n' +
+      '    at initialize.step (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:98:6678)\n' +
+      '    at initialize.update (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:97:30269)\n' +
+      '    at initialize.step (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:1:80225)\n' +
+      '    at initialize.step (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:1:84534)\n' +
+      '    at t (http://127.0.0.1:5302/assets/phaser-D8EC1TLR.js:1:146714)',
+    timestamp: '2026-10-12T14:37:53.249Z',
+    url: 'http://127.0.0.1:5302/assets/game-Cb5tn3PG.js'
+  }
+]

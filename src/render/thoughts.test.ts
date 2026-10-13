@@ -1,13 +1,15 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { CUSTOMER_CAST } from '../game/customer-cast';
 import { seatSpot } from '../game/layout';
-import { MENU } from '../game/data';
+import { MENU, INGREDIENTS, type ItemId } from '../game/data';
+import { makeSignatureId, trialSignature, saveSignature, setSignatureOnMenu, type SignatureBase, type SignatureRecipe } from '../game/signature-drinks';
 import { batchSteps, stationSpot, type Station } from '../game/kitchen';
 import { Sim, type Barista, type Cook, type Customer, type CustomerPhase, type Server } from '../game/sim';
 import { createInitialState, serialize, type GameState } from '../game/state';
 import { messagesFor, type MessageKey } from '../i18n';
 import { CHAR_H } from './sprites';
 import { thoughtCandidates } from './thoughts';
+import { openShop } from '../game/day';
 
 const look = { skin: 0, hair: 0, hairStyle: 0, shirt: 0, pants: 0 };
 function customer(patch: Partial<Customer> = {}): Customer {
@@ -300,4 +302,71 @@ describe('cosmetic thoughts contract', () => {
     expect(a.cooks).toEqual(b.cooks);
     expect(rngA).toHaveBeenCalledTimes(rngB.mock.calls.length);
   });
+});
+
+
+describe('custom drink dining thoughts', () => {
+  const cases: [SignatureBase, SignatureRecipe, number, MessageKey][] = [
+    ['coffee', { beans: 1 }, 0, 'thought.like.bold'],
+    ['tea', { tea: 1 }, 4, 'thought.like.tea'],
+    ['milk', { milk: 1 }, 1, 'thought.like.milky'],
+    ['fruit', { fruit: 1 }, 6, 'thought.like.fruity'],
+  ];
+  it.each(cases)('renders %s flavor after the served celebration without mutating the simulation', (base, recipe, appearanceId, expected) => {
+    const id = makeSignatureId(base, recipe)!;
+    const { state, sim, c } = setup({ ...dining, order: id, appearanceId, mood: 'happy', moodTimer: 1 });
+    expect(keyOf(sim, state)).toBe('thought.customer.served');
+    c.moodTimer = 0;
+    const before = serialize(state), customerBefore = JSON.stringify(c);
+    freezeDeep(state); freezeDeep(c);
+    for (let i = 0; i < 20; i++) expect(keyOf(sim, state)).toBe(expected);
+    expect(serialize(state)).toBe(before); expect(JSON.stringify(c)).toBe(customerBefore);
+  });
+  it.each(cases)('considers %s custom drinks in either delivered combo position', (base, recipe, appearanceId, expected) => {
+    const id = makeSignatureId(base, recipe)!;
+    const neutral: ItemId = base === 'tea' ? 'espresso' : 'blacktea';
+    for (const [order, extra] of [[id, neutral], [neutral, id]] as [ItemId, ItemId][]) {
+      const { state, sim, c } = setup({ ...dining, order, extra, appearanceId });
+      const before = serialize(state), customerBefore = JSON.stringify(c);
+      freezeDeep(state); freezeDeep(c);
+      expect(keyOf(sim, state)).toBe(expected);
+      expect(serialize(state)).toBe(before); expect(JSON.stringify(c)).toBe(customerBefore);
+    }
+  });
+  it.each([
+    ['sig:coffee:beans=1,cocoa=1', 2, 'thought.like.cocoa'],
+    ['sig:coffee:beans=1,sugar=1', 3, 'thought.like.sweet'],
+    ['sig:coffee:beans=1,spice=1', 5, 'thought.like.spiced'],
+    ['sig:milk:matcha=1,milk=1', 4, 'thought.like.tea'],
+    ['sig:fruit:cream=1,fruit=1', 1, 'thought.like.milky'],
+  ] as [ItemId, number, MessageKey][])('maps addon flavor for %s', (order, appearanceId, expected) => {
+    const { state, sim } = setup({ ...dining, order, appearanceId });
+    expect(keyOf(sim, state)).toBe(expected);
+  });
+});
+
+
+it.each(['coffee', 'tea', 'milk', 'fruit'] as const)('continues rendered thoughts after a real %s custom dine-in handoff', (base) => {
+  const s = createInitialState(0);
+  for (const item of MENU) s.items[item.id] = 1;
+  for (const ingredient of INGREDIENTS) s.pantry[ingredient.id] = 100;
+  const recipe = { [base === 'coffee' ? 'beans' : base]: 1 };
+  const id = makeSignatureId(base, recipe)!;
+  expect(trialSignature(s, base, recipe).ok).toBe(true);
+  expect(saveSignature(s, id, 'Real dining')).toBe(true);
+  expect(setSignatureOnMenu(s, id, true)).toBe(true);
+  s.onMenu = [];
+  const sim = new Sim(() => 0);
+  openShop(s);
+  for (let i = 0; i < 3000 && !sim.customers.some(c => c.phase === 'sitting' && c.hasCup && c.moodTimer <= 0); i++) {
+    sim.update(s, .05);
+    expect(() => thoughtCandidates(sim, s)).not.toThrow();
+  }
+  const diner = sim.customers.find(c => c.phase === 'sitting' && c.hasCup && c.moodTimer <= 0);
+  expect(diner).toBeDefined();
+  expect(diner!.order).toBe(id);
+  const stateBefore = serialize(s), snapshotBefore = JSON.stringify(sim.snapshot(s));
+  expect(thoughtCandidates(sim, s).some(t => t.id === `customer:${diner!.id}` && t.context.startsWith('taste:'))).toBe(true);
+  expect(serialize(s)).toBe(stateBefore);
+  expect(JSON.stringify(sim.snapshot(s))).toBe(snapshotBefore);
 });

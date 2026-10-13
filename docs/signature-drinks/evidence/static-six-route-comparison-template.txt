@@ -1,0 +1,27 @@
+import { expect, it } from 'vitest';
+import { writeFileSync } from 'node:fs';
+import { createInitialState } from 'SOURCE/game/state';
+import { MENU, INGREDIENTS } from 'SOURCE/game/data';
+import { salePrice, prepTime, restockQuote, dayDemand } from 'SOURCE/game/economy';
+import { STYLE_IDS, setCafeStyle, styleStages } from 'SOURCE/game/styles';
+import { openShop } from 'SOURCE/game/day';
+import { Sim } from 'SOURCE/game/sim';
+it('captures unchanged static-route economic samples', () => {
+  const rows = STYLE_IDS.map(style => {
+    const s = createInitialState(0); s.kitchen=true; s.coins=5000;
+    for (const m of MENU) s.items[m.id]=3;
+    for (const i of INGREDIENTS) s.pantry[i.id]=1000;
+    s.onMenu=['espresso','blacktea','donut']; s.bakePlan.donut=15;
+    s.upgrades.machine=2;s.upgrades.barista=1;s.upgrades.server=1;
+    setCafeStyle(s,style);
+    const quotes=MENU.map(m=>[m.id,salePrice(s,m.id),prepTime(s,m.id)]);
+    const forecast=[...dayDemand(s)]; const restock=restockQuote(s); const stages=styleStages(s,style);
+    let seed=453; const sim=new Sim(()=>{ seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;});
+    openShop(s); for(let i=0;i<3600;i++) sim.update(s,.05); sim.beginClosing(s);
+    for(let i=0;i<10000&&!sim.finishedService;i++)sim.update(s,.05);
+    expect(sim.finishedService).toBe(true);
+    const report=sim.closeShop(s);
+    return {style,quotes,forecast,restock,stages,report,coins:s.coins,pantry:s.pantry,handoffs:s.cafeStyle.handoffs};
+  });
+  writeFileSync('OUTPUT',JSON.stringify(rows,null,2));
+});

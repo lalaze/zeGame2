@@ -1,0 +1,12 @@
+
+ RUN  v5.0.3 /workspace/shared/zeGame2-play-flow
+
+
+ Test Files  3 passed (3)
+      Tests  55 passed (55)
+   Start at  08:51:24
+   Duration  5.09s (tests 66%, transform 22%, environment 6%, import 4%)
+
+    Isolate  3 workers spawned · ~248ms startup each (spawn + environment, per file)
+             at least ~497ms faster with isolate: false — reuses workers across files instead of one per file
+

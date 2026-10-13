@@ -1,0 +1,100 @@
+Traffic candidate 0.8–1.2: v1 migration fixture diagnosis
+======================================================
+
+Original focused regression run: 117 passed, 1 failed.
+Failing test: src/game/merge-runtime.test.ts
+  merged service persistence and kitchen rules
+  > migrates v1 service at safe anchors without losing paid work or duplicating reviews
+
+Original assertion at src/game/merge-runtime.test.ts:93:42:
+  expect(resumed.restore(raw, loaded)).toBe(true);
+  Expected: true
+  Received: false
+
+The fixture starts from a modern runtime snapshot and converts it to v1 by
+removing modern fields. It removed appearanceId, but left regularGuestId and
+regularGuestVisitId, which also did not exist in v1. Different traffic timing
+made this pre-existing inconsistency observable: reachLiveOrders succeeded at
+33.25000000000025 seconds with these live guests:
+  id 6: sitting; regularGuestId=mina; regularGuestVisitId=1
+  id 8: waiting; no regular identity
+  id 9: toCounter; no regular identity
+
+After the fixture stripped appearanceId, validSnapshot correctly rejected
+Mina's regular identity without its matching appearance. In a read-only
+reproduction, deleting regularGuestId and regularGuestVisitId from the same
+snapshot made validSnapshot return true and Sim.restore return true.
+
+Repair: delete those two post-v1 fields while constructing the synthetic v1
+fixture. No gameplay, migration, identity-validation or snapshot-validation
+rules were relaxed. The coordinator explicitly approved this fixture-only repair.
+
+The traffic model remains a 90-second unit-mean envelope (0.8 to 1.2), applied
+only to open-shop spawn countdown. Existing jitter renewal still discards the
+frame's expired-timer overshoot and admits at most one customer per update,
+as before; full simulation trajectories are not guaranteed identical across
+different timestep sizes. Envelope integrals and unexpired spawn budgets are
+step-additive, covered by focused tests.
+
+Full-suite follow-up and fixture repairs
+---------------------------------------
+The initial full run (before the above v1 fixture repair was loaded) reported
+7 failures, 1,034 passes and 19 skips. The other failures were:
+
+1. style-persistence.test.ts, takeaway/community handoff comparisons.
+   The original branch continued its seed-870 generator; the reload branch
+   started an unrelated seed-901 generator. Accepted toCounter guests still
+   make their dine-in decision after closing. At the new snapshot timing,
+   takeaway had id 22 (donut + blacktea) and community had id 20 (donut) at
+   toCounter. Both branches served the same totals (22 and 20), but the guest
+   chose a different service mode, correctly changing table/tea counters.
+   Takeaway original/resumed tableServed: 9/10; teaPairs: 1/2.
+   Community original/resumed tableServed: 9/10.
+   A controlled reproduction that synchronized future RNG draws at the
+   snapshot made the counters identical. The repaired fixture synchronizes
+   those future draws and retains every existing equality assertion. No
+   production RNG persistence or handoff logic changed.
+
+2. chair-access.test.ts assumed the historical blocked visit had id 18.
+   The exact historical paid arrangement still blocked chair 4, now with
+   id 22 at 72.85s; that guest remained genuinely stuck after 300s of closing.
+   The repaired test locates the actual blocked toSeat guest, asserts chair 4,
+   retains its ID, verifies rerouting that same visit after load, verifies it
+   receives its order, and retains the exactly-one-additional-sale assertion.
+
+3. settlement-advice.test.ts hardcoded 45 table losses, 145 consumed ingredient
+   units and 100 sold espressos for its seed. The new candidate produced 34
+   table losses, 152 consumed units and 118 sold espressos, with no cancelled
+   guest and the correct watchPass advice. The repaired test verifies positive
+   real table losses and sales, then the accounting identity:
+     consumed ingredient cost - sold espressos * espresso unit cost
+       = table losses * espresso unit cost
+       = advice.unrecoveredIngredientCost
+   It also checks the exact reason amount, no unfinished-work reason, no
+   cancelled review and unchanged watchPass guidance. It does not merely
+   replace the old expected numbers with the new observed ones.
+
+4. scripts/economy-lab.test.ts exceeded its 5s default timeout while the full
+   suite ran in parallel. An isolated rerun passed all four enabled tests
+   (one opt-in test skipped), in 3.4s. Final bounded-worker verification remains
+   the coordinator's responsibility.
+
+5. scripts/balance.test.ts remains unchanged and failed its high-pressure
+   fast-menu-versus-latte ordering assertion: 514 versus 542 operating profit.
+   This is a 12-seed mean over 360s, not a single-seed observation. The economic
+   validation owner was notified to assess it alongside the fixed paired
+   protocol. A changed expectation is not an accepted economic fix.
+
+The coordinator explicitly authorized the three fixture repairs above.
+
+Candidate narrowing
+-------------------
+The initial 20% pilot report is retained in BALANCE-waves20-pilot-v1.md. Its
+paired sample and the untouched legacy menu-ranking regression prompted the
+coordinator to request a 10% candidate. Only TRAFFIC_AMPLITUDE changed from
+0.2 to 0.1: bounds are now 0.9–1.1, with the same 90-second cycle, phase
+durations, exact unit mean, open-only clock application and jitter logic.
+Focused boundary tests were updated to reflect this amplitude. Prices,
+patience, promotions, forecast formulas and the existing balance assertion
+remain unchanged. This is a candidate pending economic validation, not a
+claim that the 20% failures have disappeared.

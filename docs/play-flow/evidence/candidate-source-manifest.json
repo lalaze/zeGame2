@@ -1,0 +1,20 @@
+{
+  "baselineGameSourceHash": "c81346116b3956830810fdd5ac3764e3de4c876a179563ea653a0385b8b7a893",
+  "baselineToTreatmentChangedGameFiles": [
+    "sim.ts",
+    "traffic.ts"
+  ],
+  "archivedCandidates": {
+    "waves20-pilot-v1": {
+      "gameSourceHash": "befd511da7a1c5e5a4757fac4a2862178d34b8c02b4a4bdb7efc2596a3527f5e",
+      "simSha256": "4bd61e34032e345d4df1f3d88a966f1349e108b7894286eecf2fdc91c1e1e11c",
+      "trafficSha256": "9d54cf2f8caa6407db51a9b640b1966329ff1bc9cc4e95a39aff48a6fbc1f0ff"
+    },
+    "waves10-pilot-v1": {
+      "gameSourceHash": "050f12965e50cf3edc0a2a3b8916b69a9222c4c1c0e5b4e74376b107dc6b84d9",
+      "simSha256": "4bd61e34032e345d4df1f3d88a966f1349e108b7894286eecf2fdc91c1e1e11c",
+      "trafficSha256": "281f994790e0f9a341a3c25d7bc5ed57e470e44210b183d957eb5dc4e2f4bc80"
+    }
+  },
+  "currentTreatmentGameSourceHash": "050f12965e50cf3edc0a2a3b8916b69a9222c4c1c0e5b4e74376b107dc6b84d9"
+}

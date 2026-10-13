@@ -1,0 +1,27 @@
+
+ RUN  v5.0.3 /workspace/shared/zeGame2-play-flow
+
+waves20-pilot-v1: route-purchases/early/base/coffee/focus@180: 2/2; 0.05s
+waves20-pilot-v1: route-purchases/early/base/coffee/focus@1800: 2/2; 0.53s
+waves20-pilot-v1: route-purchases/early/rush/bakery/focus@180: 2/2; 0.71s
+waves20-pilot-v1: route-purchases/early/rush/bakery/focus@1800: 2/2; 1.33s
+waves20-pilot-v1: route-purchases/mid/base/cats/focus@180: 2/2; 0.60s
+waves20-pilot-v1: route-purchases/mid/base/cats/focus@1800: 2/2; 4.53s
+waves20-pilot-v1: route-purchases/mid/rush/takeaway/focus@180: 2/2; 0.09s
+waves20-pilot-v1: route-purchases/mid/rush/takeaway/focus@1800: 2/2; 0.81s
+waves20-pilot-v1: route-purchases/late/base/garden/focus@180: 2/2; 4.41s
+waves20-pilot-v1: route-purchases/late/base/garden/focus@1800: 2/2; 22.79s
+waves20-pilot-v1: route-purchases/late/rush/community/focus@180: 2/2; 0.18s
+waves20-pilot-v1: route-purchases/late/rush/community/focus@1800: 2/2; 1.03s
+waves20-pilot-v1: sanity/fresh/base@180: 2/2; 0.06s
+waves20-pilot-v1: sanity/fresh/base@1800: 2/2; 0.53s
+waves20-pilot-v1: sanity/signature-heavy/mid/base@180: 2/2; 0.11s
+waves20-pilot-v1: sanity/signature-heavy/mid/base@1800: 2/2; 0.98s
+waves20-pilot-v1: sanity/signature-heavy/mid/rush@180: 2/2; 0.13s
+waves20-pilot-v1: sanity/signature-heavy/mid/rush@1800: 2/2; 1.37s
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  08:25:34
+   Duration  41.24s (tests 99%, transform 1%)
+

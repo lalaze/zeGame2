@@ -1,0 +1,45 @@
+ M scripts/subset-font.mjs
+ M src/game/data.ts
+ M src/game/economy.ts
+ M src/game/menu-stock.test.ts
+ M src/game/promotion.ts
+ M src/game/recovery.test.ts
+ M src/game/recovery.ts
+ M src/game/regular-guests-content.ts
+ M src/game/regular-guests.ts
+ M src/game/reputation.ts
+ M src/game/settlement-advice.ts
+ M src/game/sim-snapshot.ts
+ M src/game/state.ts
+ M src/game/styles.ts
+ M src/game/taste.ts
+ M src/locales/en.json
+ M src/locales/zh.json
+ M src/main.ts
+ M src/render/sprites.ts
+ M src/render/thoughts.test.ts
+ M src/render/thoughts.ts
+ M src/style.css
+ M src/ui/panel.ts
+ M src/ui/prepare.ts
+ M src/ui/reputation.ts
+ M src/ui/settlement.ts
+ M src/ui/taste.ts
+?? docs/playtest/2026-10-12/fixtures/
+?? docs/playtest/2026-10-12/generate-fixtures.mjs
+?? docs/playtest/2026-10-12/harness.html
+?? docs/playtest/2026-10-12/regulars-recheck-directory.txt
+?? docs/signature-drinks/
+?? src/game/signature-balance.test.ts
+?? src/game/signature-drinks.test.ts
+?? src/game/signature-drinks.ts
+?? src/game/signature-independent-review.test.ts
+?? src/game/signature-operations.test.ts
+?? src/game/signature-persistence.test.ts
+?? src/game/signature-restock.test.ts
+?? src/game/signature-review.test.ts
+?? src/render/signature-drink-art.test.ts
+?? src/render/signature-drink-art.ts
+?? src/ui/item-name.ts
+?? src/ui/signature-drinks.test.ts
+?? src/ui/signature-drinks.ts

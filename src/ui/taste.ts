@@ -1,3 +1,4 @@
+import { displayItemName } from './item-name';
 import { researchBlock, researchSignature, signatureCost, tasteScore, tasteTier, SKILLED_SERVINGS, SIGNATURE_SERVINGS } from '../game/taste';
 import type { ItemId } from '../game/data';
 import type { GameState } from '../game/state';
@@ -21,7 +22,7 @@ export function tasteProgressLabel(state: GameState, id: ItemId): string {
 
 export function showTaste(state: GameState, id: ItemId, onResearch: () => void): void {
   const block = researchBlock(state, id);
-  const name = t(`item.${id}`);
+  const name = displayItemName(id, state);
   showModal({
     title: t('taste.title', { item: name }),
     body: `<div class="taste-overview"><strong>${tasteLabel(state, id)}</strong><p>${tasteProgressLabel(state, id)}</p></div>

@@ -1,0 +1,99 @@
+- heading "Signature drink QA · isolated cloud Chromium viewport simulation" [level=1]
+- paragraph: Synthetic research fixture unlocks ingredients, sets pantry to100 and cash to10000 on day8. This is not a naturally earned progression or physical-phone test.
+- text: Fixture
+- combobox "Fixture":
+  - 'option "Signature QA: synthetic unlocked ingredients, pantry100, $10000" [selected]'
+- text: Language
+- combobox "Language":
+  - option "English" [selected]
+  - option "中文"
+- button "Replace disposable QA café"
+- button "Resume current QA save"
+- text: Viewport
+- combobox "Viewport":
+  - option "1000×740 desktop"
+  - option "1180×757 desktop"
+  - option "360×720"
+  - option "390×720" [selected]
+  - option "430×720"
+  - option "720×390 landscape"
+  - option "360×320 reduced height"
+- button "Read saved counters"
+- button "Download QA saved JSON"
+- generic: Viewport 390×720
+- iframe [active] [id="game"]:
+  - banner:
+    - generic: Signature QA
+    - button "Balance $9940. View exact amount": $9940
+    - generic: Revenue today $0
+    - button "Collapse management panel" [expanded]: Collapse
+    - button "Settings": ···
+  - button "★ New café · No reviews yet · Review traffic ±0% · View customer reviews":
+    - generic: ★ New café · No reviews yet
+    - generic: Review traffic ±0%
+    - generic: ›
+  - button "Regular guests":
+    - generic: Regulars
+  - generic: "Day 8: the shop is open!"
+  - main:
+    - generic: Day 8 · Open 0:00
+    - button "1×"
+    - button "2×"
+    - button "4×"
+    - button "Close shop"
+    - button "Café style · Your own mix": Style
+    - button "Service status · details"
+    - generic "Main café"
+    - button "Map":
+      - generic: Map
+    - navigation "Café areas":
+      - button "Through the left door to Kitchen":
+      - button "Preview Reading room to the right":
+    - complementary "Management panel":
+      - tablist:
+        - tab "Menu"
+        - tab "Pantry"
+        - tab "Upgrades"
+        - tab "Furnish"
+        - tab "Cats"
+        - tab "Promote" [selected]
+      - heading "Invite a café creator" [level=3]
+      - paragraph: Hire a creator on Douyin (豆音) or Xiaohongshu for a video or café feature. One campaign at a time; stock up and prepare your team first.
+      - paragraph: "Promotion delivered today: $0.04"
+      - paragraph: Current arrivals ~18.0/min · Counter capacity ~10.0/min
+      - paragraph: More traffic does not guarantee sales or profit. Long queues, slow service and stockouts can earn bad reviews; promotion never directly lowers ratings. Capacity estimates exclude delivery, seating and stock bottlenecks.
+      - generic "Campaign and payment rules"
+      - heading "Douyin (豆音) · Local creator video" [level=3]
+      - status: Running · 3m 0s left · +50% traffic when running
+      - progressbar "Remaining campaign time"
+      - button "Pause campaign"
+      - generic: ▶
+      - heading "Douyin (豆音)" [level=3]
+      - paragraph: Café videos · A short burst of attention
+      - heading "Local creator video" [level=4]
+      - paragraph: +50% traffic · 3 open minutes
+      - paragraph: "Estimated arrivals: 12.0 → 18.0/min"
+      - paragraph: "Projected demand exceeds counter capacity: higher queue and bad-review risk."
+      - paragraph: A campaign is already booked. Book another after it finishes.
+      - button "Hire creator · $60" [disabled]
+      - heading "Popular creator spotlight" [level=4]
+      - paragraph: +100% traffic · 3 open minutes
+      - paragraph: "Estimated arrivals: 12.0 → 24.0/min"
+      - paragraph: "Projected demand exceeds counter capacity: higher queue and bad-review risk."
+      - paragraph: A campaign is already booked. Book another after it finishes.
+      - button "Hire creator · $180" [disabled]
+      - generic: ✦
+      - heading "Xiaohongshu (小红薯)" [level=3]
+      - paragraph: Lifestyle features · Gentler, longer exposure
+      - heading "Neighborhood café feature" [level=4]
+      - paragraph: +25% traffic · 6 open minutes
+      - paragraph: "Estimated arrivals: 12.0 → 15.0/min"
+      - paragraph: "Projected demand exceeds counter capacity: higher queue and bad-review risk."
+      - paragraph: A campaign is already booked. Book another after it finishes.
+      - button "Hire creator · $50" [disabled]
+      - heading "Featured lifestyle creator" [level=4]
+      - paragraph: +60% traffic · 6 open minutes
+      - paragraph: "Estimated arrivals: 12.0 → 19.2/min"
+      - paragraph: "Projected demand exceeds counter capacity: higher queue and bad-review risk."
+      - paragraph: A campaign is already booked. Book another after it finishes.
+      - button "Hire creator · $150" [disabled]

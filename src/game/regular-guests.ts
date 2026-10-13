@@ -1,3 +1,4 @@
+import { signatureDefinition } from './signature-drinks';
 import { isDrink, MENU, type ItemId } from './data';
 import { readyServings } from './economy';
 import { REGULAR_GUESTS } from './regular-guests-content';
@@ -108,7 +109,7 @@ export function regularGuestOrder(state: GameState, id: string | undefined, orde
     !state.onMenu.includes(guest.preferredDrink) || readyServings(state, guest.preferredDrink) < 1) return { order, extra };
   const drink = MENU.find((item) => item.id === guest.preferredDrink);
   if (!drink || !isDrink(drink.category)) return { order, extra };
-  const original = MENU.find((item) => item.id === order)!;
+  const original = MENU.find((item) => item.id === order) ?? signatureDefinition(order)!;
   if (isDrink(original.category)) return { order: guest.preferredDrink, extra };
   return { order, extra: extra === null ? null : guest.preferredDrink };
 }

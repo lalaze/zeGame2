@@ -1,4 +1,5 @@
 import { MENU, type ItemId } from './data';
+import { signatureDefinition } from './signature-drinks';
 import type { GameState } from './state';
 
 export const SKILLED_SERVINGS = 30;
@@ -9,9 +10,20 @@ export interface TasteState {
   signature: ItemId[];
 }
 export type TasteTier = 'standard' | 'skilled' | 'signature';
-export const tasteTier = (state: GameState, id: ItemId): TasteTier => state.taste.signature.includes(id)
-  ? 'signature' : (state.taste.served[id] ?? 0) >= SKILLED_SERVINGS ? 'skilled' : 'standard';
-export const tasteScore = (state: GameState, id: ItemId): number => ({ standard: 4, skilled: 4.5, signature: 5 })[tasteTier(state, id)];
+export const tasteTier = (state: GameState, id: ItemId): TasteTier => {
+  if (signatureDefinition(id)) {
+    const served = state.signatureDrinks.served[id] ?? 0;
+    return served >= SIGNATURE_SERVINGS ? 'signature' : served >= SKILLED_SERVINGS ? 'skilled' : 'standard';
+  }
+  return state.taste.signature.includes(id) ? 'signature'
+    : (state.taste.served[id] ?? 0) >= SKILLED_SERVINGS ? 'skilled' : 'standard';
+};
+export const tasteScore = (state: GameState, id: ItemId): number => {
+  const tier = tasteTier(state, id);
+  const custom = signatureDefinition(id);
+  return custom ? Math.min(5, Math.round((custom.quality + { standard: 0, skilled: 0.3, signature: 0.5 }[tier]) * 10) / 10)
+    : ({ standard: 4, skilled: 4.5, signature: 5 })[tier];
+};
 
 /** A combo gives equal weight to each dish that was actually delivered. */
 export function mealTaste(state: GameState, items: readonly ItemId[]): number {
@@ -19,17 +31,28 @@ export function mealTaste(state: GameState, items: readonly ItemId[]): number {
 }
 
 export function recordServings(state: GameState, items: readonly ItemId[]): void {
-  for (const id of items) state.taste.served[id] = Math.min(1_000_000_000, (state.taste.served[id] ?? 0) + 1);
+  for (const id of items) {
+    if (signatureDefinition(id)) {
+      const served = Math.min(1_000_000_000, (state.signatureDrinks.served[id] ?? 0) + 1);
+      state.signatureDrinks.served[id] = served;
+      state.taste.served[id] = served;
+    } else if (MENU.some((m) => m.id === id)) {
+      state.taste.served[id] = Math.min(1_000_000_000, (state.taste.served[id] ?? 0) + 1);
+    }
+  }
 }
 
 /** A fixed recipe investment, independent of price levels and review bonuses. */
 export function signatureCost(id: ItemId): number {
-  return Math.max(150, Math.ceil(MENU.find((m) => m.id === id)!.basePrice * 20));
+  const definition = MENU.find((m) => m.id === id);
+  return definition ? Math.max(150, Math.ceil(definition.basePrice * 20)) : 0;
 }
 
 export type ResearchBlock = 'locked' | 'owned' | 'experience' | 'open' | 'coins' | null;
 export function researchBlock(state: GameState, id: ItemId): ResearchBlock {
-  if (state.items[id] <= 0) return 'locked';
+  // Custom drinks practice automatically and cannot buy legacy research.
+  if (signatureDefinition(id)) return tasteTier(state, id) === 'signature' ? 'owned' : 'experience';
+  if (!MENU.some((m) => m.id === id) || !(state.items[id] > 0)) return 'locked';
   if (state.taste.signature.includes(id)) return 'owned';
   if ((state.taste.served[id] ?? 0) < SIGNATURE_SERVINGS) return 'experience';
   if (state.phase !== 'prep') return 'open';
@@ -47,7 +70,7 @@ export function researchSignature(state: GameState, id: ItemId): boolean {
 export function parseTaste(value: unknown, legacySales: Partial<Record<ItemId, number>>): TasteState {
   const valid = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
   const source = valid(value) ? value : {};
-  const served = valid(source.served) ? source.served : legacySales;
+  const served: Record<string, unknown> = valid(source.served) ? source.served : legacySales;
   const out: TasteState = { served: {}, signature: [] };
   for (const m of MENU) {
     const n = served[m.id];

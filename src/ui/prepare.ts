@@ -1,3 +1,4 @@
+import { showSignatureDrinks } from './signature-drinks';
 import { canEmergencyRestock, emergencyRestock } from '../game/recovery';
 import { promotionPlan } from '../game/promotion';
 import { forecastPetTraffic } from '../game/pets';
@@ -67,9 +68,9 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
       const on = onMenu.has(m.id);
       const ready = readyServings(state, m.id);
       const bake = eligible && isBakery(m.id) ? `<div class="bake">
-        <button class="chip bake-btn" data-focus="minus-${m.id}" data-bake="${m.id}:-1" aria-label="${itemName(m.id)} −${BAKE_STEP}" ${on ? '' : 'disabled'}>−${BAKE_STEP}</button>
-        <input class="bake-input" data-focus="amount-${m.id}" data-amount="${m.id}" type="number" min="0" max="9999" step="1" value="${state.bakePlan[m.id] ?? 0}" aria-label="${itemName(m.id)} · ${t('bake.label')}" ${on ? '' : 'disabled'} />
-        <button class="chip bake-btn" data-focus="plus-${m.id}" data-bake="${m.id}:1" aria-label="${itemName(m.id)} +${BAKE_STEP}" ${on ? '' : 'disabled'}>+${BAKE_STEP}</button>
+        <button class="chip bake-btn" data-focus="minus-${m.id}" data-bake="${m.id}:-1" aria-label="${itemName(m.id, state)} −${BAKE_STEP}" ${on ? '' : 'disabled'}>−${BAKE_STEP}</button>
+        <input class="bake-input" data-focus="amount-${m.id}" data-amount="${m.id}" type="number" min="0" max="9999" step="1" value="${state.bakePlan[m.id] ?? 0}" aria-label="${itemName(m.id, state)} · ${t('bake.label')}" ${on ? '' : 'disabled'} />
+        <button class="chip bake-btn" data-focus="plus-${m.id}" data-bake="${m.id}:1" aria-label="${itemName(m.id, state)} +${BAKE_STEP}" ${on ? '' : 'disabled'}>+${BAKE_STEP}</button>
         <small>${t('bake.suggested', { n: suggestedBake(state, m.id) })}</small>
       </div>` : '';
       const note = !eligible ? t('menu.requiresKitchen') : on ? isBakery(m.id) ? t('bake.forecast', { n: Math.ceil(demand.get(m.id) ?? 0) }) : t('prep.ready', { n: formatNumber(ready) }) : t('menu.off');
@@ -78,21 +79,21 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
       })}</small>` : '';
       return `<div class="prep-row${on ? '' : ' off'}${on && low.has(m.id) ? ' low' : ''}">
         <label class="prep-select"><input type="checkbox" data-focus="dish-${m.id}" data-dish="${m.id}" ${on ? 'checked' : ''} ${eligible ? '' : 'disabled'} />
-        <img src="${toDataURL(itemArtwork(m.id), 1)}" alt="" /><span class="prep-name"><b>${itemName(m.id)}</b><small>${note}</small>${ingredients}<small>${tasteLabel(state, m.id)}</small></span></label>${bake}</div>`;
+        <img src="${toDataURL(itemArtwork(m.id), 1)}" alt="" /><span class="prep-name"><b>${itemName(m.id, state)}</b><small>${note}</small>${ingredients}<small>${tasteLabel(state, m.id)}</small></span></label>${bake}</div>`;
     }).join('');
     const quote = restockQuote(state);
     const full = quote.cost <= 0;
     const missing = Object.entries(quote.buy).map(([id, n]) => `${ingredientName(id as keyof GameState['pantry'])} ×${n}`).join(t('list.sep'));
     const starterStock = state.day === 1 && state.totalEarned === 0 && full
       && onMenu.size === 1 && onMenu.has('espresso') && readyServings(state, 'espresso') > 0;
-    body.innerHTML = `<p>${t('prep.menuHint')}</p>
+    body.innerHTML = `<p>${t('prep.menuHint')}</p><button class="pixel-btn small ghost signature-entry" data-signature-research>${t('signature.entry')}</button>
       ${starterStock ? `<p class="note prep-starter">${t('prep.starterStock', { n: formatNumber(readyServings(state, 'espresso')) })}</p>` : ''}
       ${hasBakery ? `<p class="note prep-bakery-hint">${t('prep.bakeryHint')}</p>` : ''}
       <div class="prep-list">${rows}</div>
       ${onMenu.size === 0 ? `<p class="note warn prep-empty-menu" id="prep-empty-menu">${t('prep.emptyMenu')}</p>` : ''}
       ${hasBakery ? `<button class="pixel-btn small ghost" data-focus="forecast" data-forecast ${[...onMenu].some(isBakery) ? '' : 'disabled'}>${t('bake.all')}</button>` : ''}
       ${kitchenLoad(state) > 1 ? `<p class="note warn">${t('prep.capacity')}</p>` : ''}
-      ${low.size ? `<p class="note warn">${t('prep.low')} ${[...low].map(itemName).join(t('list.sep'))} ${t('prep.lowNext')}</p>` : ''}
+      ${low.size ? `<p class="note warn">${t('prep.low')} ${[...low].map((id) => itemName(id, state)).join(t('list.sep'))} ${t('prep.lowNext')}</p>` : ''}
       ${missing ? `<p class="note">${t('prep.missing', { items: missing })}</p>` : ''}
       ${quote.cost > state.coins ? `<p class="note warn">${t('prep.partial', { money: formatMoney(state.coins) })}</p>` : ''}
       ${onMenu.size ? `<button class="pixel-btn small ghost" data-focus="restock" data-restock ${full || state.coins <= 0 ? 'disabled' : ''}>${full ? t('pantry.full') : t('pantry.restock', { price: formatMoney(quote.cost) })}</button>` : ''}
@@ -140,6 +141,7 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
   });
   body.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;
+    if (target.closest('[data-signature-research]')) { showSignatureDrinks(state, onChange); return; }
     const step = target.closest<HTMLButtonElement>('button[data-bake]');
     if (step) {
       const [id, dir] = step.dataset.bake!.split(':') as [ItemId, string];

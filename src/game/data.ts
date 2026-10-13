@@ -4,7 +4,7 @@ export type Category = 'coffee' | 'tea' | 'bread' | 'pastry';
 export const CATEGORIES: readonly Category[] = ['coffee', 'tea', 'bread', 'pastry'];
 export const isDrink = (c: Category) => c === 'coffee' || c === 'tea';
 
-export type ItemId =
+export type StaticItemId =
   // coffee
   | 'espresso'
   | 'americano'
@@ -65,6 +65,8 @@ export type ItemId =
   | 'cheesecake'
   | 'macaron';
 
+export type ItemId = StaticItemId | `sig:${string}`;
+
 export interface MenuItemDef {
   id: ItemId;
   category: Category;
@@ -78,7 +80,7 @@ export interface MenuItemDef {
 
 // Each category unlocks in the order listed. New recipes fill gaps across the
 // progression, with different ingredient costs and serving times at each tier.
-export const MENU: readonly MenuItemDef[] = [
+export const MENU: readonly (MenuItemDef & { id: StaticItemId })[] = [
   { id: 'espresso', category: 'coffee', basePrice: 3, prepTime: 1.2, baseCost: 8 },
   { id: 'americano', category: 'coffee', basePrice: 5, prepTime: 2.4, baseCost: 40 },
   { id: 'latte', category: 'coffee', basePrice: 10, prepTime: 5, baseCost: 120 },
@@ -211,7 +213,7 @@ export const INGREDIENTS: readonly IngredientDef[] = [
 ];
 
 /** Units of each ingredient one serving uses. */
-export const RECIPES: Record<ItemId, Partial<Record<IngredientId, number>>> = {
+export const RECIPES: Record<StaticItemId, Partial<Record<IngredientId, number>>> = {
   espresso: { beans: 1 },
   americano: { beans: 1 },
   latte: { beans: 1, milk: 1 },

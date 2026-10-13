@@ -1,3 +1,4 @@
+import { signatureDefinition, setSignatureOnMenu } from './signature-drinks';
 import { stylePrepMultiplier, styleSaleMultiplier, styleOrderPairs, styleComboChance, styleArrivalMultiplier, styleTablePatienceExtra } from './styles';
 import { promotionTraffic } from './promotion';
 import { petTraffic, forecastPetTraffic } from './pets';
@@ -33,7 +34,7 @@ export type BuyAmount = 1 | 10 | 'max';
 const MENU_BY_ID = Object.fromEntries(MENU.map((m) => [m.id, m])) as Record<ItemId, MenuItemDef>;
 const UPGRADE_BY_ID = Object.fromEntries(UPGRADES.map((u) => [u.id, u])) as Record<UpgradeId, UpgradeDef>;
 
-export const menuItem = (id: ItemId) => MENU_BY_ID[id];
+export const menuItem = (id: ItemId): MenuItemDef => MENU_BY_ID[id] ?? signatureDefinition(id)!;
 // These ice-cream desserts need the kitchen despite their drinks-menu placement.
 export const requiresKitchen = (id: ItemId) => id === 'affogato' || id === 'matchafloat' || !isDrink(menuItem(id).category);
 export const canPrepareItem = (state: GameState, id: ItemId) => !requiresKitchen(id) || state.kitchen;
@@ -97,6 +98,7 @@ function quote(base: number, growth: number, level: number, coins: number, amoun
 
 export function quoteItem(state: GameState, id: ItemId, amount: BuyAmount): Quote {
   const def = menuItem(id);
+  if (id.startsWith('sig:')) return { count: 0, cost: 0, affordable: false };
   const q = quote(def.baseCost, ITEM_COST_GROWTH, state.items[id], state.coins, amount, Infinity);
   return isItemAvailable(state, id) ? q : { ...q, affordable: false };
 }
@@ -115,11 +117,12 @@ export function quoteUpgrade(state: GameState, id: UpgradeId, amount: BuyAmount)
 export function previousInCategory(id: ItemId): MenuItemDef | null {
   const def = menuItem(id);
   const chain = MENU.filter((m) => m.category === def.category);
-  return chain[chain.indexOf(def) - 1] ?? null;
+  return chain[chain.findIndex((m) => m.id === id) - 1] ?? null;
 }
 
 /** Unlock after the preceding dish; owned dishes stay upgradeable as the menu grows. */
 export function isItemAvailable(state: GameState, id: ItemId): boolean {
+  if (id.startsWith('sig:')) return false;
   if (!canPrepareItem(state, id)) return false;
   const prev = previousInCategory(id);
   return state.items[id] > 0 || !prev || state.items[prev.id] > 0;
@@ -146,7 +149,7 @@ export function buyUpgrade(state: GameState, id: UpgradeId, amount: BuyAmount): 
 }
 
 export function unlockedItems(state: GameState): MenuItemDef[] {
-  return MENU.filter((m) => state.items[m.id] > 0);
+  return [...MENU.filter((m) => state.items[m.id] > 0), ...state.signatureDrinks.recipes.map((r) => signatureDefinition(r.id)!).filter(Boolean)];
 }
 
 export const baristaCount = (s: GameState) => 1 + s.upgrades.barista;
@@ -170,7 +173,7 @@ export const tablePatience = (s: GameState) => 50 + comfort(s) / 4 + styleTableP
 
 export function salePrice(state: GameState, id: ItemId, vip = false, dineIn = false, meal: readonly ItemId[] = [id]): number {
   if (!canPrepareItem(state, id)) return 0;
-  return itemPrice(menuItem(id), state.items[id]) * tipMultiplier(state) * (vip ? VIP_MULTIPLIER : 1) * styleSaleMultiplier(state, id, dineIn, meal);
+  return (id.startsWith('sig:') ? menuItem(id).basePrice : itemPrice(menuItem(id), state.items[id])) * tipMultiplier(state) * (vip ? VIP_MULTIPLIER : 1) * styleSaleMultiplier(state, id, dineIn, meal);
 }
 
 export function prepTime(state: GameState, id: ItemId): number {
@@ -179,10 +182,11 @@ export function prepTime(state: GameState, id: ItemId): number {
 
 /** Today's menu: unlocked items the player chose to sell. */
 export function menuItems(state: GameState): MenuItemDef[] {
-  return MENU.filter((m) => state.items[m.id] > 0 && canPrepareItem(state, m.id) && state.onMenu.includes(m.id));
+  return [...MENU.filter((m) => state.items[m.id] > 0 && canPrepareItem(state, m.id) && state.onMenu.includes(m.id)), ...state.signatureDrinks.recipes.filter((r) => r.onMenu).map((r) => signatureDefinition(r.id)!).filter(Boolean)];
 }
 
 export function setOnMenu(state: GameState, id: ItemId, on: boolean): void {
+  if (id.startsWith('sig:')) { setSignatureOnMenu(state, id, on); return; }
   if (state.phase !== 'prep' || !canPrepareItem(state, id)) return;
   const set = new Set(state.onMenu);
   if (on && state.items[id] > 0) set.add(id);
@@ -227,7 +231,7 @@ export function earn(state: GameState, amount: number): void {
 const INGREDIENT_BY_ID = Object.fromEntries(INGREDIENTS.map((i) => [i.id, i])) as Record<IngredientId, IngredientDef>;
 export const ingredientDef = (id: IngredientId) => INGREDIENT_BY_ID[id];
 
-export const recipe = (id: ItemId) => Object.entries(RECIPES[id]) as [IngredientId, number][];
+export const recipe = (id: ItemId) => Object.entries(signatureDefinition(id)?.recipe ?? RECIPES[id as keyof typeof RECIPES]) as [IngredientId, number][];
 
 /** What one serving's ingredients cost. */
 export const servingCost = (id: ItemId) => recipe(id).reduce((sum, [ing, n]) => sum + ingredientDef(ing).cost * n, 0);
@@ -254,7 +258,7 @@ export function readyServings(state: GameState, id: ItemId): number {
  * used at the morning bake); a drink uses its ingredients now. Returns false if none left.
  */
 export function consumeServing(state: GameState, id: ItemId, today?: DayStats): boolean {
-  if (!canPrepareItem(state, id) || state.items[id] <= 0) return false;
+  if (!canPrepareItem(state, id) || (id.startsWith('sig:') ? !state.signatureDrinks.recipes.some((r) => r.id === id) : state.items[id] <= 0)) return false;
   if (isBakery(id) && state.phase !== 'prep') {
     if ((state.shelf[id] ?? 0) < 1) return false;
     state.shelf[id]!--;
@@ -337,7 +341,7 @@ export function neededIngredients(state: GameState): IngredientDef[] {
 
 /** Dishes (unlocked) that use an ingredient. */
 export const usedBy = (state: GameState, ing: IngredientId) =>
-  unlockedItems(state).filter((m) => canPrepareItem(state, m.id) && RECIPES[m.id][ing]);
+  unlockedItems(state).filter((m) => canPrepareItem(state, m.id) && recipe(m.id).some(([id]) => id === ing));
 
 export function buyIngredient(state: GameState, id: IngredientId, count: number): boolean {
   if (!Number.isSafeInteger(count) || count <= 0) return false;
@@ -392,7 +396,8 @@ export function restockQuote(state: GameState): { buy: Partial<Record<Ingredient
   const buy: Partial<Record<IngredientId, number>> = {};
   let cost = 0;
   for (const [ing, need] of Object.entries(dayNeeds(state)) as [IngredientId, number][]) {
-    const n = Math.max(0, need - state.pantry[ing]);
+    // Tastings leave quarters, but suppliers sell whole ingredient units.
+    const n = Math.max(0, Math.ceil(need - state.pantry[ing]));
     if (n === 0) continue;
     buy[ing] = n;
     cost += n * ingredientDef(ing).cost;
@@ -416,7 +421,7 @@ export function restock(state: GameState): boolean {
     // Rounding a small budget across ingredients can buy fragments of several
     // recipes while completing none. Keep a route back to earning revenue.
     const recipes = items.map(({ id }) => {
-      const deficits = recipe(id).map(([ing, n]) => [ing, Math.max(0, n - state.pantry[ing])] as [IngredientId, number]);
+      const deficits = recipe(id).map(([ing, n]) => [ing, Math.max(0, Math.ceil(n - state.pantry[ing]))] as [IngredientId, number]);
       const cost = deficits.reduce((sum, [ing, n]) => sum + ingredientDef(ing).cost * n, 0);
       return { deficits, cost };
     }).filter(({ cost }) => cost > 0 && cost <= state.coins).sort((a, b) => a.cost - b.cost);

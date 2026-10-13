@@ -1,3 +1,4 @@
+import { htmlItemName } from './item-name';
 import type { DayReport } from '../game/day';
 import { REVIEW_REASONS, reputationScore, reputationTraffic, reviewAverage, reviewCount, type ReviewSummary } from '../game/reputation';
 import type { GameState } from '../game/state';
@@ -40,7 +41,7 @@ export function showReputation(state: GameState): void {
   const latest = recent.slice(-5).reverse().map((review) => `<li class="guest-review">
     <div><b>${t('rating.review', { day: review.day, stars: review.stars.toFixed(1) })}</b><span class="review-stars" aria-hidden="true">★★★★★<span style="width:${review.stars / 5 * 100}%">★★★★★</span></span></div>
     <p>${t(`rating.reason.${review.reason}`)}</p>
-    ${review.taste !== undefined && review.items?.length ? `<p class="note review-dishes">${t('rating.mealTaste', { items: review.items.map((id) => t(`item.${id}`)).join(t('list.sep')), score: review.taste.toFixed(1) })}</p>` : ''}</li>`).join('');
+    ${review.taste !== undefined && review.items?.length ? `<p class="note review-dishes">${t('rating.mealTaste', { items: review.items.map((id) => htmlItemName(id, state)).join(t('list.sep')), score: review.taste.toFixed(1) })}</p>` : ''}</li>`).join('');
   showModal({
     title: t('rating.title'),
     body: `<div class="rating-overview"><strong>${score}</strong><span>${t('rating.traffic', { pct: trafficPercent(reputationTraffic(state.reputation)) })}</span></div>

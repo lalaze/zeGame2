@@ -1,12 +1,12 @@
 import type { MessageKey } from '../i18n';
-import type { ItemId } from './data';
+import type { StaticItemId } from './data';
 
 /** Permanent identities built on the existing customer pixel cast. */
 export interface RegularGuestDefinition {
   id: string;
   appearanceId: number;
   debutDay: number;
-  preferredDrink: ItemId;
+  preferredDrink: StaticItemId;
   nameKey: MessageKey;
   roleKey: MessageKey;
   personalityKey: MessageKey;

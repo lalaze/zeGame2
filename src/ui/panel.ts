@@ -1,3 +1,5 @@
+import { htmlItemName } from './item-name';
+import { showSignatureDrinks } from './signature-drinks';
 import { readPanelScroll, restorePanelScroll } from './panel-scroll';
 import { showMoneyDetails } from './money-details';
 import { PromotionPanel } from './promotion';
@@ -66,7 +68,25 @@ import { decorIcon } from '../render/decor-art';
 import { furnitureIcon } from '../render/furniture-art';
 import { ingredientIcon, itemArtwork, toDataURL, upgradeIcon } from '../render/sprites';
 
-type Tab = 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | 'promotion';
+export type PanelTab = 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | 'promotion';
+type Tab = PanelTab;
+/** A transient navigation checkpoint, never part of GameState or a save. */
+export interface PanelBrowsingContext {
+  readonly tab: PanelTab;
+  readonly scroll: ReadonlyMap<PanelTab, number>;
+  readonly amount: BuyAmount;
+  readonly pantryAmount: number;
+  readonly category: Category | 'all';
+  readonly decorCategory: FurnishingCategory | 'renovation';
+  readonly petBrowsing: Readonly<PetBrowsingState> | null;
+  readonly focusKey: string | null;
+}
+export interface PantryTaskContext {
+  title: string;
+  /** Plain text, including any player-assigned drink name. */
+  detail: string;
+  ingredients: readonly IngredientId[];
+}
 export type PurchaseKind = 'item' | 'upgrade' | 'decor' | 'goal' | 'ingredient' | 'menu' | 'recipe' | 'pet' | 'promotion';
 
 /** How many units one tap buys in the pantry. */
@@ -129,7 +149,7 @@ function upgradeEffect(state: GameState, id: UpgradeId): string {
   }
 }
 
-export const itemName = (id: ItemId) => t(`item.${id}` as MessageKey);
+export const itemName = (id: ItemId, state?: GameState) => htmlItemName(id, state);
 export const ingredientName = (id: IngredientId) => t(`ing.${id}` as MessageKey);
 const upgradeName = (id: UpgradeId) => t(`upgrade.${id}.name` as MessageKey);
 const upgradeDesc = (id: UpgradeId) => {
@@ -167,6 +187,13 @@ export class Panel {
   private slotNotes = new Map<DecorSlot, HTMLElement>();
   private comfortNote: HTMLElement | null = null;
   private goalSig = '';
+  private lastFocus = new Map<Tab, string>();
+  private navigationListeners = new Set<(tab: PanelTab) => void>();
+  private suppressFocus = false;
+  private pantryTask: PantryTaskContext | null = null;
+  private pantryTaskNotice: HTMLElement;
+  private pantryTaskTitle: HTMLElement;
+  private pantryTaskDetail: HTMLElement;
 
   constructor(
     private root: HTMLElement,
@@ -177,6 +204,26 @@ export class Panel {
     private onArrange: (request: ArrangeRequest) => void,
     private livingCats: LivingCatControls = {},
   ) {
+    this.pantryTaskNotice = document.createElement('section');
+    this.pantryTaskNotice.className = 'pantry-task-context';
+    this.pantryTaskNotice.tabIndex = -1;
+    this.pantryTaskNotice.hidden = true;
+    this.pantryTaskTitle = document.createElement('h3');
+    this.pantryTaskDetail = document.createElement('p');
+    this.pantryTaskDetail.setAttribute('role', 'status');
+    this.pantryTaskDetail.setAttribute('aria-live', 'polite');
+    this.pantryTaskNotice.append(this.pantryTaskTitle, this.pantryTaskDetail);
+    (root.querySelector('.panel-scroll') ?? list).before(this.pantryTaskNotice);
+    root.addEventListener('focusin', (event) => {
+      if (this.suppressFocus || !(event.target instanceof HTMLElement)) return;
+      const key = this.controlKey(event.target);
+      if (key) this.lastFocus.set(this.tab, key);
+    });
+    root.addEventListener('scroll', (event) => {
+      if (event.target === this.scroller && !root.closest('[hidden]')) {
+        this.scrollPositions.set(this.tab, readPanelScroll(this.list, this.scroller));
+      }
+    }, true);
     root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((b) =>
       b.addEventListener('click', () => this.showTab(b.dataset.tab as Tab)),
     );
@@ -234,6 +281,8 @@ export class Panel {
   }
 
   showTab(tab: Tab): void {
+    // Clear temporary presentation before measuring/restoring the destination.
+    for (const listener of this.navigationListeners) listener(tab);
     const focused = this.focusedControl();
     const previousTab = this.tab;
     if (tab !== previousTab) this.scrollPositions.set(previousTab, readPanelScroll(this.list, this.scroller));
@@ -244,6 +293,88 @@ export class Panel {
     this.update();
     if (tab !== previousTab) this.restoreTabScroll(tab);
     this.restoreVisibleFocus(focused);
+  }
+
+  get currentTab(): PanelTab { return this.tab; }
+
+  /** Explicit newer navigation wins over a temporary task's return destination. */
+  onNavigate(listener: (tab: PanelTab) => void): () => void {
+    this.navigationListeners.add(listener);
+    return () => { this.navigationListeners.delete(listener); };
+  }
+
+  captureBrowsingContext(): PanelBrowsingContext {
+    // A hidden mobile wrapper has zero geometry. Reuse its last visible offset;
+    // callers also capture immediately before explicitly collapsing management.
+    if (!this.root.closest('[hidden]')) this.scrollPositions.set(this.tab, readPanelScroll(this.list, this.scroller));
+    const scroll = new Map(this.scrollPositions);
+    if (!scroll.has(this.tab)) scroll.set(this.tab, 0);
+    const focused = this.focusedControl();
+    return {
+      tab: this.tab, scroll, amount: this.amount, pantryAmount: this.pantryAmount,
+      category: this.category, decorCategory: this.decorCategory,
+      petBrowsing: this.petBrowsing ? { ...this.petBrowsing } : null,
+      focusKey: focused && this.controlKey(focused) || this.lastFocus.get(this.tab) || null,
+    };
+  }
+
+  restoreBrowsingContext(context: PanelBrowsingContext, focus = true): void {
+    this.amount = context.amount;
+    this.pantryAmount = context.pantryAmount;
+    this.category = context.category;
+    this.decorCategory = context.decorCategory;
+    this.petBrowsing = context.petBrowsing ? { ...context.petBrowsing } : null;
+    this.scrollPositions = new Map(context.scroll);
+    this.tab = context.tab;
+    this.suppressFocus = true;
+    try {
+      this.updateControls();
+      this.update();
+      this.restoreTabScroll(this.tab);
+    } finally { this.suppressFocus = false; }
+    if (focus) this.restoreBrowsingFocus(context);
+  }
+
+  restoreBrowsingFocus(context: PanelBrowsingContext): void {
+    const available = (control: HTMLElement) => !control.closest('[hidden], [inert]') && !control.matches(':disabled');
+    const matching = context.focusKey && Array.from(this.root.querySelectorAll<HTMLElement>('button, input, select, textarea'))
+      .find((control) => this.controlKey(control) === context.focusKey && available(control));
+    const fallback = this.root.querySelector<HTMLElement>(`[data-tab="${this.tab}"]`);
+    const next = matching || fallback;
+    if (next && available(next)) next.focus({ preventScroll: true });
+  }
+
+  /** Presentation only: the original Pantry quote, buttons and handlers stay live. */
+  setPantryTaskContext(context: PantryTaskContext | null): void {
+    const layoutChanged = !!context !== !!this.pantryTask;
+    const scroll = layoutChanged ? readPanelScroll(this.list, this.scroller) : 0;
+    this.pantryTask = context;
+    this.root.classList.toggle('pantry-task', !!context);
+    const nav = this.root.querySelector<HTMLElement>('[role="tablist"], .tabs');
+    if (nav) nav.hidden = !!context;
+    this.pantryTaskNotice.hidden = !context;
+    const title = context?.title ?? '';
+    const detail = context?.detail ?? '';
+    if (this.pantryTaskTitle.textContent !== title) this.pantryTaskTitle.textContent = title;
+    if (this.pantryTaskDetail.textContent !== detail) this.pantryTaskDetail.textContent = detail;
+    this.pantryTaskNotice.setAttribute('aria-label', title);
+    this.pantryTaskDetail.hidden = !detail;
+    this.updateGoal();
+    this.updatePantryHighlights();
+    if (layoutChanged) restorePanelScroll(this.list, this.scroller, scroll);
+  }
+
+  focusPantryTask(targetRestock: boolean): void {
+    if (!this.pantryTask || this.tab !== 'pantry') return;
+    if (targetRestock) restorePanelScroll(this.list, this.scroller, 0);
+    this.pantryTaskNotice.focus({ preventScroll: true });
+  }
+
+  private updatePantryHighlights(): void {
+    for (const [key, refs] of this.rows) {
+      const id = key.startsWith('ing:') ? key.slice(4) as IngredientId : null;
+      refs.el.classList.toggle('pantry-shortfall', !!id && !!this.pantryTask?.ingredients.includes(id));
+    }
   }
 
   private restoreTabScroll(tab: Tab): void {
@@ -302,7 +433,7 @@ export class Panel {
   }
 
   private restoreVisibleFocus(previous: HTMLElement | null): void {
-    if (!previous) return;
+    if (!previous || this.suppressFocus) return;
     const available = (control: HTMLElement) => this.root.contains(control) && !control.closest('[hidden]') && !control.matches(':disabled');
     if (available(previous)) return;
     const key = this.controlKey(previous);
@@ -423,6 +554,7 @@ export class Panel {
 
   setState(state: GameState): void {
     this.state = state;
+    for (const listener of this.navigationListeners) listener(this.tab);
     this.refresh();
   }
 
@@ -440,7 +572,7 @@ export class Panel {
     if (this.tab === 'upgrades') return UPGRADES.map((u) => `upgrade:${u.id}`);
     if (this.tab === 'decor') return ['decor', this.decorCategory];
     if (this.tab === 'pantry') return ['pantry', ...neededIngredients(this.state).map((i) => `ing:${i.id}`)];
-    const stylePriceNote = this.state.cafeStyle.focus ? ['style-prices'] : [];
+    const stylePriceNote = ['signature-workbench', ...(this.state.cafeStyle.focus ? ['style-prices'] : [])];
     if (this.introMode) {
       // Show every owned recipe, even if a full-view filter was previously selected.
       // Older/purchased food remains available, with its existing kitchen gates intact.
@@ -498,6 +630,14 @@ export class Panel {
     }
     for (const key of keys) {
       const [kind, id] = key.split(':');
+      if (kind === 'signature-workbench') {
+        const button = document.createElement('button');
+        button.className = 'pixel-btn small ghost signature-entry';
+        button.textContent = t('signature.entry');
+        button.addEventListener('click', () => showSignatureDrinks(this.state, () => { this.onPurchase('recipe', 'signature'); this.refresh(); }));
+        this.list.append(button);
+        continue;
+      }
       if (kind === 'style-prices') {
         const note = document.createElement('p');
         note.className = 'menu-style-prices note';
@@ -686,7 +826,7 @@ export class Panel {
 
   private updateGoal(): void {
     const goal = currentGoal(this.state);
-    if (!goal) {
+    if (!goal || this.pantryTask) {
       this.goalEl.hidden = true;
       return;
     }
@@ -902,6 +1042,7 @@ export class Panel {
       this.updateMoneyDetails(refs, cost);
       refs.btn.disabled = cost > s.coins;
     }
+    this.updatePantryHighlights();
   }
 
   private updateMoneyDetails(refs: RowRefs, cost: number, hidden = false): void {

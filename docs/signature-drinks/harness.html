@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Isolated café playtest</title>
+<style>body{margin:12px;background:#edf0f1;font:14px sans-serif}button,select{min-height:40px;margin:3px}iframe{display:block;border:1px solid #333;background:white}pre{white-space:pre-wrap;max-width:1100px;max-height:130px;overflow:auto}</style>
+<h1>Signature drink QA · isolated cloud Chromium viewport simulation</h1>
+<p>Synthetic research fixture unlocks ingredients, sets pantry to100 and cash to10000 on day8. This is not a naturally earned progression or physical-phone test.</p>
+<label>Fixture <select id="fixture"><option value="research">Signature QA: synthetic unlocked ingredients, pantry100, $10000</option></select></label>
+<label>Language <select id="language"><option value="en">English</option><option value="zh">中文</option></select></label>
+<button id="load">Replace disposable QA café</button><button id="mount">Resume current QA save</button>
+<label>Viewport <select id="size"><option value="1000,740">1000×740 desktop</option><option value="1180,757">1180×757 desktop</option><option value="360,720">360×720</option><option value="390,720">390×720</option><option value="430,720">430×720</option><option value="720,390">720×390 landscape</option><option value="360,320">360×320 reduced height</option></select></label>
+<button id="inspect">Read saved counters</button><button id="download">Download QA saved JSON</button>
+<pre id="status">Not loaded. Use an unused isolated localhost port 5302 only.</pre><div id="host"></div>
+<script type="module">
+const $=s=>document.querySelector(s),host=$('#host'),status=$('#status');
+const safe=['127.0.0.1','localhost'].includes(location.hostname)&&Number(location.port)===5302;
+if(!safe){status.textContent='Safety lock: serve this QA directory on unused localhost port5302. Controls disabled.';document.querySelectorAll('button,select').forEach(b=>b.disabled=true);}
+let generation=0;
+function mount(){if(!safe)return;const [w,h]=$('#size').value.split(',');const f=document.createElement('iframe');f.id='game';f.title='Disposable test café';f.width=w;f.height=h;f.src='/index.html?qa='+Date.now();host.replaceChildren(f);}
+$('#load').onclick=async()=>{if(!safe)return;const g=++generation;const pick=$('#fixture').value;host.replaceChildren();await new Promise(r=>setTimeout(r,300));const response=await fetch('/fixtures/'+pick+'.json');if(!response.ok)throw Error('Fixture fetch failed');const fixture=await response.json();if(g!==generation)return;localStorage.setItem('tiny-bean-cafe/save',JSON.stringify(fixture));localStorage.setItem('tiny-bean-cafe/locale',$('#language').value);status.textContent='Loaded disposable fixture '+pick+' on '+location.origin;mount();};
+$('#mount').onclick=mount;
+$('#size').onchange=()=>{const f=$('#game');if(f){const [w,h]=$('#size').value.split(',');f.width=w;f.height=h;}status.textContent='Viewport '+$('#size').selectedOptions[0].textContent;};
+function saved(){return JSON.parse(localStorage.getItem('tiny-bean-cafe/save')||'{}');}
+$('#inspect').onclick=()=>{const s=saved(),f=$('#game');status.textContent=JSON.stringify({note:'Last autosave only; read does not advance or save simulation',origin:location.origin,viewport:f?{width:f.contentWindow.innerWidth,height:f.contentWindow.innerHeight,scrollWidth:f.contentDocument.documentElement.scrollWidth}:null,version:s.version,day:s.day,phase:s.phase,dayTime:s.dayTime,coins:s.coins,totalEarned:s.totalEarned,served:s.served,pantry:s.pantry,signatureDrinks:s.signatureDrinks,items:s.items,regions:s.regions,kitchen:s.kitchen,today:s.today,pets:s.pets,promotion:s.promotion,regularGuests:s.regularGuests},null,2);};
+$('#download').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(saved(),null,2)],{type:'application/json'}));a.download='disposable-cafe-qa-save.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);};
+</script></html>

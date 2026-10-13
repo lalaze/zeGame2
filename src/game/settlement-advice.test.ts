@@ -166,14 +166,17 @@ describe('honest cost explanations', () => {
     for (let seconds = 0; seconds < 300 && !sim.finishedService; seconds += 0.1) sim.update(state, 0.1);
     expect(sim.finishedService).toBe(true);
     const day = sim.closeShop(state)!;
-    expect(day.tableLost).toBe(45);
+    expect(day.tableLost).toBeGreaterThan(0);
     expect(day.reviews.reasons.cancelled ?? 0).toBe(0);
-    expect(day.ingredientCost).toBe(145);
-    expect(day.sales.espresso).toBe(100);
+    expect(day.sales.espresso).toBeGreaterThan(0);
+    // The traffic envelope changes visit counts. Prove the actual ledger
+    // remainder is entirely the espresso consumed by timed-out table orders.
+    const unrecovered = day.ingredientCost - day.sales.espresso! * servingCost('espresso');
+    expect(unrecovered).toBeCloseTo(day.tableLost * servingCost('espresso'), 8);
     const advice = settlementAdvice(day, state);
-    expect(advice.unrecoveredIngredientCost).toBe(45);
+    expect(advice.unrecoveredIngredientCost).toBe(unrecovered);
     expect(advice.reasons.some((reason) => reason.kind === 'unfinished' || reason.kind === 'unfinishedBake')).toBe(false);
-    expect(advice.reasons).toContainEqual({ kind: 'unrecovered', amount: 45 });
+    expect(advice.reasons).toContainEqual({ kind: 'unrecovered', amount: unrecovered });
     expect(advice.action).toMatchObject({ kind: 'watchPass', cost: 0 });
   });
 

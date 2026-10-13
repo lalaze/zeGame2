@@ -1,0 +1,343 @@
+- heading "Signature drink QA · isolated cloud Chromium viewport simulation" [level=1]
+- paragraph: Synthetic research fixture unlocks ingredients, sets pantry to100 and cash to10000 on day8. This is not a naturally earned progression or physical-phone test.
+- text: Fixture
+- combobox "Fixture":
+  - 'option "Signature QA: synthetic unlocked ingredients, pantry100, $10000" [selected]'
+- text: Language
+- combobox "Language":
+  - option "English" [selected]
+  - option "中文"
+- button "Replace disposable QA café"
+- button "Resume current QA save"
+- text: Viewport
+- combobox "Viewport":
+  - option "1000×740 desktop"
+  - option "1180×757 desktop"
+  - option "360×720"
+  - option "390×720" [selected]
+  - option "430×720"
+  - option "720×390 landscape"
+  - option "360×320 reduced height"
+- button "Read saved counters"
+- button "Download QA saved JSON"
+- generic: "{ \"note\": \"Last autosave only; read does not advance or save simulation\", \"origin\": \"http://127.0.0.1:5302\", \"viewport\": { \"width\": 390, \"height\": 720, \"scrollWidth\": 390 }, \"version\": 15, \"day\": 8, \"phase\": \"open\", \"dayTime\": 89.25700999999657, \"coins\": 10048.799999999988, \"totalEarned\": 108.79999999999997, \"served\": 16, \"pantry\": { \"beans\": 83.5, \"milk\": 83.25, \"flour\": 100, \"butter\": 100, \"eggs\": 100, \"sugar\": 100, \"tea\": 100, \"spice\": 100, \"cocoa\": 100, \"cream\": 100, \"fruit\": 100, \"matcha\": 100 }, \"signatureDrinks\": { \"recipes\": [ { \"id\": \"sig:coffee:beans=1,milk=1\", \"name\": \"Cloud Renamed\", \"onMenu\": true } ], \"tested\": [ \"sig:coffee:beans=1,milk=2\", \"sig:coffee:beans=1,milk=1\" ], \"served\": { \"sig:coffee:beans=1,milk=1\": 16 } }, \"items\": { \"espresso\": 1, \"americano\": 1, \"latte\": 1, \"cappuccino\": 0, \"flatwhite\": 0, \"cortado\": 0, \"mocha\": 0, \"vienna\": 0, \"macchiato\": 0, \"coldbrew\": 0, \"dirty\": 0, \"pourover\": 0, \"creamcoffee\": 0, \"affogato\": 0, \"blacktea\": 1, \"hotchoc\": 1, \"lemontea\": 1, \"chai\": 1, \"fruittea\": 1, \"hojicha\": 0, \"matcha\": 1, \"frappe\": 0, \"smoothie\": 0, \"milktea\": 0, \"matchafloat\": 0, \"roll\": 1, \"bagel\": 0, \"baguette\": 0, \"cheesebun\": 0, \"pretzel\": 0, \"focaccia\": 0, \"ciabatta\": 0, \"raisinbread\": 0, \"sourdough\": 0, \"rye\": 0, \"chocobread\": 0, \"shokupan\": 0, \"brioche\": 0, \"fruitbrioche\": 0, \"garlicbread\": 0, \"donut\": 1, \"scone\": 0, \"cookie\": 0, \"croissant\": 0, \"painchoc\": 0, \"brownie\": 0, \"cinnamon\": 0, \"muffin\": 0, \"creampuff\": 0, \"melonpan\": 0, \"eggtart\": 0, \"cake\": 0, \"swissroll\": 0, \"cheesecake\": 0, \"macaron\": 0, \"sig:coffee:beans=1,milk=1\": 1 }, \"regions\": [], \"kitchen\": true, \"today\": { \"reviews\": { \"stars\": [ 0, 0, 6, 10, 0 ], \"reasons\": { \"skilledTaste\": 3, \"steady\": 7, \"slow\": 6 }, \"totalScore\": 58.3 }, \"served\": 16, \"missed\": 0, \"soldOut\": 0, \"queueLost\": 0, \"tableLost\": 0, \"extraLost\": 0, \"doorLost\": 5, \"shortages\": {}, \"revenue\": 108.79999999999997, \"ingredientCost\": 48, \"petCost\": 0, \"promotionCost\": 29.752336666666015, \"sales\": { \"sig:coffee:beans=1,milk=1\": 16 }, \"baked\": {} }, \"pets\": [], \"promotion\": { \"id\": \"clipLocal\", \"remaining\": 90.74298999999552, \"paused\": false }, \"regularGuests\": { \"guests\": { \"nico\": { \"firstMetDay\": 8, \"served\": 1, \"unlockedChapters\": [ 0 ], \"readChapters\": [], \"lastUnlockDay\": 8, \"servedVisitIds\": [ 1 ], \"pendingVisitIds\": [], \"pendingDay\": 8 }, \"theo\": { \"firstMetDay\": 8, \"served\": 1, \"unlockedChapters\": [ 0 ], \"readChapters\": [], \"lastUnlockDay\": 8, \"servedVisitIds\": [ 2 ], \"pendingVisitIds\": [], \"pendingDay\": 8 }, \"alba\": { \"firstMetDay\": 8, \"served\": 1, \"unlockedChapters\": [ 0 ], \"readChapters\": [], \"lastUnlockDay\": 8, \"servedVisitIds\": [ 3 ], \"pendingVisitIds\": [], \"pendingDay\": 8 }, \"june\": { \"firstMetDay\": 8, \"served\": 0, \"unlockedChapters\": [], \"readChapters\": [], \"lastUnlockDay\": null, \"servedVisitIds\": [], \"pendingVisitIds\": [ 4 ], \"pendingDay\": 8 }, \"iris\": { \"firstMetDay\": 8, \"served\": 0, \"unlockedChapters\": [], \"readChapters\": [], \"lastUnlockDay\": null, \"servedVisitIds\": [], \"pendingVisitIds\": [ 5 ], \"pendingDay\": 8 } }, \"nextVisitId\": 6 } }"
+- iframe [active] [id="game"]:
+  - banner:
+    - generic: Signature QA
+    - button "余额 ≈$10.0K，查看精确金额": ≈$10.0K
+    - generic: 今日营业额 $0
+    - button "收起经营面板" [expanded]: 收起
+    - button "设置": ···
+  - button "★ 3.56 / 5 · 口碑客流 −4% · 查看顾客评价":
+    - generic: ★ 3.56 / 5
+    - generic: 口碑客流 −4%
+    - generic: ›
+  - button "熟客记录 · 5 段新故事":
+    - generic: 熟客
+    - generic: "5"
+  - generic: 第 9 天：开门营业啦！
+  - main:
+    - generic: 第 9 天 · 已营业 0:02
+    - button "1×"
+    - button "2×"
+    - button "4×"
+    - button "打烊结算"
+    - button "经营风格 · 自由混搭": 经营
+    - button "经营状态 · 查看详情"
+    - generic "主店"
+    - button "地图":
+      - generic: 地图
+    - navigation "咖啡馆区域":
+      - button "从左侧门前往后厨":
+      - button "查看右侧的阅读休息室":
+    - complementary "经营面板":
+      - tablist:
+        - tab "菜单" [selected]
+        - tab "食材"
+        - tab "升级"
+        - tab "装扮"
+        - tab "猫咪"
+        - tab "推广"
+      - generic: 购买
+      - button "x1" [pressed]
+      - button "x10"
+      - button "最大"
+      - button "全部" [pressed]
+      - button "咖啡"
+      - button "茶饮"
+      - button "面包"
+      - button "甜点"
+      - button "招牌饮品研发"
+      - generic: 菜单上有 1 道餐点 · 种类丰富让顾客 +0%。有些顾客会点一杯饮品再配一份烘焙。
+      - heading "咖啡 3/14" [level=3]:
+        - text: 咖啡
+        - generic: 3/14
+      - generic: 浓缩咖啡 Lv 1
+      - generic: 售价 $3 · 原料 $1 · 1.2秒 · 售价 $3 → ≈$6.5333
+      - button "金额详情"
+      - img "咖啡豆"
+      - generic: 可做 80 份
+      - button "浓缩咖啡 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "未上架" [disabled]
+      - button "升级 $8.96":
+        - generic: 升级
+        - generic: $8.96
+      - generic: 美式咖啡 Lv 1
+      - generic: 售价 $5 · 原料 $1 · 2.4秒 · 售价 $5 → ≈$10.8889
+      - button "金额详情"
+      - img "咖啡豆"
+      - generic: 可做 80 份
+      - button "美式咖啡 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "未上架" [disabled]
+      - button "升级 ≈$44.8":
+        - generic: 升级
+        - generic: ≈$44.8
+      - generic: 拿铁 Lv 1
+      - generic: 售价 $10 · 原料 $3 · 5.0秒 · 售价 $10 → ≈$21.7778
+      - button "金额详情"
+      - img "咖啡豆"
+      - img "牛奶"
+      - generic: 可做 79 份
+      - button "拿铁 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "未上架" [disabled]
+      - button "升级 $134.4":
+        - generic: 升级
+        - generic: $134.4
+      - generic: 卡布奇诺
+      - generic: 售价 $35 · 售价 $0 → $35
+      - button "金额详情"
+      - img "咖啡豆"
+      - img "牛奶"
+      - generic: 可做 79 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "解锁 $1200":
+        - generic: 解锁
+        - generic: $1200
+      - generic: "?"
+      - generic: "???"
+      - generic: 先解锁这一类里的上一道
+      - heading "茶与饮品 6/11" [level=3]:
+        - text: 茶与饮品
+        - generic: 6/11
+      - generic: 伯爵红茶 Lv 1
+      - generic: 售价 $9 · 原料 $2 · 4.0秒 · 售价 $9 → ≈$19.6
+      - button "金额详情"
+      - img "茶叶"
+      - generic: 可做 100 份
+      - button "伯爵红茶 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "未上架" [disabled]
+      - button "升级 ≈$100.8":
+        - generic: 升级
+        - generic: ≈$100.8
+      - generic: 热巧克力 Lv 1
+      - generic: 售价 $30 · 原料 $13 · 3.0秒 · 售价 $30 → ≈$65.3333
+      - button "金额详情"
+      - img "可可粉"
+      - img "牛奶"
+      - img "糖"
+      - generic: 可做 79 份
+      - button "热巧克力 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "未上架" [disabled]
+      - button "升级 ≈$1.00K":
+        - generic: 升级
+        - generic: ≈$1.00K
+      - generic: 柠檬红茶 Lv 1
+      - generic: 售价 $55 · 原料 $23 · 2.5秒 · 售价 $55 → ≈$119.7778
+      - button "金额详情"
+      - img "茶叶"
+      - img "新鲜水果"
+      - img "糖"
+      - generic: 可做 99 份
+      - button "柠檬红茶 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "未上架" [disabled]
+      - button "升级 ≈$3.13K":
+        - generic: 升级
+        - generic: ≈$3.13K
+      - generic: 香料奶茶 Lv 1
+      - generic: 售价 $100 · 原料 $10 · 3.5秒 · 售价 $100 → ≈$217.7778
+      - button "金额详情"
+      - img "茶叶"
+      - img "牛奶"
+      - img "香料"
+      - generic: 可做 79 份
+      - button "香料奶茶 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "未上架" [disabled]
+      - button "升级 $8960":
+        - generic: 升级
+        - generic: $8960
+      - generic: 缤纷水果茶 Lv 1
+      - generic: 售价 $350 · 原料 $43 · 3.8秒 · 售价 $350 → ≈$762.2222
+      - button "还差 ≈$45.9K"
+      - img "茶叶"
+      - img "新鲜水果"
+      - generic: ×2
+      - img "糖"
+      - generic: 可做 49 份
+      - button "缤纷水果茶 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "未上架" [disabled]
+      - button "升级 ≈$56.0K" [disabled]:
+        - generic: 升级
+        - generic: ≈$56.0K
+      - generic: 焙茶拿铁
+      - generic: 售价 $750 · 售价 $0 → $750
+      - button "还差 ≈$169K"
+      - img "茶叶"
+      - generic: ×2
+      - img "牛奶"
+      - generic: 可做 50 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "解锁 $180K" [disabled]:
+        - generic: 解锁
+        - generic: $180K
+      - generic: 抹茶拿铁 Lv 1
+      - generic: 售价 $1400 · 原料 $42 · 4.5秒 · 售价 $1400 → ≈$3.04K
+      - button "还差 ≈$605K"
+      - img "抹茶粉"
+      - img "牛奶"
+      - generic: 可做 79 份
+      - button "抹茶拿铁 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "未上架" [disabled]
+      - button "升级 ≈$616K" [disabled]:
+        - generic: 升级
+        - generic: ≈$616K
+      - generic: 焦糖冰沙
+      - generic: 售价 $5000 · 售价 $0 → $5000
+      - button "还差 ≈$4.48M"
+      - img "咖啡豆"
+      - img "牛奶"
+      - generic: ×2
+      - img "糖"
+      - img "奶油奶酪"
+      - generic: 可做 39 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "解锁 $4.50M" [disabled]:
+        - generic: 解锁
+        - generic: $4.50M
+      - generic: "?"
+      - generic: "???"
+      - generic: 先解锁这一类里的上一道
+      - heading "面包 1/15" [level=3]:
+        - text: 面包
+        - generic: 1/15
+      - generic: 黄油小餐包 Lv 1
+      - generic: 售价 $8 · 原料 $4 · 0.8秒 · 售价 $8 → ≈$17.4222
+      - button "金额详情"
+      - img "面粉"
+      - img "黄油"
+      - generic: 食材够做 100 份
+      - button "黄油小餐包 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "未上架" [disabled]
+      - button "升级 $33.6":
+        - generic: 升级
+        - generic: $33.6
+      - generic: 芝麻贝果
+      - generic: 售价 $12 · 售价 $0 → $12
+      - button "金额详情"
+      - img "面粉"
+      - img "糖"
+      - generic: 食材够做 99 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "解锁 $150":
+        - generic: 解锁
+        - generic: $150
+      - generic: "?"
+      - generic: "???"
+      - generic: 先解锁这一类里的上一道
+      - heading "甜点与蛋糕 1/15" [level=3]:
+        - text: 甜点与蛋糕
+        - generic: 1/15
+      - generic: 糖霜甜甜圈 Lv 1
+      - generic: 售价 $20 · 原料 $5 · 4.5秒 · 售价 $20 → ≈$43.5556
+      - button "金额详情"
+      - img "面粉"
+      - img "糖"
+      - img "鸡蛋"
+      - generic: 食材够做 99 份
+      - button "糖霜甜甜圈 · 味道 4.0 · 标准配方 · 已售 0/30 份 · 下一档 4.5 分":
+        - generic: 味道 4.0 · 标准配方
+        - generic: 已售 0/30 份 · 下一档 4.5 分
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "未上架" [disabled]
+      - button "升级 ≈$336":
+        - generic: 升级
+        - generic: ≈$336
+      - generic: 葡萄干司康
+      - generic: 售价 $32 · 售价 $0 → $32
+      - button "金额详情"
+      - img "面粉"
+      - img "黄油"
+      - img "奶油奶酪"
+      - generic: 食材够做 100 份
+      - generic "下个价格里程碑：10 级（逐步增长）"
+      - button "解锁 $1100":
+        - generic: 解锁
+        - generic: $1100
+      - generic: "?"
+      - generic: "???"
+      - generic: 先解锁这一类里的上一道
+  - dialog "招牌饮品":
+    - heading "招牌饮品" [level=2]
+    - region "招牌饮品":
+      - button "返回配方本"
+      - heading "复核莓云二号" [active] [level=3]
+      - paragraph: 已上架
+      - term: 每杯食材成本
+      - definition: $25
+      - term: 当前售价
+      - definition: $42
+      - term: 当前制作时间
+      - definition: 6.6s
+      - term: 每杯食材毛利
+      - definition: $17
+      - heading "配方熟练度" [level=4]
+      - paragraph: "当前口味评分: 4.2 / 5 · 新配方"
+      - paragraph: "配方基础品质: 4.2 / 5"
+      - paragraph: "已交付杯数: 0"
+      - paragraph: "下一目标: 0 / 30"
+      - paragraph: 只有顾客实际收到饮品才会增加熟练度。试饮、保存和改名均不增加经验。交付 30 杯后熟练，100 杯后自动精通，无需支付研发费。
+      - paragraph: 已计入当前咖啡馆加成。按普通外带订单计算，不含贵宾或堂食加成。食材毛利未扣除其他运营成本。
+      - heading "风味笔记" [level=4]
+      - paragraph: 果香 · 微甜 · 奶香
+      - paragraph: 搭配协调，基底风味清晰。
+      - heading "每杯所需食材" [level=4]
+      - list:
+        - generic: 水果 × 1
+        - generic: 牛奶 × 2
+        - generic: 糖 × 1
+      - status: 仅可在准备营业时研发饮品和调整菜单。
+      - textbox "改名" [disabled]
+      - button "调整配方" [disabled]
+      - button "改名" [disabled]
+      - button "移出菜单" [disabled]
+      - button "删除配方" [disabled]
+    - button "关闭"

@@ -18,8 +18,12 @@ function mixedFixture(){
 }
 describe('mixed styles, live saves and settlement',()=>{
   it.each(STYLE_IDS)('%s survives repeated live reloads without replaying handoff counters or purchases',style=>{
-    const s=mixedFixture();setCafeStyle(s,style);openShop(s);const sim=new Sim(rng(870));tick(s,sim,2000);sim.beginClosing(s);
-    const saved=serialize(s),snapshot=sim.snapshot(s);const loaded=deserialize(saved,0),resumed=new Sim(rng(901));
+    const s=mixedFixture();setCafeStyle(s,style);openShop(s);
+    let sourceRng=rng(870);const sim=new Sim(()=>sourceRng());tick(s,sim,2000);sim.beginClosing(s);
+    const saved=serialize(s),snapshot=sim.snapshot(s);
+    // Accepted guests can still choose a seat after closing. Exact continuation
+    // comparisons require matching future random draws, not two unrelated seeds.
+    sourceRng=rng(901);const loaded=deserialize(saved,0),resumed=new Sim(rng(901));
     expect(resumed.restore(snapshot,loaded)).toBe(true);expect(loaded.cafeStyle).toEqual(s.cafeStyle);expect(loaded.pantry).toEqual(s.pantry);
     expect(setCafeStyle(loaded,'coffee')).toBe(false);expect(loaded.cafeStyle.focus).toBe(style);
     for(let j=0;j<3;j++){

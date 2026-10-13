@@ -1,0 +1,35 @@
+
+ RUN  v5.0.3 /workspace/shared/zeGame2-play-flow
+
+waves10-full-v1-shard0: route-purchases/early/base/coffee/focus@180: 30/30; 0.90s
+waves10-full-v1-shard0: route-purchases/early/base/bakery/focus@1800: 30/30; 8.01s
+waves10-full-v1-shard0: route-purchases/early/base/takeaway/focus@180: 30/30; 0.70s
+waves10-full-v1-shard0: route-purchases/early/base/garden/focus@1800: 30/30; 37.49s
+waves10-full-v1-shard0: route-purchases/early/rush/coffee/focus@180: 30/30; 0.84s
+waves10-full-v1-shard0: route-purchases/early/rush/bakery/focus@1800: 30/30; 20.44s
+waves10-full-v1-shard0: route-purchases/early/rush/takeaway/focus@180: 30/30; 0.73s
+waves10-full-v1-shard0: route-purchases/early/rush/garden/focus@1800: 30/30; 39.48s
+waves10-full-v1-shard0: route-purchases/mid/base/coffee/focus@180: 30/30; 0.75s
+waves10-full-v1-shard0: route-purchases/mid/base/bakery/focus@1800: 30/30; 146.57s
+waves10-full-v1-shard0: route-purchases/mid/base/takeaway/focus@180: 30/30; 0.53s
+waves10-full-v1-shard0: route-purchases/mid/base/garden/focus@1800: 30/30; 109.31s
+waves10-full-v1-shard0: route-purchases/mid/rush/coffee/focus@180: 30/30; 0.81s
+waves10-full-v1-shard0: route-purchases/mid/rush/bakery/focus@1800: 30/30; 17.92s
+waves10-full-v1-shard0: route-purchases/mid/rush/takeaway/focus@180: 30/30; 0.74s
+waves10-full-v1-shard0: route-purchases/mid/rush/garden/focus@1800: 30/30; 97.61s
+waves10-full-v1-shard0: route-purchases/late/base/coffee/focus@180: 30/30; 0.69s
+waves10-full-v1-shard0: route-purchases/late/base/bakery/focus@1800: 30/30; 349.73s
+waves10-full-v1-shard0: route-purchases/late/base/takeaway/focus@180: 30/30; 0.88s
+waves10-full-v1-shard0: route-purchases/late/base/garden/focus@1800: 30/30; 225.60s
+waves10-full-v1-shard0: route-purchases/late/rush/coffee/focus@180: 30/30; 0.86s
+waves10-full-v1-shard0: route-purchases/late/rush/bakery/focus@1800: 30/30; 160.69s
+waves10-full-v1-shard0: route-purchases/late/rush/takeaway/focus@180: 30/30; 0.84s
+waves10-full-v1-shard0: route-purchases/late/rush/garden/focus@1800: 30/30; 211.35s
+waves10-full-v1-shard0: sanity/fresh/base@180: 30/30; 0.80s
+waves10-full-v1-shard0: sanity/signature-heavy/mid/base@1800: 30/30; 13.20s
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  08:32:40
+   Duration  1448.96s (tests 100%)
+

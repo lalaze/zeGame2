@@ -1,0 +1,27 @@
+--- /workspace/shared/play-flow-baseline/src/game/sim.ts	2026-10-12 02:43:52.276926286 -0700
++++ src/game/sim.ts	2026-10-12 08:22:07.020076566 -0700
+@@ -58,6 +58,7 @@
+ 
+ import { recordReview, mealReview, type ReviewInput } from './reputation';
+ import { recordServings } from './taste';
++import { integratedTrafficSeconds } from './traffic';
+ 
+ export type { Look };
+ 
+@@ -951,11 +952,14 @@
+ 
+     const open = state.phase === 'open';
+     const running = state.phase !== 'prep';
++    const arrivalSeconds = open ? integratedTrafficSeconds(state.dayTime, dt) : dt;
+     if (running) state.dayTime += dt;
+     updatePetCare(state, dt);
+     updatePromotion(state, dt);
+-    this.spawnTimer -= dt;
+-    if (this.spawnTimer <= 0) {
++    // Keep the saved timer in mean-rate seconds, including legacy snapshots.
++    // Only open-shop arrivals follow the wave; prep/closing retain their clock.
++    this.spawnTimer -= arrivalSeconds;
++    if (dt > 0 && this.spawnTimer <= 0) {
+       // Jittered so customers don't march in like clockwork.
+       this.spawnTimer = (0.5 + this.rng()) / arrivalRate(state);
+       if (open) {

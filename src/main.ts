@@ -2,11 +2,14 @@ import '@fontsource/pixelify-sans/400.css';
 import '@fontsource/pixelify-sans/600.css';
 import './style.css';
 
+import { PlayFlow } from './ui/play-flow';
+import { pantryTaskContext } from './ui/play-flow-context';
+import { trafficHud } from './ui/traffic-status';
 import { showLivingCat } from './ui/living-cats';
 import type { CatId } from './game/pets';
 import { SPEEDS } from './game/data';
 import { formatOpenTime, openShop, type DayReport } from './game/day';
-import { expectedCustomers, tipMultiplier } from './game/economy';
+import { expectedCustomers, menuItems, tipMultiplier } from './game/economy';
 import { canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
 import { formatMoney, formatTransactionMoney } from './game/format';
 import { MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
@@ -25,7 +28,7 @@ import { showMoneyDetails } from './ui/money-details';
 import { closeModal, isModalOpen, showModal, toast } from './ui/modal';
 import { showOnboarding, type OnboardingResult } from './ui/onboarding';
 import { Panel, decorName, itemName, type ArrangeRequest } from './ui/panel';
-import { OperationMonitor } from './game/operations';
+import { OperationMonitor, operationStatus } from './game/operations';
 import { ingredientName } from './ui/panel';
 import { updateReputationButton, showReputation } from './ui/reputation';
 import { showRegularGuests, updateRegularGuestsButton } from './ui/regular-guests';
@@ -199,6 +202,8 @@ function updatePanelVisibility(): void {
 }
 
 function setPanelCollapsed(collapsed: boolean): void {
+  playFlow.cancelPantry();
+  if (!panelCollapsed && collapsed) panel.captureBrowsingContext();
   panelCollapsed = collapsed;
   storage.setPreference(PANEL_COLLAPSED_KEY, collapsed ? '1' : '0');
   updatePanelVisibility();
@@ -336,6 +341,7 @@ function holdPiece(id: string, moving: number, fromBrowse: boolean): void {
 }
 
 function startArrange(request: ArrangeRequest): void {
+  playFlow.cancelPantry();
   if (!arrange) arrangeFocus.capture();
   // Decorations go in the dining rooms, never the kitchen.
   if (!isAreaOpen(state, scene.area) || scene.area === 'kitchen') regionsUI.select('main');
@@ -424,11 +430,38 @@ function updateStats(): void {
 // ------------------------------------------------------------ the business day
 
 const dayClock = $('day-clock');
+const dayClockBase = document.createElement('span');
+const dayClockTraffic = document.createElement('span');
+dayClockTraffic.className = 'traffic-inline';
+dayClock.replaceChildren(dayClockBase, dayClockTraffic);
 const operationMonitor = new OperationMonitor();
 const operationBtn = $<HTMLButtonElement>('operation-status');
 const openBtn = $<HTMLButtonElement>('open-btn');
 const closeBtn = $<HTMLButtonElement>('close-btn');
 const speedBtns = [...document.querySelectorAll<HTMLButtonElement>('[data-speed]')];
+
+const playFlow = new PlayFlow({
+  panel,
+  state: () => state,
+  canInteract: () => cafeInteractionEnabled(session.active, isModalOpen()) && !arrange && !scene.panning && !scene.overview,
+  help: helpBrew,
+  isPanelCollapsed: () => panelCollapsed,
+  setPanelCollapsed: (collapsed) => {
+    if (!panelCollapsed && collapsed) panel.captureBrowsingContext();
+    panelCollapsed = collapsed; updatePanelVisibility();
+  },
+  labels: () => ({
+    title: t('flow.title'), help: t('flow.help'), helpHint: t('flow.helpHint'),
+    pantry: t('flow.pantry'), back: t('flow.back'),
+    returnTo: (tab) => tab ? t('flow.return', { tab: t(`tab.${tab}`) }) : t('flow.returnCafe'),
+  }),
+  pantryContext: (shortage) => pantryTaskContext(state, sim, shortage),
+});
+const trafficSummary = document.createElement('span');
+trafficSummary.className = 'traffic-summary';
+playFlow.element.prepend(trafficSummary);
+$('app').append(playFlow.element);
+
 
 function updateDayHud(): void {
   updateReputationButton(state);
@@ -437,15 +470,23 @@ function updateDayHud(): void {
   const open = state.phase !== 'prep';
   const closing = state.phase === 'closing';
   const time = closing ? t('day.closing') : open ? t('day.openFor', { time: formatOpenTime(state.dayTime) }) : t('day.closed');
-  const text = `${t('day.label', { n: state.day })} · ${time}`;
-  if (dayClock.textContent !== text) dayClock.textContent = text;
+  const traffic = trafficHud(state);
+  const baseText = `${t('day.label', { n: state.day })} · ${time}`;
+  const rhythmText = traffic ? `${traffic.label} → ${traffic.nextLabel}` : '';
+  const text = `${baseText}${rhythmText ? ` · ${rhythmText}` : ''}`;
+  if (dayClockBase.textContent !== baseText) dayClockBase.textContent = baseText;
+  if (dayClockTraffic.textContent !== rhythmText) dayClockTraffic.textContent = rhythmText;
+  if (trafficSummary.textContent !== rhythmText) trafficSummary.textContent = rhythmText;
+  trafficSummary.hidden = dayClockTraffic.hidden = !traffic;
+  dayClock.title = traffic?.description ?? '';
+  dayClock.setAttribute('aria-label', traffic ? `${text}. ${traffic.description}` : text);
   $('day-speed').hidden = !open;
   closeBtn.hidden = !open;
   closeBtn.textContent = t(closing ? 'day.finishNow' : 'day.close');
   closeBtn.title = closing ? t('day.discard') : t('day.closeHelp');
   operationBtn.hidden = !open;
   const status = operationMonitor.update(state, sim);
-  operationBtn.textContent = t(`ops.${status.kind}`);
+  operationBtn.textContent = t(status.kind === 'ingredients' ? 'flow.shortageTitle' : `ops.${status.kind}`);
   if (!open) operationMonitor.reset();
   $('day-hud').hidden = !isAreaOpen(state, scene.area);
   for (const b of speedBtns) b.classList.toggle('active', Number(b.dataset.speed) === state.speed);
@@ -454,6 +495,7 @@ function updateDayHud(): void {
   if (openBtn.textContent !== label) openBtn.textContent = label;
   hint.hidden = !open || guide.simplify || !!storage.preference(HINT_KEY);
   updateGuide();
+  playFlow.update();
 }
 
 for (const b of speedBtns) {
@@ -473,7 +515,7 @@ function startDay(): void {
   updateDayHud();
 }
 
-const menuEmpty = () => !state.onMenu.some((id) => state.items[id] > 0);
+const menuEmpty = () => menuItems(state).length === 0;
 
 /** The only way to open: prepare today's menu, then confirm. */
 function prepareDay(): void {
@@ -502,17 +544,21 @@ $('reputation-btn').addEventListener('click', () => showReputation(state));
 $('regular-guests-btn').addEventListener('click', () => showRegularGuests(state, saveGame));
 $('cafe-style-btn').addEventListener('click', () => showCafeStyles(state, () => { saveGame(); panel.refresh(); updateDayHud(); }));
 operationBtn.addEventListener('click', () => {
-  const status = operationMonitor.current;
+  if (!cafeInteractionEnabled(session.active, isModalOpen())) return;
+  const status = state.phase === 'closing' ? operationStatus(state, sim) : operationMonitor.current;
+  if (status.kind === 'ingredients') { playFlow.openPantry(true, operationBtn); return; }
   const detail = t(`ops.${status.kind}.detail`);
-  const extra = status.item ? `<p>${itemName(status.item)}${status.ingredients?.length ? ` · ${status.ingredients.map(ingredientName).join(t('list.sep'))}` : ''}${status.seconds !== undefined ? ` · ${t('ops.workRemaining', { n: status.seconds })}` : ''}</p>` : '';
-  const pantry = status.kind === 'ingredients';
-  showModal({ title: t(`ops.${status.kind}`), body: `<p>${detail}</p>${extra}`, buttons: [
+  const traffic = trafficHud(state);
+  const rhythm = traffic ? `<p class="traffic-explanation">${traffic.description} ${t('flow.traffic.about')}</p>` : '';
+  const extra = status.item ? `<p>${itemName(status.item, state)}${status.ingredients?.length ? ` · ${status.ingredients.map(ingredientName).join(t('list.sep'))}` : ''}${status.seconds !== undefined ? ` · ${t('ops.workRemaining', { n: status.seconds })}` : ''}</p>` : '';
+  showModal({ title: t(`ops.${status.kind}`), body: `<p>${detail}</p>${extra}${rhythm}`, buttons: [
     { label: t('settings.back'), primary: true },
-    ...(status.kind === 'closing' || status.kind === 'steady' ? [] : [{ label: t(pantry ? 'tab.pantry' : 'tab.upgrades'), onClick: () => showPanelTab(pantry ? 'pantry' : 'upgrades') }]),
+    ...(status.kind === 'closing' || status.kind === 'steady' ? [] : [{ label: t('tab.upgrades'), onClick: () => showPanelTab('upgrades') }]),
   ] });
 });
 
 function showReport(report: DayReport): void {
+  playFlow.returnToPrevious(false);
   $('toast').hidden = true;
   saveGame();
   panel.refresh();
@@ -667,6 +713,7 @@ function openSettings(): void {
 $('settings-btn').addEventListener('click', openSettings);
 
 function resetGame(): void {
+  playFlow.cancelPantry();
   state = createInitialState(Date.now());
   guide.reset();
   sim.reset();
@@ -713,12 +760,18 @@ function tapAt(x: number, y: number): void {
     scene.petCat();
     return;
   }
-  if (state.phase === 'prep' || !sim.boost()) return;
+  helpBrew();
+}
+
+/** The button and scene share one optional, persisted service-help cooldown. */
+function helpBrew(): boolean {
+  if (!cafeInteractionEnabled(session.active, isModalOpen()) || arrange || scene.panning || scene.overview || state.phase === 'prep' || !sim.boost()) return false;
   sim.baristas.forEach((_, i) => { if (sim.isBrewing(i) && !sim.isHolding(i)) { const p = sim.baristaPose(i); scene.sparkle(p.x, p.y - 15); } });
   if (!hint.hidden) {
     hint.hidden = true;
     storage.setPreference(HINT_KEY, '1');
   }
+  return true;
 }
 
 /** A tap or click on the café, at (x, y) in scene pixels. */
@@ -747,6 +800,8 @@ window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && isModalOpen()) {
     e.preventDefault();
     closeModal();
+  } else if (e.key === 'Escape' && playFlow.handleEscape(e)) {
+    return;
   } else if (e.key === ' ' && !isModalOpen() && !onboarding) {
     e.preventDefault();
     if (!e.repeat) tapAt(areaOrigin(scene.area).x + 110 + Math.random() * 100, areaOrigin(scene.area).y + 70);

@@ -1,4 +1,5 @@
-import type { ItemId } from '../game/data';
+import type { ItemId, StaticItemId } from '../game/data';
+import { signatureDefinition } from '../game/signature-drinks';
 import { Sim, seated, type Customer } from '../game/sim';
 import type { GameState } from '../game/state';
 import type { MessageKey } from '../i18n';
@@ -24,9 +25,10 @@ const FLAVORS: readonly Flavor[] = ['bold', 'milky', 'cocoa', 'sweet', 'tea', 's
 /**
  * Deliberately authored flavor notes, not an inference from category or price.
  * Kept in the view: these are subjective daydreams, never recipe/economy data.
- * Record<ItemId, ...> makes adding a dish require an explicit flavor choice.
+ * Record<StaticItemId, ...> requires an authored choice for every stock dish.
+ * Custom recipes derive cosmetic notes from their immutable ingredients.
  */
-const ITEM_FLAVORS: Record<ItemId, readonly Flavor[]> = {
+const ITEM_FLAVORS: Record<StaticItemId, readonly Flavor[]> = {
   espresso: ['bold'],
   americano: ['bold'],
   latte: ['milky', 'bold'],
@@ -84,6 +86,22 @@ const ITEM_FLAVORS: Record<ItemId, readonly Flavor[]> = {
   macaron: ['sweet'],
 };
 
+/** Immutable recipe flavors; display-only and independent of delivery accounting. */
+function itemFlavors(id: ItemId): readonly Flavor[] {
+  const custom = signatureDefinition(id);
+  if (!custom) return ITEM_FLAVORS[id as StaticItemId] ?? [];
+  const recipe = custom.recipe;
+  const flavors: Flavor[] = [];
+  if (recipe.beans) flavors.push('bold');
+  if (recipe.milk || recipe.cream) flavors.push('milky');
+  if (recipe.cocoa) flavors.push('cocoa');
+  if (recipe.sugar) flavors.push('sweet');
+  if (recipe.tea || recipe.matcha) flavors.push('tea');
+  if (recipe.spice) flavors.push('spiced');
+  if (recipe.fruit) flavors.push('fruity');
+  return flavors;
+}
+
 function identity(c: Customer): number {
   if (Number.isInteger(c.appearanceId) && c.appearanceId! >= 0) return c.appearanceId!;
   // Old/test customers without a cast ID still keep a stable, appearance-based taste.
@@ -101,9 +119,10 @@ function taste(c: Customer): Thought {
   const avoided = FLAVORS[(person * 3 + 5) % FLAVORS.length];
   const items = c.extra ? [c.order, c.extra] : [c.order];
   for (const item of items) {
-    if (ITEM_FLAVORS[item].includes(liked))
+    const flavors = itemFlavors(item);
+    if (flavors.includes(liked))
       return thought(`thought.like.${liked}`, `taste:like:${item}:${liked}`, 50);
-    if (ITEM_FLAVORS[item].includes(avoided))
+    if (flavors.includes(avoided))
       return thought(`thought.dislike.${avoided}`, `taste:dislike:${item}:${avoided}`, 50);
   }
   return thought(person % 2 ? 'thought.customer.enjoy' : 'thought.customer.cozy', 'taste:enjoy', 40);

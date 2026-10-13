@@ -12,7 +12,9 @@ let ascii = '';
 for (let c = 0x20; c < 0x7f; c++) ascii += String.fromCharCode(c);
 // Anything that can show up in dynamic text: numbers, money, units, punctuation.
 const extra = '¥$×·…—–“”‘’、，。：；！？（）《》【】％＋';
-const text = Object.values(zh).join('') + ascii + extra;
+// The workbench owns a compact bilingual phrase map; include its dynamic labels.
+const signatureUI = readFileSync('src/ui/signature-drinks.ts', 'utf8');
+const text = Object.values(zh).join('') + signatureUI + ascii + extra;
 
 const out = await subsetFont(readFileSync(SOURCE), text, { targetFormat: 'woff2' });
 mkdirSync('src/assets', { recursive: true });

@@ -1,6 +1,7 @@
+import { signatureDrinkCanvas, signatureDrinkIcon } from './signature-drink-art';
 import { CUSTOMER_CAST, type CustomerDesign } from '../game/customer-cast';
 import type { CatId } from '../game/pets';
-import type { IngredientId, ItemId, UpgradeId } from '../game/data';
+import type { IngredientId, ItemId, StaticItemId, UpgradeId } from '../game/data';
 import type { Look } from '../game/state';
 import { edge, mix, ramp } from './color';
 
@@ -674,7 +675,7 @@ export function character(look: Look, role: Role = 'customer', appearanceId?: nu
 
 const CUP = { w: '#fdf6ec', W: '#dccdb9', d: '#efe2cf', D: '#c4b096', s: '#ece6de' };
 
-export const ITEM_ART: Record<ItemId, { rows: string[]; palette: Palette }> = {
+export const ITEM_ART: Record<StaticItemId, { rows: string[]; palette: Palette }> = {
   espresso: {
     rows: [
       '....s..s....',
@@ -1489,10 +1490,11 @@ export const ITEM_ART: Record<ItemId, { rows: string[]; palette: Palette }> = {
 const itemCache = new Map<string, HTMLCanvasElement>();
 
 export function itemIcon(id: ItemId, outline = true): HTMLCanvasElement {
+  if (id.startsWith('sig:')) return signatureDrinkIcon(id);
   const key = `${id}.${outline}`;
   let c = itemCache.get(key);
   if (!c) {
-    const art = ITEM_ART[id];
+    const art = ITEM_ART[id as StaticItemId];
     c = pixelSprite(art.rows, art.palette, outline ? 'sel' : false);
     itemCache.set(key, c);
   }
@@ -1501,10 +1503,11 @@ export function itemIcon(id: ItemId, outline = true): HTMLCanvasElement {
 
 /** Three-times-density artwork for menus, reports and transparent PNG export. */
 export function itemArtwork(id: ItemId): HTMLCanvasElement {
+  if (id.startsWith('sig:')) return signatureDrinkCanvas(id, 3);
   const key = `${id}.artwork`;
   let canvas = itemCache.get(key);
   if (!canvas) {
-    const art = ITEM_ART[id];
+    const art = ITEM_ART[id as StaticItemId];
     canvas = pixelSprite(art.rows, art.palette, 'sel', 3);
     itemCache.set(key, canvas);
   }

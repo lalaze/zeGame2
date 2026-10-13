@@ -105,17 +105,24 @@ describe('chair-access placement guard', () => {
     const original = legacyFixture();
     // Deliberately inject an old arrangement, bypassing the new placement guard.
     const { sim } = runDay(original);
-    expect(sim.customers.find(c => c.id === 18)?.pathBlocked).toBe(true);
+    // Arrival timing can change the visit ID; the historical obstruction must
+    // still genuinely block the guest approaching this left-hand chair.
+    const blocked = sim.customers.find(c => c.pathBlocked && c.phase === 'toSeat');
+    expect(blocked).toBeDefined();
+    expect(blocked!.seat).toBe(4);
+    const blockedId = blocked!.id;
     const snapshot = sim.snapshot(original);
     const state = deserialize(serialize(original), 0);
     const served = state.today.served;
     const resumed = new Sim(() => 0.5);
     expect(resumed.restore(snapshot, state)).toBe(true);
+    expect(resumed.customers.find(c => c.id === blockedId)?.pathBlocked).toBe(false);
     expect(state.decor.stored.plant_fern).toBe(1);
     expect(state.today.served).toBe(served);
     for (let tick = 0; tick < 1200 && !resumed.finishedService; tick++) resumed.update(state, 0.05);
     expect(resumed.finishedService).toBe(true);
     expect(resumed.customers.some(c => c.pathBlocked)).toBe(false);
+    expect(resumed.customers.find(c => c.id === blockedId)?.hasCup).toBe(true);
     expect(state.today.served).toBe(served + 1);
   });
 

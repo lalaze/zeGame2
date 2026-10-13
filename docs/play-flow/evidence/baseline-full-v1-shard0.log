@@ -1,0 +1,35 @@
+
+ RUN  v5.0.3 /workspace/shared/play-flow-baseline
+
+baseline-full-v1-shard0: route-purchases/early/base/coffee/focus@180: 30/30; 0.77s
+baseline-full-v1-shard0: route-purchases/early/base/bakery/focus@1800: 30/30; 9.14s
+baseline-full-v1-shard0: route-purchases/early/base/takeaway/focus@180: 30/30; 0.76s
+baseline-full-v1-shard0: route-purchases/early/base/garden/focus@1800: 30/30; 31.25s
+baseline-full-v1-shard0: route-purchases/early/rush/coffee/focus@180: 30/30; 0.80s
+baseline-full-v1-shard0: route-purchases/early/rush/bakery/focus@1800: 30/30; 17.59s
+baseline-full-v1-shard0: route-purchases/early/rush/takeaway/focus@180: 30/30; 0.81s
+baseline-full-v1-shard0: route-purchases/early/rush/garden/focus@1800: 30/30; 37.77s
+baseline-full-v1-shard0: route-purchases/mid/base/coffee/focus@180: 30/30; 1.16s
+baseline-full-v1-shard0: route-purchases/mid/base/bakery/focus@1800: 30/30; 133.18s
+baseline-full-v1-shard0: route-purchases/mid/base/takeaway/focus@180: 30/30; 0.63s
+baseline-full-v1-shard0: route-purchases/mid/base/garden/focus@1800: 30/30; 130.71s
+baseline-full-v1-shard0: route-purchases/mid/rush/coffee/focus@180: 30/30; 0.93s
+baseline-full-v1-shard0: route-purchases/mid/rush/bakery/focus@1800: 30/30; 18.39s
+baseline-full-v1-shard0: route-purchases/mid/rush/takeaway/focus@180: 30/30; 0.64s
+baseline-full-v1-shard0: route-purchases/mid/rush/garden/focus@1800: 30/30; 100.23s
+baseline-full-v1-shard0: route-purchases/late/base/coffee/focus@180: 30/30; 0.84s
+baseline-full-v1-shard0: route-purchases/late/base/bakery/focus@1800: 30/30; 316.44s
+baseline-full-v1-shard0: route-purchases/late/base/takeaway/focus@180: 30/30; 0.68s
+baseline-full-v1-shard0: route-purchases/late/base/garden/focus@1800: 30/30; 224.60s
+baseline-full-v1-shard0: route-purchases/late/rush/coffee/focus@180: 30/30; 1.13s
+baseline-full-v1-shard0: route-purchases/late/rush/bakery/focus@1800: 30/30; 163.23s
+baseline-full-v1-shard0: route-purchases/late/rush/takeaway/focus@180: 30/30; 0.83s
+baseline-full-v1-shard0: route-purchases/late/rush/garden/focus@1800: 30/30; 230.02s
+baseline-full-v1-shard0: sanity/fresh/base@180: 30/30; 0.91s
+baseline-full-v1-shard0: sanity/signature-heavy/mid/base@1800: 30/30; 14.65s
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  08:28:53
+   Duration  1439.32s (tests 100%)
+

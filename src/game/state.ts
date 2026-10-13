@@ -1,3 +1,4 @@
+import { emptySignatureDrinks, parseSignatureDrinks, signatureDefinition, type SignatureState } from './signature-drinks';
 import { parseCafeStyle, type CafeStyleState } from './styles';
 import { emptyRegularGuests, parseRegularGuests, type RegularGuestState } from './regular-guests';
 import { parsePromotion, type Promotion } from './promotion';
@@ -21,7 +22,7 @@ import { parseTaste, type TasteState } from './taste';
 import { emptyReviews, parseReputation, parseReviews, type Reputation, type ReviewSummary } from './reputation';
 
 export const SAVE_KEY = 'tiny-bean-cafe/save';
-export const SAVE_VERSION = 14;
+export const SAVE_VERSION = 15;
 
 export interface Look {
   skin: number;
@@ -91,6 +92,7 @@ export const emptyDay = (): DayStats => ({
 export type Phase = 'prep' | 'open' | 'closing';
 
 export interface GameState {
+  signatureDrinks: SignatureState;
   cafeStyle: CafeStyleState;
   regularGuests: RegularGuestState;
   promotion: Promotion | null;
@@ -147,6 +149,7 @@ export function createInitialState(now: number): GameState {
   pantry.beans = STARTER_BEANS;
   return {
     version: SAVE_VERSION,
+    signatureDrinks: emptySignatureDrinks(),
     cafeStyle: parseCafeStyle(null),
     regularGuests: emptyRegularGuests(),
     pets: [],
@@ -268,6 +271,8 @@ export function deserialize(raw: string | null, now: number): GameState {
   const items = (data.items ?? {}) as Record<string, unknown>;
   for (const m of MENU) base.items[m.id] = Math.floor(num(items[m.id], base.items[m.id]));
   base.items.espresso = Math.max(1, base.items.espresso);
+  base.signatureDrinks = parseSignatureDrinks(data.signatureDrinks);
+  for (const recipe of base.signatureDrinks.recipes) base.items[recipe.id] = 1;
 
   const upgrades = (data.upgrades ?? {}) as Record<string, unknown>;
   for (const u of UPGRADES) {
@@ -296,7 +301,7 @@ export function deserialize(raw: string | null, now: number): GameState {
   base.dayTime = base.phase !== 'prep' ? num(data.dayTime, 0) : 0;
   base.speed = SPEEDS.find((v) => v === data.speed) ?? 1;
   const pantry = (data.pantry ?? {}) as Record<string, unknown>;
-  for (const i of INGREDIENTS) base.pantry[i.id] = Math.floor(num(pantry[i.id], base.pantry[i.id]));
+  for (const i of INGREDIENTS) base.pantry[i.id] = num(pantry[i.id], base.pantry[i.id]);
   // v3 sold "flour & butter" as one ingredient and had strawberries instead of fresh fruit.
   const oldPastry = Math.floor(num(pantry.pastry, 0));
   base.pantry.flour += oldPastry;
@@ -313,6 +318,9 @@ export function deserialize(raw: string | null, now: number): GameState {
   // evidence forward without inventing a split of the lifetime customer total.
   base.taste = parseTaste(data.taste, num(data.version, 1) < 10 ? base.today.sales : {});
   base.taste.signature = base.taste.signature.filter((id) => base.items[id] > 0);
+  // One canonical delivery history survives renaming, removal and recreating a recipe.
+  // Custom mastery is earned automatically; legacy paid research never grants it.
+  for (const [id, n] of Object.entries(base.signatureDrinks.served)) base.taste.served[id as ItemId] = n;
   base.reputation = parseReputation(data.reputation);
   base.bakePlan = parseCounts(data.bakePlan);
   base.inProduction = base.phase === 'prep' ? {} : parseCounts(data.inProduction);
@@ -344,13 +352,17 @@ export function deserialize(raw: string | null, now: number): GameState {
   return base;
 }
 
-function parseCounts(value: unknown): Partial<Record<ItemId, number>> {
+function parseCounts(value: unknown, includeSignatures = false): Partial<Record<ItemId, number>> {
   const out: Partial<Record<ItemId, number>> = {};
   if (!value || typeof value !== 'object') return out;
   const v = value as Record<string, unknown>;
   for (const m of MENU) {
     const n = Math.floor(num(v[m.id], -1));
     if (n >= 0) out[m.id] = n;
+  }
+  if (includeSignatures) for (const [id, value] of Object.entries(v)) {
+    const n = Math.floor(num(value, -1));
+    if (signatureDefinition(id) && n >= 0) out[id as ItemId] = n;
   }
   return out;
 }
@@ -364,16 +376,12 @@ function parseDay(value: unknown): DayStats {
   day.missed = Math.floor(num(d.missed, 0));
   day.soldOut = Math.floor(num(d.soldOut, 0));
   for (const key of ['queueLost', 'tableLost', 'extraLost', 'doorLost'] as const) day[key] = Math.floor(num(d[key], 0));
-  day.shortages = parseCounts(d.shortages);
+  day.shortages = parseCounts(d.shortages, true);
   day.revenue = num(d.revenue, 0);
   day.ingredientCost = num(d.ingredientCost, 0);
   day.petCost = num(d.petCost, 0);
   day.promotionCost = num(d.promotionCost, 0);
-  const sales = (d.sales ?? {}) as Record<string, unknown>;
-  for (const m of MENU) {
-    const n = Math.floor(num(sales[m.id], 0));
-    if (n > 0) day.sales[m.id] = n;
-  }
+  for (const [id, count] of Object.entries(parseCounts(d.sales, true))) if (count !== undefined && count > 0) day.sales[id as ItemId] = count;
   day.baked = parseCounts(d.baked);
   return day;
 }

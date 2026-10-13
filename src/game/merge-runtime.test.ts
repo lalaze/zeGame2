@@ -85,6 +85,9 @@ describe('merged service persistence and kitchen rules', () => {
       c.x = 100; c.y = 100; c.tx = 200; c.ty = 150;
       c.via = [{ x: 200, y: 150 }];
       delete c.journey; delete c.pathBlocked; delete c.appearanceId;
+      // A real v1 save also predates regular identities; do not retain a modern
+      // identity whose required appearance was just removed from this fixture.
+      delete c.regularGuestId; delete c.regularGuestVisitId;
     }
     const loaded = deserialize(serialize(s), 0);
     const resumed = new Sim(rng(1));

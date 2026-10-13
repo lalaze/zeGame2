@@ -1,4 +1,5 @@
 import { MENU, type ItemId } from './data';
+import { signatureDefinition } from './signature-drinks';
 import { mealTaste } from './taste';
 import type { GameState } from './state';
 
@@ -85,8 +86,13 @@ export function parseReputation(value: unknown): Reputation {
   for (const raw of value.recent.slice(-REVIEW_WINDOW)) {
     if (!object(raw) || !reason(raw.reason) || typeof raw.stars !== 'number' || !Number.isFinite(raw.stars) || raw.stars < 1 || raw.stars > 5) continue;
     const review: Review = { stars: Math.round(raw.stars * 10) / 10, reason: raw.reason, day: Math.max(1, count(raw.day)) };
-    if (typeof raw.taste === 'number' && Number.isFinite(raw.taste) && raw.taste >= 4 && raw.taste <= 5) review.taste = Math.round(raw.taste * 10) / 10;
-    if (Array.isArray(raw.items)) review.items = raw.items.slice(0, 2).filter((id): id is ItemId => MENU.some((m) => m.id === id));
+    if (Array.isArray(raw.items)) review.items = raw.items.slice(0, 2).filter((id): id is ItemId => MENU.some((m) => m.id === id) || typeof id === 'string' && signatureDefinition(id) !== null);
+    // Custom recipes may start below four stars. Require valid canonical item
+    // evidence, and retain the rounded combo floor rather than weakening stock reviews.
+    const minimumTaste = review.items?.length
+      ? Math.round(review.items.reduce((sum, id) => sum + (signatureDefinition(id)?.quality ?? 4), 0) / review.items.length * 10) / 10
+      : 4;
+    if (typeof raw.taste === 'number' && Number.isFinite(raw.taste) && raw.taste >= minimumTaste && raw.taste <= 5) review.taste = Math.round(raw.taste * 10) / 10;
     recent.push(review);
   }
   return { recent };

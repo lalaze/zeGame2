@@ -1,3 +1,4 @@
+import { parseSignatureDrinks, signatureDefinition } from './signature-drinks';
 import { INGREDIENTS, MENU, UPGRADES } from './data';
 import { DECOR_SLOTS, decorDef } from './decor';
 import { canPrepareItem, ingredientDef, recipe, servingsLeft, unlockedItems } from './economy';
@@ -21,14 +22,24 @@ function finiteTree(value: unknown, seen = new Set<object>()): boolean {
 }
 
 function validState(state: GameState): boolean {
+  // Trial portions use quarters. Keep malformed/non-finite quantities rejected.
+  const pantryAmount = (n: unknown) => amount(n) && Number.isSafeInteger(n * 4);
+  const sig = state.signatureDrinks;
+  if (!sig || !Array.isArray(sig.recipes) || !Array.isArray(sig.tested) || !sig.served || typeof sig.served !== 'object' || Array.isArray(sig.served)) return false;
+  const parsed = parseSignatureDrinks(sig);
+  if (parsed.recipes.length !== sig.recipes.length || parsed.tested.length !== sig.tested.length ||
+    parsed.tested.some((id, index) => id !== sig.tested[index]) ||
+    parsed.recipes.some((recipe, index) => recipe.id !== sig.recipes[index]?.id || recipe.name !== sig.recipes[index]?.name || recipe.onMenu !== sig.recipes[index]?.onMenu) ||
+    Object.keys(parsed.served).length !== Object.keys(sig.served).length ||
+    Object.entries(parsed.served).some(([id, n]) => n !== sig.served[id])) return false;
   if (!finiteTree(state) || !amount(state.coins) || !amount(state.totalEarned) || !count(state.served) ||
     !count(state.day) || state.day < 1 || !count(state.goal) || state.goal > GOALS.length ||
     typeof state.kitchen !== 'boolean' || !MENU.every(({ id }) => count(state.items[id])) || state.items.espresso < 1 ||
-    !INGREDIENTS.every(({ id }) => count(state.pantry[id])) ||
+    !INGREDIENTS.every(({ id }) => pantryAmount(state.pantry[id])) ||
     !UPGRADES.every(({ id, max }) => count(state.upgrades[id]) && state.upgrades[id] <= max)) return false;
-  const menuIds = new Set(MENU.map(({ id }) => id));
+  const menuIds = new Set<string>(MENU.map(({ id }) => id));
   const ingredientIds = new Set(INGREDIENTS.map(({ id }) => id));
-  if (Object.keys(state.items).some((id) => !menuIds.has(id as typeof MENU[number]['id'])) ||
+  if (Object.entries(state.items).some(([id, n]) => !menuIds.has(id) && !(signatureDefinition(id) && sig.tested.includes(id) && n === 1)) ||
     Object.keys(state.pantry).some((id) => !ingredientIds.has(id as typeof INGREDIENTS[number]['id'])) ||
     !Array.isArray(state.onMenu) || new Set(state.onMenu).size !== state.onMenu.length ||
     state.onMenu.some((id) => !menuIds.has(id) || state.items[id] < 1)) return false;
@@ -151,15 +162,16 @@ function hasLayout(candidates: { comfort: number; masks: bigint[]; groupEnd: num
 export function canEmergencyRestock(state: GameState): boolean {
   try {
     if (!state || state.phase !== 'prep' || !validState(state)) return false;
-    // Espresso is always accessible. At $1 or more a bean can be bought normally;
+    // Espresso needs a full bean; trial leftovers alone cannot make a serving.
+    // At $1 or more a bean can be bought normally;
     // below $1 every paid goal prerequisite in the current catalog is unaffordable.
-    if (state.pantry.beans > 0 || state.coins >= ingredientDef('beans').cost) return false;
+    if (state.pantry.beans >= 1 || state.coins >= ingredientDef('beans').cost) return false;
     // In-flight paid work blocks aid. Legacy shelf stock suspended before a
     // kitchen is built cannot be sold, so only accessible shelf stock counts.
     if (Object.values(state.inProduction).some((n) => (n ?? 0) > 0)) return false;
     for (const { id } of unlockedItems(state).filter((m) => canPrepareItem(state, m.id))) {
       if ((state.shelf[id] ?? 0) > 0 || servingsLeft(state, id) >= 1) return false;
-      const deficitCost = recipe(id).reduce((sum, [ing, n]) => sum + Math.max(0, n - state.pantry[ing]) * ingredientDef(ing).cost, 0);
+      const deficitCost = recipe(id).reduce((sum, [ing, n]) => sum + Math.max(0, Math.ceil(n - state.pantry[ing])) * ingredientDef(ing).cost, 0);
       if (deficitCost <= state.coins) return false;
     }
     if (goalDone(state)) return false;

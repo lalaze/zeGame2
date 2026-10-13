@@ -1,0 +1,75 @@
+/** A complete, unit-mean wave fits twice into the usual 180-second forecast. */
+export const TRAFFIC_CYCLE_SECONDS = 90;
+export const TRAFFIC_AMPLITUDE = 0.1;
+export const TRAFFIC_MIN_MULTIPLIER = 1 - TRAFFIC_AMPLITUDE;
+export const TRAFFIC_MAX_MULTIPLIER = 1 + TRAFFIC_AMPLITUDE;
+
+export type TrafficPhase = 'calm' | 'rising' | 'busy' | 'easing';
+
+export interface TrafficStatus {
+  /** Stable phase keys for localized labels; this is not a customer-count forecast. */
+  phase: TrafficPhase;
+  multiplier: number;
+  nextPhase: TrafficPhase;
+  secondsToNextPhase: number;
+}
+
+const CALM_END = 30;
+const RISE_END = 45;
+const BUSY_END = 75;
+const RAMP_SECONDS = 15;
+const SLOPE = (TRAFFIC_MAX_MULTIPLIER - TRAFFIC_MIN_MULTIPLIER) / RAMP_SECONDS;
+const cycleTime = (dayTime: number) => Number.isFinite(dayTime) ? Math.max(0, dayTime) % TRAFFIC_CYCLE_SECONDS : 0;
+
+/** Pure active-service time: opening starts calm, and save/reload needs no new state. */
+export function trafficAt(dayTime: number): TrafficStatus {
+  const time = cycleTime(dayTime);
+  if (time < CALM_END) return {
+    phase: 'calm', multiplier: TRAFFIC_MIN_MULTIPLIER,
+    nextPhase: 'rising', secondsToNextPhase: CALM_END - time,
+  };
+  if (time < RISE_END) return {
+    phase: 'rising', multiplier: TRAFFIC_MIN_MULTIPLIER + SLOPE * (time - CALM_END),
+    nextPhase: 'busy', secondsToNextPhase: RISE_END - time,
+  };
+  if (time < BUSY_END) return {
+    phase: 'busy', multiplier: TRAFFIC_MAX_MULTIPLIER,
+    nextPhase: 'easing', secondsToNextPhase: BUSY_END - time,
+  };
+  return {
+    phase: 'easing', multiplier: TRAFFIC_MAX_MULTIPLIER - SLOPE * (time - BUSY_END),
+    nextPhase: 'calm', secondsToNextPhase: TRAFFIC_CYCLE_SECONDS - time,
+  };
+}
+
+/** Exact area from the start of one cycle, for time in [0, 90]. */
+function cycleIntegral(time: number): number {
+  if (time <= CALM_END) return time * TRAFFIC_MIN_MULTIPLIER;
+  const calmArea = CALM_END * TRAFFIC_MIN_MULTIPLIER;
+  if (time <= RISE_END) {
+    const ramp = time - CALM_END;
+    return calmArea + ramp * TRAFFIC_MIN_MULTIPLIER + SLOPE * ramp * ramp / 2;
+  }
+  // Both linear ramps average exactly 1, regardless of the chosen amplitude.
+  const riseArea = calmArea + RAMP_SECONDS;
+  if (time <= BUSY_END) return riseArea + (time - RISE_END) * TRAFFIC_MAX_MULTIPLIER;
+  const busyArea = riseArea + (BUSY_END - RISE_END) * TRAFFIC_MAX_MULTIPLIER;
+  const ramp = time - BUSY_END;
+  return busyArea + ramp * TRAFFIC_MAX_MULTIPLIER - SLOPE * ramp * ramp / 2;
+}
+
+/**
+ * Arrival-clock seconds consumed during [dayTime, dayTime + dt]. Integrating
+ * ramps (instead of sampling one multiplier) keeps boundary-crossing steps
+ * consistent. Complete cycles are unit-mean, without iterating over elapsed days.
+ */
+export function integratedTrafficSeconds(dayTime: number, dt: number): number {
+  if (!Number.isFinite(dt) || dt <= 0) return 0;
+  const time = cycleTime(dayTime);
+  const cycles = Math.floor(dt / TRAFFIC_CYCLE_SECONDS);
+  const end = time + dt % TRAFFIC_CYCLE_SECONDS;
+  const partial = end <= TRAFFIC_CYCLE_SECONDS
+    ? cycleIntegral(end) - cycleIntegral(time)
+    : TRAFFIC_CYCLE_SECONDS - cycleIntegral(time) + cycleIntegral(end - TRAFFIC_CYCLE_SECONDS);
+  return cycles * TRAFFIC_CYCLE_SECONDS + partial;
+}

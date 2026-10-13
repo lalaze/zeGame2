@@ -1,0 +1,2666 @@
+[
+  {
+    "style": "coffee",
+    "quotes": [
+      [
+        "espresso",
+        11.024,
+        1.08864
+      ],
+      [
+        "americano",
+        18.373333333333335,
+        2.17728
+      ],
+      [
+        "latte",
+        36.74666666666667,
+        4.536000000000001
+      ],
+      [
+        "cappuccino",
+        128.61333333333334,
+        3.1752000000000002
+      ],
+      [
+        "flatwhite",
+        220.48000000000002,
+        2.9030400000000007
+      ],
+      [
+        "cortado",
+        551.2,
+        2.3587200000000004
+      ],
+      [
+        "mocha",
+        1469.8666666666668,
+        3.6288000000000005
+      ],
+      [
+        "vienna",
+        2756,
+        4.35456
+      ],
+      [
+        "macchiato",
+        4777.066666666667,
+        3.810240000000001
+      ],
+      [
+        "coldbrew",
+        16536,
+        2.2680000000000007
+      ],
+      [
+        "dirty",
+        58794.66666666667,
+        1.9958400000000005
+      ],
+      [
+        "pourover",
+        257226.6666666667,
+        5.443200000000001
+      ],
+      [
+        "creamcoffee",
+        477706.66666666674,
+        4.536000000000001
+      ],
+      [
+        "affogato",
+        881920,
+        3.1752000000000002
+      ],
+      [
+        "blacktea",
+        31.8,
+        3.24
+      ],
+      [
+        "hotchoc",
+        106,
+        2.43
+      ],
+      [
+        "lemontea",
+        194.33333333333334,
+        2.0250000000000004
+      ],
+      [
+        "chai",
+        353.33333333333337,
+        2.835
+      ],
+      [
+        "fruittea",
+        1236.6666666666667,
+        3.078
+      ],
+      [
+        "hojicha",
+        2650,
+        2.5920000000000005
+      ],
+      [
+        "matcha",
+        4946.666666666667,
+        3.6450000000000005
+      ],
+      [
+        "frappe",
+        17666.666666666668,
+        4.050000000000001
+      ],
+      [
+        "smoothie",
+        56533.333333333336,
+        3.24
+      ],
+      [
+        "milktea",
+        229666.6666666667,
+        3.6450000000000005
+      ],
+      [
+        "matchafloat",
+        812666.6666666667,
+        4.455
+      ],
+      [
+        "roll",
+        28.266666666666666,
+        0.6480000000000001
+      ],
+      [
+        "bagel",
+        42.4,
+        2.268
+      ],
+      [
+        "baguette",
+        106,
+        0.972
+      ],
+      [
+        "cheesebun",
+        194.33333333333334,
+        1.4580000000000002
+      ],
+      [
+        "pretzel",
+        353.33333333333337,
+        0.972
+      ],
+      [
+        "focaccia",
+        706.6666666666667,
+        1.215
+      ],
+      [
+        "ciabatta",
+        1342.6666666666667,
+        1.215
+      ],
+      [
+        "raisinbread",
+        2650,
+        0.972
+      ],
+      [
+        "sourdough",
+        4593.333333333333,
+        1.215
+      ],
+      [
+        "rye",
+        16960,
+        1.215
+      ],
+      [
+        "chocobread",
+        31800,
+        1.62
+      ],
+      [
+        "shokupan",
+        60066.66666666667,
+        1.215
+      ],
+      [
+        "brioche",
+        233200,
+        1.215
+      ],
+      [
+        "fruitbrioche",
+        441666.6666666667,
+        1.7820000000000003
+      ],
+      [
+        "garlicbread",
+        812666.6666666667,
+        2.0250000000000004
+      ],
+      [
+        "donut",
+        70.66666666666667,
+        3.6450000000000005
+      ],
+      [
+        "scone",
+        113.06666666666666,
+        0.972
+      ],
+      [
+        "cookie",
+        212,
+        0.6480000000000001
+      ],
+      [
+        "croissant",
+        388.6666666666667,
+        1.215
+      ],
+      [
+        "painchoc",
+        636,
+        1.215
+      ],
+      [
+        "brownie",
+        918.6666666666667,
+        0.972
+      ],
+      [
+        "cinnamon",
+        1484,
+        1.215
+      ],
+      [
+        "muffin",
+        2650,
+        0.972
+      ],
+      [
+        "creampuff",
+        3710,
+        2.0250000000000004
+      ],
+      [
+        "melonpan",
+        5300,
+        0.972
+      ],
+      [
+        "eggtart",
+        18373.333333333332,
+        1.215
+      ],
+      [
+        "cake",
+        63600,
+        1.62
+      ],
+      [
+        "swissroll",
+        127200,
+        2.0250000000000004
+      ],
+      [
+        "cheesecake",
+        254400,
+        1.62
+      ],
+      [
+        "macaron",
+        918666.6666666667,
+        1.215
+      ]
+    ],
+    "forecast": [
+      [
+        "espresso",
+        15.275
+      ],
+      [
+        "blacktea",
+        15.275
+      ],
+      [
+        "donut",
+        22.099999999999998
+      ]
+    ],
+    "restock": {
+      "buy": {},
+      "cost": 0
+    },
+    "stages": [
+      {
+        "id": "early",
+        "done": false,
+        "goals": [
+          {
+            "id": "espresso5",
+            "current": 3,
+            "target": 5,
+            "done": false
+          },
+          {
+            "id": "machine1",
+            "current": 1,
+            "target": 1,
+            "done": true
+          },
+          {
+            "id": "coffee30",
+            "current": 0,
+            "target": 30,
+            "done": false
+          }
+        ]
+      },
+      {
+        "id": "mid",
+        "done": false,
+        "goals": [
+          {
+            "id": "latte5",
+            "current": 3,
+            "target": 5,
+            "done": false
+          },
+          {
+            "id": "barista1",
+            "current": 1,
+            "target": 1,
+            "done": true
+          },
+          {
+            "id": "coffeeSignature1",
+            "current": 0,
+            "target": 1,
+            "done": false
+          }
+        ]
+      },
+      {
+        "id": "late",
+        "done": false,
+        "goals": [
+          {
+            "id": "flatwhite10",
+            "current": 3,
+            "target": 10,
+            "done": false
+          },
+          {
+            "id": "machine4",
+            "current": 2,
+            "target": 4,
+            "done": false
+          },
+          {
+            "id": "coffeeSignature2",
+            "current": 0,
+            "target": 2,
+            "done": false
+          }
+        ]
+      }
+    ],
+    "report": {
+      "reviews": {
+        "stars": [
+          0,
+          0,
+          0,
+          40,
+          0
+        ],
+        "reasons": {
+          "standardTaste": 40
+        },
+        "totalScore": 160
+      },
+      "served": 40,
+      "missed": 0,
+      "soldOut": 0,
+      "queueLost": 0,
+      "tableLost": 0,
+      "extraLost": 0,
+      "doorLost": 0,
+      "shortages": {},
+      "revenue": 3593.541333333332,
+      "ingredientCost": 212,
+      "petCost": 0,
+      "promotionCost": 0,
+      "sales": {
+        "blacktea": 12,
+        "donut": 29,
+        "espresso": 13
+      },
+      "baked": {
+        "donut": 35
+      },
+      "rating": 4,
+      "ratingCount": 40,
+      "ratingTraffic": 1,
+      "day": 1,
+      "duration": 184.80000000000777,
+      "profit": 3381.541333333332,
+      "bestSeller": "donut",
+      "outOfStock": [],
+      "shelfSoldOut": [],
+      "stale": {
+        "donut": 6
+      },
+      "staleCost": 30
+    },
+    "coins": 8593.541333333333,
+    "pantry": {
+      "beans": 987,
+      "milk": 1000,
+      "flour": 965,
+      "butter": 1000,
+      "eggs": 965,
+      "sugar": 965,
+      "tea": 988,
+      "spice": 1000,
+      "cocoa": 1000,
+      "cream": 1000,
+      "fruit": 1000,
+      "matcha": 1000
+    },
+    "handoffs": {
+      "tableServed": 24,
+      "catServed": 0,
+      "fastServed": 3,
+      "teaPairs": 5
+    }
+  },
+  {
+    "style": "bakery",
+    "quotes": [
+      [
+        "espresso",
+        10.6,
+        0.972
+      ],
+      [
+        "americano",
+        17.666666666666668,
+        1.944
+      ],
+      [
+        "latte",
+        35.333333333333336,
+        4.050000000000001
+      ],
+      [
+        "cappuccino",
+        123.66666666666667,
+        2.835
+      ],
+      [
+        "flatwhite",
+        212,
+        2.5920000000000005
+      ],
+      [
+        "cortado",
+        530,
+        2.1060000000000003
+      ],
+      [
+        "mocha",
+        1413.3333333333335,
+        3.24
+      ],
+      [
+        "vienna",
+        2650,
+        3.888
+      ],
+      [
+        "macchiato",
+        4593.333333333333,
+        3.4020000000000006
+      ],
+      [
+        "coldbrew",
+        15900,
+        2.0250000000000004
+      ],
+      [
+        "dirty",
+        56533.333333333336,
+        1.7820000000000003
+      ],
+      [
+        "pourover",
+        247333.33333333334,
+        4.86
+      ],
+      [
+        "creamcoffee",
+        459333.3333333334,
+        4.050000000000001
+      ],
+      [
+        "affogato",
+        848000,
+        2.835
+      ],
+      [
+        "blacktea",
+        31.8,
+        3.24
+      ],
+      [
+        "hotchoc",
+        106,
+        2.43
+      ],
+      [
+        "lemontea",
+        194.33333333333334,
+        2.0250000000000004
+      ],
+      [
+        "chai",
+        353.33333333333337,
+        2.835
+      ],
+      [
+        "fruittea",
+        1236.6666666666667,
+        3.078
+      ],
+      [
+        "hojicha",
+        2650,
+        2.5920000000000005
+      ],
+      [
+        "matcha",
+        4946.666666666667,
+        3.6450000000000005
+      ],
+      [
+        "frappe",
+        17666.666666666668,
+        4.050000000000001
+      ],
+      [
+        "smoothie",
+        56533.333333333336,
+        3.24
+      ],
+      [
+        "milktea",
+        229666.6666666667,
+        3.6450000000000005
+      ],
+      [
+        "matchafloat",
+        812666.6666666667,
+        4.455
+      ],
+      [
+        "roll",
+        28.266666666666666,
+        0.6480000000000001
+      ],
+      [
+        "bagel",
+        42.4,
+        2.268
+      ],
+      [
+        "baguette",
+        106,
+        0.972
+      ],
+      [
+        "cheesebun",
+        194.33333333333334,
+        1.4580000000000002
+      ],
+      [
+        "pretzel",
+        353.33333333333337,
+        0.972
+      ],
+      [
+        "focaccia",
+        706.6666666666667,
+        1.215
+      ],
+      [
+        "ciabatta",
+        1342.6666666666667,
+        1.215
+      ],
+      [
+        "raisinbread",
+        2650,
+        0.972
+      ],
+      [
+        "sourdough",
+        4593.333333333333,
+        1.215
+      ],
+      [
+        "rye",
+        16960,
+        1.215
+      ],
+      [
+        "chocobread",
+        31800,
+        1.62
+      ],
+      [
+        "shokupan",
+        60066.66666666667,
+        1.215
+      ],
+      [
+        "brioche",
+        233200,
+        1.215
+      ],
+      [
+        "fruitbrioche",
+        441666.6666666667,
+        1.7820000000000003
+      ],
+      [
+        "garlicbread",
+        812666.6666666667,
+        2.0250000000000004
+      ],
+      [
+        "donut",
+        70.66666666666667,
+        3.6450000000000005
+      ],
+      [
+        "scone",
+        113.06666666666666,
+        0.972
+      ],
+      [
+        "cookie",
+        212,
+        0.6480000000000001
+      ],
+      [
+        "croissant",
+        388.6666666666667,
+        1.215
+      ],
+      [
+        "painchoc",
+        636,
+        1.215
+      ],
+      [
+        "brownie",
+        918.6666666666667,
+        0.972
+      ],
+      [
+        "cinnamon",
+        1484,
+        1.215
+      ],
+      [
+        "muffin",
+        2650,
+        0.972
+      ],
+      [
+        "creampuff",
+        3710,
+        2.0250000000000004
+      ],
+      [
+        "melonpan",
+        5300,
+        0.972
+      ],
+      [
+        "eggtart",
+        18373.333333333332,
+        1.215
+      ],
+      [
+        "cake",
+        63600,
+        1.62
+      ],
+      [
+        "swissroll",
+        127200,
+        2.0250000000000004
+      ],
+      [
+        "cheesecake",
+        254400,
+        1.62
+      ],
+      [
+        "macaron",
+        918666.6666666667,
+        1.215
+      ]
+    ],
+    "forecast": [
+      [
+        "espresso",
+        16.25
+      ],
+      [
+        "blacktea",
+        16.25
+      ],
+      [
+        "donut",
+        26
+      ]
+    ],
+    "restock": {
+      "buy": {},
+      "cost": 0
+    },
+    "stages": [
+      {
+        "id": "early",
+        "done": false,
+        "goals": [
+          {
+            "id": "espresso5",
+            "current": 3,
+            "target": 5,
+            "done": false
+          },
+          {
+            "id": "kitchen",
+            "current": 1,
+            "target": 1,
+            "done": true
+          },
+          {
+            "id": "roll3",
+            "current": 3,
+            "target": 3,
+            "done": true
+          }
+        ]
+      },
+      {
+        "id": "mid",
+        "done": false,
+        "goals": [
+          {
+            "id": "donut3",
+            "current": 3,
+            "target": 3,
+            "done": true
+          },
+          {
+            "id": "cook1",
+            "current": 0,
+            "target": 1,
+            "done": false
+          },
+          {
+            "id": "bakery100",
+            "current": 0,
+            "target": 100,
+            "done": false
+          }
+        ]
+      },
+      {
+        "id": "late",
+        "done": false,
+        "goals": [
+          {
+            "id": "croissant5",
+            "current": 3,
+            "target": 5,
+            "done": false
+          },
+          {
+            "id": "cook2",
+            "current": 0,
+            "target": 2,
+            "done": false
+          },
+          {
+            "id": "bakerySignature2",
+            "current": 0,
+            "target": 2,
+            "done": false
+          }
+        ]
+      }
+    ],
+    "report": {
+      "reviews": {
+        "stars": [
+          0,
+          0,
+          0,
+          34,
+          0
+        ],
+        "reasons": {
+          "standardTaste": 34
+        },
+        "totalScore": 136
+      },
+      "served": 34,
+      "missed": 0,
+      "soldOut": 0,
+      "queueLost": 0,
+      "tableLost": 0,
+      "extraLost": 0,
+      "doorLost": 0,
+      "shortages": {},
+      "revenue": 3356.666666666668,
+      "ingredientCost": 215,
+      "petCost": 0,
+      "promotionCost": 0,
+      "sales": {
+        "blacktea": 14,
+        "donut": 25,
+        "espresso": 12
+      },
+      "baked": {
+        "donut": 35
+      },
+      "rating": 4,
+      "ratingCount": 34,
+      "ratingTraffic": 1,
+      "day": 1,
+      "duration": 199.9000000000112,
+      "profit": 3141.666666666668,
+      "bestSeller": "donut",
+      "outOfStock": [],
+      "shelfSoldOut": [],
+      "stale": {
+        "donut": 10
+      },
+      "staleCost": 50
+    },
+    "coins": 8356.666666666666,
+    "pantry": {
+      "beans": 988,
+      "milk": 1000,
+      "flour": 965,
+      "butter": 1000,
+      "eggs": 965,
+      "sugar": 965,
+      "tea": 986,
+      "spice": 1000,
+      "cocoa": 1000,
+      "cream": 1000,
+      "fruit": 1000,
+      "matcha": 1000
+    },
+    "handoffs": {
+      "tableServed": 25,
+      "catServed": 0,
+      "fastServed": 0,
+      "teaPairs": 7
+    }
+  },
+  {
+    "style": "cats",
+    "quotes": [
+      [
+        "espresso",
+        10.6,
+        0.972
+      ],
+      [
+        "americano",
+        17.666666666666668,
+        1.944
+      ],
+      [
+        "latte",
+        35.333333333333336,
+        4.050000000000001
+      ],
+      [
+        "cappuccino",
+        123.66666666666667,
+        2.835
+      ],
+      [
+        "flatwhite",
+        212,
+        2.5920000000000005
+      ],
+      [
+        "cortado",
+        530,
+        2.1060000000000003
+      ],
+      [
+        "mocha",
+        1413.3333333333335,
+        3.24
+      ],
+      [
+        "vienna",
+        2650,
+        3.888
+      ],
+      [
+        "macchiato",
+        4593.333333333333,
+        3.4020000000000006
+      ],
+      [
+        "coldbrew",
+        15900,
+        2.0250000000000004
+      ],
+      [
+        "dirty",
+        56533.333333333336,
+        1.7820000000000003
+      ],
+      [
+        "pourover",
+        247333.33333333334,
+        4.86
+      ],
+      [
+        "creamcoffee",
+        459333.3333333334,
+        4.050000000000001
+      ],
+      [
+        "affogato",
+        848000,
+        2.835
+      ],
+      [
+        "blacktea",
+        31.8,
+        3.24
+      ],
+      [
+        "hotchoc",
+        106,
+        2.43
+      ],
+      [
+        "lemontea",
+        194.33333333333334,
+        2.0250000000000004
+      ],
+      [
+        "chai",
+        353.33333333333337,
+        2.835
+      ],
+      [
+        "fruittea",
+        1236.6666666666667,
+        3.078
+      ],
+      [
+        "hojicha",
+        2650,
+        2.5920000000000005
+      ],
+      [
+        "matcha",
+        4946.666666666667,
+        3.6450000000000005
+      ],
+      [
+        "frappe",
+        17666.666666666668,
+        4.050000000000001
+      ],
+      [
+        "smoothie",
+        56533.333333333336,
+        3.24
+      ],
+      [
+        "milktea",
+        229666.6666666667,
+        3.6450000000000005
+      ],
+      [
+        "matchafloat",
+        812666.6666666667,
+        4.455
+      ],
+      [
+        "roll",
+        28.266666666666666,
+        0.6480000000000001
+      ],
+      [
+        "bagel",
+        42.4,
+        2.268
+      ],
+      [
+        "baguette",
+        106,
+        0.972
+      ],
+      [
+        "cheesebun",
+        194.33333333333334,
+        1.4580000000000002
+      ],
+      [
+        "pretzel",
+        353.33333333333337,
+        0.972
+      ],
+      [
+        "focaccia",
+        706.6666666666667,
+        1.215
+      ],
+      [
+        "ciabatta",
+        1342.6666666666667,
+        1.215
+      ],
+      [
+        "raisinbread",
+        2650,
+        0.972
+      ],
+      [
+        "sourdough",
+        4593.333333333333,
+        1.215
+      ],
+      [
+        "rye",
+        16960,
+        1.215
+      ],
+      [
+        "chocobread",
+        31800,
+        1.62
+      ],
+      [
+        "shokupan",
+        60066.66666666667,
+        1.215
+      ],
+      [
+        "brioche",
+        233200,
+        1.215
+      ],
+      [
+        "fruitbrioche",
+        441666.6666666667,
+        1.7820000000000003
+      ],
+      [
+        "garlicbread",
+        812666.6666666667,
+        2.0250000000000004
+      ],
+      [
+        "donut",
+        70.66666666666667,
+        3.6450000000000005
+      ],
+      [
+        "scone",
+        113.06666666666666,
+        0.972
+      ],
+      [
+        "cookie",
+        212,
+        0.6480000000000001
+      ],
+      [
+        "croissant",
+        388.6666666666667,
+        1.215
+      ],
+      [
+        "painchoc",
+        636,
+        1.215
+      ],
+      [
+        "brownie",
+        918.6666666666667,
+        0.972
+      ],
+      [
+        "cinnamon",
+        1484,
+        1.215
+      ],
+      [
+        "muffin",
+        2650,
+        0.972
+      ],
+      [
+        "creampuff",
+        3710,
+        2.0250000000000004
+      ],
+      [
+        "melonpan",
+        5300,
+        0.972
+      ],
+      [
+        "eggtart",
+        18373.333333333332,
+        1.215
+      ],
+      [
+        "cake",
+        63600,
+        1.62
+      ],
+      [
+        "swissroll",
+        127200,
+        2.0250000000000004
+      ],
+      [
+        "cheesecake",
+        254400,
+        1.62
+      ],
+      [
+        "macaron",
+        918666.6666666667,
+        1.215
+      ]
+    ],
+    "forecast": [
+      [
+        "espresso",
+        15.275
+      ],
+      [
+        "blacktea",
+        15.275
+      ],
+      [
+        "donut",
+        22.099999999999998
+      ]
+    ],
+    "restock": {
+      "buy": {},
+      "cost": 0
+    },
+    "stages": [
+      {
+        "id": "early",
+        "done": false,
+        "goals": [
+          {
+            "id": "espresso5",
+            "current": 3,
+            "target": 5,
+            "done": false
+          },
+          {
+            "id": "cats1",
+            "current": 0,
+            "target": 1,
+            "done": false
+          },
+          {
+            "id": "comfort5",
+            "current": 0,
+            "target": 5,
+            "done": false
+          }
+        ]
+      },
+      {
+        "id": "mid",
+        "done": false,
+        "goals": [
+          {
+            "id": "cats2",
+            "current": 0,
+            "target": 2,
+            "done": false
+          },
+          {
+            "id": "server1",
+            "current": 1,
+            "target": 1,
+            "done": true
+          },
+          {
+            "id": "comfort15",
+            "current": 0,
+            "target": 15,
+            "done": false
+          }
+        ]
+      },
+      {
+        "id": "late",
+        "done": false,
+        "goals": [
+          {
+            "id": "cats3",
+            "current": 0,
+            "target": 3,
+            "done": false
+          },
+          {
+            "id": "comfort30",
+            "current": 0,
+            "target": 30,
+            "done": false
+          },
+          {
+            "id": "catServed300",
+            "current": 0,
+            "target": 300,
+            "done": false
+          }
+        ]
+      }
+    ],
+    "report": {
+      "reviews": {
+        "stars": [
+          0,
+          0,
+          0,
+          40,
+          0
+        ],
+        "reasons": {
+          "standardTaste": 40
+        },
+        "totalScore": 160
+      },
+      "served": 40,
+      "missed": 0,
+      "soldOut": 0,
+      "queueLost": 0,
+      "tableLost": 0,
+      "extraLost": 0,
+      "doorLost": 0,
+      "shortages": {},
+      "revenue": 3586.3333333333326,
+      "ingredientCost": 212,
+      "petCost": 0,
+      "promotionCost": 0,
+      "sales": {
+        "blacktea": 12,
+        "donut": 29,
+        "espresso": 13
+      },
+      "baked": {
+        "donut": 35
+      },
+      "rating": 4,
+      "ratingCount": 40,
+      "ratingTraffic": 1,
+      "day": 1,
+      "duration": 184.70000000000775,
+      "profit": 3374.3333333333326,
+      "bestSeller": "donut",
+      "outOfStock": [],
+      "shelfSoldOut": [],
+      "stale": {
+        "donut": 6
+      },
+      "staleCost": 30
+    },
+    "coins": 8586.333333333336,
+    "pantry": {
+      "beans": 987,
+      "milk": 1000,
+      "flour": 965,
+      "butter": 1000,
+      "eggs": 965,
+      "sugar": 965,
+      "tea": 988,
+      "spice": 1000,
+      "cocoa": 1000,
+      "cream": 1000,
+      "fruit": 1000,
+      "matcha": 1000
+    },
+    "handoffs": {
+      "tableServed": 24,
+      "catServed": 0,
+      "fastServed": 3,
+      "teaPairs": 5
+    }
+  },
+  {
+    "style": "takeaway",
+    "quotes": [
+      [
+        "espresso",
+        9.963999999999999,
+        0.972
+      ],
+      [
+        "americano",
+        16.606666666666666,
+        1.944
+      ],
+      [
+        "latte",
+        35.333333333333336,
+        4.050000000000001
+      ],
+      [
+        "cappuccino",
+        123.66666666666667,
+        2.835
+      ],
+      [
+        "flatwhite",
+        212,
+        2.5920000000000005
+      ],
+      [
+        "cortado",
+        498.2,
+        2.1060000000000003
+      ],
+      [
+        "mocha",
+        1413.3333333333335,
+        3.24
+      ],
+      [
+        "vienna",
+        2650,
+        3.888
+      ],
+      [
+        "macchiato",
+        4593.333333333333,
+        3.4020000000000006
+      ],
+      [
+        "coldbrew",
+        14946,
+        2.0250000000000004
+      ],
+      [
+        "dirty",
+        53141.333333333336,
+        1.7820000000000003
+      ],
+      [
+        "pourover",
+        247333.33333333334,
+        4.86
+      ],
+      [
+        "creamcoffee",
+        459333.3333333334,
+        4.050000000000001
+      ],
+      [
+        "affogato",
+        848000,
+        2.835
+      ],
+      [
+        "blacktea",
+        31.8,
+        3.24
+      ],
+      [
+        "hotchoc",
+        99.64,
+        2.43
+      ],
+      [
+        "lemontea",
+        182.67333333333332,
+        2.0250000000000004
+      ],
+      [
+        "chai",
+        353.33333333333337,
+        2.835
+      ],
+      [
+        "fruittea",
+        1236.6666666666667,
+        3.078
+      ],
+      [
+        "hojicha",
+        2650,
+        2.5920000000000005
+      ],
+      [
+        "matcha",
+        4946.666666666667,
+        3.6450000000000005
+      ],
+      [
+        "frappe",
+        17666.666666666668,
+        4.050000000000001
+      ],
+      [
+        "smoothie",
+        56533.333333333336,
+        3.24
+      ],
+      [
+        "milktea",
+        229666.6666666667,
+        3.6450000000000005
+      ],
+      [
+        "matchafloat",
+        812666.6666666667,
+        4.455
+      ],
+      [
+        "roll",
+        28.266666666666666,
+        0.6480000000000001
+      ],
+      [
+        "bagel",
+        42.4,
+        2.268
+      ],
+      [
+        "baguette",
+        106,
+        0.972
+      ],
+      [
+        "cheesebun",
+        194.33333333333334,
+        1.4580000000000002
+      ],
+      [
+        "pretzel",
+        353.33333333333337,
+        0.972
+      ],
+      [
+        "focaccia",
+        706.6666666666667,
+        1.215
+      ],
+      [
+        "ciabatta",
+        1342.6666666666667,
+        1.215
+      ],
+      [
+        "raisinbread",
+        2650,
+        0.972
+      ],
+      [
+        "sourdough",
+        4593.333333333333,
+        1.215
+      ],
+      [
+        "rye",
+        16960,
+        1.215
+      ],
+      [
+        "chocobread",
+        31800,
+        1.62
+      ],
+      [
+        "shokupan",
+        60066.66666666667,
+        1.215
+      ],
+      [
+        "brioche",
+        233200,
+        1.215
+      ],
+      [
+        "fruitbrioche",
+        441666.6666666667,
+        1.7820000000000003
+      ],
+      [
+        "garlicbread",
+        812666.6666666667,
+        2.0250000000000004
+      ],
+      [
+        "donut",
+        70.66666666666667,
+        3.6450000000000005
+      ],
+      [
+        "scone",
+        113.06666666666666,
+        0.972
+      ],
+      [
+        "cookie",
+        212,
+        0.6480000000000001
+      ],
+      [
+        "croissant",
+        388.6666666666667,
+        1.215
+      ],
+      [
+        "painchoc",
+        636,
+        1.215
+      ],
+      [
+        "brownie",
+        918.6666666666667,
+        0.972
+      ],
+      [
+        "cinnamon",
+        1484,
+        1.215
+      ],
+      [
+        "muffin",
+        2650,
+        0.972
+      ],
+      [
+        "creampuff",
+        3710,
+        2.0250000000000004
+      ],
+      [
+        "melonpan",
+        5300,
+        0.972
+      ],
+      [
+        "eggtart",
+        18373.333333333332,
+        1.215
+      ],
+      [
+        "cake",
+        63600,
+        1.62
+      ],
+      [
+        "swissroll",
+        127200,
+        2.0250000000000004
+      ],
+      [
+        "cheesecake",
+        254400,
+        1.62
+      ],
+      [
+        "macaron",
+        918666.6666666667,
+        1.215
+      ]
+    ],
+    "forecast": [
+      [
+        "espresso",
+        15.275
+      ],
+      [
+        "blacktea",
+        15.275
+      ],
+      [
+        "donut",
+        22.099999999999998
+      ]
+    ],
+    "restock": {
+      "buy": {},
+      "cost": 0
+    },
+    "stages": [
+      {
+        "id": "early",
+        "done": false,
+        "goals": [
+          {
+            "id": "espresso5",
+            "current": 3,
+            "target": 5,
+            "done": false
+          },
+          {
+            "id": "machine1",
+            "current": 1,
+            "target": 1,
+            "done": true
+          },
+          {
+            "id": "fastServed30",
+            "current": 0,
+            "target": 30,
+            "done": false
+          }
+        ]
+      },
+      {
+        "id": "mid",
+        "done": false,
+        "goals": [
+          {
+            "id": "americano10",
+            "current": 3,
+            "target": 10,
+            "done": false
+          },
+          {
+            "id": "barista1",
+            "current": 1,
+            "target": 1,
+            "done": true
+          },
+          {
+            "id": "machine3",
+            "current": 2,
+            "target": 3,
+            "done": false
+          }
+        ]
+      },
+      {
+        "id": "late",
+        "done": false,
+        "goals": [
+          {
+            "id": "cortado3",
+            "current": 3,
+            "target": 3,
+            "done": true
+          },
+          {
+            "id": "barista2",
+            "current": 1,
+            "target": 2,
+            "done": false
+          },
+          {
+            "id": "machine8",
+            "current": 2,
+            "target": 8,
+            "done": false
+          },
+          {
+            "id": "fastServed300",
+            "current": 0,
+            "target": 300,
+            "done": false
+          }
+        ]
+      }
+    ],
+    "report": {
+      "reviews": {
+        "stars": [
+          0,
+          0,
+          0,
+          39,
+          0
+        ],
+        "reasons": {
+          "standardTaste": 39
+        },
+        "totalScore": 156
+      },
+      "served": 39,
+      "missed": 0,
+      "soldOut": 0,
+      "queueLost": 0,
+      "tableLost": 0,
+      "extraLost": 0,
+      "doorLost": 0,
+      "shortages": {},
+      "revenue": 3572.553333333333,
+      "ingredientCost": 211,
+      "petCost": 0,
+      "promotionCost": 0,
+      "sales": {
+        "blacktea": 12,
+        "donut": 29,
+        "espresso": 12
+      },
+      "baked": {
+        "donut": 35
+      },
+      "rating": 4,
+      "ratingCount": 39,
+      "ratingTraffic": 1,
+      "day": 1,
+      "duration": 181.9000000000071,
+      "profit": 3361.553333333333,
+      "bestSeller": "donut",
+      "outOfStock": [],
+      "shelfSoldOut": [],
+      "stale": {
+        "donut": 6
+      },
+      "staleCost": 30
+    },
+    "coins": 8572.553333333333,
+    "pantry": {
+      "beans": 988,
+      "milk": 1000,
+      "flour": 965,
+      "butter": 1000,
+      "eggs": 965,
+      "sugar": 965,
+      "tea": 988,
+      "spice": 1000,
+      "cocoa": 1000,
+      "cream": 1000,
+      "fruit": 1000,
+      "matcha": 1000
+    },
+    "handoffs": {
+      "tableServed": 21,
+      "catServed": 0,
+      "fastServed": 5,
+      "teaPairs": 5
+    }
+  },
+  {
+    "style": "garden",
+    "quotes": [
+      [
+        "espresso",
+        10.6,
+        0.972
+      ],
+      [
+        "americano",
+        17.666666666666668,
+        1.944
+      ],
+      [
+        "latte",
+        35.333333333333336,
+        4.050000000000001
+      ],
+      [
+        "cappuccino",
+        123.66666666666667,
+        2.835
+      ],
+      [
+        "flatwhite",
+        212,
+        2.5920000000000005
+      ],
+      [
+        "cortado",
+        530,
+        2.1060000000000003
+      ],
+      [
+        "mocha",
+        1413.3333333333335,
+        3.24
+      ],
+      [
+        "vienna",
+        2650,
+        3.888
+      ],
+      [
+        "macchiato",
+        4593.333333333333,
+        3.4020000000000006
+      ],
+      [
+        "coldbrew",
+        15900,
+        2.0250000000000004
+      ],
+      [
+        "dirty",
+        56533.333333333336,
+        1.7820000000000003
+      ],
+      [
+        "pourover",
+        247333.33333333334,
+        4.86
+      ],
+      [
+        "creamcoffee",
+        459333.3333333334,
+        4.050000000000001
+      ],
+      [
+        "affogato",
+        848000,
+        2.835
+      ],
+      [
+        "blacktea",
+        31.8,
+        3.24
+      ],
+      [
+        "hotchoc",
+        106,
+        2.43
+      ],
+      [
+        "lemontea",
+        194.33333333333334,
+        2.0250000000000004
+      ],
+      [
+        "chai",
+        353.33333333333337,
+        2.835
+      ],
+      [
+        "fruittea",
+        1236.6666666666667,
+        3.078
+      ],
+      [
+        "hojicha",
+        2650,
+        2.5920000000000005
+      ],
+      [
+        "matcha",
+        4946.666666666667,
+        3.6450000000000005
+      ],
+      [
+        "frappe",
+        17666.666666666668,
+        4.050000000000001
+      ],
+      [
+        "smoothie",
+        56533.333333333336,
+        3.24
+      ],
+      [
+        "milktea",
+        229666.6666666667,
+        3.6450000000000005
+      ],
+      [
+        "matchafloat",
+        812666.6666666667,
+        4.455
+      ],
+      [
+        "roll",
+        28.266666666666666,
+        0.6480000000000001
+      ],
+      [
+        "bagel",
+        42.4,
+        2.268
+      ],
+      [
+        "baguette",
+        106,
+        0.972
+      ],
+      [
+        "cheesebun",
+        194.33333333333334,
+        1.4580000000000002
+      ],
+      [
+        "pretzel",
+        353.33333333333337,
+        0.972
+      ],
+      [
+        "focaccia",
+        706.6666666666667,
+        1.215
+      ],
+      [
+        "ciabatta",
+        1342.6666666666667,
+        1.215
+      ],
+      [
+        "raisinbread",
+        2650,
+        0.972
+      ],
+      [
+        "sourdough",
+        4593.333333333333,
+        1.215
+      ],
+      [
+        "rye",
+        16960,
+        1.215
+      ],
+      [
+        "chocobread",
+        31800,
+        1.62
+      ],
+      [
+        "shokupan",
+        60066.66666666667,
+        1.215
+      ],
+      [
+        "brioche",
+        233200,
+        1.215
+      ],
+      [
+        "fruitbrioche",
+        441666.6666666667,
+        1.7820000000000003
+      ],
+      [
+        "garlicbread",
+        812666.6666666667,
+        2.0250000000000004
+      ],
+      [
+        "donut",
+        70.66666666666667,
+        3.6450000000000005
+      ],
+      [
+        "scone",
+        113.06666666666666,
+        0.972
+      ],
+      [
+        "cookie",
+        212,
+        0.6480000000000001
+      ],
+      [
+        "croissant",
+        388.6666666666667,
+        1.215
+      ],
+      [
+        "painchoc",
+        636,
+        1.215
+      ],
+      [
+        "brownie",
+        918.6666666666667,
+        0.972
+      ],
+      [
+        "cinnamon",
+        1484,
+        1.215
+      ],
+      [
+        "muffin",
+        2650,
+        0.972
+      ],
+      [
+        "creampuff",
+        3710,
+        2.0250000000000004
+      ],
+      [
+        "melonpan",
+        5300,
+        0.972
+      ],
+      [
+        "eggtart",
+        18373.333333333332,
+        1.215
+      ],
+      [
+        "cake",
+        63600,
+        1.62
+      ],
+      [
+        "swissroll",
+        127200,
+        2.0250000000000004
+      ],
+      [
+        "cheesecake",
+        254400,
+        1.62
+      ],
+      [
+        "macaron",
+        918666.6666666667,
+        1.215
+      ]
+    ],
+    "forecast": [
+      [
+        "espresso",
+        15.275
+      ],
+      [
+        "blacktea",
+        15.275
+      ],
+      [
+        "donut",
+        22.099999999999998
+      ]
+    ],
+    "restock": {
+      "buy": {},
+      "cost": 0
+    },
+    "stages": [
+      {
+        "id": "early",
+        "done": false,
+        "goals": [
+          {
+            "id": "blacktea3",
+            "current": 3,
+            "target": 3,
+            "done": true
+          },
+          {
+            "id": "planted",
+            "current": 0,
+            "target": 1,
+            "done": false
+          },
+          {
+            "id": "tea30",
+            "current": 0,
+            "target": 30,
+            "done": false
+          }
+        ]
+      },
+      {
+        "id": "mid",
+        "done": true,
+        "goals": [
+          {
+            "id": "kitchen",
+            "current": 1,
+            "target": 1,
+            "done": true
+          },
+          {
+            "id": "scone3",
+            "current": 3,
+            "target": 3,
+            "done": true
+          },
+          {
+            "id": "server1",
+            "current": 1,
+            "target": 1,
+            "done": true
+          }
+        ]
+      },
+      {
+        "id": "late",
+        "done": false,
+        "goals": [
+          {
+            "id": "greenhouse",
+            "current": 0,
+            "target": 1,
+            "done": false
+          },
+          {
+            "id": "terrace",
+            "current": 0,
+            "target": 1,
+            "done": false
+          },
+          {
+            "id": "server2",
+            "current": 1,
+            "target": 2,
+            "done": false
+          },
+          {
+            "id": "teaPairs100",
+            "current": 0,
+            "target": 100,
+            "done": false
+          }
+        ]
+      }
+    ],
+    "report": {
+      "reviews": {
+        "stars": [
+          0,
+          0,
+          0,
+          40,
+          0
+        ],
+        "reasons": {
+          "standardTaste": 40
+        },
+        "totalScore": 160
+      },
+      "served": 40,
+      "missed": 0,
+      "soldOut": 0,
+      "queueLost": 0,
+      "tableLost": 0,
+      "extraLost": 0,
+      "doorLost": 0,
+      "shortages": {},
+      "revenue": 3586.3333333333326,
+      "ingredientCost": 212,
+      "petCost": 0,
+      "promotionCost": 0,
+      "sales": {
+        "blacktea": 12,
+        "donut": 29,
+        "espresso": 13
+      },
+      "baked": {
+        "donut": 35
+      },
+      "rating": 4,
+      "ratingCount": 40,
+      "ratingTraffic": 1,
+      "day": 1,
+      "duration": 184.70000000000775,
+      "profit": 3374.3333333333326,
+      "bestSeller": "donut",
+      "outOfStock": [],
+      "shelfSoldOut": [],
+      "stale": {
+        "donut": 6
+      },
+      "staleCost": 30
+    },
+    "coins": 8586.333333333336,
+    "pantry": {
+      "beans": 987,
+      "milk": 1000,
+      "flour": 965,
+      "butter": 1000,
+      "eggs": 965,
+      "sugar": 965,
+      "tea": 988,
+      "spice": 1000,
+      "cocoa": 1000,
+      "cream": 1000,
+      "fruit": 1000,
+      "matcha": 1000
+    },
+    "handoffs": {
+      "tableServed": 24,
+      "catServed": 0,
+      "fastServed": 3,
+      "teaPairs": 5
+    }
+  },
+  {
+    "style": "community",
+    "quotes": [
+      [
+        "espresso",
+        10.6,
+        0.972
+      ],
+      [
+        "americano",
+        17.666666666666668,
+        1.944
+      ],
+      [
+        "latte",
+        35.333333333333336,
+        4.050000000000001
+      ],
+      [
+        "cappuccino",
+        123.66666666666667,
+        2.835
+      ],
+      [
+        "flatwhite",
+        212,
+        2.5920000000000005
+      ],
+      [
+        "cortado",
+        530,
+        2.1060000000000003
+      ],
+      [
+        "mocha",
+        1413.3333333333335,
+        3.24
+      ],
+      [
+        "vienna",
+        2650,
+        3.888
+      ],
+      [
+        "macchiato",
+        4593.333333333333,
+        3.4020000000000006
+      ],
+      [
+        "coldbrew",
+        15900,
+        2.0250000000000004
+      ],
+      [
+        "dirty",
+        56533.333333333336,
+        1.7820000000000003
+      ],
+      [
+        "pourover",
+        247333.33333333334,
+        4.86
+      ],
+      [
+        "creamcoffee",
+        459333.3333333334,
+        4.050000000000001
+      ],
+      [
+        "affogato",
+        848000,
+        2.835
+      ],
+      [
+        "blacktea",
+        31.8,
+        3.24
+      ],
+      [
+        "hotchoc",
+        106,
+        2.43
+      ],
+      [
+        "lemontea",
+        194.33333333333334,
+        2.0250000000000004
+      ],
+      [
+        "chai",
+        353.33333333333337,
+        2.835
+      ],
+      [
+        "fruittea",
+        1236.6666666666667,
+        3.078
+      ],
+      [
+        "hojicha",
+        2650,
+        2.5920000000000005
+      ],
+      [
+        "matcha",
+        4946.666666666667,
+        3.6450000000000005
+      ],
+      [
+        "frappe",
+        17666.666666666668,
+        4.050000000000001
+      ],
+      [
+        "smoothie",
+        56533.333333333336,
+        3.24
+      ],
+      [
+        "milktea",
+        229666.6666666667,
+        3.6450000000000005
+      ],
+      [
+        "matchafloat",
+        812666.6666666667,
+        4.455
+      ],
+      [
+        "roll",
+        28.266666666666666,
+        0.6480000000000001
+      ],
+      [
+        "bagel",
+        42.4,
+        2.268
+      ],
+      [
+        "baguette",
+        106,
+        0.972
+      ],
+      [
+        "cheesebun",
+        194.33333333333334,
+        1.4580000000000002
+      ],
+      [
+        "pretzel",
+        353.33333333333337,
+        0.972
+      ],
+      [
+        "focaccia",
+        706.6666666666667,
+        1.215
+      ],
+      [
+        "ciabatta",
+        1342.6666666666667,
+        1.215
+      ],
+      [
+        "raisinbread",
+        2650,
+        0.972
+      ],
+      [
+        "sourdough",
+        4593.333333333333,
+        1.215
+      ],
+      [
+        "rye",
+        16960,
+        1.215
+      ],
+      [
+        "chocobread",
+        31800,
+        1.62
+      ],
+      [
+        "shokupan",
+        60066.66666666667,
+        1.215
+      ],
+      [
+        "brioche",
+        233200,
+        1.215
+      ],
+      [
+        "fruitbrioche",
+        441666.6666666667,
+        1.7820000000000003
+      ],
+      [
+        "garlicbread",
+        812666.6666666667,
+        2.0250000000000004
+      ],
+      [
+        "donut",
+        70.66666666666667,
+        3.6450000000000005
+      ],
+      [
+        "scone",
+        113.06666666666666,
+        0.972
+      ],
+      [
+        "cookie",
+        212,
+        0.6480000000000001
+      ],
+      [
+        "croissant",
+        388.6666666666667,
+        1.215
+      ],
+      [
+        "painchoc",
+        636,
+        1.215
+      ],
+      [
+        "brownie",
+        918.6666666666667,
+        0.972
+      ],
+      [
+        "cinnamon",
+        1484,
+        1.215
+      ],
+      [
+        "muffin",
+        2650,
+        0.972
+      ],
+      [
+        "creampuff",
+        3710,
+        2.0250000000000004
+      ],
+      [
+        "melonpan",
+        5300,
+        0.972
+      ],
+      [
+        "eggtart",
+        18373.333333333332,
+        1.215
+      ],
+      [
+        "cake",
+        63600,
+        1.62
+      ],
+      [
+        "swissroll",
+        127200,
+        2.0250000000000004
+      ],
+      [
+        "cheesecake",
+        254400,
+        1.62
+      ],
+      [
+        "macaron",
+        918666.6666666667,
+        1.215
+      ]
+    ],
+    "forecast": [
+      [
+        "espresso",
+        15.275
+      ],
+      [
+        "blacktea",
+        15.275
+      ],
+      [
+        "donut",
+        22.099999999999998
+      ]
+    ],
+    "restock": {
+      "buy": {},
+      "cost": 0
+    },
+    "stages": [
+      {
+        "id": "early",
+        "done": false,
+        "goals": [
+          {
+            "id": "espresso5",
+            "current": 3,
+            "target": 5,
+            "done": false
+          },
+          {
+            "id": "comfort5",
+            "current": 0,
+            "target": 5,
+            "done": false
+          },
+          {
+            "id": "tableServed30",
+            "current": 0,
+            "target": 30,
+            "done": false
+          }
+        ]
+      },
+      {
+        "id": "mid",
+        "done": false,
+        "goals": [
+          {
+            "id": "reading",
+            "current": 0,
+            "target": 1,
+            "done": false
+          },
+          {
+            "id": "server1",
+            "current": 1,
+            "target": 1,
+            "done": true
+          },
+          {
+            "id": "reliable",
+            "current": 0,
+            "target": 4.2,
+            "done": false
+          }
+        ]
+      },
+      {
+        "id": "late",
+        "done": false,
+        "goals": [
+          {
+            "id": "bookshelf",
+            "current": 0,
+            "target": 1,
+            "done": false
+          },
+          {
+            "id": "server2",
+            "current": 1,
+            "target": 2,
+            "done": false
+          },
+          {
+            "id": "tableServed300",
+            "current": 0,
+            "target": 300,
+            "done": false
+          },
+          {
+            "id": "reliable",
+            "current": 0,
+            "target": 4.2,
+            "done": false
+          }
+        ]
+      }
+    ],
+    "report": {
+      "reviews": {
+        "stars": [
+          0,
+          0,
+          0,
+          40,
+          0
+        ],
+        "reasons": {
+          "standardTaste": 40
+        },
+        "totalScore": 160
+      },
+      "served": 40,
+      "missed": 0,
+      "soldOut": 0,
+      "queueLost": 0,
+      "tableLost": 0,
+      "extraLost": 0,
+      "doorLost": 0,
+      "shortages": {},
+      "revenue": 3586.3333333333326,
+      "ingredientCost": 212,
+      "petCost": 0,
+      "promotionCost": 0,
+      "sales": {
+        "blacktea": 12,
+        "donut": 29,
+        "espresso": 13
+      },
+      "baked": {
+        "donut": 35
+      },
+      "rating": 4,
+      "ratingCount": 40,
+      "ratingTraffic": 1,
+      "day": 1,
+      "duration": 184.70000000000775,
+      "profit": 3374.3333333333326,
+      "bestSeller": "donut",
+      "outOfStock": [],
+      "shelfSoldOut": [],
+      "stale": {
+        "donut": 6
+      },
+      "staleCost": 30
+    },
+    "coins": 8586.333333333336,
+    "pantry": {
+      "beans": 987,
+      "milk": 1000,
+      "flour": 965,
+      "butter": 1000,
+      "eggs": 965,
+      "sugar": 965,
+      "tea": 988,
+      "spice": 1000,
+      "cocoa": 1000,
+      "cream": 1000,
+      "fruit": 1000,
+      "matcha": 1000
+    },
+    "handoffs": {
+      "tableServed": 24,
+      "catServed": 0,
+      "fastServed": 3,
+      "teaPairs": 5
+    }
+  }
+]

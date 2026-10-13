@@ -1,0 +1,35 @@
+
+ RUN  v5.0.3 /workspace/shared/zeGame2-play-flow
+
+waves10-full-v1-shard2: route-purchases/early/base/bakery/focus@180: 30/30; 1.29s
+waves10-full-v1-shard2: route-purchases/early/base/cats/focus@1800: 30/30; 7.83s
+waves10-full-v1-shard2: route-purchases/early/base/garden/focus@180: 30/30; 3.94s
+waves10-full-v1-shard2: route-purchases/early/base/community/focus@1800: 30/30; 9.81s
+waves10-full-v1-shard2: route-purchases/early/rush/bakery/focus@180: 30/30; 14.09s
+waves10-full-v1-shard2: route-purchases/early/rush/cats/focus@1800: 30/30; 11.04s
+waves10-full-v1-shard2: route-purchases/early/rush/garden/focus@180: 30/30; 12.69s
+waves10-full-v1-shard2: route-purchases/early/rush/community/focus@1800: 30/30; 9.41s
+waves10-full-v1-shard2: route-purchases/mid/base/bakery/focus@180: 30/30; 19.84s
+waves10-full-v1-shard2: route-purchases/mid/base/cats/focus@1800: 30/30; 39.98s
+waves10-full-v1-shard2: route-purchases/mid/base/garden/focus@180: 30/30; 14.03s
+waves10-full-v1-shard2: route-purchases/mid/base/community/focus@1800: 30/30; 22.77s
+waves10-full-v1-shard2: route-purchases/mid/rush/bakery/focus@180: 30/30; 2.06s
+waves10-full-v1-shard2: route-purchases/mid/rush/cats/focus@1800: 30/30; 38.00s
+waves10-full-v1-shard2: route-purchases/mid/rush/garden/focus@180: 30/30; 13.13s
+waves10-full-v1-shard2: route-purchases/mid/rush/community/focus@1800: 30/30; 14.34s
+waves10-full-v1-shard2: route-purchases/late/base/bakery/focus@180: 30/30; 36.52s
+waves10-full-v1-shard2: route-purchases/late/base/cats/focus@1800: 30/30; 16.27s
+waves10-full-v1-shard2: route-purchases/late/base/garden/focus@180: 30/30; 22.22s
+waves10-full-v1-shard2: route-purchases/late/base/community/focus@1800: 30/30; 24.75s
+waves10-full-v1-shard2: route-purchases/late/rush/bakery/focus@180: 30/30; 17.31s
+waves10-full-v1-shard2: route-purchases/late/rush/cats/focus@1800: 30/30; 18.73s
+waves10-full-v1-shard2: route-purchases/late/rush/garden/focus@180: 30/30; 22.31s
+waves10-full-v1-shard2: route-purchases/late/rush/community/focus@1800: 30/30; 14.21s
+waves10-full-v1-shard2: sanity/signature-heavy/mid/base@180: 30/30; 1.64s
+waves10-full-v1-shard2: sanity/signature-heavy/mid/rush@1800: 30/30; 17.59s
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  08:32:40
+   Duration  427.27s (tests 100%)
+

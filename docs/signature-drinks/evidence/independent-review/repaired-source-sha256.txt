@@ -1,0 +1,4 @@
+ce156a469f4e9df406950b7fe0c6257a5d162dbb33a0ae186023fd1de94dae91  src/main.ts
+b9df6bc870426addab1c3d8d45d15ad68510735c2fbb8dc750a6f0885f500fa9  src/game/promotion.ts
+f8ef8a6d07ca7da574f937a7522ed5bc96370764ab4826639bd7ddf0b54ab55b  src/game/settlement-advice.ts
+bcb9e22f4532ddec0e2591bf903467260e26f8e430708bbd59ddb5840e782557  src/game/signature-independent-review.test.ts

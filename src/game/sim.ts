@@ -58,6 +58,7 @@ import { validSnapshot, type SimSnapshot } from './sim-snapshot';
 
 import { recordReview, mealReview, type ReviewInput } from './reputation';
 import { recordServings } from './taste';
+import { integratedTrafficSeconds } from './traffic';
 
 export type { Look };
 
@@ -951,11 +952,14 @@ export class Sim {
 
     const open = state.phase === 'open';
     const running = state.phase !== 'prep';
+    const arrivalSeconds = open ? integratedTrafficSeconds(state.dayTime, dt) : dt;
     if (running) state.dayTime += dt;
     updatePetCare(state, dt);
     updatePromotion(state, dt);
-    this.spawnTimer -= dt;
-    if (this.spawnTimer <= 0) {
+    // Keep the saved timer in mean-rate seconds, including legacy snapshots.
+    // Only open-shop arrivals follow the wave; prep/closing retain their clock.
+    this.spawnTimer -= arrivalSeconds;
+    if (dt > 0 && this.spawnTimer <= 0) {
       // Jittered so customers don't march in like clockwork.
       this.spawnTimer = (0.5 + this.rng()) / arrivalRate(state);
       if (open) {

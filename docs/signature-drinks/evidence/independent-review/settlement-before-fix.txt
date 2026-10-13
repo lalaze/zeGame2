@@ -1,0 +1,49 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+ ❯ src/game/signature-independent-review.test.ts (4 tests | 2 failed) 22ms
+   ❯ independent review: fractional-stock settlement advice (2)
+     × does not promise an unpurchasable fractional bean instead of emergency help 9ms
+     × recognizes a listed custom recipe when recommending existing stock 2ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/game/signature-independent-review.test.ts > independent review: fractional-stock settlement advice > does not promise an unpurchasable fractional bean instead of emergency help
+AssertionError: expected 'restartRecipe' to be 'emergency' // Object.is equality
+
+Expected: "emergency"
+Received: "restartRecipe"
+
+ ❯ src/game/signature-independent-review.test.ts:31:51
+     29|   const s = onlySignature(); s.goal = GOALS.length; s.pantry.beans = .…
+     30|   const report = finishDay(s);
+     31|   expect(settlementAdvice(report, s).action.kind).toBe('emergency');
+       |                                                   ^
+     32|  });
+     33|  it('recognizes a listed custom recipe when recommending existing stoc…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/game/signature-independent-review.test.ts > independent review: fractional-stock settlement advice > recognizes a listed custom recipe when recommending existing stock
+AssertionError: expected 'switchMenu' to be 'useStock' // Object.is equality
+
+Expected: "useStock"
+Received: "switchMenu"
+
+ ❯ src/game/signature-independent-review.test.ts:36:51
+     34|   const s = onlySignature(); s.goal = GOALS.length; s.pantry.beans = 2…
+     35|   const report = finishDay(s);
+     36|   expect(settlementAdvice(report, s).action.kind).toBe('useStock');
+       |                                                   ^
+     37|  });
+     38| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 2 passed (4)
+   Start at  08:08:46
+   Duration  505ms (transform 80%, import 12%, tests 6%, worker 2%)
+

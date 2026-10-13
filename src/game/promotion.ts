@@ -1,3 +1,4 @@
+import { menuItems } from './economy';
 import type { GameState } from './state';
 
 /** Platform campaigns: short-video bursts versus longer lifestyle features. */
@@ -19,7 +20,7 @@ export function promotionTraffic(state: GameState): number {
 
 export function bookPromotion(state: GameState, id: string): boolean {
   const plan = promotionPlan(id);
-  if (!plan || state.promotion || state.phase === 'closing' || state.coins < plan.cost || !state.onMenu.length) return false;
+  if (!plan || state.promotion || state.phase === 'closing' || state.coins < plan.cost || !menuItems(state).length) return false;
   state.coins -= plan.cost;
   state.promotion = { id: plan.id, remaining: plan.seconds, paused: false };
   return true;

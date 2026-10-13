@@ -1,0 +1,22 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> tiny-bean-cafe@0.1.0 test
+> vitest run --maxWorkers=2
+
+
+ RUN  v5.0.3 /workspace/shared/play-flow-release-check
+
+
+ Test Files  104 passed | 1 skipped (105)
+      Tests  1098 passed | 26 skipped (1124)
+   Start at  09:05:45
+   Duration  70.86s (tests 89%, environment 5%, import 3%, transform 2%)
+
+    Isolate  105 workers spawned · ~187ms startup each (spawn + environment, per file)
+             at least ~9.64s faster with isolate: false — reuses workers across files instead of one per file
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

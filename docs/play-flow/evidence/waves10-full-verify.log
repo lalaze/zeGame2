@@ -1,0 +1,10 @@
+
+ RUN  v5.0.3 /workspace/shared/zeGame2-play-flow
+
+{"treatmentLabel":"waves10-full-v1","cells":78,"pairedRuns":2340,"flags":[{"id":"route-purchases/early/rush/bakery/focus@180","flags":["profit"],"profitFraction":-0.06956448858576653,"lossRateDelta":{"n":30,"mean":-0.0017542594842241631,"sd":0.009793251811687607,"ci95Low":-0.0054111198092884226,"ci95High":0.0019026008408400963,"min":-0.0191256830601092,"max":0.025472887767969743},"ratingDelta":{"n":30,"mean":-0.012000000000000004,"sd":0.03986183032979519,"ci95Low":-0.026884652066589902,"ci95High":0.0028846520665898965,"min":-0.17999999999999994,"max":0.06000000000000005}},{"id":"route-purchases/early/rush/community/focus@180","flags":["profit"],"profitFraction":-0.05452628933627441,"lossRateDelta":{"n":30,"mean":-0.0038122220827797554,"sd":0.022491235451822692,"ci95Low":-0.012210587423216764,"ci95High":0.004586143257657252,"min":-0.0543364681295716,"max":0.039287733182589046},"ratingDelta":{"n":30,"mean":-0.01047165532879816,"sd":0.10712659108729462,"ci95Low":-0.050473381848174056,"ci95High":0.02953007119057774,"min":-0.18816326530612226,"max":0.21999999999999975}},{"id":"route-purchases/mid/rush/bakery/focus@180","flags":["rating"],"profitFraction":-0.005021838609550605,"lossRateDelta":{"n":30,"mean":0.01934644232956918,"sd":0.03261539516514682,"ci95Low":0.007167653622903107,"ci95High":0.03152523103623525,"min":-0.03950216450216448,"max":0.08996383363471971},"ratingDelta":{"n":30,"mean":-0.11733333333333344,"sd":0.21500494514494708,"ci95Low":-0.19761749927858613,"ci95High":-0.03704916738808074,"min":-0.6400000000000006,"max":0.3200000000000003}}]}
+
+ Test Files  1 passed (1)
+      Tests  5 passed | 1 skipped (6)
+   Start at  08:56:57
+   Duration  809ms (tests 51%, transform 41%, import 8%, worker 1%)
+

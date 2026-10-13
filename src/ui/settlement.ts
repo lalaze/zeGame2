@@ -1,3 +1,4 @@
+import { htmlItemName } from './item-name';
 import type { ItemId } from '../game/data';
 import { formatOpenTime, type DayReport } from '../game/day';
 import { formatAccountMoney, formatMoney } from '../game/format';
@@ -8,7 +9,7 @@ import { itemArtwork, toDataURL } from '../render/sprites';
 import { ratingReportHtml } from './reputation';
 
 const text = (key: string, params?: Record<string, string | number>) => t(key as MessageKey, params);
-const itemName = (id: ItemId) => t(`item.${id}`);
+const itemName = (id: ItemId) => htmlItemName(id);
 const row = (label: string, value: string) => `<dt>${label}</dt><dd>${value}</dd>`;
 const list = (ids: ItemId[]) => ids.map(itemName).join(t('list.sep'));
 
@@ -34,11 +35,11 @@ function actionText(advice: SettlementAdvice): string {
 /** Compact summary first; the full original ledger is still one disclosure away. */
 export function settlementHtml(report: DayReport, state: GameState): { body: string; recommendedTab: SettlementTab; advice: SettlementAdvice } {
   const advice = settlementAdvice(report, state);
-  const totalBaked = Object.values(report.baked).reduce((sum, n) => sum + (n ?? 0), 0);
-  const staleCount = Object.values(report.stale).reduce((sum, n) => sum + (n ?? 0), 0);
+  const totalBaked = Object.values(report.baked).reduce<number>((sum, n) => sum + (n ?? 0), 0);
+  const staleCount = Object.values(report.stale).reduce<number>((sum, n) => sum + (n ?? 0), 0);
   const best = report.bestSeller;
   const bestHtml = best
-    ? `<p class="report-best"><img src="${toDataURL(itemArtwork(best), 1)}" alt="" />${t('report.best', { item: itemName(best), n: report.sales[best] ?? 0 })}</p>`
+    ? `<p class="report-best"><img src="${toDataURL(itemArtwork(best), 1)}" alt="" />${t('report.best', { item: htmlItemName(best, state), n: report.sales[best] ?? 0 })}</p>`
     : `<p>${t('report.none')}</p>`;
   const goal = advice.claimableGoal;
   // Profit loss drivers stay together even when several costs contributed.
@@ -78,9 +79,9 @@ export function settlementHtml(report: DayReport, state: GameState): { body: str
       ${secondaryReasons.length ? `<p class="note">${secondaryReasons.map(reasonText).join(' ')}</p>` : ''}
       ${ratingReportHtml(report)}
       ${bestHtml}
-      ${Object.keys(report.shortages).length ? `<p class="note">${t('report.shortages', { items: Object.entries(report.shortages).map(([id, n]) => `${itemName(id as ItemId)} ×${n}`).join(t('list.sep')) })}</p>` : ''}
+      ${Object.keys(report.shortages).length ? `<p class="note">${t('report.shortages', { items: Object.entries(report.shortages).map(([id, n]) => `${htmlItemName(id as ItemId, state)} ×${n}`).join(t('list.sep')) })}</p>` : ''}
       ${report.shelfSoldOut.length ? `<p class="note">${t('report.shelfOut', { items: list(report.shelfSoldOut) })}</p>` : ''}
-      ${staleCount ? `<p class="note">${t('report.staleItems', { items: Object.entries(report.stale).map(([id, n]) => `${itemName(id as ItemId)} ×${n}`).join(t('list.sep')) })}</p>` : ''}
+      ${staleCount ? `<p class="note">${t('report.staleItems', { items: Object.entries(report.stale).map(([id, n]) => `${htmlItemName(id as ItemId, state)} ×${n}`).join(t('list.sep')) })}</p>` : ''}
       ${report.outOfStock.length ? `<p class="note warn">${t('report.outOfStock', { items: list(report.outOfStock) })}</p>` : ''}
     </details>`;
   return { body, recommendedTab: advice.action.tab, advice };

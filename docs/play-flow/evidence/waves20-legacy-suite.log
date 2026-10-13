@@ -1,0 +1,192 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2-play-flow
+
+ ❯ src/game/merge-runtime.test.ts (8 tests | 1 failed) 1230ms
+   ❯ merged service persistence and kitchen rules (8)
+     × migrates v1 service at safe anchors without losing paid work or duplicating reviews 18ms
+ ❯ scripts/economy-lab.test.ts (5 tests | 1 failed | 1 skipped) 5411ms
+   ❯ economy lab design and accounting (4)
+     × resets global layout before expanded forecasts regardless of previous sample 5273ms
+ ❯ src/game/style-persistence.test.ts (7 tests | 2 failed) 1387ms
+   ❯ mixed styles, live saves and settlement (7)
+     × takeaway survives repeated live reloads without replaying handoff counters or purchases 210ms
+     × community survives repeated live reloads without replaying handoff counters or purchases 291ms
+ ❯ src/game/chair-access.test.ts (6 tests | 1 failed) 2248ms
+   ❯ chair-access placement guard (6)
+     × resumes an already blocked saved visit after safely storing the old obstruction 707ms
+ ❯ src/game/settlement-advice.test.ts (23 tests | 1 failed) 702ms
+   ❯ honest cost explanations (13)
+     × diagnoses real table timeouts after normal draining as delivery/production checks 621ms
+stdout | scripts/balance.test.ts > offers a different profitable menu when production, rather than arrivals, limits service
+┌─────────┬──────────┬───────────┬─────────┬────────┬──────┬───────┬────────┐
+│ (index) │ version  │ marketing │ menu    │ profit │ lost │ stale │ served │
+├─────────┼──────────┼───────────┼─────────┼────────┼──────┼───────┼────────┤
+│ 0       │ 'before' │ 0         │ 'fast'  │ 172    │ 0    │ 0     │ 72     │
+│ 1       │ 'before' │ 0         │ 'high'  │ 606    │ 0    │ 0     │ 72     │
+│ 2       │ 'before' │ 0         │ 'mixed' │ 165    │ 0    │ 5     │ 74     │
+│ 3       │ 'before' │ 0         │ 'all'   │ 758    │ 0    │ 20    │ 87     │
+│ 4       │ 'before' │ 25        │ 'fast'  │ 348    │ 0    │ 0     │ 145    │
+│ 5       │ 'before' │ 25        │ 'high'  │ 827    │ 0    │ 0     │ 101    │
+│ 6       │ 'before' │ 25        │ 'mixed' │ 324    │ 40   │ 0     │ 134    │
+│ 7       │ 'before' │ 25        │ 'all'   │ 1145   │ 6    │ 7     │ 119    │
+│ 8       │ 'after'  │ 0         │ 'fast'  │ 187    │ 0    │ 0     │ 73     │
+│ 9       │ 'after'  │ 0         │ 'high'  │ 519    │ 0    │ 0     │ 63     │
+│ 10      │ 'after'  │ 0         │ 'mixed' │ 324    │ 0    │ 4     │ 74     │
+│ 11      │ 'after'  │ 0         │ 'all'   │ 783    │ 0    │ 19    │ 77     │
+│ 12      │ 'after'  │ 25        │ 'fast'  │ 514    │ 0    │ 0     │ 215    │
+│ 13      │ 'after'  │ 25        │ 'high'  │ 542    │ 0    │ 0     │ 64     │
+│ 14      │ 'after'  │ 25        │ 'mixed' │ 662    │ 74   │ 0     │ 184    │
+│ 15      │ 'after'  │ 25        │ 'all'   │ 862    │ 1    │ 19    │ 78     │
+└─────────┴──────────┴───────────┴─────────┴────────┴──────┴───────┴────────┘
+
+ ❯ scripts/balance.test.ts (1 test | 1 failed) 36841ms
+   × offers a different profitable menu when production, rather than arrivals, limits service 36839ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  scripts/balance.test.ts > offers a different profitable menu when production, rather than arrivals, limits service
+AssertionError: expected 514 to be greater than 542
+ ❯ scripts/balance.test.ts:47:41
+     45|   console.table(rows);
+     46|   expect(sample(menus.high, 0).profit).toBeGreaterThan(sample(menus.fa…
+     47|   expect(sample(menus.fast, 25).profit).toBeGreaterThan(sample(menus.h…
+       |                                         ^
+     48|   console.table([0,20,2].map((click) => ({ clicks: click === 0 ? 'none…
+     49| }, 120_000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  scripts/economy-lab.test.ts > economy lab design and accounting > resets global layout before expanded forecasts regardless of previous sample
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ scripts/economy-lab.test.ts:15:3
+     13|     expect(scenarios().filter((s) => s.stage === 'early' && s.promotio…
+     14|   });
+     15|   it('resets global layout before expanded forecasts regardless of pre…
+       |   ^
+     16|     const scenario = scenarios().find((s) => s.id === 'expanded/all/no…
+     17|     setSceneHeight(240); setKitchenLevel(0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+ FAIL  src/game/chair-access.test.ts > chair-access placement guard > resumes an already blocked saved visit after safely storing the old obstruction
+AssertionError: expected undefined to be true // Object.is equality
+
+- Expected:
+true
+
++ Received:
+undefined
+
+ ❯ src/game/chair-access.test.ts:108:63
+    106|     // Deliberately inject an old arrangement, bypassing the new place…
+    107|     const { sim } = runDay(original);
+    108|     expect(sim.customers.find(c => c.id === 18)?.pathBlocked).toBe(tru…
+       |                                                               ^
+    109|     const snapshot = sim.snapshot(original);
+    110|     const state = deserialize(serialize(original), 0);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/7]⎯
+
+ FAIL  src/game/merge-runtime.test.ts > merged service persistence and kitchen rules > migrates v1 service at safe anchors without losing paid work or duplicating reviews
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/game/merge-runtime.test.ts:93:42
+     92|     const loaded = deserialize(serialize(s), 0);
+     93|     const resumed = new Sim(rng(1));
+     94|     const pantry = { ...loaded.pantry };
+       |     ^
+     95|     const cost = loaded.today.ingredientCost;
+     96|     expect(resumed.restore(raw, loaded)).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/7]⎯
+
+ FAIL  src/game/settlement-advice.test.ts > honest cost explanations > diagnoses real table timeouts after normal draining as delivery/production checks
+AssertionError: expected 34 to be 45 // Object.is equality
+
+- Expected
++ Received
+
+- 45
++ 34
+
+ ❯ src/game/settlement-advice.test.ts:169:27
+    167|     expect(sim.finishedService).toBe(true);
+    168|     const day = sim.closeShop(state)!;
+    169|     expect(day.tableLost).toBe(45);
+       |                           ^
+    170|     expect(day.reviews.reasons.cancelled ?? 0).toBe(0);
+    171|     expect(day.ingredientCost).toBe(145);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/7]⎯
+
+ FAIL  src/game/style-persistence.test.ts > mixed styles, live saves and settlement > takeaway survives repeated live reloads without replaying handoff counters or purchases
+AssertionError: expected { Object (tableServed, catServed, ...) } to deeply equal { tableServed: 9, catServed: 22, …(2) }
+
+- Expected
++ Received
+
+  {
+    "catServed": 22,
+    "fastServed": 6,
+-   "tableServed": 9,
+-   "teaPairs": 1,
++   "tableServed": 10,
++   "teaPairs": 2,
+  }
+
+ ❯ src/game/style-persistence.test.ts:31:146
+     29|     expect(sim.finishedService).toBe(true);expect(resumed.finishedServ…
+     30|     const report=sim.closeShop(s)!,reloadReport=resumed.closeShop(load…
+     31|     expect(reloadReport.served).toBe(report.served);expect(reloadRepor…
+       |                                                                                                                                                  ^
+     32|     const before=serialize(loaded);expect(resumed.closeShop(loaded)).t…
+     33|     expect(loaded.taste.signature).toContain('espresso');expect(loaded…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/7]⎯
+
+ FAIL  src/game/style-persistence.test.ts > mixed styles, live saves and settlement > community survives repeated live reloads without replaying handoff counters or purchases
+AssertionError: expected { Object (tableServed, catServed, ...) } to deeply equal { tableServed: 9, catServed: 20, …(2) }
+
+- Expected
++ Received
+
+  {
+    "catServed": 20,
+    "fastServed": 3,
+-   "tableServed": 9,
++   "tableServed": 10,
+    "teaPairs": 1,
+  }
+
+ ❯ src/game/style-persistence.test.ts:31:146
+     29|     expect(sim.finishedService).toBe(true);expect(resumed.finishedServ…
+     30|     const report=sim.closeShop(s)!,reloadReport=resumed.closeShop(load…
+     31|     expect(reloadReport.served).toBe(report.served);expect(reloadRepor…
+       |                                                                                                                                                  ^
+     32|     const before=serialize(loaded);expect(resumed.closeShop(loaded)).t…
+     33|     expect(loaded.taste.signature).toContain('espresso');expect(loaded…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/7]⎯
+
+
+ Test Files  6 failed | 93 passed | 1 skipped (100)
+      Tests  7 failed | 1034 passed | 19 skipped (1060)
+   Start at  08:25:37
+   Duration  37.51s (tests 85%, environment 6%, transform 5%, import 4%)
+
+    Isolate  100 workers spawned · ~319ms startup each (spawn + environment, per file)
+             at least ~3.67s faster with isolate: false — reuses workers across files instead of one per file
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

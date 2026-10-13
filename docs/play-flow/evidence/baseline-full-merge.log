@@ -1,0 +1,9 @@
+
+ RUN  v5.0.3 /workspace/shared/zeGame2-play-flow
+
+
+ Test Files  1 passed (1)
+      Tests  4 passed | 2 skipped (6)
+   Start at  08:53:07
+   Duration  690ms (transform 57%, tests 34%, import 9%)
+

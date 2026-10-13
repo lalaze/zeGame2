@@ -1,0 +1,35 @@
+
+ RUN  v5.0.3 /workspace/shared/play-flow-baseline
+
+baseline-full-v1-shard2: route-purchases/early/base/bakery/focus@180: 30/30; 1.09s
+baseline-full-v1-shard2: route-purchases/early/base/cats/focus@1800: 30/30; 8.49s
+baseline-full-v1-shard2: route-purchases/early/base/garden/focus@180: 30/30; 4.64s
+baseline-full-v1-shard2: route-purchases/early/base/community/focus@1800: 30/30; 8.45s
+baseline-full-v1-shard2: route-purchases/early/rush/bakery/focus@180: 30/30; 11.74s
+baseline-full-v1-shard2: route-purchases/early/rush/cats/focus@1800: 30/30; 8.57s
+baseline-full-v1-shard2: route-purchases/early/rush/garden/focus@180: 30/30; 10.65s
+baseline-full-v1-shard2: route-purchases/early/rush/community/focus@1800: 30/30; 8.60s
+baseline-full-v1-shard2: route-purchases/mid/base/bakery/focus@180: 30/30; 19.28s
+baseline-full-v1-shard2: route-purchases/mid/base/cats/focus@1800: 30/30; 38.77s
+baseline-full-v1-shard2: route-purchases/mid/base/garden/focus@180: 30/30; 13.07s
+baseline-full-v1-shard2: route-purchases/mid/base/community/focus@1800: 30/30; 21.04s
+baseline-full-v1-shard2: route-purchases/mid/rush/bakery/focus@180: 30/30; 1.86s
+baseline-full-v1-shard2: route-purchases/mid/rush/cats/focus@1800: 30/30; 32.70s
+baseline-full-v1-shard2: route-purchases/mid/rush/garden/focus@180: 30/30; 11.47s
+baseline-full-v1-shard2: route-purchases/mid/rush/community/focus@1800: 30/30; 12.88s
+baseline-full-v1-shard2: route-purchases/late/base/bakery/focus@180: 30/30; 44.57s
+baseline-full-v1-shard2: route-purchases/late/base/cats/focus@1800: 30/30; 19.64s
+baseline-full-v1-shard2: route-purchases/late/base/garden/focus@180: 30/30; 25.98s
+baseline-full-v1-shard2: route-purchases/late/base/community/focus@1800: 30/30; 26.10s
+baseline-full-v1-shard2: route-purchases/late/rush/bakery/focus@180: 30/30; 21.84s
+baseline-full-v1-shard2: route-purchases/late/rush/cats/focus@1800: 30/30; 21.75s
+baseline-full-v1-shard2: route-purchases/late/rush/garden/focus@180: 30/30; 23.54s
+baseline-full-v1-shard2: route-purchases/late/rush/community/focus@1800: 30/30; 15.90s
+baseline-full-v1-shard2: sanity/signature-heavy/mid/base@180: 30/30; 1.61s
+baseline-full-v1-shard2: sanity/signature-heavy/mid/rush@1800: 30/30; 17.78s
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  08:28:53
+   Duration  433.26s (tests 100%)
+

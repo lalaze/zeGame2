@@ -1,0 +1,53 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> tiny-bean-cafe@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.3 /tmp/signature-source-verification/tiny-bean-cafe
+
+ ❯ scripts/cafe-style-frontier.test.ts (0 test)
+ ❯ scripts/cafe-style-frontier-verify.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  scripts/cafe-style-frontier-verify.test.ts [ scripts/cafe-style-frontier-verify.test.ts ]
+Error: ENOENT: no such file or directory, open 'docs/cafe-styles/results/earned-late-union-input.json'
+ ❯ scripts/cafe-style-frontier-lab.ts:24:33
+     22|
+     23| export const UNION_PATH = 'docs/cafe-styles/results/earned-late-union-…
+     24| export const UNION = JSON.parse(readFileSync(UNION_PATH, 'utf8'));
+       |                                 ^
+     25| export const HOLDOUT_SEEDS = Array.from({ length: 30 }, (_, i) => (0xc…
+     26| export type FrontierRoute = { id: string; menu: string; items: ItemId[…
+ ❯ scripts/cafe-style-frontier-verify.test.ts:6:1
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  scripts/cafe-style-frontier.test.ts [ scripts/cafe-style-frontier.test.ts ]
+Error: ENOENT: no such file or directory, open 'docs/cafe-styles/results/earned-late-union-input.json'
+ ❯ scripts/cafe-style-frontier-lab.ts:24:33
+     22|
+     23| export const UNION_PATH = 'docs/cafe-styles/results/earned-late-union-…
+     24| export const UNION = JSON.parse(readFileSync(UNION_PATH, 'utf8'));
+       |                                 ^
+     25| export const HOLDOUT_SEEDS = Array.from({ length: 30 }, (_, i) => (0xc…
+     26| export type FrontierRoute = { id: string; menu: string; items: ItemId[…
+ ❯ scripts/cafe-style-frontier.test.ts:4:1
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 93 passed | 1 skipped (96)
+      Tests  991 passed | 14 skipped (1005)
+   Start at  07:44:48
+   Duration  40.44s (tests 85%, environment 6%, transform 5%, import 4%)
+
+    Isolate  96 workers spawned · ~283ms startup each (spawn + environment, per file)
+             at least ~3.11s faster with isolate: false — reuses workers across files instead of one per file
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

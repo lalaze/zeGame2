@@ -1,0 +1,145 @@
+{
+  "complete": true,
+  "retainedRawLabels": {
+    "baseline-pilot-v1": {
+      "cells": 18,
+      "rows": 36,
+      "sourceHash": "c81346116b3956830810fdd5ac3764e3de4c876a179563ea653a0385b8b7a893",
+      "fileSha256": "a23abed92d57774d2392034079ea39737ceb7ec8b69311574579a394cb147106"
+    },
+    "waves20-pilot-v1": {
+      "cells": 18,
+      "rows": 36,
+      "sourceHash": "befd511da7a1c5e5a4757fac4a2862178d34b8c02b4a4bdb7efc2596a3527f5e",
+      "fileSha256": "bf339492ca97271a53a93ee3e36a707fbe5ae0947fbcbecf9ad4894e3ece3eff"
+    },
+    "waves10-pilot-v1": {
+      "cells": 18,
+      "rows": 36,
+      "sourceHash": "050f12965e50cf3edc0a2a3b8916b69a9222c4c1c0e5b4e74376b107dc6b84d9",
+      "fileSha256": "262180f1580c36885e4bfd40e66c8eeca3da62dd6be0b1f96df40bfb02b71cec"
+    },
+    "baseline-full-v1": {
+      "cells": 78,
+      "rows": 2340,
+      "sourceHash": "c81346116b3956830810fdd5ac3764e3de4c876a179563ea653a0385b8b7a893",
+      "fileSha256": "8753377ceedb9c6068a74a1baec945d717b863f6ee95e9f306133c4285f80608"
+    },
+    "waves10-full-v1": {
+      "cells": 78,
+      "rows": 2340,
+      "sourceHash": "050f12965e50cf3edc0a2a3b8916b69a9222c4c1c0e5b4e74376b107dc6b84d9",
+      "fileSha256": "dca77f1e3559463136977223ab99850695045a398969289620d427586a1b3ee8"
+    },
+    "baseline-holdout-v1": {
+      "cells": 6,
+      "rows": 180,
+      "sourceHash": "c81346116b3956830810fdd5ac3764e3de4c876a179563ea653a0385b8b7a893",
+      "fileSha256": "46f6b2a605450c91567ca12255f63a7840356dcf5a7383a7c1849935e43f0fe9"
+    },
+    "waves10-holdout-v1": {
+      "cells": 6,
+      "rows": 180,
+      "sourceHash": "050f12965e50cf3edc0a2a3b8916b69a9222c4c1c0e5b4e74376b107dc6b84d9",
+      "fileSha256": "9a49068402d4faa86e6e120ea010c78c5734efb6fa24f0ee53b0446b8c9baf78"
+    },
+    "baseline-mechanism-v1": {
+      "cells": 2,
+      "rows": 60,
+      "sourceHash": "c81346116b3956830810fdd5ac3764e3de4c876a179563ea653a0385b8b7a893",
+      "fileSha256": "6a89300b5f3a9c7797c9eb5256dd292132ac3eeec58af136d32a39ecf8612fe9"
+    },
+    "waves10-mechanism-v1": {
+      "cells": 2,
+      "rows": 60,
+      "sourceHash": "050f12965e50cf3edc0a2a3b8916b69a9222c4c1c0e5b4e74376b107dc6b84d9",
+      "fileSha256": "8ac4e6d43014d04d28bee8de844188070811dbcf6b9b83d9e0037d91547a3b38"
+    }
+  },
+  "retainedEconomicSimulations": 5268,
+  "files": {
+    "docs/play-flow/evidence/baseline-full-merge.log": "5ec5e9f2126f1a5d1a1c615b0b48e9b0571cf3745f62ed72df171e5a590f41b3",
+    "docs/play-flow/evidence/baseline-full-v1-shard0.json": "573f08e730a25d58ef3be41bec89334e03008ce262a970d2dd9d05480aac2b37",
+    "docs/play-flow/evidence/baseline-full-v1-shard0.log": "c7d4295c6178820695856fd9aa6b500d8342ad05a5523c4be6ac492f26e4dd5e",
+    "docs/play-flow/evidence/baseline-full-v1-shard1.json": "5d762f6244bc821136edf5d6bfabd9e83ca9167e7b752031b97be3a40a9119c7",
+    "docs/play-flow/evidence/baseline-full-v1-shard1.log": "69e06924a495c7349d9075505c2dfc8c23733bfdfbb7ccebfd38f28344a09b6c",
+    "docs/play-flow/evidence/baseline-full-v1-shard2.json": "ed6c89c29cb4a03aebe4b5ffdf470d195ca56a6d71eb0805795ff0e3569a56f6",
+    "docs/play-flow/evidence/baseline-full-v1-shard2.log": "e3092d09f313a6ba580be89021163e29e1694b5e9bda1940396e149e91da5864",
+    "docs/play-flow/evidence/baseline-full-v1.json": "8753377ceedb9c6068a74a1baec945d717b863f6ee95e9f306133c4285f80608",
+    "docs/play-flow/evidence/baseline-holdout-v1.json": "46f6b2a605450c91567ca12255f63a7840356dcf5a7383a7c1849935e43f0fe9",
+    "docs/play-flow/evidence/baseline-holdout-v1.log": "512eea2016a6c4dcd7fc4d07a3014c470812d7e5e870e8f02d36204e3a8a7bdf",
+    "docs/play-flow/evidence/baseline-legacy-balance.log": "02640949698d1aaacbda6fe0d9e3c4ca6d293b67724248e33a5e544b0b281018",
+    "docs/play-flow/evidence/baseline-mechanism-v1.json": "6a89300b5f3a9c7797c9eb5256dd292132ac3eeec58af136d32a39ecf8612fe9",
+    "docs/play-flow/evidence/baseline-mechanism-v1.log": "ad46ba82772a91978771585f49b9e56868ebbd2b5e8e4e92e38e4683b10473b8",
+    "docs/play-flow/evidence/baseline-pilot-v1.json": "a23abed92d57774d2392034079ea39737ceb7ec8b69311574579a394cb147106",
+    "docs/play-flow/evidence/baseline-pilot-v1.log": "84fcb5ff405db0e5a2ae95d4777cfe5783f835e89841b0b97e4c2d3f459901a2",
+    "docs/play-flow/evidence/build-current.log": "1ddd1fc40ec0ff786b28897c1c3b68511d495d1dbf4d870a1fee8b0a1e9dfe43",
+    "docs/play-flow/evidence/build-final.log": "b1192f65ac1c8d0e4b9ea5c80803e5cb16c71f0c22dc19768af8338e5f7528f3",
+    "docs/play-flow/evidence/build-mobile-fix.log": "cd75a7865368812b3db9f44f7ec1eb82aee9fea0ff167f7aed3104e1e20f7944",
+    "docs/play-flow/evidence/build-ui-candidate.log": "92d7671c3be627d8fe6f7113313ddb98d831235e7f06ca0493b5148163e78d1f",
+    "docs/play-flow/evidence/candidate-sim-source.txt": "4bd61e34032e345d4df1f3d88a966f1349e108b7894286eecf2fdc91c1e1e11c",
+    "docs/play-flow/evidence/candidate-source-manifest.json": "c21512a09ac784efbbbd42e4f36a6d6c2f4dd3d2671890d152d8f7fc297dd7c5",
+    "docs/play-flow/evidence/diff-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/play-flow/evidence/full-tests-candidate.log": "016f50a897f74b6b2fe3a068b5efa6de583be3aebd0d7aab6644322fe138b234",
+    "docs/play-flow/evidence/full-tests-final.log": "1e6b9bbe4ba5f5778921d2af34c5e009514024af6278d5bdb904f8e1687041ac",
+    "docs/play-flow/evidence/harness-contract-tests.log": "e2c75e37eb811026df896b36df9592033189fc94391b6139758623f474afe65c",
+    "docs/play-flow/evidence/integrity.json": "68faaa5571d5bd3924c0afad4e375c4c2c5623a48fc4c8214b5f7b2b8ea9b33e",
+    "docs/play-flow/evidence/traffic-regression-note.txt": "f037eb5197ac29792fed5489ad5c705b3dbcba0952aebe08d95e607be938b43f",
+    "docs/play-flow/evidence/traffic-sim.patch": "68809254b09482ac66aeaccbbadae9ffa2d614f6025b37ceae950b396a5ee2f6",
+    "docs/play-flow/evidence/typescript-check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/play-flow/evidence/ui-final-focused.log": "7249ac682ebd7403fed1252c82497220343032194a61ffc01af600559ed51aa3",
+    "docs/play-flow/evidence/waves10-full-merge.log": "7afe281ff2d01163d45ac7d4d4f92a3ec3e7c06c407e370ec80eaf3d92efb54e",
+    "docs/play-flow/evidence/waves10-full-v1-comparison.json": "4759675aa50683ee3968ffdba8f84e4e862ab33517425e9d7653702461ab6480",
+    "docs/play-flow/evidence/waves10-full-v1-disposition.json": "4ec9321d5bef2b40c5104915f661b54c903d38012dc884a253e43b370400c8ca",
+    "docs/play-flow/evidence/waves10-full-v1-flag-diagnostics.json": "7871104edf4231b1602cf96b71dca00195a8733b3cb4825a3ab476f60c7eca14",
+    "docs/play-flow/evidence/waves10-full-v1-shard0.json": "8d54bcc32f47be04bbdd684f02dadaecfb231ad03b28dcf25e9951181f8b1279",
+    "docs/play-flow/evidence/waves10-full-v1-shard0.log": "4e54dbee21839830f5be5f99869478b37a37d0fa1fdafb1adbd1335720f84c56",
+    "docs/play-flow/evidence/waves10-full-v1-shard1.json": "2483a45abeeecbf6212e4414df17c40cf7c8855c36fa822312426ed3e6e0cc6f",
+    "docs/play-flow/evidence/waves10-full-v1-shard1.log": "91a2bbd85a68d80258eb08353a1fe3500173a38e3ee8d394155ad095f4e94fe1",
+    "docs/play-flow/evidence/waves10-full-v1-shard2.json": "3908b0d2be6269bd3990d3e5fc8a35ef769fe83a8c6880aaa401828a0a9c6b57",
+    "docs/play-flow/evidence/waves10-full-v1-shard2.log": "aa7b7730c55e430523a3eee3561e5414fdd017028ced81d0ba57c6d3d1890276",
+    "docs/play-flow/evidence/waves10-full-v1.json": "dca77f1e3559463136977223ab99850695045a398969289620d427586a1b3ee8",
+    "docs/play-flow/evidence/waves10-full-verify.log": "47bd8fa49dca4fbeb5d1b575071e86fb6e16056051019a3b79e391e1e5b242a9",
+    "docs/play-flow/evidence/waves10-holdout-v1-comparison.json": "81084a4e4d09ad758bf806f1a5c9d1e00deb7535a813250f4a9fe28af8c3cc4c",
+    "docs/play-flow/evidence/waves10-holdout-v1.json": "9a49068402d4faa86e6e120ea010c78c5734efb6fa24f0ee53b0446b8c9baf78",
+    "docs/play-flow/evidence/waves10-holdout-v1.log": "4e85d576123843db5a2cfa763414f46d6ce768e4bfcc017d5ee6f62cc5e95664",
+    "docs/play-flow/evidence/waves10-holdout-verify.log": "d34e50d8ceedc7edbcc173c0b0df0066c5baad717d6b14d1d4859b83104bac8c",
+    "docs/play-flow/evidence/waves10-legacy-balance.log": "104738e8db01ddc85227118194e4c52c0355528685f975e281e2a9970dcf56be",
+    "docs/play-flow/evidence/waves10-mechanism-v1-comparison.json": "07a29dcf54dd138e2649b4ddf1e5698499f02922185f84c23440e2d71d2c46b2",
+    "docs/play-flow/evidence/waves10-mechanism-v1.json": "8ac4e6d43014d04d28bee8de844188070811dbcf6b9b83d9e0037d91547a3b38",
+    "docs/play-flow/evidence/waves10-mechanism-v1.log": "2a4e6af40d0a12bedeec6d3a7475bf4b8a687d85f478b1925bfbc942a77c6cb5",
+    "docs/play-flow/evidence/waves10-mechanism-verify.log": "cc0ae41f5933d4127fa6bf3c43105575bdf6bd162a393c25c28520e3a0be1e75",
+    "docs/play-flow/evidence/waves10-pilot-v1-comparison.json": "3e9e03112beffba1fdb7ce103b53c3100c5ed07de91cb4bb990694d557154fe7",
+    "docs/play-flow/evidence/waves10-pilot-v1.json": "262180f1580c36885e4bfd40e66c8eeca3da62dd6be0b1f96df40bfb02b71cec",
+    "docs/play-flow/evidence/waves10-pilot-v1.log": "d56f3f52f5c8b1ee85faefbbf6e0579864374d8748c5401e4364d9156550dba0",
+    "docs/play-flow/evidence/waves10-pilot-verify.log": "90d8f4c3ea904c4109556dd9ef7fb98de1ffae32fee636851fb972159a6e0406",
+    "docs/play-flow/evidence/waves10-traffic-source.txt": "281f994790e0f9a341a3c25d7bc5ed57e470e44210b183d957eb5dc4e2f4bc80",
+    "docs/play-flow/evidence/waves20-legacy-suite.log": "b47855c7a77a797b471535e7ea7caff876bfa58ae11e09391bf8f349f2612c1a",
+    "docs/play-flow/evidence/waves20-pilot-v1-comparison.json": "68e844ecd6695b85bd4b6ece94c73ae65092c77f5e7cce5e75acb08d817451d0",
+    "docs/play-flow/evidence/waves20-pilot-v1.json": "bf339492ca97271a53a93ee3e36a707fbe5ae0947fbcbecf9ad4894e3ece3eff",
+    "docs/play-flow/evidence/waves20-pilot-v1.log": "ac21c31c146ecc923973ac625b1e4fd0f8aac829c20d12d2411ec81dd35769dd",
+    "docs/play-flow/evidence/waves20-pilot-verify.log": "7cce8a4006862309629d282e543464c53ea2a8b6f6a5440793cde94b3a45642d",
+    "docs/play-flow/evidence/waves20-traffic-source.txt": "9d54cf2f8caa6407db51a9b640b1966329ff1bc9cc4e95a39aff48a6fbc1f0ff"
+  },
+  "scripts": {
+    "scripts/play-flow-balance-diagnose.ts": "4d3557fe226dbf93cb924d29fdf9e04d79515af8ddd4274d1cca4b3756b4693f",
+    "scripts/play-flow-balance-holdout.test.ts": "1c612c9e4b603c0db2b27dda617acfe4a41c0feb0c8cefcc13f5e03bee1551a6",
+    "scripts/play-flow-balance-lab.ts": "ae35f40afccf1c722c2e7f0c607abd0ac9365385de4f8ded2ca21a302be0c669",
+    "scripts/play-flow-balance-mechanism.test.ts": "d84091627c97a8b94f1cdbd063b7336b9321371c84fc1039d4fbf628010c938f",
+    "scripts/play-flow-balance-verify.test.ts": "8f906e9a4b0369961df21731d0bde2b490aea649a6392a252522ec1c366db840",
+    "scripts/play-flow-balance-verify.ts": "31085e4830ed6827c264a5b304beee16ef3dfc96046d298995a1d29195141c85",
+    "scripts/play-flow-balance.test.ts": "4ee467936633c7d94b7f681e6feca6cc07bfb20bbb22f2f07ca077da5b27f98b"
+  },
+  "reports": {
+    "docs/play-flow/BALANCE-FLAG-REVIEW.md": "2d58894b7c6cc18534585f00a8be634eaf02491fc2d5d676f1bd73066c08e5b7",
+    "docs/play-flow/BALANCE-HOLDOUT-RESULTS.md": "f59816db61ecd9601325aa56d0428875efb66ade8a0b73c8bc29d4515a153e9b",
+    "docs/play-flow/BALANCE-HOLDOUT.md": "eb1ea6f3c8519ded79c86b25bbf1bfd720ec8571c82aef0d27bcd64c3c3a5d68",
+    "docs/play-flow/BALANCE-MECHANISM-RESULTS.md": "2d1b81b6cf0182db781cc9a4e1d34d20be3fd32ba7be18c8e8805c4a1154b186",
+    "docs/play-flow/BALANCE-MECHANISM.md": "606b53bb92180ae32d9e68c5ceaf25d07d3dfa72c7064c6ce21f5b8b2fb9e345",
+    "docs/play-flow/BALANCE-PROTOCOL.md": "289e9c7457a9bbb0f2025f3eafc5a283adcedc037ef1502ae1dfd39f4c062785",
+    "docs/play-flow/BALANCE-waves10-full-v1.md": "e2f73b8fd6793185ed2b8c607af41268be2c2b62661c77afd752e66c5e5636d7",
+    "docs/play-flow/BALANCE-waves10-pilot-v1.md": "11c871ac10f627ce589611e5a3121c497b3f6cd774cacb625ec2559f837b7ba6",
+    "docs/play-flow/BALANCE-waves20-pilot-v1.md": "b5cf9c4928b04474962c2b2f1ecab8a4343dd1b7ea0f1a8a6201682cbf9e10ea",
+    "docs/play-flow/BALANCE.md": "733db6abdb8a6ee4713f51b112e1725e4a25fe3912f3c01c1b97ae60bdf9b582"
+  }
+}

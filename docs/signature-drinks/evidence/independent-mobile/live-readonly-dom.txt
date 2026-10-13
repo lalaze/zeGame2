@@ -1,0 +1,340 @@
+- heading "Signature drink QA · isolated cloud Chromium viewport simulation" [level=1]
+- paragraph: Synthetic research fixture unlocks ingredients, sets pantry to100 and cash to10000 on day8. This is not a naturally earned progression or physical-phone test.
+- text: Fixture
+- combobox "Fixture":
+  - 'option "Signature QA: synthetic unlocked ingredients, pantry100, $10000" [selected]'
+- text: Language
+- combobox "Language":
+  - option "English" [selected]
+  - option "中文"
+- button "Replace disposable QA café"
+- button "Resume current QA save"
+- text: Viewport
+- combobox "Viewport":
+  - option "1000×740 desktop"
+  - option "1180×757 desktop"
+  - option "360×720"
+  - option "390×720" [selected]
+  - option "430×720"
+  - option "720×390 landscape"
+  - option "360×320 reduced height"
+- button "Read saved counters"
+- button "Download QA saved JSON"
+- generic: Viewport 390×720
+- iframe [active] [id="game"]:
+  - banner:
+    - generic: Signature QA
+    - button "Balance ≈$9.95K. View exact amount": ≈$9.95K
+    - generic: Revenue today $13
+    - button "Collapse management panel" [expanded]: Collapse
+    - button "Settings": ···
+  - button "★ 4.01 / 5 · Review traffic ±0% · View customer reviews":
+    - generic: ★ 4.01 / 5
+    - generic: Review traffic ±0%
+    - generic: ›
+  - button "Regular guests":
+    - generic: Regulars
+  - main:
+    - generic: Day 8 · Open 0:18
+    - button "1×"
+    - button "2×"
+    - button "4×"
+    - button "Close shop"
+    - button "Café style · Your own mix": Style
+    - button "Service status · details"
+    - generic "Main café"
+    - button "Map":
+      - generic: Map
+    - navigation "Café areas":
+      - button "Through the left door to Kitchen":
+      - button "Preview Reading room to the right":
+    - complementary "Management panel":
+      - tablist:
+        - tab "Menu" [selected]
+        - tab "Pantry"
+        - tab "Upgrades"
+        - tab "Furnish"
+        - tab "Cats"
+        - tab "Promote"
+      - generic: Buy
+      - button "x1" [pressed]
+      - button "x10"
+      - button "Max"
+      - button "All" [pressed]
+      - button "Coffee"
+      - button "Tea"
+      - button "Bread"
+      - button "Sweets"
+      - button "Signature drink lab"
+      - generic: "Dishes on the menu: 1 · variety brings +0% customers. Some customers pair a drink with something from the bakery."
+      - heading "Coffee 3/14" [level=3]:
+        - text: Coffee
+        - generic: 3/14
+      - generic: Espresso Lv 1
+      - generic: $3 each · ingredients $1 · 1.2s · Price $3 → ≈$6.5333
+      - button "Amounts"
+      - img "Coffee Beans"
+      - generic: 96 servings in stock
+      - 'button "Espresso · Taste 4.0 · Standard · Served 0/30 · Next: 4.5 taste"':
+        - generic: Taste 4.0 · Standard
+        - generic: "Served 0/30 · Next: 4.5 taste"
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Off menu" [disabled]
+      - button "Level up $8.96":
+        - generic: Level up
+        - generic: $8.96
+      - generic: Americano Lv 1
+      - generic: $5 each · ingredients $1 · 2.4s · Price $5 → ≈$10.8889
+      - button "Amounts"
+      - img "Coffee Beans"
+      - generic: 96 servings in stock
+      - 'button "Americano · Taste 4.0 · Standard · Served 0/30 · Next: 4.5 taste"':
+        - generic: Taste 4.0 · Standard
+        - generic: "Served 0/30 · Next: 4.5 taste"
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Off menu" [disabled]
+      - button "Level up ≈$44.8":
+        - generic: Level up
+        - generic: ≈$44.8
+      - generic: Latte Lv 1
+      - generic: $10 each · ingredients $3 · 5.0s · Price $10 → ≈$21.7778
+      - button "Amounts"
+      - img "Coffee Beans"
+      - img "Milk"
+      - generic: 96 servings in stock
+      - 'button "Latte · Taste 4.0 · Standard · Served 0/30 · Next: 4.5 taste"':
+        - generic: Taste 4.0 · Standard
+        - generic: "Served 0/30 · Next: 4.5 taste"
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Off menu" [disabled]
+      - button "Level up $134.4":
+        - generic: Level up
+        - generic: $134.4
+      - generic: Cappuccino
+      - generic: Sells for $35 · Price $0 → $35
+      - button "Amounts"
+      - img "Coffee Beans"
+      - img "Milk"
+      - generic: 96 servings in stock
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Unlock $1200":
+        - generic: Unlock
+        - generic: $1200
+      - generic: "?"
+      - generic: "???"
+      - generic: Unlock the previous item in this category first
+      - heading "Tea & Drinks 6/11" [level=3]:
+        - text: Tea & Drinks
+        - generic: 6/11
+      - generic: Earl Grey Tea Lv 1
+      - generic: $9 each · ingredients $2 · 4.0s · Price $9 → ≈$19.6
+      - button "Amounts"
+      - img "Tea Leaves"
+      - generic: 100 servings in stock
+      - 'button "Earl Grey Tea · Taste 4.0 · Standard · Served 0/30 · Next: 4.5 taste"':
+        - generic: Taste 4.0 · Standard
+        - generic: "Served 0/30 · Next: 4.5 taste"
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Off menu" [disabled]
+      - button "Level up ≈$100.8":
+        - generic: Level up
+        - generic: ≈$100.8
+      - generic: Hot Chocolate Lv 1
+      - generic: $30 each · ingredients $13 · 3.0s · Price $30 → ≈$65.3333
+      - button "Amounts"
+      - img "Cocoa"
+      - img "Milk"
+      - img "Sugar"
+      - generic: 96 servings in stock
+      - 'button "Hot Chocolate · Taste 4.0 · Standard · Served 0/30 · Next: 4.5 taste"':
+        - generic: Taste 4.0 · Standard
+        - generic: "Served 0/30 · Next: 4.5 taste"
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Off menu" [disabled]
+      - button "Level up ≈$1.00K":
+        - generic: Level up
+        - generic: ≈$1.00K
+      - generic: Lemon Black Tea Lv 1
+      - generic: $55 each · ingredients $23 · 2.5s · Price $55 → ≈$119.7778
+      - button "Amounts"
+      - img "Tea Leaves"
+      - img "Fresh Fruit"
+      - img "Sugar"
+      - generic: 100 servings in stock
+      - 'button "Lemon Black Tea · Taste 4.0 · Standard · Served 0/30 · Next: 4.5 taste"':
+        - generic: Taste 4.0 · Standard
+        - generic: "Served 0/30 · Next: 4.5 taste"
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Off menu" [disabled]
+      - button "Level up ≈$3.13K":
+        - generic: Level up
+        - generic: ≈$3.13K
+      - generic: Chai Latte Lv 1
+      - generic: $100 each · ingredients $10 · 3.5s · Price $100 → ≈$217.7778
+      - button "Amounts"
+      - img "Tea Leaves"
+      - img "Milk"
+      - img "Spices & Herbs"
+      - generic: 96 servings in stock
+      - 'button "Chai Latte · Taste 4.0 · Standard · Served 0/30 · Next: 4.5 taste"':
+        - generic: Taste 4.0 · Standard
+        - generic: "Served 0/30 · Next: 4.5 taste"
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Off menu" [disabled]
+      - button "Level up $8960":
+        - generic: Level up
+        - generic: $8960
+      - generic: Mixed Fruit Tea Lv 1
+      - generic: $350 each · ingredients $43 · 3.8s · Price $350 → ≈$762.2222
+      - button "Need ≈$46.0K"
+      - img "Tea Leaves"
+      - img "Fresh Fruit"
+      - generic: ×2
+      - img "Sugar"
+      - generic: 50 servings in stock
+      - 'button "Mixed Fruit Tea · Taste 4.0 · Standard · Served 0/30 · Next: 4.5 taste"':
+        - generic: Taste 4.0 · Standard
+        - generic: "Served 0/30 · Next: 4.5 taste"
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Off menu" [disabled]
+      - button "Level up ≈$56.0K" [disabled]:
+        - generic: Level up
+        - generic: ≈$56.0K
+      - generic: Hojicha Latte
+      - generic: Sells for $750 · Price $0 → $750
+      - button "Need ≈$170K"
+      - img "Tea Leaves"
+      - generic: ×2
+      - img "Milk"
+      - generic: 50 servings in stock
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Unlock $180K" [disabled]:
+        - generic: Unlock
+        - generic: $180K
+      - generic: Matcha Latte Lv 1
+      - generic: $1400 each · ingredients $42 · 4.5s · Price $1400 → ≈$3.04K
+      - button "Need ≈$606K"
+      - img "Matcha Powder"
+      - img "Milk"
+      - generic: 96 servings in stock
+      - 'button "Matcha Latte · Taste 4.0 · Standard · Served 0/30 · Next: 4.5 taste"':
+        - generic: Taste 4.0 · Standard
+        - generic: "Served 0/30 · Next: 4.5 taste"
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Off menu" [disabled]
+      - button "Level up ≈$616K" [disabled]:
+        - generic: Level up
+        - generic: ≈$616K
+      - generic: Caramel Frappé
+      - generic: Sells for $5000 · Price $0 → $5000
+      - button "Need ≈$4.49M"
+      - img "Coffee Beans"
+      - img "Milk"
+      - generic: ×2
+      - img "Sugar"
+      - img "Cream & Cheese"
+      - generic: 48 servings in stock
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Unlock $4.50M" [disabled]:
+        - generic: Unlock
+        - generic: $4.50M
+      - generic: "?"
+      - generic: "???"
+      - generic: Unlock the previous item in this category first
+      - heading "Bread 1/15" [level=3]:
+        - text: Bread
+        - generic: 1/15
+      - generic: Butter Roll Lv 1
+      - generic: $8 each · ingredients $4 · 0.8s · Price $8 → ≈$17.4222
+      - button "Amounts"
+      - img "Flour"
+      - img "Butter"
+      - generic: ingredients for 100
+      - 'button "Butter Roll · Taste 4.0 · Standard · Served 0/30 · Next: 4.5 taste"':
+        - generic: Taste 4.0 · Standard
+        - generic: "Served 0/30 · Next: 4.5 taste"
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Off menu" [disabled]
+      - button "Level up $33.6":
+        - generic: Level up
+        - generic: $33.6
+      - generic: Sesame Bagel
+      - generic: Sells for $12 · Price $0 → $12
+      - button "Amounts"
+      - img "Flour"
+      - img "Sugar"
+      - generic: ingredients for 100
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Unlock $150":
+        - generic: Unlock
+        - generic: $150
+      - generic: "?"
+      - generic: "???"
+      - generic: Unlock the previous item in this category first
+      - heading "Pastries & Cakes 1/15" [level=3]:
+        - text: Pastries & Cakes
+        - generic: 1/15
+      - generic: Glazed Donut Lv 1
+      - generic: $20 each · ingredients $5 · 4.5s · Price $20 → ≈$43.5556
+      - button "Amounts"
+      - img "Flour"
+      - img "Sugar"
+      - img "Eggs"
+      - generic: ingredients for 100
+      - 'button "Glazed Donut · Taste 4.0 · Standard · Served 0/30 · Next: 4.5 taste"':
+        - generic: Taste 4.0 · Standard
+        - generic: "Served 0/30 · Next: 4.5 taste"
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Off menu" [disabled]
+      - button "Level up ≈$336":
+        - generic: Level up
+        - generic: ≈$336
+      - generic: Raisin Scone
+      - generic: Sells for $32 · Price $0 → $32
+      - button "Amounts"
+      - img "Flour"
+      - img "Butter"
+      - img "Cream & Cheese"
+      - generic: ingredients for 100
+      - 'generic "Next price milestone: Lv 10 (grows gradually)"'
+      - button "Unlock $1100":
+        - generic: Unlock
+        - generic: $1100
+      - generic: "?"
+      - generic: "???"
+      - generic: Unlock the previous item in this category first
+  - dialog "Signature drinks":
+    - heading "Signature drinks" [level=2]
+    - region "Signature drinks":
+      - button "Back to recipes"
+      - heading "Cloud Renamed" [active] [level=3]
+      - paragraph: On the menu
+      - term: Ingredients / serving
+      - definition: $3
+      - term: Current sale price
+      - definition: $6.8
+      - term: Current preparation time
+      - definition: 4.8s
+      - term: Ingredient margin / serving
+      - definition: $3.8
+      - heading "Recipe practice" [level=4]
+      - paragraph: "Current taste: 4.1 / 5 · New recipe"
+      - paragraph: "Recipe quality: 4.1 / 5"
+      - paragraph: "Servings delivered: 2"
+      - paragraph: "Next milestone: 2 / 30"
+      - paragraph: Practice grows only when a customer receives this drink. Tastings, saving and renaming give no experience. At 30 deliveries it becomes practiced; at 100 it masters automatically, with no research fee.
+      - paragraph: Current café bonuses included. Standard takeaway sale, before VIP or dine-in bonuses. Ingredient margin excludes other running costs.
+      - heading "Flavor notes" [level=4]
+      - paragraph: roasted · creamy
+      - paragraph: A focused blend with a clear base.
+      - heading "Ingredients per serving" [level=4]
+      - list:
+        - generic: Coffee beans × 1
+        - generic: Milk × 1
+      - status: Research and menu changes are available during preparation only.
+      - textbox "Rename" [disabled]
+      - button "Edit formula" [disabled]
+      - button "Rename" [disabled]
+      - button "Remove from menu" [disabled]
+      - button "Delete recipe" [disabled]
+    - button "Close"

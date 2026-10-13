@@ -2147,3 +2147,88 @@ button.coins { display: block; width: 100%; min-height: 32px; padding: 0; border
 @media (max-width: 860px) and (min-height: 501px) {
   .has-guide .stage { height: min(350px, 43dvh); }
 }
+
+/* Signature recipe workbench: scoped, touch-sized and narrow-screen safe. */
+.signature-modal { width: min(620px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); display: flex; flex-direction: column; }
+.signature-modal .modal-body { overflow-y: auto; min-height: 0; }
+.signature-research { min-width: 0; overflow-wrap: anywhere; }
+.signature-research h3 { font-size: 17px; margin: 16px 0 10px; }
+.signature-research h4 { margin: 8px 0; }
+.signature-research img { image-rendering: pixelated; flex-shrink: 0; }
+.signature-research .pixel-btn, .signature-research select, .signature-research input { min-height: 44px; min-width: 44px; max-width: 100%; }
+.signature-bases { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.signature-bases button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 8px 2px; font-size: 12px; overflow-wrap: anywhere; }
+.signature-bases [aria-pressed="true"] { background: #e3e8cb; outline: 2px solid var(--green-dark); outline-offset: -2px; }
+.signature-doses { display: grid; gap: 8px; }
+.signature-dose { display: grid; grid-template-columns: 36px minmax(0, 1fr) 104px; align-items: center; gap: 8px; border-bottom: 1px solid var(--wood-light); padding-bottom: 6px; }
+.signature-dose img { width: 32px; height: 32px; }
+.signature-dose small { grid-column: 2 / -1; font-size: 11px; color: var(--muted); }
+.signature-dose select { grid-column: 3; grid-row: 1; width: 100%; color: var(--ink); background: var(--cream); border: 2px solid var(--wood-light); font: inherit; font-size: 12px; }
+.signature-summary { background: var(--cream); padding: 10px; border: 2px solid var(--wood-light); }
+.signature-metrics { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; font-size: 13px; }
+.signature-metrics dd { margin: 0; text-align: right; font-weight: bold; }
+.signature-ingredients { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 16px; padding: 0; }
+.signature-ingredients li { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.signature-ingredients img { width: 24px; height: 24px; }
+.signature-naming input, .signature-research > input { width: 100%; box-sizing: border-box; margin: 8px 0; padding: 8px; background: var(--cream); color: var(--ink); border: 2px solid var(--wood-light); font: inherit; }
+.signature-status { color: var(--green-dark); line-height: 1.6; }
+.signature-card { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 10px; padding: 10px; margin: 10px 0; border: 2px solid var(--wood-light); background: var(--cream); }
+.signature-card > button { grid-column: 1 / -1; }
+.signature-card h4 { word-break: break-word; }
+.signature-actions, .signature-delete { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.signature-delete p { width: 100%; }
+.signature-research button:disabled, .signature-research select:disabled { opacity: .55; }
+@media (max-width: 430px) {
+  .signature-modal { padding: 14px; }
+  .signature-bases { gap: 6px; }
+  .signature-bases img { width: 36px; height: 36px; }
+  .signature-dose { grid-template-columns: 28px minmax(0, 1fr) 90px; gap: 6px; }
+}
+
+/* Frequent service actions stay in normal layout flow, below the café and panel.
+   Nothing floats over the pixel scene or creates a second purchasing surface. */
+.play-flow-actions {
+  display: flex; justify-content: flex-end; gap: 10px; flex-shrink: 0;
+  padding: 6px 14px; background: var(--paper); border-top: 2px solid var(--brown);
+}
+.play-flow-actions .chip {
+  min-width: 140px; min-height: 44px; margin: 0; padding: 7px 14px;
+  overflow-wrap: anywhere; line-height: 1.25;
+}
+.play-flow-help-hint {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.pantry-task-context {
+  flex-shrink: 0; max-height: 110px; overflow-y: auto; padding: 8px 12px;
+  background: var(--cream); border-bottom: 2px solid var(--wood-light);
+  overflow-wrap: anywhere;
+}
+.pantry-task-context h3 { margin: 0 0 4px; font-size: 16px; }
+.pantry-task-context p { margin: 0; font-size: 12px; line-height: 1.5; }
+.pantry-task-context:focus { outline: 2px solid var(--green-dark); outline-offset: -3px; }
+.pantry-shortfall { box-shadow: inset 3px 0 var(--green); }
+.traffic-explanation { color: var(--muted); }
+@media (max-width: 860px) {
+  .play-flow-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 6px 10px; }
+  .play-flow-actions .chip { min-width: 44px; width: 100%; padding-inline: 6px; }
+  .pantry-task-context { max-height: 100px; padding: 6px 10px; }
+  .pantry-task-context h3 { font-size: 14px; }
+}
+/* The focused task's own explanation replaces the long ordinary pantry intro;
+   keep the live forecast and real replenishment button within reach. */
+.pantry-task .pantry-intro > .note { display: none; }
+@media (max-width: 860px) {
+  /* A temporary stock task gets the guide's space. Its progress is untouched;
+     Back restores the same guide, instead of trapping stock in a 27px scroller. */
+  #app.has-guide:has(.panel.pantry-task) > .first-service { display: none; }
+}
+/* Desktop rhythm information lives with service actions, outside the scene.
+   Mobile already docks its day clock outside the canvas; keep the preview there. */
+.traffic-inline { display: none; }
+.traffic-summary { margin-right: auto; align-self: center; max-width: 50%; color: var(--green-dark); font-size: 14px; line-height: 1.4; }
+.pantry-task button { min-width: 44px; min-height: 44px; }
+@media (max-width: 860px) {
+  .traffic-inline { display: block; }
+  .traffic-summary { display: none; }
+}

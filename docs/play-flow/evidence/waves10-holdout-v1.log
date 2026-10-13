@@ -1,0 +1,15 @@
+
+ RUN  v5.0.3 /workspace/shared/zeGame2-play-flow
+
+waves10-holdout-v1: route-purchases/early/rush/bakery/focus@180: 30/30; 20.57s
+waves10-holdout-v1: route-purchases/early/rush/bakery/focus@1800: 30/30; 27.61s
+waves10-holdout-v1: route-purchases/early/rush/community/focus@180: 30/30; 0.85s
+waves10-holdout-v1: route-purchases/early/rush/community/focus@1800: 30/30; 9.38s
+waves10-holdout-v1: route-purchases/mid/rush/bakery/focus@180: 30/30; 2.98s
+waves10-holdout-v1: route-purchases/mid/rush/bakery/focus@1800: 30/30; 29.51s
+
+ Test Files  1 passed (1)
+      Tests  2 passed | 1 skipped (3)
+   Start at  08:43:39
+   Duration  91.58s (tests 99%)
+

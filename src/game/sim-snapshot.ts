@@ -1,3 +1,4 @@
+import { signatureDefinition } from './signature-drinks';
 import { regularGuestDefinition } from './regular-guests';
 import { MENU, PASS_SLOTS } from './data';
 import { MAX_SCENE_H, MIN_SCENE_H, TOTAL_TABLE_SPOTS } from './layout';
@@ -20,7 +21,7 @@ const obj = (x: unknown): x is Obj => !!x && typeof x === 'object' && !Array.isA
 const finite = (x: unknown): x is number => typeof x === 'number' && Number.isFinite(x);
 const positive = (x: unknown): x is number => finite(x) && x >= 0;
 const integer = (x: unknown): x is number => positive(x) && Number.isSafeInteger(x);
-const item = (x: unknown): x is ItemId => MENU.some((m) => m.id === x);
+const item = (x: unknown): x is ItemId => MENU.some((m) => m.id === x) || typeof x === 'string' && signatureDefinition(x) !== null;
 const list = (x: unknown, max: number, check: (v: unknown) => boolean): x is unknown[] => Array.isArray(x) && x.length <= max && x.every(check);
 const point = (x: unknown) => obj(x) && finite(x.x) && finite(x.y) && Math.abs(x.x) < 10000 && Math.abs(x.y) < 10000;
 const look = (x: unknown) => obj(x) && ['skin','hair','hairStyle','shirt','pants'].every((k) => integer(x[k]) && x[k] < 8);
@@ -52,6 +53,16 @@ export function validSnapshot(value: unknown, state: GameState): value is SimSna
     !list(value.queue, 6, integer) || !list(value.seats, TOTAL_TABLE_SPOTS * 2, nullableId) || !list(value.pass, PASS_SLOTS, plate) || !list(value.rack, 3, item)) return false;
   if (value.version === 2 && (!validCustomerCastSnapshot(value.customerCast) || !integer(value.castRandomState) || value.castRandomState > 0xffffffff)) return false;
   const s = value as unknown as SimSnapshot;
+  // A syntactically valid custom recipe must still exist in this economic save.
+  // Definitions themselves are immutable, so an edited name cannot change an order.
+  const savedRecipe = (id: ItemId) => MENU.some((m) => m.id === id) || state.signatureDrinks.recipes.some((recipe) => recipe.id === id);
+  const inFlight = [
+    ...s.customers.flatMap((c) => c.extra === null ? [c.order] : [c.order, c.extra]),
+    ...s.pass.flatMap((p) => p.items), ...s.rack,
+    ...s.servers.flatMap((server) => server.plates.flatMap((p) => p.items)),
+    ...s.cooks.flatMap((cook) => cook.batch === null ? [] : [cook.batch.item]),
+  ];
+  if (!inFlight.every(savedRecipe)) return false;
   if (!state.kitchen && s.cooks.length > 0) return false;
   // Legacy live customers without narrative fields retain their original identity.
   // Present fields must agree with their saved appearance, debut and visit receipt.

@@ -121,7 +121,7 @@ describe('opening-stock projection', () => {
       const total = openShop(state);
       expect(state.pantry).toEqual(projected.pantry);
       expect(state.shelf).toEqual(projected.shelf);
-      expect(total).toBe(Object.values(projected.shelf).reduce((sum, n) => sum + n, 0));
+      expect(total).toBe(Object.values(projected.shelf).reduce<number>((sum, n) => sum + (n ?? 0), 0));
       for (const n of Object.values(state.pantry)) expect(n).toBeGreaterThanOrEqual(0);
     }
   });

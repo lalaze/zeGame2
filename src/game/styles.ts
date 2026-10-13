@@ -3,6 +3,7 @@ import { COMBO_CHANCE, MENU, isDrink, type MenuItemDef, type ItemId } from './da
 import { comfort } from './decor';
 import { petActive } from './pets';
 import { reputationScore } from './reputation';
+import { signatureDefinition } from './signature-drinks';
 import { tasteTier } from './taste';
 import type { GameState } from './state';
 
@@ -31,9 +32,14 @@ export function setCafeStyle(state: GameState, id: CafeStyleId | null): boolean 
 export const cafeStyle = (state: GameState): CafeStyleId | null => state.cafeStyle?.focus ?? null;
 export interface StyleGoal { id: string; current: number; target: number; done: boolean }
 export interface StyleStage { id: 'early' | 'mid' | 'late'; done: boolean; goals: StyleGoal[] }
-const category = (id: ItemId) => MENU.find((m) => m.id === id)!.category;
-const servings = (s: GameState, categories: string[]) => MENU.filter((m) => categories.includes(m.category)).reduce((sum, m) => sum + (s.taste.served[m.id] ?? 0), 0);
-const signatures = (s: GameState, categories: string[]) => s.taste.signature.filter((id) => categories.includes(category(id))).length;
+const definition = (id: ItemId) => MENU.find((m) => m.id === id) ?? signatureDefinition(id);
+const category = (id: ItemId) => definition(id)?.category;
+const servings = (s: GameState, categories: string[]) =>
+  MENU.filter((m) => categories.includes(m.category)).reduce((sum, m) => sum + (s.taste.served[m.id] ?? 0), 0)
+  + Object.entries(s.signatureDrinks.served).reduce((sum, [id, n]) => sum + (categories.includes(signatureDefinition(id)?.category ?? '') ? n : 0), 0);
+const signatures = (s: GameState, categories: string[]) =>
+  s.taste.signature.filter((id) => categories.includes(category(id) ?? '')).length
+  + Object.keys(s.signatureDrinks.served).filter((id) => categories.includes(signatureDefinition(id)?.category ?? '') && tasteTier(s, id as ItemId) === 'signature').length;
 const goal = (id: string, current: number, target: number): StyleGoal => ({ id, current: Math.min(current, target), target, done: current >= target });
 /** No claimable money or stat rewards: these checklists reflect retained real assets
  * and delivered servings. Switching/reloading cannot mint or stack anything. */
@@ -108,8 +114,8 @@ export function styleSaleMultiplier(s: GameState, id: ItemId, dineIn = false, me
 /** Qualifies from the delivered meal; upgraded machines do not turn elaborate
  * recipes into commuter orders, and an actual add-on makes it ineligible. */
 export function fastDrinkMeal(meal: readonly ItemId[]): boolean {
-  return meal.length > 0 && meal.every((id) => ['coffee', 'tea'].includes(category(id)))
-    && meal.reduce((sum, id) => sum + MENU.find((m) => m.id === id)!.prepTime, 0) <= 3;
+  return meal.length > 0 && meal.every((id) => ['coffee', 'tea'].includes(category(id) ?? ''))
+    && meal.reduce((sum, id) => sum + (definition(id)?.prepTime ?? Infinity), 0) <= 3;
 }
 export const teaPastryMeal = (meal: readonly ItemId[]): boolean => meal.some((id) => category(id) === 'tea') && meal.some((id) => category(id) === 'pastry');
 export const activeStyleCats = (s: GameState): number => s.pets.filter(petActive).length;

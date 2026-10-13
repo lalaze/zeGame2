@@ -269,7 +269,7 @@ describe('one-bean emergency restock', () => {
     (s: GameState) => { s.coins = NaN; },
     (s: GameState) => { s.coins = -1; },
     (s: GameState) => { s.pantry.milk = Infinity; },
-    (s: GameState) => { s.pantry.beans = 0.5; },
+    (s: GameState) => { s.pantry.beans = 0.1; },
     (s: GameState) => { s.pantry.tea = -1; },
     (s: GameState) => { s.items.latte = 0.5; },
     (s: GameState) => { s.shelf.roll = NaN; },

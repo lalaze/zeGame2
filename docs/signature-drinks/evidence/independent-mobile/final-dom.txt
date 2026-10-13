@@ -1,0 +1,66 @@
+- heading "Signature drink QA · isolated cloud Chromium viewport simulation" [level=1]
+- paragraph: Synthetic research fixture unlocks ingredients, sets pantry to100 and cash to10000 on day8. This is not a naturally earned progression or physical-phone test.
+- text: Fixture
+- combobox "Fixture":
+  - 'option "Signature QA: synthetic unlocked ingredients, pantry100, $10000" [selected]'
+- text: Language
+- combobox "Language":
+  - option "English" [selected]
+  - option "中文"
+- button "Replace disposable QA café"
+- button "Resume current QA save"
+- text: Viewport
+- combobox "Viewport":
+  - option "1000×740 desktop"
+  - option "1180×757 desktop"
+  - option "360×720"
+  - option "390×720" [selected]
+  - option "430×720"
+  - option "720×390 landscape"
+  - option "360×320 reduced height"
+- button "Read saved counters"
+- button "Download QA saved JSON"
+- generic: "{ \"note\": \"Last autosave only; read does not advance or save simulation\", \"origin\": \"http://127.0.0.1:5302\", \"viewport\": { \"width\": 390, \"height\": 720, \"scrollWidth\": 390 }, \"version\": 15, \"day\": 8, \"phase\": \"open\", \"dayTime\": 89.25700999999657, \"coins\": 10048.799999999988, \"totalEarned\": 108.79999999999997, \"served\": 16, \"pantry\": { \"beans\": 83.5, \"milk\": 83.25, \"flour\": 100, \"butter\": 100, \"eggs\": 100, \"sugar\": 100, \"tea\": 100, \"spice\": 100, \"cocoa\": 100, \"cream\": 100, \"fruit\": 100, \"matcha\": 100 }, \"signatureDrinks\": { \"recipes\": [ { \"id\": \"sig:coffee:beans=1,milk=1\", \"name\": \"Cloud Renamed\", \"onMenu\": true } ], \"tested\": [ \"sig:coffee:beans=1,milk=2\", \"sig:coffee:beans=1,milk=1\" ], \"served\": { \"sig:coffee:beans=1,milk=1\": 16 } }, \"items\": { \"espresso\": 1, \"americano\": 1, \"latte\": 1, \"cappuccino\": 0, \"flatwhite\": 0, \"cortado\": 0, \"mocha\": 0, \"vienna\": 0, \"macchiato\": 0, \"coldbrew\": 0, \"dirty\": 0, \"pourover\": 0, \"creamcoffee\": 0, \"affogato\": 0, \"blacktea\": 1, \"hotchoc\": 1, \"lemontea\": 1, \"chai\": 1, \"fruittea\": 1, \"hojicha\": 0, \"matcha\": 1, \"frappe\": 0, \"smoothie\": 0, \"milktea\": 0, \"matchafloat\": 0, \"roll\": 1, \"bagel\": 0, \"baguette\": 0, \"cheesebun\": 0, \"pretzel\": 0, \"focaccia\": 0, \"ciabatta\": 0, \"raisinbread\": 0, \"sourdough\": 0, \"rye\": 0, \"chocobread\": 0, \"shokupan\": 0, \"brioche\": 0, \"fruitbrioche\": 0, \"garlicbread\": 0, \"donut\": 1, \"scone\": 0, \"cookie\": 0, \"croissant\": 0, \"painchoc\": 0, \"brownie\": 0, \"cinnamon\": 0, \"muffin\": 0, \"creampuff\": 0, \"melonpan\": 0, \"eggtart\": 0, \"cake\": 0, \"swissroll\": 0, \"cheesecake\": 0, \"macaron\": 0, \"sig:coffee:beans=1,milk=1\": 1 }, \"regions\": [], \"kitchen\": true, \"today\": { \"reviews\": { \"stars\": [ 0, 0, 6, 10, 0 ], \"reasons\": { \"skilledTaste\": 3, \"steady\": 7, \"slow\": 6 }, \"totalScore\": 58.3 }, \"served\": 16, \"missed\": 0, \"soldOut\": 0, \"queueLost\": 0, \"tableLost\": 0, \"extraLost\": 0, \"doorLost\": 5, \"shortages\": {}, \"revenue\": 108.79999999999997, \"ingredientCost\": 48, \"petCost\": 0, \"promotionCost\": 29.752336666666015, \"sales\": { \"sig:coffee:beans=1,milk=1\": 16 }, \"baked\": {} }, \"pets\": [], \"promotion\": { \"id\": \"clipLocal\", \"remaining\": 90.74298999999552, \"paused\": false }, \"regularGuests\": { \"guests\": { \"nico\": { \"firstMetDay\": 8, \"served\": 1, \"unlockedChapters\": [ 0 ], \"readChapters\": [], \"lastUnlockDay\": 8, \"servedVisitIds\": [ 1 ], \"pendingVisitIds\": [], \"pendingDay\": 8 }, \"theo\": { \"firstMetDay\": 8, \"served\": 1, \"unlockedChapters\": [ 0 ], \"readChapters\": [], \"lastUnlockDay\": 8, \"servedVisitIds\": [ 2 ], \"pendingVisitIds\": [], \"pendingDay\": 8 }, \"alba\": { \"firstMetDay\": 8, \"served\": 1, \"unlockedChapters\": [ 0 ], \"readChapters\": [], \"lastUnlockDay\": 8, \"servedVisitIds\": [ 3 ], \"pendingVisitIds\": [], \"pendingDay\": 8 }, \"june\": { \"firstMetDay\": 8, \"served\": 0, \"unlockedChapters\": [], \"readChapters\": [], \"lastUnlockDay\": null, \"servedVisitIds\": [], \"pendingVisitIds\": [ 4 ], \"pendingDay\": 8 }, \"iris\": { \"firstMetDay\": 8, \"served\": 0, \"unlockedChapters\": [], \"readChapters\": [], \"lastUnlockDay\": null, \"servedVisitIds\": [], \"pendingVisitIds\": [ 5 ], \"pendingDay\": 8 } }, \"nextVisitId\": 6 } }"
+- iframe [active] [id="game"]:
+  - banner:
+    - generic: Signature QA
+    - button "余额 ≈$10.4K，查看精确金额": ≈$10.4K
+    - generic: 休息中 · 第 10 天
+    - button "展开经营面板": 经营
+    - button "设置": ···
+  - button "★ 3.45 / 5 · 口碑客流 −5% · 查看顾客评价":
+    - generic: ★ 3.45 / 5
+    - generic: 口碑客流 −5%
+    - generic: ›
+  - button "熟客记录 · 7 段新故事":
+    - generic: 熟客
+    - generic: "7"
+  - main:
+    - generic: Signature QA
+    - generic: 第 10 天 · 休息中
+    - button "经营风格 · 自由混搭": 经营
+    - button "准备菜单 · 第 10 天"
+    - generic "主店"
+    - button "地图":
+      - generic: 地图
+    - navigation "咖啡馆区域":
+      - button "从左侧门前往后厨":
+      - button "查看右侧的阅读休息室":
+  - dialog "第 9 天营业结算":
+    - heading "第 9 天营业结算" [level=2]
+    - region "第 9 天营业结算":
+      - term: 接待顾客
+      - definition: "9"
+      - term: 营业额
+      - definition: $378.00
+      - term: 本次消耗成本
+      - definition: −$247.82
+      - generic: 利润
+      - generic: +$130.18
+    - region "下一步":
+      - paragraph: 0 位客人排队中离开，另有 7 位因队满未能加入。
+      - paragraph: "下一步: 明天先只卖 黄油小餐包，使用现有原料，无需购买。赚到下一笔收入后先补原料，再考虑投资。"
+      - paragraph: 先留出补原料的钱，再考虑升级或解锁新品。
+    - generic "营业详情与成本明细" [active]
+    - button "准备明天"
+    - button "菜单"

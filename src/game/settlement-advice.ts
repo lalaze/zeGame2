@@ -44,7 +44,7 @@ export function settlementAdvice(report: DayReport, state: GameState): Settlemen
   const soldCost = (Object.entries(report.sales) as [ItemId, number][])
     .reduce((sum, [id, n]) => sum + servingCost(id) * n, 0);
   const unrecoveredIngredientCost = Math.max(0, report.ingredientCost - soldCost - report.staleCost);
-  const staleCount = Object.values(report.stale).reduce((sum, n) => sum + (n ?? 0), 0);
+  const staleCount = Object.values(report.stale).reduce<number>((sum, n) => sum + (n ?? 0), 0);
   const cancelled = report.reviews.reasons.cancelled ?? 0;
   const onMenu = menuItems(state);
   const completedBakeCost = (Object.entries(report.baked) as [ItemId, number][])
@@ -95,7 +95,7 @@ export function settlementAdvice(report: DayReport, state: GameState): Settlemen
         return { kind: 'restock', tab: 'pantry', cost: state.coins - projected.coins, ingredients };
       }
       const available = stocked.find(({ id }) => onMenu.some((m) => m.id === id)) ?? stocked[0];
-      if (available) return { kind: state.onMenu.includes(available.id) ? 'useStock' : 'switchMenu', tab: 'menu', cost: 0, item: available.id };
+      if (available) return { kind: onMenu.some((m) => m.id === available.id) ? 'useStock' : 'switchMenu', tab: 'menu', cost: 0, item: available.id };
     }
 
     // An empty menu or exhausted unaffordable recipe can still have a free or
@@ -103,7 +103,7 @@ export function settlementAdvice(report: DayReport, state: GameState): Settlemen
     if (!onMenu.length || !onMenu.some(({ id }) => servingsLeft(state, id) > 0)) {
       if (stocked[0]) return { kind: 'switchMenu', tab: 'menu', cost: 0, item: stocked[0].id };
       const affordable = unlockedItems(state).filter(({ id }) => canPrepareItem(state, id)).map(({ id }) => ({
-        id, cost: recipe(id).reduce((sum, [ing, n]) => sum + Math.max(0, n - state.pantry[ing]) * ingredientDef(ing).cost, 0),
+        id, cost: recipe(id).reduce((sum, [ing, n]) => sum + Math.max(0, Math.ceil(n - state.pantry[ing])) * ingredientDef(ing).cost, 0),
       })).filter(({ cost }) => cost > 0 && cost <= state.coins).sort((a, b) => a.cost - b.cost)[0];
       if (affordable) return { kind: 'restartRecipe', tab: 'menu', cost: affordable.cost, item: affordable.id };
       if (canEmergencyRestock(state)) return { kind: 'emergency', tab: 'pantry', cost: 0 };
