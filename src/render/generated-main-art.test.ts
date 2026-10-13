@@ -50,8 +50,11 @@ beforeEach(async () => {
   RoomPainter = (await import('./room-art')).RoomPainter;
 });
 
-function install(id: GeneratedMainId, width = 80, height = 40) {
-  const image = source(id, width, height);
+function install(id: GeneratedMainId, width?: number, height?: number) {
+  const authored: Partial<Record<GeneratedMainId, readonly [number, number]>> = {
+    display: [1941, 521], croissant: [437, 293], cake: [336, 327],
+  };
+  const image = source(id, width ?? authored[id]?.[0] ?? 80, height ?? authored[id]?.[1] ?? 40);
   art.installGeneratedMainAsset(id, image);
   return image;
 }
@@ -87,7 +90,7 @@ describe('generated main-room asset registry and painting', () => {
     const files = Object.values(art.GENERATED_MAIN_ASSETS);
     expect(new Set(files).size).toBe(files.length);
     for (const file of files) {
-      expect(file).toMatch(/^(?:(?:main|staff|service|wall|menu)-v\d+|customer-0-v1|cat-siamese-v1)\/[a-zA-Z0-9-]+\.png$/);
+      expect(file).toMatch(/^(?:(?:(?:main|staff|service|wall|menu)-v\d+|customer-0-v1|cat-siamese-v1)\/[a-zA-Z0-9-]+|catalog-v1\/(?:menu|ingredients|furniture|decor|environment|tableware|signature|main-static|staff-server|staff-owner)\/[a-zA-Z0-9_-]+|catalog-v1\/(?:customers|cats)\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+)\.png$/);
       expect(file.split('/')).not.toContain('sources');
       const bytes = readFileSync(new URL(`../../public/art/generated/${file}`, import.meta.url));
       expect([...bytes.subarray(0, 8)], file).toEqual([137, 80, 78, 71, 13, 10, 26, 10]);

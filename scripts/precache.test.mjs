@@ -12,7 +12,7 @@ afterEach(async () => {
   await Promise.all(temporary.splice(0).map((path) => rm(path, { recursive: true, force: true })));
 });
 
-async function buildFixture() {
+async function buildFixture(extraFiles = {}) {
   const dir = await mkdtemp(join(tmpdir(), 'cafe-precache-'));
   temporary.push(dir);
   await mkdir(join(dir, 'assets'));
@@ -25,6 +25,7 @@ async function buildFixture() {
     'icon-192.png': 'icon',
     'assets/app-123.js.map': 'excluded source map',
     'sw.js': 'old worker',
+    ...extraFiles,
   })) await writeFile(join(dir, name), body);
   return { dir, ...(await generateServiceWorker(dir, templatePath)) };
 }
@@ -48,6 +49,9 @@ function worker(source, scope = 'https://example.test/games/cafe/', existing = n
         put: async (request, response) => { entries.set(keyOf(request), response.clone()); },
         addAll: async (requests) => {
           const responses = await Promise.all(requests.map((request) => fetch(request)));
+          // Like Cache.addAll, HTTP failures reject the entire batch before
+          // committing any response, even though fetch itself resolved.
+          if (responses.some((response) => !response.ok)) throw new TypeError('Unsuccessful precache response');
           requests.forEach((request, i) => entries.set(keyOf(request), responses[i]));
         },
       };
@@ -129,16 +133,75 @@ describe('production offline app shell', () => {
     }
   });
 
-  it('holds installation open until the final shell asset has downloaded', async () => {
-    const { source } = await buildFixture();
+  it('limits installation to four requests and waits for each batch before starting the next', async () => {
+    const { source, manifest } = await buildFixture({ 'extra-a.bin': 'a', 'extra-b.bin': 'b', 'extra-c.bin': 'c' });
     const app = worker(source);
-    let release;
-    const gate = new Promise((resolve) => { release = resolve; });
-    app.fetch.mockImplementationOnce(async () => { await gate; return new Response('slow asset'); });
+    const releases = new Map();
+    const gates = new Map(manifest.map((path) => {
+      const url = new URL(path, 'https://example.test/games/cafe/').href;
+      return [url, new Promise((resolve) => releases.set(url, resolve))];
+    }));
+    const urls = [...gates.keys()];
+    let active = 0;
+    let peak = 0;
+    app.fetch.mockImplementation(async (request) => {
+      active++;
+      peak = Math.max(peak, active);
+      await gates.get(request.url);
+      active--;
+      return new Response(request.url);
+    });
     let installed = false;
     const install = app.lifecycle('install').then(() => { installed = true; });
-    await new Promise((resolve) => setTimeout(resolve, 0));
+    const nextTurn = () => new Promise((resolve) => setTimeout(resolve, 0));
+    await nextTurn();
+    expect(app.fetch).toHaveBeenCalledTimes(4);
+    expect(active).toBe(4);
+    for (const url of urls.slice(0, 3)) releases.get(url)();
+    await nextTurn();
+    expect(app.fetch).toHaveBeenCalledTimes(4);
+    expect(active).toBe(1);
     expect(installed).toBe(false);
+
+    releases.get(urls[3])();
+    await nextTurn();
+    expect(app.fetch).toHaveBeenCalledTimes(8);
+    expect(active).toBe(4);
+    for (const url of urls.slice(4, 8)) releases.get(url)();
+    await nextTurn();
+    expect(app.fetch).toHaveBeenCalledTimes(9);
+    expect(active).toBe(1);
+    expect(installed).toBe(false);
+    expect(app.claim).not.toHaveBeenCalled();
+    expect(app.skipWaiting).not.toHaveBeenCalled();
+
+    releases.get(urls[8])();
+    await install;
+    expect(installed).toBe(true);
+    expect(active).toBe(0);
+    expect(peak).toBe(4);
+    expect(app.fetch.mock.calls.map(([request]) => request.url)).toEqual(urls);
+    expect(app.fetch.mock.calls.every(([request]) => request.cache === 'reload')).toBe(true);
+  });
+
+  it('holds installation open until the final shell asset in the final batch has downloaded', async () => {
+    const { source, manifest } = await buildFixture();
+    const app = worker(source);
+    let release;
+    let reached;
+    const gate = new Promise((resolve) => { release = resolve; });
+    const lastStarted = new Promise((resolve) => { reached = resolve; });
+    const lastUrl = new URL(manifest.at(-1), 'https://example.test/games/cafe/').href;
+    app.fetch.mockImplementation(async (request) => {
+      if (request.url === lastUrl) { reached(); await gate; }
+      return new Response(request.url);
+    });
+    let installed = false;
+    const install = app.lifecycle('install').then(() => { installed = true; });
+    await lastStarted;
+    expect(app.fetch).toHaveBeenCalledTimes(manifest.length);
+    expect(installed).toBe(false);
+    expect(app.claim).not.toHaveBeenCalled();
     release();
     await install;
     expect(installed).toBe(true);
@@ -176,6 +239,63 @@ describe('production offline app shell', () => {
     expect(app.caches.delete).not.toHaveBeenCalled();
     expect(app.claim).not.toHaveBeenCalled();
     expect(app.existing.has(old)).toBe(true);
+  });
+
+  it.each([
+    ['network', 0], ['HTTP', 0], ['network', 4], ['HTTP', 4],
+  ])('rejects a %s failure at entry %i, preserves the old cache, and safely retries the partial version', async (failure, failedIndex) => {
+    const { source, manifest } = await buildFixture({ 'extra-a.bin': 'a', 'extra-b.bin': 'b', 'extra-c.bin': 'c' });
+    const scope = 'https://example.test/games/cafe/';
+    const urls = manifest.map((path) => new URL(path, scope).href);
+    const shellUrl = new URL('./index.html', scope).href;
+    const old = `tiny-bean-cafe:${encodeURIComponent(scope)}:previous-working-version`;
+    const oldEntries = new Map([[shellUrl, new Response('previous working shell')]]);
+    const app = worker(source, scope, new Map([[old, oldEntries]]));
+    app.fetch.mockImplementation(async (request) => {
+      if (request.url === urls[failedIndex]) {
+        if (failure === 'network') throw new TypeError('Missing bundle');
+        return new Response('unavailable', { status: 503 });
+      }
+      return new Response(`first attempt: ${request.url}`);
+    });
+    await expect(app.lifecycle('install')).rejects.toThrow(
+      failure === 'network' ? 'Missing bundle' : 'Unsuccessful precache response');
+    expect(app.fetch).toHaveBeenCalledTimes(failedIndex + 4);
+    expect(app.fetch.mock.calls.map(([request]) => request.url)).toEqual(urls.slice(0, failedIndex + 4));
+    expect(app.caches.delete).not.toHaveBeenCalled();
+    expect(app.claim).not.toHaveBeenCalled();
+    expect(app.skipWaiting).not.toHaveBeenCalled();
+    expect(app.existing.get(old)).toBe(oldEntries);
+    expect(await oldEntries.get(shellUrl).clone().text()).toBe('previous working shell');
+    const newKeys = [...app.existing.keys()].filter((key) => key !== old);
+    expect(newKeys).toHaveLength(1);
+    const partial = app.existing.get(newKeys[0]);
+    expect([...partial.keys()]).toEqual(urls.slice(0, failedIndex));
+
+    // A new installer sees the same partially populated version cache. It
+    // reloads all entries, including earlier batches, rather than treating
+    // their mere presence as proof that the complete offline shell is ready.
+    const retry = worker(source, scope, app.existing);
+    const defaultFetch = retry.fetch.getMockImplementation();
+    retry.fetch.mockImplementation(async (request) => new Response(`retry: ${request.url}`));
+    await retry.lifecycle('install');
+    expect(retry.fetch.mock.calls.map(([request]) => request.url)).toEqual(urls);
+    expect(retry.fetch.mock.calls.every(([request]) => request.cache === 'reload')).toBe(true);
+    expect(retry.existing.get(newKeys[0])).toBe(partial);
+    expect([...partial.keys()]).toEqual(urls);
+    expect(retry.caches.delete).not.toHaveBeenCalled();
+    expect(retry.claim).not.toHaveBeenCalled();
+    expect(retry.skipWaiting).not.toHaveBeenCalled();
+    expect(await oldEntries.get(shellUrl).clone().text()).toBe('previous working shell');
+    for (const url of urls) expect(await partial.get(url).clone().text()).toBe(`retry: ${url}`);
+
+    await retry.lifecycle('activate');
+    expect(retry.caches.delete.mock.calls).toEqual([[old]]);
+    expect(retry.claim).toHaveBeenCalledOnce();
+    retry.fetch.mockImplementation(defaultFetch);
+    retry.goOffline();
+    for (const path of manifest) expect(await (await retry.request(path)).text()).toBe(`retry: ${new URL(path, scope).href}`);
+    expect(await (await retry.request('./', 'navigate')).text()).toBe(`retry: ${shellUrl}`);
   });
 
   it('does not serve responses from unrelated caches or intercept foreign/out-of-scope/non-GET traffic', async () => {

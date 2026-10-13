@@ -1,11 +1,14 @@
-import { GENERATED_CAT_FRAME_IDS, type GeneratedCatAdapter } from './generated-cat-art';
-import { GENERATED_CUSTOMER_FRAME_IDS, type GeneratedCustomerAdapter } from './generated-customer-art';
+import { type GeneratedCatAdapter } from './generated-cat-art';
+import { type GeneratedCustomerAdapter } from './generated-customer-art';
 import { generatedMainKey, generatedMainSource, getGeneratedCustomerAdapter, getGeneratedStaffAdapter, getGeneratedCatAdapter,
   removeGeneratedMainSource } from './generated-main-art';
 import { GENERATED_STAFF_FRAME_IDS, type GeneratedStaffAdapter } from './generated-staff-art';
+import type { GeneratedServerAdapter } from './generated-server-art';
+import { getGeneratedServerAdapter } from './generated-main-art';
 
 export type GeneratedCharacterPack =
   | { readonly kind: 'staff'; readonly adapter: GeneratedStaffAdapter }
+  | { readonly kind: 'server'; readonly adapter: GeneratedServerAdapter }
   | { readonly kind: 'customer'; readonly adapter: GeneratedCustomerAdapter }
   | { readonly kind: 'cat'; readonly adapter: GeneratedCatAdapter };
 
@@ -26,9 +29,9 @@ export interface GeneratedSourceTextures {
  * Returns the number of source IDs released from either cache.
  */
 export function releaseGeneratedCharacterSources(pack: GeneratedCharacterPack, textures: GeneratedSourceTextures): number {
-  const shared = pack.kind === 'staff' ? getGeneratedStaffAdapter() : pack.kind === 'customer' ? getGeneratedCustomerAdapter() : getGeneratedCatAdapter();
+  const shared = pack.kind === 'staff' ? getGeneratedStaffAdapter() : pack.kind === 'server' ? getGeneratedServerAdapter() : pack.kind === 'customer' ? getGeneratedCustomerAdapter() : getGeneratedCatAdapter();
   if (!pack.adapter.ready || shared !== pack.adapter) return 0;
-  const ids = pack.kind === 'staff' ? GENERATED_STAFF_FRAME_IDS : pack.kind === 'customer' ? GENERATED_CUSTOMER_FRAME_IDS : GENERATED_CAT_FRAME_IDS;
+  const ids = pack.kind === 'staff' ? GENERATED_STAFF_FRAME_IDS : pack.kind === 'customer' ? pack.adapter.sourceFrameIds : pack.adapter.sourceFrameIds;
   let released = 0;
   for (const id of ids) {
     const key = generatedMainKey(id);

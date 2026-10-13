@@ -1,3 +1,4 @@
+import { getGeneratedDecorAdapter } from './generated-main-art';
 // Pixel art for every decor item, in a shaded Stardew-like style. Each painter
 // draws into a region so the same code renders both the café scene and the
 // small thumbnails in the shop.
@@ -66,6 +67,7 @@ const WALLS: Record<string, WallStyle> = {
 const wallStyle = (id: string) => WALLS[id] ?? WALLS.wall_cream;
 
 export function paintWall(ctx: Ctx, id: string, x0: number, y0: number, w: number, h: number, t = 0): void {
+  if (getGeneratedDecorAdapter()?.paintTile(ctx, id, x0, y0, w, h)) return;
   const s = wallStyle(id);
   const r = ramp(s.base);
   // One small palette per repaint; never parse the same hex in the pixel loop.
@@ -165,6 +167,7 @@ export const wainscotColor = (id: string) => wallStyle(id).wainscot;
 // ---------------------------------------------------------------- floors
 
 export function paintFloor(ctx: Ctx, id: string, x0: number, y0: number, w: number, h: number): void {
+  if (getGeneratedDecorAdapter()?.paintTile(ctx, id, x0, y0, w, h)) return;
   // Beveled tiles in the Stardew manner: bright top-left edge, shaded
   // bottom-right edge, a dark grout line and a little speckle.
   const tiles = (a: string, b: string, size: number, speckle = 0.02) => {
@@ -300,6 +303,7 @@ export function counterColors(id: string): { top: string; front: string; trim?: 
 
 /** Draws a counter in 3/4 view: a top surface of height topH, then the front face. */
 export function paintCounter(ctx: Ctx, id: string, x: number, y: number, w: number, topH: number, frontH: number): void {
+  if (getGeneratedDecorAdapter()?.paintCounter(ctx, id, x, y, w, topH, frontH)) return;
   const s = COUNTERS[id] ?? COUNTERS.counter_oak;
   const top = ramp(s.top);
   const front = ramp(s.front);
@@ -546,6 +550,7 @@ export function paintPlant(ctx: Ctx, id: string, cx: number, footY: number): voi
 
 /** Small pot sitting on a windowsill whose top is at y. */
 export function paintSill(ctx: Ctx, id: string, cx: number, y: number): void {
+  if (getGeneratedDecorAdapter()?.paintSprite(ctx, id, cx, y + 1)) return;
   const s = SILLS[id]?.();
   if (s) ctx.drawImage(s, Math.round(cx - s.width / 2), y - s.height + 1);
 }
@@ -628,6 +633,18 @@ function chandelier(ctx: Ctx, cx: number, t: number): void {
 }
 
 export function paintCeiling(ctx: Ctx, id: string, sceneW: number, t: number): void {
+  const generated = getGeneratedDecorAdapter();
+  if (generated?.sprite(id)) {
+    if (id === 'ceiling_lights' || id === 'ceiling_vines') {
+      const width = generated.sprite(id)!.width;
+      ctx.save(); ctx.beginPath(); ctx.rect(0, 0, sceneW, 40); ctx.clip();
+      for (let x = 0; x < sceneW; x += width) generated.paintSprite(ctx, id, x + width / 2, 6 + (id === 'ceiling_vines' ? Math.sin(t * 1.2) * 0.35 : 0));
+      ctx.restore();
+    } else if (id === 'ceiling_pendants') {
+      for (const x of [36, 132, 188, 284]) generated.paintSprite(ctx, id, x, 7);
+    } else generated.paintSprite(ctx, id, sceneW / 2, 3);
+    return;
+  }
   switch (id) {
     case 'ceiling_lights':
       return paintStringLights(ctx, 0, sceneW, t);
@@ -706,6 +723,7 @@ export function paintRunnerJoin(ctx: Ctx, x: number, y: number, w: number, h: nu
 }
 
 export function paintRug(ctx: Ctx, id: string, x: number, y: number, w: number, h: number): void {
+  if (getGeneratedDecorAdapter()?.paintFitted(ctx, id, x, y, w, h)) return;
   if (id === 'rug_round') {
     const cx = x + w / 2;
     const cy = y + h / 2;
@@ -780,6 +798,18 @@ const neonHeading = lazy(() => {
 });
 
 export function paintNeon(ctx: Ctx, id: string, cx: number, y: number, t: number): void {
+  const generated = getGeneratedDecorAdapter(), body = generated?.sprite(id);
+  if (body) {
+    ctx.save(); ctx.globalAlpha *= 0.85 + Math.sin(t * 3) * 0.15;
+    generated!.paintSprite(ctx, id, cx, y + body.height / 2);
+    if (id === 'neon_cafe') {
+      const heading = neonHeading();
+      const scale = Math.min((body.width - 4) / heading.width, (body.height - 4) / heading.height);
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(heading, cx - heading.width * scale / 2, y + (body.height - heading.height * scale) / 2, heading.width * scale, heading.height * scale);
+    }
+    ctx.restore(); return;
+  }
   if (id === 'neon_none') return;
   ctx.save();
   ctx.globalAlpha = 0.8 + Math.sin(t * 3) * 0.2;
@@ -811,6 +841,8 @@ const ICON_H = 24;
 const iconCache = new Map<string, HTMLCanvasElement>();
 
 export function decorIcon(id: string): HTMLCanvasElement {
+  const generated = getGeneratedDecorAdapter()?.icon(id);
+  if (generated) return generated;
   let c = iconCache.get(id);
   if (c) return c;
   c = document.createElement('canvas');

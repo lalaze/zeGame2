@@ -1,3 +1,4 @@
+import { getGeneratedFurnitureAdapter } from './generated-main-art';
 // Pixel art for placeable furniture. Wall pieces are drawn into their footprint;
 // floor pieces stand on the floor, centered on their footprint, and may rise above it.
 import { CELL, furnitureDef } from '../game/furniture';
@@ -323,6 +324,20 @@ function glow(ctx: Ctx, cx: number, cy: number, radius: number): void {
  * `now` drives the clock.
  */
 export function paintWallFurniture(ctx: Ctx, id: string, x: number, y: number, t: number, now: Date): void {
+  if (getGeneratedFurnitureAdapter()?.paintWall(ctx, id, x, y, now)) {
+    if (id === 'sconce') { const def = furnitureDef(id)!; glow(ctx, x + def.w * CELL / 2, y + 4, 12); }
+    if (id === 'hanging_ivy') {
+      const adapter = getGeneratedFurnitureAdapter()!, sprite = adapter.sprite(id)!, def = furnitureDef(id)!;
+      const left = Math.round(x + (def.w * CELL - sprite.width) / 2), top = Math.round(y + (def.h * CELL - sprite.height) / 2);
+      const points = adapter.overlay(id)?.points;
+      ctx.save(); ctx.strokeStyle = '#846347'; ctx.lineWidth = 0.5;
+      for (const point of [points?.leftAttachment, points?.rightAttachment]) if (point) {
+        ctx.beginPath(); ctx.moveTo(x + def.w * CELL / 2, y); ctx.lineTo(left + point.x, top + point.y); ctx.stroke();
+      }
+      ctx.restore();
+    }
+    return;
+  }
   const def = furnitureDef(id);
   if (!def) return;
   const w = def.w * CELL;
@@ -337,6 +352,17 @@ export function paintWallFurniture(ctx: Ctx, id: string, x: number, y: number, t
 
 /** Draws a floor piece standing centered at cx with its feet on footY. */
 export function paintFloorFurniture(ctx: Ctx, id: string, cx: number, footY: number): void {
+  const generated = getGeneratedFurnitureAdapter(), bitmap = generated?.sprite(id);
+  if (bitmap) {
+    shadow(ctx, cx, footY, Math.max(10, bitmap.width * 0.8));
+    if (generated!.paintFloor(ctx, id, cx, footY)) {
+      if (id === 'lamp' || id === 'lantern') {
+        const wick = generated!.overlay(id)?.points.wick;
+        glow(ctx, wick ? cx - bitmap.width / 2 + wick.x : cx, footY - bitmap.height + (wick ? 1 + wick.y : 4), 18);
+      }
+      return;
+    }
+  }
   const sprite = spriteFor(id);
   if (!sprite) return;
   shadow(ctx, cx, footY, Math.max(10, sprite.width * 0.8));
@@ -347,6 +373,8 @@ export function paintFloorFurniture(ctx: Ctx, id: string, cx: number, footY: num
 
 /** The drawn bounds of a floor piece, for tapping it. */
 export function floorFurnitureBounds(id: string, cx: number, footY: number): { x: number; y: number; w: number; h: number } {
+  const generated = getGeneratedFurnitureAdapter()?.floorBounds(id, cx, footY);
+  if (generated) return generated;
   const sprite = spriteFor(id);
   const w = sprite?.width ?? CELL;
   const h = sprite?.height ?? CELL;
@@ -360,6 +388,8 @@ const ICON_H = 24;
 const iconCache = new Map<string, HTMLCanvasElement>();
 
 export function furnitureIcon(id: string): HTMLCanvasElement {
+  const generated = getGeneratedFurnitureAdapter()?.icon(id);
+  if (generated) return generated;
   let c = iconCache.get(id);
   if (c) return c;
   c = canvas(ICON_W, ICON_H, (_, ctx) => {

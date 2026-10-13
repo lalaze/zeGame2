@@ -1,0 +1,36 @@
+{
+  "cases": [
+    "sig:coffee:beans=1",
+    "sig:coffee:beans=2",
+    "sig:tea:tea=1",
+    "sig:tea:tea=2",
+    "sig:milk:milk=1",
+    "sig:milk:milk=2",
+    "sig:fruit:fruit=1",
+    "sig:fruit:fruit=2",
+    "sig:coffee:beans=1,milk=1",
+    "sig:coffee:beans=1,milk=2",
+    "sig:milk:milk=1,sugar=1",
+    "sig:milk:milk=1,sugar=2",
+    "sig:milk:milk=1,spice=1",
+    "sig:milk:milk=1,spice=2",
+    "sig:milk:cocoa=1,milk=1",
+    "sig:milk:cocoa=2,milk=1",
+    "sig:milk:cream=1,milk=1",
+    "sig:milk:cream=2,milk=1",
+    "sig:milk:fruit=1,milk=1",
+    "sig:milk:fruit=2,milk=1",
+    "sig:milk:matcha=1,milk=1",
+    "sig:milk:matcha=2,milk=1",
+    "sig:coffee:beans=2,cocoa=1,cream=2,milk=1",
+    "sig:tea:cream=2,matcha=1,milk=1,tea=2",
+    "sig:milk:cream=2,fruit=1,milk=2,sugar=1",
+    "sig:fruit:fruit=2,milk=1,spice=1,sugar=2"
+  ],
+  "sizes": [
+    18,
+    32,
+    96
+  ],
+  "status": "rendered-requires-visual-review"
+}

@@ -3,7 +3,7 @@ import { fineSpriteArt } from '../render/fine-sprite-art';
 import { GENERATED_MAIN_ASSETS, generatedMainSource, getGeneratedStaffAdapter } from '../render/generated-main-art';
 import { GENERATED_STAFF_DENSITY, GENERATED_STAFF_FOOT, GENERATED_STAFF_FRAME_IDS, generatedStaffEligible,
   type GeneratedStaffFrameMeta, type GeneratedStaffManifest } from '../render/generated-staff-art';
-import manifestJson from '../render/generated-staff-manifest.json';
+import runtimeCatalog from '../../assets/generated/runtime-catalog-v1/runtime.json';
 import { character } from '../render/sprites';
 
 export interface GeneratedOwnerPreview {
@@ -21,7 +21,7 @@ const W = 18, H = 28, D = GENERATED_STAFF_DENSITY;
 
 /** Match the adapter's single, whole-set scale without loading eight unused poses. */
 function standingGeometry(): { meta: GeneratedStaffFrameMeta; scale: number } | null {
-  const manifest = manifestJson as GeneratedStaffManifest;
+  const manifest = runtimeCatalog.staffManifest as GeneratedStaffManifest;
   if (manifest.identity !== 'barista-default' || manifest.frames.length !== GENERATED_STAFF_FRAME_IDS.length) return null;
   const ids = new Set<string>();
   let scale = Infinity;

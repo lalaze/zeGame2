@@ -1,0 +1,346 @@
+{
+  "version": 15,
+  "signatureDrinks": {
+    "recipes": [],
+    "tested": [],
+    "served": {}
+  },
+  "cafeStyle": {
+    "focus": null,
+    "handoffs": {
+      "tableServed": 0,
+      "catServed": 0,
+      "fastServed": 0,
+      "teaPairs": 0
+    }
+  },
+  "regularGuests": {
+    "guests": {},
+    "nextVisitId": 1
+  },
+  "pets": [],
+  "promotion": null,
+  "reputation": {
+    "recent": []
+  },
+  "taste": {
+    "served": {},
+    "signature": []
+  },
+  "coins": 10000,
+  "totalEarned": 0,
+  "served": 0,
+  "items": {
+    "espresso": 1,
+    "americano": 1,
+    "latte": 1,
+    "cappuccino": 1,
+    "flatwhite": 1,
+    "cortado": 1,
+    "mocha": 1,
+    "vienna": 1,
+    "macchiato": 1,
+    "coldbrew": 1,
+    "dirty": 1,
+    "pourover": 1,
+    "creamcoffee": 1,
+    "affogato": 1,
+    "blacktea": 1,
+    "hotchoc": 1,
+    "lemontea": 1,
+    "chai": 1,
+    "fruittea": 1,
+    "hojicha": 1,
+    "matcha": 1,
+    "frappe": 1,
+    "smoothie": 1,
+    "milktea": 1,
+    "matchafloat": 1,
+    "roll": 1,
+    "bagel": 1,
+    "baguette": 1,
+    "cheesebun": 1,
+    "pretzel": 1,
+    "focaccia": 1,
+    "ciabatta": 1,
+    "raisinbread": 1,
+    "sourdough": 1,
+    "rye": 1,
+    "chocobread": 1,
+    "shokupan": 1,
+    "brioche": 1,
+    "fruitbrioche": 1,
+    "garlicbread": 1,
+    "donut": 1,
+    "scone": 1,
+    "cookie": 1,
+    "croissant": 1,
+    "painchoc": 1,
+    "brownie": 1,
+    "cinnamon": 1,
+    "muffin": 1,
+    "creampuff": 1,
+    "melonpan": 1,
+    "eggtart": 1,
+    "cake": 1,
+    "swissroll": 1,
+    "cheesecake": 1,
+    "macaron": 1
+  },
+  "upgrades": {
+    "marketing": 0,
+    "machine": 0,
+    "barista": 0,
+    "server": 0,
+    "cook": 0,
+    "tables": 0
+  },
+  "regions": [],
+  "kitchen": true,
+  "profile": {
+    "cafeName": "Canonical Staff QA",
+    "ownerName": "QA",
+    "look": {
+      "skin": 0,
+      "hair": 0,
+      "hairStyle": 0,
+      "shirt": 0,
+      "pants": 0
+    }
+  },
+  "decor": {
+    "owned": [
+      "wall_cream",
+      "wall_mint",
+      "wall_rose",
+      "floor_checker",
+      "floor_planks",
+      "floor_mint",
+      "counter_oak",
+      "sill_none",
+      "ceiling_none",
+      "rug_none",
+      "neon_none"
+    ],
+    "equipped": {
+      "wallpaper": "wall_cream",
+      "floor": "floor_checker",
+      "counter": "counter_oak",
+      "sill": "sill_none",
+      "ceiling": "ceiling_none",
+      "rug": "rug_none",
+      "neon": "neon_none"
+    },
+    "placed": [
+      {
+        "id": "clock",
+        "col": 10,
+        "row": 0
+      },
+      {
+        "id": "mugrack",
+        "col": 27,
+        "row": 3
+      }
+    ],
+    "stored": {}
+  },
+  "goal": 15,
+  "phase": "open",
+  "day": 8,
+  "dayTime": 0,
+  "speed": 1,
+  "onMenu": [
+    "espresso",
+    "latte",
+    "croissant",
+    "eggtart",
+    "cake"
+  ],
+  "pantry": {
+    "beans": 300,
+    "milk": 300,
+    "flour": 295,
+    "butter": 290,
+    "eggs": 300,
+    "sugar": 300,
+    "tea": 300,
+    "spice": 300,
+    "cocoa": 300,
+    "cream": 300,
+    "fruit": 300,
+    "matcha": 300
+  },
+  "bakePlan": {
+    "croissant": 3,
+    "eggtart": 3,
+    "cake": 3
+  },
+  "shelf": {},
+  "today": {
+    "reviews": {
+      "stars": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reasons": {},
+      "totalScore": 0
+    },
+    "served": 0,
+    "missed": 0,
+    "soldOut": 0,
+    "queueLost": 0,
+    "tableLost": 0,
+    "extraLost": 0,
+    "doorLost": 0,
+    "shortages": {},
+    "revenue": 0,
+    "ingredientCost": 35,
+    "petCost": 0,
+    "promotionCost": 0,
+    "sales": {},
+    "baked": {}
+  },
+  "inProduction": {
+    "croissant": 5
+  },
+  "createdAt": 0,
+  "runtime": {
+    "version": 2,
+    "kitchenLevel": 0,
+    "day": 8,
+    "phase": "open",
+    "served": 0,
+    "height": 240,
+    "customers": [],
+    "baristas": [
+      {
+        "look": {
+          "skin": 0,
+          "hair": 0,
+          "hairStyle": 0,
+          "shirt": 0,
+          "pants": 0
+        },
+        "customerId": null,
+        "remaining": 0,
+        "total": 0,
+        "calling": 0
+      }
+    ],
+    "servers": [
+      {
+        "x": 264,
+        "y": 119,
+        "tx": 264,
+        "ty": 119,
+        "stride": 0,
+        "via": [],
+        "look": {
+          "skin": 0,
+          "hair": 0,
+          "hairStyle": 0,
+          "shirt": 0,
+          "pants": 0
+        },
+        "phase": "idle",
+        "plates": [],
+        "ack": 0
+      }
+    ],
+    "cooks": [
+      {
+        "x": -170,
+        "y": 116,
+        "tx": -297,
+        "ty": 94,
+        "stride": 0,
+        "via": [],
+        "look": {
+          "skin": 0,
+          "hair": 0,
+          "hairStyle": 0,
+          "shirt": 0,
+          "pants": 0
+        },
+        "batch": {
+          "item": "croissant",
+          "n": 5,
+          "steps": [
+            "cooler",
+            "sheeter",
+            "proofer",
+            "convection",
+            "rack",
+            "door"
+          ],
+          "step": 0,
+          "timer": 1
+        },
+        "journey": [
+          {
+            "x": -297,
+            "y": 94
+          }
+        ],
+        "pathBlocked": false
+      }
+    ],
+    "queue": [],
+    "seats": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "pass": [],
+    "rack": [],
+    "spawnTimer": 1.5,
+    "nextId": 1,
+    "boostCooldown": 0,
+    "customerCast": {
+      "remaining": [],
+      "previous": -1
+    },
+    "castRandomState": 1
+  }
+}

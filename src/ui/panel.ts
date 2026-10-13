@@ -696,7 +696,7 @@ export class Panel {
         ? `<div class="recipe">${recipe(id as ItemId)
             .map(
               ([ing, n]) =>
-                `<img alt="${ingredientName(ing)}" title="${ingredientName(ing)}" src="${iconUrl(`ing:${ing}`, () => ingredientIcon(ing))}" />${n > 1 ? `<span>×${n}</span>` : ''}`,
+                `<img data-ingredient="${ing}" alt="${ingredientName(ing)}" title="${ingredientName(ing)}" src="${iconUrl(`ing:${ing}`, () => ingredientIcon(ing))}" />${n > 1 ? `<span>×${n}</span>` : ''}`,
             )
             .join('')}<b class="left"></b></div>`
         : '';
@@ -928,6 +928,11 @@ export class Panel {
         const icon = refs.el.querySelector<HTMLImageElement>('img.icon');
         const source = iconUrl(`item:${id}`, () => itemArtwork(id as ItemId));
         if (icon && icon.getAttribute('src') !== source) icon.src = source;
+        for (const image of refs.el.querySelectorAll<HTMLImageElement>('img[data-ingredient]')) {
+          const ingredient = image.dataset.ingredient as IngredientId;
+          const ingredientSource = iconUrl(`ing:${ingredient}`, () => ingredientIcon(ingredient));
+          if (image.getAttribute('src') !== ingredientSource) image.src = ingredientSource;
+        }
         const def = MENU.find((m) => m.id === id)!;
         const level = s.items[def.id];
         const q = quoteItem(s, def.id, this.buyAmount);
@@ -1028,6 +1033,9 @@ export class Panel {
     }
     for (const [key, refs] of this.rows) {
       const id = key.split(':')[1] as IngredientId;
+      const icon = refs.el.querySelector<HTMLImageElement>('img.icon');
+      const source = iconUrl(`ing:${id}`, () => ingredientIcon(id));
+      if (icon && icon.getAttribute('src') !== source) icon.src = source;
       const def = ingredientDef(id);
       const stock = s.pantry[id];
       const need = needs[id] ?? 0;

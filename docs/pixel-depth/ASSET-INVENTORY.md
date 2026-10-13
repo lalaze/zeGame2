@@ -10,6 +10,16 @@ The catalogs below are exhaustive ID lists from gameplay data, not an approximat
 
 The historical A export contained 963 assets with atlas/export correspondence. Its prior room/UI/interaction observations apply only to that archived implementation. They are not current pixel-depth verification. Current main-room source is still a work in progress. Selected generated furniture and default-owner assets have actual desktop/390 runtime captures; no whole-room visual acceptance has been granted. Other rooms and full catalog remain pending. See PROGRESS.md for current test counts and verification limits.
 
+## Main-room integration checkpoint — 2026-10-13 12:08 UTC
+
+Actual runtime adapters now include 55 menu identities, 12 pantry ingredients, 39 placeables, 31 nonempty decor selections, 30 exact fixed customer identities (450 poses), and 12 cat breeds (168 actions). Bounded adapter acceptance does not replace per-room visual/contact review. All original bitmaps and generation provenance remain independent from small runtime exports.
+
+Main-only structural additions: beam, corner post, foreground threshold, outdoor trees, roof cluster, cloud. Existing selected main window/board/lamps, counter service props, table/chairs/plants and live display remain layered. Cups/saucers and heart/drop/crown use generated bitmaps; edge-on pass plates and carried trays are awaiting corrected-aspect resources, so the near-square candidates are not squeezed into those slots.
+
+Staff scope is intentionally exact: existing default-owner nine-frame pack plus one canonical all-zero server nine-frame pack. Random/custom employees retain their correct existing Looks until matching assets or a validated material compositor exists. The 99 parameter source candidates still do not establish any accepted parametric Look family. Six failed back poses remain excluded.
+
+Desktop EN/ZH and390 CSS-width independent QA service/refresh, clock move/store/re-place, synthetic v12 migration and full-day closure have actual evidence. Scene-wide main aesthetic acceptance, physical-mobile cold-load performance, all actor/contact combinations and remaining rooms are still open. See PROGRESS.md and dated test/build logs for precise chronology.
+
 ## Acceptance criteria
 
 - Reference A: dark walnut timber, layered cream plaster, brass lamps, rich foliage, chalkboard, glass pastry case, red gingham, grounded chibi people and soft daytime rays.
@@ -356,3 +366,27 @@ Next production batch: customer cast0/Mina only, identity-matched nine stand/wal
 - Siamese:14PNG,11other breeds keep distinct fallback. All fourteen lossless source crops independently verified; actual ordinary adoption/service/refresh/pet/locate checked.
 - Total before menu batch:58 runtime PNG. Main-menu espresso/latte/eggtart3additional PNG are currently being integrated, not yet counted as browser-verified. Croissant/cake will share their existing images between world and menu/order UI.
 - Identity expansion architecture and all30cast ledger:IDENTITY-COVERAGE-PLAN.md. Main-room acceptance remains open; the exhaustive inherited catalogs above are requirements, not claims of new generated coverage.
+
+## Current runtime coverage — 2026-10-13 12:36 UTC (supersedes earlier checkpoints)
+
+| Family | Integrated generated resources | Explicit remaining work |
+|---|---|---|
+| Fixed customers | All30 exact fixed identities,450 authored stand/walk/seat/pet frames; left walking mirror | Per-identity seat/hand contact and visual manual acceptance beyond sampled casts |
+| Cats | All12 breed identities,168 authored behavior frames | All-breed runtime gait/hand contact manual review; correct recorded scale limitations as found |
+| Staff | All-zero owner9 and all-zero server9 exact frames; left mirror | Random/custom saved Looks remain their original identity artwork; parameter materials have0accepted Looks |
+| Menu and ingredients |55menu items +12ingredients in world and UI adapters | Fine thumbnail legibility across every product; generated custom-drink liquid/rim/dose composition still pending |
+| Furniture and decor |39placeables,31nonempty decor selections (36variant PNGs),4none choices preserved; generated surfaces and service props across5counter finishes | Every arrangement/room visual validation; any recorded curtain/light/texture boundary defects |
+| Main fixed environment | Counter/table/chairs/vase/plant/display,6service props,3wall props,6beam/post/threshold/outdoor layers | Remaining live sky/light/door/procedural effects are retained; no claim all wall/room structures generated |
+| Tableware/feedback |Cup-saucer,heart/drop/crown plus independent shallow pass plate and carried tray | Bell/status/UI-logo treatments and composite recipe layers; near-square empty plate remains available but not forced into shallow slots |
+| Other room environments |Shared placed furniture/decor/actors use adapters | Reading,greenhouse,terrace and kitchen dedicated shells/modules still require integration and visual review;18kitchen body candidates still offline |
+
+Runtime packed export now748PNG/16,956,220B; prior61 originals add14,975,204B, total809PNG/31,931,424B loaded at startup. Original generated sheets and crop manifests remain separate, including new shallow-tableware-v1 corrections outside frozen bulk-candidates. The source catalog's797nonparameter candidate crops and99parameter candidates are generation bookkeeping, not visual/runtime acceptance. All six failed parameter silhouettes remain ineligible.
+
+### 13:03 runtime byte-budget update
+The same809IDs now use786packed runtime PNGs plus23previous static PNGs. Original38actor crops moved into immutable authoring archive with a complete previousPublicFile recovery map; no original pixels were discarded. Runtime total25,441,667B, down6,489,757B. Actor/world coverage is unchanged by this export; parameter identity eligibility remains zero outside the two exact whole-frame staff packs.
+
+## 2026-10-13 14:17 integration checkpoint
+- Signature:14/16 candidate layers connected to source compositor; milk-foam and generic glints deliberately excluded. Native body/milk/portion layers preserve recipe state.1104valid IDs unique at18/32px; live creation/save/menu verification remains blocked, so not claimed complete.
+- Main static:16originals now archived byte-identically and represented by independently budgeted packedPNG;7original-size static PNG remain.54total archived old public paths (38actor+16static) have exact recovery maps.
+- Shipping total823PNG/19,935,246B;816catalogPNG/18,597,817B plus7originals/1,337,429B. This is image payload only, not all app download bytes.
+- Latest main desktop/390 service visually checked. All-room dedicated environment/kitchen and custom/other staff identity gaps remain as previously listed; no failed material-ID candidate enabled.

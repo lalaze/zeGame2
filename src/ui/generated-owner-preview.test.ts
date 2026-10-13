@@ -4,14 +4,14 @@ import { readFileSync } from 'node:fs';
 import type { Look } from '../game/state';
 import { GENERATED_MAIN_ASSETS, generatedMainSource, getGeneratedStaffAdapter } from '../render/generated-main-art';
 import { createGeneratedStaffArt, GENERATED_STAFF_FRAME_IDS, type GeneratedStaffManifest, type GeneratedStaffSources } from '../render/generated-staff-art';
-import manifestJson from '../render/generated-staff-manifest.json';
+import runtimeCatalog from '../../assets/generated/runtime-catalog-v1/runtime.json';
 import { fineSpriteArt, registerFineSpriteArt } from '../render/fine-sprite-art';
 import { character } from '../render/sprites';
 import { createGeneratedOwnerPreview } from './generated-owner-preview';
 import { showOnboarding } from './onboarding';
 
 vi.mock('../render/generated-main-art', () => ({
-  GENERATED_MAIN_ASSETS: { 'barista-down-stand': 'staff-v2/owner-down-stand.png' },
+  GENERATED_MAIN_ASSETS: { 'barista-down-stand': 'catalog-v1/staff-owner/barista-down-stand.png' },
   getGeneratedStaffAdapter: vi.fn(() => null), generatedMainSource: vi.fn(() => undefined),
 }));
 vi.mock('../render/decor-art', () => ({ paintCounter: vi.fn(), paintFloor: vi.fn(), paintWainscot: vi.fn(), paintWall: vi.fn() }));
@@ -32,7 +32,7 @@ vi.mock('../render/sprites', () => {
 });
 
 const defaultLook: Look = { skin: 0, hair: 0, hairStyle: 0, shirt: 0, pants: 0 };
-const manifest = manifestJson as GeneratedStaffManifest;
+const manifest = runtimeCatalog.staffManifest as GeneratedStaffManifest;
 const standing = manifest.frames.find(frame => frame.direction === 'down' && frame.state === 'stand')!;
 class TestImage {
   src = '';

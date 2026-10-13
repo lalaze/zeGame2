@@ -259,6 +259,8 @@ describe('generated regular portrait identity', () => {
     backing.toString = () => 'generated-mina';
     registerFineSpriteArt(logical, backing, 4);
     setGeneratedCustomerAdapter({ ready: true, scales: {walking: 1, seated: 1},
+      readyAppearanceIds: [0], sourceFrameIds: [],
+      scalesFor: appearanceId => appearanceId === 0 ? { walking: 1, seated: 1 } : null,
       resolve: (identity, fallback) => identity.appearanceId === 0 ? { frames: {...fallback, stand: logical}, generated: true } : {frames: fallback, generated: false},
       drawOffset: () => ({x: 0, y: 0}), contactPoints: () => null });
     try {

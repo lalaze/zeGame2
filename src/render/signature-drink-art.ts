@@ -1,3 +1,4 @@
+import { getGeneratedSignatureAdapter } from './generated-signature-art';
 import type { IngredientId } from '../game/data';
 import { signatureDefinition, BASE_INGREDIENT, type SignatureDefinition } from '../game/signature-drinks';
 import { MiniGrid, ingredientMiniatureGrid, menuMiniatureGrid, miniatureCanvas } from './menu-miniatures';
@@ -68,6 +69,7 @@ export function signatureDrinkCanvas(id: string, density = 1): HTMLCanvasElement
 /** Order bubbles retain their fixed 18px envelope. */
 export function signatureDrinkIcon(id: string): HTMLCanvasElement {return paintSignature(id,1,true);}
 function paintSignature(id:string,density:number,compact:boolean):HTMLCanvasElement {
+ const generated=getGeneratedSignatureAdapter()?.canvas(id,density,compact);if(generated)return generated;
  const def=signatureDefinition(id);const scale=Number.isFinite(density)?Math.max(1,Math.min(16,Math.floor(density))):1;
  const key=`${def?.id??'invalid'}.${scale}.${compact?'icon':'art'}`;const prior=canvasCache.get(key);if(prior)return prior;
  const canvas=miniatureCanvas(def?signatureRecipeGrid(def):new MiniGrid(),compact?18:32,compact?18:32,false,scale);canvasCache.set(key,canvas);return canvas;

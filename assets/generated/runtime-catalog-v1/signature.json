@@ -1,0 +1,212 @@
+{
+  "cup-coffee": {
+    "originalSize": [
+      415,
+      369
+    ],
+    "size": [
+      128,
+      114
+    ],
+    "scale": 0.30843373493975906,
+    "productionContentSize": [
+      128,
+      113.8120481927711
+    ]
+  },
+  "cup-tea": {
+    "originalSize": [
+      357,
+      369
+    ],
+    "size": [
+      124,
+      128
+    ],
+    "scale": 0.34688346883468835,
+    "productionContentSize": [
+      123.83739837398375,
+      128
+    ]
+  },
+  "cup-milk": {
+    "originalSize": [
+      250,
+      374
+    ],
+    "size": [
+      86,
+      128
+    ],
+    "scale": 0.3422459893048128,
+    "productionContentSize": [
+      85.56149732620321,
+      127.99999999999999
+    ]
+  },
+  "cup-fruit": {
+    "originalSize": [
+      310,
+      374
+    ],
+    "size": [
+      107,
+      128
+    ],
+    "scale": 0.3422459893048128,
+    "productionContentSize": [
+      106.09625668449198,
+      127.99999999999999
+    ]
+  },
+  "liquid-coffee": {
+    "originalSize": [
+      368,
+      199
+    ],
+    "size": [
+      128,
+      70
+    ],
+    "scale": 0.34782608695652173,
+    "productionContentSize": [
+      128,
+      69.21739130434783
+    ]
+  },
+  "liquid-tea": {
+    "originalSize": [
+      336,
+      199
+    ],
+    "size": [
+      128,
+      76
+    ],
+    "scale": 0.38095238095238093,
+    "productionContentSize": [
+      128,
+      75.80952380952381
+    ]
+  },
+  "liquid-milk": {
+    "originalSize": [
+      336,
+      199
+    ],
+    "size": [
+      128,
+      76
+    ],
+    "scale": 0.38095238095238093,
+    "productionContentSize": [
+      128,
+      75.80952380952381
+    ]
+  },
+  "liquid-fruit": {
+    "originalSize": [
+      340,
+      199
+    ],
+    "size": [
+      128,
+      75
+    ],
+    "scale": 0.3764705882352941,
+    "productionContentSize": [
+      128,
+      74.91764705882353
+    ]
+  },
+  "topping-sugar": {
+    "originalSize": [
+      315,
+      214
+    ],
+    "size": [
+      128,
+      87
+    ],
+    "scale": 0.40634920634920635,
+    "productionContentSize": [
+      128,
+      86.95873015873016
+    ]
+  },
+  "topping-spice": {
+    "originalSize": [
+      311,
+      214
+    ],
+    "size": [
+      128,
+      89
+    ],
+    "scale": 0.4115755627009646,
+    "productionContentSize": [
+      128,
+      88.07717041800643
+    ]
+  },
+  "topping-cocoa": {
+    "originalSize": [
+      327,
+      224
+    ],
+    "size": [
+      128,
+      88
+    ],
+    "scale": 0.39143730886850153,
+    "productionContentSize": [
+      128,
+      87.68195718654434
+    ]
+  },
+  "topping-cream": {
+    "originalSize": [
+      361,
+      274
+    ],
+    "size": [
+      128,
+      98
+    ],
+    "scale": 0.3545706371191136,
+    "productionContentSize": [
+      128,
+      97.15235457063712
+    ]
+  },
+  "topping-fruit": {
+    "originalSize": [
+      320,
+      265
+    ],
+    "size": [
+      128,
+      106
+    ],
+    "scale": 0.4,
+    "productionContentSize": [
+      128,
+      106
+    ]
+  },
+  "topping-matcha": {
+    "originalSize": [
+      351,
+      239
+    ],
+    "size": [
+      128,
+      88
+    ],
+    "scale": 0.3646723646723647,
+    "productionContentSize": [
+      128,
+      87.15669515669516
+    ]
+  }
+}

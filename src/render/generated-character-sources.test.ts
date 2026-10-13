@@ -7,16 +7,19 @@ import { createGeneratedOwnerPreview } from '../ui/generated-owner-preview';
 import { closeModal } from '../ui/modal';
 import { showRegularGuests } from '../ui/regular-guests';
 import { fineSpriteArt } from './fine-sprite-art';
-import { createGeneratedCatArt, GENERATED_CAT_FRAME_IDS, type GeneratedCatFrameId, type GeneratedCatManifest } from './generated-cat-art';
+import { createGeneratedCatArt, generatedCatFrameIds, type GeneratedCatFrameId, type GeneratedCatManifest } from './generated-cat-art';
 import catManifestJson from './generated-cat-manifest.json';
 import { releaseGeneratedCharacterSources } from './generated-character-sources';
-import { createGeneratedCustomerArt, GENERATED_CUSTOMER_FRAME_IDS, type GeneratedCustomerFrameId, type GeneratedCustomerManifest } from './generated-customer-art';
+import { createGeneratedCustomerArt, generatedCustomerFrameIds, type GeneratedCustomerFrameId, type GeneratedCustomerManifest } from './generated-customer-art';
 import customerManifestJson from './generated-customer-manifest.json';
 import { clearGeneratedMainAssets, GENERATED_MAIN_ASSETS, generatedMainKey, generatedMainSource, getGeneratedCatAdapter, getGeneratedCustomerAdapter,
   getGeneratedStaffAdapter, installGeneratedMainAsset, setGeneratedCatAdapter, setGeneratedCustomerAdapter, setGeneratedStaffAdapter, type GeneratedMainId } from './generated-main-art';
 import { createGeneratedStaffArt, GENERATED_STAFF_FRAME_IDS, type GeneratedStaffFrameId, type GeneratedStaffManifest } from './generated-staff-art';
 import staffManifestJson from './generated-staff-manifest.json';
 import { catFrames, character, toDataURL } from './sprites';
+
+const GENERATED_CAT_FRAME_IDS = generatedCatFrameIds('siamese');
+const GENERATED_CUSTOMER_FRAME_IDS = generatedCustomerFrameIds(0);
 
 // Synthetic pixels are copied when drawn. The mock deliberately does not retain
 // the source image: after baking we poison it to catch any later dependency.

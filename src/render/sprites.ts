@@ -5,8 +5,8 @@ import type { CatId } from '../game/pets';
 import type { IngredientId, ItemId, StaticItemId, UpgradeId } from '../game/data';
 import type { Look } from '../game/state';
 import { edge, mix, ramp } from './color';
-import { mirrorFineSpriteArt, registerFineCharacterArt } from './fine-sprite-art';
-import { getGeneratedFoodAdapter } from './generated-main-art';
+import { fineSpriteArt, mirrorFineSpriteArt, registerFineCharacterArt } from './fine-sprite-art';
+import { getGeneratedFoodAdapter, getGeneratedIngredientAdapter, getGeneratedTablewareAdapter } from './generated-main-art';
 
 /** Warm near-black used for outlines, like Stardew's, rather than pure black. */
 export const OUTLINE = '#39281f';
@@ -1033,6 +1033,8 @@ const INGREDIENT_ART = Object.fromEntries(
 
 const ingredientCache = new Map<IngredientId, HTMLCanvasElement>();
 export function ingredientIcon(id: IngredientId): HTMLCanvasElement {
+  const generated = getGeneratedIngredientAdapter()?.icon(id);
+  if (generated) return generated;
   let c = ingredientCache.get(id);
   if (!c) {
     const art = INGREDIENT_ART[id];
@@ -1228,13 +1230,17 @@ const lazySprite = (rows: string[], palette: Palette) => {
   return () => (c ??= pixelSprite(rows, palette));
 };
 
-export const heartSprite = lazySprite(['.rr.rr.', 'rRRrrrs', 'rRrrrss', '.rrrss.', '..rss..', '...s...'], {
+const legacyHeartSprite = lazySprite(['.rr.rr.', 'rRRrrrs', 'rRrrrss', '.rrrss.', '..rss..', '...s...'], {
   r: '#c96761', R: '#f4b29b', s: '#9d4f49',
 });
-export const dropSprite = lazySprite(['..b..', '.Bbb.', 'bBbbs', 'bbbss', '.sss.'], { b: '#81aeb4', B: '#deeee0', s: '#537982' });
-export const crownSprite = lazySprite(['Y..Y..Y', 'yY.Y.Yy', 'yYyyyyy', 'yRyByRy'], {
+const legacyDropSprite = lazySprite(['..b..', '.Bbb.', 'bBbbs', 'bbbss', '.sss.'], { b: '#81aeb4', B: '#deeee0', s: '#537982' });
+const legacyCrownSprite = lazySprite(['Y..Y..Y', 'yY.Y.Yy', 'yYyyyyy', 'yRyByRy'], {
   y: '#c8a15e', Y: '#f0ce85', R: '#ba5d50', B: '#627451',
 });
+
+export const heartSprite = (): HTMLCanvasElement => getGeneratedTablewareAdapter()?.sprite('heart') ?? legacyHeartSprite();
+export const dropSprite = (): HTMLCanvasElement => getGeneratedTablewareAdapter()?.sprite('drop') ?? legacyDropSprite();
+export const crownSprite = (): HTMLCanvasElement => getGeneratedTablewareAdapter()?.sprite('crown') ?? legacyCrownSprite();
 
 export function toDataURL(canvas: HTMLCanvasElement, scale: number): string {
   const c = document.createElement('canvas');
@@ -1242,6 +1248,6 @@ export function toDataURL(canvas: HTMLCanvasElement, scale: number): string {
   c.height = canvas.height * scale;
   const ctx = c.getContext('2d')!;
   ctx.imageSmoothingEnabled = false;
-  ctx.drawImage(canvas, 0, 0, c.width, c.height);
+  ctx.drawImage(fineSpriteArt(canvas)?.canvas ?? canvas, 0, 0, c.width, c.height);
   return c.toDataURL();
 }

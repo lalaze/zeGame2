@@ -53,7 +53,7 @@ function harness(side: 0 | 1, elapsed = 0, quiet = false, paused = false, genera
   const manifest = manifestJson as GeneratedCustomerManifest;
   const sources = Object.fromEntries(manifest.frames.map(meta => {
     const id = `mina-${meta.direction}-${meta.state}`;
-    const bytes = readFileSync(new URL(`../../../public/art/generated/customer-0-v1/${id}.png`, import.meta.url));
+    const bytes = readFileSync(new URL(`../../../assets/generated/original-main-actors-v1/customer-0-v1/${id}.png`, import.meta.url));
     return [id, { width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20) } as HTMLCanvasElement];
   }));
   const adapter = createGeneratedCustomerArt(manifest, sources);

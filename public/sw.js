@@ -12,7 +12,16 @@ self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     if (!Array.isArray(PRECACHE)) throw new Error('Service worker must be built by Vite');
     const cache = await caches.open(CACHE);
-    await cache.addAll(PRECACHE.map((path) => new Request(new URL(path, SCOPE), { cache: 'reload' })));
+    // Leave network capacity for the game's foreground image loader. Each
+    // batch must succeed before starting the next; installation still waits
+    // for the complete shell. A failed batch may leave a partial new-version
+    // cache, but it cannot activate, and a retry reloads every entry safely.
+    const batchSize = 4;
+    for (let start = 0; start < PRECACHE.length; start += batchSize) {
+      const requests = PRECACHE.slice(start, start + batchSize)
+        .map((path) => new Request(new URL(path, SCOPE), { cache: 'reload' }));
+      await cache.addAll(requests);
+    }
   })());
   // Let updates wait for old tabs to close; replacing a live worker can mix
   // versions or remove assets still needed by an open game.

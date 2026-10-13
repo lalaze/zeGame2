@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { inflateSync } from 'node:zlib';
-import { MENU } from '../game/data';
+import { MENU, type ItemId } from '../game/data';
 import { createInitialState } from '../game/state';
 import { paintPastryFridge, paintRack } from './kitchen-art';
 import { RoomPainter } from './room-art';
@@ -32,8 +32,11 @@ class RecordingCanvas {
 const recorded = (canvas: HTMLCanvasElement) => canvas as unknown as RecordingCanvas;
 const source = (width = 100, height = 80) => ({ width, height }) as HTMLCanvasElement;
 function fixture() {
-  const sizes = [[531, 459], [682, 540], [613, 473], [437, 293], [336, 327]];
-  const sources = Object.fromEntries(GENERATED_FOOD_IDS.map((id, i) => [id, source(sizes[i][0], sizes[i][1])])) as Record<GeneratedFoodId, CanvasImageSource>;
+  const manifest = JSON.parse(readFileSync('assets/generated/bulk-candidates/menu/manifest.json', 'utf8'));
+  const sizes: Record<string, readonly [number, number]> = Object.fromEntries(
+    manifest.assets.map((asset: { itemId: string; size: [number, number] }) => [asset.itemId, asset.size]));
+  Object.assign(sizes, { espresso: [531, 459], latte: [682, 540], eggtart: [613, 473], croissant: [437, 293], cake: [336, 327] });
+  const sources = Object.fromEntries(GENERATED_FOOD_IDS.map(id => [id, source(...sizes[id])])) as Record<GeneratedFoodId, CanvasImageSource>;
   const canvases: RecordingCanvas[] = [];
   const createCanvas = vi.fn(() => { const canvas = new RecordingCanvas(); canvases.push(canvas); return canvas as unknown as HTMLCanvasElement; });
   const create = (input: GeneratedFoodSources = sources) => createGeneratedFoodArt(input, { createCanvas });
@@ -128,41 +131,62 @@ describe('generated food bitmap adapter', () => {
     const { sources, create } = fixture();
     delete (sources as Partial<typeof sources>).latte;
     const adapter = create();
-    expect(adapter.readyIds).toEqual(['espresso', 'eggtart', 'croissant', 'cake']);
+    expect(adapter.readyIds).toEqual(GENERATED_FOOD_IDS.filter(id => id !== 'latte'));
     expect(adapter.icon('latte')).toBeUndefined(); expect(adapter.artwork('latte')).toBeUndefined();
     for (const id of adapter.readyIds) expect(adapter.icon(id)).toBeDefined();
     const empty = create({});
     expect(empty.ready).toBe(false); expect(empty.readyIds).toEqual([]);
   });
 
-  it('never caches or substitutes any of the other 50 foods or signature recipes', () => {
-    const { create, createCanvas } = fixture(), adapter = create(), count = createCanvas.mock.calls.length;
-    const untouched = MENU.filter(item => !GENERATED_FOOD_IDS.includes(item.id as GeneratedFoodId));
-    expect(untouched).toHaveLength(50);
-    for (const item of untouched) {
-      expect(adapter.icon(item.id)).toBeUndefined(); expect(adapter.artwork(item.id)).toBeUndefined();
+  it('covers the exact static catalog and source manifests, without adding runtime crops or signature identities', () => {
+    const catalog = JSON.parse(readFileSync('docs/pixel-depth/BULK-ASSET-CATALOG.json', 'utf8'));
+    const manifest = JSON.parse(readFileSync('assets/generated/bulk-candidates/menu/manifest.json', 'utf8'));
+    expect(GENERATED_FOOD_IDS).toHaveLength(55);
+    expect(GENERATED_FOOD_IDS).toEqual(MENU.map(item => item.id));
+    expect(GENERATED_FOOD_ENVELOPES).toEqual(Object.fromEntries(
+      catalog.menu.map((item: { id: string; logicalBare: number[] }) => [item.id, item.logicalBare])));
+    const originals = ['espresso', 'latte', 'eggtart', 'croissant', 'cake'];
+    expect([...manifest.assets.map((asset: { itemId: string }) => asset.itemId), ...originals].sort())
+      .toEqual([...GENERATED_FOOD_IDS].sort());
+    for (const asset of manifest.assets) {
+      expect(asset.logicalBare).toEqual(GENERATED_FOOD_ENVELOPES[asset.itemId as GeneratedFoodId]);
+      const bytes = readFileSync(`assets/generated/bulk-candidates/menu/${asset.file}`);
+      expect([bytes.readUInt32BE(16), bytes.readUInt32BE(20)]).toEqual(asset.size);
     }
-    expect(adapter.icon('sig:coffee:beans=1')).toBeUndefined();
+  });
+
+  it('never allocates or substitutes sources for unknown IDs or signature recipes', () => {
+    const { create, createCanvas, sources } = fixture();
+    const extra = { ...sources, unknown: source(), 'sig:coffee:beans=1': source() };
+    const adapter = create(extra), count = createCanvas.mock.calls.length;
+    for (const id of ['unknown', '__proto__', 'constructor', 'sig:coffee:beans=1']) {
+      expect(adapter.icon(id as ItemId)).toBeUndefined(); expect(adapter.artwork(id as ItemId)).toBeUndefined();
+    }
+    expect(adapter.readyIds).toEqual(GENERATED_FOOD_IDS);
     expect(createCanvas).toHaveBeenCalledTimes(count);
   });
 
-  it('bounds allocation to thirty canvases and returns stable independent bare, outlined and UI cache entries', () => {
+  it('bounds allocation to six canvases per identity and returns stable independent bare, outlined and UI cache entries', () => {
     const { create, createCanvas } = fixture(), adapter = create();
-    expect(createCanvas).toHaveBeenCalledTimes(30);
+    expect(createCanvas).toHaveBeenCalledTimes(55 * 6);
     const outputs = GENERATED_FOOD_IDS.flatMap(id => [adapter.icon(id)!, adapter.icon(id, false)!, adapter.artwork(id)!]);
-    expect(new Set(outputs).size).toBe(15);
+    expect(new Set(outputs).size).toBe(55 * 3);
     for (let i = 0; i < 100; i++) for (const id of GENERATED_FOOD_IDS) {
       expect(adapter.icon(id)).toBe(outputs[GENERATED_FOOD_IDS.indexOf(id) * 3]);
       expect(adapter.icon(id, false)).toBe(outputs[GENERATED_FOOD_IDS.indexOf(id) * 3 + 1]);
       expect(adapter.artwork(id)).toBe(outputs[GENERATED_FOOD_IDS.indexOf(id) * 3 + 2]);
     }
-    expect(createCanvas).toHaveBeenCalledTimes(30);
+    expect(createCanvas).toHaveBeenCalledTimes(55 * 6);
   });
 
   it('rejects unloaded or invalid image dimensions without allocating a blank replacement', () => {
     const { create, createCanvas } = fixture();
     for (const invalid of [source(0, 20), source(20, -1), source(NaN, 20), source(Infinity, 20),
-      { width: 100, height: 80, naturalWidth: 0, naturalHeight: 0 } as HTMLImageElement]) {
+      { width: 100, height: 80, naturalWidth: 0, naturalHeight: 0 } as HTMLImageElement,
+      { width: 100, height: 80, complete: false, naturalWidth: 100, naturalHeight: 80 } as HTMLImageElement,
+      { width: 100, height: 80, naturalWidth: 100 } as HTMLImageElement,
+      { width: 100, height: 80, videoWidth: 100 } as HTMLVideoElement,
+      { width: 100, height: 80, displayHeight: 80 } as unknown as VideoFrame]) {
       expect(create({ espresso: invalid }).ready).toBe(false);
     }
     expect(createCanvas).not.toHaveBeenCalled();
@@ -177,8 +201,71 @@ describe('generated food bitmap adapter', () => {
     });
     const partial = createGeneratedFoodArt(sources, { createCanvas: allocation });
     expect(partial.icon('espresso')).toBeUndefined(); expect(partial.artwork('espresso')).toBeUndefined();
-    expect(partial.readyIds).toEqual(['latte', 'eggtart', 'croissant', 'cake']);
+    expect(partial.readyIds).toEqual(GENERATED_FOOD_IDS.filter(id => id !== 'espresso'));
     expect(create().readyIds).toEqual(GENERATED_FOOD_IDS);
+  });
+
+  it.each([
+    { width: 9, height: 90, complete: true, naturalWidth: 800, naturalHeight: 200 },
+    { width: 9, height: 90, videoWidth: 800, videoHeight: 200 },
+    { width: 9, height: 90, displayWidth: 800, displayHeight: 200 },
+  ])('uses the native dimension pair rather than display attributes: %j', input => {
+    const { create } = fixture(), original = input as unknown as CanvasImageSource;
+    const adapter = create({ baguette: original });
+    const backing = fineSpriteArt(adapter.icon('baguette', false)!).canvas;
+    const world = recorded(backing).draws[0];
+    expect(world.args.slice(0, 4)).toEqual([0, 0, 800, 200]);
+    expect(world.args.slice(4)).toEqual([0, 16, 48, 12]);
+    const uiBody = recorded(adapter.artwork('baguette')!).draws.at(-1)!.source as HTMLCanvasElement;
+    const ui = recorded(uiBody).draws[0];
+    expect(ui.args.slice(0, 4)).toEqual([0, 0, 800, 200]);
+    expect(ui.args[6] / 800).toBe(ui.args[7] / 200);
+  });
+
+  it.each([1, 2, 3, 4, 5, 6])('publishes nothing for an identity whose canvas %i fails', failAt => {
+    const { sources, createCanvas } = fixture();
+    let count = 0;
+    const adapter = createGeneratedFoodArt({ espresso: sources.espresso, latte: sources.latte }, { createCanvas: () => {
+      if (++count === failAt) throw new Error('allocation failed');
+      return createCanvas();
+    } });
+    expect(adapter.readyIds).toEqual(['latte']);
+    expect(adapter.icon('espresso', false)).toBeUndefined();
+    expect(adapter.icon('espresso')).toBeUndefined(); expect(adapter.artwork('espresso')).toBeUndefined();
+    expect(adapter.artwork('latte')).toBeDefined();
+  });
+
+  it('falls back independently for a null context and a failed source draw', () => {
+    const { sources, createCanvas } = fixture();
+    const noContext = createGeneratedFoodArt({ espresso: sources.espresso }, {
+      createCanvas: () => ({ getContext: () => null }) as unknown as HTMLCanvasElement,
+    });
+    expect(noContext.ready).toBe(false);
+    const adapter = createGeneratedFoodArt({ espresso: sources.espresso, latte: sources.latte }, { createCanvas: () => {
+      const canvas = createCanvas(), mock = recorded(canvas), draw = mock.context.drawImage;
+      mock.context.drawImage = (image, ...args) => {
+        if (image === sources.espresso) throw new Error('decode/draw failed');
+        draw(image, ...args);
+      };
+      return canvas;
+    } });
+    expect(adapter.readyIds).toEqual(['latte']);
+    expect(adapter.icon('espresso')).toBeUndefined(); expect(adapter.artwork('espresso')).toBeUndefined();
+  });
+
+  it('keeps all 55 identities independent across fresh, partial and empty reloads', () => {
+    const { create, sources } = fixture(), first = create(), partial = create({ macaron: sources.macaron }), empty = create({});
+    expect(Object.isFrozen(first)).toBe(true); expect(Object.isFrozen(first.readyIds)).toBe(true);
+    expect(partial.readyIds).toEqual(['macaron']); expect(empty.readyIds).toEqual([]);
+    for (const id of GENERATED_FOOD_IDS) {
+      expect(first.icon(id)).toBeDefined(); expect(first.artwork(id)).toBeDefined();
+      if (id === 'macaron') {
+        expect(partial.icon(id)).not.toBe(first.icon(id)); expect(partial.artwork(id)).not.toBe(first.artwork(id));
+      } else {
+        expect(partial.icon(id)).toBeUndefined(); expect(partial.artwork(id)).toBeUndefined();
+      }
+      expect(empty.icon(id)).toBeUndefined(); expect(empty.artwork(id)).toBeUndefined();
+    }
   });
 
   it('refreshes legacy cache hits on install, clears on reload and never reuses a prior generated adapter', () => {
@@ -186,7 +273,7 @@ describe('generated food bitmap adapter', () => {
     vi.stubGlobal('document', { createElement: createCanvas });
     const oldIcon = itemIcon('espresso'), oldBare = itemIcon('espresso', false), oldArt = itemArtwork('espresso');
     const untouched = itemIcon('blacktea'), untouchedArt = itemArtwork('blacktea');
-    const first = create(); setGeneratedFoodAdapter(first);
+    const first = create({ ...sources, blacktea: undefined }); setGeneratedFoodAdapter(first);
     expect(itemIcon('espresso')).toBe(first.icon('espresso'));
     expect(itemIcon('espresso', false)).toBe(first.icon('espresso', false));
     expect(itemArtwork('espresso')).toBe(first.artwork('espresso'));
@@ -248,7 +335,7 @@ describe('generated food bitmap adapter', () => {
   it('retains real faint-alpha fringes beyond the source manifest threshold without an opaque background', () => {
     const expected = { espresso: [7, 1, 525, 452], latte: [2, 4, 675, 533], eggtart: [6, 6, 606, 471] };
     for (const id of ['espresso', 'latte', 'eggtart'] as const) {
-      const alpha = pngAlpha(`public/art/generated/menu-v1/${id}.png`);
+      const alpha = pngAlpha(`assets/generated/original-main-static-v1/menu-v1/${id}.png`);
       expect(alpha.bounds(0).box).toEqual(expected[id]);
       expect(alpha.bounds(0).count).toBeGreaterThan(alpha.bounds(128).count);
       expect(alpha.bounds(0).box).not.toEqual(alpha.bounds(128).box);
@@ -256,7 +343,7 @@ describe('generated food bitmap adapter', () => {
       expect(alpha.cornerAlpha).toEqual([0, 0, 0, 0]);
     }
     for (const name of ['croissant', 'strawberry-cake']) {
-      const alpha = pngAlpha(`public/art/generated/main-v2/${name}.png`);
+      const alpha = pngAlpha(`assets/generated/original-main-static-v1/main-v2/${name}.png`);
       expect(alpha.bounds(0).count).toBeGreaterThan(0);
       expect(alpha.bounds(0).count).toBeLessThan(alpha.width * alpha.height);
       expect(alpha.cornerAlpha).toEqual([0, 0, 0, 0]);
@@ -265,7 +352,7 @@ describe('generated food bitmap adapter', () => {
 
   it('preserves lossless archived crops and the full original source/manifest', () => {
     for (const id of ['espresso', 'latte', 'eggtart']) {
-      const runtime = readFileSync(`public/art/generated/menu-v1/${id}.png`);
+      const runtime = readFileSync(`assets/generated/original-main-static-v1/menu-v1/${id}.png`);
       const archive = readFileSync(`assets/generated/menu-v1/${id}.png`);
       const hash = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
       expect(hash(runtime)).toBe(hash(archive));

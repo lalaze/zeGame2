@@ -4,6 +4,7 @@ import { CATS, CARE_SECONDS, type CatId } from '../game/pets';
 import { createInitialState, serialize } from '../game/state';
 import { setLocale } from '../i18n';
 import { registerFineSpriteArt } from '../render/fine-sprite-art';
+import { generatedCatFrameIds } from '../render/generated-cat-art';
 import { getGeneratedCatAdapter } from '../render/generated-main-art';
 import { catFrames, toDataURL, type CatFrames } from '../render/sprites';
 import { PetPanel } from './pets';
@@ -44,7 +45,8 @@ function generatedIdle(label = 'generated-siamese', density = 4) {
 }
 function adapterFor(idle: HTMLCanvasElement, ready = true) {
   return {
-    ready, scales: null,
+    ready, scales: null, readyBreeds: ['siamese' as CatId], sourceFrameIds: generatedCatFrameIds('siamese'),
+    scalesByBreed: {}, errors: [],
     resolve: vi.fn((breed: CatId, fallback: CatFrames) => breed === 'siamese'
       ? { frames: { ...fallback, idle }, generated: true }
       : { frames: fallback, generated: false }),

@@ -1,0 +1,10 @@
+{
+  "count": 2,
+  "exactRGBAcrop": true,
+  "transparentBackground": true,
+  "visualEmptyAssets": true,
+  "sourceDimensions": [
+    1536,
+    1024
+  ]
+}

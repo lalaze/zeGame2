@@ -1,0 +1,286 @@
+{
+  "version": 1,
+  "operation": "Byte-identical archival copies; original source sheets and manifests remain unchanged.",
+  "manifests": [
+    {
+      "file": "src/render/generated-staff-manifest.json",
+      "sha256": "5443036e5308f8e92b923db11fe0455fca56439b641a4b75aad31ab0d786bc09"
+    },
+    {
+      "file": "src/render/generated-customer-manifest.json",
+      "sha256": "0bc83ba87af9d21595c31312faaccdda780c7bad2de153239c0df0c26232a32f"
+    },
+    {
+      "file": "src/render/generated-cat-manifest.json",
+      "sha256": "6ee8c3a3d4dcf55f7a3e5703a815d75c12cbd00392f40dfeb77863d9c8738498"
+    }
+  ],
+  "images": [
+    {
+      "key": "barista-down-stand",
+      "file": "assets/generated/original-main-actors-v1/staff-v2/owner-down-stand.png",
+      "previousPublicFile": "public/art/generated/staff-v2/owner-down-stand.png",
+      "sha256": "864128a6a8b6615904452ff2dd34e382d1b5b8e53ae77aa2b55affb320686cfc",
+      "bytes": 108309
+    },
+    {
+      "key": "barista-down-stepA",
+      "file": "assets/generated/original-main-actors-v1/staff-v2/owner-down-stepA.png",
+      "previousPublicFile": "public/art/generated/staff-v2/owner-down-stepA.png",
+      "sha256": "bbef062630b910d3903cbba83698059fb31d797702d1a2d61fc44e69265aa5cd",
+      "bytes": 111866
+    },
+    {
+      "key": "barista-down-stepB",
+      "file": "assets/generated/original-main-actors-v1/staff-v2/owner-down-stepB.png",
+      "previousPublicFile": "public/art/generated/staff-v2/owner-down-stepB.png",
+      "sha256": "224a3423efd7979807be68b3787476fe9f2985ea3e90cd7183b99c4076cbedb7",
+      "bytes": 109847
+    },
+    {
+      "key": "barista-up-stand",
+      "file": "assets/generated/original-main-actors-v1/staff-v2/owner-up-stand.png",
+      "previousPublicFile": "public/art/generated/staff-v2/owner-up-stand.png",
+      "sha256": "07deecfb0db2bcedc9071f0a396045c0075f88f8761e9504e59961e983375622",
+      "bytes": 104476
+    },
+    {
+      "key": "barista-up-stepA",
+      "file": "assets/generated/original-main-actors-v1/staff-v2/owner-up-stepA.png",
+      "previousPublicFile": "public/art/generated/staff-v2/owner-up-stepA.png",
+      "sha256": "500143f7906db9c7c4030cc8d4d5f8b3b412793a3c92175b0a6bd04a73091c74",
+      "bytes": 107758
+    },
+    {
+      "key": "barista-up-stepB",
+      "file": "assets/generated/original-main-actors-v1/staff-v2/owner-up-stepB.png",
+      "previousPublicFile": "public/art/generated/staff-v2/owner-up-stepB.png",
+      "sha256": "deae943f36552a3353be6574c77f2c7683687ee103369da88806beeb10738c61",
+      "bytes": 105998
+    },
+    {
+      "key": "barista-right-stand",
+      "file": "assets/generated/original-main-actors-v1/staff-v2/owner-right-stand.png",
+      "previousPublicFile": "public/art/generated/staff-v2/owner-right-stand.png",
+      "sha256": "cd28e80ebf35e974af3fbf45227ed8e4213db23f976a249c8547dcaa89655c75",
+      "bytes": 97354
+    },
+    {
+      "key": "barista-right-stepA",
+      "file": "assets/generated/original-main-actors-v1/staff-v2/owner-right-stepA.png",
+      "previousPublicFile": "public/art/generated/staff-v2/owner-right-stepA.png",
+      "sha256": "123bc166ffefd4d932909c30385d9cde31035e336af31086032bae01e7c24a56",
+      "bytes": 119561
+    },
+    {
+      "key": "barista-right-stepB",
+      "file": "assets/generated/original-main-actors-v1/staff-v2/owner-right-stepB.png",
+      "previousPublicFile": "public/art/generated/staff-v2/owner-right-stepB.png",
+      "sha256": "e50a313755ab4d0fdaa5ef45c8f66d09335f2cfe4f7b05aa547ee09a1ea2b9f2",
+      "bytes": 106161
+    },
+    {
+      "key": "mina-down-stand",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-down-stand.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-down-stand.png",
+      "sha256": "ec0ac3625c32a9a2883834c3224a59a8453a848470695c588b4a466bc818db5c",
+      "bytes": 110800
+    },
+    {
+      "key": "mina-down-stepA",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-down-stepA.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-down-stepA.png",
+      "sha256": "ddcfa91973db7295098253785b2bb121559345f02240808b43dc4c5d8be4319f",
+      "bytes": 114190
+    },
+    {
+      "key": "mina-down-stepB",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-down-stepB.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-down-stepB.png",
+      "sha256": "ae8c5d802b18f3dd66a2c641a27c4ea7517316c773b21c25cc2a03336b79204c",
+      "bytes": 110616
+    },
+    {
+      "key": "mina-up-stand",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-up-stand.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-up-stand.png",
+      "sha256": "e6d6867cc47300b7bc19248a18d5d3112c8a09c3bbee3ed1e9d430185e1c8ea2",
+      "bytes": 95927
+    },
+    {
+      "key": "mina-up-stepA",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-up-stepA.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-up-stepA.png",
+      "sha256": "81309af2ac10504a3137ec33538d80b3f66d7df25c5819faf55ac2ce9f1dad18",
+      "bytes": 100413
+    },
+    {
+      "key": "mina-up-stepB",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-up-stepB.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-up-stepB.png",
+      "sha256": "4cc47a51a870afb16b4e4f4d974a9d3262c926184da4a435d82c2e1e80b3da98",
+      "bytes": 99440
+    },
+    {
+      "key": "mina-right-stand",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-right-stand.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-right-stand.png",
+      "sha256": "273feabdfccb4d2d4f89820ddc5ae8a4cd15f6a1efeaed762e892a39766abf8b",
+      "bytes": 100519
+    },
+    {
+      "key": "mina-right-stepA",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-right-stepA.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-right-stepA.png",
+      "sha256": "28d6274733a0d1f79a40852214ddd0bb194b8dc568892d6baac95383ba333af4",
+      "bytes": 124036
+    },
+    {
+      "key": "mina-right-stepB",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-right-stepB.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-right-stepB.png",
+      "sha256": "2b297c307f97380f894aff4d31b9e7624477fe51a81c37eb1e936f41a08d47c4",
+      "bytes": 111080
+    },
+    {
+      "key": "mina-right-sit",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-right-sit.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-right-sit.png",
+      "sha256": "66dbeb9e1d17905c2dcffc2832ad7f9fc54cb8f0621fcd2c628f726017b084cb",
+      "bytes": 215142
+    },
+    {
+      "key": "mina-right-sitPetA",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-right-sitPetA.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-right-sitPetA.png",
+      "sha256": "01d060b6238e244931e56e0c7b38e3b9a0cc10c38d49949ca3fda0b3f9c3ead0",
+      "bytes": 251702
+    },
+    {
+      "key": "mina-right-sitPetB",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-right-sitPetB.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-right-sitPetB.png",
+      "sha256": "e29350dfa40497ee15454b49f6271c9eba20c6f14be4909f9bb4be61924ed54c",
+      "bytes": 248100
+    },
+    {
+      "key": "mina-left-sit",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-left-sit.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-left-sit.png",
+      "sha256": "ed85ba65d1a5cc6365b2ff24f283cce664e9f1f7c815de7fe3b780e075642daa",
+      "bytes": 210601
+    },
+    {
+      "key": "mina-left-sitPetA",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-left-sitPetA.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-left-sitPetA.png",
+      "sha256": "bed64f74c15593be05cd6c8e9dcd9614fdb8d8e9d8ebbf433263269f393c7a31",
+      "bytes": 241801
+    },
+    {
+      "key": "mina-left-sitPetB",
+      "file": "assets/generated/original-main-actors-v1/customer-0-v1/mina-left-sitPetB.png",
+      "previousPublicFile": "public/art/generated/customer-0-v1/mina-left-sitPetB.png",
+      "sha256": "f9d392fe127a67f6542d9de5160a507345129841933208366e0e286ac22f6305",
+      "bytes": 238581
+    },
+    {
+      "key": "siamese-idle",
+      "file": "assets/generated/original-main-actors-v1/cat-siamese-v1/siamese-idle.png",
+      "previousPublicFile": "public/art/generated/cat-siamese-v1/siamese-idle.png",
+      "sha256": "ee3305f322c35a56d6bead5cc017ac1df5846d8d7be5ac3f44224b0586cbd59a",
+      "bytes": 208975
+    },
+    {
+      "key": "siamese-lookUp",
+      "file": "assets/generated/original-main-actors-v1/cat-siamese-v1/siamese-lookUp.png",
+      "previousPublicFile": "public/art/generated/cat-siamese-v1/siamese-lookUp.png",
+      "sha256": "a8469cf6364d4fae197aa2dbc6ac0cb06577f50de0e514955058ebd42c474f6c",
+      "bytes": 224735
+    },
+    {
+      "key": "siamese-walkA",
+      "file": "assets/generated/original-main-actors-v1/cat-siamese-v1/siamese-walkA.png",
+      "previousPublicFile": "public/art/generated/cat-siamese-v1/siamese-walkA.png",
+      "sha256": "5bad8e0b6f4ad2b95aa17c2005381312848c0ecb0af303561b64e840a32e8c1b",
+      "bytes": 238174
+    },
+    {
+      "key": "siamese-walkB",
+      "file": "assets/generated/original-main-actors-v1/cat-siamese-v1/siamese-walkB.png",
+      "previousPublicFile": "public/art/generated/cat-siamese-v1/siamese-walkB.png",
+      "sha256": "0efd47e1bcb5b5a7fdf67881ef36a6b843c7f3d2b2212c4a9fcc4e0165aad6a0",
+      "bytes": 239578
+    },
+    {
+      "key": "siamese-swish",
+      "file": "assets/generated/original-main-actors-v1/cat-siamese-v1/siamese-swish.png",
+      "previousPublicFile": "public/art/generated/cat-siamese-v1/siamese-swish.png",
+      "sha256": "e8145f9bb519d33cb9ab149811f6372198b5d3be1663433770228cc9b38b633f",
+      "bytes": 260517
+    },
+    {
+      "key": "siamese-blink",
+      "file": "assets/generated/original-main-actors-v1/cat-siamese-v1/siamese-blink.png",
+      "previousPublicFile": "public/art/generated/cat-siamese-v1/siamese-blink.png",
+      "sha256": "614fce82f496dbd8605df733fb328591256ebeca6346b4d1fee552092a0313f4",
+      "bytes": 250128
+    },
+    {
+      "key": "siamese-happy",
+      "file": "assets/generated/original-main-actors-v1/cat-siamese-v1/siamese-happy.png",
+      "previousPublicFile": "public/art/generated/cat-siamese-v1/siamese-happy.png",
+      "sha256": "02a33044ee8da0db928875bbe8cadd56bebe0c5f1b40910b1748d53f593846c4",
+      "bytes": 252161
+    },
+    {
+      "key": "siamese-sleep",
+      "file": "assets/generated/original-main-actors-v1/cat-siamese-v1/siamese-sleep.png",
+      "previousPublicFile": "public/art/generated/cat-siamese-v1/siamese-sleep.png",
+      "sha256": "0d80ec694a63deb2fbc2388395ec77b95e57198aa83c1d40a70db6b74918721a",
+      "bytes": 176814
+    },
+    {
+      "key": "siamese-groomA",
+      "file": "assets/generated/original-main-actors-v1/cat-siamese-v1/siamese-groomA.png",
+      "previousPublicFile": "public/art/generated/cat-siamese-v1/siamese-groomA.png",
+      "sha256": "4c2d7894221a0977ec4ced26630b2ad7a4cab4321ee2f8d242d26222f5a95753",
+      "bytes": 262161
+    },
+    {
+      "key": "siamese-groomB",
+      "file": "assets/generated/original-main-actors-v1/cat-siamese-v1/siamese-groomB.png",
+      "previousPublicFile": "public/art/generated/cat-siamese-v1/siamese-groomB.png",
+      "sha256": "4c735239429b76ee37fbbae8bc4bf3421165aa6e9c019d1cbc0c57e5ca1e7317",
+      "bytes": 244056
+    },
+    {
+      "key": "siamese-stretch",
+      "file": "assets/generated/original-main-actors-v1/cat-siamese-v1/siamese-stretch.png",
+      "previousPublicFile": "public/art/generated/cat-siamese-v1/siamese-stretch.png",
+      "sha256": "6b4a70e13a7a2fe536bb3b92e8bd844b5e452ab7563506d5b4e6cc5e9d42d287",
+      "bytes": 352861
+    },
+    {
+      "key": "siamese-watch",
+      "file": "assets/generated/original-main-actors-v1/cat-siamese-v1/siamese-watch.png",
+      "previousPublicFile": "public/art/generated/cat-siamese-v1/siamese-watch.png",
+      "sha256": "42a6771d583f2d257a75120b5617739970740588ba70b69ee8a4201699c67ef6",
+      "bytes": 270741
+    },
+    {
+      "key": "siamese-nuzzleA",
+      "file": "assets/generated/original-main-actors-v1/cat-siamese-v1/siamese-nuzzleA.png",
+      "previousPublicFile": "public/art/generated/cat-siamese-v1/siamese-nuzzleA.png",
+      "sha256": "988bd88694799dfd2f44aa8e35d691289c41f374cb759ed1d5d8bc131292bd51",
+      "bytes": 554336
+    },
+    {
+      "key": "siamese-nuzzleB",
+      "file": "assets/generated/original-main-actors-v1/cat-siamese-v1/siamese-nuzzleB.png",
+      "previousPublicFile": "public/art/generated/cat-siamese-v1/siamese-nuzzleB.png",
+      "sha256": "deb6b8e5eee8db4407db630ced2268bfd2adf91da9070a53d1abad008675d627",
+      "bytes": 528299
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "removedDuplicates": [
+    {
+      "previousPublicFile": "public/art/generated/main-v1/vine.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/main-v1/vine.png",
+      "sha256": "e31df5efbcd674539f4ee67116079313e205bda7bdf30264540a58c55224956e",
+      "bytes": 285432
+    },
+    {
+      "previousPublicFile": "public/art/generated/main-v2/empty-wide-display.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/main-v2/empty-wide-display.png",
+      "sha256": "527f3ca54de2ddf474f3a43af48fc861307980927c9dbef78f4b973b428d4d2c",
+      "bytes": 894346
+    },
+    {
+      "previousPublicFile": "public/art/generated/menu-v1/espresso.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/menu-v1/espresso.png",
+      "sha256": "40fb65d7999dbd8f1813e7db974eafcc2bd83ef5773587c67fa905299adbbba1",
+      "bytes": 239982
+    },
+    {
+      "previousPublicFile": "public/art/generated/menu-v1/latte.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/menu-v1/latte.png",
+      "sha256": "b4898bf4b89cf24f1f1de4327432491d11dca99473b1efc45018b2534e09aaaa",
+      "bytes": 363155
+    },
+    {
+      "previousPublicFile": "public/art/generated/menu-v1/eggtart.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/menu-v1/eggtart.png",
+      "sha256": "8532de75721dbd274f4cd7eb6cb29a59c241e974fc9f4385e2133c78aa5320e6",
+      "bytes": 313608
+    },
+    {
+      "previousPublicFile": "public/art/generated/main-v2/croissant.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/main-v2/croissant.png",
+      "sha256": "5a63eab40060eb73f604a51a0313491b2ff9ba7e050d98ca8733693fa93df2dd",
+      "bytes": 143003
+    },
+    {
+      "previousPublicFile": "public/art/generated/main-v2/strawberry-cake.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/main-v2/strawberry-cake.png",
+      "sha256": "f501dc95c11552c17812ab7a376f9c1ccd016f5d551bcc2f163ca02e41f0087a",
+      "bytes": 136327
+    },
+    {
+      "previousPublicFile": "public/art/generated/service-v1/pickup-hutch-two-tier-v2.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/service-v1/pickup-hutch-two-tier-v2.png",
+      "sha256": "9aac4e471380baeae21744af31008afde539c871cb5af70e6907314f67ff8de2",
+      "bytes": 1604074
+    },
+    {
+      "previousPublicFile": "public/art/generated/service-v1/espresso-machine.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/service-v1/espresso-machine.png",
+      "sha256": "48e3c2408f7f9b56440778581fe033cbdc649e3912c06f725e71a569f6278f00",
+      "bytes": 403252
+    },
+    {
+      "previousPublicFile": "public/art/generated/service-v1/low-service-cupboard.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/service-v1/low-service-cupboard.png",
+      "sha256": "c210ace920723a8b57343025d1ed896e7d5e81a31f5eb130d47246b223ff66a0",
+      "bytes": 371134
+    },
+    {
+      "previousPublicFile": "public/art/generated/service-v1/cups-stack.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/service-v1/cups-stack.png",
+      "sha256": "b0f5f30744172b59a67a3ab6675e3e7b0a7e73074ec552e6680b4ada4ce49109",
+      "bytes": 132061
+    },
+    {
+      "previousPublicFile": "public/art/generated/service-v1/glass-jars-pair.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/service-v1/glass-jars-pair.png",
+      "sha256": "bf422feb160895d212983f6caa1ea50310dd94f4c4c127588deffdbd75df977a",
+      "bytes": 190389
+    },
+    {
+      "previousPublicFile": "public/art/generated/service-v1/empty-wicker-basket.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/service-v1/empty-wicker-basket.png",
+      "sha256": "25d1178a17a271c6a34cdb711af9666f2c7f91315d6aefeaee6ebaf3c606c795",
+      "bytes": 207550
+    },
+    {
+      "previousPublicFile": "public/art/generated/wall-v1/window-gingham-frame.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/wall-v1/window-gingham-frame.png",
+      "sha256": "e9e81d2730951aed06374cf6c3a4b12b831c7f2bf8e68560e94409b32f025704",
+      "bytes": 430696
+    },
+    {
+      "previousPublicFile": "public/art/generated/wall-v1/blank-chalkboard.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/wall-v1/blank-chalkboard.png",
+      "sha256": "29c51857db5a3d2d8adfcccf04ef0760f57967d83f19890ddb2b73bd17df0a00",
+      "bytes": 418095
+    },
+    {
+      "previousPublicFile": "public/art/generated/wall-v1/brass-wall-lamp.png",
+      "restoreFrom": "assets/generated/original-main-static-v1/wall-v1/brass-wall-lamp.png",
+      "sha256": "46c2df809c5314c1da44e0a36933a71c4f4f56cc16486bf21cea43a7a4ee3c83",
+      "bytes": 96857
+    }
+  ]
+}

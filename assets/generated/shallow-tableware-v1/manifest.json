@@ -1,0 +1,155 @@
+{
+  "generator": "built-in image_gen",
+  "bboxAlphaThreshold": "alpha>128 measurement only; complete source RGBA crop retained",
+  "assets": [
+    {
+      "id": "shallow-plate",
+      "file": "shallow-plate.png",
+      "source": "source.png",
+      "source_crop": [
+        159,
+        225,
+        1377,
+        402
+      ],
+      "size": [
+        1218,
+        177
+      ],
+      "bbox": {
+        "x": 12,
+        "y": 12,
+        "w": 1194,
+        "h": 153
+      },
+      "nativeVisibleAspect": 7.803921568627451,
+      "targetLogicalEnvelope": [
+        12,
+        2
+      ],
+      "aspectPreservingFit": [
+        12.0,
+        1.5376884422110553
+      ],
+      "sourceToWorldScale": 0.010050251256281407,
+      "foot": {
+        "x": 609.0,
+        "y": 164
+      },
+      "centerline": {
+        "x": 609.0,
+        "y": 88.5
+      },
+      "supportContact": {
+        "x": 609,
+        "y": 84
+      },
+      "supportContactSource": {
+        "x": 768,
+        "y": 309
+      },
+      "supportPlane": [
+        {
+          "x": 131,
+          "y": 68
+        },
+        {
+          "x": 1086,
+          "y": 68
+        },
+        {
+          "x": 1111,
+          "y": 101
+        },
+        {
+          "x": 109,
+          "y": 101
+        }
+      ],
+      "anchorAccuracy": "Visual estimate of horizontal interior plane, pending runtime food placement/occlusion validation",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "b99a70bef8d2084570124d2406c9af981f847cd024aeb6b8b27705bd936f572a",
+      "status": "source_checked_runtime_pending"
+    },
+    {
+      "id": "shallow-tray",
+      "file": "shallow-tray.png",
+      "source": "source.png",
+      "source_crop": [
+        39,
+        678,
+        1497,
+        880
+      ],
+      "size": [
+        1458,
+        202
+      ],
+      "bbox": {
+        "x": 12,
+        "y": 12,
+        "w": 1434,
+        "h": 178
+      },
+      "nativeVisibleAspect": 8.0561797752809,
+      "targetLogicalEnvelope": [
+        22,
+        3
+      ],
+      "aspectPreservingFit": [
+        22.0,
+        2.730822873082287
+      ],
+      "sourceToWorldScale": 0.015341701534170154,
+      "foot": {
+        "x": 729.0,
+        "y": 189
+      },
+      "centerline": {
+        "x": 729.0,
+        "y": 101.0
+      },
+      "supportContact": {
+        "x": 729,
+        "y": 84
+      },
+      "supportContactSource": {
+        "x": 768,
+        "y": 762
+      },
+      "supportPlane": [
+        {
+          "x": 166,
+          "y": 65
+        },
+        {
+          "x": 1288,
+          "y": 65
+        },
+        {
+          "x": 1369,
+          "y": 101
+        },
+        {
+          "x": 89,
+          "y": 101
+        }
+      ],
+      "anchorAccuracy": "Visual estimate of horizontal interior plane, pending runtime food placement/occlusion validation",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "16162f45c424a3c5f7fadbe799a8e3ec2785e79d2d7a017bd853ea0666b2fed0",
+      "status": "source_checked_runtime_pending"
+    }
+  ],
+  "limitations": [
+    "Imagegen produced plate7.804:1 vs requested6:1 and tray8.056:1 vs requested7.333:1. They are genuinely shallow side-view silhouettes; preserve native aspect instead of stretching. At target widths their heights are1.538 and2.731logical pixels.",
+    "Small-scale pixel readability and supporting-plane food occlusion require runtime review.",
+    "No food, hands, text or objects baked in. Immutable bulk originals unchanged."
+  ]
+}

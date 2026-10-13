@@ -1,0 +1,37 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> tiny-bean-cafe@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+ ❯ src/render/phaser/cafe-scene-presentation.test.ts (2 tests | 1 failed) 15ms
+   ❯ scene projection attachment groups (2)
+     × moves a server, tray and food by exactly the same foot displacement 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/render/phaser/cafe-scene-presentation.test.ts > scene projection attachment groups > moves a server, tray and food by exactly the same foot displacement
+TypeError: this.image(...).setScale is not a function
+ ❯ src/render/phaser/cafe-scene.ts:908:12
+    906|         const scale = selected?.generated ? Math.min(1, 8 / icon.width…
+    907|         this.image(icon, cx - (selected?.generated ? icon.width * scal…
+    908|           .setScale(scale / fineSpriteArt(icon).density);
+       |            ^
+    909|       });
+    910|       this.image(tray, x - 11, ty, depth + 0.003);
+ ❯ CafeScene.drawServer src/render/phaser/cafe-scene.ts:903:21
+ ❯ src/render/phaser/cafe-scene-presentation.test.ts:40:11
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 150 passed | 1 skipped (152)
+      Tests  1 failed | 2275 passed | 28 skipped (2304)
+   Start at  05:06:12
+   Duration  83.21s (tests 86%, import 5%, environment 5%, transform 3%)
+
+    Isolate  152 workers spawned · ~178ms startup each (spawn + environment, per file)
+             at least ~13.32s faster with isolate: false — reuses workers across files instead of one per file
+

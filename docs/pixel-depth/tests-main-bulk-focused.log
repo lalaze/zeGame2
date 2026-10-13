@@ -1,0 +1,13 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+ RUN  v5.0.3 /workspace/shared/zeGame2
+
+
+ Test Files  7 passed (7)
+      Tests  92 passed (92)
+   Start at  04:02:43
+   Duration  3.16s (tests 48%, transform 27%, import 13%, environment 11%, worker 1%)
+
+    Isolate  7 workers spawned · ~214ms startup each (spawn + environment, per file)
+             at least ~535ms faster with isolate: false — reuses workers across files instead of one per file
+

@@ -1,0 +1,342 @@
+{
+  "identity": "canonical-server-all-zero-only",
+  "role": "server",
+  "look": {
+    "skin": 0,
+    "hair": 0,
+    "hairStyle": 0,
+    "shirt": 0,
+    "pants": 0
+  },
+  "exactLookOnly": true,
+  "frames": [
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-down-stand.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-source.png",
+      "direction": "down",
+      "state": "stand",
+      "frame": "stand",
+      "size": [
+        183,
+        407
+      ],
+      "source_crop": [
+        136,
+        14,
+        319,
+        421
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 163,
+        "h": 387
+      },
+      "foot": {
+        "x": 91.5,
+        "y": 396
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "edgeAlphaMax": 0,
+      "sha256": "2b118caf1c41a50474cdc1f71a164786e8ef5f8a27e91c898630c35e922153f5",
+      "status": "candidate_source_checked_runtime_pending",
+      "sourceToWorldScale": 0.07235142118863049
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-down-stepA.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-source.png",
+      "direction": "down",
+      "state": "stepA",
+      "frame": "stride",
+      "size": [
+        188,
+        416
+      ],
+      "source_crop": [
+        532,
+        14,
+        720,
+        430
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 168,
+        "h": 400
+      },
+      "foot": {
+        "x": 94.0,
+        "y": 409
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "edgeAlphaMax": 1,
+      "sha256": "07e9c08c9dc9c609979ac00e1bdc06cb2cd2e5c3b3fc877634ff730acbfbd223",
+      "status": "candidate_source_checked_runtime_pending",
+      "sourceToWorldScale": 0.07235142118863049
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-down-stepB.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-source.png",
+      "direction": "down",
+      "state": "stepB",
+      "frame": "passing",
+      "size": [
+        188,
+        410
+      ],
+      "source_crop": [
+        949,
+        15,
+        1137,
+        425
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 10,
+        "w": 168,
+        "h": 390
+      },
+      "foot": {
+        "x": 94.0,
+        "y": 399
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "edgeAlphaMax": 0,
+      "sha256": "babd1f508d9391b0f58314bca9c4af7cd8ec011ec3943ce1d27f689e0cdc87f3",
+      "status": "candidate_source_checked_runtime_pending",
+      "sourceToWorldScale": 0.07235142118863049
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-up-stand.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-source.png",
+      "direction": "up",
+      "state": "stand",
+      "frame": "stand",
+      "size": [
+        183,
+        399
+      ],
+      "source_crop": [
+        139,
+        430,
+        322,
+        829
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 7,
+        "w": 163,
+        "h": 382
+      },
+      "foot": {
+        "x": 91.5,
+        "y": 388
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "edgeAlphaMax": 0,
+      "sha256": "c52961fef755592c2d18286f743a61b39db823ddfe2bdebf42b5109b571adf67",
+      "status": "candidate_source_checked_runtime_pending",
+      "sourceToWorldScale": 0.07235142118863049
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-up-stepA.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-source.png",
+      "direction": "up",
+      "state": "stepA",
+      "frame": "stride",
+      "size": [
+        197,
+        405
+      ],
+      "source_crop": [
+        525,
+        430,
+        722,
+        835
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 5,
+        "w": 177,
+        "h": 391
+      },
+      "foot": {
+        "x": 98.5,
+        "y": 395
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "edgeAlphaMax": 1,
+      "sha256": "8b078e2890018dfebef0bc1be1dcf3b34254fe60dec21c9b65e0650a49b5adc5",
+      "status": "candidate_source_checked_runtime_pending",
+      "sourceToWorldScale": 0.07235142118863049
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-up-stepB.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-source.png",
+      "direction": "up",
+      "state": "stepB",
+      "frame": "passing",
+      "size": [
+        189,
+        402
+      ],
+      "source_crop": [
+        953,
+        430,
+        1142,
+        832
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 6,
+        "w": 169,
+        "h": 386
+      },
+      "foot": {
+        "x": 94.5,
+        "y": 391
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "edgeAlphaMax": 1,
+      "sha256": "3c33b045c7bc2215d7ef054cccf22f93b83e4380413479e2f5e8de8da8598199",
+      "status": "candidate_source_checked_runtime_pending",
+      "sourceToWorldScale": 0.07235142118863049
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-right-stand.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-source.png",
+      "direction": "right",
+      "state": "stand",
+      "frame": "stand",
+      "size": [
+        184,
+        402
+      ],
+      "source_crop": [
+        135,
+        835,
+        319,
+        1237
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 8,
+        "w": 164,
+        "h": 384
+      },
+      "foot": {
+        "x": 92.0,
+        "y": 391
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "edgeAlphaMax": 0,
+      "sha256": "ce920ce4b1c264c83616450e779a13c3cfac60e4d45d7599f6cbb65ca3bdadb9",
+      "status": "candidate_source_checked_runtime_pending",
+      "sourceToWorldScale": 0.07235142118863049
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-right-stepA.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-source.png",
+      "direction": "right",
+      "state": "stepA",
+      "frame": "stride",
+      "size": [
+        255,
+        399
+      ],
+      "source_crop": [
+        510,
+        835,
+        765,
+        1234
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 8,
+        "w": 235,
+        "h": 381
+      },
+      "foot": {
+        "x": 127.5,
+        "y": 388
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "edgeAlphaMax": 1,
+      "sha256": "29d87a62f50e35f43ed678313cb60bf794c01120e0913548c42dd3ed7b16764c",
+      "status": "candidate_source_checked_runtime_pending",
+      "sourceToWorldScale": 0.07235142118863049
+    },
+    {
+      "file": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-right-stepB.png",
+      "source": "/workspace/scratch/30a3201ff9cd/cafe-server-canonical-v1/server-source.png",
+      "direction": "right",
+      "state": "stepB",
+      "frame": "passing",
+      "size": [
+        189,
+        403
+      ],
+      "source_crop": [
+        963,
+        835,
+        1152,
+        1238
+      ],
+      "bbox": {
+        "x": 10,
+        "y": 8,
+        "w": 169,
+        "h": 385
+      },
+      "foot": {
+        "x": 94.5,
+        "y": 392
+      },
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "edgeAlphaMax": 1,
+      "sha256": "4e465abca1bf01f8576ae97972b3ee710ca332dd4fba232a6a3f681f37331946",
+      "status": "candidate_source_checked_runtime_pending",
+      "sourceToWorldScale": 0.07235142118863049
+    }
+  ],
+  "left": "mirror right",
+  "bboxAlphaThreshold": "alpha>128 measurement only; full RGBA crop retained",
+  "sourceToWorldScale": 0.07235142118863049,
+  "logicalStandingHeight": 28,
+  "anchorDefinition": "Feet baseline midpoint, visually inferred using opaque body bounds; same source scale for all directions and poses. Validate ground-contact/stride in runtime.",
+  "status": "candidate_source_checked_runtime_pending",
+  "notCovered": "Any nonzero Look key; no all-staff/default/random identity replacement or parameterized coverage.",
+  "sourceGeneration": "built-in image_gen edit using approved owner9 craft+legacy exact server Look reference",
+  "limitations": [
+    "Top-middle stride cell has6px bottom gutter and up frames5-7px top gutter; all opaque body pixels preserved.",
+    "Natural-shaded palette follows target hue identity, not exact flat per-pixel hex swatches.",
+    "Handheld trays/food must be runtime layers; no objects baked in."
+  ]
+}

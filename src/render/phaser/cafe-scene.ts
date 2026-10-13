@@ -1,3 +1,14 @@
+import { createGeneratedSignatureArt, setGeneratedSignatureAdapter, GENERATED_SIGNATURE_IDS, generatedSignatureKey } from '../generated-signature-art';
+import { releaseGeneratedStaticSources } from '../generated-static-sources';
+import { createGeneratedServerArt, GENERATED_SERVER_FRAME_IDS, type GeneratedServerAdapter, type GeneratedServerManifest } from '../generated-server-art';
+import { setGeneratedServerAdapter } from '../generated-main-art';
+import { createGeneratedMainEnvironmentArt, GENERATED_MAIN_ENVIRONMENT_IDS, generatedMainEnvironmentKey } from '../generated-main-environment-art';
+import { createGeneratedTablewareArt, GENERATED_TABLEWARE_IDS, generatedTablewareKey } from '../generated-tableware-art';
+import { setGeneratedMainEnvironmentAdapter, setGeneratedTablewareAdapter, getGeneratedTablewareAdapter } from '../generated-main-art';
+import runtimeCatalog from '../../../assets/generated/runtime-catalog-v1/runtime.json';
+import { createGeneratedFurnitureArt, GENERATED_FURNITURE_IDS, generatedFurnitureKey } from '../generated-furniture-art';
+import { createGeneratedDecorArt, GENERATED_DECOR_SOURCE_IDS } from '../generated-decor-art';
+import { createGeneratedIngredientArt, GENERATED_INGREDIENT_IDS } from '../generated-ingredient-art';
 import { UI_ART, paintThoughtFrame, paintOrderFrame, paintSoldOutFrame, paintSoldOutCross, paintCallBubble, paintAckBubble } from '../ui-art';
 import { paintServiceCup, paintServiceTray, paintTableVase, paintTableTent } from '../service-props-art';
 import { styleStationMultiplier } from '../../game/styles';
@@ -28,20 +39,17 @@ import { BENCH_RISE, BINS_RISE, DISH_PIT_RISE, FRIDGE_RISE, RACK_RISE, paintBenc
 import { paintRegion } from '../region-art';
 import { CHAIR_LEFT, CHAIR_RIGHT, RoomPainter, TABLE, TABLE_CX, TABLE_TOP_DY, type CounterCup } from '../room-art';
 import { CHAR_H, OUTLINE, catFrames, character, crownSprite, dropSprite, heartSprite, itemIcon, pixelSprite, type CharacterFrames, type Facing } from '../sprites';
-import { PIXEL_FONT, PIXEL_FONT_HALO, addPixelFonts } from './pixel-font';
+import { PIXEL_FONT, PIXEL_FONT_HALO, PIXEL_FONT_VIP, addPixelFonts } from './pixel-font';
 import { baked, canvasKey } from './textures';
 import { fineSpriteArt, logicalCrop } from '../fine-sprite-art';
 import { PreviewMetrics } from '../preview-metrics';
 import { paintFinePottedPlant } from '../fine-plant-art';
-import { GENERATED_MAIN_ASSETS, clearGeneratedMainAssets, generatedMainKey, generatedMainSource, installGeneratedMainAsset, setGeneratedStaffAdapter, setGeneratedCustomerAdapter, setGeneratedCatAdapter, setGeneratedFoodAdapter, type GeneratedMainId } from '../generated-main-art';
+import { GENERATED_MAIN_ASSETS, clearGeneratedMainAssets, generatedMainKey, generatedMainSource, installGeneratedMainAsset, setGeneratedStaffAdapter, setGeneratedCustomerAdapter, setGeneratedCatAdapter, setGeneratedFoodAdapter, setGeneratedIngredientAdapter, setGeneratedFurnitureAdapter, setGeneratedDecorAdapter, getGeneratedFurnitureAdapter, type GeneratedMainId } from '../generated-main-art';
 import { createGeneratedStaffArt, GENERATED_STAFF_FRAME_IDS, type GeneratedStaffAdapter, type GeneratedStaffManifest } from '../generated-staff-art';
-import generatedStaffManifest from '../generated-staff-manifest.json';
 import { releaseGeneratedCharacterSources } from '../generated-character-sources';
 import { createGeneratedCatArt, GENERATED_CAT_FRAME_IDS, type GeneratedCatAdapter, type GeneratedCatManifest } from '../generated-cat-art';
-import generatedCatManifest from '../generated-cat-manifest.json';
 import { createGeneratedFoodArt, GENERATED_FOOD_IDS } from '../generated-food-art';
 import { createGeneratedCustomerArt, GENERATED_CUSTOMER_FRAME_IDS, type GeneratedCustomerAdapter, type GeneratedCustomerManifest } from '../generated-customer-art';
-import generatedCustomerManifest from '../generated-customer-manifest.json';
 import { dustMotes, roomDepth } from '../materials';
 import { prepareCanvasMultiply } from './canvas-lighting';
 import { bindCanvasTaps, type CanvasTaps } from './canvas-taps';
@@ -134,7 +142,8 @@ function lampsIn(area: AreaId, state: GameState): Lamp[] {
       add(cell.x - o.x + cell.w / 2, cell.y - o.y + 4, 22);
     } else {
       const { cx, foot } = floorAnchor(def, piece.col, piece.row);
-      add(cx - o.x, floorFurnitureBounds(piece.id, cx, foot).y - o.y + 4, 30, 1, LAMP, { x: cx - o.x, y: foot - o.y });
+      const bounds = floorFurnitureBounds(piece.id, cx, foot), wick = getGeneratedFurnitureAdapter()?.overlay(piece.id)?.points.wick;
+      add(wick ? bounds.x - o.x + wick.x : cx - o.x, bounds.y - o.y + (wick?.y ?? 4), 30, 1, LAMP, { x: cx - o.x, y: foot - o.y });
     }
   }
   return lamps;
@@ -201,6 +210,7 @@ export class CafeScene extends Phaser.Scene {
   private layers = new Map<string, Layer>();
   private metrics: PreviewMetrics | null = null;
   private generatedStaff: GeneratedStaffAdapter | null = null;
+  private generatedServers: GeneratedServerAdapter | null = null;
   private generatedCustomers: GeneratedCustomerAdapter | null = null;
   private generatedCats: GeneratedCatAdapter | null = null;
   /** Visual attachment only; weak actor keys cannot survive a companion reset. */
@@ -248,28 +258,47 @@ export class CafeScene extends Phaser.Scene {
       const key = generatedMainKey(id);
       if (this.textures.exists(key)) installGeneratedMainAsset(id, this.textures.get(key).getSourceImage() as HTMLImageElement);
     }
-    this.generatedStaff = createGeneratedStaffArt(generatedStaffManifest as GeneratedStaffManifest,
+    this.generatedStaff = createGeneratedStaffArt(runtimeCatalog.staffManifest as GeneratedStaffManifest,
       Object.fromEntries(GENERATED_STAFF_FRAME_IDS.map(id => [id, generatedMainSource(id)])));
     setGeneratedStaffAdapter(this.generatedStaff);
-    this.generatedCustomers = createGeneratedCustomerArt(generatedCustomerManifest as GeneratedCustomerManifest,
+    this.generatedServers = createGeneratedServerArt(runtimeCatalog.serverManifest as GeneratedServerManifest,
+      Object.fromEntries(GENERATED_SERVER_FRAME_IDS.map(id => [id, generatedMainSource(id)])));
+    setGeneratedServerAdapter(this.generatedServers);
+    this.generatedCustomers = createGeneratedCustomerArt(runtimeCatalog.customerManifests as GeneratedCustomerManifest[],
       Object.fromEntries(GENERATED_CUSTOMER_FRAME_IDS.map(id => [id, generatedMainSource(id)])));
     setGeneratedCustomerAdapter(this.generatedCustomers);
-    this.generatedCats = createGeneratedCatArt(generatedCatManifest as GeneratedCatManifest,
+    this.generatedCats = createGeneratedCatArt(runtimeCatalog.catManifests as GeneratedCatManifest[],
       Object.fromEntries(GENERATED_CAT_FRAME_IDS.map(id => [id, generatedMainSource(id)])));
     setGeneratedCatAdapter(this.generatedCats);
+    setGeneratedSignatureAdapter(createGeneratedSignatureArt(
+      Object.fromEntries(GENERATED_SIGNATURE_IDS.map(id => [id, generatedMainSource(generatedSignatureKey(id))]))));
     setGeneratedFoodAdapter(createGeneratedFoodArt(
-      Object.fromEntries(GENERATED_FOOD_IDS.map(id => [id, generatedMainSource(id)]))));
+      Object.fromEntries(GENERATED_FOOD_IDS.map(id => [id, generatedMainSource(id)])),
+      { rasterMetadata: runtimeCatalog.mainStaticMetadata }));
+    setGeneratedIngredientAdapter(createGeneratedIngredientArt(
+      Object.fromEntries(GENERATED_INGREDIENT_IDS.map(id => [id, generatedMainSource(`ingredient-${id}`)]))));
+    setGeneratedFurnitureAdapter(createGeneratedFurnitureArt(
+      Object.fromEntries(GENERATED_FURNITURE_IDS.map(id => [id, generatedMainSource(generatedFurnitureKey(id))]))));
+    setGeneratedDecorAdapter(createGeneratedDecorArt(
+      Object.fromEntries(GENERATED_DECOR_SOURCE_IDS.map(id => [id, generatedMainSource(`decor-${id}` as GeneratedMainId)]))));
+    setGeneratedMainEnvironmentAdapter(createGeneratedMainEnvironmentArt(
+      Object.fromEntries(GENERATED_MAIN_ENVIRONMENT_IDS.map(id => [id, generatedMainSource(generatedMainEnvironmentKey(id))]))));
+    setGeneratedTablewareAdapter(createGeneratedTablewareArt(
+      Object.fromEntries(GENERATED_TABLEWARE_IDS.map(id => [id, generatedMainSource(generatedTablewareKey(id))]))));
     // Published pose canvases own their pixels; full-resolution character sources
     // are no longer needed by either scene sprites or shared avatar previews.
     // Cleanup failure must never block an otherwise ready operating renderer.
     for (const pack of [
       { kind: 'staff' as const, adapter: this.generatedStaff },
+      { kind: 'server' as const, adapter: this.generatedServers },
       { kind: 'customer' as const, adapter: this.generatedCustomers },
       { kind: 'cat' as const, adapter: this.generatedCats },
     ]) {
       try { releaseGeneratedCharacterSources(pack, this.textures); }
       catch (error) { console.warn('Generated character source cleanup was deferred.', error); }
     }
+    try { releaseGeneratedStaticSources(this.textures); }
+    catch (error) { console.warn('Generated static source cleanup was deferred.', error); }
     this.metrics = new PreviewMetrics(this.game.canvas, window.location.href);
     addPixelFonts(this);
     // Canvas text does not trigger CSS font loading on its own. Load both scripts
@@ -312,8 +341,9 @@ export class CafeScene extends Phaser.Scene {
         // Puffs start as 2x2 and thin out to a single pixel.
         scale: { onEmit: () => 2, onUpdate: (_p, _k, t) => (t < 0.4 ? 2 : 1) },
       }),
-      heart: emitter(canvasKey(this.textures, heartSprite()), {
+      heart: emitter(canvasKey(this.textures, fineSpriteArt(heartSprite()).canvas), {
         lifespan: 1300,
+        scale: 1 / fineSpriteArt(heartSprite()).density,
         speedX: { min: -6, max: 6 },
         speedY: -18,
         alpha: { onEmit: () => 1, onUpdate: fade },
@@ -603,7 +633,8 @@ export class CafeScene extends Phaser.Scene {
       let sprite = Math.floor(time / 0.7) % 2 ? frames.swish : frames.idle;
       if (!petActive(cat) || time % 4 < 0.15) sprite = frames.blink;
       if (this.view.catHappy > 0 && this.view.catSpot.x === CAT_SPOTS[i].x) sprite = frames.happy;
-      this.image(sprite, o.x + spot.x - 8, o.y + spot.y - sprite.height + 2, DEPTH.cat);
+      const offset = this.generatedCats?.drawOffset(sprite);
+      this.image(sprite, o.x + spot.x - 8 + (offset?.x ?? 0), o.y + spot.y - sprite.height + 2 + (offset?.y ?? 0), DEPTH.cat);
     });
   }
 
@@ -664,7 +695,9 @@ export class CafeScene extends Phaser.Scene {
     this.sim.pass.forEach((plate, i) => {
       const slot = projectMainPlaneWorld(passSlot(i), MAIN_COUNTER_PLANE);
       const depth = DEPTH.counter + 0.5 + i * 0.01;
-      const dish = baked(this.textures, 'pass-plate', PASS_SLOT_W, 2, (ctx) => {
+      const tableware = getGeneratedTablewareAdapter();
+      const generatedDish = tableware?.sprite('shallow-plate');
+      const dish = generatedDish ?? baked(this.textures, 'pass-plate', PASS_SLOT_W, 2, (ctx) => {
         ctx.fillStyle = OUTLINE;
         ctx.fillRect(0, 1, PASS_SLOT_W, 1);
         ctx.fillStyle = '#fdf6ec';
@@ -672,7 +705,8 @@ export class CafeScene extends Phaser.Scene {
       });
       // Unoutlined icons, like the menu board's, so three fit side by side.
       const icon = itemIcon(plate.items[0], false);
-      this.image(icon, o.x + slot.x + Math.floor((PASS_SLOT_W - icon.width) / 2), o.y + slot.y - 2 - icon.height, depth);
+      const supportY = generatedDish ? tableware?.support('shallow-plate')?.y ?? 1 : 1;
+      this.image(icon, o.x + slot.x + Math.floor((PASS_SLOT_W - icon.width) / 2), o.y + slot.y - 3 + supportY - icon.height, depth);
       this.image(dish, o.x + slot.x, o.y + slot.y - 3, depth + 0.001);
     });
     const ringing = t - this.bellRang < 0.6;
@@ -812,18 +846,23 @@ export class CafeScene extends Phaser.Scene {
    * A floor piece baked with its shadow and glow, and where the texture's top-left
    * goes relative to the piece's center and feet.
    */
-  private floorTexture(id: string): { key: string; dx: number; dy: number } {
+  private floorTexture(id: string): { key: string; dx: number; dy: number; density: number } {
     const b = floorFurnitureBounds(id, 0, 0);
     // An odd-width sprite sits half a pixel left of center, as when painted directly.
     const half = Math.floor(b.w / 2);
-    const key = baked(this.textures, `floor-${id}`, b.w + PAD * 2, b.h + PAD * 2, (ctx) => paintFloorFurniture(ctx, id, PAD + half, PAD + b.h - 1));
-    return { key, dx: -PAD - half, dy: -PAD - b.h + 1 };
+    const density = getGeneratedFurnitureAdapter()?.sprite(id) ? 4 : 1;
+    const key = baked(this.textures, `floor-${id}-${density}x`, (b.w + PAD * 2) * density, (b.h + PAD * 2) * density, (ctx) => {
+      if (density > 1) ctx.scale(density, density);
+      ctx.imageSmoothingEnabled = false;
+      paintFloorFurniture(ctx, id, PAD + half, PAD + b.h - 1);
+    });
+    return { key, dx: -PAD - half, dy: -PAD - b.h + 1, density };
   }
 
   private floorPiece(id: string, cx: number, foot: number, depth: number): void {
-    const { key, dx, dy } = this.floorTexture(id);
+    const { key, dx, dy, density = 1 } = this.floorTexture(id);
     const painted = projectMainWorld({ x: cx, y: foot });
-    this.image(key, painted.x + dx, painted.y + dy, depth);
+    this.image(key, painted.x + dx, painted.y + dy, depth).setScale(1 / density);
   }
 
   /** Which way someone faces: where they're walking, or `standing` when still. */
@@ -855,15 +894,25 @@ export class CafeScene extends Phaser.Scene {
 
   /** A server, carrying a tray of orders at shoulder height, with a "!" when they answer the bell. */
   private drawServer(server: Server, depth: number): void {
-    const { x, y, bob } = this.drawWalker(server, character(server.look, 'server'), 'down', depth);
+    const fallback = character(server.look, 'server');
+    const selected = this.generatedServers?.resolve({role:'server',look:server.look},fallback);
+    const frames = selected?.frames ?? fallback;
+    const { x, y, bob } = this.drawWalker(server, frames, 'down', depth);
     if (server.plates.length > 0 && server.phase !== 'toPass') {
-      const tray = baked(this.textures, 'tray', 22, 3, paintServiceTray);
-      const ty = y - 17 - bob;
+      const tableware = getGeneratedTablewareAdapter();
+      const generatedTray = tableware?.sprite('shallow-tray');
+      const tray = generatedTray ?? baked(this.textures, 'tray', 22, 3, paintServiceTray);
+      const traySupportY = generatedTray ? tableware?.support('shallow-tray')?.y ?? 0 : 0;
+      // This authored figure carries at its hands, below the face. The old
+      // shoulder-height strip plus full menu icon hid the new server's head.
+      const ty = y - (selected?.generated ? 10 : 17) - bob;
       const n = server.plates.length;
       server.plates.forEach((plate, i) => {
         const icon = itemIcon(plate.items[0], false);
         const cx = x + Math.round((i - (n - 1) / 2) * 7);
-        this.image(icon, cx - Math.floor(icon.width / 2), ty - icon.height, depth + 0.002 + i * 0.0001);
+        const scale = selected?.generated ? Math.min(1, 8 / icon.width, 8 / icon.height) : 1;
+        const food = this.image(icon, cx - (selected?.generated ? icon.width * scale / 2 : Math.floor(icon.width / 2)), ty + traySupportY - icon.height * scale, depth + 0.002 + i * 0.0001);
+        if (selected?.generated) food.setScale(scale / fineSpriteArt(icon).density);
       });
       this.image(tray, x - 11, ty, depth + 0.003);
     }
@@ -947,6 +996,8 @@ export class CafeScene extends Phaser.Scene {
   }
 
   private cup(x: number, y: number, depth: number): void {
+    const generated = getGeneratedTablewareAdapter()?.sprite('empty-cup-saucer');
+    if (generated) { this.image(generated, x, y, depth); return; }
     const key = baked(this.textures, 'cup', 7, 7, paintServiceCup);
     this.image(key, x, y, depth);
   }
@@ -1229,8 +1280,8 @@ export class CafeScene extends Phaser.Scene {
     const x = Math.min(view.viewX + view.viewWidth - w - 2, Math.max(view.viewX + 2, presented.x - w / 2));
     const object = this.add
       .container(Math.round(x), y, [
-        this.add.bitmapText(0, 0, PIXEL_FONT_HALO, text).setTint(color(OUTLINE)),
-        this.add.bitmapText(0, 0, PIXEL_FONT, text).setTint(color(e.vip ? '#ff9fcb' : '#ffd95a')),
+        this.add.bitmapText(0, 0, PIXEL_FONT_HALO, text),
+        this.add.bitmapText(0, 0, e.vip ? PIXEL_FONT_VIP : PIXEL_FONT, text),
       ])
       .setDepth(DEPTH.floaters);
     const floater: Floater = { x: presented.x, pos: { y }, object };
@@ -1302,22 +1353,25 @@ export class CafeScene extends Phaser.Scene {
     const rect = cellRect(def.surface, ghost.col, ghost.row, def.w, def.h);
     if (def.surface === 'wall') {
       // Wall pieces are repainted while held so a clock keeps time.
-      const key = `ghost-wall-${ghost.id}`;
+      const density = getGeneratedFurnitureAdapter()?.sprite(ghost.id) ? 4 : 1;
+      const key = `ghost-wall-${ghost.id}-${density}x`;
       const w = def.w * CELL + PAD * 2;
       const h = def.h * CELL + PAD * 2;
-      const texture = (this.textures.exists(key) ? this.textures.get(key) : this.textures.createCanvas(key, w, h)) as Phaser.Textures.CanvasTexture;
-      texture.context.clearRect(0, 0, w, h);
+      const texture = (this.textures.exists(key) ? this.textures.get(key) : this.textures.createCanvas(key, w * density, h * density)) as Phaser.Textures.CanvasTexture;
+      texture.context.clearRect(0, 0, w * density, h * density);
+      if (density > 1) { texture.context.save(); texture.context.scale(density, density); }
       paintWallFurniture(texture.context, ghost.id, PAD, PAD, t, now);
+      if (density > 1) texture.context.restore();
       texture.refresh();
       const left = this.view.area === 'main' ? projectMainPlaneWorld(rect, MAIN_WALL_PLANE) : rect;
       const right = this.view.area === 'main' ? projectMainPlaneWorld({ x: rect.x + rect.w, y: rect.y }, MAIN_WALL_PLANE) : { x: rect.x + rect.w, y: rect.y };
       const scaleX = (right.x - left.x) / rect.w;
-      this.ghostPiece.setTexture(key).setScale(scaleX, 1).setPosition(left.x - PAD * scaleX, left.y - PAD);
+      this.ghostPiece.setTexture(key).setScale(scaleX / density, 1 / density).setPosition(left.x - PAD * scaleX, left.y - PAD);
     } else {
       const { cx, foot } = floorAnchor(def, ghost.col, ghost.row);
-      const { key, dx, dy } = this.floorTexture(ghost.id);
+      const { key, dx, dy, density = 1 } = this.floorTexture(ghost.id);
       const painted = projectMainWorld({ x: cx, y: foot });
-      this.ghostPiece.setTexture(key).setScale(1).setPosition(painted.x + dx, painted.y + dy);
+      this.ghostPiece.setTexture(key).setScale(1 / density).setPosition(painted.x + dx, painted.y + dy);
     }
     const fill = color(canPlace(state, ghost.id, ghost.col, ghost.row, tables, ghost.skip) && this.sim.furnitureSpaceClear(ghost.id, ghost.col, ghost.row) && this.view.catSpaceClear(ghost.id, ghost.col, ghost.row) ? GHOST_OK : GHOST_BAD);
     box.fillStyle(fill, 0.3 + Math.sin(t * 6) * 0.08);

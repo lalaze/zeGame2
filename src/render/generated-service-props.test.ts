@@ -1,7 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { DECOR } from '../game/decor';
 import { BACK_BAR, COUNTER, MAIN_CUPBOARDS, PASS, PASS_BELL, passSlot } from '../game/layout';
 import { createInitialState, type GameState } from '../game/state';
-import { clearGeneratedMainAssets, installGeneratedMainAsset, type GeneratedMainId } from './generated-main-art';
+import { clearGeneratedMainAssets, installGeneratedMainAsset, removeGeneratedMainSource, type GeneratedMainId } from './generated-main-art';
 import { MACHINE_X, MACHINE_Y, RoomPainter, type CounterCup } from './room-art';
 import { drawText } from './font';
 
@@ -44,6 +45,7 @@ function context() {
   return {ctx:ctx as unknown as CanvasRenderingContext2D,events,stack,translation:()=>[ctx.tx,ctx.ty],clip:()=>ctx.activeClip,smoothing:()=>ctx.imageSmoothingEnabled};
 }
 
+const COUNTER_FINISHES = ['counter_oak', 'counter_walnut', 'counter_marble', 'counter_pink', 'counter_gold'] as const;
 const serviceSizes={
   'service-machine':[488,433], 'service-cupboard':[536,389],
   'service-cups':[222,294], 'service-jars':[351,304], 'service-basket':[430,235],
@@ -69,10 +71,15 @@ beforeEach(()=>{
 });
 afterEach(()=>vi.unstubAllGlobals());
 
-describe('selected main-service bitmap integration',()=>{
+it('covers every available counter finish',()=>{
+  expect(COUNTER_FINISHES).toEqual(DECOR.filter(decor=>decor.slot==='counter').map(decor=>decor.id));
+});
+
+describe.each(COUNTER_FINISHES)('selected main-service bitmap integration (%s)',counter=>{
+  const render=(level=0,cups:CounterCup[]=[],time=0,density=2)=>renderCounter(level,cups,time,density,counter);
   it('draws the actual machine bitmap at uniform scale and the original foot, without a second legacy machine/wand',()=>{
     installServices();
-    const {events}=renderCounter();
+    const {events}=render();
     const draw=images(events).find(event=>event.source.assetId==='service-machine')!;
     expect(draw).toBeDefined();
     const [x,y,w,h]=draw.args;
@@ -85,11 +92,11 @@ describe('selected main-service bitmap integration',()=>{
     expect(at(events,MACHINE_X-2,MACHINE_Y+10,1,8)).toHaveLength(0);
   });
 
-  it('keeps missing-asset, low-density and alternative-finish machine fallbacks',()=>{
-    for(const mode of ['missing','low-density','other-finish']){
+  it('keeps missing-asset and low-density machine fallbacks',()=>{
+    for(const mode of ['missing','low-density']){
       clearGeneratedMainAssets();
       if(mode!=='missing')installServices();
-      const {events}=renderCounter(10,[],0,mode==='low-density'?1:2,mode==='other-finish'?'counter_marble':'counter_oak');
+      const {events}=render(10,[],0,mode==='low-density'?1:2);
       expect(images(events).some(event=>event.source.assetId?.startsWith('service-'))).toBe(false);
       const legacy=images(events).find(event=>event.source.legacy==='machine');
       expect(legacy).toBeDefined();
@@ -100,14 +107,14 @@ describe('selected main-service bitmap integration',()=>{
 
   it('retains live brew status, two brew streams and cup fill above the bitmap',()=>{
     installServices();
-    const idle=renderCounter(0,[],.3).events;
-    const working=renderCounter(0,[{x:80,fill:.75}],.3).events;
+    const idle=render(0,[],.3).events;
+    const working=render(0,[{x:80,fill:.75}],.3).events;
     expect(at(idle,MACHINE_X+24,MACHINE_Y+9,2,2,'#e2434b')).toHaveLength(1);
     expect(at(working,MACHINE_X+24,MACHINE_Y+9,2,2,'#7fe36a')).toHaveLength(1);
     for(const dx of [5,21]){
       expect(at(idle,MACHINE_X+dx,MACHINE_Y+18,1,2)).toHaveLength(0);
       expect(at(working,MACHINE_X+dx,MACHINE_Y+18,1,2,'#c28f5a')).toHaveLength(1);
-      expect(at(renderCounter(0,[{x:80,fill:.75}],.2).events,MACHINE_X+dx,MACHINE_Y+18,1,2,'#925b2f')).toHaveLength(1);
+      expect(at(render(0,[{x:80,fill:.75}],.2).events,MACHINE_X+dx,MACHINE_Y+18,1,2,'#925b2f')).toHaveLength(1);
     }
     const liveCup=at(working,90,COUNTER.top+2,5,3,'#6e3f24')[0];
     expect(liveCup).toBeDefined();
@@ -122,8 +129,8 @@ describe('selected main-service bitmap integration',()=>{
       [10,MACHINE_X+1,MACHINE_Y+4,1,8,'#e4ad6a'],
       [15,MACHINE_X+10,MACHINE_Y+10,7,2,'#c8a15e'],
     ] as const){
-      expect(at(renderCounter(level-1).events,x,y,w,h,color)).toHaveLength(0);
-      const {events}=renderCounter(level);
+      expect(at(render(level-1).events,x,y,w,h,color)).toHaveLength(0);
+      const {events}=render(level);
       const cue=at(events,x,y,w,h,color)[0];
       expect(cue).toBeDefined();
       expect(events.indexOf(cue)).toBeGreaterThan(events.findIndex(event=>event.kind==='image'&&event.source.assetId==='service-machine'));
@@ -133,7 +140,7 @@ describe('selected main-service bitmap integration',()=>{
   it('fits the low cupboard uniformly at the existing contact point and retains the carafe',()=>{
     installServices();
     const {ctx,events}=context();
-    new RoomPainter(ctx,2,false).drawServiceCupboards('counter_oak');
+    new RoomPainter(ctx,2,false).drawServiceCupboards(counter);
     const draw=images(events).find(event=>event.source.assetId==='service-cupboard')!;
     expect(draw).toBeDefined();
     const [x,y,w,h]=draw.args;
@@ -144,18 +151,18 @@ describe('selected main-service bitmap integration',()=>{
     expect(at(events,275,65,3,5,'#acc6af')).toHaveLength(1);
     clearGeneratedMainAssets();
     const fallback=context();
-    new RoomPainter(fallback.ctx,2,false).drawServiceCupboards('counter_oak');
+    new RoomPainter(fallback.ctx,2,false).drawServiceCupboards(counter);
     expect(at(fallback.events,MAIN_CUPBOARDS[0].x-1,80,42,27)).toHaveLength(1);
   });
 
   it('lowers only the generated cupboard attachments and restores the caller transform',()=>{
-    for(const mode of ['generated','missing','other-finish','low-density']){
+    for(const mode of ['generated','missing','low-density']){
       clearGeneratedMainAssets();
       if(mode!=='missing')installServices();
       const record=context(),offset=mode==='generated'?4:0;
       record.ctx.translate(3,7);
       new RoomPainter(record.ctx,mode==='low-density'?1:2,false)
-        .drawServiceCupboards(mode==='other-finish'?'counter_marble':'counter_oak');
+        .drawServiceCupboards(counter);
       // Carafe, tray and both glasses move together only after a bitmap succeeds.
       expect(at(record.events,275+3,61+7+offset,3,5,'#acc6af')).toHaveLength(1);
       expect(at(record.events,286+3,76+7+offset,17,2,'#674b31')).toHaveLength(1);
@@ -170,7 +177,7 @@ describe('selected main-service bitmap integration',()=>{
   it('uses actual cup/jar bitmaps at existing worktop anchors without stretching them',()=>{
     installServices();
     const {ctx,events}=context();
-    new RoomPainter(ctx,2,false).drawBackBar(createInitialState(0),'counter_oak');
+    new RoomPainter(ctx,2,false).drawBackBar(createInitialState(0),counter);
     const cups=images(events).filter(event=>event.source.assetId==='service-cups');
     const jars=images(events).find(event=>event.source.assetId==='service-jars')!;
     expect(cups).toHaveLength(3);expect(jars).toBeDefined();
@@ -192,9 +199,9 @@ describe('selected main-service bitmap integration',()=>{
     state.kitchen=true;state.onMenu=['espresso','roll','bagel'];
     state.items.roll=1;state.items.bagel=1;
     const before=JSON.stringify(state);
-    const bare=context();new RoomPainter(bare.ctx,2,false).drawBackBar(state,'counter_oak');
+    const bare=context();new RoomPainter(bare.ctx,2,false).drawBackBar(state,counter);
     installServices();
-    const loaded=context();new RoomPainter(loaded.ctx,2,false).drawBackBar(state,'counter_oak');
+    const loaded=context();new RoomPainter(loaded.ctx,2,false).drawBackBar(state,counter);
     const foods=(events:(Mark|Draw)[])=>images(events).filter(draw=>draw.source.itemId).map(draw=>({item:draw.source.itemId,args:draw.args}));
     expect(foods(loaded.events)).toEqual(foods(bare.events));
     expect(foods(loaded.events).map(food=>food.item)).toEqual(['roll','bagel']);
@@ -230,15 +237,15 @@ describe('selected main-service bitmap integration',()=>{
     installServices();
     const state=createInitialState(0);
     state.kitchen=true;state.items.roll=1;state.onMenu=['espresso'];
-    const empty=context();new RoomPainter(empty.ctx,2,false).drawBackBar(state,'counter_oak');
+    const empty=context();new RoomPainter(empty.ctx,2,false).drawBackBar(state,counter);
     expect(images(empty.events).some(draw=>draw.source.itemId)).toBe(false);
     expect(images(empty.events).some(draw=>draw.source.assetId==='service-basket')).toBe(false);
     state.onMenu=['espresso','roll'];
-    for(const mode of ['missing','other-finish','low-density']){
+    for(const mode of ['missing','low-density']){
       clearGeneratedMainAssets();if(mode!=='missing')installServices();
       const record=context();
-      new RoomPainter(record.ctx,mode==='low-density'?1:2,false).drawBackBar(state,mode==='other-finish'?'counter_marble':'counter_oak');
-      expect(images(record.events).some(draw=>draw.source.assetId==='service-basket')).toBe(false);
+      new RoomPainter(record.ctx,mode==='low-density'?1:2,false).drawBackBar(state,counter);
+      expect(images(record.events).some(draw=>draw.source.assetId?.startsWith('service-'))).toBe(false);
       expect(images(record.events).filter(draw=>draw.source.itemId).map(draw=>draw.source.itemId)).toEqual(['roll']);
       expect(record.clip()).toBeNull();expect(record.stack).toHaveLength(0);
     }
@@ -247,7 +254,7 @@ describe('selected main-service bitmap integration',()=>{
   it('fits the corrected pickup visible bbox at native aspect without altering the six slots or bell',()=>{
     installServices();
     const slots=Array.from({length:6},(_,i)=>passSlot(i)), bell={...PASS_BELL};
-    const {ctx,events}=renderCounter();
+    const {ctx,events}=render();
     const draw=images(events).find(event=>event.source.assetId==='service-pickup')!;
     expect(draw).toBeDefined();
     expect(draw.args.slice(0,4)).toEqual([8,8,1281,1102]);
@@ -267,11 +274,82 @@ describe('selected main-service bitmap integration',()=>{
     expect(at(events,PASS.x+1,PASS.top+21,38,3,'#39281f')).toHaveLength(0);
   });
 
-  it('retains the procedural pickup geometry on missing assets and alternative finishes',()=>{
-    for(const counter of ['counter_oak','counter_marble']){
+  it.each(Object.keys(serviceSizes) as (keyof typeof serviceSizes)[])(
+    'falls back only for the unavailable %s source',missing=>{
+      installServices();
+      const state=createInitialState(0);
+      state.kitchen=true;state.items.roll=1;state.onMenu=['espresso','roll'];
+      const paint=()=>{
+        const record=context(),painter=new RoomPainter(record.ctx,2,false);
+        painter.drawBackBar(state,counter);
+        painter.drawServiceCupboards(counter);
+        painter.drawCounter(state,counter,0,[]);
+        return record;
+      };
+      const complete=paint();
+      expect(removeGeneratedMainSource(missing)).toBe(true);
+      const partial=paint();
+      const serviceCounts={
+        'service-machine':1,'service-cupboard':MAIN_CUPBOARDS.length,
+        'service-cups':3,'service-jars':1,'service-basket':2,'service-pickup':1,
+      };
+      for(const [id,count] of Object.entries(serviceCounts)){
+        const matching=(record:ReturnType<typeof context>)=>images(record.events).filter(draw=>draw.source.assetId===id);
+        expect(matching(complete)).toHaveLength(count);
+        expect(matching(partial)).toEqual(id===missing?[]:matching(complete));
+      }
+      // An unavailable source restores real fallback artwork rather than a gap.
+      expect(fills(partial.events).length).toBeGreaterThan(fills(complete.events).length);
+      expect(images(partial.events).filter(draw=>draw.source.itemId).map(draw=>draw.source.itemId)).toEqual(['roll']);
+      expect(partial.clip()).toBeNull();expect(partial.stack).toHaveLength(0);
+    },
+  );
+
+  it.each([false,true])('keeps pastry stock live across prep, open and closing (generated display: %s)',generatedDisplay=>{
+    installServices();
+    if(generatedDisplay)installGeneratedMainAsset('display',{assetId:'display',width:1941,height:521} as Image);
+    const state=createInitialState(0),record=context(),painter=new RoomPainter(record.ctx,2,false);
+    state.kitchen=true;state.items.roll=1;state.onMenu=['espresso','roll'];
+    let fixedProps:Draw[]|undefined;
+    for(const [phase,planned,remaining,count] of [
+      ['prep',8,0,2],['prep',0,8,0],['open',8,0,0],['open',8,1,1],
+      ['open',0,8,2],['closing',8,0,0],['closing',0,8,2],
+    ] as const){
+      state.phase=phase;state.bakePlan.roll=planned;state.shelf.roll=remaining;
+      const before=JSON.stringify(state);
+      record.events.length=0;
+      painter.drawCounter(state,counter,0,[]);
+      expect(images(record.events).filter(draw=>draw.source.itemId==='roll')).toHaveLength(count);
+      const props=images(record.events).filter(draw=>draw.source.assetId?.startsWith('service-'));
+      expect(props.map(draw=>draw.source.assetId)).toEqual(['service-machine','service-pickup']);
+      if(fixedProps)expect(props).toEqual(fixedProps);else fixedProps=props;
+      expect(JSON.stringify(state)).toBe(before);
+      expect(record.clip()).toBeNull();expect(record.stack).toHaveLength(0);
+    }
+  });
+
+  it('refreshes basket contents from the current menu without retaining removed bread',()=>{
+    installServices();
+    const state=createInitialState(0),record=context(),painter=new RoomPainter(record.ctx,2,false);
+    state.kitchen=true;state.items.roll=1;state.items.bagel=1;
+    for(const breads of [['roll','bagel'],['bagel'],[]] as const){
+      state.onMenu=['espresso',...breads];
+      const before=JSON.stringify(state);
+      record.events.length=0;
+      painter.drawBackBar(state,counter);
+      expect(images(record.events).filter(draw=>draw.source.itemId).map(draw=>draw.source.itemId)).toEqual(breads);
+      expect(images(record.events).filter(draw=>draw.source.assetId==='service-basket')).toHaveLength(breads.length?2:0);
+      expect(JSON.stringify(state)).toBe(before);
+      expect(record.clip()).toBeNull();expect(record.stack).toHaveLength(0);
+    }
+  });
+
+  it('retains the procedural pickup geometry on missing assets, low density and invalid padding',()=>{
+    for(const mode of ['missing','low-density','invalid-padding']){
       clearGeneratedMainAssets();
-      if(counter==='counter_marble')installServices();
-      const {events}=renderCounter(0,[],0,2,counter);
+      if(mode!=='missing')installServices();
+      if(mode==='invalid-padding')installGeneratedMainAsset('service-pickup',{assetId:'service-pickup',width:16,height:16} as Image);
+      const {events}=render(0,[],0,mode==='low-density'?1:2);
       expect(images(events).some(draw=>draw.source.assetId==='service-pickup')).toBe(false);
       expect(at(events,PASS.x+1,PASS.top+21,38,3,'#39281f')).toHaveLength(1);
       expect(at(events,PASS.x-1,COUNTER.top-2,PASS.w+2,3,'#39281f')).toHaveLength(1);

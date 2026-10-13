@@ -1,12 +1,24 @@
+import { setGeneratedSignatureAdapter, GENERATED_SIGNATURE_ASSETS } from './generated-signature-art';
+import type { GeneratedFurnitureAdapter } from './generated-furniture-art';
+import type { GeneratedMainEnvironmentAdapter } from './generated-main-environment-art';
+import type { GeneratedTablewareAdapter } from './generated-tableware-art';
+import type { GeneratedServerAdapter } from './generated-server-art';
+import type { GeneratedDecorAdapter } from './generated-decor-art';
+import type { GeneratedIngredientAdapter } from './generated-ingredient-art';
+import runtimeCatalog from '../../assets/generated/runtime-catalog-v1/runtime.json';
 import type { GeneratedStaffAdapter } from './generated-staff-art';
 import type { GeneratedCustomerAdapter } from './generated-customer-art';
 import type { GeneratedCatAdapter } from './generated-cat-art';
 import type { GeneratedFoodAdapter } from './generated-food-art';
+import { generatedRasterGeometry, type GeneratedRasterMetadata } from './generated-raster-geometry';
 
 /** Shared ready adapter keeps avatar previews and world rendering on one identity. */
 let staffAdapter: GeneratedStaffAdapter | null = null;
 export const getGeneratedStaffAdapter = (): GeneratedStaffAdapter | null => staffAdapter;
 export function setGeneratedStaffAdapter(adapter: GeneratedStaffAdapter | null): void { staffAdapter = adapter; }
+let serverAdapter: GeneratedServerAdapter | null = null;
+export const getGeneratedServerAdapter = (): GeneratedServerAdapter | null => serverAdapter;
+export function setGeneratedServerAdapter(adapter: GeneratedServerAdapter | null): void { serverAdapter = adapter; }
 let customerAdapter: GeneratedCustomerAdapter | null = null;
 export const getGeneratedCustomerAdapter = (): GeneratedCustomerAdapter | null => customerAdapter;
 export function setGeneratedCustomerAdapter(adapter: GeneratedCustomerAdapter | null): void { customerAdapter = adapter; }
@@ -18,70 +30,34 @@ let foodAdapter: GeneratedFoodAdapter | null = null;
 export const getGeneratedFoodAdapter = (): GeneratedFoodAdapter | null => foodAdapter;
 export function setGeneratedFoodAdapter(adapter: GeneratedFoodAdapter | null): void { foodAdapter = adapter; }
 
+let ingredientAdapter: GeneratedIngredientAdapter | null = null;
+export const getGeneratedIngredientAdapter = (): GeneratedIngredientAdapter | null => ingredientAdapter;
+export function setGeneratedIngredientAdapter(adapter: GeneratedIngredientAdapter | null): void { ingredientAdapter = adapter; }
+
+let furnitureAdapter: GeneratedFurnitureAdapter | null = null;
+export const getGeneratedFurnitureAdapter = (): GeneratedFurnitureAdapter | null => furnitureAdapter;
+export function setGeneratedFurnitureAdapter(adapter: GeneratedFurnitureAdapter | null): void { furnitureAdapter = adapter; }
+let decorAdapter: GeneratedDecorAdapter | null = null;
+export const getGeneratedDecorAdapter = (): GeneratedDecorAdapter | null => decorAdapter;
+export function setGeneratedDecorAdapter(adapter: GeneratedDecorAdapter | null): void { decorAdapter = adapter; }
+let environmentAdapter: GeneratedMainEnvironmentAdapter | null = null;
+export const getGeneratedMainEnvironmentAdapter = (): GeneratedMainEnvironmentAdapter | null => environmentAdapter;
+export function setGeneratedMainEnvironmentAdapter(adapter: GeneratedMainEnvironmentAdapter | null): void { environmentAdapter = adapter; }
+let tablewareAdapter: GeneratedTablewareAdapter | null = null;
+export const getGeneratedTablewareAdapter = (): GeneratedTablewareAdapter | null => tablewareAdapter;
+export function setGeneratedTablewareAdapter(adapter: GeneratedTablewareAdapter | null): void { tablewareAdapter = adapter; }
+
 /** Original image-generated bitmaps selected by the user; no procedural substitution. */
 export const GENERATED_MAIN_ASSETS = {
+  ...runtimeCatalog.assets,
+  ...GENERATED_SIGNATURE_ASSETS,
   'cabinet-top': 'main-v1/cabinet-top.png',
   'cabinet-front': 'main-v1/cabinet-front.png',
   plant: 'main-v1/plant.png',
-  vine: 'main-v1/vine.png',
   table: 'main-v2/table-no-vase.png',
   'chair-right': 'main-v2/chair-facing-right.png',
   'chair-left': 'main-v2/chair-facing-left.png',
   vase: 'main-v2/flower-vase.png',
-  croissant: 'main-v2/croissant.png',
-  cake: 'main-v2/strawberry-cake.png',
-  display: 'main-v2/empty-wide-display.png',
-  espresso: 'menu-v1/espresso.png',
-  latte: 'menu-v1/latte.png',
-  eggtart: 'menu-v1/eggtart.png',
-  'barista-down-stand': 'staff-v2/owner-down-stand.png',
-  'barista-down-stepA': 'staff-v2/owner-down-stepA.png',
-  'barista-down-stepB': 'staff-v2/owner-down-stepB.png',
-  'barista-up-stand': 'staff-v2/owner-up-stand.png',
-  'barista-up-stepA': 'staff-v2/owner-up-stepA.png',
-  'barista-up-stepB': 'staff-v2/owner-up-stepB.png',
-  'barista-right-stand': 'staff-v2/owner-right-stand.png',
-  'barista-right-stepA': 'staff-v2/owner-right-stepA.png',
-  'barista-right-stepB': 'staff-v2/owner-right-stepB.png',
-  'mina-down-stand': 'customer-0-v1/mina-down-stand.png',
-  'mina-down-stepA': 'customer-0-v1/mina-down-stepA.png',
-  'mina-down-stepB': 'customer-0-v1/mina-down-stepB.png',
-  'mina-up-stand': 'customer-0-v1/mina-up-stand.png',
-  'mina-up-stepA': 'customer-0-v1/mina-up-stepA.png',
-  'mina-up-stepB': 'customer-0-v1/mina-up-stepB.png',
-  'mina-right-stand': 'customer-0-v1/mina-right-stand.png',
-  'mina-right-stepA': 'customer-0-v1/mina-right-stepA.png',
-  'mina-right-stepB': 'customer-0-v1/mina-right-stepB.png',
-  'mina-right-sit': 'customer-0-v1/mina-right-sit.png',
-  'mina-right-sitPetA': 'customer-0-v1/mina-right-sitPetA.png',
-  'mina-right-sitPetB': 'customer-0-v1/mina-right-sitPetB.png',
-  'mina-left-sit': 'customer-0-v1/mina-left-sit.png',
-  'mina-left-sitPetA': 'customer-0-v1/mina-left-sitPetA.png',
-  'mina-left-sitPetB': 'customer-0-v1/mina-left-sitPetB.png',
-
-  'service-pickup': 'service-v1/pickup-hutch-two-tier-v2.png',
-  'service-machine': 'service-v1/espresso-machine.png',
-  'service-cupboard': 'service-v1/low-service-cupboard.png',
-  'service-cups': 'service-v1/cups-stack.png',
-  'service-jars': 'service-v1/glass-jars-pair.png',
-  'service-basket': 'service-v1/empty-wicker-basket.png',
-  'wall-window': 'wall-v1/window-gingham-frame.png',
-  'wall-board': 'wall-v1/blank-chalkboard.png',
-  'wall-lamp': 'wall-v1/brass-wall-lamp.png',
-  'siamese-idle': 'cat-siamese-v1/siamese-idle.png',
-  'siamese-lookUp': 'cat-siamese-v1/siamese-lookUp.png',
-  'siamese-walkA': 'cat-siamese-v1/siamese-walkA.png',
-  'siamese-walkB': 'cat-siamese-v1/siamese-walkB.png',
-  'siamese-swish': 'cat-siamese-v1/siamese-swish.png',
-  'siamese-blink': 'cat-siamese-v1/siamese-blink.png',
-  'siamese-happy': 'cat-siamese-v1/siamese-happy.png',
-  'siamese-sleep': 'cat-siamese-v1/siamese-sleep.png',
-  'siamese-groomA': 'cat-siamese-v1/siamese-groomA.png',
-  'siamese-groomB': 'cat-siamese-v1/siamese-groomB.png',
-  'siamese-stretch': 'cat-siamese-v1/siamese-stretch.png',
-  'siamese-watch': 'cat-siamese-v1/siamese-watch.png',
-  'siamese-nuzzleA': 'cat-siamese-v1/siamese-nuzzleA.png',
-  'siamese-nuzzleB': 'cat-siamese-v1/siamese-nuzzleB.png',
 
 } as const;
 export type GeneratedMainId = keyof typeof GENERATED_MAIN_ASSETS;
@@ -90,24 +66,39 @@ const sources = new Map<GeneratedMainId, Source>();
 /** New Scene load must not inherit successful images from an older load. */
 export function clearGeneratedMainAssets(): void {
   sources.clear();
+  setGeneratedSignatureAdapter(null);
   setGeneratedStaffAdapter(null);
+  setGeneratedServerAdapter(null);
   setGeneratedCustomerAdapter(null);
   setGeneratedCatAdapter(null);
   setGeneratedFoodAdapter(null);
+  setGeneratedIngredientAdapter(null);
+  setGeneratedFurnitureAdapter(null);
+  setGeneratedDecorAdapter(null);
+  setGeneratedMainEnvironmentAdapter(null);
+  setGeneratedTablewareAdapter(null);
 }
 export const generatedMainKey = (id: GeneratedMainId) => `generated-main:${id}`;
 export function installGeneratedMainAsset(id: GeneratedMainId, source: Source): void {
   if (source.width > 0 && source.height > 0) sources.set(id, source);
 }
 export const generatedMainSource = (id: GeneratedMainId): Source | undefined => sources.get(id);
+const mainStaticMetadata: Readonly<Partial<Record<GeneratedMainId, GeneratedRasterMetadata>>> = runtimeCatalog.mainStaticMetadata;
+/** Original-coordinate geometry, excluding only newly introduced trailing export padding. */
+export function generatedMainRaster(id: GeneratedMainId) {
+  const source = sources.get(id);
+  return source ? generatedRasterGeometry(source, mainStaticMetadata[id]) : null;
+}
 /** Release one original bitmap without invalidating its already-baked shared adapter. */
 export const removeGeneratedMainSource = (id: GeneratedMainId): boolean => sources.delete(id);
 /** Nearest-neighbor source sampling preserves the selected bitmap rather than smoothing it. */
 export function paintGeneratedMain(ctx: CanvasRenderingContext2D, id: GeneratedMainId, x: number, y: number, w: number, h: number): boolean {
-  const source = sources.get(id);
-  if (!source || w <= 0 || h <= 0) return false;
+  const raster = generatedMainRaster(id);
+  if (!raster || w <= 0 || h <= 0) return false;
   ctx.save(); ctx.imageSmoothingEnabled = false;
-  ctx.drawImage(source, x, y, w, h); ctx.restore();
+  if (raster.sourceScale === 1) ctx.drawImage(raster.source, x, y, w, h);
+  else ctx.drawImage(raster.source, 0, 0, raster.contentWidth, raster.contentHeight, x, y, w, h);
+  ctx.restore();
   return true;
 }
 /** Repeat real cabinet modules at their own aspect, rather than squashing a short cabinet. */

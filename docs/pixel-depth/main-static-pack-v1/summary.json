@@ -1,0 +1,43 @@
+{
+  "publicPngCount": 823,
+  "publicPngBytesBefore": 25662684,
+  "publicPngBytesAfter": 19935246,
+  "bytesSaved": 5727438,
+  "publicDecodedRgbaBytesBefore": 69463216,
+  "publicDecodedRgbaBytesAfter": 49958616,
+  "staticOriginalBytes": 6229961,
+  "staticPackedBytes": 502523,
+  "staticOriginalDecodedRgbaBytes": 20770856,
+  "staticPackedDecodedRgbaBytes": 1266256,
+  "unchangedPriorPublicPngCount": 807,
+  "unchangedGameFileCount": 71,
+  "deterministicExportFilesVerified": 843,
+  "catalogImageCount": 816,
+  "catalogBytes": 18597817,
+  "keptOriginalImageCount": 7,
+  "keptOriginalImageBytes": 1337429,
+  "exportModesVerified": [
+    "--main-static-only",
+    "--signature-only",
+    "--original-actors-only",
+    "full"
+  ],
+  "ids": [
+    "vine",
+    "display",
+    "espresso",
+    "latte",
+    "eggtart",
+    "croissant",
+    "cake",
+    "service-pickup",
+    "service-machine",
+    "service-cupboard",
+    "service-cups",
+    "service-jars",
+    "service-basket",
+    "wall-window",
+    "wall-board",
+    "wall-lamp"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "frames": 9,
+  "uniqueImages": 9,
+  "exactRGBAcrop": true,
+  "transparent": true,
+  "opaqueBodyNotClipped": true,
+  "edgeMax": 1,
+  "visualChecks": [
+    "short dark-brown hair and light skin stable",
+    "cream shirt blue-grey apron/pants",
+    "bowtie only on front and right neck",
+    "all three backs show crossed straps/waist tie and no neck bowtie",
+    "distinct stand and opposing step poses",
+    "same source scale all nine"
+  ],
+  "runtimeValidated": false
+}
