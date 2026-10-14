@@ -1,3 +1,6 @@
+import { SEATING_LAYOUT, seatingFurniture, seatingGeometry } from '../cozy-seating-art';
+import { cozySeatedGeometry } from '../cozy-character-art';
+import { cozyCafeSprite } from '../cozy-cafe-art';
 import { createGeneratedSignatureArt, setGeneratedSignatureAdapter, GENERATED_SIGNATURE_IDS, generatedSignatureKey } from '../generated-signature-art';
 import { releaseGeneratedStaticSources } from '../generated-static-sources';
 import { createGeneratedServerArt, GENERATED_SERVER_FRAME_IDS, type GeneratedServerAdapter, type GeneratedServerManifest } from '../generated-server-art';
@@ -56,6 +59,7 @@ import { bindCanvasTaps, type CanvasTaps } from './canvas-taps';
 import { MAIN_COUNTER_PLANE, MAIN_WALL_PLANE, projectMainCellOutline, projectMainAttachment, projectMainPlaneWorld, projectMainWorld } from '../main-pixel-presentation';
 import type { PixelPoint } from '../pixel-projection';
 import { placementMaskKey } from '../placement-mask-cache';
+import { preloadReferenceCharacters, referenceCharacterContacts, referenceCharacterOffset } from '../reference-character-art';
 
 /** Called every frame before the scene is drawn: runs the simulation and the page around it. */
 export interface CafeHooks {
@@ -250,13 +254,37 @@ export class CafeScene extends Phaser.Scene {
   }
 
   private loadingFailed = false;
+  private initialized = false;
+  private loadGeneration = 0;
+  private referenceCharactersReady: Promise<void> | null = null;
 
   preload(): void {
     clearGeneratedMainAssets();
     this.loadingFailed = false;
+    this.initialized = false;
+    const generation = this.loadGeneration = (this.loadGeneration ?? 0) + 1;
+    const cancelLoading = () => {
+      this.loadGeneration++;
+      this.initialized = false;
+      this.events.off(Phaser.Scenes.Events.SHUTDOWN, cancelLoading);
+      this.events.off(Phaser.Scenes.Events.DESTROY, cancelLoading);
+    };
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, cancelLoading);
+    this.events.once(Phaser.Scenes.Events.DESTROY, cancelLoading);
     let loaded = 0;
-    const total = Object.keys(GENERATED_MAIN_ASSETS).length;
+    // The new cast is five decoded atlases, published together as one family.
+    const mainAssets = Object.entries(GENERATED_MAIN_ASSETS).filter(([id]) => !/^(?:barista|server|mina|customer)-/.test(id));
+    const total = mainAssets.length + 5;
     this.hooks.loadingProgress?.(loaded, total);
+    this.referenceCharactersReady = preloadReferenceCharacters().then(() => {
+      if (generation !== this.loadGeneration || this.loadingFailed) return;
+      loaded += 5;
+      this.hooks.loadingProgress?.(loaded, total);
+    }, error => {
+      if (generation !== this.loadGeneration || this.loadingFailed) return;
+      this.loadingFailed = true;
+      this.onLoadError(error instanceof Error ? error : new Error(String(error)));
+    });
     this.load.on('filecomplete', () => {
       if (!this.loadingFailed) this.hooks.loadingProgress?.(++loaded, total);
     });
@@ -264,18 +292,25 @@ export class CafeScene extends Phaser.Scene {
       this.loadingFailed = true;
       this.onLoadError(new Error(`Image failed to load: ${file.key}`));
     });
-    for (const [id, file] of Object.entries(GENERATED_MAIN_ASSETS)) {
+    for (const [id, file] of mainAssets) {
       this.load.image(generatedMainKey(id as GeneratedMainId), `${import.meta.env.BASE_URL}art/generated/${file}`);
     }
   }
 
   create(): void {
     if (this.loadingFailed) return;
-    try { this.createCafe(); }
-    catch (error) {
+    const generation = this.loadGeneration;
+    // Phaser does not await async create methods. Keep its update loop gated
+    // until all human art has decoded and the scene is fully initialized.
+    void (this.referenceCharactersReady ?? preloadReferenceCharacters()).then(() => {
+      if (generation !== this.loadGeneration || this.loadingFailed) return;
+      this.createCafe();
+      this.initialized = true;
+    }).catch(error => {
+      if (generation !== this.loadGeneration || this.loadingFailed) return;
       this.loadingFailed = true;
       this.onLoadError(error instanceof Error ? error : new Error(String(error)));
-    }
+    });
   }
 
   private createCafe(): void {
@@ -417,7 +452,7 @@ export class CafeScene extends Phaser.Scene {
   }
 
   update(time: number, delta: number): void {
-    if (this.loadingFailed) return;
+    if (this.loadingFailed || !this.initialized) return;
     const measuredAt = this.metrics?.enabled ? performance.now() : 0;
     const dt = Math.min(0.25, Math.max(0, delta / 1000));
     this.hooks.tick(dt);
@@ -673,12 +708,7 @@ export class CafeScene extends Phaser.Scene {
       // The first spot behind the counter is always the owner.
       const role = i === 0 && state.profile ? 'owner' : 'barista';
       const look = role === 'owner' ? state.profile!.look : b.look;
-      const fallback = character(look, role);
-      const selected = this.generatedStaff?.resolve({ role, look }, fallback);
-      const frames = selected?.frames ?? fallback;
-      // The selected painting has a slimmer silhouette than the legacy chibi.
-      // Enlarge uniformly around its fixed foot, never widen/squash its face.
-      const visualScale = selected?.generated ? 1.18 : 1;
+      const frames = character(look, role);
       const dir = frames[pose.facing];
       let sprite = dir[0];
       let bob = 0;
@@ -687,9 +717,8 @@ export class CafeScene extends Phaser.Scene {
       else if (!brewing) bob = Math.floor(t * 1.2 + i * 0.7) % 2;
       // Nearer the counter draws in front, but everyone in the bar stays behind it.
       const depth = DEPTH.baristas + pose.y * 0.01 + i * 0.001;
-      const top = o.y + pose.y - (CHAR_H - 1) * visualScale;
-      const actor = this.image(sprite, x - 9 * visualScale, top + bob, depth);
-      if (selected?.generated) actor.setScale(visualScale / fineSpriteArt(sprite).density);
+      const top = o.y + pose.y - (CHAR_H - 1);
+      this.image(sprite, x - 9, top + bob, depth);
       // Carrying the order forward from the back bar.
       if (brewing && pose.facing === 'down' && pose.walking) this.cup(x - 3, o.y + pose.y - 10, depth + 0.0005);
       if (brewing) {
@@ -847,8 +876,8 @@ export class CafeScene extends Phaser.Scene {
     // During approach/nuzzle, anticipate Pet A. The response itself chooses the
     // same A/B/reduced-motion frame as the seated renderer below.
     const pose = this.seatedCustomerPose(index, side, guest, 0, cat);
-    const contact = this.generatedCustomers?.contactPoints(pose.sprite)?.petContact;
-    if (!contact) return painted; // Exact legacy identities and unpaired cats stay put.
+    const contact = referenceCharacterContacts(pose.sprite)?.petContact;
+    if (!contact) return painted; // Unpaired or unavailable hand contacts stay put.
     const raised = this.residentFrames(cat.id).lookUp;
     // CAT_BASE's forehead is (6,3), including pixelSprite's one-pixel border.
     // Upright cats face the seat: the right chair mirrors that same crown point.
@@ -914,31 +943,27 @@ export class CafeScene extends Phaser.Scene {
     const y = Math.round(painted.y);
     this.shadow(x, y, 12, depth);
     const bob = walking && idx !== 0 ? 1 : 0;
-    this.image(frames[facing][idx], x - 9, y - (CHAR_H - 1) - bob, depth + 0.001);
+    const frame=frames[facing][idx],foot=referenceCharacterContacts(frame)?.foot;
+    this.image(frame, x - (foot?.x??9), y - (foot?.y??CHAR_H-1) - bob, depth + 0.001);
     return { x, y, bob, facing };
   }
 
   /** A server, carrying a tray of orders at shoulder height, with a "!" when they answer the bell. */
   private drawServer(server: Server, depth: number): void {
-    const fallback = character(server.look, 'server');
-    const selected = this.generatedServers?.resolve({role:'server',look:server.look},fallback);
-    const frames = selected?.frames ?? fallback;
+    const frames = character(server.look, 'server');
     const { x, y, bob } = this.drawWalker(server, frames, 'down', depth);
     if (server.plates.length > 0 && server.phase !== 'toPass') {
       const tableware = getGeneratedTablewareAdapter();
       const generatedTray = tableware?.sprite('shallow-tray');
       const tray = generatedTray ?? baked(this.textures, 'tray', 22, 3, paintServiceTray);
       const traySupportY = generatedTray ? tableware?.support('shallow-tray')?.y ?? 0 : 0;
-      // This authored figure carries at its hands, below the face. The old
-      // shoulder-height strip plus full menu icon hid the new server's head.
-      const ty = y - (selected?.generated ? 10 : 17) - bob;
+      const ty = y - 10 - bob;
       const n = server.plates.length;
       server.plates.forEach((plate, i) => {
         const icon = itemIcon(plate.items[0], false);
         const cx = x + Math.round((i - (n - 1) / 2) * 7);
-        const scale = selected?.generated ? Math.min(1, 8 / icon.width, 8 / icon.height) : 1;
-        const food = this.image(icon, cx - (selected?.generated ? icon.width * scale / 2 : Math.floor(icon.width / 2)), ty + traySupportY - icon.height * scale, depth + 0.002 + i * 0.0001);
-        if (selected?.generated) food.setScale(scale / fineSpriteArt(icon).density);
+        const scale = Math.min(1, 8 / Math.max(icon.width, icon.height));
+        this.image(icon, cx - icon.width * scale / 2, ty + traySupportY - icon.height * scale, depth + 0.002 + i * 0.0001).setScale(scale / fineSpriteArt(icon).density);
       });
       this.image(tray, x - 11, ty, depth + 0.003);
     }
@@ -1029,8 +1054,7 @@ export class CafeScene extends Phaser.Scene {
   }
 
   private customerFrames(c: Customer): CharacterFrames {
-    const fallback = character(c.look, 'customer', c.appearanceId);
-    return this.generatedCustomers?.resolve({ role: 'customer', appearanceId: c.appearanceId, look: c.look }, fallback).frames ?? fallback;
+    return character(c.look, 'customer', c.appearanceId);
   }
 
   /** One pose/anchor calculation shared by the sitter and its generated hand contact. */
@@ -1045,7 +1069,19 @@ export class CafeScene extends Phaser.Scene {
     const petFrame = pair?.interaction?.phase === 'response' && !still ? Math.floor(pair.interaction.elapsed / 0.65) % 2 : 0;
     const sprite = pair ? (side === 0 ? frames.sitPetRight : frames.sitPetLeft)[petFrame] : side === 0 ? frames.sitRight : frames.sitLeft;
     const bob = pair || still ? 0 : Math.floor(t * 1.1 + c.id) % 3 === 0 ? 1 : 0;
-    const offset = this.generatedCustomers?.drawOffset(sprite) ?? { x: 0, y: 0 };
+    const offset = referenceCharacterOffset(sprite);
+    const ensemble = seatingGeometry(sprite);
+    if(ensemble)return {sprite,pair,x:table.x+(side===0?-SEATING_LAYOUT.seatX:SEATING_LAYOUT.seatX)-ensemble.floor.x,
+      y:table.y+SEATING_LAYOUT.floorY-ensemble.floor.y};
+    // Existing cast keeps its character art but shares the new chair's cushion.
+    if(seatingFurniture('table')){
+      const hip=referenceCharacterContacts(sprite)?.seatContact;
+      if(hip)return {sprite,pair,x:table.x+(side===0?-SEATING_LAYOUT.seatX:SEATING_LAYOUT.seatX)-hip.x,
+        y:table.y-13-hip.y};
+    }
+    const cozy = cozySeatedGeometry(sprite);
+    if(cozy) return {sprite,pair,x:logicalSeat.x + table.x-logicalTable.x+(side===0?-4:4)-cozy.hip.x,
+      y:logicalSeat.y-10-cozy.hip.y};
     return { sprite, pair, x: logicalSeat.x + table.x - logicalTable.x - 9 + offset.x,
       y: logicalSeat.y - (CHAR_H + 5) + bob + offset.y };
   }
@@ -1063,7 +1099,10 @@ export class CafeScene extends Phaser.Scene {
     const tableShift = table.x - logicalTable.x;
     let d = depth;
     const next = () => (d += 0.001);
-    this.shadow(table.x, table.y, 30, next(), 0.2);
+    const ensembleTable = seatingFurniture('table');
+    const cozyTable = ensembleTable ?? (index < MAX_TABLES ? cozyCafeSprite('table') : undefined);
+    this.shadow(table.x + (cozyTable ? 2 : 0), table.y + 1, cozyTable ? 38 : 30, next(), cozyTable ? 0.25 : 0.2);
+    if (cozyTable) this.shadow(table.x, table.y, 17, next(), 0.34);
     const diners = ([0, 1] as const).map((side) => {
       const id = this.sim.seats[index * 2 + side];
       const c = id != null ? this.sim.customers.find((cc) => cc.id === id) : undefined;
@@ -1073,25 +1112,31 @@ export class CafeScene extends Phaser.Scene {
     // Chairs (backs on the outside) and anyone sitting in them.
     for (const side of [0, 1] as const) {
       const logicalSeat = seatSpot(index, side);
-      const s = { ...logicalSeat, x: logicalSeat.x + tableShift };
-      this.shadow(s.x, s.y, 14, next(), 0.15);
+      const s = ensembleTable ? {x:table.x+(side===0?-SEATING_LAYOUT.seatX:SEATING_LAYOUT.seatX),y:table.y+SEATING_LAYOUT.floorY} : { ...logicalSeat, x: logicalSeat.x + tableShift };
+      this.shadow(s.x + 1, s.y + 1, cozyTable ? 18 : 14, next(), cozyTable ? 0.23 : 0.15);
       const chair = side === 0 ? CHAIR_RIGHT() : CHAIR_LEFT();
       const chairDepth = next();
-      if (!this.generatedPicture(side === 0 ? 'chair-right' : 'chair-left', side === 0 ? s.x - 10 : s.x - 8, s.y - 25, 18, 25, chairDepth)) {
-        this.image(chair, side === 0 ? s.x - 9 : s.x - chair.width + 9, s.y - chair.height + 1, chairDepth);
-      }
       const c = diners[side];
-      if (c) {
-        const { sprite, x, y } = sitter(side, c);
-        this.image(sprite, x, y, next());
+      const pose = c ? sitter(side,c) : undefined;
+      const embeddedChair = pose && seatingGeometry(pose.sprite);
+      const ensembleChair = ensembleTable ? seatingFurniture('chair',side===1) : undefined;
+      const cozyChair = cozyTable ? cozyCafeSprite('chair', side === 1) : undefined;
+      if(!embeddedChair){
+        if(ensembleChair)this.image(ensembleChair,s.x-(side===0?13:21),s.y-41,chairDepth);
+        else if (cozyChair) this.image(cozyChair, side === 0 ? s.x - 12 : s.x - 8, s.y - cozyChair.height + 1, chairDepth);
+        else if (!this.generatedPicture(side === 0 ? 'chair-right' : 'chair-left', side === 0 ? s.x - 10 : s.x - 8, s.y - 25, 18, 25, chairDepth)) {
+          this.image(chair, side === 0 ? s.x - 9 : s.x - chair.width + 9, s.y - chair.height + 1, chairDepth);
+        }
       }
+      if(pose)this.image(pose.sprite,pose.x,pose.y,next());
     }
     const top = TABLE();
     const tableDepth = next();
-    if (!this.generatedPicture('table', table.x - 16.5, table.y - TABLE_TOP_DY - 5.4, 33, 33 * 462 / 563, tableDepth)) {
+    if (cozyTable) this.image(cozyTable, table.x - cozyTable.width / 2, table.y - cozyTable.height + 1, tableDepth);
+    else if (!this.generatedPicture('table', table.x - 16.5, table.y - TABLE_TOP_DY - 5.4, 33, 33 * 462 / 563, tableDepth)) {
       this.image(top, table.x - TABLE_CX, table.y - top.height + 1, tableDepth);
     }
-    const cy = table.y - TABLE_TOP_DY;
+    const cy = table.y + (ensembleTable ? SEATING_LAYOUT.surfaceY : -TABLE_TOP_DY);
     // A bud vase in the middle.
     const bloom = ['#ef5d7a', '#f2c14e', '#ffffff', '#9f78d2'][index % 4];
     const vase = baked(this.textures, `vase-${bloom}`, 5, 14, ctx => paintTableVase(ctx, bloom));
@@ -1102,16 +1147,20 @@ export class CafeScene extends Phaser.Scene {
       const c = diners[side];
       if (!c) continue;
       const { sprite, x, y, pair } = sitter(side, c);
-      const crop = logicalCrop(sprite, 0, 0, sprite.width, CHAR_H - 8);
-      this.image(sprite, x, y, next()).setCrop(crop.x, crop.y, crop.width, crop.height);
+      const ensemble=seatingGeometry(sprite);
+      if(ensemble)this.image(ensemble.foreground,x,y,next());
+      else {
+        const crop = logicalCrop(sprite, 0, 0, sprite.width, cozySeatedGeometry(sprite)?.upperBody ?? CHAR_H - 8);
+        this.image(sprite, x, y, next()).setCrop(crop.x, crop.y, crop.width, crop.height);
+      }
       const contact = pair && this.getState().pets.some(p => p.id === pair.id && petActive(p)) &&
-        this.generatedCustomers?.contactPoints(sprite)?.petContact;
+        referenceCharacterContacts(sprite)?.petContact;
       if (contact) {
         // The authored reaching hand is below the ordinary upper-body crop.
         // Redraw only its outer wrist/palm over the matched cat, never the torso,
         // lap or legs over the tablecloth. Crop remains in physical pixels.
         const left = Math.max(0, Math.floor(contact.x - 3));
-        const top = Math.max(CHAR_H - 8, Math.floor(contact.y - 3));
+        const top = Math.max(ensemble ? 0 : CHAR_H - 8, Math.floor(contact.y - 3));
         const hand = logicalCrop(sprite, left, top, Math.ceil(contact.x + 2) - left, Math.ceil(contact.y + 2) - top);
         this.image(sprite, x, y, DEPTH.floor + pair.y + 0.008).setCrop(hand.x, hand.y, hand.width, hand.height);
       }

@@ -52,6 +52,7 @@ export const GENERATED_MAIN_ASSETS = {
   ...runtimeCatalog.assets,
   ...GENERATED_SIGNATURE_ASSETS,
   'reference-machine': 'reference-main-v1/espresso.png',
+  'cozy-cafe-atlas': 'cozy-cafe-v1/furniture-atlas.png',
   'cabinet-top': 'main-v1/cabinet-top.png',
   'cabinet-front': 'main-v1/cabinet-front.png',
   plant: 'main-v1/plant.png',

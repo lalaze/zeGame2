@@ -17,11 +17,14 @@
   <footer>PNG 使用透明底与整数像素；JSON 的 frame 是图集坐标，sourceSize 是原素材尺寸。此页面不读取或改写游戏存档。<a href="./">返回游戏</a></footer>
 </main><script type="module" src="/src/art-preview.ts"></script><script type="module">
 import { character } from './src/render/sprites.ts';
+import { preloadReferenceCharacters } from './src/render/reference-character-art.ts';
+import { fineSpriteArt } from './src/render/fine-sprite-art.ts';
 import { CUSTOMER_CAST } from './src/game/customer-cast.ts';
 const canvas=document.querySelector('#cast'),ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;
 let moving=true;
 document.querySelector('#motion').onclick=()=>{moving=!moving;document.querySelector('#motion').textContent=moving?'暂停走路':'播放走路'};
 function draw(t){ctx.clearRect(0,0,576,580);
- CUSTOMER_CAST.forEach((design,i)=>{const x=6+(i%6)*95,y=7+Math.floor(i/6)*114;const f=character(design.look,'customer',design.id);ctx.fillStyle='#dfcdb0';ctx.fillRect(x,y,89,108);ctx.fillStyle='#fff5df';ctx.fillRect(x+1,y+1,87,106);ctx.fillStyle='#b9a58a';ctx.font='7px sans-serif';ctx.fillText(String(i+1).padStart(2,'0'),x+6,y+11);ctx.fillStyle='#d5bfa0';ctx.beginPath();ctx.ellipse(x+44,y+57,15,3,0,0,Math.PI*2);ctx.fill();ctx.drawImage(f.stand,x+26,y+3,36,56);ctx.fillStyle='#594638';ctx.textAlign='center';ctx.font='8px sans-serif';ctx.fillText(design.name,x+44,y+70);ctx.textAlign='start';const idx=moving?[0,1,0,2][Math.floor(t/180)%4]:0;[f.down[idx],f.right[idx],f.up[idx],f.sitLeft].forEach((c,j)=>ctx.drawImage(c,x+4+j*21,y+77));});requestAnimationFrame(draw)}requestAnimationFrame(draw);
+ CUSTOMER_CAST.forEach((design,i)=>{const x=6+(i%6)*95,y=7+Math.floor(i/6)*114;const f=character(design.look,'customer',design.id);ctx.fillStyle='#dfcdb0';ctx.fillRect(x,y,89,108);ctx.fillStyle='#fff5df';ctx.fillRect(x+1,y+1,87,106);ctx.fillStyle='#b9a58a';ctx.font='7px sans-serif';ctx.fillText(String(i+1).padStart(2,'0'),x+6,y+11);ctx.fillStyle='#d5bfa0';ctx.beginPath();ctx.ellipse(x+44,y+57,15,3,0,0,Math.PI*2);ctx.fill();ctx.drawImage(fineSpriteArt(f.stand).canvas,x+26,y+3,36,56);ctx.fillStyle='#594638';ctx.textAlign='center';ctx.font='8px sans-serif';ctx.fillText(design.name,x+44,y+70);ctx.textAlign='start';const idx=moving?[0,1,0,2][Math.floor(t/180)%4]:0;[f.down[idx],f.right[idx],f.up[idx],f.sitLeft].forEach((c,j)=>ctx.drawImage(fineSpriteArt(c).canvas,x+4+j*21,y+77,c.width,c.height));});requestAnimationFrame(draw)}
+preloadReferenceCharacters().then(()=>requestAnimationFrame(draw)).catch(error=>{document.querySelector('#count').textContent='人物素材加载失败，请刷新重试。';console.error(error)});
 </script></body>
 </html>

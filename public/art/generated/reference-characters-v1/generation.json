@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "tool": "built-in image_gen",
+  "styleReferenceAttachment": "5f3d1f58-ea8d-45ce-a3d4-a58cf1667a6b",
+  "basePrompt": "Use case: stylized-concept. Production game sprite sheet, transparent background. Match the reference café's warm handcrafted pixel art: small 2.8-head-tall human, subdued warm brown outline, tiny dot eyes, solid matte clustered pixels, cream highlights, no glossy anime rendering, no gradients. A single young adult café customer with short tousled chestnut hair, cream shirt under muted brick-red cardigan, slate-blue trousers, brown shoes. Full body, front/slightly overhead game perspective like the reference. Exactly 15 separate sprites arranged in a PERFECT 5-column by 3-row evenly spaced grid, each cell same dimensions and same baseline, with generous transparent gap, no grid lines/text/shadows/props/chairs. Output 1536x1024.\nRead order:\nrow1: front idle, front walking left leg forward, front walking right leg forward, back idle, back walking left leg forward.\nrow2: back walking right leg forward, right-facing profile idle, right-facing walking left leg forward, right-facing walking right leg forward, right-facing seated (invisible chair, thighs horizontal, lower legs down).\nrow3: right-facing seated leaning and lowering nearest hand to pet a cat (no cat), same pose hand one pixel farther down, left-facing seated, left-facing seated leaning lowering nearest hand, same left petting hand slightly farther down.\nSame identity, proportions, outfit and exact pixel scale in all cells. All poses must be drawn, not merely duplicate standing images. No tray, cup, animal, chair, cast shadow, detached marks or background. Each sprite isolated with true alpha transparency.",
+  "variants": {
+    "short": "short tousled chestnut hair, brick cardigan",
+    "long": "long chestnut hair to shoulder blades, brick cardigan",
+    "bob": "tidy chestnut bob, brick cardigan",
+    "staff": "high tied bun, cream shirt, sage-green bib apron",
+    "chef": "cream baker toque and chef jacket, terracotta apron"
+  },
+  "layout": {
+    "columns": 5,
+    "rows": 3,
+    "poses": [
+      "down-stand",
+      "down-stepA",
+      "down-stepB",
+      "up-stand",
+      "up-stepA",
+      "up-stepB",
+      "right-stand",
+      "right-stepA",
+      "right-stepB",
+      "right-sit",
+      "right-petA",
+      "right-petB",
+      "left-sit",
+      "left-petA",
+      "left-petB"
+    ]
+  },
+  "integration": "Original atlases retained. Runtime semantic palette variants preserve saved Looks and cast IDs. Complete atlas family gates readiness; no save schema or gameplay changes."
+}

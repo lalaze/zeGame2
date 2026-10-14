@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reference character visual QA</title>
+<style>
+:root{font:14px/1.5 system-ui,sans-serif;color:#44352d;background:#eaddc4}*{box-sizing:border-box}body{margin:0;padding:24px}main{max-width:1440px;margin:auto}h1{margin:0;font-size:26px}h2{margin:28px 0 8px;font-size:20px}p{max-width:90ch}button{font:inherit;padding:8px 14px;margin:0 6px 8px 0;border:1px solid #a48a6b;border-radius:5px;background:#fff3dd;color:inherit;cursor:pointer}button[aria-pressed="true"]{background:#64785a;color:white}canvas{image-rendering:pixelated}#scene{display:block;max-width:100%;height:auto!important;background:#d0c19f;box-shadow:0 4px 20px #47302020}#roster{width:100%;height:auto;background:#f6ead2;border:1px solid #bca485}.frames{display:grid;grid-template-columns:repeat(auto-fit,minmax(410px,1fr));gap:12px}.sheet{margin:0;padding:10px;background:#f6ead2;border:1px solid #bca485;overflow:auto}.sheet figcaption{font-weight:600;margin-bottom:8px}.sheet canvas{max-width:100%;height:auto}#status{position:sticky;top:0;z-index:2;display:block;background:#fff5df;border:1px solid #bca485;padding:10px;margin:12px 0}body[data-ready="error"] #status{color:#9f342b}body[data-ready="true"] #status{color:#365c36}#results{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;background:#fbf4e7;padding:14px;max-height:480px;overflow:auto}.legend{font-size:12px}.legend b{display:inline-block;margin-right:14px}.foot{color:#a15435}.seat{color:#326786}.hand{color:#93457c}small{color:#705e4e}
+</style>
+</head>
+<body data-ready="loading">
+<main>
+<h1>Reference character visual QA</h1>
+<p>Real game painters and a deterministic in-memory fixture. This page never loads the player's saved café. The fixture is for visual coverage, not an economic, navigation, or save-system test.</p>
+<div id="status" role="status">Loading reference atlases…</div>
+<h2>Live CaféScene fixture</h2>
+<p><button id="main-room" aria-pressed="true">Main café</button><button id="kitchen-room" aria-pressed="false">Kitchen</button><button id="animation" aria-pressed="true">Pause fixture motion</button><button id="reset">Reset fixture motion</button></p>
+<canvas id="scene" aria-label="Actual CafeGame renderer with populated QA fixture"></canvas>
+<p id="scene-summary"></p>
+<small>Customers cover two seated directions, walking up/down/left/right, and a takeaway cup. The customized owner and barista render behind the counter; the server carries a tray. The kitchen contains three customized cooks. Positions move only inside this fixture; no user actions or purchases run.</small>
+<h2>All 30 customers and four customized staff</h2>
+<canvas id="roster" aria-label="Full reference-art roster"></canvas>
+<h2>Every production pose</h2>
+<p class="legend"><b class="foot">Orange: foot</b><b class="seat">Blue: seated hip</b><b class="hand">Purple: pet contact</b>Crosses are declared anchors. These sheets draw fineSpriteArt backing canvases, with production offsets. Names show the exact frame keys.</p>
+<div id="frames" class="frames"></div>
+<h2>Browser checks</h2>
+<p>JSON below records assertions executed by this page and actual frame metadata. Visual review is still required for anatomy, pose readability, contact quality, occlusion, and style. No broad test suite, build, or typecheck is implied.</p>
+<pre id="results">{"status":"loading"}</pre>
+</main>
+<script type="module">
+const status = document.querySelector('#status');
+const resultsNode = document.querySelector('#results');
+const results = { status:'loading', scope:'reference-character browser visual fixture', assertions:[], frames:[], scene:null, errors:[] };
+let game;
+function publish() { resultsNode.textContent = JSON.stringify(results, null, 2); window.referenceCharacterQAResults = results; }
+function fail(error) {
+  const message = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+  results.errors.push(message); results.status = 'error'; document.body.dataset.ready = 'error'; status.textContent = message; publish();
+}
+window.addEventListener('error', event => fail(event.error || event.message));
+window.addEventListener('unhandledrejection', event => fail(event.reason));
+function check(name, passed, detail) { results.assertions.push({ name, passed:Boolean(passed), ...(detail === undefined ? {} : {detail}) }); }
+function hashPixels(canvas) {
+  const data = canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data;
+  let value=2166136261, count=0, edges=0, minX=canvas.width, minY=canvas.height, maxX=-1, maxY=-1;
+  for (let i=0;i<data.length;i++) value=Math.imul(value ^ data[i],16777619);
+  for (let y=0;y<canvas.height;y++) for (let x=0;x<canvas.width;x++) {
+    if (!data[(y*canvas.width+x)*4+3]) continue;
+    count++; minX=Math.min(minX,x);minY=Math.min(minY,y);maxX=Math.max(maxX,x);maxY=Math.max(maxY,y);
+    if(x===0||y===0||x===canvas.width-1||y===canvas.height-1) edges++;
+  }
+  return {hash:(value>>>0).toString(16).padStart(8,'0'),opaquePixels:count,borderPixels:edges,bounds:count?{minX,minY,maxX,maxY}:null};
+}
+function cross(ctx,x,y,color){ctx.strokeStyle=color;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x-4,y+.5);ctx.lineTo(x+4,y+.5);ctx.moveTo(x+.5,y-4);ctx.lineTo(x+.5,y+4);ctx.stroke();}
+function mirrorEqual(left,right){
+  if(left.width!==right.width||left.height!==right.height)return false;
+  const a=left.getContext('2d').getImageData(0,0,left.width,left.height).data;
+  const b=right.getContext('2d').getImageData(0,0,right.width,right.height).data;
+  for(let y=0;y<left.height;y++)for(let x=0;x<left.width;x++)for(let k=0;k<4;k++)if(a[(y*left.width+x)*4+k]!==b[(y*right.width+right.width-1-x)*4+k])return false;
+  return true;
+}
+const close=(a,b)=>Math.abs(a-b)<.001;
+try {
+  // Dynamic imports keep module-load failures visible in the DOM and dataset.
+  const [{character,CHAR_H},{fineSpriteArt},reference,{CUSTOMER_CAST},{CafeGame},{CafeView},{Sim},{createInitialState},layout,kitchen] = await Promise.all([
+    import('/src/render/sprites.ts'),import('/src/render/fine-sprite-art.ts'),import('/src/render/reference-character-art.ts'),
+    import('/src/game/customer-cast.ts'),import('/src/render/phaser/game.ts'),import('/src/render/cafe-view.ts'),
+    import('/src/game/sim.ts'),import('/src/game/state.ts'),import('/src/game/layout.ts'),import('/src/game/kitchen.ts')
+  ]);
+  const {preloadReferenceCharacters,resolveReferenceCharacter,referenceCharacterOffset,referenceCharacterContacts}=reference;
+  await preloadReferenceCharacters();
+  const staff=[
+    {name:'Customized owner',role:'owner',look:{skin:3,hair:5,hairStyle:2,shirt:4,pants:2}},
+    {name:'Customized barista',role:'barista',look:{skin:1,hair:2,hairStyle:3,shirt:6,pants:1}},
+    {name:'Customized server',role:'server',look:{skin:2,hair:4,hairStyle:1,shirt:5,pants:0}},
+    {name:'Customized cook',role:'cook',look:{skin:0,hair:3,hairStyle:0,shirt:7,pants:2}}
+  ];
+  const identities=[...CUSTOMER_CAST.map(c=>({name:`${String(c.id+1).padStart(2,'0')} ${c.name}`,role:'customer',look:c.look,appearanceId:c.id})),...staff];
+  check('All 30 customer identities are present',CUSTOMER_CAST.length===30,CUSTOMER_CAST.length);
+  const descriptors=[...['down','up','right','left'].flatMap(direction=>[0,1,2].map(i=>({name:`${direction}[${i}]`,get:f=>f[direction][i],seated:false,pet:false,left:direction==='left'}))),
+    {name:'sitRight',get:f=>f.sitRight,seated:true,pet:false,left:false},{name:'sitLeft',get:f=>f.sitLeft,seated:true,pet:false,left:true},
+    ...['Right','Left'].flatMap(direction=>[0,1].map(i=>({name:`sitPet${direction}[${i}]`,get:f=>f[`sitPet${direction}`][i],seated:true,pet:true,left:direction==='Left'})))];
+  const roster=document.querySelector('#roster'),columns=6,cellW=180,cellH=168;
+  roster.width=columns*cellW;roster.height=Math.ceil(identities.length/columns)*cellH;
+  const rc=roster.getContext('2d');rc.imageSmoothingEnabled=false;
+  const downHashes=[];
+  for(let identityIndex=0;identityIndex<identities.length;identityIndex++){
+    const who=identities[identityIndex],frames=character(who.look,who.role,who.appearanceId),resolved=resolveReferenceCharacter(who.look,who.role,who.appearanceId);
+    check(`${who.name}: character() uses the reference frame family`,resolved!==null&&frames===resolved);
+    check(`${who.name}: stand aliases down[0]`,frames.stand===frames.down[0]);
+    const figure=document.createElement('figure');figure.className='sheet';
+    const caption=document.createElement('figcaption');caption.textContent=`${who.name} · ${who.role}`;figure.append(caption);
+    const sheet=document.createElement('canvas');sheet.width=9*68;sheet.height=2*132;sheet.setAttribute('aria-label',`${who.name}: all 18 frames`);figure.append(sheet);document.querySelector('#frames').append(figure);
+    const sc=sheet.getContext('2d');sc.imageSmoothingEnabled=false;sc.font='10px system-ui';sc.textAlign='center';
+    for(let poseIndex=0;poseIndex<descriptors.length;poseIndex++){
+      const pose=descriptors[poseIndex],frame=pose.get(frames),art=fineSpriteArt(frame),offset=referenceCharacterOffset(frame),contact=referenceCharacterContacts(frame),pixels=hashPixels(art.canvas);
+      const name=`${who.name}: ${pose.name}`,expectedW=pose.pet?22:18,expectedH=pose.seated?(pose.pet?34:29):28;
+      check(`${name}: reference backing and logical size`,art.density===3&&frame.width===expectedW&&frame.height===expectedH&&art.canvas.width===frame.width*3&&art.canvas.height===frame.height*3);
+      check(`${name}: nonempty pixels`,pixels.opaquePixels>0);
+      const finitePoint=p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.y);
+      check(`${name}: finite foot and offset`,finitePoint(contact?.foot)&&finitePoint(offset));
+      if(pose.seated)check(`${name}: stable seated hip`,finitePoint(contact?.seatContact)&&close(contact.seatContact.x+offset.x,pose.left?11:7)&&close(contact.seatContact.y+offset.y,22));
+      else check(`${name}: stable walking foot`,contact&&close(contact.foot.x+offset.x,9)&&close(contact.foot.y+offset.y,CHAR_H-1));
+      if(pose.pet)check(`${name}: pet contact inside canvas`,finitePoint(contact?.petContact)&&contact.petContact.x>=0&&contact.petContact.x<=frame.width&&contact.petContact.y>=0&&contact.petContact.y<=frame.height);
+      results.frames.push({identity:who.name,role:who.role,appearanceId:who.appearanceId??null,pose:pose.name,logical:[frame.width,frame.height],density:art.density,offset,contact,...pixels});
+      const col=poseIndex%9,row=Math.floor(poseIndex/9),scale=3,x=col*68+7+offset.x*scale,y=row*132+5+offset.y*scale;
+      sc.fillStyle=(row+col)%2?'#ead8b9':'#f6ead2';sc.fillRect(col*68,row*132,68,132);
+      sc.drawImage(art.canvas,x,y,frame.width*scale,frame.height*scale);
+      if(contact?.foot)cross(sc,x+contact.foot.x*scale,y+contact.foot.y*scale,'#a15435');
+      if(contact?.seatContact)cross(sc,x+contact.seatContact.x*scale,y+contact.seatContact.y*scale,'#326786');
+      if(contact?.petContact)cross(sc,x+contact.petContact.x*scale,y+contact.petContact.y*scale,'#93457c');
+      sc.fillStyle='#44352d';sc.fillText(pose.name,col*68+34,row*132+123,66);
+    }
+    for(let i=0;i<3;i++)check(`${who.name}: left[${i}] mirrors right[${i}]`,mirrorEqual(fineSpriteArt(frames.left[i]).canvas,fineSpriteArt(frames.right[i]).canvas));
+    for(const direction of ['down','up','right'])check(`${who.name}: ${direction} gait frames differ`,hashPixels(fineSpriteArt(frames[direction][1]).canvas).hash!==hashPixels(fineSpriteArt(frames[direction][2]).canvas).hash);
+    const cx=identityIndex%columns*cellW,cy=Math.floor(identityIndex/columns)*cellH;
+    rc.fillStyle=identityIndex%2?'#ead8b9':'#f6ead2';rc.fillRect(cx,cy,cellW,cellH);
+    // Front, side and seated poses together expose silhouette differences across the roster.
+    for(const [i,frame] of [frames.down[0],frames.right[1],frames.sitRight].entries())rc.drawImage(fineSpriteArt(frame).canvas,cx+8+i*56,cy+12,frame.width*3,frame.height*3);
+    rc.fillStyle='#44352d';rc.textAlign='center';rc.font='12px system-ui';rc.fillText(who.name,cx+cellW/2,cy+122,cellW-8);rc.font='10px system-ui';rc.fillText(who.role,cx+cellW/2,cy+142);
+    if(who.role==='customer')downHashes.push(hashPixels(fineSpriteArt(frames.down[0]).canvas).hash);
+  }
+  check('All customer front portraits remain visually distinct',new Set(downHashes).size===30,new Set(downHashes).size);
+
+  // Fresh, isolated state only. Do not import main.ts, session ownership or save loaders here.
+  layout.setSceneHeight(240);
+  const state=createInitialState(0);state.profile={cafeName:'Character QA',ownerName:'QA owner',look:{...staff[0].look}};
+  state.kitchen=true;state.upgrades.barista=1;state.upgrades.server=0;state.upgrades.cook=2;state.upgrades.tables=2;
+  state.items.roll=1;state.items.bagel=1;state.items.donut=1;state.onMenu=['espresso'];
+  const sim=new Sim(()=>.5);sim.update(state,0);state.phase='open';
+  sim.baristas[0].look={...staff[0].look};sim.baristas[1].look={...staff[1].look};sim.servers[0].look={...staff[2].look};
+  const makeCustomer=(appearanceId,phase,point,extra={})=>({id:100+appearanceId,appearanceId,look:{...CUSTOMER_CAST[appearanceId].look},phase,x:point.x,y:point.y,tx:point.x,ty:point.y,stride:0,via:[],reviewed:true,waitSeconds:0,missingExtra:false,order:'espresso',extra:null,vip:false,patience:1000,spot:-1,seat:-1,timer:1000,mood:null,moodTimer:0,hasCup:false,soldOut:false,dineIn:false,...extra});
+  sim.customers=[makeCustomer(0,'sitting',layout.seatSpot(0,0),{seat:0,dineIn:true,hasCup:true}),makeCustomer(12,'sitting',layout.seatSpot(1,1),{seat:3,dineIn:true,hasCup:true}),
+    makeCustomer(4,'toSeat',{x:150,y:205},{tx:150,ty:180}),makeCustomer(20,'exiting',{x:180,y:190},{tx:180,ty:214,hasCup:true}),
+    makeCustomer(25,'toSeat',{x:52,y:145},{tx:78,ty:145}),makeCustomer(28,'toSeat',{x:273,y:145},{tx:247,ty:145})];
+  sim.seats.fill(null);sim.seats[0]=100;sim.seats[3]=112;sim.queue=[];
+  Object.assign(sim.baristas[0],{customerId:104,total:8,remaining:7.9});
+  Object.assign(sim.baristas[1],{customerId:120,total:8,remaining:4});
+  Object.assign(sim.servers[0],{x:239,y:199,tx:239,ty:181,stride:5,via:[],phase:'delivering',plates:[{customerId:112,items:['espresso'],barista:0,server:0,waited:0}],ack:0});
+  const ko=layout.areaOrigin('kitchen');
+  sim.cooks.forEach((cook,i)=>{const home=kitchen.cookHome(i);Object.assign(cook,{look:{...staff[3].look,skin:i,hair:i,hairStyle:i},x:home.x,y:home.y,tx:home.x,ty:home.y,stride:5,via:[],batch:null});});
+  Object.assign(sim.cooks[1],{x:ko.x+190,y:ko.y+145,tx:ko.x+215,ty:ko.y+145});
+  Object.assign(sim.cooks[2],{x:ko.x+89,y:ko.y+151,tx:ko.x+89,ty:ko.y+132});
+  const view=new CafeView();view.moveToArea('main',true);
+  // Optional clean art-review frame; production thought behavior is unchanged.
+  if(new URLSearchParams(location.search).has('qa-clean')) view.paused=true;
+  let moving=true,elapsed=0,renderedTicks=0;
+  const walkers=[...sim.customers.filter(c=>!c.dineIn),sim.servers[0],sim.cooks[1],sim.cooks[2]];
+  const starts=walkers.map(w=>({x:w.x,y:w.y,tx:w.tx,ty:w.ty}));
+  function applyTime(time){walkers.forEach((w,i)=>{const a=starts[i],fraction=(time*.32+i*.15)%1;w.x=a.x+(a.tx-a.x)*fraction;w.y=a.y+(a.ty-a.y)*fraction;w.tx=a.tx;w.ty=a.ty;w.stride=time*24+i*5;});sim.baristas[0].remaining=7.95-(time%8);}
+  function showArea(area){if(area!=='main'&&area!=='kitchen')throw Error('Unknown QA area');view.moveToArea(area,true);document.querySelector('#main-room').setAttribute('aria-pressed',String(area==='main'));document.querySelector('#kitchen-room').setAttribute('aria-pressed',String(area==='kitchen'));document.body.dataset.area=area;return area;}
+  window.referenceCharacterQA={showArea,setTime(seconds){elapsed=Math.max(0,Number(seconds)||0);applyTime(elapsed);},pause(){moving=false;document.querySelector('#animation').textContent='Resume fixture motion';document.querySelector('#animation').setAttribute('aria-pressed','false');},results};
+  document.querySelector('#main-room').onclick=()=>showArea('main');document.querySelector('#kitchen-room').onclick=()=>showArea('kitchen');
+  document.querySelector('#animation').onclick=()=>{moving=!moving;document.querySelector('#animation').textContent=moving?'Pause fixture motion':'Resume fixture motion';document.querySelector('#animation').setAttribute('aria-pressed',String(moving));};
+  document.querySelector('#reset').onclick=()=>{elapsed=0;applyTime(0);};
+  game=new CafeGame(document.querySelector('#scene'),view,sim,()=>state,{tick(dt){renderedTicks++;if(moving){elapsed+=dt;applyTime(elapsed);}view.update(dt,sim);},pointerDown(){},pointerMove(){},loadingProgress(n,total){status.textContent=`Loading actual CaféScene assets: ${n}/${total}`;}});
+  game.resize({width:960,height:720,cssWidth:960,cssHeight:720,backing:3,smooth:false});
+  await Promise.race([game.ready,new Promise((_,reject)=>setTimeout(()=>reject(new Error('CaféScene first-frame timeout (120 seconds)')),120000))]);
+  // POST_RENDER resolves game.ready. Wait two more browser frames before exposing readiness.
+  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+  check('Actual CaféScene produced its first frame',renderedTicks>0,renderedTicks);
+  results.scene={renderer:'CafeGame / CafeScene',fixture:'in-memory visual-only',customers:sim.customers.length,seated:sim.customers.filter(c=>c.dineIn).length,walkingCustomers:sim.customers.filter(c=>!c.dineIn).length,baristas:sim.baristas.length,servers:sim.servers.length,cooks:sim.cooks.length,saveStorage:'not accessed by this fixture',simulationEconomy:'not advanced'};
+  document.querySelector('#scene-summary').textContent='6 customers (2 seated, 4 walking), customized owner and barista, tray-carrying server, 3 kitchen cooks. Use the room buttons to inspect both real scenes.';
+  const failed=results.assertions.filter(a=>!a.passed),hasError=failed.length>0||results.errors.length>0;results.status=hasError?'failed':'passed';results.summary={identities:identities.length,poses:results.frames.length,assertions:results.assertions.length,failed:failed.length,errors:results.errors.length};
+  document.body.dataset.ready=hasError?'error':'true';document.body.dataset.area='main';status.textContent=hasError?`FAILED: ${failed.length} browser assertions, ${results.errors.length} runtime errors. See JSON.`:`READY: ${identities.length} identities, ${results.frames.length} poses, ${results.assertions.length} browser assertions passed. Visual review still required.`;publish();
+  window.addEventListener('pagehide',()=>game.destroy(),{once:true});
+}catch(error){fail(error);}
+</script>
+</body>
+</html>

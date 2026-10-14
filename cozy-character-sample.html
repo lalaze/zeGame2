@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>圆润咖啡馆 · 两个人物动态样板</title>
+<style>
+:root{font:15px/1.6 system-ui,sans-serif;color:#523a2c;background:#eadcc6}*{box-sizing:border-box}body{margin:0;padding:24px}main{max-width:1120px;margin:auto}h1{font-size:28px;margin:0 0 8px}h2{font-size:20px;margin:24px 0 8px}p{margin:8px 0 14px}button,a.button,select{font:inherit;border:1px solid #af9071;border-radius:9px;padding:8px 14px;color:inherit;background:#fff3dc;cursor:pointer;margin:0 5px 8px 0;text-decoration:none;display:inline-block}button[aria-pressed=true],a.active{background:#6c7a56;color:#fff7df}canvas{image-rendering:pixelated;max-width:100%;height:auto!important}#scene{display:block;background:#d6c3a6;border-radius:10px;box-shadow:0 4px 20px #50332026}#status{padding:10px 14px;border:1px solid #bfa184;background:#fff6e4;border-radius:8px;margin:14px 0}body[data-ready=error] #status{color:#a23221}.toolbar{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px}.compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:#f7ecd8;padding:16px;border:1px solid #c7ac8c;border-radius:12px}.card h3{margin:0 0 8px}.card canvas{width:100%}.hint,small{color:#7e6551;font-size:13px}details{margin-top:22px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;max-height:300px;overflow:auto}#sheet{width:100%;background:#f5e9d2;border:1px solid #bba080}#approved{max-width:220px;vertical-align:top;border-radius:10px}#motion{width:100%;background:#f5e9d2;border:1px solid #bba080;border-radius:10px}@media(max-width:620px){body{padding:14px}h1{font-size:23px}.compare{grid-template-columns:1fr}.toolbar button,.toolbar a{padding:7px 10px}}
+</style></head><body data-ready="loading"><main>
+<h1>两个人物，融进这间咖啡馆</h1>
+<p>店主与一位顾客的圆润比例、暖棕轮廓和窗边受光。下方使用当前游戏的真实场景、桌椅遮挡与端盘绘制。</p>
+<div id="status" role="status">正在加载人物样板…</div>
+<div class="toolbar"><a class="button" id="after-link" href="?version=after&qa-light=10">新样板</a><a class="button" id="before-link" href="?version=before&qa-light=10">原人物对照</a><a class="button" href="/">打开主游戏</a></div>
+<div class="toolbar"><button data-mode="walk">走动</button><button data-mode="sit">坐下</button><button data-mode="tray">端盘</button><label>方向 <select id="direction"><option value="right">向右</option><option value="left">向左</option><option value="down">向前</option><option value="up">向后</option></select></label><button id="pause" aria-pressed="false">暂停</button><button id="reset">重播</button></div>
+<canvas id="scene" aria-label="店主与一位顾客的真实游戏场景预览"></canvas>
+<p id="mode-note"></p>
+<p class="hint">这是独立的美术样板：只使用临时演示状态，不读取或写入你的存档。两个角色在这页轮流演示动作，不改变主游戏的角色、职务或自定义外观。</p>
+<h2>放大动作 · 同时看前后</h2><p class="hint">每组左边是原人物，右边是新样板。与上方动作、方向和暂停按钮同步。</p><canvas id="motion" width="960" height="240" aria-label="原人物与新样板实时动画对照"></canvas>
+<h2>轮廓与坐姿对照</h2><div class="compare"><section class="card"><h3>店主 · 原人物 → 新样板</h3><canvas id="owner-compare" width="500" height="235"></canvas></section><section class="card"><h3>顾客 · 原人物 → 新样板</h3><canvas id="guest-compare" width="500" height="235"></canvas></section></div>
+<h2>完整动作帧</h2><p class="hint">每人 18 个运行姿势，包括四向走路、左右坐姿与俯身动作。端盘道具仍由游戏独立绘制。</p><canvas id="sheet" width="1080" height="430" aria-label="店主和顾客的完整动作帧"></canvas>
+<details><summary>查看已执行检查</summary><pre id="results"></pre></details>
+</main><script type="module">
+const out={status:'loading',assertions:[],errors:[],scope:'Two visual designs in an isolated real CafeGame fixture. No economy or saved-session checks.'};
+const status=document.querySelector('#status');let game;
+const publish=()=>{document.querySelector('#results').textContent=JSON.stringify(out,null,2);window.cozySampleResults=out;};
+const fail=e=>{out.status='error';out.errors.push(String(e?.message||e));document.body.dataset.ready='error';status.textContent=out.errors.at(-1);publish();};
+addEventListener('error',e=>fail(e.error||e.message));addEventListener('unhandledrejection',e=>fail(e.reason));
+const check=(name,passed,detail)=>out.assertions.push({name,passed:!!passed,...(detail===undefined?{}:{detail})});
+function hash(c){let h=2166136261;for(const n of c.getContext('2d').getImageData(0,0,c.width,c.height).data)h=Math.imul(h^n,16777619);return (h>>>0).toString(16);}
+try{
+const [{prepareCozyCharacterSample,OWNER_LOOK,GUEST_LOOK},{character},{fineSpriteArt},{CUSTOMER_CAST},{CafeGame},{CafeView},{Sim},{createInitialState},layout]=await Promise.all([
+ import('/src/render/cozy-character-sample.ts'),import('/src/render/sprites.ts'),import('/src/render/fine-sprite-art.ts'),import('/src/game/customer-cast.ts'),import('/src/render/phaser/game.ts'),import('/src/render/cafe-view.ts'),import('/src/game/sim.ts'),import('/src/game/state.ts'),import('/src/game/layout.ts')]);
+const ref=await import('/src/render/reference-character-art.ts');await ref.preloadReferenceCharacters();
+const untouchedLook={skin:3,hair:5,hairStyle:3,shirt:4,pants:2};
+const untouched=[character(untouchedLook,'owner').stand,character(CUSTOMER_CAST[7].look,'customer',7).stand];
+const untouchedHashes=untouched.map(c=>hash(fineSpriteArt(c).canvas));
+const isAfter=new URLSearchParams(location.search).get('version')!=='before';
+document.querySelector(isAfter?'#after-link':'#before-link').classList.add('active');
+const samples=await prepareCozyCharacterSample(isAfter);
+check('Only two visual designs',samples.slice(0,2).length===2);
+check('Other customized owner and cast member remain byte-identical',untouched.every((c,i)=>hash(fineSpriteArt(c).canvas)===untouchedHashes[i]));
+for(const sample of samples)for(const e of sample.entries){
+ check(`${sample.name} ${e.name}: dimensions retained`,e.after.width===e.before.width&&e.after.height===e.before.height);
+ check(`${sample.name} ${e.name}: new pixels`,hash(e.after)!==hash(e.before));
+ check(`${sample.name} ${e.name}: active source`,hash(fineSpriteArt(e.target).canvas)===hash(isAfter?e.after:e.before));
+ check(`${sample.name} ${e.name}: anchor metadata present`,!!e.contact&&Number.isFinite(e.contact.foot.x)&&Number.isFinite(e.contact.foot.y));
+ const d=e.after.getContext('2d').getImageData(0,0,e.after.width,e.after.height).data;let solid=0,edge=0;
+ for(let y=0;y<e.after.height;y++)for(let x=0;x<e.after.width;x++)if(d[(y*e.after.width+x)*4+3]>100){solid++;if(!x||!y||x===e.after.width-1||y===e.after.height-1)edge++;}
+ check(`${sample.name} ${e.name}: no clipping`,solid>150&&edge===0,{solid,edge});
+}
+for(const sample of samples.slice(0,2))for(const dir of ['down','up','right'])check(`${sample.name} ${dir}: gait differs`,hash(sample.entries.find(e=>e.name===`${dir}[1]`).after)!==hash(sample.entries.find(e=>e.name===`${dir}[2]`).after));
+const draw=(ctx,c,x,y,w=c.width,h=c.height)=>{ctx.imageSmoothingEnabled=false;ctx.drawImage(c,x,y,w,h);};
+for(const [i,id] of ['#owner-compare','#guest-compare'].entries()){
+ const ctx=document.querySelector(id).getContext('2d');ctx.font='14px system-ui';ctx.fillStyle='#71523d';
+ for(const [col,name] of ['down[0]','right[1]','sitRight'].entries())for(const [side,variant] of ['before','after'].entries()){
+  const e=samples[i].entries.find(e=>e.name===name),x=col*165+side*76;draw(ctx,e[variant],x+3,18,e.target.width*4,e.target.height*4);ctx.fillText(side?'新样板':'原人物',x+8,167);
+ }ctx.fillText('站立',48,210);ctx.fillText('走动',211,210);ctx.fillText('坐姿',375,210);
+}
+const sc=document.querySelector('#sheet').getContext('2d');sc.font='11px system-ui';sc.textAlign='center';
+samples.slice(0,2).forEach((sample,row)=>{sample.entries.forEach((e,i)=>{const x=i*60;draw(sc,e.after,x+3,row*215+24,e.target.width*3,e.target.height*3);sc.fillStyle='#614735';sc.fillText(e.name,x+30,row*215+145,58);});sc.fillText(sample.name,540,row*215+190);});
+layout.setSceneHeight(240);const state=createInitialState(0);state.profile={cafeName:'Character sample',ownerName:'Sample owner',look:{...OWNER_LOOK}};state.upgrades.tables=2;state.kitchen=false;
+const sim=new Sim(()=>.5);sim.update(state,0);state.phase='open';sim.baristas=[];sim.cooks=[];sim.queue=[];
+const ownerActor={...sim.servers[0],look:{...OWNER_LOOK},x:175,y:192,tx:205,ty:192,stride:0,via:[],phase:'delivering',plates:[],ack:0};
+const guest=(id,look)=>({id,look:{...look},phase:'toSeat',x:80,y:158,tx:105,ty:158,stride:0,via:[],reviewed:true,waitSeconds:0,missingExtra:false,order:'espresso',extra:null,vip:false,patience:1000,spot:-1,seat:-1,timer:1000,mood:null,moodTimer:0,hasCup:false,soldOut:false,dineIn:false});
+const visitor=guest(100,GUEST_LOOK),ownerSitter=guest(101,OWNER_LOOK);
+const view=new CafeView();view.moveToArea('main',true);view.paused=true;
+let mode='tray',direction='right',moving=!matchMedia('(prefers-reduced-motion: reduce)').matches,elapsed=0,ticks=0;
+function move(actor,x,y,time){const fraction=(time*.18)%1,delta=30*fraction;actor.x=x+(direction==='right'?delta:direction==='left'?-delta:0);actor.y=y+(direction==='down'?delta:direction==='up'?-delta:0);actor.tx=x+(direction==='right'?32:direction==='left'?-32:0);actor.ty=y+(direction==='down'?32:direction==='up'?-32:0);actor.stride=time*20;}
+function seat(actor,index,side){const p=layout.seatSpot(index,side);Object.assign(actor,{phase:'sitting',x:p.x,y:p.y,tx:p.x,ty:p.y,seat:index*2+side,dineIn:true,hasCup:true});sim.seats[index*2+side]=actor.id;}
+function applyTime(){sim.seats.fill(null);sim.servers=mode==='sit'?[]:[ownerActor];sim.customers=mode==='sit'?[visitor,ownerSitter]:[visitor];
+ Object.assign(visitor,{phase:'toSeat',seat:-1,dineIn:false,hasCup:false});ownerActor.plates=mode==='tray'?[{customerId:100,items:['espresso'],barista:0,server:0,waited:0}]:[];
+ if(mode==='sit'){seat(visitor,0,0);seat(ownerSitter,1,1);}else{move(ownerActor,175,185,elapsed);if(mode==='tray')seat(visitor,0,0);else move(visitor,80,151,elapsed+.5);}
+ document.body.dataset.mode=mode;document.body.dataset.direction=direction;
+}
+function showMode(next){if(!['walk','sit','tray'].includes(next))throw Error('Unknown mode');mode=next;elapsed=0;applyTime();document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));document.querySelector('#mode-note').textContent=mode==='sit'?'左右坐姿：检查椅面接触与桌布遮挡。':mode==='tray'?'店主示范游戏的端盘动作，顾客入座。托盘、咖啡和人物独立分层。':'两人四向走动：检查脚底着地、步幅与环境比例。';}
+function syncPause(){document.querySelector('#pause').textContent=moving?'暂停':'继续';document.querySelector('#pause').setAttribute('aria-pressed',String(!moving));}
+function motion(){const ctx=document.querySelector('#motion').getContext('2d');ctx.clearRect(0,0,960,240);ctx.font='16px system-ui';ctx.fillStyle='#684b38';
+ samples.slice(0,2).forEach((s,i)=>{const frame=(mode==='sit'||(mode==='tray'&&i===1))?(i?'sitRight':'sitLeft'):`${direction}[${[1,0,2,0][Math.floor(elapsed*4)%4]}]`,e=s.entries.find(e=>e.name===frame);
+ ['before','after'].forEach((variant,k)=>{const x=i*480+k*210+28;draw(ctx,e[variant],x,18,e.target.width*5,e.target.height*5);ctx.fillText(`${s.name} · ${k?'新样板':'原人物'}`,x,205);});
+ });}
+document.querySelectorAll('button[data-mode]').forEach(b=>b.onclick=()=>showMode(b.dataset.mode));document.querySelector('#direction').onchange=e=>{direction=e.target.value;elapsed=0;applyTime();};
+document.querySelector('#pause').onclick=()=>{moving=!moving;syncPause();};document.querySelector('#reset').onclick=()=>{elapsed=0;applyTime();motion();};
+window.cozySampleQA={showMode,setTime(t){elapsed=t;applyTime();motion();},setDirection(d){direction=d;document.querySelector('#direction').value=d;applyTime();},pause(){moving=false;syncPause();},state:()=>({mode,direction,moving,elapsed,actors:sim.customers.length+sim.servers.length,ticks}),results:out};
+showMode(mode);syncPause();motion();
+game=new CafeGame(document.querySelector('#scene'),view,sim,()=>state,{tick(dt){ticks++;if(moving)elapsed+=dt;applyTime();motion();view.update(dt,sim);},pointerDown(){},pointerMove(){},loadingProgress(n,total){status.textContent=`加载场景与人物：${n}/${total}`;}});
+game.resize({width:960,height:720,cssWidth:960,cssHeight:720,backing:3,smooth:false});
+await Promise.race([game.ready,new Promise((_,reject)=>setTimeout(()=>reject(Error('Scene did not become ready')),120000))]);await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+check('Real CafeGame rendered',ticks>0);check('Exactly two actors in fixture',sim.customers.length+sim.servers.length===2);
+out.summary={visualDesigns:2,posesPerDesign:18,checks:out.assertions.length,failed:out.assertions.filter(a=>!a.passed).length,version:isAfter?'after':'before'};
+const hasFailures=out.summary.failed>0||out.errors.length>0;out.status=hasFailures?'failed':'passed';document.body.dataset.ready=hasFailures?'error':'true';status.textContent=hasFailures?`有 ${out.summary.failed} 项检查和 ${out.errors.length} 项运行错误待修正`:`已就绪 · ${isAfter?'新样板':'原人物对照'} · 两个人物 / 四向走动 / 左右坐姿 / 游戏端盘`;
+publish();addEventListener('pagehide',()=>game.destroy(),{once:true});
+}catch(e){fail(e);}
+</script></body></html>

@@ -1,3 +1,4 @@
+import { COZY_OWNER_LOOK } from '../render/cozy-character-art';
 // The opening flow: name the café, create the owner, pick a starter style.
 // Also reused (name + character only) when editing the profile later.
 import { STARTER_THEMES } from '../game/decor';
@@ -227,6 +228,11 @@ export function showOnboarding(opts: Options): void {
           placeholder="${escapeHtml(t('ob.char.namePlaceholder'))}" />
         <button class="pixel-btn ghost small" data-random>${t('ob.random')}</button>
       </div>`;
+    const preset = document.createElement('button');
+    preset.className = 'pixel-btn ghost small';
+    preset.dataset.cozyOwnerPreset = 'true';
+    preset.textContent = getLocale() === 'zh' ? '使用样板店主造型' : 'Use cozy owner look';
+    body.querySelector('.char-options')!.append(preset);
     const preview = body.querySelector<HTMLElement>('.char-preview')!;
     const ownerPreview = createGeneratedOwnerPreview(draft.look, 5);
     preview.append(ownerPreview.canvas);
@@ -269,6 +275,7 @@ export function showOnboarding(opts: Options): void {
       draft.look = randomLook();
       paint();
     });
+    preset.addEventListener('click', () => { draft.look = { ...COZY_OWNER_LOOK }; paint(); });
     paint(false);
   }
 

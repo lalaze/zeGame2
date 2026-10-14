@@ -4,7 +4,6 @@ import { markRegularGuestChapterRead, regularGuestChapterRequirement, regularGue
 import type { GameState } from '../game/state';
 import { t } from '../i18n';
 import { character, toDataURL } from '../render/sprites';
-import { getGeneratedCustomerAdapter } from '../render/generated-main-art';
 import { fineSpriteArt } from '../render/fine-sprite-art';
 import { isComposingKey } from './keyboard';
 import { closeModal, showModal } from './modal';
@@ -31,12 +30,10 @@ export function updateRegularGuestsButton(state: GameState): void {
 const portraits = new Map<number, { frame: HTMLCanvasElement; source: string }>();
 function portrait(guest: RegularGuestDefinition): HTMLImageElement {
   const design = CUSTOMER_CAST[guest.appearanceId];
-  const fallback = character(design.look, 'customer', guest.appearanceId);
-  const result = getGeneratedCustomerAdapter()?.resolve({ role: 'customer', appearanceId: guest.appearanceId, look: design.look }, fallback);
-  const frame = result?.frames.stand ?? fallback.stand;
+  const frame = character(design.look, 'customer', guest.appearanceId).stand;
   let cached = portraits.get(guest.appearanceId);
   if (!cached || cached.frame !== frame) {
-    const art = result?.generated ? fineSpriteArt(frame) : { canvas: frame, density: 1 };
+    const art = fineSpriteArt(frame);
     cached = { frame, source: toDataURL(art.canvas, 3 / art.density) };
     portraits.set(guest.appearanceId, cached);
   }

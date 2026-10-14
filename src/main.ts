@@ -24,7 +24,6 @@ import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale
 import { CafeView } from './render/cafe-view';
 import { CafeGame } from './render/phaser/game';
 import { character, toDataURL } from './render/sprites';
-import { getGeneratedStaffAdapter } from './render/generated-main-art';
 import { fineSpriteArt } from './render/fine-sprite-art';
 import { showMoneyDetails } from './ui/money-details';
 import { closeModal, isModalOpen, showModal, toast } from './ui/modal';
@@ -610,8 +609,7 @@ onLocaleChange(() => {
 
 const ownerIcon = () => {
   if (!state.profile) return toDataURL(character({ skin: 0, hair: 1, hairStyle: 1, shirt: 0, pants: 0 }, 'barista').stand, 3);
-  const fallback = character(state.profile.look, 'owner');
-  const frames = getGeneratedStaffAdapter()?.resolve({ role: 'owner', look: state.profile.look }, fallback).frames ?? fallback;
+  const frames = character(state.profile.look, 'owner');
   const art = fineSpriteArt(frames.stand);
   return toDataURL(art.canvas, 3 / art.density);
 };
@@ -897,6 +895,8 @@ updateDayHud();
 waitForStartupReady(cafe.ready, document.fonts.ready).then(() =>
   requestAnimationFrame(() => {
     startupComplete = true;
+    // Replace any staff thumbnails prepared before the character atlases loaded.
+    panel.refresh();
     loading.complete();
     document.body.classList.add('ready');
     if (!state.profile) startOnboarding();

@@ -1,5 +1,6 @@
 import { menuMiniature, ingredientMiniature, upgradeMiniature, miniatureSource, menuMiniatureGrid, ingredientMiniatureGrid } from './menu-miniatures';
 import { signatureDrinkCanvas, signatureDrinkIcon } from './signature-drink-art';
+import { resolveReferenceCharacter } from './reference-character-art';
 import { CUSTOMER_CAST, type CustomerDesign } from '../game/customer-cast';
 import type { CatId } from '../game/pets';
 import type { IngredientId, ItemId, StaticItemId, UpgradeId } from '../game/data';
@@ -850,6 +851,8 @@ function customerDetails(rows: string[], design: CustomerDesign, view: 'front' |
 }
 
 export function character(look: Look, role: Role = 'customer', appearanceId?: number): CharacterFrames {
+  const reference = resolveReferenceCharacter(look, role, appearanceId);
+  if (reference) return reference;
   const design = role === 'customer' && Number.isInteger(appearanceId) ? CUSTOMER_CAST[appearanceId!] : undefined;
   const key = `${look.skin}.${look.hair}.${look.hairStyle}.${look.shirt}.${look.pants}.${role}.${design?.id ?? 'base'}`;
   const cached = charCache.get(key);
@@ -1049,17 +1052,24 @@ export function ingredientIcon(id: IngredientId): HTMLCanvasElement {
 const UPGRADE_ENVELOPES = { marketing: [12, 10], machine: [12, 9], tables: [12, 8] } as const;
 
 const upgradeCache = new Map<UpgradeId, HTMLCanvasElement>();
+const staffPortraitFrames = new Map<UpgradeId, HTMLCanvasElement>();
 export function upgradeIcon(id: UpgradeId): HTMLCanvasElement {
-  const cached = upgradeCache.get(id); if (cached) return cached;
   if (id === 'barista' || id === 'server' || id === 'cook') {
     const full = character({ skin: id === 'server' ? 2 : id === 'cook' ? 1 : 0, hair: id === 'server' ? 0 : 1, hairStyle: 1, shirt: 0, pants: 0 }, id).stand;
+    const cached = upgradeCache.get(id);
+    if (cached && staffPortraitFrames.get(id) === full) return cached;
+    const art = fineSpriteArt(full);
     const c = document.createElement('canvas');
     c.width = full.width;
     c.height = HEAD_ROWS + 2;
-    c.getContext('2d')!.drawImage(full, 0, 0);
+    const ctx = c.getContext('2d')!;
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(art.canvas, 0, 0, full.width, full.height);
+    staffPortraitFrames.set(id, full);
     upgradeCache.set(id, c);
     return c;
   }
+  const cached = upgradeCache.get(id); if (cached) return cached;
   const [width, height] = UPGRADE_ENVELOPES[id];
   const canvas = upgradeMiniature(id, width, height);
   upgradeCache.set(id, canvas);

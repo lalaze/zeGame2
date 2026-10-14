@@ -1,3 +1,4 @@
+import { cozyCafePart, paintCozyCabinet } from './cozy-cafe-art';
 import { getGeneratedDecorAdapter, getGeneratedMainEnvironmentAdapter } from './generated-main-art';
 // Canvas painters for the parts of a room that are baked into textures: the main
 // café's back wall, floor, back bar and counter, the front wall along the bottom
@@ -320,6 +321,13 @@ export class RoomPainter {
   constructor(public ctx: CanvasRenderingContext2D, readonly density = 1, private readonly project = true) {}
 
   private wallWindow(win: WindowBounds) {
+    const cozy = this.density > 1 ? cozyCafePart('window') : undefined;
+    if (cozy) {
+      const w = win.w + 16, h = w * cozy.height / cozy.width;
+      const x = win.x - 8, y = win.y + win.h + 1 - h * .84;
+      return { source: cozy, sourceScale: 1, cropX: 0, cropY: 0, sourceWidth: cozy.width, sourceHeight: cozy.height,
+        x, y, w, h, aperture: { x: x + w * .22, y: y + h * .12, w: w * .56, h: h * .73 } };
+    }
     const source = this.density > 1 ? generatedMainRaster('wall-window') : null;
     if (!source || source.width <= 20 || source.height <= 20) return null;
     // Selected manifest: visible [10,10,623,504], aperture [125,87,386,296].
@@ -327,7 +335,7 @@ export class RoomPainter {
     // cat, botanical accent and OPEN sign keep their established attachments.
     const scale = (win.w + 16) / (source.width - 20);
     const x = win.x - 8, y = win.y + win.h + 1 - 410 * scale;
-    return { source: source.source, sourceScale: source.sourceScale,
+    return { source: source.source, sourceScale: source.sourceScale, cropX: 10, cropY: 10,
       sourceWidth: source.width - 20, sourceHeight: source.height - 20, x, y, w: win.w + 16, h: (source.height - 20) * scale,
       aperture: { x: x + 115 * scale, y: y + 77 * scale, w: 386 * scale, h: 296 * scale } };
   }
@@ -459,6 +467,7 @@ export class RoomPainter {
 
   /** A single satin oak worktop, with restrained paneled joinery from the reference. */
   private referenceOakCounter(x: number, y: number, w: number, topH: number, frontH: number, drawers = false): void {
+    if (paintCozyCabinet(this.ctx, x, y, w, topH, frontH)) return;
     const ctx = this.ctx, front = y + topH, bottom = front + frontH;
     this.r(x, y, w, topH, '#b77841');
     this.r(x + 1, y + 1, w - 2, 1, '#e0b57b');
@@ -530,6 +539,11 @@ export class RoomPainter {
       this.r(x === 0 ? 7 : x - 6, 8, 6, 1, '#c98c4d');
     }
     paintWainscot(this.ctx, wallpaper, 0, 61, SCENE_W, 15);
+    // The two window bays share the same substantial oak front as the live bar.
+    // This is architecture behind the existing service aisle, never a new obstacle.
+    if (this.density > 1 && wallpaper === 'wall_cream') {
+      for (const win of WINDOWS) paintCozyCabinet(this.ctx, win.x - 4, 59, win.w + 8, 3, 17);
+    }
     // Baseboard.
     this.r(0, 76, SCENE_W, 4, WOOD.dark);
     this.r(0, 76, SCENE_W, 1, WOOD.base);
@@ -604,7 +618,7 @@ export class RoomPainter {
     if (generated) {
       ctx.save(); ctx.imageSmoothingEnabled = false;
       const rs = generated.sourceScale;
-      ctx.drawImage(generated.source, 10 * rs, 10 * rs, generated.sourceWidth * rs, generated.sourceHeight * rs,
+      ctx.drawImage(generated.source, generated.cropX * rs, generated.cropY * rs, generated.sourceWidth * rs, generated.sourceHeight * rs,
         generated.x, generated.y, generated.w, generated.h);
       ctx.restore();
     } else {
@@ -876,7 +890,7 @@ export class RoomPainter {
       this.ctx.drawImage(projected, 0, 0, SCENE_W, H);
       return;
     }
-    if (floor === 'floor_checker') paintPixelFloorDepth(this.ctx, 0, FLOOR_Y, SCENE_W, H - FLOOR_Y, 17, { pixelSize: 0.5, columns: 16, rows: 10, horizontalBackScale: this.density > 1 ? 1 : 0.8 });
+    if (floor === 'floor_checker') paintPixelFloorDepth(this.ctx, 0, FLOOR_Y, SCENE_W, H - FLOOR_Y, 17, { pixelSize: 0.5, columns: 12, rows: 8, horizontalBackScale: this.density > 1 ? 1 : 0.8 });
     else paintFloor(this.ctx, floor, 0, FLOOR_Y, SCENE_W, H - FLOOR_Y);
     // Shadow where the floor meets the wall.
     this.ctx.save();
@@ -885,7 +899,8 @@ export class RoomPainter {
       this.r(0, FLOOR_Y + i, SCENE_W, 1, '#2a1410');
     }
     this.ctx.restore();
-    this.drawDiningBays();
+    // The quieter continuous stone floor lets the furniture define each dining bay.
+    if (!cozyCafePart('table')) this.drawDiningBays();
     // The guest cross-aisle connects the entry and reading room.
     paintPassageFloor(this.ctx, 'main');
     // The rug lies in the open floor between the counter and the front door;
@@ -899,7 +914,7 @@ export class RoomPainter {
     const { lean, length } = beam(light.sun);
     for (const win of WINDOWS) {
       const opening = this.wallWindow(win)?.aperture ?? win;
-      paintSunbeam(ctx, light.sun, opening.x, opening.x + opening.w, FLOOR_Y, lean * 1.8, length * 1.2, { opacity: 0.78, pixelSize: 0.5 });
+      paintSunbeam(ctx, light.sun, opening.x, opening.x + opening.w, FLOOR_Y, lean * 2.4, length * 1.35, { opacity: 0.88, pixelSize: 0.5 });
     }
     paintSunbeam(ctx, light.sun, DOOR_X, DOOR_X + DOOR_W, H, Math.round(lean / 3), -Math.round(length * 0.9));
     // Kitchen light spilling in through the door in the left wall while it's open.
@@ -974,6 +989,7 @@ export class RoomPainter {
     const colors = counterColors(counter);
     const wood = ramp(colors.front);
     for (const { x } of MAIN_CUPBOARDS) {
+      if (this.density > 1 && counter === 'counter_oak' && paintCozyCabinet(this.ctx, x - 1, 78, 42, 5, 25)) continue;
       // Retain the established floor/contact anchor and countertop back edge.
       this.r(x - 1, 80, 42, 27, OUTLINE);
       this.r(x, 81, 40, 23, wood.base);

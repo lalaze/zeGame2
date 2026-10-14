@@ -1,0 +1,29 @@
+import { createRequire } from 'node:module';
+const require=createRequire(import.meta.url);
+const {spawn}=require('child_process');const fs=require('fs');const path=require('path');const os=require('os');
+const profile=fs.mkdtempSync(path.join(os.tmpdir(),'cozy-sample-qa-'));const chrome=spawn('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',['--headless','--remote-debugging-pipe','--user-data-dir='+profile,'--no-first-run','--no-default-browser-check'],{stdio:['ignore','ignore','ignore','pipe','pipe']});
+let seq=0,buffer='',session;const waiting=new Map(),errors=[];chrome.stdio[4].on('data',b=>{buffer+=b.toString();let i;while((i=buffer.indexOf('\0'))>=0){const raw=buffer.slice(0,i);buffer=buffer.slice(i+1);if(!raw)continue;const msg=JSON.parse(raw);if(msg.id&&waiting.has(msg.id)){const p=waiting.get(msg.id);waiting.delete(msg.id);msg.error?p.reject(Error(JSON.stringify(msg.error))):p.resolve(msg.result);}if(msg.method==='Runtime.exceptionThrown')errors.push(msg.params.exceptionDetails);}});
+function send(method,params={},sid=session){return new Promise((resolve,reject)=>{const id=++seq;waiting.set(id,{resolve,reject});chrome.stdio[3].write(JSON.stringify({id,method,params,...(sid?{sessionId:sid}:{})})+'\0');});}
+async function ev(expression){const r=await send('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw Error(JSON.stringify(r.exceptionDetails));return r.result.value;}
+const delay=ms=>new Promise(r=>setTimeout(r,ms));
+(async()=>{try{
+const target=await send('Target.createTarget',{url:'about:blank'},null);session=(await send('Target.attachToTarget',{targetId:target.targetId,flatten:true},null)).sessionId;
+await send('Runtime.enable');await send('Page.enable');await send('Emulation.setDeviceMetricsOverride',{width:1200,height:1000,deviceScaleFactor:1,mobile:false});
+await send('Page.navigate',{url:'http://127.0.0.1:5173/?qa-light=10'});
+for(let i=0;i<120;i++){await delay(300);if(await ev('!!document.querySelector(".onboard [data-next]")'))break;}
+for(let i=0;i<2;i++){await ev('document.querySelector(".onboard [data-next]").click()');await delay(100);}
+await ev('document.querySelector("[data-cozy-owner-preset]").click()');await delay(200);
+for(let i=0;i<3;i++){await ev('document.querySelector(".onboard [data-next]").click()');await delay(150);}
+console.log('GUEST_FRAMES '+JSON.stringify(await ev(`(async()=>{const source=await fetch('/src/render/sprites.ts').then(r=>r.text());const url=source.match(/from "([^"]*reference-character-art[^"]*)"/)[1];const r=await import(url);const s=await import('/src/render/sprites.ts');const f=await import('/src/render/fine-sprite-art.ts');const cast=await import('/src/game/customer-cast.ts');await r.preloadReferenceCharacters();const frames=s.character(cast.CUSTOMER_CAST[1].look,'customer',1);const all=[...frames.down,...frames.up,...frames.right,...frames.left,frames.sitRight,frames.sitLeft,...frames.sitPetRight,...frames.sitPetLeft];const checks=all.map(frame=>{const art=f.fineSpriteArt(frame).canvas,px=art.getContext('2d').getImageData(0,0,art.width,art.height).data;let n=0,edge=0;for(let i=3;i<px.length;i+=4)if(px[i]){n++;const v=(i-3)/4,x=v%art.width,y=Math.floor(v/art.width);if(!x||!y||x===art.width-1||y===art.height-1)edge++;}return {n,edge,contact:r.referenceCharacterContacts(frame)};});if(checks.length!==18||checks.some(x=>!x.n||x.edge||!x.contact))throw Error('Guest pose failure');return {id:1,name:cast.CUSTOMER_CAST[1].name,checks};})()`)));
+await ev(`(async()=>{const {Sim}=await import('/src/game/sim.ts');const original=Sim.prototype.update;Sim.prototype.update=function(state,dt){window.cafeQA={sim:this,state};return window.freezeCafeQA?[]:original.call(this,state,dt);};})()`);
+await delay(500);
+console.log('CAPTURED '+JSON.stringify(await ev('({sim:!!window.cafeQA,state:window.cafeQA?.state.phase})')));
+await ev(`(async()=>{window.freezeCafeQA=true;const {sim,state}=window.cafeQA;sim.customerCast.restore({remaining:[1],previous:-1});sim.spawn(state);const c=sim.customers[0];if(c.appearanceId!==1)throw Error('Wrong guest');window.guestQA=c;const layout=await import('/src/game/layout.ts');window.qaLayout=layout;Object.assign(c,{x:190,y:230,tx:210,ty:230,phase:'queue',via:[],journey:[],stride:4});sim.queue=[];})()`);
+for(const dir of ['right','left','up','down']){
+ await ev(`Object.assign(guestQA,{tx:guestQA.x+(${JSON.stringify(dir)}==='right'?20:${JSON.stringify(dir)}==='left'?-20:0),ty:guestQA.y+(${JSON.stringify(dir)}==='down'?20:${JSON.stringify(dir)}==='up'?-20:0),stride:8})`);await delay(100);
+}
+for(const side of [0,1]){await ev(`(()=>{const {sim}=cafeQA;sim.seats.fill(null);const p=qaLayout.seatSpot(0,${side});Object.assign(guestQA,{...p,tx:p.x,ty:p.y,phase:'sitting',seat:${side},dineIn:true,hasCup:true});sim.seats[${side}]=guestQA.id;})()`);await delay(250);}
+console.log('PRODUCTION_GUEST '+JSON.stringify(await ev('({id:guestQA.appearanceId,phase:guestQA.phase,seat:guestQA.seat,owner:cafeQA.state.profile.look})')));
+await send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});await delay(250);console.log('MOBILE '+JSON.stringify(await ev('({width:innerWidth,scroll:document.documentElement.scrollWidth})')));
+console.log('RUNTIME_ERRORS '+JSON.stringify(errors));if(errors.length)throw Error('Runtime exceptions');
+} catch(e){console.log('QA_ERROR '+e.stack);process.exitCode=1;}finally{await send('Browser.close',{},null).catch(()=>{});await Promise.race([new Promise(r=>chrome.once('exit',r)),delay(2000)]);if(chrome.exitCode===null)chrome.kill('SIGTERM');fs.rmSync(profile,{recursive:true,force:true});if(fs.existsSync(profile))throw Error('Temporary profile still exists');console.log('PROFILE_CLEANED '+profile);}})();

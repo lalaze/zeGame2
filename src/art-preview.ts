@@ -1,4 +1,5 @@
 import { artArchive, type ArchiveFile } from './render/art-archive';
+import { preloadReferenceCharacters } from './render/reference-character-art';
 import { makeSignatureId, type SignatureBase, type SignatureRecipe } from './game/signature-drinks';
 import { paintServiceCup, paintServiceTray, paintTableVase, paintTableTent } from './render/service-props-art';
 import { paintCallBubble, paintAckBubble, paintOrderFrame, paintSoldOutFrame, paintSoldOutCross, paintThoughtFrame } from './render/ui-art';
@@ -20,6 +21,8 @@ import { paintRegion } from './render/region-art';
 import { RoomPainter } from './render/room-art';
 import { catFrames, character, ingredientIcon, itemArtwork, upgradeIcon, heartSprite, dropSprite, crownSprite, type Role } from './render/sprites';
 
+async function startArtPreview(): Promise<void> {
+await preloadReferenceCharacters();
 setLocale('zh');
 type Asset = { id: string; group: string; name: string; canvas: HTMLCanvasElement };
 const assets: Asset[] = [];
@@ -173,4 +176,11 @@ archive.addEventListener('click', () => {
     archiveUrl = URL.createObjectURL(new Blob([artArchive(files) as Uint8Array<ArrayBuffer>], { type: 'application/zip' }));
   }
   archive.href = archiveUrl;
+});
+}
+
+void startArtPreview().catch((error: unknown) => {
+  const status = document.querySelector('#count');
+  if (status) status.textContent = '人物素材加载失败，请刷新重试。';
+  console.error('Character art preview failed to load.', error);
 });
