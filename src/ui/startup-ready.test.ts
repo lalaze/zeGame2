@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { waitForStartupReady } from './startup-ready';
+import { STARTUP_TIMEOUT_MS, waitForStartupReady } from './startup-ready';
 
 function deferred() {
   let resolve!: () => void;
@@ -9,6 +9,20 @@ function deferred() {
 }
 
 describe('startup readiness', () => {
+  it('rejects a stuck renderer and never reports a late completion as ready', async () => {
+    vi.useFakeTimers();
+    const renderer = deferred();
+    const ready = vi.fn();
+    const startup = waitForStartupReady(renderer.promise, Promise.resolve()).then(ready);
+    const rejected = expect(startup).rejects.toThrow('Café startup timed out');
+    await vi.advanceTimersByTimeAsync(STARTUP_TIMEOUT_MS);
+    await rejected;
+    renderer.resolve();
+    await Promise.resolve();
+    expect(ready).not.toHaveBeenCalled();
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
   beforeEach(() => vi.useFakeTimers());
   afterEach(() => vi.useRealTimers());
 

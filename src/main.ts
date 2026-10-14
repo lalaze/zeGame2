@@ -43,6 +43,7 @@ import { dockMobileControls } from './ui/mobile-layout';
 import { ArrangeFocus } from './ui/arrange-focus';
 import { trackVisualViewport } from './ui/viewport';
 import { waitForStartupReady } from './ui/startup-ready';
+import { startupLoading } from './ui/startup-loading';
 
 trackVisualViewport();
 import { settlementHtml } from './ui/settlement';
@@ -88,6 +89,8 @@ void Promise.resolve().then(() => acquireSaveSession(storage, navigator.locks, s
 });
 
 function startGame(session: SaveSession): void {
+const loading = startupLoading($('loader'), chinese(), () => window.location.reload());
+let startupComplete = false;
 let state: GameState = session.state;
 const sim = session.sim;
 const scene = new CafeView();
@@ -119,7 +122,9 @@ function saveGame(): void {
 // A released/stale session must not accept keyboard shortcuts or modal actions.
 for (const type of ['click', 'pointerdown', 'keydown']) {
   window.addEventListener(type, (event) => {
-    if (!session.active || document.getElementById('save-session-notice')) {
+    // The loading overlay owns its retry control, even after a failed session closes.
+    if (event.target instanceof Node && $('loader')?.contains(event.target)) return;
+    if (!startupComplete || !session.active || document.getElementById('save-session-notice')) {
       event.preventDefault();
       event.stopImmediatePropagation();
     }
@@ -797,6 +802,7 @@ function pointerMove(x: number, y: number): void {
 }
 
 window.addEventListener('keydown', (e) => {
+  if (!startupComplete) return;
   // Preserve native activation and editing; Esc can still close a dialog.
   if (isComposingKey(e)) return;
   const onboarding = !!document.querySelector('.onboard-overlay');
@@ -825,7 +831,7 @@ document.addEventListener('visibilitychange', () => {
 savePage.onClose(() => {
   try { saveGame(); } finally { session.close(); }
 });
-setInterval(() => saveGame(), AUTOSAVE_MS);
+const autosaveTimer = setInterval(() => { if (startupComplete) saveGame(); }, AUTOSAVE_MS);
 
 // ------------------------------------------------------------ loop
 
@@ -837,7 +843,7 @@ let shownRate = '';
 function frame(dt: number): void {
   // Paused while a dialog (like the day report) is up or the tab is hidden; sped up
   // when the player asks.
-  const paused = !session.active || !!document.getElementById('save-session-notice') || isModalOpen() || document.hidden || !!document.querySelector('.onboard-overlay');
+  const paused = !startupComplete || !session.active || !!document.getElementById('save-session-notice') || isModalOpen() || document.hidden || !!document.querySelector('.onboard-overlay');
   scene.paused = paused;
   const simDt = paused ? 0 : state.phase !== 'prep' ? dt * state.speed : dt;
   for (let remaining = simDt; remaining > 1e-6; remaining -= SIM_STEP) {
@@ -877,20 +883,23 @@ function frame(dt: number): void {
 
 const cafe = new CafeGame(canvas, scene, sim, () => state, {
   tick: frame, pointerDown, pointerMove, interactionState: () => arrange,
-  interactionEnabled: () => cafeInteractionEnabled(session.active, isModalOpen()),
+  interactionEnabled: () => startupComplete && cafeInteractionEnabled(session.active, isModalOpen()),
+  loadingProgress: (loaded, total) => loading.progress(loaded, total),
 });
 fitCanvas();
 panel.update();
 regionsUI.select('main');
 updateDayHud();
-// Saves from before the opening flow existed go through it first.
-if (!state.profile) startOnboarding();
+// Onboarding must wait until the renderer and its generated portraits are ready.
 
-// The page starts behind a loading spinner (see index.html). Lift it once the pixel
+// The inline resource progress stays visible until the pixel
 // fonts are in (or after 2s at most) and the café has drawn its first frame.
 waitForStartupReady(cafe.ready, document.fonts.ready).then(() =>
   requestAnimationFrame(() => {
+    startupComplete = true;
+    loading.complete();
     document.body.classList.add('ready');
+    if (!state.profile) startOnboarding();
     setTimeout(() => $('loader').remove(), 300);
     const movedFurniture = consumeFurnitureMovesOnLoad(state);
     if (movedFurniture > 0) {
@@ -898,5 +907,10 @@ waitForStartupReady(cafe.ready, document.fonts.ready).then(() =>
       toast(t('toast.furnitureMovedOnLoad', { n: movedFurniture }));
     }
   }),
-);
+).catch((error: unknown) => {
+  clearInterval(autosaveTimer);
+  session.close();
+  loading.fail(error);
+  cafe.destroy();
+});
 }

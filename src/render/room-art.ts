@@ -45,7 +45,7 @@ import { fineTableCanvas, fineChairCanvas } from './fine-dining-art';
 import { fineSpriteArt, registerFineSpriteArt } from './fine-sprite-art';
 import { paintFineBreadBasket, paintFineCakeDome, paintFineCupStack, paintFineStorageJar, FINE_COUNTER_PROP_BOUNDS } from './fine-counter-props-art';
 import { paintFineTrailingPlant } from './fine-plant-art';
-import { generatedMainRaster, paintGeneratedMain, paintGeneratedCabinetBand } from './generated-main-art';
+import { generatedMainRaster, paintGeneratedMain } from './generated-main-art';
 
 const WOOD = { base: '#865332', hi: '#c98c4d', lo: '#67432b', dark: '#543425' };
 type WindowBounds = { x: number; y: number; w: number; h: number };
@@ -457,6 +457,40 @@ export class RoomPainter {
   }
 
 
+  /** A single satin oak worktop, with restrained paneled joinery from the reference. */
+  private referenceOakCounter(x: number, y: number, w: number, topH: number, frontH: number, drawers = false): void {
+    const ctx = this.ctx, front = y + topH, bottom = front + frontH;
+    this.r(x, y, w, topH, '#b77841');
+    this.r(x + 1, y + 1, w - 2, 1, '#e0b57b');
+    this.r(x + 1, front - 2, w - 2, 1, '#d69a56');
+    this.r(x, front - 1, w, 2, '#62402a');
+    for (let yy = y + 3; yy < front - 2; yy += 3) {
+      this.r(x + 2, yy, w - 4, 1, yy % 2 ? '#b17642' : '#bd814a');
+    }
+    this.r(x, front + 1, w, frontH - 1, '#805333');
+    const count = Math.max(1, Math.round(w / 28)), step = w / count;
+    for (let i = 0; i < count; i++) {
+      const px = x + i * step + 2, pw = step - 4;
+      paintFineCabinet(ctx, px, front + 2, pw, frontH - 4, '#895a37', drawers);
+      if (drawers) {
+        this.r(px + 2, front + 3, pw - 4, 4, '#92633c');
+        this.r(px + 2, front + 7, pw - 4, 1, '#593b28');
+        this.r(px + pw / 2 - 2, front + 4, 4, 1, '#d7b879');
+      }
+    }
+    this.r(x, bottom - 2, w, 2, '#563c2b');
+  }
+
+  /** Full generated image, aligned by measured opaque bounds; alpha is preserved. */
+  private referenceMachine(left: number, foot: number): boolean {
+    if (this.density <= 1) return false;
+    const raster = generatedMainRaster('reference-machine');
+    if (!raster) return false;
+    const scale = 32 / 1166;
+    return paintGeneratedMain(this.ctx, 'reference-machine',
+      left - 132 * scale, foot - 930 * scale, 1430 * scale, 1100 * scale);
+  }
+
   private cabinet(x: number, y: number, w: number, h: number, base: string, handle = false): void {
     (this.density > 1 ? paintFineCabinet : cabinetPanel)(this.ctx, x, y, w, h, base, handle);
   }
@@ -472,11 +506,20 @@ export class RoomPainter {
   }
 
   private drawWallLogical(wallpaper: string, t: number): void {
-    paintWall(this.ctx, wallpaper, 0, 6, SCENE_W, 54, t);
+    if (wallpaper === 'wall_cream' && this.density > 1) {
+      // Quiet linen-and-ivory stripes keep the windows and chalkboard in focus.
+      this.r(0, 6, SCENE_W, 55, '#efdfc1');
+      for (let x = 0; x < SCENE_W; x += 8) {
+        this.r(x, 6, 1, 55, '#d6bd95');
+        this.r(x + 1, 6, 1, 55, '#fff0d6');
+        this.r(x + 4, 6, 1, 55, '#e5cfaa');
+      }
+    } else paintWall(this.ctx, wallpaper, 0, 6, SCENE_W, 54, t);
     // A deep crown beam with laminated timber returns and pegged end blocks.
     const beamPainter = this.density > 1 ? paintFineBeam : timberBeam;
     const environment = this.density > 1 ? getGeneratedMainEnvironmentAdapter() : null;
-    if (!environment?.paintBeam(this.ctx, 0, 0, SCENE_W, 8)) beamPainter(this.ctx, 0, 0, SCENE_W, 8);
+    // One continuous header rather than repeating an end-capped beam bitmap.
+    beamPainter(this.ctx, 0, 0, SCENE_W, 8);
     for (const x of [0, SCENE_W - 7]) {
       // Native source columns are broader than the historical seven-pixel
       // strip. Contain them at the outer boundary, never stretch their woodwork.
@@ -694,10 +737,9 @@ export class RoomPainter {
     }
     this.r(x, bottom - 2, w, 2, body.dark);
 
-    const generatedBackCounter = getGeneratedDecorAdapter()?.paintCounter(this.ctx, counter, x + 1, top + 1, w - 2, front - top - 1, bottom - front - 2);
+    const generatedBackCounter = counter !== 'counter_oak' && getGeneratedDecorAdapter()?.paintCounter(this.ctx, counter, x + 1, top + 1, w - 2, front - top - 1, bottom - front - 2);
     if (!generatedBackCounter && this.density > 1 && counter === 'counter_oak') {
-      paintGeneratedCabinetBand(this.ctx, 'cabinet-top', x + 1, top + 1, w - 2, front - top - 2);
-      paintGeneratedCabinetBand(this.ctx, 'cabinet-front', x + 2, front + 2, w - 4, bottom - front - 4);
+      this.referenceOakCounter(x, top, w, front - top, bottom - front, true);
     }
 
     const sit = top + 4; // Items stand a little back from the front edge.
@@ -834,7 +876,7 @@ export class RoomPainter {
       this.ctx.drawImage(projected, 0, 0, SCENE_W, H);
       return;
     }
-    if (floor === 'floor_checker' && !getGeneratedDecorAdapter()?.readyIds.includes('floor_checker')) paintPixelFloorDepth(this.ctx, 0, FLOOR_Y, SCENE_W, H - FLOOR_Y, 17, { pixelSize: 0.5, horizontalBackScale: this.density > 1 ? 1 : 0.8 });
+    if (floor === 'floor_checker') paintPixelFloorDepth(this.ctx, 0, FLOOR_Y, SCENE_W, H - FLOOR_Y, 17, { pixelSize: 0.5, columns: 16, rows: 10, horizontalBackScale: this.density > 1 ? 1 : 0.8 });
     else paintFloor(this.ctx, floor, 0, FLOOR_Y, SCENE_W, H - FLOOR_Y);
     // Shadow where the floor meets the wall.
     this.ctx.save();
@@ -897,7 +939,8 @@ export class RoomPainter {
     const ctx = this.ctx;
     ctx.save();
     for (const x of [13, 193]) {
-      ctx.globalAlpha = 0.15;
+      // Fine inlaid borders, without darkening entire dining bays.
+      ctx.globalAlpha = 0.04;
       this.r(x, top, 114, bottom - top, '#9b6747');
       ctx.globalAlpha = 0.35;
       this.r(x, top, 114, 1, '#a97954');
@@ -930,15 +973,8 @@ export class RoomPainter {
   private drawServiceCupboardsLogical(counter: string): void {
     const colors = counterColors(counter);
     const wood = ramp(colors.front);
-    let attachmentOffsetY = 0;
     for (const { x } of MAIN_CUPBOARDS) {
       // Retain the established floor/contact anchor and countertop back edge.
-      if (this.serviceBitmap('service-cupboard', x + 20, 108, 44, 31)) {
-        // The selected bitmap's sloped wood plane is below the old flat slab.
-        // Move only its loose attachments; the cabinet foot and world stay put.
-        attachmentOffsetY = 4;
-        continue;
-      }
       this.r(x - 1, 80, 42, 27, OUTLINE);
       this.r(x, 81, 40, 23, wood.base);
       this.r(x + 2, 85, 17, 16, wood.lo);
@@ -957,7 +993,6 @@ export class RoomPainter {
     }
     this.ctx.save();
     try {
-      if (attachmentOffsetY) this.ctx.translate(0, attachmentOffsetY);
       // Glass carafe with a turned neck, stepped shoulders, open handle and water line.
       this.r(272, 69, 9, 9, '#638a81');
       this.r(273, 66, 7, 12, '#98baaa');
@@ -1068,13 +1103,7 @@ export class RoomPainter {
     this.drawReturn(counter);
     paintCounter(this.ctx, counter, x, top, w, front - top, bottom - front);
     if (this.density > 1 && counter === 'counter_oak') {
-      const base = counterColors(counter).front;
-      for (let px = x + 2; px < x + w - 3; px += 28) {
-        const panelW = Math.min(26, x + w - 2 - px);
-        if (panelW >= 8) this.cabinet(px, front + 2, panelW, bottom - front - 5, base);
-      }
-      paintGeneratedCabinetBand(this.ctx, 'cabinet-top', x + 1, top + 1, w - 2, front - top - 2);
-      paintGeneratedCabinetBand(this.ctx, 'cabinet-front', x + 2, front + 1, w - 4, bottom - front - 3);
+      this.referenceOakCounter(x, top, w, front - top, bottom - front);
     }
 
     // Espresso machine; its finish gets fancier with upgrades.
@@ -1083,7 +1112,7 @@ export class RoomPainter {
     const brewing = cups.length > 0;
     const mx = MACHINE_X;
     const my = MACHINE_Y;
-    if (!this.serviceBitmap('service-machine', mx + 13, my + 24, 30, 25)) {
+    if (!this.referenceMachine(mx - 2, my + 24) && !this.serviceBitmap('service-machine', mx + 13, my + 24, 30, 25)) {
       const chrome = ramp('#c9d3d8');
       // The selected bitmap already includes both steam wands; legacy art needs
       // its separate wand. Live brew streams and upgrade cues remain below.
@@ -1277,37 +1306,8 @@ export class RoomPainter {
     const { top, front, bottom } = COUNTER;
     const { x, w } = PASTRY_CASE;
     const ctx = this.ctx;
-    // The generated cabinet is genuinely empty. All food is still determined by
-    // the current menu and prep plan/live shelf, never painted into its bitmap.
-    if (this.density > 1 && generatedMainRaster('display')) {
-      const displayY = front - 2, displayH = w * 521 / 1941;
-      paintGeneratedMain(ctx, 'display', x, displayY, w, displayH);
-      const shelfY = displayY + displayH * 0.84;
-      const bakery = menuItems(state).filter(m => !isDrink(m.category)).slice(0, 5);
-      const slots = Math.max(3, bakery.length);
-      bakery.forEach((m, i) => {
-        const count = state.phase === 'prep' ? (state.bakePlan[m.id] ?? 0) : (state.shelf[m.id] ?? 0);
-        if (count <= 0) return;
-        const sx = x + w / slots * (i + 0.5);
-        this.r(sx - 5, shelfY, 10, 0.5, '#f4ead6');
-        if (m.id === 'croissant' || m.id === 'cake') {
-          const food = generatedMainRaster(m.id);
-          if (food) {
-            const scale = Math.min((m.id === 'croissant' ? 12 : 8) / food.width, 8 / food.height);
-            const width = food.width * scale, height = food.height * scale;
-            if (paintGeneratedMain(ctx, m.id, sx - width / 2, shelfY - height, width, height)) return;
-          }
-        }
-        const icon = itemIcon(m.id);
-        const ix = Math.round(sx - icon.width / 2), iy = shelfY - icon.height + 1;
-        if (count >= 8) ctx.drawImage(fineSpriteArt(icon).canvas, ix - 2, iy - 2, icon.width, icon.height);
-        ctx.drawImage(fineSpriteArt(icon).canvas, ix, iy, icon.width, icon.height);
-      });
-      ctx.save(); ctx.globalAlpha = 0.14;
-      for (const gx of [x + 7, x + w / 2 + 2]) for (let i = 0; i < 9; i++) this.r(gx + i, displayY + 7 + i, 0.5, 0.5, '#fff8de');
-      ctx.restore();
-      return;
-    }
+    // Reuse the existing live-stock case painter with a pale oak frame. Its
+    // cream interior matches the reference and keeps every food item dynamic.
     // Glass top over the case.
     this.r(x, top + 1, w, front - top - 4, '#cfe6ea');
     this.r(x, top + 1, w, 1, '#eef8fa');
@@ -1317,7 +1317,7 @@ export class RoomPainter {
     // The case itself: a lit cream interior with one shelf.
     const cy = front + 2;
     const ch = bottom - front - 6;
-    const brass = ramp('#d9a441');
+    const brass = ramp('#b98546');
     this.r(x - 1, cy - 1, w + 2, ch + 2, OUTLINE);
     this.r(x, cy, w, ch, '#f6e6c6');
     this.r(x, cy, w, 3, '#fff4d8');

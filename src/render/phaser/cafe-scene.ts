@@ -68,6 +68,8 @@ export interface CafeHooks {
   interactionState?(): unknown;
   /** Live page guard; pause state alone may be one animation frame behind. */
   interactionEnabled?(): boolean;
+  /** Decoded images ready for texture installation, not just downloaded bytes. */
+  loadingProgress?(loaded: number, total: number): void;
 }
 
 // Back to front. Everything standing on the floor sorts by where its feet are.
@@ -242,18 +244,41 @@ export class CafeScene extends Phaser.Scene {
     private getState: () => GameState,
     private hooks: CafeHooks,
     private onCreate: () => void,
+    private onLoadError: (error: Error) => void = () => {},
   ) {
     super('cafe');
   }
 
+  private loadingFailed = false;
+
   preload(): void {
     clearGeneratedMainAssets();
+    this.loadingFailed = false;
+    let loaded = 0;
+    const total = Object.keys(GENERATED_MAIN_ASSETS).length;
+    this.hooks.loadingProgress?.(loaded, total);
+    this.load.on('filecomplete', () => {
+      if (!this.loadingFailed) this.hooks.loadingProgress?.(++loaded, total);
+    });
+    this.load.once('loaderror', (file: { key: string }) => {
+      this.loadingFailed = true;
+      this.onLoadError(new Error(`Image failed to load: ${file.key}`));
+    });
     for (const [id, file] of Object.entries(GENERATED_MAIN_ASSETS)) {
       this.load.image(generatedMainKey(id as GeneratedMainId), `${import.meta.env.BASE_URL}art/generated/${file}`);
     }
   }
 
   create(): void {
+    if (this.loadingFailed) return;
+    try { this.createCafe(); }
+    catch (error) {
+      this.loadingFailed = true;
+      this.onLoadError(error instanceof Error ? error : new Error(String(error)));
+    }
+  }
+
+  private createCafe(): void {
     for (const id of Object.keys(GENERATED_MAIN_ASSETS) as GeneratedMainId[]) {
       const key = generatedMainKey(id);
       if (this.textures.exists(key)) installGeneratedMainAsset(id, this.textures.get(key).getSourceImage() as HTMLImageElement);
@@ -392,6 +417,7 @@ export class CafeScene extends Phaser.Scene {
   }
 
   update(time: number, delta: number): void {
+    if (this.loadingFailed) return;
     const measuredAt = this.metrics?.enabled ? performance.now() : 0;
     const dt = Math.min(0.25, Math.max(0, delta / 1000));
     this.hooks.tick(dt);

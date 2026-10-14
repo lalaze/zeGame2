@@ -1,0 +1,10 @@
+<!doctype html><meta charset="utf-8"><title>Main scene visual QA</title><style>body{margin:0;background:#eaddc4;display:grid;place-items:center;min-height:100vh}canvas{image-rendering:pixelated}#status{position:absolute;top:4px;left:8px;font:12px sans-serif}</style><canvas id="scene"></canvas><span id="status">Loading</span><script type="module">
+import {CafeGame} from '/src/render/phaser/game.ts';
+import {CafeView} from '/src/render/cafe-view.ts';
+import {Sim} from '/src/game/sim.ts';
+import {createInitialState} from '/src/game/state.ts';
+const state=createInitialState(0), sim=new Sim(()=>.5), view=new CafeView();
+const game=new CafeGame(document.querySelector('canvas'),view,sim,()=>state,{tick(){sim.update(state,0)},pointerDown(){},pointerMove(){},loadingProgress(n,total){document.querySelector('#status').textContent=n+'/'+total}});
+game.resize({width:960,height:720,cssWidth:960,cssHeight:720,backing:3,smooth:false});
+game.ready.then(()=>{document.querySelector('#status').textContent='READY';document.body.dataset.ready='true'}).catch(e=>document.querySelector('#status').textContent=String(e));
+</script>

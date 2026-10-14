@@ -103,7 +103,7 @@ describe('generated main-room asset registry and painting', () => {
   it('queues each runtime image under its own stable key and the configured base URL', async () => {
     const { CafeScene } = await import('./phaser/cafe-scene');
     const loadImage = vi.fn();
-    const scene = Object.assign(Object.create(CafeScene.prototype), { load: { image: loadImage } });
+    const scene = Object.assign(Object.create(CafeScene.prototype), { load: { image: loadImage, on: vi.fn(), once: vi.fn() }, hooks: {} });
     scene.preload();
     expect(loadImage.mock.calls).toEqual(Object.entries(art.GENERATED_MAIN_ASSETS)
       .map(([id, file]) => [art.generatedMainKey(id as GeneratedMainId), `${import.meta.env.BASE_URL}art/generated/${file}`]));

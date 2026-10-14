@@ -26,6 +26,20 @@ export function paintPixelRoomShell(ctx: CanvasRenderingContext2D, height: numbe
       if (Math.floor(y) % 19 < 8 && depth > 4) r(side === 'left' ? 2 : width - 3, y, .5, .5, '#b1814f');
     }
   }
+  // Chunky outer oak posts and projecting collars frame the diorama. They
+  // stay in the existing outer wall margin and never cover a walkable foot.
+  for (const side of ['left', 'right'] as const) {
+    const x = side === 'left' ? 0 : width - 5;
+    r(x, 0, 5, height - 7, '#684730');
+    r(x + 1, 0, 3, height - 7, '#92603b');
+    r(side === 'left' ? x + 1 : x + 3.5, 1, .5, height - 9, '#c39460');
+    r(side === 'left' ? x + 4 : x, 1, .5, height - 9, '#463022');
+    for (const y of [2, 39, height - 70, height - 30, height - 12]) {
+      r(Math.max(0, x - 1), y, 6, 4, '#563b29');
+      r(Math.max(0, x - 1), y, 6, .5, '#d5aa72');
+      r(Math.max(0, x - .5), y + .5, 5.5, 1.5, '#a67649');
+    }
+  }
   // An architectural header and rear reveal above the original floor opening.
   // This is background joinery; paintRoomBoundaries retains its <=8px sill.
   const kitchen = options.doorways?.find(door => door.side === 'left');

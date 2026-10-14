@@ -13,8 +13,7 @@
     <link rel="apple-touch-icon" href="./icon-192.png" />
     <title>Tiny Bean Café</title>
     <style>
-      /* Shown until the game is ready (main.ts adds .ready to <body>); kept inline so it
-         works before the stylesheet and fonts load. */
+      /* Visible before JavaScript, stylesheets and fonts finish loading. */
       html, body { background: #543425; }
       body:not(.ready) #app { visibility: hidden; }
       #loader {
@@ -22,11 +21,37 @@
         inset: 0;
         z-index: 100;
         display: grid;
-        place-items: center;
+        place-content: center;
+        justify-items: center;
+        gap: 20px;
+        padding: 24px;
+        color: #fff7e8;
+        text-align: center;
+        font: 16px/1.5 system-ui, sans-serif;
         background: #543425;
         transition: opacity 0.25s;
       }
       body.ready #loader { opacity: 0; pointer-events: none; }
+      #loader [hidden] { display: none; }
+      #loader .loader-title { margin: 12px 0 0; font-size: 22px; letter-spacing: 1px; }
+      #loader .loader-status { margin: 0; max-width: 30em; overflow-wrap: anywhere; }
+      #loader .loader-meter { width: min(300px, 80vw); display: grid; gap: 8px; }
+      #loader progress {
+        display: block; box-sizing: border-box; width: 100%; height: 20px;
+        appearance: none; border: 3px solid #c8a15e; border-radius: 0;
+        background: #382218; color: #f0ce85; accent-color: #f0ce85;
+      }
+      #loader progress::-webkit-progress-bar { background: #382218; }
+      #loader progress::-webkit-progress-value { background: #f0ce85; }
+      #loader progress::-moz-progress-bar { background: #f0ce85; }
+      #loader progress:indeterminate { opacity: 0.65; }
+      #loader .loader-count { min-height: 1.5em; color: #ebbd7d; font-variant-numeric: tabular-nums; }
+      #loader .loader-retry {
+        padding: 10px 24px; border: 2px solid #c8a15e; border-radius: 0;
+        background: #865332; color: #fff7e8; font: inherit; cursor: pointer;
+      }
+      #loader .loader-retry:focus-visible { outline: 3px solid #fff7e8; outline-offset: 4px; }
+      #loader .loader-detail { max-width: 36em; overflow-wrap: anywhere; }
       #loader i {
         width: 12px;
         height: 12px;
@@ -43,12 +68,22 @@
         87.5% { box-shadow: -16px -16px #865332, 0px -16px #865332, 16px -16px #865332, 16px 0px #865332, 16px 16px #866344, 0px 16px #c8a15e, -16px 16px #ebbd7d, -16px 0px #f0ce85; }
       }
       @media (prefers-reduced-motion: reduce) {
-        #loader i { animation-duration: 2.4s; }
+        #loader i { animation: none; box-shadow: -16px -16px #f0ce85, 0 -16px #865332, 16px -16px #865332, 16px 0 #865332, 16px 16px #865332, 0 16px #866344, -16px 16px #c8a15e, -16px 0 #ebbd7d; }
+        #loader { transition: none; }
       }
     </style>
   </head>
   <body>
-    <div id="loader" role="progressbar" aria-label="Loading"><i></i></div>
+    <div id="loader" aria-busy="true">
+      <i aria-hidden="true"></i>
+      <p class="loader-title">Tiny Bean Café</p>
+      <p class="loader-status" data-loading-status role="status">正在载入游戏 / Loading the café…</p>
+      <div class="loader-meter">
+        <progress data-loading-bar max="1" aria-label="资源加载进度 / Asset loading progress"></progress>
+        <span class="loader-count" data-loading-count></span>
+      </div>
+      <button class="loader-retry" data-loading-retry type="button" hidden>重新加载 / Reload</button>
+    </div>
     <div id="app">
       <header class="hud">
         <div class="brand">
