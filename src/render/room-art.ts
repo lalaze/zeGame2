@@ -1,3 +1,4 @@
+import { mainKeyLight, paintWindowBounce } from './main-room-lighting';
 import { cozyCafePart, paintCozyCabinet } from './cozy-cafe-art';
 import { getGeneratedDecorAdapter, getGeneratedIngredientAdapter, getGeneratedMainEnvironmentAdapter } from './generated-main-art';
 import { paintCozyService, paintCozyCakeDome } from './cozy-service-art';
@@ -35,13 +36,13 @@ import { cabinetPanel, glassReflection, leafySprig, timberBeam, treeLine, wallLa
 import { mix, ramp } from './color';
 import { counterColors, grain, paintCounter, paintFloor, paintRug, paintRunner, paintRunnerJoin, paintWainscot, paintWall, wainscotColor } from './decor-art';
 import { drawText, textWidth } from './font';
-import { beam, type Lighting, type Sun } from './lighting';
+import { type Lighting, type Sun } from './lighting';
 import { OUTLINE, itemIcon, pixelSprite } from './sprites';
 import { paintPixelFloorDepth } from './pixel-floor-depth';
 import { paintFineCabinet, paintFineBeam } from './pixel-joinery';
 import { paintPixelWindowVillage } from './pixel-window-village';
 import { pixelFloorDoorLight, projectFloorLayer } from './pixel-floor-projection';
-import { mainPixelProjection, projectMainPlaneWorld } from './main-pixel-presentation';
+import { MAIN_WALL_PLANE, MAIN_COUNTER_PLANE, mainPixelProjection, projectMainPlaneWorld } from './main-pixel-presentation';
 import { paintPixelRoomShell } from './pixel-room-shell';
 import { fineTableCanvas, fineChairCanvas } from './fine-dining-art';
 import { fineSpriteArt, registerFineSpriteArt } from './fine-sprite-art';
@@ -321,6 +322,8 @@ export class RoomPainter {
 
   constructor(public ctx: CanvasRenderingContext2D, readonly density = 1, private readonly project = true) {}
 
+  lightOpenings() { return WINDOWS.map(win => this.wallWindow(win)?.aperture ?? win); }
+
   private wallWindow(win: WindowBounds) {
     const cozy = this.density > 1 ? cozyCafePart('window') : undefined;
     if (cozy) {
@@ -509,6 +512,50 @@ export class RoomPainter {
     if (w <= 0 || h <= 0) return;
     this.ctx.fillStyle = color;
     this.ctx.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+  }
+
+  /** Warm wall returns and cabinet tops share the floor's upper-left key. */
+  drawArchitecturalLight(light: Lighting): void {
+    const key = mainKeyLight(light.sun);
+    if (!key.strength) return;
+    this.withPlane(MAIN_WALL_PLANE, () => {
+      const ctx = this.ctx; ctx.save();
+      ctx.beginPath(); ctx.rect(7, 8, SCENE_W - 14, 68); ctx.clip();
+      for (const opening of this.lightOpenings()) {
+        // Window/curtain and menu layers are painted afterwards; only exposed
+        // plaster, timber and the window cabinet receive this wash.
+        for (let y = 10; y < 76; y += .5) {
+          const t = (y - 10) / 66;
+          ctx.fillStyle = '#ffe1a0'; ctx.globalAlpha = key.strength * .19;
+          ctx.fillRect(opening.x - 14 + t * 20, y, 9, .5);
+          ctx.globalAlpha = key.strength * .08;
+          ctx.fillRect(opening.x - 17 + t * 20, y, 3, .5);
+        }
+        ctx.fillStyle = '#ffe5ae'; ctx.globalAlpha = key.strength * .28;
+        ctx.fillRect(opening.x - 2, 59, opening.w + 10, 2);
+        ctx.globalAlpha = key.strength * .12;
+        ctx.fillRect(opening.x + 7, 61, opening.w - 7, 9);
+      }
+      ctx.restore();
+    });
+  }
+
+  /** Masked to the counter body; never fills transparent canvas around it. */
+  drawCounterLight(light: Lighting): void {
+    const key = mainKeyLight(light.sun);
+    if (!key.strength) return;
+    this.withPlane(MAIN_COUNTER_PLANE, () => {
+      const ctx = this.ctx; ctx.save();
+      ctx.globalCompositeOperation = 'source-atop';
+      ctx.fillStyle = '#ffe3a6';
+      ctx.globalAlpha = key.strength * .12;
+      ctx.fillRect(COUNTER.x, COUNTER.top, COUNTER.w, 4);
+      ctx.globalAlpha = key.strength * .055;
+      ctx.fillRect(COUNTER.x, COUNTER.top + 4, COUNTER.w, COUNTER.front - COUNTER.top - 4);
+      ctx.fillStyle = '#63422f'; ctx.globalAlpha = .09;
+      ctx.fillRect(COUNTER.x, COUNTER.front, COUNTER.w, 2);
+      ctx.restore();
+    });
   }
 
   drawWall(wallpaper: string, t: number): void {
@@ -923,13 +970,13 @@ export class RoomPainter {
     this.drawQueueMarks();
     if (!newRunner) this.drawDoormat(H);
     const ctx = this.ctx;
-    // Sunlight falling through the window, and in through the open front door.
-    const { lean, length } = beam(light.sun);
+    // Quiet diffuse window bounce. Explicit long pane strips made the floor
+    // read like fabric; preserve the authored tile texture instead.
     for (const win of WINDOWS) {
       const opening = this.wallWindow(win)?.aperture ?? win;
-      paintSunbeam(ctx, light.sun, opening.x, opening.x + opening.w, FLOOR_Y, lean * 2.4, length * 1.35, { opacity: 0.88, pixelSize: 0.5 });
+      paintWindowBounce(ctx, opening.x, opening.w, FLOOR_Y, light.sun);
     }
-    paintSunbeam(ctx, light.sun, DOOR_X, DOOR_X + DOOR_W, H, Math.round(lean / 3), -Math.round(length * 0.9));
+
     // Kitchen light spilling in through the door in the left wall while it's open.
     if (this.kitchenDoor > 0.05) {
       const y = doorwayY('main', 'left');
@@ -949,8 +996,12 @@ export class RoomPainter {
     // with the doorway frame, rather than a separate arrow-marked path.
     // Shadow cast by the counter, and the room darkening toward its edges.
     ctx.save();
-    ctx.globalAlpha = 0.2;
-    this.r(COUNTER.x, COUNTER.bottom, COUNTER.w + COUNTER_GATE.w, 3, '#2a1410');
+    for (let row = 0; row < 10; row++) {
+      ctx.globalAlpha = (0.15 + light.sun.strength * 0.05) * (1 - row / 11);
+      this.r(COUNTER.x + row * .5, COUNTER.bottom + row, COUNTER.w + COUNTER_GATE.w, 1, '#493326');
+    }
+    ctx.globalAlpha = 0.24;
+    this.r(COUNTER.x, COUNTER.bottom, COUNTER.w + COUNTER_GATE.w, 1, '#39281f');
     for (let i = 0; i < 4; i++) {
       ctx.globalAlpha = 0.11 - i * 0.025;
       this.r(0, H - 6 * (i + 1), SCENE_W, 6, '#2a1410');

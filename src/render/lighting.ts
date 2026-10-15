@@ -106,7 +106,12 @@ export function lightingAt(hour: number): Lighting {
 const EXPOSURE: Record<AreaId, number> = { main: 0.48, reading: 0.45, greenhouse: 0.9, terrace: 1, kitchen: 0.35 };
 
 /** The color a room is multiplied by. */
-export const roomAmbient = (light: Lighting, area: AreaId) => mix('#ffffff', light.ambient, EXPOSURE[area]);
+export const roomAmbient = (light: Lighting, area: AreaId) => {
+  // Main-room night keeps warm material identity while leaving enough value
+  // separation for local lantern pools. Outdoor rooms retain sky exposure.
+  const ambient = area === 'main' ? mix(light.ambient, '#b7a18c', light.dark * .28) : light.ambient;
+  return mix('#ffffff', ambient, area === 'main' ? .60 : EXPOSURE[area]);
+};
 
 /**
  * A sunbeam's slant and reach for light falling through a window: it leans away from

@@ -1,3 +1,4 @@
+import { mainKeyLight, mainShadowState, paintContactShade, paintCastShade, mainSurfaceLight, mainLitSprite } from '../main-room-lighting';
 import { COZY_DECOR_CATALOG } from '../cozy-materials';
 import { preloadCozyCats, createCozyCatArt } from '../cozy-cat-assets';
 import cozyEnvironmentMetadata from '../cozy-environment-metadata.json';
@@ -60,7 +61,7 @@ import { createGeneratedCustomerArt, GENERATED_CUSTOMER_FRAME_IDS, type Generate
 import { dustMotes, roomDepth } from '../materials';
 import { prepareCanvasMultiply } from './canvas-lighting';
 import { bindCanvasTaps, type CanvasTaps } from './canvas-taps';
-import { MAIN_COUNTER_PLANE, MAIN_WALL_PLANE, projectMainCellOutline, projectMainAttachment, projectMainPlaneWorld, projectMainWorld } from '../main-pixel-presentation';
+import { MAIN_COUNTER_PLANE, MAIN_WALL_PLANE, unprojectMainWorld, projectMainCellOutline, projectMainAttachment, projectMainPlaneWorld, projectMainWorld } from '../main-pixel-presentation';
 import type { PixelPoint } from '../pixel-projection';
 import { placementMaskKey } from '../placement-mask-cache';
 import { STANDING_CHARACTER_SCALE, STANDING_LEG_EXTENSION, preloadReferenceCharacters, referenceCharacterContacts, referenceCharacterOffset } from '../reference-character-art';
@@ -126,6 +127,8 @@ function lampsIn(area: AreaId, state: GameState): Lamp[] {
     lamps.push({ ...point, radius, color: tint, strength });
   };
   if (area === 'main') {
+    // Existing permanent wall lanterns must illuminate their actual positions.
+    add(80.5, 21, 26, .55); add(223.5, 19, 26, .55);
     const ceiling = state.decor.equipped.ceiling;
     if (ceiling === 'ceiling_pendants') for (const x of [36, 132, 188, 284]) add(x, 13, 26);
     if (ceiling === 'ceiling_chandelier') add(SCENE_W / 2, 9, 46);
@@ -469,6 +472,7 @@ export class CafeScene extends Phaser.Scene {
     const real = previewLightDate(new Date(), window.location.href);
     const now = new Date(2000, 0, 1, real.getHours(), real.getMinutes());
     const light = lightingAt(real.getHours() + real.getMinutes() / 60);
+    this.currentLight = light;
     const viewX = Math.round(view.viewX);
     const viewY = Math.round(view.viewY);
 
@@ -515,6 +519,17 @@ export class CafeScene extends Phaser.Scene {
   }
 
   private furnitureAlpha = 1;
+  private currentLight = lightingAt(12);
+  private mainOpenings: readonly { x: number; w: number }[] = WINDOWS;
+
+  private litImage(source: HTMLCanvasElement | string, x: number, y: number, depth: number, anchor: PixelPoint) {
+    if (!this.currentLight) return this.image(source, x, y, depth);
+    const inside = anchor.x > 0 && anchor.x < SCENE_W && anchor.y >= 80 && anchor.y < sceneHeight();
+    const p = unprojectMainWorld(anchor);
+    const strength = mainKeyLight(this.currentLight.sun).strength;
+    const exposure = inside ? strength * .18 + mainSurfaceLight(p.x, p.y, this.currentLight, this.mainOpenings) * .82 : 0;
+    return this.image(typeof source === 'string' ? source : mainLitSprite(source, exposure), x, y, depth);
+  }
 
   private image(canvasOrKey: HTMLCanvasElement | string, x: number, y: number, depth: number): Phaser.GameObjects.Image {
     const art = typeof canvasOrKey === 'string' ? null : fineSpriteArt(canvasOrKey);
@@ -536,9 +551,22 @@ export class CafeScene extends Phaser.Scene {
     this.rects.next().setPosition(Math.round(x), Math.round(y)).setSize(Math.round(w), Math.round(h)).setFillStyle(color(fill)).setDepth(depth);
   }
 
-  /** A soft oval floor shadow centered at (cx, y), as decor-art's `shadow` paints it. */
-  private shadow(cx: number, y: number, w: number, depth: number, alpha = 0.22): void {
+  /** Main-room cast/contact passes sit below ALL floor actors, including the
+   * neighbour whose foot happens to sort earlier. Other rooms retain their art. */
+  private shadow(cx: number, y: number, w: number, depth: number, alpha = 0.22, cast = true): void {
     const half = Math.round(w / 2);
+    if (this.currentLight && cx > 0 && cx < SCENE_W && y >= 80 && y < sceneHeight()) {
+      const s = mainShadowState(this.currentLight);
+      if (cast && s.strength > 0) {
+        const key = baked(this.textures, `main-cast-${w}-${s.reach}-${s.strength}`, w + 32, 40,
+          ctx => paintCastShade(ctx, half + 2, 7, w, s.reach, s.strength));
+        this.image(key, cx - half - 2, y - 7, DEPTH.floor - .5);
+      }
+      const key = baked(this.textures, `main-contact-${w}-${alpha}`, w + 4, 14,
+        ctx => paintContactShade(ctx, half + 2, 7, w, alpha));
+      this.image(key, cx - half - 2, y - 7, DEPTH.floor - .4);
+      return;
+    }
     const key = baked(this.textures, `shadow-${w}-${alpha}`, half * 2, 4, (ctx) => shadow(ctx, half, 2, w, alpha));
     this.image(key, cx - half, y - 2, depth);
   }
@@ -604,6 +632,8 @@ export class CafeScene extends Phaser.Scene {
         p.kitchenDoor = this.view.kitchenDoor;
         const ctx = p.ctx;
         p.drawWall(decor.wallpaper, t);
+        this.mainOpenings = p.lightOpenings();
+        p.drawArchitecturalLight(light);
         const sill = WINDOWS[0];
         p.drawWindow(sill, light, t, state.phase === 'open');
         for (const win of WINDOWS.slice(1)) p.drawWindow(win, light, t, null);
@@ -636,13 +666,14 @@ export class CafeScene extends Phaser.Scene {
         H,
         decor.counter,
         state.upgrades.machine,
+        now.getTime(),
         cups.map((c) => `${c.x}:${Math.ceil(c.fill * 4)}`).join(','),
         cups.length > 0 && Math.floor(t * 4) % 2,
         menuItems(state).map((m) => m.id).join(','),
         JSON.stringify(shelf),
         Math.min(4, 1 + Math.floor(state.today.served / 15)),
       ].join('|');
-      this.paint(counter, o.x, o.y, counterSig, (p) => p.drawCounter(state, decor.counter, t, cups));
+      this.paint(counter, o.x, o.y, counterSig, (p) => { p.drawCounter(state, decor.counter, t, cups); p.drawCounterLight(light); });
     } else if (area === 'kitchen') {
       const locked = !isAreaOpen(state, area);
       const installed = installedEquipment(state);
@@ -728,7 +759,7 @@ export class CafeScene extends Phaser.Scene {
       const foot = contact?.foot;
       const originY = o.y + pose.y - (foot?.y ?? CHAR_H - 1);
       const top = originY + (referenceCharacterContacts(sprite)?.head?.y ?? 0);
-      this.image(sprite, x - (foot?.x ?? 9), originY + bob, depth);
+      this.litImage(sprite, x - (foot?.x ?? 9), originY + bob, depth, { x, y: o.y + pose.y });
       // Carrying the order forward from the back bar.
       if (brewing && pose.facing === 'down' && pose.walking) {
         const hand = contact?.carryContact;
@@ -959,7 +990,7 @@ export class CafeScene extends Phaser.Scene {
     this.shadow(x, y, 12, depth);
     const bob = walking && idx !== 0 ? 1 : 0;
     const frame=frames[facing][idx],foot=referenceCharacterContacts(frame)?.foot;
-    this.image(frame, x - (foot?.x??9), y - (foot?.y??CHAR_H-1) - bob, depth + 0.001);
+    this.litImage(frame, x - (foot?.x??9), y - (foot?.y??CHAR_H-1) - bob, depth + 0.001, { x, y });
     const carryContact=referenceCharacterContacts(frame)?.carryContact;
     return { x, y, bob, facing, carryY: carryContact && foot ? y - foot.y + carryContact.y - bob : undefined, legExtension: referenceCharacterContacts(frame)?.legExtension ?? 0, scale: foot ? STANDING_CHARACTER_SCALE : 1, height: foot ? foot.y - (referenceCharacterContacts(frame)?.head?.y ?? 0) : CHAR_H - 1 };
   }
@@ -1120,7 +1151,7 @@ export class CafeScene extends Phaser.Scene {
     const ensembleTable = seatingFurniture('table');
     const cozyTable = ensembleTable ?? (index < MAX_TABLES ? cozyCafeSprite('table') : undefined);
     this.shadow(table.x + (cozyTable ? 2 : 0), table.y + 1, cozyTable ? 38 : 30, next(), cozyTable ? 0.25 : 0.2);
-    if (cozyTable) this.shadow(table.x, table.y, 17, next(), 0.34);
+    if (cozyTable) this.shadow(table.x, table.y, 17, next(), 0.34, false);
     const diners = ([0, 1] as const).map((side) => {
       const id = preview ? undefined : this.sim.seats[index * 2 + side];
       const c = id != null ? this.sim.customers.find((cc) => cc.id === id) : undefined;
@@ -1140,19 +1171,19 @@ export class CafeScene extends Phaser.Scene {
       const ensembleChair = ensembleTable ? seatingFurniture('chair',side===1) : undefined;
       const cozyChair = cozyTable ? cozyCafeSprite('chair', side === 1) : undefined;
       if(!embeddedChair){
-        if(ensembleChair)this.image(ensembleChair,s.x-(side===0?13:21),s.y-41,chairDepth);
-        else if (cozyChair) this.image(cozyChair, side === 0 ? s.x - 12 : s.x - 8, s.y - cozyChair.height + 1, chairDepth);
+        if(ensembleChair)this.litImage(ensembleChair,s.x-(side===0?13:21),s.y-41,chairDepth, table);
+        else if (cozyChair) this.litImage(cozyChair, side === 0 ? s.x - 12 : s.x - 8, s.y - cozyChair.height + 1, chairDepth, table);
         else if (!this.generatedPicture(side === 0 ? 'chair-right' : 'chair-left', side === 0 ? s.x - 10 : s.x - 8, s.y - 25, 18, 25, chairDepth)) {
-          this.image(chair, side === 0 ? s.x - 9 : s.x - chair.width + 9, s.y - chair.height + 1, chairDepth);
+          this.litImage(chair, side === 0 ? s.x - 9 : s.x - chair.width + 9, s.y - chair.height + 1, chairDepth, table);
         }
       }
-      if(pose)this.image(pose.sprite,pose.x,pose.y,next());
+      if(pose)this.litImage(pose.sprite,pose.x,pose.y,next(), table);
     }
     const top = TABLE();
     const tableDepth = next();
-    if (cozyTable) this.image(cozyTable, table.x - cozyTable.width / 2, table.y - cozyTable.height + 1, tableDepth);
+    if (cozyTable) this.litImage(cozyTable, table.x - cozyTable.width / 2, table.y - cozyTable.height + 1, tableDepth, table);
     else if (!this.generatedPicture('table', table.x - 16.5, table.y - TABLE_TOP_DY - 5.4, 33, 33 * 462 / 563, tableDepth)) {
-      this.image(top, table.x - TABLE_CX, table.y - top.height + 1, tableDepth);
+      this.litImage(top, table.x - TABLE_CX, table.y - top.height + 1, tableDepth, table);
     }
     const cy = table.y + (ensembleTable ? SEATING_LAYOUT.surfaceY : -TABLE_TOP_DY);
     // A bud vase in the middle.
@@ -1166,10 +1197,10 @@ export class CafeScene extends Phaser.Scene {
       if (!c) continue;
       const { sprite, x, y, pair } = sitter(side, c);
       const ensemble=seatingGeometry(sprite);
-      if(ensemble)this.image(ensemble.foreground,x,y,next());
+      if(ensemble)this.litImage(ensemble.foreground,x,y,next(), table);
       else {
         const crop = logicalCrop(sprite, 0, 0, sprite.width, cozySeatedGeometry(sprite)?.upperBody ?? CHAR_H - 8);
-        this.image(sprite, x, y, next()).setCrop(crop.x, crop.y, crop.width, crop.height);
+        this.litImage(sprite, x, y, next(), table).setCrop(crop.x, crop.y, crop.width, crop.height);
       }
       const contact = pair && this.getState().pets.some(p => p.id === pair.id && petActive(p)) &&
         referenceCharacterContacts(sprite)?.petContact;
@@ -1180,7 +1211,7 @@ export class CafeScene extends Phaser.Scene {
         const left = Math.max(0, Math.floor(contact.x - 3));
         const top = Math.max(ensemble ? 0 : CHAR_H - 8, Math.floor(contact.y - 3));
         const hand = logicalCrop(sprite, left, top, Math.ceil(contact.x + 2) - left, Math.ceil(contact.y + 2) - top);
-        this.image(sprite, x, y, DEPTH.floor + pair.y + 0.008).setCrop(hand.x, hand.y, hand.width, hand.height);
+        this.litImage(sprite, x, y, DEPTH.floor + pair.y + 0.008, table).setCrop(hand.x, hand.y, hand.width, hand.height);
       }
     }
     // Their order once it's arrived; until then, the table number for the server to find.
