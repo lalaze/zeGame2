@@ -2908,3 +2908,39 @@ body.fullscreen-cafe .guide-details > summary:focus-visible { outline: 2px solid
     max-height: 45dvh;
   }
 }
+
+/* Keep mobile doorway targets fully inside the room without moving the doors
+   or shrinking their 44px touch areas. Desktop labels keep their original anchors. */
+@media (max-width: 860px) {
+  body.fullscreen-cafe .area-left { transform: translate(0, -50%); }
+  body.fullscreen-cafe .area-right { transform: translate(-100%, -50%); }
+  body.fullscreen-cafe .region-card { width: min(320px, calc(100% - 112px)); }
+
+  /* Locked-room cards occupy the room centre. Use the free bottom action slot
+     beside Settings rather than covering the card with the Map control. */
+  body.fullscreen-cafe .stage:has(.region-card:not([hidden])) > .area-nav {
+    top: auto;
+    bottom: var(--edge-bottom);
+    left: calc(var(--edge-left) + 58px);
+  }
+}
+
+/* In short landscape viewports the left gutter must also stay clear of the
+   kitchen door. Let the existing clock/speed flex rows wrap within that gutter. */
+@media (max-width: 860px) and (max-height: 500px) and (orientation: landscape) {
+  body.fullscreen-cafe .day-hud {
+    width: min(224px, max(44px, calc((100vw - 400dvh / 3) / 2 - 24px)));
+  }
+}
+
+/* Short, narrow landscape screens keep reviews and regulars on one row above
+   the right-hand doorway, instead of stacking the regulars button over it. */
+@media (min-width: 600px) and (max-width: 760px) and (max-height: 500px) and (orientation: landscape) {
+  body.fullscreen-cafe .cafe-status-bar {
+    top: calc(var(--edge-top) + 62px);
+    flex-direction: row;
+    width: auto;
+    max-width: calc(100% - 180px);
+  }
+  body.fullscreen-cafe .cafe-status-bar button { flex: 0 0 auto; }
+}
