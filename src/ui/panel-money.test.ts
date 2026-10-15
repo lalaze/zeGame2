@@ -118,3 +118,27 @@ describe('purchase amount presentation', () => {
     expect(query('[role="dialog"]').textContent).toContain('Balance: $100');
   });
 });
+
+describe('quiet pantry status presentation', () => {
+  it('distinguishes complete stock from an unaffordable restock and preserves disabled buying', () => {
+    const state = createInitialState(0); state.coins = 0; state.pantry.beans = 500;
+    const { panel } = panelFor(state); panel.showTab('pantry');
+    const restock = button('[data-restock]');
+    expect(restock.disabled).toBe(true);
+    expect(restock.classList.contains('is-complete')).toBe(true);
+    expect(query('.restock-reason').hidden).toBe(true);
+    state.pantry.beans = 0; panel.update();
+    expect(restock.classList.contains('is-complete')).toBe(false);
+    expect(restock.disabled).toBe(true);
+    expect(query('.restock-reason').hidden).toBe(false);
+    expect(query('.restock-reason').textContent).toContain('Need');
+    expect(restock.getAttribute('aria-describedby')).toBe('pantry-restock-reason');
+    const buy = button('[data-buy="ing:beans"]');
+    buy.click(); expect(state.coins).toBe(0); expect(state.pantry.beans).toBe(0);
+    state.coins = 100; panel.update();
+    expect(restock.disabled).toBe(false);
+    expect(query('.restock-reason').hidden).toBe(true);
+    expect(buy.disabled).toBe(false);
+    buy.click(); expect(state.coins).toBe(90); expect(state.pantry.beans).toBe(10);
+  });
+});

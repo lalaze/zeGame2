@@ -27,10 +27,14 @@ describe('Warm Pixel A small-label contrast', () => {
     for (const ink of ['muted', 'brass-ink']) expect(contrast(variables[ink], variables[surface])).toBeGreaterThanOrEqual(4.5);
   });
   it.each([
-    '.pixel-btn:hover:not(:disabled)', '.pixel-btn.ghost:hover:not(:disabled)',
+    '.pixel-btn:hover:not(:disabled)',
     '.pixel-btn.danger:hover:not(:disabled)', '.day-hud .chip.close-btn:hover:not(:disabled)',
   ])('keeps %s labels readable', selector => {
     expect(contrast(variables['paper-light'], backgroundOf(selector))).toBeGreaterThanOrEqual(4.5);
+  });
+  it('keeps paper secondary buttons and disabled controls readable', () => {
+    expect(contrast(variables['ink'], backgroundOf('.pixel-btn.ghost:hover:not(:disabled)'))).toBeGreaterThanOrEqual(4.5);
+    expect(contrast(variables['disabled-ink'], variables['disabled-paper'])).toBeGreaterThanOrEqual(3);
   });
   it('keeps off-menu and unavailable copy opaque while the artwork stays subdued', () => {
     expect(css).toContain('.row.locked, .prep-row.off { opacity: 1; }');

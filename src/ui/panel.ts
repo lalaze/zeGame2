@@ -771,7 +771,8 @@ export class Panel {
     intro.innerHTML = `
       <div class="pantry-forecast"></div>
       <div class="note">${t(this.introMode ? 'guide.pantryIntro' : 'pantry.intro')}</div>
-      <button class="pixel-btn restock" data-restock></button>`;
+      <button class="pixel-btn restock" data-restock aria-describedby="pantry-restock-reason"></button>
+      <div id="pantry-restock-reason" class="note restock-reason" hidden></div>`;
     this.pantryNote = intro.querySelector('.pantry-forecast');
     this.restockBtn = intro.querySelector('button');
     this.list.append(intro);
@@ -1060,6 +1061,12 @@ export class Panel {
       const full = restockQ.cost <= 0;
       this.restockBtn.textContent = full ? t('pantry.full') : t('pantry.restock', { price: formatMoney(restockQ.cost) });
       this.restockBtn.disabled = full || s.coins <= 0;
+      this.restockBtn.classList.toggle('is-complete', full);
+      const reason = this.list.querySelector<HTMLElement>('.restock-reason');
+      if (reason) {
+        reason.hidden = full || s.coins > 0;
+        reason.textContent = reason.hidden ? '' : t('money.short', { money: formatMoney(restockQ.cost - s.coins) });
+      }
     }
     for (const [key, refs] of this.rows) {
       const id = key.split(':')[1] as IngredientId;

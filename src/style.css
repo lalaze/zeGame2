@@ -2241,33 +2241,33 @@ button.coins { display: block; width: 100%; min-height: 32px; padding: 0; border
    the mobile control dock retain their existing ownership and sizing.
    ================================================================ */
 :root {
-  --ink: #39281f;
-  --brown: #865332;
-  --wood: #865332;
-  --wood-light: #c98c4d;
-  --wood-hi: #ebbd7d;
-  --wood-lo: #543425;
-  --paper: #e9d9b8;
-  --cream: #f4e6c7;
-  --green: #627451;
-  --green-dark: #3d503a;
+  --ink: #3f3027;
+  --brown: #65432f;
+  --wood: #65432f;
+  --wood-light: #aa8562;
+  --wood-hi: #c8ac87;
+  --wood-lo: #493428;
+  --paper: #f4e8cd;
+  --cream: #faf2e1;
+  --green: #59694b;
+  --green-dark: #43523a;
   --pink: #b76350;
-  --gold: #c8a15e;
-  --muted: #6d583f;
-  --paper-light: #fff5dc;
-  --paper-shadow: #c7b28b;
-  --brass-light: #f0ce85;
-  --brass-shadow: #866344;
+  --gold: #b78a4b;
+  --muted: #6b5946;
+  --paper-light: #fff9ec;
+  --paper-shadow: #d8c8a9;
+  --brass-light: #eed7a6;
+  --brass-shadow: #927453;
   --brass-ink: #725235;
-  --terracotta: #ab5543;
-  --frame: var(--border), inset 0 2px 0 var(--paper-light), inset 2px 0 0 var(--wood-hi),
-    inset -2px -2px 0 var(--wood-lo), inset 0 0 0 4px var(--wood-light), inset 0 0 0 5px var(--brass-shadow);
-  --wood-planks: repeating-linear-gradient(0deg, transparent 0 22px, #54342580 22px 24px, #c98c4d60 24px 25px, transparent 25px 48px),
-    repeating-linear-gradient(90deg, transparent 0 118px, #54342570 118px 120px, transparent 120px 238px);
-  --paper-grain: repeating-linear-gradient(0deg, transparent 0 5px, #86634406 5px 6px);
-  --paper-card: 0 0 0 2px var(--brass-shadow), 2px 3px 0 2px #54342524,
-    inset 1px 1px 0 var(--paper-light), inset -1px -1px 0 var(--paper-shadow);
-  --button-edge: var(--border), inset 2px 2px 0 #fff5dc59, inset -2px -2px 0 #39281f66, 0 4px 0 var(--wood-lo);
+  --terracotta: #934b3c;
+  --disabled-paper: #ded6c4;
+  --disabled-ink: #74644f;
+  --border: 0 0 0 1px var(--wood-lo);
+  --frame: 0 0 0 1px var(--wood-lo), inset 0 0 0 1px var(--wood-light);
+  --wood-planks: repeating-linear-gradient(0deg, transparent 0 7px, #fff9ec05 7px 8px, transparent 8px 13px);
+  --paper-grain: repeating-linear-gradient(0deg, transparent 0 7px, #65432f03 7px 8px);
+  --paper-card: 0 0 0 1px var(--paper-shadow), 0 1px 0 #49342812;
+  --button-edge: 0 0 0 1px var(--wood-lo), 0 2px 0 var(--wood-lo), inset 0 1px 0 #fff9ec24;
 }
 
 body {
@@ -2957,3 +2957,115 @@ body.fullscreen-cafe .drawer-balance { max-width: 50%; min-width: 0; overflow-wr
 .stage:has(.scene-wrap.is-overview) .room-zoom-controls,
 .stage:has(.scene-wrap.is-panning) .room-zoom-controls { visibility: hidden; pointer-events: none; }
 @media (max-height: 500px) { .room-zoom-controls { left: auto; right: 12px; bottom: 72px; transform: none; } }
+
+/* Quiet paper / walnut / matte sage materials. Geometry and game state remain
+   owned by the existing responsive layout and control components above. */
+.pixel-btn, .chip, .tab {
+  min-width: 44px; min-height: 44px; border-radius: 0;
+  text-shadow: none; box-shadow: var(--button-edge);
+}
+.pixel-btn { background: var(--green); color: var(--paper-light); }
+.pixel-btn:hover:not(:disabled) { background: #627354; filter: none; }
+.pixel-btn.ghost { background: var(--cream); color: var(--ink); text-shadow: none; }
+.pixel-btn.ghost:hover:not(:disabled) { background: #fff9ec; color: var(--ink); }
+.pixel-btn.danger, .day-hud .close-btn { background: var(--terracotta); color: var(--paper-light); text-shadow: none; }
+.pixel-btn.danger:hover:not(:disabled),
+.day-hud .chip.close-btn:hover:not(:disabled) { background: #9b5140; color: var(--paper-light); }
+.pixel-btn:active:not(:disabled), .chip:active:not(:disabled), .tab:active:not(:disabled) {
+  box-shadow: var(--border), inset 0 1px 0 #49342830;
+  translate: 0 1px;
+}
+.pixel-btn:active:not(:disabled) { transform: none; }
+.pixel-btn:disabled, .chip:disabled, .menu-toggle:disabled {
+  background: var(--disabled-paper); color: var(--disabled-ink);
+  box-shadow: 0 0 0 1px #a9967d; text-shadow: none; opacity: 1;
+  cursor: not-allowed; translate: none;
+}
+.chip, .tab { background: var(--cream); color: var(--ink); text-shadow: none; }
+.tab:hover:not(.active) { background: var(--paper-light); }
+.tab.active, .chip.active, .menu-toggle.active,
+.pet-tabs [aria-pressed="true"], .pet-filters [aria-pressed="true"] {
+  background: var(--green); color: var(--paper-light); text-shadow: none;
+  box-shadow: var(--border), inset 0 -3px 0 var(--paper-light);
+}
+.tab.active { z-index: 1; }
+.chip:hover:not(:disabled):not(.active):not([aria-pressed="true"]) { background: var(--paper-light); }
+.tab.active:hover, .chip.active:hover:not(:disabled) { background: var(--green-dark); }
+:is(.pixel-btn,.chip,.tab,.theme,.pet-choice,.style-choice):focus-visible,
+body.fullscreen-cafe button:focus-visible {
+  outline: 2px solid var(--paper-light); outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--green-dark);
+}
+.panel, body.fullscreen-cafe #management-panel {
+  background: var(--paper-grain), var(--paper);
+  border: 2px solid var(--wood-lo);
+  box-shadow: inset 0 0 0 1px var(--wood-light), 0 3px 0 #49342830;
+}
+.tabs, body.fullscreen-cafe .drawer-header {
+  background: var(--wood-planks), var(--wood);
+  box-shadow: none; text-shadow: none;
+}
+.tabs { border-bottom: 1px solid var(--wood-lo); }
+body.fullscreen-cafe .panel .tab { box-shadow: var(--border); }
+body.fullscreen-cafe .panel .tab.active { box-shadow: var(--border), inset 0 -3px var(--paper-light); }
+body.fullscreen-cafe .drawer-balance {
+  background: transparent; color: var(--paper-light); text-shadow: none;
+  box-shadow: none; border: 1px solid #c8ac8766;
+  text-decoration: underline; text-underline-offset: 4px; padding: 7px 9px;
+}
+body.fullscreen-cafe .drawer-balance:hover:not(:disabled) { background: #ffffff0d; }
+body.fullscreen-cafe .drawer-balance:active:not(:disabled) { background: #00000012; box-shadow: none; }
+body.fullscreen-cafe #drawer-close { background: var(--cream); color: var(--ink); }
+body.fullscreen-cafe #drawer-close:hover { background: var(--paper-light); }
+body.fullscreen-cafe .edge-tools button {
+  background: var(--paper-grain), var(--cream); color: var(--ink);
+  box-shadow: var(--button-edge); text-shadow: none;
+}
+body.fullscreen-cafe .edge-tools button:hover { background: var(--paper-light); }
+body.fullscreen-cafe .edge-tools button[aria-expanded="true"],
+body.fullscreen-cafe .edge-tools button.active {
+  background: var(--green); color: var(--paper-light);
+  box-shadow: var(--border), inset 3px 0 var(--paper-light);
+}
+body.fullscreen-cafe .edge-tools button:active { translate: 0 1px; }
+body.fullscreen-cafe .edge-tools button:focus-visible,
+body.fullscreen-cafe .drawer-balance:focus-visible,
+body.fullscreen-cafe .panel .tab:focus-visible {
+  outline: 2px solid var(--paper-light); outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--green-dark);
+}
+.row, .pet-card, .promo-card, .regular-profile, .signature-card, .style-current,
+.signature-summary, .taste-overview, .rating-overview, .rating-report {
+  background: var(--cream); border-color: var(--paper-shadow); box-shadow: var(--paper-card);
+}
+.row.new { background: var(--cream); }
+.row.low { box-shadow: var(--paper-card), inset 3px 0 var(--terracotta); }
+.goal, .toast { background: var(--cream); box-shadow: var(--paper-card); }
+.goal { border-top: 2px solid var(--wood-light); }
+.goal.done { background: #e9eddd; }
+.bar { background: var(--paper-shadow); box-shadow: 0 0 0 1px var(--brass-shadow); }
+.bar i { background: var(--green); }
+.row.low .bar i { background: var(--terracotta); }
+.pixel-btn.restock.is-complete {
+  background: #e9eddd; color: var(--green-dark); border: 1px solid #bcc6aa;
+  box-shadow: none; cursor: default; text-align: left;
+}
+.restock-reason { margin: 8px 3px 0; color: var(--muted); }
+.pixel-box {
+  background: var(--paper-grain), var(--cream);
+  box-shadow: 0 0 0 1px var(--wood-light), 0 0 0 5px var(--wood), 0 0 0 6px var(--wood-lo), 0 7px 0 6px #49342830;
+}
+body.fullscreen-cafe .hud .brand {
+  background: var(--wood-planks), var(--wood); box-shadow: var(--frame); text-shadow: none;
+}
+body.fullscreen-cafe .day-hud, body.fullscreen-cafe .hud .money,
+.area-plan-toggle, .cafe-style-button, .area-arrow-sign {
+  background: var(--cream); box-shadow: var(--paper-card);
+}
+body.fullscreen-cafe #settings-btn { min-width: 44px; min-height: 44px; }
+body.fullscreen-cafe .first-service { border: 1px solid var(--paper-shadow); box-shadow: var(--paper-card); }
+.money-details { min-height: 44px; min-width: 44px; }
+@media (prefers-reduced-motion: reduce) {
+  .pixel-btn:active:not(:disabled), .chip:active:not(:disabled),
+  .tab:active:not(:disabled), body.fullscreen-cafe .edge-tools button:active { translate: none; }
+}
