@@ -1,12 +1,14 @@
 // @vitest-environment happy-dom
+/// <reference types="node" />
+import { readFileSync } from 'node:fs';
 import { describe, expect, it, vi } from 'vitest';
 import { startupLoading } from './startup-loading';
 
 describe('startup loading feedback', () => {
   it.each([true, false])('shows real progress and exposes one reload on failure (Chinese: %s)', chinese => {
-    const root = document.createElement('div');
-    root.innerHTML = '<i></i>';
-    root.setAttribute('role', 'progressbar');
+    const page = new DOMParser().parseFromString(readFileSync('index.html', 'utf8'), 'text/html');
+    const root = document.importNode(page.getElementById('loader')!, true);
+    expect(root).not.toBeNull();
     document.body.append(root);
     const retry = vi.fn();
     const loading = startupLoading(root, chinese, retry);
@@ -16,7 +18,8 @@ describe('startup loading feedback', () => {
     loading.progress(100, 100);
     expect(root.textContent).toContain(chinese ? '准备场景' : 'Preparing the scene');
     loading.fail(new Error('Image failed: customer-12'));
-    expect(root.querySelector('i')).toBeNull();
+    expect(root.getAttribute('aria-busy')).toBe('false');
+    expect(root.querySelector('.loader-content .loader-detail')).not.toBeNull();
     expect(root.querySelector('[role=alert]')).not.toBeNull();
     expect(root.querySelector('progress')!.hidden).toBe(true);
     expect(root.textContent).toContain('Image failed: customer-12');

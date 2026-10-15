@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720" shape-rendering="crispEdges">
+  <defs>
+    <pattern id="paving" width="32" height="24" patternUnits="userSpaceOnUse"><rect width="32" height="24" fill="#c9b99a"/><path d="M0 0H32M0 12H32M16 0V12M0 12V24" fill="none" stroke="#baa98b" stroke-width="1"/><path d="M2 2H13M18 14H29" stroke="#d6c6a8" stroke-width="1"/></pattern>
+    <pattern id="roof" width="24" height="16" patternUnits="userSpaceOnUse"><rect width="24" height="16" fill="#99765c"/><path d="M0 0H24M0 8H24M12 0V8M0 8V16" fill="none" stroke="#80634e" stroke-width="1"/><path d="M1 2H11M13 10H23" stroke="#ad8a69" stroke-width="1"/></pattern>
+    <g id="pot"><path d="M-10 5H12V9H10V20H-8V9H-10Z" fill="#8d6349"/><path d="M-8 9H8V18H-6V12H-8Z" fill="#b0845b"/><path d="M-10 3H12V7H-10Z" fill="#cfaa77"/><path d="M-2-8H2V5H-2Z" fill="#5c714b"/><path d="M-12-4H-8V-8H-2V-4H4V-10H10V-6H14V2H10V6H-8V2H-12Z" fill="#6e8459"/><path d="M-8-5H-3V0H-8ZM5-7H9V-2H5ZM1 0H6V4H1Z" fill="#99a574"/></g>
+    <g id="tree"><path d="M-20 17H22V23H16V27H-14V23H-20Z" fill="#acaa83"/><path d="M-3-4H4V21H-3Z" fill="#80694e"/><path d="M-14-25H12V-21H21V-13H27V4H22V11H13V15H-15V10H-24V2H-28V-12H-22V-20H-14Z" fill="#657a53"/><path d="M-14-25H9V-20H18V-12H22V-3H10V2H-6V-2H-18V-10H-22V-16H-14Z" fill="#839263"/><path d="M-11-19H0V-15H7V-9H-5V-5H-14V-10H-18V-15H-11Z" fill="#a2ab79"/><path d="M10 3H17V7H10ZM-13 5H-6V9H-13Z" fill="#7e8f5d"/></g>
+    <g id="bench"><path d="M-16-8H18V-3H-16ZM-16-1H18V4H-16ZM-18 7H20V12H-18Z" fill="#9d7955"/><path d="M-16-8H18V-6H-16ZM-16-1H18V1H-16ZM-18 7H20V9H-18Z" fill="#c7a475"/><path d="M-14 12H-10V17H-14ZM12 12H16V17H12Z" fill="#72624b"/></g>
+  </defs>
+  <!-- The central 320 × 240 footprint is covered by the unchanged café canvas. -->
+  <rect width="960" height="720" fill="url(#paving)"/>
+  <!-- A quiet neighboring roof and sheltered back garden above the café. -->
+  <rect y="0" width="960" height="194" fill="url(#roof)"/>
+  <rect y="194" width="960" height="6" fill="#725e4b"/>
+  <rect y="200" width="960" height="5" fill="#d8c9a6"/>
+  <rect y="205" width="960" height="33" fill="#87926b"/>
+  <path d="M0 232H960V240H0Z" fill="#bba383"/>
+  <path d="M0 232H960V235H0Z" fill="#dfcaa5"/>
+  <!-- Side terraces: short plaster walls, sunlit coping and two quiet lanes. -->
+  <path d="M0 240H256V480H0ZM704 240H960V480H704Z" fill="#b6ba8d"/>
+  <path d="M256 240H265V480H256ZM695 240H704V480H695Z" fill="#aa9475"/>
+  <path d="M256 240H260V480H256ZM700 240H704V480H700Z" fill="#e1cdab"/>
+  <path d="M311 240H320V480H311ZM640 240H649V480H640Z" fill="#927c62"/>
+  <path d="M311 240H315V480H311ZM645 240H649V480H645Z" fill="#d0b895"/>
+  <path d="M300 244H311V480H300ZM649 244H660V480H649Z" fill="#b2a184" opacity=".5"/>
+  <!-- Small details are all outside the game footprint and never interactive. -->
+  <use href="#pot" x="292" y="282"/>
+  <use href="#pot" x="672" y="280"/>
+  <use href="#bench" x="282" y="404"/>
+  <use href="#pot" x="290" y="456"/>
+  <use href="#pot" x="672" y="456"/>
+  <use href="#tree" x="235" y="316"/>
+  <use href="#tree" x="728" y="397"/>
+  <use href="#tree" x="365" y="214"/>
+  <use href="#tree" x="591" y="215"/>
+  <!-- The front sidewalk continues naturally when a tall screen reveals it. -->
+  <rect y="480" width="960" height="6" fill="#a28a6d"/>
+  <rect y="480" width="960" height="2" fill="#e2cdaa"/>
+  <rect y="536" width="960" height="7" fill="#a29175"/>
+  <rect y="536" width="960" height="2" fill="#dfcba9"/>
+  <rect y="543" width="960" height="177" fill="#b9b6a2"/>
+  <path d="M0 574H960M0 610H960M0 646H960M0 682H960" stroke="#c5c1ab" stroke-width="2"/>
+  <use href="#bench" x="372" y="512"/>
+  <use href="#pot" x="340" y="511"/>
+  <use href="#tree" x="608" y="507"/>
+  <path d="M463 500H483V502H463ZM478 514H495V516H478ZM441 521H451V523H441Z" fill="#b3a184"/>
+</svg>

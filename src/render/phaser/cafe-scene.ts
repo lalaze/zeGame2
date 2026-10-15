@@ -1,3 +1,4 @@
+import { insideRoomFrame } from '../viewport-frame';
 import { mainKeyLight, mainShadowState, paintContactShade, paintCastShade, mainSurfaceLight, mainLitSprite } from '../main-room-lighting';
 import { COZY_DECOR_CATALOG } from '../cozy-materials';
 import { preloadCozyCats, createCozyCatArt } from '../cozy-cat-assets';
@@ -220,6 +221,7 @@ interface Floater {
 export class CafeScene extends Phaser.Scene {
   /** Device pixels per art pixel; the camera zooms by this on top of the view's own zoom. */
   backing = 1;
+  viewportFrame = { x: 0, y: 0, roomWidth: SCENE_W, roomHeight: sceneHeight() };
   private layers = new Map<string, Layer>();
   private metrics: PreviewMetrics | null = null;
   private generatedStaff: GeneratedStaffAdapter | null = null;
@@ -437,10 +439,12 @@ export class CafeScene extends Phaser.Scene {
       context: () => [this.view.area, this.view.overview, this.view.viewX, this.view.viewY, this.view.zoom,
         this.view.ghost?.id, this.view.ghost?.skip, this.getState(), this.getState().phase, this.hooks.interactionState?.()],
       tap: (screenX, screenY) => {
+        if (!insideRoomFrame(screenX, screenY, this.viewportFrame)) return;
         const { x, y } = camera.getWorldPoint(screenX, screenY);
         this.view.withPresentedPointer({ x, y }, logical => this.hooks.pointerDown(logical.x, logical.y));
       },
       hover: (screenX, screenY) => {
+        if (!insideRoomFrame(screenX, screenY, this.viewportFrame)) return;
         const { x, y } = camera.getWorldPoint(screenX, screenY);
         this.view.withPresentedPointer({ x, y }, logical => this.hooks.pointerMove(logical.x, logical.y));
       },
@@ -478,14 +482,17 @@ export class CafeScene extends Phaser.Scene {
 
     const camera = this.cameras.main;
     camera.setZoom(this.backing * view.zoom);
-    camera.setScroll(viewX, viewY);
+    const zoom = this.backing * view.zoom;
+    const left = viewX - this.viewportFrame.x / zoom;
+    const top = viewY - this.viewportFrame.y / zoom;
+    camera.setScroll(left, top);
 
     this.images.begin();
     this.rects.begin();
     this.glows.begin();
     for (const area of AREA_IDS) {
       const o = areaBounds(area);
-      const visible = o.x < viewX + view.viewWidth && o.x + o.w > viewX && o.y < viewY + view.viewHeight && o.y + o.h > viewY;
+      const visible = o.x < left + camera.width / zoom && o.x + o.w > left && o.y < top + camera.height / zoom && o.y + o.h > top;
       this.drawRoom(area, visible, state, t, now, light);
       this.drawLight(area, visible, state, light);
     }

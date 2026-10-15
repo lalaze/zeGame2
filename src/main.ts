@@ -38,19 +38,21 @@ import { showCafeStyles, updateCafeStyleButton } from './ui/cafe-styles';
 import { RegionsUI, areaName } from './ui/regions';
 import { FirstServiceGuide } from './ui/first-service';
 import { cafeInteractionEnabled } from './ui/cafe-interaction';
-import { dockMobileControls } from './ui/mobile-layout';
+import { FullscreenDrawer } from './ui/fullscreen-drawer';
+import { fitFullscreenRoom } from './ui/fullscreen-layout';
 import { ArrangeFocus } from './ui/arrange-focus';
 import { trackVisualViewport } from './ui/viewport';
 import { waitForStartupReady } from './ui/startup-ready';
 import { startupLoading } from './ui/startup-loading';
 
+// Static imports succeeded; the game now owns startup/error feedback.
+window.dispatchEvent(new Event('cafe:bootstrap-ready'));
 trackVisualViewport();
 import { settlementHtml } from './ui/settlement';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 
 const HINT_KEY = 'tiny-bean-cafe/hint-done';
-const PANEL_COLLAPSED_KEY = 'tiny-bean-cafe/panel-collapsed';
 const AUTOSAVE_MS = 5000;
 const SIM_STEP = 0.05;
 
@@ -79,7 +81,11 @@ sessionNotice(chinese()
 void Promise.resolve().then(() => acquireSaveSession(storage, navigator.locks, savePage.signal)).then((session) => {
   if (savePage.signal.aborted) { session.close(); return; }
   document.getElementById('save-session-notice')?.remove();
-  try { startGame(session); } catch (error) { session.close(); throw error; }
+  const loading = startupLoading($('loader'), chinese(), () => window.location.reload());
+  try { startGame(session, loading); } catch (error) {
+    session.close();
+    loading.fail(error);
+  }
 }).catch(() => {
   if (savePage.signal.aborted) return;
   sessionNotice(chinese()
@@ -87,8 +93,7 @@ void Promise.resolve().then(() => acquireSaveSession(storage, navigator.locks, s
     : 'Your save could not be opened safely. Use a browser with Web Locks over HTTPS or localhost, and allow local storage. Your save has not been changed.');
 });
 
-function startGame(session: SaveSession): void {
-const loading = startupLoading($('loader'), chinese(), () => window.location.reload());
+function startGame(session: SaveSession, loading: ReturnType<typeof startupLoading>): void {
 let startupComplete = false;
 let state: GameState = session.state;
 const sim = session.sim;
@@ -103,6 +108,11 @@ function updateTemporaryNotice(): void {
     notice.setAttribute('role', 'status');
     notice.style.cssText = 'position:relative;flex-shrink:0;z-index:10001;padding:8px 16px;background:#fff0c2;color:#493728;text-align:center;font:14px sans-serif';
     $('app').prepend(notice);
+    // Keep the honest temporary-session warning above floating controls,
+    // without shrinking or moving the room beneath them.
+    const measureNotice = () => document.body.style.setProperty('--notice-height', `${notice!.getBoundingClientRect().height}px`);
+    new ResizeObserver(measureNotice).observe(notice);
+    queueMicrotask(measureNotice);
   }
   notice.textContent = t('save.temporary');
 }
@@ -137,54 +147,16 @@ const stage = $('stage');
 
 const sign = $('stage-sign');
 const stats = $('stage-stats');
-// Space for the stats strip under the café and the café-name sign above it.
-const STATS_SPACE = 44;
-const SIGN_SPACE = 70;
-
+// Overlays never participate in room sizing. The original floor plan is unchanged.
 function fitCanvas(): void {
-  const dpr = window.devicePixelRatio || 1;
-  const style = getComputedStyle(stage);
-  // Room inside the stage padding, minus the canvas's frame and drop shadow.
-  const mobileDock = stage.querySelector<HTMLElement>('.mobile-stage-controls');
-  const dockHeight = mobileDock ? mobileDock.offsetHeight + 12 : 0;
-  const operation = $('operation-status');
-  // Mobile service status shares the dock's second row; its height is already
-  // included above. Counting it twice would squeeze the café during first service.
-  const statusHeight = mobileDock?.contains(operation) ? 0 : mobileDock && !operation.hidden ? operation.offsetHeight + 12 : mobileDock ? 0 : operation.hidden ? 0 : operation.offsetHeight + 12;
-  const rect = {
-    width: stage.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) - 8,
-    height: stage.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom) - 12 - statusHeight - dockHeight,
-  };
-  // The stats strip only shows if the café could still be as wide as the stage under it.
-  stats.hidden = !!mobileDock || rect.height - STATS_SPACE < MIN_SCENE_H * (rect.width / SCENE_W);
-  const roomH = rect.height - (stats.hidden ? 0 : STATS_SPACE);
-  // A fixed-view illustration retains the established 320×240 floor plan.
-  // Tall phone viewports get breathing room around the café rather than more
-  // empty forecourt. Existing session/resize migration still owns saved feet.
+  stats.hidden = sign.hidden = true;
   const previousHeight = sceneHeight();
   setSceneHeight(MIN_SCENE_H);
   if (previousHeight !== sceneHeight()) {
     sim.resizeScene(previousHeight);
     scene.setOverview(scene.overview, true);
   }
-  const spare = roomH - sceneHeight() * Math.min(rect.width / SCENE_W, roomH / sceneHeight());
-  sign.hidden = spare < SIGN_SPACE;
-  const availH = roomH - (sign.hidden ? 0 : SIGN_SPACE);
-  const fit = Math.min((rect.width * dpr) / SCENE_W, (availH * dpr) / sceneHeight());
-  // The café always fills the available room. Once each art pixel is 3+ device
-  // pixels, a fractional nearest-neighbor scale looks even. Below that, rounding down
-  // would waste up to half the space, so the art is upscaled to the next whole number
-  // and the browser shrinks it smoothly, which keeps every pixel the same size.
-  const shown = Math.max(0.1, fit);
-  const backing = shown >= 3 ? shown : Math.ceil(shown);
-  cafe.resize({
-    width: Math.round(SCENE_W * backing),
-    height: Math.round(sceneHeight() * backing),
-    cssWidth: (SCENE_W * shown) / dpr,
-    cssHeight: (sceneHeight() * shown) / dpr,
-    backing,
-    smooth: backing !== shown,
-  });
+  cafe.resize(fitFullscreenRoom(stage.clientWidth, stage.clientHeight, window.devicePixelRatio || 1, SCENE_W, sceneHeight()), { width: stage.clientWidth, height: stage.clientHeight });
 }
 new ResizeObserver(fitCanvas).observe(stage);
 
@@ -197,24 +169,46 @@ const hint = $('hint');
 const panelRoot = $('management-panel');
 const panelToggle = $<HTMLButtonElement>('panel-toggle');
 const layout = document.querySelector<HTMLElement>('.layout')!;
-let panelCollapsed = storage.preference(PANEL_COLLAPSED_KEY) === '1';
-
-function updatePanelVisibility(): void {
-  panelRoot.hidden = panelCollapsed;
-  panelRoot.setAttribute('aria-label', t('panel.title'));
-  layout.classList.toggle('panel-collapsed', panelCollapsed);
-  panelToggle.textContent = t(panelCollapsed ? 'panel.expand' : 'panel.collapse');
+let panelCollapsed = true;
+const drawer = new FullscreenDrawer(panelRoot, panelToggle, $<HTMLButtonElement>('drawer-close'), $('drawer-backdrop'), () => setPanelCollapsed(true));
+const edgeTools = $('edge-tools');
+let detachedTablePreview = false;
+const previewExit = document.createElement('button');
+previewExit.className = 'pixel-btn table-preview-exit';
+previewExit.hidden = true;
+stage.append(previewExit);
+previewExit.addEventListener('click', () => {
+  detachedTablePreview = false;
+  panel.clearTablePreview();
+  showPanelTab('upgrades');
+});
+function updateDrawerLabels(): void {
+  previewExit.textContent = chinese() ? '返回升级' : 'Back to upgrades';
+  $('drawer-title').textContent = t('panel.title');
+  $('drawer-close').setAttribute('aria-label', chinese() ? '关闭管理' : 'Close management');
+  $('drawer-pause').textContent = chinese() ? '已暂停 · 关闭后继续' : 'Paused · close to resume';
+  panelToggle.textContent = chinese() ? '管理' : 'Manage';
   panelToggle.title = t(panelCollapsed ? 'panel.expandTitle' : 'panel.collapseTitle');
   panelToggle.setAttribute('aria-label', panelToggle.title);
-  panelToggle.setAttribute('aria-expanded', String(!panelCollapsed));
+  edgeTools.setAttribute('aria-label', t('panel.title'));
+  for (const button of edgeTools.querySelectorAll<HTMLButtonElement>('[data-management-tab]')) {
+    const tab = button.dataset.managementTab as 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | 'promotion';
+    button.querySelector('span:last-child')!.textContent = t(`tab.${tab}`);
+    button.setAttribute('aria-expanded', String(!panelCollapsed && panelRoot.querySelector(`[data-tab="${tab}"]`)?.classList.contains('active')));
+  }
 }
 
-function setPanelCollapsed(collapsed: boolean): void {
+function updatePanelVisibility(restoreFocus = true): void {
+  panelRoot.setAttribute('aria-label', t('panel.title'));
+  layout.classList.toggle('panel-collapsed', panelCollapsed);
+  drawer.setOpen(!panelCollapsed, restoreFocus);
+  updateDrawerLabels();
+}
+function setPanelCollapsed(collapsed: boolean, restoreFocus = true): void {
   playFlow.cancelPantry();
   if (!panelCollapsed && collapsed) panel.captureBrowsingContext();
   panelCollapsed = collapsed;
-  storage.setPreference(PANEL_COLLAPSED_KEY, collapsed ? '1' : '0');
-  updatePanelVisibility();
+  updatePanelVisibility(restoreFocus);
 }
 panelToggle.addEventListener('click', () => setPanelCollapsed(!panelCollapsed));
 updatePanelVisibility();
@@ -242,14 +236,31 @@ const panel = new Panel(
     locate: (id) => locateResident(id),
     interact: (id) => greetResident(id),
   },
-  () => regionsUI.select('main'),
+  () => {
+    regionsUI.select('main');
+    if (drawer.media.matches) {
+      detachedTablePreview = true;
+      setPanelCollapsed(true, false);
+      previewExit.hidden = false;
+      previewExit.focus({ preventScroll: true });
+    }
+  },
 );
 
 /** Opening a management task also reveals the panel if the player folded it away. */
 function showPanelTab(tab: 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | 'promotion'): void {
   setPanelCollapsed(false);
   panel.showTab(tab);
+  updateDrawerLabels();
 }
+edgeTools.addEventListener('click', (event) => {
+  const button = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-management-tab]');
+  if (!button) return;
+  const tab = button.dataset.managementTab as 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | 'promotion';
+  if (!panelCollapsed && panel.currentTab === tab) setPanelCollapsed(true);
+  else showPanelTab(tab);
+});
+panel.onNavigate(() => queueMicrotask(updateDrawerLabels));
 
 // Intro preferences never write or migrate the café save itself.
 let introMode = false;
@@ -291,7 +302,8 @@ const arrangeStore = $<HTMLButtonElement>('arrange-store');
 const arrangeDone = $<HTMLButtonElement>('arrange-done');
 const arrangeFocus = new ArrangeFocus(panelRoot, arrangeDone);
 const sceneWrap = document.querySelector<HTMLElement>('.scene-wrap')!;
-dockMobileControls(stage, sceneWrap, [$('day-hud'), $('cafe-style-btn'), $('open-btn'), arrangeBar, $('operation-status')], fitCanvas);
+stage.append($('day-hud'), $('cafe-style-btn'), $('open-btn'), arrangeBar, $('area-nav'));
+let arrangementHadDrawer = false;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const regionsUI = new RegionsUI($('area-nav'), $('area-edges'), $('region-card'), () => state, (area) => {
   scene.moveToArea(area, reducedMotion.matches);
@@ -316,6 +328,14 @@ const regionsUI = new RegionsUI($('area-nav'), $('area-edges'), $('region-card')
 });
 
 function showArrange(): void {
+  if (arrange && !panelCollapsed) {
+    arrangementHadDrawer = true;
+    setPanelCollapsed(true, false);
+  } else if (!arrange && arrangementHadDrawer) {
+    arrangementHadDrawer = false;
+    setPanelCollapsed(false, false);
+  }
+  document.body.classList.toggle('arranging-cafe', !!arrange);
   sceneWrap.classList.toggle('arranging', !!arrange);
   arrangeBar.hidden = !arrange;
   if (!arrange) return;
@@ -452,7 +472,7 @@ const speedBtns = [...document.querySelectorAll<HTMLButtonElement>('[data-speed]
 const playFlow = new PlayFlow({
   panel,
   state: () => state,
-  canInteract: () => cafeInteractionEnabled(session.active, isModalOpen()) && !arrange && !scene.panning && !scene.overview,
+  canInteract: () => cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused) && !arrange && !scene.panning && !scene.overview,
   help: helpBrew,
   isPanelCollapsed: () => panelCollapsed,
   setPanelCollapsed: (collapsed) => {
@@ -553,7 +573,7 @@ $('reputation-btn').addEventListener('click', () => showReputation(state));
 $('regular-guests-btn').addEventListener('click', () => showRegularGuests(state, saveGame));
 $('cafe-style-btn').addEventListener('click', () => showCafeStyles(state, () => { saveGame(); panel.refresh(); updateDayHud(); }));
 operationBtn.addEventListener('click', () => {
-  if (!cafeInteractionEnabled(session.active, isModalOpen())) return;
+  if (!cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused)) return;
   const status = state.phase === 'closing' ? operationStatus(state, sim) : operationMonitor.current;
   if (status.kind === 'ingredients') { playFlow.openPantry(true, operationBtn); return; }
   const detail = t(`ops.${status.kind}.detail`);
@@ -603,6 +623,7 @@ function applyStaticText(): void {
 applyStaticText();
 onLocaleChange(() => {
   applyStaticText();
+  updateDrawerLabels();
   updateTemporaryNotice();
   shownStats = '';
   panel.refresh();
@@ -756,7 +777,7 @@ function greetResident(id: CatId): void {
 
 function tapAt(x: number, y: number): void {
   // Keep scene residents touchable at 44 CSS pixels even in a compact café.
-  const catHitRadius = Math.max(12, 22 * SCENE_W / Math.max(1, canvas.getBoundingClientRect().width));
+  const catHitRadius = Math.max(12, 22 * SCENE_W / Math.max(1, $('scene-area').getBoundingClientRect().width));
   const residentId = scene.hitResidentCat(x, y, catHitRadius);
   if (residentId) {
     const pet = state.pets.find(p => p.id === residentId)!;
@@ -773,7 +794,7 @@ function tapAt(x: number, y: number): void {
 
 /** The button and scene share one optional, persisted service-help cooldown. */
 function helpBrew(): boolean {
-  if (!cafeInteractionEnabled(session.active, isModalOpen()) || arrange || scene.panning || scene.overview || state.phase === 'prep' || !sim.boost()) return false;
+  if (!cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused) || arrange || scene.panning || scene.overview || state.phase === 'prep' || !sim.boost()) return false;
   sim.baristas.forEach((_, i) => { if (sim.isBrewing(i) && !sim.isHolding(i)) { const p = sim.baristaPose(i); scene.sparkle(p.x, p.y - 15); } });
   if (!hint.hidden) {
     hint.hidden = true;
@@ -801,13 +822,19 @@ function pointerMove(x: number, y: number): void {
 }
 
 window.addEventListener('keydown', (e) => {
-  if (!startupComplete) return;
+  if (!startupComplete || e.defaultPrevented || isComposingKey(e)) return;
+  if (!isModalOpen() && !document.querySelector('.onboard-overlay') &&
+      !(e.key === 'Escape' && panel.tablePreviewRequested) && drawer.handleKey(e)) return;
   // Preserve native activation and editing; Esc can still close a dialog.
   if (isComposingKey(e)) return;
   const onboarding = !!document.querySelector('.onboard-overlay');
   if (usesNativeKeyboard(e.target) && e.key !== 'Escape') return;
   if (e.key === 'Escape' && panel.tablePreviewRequested && !isModalOpen()) {
     panel.clearTablePreview();
+    if (detachedTablePreview) {
+      detachedTablePreview = false;
+      showPanelTab('upgrades');
+    }
     e.preventDefault();
   } else if (e.key === 'Escape' && isModalOpen()) {
     e.preventDefault();
@@ -845,7 +872,7 @@ let shownRate = '';
 function frame(dt: number): void {
   // Paused while a dialog (like the day report) is up or the tab is hidden; sped up
   // when the player asks.
-  const paused = !startupComplete || !session.active || !!document.getElementById('save-session-notice') || isModalOpen() || document.hidden || !!document.querySelector('.onboard-overlay');
+  const paused = drawer.paused || !startupComplete || !session.active || !!document.getElementById('save-session-notice') || isModalOpen() || document.hidden || !!document.querySelector('.onboard-overlay');
   scene.paused = paused;
   const simDt = paused ? 0 : state.phase !== 'prep' ? dt * state.speed : dt;
   for (let remaining = simDt; remaining > 1e-6; remaining -= SIM_STEP) {
@@ -859,13 +886,17 @@ function frame(dt: number): void {
 
   // Settlement can open a dialog in this frame; hide thoughts immediately.
   scene.paused = paused || isModalOpen();
-  if (panelCollapsed || panelRoot.hidden || scene.paused || !!arrange ||
+  if (((panelCollapsed || panelRoot.hidden) && !detachedTablePreview) || scene.paused || !!arrange ||
       scene.area !== 'main' || scene.overview || state.phase !== 'prep') panel.clearTablePreview();
+  if (!panel.tablePreviewRequested) detachedTablePreview = false;
+  previewExit.hidden = !detachedTablePreview;
   scene.tablePreview = panel.tablePreviewRequested;
   scene.livingCats.update(state, scene.paused ? 0 : dt, sim);
   scene.update(dt, sim);
   sceneWrap.classList.toggle('is-panning', scene.panning);
   sceneWrap.classList.toggle('is-overview', scene.overview);
+  stage.classList.toggle('is-panning', scene.panning);
+  stage.classList.toggle('is-overview', scene.overview);
   arrangeFocus.update(!!arrange, !scene.panning && !scene.overview && !scene.paused);
 
   const coins = formatTransactionMoney(state.coins);
@@ -888,7 +919,7 @@ function frame(dt: number): void {
 
 const cafe = new CafeGame(canvas, scene, sim, () => state, {
   tick: frame, pointerDown, pointerMove, interactionState: () => arrange,
-  interactionEnabled: () => startupComplete && cafeInteractionEnabled(session.active, isModalOpen()),
+  interactionEnabled: () => startupComplete && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused),
   loadingProgress: (loaded, total) => loading.progress(loaded, total),
 });
 fitCanvas();
@@ -900,21 +931,26 @@ updateDayHud();
 // The inline resource progress stays visible until the pixel
 // fonts are in (or after 2s at most) and the café has drawn its first frame.
 waitForStartupReady(cafe.ready, document.fonts.ready).then(() =>
-  requestAnimationFrame(() => {
+  new Promise<void>((resolve, reject) => requestAnimationFrame(() => {
+    try {
     startupComplete = true;
     // Replace any staff thumbnails prepared before the character atlases loaded.
     panel.refresh();
     loading.complete();
     document.body.classList.add('ready');
     if (!state.profile) startOnboarding();
-    setTimeout(() => $('loader').remove(), 300);
     const movedFurniture = consumeFurnitureMovesOnLoad(state);
     if (movedFurniture > 0) {
       saveGame();
       toast(t('toast.furnitureMovedOnLoad', { n: movedFurniture }));
     }
-  }),
+    setTimeout(() => $('loader').remove(), 300);
+    resolve();
+    } catch (error) { reject(error); }
+  })),
 ).catch((error: unknown) => {
+  startupComplete = false;
+  document.body.classList.remove('ready');
   clearInterval(autosaveTimer);
   session.close();
   loading.fail(error);

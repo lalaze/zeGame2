@@ -1,0 +1,16 @@
+/** Expand only the drawing surface; the central authored room keeps its contain scale. */
+export function viewportFrame(room: { width: number; height: number; cssWidth: number; cssHeight: number }, viewport = { width: room.cssWidth, height: room.cssHeight }) {
+  const cssWidth = Math.max(room.cssWidth, viewport.width);
+  const cssHeight = Math.max(room.cssHeight, viewport.height);
+  const width = Math.round(cssWidth * room.width / room.cssWidth);
+  const height = Math.round(cssHeight * room.height / room.cssHeight);
+  return {
+    width, height, cssWidth, cssHeight,
+    x: (width - room.width) / 2, y: (height - room.height) / 2,
+    roomWidth: room.width, roomHeight: room.height,
+    left: (room.cssWidth - cssWidth) / 2, top: (room.cssHeight - cssHeight) / 2,
+  };
+}
+export function insideRoomFrame(x: number, y: number, frame: { x: number; y: number; roomWidth: number; roomHeight: number }): boolean {
+  return x >= frame.x && y >= frame.y && x < frame.x + frame.roomWidth && y < frame.y + frame.roomHeight;
+}

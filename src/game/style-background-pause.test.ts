@@ -40,20 +40,24 @@ function liveFrame(withCare = true) {
   let seed = 1592594996;
   const sim = new Sim(() => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 2 ** 32; });
   const session = { active: true };
+  const drawer = { paused: false };
   let modal = false;
-  const scene = { paused: false, panning: false, overview: false, addEvents: vi.fn(), update: vi.fn(), livingCats: { update: vi.fn() } };
+  const scene = { area: 'main', tablePreview: false, paused: false, panning: false, overview: false, addEvents: vi.fn(), update: vi.fn(), livingCats: { update: vi.fn() } };
   const showReport = vi.fn(() => { modal = true; });
   const dependencies = {
-    document, state, sim, session, scene, SIM_STEP: simStep, isModalOpen: () => modal, showReport,
+    document, state, sim, session, scene, drawer, startupComplete: true,
+    panelCollapsed: true, panelRoot: document.createElement('aside'),
+    detachedTablePreview: false, previewExit: document.createElement('button'), stage: document.createElement('section'),
+    SIM_STEP: simStep, isModalOpen: () => modal, showReport,
     sceneWrap: document.createElement('div'), arrangeFocus: { update: vi.fn() }, arrange: null,
     coinsEl: document.createElement('button'), rateEl: document.createElement('div'),
-    formatMoney, formatTransactionMoney, t, panel: { update: vi.fn() }, regionsUI: { update: vi.fn() },
+    formatMoney, formatTransactionMoney, t, panel: { update: vi.fn(), tablePreviewRequested: false, clearTablePreview: vi.fn() }, regionsUI: { update: vi.fn() },
     updateStats: vi.fn(), updateDayHud: vi.fn(),
   };
   const frame = new Function(...Object.keys(dependencies), `${frameSource}\nreturn frame;`)(...Object.values(dependencies)) as (dt: number) => void;
-  const tick = new Function('delta', `${sceneTick}\nreturn dt;`) as (this: { hooks: { tick: typeof frame } }, delta: number) => number;
-  const rawFrame = (milliseconds: number) => tick.call({ hooks: { tick: frame } }, milliseconds);
-  return { state, sim, session, scene, showReport, rawFrame, setModal: (open: boolean) => { modal = open; } };
+  const tick = new Function('delta', `${sceneTick}\nreturn dt;`) as (this: { initialized: boolean; loadingFailed: boolean; hooks: { tick: typeof frame } }, delta: number) => number;
+  const rawFrame = (milliseconds: number) => tick.call({ initialized: true, loadingFailed: false, hooks: { tick: frame } }, milliseconds);
+  return { state, sim, session, scene, drawer, showReport, rawFrame, setModal: (open: boolean) => { modal = open; } };
 }
 
 beforeEach(() => {
@@ -64,11 +68,12 @@ beforeEach(() => {
 afterEach(() => { vi.restoreAllMocks(); document.body.replaceChildren(); setSceneHeight(MIN_SCENE_H); setKitchenLevel(0); });
 
 describe('actual main-frame background and modal timing contract', () => {
-  it.each(['hidden tab', 'modal', 'inactive save session', 'save notice', 'onboarding'] as const)('does not advance any real simulation or care while blocked by %s', blocker => {
+  it.each(['hidden tab', 'modal', 'inactive save session', 'save notice', 'onboarding', 'mobile drawer'] as const)('does not advance any real simulation or care while blocked by %s', blocker => {
     const run = liveFrame();
     for (let frame = 0; frame < 80; frame++) run.rawFrame(250);
     if (blocker === 'hidden tab') vi.spyOn(document, 'hidden', 'get').mockReturnValue(true);
     if (blocker === 'modal') run.setModal(true);
+    if (blocker === 'mobile drawer') run.drawer.paused = true;
     if (blocker === 'inactive save session') run.session.active = false;
     if (blocker === 'save notice') document.body.innerHTML = '<div id="save-session-notice"></div>';
     if (blocker === 'onboarding') document.body.innerHTML = '<div class="onboard-overlay"></div>';
@@ -104,6 +109,33 @@ describe('actual main-frame background and modal timing contract', () => {
     expect(promotion - run.state.promotion!.remaining).toBeCloseTo(0.25 * speed, 8);
     expect(run.scene.paused).toBe(false);
     expect(run.scene.livingCats.update.mock.calls.at(-1)?.[1]).toBe(0.25);
+  });
+
+
+  it.each([1, 2, 4] as const)('mobile drawer resumes at %sx and preserves an overlapping modal pause', speed => {
+    const run = liveFrame(); run.state.speed = speed;
+    run.rawFrame(100);
+    run.drawer.paused = true;
+    const before = serialize(run.state);
+    run.rawFrame(60_000);
+    expect(serialize(run.state)).toBe(before);
+    expect(run.scene.paused).toBe(true);
+    run.setModal(true);
+    run.drawer.paused = false;
+    run.rawFrame(60_000);
+    expect(serialize(run.state)).toBe(before);
+    expect(run.scene.paused).toBe(true);
+    expect(run.state.speed).toBe(speed);
+    run.setModal(false);
+    const time = run.state.dayTime;
+    const care = run.state.pets[0].careSeconds;
+    const promotion = run.state.promotion!.remaining;
+    expect(run.rawFrame(60_000)).toBe(0.25);
+    expect(run.state.dayTime - time).toBeCloseTo(0.25 * speed, 8);
+    expect(care - run.state.pets[0].careSeconds).toBeCloseTo(0.25 * speed, 8);
+    expect(promotion - run.state.promotion!.remaining).toBeCloseTo(0.25 * speed, 8);
+    expect(run.state.speed).toBe(speed);
+    expect(run.scene.paused).toBe(false);
   });
 
   it('does not settle a finished service while hidden and pauses cat motion as settlement opens', () => {

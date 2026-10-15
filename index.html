@@ -13,76 +13,85 @@
     <link rel="apple-touch-icon" href="./icon-192.png" />
     <title>Tiny Bean Café</title>
     <style>
-      /* Visible before JavaScript, stylesheets and fonts finish loading. */
-      html, body { background: #543425; }
+      /* Inline feedback appears before the bundle; the decorative walk never drives progress. */
+      html, body { background: #49382e; }
       body:not(.ready) #app { visibility: hidden; }
       #loader {
-        position: fixed;
-        inset: 0;
-        z-index: 100;
-        display: grid;
-        place-content: center;
-        justify-items: center;
-        gap: 20px;
-        padding: 24px;
-        color: #fff7e8;
-        text-align: center;
-        font: 16px/1.5 system-ui, sans-serif;
-        background: #543425;
-        transition: opacity 0.25s;
+        position: fixed; inset: 0; z-index: 100;
+        display: flex; align-items: center; justify-content: center;
+        padding: max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+        overflow: auto; color: #f5e9cc; text-align: center;
+        font: 16px/1.5 'Pixel ZH', 'Pixelify Sans', ui-monospace, monospace;
+        background: repeating-linear-gradient(0deg, transparent 0 63px, #35271f44 63px 66px),
+          repeating-linear-gradient(90deg, #ffffff03 0 95px, #00000008 95px 98px), #5b4738;
+        transition: opacity .2s;
       }
       body.ready #loader { opacity: 0; pointer-events: none; }
       #loader [hidden] { display: none; }
-      #loader .loader-title { margin: 12px 0 0; font-size: 22px; letter-spacing: 1px; }
-      #loader .loader-status { margin: 0; max-width: 30em; overflow-wrap: anywhere; }
-      #loader .loader-meter { width: min(300px, 80vw); display: grid; gap: 8px; }
+      #loader .loader-content { width: min(380px, 100%); margin: auto; }
+      #loader .loader-walkway { height: 112px; position: relative; margin: 24px 0 4px; }
+      #loader .loader-walker { position: absolute; bottom: 0; left: 0; width: 84px; height: 108px; animation: loader-travel 8s linear infinite; }
+      #loader .loader-figure { width: 84px; height: 108px; position: relative; animation: loader-facing 8s steps(1, end) infinite; }
+      #loader .loader-pose { position: absolute; inset: 0; width: 84px; height: 108px; opacity: 0; animation: loader-step .8s steps(1, end) infinite; }
+      #loader .loader-pose:nth-child(2) { animation-delay: -.6s; }
+      #loader .loader-pose:nth-child(3) { animation-delay: -.4s; }
+      #loader .loader-pose:nth-child(4) { animation-delay: -.2s; }
+      @keyframes loader-travel { 0%, 100% { left: 0; } 50% { left: calc(100% - 84px); } }
+      @keyframes loader-facing { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(-1); } }
+      @keyframes loader-step { 0%, 24.999% { opacity: 1; } 25%, 100% { opacity: 0; } }
+      #loader[aria-busy="false"] .loader-walker, #loader[aria-busy="false"] .loader-figure,
+      #loader[aria-busy="false"] .loader-pose { animation-play-state: paused; }
+      #loader .loader-title { margin: 0; font-size: clamp(22px, 5vw, 28px); line-height: 1.25; color: #f5e9cc; }
+      #loader .loader-status { margin: 18px 0 0; min-height: 3em; font-size: 14px; overflow-wrap: anywhere; }
+      #loader .loader-meter { width: 100%; display: grid; gap: 10px; }
       #loader progress {
-        display: block; box-sizing: border-box; width: 100%; height: 20px;
-        appearance: none; border: 3px solid #c8a15e; border-radius: 0;
-        background: #382218; color: #f0ce85; accent-color: #f0ce85;
+        display: block; box-sizing: border-box; width: 100%; height: 24px;
+        appearance: none; border: 3px solid #65513b; border-radius: 0;
+        background: #d4c3a0; color: #6f865a; accent-color: #6f865a;
+        box-shadow: 0 2px #fff6dc, inset 0 2px #aa956f;
       }
-      #loader progress::-webkit-progress-bar { background: #382218; }
-      #loader progress::-webkit-progress-value { background: #f0ce85; }
-      #loader progress::-moz-progress-bar { background: #f0ce85; }
-      #loader progress:indeterminate { opacity: 0.65; }
-      #loader .loader-count { min-height: 1.5em; color: #ebbd7d; font-variant-numeric: tabular-nums; }
+      #loader progress::-webkit-progress-bar { background: #d4c3a0; box-shadow: inset 0 2px #aa956f; }
+      #loader progress::-webkit-progress-value {
+        background: repeating-linear-gradient(90deg, transparent 0 13px, #3c573b55 13px 15px),
+          linear-gradient(#a5b57a 0 3px, #748b59 3px 12px, #546c47 12px);
+      }
+      #loader progress::-moz-progress-bar {
+        background: repeating-linear-gradient(90deg, transparent 0 13px, #3c573b55 13px 15px),
+          linear-gradient(#a5b57a 0 3px, #748b59 3px 12px, #546c47 12px);
+      }
+      #loader .loader-track { position: relative; overflow: hidden; }
+      #loader .loader-track:has(progress:indeterminate)::after {
+        content: ""; position: absolute; top: 3px; bottom: 3px; left: 3px; width: 24%;
+        background: repeating-linear-gradient(90deg, #8fa56a 0 13px, #647e50 13px 15px);
+        animation: loader-wait 1.4s ease-in-out infinite alternate;
+      }
+      @keyframes loader-wait { to { left: 74%; } }
+      #loader .loader-track:has(progress[hidden])::after { display: none; }
+      #loader progress:indeterminate { opacity: .85; }
+      #loader .loader-count { min-height: 1.5em; font-size: 13px; color: #e7d5b5; font-variant-numeric: tabular-nums; }
       #loader .loader-retry {
-        padding: 10px 24px; border: 2px solid #c8a15e; border-radius: 0;
-        background: #865332; color: #fff7e8; font: inherit; cursor: pointer;
+        min-height: 44px; margin-top: 18px; padding: 8px 22px;
+        border: 3px solid #49382e; border-radius: 0; background: #546c47; color: #fff6dc;
+        box-shadow: inset 3px 3px #9caf7b, inset -3px -3px #446849; font: inherit; cursor: pointer;
       }
-      #loader .loader-retry:focus-visible { outline: 3px solid #fff7e8; outline-offset: 4px; }
-      #loader .loader-detail { max-width: 36em; overflow-wrap: anywhere; }
-      #loader i {
-        width: 12px;
-        height: 12px;
-        animation: loader-spin 0.8s steps(1) infinite;
-      }
-      @keyframes loader-spin {
-        0% { box-shadow: -16px -16px #f0ce85, 0px -16px #865332, 16px -16px #865332, 16px 0px #865332, 16px 16px #865332, 0px 16px #866344, -16px 16px #c8a15e, -16px 0px #ebbd7d; }
-        12.5% { box-shadow: -16px -16px #ebbd7d, 0px -16px #f0ce85, 16px -16px #865332, 16px 0px #865332, 16px 16px #865332, 0px 16px #865332, -16px 16px #866344, -16px 0px #c8a15e; }
-        25% { box-shadow: -16px -16px #c8a15e, 0px -16px #ebbd7d, 16px -16px #f0ce85, 16px 0px #865332, 16px 16px #865332, 0px 16px #865332, -16px 16px #865332, -16px 0px #866344; }
-        37.5% { box-shadow: -16px -16px #866344, 0px -16px #c8a15e, 16px -16px #ebbd7d, 16px 0px #f0ce85, 16px 16px #865332, 0px 16px #865332, -16px 16px #865332, -16px 0px #865332; }
-        50% { box-shadow: -16px -16px #865332, 0px -16px #866344, 16px -16px #c8a15e, 16px 0px #ebbd7d, 16px 16px #f0ce85, 0px 16px #865332, -16px 16px #865332, -16px 0px #865332; }
-        62.5% { box-shadow: -16px -16px #865332, 0px -16px #865332, 16px -16px #866344, 16px 0px #c8a15e, 16px 16px #ebbd7d, 0px 16px #f0ce85, -16px 16px #865332, -16px 0px #865332; }
-        75% { box-shadow: -16px -16px #865332, 0px -16px #865332, 16px -16px #865332, 16px 0px #866344, 16px 16px #c8a15e, 0px 16px #ebbd7d, -16px 16px #f0ce85, -16px 0px #865332; }
-        87.5% { box-shadow: -16px -16px #865332, 0px -16px #865332, 16px -16px #865332, 16px 0px #865332, 16px 16px #866344, 0px 16px #c8a15e, -16px 16px #ebbd7d, -16px 0px #f0ce85; }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        #loader i { animation: none; box-shadow: -16px -16px #f0ce85, 0 -16px #865332, 16px -16px #865332, 16px 0 #865332, 16px 16px #865332, 0 16px #866344, -16px 16px #c8a15e, -16px 0 #ebbd7d; }
-        #loader { transition: none; }
-      }
+      #loader .loader-retry:focus-visible { outline: 3px solid #fff6dc; outline-offset: 4px; }
+      #loader .loader-retry:disabled { opacity: .65; cursor: wait; }
+      #loader .loader-detail { display: block; margin-top: 16px; font-size: 12px; overflow-wrap: anywhere; color: #ffccae; }
+      @media (prefers-reduced-motion: reduce) { #loader .loader-walker, #loader .loader-figure, #loader .loader-pose { animation: none; } #loader .loader-walker { left: calc(50% - 42px); } #loader .loader-pose:first-child { opacity: 1; } #loader .loader-track:has(progress:indeterminate)::after { animation: none; left: 38%; } #loader { transition: none; } }
     </style>
   </head>
-  <body>
+  <body class="fullscreen-cafe">
     <div id="loader" aria-busy="true">
-      <i aria-hidden="true"></i>
+      <div class="loader-content">
       <p class="loader-title">Tiny Bean Café</p>
-      <p class="loader-status" data-loading-status role="status">正在载入游戏 / Loading the café…</p>
+      <div class="loader-walkway" aria-hidden="true"><div class="loader-walker"><div class="loader-figure"><svg class="loader-pose" viewBox="100 70 420 540" overflow="hidden"><image href="./loading-carry-staff-v2.png" width="1254" height="1254"/></svg><svg class="loader-pose" viewBox="727 70 420 540" overflow="hidden"><image href="./loading-carry-staff-v2.png" width="1254" height="1254"/></svg><svg class="loader-pose" viewBox="100 697 420 540" overflow="hidden"><image href="./loading-carry-staff-v2.png" width="1254" height="1254"/></svg><svg class="loader-pose" viewBox="727 697 420 540" overflow="hidden"><image href="./loading-carry-staff-v2.png" width="1254" height="1254"/></svg></div></div></div>
       <div class="loader-meter">
-        <progress data-loading-bar max="1" aria-label="资源加载进度 / Asset loading progress"></progress>
+        <div class="loader-track"><progress data-loading-bar max="1" aria-label="正在等待启动，尚无可测量进度 / Starting; progress not yet measurable"></progress></div>
         <span class="loader-count" data-loading-count></span>
       </div>
+      <p class="loader-status" data-loading-status role="status">正在启动程序，尚无可测量进度 / Starting the app…</p>
       <button class="loader-retry" data-loading-retry type="button" hidden>重新加载 / Reload</button>
+      </div>
     </div>
     <div id="app">
       <header class="hud">
@@ -95,7 +104,7 @@
           <div class="rate" id="rate">$0/s</div>
         </div>
         <div class="hud-buttons">
-          <button id="panel-toggle" class="pixel-btn small ghost" aria-controls="management-panel" aria-expanded="true">Collapse</button>
+          <button id="panel-toggle" class="pixel-btn small ghost" aria-controls="management-panel" aria-expanded="false">Manage</button>
           <button id="settings-btn" class="pixel-btn small ghost" data-i18n-title="hud.settings">···</button>
         </div>
       </header>
@@ -111,6 +120,7 @@
 
       <main class="layout">
         <section class="stage" id="stage">
+          <div class="environment" aria-hidden="true"><img class="environment-art" src="./cafe-exterior.svg" alt="" draggable="false" /></div>
           <div class="stage-sign" id="stage-sign" hidden><span id="stage-sign-name"></span></div>
           <div class="scene-wrap" id="scene-area">
             <canvas id="scene" aria-label="Your café"></canvas>
@@ -136,12 +146,18 @@
               </span>
             </div>
           </div>
+          <nav class="edge-tools" id="edge-tools" aria-label="Manage café"><button type="button" data-management-tab="menu" aria-controls="management-panel" aria-expanded="false"><span aria-hidden="true">☕</span><span>menu</span></button><button type="button" data-management-tab="pantry" aria-controls="management-panel" aria-expanded="false"><span aria-hidden="true">▤</span><span>pantry</span></button><button type="button" data-management-tab="upgrades" aria-controls="management-panel" aria-expanded="false"><span aria-hidden="true">↑</span><span>upgrades</span></button><button type="button" data-management-tab="decor" aria-controls="management-panel" aria-expanded="false"><span aria-hidden="true">✿</span><span>decor</span></button><button type="button" data-management-tab="pets" aria-controls="management-panel" aria-expanded="false"><span aria-hidden="true">♧</span><span>pets</span></button><button type="button" data-management-tab="promotion" aria-controls="management-panel" aria-expanded="false"><span aria-hidden="true">★</span><span>promotion</span></button></nav>
           <div class="stage-stats" id="stage-stats" hidden></div>
           <button class="operation-status chip" id="operation-status" hidden></button>
           <div class="hint" id="hint" data-i18n="hint.tap" hidden>Tap the café to help brew faster!</div>
         </section>
 
-        <aside class="panel" id="management-panel">
+        <button class="drawer-backdrop" id="drawer-backdrop" type="button" aria-label="Close management" tabindex="-1" hidden></button>
+        <aside class="panel" id="management-panel" aria-labelledby="drawer-title" hidden>
+          <header class="drawer-header">
+            <div><strong id="drawer-title">Manage café</strong><small class="drawer-pause" id="drawer-pause" hidden>Paused</small></div>
+            <button id="drawer-close" type="button" class="pixel-btn small" aria-label="Close management">×</button>
+          </header>
           <nav class="tabs" role="tablist">
             <button role="tab" data-tab="menu" class="tab active" data-i18n="tab.menu">Menu</button>
             <button role="tab" data-tab="pantry" class="tab" data-i18n="tab.pantry">Pantry</button>
@@ -180,6 +196,55 @@
     <div id="modal-root"></div>
     <div id="toast" class="toast" hidden></div>
 
-    <script type="module" src="/src/main.ts"></script>
+    <script id="loader-bootstrap">
+      // Runs independently of the game module graph, so failed imports cannot leave a silent empty bar.
+      (() => {
+        const root = document.getElementById('loader');
+        const status = root.querySelector('[data-loading-status]');
+        const bar = root.querySelector('progress');
+        const retry = root.querySelector('[data-loading-retry]');
+        let active = true, failed = false;
+        const reload = () => { retry.disabled = true; window.location.reload(); };
+        retry.onclick = reload;
+        const fail = (message) => {
+          if (!active || failed) return;
+          failed = true; clearTimeout(timer);
+          root.setAttribute('aria-busy', 'false');
+          bar.hidden = true; status.setAttribute('role', 'alert');
+          status.textContent = '启动程序加载失败，请重新加载 / App could not start. Please reload.';
+          const detail = document.createElement('small');
+          detail.className = 'loader-detail'; detail.textContent = message;
+          root.querySelector('.loader-content').append(detail);
+          retry.hidden = false; retry.focus();
+        };
+        const onError = (event) => {
+          if (event.target?.id === 'game-entry') fail('启动脚本或依赖无法加载 / Startup script or dependency unavailable');
+          else if (event.error) fail(event.message || 'Startup error');
+        };
+        const onRejection = (event) => fail(event.reason instanceof Error ? event.reason.message : String(event.reason));
+        const timer = setTimeout(() => {
+          if (!active || failed) return;
+          status.textContent = '启动仍在等待，尚未取得进度。可检查网络或重新加载。 / Still waiting to start. Check the connection or reload.';
+          retry.hidden = false;
+        }, 20000);
+        const handoff = () => {
+          active = false; clearTimeout(timer);
+          window.removeEventListener('error', onError, true);
+          window.removeEventListener('unhandledrejection', onRejection);
+          window.removeEventListener('cafe:bootstrap-ready', moduleStarted);
+          window.removeEventListener('cafe:loader-owned', handoff);
+          retry.onclick = null; retry.hidden = true; retry.disabled = false;
+          bar.hidden = false; status.setAttribute('role', 'status');
+          root.setAttribute('aria-busy', 'true');
+          root.querySelector('.loader-detail')?.remove();
+        };
+        window.addEventListener('error', onError, true);
+        window.addEventListener('unhandledrejection', onRejection);
+        const moduleStarted = () => clearTimeout(timer);
+        window.addEventListener('cafe:bootstrap-ready', moduleStarted);
+        window.addEventListener('cafe:loader-owned', handoff);
+      })();
+    </script>
+    <script id="game-entry" type="module" src="/src/main.ts"></script>
   </body>
 </html>

@@ -79,16 +79,21 @@ export class FirstServiceGuide {
     const signature = `${this.element.hidden}:${step}:${getLocale()}:${this.expandedTools}`;
     if (signature === this.signature) return;
     this.signature = signature;
+    const detailsOpen = this.element.querySelector<HTMLDetailsElement>('.guide-details')?.open ?? false;
     const focused = (document.activeElement as HTMLElement | null)?.dataset.guideAction;
     const hadFocus = this.element.contains(document.activeElement);
     const number: Record<FirstServiceStep, number> = { stock: 1, prepare: 2, observe: 3, close: 4, closing: 4, reopen: 5, complete: 6 };
     this.element.setAttribute('aria-label', t('guide.title'));
-    this.element.innerHTML = `<div class="guide-copy"><b>${t('guide.progress', { n: number[step] })} · ${t(`guide.${step}.title`)}</b><p>${t(`guide.${step}.body`)}</p></div>
-      <div class="guide-actions">${step !== 'closing' ? `<button class="pixel-btn small" data-guide-action="next">${t(`guide.${step}.action`)}</button>` : ''}
+    this.element.innerHTML = `<div class="guide-heading"><details class="guide-details"${detailsOpen ? ' open' : ''}>
+      <summary data-guide-action="details"><b>${t('guide.progress', { n: number[step] })} · ${t(`guide.${step}.title`)}</b></summary>
+      <div class="guide-copy"><p>${t(`guide.${step}.body`)}</p></div>
+      <div class="guide-actions">
       <button class="chip" data-guide-action="help">${t('guide.help')}</button>
       ${!this.expandedTools ? `<button class="chip" data-guide-action="tools">${t('guide.tools')}</button>` : ''}
-      <button class="chip" data-guide-action="skip">${t(step === 'complete' ? 'guide.done' : 'guide.skip')}</button></div>`;
-    if (hadFocus) (this.element.querySelector<HTMLElement>(`[data-guide-action="${focused}"]`) ?? this.element.querySelector<HTMLElement>('button'))?.focus();
+      <button class="chip" data-guide-action="skip">${t(step === 'complete' ? 'guide.done' : 'guide.skip')}</button></div>
+      </details>
+      ${step !== 'closing' ? `<button class="pixel-btn small guide-primary" data-guide-action="next">${t(`guide.${step}.action`)}</button>` : ''}</div>`;
+    if (hadFocus) (this.element.querySelector<HTMLElement>(`[data-guide-action="${focused}"]`) ?? this.element.querySelector<HTMLElement>('summary'))?.focus();
   }
   showHelp(): void {
     showModal({ focusableBody: true, title: t('guide.helpTitle'), body: `<div class="guide-reference">${['stock', 'menu', 'bake', 'open', 'close', 'next'].map((topic) => `<h3>${t(`guide.reference.${topic}.title` as Parameters<typeof t>[0])}</h3><p>${t(`guide.reference.${topic}.body` as Parameters<typeof t>[0])}</p>`).join('')}</div>`, buttons: [{ label: t('settings.back'), primary: true }] });

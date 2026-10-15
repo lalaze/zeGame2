@@ -16,6 +16,16 @@ npm run balance:recovery  # current one-bean recovery, 30 fixed seeds per case
 npm run balance:compare   # verify matched baseline/candidate experiment artifacts
 ```
 
+## Fullscreen café controls
+
+The game stage fills the browser viewport. The authored 320×240 room stays complete and proportional at the largest contain size; the same live renderer shows genuine neighboring rooms in the remaining space, following the building's physical floor plan (including locked rooms in their existing locked appearance). Exterior scenery remains visible only outside actual room footprints, including below the shorter kitchen. These surrounding previews are passive; room navigation and interactions remain in the central room. It does not create extra floor space, seats or walkable areas. Opening management never resizes the room.
+
+Desktop management opens from the six floating right-edge tools. On phones, use **Manage**; the overlay pauses service and shows a pause badge. Closing it removes only that overlay's pause reason, preserving speed and any other active dialog/background pause. Escape returns focus to the opener, and the mobile drawer contains keyboard focus. Each management tab retains its existing browsing state.
+
+Furniture placement temporarily folds management away and restores the catalog when finished or cancelled. Mobile table planning likewise reveals the room, with a **Back to upgrades** button. Map and doorway navigation continue to use the existing room connections.
+
+Regression checks: `src/ui/fullscreen-*.test.ts` and `node scripts/adjacent-overlay-qa.mjs` (installed Chrome, isolated temporary profile, authorized Tailscale preview on port 5173). The browser check writes screenshots and a structured report under `artifacts/adjacent-*`.
+
 ## How it works
 
 **Opening day.** On first launch you get the keys to an empty shop and go through a short setup:

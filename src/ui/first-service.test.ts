@@ -17,6 +17,31 @@ function setup() {
   const click = (action: string) => guide.element.querySelector<HTMLButtonElement>(`[data-guide-action="${action}"]`)!.click();
   return { s, storage, actions, guide, click };
 }
+describe('compact guidance', () => {
+  it('returns focus to the visible summary when the primary action disappears', () => {
+    const { s, guide } = setup();
+    s.phase = 'open'; s.dayTime = 45; guide.update();
+    guide.element.querySelector<HTMLElement>('[data-guide-action="next"]')!.focus();
+    s.phase = 'closing'; guide.update();
+    expect(document.activeElement).toBe(guide.element.querySelector('summary'));
+    expect(guide.element.querySelector<HTMLDetailsElement>('details')!.open).toBe(false);
+  });
+  it('starts folded, preserves expansion and focus through a step change', () => {
+    const { guide, click, actions } = setup();
+    const details = guide.element.querySelector<HTMLDetailsElement>('details')!;
+    expect(details.open).toBe(false);
+    const primary = guide.element.querySelector<HTMLButtonElement>('[data-guide-action="next"]')!;
+    expect(primary.closest('details')).toBeNull();
+    details.open = true;
+    primary.focus(); click('next');
+    expect(actions.pantry).toHaveBeenCalledOnce();
+    expect(guide.element.querySelector<HTMLDetailsElement>('details')!.open).toBe(true);
+    expect((document.activeElement as HTMLElement).dataset.guideAction).toBe('next');
+    guide.element.querySelector<HTMLDetailsElement>('details')!.open = false;
+    guide.update();
+    expect(guide.element.querySelector<HTMLDetailsElement>('details')!.open).toBe(false);
+  });
+});
 describe('skippable and replayable first service guidance', () => {
   it('checks existing stock, prepares, observes and closes only after explicit actions', () => {
     const { s, actions, guide, click } = setup();

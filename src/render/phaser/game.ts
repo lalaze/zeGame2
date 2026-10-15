@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { viewportFrame } from '../viewport-frame';
 import { SCENE_W, sceneHeight } from '../../game/layout';
 import type { Sim } from '../../game/sim';
 import type { GameState } from '../../game/state';
@@ -31,6 +32,7 @@ export class CafeGame {
   private scene: CafeScene;
   private size: CafeSize | null = null;
   private booted = false;
+  private viewport?: { width: number; height: number };
   /** Resolves once the scene is up and drawing. */
   readonly ready: Promise<void>;
 
@@ -70,8 +72,9 @@ export class CafeGame {
     this.game.destroy(false);
   }
 
-  resize(size: CafeSize): void {
+  resize(size: CafeSize, viewport?: { width: number; height: number }): void {
     this.size = size;
+    this.viewport = viewport;
     if (this.booted) this.apply();
   }
 
@@ -79,10 +82,19 @@ export class CafeGame {
     const size = this.size;
     if (!size) return;
     const { canvas } = this;
+    const frame = viewportFrame(size, this.viewport);
+    this.scene.viewportFrame = frame;
     this.scene.backing = size.backing;
-    if (canvas.width !== size.width || canvas.height !== size.height) this.game.scale.resize(size.width, size.height);
-    canvas.style.width = `${size.cssWidth}px`;
-    canvas.style.height = `${size.cssHeight}px`;
+    if (canvas.width !== frame.width || canvas.height !== frame.height) this.game.scale.resize(frame.width, frame.height);
+    canvas.style.width = `${frame.cssWidth}px`;
+    canvas.style.height = `${frame.cssHeight}px`;
+    canvas.style.position = 'absolute';
+    canvas.style.left = `${frame.left}px`;
+    canvas.style.top = `${frame.top}px`;
+    if (canvas.parentElement) {
+      canvas.parentElement.style.width = `${size.cssWidth}px`;
+      canvas.parentElement.style.height = `${size.cssHeight}px`;
+    }
     canvas.style.imageRendering = size.smooth ? 'auto' : 'pixelated';
     // Pointer positions are mapped through the canvas's size on the page.
     this.game.scale.refresh();

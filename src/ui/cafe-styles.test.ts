@@ -214,7 +214,10 @@ describe('six directions and responsive structure', () => {
     expect(styles).toContain('.mobile-stage-controls:not(:has(#open-btn:not([hidden]))) .day-hud { flex: 1 0 100%; width: 100%; }');
     expect(styles).toContain('.mobile-stage-controls .operation-status { flex: 1 1 200px;');
     expect(styles).toContain('.has-guide .stage { height: min(350px, 43dvh); }');
-    expect(readFileSync('src/main.ts', 'utf8')).toContain('mobileDock?.contains(operation) ? 0');
+    // The legacy dock still has isolated coverage below; production uses overlays
+    // and never subtracts mobile controls from the room's viewport.
+    expect(readFileSync('src/main.ts', 'utf8')).toContain('fitFullscreenRoom(stage.clientWidth, stage.clientHeight');
+    expect(readFileSync('src/main.ts', 'utf8')).not.toContain('dockMobileControls(stage,');
     const media = Object.assign(new EventTarget(), { matches: true });
     vi.spyOn(window, 'matchMedia').mockReturnValue(media as MediaQueryList);
     document.body.innerHTML = '<section id="stage"><div id="scene-area"><canvas></canvas><div id="day-hud"></div><button id="cafe-style-btn"></button><button id="open-btn"></button><div id="arrange-bar"></div></div><button id="operation-status"></button></section>';

@@ -1,5 +1,6 @@
 /** Use the inline loader immediately; show measured file progress once its total is known. */
 export function startupLoading(root: HTMLElement, chinese: boolean, retry: () => void) {
+  window.dispatchEvent(new Event('cafe:loader-owned'));
   let failed = false;
   const status = root.querySelector<HTMLElement>('[data-loading-status]')!;
   const bar = root.querySelector<HTMLProgressElement>('[data-loading-bar]')!;
@@ -35,7 +36,7 @@ export function startupLoading(root: HTMLElement, chinese: boolean, retry: () =>
       if (failed) return;
       failed = true;
       root.setAttribute('aria-busy', 'false');
-      root.querySelector('i')?.remove();
+      // aria-busy=false pauses the decorative walk without affecting progress.
       bar.hidden = true;
       count.hidden = true;
       status.setAttribute('role', 'alert');
@@ -45,7 +46,7 @@ export function startupLoading(root: HTMLElement, chinese: boolean, retry: () =>
       const detail = document.createElement('small');
       detail.className = 'loader-detail';
       detail.textContent = error instanceof Error ? error.message : String(error);
-      root.append(detail);
+      (root.querySelector('.loader-content') ?? root).append(detail);
       button.hidden = false;
       button.focus();
     },
