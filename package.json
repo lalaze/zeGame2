@@ -26,6 +26,7 @@
     "balance:routes:progression": "CAFESTYLE_PROGRESSION=1 vitest run scripts/cafe-style-progression.test.ts --silent=false --disableConsoleIntercept"
   },
   "devDependencies": {
+    "@types/node": "^26.6.5",
     "happy-dom": "^20.14.6",
     "subset-font": "^2.9.0",
     "typescript": "^7.0.2",

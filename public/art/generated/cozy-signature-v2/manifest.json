@@ -1,0 +1,460 @@
+{
+  "version": "cozy-signature-v2",
+  "processing": "Rectangular extraction, nearest-neighbor fitting, preserved generated alpha. Runtime production dimensions and source-coordinate metadata size/anchor contracts retained.",
+  "assets": {
+    "cup-coffee": {
+      "file": "cup-coffee.png",
+      "source": "sources/cups-atlas.png",
+      "sourceRect": {
+        "left": 158,
+        "top": 179,
+        "width": 433,
+        "height": 340
+      },
+      "originalSize": [
+        415,
+        369
+      ],
+      "outputSize": [
+        128,
+        114
+      ],
+      "contentRect": [
+        20,
+        38,
+        374,
+        293
+      ],
+      "sha256": "1d1443e9b96e519dc96c8f9e0d1d234208bd3072e9952458de79d4c012b87148"
+    },
+    "cup-tea": {
+      "file": "cup-tea.png",
+      "source": "sources/cups-atlas.png",
+      "sourceRect": {
+        "left": 722,
+        "top": 164,
+        "width": 439,
+        "height": 371
+      },
+      "originalSize": [
+        357,
+        369
+      ],
+      "outputSize": [
+        124,
+        128
+      ],
+      "contentRect": [
+        18,
+        48,
+        321,
+        272
+      ],
+      "sha256": "0efaef99b7e9cad78f81b510650f45342afd408b81dcf78068ffa6be5c8eecdf"
+    },
+    "cup-milk": {
+      "file": "cup-milk.png",
+      "source": "sources/cups-atlas.png",
+      "sourceRect": {
+        "left": 201,
+        "top": 694,
+        "width": 281,
+        "height": 427
+      },
+      "originalSize": [
+        250,
+        374
+      ],
+      "outputSize": [
+        86,
+        128
+      ],
+      "contentRect": [
+        14,
+        18,
+        222,
+        337
+      ],
+      "sha256": "315ea79ba0be45a3e2388cc43507cd106a4ca0a8246087e2fae71034c54334ee"
+    },
+    "cup-fruit": {
+      "file": "cup-fruit.png",
+      "source": "sources/cups-atlas.png",
+      "sourceRect": {
+        "left": 757,
+        "top": 694,
+        "width": 317,
+        "height": 437
+      },
+      "originalSize": [
+        310,
+        374
+      ],
+      "outputSize": [
+        107,
+        128
+      ],
+      "contentRect": [
+        33,
+        18,
+        244,
+        337
+      ],
+      "sha256": "253147d8256138412212f7e9b12f866dce505dca2eb36f64ff1cae9ed4cf9ed6"
+    },
+    "liquid-coffee": {
+      "file": "liquid-coffee.png",
+      "source": "sources/liquids-atlas.png",
+      "sourceRect": {
+        "left": 78,
+        "top": 270,
+        "width": 495,
+        "height": 241
+      },
+      "originalSize": [
+        368,
+        199
+      ],
+      "outputSize": [
+        128,
+        70
+      ],
+      "contentRect": [
+        39,
+        27,
+        313,
+        152
+      ],
+      "sha256": "ef9fa8e90a6067cbef9364d32eeefffbb24a41bd875a9ff28e7e885badadd63e"
+    },
+    "liquid-tea": {
+      "file": "liquid-tea.png",
+      "source": "sources/liquids-atlas.png",
+      "sourceRect": {
+        "left": 689,
+        "top": 276,
+        "width": 487,
+        "height": 232
+      },
+      "originalSize": [
+        336,
+        199
+      ],
+      "outputSize": [
+        128,
+        76
+      ],
+      "contentRect": [
+        14,
+        29,
+        308,
+        147
+      ],
+      "sha256": "73ad37f0874dde86388b4c243222bed666345ebaed0836e4ee8c8a41e03e7998"
+    },
+    "liquid-milk": {
+      "file": "liquid-milk.png",
+      "source": "sources/liquids-atlas.png",
+      "sourceRect": {
+        "left": 79,
+        "top": 770,
+        "width": 494,
+        "height": 238
+      },
+      "originalSize": [
+        336,
+        199
+      ],
+      "outputSize": [
+        128,
+        76
+      ],
+      "contentRect": [
+        12,
+        28,
+        303,
+        146
+      ],
+      "sha256": "e0c9f840801285a4ae030026285a757eb22995910b06d0ebfcd2c855e552b941"
+    },
+    "liquid-fruit": {
+      "file": "liquid-fruit.png",
+      "source": "sources/liquids-atlas.png",
+      "sourceRect": {
+        "left": 689,
+        "top": 772,
+        "width": 487,
+        "height": 236
+      },
+      "originalSize": [
+        340,
+        199
+      ],
+      "outputSize": [
+        128,
+        75
+      ],
+      "contentRect": [
+        8,
+        26,
+        308,
+        149
+      ],
+      "sha256": "954022dc1996933ce36a832826e1d2519fcf368e82b068b6db48a92711ffca38"
+    },
+    "topping-sugar": {
+      "file": "topping-sugar.png",
+      "source": "sources/toppings-atlas.png",
+      "sourceRect": {
+        "left": 74,
+        "top": 248,
+        "width": 287,
+        "height": 275
+      },
+      "originalSize": [
+        315,
+        214
+      ],
+      "outputSize": [
+        128,
+        87
+      ],
+      "contentRect": [
+        48,
+        3,
+        216,
+        207
+      ],
+      "sha256": "422d90eb0a98b13d521dcdd471c0d1794c4c711107d16a32ab313413433bfbe3"
+    },
+    "topping-spice": {
+      "file": "topping-spice.png",
+      "source": "sources/toppings-atlas.png",
+      "sourceRect": {
+        "left": 457,
+        "top": 270,
+        "width": 341,
+        "height": 282
+      },
+      "originalSize": [
+        311,
+        214
+      ],
+      "outputSize": [
+        128,
+        89
+      ],
+      "contentRect": [
+        26,
+        3,
+        249,
+        206
+      ],
+      "sha256": "2823fc9d199b94c46adbdb5f8a9f02aac91ed53abd0d9b5446b7638b340babf0"
+    },
+    "topping-cocoa": {
+      "file": "topping-cocoa.png",
+      "source": "sources/toppings-atlas.png",
+      "sourceRect": {
+        "left": 887,
+        "top": 316,
+        "width": 325,
+        "height": 203
+      },
+      "originalSize": [
+        327,
+        224
+      ],
+      "outputSize": [
+        128,
+        88
+      ],
+      "contentRect": [
+        30,
+        42,
+        264,
+        165
+      ],
+      "sha256": "8d1bfb6d13244d2a5e4ee848ff6f02072fb6edf63c997ecd60bf6fce0ce984f1"
+    },
+    "topping-cream": {
+      "file": "topping-cream.png",
+      "source": "sources/toppings-atlas.png",
+      "sourceRect": {
+        "left": 51,
+        "top": 762,
+        "width": 332,
+        "height": 319
+      },
+      "originalSize": [
+        361,
+        274
+      ],
+      "outputSize": [
+        128,
+        98
+      ],
+      "contentRect": [
+        57,
+        3,
+        248,
+        238
+      ],
+      "sha256": "46918b344379df426454a2c757226afea2f4817b51accc4646cadf629e57bf29"
+    },
+    "topping-fruit": {
+      "file": "topping-fruit.png",
+      "source": "sources/toppings-atlas.png",
+      "sourceRect": {
+        "left": 471,
+        "top": 777,
+        "width": 325,
+        "height": 297
+      },
+      "originalSize": [
+        320,
+        265
+      ],
+      "outputSize": [
+        128,
+        106
+      ],
+      "contentRect": [
+        23,
+        3,
+        242,
+        221
+      ],
+      "sha256": "9c07a393cd2c25c70f10c29c59e78ec4c058263985f8cb2f66472b612852e82b"
+    },
+    "topping-matcha": {
+      "file": "topping-matcha.png",
+      "source": "sources/toppings-atlas.png",
+      "sourceRect": {
+        "left": 887,
+        "top": 865,
+        "width": 322,
+        "height": 181
+      },
+      "originalSize": [
+        351,
+        239
+      ],
+      "outputSize": [
+        128,
+        88
+      ],
+      "contentRect": [
+        7,
+        12,
+        323,
+        182
+      ],
+      "sha256": "4a4a5c18d8b626633bbfcae6413d9dcd98708c0f5000a165a4e82fc1c435d55c"
+    }
+  },
+  "vessels": {
+    "coffee": {
+      "size": [
+        415,
+        369
+      ],
+      "rim": [
+        166.84,
+        102.63,
+        112.29,
+        37.92
+      ]
+    },
+    "tea": {
+      "size": [
+        357,
+        369
+      ],
+      "rim": [
+        137.92,
+        94.19,
+        103.83,
+        33.73
+      ],
+      "body": [
+        [
+          36.28,
+          95.65
+        ],
+        [
+          240.29,
+          95.65
+        ],
+        [
+          227.13,
+          281.14
+        ],
+        [
+          56.75,
+          282.61
+        ]
+      ]
+    },
+    "milk": {
+      "size": [
+        250,
+        374
+      ],
+      "rim": [
+        124.6,
+        60.62,
+        94.01,
+        29.2
+      ],
+      "body": [
+        [
+          32.17,
+          62.2
+        ],
+        [
+          217.04,
+          62.2
+        ],
+        [
+          196.5,
+          325.8
+        ],
+        [
+          50.34,
+          325.8
+        ]
+      ]
+    },
+    "fruit": {
+      "size": [
+        310,
+        374
+      ],
+      "rim": [
+        154.62,
+        63.5,
+        106.99,
+        32.39
+      ],
+      "body": [
+        [
+          49.16,
+          64.27
+        ],
+        [
+          260.84,
+          64.27
+        ],
+        [
+          240.05,
+          324.92
+        ],
+        [
+          70.72,
+          324.92
+        ]
+      ]
+    }
+  }
+}

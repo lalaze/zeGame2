@@ -4,9 +4,11 @@ vi.mock('../reference-character-art', () => ({
   preloadReferenceCharacters: vi.fn(), referenceCharacterContacts: vi.fn(), referenceCharacterOffset: vi.fn(),
   resolveReferenceCharacter: vi.fn(() => null),
 }));
+vi.mock('../cozy-cat-assets', () => ({ preloadCozyCats: vi.fn(), createCozyCatArt: vi.fn(() => null) }));
 import { CafeScene } from './cafe-scene';
 import { GENERATED_MAIN_ASSETS } from '../generated-main-art';
 import { preloadReferenceCharacters } from '../reference-character-art';
+import { preloadCozyCats } from '../cozy-cat-assets';
 
 function deferred() {
   let resolve!: () => void, reject!: (error: Error) => void;
@@ -19,6 +21,7 @@ beforeEach(() => {
   vi.clearAllMocks();
   characters = deferred();
   vi.mocked(preloadReferenceCharacters).mockReturnValue(characters.promise);
+  vi.mocked(preloadCozyCats).mockResolvedValue();
 });
 function harness() {
   const handlers = new Map<string, (...args: any[]) => void>();
@@ -84,6 +87,23 @@ describe('café image startup', () => {
     expect(h.ready).not.toHaveBeenCalled();
     h.scene.update(0, 16);
     expect(h.tick).not.toHaveBeenCalled();
+  });
+
+  it('waits for cat artwork after the human atlases have decoded', async () => {
+    const cats = deferred(); vi.mocked(preloadCozyCats).mockReturnValue(cats.promise);
+    const h = harness(); h.scene.preload(); h.scene.create();
+    characters.resolve(); await flush();
+    expect(h.create).not.toHaveBeenCalled();
+    cats.resolve(); await flush();
+    expect(h.create).toHaveBeenCalledOnce();
+  });
+
+  it('reports a cat atlas failure instead of showing mixed generations', async () => {
+    const cats = deferred(); vi.mocked(preloadCozyCats).mockReturnValue(cats.promise);
+    const h = harness(), failure = new Error('Could not load cozy cat atlas: ginger');
+    h.scene.preload(); h.scene.create(); characters.resolve(); cats.reject(failure); await flush();
+    expect(h.fail).toHaveBeenCalledExactlyOnceWith(failure);
+    expect(h.create).not.toHaveBeenCalled();
   });
 
   it('rejects scene initialization exceptions rather than leaving ready pending', async () => {

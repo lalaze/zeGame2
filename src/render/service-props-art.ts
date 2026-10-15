@@ -2,6 +2,9 @@
  * Native-size canvases keep hand/table anchors stable and are baked once by Phaser.
  */
 import { drawText, textWidth } from './font';
+import { getGeneratedTablewareAdapter } from './generated-main-art';
+import { paintCozyWorld } from './cozy-world-art';
+import { paintCozyTableTent } from './cozy-service-art';
 
 type Ctx = CanvasRenderingContext2D;
 const p = (ctx: Ctx, x: number, y: number, w: number, h: number, color: string) => {
@@ -11,6 +14,7 @@ const p = (ctx: Ctx, x: number, y: number, w: number, h: number, color: string) 
 
 /** Seven-pixel porcelain demitasse, with a real handle and a saucer. */
 export function paintServiceCup(ctx: Ctx): void {
+  if (getGeneratedTablewareAdapter()?.paint(ctx, 'empty-cup-saucer', 0, 0)) return;
   p(ctx, 1, 0, 4, 5, '#543b2a');
   p(ctx, 2, 1, 2, 4, '#e0c99f');
   p(ctx, 1, 1, 1, 3, '#fff5dc');
@@ -26,6 +30,7 @@ export function paintServiceCup(ctx: Ctx): void {
 
 /** Dark polished serving tray, narrow brass rim and two integral handles. */
 export function paintServiceTray(ctx: Ctx): void {
+  if (getGeneratedTablewareAdapter()?.paint(ctx, 'shallow-tray', 0, 0)) return;
   p(ctx, 1, 0, 20, 3, '#39281f');
   p(ctx, 0, 0, 3, 1, '#c8a15e');
   p(ctx, 19, 0, 3, 1, '#c8a15e');
@@ -37,6 +42,7 @@ export function paintServiceTray(ctx: Ctx): void {
 
 /** Glass bud bottle, two leaves, a five-petal flower and reflected light. */
 export function paintTableVase(ctx: Ctx, bloom: string): void {
+  if (paintCozyWorld(ctx, 'vase', 0, 14, 5, 14)) return;
   p(ctx, 1, 7, 3, 6, '#476657');
   p(ctx, 0, 9, 5, 3, '#476657');
   p(ctx, 1, 8, 3, 4, '#b7d4b8');
@@ -57,6 +63,7 @@ export function paintTableVase(ctx: Ctx, bloom: string): void {
 
 /** Folded ivory stock in a wooden number holder, rather than a flat label. */
 export function paintTableTent(ctx: Ctx, n: number): void {
+  if (paintCozyTableTent(ctx, n)) return;
   const text = String(n), w = textWidth(text) + 4;
   p(ctx, 1, 0, w - 2, 7, '#543425');
   p(ctx, 1, 1, w - 2, 5, '#f4e6c7');

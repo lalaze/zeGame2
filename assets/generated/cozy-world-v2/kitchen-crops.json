@@ -1,0 +1,306 @@
+[
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-cooler.png",
+    "size": [
+      224,
+      317
+    ],
+    "bounds": [
+      2,
+      2,
+      220,
+      313
+    ],
+    "sourceBox": [
+      52,
+      24,
+      220,
+      313
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-dryStore.png",
+    "size": [
+      261,
+      303
+    ],
+    "bounds": [
+      2,
+      2,
+      257,
+      299
+    ],
+    "sourceBox": [
+      347,
+      43,
+      257,
+      299
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-handSink.png",
+    "size": [
+      200,
+      241
+    ],
+    "bounds": [
+      2,
+      2,
+      196,
+      237
+    ],
+    "sourceBox": [
+      693,
+      88,
+      196,
+      237
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-mixer.png",
+    "size": [
+      215,
+      284
+    ],
+    "bounds": [
+      2,
+      2,
+      211,
+      280
+    ],
+    "sourceBox": [
+      981,
+      60,
+      211,
+      280
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-proofer.png",
+    "size": [
+      212,
+      306
+    ],
+    "bounds": [
+      2,
+      2,
+      208,
+      302
+    ],
+    "sourceBox": [
+      56,
+      350,
+      208,
+      302
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-hood.png",
+    "size": [
+      321,
+      236
+    ],
+    "bounds": [
+      2,
+      2,
+      317,
+      232
+    ],
+    "sourceBox": [
+      308,
+      378,
+      317,
+      232
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-kettle.png",
+    "size": [
+      228,
+      251
+    ],
+    "bounds": [
+      2,
+      2,
+      224,
+      247
+    ],
+    "sourceBox": [
+      664,
+      397,
+      224,
+      247
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-deckOven.png",
+    "size": [
+      295,
+      279
+    ],
+    "bounds": [
+      2,
+      2,
+      291,
+      275
+    ],
+    "sourceBox": [
+      940,
+      369,
+      291,
+      275
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-convection.png",
+    "size": [
+      273,
+      219
+    ],
+    "bounds": [
+      2,
+      2,
+      269,
+      215
+    ],
+    "sourceBox": [
+      31,
+      684,
+      269,
+      215
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-fryer.png",
+    "size": [
+      217,
+      252
+    ],
+    "bounds": [
+      2,
+      2,
+      213,
+      248
+    ],
+    "sourceBox": [
+      347,
+      661,
+      213,
+      248
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-bench.png",
+    "size": [
+      367,
+      208
+    ],
+    "bounds": [
+      2,
+      2,
+      363,
+      204
+    ],
+    "sourceBox": [
+      579,
+      706,
+      363,
+      204
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-sheeter.png",
+    "size": [
+      270,
+      191
+    ],
+    "bounds": [
+      2,
+      2,
+      266,
+      187
+    ],
+    "sourceBox": [
+      961,
+      716,
+      266,
+      187
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-standMixer.png",
+    "size": [
+      234,
+      273
+    ],
+    "bounds": [
+      2,
+      2,
+      230,
+      269
+    ],
+    "sourceBox": [
+      34,
+      934,
+      230,
+      269
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-bins.png",
+    "size": [
+      249,
+      204
+    ],
+    "bounds": [
+      2,
+      2,
+      245,
+      200
+    ],
+    "sourceBox": [
+      309,
+      976,
+      245,
+      200
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-rack.png",
+    "size": [
+      313,
+      265
+    ],
+    "bounds": [
+      2,
+      2,
+      309,
+      261
+    ],
+    "sourceBox": [
+      594,
+      936,
+      309,
+      261
+    ]
+  },
+  {
+    "file": "public/art/generated/cozy-world-v2/kitchen-pastryFridge.png",
+    "size": [
+      312,
+      251
+    ],
+    "bounds": [
+      2,
+      2,
+      308,
+      247
+    ],
+    "sourceBox": [
+      928,
+      958,
+      308,
+      247
+    ]
+  }
+]

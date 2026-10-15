@@ -1,0 +1,242 @@
+[
+  {
+    "id": "main-horizontal-beam",
+    "file": "public/art/generated/cozy-world-v2/environment-main-horizontal-beam.png",
+    "size": [
+      684,
+      118
+    ],
+    "bounds": [
+      97,
+      8,
+      489,
+      102
+    ],
+    "sourceBox": [
+      15,
+      196,
+      451,
+      94
+    ],
+    "bbox": {
+      "x": 97,
+      "y": 8,
+      "w": 489,
+      "h": 102
+    },
+    "cacheEnvelope": [
+      80,
+      16
+    ]
+  },
+  {
+    "id": "main-corner-post",
+    "file": "public/art/generated/cozy-world-v2/environment-main-corner-post.png",
+    "size": [
+      147,
+      540
+    ],
+    "bounds": [
+      8,
+      48,
+      131,
+      484
+    ],
+    "sourceBox": [
+      578,
+      19,
+      105,
+      388
+    ],
+    "bbox": {
+      "x": 8,
+      "y": 48,
+      "w": 131,
+      "h": 484
+    },
+    "cacheEnvelope": [
+      18,
+      80
+    ]
+  },
+  {
+    "id": "foreground-threshold",
+    "file": "public/art/generated/cozy-world-v2/environment-foreground-threshold.png",
+    "size": [
+      619,
+      122
+    ],
+    "bounds": [
+      8,
+      12,
+      603,
+      102
+    ],
+    "sourceBox": [
+      786,
+      213,
+      456,
+      77
+    ],
+    "bbox": {
+      "x": 8,
+      "y": 12,
+      "w": 603,
+      "h": 102
+    },
+    "cacheEnvelope": [
+      64,
+      12
+    ]
+  },
+  {
+    "id": "outdoor-tree-line",
+    "file": "public/art/generated/cozy-world-v2/environment-outdoor-tree-line.png",
+    "size": [
+      516,
+      412
+    ],
+    "bounds": [
+      45,
+      8,
+      425,
+      396
+    ],
+    "sourceBox": [
+      13,
+      459,
+      400,
+      373
+    ],
+    "bbox": {
+      "x": 45,
+      "y": 8,
+      "w": 425,
+      "h": 396
+    },
+    "cacheEnvelope": [
+      94,
+      50
+    ]
+  },
+  {
+    "id": "village-roof-cluster",
+    "file": "public/art/generated/cozy-world-v2/environment-village-roof-cluster.png",
+    "size": [
+      404,
+      347
+    ],
+    "bounds": [
+      34,
+      8,
+      335,
+      331
+    ],
+    "sourceBox": [
+      429,
+      467,
+      396,
+      391
+    ],
+    "bbox": {
+      "x": 34,
+      "y": 8,
+      "w": 335,
+      "h": 331
+    },
+    "cacheEnvelope": [
+      80,
+      48
+    ]
+  },
+  {
+    "id": "cloud",
+    "file": "public/art/generated/cozy-world-v2/environment-cloud.png",
+    "size": [
+      419,
+      220
+    ],
+    "bounds": [
+      54,
+      8,
+      311,
+      204
+    ],
+    "sourceBox": [
+      837,
+      539,
+      403,
+      264
+    ],
+    "bbox": {
+      "x": 54,
+      "y": 8,
+      "w": 311,
+      "h": 204
+    },
+    "cacheEnvelope": [
+      44,
+      20
+    ]
+  },
+  {
+    "id": "tableware-heart",
+    "file": "public/art/generated/cozy-world-v2/tableware-heart.png",
+    "size": [
+      310,
+      304
+    ],
+    "bounds": [
+      10,
+      36,
+      290,
+      258
+    ],
+    "sourceBox": [
+      64,
+      920,
+      301,
+      268
+    ]
+  },
+  {
+    "id": "tableware-drop",
+    "file": "public/art/generated/cozy-world-v2/tableware-drop.png",
+    "size": [
+      305,
+      305
+    ],
+    "bounds": [
+      54,
+      10,
+      197,
+      285
+    ],
+    "sourceBox": [
+      523,
+      895,
+      208,
+      301
+    ]
+  },
+  {
+    "id": "tableware-crown",
+    "file": "public/art/generated/cozy-world-v2/tableware-crown.png",
+    "size": [
+      348,
+      305
+    ],
+    "bounds": [
+      10,
+      19,
+      328,
+      276
+    ],
+    "sourceBox": [
+      867,
+      895,
+      343,
+      289
+    ]
+  }
+]

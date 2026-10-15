@@ -1,0 +1,56 @@
+{
+  "version": "cozy-signature-v2",
+  "generatedAt": "2026-10-15",
+  "tool": "built-in image_gen",
+  "useCase": "stylized-concept",
+  "styleReferences": [
+    "public/art/generated/cafe-style-sample-v1/sample.png",
+    "public/art/generated/cozy-cafe-v1/furniture-atlas.png"
+  ],
+  "atlases": [
+    {
+      "name": "cups",
+      "columns": 2,
+      "rows": 2,
+      "ids": [
+        "cup-coffee",
+        "cup-tea",
+        "cup-milk",
+        "cup-fruit"
+      ],
+      "prompt": "Use case: stylized-concept.\nAsset type: Production transparent sprite atlas for a cozy cafe game.\nInput images are STYLE REFERENCES ONLY: image 1 is the approved cafe scene; image 2 approved furniture sprites. Match their softly rounded shapes, rich amber and cream highlights, chestnut-brown outlines, warm autumn palette, hand painted pixel clusters, charming polished pixel-art. The image is an atlas of isolated small food object sprites, NOT a scene. Each sprite uses a consistent elevated three-quarter view with visible top surface and front. Coarse crisp pixel edges, clear readable silhouettes, restrained detail, no smooth vector outlines, no realism. Truly transparent background and transparent gaps; never a checkerboard drawing. All items centered fully inside their cells with at least 18% transparent padding on every side. No ground, no cast ground shadows, no additional props, labels, numbers, gridlines, text, logos, frames or watermarks. Every requested cell is separate, nothing overlaps or touches another cell.\nPrimary request: redraw four EMPTY modular drink vessels for the game's recipe compositor. This is a CUTOUT SPRITE SHEET. Use a 2 columns by 2 rows square atlas with one small vessel in the CENTER HALF of each cell and huge empty transparent margins.\nRow 1 left: an empty round ivory ceramic coffee cup, one large curved handle on its right, no saucer. Its top is a broad elliptical OPEN HOLE with actual fully transparent alpha inside; draw only a cream ceramic rim around the open hole, and opaque cream cup exterior beneath it.\nRow 1 right: an empty clear glass tea mug, rounded with one curved handle on its right. The top opening and interior body are fully transparent, with only a warm golden glass rim, thin brown glass outline and a few pale cream reflection stripes on side edges.\nRow 2 left: an empty tall clear glass for milk, gently tapered sides, thick rounded glass base, no handle. Top opening and center body fully transparent, pale cream rim and a few thin warm edge highlights.\nRow 2 right: an empty slightly wider tall clear glass for fruit juice, gently tapered sides, rounded base, no handle. Top opening and center body fully transparent, pale amber rim and a few thin cream edge highlights.\nCritical: these are overlay layers, so inside each cup there must be true alpha transparency. No liquid, no fill, no foam, no toppings, no black or white opaque interiors. Keep fully transparent outside each vessel too. No plates, no shadows. Warm chunky rounded pixel art matching the cafe reference, no white photorealistic glass.",
+      "generatedSource": "/Users/lalaze/.codex/generated_images/01a13e02-f816-7053-9c8a-35e7c4c376e6/exec-8b0803b3-0bc6-4fd3-b5d4-a460a2afca52.png",
+      "sourceFile": "sources/cups-atlas.png"
+    },
+    {
+      "name": "liquids",
+      "columns": 2,
+      "rows": 2,
+      "ids": [
+        "liquid-coffee",
+        "liquid-tea",
+        "liquid-milk",
+        "liquid-fruit"
+      ],
+      "prompt": "Use case: stylized-concept.\nAsset type: Production transparent sprite atlas for a cozy cafe game.\nInput images are STYLE REFERENCES ONLY: image 1 is the approved cafe scene; image 2 approved furniture sprites. Match their softly rounded shapes, rich amber and cream highlights, chestnut-brown outlines, warm autumn palette, hand painted pixel clusters, charming polished pixel-art. The image is an atlas of isolated small food object sprites, NOT a scene. Each sprite uses a consistent elevated three-quarter view with visible top surface and front. Coarse crisp pixel edges, clear readable silhouettes, restrained detail, no smooth vector outlines, no realism. Truly transparent background and transparent gaps; never a checkerboard drawing. All items centered fully inside their cells with at least 18% transparent padding on every side. No ground, no cast ground shadows, no additional props, labels, numbers, gridlines, text, logos, frames or watermarks. Every requested cell is separate, nothing overlaps or touches another cell.\nPrimary request: four modular LIQUID SURFACE layers, with no cups. Generate a 2 columns by 2 rows square atlas. Each cell contains one small horizontal flat ELLIPTICAL OVAL surface, centered in the cell with very large transparent margins. Each ellipse is about 2.5 times as wide as it is high. A few chunky highlights suggest a glossy liquid seen from an elevated three-quarter view.\nRow 1 left: rich dark roast espresso coffee surface with caramel crema ringing its edge.\nRow 1 right: warm amber-black tea surface with golden reflections, no floating fruit or leaves.\nRow 2 left: warm ivory milk surface, soft cream highlights and a few tiny bubbles at one edge, no foam peak.\nRow 2 right: muted strawberry-red fruit juice surface, soft peach highlights, no fruit pieces.\nThe image outside each ellipse is fully transparent. These are flat surfaces to fit in modular cup openings, no bowl, no cup, no glass, no containers, no thickness, no drips, no shadows, no toppings, no text. Keep all four ellipses the same size and same 2.5:1 perspective. Warm rounded clean pixel-art clusters.",
+      "generatedSource": "/Users/lalaze/.codex/generated_images/01a13e02-f816-7053-9c8a-35e7c4c376e6/exec-3a22f96c-d74a-4689-9bca-601cfb4a301c.png",
+      "sourceFile": "sources/liquids-atlas.png"
+    },
+    {
+      "name": "toppings",
+      "columns": 3,
+      "rows": 2,
+      "ids": [
+        "topping-sugar",
+        "topping-spice",
+        "topping-cocoa",
+        "topping-cream",
+        "topping-fruit",
+        "topping-matcha"
+      ],
+      "prompt": "Use case: stylized-concept.\nAsset type: Production transparent sprite atlas for a cozy cafe game.\nInput images are STYLE REFERENCES ONLY: image 1 is the approved cafe scene; image 2 approved furniture sprites. Match their softly rounded shapes, rich amber and cream highlights, chestnut-brown outlines, warm autumn palette, hand painted pixel clusters, charming polished pixel-art. The image is an atlas of isolated small food object sprites, NOT a scene. Each sprite uses a consistent elevated three-quarter view with visible top surface and front. Coarse crisp pixel edges, clear readable silhouettes, restrained detail, no smooth vector outlines, no realism. Truly transparent background and transparent gaps; never a checkerboard drawing. All items centered fully inside their cells with at least 18% transparent padding on every side. No ground, no cast ground shadows, no additional props, labels, numbers, gridlines, text, logos, frames or watermarks. Every requested cell is separate, nothing overlaps or touches another cell.\nPrimary request: six modular DRINK TOPPING layers with no cups or containers. Generate a 3 columns by 2 rows square atlas. Each cell contains exactly one small topping group, centered in the CENTRAL HALF of its cell with huge fully transparent margins.\nRow 1 left: a compact group of three warm ivory sugar cubes, stacked as two below and one above, viewed from elevated three-quarter angle.\nRow 1 middle: two short cinnamon sticks crossing compactly with one tiny star anise pod; a drink garnish.\nRow 1 right: a low small mound of fine cocoa powder, warm dark brown, horizontally oval base, a surface coating.\nRow 2 left: one plump whipped cream swirl with a soft pointed peak, warm ivory white, a drink garnish.\nRow 2 middle: a compact red strawberry and two tiny blueberries, one small green leaf, no citrus, a drink garnish.\nRow 2 right: a very low flattened mound of fine matcha powder, sage matcha green, horizontally oval base, a surface coating.\nEach topping uses polished rounded warm pixel art and chunky controlled highlights. Everything outside the topping is truly transparent. No dishes, cups, glasses, bowls, boards, shadows, text or extra scattered powder. Keep silhouettes compact, each single group centered safely inside cell.",
+      "generatedSource": "/Users/lalaze/.codex/generated_images/01a13e02-f816-7053-9c8a-35e7c4c376e6/exec-a01d6fc0-7986-4098-aa49-447f5c7a931b.png",
+      "sourceFile": "sources/toppings-atlas.png"
+    }
+  ]
+}

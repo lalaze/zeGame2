@@ -1,0 +1,140 @@
+{
+  "version": "cozy-service-v2",
+  "processing": "Rectangular extraction, nearest-neighbor resize, 8px transparent safety border; no recoloring or alpha masking.",
+  "assets": {
+    "cozy-grinder": {
+      "file": "cozy-grinder.png",
+      "source": "source-atlas.png",
+      "sourceRect": {
+        "left": 189,
+        "top": 77,
+        "width": 333,
+        "height": 526
+      },
+      "guide": {
+        "size": [
+          127,
+          192
+        ],
+        "artBounds": [
+          9,
+          9,
+          109,
+          174
+        ],
+        "foot": [
+          63.5,
+          183
+        ],
+        "aspect": 0.63
+      },
+      "nonTransparentOuterEdgePixels": 0,
+      "sha256": "dcc86bba3419d69ddf9637037d80980dc7d84ffde636d55a83cd12142a21855c"
+    },
+    "cozy-milk-pitcher": {
+      "file": "cozy-milk-pitcher.png",
+      "source": "source-atlas.png",
+      "sourceRect": {
+        "left": 747,
+        "top": 216,
+        "width": 411,
+        "height": 364
+      },
+      "guide": {
+        "size": [
+          192,
+          172
+        ],
+        "artBounds": [
+          10,
+          10,
+          172,
+          152
+        ],
+        "foot": [
+          96,
+          162
+        ],
+        "aspect": 1.13
+      },
+      "nonTransparentOuterEdgePixels": 0,
+      "sha256": "883154fe3a233823a7473f3117e03ef46bbd4ae8be644f16e93fa56105793b89"
+    },
+    "cozy-cake-dome": {
+      "file": "cozy-cake-dome.png",
+      "source": "source-atlas.png",
+      "sourceRect": {
+        "left": 105,
+        "top": 693,
+        "width": 476,
+        "height": 478
+      },
+      "guide": {
+        "size": [
+          191,
+          192
+        ],
+        "artBounds": [
+          9,
+          9,
+          173,
+          174
+        ],
+        "foot": [
+          95.5,
+          183
+        ],
+        "aspect": 0.99,
+        "interiorRect": [
+          48.44,
+          53.66,
+          99.26,
+          49.71
+        ],
+        "cakeFoot": [
+          98.07,
+          123.98
+        ],
+        "glassOverlayBottom": 104.47,
+        "interiorTransparency": 0.91
+      },
+      "nonTransparentOuterEdgePixels": 0,
+      "sha256": "39b3844ba772b3ec8da3d79ef9b133d33ad61c3e79ed9839e5e33e0c3181e635"
+    },
+    "cozy-table-tent": {
+      "file": "cozy-table-tent.png",
+      "source": "source-atlas.png",
+      "sourceRect": {
+        "left": 727,
+        "top": 743,
+        "width": 432,
+        "height": 438
+      },
+      "guide": {
+        "size": [
+          190,
+          192
+        ],
+        "artBounds": [
+          10,
+          9,
+          170,
+          174
+        ],
+        "foot": [
+          95,
+          183
+        ],
+        "aspect": 0.98,
+        "numberRect": [
+          53.51,
+          44.16,
+          65.65,
+          74.34
+        ]
+      },
+      "nonTransparentOuterEdgePixels": 0,
+      "sha256": "eab9b44858f71ecdd9f8bf2d3a512efedc446fbb1f7361ef9621cdcb13fef6bf"
+    }
+  }
+}

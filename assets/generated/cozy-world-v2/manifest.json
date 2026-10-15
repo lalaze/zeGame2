@@ -1,0 +1,656 @@
+{
+  "version": 2,
+  "tool": "built-in image_gen",
+  "reference": "public/art/generated/cafe-style-sample-v1/sample.png",
+  "prompts": [
+    "counters-prompt.txt",
+    "environment-prompt.txt",
+    "fixtures-prompt.txt",
+    "kitchen-prompt.txt",
+    "materials-prompt.txt",
+    "regions-prompt.txt",
+    "service-prompt.txt"
+  ],
+  "packing": "Transparent crops, contain/nearest sampling; runtime geometry in src/render/cozy-*-metadata.json. Historical art retained.",
+  "files": [
+    {
+      "file": "public/art/generated/cozy-world-v2/decor-counter_gold-front.png",
+      "size": [
+        560,
+        224
+      ],
+      "bytes": 238371,
+      "sha256": "167ae4d7ec32eb956b59c1954f6ac894bebecc5820a2e1177d8106b48ab569f6"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/decor-counter_gold-top.png",
+      "size": [
+        560,
+        54
+      ],
+      "bytes": 60982,
+      "sha256": "edef053af97e0222a7d246857d358a1c1acb687cb75f7294976d3e92741c15d5"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/decor-counter_marble-front.png",
+      "size": [
+        560,
+        224
+      ],
+      "bytes": 224153,
+      "sha256": "4ab4098674abd45ce51a0f9f49b91f5563dd9eb49a7016097d30070c74066997"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/decor-counter_marble-top.png",
+      "size": [
+        560,
+        54
+      ],
+      "bytes": 56686,
+      "sha256": "0e24f85ee8f73f1de1137572765598fb2af4a3ea64280528a3f1bfb12f053bd4"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/decor-counter_oak-front.png",
+      "size": [
+        270,
+        210
+      ],
+      "bytes": 114499,
+      "sha256": "fc6f623bd86a7728462ee9c4541e168d511ce7a8393aa47e513a810b25455ae6"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/decor-counter_oak-top.png",
+      "size": [
+        270,
+        22
+      ],
+      "bytes": 14333,
+      "sha256": "2daae72dbf6ca63773ab8c6577141cb5c5d947031f2913c5536ef3995d8f1c36"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/decor-counter_pink-front.png",
+      "size": [
+        560,
+        224
+      ],
+      "bytes": 231862,
+      "sha256": "e08c4b1f4a733507328fcdd6ae88f04825b44d37bc62645be52ffb6ac55ecf74"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/decor-counter_pink-top.png",
+      "size": [
+        560,
+        54
+      ],
+      "bytes": 49733,
+      "sha256": "447eae92e70dd00cc439b5f45112241f7cbfb5d548aa7a073047e85cd3d34373"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/decor-counter_walnut-front.png",
+      "size": [
+        560,
+        224
+      ],
+      "bytes": 226995,
+      "sha256": "f9d37c6205b23a33e7c0e0fa009979d1a42cd4b69baa3db0977f0061bfe24c88"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/decor-counter_walnut-top.png",
+      "size": [
+        560,
+        54
+      ],
+      "bytes": 58343,
+      "sha256": "04759f351e1045a9dba13306b7006144a5d2ea6483979407ae974a50f9dea648"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/display.png",
+      "size": [
+        1941,
+        521
+      ],
+      "bytes": 289166,
+      "sha256": "609613393e07e3326e186d84cdbda1bdd0a23d366cd5bc89c6198d4f5fc1ecff"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/environment-cloud.png",
+      "size": [
+        419,
+        220
+      ],
+      "bytes": 65872,
+      "sha256": "fc89f39297d79c9720928700bd26bde69374b4b979bea2c23ab1c30dcf6d71e9"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/environment-foreground-threshold.png",
+      "size": [
+        619,
+        122
+      ],
+      "bytes": 82382,
+      "sha256": "9ce50ff06760a80b82e14637d08381c7e6e92687975e2f9271be02429b096631"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/environment-main-corner-post.png",
+      "size": [
+        147,
+        540
+      ],
+      "bytes": 93609,
+      "sha256": "f7f1e74d4848b96f82062e3710238af9f0a6e06f02bc7adc04705162880293d5"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/environment-main-horizontal-beam.png",
+      "size": [
+        684,
+        118
+      ],
+      "bytes": 90552,
+      "sha256": "9e9b96bc1c6b13cfcd0f6afd5e4926517d01680c629ac5e67e045a509a1eb958"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/environment-outdoor-tree-line.png",
+      "size": [
+        516,
+        412
+      ],
+      "bytes": 333156,
+      "sha256": "715e45d9e8d5fd1cf6367f73b58f32a36b266153275adc9f8e62891598e5216c"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/environment-village-roof-cluster.png",
+      "size": [
+        404,
+        347
+      ],
+      "bytes": 240750,
+      "sha256": "d19ac789e7238247099aed049e76f6b51c3578b91654cdaac16602a35a0f2abb"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/floor_checker.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 106227,
+      "sha256": "3ee6f9695a16b39eb728f8e2aea67cd58a5be2b227aa84bf24ece77aa1391924"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/floor_herringbone.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 147725,
+      "sha256": "6653c87b6d10473eae5cf34d65d96dd9c98272d9478d15bbb8d8d99385baa592"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/floor_marble.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 104031,
+      "sha256": "4bfa7b8a0dfc26a391295573aa7caa7757bff882264b6a4876a93dd7fe270943"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/floor_mint.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 113672,
+      "sha256": "0e8156b0532484dfb4a0cefbf7a8a71068a39aa0f2b89a3fce1f4395a2959f72"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/floor_planks.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 115367,
+      "sha256": "65a81e6f70105d40db6a777b3501411467baeac23dc7fad519acf98d0f8e602a"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/floor_terrazzo.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 110289,
+      "sha256": "7628b9de399f2cac205ab0bc5bad433dae12d0a2c0feda3cf0f22dc24c68028d"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/garden_grass.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 131170,
+      "sha256": "8f01846f34ef10d2a8f558908c9b8f014015e0de324e82d3661744d3a2592629"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-bench.png",
+      "size": [
+        696,
+        206
+      ],
+      "bytes": 204010,
+      "sha256": "027ceacadc3268e0106f589e1f1e118e4f56c5c110b5695f95ffdb7dbcea2a49"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-bins.png",
+      "size": [
+        249,
+        204
+      ],
+      "bytes": 104592,
+      "sha256": "32d49d5e192e51cb4192d61562ddeae5ae3f5eca62271a238d9ca2ef55076c6e"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-convection.png",
+      "size": [
+        273,
+        219
+      ],
+      "bytes": 120145,
+      "sha256": "1ce6c4fe6d12d831ce33c435fe24c3109bf158200c2265acc7c6b06664bcc5a4"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-cooler.png",
+      "size": [
+        224,
+        317
+      ],
+      "bytes": 112700,
+      "sha256": "13b133966492d41d2c1f48bcac9c54ee0b76c68b21edeb7472a920bb764e58d4"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-deckOven.png",
+      "size": [
+        295,
+        279
+      ],
+      "bytes": 163572,
+      "sha256": "d0e2df0e6453013fba6e91ce0a66abc9326bdbb5b2e66e0e8d686a018a4dadbe"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-dishPit.png",
+      "size": [
+        296,
+        297
+      ],
+      "bytes": 133510,
+      "sha256": "aa15ff0fdb0bd7cda97c51e06da295863ea4f7f01b64a8e56ac209f01b48df68"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-dryStore.png",
+      "size": [
+        261,
+        303
+      ],
+      "bytes": 198780,
+      "sha256": "d57196100dcbe964de36e4cbaaaa94917078bb327712d7c08bee88e17c0ac2c6"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-fryer.png",
+      "size": [
+        217,
+        252
+      ],
+      "bytes": 111635,
+      "sha256": "9d37e69485a07776620325a6789196b85eda21602f3b5a02a677c17b5a30bdcd"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-handSink.png",
+      "size": [
+        200,
+        241
+      ],
+      "bytes": 74611,
+      "sha256": "90d3739ca8b8ec577426c010c2772c5468e11f200c31de864aac3225960d4550"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-hood.png",
+      "size": [
+        536,
+        188
+      ],
+      "bytes": 155038,
+      "sha256": "075fc5e759fee55c33fd073984e4848482a2c7ecf22b128e32d4ef5a0af31163"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-kettle.png",
+      "size": [
+        228,
+        251
+      ],
+      "bytes": 130774,
+      "sha256": "70f72d438d084820448f6c8850bb283d1a7535234f8117621335a6ceded4fac2"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-mixer.png",
+      "size": [
+        215,
+        284
+      ],
+      "bytes": 130159,
+      "sha256": "f15f74faaf91d8dcedfcb71b031132c27a11bd1409fc30a7e6c59556d44b9506"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-pastryFridge.png",
+      "size": [
+        249,
+        457
+      ],
+      "bytes": 221196,
+      "sha256": "f1280682a1c06d9ee29909db9cb0d4ea4d146efff16d8c405dc8d3d1fb6ad9ff"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-proofer.png",
+      "size": [
+        212,
+        306
+      ],
+      "bytes": 137753,
+      "sha256": "8f337b670c0e1682cf26a6b4a75174eab0045ca55a50ba0f6ec2b1940aae07fb"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-rack.png",
+      "size": [
+        255,
+        453
+      ],
+      "bytes": 219803,
+      "sha256": "ead04568b5fb071d8e9dca349e22f7ebeccde56063fdc4f334950f25bd23c557"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-sheeter.png",
+      "size": [
+        270,
+        191
+      ],
+      "bytes": 104508,
+      "sha256": "155b460db75969562c7cf7c7e73f7964f6275c444940393abedf81b424c6b5ad"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen-standMixer.png",
+      "size": [
+        234,
+        273
+      ],
+      "bytes": 140992,
+      "sha256": "ab52a34cf3db79245674ee246be19b80290dfd13925c0b15403805436132dabc"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/kitchen_wall.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 73688,
+      "sha256": "356afa04f67dadbde45e9f5d05347fbdc177172cdf0a0e454523983567741cb8"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/patio_floor.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 120369,
+      "sha256": "7d7ee825e02f0fad4b5dddb5ee0c17151677e5318a8834c97d84043ff5bbccd7"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/plant.png",
+      "size": [
+        220,
+        300
+      ],
+      "bytes": 91215,
+      "sha256": "6e5b4a99c29234d94a791e4c88fe978b9befdcf7a11239717d7ca680bd756448"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/reference-machine.png",
+      "size": [
+        1430,
+        1100
+      ],
+      "bytes": 259844,
+      "sha256": "4a534b391b48fc86fbfcd62de875c5857e715da0af8cd52a0ecc8b00fc0d98d8"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/region-greenhouse.png",
+      "size": [
+        1184,
+        322
+      ],
+      "bytes": 1122273,
+      "sha256": "717bcfb6b269371d0ed43c928cdbe872064bfc85ede3eae16c037c9cf8b85337"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/region-reading.png",
+      "size": [
+        1185,
+        320
+      ],
+      "bytes": 1020181,
+      "sha256": "37b9592cfa304eaf9339e39ee4773c21cca1f9a7645c519010cc9d6d52ccf312"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/region-terrace.png",
+      "size": [
+        1196,
+        329
+      ],
+      "bytes": 1152344,
+      "sha256": "f832b9983eb529ea400f3e5b233f148ca78125171bcf7a9017d097f3d14ab5c7"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/service-basket.png",
+      "size": [
+        430,
+        235
+      ],
+      "bytes": 122329,
+      "sha256": "423ded31e3c95d01ed880cd558b175ba5efb26884039334380f89047e9386341"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/service-cups.png",
+      "size": [
+        222,
+        294
+      ],
+      "bytes": 72060,
+      "sha256": "595b3148f8f6052df0a663a180a1cf801da7cf1bc5eac70eea1b8e6b3b891cbc"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/service-jars.png",
+      "size": [
+        351,
+        304
+      ],
+      "bytes": 154089,
+      "sha256": "9fa65e5954ce337d75367c95ee29a18e4abefba78f5aab71d98d545d57d5b715"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/service-machine.png",
+      "size": [
+        488,
+        433
+      ],
+      "bytes": 205417,
+      "sha256": "94212b45632914e622646dd695d713ad222691d968a12c2e89ffaed3525db4ee"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/service-pickup.png",
+      "size": [
+        1297,
+        1118
+      ],
+      "bytes": 222481,
+      "sha256": "ddd1fb00520c4b3d3f10ddd64f78d5e7b2f66e86835be4efce0580abe57ec43b"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/tableware-crown.png",
+      "size": [
+        348,
+        305
+      ],
+      "bytes": 149541,
+      "sha256": "13b21a0111a34678ca3d5fe4f29e8bc9fdf8e0e93a23fee44f1599bf6213fbe7"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/tableware-drop.png",
+      "size": [
+        305,
+        305
+      ],
+      "bytes": 80306,
+      "sha256": "8177ae5de94fd0eb0ed9d50718e3e293f4ebcdfc7cd8d0d86175b3dd6ab4aba6"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/tableware-empty-cup-saucer.png",
+      "size": [
+        378,
+        367
+      ],
+      "bytes": 93759,
+      "sha256": "0715a832c4a20f5202b06918a2e7fe93a58418ea4c2f99b1bde671e2a39f7f87"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/tableware-empty-plate.png",
+      "size": [
+        348,
+        350
+      ],
+      "bytes": 75884,
+      "sha256": "a36216299d91f1cfd16c0f2c33e88de0c1e755994b30ac94cea971148110df03"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/tableware-heart.png",
+      "size": [
+        310,
+        304
+      ],
+      "bytes": 118185,
+      "sha256": "7ee3792d97f00e89acaef6d96c292ac6d2a59f0f438a883db40df38d9dfa0a0b"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/tableware-shallow-plate.png",
+      "size": [
+        1218,
+        177
+      ],
+      "bytes": 53943,
+      "sha256": "dd1c4fc53492b7ed836749e7c45f8f4ca962e7018dfed6be030cd7e26483d940"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/tableware-shallow-tray.png",
+      "size": [
+        1458,
+        202
+      ],
+      "bytes": 85342,
+      "sha256": "a08cbb2a8cce8664ec8ebc0cadcece5073648aa11d971bd4436a080a4c2cf8d5"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/vase.png",
+      "size": [
+        160,
+        220
+      ],
+      "bytes": 56270,
+      "sha256": "0d3b455f2f595b70d96fa15096dc89ee168f3a3e1d9b4c6b4d462e2aad1f4dd1"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/vine.png",
+      "size": [
+        388,
+        453
+      ],
+      "bytes": 149963,
+      "sha256": "bd6a5e8711743b90dc2a3d6b175899be9f925ccffee223b2033a42f09a6d7ea6"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/wall-board.png",
+      "size": [
+        818,
+        412
+      ],
+      "bytes": 143937,
+      "sha256": "50996bbf532099a4612724ea3718673a8163d00a8aea79546dbd8b93e5934466"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/wall-lamp.png",
+      "size": [
+        206,
+        294
+      ],
+      "bytes": 72349,
+      "sha256": "92a8b836170d7cd3ac58026beaf7dc01e2d7a178d8d665ddc91e79ec6e17c50b"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/wall_brick.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 136504,
+      "sha256": "ddef9c5abe04a18b4e7776be231de34c5f8bb426cc85504928724cdd886ee9d7"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/wall_cream.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 92134,
+      "sha256": "929e3623fb29421adbd28d189cc2c76ff4450bb1912bdc67193781642508ea58"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/wall_dots.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 70310,
+      "sha256": "f029f8b37233ac47467d7eeb107551fe34cb2de3256624dcee12cd6568cc6a49"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/wall_mint.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 92168,
+      "sha256": "e7bf71e78a6a7ac678d2bc68250621f7fce1fcb63a753f6a8ddb6fbc814c5537"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/wall_rose.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 89809,
+      "sha256": "e34a88c258454abf72f951d045f02f63fb0952fb6d8228c9efb96f91ee501bea"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/wall_stars.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 72441,
+      "sha256": "94a686c970e68e66b45b381c09e85beaecffa711cfdfad987303974e6d30fc35"
+    },
+    {
+      "file": "public/art/generated/cozy-world-v2/wall_walnut.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 109142,
+      "sha256": "852363ab6a19e1be60b82ee255fc7cdb19fbd9d1f9472beea09e0f23fd74b3b6"
+    }
+  ]
+}

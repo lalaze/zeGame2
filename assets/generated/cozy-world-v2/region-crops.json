@@ -1,0 +1,62 @@
+[
+  {
+    "id": "reading",
+    "file": "public/art/generated/cozy-world-v2/region-reading.png",
+    "size": [
+      1185,
+      320
+    ],
+    "bounds": [
+      0,
+      0,
+      1185,
+      320
+    ],
+    "sourceBox": [
+      35,
+      85,
+      1185,
+      320
+    ]
+  },
+  {
+    "id": "greenhouse",
+    "file": "public/art/generated/cozy-world-v2/region-greenhouse.png",
+    "size": [
+      1184,
+      322
+    ],
+    "bounds": [
+      0,
+      0,
+      1184,
+      322
+    ],
+    "sourceBox": [
+      35,
+      465,
+      1184,
+      322
+    ]
+  },
+  {
+    "id": "terrace",
+    "file": "public/art/generated/cozy-world-v2/region-terrace.png",
+    "size": [
+      1196,
+      329
+    ],
+    "bounds": [
+      0,
+      0,
+      1196,
+      329
+    ],
+    "sourceBox": [
+      30,
+      838,
+      1196,
+      329
+    ]
+  }
+]

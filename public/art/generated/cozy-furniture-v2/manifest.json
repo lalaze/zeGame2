@@ -1,0 +1,1812 @@
+{
+  "generator": "built-in image_gen",
+  "processing": "RGBA crop, uniform nearest-neighbor resize, transparent canvas packing; no procedural drawing",
+  "furnitureCount": 39,
+  "decorSpriteCount": 13,
+  "assets": [
+    {
+      "id": "bookshelf",
+      "key": "furniture-bookshelf",
+      "file": "furniture-bookshelf.png",
+      "atlas": "furniture-a-atlas.png",
+      "crop": {
+        "left": 413,
+        "top": 57,
+        "width": 379,
+        "height": 356
+      },
+      "packed": [
+        367,
+        384
+      ],
+      "sourceSize": [
+        1082,
+        1134
+      ],
+      "anchor": {
+        "x": 541,
+        "y": 1123,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 40,
+        "width": 362,
+        "height": 340
+      },
+      "sha256": "764358c12fe280c3c308910a8b4d97f757b83086a4f5e8a64435f6c8e66829bf",
+      "opaquePixels": 108733,
+      "edgePixels": 0
+    },
+    {
+      "id": "catbed",
+      "key": "furniture-catbed",
+      "file": "furniture-catbed.png",
+      "atlas": "furniture-a-atlas.png",
+      "crop": {
+        "left": 857,
+        "top": 180,
+        "width": 349,
+        "height": 217
+      },
+      "packed": [
+        385,
+        181
+      ],
+      "sourceSize": [
+        1326,
+        623
+      ],
+      "anchor": {
+        "x": 663,
+        "y": 612,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 51,
+        "top": 2,
+        "width": 282,
+        "height": 175
+      },
+      "sha256": "b0978dd1606066aa4c6a7d7fe612bbf20508faa18059e85e3d2b36bdc7cea3ee",
+      "opaquePixels": 40363,
+      "edgePixels": 0
+    },
+    {
+      "id": "aframe",
+      "key": "furniture-aframe",
+      "file": "furniture-aframe.png",
+      "atlas": "furniture-a-atlas.png",
+      "crop": {
+        "left": 49,
+        "top": 491,
+        "width": 307,
+        "height": 338
+      },
+      "packed": [
+        323,
+        384
+      ],
+      "sourceSize": [
+        1018,
+        1211
+      ],
+      "anchor": {
+        "x": 509,
+        "y": 1200,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 30,
+        "width": 319,
+        "height": 351
+      },
+      "sha256": "4410afeb9d17d6cf55cbee2444e2cfe91fecfbe19aa32779d87dedac98a06b3e",
+      "opaquePixels": 81832,
+      "edgePixels": 0
+    },
+    {
+      "id": "lamp",
+      "key": "furniture-lamp",
+      "file": "furniture-lamp.png",
+      "atlas": "furniture-a-atlas.png",
+      "crop": {
+        "left": 533,
+        "top": 435,
+        "width": 164,
+        "height": 394
+      },
+      "packed": [
+        151,
+        384
+      ],
+      "sourceSize": [
+        632,
+        1610
+      ],
+      "anchor": {
+        "x": 316,
+        "y": 1599,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 28,
+        "width": 147,
+        "height": 353
+      },
+      "sha256": "c57b5bfa922d480296ec1cb59cfbcd27b9ae75765efdb63c39c3c70ee734d107",
+      "opaquePixels": 23459,
+      "edgePixels": 0
+    },
+    {
+      "id": "bench",
+      "key": "furniture-bench",
+      "file": "furniture-bench.png",
+      "atlas": "furniture-a-atlas.png",
+      "crop": {
+        "left": 808,
+        "top": 513,
+        "width": 403,
+        "height": 316
+      },
+      "packed": [
+        384,
+        167
+      ],
+      "sourceSize": [
+        1704,
+        738
+      ],
+      "anchor": {
+        "x": 852,
+        "y": 727,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 89,
+        "top": 2,
+        "width": 206,
+        "height": 162
+      },
+      "sha256": "8f9d42b991edbff8242a0e8a684b1b13b8e7452eabd767397796f56ae242cb8d",
+      "opaquePixels": 21182,
+      "edgePixels": 0
+    },
+    {
+      "id": "armchair",
+      "key": "furniture-armchair",
+      "file": "furniture-armchair.png",
+      "atlas": "furniture-a-atlas.png",
+      "crop": {
+        "left": 32,
+        "top": 866,
+        "width": 358,
+        "height": 357
+      },
+      "packed": [
+        384,
+        351
+      ],
+      "sourceSize": [
+        1164,
+        1063
+      ],
+      "anchor": {
+        "x": 582,
+        "y": 1052,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 19,
+        "top": 2,
+        "width": 346,
+        "height": 345
+      },
+      "sha256": "b7df42e10cb8174609155f87c6e04845e1bd51d520009bd91b11d2a435217633",
+      "opaquePixels": 81375,
+      "edgePixels": 0
+    },
+    {
+      "id": "gramophone",
+      "key": "furniture-gramophone",
+      "file": "furniture-gramophone.png",
+      "atlas": "furniture-a-atlas.png",
+      "crop": {
+        "left": 479,
+        "top": 833,
+        "width": 245,
+        "height": 399
+      },
+      "packed": [
+        295,
+        384
+      ],
+      "sourceSize": [
+        1032,
+        1345
+      ],
+      "anchor": {
+        "x": 516,
+        "y": 1334,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 31,
+        "top": 2,
+        "width": 233,
+        "height": 379
+      },
+      "sha256": "5c48a35d4a32d38c84d56849b1e1cdca6771d7fba713ebe4b4968d05e7321663",
+      "opaquePixels": 61054,
+      "edgePixels": 0
+    },
+    {
+      "id": "piano",
+      "key": "furniture-piano",
+      "file": "furniture-piano.png",
+      "atlas": "furniture-a-atlas.png",
+      "crop": {
+        "left": 799,
+        "top": 851,
+        "width": 414,
+        "height": 375
+      },
+      "packed": [
+        385,
+        289
+      ],
+      "sourceSize": [
+        1237,
+        930
+      ],
+      "anchor": {
+        "x": 618.5,
+        "y": 919,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 36,
+        "top": 2,
+        "width": 313,
+        "height": 283
+      },
+      "sha256": "552a3d1d01312469a73f890935b3ca21190a42ee22bc027d980b5bff3996958c",
+      "opaquePixels": 71063,
+      "edgePixels": 0
+    },
+    {
+      "id": "sofa",
+      "key": "furniture-sofa",
+      "file": "furniture-sofa.png",
+      "atlas": "furniture-b-atlas.png",
+      "crop": {
+        "left": 26,
+        "top": 89,
+        "width": 513,
+        "height": 302
+      },
+      "packed": [
+        384,
+        213
+      ],
+      "sourceSize": [
+        1351,
+        749
+      ],
+      "anchor": {
+        "x": 675.5,
+        "y": 738,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 16,
+        "top": 2,
+        "width": 353,
+        "height": 208
+      },
+      "sha256": "438b3b202b895a3d13339153204c7dcfa52112ca00522479344e1ab98d698beb",
+      "opaquePixels": 55313,
+      "edgePixels": 0
+    },
+    {
+      "id": "round_stool",
+      "key": "furniture-round_stool",
+      "file": "furniture-round_stool.png",
+      "atlas": "furniture-b-atlas.png",
+      "crop": {
+        "left": 580,
+        "top": 88,
+        "width": 219,
+        "height": 306
+      },
+      "packed": [
+        292,
+        384
+      ],
+      "sourceSize": [
+        771,
+        1015
+      ],
+      "anchor": {
+        "x": 385.5,
+        "y": 1004,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 11,
+        "top": 2,
+        "width": 270,
+        "height": 378
+      },
+      "sha256": "c0d44b8cf9045d02b4ea497bcf18121203196f58235811864c7ad0571dbc3527",
+      "opaquePixels": 74388,
+      "edgePixels": 0
+    },
+    {
+      "id": "lantern",
+      "key": "furniture-lantern",
+      "file": "furniture-lantern.png",
+      "atlas": "furniture-b-atlas.png",
+      "crop": {
+        "left": 951,
+        "top": 40,
+        "width": 188,
+        "height": 349
+      },
+      "packed": [
+        177,
+        384
+      ],
+      "sourceSize": [
+        663,
+        1442
+      ],
+      "anchor": {
+        "x": 331.5,
+        "y": 1431,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 61,
+        "width": 173,
+        "height": 320
+      },
+      "sha256": "f9309dec5f1389def66b207652540ae77b820bea9004468a072d70ba4e687b19",
+      "opaquePixels": 39016,
+      "edgePixels": 0
+    },
+    {
+      "id": "bean_display",
+      "key": "furniture-bean_display",
+      "file": "furniture-bean_display.png",
+      "atlas": "furniture-b-atlas.png",
+      "crop": {
+        "left": 21,
+        "top": 448,
+        "width": 369,
+        "height": 357
+      },
+      "packed": [
+        384,
+        309
+      ],
+      "sourceSize": [
+        1157,
+        929
+      ],
+      "anchor": {
+        "x": 578.5,
+        "y": 918,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 36,
+        "top": 2,
+        "width": 313,
+        "height": 303
+      },
+      "sha256": "48d2545fc543863d2070fb531914064bfbb867b17f924a96af7d867adbb8df12",
+      "opaquePixels": 73225,
+      "edgePixels": 0
+    },
+    {
+      "id": "sideboard",
+      "key": "furniture-sideboard",
+      "file": "furniture-sideboard.png",
+      "atlas": "furniture-b-atlas.png",
+      "crop": {
+        "left": 410,
+        "top": 502,
+        "width": 484,
+        "height": 295
+      },
+      "packed": [
+        384,
+        287
+      ],
+      "sourceSize": [
+        1226,
+        914
+      ],
+      "anchor": {
+        "x": 613,
+        "y": 903,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 51,
+        "width": 380,
+        "height": 232
+      },
+      "sha256": "49ce053cd86d697b46105c36160c4619470d2d217d4a5cbc7c652e11dc05dd15",
+      "opaquePixels": 72504,
+      "edgePixels": 0
+    },
+    {
+      "id": "display_cabinet",
+      "key": "furniture-display_cabinet",
+      "file": "furniture-display_cabinet.png",
+      "atlas": "furniture-b-atlas.png",
+      "crop": {
+        "left": 918,
+        "top": 413,
+        "width": 270,
+        "height": 399
+      },
+      "packed": [
+        246,
+        385
+      ],
+      "sourceSize": [
+        904,
+        1412
+      ],
+      "anchor": {
+        "x": 452,
+        "y": 1401,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 24,
+        "width": 242,
+        "height": 357
+      },
+      "sha256": "ef89e30803fba6184882380cb4b9d438a233367535f40246bd89731fe034ddfa",
+      "opaquePixels": 72931,
+      "edgePixels": 0
+    },
+    {
+      "id": "magazine_rack",
+      "key": "furniture-magazine_rack",
+      "file": "furniture-magazine_rack.png",
+      "atlas": "furniture-b-atlas.png",
+      "crop": {
+        "left": 56,
+        "top": 824,
+        "width": 274,
+        "height": 413
+      },
+      "packed": [
+        247,
+        384
+      ],
+      "sourceSize": [
+        797,
+        1240
+      ],
+      "anchor": {
+        "x": 398.5,
+        "y": 1229,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 15,
+        "width": 243,
+        "height": 366
+      },
+      "sha256": "80ed419a77f21bfe3af3053f70d2ed1252770e3513c1f18b26c85d69742cc7f5",
+      "opaquePixels": 65712,
+      "edgePixels": 0
+    },
+    {
+      "id": "coffee_cart",
+      "key": "furniture-coffee_cart",
+      "file": "furniture-coffee_cart.png",
+      "atlas": "furniture-b-atlas.png",
+      "crop": {
+        "left": 412,
+        "top": 823,
+        "width": 445,
+        "height": 416
+      },
+      "packed": [
+        384,
+        282
+      ],
+      "sourceSize": [
+        1212,
+        890
+      ],
+      "anchor": {
+        "x": 606,
+        "y": 879,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 44,
+        "top": 2,
+        "width": 296,
+        "height": 276
+      },
+      "sha256": "49399765ddd44cce11c1718d26a512409b90b4cb1b49d8273ba8dbd59ec6c1ed",
+      "opaquePixels": 55897,
+      "edgePixels": 0
+    },
+    {
+      "id": "sconce",
+      "key": "furniture-sconce",
+      "file": "furniture-sconce.png",
+      "atlas": "furniture-b-atlas.png",
+      "crop": {
+        "left": 947,
+        "top": 878,
+        "width": 242,
+        "height": 280
+      },
+      "packed": [
+        270,
+        384
+      ],
+      "sourceSize": [
+        206,
+        294
+      ],
+      "anchor": {
+        "x": 103,
+        "y": 147,
+        "kind": "wall-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 38,
+        "width": 265,
+        "height": 307
+      },
+      "sha256": "383fd59832aeb8f791f649bb6d1f96fb2f20304d8a9494cac70c1fb8f4860406",
+      "opaquePixels": 46902,
+      "edgePixels": 0
+    },
+    {
+      "id": "plant_fern",
+      "key": "furniture-plant_fern",
+      "file": "furniture-plant_fern.png",
+      "atlas": "plants-atlas.png",
+      "crop": {
+        "left": 19,
+        "top": 59,
+        "width": 345,
+        "height": 306
+      },
+      "packed": [
+        384,
+        318
+      ],
+      "sourceSize": [
+        1238,
+        1022
+      ],
+      "anchor": {
+        "x": 619,
+        "y": 1011,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 17,
+        "top": 2,
+        "width": 351,
+        "height": 312
+      },
+      "sha256": "72e2b8f652829ab68883eb43cf245f7af4afc39ec1355832dea0c0e4abac752f",
+      "opaquePixels": 80493,
+      "edgePixels": 0
+    },
+    {
+      "id": "plant_fig",
+      "key": "furniture-plant_fig",
+      "file": "furniture-plant_fig.png",
+      "atlas": "plants-atlas.png",
+      "crop": {
+        "left": 780,
+        "top": 7,
+        "width": 268,
+        "height": 361
+      },
+      "packed": [
+        258,
+        384
+      ],
+      "sourceSize": [
+        939,
+        1401
+      ],
+      "anchor": {
+        "x": 469.5,
+        "y": 1390,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 40,
+        "width": 253,
+        "height": 341
+      },
+      "sha256": "d88dd91a2eb2d6e4729d0e4486b5ce5e46212513cd408e8f200db4ea95bf2026",
+      "opaquePixels": 53631,
+      "edgePixels": 0
+    },
+    {
+      "id": "plant_monstera",
+      "key": "furniture-plant_monstera",
+      "file": "furniture-plant_monstera.png",
+      "atlas": "plants-atlas.png",
+      "crop": {
+        "left": 24,
+        "top": 399,
+        "width": 335,
+        "height": 333
+      },
+      "packed": [
+        384,
+        323
+      ],
+      "sourceSize": [
+        1302,
+        1092
+      ],
+      "anchor": {
+        "x": 651,
+        "y": 1081,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 33,
+        "top": 2,
+        "width": 319,
+        "height": 317
+      },
+      "sha256": "80669d63b77b1fd09a411bb1dd6b9d33ec0635b9c41e8591072f4ecfcb7f1292",
+      "opaquePixels": 75281,
+      "edgePixels": 0
+    },
+    {
+      "id": "plant_lemon",
+      "key": "furniture-plant_lemon",
+      "file": "furniture-plant_lemon.png",
+      "atlas": "plants-atlas.png",
+      "crop": {
+        "left": 402,
+        "top": 393,
+        "width": 300,
+        "height": 339
+      },
+      "packed": [
+        297,
+        385
+      ],
+      "sourceSize": [
+        887,
+        1148
+      ],
+      "anchor": {
+        "x": 443.5,
+        "y": 1137,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 49,
+        "width": 293,
+        "height": 331
+      },
+      "sha256": "d82a83825e8ee8f91e6d5d084564ec7d2a00b6240726758644a9669ec8fcc5d2",
+      "opaquePixels": 65363,
+      "edgePixels": 0
+    },
+    {
+      "id": "plant_succulent",
+      "key": "furniture-plant_succulent",
+      "file": "furniture-plant_succulent.png",
+      "atlas": "plants-atlas.png",
+      "crop": {
+        "left": 89,
+        "top": 778,
+        "width": 204,
+        "height": 284
+      },
+      "packed": [
+        265,
+        384
+      ],
+      "sourceSize": [
+        852,
+        1238
+      ],
+      "anchor": {
+        "x": 426,
+        "y": 1227,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 19,
+        "width": 260,
+        "height": 362
+      },
+      "sha256": "61a64550f35263738fc57dbfb79c3f4509d8baf97a88ee7a38f7c34956224894",
+      "opaquePixels": 60652,
+      "edgePixels": 0
+    },
+    {
+      "id": "vase_daisies",
+      "key": "furniture-vase_daisies",
+      "file": "furniture-vase_daisies.png",
+      "atlas": "plants-atlas.png",
+      "crop": {
+        "left": 442,
+        "top": 756,
+        "width": 220,
+        "height": 318
+      },
+      "packed": [
+        361,
+        384
+      ],
+      "sourceSize": [
+        264,
+        281
+      ],
+      "anchor": {
+        "x": 132,
+        "y": 268,
+        "kind": "floor-foot"
+      },
+      "placement": {
+        "left": 54,
+        "top": 2,
+        "width": 252,
+        "height": 364
+      },
+      "sha256": "b95404048b709a99dbdaf4caf292d3337973af3a6aecd9305c7d6f3914266527",
+      "opaquePixels": 55755,
+      "edgePixels": 0
+    },
+    {
+      "id": "hanging_ivy",
+      "key": "furniture-hanging_ivy",
+      "file": "furniture-hanging_ivy.png",
+      "atlas": "plants-atlas.png",
+      "crop": {
+        "left": 793,
+        "top": 736,
+        "width": 249,
+        "height": 373
+      },
+      "packed": [
+        329,
+        384
+      ],
+      "sourceSize": [
+        388,
+        453
+      ],
+      "anchor": {
+        "x": 194,
+        "y": 225.5,
+        "kind": "wall-center"
+      },
+      "placement": {
+        "left": 38,
+        "top": 2,
+        "width": 253,
+        "height": 378
+      },
+      "sha256": "2a2cf2a13c11f821c891b3078d02820f81e9a89b03ee74116d1b789d5e20f05b",
+      "opaquePixels": 56003,
+      "edgePixels": 0
+    },
+    {
+      "id": "sill_cactus-default",
+      "key": "decor-sill_cactus-default",
+      "file": "decor-sill_cactus-default.png",
+      "atlas": "plants-atlas.png",
+      "crop": {
+        "left": 121,
+        "top": 1139,
+        "width": 136,
+        "height": 266
+      },
+      "packed": [
+        259,
+        384
+      ],
+      "sourceSize": [
+        844,
+        1252
+      ],
+      "anchor": {
+        "x": 397,
+        "y": 1241,
+        "kind": "pot-base-contact"
+      },
+      "placement": {
+        "left": 25,
+        "top": 2,
+        "width": 194,
+        "height": 379
+      },
+      "sha256": "1778b7b2da27517819d3c2371ddc8c733155ebb2c79d87bef1fcca6c66ab4d49",
+      "opaquePixels": 57644,
+      "edgePixels": 0
+    },
+    {
+      "id": "sill_tulips-default",
+      "key": "decor-sill_tulips-default",
+      "file": "decor-sill_tulips-default.png",
+      "atlas": "plants-atlas.png",
+      "crop": {
+        "left": 412,
+        "top": 1086,
+        "width": 267,
+        "height": 329
+      },
+      "packed": [
+        339,
+        384
+      ],
+      "sourceSize": [
+        903,
+        1024
+      ],
+      "anchor": {
+        "x": 459,
+        "y": 1013,
+        "kind": "pot-base-contact"
+      },
+      "placement": {
+        "left": 19,
+        "top": 2,
+        "width": 307,
+        "height": 378
+      },
+      "sha256": "ed9c19597329113ef3f625fae30a5bba471dcb69bd59772b06f6ebecef6f7d8a",
+      "opaquePixels": 75757,
+      "edgePixels": 0
+    },
+    {
+      "id": "sill_bonsai-default",
+      "key": "decor-sill_bonsai-default",
+      "file": "decor-sill_bonsai-default.png",
+      "atlas": "plants-atlas.png",
+      "crop": {
+        "left": 755,
+        "top": 1115,
+        "width": 318,
+        "height": 300
+      },
+      "packed": [
+        384,
+        335
+      ],
+      "sourceSize": [
+        1164,
+        1014
+      ],
+      "anchor": {
+        "x": 566.5,
+        "y": 1003,
+        "kind": "pot-base-contact"
+      },
+      "placement": {
+        "left": 12,
+        "top": 2,
+        "width": 349,
+        "height": 329
+      },
+      "sha256": "164f3d196e9493f5ec3517bff9df55d23a9606f8dd9c04a01793c20cee6e70cc",
+      "opaquePixels": 71910,
+      "edgePixels": 0
+    },
+    {
+      "id": "clock",
+      "key": "furniture-clock",
+      "file": "furniture-clock.png",
+      "atlas": "wall-atlas.png",
+      "crop": {
+        "left": 60,
+        "top": 90,
+        "width": 276,
+        "height": 322
+      },
+      "packed": [
+        380,
+        384
+      ],
+      "sourceSize": [
+        1089,
+        1102
+      ],
+      "anchor": {
+        "x": 544.5,
+        "y": 1091,
+        "kind": "wall-bottom-center"
+      },
+      "placement": {
+        "left": 28,
+        "top": 2,
+        "width": 324,
+        "height": 378
+      },
+      "sha256": "60f1957309cdfb2864546494079883ee8643c178e13d740e4043d53b6d743bd2",
+      "opaquePixels": 85630,
+      "edgePixels": 0
+    },
+    {
+      "id": "mugrack",
+      "key": "furniture-mugrack",
+      "file": "furniture-mugrack.png",
+      "atlas": "wall-atlas.png",
+      "crop": {
+        "left": 386,
+        "top": 168,
+        "width": 431,
+        "height": 208
+      },
+      "packed": [
+        384,
+        136
+      ],
+      "sourceSize": [
+        1481,
+        524
+      ],
+      "anchor": {
+        "x": 740.5,
+        "y": 513,
+        "kind": "wall-bottom-center"
+      },
+      "placement": {
+        "left": 57,
+        "top": 2,
+        "width": 271,
+        "height": 131
+      },
+      "sha256": "14b3720704b9ab7528f34525b65e7f38e7eea26081e546fbf8e15731087f1d0c",
+      "opaquePixels": 28667,
+      "edgePixels": 0
+    },
+    {
+      "id": "shelf",
+      "key": "furniture-shelf",
+      "file": "furniture-shelf.png",
+      "atlas": "wall-atlas.png",
+      "crop": {
+        "left": 828,
+        "top": 157,
+        "width": 418,
+        "height": 245
+      },
+      "packed": [
+        384,
+        180
+      ],
+      "sourceSize": [
+        1488,
+        695
+      ],
+      "anchor": {
+        "x": 744,
+        "y": 684,
+        "kind": "wall-bottom-center"
+      },
+      "placement": {
+        "left": 43,
+        "top": 2,
+        "width": 298,
+        "height": 175
+      },
+      "sha256": "081687a5a1913e2041cec54f3d24c27dd3d618f3f28391eb1700a36869956918",
+      "opaquePixels": 35119,
+      "edgePixels": 0
+    },
+    {
+      "id": "wreath_season",
+      "key": "furniture-wreath_season",
+      "file": "furniture-wreath_season.png",
+      "atlas": "wall-atlas.png",
+      "crop": {
+        "left": 887,
+        "top": 461,
+        "width": 325,
+        "height": 351
+      },
+      "packed": [
+        370,
+        384
+      ],
+      "sourceSize": [
+        1119,
+        1163
+      ],
+      "anchor": {
+        "x": 559.5,
+        "y": 1152,
+        "kind": "wall-bottom-center"
+      },
+      "placement": {
+        "left": 10,
+        "top": 2,
+        "width": 350,
+        "height": 378
+      },
+      "sha256": "26cb91e135880a31d9c7e47d392a7646d88be56cb8ebbabaa6ffe1b5501b932b",
+      "opaquePixels": 91075,
+      "edgePixels": 0
+    },
+    {
+      "id": "poster_coffee",
+      "key": "furniture-poster_coffee",
+      "file": "furniture-poster_coffee.png",
+      "atlas": "wall-atlas.png",
+      "crop": {
+        "left": 57,
+        "top": 845,
+        "width": 315,
+        "height": 319
+      },
+      "packed": [
+        384,
+        348
+      ],
+      "sourceSize": [
+        980,
+        888
+      ],
+      "anchor": {
+        "x": 490,
+        "y": 877,
+        "kind": "wall-bottom-center"
+      },
+      "placement": {
+        "left": 24,
+        "top": 2,
+        "width": 337,
+        "height": 342
+      },
+      "sha256": "19abd4abd28a89782a743d03777043b4b35fc36ddbc139b8dba28980ad6e63b1",
+      "opaquePixels": 108117,
+      "edgePixels": 0
+    },
+    {
+      "id": "poster_bakery",
+      "key": "furniture-poster_bakery",
+      "file": "furniture-poster_bakery.png",
+      "atlas": "wall-atlas.png",
+      "crop": {
+        "left": 458,
+        "top": 845,
+        "width": 312,
+        "height": 319
+      },
+      "packed": [
+        384,
+        332
+      ],
+      "sourceSize": [
+        973,
+        841
+      ],
+      "anchor": {
+        "x": 486.5,
+        "y": 830,
+        "kind": "wall-bottom-center"
+      },
+      "placement": {
+        "left": 33,
+        "top": 2,
+        "width": 318,
+        "height": 326
+      },
+      "sha256": "fb05406fb0e7084df4aaf13e62a2840373dfffb523e6709c75269fb58388d850",
+      "opaquePixels": 96904,
+      "edgePixels": 0
+    },
+    {
+      "id": "art_landscape",
+      "key": "furniture-art_landscape",
+      "file": "furniture-art_landscape.png",
+      "atlas": "wall-atlas.png",
+      "crop": {
+        "left": 813,
+        "top": 867,
+        "width": 412,
+        "height": 297
+      },
+      "packed": [
+        384,
+        262
+      ],
+      "sourceSize": [
+        1137,
+        775
+      ],
+      "anchor": {
+        "x": 568.5,
+        "y": 764,
+        "kind": "wall-bottom-center"
+      },
+      "placement": {
+        "left": 15,
+        "top": 2,
+        "width": 355,
+        "height": 256
+      },
+      "sha256": "4cb6395aed30ec8d5727851e398aae3054eb72d551f704a959a6240ab0a3c529",
+      "opaquePixels": 86864,
+      "edgePixels": 0
+    },
+    {
+      "id": "art_cat",
+      "key": "furniture-art_cat",
+      "file": "furniture-art_cat.png",
+      "atlas": "accent-atlas.png",
+      "crop": {
+        "left": 28,
+        "top": 66,
+        "width": 368,
+        "height": 267
+      },
+      "packed": [
+        384,
+        310
+      ],
+      "sourceSize": [
+        1108,
+        893
+      ],
+      "anchor": {
+        "x": 554,
+        "y": 882,
+        "kind": "wall-bottom-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 30,
+        "width": 380,
+        "height": 276
+      },
+      "sha256": "e0f8299bcd89356286254648ee31e4658a306653ce82f7eaaf31e8c5a7d557ce",
+      "opaquePixels": 99352,
+      "edgePixels": 0
+    },
+    {
+      "id": "art_bean",
+      "key": "furniture-art_bean",
+      "file": "furniture-art_bean.png",
+      "atlas": "accent-atlas.png",
+      "crop": {
+        "left": 431,
+        "top": 66,
+        "width": 368,
+        "height": 267
+      },
+      "packed": [
+        384,
+        294
+      ],
+      "sourceSize": [
+        1167,
+        891
+      ],
+      "anchor": {
+        "x": 583.5,
+        "y": 880,
+        "kind": "wall-bottom-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 14,
+        "width": 380,
+        "height": 276
+      },
+      "sha256": "17fc8ba59e0e91105a2484dee4b26dcb8a17bdcd9319b6cc60e8ab5ec4e7d866",
+      "opaquePixels": 99657,
+      "edgePixels": 0
+    },
+    {
+      "id": "art_starry",
+      "key": "furniture-art_starry",
+      "file": "furniture-art_starry.png",
+      "atlas": "accent-atlas.png",
+      "crop": {
+        "left": 835,
+        "top": 66,
+        "width": 367,
+        "height": 267
+      },
+      "packed": [
+        384,
+        230
+      ],
+      "sourceSize": [
+        1206,
+        721
+      ],
+      "anchor": {
+        "x": 603,
+        "y": 710,
+        "kind": "wall-bottom-center"
+      },
+      "placement": {
+        "left": 38,
+        "top": 2,
+        "width": 308,
+        "height": 224
+      },
+      "sha256": "4e2fdd0fed126680d06ded70c25e4b5e2a0ef411ed33af91b3ed7d721c76487b",
+      "opaquePixels": 65661,
+      "edgePixels": 0
+    },
+    {
+      "id": "ceiling_pendants-unlit",
+      "key": "decor-ceiling_pendants-unlit",
+      "file": "decor-ceiling_pendants-unlit.png",
+      "atlas": "accent-atlas.png",
+      "crop": {
+        "left": 958,
+        "top": 367,
+        "width": 151,
+        "height": 270
+      },
+      "packed": [
+        192,
+        384
+      ],
+      "sourceSize": [
+        777,
+        1554
+      ],
+      "anchor": {
+        "x": 388.5,
+        "y": 0,
+        "kind": "ceiling-top-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 1,
+        "width": 188,
+        "height": 336
+      },
+      "sha256": "7d01015fa2ed1b2365d1448847b29313a8797459ad24862472db32411647f31e",
+      "opaquePixels": 24873,
+      "edgePixels": 0
+    },
+    {
+      "id": "ceiling_chandelier-unlit",
+      "key": "decor-ceiling_chandelier-unlit",
+      "file": "decor-ceiling_chandelier-unlit.png",
+      "atlas": "accent-atlas.png",
+      "crop": {
+        "left": 53,
+        "top": 680,
+        "width": 316,
+        "height": 275
+      },
+      "packed": [
+        384,
+        242
+      ],
+      "sourceSize": [
+        1543,
+        971
+      ],
+      "anchor": {
+        "x": 771.5,
+        "y": 0,
+        "kind": "ceiling-top-center"
+      },
+      "placement": {
+        "left": 54,
+        "top": 1,
+        "width": 276,
+        "height": 240
+      },
+      "sha256": "7ed150070508b9cef6445e239992d9f5d6e04a5ccb297ad53564bcc69de6d1a0",
+      "opaquePixels": 30945,
+      "edgePixels": 0
+    },
+    {
+      "id": "rug_red-default",
+      "key": "decor-rug_red-default",
+      "file": "decor-rug_red-default.png",
+      "atlas": "accent-atlas.png",
+      "crop": {
+        "left": 411,
+        "top": 727,
+        "width": 407,
+        "height": 190
+      },
+      "packed": [
+        384,
+        207
+      ],
+      "sourceSize": [
+        1513,
+        813
+      ],
+      "anchor": {
+        "x": 756.5,
+        "y": 406.5,
+        "kind": "floor-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 15,
+        "width": 380,
+        "height": 177
+      },
+      "sha256": "451f0061d7c9a782088825001893c0a305786929a05cf5e9f79a621823dbec17",
+      "opaquePixels": 57330,
+      "edgePixels": 0
+    },
+    {
+      "id": "rug_blue-default",
+      "key": "decor-rug_blue-default",
+      "file": "decor-rug_blue-default.png",
+      "atlas": "accent-atlas.png",
+      "crop": {
+        "left": 822,
+        "top": 726,
+        "width": 401,
+        "height": 191
+      },
+      "packed": [
+        384,
+        189
+      ],
+      "sourceSize": [
+        1465,
+        719
+      ],
+      "anchor": {
+        "x": 732.5,
+        "y": 359.5,
+        "kind": "floor-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 4,
+        "width": 380,
+        "height": 181
+      },
+      "sha256": "08a5fcf232f2370608c7c8c5de1a2f27ec0f15e861de92d11d760dc1974af303",
+      "opaquePixels": 59706,
+      "edgePixels": 0
+    },
+    {
+      "id": "rug_round-default",
+      "key": "decor-rug_round-default",
+      "file": "decor-rug_round-default.png",
+      "atlas": "accent-atlas.png",
+      "crop": {
+        "left": 29,
+        "top": 1014,
+        "width": 364,
+        "height": 203
+      },
+      "packed": [
+        384,
+        221
+      ],
+      "sourceSize": [
+        1533,
+        882
+      ],
+      "anchor": {
+        "x": 766.5,
+        "y": 441,
+        "kind": "floor-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 4,
+        "width": 380,
+        "height": 212
+      },
+      "sha256": "2338dbb20b113f13237aa46fbb944e38811d0fc35ca4843b5d201988bce95564",
+      "opaquePixels": 63746,
+      "edgePixels": 0
+    },
+    {
+      "id": "neon_heart-unlit",
+      "key": "decor-neon_heart-unlit",
+      "file": "decor-neon_heart-unlit.png",
+      "atlas": "accent-atlas.png",
+      "crop": {
+        "left": 915,
+        "top": 1004,
+        "width": 229,
+        "height": 213
+      },
+      "packed": [
+        384,
+        346
+      ],
+      "sourceSize": [
+        936,
+        841
+      ],
+      "anchor": {
+        "x": 468,
+        "y": 420.5,
+        "kind": "wall-center"
+      },
+      "placement": {
+        "left": 9,
+        "top": 2,
+        "width": 367,
+        "height": 341
+      },
+      "sha256": "4e82a992296a8550c9f96e7b42eead81e59d4b1652690bd6a4973fbb6fc1e28e",
+      "opaquePixels": 88463,
+      "edgePixels": 0
+    },
+    {
+      "id": "neon_cup-unlit",
+      "key": "decor-neon_cup-unlit",
+      "file": "decor-neon_cup-unlit.png",
+      "atlas": "neon-cup.png",
+      "crop": {
+        "left": 286,
+        "top": 169,
+        "width": 692,
+        "height": 937
+      },
+      "packed": [
+        362,
+        384
+      ],
+      "sourceSize": [
+        1129,
+        1199
+      ],
+      "anchor": {
+        "x": 564.5,
+        "y": 599.5,
+        "kind": "wall-center"
+      },
+      "placement": {
+        "left": 40,
+        "top": 2,
+        "width": 281,
+        "height": 380
+      },
+      "sha256": "4d836a2b9390409a94a3c6fb0fec4ccf0102a6d5b1d428317dd55614dbdb18a7",
+      "opaquePixels": 42355,
+      "edgePixels": 0
+    },
+    {
+      "id": "garland",
+      "key": "furniture-garland",
+      "file": "furniture-garland.png",
+      "atlas": "wide-accents-atlas.png",
+      "crop": {
+        "left": 23,
+        "top": 98,
+        "width": 1209,
+        "height": 242
+      },
+      "packed": [
+        384,
+        110
+      ],
+      "sourceSize": [
+        2140,
+        609
+      ],
+      "anchor": {
+        "x": 1070,
+        "y": 598,
+        "kind": "wall-bottom-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 31,
+        "width": 380,
+        "height": 76
+      },
+      "sha256": "fd84fa0f2c665e07a190486703fdad27298122788e0f41d08c69a614c27bd615",
+      "opaquePixels": 14393,
+      "edgePixels": 0
+    },
+    {
+      "id": "wall_pennants",
+      "key": "furniture-wall_pennants",
+      "file": "furniture-wall_pennants.png",
+      "atlas": "wide-accents-atlas.png",
+      "crop": {
+        "left": 18,
+        "top": 366,
+        "width": 1218,
+        "height": 170
+      },
+      "packed": [
+        384,
+        74
+      ],
+      "sourceSize": [
+        2150,
+        410
+      ],
+      "anchor": {
+        "x": 1075,
+        "y": 399,
+        "kind": "wall-bottom-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 18,
+        "width": 380,
+        "height": 53
+      },
+      "sha256": "264cef9567497da53e9bd4d7bfa02bb06a0c245bb2f7da245512779f4bc575b5",
+      "opaquePixels": 8340,
+      "edgePixels": 0
+    },
+    {
+      "id": "ceiling_lights-unlit",
+      "key": "decor-ceiling_lights-unlit",
+      "file": "decor-ceiling_lights-unlit.png",
+      "atlas": "wide-accents-atlas.png",
+      "crop": {
+        "left": 18,
+        "top": 574,
+        "width": 1219,
+        "height": 167
+      },
+      "packed": [
+        384,
+        73
+      ],
+      "sourceSize": [
+        2038,
+        387
+      ],
+      "anchor": {
+        "x": 1019,
+        "y": 10,
+        "kind": "ceiling-top-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 2,
+        "width": 380,
+        "height": 52
+      },
+      "sha256": "d705adcb7cfa0d2672868cddf09c32a149c8770e2378cad7e4774d3f97c1eb7b",
+      "opaquePixels": 7371,
+      "edgePixels": 0
+    },
+    {
+      "id": "ceiling_vines-default",
+      "key": "decor-ceiling_vines-default",
+      "file": "decor-ceiling_vines-default.png",
+      "atlas": "wide-accents-atlas.png",
+      "crop": {
+        "left": 27,
+        "top": 791,
+        "width": 1200,
+        "height": 191
+      },
+      "packed": [
+        384,
+        98
+      ],
+      "sourceSize": [
+        2163,
+        547
+      ],
+      "anchor": {
+        "x": 1081.5,
+        "y": 10,
+        "kind": "ceiling-top-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 2,
+        "width": 380,
+        "height": 60
+      },
+      "sha256": "ed929e658e9d8f37d9ed2f16ecfbe0a8d5399a64a544b0f2a59d59b34798f749",
+      "opaquePixels": 11503,
+      "edgePixels": 0
+    },
+    {
+      "id": "neon_cafe-unlit",
+      "key": "decor-neon_cafe-unlit",
+      "file": "decor-neon_cafe-unlit.png",
+      "atlas": "wide-accents-atlas.png",
+      "crop": {
+        "left": 33,
+        "top": 1020,
+        "width": 1189,
+        "height": 161
+      },
+      "packed": [
+        384,
+        71
+      ],
+      "sourceSize": [
+        2091,
+        384
+      ],
+      "anchor": {
+        "x": 1045.5,
+        "y": 192,
+        "kind": "wall-center"
+      },
+      "placement": {
+        "left": 2,
+        "top": 10,
+        "width": 380,
+        "height": 51
+      },
+      "sha256": "5ef3f6f0896207ef7f80a6c8809e7cc3aabd210a9c2550f7d9c2e9b265d429c3",
+      "opaquePixels": 16578,
+      "edgePixels": 0
+    },
+    {
+      "id": "coatrack",
+      "key": "furniture-coatrack",
+      "file": "furniture-coatrack.png",
+      "atlas": "slender-props-atlas.png",
+      "crop": {
+        "left": 112,
+        "top": 12,
+        "width": 266,
+        "height": 1202
+      },
+      "packed": [
+        109,
+        384
+      ],
+      "sourceSize": [
+        562,
+        1980
+      ],
+      "anchor": {
+        "x": 281,
+        "y": 1969,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 12,
+        "top": 2,
+        "width": 84,
+        "height": 380
+      },
+      "sha256": "791d153b52b672bce8dadc49b48b1b405531816de59bfd0f10f453dcf5324cff",
+      "opaquePixels": 9954,
+      "edgePixels": 0
+    },
+    {
+      "id": "plant_snake",
+      "key": "furniture-plant_snake",
+      "file": "furniture-plant_snake.png",
+      "atlas": "slender-props-atlas.png",
+      "crop": {
+        "left": 497,
+        "top": 24,
+        "width": 282,
+        "height": 1193
+      },
+      "packed": [
+        167,
+        384
+      ],
+      "sourceSize": [
+        688,
+        1590
+      ],
+      "anchor": {
+        "x": 344,
+        "y": 1579,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 38,
+        "top": 2,
+        "width": 90,
+        "height": 379
+      },
+      "sha256": "ffd5193dc3876e7ccd222fdd503312d2ee01131e01ab251c6d9b4f5c5e163893",
+      "opaquePixels": 21849,
+      "edgePixels": 0
+    },
+    {
+      "id": "plant_lavender",
+      "key": "furniture-plant_lavender",
+      "file": "furniture-plant_lavender.png",
+      "atlas": "slender-props-atlas.png",
+      "crop": {
+        "left": 943,
+        "top": 58,
+        "width": 215,
+        "height": 1161
+      },
+      "packed": [
+        173,
+        384
+      ],
+      "sourceSize": [
+        700,
+        1555
+      ],
+      "anchor": {
+        "x": 350,
+        "y": 1544,
+        "kind": "foot-bottom-center"
+      },
+      "placement": {
+        "left": 51,
+        "top": 2,
+        "width": 70,
+        "height": 379
+      },
+      "sha256": "e81685b43a9b22f98e4f92ac8bf1a260e5034b45476bf1856010426084687758",
+      "opaquePixels": 18656,
+      "edgePixels": 0
+    }
+  ],
+  "overlayCorrections": {
+    "lantern": {
+      "overlayPoints": {
+        "wick": {
+          "x": 332.3359375,
+          "y": 914.2587303008596
+        }
+      }
+    },
+    "hanging_ivy": {
+      "overlayPoints": {
+        "potRim": {
+          "x": 195.85655120481928,
+          "y": 218.7450569705094
+        },
+        "leftAttachment": {
+          "x": 146.71238077309238,
+          "y": 179.2935237935657
+        },
+        "rightAttachment": {
+          "x": 259.3843812751004,
+          "y": 174.51151977211796
+        }
+      }
+    },
+    "clock": {
+      "clock": {
+        "dial": {
+          "x": 545.2604166666667,
+          "y": 551.4990942028985
+        },
+        "minute": 259.51879528985506,
+        "hour": 182.00019409937886
+      }
+    }
+  }
+}

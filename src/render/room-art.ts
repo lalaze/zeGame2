@@ -1,5 +1,6 @@
 import { cozyCafePart, paintCozyCabinet } from './cozy-cafe-art';
-import { getGeneratedDecorAdapter, getGeneratedMainEnvironmentAdapter } from './generated-main-art';
+import { getGeneratedDecorAdapter, getGeneratedIngredientAdapter, getGeneratedMainEnvironmentAdapter } from './generated-main-art';
+import { paintCozyService, paintCozyCakeDome } from './cozy-service-art';
 // Canvas painters for the parts of a room that are baked into textures: the main
 // café's back wall, floor, back bar and counter, the front wall along the bottom
 // edge, and the props (tables, chairs, crates) that the Phaser scene places.
@@ -494,9 +495,9 @@ export class RoomPainter {
     if (this.density <= 1) return false;
     const raster = generatedMainRaster('reference-machine');
     if (!raster) return false;
-    const scale = 32 / 1166;
+    const scale = Math.min(32 / raster.width, 26 / raster.height);
     return paintGeneratedMain(this.ctx, 'reference-machine',
-      left - 132 * scale, foot - 930 * scale, 1430 * scale, 1100 * scale);
+      left, foot - raster.height * scale, raster.width * scale, raster.height * scale);
   }
 
   private cabinet(x: number, y: number, w: number, h: number, base: string, handle = false): void {
@@ -758,8 +759,10 @@ export class RoomPainter {
     const sit = top + 4; // Items stand a little back from the front edge.
     const ctx = this.ctx;
     // Left of the menu board: the grinder and jars of beans and tea.
-    const grinder = GRINDER();
-    ctx.drawImage(grinder, x + 2, sit - grinder.height + 1);
+    if (!paintCozyService(ctx, 'cozy-grinder', x + 2, sit + 1, 12, 19)) {
+      const grinder = GRINDER();
+      ctx.drawImage(grinder, x + 2, sit - grinder.height + 1);
+    }
     if (this.serviceBitmap('service-jars', x + 25.5, sit + 1, 21, 15)) {
       // Empty glass storage props are decorative; they imply no ingredient count.
     } else if (this.density > 1) {
@@ -793,6 +796,7 @@ export class RoomPainter {
     }
     const pitcher = ramp('#c9d3d8');
     const jx = 151;
+    if (!paintCozyService(ctx, 'cozy-milk-pitcher', jx - 1, sit + 1, 11, 10)) {
     this.r(jx, sit - 9, 8, 9, OUTLINE);
     this.r(jx + 1, sit - 8, 6, 8, pitcher.base);
     this.r(jx + 1, sit - 8, 1, 8, pitcher.hi);
@@ -801,7 +805,12 @@ export class RoomPainter {
     this.r(jx + 2, sit - 7, 1, 6, '#eef0d6');
     this.r(jx + 5, sit - 6, 2, 5, '#939b84');
     this.r(jx + 2, sit - 2, 4, 1, '#b7b9a0');
-    if (this.density > 1) paintFineCakeDome(ctx, 188, sit + 1 - FINE_COUNTER_PROP_BOUNDS.cakeDome.h);
+    }
+    const dessert = menuItems(state).find(m => m.category === 'pastry' &&
+      (state.phase === 'prep' ? state.bakePlan[m.id] ?? 0 : state.shelf[m.id] ?? 0) > 0);
+    if (paintCozyCakeDome(ctx, 188, sit + 1, dessert ? itemIcon(dessert.id, false) : undefined)) {
+      // The empty dome and the current menu's real cake stay separate layers.
+    } else if (this.density > 1) paintFineCakeDome(ctx, 188, sit + 1 - FINE_COUNTER_PROP_BOUNDS.cakeDome.h);
     else {
       const dome = CAKE_DOME();
       ctx.drawImage(dome, 188, sit - dome.height + 1);
@@ -831,6 +840,9 @@ export class RoomPainter {
           this.r(hx + 1, sit - 8, 1, 1, '#eed49b');
         }
       }
+    } else if (getGeneratedIngredientAdapter()?.artwork('beans')) {
+      const beans = getGeneratedIngredientAdapter()!.artwork('beans')!;
+      ctx.drawImage(beans, bx, sit - 14, 20, 15);
     } else {
       const sack = ramp('#c9a873');
       this.r(bx + 1, sit - 13, 18, 14, OUTLINE);

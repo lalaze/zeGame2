@@ -1,0 +1,30 @@
+/** Image-generated replacement pack; the old catalog remains a source archive. */
+export const COZY_KITCHEN_IDS = ['cooler', 'dryStore', 'handSink', 'mixer', 'proofer', 'hood', 'kettle', 'deckOven', 'convection', 'fryer', 'bench', 'sheeter', 'standMixer', 'bins', 'rack', 'pastryFridge', 'dishPit'] as const;
+export type CozyKitchenId = typeof COZY_KITCHEN_IDS[number];
+export const COZY_WORLD_ASSETS = {
+  ...Object.fromEntries(['main-horizontal-beam', 'main-corner-post', 'foreground-threshold', 'outdoor-tree-line', 'village-roof-cluster', 'cloud'].map(id => [`environment-${id}`, `cozy-world-v2/environment-${id}.png`])) as Record<`environment-${'main-horizontal-beam' | 'main-corner-post' | 'foreground-threshold' | 'outdoor-tree-line' | 'village-roof-cluster' | 'cloud'}`, string>,
+  'tableware-heart': 'cozy-world-v2/tableware-heart.png',
+  'tableware-drop': 'cozy-world-v2/tableware-drop.png',
+  'tableware-crown': 'cozy-world-v2/tableware-crown.png',
+  'cozy-kitchen-wall': 'cozy-world-v2/kitchen_wall.png',
+  'cozy-region-reading': 'cozy-world-v2/region-reading.png',
+  'cozy-region-greenhouse': 'cozy-world-v2/region-greenhouse.png',
+  'cozy-region-terrace': 'cozy-world-v2/region-terrace.png',
+  ...Object.fromEntries(COZY_KITCHEN_IDS.map(id => [`cozy-kitchen-${id}`, `cozy-world-v2/kitchen-${id}.png`])) as Record<`cozy-kitchen-${CozyKitchenId}`, string>,
+  'reference-machine': 'cozy-world-v2/reference-machine.png',
+  'service-machine': 'cozy-world-v2/service-machine.png',
+  'service-pickup': 'cozy-world-v2/service-pickup.png',
+  display: 'cozy-world-v2/display.png',
+  'service-cups': 'cozy-world-v2/service-cups.png',
+  'service-jars': 'cozy-world-v2/service-jars.png',
+  'service-basket': 'cozy-world-v2/service-basket.png',
+  plant: 'cozy-world-v2/plant.png',
+  vase: 'cozy-world-v2/vase.png',
+  vine: 'cozy-world-v2/vine.png',
+  'wall-board': 'cozy-world-v2/wall-board.png',
+  'wall-lamp': 'cozy-world-v2/wall-lamp.png',
+  'tableware-empty-cup-saucer': 'cozy-world-v2/tableware-empty-cup-saucer.png',
+  'tableware-empty-plate': 'cozy-world-v2/tableware-empty-plate.png',
+  'tableware-shallow-plate': 'cozy-world-v2/tableware-shallow-plate.png',
+  'tableware-shallow-tray': 'cozy-world-v2/tableware-shallow-tray.png',
+} as const;

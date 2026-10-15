@@ -1,0 +1,232 @@
+{
+  "counter_walnut-top": {
+    "id": "counter_walnut",
+    "state": "top",
+    "slot": "counter",
+    "kind": "counter",
+    "size": [
+      560,
+      54
+    ],
+    "anchor": {
+      "x": 0,
+      "y": 0,
+      "kind": "module-origin"
+    },
+    "counterBand": {
+      "x": 0,
+      "y": 0,
+      "w": 560,
+      "h": 54,
+      "repeatX": 0,
+      "repeatW": 560
+    }
+  },
+  "counter_walnut-front": {
+    "id": "counter_walnut",
+    "state": "front",
+    "slot": "counter",
+    "kind": "counter",
+    "size": [
+      560,
+      224
+    ],
+    "anchor": {
+      "x": 0,
+      "y": 0,
+      "kind": "module-origin"
+    },
+    "counterBand": {
+      "x": 0,
+      "y": 0,
+      "w": 560,
+      "h": 224,
+      "repeatX": 0,
+      "repeatW": 560
+    }
+  },
+  "counter_marble-top": {
+    "id": "counter_marble",
+    "state": "top",
+    "slot": "counter",
+    "kind": "counter",
+    "size": [
+      560,
+      54
+    ],
+    "anchor": {
+      "x": 0,
+      "y": 0,
+      "kind": "module-origin"
+    },
+    "counterBand": {
+      "x": 0,
+      "y": 0,
+      "w": 560,
+      "h": 54,
+      "repeatX": 0,
+      "repeatW": 560
+    }
+  },
+  "counter_marble-front": {
+    "id": "counter_marble",
+    "state": "front",
+    "slot": "counter",
+    "kind": "counter",
+    "size": [
+      560,
+      224
+    ],
+    "anchor": {
+      "x": 0,
+      "y": 0,
+      "kind": "module-origin"
+    },
+    "counterBand": {
+      "x": 0,
+      "y": 0,
+      "w": 560,
+      "h": 224,
+      "repeatX": 0,
+      "repeatW": 560
+    }
+  },
+  "counter_pink-top": {
+    "id": "counter_pink",
+    "state": "top",
+    "slot": "counter",
+    "kind": "counter",
+    "size": [
+      560,
+      54
+    ],
+    "anchor": {
+      "x": 0,
+      "y": 0,
+      "kind": "module-origin"
+    },
+    "counterBand": {
+      "x": 0,
+      "y": 0,
+      "w": 560,
+      "h": 54,
+      "repeatX": 0,
+      "repeatW": 560
+    }
+  },
+  "counter_pink-front": {
+    "id": "counter_pink",
+    "state": "front",
+    "slot": "counter",
+    "kind": "counter",
+    "size": [
+      560,
+      224
+    ],
+    "anchor": {
+      "x": 0,
+      "y": 0,
+      "kind": "module-origin"
+    },
+    "counterBand": {
+      "x": 0,
+      "y": 0,
+      "w": 560,
+      "h": 224,
+      "repeatX": 0,
+      "repeatW": 560
+    }
+  },
+  "counter_gold-top": {
+    "id": "counter_gold",
+    "state": "top",
+    "slot": "counter",
+    "kind": "counter",
+    "size": [
+      560,
+      54
+    ],
+    "anchor": {
+      "x": 0,
+      "y": 0,
+      "kind": "module-origin"
+    },
+    "counterBand": {
+      "x": 0,
+      "y": 0,
+      "w": 560,
+      "h": 54,
+      "repeatX": 0,
+      "repeatW": 560
+    }
+  },
+  "counter_gold-front": {
+    "id": "counter_gold",
+    "state": "front",
+    "slot": "counter",
+    "kind": "counter",
+    "size": [
+      560,
+      224
+    ],
+    "anchor": {
+      "x": 0,
+      "y": 0,
+      "kind": "module-origin"
+    },
+    "counterBand": {
+      "x": 0,
+      "y": 0,
+      "w": 560,
+      "h": 224,
+      "repeatX": 0,
+      "repeatW": 560
+    }
+  },
+  "counter_oak-top": {
+    "id": "counter_oak",
+    "state": "top",
+    "slot": "counter",
+    "kind": "counter",
+    "size": [
+      270,
+      22
+    ],
+    "anchor": {
+      "x": 0,
+      "y": 0,
+      "kind": "module-origin"
+    },
+    "counterBand": {
+      "x": 0,
+      "y": 0,
+      "w": 270,
+      "h": 22,
+      "repeatX": 0,
+      "repeatW": 270
+    }
+  },
+  "counter_oak-front": {
+    "id": "counter_oak",
+    "state": "front",
+    "slot": "counter",
+    "kind": "counter",
+    "size": [
+      270,
+      210
+    ],
+    "anchor": {
+      "x": 0,
+      "y": 0,
+      "kind": "module-origin"
+    },
+    "counterBand": {
+      "x": 0,
+      "y": 0,
+      "w": 270,
+      "h": 210,
+      "repeatX": 0,
+      "repeatW": 270
+    }
+  }
+}

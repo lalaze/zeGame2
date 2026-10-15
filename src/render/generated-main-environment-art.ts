@@ -18,7 +18,13 @@ export const generatedMainEnvironmentKey = (id: GeneratedMainEnvironmentId): `en
 export const GENERATED_MAIN_ENVIRONMENT_DENSITY = 4;
 export type GeneratedMainEnvironmentSources = Readonly<Partial<Record<GeneratedMainEnvironmentId, CanvasImageSource>>>;
 export type GeneratedMainEnvironmentAlignment = 'left' | 'center' | 'right';
-export interface GeneratedMainEnvironmentOptions { readonly createCanvas?: () => HTMLCanvasElement }
+export interface GeneratedMainEnvironmentOptions {
+  readonly createCanvas?: () => HTMLCanvasElement;
+  readonly catalog?: Readonly<Partial<Record<GeneratedMainEnvironmentId, {
+    readonly size: readonly number[]; readonly bbox: { readonly x: number; readonly y: number; readonly w: number; readonly h: number };
+    readonly cacheEnvelope: readonly number[];
+  }>>>;
+}
 
 export interface GeneratedMainEnvironmentAdapter {
   readonly ready: boolean;
@@ -56,13 +62,13 @@ function sourceSize(source: CanvasImageSource): readonly [number, number] {
   return [s.width ?? 0, s.height ?? 0];
 }
 
-function bake(sources: GeneratedMainEnvironmentSources, make: () => HTMLCanvasElement): Map<GeneratedMainEnvironmentId, Baked> {
+function bake(sources: GeneratedMainEnvironmentSources, make: () => HTMLCanvasElement, catalog?: GeneratedMainEnvironmentOptions['catalog']): Map<GeneratedMainEnvironmentId, Baked> {
   const result = new Map<GeneratedMainEnvironmentId, Baked>();
   for (const id of GENERATED_MAIN_ENVIRONMENT_IDS) {
     try {
       const source = sources[id];
       if (!source) continue;
-      const [sw, sh] = sourceSize(source), meta = GENERATED_MAIN_ENVIRONMENT_CATALOG[id];
+      const [sw, sh] = sourceSize(source), meta = catalog?.[id] ?? GENERATED_MAIN_ENVIRONMENT_CATALOG[id];
       if (![sw, sh].every(n => Number.isFinite(n) && n > 0)) continue;
       // Packed PNGs scale both axes together and can pad the shorter edge by
       // <= 1 px. Measure authored bounds with that same packed ratio.
@@ -176,5 +182,5 @@ function adapterFor(baked: ReadonlyMap<GeneratedMainEnvironmentId, Baked>): Gene
  * The caller can release all readyIds' decoded sources immediately afterward. */
 export function createGeneratedMainEnvironmentArt(sources: GeneratedMainEnvironmentSources,
   options: GeneratedMainEnvironmentOptions = {}): GeneratedMainEnvironmentAdapter {
-  return adapterFor(bake(sources, options.createCanvas ?? (() => document.createElement('canvas'))));
+  return adapterFor(bake(sources, options.createCanvas ?? (() => document.createElement('canvas')), options.catalog));
 }

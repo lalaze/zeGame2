@@ -1,0 +1,322 @@
+[
+  {
+    "id": "reference-machine",
+    "file": "public/art/generated/cozy-world-v2/reference-machine.png",
+    "size": [
+      1430,
+      1100
+    ],
+    "bounds": [
+      114,
+      8,
+      1201,
+      1084
+    ],
+    "sourceBox": [
+      24,
+      84,
+      287,
+      259
+    ]
+  },
+  {
+    "id": "service-pickup",
+    "file": "public/art/generated/cozy-world-v2/service-pickup.png",
+    "size": [
+      1297,
+      1118
+    ],
+    "bounds": [
+      119,
+      8,
+      1059,
+      1102
+    ],
+    "sourceBox": [
+      339,
+      63,
+      268,
+      279
+    ]
+  },
+  {
+    "id": "display",
+    "file": "public/art/generated/cozy-world-v2/display.png",
+    "size": [
+      1941,
+      521
+    ],
+    "bounds": [
+      622,
+      8,
+      697,
+      505
+    ],
+    "sourceBox": [
+      636,
+      115,
+      309,
+      224
+    ]
+  },
+  {
+    "id": "kitchen-dishPit",
+    "file": "public/art/generated/cozy-world-v2/kitchen-dishPit.png",
+    "size": [
+      296,
+      297
+    ],
+    "bounds": [
+      8,
+      8,
+      280,
+      281
+    ],
+    "sourceBox": [
+      958,
+      68,
+      280,
+      281
+    ]
+  },
+  {
+    "id": "service-cups",
+    "file": "public/art/generated/cozy-world-v2/service-cups.png",
+    "size": [
+      222,
+      294
+    ],
+    "bounds": [
+      8,
+      147,
+      206,
+      139
+    ],
+    "sourceBox": [
+      39,
+      442,
+      260,
+      175
+    ]
+  },
+  {
+    "id": "service-jars",
+    "file": "public/art/generated/cozy-world-v2/service-jars.png",
+    "size": [
+      351,
+      304
+    ],
+    "bounds": [
+      8,
+      20,
+      335,
+      276
+    ],
+    "sourceBox": [
+      344,
+      410,
+      260,
+      214
+    ]
+  },
+  {
+    "id": "service-basket",
+    "file": "public/art/generated/cozy-world-v2/service-basket.png",
+    "size": [
+      430,
+      235
+    ],
+    "bounds": [
+      8,
+      16,
+      414,
+      211
+    ],
+    "sourceBox": [
+      645,
+      469,
+      288,
+      147
+    ]
+  },
+  {
+    "id": "plant",
+    "file": "public/art/generated/cozy-world-v2/plant.png",
+    "size": [
+      220,
+      300
+    ],
+    "bounds": [
+      8,
+      109,
+      204,
+      183
+    ],
+    "sourceBox": [
+      972,
+      410,
+      260,
+      233
+    ]
+  },
+  {
+    "id": "vase",
+    "file": "public/art/generated/cozy-world-v2/vase.png",
+    "size": [
+      160,
+      220
+    ],
+    "bounds": [
+      8,
+      35,
+      144,
+      177
+    ],
+    "sourceBox": [
+      60,
+      690,
+      196,
+      241
+    ]
+  },
+  {
+    "id": "vine",
+    "file": "public/art/generated/cozy-world-v2/vine.png",
+    "size": [
+      388,
+      453
+    ],
+    "bounds": [
+      61,
+      8,
+      266,
+      437
+    ],
+    "sourceBox": [
+      364,
+      662,
+      203,
+      333
+    ]
+  },
+  {
+    "id": "wall-board",
+    "file": "public/art/generated/cozy-world-v2/wall-board.png",
+    "size": [
+      818,
+      412
+    ],
+    "bounds": [
+      121,
+      8,
+      576,
+      396
+    ],
+    "sourceBox": [
+      628,
+      708,
+      314,
+      216
+    ]
+  },
+  {
+    "id": "wall-lamp",
+    "file": "public/art/generated/cozy-world-v2/wall-lamp.png",
+    "size": [
+      206,
+      294
+    ],
+    "bounds": [
+      8,
+      88,
+      190,
+      198
+    ],
+    "sourceBox": [
+      998,
+      695,
+      214,
+      223
+    ]
+  },
+  {
+    "id": "tableware-empty-cup-saucer",
+    "file": "public/art/generated/cozy-world-v2/tableware-empty-cup-saucer.png",
+    "size": [
+      378,
+      367
+    ],
+    "bounds": [
+      8,
+      109,
+      362,
+      250
+    ],
+    "sourceBox": [
+      43,
+      1031,
+      227,
+      157
+    ]
+  },
+  {
+    "id": "tableware-empty-plate",
+    "file": "public/art/generated/cozy-world-v2/tableware-empty-plate.png",
+    "size": [
+      348,
+      350
+    ],
+    "bounds": [
+      8,
+      151,
+      332,
+      191
+    ],
+    "sourceBox": [
+      341,
+      1036,
+      254,
+      146
+    ]
+  },
+  {
+    "id": "tableware-shallow-plate",
+    "file": "public/art/generated/cozy-world-v2/tableware-shallow-plate.png",
+    "size": [
+      1218,
+      177
+    ],
+    "bounds": [
+      253,
+      8,
+      712,
+      161
+    ],
+    "sourceBox": [
+      637,
+      1079,
+      292,
+      66
+    ]
+  },
+  {
+    "id": "tableware-shallow-tray",
+    "file": "public/art/generated/cozy-world-v2/tableware-shallow-tray.png",
+    "size": [
+      1458,
+      202
+    ],
+    "bounds": [
+      477,
+      8,
+      504,
+      186
+    ],
+    "sourceBox": [
+      954,
+      1063,
+      282,
+      104
+    ]
+  }
+]

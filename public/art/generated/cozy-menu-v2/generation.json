@@ -1,0 +1,130 @@
+{
+  "version": "cozy-menu-v2",
+  "generatedAt": "2026-10-15",
+  "tool": "built-in image_gen",
+  "useCase": "stylized-concept",
+  "styleReferences": [
+    "public/art/generated/cafe-style-sample-v1/sample.png",
+    "public/art/generated/cozy-cafe-v1/furniture-atlas.png"
+  ],
+  "atlases": [
+    {
+      "name": "coffee",
+      "columns": 4,
+      "rows": 4,
+      "ids": [
+        "espresso",
+        "americano",
+        "latte",
+        "cappuccino",
+        "flatwhite",
+        "cortado",
+        "mocha",
+        "vienna",
+        "macchiato",
+        "coldbrew",
+        "dirty",
+        "pourover",
+        "creamcoffee",
+        "affogato"
+      ],
+      "prompt": "Use case: stylized-concept.\nAsset type: Production transparent sprite atlas for a cozy cafe game.\nInput images are STYLE REFERENCES ONLY: image 1 is the approved cafe scene; image 2 approved furniture sprites. Match their softly rounded shapes, rich amber and cream highlights, chestnut-brown outlines, warm autumn palette, hand painted pixel clusters, charming polished pixel-art. The image is an atlas of isolated small food object sprites, NOT a scene. Each sprite uses a consistent elevated three-quarter view with visible top surface and front. Coarse crisp pixel edges, clear readable silhouettes, restrained detail, no smooth vector outlines, no realism. Truly transparent background and transparent gaps; never a checkerboard drawing. All items centered fully inside their cells with at least 18% transparent padding on every side. No ground, no cast ground shadows, no additional props, labels, numbers, gridlines, text, logos, frames or watermarks. Every requested cell is separate, nothing overlaps or touches another cell.\nGenerate a square 1024x1024 image containing exactly 4 equal columns and 4 equal rows, each cell 256x256. Fourteen coffee sprites, row-major order:\nRow 1: espresso: tiny ivory demitasse with dark coffee and crema on matching saucer; americano: taller terracotta ceramic mug filled with black coffee; latte: broad ivory cup with a clear milk-foam heart; cappuccino: peach cup with abundant white foam and cinnamon dust.\nRow 2: flatwhite: low sage cup with a fine flat rosetta foam surface; cortado: small clear short glass of equally layered espresso and warm milk; mocha: cocoa-brown ceramic cup with cream swirl and chocolate drizzle; vienna: tall clear footed cup of black coffee crowned by whipped cream.\nRow 3: macchiato: tiny caramel-colored espresso cup with single dollop of milk foam; coldbrew: squat clear tumbler of dark amber coffee and ice cubes; dirty: short glass with white cold milk bottom and dark espresso top; pourover: amber glass server/carafe of brewed coffee, wooden collar.\nRow 4: creamcoffee: beige coffee glass with thick smooth cream cap; affogato: small cream dessert bowl with vanilla ice cream and espresso drizzle; cell 3 empty transparent; cell 4 empty transparent.\nMake each identity visibly distinct. Cups and saucers count as one sprite.",
+      "generatedSource": "/Users/lalaze/.codex/generated_images/01a13e02-f816-7053-9c8a-35e7c4c376e6/exec-d4eacdc0-f4a2-433b-a0ca-735df3dbe0ca.png",
+      "sourceFile": "sources/coffee-atlas.png"
+    },
+    {
+      "name": "drinks",
+      "columns": 4,
+      "rows": 3,
+      "ids": [
+        "blacktea",
+        "hotchoc",
+        "lemontea",
+        "chai",
+        "fruittea",
+        "hojicha",
+        "matcha",
+        "frappe",
+        "smoothie",
+        "milktea",
+        "matchafloat"
+      ],
+      "prompt": "Use case: stylized-concept.\nAsset type: Production transparent sprite atlas for a cozy cafe game.\nInput images are STYLE REFERENCES ONLY: image 1 is the approved cafe scene; image 2 approved furniture sprites. Match their softly rounded shapes, rich amber and cream highlights, chestnut-brown outlines, warm autumn palette, hand painted pixel clusters, charming polished pixel-art. The image is an atlas of isolated small food object sprites, NOT a scene. Each sprite uses a consistent elevated three-quarter view with visible top surface and front. Coarse crisp pixel edges, clear readable silhouettes, restrained detail, no smooth vector outlines, no realism. Truly transparent background and transparent gaps; never a checkerboard drawing. All items centered fully inside their cells with at least 18% transparent padding on every side. No ground, no cast ground shadows, no additional props, labels, numbers, gridlines, text, logos, frames or watermarks. Every requested cell is separate, nothing overlaps or touches another cell.\nGenerate a square image containing exactly 4 equal columns and 3 equal rows. Eleven tea and cold-drink sprites, row-major order:\nRow 1: blacktea: warm amber black tea in a round cream ceramic cup with a small saucer; hotchoc: warm cocoa in a rich red mug topped with three marshmallows; lemontea: amber tea in a clear glass cup with one lemon slice on its rim; chai: pale spiced milk tea in a warm cinnamon-brown ceramic mug with one cinnamon stick.\nRow 2: fruittea: ruby berry tea in a clear round glass cup with visible small berry pieces; hojicha: muted roasted-brown tea in a sage ceramic tea bowl; matcha: bright matcha-green tea with light foam in a cream ceramic tea bowl; frappe: short wide glass of beige blended iced coffee, cream swirl and simple red straw.\nRow 3: smoothie: short wide clear glass of pale strawberry-pink smoothie with a berry and simple sage straw; milktea: rounded clear tumbler of caramel milk tea with dark tapioca pearls at its bottom and a simple ochre straw; matchafloat: rounded glass of bright green matcha topped by one scoop vanilla ice cream; cell 4 empty transparent.\nWarm red, sage and cream drinkware, same warm pixel style. Each sprite centered inside its independent cell with 18% empty padding. Use visually compact drink silhouettes, no tall thin glasses.",
+      "generatedSource": "/Users/lalaze/.codex/generated_images/01a13e02-f816-7053-9c8a-35e7c4c376e6/exec-3c6e0b2d-ed5b-428e-97dd-b88be31ee07e.png",
+      "sourceFile": "sources/drinks-atlas.png"
+    },
+    {
+      "name": "bread",
+      "columns": 4,
+      "rows": 4,
+      "ids": [
+        "roll",
+        "bagel",
+        "baguette",
+        "cheesebun",
+        "pretzel",
+        "focaccia",
+        "ciabatta",
+        "raisinbread",
+        "sourdough",
+        "rye",
+        "chocobread",
+        "shokupan",
+        "brioche",
+        "fruitbrioche",
+        "garlicbread"
+      ],
+      "prompt": "Use case: stylized-concept.\nAsset type: Production transparent sprite atlas for a cozy cafe game.\nInput images are STYLE REFERENCES ONLY: image 1 is the approved cafe scene; image 2 approved furniture sprites. Match their softly rounded shapes, rich amber and cream highlights, chestnut-brown outlines, warm autumn palette, hand painted pixel clusters, charming polished pixel-art. The image is an atlas of isolated small food object sprites, NOT a scene. Each sprite uses a consistent elevated three-quarter view with visible top surface and front. Coarse crisp pixel edges, clear readable silhouettes, restrained detail, no smooth vector outlines, no realism. Truly transparent background and transparent gaps; never a checkerboard drawing. All items centered fully inside their cells with at least 18% transparent padding on every side. No ground, no cast ground shadows, no additional props, labels, numbers, gridlines, text, logos, frames or watermarks. Every requested cell is separate, nothing overlaps or touches another cell.\nGenerate a square image containing exactly 4 equal columns and 4 equal rows, each cell equal-sized. Fifteen bread sprites, row-major order:\nRow 1: roll: one round golden dinner roll with shallow cross score; bagel: plump golden sesame bagel with central hole; baguette: short rustic golden French baguette placed diagonally; cheesebun: round soft golden bun with melted creamy cheese and small browned cheese spots.\nRow 2: pretzel: one classic brown twisted pretzel with salt crystals; focaccia: a rectangular golden dimpled focaccia with rosemary leaves and olive pieces; ciabatta: squat flour-dusted rectangular Italian loaf; raisinbread: a warm sliced loaf showing dark raisins in its cut face.\nRow 3: sourdough: a round crusty artisan boule with one leaf-shaped scored mark; rye: short darker brown rye loaf with one cut end showing dense crumb; chocobread: chocolate-brown braided bread with chocolate chunks; shokupan: soft square Japanese milk-bread loaf with two white fluffy slices.\nRow 4: brioche: glossy golden fluted brioche bun with small rounded top knob; fruitbrioche: round golden brioche with jewel-like red and green candied fruit; garlicbread: short baguette split open with visible golden butter and green herb topping; last cell fully empty transparent.\nEach image is ONLY its bread, no plates, no boards, no basket, no cloth, no knife. Emphasize plump cozy rounded silhouettes, crisp chunky pixel shading, warm chestnut contour. All breads centered with 20% padding inside their own cell.",
+      "generatedSource": "/Users/lalaze/.codex/generated_images/01a13e02-f816-7053-9c8a-35e7c4c376e6/exec-e2fe3339-e00c-4cf4-9399-4e4cdfe318cf.png",
+      "sourceFile": "sources/bread-atlas.png"
+    },
+    {
+      "name": "dessert",
+      "columns": 4,
+      "rows": 4,
+      "ids": [
+        "donut",
+        "scone",
+        "cookie",
+        "croissant",
+        "painchoc",
+        "brownie",
+        "cinnamon",
+        "muffin",
+        "creampuff",
+        "melonpan",
+        "eggtart",
+        "cake",
+        "swissroll",
+        "cheesecake",
+        "macaron"
+      ],
+      "prompt": "Use case: stylized-concept.\nAsset type: Production transparent sprite atlas for a cozy cafe game.\nInput images are STYLE REFERENCES ONLY: image 1 is the approved cafe scene; image 2 approved furniture sprites. Match their softly rounded shapes, rich amber and cream highlights, chestnut-brown outlines, warm autumn palette, hand painted pixel clusters, charming polished pixel-art. The image is an atlas of isolated small food object sprites, NOT a scene. Each sprite uses a consistent elevated three-quarter view with visible top surface and front. Coarse crisp pixel edges, clear readable silhouettes, restrained detail, no smooth vector outlines, no realism. Truly transparent background and transparent gaps; never a checkerboard drawing. All items centered fully inside their cells with at least 18% transparent padding on every side. No ground, no cast ground shadows, no additional props, labels, numbers, gridlines, text, logos, frames or watermarks. Every requested cell is separate, nothing overlaps or touches another cell.\nGenerate a square image containing exactly 4 equal columns and 4 equal rows, each cell equal-sized. Fifteen pastry and dessert sprites, row-major order:\nRow 1: donut: plump ring donut with strawberry-pink frosting and sparse sprinkles; scone: small craggy golden wedge scone; cookie: large round golden cookie with chocolate chunks; croissant: curved flaky buttery croissant.\nRow 2: painchoc: plump rectangular pain au chocolat with visible two chocolate ends; brownie: square dark fudge brownie with thin crackly top; cinnamon: rolled cinnamon bun with clear spiral and a little cream icing; muffin: golden blueberry muffin in simple russet paper cup.\nRow 3: creampuff: round golden choux puff split with thick white cream filling; melonpan: round Japanese sweet bun with pale golden crosshatch crust; eggtart: round fluted egg tart with golden pastry edge and glossy yellow custard center; cake: triangular slice of ivory strawberry shortcake with pink berry layer and one red strawberry.\nRow 4: swissroll: one slice of pale golden sponge roll with clear white cream spiral and strawberry center; cheesecake: triangular cream cheesecake slice with a thin golden biscuit base and one small red berry; macaron: three plump macarons stacked compactly in sage, cream, and rose colors; cell 4 empty transparent.\nEach sprite is only the dessert, no plates, no board, no utensils, no loose decoration. Maintain bold appetizing rounded forms with chestnut pixel contours and warm amber highlights. Every sprite centered with generous 20% padding in its cell.",
+      "generatedSource": "/Users/lalaze/.codex/generated_images/01a13e02-f816-7053-9c8a-35e7c4c376e6/exec-db21ffdd-dad3-48f7-b799-f0670c28dcad.png",
+      "sourceFile": "sources/dessert-atlas.png"
+    },
+    {
+      "name": "pantry",
+      "columns": 4,
+      "rows": 3,
+      "ids": [
+        "ingredient-beans",
+        "ingredient-milk",
+        "ingredient-flour",
+        "ingredient-butter",
+        "ingredient-eggs",
+        "ingredient-sugar",
+        "ingredient-tea",
+        "ingredient-spice",
+        "ingredient-cocoa",
+        "ingredient-cream",
+        "ingredient-fruit",
+        "ingredient-matcha"
+      ],
+      "prompt": "Use case: stylized-concept.\nAsset type: Production transparent sprite atlas for a cozy cafe game.\nInput images are STYLE REFERENCES ONLY: image 1 is the approved cafe scene; image 2 approved furniture sprites. Match their softly rounded shapes, rich amber and cream highlights, chestnut-brown outlines, warm autumn palette, hand painted pixel clusters, charming polished pixel-art. The image is an atlas of isolated small food object sprites, NOT a scene. Each sprite uses a consistent elevated three-quarter view with visible top surface and front. Coarse crisp pixel edges, clear readable silhouettes, restrained detail, no smooth vector outlines, no realism. Truly transparent background and transparent gaps; never a checkerboard drawing. All items centered fully inside their cells with at least 18% transparent padding on every side. No ground, no cast ground shadows, no additional props, labels, numbers, gridlines, text, logos, frames or watermarks. Every requested cell is separate, nothing overlaps or touches another cell.\nGenerate a square image containing exactly 4 equal columns and 3 equal rows, every cell equal-sized. Twelve cozy cafe pantry ingredient sprites, row-major order:\nRow 1: coffee beans: small open tan cloth sack filled with glossy roasted coffee beans, with 2 beans at its base; milk: short rounded cream glass milk bottle filled with milk and a red gingham fabric cap; flour: small warm ivory paper flour sack, folded top and simple wheat-ear pictogram without words; butter: golden rectangular butter block with one cut pat on folded cream paper.\nRow 2: eggs: three plump ivory and warm beige eggs gathered in a small low woven nest; sugar: petite cream bowl with piled white sugar cubes; tea: small sage cylindrical tin, lid slightly tilted, visible brown loose tea leaves and tiny leaf pictogram; spices: a squat terracotta jar with warm ground cinnamon plus two short cinnamon sticks resting against it.\nRow 3: cocoa: small cocoa-brown tin with a neat mound of cocoa powder and tiny cacao-bean pictogram; cream: petite round ivory ceramic pitcher filled with thick cream, one little spout and handle; fruit: one compact cluster of red strawberry, orange slice, red apple, and two blueberries; matcha: small warm wood bowl with bright green matcha powder and a tiny bamboo scoop.\nAll containers short and plump, not tall, and all distinct. No written text. Sprite object grouping must remain compact. Preserve 18% transparent padding in every cell. All objects fully visible and independent.\nCRITICAL production revision: Make every object dramatically SMALLER within its cell. Each sprite must fit completely within the CENTRAL HALF of its cell, with 25% truly empty transparent margin on all four sides. This means each sprite occupies at most 12.5% of total image width and at most 16% of total image height. Nothing reaches the outer image edge. No objects touch. Thin dark warm-brown contour only; no red fringe, no glow, no colored edge halo, no scattered dust/noise. One compact single object grouping per cell. The flour and butter have a very large transparent gap, as do cream and fruit. The fruit's leaves must remain inside its own cell.",
+      "generatedSource": "/Users/lalaze/.codex/generated_images/01a13e02-f816-7053-9c8a-35e7c4c376e6/exec-424239e8-94d7-4211-89a7-d25b0496179f.png",
+      "sourceFile": "sources/pantry-atlas.png",
+      "discardedSource": "/Users/lalaze/.codex/generated_images/01a13e02-f816-7053-9c8a-35e7c4c376e6/exec-ec57b2b3-4ec7-41a5-b78e-296d9d525748.png"
+    }
+  ]
+}

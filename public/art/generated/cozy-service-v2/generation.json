@@ -1,0 +1,20 @@
+{
+  "version": "cozy-service-v2",
+  "generatedAt": "2026-10-15",
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept.\nAsset type: production transparent prop sprite atlas for a cozy cafe game.\nThe two attached images are STYLE REFERENCES ONLY: the approved warm cafe scene and furniture atlas. Match their rounded silhouettes, deep chestnut outlines, soft cream and amber highlights, warm wood, sage enamel and restrained red accents, detailed but clear hand-painted pixel-art clusters. Elevated three-quarter view with visible top and front, consistent with the reference furniture.\nGenerate exactly a 2 columns by 2 rows square atlas containing four fully separate cafe props. Every object fits entirely inside the CENTRAL 60% of its cell. Leave large transparent gaps and a fully transparent outer margin. No scene, floor, ground shadows, checkerboard drawing, labels, text, numerals, logos, frames or watermark.\nTop left: a small countertop electric burr COFFEE GRINDER, squat sage-green enamel body with a warm brass switch, short dispensing spout on the front, small base platform, rounded clear bean hopper on top containing roasted coffee beans and a dark brown lid. A charming believable cafe appliance, no coffee cup placed under it.\nTop right: a small plump STAINLESS MILK FROTHING PITCHER, warm silver and cream reflections, pointed pouring spout to the left, single rounded handle to the right, open dark interior visible from above. One vessel only, no milk pour, no saucer.\nBottom left: an EMPTY transparent GLASS CAKE DOME on a low warm brass pedestal plate, small round brass knob at the top. Draw the dome only as a thin softly arched glass edge contour and 2 short narrow cream reflection streaks near its left and right edges. The large entire central interior is ACTUAL ZERO-ALPHA TRANSPARENCY so a real-time cake sprite can be visible behind this overlay. No cake, food, reflections of a scene, opaque white glass, colored interior tint, frost or filled center. The brass base plate and short pedestal are opaque and form the bottom 20% of the prop. Empty clear glass above.\nBottom right: a small blank TABLE NUMBER TENT SIGN, warm amber wooden A-frame stand with a large clean plain ivory front face, front-facing enough for the game to place its own dynamic number. Rounded wooden border, small visible triangular folded side on the right, short broad flat base. The entire ivory face must be completely BLANK, no text, no number, no symbols, no decoration.\nMaintain strong readable outlines and charming rounded proportions. This image must have real transparent alpha outside each object, especially inside the cake dome.",
+  "styleReferences": [
+    "public/art/generated/cafe-style-sample-v1/sample.png",
+    "public/art/generated/cozy-cafe-v1/furniture-atlas.png"
+  ],
+  "generatedSource": "/Users/lalaze/.codex/generated_images/01a13e02-f816-7053-9c8a-35e7c4c376e6/exec-fed2ea76-3436-4e03-a4cd-afbaa27329a5.png",
+  "sourceFile": "source-atlas.png",
+  "columns": 2,
+  "rows": 2,
+  "ids": [
+    "cozy-grinder",
+    "cozy-milk-pitcher",
+    "cozy-cake-dome",
+    "cozy-table-tent"
+  ]
+}

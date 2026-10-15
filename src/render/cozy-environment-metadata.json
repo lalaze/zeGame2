@@ -1,0 +1,98 @@
+{
+  "main-horizontal-beam": {
+    "size": [
+      684,
+      118
+    ],
+    "bbox": {
+      "x": 97,
+      "y": 8,
+      "w": 489,
+      "h": 102
+    },
+    "cacheEnvelope": [
+      80,
+      16
+    ]
+  },
+  "main-corner-post": {
+    "size": [
+      147,
+      540
+    ],
+    "bbox": {
+      "x": 8,
+      "y": 48,
+      "w": 131,
+      "h": 484
+    },
+    "cacheEnvelope": [
+      18,
+      80
+    ]
+  },
+  "foreground-threshold": {
+    "size": [
+      619,
+      122
+    ],
+    "bbox": {
+      "x": 8,
+      "y": 12,
+      "w": 603,
+      "h": 102
+    },
+    "cacheEnvelope": [
+      64,
+      12
+    ]
+  },
+  "outdoor-tree-line": {
+    "size": [
+      516,
+      412
+    ],
+    "bbox": {
+      "x": 45,
+      "y": 8,
+      "w": 425,
+      "h": 396
+    },
+    "cacheEnvelope": [
+      94,
+      50
+    ]
+  },
+  "village-roof-cluster": {
+    "size": [
+      404,
+      347
+    ],
+    "bbox": {
+      "x": 34,
+      "y": 8,
+      "w": 335,
+      "h": 331
+    },
+    "cacheEnvelope": [
+      80,
+      48
+    ]
+  },
+  "cloud": {
+    "size": [
+      419,
+      220
+    ],
+    "bbox": {
+      "x": 54,
+      "y": 8,
+      "w": 311,
+      "h": 204
+    },
+    "cacheEnvelope": [
+      44,
+      20
+    ]
+  }
+}

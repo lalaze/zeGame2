@@ -1,0 +1,218 @@
+{
+  "mode": "built-in image_gen",
+  "styleReferences": [
+    "../cafe-style-sample-v1/sample.png",
+    "../cozy-cafe-v1/furniture-atlas.png"
+  ],
+  "created": "2026-10-15",
+  "atlases": [
+    {
+      "file": "furniture-a-atlas",
+      "cols": 3,
+      "rows": 3,
+      "ids": [
+        "coatrack",
+        "bookshelf",
+        "catbed",
+        "aframe",
+        "lamp",
+        "bench",
+        "armchair",
+        "gramophone",
+        "piano"
+      ],
+      "subjects": [
+        "tall slender turned golden-oak coat rack with curled coat hooks, empty",
+        "wide squat honey-oak bookcase, three shelves of warm muted books",
+        "wide shallow oval wicker cat bed with soft sage-green padded cushion, no cat",
+        "rustic A-frame standing cafe chalkboard with a simple chalk cup doodle only, no lettering",
+        "tall slender brass floor lamp with a cream pleated tapered fabric shade, unlit",
+        "wide honey-oak bench with low wooden slat back, sage-green cushioned seat",
+        "soft rounded terracotta-red upholstered armchair with small oak feet",
+        "antique golden brass gramophone horn on a small walnut cabinet",
+        "upright honey-walnut piano, full keyboard, three-quarter front view, no stool"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: production sprite atlas for a cozy cafe pixel-art game. Primary request: redraw all listed furniture/decoration objects in the exact warm rounded detailed pixel illustration style of the supplied cafe reference. The reference images are STYLE references only, do not copy their subject layout. Rich honey-oak wood, golden edge highlights, dark warm brown chunky pixel outlines, soft rounded silhouettes, sage green/terracotta/cream accents, carefully clustered visible square pixels, no photographic texture. Use the existing furniture atlas's slightly elevated front three-quarter perspective consistently, except wall pictures are front-on. Every object is an isolated complete cutout on GENUINELY TRANSPARENT background. No scene, no floor plane, no background, no letters, no labels, no border around cells, no drop shadows outside objects, no cropping. Lights UNLIT; do not bake glow. Each sprite is centered separately with generous 12% transparent cell margins; no object crosses into another cell.\nCanvas: portrait or square sprite atlas, EXACTLY 3 equal-width columns by 3 equal-height rows. Read strictly row-major left-to-right, top-to-bottom. Each equal cell contains exactly ONE object. Cell contents:\nRow 1, column 1: tall slender turned golden-oak coat rack with curled coat hooks, empty.\nRow 1, column 2: wide squat honey-oak bookcase, three shelves of warm muted books.\nRow 1, column 3: wide shallow oval wicker cat bed with soft sage-green padded cushion, no cat.\nRow 2, column 1: rustic A-frame standing cafe chalkboard with a simple chalk cup doodle only, no lettering.\nRow 2, column 2: tall slender brass floor lamp with a cream pleated tapered fabric shade, unlit.\nRow 2, column 3: wide honey-oak bench with low wooden slat back, sage-green cushioned seat.\nRow 3, column 1: soft rounded terracotta-red upholstered armchair with small oak feet.\nRow 3, column 2: antique golden brass gramophone horn on a small walnut cabinet.\nRow 3, column 3: upright honey-walnut piano, full keyboard, three-quarter front view, no stool. Keep all grid cells uniform and fully separate.",
+      "source": "/Users/lalaze/.codex/generated_images/01a13e03-1db3-7880-a1fc-e8f7fad29a74/exec-d825d47a-61fa-4a81-89f9-35662a7badc9.png"
+    },
+    {
+      "file": "furniture-b-atlas",
+      "cols": 3,
+      "rows": 3,
+      "ids": [
+        "sofa",
+        "round_stool",
+        "lantern",
+        "bean_display",
+        "sideboard",
+        "display_cabinet",
+        "magazine_rack",
+        "coffee_cart",
+        "sconce"
+      ],
+      "subjects": [
+        "wide rounded sage-green two-seat sofa, rolled arms, honey-oak short feet",
+        "small tall round honey-oak stool with a terracotta-red upholstered seat",
+        "tall vintage brass hurricane lantern, glass housing, unlit candle inside, no flame",
+        "small honey-oak coffee bean display stand with three burlap bean sacks and scoops",
+        "wide low honey-oak sideboard with three drawers, two paneled cabinet doors and brass handles",
+        "tall narrow honey-oak display cabinet with glass upper doors and ceramic cups visible inside",
+        "narrow tall honey-oak slanted magazine rack holding neatly stacked colorful magazines without readable text",
+        "wide vintage honey-oak wheeled coffee cart with brass rails, coffee pot and cups",
+        "single curved brass wall sconce with a small creamy amber glass shade, unlit, full fixture"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: production sprite atlas for a cozy cafe pixel-art game. Primary request: redraw all listed furniture/decoration objects in the exact warm rounded detailed pixel illustration style of the supplied cafe reference. The reference images are STYLE references only, do not copy their subject layout. Rich honey-oak wood, golden edge highlights, dark warm brown chunky pixel outlines, soft rounded silhouettes, sage green/terracotta/cream accents, carefully clustered visible square pixels, no photographic texture. Use the existing furniture atlas's slightly elevated front three-quarter perspective consistently, except wall pictures are front-on. Every object is an isolated complete cutout on GENUINELY TRANSPARENT background. No scene, no floor plane, no background, no letters, no labels, no border around cells, no drop shadows outside objects, no cropping. Lights UNLIT; do not bake glow. Each sprite is centered separately with generous 12% transparent cell margins; no object crosses into another cell.\nCanvas: portrait or square sprite atlas, EXACTLY 3 equal-width columns by 3 equal-height rows. Read strictly row-major left-to-right, top-to-bottom. Each equal cell contains exactly ONE object. Cell contents:\nRow 1, column 1: wide rounded sage-green two-seat sofa, rolled arms, honey-oak short feet.\nRow 1, column 2: small tall round honey-oak stool with a terracotta-red upholstered seat.\nRow 1, column 3: tall vintage brass hurricane lantern, glass housing, unlit candle inside, no flame.\nRow 2, column 1: small honey-oak coffee bean display stand with three burlap bean sacks and scoops.\nRow 2, column 2: wide low honey-oak sideboard with three drawers, two paneled cabinet doors and brass handles.\nRow 2, column 3: tall narrow honey-oak display cabinet with glass upper doors and ceramic cups visible inside.\nRow 3, column 1: narrow tall honey-oak slanted magazine rack holding neatly stacked colorful magazines without readable text.\nRow 3, column 2: wide vintage honey-oak wheeled coffee cart with brass rails, coffee pot and cups.\nRow 3, column 3: single curved brass wall sconce with a small creamy amber glass shade, unlit, full fixture. Keep all grid cells uniform and fully separate.",
+      "source": "/Users/lalaze/.codex/generated_images/01a13e03-1db3-7880-a1fc-e8f7fad29a74/exec-b9319acc-6364-4e66-b393-6ddd475dcb6e.png"
+    },
+    {
+      "file": "plants-atlas",
+      "cols": 3,
+      "rows": 4,
+      "ids": [
+        "plant_fern",
+        "plant_snake",
+        "plant_fig",
+        "plant_monstera",
+        "plant_lemon",
+        "plant_lavender",
+        "plant_succulent",
+        "vase_daisies",
+        "hanging_ivy",
+        "sill_cactus-default",
+        "sill_tulips-default",
+        "sill_bonsai-default"
+      ],
+      "subjects": [
+        "lush wide green fern with many rounded arching fronds in a squat warm terracotta pot",
+        "tall narrow snake plant with green sword leaves striped pale gold in a terracotta pot",
+        "tall small fiddle-leaf fig tree with rounded thick leaves and slim trunk in a terracotta pot",
+        "lush wide monstera houseplant with broad split glossy green leaves in a terracotta pot",
+        "round small lemon tree with golden lemons and soft green foliage in a terracotta pot",
+        "tall slender lavender plant with purple flower spikes in a warm ivory ceramic pot",
+        "small jade-green succulent rosette on a little stem in a narrow terracotta pot",
+        "slim clear glass vase filled with five cream-white daisies, golden centers and green stems",
+        "wall-hanging terracotta pot with trailing ivy draping below, leafy hanging plant, short cream cord",
+        "little upright green cactus in a tiny terracotta pot",
+        "three pink and cream tulips with green leaves in a round terracotta pot",
+        "small spreading bonsai tree in a shallow warm clay pot"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: production sprite atlas for a cozy cafe pixel-art game. Primary request: redraw all listed furniture/decoration objects in the exact warm rounded detailed pixel illustration style of the supplied cafe reference. The reference images are STYLE references only, do not copy their subject layout. Rich honey-oak wood, golden edge highlights, dark warm brown chunky pixel outlines, soft rounded silhouettes, sage green/terracotta/cream accents, carefully clustered visible square pixels, no photographic texture. Use the existing furniture atlas's slightly elevated front three-quarter perspective consistently, except wall pictures are front-on. Every object is an isolated complete cutout on GENUINELY TRANSPARENT background. No scene, no floor plane, no background, no letters, no labels, no border around cells, no drop shadows outside objects, no cropping. Lights UNLIT; do not bake glow. Each sprite is centered separately with generous 12% transparent cell margins; no object crosses into another cell.\nCanvas: portrait or square sprite atlas, EXACTLY 3 equal-width columns by 4 equal-height rows. Read strictly row-major left-to-right, top-to-bottom. Each equal cell contains exactly ONE object. Cell contents:\nRow 1, column 1: lush wide green fern with many rounded arching fronds in a squat warm terracotta pot.\nRow 1, column 2: tall narrow snake plant with green sword leaves striped pale gold in a terracotta pot.\nRow 1, column 3: tall small fiddle-leaf fig tree with rounded thick leaves and slim trunk in a terracotta pot.\nRow 2, column 1: lush wide monstera houseplant with broad split glossy green leaves in a terracotta pot.\nRow 2, column 2: round small lemon tree with golden lemons and soft green foliage in a terracotta pot.\nRow 2, column 3: tall slender lavender plant with purple flower spikes in a warm ivory ceramic pot.\nRow 3, column 1: small jade-green succulent rosette on a little stem in a narrow terracotta pot.\nRow 3, column 2: slim clear glass vase filled with five cream-white daisies, golden centers and green stems.\nRow 3, column 3: wall-hanging terracotta pot with trailing ivy draping below, leafy hanging plant, short cream cord.\nRow 4, column 1: little upright green cactus in a tiny terracotta pot.\nRow 4, column 2: three pink and cream tulips with green leaves in a round terracotta pot.\nRow 4, column 3: small spreading bonsai tree in a shallow warm clay pot. Keep all grid cells uniform and fully separate.",
+      "source": "/Users/lalaze/.codex/generated_images/01a13e03-1db3-7880-a1fc-e8f7fad29a74/exec-a59b40ca-cba4-4606-8184-02aeb494475f.png"
+    },
+    {
+      "file": "wall-atlas",
+      "cols": 3,
+      "rows": 3,
+      "ids": [
+        "clock",
+        "mugrack",
+        "shelf",
+        "garland",
+        "wall_pennants",
+        "wreath_season",
+        "poster_coffee",
+        "poster_bakery",
+        "art_landscape"
+      ],
+      "subjects": [
+        "round honey-oak wall clock, simple ivory blank clock dial with hour ticks, no clock hands",
+        "wide horizontal honey-oak wall mug rack with five hanging cream and terracotta ceramic mugs",
+        "wide honey-oak wall shelf with three ceramic jars and a small stack of books",
+        "wide horizontal draping green leaf garland with little cream flowers, no wall",
+        "wide horizontal string of small alternating terracotta and cream triangular fabric pennants",
+        "round leafy seasonal wreath with small red berries, cream flowers and a terracotta ribbon",
+        "square honey-oak framed ivory coffee illustration poster with one big brown coffee cup and coffee beans, no text",
+        "square honey-oak framed ivory bakery illustration poster with golden croissant and bread loaf, no text",
+        "wide honey-oak framed landscape painting, warm green rolling hills, tiny terracotta-roof cottage and creamy sky"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: production sprite atlas for a cozy cafe pixel-art game. Primary request: redraw all listed furniture/decoration objects in the exact warm rounded detailed pixel illustration style of the supplied cafe reference. The reference images are STYLE references only, do not copy their subject layout. Rich honey-oak wood, golden edge highlights, dark warm brown chunky pixel outlines, soft rounded silhouettes, sage green/terracotta/cream accents, carefully clustered visible square pixels, no photographic texture. Use the existing furniture atlas's slightly elevated front three-quarter perspective consistently, except wall pictures are front-on. Every object is an isolated complete cutout on GENUINELY TRANSPARENT background. No scene, no floor plane, no background, no letters, no labels, no border around cells, no drop shadows outside objects, no cropping. Lights UNLIT; do not bake glow. Each sprite is centered separately with generous 12% transparent cell margins; no object crosses into another cell.\nCanvas: portrait or square sprite atlas, EXACTLY 3 equal-width columns by 3 equal-height rows. Read strictly row-major left-to-right, top-to-bottom. Each equal cell contains exactly ONE object. Cell contents:\nRow 1, column 1: round honey-oak wall clock, simple ivory blank clock dial with hour ticks, no clock hands.\nRow 1, column 2: wide horizontal honey-oak wall mug rack with five hanging cream and terracotta ceramic mugs.\nRow 1, column 3: wide honey-oak wall shelf with three ceramic jars and a small stack of books.\nRow 2, column 1: wide horizontal draping green leaf garland with little cream flowers, no wall.\nRow 2, column 2: wide horizontal string of small alternating terracotta and cream triangular fabric pennants.\nRow 2, column 3: round leafy seasonal wreath with small red berries, cream flowers and a terracotta ribbon.\nRow 3, column 1: square honey-oak framed ivory coffee illustration poster with one big brown coffee cup and coffee beans, no text.\nRow 3, column 2: square honey-oak framed ivory bakery illustration poster with golden croissant and bread loaf, no text.\nRow 3, column 3: wide honey-oak framed landscape painting, warm green rolling hills, tiny terracotta-roof cottage and creamy sky. Keep all grid cells uniform and fully separate.",
+      "source": "/Users/lalaze/.codex/generated_images/01a13e03-1db3-7880-a1fc-e8f7fad29a74/exec-c56f9ee2-dc54-45e2-a560-eb892b9c6b72.png"
+    },
+    {
+      "file": "accent-atlas",
+      "cols": 3,
+      "rows": 4,
+      "ids": [
+        "art_cat",
+        "art_bean",
+        "art_starry",
+        "ceiling_lights-unlit",
+        "ceiling_vines-default",
+        "ceiling_pendants-unlit",
+        "ceiling_chandelier-unlit",
+        "rug_red-default",
+        "rug_blue-default",
+        "rug_round-default",
+        "neon_cafe-unlit",
+        "neon_heart-unlit"
+      ],
+      "subjects": [
+        "wide honey-oak framed portrait painting of a seated plump orange cat on warm cream",
+        "wide honey-oak framed still-life painting of coffee beans and a green coffee branch",
+        "wide honey-oak framed starry night painting with a crescent moon, small golden stars and dusky blue sky",
+        "very wide shallow horizontal string of eight tiny unlit round cream bulbs on a gently dipping dark-brown wire",
+        "very wide shallow horizontal ceiling ivy swag, little hanging green leaves on a vine",
+        "one slim brass hanging ceiling pendant with long thin dark cord and rounded golden shade, unlit",
+        "wide short brass chandelier with three small creamy glass shades, short suspension cord, unlit",
+        "wide red terracotta woven rectangular rug shown from elevated three-quarter cafe game view, cream simple geometric border",
+        "wide muted dusty-blue woven rectangular rug shown from elevated three-quarter cafe game view, cream simple geometric border",
+        "oval woven warm beige and terracotta round rug shown from elevated three-quarter cafe game view",
+        "very wide low brown brass-backed blank neon cafe sign fixture with four simple pale unlit tube mounting segments, no letters",
+        "heart-shaped unlit muted salmon-pink neon tube on subtle brown backing, no glow"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: production sprite atlas for a cozy cafe pixel-art game. Primary request: redraw all listed furniture/decoration objects in the exact warm rounded detailed pixel illustration style of the supplied cafe reference. The reference images are STYLE references only, do not copy their subject layout. Rich honey-oak wood, golden edge highlights, dark warm brown chunky pixel outlines, soft rounded silhouettes, sage green/terracotta/cream accents, carefully clustered visible square pixels, no photographic texture. Use the existing furniture atlas's slightly elevated front three-quarter perspective consistently, except wall pictures are front-on. Every object is an isolated complete cutout on GENUINELY TRANSPARENT background. No scene, no floor plane, no background, no letters, no labels, no border around cells, no drop shadows outside objects, no cropping. Lights UNLIT; do not bake glow. Each sprite is centered separately with generous 12% transparent cell margins; no object crosses into another cell.\nCanvas: portrait or square sprite atlas, EXACTLY 3 equal-width columns by 4 equal-height rows. Read strictly row-major left-to-right, top-to-bottom. Each equal cell contains exactly ONE object. Cell contents:\nRow 1, column 1: wide honey-oak framed portrait painting of a seated plump orange cat on warm cream.\nRow 1, column 2: wide honey-oak framed still-life painting of coffee beans and a green coffee branch.\nRow 1, column 3: wide honey-oak framed starry night painting with a crescent moon, small golden stars and dusky blue sky.\nRow 2, column 1: very wide shallow horizontal string of eight tiny unlit round cream bulbs on a gently dipping dark-brown wire.\nRow 2, column 2: very wide shallow horizontal ceiling ivy swag, little hanging green leaves on a vine.\nRow 2, column 3: one slim brass hanging ceiling pendant with long thin dark cord and rounded golden shade, unlit.\nRow 3, column 1: wide short brass chandelier with three small creamy glass shades, short suspension cord, unlit.\nRow 3, column 2: wide red terracotta woven rectangular rug shown from elevated three-quarter cafe game view, cream simple geometric border.\nRow 3, column 3: wide muted dusty-blue woven rectangular rug shown from elevated three-quarter cafe game view, cream simple geometric border.\nRow 4, column 1: oval woven warm beige and terracotta round rug shown from elevated three-quarter cafe game view.\nRow 4, column 2: very wide low brown brass-backed blank neon cafe sign fixture with four simple pale unlit tube mounting segments, no letters.\nRow 4, column 3: heart-shaped unlit muted salmon-pink neon tube on subtle brown backing, no glow. Keep all grid cells uniform and fully separate.",
+      "source": "/Users/lalaze/.codex/generated_images/01a13e03-1db3-7880-a1fc-e8f7fad29a74/exec-1d81e9e0-4bd2-4b7b-bffe-a58ae0dc3d83.png"
+    },
+    {
+      "file": "neon-cup",
+      "cols": 1,
+      "rows": 1,
+      "ids": [
+        "neon_cup-unlit"
+      ],
+      "subjects": [
+        "unlit muted warm cream neon outline of a coffee cup with handle, two simple steam curls rising above, dark warm brass support outline, no glow"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: production sprite atlas for a cozy cafe pixel-art game. Primary request: redraw all listed furniture/decoration objects in the exact warm rounded detailed pixel illustration style of the supplied cafe reference. The reference images are STYLE references only, do not copy their subject layout. Rich honey-oak wood, golden edge highlights, dark warm brown chunky pixel outlines, soft rounded silhouettes, sage green/terracotta/cream accents, carefully clustered visible square pixels, no photographic texture. Use the existing furniture atlas's slightly elevated front three-quarter perspective consistently, except wall pictures are front-on. Every object is an isolated complete cutout on GENUINELY TRANSPARENT background. No scene, no floor plane, no background, no letters, no labels, no border around cells, no drop shadows outside objects, no cropping. Lights UNLIT; do not bake glow. Each sprite is centered separately with generous 12% transparent cell margins; no object crosses into another cell.\nCanvas: square sprite atlas, EXACTLY 1 equal-width columns by 1 equal-height rows. Read strictly row-major left-to-right, top-to-bottom. Each equal cell contains exactly ONE object. Cell contents:\nRow 1, column 1: unlit muted warm cream neon outline of a coffee cup with handle, two simple steam curls rising above, dark warm brass support outline, no glow. No other items.",
+      "source": "/Users/lalaze/.codex/generated_images/01a13e03-1db3-7880-a1fc-e8f7fad29a74/exec-c328a4eb-96fb-4a6d-8cf5-f82053fb3e95.png"
+    },
+    {
+      "file": "wide-accents-atlas",
+      "cols": 1,
+      "rows": 5,
+      "ids": [
+        "garland",
+        "wall_pennants",
+        "ceiling_lights-unlit",
+        "ceiling_vines-default",
+        "neon_cafe-unlit"
+      ],
+      "subjects": [
+        "green leaf garland",
+        "fabric pennants",
+        "ceiling bulb string",
+        "ceiling ivy",
+        "blank cafe neon fixture"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: production sprite atlas. Redraw five VERY WIDE AND SHALLOW horizontal cafe decorations matching supplied warm honey-oak, rounded, highly detailed visible clustered pixel-art reference. Genuinely transparent background. STRICT single column of FIVE evenly spaced rows, all isolated from each other. Canvas 1536x1536 square. Objects should each span about 1250 pixels in width. Thin long shapes; absolutely no short chunky bunches. Each object has clean dark warm-brown pixel outlines and warm highlights. No floor, no background, no labels, no text, no glows. Exactly five objects, top to bottom:\nRow 1: very wide green flower garland, overall width to height ratio 3.6 to 1, a long shallow arch with a few small hanging ivy leaves and cream daisies.\nRow 2: very wide string of 11 tiny alternating terracotta/cream cloth triangle pennants, width to height ratio 5.3 to 1, thin line with very shallow sag.\nRow 3: very wide string of 12 small unlit ivory glass bulbs on brown thin electrical cable, width to height ratio 5.3 to 1, shallow sag, bulbs are dim solid cream, no glow.\nRow 4: very wide trailing ivy vine mounted at ceiling edge, width to height ratio 4 to 1, long horizontal stem with small leaves and short hanging stems spread evenly across width.\nRow 5: very wide shallow vintage honey-oak/brass cafe neon sign backplate, width to height ratio 5.5 to 1, rounded long horizontal frame, blank dark brown panel center for runtime lettering, no letters, no symbols, no light, no big handle on top.\nPreserve transparent margins around each whole row. Use the reference style faithfully.",
+      "source": "/Users/lalaze/.codex/generated_images/01a13e03-1db3-7880-a1fc-e8f7fad29a74/exec-8bde7f3a-c905-4f0d-b549-b6ac3b899f62.png"
+    },
+    {
+      "file": "slender-props-atlas",
+      "cols": 3,
+      "rows": 1,
+      "ids": [
+        "coatrack",
+        "plant_snake",
+        "plant_lavender"
+      ],
+      "subjects": [
+        "narrow tall coat rack",
+        "narrow tall snake plant",
+        "narrow tall lavender"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: production sprite atlas. Redraw three SLENDER TALL furniture/decor sprites in the warm honey-oak, rounded detailed visible clustered pixel-art style of the supplied cozy cafe reference. Genuinely transparent background. STRICT three equal columns by one row, square canvas, three separate full-height objects, no overlap. Each object should be around 1000 pixels tall with empty margins, and much narrower than tall. Pixel-art edges, no blur, warm dark brown outlines. Isolated object cutouts, no ground, no scene, no shadows, no labels. Column 1: extremely slender tall honey-oak standing coat rack, overall width-to-height ratio exactly about 0.28, elegant very tall thin central turned wooden post, small curled brass hooks near top, a narrow three-foot base; empty, no coats. Column 2: tall slender snake plant in a small terracotta pot, green sword leaves with pale-gold edges reaching vertically, overall width-to-height ratio 0.43. Column 3: tall slender lavender in a little ivory ceramic pot, long slim upright green stems topped with soft purple tiny blooms, overall width-to-height ratio 0.45. All fully visible, complete bases, recognizable rounded cafe-game forms, warm luminous highlights.",
+      "source": "/Users/lalaze/.codex/generated_images/01a13e03-1db3-7880-a1fc-e8f7fad29a74/exec-a597496e-369e-4909-8348-952db838db03.png"
+    }
+  ]
+}

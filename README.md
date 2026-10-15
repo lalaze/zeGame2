@@ -104,11 +104,11 @@ To add or change text, edit `src/locales/en.json` and `src/locales/zh.json`. The
 | `src/i18n.ts`, `src/locales/` | Translations |
 | `scripts/gen-icons.mjs` | Builds the app icons from a pixel map (`npm run icons`) |
 
-All art is drawn in code from character grids (see `src/render/sprites.ts`), so there are no image files to manage. The Phaser scene turns those canvases into textures; rooms are painted into canvas textures that repaint a dozen times a second for their ambient animation. The side panel, dialogs and HUD are plain HTML over the canvas. To add a drink, add an entry to `MENU` and its recipe to `RECIPES` in `data.ts`, and its art in `ITEM_ART`.
+Production artwork uses the generated cozy bitmap packs in `public/art/generated/`, with shared canvas adapters and code-drawn live effects. Character-grid painters in `src/render/sprites.ts` remain fallbacks. Phaser turns those canvases into textures; room layers repaint for ambient animation. The side panel, dialogs and HUD are plain HTML over the canvas. The complete current asset mapping and redraw verification are in [docs/cozy-redraw-v2](docs/cozy-redraw-v2/README.md).
 
 ### Artwork and exports
 
-The café uses code-drawn pixel art with a shared upper-left light direction,
+The café uses a unified cozy pixel-art collection with a shared upper-left light direction,
 warm wood, ivory ceramics, sage accents and brass fittings. Menu dishes have
 3×-density artwork with fine material-edge highlights; in-world sprites retain
 their original dimensions. Window reflections, fading pane-shaped sunbeams,
@@ -119,8 +119,8 @@ Open `sprite-preview.html` on the development or built site for the asset galler
 It uses the same painters as the game, with category filters, light/dark preview,
 individual PNG downloads, a transparent atlas and its frame manifest. It does not
 read or write game saves. The gallery generates its ZIP, PNG atlas and JSON from the current artwork, including all 30 regular customers. Historical reference exports remain in `public/art/`. The downloaded `tiny-bean-assets.zip` includes individual
-PNGs, the atlas, coordinates and backgrounds: 685 sprite frames
-(including all 55 dishes and 420 frames for the 30 regular customers) and five room backgrounds.
+PNGs, the atlas, coordinates and backgrounds: 980 sprite frames
+(including all 55 dishes, 168 cat frames and the complete 30-customer cast) and five room backgrounds.
 Character exports also show one sample appearance per role; the game still generates all player appearances.
 Room exports contain background layers only; movable furniture and characters
 are separate. After changing artwork, re-export the atlas, JSON and room PNGs

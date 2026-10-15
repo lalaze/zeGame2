@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-10-15",
+  "menu": {
+    "assets": 67,
+    "staticMenu": 55,
+    "pantry": 12,
+    "unknownRuntimeKeys": 0,
+    "nonTransparentOuterEdgePixels": 0,
+    "legacyOriginalSizePreserved": [
+      "espresso",
+      "latte",
+      "eggtart",
+      "croissant",
+      "cake"
+    ],
+    "visualContactSheet": "cozy-menu-v2/contact-sheet.png"
+  },
+  "signature": {
+    "assets": 14,
+    "productionDimensionsMatch": true,
+    "nonTransparentOuterEdgePixels": 0,
+    "transparentApertureCenters": 4,
+    "renderGeometry": "src/render/cozy-signature-registration.ts",
+    "compositeCases": 16,
+    "visualContactSheet": "cozy-signature-v2/contact-sheet.png",
+    "compositePreview": "cozy-signature-v2/composite-preview.png"
+  },
+  "scope": "Generated all 81 bitmap sprites with built-in image_gen. Cropping, nearest-neighbor scaling and transparent padding performed by sharp. No recipe/gameplay logic changed."
+}

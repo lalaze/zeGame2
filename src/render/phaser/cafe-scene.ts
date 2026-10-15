@@ -1,3 +1,7 @@
+import { COZY_DECOR_CATALOG } from '../cozy-materials';
+import { preloadCozyCats, createCozyCatArt } from '../cozy-cat-assets';
+import cozyEnvironmentMetadata from '../cozy-environment-metadata.json';
+import { COZY_FURNITURE_CATALOG } from '../cozy-furniture-assets';
 import { SEATING_LAYOUT, seatingFurniture, seatingGeometry } from '../cozy-seating-art';
 import { cozySeatedGeometry } from '../cozy-character-art';
 import { cozyCafeSprite } from '../cozy-cafe-art';
@@ -276,7 +280,7 @@ export class CafeScene extends Phaser.Scene {
     const mainAssets = Object.entries(GENERATED_MAIN_ASSETS).filter(([id]) => !/^(?:barista|server|mina|customer)-/.test(id));
     const total = mainAssets.length + 5;
     this.hooks.loadingProgress?.(loaded, total);
-    this.referenceCharactersReady = preloadReferenceCharacters().then(() => {
+    this.referenceCharactersReady = Promise.all([preloadReferenceCharacters(), preloadCozyCats()]).then(() => {
       if (generation !== this.loadGeneration || this.loadingFailed) return;
       loaded += 5;
       this.hooks.loadingProgress?.(loaded, total);
@@ -302,7 +306,7 @@ export class CafeScene extends Phaser.Scene {
     const generation = this.loadGeneration;
     // Phaser does not await async create methods. Keep its update loop gated
     // until all human art has decoded and the scene is fully initialized.
-    void (this.referenceCharactersReady ?? preloadReferenceCharacters()).then(() => {
+    void (this.referenceCharactersReady ?? Promise.all([preloadReferenceCharacters(), preloadCozyCats()])).then(() => {
       if (generation !== this.loadGeneration || this.loadingFailed) return;
       this.createCafe();
       this.initialized = true;
@@ -327,7 +331,7 @@ export class CafeScene extends Phaser.Scene {
     this.generatedCustomers = createGeneratedCustomerArt(runtimeCatalog.customerManifests as GeneratedCustomerManifest[],
       Object.fromEntries(GENERATED_CUSTOMER_FRAME_IDS.map(id => [id, generatedMainSource(id)])));
     setGeneratedCustomerAdapter(this.generatedCustomers);
-    this.generatedCats = createGeneratedCatArt(runtimeCatalog.catManifests as GeneratedCatManifest[],
+    this.generatedCats = createCozyCatArt() ?? createGeneratedCatArt(runtimeCatalog.catManifests as GeneratedCatManifest[],
       Object.fromEntries(GENERATED_CAT_FRAME_IDS.map(id => [id, generatedMainSource(id)])));
     setGeneratedCatAdapter(this.generatedCats);
     setGeneratedSignatureAdapter(createGeneratedSignatureArt(
@@ -338,11 +342,11 @@ export class CafeScene extends Phaser.Scene {
     setGeneratedIngredientAdapter(createGeneratedIngredientArt(
       Object.fromEntries(GENERATED_INGREDIENT_IDS.map(id => [id, generatedMainSource(`ingredient-${id}`)]))));
     setGeneratedFurnitureAdapter(createGeneratedFurnitureArt(
-      Object.fromEntries(GENERATED_FURNITURE_IDS.map(id => [id, generatedMainSource(generatedFurnitureKey(id))]))));
+      Object.fromEntries(GENERATED_FURNITURE_IDS.map(id => [id, generatedMainSource(generatedFurnitureKey(id))])), { catalog: COZY_FURNITURE_CATALOG }));
     setGeneratedDecorAdapter(createGeneratedDecorArt(
-      Object.fromEntries(GENERATED_DECOR_SOURCE_IDS.map(id => [id, generatedMainSource(`decor-${id}` as GeneratedMainId)]))));
+      Object.fromEntries(GENERATED_DECOR_SOURCE_IDS.map(id => [id, generatedMainSource(`decor-${id}` as GeneratedMainId)])), { catalog: COZY_DECOR_CATALOG }));
     setGeneratedMainEnvironmentAdapter(createGeneratedMainEnvironmentArt(
-      Object.fromEntries(GENERATED_MAIN_ENVIRONMENT_IDS.map(id => [id, generatedMainSource(generatedMainEnvironmentKey(id))]))));
+      Object.fromEntries(GENERATED_MAIN_ENVIRONMENT_IDS.map(id => [id, generatedMainSource(generatedMainEnvironmentKey(id))])), { catalog: cozyEnvironmentMetadata }));
     setGeneratedTablewareAdapter(createGeneratedTablewareArt(
       Object.fromEntries(GENERATED_TABLEWARE_IDS.map(id => [id, generatedMainSource(generatedTablewareKey(id))]))));
     // Published pose canvases own their pixels; full-resolution character sources
@@ -542,7 +546,7 @@ export class CafeScene extends Phaser.Scene {
   private layer(name: string, depth: number): Layer {
     let layer = this.layers.get(name);
     if (!layer) {
-      const density = name.startsWith('room-main') ? 2 : 1;
+      const density = 2;
       const texture = this.textures.createCanvas(name, SCENE_W * density, sceneHeight() * density)!;
       const image = this.add.image(0, 0, name).setOrigin(0, 0).setDepth(depth).setScale(1 / density);
       layer = { texture, image, painter: new RoomPainter(texture.context, density), shown: '', density };
@@ -1004,8 +1008,10 @@ export class CafeScene extends Phaser.Scene {
     const o = areaOrigin('kitchen');
     const installed = installedEquipment(state);
     const piece = (name: string, x: number, foot: number, w: number, rise: number, paint: (ctx: CanvasRenderingContext2D) => void) => {
-      const key = baked(this.textures, `kitchen-${name}`, w + 20, rise + 1, paint);
-      this.image(key, o.x + x - 10, o.y + foot - rise, DEPTH.floor + o.y + foot);
+      const key = baked(this.textures, `kitchen-${name}`, (w + 20) * 3, (rise + 1) * 3, ctx => {
+        ctx.scale(3, 3); ctx.imageSmoothingEnabled = false; paint(ctx);
+      });
+      this.image(key, o.x + x - 10, o.y + foot - rise, DEPTH.floor + o.y + foot).setDisplaySize(w + 20, rise + 1);
     };
     const benchFoot = kitchenFloorY(BENCH.front);
     const tools = `${installed.has('sheeter')}-${installed.has('standMixer')}`;

@@ -4,6 +4,8 @@
 // to the kitchen. Equipment the menu doesn't call for yet shows as a marked-out
 // space with its hookups capped after the kitchen is built. Before purchase the
 // room is an unfitted shell, not a working kitchen hidden under a tint.
+import { paintCozyKitchen } from './cozy-world-art';
+import { generatedMainSource, getGeneratedDecorAdapter } from './generated-main-art';
 import type { ItemId } from '../game/data';
 import {
   BENCH,
@@ -138,6 +140,15 @@ export function paintKitchen(ctx: Ctx, H: number, t: number, locked: boolean, in
       if ((x + row * 3) % 7 === 0) r(Math.max(0, x + 3), y + 5, 4, 1, '#e8d7b6');
     }
   }
+  const wallTile = generatedMainSource('cozy-kitchen-wall');
+  if (wallTile) {
+    ctx.save(); ctx.imageSmoothingEnabled = false;
+    for (let y = 0; y < FLOOR_Y - 5; y += 32) for (let x = 0; x < SCENE_W; x += 32) {
+      const h = Math.min(32, FLOOR_Y - 5 - y);
+      ctx.drawImage(wallTile, 0, 0, wallTile.width, wallTile.height * h / 32, x, y, 32, h);
+    }
+    ctx.restore();
+  }
   timberBeam(ctx, 0, 0, SCENE_W, 6);
   r(0, FLOOR_Y - 5, SCENE_W, 5, SAGE); r(0, FLOOR_Y - 5, SCENE_W, 1, '#9da57c');
   r(0, FLOOR_Y - 1, SCENE_W, 1, OUTLINE);
@@ -155,6 +166,7 @@ export function paintKitchen(ctx: Ctx, H: number, t: number, locked: boolean, in
       if (th > 10) { r(x + 5, y + 8, 3, 1, '#d2ba91'); r(x + 6, y + 7, 1, 3, '#d2ba91'); }
     }
   }
+  getGeneratedDecorAdapter()?.paintTile(ctx, 'floor_checker', 0, FLOOR_Y, SCENE_W, H - FLOOR_Y);
   r(0, FLOOR_Y, SCENE_W, 2, '#a88b61');
   const drainY = kitchenFloorY(152);
   r(143, drainY - 4, 14, 8, OUTLINE); r(144, drainY - 3, 12, 6, BRASS);
@@ -218,6 +230,7 @@ function mat(ctx: Ctx, x: number, y: number, w: number, h: number): void {
 
 /** The walk-in cold room's heavy door, with its thermometer and a frosted window. */
 function cooler(ctx: Ctx, { x, w }: { x: number; w: number }, on: boolean): void {
+  if (paintCozyKitchen(ctx, 'cooler', x, BASE, w, 66, on)) return;
   const r = painter(ctx), top = 18;
   steelBox(ctx, x, top, w, BASE - top, ENAMEL);
   // Rounded enamel door sits in a visibly deep olive seal.
@@ -248,6 +261,7 @@ function cooler(ctx: Ctx, { x, w }: { x: number; w: number }, on: boolean): void
 
 /** Wire shelving: flour sacks on the floor, tubs of sugar, jars and boxes above. */
 function dryStore(ctx: Ctx, { x, w }: { x: number; w: number }, on: boolean): void {
+  if (paintCozyKitchen(ctx, 'dryStore', x, BASE, w, 64, on)) return;
   const r = painter(ctx), top = 28;
   // Timber pantry with open, shadowed shelves and pegged uprights.
   r(x + 2, top, w - 4, BASE - top - 2, '#543425');
@@ -286,6 +300,7 @@ function dryStore(ctx: Ctx, { x, w }: { x: number; w: number }, on: boolean): vo
 
 /** The hand-wash sink, with soap and paper towels: the first stop from storage to prep. */
 function handSink(ctx: Ctx, { x, w }: { x: number; w: number }): void {
+  if (paintCozyKitchen(ctx, 'handSink', x, BASE, w, 24)) return;
   const r = painter(ctx);
   // Thick ceramic basin with a scooped well and aged brass gooseneck.
   r(x, 55, w, 9, OUTLINE); r(x + 1, 55, w - 2, 2, '#fff3d9');
@@ -300,6 +315,7 @@ function handSink(ctx: Ctx, { x, w }: { x: number; w: number }): void {
 
 /** A spiral dough mixer: the hook turns in its bowl while a cook is mixing. */
 function mixer(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: boolean): void {
+  if (paintCozyKitchen(ctx, 'mixer', x, BASE, w, 38, on, t)) return;
   const r = painter(ctx);
   steelBox(ctx, x + 1, 66, w - 2, BASE - 66, ENAMEL);
   r(x + 4, BASE - 4, w - 8, 3, '#55606b');
@@ -326,6 +342,7 @@ function mixer(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: bool
 
 /** The proofing cabinet: warm and steamy, with dough rising on its trays. */
 function proofer(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: boolean): void {
+  if (paintCozyKitchen(ctx, 'proofer', x, BASE, w, 58, on, t)) return;
   const r = painter(ctx);
   const top = 26;
   steelBox(ctx, x, top, w, BASE - top, ENAMEL);
@@ -358,6 +375,7 @@ function proofer(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: bo
 
 /** The extraction hood over the hot line, with its filters and lights. */
 function hood(ctx: Ctx): void {
+  if (paintCozyKitchen(ctx, 'hood', HOOD.x, 27, HOOD.w, 24)) return;
   const r = painter(ctx), { x, w } = HOOD;
   // Folded copper canopy widens downwards; seams lead into the filter cavity.
   r(x + 5, 10, w - 10, 3, OUTLINE); r(x + 6, 10, w - 12, 1, '#e0b678');
@@ -377,6 +395,7 @@ function hood(ctx: Ctx): void {
 
 /** A two-burner range with the big pot for boiling bagels and pretzels. */
 function kettle(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: boolean): void {
+  if (paintCozyKitchen(ctx, 'kettle', x, BASE, w, 38, on, t)) return;
   const r = painter(ctx);
   steelBox(ctx, x, 62, w, BASE - 62);
   r(x + 3, 68, w - 6, 10, OUTLINE);
@@ -401,6 +420,7 @@ function kettle(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: boo
 
 /** The deck oven: two stone decks, their windows glowing with loaves while a cook bakes. */
 function deckOven(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: boolean): void {
+  if (paintCozyKitchen(ctx, 'deckOven', x, BASE, w, 54, on, t)) return;
   const r = painter(ctx);
   const top = 32;
   steelBox(ctx, x, top, w, BASE - 8 - top, ENAMEL);
@@ -438,6 +458,7 @@ function deckOven(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: b
 
 /** A convection oven on a stand, its fan turning behind the glass while it bakes. */
 function convection(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: boolean): void {
+  if (paintCozyKitchen(ctx, 'convection', x, BASE, w, 48, on, t)) return;
   const r = painter(ctx);
   const top = 36;
   steelBox(ctx, x, top, w, 26, ENAMEL);
@@ -474,6 +495,7 @@ function convection(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on:
 
 /** The fryer for donuts, its oil shimmering and bubbling while a batch cooks. */
 function fryer(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: boolean): void {
+  if (paintCozyKitchen(ctx, 'fryer', x, BASE, w, 28, on, t)) return;
   const r = painter(ctx);
   steelBox(ctx, x, 58, w, BASE - 58);
   r(x + 2, 59, w - 4, 6, OUTLINE);
@@ -505,6 +527,14 @@ function fryer(ctx: Ctx, { x, w }: { x: number; w: number }, t: number, on: bool
 export function paintBench(ctx: Ctx, cx: number, foot: number, sheeter: boolean, standMixer: boolean): void {
   const r = painter(ctx), { w, height, depth } = BENCH;
   const x = Math.round(cx - w / 2), front = foot - height, top = front - depth;
+  if (paintCozyKitchen(ctx, 'bench', x, foot, w, height + depth)) {
+    const source = generatedMainSource('cozy-kitchen-bench')!;
+    const scale = Math.min(w / source.width, (height + depth) / source.height);
+    const left = x + (w - source.width * scale) / 2, surface = foot - source.height * scale + 3;
+    if (sheeter) paintCozyKitchen(ctx, 'sheeter', left + 3, surface, 24, 14);
+    if (standMixer) paintCozyKitchen(ctx, 'standMixer', left + source.width * scale - 20, surface, 14, 18);
+    return;
+  }
   // Thick maple butcher block sits on a framed pantry island with open storage.
   r(x - 1, top - 1, w + 2, depth + 2, OUTLINE);
   r(x, top, w, depth, '#c99459'); r(x, top, w, 1, '#efd19b');
@@ -566,6 +596,7 @@ export const BINS_RISE = 20;
 
 /** Rolling ingredient bins at the storage end, lids labelled for flour and sugar. */
 export function paintBins(ctx: Ctx, x: number, foot: number): void {
+  if (paintCozyKitchen(ctx, 'bins', x, foot, BINS.w, BINS_RISE)) return;
   const r = painter(ctx);
   const top = foot - BINS_RISE;
   for (const [i, label, lid] of [[0, 'F', '#627451'], [1, 'S', '#aa5944']] as const) {
@@ -588,6 +619,16 @@ export function paintBins(ctx: Ctx, x: number, foot: number): void {
 
 /** The speed rack by the door, its trays holding the latest batches to cool. */
 export function paintRack(ctx: Ctx, x: number, foot: number, items: readonly ItemId[]): void {
+  if (paintCozyKitchen(ctx, 'rack', x, foot, RACK.w, RACK_RISE)) {
+    const source = generatedMainSource('cozy-kitchen-rack')!;
+    const scale = Math.min(RACK.w / source.width, RACK_RISE / source.height);
+    const h = source.height * scale, top = foot - h;
+    for (let i = 0; i < Math.min(items.length, 4); i++) {
+      const icon = itemIcon(items[i], false), width = 8, height = icon.height * width / icon.width;
+      for (let k = 0; k < 2; k++) ctx.drawImage(fineSpriteArt(icon).canvas, x + 3 + k * 8, top + h * (.135 + i * .225) - height, width, height);
+    }
+    return;
+  }
   const r = painter(ctx);
   const { w } = RACK;
   const top = foot - RACK_RISE;
@@ -618,6 +659,14 @@ export function paintRack(ctx: Ctx, x: number, foot: number, items: readonly Ite
 
 /** The glass-fronted pastry fridge where cakes set, with a few on its shelves. */
 export function paintPastryFridge(ctx: Ctx, x: number, foot: number, items: readonly ItemId[]): void {
+  if (paintCozyKitchen(ctx, 'pastryFridge', x, foot, PASTRY_FRIDGE.w, FRIDGE_RISE)) {
+    for (let i = 0; i < Math.min(items.length, 2); i++) {
+      const icon = itemIcon(items[i], false);
+      ctx.drawImage(fineSpriteArt(icon).canvas, x + PASTRY_FRIDGE.w / 2 - icon.width / 2,
+        foot - FRIDGE_RISE + 16 + i * 10 - icon.height, icon.width, icon.height);
+    }
+    return;
+  }
   const r = painter(ctx);
   const { w } = PASTRY_FRIDGE;
   const top = foot - FRIDGE_RISE;
@@ -644,6 +693,7 @@ export function paintPastryFridge(ctx: Ctx, x: number, foot: number, items: read
 
 /** The dish pit by the door: a three-bay sink with a sprayer, and a rack of clean plates. */
 export function paintDishPit(ctx: Ctx, x: number, foot: number): void {
+  if (paintCozyKitchen(ctx, 'dishPit', x, foot, DISH_PIT.w, DISH_PIT_RISE)) return;
   const r = painter(ctx);
   const { w } = DISH_PIT;
   const front = foot - 14;

@@ -7,6 +7,7 @@ import { mix } from './color';
 import { paintFloorFurniture } from './furniture-art';
 import { beam, type Lighting } from './lighting';
 import { paintSunbeam } from './room-art';
+import { generatedMainSource } from './generated-main-art';
 
 type Ctx = CanvasRenderingContext2D;
 const ink = WARM_MATERIAL.ink;
@@ -65,7 +66,25 @@ export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, l
   paintFloor(ctx, terrace ? 'floor_terrazzo' : reading ? 'floor_herringbone' : 'floor_mint', 0, FLOOR_Y, SCENE_W, height - FLOOR_Y);
   const sky = (painted: string) => mix(painted, light.sky[1], 0.55);
 
-  if (reading) {
+  const backdrop = generatedMainSource(`cozy-region-${id}`);
+  if (backdrop) {
+    ctx.save(); ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(backdrop, 0, 0, SCENE_W, FLOOR_Y);
+    if (light.dark > 0) {
+      ctx.globalAlpha = light.dark * .48; ctx.fillStyle = '#283837';
+      ctx.fillRect(0, 0, SCENE_W, FLOOR_Y);
+    }
+    ctx.restore();
+    if (reading) {
+      paintFloorFurniture(ctx, 'armchair', 115, floorY(102));
+      paintFloorFurniture(ctx, 'armchair', 206, floorY(102));
+      paintFloorFurniture(ctx, 'lamp', 100, floorY(98));
+    } else {
+      for (const x of [30, 290]) paintFloorFurniture(ctx, terrace ? 'plant_lemon' : 'plant_monstera', x, floorY(96));
+      paintFloorFurniture(ctx, 'bench', 160, floorY(100));
+      for (const x of [108, 212]) paintFloorFurniture(ctx, 'plant_fern', x, floorY(98));
+    }
+  } else if (reading) {
     timberBeam(ctx, 0, 0, SCENE_W, 8);
     for (const x of [0, 314]) timberBeam(ctx, x, 0, 6, 80, true);
     for (const x of [18, 234]) libraryShelf(ctx, x);

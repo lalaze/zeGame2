@@ -6,8 +6,9 @@ import type { CatId } from '../game/pets';
 import type { IngredientId, ItemId, StaticItemId, UpgradeId } from '../game/data';
 import type { Look } from '../game/state';
 import { edge, mix, ramp } from './color';
-import { fineSpriteArt, mirrorFineSpriteArt, registerFineCharacterArt } from './fine-sprite-art';
-import { getGeneratedFoodAdapter, getGeneratedIngredientAdapter, getGeneratedTablewareAdapter } from './generated-main-art';
+import { fineSpriteArt, mirrorFineSpriteArt, registerFineCharacterArt, registerFineSpriteArt } from './fine-sprite-art';
+import { generatedMainSource, getGeneratedFoodAdapter, getGeneratedFurnitureAdapter, getGeneratedIngredientAdapter, getGeneratedTablewareAdapter } from './generated-main-art';
+import { cozyCafeSprite } from './cozy-cafe-art';
 
 /** Warm near-black used for outlines, like Stardew's, rather than pure black. */
 export const OUTLINE = '#39281f';
@@ -1053,6 +1054,7 @@ const UPGRADE_ENVELOPES = { marketing: [12, 10], machine: [12, 9], tables: [12, 
 
 const upgradeCache = new Map<UpgradeId, HTMLCanvasElement>();
 const staffPortraitFrames = new Map<UpgradeId, HTMLCanvasElement>();
+const upgradeSources = new Map<UpgradeId, CanvasImageSource>();
 export function upgradeIcon(id: UpgradeId): HTMLCanvasElement {
   if (id === 'barista' || id === 'server' || id === 'cook') {
     const full = character({ skin: id === 'server' ? 2 : id === 'cook' ? 1 : 0, hair: id === 'server' ? 0 : 1, hairStyle: 1, shirt: 0, pants: 0 }, id).stand;
@@ -1068,6 +1070,21 @@ export function upgradeIcon(id: UpgradeId): HTMLCanvasElement {
     staffPortraitFrames.set(id, full);
     upgradeCache.set(id, c);
     return c;
+  }
+  const replacement = id === 'marketing' ? getGeneratedFurnitureAdapter()?.icon('aframe') :
+    id === 'tables' ? cozyCafeSprite('table') : generatedMainSource('reference-machine');
+  if (replacement) {
+    const source = replacement instanceof HTMLCanvasElement ? fineSpriteArt(replacement).canvas : replacement;
+    if (upgradeSources.get(id) === source) return upgradeCache.get(id)!;
+    const [w, h] = UPGRADE_ENVELOPES[id], d = 4;
+    const backing = document.createElement('canvas'); backing.width = (w + 2) * d; backing.height = (h + 2) * d;
+    const ctx = backing.getContext('2d')!; ctx.imageSmoothingEnabled = false;
+    const scale = Math.min(w / source.width, h / source.height);
+    ctx.drawImage(source, ((w + 2 - source.width * scale) / 2) * d, (h + 1 - source.height * scale) * d, source.width * scale * d, source.height * scale * d);
+    const icon = document.createElement('canvas'); icon.width = w + 2; icon.height = h + 2;
+    icon.getContext('2d')!.drawImage(backing, 0, 0, icon.width, icon.height);
+    registerFineSpriteArt(icon, backing, d); upgradeSources.set(id, source); upgradeCache.set(id, icon);
+    return icon;
   }
   const cached = upgradeCache.get(id); if (cached) return cached;
   const [width, height] = UPGRADE_ENVELOPES[id];

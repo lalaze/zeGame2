@@ -23,7 +23,9 @@ const retained = { 'cabinet-top': 'main-v1/cabinet-top.png', 'cabinet-front': 'm
   'chair-left': 'main-v2/chair-facing-left.png', vase: 'main-v2/flower-vase.png' } as const;
 const fileBytes = (file: string) => readFileSync(new URL(`../../${file}`, import.meta.url));
 const hash = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
-const fileFor = (id: StaticId, packed: boolean) => packed ? `public/art/generated/${GENERATED_MAIN_ASSETS[id]}` : archive.images.find(row => row.key === id)!.file;
+// Archive comparisons exercise the frozen v1 export, independently of whichever
+// generation the live registry currently selects. Current overrides are tested below.
+const fileFor = (id: StaticId, packed: boolean) => packed ? `public/art/generated/${runtime.assets[id]}` : archive.images.find(row => row.key === id)!.file;
 const size = (file: string) => { const png = fileBytes(file); return [png.readUInt32BE(16), png.readUInt32BE(20)] as const; };
 type Source = HTMLCanvasElement & { assetId?: string };
 const fakeSource = (id: string, width: number, height: number) => ({ assetId: id, width, height }) as Source;
@@ -80,7 +82,7 @@ function roomRecord(packed: boolean, value: GameState, hour = 12, counter = 'cou
 afterEach(() => { clearGeneratedMainAssets(); vi.unstubAllGlobals(); });
 
 describe('main static archive and exact production geometry', () => {
-  it('keeps sixteen immutable originals, exact hashes, unique exports and all seven excluded URLs', () => {
+  it('keeps sixteen immutable originals, exact hashes, unique exports and all seven excluded originals', () => {
     expect(archive.images).toHaveLength(16); expect(ids).toHaveLength(16);
     expect(new Set(archive.images.map(row => row.key)).size).toBe(16);
     for (const entry of archive.images) {
@@ -88,10 +90,14 @@ describe('main static archive and exact production geometry', () => {
       expect(original.length).toBe(entry.bytes); expect(hash(original)).toBe(entry.sha256);
       expect(row.source).toBe(entry.file); expect(row.sourceSha256).toBe(entry.sha256);
       expect(hash(fileBytes(row.file))).toBe(row.sha256);
-      expect(`public/art/generated/${GENERATED_MAIN_ASSETS[entry.key as StaticId]}`).toBe(row.file);
+      expect(`public/art/generated/${runtime.assets[entry.key as StaticId]}`).toBe(row.file);
       expect(row.file).not.toBe(entry.previousPublicFile);
     }
-    for (const [id, path] of Object.entries(retained)) expect(GENERATED_MAIN_ASSETS[id as keyof typeof retained]).toBe(path);
+    for (const [id, path] of Object.entries(retained)) {
+      expect(runtime.assets).not.toHaveProperty(id);
+      expect(catalog.assets).not.toHaveProperty(id);
+      expect(size(`public/art/generated/${path}`).every(axis => axis > 0)).toBe(true);
+    }
     expect(catalog.images.filter(row => row.key.startsWith('signature-'))).toHaveLength(14);
     expect(runtime.customerManifests).toHaveLength(30); expect(runtime.catManifests).toHaveLength(12);
   });
@@ -123,6 +129,49 @@ describe('main static archive and exact production geometry', () => {
       expect(generatedRasterGeometry(source, { ...base, [field]: value } as unknown as GeneratedRasterMetadata)).toBeNull();
     }
     expect(generatedRasterGeometry(source, { ...base, productionContentSize: [base.size[0] - 1, base.size[1]] })).toBeNull();
+  });
+});
+
+describe('current cozy replacements remain compatible with authored geometry', () => {
+  const redraws = ['vine', 'display', ...foods, 'service-pickup', 'service-machine',
+    'service-cups', 'service-jars', 'service-basket', 'wall-board', 'wall-lamp'] as const;
+
+  it.each(redraws)('selects redrawn %s pixels while preserving its coordinate and destination contract', id => {
+    const expected = `${(foods as readonly string[]).includes(id) ? 'cozy-menu-v2' : 'cozy-world-v2'}/${id}.png`;
+    expect(GENERATED_MAIN_ASSETS[id]).toBe(expected);
+    const file = `public/art/generated/${expected}`, dimensions = size(file), meta = metadata[id];
+    expect(hash(fileBytes(file))).not.toBe(hash(fileBytes(fileFor(id, true))));
+    // New art uses the same authored canvas, so old attachment coordinates and
+    // crop rectangles remain valid without pretending it is the archived pack.
+    expect(dimensions).toEqual(meta.originalSize);
+    const source = fakeSource(id, ...dimensions), geometry = generatedRasterGeometry(source, meta);
+    expect(geometry).not.toBeNull();
+    expect([geometry!.width, geometry!.height]).toEqual(meta.originalSize);
+    expect(geometry!.sourceScale).toBe(1);
+    expect([geometry!.contentWidth, geometry!.contentHeight]).toEqual(dimensions);
+    installGeneratedMainAsset(id, source);
+    expect(generatedMainRaster(id)).toEqual(geometry);
+    const output = new RecordingCanvas();
+    expect(paintGeneratedMain(output.context as unknown as CanvasRenderingContext2D, id, 7, 11, 29, 23)).toBe(true);
+    expect(output.draws).toHaveLength(1);
+    expect(output.draws[0].source).toBe(source);
+    expect(destination(output.draws[0])).toEqual([7, 11, 29, 23]);
+    expect(output.draws[0].smoothing).toBe(false);
+    expect(generatedRasterGeometry(fakeSource(id, dimensions[0] + 1, dimensions[1]), meta)).toBeNull();
+  });
+
+  it.each(foods)('publishes current %s art in the existing world and menu envelopes', id => {
+    const dimensions = size(`public/art/generated/${GENERATED_MAIN_ASSETS[id]}`);
+    const source = fakeSource(id, ...dimensions);
+    const art = createGeneratedFoodArt({ [id]: source }, { createCanvas: makeCanvas, rasterMetadata: metadata });
+    expect(art.readyIds).toEqual([id]);
+    const icon = art.icon(id, false)!, artwork = art.artwork(id)!;
+    expect([icon.width, icon.height]).toEqual(GENERATED_FOOD_ENVELOPES[id]);
+    expect(recorded(fineSpriteArt(icon).canvas).draws[0].source).toBe(source);
+    expect(recorded(fineSpriteArt(icon).canvas).draws[0].args.slice(0, 4)).toEqual([0, 0, ...dimensions]);
+    const archived = createGeneratedFoodArt({ [id]: fakeSource(id, ...size(fileFor(id, true))) },
+      { createCanvas: makeCanvas, rasterMetadata: metadata });
+    expect([artwork.width, artwork.height]).toEqual([archived.artwork(id)!.width, archived.artwork(id)!.height]);
   });
 });
 

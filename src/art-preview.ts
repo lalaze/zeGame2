@@ -1,5 +1,9 @@
 import { artArchive, type ArchiveFile } from './render/art-archive';
 import { preloadReferenceCharacters } from './render/reference-character-art';
+import { preloadArtCatalog } from './render/preload-art-catalog';
+import { generatedMainSource, getGeneratedCatAdapter } from './render/generated-main-art';
+import { COZY_KITCHEN_IDS } from './render/cozy-world-assets';
+import { fineSpriteArt } from './render/fine-sprite-art';
 import { makeSignatureId, type SignatureBase, type SignatureRecipe } from './game/signature-drinks';
 import { paintServiceCup, paintServiceTray, paintTableVase, paintTableTent } from './render/service-props-art';
 import { paintCallBubble, paintAckBubble, paintOrderFrame, paintSoldOutFrame, paintSoldOutCross, paintThoughtFrame } from './render/ui-art';
@@ -8,13 +12,13 @@ import { CATS } from './game/pets';
 import { INGREDIENTS, MENU, UPGRADES } from './game/data';
 import { DECOR } from './game/decor';
 import { FURNITURE } from './game/furniture';
-import { installedEquipment } from './game/kitchen';
-import { WINDOWS, sceneHeight, kitchenHeight, setKitchenLevel } from './game/layout';
+import { BENCH, BINS, DISH_PIT, PASTRY_FRIDGE, RACK, installedEquipment } from './game/kitchen';
+import { WINDOWS, sceneHeight, kitchenHeight, kitchenFloorY, setKitchenLevel } from './game/layout';
 import { createInitialState } from './game/state';
 import { t, setLocale, type MessageKey } from './i18n';
 import { decorIcon, paintCeiling } from './render/decor-art';
 import { furnitureIcon } from './render/furniture-art';
-import { paintKitchen } from './render/kitchen-art';
+import { paintBench, paintBins, paintDishPit, paintKitchen, paintPastryFridge, paintRack } from './render/kitchen-art';
 import { lightingAt } from './render/lighting';
 import { roomDepth } from './render/materials';
 import { paintRegion } from './render/region-art';
@@ -22,16 +26,34 @@ import { RoomPainter } from './render/room-art';
 import { catFrames, character, ingredientIcon, itemArtwork, upgradeIcon, heartSprite, dropSprite, crownSprite, type Role } from './render/sprites';
 
 async function startArtPreview(): Promise<void> {
-await preloadReferenceCharacters();
+await Promise.all([preloadReferenceCharacters(), preloadArtCatalog()]);
 setLocale('zh');
 type Asset = { id: string; group: string; name: string; canvas: HTMLCanvasElement };
 const assets: Asset[] = [];
 const roomAssets: ArchiveFile[] = [];
 const pngBytes = (canvas: HTMLCanvasElement) => Uint8Array.from(atob(canvas.toDataURL('image/png').split(',')[1]), (c) => c.charCodeAt(0));
-const add = (id: string, group: string, name: string, canvas: HTMLCanvasElement) => assets.push({ id, group, name, canvas });
+const add = (id: string, group: string, name: string, canvas: HTMLCanvasElement) => {
+  const source = fineSpriteArt(canvas).canvas;
+  const scale = Math.min(1, 120 / Math.max(source.width, source.height));
+  if (scale === 1) { assets.push({ id, group, name, canvas: source }); return; }
+  const exported = document.createElement('canvas');
+  exported.width = Math.max(1, Math.round(source.width * scale)); exported.height = Math.max(1, Math.round(source.height * scale));
+  const ctx = exported.getContext('2d')!; ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(source, 0, 0, exported.width, exported.height);
+  assets.push({ id, group, name, canvas: exported });
+};
 for (const item of MENU) add(`food/${item.id}`, '餐点', t(`item.${item.id}` as MessageKey), itemArtwork(item.id));
 for (const item of INGREDIENTS) add(`ingredient/${item.id}`, '食材', t(`ing.${item.id}` as MessageKey), ingredientIcon(item.id));
 for (const item of UPGRADES) add(`upgrade/${item.id}`, '设备', t(`upgrade.${item.id}.name` as MessageKey), upgradeIcon(item.id));
+for (const id of COZY_KITCHEN_IDS) {
+  const source = generatedMainSource(`cozy-kitchen-${id}`);
+  if (!source) continue;
+  const canvas = document.createElement('canvas'), scale = Math.min(96 / source.width, 96 / source.height);
+  canvas.width = Math.ceil(source.width * scale); canvas.height = Math.ceil(source.height * scale);
+  const ctx = canvas.getContext('2d')!; ctx.imageSmoothingEnabled = false;
+  ctx.drawImage(source, 0, 0, canvas.width, canvas.height);
+  add(`kitchen/${id}`, '设备', id, canvas);
+}
 for (const item of DECOR) add(`decor/${item.id}`, '装修', t(`decor.${item.id}` as MessageKey), decorIcon(item.id));
 for (const item of FURNITURE) add(`furniture/${item.id}`, item.category === 'decoration' ? '装饰' : '家具', t(`decor.${item.id}` as MessageKey), furnitureIcon(item.id));
 const roles: [Role, string][] = [['owner','店主'],['barista','咖啡师'],['server','服务员'],['cook','厨师'],['customer','顾客']];
@@ -50,7 +72,7 @@ for (const design of CUSTOMER_CAST) {
   add(`customer/${design.id}/sit-right`, '顾客造型', `${design.name} · 坐姿右`, frames.sitRight);
   for (const side of ['Left', 'Right'] as const) frames[`sitPet${side}`].forEach((canvas, frame) => add(`customer/${design.id}/sit-pet-${side.toLowerCase()}-${frame}`, '顾客造型', `${design.name} · 抚猫 ${side} ${frame + 1}`, canvas));
 }
-for (const cat of CATS) Object.entries(catFrames(cat.id)).forEach(([pose, value]) => {
+for (const cat of CATS) Object.entries(getGeneratedCatAdapter()?.resolve(cat.id, catFrames(cat.id)).frames ?? catFrames(cat.id)).forEach(([pose, value]) => {
   const entries = Array.isArray(value) ? value : [value];
   entries.forEach((canvas, i) => {
     const frame = entries.length > 1 ? `${pose}-${i}` : pose;
@@ -87,7 +109,8 @@ addPaint('ui/sold-out-cross', '售罄印章', 20, 18, paintSoldOutCross);
 addPaint('ui/thought', '心声云朵', 100, 24, c => paintThoughtFrame(c, 100, 24));
 
 const sheet = document.createElement('canvas');
-const cell = 128, columns = 10;
+const cell = Math.ceil((Math.max(...assets.flatMap(asset => [asset.canvas.width, asset.canvas.height])) + 8) / 16) * 16;
+const columns = 12;
 sheet.width = cell * columns; sheet.height = Math.ceil(assets.length / columns) * cell;
 const ctx = sheet.getContext('2d')!; ctx.imageSmoothingEnabled = false;
 const frames: Record<string, unknown> = {};
@@ -144,18 +167,26 @@ state.kitchen = true;
 setKitchenLevel(state.upgrades.cook);
 const light = lightingAt(10);
 for (const [id, name] of [['main', '主咖啡厅'], ['reading', '阅读室'], ['greenhouse', '玻璃花房'], ['terrace', '花园露台'], ['kitchen', '后厨']] as const) {
-  const canvas = document.createElement('canvas'); canvas.width = 320; canvas.height = id === 'kitchen' ? kitchenHeight() : sceneHeight();
-  const c = canvas.getContext('2d')!; c.imageSmoothingEnabled = false;
+  const height = id === 'kitchen' ? kitchenHeight() : sceneHeight();
+  const canvas = document.createElement('canvas'); canvas.width = 640; canvas.height = height * 2;
+  const c = canvas.getContext('2d')!; c.imageSmoothingEnabled = false; c.scale(2, 2);
   if (id === 'main') {
-    const p = new RoomPainter(c), decor = state.decor.equipped;
+    const p = new RoomPainter(c, 2), decor = state.decor.equipped;
     p.drawWall(decor.wallpaper, 0);
     for (const win of WINDOWS) p.drawWindow(win, light, 0, null);
-    p.drawMenuBoard(state); p.drawFloor(decor.floor, decor.rug, light, canvas.height);
+    p.drawMenuBoard(state); p.drawFloor(decor.floor, decor.rug, light, height);
     p.drawBackBar(state, decor.counter); p.drawServiceCupboards(decor.counter); p.drawCounter(state, decor.counter, 0, []);
     paintCeiling(c, decor.ceiling, 320, 0);
-  } else if (id === 'kitchen') paintKitchen(c, canvas.height, 0, false, installedEquipment(state), new Set());
-  else paintRegion(c, id, canvas.height, 0, light, false);
-  roomDepth(c, 320, canvas.height, 80, id === 'terrace');
+  } else if (id === 'kitchen') {
+    paintKitchen(c, height, 0, false, installedEquipment(state), new Set());
+    paintBench(c, BENCH.x + BENCH.w / 2, kitchenFloorY(BENCH.front), true, true);
+    paintRack(c, RACK.x, kitchenFloorY(RACK.foot), []);
+    paintPastryFridge(c, PASTRY_FRIDGE.x, kitchenFloorY(PASTRY_FRIDGE.foot), []);
+    paintBins(c, BINS.x, kitchenFloorY(BINS.foot));
+    paintDishPit(c, DISH_PIT.x, kitchenFloorY(DISH_PIT.foot));
+  }
+  else paintRegion(c, id, height, 0, light, false);
+  roomDepth(c, 320, height, 80, id === 'terrace');
   roomAssets.push({ name: `room-${id}.png`, bytes: pngBytes(canvas) });
   const link = document.createElement('a'); link.href = canvas.toDataURL(); link.download = `room-${id}.png`;
   const figure = document.createElement('figure'), caption = document.createElement('figcaption'); caption.textContent = name;

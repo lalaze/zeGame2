@@ -1,0 +1,44 @@
+{
+  "desktop": {
+    "rooms": [
+      "main",
+      "reading",
+      "greenhouse",
+      "terrace",
+      "kitchen"
+    ],
+    "screenshots": "images/",
+    "visuallyInspected": true
+  },
+  "mobile": {
+    "viewport": [
+      390,
+      844
+    ],
+    "scrollWidth": 390,
+    "horizontalOverflow": false
+  },
+  "cats": {
+    "readyBreeds": 12,
+    "frames": 168,
+    "actualScenePet": {
+      "reacted": true,
+      "selected": "ginger",
+      "careUnchanged": true
+    }
+  },
+  "gallery": {
+    "frames": 980,
+    "rooms": 5,
+    "atlas": [
+      1536,
+      10496
+    ],
+    "outOfBoundsFrames": 0,
+    "exportMaxFrame": 120,
+    "zipDownloaded": true,
+    "zipIntegrity": "passed"
+  },
+  "uncaughtBrowserErrors": 0,
+  "automationCleanup": "sessions closed; recommended process check empty"
+}

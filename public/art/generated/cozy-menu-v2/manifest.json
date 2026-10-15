@@ -1,0 +1,2285 @@
+{
+  "version": "cozy-menu-v2",
+  "generator": "built-in image_gen",
+  "processing": "Rectangular extraction; nearest-neighbor fit; transparent safety border. Original atlas alpha retained without threshold masking or recoloring.",
+  "assets": {
+    "espresso": {
+      "file": "espresso.png",
+      "source": "sources/coffee-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        0
+      ],
+      "sourceRect": {
+        "left": 49,
+        "top": 110,
+        "width": 217,
+        "height": 190
+      },
+      "outputSize": [
+        531,
+        459
+      ],
+      "contentRect": {
+        "left": 35,
+        "top": 28,
+        "width": 460,
+        "height": 403
+      },
+      "logicalEnvelope": [
+        12,
+        12
+      ],
+      "legacyOriginalSize": true,
+      "sha256": "734a9bfe690132c215a98e22ac8d2947e30e8da066e5f9d907a93ef214f4e5f8"
+    },
+    "americano": {
+      "file": "americano.png",
+      "source": "sources/coffee-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        0
+      ],
+      "sourceRect": {
+        "left": 366,
+        "top": 56,
+        "width": 239,
+        "height": 251
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 29,
+        "top": 10,
+        "width": 133,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "b6759d740dedb55f3c0cb41b21b8f958563c29454a7cd97c131493b77f017fe9"
+    },
+    "latte": {
+      "file": "latte.png",
+      "source": "sources/coffee-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        0
+      ],
+      "sourceRect": {
+        "left": 658,
+        "top": 83,
+        "width": 284,
+        "height": 213
+      },
+      "outputSize": [
+        682,
+        540
+      ],
+      "contentRect": {
+        "left": 32,
+        "top": 38,
+        "width": 618,
+        "height": 464
+      },
+      "logicalEnvelope": [
+        12,
+        11
+      ],
+      "legacyOriginalSize": true,
+      "sha256": "fb67bcec04dfdbf9de84ab295776dadbfd63d9f8792ed6466b4c4de27f4bd77f"
+    },
+    "cappuccino": {
+      "file": "cappuccino.png",
+      "source": "sources/coffee-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        3,
+        0
+      ],
+      "sourceRect": {
+        "left": 970,
+        "top": 70,
+        "width": 266,
+        "height": 231
+      },
+      "outputSize": [
+        192,
+        176
+      ],
+      "contentRect": {
+        "left": 11,
+        "top": 14,
+        "width": 170,
+        "height": 148
+      },
+      "logicalEnvelope": [
+        12,
+        11
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "2faa6277c9fe940cd4105bbff541a50b0ba51d5ee84c365ef0ae92744ff58e32"
+    },
+    "flatwhite": {
+      "file": "flatwhite.png",
+      "source": "sources/coffee-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        1
+      ],
+      "sourceRect": {
+        "left": 29,
+        "top": 401,
+        "width": 303,
+        "height": 226
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 10,
+        "top": 16,
+        "width": 172,
+        "height": 128
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "9101da060f6a8aaa1268edf7b93cb61b377d2660f85932c8212b11a7d7264f27"
+    },
+    "cortado": {
+      "file": "cortado.png",
+      "source": "sources/coffee-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        1
+      ],
+      "sourceRect": {
+        "left": 390,
+        "top": 394,
+        "width": 187,
+        "height": 228
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 38,
+        "top": 10,
+        "width": 115,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "3e98fd3e2b353b631a0d26a59a9e3a9bb94ad5eba43a3bdbf984cf142aa07f7a"
+    },
+    "mocha": {
+      "file": "mocha.png",
+      "source": "sources/coffee-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        1
+      ],
+      "sourceRect": {
+        "left": 675,
+        "top": 359,
+        "width": 267,
+        "height": 263
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 25,
+        "top": 10,
+        "width": 142,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "2628d5cd861f9194cf081b7b5c33f8d540446c0d544150202fb0ab706c1e8c71"
+    },
+    "vienna": {
+      "file": "vienna.png",
+      "source": "sources/coffee-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        3,
+        1
+      ],
+      "sourceRect": {
+        "left": 1010,
+        "top": 324,
+        "width": 208,
+        "height": 307
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 48,
+        "top": 10,
+        "width": 95,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "11383ca52b1d8e1b98c1c810c12d71824389ada538d853feec7398b5c9b25bc4"
+    },
+    "macchiato": {
+      "file": "macchiato.png",
+      "source": "sources/coffee-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        2
+      ],
+      "sourceRect": {
+        "left": 52,
+        "top": 711,
+        "width": 235,
+        "height": 192
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 10,
+        "top": 10,
+        "width": 171,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "37b6ace572343e6b1ef5e8f135527d67e982039580268e3dfc4f99a15b01fa57"
+    },
+    "coldbrew": {
+      "file": "coldbrew.png",
+      "source": "sources/coffee-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        2
+      ],
+      "sourceRect": {
+        "left": 368,
+        "top": 665,
+        "width": 219,
+        "height": 240
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 32,
+        "top": 10,
+        "width": 128,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "7c0e55c462f13db4893b3888d43358b3dbdd7afc1760b75bf4950922e1c158f1"
+    },
+    "dirty": {
+      "file": "dirty.png",
+      "source": "sources/coffee-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        2
+      ],
+      "sourceRect": {
+        "left": 687,
+        "top": 677,
+        "width": 199,
+        "height": 232
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 36,
+        "top": 10,
+        "width": 120,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "e4c2dc1b27557dd9a641ef471ea2472bf9c154d755bcc761ec77ad504a23819f"
+    },
+    "pourover": {
+      "file": "pourover.png",
+      "source": "sources/coffee-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        3,
+        2
+      ],
+      "sourceRect": {
+        "left": 993,
+        "top": 644,
+        "width": 223,
+        "height": 277
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 39,
+        "top": 10,
+        "width": 113,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "276419f0bd6ac864ea8d2bacecb82c05389978333017a709323e1affdc64138b"
+    },
+    "creamcoffee": {
+      "file": "creamcoffee.png",
+      "source": "sources/coffee-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        3
+      ],
+      "sourceRect": {
+        "left": 75,
+        "top": 948,
+        "width": 194,
+        "height": 250
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 41,
+        "top": 10,
+        "width": 109,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "78f9ee8e9650f94d770d0319a6a5c897f63016d632709c7a65ff75429ac3248f"
+    },
+    "affogato": {
+      "file": "affogato.png",
+      "source": "sources/coffee-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        3
+      ],
+      "sourceRect": {
+        "left": 351,
+        "top": 960,
+        "width": 247,
+        "height": 238
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 23,
+        "top": 10,
+        "width": 145,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "03eaddf70e1e8cf89c65f8078fd7096d5a8ec093df845f07e0907f8147c3102e"
+    },
+    "blacktea": {
+      "file": "blacktea.png",
+      "source": "sources/drinks-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        0
+      ],
+      "sourceRect": {
+        "left": 16,
+        "top": 146,
+        "width": 299,
+        "height": 251
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 12,
+        "top": 10,
+        "width": 167,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "0db675c4312d32c85f059a1e923cb21e2d5353b43d4cc4312e5511810fafff83"
+    },
+    "hotchoc": {
+      "file": "hotchoc.png",
+      "source": "sources/drinks-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        0
+      ],
+      "sourceRect": {
+        "left": 367,
+        "top": 132,
+        "width": 261,
+        "height": 257
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 25,
+        "top": 10,
+        "width": 142,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "6ecfb9fb7cd031098df76e803add6a5cbd9566d56a5465c88a28968d8e4f57a9"
+    },
+    "lemontea": {
+      "file": "lemontea.png",
+      "source": "sources/drinks-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        0
+      ],
+      "sourceRect": {
+        "left": 655,
+        "top": 124,
+        "width": 270,
+        "height": 264
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 24,
+        "top": 10,
+        "width": 143,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "ab01febe4db834d5c8b5632d119e6abe84cd70ae093cbbd2d0d8012d90c0d5b2"
+    },
+    "chai": {
+      "file": "chai.png",
+      "source": "sources/drinks-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        3,
+        0
+      ],
+      "sourceRect": {
+        "left": 980,
+        "top": 114,
+        "width": 266,
+        "height": 279
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 29,
+        "top": 10,
+        "width": 133,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "8bd9258224c0cf79bbda91c160d1c6f53af31e371e53c8b9c947a541a923c22d"
+    },
+    "fruittea": {
+      "file": "fruittea.png",
+      "source": "sources/drinks-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        1
+      ],
+      "sourceRect": {
+        "left": 31,
+        "top": 507,
+        "width": 283,
+        "height": 240
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 13,
+        "top": 10,
+        "width": 165,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "d3775ce2f6beef13900a678332448d2ee3680b466f59bd8737b1289667d38205"
+    },
+    "hojicha": {
+      "file": "hojicha.png",
+      "source": "sources/drinks-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        1
+      ],
+      "sourceRect": {
+        "left": 349,
+        "top": 503,
+        "width": 253,
+        "height": 244
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 23,
+        "top": 10,
+        "width": 145,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "990d380ad2fc726a07f0ffe0661e7b8883fc4fc00f82550464f88766ec8505be"
+    },
+    "matcha": {
+      "file": "matcha.png",
+      "source": "sources/drinks-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        1
+      ],
+      "sourceRect": {
+        "left": 654,
+        "top": 501,
+        "width": 260,
+        "height": 247
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 22,
+        "top": 10,
+        "width": 147,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "7ffe867d73b644f962e6b7da5f55db94fdccd360c4f25f330d4377f85057c043"
+    },
+    "frappe": {
+      "file": "frappe.png",
+      "source": "sources/drinks-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        3,
+        1
+      ],
+      "sourceRect": {
+        "left": 971,
+        "top": 447,
+        "width": 254,
+        "height": 323
+      },
+      "outputSize": [
+        192,
+        176
+      ],
+      "contentRect": {
+        "left": 35,
+        "top": 11,
+        "width": 121,
+        "height": 154
+      },
+      "logicalEnvelope": [
+        12,
+        11
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "8c6382e38f3c8267748c172d7022e89d04da2948db8edf560f88a983d2b4a48e"
+    },
+    "smoothie": {
+      "file": "smoothie.png",
+      "source": "sources/drinks-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        2
+      ],
+      "sourceRect": {
+        "left": 44,
+        "top": 818,
+        "width": 244,
+        "height": 332
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 44,
+        "top": 10,
+        "width": 103,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "dc12f968a713689aadab977fb7160f57973a05074297ac7d5fe4831018fd475c"
+    },
+    "milktea": {
+      "file": "milktea.png",
+      "source": "sources/drinks-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        2
+      ],
+      "sourceRect": {
+        "left": 343,
+        "top": 818,
+        "width": 259,
+        "height": 331
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 41,
+        "top": 10,
+        "width": 110,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "4d8246b40565e63aff147d56ff3d0b1cdad0f102223e52d8427e867eb259b999"
+    },
+    "matchafloat": {
+      "file": "matchafloat.png",
+      "source": "sources/drinks-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        2
+      ],
+      "sourceRect": {
+        "left": 660,
+        "top": 846,
+        "width": 253,
+        "height": 304
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 37,
+        "top": 10,
+        "width": 117,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "85a0b59574a53b17f995071c99d2a5c145f72c2c6eb83c53681fd8f87448883e"
+    },
+    "roll": {
+      "file": "roll.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        0
+      ],
+      "sourceRect": {
+        "left": 35,
+        "top": 86,
+        "width": 247,
+        "height": 220
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 25,
+        "top": 9,
+        "width": 141,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "d1dc7ec2e54132516daf4a3c34f68ce106af33a6fd0299cd7f5b2d7fc5b79f49"
+    },
+    "bagel": {
+      "file": "bagel.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        0
+      ],
+      "sourceRect": {
+        "left": 336,
+        "top": 70,
+        "width": 273,
+        "height": 238
+      },
+      "outputSize": [
+        192,
+        128
+      ],
+      "contentRect": {
+        "left": 32,
+        "top": 8,
+        "width": 128,
+        "height": 112
+      },
+      "logicalEnvelope": [
+        12,
+        8
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "a2115a28fb9c281ed3b69031a69145a87250870ad0422f9bb4ca4bd3bd126494"
+    },
+    "baguette": {
+      "file": "baguette.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        0
+      ],
+      "sourceRect": {
+        "left": 652,
+        "top": 64,
+        "width": 267,
+        "height": 246
+      },
+      "outputSize": [
+        192,
+        176
+      ],
+      "contentRect": {
+        "left": 12,
+        "top": 11,
+        "width": 167,
+        "height": 154
+      },
+      "logicalEnvelope": [
+        12,
+        11
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "b868fa7abf8495e16a6b993f338998cf5e3e6bf5c8ad5878c31d85d9d699cae7"
+    },
+    "cheesebun": {
+      "file": "cheesebun.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        3,
+        0
+      ],
+      "sourceRect": {
+        "left": 968,
+        "top": 87,
+        "width": 255,
+        "height": 223
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 24,
+        "top": 9,
+        "width": 144,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "35182a622daca8751b434bbc409d199ce78247c17c1310d1f6ca6b1caae57616"
+    },
+    "pretzel": {
+      "file": "pretzel.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        1
+      ],
+      "sourceRect": {
+        "left": 30,
+        "top": 372,
+        "width": 262,
+        "height": 235
+      },
+      "outputSize": [
+        192,
+        176
+      ],
+      "contentRect": {
+        "left": 11,
+        "top": 12,
+        "width": 170,
+        "height": 152
+      },
+      "logicalEnvelope": [
+        12,
+        11
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "ef860fc93ee85bab786faaa83087487ad651b87b45f18686ef0d86b739b8fc4f"
+    },
+    "focaccia": {
+      "file": "focaccia.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        1
+      ],
+      "sourceRect": {
+        "left": 315,
+        "top": 366,
+        "width": 303,
+        "height": 249
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 19,
+        "top": 9,
+        "width": 153,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "2e99b7556d8be73f89d7f66eff8835851a754a95b25113096dcaf94a6fa0b7ad"
+    },
+    "ciabatta": {
+      "file": "ciabatta.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        1
+      ],
+      "sourceRect": {
+        "left": 637,
+        "top": 384,
+        "width": 294,
+        "height": 230
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 15,
+        "top": 9,
+        "width": 161,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "907097c076007536fad931af92815a43fc6dc3e4d20eb76ddb48ec62d7f15406"
+    },
+    "raisinbread": {
+      "file": "raisinbread.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        3,
+        1
+      ],
+      "sourceRect": {
+        "left": 955,
+        "top": 356,
+        "width": 281,
+        "height": 262
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 28,
+        "top": 9,
+        "width": 135,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "311b8c2f091139152522602b48e376b3990295c4571a76aeb9729320b501093f"
+    },
+    "sourdough": {
+      "file": "sourdough.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        2
+      ],
+      "sourceRect": {
+        "left": 22,
+        "top": 656,
+        "width": 284,
+        "height": 248
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 24,
+        "top": 9,
+        "width": 144,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "d3216c12a3520d1a28d9576dfa73bddd10b5dea48d3965afc7a0e035d5da4e9d"
+    },
+    "rye": {
+      "file": "rye.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        2
+      ],
+      "sourceRect": {
+        "left": 335,
+        "top": 673,
+        "width": 278,
+        "height": 230
+      },
+      "outputSize": [
+        192,
+        128
+      ],
+      "contentRect": {
+        "left": 28,
+        "top": 8,
+        "width": 135,
+        "height": 112
+      },
+      "logicalEnvelope": [
+        12,
+        8
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "948511251c688ce1380a7720d5bd38f3d3c3f36f4afb38d058444f18885419f2"
+    },
+    "chocobread": {
+      "file": "chocobread.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        2
+      ],
+      "sourceRect": {
+        "left": 646,
+        "top": 658,
+        "width": 294,
+        "height": 244
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 20,
+        "top": 9,
+        "width": 152,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "9e9f0570f5fe818b8afbb03ff5fcae7190501116dba09aceb20ed098e3ddf6e0"
+    },
+    "shokupan": {
+      "file": "shokupan.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        3,
+        2
+      ],
+      "sourceRect": {
+        "left": 955,
+        "top": 650,
+        "width": 279,
+        "height": 267
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 23,
+        "top": 10,
+        "width": 146,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "04808114f8e7e69778479f46bb827000cb7dcf8b033924ad7986060cc0ca129d"
+    },
+    "brioche": {
+      "file": "brioche.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        3
+      ],
+      "sourceRect": {
+        "left": 33,
+        "top": 949,
+        "width": 255,
+        "height": 239
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 29,
+        "top": 9,
+        "width": 134,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "9aba10416c7b274c7bfe0745224448b21675f17c6e3223ab3dffeb330b277723"
+    },
+    "fruitbrioche": {
+      "file": "fruitbrioche.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        3
+      ],
+      "sourceRect": {
+        "left": 340,
+        "top": 949,
+        "width": 261,
+        "height": 243
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 28,
+        "top": 9,
+        "width": 135,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "c6d52284b744460623c2d4fff48ae39ab7551c6dd6f4afcdd9f33d4ac5857ba9"
+    },
+    "garlicbread": {
+      "file": "garlicbread.png",
+      "source": "sources/bread-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        3
+      ],
+      "sourceRect": {
+        "left": 642,
+        "top": 960,
+        "width": 276,
+        "height": 235
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 22,
+        "top": 9,
+        "width": 148,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "247d8947796d66dac60fb6309bfce957cbf05453d23acd8b31092eee46d13e60"
+    },
+    "donut": {
+      "file": "donut.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        0
+      ],
+      "sourceRect": {
+        "left": 50,
+        "top": 99,
+        "width": 260,
+        "height": 215
+      },
+      "outputSize": [
+        192,
+        128
+      ],
+      "contentRect": {
+        "left": 28,
+        "top": 8,
+        "width": 135,
+        "height": 112
+      },
+      "logicalEnvelope": [
+        12,
+        8
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "f0e1beb2a0a98aa6ed67bec2e41928c445e25f4053b6fd9508c046030464a6fe"
+    },
+    "scone": {
+      "file": "scone.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        0
+      ],
+      "sourceRect": {
+        "left": 354,
+        "top": 85,
+        "width": 253,
+        "height": 229
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 26,
+        "top": 9,
+        "width": 139,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "8f6831062a7b8f0b48e27ca3c3a5cf5ad761be1ebeac974b3b36ab048e3f5fa6"
+    },
+    "cookie": {
+      "file": "cookie.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        0
+      ],
+      "sourceRect": {
+        "left": 653,
+        "top": 85,
+        "width": 250,
+        "height": 229
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 27,
+        "top": 9,
+        "width": 138,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "c8db8471ed2b87e889f426f61c2aef150b0ed3a9609aa74fbd5d73620a0ac7d7"
+    },
+    "croissant": {
+      "file": "croissant.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        3,
+        0
+      ],
+      "sourceRect": {
+        "left": 937,
+        "top": 93,
+        "width": 282,
+        "height": 221
+      },
+      "outputSize": [
+        437,
+        293
+      ],
+      "contentRect": {
+        "left": 54,
+        "top": 18,
+        "width": 328,
+        "height": 257
+      },
+      "logicalEnvelope": [
+        12,
+        8
+      ],
+      "legacyOriginalSize": true,
+      "sha256": "38f31ef8aef9ef6da1e7f1c0edeed688b3a36852db4c1fa0535b5fc543c2fb69"
+    },
+    "painchoc": {
+      "file": "painchoc.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        1
+      ],
+      "sourceRect": {
+        "left": 40,
+        "top": 376,
+        "width": 273,
+        "height": 223
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 19,
+        "top": 9,
+        "width": 154,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "c7c85e80855b2829bbc8c4b625d8f71e711bcaca193e749fbfabf07e2710888f"
+    },
+    "brownie": {
+      "file": "brownie.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        1
+      ],
+      "sourceRect": {
+        "left": 357,
+        "top": 379,
+        "width": 251,
+        "height": 228
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 26,
+        "top": 9,
+        "width": 139,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "67e80005cefa29e2262149c9ca0be8616bd0f3b17850fcb5aa10a8460709c124"
+    },
+    "cinnamon": {
+      "file": "cinnamon.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        1
+      ],
+      "sourceRect": {
+        "left": 653,
+        "top": 376,
+        "width": 266,
+        "height": 231
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 23,
+        "top": 9,
+        "width": 145,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "ba4e026bf112a49601a14359a235776c2566b2695a09e0e4a6fed8a692f21000"
+    },
+    "muffin": {
+      "file": "muffin.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        3,
+        1
+      ],
+      "sourceRect": {
+        "left": 972,
+        "top": 368,
+        "width": 238,
+        "height": 239
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 33,
+        "top": 9,
+        "width": 125,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "66b3269ced5071a137100838571e57b3c6c336a838c060b3434ae57a70327e3e"
+    },
+    "creampuff": {
+      "file": "creampuff.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        2
+      ],
+      "sourceRect": {
+        "left": 49,
+        "top": 648,
+        "width": 242,
+        "height": 246
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 27,
+        "top": 10,
+        "width": 138,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "3e2bcc5bcf8652b84806af2e8ed8f508ba3d25fb58f3a6c51706f6063729c1cd"
+    },
+    "melonpan": {
+      "file": "melonpan.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        2
+      ],
+      "sourceRect": {
+        "left": 345,
+        "top": 669,
+        "width": 267,
+        "height": 221
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 20,
+        "top": 9,
+        "width": 152,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "3af81d5b1fa2ccbfa621779ed93287007744bfbef1fe3d17963384082548bfe5"
+    },
+    "eggtart": {
+      "file": "eggtart.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        2
+      ],
+      "sourceRect": {
+        "left": 653,
+        "top": 669,
+        "width": 266,
+        "height": 221
+      },
+      "outputSize": [
+        613,
+        473
+      ],
+      "contentRect": {
+        "left": 55,
+        "top": 28,
+        "width": 502,
+        "height": 417
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": true,
+      "sha256": "e5a153c1a9c6309d77120b53eb043e72a2498a4eabcb1b6f9c4a0f625671e725"
+    },
+    "cake": {
+      "file": "cake.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        3,
+        2
+      ],
+      "sourceRect": {
+        "left": 963,
+        "top": 639,
+        "width": 254,
+        "height": 267
+      },
+      "outputSize": [
+        336,
+        327
+      ],
+      "contentRect": {
+        "left": 31,
+        "top": 20,
+        "width": 273,
+        "height": 287
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": true,
+      "sha256": "ec593e57a19fbfabeccdf02d7ebab08c7af8060fc7b03a2e4c1a5fe11b0d38a7"
+    },
+    "swissroll": {
+      "file": "swissroll.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        3
+      ],
+      "sourceRect": {
+        "left": 41,
+        "top": 941,
+        "width": 272,
+        "height": 239
+      },
+      "outputSize": [
+        192,
+        176
+      ],
+      "contentRect": {
+        "left": 11,
+        "top": 13,
+        "width": 170,
+        "height": 149
+      },
+      "logicalEnvelope": [
+        12,
+        11
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "a9a7568d14937cd329763e293c0f91e3971dc0de2d585dd16f3462859adc0295"
+    },
+    "cheesecake": {
+      "file": "cheesecake.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        3
+      ],
+      "sourceRect": {
+        "left": 358,
+        "top": 959,
+        "width": 262,
+        "height": 210
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 10,
+        "top": 11,
+        "width": 172,
+        "height": 138
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "e5004c2ac808fb167195c21fb65f9020529ca6c0063e3449d4751eb513567c94"
+    },
+    "macaron": {
+      "file": "macaron.png",
+      "source": "sources/dessert-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        3
+      ],
+      "sourceRect": {
+        "left": 664,
+        "top": 949,
+        "width": 269,
+        "height": 227
+      },
+      "outputSize": [
+        192,
+        192
+      ],
+      "contentRect": {
+        "left": 12,
+        "top": 25,
+        "width": 168,
+        "height": 142
+      },
+      "logicalEnvelope": [
+        12,
+        12
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "84589fcd5e7fe8e98c894c7012dd1c008b6cfe51627a3a59269cb9175e98d1f1"
+    },
+    "ingredient-beans": {
+      "file": "ingredient-beans.png",
+      "source": "sources/pantry-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        0
+      ],
+      "sourceRect": {
+        "left": 101,
+        "top": 274,
+        "width": 195,
+        "height": 185
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 22,
+        "top": 10,
+        "width": 148,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "8a50eef789b7e3e2962215a53bd283145ca2bc1ce10ed063dcff3636b97a82eb"
+    },
+    "ingredient-milk": {
+      "file": "ingredient-milk.png",
+      "source": "sources/pantry-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        0
+      ],
+      "sourceRect": {
+        "left": 416,
+        "top": 241,
+        "width": 137,
+        "height": 218
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 52,
+        "top": 10,
+        "width": 88,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "56e874de26244c107b71da0a35dd216d747bfc7c3f203030aa98b28bc04cd758"
+    },
+    "ingredient-flour": {
+      "file": "ingredient-flour.png",
+      "source": "sources/pantry-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        0
+      ],
+      "sourceRect": {
+        "left": 677,
+        "top": 253,
+        "width": 188,
+        "height": 206
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 32,
+        "top": 10,
+        "width": 128,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "b28938dd974a72d70a39649ba8101d55a6443810a02cb1e23114a07f02194e2e"
+    },
+    "ingredient-butter": {
+      "file": "ingredient-butter.png",
+      "source": "sources/pantry-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        3,
+        0
+      ],
+      "sourceRect": {
+        "left": 948,
+        "top": 289,
+        "width": 248,
+        "height": 164
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 9,
+        "top": 14,
+        "width": 174,
+        "height": 115
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "07de5305b9bda50881b6e362bc6c70cfe3d3b1a6f893f76c8576328a7c6adfaa"
+    },
+    "ingredient-eggs": {
+      "file": "ingredient-eggs.png",
+      "source": "sources/pantry-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        1
+      ],
+      "sourceRect": {
+        "left": 85,
+        "top": 577,
+        "width": 206,
+        "height": 181
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 24,
+        "top": 9,
+        "width": 143,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "8a2d3ecb646c49177003a93be5b9e42373bda8ede338c45e9d51e8b8b73e9f87"
+    },
+    "ingredient-sugar": {
+      "file": "ingredient-sugar.png",
+      "source": "sources/pantry-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        1
+      ],
+      "sourceRect": {
+        "left": 388,
+        "top": 573,
+        "width": 177,
+        "height": 180
+      },
+      "outputSize": [
+        192,
+        128
+      ],
+      "contentRect": {
+        "left": 41,
+        "top": 8,
+        "width": 110,
+        "height": 112
+      },
+      "logicalEnvelope": [
+        12,
+        8
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "af4fc23f915f4ceefb71221fc6d258e20ab8514b3762b9c7f1b4dc26011c59d3"
+    },
+    "ingredient-tea": {
+      "file": "ingredient-tea.png",
+      "source": "sources/pantry-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        1
+      ],
+      "sourceRect": {
+        "left": 676,
+        "top": 578,
+        "width": 199,
+        "height": 170
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 14,
+        "top": 10,
+        "width": 164,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "2790ee8d7f24b05af210287f46ce69dc4e50db1c943c9b36daab68dcca2463cc"
+    },
+    "ingredient-spice": {
+      "file": "ingredient-spice.png",
+      "source": "sources/pantry-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        3,
+        1
+      ],
+      "sourceRect": {
+        "left": 983,
+        "top": 575,
+        "width": 188,
+        "height": 188
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 26,
+        "top": 10,
+        "width": 140,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "5f9a0c8f0257aa1fa1854434ee07d75475b3b34ca52ab412e4897d7ed20ad5c5"
+    },
+    "ingredient-cocoa": {
+      "file": "ingredient-cocoa.png",
+      "source": "sources/pantry-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        0,
+        2
+      ],
+      "sourceRect": {
+        "left": 115,
+        "top": 881,
+        "width": 155,
+        "height": 195
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 40,
+        "top": 10,
+        "width": 111,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "33c179cdd92f3058b0c7269a0e00c631fa3c13646560acf5e7157c4a02631d67"
+    },
+    "ingredient-cream": {
+      "file": "ingredient-cream.png",
+      "source": "sources/pantry-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        1,
+        2
+      ],
+      "sourceRect": {
+        "left": 401,
+        "top": 894,
+        "width": 177,
+        "height": 176
+      },
+      "outputSize": [
+        192,
+        144
+      ],
+      "contentRect": {
+        "left": 32,
+        "top": 9,
+        "width": 127,
+        "height": 126
+      },
+      "logicalEnvelope": [
+        12,
+        9
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "4112f5ddbdfad27c33ca9ab6ed1a86fa66438fa30beafd491546b34dbcde62b3"
+    },
+    "ingredient-fruit": {
+      "file": "ingredient-fruit.png",
+      "source": "sources/pantry-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        2,
+        2
+      ],
+      "sourceRect": {
+        "left": 659,
+        "top": 879,
+        "width": 214,
+        "height": 196
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 19,
+        "top": 10,
+        "width": 153,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "05226f0334f1c4abd461c585eb19db37984fa56315edb06f1ea6a2538448b1f9"
+    },
+    "ingredient-matcha": {
+      "file": "ingredient-matcha.png",
+      "source": "sources/pantry-atlas.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "cell": [
+        3,
+        2
+      ],
+      "sourceRect": {
+        "left": 975,
+        "top": 898,
+        "width": 199,
+        "height": 176
+      },
+      "outputSize": [
+        192,
+        160
+      ],
+      "contentRect": {
+        "left": 17,
+        "top": 10,
+        "width": 158,
+        "height": 140
+      },
+      "logicalEnvelope": [
+        12,
+        10
+      ],
+      "legacyOriginalSize": false,
+      "sha256": "fd5be4da1b0454e3611605ec2e0d72a55fc57f3316410c18e393c52e7a042058"
+    }
+  }
+}

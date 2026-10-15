@@ -1,4 +1,5 @@
 import runtimeSignature from '../../assets/generated/runtime-catalog-v1/signature.json';
+import { COZY_SIGNATURE_VESSELS } from './cozy-signature-registration';
 import { BASE_INGREDIENT, SIGNATURE_ADDONS, signatureDefinition, type SignatureBase, type SignatureDefinition } from '../game/signature-drinks';
 import type { IngredientId } from '../game/data';
 import { registerFineSpriteArt } from './fine-sprite-art';
@@ -10,12 +11,7 @@ export const generatedSignatureKey = (id: GeneratedSignatureId) => `signature-${
 export const GENERATED_SIGNATURE_ASSETS = Object.fromEntries(GENERATED_SIGNATURE_IDS.map(id => [generatedSignatureKey(id), `catalog-v1/signature/${id}.png`])) as Record<`signature-${GeneratedSignatureId}`,string>;
 type Vessel = { size: readonly [number,number]; rim: readonly [number,number,number,number]; body?: readonly (readonly [number,number])[] };
 /** Explicit proposed source-local geometry, not color-derived masks. Requires rendered visual review. */
-export const SIGNATURE_VESSELS: Readonly<Record<SignatureBase,Vessel>> = {
- coffee:{size:[415,369],rim:[191,154,122,62]},
- tea:{size:[357,369],rim:[150,116,111,42],body:[[44,118],[249,118],[223,291],[89,302]]},
- milk:{size:[250,374],rim:[118,63,92,32],body:[[28,63],[209,63],[187,290],[56,290]]},
- fruit:{size:[310,374],rim:[150,73,106,31],body:[[49,73],[254,73],[224,301],[80,301]]},
-};
+export const SIGNATURE_VESSELS: Readonly<Record<SignatureBase,Vessel>> = COZY_SIGNATURE_VESSELS;
 const META: Record<GeneratedSignatureId,{size:readonly[number,number];anchor:readonly[number,number];width:number}> = {
  'cup-coffee':{size:[415,369],anchor:[221,336],width:368},'cup-tea':{size:[357,369],anchor:[183,331],width:332},
  'cup-milk':{size:[250,374],anchor:[118,353],width:220},'cup-fruit':{size:[310,374],anchor:[150.5,357],width:241},

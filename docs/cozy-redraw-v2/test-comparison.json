@@ -1,0 +1,13 @@
+{
+  "baselineFailures": 118,
+  "currentFailures": 118,
+  "added": [],
+  "removed": [],
+  "baseline": "HEAD 619363d",
+  "tests": {
+    "passed": 2346,
+    "failed": 114,
+    "skipped": 41
+  },
+  "build": "passed"
+}

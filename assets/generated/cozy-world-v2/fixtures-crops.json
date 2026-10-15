@@ -1,0 +1,142 @@
+[
+  {
+    "id": "kitchen-bench",
+    "file": "public/art/generated/cozy-world-v2/kitchen-bench.png",
+    "size": [
+      696,
+      206
+    ],
+    "bounds": [
+      8,
+      8,
+      680,
+      190
+    ],
+    "sourceBox": [
+      22,
+      108,
+      680,
+      190
+    ]
+  },
+  {
+    "id": "display",
+    "file": "public/art/generated/cozy-world-v2/display.png",
+    "size": [
+      1941,
+      521
+    ],
+    "bounds": [
+      323,
+      8,
+      1295,
+      505
+    ],
+    "sourceBox": [
+      723,
+      103,
+      513,
+      200
+    ]
+  },
+  {
+    "id": "kitchen-hood",
+    "file": "public/art/generated/cozy-world-v2/kitchen-hood.png",
+    "size": [
+      536,
+      188
+    ],
+    "bounds": [
+      8,
+      8,
+      520,
+      172
+    ],
+    "sourceBox": [
+      22,
+      452,
+      520,
+      172
+    ]
+  },
+  {
+    "id": "wall-board",
+    "file": "public/art/generated/cozy-world-v2/wall-board.png",
+    "size": [
+      818,
+      412
+    ],
+    "bounds": [
+      48,
+      8,
+      721,
+      396
+    ],
+    "sourceBox": [
+      565,
+      426,
+      333,
+      183
+    ]
+  },
+  {
+    "id": "service-pickup",
+    "file": "public/art/generated/cozy-world-v2/service-pickup.png",
+    "size": [
+      1297,
+      1118
+    ],
+    "bounds": [
+      8,
+      144,
+      1281,
+      966
+    ],
+    "sourceBox": [
+      919,
+      386,
+      317,
+      239
+    ]
+  },
+  {
+    "id": "kitchen-rack",
+    "file": "public/art/generated/cozy-world-v2/kitchen-rack.png",
+    "size": [
+      255,
+      453
+    ],
+    "bounds": [
+      8,
+      8,
+      239,
+      437
+    ],
+    "sourceBox": [
+      185,
+      705,
+      239,
+      437
+    ]
+  },
+  {
+    "id": "kitchen-pastryFridge",
+    "file": "public/art/generated/cozy-world-v2/kitchen-pastryFridge.png",
+    "size": [
+      249,
+      457
+    ],
+    "bounds": [
+      8,
+      8,
+      233,
+      441
+    ],
+    "sourceBox": [
+      522,
+      701,
+      233,
+      441
+    ]
+  }
+]

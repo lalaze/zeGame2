@@ -1,0 +1,130 @@
+[
+  {
+    "id": "wall_cream",
+    "file": "public/art/generated/cozy-world-v2/wall_cream.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "wall_mint",
+    "file": "public/art/generated/cozy-world-v2/wall_mint.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "wall_rose",
+    "file": "public/art/generated/cozy-world-v2/wall_rose.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "wall_dots",
+    "file": "public/art/generated/cozy-world-v2/wall_dots.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "wall_brick",
+    "file": "public/art/generated/cozy-world-v2/wall_brick.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "wall_walnut",
+    "file": "public/art/generated/cozy-world-v2/wall_walnut.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "wall_stars",
+    "file": "public/art/generated/cozy-world-v2/wall_stars.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "floor_checker",
+    "file": "public/art/generated/cozy-world-v2/floor_checker.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "floor_planks",
+    "file": "public/art/generated/cozy-world-v2/floor_planks.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "floor_mint",
+    "file": "public/art/generated/cozy-world-v2/floor_mint.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "floor_terrazzo",
+    "file": "public/art/generated/cozy-world-v2/floor_terrazzo.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "floor_herringbone",
+    "file": "public/art/generated/cozy-world-v2/floor_herringbone.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "floor_marble",
+    "file": "public/art/generated/cozy-world-v2/floor_marble.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "kitchen_wall",
+    "file": "public/art/generated/cozy-world-v2/kitchen_wall.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "patio_floor",
+    "file": "public/art/generated/cozy-world-v2/patio_floor.png",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "id": "garden_grass",
+    "file": "public/art/generated/cozy-world-v2/garden_grass.png",
+    "size": [
+      256,
+      256
+    ]
+  }
+]

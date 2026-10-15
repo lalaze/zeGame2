@@ -6,6 +6,11 @@ import type { GeneratedServerAdapter } from './generated-server-art';
 import type { GeneratedDecorAdapter } from './generated-decor-art';
 import type { GeneratedIngredientAdapter } from './generated-ingredient-art';
 import runtimeCatalog from '../../assets/generated/runtime-catalog-v1/runtime.json';
+import { COZY_WORLD_ASSETS } from './cozy-world-assets';
+import { COZY_MATERIAL_ASSETS } from './cozy-materials';
+import { COZY_FURNITURE_ASSETS } from './cozy-furniture-assets';
+import { COZY_MENU_ASSETS } from './cozy-menu-assets';
+import { COZY_SERVICE_ASSETS } from './cozy-service-assets';
 import type { GeneratedStaffAdapter } from './generated-staff-art';
 import type { GeneratedCustomerAdapter } from './generated-customer-art';
 import type { GeneratedCatAdapter } from './generated-cat-art';
@@ -47,10 +52,8 @@ let tablewareAdapter: GeneratedTablewareAdapter | null = null;
 export const getGeneratedTablewareAdapter = (): GeneratedTablewareAdapter | null => tablewareAdapter;
 export function setGeneratedTablewareAdapter(adapter: GeneratedTablewareAdapter | null): void { tablewareAdapter = adapter; }
 
-/** Original image-generated bitmaps selected by the user; no procedural substitution. */
-export const GENERATED_MAIN_ASSETS = {
-  ...runtimeCatalog.assets,
-  ...GENERATED_SIGNATURE_ASSETS,
+/** Historical main-scene keys retained as fallbacks below the current pack. */
+const ORIGINAL_MAIN_ASSETS = {
   'reference-machine': 'reference-main-v1/espresso.png',
   'cozy-cafe-atlas': 'cozy-cafe-v1/furniture-atlas.png',
   'cabinet-top': 'main-v1/cabinet-top.png',
@@ -60,7 +63,18 @@ export const GENERATED_MAIN_ASSETS = {
   'chair-right': 'main-v2/chair-facing-right.png',
   'chair-left': 'main-v2/chair-facing-left.png',
   vase: 'main-v2/flower-vase.png',
+} as const;
 
+/** All consumers share the current image-generated packs. */
+export const GENERATED_MAIN_ASSETS = {
+  ...runtimeCatalog.assets,
+  ...GENERATED_SIGNATURE_ASSETS,
+  ...ORIGINAL_MAIN_ASSETS,
+  ...COZY_WORLD_ASSETS,
+  ...COZY_MATERIAL_ASSETS,
+  ...COZY_FURNITURE_ASSETS,
+  ...COZY_MENU_ASSETS,
+  ...COZY_SERVICE_ASSETS,
 } as const;
 export type GeneratedMainId = keyof typeof GENERATED_MAIN_ASSETS;
 type Source = CanvasImageSource & { width: number; height: number };
