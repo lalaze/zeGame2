@@ -258,6 +258,9 @@ export class CafeView {
       ({ x, y } = unprojectMainPlaneWorld(this.presentedPointer, MAIN_WALL_PLANE));
     }
     const o = areaOrigin(this.area);
+    // Added side bays are presentation space, not another room's saved columns.
+    if (def.surface === 'wall' && (x < o.x || x >= o.x + SCENE_W))
+      return { col: regionOffset(this.area) / CELL, row: -1 };
     x = x - o.x + regionOffset(this.area);
     y -= o.y;
     const col = Math.round(x / CELL - def.w / 2);
@@ -273,7 +276,7 @@ export class CafeView {
     const hits = state.decor.placed
       .map((p, i) => ({ p, i, def: furnitureDef(p.id) }))
       .filter(({ p, def }) => {
-        if (!def) return false;
+        if (!def || areaAtX(p.col * CELL) !== this.area) return false;
         let b =
           def.surface === 'wall'
             ? cellRect('wall', p.col, p.row, def.w, def.h)

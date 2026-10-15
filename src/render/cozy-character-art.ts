@@ -1,3 +1,4 @@
+import { CHARACTER_PROPORTIONS } from './character-proportions';
 import { clearSeatingEnsemble, preloadSeatingEnsemble, seatingGeometry, seatingUnit } from './cozy-seating-art';
 import type { Look } from '../game/state';
 import type { CharacterFrames, Role } from './sprites';
@@ -61,7 +62,8 @@ export function applyCozyCharacter(frames:CharacterFrames,look:Look,role:Role,ap
     if(seated){target.width=24;target.height=34;}else{target.width=18;target.height=28;}
     const art=canvas(target.width*3,target.height*3),ctx=art.getContext('2d')!;
     ctx.imageSmoothingEnabled=false;
-    const fit=Math.min(scale*3*(seated?1.2:1),(art.width-4)/p.width,(art.height-4)/p.height);
+    // Match the sample's authored seated head/shoulder size before straight-leg extension.
+    const fit=Math.min(scale*3*(seated?1.2:CHARACTER_PROPORTIONS.sampleUpperScale),(art.width-4)/p.width,(art.height-4)/p.height);
     const w=Math.round(p.width*fit),h=Math.round(p.height*fit);
     const hipX=redesigned?(left?.68:.32):(left?.65:.35),hipY=redesigned?.76:.79;
     const ax=seated?Math.round(art.width/2-w/2):Math.round(27-w/2);

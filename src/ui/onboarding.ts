@@ -1,3 +1,4 @@
+import { referenceCharacterContacts } from '../render/reference-character-art';
 import { COZY_OWNER_LOOK } from '../render/cozy-character-art';
 // The opening flow: name the café, create the owner, pick a starter style.
 // Also reused (name + character only) when editing the profile later.
@@ -255,7 +256,8 @@ export function showOnboarding(opts: Options): void {
               const crop = document.createElement('canvas');
               crop.width = head.width;
               crop.height = HEAD_ROWS - 3;
-              crop.getContext('2d')!.drawImage(head, 0, 0);
+              const headY=referenceCharacterContacts(head)?.head?.y ?? 0;
+              crop.getContext('2d')!.drawImage(head, 0, -headY);
               crop.className = 'swatch-sprite';
               b.append(crop);
             }

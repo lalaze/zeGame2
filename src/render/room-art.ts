@@ -1,3 +1,4 @@
+import { roomSideSpace } from './room-width';
 import { cozyCafePart, paintCozyCabinet } from './cozy-cafe-art';
 import { getGeneratedDecorAdapter, getGeneratedMainEnvironmentAdapter } from './generated-main-art';
 // Canvas painters for the parts of a room that are baked into textures: the main
@@ -529,7 +530,7 @@ export class RoomPainter {
     const environment = this.density > 1 ? getGeneratedMainEnvironmentAdapter() : null;
     // One continuous header rather than repeating an end-capped beam bitmap.
     beamPainter(this.ctx, 0, 0, SCENE_W, 8);
-    for (const x of [0, SCENE_W - 7]) {
+    for (const x of (roomSideSpace() > 0 && this.project ? [] : [0, SCENE_W - 7])) {
       // Native source columns are broader than the historical seven-pixel
       // strip. Contain them at the outer boundary, never stretch their woodwork.
       if (!environment?.paintPost(this.ctx, x === 0 ? -6 : SCENE_W - 16, 0, 22, 79, x === 0 ? 'left' : 'right')) {
@@ -872,7 +873,7 @@ export class RoomPainter {
   drawFloor(floor: string, rug: string, light: Lighting, H: number): void {
     if (this.density > 1 && this.project) {
       const doorLight = pixelFloorDoorLight(this.kitchenDoor);
-      const signature = JSON.stringify([floor, rug, light, H, doorLight, !!generatedMainRaster('wall-window')]);
+      const signature = JSON.stringify([floor, rug, light, H, doorLight, roomSideSpace(), !!generatedMainRaster('wall-window')]);
       const source = this.floorCanvas ??= document.createElement('canvas');
       const projected = this.projectedFloor ??= document.createElement('canvas');
       if (this.floorSignature !== signature) {
@@ -886,7 +887,7 @@ export class RoomPainter {
         out.setTransform(2, 0, 0, 2, 0, 0);
         projectFloorLayer(out, source, mainPixelProjection(H));
       }
-      paintPixelRoomShell(this.ctx, H, mainPixelProjection(H));
+      if (roomSideSpace() === 0) paintPixelRoomShell(this.ctx, H, mainPixelProjection(H));
       this.ctx.drawImage(projected, 0, 0, SCENE_W, H);
       return;
     }
@@ -941,7 +942,7 @@ export class RoomPainter {
     for (let i = 0; i < 4; i++) {
       ctx.globalAlpha = 0.11 - i * 0.025;
       this.r(0, H - 6 * (i + 1), SCENE_W, 6, '#2a1410');
-      ctx.globalAlpha = 0.05;
+      ctx.globalAlpha = roomSideSpace() > 0 ? 0 : 0.05;
       this.r(0, FLOOR_Y, 3 * (4 - i), H - FLOOR_Y, '#2a1410');
       this.r(SCENE_W - 3 * (4 - i), FLOOR_Y, 3 * (4 - i), H - FLOOR_Y, '#2a1410');
     }
@@ -1055,12 +1056,7 @@ export class RoomPainter {
     const x = DOOR_X + 2;
     const y = H - FRONT_WALL - 9;
     const w = DOOR_W - 4;
-    const mat = ramp('#c98f4e');
-    this.r(x, y, w, 8, mat.lo);
-    this.r(x + 1, y, w - 2, 7, mat.base);
-    for (let i = 2; i < w - 2; i += 2) this.r(x + i, y + 2 + ((i / 2) % 2), 1, 3, mix(mat.base, mat.lo, 0.6));
-    this.r(x + 3, y + 1, w - 6, 1, '#b5453a');
-    this.r(x + 3, y + 5, w - 6, 1, '#b5453a');
+    paintRunner(this.ctx, x, y, w, 8, 'h');
   }
 
   /** A woven runner from the front door up to the counter. */

@@ -1,3 +1,4 @@
+import { CHARACTER_PROPORTIONS } from './character-proportions';
 import type { Look } from '../game/state';
 import { CUSTOMER_CAST } from '../game/customer-cast';
 import type { CharacterFrames, Role } from './sprites';
@@ -9,7 +10,7 @@ type Box = [number,number,number,number];
 type PoseMeta = {box:Box;file?:string;head?:number[];hip?:number[];cushion?:number[];hand?:number[];neck?:number[];eye?:number[]|null};
 type Pose = PoseMeta & {source:HTMLCanvasElement;width:number;height:number};
 type Manifest = {families:Record<string,{file:string;poses:PoseMeta[]}>;heads:{file:string;poses:PoseMeta[]}};
-type Contacts = {foot:Point;seatContact?:Point;petContact?:Point};
+type Contacts = {foot:Point;headScale?:number;bodyScale?:number;seatContact?:Point;petContact?:Point};
 const D=3;
 const SKIN=['#f4cfad','#dfaa7d','#b67c55','#80533f'];
 const HAIR=['#594237','#976546','#dfb96f','#b9674e','#626782','#cc8c9f'];
@@ -133,6 +134,7 @@ export function makeBatchCharacter(look:Look,role:Role,appearanceId:number|undef
   const p=poses[index],seated=index>=9,pet=index>=10,back=index>=3&&index<6,right=index>=6;
   const w=seated?34:24,h=seated?42:28,art=canvas(w*D,h*D),ctx=art.getContext('2d')!;
   const scale=seated?sitScale:walkScale;
+  const headScale=CHARACTER_PROPORTIONS.headSize/(seated?1:CHARACTER_PROPORTIONS.standingScale)/150;
   const cushionX=p.cushion?(p.cushion[0]-p.box[0])-p.width*.03:p.width*.36;
   const dx=seated?13-cushionX*scale:12-p.width*scale/2,dy=(seated?41:27)-p.height*scale;
   const point=(q:number[]):Point=>({x:dx+(q[0]-p.box[0])*scale,y:dy+(q[1]-p.box[1])*scale});
@@ -142,7 +144,17 @@ export function makeBatchCharacter(look:Look,role:Role,appearanceId:number|undef
   if(role!=='cook')removeSourceHead(p,body,seated,neckY);
   ctx.imageSmoothingEnabled=false;ctx.drawImage(body,dx*D,dy*D,p.width*scale*D,p.height*scale*D);
   const foreground=canvas(w*D,h*D),fg=foreground.getContext('2d')!;
-  const neck={x:dx+neckX*scale,y:dy+neckY*scale};
+  let collarY=neckY;
+  if(role==='owner'&&!seated){
+   // Anchor the replacement neck to the actual opaque collar, not a guessed crop percentage.
+   const pixels=body.getContext('2d')!.getImageData(0,0,p.width,p.height).data;
+   const cx=Math.round(neckX),radius=Math.max(2,Math.round(p.width*.055));
+   for(let y=Math.floor(neckY);y<Math.min(p.height,neckY+p.height*.15);y++){
+    let ink=0;for(let x=Math.max(0,cx-radius);x<=Math.min(p.width-1,cx+radius);x++)if(pixels[(y*p.width+x)*4+3]>100)ink++;
+    if(ink>=radius){collarY=y+2;break;}
+   }
+  }
+  const neck={x:dx+neckX*scale,y:dy+collarY*scale};
   const hand=p.hand?point(p.hand):{x:dx+p.width*scale*.87,y:dy+p.height*scale*.61};
   if(seated){
    fg.save();fg.setTransform(D,0,0,D,0,0);fg.beginPath();fg.moveTo(neck.x-5,neck.y-1);fg.lineTo(w,neck.y-1);fg.lineTo(w,hand.y+2);
@@ -151,17 +163,19 @@ export function makeBatchCharacter(look:Look,role:Role,appearanceId:number|undef
   }
   if(role!=='cook'){
    const hp=heads[style*3+(back?1:right?2:0)],head=recolour(hp,look,role,true,false);
-   const hs=(seated?13.1:11.7)/150;
+   // The standing frame is published at 1.6x; its head must equal the seated head in world units.
+   const hs=headScale;
    const hx=neck.x-(hp.neck![0]-hp.box[0])*hs,hy=neck.y-(hp.neck![1]-hp.box[1])*hs;
    ctx.drawImage(head,hx*D,hy*D,hp.width*hs*D,hp.height*hs*D);
    if(seated)fg.drawImage(head,hx*D,hy*D,hp.width*hs*D,hp.height*hs*D);
   }
   const accessory=(c:CanvasRenderingContext2D)=>{
    if(!design||back)return;c.save();c.scale(D,D);c.fillStyle=design.accent;c.strokeStyle='#554338';c.lineWidth=.6;
-   const faceX=neck.x+(right?2:0),faceY=neck.y-3.7;
-   if(design.accessory==='glasses'){c.strokeRect(faceX-2.7,faceY,2.5,1.9);if(!right)c.strokeRect(faceX+.5,faceY,2.5,1.9);}
-   if(design.accessory==='bow'){c.fillRect(neck.x-5,neck.y-9,3.4,1.8);c.fillRect(neck.x-4,neck.y-9.5,1.4,2.8);}
-   if(design.accessory==='headband'){c.fillRect(neck.x-4.8,neck.y-9,8,0.8);}
+   const headFactor=seated?1:CHARACTER_PROPORTIONS.headSize/(11.7*CHARACTER_PROPORTIONS.standingScale);
+   const faceX=neck.x+(right?2:0)*headFactor,faceY=neck.y-3.7*headFactor;
+   if(design.accessory==='glasses'){c.strokeRect(faceX-2.7*headFactor,faceY,2.5*headFactor,1.9*headFactor);if(!right)c.strokeRect(faceX+.5*headFactor,faceY,2.5*headFactor,1.9*headFactor);}
+   if(design.accessory==='bow'){c.fillRect(neck.x-5*headFactor,neck.y-9*headFactor,3.4*headFactor,1.8*headFactor);c.fillRect(neck.x-4*headFactor,neck.y-9.5*headFactor,1.4*headFactor,2.8*headFactor);}
+   if(design.accessory==='headband'){c.fillRect(neck.x-4.8*headFactor,neck.y-9*headFactor,8*headFactor,.8*headFactor);}
    if(design.accessory==='satchel'){c.strokeStyle=design.accent;c.lineWidth=.8;c.beginPath();c.moveTo(neck.x-2,neck.y+1);c.lineTo(neck.x+3,neck.y+9);c.stroke();c.fillRect(neck.x+1,neck.y+7,4,3);}
    c.restore();
   };accessory(ctx);if(seated)accessory(fg);
@@ -171,8 +185,8 @@ export function makeBatchCharacter(look:Look,role:Role,appearanceId:number|undef
   if(seated){
    const floor=flip({x:13,y:41}),hip=flip(p.hip?point(p.hip):{x:13,y:27}),petContact=pet?flip(hand):undefined;
    registerSeatingUnit(frame,{foreground:publish(front),floor,hip,...(petContact?{petContact}:{})});
-   setContacts(frame,{foot:floor,seatContact:hip,...(petContact?{petContact}:{})});
-  }else setContacts(frame,{foot:{x:12,y:27}});
+   setContacts(frame,{foot:floor,headScale,bodyScale:scale,seatContact:hip,...(petContact?{petContact}:{})});
+  }else setContacts(frame,{foot:{x:12,y:27},headScale,bodyScale:scale});
   return frame;
  };
  const down=[0,1,2].map(i=>make(i)),up=[3,4,5].map(i=>make(i)),right=[6,7,8].map(i=>make(i)),left=[6,7,8].map(i=>make(i,true));

@@ -1,6 +1,6 @@
 import type { Look } from '../game/state';
 import { fineSpriteArt } from '../render/fine-sprite-art';
-import { preloadReferenceCharacters } from '../render/reference-character-art';
+import { STANDING_CHARACTER_SCALE, preloadReferenceCharacters } from '../render/reference-character-art';
 import { character } from '../render/sprites';
 
 export interface GeneratedOwnerPreview {
@@ -40,8 +40,8 @@ export function createGeneratedOwnerPreview(initialLook: Look, cssScale: number,
       const art = fineSpriteArt(frame);
       canvas.width = art.canvas.width;
       canvas.height = art.canvas.height;
-      canvas.style.width = `${frame.width * cssScale}px`;
-      canvas.style.height = `${frame.height * cssScale}px`;
+      canvas.style.width = `${frame.width * cssScale / STANDING_CHARACTER_SCALE}px`;
+      canvas.style.height = `${frame.height * cssScale / STANDING_CHARACTER_SCALE}px`;
       const ctx = canvas.getContext('2d');
       if (ctx) {
         ctx.imageSmoothingEnabled = false;

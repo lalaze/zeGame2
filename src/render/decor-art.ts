@@ -672,54 +672,53 @@ export function paintCeiling(ctx: Ctx, id: string, sceneW: number, t: number): v
 
 // ---------------------------------------------------------------- rugs
 
-/**
- * A woven jute runner, laid either down the room ('v') or across it ('h'), so the
- * entrance runner and the corridors between rooms are one continuous carpet.
+/** Oatmeal flatweave: restrained linen binding and fine, low-contrast yarn.
+ * World-aligned weave keeps the entry and cross-aisle one continuous textile.
  */
-export function paintRunner(ctx: Ctx, x: number, y: number, w: number, h: number, dir: 'h' | 'v', base = '#d6b382'): void {
-  const along = dir === 'v' ? h : w;
-  const across = dir === 'v' ? w : h;
-  // Paint in runner-local coordinates: a runs along the carpet, b across it.
-  const at = (a: number, b: number, la: number, lb: number, color: string) =>
-    dir === 'v' ? rect(ctx, x + b, y + a, lb, la, color) : rect(ctx, x + a, y + b, la, lb, color);
-  const field = ramp(base);
-  const trim = '#9a6a45';
-  at(0, 0, along, across, field.lo);
-  at(0, 1, along, across - 2, field.base);
-  at(0, 3, along, 1, trim);
-  at(0, across - 4, along, 1, trim);
-  const weave = mix(field.base, field.lo, 0.45);
-  for (let a = 1; a < along; a += 2) {
-    for (let b = 5 + (a % 4 === 1 ? 2 : 0); b < across - 5; b += 4) at(a, b, 1, 1, weave);
-  }
-  // Diamonds down the middle.
-  const mid = Math.floor(across / 2);
-  for (let c = 10; c < along - 4; c += 20) {
-    for (let i = -2; i <= 2; i++) {
-      const half = 2 - Math.abs(i);
-      at(c + i, mid - half, 1, half * 2 + 1, i === 0 ? '#b5453a' : field.lo);
+export const RUNNER_BASE = '#c6b091';
+export const RUNNER_EDGE = '#aa9275';
+export const RUNNER_BINDING = '#e3d4ba';
+function runnerWeave(ctx: Ctx, x: number, y: number, w: number, h: number, base: string): void {
+  rect(ctx, x, y, w, h, base);
+  const yarn = mix(base, '#f3e7cf', 0.23);
+  const shadow = mix(base, '#8f785e', 0.13);
+  // Fine staggered yarns, not large motifs or a second competing check pattern.
+  for (let yy = Math.ceil(y * 2) / 2; yy < y + h; yy += 1.5) {
+    ctx.fillStyle = shadow; ctx.fillRect(x, yy, w, Math.min(.25, y + h - yy));
+    for (let xx = Math.ceil(x / 3) * 3; xx < x + w; xx += 3) {
+      ctx.fillStyle = yarn;
+      ctx.fillRect(xx, yy + .25, Math.min(1.5, x + w - xx), Math.min(.25, y + h - yy - .25));
     }
   }
 }
-
-/** Open the entrance stem into a cross runner, with continuous inset borders.
- * Paint after the two runners. The only capped edge is the far/top edge of the T.
- */
-export function paintRunnerJoin(ctx: Ctx, x: number, y: number, w: number, h: number, base = '#d6b382'): void {
-  const field = ramp(base);
-  const trim = '#9a6a45';
-  rect(ctx, x, y, w, h, field.base);
-  const weave = mix(field.base, field.lo, 0.45);
-  for (let yy = y + 5; yy < y + h; yy += 2) {
-    for (let xx = x + 2 + ((yy - y) % 4 === 1 ? 2 : 0); xx < x + w - 2; xx += 4) rect(ctx, xx, yy, 1, 1, weave);
+export function paintRunner(ctx: Ctx, x: number, y: number, w: number, h: number, dir: 'h' | 'v', base = RUNNER_BASE): void {
+  runnerWeave(ctx, x, y, w, h, base);
+  // A soft cloth-bound edge. Keep the exact walkable footprint.
+  const at = (a: number, b: number, la: number, lb: number, color: string) => {
+    ctx.fillStyle = color;
+    if (dir === 'v') ctx.fillRect(x + b, y + a, lb, la);
+    else ctx.fillRect(x + a, y + b, la, lb);
+  };
+  const along = dir === 'v' ? h : w, across = dir === 'v' ? w : h;
+  for (const b of [0, across - .5]) at(0, b, along, .5, RUNNER_EDGE);
+  for (const b of [1, across - 2]) at(0, b, along, 1, RUNNER_BINDING);
+  for (let a = 1; a < along - 1; a += 3) {
+    for (const b of [1.25, across - 1.75]) at(a, b, 1, .25, RUNNER_EDGE);
   }
-  rect(ctx, x, y, w, 1, field.lo);
-  rect(ctx, x, y + 3, w, 1, trim);
-  // The lower cross-runner border turns down into the stem's two side borders.
-  rect(ctx, x, y + h - 4, 4, 1, trim);
-  rect(ctx, x + w - 4, y + h - 4, 4, 1, trim);
-  rect(ctx, x + 3, y + h - 4, 1, 4, trim);
-  rect(ctx, x + w - 4, y + h - 4, 1, 4, trim);
+}
+
+/** Unbroken T junction: binding turns into the stem instead of crossing it. */
+export function paintRunnerJoin(ctx: Ctx, x: number, y: number, w: number, h: number, base = RUNNER_BASE): void {
+  runnerWeave(ctx, x, y, w, h, base);
+  const line = (xx: number, yy: number, ww: number, hh: number, color: string) => {
+    ctx.fillStyle = color; ctx.fillRect(xx, yy, ww, hh);
+  };
+  line(x, y, w, .5, RUNNER_EDGE);
+  line(x, y + 1, w, 1, RUNNER_BINDING);
+  for (const xx of [x, x + w - 2]) {
+    line(xx, y + h - 2, 2, 1, RUNNER_BINDING);
+  }
+  for (const xx of [x, x + w - .5]) line(xx, y + h - .5, .5, .5, RUNNER_EDGE);
 }
 
 export function paintRug(ctx: Ctx, id: string, x: number, y: number, w: number, h: number): void {

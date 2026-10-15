@@ -1,4 +1,4 @@
-import { paintRunner } from './decor-art';
+import { paintRunner, RUNNER_BASE } from './decor-art';
 import { mix } from './color';
 import { FLOOR_Y, SCENE_W, passageY, areaBounds, doorwayY } from '../game/layout';
 import { adjacentArea, isAreaOpen, type AreaId, type Direction } from '../game/regions';
@@ -10,7 +10,7 @@ export function paintPassageFloor(ctx: CanvasRenderingContext2D, area: AreaId): 
   if (area === 'kitchen') return;
   const y = passageY();
   // The same jute runner as the entrance; the glasshouse and garden get a paler, sun-bleached one.
-  const jute = area === 'main' || area === 'reading' ? '#d6b382' : '#d9d7b8';
+  const jute = area === 'main' || area === 'reading' ? RUNNER_BASE : '#d9d7b8';
   const left = area !== 'main' && adjacentArea(area, 'left');
   const right = adjacentArea(area, 'right');
   const start = area === 'main' ? 64 : left ? 0 : 146;

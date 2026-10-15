@@ -1,15 +1,13 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { FLOOR_Y, MAX_SCENE_H, MIN_SCENE_H, SCENE_W, floorY, passageY, setSceneHeight } from '../game/layout';
-import { mix, ramp } from './color';
-import { paintFloor, paintRug, paintRunnerJoin } from './decor-art';
+import { mix } from './color';
+import { paintFloor, paintRug, paintRunner, paintRunnerJoin, RUNNER_BASE, RUNNER_EDGE, RUNNER_BINDING } from './decor-art';
 import { lightingAt } from './lighting';
 import { paintPassageFloor } from './passages';
 import { RoomPainter } from './room-art';
 
 type Rect = [x: number, y: number, width: number, height: number, color: string];
-const JUTE = ramp('#d6b382');
-const TRIM = '#9a6a45';
-const WEAVE = mix(JUTE.base, JUTE.lo, 0.45);
+const FIELD = [RUNNER_BASE, mix(RUNNER_BASE, '#f3e7cf', 0.23), mix(RUNNER_BASE, '#8f785e', 0.13)];
 
 function record(paint: (ctx: CanvasRenderingContext2D) => void): Rect[] {
   const rectangles: Rect[] = [];
@@ -45,7 +43,7 @@ describe.each([MIN_SCENE_H, MAX_SCENE_H])('main entry rug at scene height %i', h
     const painted = roomFloor('rug_none', height);
     const top = passageY() - 7;
     const oldHead = floorY(150);
-    const interiorColors = [JUTE.base, JUTE.lo, WEAVE, '#b5453a'];
+    const interiorColors = FIELD;
 
     // Exclude the outer trim, but include both the former cross-runner bottom
     // border and the old separate entry rug's fringe and finished head.
@@ -55,8 +53,8 @@ describe.each([MIN_SCENE_H, MAX_SCENE_H])('main entry rug at scene height %i', h
       }
     }
     // A full-width dark edge would still read as two overlapping carpets.
-    for (const y of [top + 10, top + 13]) {
-      expect(Array.from({ length: 22 }, (_, i) => colorAt(painted, 149 + i, y))).toContain(JUTE.base);
+    for (const y of [top + 12, top + 13]) {
+      expect(Array.from({ length: 22 }, (_, i) => colorAt(painted, 149 + i, y)).every(color => FIELD.includes(color!))).toBe(true);
     }
   });
 
@@ -67,17 +65,17 @@ describe.each([MIN_SCENE_H, MAX_SCENE_H])('main entry rug at scene height %i', h
     const top = passageY() - 7;
 
     for (let x = 140; x < 180; x++) {
-      expect(colorAt(painted, x, top), `top edge at ${x}`).toBe(JUTE.lo);
-      expect(colorAt(painted, x, top + 3), `top trim at ${x}`).toBe(TRIM);
+      expect(colorAt(painted, x, top), `top edge at ${x}`).toBe(RUNNER_EDGE);
+      expect(colorAt(painted, x, top + 1), `top trim at ${x}`).toBe(RUNNER_BINDING);
     }
-    for (const [start, end] of [[140, 149], [171, 180]]) {
-      for (let x = start; x < end; x++) expect(colorAt(painted, x, top + 10)).toBe(TRIM);
-    }
-    for (let y = top + 10; y <= floorY(150) + 4; y++) {
-      for (const x of [148, 171]) expect(colorAt(painted, x, y), `side trim at ${x},${y}`).toBe(TRIM);
+    for (const [start, end] of [[140, 147], [173, 180]]) {
+      for (let x = start; x < end; x++) expect(colorAt(painted, x, top + 12)).toBe(RUNNER_BINDING);
     }
     for (let y = top + 14; y <= floorY(150) + 4; y++) {
-      for (const x of [145, 174]) expect(colorAt(painted, x, y), `side edge at ${x},${y}`).toBe(JUTE.lo);
+      for (const x of [146, 173]) expect(colorAt(painted, x, y), `side trim at ${x},${y}`).toBe(RUNNER_BINDING);
+    }
+    for (let y = top + 14; y <= floorY(150) + 4; y++) {
+      for (const x of [145, 174.5]) expect(colorAt(painted, x, y), `side edge at ${x},${y}`).toBe(RUNNER_EDGE);
     }
     // Extending the entry rug must not move its old fringe above the T.
     for (let y = top - 2; y < top; y++) {
@@ -110,13 +108,22 @@ describe.each([MIN_SCENE_H, MAX_SCENE_H])('main entry rug at scene height %i', h
 
 it('confines the join patch to its footprint and honors the runner material', () => {
   const base = '#d9d7b8';
-  const field = ramp(base);
+
   const painted = record(ctx => paintRunnerJoin(ctx, 145, 131, 30, 14, base));
   expect(painted.every(([x, y, w, h]) => x >= 145 && y >= 131 && x + w <= 175 && y + h <= 145)).toBe(true);
-  expect(colorAt(painted, 160, 131)).toBe(field.lo);
+  expect(colorAt(painted, 160, 131)).toBe(RUNNER_EDGE);
   for (let y = 135; y < 145; y++) {
     for (let x = 149; x < 171; x++) {
-      expect([base, mix(base, field.lo, 0.45)]).toContain(colorAt(painted, x, y));
+      expect([base, mix(base, '#f3e7cf', 0.23), mix(base, '#8f785e', 0.13)]).toContain(colorAt(painted, x, y));
     }
   }
+});
+
+ it('uses restrained, deterministic woven yarn without red geometric motifs', () => {
+  const paint = (ctx: CanvasRenderingContext2D) => paintRunner(ctx, 10, 20, 30, 80, 'v');
+  const painted = record(paint);
+  expect(painted).toEqual(record(paint));
+  expect(painted.some(([, , , , color]) => color === '#b5453a')).toBe(false);
+  expect(painted.every(([x, y, w, h]) => x >= 10 && y >= 20 && x + w <= 40 && y + h <= 100 && w > 0 && h > 0)).toBe(true);
+  expect(painted.some(([, , , h]) => h === .25)).toBe(true);
 });

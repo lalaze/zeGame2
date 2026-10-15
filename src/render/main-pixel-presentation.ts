@@ -1,3 +1,4 @@
+import { widenRoomX, narrowRoomX } from './room-width';
 import { COUNTER, FLOOR_Y, SCENE_W, doorwayY, sceneHeight } from '../game/layout';
 import { projectPoint, unprojectPoint, type PixelPoint, type PixelProjectionOptions } from './pixel-projection';
 
@@ -13,11 +14,13 @@ const inMain = (p: PixelPoint) => p.x >= 0 && p.x <= SCENE_W && p.y >= 0 && p.y 
 
 /** Floor coordinates, including both shared door boundaries; other rooms stay exact. */
 export function projectMainWorld(point: PixelPoint): PixelPoint {
-  return inMain(point) ? projectPoint(point, mainPixelProjection()) : { ...point };
+  const painted = inMain(point) ? projectPoint(point, mainPixelProjection()) : { ...point };
+  return point.y >= 0 && point.y <= sceneHeight() ? { x: widenRoomX(painted.x), y: painted.y } : painted;
 }
 
 export function unprojectMainWorld(point: PixelPoint): PixelPoint {
-  return inMain(point) ? unprojectPoint(point, mainPixelProjection()) : { ...point };
+  const base = point.y >= 0 && point.y <= sceneHeight() ? { x: narrowRoomX(point.x), y: point.y } : point;
+  return inMain(base) ? unprojectPoint(base, mainPixelProjection()) : { ...base };
 }
 
 /** Fixed architecture planes are horizontal affine maps, without portal notches. */
