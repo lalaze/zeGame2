@@ -30,14 +30,12 @@
       #loader [hidden] { display: none; }
       #loader .loader-content { width: min(380px, 100%); margin: auto; }
       #loader .loader-walkway { height: 112px; position: relative; margin: 24px 0 4px; }
-      #loader .loader-walker { position: absolute; bottom: 0; left: 0; width: 84px; height: 108px; animation: loader-travel 8s linear infinite; }
-      #loader .loader-figure { width: 84px; height: 108px; position: relative; animation: loader-facing 8s steps(1, end) infinite; }
+      #loader .loader-walker { position: absolute; bottom: 0; left: calc(50% - 42px); width: 84px; height: 108px; }
+      #loader .loader-figure { width: 84px; height: 108px; position: relative; }
       #loader .loader-pose { position: absolute; inset: 0; width: 84px; height: 108px; opacity: 0; animation: loader-step .8s steps(1, end) infinite; }
       #loader .loader-pose:nth-child(2) { animation-delay: -.6s; }
       #loader .loader-pose:nth-child(3) { animation-delay: -.4s; }
       #loader .loader-pose:nth-child(4) { animation-delay: -.2s; }
-      @keyframes loader-travel { 0%, 100% { left: 0; } 50% { left: calc(100% - 84px); } }
-      @keyframes loader-facing { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(-1); } }
       @keyframes loader-step { 0%, 24.999% { opacity: 1; } 25%, 100% { opacity: 0; } }
       #loader[aria-busy="false"] .loader-walker, #loader[aria-busy="false"] .loader-figure,
       #loader[aria-busy="false"] .loader-pose { animation-play-state: paused; }

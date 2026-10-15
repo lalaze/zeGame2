@@ -32,12 +32,19 @@ for(let i=0;i<8;i++){await delay(110);gait.push(await ev('({x:document.querySele
 const activity=[];
 for(let i=0;i<3;i++){activity.push(await ev('getComputedStyle(document.querySelector(".loader-track"),"::after").left'));await delay(200);}
 check(new Set(activity).size>1&&await ev('!document.querySelector("progress").hasAttribute("value")'),'pre-module activity moves without a fake percentage',{activity});
-check(new Set(gait.map(p=>p.x)).size>1&&new Set(gait.map(p=>JSON.stringify(p.poses))).size===4&&gait.every(p=>!p.progress),'all four gait frames advance without inventing progress',{gait});
+check(new Set(gait.map(p=>p.x)).size===1&&new Set(gait.map(p=>JSON.stringify(p.poses))).size===4&&gait.every(p=>!p.progress),'all four gait frames advance in place without inventing progress',{gait});
+const progressPositions=[];
+for(const value of [0,.25,.8,1]){
+progressPositions.push(await ev('(()=>{document.querySelector("progress").value='+value+';const w=document.querySelector(".loader-walker"),r=w.getBoundingClientRect(),p=document.querySelector(".loader-walkway").getBoundingClientRect();return {x:r.x,center:r.x+r.width/2,expected:p.x+p.width/2,facing:getComputedStyle(document.querySelector(".loader-figure")).transform}})()'));
+await delay(220);
+}
+check(progressPositions.every(p=>Math.abs(p.center-p.expected)<.5&&p.facing==='none')&&new Set(progressPositions.map(p=>p.x)).size===1,'staff stays centered at 0, 25, 80 and 100 percent without turning',{progressPositions});
+await ev('document.querySelector("progress").removeAttribute("value")');
 for(let frame=0;frame<4;frame++){
-await ev('document.querySelectorAll(".loader-walker,.loader-figure").forEach(e=>{const a=e.getAnimations()[0];a.pause();a.currentTime=1500});document.querySelectorAll(".loader-pose").forEach(e=>{const a=e.getAnimations()[0];a.pause();a.currentTime='+String(frame*200+50)+'})');
+await ev('document.querySelectorAll(".loader-walker,.loader-figure").forEach(e=>{const a=e.getAnimations()[0];if(a){a.pause();a.currentTime=1500}});document.querySelectorAll(".loader-pose").forEach(e=>{const a=e.getAnimations()[0];a.pause();a.currentTime='+String(frame*200+50)+'})');
 await screenshot('pose-'+frame);
 }
-await ev('document.querySelectorAll(".loader-walker,.loader-figure,.loader-pose").forEach(e=>e.getAnimations()[0].play())');
+await ev('document.querySelectorAll(".loader-walker,.loader-figure,.loader-pose").forEach(e=>e.getAnimations()[0]?.play())');
 for(const [name,width,height,mobile] of [['desktop',1200,800,false],['mobile',390,844,true],['small',320,568,true],['landscape',844,390,true]]){
 await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile});await delay(160);
 const box=await ev('(()=>{const r=document.querySelector(".loader-content").getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,overflow:document.documentElement.scrollWidth>innerWidth}})()');
