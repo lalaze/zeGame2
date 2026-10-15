@@ -1,4 +1,3 @@
-import { roomSideSpace } from './room-width';
 import { cozyCafePart, paintCozyCabinet } from './cozy-cafe-art';
 import { getGeneratedDecorAdapter, getGeneratedMainEnvironmentAdapter } from './generated-main-art';
 // Canvas painters for the parts of a room that are baked into textures: the main
@@ -22,7 +21,6 @@ import {
   PASS_COLUMNS,
   PASS_SLOT_W,
   PASTRY_CASE,
-  MAIN_CUPBOARDS,
   SCENE_W,
   WINDOWS,
   baristaSpot,
@@ -530,7 +528,7 @@ export class RoomPainter {
     const environment = this.density > 1 ? getGeneratedMainEnvironmentAdapter() : null;
     // One continuous header rather than repeating an end-capped beam bitmap.
     beamPainter(this.ctx, 0, 0, SCENE_W, 8);
-    for (const x of (roomSideSpace() > 0 && this.project ? [] : [0, SCENE_W - 7])) {
+    for (const x of [0, SCENE_W - 7]) {
       // Native source columns are broader than the historical seven-pixel
       // strip. Contain them at the outer boundary, never stretch their woodwork.
       if (!environment?.paintPost(this.ctx, x === 0 ? -6 : SCENE_W - 16, 0, 22, 79, x === 0 ? 'left' : 'right')) {
@@ -873,7 +871,7 @@ export class RoomPainter {
   drawFloor(floor: string, rug: string, light: Lighting, H: number): void {
     if (this.density > 1 && this.project) {
       const doorLight = pixelFloorDoorLight(this.kitchenDoor);
-      const signature = JSON.stringify([floor, rug, light, H, doorLight, roomSideSpace(), !!generatedMainRaster('wall-window')]);
+      const signature = JSON.stringify([floor, rug, light, H, doorLight, !!generatedMainRaster('wall-window')]);
       const source = this.floorCanvas ??= document.createElement('canvas');
       const projected = this.projectedFloor ??= document.createElement('canvas');
       if (this.floorSignature !== signature) {
@@ -887,7 +885,7 @@ export class RoomPainter {
         out.setTransform(2, 0, 0, 2, 0, 0);
         projectFloorLayer(out, source, mainPixelProjection(H));
       }
-      if (roomSideSpace() === 0) paintPixelRoomShell(this.ctx, H, mainPixelProjection(H));
+      paintPixelRoomShell(this.ctx, H, mainPixelProjection(H));
       this.ctx.drawImage(projected, 0, 0, SCENE_W, H);
       return;
     }
@@ -942,7 +940,7 @@ export class RoomPainter {
     for (let i = 0; i < 4; i++) {
       ctx.globalAlpha = 0.11 - i * 0.025;
       this.r(0, H - 6 * (i + 1), SCENE_W, 6, '#2a1410');
-      ctx.globalAlpha = roomSideSpace() > 0 ? 0 : 0.05;
+      ctx.globalAlpha = 0.05;
       this.r(0, FLOOR_Y, 3 * (4 - i), H - FLOOR_Y, '#2a1410');
       this.r(SCENE_W - 3 * (4 - i), FLOOR_Y, 3 * (4 - i), H - FLOOR_Y, '#2a1410');
     }
@@ -981,62 +979,9 @@ export class RoomPainter {
     }
   }
 
-  /** Fitted crockery stations belong to the architecture, not purchased decor. */
-  drawServiceCupboards(counter: string): void {
-    this.withPlane(108, () => this.drawServiceCupboardsLogical(counter));
-  }
-
-  private drawServiceCupboardsLogical(counter: string): void {
-    const colors = counterColors(counter);
-    const wood = ramp(colors.front);
-    for (const { x } of MAIN_CUPBOARDS) {
-      if (this.density > 1 && counter === 'counter_oak' && paintCozyCabinet(this.ctx, x - 1, 78, 42, 5, 25)) continue;
-      // Retain the established floor/contact anchor and countertop back edge.
-      this.r(x - 1, 80, 42, 27, OUTLINE);
-      this.r(x, 81, 40, 23, wood.base);
-      this.r(x + 2, 85, 17, 16, wood.lo);
-      this.r(x + 21, 85, 17, 16, wood.lo);
-      this.r(x + 3, 86, 15, 1, wood.hi);
-      this.r(x + 22, 86, 15, 1, wood.hi);
-      this.r(x + 15, 91, 2, 2, '#e7c477');
-      this.r(x + 23, 91, 2, 2, '#e7c477');
-      this.cabinet(x + 2, 85, 17, 18, colors.front, true);
-      this.cabinet(x + 21, 85, 17, 18, colors.front, true);
-      this.r(x - 2, 78, 44, 5, OUTLINE);
-      this.r(x - 1, 78, 42, 3, '#d8c5a8');
-      this.r(x - 1, 78, 42, 1, '#f4e3c8');
-      this.r(x + 2, 105, 3, 3, wood.dark);
-      this.r(x + 35, 105, 3, 3, wood.dark);
-    }
-    this.ctx.save();
-    try {
-      // Glass carafe with a turned neck, stepped shoulders, open handle and water line.
-      this.r(272, 69, 9, 9, '#638a81');
-      this.r(273, 66, 7, 12, '#98baaa');
-      this.r(274, 65, 5, 12, '#dae8cb');
-      this.r(275, 61, 3, 5, '#acc6af');
-      this.r(274, 61, 5, 1, '#f1ebd0');
-      this.r(274, 70, 5, 7, '#83b2a7');
-      this.r(274, 70, 5, 1, '#d4e3c5');
-      this.r(274, 66, 1, 10, '#f6f3db');
-      this.r(278, 68, 1, 8, '#639c94');
-      this.r(280, 67, 3, 1, '#afcabb');
-      this.r(282, 68, 1, 5, '#afcabb');
-      this.r(280, 73, 3, 1, '#759c8f');
-      this.r(286, 76, 17, 2, '#674b31');
-      this.r(286, 75, 17, 1, '#c8a15e');
-      this.r(287, 76, 15, 1, '#ac8c54');
-      for (const x of [288, 296]) {
-        this.r(x, 70, 5, 1, '#90a995');
-        this.r(x, 71, 1, 4, '#eef0d4');
-        this.r(x + 1, 72, 3, 3, '#b0c9b5');
-        this.r(x + 4, 71, 1, 4, '#81a393');
-        this.r(x + 1, 74, 3, 1, '#e1e9ca');
-      }
-    } finally {
-      this.ctx.restore();
-    }
-  }
+  /** The former freestanding window cupboard has been removed from the room.
+   * Keep the painter entry point for existing scene/preview callers. */
+  drawServiceCupboards(_counter: string): void {}
 
   /** The rubber mat the baristas stand on inside the bar, between the back bar and the counter. */
   private drawBarMat(): void {
@@ -1368,27 +1313,6 @@ export class RoomPainter {
     this.r(x + w - 1, cy, 1, ch, brass.lo);
   }
 
-  /** A table spot the shop hasn't expanded into yet: crates and a barrier, standing at (x, y). */
-  drawUnbuilt(x: number, y: number): void {
-    // One discreet planning marker, rather than crates blocking the cross-aisle.
-    this.ctx.save();
-    this.ctx.globalAlpha = 0.6;
-    for (const dx of [-22, 16]) {
-      this.r(x + dx, y - 26, 6, 1, '#b3915e');
-      this.r(x + dx, y + 2, 6, 1, '#b3915e');
-    }
-    for (const dx of [-22, 21]) {
-      this.r(x + dx, y - 26, 1, 5, '#b3915e');
-      this.r(x + dx, y - 2, 1, 5, '#b3915e');
-    }
-    this.ctx.restore();
-    this.r(x - 10, y - 16, 21, 12, OUTLINE);
-    this.r(x - 9, y - 15, 19, 10, '#b99061');
-    this.r(x - 8, y - 14, 17, 1, '#dec395');
-    this.r(x - 8, y - 7, 17, 1, '#805a36');
-    for (const dx of [-7, 7]) this.r(x + dx, y - 13, 1, 1, '#f1d192');
-    this.r(x - 8, y - 4, 2, 2, '#543425');
-    this.r(x + 7, y - 4, 2, 2, '#543425');
-    drawText(this.ctx, '+', x - 1, y - 12, '#fff0cf');
-  }
+  /** Unbuilt spots remain empty; the scene renders an opt-in furniture preview. */
+  drawUnbuilt(_x: number, _y: number): void {}
 }

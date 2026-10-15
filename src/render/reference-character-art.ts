@@ -1,4 +1,4 @@
-import { clearOwnerCompanion, makeOwnerCompanion, preloadOwnerCompanion } from './cozy-owner-companion-art';
+import { clearCozyTeam, cozyTeamReady, makeCozyTeam, preloadCozyTeam } from './cozy-team-art';
 import { CHARACTER_PROPORTIONS } from './character-proportions';
 import { fineSpriteArt, registerFineSpriteArt } from './fine-sprite-art';
 import type { Look } from '../game/state';
@@ -7,7 +7,7 @@ import { applyCozyCharacter, clearCozyCharacters, preloadCozyCharacters } from '
 import { batchCharactersReady, clearBatchCharacters, makeBatchCharacter, preloadBatchCharacters } from './cozy-cast-art';
 
 type Point = Readonly<{x:number;y:number}>;
-type Contacts = Readonly<{foot:Point;head?:Point;headScale?:number;bodyScale?:number;legStart?:number;legEnd?:number;legExtension?:number;seatContact?:Point;petContact?:Point}>;
+type Contacts = Readonly<{foot:Point;head?:Point;headHeight?:number;headScale?:number;bodyScale?:number;legStart?:number;legEnd?:number;legExtension?:number;carryContact?:Point;seatContact?:Point;petContact?:Point}>;
 export const STANDING_CHARACTER_SCALE = CHARACTER_PROPORTIONS.standingScale;
 export const STANDING_LEG_EXTENSION = CHARACTER_PROPORTIONS.straightLegExtension;
 const ZERO=Object.freeze({x:0,y:0});
@@ -16,24 +16,27 @@ let contacts=new WeakMap<HTMLCanvasElement,Contacts>();
 let pending:Promise<void>|null=null,generation=0,ready=false;
 /** Publish the two approved examples and the complete new family atomically. */
 export function preloadReferenceCharacters():Promise<void>{
- if(ready&&batchCharactersReady())return Promise.resolve();
+ if(ready&&batchCharactersReady()&&cozyTeamReady())return Promise.resolve();
  if(pending)return pending;const epoch=generation;
- pending=Promise.all([preloadCozyCharacters(),preloadBatchCharacters(),preloadOwnerCompanion()]).then(()=>{if(epoch===generation)ready=true;}).catch(error=>{if(epoch===generation)pending=null;throw error;});
+ pending=Promise.all([preloadCozyCharacters(),preloadBatchCharacters(),preloadCozyTeam()]).then(()=>{if(epoch===generation)ready=true;}).catch(error=>{if(epoch===generation)pending=null;throw error;});
  return pending;
 }
 export function clearReferenceCharacters():void{
- generation++;ready=false;pending=null;clearCozyCharacters();clearBatchCharacters();clearOwnerCompanion();cache.clear();contacts=new WeakMap();
+ generation++;ready=false;pending=null;clearCozyCharacters();clearBatchCharacters();clearCozyTeam();cache.clear();contacts=new WeakMap();
 }
 export function referenceCharacterOffset(_frame:HTMLCanvasElement):Point{return ZERO;}
 export function referenceCharacterContacts(frame:HTMLCanvasElement):Contacts|null{return contacts.get(frame)??null;}
 export function resolveReferenceCharacter(look:Look,role:Role='customer',appearanceId?:number):CharacterFrames|null{
  if(!ready||!batchCharactersReady())return null;
- const key=['v4',role,look.skin,look.hair,look.hairStyle,look.shirt,look.pants,appearanceId??-1].join('.');
+ const key=['v7',role,look.skin,look.hair,look.hairStyle,look.shirt,look.pants,appearanceId??-1].join('.');
  const old=cache.get(key);if(old)return old;
- const result=role==='owner'?makeOwnerCompanion(look,(frame,points)=>contacts.set(frame,points)):makeBatchCharacter(look,role,appearanceId,(frame,points)=>contacts.set(frame,points));
+ const result=role==='customer'?makeBatchCharacter(look,role,appearanceId,(frame,points)=>contacts.set(frame,points)):makeCozyTeam(look,role,(frame,points)=>contacts.set(frame,points));
  if(!result)return null;
- // Sample identities retain their authored walking and finished table-chair units.
- if(role!=='owner')applyCozyCharacter(result,look,role,appearanceId,(frame,points)=>contacts.set(frame,points));
+ // Team figures are already authored at room scale, including their short limbs.
+ // Never apply the older customer's leg/standing transform to these complete bodies.
+ if(role!=='customer'){cache.set(key,result);if(cache.size>160)cache.delete(cache.keys().next().value!);return result;}
+ // Sample customer identities retain their authored walking and finished table-chair units.
+ applyCozyCharacter(result,look,role,appearanceId,(frame,points)=>contacts.set(frame,points));
  // Match the room's furniture scale without resizing the authored seated-chair units.
  const enlarged=new Map<HTMLCanvasElement,HTMLCanvasElement>();
  const standing=(frame:HTMLCanvasElement)=>{
@@ -44,10 +47,8 @@ export function resolveReferenceCharacter(look:Look,role:Role='customer',appeara
   // Standing legs include the thigh and shin; sitting units bend the thigh onto the cushion.
   // Extend only below the hip, never the head, torso, furniture or simulation position.
   const hipY=point?.legStart??foot.y-6,ankleY=point?.legEnd??foot.y-2.5;
-  // Owner and companion use the same scene normalization; owner contacts keep the apron above the trouser-only extension.
-  // The staff atlas already has longer trouser legs than the owner/customer art.
-  // Keep the server's head and torso unchanged while matching their standing height.
-  const legExtension=role==='server'?3:STANDING_LEG_EXTENSION;
+  // Retain the existing customer normalization unchanged.
+  const legExtension=STANDING_LEG_EXTENSION;
   const target=document.createElement('canvas');target.width=Math.ceil(frame.width*scale);target.height=Math.ceil(frame.height*scale+legExtension);
   const art=document.createElement('canvas');art.width=target.width*density;art.height=target.height*density;
   const ctx=art.getContext('2d')!;ctx.imageSmoothingEnabled=false;

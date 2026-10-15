@@ -1,4 +1,6 @@
 {
+  "upgrade.tables.preview": "预览位置",
+  "upgrade.tables.hidePreview": "收起预览",
   "app.title": "小豆咖啡馆",
   "hud.settings": "设置",
   "panel.title": "经营面板",

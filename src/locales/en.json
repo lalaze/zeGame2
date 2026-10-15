@@ -1,4 +1,6 @@
 {
+  "upgrade.tables.preview": "Preview position",
+  "upgrade.tables.hidePreview": "Hide preview",
   "app.title": "Tiny Bean Café",
   "hud.settings": "Settings",
   "panel.title": "Management panel",

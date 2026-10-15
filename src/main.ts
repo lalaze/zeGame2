@@ -1,4 +1,3 @@
-import { fittedRoomWidth, roomPresentationWidth, setRoomPresentationWidth } from './render/room-width';
 import '@fontsource/pixelify-sans/400.css';
 import '@fontsource/pixelify-sans/600.css';
 import './style.css';
@@ -171,10 +170,7 @@ function fitCanvas(): void {
   const spare = roomH - sceneHeight() * Math.min(rect.width / SCENE_W, roomH / sceneHeight());
   sign.hidden = spare < SIGN_SPACE;
   const availH = roomH - (sign.hidden ? 0 : SIGN_SPACE);
-  const viewWidth = fittedRoomWidth(rect.width, availH, sceneHeight(),
-    !mobileDock && scene.area === 'main' && !scene.overview && !scene.panning);
-  setRoomPresentationWidth(viewWidth);
-  const fit = Math.min((rect.width * dpr) / viewWidth, (availH * dpr) / sceneHeight());
+  const fit = Math.min((rect.width * dpr) / SCENE_W, (availH * dpr) / sceneHeight());
   // The café always fills the available room. Once each art pixel is 3+ device
   // pixels, a fractional nearest-neighbor scale looks even. Below that, rounding down
   // would waste up to half the space, so the art is upscaled to the next whole number
@@ -182,9 +178,9 @@ function fitCanvas(): void {
   const shown = Math.max(0.1, fit);
   const backing = shown >= 3 ? shown : Math.ceil(shown);
   cafe.resize({
-    width: Math.round(viewWidth * backing),
+    width: Math.round(SCENE_W * backing),
     height: Math.round(sceneHeight() * backing),
-    cssWidth: (viewWidth * shown) / dpr,
+    cssWidth: (SCENE_W * shown) / dpr,
     cssHeight: (sceneHeight() * shown) / dpr,
     backing,
     smooth: backing !== shown,
@@ -246,6 +242,7 @@ const panel = new Panel(
     locate: (id) => locateResident(id),
     interact: (id) => greetResident(id),
   },
+  () => regionsUI.select('main'),
 );
 
 /** Opening a management task also reveals the panel if the player folded it away. */
@@ -759,7 +756,7 @@ function greetResident(id: CatId): void {
 
 function tapAt(x: number, y: number): void {
   // Keep scene residents touchable at 44 CSS pixels even in a compact café.
-  const catHitRadius = Math.max(12, 22 * roomPresentationWidth() / Math.max(1, canvas.getBoundingClientRect().width));
+  const catHitRadius = Math.max(12, 22 * SCENE_W / Math.max(1, canvas.getBoundingClientRect().width));
   const residentId = scene.hitResidentCat(x, y, catHitRadius);
   if (residentId) {
     const pet = state.pets.find(p => p.id === residentId)!;
@@ -809,7 +806,10 @@ window.addEventListener('keydown', (e) => {
   if (isComposingKey(e)) return;
   const onboarding = !!document.querySelector('.onboard-overlay');
   if (usesNativeKeyboard(e.target) && e.key !== 'Escape') return;
-  if (e.key === 'Escape' && isModalOpen()) {
+  if (e.key === 'Escape' && panel.tablePreviewRequested && !isModalOpen()) {
+    panel.clearTablePreview();
+    e.preventDefault();
+  } else if (e.key === 'Escape' && isModalOpen()) {
     e.preventDefault();
     closeModal();
   } else if (e.key === 'Escape' && playFlow.handleEscape(e)) {
@@ -838,7 +838,6 @@ const autosaveTimer = setInterval(() => { if (startupComplete) saveGame(); }, AU
 // ------------------------------------------------------------ loop
 
 let uiTimer = 0;
-let fittedView = '';
 let shownCoins = '';
 let shownRate = '';
 
@@ -860,10 +859,11 @@ function frame(dt: number): void {
 
   // Settlement can open a dialog in this frame; hide thoughts immediately.
   scene.paused = paused || isModalOpen();
+  if (panelCollapsed || panelRoot.hidden || scene.paused || !!arrange ||
+      scene.area !== 'main' || scene.overview || state.phase !== 'prep') panel.clearTablePreview();
+  scene.tablePreview = panel.tablePreviewRequested;
   scene.livingCats.update(state, scene.paused ? 0 : dt, sim);
   scene.update(dt, sim);
-  const nextFit = [scene.area, scene.overview, scene.panning].join(':');
-  if (nextFit !== fittedView) { fittedView = nextFit; fitCanvas(); }
   sceneWrap.classList.toggle('is-panning', scene.panning);
   sceneWrap.classList.toggle('is-overview', scene.overview);
   arrangeFocus.update(!!arrange, !scene.panning && !scene.overview && !scene.paused);

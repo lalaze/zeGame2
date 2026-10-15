@@ -68,6 +68,8 @@ export class CafeView {
   overview = false;
   /** Mirrors the page's pause state, so transient thoughts disappear behind dialogs. */
   paused = false;
+  /** An explicit, temporary next-table preview; never saved or treated as a seat. */
+  tablePreview = false;
   /** Set while the player is placing or moving a piece. */
   ghost: Ghost | null = null;
   /** Seconds the cat stays happy after being petted. */
@@ -258,9 +260,6 @@ export class CafeView {
       ({ x, y } = unprojectMainPlaneWorld(this.presentedPointer, MAIN_WALL_PLANE));
     }
     const o = areaOrigin(this.area);
-    // Added side bays are presentation space, not another room's saved columns.
-    if (def.surface === 'wall' && (x < o.x || x >= o.x + SCENE_W))
-      return { col: regionOffset(this.area) / CELL, row: -1 };
     x = x - o.x + regionOffset(this.area);
     y -= o.y;
     const col = Math.round(x / CELL - def.w / 2);
@@ -276,7 +275,7 @@ export class CafeView {
     const hits = state.decor.placed
       .map((p, i) => ({ p, i, def: furnitureDef(p.id) }))
       .filter(({ p, def }) => {
-        if (!def || areaAtX(p.col * CELL) !== this.area) return false;
+        if (!def) return false;
         let b =
           def.surface === 'wall'
             ? cellRect('wall', p.col, p.row, def.w, def.h)

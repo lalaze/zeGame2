@@ -55,10 +55,8 @@ export const BACK_BAR = { x: 72, w: 182, top: 57, front: 63 };
 /** The floor inside the bar, between the back bar and the counter. */
 export const BAR_AISLE = { x: COUNTER_RETURN.x + COUNTER_RETURN.w, w: COUNTER_GATE.x + COUNTER_GATE.w - COUNTER_RETURN.x - COUNTER_RETURN.w, top: FLOOR_Y, bottom: COUNTER.top };
 
-/** Fitted crockery cabinets below the windows (no gameplay capacity/comfort). */
-export const MAIN_CUPBOARDS = [
-  { x: 266, y: 80, w: 40, h: 28 },
-] as const;
+/** No freestanding window cupboards remain; keep the shared obstacle list empty. */
+export const MAIN_CUPBOARDS: readonly { x: number; y: number; w: number; h: number }[] = [];
 
 /** The front door: an opening in the bottom wall, centered. */
 export const DOOR_W = 32;

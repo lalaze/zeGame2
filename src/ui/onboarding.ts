@@ -255,8 +255,9 @@ export function showOnboarding(opts: Options): void {
               const head = character({ ...draft.look, hairStyle: i }, 'owner').stand;
               const crop = document.createElement('canvas');
               crop.width = head.width;
-              crop.height = HEAD_ROWS - 3;
-              const headY=referenceCharacterContacts(head)?.head?.y ?? 0;
+              const contact=referenceCharacterContacts(head);
+              crop.height = Math.ceil(contact?.headHeight ?? HEAD_ROWS - 3);
+              const headY=contact?.head?.y ?? 0;
               crop.getContext('2d')!.drawImage(head, 0, -headY);
               crop.className = 'swatch-sprite';
               b.append(crop);

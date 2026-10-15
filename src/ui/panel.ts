@@ -61,6 +61,7 @@ import { formatTransactionMoney as formatMoney, formatNumber } from '../game/for
 import { GOALS, claimGoal, currentGoal, goalDone } from '../game/goals';
 import type { GameState } from '../game/state';
 import { mainTableCount } from '../game/regions';
+import { MAX_TABLES } from '../game/layout';
 import { t, type MessageKey } from '../i18n';
 import { toast } from './modal';
 import { showTaste, tasteLabel, tasteProgressLabel } from './taste';
@@ -169,6 +170,13 @@ export const decorName = (id: string) => t(`decor.${id}` as MessageKey);
 
 export class Panel {
   private tab: Tab = 'menu';
+  private tablePreview = false;
+  get tablePreviewRequested(): boolean { return this.tablePreview; }
+  clearTablePreview(): void {
+    this.tablePreview = false;
+    const button = this.list.querySelector<HTMLButtonElement>('[data-table-preview]');
+    if (button) { button.setAttribute('aria-pressed', 'false'); button.textContent = t('upgrade.tables.preview'); }
+  }
   private scrollPositions = new Map<Tab, number>();
   private introMode = false;
   private promotionPanel: PromotionPanel | null = null;
@@ -206,6 +214,7 @@ export class Panel {
     private onPurchase: (kind: PurchaseKind, id: string) => void,
     private onArrange: (request: ArrangeRequest) => void,
     private livingCats: LivingCatControls = {},
+    private onTablePreview: () => void = () => {},
   ) {
     this.pantryTaskNotice = document.createElement('section');
     this.pantryTaskNotice.className = 'pantry-task-context';
@@ -272,6 +281,7 @@ export class Panel {
     if (this.introMode === enabled) return;
     const focused = this.focusedControl();
     this.introMode = enabled;
+    this.clearTablePreview();
     const previousTab = this.tab;
     if (enabled && this.tab !== 'menu' && this.tab !== 'pantry') {
       this.scrollPositions.set(this.tab, readPanelScroll(this.list, this.scroller));
@@ -284,6 +294,7 @@ export class Panel {
   }
 
   showTab(tab: Tab): void {
+    this.clearTablePreview();
     // Clear temporary presentation before measuring/restoring the destination.
     for (const listener of this.navigationListeners) listener(tab);
     const focused = this.focusedControl();
@@ -322,6 +333,7 @@ export class Panel {
   }
 
   restoreBrowsingContext(context: PanelBrowsingContext, focus = true): void {
+    this.clearTablePreview();
     this.amount = context.amount;
     this.pantryAmount = context.pantryAmount;
     this.category = context.category;
@@ -456,6 +468,13 @@ export class Panel {
 
   private onListClick(e: Event): void {
     const target = e.target as HTMLElement;
+    const preview = target.closest<HTMLButtonElement>('button[data-table-preview]');
+    if (preview && !preview.disabled) {
+      this.tablePreview = !this.tablePreview;
+      if (this.tablePreview) this.onTablePreview();
+      this.update();
+      return;
+    }
     const categoryButton = target.closest<HTMLButtonElement>('button[data-decor-category]');
     if (categoryButton) {
       const category = categoryButton.dataset.decorCategory as typeof this.decorCategory;
@@ -543,6 +562,7 @@ export class Panel {
     const ok =
       kind === 'item' ? buyItem(this.state, id as ItemId, this.buyAmount) : buyUpgrade(this.state, id as UpgradeId, this.buyAmount);
     if (!ok) return;
+    if (kind === 'upgrade' && id === 'tables') this.clearTablePreview();
     this.pop(btn.closest('.row'));
     this.onPurchase(kind, id);
     this.update();
@@ -556,6 +576,7 @@ export class Panel {
   }
 
   setState(state: GameState): void {
+    this.clearTablePreview();
     this.state = state;
     for (const listener of this.navigationListeners) listener(this.tab);
     this.refresh();
@@ -720,6 +741,7 @@ export class Panel {
           ${isItem || isIng ? '<div class="bar"><i></i></div>' : ''}
         </div>
         <div class="row-actions">
+          ${kind === 'upgrade' && id === 'tables' ? '<button type="button" class="chip" data-table-preview aria-pressed="false"></button>' : ''}
           ${isItem ? `<button class="chip menu-toggle" data-menu="${id}"></button>` : ''}
           <button class="pixel-btn buy" data-buy="${kind}:${id}">
             <span class="label"></span><span class="cost"></span>
@@ -875,6 +897,14 @@ export class Panel {
 
   private updateContents(): void {
     const s = this.state;
+    const preview = this.list.querySelector<HTMLButtonElement>('[data-table-preview]');
+    const previewAvailable = this.tab === 'upgrades' && s.phase === 'prep' && mainTableCount(s) < MAX_TABLES;
+    if (!previewAvailable) this.tablePreview = false;
+    if (preview) {
+      preview.hidden = !previewAvailable;
+      preview.setAttribute('aria-pressed', String(this.tablePreview));
+      preview.textContent = t(this.tablePreview ? 'upgrade.tables.hidePreview' : 'upgrade.tables.preview');
+    }
     if (this.tab === 'promotion') { this.promotionPanel?.update(); return; }
     if (this.tab === 'pets') { this.petPanel?.update(); return; }
 
