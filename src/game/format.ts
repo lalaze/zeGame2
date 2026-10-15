@@ -18,15 +18,14 @@ export function formatNumber(n: number): string {
 
 export const formatMoney = (n: number) => '$' + formatNumber(n);
 
-/** Transactions keep useful fractional precision; an approximation is never unmarked.
+/** Everyday transactions use at most two decimals; an approximation is never unmarked.
  * Exact values remain available through the amount-details controls. */
 export function formatTransactionMoney(n: number): string {
   if (!Number.isFinite(n)) return formatMoney(n);
   if (Math.abs(n) < 1000 || Number.isInteger(n) && Math.abs(n) < 100000) {
-    const shown = Number(n.toFixed(4));
+    const shown = Number(n.toFixed(2));
     if (n !== 0 && shown === 0) {
-      const tiny = n.toExponential(2).replace('+', '');
-      return `${Number(tiny) === n ? '' : '≈'}$${tiny}`;
+      return n < 0 ? '−<$0.01' : '<$0.01';
     }
     return `${shown === n ? '' : '≈'}$${shown}`;
   }

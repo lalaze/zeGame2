@@ -17,7 +17,7 @@ function pastryCount(phase: GameState['phase'], planned: number, remaining: numb
   state.bakePlan.roll = planned;
   state.shelf.roll = remaining;
   const drawImage = vi.fn();
-  const ctx = { fillStyle: '', globalAlpha: 1, fillRect() {}, save() {}, restore() {}, drawImage } as unknown as CanvasRenderingContext2D;
+  const ctx = { measureText:(text:string)=>({width:[...text].length*5}),fillText() {},beginPath() {},rect() {},clip() {}, fillStyle: '', globalAlpha: 1, fillRect() {}, save() {}, restore() {}, drawImage } as unknown as CanvasRenderingContext2D;
   new RoomPainter(ctx).drawCounter(state, 'counter_oak', 0, []);
   return drawImage.mock.calls.filter(([source]) => source.itemId === 'roll').length;
 }

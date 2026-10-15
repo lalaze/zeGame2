@@ -4,7 +4,7 @@ import { BACK_BAR, COUNTER, MAIN_CUPBOARDS, PASS, PASS_BELL, passSlot } from '..
 import { createInitialState, type GameState } from '../game/state';
 import { clearGeneratedMainAssets, installGeneratedMainAsset, removeGeneratedMainSource, type GeneratedMainId } from './generated-main-art';
 import { MACHINE_X, MACHINE_Y, RoomPainter, type CounterCup } from './room-art';
-import { drawText } from './font';
+const nativeText = vi.fn();
 
 vi.mock('./font', () => ({ drawText: vi.fn(), textWidth: (text: string) => text.length * 4 }));
 vi.mock('./sprites', () => ({
@@ -26,6 +26,7 @@ function context() {
   const stack:{fillStyle:string;globalAlpha:number;imageSmoothingEnabled:boolean;tx:number;ty:number;activeClip:number[][]|null}[]=[];
   let path:number[][]=[];
   const ctx={
+    measureText:(text:string)=>({width:[...text].length*5}),fillText:nativeText,
     fillStyle:'#123456',globalAlpha:1,imageSmoothingEnabled:true,tx:0,ty:0,activeClip:null as number[][]|null,
     save(){stack.push({fillStyle:this.fillStyle,globalAlpha:this.globalAlpha,imageSmoothingEnabled:this.imageSmoothingEnabled,tx:this.tx,ty:this.ty,activeClip:this.activeClip});},
     restore(){Object.assign(this,stack.pop()!);},
@@ -254,7 +255,7 @@ describe.each(COUNTER_FINISHES)('selected main-service bitmap integration (%s)',
   it('fits the corrected pickup visible bbox at native aspect without altering the six slots or bell',()=>{
     installServices();
     const slots=Array.from({length:6},(_,i)=>passSlot(i)), bell={...PASS_BELL};
-    const {ctx,events}=render();
+    const {events}=render();
     const draw=images(events).find(event=>event.source.assetId==='service-pickup')!;
     expect(draw).toBeDefined();
     expect(draw.args.slice(0,4)).toEqual([8,8,1281,1102]);
@@ -268,7 +269,7 @@ describe.each(COUNTER_FINISHES)('selected main-service bitmap integration (%s)',
     expect(y+(1063-42)*w/1281).toBeCloseTo(93.881343,5);
     expect(Array.from({length:6},(_,i)=>passSlot(i))).toEqual(slots);
     expect(PASS_BELL).toEqual(bell);
-    expect(drawText).toHaveBeenCalledWith(ctx,'PICKUP',PASS.x+7,PASS.top+1,'#f5e6c4');
+    expect(nativeText).toHaveBeenCalledWith('PICK…',PASS.x+19,PASS.top+3.5);
     const header=at(events,PASS.x-2,PASS.top-1,PASS.w+4,8,'#39281f')[0];
     expect(events.indexOf(header)).toBeGreaterThan(events.indexOf(draw));
     expect(at(events,PASS.x+1,PASS.top+21,38,3,'#39281f')).toHaveLength(0);

@@ -3,7 +3,7 @@ import { CHARACTER_PROPORTIONS } from './character-proportions';
 import { fineSpriteArt, registerFineSpriteArt } from './fine-sprite-art';
 import type { Look } from '../game/state';
 import type { CharacterFrames, Role } from './sprites';
-import { applyCozyCharacter, clearCozyCharacters, preloadCozyCharacters } from './cozy-character-art';
+import { COZY_GUEST_APPEARANCE_ID, applyCozyCharacter, clearCozyCharacters, preloadCozyCharacters } from './cozy-character-art';
 import { batchCharactersReady, clearBatchCharacters, makeBatchCharacter, preloadBatchCharacters } from './cozy-cast-art';
 
 type Point = Readonly<{x:number;y:number}>;
@@ -28,7 +28,7 @@ export function referenceCharacterOffset(_frame:HTMLCanvasElement):Point{return 
 export function referenceCharacterContacts(frame:HTMLCanvasElement):Contacts|null{return contacts.get(frame)??null;}
 export function resolveReferenceCharacter(look:Look,role:Role='customer',appearanceId?:number):CharacterFrames|null{
  if(!ready||!batchCharactersReady())return null;
- const key=['v7',role,look.skin,look.hair,look.hairStyle,look.shirt,look.pants,appearanceId??-1].join('.');
+ const key=['v8',role,look.skin,look.hair,look.hairStyle,look.shirt,look.pants,appearanceId??-1].join('.');
  const old=cache.get(key);if(old)return old;
  const result=role==='customer'?makeBatchCharacter(look,role,appearanceId,(frame,points)=>contacts.set(frame,points)):makeCozyTeam(look,role,(frame,points)=>contacts.set(frame,points));
  if(!result)return null;
@@ -47,8 +47,9 @@ export function resolveReferenceCharacter(look:Look,role:Role='customer',appeara
   // Standing legs include the thigh and shin; sitting units bend the thigh onto the cushion.
   // Extend only below the hip, never the head, torso, furniture or simulation position.
   const hipY=point?.legStart??foot.y-6,ankleY=point?.legEnd??foot.y-2.5;
-  // Retain the existing customer normalization unchanged.
-  const legExtension=STANDING_LEG_EXTENSION;
+  // The smaller approved sample needs its extension; batch guests need only a small extension to match the 37–40px team.
+  // Preserve seated units and all source clothing/identity pixels.
+  const legExtension=appearanceId===COZY_GUEST_APPEARANCE_ID?STANDING_LEG_EXTENSION:4;
   const target=document.createElement('canvas');target.width=Math.ceil(frame.width*scale);target.height=Math.ceil(frame.height*scale+legExtension);
   const art=document.createElement('canvas');art.width=target.width*density;art.height=target.height*density;
   const ctx=art.getContext('2d')!;ctx.imageSmoothingEnabled=false;

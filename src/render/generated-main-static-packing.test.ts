@@ -36,6 +36,7 @@ class RecordingCanvas {
   width = 0; height = 0; draws: Draw[] = []; geometry: unknown[][] = [];
   stack: { fillStyle: string; globalAlpha: number; imageSmoothingEnabled: boolean; globalCompositeOperation: string }[] = [];
   context = {
+    measureText: (text: string) => ({ width: [...text].length * 5 }), fillText() {},
     canvas: this, fillStyle: '', globalAlpha: 1, imageSmoothingEnabled: true, globalCompositeOperation: 'source-over',
     save: () => { const c = this.context; this.stack.push({ fillStyle: c.fillStyle, globalAlpha: c.globalAlpha, imageSmoothingEnabled: c.imageSmoothingEnabled, globalCompositeOperation: c.globalCompositeOperation }); },
     restore: () => Object.assign(this.context, this.stack.pop()),

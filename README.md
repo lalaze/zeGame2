@@ -77,7 +77,7 @@ What to spend the day's revenue on:
 
 ### Little thoughts
 
-Customers and staff occasionally share short, localized thought clouds about what they are doing. Dine-in guests have consistent cosmetic flavor preferences, with affectionate likes and gentle dislikes after their order arrives. These thoughts never change orders, prices, tips, patience, or save data. At most two clouds appear at once; they avoid service indicators and disappear during dialogs, room transitions, the map, and furniture placement. Thought clouds add no animation.
+Customers and staff occasionally share short, localized thought clouds about what they are doing. Dine-in guests have consistent cosmetic flavor preferences, with affectionate likes and gentle dislikes after their order arrives. These thoughts never change orders, prices, tips, patience, or save data. At most one compact cloud appears at once, for up to 3.6 seconds; they avoid service indicators and disappear during dialogs, room transitions, the map, and furniture placement. Thought clouds add no animation.
 
 ### Neighborhood regulars
 

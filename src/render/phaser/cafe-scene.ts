@@ -634,7 +634,7 @@ export class CafeScene extends Phaser.Scene {
       return;
     }
     if (area === 'main') {
-      const backSig = [tick, H, Object.values(decor).join(','), menuItems(state).map((m) => m.id).join(','), state.phase, placed, now.getTime(), this.view.kitchenDoor.toFixed(2)].join('|');
+      const backSig = [tick, H, getLocale(), state.profile?.cafeName, Object.values(decor).join(','), menuItems(state).map((m) => m.id).join(','), state.phase, placed, now.getTime(), this.view.kitchenDoor.toFixed(2)].join('|');
       this.paint(back, o.x, o.y, backSig, (p) => {
         p.kitchenDoor = this.view.kitchenDoor;
         const ctx = p.ctx;
@@ -646,7 +646,7 @@ export class CafeScene extends Phaser.Scene {
         for (const win of WINDOWS.slice(1)) p.drawWindow(win, light, t, null);
         p.withPlane(MAIN_WALL_PLANE, () => paintSill(p.ctx, decor.sill, sill.x + sill.w - 8, sill.y + sill.h + 1));
         // The neon sign glows in the left window, facing the street.
-        p.withPlane(MAIN_WALL_PLANE, () => paintNeon(p.ctx, decor.neon, sill.x + sill.w / 2, sill.y + 4, t));
+        p.withPlane(MAIN_WALL_PLANE, () => paintNeon(p.ctx, decor.neon, sill.x + sill.w / 2, sill.y + 4, t, state.profile?.cafeName));
         p.drawMenuBoard(state);
         state.decor.placed.forEach((piece, i) => {
           const def = furnitureDef(piece.id);
@@ -670,7 +670,7 @@ export class CafeScene extends Phaser.Scene {
       const counter = this.layer('room-main-counter', DEPTH.counter);
       const shelf = state.phase !== 'prep' ? state.shelf : state.bakePlan;
       const counterSig = [
-        H,
+        H, getLocale(),
         decor.counter,
         state.upgrades.machine,
         now.getTime(),
@@ -1312,7 +1312,7 @@ export class CafeScene extends Phaser.Scene {
       const key = `thought-${getLocale()}-${c.key}`;
       if (!this.textures.exists(key)) {
         const measure = document.createElement('canvas').getContext('2d')!;
-        const font = '12px "Pixel ZH", "Pixelify Sans", sans-serif';
+        const font = '10px "Pixel ZH", "Pixelify Sans", sans-serif';
         measure.font = font;
         const units = getLocale() === 'zh' ? [...text] : text.split(' ');
         const join = getLocale() === 'zh' ? '' : ' ';
@@ -1320,7 +1320,7 @@ export class CafeScene extends Phaser.Scene {
         let line = '';
         for (const unit of units) {
           const next = line ? line + join + unit : unit;
-          if (line && measure.measureText(next).width > 96) { lines.push(line); line = unit; }
+          if (line && measure.measureText(next).width > 80) { lines.push(line); line = unit; }
           else line = next;
         }
         if (line) lines.push(line);

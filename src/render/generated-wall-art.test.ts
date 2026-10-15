@@ -3,7 +3,7 @@ import { MENU } from '../game/data';
 import { menuItems } from '../game/economy';
 import { FLOOR_Y, WINDOWS } from '../game/layout';
 import { createInitialState } from '../game/state';
-import { drawText } from './font';
+const nativeText = vi.fn();
 import { clearGeneratedMainAssets, installGeneratedMainAsset, type GeneratedMainId } from './generated-main-art';
 import { lightingAt } from './lighting';
 import { RoomPainter } from './room-art';
@@ -27,6 +27,7 @@ function recording(canvas?:{label?:string}){
   const events:Event[]=[],clips:Clip[]=[],stack:{fillStyle:string;globalAlpha:number;imageSmoothingEnabled:boolean;activeClip:Clip|null}[]=[];
   let pending:Clip|null=null;
   const ctx={
+    measureText:(text:string)=>({width:[...text].length*5}),fillText:nativeText,
     canvas,fillStyle:'#123456',globalAlpha:1,imageSmoothingEnabled:true,activeClip:null as Clip|null,
     save(){stack.push({fillStyle:this.fillStyle,globalAlpha:this.globalAlpha,imageSmoothingEnabled:this.imageSmoothingEnabled,activeClip:this.activeClip});},
     restore(){Object.assign(this,stack.pop()!);},
@@ -90,9 +91,9 @@ describe('selected main-wall bitmaps and live overlays',()=>{
     for(const sign of [false,true]){
       clearGeneratedMainAssets();windowRecord(12,0,sign);
       const word=sign?'OPEN':'CLOSED';
-      const legacy=vi.mocked(drawText).mock.calls.filter(call=>call[1]===word).at(-1)!.slice(2);
+      const legacy=nativeText.mock.calls.filter(call=>call[0]===word).at(-1)!.slice(1);
       installWalls();const generated=windowRecord(12,0,sign);
-      const replacement=vi.mocked(drawText).mock.calls.filter(call=>call[1]===word).at(-1)!.slice(2);
+      const replacement=nativeText.mock.calls.filter(call=>call[0]===word).at(-1)!.slice(1);
       expect(replacement).toEqual(legacy);
       expect(fills(generated.events).some(fill=>fill.x===49&&fill.y===47&&fill.w===5&&fill.h===4&&fill.color==='#bc7149')).toBe(true);
     }
@@ -127,7 +128,7 @@ describe('selected main-wall bitmaps and live overlays',()=>{
       expect(ix+iw).toBeLessThanOrEqual(cx+cw);expect(iy+ih).toBeLessThanOrEqual(cy+ch);
       expect(record.events.indexOf(image)).toBeGreaterThan(record.events.indexOf(draw));
     }
-    expect(images(record.events).some(image=>image.source.label==='MENU')).toBe(true);
+    expect(nativeText.mock.calls.some(call=>call[0]==='MENU')).toBe(true);
     expect(JSON.stringify(state)).toBe(before);
     expect(record.state.activeClip).toBeNull();expect(record.state.imageSmoothingEnabled).toBe(true);expect(record.stack).toHaveLength(0);
   });

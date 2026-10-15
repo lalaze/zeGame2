@@ -4,6 +4,25 @@ import { FLOOR_Y, SCENE_W, passageY, areaBounds, doorwayY } from '../game/layout
 import { adjacentArea, isAreaOpen, type AreaId, type Direction } from '../game/regions';
 import type { GameState } from '../game/state';
 
+
+/** Visible woven fibres at the room's native art resolution. No navigation changes. */
+export function passageRunner(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, dir: 'h' | 'v', base: string, detailed: boolean): void {
+  paintRunner(ctx, x, y, w, h, dir, base);
+  if (!detailed) return;
+  const light = mix(base, '#f3e7cf', .28), shade = mix(base, '#705a40', .18);
+  for (let yy = Math.ceil(y + 3); yy < y + h - 3; yy += 3) {
+    const shift = Math.floor(yy / 3) % 2 ? 2 : 0;
+    for (let xx = Math.ceil(x + 3) + shift; xx < x + w - 3; xx += 5) {
+      ctx.fillStyle = shade; ctx.fillRect(xx, yy, 2, 1);
+      ctx.fillStyle = light; ctx.fillRect(xx, yy + 1, 1, 1);
+    }
+  }
+  // One inward contact edge gives the fabric thickness without widening paths.
+  ctx.fillStyle = mix(base, '#493127', .24);
+  if (dir === 'v') ctx.fillRect(x + w - 1, y, 1, h);
+  else ctx.fillRect(x, y + h - 1, w, 1);
+}
+
 /** Physical thresholds and circulation belong to the building, not to the camera. */
 export function paintPassageFloor(ctx: CanvasRenderingContext2D, area: AreaId): void {
   // The kitchen's tiled floor needs no runner.
@@ -16,8 +35,8 @@ export function paintPassageFloor(ctx: CanvasRenderingContext2D, area: AreaId): 
   const start = area === 'main' ? 64 : left ? 0 : 146;
   const end = right ? 320 : 174;
   // The runner to the glasshouse tucks under the cross runner.
-  if (adjacentArea(area, 'up')) paintRunner(ctx, 145, 0, 30, y, 'v', jute);
-  paintRunner(ctx, start, y - 7, end - start, 14, 'h', jute);
+  if (adjacentArea(area, 'up')) passageRunner(ctx, 145, 0, 30, y, 'v', jute, area !== 'main');
+  passageRunner(ctx, start, y - 7, end - start, 14, 'h', jute, area !== 'main');
   ctx.fillStyle = '#b29770';
   for (const direction of ['left', 'right'] as const) {
     if (!adjacentArea(area, direction) || (area === 'main' && direction === 'left')) continue;

@@ -80,3 +80,15 @@ describe('progressive settlement disclosure', () => {
     }
   });
 });
+
+ it.each(['en', 'zh'] as const)('separates full and partial forecast funding in %s', locale => {
+  setLocale(locale); const state = createInitialState(0); state.goal = GOALS.length; state.pantry.beans = 0;
+  state.coins = 25340.481970575758;
+  const full = settlementHtml(day(), state); document.body.innerHTML = full.body;
+  expect(full.advice.action.kind).toBe('restock');
+  expect(document.querySelector('.report-action')!.textContent).toContain(locale === 'zh' ? '可买齐当前预测' : 'all ingredients in the current forecast');
+  expect(document.querySelector('.report-action')!.textContent).not.toContain(locale === 'zh' ? '资金只够部分' : 'budget covers only part');
+  state.coins = 1;
+  document.body.innerHTML = settlementHtml(day(), state).body;
+  expect(document.querySelector('.report-action')!.textContent).toContain(locale === 'zh' ? '资金只够部分' : 'budget covers only part');
+ });

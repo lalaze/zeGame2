@@ -30,14 +30,14 @@ export function thoughtTextRaster(lines: readonly string[], font: string, width:
   const canvas = document.createElement('canvas');
   canvas.width = width;
   // Generous transparent space accommodates ascenders/descenders in either font.
-  canvas.height = lines.length * 14 + 48;
+  canvas.height = lines.length * 12 + 48;
   const ctx = canvas.getContext('2d')!;
   ctx.font = font;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'alphabetic';
   ctx.fillStyle = UI_ART.ink;
-  lines.forEach((line, i) => ctx.fillText(line, width / 2, 24 + i * 14));
+  lines.forEach((line, i) => ctx.fillText(line, width / 2, 24 + i * 12));
   const ink = alphaInkBounds(ctx.getImageData(0, 0, canvas.width, canvas.height).data, canvas.width, canvas.height);
   // Translations are non-empty; a harmless transparent row also handles blank input.
-  return { canvas, ...centerInk(ink ?? { top: 24, bottom: 24 }, lines.length * 14 + 8) };
+  return { canvas, ...centerInk(ink ?? { top: 24, bottom: 24 }, lines.length * 12 + 6) };
 }

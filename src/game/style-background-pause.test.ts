@@ -50,7 +50,7 @@ function liveFrame(withCare = true) {
     detachedTablePreview: false, previewExit: document.createElement('button'), stage: document.createElement('section'),
     SIM_STEP: simStep, isModalOpen: () => modal, showReport,
     sceneWrap: document.createElement('div'), arrangeFocus: { update: vi.fn() }, arrange: null,
-    coinsEl: document.createElement('button'), rateEl: document.createElement('div'),
+    drawerBalance: document.createElement('button'), coinsEl: document.createElement('button'), rateEl: document.createElement('div'),
     formatMoney, formatTransactionMoney, t, panel: { update: vi.fn(), tablePreviewRequested: false, clearTablePreview: vi.fn() }, regionsUI: { update: vi.fn() },
     updateStats: vi.fn(), updateDayHud: vi.fn(),
   };

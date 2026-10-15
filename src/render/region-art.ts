@@ -1,6 +1,7 @@
 import { FLOOR_Y, SCENE_W, floorY } from '../game/layout';
 import type { RegionId } from '../game/regions';
-import { paintFloor, paintWall, paintRunner } from './decor-art';
+import { paintFloor, paintWall } from './decor-art';
+import { passageRunner } from './passages';
 import { drawText, textWidth } from './font';
 import { cabinetPanel, glassReflection, leafySprig, timberBeam, treeLine, wallLantern, WARM_MATERIAL } from './materials';
 import { mix } from './color';
@@ -190,7 +191,7 @@ export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, l
   drawText(ctx, word, signX - textWidth(word) / 2, 11, '#f4e6c7');
 
   // The existing narrow service aisle is unchanged; only its woven artwork differs.
-  paintRunner(ctx, 145, floorY(110), 30, height - floorY(110) - 8, 'v', reading ? '#d7b385' : '#cdbd96');
+  passageRunner(ctx, 145, floorY(110), 30, height - floorY(110) - 8, 'v', reading ? '#d7b385' : '#cdbd96', true);
   const { lean, length } = beam(light.sun);
   if (reading) paintSunbeam(ctx, light.sun, 113, 207, FLOOR_Y, lean, length);
   else if (!terrace) for (const x of [20, 128, 236]) paintSunbeam(ctx, light.sun, x, x + 34, FLOOR_Y, lean, length + 24);

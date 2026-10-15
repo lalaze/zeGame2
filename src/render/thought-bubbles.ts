@@ -78,7 +78,7 @@ export class ThoughtBubbles {
       if (!live.has(id) || live.get(id)!.context !== a.context || a.until <= this.now) this.active.delete(id);
     }
     for (const id of this.cooldown.keys()) if (!live.has(id)) this.cooldown.delete(id);
-    if (this.active.size < 2 && this.now >= this.next) {
+    if (this.active.size < 1 && this.now >= this.next) {
       const c = candidates.filter(c => {
         const previous = this.cooldown.get(c.id);
         // A first taste must still fit into a short visit after a queue/service thought.
@@ -87,7 +87,7 @@ export class ThoughtBubbles {
       })
         .sort((a, b) => b.priority - a.priority || a.id.localeCompare(b.id))[0];
       if (c) {
-        this.active.set(c.id, { context: c.context, until: this.now + 4.8 });
+        this.active.set(c.id, { context: c.context, until: this.now + 3.6 });
         this.cooldown.set(c.id, { until: this.now + 19, context: c.context });
         this.next = this.now + 2.4;
       }

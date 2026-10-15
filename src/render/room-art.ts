@@ -1,3 +1,5 @@
+import { getLocale, t } from '../i18n';
+import { paintSignText } from './sign-lettering';
 import { mainKeyLight, paintWindowBounce } from './main-room-lighting';
 import { cozyCafePart, paintCozyCabinet } from './cozy-cafe-art';
 import { getGeneratedDecorAdapter, getGeneratedIngredientAdapter, getGeneratedMainEnvironmentAdapter } from './generated-main-art';
@@ -35,7 +37,7 @@ import { paintPassageFloor } from './passages';
 import { cabinetPanel, glassReflection, leafySprig, timberBeam, treeLine, wallLantern } from './materials';
 import { mix, ramp } from './color';
 import { counterColors, grain, paintCounter, paintFloor, paintRug, paintRunner, paintRunnerJoin, paintWainscot, paintWall, wainscotColor } from './decor-art';
-import { drawText, textWidth } from './font';
+import { textWidth } from './font';
 import { type Lighting, type Sun } from './lighting';
 import { OUTLINE, itemIcon, pixelSprite } from './sprites';
 import { paintPixelFloorDepth } from './pixel-floor-depth';
@@ -61,20 +63,6 @@ const SERVICE_FOOT_Y = {
   'service-cups': 286 / 294,
   'service-jars': 296 / 304,
 } as const;
-
-/** A tiny bounded cache for the room's bitmap headings, reused on lighting updates. */
-const headingCache = new Map<string, HTMLCanvasElement>();
-function bigText(ctx: CanvasRenderingContext2D, text: string, cx: number, y: number, color: string, outline?: string): void {
-  const key = `${text}:${color}:${outline ?? ''}`;
-  let tmp = headingCache.get(key);
-  if (!tmp) {
-    tmp = document.createElement('canvas');
-    tmp.width = textWidth(text) + 2; tmp.height = 7;
-    drawText(tmp.getContext('2d')!, text, 1, 1, color, outline);
-    headingCache.set(key, tmp);
-  }
-  ctx.drawImage(tmp, Math.round(cx - tmp.width), y, tmp.width * 2, tmp.height * 2);
-}
 
 const ESPRESSO = [
   '..wwww..wwww..wwww............',
@@ -367,7 +355,8 @@ export class RoomPainter {
       const rs = source.sourceScale;
       ctx.drawImage(source.source, 10 * rs, 10 * rs, sw * rs, sh * rs, x, y, width, sh * scale);
       ctx.beginPath(); ctx.rect(x + 51 * scale, y + 43 * scale, 697 * scale, 264 * scale); ctx.clip();
-      bigText(ctx, 'MENU', x + width / 2, y + 4, '#f5efe0');
+      paintSignText(ctx, state.profile?.cafeName ?? t('app.title'), x + width / 2, y + 6, width - 16, 7, '#f5efe0');
+      paintSignText(ctx, getLocale() === 'zh' ? '今日菜单' : 'MENU', x + width / 2, y + 13, width - 16, 5, '#e6c997');
       const today = menuItems(state);
       [today.slice(0,5), today.slice(5,10)].forEach((row,ri) => {
         const total = row.length * 16 - 4;
@@ -703,8 +692,8 @@ export class RoomPainter {
     leafySprig(ctx, x + w - 7, y + h - 6, 3, x);
     if (sign === null) return;
     // The OPEN / CLOSED sign hangs on two strings from the crossbar, below the neon.
-    const word = sign ? 'OPEN' : 'CLOSED';
-    const sw = textWidth(word) + 6;
+    const word = getLocale() === 'zh' ? (sign ? '营业中' : '休息中') : (sign ? 'OPEN' : 'CLOSED');
+    const sw = getLocale() === 'zh' ? 27 : textWidth(word) + 6;
     const sx = Math.round(x + (w - sw) / 2);
     const bar = y + h / 2 + 2;
     const sy = bar + 3;
@@ -712,7 +701,7 @@ export class RoomPainter {
     this.r(sx + sw - 3, bar, 1, sy - bar, '#4a2e1e');
     this.r(sx, sy, sw, 9, OUTLINE);
     this.r(sx + 1, sy + 1, sw - 2, 7, sign ? '#fdf6ec' : '#3f5f93');
-    drawText(this.ctx, word, sx + 3, sy + 2, sign ? '#d9384a' : '#fdf6ec');
+    paintSignText(this.ctx, word, sx + sw / 2, sy + 1, sw - 4, 7, sign ? '#d9384a' : '#fdf6ec');
   }
 
 
@@ -753,7 +742,8 @@ export class RoomPainter {
     this.r(x + 8, y + h - 7, 14, 1, '#4f6e5c');
     this.r(x + w - 22, y + 7, 12, 1, '#4f6e5c');
     this.r(x + w - 14, y + h - 9, 6, 1, '#4f6e5c');
-    bigText(this.ctx, 'MENU', x + w / 2, y + 4, '#f5efe0');
+    paintSignText(this.ctx, state.profile?.cafeName ?? t('app.title'), x + w / 2, y + 3, w - 16, 8, '#f5efe0');
+    paintSignText(this.ctx, getLocale() === 'zh' ? '今日菜单' : 'MENU', x + w / 2, y + 11, w - 16, 6, '#e6c997');
     // Today's menu, as many as fit.
     const today = menuItems(state);
     const rows = [today.slice(0, 5), today.slice(5, 10)];
@@ -1188,7 +1178,7 @@ export class RoomPainter {
     // Distinct customer-facing order and pickup plaques.
     this.r(108, 112, 31, 10, OUTLINE);
     this.r(109, 113, 29, 8, '#466958');
-    drawText(this.ctx, 'ORDER', 113, 115, '#f8e8bc');
+    paintSignText(this.ctx, getLocale() === 'zh' ? '点单' : 'ORDER', 123.5, 113, 27, 8, '#f8e8bc');
 
     // Tip jar, in the gap between the first two baristas.
     const coins = Math.min(4, 1 + Math.floor(state.today.served / 15));
@@ -1286,7 +1276,7 @@ export class RoomPainter {
     this.r(x - 2, top - 1, w + 4, 8, OUTLINE);
     this.r(x - 1, top, w + 2, 6, wood.lo);
     this.r(x - 1, top, w + 2, 1, wood.hi);
-    drawText(this.ctx, 'PICKUP', x + 7, top + 1, '#f5e6c4');
+    paintSignText(this.ctx, getLocale() === 'zh' ? '取餐' : 'PICKUP', x + 19, top, 28, 7, '#f5e6c4');
     for (const lx of [inner + 4, inner + innerW - 11]) {
       this.r(lx, top + 7, 7, 2, '#7a5a2a');
       this.r(lx + 1, top + 7, 5, 1, '#a67c3a');

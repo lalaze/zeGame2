@@ -22,7 +22,9 @@ function reasonText(reason: SettlementReason): string {
 function actionText(advice: SettlementAdvice): string {
   const action = advice.action;
   const items = Object.entries(action.ingredients ?? {}).map(([id, n]) => `${text(`ing.${id}`)} ×${n}`).join(t('list.sep'));
-  return text(`report.action.${action.kind}`, {
+  return text(action.kind === 'restock'
+    ? (action.cost + 1e-6 >= advice.ingredientReserve ? 'report.action.restockFull' : 'report.action.restock')
+    : `report.action.${action.kind}`, {
     item: action.item ? itemName(action.item) : '',
     items,
     n: action.amount ?? 0,

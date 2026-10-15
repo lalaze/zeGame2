@@ -20,6 +20,7 @@ class ArtCanvas {
     const canvas = this;
     const stack: [string, number][] = [];
     return {
+      measureText:(text:string)=>({width:[...text].length*5}),fillText() {},
       fillStyle: '', globalAlpha: 1, imageSmoothingEnabled: false,
       fillRect(x: number, y: number, w: number, h: number) {
         canvas.draws.push([x, y, w, h, this.fillStyle, this.globalAlpha]);

@@ -1,3 +1,4 @@
+import { RoomViewport } from './ui/room-viewport';
 import '@fontsource/pixelify-sans/400.css';
 import '@fontsource/pixelify-sans/600.css';
 import './style.css';
@@ -144,11 +145,13 @@ for (const type of ['click', 'pointerdown', 'keydown']) {
 
 const canvas = $<HTMLCanvasElement>('scene');
 const stage = $('stage');
+let roomViewport: RoomViewport | undefined;
 
 const sign = $('stage-sign');
 const stats = $('stage-stats');
 // Overlays never participate in room sizing. The original floor plan is unchanged.
 function fitCanvas(): void {
+  roomViewport?.reset();
   stats.hidden = sign.hidden = true;
   const previousHeight = sceneHeight();
   setSceneHeight(MIN_SCENE_H);
@@ -164,6 +167,8 @@ new ResizeObserver(fitCanvas).observe(stage);
 
 const coinsEl = $('coins');
 coinsEl.addEventListener('click', () => showMoneyDetails(state.coins));
+const drawerBalance = $('drawer-balance');
+drawerBalance.addEventListener('click', () => showMoneyDetails(state.coins));
 const rateEl = $('rate');
 const hint = $('hint');
 const panelRoot = $('management-panel');
@@ -183,6 +188,7 @@ previewExit.addEventListener('click', () => {
   showPanelTab('upgrades');
 });
 function updateDrawerLabels(): void {
+  roomViewport?.refreshLabels();
   previewExit.textContent = chinese() ? '返回升级' : 'Back to upgrades';
   $('drawer-title').textContent = t('panel.title');
   $('drawer-close').setAttribute('aria-label', chinese() ? '关闭管理' : 'Close management');
@@ -306,6 +312,7 @@ stage.append($('day-hud'), $('cafe-style-btn'), $('open-btn'), arrangeBar, $('ar
 let arrangementHadDrawer = false;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const regionsUI = new RegionsUI($('area-nav'), $('area-edges'), $('region-card'), () => state, (area) => {
+  roomViewport?.reset();
   scene.moveToArea(area, reducedMotion.matches);
   sceneWrap.classList.toggle('has-front-passage', !!adjacentArea(area, 'down'));
   canvas.setAttribute('aria-label', areaName(area));
@@ -323,6 +330,7 @@ const regionsUI = new RegionsUI($('area-nav'), $('area-edges'), $('region-card')
   for (let i = 0; i < 16; i++) scene.sparkle(origin.x + 40 + Math.random() * 240, origin.y + 70 + Math.random() * 60);
   updateDayHud();
 }, (show) => {
+  roomViewport?.reset();
   scene.setOverview(show, reducedMotion.matches);
   canvas.setAttribute('aria-label', show ? t('area.overviewHint') : areaName(scene.area));
 });
@@ -901,6 +909,8 @@ function frame(dt: number): void {
 
   const coins = formatTransactionMoney(state.coins);
   coinsEl.setAttribute('aria-label', t('money.balanceDetails', { money: coins }));
+  drawerBalance.setAttribute('aria-label', t('money.balanceDetails', { money: coins }));
+  drawerBalance.textContent = t('money.balance', { money: coins });
   if (coins !== shownCoins) coinsEl.textContent = shownCoins = coins;
   uiTimer -= dt;
   if (uiTimer <= 0) {
@@ -918,10 +928,13 @@ function frame(dt: number): void {
 }
 
 const cafe = new CafeGame(canvas, scene, sim, () => state, {
-  tick: frame, pointerDown, pointerMove, interactionState: () => arrange,
+  tick: (dt) => { roomViewport?.refresh(); frame(dt); }, pointerDown, pointerMove, interactionState: () => arrange,
   interactionEnabled: () => startupComplete && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused),
   loadingProgress: (loaded, total) => loading.progress(loaded, total),
 });
+roomViewport = new RoomViewport(canvas, stage,
+  () => startupComplete && !scene.panning && !scene.overview && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused),
+  () => [scene.area, scene.overview, arrange?.mode, arrange?.mode === 'place' ? arrange.id : '', state.phase].join(':'));
 fitCanvas();
 panel.update();
 regionsUI.select('main');
@@ -954,6 +967,7 @@ waitForStartupReady(cafe.ready, document.fonts.ready).then(() =>
   clearInterval(autosaveTimer);
   session.close();
   loading.fail(error);
+  roomViewport?.destroy();
   cafe.destroy();
 });
 }

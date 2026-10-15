@@ -19,6 +19,8 @@ describe('accessible exact money details', () => {
     expect(dialog.textContent).toContain('$10.03');
     expect(dialog.textContent).toContain('$' + String(10.0352 - 10.03));
     expect(dialog.textContent).toContain(t('money.precision'));
+    expect(dialog.querySelector('details')!.open).toBe(false);
+    expect(dialog.querySelector('.money-detail-body > p')!.textContent).toContain('≈$10.04');
     expect(dialog.contains(document.activeElement)).toBe(true);
     // This unit checks programmatic close; the actual keyboard route is browser QA.
     closeModal();

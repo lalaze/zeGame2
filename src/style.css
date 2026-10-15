@@ -2944,3 +2944,16 @@ body.fullscreen-cafe .guide-details > summary:focus-visible { outline: 2px solid
   }
   body.fullscreen-cafe .cafe-status-bar button { flex: 0 0 auto; }
 }
+
+/* The budget stays outside the scrolling catalog, on desktop and mobile. */
+body.fullscreen-cafe .drawer-header > div { flex: 1; min-width: 0; }
+body.fullscreen-cafe .drawer-balance { max-width: 50%; min-width: 0; overflow-wrap: anywhere; font-size: 13px; line-height: 1.35; }
+.money-exact-details { margin-top: 12px; font-size: 12px; overflow-wrap: anywhere; }
+.money-exact-details summary { cursor: pointer; }
+
+/* Only the canvas is magnified; management and controls keep their touch sizes. */
+.room-zoom-controls { position: absolute; z-index: 12; left: 50%; bottom: calc(64px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); display: flex; gap: 4px; }
+.room-zoom-controls button { min-width: 44px; min-height: 44px; padding: 6px 10px; }
+.stage:has(.scene-wrap.is-overview) .room-zoom-controls,
+.stage:has(.scene-wrap.is-panning) .room-zoom-controls { visibility: hidden; pointer-events: none; }
+@media (max-height: 500px) { .room-zoom-controls { left: auto; right: 12px; bottom: 72px; transform: none; } }
