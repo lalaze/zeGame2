@@ -2,6 +2,7 @@
 export const COZY_KITCHEN_IDS = ['cooler', 'dryStore', 'handSink', 'mixer', 'proofer', 'hood', 'kettle', 'deckOven', 'convection', 'fryer', 'bench', 'sheeter', 'standMixer', 'bins', 'rack', 'pastryFridge', 'dishPit'] as const;
 export type CozyKitchenId = typeof COZY_KITCHEN_IDS[number];
 export const COZY_WORLD_ASSETS = {
+  'main-runner': 'main-runner-v3/runner.png',
   ...Object.fromEntries(['main-horizontal-beam', 'main-corner-post', 'foreground-threshold', 'outdoor-tree-line', 'village-roof-cluster', 'cloud'].map(id => [`environment-${id}`, `cozy-world-v2/environment-${id}.png`])) as Record<`environment-${'main-horizontal-beam' | 'main-corner-post' | 'foreground-threshold' | 'outdoor-tree-line' | 'village-roof-cluster' | 'cloud'}`, string>,
   'tableware-heart': 'cozy-world-v2/tableware-heart.png',
   'tableware-drop': 'cozy-world-v2/tableware-drop.png',

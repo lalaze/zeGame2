@@ -1,6 +1,7 @@
 import { cozyCafePart, paintCozyCabinet } from './cozy-cafe-art';
 import { getGeneratedDecorAdapter, getGeneratedIngredientAdapter, getGeneratedMainEnvironmentAdapter } from './generated-main-art';
 import { paintCozyService, paintCozyCakeDome } from './cozy-service-art';
+import { paintMainCarpet } from './main-runner-art';
 // Canvas painters for the parts of a room that are baked into textures: the main
 // café's back wall, floor, back bar and counter, the front wall along the bottom
 // edge, and the props (tables, chairs, crates) that the Phaser scene places.
@@ -916,10 +917,11 @@ export class RoomPainter {
     paintPassageFloor(this.ctx, 'main');
     // The rug lies in the open floor between the counter and the front door;
     // without one there's a plain runner leading in from the door.
-    if (rug === 'rug_none') this.drawRunner(H);
+    const newRunner = paintMainCarpet(this.ctx, H, rug === 'rug_none');
+    if (rug === 'rug_none') { if (!newRunner) this.drawRunner(H); }
     else paintRug(this.ctx, rug, 133, floorY(150), 54, H - 20 - floorY(150));
     this.drawQueueMarks();
-    this.drawDoormat(H);
+    if (!newRunner) this.drawDoormat(H);
     const ctx = this.ctx;
     // Sunlight falling through the window, and in through the open front door.
     const { lean, length } = beam(light.sun);

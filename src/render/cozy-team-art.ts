@@ -7,7 +7,7 @@ type Point = { x: number; y: number };
 type Box = [number, number, number, number];
 type PoseAnchors = { hip?: Point; hand?: Point; neck?: Point; floor?: Point };
 type Sheet = { file: string; bounds: Box[]; anchors?: PoseAnchors[] };
-export type TeamManifest = { families: Sheet[]; chef: Sheet; seated: Sheet[]; chefSeated: Sheet };
+export type TeamManifest = { families: Sheet[]; chef: Sheet; seated: Sheet[]; chefSeated: Sheet; attendant: Sheet };
 type Pose = { source: HTMLCanvasElement; width: number; height: number; anchors: PoseAnchors };
 export type TeamContacts = { foot: Point; head: Point; headHeight: number; headScale: number; bodyScale: number;
   legExtension: number; carryContact?: Point; seatContact?: Point; petContact?: Point };
@@ -19,6 +19,7 @@ const HAIR = ['#594237', '#976546', '#dfb96f', '#b9674e', '#626782', '#cc8c9f'];
 const CLOTH = ['#bb6b58', '#799ba7', '#8ba477', '#d3a453', '#9b87af', '#cf929e', '#69a295', '#e5d7ba'];
 const PANTS = ['#53637b', '#85664f', '#585464'];
 let families: Pose[][] = [], seated: Pose[][] = [], chef: Pose[] = [], chefSeated: Pose[] = [];
+let attendant: Pose[] = [];
 let pending: Promise<void> | null = null, epoch = 0;
 const canvas = (w: number, h: number) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
 const mod = (n: number, length: number) => ((Math.trunc(n) % length) + length) % length;
@@ -26,15 +27,15 @@ const rgb = (hex: string) => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16
 
 export function validateTeamManifest(m: TeamManifest): void {
   if (m.families?.length !== 8 || m.families.some(s => s.bounds?.length !== 9) || m.chef?.bounds?.length !== 9 ||
-      m.seated?.length !== 2 || m.seated.some(s => s.bounds?.length !== 12) || m.chefSeated?.bounds?.length !== 3)
+      m.seated?.length !== 2 || m.seated.some(s => s.bounds?.length !== 12) || m.chefSeated?.bounds?.length !== 3 || m.attendant?.bounds?.length !== 12)
     throw Error('Incomplete cozy team poses');
-  for (const sheet of [...m.families, m.chef, ...m.seated, m.chefSeated]) {
+  for (const sheet of [...m.families, m.chef, ...m.seated, m.chefSeated, m.attendant]) {
     if (!sheet.file || sheet.bounds.some(b => b.length !== 4 || b.some(v => !Number.isFinite(v)) || b[0] < 0 || b[1] < 0 || b[2] <= b[0] || b[3] <= b[1]))
       throw Error('Invalid cozy team bounds');
   }
 }
-export function cozyTeamReady(): boolean { return families.length === 8 && seated.length === 8 && chef.length === 9 && chefSeated.length === 3; }
-export function clearCozyTeam(): void { epoch++; families = []; seated = []; chef = []; chefSeated = []; pending = null; }
+export function cozyTeamReady(): boolean { return families.length === 8 && seated.length === 8 && chef.length === 9 && chefSeated.length === 3 && attendant.length === 12; }
+export function clearCozyTeam(): void { epoch++; families = []; seated = []; chef = []; chefSeated = []; attendant = []; pending = null; }
 export function preloadCozyTeam(): Promise<void> {
   if (cozyTeamReady()) return Promise.resolve();
   if (pending) return pending;
@@ -57,10 +58,10 @@ export function preloadCozyTeam(): Promise<void> {
         return { source, width: source.width, height: source.height, anchors: sheet.anchors?.[index] ?? {} };
       });
     };
-    const [walks, seats, cookWalk, cookSeats] = await Promise.all([
-      Promise.all(manifest.families.map(decode)), Promise.all(manifest.seated.map(decode)), decode(manifest.chef), decode(manifest.chefSeated),
+    const [walks, seats, cookWalk, cookSeats, staff] = await Promise.all([
+      Promise.all(manifest.families.map(decode)), Promise.all(manifest.seated.map(decode)), decode(manifest.chef), decode(manifest.chefSeated), decode(manifest.attendant),
     ]);
-    if (generation === epoch) { families = walks; const flat = seats.flat(); seated = TEAM_HAIRSTYLES.map((_, i) => flat.slice(i * 3, i * 3 + 3)); chef = cookWalk; chefSeated = cookSeats; }
+    if (generation === epoch) { families = walks; const flat = seats.flat(); seated = TEAM_HAIRSTYLES.map((_, i) => flat.slice(i * 3, i * 3 + 3)); chef = cookWalk; chefSeated = cookSeats; attendant = staff; }
   })().catch(error => { if (generation === epoch) pending = null; throw error; });
   return pending;
 }
@@ -72,10 +73,10 @@ export function teamStandingTransform(sizes: readonly { width: number; height: n
     foot: { x: TEAM_STANDING_SIZE.footX, y: TEAM_STANDING_SIZE.footY } };
 }
 /** Source peach is separated into connected face/hand islands so hair glints never become skin. */
-function skinMask(p: Pose, data: Uint8ClampedArray, neckY: number, sit: boolean, back: boolean): Uint8Array {
+function skinMask(p: Pose, data: Uint8ClampedArray, neckY: number, sit: boolean, back: boolean, capped: boolean): Uint8Array {
   const count = p.width * p.height, seen = new Uint8Array(count), mask = new Uint8Array(count);
   const candidate = (n: number) => { const i = n * 4, r = data[i], g = data[i + 1], b = data[i + 2];
-    return data[i + 3] > 100 && r > 205 && g > 120 && b > 65 && r - g > 28 && g - b > 24 && g / r > .53; };
+    return data[i + 3] > 100 && r > (capped ? 175 : 205) && g > 120 && b > 65 && r - g > 28 && g - b > 24 && g / r > .53; };
   let face: number[] = [];
   const hand = p.anchors.hand ?? { x: p.width * .80, y: p.height * .70 };
   for (let n = 0; n < count; n++) {
@@ -92,7 +93,7 @@ function skinMask(p: Pose, data: Uint8ClampedArray, neckY: number, sit: boolean,
     const isHand = center.y > neckY && center.y < p.height * (sit ? .85 : .80) &&
       (sit ? ((center.x - hand.x) / (p.width * .25)) ** 2 + ((center.y - hand.y) / (p.height * .17)) ** 2 < 1 || (center.x > p.width * .42 && center.y < p.height * .70) : true);
     const mean = island.reduce((v, at) => { const i = at * 4; return [v[0] + data[i], v[1] + data[i + 1], v[2] + data[i + 2]]; }, [0, 0, 0]);
-    const hasPeachCore = mean[1] / mean[0] > .65 && mean[1] / mean[0] < .84 && mean[2] / mean[0] > .35 && mean[2] / mean[0] < .65 && island.some(at => { const i = at * 4; return data[i] > 235 && data[i + 1] > 150 && data[i + 2] > 95 && data[i] - data[i + 1] > 38; });
+    const hasPeachCore = mean[1] / mean[0] > .65 && mean[1] / mean[0] < .84 && mean[2] / mean[0] > .35 && mean[2] / mean[0] < .65 && island.some(at => { const i = at * 4; return data[i] > (capped ? 205 : 235) && data[i + 1] > 150 && data[i + 2] > 95 && data[i] - data[i + 1] > 38; });
     const isEar = center.y > p.height * .20 && center.y < neckY - p.height * .055;
     const hasNeckCore = mean[1] / mean[0] > .53 && mean[1] / mean[0] < .70 && mean[2] / mean[0] > .30 && mean[2] / mean[0] < .50 && island.some(at => data[at * 4] > 235);
     const isNeck = center.y >= neckY - p.height * .08 && center.y < neckY + p.height * .055 && center.x > p.width * .35 && center.x < p.width * .70;
@@ -102,11 +103,13 @@ function skinMask(p: Pose, data: Uint8ClampedArray, neckY: number, sit: boolean,
   return mask;
 }
 /** Follow connected warm hair below the neck, including long locks and braids. */
-function hairMask(p: Pose, data: Uint8ClampedArray, skin: Uint8Array, neckY: number, sit: boolean, cook: boolean): Uint8Array {
+function hairMask(p: Pose, data: Uint8ClampedArray, skin: Uint8Array, neckY: number, sit: boolean, cook: boolean, capped: boolean): Uint8Array {
   const count = p.width * p.height, seen = new Uint8Array(count), mask = new Uint8Array(count);
   const candidate = (n: number) => {
     if (skin[n]) return false;
     const i = n * 4, r = data[i], g = data[i + 1], b = data[i + 2], y = Math.floor(n / p.width), lum = r * .299 + g * .587 + b * .114;
+    // The attendant's cream cap has warm shadows, but those are not hair.
+    if (capped && (y < p.height * .15 || lum > 150 || r < g * 1.4)) return false;
     if (cook && (y < p.height * .22 || y > neckY + p.height * .03 || (y < p.height * .34 && r > 150 && r - g < 70 && g - b < 80))) return false;
     // Golden chair wood is much yellower than the source chestnut hair.
     if (sit && y > p.height * .30 && b / r < .25 && g / r > .48) return false;
@@ -146,13 +149,15 @@ function recolour(p: Pose, look: Look, role: Exclude<Role, 'customer'>, sit: boo
   const target = canvas(p.width, p.height), ctx = target.getContext('2d')!; ctx.drawImage(p.source, 0, 0);
   const image = ctx.getImageData(0, 0, p.width, p.height), pixels = image.data;
   const skin = rgb(SKIN[mod(look.skin, 4)]), hair = rgb(HAIR[mod(look.hair, 6)]), pants = rgb(PANTS[mod(look.pants, 3)]);
-  const selected = rgb(CLOTH[mod(look.shirt, 8)]), uniform = rgb(role === 'server' ? '#657f88' : role === 'cook' ? '#a76e52' : '#74805a');
-  const cloth = role === 'owner' ? selected : selected.map((v, i) => v * .68 + uniform[i] * .32);
+  const capped = role === 'server' || role === 'barista';
+  const selected = rgb(CLOTH[mod(look.shirt, 8)]), uniform = rgb(role === 'server' ? '#72858a' : role === 'cook' ? '#a76e52' : '#77836b');
+  const mix = capped ? .35 : .68;
+  const cloth = role === 'owner' ? selected : selected.map((v, i) => v * mix + uniform[i] * (1 - mix));
   const neckY = p.anchors.neck?.y ?? p.height * (sit ? .44 : role === 'cook' ? .48 : .46);
   const hipY = p.anchors.hip?.y ?? p.height * (sit ? .74 : .78);
   const neckX = p.anchors.neck?.x ?? p.width * (sit ? .55 : .50);
-  const skinIslands = skinMask(p, pixels, neckY, sit, back);
-  const hairIslands = hairMask(p, pixels, skinIslands, neckY, sit, role === 'cook');
+  const skinIslands = skinMask(p, pixels, neckY, sit, back, capped);
+  const hairIslands = hairMask(p, pixels, skinIslands, neckY, sit, role === 'cook', capped);
   for (let n = 0; n < p.width * p.height; n++) {
     const i = n * 4; if (!pixels[i + 3]) continue;
     const r = pixels[i], g = pixels[i + 1], b = pixels[i + 2], x = n % p.width, y = Math.floor(n / p.width);
@@ -169,7 +174,7 @@ function recolour(p: Pose, look: Look, role: Exclude<Role, 'customer'>, sit: boo
     else if (hairIslands[n]) { color = hair; base = role === 'cook' ? 84 : 96; }
     else if (role !== 'cook' && y > neckY - p.height * .04 && y < hipY + p.height * .07 && g > r * .85 && g > b * 1.18 && r < 185) { color = cloth; base = 103; }
     else if (role === 'cook' && y > neckY - p.height * .025 && y < hipY + p.height * .07 && warm && r > 95 && r - g > 32) { color = cloth; base = 113; }
-    else if (y > hipY - p.height * .035 && y < p.height * (sit ? .90 : .91) && (!sit || x > p.width * .43) && r > g && g > b && g / r > .55 && b / r > .27) { color = pants; base = role === 'cook' ? 79 : 185; }
+    else if (y > hipY - p.height * .035 && y < p.height * (sit ? .90 : .91) && (!sit || x > p.width * .43) && r > g && g > b && g / r > .55 && b / r > .27) { color = pants; base = capped ? 90 : role === 'cook' ? 79 : 185; }
     if (color) {
       const light = Math.max(.40, Math.min(1.35, lum / base));
       for (let k = 0; k < 3; k++) pixels[i + k] = Math.max(15, Math.min(250, Math.round(color[k] * light)));
@@ -193,7 +198,10 @@ function top(art: HTMLCanvasElement): number {
 /** Complete body poses for the shop team; customers keep their existing painter. */
 export function makeCozyTeam(look: Look, role: Exclude<Role, 'customer'>, set: (frame: HTMLCanvasElement, contacts: TeamContacts) => void): CharacterFrames | null {
   if (!cozyTeamReady()) return null;
-  const style = mod(look.hairStyle, 8), poses = role === 'cook' ? chef : families[style], seats = role === 'cook' ? chefSeated : seated[style];
+  // Working attendants wear a compact cap over their hair. Saved hairstyles
+  // still belong to the player's owner avatar; no appearance data is migrated.
+  const capped = role === 'server' || role === 'barista';
+  const style = mod(look.hairStyle, 8), poses = capped ? attendant.slice(0, 9) : role === 'cook' ? chef : families[style], seats = capped ? attendant.slice(9) : role === 'cook' ? chefSeated : seated[style];
   const transform = teamStandingTransform(poses);
   const make = (index: number, mirrored = false) => {
     const p = poses[index], { scale, width, height, foot } = transform, art = canvas(width * D, height * D), ctx = art.getContext('2d')!;
@@ -227,6 +235,8 @@ export function makeCozyTeam(look: Look, role: Exclude<Role, 'customer'>, set: (
   };
   // The source front/back steps share the same leading leg. Mirror the second
   // authored step as a whole figure to alternate feet without lengthening limbs.
-  const down = [make(0), make(1), make(1, true)], up = [make(3), make(4), make(4, true)], right = [6, 7, 8].map(i => make(i)), left = [6, 7, 8].map(i => make(i, true));
+  // The new attendant includes independently authored opposite gait frames;
+  // preserve the asymmetric fringe and pin instead of mirroring the body.
+  const down = [make(0), make(1), capped ? make(2) : make(1, true)], up = [make(3), make(4), capped ? make(5) : make(4, true)], right = [6, 7, 8].map(i => make(i)), left = [6, 7, 8].map(i => make(i, true));
   return { down, up, right, left, stand: down[0], sitRight: seat(0), sitLeft: seat(0, true), sitPetRight: [seat(1), seat(2)], sitPetLeft: [seat(1, true), seat(2, true)] };
 }
