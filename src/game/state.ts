@@ -1,3 +1,4 @@
+import { parsePartners, type PartnerState } from './partners';
 import { emptySignatureDrinks, parseSignatureDrinks, signatureDefinition, type SignatureState } from './signature-drinks';
 import { parseCafeStyle, type CafeStyleState } from './styles';
 import { emptyRegularGuests, parseRegularGuests, type RegularGuestState } from './regular-guests';
@@ -22,7 +23,7 @@ import { parseTaste, type TasteState } from './taste';
 import { emptyReviews, parseReputation, parseReviews, type Reputation, type ReviewSummary } from './reputation';
 
 export const SAVE_KEY = 'tiny-bean-cafe/save';
-export const SAVE_VERSION = 15;
+export const SAVE_VERSION = 16;
 
 export interface Look {
   skin: number;
@@ -92,6 +93,7 @@ export const emptyDay = (): DayStats => ({
 export type Phase = 'prep' | 'open' | 'closing';
 
 export interface GameState {
+  partners: PartnerState;
   signatureDrinks: SignatureState;
   cafeStyle: CafeStyleState;
   regularGuests: RegularGuestState;
@@ -149,6 +151,7 @@ export function createInitialState(now: number): GameState {
   pantry.beans = STARTER_BEANS;
   return {
     version: SAVE_VERSION,
+    partners: { roster: { yue: { xp: 0, workedDays: 0, lastWorkedDay: 0, specialty: null, unlocked: 0, read: [], todayDay: 0, todayJobs: 0, todayUnlocks: 0 } }, active: { barista: [], server: ['yue'], cook: [] } },
     signatureDrinks: emptySignatureDrinks(),
     cafeStyle: parseCafeStyle(null),
     regularGuests: emptyRegularGuests(),
@@ -297,6 +300,7 @@ export function deserialize(raw: string | null, now: number): GameState {
 
   base.day = Math.max(1, Math.floor(num(data.day, 1)));
   base.regularGuests = parseRegularGuests(data.regularGuests, base.day);
+  base.partners = parsePartners(data.partners, base);
   base.phase = data.phase === 'closing' ? 'closing' : data.phase === 'open' ? 'open' : 'prep';
   base.dayTime = base.phase !== 'prep' ? num(data.dayTime, 0) : 0;
   base.speed = SPEEDS.find((v) => v === data.speed) ?? 1;

@@ -1,9 +1,11 @@
+import { partnerContributions, type PartnerContribution } from './partners';
 import { reputationScore, reputationTraffic } from './reputation';
 import type { ItemId } from './data';
 import { bakeMorning, dayDemand, isBakery, menuItems, projectMorningBake, recipe, servingsLeft, servingCost, soldOutItems, suggestedBake } from './economy';
 import { emptyDay, type DayStats, type GameState } from './state';
 
 export interface DayReport extends DayStats {
+  partners?: PartnerContribution[];
   rating: number;
   ratingCount: number;
   ratingTraffic: number;
@@ -78,6 +80,7 @@ export function finishDay(state: GameState): DayReport {
   }
   const report: DayReport = {
     ...today,
+    partners: partnerContributions(state),
     reviews: structuredClone(today.reviews),
     rating: reputationScore(state.reputation),
     ratingCount: state.reputation.recent.length,

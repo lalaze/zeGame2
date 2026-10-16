@@ -33,6 +33,7 @@ import { Panel, decorName, itemName, type ArrangeRequest } from './ui/panel';
 import { OperationMonitor, operationStatus } from './game/operations';
 import { ingredientName } from './ui/panel';
 import { updateReputationButton, showReputation } from './ui/reputation';
+import { showPartners, updatePartnersButton } from './ui/partners';
 import { showRegularGuests, updateRegularGuestsButton } from './ui/regular-guests';
 import { showPrepare } from './ui/prepare';
 import { showCafeStyles, updateCafeStyleButton } from './ui/cafe-styles';
@@ -503,6 +504,7 @@ $('app').append(playFlow.element);
 function updateDayHud(): void {
   updateReputationButton(state);
   updateRegularGuestsButton(state);
+  updatePartnersButton(state);
   updateCafeStyleButton(state);
   const open = state.phase !== 'prep';
   const closing = state.phase === 'closing';
@@ -578,6 +580,7 @@ function closeDay(): void {
 }
 closeBtn.addEventListener('click', closeDay);
 $('reputation-btn').addEventListener('click', () => showReputation(state));
+$('partners-btn').addEventListener('click', () => showPartners(state, sim, saveGame));
 $('regular-guests-btn').addEventListener('click', () => showRegularGuests(state, saveGame));
 $('cafe-style-btn').addEventListener('click', () => showCafeStyles(state, () => { saveGame(); panel.refresh(); updateDayHud(); }));
 operationBtn.addEventListener('click', () => {
@@ -820,7 +823,18 @@ function pointerDown(x: number, y: number): void {
     return;
   }
   if (arrange) arrangeTap(x, y);
-  else tapAt(x, y);
+  else {
+    const actors = [
+      ...sim.baristas.map((b, i) => ({ ...sim.baristaPose(i), partnerId: b.partnerId })),
+      ...sim.servers, ...sim.cooks,
+    ];
+    const partner = actors.filter(a => a.partnerId && Math.abs(x - a.x) <= 13 && y <= a.y && y >= a.y - 44)
+      .sort((a,b) => b.y-a.y)[0];
+    if (partner?.partnerId && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused)) {
+      showPartners(state, sim, saveGame, partner.partnerId); return;
+    }
+    tapAt(x, y);
+  }
 }
 
 /** With a mouse, the piece being placed follows the pointer. */

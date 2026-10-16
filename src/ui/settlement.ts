@@ -1,3 +1,6 @@
+import { partnerDefinition } from '../game/partners';
+import { getLocale } from '../i18n';
+import { partnerText } from './partners';
 import { htmlItemName } from './item-name';
 import type { ItemId } from '../game/data';
 import { formatOpenTime, type DayReport } from '../game/day';
@@ -62,6 +65,7 @@ export function settlementHtml(report: DayReport, state: GameState): { body: str
       <p class="report-action"><b>${text('report.nextStep')}:</b> ${actionText(advice)}</p>
       ${advice.action.kind === 'restock' || advice.action.kind === 'upgrade' ? '' : `<p class="note report-stock-priority">${text('report.stockFirst')}</p>`}
     </section>
+    ${report.partners?.length ? '<section class="report-partners"><h3>'+partnerText('今日伙伴贡献','Today’s partner contributions')+'</h3><ul>'+report.partners.map(p=>'<li>'+(partnerDefinition(p.id)?.name[getLocale()] ?? '')+' · '+p.jobs+partnerText(' 次工作',' jobs')+' · '+p.xp+' XP'+(p.unlocked?' · '+p.unlocked+partnerText(' 个新故事',' new stories'):'')+'</li>').join('')+'</ul></section>' : ''}
     <details class="report-details">
       <summary>${text('report.details')}</summary>
       <dl class="stats">

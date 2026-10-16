@@ -1,3 +1,4 @@
+import { syncPartners, activePartner, recordPartnerWork, partnerServerSpeed, partnerTraySize, partnerBrewMultiplier, partnerCookSpeed, partnerStationTime } from './partners';
 import { recordStyleHandoff, styleOrderPairs, styleComboChance, styleSeatChance, styleStationMultiplier, styleDwellExtra, styleServerMultiplier } from './styles';
 import { recordRegularGuestArrival, recordRegularGuestDeparture, recordRegularGuestService, regularGuestForAppearance, regularGuestOrder } from './regular-guests';
 import { CUSTOMER_CAST, CustomerCastCycle } from './customer-cast';
@@ -9,6 +10,7 @@ import { CELL, furnitureDef } from './furniture';
 import { routeFloorSegment, segmentCrossesObstacle, type FloorObstacle, type FloorPoint } from './navigation';
 import {
   arrivalRate,
+  isBakery,
   baristaCount,
   consumeServing,
   canPrepareItem,
@@ -116,6 +118,9 @@ export interface Customer extends Walker {
 }
 
 export interface Barista {
+  partnerId?: string;
+  /** Persisted with the in-flight job; a full pass must not reward again. */
+  brewCredited?: boolean;
   look: Look;
   customerId: number | null;
   remaining: number;
@@ -147,6 +152,7 @@ export interface Batch {
 
 /** A cook in the kitchen, free or seeing a batch through. */
 export interface Cook extends Walker {
+  partnerId?: string;
   look: Look;
   batch: Batch | null;
 }
@@ -155,6 +161,7 @@ export interface Cook extends Walker {
 export type ServerPhase = 'idle' | 'toPass' | 'delivering' | 'returning';
 
 export interface Server extends Walker {
+  partnerId?: string;
   look: Look;
   phase: ServerPhase;
   /** Orders they're fetching or carrying: one, or two bound for the same room. */
@@ -400,6 +407,7 @@ export class Sim {
   }
 
   private sync(state: GameState): void {
+    syncPartners(state);
     const stage = state.kitchen ? state.upgrades.cook : 0;
     setKitchenLevel(stage);
     if (this.kitchenStage >= 0 && this.kitchenStage !== stage) {
@@ -430,6 +438,22 @@ export class Sim {
       const home = cookHome(this.cooks.length);
       this.cooks.push({ x: home.x, y: home.y, tx: home.x, ty: home.y, stride: 0, via: [], look: this.randomLook(), batch: null });
     }
+    this.baristas.forEach((barista, i) => {
+      if (i === 0) { barista.partnerId = undefined; return; }
+      const partner = activePartner(state, 'barista', i - 1);
+      if (partner) { barista.partnerId = partner.id; barista.look = { ...partner.look }; }
+    });
+    this.cooks.forEach((cook, i) => {
+      const partner = activePartner(state, 'cook', i);
+      if (partner) { cook.partnerId = partner.id; cook.look = { ...partner.look }; }
+    });
+    this.servers.forEach((server, i) => {
+      const partner = activePartner(state, 'server', i);
+      if (partner) {
+        server.partnerId = partner.id;
+        server.look = { ...partner.look };
+      }
+    });
     while (this.seats.length < TOTAL_TABLE_SPOTS * 2) this.seats.push(null);
   }
 
@@ -724,6 +748,7 @@ export class Sim {
       c.spot = i;
       this.walk(c, serviceSpot(i));
       b.customerId = c.id;
+      b.brewCredited = false;
       b.remaining = 0;
       b.total = 0;
       this.relayoutQueue();
@@ -756,7 +781,7 @@ export class Sim {
         c.extra = null;
       }
       c.phase = 'ordering';
-      b.total = b.remaining = prepTime(state, c.order) + (c.extra ? prepTime(state, c.extra) : 0);
+      b.total = b.remaining = prepTime(state, c.order) * partnerBrewMultiplier(state, b.partnerId, isBakery(c.order)) + (c.extra ? prepTime(state, c.extra) * partnerBrewMultiplier(state, b.partnerId, isBakery(c.extra)) : 0);
       // With a table free, some stay: they take a seat and the order is brought over.
       const seat = this.freeSeat(state);
       if (seat >= 0 && this.rng() < styleSeatChance(state, c.extra ? [c.order, c.extra] : [c.order])) {
@@ -805,7 +830,9 @@ export class Sim {
     // Their order can beat them to the table; the server waits for them to sit down.
     if (c && (c.phase === 'ordering' || c.phase === 'toSeat')) return false;
     if (c && c.phase === 'waiting') {
+      const unpaid = !c.hasCup;
       this.charge(state, c, events);
+      if (unpaid && c.hasCup) recordPartnerWork(state, server.partnerId);
       c.phase = 'sitting';
       c.timer = 6 + this.rng() * 8 + styleDwellExtra(state, c.extra ? [c.order, c.extra] : [c.order]);
     }
@@ -847,7 +874,7 @@ export class Sim {
    * giving up, plus whatever else fits on the tray, preferring orders for the same
    * room, then rooms on the way there, then rooms beyond it.
    */
-  private loadTray(): Plate[] {
+  private loadTray(limit = TRAY_PLATES): Plate[] {
     const open = this.pass.filter((p) => p.server === null);
     if (open.length === 0) return [];
     const patience = (p: Plate) => {
@@ -858,7 +885,7 @@ export class Sim {
     const room = this.plateRoom(first);
     const rank = (p: Plate) => (this.plateRoom(p) === room ? 0 : roomDepth(this.plateRoom(p)) < roomDepth(room) ? 1 : 2);
     const rest = open.filter((p) => p !== first).sort((a, b) => rank(a) - rank(b));
-    return [first, ...rest].slice(0, TRAY_PLATES);
+    return [first, ...rest].slice(0, limit);
   }
 
   /** The room a plate's table is in. */
@@ -881,10 +908,10 @@ export class Sim {
     }
     this.servers.forEach((server, i) => {
       server.ack = Math.max(0, server.ack - dt);
-      step(server, dt, SERVER_SPEED * styleServerMultiplier(state));
+      step(server, dt, SERVER_SPEED * styleServerMultiplier(state) * partnerServerSpeed(state, server.partnerId, server.plates.length));
       const there = resting(server);
       if (server.phase === 'idle') {
-        const tray = this.loadTray();
+        const tray = this.loadTray(partnerTraySize(state, server.partnerId));
         if (tray.length === 0) return;
         for (const plate of tray) plate.server = i;
         server.plates = tray;
@@ -909,7 +936,7 @@ export class Sim {
    */
   private updateCooks(state: GameState, dt: number, events: SimEvent[]): void {
     this.cooks.forEach((cook, i) => {
-      step(cook, dt);
+      step(cook, dt, WALK_SPEED * partnerCookSpeed(state, cook.partnerId));
       if (!resting(cook)) return;
       const batch = cook.batch;
       if (!batch) {
@@ -917,7 +944,7 @@ export class Sim {
         if (!next) return;
         startBatch(state, next.item, next.n);
         const steps = batchSteps(next.item);
-        cook.batch = { ...next, steps, step: 0, timer: STATION_SECONDS[steps[0]] * styleStationMultiplier(state) };
+        cook.batch = { ...next, steps, step: 0, timer: STATION_SECONDS[steps[0]] * styleStationMultiplier(state) * partnerStationTime(state, cook.partnerId) };
         this.walk(cook, ...kitchenPath(cook, stationSpot(steps[0])));
         return;
       }
@@ -925,11 +952,13 @@ export class Sim {
       if (batch.timer > 0) return;
       const station = batch.steps[++batch.step];
       if (station) {
-        batch.timer = STATION_SECONDS[station] * styleStationMultiplier(state);
+        batch.timer = STATION_SECONDS[station] * styleStationMultiplier(state) * partnerStationTime(state, cook.partnerId);
         this.walk(cook, ...kitchenPath(cook, stationSpot(station)));
         return;
       }
+      const bakedBefore = state.today.baked[batch.item] ?? 0;
       shelveBatch(state, batch.item, batch.n);
+      if ((state.today.baked[batch.item] ?? 0) > bakedBefore) recordPartnerWork(state, cook.partnerId);
       this.rack = [batch.item, ...this.rack].slice(0, 3);
       events.push({ type: 'restock', item: batch.item, n: batch.n });
       cook.batch = null;
@@ -948,6 +977,7 @@ export class Sim {
   update(state: GameState, dt: number): SimEvent[] {
     const events: SimEvent[] = [];
     this.sync(state);
+    if (!Number.isFinite(dt) || dt <= 0) return events;
     this.boostCooldown = Math.max(0, this.boostCooldown - dt);
 
     const open = state.phase === 'open';
@@ -1027,6 +1057,7 @@ export class Sim {
       b.remaining -= dt;
       if (b.remaining > 0) return;
       const c = this.find(b.customerId);
+      if (c && c.phase !== 'exiting' && !b.brewCredited) { recordPartnerWork(state, b.partnerId); b.brewCredited = true; }
       if (!c || c.phase === 'exiting') b.customerId = null;
       else if (c.dineIn) this.sendToPass(c, i, events);
       // A takeaway order waits for its customer to reach the counter.

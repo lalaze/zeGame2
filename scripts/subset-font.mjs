@@ -14,7 +14,8 @@ for (let c = 0x20; c < 0x7f; c++) ascii += String.fromCharCode(c);
 const extra = '¥$×·…—–“”‘’、，。：；！？（）《》【】％＋';
 // The workbench owns a compact bilingual phrase map; include its dynamic labels.
 const signatureUI = readFileSync('src/ui/signature-drinks.ts', 'utf8');
-const text = Object.values(zh).join('') + signatureUI + ascii + extra;
+const partnerText = ['src/ui/partners.ts','src/game/partners.ts','src/game/partner-stories.ts'].map(path => readFileSync(path,'utf8')).join('');
+const text = Object.values(zh).join('') + signatureUI + partnerText + ascii + extra;
 
 const out = await subsetFont(readFileSync(SOURCE), text, { targetFormat: 'woff2' });
 mkdirSync('src/assets', { recursive: true });
