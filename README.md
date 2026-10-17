@@ -18,7 +18,7 @@ npm run balance:compare   # verify matched baseline/candidate experiment artifac
 
 ## Fullscreen café controls
 
-The game stage fills the browser viewport. The authored 320×240 room stays complete and proportional at the largest contain size; the same live renderer shows genuine neighboring rooms in the remaining space, following the building's physical floor plan (including locked rooms in their existing locked appearance). Exterior scenery remains visible only outside actual room footprints, including below the shorter kitchen. These surrounding previews are passive; room navigation and interactions remain in the central room. It does not create extra floor space, seats or walkable areas. Opening management never resizes the room.
+The game stage fills the browser viewport. The authored 320×240 room stays complete and proportional at an even whole number of device pixels per room pixel: exactly, when that is within 10% of the largest contain size, otherwise at the contain size with the small remainder smoothed (see [docs/art-grid](docs/art-grid/README.md)); the same live renderer shows genuine neighboring rooms in the remaining space, following the building's physical floor plan (including locked rooms in their existing locked appearance). Exterior scenery remains visible only outside actual room footprints, including below the shorter kitchen. These surrounding previews are passive; room navigation and interactions remain in the central room. It does not create extra floor space, seats or walkable areas. Opening management never resizes the room.
 
 Desktop management opens from the six floating right-edge tools. On phones, use **Manage**; the overlay pauses service and shows a pause badge. Closing it removes only that overlay's pause reason, preserving speed and any other active dialog/background pause. Escape returns focus to the opener, and the mobile drawer contains keyboard focus. Each management tab retains its existing browsing state.
 
@@ -114,7 +114,7 @@ To add or change text, edit `src/locales/en.json` and `src/locales/zh.json`. The
 | `src/i18n.ts`, `src/locales/` | Translations |
 | `scripts/gen-icons.mjs` | Builds the app icons from a pixel map (`npm run icons`) |
 
-Production artwork uses the generated cozy bitmap packs in `public/art/generated/`, with shared canvas adapters and code-drawn live effects. Character-grid painters in `src/render/sprites.ts` remain fallbacks. Phaser turns those canvases into textures; room layers repaint for ambient animation. The side panel, dialogs and HUD are plain HTML over the canvas. The complete current asset mapping and redraw verification are in [docs/cozy-redraw-v2](docs/cozy-redraw-v2/README.md).
+Production artwork uses the generated cozy bitmap packs in `public/art/generated/`, with shared canvas adapters and code-drawn live effects. Everything in the world is drawn on one art grid of two art pixels per room pixel; finer legacy sprites are resampled onto it, and new world art is authored natively at that size on the master palette ([docs/art-grid](docs/art-grid/README.md)). Character-grid painters in `src/render/sprites.ts` remain fallbacks. Phaser turns those canvases into textures; room layers repaint for ambient animation. The side panel, dialogs and HUD are plain HTML over the canvas. The complete current asset mapping and redraw verification are in [docs/cozy-redraw-v2](docs/cozy-redraw-v2/README.md).
 
 ### Artwork and exports
 

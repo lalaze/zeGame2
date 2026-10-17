@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { alphaInkBounds, centerInk } from './thought-text';
+import { describe, expect, it, vi } from 'vitest';
+import { alphaInkBounds, centerInk, thoughtTextRaster } from './thought-text';
 
 function pixels(width: number, height: number, points: [number, number, number][]) {
   const data = new Uint8ClampedArray(width * height * 4);
@@ -39,5 +39,33 @@ describe('equal top and bottom ink padding', () => {
       const p=centerInk({top:24-inkHeight,bottom:23},22);
       expect(p.height).toBeGreaterThanOrEqual(22);expect(p.height).toBeLessThanOrEqual(23);
     }
+  });
+});
+
+describe('native thought lettering raster', () => {
+  it('paints binary one-art-pixel glyphs at density two without canvas fillText', () => {
+    const rectangles: number[][] = [];
+    const fillText = vi.fn();
+    vi.stubGlobal('document', { fonts: new Set(), createElement: () => {
+      const canvas = { width: 0, height: 0, getContext: () => ctx };
+      const ctx = {
+        fillStyle: '', fillText,
+        fillRect(x: number, y: number, w: number, h: number) { rectangles.push([x, y, w, h]); },
+        getImageData() {
+          const data = new Uint8ClampedArray(canvas.width * canvas.height * 4);
+          for (const [x, y] of rectangles) data[(y * canvas.width + x) * 4 + 3] = 255;
+          return { data };
+        },
+      };
+      return canvas;
+    } });
+    try {
+      const result = thoughtTextRaster(['My little café dream', 'Hello!'], '', 100);
+      expect(result.canvas.width).toBe(200);
+      expect(rectangles.length).toBeGreaterThan(100);
+      expect(rectangles.every(rect => rect.every(Number.isInteger) && rect[2] === 1 && rect[3] === 1)).toBe(true);
+      expect(fillText).not.toHaveBeenCalled();
+      expect(result.textY).toBe((result.height - result.inkHeight / 2) / 2);
+    } finally { vi.unstubAllGlobals(); }
   });
 });

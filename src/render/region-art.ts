@@ -9,6 +9,8 @@ import { paintFloorFurniture } from './furniture-art';
 import { beam, type Lighting } from './lighting';
 import { paintSunbeam } from './room-art';
 import { generatedMainSource } from './generated-main-art';
+import { extensionFloor, extensionRunner, extensionWindowPatch, readingDoor, readingFurnishing } from './extension-surfaces';
+import { paintWindowBounce } from './main-room-lighting';
 
 type Ctx = CanvasRenderingContext2D;
 const ink = WARM_MATERIAL.ink;
@@ -64,7 +66,11 @@ export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, l
   const r = (x: number, y: number, w: number, h: number, color: string) => rect(ctx, x, y, w, h, color);
   const reading = id === 'reading', terrace = id === 'terrace';
   paintWall(ctx, reading ? 'wall_cream' : 'wall_mint', 0, 0, SCENE_W, FLOOR_Y, t);
-  paintFloor(ctx, terrace ? 'floor_terrazzo' : reading ? 'floor_herringbone' : 'floor_mint', 0, FLOOR_Y, SCENE_W, height - FLOOR_Y);
+  if (!locked && !reading) extensionFloor(ctx, id, FLOOR_Y, height);
+  else paintFloor(ctx, terrace ? 'floor_terrazzo' : reading ? 'floor_herringbone' : 'floor_mint', 0, FLOOR_Y, SCENE_W, height - FLOOR_Y);
+  const furnishing = (kind: 'armchair' | 'lamp', x: number, foot: number) => {
+    if (locked) paintFloorFurniture(ctx, kind, x, foot);
+  };
   const sky = (painted: string) => mix(painted, light.sky[1], 0.55);
 
   const backdrop = generatedMainSource(`cozy-region-${id}`);
@@ -77,9 +83,9 @@ export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, l
     }
     ctx.restore();
     if (reading) {
-      paintFloorFurniture(ctx, 'armchair', 115, floorY(102));
-      paintFloorFurniture(ctx, 'armchair', 206, floorY(102));
-      paintFloorFurniture(ctx, 'lamp', 100, floorY(98));
+      furnishing('armchair', 115, floorY(102));
+      furnishing('armchair', 206, floorY(102));
+      furnishing('lamp', 100, floorY(98));
     } else {
       for (const x of [30, 290]) paintFloorFurniture(ctx, terrace ? 'plant_lemon' : 'plant_monstera', x, floorY(96));
       paintFloorFurniture(ctx, 'bench', 160, floorY(100));
@@ -110,9 +116,9 @@ export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, l
     r(181, 62, 14, 2, '#7e5b45'); r(182, 60, 12, 2, '#d2ad78');
     r(183, 58, 11, 2, '#6d7c5b');
     for (const x of [90, 219]) wallLantern(ctx, x, 31);
-    paintFloorFurniture(ctx, 'armchair', 115, floorY(102));
-    paintFloorFurniture(ctx, 'armchair', 206, floorY(102));
-    paintFloorFurniture(ctx, 'lamp', 100, floorY(98));
+    furnishing('armchair', 115, floorY(102));
+    furnishing('armchair', 206, floorY(102));
+    furnishing('lamp', 100, floorY(98));
   } else {
     r(0, 0, SCENE_W, 80, sky('#b7d7d2'));
     for (const [x, y, w] of [[41, 13, 36], [199, 8, 44]]) {
@@ -184,6 +190,7 @@ export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, l
     for (const x of [108, 212]) paintFloorFurniture(ctx, 'plant_fern', x, floorY(98));
   }
 
+  if (reading && !locked) readingDoor(ctx, FLOOR_Y, light);
   const word = reading ? 'BOOK NOOK' : terrace ? 'GARDEN PATIO' : 'GLASSHOUSE';
   const width = textWidth(word) + 14, signX = reading ? 70 : 160;
   timberBeam(ctx, signX - width / 2 - 1, 7, width + 2, 13, false, reading ? '#865332' : '#627451');
@@ -191,10 +198,21 @@ export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, l
   drawText(ctx, word, signX - textWidth(word) / 2, 11, '#f4e6c7');
 
   // The existing narrow service aisle is unchanged; only its woven artwork differs.
-  passageRunner(ctx, 145, floorY(110), 30, height - floorY(110) - 8, 'v', reading ? '#d7b385' : '#cdbd96', true);
+  if (locked) passageRunner(ctx, 145, floorY(110), 30, height - floorY(110) - 8, 'v', reading ? '#d7b385' : '#cdbd96', true);
+  else extensionRunner(ctx, id, 145, floorY(110), 30, height - floorY(110) - 8, 'v');
   const { lean, length } = beam(light.sun);
-  if (reading) paintSunbeam(ctx, light.sun, 113, 207, FLOOR_Y, lean, length);
-  else if (!terrace) for (const x of [20, 128, 236]) paintSunbeam(ctx, light.sun, x, x + 34, FLOOR_Y, lean, length + 24);
+  if (locked) {
+    if (reading) paintSunbeam(ctx, light.sun, 113, 207, FLOOR_Y, lean, length);
+    else if (!terrace) for (const x of [20, 128, 236]) paintSunbeam(ctx, light.sun, x, x + 34, FLOOR_Y, lean, length + 24);
+  } else if (reading) {
+    for (const x of [113, 183]) paintWindowBounce(ctx, x, 24, FLOOR_Y, light.sun);
+  } else for (const x of [20, 128, 236]) extensionWindowPatch(ctx, x, 34, FLOOR_Y, light.sun);
+
+  if (reading && !locked) {
+    readingFurnishing(ctx, 'armchair', 115, floorY(102));
+    readingFurnishing(ctx, 'armchair', 206, floorY(102));
+    readingFurnishing(ctx, 'lamp', 100, floorY(98));
+  }
 
   if (locked) {
     ctx.save(); ctx.setLineDash([3, 3]); ctx.strokeStyle = '#b39f79';

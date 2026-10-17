@@ -1,5 +1,6 @@
 import { generatedMainSource, type GeneratedMainId } from './generated-main-art';
 import type { CozyKitchenId } from './cozy-world-assets';
+import { paintContactShade } from './main-room-lighting';
 
 const KITCHEN_INDICATORS: Partial<Record<CozyKitchenId, readonly [number, number]>> = {
   cooler: [.27, .16], mixer: [.83, .24], standMixer: [.83, .24], proofer: [.39, .155],
@@ -32,6 +33,7 @@ export function paintCozyKitchen(ctx: CanvasRenderingContext2D, id: CozyKitchenI
   if (!fit) return false;
   const { source, left, top, width, height } = fit;
   ctx.save(); ctx.imageSmoothingEnabled = false;
+  if (!['hood', 'sheeter', 'standMixer'].includes(id)) paintContactShade(ctx, left + width / 2, foot, width * .9, .18);
   ctx.drawImage(source, left, top, width, height);
   if (!active) { ctx.restore(); return true; }
 

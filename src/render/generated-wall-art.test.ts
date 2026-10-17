@@ -8,7 +8,8 @@ import { clearGeneratedMainAssets, installGeneratedMainAsset, type GeneratedMain
 import { lightingAt } from './lighting';
 import { RoomPainter } from './room-art';
 
-vi.mock('./font',()=>({
+vi.mock('./font',async(importOriginal)=>({
+  ...await importOriginal<typeof import('./font')>(),
   textWidth:(text:string)=>text.length*5,
   drawText:vi.fn((ctx:{canvas?:{label?:string}},text:string)=>{if(ctx.canvas)ctx.canvas.label=text;}),
 }));
@@ -76,8 +77,8 @@ describe('selected main-wall bitmaps and live overlays',()=>{
     expect(frame(day.events).args).toEqual(frame(night.events).args);
     expect(fills(day.events).some(fill=>fill.color===lightingAt(12).sky[0])).toBe(true);
     expect(fills(night.events).some(fill=>fill.color===lightingAt(23).sky[0])).toBe(true);
-    const sun=fills(day.events).find(fill=>fill.color===lightingAt(12).sun.disc&&fill.w===6&&fill.h===6)!;
-    const moon=fills(night.events).find(fill=>fill.color==='#f6eec2'&&fill.w===6&&fill.h===6)!;
+    const sun=fills(day.events).find(fill=>fill.color==='#fee69a'&&fill.w===.5&&fill.h===.5)!;
+    const moon=fills(night.events).find(fill=>fill.color==='#efdfbe'&&fill.w===.5&&fill.h===.5)!;
     expect(sun).toBeDefined();expect(moon).toBeDefined();
     expect(day.events.indexOf(sun)).toBeLessThan(day.events.indexOf(frame(day.events)));
     expect(night.events.indexOf(moon)).toBeLessThan(night.events.indexOf(frame(night.events)));
@@ -87,15 +88,18 @@ describe('selected main-wall bitmaps and live overlays',()=>{
     expect(clouds(day)).not.toEqual(clouds(later));
   });
 
-  it('keeps OPEN/CLOSED and botanical attachments at their original logical positions',()=>{
+  it('keeps pixel OPEN/CLOSED lettering and the equipped plant at the original anchors',()=>{
     for(const sign of [false,true]){
-      clearGeneratedMainAssets();windowRecord(12,0,sign);
-      const word=sign?'OPEN':'CLOSED';
-      const legacy=nativeText.mock.calls.filter(call=>call[0]===word).at(-1)!.slice(1);
+      clearGeneratedMainAssets();const legacy=windowRecord(12,0,sign);
       installWalls();const generated=windowRecord(12,0,sign);
-      const replacement=nativeText.mock.calls.filter(call=>call[0]===word).at(-1)!.slice(1);
-      expect(replacement).toEqual(legacy);
-      expect(fills(generated.events).some(fill=>fill.x===49&&fill.y===47&&fill.w===5&&fill.h===4&&fill.color==='#bc7149')).toBe(true);
+      expect(generated.clips.at(-1)).toEqual(legacy.clips.at(-1));
+      const pixels=(record:ReturnType<typeof recording>)=>fills(record.events).filter(fill=>fill.w===.5&&fill.h===.5&&fill.clip?.[3]===6);
+      expect(pixels(generated).length).toBeGreaterThan(0);
+      expect(pixels(generated)).toEqual(pixels(legacy));
+      expect(nativeText).not.toHaveBeenCalled();
+      const plant=recording();new RoomPainter(plant.ctx,2,false).drawSill('sill_bonsai',WINDOWS[0].x+WINDOWS[0].w-8,WINDOWS[0].y+WINDOWS[0].h+1);
+      expect(fills(plant.events).every(mark=>mark.y+mark.h<=51)).toBe(true);
+      expect(fills(plant.events).some(mark=>mark.x===46.5&&mark.y===48&&mark.w===7&&mark.h===3)).toBe(true);
     }
   });
 
@@ -128,7 +132,8 @@ describe('selected main-wall bitmaps and live overlays',()=>{
       expect(ix+iw).toBeLessThanOrEqual(cx+cw);expect(iy+ih).toBeLessThanOrEqual(cy+ch);
       expect(record.events.indexOf(image)).toBeGreaterThan(record.events.indexOf(draw));
     }
-    expect(nativeText.mock.calls.some(call=>call[0]==='MENU')).toBe(true);
+    expect(nativeText).not.toHaveBeenCalled();
+    expect(fills(record.events).filter(fill=>fill.w===.5&&fill.h===.5&&fill.y>=20&&fill.y<26).length).toBeGreaterThan(0);
     expect(JSON.stringify(state)).toBe(before);
     expect(record.state.activeClip).toBeNull();expect(record.state.imageSmoothingEnabled).toBe(true);expect(record.stack).toHaveLength(0);
   });
@@ -159,12 +164,12 @@ describe('selected main-wall bitmaps and live overlays',()=>{
   });
 
   it('uses the actual new window aperture for floor sunlight, with dynamic night suppression',()=>{
-    const sun=lightingAt(12),snap=(value:number)=>Math.round(value*2)/2;
-    const beamMarks=(hour:number)=>{const record=recording();new RoomPainter(record.ctx,2,false).drawFloor('floor_checker','rug_none',lightingAt(hour),240);return fills(record.events).filter(fill=>fill.color===sun.sun.color&&fill.y===FLOOR_Y&&fill.h===.5&&fill.alpha>0);};
+    const snap=(value:number)=>Math.round(value*2)/2;
+    const beamMarks=(hour:number)=>{const record=recording();new RoomPainter(record.ctx,2,false).drawFloor('floor_checker','rug_none',lightingAt(hour),240);return fills(record.events).filter(fill=>fill.color==='#fee8ac'&&fill.y===FLOOR_Y&&fill.h===.5&&fill.alpha>.2);};
     const legacy=beamMarks(12);expect(legacy).toHaveLength(4);
     installWalls();const actual=beamMarks(12);expect(actual).toHaveLength(4);
     const apertureX=4+115*62/613,apertureW=386*62/613;
-    expect(actual[0].x).toBe(snap(apertureX+1));expect(actual[0].w).toBe(snap(apertureW/2-3));
+    expect(actual[0].x).toBe(snap(apertureX));expect(actual[0].w).toBe(snap(apertureW/2-2));
     expect(actual[0].w).toBeLessThan(legacy[0].w);
     expect(beamMarks(23)).toHaveLength(0);
   });

@@ -6,7 +6,8 @@ import { clearGeneratedMainAssets, installGeneratedMainAsset, removeGeneratedMai
 import { MACHINE_X, MACHINE_Y, RoomPainter, type CounterCup } from './room-art';
 const nativeText = vi.fn();
 
-vi.mock('./font', () => ({ drawText: vi.fn(), textWidth: (text: string) => text.length * 4 }));
+vi.mock('./font', async (importOriginal) => ({
+  ...await importOriginal<typeof import('./font')>(), drawText: vi.fn(), textWidth: (text: string) => text.length * 4 }));
 vi.mock('./sprites', () => ({
   OUTLINE: '#39281f',
   itemIcon: (itemId: string) => ({ width: 12, height: 12, itemId }),
@@ -252,27 +253,20 @@ describe.each(COUNTER_FINISHES)('selected main-service bitmap integration (%s)',
     }
   });
 
-  it('fits the corrected pickup visible bbox at native aspect without altering the six slots or bell',()=>{
+  it('authors the pickup on-grid without altering its six live slots or bell',()=>{
     installServices();
     const slots=Array.from({length:6},(_,i)=>passSlot(i)), bell={...PASS_BELL};
     const {events}=render();
-    const draw=images(events).find(event=>event.source.assetId==='service-pickup')!;
-    expect(draw).toBeDefined();
-    expect(draw.args.slice(0,4)).toEqual([8,8,1281,1102]);
-    const [,,, ,x,y,w,h]=draw.args;
-    expect([x,y,w]).toEqual([PASS.x,PASS.top+2,40]);
-    expect(w/1281).toBeCloseTo(h/1102,12);
-    expect(h).toBeCloseTo(34.410617,5);
-    expect(draw.smoothing).toBe(false);
-    // Visual ledges from the selected v2 source manifest, not game geometry.
-    expect(y+(648-42)*w/1281).toBeCloseTo(80.922717,5);
-    expect(y+(1063-42)*w/1281).toBeCloseTo(93.881343,5);
+    expect(images(events).some(event=>event.source.assetId==='service-pickup')).toBe(false);
+    for(const y of [PASS.top+21,COUNTER.top-2]) {
+      expect(at(events,PASS.x-1,y,PASS.w+2,3,'#42251a')).toHaveLength(1);
+    }
     expect(Array.from({length:6},(_,i)=>passSlot(i))).toEqual(slots);
     expect(PASS_BELL).toEqual(bell);
-    expect(nativeText).toHaveBeenCalledWith('PICK…',PASS.x+19,PASS.top+3.5);
-    const header=at(events,PASS.x-2,PASS.top-1,PASS.w+4,8,'#39281f')[0];
-    expect(events.indexOf(header)).toBeGreaterThan(events.indexOf(draw));
-    expect(at(events,PASS.x+1,PASS.top+21,38,3,'#39281f')).toHaveLength(0);
+    expect(nativeText).not.toHaveBeenCalled();
+    const lettering=fills(events).filter(mark=>mark.w===.5&&mark.h===.5&&mark.y>=PASS.top&&mark.y<PASS.top+6);
+    expect(lettering.length).toBeGreaterThan(0);
+    expect(at(events,PASS.x-2,PASS.top-1,PASS.w+4,8,'#42251a')).toHaveLength(1);
   });
 
   it.each(Object.keys(serviceSizes) as (keyof typeof serviceSizes)[])(
@@ -292,7 +286,7 @@ describe.each(COUNTER_FINISHES)('selected main-service bitmap integration (%s)',
       const partial=paint();
       const serviceCounts={
         'service-machine':1,'service-cupboard':MAIN_CUPBOARDS.length,
-        'service-cups':3,'service-jars':1,'service-basket':2,'service-pickup':1,
+        'service-cups':3,'service-jars':1,'service-basket':2,'service-pickup':0,
       };
       for(const [id,count] of Object.entries(serviceCounts)){
         const matching=(record:ReturnType<typeof context>)=>images(record.events).filter(draw=>draw.source.assetId===id);
@@ -300,7 +294,8 @@ describe.each(COUNTER_FINISHES)('selected main-service bitmap integration (%s)',
         expect(matching(partial)).toEqual(id===missing?[]:matching(complete));
       }
       // An unavailable source restores real fallback artwork rather than a gap.
-      expect(fills(partial.events).length).toBeGreaterThan(fills(complete.events).length);
+      if(missing==='service-pickup') expect(fills(partial.events)).toEqual(fills(complete.events));
+      else expect(fills(partial.events).length).toBeGreaterThan(fills(complete.events).length);
       expect(images(partial.events).filter(draw=>draw.source.itemId).map(draw=>draw.source.itemId)).toEqual(['roll']);
       expect(partial.clip()).toBeNull();expect(partial.stack).toHaveLength(0);
     },
@@ -322,7 +317,7 @@ describe.each(COUNTER_FINISHES)('selected main-service bitmap integration (%s)',
       painter.drawCounter(state,counter,0,[]);
       expect(images(record.events).filter(draw=>draw.source.itemId==='roll')).toHaveLength(count);
       const props=images(record.events).filter(draw=>draw.source.assetId?.startsWith('service-'));
-      expect(props.map(draw=>draw.source.assetId)).toEqual(['service-machine','service-pickup']);
+      expect(props.map(draw=>draw.source.assetId)).toEqual(['service-machine']);
       if(fixedProps)expect(props).toEqual(fixedProps);else fixedProps=props;
       expect(JSON.stringify(state)).toBe(before);
       expect(record.clip()).toBeNull();expect(record.stack).toHaveLength(0);
@@ -352,8 +347,8 @@ describe.each(COUNTER_FINISHES)('selected main-service bitmap integration (%s)',
       if(mode==='invalid-padding')installGeneratedMainAsset('service-pickup',{assetId:'service-pickup',width:16,height:16} as Image);
       const {events}=render(0,[],0,mode==='low-density'?1:2);
       expect(images(events).some(draw=>draw.source.assetId==='service-pickup')).toBe(false);
-      expect(at(events,PASS.x+1,PASS.top+21,38,3,'#39281f')).toHaveLength(1);
-      expect(at(events,PASS.x-1,COUNTER.top-2,PASS.w+2,3,'#39281f')).toHaveLength(1);
+      expect(at(events,PASS.x-1,PASS.top+21,PASS.w+2,3,'#42251a')).toHaveLength(1);
+      expect(at(events,PASS.x-1,COUNTER.top-2,PASS.w+2,3,'#42251a')).toHaveLength(1);
     }
   });
 });

@@ -1,10 +1,10 @@
+import { artRamp, mainTimber, mainCabinet, mainWall, mainFloor, mainCarpet, mainRug, mainSillPlant, mainSkyDisc, mainPickup, counterMaterial } from './main-room-surfaces';
 import { getLocale, t } from '../i18n';
-import { paintSignText } from './sign-lettering';
+import { paintPixelSignText as paintSignText } from './sign-lettering';
 import { mainKeyLight, paintWindowBounce } from './main-room-lighting';
-import { cozyCafePart, paintCozyCabinet } from './cozy-cafe-art';
-import { getGeneratedDecorAdapter, getGeneratedIngredientAdapter, getGeneratedMainEnvironmentAdapter } from './generated-main-art';
+import { cozyCafePart } from './cozy-cafe-art';
+import { getGeneratedIngredientAdapter, getGeneratedMainEnvironmentAdapter } from './generated-main-art';
 import { paintCozyService, paintCozyCakeDome } from './cozy-service-art';
-import { paintMainCarpet } from './main-runner-art';
 // Canvas painters for the parts of a room that are baked into textures: the main
 // café's back wall, floor, back bar and counter, the front wall along the bottom
 // edge, and the props (tables, chairs, crates) that the Phaser scene places.
@@ -23,8 +23,6 @@ import {
   floorY,
   queueSpot,
   PASS,
-  PASS_COLUMNS,
-  PASS_SLOT_W,
   PASTRY_CASE,
   SCENE_W,
   WINDOWS,
@@ -34,14 +32,12 @@ import {
 } from '../game/layout';
 import type { GameState } from '../game/state';
 import { paintPassageFloor } from './passages';
-import { cabinetPanel, glassReflection, leafySprig, timberBeam, treeLine, wallLantern } from './materials';
+import { glassReflection, leafySprig, timberBeam, treeLine, wallLantern } from './materials';
 import { mix, ramp } from './color';
-import { counterColors, grain, paintCounter, paintFloor, paintRug, paintRunner, paintRunnerJoin, paintWainscot, paintWall, wainscotColor } from './decor-art';
+import { grain, paintRunner, paintRunnerJoin, wainscotColor } from './decor-art';
 import { textWidth } from './font';
 import { type Lighting, type Sun } from './lighting';
 import { OUTLINE, itemIcon, pixelSprite } from './sprites';
-import { paintPixelFloorDepth } from './pixel-floor-depth';
-import { paintFineCabinet, paintFineBeam } from './pixel-joinery';
 import { paintPixelWindowVillage } from './pixel-window-village';
 import { pixelFloorDoorLight, projectFloorLayer } from './pixel-floor-projection';
 import { MAIN_WALL_PLANE, MAIN_COUNTER_PLANE, mainPixelProjection, projectMainPlaneWorld } from './main-pixel-presentation';
@@ -53,6 +49,7 @@ import { paintFineTrailingPlant } from './fine-plant-art';
 import { generatedMainRaster, paintGeneratedMain } from './generated-main-art';
 
 const WOOD = { base: '#865332', hi: '#c98c4d', lo: '#67432b', dark: '#543425' };
+type RoomLabel = [text: string, cx: number, y: number, width: number, height: number, color: string];
 type WindowBounds = { x: number; y: number; w: number; h: number };
 
 // Alpha-visible foot anchors from the selected, unchanged service PNG manifest.
@@ -307,6 +304,7 @@ export interface CounterCup {
 export class RoomPainter {
   /** How far the kitchen door has swung open, 0 to 1. */
   kitchenDoor = 0;
+  private wallpaper = 'wall_cream';
 
   constructor(public ctx: CanvasRenderingContext2D, readonly density = 1, private readonly project = true) {}
 
@@ -355,15 +353,15 @@ export class RoomPainter {
       const rs = source.sourceScale;
       ctx.drawImage(source.source, 10 * rs, 10 * rs, sw * rs, sh * rs, x, y, width, sh * scale);
       ctx.beginPath(); ctx.rect(x + 51 * scale, y + 43 * scale, 697 * scale, 264 * scale); ctx.clip();
-      paintSignText(ctx, state.profile?.cafeName ?? t('app.title'), x + width / 2, y + 6, width - 16, 7, '#f5efe0');
-      paintSignText(ctx, getLocale() === 'zh' ? '今日菜单' : 'MENU', x + width / 2, y + 13, width - 16, 5, '#e6c997');
+      this.sign(ctx, state.profile?.cafeName ?? t('app.title'), x + width / 2, y + 6, width - 16, 7, artRamp('cloth-7')[2]);
+      this.sign(ctx, getLocale() === 'zh' ? '今日菜单' : 'MENU', x + width / 2, y + 13, width - 16, 6, artRamp('floor')[5]);
       const today = menuItems(state);
       [today.slice(0,5), today.slice(5,10)].forEach((row,ri) => {
         const total = row.length * 16 - 4;
         row.forEach((item,i) => {
           const icon = itemIcon(item.id,false), iconScale = Math.min(9 / icon.width,9 / icon.height);
           const iw = icon.width * iconScale, ih = icon.height * iconScale;
-          ctx.drawImage(fineSpriteArt(icon).canvas, x + width / 2 - total / 2 + i * 16 + (12 - iw) / 2, y + 18 + ri * 10 + (9 - ih), iw, ih);
+          ctx.drawImage(fineSpriteArt(icon).canvas, x + width / 2 - total / 2 + i * 16 + (12 - iw) / 2, y + 19 + ri * 10 + (9 - ih), iw, ih);
         });
       });
     } finally { ctx.restore(); }
@@ -378,23 +376,6 @@ export class RoomPainter {
     const scale = Math.min(maxWidth / source.width, maxHeight / source.height);
     const width = source.width * scale, height = source.height * scale;
     return paintGeneratedMain(this.ctx, id, cx - width / 2, foot - height * SERVICE_FOOT_Y[id], width, height);
-  }
-
-  private servicePickup(): boolean {
-    if (this.density <= 1) return false;
-    const source = generatedMainRaster('service-pickup');
-    if (!source || source.width <= 16 || source.height <= 16) return false;
-    // Selected v2 manifest: visible [8,8,1289,1110] inside 1297×1118.
-    // Fit the visible footprint, excluding only its unchanged external padding.
-    // Its native ledges land at y80.923/y93.881; all six live plate slots and the
-    // separately rendered bell keep their existing gameplay coordinates.
-    const sw = source.width - 16, sh = source.height - 16;
-    this.ctx.save();
-    this.ctx.imageSmoothingEnabled = false;
-    const rs = source.sourceScale;
-    this.ctx.drawImage(source.source, 8 * rs, 8 * rs, sw * rs, sh * rs, PASS.x, PASS.top + 2, PASS.w, PASS.w * sh / sw);
-    this.ctx.restore();
-    return true;
   }
 
   private serviceBreadBasket(bx: number, foot: number, foreground = false): boolean {
@@ -436,6 +417,12 @@ export class RoomPainter {
   private floorCanvas: HTMLCanvasElement | null = null;
   private projectedFloor: HTMLCanvasElement | null = null;
   private floorSignature = '';
+  private labels: RoomLabel[] | null = null;
+
+  private sign(ctx: CanvasRenderingContext2D, ...label: RoomLabel): void {
+    if (this.labels) this.labels.push(label);
+    else paintSignText(ctx, ...label);
+  }
 
   /** Upright architecture stays upright; raster scaling keeps the fine pixel edges crisp. */
   withPlane(footY: number, paint: () => void): void {
@@ -448,40 +435,22 @@ export class RoomPainter {
     const target = this.ctx, ctx = source.getContext('2d')!;
     ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, source.width, source.height);
     ctx.setTransform(2, 0, 0, 2, 0, 0); ctx.imageSmoothingEnabled = false;
-    this.ctx = ctx;
-    try { paint(); } finally { this.ctx = target; }
+    const labels: RoomLabel[] = [], previousLabels = this.labels;
+    this.labels = labels; this.ctx = ctx;
+    try { paint(); } finally { this.ctx = target; this.labels = previousLabels; }
     const a = projectMainPlaneWorld({ x: 0, y: footY }, footY);
     const b = projectMainPlaneWorld({ x: SCENE_W, y: footY }, footY);
     target.save(); target.imageSmoothingEnabled = false;
     target.drawImage(source, Math.round(a.x * 2) / 2, 0, Math.round((b.x - a.x) * 2) / 2, H);
     target.restore();
+    // Lettering is painted AFTER the horizontal plane resample. One-art-pixel
+    // Chinese strokes must not be dropped by the room's 90% wall projection.
+    for (const [text, cx, y, width, height, color] of labels) {
+      paintSignText(target, text, projectMainPlaneWorld({ x: cx, y: footY }, footY).x,
+        y, width * (b.x - a.x) / SCENE_W, height, color);
+    }
   }
 
-
-  /** A single satin oak worktop, with restrained paneled joinery from the reference. */
-  private referenceOakCounter(x: number, y: number, w: number, topH: number, frontH: number, drawers = false): void {
-    if (paintCozyCabinet(this.ctx, x, y, w, topH, frontH)) return;
-    const ctx = this.ctx, front = y + topH, bottom = front + frontH;
-    this.r(x, y, w, topH, '#b77841');
-    this.r(x + 1, y + 1, w - 2, 1, '#e0b57b');
-    this.r(x + 1, front - 2, w - 2, 1, '#d69a56');
-    this.r(x, front - 1, w, 2, '#62402a');
-    for (let yy = y + 3; yy < front - 2; yy += 3) {
-      this.r(x + 2, yy, w - 4, 1, yy % 2 ? '#b17642' : '#bd814a');
-    }
-    this.r(x, front + 1, w, frontH - 1, '#805333');
-    const count = Math.max(1, Math.round(w / 28)), step = w / count;
-    for (let i = 0; i < count; i++) {
-      const px = x + i * step + 2, pw = step - 4;
-      paintFineCabinet(ctx, px, front + 2, pw, frontH - 4, '#895a37', drawers);
-      if (drawers) {
-        this.r(px + 2, front + 3, pw - 4, 4, '#92633c');
-        this.r(px + 2, front + 7, pw - 4, 1, '#593b28');
-        this.r(px + pw / 2 - 2, front + 4, 4, 1, '#d7b879');
-      }
-    }
-    this.r(x, bottom - 2, w, 2, '#563c2b');
-  }
 
   /** Full generated image, aligned by measured opaque bounds; alpha is preserved. */
   private referenceMachine(left: number, foot: number): boolean {
@@ -493,14 +462,10 @@ export class RoomPainter {
       left, foot - raster.height * scale, raster.width * scale, raster.height * scale);
   }
 
-  private cabinet(x: number, y: number, w: number, h: number, base: string, handle = false): void {
-    (this.density > 1 ? paintFineCabinet : cabinetPanel)(this.ctx, x, y, w, h, base, handle);
-  }
-
   private r(x: number, y: number, w: number, h: number, color: string): void {
     if (w <= 0 || h <= 0) return;
     this.ctx.fillStyle = color;
-    this.ctx.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+    this.ctx.fillRect(Math.round(x * 2) / 2, Math.round(y * 2) / 2, Math.round(w * 2) / 2, Math.round(h * 2) / 2);
   }
 
   /** Warm wall returns and cabinet tops share the floor's upper-left key. */
@@ -548,42 +513,12 @@ export class RoomPainter {
   }
 
   drawWall(wallpaper: string, t: number): void {
+    this.wallpaper = wallpaper;
     this.withPlane(80, () => this.drawWallLogical(wallpaper, t));
   }
 
-  private drawWallLogical(wallpaper: string, t: number): void {
-    if (wallpaper === 'wall_cream' && this.density > 1) {
-      // Quiet linen-and-ivory stripes keep the windows and chalkboard in focus.
-      this.r(0, 6, SCENE_W, 55, '#efdfc1');
-      for (let x = 0; x < SCENE_W; x += 8) {
-        this.r(x, 6, 1, 55, '#d6bd95');
-        this.r(x + 1, 6, 1, 55, '#fff0d6');
-        this.r(x + 4, 6, 1, 55, '#e5cfaa');
-      }
-    } else paintWall(this.ctx, wallpaper, 0, 6, SCENE_W, 54, t);
-    // A deep crown beam with laminated timber returns and pegged end blocks.
-    const beamPainter = this.density > 1 ? paintFineBeam : timberBeam;
-    const environment = this.density > 1 ? getGeneratedMainEnvironmentAdapter() : null;
-    // One continuous header rather than repeating an end-capped beam bitmap.
-    beamPainter(this.ctx, 0, 0, SCENE_W, 8);
-    for (const x of [0, SCENE_W - 7]) {
-      // Native source columns are broader than the historical seven-pixel
-      // strip. Contain them at the outer boundary, never stretch their woodwork.
-      if (!environment?.paintPost(this.ctx, x === 0 ? -6 : SCENE_W - 16, 0, 22, 79, x === 0 ? 'left' : 'right')) {
-        beamPainter(this.ctx, x, 0, 7, 79, true);
-      }
-      for (let i = 0; i < 7; i++) this.r(x === 0 ? 7 + i : x - i - 1, 7 + i, 1, 7 - i, '#67432b');
-      this.r(x === 0 ? 7 : x - 6, 8, 6, 1, '#c98c4d');
-    }
-    paintWainscot(this.ctx, wallpaper, 0, 61, SCENE_W, 15);
-    // The two window bays share the same substantial oak front as the live bar.
-    // This is architecture behind the existing service aisle, never a new obstacle.
-    if (this.density > 1 && wallpaper === 'wall_cream') {
-      for (const win of WINDOWS) paintCozyCabinet(this.ctx, win.x - 4, 59, win.w + 8, 3, 17);
-    }
-    // Baseboard.
-    this.r(0, 76, SCENE_W, 4, WOOD.dark);
-    this.r(0, 76, SCENE_W, 1, WOOD.base);
+  private drawWallLogical(wallpaper: string, _t: number): void {
+    mainWall(this.ctx, wallpaper);
     // Small permanent lanterns and trailing herbs are part of the architecture.
     if (!this.wallLamp(76,10)) wallLantern(this.ctx, 76, 10);
     if (!this.wallLamp(219,8)) wallLantern(this.ctx, 219, 8);
@@ -624,12 +559,11 @@ export class RoomPainter {
         stars.forEach(([sx, sy], i) => {
           if ((Math.floor(t * 1.5) + i) % 4 !== 0) this.r(x + sx / 46 * w, y + sy / 38 * h, 1, 1, '#fff6c8');
         });
-        this.r(x + w - 8, y + 4, 6, 6, '#f6eec2');
-        this.r(x + w - 6, y + 4, 5, 5, bands[0]);
+        mainSkyDisc(ctx, x + w - 8, y + 4, true);
       } else {
         // The sun crosses the window and sinks behind the hills.
         const { sun } = light;
-        if (sun.elevation > 0) this.r(x + 2 + sun.x * (w - 10), y + 3 + (1 - sun.elevation) * (h - 14), 6, 6, sun.disc);
+        if (sun.elevation > 0) mainSkyDisc(ctx, x + 2 + sun.x * (w - 10), y + 3 + (1 - sun.elevation) * (h - 14), false);
         const generatedCloud = this.density > 1 && getGeneratedMainEnvironmentAdapter()?.readyIds.includes('cloud');
         for (const [offset, cy] of (generatedCloud ? [] : [[0, 7], [34, 15]])) {
           const cx = x - 16 + ((t * 2.5 + offset) % (w + 24));
@@ -686,10 +620,7 @@ export class RoomPainter {
       this.r(x - 6, y + h + 5, 4, 2, WOOD.dark);
       this.r(x + w + 2, y + h + 5, 4, 2, WOOD.dark);
     }
-    // A botanical accent on each return, clear of the hanging OPEN sign.
-    this.r(x + w - 9, y + h - 3, 5, 4, '#bc7149');
-    this.r(x + w - 9, y + h - 3, 5, 1, '#e5a463');
-    leafySprig(ctx, x + w - 7, y + h - 6, 3, x);
+    // Equipped sill plants are drawn separately at their established anchor.
     if (sign === null) return;
     // The OPEN / CLOSED sign hangs on two strings from the crossbar, below the neon.
     const word = getLocale() === 'zh' ? (sign ? '营业中' : '休息中') : (sign ? 'OPEN' : 'CLOSED');
@@ -699,11 +630,16 @@ export class RoomPainter {
     const sy = bar + 3;
     this.r(sx + 2, bar, 1, sy - bar, '#4a2e1e');
     this.r(sx + sw - 3, bar, 1, sy - bar, '#4a2e1e');
-    this.r(sx, sy, sw, 9, OUTLINE);
-    this.r(sx + 1, sy + 1, sw - 2, 7, sign ? '#fdf6ec' : '#3f5f93');
-    paintSignText(this.ctx, word, sx + sw / 2, sy + 1, sw - 4, 7, sign ? '#d9384a' : '#fdf6ec');
+    mainTimber(ctx, sx, sy, sw, 10);
+    this.r(sx + 1.5, sy + 1.5, sw - 3, 7, sign ? artRamp('cloth-7')[2] : artRamp('sage')[0]);
+    this.r(sx + 2, sy + 2, sw - 4, .5, sign ? artRamp('floor')[4] : artRamp('sage')[2]);
+    this.sign(this.ctx, word, sx + sw / 2, sy + 2, sw - 4, 6, sign ? artRamp('gingham')[0] : artRamp('cloth-7')[2]);
   }
 
+
+  drawSill(id: string, cx: number, foot: number): void {
+    this.withPlane(MAIN_WALL_PLANE, () => mainSillPlant(this.ctx, id, cx, foot));
+  }
 
   drawMenuBoard(state: GameState): void {
     this.withPlane(80, () => this.drawMenuBoardLogical(state));
@@ -742,8 +678,8 @@ export class RoomPainter {
     this.r(x + 8, y + h - 7, 14, 1, '#4f6e5c');
     this.r(x + w - 22, y + 7, 12, 1, '#4f6e5c');
     this.r(x + w - 14, y + h - 9, 6, 1, '#4f6e5c');
-    paintSignText(this.ctx, state.profile?.cafeName ?? t('app.title'), x + w / 2, y + 3, w - 16, 8, '#f5efe0');
-    paintSignText(this.ctx, getLocale() === 'zh' ? '今日菜单' : 'MENU', x + w / 2, y + 11, w - 16, 6, '#e6c997');
+    this.sign(this.ctx, state.profile?.cafeName ?? t('app.title'), x + w / 2, y + 3, w - 16, 8, artRamp('cloth-7')[2]);
+    this.sign(this.ctx, getLocale() === 'zh' ? '今日菜单' : 'MENU', x + w / 2, y + 11, w - 16, 6, artRamp('floor')[5]);
     // Today's menu, as many as fit.
     const today = menuItems(state);
     const rows = [today.slice(0, 5), today.slice(5, 10)];
@@ -769,30 +705,8 @@ export class RoomPainter {
 
   private drawBackBarLogical(state: GameState, counter: string): void {
     const { x, w, top, front } = BACK_BAR;
-    const colors = counterColors(counter);
-    const body = ramp(colors.front);
-    const slab = ramp(colors.top);
     const bottom = FLOOR_Y;
-    // Worktop and cupboard doors.
-    this.r(x, top - 1, w + 1, 1, OUTLINE);
-    this.r(x, top, w, front - top, slab.base);
-    this.r(x, top, w, 1, slab.lo);
-    this.r(x, front - 2, w, 1, slab.hi);
-    this.r(x, front - 1, w, 1, colors.trim ?? slab.dark);
-    this.r(x - 1, top - 1, 1, bottom - top + 1, OUTLINE);
-    this.r(x + w, top - 1, 1, bottom - top + 1, OUTLINE);
-    this.r(x, front, w, bottom - front, body.lo);
-    grain(this.ctx, x + 1, top + 1, w - 2, front - top - 3, slab, 'h', 52);
-    for (let dx = x + 3; dx + 22 <= x + w - 2; dx += 25) {
-      this.cabinet(dx, front + 2, 22, bottom - front - 5, colors.front, true);
-      this.r(dx + 3, front + 4, 1, 2, '#b77d45');
-    }
-    this.r(x, bottom - 2, w, 2, body.dark);
-
-    const generatedBackCounter = counter !== 'counter_oak' && getGeneratedDecorAdapter()?.paintCounter(this.ctx, counter, x + 1, top + 1, w - 2, front - top - 1, bottom - front - 2);
-    if (!generatedBackCounter && this.density > 1 && counter === 'counter_oak') {
-      this.referenceOakCounter(x, top, w, front - top, bottom - front, true);
-    }
+    mainCabinet(this.ctx, counter, x, top, w, front - top, bottom - front, true);
 
     const sit = top + 4; // Items stand a little back from the front edge.
     const ctx = this.ctx;
@@ -935,17 +849,16 @@ export class RoomPainter {
         out.setTransform(2, 0, 0, 2, 0, 0);
         projectFloorLayer(out, source, mainPixelProjection(H));
       }
-      paintPixelRoomShell(this.ctx, H, mainPixelProjection(H));
+      paintPixelRoomShell(this.ctx, H, mainPixelProjection(H), this.wallpaper);
       this.ctx.drawImage(projected, 0, 0, SCENE_W, H);
       return;
     }
-    if (floor === 'floor_checker') paintPixelFloorDepth(this.ctx, 0, FLOOR_Y, SCENE_W, H - FLOOR_Y, 17, { pixelSize: 0.5, columns: 12, rows: 8, horizontalBackScale: this.density > 1 ? 1 : 0.8 });
-    else paintFloor(this.ctx, floor, 0, FLOOR_Y, SCENE_W, H - FLOOR_Y);
+    mainFloor(this.ctx, floor, H);
     // Shadow where the floor meets the wall.
     this.ctx.save();
     for (let i = 0; i < 3; i++) {
       this.ctx.globalAlpha = 0.18 - i * 0.05;
-      this.r(0, FLOOR_Y + i, SCENE_W, 1, '#2a1410');
+      this.r(0, FLOOR_Y + i, SCENE_W, 1, artRamp('walnut')[0]);
     }
     this.ctx.restore();
     // The quieter continuous stone floor lets the furniture define each dining bay.
@@ -954,14 +867,13 @@ export class RoomPainter {
     paintPassageFloor(this.ctx, 'main');
     // The rug lies in the open floor between the counter and the front door;
     // without one there's a plain runner leading in from the door.
-    const newRunner = paintMainCarpet(this.ctx, H, rug === 'rug_none');
+    const newRunner = mainCarpet(this.ctx, H, rug === 'rug_none');
     if (rug === 'rug_none') { if (!newRunner) this.drawRunner(H); }
-    else paintRug(this.ctx, rug, 133, floorY(150), 54, H - 20 - floorY(150));
+    else mainRug(this.ctx, rug, 133, floorY(150), 54, H - 20 - floorY(150));
     this.drawQueueMarks();
     if (!newRunner) this.drawDoormat(H);
     const ctx = this.ctx;
-    // Quiet diffuse window bounce. Explicit long pane strips made the floor
-    // read like fabric; preserve the authored tile texture instead.
+    // Golden pane footprints cross the tile joints and fade beyond the dining bays.
     for (const win of WINDOWS) {
       const opening = this.wallWindow(win)?.aperture ?? win;
       paintWindowBounce(ctx, opening.x, opening.w, FLOOR_Y, light.sun);
@@ -972,7 +884,7 @@ export class RoomPainter {
       const y = doorwayY('main', 'left');
       ctx.save();
       ctx.globalAlpha = 0.18 * this.kitchenDoor;
-      ctx.fillStyle = '#ffcf8a';
+      ctx.fillStyle = artRamp('floor')[4];
       ctx.beginPath();
       ctx.moveTo(0, y - 14);
       ctx.lineTo(0, y + 14);
@@ -988,16 +900,16 @@ export class RoomPainter {
     ctx.save();
     for (let row = 0; row < 10; row++) {
       ctx.globalAlpha = (0.15 + light.sun.strength * 0.05) * (1 - row / 11);
-      this.r(COUNTER.x + row * .5, COUNTER.bottom + row, COUNTER.w + COUNTER_GATE.w, 1, '#493326');
+      this.r(COUNTER.x + row * .5, COUNTER.bottom + row, COUNTER.w + COUNTER_GATE.w, 1, artRamp('walnut')[0]);
     }
     ctx.globalAlpha = 0.24;
-    this.r(COUNTER.x, COUNTER.bottom, COUNTER.w + COUNTER_GATE.w, 1, '#39281f');
+    this.r(COUNTER.x, COUNTER.bottom, COUNTER.w + COUNTER_GATE.w, 1, artRamp('walnut')[0]);
     for (let i = 0; i < 4; i++) {
       ctx.globalAlpha = 0.11 - i * 0.025;
-      this.r(0, H - 6 * (i + 1), SCENE_W, 6, '#2a1410');
+      this.r(0, H - 6 * (i + 1), SCENE_W, 6, artRamp('walnut')[0]);
       ctx.globalAlpha = 0.05;
-      this.r(0, FLOOR_Y, 3 * (4 - i), H - FLOOR_Y, '#2a1410');
-      this.r(SCENE_W - 3 * (4 - i), FLOOR_Y, 3 * (4 - i), H - FLOOR_Y, '#2a1410');
+      this.r(0, FLOOR_Y, 3 * (4 - i), H - FLOOR_Y, artRamp('walnut')[0]);
+      this.r(SCENE_W - 3 * (4 - i), FLOOR_Y, 3 * (4 - i), H - FLOOR_Y, artRamp('walnut')[0]);
     }
     ctx.restore();
   }
@@ -1113,10 +1025,7 @@ export class RoomPainter {
   private drawCounterLogical(state: GameState, counter: string, t: number, cups: CounterCup[]): void {
     const { x, w, top, front, bottom } = COUNTER;
     this.drawReturn(counter);
-    paintCounter(this.ctx, counter, x, top, w, front - top, bottom - front);
-    if (this.density > 1 && counter === 'counter_oak') {
-      this.referenceOakCounter(x, top, w, front - top, bottom - front);
-    }
+    mainCabinet(this.ctx, counter, x, top, w, front - top, bottom - front);
 
     // Espresso machine; its finish gets fancier with upgrades.
     const lvl = state.upgrades.machine;
@@ -1176,9 +1085,10 @@ export class RoomPainter {
     this.drawGate(counter);
     this.drawPass(counter);
     // Distinct customer-facing order and pickup plaques.
-    this.r(108, 112, 31, 10, OUTLINE);
-    this.r(109, 113, 29, 8, '#466958');
-    paintSignText(this.ctx, getLocale() === 'zh' ? '点单' : 'ORDER', 123.5, 113, 27, 8, '#f8e8bc');
+    mainTimber(this.ctx, 108, 112, 31, 10);
+    this.r(109, 113, 29, 8, artRamp('sage')[0]);
+    this.r(109, 113, 29, .5, artRamp('sage')[2]);
+    this.sign(this.ctx, getLocale() === 'zh' ? '点单' : 'ORDER', 123.5, 113, 27, 8, artRamp('cloth-7')[2]);
 
     // Tip jar, in the gap between the first two baristas.
     const coins = Math.min(4, 1 + Math.floor(state.today.served / 15));
@@ -1222,13 +1132,11 @@ export class RoomPainter {
     const top = BACK_BAR.top;
     // The lower return is a staff opening aligned with the kitchen door.
     const h = FLOOR_Y - top - 2;
-    const colors = counterColors(counter);
-    const slab = ramp(colors.top);
-    this.r(x - 1, top - 1, w + 2, h + 1, OUTLINE);
-    this.r(x, top, w, h, slab.base);
-    this.r(x, top, 1, h, slab.lo);
-    this.r(x + w - 2, top, 1, h, slab.hi);
-    this.r(x + w - 1, top, 1, h, colors.trim ?? slab.dark);
+    mainTimber(this.ctx, x - 1, top - 1, w + 2, h + 1, true);
+    const mat = counterMaterial(counter);
+    this.r(x + 1, top + 1, w - 2, h - 2, mat[Math.min(3, mat.length - 1)]);
+    for (let yy = top + 2; yy < top + h - 3; yy += 9) this.r(x + 2, yy, .5, 6, mat.at(-1)!);
+    this.r(x + w - 1, top, .5, h, artRamp('walnut')[0]);
   }
 
   /**
@@ -1238,76 +1146,35 @@ export class RoomPainter {
    * on its header and the plates are drawn live.
    */
   private drawPass(counter: string): void {
-    const { x, w, top } = PASS;
-    const base = COUNTER.top;
-    const shelf = top + 21;
-    const wood = ramp(counterColors(counter).front);
-    const steel = ramp('#b9c4cb');
-    const inner = x + 2;
-    const innerW = PASS_COLUMNS * PASS_SLOT_W;
-    if (!this.servicePickup()) {
-      // A warm wash from the heat lamps over both shelves.
-      this.ctx.save();
-      this.ctx.globalAlpha = 0.16;
-      this.r(inner, top + 8, innerW, base - top - 8, '#ffb060');
-      this.ctx.restore();
-      // Slot marks: a pale tick at each slot's edge, on the ledge and the shelf.
-      for (const y of [shelf - 1, base - 2]) {
-        for (let i = 1; i < PASS_COLUMNS; i++) this.r(inner + i * PASS_SLOT_W, y - 2, 1, 3, steel.lo);
-      }
-      // The heated shelf, and the steel ledge over the gate.
-      this.r(inner - 1, shelf, innerW + 2, 3, OUTLINE);
-      this.r(inner, shelf, innerW, 1, steel.hi);
-      this.r(inner, shelf + 1, innerW, 1, steel.base);
-      this.r(inner + 1, shelf + 3, innerW - 2, 1, '#73624e');
-      for (const sx of [inner + 2, inner + innerW - 4]) this.r(sx, shelf + 3, 2, 3, '#8c7b5e');
-      this.r(x - 1, base - 2, w + 2, 3, OUTLINE);
-      this.r(x, base - 2, w, 1, steel.hi);
-      this.r(x, base - 1, w, 1, steel.base);
-      // Posts either side.
-      for (const px of [x, x + w - 2]) {
-        this.r(px - 1, top + 6, 4, base - top - 7, OUTLINE);
-        this.r(px, top + 6, 2, base - top - 7, wood.base);
-        this.r(px, top + 6, 1, base - top - 7, wood.hi);
-        for (const hy of [top + 10, base - 8]) this.r(px, hy, 1, 1, '#e2c17d');
-      }
-    }
-    // The header, signed PASS, with two heat lamps under it.
-    this.r(x - 2, top - 1, w + 4, 8, OUTLINE);
-    this.r(x - 1, top, w + 2, 6, wood.lo);
-    this.r(x - 1, top, w + 2, 1, wood.hi);
-    paintSignText(this.ctx, getLocale() === 'zh' ? '取餐' : 'PICKUP', x + 19, top, 28, 7, '#f5e6c4');
-    for (const lx of [inner + 4, inner + innerW - 11]) {
-      this.r(lx, top + 7, 7, 2, '#7a5a2a');
-      this.r(lx + 1, top + 7, 5, 1, '#a67c3a');
-      this.r(lx + 1, top + 9, 5, 1, '#ffd27a');
-    }
+    mainPickup(this.ctx, counter);
+    this.sign(this.ctx, getLocale() === 'zh' ? '取餐' : 'PICKUP', PASS.x + 19, PASS.top,
+      28, 6, artRamp('cloth-7')[2]);
   }
 
   /** The hinged flap at the end of the counter: a lift-up top and a little swing door. */
   private drawGate(counter: string): void {
     const { top, front, bottom } = COUNTER;
     const { x, w } = COUNTER_GATE;
-    const colors = counterColors(counter);
-    const slab = ramp(colors.top);
-    const body = ramp(colors.front);
+    const mat = counterMaterial(counter);
+    const slab = { base: artRamp('oak')[3], hi: artRamp('oak')[5], lo: artRamp('oak')[2], dark: artRamp('walnut')[0] };
+    const body = { base: mat[Math.min(2, mat.length-1)], hi: mat.at(-1)!, lo: mat[1], dark: mat[0] };
     // The flap: same top as the counter, with a seam and two brass hinges.
-    this.r(x, top - 1, w, 1, OUTLINE);
+    this.r(x, top - 1, w, 1, artRamp('walnut')[0]);
     this.r(x, top, w, front - top, slab.base);
     this.r(x, top, w, 1, slab.lo);
     this.r(x, front - 3, w, 1, slab.hi);
-    this.r(x, front - 1, w, 1, colors.trim ?? slab.dark);
+    this.r(x, front - 1, w, 1, slab.dark);
     this.r(x, top, 1, front - top, slab.dark);
-    for (const hy of [top + 2, front - 5]) this.r(x + 1, hy, 2, 2, '#d9a441');
+    for (const hy of [top + 2, front - 5]) this.r(x + 1, hy, 2, 2, artRamp('oak')[4]);
     // Below it, an opening and a half-height swing door.
-    this.r(x, front, w, bottom - front, '#3a2418');
+    this.r(x, front, w, bottom - front, artRamp('walnut')[0]);
     const dy = front + 5;
     this.r(x + 1, dy, w - 2, bottom - dy - 1, body.dark);
     this.r(x + 2, dy + 1, w - 4, bottom - dy - 3, body.base);
     this.r(x + 2, dy + 1, w - 4, 1, body.hi);
     this.r(x + 4, dy + 4, w - 8, bottom - dy - 9, body.lo);
-    this.r(x + w - 5, dy + 6, 2, 2, colors.trim ?? '#e7b84a');
-    this.r(x + w, top - 1, 1, bottom - top + 1, OUTLINE);
+    this.r(x + w - 5, dy + 6, 2, 2, artRamp('oak')[5]);
+    this.r(x + w, top - 1, 1, bottom - top + 1, artRamp('walnut')[0]);
   }
 
   /**
@@ -1321,21 +1188,22 @@ export class RoomPainter {
     // Reuse the existing live-stock case painter with a pale oak frame. Its
     // cream interior matches the reference and keeps every food item dynamic.
     // Glass top over the case.
-    this.r(x, top + 1, w, front - top - 4, '#cfe6ea');
-    this.r(x, top + 1, w, 1, '#eef8fa');
-    for (let i = 0; i < w - 6; i += 9) this.r(x + 3 + i, top + 3, 4, 1, '#ffffff');
-    this.r(x, top + 1, 1, front - top - 4, '#9fc3cf');
-    this.r(x + w - 1, top + 1, 1, front - top - 4, '#9fc3cf');
+    this.r(x, top + 1, w, front - top - 4, '#b7bf94');
+    this.r(x, top + 1, w, 1, '#efdfbe');
+    for (const gx of [x + 7, x + w * .63]) for (let row = 0; row < front - top - 6; row += .5) this.r(gx + row * .65, top + 2 + row, 1, .5, '#efdfbe');
+    this.r(x, front - 4, w, .5, artRamp('sage')[0]);
+    this.r(x, top + 1, 1, front - top - 4, '#8ba477');
+    this.r(x + w - 1, top + 1, 1, front - top - 4, '#8ba477');
     // The case itself: a lit cream interior with one shelf.
     const cy = front + 2;
     const ch = bottom - front - 6;
-    const brass = ramp('#b98546');
+    const brass = { hi: artRamp('oak')[5], base: artRamp('oak')[3], lo: artRamp('walnut')[1] };
     this.r(x - 1, cy - 1, w + 2, ch + 2, OUTLINE);
-    this.r(x, cy, w, ch, '#f6e6c6');
-    this.r(x, cy, w, 3, '#fff4d8');
-    this.r(x, cy + ch - 4, w, 4, '#e8cfa4');
+    this.r(x, cy, w, ch, '#efdfbe');
+    this.r(x, cy, w, 3, '#fee8ac');
+    this.r(x, cy + ch - 4, w, 4, '#d6ac7b');
     const shelfY = cy + ch - 4;
-    this.r(x, shelfY, w, 1, '#c9a873');
+    this.r(x, shelfY, w, 1, '#c0824f');
 
     const bakery = menuItems(state).filter((m) => !isDrink(m.category)).slice(0, 5);
     const slots = Math.max(3, bakery.length);
@@ -1343,8 +1211,8 @@ export class RoomPainter {
     for (let i = 0; i < slots; i++) {
       const sx = Math.round(x + slot * i + slot / 2);
       // Doily plate.
-      this.r(sx - 5, shelfY - 1, 11, 1, '#ffffff');
-      this.r(sx - 4, shelfY, 9, 1, '#e9dcc8');
+      this.r(sx - 5, shelfY - 1, 11, 1, '#efdfbe');
+      this.r(sx - 4, shelfY, 9, 1, '#e5d7ba');
       const m = bakery[i];
       if (!m) continue;
       const count = state.phase === 'prep' ? (state.bakePlan[m.id] ?? 0) : (state.shelf[m.id] ?? 0);
@@ -1359,7 +1227,7 @@ export class RoomPainter {
     ctx.save();
     ctx.globalAlpha = 0.45;
     for (const gx of [x + 6, x + w / 2 + 4]) {
-      for (let i = 0; i < ch - 2; i++) this.r(gx + i * 0.6, cy + 1 + i, 2, 1, '#ffffff');
+      for (let i = 0; i < ch - 2; i++) this.r(gx + i * 0.6, cy + 1 + i, 2, 1, '#efdfbe');
     }
     ctx.restore();
     this.r(x, cy, w, 1, brass.hi);

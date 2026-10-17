@@ -1,4 +1,4 @@
-import { paintSignText } from './sign-lettering';
+import { paintSignText, paintPixelSignText } from './sign-lettering';
 import { getGeneratedDecorAdapter } from './generated-main-art';
 // Pixel art for every decor item, in a shaded Stardew-like style. Each painter
 // draws into a region so the same code renders both the café scene and the
@@ -797,13 +797,13 @@ const neonHeading = lazy(() => {
   return c;
 });
 
-export function paintNeon(ctx: Ctx, id: string, cx: number, y: number, t: number, label?: string): void {
+export function paintNeon(ctx: Ctx, id: string, cx: number, y: number, t: number, label?: string, pixelLettering = false): void {
   const generated = getGeneratedDecorAdapter(), body = generated?.sprite(id);
   if (body) {
     ctx.save(); ctx.globalAlpha *= 0.85 + Math.sin(t * 3) * 0.15;
     generated!.paintSprite(ctx, id, cx, y + body.height / 2);
     if (id === 'neon_cafe') {
-      if (label) { paintSignText(ctx, label, cx, y + 2, body.width - 4, body.height - 4, '#efbc89'); ctx.restore(); return; }
+      if (label) { (pixelLettering ? paintPixelSignText : paintSignText)(ctx, label, cx, y + 2, body.width - 4, body.height - 4, '#efbc89'); ctx.restore(); return; }
       const heading = neonHeading();
       const scale = Math.min((body.width - 4) / heading.width, (body.height - 4) / heading.height);
       ctx.imageSmoothingEnabled = false;
@@ -815,7 +815,7 @@ export function paintNeon(ctx: Ctx, id: string, cx: number, y: number, t: number
   ctx.save();
   ctx.globalAlpha = 0.8 + Math.sin(t * 3) * 0.2;
   if (id === 'neon_cafe') {
-    if (label) { paintSignText(ctx, label, cx, y, 68, 14, '#efbc89'); ctx.restore(); return; }
+    if (label) { (pixelLettering ? paintPixelSignText : paintSignText)(ctx, label, cx, y, 68, 14, '#efbc89'); ctx.restore(); return; }
     // Doubled bitmap text so the sign reads at this scale.
     const tmp = neonHeading();
     ctx.imageSmoothingEnabled = false;

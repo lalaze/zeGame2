@@ -323,9 +323,9 @@ function glow(ctx: Ctx, cx: number, cy: number, radius: number): void {
  * Draws a wall piece filling its footprint, whose top-left corner is (x, y).
  * `now` drives the clock.
  */
-export function paintWallFurniture(ctx: Ctx, id: string, x: number, y: number, t: number, now: Date): void {
+export function paintWallFurniture(ctx: Ctx, id: string, x: number, y: number, t: number, now: Date, emitGlow = true): void {
   if (getGeneratedFurnitureAdapter()?.paintWall(ctx, id, x, y, now)) {
-    if (id === 'sconce') { const def = furnitureDef(id)!; glow(ctx, x + def.w * CELL / 2, y + 4, 12); }
+    if (id === 'sconce' && emitGlow) { const def = furnitureDef(id)!; glow(ctx, x + def.w * CELL / 2, y + 4, 12); }
     if (id === 'hanging_ivy') {
       const adapter = getGeneratedFurnitureAdapter()!, sprite = adapter.sprite(id)!, def = furnitureDef(id)!;
       const left = Math.round(x + (def.w * CELL - sprite.width) / 2), top = Math.round(y + (def.h * CELL - sprite.height) / 2);
@@ -347,16 +347,16 @@ export function paintWallFurniture(ctx: Ctx, id: string, x: number, y: number, t
   const sprite = spriteFor(id);
   if (!sprite) return;
   ctx.drawImage(sprite, Math.round(x + (w - sprite.width) / 2), Math.round(y + (h - sprite.height) / 2));
-  if (id === 'sconce') glow(ctx, x + w / 2, y + 4, 12);
+  if (id === 'sconce' && emitGlow) glow(ctx, x + w / 2, y + 4, 12);
 }
 
 /** Draws a floor piece standing centered at cx with its feet on footY. */
-export function paintFloorFurniture(ctx: Ctx, id: string, cx: number, footY: number): void {
+export function paintFloorFurniture(ctx: Ctx, id: string, cx: number, footY: number, emitGlow = true): void {
   const generated = getGeneratedFurnitureAdapter(), bitmap = generated?.sprite(id);
   if (bitmap) {
     shadow(ctx, cx, footY, Math.max(10, bitmap.width * 0.8));
     if (generated!.paintFloor(ctx, id, cx, footY)) {
-      if (id === 'lamp' || id === 'lantern') {
+      if (emitGlow && (id === 'lamp' || id === 'lantern')) {
         const wick = generated!.overlay(id)?.points.wick;
         glow(ctx, wick ? cx - bitmap.width / 2 + wick.x : cx, footY - bitmap.height + (wick ? 1 + wick.y : 4), 18);
       }
@@ -368,7 +368,7 @@ export function paintFloorFurniture(ctx: Ctx, id: string, cx: number, footY: num
   shadow(ctx, cx, footY, Math.max(10, sprite.width * 0.8));
   const x = Math.round(cx - sprite.width / 2);
   ctx.drawImage(sprite, x, footY - sprite.height + 1);
-  if (id === 'lamp' || id === 'lantern') glow(ctx, cx, footY - sprite.height + 4, 18);
+  if (emitGlow && (id === 'lamp' || id === 'lantern')) glow(ctx, cx, footY - sprite.height + 4, 18);
 }
 
 /** The drawn bounds of a floor piece, for tapping it. */

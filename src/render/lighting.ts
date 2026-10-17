@@ -106,10 +106,11 @@ export function lightingAt(hour: number): Lighting {
 const EXPOSURE: Record<AreaId, number> = { main: 0.48, reading: 0.45, greenhouse: 0.9, terrace: 1, kitchen: 0.35 };
 
 /** The color a room is multiplied by. */
-export const roomAmbient = (light: Lighting, area: AreaId) => {
+export const roomAmbient = (light: Lighting, area: AreaId, locked = false) => {
   // Main-room night keeps warm material identity while leaving enough value
   // separation for local lantern pools. Outdoor rooms retain sky exposure.
-  const ambient = area === 'main' ? mix(light.ambient, '#b7a18c', light.dark * .28) : light.ambient;
+  const warmth = area === 'main' ? .82 : locked ? 0 : area === 'greenhouse' ? .24 : area === 'terrace' ? .16 : .65;
+  const ambient = mix(light.ambient, '#d6ac7b', light.dark * warmth);
   return mix('#ffffff', ambient, area === 'main' ? .60 : EXPOSURE[area]);
 };
 

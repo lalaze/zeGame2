@@ -10,7 +10,7 @@ let atlas: HTMLImageElement | null = null, petAtlas: HTMLImageElement | null = n
 let idleAtlas: HTMLImageElement | null = null;
 let pending: Promise<void> | null = null, epoch = 0;
 const cache = new Map<string, HTMLCanvasElement>();
-const metadata = new WeakMap<HTMLCanvasElement, { foreground: HTMLCanvasElement; floor: Point; hip: Point; petContact?: Point }>();
+const metadata = new WeakMap<HTMLCanvasElement, { foreground: HTMLCanvasElement; floor: Point; hip: Point; petContact?: Point; embeddedChair?: boolean }>();
 const normal: Record<Identity, Spec> = {
   owner:{box:[225,10,839,855],anchor:{x:418,y:855},scale:.0445,
     foreground:[{x:270,y:10},{x:839,y:10},{x:839,y:484},{x:430,y:484},{x:395,y:335},{x:300,y:290}]},
@@ -85,4 +85,4 @@ export function seatingFurniture(part:'table'|'chair',mirror=false):HTMLCanvasEl
 }
 
 /** Register newly authored cast units with the shared scene chair/foreground contract. */
-export function registerSeatingUnit(frame:HTMLCanvasElement,geometry:{foreground:HTMLCanvasElement;floor:{x:number;y:number};hip:{x:number;y:number};petContact?:{x:number;y:number}}):void {metadata.set(frame,geometry);}
+export function registerSeatingUnit(frame:HTMLCanvasElement,geometry:{foreground:HTMLCanvasElement;floor:{x:number;y:number};hip:{x:number;y:number};petContact?:{x:number;y:number};embeddedChair?:boolean}):void {metadata.set(frame,geometry);}

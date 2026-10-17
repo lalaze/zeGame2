@@ -9,6 +9,10 @@ export interface FineSpriteArt {
 
 const artwork = new WeakMap<HTMLCanvasElement, FineSpriteArt>();
 const deferred = new WeakMap<HTMLCanvasElement, () => void>();
+const backings = new WeakSet<HTMLCanvasElement>();
+
+/** Registered backings are finished artwork: painters never draw into them again. */
+export function isFineBacking(canvas: HTMLCanvasElement): boolean { return backings.has(canvas); }
 
 /** Source canvases keep their legacy dimensions, anchors and UI contracts. */
 export function fineSpriteArt(original: HTMLCanvasElement): FineSpriteArt {
@@ -28,6 +32,7 @@ export function registerFineSpriteArt(original: HTMLCanvasElement, canvas: HTMLC
     throw new Error('Fine sprite backing dimensions must match its logical source.');
   }
   deferred.delete(original);
+  backings.add(canvas);
   artwork.set(original, Object.freeze({ canvas, density, logicalWidth: original.width, logicalHeight: original.height }));
 }
 

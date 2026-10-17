@@ -1,3 +1,4 @@
+import { loadSignFonts, signFontRevision } from '../sign-lettering';
 import { insideRoomFrame } from '../viewport-frame';
 import { mainKeyLight, mainShadowState, paintContactShade, paintCastShade, mainSurfaceLight, mainLitSprite } from '../main-room-lighting';
 import { COZY_DECOR_CATALOG } from '../cozy-materials';
@@ -27,18 +28,20 @@ import { residentCatFlipX } from '../living-cat-pose';
 import Phaser from 'phaser';
 import { getLocale, t as translate } from '../../i18n';
 import { thoughtCandidates } from '../thoughts';
-import { thoughtTextRaster } from '../thought-text';
+import { thoughtTextRaster, thoughtTextWidth, wrapThoughtText } from '../thought-text';
+import { extensionTable, remapTablecloth } from '../extension-table-art';
+import { extensionLampPool } from '../extension-surfaces';
 import { ThoughtBubbles, placeThought, thoughtBubbleWidth, type ThoughtRect } from '../thought-bubbles';
 import { menuItems } from '../../game/economy';
 import { formatMoney } from '../../game/format';
 import { COLS, FLOOR_ROWS, WALL_ROWS, WALL_TOP, CELL, canPlace, cellFree, furnitureDef } from '../../game/furniture';
 import { BENCH, BINS, DISH_PIT, PASTRY_FRIDGE, RACK, cookHome, installedEquipment, stationSpot, STATION_SECONDS, type Station } from '../../game/kitchen';
-import { CAT_SPOTS, MAX_TABLES, PASS, PASS_BELL, PASS_SLOT_W, passSlot, SCENE_W, WINDOWS, areaOrigin, areaBounds, kitchenFloorY, doorwayY, baristaSpot, doorPlantSpots, floorY, sceneHeight, seatApproach, seatSpot, tablePos } from '../../game/layout';
+import { CAT_SPOTS, MAX_TABLES, PASS, PASS_BELL, PASS_SLOT_W, passSlot, SCENE_W, WINDOWS, areaOrigin, areaBounds, kitchenFloorY, doorwayY, baristaSpot, doorPlantSpots, floorY, sceneHeight, seatApproach, seatSpot, tableArea, tablePos } from '../../game/layout';
 import { AREA_IDS, activeTableIndices, areaAtX, isAreaOpen, mainTableCount, regionOffset, type AreaId } from '../../game/regions';
 import { seated, type Cook, type Customer, type Server, type Sim, type SimEvent, type Walker } from '../../game/sim';
 import type { GameState } from '../../game/state';
 import { cellRect, floorAnchor, type CafeView, type Ghost } from '../cafe-view';
-import { paintCeiling, paintNeon, paintSill, shadow } from '../decor-art';
+import { paintCeiling, paintNeon, shadow } from '../decor-art';
 import { drawText, textWidth } from '../font';
 import { GHOST_BAD, GHOST_OK, floorFurnitureBounds, paintFloorFurniture, paintWallFurniture } from '../furniture-art';
 import { paintPassageFloor, paintRoomBoundaries } from '../passages';
@@ -50,7 +53,8 @@ import { CHAIR_LEFT, CHAIR_RIGHT, RoomPainter, TABLE, TABLE_CX, TABLE_TOP_DY, ty
 import { CHAR_H, OUTLINE, catFrames, character, crownSprite, dropSprite, heartSprite, itemIcon, pixelSprite, type CharacterFrames, type Facing } from '../sprites';
 import { PIXEL_FONT, PIXEL_FONT_HALO, PIXEL_FONT_VIP, addPixelFonts } from './pixel-font';
 import { baked, canvasKey } from './textures';
-import { fineSpriteArt, logicalCrop } from '../fine-sprite-art';
+import { type FineSpriteArt } from '../fine-sprite-art';
+import { WORLD_ART_DENSITY, gridSafeContext, resampleImage, worldCrop, worldSpriteArt } from '../world-art-grid';
 import { PreviewMetrics } from '../preview-metrics';
 import { paintFinePottedPlant } from '../fine-plant-art';
 import { GENERATED_MAIN_ASSETS, clearGeneratedMainAssets, generatedMainKey, generatedMainSource, installGeneratedMainAsset, setGeneratedStaffAdapter, setGeneratedCustomerAdapter, setGeneratedCatAdapter, setGeneratedFoodAdapter, setGeneratedIngredientAdapter, setGeneratedFurnitureAdapter, setGeneratedDecorAdapter, getGeneratedFurnitureAdapter, type GeneratedMainId } from '../generated-main-art';
@@ -143,7 +147,7 @@ function lampsIn(area: AreaId, state: GameState): Lamp[] {
     for (const x of [182, 236, 290]) add(x, 30, 16, 0.7);
     add(218, 56, 26, 0.6, '#ffa64a');
   } else if (area === 'reading') {
-    add(100, floorFurnitureBounds('lamp', 100, floorY(98)).y + 4, 30);
+    add(100, floorY(98) - 27, 30);
   } else if (area === 'terrace') {
     for (let x = 22; x < SCENE_W; x += 34) add(x, 19 + Math.round(Math.sin((x / SCENE_W) * Math.PI) * 12), 14, 0.9);
   }
@@ -163,16 +167,16 @@ function lampsIn(area: AreaId, state: GameState): Lamp[] {
   return lamps;
 }
 
-/** A pool of lamplight fading out in a few flat steps, so it stays pixel art. */
-function paintGlow(ctx: CanvasRenderingContext2D, radius: number, tint: string): void {
-  const STEPS = 5;
-  ctx.fillStyle = tint;
-  for (let y = 0; y < radius * 2; y++) {
-    for (let x = 0; x < radius * 2; x++) {
-      const d = Math.hypot(x + 0.5 - radius, y + 0.5 - radius) / radius;
+/** Main-room lanterns use a smooth falloff sampled on the art grid, baked once. */
+function paintGlow(ctx: CanvasRenderingContext2D, radius: number, tint: string, smooth = false): void {
+  const STEPS = 5, pixel = smooth ? .5 : 1;
+  ctx.fillStyle = smooth ? '#f6cb8c' : tint;
+  for (let y = 0; y < radius * 2; y += pixel) {
+    for (let x = 0; x < radius * 2; x += pixel) {
+      const d = Math.hypot(x + pixel / 2 - radius, y + pixel / 2 - radius) / radius;
       if (d >= 1) continue;
-      ctx.globalAlpha = (0.36 * Math.ceil((1 - d) ** 1.6 * STEPS)) / STEPS;
-      ctx.fillRect(x, y, 1, 1);
+      ctx.globalAlpha = smooth ? .28 * (1 - d * d) ** 3 : (0.36 * Math.ceil((1 - d) ** 1.6 * STEPS)) / STEPS;
+      ctx.fillRect(x, y, pixel, pixel);
     }
   }
 }
@@ -285,7 +289,7 @@ export class CafeScene extends Phaser.Scene {
     const mainAssets = Object.entries(GENERATED_MAIN_ASSETS).filter(([id]) => !/^(?:barista|server|mina|customer)-/.test(id));
     const total = mainAssets.length + 5;
     this.hooks.loadingProgress?.(loaded, total);
-    this.referenceCharactersReady = Promise.all([preloadReferenceCharacters(), preloadCozyCats()]).then(() => {
+    this.referenceCharactersReady = Promise.all([preloadReferenceCharacters(), preloadCozyCats(), loadSignFonts()]).then(() => {
       if (generation !== this.loadGeneration || this.loadingFailed) return;
       loaded += 5;
       this.hooks.loadingProgress?.(loaded, total);
@@ -311,7 +315,7 @@ export class CafeScene extends Phaser.Scene {
     const generation = this.loadGeneration;
     // Phaser does not await async create methods. Keep its update loop gated
     // until all human art has decoded and the scene is fully initialized.
-    void (this.referenceCharactersReady ?? Promise.all([preloadReferenceCharacters(), preloadCozyCats()])).then(() => {
+    void (this.referenceCharactersReady ?? Promise.all([preloadReferenceCharacters(), preloadCozyCats(), loadSignFonts()])).then(() => {
       if (generation !== this.loadGeneration || this.loadingFailed) return;
       this.createCafe();
       this.initialized = true;
@@ -410,9 +414,9 @@ export class CafeScene extends Phaser.Scene {
         // Puffs start as 2x2 and thin out to a single pixel.
         scale: { onEmit: () => 2, onUpdate: (_p, _k, t) => (t < 0.4 ? 2 : 1) },
       }),
-      heart: emitter(canvasKey(this.textures, fineSpriteArt(heartSprite()).canvas), {
+      heart: emitter(canvasKey(this.textures, worldSpriteArt(heartSprite()).canvas), {
         lifespan: 1300,
-        scale: 1 / fineSpriteArt(heartSprite()).density,
+        scale: 1 / worldSpriteArt(heartSprite()).density,
         speedX: { min: -6, max: 6 },
         speedY: -18,
         alpha: { onEmit: () => 1, onUpdate: fade },
@@ -538,19 +542,34 @@ export class CafeScene extends Phaser.Scene {
     return this.image(typeof source === 'string' ? source : mainLitSprite(source, exposure), x, y, depth);
   }
 
-  private image(canvasOrKey: HTMLCanvasElement | string, x: number, y: number, depth: number): Phaser.GameObjects.Image {
-    const art = typeof canvasOrKey === 'string' ? null : fineSpriteArt(canvasOrKey);
-    const key = typeof canvasOrKey === 'string' ? canvasOrKey : canvasKey(this.textures, art!.canvas);
+  /** Sprites always draw from their world-grid artwork, whatever density they were authored at. */
+  private image(canvasOrKey: HTMLCanvasElement | FineSpriteArt | string, x: number, y: number, depth: number): Phaser.GameObjects.Image {
+    const art = typeof canvasOrKey === 'string' ? null : 'density' in canvasOrKey ? canvasOrKey : worldSpriteArt(canvasOrKey);
+    const key = art ? canvasKey(this.textures, art.canvas) : canvasOrKey as string;
     const image = this.images.next();
     image.setTexture(key).setScale(1 / (art?.density ?? 1)).setPosition(Math.round(x * 2) / 2, Math.round(y * 2) / 2).setDepth(depth).setAlpha(this.furnitureAlpha).setFlipX(false);
     if (image.isCropped) image.setCrop();
     return image;
   }
 
-  private generatedPicture(id: GeneratedMainId, x: number, y: number, width: number, height: number, depth: number): Phaser.GameObjects.Image | null {
+  private generatedPicture(id: GeneratedMainId, x: number, y: number, width: number, height: number, depth: number, area: AreaId = 'main'): Phaser.GameObjects.Image | null {
     const key = generatedMainKey(id);
     if (!generatedMainSource(id) || !this.textures.exists(key)) return null;
-    return this.image(key, x, y, depth).setDisplaySize(width, height);
+    // Resample the painting once to the exact art pixels it covers, instead of scaling it per frame.
+    const w = Math.max(1, Math.round(width * WORLD_ART_DENSITY)), h = Math.max(1, Math.round(height * WORLD_ART_DENSITY));
+    const gridKey = `${key}@${w}x${h}${area === 'main' ? '' : ':' + area}`;
+    if (!this.textures.exists(gridKey)) {
+      const frame = this.textures.getFrame(key);
+      const resampled = resampleImage(frame.source.image as HTMLImageElement, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, w, h);
+      if (area === 'main') this.textures.addCanvas(gridKey, resampled);
+      else {
+        const variant = document.createElement('canvas'); variant.width = w; variant.height = h;
+        const ctx = variant.getContext('2d')!; ctx.drawImage(resampled, 0, 0);
+        const pixels = ctx.getImageData(0, 0, w, h); remapTablecloth(pixels.data, w, h, area); ctx.putImageData(pixels, 0, 0);
+        this.textures.addCanvas(gridKey, variant);
+      }
+    }
+    return this.image(gridKey, x, y, depth).setScale(1 / WORLD_ART_DENSITY);
   }
 
   private rect(x: number, y: number, w: number, h: number, fill: string, depth: number): void {
@@ -574,17 +593,24 @@ export class CafeScene extends Phaser.Scene {
       this.image(key, cx - half - 2, y - 7, DEPTH.floor - .4);
       return;
     }
-    const key = baked(this.textures, `shadow-${w}-${alpha}`, half * 2, 4, (ctx) => shadow(ctx, half, 2, w, alpha));
-    this.image(key, cx - half, y - 2, depth);
+    if (cx >= 0 && cx <= SCENE_W && y >= 0 && y <= sceneHeight()) {
+      const key = baked(this.textures, `shadow-${w}-${alpha}`, half * 2, 4, ctx => shadow(ctx, half, 2, w, alpha));
+      this.image(key, cx - half, y - 2, depth);
+      return;
+    }
+    const key = baked(this.textures, `extension-contact-${w}-${alpha}`, (w + 4) * 2, 14 * 2, ctx => {
+      ctx.scale(2, 2); paintContactShade(ctx, half + 2, 7, w, alpha);
+    });
+    this.image(key, cx - half - 2, y - 7, depth).setScale(1 / WORLD_ART_DENSITY);
   }
 
   private layer(name: string, depth: number): Layer {
     let layer = this.layers.get(name);
     if (!layer) {
-      const density = 2;
+      const density = WORLD_ART_DENSITY;
       const texture = this.textures.createCanvas(name, SCENE_W * density, sceneHeight() * density)!;
       const image = this.add.image(0, 0, name).setOrigin(0, 0).setDepth(depth).setScale(1 / density);
-      layer = { texture, image, painter: new RoomPainter(texture.context, density), shown: '', density };
+      layer = { texture, image, painter: new RoomPainter(gridSafeContext(texture.context), density), shown: '', density };
       this.layers.set(name, layer);
     }
     return layer;
@@ -634,7 +660,7 @@ export class CafeScene extends Phaser.Scene {
       return;
     }
     if (area === 'main') {
-      const backSig = [tick, H, getLocale(), state.profile?.cafeName, Object.values(decor).join(','), menuItems(state).map((m) => m.id).join(','), state.phase, placed, now.getTime(), this.view.kitchenDoor.toFixed(2)].join('|');
+      const backSig = [tick, H, getLocale(), signFontRevision(), state.profile?.cafeName, Object.values(decor).join(','), menuItems(state).map((m) => m.id).join(','), state.phase, placed, now.getTime(), this.view.kitchenDoor.toFixed(2)].join('|');
       this.paint(back, o.x, o.y, backSig, (p) => {
         p.kitchenDoor = this.view.kitchenDoor;
         const ctx = p.ctx;
@@ -644,9 +670,9 @@ export class CafeScene extends Phaser.Scene {
         const sill = WINDOWS[0];
         p.drawWindow(sill, light, t, state.phase === 'open');
         for (const win of WINDOWS.slice(1)) p.drawWindow(win, light, t, null);
-        p.withPlane(MAIN_WALL_PLANE, () => paintSill(p.ctx, decor.sill, sill.x + sill.w - 8, sill.y + sill.h + 1));
+        p.drawSill(decor.sill, sill.x + sill.w - 8, sill.y + sill.h + 1);
         // The neon sign glows in the left window, facing the street.
-        p.withPlane(MAIN_WALL_PLANE, () => paintNeon(p.ctx, decor.neon, sill.x + sill.w / 2, sill.y + 4, t, state.profile?.cafeName));
+        p.withPlane(MAIN_WALL_PLANE, () => paintNeon(p.ctx, decor.neon, sill.x + sill.w / 2, sill.y + 4, t, state.profile?.cafeName, true));
         p.drawMenuBoard(state);
         state.decor.placed.forEach((piece, i) => {
           const def = furnitureDef(piece.id);
@@ -670,7 +696,7 @@ export class CafeScene extends Phaser.Scene {
       const counter = this.layer('room-main-counter', DEPTH.counter);
       const shelf = state.phase !== 'prep' ? state.shelf : state.bakePlan;
       const counterSig = [
-        H, getLocale(),
+        H, getLocale(), signFontRevision(),
         decor.counter,
         state.upgrades.machine,
         now.getTime(),
@@ -685,22 +711,22 @@ export class CafeScene extends Phaser.Scene {
       const locked = !isAreaOpen(state, area);
       const installed = installedEquipment(state);
       const active = this.activeStations();
-      this.paint(back, o.x, o.y, [tick, H, locked, [...installed].join(','), [...active].join(',')].join('|'), (p) => {
+      this.paint(back, o.x, o.y, [tick, H, locked, signFontRevision(), [...installed].join(','), [...active].join(',')].join('|'), (p) => {
         paintKitchen(p.ctx, H, t, locked, installed, active);
         roomDepth(p.ctx, SCENE_W, H, 80);
       }, H);
     } else {
       const offset = regionOffset(area);
       const locked = !isAreaOpen(state, area);
-      this.paint(back, o.x, o.y, [tick, H, placed, now.getTime(), locked].join('|'), (p) => {
+      this.paint(back, o.x, o.y, [tick, H, placed, now.getTime(), locked, signFontRevision()].join('|'), (p) => {
         const ctx = p.ctx;
         paintRegion(ctx, area, H, t, light, locked);
         state.decor.placed.forEach((piece, i) => {
           const def = furnitureDef(piece.id);
           const x = piece.col * CELL;
-          if (def?.surface === 'wall' && x >= offset && x < offset + SCENE_W && i !== skip) paintWallFurniture(ctx, piece.id, x - offset, WALL_TOP + piece.row * CELL, t, now);
+          if (def?.surface === 'wall' && x >= offset && x < offset + SCENE_W && i !== skip) paintWallFurniture(ctx, piece.id, x - offset, WALL_TOP + piece.row * CELL, t, now, locked);
         });
-        paintPassageFloor(ctx, area);
+        paintPassageFloor(ctx, area, locked);
         roomDepth(ctx, SCENE_W, H, 80, area === 'terrace');
       });
     }
@@ -719,12 +745,16 @@ export class CafeScene extends Phaser.Scene {
    */
   private drawLight(area: AreaId, visible: boolean, state: GameState, light: Lighting): void {
     const o = areaOrigin(area);
-    const ambient = roomAmbient(light, area);
+    const ambient = roomAmbient(light, area, !isAreaOpen(state, area));
     this.grades.get(area)!.setVisible(visible && this.canGrade && ambient !== '#ffffff').setPosition(o.x, o.y).setSize(SCENE_W, areaBounds(area).h).setFillStyle(color(ambient));
     if (!visible || light.lamps < 0.01 || !isAreaOpen(state, area)) return;
     for (const lamp of lampsIn(area, state)) {
-      const key = baked(this.textures, `glow-${lamp.radius}-${lamp.color}`, lamp.radius * 2, lamp.radius * 2, (ctx) => paintGlow(ctx, lamp.radius, lamp.color));
-      this.glows.next().setTexture(key).setPosition(o.x + lamp.x, o.y + lamp.y).setAlpha(light.lamps * lamp.strength);
+      const density = area === 'main' ? 1 : WORLD_ART_DENSITY;
+      const key = baked(this.textures, `glow-soft-${lamp.radius}-${lamp.color}${area === 'main' ? '' : '-extension'}`, lamp.radius * 2 * density, lamp.radius * 2 * density, ctx => {
+        if (area === 'main') paintGlow(ctx, lamp.radius, lamp.color, true);
+        else { ctx.scale(density, density); extensionLampPool(ctx, lamp.radius, lamp.color); }
+      });
+      this.glows.next().setTexture(key).setScale(1 / density).setPosition(o.x + lamp.x, o.y + lamp.y).setAlpha(light.lamps * lamp.strength);
     }
   }
 
@@ -954,21 +984,22 @@ export class CafeScene extends Phaser.Scene {
    * A floor piece baked with its shadow and glow, and where the texture's top-left
    * goes relative to the piece's center and feet.
    */
-  private floorTexture(id: string): { key: string; dx: number; dy: number; density: number } {
+  private floorTexture(id: string, extension = false): { key: string; dx: number; dy: number; density: number } {
     const b = floorFurnitureBounds(id, 0, 0);
     // An odd-width sprite sits half a pixel left of center, as when painted directly.
     const half = Math.floor(b.w / 2);
-    const density = getGeneratedFurnitureAdapter()?.sprite(id) ? 4 : 1;
-    const key = baked(this.textures, `floor-${id}-${density}x`, (b.w + PAD * 2) * density, (b.h + PAD * 2) * density, (ctx) => {
+    const density = getGeneratedFurnitureAdapter()?.sprite(id) ? WORLD_ART_DENSITY : 1;
+    const key = baked(this.textures, `floor-${id}-${density}x${extension ? '-extension' : ''}`, (b.w + PAD * 2) * density, (b.h + PAD * 2) * density, (raw) => {
+      const ctx = gridSafeContext(raw);
       if (density > 1) ctx.scale(density, density);
       ctx.imageSmoothingEnabled = false;
-      paintFloorFurniture(ctx, id, PAD + half, PAD + b.h - 1);
+      paintFloorFurniture(ctx, id, PAD + half, PAD + b.h - 1, !extension);
     });
     return { key, dx: -PAD - half, dy: -PAD - b.h + 1, density };
   }
 
   private floorPiece(id: string, cx: number, foot: number, depth: number): void {
-    const { key, dx, dy, density = 1 } = this.floorTexture(id);
+    const { key, dx, dy, density = 1 } = this.floorTexture(id, cx < 0 || cx > SCENE_W || foot < 0);
     const painted = projectMainWorld({ x: cx, y: foot });
     this.image(key, painted.x + dx, painted.y + dy, depth).setScale(1 / density);
   }
@@ -999,7 +1030,7 @@ export class CafeScene extends Phaser.Scene {
     const frame=frames[facing][idx],foot=referenceCharacterContacts(frame)?.foot;
     this.litImage(frame, x - (foot?.x??9), y - (foot?.y??CHAR_H-1) - bob, depth + 0.001, { x, y });
     const carryContact=referenceCharacterContacts(frame)?.carryContact;
-    return { x, y, bob, facing, carryY: carryContact && foot ? y - foot.y + carryContact.y - bob : undefined, legExtension: referenceCharacterContacts(frame)?.legExtension ?? 0, scale: foot ? STANDING_CHARACTER_SCALE : 1, height: foot ? foot.y - (referenceCharacterContacts(frame)?.head?.y ?? 0) : CHAR_H - 1 };
+    return { x, y, bob, facing, carryX: carryContact && foot ? x - foot.x + carryContact.x : undefined, carryY: carryContact && foot ? y - foot.y + carryContact.y - bob : undefined, legExtension: referenceCharacterContacts(frame)?.legExtension ?? 0, scale: foot ? STANDING_CHARACTER_SCALE : 1, height: foot ? foot.y - (referenceCharacterContacts(frame)?.head?.y ?? 0) : CHAR_H - 1 };
   }
 
   /** A server, carrying a tray of orders at shoulder height, with a "!" when they answer the bell. */
@@ -1017,7 +1048,7 @@ export class CafeScene extends Phaser.Scene {
         const icon = itemIcon(plate.items[0], false);
         const cx = x + Math.round((i - (n - 1) / 2) * 7);
         const scale = Math.min(1, 8 / Math.max(icon.width, icon.height));
-        this.image(icon, cx - icon.width * scale / 2, ty + traySupportY - icon.height * scale, depth + 0.002 + i * 0.0001).setScale(scale / fineSpriteArt(icon).density);
+        this.image(worldSpriteArt(icon, icon.width * scale, icon.height * scale), cx - icon.width * scale / 2, ty + traySupportY - icon.height * scale, depth + 0.002 + i * 0.0001);
       });
       this.image(tray, x - 11, ty, depth + 0.003);
     }
@@ -1046,8 +1077,9 @@ export class CafeScene extends Phaser.Scene {
     const o = areaOrigin('kitchen');
     const installed = installedEquipment(state);
     const piece = (name: string, x: number, foot: number, w: number, rise: number, paint: (ctx: CanvasRenderingContext2D) => void) => {
-      const key = baked(this.textures, `kitchen-${name}`, (w + 20) * 3, (rise + 1) * 3, ctx => {
-        ctx.scale(3, 3); ctx.imageSmoothingEnabled = false; paint(ctx);
+      const key = baked(this.textures, `kitchen-${name}`, (w + 20) * WORLD_ART_DENSITY, (rise + 1) * WORLD_ART_DENSITY, raw => {
+        const ctx = gridSafeContext(raw);
+        ctx.scale(WORLD_ART_DENSITY, WORLD_ART_DENSITY); ctx.imageSmoothingEnabled = false; paint(ctx);
       });
       this.image(key, o.x + x - 10, o.y + foot - rise, DEPTH.floor + o.y + foot).setDisplaySize(w + 20, rise + 1);
     };
@@ -1144,8 +1176,8 @@ export class CafeScene extends Phaser.Scene {
 
   private drawCustomer(c: Customer, depth: number): void {
     const standing = c.phase === 'queue' || c.phase === 'ordering' ? 'up' : 'down';
-    const { x, y, bob, facing, scale } = this.drawWalker(c, this.customerFrames(c), standing, depth);
-    if (c.hasCup && facing !== 'up') this.cup(facing === 'left' ? x - 8 * scale : x + 4 * scale, y - 10 * scale - (scale > 1 ? STANDING_LEG_EXTENSION : 0) - bob, depth + 0.002);
+    const { x, y, bob, facing, scale, carryX, carryY } = this.drawWalker(c, this.customerFrames(c), standing, depth);
+    if (c.hasCup && facing !== 'up') this.cup(carryX ?? (facing === 'left' ? x - 8 * scale : x + 4 * scale), carryY ?? y - 10 * scale - (scale > 1 ? STANDING_LEG_EXTENSION : 0) - bob, depth + 0.002);
   }
 
   /** A round table with its two chairs, anyone sitting at it, and their drinks. */
@@ -1156,7 +1188,9 @@ export class CafeScene extends Phaser.Scene {
     let d = depth;
     const next = () => (d += 0.001);
     const ensembleTable = seatingFurniture('table');
-    const cozyTable = ensembleTable ?? (index < MAX_TABLES ? cozyCafeSprite('table') : undefined);
+    const area = tableArea(index);
+    const baseTable = ensembleTable ?? (index < MAX_TABLES ? cozyCafeSprite('table') : undefined);
+    const cozyTable = baseTable ? extensionTable(baseTable, area) : undefined;
     this.shadow(table.x + (cozyTable ? 2 : 0), table.y + 1, cozyTable ? 38 : 30, next(), cozyTable ? 0.25 : 0.2);
     if (cozyTable) this.shadow(table.x, table.y, 17, next(), 0.34, false);
     const diners = ([0, 1] as const).map((side) => {
@@ -1174,7 +1208,8 @@ export class CafeScene extends Phaser.Scene {
       const chairDepth = next();
       const c = diners[side];
       const pose = c ? sitter(side,c) : undefined;
-      const embeddedChair = pose && seatingGeometry(pose.sprite);
+      const seating = pose && seatingGeometry(pose.sprite);
+      const embeddedChair = seating && seating.embeddedChair !== false;
       const ensembleChair = ensembleTable ? seatingFurniture('chair',side===1) : undefined;
       const cozyChair = cozyTable ? cozyCafeSprite('chair', side === 1) : undefined;
       if(!embeddedChair){
@@ -1186,10 +1221,10 @@ export class CafeScene extends Phaser.Scene {
       }
       if(pose)this.litImage(pose.sprite,pose.x,pose.y,next(), table);
     }
-    const top = TABLE();
+    const top = extensionTable(TABLE(), area);
     const tableDepth = next();
     if (cozyTable) this.litImage(cozyTable, table.x - cozyTable.width / 2, table.y - cozyTable.height + 1, tableDepth, table);
-    else if (!this.generatedPicture('table', table.x - 16.5, table.y - TABLE_TOP_DY - 5.4, 33, 33 * 462 / 563, tableDepth)) {
+    else if (!this.generatedPicture('table', table.x - 16.5, table.y - TABLE_TOP_DY - 5.4, 33, 33 * 462 / 563, tableDepth, area)) {
       this.litImage(top, table.x - TABLE_CX, table.y - top.height + 1, tableDepth, table);
     }
     const cy = table.y + (ensembleTable ? SEATING_LAYOUT.surfaceY : -TABLE_TOP_DY);
@@ -1206,7 +1241,7 @@ export class CafeScene extends Phaser.Scene {
       const ensemble=seatingGeometry(sprite);
       if(ensemble)this.litImage(ensemble.foreground,x,y,next(), table);
       else {
-        const crop = logicalCrop(sprite, 0, 0, sprite.width, cozySeatedGeometry(sprite)?.upperBody ?? CHAR_H - 8);
+        const crop = worldCrop(sprite, 0, 0, sprite.width, cozySeatedGeometry(sprite)?.upperBody ?? CHAR_H - 8);
         this.litImage(sprite, x, y, next(), table).setCrop(crop.x, crop.y, crop.width, crop.height);
       }
       const contact = pair && this.getState().pets.some(p => p.id === pair.id && petActive(p)) &&
@@ -1217,7 +1252,7 @@ export class CafeScene extends Phaser.Scene {
         // lap or legs over the tablecloth. Crop remains in physical pixels.
         const left = Math.max(0, Math.floor(contact.x - 3));
         const top = Math.max(ensemble ? 0 : CHAR_H - 8, Math.floor(contact.y - 3));
-        const hand = logicalCrop(sprite, left, top, Math.ceil(contact.x + 2) - left, Math.ceil(contact.y + 2) - top);
+        const hand = worldCrop(sprite, left, top, Math.ceil(contact.x + 2) - left, Math.ceil(contact.y + 2) - top);
         this.litImage(sprite, x, y, DEPTH.floor + pair.y + 0.008, table).setCrop(hand.x, hand.y, hand.width, hand.height);
       }
     }
@@ -1309,35 +1344,24 @@ export class CafeScene extends Phaser.Scene {
     for (const f of this.floaters) occupied.push({ x: f.x - 24, y: f.pos.y - 10, w: 48, h: 20 });
     for (const c of selected) {
       const text = translate(c.key);
-      const key = `thought-${getLocale()}-${c.key}`;
+      const key = `thought-pixel-${signFontRevision()}-${getLocale()}-${c.key}`;
       if (!this.textures.exists(key)) {
-        const measure = document.createElement('canvas').getContext('2d')!;
-        const font = '10px "Pixel ZH", "Pixelify Sans", sans-serif';
-        measure.font = font;
-        const units = getLocale() === 'zh' ? [...text] : text.split(' ');
-        const join = getLocale() === 'zh' ? '' : ' ';
-        const lines: string[] = [];
-        let line = '';
-        for (const unit of units) {
-          const next = line ? line + join + unit : unit;
-          if (line && measure.measureText(next).width > 80) { lines.push(line); line = unit; }
-          else line = next;
-        }
-        if (line) lines.push(line);
-        const w = thoughtBubbleWidth(Math.max(...lines.map(l => measure.measureText(l).width)));
-        const lettering = thoughtTextRaster(lines, font, w);
+        const lines = wrapThoughtText(text, getLocale() === 'zh');
+        const w = thoughtBubbleWidth(Math.max(...lines.map(thoughtTextWidth)));
+        const lettering = thoughtTextRaster(lines, '', w);
         const h = lettering.height;
-        baked(this.textures, key, w, h, ctx => {
+        baked(this.textures, key, w * 2, h * 2, ctx => {
+          ctx.scale(2, 2);
           paintThoughtFrame(ctx, w, h);
           // Center the painted ink itself, not the font's invisible ascent/descent.
-          ctx.drawImage(lettering.canvas, 0, lettering.sourceY, w, lettering.inkHeight, 0, lettering.textY, w, lettering.inkHeight);
+          ctx.drawImage(lettering.canvas, 0, lettering.sourceY, w * 2, lettering.inkHeight, 0, lettering.textY, w, lettering.inkHeight / 2);
         });
       }
       const texture = this.textures.get(key).getSourceImage();
-      const placement = placeThought(c, texture.width, texture.height, bounds, occupied);
+      const placement = placeThought(c, texture.width / 2, texture.height / 2, bounds, occupied);
       if (!placement) continue;
       occupied.push(placement, ...placement.dots);
-      this.image(key, placement.x, placement.y, DEPTH.overlay + 10);
+      this.image(key, placement.x, placement.y, DEPTH.overlay + 10).setScale(1 / WORLD_ART_DENSITY);
       // The planner validated the complete chain. Never omit individual dots.
       for (const dot of placement.dots) {
         this.rect(dot.x, dot.y, dot.w, dot.h, UI_ART.brassShade, DEPTH.overlay + 10);
@@ -1347,7 +1371,10 @@ export class CafeScene extends Phaser.Scene {
   }
 
   private customerHeadTop(c: Customer): number {
-    if (seated(c)) return this.seatedCustomerPose(Math.floor(c.seat / 2), (c.seat % 2) as 0 | 1, c, 0).y + 2;
+    if (seated(c)) {
+      const pose = this.seatedCustomerPose(Math.floor(c.seat / 2), (c.seat % 2) as 0 | 1, c, 0);
+      return pose.y + (referenceCharacterContacts(pose.sprite)?.head?.y ?? 2);
+    }
     const frame = this.customerFrames(c).stand;
     const contact = referenceCharacterContacts(frame);
     return Math.round(c.y) - (contact?.foot.y ?? CHAR_H) + (contact?.head?.y ?? 0);
@@ -1491,14 +1518,14 @@ export class CafeScene extends Phaser.Scene {
     const rect = cellRect(def.surface, ghost.col, ghost.row, def.w, def.h);
     if (def.surface === 'wall') {
       // Wall pieces are repainted while held so a clock keeps time.
-      const density = getGeneratedFurnitureAdapter()?.sprite(ghost.id) ? 4 : 1;
+      const density = getGeneratedFurnitureAdapter()?.sprite(ghost.id) ? WORLD_ART_DENSITY : 1;
       const key = `ghost-wall-${ghost.id}-${density}x`;
       const w = def.w * CELL + PAD * 2;
       const h = def.h * CELL + PAD * 2;
       const texture = (this.textures.exists(key) ? this.textures.get(key) : this.textures.createCanvas(key, w * density, h * density)) as Phaser.Textures.CanvasTexture;
       texture.context.clearRect(0, 0, w * density, h * density);
       if (density > 1) { texture.context.save(); texture.context.scale(density, density); }
-      paintWallFurniture(texture.context, ghost.id, PAD, PAD, t, now);
+      paintWallFurniture(gridSafeContext(texture.context), ghost.id, PAD, PAD, t, now);
       if (density > 1) texture.context.restore();
       texture.refresh();
       const left = this.view.area === 'main' ? projectMainPlaneWorld(rect, MAIN_WALL_PLANE) : rect;

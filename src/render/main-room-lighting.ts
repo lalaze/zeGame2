@@ -1,5 +1,6 @@
 import type { Lighting, Sun } from './lighting';
-import { fineSpriteArt, registerFineSpriteArt } from './fine-sprite-art';
+import { registerFineSpriteArt } from './fine-sprite-art';
+import { worldSpriteArt } from './world-art-grid';
 
 export const MAIN_KEY_SLOPE = .38;
 export const mainCastVector = (reach: number) => ({ x: reach * MAIN_KEY_SLOPE, y: reach });
@@ -22,15 +23,15 @@ export function mainShadowState(light: Lighting) {
 
 /** Softness is a few pixel steps, with a compact dark contact core. */
 export function paintContactShade(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, opacity: number) {
-  ctx.save(); ctx.fillStyle = '#493326';
+  ctx.save(); ctx.fillStyle = '#42251a';
   const rx = width / 2, ry = width >= 30 ? 5 : 2.5;
   for (let row = -ry; row <= ry; row += .5) {
     const edge = Math.sqrt(Math.max(0, 1 - (row / ry) ** 2));
-    ctx.globalAlpha = opacity * (.38 + .34 * edge);
+    ctx.globalAlpha = Math.min(1, opacity * (1.1 + .5 * edge));
     ctx.fillRect(Math.round((x - rx * edge) * 2) / 2, y + row, Math.round(width * edge * 2) / 2, .5);
   }
-  ctx.globalAlpha = opacity * .65;
-  ctx.fillRect(x - width * .23, y - .5, width * .46, 1);
+  ctx.globalAlpha = Math.min(1, opacity * 1.8);
+  ctx.fillRect(Math.round((x - width * .23) * 2) / 2, y - .5, Math.round(width * .46 * 2) / 2, 1);
   ctx.restore();
 }
 
@@ -38,7 +39,7 @@ export function paintContactShade(ctx: CanvasRenderingContext2D, x: number, y: n
  * whole cast pass can sort BELOW every actor/chair, not over its neighbours. */
 export function paintCastShade(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, reach: number, strength: number) {
   if (strength <= 0) return;
-  ctx.save(); ctx.fillStyle = '#654530';
+  ctx.save(); ctx.fillStyle = '#55301f';
   const ry = width >= 30 ? 5 : 3, vector = mainCastVector(reach);
   for (let row = -ry; row <= vector.y + ry; row += .5) {
     const t = Math.max(0, Math.min(1, row / vector.y));
@@ -52,40 +53,44 @@ export function paintCastShade(ctx: CanvasRenderingContext2D, x: number, y: numb
   ctx.restore();
 }
 
-/** Diffuse window bounce, deliberately not an opaque pane-shaped ribbon.
- * Nested low-opacity pixel bands preserve tile joints and disappear before
- * the dining area; there are no crossbar gaps or hard terminal rectangles. */
+/** Golden window footprints: two separated panes, fixed upper-left key, with
+ * a small feather at the far edge. Half-pixel scanlines avoid vector AA. */
 export function paintWindowBounce(ctx: CanvasRenderingContext2D, x: number, width: number, floorY: number, sun: Sun) {
   const key = mainKeyLight(sun);
   if (!key.strength) return;
-  const reach = 74 + (1 - sun.elevation) * 12;
-  ctx.save(); ctx.fillStyle = '#fff0c9';
-  for (let row = 0; row < reach; row++) {
-    const t = row / reach, center = x + width / 2 + row * MAIN_KEY_SLOPE;
-    const radius = (width / 2 + 18) * Math.sqrt(1 - t * t);
-    ctx.globalAlpha = key.strength * .021 * (1 - t) ** 2;
-    for (let band = 0; band < 6; band++) {
-      const half = radius * (1 - band * .12);
-      ctx.fillRect(Math.round((center - half) * 2) / 2, floorY + row, Math.round(half * 4) / 2, 1);
+  const reach = key.length;
+  ctx.save(); ctx.fillStyle = '#fee8ac';
+  for (let row = 0; row < reach; row += .5) {
+    const t = row / reach, feather = Math.min(1, (1 - t) * 12);
+    const left = x + row * MAIN_KEY_SLOPE;
+    // The crossbar cuts a quiet shadow through the projected panes.
+    if (t > .36 && t < .40) continue;
+    ctx.globalAlpha = key.strength * .48 * feather;
+    for (let pane = 0; pane < 2; pane++) {
+      const px = Math.round((left + pane * width / 2) * 2) / 2;
+      ctx.fillRect(px, floorY + row, Math.round((width / 2 - 2) * 2) / 2, .5);
+      ctx.globalAlpha = key.strength * .12 * feather;
+      ctx.fillRect(px - 1, floorY + row, 1, .5);
+      ctx.globalAlpha = key.strength * .48 * feather;
     }
   }
   ctx.restore();
 }
 
-/** Match the diffuse window footprint used on the floor, with no bright lanes. */
+/** Soft object exposure follows the same diagonal and reach as the floor panes. */
 export function mainSurfaceLight(x: number, y: number, light: Lighting, openings: readonly {x: number; w: number}[]) {
   const key = mainKeyLight(light.sun);
   if (key.strength === 0) return 0;
-  const reach = 74 + (1 - light.sun.elevation) * 12;
+  const reach = key.length;
   const row = Math.max(0, y - 80), t = row / reach;
   if (t >= 1) return 0;
   let coverage = 0;
   for (const opening of openings) {
     const center = opening.x + opening.w / 2 + row * MAIN_KEY_SLOPE;
-    const radius = (opening.w / 2 + 18) * Math.sqrt(1 - t * t);
+    const radius = opening.w / 2 + 6;
     coverage = Math.max(coverage, Math.max(0, 1 - Math.abs(x - center) / radius));
   }
-  return coverage * key.strength * (1 - t) ** 2;
+  return coverage * key.strength * (1 - t * .35) * Math.min(1, (1 - t) * 12);
 }
 
 const lit = new WeakMap<HTMLCanvasElement, Map<number, HTMLCanvasElement>>();
@@ -97,7 +102,7 @@ export function mainLitSprite(source: HTMLCanvasElement, exposure: number): HTML
   let variants = lit.get(source);
   if (!variants) { variants = new Map(); lit.set(source, variants); }
   const old = variants.get(level); if (old) return old;
-  const art = fineSpriteArt(source), canvas = document.createElement('canvas');
+  const art = worldSpriteArt(source), canvas = document.createElement('canvas');
   canvas.width = art.canvas.width; canvas.height = art.canvas.height;
   const ctx = canvas.getContext('2d')!;
   ctx.imageSmoothingEnabled = false; ctx.drawImage(art.canvas, 0, 0);

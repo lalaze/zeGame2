@@ -30,21 +30,27 @@ describe('coherent main-room light', () => {
     const light = lightingAt(10), key = mainKeyLight(light.sun), windows = [{ x: 20, w: 40 }];
     expect(mainSurfaceLight(40, 80, light, windows)).toBeGreaterThan(.5);
     expect(mainSurfaceLight(200, 100, light, windows)).toBe(0);
+    expect(mainSurfaceLight(40 + 80 * .38, 160, light, windows)).toBeGreaterThan(.2);
     expect(mainSurfaceLight(40 + key.lean, 81 + key.length, light, windows)).toBe(0);
     expect(mainSurfaceLight(40, 80, lightingAt(21), windows)).toBe(0);
   });
-  it('uses low-opacity bounce without long pane strips or hard end caps', () => {
-    const calls: { alpha: number; y: number }[] = [];
+  it('projects readable golden panes beyond the counter with a feathered far edge', () => {
+    const calls: { alpha: number; x: number; y: number; w: number; h: number }[] = [];
     const ctx = { save() {}, restore() {}, globalAlpha: 1, fillStyle: '',
-      fillRect(this: { globalAlpha: number }, _x: number, y: number) { calls.push({ alpha: this.globalAlpha, y }); },
+      fillRect(this: { globalAlpha: number }, x: number, y: number, w: number, h: number) { calls.push({ alpha: this.globalAlpha, x, y, w, h }); },
     } as unknown as CanvasRenderingContext2D;
-    paintWindowBounce(ctx, 20, 40, 80, lightingAt(10).sun);
-    expect(Math.max(...calls.map(c => c.alpha))).toBeLessThan(.022);
-    expect(Math.max(...calls.map(c => c.y))).toBeLessThan(170);
-    expect(calls.at(-1)!.alpha).toBeLessThan(.00002);
-    const source = readFileSync(new URL('./room-art.ts', import.meta.url), 'utf8');
-    expect(source).toContain('paintWindowBounce(ctx, opening.x, opening.w, FLOOR_Y, light.sun)');
-    expect(source).not.toContain('opacity: 0.72');
+    const light = lightingAt(10);
+    paintWindowBounce(ctx, 20, 40, 80, light.sun);
+    expect(Math.max(...calls.map(c => c.alpha))).toBeGreaterThan(.3);
+    expect(Math.max(...calls.map(c => c.y))).toBeGreaterThan(190);
+    expect(calls.at(-1)!.alpha).toBeLessThan(.02);
+    expect(calls.every(c => [c.x,c.y,c.w,c.h].every(v => Number.isInteger(v * 2)))).toBe(true);
+    const first = calls.filter(c => c.y === 80 && c.alpha > .2);
+    expect(first).toHaveLength(2);
+    expect(first[1].x - (first[0].x + first[0].w)).toBeGreaterThan(0);
+    calls.length = 0;
+    paintWindowBounce(ctx, 20, 40, 80, lightingAt(21).sun);
+    expect(calls).toEqual([]);
   });
   it('keeps noon neutral and night readable without changing other rooms', () => {
     expect(roomAmbient(lightingAt(12), 'main')).toBe('#ffffff');

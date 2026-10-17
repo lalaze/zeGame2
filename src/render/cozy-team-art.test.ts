@@ -40,12 +40,13 @@ describe('whole-figure cozy team art', () => {
       }
     }
   });
-  it('routes team art around the older customer leg transform', () => {
+  it('publishes both whole-figure families without the retired customer leg transform', () => {
     const source = readFileSync('src/render/reference-character-art.ts', 'utf8');
-    const early = source.indexOf("if(role!=='customer'){cache.set(key,result)");
-    expect(early).toBeGreaterThan(source.indexOf('makeCozyTeam(look,role'));
-    expect(early).toBeLessThan(source.indexOf('const standing='));
-    expect(source).toContain('applyCozyCharacter(result,look,role,appearanceId');
+    expect(source).toContain('makeCozyTeam(look, role');
+    expect(source).toContain('makeBatchCharacter(look, role, appearanceId');
+    expect(source).not.toContain('applyCozyCharacter(');
+    expect(source).not.toContain('const standing=');
+    expect(source).not.toContain('legExtension*density');
     expect(readFileSync('src/game/state.ts', 'utf8')).toContain('hairStyle: 4');
   });
 });

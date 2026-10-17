@@ -1,0 +1,23 @@
+{
+  "version": 5,
+  "date": "2026-10-16",
+  "tool": "built-in image_gen",
+  "intent": "generate modular raster sprite atlases with visible staff/sample style references",
+  "references": [
+    "public/art/generated/cozy-team-v7/hair-0-short-v1.png",
+    "public/art/generated/cafe-style-sample-v1/sample.png"
+  ],
+  "outputs": [
+    { "source": "sources/bodies-a.png", "original": "ig_0c53aba2866da752016ad27f07f0e087d1afafff31f38543b1.png", "prompt": "prompts.md#1-sourcesbodies-apng" },
+    { "source": "sources/bodies-b.png", "original": "ig_0c53aba2866da752016ad27f54fcec87d18e0b785823459ea9.png", "prompt": "prompts.md#2-sourcesbodies-bpng" },
+    { "source": "sources/bodies-c.png", "original": "ig_0c53aba2866da752016ad27f79114887d197d957191fdbf283.png", "prompt": "prompts.md#3-sourcesbodies-cpng" },
+    { "source": "sources/heads.png", "original": "ig_0c53aba2866da752016ad27fa48cbc87d1826318a2f393f5b4.png", "prompt": "prompts.md#4-sourcesheadspng" }
+  ],
+  "postprocessing": {
+    "chromaKey": "remove_chroma_key.py --key-color #ff00ff --tolerance 100 --spill-cleanup",
+    "authoring": "scripts/build-cozy-cast-v5.py",
+    "conform": "node scripts/pixel-conform.mjs conform (each finished sheet at final dimensions)",
+    "palette": "docs/art-grid/palette.json",
+    "runtimeDensity": 2
+  }
+}

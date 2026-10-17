@@ -3,6 +3,7 @@ import { mix } from './color';
 import { FLOOR_Y, SCENE_W, passageY, areaBounds, doorwayY } from '../game/layout';
 import { adjacentArea, isAreaOpen, type AreaId, type Direction } from '../game/regions';
 import type { GameState } from '../game/state';
+import { extensionRunner, extensionRunnerJunction, readingDoorFrame } from './extension-surfaces';
 
 
 /** Visible woven fibres at the room's native art resolution. No navigation changes. */
@@ -24,7 +25,7 @@ export function passageRunner(ctx: CanvasRenderingContext2D, x: number, y: numbe
 }
 
 /** Physical thresholds and circulation belong to the building, not to the camera. */
-export function paintPassageFloor(ctx: CanvasRenderingContext2D, area: AreaId): void {
+export function paintPassageFloor(ctx: CanvasRenderingContext2D, area: AreaId, locked = false): void {
   // The kitchen's tiled floor needs no runner.
   if (area === 'kitchen') return;
   const y = passageY();
@@ -35,8 +36,13 @@ export function paintPassageFloor(ctx: CanvasRenderingContext2D, area: AreaId): 
   const start = area === 'main' ? 64 : left ? 0 : 146;
   const end = right ? 320 : 174;
   // The runner to the glasshouse tucks under the cross runner.
-  if (adjacentArea(area, 'up')) passageRunner(ctx, 145, 0, 30, y, 'v', jute, area !== 'main');
-  passageRunner(ctx, start, y - 7, end - start, 14, 'h', jute, area !== 'main');
+  const runner = (x: number, top: number, w: number, h: number, dir: 'h' | 'v') => {
+    if (area === 'main' || locked) passageRunner(ctx, x, top, w, h, dir, jute, area !== 'main');
+    else extensionRunner(ctx, area, x, top, w, h, dir);
+  };
+  if (adjacentArea(area, 'up')) runner(145, locked ? 0 : FLOOR_Y, 30, y - (locked ? 0 : FLOOR_Y), 'v');
+  runner(start, y - 7, end - start, 14, 'h');
+  if (area !== 'main' && !locked) extensionRunnerJunction(ctx, area, y);
   ctx.fillStyle = '#b29770';
   for (const direction of ['left', 'right'] as const) {
     if (!adjacentArea(area, direction) || (area === 'main' && direction === 'left')) continue;
@@ -140,6 +146,15 @@ export function paintRoomBoundaries(ctx: CanvasRenderingContext2D, area: AreaId,
   }
   // A real rear doorway replaces the window's middle, meeting the glasshouse threshold.
   if (adjacentArea(area, 'up')) {
+    if (isAreaOpen(state, area)) {
+      readingDoorFrame(ctx, FLOOR_Y);
+      if (blocked('up')) {
+        r(144, 24, 32, FLOOR_Y - 24, '#916444');
+        for (let top = 28; top < FLOOR_Y; top += 9) r(145, top, 30, 2, '#bb8e5e');
+        r(158, 52, 5, 6, '#e6b34d');
+      }
+      return;
+    }
     for (const x of [139, 176]) {
       r(x, 0, 5, FLOOR_Y + 4, ink);
       r(x + 1, 0, 3, FLOOR_Y + 3, base);

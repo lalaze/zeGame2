@@ -7,6 +7,7 @@ import type { Plate, Server } from '../../game/sim';
 import { createInitialState, type GameState } from '../../game/state';
 import { CafeView, cellRect, floorAnchor, type Ghost } from '../cafe-view';
 import { fineSpriteArt } from '../fine-sprite-art';
+import { WORLD_ART_DENSITY, worldSpriteArt } from '../world-art-grid';
 import { floorFurnitureBounds } from '../furniture-art';
 import { createGeneratedCatArt, type GeneratedCatAdapter, type GeneratedCatManifest } from '../generated-cat-art';
 import { createGeneratedFurnitureArt, GENERATED_FURNITURE_CATALOG, type GeneratedFurnitureId } from '../generated-furniture-art';
@@ -141,7 +142,7 @@ afterEach(() => {
 });
 
 describe('generated furniture Scene textures retain logical world geometry', () => {
-  it.each(['plant_snake', 'lamp', 'bench'] as const)('bakes %s at 4× while preserving its foot, envelope and tap bounds', id => {
+  it.each(['plant_snake', 'lamp', 'bench'] as const)('bakes %s on the world art grid while preserving its foot, envelope and tap bounds', id => {
     const h = harness(), state = createInitialState(0);
     const placed = { id, col: 4, row: 18 }, def = furnitureDef(id)!;
     state.decor.placed = [placed];
@@ -156,15 +157,15 @@ describe('generated furniture Scene textures retain logical world geometry', () 
     const image = h.images[0], bounds = floorFurnitureBounds(id, anchor.cx, anchor.foot);
 
     expect(bounds).toEqual(legacyBounds);
-    expect(texture).toEqual({ key: `floor-${id}-4x`, dx: legacy.dx, dy: legacy.dy, density: 4 });
+    expect(texture).toEqual({ key: `floor-${id}-${WORLD_ART_DENSITY}x`, dx: legacy.dx, dy: legacy.dy, density: WORLD_ART_DENSITY });
     expect(legacy.density).toBe(1);
     expect(texture.key).not.toBe(legacy.key);
-    expect([canvas.width, canvas.height]).toEqual([oldCanvas.width * 4, oldCanvas.height * 4]);
-    expect(canvas.context.scale).toHaveBeenCalledExactlyOnceWith(4, 4);
+    expect([canvas.width, canvas.height]).toEqual([oldCanvas.width * WORLD_ART_DENSITY, oldCanvas.height * WORLD_ART_DENSITY]);
+    expect(canvas.context.scale).toHaveBeenCalledExactlyOnceWith(WORLD_ART_DENSITY, WORLD_ART_DENSITY);
     expect(canvas.context.imageSmoothingEnabled).toBe(false);
     expect(canvas.context.drawImage).toHaveBeenCalledWith(fineSpriteArt(adapter.sprite(id)!).canvas,
       PAD + Math.floor(bounds.w / 2) - bounds.w / 2, PAD, bounds.w, bounds.h);
-    expect(image).toMatchObject({ key: texture.key, scaleX: 0.25, scaleY: 0.25, depth: 1234.3,
+    expect(image).toMatchObject({ key: texture.key, scaleX: 1 / WORLD_ART_DENSITY, scaleY: 1 / WORLD_ART_DENSITY, depth: 1234.3,
       x: snap(painted.x + texture.dx), y: snap(painted.y + texture.dy) });
     expect([canvas.width * image.scaleX, canvas.height * image.scaleY])
       .toEqual([bounds.w + PAD * 2, bounds.h + PAD * 2]);
@@ -204,7 +205,7 @@ describe('generated furniture Scene textures retain logical world geometry', () 
     const h = harness(), state = createInitialState(0);
     const ghost = { id: 'plant_snake', col: 1, row: 18, skip: -1 }, def = furnitureDef(ghost.id)!;
     const anchor = floorAnchor(def, ghost.col, ghost.row), bounds = floorFurnitureBounds(ghost.id, 0, 0);
-    const painted = projectMainWorld({ x: anchor.cx, y: anchor.foot }), density = generated ? 4 : 1;
+    const painted = projectMainWorld({ x: anchor.cx, y: anchor.foot }), density = generated ? WORLD_ART_DENSITY : 1;
     const before = JSON.stringify({ state, ghost });
     h.scene.drawGhost(state, ghost, 0, new Date(0));
     const piece = h.ghostPiece, canvas = backing(h.textures, piece.key);
@@ -220,7 +221,7 @@ describe('generated furniture Scene textures retain logical world geometry', () 
 
   it.each([false, true])('repaints a wall ghost at physical resolution without enlarging its world footprint (generated: %s)', generated => {
     if (generated) installFurniture('clock');
-    const h = harness(), state = createInitialState(0), density = generated ? 4 : 1;
+    const h = harness(), state = createInitialState(0), density = generated ? WORLD_ART_DENSITY : 1;
     const ghost = { id: 'clock', col: 5, row: 1, skip: -1 }, def = furnitureDef(ghost.id)!;
     const rect = cellRect('wall', ghost.col, ghost.row, def.w, def.h);
     const left = projectMainPlaneWorld(rect, MAIN_WALL_PLANE);
@@ -235,7 +236,7 @@ describe('generated furniture Scene textures retain logical world geometry', () 
     expect(texture.context.clearRect).toHaveBeenCalledTimes(2);
     expect(texture.context.clearRect).toHaveBeenLastCalledWith(0, 0, w * density, height * density);
     expect(texture.refresh).toHaveBeenCalledTimes(2);
-    expect(texture.context.scale.mock.calls).toEqual(generated ? [[4, 4], [4, 4]] : []);
+    expect(texture.context.scale.mock.calls).toEqual(generated ? [[density, density], [density, density]] : []);
     expect(piece.scaleX).toBeCloseTo(wallScale / density, 12);
     expect(piece.scaleY).toBe(1 / density);
     expect(canvas.width * piece.scaleX).toBeCloseTo(w * wallScale, 12);
@@ -259,11 +260,12 @@ describe('generated visiting cat retains the original sill contact', () => {
     const contact = adapter.contactPoints(sprite)!.foot;
     const spot = projectMainPlaneWorld(CAT_SPOTS[0], MAIN_WALL_PLANE);
     h.scene.drawCat(state, time, { x: 0, y: 0 });
-    const image = h.images[0], art = fineSpriteArt(sprite);
+    const image = h.images[0], art = worldSpriteArt(sprite);
     expect(h.images).toHaveLength(1);
+    expect(fineSpriteArt(sprite).density).toBe(4);
     expect(h.textures.uploaded.get(image.key)).toBe(art.canvas);
-    expect([art.canvas.width, art.canvas.height]).toEqual([sprite.width * 4, sprite.height * 4]);
-    expect([image.scaleX, image.scaleY]).toEqual([0.25, 0.25]);
+    expect([art.canvas.width, art.canvas.height]).toEqual([sprite.width * WORLD_ART_DENSITY, sprite.height * WORLD_ART_DENSITY]);
+    expect([image.scaleX, image.scaleY]).toEqual([1 / WORLD_ART_DENSITY, 1 / WORLD_ART_DENSITY]);
     expect(image.x + contact.x).toBe(snap(spot.x) + 1);
     expect(image.y + contact.y).toBe(spot.y + 1);
 
@@ -329,7 +331,7 @@ describe('generated server Scene composition retains live service payloads', () 
         const selected = h.scene.generatedServers.resolve({ role: 'server', look: server.look }, fallback);
         expect(selected.generated).toBe(generated);
         const frame = selected.frames[walking ? 'right' : 'down'][walking ? 1 : 0];
-        const frameArt = fineSpriteArt(frame), frameCanvas = frameArt.canvas as unknown as CanvasStub;
+        const frameArt = worldSpriteArt(frame), frameCanvas = frameArt.canvas as unknown as CanvasStub;
         const frameDrawCount = frameCanvas.context.drawImage.mock.calls.length;
         // The same completed orders are still visible to simulation/pass owners.
         const pass = [...server.plates], originalItems = pass.map(plate => plate.items);
@@ -343,7 +345,8 @@ describe('generated server Scene composition retains live service payloads', () 
         const body = h.images.find(image => h.textures.uploaded.get(image.key) === frameArt.canvas)!;
         expect(body).toMatchObject({ x: x - 9, y: y - (CHAR_H - 1) - bob,
           depth: depth + 0.001, scaleX: 1 / frameArt.density, scaleY: 1 / frameArt.density });
-        expect(frameArt.density).toBe(generated ? 4 : 2);
+        expect(fineSpriteArt(frame).density).toBe(generated ? 4 : 2);
+        expect(frameArt.density).toBe(WORLD_ART_DENSITY);
         if (!generated) expect(selected.frames).toBe(fallback);
         const tray = h.images.find(image => image.key === 'tray')!;
         expect(tray).toMatchObject({ x: x - 11, y: trayY, depth: depth + 0.003, scaleX: 1, scaleY: 1 });
@@ -353,20 +356,24 @@ describe('generated server Scene composition retains live service payloads', () 
         expect(frameCanvas.context.drawImage).toHaveBeenCalledTimes(frameDrawCount);
 
         for (const [i, plate] of pass.entries()) {
-          const icon = itemIcon(plate.items[0], false), art = fineSpriteArt(icon);
+          const icon = itemIcon(plate.items[0], false);
+          expect(fineSpriteArt(icon).density).toBe(4);
+          const scale = generated ? Math.min(1, 8 / icon.width, 8 / icon.height) : 1;
+          const art = worldSpriteArt(icon, icon.width * scale, icon.height * scale);
           const food = h.images.filter(image => h.textures.uploaded.get(image.key) === art.canvas);
           expect(food).toHaveLength(1);
-          expect(art.density).toBe(4);
-          const scale = generated ? Math.min(1, 8 / icon.width, 8 / icon.height) : 1;
+          expect(art.density).toBe(WORLD_ART_DENSITY);
           const cx = x + Math.round((i - (count - 1) / 2) * 7);
           expect(food[0]).toMatchObject({
             x: snap(cx - (generated ? icon.width * scale / 2 : Math.floor(icon.width / 2))),
             y: snap(trayY - icon.height * scale), depth: depth + 0.002 + i * 0.0001,
-            scaleX: scale / art.density, scaleY: scale / art.density,
+            scaleX: 1 / art.density, scaleY: 1 / art.density,
           });
+          // Scaled icons are resampled to whole art pixels: within half a room pixel of the exact size.
           const displayW = art.canvas.width * food[0].scaleX;
           const displayH = art.canvas.height * food[0].scaleY;
-          expect(displayW / displayH).toBeCloseTo(icon.width / icon.height, 12);
+          expect(Math.abs(displayW - icon.width * scale)).toBeLessThanOrEqual(0.5);
+          expect(Math.abs(displayH - icon.height * scale)).toBeLessThanOrEqual(0.5);
           expect(food[0].depth).toBeGreaterThan(body.depth);
           expect(food[0].depth).toBeLessThan(tray.depth);
           if (generated) {
@@ -468,7 +475,7 @@ describe('authored shallow serviceware Scene support and live food layers', () =
         installServerFood();
         const tableware = installShallowTableware(packed), sprite = tableware.sprite('shallow-tray')!;
         expect(tableware.tray()).toBe(sprite);
-        const trayArt = fineSpriteArt(sprite), trayCanvas = trayArt.canvas as unknown as CanvasStub;
+        const trayArt = worldSpriteArt(sprite), trayCanvas = trayArt.canvas as unknown as CanvasStub;
         const bakedDraws = trayCanvas.context.drawImage.mock.calls.slice();
         h.sim.pass = [...server.plates];
         const before = JSON.stringify({ state, server, pass: h.sim.pass });
@@ -482,24 +489,27 @@ describe('authored shallow serviceware Scene support and live food layers', () =
         expect(h.images).toHaveLength(count + 3);
         const tray = h.images.at(-1)!;
         expect(h.textures.uploaded.get(tray.key)).toBe(trayArt.canvas);
-        expect(tray).toMatchObject({ x: x - 11, y: trayY, depth: 1200.003, scaleX: 0.25, scaleY: 0.25 });
-        expect([trayArt.canvas.width, trayArt.canvas.height]).toEqual([88, 12]);
+        expect(tray).toMatchObject({ x: x - 11, y: trayY, depth: 1200.003, scaleX: 1 / WORLD_ART_DENSITY, scaleY: 1 / WORLD_ART_DENSITY });
+        expect([fineSpriteArt(sprite).canvas.width, fineSpriteArt(sprite).canvas.height]).toEqual([88, 12]);
+        expect([trayArt.canvas.width, trayArt.canvas.height]).toEqual([22 * WORLD_ART_DENSITY, 3 * WORLD_ART_DENSITY]);
         expect([trayArt.canvas.width * tray.scaleX, trayArt.canvas.height * tray.scaleY]).toEqual([22, 3]);
         expect(h.textures.exists('tray')).toBe(false);
         expect(supportY).toBeGreaterThan(0);
         expect(supportY).toBeLessThan(tableware.anchor('shallow-tray')!.y);
         for (const [i, plate] of server.plates.entries()) {
-          const food = h.images[i + 2], icon = itemIcon(plate.items[0], false), art = fineSpriteArt(icon);
+          const food = h.images[i + 2], icon = itemIcon(plate.items[0], false);
           const scale = generatedServer ? Math.min(1, 8 / icon.width, 8 / icon.height) : 1;
+          const art = worldSpriteArt(icon, icon.width * scale, icon.height * scale);
           const cx = x + Math.round((i - (count - 1) / 2) * 7);
           expect(h.textures.uploaded.get(food.key)).toBe(art.canvas);
           expect(food).toMatchObject({
             x: snap(cx - (generatedServer ? icon.width * scale / 2 : Math.floor(icon.width / 2))),
             y: snap(trayY + supportY - icon.height * scale),
-            depth: 1200.002 + i * 0.0001, scaleX: scale / art.density, scaleY: scale / art.density,
+            depth: 1200.002 + i * 0.0001, scaleX: 1 / art.density, scaleY: 1 / art.density,
           });
+          // Whole art pixels: the resampled icon may end up to half a room pixel off the support.
           const physicalBottom = food.y + art.canvas.height * food.scaleY;
-          expect(Math.abs(physicalBottom - (tray.y + supportY))).toBeLessThanOrEqual(0.25);
+          expect(Math.abs(physicalBottom - (tray.y + supportY))).toBeLessThanOrEqual(0.5);
           expect(food.depth).toBeGreaterThan(h.images[1].depth);
           expect(food.depth).toBeLessThan(tray.depth);
           expect(server.plates[i]).toBe(originalPlates[i]);
@@ -519,7 +529,7 @@ describe('authored shallow serviceware Scene support and live food layers', () =
     installServerFood();
     const tableware = installShallowTableware(packed), plate = tableware.sprite('shallow-plate')!;
     expect(tableware.passPlate()).toBe(plate);
-    const plateArt = fineSpriteArt(plate), supportY = tableware.support('shallow-plate')!.y;
+    const plateArt = worldSpriteArt(plate), supportY = tableware.support('shallow-plate')!.y;
     const plateCanvas = plateArt.canvas as unknown as CanvasStub;
     const bakedDraws = plateCanvas.context.drawImage.mock.calls.slice();
     const firstRow = serverFixture(3).plates;
@@ -534,7 +544,7 @@ describe('authored shallow serviceware Scene support and live food layers', () =
       for (const [i, order] of orders.entries()) {
         const slot = projectMainPlaneWorld(passSlot(i), MAIN_COUNTER_PLANE);
         const food = h.images[i * 2], dish = h.images[i * 2 + 1];
-        const icon = itemIcon(order.items[0], false), foodArt = fineSpriteArt(icon);
+        const icon = itemIcon(order.items[0], false), foodArt = worldSpriteArt(icon);
         const depth = 30.5 + i * 0.01;
         expect(h.textures.uploaded.get(food.key)).toBe(foodArt.canvas);
         expect(h.textures.uploaded.get(dish.key)).toBe(plateArt.canvas);
@@ -544,8 +554,9 @@ describe('authored shallow serviceware Scene support and live food layers', () =
           scaleX: 1 / foodArt.density, scaleY: 1 / foodArt.density,
         });
         expect(dish).toMatchObject({ x: snap(origin.x + slot.x), y: origin.y + slot.y - 3,
-          depth: depth + 0.001, scaleX: 0.25, scaleY: 0.25 });
-        expect([plateArt.canvas.width, plateArt.canvas.height]).toEqual([48, 8]);
+          depth: depth + 0.001, scaleX: 1 / WORLD_ART_DENSITY, scaleY: 1 / WORLD_ART_DENSITY });
+        expect([fineSpriteArt(plate).canvas.width, fineSpriteArt(plate).canvas.height]).toEqual([48, 8]);
+        expect([plateArt.canvas.width, plateArt.canvas.height]).toEqual([12 * WORLD_ART_DENSITY, 2 * WORLD_ART_DENSITY]);
         expect(Math.abs(food.y + icon.height - (dish.y + supportY))).toBeLessThanOrEqual(0.25);
         expect(food.depth).toBeLessThan(dish.depth);
         expect(h.sim.pass[i]).toBe(order);
@@ -623,7 +634,7 @@ describe('authored shallow serviceware Scene support and live food layers', () =
     h.scene.drawPass(3, { x: 0, y: 0 });
     const firstKey = h.images[1].key;
     expect(getGeneratedTablewareAdapter()).toBe(tableware);
-    expect(h.textures.uploaded.get(firstKey)).toBe(fineSpriteArt(tableware.passPlate()!).canvas);
+    expect(h.textures.uploaded.get(firstKey)).toBe(worldSpriteArt(tableware.passPlate()!).canvas);
     clearGeneratedMainAssets();
     expect(getGeneratedTablewareAdapter()).toBeNull();
     h.images.length = 0;

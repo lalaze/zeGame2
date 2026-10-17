@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { FLOOR_Y, MAX_SCENE_H, MIN_SCENE_H, SCENE_W, doorwayY, passageY, setKitchenLevel, setSceneHeight } from '../game/layout';
+import { MAX_SCENE_H, MIN_SCENE_H, SCENE_W, doorwayY, passageY, setKitchenLevel, setSceneHeight } from '../game/layout';
 import type { AreaId } from '../game/regions';
 import { createInitialState } from '../game/state';
-import { paintFloor } from './decor-art';
+import { mainFloor } from './main-room-surfaces';
 import { lightingAt } from './lighting';
 import { paintPassageFloor, paintRoomBoundaries } from './passages';
 import { RoomPainter } from './room-art';
@@ -100,7 +100,7 @@ describe('kitchen doorway threshold', () => {
   it('leaves the main-room floor material visible between the sill and the counter', () => {
     const height = MIN_SCENE_H;
     setSceneHeight(height);
-    const floor = record(ctx => paintFloor(ctx, 'floor_wood', 0, FLOOR_Y, SCENE_W, height - FLOOR_Y));
+    const floor = record(ctx => mainFloor(ctx, 'floor_wood', height));
     const main = record(ctx => new RoomPainter(ctx).drawFloor('floor_wood', 'rug_none', lightingAt(0), height));
     // Beyond the edge shadow, there must be no STAFF label, arrows, or separate strip.
     for (let x = 12; x < 64; x++) for (let y = 83; y < 100; y++) {

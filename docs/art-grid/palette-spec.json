@@ -1,0 +1,452 @@
+{
+  "about": "Master palette ramps for the caf\u00e9 world. Sampled ramps come from regions of the approved art-direction sample; generated ramps shade the game's own customisation colours. Build with: node scripts/pixel-conform.mjs ramps docs/art-grid/palette-spec.json --out=docs/art-grid/palette.json --swatch=docs/art-grid/palette.png",
+  "reference": "public/art/generated/cafe-style-sample-v1/sample.png",
+  "sampled": [
+    {
+      "ramp": "ink",
+      "shades": 3,
+      "boxes": [
+        [
+          255,
+          690,
+          430,
+          1010
+        ],
+        [
+          520,
+          880,
+          760,
+          1040
+        ],
+        [
+          820,
+          690,
+          1010,
+          1040
+        ]
+      ],
+      "darkest": 0.14
+    },
+    {
+      "ramp": "walnut",
+      "shades": 6,
+      "boxes": [
+        [
+          0,
+          0,
+          100,
+          1000
+        ],
+        [
+          340,
+          500,
+          1060,
+          690
+        ]
+      ],
+      "accept": [
+        {
+          "hue": [
+            20,
+            85
+          ],
+          "minChroma": 0.04,
+          "maxLightness": 0.75
+        }
+      ]
+    },
+    {
+      "ramp": "oak",
+      "shades": 6,
+      "boxes": [
+        [
+          255,
+          700,
+          430,
+          1000
+        ],
+        [
+          830,
+          700,
+          1010,
+          1030
+        ],
+        [
+          540,
+          900,
+          750,
+          1030
+        ],
+        [
+          330,
+          440,
+          1070,
+          500
+        ]
+      ],
+      "accept": [
+        {
+          "hue": [
+            35,
+            90
+          ],
+          "minChroma": 0.06
+        }
+      ]
+    },
+    {
+      "ramp": "wall",
+      "shades": 5,
+      "boxes": [
+        [
+          300,
+          40,
+          420,
+          430
+        ],
+        [
+          1060,
+          40,
+          1150,
+          430
+        ],
+        [
+          120,
+          300,
+          250,
+          900
+        ]
+      ],
+      "accept": [
+        {
+          "hue": [
+            45,
+            105
+          ],
+          "minLightness": 0.72
+        }
+      ]
+    },
+    {
+      "ramp": "floor",
+      "shades": 6,
+      "boxes": [
+        [
+          0,
+          1040,
+          1254,
+          1254
+        ]
+      ],
+      "accept": [
+        {
+          "hue": [
+            45,
+            105
+          ],
+          "minLightness": 0.6
+        }
+      ]
+    },
+    {
+      "ramp": "gingham",
+      "shades": 6,
+      "boxes": [
+        [
+          500,
+          720,
+          860,
+          900
+        ],
+        [
+          440,
+          20,
+          540,
+          330
+        ],
+        [
+          920,
+          20,
+          1040,
+          440
+        ]
+      ],
+      "accept": [
+        {
+          "hue": [
+            10,
+            50
+          ],
+          "minChroma": 0.1
+        },
+        {
+          "hue": [
+            50,
+            110
+          ],
+          "minLightness": 0.86
+        }
+      ]
+    },
+    {
+      "ramp": "sage",
+      "shades": 5,
+      "boxes": [
+        [
+          300,
+          820,
+          430,
+          890
+        ],
+        [
+          830,
+          820,
+          965,
+          900
+        ]
+      ],
+      "accept": [
+        {
+          "hue": [
+            110,
+            175
+          ],
+          "minChroma": 0.03
+        }
+      ]
+    },
+    {
+      "ramp": "leaf",
+      "shades": 5,
+      "boxes": [
+        [
+          370,
+          330,
+          550,
+          460
+        ],
+        [
+          520,
+          130,
+          700,
+          390
+        ]
+      ],
+      "accept": [
+        {
+          "hue": [
+            95,
+            160
+          ],
+          "minChroma": 0.06
+        }
+      ]
+    },
+    {
+      "ramp": "sky",
+      "shades": 4,
+      "boxes": [
+        [
+          560,
+          60,
+          720,
+          125
+        ],
+        [
+          760,
+          60,
+          900,
+          210
+        ]
+      ],
+      "accept": [
+        {
+          "hue": [
+            200,
+            270
+          ],
+          "minChroma": 0.04
+        },
+        {
+          "maxChroma": 0.05,
+          "minLightness": 0.9
+        }
+      ]
+    },
+    {
+      "ramp": "terracotta",
+      "shades": 4,
+      "boxes": [
+        [
+          780,
+          230,
+          900,
+          330
+        ],
+        [
+          420,
+          400,
+          500,
+          465
+        ]
+      ],
+      "accept": [
+        {
+          "hue": [
+            25,
+            70
+          ],
+          "minChroma": 0.08
+        }
+      ]
+    },
+    {
+      "ramp": "hair",
+      "shades": 5,
+      "boxes": [
+        [
+          320,
+          570,
+          500,
+          800
+        ]
+      ],
+      "accept": [
+        {
+          "hue": [
+            20,
+            80
+          ],
+          "minChroma": 0.03,
+          "maxLightness": 0.7
+        }
+      ]
+    },
+    {
+      "ramp": "sweater",
+      "shades": 4,
+      "boxes": [
+        [
+          350,
+          720,
+          470,
+          840
+        ]
+      ],
+      "accept": [
+        {
+          "hue": [
+            15,
+            50
+          ],
+          "minChroma": 0.1
+        }
+      ]
+    },
+    {
+      "ramp": "porcelain",
+      "shades": 4,
+      "boxes": [
+        [
+          455,
+          700,
+          515,
+          765
+        ],
+        [
+          640,
+          700,
+          690,
+          770
+        ]
+      ],
+      "accept": [
+        {
+          "maxChroma": 0.07,
+          "minLightness": 0.6
+        }
+      ]
+    },
+    {
+      "ramp": "brass",
+      "shades": 5,
+      "boxes": [
+        [
+          115,
+          120,
+          245,
+          300
+        ],
+        [
+          670,
+          530,
+          740,
+          560
+        ]
+      ],
+      "accept": [
+        {
+          "hue": [
+            40,
+            100
+          ],
+          "minChroma": 0.07
+        }
+      ]
+    }
+  ],
+  "generated": [
+    {
+      "ramp": "skin",
+      "shades": 3,
+      "colors": [
+        "#f4cfad",
+        "#dfaa7d",
+        "#b67c55",
+        "#80533f"
+      ]
+    },
+    {
+      "ramp": "hair-option",
+      "shades": 3,
+      "colors": [
+        "#594237",
+        "#976546",
+        "#dfb96f",
+        "#b9674e",
+        "#626782",
+        "#cc8c9f"
+      ]
+    },
+    {
+      "ramp": "cloth",
+      "shades": 3,
+      "colors": [
+        "#bb6b58",
+        "#799ba7",
+        "#8ba477",
+        "#d3a453",
+        "#9b87af",
+        "#cf929e",
+        "#69a295",
+        "#e5d7ba"
+      ]
+    },
+    {
+      "ramp": "pants",
+      "shades": 3,
+      "colors": [
+        "#53637b",
+        "#85664f",
+        "#585464"
+      ]
+    },
+    {
+      "ramp": "steel",
+      "shades": 5,
+      "colors": [
+        "#9a9c98"
+      ]
+    }
+  ]
+}

@@ -5,7 +5,10 @@
 // space with its hookups capped after the kitchen is built. Before purchase the
 // room is an unfitted shell, not a working kitchen hidden under a tint.
 import { paintCozyKitchen } from './cozy-world-art';
-import { generatedMainSource, getGeneratedDecorAdapter } from './generated-main-art';
+import { generatedMainSource } from './generated-main-art';
+import { extensionFloor } from './extension-surfaces';
+import { artRamp, artRect } from './main-room-surfaces';
+import { paintPixelSignText } from './sign-lettering';
 import type { ItemId } from '../game/data';
 import {
   BENCH,
@@ -22,7 +25,7 @@ import {
 } from '../game/kitchen';
 import { FLOOR_Y, SCENE_W, kitchenFloorY } from '../game/layout';
 import { brushedMetal, cabinetPanel, glassReflection, timberBeam } from './materials';
-import { mix, ramp } from './color';
+import { mix } from './color';
 import { drawText, textWidth } from './font';
 import { itemIcon } from './sprites';
 import { fineSpriteArt } from './fine-sprite-art';
@@ -36,7 +39,6 @@ const SAGE = '#627451', CREAM = '#f4e6c7', BRASS = '#c8a15e';
 const DARK_STEEL = { base: '#69745f', hi: '#a6af8a', lo: '#495542', dark: '#303a2e' };
 const TILE = '#f4e6c7';
 const GROUT = '#cbb992';
-const NON_SLIP = ramp('#ceb992');
 const GLOW = '#ffb04a';
 /** Where everything against the back wall stands. */
 const BASE = 84;
@@ -63,15 +65,12 @@ function steelBox(ctx: Ctx, x: number, y: number, w: number, h: number, metal = 
 
 /** A dashed outline marking where a piece will go once the menu needs it. */
 function reserved(ctx: Ctx, x: number, y: number, w: number, h: number): void {
-  const r = painter(ctx);
-  for (let i = 0; i < w; i += 4) {
-    r(x + i, y, 2, 1, '#9aa39c');
-    r(x + i, y + h - 1, 2, 1, '#9aa39c');
-  }
-  for (let i = 0; i < h; i += 4) {
-    r(x, y + i, 1, 2, '#9aa39c');
-    r(x + w - 1, y + i, 1, 2, '#9aa39c');
-  }
+  const floor = Math.max(FLOOR_Y + 2, y + h - 3), tape = artRamp('wall');
+  artRect(ctx, x + 1, floor, w - 2, 5, artRamp('floor')[0]);
+  for (const edge of [x + 1, x + w - 2]) artRect(ctx, edge, floor, 1, 5, tape[3]);
+  for (const edge of [floor, floor + 4]) artRect(ctx, x + 1, edge, w - 2, 1, tape[3]);
+  artRect(ctx, x + 2, floor, Math.max(1, w - 5), .5, tape[4]);
+  for (const edge of [x + 1, x + w - 4]) artRect(ctx, edge, floor + 3, 3, .5, tape[1]);
 }
 
 /** A capped pipe and a power socket on the wall: ready for a piece to be fitted. */
@@ -93,7 +92,7 @@ function plaque(ctx: Ctx, word: string, cx: number, y: number, color: string): v
   r(x - 1, y - 1, w + 2, 9, OUTLINE);
   r(x, y, w, 7, color);
   r(x, y, w, 1, mix(color, '#ffffff', 0.35));
-  drawText(ctx, word, x + 3, y + 1, '#fdf6ec');
+  paintPixelSignText(ctx, word, cx, y + .5, w - 3, 6, artRamp('cloth-7')[2]);
 }
 
 // ---------------------------------------------------------------- the room
@@ -153,20 +152,7 @@ export function paintKitchen(ctx: Ctx, H: number, t: number, locked: boolean, in
   r(0, FLOOR_Y - 5, SCENE_W, 5, SAGE); r(0, FLOOR_Y - 5, SCENE_W, 1, '#9da57c');
   r(0, FLOOR_Y - 1, SCENE_W, 1, OUTLINE);
 
-  // Warm, heavily bevelled non-slip stone. Small inlays avoid noisy full tiles.
-  const top = FLOOR_Y;
-  r(0, top, SCENE_W, H - top, NON_SLIP.base);
-  for (let y = top; y < H; y += 16) {
-    const th = Math.min(16, H - y);
-    for (let x = 0; x < SCENE_W; x += 16) {
-      r(x, y, 16, th, '#aa916a');
-      r(x + 1, y + 1, 15, th - 1, ((x + y - top) / 16) % 2 ? '#decbab' : '#e9d6b1');
-      r(x + 2, y + 2, 13, 1, '#f8ebce'); r(x + 2, y + 2, 1, th - 3, '#f8ebce');
-      r(x + 14, y + 3, 1, th - 3, '#c7ae82'); r(x + 3, y + th - 1, 12, 1, '#c7ae82');
-      if (th > 10) { r(x + 5, y + 8, 3, 1, '#d2ba91'); r(x + 6, y + 7, 1, 3, '#d2ba91'); }
-    }
-  }
-  getGeneratedDecorAdapter()?.paintTile(ctx, 'floor_checker', 0, FLOOR_Y, SCENE_W, H - FLOOR_Y);
+  extensionFloor(ctx, 'kitchen', FLOOR_Y, H);
   r(0, FLOOR_Y, SCENE_W, 2, '#a88b61');
   const drainY = kitchenFloorY(152);
   r(143, drainY - 4, 14, 8, OUTLINE); r(144, drainY - 3, 12, 6, BRASS);
@@ -220,11 +206,13 @@ export function paintKitchen(ctx: Ctx, H: number, t: number, locked: boolean, in
 
 /** An anti-fatigue mat, black rubber with drainage holes. */
 function mat(ctx: Ctx, x: number, y: number, w: number, h: number): void {
-  const r = painter(ctx);
-  r(x, y, w, h, '#3d3a3a');
-  r(x, y, w, 1, '#5a5555');
-  for (let hy = y + 2; hy < y + h - 1; hy += 3) {
-    for (let hx = x + 1 + ((hy - y) % 2 ? 2 : 0); hx < x + w - 1; hx += 4) r(hx, hy, 2, 1, '#2a2727');
+  const rubber = artRamp('sage');
+  artRect(ctx, x, y, w, h, rubber[0]);
+  artRect(ctx, x + .5, y + .5, w - 1, h - 1, rubber[1]);
+  artRect(ctx, x + 1, y + .5, w - 2, .5, rubber[2]);
+  for (let hy = y + 2; hy < y + h - 1; hy += 2) for (let hx = x + 2; hx < x + w - 2; hx += 3) {
+    artRect(ctx, hx, hy, 1.5, .5, rubber[0]);
+    artRect(ctx, hx, hy + .5, 1.5, .5, rubber[2]);
   }
 }
 

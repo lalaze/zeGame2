@@ -1,0 +1,31 @@
+<!doctype html><meta charset="utf-8"><title>QA fixture: art grid</title><style>@font-face{font-family:"Pixel ZH";src:url("/src/assets/pixel-zh.woff2")}html,body{margin:0;background:#2b211b}canvas{image-rendering:pixelated;display:block}#status{position:fixed;top:4px;left:8px;font:12px sans-serif;color:#f4e8d4}</style><canvas id="scene"></canvas><span id="status">Art grid fixture · no saves</span><script type="module">
+// Development-only scene for art-grid QA: renders the live café painters at an exact,
+// even device-pixel scale (?backing=4) without touching any save. Used by
+// scripts/art-grid-qa.mjs and documented in docs/art-grid/README.md.
+import {CafeGame} from '/src/render/phaser/game.ts';
+import {CafeView} from '/src/render/cafe-view.ts';
+import {Sim} from '/src/game/sim.ts';
+import {createInitialState} from '/src/game/state.ts';
+import {setKitchenLevel} from '/src/game/layout.ts';
+import {bakeForForecast,restock} from '/src/game/economy.ts';
+import {openShop} from '/src/game/day.ts';
+import {setLocale} from '/src/i18n.ts';
+import {applyTheme} from '/src/game/decor.ts';
+import {loadSignFonts} from '/src/render/sign-lettering.ts';
+const params=new URLSearchParams(location.search);
+const style=['mint','rose'].includes(params.get('style'))?params.get('style'):'cream';
+const backing=Math.max(1,Math.round(Number(params.get('backing')||4)));
+setLocale(params.get('locale')==='en'?'en':'zh');setKitchenLevel(2);
+const state=createInitialState(0);state.profile={cafeName:params.get('locale')==='en'?'Tiny Bean Café':'猫与朋友咖啡馆',ownerName:'店主',look:{skin:0,hair:0,hairStyle:1,shirt:2,pants:1}};
+applyTheme(state,style==='cream'?'classic':style);
+state.coins=25000;state.kitchen=true;state.upgrades.cook=1;state.regions=['reading','greenhouse','terrace'];state.items.roll=1;state.items.donut=1;state.onMenu=['espresso','roll','donut'];
+bakeForForecast(state);restock(state);openShop(state);
+let seed=17;const sim=new Sim(()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296}),view=new CafeView();
+const canvas=document.querySelector('canvas');
+await loadSignFonts();
+const game=new CafeGame(canvas,view,sim,()=>state,{tick(dt){sim.update(state,dt);view.update(dt,sim)},pointerDown(){},pointerMove(){}});
+const width=320*backing,height=240*backing;
+game.resize({width,height,cssWidth:width/devicePixelRatio,cssHeight:height/devicePixelRatio,backing,smooth:false});
+window.qa={view,state,sim,game,backing,style};
+game.ready.then(()=>{document.body.dataset.ready='true'}).catch(e=>{document.querySelector('#status').textContent=String(e);document.body.dataset.ready='error'});
+</script>
