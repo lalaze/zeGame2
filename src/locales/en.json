@@ -1,4 +1,11 @@
 {
+  "decor.tablecloth_rose": "Rose gingham",
+  "decor.curtain_rose": "Rose curtains",
+  "decor.counter_sage": "Sage painted counter",
+  "decor.counter_blush": "Blush painted counter",
+  "theme.classic.description": "Cream stripes · Oak counter · Red gingham",
+  "theme.mint.description": "Mint walls · Sage counter · Green gingham",
+  "theme.rose.description": "Rose walls · Blush counter · Pink textiles",
   "slot.tablecloth": "Tablecloths",
   "slot.centerpiece": "Table centerpieces",
   "slot.curtain": "Curtains",

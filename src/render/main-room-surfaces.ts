@@ -25,6 +25,8 @@ export function mainTimber(ctx: Ctx, x: number, y: number, w: number, h: number,
 }
 /** Six-value joinery ramps: shadow, recess, molding, field, lit bevel, gleam. */
 export function counterMaterial(id: string): readonly string[] {
+  if (id === 'counter_sage') return [walnut[0], sage[0], sage[1], sage[2], cream[1], cream[2]];
+  if (id === 'counter_blush') return [walnut[0], rose[0], rose[1], rose[2], cream[1], cream[2]];
   if (id === 'counter_walnut') return [walnut[0], walnut[0], walnut[1], walnut[2], walnut[3], oak[2]];
   if (id === 'counter_pink') return [walnut[0], rose[0], rose[0], rose[1], rose[2], cream[2]];
   if (id === 'counter_marble') return [walnut[0], cream[0], artRamp('steel')[3], cream[1], cream[2], floor[5]];
@@ -60,7 +62,7 @@ function raisedPanel(ctx: Ctx, x:number,y:number,w:number,h:number,m:readonly st
   if(pull) brassPull(ctx,x+w/2,y+1.5);
 }
 export function mainCabinet(ctx: Ctx, id: string, x:number,y:number,w:number,topH:number,frontH:number, drawers=false) {
-  const body=counterMaterial(id), top=id==='counter_marble'?cream:oak;
+  const body=counterMaterial(id), top=id==='counter_marble'||id==='counter_sage'?cream:oak;
   const r=(a:number,b:number,c:number,d:number,col:string)=>artRect(ctx,x+a,y+b,c,d,col);
   r(0,0,w,topH+frontH,walnut[0]);
   r(.5,.5,w-1,topH-1,top[Math.min(3,top.length-1)]);

@@ -5,7 +5,7 @@ import { COZY_OWNER_LOOK } from '../render/cozy-character-art';
 import { STARTER_THEMES } from '../game/decor';
 import { LOOK_RANGES, NAME_MAX, cleanName, type Look, type Profile } from '../game/state';
 import { LOCALES, getLocale, setLocale, t, tList, type Locale, type MessageKey } from '../i18n';
-import { paintCounter, paintFloor, paintWainscot, paintWall } from '../render/decor-art';
+import { starterThemePreview } from '../render/starter-theme-preview';
 import { HAIRS, HEAD_ROWS, SHIRTS, SKINS, character } from '../render/sprites';
 
 import { containDialogFocus, focusDialog } from './dialog-focus';
@@ -40,20 +40,6 @@ function randomLook(): Look {
   return Object.fromEntries(
     (Object.keys(LOOK_RANGES) as (keyof Look)[]).map((k) => [k, Math.floor(Math.random() * LOOK_RANGES[k])]),
   ) as unknown as Look;
-}
-
-function themePreview(themeId: string): HTMLCanvasElement {
-  const theme = STARTER_THEMES.find((th) => th.id === themeId)!;
-  const c = document.createElement('canvas');
-  c.width = 48;
-  c.height = 32;
-  const ctx = c.getContext('2d')!;
-  paintWall(ctx, theme.equip.wallpaper!, 0, 0, 48, 15);
-  paintWainscot(ctx, theme.equip.wallpaper!, 0, 16, 48, 5);
-  paintFloor(ctx, theme.equip.floor!, 0, 21, 48, 11);
-  paintCounter(ctx, theme.equip.counter!, 4, 17, 26, 3, 9);
-  c.className = 'theme-preview';
-  return c;
 }
 
 export function showOnboarding(opts: Options): void {
@@ -138,6 +124,7 @@ export function showOnboarding(opts: Options): void {
     releasePreview?.();
     releasePreview = undefined;
     const step = steps[index];
+    card.classList.toggle('ob-style', step === 'style');
     const dots = steps.map((_, i) => `<i class="${i === index ? 'on' : i < index ? 'done' : ''}"></i>`).join('');
     const isLast = index === steps.length - 1;
     const nextLabel =
@@ -288,18 +275,30 @@ export function showOnboarding(opts: Options): void {
       <p class="note">${t('ob.style.hint')}</p>
       <div class="themes"></div>`;
     const wrap = body.querySelector<HTMLElement>('.themes')!;
+    const previews = new Map(STARTER_THEMES.map(th => [th.id, starterThemePreview(th.id)]));
     const paint = () => {
       wrap.replaceChildren(
         ...STARTER_THEMES.map((th) => {
           const b = document.createElement('button');
           b.className = 'theme' + (draft.theme === th.id ? ' active' : '');
-          b.append(themePreview(th.id));
+          b.type = 'button';
+          b.dataset.theme = th.id;
+          b.setAttribute('aria-pressed', String(draft.theme === th.id));
+          b.append(previews.get(th.id)!);
           const label = document.createElement('span');
           label.textContent = t(`theme.${th.id}` as MessageKey);
-          b.append(label);
+          const description = document.createElement('small');
+          description.className = 'theme-description';
+          for (const part of t(`theme.${th.id}.description` as MessageKey).split(' · ')) {
+            const line = document.createElement('span');
+            line.textContent = part;
+            description.append(line);
+          }
+          b.append(label, description);
           b.addEventListener('click', () => {
             draft.theme = th.id;
             paint();
+            wrap.querySelector<HTMLButtonElement>(`[data-theme="${th.id}"]`)?.focus({ preventScroll: true });
           });
           return b;
         }),

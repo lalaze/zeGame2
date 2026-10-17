@@ -2,6 +2,7 @@ import { generatedRasterGeometry } from './generated-raster-geometry';
 
 /** Recolour fabric pigment only; preserve the source silhouette, folds and timber. */
 export const TEXTILE_COLORS: Readonly<Record<string, readonly [number, number, number]>> = {
+  tablecloth_rose: [204, 139, 158], curtain_rose: [204, 139, 158],
   tablecloth_mint: [105, 151, 113], tablecloth_blue: [90, 132, 174],
   tablecloth_lavender: [156, 116, 169], tablecloth_linen: [235, 220, 187],
   curtain_sage: [105, 151, 113], curtain_blue: [90, 132, 174], curtain_linen: [235, 220, 187],

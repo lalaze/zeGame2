@@ -19,6 +19,7 @@ export interface DecorDef {
 export const DECOR: readonly DecorDef[] = [
   { id: 'tablecloth_classic', slot: 'tablecloth', cost: 0, comfort: 0 },
   { id: 'tablecloth_mint', slot: 'tablecloth', cost: 0, comfort: 0 },
+  { id: 'tablecloth_rose', slot: 'tablecloth', cost: 0, comfort: 0 },
   { id: 'tablecloth_blue', slot: 'tablecloth', cost: 120, comfort: 2 },
   { id: 'tablecloth_lavender', slot: 'tablecloth', cost: 300, comfort: 3 },
   { id: 'tablecloth_linen', slot: 'tablecloth', cost: 600, comfort: 4 },
@@ -30,6 +31,7 @@ export const DECOR: readonly DecorDef[] = [
 
   { id: 'curtain_classic', slot: 'curtain', cost: 0, comfort: 0 },
   { id: 'curtain_sage', slot: 'curtain', cost: 0, comfort: 0 },
+  { id: 'curtain_rose', slot: 'curtain', cost: 0, comfort: 0 },
   { id: 'curtain_blue', slot: 'curtain', cost: 180, comfort: 2 },
   { id: 'curtain_linen', slot: 'curtain', cost: 450, comfort: 3 },
 
@@ -49,6 +51,8 @@ export const DECOR: readonly DecorDef[] = [
   { id: 'floor_marble', slot: 'floor', cost: 8_000_000, comfort: 28 },
 
   { id: 'counter_oak', slot: 'counter', cost: 0, comfort: 0 },
+  { id: 'counter_sage', slot: 'counter', cost: 0, comfort: 0 },
+  { id: 'counter_blush', slot: 'counter', cost: 0, comfort: 0 },
   { id: 'counter_walnut', slot: 'counter', cost: 1_000, comfort: 5 },
   { id: 'counter_marble', slot: 'counter', cost: 40_000, comfort: 12 },
   { id: 'counter_pink', slot: 'counter', cost: 1_500_000, comfort: 22 },
@@ -82,9 +86,9 @@ export const decorForSlot = (slot: DecorSlot) => DECOR.filter((d) => d.slot === 
 
 /** Free looks offered in the opening flow; they can be swapped any time later. */
 export const STARTER_THEMES: readonly { id: string; equip: Partial<Record<DecorSlot, string>> }[] = [
-  { id: 'classic', equip: { wallpaper: 'wall_cream', floor: 'floor_checker', counter: 'counter_oak' } },
-  { id: 'mint', equip: { wallpaper: 'wall_mint', floor: 'floor_mint', counter: 'counter_oak' } },
-  { id: 'rose', equip: { wallpaper: 'wall_rose', floor: 'floor_planks', counter: 'counter_oak' } },
+  { id: 'classic', equip: { wallpaper: 'wall_cream', floor: 'floor_checker', counter: 'counter_oak', tablecloth: 'tablecloth_classic', curtain: 'curtain_classic' } },
+  { id: 'mint', equip: { wallpaper: 'wall_mint', floor: 'floor_mint', counter: 'counter_sage', tablecloth: 'tablecloth_mint', curtain: 'curtain_sage' } },
+  { id: 'rose', equip: { wallpaper: 'wall_rose', floor: 'floor_planks', counter: 'counter_blush', tablecloth: 'tablecloth_rose', curtain: 'curtain_rose' } },
 ];
 
 export function comfort(state: GameState): number {

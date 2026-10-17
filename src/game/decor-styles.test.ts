@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DECOR, comfort, useDecor } from './decor';
+import { DECOR, STARTER_THEMES, applyTheme, comfort, useDecor } from './decor';
 import { createInitialState, deserialize, serialize } from './state';
 import { messagesFor } from '../i18n';
 
@@ -40,5 +40,40 @@ describe('replaceable café textiles and centerpieces', () => {
         expect(keys).toContain(`decor.${def.id}`); expect(keys).toContain(`slot.${def.slot}`);
       }
     }
+  });
+});
+
+
+describe('coordinated starter themes', () => {
+  it('gives each theme distinct walls, floors, counters, tablecloths and curtains at no cost', () => {
+    const state = createInitialState(0);
+    const original = { coins: state.coins, comfort: comfort(state), upgrades: { ...state.upgrades } };
+    for (const theme of [...STARTER_THEMES, STARTER_THEMES[0]]) {
+      applyTheme(state, theme.id);
+      expect(state.coins).toBe(original.coins);
+      expect(comfort(state)).toBe(original.comfort);
+      expect(state.upgrades).toEqual(original.upgrades);
+      expect(state.decor.equipped).toMatchObject(theme.equip);
+      for (const id of Object.values(theme.equip)) expect(state.decor.owned).toContain(id);
+      expect(deserialize(serialize(state), 0).decor.equipped).toEqual(state.decor.equipped);
+    }
+    for (const slot of ['wallpaper', 'floor', 'counter', 'tablecloth', 'curtain'] as const) {
+      expect(new Set(STARTER_THEMES.map(theme => theme.equip[slot])).size).toBe(3);
+    }
+  });
+
+  it('adds the new free finishes to old saves without replacing their existing look', () => {
+    const state = createInitialState(0); applyTheme(state, 'rose');
+    const old = JSON.parse(serialize(state));
+    old.decor.equipped.counter = 'counter_oak';
+    old.decor.equipped.tablecloth = 'tablecloth_classic';
+    old.decor.equipped.curtain = 'curtain_classic';
+    old.decor.owned = old.decor.owned.filter((id: string) => !['counter_sage', 'counter_blush', 'tablecloth_rose', 'curtain_rose'].includes(id));
+    const loaded = deserialize(JSON.stringify(old), 0);
+    expect(loaded.decor.equipped).toEqual(old.decor.equipped);
+    for (const id of ['counter_sage', 'counter_blush', 'tablecloth_rose', 'curtain_rose']) {
+      expect(useDecor(loaded, id)).toBe(true);
+    }
+    expect(loaded.coins).toBe(0);
   });
 });

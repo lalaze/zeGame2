@@ -1,4 +1,11 @@
 {
+  "decor.tablecloth_rose": "玫瑰粉格桌布",
+  "decor.curtain_rose": "玫瑰粉窗帘",
+  "decor.counter_sage": "鼠尾草绿吧台",
+  "decor.counter_blush": "浅粉木吧台",
+  "theme.classic.description": "奶油条纹 · 橡木吧台 · 红格布艺",
+  "theme.mint.description": "薄荷墙面 · 绿白吧台 · 清新绿格",
+  "theme.rose.description": "玫瑰墙面 · 浅粉吧台 · 粉色布艺",
   "slot.tablecloth": "桌布",
   "slot.centerpiece": "桌面摆饰",
   "slot.curtain": "窗帘",

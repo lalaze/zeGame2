@@ -292,6 +292,8 @@ interface CounterStyle {
 }
 
 const COUNTERS: Record<string, CounterStyle> = {
+  counter_sage: { top: '#efe0c3', front: '#819a76' },
+  counter_blush: { top: '#e8ca9d', front: '#cfa7a2' },
   counter_oak: { top: '#c98c4d', front: '#865332' },
   counter_walnut: { top: '#98643e', front: '#543425' },
   counter_marble: { top: '#f3efe8', front: '#e2dace', veins: '#c9c0b2' },
