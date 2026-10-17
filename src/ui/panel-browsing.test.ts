@@ -645,3 +645,19 @@ describe('catalog-relative positions across responsive scroll owners', () => {
     expect(list.scrollTop).toBe(0);
   });
 });
+
+
+describe('renovation style switching', () => {
+  it('buys and switches textiles and centerpieces in the existing shop', () => {
+    const state = createInitialState(0); state.coins = 1000;
+    const { panel } = panelFor(state);
+    panel.showTab('decor'); button('[data-decor-category="renovation"]').click();
+    for (const id of ['tablecloth_blue', 'centerpiece_succulent', 'curtain_blue']) button(`[data-decor="${id}"]`).click();
+    expect(state.decor.equipped).toMatchObject({ tablecloth: 'tablecloth_blue', centerpiece: 'centerpiece_succulent', curtain: 'curtain_blue' });
+    expect(state.coins).toBe(610);
+    button('[data-decor="tablecloth_classic"]').click();
+    button('[data-decor="tablecloth_blue"]').click();
+    expect(state.coins).toBe(610);
+    expect(button('[data-decor="tablecloth_blue"]').disabled).toBe(true);
+  });
+});

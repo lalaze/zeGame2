@@ -3,9 +3,9 @@
 import { furnitureComfort, furnitureDef } from './furniture';
 import type { GameState } from './state';
 
-export type DecorSlot = 'wallpaper' | 'floor' | 'counter' | 'sill' | 'ceiling' | 'rug' | 'neon';
+export type DecorSlot = 'wallpaper' | 'floor' | 'counter' | 'sill' | 'ceiling' | 'rug' | 'neon' | 'tablecloth' | 'centerpiece' | 'curtain';
 
-export const DECOR_SLOTS: readonly DecorSlot[] = ['wallpaper', 'floor', 'counter', 'sill', 'ceiling', 'rug', 'neon'];
+export const DECOR_SLOTS: readonly DecorSlot[] = ['tablecloth', 'centerpiece', 'curtain', 'wallpaper', 'floor', 'counter', 'sill', 'ceiling', 'rug', 'neon'];
 
 export interface DecorDef {
   id: string;
@@ -17,6 +17,22 @@ export interface DecorDef {
 
 // Free items are owned from the start. Ids double as translation keys (decor.<id>).
 export const DECOR: readonly DecorDef[] = [
+  { id: 'tablecloth_classic', slot: 'tablecloth', cost: 0, comfort: 0 },
+  { id: 'tablecloth_mint', slot: 'tablecloth', cost: 0, comfort: 0 },
+  { id: 'tablecloth_blue', slot: 'tablecloth', cost: 120, comfort: 2 },
+  { id: 'tablecloth_lavender', slot: 'tablecloth', cost: 300, comfort: 3 },
+  { id: 'tablecloth_linen', slot: 'tablecloth', cost: 600, comfort: 4 },
+
+  { id: 'centerpiece_flowers', slot: 'centerpiece', cost: 0, comfort: 0 },
+  { id: 'centerpiece_none', slot: 'centerpiece', cost: 0, comfort: 0 },
+  { id: 'centerpiece_succulent', slot: 'centerpiece', cost: 90, comfort: 2 },
+  { id: 'centerpiece_candle', slot: 'centerpiece', cost: 240, comfort: 3 },
+
+  { id: 'curtain_classic', slot: 'curtain', cost: 0, comfort: 0 },
+  { id: 'curtain_sage', slot: 'curtain', cost: 0, comfort: 0 },
+  { id: 'curtain_blue', slot: 'curtain', cost: 180, comfort: 2 },
+  { id: 'curtain_linen', slot: 'curtain', cost: 450, comfort: 3 },
+
   { id: 'wall_cream', slot: 'wallpaper', cost: 0, comfort: 0 },
   { id: 'wall_mint', slot: 'wallpaper', cost: 0, comfort: 0 },
   { id: 'wall_rose', slot: 'wallpaper', cost: 0, comfort: 0 },

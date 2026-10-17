@@ -1,3 +1,4 @@
+import { curtainSource, TEXTILE_COLORS } from './textile-styles';
 import { artRamp, mainTimber, mainCabinet, mainWall, mainFloor, mainCarpet, mainRug, mainSillPlant, mainSkyDisc, mainPickup, counterMaterial } from './main-room-surfaces';
 import { getLocale, t } from '../i18n';
 import { paintPixelSignText as paintSignText } from './sign-lettering';
@@ -305,6 +306,7 @@ export class RoomPainter {
   /** How far the kitchen door has swung open, 0 to 1. */
   kitchenDoor = 0;
   private wallpaper = 'wall_cream';
+  curtain = 'curtain_classic';
 
   constructor(public ctx: CanvasRenderingContext2D, readonly density = 1, private readonly project = true) {}
 
@@ -315,7 +317,7 @@ export class RoomPainter {
     if (cozy) {
       const w = win.w + 16, h = w * cozy.height / cozy.width;
       const x = win.x - 8, y = win.y + win.h + 1 - h * .84;
-      return { source: cozy, sourceScale: 1, cropX: 0, cropY: 0, sourceWidth: cozy.width, sourceHeight: cozy.height,
+      return { source: curtainSource(cozy, this.curtain), sourceScale: 1, cropX: 0, cropY: 0, sourceWidth: cozy.width, sourceHeight: cozy.height,
         x, y, w, h, aperture: { x: x + w * .22, y: y + h * .12, w: w * .56, h: h * .73 } };
     }
     const source = this.density > 1 ? generatedMainRaster('wall-window') : null;
@@ -325,7 +327,7 @@ export class RoomPainter {
     // cat, botanical accent and OPEN sign keep their established attachments.
     const scale = (win.w + 16) / (source.width - 20);
     const x = win.x - 8, y = win.y + win.h + 1 - 410 * scale;
-    return { source: source.source, sourceScale: source.sourceScale, cropX: 10, cropY: 10,
+    return { source: curtainSource(source.source, this.curtain), sourceScale: source.sourceScale, cropX: 10, cropY: 10,
       sourceWidth: source.width - 20, sourceHeight: source.height - 20, x, y, w: win.w + 16, h: (source.height - 20) * scale,
       aperture: { x: x + 115 * scale, y: y + 77 * scale, w: 386 * scale, h: 296 * scale } };
   }
@@ -603,7 +605,9 @@ export class RoomPainter {
         for (let yy = -5; yy < h; yy++) for (let xx = 0; xx < 7; xx++) {
           const check = (Math.floor((xx + 1) / 2) % 2) + (Math.floor((yy + 8) / 3) % 2);
           const fold = xx === (dir === 1 ? 0 : 6) || xx === 3;
-          const color = ['#f4dfb7', '#cf8970', '#a64c3e'][check];
+          const tint = TEXTILE_COLORS[this.curtain];
+          const base = tint ? '#' + tint.map(c => c.toString(16).padStart(2, '0')).join('') : '#a64c3e';
+          const color = ['#f4dfb7', mix('#f4dfb7', base, .55), base][check];
           this.r(cx + xx, y + yy, 1, 1, fold ? mix(color, '#653628', 0.24) : color);
         }
         this.r(cx - 1, y - 6, 9, 1, '#543425');

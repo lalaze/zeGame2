@@ -1,3 +1,5 @@
+import { textileSwatch } from './textile-styles';
+import { paintCenterpiece } from './table-centerpiece-art';
 import { paintSignText, paintPixelSignText } from './sign-lettering';
 import { getGeneratedDecorAdapter } from './generated-main-art';
 // Pixel art for every decor item, in a shaded Stardew-like style. Each painter
@@ -861,6 +863,15 @@ export function decorIcon(id: string): HTMLCanvasElement {
       rect(ctx, 0, i, 1, 1, '#c4ad92');
       rect(ctx, ICON_W - 1, i, 1, 1, '#c4ad92');
     }
+  } else if (slot === 'tablecloth') {
+    rect(ctx, 11, 16, 5, 6, '#805536');
+    textileSwatch(ctx, id, 2, 4, 24, 14);
+  } else if (slot === 'curtain') {
+    rect(ctx, 2, 2, 24, 2, '#805536');
+    textileSwatch(ctx, id, 3, 4, 8, 18);
+    textileSwatch(ctx, id, 17, 4, 8, 18);
+  } else if (slot === 'centerpiece') {
+    ctx.save(); ctx.translate(9, 5); paintCenterpiece(ctx, id); ctx.restore();
   } else if (slot === 'wallpaper') {
     paintWall(ctx, id, 0, 0, ICON_W, 16, 0.4);
     paintWainscot(ctx, id, 0, 17, ICON_W, 7);

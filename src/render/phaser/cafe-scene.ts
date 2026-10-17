@@ -1,3 +1,5 @@
+import { remapTextile } from '../textile-styles';
+import { paintCenterpiece } from '../table-centerpiece-art';
 import { loadSignFonts, signFontRevision } from '../sign-lettering';
 import { insideRoomFrame } from '../viewport-frame';
 import { mainKeyLight, mainShadowState, paintContactShade, paintCastShade, mainSurfaceLight, mainLitSprite } from '../main-room-lighting';
@@ -552,20 +554,23 @@ export class CafeScene extends Phaser.Scene {
     return image;
   }
 
-  private generatedPicture(id: GeneratedMainId, x: number, y: number, width: number, height: number, depth: number, area: AreaId = 'main'): Phaser.GameObjects.Image | null {
+  private generatedPicture(id: GeneratedMainId, x: number, y: number, width: number, height: number, depth: number, area: AreaId = 'main', style = 'tablecloth_classic'): Phaser.GameObjects.Image | null {
     const key = generatedMainKey(id);
     if (!generatedMainSource(id) || !this.textures.exists(key)) return null;
     // Resample the painting once to the exact art pixels it covers, instead of scaling it per frame.
     const w = Math.max(1, Math.round(width * WORLD_ART_DENSITY)), h = Math.max(1, Math.round(height * WORLD_ART_DENSITY));
-    const gridKey = `${key}@${w}x${h}${area === 'main' ? '' : ':' + area}`;
+    const gridKey = `${key}@${w}x${h}${area === 'main' ? '' : ':' + area}${style === 'tablecloth_classic' ? '' : ':' + style}`;
     if (!this.textures.exists(gridKey)) {
       const frame = this.textures.getFrame(key);
       const resampled = resampleImage(frame.source.image as HTMLImageElement, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, w, h);
-      if (area === 'main') this.textures.addCanvas(gridKey, resampled);
+      if (area === 'main' && style === 'tablecloth_classic') this.textures.addCanvas(gridKey, resampled);
       else {
         const variant = document.createElement('canvas'); variant.width = w; variant.height = h;
         const ctx = variant.getContext('2d')!; ctx.drawImage(resampled, 0, 0);
-        const pixels = ctx.getImageData(0, 0, w, h); remapTablecloth(pixels.data, w, h, area); ctx.putImageData(pixels, 0, 0);
+        const pixels = ctx.getImageData(0, 0, w, h);
+        if (style === 'tablecloth_classic') remapTablecloth(pixels.data, w, h, area);
+        else remapTextile(pixels.data, w, h, style, true);
+        ctx.putImageData(pixels, 0, 0);
         this.textures.addCanvas(gridKey, variant);
       }
     }
@@ -663,6 +668,7 @@ export class CafeScene extends Phaser.Scene {
       const backSig = [tick, H, getLocale(), signFontRevision(), state.profile?.cafeName, Object.values(decor).join(','), menuItems(state).map((m) => m.id).join(','), state.phase, placed, now.getTime(), this.view.kitchenDoor.toFixed(2)].join('|');
       this.paint(back, o.x, o.y, backSig, (p) => {
         p.kitchenDoor = this.view.kitchenDoor;
+        p.curtain = decor.curtain;
         const ctx = p.ctx;
         p.drawWall(decor.wallpaper, t);
         this.mainOpenings = p.lightOpenings();
@@ -1187,10 +1193,13 @@ export class CafeScene extends Phaser.Scene {
     const tableShift = table.x - logicalTable.x;
     let d = depth;
     const next = () => (d += 0.001);
+    const decor = this.getState?.().decor.equipped;
+    const cloth = decor?.tablecloth ?? 'tablecloth_classic';
+    const centerpiece = decor?.centerpiece ?? 'centerpiece_flowers';
     const ensembleTable = seatingFurniture('table');
     const area = tableArea(index);
     const baseTable = ensembleTable ?? (index < MAX_TABLES ? cozyCafeSprite('table') : undefined);
-    const cozyTable = baseTable ? extensionTable(baseTable, area) : undefined;
+    const cozyTable = baseTable ? extensionTable(baseTable, area, cloth) : undefined;
     this.shadow(table.x + (cozyTable ? 2 : 0), table.y + 1, cozyTable ? 38 : 30, next(), cozyTable ? 0.25 : 0.2);
     if (cozyTable) this.shadow(table.x, table.y, 17, next(), 0.34, false);
     const diners = ([0, 1] as const).map((side) => {
@@ -1221,10 +1230,10 @@ export class CafeScene extends Phaser.Scene {
       }
       if(pose)this.litImage(pose.sprite,pose.x,pose.y,next(), table);
     }
-    const top = extensionTable(TABLE(), area);
+    const top = extensionTable(TABLE(), area, cloth);
     const tableDepth = next();
     if (cozyTable) this.litImage(cozyTable, table.x - cozyTable.width / 2, table.y - cozyTable.height + 1, tableDepth, table);
-    else if (!this.generatedPicture('table', table.x - 16.5, table.y - TABLE_TOP_DY - 5.4, 33, 33 * 462 / 563, tableDepth, area)) {
+    else if (!this.generatedPicture('table', table.x - 16.5, table.y - TABLE_TOP_DY - 5.4, 33, 33 * 462 / 563, tableDepth, area, cloth)) {
       this.litImage(top, table.x - TABLE_CX, table.y - top.height + 1, tableDepth, table);
     }
     const cy = table.y + (ensembleTable ? SEATING_LAYOUT.surfaceY : -TABLE_TOP_DY);
@@ -1232,7 +1241,12 @@ export class CafeScene extends Phaser.Scene {
     const bloom = ['#ef5d7a', '#f2c14e', '#ffffff', '#9f78d2'][index % 4];
     const vase = baked(this.textures, `vase-${bloom}`, 5, 14, ctx => paintTableVase(ctx, bloom));
     const vaseDepth = next();
-    if (!this.generatedPicture('vase', table.x - 3.5, cy - 7, 7, 7 * 281 / 264, vaseDepth)) this.image(vase, table.x - 2, cy - 13, vaseDepth);
+    if (centerpiece === 'centerpiece_flowers') {
+      if (!this.generatedPicture('vase', table.x - 3.5, cy - 7, 7, 7 * 281 / 264, vaseDepth)) this.image(vase, table.x - 2, cy - 13, vaseDepth);
+    } else if (centerpiece !== 'centerpiece_none') {
+      const ornament = baked(this.textures, centerpiece, 30, 42, ctx => { ctx.scale(3, 3); paintCenterpiece(ctx, centerpiece); });
+      this.image(ornament, table.x - 3.75, cy - 9.5, vaseDepth).setScale(1 / 4);
+    }
     // Seated customers lean over the table: their upper body goes on top again.
     for (const side of [0, 1] as const) {
       const c = diners[side];

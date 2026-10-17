@@ -1,9 +1,10 @@
+import { remapTextile } from './textile-styles';
 import type { AreaId } from '../game/regions';
 import { artRamp } from './main-room-surfaces';
 import { registerFineSpriteArt } from './fine-sprite-art';
 import { worldSpriteArt } from './world-art-grid';
 
-const variants = new WeakMap<HTMLCanvasElement, Map<AreaId, HTMLCanvasElement>>();
+const variants = new WeakMap<HTMLCanvasElement, Map<string, HTMLCanvasElement>>();
 
 export function remapTablecloth(pixels: Uint8ClampedArray, width: number, height: number, area: AreaId): void {
   if (area === 'main' || area === 'kitchen') return;
@@ -22,19 +23,21 @@ export function remapTablecloth(pixels: Uint8ClampedArray, width: number, height
   }
 }
 
-export function extensionTable(source: HTMLCanvasElement, area: AreaId): HTMLCanvasElement {
-  if (area === 'main' || area === 'kitchen') return source;
-  const cache = variants.get(source) ?? new Map<AreaId, HTMLCanvasElement>();
-  const existing = cache.get(area); if (existing) return existing;
+export function extensionTable(source: HTMLCanvasElement, area: AreaId, style = 'tablecloth_classic'): HTMLCanvasElement {
+  if ((area === 'main' || area === 'kitchen') && style === 'tablecloth_classic') return source;
+  const key = `${area}:${style}`;
+  const cache = variants.get(source) ?? new Map<string, HTMLCanvasElement>();
+  const existing = cache.get(key); if (existing) return existing;
   const art = worldSpriteArt(source), backing = document.createElement('canvas');
   backing.width = art.canvas.width; backing.height = art.canvas.height;
   const ctx = backing.getContext('2d')!;
   ctx.drawImage(art.canvas, 0, 0);
   const pixels = ctx.getImageData(0, 0, backing.width, backing.height);
-  remapTablecloth(pixels.data, backing.width, backing.height, area);
+  if (style === 'tablecloth_classic') remapTablecloth(pixels.data, backing.width, backing.height, area);
+  else remapTextile(pixels.data, backing.width, backing.height, style, true);
   ctx.putImageData(pixels, 0, 0);
   const logical = document.createElement('canvas'); logical.width = source.width; logical.height = source.height;
   registerFineSpriteArt(logical, backing, art.density);
-  cache.set(area, logical); variants.set(source, cache);
+  cache.set(key, logical); variants.set(source, cache);
   return logical;
 }
