@@ -35,6 +35,22 @@ placeholder-looking surfaces; that is the backlog at the end.
   cabinet frames, brass-edged paper plates and raised sage buttons. Shop thumbnails
   and portraits retain their original backings.
 
+## Café team poses
+
+The owner, barista, server and cook now use `team-pixel-art.ts` through
+`cozy-team-art.ts`. Source paintings are labelled by material and voted directly
+onto the 2× world grid, then painted with the master-palette customization ramps.
+Each pose's grid is cached across looks; the world renderer uses it without another
+resample. Faces keep their eyes and mouth, outlines are one art pixel, and the
+seated foreground is cut at pixel centres to avoid translucent table-edge fringes.
+Saved appearance IDs, logical sizes, carry/seat/pet anchors and mirrored poses are
+preserved. Garments use the selected clothing ramp directly, including staff aprons.
+
+Inspect `/scripts/team-art-fixture.html?verify=1&zoom=2` on the dev server. Its
+`#team-art-report` checks 32 role/look combinations and 768 whole/foreground frames
+for native density, palette, binary alpha, mirrors, cache reuse and contacts.
+The numerical conversion tests live in `src/render/team-pixel-art.test.ts`.
+
 ## Interface chrome
 
 The final material layer in `src/style.css` owns interface colors and bevels, not

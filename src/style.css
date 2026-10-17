@@ -2649,9 +2649,9 @@ body.fullscreen-cafe .hud .money {
 }
 body.fullscreen-cafe .money .coins { min-height: 32px; font-size: 24px; }
 body.fullscreen-cafe .hud-buttons { position: absolute; inset: 0; display: block; pointer-events: none; }
-body.fullscreen-cafe .hud-buttons button { position: absolute; min-height: 44px; pointer-events: auto; }
+body.fullscreen-cafe .hud-buttons > button { position: absolute; min-height: 44px; pointer-events: auto; }
 body.fullscreen-cafe #settings-btn { left: var(--edge-left); bottom: var(--edge-bottom); width: 44px; }
-body.fullscreen-cafe #panel-toggle { right: var(--edge-right); bottom: var(--edge-bottom); padding-inline: 16px; }
+body.fullscreen-cafe #panel-toggle { right: var(--edge-right); bottom: var(--edge-bottom); min-height: 44px; padding-inline: 16px; }
 body.fullscreen-cafe .cafe-status-bar {
   position: absolute; z-index: 8; top: calc(var(--edge-top) + 74px); right: var(--edge-right);
   display: flex; flex-direction: column; align-items: stretch; gap: 8px;
@@ -2690,12 +2690,17 @@ body.fullscreen-cafe .operation-status {
   max-width: min(330px, calc(100% - 150px)); min-height: 44px; height: auto; margin: 0;
 }
 body.fullscreen-cafe .hint { display: none; }
+/* Desktop shortcuts stay folded into Manage and unfold directly above it. */
 body.fullscreen-cafe .edge-tools {
-  position: absolute; z-index: 8; top: 50%; right: var(--edge-right);
-  transform: translateY(-50%); display: flex; flex-direction: column; gap: 12px;
-  max-height: calc(100% - 240px); overflow-y: auto; padding: 4px;
+  position: absolute; right: calc(var(--edge-right) + var(--px)); bottom: calc(var(--edge-bottom) + var(--px) + 56px);
+  display: flex; flex-direction: column; gap: 2px;
+  max-height: calc(100% - var(--edge-top) - var(--edge-bottom) - var(--px) - 56px); overflow-y: auto; padding: 6px;
   scrollbar-width: thin; pointer-events: auto;
+  background: var(--wood-planks), var(--wood); box-shadow: var(--frame);
+  animation: cafe-shortcuts-in 120ms ease-out;
 }
+body.fullscreen-cafe.shortcuts-open .hud { z-index: 10; }
+body.fullscreen-cafe.shortcuts-open .play-flow-actions { visibility: hidden; pointer-events: none; }
 body.fullscreen-cafe .edge-tools button {
   display: flex; align-items: center; gap: 8px; min-height: 44px; min-width: 100px;
   margin: 0; padding: 8px 10px; border: 0; color: var(--ink);
@@ -2749,8 +2754,7 @@ body.fullscreen-cafe .arrange-actions button { min-height: 44px; }
 body.fullscreen-cafe .stage:has(.scene-wrap.arranging) > .day-hud,
 body.fullscreen-cafe .stage:has(.scene-wrap.arranging) > .open-btn,
 body.fullscreen-cafe .stage:has(.scene-wrap.arranging) > .cafe-style-button,
-body.fullscreen-cafe .stage:has(.scene-wrap.arranging) > .operation-status,
-body.fullscreen-cafe .stage:has(.scene-wrap.arranging) > .edge-tools { display: none; }
+body.fullscreen-cafe .stage:has(.scene-wrap.arranging) > .operation-status { display: none; }
 body.fullscreen-cafe .stage:has(.scene-wrap.is-overview) > .day-hud,
 body.fullscreen-cafe .stage:has(.scene-wrap.is-overview) > .open-btn,
 body.fullscreen-cafe .stage:has(.scene-wrap.is-overview) > .cafe-style-button,
@@ -2770,6 +2774,7 @@ body.fullscreen-cafe .toast {
   left: 50%; margin: 0; max-width: min(420px, calc(100% - 40px)); transform: translateX(-50%);
 }
 @keyframes cafe-drawer-in { from { opacity: .5; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes cafe-shortcuts-in { from { opacity: .5; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (max-width: 860px) {
   body.fullscreen-cafe {
@@ -2817,7 +2822,8 @@ body.fullscreen-cafe .toast {
   body.fullscreen-cafe .first-service { left: 50%; transform: translateX(-50%); width: min(400px, 55%); max-height: 45%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  body.fullscreen-cafe #management-panel:not([hidden]) { animation: none; }
+  body.fullscreen-cafe #management-panel:not([hidden]),
+  body.fullscreen-cafe .edge-tools { animation: none; }
 }
 
 /* Auxiliary actions share edge space without reintroducing layout rows. */
@@ -2833,12 +2839,6 @@ body.fullscreen-cafe .play-flow-actions {
 body.fullscreen-cafe .play-flow-actions .chip { min-width: 100px; min-height: 44px; width: auto; padding: 8px 10px; font-size: 13px; }
 body.fullscreen-cafe .play-flow-actions .traffic-summary { display: none; }
 body.fullscreen-cafe.drawer-open .play-flow-actions { visibility: hidden; pointer-events: none; }
-@media (min-width: 1100px) {
-  body.fullscreen-cafe.drawer-open .edge-tools { right: calc(var(--edge-right) + 400px); }
-}
-@media (min-width: 861px) and (max-width: 1099px) {
-  body.fullscreen-cafe.drawer-open .edge-tools { visibility: hidden; pointer-events: none; }
-}
 @media (max-width: 860px) {
   body.fullscreen-cafe .play-flow-actions { max-width: 125px; gap: 8px; }
   body.fullscreen-cafe .play-flow-actions .chip { min-width: 44px; font-size: 12px; padding: 6px 8px; }
@@ -2852,11 +2852,6 @@ body.fullscreen-cafe .table-preview-exit {
   max-width: calc(100% - 156px); padding: 8px 14px; white-space: normal;
 }
 body.fullscreen-cafe .table-preview-exit:active { transform: translate(-50%, 1px); }
-
-/* Keep a clear 44px passage at the right room edge for its door arrow and destination label. */
-@media (min-width: 861px) {
-  body.fullscreen-cafe:not(.drawer-open) .edge-tools { right: calc(var(--edge-right) + 120px); }
-}
 
 /* Replace the three existing .environment rules; append the guide rules after
    all current fullscreen rules. room-scale is the exact CSS display scale. */
@@ -2957,6 +2952,7 @@ body.fullscreen-cafe .drawer-balance { max-width: 50%; min-width: 0; overflow-wr
 .stage:has(.scene-wrap.is-overview) .room-zoom-controls,
 .stage:has(.scene-wrap.is-panning) .room-zoom-controls { visibility: hidden; pointer-events: none; }
 @media (max-height: 500px) { .room-zoom-controls { left: auto; right: 12px; bottom: 72px; transform: none; } }
+@media (max-height: 500px) { body.fullscreen-cafe.shortcuts-open .room-zoom-controls { visibility: hidden; pointer-events: none; } }
 
 :root {
   --ink: #291711;
@@ -3125,6 +3121,12 @@ body.fullscreen-cafe .edge-tools button.active:hover { background: var(--green-d
   box-shadow: var(--button-edge), inset 4px 0 var(--brass-light);
 }
 .area-plan-toggle[aria-pressed="true"]:hover { background: var(--green-dark); }
+body.fullscreen-cafe #panel-toggle[aria-expanded="true"] {
+  --button-hi: #738e53; --button-lo: #374e3d;
+  background: var(--green); color: var(--paper-light);
+  box-shadow: var(--button-edge), inset 4px 0 var(--brass-light);
+}
+body.fullscreen-cafe #panel-toggle[aria-expanded="true"]:hover { background: var(--green-dark); }
 body.fullscreen-cafe .cafe-status-bar button:active:not(:disabled),
 .area-plan-toggle:active, .cafe-style-button:active {
   translate: 0 var(--ui-pixel); box-shadow: var(--button-pressed);

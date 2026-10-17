@@ -1,0 +1,29 @@
+<!doctype html><meta charset="utf-8"><title>QA fixture: café team art</title><style>html,body{margin:0;background:#3a2a21;color:#f4e8d4;font:12px sans-serif}canvas{image-rendering:pixelated;display:block}</style><canvas id="sheet"></canvas><script type="module">
+// Development-only sheet of the live team sprites (owner, barista, server, cook) exactly as
+// the world draws them: the 2× world-grid art from worldSpriteArt(), enlarged by whole
+// pixels. ?looks=skin.hair.style.shirt.pants,… &zoom=4 &roles=owner,barista &poses=0,7. No saves.
+import {preloadReferenceCharacters,resolveReferenceCharacter} from '/src/render/reference-character-art.ts';
+import {worldSpriteArt} from '/src/render/world-art-grid.ts';
+const params=new URLSearchParams(location.search);
+const zoom=Math.max(1,Math.round(Number(params.get('zoom')||4)));
+const looks=(params.get('looks')||'3.5.3.7.0,0.0.3.2.1,1.3.0.5.0,2.4.1.1.2,3.2.2.4.1,0.1.3.0.0').split(',').map(s=>{const [skin,hair,hairStyle,shirt,pants]=s.split('.').map(Number);return {skin,hair,hairStyle,shirt,pants};});
+const roles=(params.get('roles')||'owner').split(',');
+const pick=(params.get('poses')||'0,1,2,3,4,5,6,7,8').split(',').map(Number);
+const poses=f=>{const all=[f.stand,f.down[1],f.down[2],f.up[0],f.right[0],f.right[1],f.left[0],f.sitRight,f.sitPetRight[0]];return pick.map(i=>all[i]);};
+await preloadReferenceCharacters();
+const rows=[];for(const role of roles)for(const look of looks){const f=resolveReferenceCharacter(look,role);if(f)rows.push({role,look,frames:poses(f).map(c=>worldSpriteArt(c).canvas)});}
+const cellW=Math.max(...rows.flatMap(r=>r.frames.map(c=>c.width))),cellH=Math.max(...rows.flatMap(r=>r.frames.map(c=>c.height)));
+const pad=6,label=16,sheet=document.querySelector('#sheet'),ctx=sheet.getContext('2d');
+sheet.width=(cellW*zoom+pad)*pick.length+pad;sheet.height=rows.length*(cellH*zoom+pad+label)+pad;
+ctx.fillStyle='#3a2a21';ctx.fillRect(0,0,sheet.width,sheet.height);ctx.imageSmoothingEnabled=false;
+rows.forEach((row,r)=>{const y=pad+r*(cellH*zoom+pad+label);ctx.fillStyle='#f4e8d4';ctx.font='12px sans-serif';
+ ctx.fillText(`${row.role} skin ${row.look.skin} hair ${row.look.hair} style ${row.look.hairStyle} shirt ${row.look.shirt} pants ${row.look.pants}`,pad,y+12);
+ row.frames.forEach((c,i)=>{const x=pad+i*(cellW*zoom+pad);ctx.fillStyle='#d9c09a';ctx.fillRect(x,y+label,cellW*zoom,cellH*zoom);ctx.drawImage(c,x,y+label+(cellH-c.height)*zoom,c.width*zoom,c.height*zoom);});});
+document.body.dataset.ready='true';
+if(params.has('verify')){
+ const {checkTeamArt}=await import('./team-art-checks.ts');
+ const report=await checkTeamArt();
+ const result=document.createElement('pre');result.id='team-art-report';result.textContent=JSON.stringify(report,null,2);document.body.append(result);
+ document.body.dataset.verified=report.failures.length?'failed':'passed';
+}
+</script>

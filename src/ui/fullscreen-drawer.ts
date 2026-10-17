@@ -1,3 +1,5 @@
+export const MOBILE_MANAGEMENT_QUERY = '(max-width: 860px), (max-height: 500px) and (pointer: coarse)';
+
 /** Transient overlay state. Never writes speed, game phase or saved data. */
 export class FullscreenDrawer {
   private open = false;
@@ -11,7 +13,7 @@ export class FullscreenDrawer {
     private backdrop: HTMLElement,
     private onClose: () => void,
   ) {
-    this.media = window.matchMedia('(max-width: 860px), (max-height: 500px) and (pointer: coarse)');
+    this.media = window.matchMedia(MOBILE_MANAGEMENT_QUERY);
     this.panel.classList.add('mobile-panel');
     this.close.addEventListener('click', onClose);
     this.backdrop.addEventListener('click', onClose);

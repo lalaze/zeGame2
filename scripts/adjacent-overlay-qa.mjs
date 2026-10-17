@@ -24,7 +24,8 @@ await delay(1300);fs.mkdirSync('artifacts',{recursive:true});
 await ev(`(async()=>{const url=performance.getEntriesByType('resource').map(r=>r.name).find(u=>u.includes('/src/render/phaser/cafe-scene.ts'));const {CafeScene}=await import(url);const original=CafeScene.prototype.drawTable;CafeScene.prototype.drawTable=function(...args){window.qaScene=this;return original.apply(this,args)};document.querySelector('[data-guide-action="skip"]')?.click()})()`);
 await delay(800);
 check(await ev('!!window.qaScene'),'scene captured');
-for(const [name,width,height,mobile] of [['desktop',1200,900,false],['wide',1920,1080,false],['mobile',390,844,true],['landscape',844,390,true]]){
+for(const [name,width,height,mobile] of [['desktop',1200,900,false],['wide',1920,1080,false],['mobile',390,844,true],['landscape',844,390,true],['wide-landscape',932,430,true]]){
+  await send('Emulation.setTouchEmulationEnabled',{enabled:mobile});
   await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile});await delay(550);
   if(await ev('!document.querySelector("#management-panel").hidden')) await click('#drawer-close');
   const closed=await geometry();
@@ -62,7 +63,13 @@ for(const [name,width,height,mobile] of [['desktop',1200,900,false],['wide',1920
     await ev('qaScene.hooks.pointerDown=window.originalTap');
   }
   await screenshot(name+'-closed');
-  await click('#panel-toggle');
+  if(!mobile){
+    check(await ev('document.querySelector("#edge-tools").hidden'),name+' shortcuts folded by default');
+    await click('#panel-toggle');
+    check(await ev('!document.querySelector("#edge-tools").hidden&&document.querySelector("#panel-toggle").getAttribute("aria-expanded")==="true"'),name+' Manage unfolds shortcuts');
+    await screenshot(name+'-shortcuts');
+    await click('[data-management-tab="menu"]');
+  } else await click('#panel-toggle');
   const opened=await geometry();
   check(opened.open&&JSON.stringify(closed.canvas)===JSON.stringify(opened.canvas)&&JSON.stringify(closed.stage)===JSON.stringify(opened.stage),name+' drawer never resizes room',{closed:closed.canvas,opened:opened.canvas});
   check(opened.focus==='drawer-close',name+' initial focus');
@@ -76,8 +83,8 @@ for(const [name,width,height,mobile] of [['desktop',1200,900,false],['wide',1920
   }
   await screenshot(name+'-open');
   if(mobile){
-    const controls=await ev(`(()=>{const p=document.querySelector('#management-panel');const cs=[...p.querySelectorAll('button,input,select,textarea,a[href],[tabindex]')].filter(e=>e.tabIndex>=0&&!e.matches(':disabled')&&!e.closest('[hidden],[inert]')&&e.getClientRects().length);window.qaLast=cs.at(-1);window.qaLast.focus();return {count:cs.length,last:window.qaLast.outerHTML}})()`);
-    await key('Tab');check(await ev('document.activeElement.id==="drawer-close"'),name+' Tab trap end',{controls});
+    const controls=await ev(`(()=>{const p=document.querySelector('#management-panel');const cs=[...p.querySelectorAll('button,input,select,textarea,a[href],[tabindex]')].filter(e=>e.tabIndex>=0&&!e.matches(':disabled')&&!e.closest('[hidden],[inert]')&&e.getClientRects().length);window.qaFirst=cs[0];window.qaLast=cs.at(-1);window.qaLast.focus();return {count:cs.length,first:window.qaFirst.outerHTML,last:window.qaLast.outerHTML}})()`);
+    await key('Tab');check(await ev('document.activeElement===window.qaFirst'),name+' Tab trap end',{controls});
     await key('Tab',8);check(await ev('document.activeElement===window.qaLast'),name+' Shift Tab trap start');
     check(await ev('document.querySelector("#stage").inert&&document.querySelector(".hud").inert'),name+' scene and HUD inert');
     const speed=await ev('qaScene.getState().speed');await key('Escape');const after=await geometry();
@@ -87,21 +94,26 @@ for(const [name,width,height,mobile] of [['desktop',1200,900,false],['wide',1920
     await key('Escape');check(await ev('document.querySelector("#management-panel").hidden&&document.activeElement.id==="panel-toggle"'),name+' Escape restores focus');
   }
 }
-// Desktop six edge entries and restored focus.
+// Desktop six shortcuts fold into Manage; each opens its tab and folds away.
+await send('Emulation.setTouchEmulationEnabled',{enabled:false});
 await send('Emulation.setDeviceMetricsOverride',{width:1200,height:900,deviceScaleFactor:1,mobile:false});await delay(400);
 for(const tabName of ['menu','pantry','upgrades','decor','pets','promotion']){
-  await click('[data-management-tab="'+tabName+'"]');
-  check(await ev('!document.querySelector("#management-panel").hidden&&document.querySelector("[data-tab='+tabName+']").classList.contains("active")'),'edge entry '+tabName);
-  await key('Escape');check(await ev('document.activeElement.dataset.managementTab==="'+tabName+'"'),'edge focus return '+tabName);
+  await click('#panel-toggle');await click('[data-management-tab="'+tabName+'"]');
+  check(await ev('!document.querySelector("#management-panel").hidden&&document.querySelector("#edge-tools").hidden&&document.querySelector("[data-tab='+tabName+']").classList.contains("active")'),'edge entry '+tabName);
+  await key('Escape');check(await ev('document.activeElement.id==="panel-toggle"'),'edge focus return '+tabName);
 }
+await click('#panel-toggle');await key('Escape');
+check(await ev('document.querySelector("#edge-tools").hidden&&document.activeElement.id==="panel-toggle"'),'Escape folds shortcuts');
+await click('#panel-toggle');await clickAt(600,450);
+check(await ev('document.querySelector("#edge-tools").hidden&&document.querySelector("#management-panel").hidden'),'outside press folds shortcuts');
 // UI pointer events must not reach canvas behind the panel.
-await click('#panel-toggle');
+await click('#panel-toggle');await click('[data-management-tab="menu"]');
 await ev('window.qaCanvasDown=0;document.querySelector("#scene").addEventListener("pointerdown",()=>window.qaCanvasDown++)');
 await click('[data-tab="menu"]');
 check(await ev('window.qaCanvasDown===0'),'panel click does not reach canvas');
 await click('#drawer-close');
 // Table placement preview remains usable while mobile drawer is normally paused.
-await click('[data-management-tab="upgrades"]');
+await click('#panel-toggle');await click('[data-management-tab="upgrades"]');
 await click('[data-table-preview]');
 check(await ev('qaScene.view.tablePreview&&!document.querySelector("#management-panel").hidden'),'desktop table preview activates');
 await key('Escape');

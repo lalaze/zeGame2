@@ -41,6 +41,7 @@ import { RegionsUI, areaName } from './ui/regions';
 import { FirstServiceGuide } from './ui/first-service';
 import { cafeInteractionEnabled } from './ui/cafe-interaction';
 import { FullscreenDrawer } from './ui/fullscreen-drawer';
+import { ManagementShortcuts } from './ui/management-shortcuts';
 import { fitFullscreenRoom } from './ui/fullscreen-layout';
 import { ArrangeFocus } from './ui/arrange-focus';
 import { trackVisualViewport } from './ui/viewport';
@@ -178,6 +179,8 @@ const layout = document.querySelector<HTMLElement>('.layout')!;
 let panelCollapsed = true;
 const drawer = new FullscreenDrawer(panelRoot, panelToggle, $<HTMLButtonElement>('drawer-close'), $('drawer-backdrop'), () => setPanelCollapsed(true));
 const edgeTools = $('edge-tools');
+// Desktop folds the six shortcuts into Manage; phones open the drawer directly.
+const shortcuts = new ManagementShortcuts(edgeTools, panelToggle, updateDrawerLabels);
 let detachedTablePreview = false;
 const previewExit = document.createElement('button');
 previewExit.className = 'pixel-btn table-preview-exit';
@@ -195,8 +198,12 @@ function updateDrawerLabels(): void {
   $('drawer-close').setAttribute('aria-label', chinese() ? '关闭管理' : 'Close management');
   $('drawer-pause').textContent = chinese() ? '已暂停 · 关闭后继续' : 'Paused · close to resume';
   panelToggle.textContent = chinese() ? '管理' : 'Manage';
-  panelToggle.title = t(panelCollapsed ? 'panel.expandTitle' : 'panel.collapseTitle');
+  const folded = panelCollapsed && shortcuts.available;
+  panelToggle.title = t(!panelCollapsed ? 'panel.collapseTitle' : !folded ? 'panel.expandTitle'
+    : shortcuts.expanded ? 'panel.hideShortcuts' : 'panel.showShortcuts');
   panelToggle.setAttribute('aria-label', panelToggle.title);
+  panelToggle.setAttribute('aria-controls', folded ? 'edge-tools' : 'management-panel');
+  panelToggle.setAttribute('aria-expanded', String(!panelCollapsed || shortcuts.expanded));
   edgeTools.setAttribute('aria-label', t('panel.title'));
   for (const button of edgeTools.querySelectorAll<HTMLButtonElement>('[data-management-tab]')) {
     const tab = button.dataset.managementTab as 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | 'promotion';
@@ -208,6 +215,7 @@ function updateDrawerLabels(): void {
 function updatePanelVisibility(restoreFocus = true): void {
   panelRoot.setAttribute('aria-label', t('panel.title'));
   layout.classList.toggle('panel-collapsed', panelCollapsed);
+  if (!panelCollapsed) shortcuts.setOpen(false);
   drawer.setOpen(!panelCollapsed, restoreFocus);
   updateDrawerLabels();
 }
@@ -217,7 +225,10 @@ function setPanelCollapsed(collapsed: boolean, restoreFocus = true): void {
   panelCollapsed = collapsed;
   updatePanelVisibility(restoreFocus);
 }
-panelToggle.addEventListener('click', () => setPanelCollapsed(!panelCollapsed));
+panelToggle.addEventListener('click', () => {
+  if (panelCollapsed && shortcuts.available) shortcuts.setOpen(!shortcuts.expanded);
+  else setPanelCollapsed(!panelCollapsed);
+});
 updatePanelVisibility();
 
 const panel = new Panel(
@@ -263,9 +274,9 @@ function showPanelTab(tab: 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | '
 edgeTools.addEventListener('click', (event) => {
   const button = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-management-tab]');
   if (!button) return;
-  const tab = button.dataset.managementTab as 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | 'promotion';
-  if (!panelCollapsed && panel.currentTab === tab) setPanelCollapsed(true);
-  else showPanelTab(tab);
+  // Fold the shortcuts first, so closing the drawer returns focus to Manage.
+  shortcuts.setOpen(false, true);
+  showPanelTab(button.dataset.managementTab as 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | 'promotion');
 });
 panel.onNavigate(() => queueMicrotask(updateDrawerLabels));
 
@@ -380,6 +391,7 @@ function holdPiece(id: string, moving: number, fromBrowse: boolean): void {
 
 function startArrange(request: ArrangeRequest): void {
   playFlow.cancelPantry();
+  shortcuts.setOpen(false);
   if (!arrange) arrangeFocus.capture();
   // Decorations go in the dining rooms, never the kitchen.
   if (!isAreaOpen(state, scene.area) || scene.area === 'kitchen') regionsUI.select('main');
@@ -861,6 +873,8 @@ window.addEventListener('keydown', (e) => {
   } else if (e.key === 'Escape' && isModalOpen()) {
     e.preventDefault();
     closeModal();
+  } else if (e.key === 'Escape' && shortcuts.handleEscape(e)) {
+    return;
   } else if (e.key === 'Escape' && playFlow.handleEscape(e)) {
     return;
   } else if (e.key === ' ' && !isModalOpen() && !onboarding) {

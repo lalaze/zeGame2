@@ -8,6 +8,8 @@
   "panel.expand": "经营",
   "panel.collapseTitle": "收起经营面板",
   "panel.expandTitle": "展开经营面板",
+  "panel.showShortcuts": "展开经营菜单",
+  "panel.hideShortcuts": "收起经营菜单",
   "hint.tap": "点击可帮忙制作（每游戏秒一次），不用连续猛点！",
   "tab.menu": "菜单",
   "tab.upgrades": "升级",

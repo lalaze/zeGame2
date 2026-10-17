@@ -8,6 +8,8 @@
   "panel.expand": "Manage",
   "panel.collapseTitle": "Collapse management panel",
   "panel.expandTitle": "Expand management panel",
+  "panel.showShortcuts": "Show management shortcuts",
+  "panel.hideShortcuts": "Hide management shortcuts",
   "hint.tap": "Tap to help brew (once per game second); no need to spam!",
   "tab.menu": "Menu",
   "tab.upgrades": "Upgrades",
