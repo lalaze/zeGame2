@@ -12,8 +12,23 @@ function setup() {
   new Function(source)();
   return { root: document.getElementById('loader')!, bar: document.querySelector('progress')!, retry: document.querySelector<HTMLButtonElement>('[data-loading-retry]')! };
 }
-afterEach(() => { window.dispatchEvent(new Event('cafe:loader-owned')); vi.useRealTimers(); document.body.innerHTML = ''; });
+afterEach(() => { window.dispatchEvent(new Event('cafe:loader-owned')); vi.useRealTimers(); localStorage.clear(); vi.restoreAllMocks(); document.body.innerHTML = ''; });
 describe('pre-module startup feedback', () => {
+  it.each(['zh', 'en'])('uses the saved %s language before the main bundle is ready', locale => {
+    localStorage.setItem('tiny-bean-cafe/locale', locale);
+    const { root, bar } = setup();
+    expect(root.lang).toBe(locale === 'zh' ? 'zh-CN' : 'en');
+    expect(root.querySelector('[data-loading-status]')!.textContent).toBe(locale === 'zh' ? '正在准备咖啡馆…' : 'Preparing your café…');
+    expect(bar.hasAttribute('value')).toBe(false);
+    expect(root.querySelector('[data-loading-percent]')!.textContent).toBe('');
+  });
+  it('falls back to browser language when preference storage is unavailable', () => {
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => { throw new Error('denied'); });
+    vi.spyOn(navigator, 'languages', 'get').mockReturnValue(['zh-CN']);
+    const { root } = setup();
+    expect(root.lang).toBe('zh-CN');
+    expect(root.querySelector('[data-loading-step=boot]')!.textContent).toBe('启动');
+  });
   it('keeps progress indeterminate and offers retry after a long wait, without faking failure or completion', () => {
     vi.useFakeTimers(); const {root,bar,retry}=setup();
     vi.advanceTimersByTime(21000);

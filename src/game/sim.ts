@@ -31,6 +31,7 @@ import {
   MAIN_CUPBOARDS,
   SCENE_W,
   TOTAL_TABLE_SPOTS,
+  TABLE_HALF_WIDTH,
   areaAtPoint,
   areaOrigin,
   baristaSpot,
@@ -51,7 +52,9 @@ import {
   serverHome,
   serviceSpot,
   tableArea,
+  tableFootprint,
   tablePos,
+  tablePosAtHeight,
 } from './layout';
 import { batchSteps, cookHome, kitchenPath, nextBatch, shelveBatch, startBatch, stationSpot, kitchenObstacles, STATION_SECONDS, type Station } from './kitchen';
 import { AREA_IDS, activeTableIndices, adjacentArea, areaAtX, areaConnections, regionOffset, type AreaId } from './regions';
@@ -348,6 +351,15 @@ export class Sim {
   resizeScene(fromHeight: number): void {
     const move = (w: Walker) => {
       const position = resizeRoomPoint(w, fromHeight);
+      // Floor stretching must not squeeze an ordinary aisle into a chair's
+      // fixed-depth footprint. Preserve the side of each table the walker was on.
+      for (const table of this.navigationTables) {
+        if (tableArea(table) !== areaAtPoint(w.x, w.y, fromHeight)) continue;
+        const before = tablePosAtHeight(table, fromHeight), after = tablePos(table);
+        if (Math.abs(w.x - before.x) >= TABLE_HALF_WIDTH + WALK_CLEARANCE) continue;
+        if (w.y <= before.y - 10 - WALK_CLEARANCE) position.y = Math.min(position.y, after.y - 10 - WALK_CLEARANCE);
+        else if (w.y >= before.y + 3 + WALK_CLEARANCE) position.y = Math.max(position.y, after.y + 3 + WALK_CLEARANCE);
+      }
       const target = resizeRoomPoint({ x: w.tx, y: w.ty }, fromHeight);
       w.x = position.x; w.y = position.y;
       w.tx = target.x; w.ty = target.y;
@@ -480,8 +492,7 @@ export class Sim {
       }
     }
     for (const i of tables) {
-      const p = tablePos(i);
-      this.navigationObstacles.get(tableArea(i))!.push({ x: p.x - 23, y: p.y - 10, w: 46, h: 13 });
+      this.navigationObstacles.get(tableArea(i))!.push(tableFootprint(i));
     }
     for (const p of state.decor.placed) {
       const def = furnitureDef(p.id), area = areaAtX(p.col * CELL);
@@ -518,8 +529,13 @@ export class Sim {
       const p = tablePos(table);
       for (const side of [0, 1] as const) {
         const seat = seatSpot(table, side);
-        if (exact ? Math.abs(point.x - seat.x) < 0.001 && Math.abs(point.y - seat.y) < 0.001 :
-          Math.abs(point.x - seat.x) < 2 && point.y >= p.y - 1 && point.y <= p.y + 6) return seatApproach(table, side);
+        if (exact) {
+          if (Math.abs(point.x - seat.x) < 0.001 && Math.abs(point.y - seat.y) < 0.001) return seatApproach(table, side);
+        } else if (Math.abs(point.x - seat.x) < 2 && point.y >= p.y - 20 && point.y <= p.y + 13) {
+          // Preserve an in-progress chair step across floor resizes, leaving
+          // through the apron on the side the guest already occupies.
+          return point.y < seat.y ? { x: seat.x, y: p.y - 20 } : seatApproach(table, side);
+        }
       }
     }
     return undefined;
@@ -689,7 +705,7 @@ export class Sim {
     if (this.floorState && c.regularGuestId && c.regularGuestVisitId !== undefined) {
       recordRegularGuestDeparture(this.floorState, c.regularGuestId, c.regularGuestVisitId);
     }
-    // Someone getting up from a table steps out in front of it first.
+    // Someone getting up from a table steps into its clear apron first.
     const from = seated(c) ? [seatApproach(Math.floor(c.seat / 2), (c.seat % 2) as 0 | 1)] : [];
     const area = seated(c) ? tableArea(Math.floor(c.seat / 2)) : areaAtPoint(c.x, c.y) ?? 'main';
     if (c.seat >= 0) this.seats[c.seat] = null;

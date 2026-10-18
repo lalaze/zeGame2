@@ -1,0 +1,35 @@
+{
+  "file": "art/generated/cozy-dining-v3/design.png",
+  "bounds": [
+    792,
+    268,
+    1142,
+    499
+  ],
+  "topPlane": {
+    "center": [
+      967,
+      317
+    ],
+    "radius": [
+      169,
+      43
+    ]
+  },
+  "chair": {
+    "bounds": [
+      1224,
+      686,
+      1457,
+      982
+    ],
+    "anchor": [
+      1360,
+      982
+    ],
+    "scale": 0.07094594594594594,
+    "mirror": false
+  },
+  "tool": "built-in image_gen",
+  "prompt": "Use case: stylized-concept. Asset type: production design sheet for a warm pixel-art cafe game. Completely REDESIGN the dining station as one coherent physical object plus seated people. Reference image 1 supplies ONLY the character identity, chunky proportions, warm brown outlines and pixel cluster style; do not copy its seated anatomy. Reference image 2 shows the OLD FAILED layout; it is a problem reference, not a design to preserve. New furniture: a round honey-walnut table with a clearly visible WOODEN oval top, a thin light cream inset/placemat, a slim central support and modest feet; NO hanging tablecloth, NO gingham curtain skirt, NO massive pedestal. Two normal-height walnut chairs with olive-green cushions and simple curved backs. Chair legs, people's lower legs and the table support must be convincingly proportional, not stunted or flattened. Camera is the same moderately elevated front 3/4 view throughout. Head-to-body ratio stays the game's rounded 2.3-head chibi style. Both people sit upright, their pelvis visibly supported by the center of the cushion, thighs horizontal, knees bent, short vertical shins, shoes at the same floor as the chair feet; forearms rest comfortably on the VISIBLE UPPER oval surface, palms inside the rim, shoulders relaxed. Table surface should be about an elbow height ABOVE the seated hips. Show clear table rim, knees underneath, and chair/body contact. Left sitter is the warm dark-brown skin woman with high dark bun and cream headband, cream blouse and muted golden skirt, brown shoes. Right sitter is the golden-orange bob-haired pale person, mustard sweater, cream scarf, slate trousers, brown shoes. OUTPUT SIX separated cells in a strict invisible 3-column by 2-row grid, truly transparent alpha, large clear gutters, no text or shadows. Cell top-left: complete assembled two-person dining station, both seated naturally, empty top except two separate cups. Cell top-middle: exact same empty table alone, no cups. Cell top-right: exact same empty left chair facing right. Cell bottom-left: complete left person sitting on the matching chair, facing RIGHT, arms at the same tabletop height but NO table or cups. Cell bottom-middle: complete right person sitting on matching chair, facing LEFT, same height arms but NO table or cups. Cell bottom-right: matching empty right chair facing LEFT. Every cell fully contained, no clipping, no floor/background, no marks or labels, no detached parts. All furniture and people use matching scale and shape. Crisp warm pixel illustration, distinct readable clusters and limited material shades, not blurry painted texture."
+}

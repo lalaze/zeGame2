@@ -6,6 +6,7 @@ import { unlockRegion } from '../game/regions';
 import { createInitialState, serialize } from '../game/state';
 import { setLocale } from '../i18n';
 import { Panel } from './panel';
+import { decorIcon } from '../render/decor-art';
 
 vi.mock('../render/sprites', () => ({
   ingredientIcon: () => document.createElement('canvas'),
@@ -14,7 +15,7 @@ vi.mock('../render/sprites', () => ({
   catFrames: () => ({ idle: document.createElement('canvas') }),
   toDataURL: () => 'data:image/png;base64,',
 }));
-vi.mock('../render/decor-art', () => ({ decorIcon: () => document.createElement('canvas') }));
+vi.mock('../render/decor-art', () => ({ decorIcon: vi.fn(() => document.createElement('canvas')) }));
 vi.mock('../render/furniture-art', () => ({ furnitureIcon: () => document.createElement('canvas') }));
 
 const tabs = ['menu', 'pantry', 'upgrades', 'decor', 'pets', 'promotion'] as const;
@@ -648,11 +649,15 @@ describe('catalog-relative positions across responsive scroll owners', () => {
 
 
 describe('renovation style switching', () => {
-  it('buys and switches textiles and centerpieces in the existing shop', () => {
+  it('buys and switches table mats and refreshes companion ornament previews', () => {
     const state = createInitialState(0); state.coins = 1000;
     const { panel } = panelFor(state);
     panel.showTab('decor'); button('[data-decor-category="renovation"]').click();
+    expect(document.querySelector('.decor-slot h3')!.textContent).toContain('Table mats');
+    vi.mocked(decorIcon).mockClear();
     for (const id of ['tablecloth_blue', 'centerpiece_succulent', 'curtain_blue']) button(`[data-decor="${id}"]`).click();
+    expect(decorIcon).toHaveBeenCalledWith('centerpiece_none','tablecloth_blue','centerpiece_succulent');
+    expect(decorIcon).toHaveBeenCalledWith('tablecloth_rose','tablecloth_blue','centerpiece_succulent');
     expect(state.decor.equipped).toMatchObject({ tablecloth: 'tablecloth_blue', centerpiece: 'centerpiece_succulent', curtain: 'curtain_blue' });
     expect(state.coins).toBe(610);
     button('[data-decor="tablecloth_classic"]').click();

@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { startupLoading } from '../src/ui/startup-loading';
 
-const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+const html = readFileSync('index.html', 'utf8');
 function setup(chinese = true) {
   const root = document.getElementById('loader')!;
   const retry = vi.fn();
@@ -17,13 +17,14 @@ function setup(chinese = true) {
   };
 }
 beforeEach(() => {
-  document.body.innerHTML = html.slice(html.indexOf('<body>') + 6, html.indexOf('<div id="app">'));
+  const page = new DOMParser().parseFromString(html, 'text/html');
+  document.body.replaceChildren(document.importNode(page.getElementById('loader')!, true));
 });
 describe('first-entry resource progress', () => {
   it('exists before JavaScript and does not invent a percentage', () => {
     const bar = document.querySelector('progress')!;
     expect(bar.hasAttribute('value')).toBe(false);
-    expect(document.querySelector('[data-loading-status]')?.textContent).toContain('Loading');
+    expect(document.querySelector('[data-loading-status]')?.textContent).toContain('Preparing');
     const { root } = setup();
     expect(root.querySelectorAll('progress')).toHaveLength(1);
     expect(root.getAttribute('aria-busy')).toBe('true');
@@ -33,15 +34,21 @@ describe('first-entry resource progress', () => {
     loading.progress(3, 12);
     expect(bar.max).toBe(12);
     expect(bar.value).toBe(3);
-    expect(count.textContent).toBe('25% · 3 / 12');
+    expect(count.textContent).toBe('已加载 3 / 12 项素材');
+    expect(root.querySelector('[data-loading-percent]')?.textContent).toBe('25%');
+    expect(root.dataset.loadingStage).toBe('assets');
     expect(bar.getAttribute('aria-valuetext')).toContain('25%');
     loading.progress(12, 12);
-    expect(status.textContent).toContain('正在准备场景');
+    expect(status.textContent).toContain('正在布置店铺');
     expect(root.getAttribute('aria-busy')).toBe('true');
+    expect(root.dataset.loadingStage).toBe('scene');
+    expect(root.querySelector('[data-loading-step=scene]')?.getAttribute('aria-current')).toBe('step');
     expect(document.body.classList.contains('ready')).toBe(false);
     loading.complete();
     expect(status.textContent).toBe('咖啡馆已就绪');
     expect(root.getAttribute('aria-busy')).toBe('false');
+    expect(root.dataset.loadingStage).toBe('ready');
+    expect(root.querySelectorAll('.loader-stages .done')).toHaveLength(3);
   });
   it('ignores unknown totals and clamps out-of-range completed counts', () => {
     const { loading, bar, count } = setup(false);
@@ -51,7 +58,7 @@ describe('first-entry resource progress', () => {
     loading.progress(-1, 12);
     expect(bar.value).toBe(0);
     loading.progress(15, 12);
-    expect(count.textContent).toBe('100% · 12 / 12');
+    expect(count.textContent).toBe('12 / 12 assets loaded');
   });
   it('keeps failure visible and allows only one retry activation', () => {
     const { loading, bar, count, status, button, retry, root } = setup(false);

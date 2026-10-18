@@ -16,6 +16,7 @@ export interface DecorDef {
 }
 
 // Free items are owned from the start. Ids double as translation keys (decor.<id>).
+// The persisted tablecloth IDs now select tabletop mats on the new dining set.
 export const DECOR: readonly DecorDef[] = [
   { id: 'tablecloth_classic', slot: 'tablecloth', cost: 0, comfort: 0 },
   { id: 'tablecloth_mint', slot: 'tablecloth', cost: 0, comfort: 0 },

@@ -1,3 +1,5 @@
+import { SEAT_OFFSET } from '../game/layout';
+import diningTable from './dining-table-manifest.json';
 import { registerFineSpriteArt } from './fine-sprite-art';
 
 type Identity = 'owner' | 'guest';
@@ -7,11 +9,13 @@ type Spec = { box: Box; anchor: Point; scale: number; foreground?: readonly Poin
 const D = 3;
 // The tabletop plane sits at the guests' forearms, below their shoulders.
 // Keep its painted height and cup/vase contact on the same calibration.
-export const SEATING_LAYOUT = Object.freeze({ seatX: 25, floorY: 1, surfaceY: -15, tableWidth: 40, tableHeight: 20 });
+export const SEATING_LAYOUT = Object.freeze({ seatX: SEAT_OFFSET, floorY: 1, surfaceY: -15, tableWidth: 34, tableHeight: 24, tableFloorY: 1.5 });
 let atlas: HTMLImageElement | null = null, petAtlas: HTMLImageElement | null = null;
-let idleAtlas: HTMLImageElement | null = null;
+let idleAtlas: HTMLImageElement | null = null, tableAtlas: HTMLImageElement | null = null;
 let pending: Promise<void> | null = null, epoch = 0;
 const cache = new Map<string, HTMLCanvasElement>();
+const diningTables = new WeakSet<HTMLCanvasElement>();
+export function isDiningTableSprite(frame:HTMLCanvasElement):boolean{return diningTables.has(frame);}
 const metadata = new WeakMap<HTMLCanvasElement, { foreground: HTMLCanvasElement; floor: Point; hip: Point; petContact?: Point; embeddedChair?: boolean }>();
 const normal: Record<Identity, Spec> = {
   owner:{box:[225,10,839,855],anchor:{x:418,y:855},scale:.0445,
@@ -34,15 +38,17 @@ const pets: Record<Identity, readonly Spec[]> = {
   ]
 };
 function canvas(w:number,h:number) { const c=document.createElement('canvas'); c.width=w;c.height=h;return c; }
-export function clearSeatingEnsemble():void {epoch++;atlas=null;petAtlas=null;idleAtlas=null;pending=null;cache.clear();}
+export function clearSeatingEnsemble():void {epoch++;atlas=null;petAtlas=null;idleAtlas=null;tableAtlas=null;pending=null;cache.clear();}
 export function preloadSeatingEnsemble():Promise<void> {
-  if(atlas&&petAtlas&&idleAtlas)return Promise.resolve();
+  if(atlas&&petAtlas&&idleAtlas&&tableAtlas)return Promise.resolve();
   if(pending)return pending;
   const generation=epoch;
-  pending=Promise.all(['ensemble.png','petting.png','idle-v4.png'].map(async name=>{
-    const image=new Image();image.src=import.meta.env.BASE_URL+'art/generated/cozy-seating-v3/'+name;
+  const files=['ensemble.png','petting.png','idle-v4.png'].map(name=>'art/generated/cozy-seating-v3/'+name);
+  files.push(diningTable.file);
+  pending=Promise.all(files.map(async file=>{
+    const image=new Image();image.src=import.meta.env.BASE_URL+file;
     await image.decode();return image;
-  })).then(([a,p,i])=>{if(generation===epoch){atlas=a;petAtlas=p;idleAtlas=i;}}).catch(error=>{if(generation===epoch)pending=null;throw error;});
+  })).then(([a,p,i,table])=>{if(generation===epoch){atlas=a;petAtlas=p;idleAtlas=i;tableAtlas=table;}}).catch(error=>{if(generation===epoch)pending=null;throw error;});
   return pending;
 }
 function make(spec:Spec,image:HTMLImageElement,mirror:boolean,w=34,h=42):HTMLCanvasElement {
@@ -74,17 +80,22 @@ export function seatingUnit(identity:Identity,mirror=false,petFrame?:number):HTM
 }
 export function seatingGeometry(frame:HTMLCanvasElement){return metadata.get(frame);}
 export function seatingFurniture(part:'table'|'chair',mirror=false):HTMLCanvasElement|undefined {
-  if(!atlas)return;
+  if(!atlas||!tableAtlas)return;
   const key=part+':'+mirror;if(cache.has(key))return cache.get(key);
   if(part==='chair'){
-    const frame=make({box:[805,77,1153,532],anchor:{x:966,y:532},scale:.054},atlas,mirror);
+    const chair=diningTable.chair;
+    const frame=make({box:chair.bounds as [number,number,number,number],anchor:{x:chair.anchor[0],y:chair.anchor[1]},scale:chair.scale},tableAtlas,mirror!==chair.mirror);
     cache.set(key,frame);return frame;
   }
   const w=SEATING_LAYOUT.tableWidth,h=SEATING_LAYOUT.tableHeight;
   const frame=canvas(w,h),art=canvas(w*D,h*D),ctx=art.getContext('2d')!;
-  ctx.imageSmoothingEnabled=false;ctx.drawImage(atlas,88,71,608,457,3,3,w*D-6,h*D-6);
+  // One scale preserves the round top, cloth drape and pedestal proportions.
+  // Complete authored furniture uses one uniform scale and one floor baseline.
+  const [x,y,right,bottom]=diningTable.bounds,sw=right-x,sh=bottom-y;
+  const scale=Math.min((w*D-6)/sw,(h*D-6)/sh),dw=sw*scale,dh=sh*scale;
+  ctx.imageSmoothingEnabled=false;ctx.drawImage(tableAtlas,x,y,sw,sh,(w*D-dw)/2,h*D-3-dh,dw,dh);
   const pixels=ctx.getImageData(0,0,art.width,art.height);for(let n=3;n<pixels.data.length;n+=4)if(pixels.data[n]<100)pixels.data[n]=0;ctx.putImageData(pixels,0,0);
-  frame.getContext('2d')!.drawImage(art,0,0,w,h);registerFineSpriteArt(frame,art,D);cache.set(key,frame);return frame;
+  frame.getContext('2d')!.drawImage(art,0,0,w,h);registerFineSpriteArt(frame,art,D);diningTables.add(frame);cache.set(key,frame);return frame;
 }
 
 /** Register newly authored cast units with the shared scene chair/foreground contract. */

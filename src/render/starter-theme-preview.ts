@@ -1,13 +1,13 @@
 import { applyTheme } from '../game/decor';
 import { createInitialState } from '../game/state';
 import { WINDOWS } from '../game/layout';
-import { RoomPainter, TABLE, CHAIR_LEFT, CHAIR_RIGHT } from './room-art';
+import { RoomPainter, TABLE, TABLE_TOP_DY, CHAIR_LEFT, CHAIR_RIGHT } from './room-art';
 import { lightingAt } from './lighting';
 import { SEATING_LAYOUT, seatingFurniture } from './cozy-seating-art';
 import { cozyCafeSprite } from './cozy-cafe-art';
 import { extensionTable } from './extension-table-art';
 import { worldSpriteArt } from './world-art-grid';
-import { paintCenterpiece } from './table-centerpiece-art';
+import { centerpieceSprite } from './table-centerpiece-art';
 
 /** A miniature room built with the same surfaces, windows and furniture as play. */
 export function starterThemePreview(themeId: string): HTMLCanvasElement {
@@ -30,17 +30,17 @@ export function starterThemePreview(themeId: string): HTMLCanvasElement {
   painter.drawCounter(state, decor.counter, 0, []);
   const ensembleTable = seatingFurniture('table');
   const table = extensionTable(ensembleTable ?? cozyCafeSprite('table') ?? TABLE(), 'main', decor.tablecloth);
-  const centerpieceY = ensembleTable ? 199 + SEATING_LAYOUT.surfaceY - 7 : 170;
+  const centerpieceY = 199 + (ensembleTable ? SEATING_LAYOUT.surfaceY : -TABLE_TOP_DY);
   const draw = (sprite: HTMLCanvasElement, x: number, foot: number) => {
     const art = worldSpriteArt(sprite);
     ctx.drawImage(art.canvas, x, foot - sprite.height, sprite.width, sprite.height);
   };
   for (const x of [69, 153, 237]) {
-    draw(seatingFurniture('chair') ?? cozyCafeSprite('chair') ?? CHAIR_RIGHT(), x - 38, 201);
-    draw(seatingFurniture('chair', true) ?? cozyCafeSprite('chair', true) ?? CHAIR_LEFT(), x + 6, 201);
-    draw(table, x - table.width / 2, 200);
-    ctx.save(); ctx.translate(x - 2.5, centerpieceY); ctx.scale(.5, .5);
-    paintCenterpiece(ctx, decor.centerpiece); ctx.restore();
+    draw(seatingFurniture('chair') ?? cozyCafeSprite('chair') ?? CHAIR_RIGHT(), x - SEATING_LAYOUT.seatX - 13, 201);
+    draw(seatingFurniture('chair', true) ?? cozyCafeSprite('chair', true) ?? CHAIR_LEFT(), x + SEATING_LAYOUT.seatX - 21, 201);
+    draw(table, x - table.width / 2, 200 + (ensembleTable ? SEATING_LAYOUT.tableFloorY : 0));
+    const ornament=centerpieceSprite(decor.centerpiece);
+    if(ornament)draw(ornament,x-ornament.width/2,centerpieceY);
   }
   return canvas;
 }

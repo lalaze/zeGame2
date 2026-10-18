@@ -3,7 +3,7 @@ import { routeFloorSegment, segmentCrossesObstacle, type FloorObstacle, type Flo
 import { MAX_QUEUE } from './data';
 import { openShop } from './day';
 import { canPlace } from './furniture';
-import { COUNTER, COUNTER_GATE, FLOOR_Y, MAIN_CUPBOARDS, MAX_SCENE_H, MIN_SCENE_H, areaAtPoint, areaOrigin, doorPlantSpots, floorY, passageY, seatApproach, seatSpot, setSceneHeight, tablePos } from './layout';
+import { COUNTER, COUNTER_GATE, FLOOR_Y, MAIN_CUPBOARDS, MAX_SCENE_H, MIN_SCENE_H, areaAtPoint, areaOrigin, doorPlantSpots, floorY, passageY, seatApproach, seatSpot, setSceneHeight, tableFootprint, tablePos } from './layout';
 import { REGIONS, activeTableIndices, areaConnections, unlockRegion } from './regions';
 import { SERVER_SPEED, Sim, WALK_SPEED, type Walker } from './sim';
 import { createInitialState } from './state';
@@ -160,17 +160,17 @@ function assertWalkersClear(sim: Sim, before: Map<Walker, FloorPoint>, tableIndi
     const isCustomer = 'seat' in w;
     if (Math.hypot(w.x - previous.x, w.y - previous.y) > (isCustomer ? WALK_SPEED : SERVER_SPEED) * dt + 0.0001) throw new Error('Walker exceeded normal speed');
     for (const box of fixed) if (segmentCrossesObstacle(previous, w, box)) throw new Error(`Fixture collision: ${JSON.stringify({ previous, now: { x: w.x, y: w.y }, box })}`);
+    // Entering/leaving a seat is the sole intentional furniture overlap; ordinary
+    // travel must avoid the full chairs, including where adjacent bays meet.
+    const chairStep = tableIndices.some(table => [0, 1].some(side => {
+      const seat = seatSpot(table, side as 0 | 1), apron = seatApproach(table, side as 0 | 1);
+      return Math.abs(previous.x - seat.x) < .001 && Math.abs(w.x - seat.x) < .001 &&
+        previous.y >= Math.min(seat.y, apron.y) - .001 && previous.y <= Math.max(seat.y, apron.y) + .001 &&
+        w.y >= Math.min(seat.y, apron.y) - .001 && w.y <= Math.max(seat.y, apron.y) + .001;
+    }));
     for (const table of tableIndices) {
-      const p = tablePos(table);
-      const box = { x: p.x - 23, y: p.y - 10, w: 46, h: 13 };
-      // Walking vertically between a chair and its apron is the sole intentional
-      // overlap. Standing diners occupy their chair's reserved footprint.
-      const chairStep = [0, 1].some((side) => {
-        const seat = seatSpot(table, side as 0 | 1), apron = seatApproach(table, side as 0 | 1);
-        return Math.abs(previous.x - seat.x) < 0.001 && Math.abs(w.x - seat.x) < 0.001 &&
-          previous.y >= seat.y - 0.001 && previous.y <= apron.y + 0.001 && w.y >= seat.y - 0.001 && w.y <= apron.y + 0.001;
-      });
-      if (!chairStep && segmentCrossesObstacle(previous, w, box)) throw new Error(`Table collision: ${JSON.stringify({ previous, now: { x: w.x, y: w.y }, phase: w.phase, table })}`);
+      const boxes = [tableFootprint(table)];
+      if (!chairStep && boxes.some(box => segmentCrossesObstacle(previous, w, box))) throw new Error(`Table/chair collision: ${JSON.stringify({ previous, now: { x: w.x, y: w.y }, phase: w.phase, table })}`);
     }
     const a = areaAtPoint(previous.x, previous.y), b = areaAtPoint(w.x, w.y);
     if (a && b && a !== b) {
@@ -184,6 +184,30 @@ function assertWalkersClear(sim: Sim, before: Map<Walker, FloorPoint>, tableIndi
 }
 
 describe('simulation obstacle-aware routes', () => {
+  it('walks around the rendered chairs rather than just the old tabletop footprint', () => {
+    const state = fullShop(2), sim = new Sim(seeded(77));
+    state.phase = 'prep'; sim.update(state, 0);
+    const walker = sim.servers[0], table = tablePos(0);
+    const from = { x: table.x + 38, y: table.y + 36 };
+    const to = { x: from.x, y: table.y - 24 };
+    Object.assign(walker, from, { phase: 'returning' });
+    const internal = sim as unknown as { walk(w: Walker, ...p: FloorPoint[]): void };
+    internal.walk(walker, to);
+    expect(walker.pathBlocked).toBe(false);
+    // The current chair artwork reaches 36px to either side of the table;
+    // retain the same 8px body clearance used for other floor furniture.
+    expectClear(from, [{ x: walker.tx, y: walker.ty }, ...walker.via],
+      [{ x: table.x - 36, y: table.y - 10, w: 72, h: 13 }], undefined, 8);
+  });
+
+  it('aligns arrival and departure with the authored chair floor contacts', () => {
+    for (const table of [0, 1, 8, 12, 16]) {
+      const p = tablePos(table);
+      expect(seatSpot(table, 0)).toEqual({ x: p.x - 20, y: p.y + 1 });
+      expect(seatSpot(table, 1)).toEqual({ x: p.x + 20, y: p.y + 1 });
+    }
+  });
+
   it('rejects floor placement on a walker or their clearance margin until they move away', () => {
     const sim = new Sim(seeded(1));
     sim.update(fullShop(2), 0);
@@ -292,8 +316,8 @@ describe('simulation obstacle-aware routes', () => {
       expect(segmentCrossesObstacle(previous, walker, plant)).toBe(false);
     }
     expect({ x: walker.x, y: walker.y }).toEqual({ x: 195, y: 210 });
-    Object.assign(walker, { x: 10, y: 174, phase: 'returning' });
-    internal.walk(walker, { x: 140, y: 174 });
+    Object.assign(walker, { x: 10, y: 210, phase: 'returning' });
+    internal.walk(walker, { x: 10, y: 150 });
     state.upgrades.tables = 1;
     sim.update(state, 0);
     expect(walker.pathBlocked).toBe(false);
@@ -302,7 +326,7 @@ describe('simulation obstacle-aware routes', () => {
       sim.update(state, 0.05);
       assertWalkersClear(sim, before, activeTableIndices(state), 0.05);
     }
-    expect({ x: walker.x, y: walker.y }).toEqual({ x: 140, y: 174 });
+    expect({ x: walker.x, y: walker.y }).toEqual({ x: 10, y: 150 });
   });
 
   it('keeps partial walking paths valid after growing and shrinking the room', () => {

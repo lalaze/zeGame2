@@ -42,7 +42,7 @@ describe('physical café floor plan', () => {
     const state = expandedState();
     expect(canPlace(state, 'plant_fern', 50, 7, 2)).toBe(false);
     expect(canPlace(state, 'art_landscape', 58, 0, 2)).toBe(false); // Reading room rear doorway.
-    expect(canPlace(state, 'plant_fern', 51, 9, 2)).toBe(true);
+    expect(canPlace(state, 'plant_fern', 53, 9, 2)).toBe(true);
     state.decor.placed.push({ id: 'plant_fern', col: 49, row: 7 });
     const restored = deserialize(serialize(state), 0);
     expect(restored.decor.placed.some((p) => p.id === 'plant_fern')).toBe(false);

@@ -114,8 +114,9 @@ describe('living café cats', () => {
     if(change==='moved') {expect(a.targetKind).toBe('bed');expect(a.x).toBe(56);}
   });
   it('keeps all three residents visible in a densely legally furnished main room', () => {
-    const s=setup();adoptCat(s,'tuxedo');adoptCat(s,'calico');s.upgrades.tables=6;
-    for(let row=0;row<19;row++) for(let col=1;col<39;col++) if(canPlace(s,'plant_snake',col,row,8)) s.decor.placed.push({id:'plant_snake',col,row});
+    // Leave a dining bay free for dense decoration; eight full chair footprints fill it.
+    const s=setup();adoptCat(s,'tuxedo');adoptCat(s,'calico');s.upgrades.tables=2;
+    for(let row=0;row<19;row++) for(let col=1;col<39;col++) if(canPlace(s,'plant_snake',col,row,4)) s.decor.placed.push({id:'plant_snake',col,row});
     expect(s.decor.placed.filter((p)=>p.id==='plant_snake').length).toBeGreaterThan(20);
     const cats=new LivingCats(seeded());cats.update(s,0);expect(cats.actors.size).toBe(3);
     expect(new Set([...cats.actors.values()].map((a)=>a.x+','+a.y)).size).toBe(3);

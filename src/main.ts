@@ -1,3 +1,4 @@
+import { showFirstOpening } from './ui/first-opening';
 import { RoomViewport } from './ui/room-viewport';
 import '@fontsource/pixelify-sans/400.css';
 import '@fontsource/pixelify-sans/600.css';
@@ -10,7 +11,7 @@ import { showLivingCat } from './ui/living-cats';
 import type { CatId } from './game/pets';
 import { SPEEDS } from './game/data';
 import { formatOpenTime, openShop, type DayReport } from './game/day';
-import { expectedCustomers, menuItems, tipMultiplier } from './game/economy';
+import { expectedCustomers, menuItems, tipMultiplier, unlockedItems } from './game/economy';
 import { canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
 import { formatMoney, formatTransactionMoney } from './game/format';
 import { MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
@@ -288,13 +289,18 @@ function revealAllTools(): void {
   $('app').classList.remove('guided-focus');
 }
 const guide = new FirstServiceGuide(() => state, storage, {
-  pantry: () => showPanelTab('pantry'),
   prepare: () => prepareDay(),
   close: () => closeDay(),
   status: () => operationBtn.click(),
   allTools: revealAllTools,
 });
 layout.before(guide.element);
+// Wrapped receipts reserve their actual height above the persistent view controls.
+const toastElement = $('toast');
+new ResizeObserver(() => {
+  const height = toastElement.getBoundingClientRect().height;
+  document.body.style.setProperty('--toast-clearance', `${height > 0 ? height + 12 : 0}px`);
+}).observe(toastElement);
 function updateGuide(): void {
   guide.update();
   if (introMode !== guide.simplify) {
@@ -320,10 +326,10 @@ const arrangeStore = $<HTMLButtonElement>('arrange-store');
 const arrangeDone = $<HTMLButtonElement>('arrange-done');
 const arrangeFocus = new ArrangeFocus(panelRoot, arrangeDone);
 const sceneWrap = document.querySelector<HTMLElement>('.scene-wrap')!;
-stage.append($('day-hud'), $('cafe-style-btn'), $('open-btn'), arrangeBar, $('area-nav'));
+stage.append($('day-hud'), $('cafe-style-btn'), $('open-btn'), arrangeBar);
 let arrangementHadDrawer = false;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const regionsUI = new RegionsUI($('area-nav'), $('area-edges'), $('region-card'), () => state, (area) => {
+const regionsUI = new RegionsUI($('area-edges'), $('region-card'), () => state, (area) => {
   roomViewport?.reset();
   scene.moveToArea(area, reducedMotion.matches);
   sceneWrap.classList.toggle('has-front-passage', !!adjacentArea(area, 'down'));
@@ -571,10 +577,13 @@ const menuEmpty = () => menuItems(state).length === 0;
 /** The only way to open: prepare today's menu, then confirm. */
 function prepareDay(): void {
   if (state.phase !== 'prep') return;
-  showPrepare(state, startDay, () => {
-    saveGame();
-    panel.refresh();
-  });
+  const changed = () => { saveGame(); panel.refresh(); };
+  const standard = () => showPrepare(state, startDay, changed);
+  const step = guide.openingStep;
+  if (step && !state.kitchen && unlockedItems(state).every(item => item.id === 'espresso')) {
+    setPanelCollapsed(true, false);
+    showFirstOpening(state, startDay, changed, { step, confirmStock: () => guide.confirmStock(), advanced: standard });
+  } else standard();
 }
 openBtn.addEventListener('click', prepareDay);
 
@@ -679,10 +688,8 @@ function startOnboarding(then?: () => void): void {
       applyProfile(result);
       for (let i = 0; i < 24; i++) scene.sparkle(10 + Math.random() * 172, 20 + Math.random() * 90);
       updateDayHud();
-      toast(t('ob.opened', { cafe: result.profile.cafeName }));
-      // Day 1 opens like every other day: from preparing the menu.
-      if (!guide.simplify) prepareDay();
-      else updateGuide();
+      // Continue directly into preparation; only the final confirmation opens the shop.
+      prepareDay();
       then?.();
     },
   });
@@ -961,8 +968,9 @@ const cafe = new CafeGame(canvas, scene, sim, () => state, {
   loadingProgress: (loaded, total) => loading.progress(loaded, total),
 });
 roomViewport = new RoomViewport(canvas, stage,
-  () => startupComplete && !scene.panning && !scene.overview && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused),
-  () => [scene.area, scene.overview, arrange?.mode, arrange?.mode === 'place' ? arrange.id : '', state.phase].join(':'));
+  () => startupComplete && !scene.panning && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused),
+  () => [scene.area, scene.overview, arrange?.mode, arrange?.mode === 'place' ? arrange.id : '', state.phase].join(':'),
+  { isActive: () => scene.overview, toggle: () => regionsUI.toggleOverview() });
 fitCanvas();
 panel.update();
 regionsUI.select('main');

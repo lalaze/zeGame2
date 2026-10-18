@@ -16,7 +16,7 @@ describe('startup loading feedback', () => {
     expect(root.querySelector('progress')!.value).toBe(6);
     expect(root.textContent).toContain('6 / 100');
     loading.progress(100, 100);
-    expect(root.textContent).toContain(chinese ? '准备场景' : 'Preparing the scene');
+    expect(root.textContent).toContain(chinese ? '布置店铺' : 'Preparing the scene');
     loading.fail(new Error('Image failed: customer-12'));
     expect(root.getAttribute('aria-busy')).toBe('false');
     expect(root.querySelector('.loader-content .loader-detail')).not.toBeNull();

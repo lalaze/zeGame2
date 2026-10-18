@@ -1,0 +1,26 @@
+// Compile complete authored chair-and-person units. No body-part transforms.
+import fs from 'node:fs';
+import { decodePng, encodePng, oklab } from './pixel-conform.mjs';
+import { resampleRgba } from '../src/render/pixel-resample.ts';
+const root='assets/generated/cozy-dining-v3',out='public/art/generated/cozy-dining-v3';
+const handContacts=JSON.parse(fs.readFileSync(`${root}/contacts.json`));
+const groups=[[27,0,17],[1,2,3],[4,5,6],[7,8,9],[10,11,12],[13,14,15],[16,18,19],[20,21,22],[23,24,25],[26,28,29]];
+const palette=JSON.parse(fs.readFileSync('docs/art-grid/palette.json')).colors.map(c=>[1,3,5].map(i=>parseInt(c.hex.slice(i,i+2),16))),labs=palette.map(c=>oklab(...c)),cache=new Map();
+function snap(p){for(let n=0;n<p.length;n+=4){if(p[n+3]<128){p.fill(0,n,n+4);continue}p[n+3]=255;const key=p[n]*65536+p[n+1]*256+p[n+2];if(!cache.has(key)){const lab=oklab(p[n],p[n+1],p[n+2]);let best=0,d=Infinity;labs.forEach((v,i)=>{const e=v.reduce((a,c,k)=>a+(c-lab[k])**2,0);if(e<d){best=i;d=e}});cache.set(key,palette[best])}p.set(cache.get(key),n)}return p}
+// Trace the actual outer palm in the complete painting, not a guessed wrist.
+function palm(pixels,w,h,pet){
+  const top=Math.floor(h*(pet?.60:.48)),bottom=Math.floor(h*(pet?.89:.68));let right=0;
+  for(let y=top;y<=bottom;y++)for(let x=Math.floor(w*.55);x<w;x++)if(pixels[(y*w+x)*4+3])right=Math.max(right,x);
+  const x=Math.max(0,right-2),rows=[];
+  for(let y=top;y<=bottom;y++)if(pixels[(y*w+x)*4+3])rows.push(y);
+  if(!rows.length)throw Error('Missing painted palm');
+  return[x,rows[Math.floor(rows.length/2)]];
+}
+function seams(hist){const cuts=[0];for(let i=1;i<3;i++){let start=Math.round(hist.length*(i-.25)/3),end=Math.round(hist.length*(i+.25)/3),min=Infinity;for(let k=start;k<end;k++)min=Math.min(min,hist[k]);let best=[],run=[];for(let k=start;k<=end;k++){if(k<end&&hist[k]===min)run.push(k);else{if(run.length>best.length)best=run;run=[]}}cuts.push(best[Math.floor(best.length/2)])}return[...cuts,hist.length]}
+function cut(image,box){const[l,t,r,b]=box,w=r-l,h=b-t,pixels=new Uint8ClampedArray(w*h*4);for(let y=0;y<h;y++)pixels.set(image.pixels.subarray(((y+t)*image.width+l)*4,((y+t)*image.width+r)*4),y*w*4);return{width:w,height:h,pixels,sourceBox:box}}
+function extract(image){const{width,height,pixels}=image,cols=new Uint32Array(width);for(let n=0;n<width*height;n++)if(pixels[n*4+3]>=128)cols[n%width]++;const xs=seams(cols),result=Array(9);for(let col=0;col<3;col++){const rows=new Uint32Array(height);for(let y=0;y<height;y++)for(let x=xs[col];x<xs[col+1];x++)if(pixels[(y*width+x)*4+3]>=128)rows[y]++;const ys=seams(rows);for(let row=0;row<3;row++){const source=cut(image,[xs[col],ys[row],xs[col+1],ys[row+1]]),seen=new Uint8Array(source.width*source.height);let largest=[];for(let at=0;at<seen.length;at++){if(seen[at]||source.pixels[at*4+3]<128)continue;const island=[at];seen[at]=1;for(let i=0;i<island.length;i++){const n=island[i],x=n%source.width,y=Math.floor(n/source.width);for(const v of[x?n-1:-1,x<source.width-1?n+1:-1,y?n-source.width:-1,y<source.height-1?n+source.width:-1])if(v>=0&&!seen[v]&&source.pixels[v*4+3]>=128){seen[v]=1;island.push(v)}}if(island.length>largest.length)largest=island}if(largest.length<1000)throw Error('Missing seated unit');let l=source.width,t=source.height,r=0,b=0;for(const n of largest){const x=n%source.width,y=Math.floor(n/source.width);l=Math.min(l,x);r=Math.max(r,x+1);t=Math.min(t,y);b=Math.max(b,y+1)}const clean=new Uint8ClampedArray(source.pixels.length);for(const n of largest)clean.set(source.pixels.subarray(n*4,n*4+4),n*4);source.pixels=clean;const p=cut(source,[l,t,r,b]);p.sourceBox=[xs[col]+l,ys[row]+t,xs[col]+r,ys[row]+b];result[row*3+col]=p}}return result}
+fs.mkdirSync(out,{recursive:true});
+const manifest={version:3,density:2,width:40,height:44,embeddedChair:true,characters:[]};
+for(const[group,ids]of groups.entries()){const file=`${root}/sources/group-${group}.png`;if(!fs.existsSync(file)&&process.argv.includes('--partial'))continue;const cells=extract(decodePng(file));for(const[row,id]of ids.entries()){const poses=cells.slice(row*3,row*3+3),scale=Math.min(72/poses[0].height,68/Math.max(...poses.map(p=>p.width))),atlas={width:240,height:88,pixels:new Uint8ClampedArray(240*88*4)},frames=[];for(const[index,p]of poses.entries()){const w=Math.round(p.width*scale),h=Math.round(p.height*scale),x=Math.round(36-w*.4),y=84-h;if(x<1||y<1||x+w>79||y+h>87)throw Error(`Clipped unit ${id}/${index}`);const pixels=snap(resampleRgba(p.pixels,p.width,p.height,w,h)),hand=palm(pixels,w,h,index>0);for(let r=0;r<h;r++)atlas.pixels.set(pixels.subarray(r*w*4,(r+1)*w*4),((r+y)*atlas.width+index*80+x)*4);frames.push({box:[index*80,0,(index+1)*80,88],sourceBox:p.sourceBox,top:y,neck:[Math.round(x+w*.55),Math.round(y+h*.46)],foot:[36,84],hip:[36,64],hand:handContacts[id]?.[index]??[x+hand[0],y+hand[1]]})}const file=`customer-${id}.png`;encodePng(`${out}/${file}`,atlas);manifest.characters.push({id,file,source:`sources/group-${group}.png`,scale,frames})}}
+manifest.characters.sort((a,b)=>a.id-b.id);fs.writeFileSync(`${out}/manifest.json`,JSON.stringify(manifest,null,2)+'\n');
+console.log(`Compiled ${manifest.characters.length} seated identities (${manifest.characters.length*3} complete chair/body poses)`);

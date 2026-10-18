@@ -1,0 +1,110 @@
+{
+  "tool": "built-in image_gen",
+  "version": 3,
+  "design": {
+    "source": "public/art/generated/cozy-dining-v3/design.png",
+    "prompt": "design-prompt.txt"
+  },
+  "groups": [
+    {
+      "ids": [
+        27,
+        0,
+        17
+      ],
+      "source": "sources/group-0.png",
+      "prompt": "prompt-0.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14da0-f4e8-72a3-a6a8-0210cf926ed9/exec-e4d8c6db-84b5-4c41-88d1-f82fe8c5ec8f.png"
+    },
+    {
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "source": "sources/group-1.png",
+      "prompt": "prompt-1.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14da0-f4e8-72a3-a6a8-0210cf926ed9/exec-8d16eb7c-ce6c-4326-81d0-631766157a9d.png"
+    },
+    {
+      "ids": [
+        4,
+        5,
+        6
+      ],
+      "source": "sources/group-2.png",
+      "prompt": "prompt-2.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14da0-f4e8-72a3-a6a8-0210cf926ed9/exec-ac8f53e2-3452-4b01-8ea9-625ac24c578e.png"
+    },
+    {
+      "ids": [
+        7,
+        8,
+        9
+      ],
+      "source": "sources/group-3.png",
+      "prompt": "prompt-3.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14da0-f4e8-72a3-a6a8-0210cf926ed9/exec-1c5be863-42a4-4ae4-a0a4-f78ff69c0f69.png"
+    },
+    {
+      "ids": [
+        10,
+        11,
+        12
+      ],
+      "source": "sources/group-4.png",
+      "prompt": "prompt-4.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14da0-f4e8-72a3-a6a8-0210cf926ed9/exec-27912966-a2ac-47e8-af05-4efd5d7201b8.png"
+    },
+    {
+      "ids": [
+        13,
+        14,
+        15
+      ],
+      "source": "sources/group-5.png",
+      "prompt": "prompt-5.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14da0-f4e8-72a3-a6a8-0210cf926ed9/exec-f078b8ad-5e2b-4090-b227-02f73ebcdf58.png"
+    },
+    {
+      "ids": [
+        16,
+        18,
+        19
+      ],
+      "source": "sources/group-6.png",
+      "prompt": "prompt-6.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14da0-f4e8-72a3-a6a8-0210cf926ed9/exec-067f1eb9-fd71-4f6b-a081-714139dc8b69.png"
+    },
+    {
+      "ids": [
+        20,
+        21,
+        22
+      ],
+      "source": "sources/group-7.png",
+      "prompt": "prompt-7.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14da0-f4e8-72a3-a6a8-0210cf926ed9/exec-313373a1-debb-4e1f-8d6c-ba1e4bb4761f.png"
+    },
+    {
+      "ids": [
+        23,
+        24,
+        25
+      ],
+      "source": "sources/group-8.png",
+      "prompt": "prompt-8.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14da0-f4e8-72a3-a6a8-0210cf926ed9/exec-e9acff6e-a837-4663-8d71-e105f34d0a40.png"
+    },
+    {
+      "ids": [
+        26,
+        28,
+        29
+      ],
+      "source": "sources/group-9.png",
+      "prompt": "prompt-9.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14da0-f4e8-72a3-a6a8-0210cf926ed9/exec-e0c1c3ee-ca23-437b-babf-fbd28d9c6c1c.png"
+    }
+  ]
+}

@@ -15,6 +15,7 @@ export const CAST_ART_DENSITY = 2;
 export const CAST_STANDING_SIZE = Object.freeze({ width: 40, height: 44, footX: 20, footY: 42 });
 const W = CAST_STANDING_SIZE.width * CAST_ART_DENSITY, H = CAST_STANDING_SIZE.height * CAST_ART_DENSITY;
 const figures = new Map<number, Pose[]>();
+const diningFigures = new Map<number, Pose[]>();
 let pending: Promise<void> | null = null, epoch = 0;
 const ramps = new Map<string, string[]>();
 for (const color of palette.colors) { const ramp = ramps.get(color.ramp) ?? []; ramp.push(color.hex); ramps.set(color.ramp, ramp); }
@@ -37,8 +38,8 @@ export function validateCastManifest(manifest: Manifest): void {
     }
   }
 }
-export function clearBatchCharacters(): void { epoch++; figures.clear(); pending = null; }
-export function batchCharactersReady(): boolean { return figures.size === CUSTOMER_CAST.length; }
+export function clearBatchCharacters(): void { epoch++; figures.clear(); diningFigures.clear(); pending = null; }
+export function batchCharactersReady(): boolean { return figures.size === CUSTOMER_CAST.length && diningFigures.size === CUSTOMER_CAST.length; }
 export function preloadBatchCharacters(): Promise<void> {
   if (batchCharactersReady()) return Promise.resolve();
   if (pending) return pending;
@@ -58,7 +59,21 @@ export function preloadBatchCharacters(): Promise<void> {
       });
       return [sheet.id, poses] as const;
     }));
-    if (generation === epoch) decoded.forEach(([id, poses]) => figures.set(id, poses));
+    const diningBase=import.meta.env.BASE_URL+'art/generated/cozy-dining-v3/';
+    const diningResponse=await fetch(diningBase+'manifest.json');
+    if(!diningResponse.ok)throw Error('Missing matched dining cast');
+    const dining=await diningResponse.json();
+    if(dining.version!==3||dining.density!==2||!dining.embeddedChair||dining.characters.length!==CUSTOMER_CAST.length)throw Error('Incomplete matched dining cast');
+    const seated=await Promise.all(dining.characters.map(async(sheet:Sheet)=>{
+      if(sheet.frames.length!==3)throw Error('Missing matched dining pose');
+      const image=new Image();image.src=diningBase+sheet.file;await image.decode();
+      if(image.naturalWidth!==W*3||image.naturalHeight!==H)throw Error('Invalid matched dining atlas size');
+      return [sheet.id,sheet.frames.map(pose=>{const source=canvas(W,H);source.getContext('2d')!.drawImage(image,pose.box[0],0,W,H,0,0,W,H);return{...pose,source};})] as const;
+    }));
+    if (generation === epoch) {
+      decoded.forEach(([id, poses]) => figures.set(id, poses));
+      seated.forEach(([id, poses])=>diningFigures.set(id,poses));
+    }
   })().catch(error => { if (generation === epoch) pending = null; throw error; });
   return pending;
 }
@@ -96,7 +111,7 @@ export function makeBatchCharacter(look: Look, role: Role, appearanceId: number 
   if (!batchCharactersReady() || role !== 'customer') return null;
   const design = CUSTOMER_CAST[mod(appearanceId ?? 0, CUSTOMER_CAST.length)], poses = figures.get(design.id)!;
   const make = (index: number, mirrored = false): HTMLCanvasElement => {
-    const pose = poses[index], seated = index >= 9;
+    const seated = index >= 9, pose = seated ? diningFigures.get(design.id)![index-9] : poses[index];
     // Neck landmarks describe the intact painting; they never position a head.
     const art = paintPose(pose, look, design.look);
     const frame = publish(mirrored ? mirror(art) : art);
@@ -114,7 +129,7 @@ export function makeBatchCharacter(look: Look, role: Role, appearanceId: number 
         if (row > pose.neck[1] + 1 && (column < pose.neck[0] + 1 || row > armBottom)) pixels.data[(row * W + column) * 4 + 3] = 0;
       }
       fg.putImageData(pixels, 0, 0);
-      registerSeatingUnit(frame, { foreground: publish(mirrored ? mirror(foreground) : foreground), floor: foot, hip, embeddedChair: false, ...(index >= 10 ? { petContact: hand } : {}) });
+      registerSeatingUnit(frame, { foreground: publish(mirrored ? mirror(foreground) : foreground), floor: foot, hip, embeddedChair: true, ...(index >= 10 ? { petContact: hand } : {}) });
     }
     return frame;
   };

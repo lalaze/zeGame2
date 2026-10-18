@@ -6,6 +6,11 @@ export function clampRoomPan(value: number, room: number, viewport: number, zoom
   return Math.max(-limit, Math.min(limit, value));
 }
 
+interface RoomOverview {
+  isActive(): boolean;
+  toggle(): void;
+}
+
 /** Magnify the canvas only. Input continues mapping its DOM bounds to buffer coordinates. */
 export class RoomViewport {
   private zoom = 1;
@@ -21,8 +26,9 @@ export class RoomViewport {
   private minus = document.createElement('button');
   private abort = new AbortController();
   private previousTouchAction: string;
+  private presentation = '';
   constructor(private canvas: HTMLCanvasElement, private stage: HTMLElement,
-    private enabled: () => boolean, private context: () => string) {
+    private enabled: () => boolean, private context: () => string, private overview?: RoomOverview) {
     this.previousTouchAction = canvas.style.touchAction;
     canvas.style.touchAction = 'none';
     this.controls.className = 'room-zoom-controls';
@@ -34,9 +40,14 @@ export class RoomViewport {
     }
     this.stage.append(this.controls);
     const signal = this.abort.signal;
-    this.plus.addEventListener('click', () => { if (enabled()) this.setZoom(this.zoom + .5); }, { signal });
-    this.minus.addEventListener('click', () => { if (enabled()) this.setZoom(this.zoom - .5); }, { signal });
-    this.resetButton.addEventListener('click', () => this.reset(), { signal });
+    this.plus.addEventListener('click', () => { if (enabled() && !this.overview?.isActive()) this.setZoom(this.zoom + .5); }, { signal });
+    this.minus.addEventListener('click', () => { if (enabled() && !this.overview?.isActive()) this.setZoom(this.zoom - .5); }, { signal });
+    this.resetButton.addEventListener('click', () => {
+      if (!this.enabled()) return;
+      this.reset();
+      this.overview?.toggle();
+      this.apply();
+    }, { signal });
     window.addEventListener('pointerdown', this.down, { capture: true, signal });
     window.addEventListener('pointermove', this.move, { capture: true, signal });
     window.addEventListener('pointerup', this.up, { capture: true, signal });
@@ -46,20 +57,23 @@ export class RoomViewport {
     document.addEventListener('visibilitychange', this.cancel, { signal });
     this.apply();
   }
-  refresh(): void { if (this.points.size && (!this.enabled() || this.gestureContext !== this.context())) this.cancel(); }
+  refresh(): void {
+    if (this.points.size && (!this.enabled() || this.overview?.isActive() || this.gestureContext !== this.context())) this.cancel();
+    if (this.presentation !== `${this.enabled()}:${!!this.overview?.isActive()}`) this.apply();
+  }
   refreshLabels(): void { this.apply(); }
   reset(): void { this.cancel(); this.zoom = 1; this.x = this.y = 0; this.apply(); }
   private onResize = () => this.reset();
   private cancel = () => { this.points.clear(); this.gestureContext = null; this.dragStart = null; this.dragging = false; };
   private down = (event: PointerEvent) => {
-    if (event.pointerType !== 'touch' || event.target !== this.canvas || !this.enabled()) return;
+    if (event.pointerType !== 'touch' || event.target !== this.canvas || !this.enabled() || this.overview?.isActive()) return;
     if (!this.points.size) { this.gestureContext = this.context(); this.dragStart = { x: event.clientX, y: event.clientY }; this.dragging = false; }
     this.points.set(event.pointerId, { x: event.clientX, y: event.clientY });
   };
   private up = (event: PointerEvent) => { this.points.delete(event.pointerId); if (!this.points.size) this.gestureContext = null; };
   private move = (event: PointerEvent) => {
     if (!this.points.has(event.pointerId)) return;
-    if (!this.enabled() || this.gestureContext !== this.context()) { this.cancel(); return; }
+    if (!this.enabled() || this.overview?.isActive() || this.gestureContext !== this.context()) { this.cancel(); return; }
     const before = [...this.points.values()];
     this.points.set(event.pointerId, { x: event.clientX, y: event.clientY });
     const after = [...this.points.values()];
@@ -98,6 +112,9 @@ export class RoomViewport {
     this.canvas.dataset.roomZoom = String(this.zoom);
     this.canvas.dataset.roomPan = this.x + ',' + this.y;
     const zh = getLocale() === 'zh';
+    const overview = !!this.overview?.isActive(), enabled = this.enabled();
+    this.presentation = `${enabled}:${overview}`;
+    this.controls.classList.toggle('is-overview', overview);
     this.controls.setAttribute('aria-label', zh ? '房间视图缩放' : 'Room zoom');
     this.minus.textContent = '−'; this.plus.textContent = '+';
     this.minus.setAttribute('aria-label', zh ? '缩小房间' : 'Zoom out');
@@ -105,8 +122,15 @@ export class RoomViewport {
     this.resetButton.textContent = zh ? '全景' : 'Fit room';
     this.resetButton.title = zh ? '双指缩放，放大后单指拖动；点击恢复全景' : 'Pinch to zoom, drag to pan; click to fit the room';
     this.resetButton.setAttribute('aria-label', (zh ? '恢复房间全景，当前 ' : 'Fit room, current ') + Math.round(this.zoom * 100) + '%');
-    this.minus.disabled = this.zoom <= 1;
-    this.plus.disabled = this.zoom >= MAX_ROOM_ZOOM;
+    if (this.overview) {
+      this.resetButton.textContent = overview ? (zh ? '返回房间' : 'Back to room') : (zh ? '全景' : 'Overview');
+      this.resetButton.title = overview ? (zh ? '返回当前房间' : 'Return to the current room') : (zh ? '查看全店地图，点击房间进入' : 'View the whole café; select a room to enter');
+      this.resetButton.setAttribute('aria-label', this.resetButton.title);
+      this.resetButton.setAttribute('aria-pressed', String(overview));
+    }
+    this.resetButton.disabled = !enabled;
+    this.minus.disabled = !enabled || overview || this.zoom <= 1;
+    this.plus.disabled = !enabled || overview || this.zoom >= MAX_ROOM_ZOOM;
   }
   destroy(): void {
     this.abort.abort(); this.cancel(); this.controls.remove();

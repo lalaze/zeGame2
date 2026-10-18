@@ -1,5 +1,6 @@
 import { textileSwatch } from './textile-styles';
 import { paintCenterpiece } from './table-centerpiece-art';
+import { diningDecorationPreview } from './dining-decoration-art';
 import { paintSignText, paintPixelSignText } from './sign-lettering';
 import { getGeneratedDecorAdapter } from './generated-main-art';
 // Pixel art for every decor item, in a shaded Stardew-like style. Each painter
@@ -846,7 +847,12 @@ const ICON_W = 28;
 const ICON_H = 24;
 const iconCache = new Map<string, HTMLCanvasElement>();
 
-export function decorIcon(id: string): HTMLCanvasElement {
+export function decorIcon(id: string,mat='tablecloth_classic',ornament='centerpiece_flowers'): HTMLCanvasElement {
+  const slot = decorDef(id)?.slot;
+  if(slot==='tablecloth'||slot==='centerpiece'){
+    const dining=diningDecorationPreview(slot==='tablecloth'?id:mat,slot==='centerpiece'?id:ornament);
+    if(dining)return dining;
+  }
   const generated = getGeneratedDecorAdapter()?.icon(id);
   if (generated) return generated;
   let c = iconCache.get(id);
@@ -855,7 +861,6 @@ export function decorIcon(id: string): HTMLCanvasElement {
   c.width = ICON_W;
   c.height = ICON_H;
   const ctx = c.getContext('2d')!;
-  const slot = decorDef(id)?.slot;
   if (id.endsWith('_none')) {
     for (let i = 0; i < ICON_W; i += 2) {
       rect(ctx, i, 0, 1, 1, '#c4ad92');

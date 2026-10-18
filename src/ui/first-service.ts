@@ -4,7 +4,7 @@ import type { GuardedStorage } from '../game/storage';
 import { getLocale, t } from '../i18n';
 import { showModal } from './modal';
 
-type Actions = { pantry: () => void; prepare: () => void; close: () => void; status: () => void; allTools: () => void };
+type Actions = { prepare: () => void; close: () => void; status: () => void; allTools: () => void };
 /** A small in-flow card, never a simulation-pausing overlay. */
 export class FirstServiceGuide {
   readonly element = document.createElement('section');
@@ -37,6 +37,11 @@ export class FirstServiceGuide {
     if (this.active) this.persist();
   }
   get simplify(): boolean { return this.active && !this.expandedTools; }
+  get openingStep(): 'stock' | 'menu' | null {
+    return this.active && !this.expandedTools && !this.completed && this.state().day === 1 && this.state().phase === 'prep'
+      ? this.checkedStock ? 'menu' : 'stock' : null;
+  }
+  confirmStock(): void { this.checkedStock = true; this.persist(); this.update(); }
   private persist(): void {
     this.storage.setPreference(this.key, this.active ? `active${this.checkedStock ? ':stock' : ''}${this.expandedTools ? ':tools' : ''}${this.completed ? ':complete' : ''}` : 'done');
   }
@@ -47,8 +52,7 @@ export class FirstServiceGuide {
   }
   private advance(): void {
     const step = this.completed ? 'complete' : firstServiceStep(this.state(), this.checkedStock);
-    if (step === 'stock') { this.checkedStock = true; this.persist(); this.actions.pantry(); }
-    else if (step === 'prepare' || step === 'reopen') this.actions.prepare();
+    if (step === 'stock' || step === 'prepare' || step === 'reopen') this.actions.prepare();
     else if (step === 'close') this.actions.close();
     else if (step === 'observe') this.actions.status();
     else if (step === 'complete') this.dismiss();
@@ -79,7 +83,7 @@ export class FirstServiceGuide {
     const signature = `${this.element.hidden}:${step}:${getLocale()}:${this.expandedTools}`;
     if (signature === this.signature) return;
     this.signature = signature;
-    const detailsOpen = this.element.querySelector<HTMLDetailsElement>('.guide-details')?.open ?? false;
+    const detailsOpen = this.element.querySelector<HTMLDetailsElement>('.guide-details')?.open ?? (step === 'stock' || step === 'prepare' || step === 'observe');
     const focused = (document.activeElement as HTMLElement | null)?.dataset.guideAction;
     const hadFocus = this.element.contains(document.activeElement);
     const number: Record<FirstServiceStep, number> = { stock: 1, prepare: 2, observe: 3, close: 4, closing: 4, reopen: 5, complete: 6 };

@@ -10,9 +10,9 @@ describe('staff door controls', () => {
   it('keeps arrows on the shared staff doorway while kitchen size and viewport change', () => {
     const state = createInitialState(0);
     state.kitchen = true;
-    const nav = document.createElement('div'), edges = document.createElement('div'), card = document.createElement('div');
-    document.body.append(nav, edges, card);
-    const ui = new RegionsUI(nav, edges, card, () => state, () => {}, () => {}, () => {});
+    const edges = document.createElement('div'), card = document.createElement('div');
+    document.body.append(edges, card);
+    const ui = new RegionsUI(edges, card, () => state, () => {}, () => {}, () => {});
     for (const height of [MIN_SCENE_H, MAX_SCENE_H]) for (let stage = 0; stage < 3; stage++) {
       setSceneHeight(height); setKitchenLevel(stage); state.upgrades.cook = stage;
       ui.select('main');

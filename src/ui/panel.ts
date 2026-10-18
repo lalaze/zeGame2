@@ -111,6 +111,7 @@ interface RowRefs {
 interface TileRefs {
   el: HTMLElement;
   btn: HTMLButtonElement;
+  artKey?: string;
 }
 
 interface FurnitureTileRefs {
@@ -839,7 +840,7 @@ export class Panel {
         const tile = document.createElement('div');
         tile.className = 'tile';
         tile.innerHTML = `
-          <img class="tile-icon" alt="" src="${iconUrl(`decor:${def.id}`, () => decorIcon(def.id))}" />
+          <img class="tile-icon" alt="" src="${iconUrl(`decor:${def.id}`, () => decorIcon(def.id,this.state.decor.equipped.tablecloth,this.state.decor.equipped.centerpiece))}" />
           <div class="tile-name">${decorName(def.id)}</div>
           <div class="tile-comfort">${def.comfort > 0 ? t('decor.comfort', { n: def.comfort }) : '&nbsp;'}</div>
           <button class="pixel-btn tile-btn" data-decor="${def.id}"></button>`;
@@ -915,6 +916,13 @@ export class Panel {
       for (const [slot, note] of this.slotNotes) note.textContent = decorName(s.decor.equipped[slot]);
       for (const [id, refs] of this.tiles) {
         const def = decorDef(id)!;
+        if(def.slot==='tablecloth'||def.slot==='centerpiece'){
+          const artKey=s.decor.equipped.tablecloth+':'+s.decor.equipped.centerpiece;
+          if(refs.artKey!==artKey){
+            refs.el.querySelector<HTMLImageElement>('.tile-icon')!.src=iconUrl(`decor:${id}:${artKey}`,()=>decorIcon(id,s.decor.equipped.tablecloth,s.decor.equipped.centerpiece));
+            refs.artKey=artKey;
+          }
+        }
         const equipped = s.decor.equipped[def.slot] === id;
         const owned = ownsDecor(s, id);
         refs.el.classList.toggle('equipped', equipped);

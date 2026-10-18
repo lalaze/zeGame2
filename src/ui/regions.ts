@@ -14,7 +14,6 @@ export class RegionsUI {
   private overview = false;
 
   constructor(
-    private nav: HTMLElement,
     private edges: HTMLElement,
     private card: HTMLElement,
     private getState: () => GameState,
@@ -22,12 +21,6 @@ export class RegionsUI {
     private onUnlock: () => void,
     private onOverview: (show: boolean) => void,
   ) {
-    nav.addEventListener('click', (e) => {
-      if (!(e.target as HTMLElement).closest('.area-plan-toggle')) return;
-      this.overview = !this.overview;
-      this.onOverview(this.overview);
-      this.update();
-    });
     edges.addEventListener('click', (e) => {
       const button = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-direction]');
       if (button) this.move(button.dataset.direction as Direction);
@@ -40,6 +33,13 @@ export class RegionsUI {
         this.update();
       }
     });
+  }
+
+  /** Toggle the building view from the panorama control. */
+  toggleOverview(): void {
+    this.overview = !this.overview;
+    this.onOverview(this.overview);
+    this.update();
   }
 
   move(direction: Direction): void {
@@ -64,8 +64,7 @@ export class RegionsUI {
     this.signature = signature;
     this.edges.setAttribute('aria-label', t('area.nav'));
     // Stable controls preserve focus while money and room status update.
-    if (!this.nav.children.length) {
-      this.nav.innerHTML = `<button class="area-plan-toggle" aria-controls="scene-area">${uiIcon('map')}<span class="area-map-label"></span></button>`;
+    if (!this.edges.children.length) {
       for (const direction of ['left', 'right', 'up', 'down'] as const) {
         const button = document.createElement('button');
         button.className = `area-arrow area-${direction}`;
@@ -75,11 +74,6 @@ export class RegionsUI {
         this.edges.append(button);
       }
     }
-    const toggle = this.nav.querySelector<HTMLButtonElement>('.area-plan-toggle')!;
-    toggle.setAttribute('aria-pressed', String(this.overview));
-    toggle.setAttribute('aria-label', t('area.viewAll'));
-    toggle.title = t(this.overview ? 'area.returnRoom' : 'area.viewAll');
-    toggle.querySelector('.area-map-label')!.textContent = t('area.viewAll');
     for (const direction of ['left', 'right', 'up', 'down'] as const) {
       const button = this.edges.querySelector<HTMLButtonElement>(`[data-direction="${direction}"]`)!;
       const next = adjacentArea(this.area, direction);

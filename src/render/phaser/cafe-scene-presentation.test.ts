@@ -3,6 +3,7 @@ import { MIN_SCENE_H, setSceneHeight, tablePos } from '../../game/layout';
 import { projectMainWorld } from '../main-pixel-presentation';
 
 vi.mock('phaser', () => ({ default: { Scene: class {} } }));
+vi.mock('../table-centerpiece-art',()=>({centerpieceSprite:()=>undefined}));
 vi.mock('./textures', () => ({ baked: (_manager: unknown, key: string) => key, canvasKey: () => 'canvas' }));
 vi.mock('../sprites', () => {
   const sprite = (name: string) => ({ name, width: 18, height: 28 });
@@ -48,16 +49,16 @@ describe('scene projection attachment groups', () => {
   it('keeps both chairs, sitter and drink in one unchanged table-local coordinate group', () => {
     const { scene, images } = harness();
     const table = tablePos(0);
-    const customer = { id: 7, seat: 0, phase: 'sitting', look: {}, x: table.x - 15, y: table.y + 1 };
+    const customer = { id: 7, seat: 0, phase: 'sitting', look: {}, x: table.x - 20, y: table.y + 1 };
     scene.sim.customers = [customer]; scene.sim.seats = [7, null];
     scene.drawTable(0, 0, 1174);
     const foot = projectMainWorld(table);
     expect(images.find(i => i.key === 'table')).toMatchObject({ x: foot.x - 16, y: table.y - 26 });
-    expect(images.find(i => i.key === 'chair-right')).toMatchObject({ x: foot.x - 24, y: table.y - 24 });
-    expect(images.find(i => i.key === 'chair-left')).toMatchObject({ x: foot.x + 9, y: table.y - 24 });
+    expect(images.find(i => i.key === 'chair-right')).toMatchObject({ x: foot.x - 29, y: table.y - 24 });
+    expect(images.find(i => i.key === 'chair-left')).toMatchObject({ x: foot.x + 14, y: table.y - 24 });
     expect(images.filter(i => i.key === 'sit-right')).toHaveLength(2);
-    expect(images.filter(i => i.key === 'sit-right').every(i => i.x === foot.x - 24)).toBe(true);
+    expect(images.filter(i => i.key === 'sit-right').every(i => i.x === foot.x - 29)).toBe(true);
     expect(images.find(i => i.key === 'cup')).toMatchObject({ x: foot.x - 9, y: table.y - 24 });
-    expect(scene.customerPoint(customer).x).toBe(foot.x - 15);
+    expect(scene.customerPoint(customer).x).toBe(foot.x - 20);
   });
 });

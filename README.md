@@ -22,7 +22,7 @@ The game stage fills the browser viewport. The authored 320×240 room stays comp
 
 On desktop, the six management shortcuts stay folded into **Manage** in the bottom-right corner. Manage unfolds them just above it, and each one opens the drawer on its tab; Manage again, Escape or a click elsewhere folds them away. On phones, **Manage** opens the management overlay directly; it pauses service and shows a pause badge. Closing it removes only that overlay's pause reason, preserving speed and any other active dialog/background pause. Escape returns focus to the opener, and the mobile drawer contains keyboard focus. Each management tab retains its existing browsing state.
 
-Furniture placement temporarily folds management away and restores the catalog when finished or cancelled. Mobile table planning likewise reveals the room, with a **Back to upgrades** button. Map and doorway navigation continue to use the existing room connections.
+Furniture placement temporarily folds management away and restores the catalog when finished or cancelled. Mobile table planning likewise reveals the room, with a **Back to upgrades** button. **Overview** in the zoom controls opens the whole-building map even during the opening guide; **Back to room** returns to the selected room. Entering the overview clears any magnification, and selecting a room on the map returns to its normal view. Map and doorway navigation continue to use the existing room connections.
 
 Regression checks: `src/ui/fullscreen-*.test.ts`, `src/ui/management-shortcuts.test.ts` and `node scripts/adjacent-overlay-qa.mjs` (installed Chrome, isolated temporary profile, authorized Tailscale preview on port 5173). The browser check writes screenshots and a structured report under `artifacts/adjacent-*`.
 
@@ -33,7 +33,9 @@ Regression checks: `src/ui/fullscreen-*.test.ts`, `src/ui/management-shortcuts.t
 2. Name your café. The name appears in the header, and there's a random-name button.
 3. Create the owner: skin, hairstyle, hair color, apron color, and an optional name. The owner works the first spot behind the counter.
 4. Pick a free starter style: Classic Cream, Mint Fresh or Rose Cottage.
-5. Grand opening! Prepare the menu for day 1 and start business.
+5. Follow the first-day opening walkthrough: check the free starter beans, confirm Espresso on the menu, then explicitly start day 1. The shop stays closed until the final confirmation.
+
+Opening instructions are expanded by default. Leaving the walkthrough keeps the café closed; the guide resumes from the confirmed stock step. Experienced players can open the full preparation panel or skip the guide. Once open, the guide explains automatic service and the voluntary closing step.
 
 You can change the name and character later in Settings (`···` → Edit café).
 

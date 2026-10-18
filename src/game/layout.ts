@@ -85,8 +85,8 @@ export function passageSpot(direction: Direction, area: AreaId = 'main'): { x: n
 }
 export const passageY = () => floorY(138);
 /** The service door is aligned with the bar aisle, separate from guest circulation. */
-export const doorwayY = (area: AreaId, direction: Direction) =>
-  (area === 'main' && direction === 'left') || (area === 'kitchen' && direction === 'right') ? 88 : passageY();
+export const doorwayY = (area: AreaId, direction: Direction, height = sceneH) =>
+  (area === 'main' && direction === 'left') || (area === 'kitchen' && direction === 'right') ? 88 : floorY(138, height);
 
 /** Walk through the same shared doors that are drawn and used for navigation. */
 export function roomRoute(from: AreaId, to: AreaId): { x: number; y: number }[] {
@@ -181,6 +181,14 @@ export function resizeRoomPoint(point: { x: number; y: number }, fromHeight: num
   const oldOrigin = areaOrigin(area, fromHeight);
   const newOrigin = areaOrigin(area);
   const localY = point.y - oldOrigin.y;
+  const localX = point.x - oldOrigin.x;
+  // A walker midway through a shared doorway stays on that doorway's centre
+  // line; interpolating rounded floor bands can move it half a pixel into a wall.
+  for (const direction of ['left', 'right'] as const) {
+    if ((direction === 'left' ? localX <= 12 : localX >= SCENE_W - 12) &&
+        areaConnections(area).some(link => link.direction === direction) && Math.abs(localY - doorwayY(area, direction, fromHeight)) < .001)
+      return { x: point.x, y: newOrigin.y + doorwayY(area, direction) };
+  }
   let y = localY;
   if (localY >= fromHeight - 7) y += sceneH - fromHeight;
   else if (localY > FLOOR_Y) {
@@ -210,7 +218,7 @@ function floorShare(yMin: number): number {
   return 1;
 }
 /** Where a floor position designed at the minimum height lands at the current height. */
-export const floorY = (yMin: number) => yMin + Math.round((sceneH - MIN_SCENE_H) * floorShare(yMin));
+export const floorY = (yMin: number, height = sceneH) => yMin + Math.round((height - MIN_SCENE_H) * floorShare(yMin));
 /** The inverse of floorY: the minimum-height position shown at y on screen. */
 export function floorYMin(y: number): number {
   let best = FLOOR_Y;
@@ -232,10 +240,14 @@ const TABLE_SPOTS: readonly { x: number; y: number }[] = [
 export const MAX_TABLES = TABLE_SPOTS.length;
 export const TOTAL_TABLE_SPOTS = MAX_TABLES + REGIONS.reduce((n, r) => n + r.tables, 0);
 export function tablePos(i: number): { x: number; y: number } {
+  return tablePosAtHeight(i, sceneH);
+}
+/** Explicit height keeps tablePos safe to pass directly to array callbacks. */
+export function tablePosAtHeight(i: number, height: number): { x: number; y: number } {
   const spot = tableSpotMin(i);
   const area = tableArea(i);
-  const o = areaOrigin(area);
-  return { x: o.x + spot.x - regionOffset(area), y: o.y + floorY(spot.y) };
+  const o = areaOrigin(area, height);
+  return { x: o.x + spot.x - regionOffset(area), y: o.y + floorY(spot.y, height) };
 }
 export const tableArea = (i: number): AreaId => i < MAX_TABLES ? 'main' : REGIONS[Math.floor((i - MAX_TABLES) / 4)].id;
 /** A table's position at the minimum height, for laying things out around it. */
@@ -248,16 +260,26 @@ export function tableSpotMin(i: number): { x: number; y: number } {
   const spot = TABLE_SPOTS[i];
   return { ...spot };
 }
-export const SEAT_OFFSET = 15;
+/** Shared by walking endpoints and the authored seating artwork. */
+export const SEAT_OFFSET = 20;
+/** Ground footprint includes both chairs and room for the seated figures. */
+export const TABLE_HALF_WIDTH = 36;
+export const tableFootprint = (table: number) => {
+  const p = tablePos(table);
+  return { x: p.x - TABLE_HALF_WIDTH, y: p.y - 10, w: TABLE_HALF_WIDTH * 2, h: 13 };
+};
 /** Seat 0 is left of the table (facing right), seat 1 is right of it. */
 export const seatSpot = (table: number, side: 0 | 1) => ({
   x: tablePos(table).x + (side === 0 ? -SEAT_OFFSET : SEAT_OFFSET),
   y: tablePos(table).y + 1,
 });
-/** The spot just in front of a seat, so people walk around the table rather than through it. */
+/** Clear apron for entering a chair, in front or in the rear aisle. */
 export const seatApproach = (table: number, side: 0 | 1) => {
-  const s = seatSpot(table, side);
-  return { x: s.x, y: Math.min(s.y + 12, areaOrigin(tableArea(table)).y + sceneH - 9) };
+  const s = seatSpot(table, side), p = tablePos(table), area = tableArea(table);
+  // The entrance pots close the front aisle of the rear dining row on compact
+  // screens. Always use its rear aisle, so resizing never changes that route.
+  const rearAisle = area === 'main' && tableSpotMin(table).y === 218;
+  return { x: s.x, y: rearAisle ? p.y - 20 : Math.min(s.y + 12, areaOrigin(area).y + sceneH - 9) };
 };
 
 /** The first window has the cat, the neon sign and the OPEN sign. */

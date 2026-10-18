@@ -10,7 +10,7 @@ beforeEach(() => { closeModal(); document.body.innerHTML = '<main></main><div id
 function setup() {
   const s = createInitialState(123);
   const storage = new GuardedStorage(() => localStorage);
-  const actions = { pantry: vi.fn(), prepare: vi.fn(), close: vi.fn(), status: vi.fn(), allTools: vi.fn() };
+  const actions = { prepare: vi.fn(), close: vi.fn(), status: vi.fn(), allTools: vi.fn() };
   const guide = new FirstServiceGuide(() => s, storage, actions);
   s.profile = { cafeName: 'Test', ownerName: '', look: { skin: 0, hair: 0, hairStyle: 0, shirt: 0, pants: 0 } };
   document.querySelector('main')!.append(guide.element); guide.update();
@@ -21,20 +21,23 @@ describe('compact guidance', () => {
   it('returns focus to the visible summary when the primary action disappears', () => {
     const { s, guide } = setup();
     s.phase = 'open'; s.dayTime = 45; guide.update();
+    guide.element.querySelector<HTMLDetailsElement>('details')!.open = false;
     guide.element.querySelector<HTMLElement>('[data-guide-action="next"]')!.focus();
     s.phase = 'closing'; guide.update();
     expect(document.activeElement).toBe(guide.element.querySelector('summary'));
     expect(guide.element.querySelector<HTMLDetailsElement>('details')!.open).toBe(false);
   });
-  it('starts folded, preserves expansion and focus through a step change', () => {
+  it('shows opening instructions immediately and preserves focus through a step change', () => {
     const { guide, click, actions } = setup();
     const details = guide.element.querySelector<HTMLDetailsElement>('details')!;
-    expect(details.open).toBe(false);
+    expect(details.open).toBe(true);
     const primary = guide.element.querySelector<HTMLButtonElement>('[data-guide-action="next"]')!;
     expect(primary.closest('details')).toBeNull();
     details.open = true;
     primary.focus(); click('next');
-    expect(actions.pantry).toHaveBeenCalledOnce();
+    expect(actions.prepare).toHaveBeenCalledOnce();
+    expect(guide.openingStep).toBe('stock');
+    guide.confirmStock();
     expect(guide.element.querySelector<HTMLDetailsElement>('details')!.open).toBe(true);
     expect((document.activeElement as HTMLElement).dataset.guideAction).toBe('next');
     guide.element.querySelector<HTMLDetailsElement>('details')!.open = false;
@@ -47,8 +50,10 @@ describe('skippable and replayable first service guidance', () => {
     const { s, actions, guide, click } = setup();
     expect(guide.simplify).toBe(true);
     expect(guide.element.textContent).toContain('50 starter beans');
-    click('next'); expect(actions.pantry).toHaveBeenCalledOnce();
     click('next'); expect(actions.prepare).toHaveBeenCalledOnce();
+    expect(guide.openingStep).toBe('stock');
+    guide.confirmStock();
+    click('next'); expect(actions.prepare).toHaveBeenCalledTimes(2);
     s.phase = 'open'; guide.update(); click('next'); expect(actions.status).toHaveBeenCalledOnce();
     s.dayTime = 45; guide.update();
     expect(actions.close).not.toHaveBeenCalled();
@@ -57,9 +62,9 @@ describe('skippable and replayable first service guidance', () => {
   });
   it('persists progress and skip separately from the game save; help is always replayable', () => {
     const { s, storage, actions, guide, click } = setup();
-    click('next');
+    click('next'); guide.confirmStock();
     const resumed = new FirstServiceGuide(() => s, storage, actions); resumed.update();
-    expect(resumed.element.textContent).toContain('Choose today');
+    expect(resumed.element.textContent).toContain('Stock checked');
     click('skip'); expect(guide.element.hidden).toBe(true); expect(guide.simplify).toBe(false);
     const skipped = new FirstServiceGuide(() => s, storage, actions); skipped.update();
     expect(skipped.element.hidden).toBe(true);
@@ -131,7 +136,7 @@ describe('skippable and replayable first service guidance', () => {
   it('localizes help and survives unavailable preference storage', () => {
     const s = createInitialState(4);
     const storage = new GuardedStorage(() => { throw new Error('denied'); });
-    const guide = new FirstServiceGuide(() => s, storage, { pantry: vi.fn(), prepare: vi.fn(), close: vi.fn(), status: vi.fn(), allTools: vi.fn() });
+    const guide = new FirstServiceGuide(() => s, storage, { prepare: vi.fn(), close: vi.fn(), status: vi.fn(), allTools: vi.fn() });
     setLocale('zh'); guide.showHelp();
     expect(document.querySelector('[role=dialog]')!.textContent).toContain('烘焙数量');
   });

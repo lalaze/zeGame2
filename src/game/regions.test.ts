@@ -49,16 +49,16 @@ describe('connected café areas', () => {
   it('allows furniture only in opened rooms and keeps it through a save and reload', () => {
     const s = createInitialState(0);
     s.decor.stored.plant_fern = 2;
-    expect(canPlace(s, 'plant_fern', 51, 9, 2)).toBe(false);
+    expect(canPlace(s, 'plant_fern', 53, 9, 2)).toBe(false);
     s.coins = 1_200;
     unlockRegion(s, 'reading');
-    expect(placeFurniture(s, 'plant_fern', 51, 9, 2)).toBe(true);
+    expect(placeFurniture(s, 'plant_fern', 53, 9, 2)).toBe(true);
     expect(canPlace(s, 'plant_fern', 39, 7, 2)).toBe(false);
     expect(canPlace(s, 'plant_fern', 59, 7, 2)).toBe(false); // Central aisle.
     expect(canPlace(s, 'plant_fern', 47, 3, 2)).toBe(false); // Table.
     const loaded = deserialize(serialize(s), 0);
     expect(loaded.regions).toEqual(['reading']);
-    expect(loaded.decor.placed).toContainEqual({ id: 'plant_fern', col: 51, row: 9 });
+    expect(loaded.decor.placed).toContainEqual({ id: 'plant_fern', col: 53, row: 9 });
     expect(loaded.decor.stored.plant_fern).toBe(1);
   });
 

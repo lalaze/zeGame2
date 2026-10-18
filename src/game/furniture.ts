@@ -3,7 +3,7 @@
 //
 // Floor cells are laid out at the minimum scene height (see `floorY` in layout.ts),
 // so a spot that's free there stays free on any screen.
-import { FLOOR_Y, MAX_TABLES, MIN_SCENE_H, SCENE_W, tableSpotMin } from './layout';
+import { FLOOR_Y, MAX_TABLES, MIN_SCENE_H, SCENE_W, TABLE_HALF_WIDTH, tableSpotMin } from './layout';
 import type { GameState } from './state';
 import { activeTableIndices, adjacentArea, areaAtX, isAreaOpen, regionOffset } from './regions';
 
@@ -108,14 +108,15 @@ const FLOOR_RESERVED: readonly Rect[] = [
   { x: 186, y: MIN_SCENE_H - 15, w: 12, h: 9 },
 ];
 
-/** The space a table needs: its chairs and the clear apron in front of them.
- * The approach is 13px below the table center (seat +1, then +12). Navigation
+/** The space a table needs: its full chair width and both access aprons.
+ * The front approach is 13px below the table center (seat +1, then +12).
+ * The rear approach is 20px above it, covered by the 30px back margin. Navigation
  * pads furniture by 8px, so reserving only through +14 allowed a legal plant
  * to cover the approach and leave a customer unable to finish walking.
  * Reserve through +21 at minimum height; floor stretching only widens the gap. */
 function tableRect(i: number): Rect {
   const t = tableSpotMin(i);
-  return { x: t.x - 24, y: t.y - 30, w: 48, h: 30 + 13 + 8 };
+  return { x: t.x - TABLE_HALF_WIDTH, y: t.y - 30, w: TABLE_HALF_WIDTH * 2, h: 30 + 13 + 8 };
 }
 
 const overlaps = (a: Rect, b: Rect) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;

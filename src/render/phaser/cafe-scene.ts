@@ -1,5 +1,5 @@
 import { remapTextile } from '../textile-styles';
-import { paintCenterpiece } from '../table-centerpiece-art';
+import { centerpieceSprite } from '../table-centerpiece-art';
 import { loadSignFonts, signFontRevision } from '../sign-lettering';
 import { insideRoomFrame } from '../viewport-frame';
 import { mainKeyLight, mainShadowState, paintContactShade, paintCastShade, mainSurfaceLight, mainLitSprite } from '../main-room-lighting';
@@ -22,7 +22,7 @@ import { createGeneratedFurnitureArt, GENERATED_FURNITURE_IDS, generatedFurnitur
 import { createGeneratedDecorArt, GENERATED_DECOR_SOURCE_IDS } from '../generated-decor-art';
 import { createGeneratedIngredientArt, GENERATED_INGREDIENT_IDS } from '../generated-ingredient-art';
 import { UI_ART, paintThoughtFrame, paintOrderFrame, paintSoldOutFrame, paintSoldOutCross, paintCallBubble, paintAckBubble } from '../ui-art';
-import { paintServiceCup, paintServiceTray, paintTableVase, paintTableTent } from '../service-props-art';
+import { paintServiceCup, paintServiceTray, paintTableTent } from '../service-props-art';
 import { styleStationMultiplier } from '../../game/styles';
 import { petActive } from '../../game/pets';
 import type { LivingCatActor } from '../../game/living-cats';
@@ -1200,7 +1200,7 @@ export class CafeScene extends Phaser.Scene {
     const area = tableArea(index);
     const baseTable = ensembleTable ?? (index < MAX_TABLES ? cozyCafeSprite('table') : undefined);
     const cozyTable = baseTable ? extensionTable(baseTable, area, cloth) : undefined;
-    this.shadow(table.x + (cozyTable ? 2 : 0), table.y + 1, cozyTable ? 38 : 30, next(), cozyTable ? 0.25 : 0.2);
+    this.shadow(table.x + (cozyTable ? 2 : 0), table.y + 1, cozyTable ? cozyTable.width - 2 : 30, next(), cozyTable ? 0.25 : 0.2);
     if (cozyTable) this.shadow(table.x, table.y, 17, next(), 0.34, false);
     const diners = ([0, 1] as const).map((side) => {
       const id = preview ? undefined : this.sim.seats[index * 2 + side];
@@ -1232,21 +1232,14 @@ export class CafeScene extends Phaser.Scene {
     }
     const top = extensionTable(TABLE(), area, cloth);
     const tableDepth = next();
-    if (cozyTable) this.litImage(cozyTable, table.x - cozyTable.width / 2, table.y - cozyTable.height + 1, tableDepth, table);
+    if (cozyTable) this.litImage(cozyTable, table.x - cozyTable.width / 2, table.y - cozyTable.height + 1 + (ensembleTable ? SEATING_LAYOUT.tableFloorY : 0), tableDepth, table);
     else if (!this.generatedPicture('table', table.x - 16.5, table.y - TABLE_TOP_DY - 5.4, 33, 33 * 462 / 563, tableDepth, area, cloth)) {
       this.litImage(top, table.x - TABLE_CX, table.y - top.height + 1, tableDepth, table);
     }
     const cy = table.y + (ensembleTable ? SEATING_LAYOUT.surfaceY : -TABLE_TOP_DY);
-    // A bud vase in the middle.
-    const bloom = ['#ef5d7a', '#f2c14e', '#ffffff', '#9f78d2'][index % 4];
-    const vase = baked(this.textures, `vase-${bloom}`, 5, 14, ctx => paintTableVase(ctx, bloom));
     const vaseDepth = next();
-    if (centerpiece === 'centerpiece_flowers') {
-      if (!this.generatedPicture('vase', table.x - 3.5, cy - 7, 7, 7 * 281 / 264, vaseDepth)) this.image(vase, table.x - 2, cy - 13, vaseDepth);
-    } else if (centerpiece !== 'centerpiece_none') {
-      const ornament = baked(this.textures, centerpiece, 30, 42, ctx => { ctx.scale(3, 3); paintCenterpiece(ctx, centerpiece); });
-      this.image(ornament, table.x - 3.75, cy - 9.5, vaseDepth).setScale(1 / 4);
-    }
+    const ornament=centerpieceSprite(centerpiece);
+    if(ornament)this.litImage(ornament,table.x-ornament.width/2,cy-ornament.height,vaseDepth,table);
     // Seated customers lean over the table: their upper body goes on top again.
     for (const side of [0, 1] as const) {
       const c = diners[side];
