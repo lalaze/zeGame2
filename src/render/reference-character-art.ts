@@ -27,7 +27,7 @@ export function referenceCharacterOffset(_frame: HTMLCanvasElement): Point { ret
 export function referenceCharacterContacts(frame: HTMLCanvasElement): Contacts | null { return contacts.get(frame) ?? null; }
 export function resolveReferenceCharacter(look: Look, role: Role = 'customer', appearanceId?: number): CharacterFrames | null {
   if (!ready || !batchCharactersReady()) return null;
-  const key = ['v9', role, look.skin, look.hair, look.hairStyle, look.shirt, look.pants, appearanceId ?? -1].join('.');
+  const key = ['v10', role, look.skin, look.hair, look.hairStyle, look.shirt, look.pants, appearanceId ?? -1].join('.');
   const old = cache.get(key); if (old) return old;
   const result = role === 'customer' ? makeBatchCharacter(look, role, appearanceId, (frame, points) => contacts.set(frame, points)) : makeCozyTeam(look, role, (frame, points) => contacts.set(frame, points));
   if (!result) return null;

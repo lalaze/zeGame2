@@ -5,7 +5,9 @@ type Point = { x: number; y: number };
 type Box = readonly [number, number, number, number];
 type Spec = { box: Box; anchor: Point; scale: number; foreground?: readonly Point[]; hand?: Point };
 const D = 3;
-export const SEATING_LAYOUT = Object.freeze({ seatX: 25, floorY: 1, surfaceY: -22 });
+// The tabletop plane sits at the guests' forearms, below their shoulders.
+// Keep its painted height and cup/vase contact on the same calibration.
+export const SEATING_LAYOUT = Object.freeze({ seatX: 25, floorY: 1, surfaceY: -15, tableWidth: 40, tableHeight: 20 });
 let atlas: HTMLImageElement | null = null, petAtlas: HTMLImageElement | null = null;
 let idleAtlas: HTMLImageElement | null = null;
 let pending: Promise<void> | null = null, epoch = 0;
@@ -78,10 +80,11 @@ export function seatingFurniture(part:'table'|'chair',mirror=false):HTMLCanvasEl
     const frame=make({box:[805,77,1153,532],anchor:{x:966,y:532},scale:.054},atlas,mirror);
     cache.set(key,frame);return frame;
   }
-  const frame=canvas(40,30),art=canvas(120,90),ctx=art.getContext('2d')!;
-  ctx.imageSmoothingEnabled=false;ctx.drawImage(atlas,88,71,608,457,3,3,114,85.6875);
-  const pixels=ctx.getImageData(0,0,120,90);for(let n=3;n<pixels.data.length;n+=4)if(pixels.data[n]<100)pixels.data[n]=0;ctx.putImageData(pixels,0,0);
-  frame.getContext('2d')!.drawImage(art,0,0,40,30);registerFineSpriteArt(frame,art,D);cache.set(key,frame);return frame;
+  const w=SEATING_LAYOUT.tableWidth,h=SEATING_LAYOUT.tableHeight;
+  const frame=canvas(w,h),art=canvas(w*D,h*D),ctx=art.getContext('2d')!;
+  ctx.imageSmoothingEnabled=false;ctx.drawImage(atlas,88,71,608,457,3,3,w*D-6,h*D-6);
+  const pixels=ctx.getImageData(0,0,art.width,art.height);for(let n=3;n<pixels.data.length;n+=4)if(pixels.data[n]<100)pixels.data[n]=0;ctx.putImageData(pixels,0,0);
+  frame.getContext('2d')!.drawImage(art,0,0,w,h);registerFineSpriteArt(frame,art,D);cache.set(key,frame);return frame;
 }
 
 /** Register newly authored cast units with the shared scene chair/foreground contract. */

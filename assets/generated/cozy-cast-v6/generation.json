@@ -1,0 +1,111 @@
+{
+  "version": 6,
+  "tool": "built-in image_gen",
+  "reference": "public/art/generated/cozy-team-v7/hair-0-short-v1.png",
+  "outputs": [
+    {
+      "ids": [
+        27,
+        0,
+        17
+      ],
+      "source": "sources/group-0.png",
+      "prompt": "prompt-0.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14af6-d92c-7090-8392-4fbd6cf11cf0/exec-33c5526f-8cd6-4a59-8d43-0f417bfa4319.png",
+      "editPrompt": "prompt-0-edit.txt",
+      "selected": "/Users/lalaze/.codex/generated_images/01a14af6-d92c-7090-8392-4fbd6cf11cf0/exec-eb619f17-1531-43a4-a86d-6bc57aad64fb.png"
+    },
+    {
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "source": "sources/group-1.png",
+      "prompt": "prompt-1.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14af6-d92c-7090-8392-4fbd6cf11cf0/exec-0403bb6b-ef29-404d-ac33-7294732feb20.png"
+    },
+    {
+      "ids": [
+        4,
+        5,
+        6
+      ],
+      "source": "sources/group-2.png",
+      "prompt": "prompt-2.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14af6-d92c-7090-8392-4fbd6cf11cf0/exec-1d966199-d96d-442c-a41b-8998b5edce16.png"
+    },
+    {
+      "ids": [
+        7,
+        8,
+        9
+      ],
+      "source": "sources/group-3.png",
+      "prompt": "prompt-3.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14af6-d92c-7090-8392-4fbd6cf11cf0/exec-18320ddb-ee17-4773-9df4-a371b0b6707a.png"
+    },
+    {
+      "ids": [
+        10,
+        11,
+        12
+      ],
+      "source": "sources/group-4.png",
+      "prompt": "prompt-4.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14af6-d92c-7090-8392-4fbd6cf11cf0/exec-20cc61de-ba35-48f4-a93c-b9d5ca4ff7d2.png"
+    },
+    {
+      "ids": [
+        13,
+        14,
+        15
+      ],
+      "source": "sources/group-5.png",
+      "prompt": "prompt-5.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14af6-d92c-7090-8392-4fbd6cf11cf0/exec-604e69a9-c664-4cba-80ad-30d681850140.png"
+    },
+    {
+      "ids": [
+        16,
+        18,
+        19
+      ],
+      "source": "sources/group-6.png",
+      "prompt": "prompt-6.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14af6-d92c-7090-8392-4fbd6cf11cf0/exec-786e899e-ef6b-45f7-acd8-9fdd8e0a738e.png"
+    },
+    {
+      "ids": [
+        20,
+        21,
+        22
+      ],
+      "source": "sources/group-7.png",
+      "prompt": "prompt-7.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14af6-d92c-7090-8392-4fbd6cf11cf0/exec-2ba57abd-23d1-4549-bee2-0549024d04dc.png"
+    },
+    {
+      "ids": [
+        23,
+        24,
+        25
+      ],
+      "source": "sources/group-8.png",
+      "prompt": "prompt-8.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14af6-d92c-7090-8392-4fbd6cf11cf0/exec-8f9b4825-1a8a-47e1-b733-b219a7ff450d.png"
+    },
+    {
+      "ids": [
+        26,
+        28,
+        29
+      ],
+      "source": "sources/group-9.png",
+      "prompt": "prompt-9.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a14af6-d92c-7090-8392-4fbd6cf11cf0/exec-31b5fefc-71c9-4cf0-8625-548fd06ef7f1.png",
+      "editPrompt": "prompt-9-edit.txt",
+      "selected": "/Users/lalaze/.codex/generated_images/01a14af6-d92c-7090-8392-4fbd6cf11cf0/exec-1b76ec16-1ebf-4f52-928e-029166b59f07.png"
+    }
+  ]
+}

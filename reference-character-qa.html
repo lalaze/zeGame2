@@ -80,7 +80,7 @@ try {
   const descriptors=[...['down','up','right','left'].flatMap(direction=>[0,1,2].map(i=>({name:`${direction}[${i}]`,get:f=>f[direction][i],seated:false,pet:false,left:direction==='left'}))),
     {name:'sitRight',get:f=>f.sitRight,seated:true,pet:false,left:false},{name:'sitLeft',get:f=>f.sitLeft,seated:true,pet:false,left:true},
     ...['Right','Left'].flatMap(direction=>[0,1].map(i=>({name:`sitPet${direction}[${i}]`,get:f=>f[`sitPet${direction}`][i],seated:true,pet:true,left:direction==='Left'})))];
-  const roster=document.querySelector('#roster'),columns=6,cellW=180,cellH=168;
+  const roster=document.querySelector('#roster'),columns=5,cellW=340,cellH=170;
   roster.width=columns*cellW;roster.height=Math.ceil(identities.length/columns)*cellH;
   const rc=roster.getContext('2d');rc.imageSmoothingEnabled=false;
   const downHashes=[];
@@ -90,34 +90,35 @@ try {
     check(`${who.name}: stand aliases down[0]`,frames.stand===frames.down[0]);
     const figure=document.createElement('figure');figure.className='sheet';
     const caption=document.createElement('figcaption');caption.textContent=`${who.name} · ${who.role}`;figure.append(caption);
-    const sheet=document.createElement('canvas');sheet.width=9*68;sheet.height=2*132;sheet.setAttribute('aria-label',`${who.name}: all 18 frames`);figure.append(sheet);document.querySelector('#frames').append(figure);
+    const sheet=document.createElement('canvas');sheet.width=9*132;sheet.height=2*156;sheet.setAttribute('aria-label',`${who.name}: all 18 frames`);figure.append(sheet);document.querySelector('#frames').append(figure);
     const sc=sheet.getContext('2d');sc.imageSmoothingEnabled=false;sc.font='10px system-ui';sc.textAlign='center';
     for(let poseIndex=0;poseIndex<descriptors.length;poseIndex++){
       const pose=descriptors[poseIndex],frame=pose.get(frames),art=fineSpriteArt(frame),offset=referenceCharacterOffset(frame),contact=referenceCharacterContacts(frame),pixels=hashPixels(art.canvas);
-      const name=`${who.name}: ${pose.name}`,expectedW=pose.pet?22:18,expectedH=pose.seated?(pose.pet?34:29):28;
-      check(`${name}: reference backing and logical size`,art.density===3&&frame.width===expectedW&&frame.height===expectedH&&art.canvas.width===frame.width*3&&art.canvas.height===frame.height*3);
+      const guest=who.role==='customer';
+      const name=`${who.name}: ${pose.name}`,expectedW=guest?40:pose.seated?38:32,expectedH=pose.seated&&!guest?42:44;
+      check(`${name}: reference backing and logical size`,art.density===2&&frame.width===expectedW&&frame.height===expectedH&&art.canvas.width===frame.width*2&&art.canvas.height===frame.height*2);
       check(`${name}: nonempty pixels`,pixels.opaquePixels>0);
       const finitePoint=p=>p&&Number.isFinite(p.x)&&Number.isFinite(p.y);
       check(`${name}: finite foot and offset`,finitePoint(contact?.foot)&&finitePoint(offset));
-      if(pose.seated)check(`${name}: stable seated hip`,finitePoint(contact?.seatContact)&&close(contact.seatContact.x+offset.x,pose.left?11:7)&&close(contact.seatContact.y+offset.y,22));
-      else check(`${name}: stable walking foot`,contact&&close(contact.foot.x+offset.x,9)&&close(contact.foot.y+offset.y,CHAR_H-1));
+      if(pose.seated)check(`${name}: stable seated hip`,finitePoint(contact?.seatContact)&&(guest?close(contact.seatContact.x+offset.x,pose.left?22:18)&&close(contact.seatContact.y+offset.y,32):close(contact.foot.y,41)));
+      else check(`${name}: stable walking foot`,contact&&close(contact.foot.x+offset.x,guest?20:16)&&close(contact.foot.y+offset.y,42));
       if(pose.pet)check(`${name}: pet contact inside canvas`,finitePoint(contact?.petContact)&&contact.petContact.x>=0&&contact.petContact.x<=frame.width&&contact.petContact.y>=0&&contact.petContact.y<=frame.height);
       results.frames.push({identity:who.name,role:who.role,appearanceId:who.appearanceId??null,pose:pose.name,logical:[frame.width,frame.height],density:art.density,offset,contact,...pixels});
-      const col=poseIndex%9,row=Math.floor(poseIndex/9),scale=3,x=col*68+7+offset.x*scale,y=row*132+5+offset.y*scale;
-      sc.fillStyle=(row+col)%2?'#ead8b9':'#f6ead2';sc.fillRect(col*68,row*132,68,132);
+      const col=poseIndex%9,row=Math.floor(poseIndex/9),scale=3,x=col*132+6+offset.x*scale,y=row*156+5+offset.y*scale;
+      sc.fillStyle=(row+col)%2?'#ead8b9':'#f6ead2';sc.fillRect(col*132,row*156,132,156);
       sc.drawImage(art.canvas,x,y,frame.width*scale,frame.height*scale);
       if(contact?.foot)cross(sc,x+contact.foot.x*scale,y+contact.foot.y*scale,'#a15435');
       if(contact?.seatContact)cross(sc,x+contact.seatContact.x*scale,y+contact.seatContact.y*scale,'#326786');
       if(contact?.petContact)cross(sc,x+contact.petContact.x*scale,y+contact.petContact.y*scale,'#93457c');
-      sc.fillStyle='#44352d';sc.fillText(pose.name,col*68+34,row*132+123,66);
+      sc.fillStyle='#44352d';sc.fillText(pose.name,col*132+66,row*156+149,130);
     }
     for(let i=0;i<3;i++)check(`${who.name}: left[${i}] mirrors right[${i}]`,mirrorEqual(fineSpriteArt(frames.left[i]).canvas,fineSpriteArt(frames.right[i]).canvas));
     for(const direction of ['down','up','right'])check(`${who.name}: ${direction} gait frames differ`,hashPixels(fineSpriteArt(frames[direction][1]).canvas).hash!==hashPixels(fineSpriteArt(frames[direction][2]).canvas).hash);
     const cx=identityIndex%columns*cellW,cy=Math.floor(identityIndex/columns)*cellH;
     rc.fillStyle=identityIndex%2?'#ead8b9':'#f6ead2';rc.fillRect(cx,cy,cellW,cellH);
     // Front, side and seated poses together expose silhouette differences across the roster.
-    for(const [i,frame] of [frames.down[0],frames.right[1],frames.sitRight].entries())rc.drawImage(fineSpriteArt(frame).canvas,cx+8+i*56,cy+12,frame.width*3,frame.height*3);
-    rc.fillStyle='#44352d';rc.textAlign='center';rc.font='12px system-ui';rc.fillText(who.name,cx+cellW/2,cy+122,cellW-8);rc.font='10px system-ui';rc.fillText(who.role,cx+cellW/2,cy+142);
+    for(const [i,frame] of [frames.down[0],frames.right[1],frames.sitRight].entries())rc.drawImage(fineSpriteArt(frame).canvas,cx+4+i*112,cy+12,frame.width*2.5,frame.height*2.5);
+    rc.fillStyle='#44352d';rc.textAlign='center';rc.font='12px system-ui';rc.fillText(who.name,cx+cellW/2,cy+142,cellW-8);rc.font='10px system-ui';rc.fillText(who.role,cx+cellW/2,cy+158);
     if(who.role==='customer')downHashes.push(hashPixels(fineSpriteArt(frames.down[0]).canvas).hash);
   }
   check('All customer front portraits remain visually distinct',new Set(downHashes).size===30,new Set(downHashes).size);
@@ -130,10 +131,12 @@ try {
   const sim=new Sim(()=>.5);sim.update(state,0);state.phase='open';
   sim.baristas[0].look={...staff[0].look};sim.baristas[1].look={...staff[1].look};sim.servers[0].look={...staff[2].look};
   const makeCustomer=(appearanceId,phase,point,extra={})=>({id:100+appearanceId,appearanceId,look:{...CUSTOMER_CAST[appearanceId].look},phase,x:point.x,y:point.y,tx:point.x,ty:point.y,stride:0,via:[],reviewed:true,waitSeconds:0,missingExtra:false,order:'espresso',extra:null,vip:false,patience:1000,spot:-1,seat:-1,timer:1000,mood:null,moodTimer:0,hasCup:false,soldOut:false,dineIn:false,...extra});
-  sim.customers=[makeCustomer(0,'sitting',layout.seatSpot(0,0),{seat:0,dineIn:true,hasCup:true}),makeCustomer(12,'sitting',layout.seatSpot(1,1),{seat:3,dineIn:true,hasCup:true}),
+  const requestedCast=Number(new URLSearchParams(location.search).get('qa-cast')??0);
+  const seatedCast=Number.isInteger(requestedCast)&&CUSTOMER_CAST[requestedCast]?requestedCast:0;
+  sim.customers=[makeCustomer(seatedCast,'sitting',layout.seatSpot(0,0),{seat:0,dineIn:true,hasCup:true}),makeCustomer(12,'sitting',layout.seatSpot(1,1),{seat:3,dineIn:true,hasCup:true}),
     makeCustomer(4,'toSeat',{x:150,y:205},{tx:150,ty:180}),makeCustomer(20,'exiting',{x:180,y:190},{tx:180,ty:214,hasCup:true}),
     makeCustomer(25,'toSeat',{x:52,y:145},{tx:78,ty:145}),makeCustomer(28,'toSeat',{x:273,y:145},{tx:247,ty:145})];
-  sim.seats.fill(null);sim.seats[0]=100;sim.seats[3]=112;sim.queue=[];
+  sim.seats.fill(null);sim.seats[0]=100+seatedCast;sim.seats[3]=112;sim.queue=[];
   Object.assign(sim.baristas[0],{customerId:104,total:8,remaining:7.9});
   Object.assign(sim.baristas[1],{customerId:120,total:8,remaining:4});
   Object.assign(sim.servers[0],{x:239,y:199,tx:239,ty:181,stride:5,via:[],phase:'delivering',plates:[{customerId:112,items:['espresso'],barista:0,server:0,waited:0}],ack:0});
