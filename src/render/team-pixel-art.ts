@@ -110,10 +110,10 @@ function islands(width: number, height: number, include: (n: number) => boolean,
 }
 
 /** Source peach is separated into connected face/hand islands so hair glints never become skin. */
-function skinMask(p: PoseImage, neckY: number, sit: boolean, back: boolean, capped: boolean): { mask: Uint8Array; face: Island } {
+function skinMask(p: PoseImage, neckY: number, sit: boolean, back: boolean): { mask: Uint8Array; face: Island } {
   const { data, width, height } = p, mask = new Uint8Array(width * height);
   const candidate = (n: number) => { const i = n * 4, r = data[i], g = data[i + 1], b = data[i + 2];
-    return data[i + 3] > 100 && r > (capped ? 175 : 205) && g > 120 && b > 65 && r - g > 28 && g - b > 24 && g / r > .53; };
+    return data[i + 3] > 100 && r > 205 && g > 120 && b > 65 && r - g > 28 && g - b > 24 && g / r > .53; };
   let face: Island = [];
   const hand = p.anchors.hand ?? { x: width * .80, y: height * .70 };
   islands(width, height, candidate, island => {
@@ -123,7 +123,7 @@ function skinMask(p: PoseImage, neckY: number, sit: boolean, back: boolean, capp
     const isHand = center.y > neckY && center.y < height * (sit ? .85 : .80) &&
       (sit ? ((center.x - hand.x) / (width * .25)) ** 2 + ((center.y - hand.y) / (height * .17)) ** 2 < 1 || (center.x > width * .42 && center.y < height * .70) : true);
     const mean = island.reduce((v, at) => { const i = at * 4; return [v[0] + data[i], v[1] + data[i + 1], v[2] + data[i + 2]]; }, [0, 0, 0]);
-    const hasPeachCore = mean[1] / mean[0] > .65 && mean[1] / mean[0] < .84 && mean[2] / mean[0] > .35 && mean[2] / mean[0] < .65 && island.some(at => { const i = at * 4; return data[i] > (capped ? 205 : 235) && data[i + 1] > 150 && data[i + 2] > 95 && data[i] - data[i + 1] > 38; });
+    const hasPeachCore = mean[1] / mean[0] > .65 && mean[1] / mean[0] < .84 && mean[2] / mean[0] > .35 && mean[2] / mean[0] < .65 && island.some(at => { const i = at * 4; return data[i] > 235 && data[i + 1] > 150 && data[i + 2] > 95 && data[i] - data[i + 1] > 38; });
     const isEar = center.y > height * .20 && center.y < neckY - height * .055;
     const hasNeckCore = mean[1] / mean[0] > .53 && mean[1] / mean[0] < .70 && mean[2] / mean[0] > .30 && mean[2] / mean[0] < .50 && island.some(at => data[at * 4] > 235);
     const isNeck = center.y >= neckY - height * .08 && center.y < neckY + height * .055 && center.x > width * .35 && center.x < width * .70;
@@ -134,13 +134,11 @@ function skinMask(p: PoseImage, neckY: number, sit: boolean, back: boolean, capp
 }
 
 /** Follow connected warm hair below the neck, including long locks and braids. */
-function hairMask(p: PoseImage, skin: Uint8Array, neckY: number, sit: boolean, cook: boolean, capped: boolean): Uint8Array {
+function hairMask(p: PoseImage, skin: Uint8Array, neckY: number, sit: boolean, cook: boolean): Uint8Array {
   const { data, width, height } = p, count = width * height, mask = new Uint8Array(count);
   const candidate = (n: number) => {
     if (skin[n]) return false;
     const i = n * 4, r = data[i], g = data[i + 1], b = data[i + 2], y = Math.floor(n / width), lum = luma(r, g, b);
-    // The attendant's cream cap has warm shadows, but those are not hair.
-    if (capped && (y < height * .15 || lum > 150 || r < g * 1.4)) return false;
     if (cook && (y < height * .22 || y > neckY + height * .03 || (y < height * .34 && r > 150 && r - g < 70 && g - b < 80))) return false;
     // Golden chair wood is much yellower than the source chestnut hair.
     if (sit && y > height * .30 && b / r < .25 && g / r > .48) return false;
@@ -186,13 +184,13 @@ type Box = { left: number; right: number; top: number; bottom: number };
 /** Label every painted pixel. Pure and look-independent, so it is computed once per pose. */
 export function segmentTeamPose(p: PoseImage, o: SegmentOptions): PoseSegmentation {
   const { data, width, height } = p, count = width * height;
-  const capped = o.role === 'server' || o.role === 'barista', cook = o.role === 'cook';
+  const cook = o.role === 'cook';
   const neckY = p.anchors.neck?.y ?? height * (o.sit ? .44 : cook ? .48 : .46);
   const hipY = p.anchors.hip?.y ?? height * (o.sit ? .74 : .78);
   const neckX = p.anchors.neck?.x ?? width * (o.sit ? .55 : .50);
   const hand = p.anchors.hand ?? { x: width * .80, y: height * .70 };
-  const { mask: skin, face } = skinMask(p, neckY, o.sit, o.back, capped);
-  const hair = hairMask(p, skin, neckY, o.sit, cook, capped);
+  const { mask: skin, face } = skinMask(p, neckY, o.sit, o.back);
+  const hair = hairMask(p, skin, neckY, o.sit, cook);
   const material = new Uint8Array(count), tone = new Uint8Array(count);
   for (let n = 0; n < count; n++) {
     const i = n * 4; if (!data[i + 3]) continue;

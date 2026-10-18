@@ -9,7 +9,7 @@ type Point = { x: number; y: number };
 type Box = [number, number, number, number];
 type PoseAnchors = { hip?: Point; hand?: Point; neck?: Point; floor?: Point };
 type Sheet = { file: string; bounds: Box[]; anchors?: PoseAnchors[] };
-export type TeamManifest = { families: Sheet[]; chef: Sheet; seated: Sheet[]; chefSeated: Sheet; attendant: Sheet };
+export type TeamManifest = { families: Sheet[]; chef: Sheet; seated: Sheet[]; chefSeated: Sheet };
 type Pose = PoseImage;
 export type TeamContacts = { foot: Point; head: Point; headHeight: number; headScale: number; bodyScale: number;
   legExtension: number; carryContact?: Point; seatContact?: Point; petContact?: Point };
@@ -22,22 +22,21 @@ const HAIR = ['#594237', '#976546', '#dfb96f', '#b9674e', '#626782', '#cc8c9f'];
 const CLOTH = ['#bb6b58', '#799ba7', '#8ba477', '#d3a453', '#9b87af', '#cf929e', '#69a295', '#e5d7ba'];
 const PANTS = ['#53637b', '#85664f', '#585464'];
 let families: Pose[][] = [], seated: Pose[][] = [], chef: Pose[] = [], chefSeated: Pose[] = [];
-let attendant: Pose[] = [];
 let pending: Promise<void> | null = null, epoch = 0;
 const canvas = (w: number, h: number) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
 const mod = (n: number, length: number) => ((Math.trunc(n) % length) + length) % length;
 
 export function validateTeamManifest(m: TeamManifest): void {
   if (m.families?.length !== 8 || m.families.some(s => s.bounds?.length !== 9) || m.chef?.bounds?.length !== 9 ||
-      m.seated?.length !== 2 || m.seated.some(s => s.bounds?.length !== 12) || m.chefSeated?.bounds?.length !== 3 || m.attendant?.bounds?.length !== 12)
+      m.seated?.length !== 2 || m.seated.some(s => s.bounds?.length !== 12) || m.chefSeated?.bounds?.length !== 3)
     throw Error('Incomplete cozy team poses');
-  for (const sheet of [...m.families, m.chef, ...m.seated, m.chefSeated, m.attendant]) {
+  for (const sheet of [...m.families, m.chef, ...m.seated, m.chefSeated]) {
     if (!sheet.file || sheet.bounds.some(b => b.length !== 4 || b.some(v => !Number.isFinite(v)) || b[0] < 0 || b[1] < 0 || b[2] <= b[0] || b[3] <= b[1]))
       throw Error('Invalid cozy team bounds');
   }
 }
-export function cozyTeamReady(): boolean { return families.length === 8 && seated.length === 8 && chef.length === 9 && chefSeated.length === 3 && attendant.length === 12; }
-export function clearCozyTeam(): void { epoch++; families = []; seated = []; chef = []; chefSeated = []; attendant = []; pending = null; gridCache = new WeakMap(); }
+export function cozyTeamReady(): boolean { return families.length === 8 && seated.length === 8 && chef.length === 9 && chefSeated.length === 3; }
+export function clearCozyTeam(): void { epoch++; families = []; seated = []; chef = []; chefSeated = []; pending = null; gridCache = new WeakMap(); }
 export function preloadCozyTeam(): Promise<void> {
   if (cozyTeamReady()) return Promise.resolve();
   if (pending) return pending;
@@ -60,10 +59,10 @@ export function preloadCozyTeam(): Promise<void> {
         return { data: pixels.data, width: source.width, height: source.height, anchors: sheet.anchors?.[index] ?? {} };
       });
     };
-    const [walks, seats, cookWalk, cookSeats, staff] = await Promise.all([
-      Promise.all(manifest.families.map(decode)), Promise.all(manifest.seated.map(decode)), decode(manifest.chef), decode(manifest.chefSeated), decode(manifest.attendant),
+    const [walks, seats, cookWalk, cookSeats] = await Promise.all([
+      Promise.all(manifest.families.map(decode)), Promise.all(manifest.seated.map(decode)), decode(manifest.chef), decode(manifest.chefSeated),
     ]);
-    if (generation === epoch) { families = walks; const flat = seats.flat(); seated = TEAM_HAIRSTYLES.map((_, i) => flat.slice(i * 3, i * 3 + 3)); chef = cookWalk; chefSeated = cookSeats; attendant = staff; }
+    if (generation === epoch) { families = walks; const flat = seats.flat(); seated = TEAM_HAIRSTYLES.map((_, i) => flat.slice(i * 3, i * 3 + 3)); chef = cookWalk; chefSeated = cookSeats; }
   })().catch(error => { if (generation === epoch) pending = null; throw error; });
   return pending;
 }
@@ -129,10 +128,9 @@ function seatedForeground(art: HTMLCanvasElement, neck: Point, hand: Point): HTM
 /** Complete body poses for the shop team; customers keep their existing painter. */
 export function makeCozyTeam(look: Look, role: Exclude<Role, 'customer'>, set: (frame: HTMLCanvasElement, contacts: TeamContacts) => void): CharacterFrames | null {
   if (!cozyTeamReady()) return null;
-  // Working attendants wear a compact cap over their hair. Saved hairstyles
-  // still belong to the player's owner avatar; no appearance data is migrated.
-  const capped = role === 'server' || role === 'barista';
-  const style = mod(look.hairStyle, 8), poses = capped ? attendant.slice(0, 9) : role === 'cook' ? chef : families[style], seats = capped ? attendant.slice(9) : role === 'cook' ? chefSeated : seated[style];
+  // Owner and floor staff share the same authored proportions and material ramps.
+  // Keep each saved hairstyle and outfit; the cook retains the chef uniform.
+  const style = mod(look.hairStyle, 8), poses = role === 'cook' ? chef : families[style], seats = role === 'cook' ? chefSeated : seated[style];
   const transform = teamStandingTransform(poses);
   const make = (index: number, mirrored = false) => {
     const p = poses[index], { scale, width, height, foot } = transform;
@@ -163,8 +161,6 @@ export function makeCozyTeam(look: Look, role: Exclude<Role, 'customer'>, set: (
   };
   // The source front/back steps share the same leading leg. Mirror the second
   // authored step as a whole figure to alternate feet without lengthening limbs.
-  // The new attendant includes independently authored opposite gait frames;
-  // preserve the asymmetric fringe and pin instead of mirroring the body.
-  const down = [make(0), make(1), capped ? make(2) : make(1, true)], up = [make(3), make(4), capped ? make(5) : make(4, true)], right = [6, 7, 8].map(i => make(i)), left = [6, 7, 8].map(i => make(i, true));
+  const down = [make(0), make(1), make(1, true)], up = [make(3), make(4), make(4, true)], right = [6, 7, 8].map(i => make(i)), left = [6, 7, 8].map(i => make(i, true));
   return { down, up, right, left, stand: down[0], sitRight: seat(0), sitLeft: seat(0, true), sitPetRight: [seat(1), seat(2)], sitPetLeft: [seat(1, true), seat(2, true)] };
 }
