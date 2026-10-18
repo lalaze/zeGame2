@@ -2,6 +2,8 @@ import { curtainSource, TEXTILE_COLORS } from './textile-styles';
 import { artRamp, mainTimber, mainCabinet, mainWall, mainFloor, mainCarpet, mainRug, mainSillPlant, mainSkyDisc, mainPickup, counterMaterial } from './main-room-surfaces';
 import { getLocale, t } from '../i18n';
 import { paintPixelSignText as paintSignText } from './sign-lettering';
+import { displayItemName } from '../ui/item-name';
+import { formatTransactionMoney } from '../game/format';
 import { mainKeyLight, paintWindowBounce } from './main-room-lighting';
 import { cozyCafePart } from './cozy-cafe-art';
 import { getGeneratedIngredientAdapter, getGeneratedMainEnvironmentAdapter } from './generated-main-art';
@@ -10,7 +12,7 @@ import { paintCozyService, paintCozyCakeDome } from './cozy-service-art';
 // café's back wall, floor, back bar and counter, the front wall along the bottom
 // edge, and the props (tables, chairs, crates) that the Phaser scene places.
 import { isDrink } from '../game/data';
-import { menuItems } from '../game/economy';
+import { itemPrice, menuItems } from '../game/economy';
 import {
   BACK_BAR,
   BAR_AISLE,
@@ -342,7 +344,7 @@ export class RoomPainter {
     this.ctx.restore(); return true;
   }
 
-  private generatedMenuBoard(state: GameState, x: number, y: number, width: number): boolean {
+  private generatedMenuBoard(state: GameState, x: number, y: number, width: number, time: number): boolean {
     const source = this.density > 1 ? generatedMainRaster('wall-board') : null;
     if (!source || source.width <= 20 || source.height <= 20) return false;
     const sw = source.width - 20, sh = source.height - 20, scale = width / sw;
@@ -355,19 +357,48 @@ export class RoomPainter {
       const rs = source.sourceScale;
       ctx.drawImage(source.source, 10 * rs, 10 * rs, sw * rs, sh * rs, x, y, width, sh * scale);
       ctx.beginPath(); ctx.rect(x + 51 * scale, y + 43 * scale, 697 * scale, 264 * scale); ctx.clip();
-      this.sign(ctx, state.profile?.cafeName ?? t('app.title'), x + width / 2, y + 6, width - 16, 7, artRamp('cloth-7')[2]);
-      this.sign(ctx, getLocale() === 'zh' ? '今日菜单' : 'MENU', x + width / 2, y + 13, width - 16, 6, artRamp('floor')[5]);
-      const today = menuItems(state);
-      [today.slice(0,5), today.slice(5,10)].forEach((row,ri) => {
-        const total = row.length * 16 - 4;
-        row.forEach((item,i) => {
-          const icon = itemIcon(item.id,false), iconScale = Math.min(9 / icon.width,9 / icon.height);
-          const iw = icon.width * iconScale, ih = icon.height * iconScale;
-          ctx.drawImage(fineSpriteArt(icon).canvas, x + width / 2 - total / 2 + i * 16 + (12 - iw) / 2, y + 19 + ri * 10 + (9 - ih), iw, ih);
-        });
-      });
+      this.paintChalkMenu(state, x + 51 * scale + 4, y + 43 * scale, 697 * scale - 8, time);
     } finally { ctx.restore(); }
     return true;
+  }
+
+  /** Keep short menus generous and longer menus legible, three named dishes per page. */
+  private paintChalkMenu(state: GameState, x: number, y: number, width: number, time: number): void {
+    const ctx = this.ctx, today = menuItems(state);
+    const pages = Math.max(1, Math.ceil(today.length / 3));
+    const page = Math.floor(Math.max(0, time) / 8) % pages;
+    const chalk = '#f3e8ce', gold = '#edcb88', muted = '#9aae91';
+    const headerWidth = width - (pages > 1 ? 23 : 0);
+    this.sign(ctx, t('board.today'), x + headerWidth / 2, y, headerWidth - 3, 7, gold);
+    if (pages > 1) this.sign(ctx, `${page + 1}/${pages}`, x + width - 10, y, 20, 7, muted);
+    ctx.fillStyle = '#66816a'; ctx.fillRect(x + 2, y + 8.5, width - 4, .5);
+    ctx.fillStyle = gold;
+    for (const dx of [0, width - 1]) ctx.fillRect(x + dx, y + 8, 1, 1.5);
+
+    const iconAt = (id: typeof today[number]['id'], left: number, top: number, size: number) => {
+      const icon = itemIcon(id, false), scale = Math.min(size / icon.width, size / icon.height);
+      const iw = icon.width * scale, ih = icon.height * scale;
+      ctx.drawImage(fineSpriteArt(icon).canvas, left + (size - iw) / 2, top + (size - ih) / 2, iw, ih);
+    };
+    const priceOf = (item: typeof today[number]) => formatTransactionMoney(
+      item.id.startsWith('sig:') ? item.basePrice : itemPrice(item, state.items[item.id]));
+    if (today.length === 0) {
+      this.sign(ctx, t('board.empty'), x + width / 2, y + 18, width - 8, 7, muted);
+    } else if (today.length === 1) {
+      const item = today[0], textLeft = x + 29, textWidth = width - 31;
+      iconAt(item.id, x + 6, y + 13, 17);
+      this.sign(ctx, displayItemName(item.id, state), textLeft + textWidth / 2, y + 12, textWidth, 8, chalk);
+      this.sign(ctx, priceOf(item), textLeft + textWidth / 2, y + 23, textWidth, 7, gold);
+    } else {
+      today.slice(page * 3, page * 3 + 3).forEach((item, i) => {
+        const rowY = y + 11 + i * 7.5;
+        const price = priceOf(item), priceWidth = Math.min(30, Math.max(12, textWidth(price) + 3));
+        const nameWidth = width - 11 - priceWidth;
+        iconAt(item.id, x + 1, rowY, 6.5);
+        this.sign(ctx, displayItemName(item.id, state), x + 9 + nameWidth / 2, rowY, nameWidth, 6.5, chalk);
+        this.sign(ctx, price, x + width - priceWidth / 2, rowY, priceWidth, 6.5, gold);
+      });
+    }
   }
 
   // Service fixtures keep their selected artwork when the counter finish changes.
@@ -645,16 +676,16 @@ export class RoomPainter {
     this.withPlane(MAIN_WALL_PLANE, () => mainSillPlant(this.ctx, id, cx, foot));
   }
 
-  drawMenuBoard(state: GameState): void {
-    this.withPlane(80, () => this.drawMenuBoardLogical(state));
+  drawMenuBoard(state: GameState, time = 0): void {
+    this.withPlane(80, () => this.drawMenuBoardLogical(state, time));
   }
 
-  private drawMenuBoardLogical(state: GameState): void {
+  private drawMenuBoardLogical(state: GameState, time: number): void {
     const x = 110;
     const y = 7;
     const w = 100;
     const h = 44;
-    if (this.generatedMenuBoard(state,x,y,w)) return;
+    if (this.generatedMenuBoard(state,x,y,w,time)) return;
     const frame = ramp('#9a6740');
     this.r(x - 1, y - 1, w + 2, h + 2, OUTLINE);
     this.r(x, y, w, h, frame.base);
@@ -682,20 +713,7 @@ export class RoomPainter {
     this.r(x + 8, y + h - 7, 14, 1, '#4f6e5c');
     this.r(x + w - 22, y + 7, 12, 1, '#4f6e5c');
     this.r(x + w - 14, y + h - 9, 6, 1, '#4f6e5c');
-    this.sign(this.ctx, state.profile?.cafeName ?? t('app.title'), x + w / 2, y + 3, w - 16, 8, artRamp('cloth-7')[2]);
-    this.sign(this.ctx, getLocale() === 'zh' ? '今日菜单' : 'MENU', x + w / 2, y + 11, w - 16, 6, artRamp('floor')[5]);
-    // Today's menu, as many as fit.
-    const today = menuItems(state);
-    const rows = [today.slice(0, 5), today.slice(5, 10)];
-    rows.forEach((row, ri) => {
-      const total = row.length * 16 - 4;
-      row.forEach((m, i) => {
-        const icon = itemIcon(m.id, false);
-        const ix = x + w / 2 - total / 2 + i * 16 + (12 - icon.width) / 2;
-        const iy = y + 18 + ri * 12 + (12 - icon.height);
-        this.ctx.drawImage(fineSpriteArt(icon).canvas, Math.round(ix), iy, icon.width, icon.height);
-      });
-    });
+    this.paintChalkMenu(state, x + 10, y + 5, w - 20, time);
     // Chalk tray.
     this.r(x + 6, y + h, w - 12, 2, frame.lo);
     this.r(x + 14, y + h - 1, 5, 1, '#f5efe0');

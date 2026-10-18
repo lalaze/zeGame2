@@ -49,6 +49,7 @@ import { GHOST_BAD, GHOST_OK, floorFurnitureBounds, paintFloorFurniture, paintWa
 import { paintPassageFloor, paintRoomBoundaries } from '../passages';
 import { lightingAt, roomAmbient, type Lighting } from '../lighting';
 import { previewLightDate } from '../preview-light';
+import { businessLightDate } from '../business-light';
 import { BENCH_RISE, BINS_RISE, DISH_PIT_RISE, FRIDGE_RISE, RACK_RISE, paintBench, paintBins, paintDishPit, paintKitchen, paintPastryFridge, paintRack } from '../kitchen-art';
 import { paintRegion } from '../region-art';
 import { CHAIR_LEFT, CHAIR_RIGHT, RoomPainter, TABLE, TABLE_CX, TABLE_TOP_DY, type CounterCup } from '../room-art';
@@ -478,10 +479,9 @@ export class CafeScene extends Phaser.Scene {
     const view = this.view;
     const state = this.getState();
     const t = time / 1000;
-    // The light (and the wall clock) follow the player's own local time, to the minute.
-    const real = previewLightDate(new Date(), window.location.href);
-    const now = new Date(2000, 0, 1, real.getHours(), real.getMinutes());
-    const light = lightingAt(real.getHours() + real.getMinutes() / 60);
+    // Windows, room lights and wall clocks share the saved business-day clock.
+    const now = previewLightDate(businessLightDate(state), window.location.href);
+    const light = lightingAt(now.getHours() + now.getMinutes() / 60);
     this.currentLight = light;
     const viewX = Math.round(view.viewX);
     const viewY = Math.round(view.viewY);
@@ -679,7 +679,7 @@ export class CafeScene extends Phaser.Scene {
         p.drawSill(decor.sill, sill.x + sill.w - 8, sill.y + sill.h + 1);
         // The neon sign glows in the left window, facing the street.
         p.withPlane(MAIN_WALL_PLANE, () => paintNeon(p.ctx, decor.neon, sill.x + sill.w / 2, sill.y + 4, t, state.profile?.cafeName, true));
-        p.drawMenuBoard(state);
+        p.drawMenuBoard(state, this.motionPreference.matches ? 0 : t);
         state.decor.placed.forEach((piece, i) => {
           const def = furnitureDef(piece.id);
           if (def?.surface === 'wall' && piece.col < COLS && i !== skip) p.withPlane(MAIN_WALL_PLANE, () => paintWallFurniture(p.ctx, piece.id, piece.col * CELL, WALL_TOP + piece.row * CELL, t, now));

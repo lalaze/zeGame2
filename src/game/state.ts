@@ -15,7 +15,7 @@ import {
 } from './data';
 import { DECOR, DECOR_SLOTS, STARTER_THEMES, decorDef, type DecorSlot } from './decor';
 import { bakeMorning, bulkCost, dayNeeds, fillBakePlan } from './economy';
-import { DEFAULT_ART_SPOT, STARTER_FURNITURE, evictBlocked, furnitureDef, type Placed } from './furniture';
+import { DEFAULT_ART_SPOT, STARTER_FURNITURE, canPlace, evictBlocked, furnitureDef, type Placed } from './furniture';
 import { REGIONS, mainTableCount, type RegionId } from './regions';
 
 import { parsePets, type Pet } from './pets';
@@ -23,7 +23,7 @@ import { parseTaste, type TasteState } from './taste';
 import { emptyReviews, parseReputation, parseReviews, type Reputation, type ReviewSummary } from './reputation';
 
 export const SAVE_KEY = 'tiny-bean-cafe/save';
-export const SAVE_VERSION = 16;
+export const SAVE_VERSION = 17;
 
 export interface Look {
   skin: number;
@@ -345,6 +345,14 @@ export function deserialize(raw: string | null, now: number): GameState {
   // Anything placed off the grid or in a table's way goes to storage.
   const movedFurniture = evictBlocked(base, mainTableCount(base));
   if (movedFurniture > 0) furnitureMovesOnLoad.set(base, movedFurniture);
+  // Move the old starter clock clear of the permanent wall lantern. Respect
+  // custom arrangements when another wall piece already occupies the new spot.
+  if (num(data.version, 0) < 17) {
+    base.decor.placed.forEach((piece, index) => {
+      if (piece.id === 'clock' && piece.col === 10 && piece.row === 0 &&
+          canPlace(base, 'clock', 11, 0, mainTableCount(base), index)) piece.col = 11;
+    });
+  }
   // Every bread and pastry on the menu gets a morning-bake amount. Before v5 nothing was
   // baked ahead, so a day in progress bakes its batch now.
   fillBakePlan(base);

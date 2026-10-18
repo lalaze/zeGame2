@@ -7,6 +7,8 @@ const nativeText = vi.fn();
 import { clearGeneratedMainAssets, installGeneratedMainAsset, type GeneratedMainId } from './generated-main-art';
 import { lightingAt } from './lighting';
 import { RoomPainter } from './room-art';
+import * as lettering from './sign-lettering';
+import { getLocale, setLocale, t } from '../i18n';
 
 vi.mock('./font',async(importOriginal)=>({
   ...await importOriginal<typeof import('./font')>(),
@@ -54,7 +56,7 @@ function windowRecord(hour=12,time=0,sign:boolean|null=null,density=2){
   const record=recording();new RoomPainter(record.ctx,density,false).drawWindow(WINDOWS[0],lightingAt(hour),time,sign);return record;
 }
 beforeEach(()=>{clearGeneratedMainAssets();vi.clearAllMocks();vi.stubGlobal('document',{createElement:()=>canvas()});});
-afterEach(()=>vi.unstubAllGlobals());
+afterEach(()=>{vi.unstubAllGlobals();vi.restoreAllMocks();});
 
 describe('selected main-wall bitmaps and live overlays',()=>{
   it('keeps the window native aspect, sill attachment and transparent-aperture coordinates',()=>{
@@ -113,7 +115,7 @@ describe('selected main-wall bitmaps and live overlays',()=>{
     }
   });
 
-  it('fits the full blank board at native aspect and keeps all ten real menu icons within the writing area',()=>{
+  it('fits each page of three named dishes within the board writing area',()=>{
     installWalls();const state=createInitialState(0);state.kitchen=true;
     state.onMenu=MENU.slice(0,10).map(item=>item.id);for(const id of state.onMenu)state.items[id]=1;
     const before=JSON.stringify(state),record=recording();
@@ -123,8 +125,8 @@ describe('selected main-wall bitmaps and live overlays',()=>{
     const[,,,,x,y,w,h]=draw.args;
     expect([x,y,w]).toEqual([110,7,100]);expect(w/798).toBeCloseTo(h/392,12);expect(y+h).toBeLessThan(57);
     const actual=images(record.events).filter(image=>image.source.itemId);
-    expect(actual.map(image=>image.source.itemId)).toEqual(menuItems(state).slice(0,10).map(item=>item.id));
-    expect(actual).toHaveLength(10);
+    expect(actual.map(image=>image.source.itemId)).toEqual(menuItems(state).slice(0,3).map(item=>item.id));
+    expect(actual).toHaveLength(3);
     for(const image of actual){
       const[ix,iy,iw,ih]=image.args,[cx,cy,cw,ch]=image.clip!;
       expect(iw/12).toBeCloseTo(ih/12,12);expect(Math.max(iw,ih)).toBeLessThanOrEqual(9);
@@ -136,6 +138,35 @@ describe('selected main-wall bitmaps and live overlays',()=>{
     expect(fills(record.events).filter(fill=>fill.w===.5&&fill.h===.5&&fill.y>=20&&fill.y<26).length).toBeGreaterThan(0);
     expect(JSON.stringify(state)).toBe(before);
     expect(record.state.activeClip).toBeNull();expect(record.state.imageSmoothingEnabled).toBe(true);expect(record.stack).toHaveLength(0);
+  });
+
+  it.each(['en','zh'] as const)('features a single real dish with its localized name and current price in %s',locale=>{
+    const before=getLocale();setLocale(locale);
+    try {
+      installWalls();const state=createInitialState(0),record=recording();
+      const sign=vi.spyOn(lettering,'paintPixelSignText');
+      const painter=new RoomPainter(record.ctx,2,false);
+      painter.drawMenuBoard(state);
+      expect(sign.mock.calls.map(call=>call[1])).toEqual([t('board.today'),t('item.espresso'),'$3']);
+      const icon=images(record.events).find(image=>image.source.itemId==='espresso')!;
+      expect(icon.args[2]).toBe(17);expect(icon.args[3]).toBe(17);
+      state.items.espresso=10;
+      sign.mockClear();painter.drawMenuBoard(state);
+      expect(sign.mock.calls.at(-1)![1]).not.toBe('$3');
+    } finally {setLocale(before);}
+  });
+
+  it('rotates through every selected dish, including those beyond the old ten-icon limit',()=>{
+    installWalls();const state=createInitialState(0);state.kitchen=true;
+    state.onMenu=MENU.slice(0,12).map(item=>item.id);for(const id of state.onMenu)state.items[id]=1;
+    const seen:string[]=[];
+    for(let page=0;page<4;page++){
+      const record=recording();new RoomPainter(record.ctx,2,false).drawMenuBoard(state,page*8);
+      seen.push(...images(record.events).filter(image=>image.source.itemId).map(image=>image.source.itemId!));
+    }
+    expect(seen).toEqual(menuItems(state).map(item=>item.id));
+    const wrapped=recording();new RoomPainter(wrapped.ctx,2,false).drawMenuBoard(state,32);
+    expect(images(wrapped.events).filter(image=>image.source.itemId).map(image=>image.source.itemId)).toEqual(seen.slice(0,3));
   });
 
   it('does not bake menu contents and keeps the legacy board fallback',()=>{

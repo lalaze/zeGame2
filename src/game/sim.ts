@@ -4,7 +4,7 @@ import { recordRegularGuestArrival, recordRegularGuestDeparture, recordRegularGu
 import { CUSTOMER_CAST, CustomerCastCycle } from './customer-cast';
 import { updatePromotion } from './promotion';
 import { updatePetCare } from './pets';
-import { MAX_QUEUE, PASS_SLOTS, RING_AGAIN, VIP_CHANCE, type ItemId } from './data';
+import { DAY_SECONDS, MAX_QUEUE, PASS_SLOTS, RING_AGAIN, VIP_CHANCE, type ItemId } from './data';
 import { finishDay, type DayReport } from './day';
 import { CELL, furnitureDef } from './furniture';
 import { routeFloorSegment, segmentCrossesObstacle, type FloorObstacle, type FloorPoint } from './navigation';
@@ -16,6 +16,7 @@ import {
   canPrepareItem,
   cookCount,
   earn,
+  hasServiceSupply,
   menuItems,
   patienceSeconds,
   prepTime,
@@ -996,10 +997,13 @@ export class Sim {
     if (!Number.isFinite(dt) || dt <= 0) return events;
     this.boostCooldown = Math.max(0, this.boostCooldown - dt);
 
+    // Close before admitting arrivals when a loaded or newly depleted menu is empty.
+    if (state.phase === 'open' && (state.dayTime >= DAY_SECONDS || !hasServiceSupply(state))) this.beginClosing(state);
     const open = state.phase === 'open';
     const running = state.phase !== 'prep';
-    const arrivalSeconds = open ? integratedTrafficSeconds(state.dayTime, dt) : dt;
+    const arrivalSeconds = open ? integratedTrafficSeconds(state.dayTime, Math.min(dt, DAY_SECONDS - state.dayTime)) : dt;
     if (running) state.dayTime += dt;
+    if (state.phase === 'open' && state.dayTime >= DAY_SECONDS) this.beginClosing(state);
     updatePetCare(state, dt);
     updatePromotion(state, dt);
     // Keep the saved timer in mean-rate seconds, including legacy snapshots.
@@ -1008,7 +1012,7 @@ export class Sim {
     if (dt > 0 && this.spawnTimer <= 0) {
       // Jittered so customers don't march in like clockwork.
       this.spawnTimer = (0.5 + this.rng()) / arrivalRate(state);
-      if (open) {
+      if (state.phase === 'open') {
         if (this.queue.length < MAX_QUEUE) this.spawn(state);
         else state.today.doorLost++;
       }
@@ -1083,6 +1087,9 @@ export class Sim {
     this.updateServers(state, dt, events);
     this.updateCooks(state, dt, events);
 
+    // The final serving can be reserved during this update. Finish that order
+    // through ordinary closing service rather than cancelling its unpaid work.
+    if (state.phase === 'open' && !hasServiceSupply(state)) this.beginClosing(state);
     this.customers = this.customers.filter(
       (c) => !(c.phase === 'exiting' && resting(c)),
     );

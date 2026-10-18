@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { COMBO_CHANCE, DAY_SECONDS, MENU, PASS_SLOTS, UPGRADES, VARIETY_BONUS } from './data';
-import { checkOpen, finishDay, formatOpenTime, openShop, type DayReport } from './day';
+import { checkOpen, openShop, type DayReport } from './day';
 import {
   arrivalRate,
   orderShares,
@@ -172,7 +172,11 @@ describe('simulation', () => {
     s.upgrades.barista = 2;
     const sim = new Sim(seeded(7));
     const run = (seconds: number) => {
-      for (let t = 0; t < seconds; t += 0.05) sim.update(s, 0.05);
+      for (let t = 0; t < seconds; t += 0.05) {
+        // Repeat whole traffic waves to measure steady service independently of closing.
+        s.dayTime %= DAY_SECONDS / 2;
+        sim.update(s, 0.05);
+      }
     };
     run(120);
     const before = s.served;
@@ -545,14 +549,14 @@ describe('business day', () => {
     expect(s.today.served).toBe(0);
   });
 
-  it('sells out when an ingredient runs out and counts the lost customers', () => {
+  it('closes after the last ingredient is used without admitting sold-out orders', () => {
     const s = createInitialState(0);
     s.pantry.beans = 3;
     openShop(s);
     const report = runDay(s, new Sim(seeded(5)));
     expect(report.served).toBe(3);
-    expect(report.soldOut).toBeGreaterThan(0);
-    expect(report.missed).toBeGreaterThanOrEqual(report.soldOut);
+    expect(report.soldOut).toBe(0);
+    expect(report.missed).toBe(0);
     expect(report.outOfStock).toEqual(['espresso']);
     expect(s.pantry.beans).toBe(0);
   });
@@ -596,28 +600,29 @@ describe('business day', () => {
     expect(poor.coins).toBe(0);
   });
 
-  it('stays open until closed, however long, and saves a day in progress', () => {
+  it('saves a day in progress and stops arrivals after twelve business hours', () => {
     const s = createInitialState(0);
     s.pantry.beans = 1e6;
     const sim = new Sim(seeded(9));
     expect(sim.closeShop(s)).toBeNull();
     openShop(s);
-    for (let t = 0; t < DAY_SECONDS * 2; t += 0.05) sim.update(s, 0.05);
+    for (let tick = 0; tick < DAY_SECONDS / 2 / .05; tick++) sim.update(s, .05);
     expect(s.phase).toBe('open');
-    // Customers keep coming long after a typical day.
-    const served = s.today.served;
-    for (let t = 0; t < 60; t += 0.05) sim.update(s, 0.05);
-    expect(s.today.served).toBeGreaterThan(served);
-    expect(formatOpenTime(s.dayTime)).toMatch(/^7:0\d$/);
-    expect(formatOpenTime(3725)).toBe('1:02:05');
-    s.dayTime = DAY_SECONDS / 2;
-    s.today.served = 7;
-    s.today.sales.espresso = 7;
     const back = deserialize(serialize(s), 0);
     expect(back.phase).toBe('open');
-    expect(back.dayTime).toBe(DAY_SECONDS / 2);
-    expect(back.today.sales).toEqual({ espresso: 7 });
-    expect(finishDay(back).served).toBe(7);
+    expect(back.dayTime).toBeCloseTo(DAY_SECONDS / 2);
+    expect(back.today.sales).toEqual(s.today.sales);
+    const resumed = new Sim(seeded(9));
+    expect(resumed.restore(sim.snapshot(s), back)).toBe(true);
+    for (let t = 0; t < DAY_SECONDS && back.phase === 'open'; t += .05) resumed.update(back, .05);
+    expect(back.phase).toBe('closing');
+    const nextId = resumed.snapshot(back).nextId;
+    for (let t = 0; t < 120 && !resumed.finishedService; t += .05) resumed.update(back, .05);
+    expect(resumed.finishedService).toBe(true);
+    expect(resumed.snapshot(back).nextId).toBe(nextId);
+    expect(resumed.closeShop(back)!.served).toBeGreaterThan(0);
+    expect(back.phase).toBe('prep');
+    expect(back.day).toBe(2);
   });
 
   it('gives saves from before days existed a stocked pantry', () => {
@@ -877,7 +882,7 @@ describe('furniture', () => {
     // Wall pieces only go on the free wall either side of the menu board.
     expect(canPlace(s, 'art_cat', 15, 0, 2)).toBe(false);
     expect(canPlace(s, 'sconce', 9, 0, 2)).toBe(true);
-    expect(canPlace(s, 'sconce', 10, 0, 2)).toBe(false); // the clock
+    expect(canPlace(s, 'sconce', 11, 0, 2)).toBe(false); // the clock
   });
 
   it('moves and stores placed pieces', () => {
@@ -968,7 +973,7 @@ describe('furniture', () => {
       }),
       0,
     );
-    expect(s.decor.placed).toEqual([{ id: 'clock', col: 10, row: 0 }]);
+    expect(s.decor.placed).toEqual([{ id: 'clock', col: 11, row: 0 }]);
     expect(s.decor.stored).toEqual({ lamp: 2, sconce: 1, bench: 1 });
   });
 });

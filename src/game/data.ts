@@ -288,8 +288,8 @@ export const MAX_VARIETY_BONUS = 0.6;
 // ---------------------------------------------------------------- the business day
 
 /**
- * The shop stays open until the player closes it. Forecasts (the suggested morning
- * bake, stocking up for a day) plan for a typical day of this many seconds at 1×.
+ * Simulation seconds for one 08:00–20:00 business day at 1×. Forecasts and
+ * automatic closing share this horizon; 2× and 4× shorten the real playing time.
  */
 export const DAY_SECONDS = 180;
 export const SPEEDS = [1, 2, 4] as const;

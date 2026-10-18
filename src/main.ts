@@ -9,8 +9,9 @@ import { pantryTaskContext } from './ui/play-flow-context';
 import { trafficHud } from './ui/traffic-status';
 import { showLivingCat } from './ui/living-cats';
 import type { CatId } from './game/pets';
-import { SPEEDS } from './game/data';
-import { formatOpenTime, openShop, type DayReport } from './game/day';
+import { DAY_SECONDS, SPEEDS } from './game/data';
+import { openShop, type DayReport } from './game/day';
+import { formatBusinessClock, formatBusinessDuration } from './game/business-clock';
 import { expectedCustomers, menuItems, tipMultiplier, unlockedItems } from './game/economy';
 import { canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
 import { formatMoney, formatTransactionMoney } from './game/format';
@@ -487,6 +488,7 @@ function updateStats(): void {
 
 const dayClock = $('day-clock');
 const dayClockBase = document.createElement('span');
+dayClockBase.style.whiteSpace = 'pre-line';
 const dayClockTraffic = document.createElement('span');
 dayClockTraffic.className = 'traffic-inline';
 dayClock.replaceChildren(dayClockBase, dayClockTraffic);
@@ -526,7 +528,8 @@ function updateDayHud(): void {
   updateCafeStyleButton(state);
   const open = state.phase !== 'prep';
   const closing = state.phase === 'closing';
-  const time = closing ? t('day.closing') : open ? t('day.openFor', { time: formatOpenTime(state.dayTime) }) : t('day.closed');
+  const clock = formatBusinessClock(state.dayTime);
+  const time = closing ? `${clock} · ${t('day.closing')}` : open ? t('day.openFor', { clock, time: formatBusinessDuration(state.dayTime) }) : t('day.closed');
   const traffic = trafficHud(state);
   const baseText = `${t('day.label', { n: state.day })} · ${time}`;
   const rhythmText = traffic ? `${traffic.label} → ${traffic.nextLabel}` : '';
@@ -716,6 +719,7 @@ function openSettings(): void {
   showModal({
     title: t('settings.title'),
     body: `
+      ${import.meta.env.DEV ? `<p><button type="button" class="pixel-btn danger" data-test-restart>${t('settings.testRestart')}</button></p><p class="note">${t('settings.testRestartHint')}</p>` : ''}
       ${
         profile
           ? `<div class="profile-row"><img src="${ownerIcon()}" alt="" /><div><b class="profile-cafe"></b><div class="note profile-owner"></div></div>
@@ -734,19 +738,11 @@ function openSettings(): void {
       <p class="note">${t(session.mode === 'temporary' ? 'save.temporary' : 'settings.saves')}</p>`,
     buttons: [
       { label: t('settings.back'), primary: true },
-      {
+      ...(!import.meta.env.DEV ? [{
         label: t('settings.reset'),
         danger: true,
-        onClick: () =>
-          showModal({
-            title: t('reset.title'),
-            body: t('reset.body'),
-            buttons: [
-              { label: t('reset.keep'), primary: true },
-              { label: t('reset.confirm'), danger: true, onClick: resetGame },
-            ],
-          }),
-      },
+        onClick: confirmRestart,
+      }] : []),
     ],
   });
   // Names are user text, so they go in via textContent rather than the HTML template.
@@ -756,6 +752,7 @@ function openSettings(): void {
     document.querySelector('.profile-owner')!.textContent = profile.ownerName || t('ob.char.defaultName');
   }
   document.querySelector('[data-guide-replay]')?.addEventListener('click', () => guide.showHelp());
+  document.querySelector('[data-test-restart]')?.addEventListener('click', confirmRestart);
   document.querySelector('[data-edit-profile]')?.addEventListener('click', () => {
     closeModal();
     editProfile();
@@ -771,9 +768,21 @@ function openSettings(): void {
 }
 $('settings-btn').addEventListener('click', openSettings);
 
+function confirmRestart(): void {
+  showModal({
+    title: t('reset.title'),
+    body: t('reset.body'),
+    buttons: [
+      { label: t('reset.keep'), primary: true, onClick: openSettings },
+      { label: t('reset.confirm'), danger: true, onClick: resetGame },
+    ],
+  });
+}
+
 function resetGame(): void {
   playFlow.cancelPantry();
   state = createInitialState(Date.now());
+  storage.setPreference(HINT_KEY, '');
   guide.reset();
   sim.reset();
   scene.livingCats.reset();
@@ -918,10 +927,16 @@ function frame(dt: number): void {
   const paused = drawer.paused || !startupComplete || !session.active || !!document.getElementById('save-session-notice') || isModalOpen() || document.hidden || !!document.querySelector('.onboard-overlay');
   scene.paused = paused;
   const simDt = paused ? 0 : state.phase !== 'prep' ? dt * state.speed : dt;
+  const wasOpen = state.phase === 'open';
   for (let remaining = simDt; remaining > 1e-6; remaining -= SIM_STEP) {
     scene.addEvents(sim.update(state, Math.min(SIM_STEP, remaining)));
   }
 
+  if (wasOpen && state.phase === 'closing') {
+    saveGame();
+    updateDayHud();
+    toast(t(state.dayTime >= DAY_SECONDS ? 'toast.hoursClosing' : 'toast.soldOutClosing'));
+  }
   if (!paused && state.phase === 'closing' && sim.finishedService) {
     const report = sim.closeShop(state);
     if (report) showReport(report);

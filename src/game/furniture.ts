@@ -92,7 +92,7 @@ interface Rect {
 
 /** Wall space that's free to hang things on: either side of the menu board. */
 const WALL_FREE: readonly Rect[] = [
-  { x: 72, y: WALL_TOP, w: 32, h: WALL_ROWS * CELL },
+  { x: 72, y: WALL_TOP, w: 40, h: WALL_ROWS * CELL },
   { x: 216, y: WALL_TOP, w: 32, h: WALL_ROWS * CELL },
 ];
 
@@ -235,7 +235,7 @@ export function furnitureComfort(state: GameState): number {
 
 /** What a new café starts with on the wall. */
 export const STARTER_FURNITURE: readonly Placed[] = [
-  { id: 'clock', col: 10, row: 0 },
+  { id: 'clock', col: 11, row: 0 },
   { id: 'mugrack', col: 27, row: 3 },
 ];
 /** Where a painting carried over from an old save goes. */

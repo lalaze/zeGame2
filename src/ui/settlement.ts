@@ -3,7 +3,8 @@ import { getLocale } from '../i18n';
 import { partnerText } from './partners';
 import { htmlItemName } from './item-name';
 import type { ItemId } from '../game/data';
-import { formatOpenTime, type DayReport } from '../game/day';
+import type { DayReport } from '../game/day';
+import { businessElapsedMinutes, formatBusinessDuration } from '../game/business-clock';
 import { formatAccountMoney, formatMoney } from '../game/format';
 import { settlementAdvice, type SettlementAdvice, type SettlementReason, type SettlementTab } from '../game/settlement-advice';
 import type { GameState } from '../game/state';
@@ -74,14 +75,14 @@ export function settlementHtml(report: DayReport, state: GameState): { body: str
         ${row(t('report.tableLost'), report.tableLost.toLocaleString())}
         ${row(t('report.extraLost'), report.extraLost.toLocaleString())}
         ${row(t('report.doorLost'), report.doorLost.toLocaleString())}
-        ${row(t('report.duration'), formatOpenTime(report.duration))}
+        ${row(t('report.duration'), formatBusinessDuration(report.duration))}
         ${row(t('report.ingredients'), '−' + formatAccountMoney(report.ingredientCost))}
         ${report.petCost > 0 ? row(t('pet.expense'), '−' + formatAccountMoney(report.petCost)) : ''}
         ${report.promotionCost > 0 ? row(t('promo.expense'), '−' + formatAccountMoney(report.promotionCost)) : ''}
         ${totalBaked ? row(t('report.baked'), totalBaked.toLocaleString()) + row(t('report.stale'), staleCount ? t('report.staleValue', { n: staleCount, money: formatMoney(report.staleCost) }) : '0') : ''}
       </dl>
       <p class="note">${text('report.costNote')}</p>
-      <p class="note">${report.duration >= 60 ? t('report.perMinute', { money: formatMoney(report.profit * 60 / report.duration) }) : t('report.shortSample')}</p>
+      <p class="note">${businessElapsedMinutes(report.duration) >= 1 ? t('report.perMinute', { money: formatMoney(report.profit / businessElapsedMinutes(report.duration)) }) : t('report.shortSample')}</p>
       ${secondaryReasons.length ? `<p class="note">${secondaryReasons.map(reasonText).join(' ')}</p>` : ''}
       ${ratingReportHtml(report)}
       ${bestHtml}

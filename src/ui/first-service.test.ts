@@ -69,7 +69,7 @@ describe('skippable and replayable first service guidance', () => {
     const skipped = new FirstServiceGuide(() => s, storage, actions); skipped.update();
     expect(skipped.element.hidden).toBe(true);
     const before = JSON.stringify(s); skipped.showHelp();
-    expect(document.querySelector('[role=dialog]')!.textContent).toContain('Stock for ~3 minutes');
+    expect(document.querySelector('[role=dialog]')!.textContent).toContain('Stock for the day');
     expect(JSON.stringify(s)).toBe(before);
   });
   it('does not rebuild or steal focus on repeated ticks and restores all tools on reopen', () => {

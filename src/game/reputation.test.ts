@@ -127,10 +127,13 @@ describe('reviews from simulated visits', () => {
     expect(state.reputation.recent).toHaveLength(1);
   });
 
-  it('produces one bad review for a sold-out main and none for merely closing a queue', () => {
+  it('produces a bad review for a sold-out main while another menu item remains available', () => {
     const state = shop();
     state.pantry.beans = 0;
-    const sim = new Sim(() => 0.99);
+    state.items.blacktea = 1;
+    state.onMenu.push('blacktea');
+    state.pantry.tea = 1000;
+    const sim = new Sim(() => 0);
     until(state, sim, () => state.today.soldOut === 1);
     expect(state.reputation.recent).toEqual([{ stars: 1, reason: 'soldOut', day: 1 }]);
     sim.beginClosing(state);

@@ -48,7 +48,7 @@ describe('progressive settlement disclosure', () => {
       'report.duration', 'report.ingredients', 'pet.expense', 'promo.expense', 'report.baked', 'report.stale'] as const) {
       expect(details.textContent).toContain(t(key));
     }
-    expect(details.textContent).toContain('2:00');
+    expect(details.textContent).toContain('8:00');
     expect(details.textContent).toContain('$1.50');
     expect(details.textContent).toContain('$2.25');
     expect(details.querySelector('.rating-report')).not.toBeNull();

@@ -253,6 +253,12 @@ export function readyServings(state: GameState, id: ItemId): number {
   return isBakery(id) ? projected.shelf[id] ?? 0 : servingsLeft({ ...state, pantry: projected.pantry }, id);
 }
 
+/** Whether today's menu has sellable stock or bakery stock the kitchen can replenish. */
+export function hasServiceSupply(state: GameState): boolean {
+  return menuItems(state).some(({ id }) => readyServings(state, id) >= 1 ||
+    state.kitchen && isBakery(id) && ((state.inProduction[id] ?? 0) >= 1 || servingsLeft(state, id) >= 1));
+}
+
 /**
  * Sells one serving: a bread or pastry comes off the shelf (its ingredients were
  * used at the morning bake); a drink uses its ingredients now. Returns false if none left.

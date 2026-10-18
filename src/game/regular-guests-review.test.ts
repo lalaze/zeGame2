@@ -170,14 +170,12 @@ describe('independent narrative durability and preference review', () => {
     }
   });
 
-  it('real sold-out Sim arrivals discover guests but cannot earn chapters', () => {
+  it('a fully sold-out café closes before discovering guests or earning chapters', () => {
     const s = createInitialState(0); openShop(s); s.pantry.beans = 0;
     const sim = new Sim(seeded()); advance(s, sim, 8000);
-    expect(Object.keys(s.regularGuests.guests).length).toBeGreaterThan(0);
+    expect(s.phase).toBe('closing');
+    expect(s.regularGuests.guests).toEqual({});
     expect(s.today.served).toBe(0);
-    for (const p of Object.values(s.regularGuests.guests)) {
-      expect(p!.served).toBe(0); expect(p!.unlockedChapters).toEqual([]);
-    }
   });
 
   it('resumes a real in-service guest and credits its successful handoff exactly once', () => {

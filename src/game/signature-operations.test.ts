@@ -150,9 +150,11 @@ describe('signature drinks in real café operations', () => {
 
   it('records a real stockout without payment, practice, or negative pantry stock', () => {
     const { s, id } = ready();
+    // Espresso keeps the café open while the selected custom drink is sold out.
+    s.onMenu = ['espresso'];
     s.pantry.milk = 1;
     openShop(s);
-    const sim = new Sim(() => 0);
+    const sim = new Sim(() => .99);
     until(s, sim, () => s.today.soldOut > 0);
     sim.beginClosing(s);
     until(s, sim, () => sim.finishedService);

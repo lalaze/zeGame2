@@ -117,9 +117,9 @@ describe('traffic waves in the existing service clock', () => {
 
   it('consumes the same unexpired arrival budget with slow and fast simulation steps', () => {
     const start = 29.75;
-    const duration = 180;
+    const duration = 90;
     const expected = 1000 - duration;
-    for (const step of [0.05, 0.5, 5, 180]) {
+    for (const step of [0.05, 0.5, 5, 90]) {
       const { state, sim, rng } = restoredClock(start, 1000);
       for (let i = 0; i < duration / step; i++) sim.update(state, step);
       expect(state.dayTime).toBeCloseTo(start + duration, 8);

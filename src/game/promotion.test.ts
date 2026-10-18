@@ -113,9 +113,11 @@ describe('paid creator promotion', () => {
   it('brings more real visits and creates bad-review risk through stockouts, not a rating penalty', () => {
     const run = (promoted: boolean) => {
       const s = shop(); s.pantry.beans = 30;
+      // A second supply keeps service open after the promoted drink sells out.
+      s.items.blacktea = 1; s.onMenu.push('blacktea'); s.pantry.tea = 1000;
       if (promoted) bookPromotion(s, 'clipStar');
       openShop(s);
-      const sim = new Sim(() => 0.99);
+      const sim = new Sim(() => 0.1);
       for (let n = 0; n < 180 * 20; n++) sim.update(s, 0.05);
       return s;
     };
