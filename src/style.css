@@ -1847,7 +1847,15 @@ html:lang(zh) body {
 /* Keep primary actions reachable even when explanations expand on a phone. */
 .modal { display: flex; flex-direction: column; overflow: hidden; }
 .modal > h2, .modal-actions { flex-shrink: 0; }
-.modal-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 2px; }
+.modal-body {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  padding: 2px;
+  /* Overlay scrollbars ignore the gutter, so keep content clear of their track too. */
+  padding-inline-end: 16px;
+}
 @media (max-width: 860px) {
   .first-service { display: block; margin: 5px 8px 0; padding: 8px; font-size: 12px; }
   .guide-actions { margin-top: 6px; gap: 6px; max-width: none; }
