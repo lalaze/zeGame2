@@ -1,0 +1,168 @@
+{
+  "mode": "ordinary-new-game-only",
+  "fixtures": [],
+  "started": "2026-10-18T12:04:50.410Z",
+  "elapsedSeconds": 10.035,
+  "normalComplete": true,
+  "results": [
+    {
+      "pass": true,
+      "label": "localhost is secure context"
+    },
+    {
+      "pass": true,
+      "label": "no save-session blocker"
+    },
+    {
+      "pass": true,
+      "label": "ordinary fresh new game"
+    }
+  ],
+  "milestones": [
+    {
+      "label": "Fresh onboarding completed",
+      "elapsedSeconds": 10,
+      "day": 1,
+      "phase": "prep",
+      "dayTime": 0,
+      "coins": 0,
+      "served": 0,
+      "pantry": {
+        "beans": 50,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 0,
+            "workedDays": 0,
+            "lastWorkedDay": 0,
+            "specialty": null,
+            "unlocked": 0,
+            "read": [],
+            "todayDay": 0,
+            "todayJobs": 0,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      },
+      "items": {
+        "espresso": 1,
+        "americano": 0,
+        "latte": 0,
+        "cappuccino": 0,
+        "flatwhite": 0,
+        "cortado": 0,
+        "mocha": 0,
+        "vienna": 0,
+        "macchiato": 0,
+        "coldbrew": 0,
+        "dirty": 0,
+        "pourover": 0,
+        "creamcoffee": 0,
+        "affogato": 0,
+        "blacktea": 0,
+        "hotchoc": 0,
+        "lemontea": 0,
+        "chai": 0,
+        "fruittea": 0,
+        "hojicha": 0,
+        "matcha": 0,
+        "frappe": 0,
+        "smoothie": 0,
+        "milktea": 0,
+        "matchafloat": 0,
+        "roll": 0,
+        "bagel": 0,
+        "baguette": 0,
+        "cheesebun": 0,
+        "pretzel": 0,
+        "focaccia": 0,
+        "ciabatta": 0,
+        "raisinbread": 0,
+        "sourdough": 0,
+        "rye": 0,
+        "chocobread": 0,
+        "shokupan": 0,
+        "brioche": 0,
+        "fruitbrioche": 0,
+        "garlicbread": 0,
+        "donut": 0,
+        "scone": 0,
+        "cookie": 0,
+        "croissant": 0,
+        "painchoc": 0,
+        "brownie": 0,
+        "cinnamon": 0,
+        "muffin": 0,
+        "creampuff": 0,
+        "melonpan": 0,
+        "eggtart": 0,
+        "cake": 0,
+        "swissroll": 0,
+        "cheesecake": 0,
+        "macaron": 0
+      },
+      "upgrades": {
+        "marketing": 0,
+        "machine": 0,
+        "barista": 0,
+        "server": 0,
+        "cook": 0,
+        "tables": 0
+      },
+      "kitchen": false,
+      "regions": [],
+      "today": {
+        "reviews": {
+          "stars": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "reasons": {},
+          "totalScore": 0
+        },
+        "served": 0,
+        "missed": 0,
+        "soldOut": 0,
+        "queueLost": 0,
+        "tableLost": 0,
+        "extraLost": 0,
+        "doorLost": 0,
+        "shortages": {},
+        "revenue": 0,
+        "ingredientCost": 0,
+        "petCost": 0,
+        "promotionCost": 0,
+        "sales": {},
+        "baked": {}
+      },
+      "pets": []
+    }
+  ],
+  "shots": [
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/gameplay-review-7085/navigation/navigation.png"
+  ],
+  "errors": []
+}

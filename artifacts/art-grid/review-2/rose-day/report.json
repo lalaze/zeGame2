@@ -1,0 +1,24 @@
+{
+  "base": "http://127.0.0.1:5199",
+  "backing": 4,
+  "light": "10.5",
+  "locale": "zh",
+  "style": "rose",
+  "shots": [
+    "artifacts/art-grid/review-2/rose-day/main-full.png",
+    "artifacts/art-grid/review-2/rose-day/main-counter.png",
+    "artifacts/art-grid/review-2/rose-day/main-window.png",
+    "artifacts/art-grid/review-2/rose-day/main-tables.png",
+    "artifacts/art-grid/review-2/rose-day/main-entry.png",
+    "artifacts/art-grid/review-2/rose-day/kitchen-full.png",
+    "artifacts/art-grid/review-2/rose-day/kitchen-left.png",
+    "artifacts/art-grid/review-2/rose-day/kitchen-right.png",
+    "artifacts/art-grid/review-2/rose-day/reading-full.png",
+    "artifacts/art-grid/review-2/rose-day/reading-corner.png",
+    "artifacts/art-grid/review-2/rose-day/greenhouse-full.png",
+    "artifacts/art-grid/review-2/rose-day/greenhouse-corner.png",
+    "artifacts/art-grid/review-2/rose-day/terrace-full.png",
+    "artifacts/art-grid/review-2/rose-day/terrace-corner.png"
+  ],
+  "errors": []
+}

@@ -1,0 +1,286 @@
+{
+  "results": [
+    {
+      "label": "scene captured",
+      "pass": true
+    },
+    {
+      "label": "zero balance purchase disabled",
+      "pass": true
+    },
+    {
+      "label": "first goal empty progress",
+      "pass": true
+    },
+    {
+      "label": "full stock renders status strip",
+      "pass": true
+    },
+    {
+      "label": "purchase shortfall explained",
+      "pass": true
+    },
+    {
+      "label": "balance still opens details",
+      "pass": true
+    },
+    {
+      "label": "details Escape retains panel",
+      "pass": true
+    },
+    {
+      "label": "viewing controls preserves game state",
+      "pass": true
+    },
+    {
+      "label": "hover changes surface",
+      "pass": true,
+      "normal": {
+        "bg": "rgb(250, 242, 225)",
+        "shadow": "rgb(73, 52, 40) 0px 0px 0px 1px, rgb(73, 52, 40) 0px 2px 0px 0px, rgba(255, 249, 236, 0.14) 0px 1px 0px 0px inset",
+        "translate": "none",
+        "color": "rgb(63, 48, 39)",
+        "outline": "none",
+        "w": 44,
+        "h": 44
+      },
+      "hover": {
+        "bg": "rgb(255, 249, 236)",
+        "shadow": "rgb(73, 52, 40) 0px 0px 0px 1px, rgb(73, 52, 40) 0px 2px 0px 0px, rgba(255, 249, 236, 0.14) 0px 1px 0px 0px inset",
+        "translate": "none",
+        "color": "rgb(63, 48, 39)",
+        "outline": "none",
+        "w": 44,
+        "h": 44
+      }
+    },
+    {
+      "label": "pressed sinks one pixel",
+      "pass": true,
+      "pressed": {
+        "bg": "rgb(255, 249, 236)",
+        "shadow": "rgb(73, 52, 40) 0px 0px 0px 1px, rgba(73, 52, 40, 0.19) 0px 1px 0px 0px inset",
+        "translate": "0px 1px",
+        "color": "rgb(63, 48, 39)",
+        "outline": "none",
+        "w": 44,
+        "h": 44
+      }
+    },
+    {
+      "label": "keyboard focus visibly outlined",
+      "pass": true,
+      "match": true,
+      "outline": "solid"
+    },
+    {
+      "label": "desktop panel fits viewport",
+      "pass": true,
+      "overflow": false,
+      "panel": {
+        "x": 1044,
+        "y": 52,
+        "w": 380,
+        "h": 932,
+        "right": 1424,
+        "bottom": 984
+      },
+      "canvas": {
+        "w": 1440,
+        "h": 1000
+      },
+      "small": []
+    },
+    {
+      "label": "desktop drawer preserves canvas scale",
+      "pass": true
+    },
+    {
+      "label": "desktop controls have 44px targets",
+      "pass": true,
+      "small": []
+    },
+    {
+      "label": "desktop sage selected tab",
+      "pass": true,
+      "bg": "rgb(89, 105, 75)",
+      "shadow": "rgb(73, 52, 40) 0px 0px 0px 1px, rgb(255, 249, 236) 0px -3px 0px 0px inset",
+      "translate": "none",
+      "color": "rgb(255, 249, 236)",
+      "outline": "none",
+      "w": 114.671875,
+      "h": 44
+    },
+    {
+      "label": "desktop Escape closes drawer",
+      "pass": true
+    },
+    {
+      "label": "mobile panel fits viewport",
+      "pass": true,
+      "overflow": false,
+      "panel": {
+        "x": 12,
+        "y": 88,
+        "w": 366,
+        "h": 744,
+        "right": 378,
+        "bottom": 832
+      },
+      "canvas": {
+        "w": 390,
+        "h": 844
+      },
+      "small": []
+    },
+    {
+      "label": "mobile drawer preserves canvas scale",
+      "pass": true
+    },
+    {
+      "label": "mobile controls have 44px targets",
+      "pass": true,
+      "small": []
+    },
+    {
+      "label": "mobile sage selected tab",
+      "pass": true,
+      "bg": "rgb(89, 105, 75)",
+      "shadow": "rgb(73, 52, 40) 0px 0px 0px 1px, rgb(255, 249, 236) 0px -3px 0px 0px inset",
+      "translate": "none",
+      "color": "rgb(255, 249, 236)",
+      "outline": "none",
+      "w": 110,
+      "h": 44
+    },
+    {
+      "label": "mobile Escape closes drawer",
+      "pass": true
+    },
+    {
+      "label": "narrow panel fits viewport",
+      "pass": true,
+      "overflow": false,
+      "panel": {
+        "x": 12,
+        "y": 88,
+        "w": 296,
+        "h": 640,
+        "right": 308,
+        "bottom": 728
+      },
+      "canvas": {
+        "w": 320,
+        "h": 740
+      },
+      "small": []
+    },
+    {
+      "label": "narrow drawer preserves canvas scale",
+      "pass": true
+    },
+    {
+      "label": "narrow controls have 44px targets",
+      "pass": true,
+      "small": []
+    },
+    {
+      "label": "narrow sage selected tab",
+      "pass": true,
+      "bg": "rgb(89, 105, 75)",
+      "shadow": "rgb(73, 52, 40) 0px 0px 0px 1px, rgb(255, 249, 236) 0px -3px 0px 0px inset",
+      "translate": "none",
+      "color": "rgb(255, 249, 236)",
+      "outline": "none",
+      "w": 86.671875,
+      "h": 44
+    },
+    {
+      "label": "narrow Escape closes drawer",
+      "pass": true
+    },
+    {
+      "label": "landscape panel fits viewport",
+      "pass": true,
+      "overflow": false,
+      "panel": {
+        "x": 452,
+        "y": 48,
+        "w": 380,
+        "h": 330,
+        "right": 832,
+        "bottom": 378
+      },
+      "canvas": {
+        "w": 844,
+        "h": 390
+      },
+      "small": []
+    },
+    {
+      "label": "landscape drawer preserves canvas scale",
+      "pass": true
+    },
+    {
+      "label": "landscape controls have 44px targets",
+      "pass": true,
+      "small": []
+    },
+    {
+      "label": "landscape sage selected tab",
+      "pass": true,
+      "bg": "rgb(89, 105, 75)",
+      "shadow": "rgb(73, 52, 40) 0px 0px 0px 1px, rgb(255, 249, 236) 0px -3px 0px 0px inset",
+      "translate": "none",
+      "color": "rgb(255, 249, 236)",
+      "outline": "none",
+      "w": 57.328125,
+      "h": 44
+    },
+    {
+      "label": "landscape Escape closes drawer",
+      "pass": true
+    },
+    {
+      "label": "empty wallet restock gives visible reason",
+      "pass": true
+    },
+    {
+      "label": "purchase enables with funds",
+      "pass": true
+    },
+    {
+      "label": "real purchase still charges and stocks exactly",
+      "pass": true,
+      "buyBefore": {
+        "coins": 100,
+        "beans": 0
+      },
+      "buyAfter": {
+        "coins": 90,
+        "beans": 10
+      }
+    },
+    {
+      "label": "no runtime exceptions",
+      "pass": true,
+      "errors": []
+    }
+  ],
+  "shots": [
+    "artifacts/materials-desktop-pantry.jpg",
+    "artifacts/materials-desktop-pressed.jpg",
+    "artifacts/materials-desktop-focus.jpg",
+    "artifacts/materials-desktop-pantry.jpg",
+    "artifacts/materials-desktop-menu.jpg",
+    "artifacts/materials-mobile-pantry.jpg",
+    "artifacts/materials-mobile-menu.jpg",
+    "artifacts/materials-narrow-pantry.jpg",
+    "artifacts/materials-narrow-menu.jpg",
+    "artifacts/materials-landscape-pantry.jpg",
+    "artifacts/materials-landscape-menu.jpg",
+    "artifacts/materials-desktop-funded.jpg"
+  ],
+  "errors": [],
+  "failed": []
+}

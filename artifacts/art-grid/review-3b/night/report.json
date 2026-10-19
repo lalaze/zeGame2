@@ -1,0 +1,24 @@
+{
+  "base": "http://127.0.0.1:5199",
+  "backing": 4,
+  "light": "21",
+  "locale": "zh",
+  "style": "cream",
+  "shots": [
+    "artifacts/art-grid/review-3b/night/main-full.png",
+    "artifacts/art-grid/review-3b/night/main-counter.png",
+    "artifacts/art-grid/review-3b/night/main-window.png",
+    "artifacts/art-grid/review-3b/night/main-tables.png",
+    "artifacts/art-grid/review-3b/night/main-entry.png",
+    "artifacts/art-grid/review-3b/night/kitchen-full.png",
+    "artifacts/art-grid/review-3b/night/kitchen-left.png",
+    "artifacts/art-grid/review-3b/night/kitchen-right.png",
+    "artifacts/art-grid/review-3b/night/reading-full.png",
+    "artifacts/art-grid/review-3b/night/reading-corner.png",
+    "artifacts/art-grid/review-3b/night/greenhouse-full.png",
+    "artifacts/art-grid/review-3b/night/greenhouse-corner.png",
+    "artifacts/art-grid/review-3b/night/terrace-full.png",
+    "artifacts/art-grid/review-3b/night/terrace-corner.png"
+  ],
+  "errors": []
+}

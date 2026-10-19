@@ -1,0 +1,521 @@
+{
+  "checks": [
+    {
+      "pass": true,
+      "label": "portrait no horizontal overflow"
+    },
+    {
+      "pass": true,
+      "label": "portrait room aspect unchanged"
+    },
+    {
+      "pass": true,
+      "label": "portrait full 44px door targets inside room",
+      "arrows": [
+        {
+          "direction": "left",
+          "x": 6.09375,
+          "y": 361,
+          "width": 44,
+          "height": 44,
+          "right": 50.09375,
+          "bottom": 405
+        },
+        {
+          "direction": "right",
+          "x": 339.90625,
+          "y": 421.9375,
+          "width": 44,
+          "height": 44,
+          "right": 383.90625,
+          "bottom": 465.9375
+        }
+      ],
+      "room": {
+        "x": 0,
+        "y": 275.75,
+        "width": 390,
+        "height": 292.5,
+        "right": 390,
+        "bottom": 568.25
+      }
+    },
+    {
+      "pass": true,
+      "label": "portrait right-edge tap opens reading"
+    },
+    {
+      "pass": true,
+      "label": "portrait locked card clears door targets"
+    },
+    {
+      "pass": true,
+      "label": "portrait map clears locked card",
+      "map": {
+        "x": 70,
+        "y": 788,
+        "width": 63,
+        "height": 44,
+        "right": 133,
+        "bottom": 832
+      },
+      "card": {
+        "x": 56,
+        "y": 302.40625,
+        "width": 278,
+        "height": 239.1875,
+        "right": 334,
+        "bottom": 541.59375
+      }
+    },
+    {
+      "pass": true,
+      "label": "portrait map clears settings and manage"
+    },
+    {
+      "pass": true,
+      "label": "portrait navigation preserves room bounds"
+    },
+    {
+      "pass": true,
+      "label": "portrait map opens from locked room"
+    },
+    {
+      "pass": true,
+      "label": "portrait map returns to room"
+    },
+    {
+      "pass": true,
+      "label": "portrait left-edge tap returns main"
+    },
+    {
+      "pass": true,
+      "label": "portrait kitchen preview reachable"
+    },
+    {
+      "pass": true,
+      "label": "portrait map clears kitchen card"
+    },
+    {
+      "pass": true,
+      "label": "portrait drawer preserves room bounds"
+    },
+    {
+      "pass": true,
+      "label": "portrait Escape closes drawer and restores focus"
+    },
+    {
+      "pass": true,
+      "label": "small no horizontal overflow"
+    },
+    {
+      "pass": true,
+      "label": "small room aspect unchanged"
+    },
+    {
+      "pass": true,
+      "label": "small full 44px door targets inside room",
+      "arrows": [
+        {
+          "direction": "left",
+          "x": 5,
+          "y": 230,
+          "width": 44,
+          "height": 44,
+          "right": 49,
+          "bottom": 274
+        },
+        {
+          "direction": "right",
+          "x": 271,
+          "y": 280,
+          "width": 44,
+          "height": 44,
+          "right": 315,
+          "bottom": 324
+        }
+      ],
+      "room": {
+        "x": 0,
+        "y": 164,
+        "width": 320,
+        "height": 240,
+        "right": 320,
+        "bottom": 404
+      }
+    },
+    {
+      "pass": true,
+      "label": "small right-edge tap opens reading"
+    },
+    {
+      "pass": true,
+      "label": "small locked card clears door targets"
+    },
+    {
+      "pass": true,
+      "label": "small map clears locked card",
+      "map": {
+        "x": 70,
+        "y": 512,
+        "width": 63,
+        "height": 44,
+        "right": 133,
+        "bottom": 556
+      },
+      "card": {
+        "x": 56,
+        "y": 170,
+        "width": 208,
+        "height": 228,
+        "right": 264,
+        "bottom": 398
+      }
+    },
+    {
+      "pass": true,
+      "label": "small map clears settings and manage"
+    },
+    {
+      "pass": true,
+      "label": "small navigation preserves room bounds"
+    },
+    {
+      "pass": true,
+      "label": "small map opens from locked room"
+    },
+    {
+      "pass": true,
+      "label": "small map returns to room"
+    },
+    {
+      "pass": true,
+      "label": "small left-edge tap returns main"
+    },
+    {
+      "pass": true,
+      "label": "small kitchen preview reachable"
+    },
+    {
+      "pass": true,
+      "label": "small map clears kitchen card"
+    },
+    {
+      "pass": true,
+      "label": "small drawer preserves room bounds"
+    },
+    {
+      "pass": true,
+      "label": "small Escape closes drawer and restores focus"
+    },
+    {
+      "pass": true,
+      "label": "landscape no horizontal overflow"
+    },
+    {
+      "pass": true,
+      "label": "landscape room aspect unchanged"
+    },
+    {
+      "pass": true,
+      "label": "landscape full 44px door targets inside room",
+      "arrows": [
+        {
+          "direction": "left",
+          "x": 170.125,
+          "y": 121,
+          "width": 44,
+          "height": 44,
+          "right": 214.125,
+          "bottom": 165
+        },
+        {
+          "direction": "right",
+          "x": 629.875,
+          "y": 202.25,
+          "width": 44,
+          "height": 44,
+          "right": 673.875,
+          "bottom": 246.25
+        }
+      ],
+      "room": {
+        "x": 162,
+        "y": 0,
+        "width": 520,
+        "height": 390,
+        "right": 682,
+        "bottom": 390
+      }
+    },
+    {
+      "pass": true,
+      "label": "landscape right-edge tap opens reading"
+    },
+    {
+      "pass": true,
+      "label": "landscape locked card clears door targets"
+    },
+    {
+      "pass": true,
+      "label": "landscape map clears locked card",
+      "map": {
+        "x": 70,
+        "y": 334,
+        "width": 63,
+        "height": 44,
+        "right": 133,
+        "bottom": 378
+      },
+      "card": {
+        "x": 262,
+        "y": 75.40625,
+        "width": 320,
+        "height": 239.1875,
+        "right": 582,
+        "bottom": 314.59375
+      }
+    },
+    {
+      "pass": true,
+      "label": "landscape map clears settings and manage"
+    },
+    {
+      "pass": true,
+      "label": "landscape navigation preserves room bounds"
+    },
+    {
+      "pass": true,
+      "label": "landscape map opens from locked room"
+    },
+    {
+      "pass": true,
+      "label": "landscape map returns to room"
+    },
+    {
+      "pass": true,
+      "label": "landscape left-edge tap returns main"
+    },
+    {
+      "pass": true,
+      "label": "landscape kitchen preview reachable"
+    },
+    {
+      "pass": true,
+      "label": "landscape map clears kitchen card"
+    },
+    {
+      "pass": true,
+      "label": "landscape drawer preserves room bounds"
+    },
+    {
+      "pass": true,
+      "label": "landscape Escape closes drawer and restores focus"
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary no horizontal overflow"
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary room aspect unchanged"
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary full 44px door targets inside room",
+      "arrows": [
+        {
+          "direction": "left",
+          "x": 13.4375,
+          "y": 242,
+          "width": 44,
+          "height": 44,
+          "right": 57.4375,
+          "bottom": 286
+        },
+        {
+          "direction": "right",
+          "x": 802.5625,
+          "y": 376.375,
+          "width": 44,
+          "height": 44,
+          "right": 846.5625,
+          "bottom": 420.375
+        }
+      ],
+      "room": {
+        "x": 0,
+        "y": 27.5,
+        "width": 860,
+        "height": 645,
+        "right": 860,
+        "bottom": 672.5
+      }
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary right-edge tap opens reading"
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary locked card clears door targets"
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary map clears locked card",
+      "map": {
+        "x": 70,
+        "y": 644,
+        "width": 63,
+        "height": 44,
+        "right": 133,
+        "bottom": 688
+      },
+      "card": {
+        "x": 270,
+        "y": 230.40625,
+        "width": 320,
+        "height": 239.1875,
+        "right": 590,
+        "bottom": 469.59375
+      }
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary map clears settings and manage"
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary navigation preserves room bounds"
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary map opens from locked room"
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary map returns to room"
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary left-edge tap returns main"
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary kitchen preview reachable"
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary map clears kitchen card"
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary drawer preserves room bounds"
+    },
+    {
+      "pass": true,
+      "label": "mobile-boundary Escape closes drawer and restores focus"
+    },
+    {
+      "pass": true,
+      "label": "desktop-boundary no horizontal overflow"
+    },
+    {
+      "pass": true,
+      "label": "desktop-boundary room aspect unchanged"
+    },
+    {
+      "pass": true,
+      "label": "desktop-boundary right-edge tap opens reading"
+    },
+    {
+      "pass": true,
+      "label": "desktop-boundary navigation preserves room bounds"
+    },
+    {
+      "pass": true,
+      "label": "desktop-boundary map opens from locked room"
+    },
+    {
+      "pass": true,
+      "label": "desktop-boundary map returns to room"
+    },
+    {
+      "pass": true,
+      "label": "desktop-boundary left-edge tap returns main"
+    },
+    {
+      "pass": true,
+      "label": "desktop-boundary kitchen preview reachable"
+    },
+    {
+      "pass": true,
+      "label": "desktop-boundary drawer preserves room bounds"
+    },
+    {
+      "pass": true,
+      "label": "desktop-boundary Escape closes drawer and restores focus"
+    },
+    {
+      "pass": true,
+      "label": "desktop no horizontal overflow"
+    },
+    {
+      "pass": true,
+      "label": "desktop room aspect unchanged"
+    },
+    {
+      "pass": true,
+      "label": "desktop right-edge tap opens reading"
+    },
+    {
+      "pass": true,
+      "label": "desktop navigation preserves room bounds"
+    },
+    {
+      "pass": true,
+      "label": "desktop map opens from locked room"
+    },
+    {
+      "pass": true,
+      "label": "desktop map returns to room"
+    },
+    {
+      "pass": true,
+      "label": "desktop left-edge tap returns main"
+    },
+    {
+      "pass": true,
+      "label": "desktop kitchen preview reachable"
+    },
+    {
+      "pass": true,
+      "label": "desktop drawer preserves room bounds"
+    },
+    {
+      "pass": true,
+      "label": "desktop Escape closes drawer and restores focus"
+    },
+    {
+      "pass": true,
+      "label": "no runtime exceptions",
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "shots": [
+    "artifacts/mobile-navigation/portrait-main.jpg",
+    "artifacts/mobile-navigation/portrait-reading.jpg",
+    "artifacts/mobile-navigation/small-main.jpg",
+    "artifacts/mobile-navigation/small-reading.jpg",
+    "artifacts/mobile-navigation/landscape-main.jpg",
+    "artifacts/mobile-navigation/landscape-reading.jpg",
+    "artifacts/mobile-navigation/mobile-boundary-main.jpg",
+    "artifacts/mobile-navigation/mobile-boundary-reading.jpg",
+    "artifacts/mobile-navigation/desktop-boundary-main.jpg",
+    "artifacts/mobile-navigation/desktop-boundary-reading.jpg",
+    "artifacts/mobile-navigation/desktop-main.jpg",
+    "artifacts/mobile-navigation/desktop-reading.jpg"
+  ],
+  "failed": []
+}

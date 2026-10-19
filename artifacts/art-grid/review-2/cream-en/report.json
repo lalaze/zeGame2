@@ -1,0 +1,24 @@
+{
+  "base": "http://127.0.0.1:5199",
+  "backing": 4,
+  "light": "16.5",
+  "locale": "en",
+  "style": "cream",
+  "shots": [
+    "artifacts/art-grid/review-2/cream-en/main-full.png",
+    "artifacts/art-grid/review-2/cream-en/main-counter.png",
+    "artifacts/art-grid/review-2/cream-en/main-window.png",
+    "artifacts/art-grid/review-2/cream-en/main-tables.png",
+    "artifacts/art-grid/review-2/cream-en/main-entry.png",
+    "artifacts/art-grid/review-2/cream-en/kitchen-full.png",
+    "artifacts/art-grid/review-2/cream-en/kitchen-left.png",
+    "artifacts/art-grid/review-2/cream-en/kitchen-right.png",
+    "artifacts/art-grid/review-2/cream-en/reading-full.png",
+    "artifacts/art-grid/review-2/cream-en/reading-corner.png",
+    "artifacts/art-grid/review-2/cream-en/greenhouse-full.png",
+    "artifacts/art-grid/review-2/cream-en/greenhouse-corner.png",
+    "artifacts/art-grid/review-2/cream-en/terrace-full.png",
+    "artifacts/art-grid/review-2/cream-en/terrace-corner.png"
+  ],
+  "errors": []
+}

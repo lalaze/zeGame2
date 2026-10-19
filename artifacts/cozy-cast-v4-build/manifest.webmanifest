@@ -1,0 +1,17 @@
+{
+  "name": "Tiny Bean Café",
+  "short_name": "Bean Café",
+  "description": "A cozy pixel-art idle coffee shop you can run on your coffee break.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#3a2418",
+  "theme_color": "#6e4128",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

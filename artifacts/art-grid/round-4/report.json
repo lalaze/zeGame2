@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-16",
+  "timezone": "America/New_York",
+  "pack": "cozy-cast-v5",
+  "scope": {
+    "characters": 30,
+    "bodyFamilies": 12,
+    "bodyPoses": 144,
+    "headPoses": 24,
+    "savedIdsAndLooksChanged": false,
+    "roomsChanged": false,
+    "staffChanged": false,
+    "historicalPacksDeleted": false,
+    "committed": false,
+    "stashed": false
+  },
+  "production": {
+    "generator": "built-in image_gen",
+    "sourceFolder": "assets/generated/cozy-cast-v5/sources",
+    "prompts": "assets/generated/cozy-cast-v5/prompts.md",
+    "hashes": "assets/generated/cozy-cast-v5/hashes.json",
+    "density": 2,
+    "bodyFrameArtSize": [
+      64,
+      88
+    ],
+    "headComponentArtSize": [
+      48,
+      48
+    ],
+    "postprocess": "connected-component extraction; authored neck/body/eye contacts; explicit canonical material ramps; pixel-conform conform at final dimensions",
+    "guest1": "same identity slot and Look, now resolved through v5 rather than historical sample override",
+    "glasses": "one-art-pixel warm hollow frames around visible highlighted eyes",
+    "furniture": "existing chair painted separately; no legacy furniture pixels in guest textures"
+  },
+  "verification": {
+    "typescript": {
+      "command": "npx tsc --noEmit",
+      "passed": true,
+      "log": "artifacts/art-grid/round-4/tsc.log"
+    },
+    "build": {
+      "command": "npm run build",
+      "passed": true,
+      "log": "artifacts/art-grid/round-4/build.log"
+    },
+    "tests": {
+      "command": "npx vitest run",
+      "passed": 2504,
+      "failed": 103,
+      "baselineFailedTests": 103,
+      "baselineSuiteLoadFailures": [
+        "[suite] scripts/cozy-cafe-art.test.mjs",
+        "[suite] scripts/loading-progress.test.ts",
+        "[suite] scripts/main-reference-art.test.mjs",
+        "[suite] scripts/reference-character-art.test.mjs"
+      ],
+      "newFailures": [],
+      "unchangedBaselineFailures": 103,
+      "log": "artifacts/art-grid/round-4/vitest.log",
+      "results": "artifacts/art-grid/round-4/vitest-results.json"
+    },
+    "palette": {
+      "command": "node scripts/pixel-conform.mjs check public/art/generated/cozy-cast-v5/*.png",
+      "pngs": 13,
+      "passed": true,
+      "log": "artifacts/art-grid/round-4/pixel-check.log"
+    },
+    "nativeFramesChecked": 540,
+    "offPaletteGuestPixels": 0,
+    "guestStandingHeight": [
+      37.5,
+      39.5
+    ],
+    "staffStandingHeight": [
+      37,
+      39.333333333333336
+    ],
+    "guestHeadHeight": [
+      17.5,
+      19.5
+    ],
+    "intentionalTestContractChange": "cozy-team-art.test.ts now asserts that both whole-figure families bypass the retired 1.6x customer leg transform and sample override, instead of requiring that obsolete transform to remain"
+  },
+  "visualReview": {
+    "before": "artifacts/art-grid/round-4/cast-before.png",
+    "after": "artifacts/art-grid/round-4/cast-after-offline.png",
+    "seatingProof": "artifacts/art-grid/round-4/seating-after-offline.png",
+    "metrics": "artifacts/art-grid/round-4/offline-metrics.json",
+    "renderer": "actual TypeScript preload/resolver/worldSpriteArt, run through a deterministic offline software canvas; not a browser or Phaser capture",
+    "scale": "standing and seated are both four display pixels per room pixel, with no seated-miniature scaling",
+    "inspectedAgainst": [
+      "cast-before.png",
+      "cozy-team-v7/hair-0-short-v1.png",
+      "cafe-style-sample-v1/sample.png"
+    ],
+    "fixesAfterInspection": [
+      "removed generator-grid crop assumptions and isolated overlapping hair islands",
+      "kept high-resolution keyed input separate from native compiled heads",
+      "detected real pupil positions before cleaning face pixels",
+      "anchored bows/headbands inside the hair silhouette",
+      "kept cream fabric out of skin recolour",
+      "separated existing chairs from palette-clean native guests",
+      "shortened seated legs and matched hip contact to the staff/cushion band at y32, without changing seat or floor coordinates",
+      "checked both seated directions against the real table/foreground pass"
+    ]
+  },
+  "remainingGaps": [
+    "Browser/Phaser captures, live seating transitions, pet-contact animation playback and tap/cup interaction checks remain for the requested outside-sandbox browser pass. No browser or server was started here."
+  ]
+}

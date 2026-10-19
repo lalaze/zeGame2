@@ -1,0 +1,113 @@
+[suite] scripts/cozy-cafe-art.test.mjs
+[suite] scripts/loading-progress.test.ts
+[suite] scripts/main-reference-art.test.mjs
+[suite] scripts/reference-character-art.test.mjs
+src/render/generated-character-sources.test.ts :: release baked character source packs keeps copied final pixels and both shared UI previews functional without original images
+src/render/generated-food-art.test.ts :: generated food bitmap adapter bottom-centers original display-case pastries at native aspect inside the existing shelf envelopes
+src/render/generated-main-art.test.ts :: generated main-room asset registry and painting queues each runtime image under its own stable key and the configured base URL
+src/render/generated-main-art.test.ts :: generated main-room asset registry and painting references only existing runtime PNGs with positive dimensions
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display draws no food with zero closing stock despite installed food bitmaps
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display draws no food with zero open stock despite installed food bitmaps
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display draws no food with zero prep stock despite installed food bitmaps
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display falls back per missing food asset while retaining the generated empty display
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display follows menu, ownership and kitchen changes instead of keeping food baked into the display
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display uses only live shelf stock during closing and clears sold-out food immediately
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display uses only live shelf stock during open and clears sold-out food immediately
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display uses only the preparation plan during prep, even when the live shelf disagrees
+src/render/generated-main-static-packing.test.ts :: unchanged main-room static placements, live overlays and fallback keeps every source crop, world destination, overlay and state unchanged in closing
+src/render/generated-main-static-packing.test.ts :: unchanged main-room static placements, live overlays and fallback keeps every source crop, world destination, overlay and state unchanged in open
+src/render/generated-main-static-packing.test.ts :: unchanged main-room static placements, live overlays and fallback keeps every source crop, world destination, overlay and state unchanged in prep
+src/render/generated-main-static-packing.test.ts :: unchanged main-room static placements, live overlays and fallback uses current plan/live stock and keeps the empty case independent of menu changes
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_gold) falls back only for the unavailable service-cupboard source
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_gold) fits the low cupboard uniformly at the existing contact point and retains the carafe
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_gold) lowers only the generated cupboard attachments and restores the caller transform
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_marble) falls back only for the unavailable service-cupboard source
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_marble) fits the low cupboard uniformly at the existing contact point and retains the carafe
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_marble) lowers only the generated cupboard attachments and restores the caller transform
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_oak) falls back only for the unavailable service-cupboard source
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_oak) fits the low cupboard uniformly at the existing contact point and retains the carafe
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_oak) lowers only the generated cupboard attachments and restores the caller transform
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_pink) falls back only for the unavailable service-cupboard source
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_pink) fits the low cupboard uniformly at the existing contact point and retains the carafe
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_pink) lowers only the generated cupboard attachments and restores the caller transform
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_walnut) falls back only for the unavailable service-cupboard source
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_walnut) fits the low cupboard uniformly at the existing contact point and retains the carafe
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_walnut) lowers only the generated cupboard attachments and restores the caller transform
+src/render/generated-wall-art.test.ts :: selected main-wall bitmaps and live overlays uses the actual new window aperture for floor sunlight, with dynamic night suppression
+src/render/living-cat-view.test.ts :: reciprocal guest rendering integration uses paired seated sprites for both table passes and static reduced-motion poses
+src/render/living-cat-view.test.ts :: resident rendering integration renders residents exactly once per frame, in the floor depth pass
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: authored shallow serviceware Scene support and live food layers original tray: 1 orders on legacy standing server
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: authored shallow serviceware Scene support and live food layers original tray: 1 orders on legacy walking server
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: authored shallow serviceware Scene support and live food layers original tray: 3 orders on legacy standing server
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: authored shallow serviceware Scene support and live food layers original tray: 3 orders on legacy walking server
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: authored shallow serviceware Scene support and live food layers packed tray: 1 orders on legacy standing server
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: authored shallow serviceware Scene support and live food layers packed tray: 1 orders on legacy walking server
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: authored shallow serviceware Scene support and live food layers packed tray: 3 orders on legacy standing server
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: authored shallow serviceware Scene support and live food layers packed tray: 3 orders on legacy walking server
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads generated: 1 live plates standing keep their identity, geometry and depth
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads generated: 1 live plates walking keep their identity, geometry and depth
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads generated: 3 live plates standing keep their identity, geometry and depth
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads generated: 3 live plates walking keep their identity, geometry and depth
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads keeps acknowledgement separate and above the head during delivering
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads keeps acknowledgement separate and above the head during toPass
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads missing-pack: 1 live plates standing keep their identity, geometry and depth
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads missing-pack: 1 live plates walking keep their identity, geometry and depth
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads missing-pack: 3 live plates standing keep their identity, geometry and depth
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads missing-pack: 3 live plates walking keep their identity, geometry and depth
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads other-look: 1 live plates standing keep their identity, geometry and depth
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads other-look: 1 live plates walking keep their identity, geometry and depth
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads other-look: 3 live plates standing keep their identity, geometry and depth
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads other-look: 3 live plates walking keep their identity, geometry and depth
+src/render/phaser/cafe-scene-generated-bitmap.test.ts :: generated server Scene composition retains live service payloads retains legacy icon size and integer centering when the server and menu adapters are absent
+src/render/phaser/cafe-scene-image-pool.test.ts :: actual CafeScene image dispatch with pooled image objects resets scale, flip, alpha and crop across fine, ordinary and named textures
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Mina hand and resident cat attachment aligns seat 0, elapsed 0, animated, without moving simulation objects
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Mina hand and resident cat attachment aligns seat 0, elapsed 0, paused, without moving simulation objects
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Mina hand and resident cat attachment aligns seat 0, elapsed 0, reduced, without moving simulation objects
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Mina hand and resident cat attachment aligns seat 0, elapsed 0.65, animated, without moving simulation objects
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Mina hand and resident cat attachment aligns seat 0, elapsed 0.65, paused, without moving simulation objects
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Mina hand and resident cat attachment aligns seat 0, elapsed 0.65, reduced, without moving simulation objects
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Mina hand and resident cat attachment aligns seat 1, elapsed 0, animated, without moving simulation objects
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Mina hand and resident cat attachment aligns seat 1, elapsed 0, paused, without moving simulation objects
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Mina hand and resident cat attachment aligns seat 1, elapsed 0, reduced, without moving simulation objects
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Mina hand and resident cat attachment aligns seat 1, elapsed 0.65, animated, without moving simulation objects
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Mina hand and resident cat attachment aligns seat 1, elapsed 0.65, paused, without moving simulation objects
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Mina hand and resident cat attachment aligns seat 1, elapsed 0.65, reduced, without moving simulation objects
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Siamese and Mina metadata contact aligns generated cat crown seat0, elapsed0, reducedfalse
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Siamese and Mina metadata contact aligns generated cat crown seat0, elapsed0, reducedtrue
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Siamese and Mina metadata contact aligns generated cat crown seat0, elapsed0.65, reducedfalse
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Siamese and Mina metadata contact aligns generated cat crown seat0, elapsed0.65, reducedtrue
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Siamese and Mina metadata contact aligns generated cat crown seat1, elapsed0, reducedfalse
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Siamese and Mina metadata contact aligns generated cat crown seat1, elapsed0, reducedtrue
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Siamese and Mina metadata contact aligns generated cat crown seat1, elapsed0.65, reducedfalse
+src/render/phaser/cafe-scene-pet-contact.test.ts :: generated Siamese and Mina metadata contact aligns generated cat crown seat1, elapsed0.65, reducedtrue
+src/render/phaser/cafe-scene-presentation.test.ts :: scene projection attachment groups moves a server, tray and food by exactly the same foot displacement
+src/render/rug-join.test.ts :: main entry rug at scene height 240 has continuous woven material through the T junction and the former floor gap
+src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps purchased rug_blue separate from the cross runner
+src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps purchased rug_red separate from the cross runner
+src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps purchased rug_round separate from the cross runner
+src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps the top border continuous and turns the lower borders down each side
+src/ui/generated-owner-preview.test.ts :: onboarding preview lifecycle does not paint a dismissed editing page when the atlas load finishes
+src/ui/generated-owner-preview.test.ts :: onboarding preview lifecycle updates the same edit preview without changing palettes or the original profile
+src/ui/generated-owner-preview.test.ts :: onboarding preview lifecycle uses the same fine standing frame on character and opening steps
+src/ui/generated-owner-preview.test.ts :: reference owner preview can retry after failure and clears the old error
+src/ui/generated-owner-preview.test.ts :: reference owner preview ignores an old rejection after a newer look has finished
+src/ui/generated-owner-preview.test.ts :: reference owner preview ignores an old result after switching to a newer custom look
+src/ui/generated-owner-preview.test.ts :: reference owner preview ignores stale requests even after returning to the same look
+src/ui/generated-owner-preview.test.ts :: reference owner preview keeps custom hair and snapshots it while loading
+src/ui/generated-owner-preview.test.ts :: reference owner preview keeps custom hairStyle and snapshots it while loading
+src/ui/generated-owner-preview.test.ts :: reference owner preview keeps custom pants and snapshots it while loading
+src/ui/generated-owner-preview.test.ts :: reference owner preview keeps custom shirt and snapshots it while loading
+src/ui/generated-owner-preview.test.ts :: reference owner preview keeps custom skin and snapshots it while loading
+src/ui/generated-owner-preview.test.ts :: reference owner preview uses an already decoded shared family without a preview-specific image request
+src/ui/generated-owner-preview.test.ts :: reference owner preview uses the shared fine standing frame at its logical size after decoding
+src/ui/regular-guests.test.ts :: bilingual and long journal construction keeps long text in a keyboard-scrollable body with an independent close row and wrap-safe CSS
+src/ui/regular-guests.test.ts :: bilingual and long journal construction renders all seen profiles and stories in en with no missing text
+src/ui/regular-guests.test.ts :: bilingual and long journal construction renders all seen profiles and stories in zh with no missing text
+src/ui/regular-guests.test.ts :: generated regular portrait identity replaces an already cached legacy portrait with the same generated stand used in the scene
+src/ui/regular-guests.test.ts :: intentional reads and uninterrupted paging ignores read and navigation controls from a dismissed or replaced dialog
+src/ui/regular-guests.test.ts :: intentional reads and uninterrupted paging keeps the same paused modal for chapter navigation and later, without marking read
+src/ui/regular-guests.test.ts :: intentional reads and uninterrupted paging saves one explicit read, updates the badge and makes rereads idempotent
+src/ui/regular-guests.test.ts :: journal keyboard and quiet HUD leaves Enter and Space to native buttons and closes by its persistent close action
+src/ui/regular-guests.test.ts :: journal keyboard and quiet HUD traps focus after page changes and restores the opener on Escape without marking read
+src/ui/regular-guests.test.ts :: regular journal discovery and privacy lists only unlocked titles and never exposes other guests in attributes or text
+src/ui/regular-guests.test.ts :: regular journal discovery and privacy shows an encountered profile and fixed portrait before service, but no chapter titles

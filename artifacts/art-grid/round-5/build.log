@@ -1,0 +1,42 @@
+(node:35837) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+> tiny-bean-cafe@0.1.0 prebuild
+> node scripts/subset-font.mjs
+
+(node:35864) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+src/assets/pixel-zh.woff2: 1468 glyphs, 46.4 KB
+
+> tiny-bean-cafe@0.1.0 build
+> tsc --noEmit && vite build
+
+(node:35892) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35893) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+vite v8.3.3 building client environment for production...
+transforming...
+✓ 169 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/sprite-preview.html                                           3.86 kB │ gzip:   2.15 kB
+dist/assets/pixelify-sans-cyrillic-400-normal-DfOZNMlW.woff        4.41 kB
+dist/assets/pixelify-sans-cyrillic-600-normal-B3EuUOZG.woff        4.47 kB
+dist/assets/pixelify-sans-latin-ext-400-normal-DdH6zlBQ.woff2      5.36 kB
+dist/assets/pixelify-sans-latin-ext-600-normal-Dha6RiOG.woff2      5.56 kB
+dist/assets/pixelify-sans-latin-ext-400-normal-BkfTUL4s.woff       7.44 kB
+dist/assets/pixelify-sans-latin-ext-600-normal-CDaIumwU.woff       7.65 kB
+dist/assets/pixelify-sans-latin-400-normal-DLrIX9QE.woff2          7.69 kB
+dist/assets/pixelify-sans-latin-600-normal-Dd_Dy7u5.woff2          8.21 kB
+dist/assets/pixelify-sans-latin-400-normal-JapMNN6Z.woff          10.26 kB
+dist/assets/pixelify-sans-latin-600-normal-BNlgYbDL.woff          10.77 kB
+dist/index.html                                                   16.45 kB │ gzip:   4.82 kB
+dist/assets/pixel-zh-Hr8Dr_34.woff2                               47.50 kB
+dist/assets/game-CJbHWQ2b.css                                    110.36 kB │ gzip:  27.11 kB
+dist/assets/artwork-BbGjGTBn.js                                   11.25 kB │ gzip:   4.94 kB
+dist/assets/game-CgDmP2ZQ.js                                     283.33 kB │ gzip:  99.47 kB
+dist/assets/region-art-BiUWqX2B.js                               807.58 kB │ gzip: 228.39 kB
+dist/assets/phaser-D8EC1TLR.js                                 1,374.10 kB │ gzip: 357.33 kB
+
+✓ built in 1.36s

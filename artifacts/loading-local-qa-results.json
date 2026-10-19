@@ -1,0 +1,200 @@
+{
+  "scope": "Isolated actual inline loader via file URL; no server or gameplay readiness verification",
+  "results": [
+    {
+      "label": "actual alpha atlas decodes",
+      "pass": true
+    },
+    {
+      "label": "four whole carry poses replace separate cup overlay",
+      "pass": true
+    },
+    {
+      "label": "pre-module activity moves without a fake percentage",
+      "pass": true,
+      "activity": [
+        "281.125px",
+        "267.781px",
+        "229.906px"
+      ]
+    },
+    {
+      "label": "all four gait frames advance in place without inventing progress",
+      "pass": true,
+      "gait": [
+        {
+          "x": 558,
+          "poses": [
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "progress": false
+        },
+        {
+          "x": 558,
+          "poses": [
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "progress": false
+        },
+        {
+          "x": 558,
+          "poses": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "progress": false
+        },
+        {
+          "x": 558,
+          "poses": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "progress": false
+        },
+        {
+          "x": 558,
+          "poses": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "progress": false
+        },
+        {
+          "x": 558,
+          "poses": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "progress": false
+        },
+        {
+          "x": 558,
+          "poses": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "progress": false
+        },
+        {
+          "x": 558,
+          "poses": [
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "progress": false
+        }
+      ]
+    },
+    {
+      "label": "staff stays centered at 0, 25, 80 and 100 percent without turning",
+      "pass": true,
+      "progressPositions": [
+        {
+          "x": 558,
+          "center": 600,
+          "expected": 600,
+          "facing": "none"
+        },
+        {
+          "x": 558,
+          "center": 600,
+          "expected": 600,
+          "facing": "none"
+        },
+        {
+          "x": 558,
+          "center": 600,
+          "expected": 600,
+          "facing": "none"
+        },
+        {
+          "x": 558,
+          "center": 600,
+          "expected": 600,
+          "facing": "none"
+        }
+      ]
+    },
+    {
+      "label": "desktop isolated loader fits",
+      "pass": true,
+      "x": 410,
+      "y": 255.75,
+      "w": 380,
+      "h": 288.5,
+      "overflow": false
+    },
+    {
+      "label": "mobile isolated loader fits",
+      "pass": true,
+      "x": 20,
+      "y": 281.5,
+      "w": 350,
+      "h": 281,
+      "overflow": false
+    },
+    {
+      "label": "small isolated loader fits",
+      "pass": true,
+      "x": 20,
+      "y": 143.5,
+      "w": 280,
+      "h": 281,
+      "overflow": false
+    },
+    {
+      "label": "landscape isolated loader fits",
+      "pass": true,
+      "x": 232,
+      "y": 50.75,
+      "w": 380,
+      "h": 288.5,
+      "overflow": false
+    },
+    {
+      "label": "reduced motion stationary carry pose",
+      "pass": true
+    },
+    {
+      "label": "reduced motion stops indeterminate activity",
+      "pass": true
+    },
+    {
+      "label": "idle/failure CSS stops decorative walk",
+      "pass": true
+    },
+    {
+      "label": "actual missing entry module surfaces failure and retry",
+      "pass": true
+    }
+  ],
+  "shots": [
+    "artifacts/loading-local-pose-0.jpg",
+    "artifacts/loading-local-pose-1.jpg",
+    "artifacts/loading-local-pose-2.jpg",
+    "artifacts/loading-local-pose-3.jpg",
+    "artifacts/loading-local-desktop.jpg",
+    "artifacts/loading-local-mobile.jpg",
+    "artifacts/loading-local-entry-failure.jpg"
+  ],
+  "failed": []
+}

@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-16",
+  "scope": "Extension-room artwork and on-grid thought lettering; approved main artwork and existing uncommitted work preserved.",
+  "items": {
+    "1": "Framed reading-to-glasshouse doorway; wall stops at header, runner starts at floor; bound room-specific joined runners. Door recess behind actors, trim in front.",
+    "2": "Golden native pane patches with existing travelling sunlight; continuous density-two lamp pools and contact shades; warm nights, preserved sky exposure and locked grades.",
+    "3": "Calm clay glasshouse tiles, patio flagstones and kitchen ceramics; original reading herringbone retained.",
+    "4": "Dedicated larger built-in armchairs and floor lamp at unchanged anchors; no placeable definitions, shop thumbnails, footprints or tap targets changed.",
+    "5": "Cached cloth-only cream/burgundy, sage and blue/cream table remaps; geometry/alpha/seats/poses unchanged; main table untouched.",
+    "6": "Continuous floor tape and capped hookups, ribbed rubber mats and shared pixel STORE/PREP signs; equipment gates/cook routes unchanged.",
+    "7": "Shared native pixel glyph masks for measurement, wrapping and density-two thought text; binary CJK fallback, font revision keys, both locales; timing/placement unchanged."
+  },
+  "verification": {
+    "typecheckExit": 0,
+    "buildExit": 0,
+    "vitestExit": 1,
+    "passedTests": 2499,
+    "failedTests": 103,
+    "failedDiscoverySuites": [
+      "[suite] scripts/cozy-cafe-art.test.mjs",
+      "[suite] scripts/loading-progress.test.ts",
+      "[suite] scripts/main-reference-art.test.mjs",
+      "[suite] scripts/reference-character-art.test.mjs"
+    ],
+    "newFailures": [],
+    "resolvedBaselineFailures": [
+      "src/render/generated-wall-art.test.ts :: selected main-wall bitmaps and live overlays uses the actual new window aperture for floor sunlight, with dynamic night suppression",
+      "src/render/rug-join.test.ts :: main entry rug at scene height 240 has continuous woven material through the T junction and the former floor gap",
+      "src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps purchased rug_blue separate from the cross runner",
+      "src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps purchased rug_red separate from the cross runner",
+      "src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps purchased rug_round separate from the cross runner",
+      "src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps the top border continuous and turns the lower borders down each side"
+    ],
+    "changedExistingTestContracts": [],
+    "focusedExit": 0,
+    "focusedPassedTests": 58,
+    "offlineRenderExit": 0,
+    "pixelCheckExit": 0,
+    "diffCheckExit": 0,
+    "pngs": [
+      "greenhouse-day.png",
+      "greenhouse-night.png",
+      "kitchen-day.png",
+      "kitchen-night.png",
+      "kitchen-reserved.png",
+      "reading-day.png",
+      "reading-night.png",
+      "terrace-day.png",
+      "terrace-night.png",
+      "thought-en.png",
+      "thought-zh.png"
+    ],
+    "runtimePngChanges": [],
+    "browserOrServerStarted": false,
+    "zeroNewFailures": true,
+    "baselineComparisonNote": "The foundation list is a superset: six entries are not failing in this worktree. This round changes none of those main-room test contracts."
+  },
+  "offlineMethod": "Native software-canvas production-painter composites, real source assets, CoreText masks passed through production binary glyph thresholding, additive lamp pools at runtime anchors; QA composites palette-snapped. Tables follow existing source crops and anchors, without live actors or Phaser camera. Palette quantization in opaque review boards can introduce visible brightness bands; continuous runtime falloff is additionally checked numerically by regression tests.",
+  "remainingGaps": [
+    "External Chrome captures remain necessary to verify final WebGL blending, live actor sorting, camera projection and phone/touch presentation. No implementation item remains blocked."
+  ],
+  "details": "docs/art-grid/extension-room-redraw.md"
+}

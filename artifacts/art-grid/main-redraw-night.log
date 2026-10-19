@@ -1,0 +1,8 @@
+(node:54160) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Warning: Detected unsettled top-level await at file:///Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/scripts/art-grid-qa.mjs:67
+  const target = await send('Target.createTarget', { url: 'about:blank' }, null);
+                 ^
+
+
+

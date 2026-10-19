@@ -1,0 +1,1411 @@
+{
+  "results": [
+    {
+      "label": "scene captured",
+      "pass": true
+    },
+    {
+      "label": "desktop ready and no horizontal overflow",
+      "pass": true,
+      "width": 1200,
+      "height": 900,
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 1200,
+        "height": 900
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1200,
+        "height": 900
+      },
+      "room": {
+        "x": 0,
+        "y": 0,
+        "width": 1200,
+        "height": 900
+      },
+      "panel": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "overflow": false,
+      "scrollY": 0,
+      "ready": true,
+      "open": false,
+      "paused": false,
+      "speed": 1,
+      "focus": "",
+      "modal": false,
+      "inert": false
+    },
+    {
+      "label": "desktop temporary notice does not overlap top HUD",
+      "pass": true,
+      "noticeBottom": 32,
+      "controls": [
+        {
+          "selector": ".hud .brand",
+          "top": 48
+        },
+        {
+          "selector": ".hud .money",
+          "top": 48
+        },
+        {
+          "selector": "#reputation-btn",
+          "top": 122
+        }
+      ]
+    },
+    {
+      "label": "desktop stage fills viewport",
+      "pass": true
+    },
+    {
+      "label": "desktop complete undistorted room",
+      "pass": true
+    },
+    {
+      "label": "desktop maximum contain",
+      "pass": true
+    },
+    {
+      "label": "desktop right door is unobstructed",
+      "pass": true,
+      "visible": true,
+      "hit": "<svg class=\"ui-pixel-icon\" viewBox=\"0 0 7 11\" aria-hidden=\"true\" focusable=\"false\" shape-rendering=\"crispEdges\"><path fill=\"#543425\" d=\"M0 0h2v2h2v2h2v3H4v2H2v2H0V8h2V6h2V5H2V3H0z\"></path><path fill=\"#c8a15e\" d=\"M0 0h1v2H0zm2 2h1v2H2zm2 2h1v2H4z\"></path></svg>",
+      "correct": true
+    },
+    {
+      "label": "desktop entire right arrow and label clear of rail",
+      "pass": true,
+      "arrow": {
+        "left": 1109.03125,
+        "top": 496.5,
+        "right": 1200.25,
+        "bottom": 570.5
+      },
+      "overlaps": []
+    },
+    {
+      "label": "desktop right door opens reading",
+      "pass": true
+    },
+    {
+      "label": "desktop left door returns main",
+      "pass": true
+    },
+    {
+      "label": "desktop map opens",
+      "pass": true
+    },
+    {
+      "label": "desktop map room click returns main",
+      "pass": true,
+      "mapPoint": {
+        "x": 600,
+        "y": 600
+      }
+    },
+    {
+      "label": "desktop shortcuts folded by default",
+      "pass": true
+    },
+    {
+      "label": "desktop Manage unfolds shortcuts",
+      "pass": true
+    },
+    {
+      "label": "desktop drawer never resizes room",
+      "pass": true,
+      "closed": {
+        "x": 0,
+        "y": 0,
+        "width": 1200,
+        "height": 900
+      },
+      "opened": {
+        "x": 0,
+        "y": 0,
+        "width": 1200,
+        "height": 900
+      }
+    },
+    {
+      "label": "desktop initial focus",
+      "pass": true
+    },
+    {
+      "label": "desktop pause policy",
+      "pass": true,
+      "paused": false,
+      "mobile": false
+    },
+    {
+      "label": "desktop open no overflow",
+      "pass": true
+    },
+    {
+      "label": "desktop six tabs present",
+      "pass": true,
+      "tabs": [
+        {
+          "id": "menu",
+          "visible": true,
+          "rect": {
+            "width": 114.65625,
+            "height": 44
+          }
+        },
+        {
+          "id": "pantry",
+          "visible": true,
+          "rect": {
+            "width": 114.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "upgrades",
+          "visible": true,
+          "rect": {
+            "width": 114.65625,
+            "height": 44
+          }
+        },
+        {
+          "id": "decor",
+          "visible": true,
+          "rect": {
+            "width": 114.65625,
+            "height": 44
+          }
+        },
+        {
+          "id": "pets",
+          "visible": true,
+          "rect": {
+            "width": 114.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "promotion",
+          "visible": true,
+          "rect": {
+            "width": 114.65625,
+            "height": 44
+          }
+        }
+      ]
+    },
+    {
+      "label": "desktop tab menu",
+      "pass": true
+    },
+    {
+      "label": "desktop tab pantry",
+      "pass": true
+    },
+    {
+      "label": "desktop tab upgrades",
+      "pass": true
+    },
+    {
+      "label": "desktop tab decor",
+      "pass": true
+    },
+    {
+      "label": "desktop tab pets",
+      "pass": true
+    },
+    {
+      "label": "desktop tab promotion",
+      "pass": true
+    },
+    {
+      "label": "desktop Escape restores focus",
+      "pass": true
+    },
+    {
+      "label": "wide ready and no horizontal overflow",
+      "pass": true,
+      "width": 1920,
+      "height": 1080,
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      "room": {
+        "x": 240,
+        "y": 0,
+        "width": 1440,
+        "height": 1080
+      },
+      "panel": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "overflow": false,
+      "scrollY": 0,
+      "ready": true,
+      "open": false,
+      "paused": false,
+      "speed": 1,
+      "focus": "panel-toggle",
+      "modal": false,
+      "inert": false
+    },
+    {
+      "label": "wide temporary notice does not overlap top HUD",
+      "pass": true,
+      "noticeBottom": 32,
+      "controls": [
+        {
+          "selector": ".hud .brand",
+          "top": 48
+        },
+        {
+          "selector": ".hud .money",
+          "top": 48
+        },
+        {
+          "selector": "#reputation-btn",
+          "top": 122
+        }
+      ]
+    },
+    {
+      "label": "wide stage fills viewport",
+      "pass": true
+    },
+    {
+      "label": "wide complete undistorted room",
+      "pass": true
+    },
+    {
+      "label": "wide maximum contain",
+      "pass": true
+    },
+    {
+      "label": "wide right door is unobstructed",
+      "pass": true,
+      "visible": true,
+      "hit": "<svg class=\"ui-pixel-icon\" viewBox=\"0 0 7 11\" aria-hidden=\"true\" focusable=\"false\" shape-rendering=\"crispEdges\"><path fill=\"#543425\" d=\"M0 0h2v2h2v2h2v3H4v2H2v2H0V8h2V6h2V5H2V3H0z\"></path><path fill=\"#c8a15e\" d=\"M0 0h1v2H0zm2 2h1v2H2zm2 2h1v2H4z\"></path></svg>",
+      "correct": true
+    },
+    {
+      "label": "wide entire right arrow and label clear of rail",
+      "pass": true,
+      "arrow": {
+        "left": 1585.28125,
+        "top": 600,
+        "right": 1676.5,
+        "bottom": 674
+      },
+      "overlaps": []
+    },
+    {
+      "label": "wide right door opens reading",
+      "pass": true
+    },
+    {
+      "label": "wide left door returns main",
+      "pass": true
+    },
+    {
+      "label": "wide map opens",
+      "pass": true
+    },
+    {
+      "label": "wide map room click returns main",
+      "pass": true,
+      "mapPoint": {
+        "x": 959.4376098418278,
+        "y": 720
+      }
+    },
+    {
+      "label": "wide real side rooms rendered",
+      "pass": true,
+      "visible": [
+        "room-main",
+        "room-main-counter",
+        "room-reading",
+        "room-kitchen"
+      ],
+      "regions": [],
+      "kitchen": false,
+      "area": "main"
+    },
+    {
+      "label": "adjacent preview does not dispatch game taps",
+      "pass": true
+    },
+    {
+      "label": "adjacent preview preserves unlocks and current room",
+      "pass": true
+    },
+    {
+      "label": "wide shortcuts folded by default",
+      "pass": true
+    },
+    {
+      "label": "wide Manage unfolds shortcuts",
+      "pass": true
+    },
+    {
+      "label": "wide drawer never resizes room",
+      "pass": true,
+      "closed": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+      "opened": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "label": "wide initial focus",
+      "pass": true
+    },
+    {
+      "label": "wide pause policy",
+      "pass": true,
+      "paused": false,
+      "mobile": false
+    },
+    {
+      "label": "wide open no overflow",
+      "pass": true
+    },
+    {
+      "label": "wide six tabs present",
+      "pass": true,
+      "tabs": [
+        {
+          "id": "menu",
+          "visible": true,
+          "rect": {
+            "width": 114.65625,
+            "height": 44
+          }
+        },
+        {
+          "id": "pantry",
+          "visible": true,
+          "rect": {
+            "width": 114.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "upgrades",
+          "visible": true,
+          "rect": {
+            "width": 114.65625,
+            "height": 44
+          }
+        },
+        {
+          "id": "decor",
+          "visible": true,
+          "rect": {
+            "width": 114.65625,
+            "height": 44
+          }
+        },
+        {
+          "id": "pets",
+          "visible": true,
+          "rect": {
+            "width": 114.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "promotion",
+          "visible": true,
+          "rect": {
+            "width": 114.65625,
+            "height": 44
+          }
+        }
+      ]
+    },
+    {
+      "label": "wide tab menu",
+      "pass": true
+    },
+    {
+      "label": "wide tab pantry",
+      "pass": true
+    },
+    {
+      "label": "wide tab upgrades",
+      "pass": true
+    },
+    {
+      "label": "wide tab decor",
+      "pass": true
+    },
+    {
+      "label": "wide tab pets",
+      "pass": true
+    },
+    {
+      "label": "wide tab promotion",
+      "pass": true
+    },
+    {
+      "label": "wide Escape restores focus",
+      "pass": true
+    },
+    {
+      "label": "mobile ready and no horizontal overflow",
+      "pass": true,
+      "width": 390,
+      "height": 844,
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "room": {
+        "x": 0,
+        "y": 275.75,
+        "width": 390,
+        "height": 292.5
+      },
+      "panel": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "overflow": false,
+      "scrollY": 0,
+      "ready": true,
+      "open": false,
+      "paused": false,
+      "speed": 1,
+      "focus": "panel-toggle",
+      "modal": false,
+      "inert": false
+    },
+    {
+      "label": "mobile temporary notice does not overlap top HUD",
+      "pass": true,
+      "noticeBottom": 64,
+      "controls": [
+        {
+          "selector": ".hud .brand",
+          "top": 76
+        },
+        {
+          "selector": ".hud .money",
+          "top": 76
+        },
+        {
+          "selector": "#reputation-btn",
+          "top": 146
+        }
+      ]
+    },
+    {
+      "label": "mobile stage fills viewport",
+      "pass": true
+    },
+    {
+      "label": "mobile complete undistorted room",
+      "pass": true
+    },
+    {
+      "label": "mobile maximum contain",
+      "pass": true
+    },
+    {
+      "label": "mobile real rear terrace rendered",
+      "pass": true,
+      "visible": [
+        "room-main",
+        "room-main-counter",
+        "room-terrace"
+      ],
+      "regions": [],
+      "kitchen": false,
+      "area": "main"
+    },
+    {
+      "label": "mobile drawer never resizes room",
+      "pass": true,
+      "closed": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "opened": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "label": "mobile initial focus",
+      "pass": true
+    },
+    {
+      "label": "mobile pause policy",
+      "pass": true,
+      "paused": true,
+      "mobile": true
+    },
+    {
+      "label": "mobile open no overflow",
+      "pass": true
+    },
+    {
+      "label": "mobile six tabs present",
+      "pass": true,
+      "tabs": [
+        {
+          "id": "menu",
+          "visible": true,
+          "rect": {
+            "width": 110,
+            "height": 44
+          }
+        },
+        {
+          "id": "pantry",
+          "visible": true,
+          "rect": {
+            "width": 110,
+            "height": 44
+          }
+        },
+        {
+          "id": "upgrades",
+          "visible": true,
+          "rect": {
+            "width": 110,
+            "height": 44
+          }
+        },
+        {
+          "id": "decor",
+          "visible": true,
+          "rect": {
+            "width": 110,
+            "height": 44
+          }
+        },
+        {
+          "id": "pets",
+          "visible": true,
+          "rect": {
+            "width": 110,
+            "height": 44
+          }
+        },
+        {
+          "id": "promotion",
+          "visible": true,
+          "rect": {
+            "width": 110,
+            "height": 44
+          }
+        }
+      ]
+    },
+    {
+      "label": "mobile tab menu",
+      "pass": true
+    },
+    {
+      "label": "mobile tab pantry",
+      "pass": true
+    },
+    {
+      "label": "mobile tab upgrades",
+      "pass": true
+    },
+    {
+      "label": "mobile tab decor",
+      "pass": true
+    },
+    {
+      "label": "mobile tab pets",
+      "pass": true
+    },
+    {
+      "label": "mobile tab promotion",
+      "pass": true
+    },
+    {
+      "label": "mobile Tab trap end",
+      "pass": true,
+      "controls": {
+        "count": 8,
+        "first": "<button id=\"drawer-balance\" type=\"button\" class=\"pixel-btn small drawer-balance\" aria-label=\"Balance $0. View amount details\">Balance: $0</button>",
+        "last": "<button role=\"tab\" data-tab=\"promotion\" class=\"tab active\" data-i18n=\"tab.promotion\" aria-selected=\"true\">Promote</button>"
+      }
+    },
+    {
+      "label": "mobile Shift Tab trap start",
+      "pass": true
+    },
+    {
+      "label": "mobile scene and HUD inert",
+      "pass": true
+    },
+    {
+      "label": "mobile Escape restores focus and prior state",
+      "pass": true,
+      "width": 390,
+      "height": 844,
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "room": {
+        "x": 0,
+        "y": 275.75,
+        "width": 390,
+        "height": 292.5
+      },
+      "panel": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "overflow": false,
+      "scrollY": 0,
+      "ready": true,
+      "open": false,
+      "paused": false,
+      "speed": 1,
+      "focus": "panel-toggle",
+      "modal": false,
+      "inert": false
+    },
+    {
+      "label": "mobile backdrop closes",
+      "pass": true
+    },
+    {
+      "label": "landscape ready and no horizontal overflow",
+      "pass": true,
+      "width": 844,
+      "height": 390,
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      },
+      "room": {
+        "x": 162,
+        "y": 0,
+        "width": 520,
+        "height": 390
+      },
+      "panel": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "overflow": false,
+      "scrollY": 0,
+      "ready": true,
+      "open": false,
+      "paused": false,
+      "speed": 1,
+      "focus": "panel-toggle",
+      "modal": false,
+      "inert": false
+    },
+    {
+      "label": "landscape temporary notice does not overlap top HUD",
+      "pass": true,
+      "noticeBottom": 48,
+      "controls": [
+        {
+          "selector": ".hud .brand",
+          "top": 60
+        },
+        {
+          "selector": ".hud .money",
+          "top": 60
+        },
+        {
+          "selector": "#reputation-btn",
+          "top": 130
+        }
+      ]
+    },
+    {
+      "label": "landscape stage fills viewport",
+      "pass": true
+    },
+    {
+      "label": "landscape complete undistorted room",
+      "pass": true
+    },
+    {
+      "label": "landscape maximum contain",
+      "pass": true
+    },
+    {
+      "label": "landscape real side rooms rendered",
+      "pass": true,
+      "visible": [
+        "room-main",
+        "room-main-counter",
+        "room-reading",
+        "room-kitchen"
+      ],
+      "regions": [],
+      "kitchen": false,
+      "area": "main"
+    },
+    {
+      "label": "landscape drawer never resizes room",
+      "pass": true,
+      "closed": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      },
+      "opened": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      }
+    },
+    {
+      "label": "landscape initial focus",
+      "pass": true
+    },
+    {
+      "label": "landscape pause policy",
+      "pass": true,
+      "paused": true,
+      "mobile": true
+    },
+    {
+      "label": "landscape open no overflow",
+      "pass": true
+    },
+    {
+      "label": "landscape six tabs present",
+      "pass": true,
+      "tabs": [
+        {
+          "id": "menu",
+          "visible": true,
+          "rect": {
+            "width": 57.328125,
+            "height": 44
+          }
+        },
+        {
+          "id": "pantry",
+          "visible": true,
+          "rect": {
+            "width": 57.328125,
+            "height": 44
+          }
+        },
+        {
+          "id": "upgrades",
+          "visible": true,
+          "rect": {
+            "width": 57.328125,
+            "height": 44
+          }
+        },
+        {
+          "id": "decor",
+          "visible": true,
+          "rect": {
+            "width": 57.34375,
+            "height": 44
+          }
+        },
+        {
+          "id": "pets",
+          "visible": true,
+          "rect": {
+            "width": 57.328125,
+            "height": 44
+          }
+        },
+        {
+          "id": "promotion",
+          "visible": true,
+          "rect": {
+            "width": 57.328125,
+            "height": 44
+          }
+        }
+      ]
+    },
+    {
+      "label": "landscape tab menu",
+      "pass": true
+    },
+    {
+      "label": "landscape tab pantry",
+      "pass": true
+    },
+    {
+      "label": "landscape tab upgrades",
+      "pass": true
+    },
+    {
+      "label": "landscape tab decor",
+      "pass": true
+    },
+    {
+      "label": "landscape tab pets",
+      "pass": true
+    },
+    {
+      "label": "landscape tab promotion",
+      "pass": true
+    },
+    {
+      "label": "landscape Tab trap end",
+      "pass": true,
+      "controls": {
+        "count": 8,
+        "first": "<button id=\"drawer-balance\" type=\"button\" class=\"pixel-btn small drawer-balance\" aria-label=\"Balance $0. View amount details\">Balance: $0</button>",
+        "last": "<button role=\"tab\" data-tab=\"promotion\" class=\"tab active\" data-i18n=\"tab.promotion\" aria-selected=\"true\">Promote</button>"
+      }
+    },
+    {
+      "label": "landscape Shift Tab trap start",
+      "pass": true
+    },
+    {
+      "label": "landscape scene and HUD inert",
+      "pass": true
+    },
+    {
+      "label": "landscape Escape restores focus and prior state",
+      "pass": true,
+      "width": 844,
+      "height": 390,
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 844,
+        "height": 390
+      },
+      "room": {
+        "x": 162,
+        "y": 0,
+        "width": 520,
+        "height": 390
+      },
+      "panel": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "overflow": false,
+      "scrollY": 0,
+      "ready": true,
+      "open": false,
+      "paused": false,
+      "speed": 1,
+      "focus": "panel-toggle",
+      "modal": false,
+      "inert": false
+    },
+    {
+      "label": "landscape backdrop closes",
+      "pass": true
+    },
+    {
+      "label": "wide-landscape ready and no horizontal overflow",
+      "pass": true,
+      "width": 932,
+      "height": 430,
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 932,
+        "height": 430
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 932,
+        "height": 430
+      },
+      "room": {
+        "x": 179.328125,
+        "y": 0,
+        "width": 573.328125,
+        "height": 430
+      },
+      "panel": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "overflow": false,
+      "scrollY": 0,
+      "ready": true,
+      "open": false,
+      "paused": false,
+      "speed": 1,
+      "focus": "panel-toggle",
+      "modal": false,
+      "inert": false
+    },
+    {
+      "label": "wide-landscape temporary notice does not overlap top HUD",
+      "pass": true,
+      "noticeBottom": 48,
+      "controls": [
+        {
+          "selector": ".hud .brand",
+          "top": 64
+        },
+        {
+          "selector": ".hud .money",
+          "top": 64
+        },
+        {
+          "selector": "#reputation-btn",
+          "top": 138
+        }
+      ]
+    },
+    {
+      "label": "wide-landscape stage fills viewport",
+      "pass": true
+    },
+    {
+      "label": "wide-landscape complete undistorted room",
+      "pass": true
+    },
+    {
+      "label": "wide-landscape maximum contain",
+      "pass": true
+    },
+    {
+      "label": "wide-landscape drawer never resizes room",
+      "pass": true,
+      "closed": {
+        "x": 0,
+        "y": 0,
+        "width": 932,
+        "height": 430
+      },
+      "opened": {
+        "x": 0,
+        "y": 0,
+        "width": 932,
+        "height": 430
+      }
+    },
+    {
+      "label": "wide-landscape initial focus",
+      "pass": true
+    },
+    {
+      "label": "wide-landscape pause policy",
+      "pass": true,
+      "paused": true,
+      "mobile": true
+    },
+    {
+      "label": "wide-landscape open no overflow",
+      "pass": true
+    },
+    {
+      "label": "wide-landscape six tabs present",
+      "pass": true,
+      "tabs": [
+        {
+          "id": "menu",
+          "visible": true,
+          "rect": {
+            "width": 114.65625,
+            "height": 44
+          }
+        },
+        {
+          "id": "pantry",
+          "visible": true,
+          "rect": {
+            "width": 114.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "upgrades",
+          "visible": true,
+          "rect": {
+            "width": 114.65625,
+            "height": 44
+          }
+        },
+        {
+          "id": "decor",
+          "visible": true,
+          "rect": {
+            "width": 114.65625,
+            "height": 44
+          }
+        },
+        {
+          "id": "pets",
+          "visible": true,
+          "rect": {
+            "width": 114.671875,
+            "height": 44
+          }
+        },
+        {
+          "id": "promotion",
+          "visible": true,
+          "rect": {
+            "width": 114.65625,
+            "height": 44
+          }
+        }
+      ]
+    },
+    {
+      "label": "wide-landscape tab menu",
+      "pass": true
+    },
+    {
+      "label": "wide-landscape tab pantry",
+      "pass": true
+    },
+    {
+      "label": "wide-landscape tab upgrades",
+      "pass": true
+    },
+    {
+      "label": "wide-landscape tab decor",
+      "pass": true
+    },
+    {
+      "label": "wide-landscape tab pets",
+      "pass": true
+    },
+    {
+      "label": "wide-landscape tab promotion",
+      "pass": true
+    },
+    {
+      "label": "wide-landscape Tab trap end",
+      "pass": true,
+      "controls": {
+        "count": 8,
+        "first": "<button id=\"drawer-balance\" type=\"button\" class=\"pixel-btn small drawer-balance\" aria-label=\"Balance $0. View amount details\">Balance: $0</button>",
+        "last": "<button role=\"tab\" data-tab=\"promotion\" class=\"tab active\" data-i18n=\"tab.promotion\" aria-selected=\"true\">Promote</button>"
+      }
+    },
+    {
+      "label": "wide-landscape Shift Tab trap start",
+      "pass": true
+    },
+    {
+      "label": "wide-landscape scene and HUD inert",
+      "pass": true
+    },
+    {
+      "label": "wide-landscape Escape restores focus and prior state",
+      "pass": true,
+      "width": 932,
+      "height": 430,
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 932,
+        "height": 430
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 932,
+        "height": 430
+      },
+      "room": {
+        "x": 179.328125,
+        "y": 0,
+        "width": 573.328125,
+        "height": 430
+      },
+      "panel": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "overflow": false,
+      "scrollY": 0,
+      "ready": true,
+      "open": false,
+      "paused": false,
+      "speed": 1,
+      "focus": "panel-toggle",
+      "modal": false,
+      "inert": false
+    },
+    {
+      "label": "wide-landscape backdrop closes",
+      "pass": true
+    },
+    {
+      "label": "edge entry menu",
+      "pass": true
+    },
+    {
+      "label": "edge focus return menu",
+      "pass": true
+    },
+    {
+      "label": "edge entry pantry",
+      "pass": true
+    },
+    {
+      "label": "edge focus return pantry",
+      "pass": true
+    },
+    {
+      "label": "edge entry upgrades",
+      "pass": true
+    },
+    {
+      "label": "edge focus return upgrades",
+      "pass": true
+    },
+    {
+      "label": "edge entry decor",
+      "pass": true
+    },
+    {
+      "label": "edge focus return decor",
+      "pass": true
+    },
+    {
+      "label": "edge entry pets",
+      "pass": true
+    },
+    {
+      "label": "edge focus return pets",
+      "pass": true
+    },
+    {
+      "label": "edge entry promotion",
+      "pass": true
+    },
+    {
+      "label": "edge focus return promotion",
+      "pass": true
+    },
+    {
+      "label": "Escape folds shortcuts",
+      "pass": true
+    },
+    {
+      "label": "outside press folds shortcuts",
+      "pass": true
+    },
+    {
+      "label": "panel click does not reach canvas",
+      "pass": true
+    },
+    {
+      "label": "desktop table preview activates",
+      "pass": true
+    },
+    {
+      "label": "desktop first Escape clears only table preview",
+      "pass": true
+    },
+    {
+      "label": "mobile table preview reveals scene and remains active",
+      "pass": true
+    },
+    {
+      "label": "mobile table preview Back returns upgrades",
+      "pass": true
+    },
+    {
+      "label": "mobile table preview Escape returns upgrades",
+      "pass": true
+    },
+    {
+      "label": "modal over drawer paused",
+      "pass": true
+    },
+    {
+      "label": "closing modal retains drawer pause",
+      "pass": true
+    },
+    {
+      "label": "closing drawer restores speed 4",
+      "pass": true
+    },
+    {
+      "label": "closing drawer cannot unpause existing modal",
+      "pass": true,
+      "width": 390,
+      "height": 844,
+      "stage": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844
+      },
+      "room": {
+        "x": 0,
+        "y": 275.75,
+        "width": 390,
+        "height": 292.5
+      },
+      "panel": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "overflow": false,
+      "scrollY": 0,
+      "ready": true,
+      "open": false,
+      "paused": true,
+      "speed": 4,
+      "focus": "",
+      "modal": true,
+      "inert": false
+    },
+    {
+      "label": "mobile arrange collapses drawer and resumes room",
+      "pass": true
+    },
+    {
+      "label": "arrange done reopens drawer",
+      "pass": true
+    },
+    {
+      "label": "arrange cancel preserves inventory",
+      "pass": true
+    },
+    {
+      "label": "furniture purchase enters placement",
+      "pass": true
+    },
+    {
+      "label": "placement cancel returns catalog",
+      "pass": true
+    },
+    {
+      "label": "furniture placed by real pointer",
+      "pass": true,
+      "point": {
+        "x": 23.349019607843132,
+        "y": 469.2274368231047
+      }
+    },
+    {
+      "label": "successful placement returns catalog and pause",
+      "pass": true
+    },
+    {
+      "label": "no runtime errors",
+      "pass": true
+    }
+  ],
+  "shots": [
+    "artifacts/adjacent-desktop-closed.jpg",
+    "artifacts/adjacent-desktop-shortcuts.jpg",
+    "artifacts/adjacent-desktop-open.jpg",
+    "artifacts/adjacent-wide-closed.jpg",
+    "artifacts/adjacent-wide-shortcuts.jpg",
+    "artifacts/adjacent-wide-open.jpg",
+    "artifacts/adjacent-mobile-closed.jpg",
+    "artifacts/adjacent-mobile-open.jpg",
+    "artifacts/adjacent-landscape-closed.jpg",
+    "artifacts/adjacent-landscape-open.jpg",
+    "artifacts/adjacent-wide-landscape-closed.jpg",
+    "artifacts/adjacent-wide-landscape-open.jpg",
+    "artifacts/adjacent-mobile-table-preview.jpg",
+    "artifacts/adjacent-mobile-arranging.jpg",
+    "artifacts/adjacent-mobile-placement.jpg",
+    "artifacts/adjacent-mobile-placement-complete.jpg"
+  ],
+  "errors": [],
+  "failed": []
+}

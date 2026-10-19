@@ -1,0 +1,16 @@
+{
+  "tests": 2630,
+  "passed": 2486,
+  "failed": 103,
+  "skipped": 41,
+  "baselineFailures": 109,
+  "baselineSuiteFailures": 4,
+  "newFailures": [],
+  "suiteFailures": [
+    "scripts/cozy-cafe-art.test.mjs",
+    "scripts/loading-progress.test.ts",
+    "scripts/main-reference-art.test.mjs",
+    "scripts/reference-character-art.test.mjs"
+  ],
+  "newSuiteFailures": []
+}

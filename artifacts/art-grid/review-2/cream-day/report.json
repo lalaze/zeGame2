@@ -1,0 +1,24 @@
+{
+  "base": "http://127.0.0.1:5199",
+  "backing": 4,
+  "light": "10.5",
+  "locale": "zh",
+  "style": "cream",
+  "shots": [
+    "artifacts/art-grid/review-2/cream-day/main-full.png",
+    "artifacts/art-grid/review-2/cream-day/main-counter.png",
+    "artifacts/art-grid/review-2/cream-day/main-window.png",
+    "artifacts/art-grid/review-2/cream-day/main-tables.png",
+    "artifacts/art-grid/review-2/cream-day/main-entry.png",
+    "artifacts/art-grid/review-2/cream-day/kitchen-full.png",
+    "artifacts/art-grid/review-2/cream-day/kitchen-left.png",
+    "artifacts/art-grid/review-2/cream-day/kitchen-right.png",
+    "artifacts/art-grid/review-2/cream-day/reading-full.png",
+    "artifacts/art-grid/review-2/cream-day/reading-corner.png",
+    "artifacts/art-grid/review-2/cream-day/greenhouse-full.png",
+    "artifacts/art-grid/review-2/cream-day/greenhouse-corner.png",
+    "artifacts/art-grid/review-2/cream-day/terrace-full.png",
+    "artifacts/art-grid/review-2/cream-day/terrace-corner.png"
+  ],
+  "errors": []
+}

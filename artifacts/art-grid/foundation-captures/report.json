@@ -1,0 +1,23 @@
+{
+  "base": "http://127.0.0.1:5199",
+  "backing": 4,
+  "light": "10.5",
+  "locale": "zh",
+  "shots": [
+    "/tmp/artqa/grid-after/main-full.png",
+    "/tmp/artqa/grid-after/main-counter.png",
+    "/tmp/artqa/grid-after/main-window.png",
+    "/tmp/artqa/grid-after/main-tables.png",
+    "/tmp/artqa/grid-after/main-entry.png",
+    "/tmp/artqa/grid-after/kitchen-full.png",
+    "/tmp/artqa/grid-after/kitchen-left.png",
+    "/tmp/artqa/grid-after/kitchen-right.png",
+    "/tmp/artqa/grid-after/reading-full.png",
+    "/tmp/artqa/grid-after/reading-corner.png",
+    "/tmp/artqa/grid-after/greenhouse-full.png",
+    "/tmp/artqa/grid-after/greenhouse-corner.png",
+    "/tmp/artqa/grid-after/terrace-full.png",
+    "/tmp/artqa/grid-after/terrace-corner.png"
+  ],
+  "errors": []
+}

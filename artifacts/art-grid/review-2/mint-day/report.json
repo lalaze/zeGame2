@@ -1,0 +1,24 @@
+{
+  "base": "http://127.0.0.1:5199",
+  "backing": 4,
+  "light": "10.5",
+  "locale": "zh",
+  "style": "mint",
+  "shots": [
+    "artifacts/art-grid/review-2/mint-day/main-full.png",
+    "artifacts/art-grid/review-2/mint-day/main-counter.png",
+    "artifacts/art-grid/review-2/mint-day/main-window.png",
+    "artifacts/art-grid/review-2/mint-day/main-tables.png",
+    "artifacts/art-grid/review-2/mint-day/main-entry.png",
+    "artifacts/art-grid/review-2/mint-day/kitchen-full.png",
+    "artifacts/art-grid/review-2/mint-day/kitchen-left.png",
+    "artifacts/art-grid/review-2/mint-day/kitchen-right.png",
+    "artifacts/art-grid/review-2/mint-day/reading-full.png",
+    "artifacts/art-grid/review-2/mint-day/reading-corner.png",
+    "artifacts/art-grid/review-2/mint-day/greenhouse-full.png",
+    "artifacts/art-grid/review-2/mint-day/greenhouse-corner.png",
+    "artifacts/art-grid/review-2/mint-day/terrace-full.png",
+    "artifacts/art-grid/review-2/mint-day/terrace-corner.png"
+  ],
+  "errors": []
+}

@@ -1,0 +1,35 @@
+{
+  "completed": [
+    "Desktop management shortcuts folded into Manage, with keyboard focus and outside-click dismissal",
+    "Phones, including 932x430 touch landscape, open the management drawer directly",
+    "Owner/barista/server/cook material conversion integrated on native density-2 world grid",
+    "Binary-alpha, on-palette seated foregrounds and preserved action contacts"
+  ],
+  "validation": {
+    "build": "passed",
+    "targeted_unit_tests": {
+      "files": 7,
+      "passed": 78
+    },
+    "browser_checks": {
+      "passed": 151,
+      "failed": [],
+      "runtime_errors": []
+    },
+    "team_art": {
+      "looks": 32,
+      "frames": 768,
+      "milliseconds": 1548,
+      "failures": []
+    }
+  },
+  "baseline_limitations": [
+    "Full npm test was not green at takeover. Existing failures included generated-main-art, cafe-scene-generated-bitmap, cafe-scene-pet-contact, cafe-scene-presentation and retired source-text assertions. These unrelated suites were not repaired in this task."
+  ],
+  "screenshots": [
+    "artifacts/adjacent-desktop-shortcuts.jpg",
+    "artifacts/adjacent-wide-landscape-open.jpg",
+    "artifacts/team-pixel-poses.png",
+    "artifacts/team-pixel-hairstyles.png"
+  ]
+}

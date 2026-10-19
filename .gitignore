@@ -13,3 +13,8 @@ src/assets/pixel-zh.woff2
 
 # Generated regular-guest QA saves, never player or release data.
 /docs/regular-guests/fixtures/
+
+# Local browser profiles and QA scratch output (never committed).
+.cozy-cafe-*/
+.art-qa-*
+.cafe-style-sample-*

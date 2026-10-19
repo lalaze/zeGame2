@@ -1,0 +1,632 @@
+{
+  "scope": "Synthetic representative fixtures, not a replay of the original unseeded days 4 and 6. No saved game used.",
+  "rows": [
+    {
+      "stage": 1,
+      "seed": 1,
+      "window": 180,
+      "quote": 136,
+      "served": 38,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 2,
+      "window": 180,
+      "quote": 136,
+      "served": 35,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 3,
+      "window": 180,
+      "quote": 136,
+      "served": 35,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 4,
+      "window": 180,
+      "quote": 136,
+      "served": 40,
+      "soldOut": 1,
+      "extraLost": 1,
+      "shortages": {
+        "roll": 2
+      }
+    },
+    {
+      "stage": 1,
+      "seed": 5,
+      "window": 180,
+      "quote": 136,
+      "served": 41,
+      "soldOut": 1,
+      "extraLost": 0,
+      "shortages": {
+        "americano": 1
+      }
+    },
+    {
+      "stage": 1,
+      "seed": 6,
+      "window": 180,
+      "quote": 136,
+      "served": 39,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 7,
+      "window": 180,
+      "quote": 136,
+      "served": 40,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 8,
+      "window": 180,
+      "quote": 136,
+      "served": 36,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 9,
+      "window": 180,
+      "quote": 136,
+      "served": 39,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 10,
+      "window": 180,
+      "quote": 136,
+      "served": 39,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 11,
+      "window": 180,
+      "quote": 136,
+      "served": 34,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 12,
+      "window": 180,
+      "quote": 136,
+      "served": 41,
+      "soldOut": 1,
+      "extraLost": 3,
+      "shortages": {
+        "roll": 4
+      }
+    },
+    {
+      "stage": 1,
+      "seed": 13,
+      "window": 180,
+      "quote": 136,
+      "served": 31,
+      "soldOut": 2,
+      "extraLost": 1,
+      "shortages": {
+        "roll": 3
+      }
+    },
+    {
+      "stage": 1,
+      "seed": 14,
+      "window": 180,
+      "quote": 136,
+      "served": 41,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 15,
+      "window": 180,
+      "quote": 136,
+      "served": 37,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 16,
+      "window": 180,
+      "quote": 136,
+      "served": 39,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 17,
+      "window": 180,
+      "quote": 136,
+      "served": 38,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 18,
+      "window": 180,
+      "quote": 136,
+      "served": 38,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 19,
+      "window": 180,
+      "quote": 136,
+      "served": 35,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 20,
+      "window": 180,
+      "quote": 136,
+      "served": 39,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 21,
+      "window": 180,
+      "quote": 136,
+      "served": 40,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 22,
+      "window": 180,
+      "quote": 136,
+      "served": 38,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 23,
+      "window": 180,
+      "quote": 136,
+      "served": 35,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 24,
+      "window": 180,
+      "quote": 136,
+      "served": 36,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 25,
+      "window": 180,
+      "quote": 136,
+      "served": 39,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 26,
+      "window": 180,
+      "quote": 136,
+      "served": 40,
+      "soldOut": 1,
+      "extraLost": 1,
+      "shortages": {
+        "espresso": 1,
+        "americano": 1
+      }
+    },
+    {
+      "stage": 1,
+      "seed": 27,
+      "window": 180,
+      "quote": 136,
+      "served": 42,
+      "soldOut": 0,
+      "extraLost": 1,
+      "shortages": {
+        "roll": 1
+      }
+    },
+    {
+      "stage": 1,
+      "seed": 28,
+      "window": 180,
+      "quote": 136,
+      "served": 39,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 29,
+      "window": 180,
+      "quote": 136,
+      "served": 39,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 30,
+      "window": 180,
+      "quote": 136,
+      "served": 36,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 1,
+      "window": 180,
+      "quote": 178,
+      "served": 39,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 2,
+      "window": 180,
+      "quote": 178,
+      "served": 38,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 3,
+      "window": 180,
+      "quote": 178,
+      "served": 44,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 4,
+      "window": 180,
+      "quote": 178,
+      "served": 42,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 5,
+      "window": 180,
+      "quote": 178,
+      "served": 42,
+      "soldOut": 2,
+      "extraLost": 0,
+      "shortages": {
+        "roll": 2
+      }
+    },
+    {
+      "stage": 2,
+      "seed": 6,
+      "window": 180,
+      "quote": 178,
+      "served": 43,
+      "soldOut": 3,
+      "extraLost": 0,
+      "shortages": {
+        "roll": 3
+      }
+    },
+    {
+      "stage": 2,
+      "seed": 7,
+      "window": 180,
+      "quote": 178,
+      "served": 45,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 8,
+      "window": 180,
+      "quote": 178,
+      "served": 44,
+      "soldOut": 0,
+      "extraLost": 2,
+      "shortages": {
+        "roll": 2
+      }
+    },
+    {
+      "stage": 2,
+      "seed": 9,
+      "window": 180,
+      "quote": 178,
+      "served": 40,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 10,
+      "window": 180,
+      "quote": 178,
+      "served": 40,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 11,
+      "window": 180,
+      "quote": 178,
+      "served": 44,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 12,
+      "window": 180,
+      "quote": 178,
+      "served": 45,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 13,
+      "window": 180,
+      "quote": 178,
+      "served": 40,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 14,
+      "window": 180,
+      "quote": 178,
+      "served": 44,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 15,
+      "window": 180,
+      "quote": 178,
+      "served": 40,
+      "soldOut": 2,
+      "extraLost": 2,
+      "shortages": {
+        "roll": 4
+      }
+    },
+    {
+      "stage": 2,
+      "seed": 16,
+      "window": 180,
+      "quote": 178,
+      "served": 39,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 17,
+      "window": 180,
+      "quote": 178,
+      "served": 39,
+      "soldOut": 1,
+      "extraLost": 0,
+      "shortages": {
+        "latte": 1
+      }
+    },
+    {
+      "stage": 2,
+      "seed": 18,
+      "window": 180,
+      "quote": 178,
+      "served": 41,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 19,
+      "window": 180,
+      "quote": 178,
+      "served": 41,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 20,
+      "window": 180,
+      "quote": 178,
+      "served": 44,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 21,
+      "window": 180,
+      "quote": 178,
+      "served": 40,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 22,
+      "window": 180,
+      "quote": 178,
+      "served": 43,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 23,
+      "window": 180,
+      "quote": 178,
+      "served": 44,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 24,
+      "window": 180,
+      "quote": 178,
+      "served": 43,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 25,
+      "window": 180,
+      "quote": 178,
+      "served": 40,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 26,
+      "window": 180,
+      "quote": 178,
+      "served": 45,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 27,
+      "window": 180,
+      "quote": 178,
+      "served": 43,
+      "soldOut": 2,
+      "extraLost": 0,
+      "shortages": {
+        "roll": 2
+      }
+    },
+    {
+      "stage": 2,
+      "seed": 28,
+      "window": 180,
+      "quote": 178,
+      "served": 47,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 2,
+      "seed": 29,
+      "window": 180,
+      "quote": 178,
+      "served": 40,
+      "soldOut": 1,
+      "extraLost": 0,
+      "shortages": {
+        "latte": 1
+      }
+    },
+    {
+      "stage": 2,
+      "seed": 30,
+      "window": 180,
+      "quote": 178,
+      "served": 42,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    }
+  ]
+}

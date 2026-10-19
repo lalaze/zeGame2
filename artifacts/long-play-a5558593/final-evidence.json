@@ -1,0 +1,73 @@
+{
+  "locked": "临时咖啡馆：本次进度不会保存，已有存档不会更改。启用浏览器存储和 Web Locks 后，请刷新以恢复存档游戏。\n猫爪咖啡屋\n≈$25.3K\n休息中 · 第 12 天\n管理\n···\n★ 4.27 / 5\n›\n熟客\n39\n未来区域 · 03\n露天庭院\n\n推开花园的门，在树荫和灯串下，让咖啡香飘得更远。\n\n+4 张桌子\n顾客 +20%\n\n更多座位和客流也会增加送餐工作量；增聘员工前可观察出餐台。\n\n开放区域 · $240K\n攒够金币，就能开放这片空间\n经营\n地图",
+  "landscape": {
+    "room": {
+      "x": 162,
+      "y": 0,
+      "width": 520,
+      "height": 390,
+      "right": 682,
+      "bottom": 390
+    },
+    "stage": {
+      "x": 0,
+      "y": 0,
+      "width": 844,
+      "height": 390,
+      "right": 844,
+      "bottom": 390
+    },
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "overflow": false,
+    "arrows": [
+      {
+        "direction": "left",
+        "x": 170.125,
+        "y": 121,
+        "width": 44,
+        "height": 44,
+        "right": 214.125,
+        "bottom": 165
+      },
+      {
+        "direction": "right",
+        "x": 629.875,
+        "y": 202.25,
+        "width": 44,
+        "height": 44,
+        "right": 673.875,
+        "bottom": 246.25
+      }
+    ],
+    "map": {
+      "x": 12,
+      "y": 270,
+      "width": 63,
+      "height": 44,
+      "right": 75,
+      "bottom": 314
+    },
+    "card": {
+      "x": 0,
+      "y": 0,
+      "width": 0,
+      "height": 0,
+      "right": 0,
+      "bottom": 0
+    },
+    "cardHidden": true,
+    "mapCardOverlap": false,
+    "cardArrowOverlap": false,
+    "mapControlOverlap": false,
+    "title": "露天庭院",
+    "statusDoorOverlap": false,
+    "overview": false
+  },
+  "drawerClosed": true,
+  "stats": "临时咖啡馆：本次进度不会保存，已有存档不会更改。启用浏览器存储和 Web Locks 后，请刷新以恢复存档游戏。\n猫爪咖啡屋\n≈$25.3K\n休息中 · 第 12 天\n管理\n···\n★ 4.27 / 5\n›\n熟客\n39\n后厨\n阅读休息室\n☕\n菜单\n▤\n食材\n↑\n升级\n✿\n装扮\n♧\n猫咪\n★\n推广\n第 12 天 · 休息中\n经营\n准备菜单 · 第 12 天\n地图\n咖啡馆办公室\n猫爪咖啡屋\n店长\n编辑咖啡馆\n重看开店指南\n语言\nEnglish\n中文\n已售出\n521\n累计收入\n$68.9K\n营业天数\n11\n\n快捷键：空格 帮忙冲泡 · Esc 关闭弹窗\n\n只有你在玩的时候小店才会营业：切换标签页或关闭游戏时会暂停，一直开到你点「打烊结算」为止。\n\n临时咖啡馆：本次进度不会保存，已有存档不会更改。启用浏览器存储和 Web Locks 后，请刷新以恢复存档游戏。\n\n回去工作\n重置咖啡馆",
+  "money": "临时咖啡馆：本次进度不会保存，已有存档不会更改。启用浏览器存储和 Web Locks 后，请刷新以恢复存档游戏。\n猫爪咖啡屋\n≈$25.3K\n休息中 · 第 12 天\n管理\n···\n★ 4.27 / 5\n›\n熟客\n39\n后厨\n阅读休息室\n☕\n菜单\n▤\n食材\n↑\n升级\n✿\n装扮\n♧\n猫咪\n★\n推广\n第 12 天 · 休息中\n经营\n准备菜单 · 第 12 天\n地图\n精确金额\n\n余额：$25340.481970575758\n\n≈ 表示显示值经过取舍，购买按此处完整金额计算。\n\n回去工作",
+  "errors": []
+}

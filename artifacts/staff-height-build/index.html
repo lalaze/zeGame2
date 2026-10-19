@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register("./sw.js", { updateViaCache: 'none' }).catch(() => {});</script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#865332" />
+    <meta name="description" content="A cozy pixel-art coffee shop: plan the menu, stock the pantry, open for the day and grow your café." />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Bean Café" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" id="favicon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icon-192.png" />
+    <title>Tiny Bean Café</title>
+    <style>html,body{background:#543425}body:not(.ready) #app{visibility:hidden}#loader{z-index:100;color:#fff7e8;text-align:center;background:#543425;place-content:center;justify-items:center;gap:20px;padding:24px;font:16px/1.5 system-ui,sans-serif;transition:opacity .25s;display:grid;position:fixed;inset:0}body.ready #loader{opacity:0;pointer-events:none}#loader [hidden]{display:none}#loader .loader-title{letter-spacing:1px;margin:12px 0 0;font-size:22px}#loader .loader-status{overflow-wrap:anywhere;max-width:30em;margin:0}#loader .loader-meter{gap:8px;width:min(300px,80vw);display:grid}#loader progress{box-sizing:border-box;appearance:none;color:#f0ce85;accent-color:#f0ce85;background:#382218;border:3px solid #c8a15e;border-radius:0;width:100%;height:20px;display:block}#loader progress::-webkit-progress-bar{background:#382218}#loader progress::-webkit-progress-value{background:#f0ce85}#loader progress::-moz-progress-bar{background:#f0ce85}#loader progress:indeterminate{opacity:.65}#loader .loader-count{color:#ebbd7d;font-variant-numeric:tabular-nums;min-height:1.5em}#loader .loader-retry{color:#fff7e8;font:inherit;cursor:pointer;background:#865332;border:2px solid #c8a15e;border-radius:0;padding:10px 24px}#loader .loader-retry:focus-visible{outline-offset:4px;outline:3px solid #fff7e8}#loader .loader-detail{overflow-wrap:anywhere;max-width:36em}#loader i{width:12px;height:12px;animation:.8s step-end infinite loader-spin}@keyframes loader-spin{0%{box-shadow:-16px -16px #f0ce85,0 -16px #865332,16px -16px #865332,16px 0 #865332,16px 16px #865332,0 16px #866344,-16px 16px #c8a15e,-16px 0 #ebbd7d}12.5%{box-shadow:-16px -16px #ebbd7d,0 -16px #f0ce85,16px -16px #865332,16px 0 #865332,16px 16px #865332,0 16px #865332,-16px 16px #866344,-16px 0 #c8a15e}25%{box-shadow:-16px -16px #c8a15e,0 -16px #ebbd7d,16px -16px #f0ce85,16px 0 #865332,16px 16px #865332,0 16px #865332,-16px 16px #865332,-16px 0 #866344}37.5%{box-shadow:-16px -16px #866344,0 -16px #c8a15e,16px -16px #ebbd7d,16px 0 #f0ce85,16px 16px #865332,0 16px #865332,-16px 16px #865332,-16px 0 #865332}50%{box-shadow:-16px -16px #865332,0 -16px #866344,16px -16px #c8a15e,16px 0 #ebbd7d,16px 16px #f0ce85,0 16px #865332,-16px 16px #865332,-16px 0 #865332}62.5%{box-shadow:-16px -16px #865332,0 -16px #865332,16px -16px #866344,16px 0 #c8a15e,16px 16px #ebbd7d,0 16px #f0ce85,-16px 16px #865332,-16px 0 #865332}75%{box-shadow:-16px -16px #865332,0 -16px #865332,16px -16px #865332,16px 0 #866344,16px 16px #c8a15e,0 16px #ebbd7d,-16px 16px #f0ce85,-16px 0 #865332}87.5%{box-shadow:-16px -16px #865332,0 -16px #865332,16px -16px #865332,16px 0 #865332,16px 16px #866344,0 16px #c8a15e,-16px 16px #ebbd7d,-16px 0 #f0ce85}}@media (prefers-reduced-motion:reduce){#loader i{animation:none;box-shadow:-16px -16px #f0ce85,0 -16px #865332,16px -16px #865332,16px 0 #865332,16px 16px #865332,0 16px #866344,-16px 16px #c8a15e,-16px 0 #ebbd7d}#loader{transition:none}}</style>
+    <script type="module" crossorigin src="./assets/game-B5Bss-hh.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/region-art-gG3HwM-g.js">
+    <link rel="modulepreload" crossorigin href="./assets/phaser-D8EC1TLR.js">
+    <link rel="stylesheet" crossorigin href="./assets/game-DegZ4Mf4.css">
+  </head>
+  <body>
+    <div id="loader" aria-busy="true">
+      <i aria-hidden="true"></i>
+      <p class="loader-title">Tiny Bean Café</p>
+      <p class="loader-status" data-loading-status role="status">正在载入游戏 / Loading the café…</p>
+      <div class="loader-meter">
+        <progress data-loading-bar max="1" aria-label="资源加载进度 / Asset loading progress"></progress>
+        <span class="loader-count" data-loading-count></span>
+      </div>
+      <button class="loader-retry" data-loading-retry type="button" hidden>重新加载 / Reload</button>
+    </div>
+    <div id="app">
+      <header class="hud">
+        <div class="brand">
+          <img src="./icon.svg" alt="" class="brand-icon" width="32" height="32" />
+          <span class="brand-name" id="hud-cafe-name">Tiny Bean Café</span>
+        </div>
+        <div class="money">
+          <button type="button" class="coins" id="coins" aria-haspopup="dialog">$0</button>
+          <div class="rate" id="rate">$0/s</div>
+        </div>
+        <div class="hud-buttons">
+          <button id="panel-toggle" class="pixel-btn small ghost" aria-controls="management-panel" aria-expanded="true">Collapse</button>
+          <button id="settings-btn" class="pixel-btn small ghost" data-i18n-title="hud.settings">···</button>
+        </div>
+      </header>
+      <div class="cafe-status-bar">
+        <button id="reputation-btn" class="reputation-bar" aria-haspopup="dialog">
+          <span id="reputation-score"></span><span id="reputation-traffic"></span>
+          <span class="reputation-more" aria-hidden="true">›</span>
+        </button>
+        <button id="regular-guests-btn" class="regular-guests-button" aria-haspopup="dialog" aria-label="Regular guests">
+          <span data-regular-label>Regulars</span><span class="regular-unread-badge" data-regular-unread aria-hidden="true" hidden>0</span>
+        </button>
+      </div>
+
+      <main class="layout">
+        <section class="stage" id="stage">
+          <div class="stage-sign" id="stage-sign" hidden><span id="stage-sign-name"></span></div>
+          <div class="scene-wrap" id="scene-area">
+            <canvas id="scene" aria-label="Your café"></canvas>
+            <div class="area-nav" id="area-nav"></div>
+            <nav class="area-edges" id="area-edges"></nav>
+            <div class="region-card" id="region-card" hidden></div>
+            <div class="day-hud" id="day-hud">
+              <span class="day-clock" id="day-clock"></span>
+              <span class="day-speed" id="day-speed">
+                <button class="chip" data-speed="1">1×</button>
+                <button class="chip" data-speed="2">2×</button>
+                <button class="chip" data-speed="4">4×</button>
+              </span>
+              <button class="chip close-btn" id="close-btn" hidden></button>
+            </div>
+            <button class="cafe-style-button chip" id="cafe-style-btn" aria-haspopup="dialog">Style</button>
+            <button class="pixel-btn open-btn" id="open-btn" hidden></button>
+            <div class="arrange-bar" id="arrange-bar" hidden>
+              <span class="arrange-text" id="arrange-text"></span>
+              <span class="arrange-actions">
+                <button class="chip" id="arrange-store"></button>
+                <button class="chip active" id="arrange-done"></button>
+              </span>
+            </div>
+          </div>
+          <div class="stage-stats" id="stage-stats" hidden></div>
+          <button class="operation-status chip" id="operation-status" hidden></button>
+          <div class="hint" id="hint" data-i18n="hint.tap" hidden>Tap the café to help brew faster!</div>
+        </section>
+
+        <aside class="panel" id="management-panel">
+          <nav class="tabs" role="tablist">
+            <button role="tab" data-tab="menu" class="tab active" data-i18n="tab.menu">Menu</button>
+            <button role="tab" data-tab="pantry" class="tab" data-i18n="tab.pantry">Pantry</button>
+            <button role="tab" data-tab="upgrades" class="tab" data-i18n="tab.upgrades">Upgrades</button>
+            <button role="tab" data-tab="decor" class="tab" data-i18n="tab.decor">Furnish</button>
+            <button role="tab" data-tab="pets" class="tab" data-i18n="tab.pets">Cats</button>
+            <button role="tab" data-tab="promotion" class="tab" data-i18n="tab.promotion">Promote</button>
+          </nav>
+          <div class="panel-scroll">
+          <div class="goal" id="goal" hidden></div>
+          <div class="buy-amount">
+            <span data-i18n="buy.label">Buy</span>
+            <button data-amount="1" class="chip active">x1</button>
+            <button data-amount="10" class="chip">x10</button>
+            <button data-amount="max" class="chip" data-i18n="buy.max">Max</button>
+          </div>
+          <div class="menu-filter">
+            <button data-cat="all" class="chip active" data-i18n="cat.all">All</button>
+            <button data-cat="coffee" class="chip" data-i18n="catShort.coffee">Coffee</button>
+            <button data-cat="tea" class="chip" data-i18n="catShort.tea">Tea</button>
+            <button data-cat="bread" class="chip" data-i18n="catShort.bread">Bread</button>
+            <button data-cat="pastry" class="chip" data-i18n="catShort.pastry">Sweets</button>
+          </div>
+          <div class="buy-amount pantry-amount" hidden>
+            <span data-i18n="buy.label">Buy</span>
+            <button data-pantry-amount="10" class="chip active">10</button>
+            <button data-pantry-amount="50" class="chip">50</button>
+            <button data-pantry-amount="200" class="chip">200</button>
+          </div>
+          <div class="list" id="list"></div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <div id="modal-root"></div>
+    <div id="toast" class="toast" hidden></div>
+
+  </body>
+</html>

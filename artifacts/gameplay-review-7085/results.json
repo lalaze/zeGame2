@@ -1,0 +1,315 @@
+{
+  "mode": "ordinary-new-game-only",
+  "fixtures": [],
+  "started": "2026-10-18T11:53:08.279Z",
+  "elapsedSeconds": 32.541,
+  "normalComplete": false,
+  "results": [
+    {
+      "pass": true,
+      "label": "localhost is secure context"
+    },
+    {
+      "pass": true,
+      "label": "no save-session blocker"
+    },
+    {
+      "pass": true,
+      "label": "ordinary fresh new game"
+    },
+    {
+      "pass": true,
+      "label": "en: nine candidates"
+    },
+    {
+      "pass": true,
+      "label": "en-1440-team: fits viewport",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 430,
+        "right": 1010,
+        "top": 24,
+        "bottom": 976
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "en-1440-team: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "en-1440: profile is read-only and pauses time"
+    },
+    {
+      "pass": true,
+      "label": "en-1440: fresh stories locked"
+    },
+    {
+      "pass": true,
+      "label": "en-1440-profile: fits viewport",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 430,
+        "right": 1010,
+        "top": 24,
+        "bottom": 976
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "en-1440-profile: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "en: nine candidates"
+    },
+    {
+      "pass": true,
+      "label": "en-390-team: fits viewport",
+      "viewport": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 20,
+        "right": 370,
+        "top": 24,
+        "bottom": 820
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "en-390-team: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "en-390: profile is read-only and pauses time"
+    },
+    {
+      "pass": true,
+      "label": "en-390: fresh stories locked"
+    },
+    {
+      "pass": true,
+      "label": "en-390-profile: fits viewport",
+      "viewport": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 20,
+        "right": 370,
+        "top": 24,
+        "bottom": 820
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "en-390-profile: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh: nine candidates"
+    },
+    {
+      "pass": true,
+      "label": "zh-1440-team: fits viewport",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 430,
+        "right": 1010,
+        "top": 24,
+        "bottom": 976
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh-1440-team: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh-1440: profile is read-only and pauses time"
+    },
+    {
+      "pass": true,
+      "label": "zh-1440: fresh stories locked"
+    },
+    {
+      "pass": true,
+      "label": "zh-1440-profile: fits viewport",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 430,
+        "right": 1010,
+        "top": 24,
+        "bottom": 976
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh-1440-profile: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh: nine candidates"
+    },
+    {
+      "pass": true,
+      "label": "zh-390-team: fits viewport",
+      "viewport": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 20,
+        "right": 370,
+        "top": 24,
+        "bottom": 820
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh-390-team: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh-390: profile is read-only and pauses time"
+    },
+    {
+      "pass": true,
+      "label": "zh-390: fresh stories locked"
+    },
+    {
+      "pass": true,
+      "label": "zh-390-profile: fits viewport",
+      "viewport": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 20,
+        "right": 370,
+        "top": 24,
+        "bottom": 820
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh-390-profile: 44px targets",
+      "small": []
+    },
+    {
+      "pass": false,
+      "label": "browser execution completed",
+      "error": "Error: Prepare start is unavailable; manual menu inspection required\n    at openDay (file:///Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/gameplay-review-7085/ordinary-play.mjs:68:60)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async file:///Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/gameplay-review-7085/ordinary-play.mjs:135:7"
+    }
+  ],
+  "milestones": [
+    {
+      "label": "Fresh onboarding completed",
+      "elapsedSeconds": 11,
+      "day": 1,
+      "phase": "prep",
+      "dayTime": 0,
+      "coins": 0,
+      "served": 0,
+      "pantry": {
+        "beans": 50,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 0,
+            "workedDays": 0,
+            "lastWorkedDay": 0,
+            "specialty": null,
+            "unlocked": 0,
+            "read": [],
+            "todayDay": 0,
+            "todayJobs": 0,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Exact UI at blocker",
+      "elapsedSeconds": 33,
+      "body": "Sleepy Bean\n$0\nClosed · Day 1\nManage\n···\n★ New café · No reviews yet\n›\nTeam\nRegulars\n1/6 · Let’s open day 1\n\nYou have 50 starter beans for free. Press “Open with me” to check stock, choose your menu, and then open the doors.\n\nQuick help\nAll tools\nSkip guide\nOpen with me →\nDay 1 · Closed\nStyle\nPrepare menu · Day 1\n−\nOverview\n+\nDay 1 · Open your café\n1\nCheck stock\n2\nChoose menu\n3\nOpen doors\n① Your starter beans are here\n\nThis is your pantry. Each Espresso uses 1 bean portion. Your starter stock is free, so you can begin without buying ingredients.\n\n50\nbean portions\n\nYou can make 50 Espressos. Next, confirm what to serve today.\n\nOpen full preparation panel\nStock checked · Choose menu →\nExplore first · Continue later"
+    }
+  ],
+  "shots": [
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/gameplay-review-7085/en-1440-team.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/gameplay-review-7085/en-1440-profile.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/gameplay-review-7085/en-390-team.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/gameplay-review-7085/en-390-profile.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/gameplay-review-7085/zh-1440-team.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/gameplay-review-7085/zh-1440-profile.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/gameplay-review-7085/zh-390-team.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/gameplay-review-7085/zh-390-profile.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/gameplay-review-7085/error.png"
+  ],
+  "errors": []
+}

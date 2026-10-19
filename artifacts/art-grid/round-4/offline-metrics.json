@@ -1,0 +1,1550 @@
+{
+  "nativeFrames": 540,
+  "offPalettePixels": 0,
+  "rows": [
+    {
+      "role": "owner",
+      "standingHeight": 39.333333333333336,
+      "headHeight": 18.89492934330839,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 2.6666666666666665
+        },
+        "headHeight": 18.89492934330839,
+        "headScale": 0.09975062344139651,
+        "bodyScale": 0.09975062344139651,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 16,
+          "y": 28.501745635910222
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 17.006508875739645,
+          "y": 5
+        },
+        "headHeight": 16.717869822485206,
+        "seatContact": {
+          "x": 13,
+          "y": 31.817869822485207
+        },
+        "headScale": 0.10946745562130178,
+        "bodyScale": 0.10946745562130178,
+        "legExtension": 0
+      }
+    },
+    {
+      "role": "barista",
+      "standingHeight": 39.333333333333336,
+      "headHeight": 16.25228758169935,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 2.6666666666666665
+        },
+        "headHeight": 16.25228758169935,
+        "headScale": 0.13071895424836602,
+        "bodyScale": 0.13071895424836602,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 16,
+          "y": 28.577777777777776
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 15.738257839721257,
+          "y": 4.333333333333333
+        },
+        "headHeight": 15.724506387921021,
+        "seatContact": {
+          "x": 17.563763066202092,
+          "y": 31.267839721254354
+        },
+        "headScale": 0.1289198606271777,
+        "bodyScale": 0.1289198606271777,
+        "legExtension": 0
+      }
+    },
+    {
+      "role": "server",
+      "standingHeight": 39.333333333333336,
+      "headHeight": 16.25228758169935,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 2.6666666666666665
+        },
+        "headHeight": 16.25228758169935,
+        "headScale": 0.13071895424836602,
+        "bodyScale": 0.13071895424836602,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 16,
+          "y": 28.577777777777776
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 15.738257839721257,
+          "y": 4.333333333333333
+        },
+        "headHeight": 15.724506387921021,
+        "seatContact": {
+          "x": 17.563763066202092,
+          "y": 31.267839721254354
+        },
+        "headScale": 0.1289198606271777,
+        "bodyScale": 0.1289198606271777,
+        "legExtension": 0
+      }
+    },
+    {
+      "role": "cook",
+      "standingHeight": 37,
+      "headHeight": 18.47022900763359,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 5
+        },
+        "headHeight": 18.47022900763359,
+        "headScale": 0.10178117048346055,
+        "bodyScale": 0.10178117048346055,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 16,
+          "y": 29.230534351145042
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 16.877374045801528,
+          "y": 4.666666666666667
+        },
+        "headHeight": 19.799287531806616,
+        "seatContact": {
+          "x": 13,
+          "y": 32.34595419847328
+        },
+        "headScale": 0.05648854961832061,
+        "bodyScale": 0.05648854961832061,
+        "legExtension": 0
+      }
+    },
+    {
+      "role": "customer",
+      "id": 0,
+      "standingHeight": 39.5,
+      "headHeight": 19.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 1,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 2,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 3,
+      "standingHeight": 39.5,
+      "headHeight": 19.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 4,
+      "standingHeight": 39.5,
+      "headHeight": 19.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 5,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 6,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 7,
+      "standingHeight": 39.5,
+      "headHeight": 19.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 8,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 9,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 10,
+      "standingHeight": 39.5,
+      "headHeight": 19.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 11,
+      "standingHeight": 39.5,
+      "headHeight": 19.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 12,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 13,
+      "standingHeight": 39.5,
+      "headHeight": 19.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 14,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 15,
+      "standingHeight": 39.5,
+      "headHeight": 19.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 16,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 17,
+      "standingHeight": 39.5,
+      "headHeight": 19.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 18,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 19,
+      "standingHeight": 39.5,
+      "headHeight": 19.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 20,
+      "standingHeight": 39.5,
+      "headHeight": 19.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 21,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 22,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 23,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 24,
+      "standingHeight": 39.5,
+      "headHeight": 19.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 25,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 26,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 27,
+      "standingHeight": 39.5,
+      "headHeight": 19.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 28,
+      "standingHeight": 39.5,
+      "headHeight": 19.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22.5,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 2.5
+        },
+        "headHeight": 19.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 23,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    },
+    {
+      "role": "customer",
+      "id": 29,
+      "standingHeight": 37.5,
+      "headHeight": 17.5,
+      "contacts": {
+        "foot": {
+          "x": 16,
+          "y": 42
+        },
+        "head": {
+          "x": 16,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 32
+        }
+      },
+      "seat": {
+        "foot": {
+          "x": 13,
+          "y": 41
+        },
+        "head": {
+          "x": 13.5,
+          "y": 4.5
+        },
+        "headHeight": 17.5,
+        "headScale": 1,
+        "bodyScale": 1,
+        "legExtension": 0,
+        "carryContact": {
+          "x": 22,
+          "y": 22.5
+        },
+        "seatContact": {
+          "x": 13,
+          "y": 32
+        }
+      }
+    }
+  ]
+}

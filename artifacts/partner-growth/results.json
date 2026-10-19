@@ -1,0 +1,2771 @@
+{
+  "mode": "ordinary-new-game-only",
+  "fixtures": [],
+  "started": "2026-10-16T07:36:19.478Z",
+  "elapsedSeconds": 513.955,
+  "normalComplete": true,
+  "finalState": {
+    "day": 6,
+    "phase": "prep",
+    "dayTime": 0,
+    "coins": 95,
+    "served": 93,
+    "pantry": {
+      "beans": 25,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    },
+    "speed": 1,
+    "partners": {
+      "roster": {
+        "yue": {
+          "xp": 51,
+          "workedDays": 5,
+          "lastWorkedDay": 5,
+          "specialty": "a",
+          "unlocked": 2,
+          "read": [
+            0
+          ],
+          "todayDay": 5,
+          "todayJobs": 12,
+          "todayUnlocks": 0
+        },
+        "lin": {
+          "xp": 0,
+          "workedDays": 0,
+          "lastWorkedDay": 0,
+          "specialty": null,
+          "unlocked": 0,
+          "read": [],
+          "todayDay": 0,
+          "todayJobs": 0,
+          "todayUnlocks": 0
+        }
+      },
+      "active": {
+        "barista": [],
+        "server": [
+          "yue"
+        ],
+        "cook": []
+      }
+    }
+  },
+  "results": [
+    {
+      "pass": true,
+      "label": "localhost is secure context"
+    },
+    {
+      "pass": true,
+      "label": "no save-session blocker"
+    },
+    {
+      "pass": true,
+      "label": "ordinary fresh new game"
+    },
+    {
+      "pass": true,
+      "label": "en: nine candidates"
+    },
+    {
+      "pass": true,
+      "label": "en-1440-team: fits viewport",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 430,
+        "right": 1010,
+        "top": 24,
+        "bottom": 976
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "en-1440-team: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "en-1440: profile is read-only and pauses time"
+    },
+    {
+      "pass": true,
+      "label": "en-1440: fresh stories locked"
+    },
+    {
+      "pass": true,
+      "label": "en-1440-profile: fits viewport",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 430,
+        "right": 1010,
+        "top": 24,
+        "bottom": 976
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "en-1440-profile: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "en: nine candidates"
+    },
+    {
+      "pass": true,
+      "label": "en-390-team: fits viewport",
+      "viewport": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 20,
+        "right": 370,
+        "top": 24,
+        "bottom": 820
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "en-390-team: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "en-390: profile is read-only and pauses time"
+    },
+    {
+      "pass": true,
+      "label": "en-390: fresh stories locked"
+    },
+    {
+      "pass": true,
+      "label": "en-390-profile: fits viewport",
+      "viewport": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 20,
+        "right": 370,
+        "top": 24,
+        "bottom": 820
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "en-390-profile: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh: nine candidates"
+    },
+    {
+      "pass": true,
+      "label": "zh-1440-team: fits viewport",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 430,
+        "right": 1010,
+        "top": 24,
+        "bottom": 976
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh-1440-team: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh-1440: profile is read-only and pauses time"
+    },
+    {
+      "pass": true,
+      "label": "zh-1440: fresh stories locked"
+    },
+    {
+      "pass": true,
+      "label": "zh-1440-profile: fits viewport",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 430,
+        "right": 1010,
+        "top": 24,
+        "bottom": 976
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh-1440-profile: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh: nine candidates"
+    },
+    {
+      "pass": true,
+      "label": "zh-390-team: fits viewport",
+      "viewport": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 20,
+        "right": 370,
+        "top": 24,
+        "bottom": 820
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh-390-team: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh-390: profile is read-only and pauses time"
+    },
+    {
+      "pass": true,
+      "label": "zh-390: fresh stories locked"
+    },
+    {
+      "pass": true,
+      "label": "zh-390-profile: fits viewport",
+      "viewport": [
+        390,
+        844
+      ],
+      "overflow": false,
+      "modalOverflow": false,
+      "bounds": {
+        "left": 20,
+        "right": 370,
+        "top": 24,
+        "bottom": 820
+      },
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "zh-390-profile: 44px targets",
+      "small": []
+    },
+    {
+      "pass": true,
+      "label": "open-day modal pauses work and XP",
+      "before": {
+        "day": 1,
+        "phase": "open",
+        "dayTime": 5.26647,
+        "coins": 3,
+        "served": 1,
+        "pantry": {
+          "beans": 49,
+          "milk": 0,
+          "flour": 0,
+          "butter": 0,
+          "eggs": 0,
+          "sugar": 0,
+          "tea": 0,
+          "spice": 0,
+          "cocoa": 0,
+          "cream": 0,
+          "fruit": 0,
+          "matcha": 0
+        },
+        "speed": 1,
+        "partners": {
+          "roster": {
+            "yue": {
+              "xp": 0,
+              "workedDays": 0,
+              "lastWorkedDay": 0,
+              "specialty": null,
+              "unlocked": 0,
+              "read": [],
+              "todayDay": 0,
+              "todayJobs": 0,
+              "todayUnlocks": 0
+            }
+          },
+          "active": {
+            "barista": [],
+            "server": [
+              "yue"
+            ],
+            "cook": []
+          }
+        }
+      },
+      "after": {
+        "day": 1,
+        "phase": "open",
+        "dayTime": 5.26647,
+        "coins": 3,
+        "served": 1,
+        "pantry": {
+          "beans": 49,
+          "milk": 0,
+          "flour": 0,
+          "butter": 0,
+          "eggs": 0,
+          "sugar": 0,
+          "tea": 0,
+          "spice": 0,
+          "cocoa": 0,
+          "cream": 0,
+          "fruit": 0,
+          "matcha": 0
+        },
+        "speed": 1,
+        "partners": {
+          "roster": {
+            "yue": {
+              "xp": 0,
+              "workedDays": 0,
+              "lastWorkedDay": 0,
+              "specialty": null,
+              "unlocked": 0,
+              "read": [],
+              "todayDay": 0,
+              "todayJobs": 0,
+              "todayUnlocks": 0
+            }
+          },
+          "active": {
+            "barista": [],
+            "server": [
+              "yue"
+            ],
+            "cook": []
+          }
+        }
+      }
+    },
+    {
+      "pass": true,
+      "label": "ordinary earned 20 XP training charges $80 without granting XP",
+      "before": {
+        "day": 3,
+        "phase": "prep",
+        "dayTime": 0,
+        "coins": 94,
+        "served": 35,
+        "pantry": {
+          "beans": 26,
+          "milk": 0,
+          "flour": 0,
+          "butter": 0,
+          "eggs": 0,
+          "sugar": 0,
+          "tea": 0,
+          "spice": 0,
+          "cocoa": 0,
+          "cream": 0,
+          "fruit": 0,
+          "matcha": 0
+        },
+        "speed": 1,
+        "partners": {
+          "roster": {
+            "yue": {
+              "xp": 24,
+              "workedDays": 2,
+              "lastWorkedDay": 2,
+              "specialty": null,
+              "unlocked": 2,
+              "read": [],
+              "todayDay": 2,
+              "todayJobs": 9,
+              "todayUnlocks": 1
+            }
+          },
+          "active": {
+            "barista": [],
+            "server": [
+              "yue"
+            ],
+            "cook": []
+          }
+        }
+      },
+      "after": {
+        "day": 3,
+        "phase": "prep",
+        "dayTime": 0,
+        "coins": 14,
+        "served": 35,
+        "pantry": {
+          "beans": 26,
+          "milk": 0,
+          "flour": 0,
+          "butter": 0,
+          "eggs": 0,
+          "sugar": 0,
+          "tea": 0,
+          "spice": 0,
+          "cocoa": 0,
+          "cream": 0,
+          "fruit": 0,
+          "matcha": 0
+        },
+        "speed": 1,
+        "partners": {
+          "roster": {
+            "yue": {
+              "xp": 24,
+              "workedDays": 2,
+              "lastWorkedDay": 2,
+              "specialty": "a",
+              "unlocked": 2,
+              "read": [],
+              "todayDay": 2,
+              "todayJobs": 9,
+              "todayUnlocks": 1
+            }
+          },
+          "active": {
+            "barista": [],
+            "server": [
+              "yue"
+            ],
+            "cook": []
+          }
+        }
+      }
+    },
+    {
+      "pass": true,
+      "label": "reading story gives no XP"
+    },
+    {
+      "pass": true,
+      "label": "story marked read without granting XP across actual days",
+      "before": {
+        "day": 3,
+        "phase": "prep",
+        "dayTime": 0,
+        "coins": 14,
+        "served": 35,
+        "pantry": {
+          "beans": 26,
+          "milk": 0,
+          "flour": 0,
+          "butter": 0,
+          "eggs": 0,
+          "sugar": 0,
+          "tea": 0,
+          "spice": 0,
+          "cocoa": 0,
+          "cream": 0,
+          "fruit": 0,
+          "matcha": 0
+        },
+        "speed": 1,
+        "partners": {
+          "roster": {
+            "yue": {
+              "xp": 24,
+              "workedDays": 2,
+              "lastWorkedDay": 2,
+              "specialty": "a",
+              "unlocked": 2,
+              "read": [],
+              "todayDay": 2,
+              "todayJobs": 9,
+              "todayUnlocks": 1
+            }
+          },
+          "active": {
+            "barista": [],
+            "server": [
+              "yue"
+            ],
+            "cook": []
+          }
+        }
+      },
+      "after": {
+        "day": 3,
+        "phase": "prep",
+        "dayTime": 0,
+        "coins": 14,
+        "served": 35,
+        "pantry": {
+          "beans": 26,
+          "milk": 0,
+          "flour": 0,
+          "butter": 0,
+          "eggs": 0,
+          "sugar": 0,
+          "tea": 0,
+          "spice": 0,
+          "cocoa": 0,
+          "cream": 0,
+          "fruit": 0,
+          "matcha": 0
+        },
+        "speed": 1,
+        "partners": {
+          "roster": {
+            "yue": {
+              "xp": 24,
+              "workedDays": 2,
+              "lastWorkedDay": 2,
+              "specialty": "a",
+              "unlocked": 2,
+              "read": [
+                0
+              ],
+              "todayDay": 2,
+              "todayJobs": 9,
+              "todayUnlocks": 1
+            }
+          },
+          "active": {
+            "barista": [],
+            "server": [
+              "yue"
+            ],
+            "cook": []
+          }
+        }
+      }
+    },
+    {
+      "pass": true,
+      "label": "ordinary earned coins recruit reserve without adding active slot",
+      "before": {
+        "day": 6,
+        "phase": "prep",
+        "dayTime": 0,
+        "coins": 155,
+        "served": 93,
+        "pantry": {
+          "beans": 25,
+          "milk": 0,
+          "flour": 0,
+          "butter": 0,
+          "eggs": 0,
+          "sugar": 0,
+          "tea": 0,
+          "spice": 0,
+          "cocoa": 0,
+          "cream": 0,
+          "fruit": 0,
+          "matcha": 0
+        },
+        "speed": 1,
+        "partners": {
+          "roster": {
+            "yue": {
+              "xp": 51,
+              "workedDays": 5,
+              "lastWorkedDay": 5,
+              "specialty": "a",
+              "unlocked": 2,
+              "read": [
+                0
+              ],
+              "todayDay": 5,
+              "todayJobs": 12,
+              "todayUnlocks": 0
+            }
+          },
+          "active": {
+            "barista": [],
+            "server": [
+              "yue"
+            ],
+            "cook": []
+          }
+        }
+      },
+      "after": {
+        "day": 6,
+        "phase": "prep",
+        "dayTime": 0,
+        "coins": 95,
+        "served": 93,
+        "pantry": {
+          "beans": 25,
+          "milk": 0,
+          "flour": 0,
+          "butter": 0,
+          "eggs": 0,
+          "sugar": 0,
+          "tea": 0,
+          "spice": 0,
+          "cocoa": 0,
+          "cream": 0,
+          "fruit": 0,
+          "matcha": 0
+        },
+        "speed": 1,
+        "partners": {
+          "roster": {
+            "yue": {
+              "xp": 51,
+              "workedDays": 5,
+              "lastWorkedDay": 5,
+              "specialty": "a",
+              "unlocked": 2,
+              "read": [
+                0
+              ],
+              "todayDay": 5,
+              "todayJobs": 12,
+              "todayUnlocks": 0
+            },
+            "lin": {
+              "xp": 0,
+              "workedDays": 0,
+              "lastWorkedDay": 0,
+              "specialty": null,
+              "unlocked": 0,
+              "read": [],
+              "todayDay": 0,
+              "todayJobs": 0,
+              "todayUnlocks": 0
+            }
+          },
+          "active": {
+            "barista": [],
+            "server": [
+              "yue"
+            ],
+            "cook": []
+          }
+        }
+      }
+    },
+    {
+      "pass": true,
+      "label": "normal-play milestones within 20 minutes",
+      "recruited": true,
+      "trained": true,
+      "read": true,
+      "finalState": {
+        "day": 6,
+        "phase": "prep",
+        "dayTime": 0,
+        "coins": 95,
+        "served": 93,
+        "pantry": {
+          "beans": 25,
+          "milk": 0,
+          "flour": 0,
+          "butter": 0,
+          "eggs": 0,
+          "sugar": 0,
+          "tea": 0,
+          "spice": 0,
+          "cocoa": 0,
+          "cream": 0,
+          "fruit": 0,
+          "matcha": 0
+        },
+        "speed": 1,
+        "partners": {
+          "roster": {
+            "yue": {
+              "xp": 51,
+              "workedDays": 5,
+              "lastWorkedDay": 5,
+              "specialty": "a",
+              "unlocked": 2,
+              "read": [
+                0
+              ],
+              "todayDay": 5,
+              "todayJobs": 12,
+              "todayUnlocks": 0
+            },
+            "lin": {
+              "xp": 0,
+              "workedDays": 0,
+              "lastWorkedDay": 0,
+              "specialty": null,
+              "unlocked": 0,
+              "read": [],
+              "todayDay": 0,
+              "todayJobs": 0,
+              "todayUnlocks": 0
+            }
+          },
+          "active": {
+            "barista": [],
+            "server": [
+              "yue"
+            ],
+            "cook": []
+          }
+        }
+      }
+    },
+    {
+      "pass": true,
+      "label": "reload startup assets finished before interaction"
+    },
+    {
+      "pass": true,
+      "label": "normal browser reload preserves visible partner XP",
+      "primary": "yue",
+      "expectedXP": 51,
+      "persistedCards": "Good days, together\n\nNine candidates, three per role. Your roster and active slots are separate; purchased staffing stays yours free. The owner works separately.\n\nRecruit, assign and train while closed. Stories unlock through real work across business days; read whenever you like.\n\nBarista · Active 0/0\nLin\n\nBarista\n\nReserve · 0 XP · 0 business days\n\nView partner\nTheo\n\nBarista\n\nNot recruited\n\nView partner\nMira\n\nBarista\n\nNot recruited\n\nView partner\nServer · Active 1/1\nYue\n\nServer\n\nOn duty · 51 XP · 5 business days\n\nView partner\nAri\n\nServer\n\nNot recruited\n\nView partner\nNoah\n\nServer\n\nNot recruited\n\nView partner\nCook · Active 0/0\nMei\n\nCook\n\nNot recruited\n\nView partner\nHugo\n\nCook\n\nNot recruited\n\nView partner\nSora\n\nCook\n\nNot recruited\n\nView partner"
+    },
+    {
+      "pass": true,
+      "label": "no browser runtime exceptions",
+      "errors": []
+    }
+  ],
+  "milestones": [
+    {
+      "label": "Fresh onboarding completed",
+      "elapsedSeconds": 8,
+      "day": 1,
+      "phase": "prep",
+      "dayTime": 0,
+      "coins": 0,
+      "served": 0,
+      "pantry": {
+        "beans": 50,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 0,
+            "workedDays": 0,
+            "lastWorkedDay": 0,
+            "specialty": null,
+            "unlocked": 0,
+            "read": [],
+            "todayDay": 0,
+            "todayJobs": 0,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Opened business day",
+      "elapsedSeconds": 25,
+      "day": 1,
+      "phase": "open",
+      "dayTime": 0.2499899999999998,
+      "coins": 0,
+      "served": 0,
+      "pantry": {
+        "beans": 50,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 0,
+            "workedDays": 0,
+            "lastWorkedDay": 0,
+            "specialty": null,
+            "unlocked": 0,
+            "read": [],
+            "todayDay": 0,
+            "todayJobs": 0,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 25,
+      "day": 1,
+      "phase": "open",
+      "dayTime": 0.2499899999999998,
+      "coins": 0,
+      "served": 0,
+      "pantry": {
+        "beans": 50,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 0,
+            "workedDays": 0,
+            "lastWorkedDay": 0,
+            "specialty": null,
+            "unlocked": 0,
+            "read": [],
+            "todayDay": 0,
+            "todayJobs": 0,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 41,
+      "day": 1,
+      "phase": "open",
+      "dayTime": 13.03282000000003,
+      "coins": 6,
+      "served": 2,
+      "pantry": {
+        "beans": 48,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 1,
+            "workedDays": 1,
+            "lastWorkedDay": 1,
+            "specialty": null,
+            "unlocked": 0,
+            "read": [],
+            "todayDay": 1,
+            "todayJobs": 1,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 56,
+      "day": 1,
+      "phase": "open",
+      "dayTime": 28.0655700000002,
+      "coins": 15,
+      "served": 5,
+      "pantry": {
+        "beans": 44,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 3,
+            "workedDays": 1,
+            "lastWorkedDay": 1,
+            "specialty": null,
+            "unlocked": 0,
+            "read": [],
+            "todayDay": 1,
+            "todayJobs": 3,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 71,
+      "day": 1,
+      "phase": "open",
+      "dayTime": 43.08163999999992,
+      "coins": 24,
+      "served": 8,
+      "pantry": {
+        "beans": 42,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 6,
+            "workedDays": 1,
+            "lastWorkedDay": 1,
+            "specialty": null,
+            "unlocked": 1,
+            "read": [],
+            "todayDay": 1,
+            "todayJobs": 6,
+            "todayUnlocks": 1
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 86,
+      "day": 1,
+      "phase": "open",
+      "dayTime": 58.097689999999574,
+      "coins": 36,
+      "served": 12,
+      "pantry": {
+        "beans": 38,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 9,
+            "workedDays": 1,
+            "lastWorkedDay": 1,
+            "specialty": null,
+            "unlocked": 1,
+            "read": [],
+            "todayDay": 1,
+            "todayJobs": 9,
+            "todayUnlocks": 1
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 101,
+      "day": 1,
+      "phase": "open",
+      "dayTime": 73.13042000000108,
+      "coins": 42,
+      "served": 14,
+      "pantry": {
+        "beans": 35,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 10,
+            "workedDays": 1,
+            "lastWorkedDay": 1,
+            "specialty": null,
+            "unlocked": 1,
+            "read": [],
+            "todayDay": 1,
+            "todayJobs": 10,
+            "todayUnlocks": 1
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 116,
+      "day": 1,
+      "phase": "open",
+      "dayTime": 88.16315000000378,
+      "coins": 51,
+      "served": 17,
+      "pantry": {
+        "beans": 32,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 13,
+            "workedDays": 1,
+            "lastWorkedDay": 1,
+            "specialty": null,
+            "unlocked": 1,
+            "read": [],
+            "todayDay": 1,
+            "todayJobs": 13,
+            "todayUnlocks": 1
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Paid UI restock",
+      "elapsedSeconds": 125,
+      "day": 2,
+      "phase": "prep",
+      "dayTime": 0,
+      "coins": 46,
+      "served": 19,
+      "pantry": {
+        "beans": 42,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 15,
+            "workedDays": 1,
+            "lastWorkedDay": 1,
+            "specialty": null,
+            "unlocked": 1,
+            "read": [],
+            "todayDay": 1,
+            "todayJobs": 15,
+            "todayUnlocks": 1
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Opened business day",
+      "elapsedSeconds": 126,
+      "day": 2,
+      "phase": "open",
+      "dayTime": 0.25001000000000057,
+      "coins": 46,
+      "served": 19,
+      "pantry": {
+        "beans": 42,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 15,
+            "workedDays": 1,
+            "lastWorkedDay": 1,
+            "specialty": null,
+            "unlocked": 1,
+            "read": [],
+            "todayDay": 1,
+            "todayJobs": 15,
+            "todayUnlocks": 1
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 133,
+      "day": 2,
+      "phase": "open",
+      "dayTime": 7.766360000000005,
+      "coins": 49,
+      "served": 20,
+      "pantry": {
+        "beans": 41,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 16,
+            "workedDays": 2,
+            "lastWorkedDay": 2,
+            "specialty": null,
+            "unlocked": 1,
+            "read": [],
+            "todayDay": 2,
+            "todayJobs": 1,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 148,
+      "day": 2,
+      "phase": "open",
+      "dayTime": 22.799079999999996,
+      "coins": 55,
+      "served": 22,
+      "pantry": {
+        "beans": 39,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 18,
+            "workedDays": 2,
+            "lastWorkedDay": 2,
+            "specialty": null,
+            "unlocked": 1,
+            "read": [],
+            "todayDay": 2,
+            "todayJobs": 3,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 163,
+      "day": 2,
+      "phase": "open",
+      "dayTime": 37.81512999999984,
+      "coins": 61,
+      "served": 24,
+      "pantry": {
+        "beans": 37,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 18,
+            "workedDays": 2,
+            "lastWorkedDay": 2,
+            "specialty": null,
+            "unlocked": 1,
+            "read": [],
+            "todayDay": 2,
+            "todayJobs": 3,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 178,
+      "day": 2,
+      "phase": "open",
+      "dayTime": 52.83122999999884,
+      "coins": 73,
+      "served": 28,
+      "pantry": {
+        "beans": 33,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 19,
+            "workedDays": 2,
+            "lastWorkedDay": 2,
+            "specialty": null,
+            "unlocked": 1,
+            "read": [],
+            "todayDay": 2,
+            "todayJobs": 4,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 193,
+      "day": 2,
+      "phase": "open",
+      "dayTime": 67.86394999999882,
+      "coins": 79,
+      "served": 30,
+      "pantry": {
+        "beans": 30,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 20,
+            "workedDays": 2,
+            "lastWorkedDay": 2,
+            "specialty": null,
+            "unlocked": 2,
+            "read": [],
+            "todayDay": 2,
+            "todayJobs": 5,
+            "todayUnlocks": 1
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 208,
+      "day": 2,
+      "phase": "open",
+      "dayTime": 82.88003000000175,
+      "coins": 91,
+      "served": 34,
+      "pantry": {
+        "beans": 27,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 23,
+            "workedDays": 2,
+            "lastWorkedDay": 2,
+            "specialty": null,
+            "unlocked": 2,
+            "read": [],
+            "todayDay": 2,
+            "todayJobs": 8,
+            "todayUnlocks": 1
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Paid UI restock",
+      "elapsedSeconds": 223,
+      "day": 3,
+      "phase": "prep",
+      "dayTime": 0,
+      "coins": 0,
+      "served": 35,
+      "pantry": {
+        "beans": 40,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 24,
+            "workedDays": 2,
+            "lastWorkedDay": 2,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 2,
+            "todayJobs": 9,
+            "todayUnlocks": 1
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Opened business day",
+      "elapsedSeconds": 223,
+      "day": 3,
+      "phase": "open",
+      "dayTime": 0.24997000000000408,
+      "coins": 0,
+      "served": 35,
+      "pantry": {
+        "beans": 40,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 24,
+            "workedDays": 2,
+            "lastWorkedDay": 2,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 2,
+            "todayJobs": 9,
+            "todayUnlocks": 1
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 226,
+      "day": 3,
+      "phase": "open",
+      "dayTime": 2.749890000000007,
+      "coins": 0,
+      "served": 35,
+      "pantry": {
+        "beans": 40,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 24,
+            "workedDays": 2,
+            "lastWorkedDay": 2,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 2,
+            "todayJobs": 9,
+            "todayUnlocks": 1
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 241,
+      "day": 3,
+      "phase": "open",
+      "dayTime": 17.782599999999952,
+      "coins": 12,
+      "served": 39,
+      "pantry": {
+        "beans": 36,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 26,
+            "workedDays": 3,
+            "lastWorkedDay": 3,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 3,
+            "todayJobs": 2,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 256,
+      "day": 3,
+      "phase": "open",
+      "dayTime": 32.79868000000009,
+      "coins": 18,
+      "served": 41,
+      "pantry": {
+        "beans": 33,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 27,
+            "workedDays": 3,
+            "lastWorkedDay": 3,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 3,
+            "todayJobs": 3,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 271,
+      "day": 3,
+      "phase": "open",
+      "dayTime": 47.814749999998696,
+      "coins": 27,
+      "served": 44,
+      "pantry": {
+        "beans": 31,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 27,
+            "workedDays": 3,
+            "lastWorkedDay": 3,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 3,
+            "todayJobs": 3,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 286,
+      "day": 3,
+      "phase": "open",
+      "dayTime": 62.830819999996564,
+      "coins": 51,
+      "served": 48,
+      "pantry": {
+        "beans": 27,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 31,
+            "workedDays": 3,
+            "lastWorkedDay": 3,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 3,
+            "todayJobs": 7,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 301,
+      "day": 3,
+      "phase": "open",
+      "dayTime": 77.86355999999802,
+      "coins": 60,
+      "served": 51,
+      "pantry": {
+        "beans": 24,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 32,
+            "workedDays": 3,
+            "lastWorkedDay": 3,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 3,
+            "todayJobs": 8,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 316,
+      "day": 4,
+      "phase": "prep",
+      "dayTime": 0,
+      "coins": 69,
+      "served": 54,
+      "pantry": {
+        "beans": 21,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 32,
+            "workedDays": 3,
+            "lastWorkedDay": 3,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 3,
+            "todayJobs": 8,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Paid UI restock",
+      "elapsedSeconds": 318,
+      "day": 4,
+      "phase": "prep",
+      "dayTime": 0,
+      "coins": 45,
+      "served": 54,
+      "pantry": {
+        "beans": 45,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 32,
+            "workedDays": 3,
+            "lastWorkedDay": 3,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 3,
+            "todayJobs": 8,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Opened business day",
+      "elapsedSeconds": 318,
+      "day": 4,
+      "phase": "open",
+      "dayTime": 0.24998999999999647,
+      "coins": 45,
+      "served": 54,
+      "pantry": {
+        "beans": 45,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 32,
+            "workedDays": 3,
+            "lastWorkedDay": 3,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 3,
+            "todayJobs": 8,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 333,
+      "day": 4,
+      "phase": "open",
+      "dayTime": 15.282700000000093,
+      "coins": 54,
+      "served": 57,
+      "pantry": {
+        "beans": 42,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 33,
+            "workedDays": 4,
+            "lastWorkedDay": 4,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 4,
+            "todayJobs": 1,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 348,
+      "day": 4,
+      "phase": "open",
+      "dayTime": 30.298790000000317,
+      "coins": 63,
+      "served": 60,
+      "pantry": {
+        "beans": 39,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 34,
+            "workedDays": 4,
+            "lastWorkedDay": 4,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 4,
+            "todayJobs": 2,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 363,
+      "day": 4,
+      "phase": "open",
+      "dayTime": 45.31484999999858,
+      "coins": 69,
+      "served": 62,
+      "pantry": {
+        "beans": 36,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 35,
+            "workedDays": 4,
+            "lastWorkedDay": 4,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 4,
+            "todayJobs": 3,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 378,
+      "day": 4,
+      "phase": "open",
+      "dayTime": 60.33093999999659,
+      "coins": 78,
+      "served": 65,
+      "pantry": {
+        "beans": 33,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 36,
+            "workedDays": 4,
+            "lastWorkedDay": 4,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 4,
+            "todayJobs": 4,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 393,
+      "day": 4,
+      "phase": "open",
+      "dayTime": 75.3636199999973,
+      "coins": 90,
+      "served": 69,
+      "pantry": {
+        "beans": 30,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 37,
+            "workedDays": 4,
+            "lastWorkedDay": 4,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 4,
+            "todayJobs": 5,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 408,
+      "day": 4,
+      "phase": "open",
+      "dayTime": 90.39638999999862,
+      "coins": 99,
+      "served": 72,
+      "pantry": {
+        "beans": 27,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 39,
+            "workedDays": 4,
+            "lastWorkedDay": 4,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 4,
+            "todayJobs": 7,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Paid UI restock",
+      "elapsedSeconds": 413,
+      "day": 5,
+      "phase": "prep",
+      "dayTime": 0,
+      "coins": 80,
+      "served": 72,
+      "pantry": {
+        "beans": 46,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 39,
+            "workedDays": 4,
+            "lastWorkedDay": 4,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 4,
+            "todayJobs": 7,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Opened business day",
+      "elapsedSeconds": 413,
+      "day": 5,
+      "phase": "open",
+      "dayTime": 0.2499899999999965,
+      "coins": 80,
+      "served": 72,
+      "pantry": {
+        "beans": 46,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 39,
+            "workedDays": 4,
+            "lastWorkedDay": 4,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 4,
+            "todayJobs": 7,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 425,
+      "day": 5,
+      "phase": "open",
+      "dayTime": 12.74948000000006,
+      "coins": 98,
+      "served": 74,
+      "pantry": {
+        "beans": 44,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 41,
+            "workedDays": 5,
+            "lastWorkedDay": 5,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 5,
+            "todayJobs": 2,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 440,
+      "day": 5,
+      "phase": "open",
+      "dayTime": 27.78221000000028,
+      "coins": 104,
+      "served": 76,
+      "pantry": {
+        "beans": 41,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 43,
+            "workedDays": 5,
+            "lastWorkedDay": 5,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 5,
+            "todayJobs": 4,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 455,
+      "day": 5,
+      "phase": "open",
+      "dayTime": 42.79826999999891,
+      "coins": 116,
+      "served": 80,
+      "pantry": {
+        "beans": 37,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 45,
+            "workedDays": 5,
+            "lastWorkedDay": 5,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 5,
+            "todayJobs": 6,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 470,
+      "day": 5,
+      "phase": "open",
+      "dayTime": 57.81434999999688,
+      "coins": 128,
+      "served": 84,
+      "pantry": {
+        "beans": 33,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 49,
+            "workedDays": 5,
+            "lastWorkedDay": 5,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 5,
+            "todayJobs": 10,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 485,
+      "day": 5,
+      "phase": "open",
+      "dayTime": 72.84707999999685,
+      "coins": 137,
+      "served": 87,
+      "pantry": {
+        "beans": 30,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 50,
+            "workedDays": 5,
+            "lastWorkedDay": 5,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 5,
+            "todayJobs": 11,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    },
+    {
+      "label": "Ordinary play progress",
+      "elapsedSeconds": 500,
+      "day": 5,
+      "phase": "open",
+      "dayTime": 87.86314999999824,
+      "coins": 152,
+      "served": 92,
+      "pantry": {
+        "beans": 26,
+        "milk": 0,
+        "flour": 0,
+        "butter": 0,
+        "eggs": 0,
+        "sugar": 0,
+        "tea": 0,
+        "spice": 0,
+        "cocoa": 0,
+        "cream": 0,
+        "fruit": 0,
+        "matcha": 0
+      },
+      "speed": 1,
+      "partners": {
+        "roster": {
+          "yue": {
+            "xp": 51,
+            "workedDays": 5,
+            "lastWorkedDay": 5,
+            "specialty": "a",
+            "unlocked": 2,
+            "read": [
+              0
+            ],
+            "todayDay": 5,
+            "todayJobs": 12,
+            "todayUnlocks": 0
+          }
+        },
+        "active": {
+          "barista": [],
+          "server": [
+            "yue"
+          ],
+          "cook": []
+        }
+      }
+    }
+  ],
+  "shots": [
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/en-1440-team.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/en-1440-profile.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/en-390-team.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/en-390-profile.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/zh-1440-team.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/zh-1440-profile.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/zh-390-team.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/zh-390-profile.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/ordinary-trained.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/ordinary-story.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/ordinary-recruited.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/final.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/reload-team.png"
+  ],
+  "errors": []
+}

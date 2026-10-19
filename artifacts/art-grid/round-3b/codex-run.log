@@ -1,0 +1,2754 @@
+Reading additional input from stdin...
+2026-10-16T15:47:54.084941Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 140 column 5
+OpenAI Codex v0.139.0
+--------
+workdir: /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+model: gpt-6.1-sol
+provider: custom
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: high
+reasoning summaries: none
+session id: 01a14566-022a-7d00-b8a2-4eef3303a688
+--------
+user
+<task>
+Repository: /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth (branch joyful-sloth). Do NOT commit and do NOT use git stash; preserve all uncommitted work.
+
+Your previous round (docs/art-grid/extension-room-redraw.md) was reviewed in real Chrome. The glasshouse, patio, kitchen, doorway, runners, floors and the pixel thought lettering are approved; keep them. Fix the remaining reading-room problems, looking first at the real captures in artifacts/art-grid/round-3b/ (review-reading-corner.png is a 3x close-up; review-reading-day.png, review-reading-night.png, and review-glasshouse-day.png for comparison):
+
+1. Armchairs: they are flat lilac blocks with no outline, shading, material or contact shadow, and they read as placeholders. Redraw them on the 2x grid and master palette in the reading room's warm language: rounded arms, a seat cushion, deep burgundy/rust or warm velvet upholstery, wooden feet, a one-pixel warm outline, top-left highlight, bottom-right shade and a contact shadow. Keep their anchors, size envelope and depth.
+2. Floor lamp: a flat white triangle on a stick. Redraw it as a brass floor lamp with a shaded fabric shade, a base and a contact shadow. At night its lamp pool stays as it is now.
+3. Tablecloth: the reading-room cream/burgundy remap is noisy. The top shows scattered speckle pixels and the drape is a coarse, busy check. Make it read cleanly: either a calm cream cloth with a burgundy border/trim, or a clean burgundy-cream check like the glasshouse sage version. Geometry, alpha, seats and seated poses stay identical (palette remap only).
+4. Window light: a hard-edged translucent rectangle still sits on the floor behind the left armchair (and its twin on the right), the old smudge. Replace it with the same golden window patches the main room and glasshouse use, or remove it if a patch already covers that window.
+</task>
+
+<action_safety>
+Reading room only. No changes to the main room, glasshouse, patio, kitchen, thought lettering, simulation, saves, HUD or characters. No commits, no git stash, do not delete historical assets.
+</action_safety>
+
+<default_follow_through_policy>
+Keep going without routine questions; choose the most reasonable low-risk option.
+</default_follow_through_policy>
+
+<verification_loop>
+Run and report: npx tsc --noEmit; npm run build; npx vitest run compared with artifacts/art-grid/foundation-test-failures.txt (zero new failures; 103 failures currently, all baseline); node scripts/pixel-conform.mjs check on any new or changed PNG. Save offline renders and a short report.json under artifacts/art-grid/round-3b/. Browser captures will be taken afterwards outside your sandbox.
+</verification_loop>
+
+<structured_output_contract>
+Return compactly: 1) the fix for each numbered item; 2) files changed; 3) verification results; 4) remaining gaps.
+</structured_output_contract>
+2026-10-16T15:48:02.019800Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when UnexpectedContentType(Some("missing-content-type; body: "))
+2026-10-16T15:48:02.019844Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when UnexpectedContentType(Some("missing-content-type; body: "))
+codex
+I’ll inspect the captures and reading-room code, preserve the approved art, then make targeted fixes and run verification.
+
+exec
+/bin/zsh -lc "pwd; git status --short; rg --files -g AGENTS.md -g '*reading*' -g '*render*' -g '*pixel*' -g '*extension*' -g '*foundation*' -g package.json -g '*round-3b*'" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 0ms:
+/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ M README.md
+ M src/render/cozy-world-art.ts
+ M src/render/decor-art.ts
+ M src/render/fine-sprite-art.ts
+ M src/render/furniture-art.ts
+ M src/render/generated-service-props.test.ts
+ M src/render/generated-wall-art.test.ts
+ M src/render/kitchen-art.ts
+ M src/render/lighting.ts
+ M src/render/main-room-lighting.test.ts
+ M src/render/main-room-lighting.ts
+ M src/render/passages.test.ts
+ M src/render/passages.ts
+ M src/render/phaser/cafe-scene-generated-bitmap.test.ts
+ M src/render/phaser/cafe-scene.ts
+ M src/render/pixel-room-shell.ts
+ M src/render/region-art.ts
+ M src/render/room-art.ts
+ M src/render/rug-join.test.ts
+ M src/render/sign-lettering.test.ts
+ M src/render/sign-lettering.ts
+ M src/render/thought-text.test.ts
+ M src/render/thought-text.ts
+ M src/render/viewport-frame.ts
+ M src/ui/fullscreen-layout.test.ts
+ M src/ui/fullscreen-layout.ts
+?? .art-qa-characters-delivery-kitchen.jpg
+?? .art-qa-characters-delivery-main.jpg
+?? .art-qa-characters-delivery-roster.jpg
+?? .art-qa-main-final.jpg
+?? .cafe-style-sample-comparison.jpg
+?? .cozy-cafe-final-profile/
+?? .cozy-cafe-final.jpg
+?? .cozy-cafe-stage1-profile/
+?? .cozy-cafe-stage1.jpg
+?? artifacts/
+?? docs/art-grid/
+?? scripts/art-grid-fixture.html
+?? scripts/art-grid-offline-fonts.swift
+?? scripts/art-grid-qa.mjs
+?? scripts/extension-room-qa.mjs
+?? scripts/main-room-surface-qa.mjs
+?? scripts/pixel-conform.mjs
+?? scripts/review-main-room-qa.mjs
+?? src/render/extension-surfaces.test.ts
+?? src/render/extension-surfaces.ts
+?? src/render/extension-table-art.ts
+?? src/render/main-room-surfaces.test.ts
+?? src/render/main-room-surfaces.ts
+?? src/render/phaser/cafe-scene-sign-readiness.test.ts
+?? src/render/pixel-resample.ts
+?? src/render/room-sign-projection.test.ts
+?? src/render/world-art-grid.test.ts
+?? src/render/world-art-grid.ts
+src/assets/pixel-zh.woff2
+src/render/pixel-floor-depth.ts
+src/render/pixel-resample.ts
+src/render/pixel-projection.ts
+src/render/phaser/pixel-font.test.ts
+src/render/phaser/pixel-font.ts
+src/render/main-pixel-presentation.ts
+src/render/pixel-window-village.test.ts
+src/render/pixel-floor-projection.test.ts
+src/render/pixel-room-shell.ts
+src/render/pixel-joinery.test.ts
+src/render/pixel-window-village.ts
+src/render/pixel-joinery.ts
+src/render/extension-table-art.ts
+src/render/pixel-floor-depth.test.ts
+src/render/pixel-floor-projection.ts
+src/render/pixel-projection.test.ts
+src/render/extension-surfaces.test.ts
+src/render/extension-surfaces.ts
+src/ui/pixel-icons.test.ts
+src/ui/pixel-icons.ts
+assets/generated/staff-v2/renderer-manifest.json
+assets/generated/cat-siamese-v1/renderer-manifest.json
+assets/generated/server-canonical-v1/renderer-manifest.json
+assets/generated/server-canonical-v1/renderer-manifest.original.json
+assets/generated/customer-0-v1/renderer-manifest.json
+assets/generated/bulk-candidates/kitchen/renderer-manifest.json
+assets/generated/bulk-candidates/kitchen/renderer-manifest.original.json
+assets/generated/bulk-candidates/decor-materials/renderer-manifest.json
+assets/generated/bulk-candidates/decor-materials/renderer-manifest.original.json
+assets/generated/bulk-candidates/parameter/cook-style2/renderer-manifest.json
+assets/generated/bulk-candidates/parameter/cook-style2/renderer-manifest.original.json
+assets/generated/bulk-candidates/parameter/server-style2/renderer-manifest.json
+assets/generated/bulk-candidates/parameter/server-style2/renderer-manifest.original.json
+assets/generated/bulk-candidates/parameter/server-style3/renderer-manifest.json
+assets/generated/bulk-candidates/parameter/server-style3/renderer-manifest.original.json
+assets/generated/bulk-candidates/parameter/shared-owner-barista-style1/renderer-manifest.json
+assets/generated/bulk-candidates/parameter/shared-owner-barista-style1/renderer-manifest.original.json
+assets/generated/bulk-candidates/parameter/shared-owner-barista-style0/renderer-manifest.json
+assets/generated/bulk-candidates/parameter/shared-owner-barista-style0/renderer-manifest.original.json
+assets/generated/bulk-candidates/parameter/server-style1/renderer-manifest.json
+assets/generated/bulk-candidates/parameter/server-style1/renderer-manifest.original.json
+assets/generated/bulk-candidates/parameter/cook-style1/renderer-manifest.json
+assets/generated/bulk-candidates/parameter/cook-style1/renderer-manifest.original.json
+assets/generated/bulk-candidates/parameter/server-style0/renderer-manifest.json
+assets/generated/bulk-candidates/parameter/server-style0/renderer-manifest.original.json
+assets/generated/bulk-candidates/parameter/cook-style0/renderer-manifest.json
+assets/generated/bulk-candidates/parameter/cook-style0/renderer-manifest.original.json
+assets/generated/bulk-candidates/parameter/shared-owner-barista-style2/renderer-manifest.json
+assets/generated/bulk-candidates/parameter/shared-owner-barista-style2/renderer-manifest.original.json
+assets/generated/bulk-candidates/parameter/shared-owner-barista-style3/renderer-manifest.json
+assets/generated/bulk-candidates/parameter/shared-owner-barista-style3/renderer-manifest.original.json
+assets/generated/bulk-candidates/furniture/renderer-manifest.json
+assets/generated/bulk-candidates/furniture/renderer-manifest.original.json
+assets/generated/bulk-candidates/environments/reading-window-ochre-source.png
+assets/generated/bulk-candidates/environments/reading-book-stack.png
+assets/generated/bulk-candidates/environments/reading-greenhouse-source.png
+assets/generated/bulk-candidates/environments/reading-library-shelf.png
+assets/generated/bulk-candidates/environments/reading-window-ochre.png
+assets/generated/bulk-candidates/cats/american/renderer-manifest.json
+assets/generated/bulk-candidates/cats/american/renderer-manifest.original.json
+assets/generated/bulk-candidates/cats/tabby/renderer-manifest.json
+assets/generated/bulk-candidates/cats/tabby/renderer-manifest.original.json
+assets/generated/bulk-candidates/cats/black/renderer-manifest.json
+assets/generated/bulk-candidates/cats/black/renderer-manifest.original.json
+assets/generated/bulk-candidates/cats/white/renderer-manifest.json
+assets/generated/bulk-candidates/cats/white/renderer-manifest.original.json
+assets/generated/bulk-candidates/cats/ginger/renderer-manifest.json
+assets/generated/bulk-candidates/cats/ginger/renderer-manifest.original.json
+assets/generated/bulk-candidates/cats/persian/renderer-manifest.json
+assets/generated/bulk-candidates/cats/persian/renderer-manifest.original.json
+assets/generated/bulk-candidates/cats/calico/renderer-manifest.json
+assets/generated/bulk-candidates/cats/calico/renderer-manifest.original.json
+assets/generated/bulk-candidates/cats/british/renderer-manifest.json
+assets/generated/bulk-candidates/cats/british/renderer-manifest.original.json
+assets/generated/bulk-candidates/cats/tuxedo/renderer-manifest.json
+assets/generated/bulk-candidates/cats/tuxedo/renderer-manifest.original.json
+assets/generated/bulk-candidates/cats/ragdoll/renderer-manifest.json
+assets/generated/bulk-candidates/cats/ragdoll/renderer-manifest.original.json
+assets/generated/bulk-candidates/cats/mainecoon/renderer-manifest.json
+assets/generated/bulk-candidates/cats/mainecoon/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-01/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-01/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-06/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-06/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-08/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-08/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-09/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-09/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-07/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-07/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-22/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-22/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-25/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-25/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-13/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-13/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-14/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-14/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-15/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-15/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-12/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-12/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-24/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-24/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-23/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-23/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/renderer-manifest.json
+assets/generated/bulk-candidates/customers/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-05/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-05/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-02/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-02/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-03/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-03/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-04/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-04/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-19/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-19/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-26/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-26/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-21/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-21/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-28/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-28/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-17/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-17/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-27/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-27/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-10/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-10/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-11/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-11/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-29/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-29/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-16/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-16/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-20/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-20/renderer-manifest.original.json
+assets/generated/bulk-candidates/customers/cast-18/renderer-manifest.json
+assets/generated/bulk-candidates/customers/cast-18/renderer-manifest.original.json
+scripts/extension-room-qa.mjs
+scripts/pixel-conform.mjs
+package.json
+public/art/room-reading.png
+public/art/generated/cozy-world-v2/region-reading.png
+docs/art-grid/extension-room-redraw.md
+docs/pixel-depth/pixel-restored-daytime-desktop.jpg
+docs/pixel-depth/pixel-spatial-390-expanded.jpg
+docs/pixel-depth/pixel-spatial-390-collapsed.jpg
+docs/pixel-depth/pixel-restored-initial-desktop.jpg
+docs/pixel-depth/pixel-floor-detail-service.jpg
+docs/pixel-depth/pixel-fine-main-service-390.jpg
+docs/pixel-depth/pixel-restored-service-desktop.jpg
+docs/pixel-depth/pixel-fine-main-service-desktop.jpg
+docs/pixel-depth/pixel-spatial-desktop.jpg
+docs/signature-drinks/evidence/independent-mobile/render-regression-tests.log
+docs/cozy-redraw-v2/images/reading-desktop.png
+artifacts/mobile-navigation/desktop-reading.jpg
+artifacts/mobile-navigation/mobile-boundary-reading.jpg
+artifacts/mobile-navigation/portrait-reading.jpg
+artifacts/mobile-navigation/landscape-reading.jpg
+artifacts/mobile-navigation/desktop-boundary-reading.jpg
+artifacts/mobile-navigation/small-reading.jpg
+artifacts/long-play-a5558593/40-mobile-reading-service.jpg
+artifacts/long-play-a5558593/17-reading-day6.jpg
+artifacts/long-play-a5558593/14-reading-open.jpg
+artifacts/long-play-a5558593/15-reading-service.jpg
+artifacts/longplay-fixes-1a309fcc/desktop-reading.jpg
+artifacts/longplay-fixes-1a309fcc/mobile-boundary-reading.jpg
+artifacts/longplay-fixes-1a309fcc/portrait-reading.jpg
+artifacts/longplay-fixes-1a309fcc/visual/reading-01.jpg
+artifacts/longplay-fixes-1a309fcc/visual/reading-02.jpg
+artifacts/longplay-fixes-1a309fcc/landscape-reading.jpg
+artifacts/longplay-fixes-1a309fcc/desktop-boundary-reading.jpg
+artifacts/longplay-fixes-1a309fcc/small-reading.jpg
+artifacts/longplay-fixes-1a309fcc/compact-landscape-reading.jpg
+artifacts/cozy-cast-v4-build/assets/pixelify-sans-latin-600-normal-BNlgYbDL.woff
+artifacts/cozy-cast-v4-build/assets/pixelify-sans-latin-400-normal-JapMNN6Z.woff
+artifacts/cozy-cast-v4-build/assets/pixelify-sans-latin-600-normal-Dd_Dy7u5.woff2
+artifacts/cozy-cast-v4-build/assets/pixelify-sans-cyrillic-400-normal-DfOZNMlW.woff
+artifacts/cozy-cast-v4-build/assets/pixelify-sans-latin-400-normal-DLrIX9QE.woff2
+artifacts/cozy-cast-v4-build/assets/pixelify-sans-latin-ext-600-normal-CDaIumwU.woff
+artifacts/cozy-cast-v4-build/assets/pixelify-sans-latin-ext-400-normal-BkfTUL4s.woff
+artifacts/cozy-cast-v4-build/assets/pixelify-sans-cyrillic-600-normal-B3EuUOZG.woff
+artifacts/cozy-cast-v4-build/assets/pixel-zh-FEzZjWD0.woff2
+artifacts/cozy-cast-v4-build/assets/pixelify-sans-latin-ext-600-normal-Dha6RiOG.woff2
+artifacts/cozy-cast-v4-build/assets/pixelify-sans-latin-ext-400-normal-DdH6zlBQ.woff2
+artifacts/cozy-cast-v4-build/art/room-reading.png
+artifacts/art-grid/foundation-captures/reading-full.png
+artifacts/art-grid/foundation-captures/reading-corner.png
+artifacts/art-grid/round-3/render.status
+artifacts/art-grid/round-3/reading-night.png
+artifacts/art-grid/round-3/reading-day.png
+artifacts/art-grid/round-3/pixel-check.log
+artifacts/art-grid/round-3/render.log
+artifacts/art-grid/round-3/pixel-check.status
+artifacts/art-grid/round-3b/review-reading-night.png
+artifacts/art-grid/round-3b/review-reading-corner.png
+artifacts/art-grid/round-3b/review-reading-day.png
+artifacts/art-grid/review-3/cream-night/reading-full.png
+artifacts/art-grid/review-3/cream-night/reading-corner.png
+artifacts/art-grid/review-3/cream-day/reading-full.png
+artifacts/art-grid/review-3/cream-day/reading-corner.png
+artifacts/art-grid/review-3/cream-en/reading-full.png
+artifacts/art-grid/review-3/cream-en/reading-corner.png
+artifacts/art-grid/review-2/cream-night/reading-full.png
+artifacts/art-grid/review-2/cream-night/reading-corner.png
+artifacts/art-grid/review-2/cream-day/reading-full.png
+artifacts/art-grid/review-2/cream-day/reading-corner.png
+artifacts/art-grid/foundation-test-failures.txt
+artifacts/art-grid/review-2/rose-day/reading-full.png
+artifacts/art-grid/review-2/rose-day/reading-corner.png
+artifacts/art-grid/review-2/mint-day/reading-full.png
+artifacts/art-grid/review-2/mint-day/reading-corner.png
+artifacts/compact-navigation/compact-landscape-reading.jpg
+artifacts/compact-navigation/small-reading.jpg
+artifacts/compact-navigation/desktop-reading.jpg
+artifacts/compact-navigation/mobile-boundary-reading.jpg
+artifacts/compact-navigation/portrait-reading.jpg
+artifacts/compact-navigation/landscape-reading.jpg
+artifacts/compact-navigation/desktop-boundary-reading.jpg
+artifacts/art-grid/review-2/cream-en/reading-corner.png
+artifacts/art-grid/review-2/cream-en/reading-full.png
+artifacts/visual-directions-1a309fcc/compact-landscape-reading.jpg
+artifacts/visual-directions-1a309fcc/small-reading.jpg
+artifacts/visual-directions-1a309fcc/desktop-boundary-reading.jpg
+artifacts/visual-directions-1a309fcc/desktop-reading.jpg
+artifacts/visual-directions-1a309fcc/mobile-boundary-reading.jpg
+artifacts/visual-directions-1a309fcc/portrait-reading.jpg
+artifacts/playthrough-7a4f6925/06-mobile-reading-locked.jpg
+artifacts/visual-directions-1a309fcc/landscape-reading.jpg
+artifacts/visual-directions-1a309fcc/visual/reading-01.jpg
+artifacts/visual-directions-1a309fcc/visual/reading-02.jpg
+artifacts/staff-height-build/art/room-reading.png
+artifacts/staff-height-build/assets/pixelify-sans-latin-600-normal-BNlgYbDL.woff
+artifacts/staff-height-build/assets/pixelify-sans-latin-400-normal-JapMNN6Z.woff
+artifacts/staff-height-build/assets/pixelify-sans-latin-600-normal-Dd_Dy7u5.woff2
+artifacts/staff-height-build/assets/pixelify-sans-cyrillic-400-normal-DfOZNMlW.woff
+artifacts/staff-height-build/assets/pixelify-sans-latin-400-normal-DLrIX9QE.woff2
+artifacts/staff-height-build/assets/pixelify-sans-latin-ext-600-normal-CDaIumwU.woff
+artifacts/staff-height-build/assets/pixelify-sans-latin-ext-400-normal-BkfTUL4s.woff
+artifacts/staff-height-build/assets/pixelify-sans-cyrillic-600-normal-B3EuUOZG.woff
+artifacts/staff-height-build/assets/pixel-zh-FEzZjWD0.woff2
+artifacts/staff-height-build/assets/pixelify-sans-latin-ext-600-normal-Dha6RiOG.woff2
+artifacts/staff-height-build/assets/pixelify-sans-latin-ext-400-normal-DdH6zlBQ.woff2
+
+  → Inspect captures and reading-room rendering
+  • Redraw targeted reading-room details
+  • Render and verify scoped changes
+exec
+/bin/zsh -lc "find .. -name AGENTS.md -print; cat docs/art-grid/extension-room-redraw.md; cat scripts/extension-room-qa.mjs; cat src/render/extension-table-art.ts; rg -n 'armchair|floorLamp|floor-lamp|reading|smudge' src/render/{furniture-art.ts,decor-art.ts,room-art.ts,lighting.ts,extension-surfaces.ts,cozy-world-art.ts,phaser/cafe-scene.ts}; cat package.json" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 340ms:
+# Extension rooms and thought lettering — round 3
+
+## Changes
+
+1. **Reading doorway and circulation.** The upper runner now begins at the floor,
+   not the ceiling. A recessed view into the glasshouse has oak jambs, a header,
+   glazing ribs, plants and a tiled threshold. The recess paints behind actors;
+   only its frame paints in the foreground. Its sky follows the existing clock.
+   Unlocked extensions receive bound, sparsely patterned runners with a seamless
+   cross junction, using the main rug's palette/binding language.
+2. **Light.** Half-room-pixel golden pane footprints replace diffuse rectangles.
+   They retain the extension sun's travelling slant, strength, reach and night
+   suppression. Floor actors receive native contact shades; built-in reading
+   furniture and generated kitchen equipment receive contact shadows too.
+   Extension lamp textures use continuous radial falloff at density two and keep
+   their existing positions, colors, strengths and night activation. The built-in
+   reading lamp's light follows its new shade. Extension furnishings omit their
+   old concentric baked glow; main/shop behavior is unchanged. Warm night grading
+   retains the glasshouse/patio's stronger sky exposure and leaves locked grades
+   unchanged.
+3. **Floors.** Warm aged clay tiles in the glasshouse, staggered flagstones on the
+   patio and quiet kitchen ceramics replace the loud checker/speckle. Half-pixel
+   grout, lit bevels and sparse worn edges use master-palette pigments. Reading
+   herringbone is retained.
+4. **Scale.** The two built-in reading armchairs and floor lamp were calls to the
+   placeable-furniture painter, not actual placed pieces. They now have dedicated
+   density-two upholstery/brass artwork at the same centers and feet. Chair
+   silhouettes are about 24×27 room pixels; the lamp is about 10×35. No furniture
+   definition, shop thumbnail, placement footprint, tap target or anchor changes.
+5. **Room identity.** Red cloth pigment is remapped to cream/burgundy, sage and
+   blue/cream for reading/glasshouse/patio tables. Alpha, source envelopes, chairs,
+   seated poses, anchors and crops are unchanged. Ensemble, atlas and legacy
+   generated-table fallback paths retain their original geometry. Main red
+   gingham is returned unchanged. Variants are cached by source and room.
+6. **Kitchen.** Uninstalled wall equipment gets small continuous floor-tape
+   footprints instead of vertical dashed boxes; capped plumbing/electrical
+   hookups remain. Rubber mats have beveled binding and recessed rib texture.
+   STORE/PREP use shared pixel sign masks, with font-readiness layer signatures.
+   All equipment gates, cook routes and the unfitted locked shell are unchanged.
+7. **Thoughts.** Wrapping and rendering use the same shared glyph advances as
+   signs: bitmap Latin, native Pixel ZH, binary-threshold platform CJK fallback.
+   Text is baked at density two, centered by actual ink, and shown at exactly
+   half backing size. Font revision participates in the texture key. The existing
+   placement/collision planner, locales and 3.6-second display state are retained.
+
+## Files changed in this round
+
+- `src/render/extension-surfaces.ts` (new)
+- `src/render/extension-table-art.ts` (new)
+- `src/render/extension-surfaces.test.ts` (new)
+- `src/render/region-art.ts`
+- `src/render/passages.ts`
+- `src/render/kitchen-art.ts`
+- `src/render/cozy-world-art.ts`
+- `src/render/furniture-art.ts`
+- `src/render/lighting.ts`
+- `src/render/phaser/cafe-scene.ts`
+- `src/render/thought-text.ts`
+- `src/render/thought-text.test.ts`
+- `scripts/extension-room-qa.mjs` (new)
+- `scripts/art-grid-offline-fonts.swift` (optional extra QA glyphs)
+- `docs/art-grid/extension-room-redraw.md` (this report)
+- Generated evidence under `artifacts/art-grid/round-3/`.
+
+Existing uncommitted work is retained. No commit, stash, historical-asset deletion,
+runtime PNG edit, simulation/economy/save/HUD/character change or new animation.
+Main-room surface painters and approved artwork are not redrawn.
+
+## Verification and limitations
+
+Exact command outcomes and baseline comparison are in
+`artifacts/art-grid/round-3/report.json`; complete logs are alongside it.
+No existing test contract is changed. New tests cover palette/grid, calm fields,
+doorway framing and actor separation, chair upholstery/contact, travelling light,
+night suppression, continuous lamp falloff, table alpha/material preservation,
+shared thought measurement/wrapping and integer binary glyph painting. Existing
+thought timing/placement tests remain in the focused run.
+
+`node scripts/extension-room-qa.mjs` produces native day/night painter composites,
+a reserved-equipment kitchen and both thought locales. The offline canvas uses
+real source assets and production painters, CoreText scratch masks fed through
+the actual sign thresholding code, and additive lamp pools at runtime anchors.
+Composites are palette-snapped for PNG conformity checks. They are not browser
+captures: Phaser actor sorting, camera projection, live customers/cooks, touch
+interaction and final WebGL blending still need the external Chrome pass. No
+Chrome or local server was launched in this sandbox.
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { rolldown } from 'rolldown';
+import woff2 from 'wawoff2';
+import { decodePng, encodePng } from './pixel-conform.mjs';
+
+const out = 'artifacts/art-grid/round-3';
+fs.mkdirSync(out, { recursive: true });
+const zh = JSON.parse(fs.readFileSync('src/locales/zh.json'));
+const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'extension-qa-'));
+let rasters;
+try {
+  const font = path.join(temporary, 'pixel.ttf');
+  fs.writeFileSync(font, await woff2.decompress(fs.readFileSync('src/assets/pixel-zh.woff2')));
+  const result = spawnSync('swift', ['-module-cache-path', path.join(temporary, 'modules'), 'scripts/art-grid-offline-fonts.swift', font, Object.entries(zh).filter(([key]) => key.startsWith('thought.')).map(([, text]) => text).join('')], { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+  if (result.status !== 0) throw new Error(result.stderr);
+  rasters = JSON.parse(result.stdout);
+} finally { fs.rmSync(temporary, { recursive: true, force: true }); }
+
+class SoftwareCanvas {
+  constructor(width = 1, height = 1) { this.width = width; this.height = height; }
+  set width(value) { this.rectWidth = Math.round(value); this.pixels = null; }
+  get width() { return this.rectWidth; }
+  set height(value) { this.rectHeight = Math.round(value); this.pixels = null; }
+  get height() { return this.rectHeight; }
+  get data() { return this.pixels ??= new Uint8ClampedArray(this.rectWidth * this.rectHeight * 4); }
+  getContext() { return this.ctx ??= new SoftwareContext(this); }
+}
+class SoftwareImage extends SoftwareCanvas {
+  get naturalWidth() { return this.width; }
+  get naturalHeight() { return this.height; }
+}
+class SoftwareContext {
+  constructor(canvas) { this.canvas = canvas; this.fillStyle = '#000000'; this.globalAlpha = 1; this.transform = [1, 1, 0, 0]; this.stack = []; this.box = null; this.points = []; }
+  save() { this.stack.push([this.fillStyle, this.globalAlpha, [...this.transform], this.box, this.globalCompositeOperation]); }
+  restore() { [this.fillStyle, this.globalAlpha, this.transform, this.box, this.globalCompositeOperation] = this.stack.pop(); }
+  scale(positionX, positionY) { this.transform[0] *= positionX; this.transform[1] *= positionY; }
+  translate(positionX, positionY) { this.transform[2] += positionX * this.transform[0]; this.transform[3] += positionY * this.transform[1]; }
+  getTransform() { const [scaleX,scaleY,translateX,translateY]=this.transform;return {'a':scaleX,'b':0,'c':0,'d':scaleY,'e':translateX,'f':translateY}; }
+  setTransform(scaleX,_b,_c,scaleY,translateX,translateY) { this.transform=[scaleX,scaleY,translateX,translateY]; }
+  beginPath() { this.points = []; this.pending = null; this.circle = null; }
+  rect(positionX, positionY, rectWidth, rectHeight) { const [sx, sy, tx, ty] = this.transform; this.pending = [positionX * sx + tx, positionY * sy + ty, rectWidth * sx, rectHeight * sy]; }
+  clip() { this.box = this.pending; }
+  moveTo(positionX, positionY) { this.points.push([positionX, positionY]); }
+  lineTo(positionX, positionY) { this.points.push([positionX, positionY]); }
+  closePath() {}
+  setLineDash() {}
+  arc(positionX, positionY, radius) { this.circle = [positionX, positionY, radius]; }
+  ellipse(positionX, positionY, rx, ry) { this.circle = [positionX, positionY, rx, ry]; }
+  fill() {
+    if (this.circle) {
+      const [cx, cy, rx, ry = rx] = this.circle;
+      for (let positionY = cy - ry; positionY < cy + ry; positionY += .5) { const half = rx * Math.sqrt(Math.max(0, 1 - ((positionY + .25 - cy) / ry) ** 2)); this.fillRect(cx - half, positionY, half * 2, .5); }
+    } else if (this.pending) {
+      const old = this.transform; this.transform = [1, 1, 0, 0]; this.fillRect(...this.pending); this.transform = old;
+    }
+  }
+  stroke() { for (let index = 1; index < this.points.length; index++) { const start = this.points[index - 1], end = this.points[index], count = Math.ceil(Math.hypot(end[0] - start[0], end[1] - start[1]) * 2); const old = this.fillStyle; this.fillStyle = this.strokeStyle; for (let step = 0; step <= count; step++) this.fillRect(start[0] + (end[0] - start[0]) * step / count, start[1] + (end[1] - start[1]) * step / count, .5, .5); this.fillStyle = old; } }
+  strokeRect(positionX, positionY, rectWidth, rectHeight) { const old = this.fillStyle; this.fillStyle = this.strokeStyle; for (const rect of [[positionX,positionY,rectWidth,.5],[positionX,positionY+rectHeight-.5,rectWidth,.5],[positionX,positionY,.5,rectHeight],[positionX+rectWidth-.5,positionY,.5,rectHeight]]) this.fillRect(...rect); this.fillStyle = old; }
+  pixel(positionX, positionY, rgba) {
+    const canvas = this.canvas;
+    if (positionX < 0 || positionY < 0 || positionX >= canvas.width || positionY >= canvas.height || (this.box && (positionX < this.box[0] || positionY < this.box[1] || positionX >= this.box[0] + this.box[2] || positionY >= this.box[1] + this.box[3]))) return;
+    const offset = (positionY * canvas.width + positionX) * 4, data = canvas.data;
+    const alpha = rgba[3] / 255 * this.globalAlpha, previous = data[offset + 3] / 255;
+    if (this.globalCompositeOperation === 'lighter') {
+      for (let channel = 0; channel < 3; channel++) data[offset + channel] = Math.min(255, data[offset + channel] + rgba[channel] * alpha);
+      data[offset + 3] = Math.min(255, (previous + alpha) * 255); return;
+    }
+    const final = alpha + previous * (1 - alpha);
+    for (let channel = 0; channel < 3; channel++) data[offset + channel] = final ? Math.round((rgba[channel] * alpha + data[offset + channel] * previous * (1 - alpha)) / final) : 0;
+    data[offset + 3] = Math.round(final * 255);
+  }
+  fillRect(positionX, positionY, rectWidth, rectHeight) {
+    const [sx, sy, tx, ty] = this.transform, color = [1,3,5].map(index => parseInt(this.fillStyle.slice(index,index+2),16)); color.push(255);
+    const x0 = Math.round(Math.min(positionX*sx+tx,(positionX+rectWidth)*sx+tx)), x1 = Math.round(Math.max(positionX*sx+tx,(positionX+rectWidth)*sx+tx));
+    const y0 = Math.round(Math.min(positionY*sy+ty,(positionY+rectHeight)*sy+ty)), y1 = Math.round(Math.max(positionY*sy+ty,(positionY+rectHeight)*sy+ty));
+    for (let row = Math.max(0,y0); row < Math.min(this.canvas.height,y1); row++) for (let col = Math.max(0,x0); col < Math.min(this.canvas.width,x1); col++) this.pixel(col,row,color);
+  }
+  drawImage(source, ...args) {
+    let crop = [0,0,source.width,source.height], dest;
+    if (args.length === 2) dest = [...args,source.width,source.height];
+    else if (args.length === 4) dest = args;
+    else { crop = args.slice(0,4); dest = args.slice(4); }
+    const [sx,sy,tx,ty] = this.transform, [positionX,positionY,rectWidth,rectHeight] = dest;
+    const left = Math.round(positionX*sx+tx), top = Math.round(positionY*sy+ty), width = Math.round(rectWidth*sx), height = Math.round(rectHeight*sy);
+    const data = source.data;
+    for (let row = 0; row < Math.abs(height); row++) for (let col = 0; col < Math.abs(width); col++) {
+      const px = Math.floor(crop[0] + (col+.5)/Math.abs(width)*crop[2]), py = Math.floor(crop[1] + (row+.5)/Math.abs(height)*crop[3]);
+      if (px < 0 || py < 0 || px >= source.width || py >= source.height) continue;
+      const offset = (py*source.width+px)*4;
+      this.pixel(width < 0 ? left-col-1 : left+col,height < 0 ? top-row-1 : top+row,data.subarray(offset,offset+4));
+    }
+  }
+  fillText(text) { this.text = text; }
+  getImageData(positionX,positionY,rectWidth,rectHeight) {
+    if (this.text) return { data: Buffer.from(rasters[(this.font.includes('"Pixel ZH"')?'pixel':'platform')+':'+this.text] ?? '', 'base64') };
+    const data = new Uint8ClampedArray(rectWidth*rectHeight*4);
+    for (let row = 0; row < rectHeight; row++) for (let col = 0; col < rectWidth; col++) data.set(this.canvas.data.subarray(((positionY+row)*this.canvas.width+positionX+col)*4,((positionY+row)*this.canvas.width+positionX+col)*4+4),(row*rectWidth+col)*4);
+    return {data,width:rectWidth,height:rectHeight};
+  }
+  putImageData(image,positionX,positionY) { const width = image.width ?? this.canvas.width, height = image.height ?? this.canvas.height; for(let row=0;row<height;row++)for(let col=0;col<width;col++)this.canvas.data.set(image.data.subarray((row*width+col)*4,(row*width+col)*4+4),((row+positionY)*this.canvas.width+col+positionX)*4); }
+}
+globalThis.document = { createElement: () => new SoftwareCanvas(), fonts: new Set([{family:'Pixel ZH',status:'loaded'}]) };
+globalThis.HTMLCanvasElement = SoftwareCanvas;
+globalThis.HTMLImageElement = SoftwareImage;
+globalThis.ImageData = class { constructor(data,width,height) { Object.assign(this,{data,width,height}); } };
+
+const files = ['render/extension-surfaces','render/extension-table-art','render/region-art','render/kitchen-art','render/passages','render/generated-main-art','render/generated-furniture-art','render/generated-decor-art','render/cozy-furniture-assets','render/cozy-materials','render/main-room-surfaces','render/main-room-lighting','render/world-art-grid','render/thought-text','render/thought-bubbles','render/sign-lettering','render/lighting','render/materials','game/state','game/layout','game/kitchen'];
+const bundle = await rolldown({input:'qa',plugins:[{name:'qa',resolveId:id=>id==='qa'?id:null,load:id=>id==='qa'?files.map(file=>`export * from ${JSON.stringify(path.resolve('src',file+'.ts'))};`).join('\n'):null}]});
+const {output} = await bundle.generate({format:'esm'}); await bundle.close();
+const art = await import('data:text/javascript;base64,'+Buffer.from(output.find(item=>item.type==='chunk').code).toString('base64'));
+const load = file => { const image = decodePng('public/art/generated/'+file), canvas = new SoftwareImage(image.width,image.height); canvas.pixels = image.pixels; return canvas; };
+for (const [key,file] of Object.entries(art.GENERATED_MAIN_ASSETS)) if (key.startsWith('cozy-region-') || key.startsWith('cozy-kitchen-')) art.installGeneratedMainAsset(key,load(file));
+art.setGeneratedFurnitureAdapter(art.createGeneratedFurnitureArt(Object.fromEntries(['bench','plant_lemon','plant_monstera','plant_fern'].map(id=>[id,load(art.GENERATED_MAIN_ASSETS['furniture-'+id])])),{catalog:art.COZY_FURNITURE_CATALOG}));
+art.setGeneratedDecorAdapter(art.createGeneratedDecorArt(Object.fromEntries(['floor_herringbone-tile'].map(id=>[id,load(art.GENERATED_MAIN_ASSETS['decor-'+id])])),{catalog:art.COZY_DECOR_CATALOG}));
+const palette = JSON.parse(fs.readFileSync('docs/art-grid/palette.json')).colors.map(color=>[1,3,5].map(index=>parseInt(color.hex.slice(index,index+2),16)));
+function save(canvas,name) {
+  const pixels = canvas.data.slice(), cache = new Map();
+  for(let offset=0;offset<pixels.length;offset+=4) {
+    const key = pixels[offset]*65536+pixels[offset+1]*256+pixels[offset+2];
+    let color=cache.get(key);
+    if(!color){let best=Infinity;for(const candidate of palette){const distance=candidate.reduce((sum,value,index)=>sum+(value-pixels[offset+index])**2,0);if(distance<best){best=distance;color=candidate;}}cache.set(key,color);}
+    pixels.set(color,offset);pixels[offset+3]=pixels[offset+3]>=128?255:0;
+  }
+  encodePng(path.join(out,name+'.png'),{width:canvas.width,height:canvas.height,pixels});
+}
+function board(width=320,height=240) { const canvas=new SoftwareCanvas(width*2,height*2),ctx=art.gridSafeContext(canvas.getContext('2d'));ctx.scale(2,2);ctx.fillStyle='#efdfbe';ctx.fillRect(0,0,width,height);return {canvas,ctx}; }
+const tableSource = load('cozy-seating-v3/ensemble.png');
+const table = new SoftwareCanvas(80,60);table.getContext('2d').drawImage(tableSource,88,71,608,457,2,2,76,57);
+const chair = new SoftwareCanvas(68,84);chair.getContext('2d').drawImage(tableSource,805,77,348,455,8.612,32.86,37.584,49.14);
+const state=art.createInitialState(0);state.regions=['reading','greenhouse','terrace'];state.kitchen=true;
+function kitchenFloor(ctx) {
+  art.paintBench(ctx,art.BENCH['x']+art.BENCH['w']/2,art.kitchenFloorY(art.BENCH.front),false,false);
+  art.paintRack(ctx,art.RACK['x'],art.kitchenFloorY(art.RACK.foot),[]);
+  art.paintBins(ctx,art.BINS['x'],art.kitchenFloorY(art.BINS.foot));
+  art.paintDishPit(ctx,art.DISH_PIT['x'],art.kitchenFloorY(art.DISH_PIT.foot));
+}
+for (const hour of [10.5,21]) for (const area of ['reading','greenhouse','terrace','kitchen']) {
+  const light=art.lightingAt(hour),{canvas,ctx}=board();
+  if(area==='kitchen') {art.paintKitchen(ctx,240,0,false,new Set(['mixer','proofer','deckOven','fryer']),new Set());kitchenFloor(ctx);}
+  else {
+    art.paintRegion(ctx,area,240,0,light,false);art.paintPassageFloor(ctx,area,false);
+    for(const [positionX,positionY] of [[64,112],[256,112],[64,180],[256,180]]) {
+      art.paintContactShade(ctx,positionX,positionY,38,.25);
+      const variant=new SoftwareCanvas(80,60);variant.pixels=table.data.slice();art.remapTablecloth(variant.data,80,60,area);
+      ctx.drawImage(chair,positionX-38,positionY-41,34,42);ctx.save();ctx.translate(positionX+38,positionY-41);ctx.scale(-1,1);ctx.drawImage(chair,0,0,34,42);ctx.restore();ctx.drawImage(variant,positionX-20,positionY-29,40,30);
+    }
+  }
+  art.paintRoomBoundaries(ctx,area,state);
+  const grade=art.roomAmbient(light,area),rgb=[1,3,5].map(index=>parseInt(grade.slice(index,index+2),16)/255);
+  for(let offset=0;offset<canvas.data.length;offset+=4)for(let channel=0;channel<3;channel++)canvas.data[offset+channel]*=rgb[channel];
+  const lamps = area==='reading'?[[100,art.floorY(98)-27,30,1,'#ffcf7a']]:area==='terrace'?Array.from({length:9},(_,index)=>{const positionX=22+index*34;return [positionX,19+Math.round(Math.sin(positionX/320*Math.PI)*12),14,.9,'#ffcf7a'];}):area==='kitchen'?[[74,12,44,.8,'#fbf6e4'],[218,12,44,.8,'#fbf6e4'],[182,30,16,.7,'#ffcf7a'],[236,30,16,.7,'#ffcf7a'],[290,30,16,.7,'#ffcf7a'],[218,56,26,.6,'#ffa64a']]:[];
+  for(const [positionX,positionY,radius,strength,tint] of lamps) {
+    const pool=new SoftwareCanvas(radius*4,radius*4),poolCtx=pool.getContext('2d');poolCtx.scale(2,2);art.extensionLampPool(poolCtx,radius,tint);
+    ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=light.lamps*strength;ctx.drawImage(pool,positionX-radius,positionY-radius,radius*2,radius*2);ctx.restore();
+  }
+  save(canvas,area+(hour===21?'-night':'-day'));
+}
+{
+  const {canvas,ctx}=board();art.paintKitchen(ctx,240,0,false,new Set(),new Set());kitchenFloor(ctx);save(canvas,'kitchen-reserved');
+}
+for(const [locale,text] of [['en','My little café dream'],['zh',zh['thought.owner.idle']]]) {
+  const lines=art.wrapThoughtText(text,locale==='zh'),rectWidth=art.thoughtBubbleWidth(Math.max(...lines.map(art.thoughtTextWidth)));
+  const raster=art.thoughtTextRaster(lines,'',rectWidth),{canvas,ctx}=board(rectWidth,raster.height);
+  ctx.drawImage(raster.canvas,0,raster.sourceY,rectWidth*2,raster.inkHeight,0,raster.textY,rectWidth,raster.inkHeight/2);save(canvas,'thought-'+locale);
+}
+console.log('Offline production-painter boards saved to '+out+'; palette-snapped composites; lamp painters at runtime anchors; no Phaser actors or camera.');
+import type { AreaId } from '../game/regions';
+import { artRamp } from './main-room-surfaces';
+import { registerFineSpriteArt } from './fine-sprite-art';
+import { worldSpriteArt } from './world-art-grid';
+
+const variants = new WeakMap<HTMLCanvasElement, Map<AreaId, HTMLCanvasElement>>();
+
+export function remapTablecloth(pixels: Uint8ClampedArray, width: number, height: number, area: AreaId): void {
+  if (area === 'main' || area === 'kitchen') return;
+  const colors = artRamp(area === 'reading' ? 'cloth-7' : area === 'greenhouse' ? 'sage' : 'cloth-1');
+  const trim = artRamp('gingham');
+  for (let row = 0; row < height * .76; row++) for (let col = 0; col < width; col++) {
+    const offset = (row * width + col) * 4;
+    const red = pixels[offset], green = pixels[offset + 1], blue = pixels[offset + 2];
+    if (!pixels[offset + 3] || red - green < 24 || blue < green * .75 || green > red * .76) continue;
+    const level = (red + green + blue) / 3 / 255;
+    const color = area === 'reading' && level < .34 ? trim[0] : colors[Math.min(colors.length - 1, Math.floor(level * colors.length))];
+    for (let channel = 0; channel < 3; channel++) pixels[offset + channel] = parseInt(color.slice(1 + channel * 2, 3 + channel * 2), 16);
+  }
+}
+
+export function extensionTable(source: HTMLCanvasElement, area: AreaId): HTMLCanvasElement {
+  if (area === 'main' || area === 'kitchen') return source;
+  const cache = variants.get(source) ?? new Map<AreaId, HTMLCanvasElement>();
+  const existing = cache.get(area); if (existing) return existing;
+  const art = worldSpriteArt(source), backing = document.createElement('canvas');
+  backing.width = art.canvas.width; backing.height = art.canvas.height;
+  const ctx = backing.getContext('2d')!;
+  ctx.drawImage(art.canvas, 0, 0);
+  const pixels = ctx.getImageData(0, 0, backing.width, backing.height);
+  remapTablecloth(pixels.data, backing.width, backing.height, area);
+  ctx.putImageData(pixels, 0, 0);
+  const logical = document.createElement('canvas'); logical.width = source.width; logical.height = source.height;
+  registerFineSpriteArt(logical, backing, art.density);
+  cache.set(area, logical); variants.set(source, cache);
+  return logical;
+}
+src/render/lighting.ts:106:const EXPOSURE: Record<AreaId, number> = { main: 0.48, reading: 0.45, greenhouse: 0.9, terrace: 1, kitchen: 0.35 };
+src/render/extension-surfaces.ts:32:  const colors = artRamp(area === 'reading' ? 'gingham' : area === 'terrace' ? 'cloth-1' : 'sage');
+src/render/extension-surfaces.ts:37:  artRect(ctx, originX + 3, originY + 3, width - 6, height - 6, area === 'reading' ? cream[2] : colors[2]);
+src/render/extension-surfaces.ts:48:export function readingDoor(ctx: Ctx, floor: number, light?: Lighting): void {
+src/render/extension-surfaces.ts:74:  readingDoorFrame(ctx, floor);
+src/render/extension-surfaces.ts:77:export function readingDoorFrame(ctx: Ctx, floor: number): void {
+src/render/extension-surfaces.ts:85:export function readingFurnishing(ctx: Ctx, kind: 'armchair' | 'lamp', cx: number, foot: number): void {
+src/render/extension-surfaces.ts:126:  const colors = artRamp(area === 'reading' ? 'gingham' : area === 'terrace' ? 'cloth-1' : 'sage');
+src/render/extension-surfaces.ts:127:  artRect(ctx, 145, originY - 7, 30, 14, area === 'reading' ? cream[2] : colors[2]);
+src/render/furniture-art.ts:267:  armchair: ARMCHAIR,
+src/render/room-art.ts:866:    // The guest cross-aisle connects the entry and reading room.
+src/render/phaser/cafe-scene.ts:149:  } else if (area === 'reading') {
+src/render/phaser/cafe-scene.ts:734:    const wallpaper = area === 'main' ? decor.wallpaper : area === 'reading' ? 'wall_cream' : area === 'kitchen' ? 'wall_dots' : 'wall_mint';
+{
+  "name": "tiny-bean-cafe",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "predev": "node scripts/subset-font.mjs",
+    "dev": "vite --host",
+    "prebuild": "node scripts/subset-font.mjs",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host",
+    "test": "vitest run",
+    "icons": "node scripts/gen-icons.mjs",
+    "font": "node scripts/subset-font.mjs",
+    "balance": "vitest run scripts/balance.test.ts --silent=false --disableConsoleIntercept",
+    "balance:lab": "ECONOMY_LAB=1 vitest run scripts/economy-lab.test.ts --silent=false --disableConsoleIntercept",
+    "balance:compare": "node scripts/compare-economy.mjs",
+    "balance:frontier": "INVESTMENT_FRONTIER=1 vitest run scripts/investment-frontier.test.ts --silent=false --disableConsoleIntercept",
+    "balance:long": "ECONOMY_LONG_HORIZON=1 vitest run scripts/economy-long-horizon.test.ts --silent=false --disableConsoleIntercept",
+    "balance:long-supplement": "ECONOMY_LONG_HORIZON_SUPPLEMENT=1 vitest run scripts/economy-long-horizon-supplement.test.ts --silent=false --disableConsoleIntercept",
+    "balance:fixed-clock": "FIXED_CLOCK=1 vitest run scripts/economy-fixed-clock.test.ts --silent=false --disableConsoleIntercept",
+    "balance:recovery": "EMERGENCY_RECOVERY=1 EMERGENCY_RECOVERY_LABEL=emergency-recovery-v2 vitest run scripts/economy-recovery.test.ts --silent=false --disableConsoleIntercept",
+    "balance:restore": "node scripts/restore-economy-evidence.mjs",
+    "balance:routes": "vitest run scripts/cafe-style-balance.test.ts --silent=false --disableConsoleIntercept",
+    "balance:routes:full": "CAFE_STYLE_LAB=1 vitest run scripts/cafe-style-balance.test.ts --silent=false --disableConsoleIntercept",
+    "balance:routes:progression": "CAFESTYLE_PROGRESSION=1 vitest run scripts/cafe-style-progression.test.ts --silent=false --disableConsoleIntercept"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "happy-dom": "^20.14.6",
+    "subset-font": "^2.9.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.3",
+    "vitest": "^5.0.3"
+  },
+  "dependencies": {
+    "@fontsource/fusion-pixel-12px-proportional-sc": "^5.3.0",
+    "@fontsource/pixelify-sans": "^5.3.0",
+    "phaser": "^4.2.1"
+  }
+}
+
+exec
+/bin/zsh -lc 'cat src/render/extension-surfaces.ts; cat src/render/extension-table-art.ts; cat scripts/extension-room-qa.mjs; cat src/render/extension-surfaces.test.ts' in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 0ms:
+import type { AreaId } from '../game/regions';
+import type { Lighting, Sun } from './lighting';
+import { beam } from './lighting';
+import { artRamp, artRect, mainTimber } from './main-room-surfaces';
+import { paintContactShade } from './main-room-lighting';
+
+type Ctx = CanvasRenderingContext2D;
+const cream = artRamp('cloth-7'), oak = artRamp('oak'), walnut = artRamp('walnut');
+
+export function extensionFloor(ctx: Ctx, area: AreaId, top: number, height: number): void {
+  const floor = artRamp('floor');
+  const colors = area === 'greenhouse' ? [floor[0], floor[0], artRamp('terracotta')[2], floor[2], floor[3]] : floor;
+  const tileW = area === 'terrace' ? 40 : 24, tileH = area === 'terrace' ? 20 : 24;
+  artRect(ctx, 0, top, 320, height - top, colors[1]);
+  ctx.save(); ctx.beginPath(); ctx.rect(0, top, 320, height - top); ctx.clip();
+  for (let row = 0, originY = top; originY < height; originY += tileH, row++) {
+    for (let originX = row % 2 ? -tileW / 2 : 0; originX < 320; originX += tileW) {
+      artRect(ctx, originX + .5, originY + .5, tileW - 1, tileH - 1, colors[3]);
+      artRect(ctx, originX + 1, originY + 1, tileW - 2, .5, colors[4]);
+      artRect(ctx, originX + 1, originY + 1, .5, tileH - 2, colors[4]);
+      artRect(ctx, originX + 1, originY + tileH - 1.5, tileW - 2, .5, colors[2]);
+      if ((row + Math.floor(originX / tileW)) % 4 === 0) {
+        artRect(ctx, originX + 5, originY + tileH - 4, 7, .5, colors[2]);
+        artRect(ctx, originX + 6, originY + tileH - 4.5, 4, .5, colors[4]);
+      }
+    }
+  }
+  ctx.restore();
+}
+
+export function extensionRunner(ctx: Ctx, area: AreaId, originX: number, originY: number, width: number, height: number, dir: 'h' | 'v'): void {
+  const colors = artRamp(area === 'reading' ? 'gingham' : area === 'terrace' ? 'cloth-1' : 'sage');
+  artRect(ctx, originX, originY, width, height, colors[0]);
+  artRect(ctx, originX + .5, originY + .5, width - 1, height - 1, oak[2]);
+  artRect(ctx, originX + 1, originY + 1, width - 2, height - 2, cream[1]);
+  artRect(ctx, originX + 2, originY + 2, width - 4, height - 4, colors[1]);
+  artRect(ctx, originX + 3, originY + 3, width - 6, height - 6, area === 'reading' ? cream[2] : colors[2]);
+  const count = dir === 'h' ? width : height;
+  for (let step = 9; step < count - 6; step += 20) {
+    const cx = dir === 'h' ? originX + step : originX + width / 2;
+    const cy = dir === 'h' ? originY + height / 2 : originY + step;
+    artRect(ctx, cx - 1, cy - 2, 2, 1, colors[0]);
+    artRect(ctx, cx - 2, cy - 1, 4, 2, colors[1]);
+    artRect(ctx, cx - 1, cy + 1, 2, 1, colors[0]);
+  }
+}
+
+export function readingDoor(ctx: Ctx, floor: number, light?: Lighting): void {
+  artRect(ctx, 139, 12, 42, floor - 8, walnut[0]);
+  artRect(ctx, 144, 18, 32, floor - 18, artRamp('sage')[0]);
+  const sage = artRamp('sage'), tile = artRamp('floor');
+  artRect(ctx, 146, 20, 28, floor - 20, sage[1]);
+  artRect(ctx, 148, 21, 24, 32, light?.sky[1] ?? artRamp('sky')[1]);
+  artRect(ctx, 159, 21, 1.5, 33, sage[0]);
+  artRect(ctx, 148, 38, 24, 1, sage[1]);
+  artRect(ctx, 146, 54, 28, floor - 54, tile[2]);
+  for (let top = 56; top < floor - 2; top += 7) {
+    artRect(ctx, 146, top, 28, .5, tile[0]);
+    artRect(ctx, top % 2 ? 154 : 164, top, .5, 7, tile[0]);
+  }
+  for (const originX of [149, 169]) {
+    artRect(ctx, originX - 2, 50, 5, 6, artRamp('terracotta')[0]);
+    artRect(ctx, originX - 1.5, 50, 4, 5, artRamp('terracotta')[2]);
+    artRect(ctx, originX, 41, .5, 9, sage[0]);
+    for (let row = 0; row < 3; row++) {
+      artRect(ctx, originX - 2, 42 + row * 2, 2.5, 1, sage[2]);
+      artRect(ctx, originX + .5, 41 + row * 2, 2, 1, sage[3]);
+    }
+  }
+  if (light && light.dark > 0) {
+    ctx.save(); ctx.globalAlpha = light.dark * .4;
+    artRect(ctx, 144, 18, 32, floor - 20, sage[0]); ctx.restore();
+  }
+  readingDoorFrame(ctx, floor);
+}
+
+export function readingDoorFrame(ctx: Ctx, floor: number): void {
+  mainTimber(ctx, 139, 13, 5, floor - 9, true);
+  mainTimber(ctx, 176, 13, 5, floor - 9, true);
+  mainTimber(ctx, 137, 10, 46, 8);
+  mainTimber(ctx, 144, floor - 2, 32, 3);
+  artRect(ctx, 146, floor - 1.5, 28, .5, cream[2]);
+}
+
+export function readingFurnishing(ctx: Ctx, kind: 'armchair' | 'lamp', cx: number, foot: number): void {
+  const draw = (originX: number, originY: number, width: number, height: number, color: string) => artRect(ctx, cx + originX, foot + originY, width, height, color);
+  paintContactShade(ctx, cx, foot, kind === 'lamp' ? 10 : 24, .18);
+  if (kind === 'lamp') {
+    draw(-4, -1, 8, 1.5, walnut[0]); draw(-3, -2, 6, 1, oak[3]);
+    draw(-.5, -24, 1, 22, walnut[0]); draw(-.5, -23, .5, 20, oak[4]);
+    draw(-1, -33, 2, 1, oak[4]);
+    for (let row = 0; row < 16; row++) {
+      const half = 2 + Math.floor(row / 4);
+      draw(-half, -32 + row / 2, half * 2, .5, walnut[0]);
+      draw(-half + .5, -32 + row / 2, half * 2 - 1, .5, cream[row < 2 ? 1 : 2]);
+      if (row > 2) draw(half - 1.5, -32 + row / 2, 1, .5, cream[1]);
+    }
+    draw(-5, -24, 10, .5, oak[3]); draw(-4.5, -23.5, 9, .5, cream[2]);
+    return;
+  }
+  const cloth = artRamp('cloth-5');
+  draw(-10, -4, 2, 5, walnut[0]); draw(8, -4, 2, 5, walnut[0]);
+  for (let row = 0; row < 34; row++) {
+    const inset = row < 2 ? 2 : row < 4 ? 1 : 0;
+    const top = -26 + row / 2;
+    draw(-9 + inset, top, 17 - inset * 2, .5, walnut[0]);
+    if (row > 0 && row < 33) {
+      draw(-8.5 + inset, top, 16 - inset * 2, .5, cloth[0]);
+      draw(-8 + inset, top, 13.5 - inset * 2, .5, cloth[1]);
+    }
+  }
+  draw(-6, -25, 10, .5, cloth[2]); draw(-7.5, -23.5, .5, 9, cloth[2]);
+  draw(-.5, -20, 1, .5, cloth[0]); draw(0, -19.5, .5, 1, cloth[2]);
+  for (const [originX, top] of [[-12, -15], [6, -14]] as const) {
+    draw(originX + 1, top - .5, 4, .5, walnut[0]); draw(originX, top, 6, 11, walnut[0]);
+    draw(originX + .5, top, 5, 10.5, cloth[0]); draw(originX + .5, top + .5, 4, 8.5, cloth[1]);
+    draw(originX + 1, top, 3, .5, cloth[2]); draw(originX + 1, top + 1, .5, 5, cloth[2]);
+    draw(originX + 3.5, top + 7, .5, 2, cloth[0]);
+  }
+  draw(-6, -10, 12, 6, cloth[0]); draw(-6, -10, 11, 3, cloth[1]);
+  draw(-5.5, -10, 10, .5, cloth[2]); draw(-5, -7, 10, .5, cloth[2]);
+  draw(-8, -3.5, 16, 1, walnut[2]);
+}
+
+export function extensionRunnerJunction(ctx: Ctx, area: AreaId, originY: number): void {
+  const colors = artRamp(area === 'reading' ? 'gingham' : area === 'terrace' ? 'cloth-1' : 'sage');
+  artRect(ctx, 145, originY - 7, 30, 14, area === 'reading' ? cream[2] : colors[2]);
+  artRect(ctx, 159, originY - 2, 2, 1, colors[0]);
+  artRect(ctx, 158, originY - 1, 4, 2, colors[1]);
+  artRect(ctx, 159, originY + 1, 2, 1, colors[0]);
+}
+
+export function extensionLampPool(ctx: Ctx, radius: number, tint: string): void {
+  ctx.save(); ctx.fillStyle = tint;
+  for (let row = 0; row < radius * 2; row += .5) for (let col = 0; col < radius * 2; col += .5) {
+    const distance = Math.hypot(col + .25 - radius, row + .25 - radius) / radius;
+    if (distance >= 1) continue;
+    ctx.globalAlpha = .28 * (1 - distance * distance) ** 3;
+    ctx.fillRect(col, row, .5, .5);
+  }
+  ctx.restore();
+}
+
+export function extensionWindowPatch(ctx: Ctx, originX: number, width: number, floor: number, sun: Sun): void {
+  if (sun.elevation <= 0 || sun.strength <= 0) return;
+  const { lean, length } = beam(sun);
+  ctx.save(); ctx.fillStyle = artRamp('wall')[4];
+  for (let row = 0; row < length; row += .5) {
+    const progress = row / length;
+    if (progress > .36 && progress < .40) continue;
+    ctx.globalAlpha = sun.strength * .38 * Math.min(1, (1 - progress) * 12);
+    for (let pane = 0; pane < 2; pane++) {
+      artRect(ctx, originX + progress * lean + pane * width / 2, floor + row, width / 2 - 2, .5, artRamp('wall')[4]);
+    }
+  }
+  ctx.restore();
+}
+import type { AreaId } from '../game/regions';
+import { artRamp } from './main-room-surfaces';
+import { registerFineSpriteArt } from './fine-sprite-art';
+import { worldSpriteArt } from './world-art-grid';
+
+const variants = new WeakMap<HTMLCanvasElement, Map<AreaId, HTMLCanvasElement>>();
+
+export function remapTablecloth(pixels: Uint8ClampedArray, width: number, height: number, area: AreaId): void {
+  if (area === 'main' || area === 'kitchen') return;
+  const colors = artRamp(area === 'reading' ? 'cloth-7' : area === 'greenhouse' ? 'sage' : 'cloth-1');
+  const trim = artRamp('gingham');
+  for (let row = 0; row < height * .76; row++) for (let col = 0; col < width; col++) {
+    const offset = (row * width + col) * 4;
+    const red = pixels[offset], green = pixels[offset + 1], blue = pixels[offset + 2];
+    if (!pixels[offset + 3] || red - green < 24 || blue < green * .75 || green > red * .76) continue;
+    const level = (red + green + blue) / 3 / 255;
+    const color = area === 'reading' && level < .34 ? trim[0] : colors[Math.min(colors.length - 1, Math.floor(level * colors.length))];
+    for (let channel = 0; channel < 3; channel++) pixels[offset + channel] = parseInt(color.slice(1 + channel * 2, 3 + channel * 2), 16);
+  }
+}
+
+export function extensionTable(source: HTMLCanvasElement, area: AreaId): HTMLCanvasElement {
+  if (area === 'main' || area === 'kitchen') return source;
+  const cache = variants.get(source) ?? new Map<AreaId, HTMLCanvasElement>();
+  const existing = cache.get(area); if (existing) return existing;
+  const art = worldSpriteArt(source), backing = document.createElement('canvas');
+  backing.width = art.canvas.width; backing.height = art.canvas.height;
+  const ctx = backing.getContext('2d')!;
+  ctx.drawImage(art.canvas, 0, 0);
+  const pixels = ctx.getImageData(0, 0, backing.width, backing.height);
+  remapTablecloth(pixels.data, backing.width, backing.height, area);
+  ctx.putImageData(pixels, 0, 0);
+  const logical = document.createElement('canvas'); logical.width = source.width; logical.height = source.height;
+  registerFineSpriteArt(logical, backing, art.density);
+  cache.set(area, logical); variants.set(source, cache);
+  return logical;
+}
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { rolldown } from 'rolldown';
+import woff2 from 'wawoff2';
+import { decodePng, encodePng } from './pixel-conform.mjs';
+
+const out = 'artifacts/art-grid/round-3';
+fs.mkdirSync(out, { recursive: true });
+const zh = JSON.parse(fs.readFileSync('src/locales/zh.json'));
+const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'extension-qa-'));
+let rasters;
+try {
+  const font = path.join(temporary, 'pixel.ttf');
+  fs.writeFileSync(font, await woff2.decompress(fs.readFileSync('src/assets/pixel-zh.woff2')));
+  const result = spawnSync('swift', ['-module-cache-path', path.join(temporary, 'modules'), 'scripts/art-grid-offline-fonts.swift', font, Object.entries(zh).filter(([key]) => key.startsWith('thought.')).map(([, text]) => text).join('')], { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+  if (result.status !== 0) throw new Error(result.stderr);
+  rasters = JSON.parse(result.stdout);
+} finally { fs.rmSync(temporary, { recursive: true, force: true }); }
+
+class SoftwareCanvas {
+  constructor(width = 1, height = 1) { this.width = width; this.height = height; }
+  set width(value) { this.rectWidth = Math.round(value); this.pixels = null; }
+  get width() { return this.rectWidth; }
+  set height(value) { this.rectHeight = Math.round(value); this.pixels = null; }
+  get height() { return this.rectHeight; }
+  get data() { return this.pixels ??= new Uint8ClampedArray(this.rectWidth * this.rectHeight * 4); }
+  getContext() { return this.ctx ??= new SoftwareContext(this); }
+}
+class SoftwareImage extends SoftwareCanvas {
+  get naturalWidth() { return this.width; }
+  get naturalHeight() { return this.height; }
+}
+class SoftwareContext {
+  constructor(canvas) { this.canvas = canvas; this.fillStyle = '#000000'; this.globalAlpha = 1; this.transform = [1, 1, 0, 0]; this.stack = []; this.box = null; this.points = []; }
+  save() { this.stack.push([this.fillStyle, this.globalAlpha, [...this.transform], this.box, this.globalCompositeOperation]); }
+  restore() { [this.fillStyle, this.globalAlpha, this.transform, this.box, this.globalCompositeOperation] = this.stack.pop(); }
+  scale(positionX, positionY) { this.transform[0] *= positionX; this.transform[1] *= positionY; }
+  translate(positionX, positionY) { this.transform[2] += positionX * this.transform[0]; this.transform[3] += positionY * this.transform[1]; }
+  getTransform() { const [scaleX,scaleY,translateX,translateY]=this.transform;return {'a':scaleX,'b':0,'c':0,'d':scaleY,'e':translateX,'f':translateY}; }
+  setTransform(scaleX,_b,_c,scaleY,translateX,translateY) { this.transform=[scaleX,scaleY,translateX,translateY]; }
+  beginPath() { this.points = []; this.pending = null; this.circle = null; }
+  rect(positionX, positionY, rectWidth, rectHeight) { const [sx, sy, tx, ty] = this.transform; this.pending = [positionX * sx + tx, positionY * sy + ty, rectWidth * sx, rectHeight * sy]; }
+  clip() { this.box = this.pending; }
+  moveTo(positionX, positionY) { this.points.push([positionX, positionY]); }
+  lineTo(positionX, positionY) { this.points.push([positionX, positionY]); }
+  closePath() {}
+  setLineDash() {}
+  arc(positionX, positionY, radius) { this.circle = [positionX, positionY, radius]; }
+  ellipse(positionX, positionY, rx, ry) { this.circle = [positionX, positionY, rx, ry]; }
+  fill() {
+    if (this.circle) {
+      const [cx, cy, rx, ry = rx] = this.circle;
+      for (let positionY = cy - ry; positionY < cy + ry; positionY += .5) { const half = rx * Math.sqrt(Math.max(0, 1 - ((positionY + .25 - cy) / ry) ** 2)); this.fillRect(cx - half, positionY, half * 2, .5); }
+    } else if (this.pending) {
+      const old = this.transform; this.transform = [1, 1, 0, 0]; this.fillRect(...this.pending); this.transform = old;
+    }
+  }
+  stroke() { for (let index = 1; index < this.points.length; index++) { const start = this.points[index - 1], end = this.points[index], count = Math.ceil(Math.hypot(end[0] - start[0], end[1] - start[1]) * 2); const old = this.fillStyle; this.fillStyle = this.strokeStyle; for (let step = 0; step <= count; step++) this.fillRect(start[0] + (end[0] - start[0]) * step / count, start[1] + (end[1] - start[1]) * step / count, .5, .5); this.fillStyle = old; } }
+  strokeRect(positionX, positionY, rectWidth, rectHeight) { const old = this.fillStyle; this.fillStyle = this.strokeStyle; for (const rect of [[positionX,positionY,rectWidth,.5],[positionX,positionY+rectHeight-.5,rectWidth,.5],[positionX,positionY,.5,rectHeight],[positionX+rectWidth-.5,positionY,.5,rectHeight]]) this.fillRect(...rect); this.fillStyle = old; }
+  pixel(positionX, positionY, rgba) {
+    const canvas = this.canvas;
+    if (positionX < 0 || positionY < 0 || positionX >= canvas.width || positionY >= canvas.height || (this.box && (positionX < this.box[0] || positionY < this.box[1] || positionX >= this.box[0] + this.box[2] || positionY >= this.box[1] + this.box[3]))) return;
+    const offset = (positionY * canvas.width + positionX) * 4, data = canvas.data;
+    const alpha = rgba[3] / 255 * this.globalAlpha, previous = data[offset + 3] / 255;
+    if (this.globalCompositeOperation === 'lighter') {
+      for (let channel = 0; channel < 3; channel++) data[offset + channel] = Math.min(255, data[offset + channel] + rgba[channel] * alpha);
+      data[offset + 3] = Math.min(255, (previous + alpha) * 255); return;
+    }
+    const final = alpha + previous * (1 - alpha);
+    for (let channel = 0; channel < 3; channel++) data[offset + channel] = final ? Math.round((rgba[channel] * alpha + data[offset + channel] * previous * (1 - alpha)) / final) : 0;
+    data[offset + 3] = Math.round(final * 255);
+  }
+  fillRect(positionX, positionY, rectWidth, rectHeight) {
+    const [sx, sy, tx, ty] = this.transform, color = [1,3,5].map(index => parseInt(this.fillStyle.slice(index,index+2),16)); color.push(255);
+    const x0 = Math.round(Math.min(positionX*sx+tx,(positionX+rectWidth)*sx+tx)), x1 = Math.round(Math.max(positionX*sx+tx,(positionX+rectWidth)*sx+tx));
+    const y0 = Math.round(Math.min(positionY*sy+ty,(positionY+rectHeight)*sy+ty)), y1 = Math.round(Math.max(positionY*sy+ty,(positionY+rectHeight)*sy+ty));
+    for (let row = Math.max(0,y0); row < Math.min(this.canvas.height,y1); row++) for (let col = Math.max(0,x0); col < Math.min(this.canvas.width,x1); col++) this.pixel(col,row,color);
+  }
+  drawImage(source, ...args) {
+    let crop = [0,0,source.width,source.height], dest;
+    if (args.length === 2) dest = [...args,source.width,source.height];
+    else if (args.length === 4) dest = args;
+    else { crop = args.slice(0,4); dest = args.slice(4); }
+    const [sx,sy,tx,ty] = this.transform, [positionX,positionY,rectWidth,rectHeight] = dest;
+    const left = Math.round(positionX*sx+tx), top = Math.round(positionY*sy+ty), width = Math.round(rectWidth*sx), height = Math.round(rectHeight*sy);
+    const data = source.data;
+    for (let row = 0; row < Math.abs(height); row++) for (let col = 0; col < Math.abs(width); col++) {
+      const px = Math.floor(crop[0] + (col+.5)/Math.abs(width)*crop[2]), py = Math.floor(crop[1] + (row+.5)/Math.abs(height)*crop[3]);
+      if (px < 0 || py < 0 || px >= source.width || py >= source.height) continue;
+      const offset = (py*source.width+px)*4;
+      this.pixel(width < 0 ? left-col-1 : left+col,height < 0 ? top-row-1 : top+row,data.subarray(offset,offset+4));
+    }
+  }
+  fillText(text) { this.text = text; }
+  getImageData(positionX,positionY,rectWidth,rectHeight) {
+    if (this.text) return { data: Buffer.from(rasters[(this.font.includes('"Pixel ZH"')?'pixel':'platform')+':'+this.text] ?? '', 'base64') };
+    const data = new Uint8ClampedArray(rectWidth*rectHeight*4);
+    for (let row = 0; row < rectHeight; row++) for (let col = 0; col < rectWidth; col++) data.set(this.canvas.data.subarray(((positionY+row)*this.canvas.width+positionX+col)*4,((positionY+row)*this.canvas.width+positionX+col)*4+4),(row*rectWidth+col)*4);
+    return {data,width:rectWidth,height:rectHeight};
+  }
+  putImageData(image,positionX,positionY) { const width = image.width ?? this.canvas.width, height = image.height ?? this.canvas.height; for(let row=0;row<height;row++)for(let col=0;col<width;col++)this.canvas.data.set(image.data.subarray((row*width+col)*4,(row*width+col)*4+4),((row+positionY)*this.canvas.width+col+positionX)*4); }
+}
+globalThis.document = { createElement: () => new SoftwareCanvas(), fonts: new Set([{family:'Pixel ZH',status:'loaded'}]) };
+globalThis.HTMLCanvasElement = SoftwareCanvas;
+globalThis.HTMLImageElement = SoftwareImage;
+globalThis.ImageData = class { constructor(data,width,height) { Object.assign(this,{data,width,height}); } };
+
+const files = ['render/extension-surfaces','render/extension-table-art','render/region-art','render/kitchen-art','render/passages','render/generated-main-art','render/generated-furniture-art','render/generated-decor-art','render/cozy-furniture-assets','render/cozy-materials','render/main-room-surfaces','render/main-room-lighting','render/world-art-grid','render/thought-text','render/thought-bubbles','render/sign-lettering','render/lighting','render/materials','game/state','game/layout','game/kitchen'];
+const bundle = await rolldown({input:'qa',plugins:[{name:'qa',resolveId:id=>id==='qa'?id:null,load:id=>id==='qa'?files.map(file=>`export * from ${JSON.stringify(path.resolve('src',file+'.ts'))};`).join('\n'):null}]});
+const {output} = await bundle.generate({format:'esm'}); await bundle.close();
+const art = await import('data:text/javascript;base64,'+Buffer.from(output.find(item=>item.type==='chunk').code).toString('base64'));
+const load = file => { const image = decodePng('public/art/generated/'+file), canvas = new SoftwareImage(image.width,image.height); canvas.pixels = image.pixels; return canvas; };
+for (const [key,file] of Object.entries(art.GENERATED_MAIN_ASSETS)) if (key.startsWith('cozy-region-') || key.startsWith('cozy-kitchen-')) art.installGeneratedMainAsset(key,load(file));
+art.setGeneratedFurnitureAdapter(art.createGeneratedFurnitureArt(Object.fromEntries(['bench','plant_lemon','plant_monstera','plant_fern'].map(id=>[id,load(art.GENERATED_MAIN_ASSETS['furniture-'+id])])),{catalog:art.COZY_FURNITURE_CATALOG}));
+art.setGeneratedDecorAdapter(art.createGeneratedDecorArt(Object.fromEntries(['floor_herringbone-tile'].map(id=>[id,load(art.GENERATED_MAIN_ASSETS['decor-'+id])])),{catalog:art.COZY_DECOR_CATALOG}));
+const palette = JSON.parse(fs.readFileSync('docs/art-grid/palette.json')).colors.map(color=>[1,3,5].map(index=>parseInt(color.hex.slice(index,index+2),16)));
+function save(canvas,name) {
+  const pixels = canvas.data.slice(), cache = new Map();
+  for(let offset=0;offset<pixels.length;offset+=4) {
+    const key = pixels[offset]*65536+pixels[offset+1]*256+pixels[offset+2];
+    let color=cache.get(key);
+    if(!color){let best=Infinity;for(const candidate of palette){const distance=candidate.reduce((sum,value,index)=>sum+(value-pixels[offset+index])**2,0);if(distance<best){best=distance;color=candidate;}}cache.set(key,color);}
+    pixels.set(color,offset);pixels[offset+3]=pixels[offset+3]>=128?255:0;
+  }
+  encodePng(path.join(out,name+'.png'),{width:canvas.width,height:canvas.height,pixels});
+}
+function board(width=320,height=240) { const canvas=new SoftwareCanvas(width*2,height*2),ctx=art.gridSafeContext(canvas.getContext('2d'));ctx.scale(2,2);ctx.fillStyle='#efdfbe';ctx.fillRect(0,0,width,height);return {canvas,ctx}; }
+const tableSource = load('cozy-seating-v3/ensemble.png');
+const table = new SoftwareCanvas(80,60);table.getContext('2d').drawImage(tableSource,88,71,608,457,2,2,76,57);
+const chair = new SoftwareCanvas(68,84);chair.getContext('2d').drawImage(tableSource,805,77,348,455,8.612,32.86,37.584,49.14);
+const state=art.createInitialState(0);state.regions=['reading','greenhouse','terrace'];state.kitchen=true;
+function kitchenFloor(ctx) {
+  art.paintBench(ctx,art.BENCH['x']+art.BENCH['w']/2,art.kitchenFloorY(art.BENCH.front),false,false);
+  art.paintRack(ctx,art.RACK['x'],art.kitchenFloorY(art.RACK.foot),[]);
+  art.paintBins(ctx,art.BINS['x'],art.kitchenFloorY(art.BINS.foot));
+  art.paintDishPit(ctx,art.DISH_PIT['x'],art.kitchenFloorY(art.DISH_PIT.foot));
+}
+for (const hour of [10.5,21]) for (const area of ['reading','greenhouse','terrace','kitchen']) {
+  const light=art.lightingAt(hour),{canvas,ctx}=board();
+  if(area==='kitchen') {art.paintKitchen(ctx,240,0,false,new Set(['mixer','proofer','deckOven','fryer']),new Set());kitchenFloor(ctx);}
+  else {
+    art.paintRegion(ctx,area,240,0,light,false);art.paintPassageFloor(ctx,area,false);
+    for(const [positionX,positionY] of [[64,112],[256,112],[64,180],[256,180]]) {
+      art.paintContactShade(ctx,positionX,positionY,38,.25);
+      const variant=new SoftwareCanvas(80,60);variant.pixels=table.data.slice();art.remapTablecloth(variant.data,80,60,area);
+      ctx.drawImage(chair,positionX-38,positionY-41,34,42);ctx.save();ctx.translate(positionX+38,positionY-41);ctx.scale(-1,1);ctx.drawImage(chair,0,0,34,42);ctx.restore();ctx.drawImage(variant,positionX-20,positionY-29,40,30);
+    }
+  }
+  art.paintRoomBoundaries(ctx,area,state);
+  const grade=art.roomAmbient(light,area),rgb=[1,3,5].map(index=>parseInt(grade.slice(index,index+2),16)/255);
+  for(let offset=0;offset<canvas.data.length;offset+=4)for(let channel=0;channel<3;channel++)canvas.data[offset+channel]*=rgb[channel];
+  const lamps = area==='reading'?[[100,art.floorY(98)-27,30,1,'#ffcf7a']]:area==='terrace'?Array.from({length:9},(_,index)=>{const positionX=22+index*34;return [positionX,19+Math.round(Math.sin(positionX/320*Math.PI)*12),14,.9,'#ffcf7a'];}):area==='kitchen'?[[74,12,44,.8,'#fbf6e4'],[218,12,44,.8,'#fbf6e4'],[182,30,16,.7,'#ffcf7a'],[236,30,16,.7,'#ffcf7a'],[290,30,16,.7,'#ffcf7a'],[218,56,26,.6,'#ffa64a']]:[];
+  for(const [positionX,positionY,radius,strength,tint] of lamps) {
+    const pool=new SoftwareCanvas(radius*4,radius*4),poolCtx=pool.getContext('2d');poolCtx.scale(2,2);art.extensionLampPool(poolCtx,radius,tint);
+    ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=light.lamps*strength;ctx.drawImage(pool,positionX-radius,positionY-radius,radius*2,radius*2);ctx.restore();
+  }
+  save(canvas,area+(hour===21?'-night':'-day'));
+}
+{
+  const {canvas,ctx}=board();art.paintKitchen(ctx,240,0,false,new Set(),new Set());kitchenFloor(ctx);save(canvas,'kitchen-reserved');
+}
+for(const [locale,text] of [['en','My little café dream'],['zh',zh['thought.owner.idle']]]) {
+  const lines=art.wrapThoughtText(text,locale==='zh'),rectWidth=art.thoughtBubbleWidth(Math.max(...lines.map(art.thoughtTextWidth)));
+  const raster=art.thoughtTextRaster(lines,'',rectWidth),{canvas,ctx}=board(rectWidth,raster.height);
+  ctx.drawImage(raster.canvas,0,raster.sourceY,rectWidth*2,raster.inkHeight,0,raster.textY,rectWidth,raster.inkHeight/2);save(canvas,'thought-'+locale);
+}
+console.log('Offline production-painter boards saved to '+out+'; palette-snapped composites; lamp painters at runtime anchors; no Phaser actors or camera.');
+import { describe, expect, it } from 'vitest';
+import palette from '../../docs/art-grid/palette.json';
+import { extensionFloor, extensionLampPool, extensionRunner, extensionWindowPatch, readingDoor, readingDoorFrame, readingFurnishing } from './extension-surfaces';
+import { remapTablecloth } from './extension-table-art';
+import { lightingAt, roomAmbient } from './lighting';
+import { thoughtTextWidth, wrapThoughtText } from './thought-text';
+
+function record(paint: (ctx: CanvasRenderingContext2D) => void) {
+  const marks: { left: number; top: number; width: number; height: number; color: string; alpha: number }[] = [];
+  const stack: number[] = [];
+  const ctx = {
+    fillStyle: '', globalAlpha: 1,
+    save(this: {globalAlpha: number}) { stack.push(this.globalAlpha); }, restore(this: {globalAlpha: number}) { this.globalAlpha = stack.pop()!; },
+    beginPath() {}, rect() {}, clip() {},
+    fillRect(this: {fillStyle: string; globalAlpha: number}, left: number, top: number, width: number, height: number) { marks.push({ left, top, width, height, color: this.fillStyle, alpha: this.globalAlpha }); },
+  } as unknown as CanvasRenderingContext2D;
+  paint(ctx); return marks;
+}
+
+describe('extension room native artwork', () => {
+  it('uses master-palette pigment and half-room-pixel cells for every new surface', () => {
+    const colors = new Set(palette.colors.map(color => color.hex));
+    const marks = record(ctx => {
+      for (const area of ['reading', 'greenhouse', 'terrace', 'kitchen'] as const) {
+        extensionFloor(ctx, area, 80, 240);
+        extensionRunner(ctx, area, 145, 80, 30, 140, 'v');
+        extensionRunner(ctx, area, 0, 130, 175, 14, 'h');
+      }
+      readingDoor(ctx, 80);
+      readingFurnishing(ctx, 'armchair', 115, 102);
+      readingFurnishing(ctx, 'lamp', 100, 98);
+    });
+    for (const mark of marks) {
+      expect(colors.has(mark.color), mark.color).toBe(true);
+      for (const value of [mark.left, mark.top, mark.width, mark.height]) expect(Number.isInteger(value * 2)).toBe(true);
+    }
+  });
+  it('keeps floor paint below the wall and uses calm tile fields, not checker fills', () => {
+    for (const area of ['greenhouse', 'terrace', 'kitchen'] as const) {
+      const marks = record(ctx => extensionFloor(ctx, area, 80, 240));
+      expect(marks.every(mark => mark.top >= 80)).toBe(true);
+      expect(new Set(marks.filter(mark => mark.width > 15 && mark.height > 15).map(mark => mark.color)).size).toBeLessThanOrEqual(2);
+    }
+  });
+  it('has a finite header, open throat and a sill at the existing doorway', () => {
+    const marks = record(ctx => readingDoor(ctx, 80));
+    expect(Math.min(...marks.map(mark => mark.top))).toBe(10);
+    expect(marks.some(mark => mark.left === 144 && mark.top === 18 && mark.width === 32)).toBe(true);
+    expect(marks.some(mark => mark.top === 78 && mark.left === 144 && mark.width === 32)).toBe(true);
+  });
+  it('keeps the doorway throat behind actors and follows the outdoor night sky', () => {
+    const front = record(ctx => readingDoorFrame(ctx, 80));
+    expect(front.some(mark => mark.left <= 160 && mark.left + mark.width > 160 && mark.top <= 45 && mark.top + mark.height > 45)).toBe(false);
+    const day = record(ctx => readingDoor(ctx, 80, lightingAt(10.5)));
+    const night = record(ctx => readingDoor(ctx, 80, lightingAt(21)));
+    expect(day.find(mark => mark.left === 148 && mark.top === 21)?.color).not.toBe(night.find(mark => mark.left === 148 && mark.top === 21)?.color);
+    expect(night.some(mark => mark.alpha > 0 && mark.alpha < 1 && mark.left === 144)).toBe(true);
+  });
+  it('keeps the reading chair upholstered across its back, with a grounded base', () => {
+    const marks = record(ctx => readingFurnishing(ctx, 'armchair', 115, 102));
+    const back = marks.filter(mark => mark.left <= 112 && mark.left + mark.width > 112 && mark.top <= 82 && mark.top + mark.height > 82).at(-1);
+    expect(back?.color).toBe(palette.colors.find(color => color.ramp === 'cloth-5' && color.index === 1)?.hex);
+    expect(marks.some(mark => mark.alpha < 1 && mark.top >= 99)).toBe(true);
+  });
+  it('suppresses night window patches and retains the travelling sun direction', () => {
+    expect(record(ctx => extensionWindowPatch(ctx, 20, 34, 80, lightingAt(21).sun))).toEqual([]);
+    const morning = record(ctx => extensionWindowPatch(ctx, 20, 34, 80, lightingAt(9).sun));
+    const evening = record(ctx => extensionWindowPatch(ctx, 20, 34, 80, lightingAt(16).sun));
+    expect(morning.length).toBeGreaterThan(100);
+    expect(morning[100].left).not.toBe(evening[100].left);
+    expect(morning.every(mark => mark.top >= 80)).toBe(true);
+  });
+  it('uses continuous native-grid lamp falloff instead of five concentric brightness steps', () => {
+    const marks = record(ctx => extensionLampPool(ctx, 14, '#ffcf7a'));
+    expect(new Set(marks.map(mark => mark.alpha.toFixed(4))).size).toBeGreaterThan(100);
+    expect(marks.every(mark => mark.width === .5 && mark.height === .5)).toBe(true);
+  });
+  it('leaves locked ambient grades unchanged and retains stronger outdoor sky exposure', () => {
+    const light = lightingAt(21);
+    expect(roomAmbient(light, 'terrace', true)).not.toBe(roomAmbient(light, 'terrace'));
+    expect(roomAmbient(light, 'greenhouse')).not.toBe(roomAmbient(light, 'reading'));
+    expect(roomAmbient(lightingAt(12), 'main')).toBe(roomAmbient(lightingAt(12), 'main', true));
+  });
+});
+
+describe('geometry-preserving extension table colourways', () => {
+  it('remaps only cloth pigment, never alpha, wood, foliage or the main table', () => {
+    const source = new Uint8ClampedArray([180, 50, 45, 255, 150, 95, 40, 255, 50, 90, 40, 255, 180, 50, 45, 0]);
+    const variants = [];
+    for (const area of ['main', 'reading', 'greenhouse', 'terrace'] as const) {
+      const pixels = source.slice(); remapTablecloth(pixels, 4, 1, area);
+      expect([...pixels.filter((_, index) => index % 4 === 3)]).toEqual([255, 255, 255, 0]);
+      expect(pixels.slice(4)).toEqual(source.slice(4));
+      if (area === 'main') expect(pixels).toEqual(source);
+      variants.push([...pixels.slice(0, 3)].join(','));
+    }
+    expect(new Set(variants).size).toBe(4);
+  });
+});
+
+describe('pixel thought layout', () => {
+  it.each([['My little café dream', false], ['我的小小咖啡馆梦想', true], ['averylongwordwithoutbreaks'.repeat(3), false]] as const)('wraps %s with the same widths it paints', (text, chinese) => {
+    const lines = wrapThoughtText(text, chinese);
+    expect(lines.length).toBeGreaterThan(0);
+    expect(lines.every(line => thoughtTextWidth(line) <= 80)).toBe(true);
+    expect(lines.join(chinese ? '' : ' ').replaceAll(' ', '')).toBe(text.replaceAll(' ', ''));
+  });
+});
+
+exec
+/bin/zsh -lc "sed -n '85,126p' src/render/extension-surfaces.ts; cat src/render/extension-table-art.ts; cat scripts/extension-room-qa.mjs" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 0ms:
+export function readingFurnishing(ctx: Ctx, kind: 'armchair' | 'lamp', cx: number, foot: number): void {
+  const draw = (originX: number, originY: number, width: number, height: number, color: string) => artRect(ctx, cx + originX, foot + originY, width, height, color);
+  paintContactShade(ctx, cx, foot, kind === 'lamp' ? 10 : 24, .18);
+  if (kind === 'lamp') {
+    draw(-4, -1, 8, 1.5, walnut[0]); draw(-3, -2, 6, 1, oak[3]);
+    draw(-.5, -24, 1, 22, walnut[0]); draw(-.5, -23, .5, 20, oak[4]);
+    draw(-1, -33, 2, 1, oak[4]);
+    for (let row = 0; row < 16; row++) {
+      const half = 2 + Math.floor(row / 4);
+      draw(-half, -32 + row / 2, half * 2, .5, walnut[0]);
+      draw(-half + .5, -32 + row / 2, half * 2 - 1, .5, cream[row < 2 ? 1 : 2]);
+      if (row > 2) draw(half - 1.5, -32 + row / 2, 1, .5, cream[1]);
+    }
+    draw(-5, -24, 10, .5, oak[3]); draw(-4.5, -23.5, 9, .5, cream[2]);
+    return;
+  }
+  const cloth = artRamp('cloth-5');
+  draw(-10, -4, 2, 5, walnut[0]); draw(8, -4, 2, 5, walnut[0]);
+  for (let row = 0; row < 34; row++) {
+    const inset = row < 2 ? 2 : row < 4 ? 1 : 0;
+    const top = -26 + row / 2;
+    draw(-9 + inset, top, 17 - inset * 2, .5, walnut[0]);
+    if (row > 0 && row < 33) {
+      draw(-8.5 + inset, top, 16 - inset * 2, .5, cloth[0]);
+      draw(-8 + inset, top, 13.5 - inset * 2, .5, cloth[1]);
+    }
+  }
+  draw(-6, -25, 10, .5, cloth[2]); draw(-7.5, -23.5, .5, 9, cloth[2]);
+  draw(-.5, -20, 1, .5, cloth[0]); draw(0, -19.5, .5, 1, cloth[2]);
+  for (const [originX, top] of [[-12, -15], [6, -14]] as const) {
+    draw(originX + 1, top - .5, 4, .5, walnut[0]); draw(originX, top, 6, 11, walnut[0]);
+    draw(originX + .5, top, 5, 10.5, cloth[0]); draw(originX + .5, top + .5, 4, 8.5, cloth[1]);
+    draw(originX + 1, top, 3, .5, cloth[2]); draw(originX + 1, top + 1, .5, 5, cloth[2]);
+    draw(originX + 3.5, top + 7, .5, 2, cloth[0]);
+  }
+  draw(-6, -10, 12, 6, cloth[0]); draw(-6, -10, 11, 3, cloth[1]);
+  draw(-5.5, -10, 10, .5, cloth[2]); draw(-5, -7, 10, .5, cloth[2]);
+  draw(-8, -3.5, 16, 1, walnut[2]);
+}
+
+export function extensionRunnerJunction(ctx: Ctx, area: AreaId, originY: number): void {
+  const colors = artRamp(area === 'reading' ? 'gingham' : area === 'terrace' ? 'cloth-1' : 'sage');
+import type { AreaId } from '../game/regions';
+import { artRamp } from './main-room-surfaces';
+import { registerFineSpriteArt } from './fine-sprite-art';
+import { worldSpriteArt } from './world-art-grid';
+
+const variants = new WeakMap<HTMLCanvasElement, Map<AreaId, HTMLCanvasElement>>();
+
+export function remapTablecloth(pixels: Uint8ClampedArray, width: number, height: number, area: AreaId): void {
+  if (area === 'main' || area === 'kitchen') return;
+  const colors = artRamp(area === 'reading' ? 'cloth-7' : area === 'greenhouse' ? 'sage' : 'cloth-1');
+  const trim = artRamp('gingham');
+  for (let row = 0; row < height * .76; row++) for (let col = 0; col < width; col++) {
+    const offset = (row * width + col) * 4;
+    const red = pixels[offset], green = pixels[offset + 1], blue = pixels[offset + 2];
+    if (!pixels[offset + 3] || red - green < 24 || blue < green * .75 || green > red * .76) continue;
+    const level = (red + green + blue) / 3 / 255;
+    const color = area === 'reading' && level < .34 ? trim[0] : colors[Math.min(colors.length - 1, Math.floor(level * colors.length))];
+    for (let channel = 0; channel < 3; channel++) pixels[offset + channel] = parseInt(color.slice(1 + channel * 2, 3 + channel * 2), 16);
+  }
+}
+
+export function extensionTable(source: HTMLCanvasElement, area: AreaId): HTMLCanvasElement {
+  if (area === 'main' || area === 'kitchen') return source;
+  const cache = variants.get(source) ?? new Map<AreaId, HTMLCanvasElement>();
+  const existing = cache.get(area); if (existing) return existing;
+  const art = worldSpriteArt(source), backing = document.createElement('canvas');
+  backing.width = art.canvas.width; backing.height = art.canvas.height;
+  const ctx = backing.getContext('2d')!;
+  ctx.drawImage(art.canvas, 0, 0);
+  const pixels = ctx.getImageData(0, 0, backing.width, backing.height);
+  remapTablecloth(pixels.data, backing.width, backing.height, area);
+  ctx.putImageData(pixels, 0, 0);
+  const logical = document.createElement('canvas'); logical.width = source.width; logical.height = source.height;
+  registerFineSpriteArt(logical, backing, art.density);
+  cache.set(area, logical); variants.set(source, cache);
+  return logical;
+}
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { rolldown } from 'rolldown';
+import woff2 from 'wawoff2';
+import { decodePng, encodePng } from './pixel-conform.mjs';
+
+const out = 'artifacts/art-grid/round-3';
+fs.mkdirSync(out, { recursive: true });
+const zh = JSON.parse(fs.readFileSync('src/locales/zh.json'));
+const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'extension-qa-'));
+let rasters;
+try {
+  const font = path.join(temporary, 'pixel.ttf');
+  fs.writeFileSync(font, await woff2.decompress(fs.readFileSync('src/assets/pixel-zh.woff2')));
+  const result = spawnSync('swift', ['-module-cache-path', path.join(temporary, 'modules'), 'scripts/art-grid-offline-fonts.swift', font, Object.entries(zh).filter(([key]) => key.startsWith('thought.')).map(([, text]) => text).join('')], { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+  if (result.status !== 0) throw new Error(result.stderr);
+  rasters = JSON.parse(result.stdout);
+} finally { fs.rmSync(temporary, { recursive: true, force: true }); }
+
+class SoftwareCanvas {
+  constructor(width = 1, height = 1) { this.width = width; this.height = height; }
+  set width(value) { this.rectWidth = Math.round(value); this.pixels = null; }
+  get width() { return this.rectWidth; }
+  set height(value) { this.rectHeight = Math.round(value); this.pixels = null; }
+  get height() { return this.rectHeight; }
+  get data() { return this.pixels ??= new Uint8ClampedArray(this.rectWidth * this.rectHeight * 4); }
+  getContext() { return this.ctx ??= new SoftwareContext(this); }
+}
+class SoftwareImage extends SoftwareCanvas {
+  get naturalWidth() { return this.width; }
+  get naturalHeight() { return this.height; }
+}
+class SoftwareContext {
+  constructor(canvas) { this.canvas = canvas; this.fillStyle = '#000000'; this.globalAlpha = 1; this.transform = [1, 1, 0, 0]; this.stack = []; this.box = null; this.points = []; }
+  save() { this.stack.push([this.fillStyle, this.globalAlpha, [...this.transform], this.box, this.globalCompositeOperation]); }
+  restore() { [this.fillStyle, this.globalAlpha, this.transform, this.box, this.globalCompositeOperation] = this.stack.pop(); }
+  scale(positionX, positionY) { this.transform[0] *= positionX; this.transform[1] *= positionY; }
+  translate(positionX, positionY) { this.transform[2] += positionX * this.transform[0]; this.transform[3] += positionY * this.transform[1]; }
+  getTransform() { const [scaleX,scaleY,translateX,translateY]=this.transform;return {'a':scaleX,'b':0,'c':0,'d':scaleY,'e':translateX,'f':translateY}; }
+  setTransform(scaleX,_b,_c,scaleY,translateX,translateY) { this.transform=[scaleX,scaleY,translateX,translateY]; }
+  beginPath() { this.points = []; this.pending = null; this.circle = null; }
+  rect(positionX, positionY, rectWidth, rectHeight) { const [sx, sy, tx, ty] = this.transform; this.pending = [positionX * sx + tx, positionY * sy + ty, rectWidth * sx, rectHeight * sy]; }
+  clip() { this.box = this.pending; }
+  moveTo(positionX, positionY) { this.points.push([positionX, positionY]); }
+  lineTo(positionX, positionY) { this.points.push([positionX, positionY]); }
+  closePath() {}
+  setLineDash() {}
+  arc(positionX, positionY, radius) { this.circle = [positionX, positionY, radius]; }
+  ellipse(positionX, positionY, rx, ry) { this.circle = [positionX, positionY, rx, ry]; }
+  fill() {
+    if (this.circle) {
+      const [cx, cy, rx, ry = rx] = this.circle;
+      for (let positionY = cy - ry; positionY < cy + ry; positionY += .5) { const half = rx * Math.sqrt(Math.max(0, 1 - ((positionY + .25 - cy) / ry) ** 2)); this.fillRect(cx - half, positionY, half * 2, .5); }
+    } else if (this.pending) {
+      const old = this.transform; this.transform = [1, 1, 0, 0]; this.fillRect(...this.pending); this.transform = old;
+    }
+  }
+  stroke() { for (let index = 1; index < this.points.length; index++) { const start = this.points[index - 1], end = this.points[index], count = Math.ceil(Math.hypot(end[0] - start[0], end[1] - start[1]) * 2); const old = this.fillStyle; this.fillStyle = this.strokeStyle; for (let step = 0; step <= count; step++) this.fillRect(start[0] + (end[0] - start[0]) * step / count, start[1] + (end[1] - start[1]) * step / count, .5, .5); this.fillStyle = old; } }
+  strokeRect(positionX, positionY, rectWidth, rectHeight) { const old = this.fillStyle; this.fillStyle = this.strokeStyle; for (const rect of [[positionX,positionY,rectWidth,.5],[positionX,positionY+rectHeight-.5,rectWidth,.5],[positionX,positionY,.5,rectHeight],[positionX+rectWidth-.5,positionY,.5,rectHeight]]) this.fillRect(...rect); this.fillStyle = old; }
+  pixel(positionX, positionY, rgba) {
+    const canvas = this.canvas;
+    if (positionX < 0 || positionY < 0 || positionX >= canvas.width || positionY >= canvas.height || (this.box && (positionX < this.box[0] || positionY < this.box[1] || positionX >= this.box[0] + this.box[2] || positionY >= this.box[1] + this.box[3]))) return;
+    const offset = (positionY * canvas.width + positionX) * 4, data = canvas.data;
+    const alpha = rgba[3] / 255 * this.globalAlpha, previous = data[offset + 3] / 255;
+    if (this.globalCompositeOperation === 'lighter') {
+      for (let channel = 0; channel < 3; channel++) data[offset + channel] = Math.min(255, data[offset + channel] + rgba[channel] * alpha);
+      data[offset + 3] = Math.min(255, (previous + alpha) * 255); return;
+    }
+    const final = alpha + previous * (1 - alpha);
+    for (let channel = 0; channel < 3; channel++) data[offset + channel] = final ? Math.round((rgba[channel] * alpha + data[offset + channel] * previous * (1 - alpha)) / final) : 0;
+    data[offset + 3] = Math.round(final * 255);
+  }
+  fillRect(positionX, positionY, rectWidth, rectHeight) {
+    const [sx, sy, tx, ty] = this.transform, color = [1,3,5].map(index => parseInt(this.fillStyle.slice(index,index+2),16)); color.push(255);
+    const x0 = Math.round(Math.min(positionX*sx+tx,(positionX+rectWidth)*sx+tx)), x1 = Math.round(Math.max(positionX*sx+tx,(positionX+rectWidth)*sx+tx));
+    const y0 = Math.round(Math.min(positionY*sy+ty,(positionY+rectHeight)*sy+ty)), y1 = Math.round(Math.max(positionY*sy+ty,(positionY+rectHeight)*sy+ty));
+    for (let row = Math.max(0,y0); row < Math.min(this.canvas.height,y1); row++) for (let col = Math.max(0,x0); col < Math.min(this.canvas.width,x1); col++) this.pixel(col,row,color);
+  }
+  drawImage(source, ...args) {
+    let crop = [0,0,source.width,source.height], dest;
+    if (args.length === 2) dest = [...args,source.width,source.height];
+    else if (args.length === 4) dest = args;
+    else { crop = args.slice(0,4); dest = args.slice(4); }
+    const [sx,sy,tx,ty] = this.transform, [positionX,positionY,rectWidth,rectHeight] = dest;
+    const left = Math.round(positionX*sx+tx), top = Math.round(positionY*sy+ty), width = Math.round(rectWidth*sx), height = Math.round(rectHeight*sy);
+    const data = source.data;
+    for (let row = 0; row < Math.abs(height); row++) for (let col = 0; col < Math.abs(width); col++) {
+      const px = Math.floor(crop[0] + (col+.5)/Math.abs(width)*crop[2]), py = Math.floor(crop[1] + (row+.5)/Math.abs(height)*crop[3]);
+      if (px < 0 || py < 0 || px >= source.width || py >= source.height) continue;
+      const offset = (py*source.width+px)*4;
+      this.pixel(width < 0 ? left-col-1 : left+col,height < 0 ? top-row-1 : top+row,data.subarray(offset,offset+4));
+    }
+  }
+  fillText(text) { this.text = text; }
+  getImageData(positionX,positionY,rectWidth,rectHeight) {
+    if (this.text) return { data: Buffer.from(rasters[(this.font.includes('"Pixel ZH"')?'pixel':'platform')+':'+this.text] ?? '', 'base64') };
+    const data = new Uint8ClampedArray(rectWidth*rectHeight*4);
+    for (let row = 0; row < rectHeight; row++) for (let col = 0; col < rectWidth; col++) data.set(this.canvas.data.subarray(((positionY+row)*this.canvas.width+positionX+col)*4,((positionY+row)*this.canvas.width+positionX+col)*4+4),(row*rectWidth+col)*4);
+    return {data,width:rectWidth,height:rectHeight};
+  }
+  putImageData(image,positionX,positionY) { const width = image.width ?? this.canvas.width, height = image.height ?? this.canvas.height; for(let row=0;row<height;row++)for(let col=0;col<width;col++)this.canvas.data.set(image.data.subarray((row*width+col)*4,(row*width+col)*4+4),((row+positionY)*this.canvas.width+col+positionX)*4); }
+}
+globalThis.document = { createElement: () => new SoftwareCanvas(), fonts: new Set([{family:'Pixel ZH',status:'loaded'}]) };
+globalThis.HTMLCanvasElement = SoftwareCanvas;
+globalThis.HTMLImageElement = SoftwareImage;
+globalThis.ImageData = class { constructor(data,width,height) { Object.assign(this,{data,width,height}); } };
+
+const files = ['render/extension-surfaces','render/extension-table-art','render/region-art','render/kitchen-art','render/passages','render/generated-main-art','render/generated-furniture-art','render/generated-decor-art','render/cozy-furniture-assets','render/cozy-materials','render/main-room-surfaces','render/main-room-lighting','render/world-art-grid','render/thought-text','render/thought-bubbles','render/sign-lettering','render/lighting','render/materials','game/state','game/layout','game/kitchen'];
+const bundle = await rolldown({input:'qa',plugins:[{name:'qa',resolveId:id=>id==='qa'?id:null,load:id=>id==='qa'?files.map(file=>`export * from ${JSON.stringify(path.resolve('src',file+'.ts'))};`).join('\n'):null}]});
+const {output} = await bundle.generate({format:'esm'}); await bundle.close();
+const art = await import('data:text/javascript;base64,'+Buffer.from(output.find(item=>item.type==='chunk').code).toString('base64'));
+const load = file => { const image = decodePng('public/art/generated/'+file), canvas = new SoftwareImage(image.width,image.height); canvas.pixels = image.pixels; return canvas; };
+for (const [key,file] of Object.entries(art.GENERATED_MAIN_ASSETS)) if (key.startsWith('cozy-region-') || key.startsWith('cozy-kitchen-')) art.installGeneratedMainAsset(key,load(file));
+art.setGeneratedFurnitureAdapter(art.createGeneratedFurnitureArt(Object.fromEntries(['bench','plant_lemon','plant_monstera','plant_fern'].map(id=>[id,load(art.GENERATED_MAIN_ASSETS['furniture-'+id])])),{catalog:art.COZY_FURNITURE_CATALOG}));
+art.setGeneratedDecorAdapter(art.createGeneratedDecorArt(Object.fromEntries(['floor_herringbone-tile'].map(id=>[id,load(art.GENERATED_MAIN_ASSETS['decor-'+id])])),{catalog:art.COZY_DECOR_CATALOG}));
+const palette = JSON.parse(fs.readFileSync('docs/art-grid/palette.json')).colors.map(color=>[1,3,5].map(index=>parseInt(color.hex.slice(index,index+2),16)));
+function save(canvas,name) {
+  const pixels = canvas.data.slice(), cache = new Map();
+  for(let offset=0;offset<pixels.length;offset+=4) {
+    const key = pixels[offset]*65536+pixels[offset+1]*256+pixels[offset+2];
+    let color=cache.get(key);
+    if(!color){let best=Infinity;for(const candidate of palette){const distance=candidate.reduce((sum,value,index)=>sum+(value-pixels[offset+index])**2,0);if(distance<best){best=distance;color=candidate;}}cache.set(key,color);}
+    pixels.set(color,offset);pixels[offset+3]=pixels[offset+3]>=128?255:0;
+  }
+  encodePng(path.join(out,name+'.png'),{width:canvas.width,height:canvas.height,pixels});
+}
+function board(width=320,height=240) { const canvas=new SoftwareCanvas(width*2,height*2),ctx=art.gridSafeContext(canvas.getContext('2d'));ctx.scale(2,2);ctx.fillStyle='#efdfbe';ctx.fillRect(0,0,width,height);return {canvas,ctx}; }
+const tableSource = load('cozy-seating-v3/ensemble.png');
+const table = new SoftwareCanvas(80,60);table.getContext('2d').drawImage(tableSource,88,71,608,457,2,2,76,57);
+const chair = new SoftwareCanvas(68,84);chair.getContext('2d').drawImage(tableSource,805,77,348,455,8.612,32.86,37.584,49.14);
+const state=art.createInitialState(0);state.regions=['reading','greenhouse','terrace'];state.kitchen=true;
+function kitchenFloor(ctx) {
+  art.paintBench(ctx,art.BENCH['x']+art.BENCH['w']/2,art.kitchenFloorY(art.BENCH.front),false,false);
+  art.paintRack(ctx,art.RACK['x'],art.kitchenFloorY(art.RACK.foot),[]);
+  art.paintBins(ctx,art.BINS['x'],art.kitchenFloorY(art.BINS.foot));
+  art.paintDishPit(ctx,art.DISH_PIT['x'],art.kitchenFloorY(art.DISH_PIT.foot));
+}
+for (const hour of [10.5,21]) for (const area of ['reading','greenhouse','terrace','kitchen']) {
+  const light=art.lightingAt(hour),{canvas,ctx}=board();
+  if(area==='kitchen') {art.paintKitchen(ctx,240,0,false,new Set(['mixer','proofer','deckOven','fryer']),new Set());kitchenFloor(ctx);}
+  else {
+    art.paintRegion(ctx,area,240,0,light,false);art.paintPassageFloor(ctx,area,false);
+    for(const [positionX,positionY] of [[64,112],[256,112],[64,180],[256,180]]) {
+      art.paintContactShade(ctx,positionX,positionY,38,.25);
+      const variant=new SoftwareCanvas(80,60);variant.pixels=table.data.slice();art.remapTablecloth(variant.data,80,60,area);
+      ctx.drawImage(chair,positionX-38,positionY-41,34,42);ctx.save();ctx.translate(positionX+38,positionY-41);ctx.scale(-1,1);ctx.drawImage(chair,0,0,34,42);ctx.restore();ctx.drawImage(variant,positionX-20,positionY-29,40,30);
+    }
+  }
+  art.paintRoomBoundaries(ctx,area,state);
+  const grade=art.roomAmbient(light,area),rgb=[1,3,5].map(index=>parseInt(grade.slice(index,index+2),16)/255);
+  for(let offset=0;offset<canvas.data.length;offset+=4)for(let channel=0;channel<3;channel++)canvas.data[offset+channel]*=rgb[channel];
+  const lamps = area==='reading'?[[100,art.floorY(98)-27,30,1,'#ffcf7a']]:area==='terrace'?Array.from({length:9},(_,index)=>{const positionX=22+index*34;return [positionX,19+Math.round(Math.sin(positionX/320*Math.PI)*12),14,.9,'#ffcf7a'];}):area==='kitchen'?[[74,12,44,.8,'#fbf6e4'],[218,12,44,.8,'#fbf6e4'],[182,30,16,.7,'#ffcf7a'],[236,30,16,.7,'#ffcf7a'],[290,30,16,.7,'#ffcf7a'],[218,56,26,.6,'#ffa64a']]:[];
+  for(const [positionX,positionY,radius,strength,tint] of lamps) {
+    const pool=new SoftwareCanvas(radius*4,radius*4),poolCtx=pool.getContext('2d');poolCtx.scale(2,2);art.extensionLampPool(poolCtx,radius,tint);
+    ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=light.lamps*strength;ctx.drawImage(pool,positionX-radius,positionY-radius,radius*2,radius*2);ctx.restore();
+  }
+  save(canvas,area+(hour===21?'-night':'-day'));
+}
+{
+  const {canvas,ctx}=board();art.paintKitchen(ctx,240,0,false,new Set(),new Set());kitchenFloor(ctx);save(canvas,'kitchen-reserved');
+}
+for(const [locale,text] of [['en','My little café dream'],['zh',zh['thought.owner.idle']]]) {
+  const lines=art.wrapThoughtText(text,locale==='zh'),rectWidth=art.thoughtBubbleWidth(Math.max(...lines.map(art.thoughtTextWidth)));
+  const raster=art.thoughtTextRaster(lines,'',rectWidth),{canvas,ctx}=board(rectWidth,raster.height);
+  ctx.drawImage(raster.canvas,0,raster.sourceY,rectWidth*2,raster.inkHeight,0,raster.textY,rectWidth,raster.inkHeight/2);save(canvas,'thought-'+locale);
+}
+console.log('Offline production-painter boards saved to '+out+'; palette-snapped composites; lamp painters at runtime anchors; no Phaser actors or camera.');
+
+exec
+/bin/zsh -lc "cat src/render/region-art.ts; sed -n '1,90p' scripts/extension-room-qa.mjs; rg -n 'function artRamp|function artRect|paintContactShade' src/render/{main-room-surfaces,main-room-lighting}.ts; cat docs/art-grid/palette.json | head -45; rg -n 'window|sun|beam|fillRect' src/render/cozy-world-art.ts | tail -35; cat artifacts/art-grid/foundation-test-failures.txt | head -30" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 0ms:
+import { FLOOR_Y, SCENE_W, floorY } from '../game/layout';
+import type { RegionId } from '../game/regions';
+import { paintFloor, paintWall } from './decor-art';
+import { passageRunner } from './passages';
+import { drawText, textWidth } from './font';
+import { cabinetPanel, glassReflection, leafySprig, timberBeam, treeLine, wallLantern, WARM_MATERIAL } from './materials';
+import { mix } from './color';
+import { paintFloorFurniture } from './furniture-art';
+import { beam, type Lighting } from './lighting';
+import { paintSunbeam } from './room-art';
+import { generatedMainSource } from './generated-main-art';
+import { extensionFloor, extensionRunner, extensionWindowPatch, readingDoor, readingFurnishing } from './extension-surfaces';
+
+type Ctx = CanvasRenderingContext2D;
+const ink = WARM_MATERIAL.ink;
+function rect(ctx: Ctx, x: number, y: number, w: number, h: number, c: string): void {
+  if (w <= 0 || h <= 0) return;
+  ctx.fillStyle = c; ctx.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+}
+
+/** The background library shelves have individually bound books and recessed bays. */
+function libraryShelf(ctx: Ctx, x: number): void {
+  const r = (dx: number, y: number, w: number, h: number, c: string) => rect(ctx, x + dx, y, w, h, c);
+  r(-3, 14, 71, 64, ink);
+  r(0, 17, 65, 58, '#865332');
+  for (let row = 0; row < 3; row++) {
+    const y = 23 + row * 17;
+    r(3, y - 2, 59, 15, '#543425');
+    r(3, y - 1, 59, 2, '#39281f');
+    for (let i = 0; i < 11; i++) {
+      const colors = ['#687958', '#b4694a', '#d6b774', '#5d7479', '#977574'];
+      const by = y + i % 3, bh = 11 - i % 3;
+      const base = colors[(i + row * 2) % colors.length];
+      r(3 + i * 5, by, 4, bh, base);
+      r(3 + i * 5, by, 1, bh, mix(base, '#f4e6c7', 0.4));
+      r(6 + i * 5, by + 1, 1, bh - 1, mix(base, ink, 0.35));
+      r(4 + i * 5, by + 2, 2, 1, '#e6c784');
+      r(4 + i * 5, y + 9, 2, 1, '#c6a66a');
+      if ((i + row) % 3 === 0) r(4 + i * 5, by + 4, 1, 3, '#ead7b1');
+    }
+    timberBeam(ctx, x, y + 12, 65, 4);
+  }
+  for (const px of [-2, 64]) timberBeam(ctx, x + px, 15, 4, 63, true);
+  timberBeam(ctx, x - 4, 13, 73, 6);
+  r(1, 20, 2, 3, '#c8a15e'); r(61, 20, 2, 3, '#c8a15e');
+}
+
+function gardenBox(ctx: Ctx, x: number, y: number, width: number, flowers: boolean): void {
+  rect(ctx, x, y, width, 9, '#543425');
+  rect(ctx, x + 1, y + 2, width - 2, 6, '#9b6844');
+  rect(ctx, x - 1, y, width + 2, 2, '#d2a063');
+  for (let i = 4; i < width - 2; i += 7) rect(ctx, x + i, y + 2, 1, 6, '#74492f');
+  for (let i = 4; i < width - 1; i += 8) {
+    leafySprig(ctx, x + i, y - 3 - i % 3, 3, i);
+    if (flowers) {
+      rect(ctx, x + i - 1, y - 7, 3, 1, i % 2 ? '#d89476' : '#f4e6c7');
+      rect(ctx, x + i, y - 8, 1, 3, i % 2 ? '#d89476' : '#f4e6c7');
+      rect(ctx, x + i, y - 7, 1, 1, '#d4ad54');
+    }
+  }
+}
+
+/** Each extension has authored architecture, while all routing geometry stays local. */
+export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, light: Lighting, locked: boolean): void {
+  const r = (x: number, y: number, w: number, h: number, color: string) => rect(ctx, x, y, w, h, color);
+  const reading = id === 'reading', terrace = id === 'terrace';
+  paintWall(ctx, reading ? 'wall_cream' : 'wall_mint', 0, 0, SCENE_W, FLOOR_Y, t);
+  if (!locked && !reading) extensionFloor(ctx, id, FLOOR_Y, height);
+  else paintFloor(ctx, terrace ? 'floor_terrazzo' : reading ? 'floor_herringbone' : 'floor_mint', 0, FLOOR_Y, SCENE_W, height - FLOOR_Y);
+  const furnishing = (kind: 'armchair' | 'lamp', x: number, foot: number) => {
+    if (locked) paintFloorFurniture(ctx, kind, x, foot);
+    else readingFurnishing(ctx, kind, x, foot);
+  };
+  const sky = (painted: string) => mix(painted, light.sky[1], 0.55);
+
+  const backdrop = generatedMainSource(`cozy-region-${id}`);
+  if (backdrop) {
+    ctx.save(); ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(backdrop, 0, 0, SCENE_W, FLOOR_Y);
+    if (light.dark > 0) {
+      ctx.globalAlpha = light.dark * .48; ctx.fillStyle = '#283837';
+      ctx.fillRect(0, 0, SCENE_W, FLOOR_Y);
+    }
+    ctx.restore();
+    if (reading) {
+      furnishing('armchair', 115, floorY(102));
+      furnishing('armchair', 206, floorY(102));
+      furnishing('lamp', 100, floorY(98));
+    } else {
+      for (const x of [30, 290]) paintFloorFurniture(ctx, terrace ? 'plant_lemon' : 'plant_monstera', x, floorY(96));
+      paintFloorFurniture(ctx, 'bench', 160, floorY(100));
+      for (const x of [108, 212]) paintFloorFurniture(ctx, 'plant_fern', x, floorY(98));
+    }
+  } else if (reading) {
+    timberBeam(ctx, 0, 0, SCENE_W, 8);
+    for (const x of [0, 314]) timberBeam(ctx, x, 0, 6, 80, true);
+    for (const x of [18, 234]) libraryShelf(ctx, x);
+    // A deep, casement bay with cream glazing putty and checked ochre drapes.
+    r(109, 20, 102, 49, ink);
+    r(110, 21, 100, 47, '#a17243');
+    r(113, 24, 94, 41, sky('#a1c5c5'));
+    treeLine(ctx, 113, 36, 94, 29, light.dark);
+    glassReflection(ctx, 113, 24, 94, 41, 0.16);
+    r(157, 23, 5, 43, '#6f492e'); r(158, 24, 2, 41, '#e2c18b');
+    r(112, 43, 96, 4, '#6f492e'); r(113, 43, 94, 1, '#e2c18b');
+    timberBeam(ctx, 106, 67, 108, 6);
+    for (const x of [104, 208]) {
+      for (let dy = 0; dy < 34; dy++) for (let dx = 0; dx < 8; dx++) {
+        const check = (Math.floor(dx / 2) + Math.floor(dy / 3)) % 2;
+        r(x + dx, 25 + dy, 1, 1, check ? '#a47947' : '#e0bf83');
+      }
+      r(x, 51, 8, 2, '#f1d692');
+      r(x + 2, 53, 1, 4, '#c8a15e');
+    }
+    gardenBox(ctx, 118, 64, 18, false);
+    r(181, 62, 14, 2, '#7e5b45'); r(182, 60, 12, 2, '#d2ad78');
+    r(183, 58, 11, 2, '#6d7c5b');
+    for (const x of [90, 219]) wallLantern(ctx, x, 31);
+    furnishing('armchair', 115, floorY(102));
+    furnishing('armchair', 206, floorY(102));
+    furnishing('lamp', 100, floorY(98));
+  } else {
+    r(0, 0, SCENE_W, 80, sky('#b7d7d2'));
+    for (const [x, y, w] of [[41, 13, 36], [199, 8, 44]]) {
+      r(x, y, w, 4, light.cloud); r(x + 7, y - 3, w - 18, 3, light.cloud);
+      r(x + 2, y + 4, w - 5, 2, mix(light.cloud, light.sky[2], 0.4));
+    }
+    treeLine(ctx, 0, 28, SCENE_W, 52, light.dark);
+    if (terrace) {
+      // Terracotta coping stones, staggered masonry and a pegged oak pergola.
+      r(0, 62, SCENE_W, 18, '#b49b78');
+      for (let row = 0; row < 3; row++) for (let x = -11 + row % 2 * 11; x < SCENE_W; x += 23) {
+        r(x, 63 + row * 6, 22, 5, (x + row) % 3 ? '#c4ad87' : '#b7a07d');
+        r(x + 1, 63 + row * 6, 20, 1, '#e2cca3');
+        r(x + 21, 64 + row * 6, 1, 4, '#90795e');
+        r(x + 4, 66 + row * 6, 3, 1, '#d3b98e');
+      }
+      timberBeam(ctx, 0, 59, SCENE_W, 5, false, '#9b6947');
+      for (const x of [9, 305]) {
+        timberBeam(ctx, x, 0, 6, 89, true);
+        for (let i = 0; i < 13; i++) r(x < 100 ? x + 6 + i : x - i - 1, 7 + i, 1, 6, '#765032');
+      }
+      timberBeam(ctx, 0, 0, SCENE_W, 7);
+      for (let x = 34; x < 310; x += 48) {
+        r(x, 4, 4, 9, '#543425'); r(x, 4, 1, 9, '#c98c4d');
+      }
+      for (let x = 6; x < SCENE_W; x += 2) r(x, 13 + Math.round(Math.sin(x / SCENE_W * Math.PI) * 10), 2, 1, ink);
+      for (let x = 22; x < SCENE_W; x += 34) {
+        const y = 14 + Math.round(Math.sin(x / SCENE_W * Math.PI) * 10);
+        r(x, y, 1, 4, ink); r(x - 2, y + 4, 5, 6, '#9c7448');
+        r(x - 1, y + 5, 3, 4, '#f4cc77'); r(x - 1, y + 5, 1, 3, '#fff3c4');
+      }
+      for (const x of [39, 251]) gardenBox(ctx, x, 68, 31, true);
+      for (const x of [14, 307]) for (const y of [13, 26, 39, 48]) leafySprig(ctx, x, y, 4, x + y);
+      // Sparse, subtle stone-edge chips, never a second grid over the tile joints.
+      for (let y = 96; y < height - 18; y += 48) for (const x of [26, 82, 226, 278]) {
+        r(x, y, 5, 1, '#d9c7a4');
+        r(x + 1, y + 1, 3, 1, '#f1e5c9');
+        r(x + 12, y + 16, 2, 1, '#d9c7a4');
+      }
+    } else {
+      // Timber footwall, steel ribbed glass canopy and planted potting shelves.
+      for (let gx = 4; gx < SCENE_W; gx += 53) glassReflection(ctx, gx, 3, 49, 71, 0.15);
+      for (let x = 0; x < SCENE_W; x += 53) {
+        r(x, 0, 5, 80, '#384a39'); r(x + 1, 0, 2, 80, '#8b9a70');
+        r(x + 3, 1, 1, 78, '#bac59a');
+        for (const y of [28, 73]) { r(x, y, 5, 5, '#536447'); r(x + 1, y + 1, 1, 1, '#dfd5a2'); }
+      }
+      r(0, 28, SCENE_W, 4, '#4d654c'); r(0, 28, SCENE_W, 1, '#b7c295');
+      // Diagonal roof glazing reads as real trusses in perspective.
+      for (let x = 20; x < SCENE_W; x += 53) for (let y = 0; y < 28; y++) {
+        r(x + Math.round(y * 0.55), y, 2, 1, '#677c59');
+        r(x + Math.round(y * 0.55) - 1, y, 1, 1, '#afba8e');
+      }
+      for (let i = 0; i < 8; i++) {
+        const x = 14 + i * 40, y = 18 + i % 3 * 3;
+        r(x, 1, 1, y - 5, '#745534');
+        for (const dx of [-3, 3]) for (let sy = y - 5; sy < y; sy++) r(x + Math.round(dx * (sy - y + 6) / 6), sy, 1, 1, '#b39b66');
+        gardenBox(ctx, x - 5, y + 2, 11, false);
+      }
+      for (const x of [7, 218]) {
+        cabinetPanel(ctx, x, 65, 94, 15, '#7c5735');
+        timberBeam(ctx, x - 1, 62, 96, 4);
+        for (let i = 0; i < 4; i++) gardenBox(ctx, x + 5 + i * 21, 55, 12, i % 2 === 0);
+      }
+      timberBeam(ctx, 0, 77, SCENE_W, 4, false, '#627451');
+    }
+    for (const x of [30, 290]) paintFloorFurniture(ctx, terrace ? 'plant_lemon' : 'plant_monstera', x, floorY(96));
+    paintFloorFurniture(ctx, 'bench', 160, floorY(100));
+    for (const x of [108, 212]) paintFloorFurniture(ctx, 'plant_fern', x, floorY(98));
+  }
+
+  if (reading && !locked) readingDoor(ctx, FLOOR_Y, light);
+  const word = reading ? 'BOOK NOOK' : terrace ? 'GARDEN PATIO' : 'GLASSHOUSE';
+  const width = textWidth(word) + 14, signX = reading ? 70 : 160;
+  timberBeam(ctx, signX - width / 2 - 1, 7, width + 2, 13, false, reading ? '#865332' : '#627451');
+  r(signX - width / 2 + 3, 10, width - 6, 7, reading ? '#67432b' : '#42553d');
+  drawText(ctx, word, signX - textWidth(word) / 2, 11, '#f4e6c7');
+
+  // The existing narrow service aisle is unchanged; only its woven artwork differs.
+  if (locked) passageRunner(ctx, 145, floorY(110), 30, height - floorY(110) - 8, 'v', reading ? '#d7b385' : '#cdbd96', true);
+  else extensionRunner(ctx, id, 145, floorY(110), 30, height - floorY(110) - 8, 'v');
+  const { lean, length } = beam(light.sun);
+  if (locked) {
+    if (reading) paintSunbeam(ctx, light.sun, 113, 207, FLOOR_Y, lean, length);
+    else if (!terrace) for (const x of [20, 128, 236]) paintSunbeam(ctx, light.sun, x, x + 34, FLOOR_Y, lean, length + 24);
+  } else if (reading) {
+    extensionWindowPatch(ctx, 113, 24, FLOOR_Y, light.sun);
+    extensionWindowPatch(ctx, 183, 24, FLOOR_Y, light.sun);
+  } else for (const x of [20, 128, 236]) extensionWindowPatch(ctx, x, 34, FLOOR_Y, light.sun);
+
+  if (locked) {
+    ctx.save(); ctx.setLineDash([3, 3]); ctx.strokeStyle = '#b39f79';
+    for (const x of [64, 256]) for (const y of [floorY(112), floorY(180)]) ctx.strokeRect(x - 22, y - 26, 44, 28);
+    ctx.restore();
+    for (const [x, y] of [[26, height - 20], [272, height - 26]]) {
+      cabinetPanel(ctx, x, y - 18, 20, 18, '#ad8455');
+      r(x + 3, y - 18, 3, 18, '#775438'); r(x + 14, y - 18, 3, 18, '#775438');
+      r(x + 7, y - 13, 6, 5, '#ecdbb2'); r(x + 8, y - 12, 4, 1, '#a78c64');
+      for (let d = 0; d < 13; d++) r(x + 3 + d, y - 16 + d, 2, 1, '#d0aa74');
+    }
+    ctx.save(); ctx.globalAlpha = 0.15; r(0, 0, SCENE_W, height, '#584b38'); ctx.restore();
+  }
+}
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { rolldown } from 'rolldown';
+import woff2 from 'wawoff2';
+import { decodePng, encodePng } from './pixel-conform.mjs';
+
+const out = 'artifacts/art-grid/round-3';
+fs.mkdirSync(out, { recursive: true });
+const zh = JSON.parse(fs.readFileSync('src/locales/zh.json'));
+const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'extension-qa-'));
+let rasters;
+try {
+  const font = path.join(temporary, 'pixel.ttf');
+  fs.writeFileSync(font, await woff2.decompress(fs.readFileSync('src/assets/pixel-zh.woff2')));
+  const result = spawnSync('swift', ['-module-cache-path', path.join(temporary, 'modules'), 'scripts/art-grid-offline-fonts.swift', font, Object.entries(zh).filter(([key]) => key.startsWith('thought.')).map(([, text]) => text).join('')], { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+  if (result.status !== 0) throw new Error(result.stderr);
+  rasters = JSON.parse(result.stdout);
+} finally { fs.rmSync(temporary, { recursive: true, force: true }); }
+
+class SoftwareCanvas {
+  constructor(width = 1, height = 1) { this.width = width; this.height = height; }
+  set width(value) { this.rectWidth = Math.round(value); this.pixels = null; }
+  get width() { return this.rectWidth; }
+  set height(value) { this.rectHeight = Math.round(value); this.pixels = null; }
+  get height() { return this.rectHeight; }
+  get data() { return this.pixels ??= new Uint8ClampedArray(this.rectWidth * this.rectHeight * 4); }
+  getContext() { return this.ctx ??= new SoftwareContext(this); }
+}
+class SoftwareImage extends SoftwareCanvas {
+  get naturalWidth() { return this.width; }
+  get naturalHeight() { return this.height; }
+}
+class SoftwareContext {
+  constructor(canvas) { this.canvas = canvas; this.fillStyle = '#000000'; this.globalAlpha = 1; this.transform = [1, 1, 0, 0]; this.stack = []; this.box = null; this.points = []; }
+  save() { this.stack.push([this.fillStyle, this.globalAlpha, [...this.transform], this.box, this.globalCompositeOperation]); }
+  restore() { [this.fillStyle, this.globalAlpha, this.transform, this.box, this.globalCompositeOperation] = this.stack.pop(); }
+  scale(positionX, positionY) { this.transform[0] *= positionX; this.transform[1] *= positionY; }
+  translate(positionX, positionY) { this.transform[2] += positionX * this.transform[0]; this.transform[3] += positionY * this.transform[1]; }
+  getTransform() { const [scaleX,scaleY,translateX,translateY]=this.transform;return {'a':scaleX,'b':0,'c':0,'d':scaleY,'e':translateX,'f':translateY}; }
+  setTransform(scaleX,_b,_c,scaleY,translateX,translateY) { this.transform=[scaleX,scaleY,translateX,translateY]; }
+  beginPath() { this.points = []; this.pending = null; this.circle = null; }
+  rect(positionX, positionY, rectWidth, rectHeight) { const [sx, sy, tx, ty] = this.transform; this.pending = [positionX * sx + tx, positionY * sy + ty, rectWidth * sx, rectHeight * sy]; }
+  clip() { this.box = this.pending; }
+  moveTo(positionX, positionY) { this.points.push([positionX, positionY]); }
+  lineTo(positionX, positionY) { this.points.push([positionX, positionY]); }
+  closePath() {}
+  setLineDash() {}
+  arc(positionX, positionY, radius) { this.circle = [positionX, positionY, radius]; }
+  ellipse(positionX, positionY, rx, ry) { this.circle = [positionX, positionY, rx, ry]; }
+  fill() {
+    if (this.circle) {
+      const [cx, cy, rx, ry = rx] = this.circle;
+      for (let positionY = cy - ry; positionY < cy + ry; positionY += .5) { const half = rx * Math.sqrt(Math.max(0, 1 - ((positionY + .25 - cy) / ry) ** 2)); this.fillRect(cx - half, positionY, half * 2, .5); }
+    } else if (this.pending) {
+      const old = this.transform; this.transform = [1, 1, 0, 0]; this.fillRect(...this.pending); this.transform = old;
+    }
+  }
+  stroke() { for (let index = 1; index < this.points.length; index++) { const start = this.points[index - 1], end = this.points[index], count = Math.ceil(Math.hypot(end[0] - start[0], end[1] - start[1]) * 2); const old = this.fillStyle; this.fillStyle = this.strokeStyle; for (let step = 0; step <= count; step++) this.fillRect(start[0] + (end[0] - start[0]) * step / count, start[1] + (end[1] - start[1]) * step / count, .5, .5); this.fillStyle = old; } }
+  strokeRect(positionX, positionY, rectWidth, rectHeight) { const old = this.fillStyle; this.fillStyle = this.strokeStyle; for (const rect of [[positionX,positionY,rectWidth,.5],[positionX,positionY+rectHeight-.5,rectWidth,.5],[positionX,positionY,.5,rectHeight],[positionX+rectWidth-.5,positionY,.5,rectHeight]]) this.fillRect(...rect); this.fillStyle = old; }
+  pixel(positionX, positionY, rgba) {
+    const canvas = this.canvas;
+    if (positionX < 0 || positionY < 0 || positionX >= canvas.width || positionY >= canvas.height || (this.box && (positionX < this.box[0] || positionY < this.box[1] || positionX >= this.box[0] + this.box[2] || positionY >= this.box[1] + this.box[3]))) return;
+    const offset = (positionY * canvas.width + positionX) * 4, data = canvas.data;
+    const alpha = rgba[3] / 255 * this.globalAlpha, previous = data[offset + 3] / 255;
+    if (this.globalCompositeOperation === 'lighter') {
+      for (let channel = 0; channel < 3; channel++) data[offset + channel] = Math.min(255, data[offset + channel] + rgba[channel] * alpha);
+      data[offset + 3] = Math.min(255, (previous + alpha) * 255); return;
+    }
+    const final = alpha + previous * (1 - alpha);
+    for (let channel = 0; channel < 3; channel++) data[offset + channel] = final ? Math.round((rgba[channel] * alpha + data[offset + channel] * previous * (1 - alpha)) / final) : 0;
+    data[offset + 3] = Math.round(final * 255);
+  }
+  fillRect(positionX, positionY, rectWidth, rectHeight) {
+    const [sx, sy, tx, ty] = this.transform, color = [1,3,5].map(index => parseInt(this.fillStyle.slice(index,index+2),16)); color.push(255);
+    const x0 = Math.round(Math.min(positionX*sx+tx,(positionX+rectWidth)*sx+tx)), x1 = Math.round(Math.max(positionX*sx+tx,(positionX+rectWidth)*sx+tx));
+    const y0 = Math.round(Math.min(positionY*sy+ty,(positionY+rectHeight)*sy+ty)), y1 = Math.round(Math.max(positionY*sy+ty,(positionY+rectHeight)*sy+ty));
+    for (let row = Math.max(0,y0); row < Math.min(this.canvas.height,y1); row++) for (let col = Math.max(0,x0); col < Math.min(this.canvas.width,x1); col++) this.pixel(col,row,color);
+  }
+  drawImage(source, ...args) {
+    let crop = [0,0,source.width,source.height], dest;
+    if (args.length === 2) dest = [...args,source.width,source.height];
+    else if (args.length === 4) dest = args;
+    else { crop = args.slice(0,4); dest = args.slice(4); }
+    const [sx,sy,tx,ty] = this.transform, [positionX,positionY,rectWidth,rectHeight] = dest;
+    const left = Math.round(positionX*sx+tx), top = Math.round(positionY*sy+ty), width = Math.round(rectWidth*sx), height = Math.round(rectHeight*sy);
+    const data = source.data;
+    for (let row = 0; row < Math.abs(height); row++) for (let col = 0; col < Math.abs(width); col++) {
+      const px = Math.floor(crop[0] + (col+.5)/Math.abs(width)*crop[2]), py = Math.floor(crop[1] + (row+.5)/Math.abs(height)*crop[3]);
+src/render/main-room-surfaces.ts:11:export function artRect(ctx: Ctx, x: number, y: number, w: number, h: number, color: string) {
+src/render/main-room-lighting.ts:25:export function paintContactShade(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, opacity: number) {
+{
+  "spec": "docs/art-grid/palette-spec.json",
+  "reference": "public/art/generated/cafe-style-sample-v1/sample.png",
+  "colors": [
+    {
+      "hex": "#160704",
+      "ramp": "ink",
+      "index": 0,
+      "lightness": 0.152
+    },
+    {
+      "hex": "#20110c",
+      "ramp": "ink",
+      "index": 1,
+      "lightness": 0.197
+    },
+    {
+      "hex": "#291711",
+      "ramp": "ink",
+      "index": 2,
+      "lightness": 0.227
+    },
+    {
+      "hex": "#42251a",
+      "ramp": "walnut",
+      "index": 0,
+      "lightness": 0.299
+    },
+    {
+      "hex": "#55301f",
+      "ramp": "walnut",
+      "index": 1,
+      "lightness": 0.352
+    },
+    {
+      "hex": "#703d23",
+      "ramp": "walnut",
+      "index": 2,
+      "lightness": 0.418
+    },
+    {
+      "hex": "#8a4a25",
+      "ramp": "walnut",
+      "index": 3,
+      "lightness": 0.48
+45:    ctx.fillRect(left + u * width, top + v * height, rw * width, rh * height); ctx.restore();
+54:      ctx.fillRect(left + width * (u + (i - 1) * spread / 2) + sway,
+[suite] scripts/cozy-cafe-art.test.mjs
+[suite] scripts/loading-progress.test.ts
+[suite] scripts/main-reference-art.test.mjs
+[suite] scripts/reference-character-art.test.mjs
+src/render/generated-character-sources.test.ts :: release baked character source packs keeps copied final pixels and both shared UI previews functional without original images
+src/render/generated-food-art.test.ts :: generated food bitmap adapter bottom-centers original display-case pastries at native aspect inside the existing shelf envelopes
+src/render/generated-main-art.test.ts :: generated main-room asset registry and painting queues each runtime image under its own stable key and the configured base URL
+src/render/generated-main-art.test.ts :: generated main-room asset registry and painting references only existing runtime PNGs with positive dimensions
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display draws no food with zero closing stock despite installed food bitmaps
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display draws no food with zero open stock despite installed food bitmaps
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display draws no food with zero prep stock despite installed food bitmaps
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display falls back per missing food asset while retaining the generated empty display
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display follows menu, ownership and kitchen changes instead of keeping food baked into the display
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display uses only live shelf stock during closing and clears sold-out food immediately
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display uses only live shelf stock during open and clears sold-out food immediately
+src/render/generated-main-art.test.ts :: real density-2 pastry painter with generated empty display uses only the preparation plan during prep, even when the live shelf disagrees
+src/render/generated-main-static-packing.test.ts :: unchanged main-room static placements, live overlays and fallback keeps every source crop, world destination, overlay and state unchanged in closing
+src/render/generated-main-static-packing.test.ts :: unchanged main-room static placements, live overlays and fallback keeps every source crop, world destination, overlay and state unchanged in open
+src/render/generated-main-static-packing.test.ts :: unchanged main-room static placements, live overlays and fallback keeps every source crop, world destination, overlay and state unchanged in prep
+src/render/generated-main-static-packing.test.ts :: unchanged main-room static placements, live overlays and fallback uses current plan/live stock and keeps the empty case independent of menu changes
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_gold) falls back only for the unavailable service-cupboard source
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_gold) fits the low cupboard uniformly at the existing contact point and retains the carafe
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_gold) lowers only the generated cupboard attachments and restores the caller transform
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_marble) falls back only for the unavailable service-cupboard source
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_marble) fits the low cupboard uniformly at the existing contact point and retains the carafe
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_marble) lowers only the generated cupboard attachments and restores the caller transform
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_oak) falls back only for the unavailable service-cupboard source
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_oak) fits the low cupboard uniformly at the existing contact point and retains the carafe
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_oak) lowers only the generated cupboard attachments and restores the caller transform
+src/render/generated-service-props.test.ts :: selected main-service bitmap integration (counter_pink) falls back only for the unavailable service-cupboard source
+
+exec
+/bin/zsh -lc "sed -n '140,240p' src/render/region-art.ts; sed -n '1,60p' src/render/main-room-surfaces.ts; sed -n '140,210p' src/render/extension-surfaces.ts; rg -n -A20 'function paintContactShade' src/render/main-room-lighting.ts; sed -n '1,58p' scripts/extension-room-qa.mjs; sed -n '1,38p' src/render/extension-surfaces.test.ts; ls scripts/*software*; rg -n 'cloth-7|gingham|brass' docs/art-grid/palette.json | head" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 0ms:
+        timberBeam(ctx, x, 0, 6, 89, true);
+        for (let i = 0; i < 13; i++) r(x < 100 ? x + 6 + i : x - i - 1, 7 + i, 1, 6, '#765032');
+      }
+      timberBeam(ctx, 0, 0, SCENE_W, 7);
+      for (let x = 34; x < 310; x += 48) {
+        r(x, 4, 4, 9, '#543425'); r(x, 4, 1, 9, '#c98c4d');
+      }
+      for (let x = 6; x < SCENE_W; x += 2) r(x, 13 + Math.round(Math.sin(x / SCENE_W * Math.PI) * 10), 2, 1, ink);
+      for (let x = 22; x < SCENE_W; x += 34) {
+        const y = 14 + Math.round(Math.sin(x / SCENE_W * Math.PI) * 10);
+        r(x, y, 1, 4, ink); r(x - 2, y + 4, 5, 6, '#9c7448');
+        r(x - 1, y + 5, 3, 4, '#f4cc77'); r(x - 1, y + 5, 1, 3, '#fff3c4');
+      }
+      for (const x of [39, 251]) gardenBox(ctx, x, 68, 31, true);
+      for (const x of [14, 307]) for (const y of [13, 26, 39, 48]) leafySprig(ctx, x, y, 4, x + y);
+      // Sparse, subtle stone-edge chips, never a second grid over the tile joints.
+      for (let y = 96; y < height - 18; y += 48) for (const x of [26, 82, 226, 278]) {
+        r(x, y, 5, 1, '#d9c7a4');
+        r(x + 1, y + 1, 3, 1, '#f1e5c9');
+        r(x + 12, y + 16, 2, 1, '#d9c7a4');
+      }
+    } else {
+      // Timber footwall, steel ribbed glass canopy and planted potting shelves.
+      for (let gx = 4; gx < SCENE_W; gx += 53) glassReflection(ctx, gx, 3, 49, 71, 0.15);
+      for (let x = 0; x < SCENE_W; x += 53) {
+        r(x, 0, 5, 80, '#384a39'); r(x + 1, 0, 2, 80, '#8b9a70');
+        r(x + 3, 1, 1, 78, '#bac59a');
+        for (const y of [28, 73]) { r(x, y, 5, 5, '#536447'); r(x + 1, y + 1, 1, 1, '#dfd5a2'); }
+      }
+      r(0, 28, SCENE_W, 4, '#4d654c'); r(0, 28, SCENE_W, 1, '#b7c295');
+      // Diagonal roof glazing reads as real trusses in perspective.
+      for (let x = 20; x < SCENE_W; x += 53) for (let y = 0; y < 28; y++) {
+        r(x + Math.round(y * 0.55), y, 2, 1, '#677c59');
+        r(x + Math.round(y * 0.55) - 1, y, 1, 1, '#afba8e');
+      }
+      for (let i = 0; i < 8; i++) {
+        const x = 14 + i * 40, y = 18 + i % 3 * 3;
+        r(x, 1, 1, y - 5, '#745534');
+        for (const dx of [-3, 3]) for (let sy = y - 5; sy < y; sy++) r(x + Math.round(dx * (sy - y + 6) / 6), sy, 1, 1, '#b39b66');
+        gardenBox(ctx, x - 5, y + 2, 11, false);
+      }
+      for (const x of [7, 218]) {
+        cabinetPanel(ctx, x, 65, 94, 15, '#7c5735');
+        timberBeam(ctx, x - 1, 62, 96, 4);
+        for (let i = 0; i < 4; i++) gardenBox(ctx, x + 5 + i * 21, 55, 12, i % 2 === 0);
+      }
+      timberBeam(ctx, 0, 77, SCENE_W, 4, false, '#627451');
+    }
+    for (const x of [30, 290]) paintFloorFurniture(ctx, terrace ? 'plant_lemon' : 'plant_monstera', x, floorY(96));
+    paintFloorFurniture(ctx, 'bench', 160, floorY(100));
+    for (const x of [108, 212]) paintFloorFurniture(ctx, 'plant_fern', x, floorY(98));
+  }
+
+  if (reading && !locked) readingDoor(ctx, FLOOR_Y, light);
+  const word = reading ? 'BOOK NOOK' : terrace ? 'GARDEN PATIO' : 'GLASSHOUSE';
+  const width = textWidth(word) + 14, signX = reading ? 70 : 160;
+  timberBeam(ctx, signX - width / 2 - 1, 7, width + 2, 13, false, reading ? '#865332' : '#627451');
+  r(signX - width / 2 + 3, 10, width - 6, 7, reading ? '#67432b' : '#42553d');
+  drawText(ctx, word, signX - textWidth(word) / 2, 11, '#f4e6c7');
+
+  // The existing narrow service aisle is unchanged; only its woven artwork differs.
+  if (locked) passageRunner(ctx, 145, floorY(110), 30, height - floorY(110) - 8, 'v', reading ? '#d7b385' : '#cdbd96', true);
+  else extensionRunner(ctx, id, 145, floorY(110), 30, height - floorY(110) - 8, 'v');
+  const { lean, length } = beam(light.sun);
+  if (locked) {
+    if (reading) paintSunbeam(ctx, light.sun, 113, 207, FLOOR_Y, lean, length);
+    else if (!terrace) for (const x of [20, 128, 236]) paintSunbeam(ctx, light.sun, x, x + 34, FLOOR_Y, lean, length + 24);
+  } else if (reading) {
+    extensionWindowPatch(ctx, 113, 24, FLOOR_Y, light.sun);
+    extensionWindowPatch(ctx, 183, 24, FLOOR_Y, light.sun);
+  } else for (const x of [20, 128, 236]) extensionWindowPatch(ctx, x, 34, FLOOR_Y, light.sun);
+
+  if (locked) {
+    ctx.save(); ctx.setLineDash([3, 3]); ctx.strokeStyle = '#b39f79';
+    for (const x of [64, 256]) for (const y of [floorY(112), floorY(180)]) ctx.strokeRect(x - 22, y - 26, 44, 28);
+    ctx.restore();
+    for (const [x, y] of [[26, height - 20], [272, height - 26]]) {
+      cabinetPanel(ctx, x, y - 18, 20, 18, '#ad8455');
+      r(x + 3, y - 18, 3, 18, '#775438'); r(x + 14, y - 18, 3, 18, '#775438');
+      r(x + 7, y - 13, 6, 5, '#ecdbb2'); r(x + 8, y - 12, 4, 1, '#a78c64');
+      for (let d = 0; d < 13; d++) r(x + 3 + d, y - 16 + d, 2, 1, '#d0aa74');
+    }
+    ctx.save(); ctx.globalAlpha = 0.15; r(0, 0, SCENE_W, height, '#584b38'); ctx.restore();
+  }
+}
+/** Main café architecture, authored in half-room-pixel cells on the master palette.
+ * Flat floor motifs are >=2 room px so the row projection cannot turn them into noise. */
+import palette from '../../docs/art-grid/palette.json';
+import { DOOR_W, DOOR_X, FLOOR_Y, PASS, PASS_COLUMNS, PASS_SLOT_W, COUNTER, passageY } from '../game/layout';
+type Ctx = CanvasRenderingContext2D;
+const ramps = new Map<string, string[]>();
+for (const c of palette.colors) { const ramp = ramps.get(c.ramp) ?? []; ramp.push(c.hex); ramps.set(c.ramp, ramp); }
+export const artRamp = (name: string): readonly string[] => ramps.get(name)!;
+const oak = artRamp('oak'), walnut = artRamp('walnut'), floor = artRamp('floor');
+const cream = artRamp('cloth-7'), sage = artRamp('sage'), rose = artRamp('cloth-5');
+export function artRect(ctx: Ctx, x: number, y: number, w: number, h: number, color: string) {
+  if (w <= 0 || h <= 0) return;
+  ctx.fillStyle = color; ctx.fillRect(Math.round(x * 2) / 2, Math.round(y * 2) / 2, Math.round(w * 2) / 2, Math.round(h * 2) / 2);
+}
+export function mainTimber(ctx: Ctx, x: number, y: number, w: number, h: number, vertical = false) {
+  const r = (a:number,b:number,c:number,d:number,col:string) => artRect(ctx,x+a,y+b,c,d,col);
+  r(0,0,w,h,walnut[0]); r(.5,.5,w-1,h-1,oak[2]);
+  r(1,1,Math.max(.5,w-2),Math.max(.5,h-2),oak[3]);
+  r(.5,.5,vertical ? .5 : w-1,vertical ? h-1 : .5,oak[4]);
+  r(w-1,1,.5,h-1,walnut[0]); r(1,h-1,w-1,.5,walnut[0]);
+  if(!vertical && h>=4) {r(1,h-2,w-2,1,oak[2]);r(1,h-1.5,w-2,.5,walnut[2]);}
+  if(vertical && w>=4) {r(w-2,1,1,h-2,oak[2]);r(w-1.5,1,.5,h-2,walnut[2]);}
+  if (vertical) for(let yy=3;yy<h-3;yy+=11) r(2,yy,.5,Math.min(7,h-yy-2),oak[3]);
+  else for(let xx=4;xx<w-5;xx+=19) r(xx,2,Math.min(11,w-xx-2),.5,oak[3]);
+}
+/** Six-value joinery ramps: shadow, recess, molding, field, lit bevel, gleam. */
+export function counterMaterial(id: string): readonly string[] {
+  if (id === 'counter_walnut') return [walnut[0], walnut[0], walnut[1], walnut[2], walnut[3], oak[2]];
+  if (id === 'counter_pink') return [walnut[0], rose[0], rose[0], rose[1], rose[2], cream[2]];
+  if (id === 'counter_marble') return [walnut[0], cream[0], artRamp('steel')[3], cream[1], cream[2], floor[5]];
+  if (id === 'counter_gold') return [walnut[0], oak[0], oak[2], artRamp('wall')[1], artRamp('wall')[3], artRamp('wall')[4]];
+  return [walnut[0], walnut[1], walnut[2], walnut[3], oak[2], oak[4]];
+}
+function brassPull(ctx: Ctx, cx: number, y: number) {
+  const r = (x:number,dy:number,w:number,h:number,c:string) => artRect(ctx,cx+x,y+dy,w,h,c);
+  r(-2.5,.5,5,1.5,walnut[0]);
+  r(-2.5,0,1,1.5,oak[2]); r(1.5,0,1,1.5,oak[2]);
+  r(-2,0,.5,1,oak[5]); r(1.5,0,.5,1,oak[5]);
+  r(-1.5,1,3,.5,oak[3]); r(-1.5,.5,3,.5,oak[5]);
+}
+function raisedPanel(ctx: Ctx, x:number,y:number,w:number,h:number,m:readonly string[],pull=true) {
+  const r = (a:number,b:number,c:number,d:number,col:string) => artRect(ctx,x+a,y+b,c,d,col);
+  r(0,0,w,h,m[0]); r(.5,.5,w-1,h-1,m[2]);
+  r(.5,.5,w-1,.5,m[5]); r(.5,1,.5,h-1.5,m[4]);
+  r(w-1,1,.5,h-1.5,m[1]); r(1,h-1,w-1,.5,m[1]);
+  if(h>=8) {
+    // A dark cove, a bright inner bevel and a raised central field.
+    r(2,2,w-4,h-4,m[1]);
+    r(2.5,2.5,w-5,h-5,m[0]);
+    r(3,3,w-6,h-6,m[3]);
+    r(3,3,w-6,.5,m[4]); r(3,3.5,.5,h-6.5,m[4]);
+    r(w-3.5,3.5,.5,h-6.5,m[1]); r(3.5,h-3.5,w-7,.5,m[1]);
+    if(h>=11) {
+      r(4,h-5,w-8,1,m[2]);
+      // Restrained long fibres, not a noisy grain or a second contour.
+      r(5,5,Math.max(1,(w-10)*.45),.5,m[4]);
+      r(w-8,h-6,3,.5,m[3]);
+    }
+  }
+  if(pull) brassPull(ctx,x+w/2,y+1.5);
+  }
+  ctx.restore();
+}
+
+export function extensionWindowPatch(ctx: Ctx, originX: number, width: number, floor: number, sun: Sun): void {
+  if (sun.elevation <= 0 || sun.strength <= 0) return;
+  const { lean, length } = beam(sun);
+  ctx.save(); ctx.fillStyle = artRamp('wall')[4];
+  for (let row = 0; row < length; row += .5) {
+    const progress = row / length;
+    if (progress > .36 && progress < .40) continue;
+    ctx.globalAlpha = sun.strength * .38 * Math.min(1, (1 - progress) * 12);
+    for (let pane = 0; pane < 2; pane++) {
+      artRect(ctx, originX + progress * lean + pane * width / 2, floor + row, width / 2 - 2, .5, artRamp('wall')[4]);
+    }
+  }
+  ctx.restore();
+}
+25:export function paintContactShade(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, opacity: number) {
+26-  ctx.save(); ctx.fillStyle = '#42251a';
+27-  const rx = width / 2, ry = width >= 30 ? 5 : 2.5;
+28-  for (let row = -ry; row <= ry; row += .5) {
+29-    const edge = Math.sqrt(Math.max(0, 1 - (row / ry) ** 2));
+30-    ctx.globalAlpha = Math.min(1, opacity * (1.1 + .5 * edge));
+31-    ctx.fillRect(Math.round((x - rx * edge) * 2) / 2, y + row, Math.round(width * edge * 2) / 2, .5);
+32-  }
+33-  ctx.globalAlpha = Math.min(1, opacity * 1.8);
+34-  ctx.fillRect(Math.round((x - width * .23) * 2) / 2, y - .5, Math.round(width * .46 * 2) / 2, 1);
+35-  ctx.restore();
+36-}
+37-
+38-/** A restrained, tapered floor projection. Separate from contact AO so the
+39- * whole cast pass can sort BELOW every actor/chair, not over its neighbours. */
+40-export function paintCastShade(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, reach: number, strength: number) {
+41-  if (strength <= 0) return;
+42-  ctx.save(); ctx.fillStyle = '#55301f';
+43-  const ry = width >= 30 ? 5 : 3, vector = mainCastVector(reach);
+44-  for (let row = -ry; row <= vector.y + ry; row += .5) {
+45-    const t = Math.max(0, Math.min(1, row / vector.y));
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { rolldown } from 'rolldown';
+import woff2 from 'wawoff2';
+import { decodePng, encodePng } from './pixel-conform.mjs';
+
+const out = 'artifacts/art-grid/round-3';
+fs.mkdirSync(out, { recursive: true });
+const zh = JSON.parse(fs.readFileSync('src/locales/zh.json'));
+const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'extension-qa-'));
+let rasters;
+try {
+  const font = path.join(temporary, 'pixel.ttf');
+  fs.writeFileSync(font, await woff2.decompress(fs.readFileSync('src/assets/pixel-zh.woff2')));
+  const result = spawnSync('swift', ['-module-cache-path', path.join(temporary, 'modules'), 'scripts/art-grid-offline-fonts.swift', font, Object.entries(zh).filter(([key]) => key.startsWith('thought.')).map(([, text]) => text).join('')], { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 });
+  if (result.status !== 0) throw new Error(result.stderr);
+  rasters = JSON.parse(result.stdout);
+} finally { fs.rmSync(temporary, { recursive: true, force: true }); }
+
+class SoftwareCanvas {
+  constructor(width = 1, height = 1) { this.width = width; this.height = height; }
+  set width(value) { this.rectWidth = Math.round(value); this.pixels = null; }
+  get width() { return this.rectWidth; }
+  set height(value) { this.rectHeight = Math.round(value); this.pixels = null; }
+  get height() { return this.rectHeight; }
+  get data() { return this.pixels ??= new Uint8ClampedArray(this.rectWidth * this.rectHeight * 4); }
+  getContext() { return this.ctx ??= new SoftwareContext(this); }
+}
+class SoftwareImage extends SoftwareCanvas {
+  get naturalWidth() { return this.width; }
+  get naturalHeight() { return this.height; }
+}
+class SoftwareContext {
+  constructor(canvas) { this.canvas = canvas; this.fillStyle = '#000000'; this.globalAlpha = 1; this.transform = [1, 1, 0, 0]; this.stack = []; this.box = null; this.points = []; }
+  save() { this.stack.push([this.fillStyle, this.globalAlpha, [...this.transform], this.box, this.globalCompositeOperation]); }
+  restore() { [this.fillStyle, this.globalAlpha, this.transform, this.box, this.globalCompositeOperation] = this.stack.pop(); }
+  scale(positionX, positionY) { this.transform[0] *= positionX; this.transform[1] *= positionY; }
+  translate(positionX, positionY) { this.transform[2] += positionX * this.transform[0]; this.transform[3] += positionY * this.transform[1]; }
+  getTransform() { const [scaleX,scaleY,translateX,translateY]=this.transform;return {'a':scaleX,'b':0,'c':0,'d':scaleY,'e':translateX,'f':translateY}; }
+  setTransform(scaleX,_b,_c,scaleY,translateX,translateY) { this.transform=[scaleX,scaleY,translateX,translateY]; }
+  beginPath() { this.points = []; this.pending = null; this.circle = null; }
+  rect(positionX, positionY, rectWidth, rectHeight) { const [sx, sy, tx, ty] = this.transform; this.pending = [positionX * sx + tx, positionY * sy + ty, rectWidth * sx, rectHeight * sy]; }
+  clip() { this.box = this.pending; }
+  moveTo(positionX, positionY) { this.points.push([positionX, positionY]); }
+  lineTo(positionX, positionY) { this.points.push([positionX, positionY]); }
+  closePath() {}
+  setLineDash() {}
+  arc(positionX, positionY, radius) { this.circle = [positionX, positionY, radius]; }
+  ellipse(positionX, positionY, rx, ry) { this.circle = [positionX, positionY, rx, ry]; }
+  fill() {
+    if (this.circle) {
+      const [cx, cy, rx, ry = rx] = this.circle;
+      for (let positionY = cy - ry; positionY < cy + ry; positionY += .5) { const half = rx * Math.sqrt(Math.max(0, 1 - ((positionY + .25 - cy) / ry) ** 2)); this.fillRect(cx - half, positionY, half * 2, .5); }
+    } else if (this.pending) {
+      const old = this.transform; this.transform = [1, 1, 0, 0]; this.fillRect(...this.pending); this.transform = old;
+    }
+import { describe, expect, it } from 'vitest';
+import palette from '../../docs/art-grid/palette.json';
+import { extensionFloor, extensionLampPool, extensionRunner, extensionWindowPatch, readingDoor, readingDoorFrame, readingFurnishing } from './extension-surfaces';
+import { remapTablecloth } from './extension-table-art';
+import { lightingAt, roomAmbient } from './lighting';
+import { thoughtTextWidth, wrapThoughtText } from './thought-text';
+
+function record(paint: (ctx: CanvasRenderingContext2D) => void) {
+  const marks: { left: number; top: number; width: number; height: number; color: string; alpha: number }[] = [];
+  const stack: number[] = [];
+  const ctx = {
+    fillStyle: '', globalAlpha: 1,
+    save(this: {globalAlpha: number}) { stack.push(this.globalAlpha); }, restore(this: {globalAlpha: number}) { this.globalAlpha = stack.pop()!; },
+    beginPath() {}, rect() {}, clip() {},
+    fillRect(this: {fillStyle: string; globalAlpha: number}, left: number, top: number, width: number, height: number) { marks.push({ left, top, width, height, color: this.fillStyle, alpha: this.globalAlpha }); },
+  } as unknown as CanvasRenderingContext2D;
+  paint(ctx); return marks;
+}
+
+describe('extension room native artwork', () => {
+  it('uses master-palette pigment and half-room-pixel cells for every new surface', () => {
+    const colors = new Set(palette.colors.map(color => color.hex));
+    const marks = record(ctx => {
+      for (const area of ['reading', 'greenhouse', 'terrace', 'kitchen'] as const) {
+        extensionFloor(ctx, area, 80, 240);
+        extensionRunner(ctx, area, 145, 80, 30, 140, 'v');
+        extensionRunner(ctx, area, 0, 130, 175, 14, 'h');
+      }
+      readingDoor(ctx, 80);
+      readingFurnishing(ctx, 'armchair', 115, 102);
+      readingFurnishing(ctx, 'lamp', 100, 98);
+    });
+    for (const mark of marks) {
+      expect(colors.has(mark.color), mark.color).toBe(true);
+      for (const value of [mark.left, mark.top, mark.width, mark.height]) expect(Number.isInteger(value * 2)).toBe(true);
+    }
+  });
+  it('keeps floor paint below the wall and uses calm tile fields, not checker fills', () => {
+zsh:1: no matches found: scripts/*software*
+163:      "ramp": "gingham",
+169:      "ramp": "gingham",
+175:      "ramp": "gingham",
+181:      "ramp": "gingham",
+187:      "ramp": "gingham",
+193:      "ramp": "gingham",
+385:      "ramp": "brass",
+391:      "ramp": "brass",
+397:      "ramp": "brass",
+403:      "ramp": "brass",
+
+exec
+/bin/zsh -lc "sed -n '8,28p' src/render/main-room-surfaces.ts; sed -n '137,190p' src/render/extension-surfaces.ts; rg -n -A15 'export function paintContactShade' src/render/main-room-lighting.ts; rg -n 'fillRect|floor|window|beam' src/render/decor-art.ts | head -55; sed -n '1,30p' scripts/extension-room-qa.mjs; sed -n '100,137p' src/render/region-art.ts; node -e \"const p=require('./docs/art-grid/palette.json'); for(const r of ['gingham','brass','cloth-7','cloth-5','walnut'])console.log(r,p.colors.filter(c=>c.ramp===r).map(c=>c.hex));\"" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 116ms:
+gingham [ '#8c2b20', '#b54634', '#e26443', '#fb8e61', '#fbd39c', '#feefb9' ]
+brass [ '#6f3a17', '#a15b1f', '#e99835', '#f3bd6a', '#fde083' ]
+cloth-7 [ '#a28e85', '#e5d7ba', '#efdfbe' ]
+cloth-5 [ '#956575', '#cf929e', '#e1b4ac' ]
+walnut [ '#42251a', '#55301f', '#703d23', '#8a4a25', '#ae602b', '#d57c33' ]
+(node:90525) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+exec
+/bin/zsh -lc "cat src/render/main-room-lighting.ts | head -25; rg -n 'patch|window' src/render/main-room-lighting.ts; sed -n '1,10p' src/render/main-room-surfaces.ts; rg -n 'remapTablecloth|extensionTable' src/render/phaser/cafe-scene.ts src/render/*; rg -n 'ensemble|seated|cloth' src/render/cozy-seating* src/render/generated-table*; rg -n 'usage|check|process.argv' scripts/pixel-conform.mjs | tail -15; ls artifacts/art-grid/round-3b; sed -n '1,80p' src/render/grid-safe* 2>/dev/null" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ exited 1 in 107ms:
+brief.md
+codex-run.log
+review-glasshouse-day.png
+review-reading-corner.png
+review-reading-day.png
+review-reading-night.png
+zsh:1: no matches found: src/render/grid-safe*
+
+codex
+The chairs use lilac, and light paints over them. I’ll add warm shading, simplify the cloth, and move window light behind furniture.
+
+  ✓ Inspect captures and reading-room rendering
+  → Redraw targeted reading-room details
+  • Render and verify scoped changes
+exec
+/bin/zsh -lc "sed -n '56,89p' src/render/main-room-lighting.ts; sed -n '552,574p' src/render/phaser/cafe-scene.ts; cat src/render/cozy-seating-art.ts | head -105; rg -n 'gridSafeContext|SoftwareContext|rolldown' scripts/extension-room-qa.mjs" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 0ms:
+/** Golden window footprints: two separated panes, fixed upper-left key, with
+ * a small feather at the far edge. Half-pixel scanlines avoid vector AA. */
+export function paintWindowBounce(ctx: CanvasRenderingContext2D, x: number, width: number, floorY: number, sun: Sun) {
+  const key = mainKeyLight(sun);
+  if (!key.strength) return;
+  const reach = key.length;
+  ctx.save(); ctx.fillStyle = '#fee8ac';
+  for (let row = 0; row < reach; row += .5) {
+    const t = row / reach, feather = Math.min(1, (1 - t) * 12);
+    const left = x + row * MAIN_KEY_SLOPE;
+    // The crossbar cuts a quiet shadow through the projected panes.
+    if (t > .36 && t < .40) continue;
+    ctx.globalAlpha = key.strength * .48 * feather;
+    for (let pane = 0; pane < 2; pane++) {
+      const px = Math.round((left + pane * width / 2) * 2) / 2;
+      ctx.fillRect(px, floorY + row, Math.round((width / 2 - 2) * 2) / 2, .5);
+      ctx.globalAlpha = key.strength * .12 * feather;
+      ctx.fillRect(px - 1, floorY + row, 1, .5);
+      ctx.globalAlpha = key.strength * .48 * feather;
+    }
+  }
+  ctx.restore();
+}
+
+/** Soft object exposure follows the same diagonal and reach as the floor panes. */
+export function mainSurfaceLight(x: number, y: number, light: Lighting, openings: readonly {x: number; w: number}[]) {
+  const key = mainKeyLight(light.sun);
+  if (key.strength === 0) return 0;
+  const reach = key.length;
+  const row = Math.max(0, y - 80), t = row / reach;
+  if (t >= 1) return 0;
+  let coverage = 0;
+  for (const opening of openings) {
+    const center = opening.x + opening.w / 2 + row * MAIN_KEY_SLOPE;
+    return image;
+  }
+
+  private generatedPicture(id: GeneratedMainId, x: number, y: number, width: number, height: number, depth: number, area: AreaId = 'main'): Phaser.GameObjects.Image | null {
+    const key = generatedMainKey(id);
+    if (!generatedMainSource(id) || !this.textures.exists(key)) return null;
+    // Resample the painting once to the exact art pixels it covers, instead of scaling it per frame.
+    const w = Math.max(1, Math.round(width * WORLD_ART_DENSITY)), h = Math.max(1, Math.round(height * WORLD_ART_DENSITY));
+    const gridKey = `${key}@${w}x${h}${area === 'main' ? '' : ':' + area}`;
+    if (!this.textures.exists(gridKey)) {
+      const frame = this.textures.getFrame(key);
+      const resampled = resampleImage(frame.source.image as HTMLImageElement, frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight, w, h);
+      if (area === 'main') this.textures.addCanvas(gridKey, resampled);
+      else {
+        const variant = document.createElement('canvas'); variant.width = w; variant.height = h;
+        const ctx = variant.getContext('2d')!; ctx.drawImage(resampled, 0, 0);
+        const pixels = ctx.getImageData(0, 0, w, h); remapTablecloth(pixels.data, w, h, area); ctx.putImageData(pixels, 0, 0);
+        this.textures.addCanvas(gridKey, variant);
+      }
+    }
+    return this.image(gridKey, x, y, depth).setScale(1 / WORLD_ART_DENSITY);
+  }
+
+import { registerFineSpriteArt } from './fine-sprite-art';
+
+type Identity = 'owner' | 'guest';
+type Point = { x: number; y: number };
+type Box = readonly [number, number, number, number];
+type Spec = { box: Box; anchor: Point; scale: number; foreground?: readonly Point[]; hand?: Point };
+const D = 3;
+export const SEATING_LAYOUT = Object.freeze({ seatX: 25, floorY: 1, surfaceY: -22 });
+let atlas: HTMLImageElement | null = null, petAtlas: HTMLImageElement | null = null;
+let idleAtlas: HTMLImageElement | null = null;
+let pending: Promise<void> | null = null, epoch = 0;
+const cache = new Map<string, HTMLCanvasElement>();
+const metadata = new WeakMap<HTMLCanvasElement, { foreground: HTMLCanvasElement; floor: Point; hip: Point; petContact?: Point }>();
+const normal: Record<Identity, Spec> = {
+  owner:{box:[225,10,839,855],anchor:{x:418,y:855},scale:.0445,
+    foreground:[{x:270,y:10},{x:839,y:10},{x:839,y:484},{x:430,y:484},{x:395,y:335},{x:300,y:290}]},
+  guest:{box:[987,34,1592,855],anchor:{x:1173,y:855},scale:.0445,
+    foreground:[{x:1030,y:34},{x:1592,y:34},{x:1592,y:490},{x:1210,y:510},{x:1080,y:500},{x:1030,y:305}]}
+};
+const pets: Record<Identity, readonly Spec[]> = {
+  owner: [
+    {box:[155,28,580,619],anchor:{x:287,y:619},scale:.065,hand:{x:551,y:380},
+      foreground:[{x:205,y:28},{x:580,y:28},{x:580,y:401},{x:451,y:391},{x:337,y:383},{x:282,y:321},{x:250,y:225},{x:205,y:205}]},
+    {box:[700,28,1135,619],anchor:{x:834,y:619},scale:.065,hand:{x:1099,y:410},
+      foreground:[{x:750,y:28},{x:1135,y:28},{x:1135,y:430},{x:1025,y:392},{x:884,y:383},{x:830,y:321},{x:800,y:225},{x:750,y:205}]}
+  ],
+  guest: [
+    {box:[155,640,602,1225],anchor:{x:288,y:1225},scale:.065,hand:{x:578,y:968},
+      foreground:[{x:198,y:640},{x:602,y:640},{x:602,y:991},{x:493,y:980},{x:332,y:978},{x:243,y:928},{x:198,y:834}]},
+    {box:[700,640,1142,1225],anchor:{x:834,y:1225},scale:.065,hand:{x:1120,y:1006},
+      foreground:[{x:745,y:640},{x:1142,y:640},{x:1142,y:1029},{x:1030,y:993},{x:878,y:978},{x:790,y:928},{x:745,y:834}]}
+  ]
+};
+function canvas(w:number,h:number) { const c=document.createElement('canvas'); c.width=w;c.height=h;return c; }
+export function clearSeatingEnsemble():void {epoch++;atlas=null;petAtlas=null;idleAtlas=null;pending=null;cache.clear();}
+export function preloadSeatingEnsemble():Promise<void> {
+  if(atlas&&petAtlas&&idleAtlas)return Promise.resolve();
+  if(pending)return pending;
+  const generation=epoch;
+  pending=Promise.all(['ensemble.png','petting.png','idle-v4.png'].map(async name=>{
+    const image=new Image();image.src=import.meta.env.BASE_URL+'art/generated/cozy-seating-v3/'+name;
+    await image.decode();return image;
+  })).then(([a,p,i])=>{if(generation===epoch){atlas=a;petAtlas=p;idleAtlas=i;}}).catch(error=>{if(generation===epoch)pending=null;throw error;});
+  return pending;
+}
+function make(spec:Spec,image:HTMLImageElement,mirror:boolean,w=34,h=42):HTMLCanvasElement {
+  const art=canvas(w*D,h*D),ctx=art.getContext('2d')!;
+  const [x,y,r,b]=spec.box;
+  const dx=13-(spec.anchor.x-x)*spec.scale,dy=41-(spec.anchor.y-y)*spec.scale;
+  ctx.imageSmoothingEnabled=false;
+  if(mirror){ctx.translate(w*D,0);ctx.scale(-1,1);}
+  ctx.drawImage(image,x,y,r-x,b-y,dx*D,dy*D,(r-x)*spec.scale*D,(b-y)*spec.scale*D);
+  // Remove only near-transparent edge noise; never infer furniture/character silhouettes from RGB.
+  const pixels=ctx.getImageData(0,0,art.width,art.height);
+  for(let n=3;n<pixels.data.length;n+=4)if(pixels.data[n]<100)pixels.data[n]=0;
+  ctx.putImageData(pixels,0,0);
+  const frame=canvas(w,h);frame.getContext('2d')!.drawImage(art,0,0,w,h);registerFineSpriteArt(frame,art,D);
+  const point=(p:Point):Point=>({x:mirror?w-(13+(p.x-spec.anchor.x)*spec.scale):13+(p.x-spec.anchor.x)*spec.scale,y:41+(p.y-spec.anchor.y)*spec.scale});
+  if(spec.foreground){
+    const foreground=canvas(w,h),high=canvas(w*D,h*D),f=high.getContext('2d')!;
+    f.beginPath();spec.foreground.forEach((p,i)=>{const q=point(p);i?f.lineTo(q.x*D,q.y*D):f.moveTo(q.x*D,q.y*D);});f.closePath();f.clip();f.drawImage(art,0,0);
+    foreground.getContext('2d')!.drawImage(high,0,0,w,h);registerFineSpriteArt(foreground,high,D);
+    metadata.set(frame,{foreground,floor:{x:mirror?w-13:13,y:41},hip:{x:mirror?w-13:13,y:27},...(spec.hand?{petContact:point(spec.hand)}:{})});
+  }
+  return frame;
+}
+export function seatingUnit(identity:Identity,mirror=false,petFrame?:number):HTMLCanvasElement|undefined {
+  if(!atlas||!petAtlas||!idleAtlas)return;
+  const key=identity+':'+mirror+':'+(petFrame??'normal');if(cache.has(key))return cache.get(key);
+  const frame=make(petFrame===undefined?normal[identity]:pets[identity][petFrame%2],petFrame===undefined?idleAtlas:petAtlas,mirror);
+  cache.set(key,frame);return frame;
+}
+export function seatingGeometry(frame:HTMLCanvasElement){return metadata.get(frame);}
+export function seatingFurniture(part:'table'|'chair',mirror=false):HTMLCanvasElement|undefined {
+  if(!atlas)return;
+  const key=part+':'+mirror;if(cache.has(key))return cache.get(key);
+  if(part==='chair'){
+    const frame=make({box:[805,77,1153,532],anchor:{x:966,y:532},scale:.054},atlas,mirror);
+    cache.set(key,frame);return frame;
+  }
+  const frame=canvas(40,30),art=canvas(120,90),ctx=art.getContext('2d')!;
+  ctx.imageSmoothingEnabled=false;ctx.drawImage(atlas,88,71,608,457,3,3,114,85.6875);
+  const pixels=ctx.getImageData(0,0,120,90);for(let n=3;n<pixels.data.length;n+=4)if(pixels.data[n]<100)pixels.data[n]=0;ctx.putImageData(pixels,0,0);
+  frame.getContext('2d')!.drawImage(art,0,0,40,30);registerFineSpriteArt(frame,art,D);cache.set(key,frame);return frame;
+}
+
+/** Register newly authored cast units with the shared scene chair/foreground contract. */
+export function registerSeatingUnit(frame:HTMLCanvasElement,geometry:{foreground:HTMLCanvasElement;floor:{x:number;y:number};hip:{x:number;y:number};petContact?:{x:number;y:number}}):void {metadata.set(frame,geometry);}
+5:import { rolldown } from 'rolldown';
+29:  getContext() { return this.ctx ??= new SoftwareContext(this); }
+35:class SoftwareContext {
+111:const bundle = await rolldown({input:'qa',plugins:[{name:'qa',resolveId:id=>id==='qa'?id:null,load:id=>id==='qa'?files.map(file=>`export * from ${JSON.stringify(path.resolve('src',file+'.ts'))};`).join('\n'):null}]});
+129:function board(width=320,height=240) { const canvas=new SoftwareCanvas(width*2,height*2),ctx=art.gridSafeContext(canvas.getContext('2d'));ctx.scale(2,2);ctx.fillStyle='#efdfbe';ctx.fillRect(0,0,width,height);return {canvas,ctx}; }
+
+exec
+/bin/zsh -lc "command -v apply_patch; sed -n '96,120p' scripts/extension-room-qa.mjs; sed -n '202,238p' scripts/pixel-conform.mjs" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 0ms:
+/Users/lalaze/.codex/tmp/arg0/codex-arg0qkrBBM/apply_patch
+  fillText(text) { this.text = text; }
+  getImageData(positionX,positionY,rectWidth,rectHeight) {
+    if (this.text) return { data: Buffer.from(rasters[(this.font.includes('"Pixel ZH"')?'pixel':'platform')+':'+this.text] ?? '', 'base64') };
+    const data = new Uint8ClampedArray(rectWidth*rectHeight*4);
+    for (let row = 0; row < rectHeight; row++) for (let col = 0; col < rectWidth; col++) data.set(this.canvas.data.subarray(((positionY+row)*this.canvas.width+positionX+col)*4,((positionY+row)*this.canvas.width+positionX+col)*4+4),(row*rectWidth+col)*4);
+    return {data,width:rectWidth,height:rectHeight};
+  }
+  putImageData(image,positionX,positionY) { const width = image.width ?? this.canvas.width, height = image.height ?? this.canvas.height; for(let row=0;row<height;row++)for(let col=0;col<width;col++)this.canvas.data.set(image.data.subarray((row*width+col)*4,(row*width+col)*4+4),((row+positionY)*this.canvas.width+col+positionX)*4); }
+}
+globalThis.document = { createElement: () => new SoftwareCanvas(), fonts: new Set([{family:'Pixel ZH',status:'loaded'}]) };
+globalThis.HTMLCanvasElement = SoftwareCanvas;
+globalThis.HTMLImageElement = SoftwareImage;
+globalThis.ImageData = class { constructor(data,width,height) { Object.assign(this,{data,width,height}); } };
+
+const files = ['render/extension-surfaces','render/extension-table-art','render/region-art','render/kitchen-art','render/passages','render/generated-main-art','render/generated-furniture-art','render/generated-decor-art','render/cozy-furniture-assets','render/cozy-materials','render/main-room-surfaces','render/main-room-lighting','render/world-art-grid','render/thought-text','render/thought-bubbles','render/sign-lettering','render/lighting','render/materials','game/state','game/layout','game/kitchen'];
+const bundle = await rolldown({input:'qa',plugins:[{name:'qa',resolveId:id=>id==='qa'?id:null,load:id=>id==='qa'?files.map(file=>`export * from ${JSON.stringify(path.resolve('src',file+'.ts'))};`).join('\n'):null}]});
+const {output} = await bundle.generate({format:'esm'}); await bundle.close();
+const art = await import('data:text/javascript;base64,'+Buffer.from(output.find(item=>item.type==='chunk').code).toString('base64'));
+const load = file => { const image = decodePng('public/art/generated/'+file), canvas = new SoftwareImage(image.width,image.height); canvas.pixels = image.pixels; return canvas; };
+for (const [key,file] of Object.entries(art.GENERATED_MAIN_ASSETS)) if (key.startsWith('cozy-region-') || key.startsWith('cozy-kitchen-')) art.installGeneratedMainAsset(key,load(file));
+art.setGeneratedFurnitureAdapter(art.createGeneratedFurnitureArt(Object.fromEntries(['bench','plant_lemon','plant_monstera','plant_fern'].map(id=>[id,load(art.GENERATED_MAIN_ASSETS['furniture-'+id])])),{catalog:art.COZY_FURNITURE_CATALOG}));
+art.setGeneratedDecorAdapter(art.createGeneratedDecorArt(Object.fromEntries(['floor_herringbone-tile'].map(id=>[id,load(art.GENERATED_MAIN_ASSETS['decor-'+id])])),{catalog:art.COZY_DECOR_CATALOG}));
+const palette = JSON.parse(fs.readFileSync('docs/art-grid/palette.json')).colors.map(color=>[1,3,5].map(index=>parseInt(color.hex.slice(index,index+2),16)));
+function save(canvas,name) {
+  const pixels = canvas.data.slice(), cache = new Map();
+function check() {
+  if (!positional.length) throw new Error('check needs at least one PNG');
+  const paletteFile = option('no-palette', false) ? null : option('palette', DEFAULT_PALETTE);
+  const allowed = paletteFile ? new Set(loadPalette(paletteFile).colours.map(hex)) : null;
+  const keepAlpha = option('keep-alpha', false);
+  let failed = 0;
+  for (const file of positional) {
+    const { width, height, pixels } = decodePng(file), off = new Set();
+    let partial = 0;
+    for (let i = 0; i < pixels.length; i += 4) {
+      const a = pixels[i + 3];
+      if (!a) continue;
+      if (a !== 255) partial++;
+      const colour = hex([pixels[i], pixels[i + 1], pixels[i + 2]]);
+      if (allowed && !allowed.has(colour)) off.add(colour);
+    }
+    const ok = !off.size && (keepAlpha || !partial);
+    if (!ok) failed++;
+    console.log(`${ok ? 'PASS' : 'FAIL'} ${file} ${width}×${height} art px (${width / WORLD_ART_DENSITY}×${height / WORLD_ART_DENSITY} room px)` +
+      (off.size ? ` · ${off.size} off-palette colours (${[...off].slice(0, 6).join(' ')}${off.size > 6 ? ' …' : ''})` : '') +
+      (partial && !keepAlpha ? ` · ${partial} partially transparent pixels` : ''));
+  }
+  if (failed) process.exitCode = 1;
+}
+
+function palette() {
+  const out = option('out'), wanted = Number(option('colors', 48));
+  if (!positional.length || !out) throw new Error('palette needs reference PNGs and --out');
+  const samples = [];
+  for (const file of positional) {
+    const { pixels } = decodePng(file);
+    for (let i = 0; i < pixels.length; i += 4 * 7) if (pixels[i + 3] > 200) samples.push([pixels[i], pixels[i + 1], pixels[i + 2]]);
+  }
+  const points = samples.map(c => ({ rgb: c, lab: oklab(...c) }));
+  // k-means++ in OKLab, deterministic seeding.
+  let seed = 7; const random = () => (seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0) / 4294967296;
+  const centres = [points[Math.floor(random() * points.length)].lab];
+
+exec
+/bin/zsh -lc "apply_patch <<'PATCH'
+*** Begin Patch
+*** Update File: scripts/extension-room-qa.mjs
+@@
+-const out = 'artifacts/art-grid/round-3';
++const out = process.env.ART_GRID_OUT ?? 'artifacts/art-grid/round-3';
+*** End Patch
+PATCH
+ART_GRID_OUT=/tmp/reading-3b-before node scripts/extension-room-qa.mjs > /tmp/reading-3b-before.log 2>&1" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 4590ms:
+Success. Updated the following files:
+M scripts/extension-room-qa.mjs
+
+exec
+/bin/zsh -lc "apply_patch <<'PATCH'
+*** Begin Patch
+*** Update File: src/render/extension-surfaces.ts
+@@
+   if (kind === 'lamp') {
+-    draw(-4, -1, 8, 1.5, walnut[0]); draw(-3, -2, 6, 1, oak[3]);
+-    draw(-.5, -24, 1, 22, walnut[0]); draw(-.5, -23, .5, 20, oak[4]);
+-    draw(-1, -33, 2, 1, oak[4]);
++    const brass = artRamp('brass');
++    draw(-4, -1, 8, 1.5, walnut[0]); draw(-3.5, -1.5, 7, 1, brass[1]);
++    draw(-2.5, -2, 5, .5, brass[3]); draw(1, -1, 2.5, .5, brass[0]);
++    draw(-.5, -24, 1.5, 22, brass[0]); draw(-.5, -24, .5, 21.5, brass[3]);
++    draw(0, -23, .5, 20.5, brass[2]);
++    draw(-1, -33, 2, 1, brass[1]); draw(-1, -33, 1, .5, brass[3]);
+     for (let row = 0; row < 16; row++) {
+       const half = 2 + Math.floor(row / 4);
+       draw(-half, -32 + row / 2, half * 2, .5, walnut[0]);
+-      draw(-half + .5, -32 + row / 2, half * 2 - 1, .5, cream[row < 2 ? 1 : 2]);
+-      if (row > 2) draw(half - 1.5, -32 + row / 2, 1, .5, cream[1]);
++      draw(-half + .5, -32 + row / 2, half * 2 - 1, .5, cream[1]);
++      draw(-half + .5, -32 + row / 2, half - .5, .5, cream[2]);
++      draw(half - 1, -32 + row / 2, .5, .5, cream[0]);
+     }
+-    draw(-5, -24, 10, .5, oak[3]); draw(-4.5, -23.5, 9, .5, cream[2]);
++    draw(-5, -24, 10, .5, brass[0]); draw(-4.5, -24, 8.5, .5, brass[3]);
++    draw(-4, -23.5, 8, .5, cream[1]);
+     return;
+   }
+-  const cloth = artRamp('cloth-5');
+-  draw(-10, -4, 2, 5, walnut[0]); draw(8, -4, 2, 5, walnut[0]);
++  const cloth = artRamp('gingham');
++  for (const originX of [-10, 8]) {
++    draw(originX, -4, 2, 5, walnut[0]);
++    draw(originX + .5, -3, 1, 3.5, oak[2]);
++    draw(originX + .5, -3, .5, 2, oak[3]);
++  }
+   for (let row = 0; row < 34; row++) {
+     const inset = row < 2 ? 2 : row < 4 ? 1 : 0;
+     const top = -26 + row / 2;
+     draw(-9 + inset, top, 17 - inset * 2, .5, walnut[0]);
+     if (row > 0 && row < 33) {
+       draw(-8.5 + inset, top, 16 - inset * 2, .5, cloth[0]);
+-      draw(-8 + inset, top, 13.5 - inset * 2, .5, cloth[1]);
++      draw(-8 + inset, top, 13 - inset * 2, .5, cloth[1]);
+     }
+   }
+-  draw(-6, -25, 10, .5, cloth[2]); draw(-7.5, -23.5, .5, 9, cloth[2]);
+-  draw(-.5, -20, 1, .5, cloth[0]); draw(0, -19.5, .5, 1, cloth[2]);
++  draw(-6, -25, 10, .5, cloth[2]); draw(-7.5, -23.5, .5, 9, cloth[2]);
++  draw(-6.5, -24, 11.5, .5, cloth[0]); draw(-6.5, -23.5, .5, 9, cloth[0]);
++  draw(4.5, -23.5, .5, 10, cloth[0]); draw(-6, -14, 11, .5, cloth[0]);
++  for (const originX of [-3.5, 1.5]) {
++    draw(originX, -21, 1, .5, cloth[0]); draw(originX + .5, -20.5, .5, .5, cloth[2]);
++  }
++  draw(-6, -10, 12, 7, walnut[0]); draw(-5.5, -9.5, 11, 5.5, cloth[0]);
++  draw(-5.5, -10, 10.5, 2.5, cloth[1]); draw(-5, -10, 9.5, .5, cloth[2]);
++  draw(-5.5, -7.5, 10.5, .5, walnut[0]); draw(-5, -7, 9.5, .5, cloth[2]);
+   for (const [originX, top] of [[-12, -15], [6, -14]] as const) {
+-    draw(originX + 1, top - .5, 4, .5, walnut[0]); draw(originX, top, 6, 11, walnut[0]);
+-    draw(originX + .5, top, 5, 10.5, cloth[0]); draw(originX + .5, top + .5, 4, 8.5, cloth[1]);
+-    draw(originX + 1, top, 3, .5, cloth[2]); draw(originX + 1, top + 1, .5, 5, cloth[2]);
+-    draw(originX + 3.5, top + 7, .5, 2, cloth[0]);
++    draw(originX + 1, top - 1, 4, .5, walnut[0]); draw(originX + .5, top - .5, 5, 1, walnut[0]);
++    draw(originX, top + .5, 6, 10.5, walnut[0]);
++    draw(originX + .5, top, 5, 10.5, cloth[0]); draw(originX + .5, top + .5, 3.5, 8.5, cloth[1]);
++    draw(originX + 1, top, 3, .5, cloth[2]); draw(originX + .5, top + 1, .5, 5, cloth[2]);
++    draw(originX + 4, top + 1, .5, 8.5, cloth[0]); draw(originX + .5, top + 9.5, 4, .5, walnut[0]);
+   }
+-  draw(-6, -10, 12, 6, cloth[0]); draw(-6, -10, 11, 3, cloth[1]);
+-  draw(-5.5, -10, 10, .5, cloth[2]); draw(-5, -7, 10, .5, cloth[2]);
+   draw(-8, -3.5, 16, 1, walnut[2]);
++  draw(-8, -3.5, 15, .5, oak[3]);
+ }
+*** Update File: src/render/region-art.ts
+@@
+ import { extensionFloor, extensionRunner, extensionWindowPatch, readingDoor, readingFurnishing } from './extension-surfaces';
++import { paintWindowBounce } from './main-room-lighting';
+@@
+   const furnishing = (kind: 'armchair' | 'lamp', x: number, foot: number) => {
+     if (locked) paintFloorFurniture(ctx, kind, x, foot);
+-    else readingFurnishing(ctx, kind, x, foot);
+   };
+@@
+   } else if (reading) {
+-    extensionWindowPatch(ctx, 113, 24, FLOOR_Y, light.sun);
+-    extensionWindowPatch(ctx, 183, 24, FLOOR_Y, light.sun);
++    for (const x of [113, 183]) paintWindowBounce(ctx, x, 24, FLOOR_Y, light.sun);
+   } else for (const x of [20, 128, 236]) extensionWindowPatch(ctx, x, 34, FLOOR_Y, light.sun);
++
++  if (reading && "'!locked) {
++    readingFurnishing(ctx, '"'armchair', 115, floorY(102));
++    readingFurnishing(ctx, 'armchair', 206, floorY(102));
++    readingFurnishing(ctx, 'lamp', 100, floorY(98));
++  }
+*** Update File: src/render/extension-table-art.ts
+@@
+-    const color = area === 'reading' && level < .34 ? trim[0] : colors[Math.min(colors.length - 1, Math.floor(level * colors.length))];
++    const edge = col === 0 || col === width - 1 || row === 0 || row === height - 1
++      || "'!pixels[offset - 4 + 3] || !pixels[offset + 4 + 3]
++      || !pixels[offset - width * 4 + 3] || !pixels[offset + width * 4 + 3];
++    const color = area === '"'reading' ? edge && level < .34 ? trim[0] : colors[2] : colors[Math.min(colors.length - 1, Math.floor(level * colors.length))];
+*** End Patch
+PATCH
+ART_GRID_OUT=artifacts/art-grid/round-3b node scripts/extension-room-qa.mjs > artifacts/art-grid/round-3b/render.log 2>&1
+npx vitest run src/render/extension-surfaces.test.ts > artifacts/art-grid/round-3b/focused-tests.log 2>&1" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ exited 1 in 4809ms:
+exec
+/bin/zsh -lc "cat artifacts/art-grid/round-3b/focused-tests.log | tail -30; node --input-type=module <<'JS'
+import {decodePng} from './scripts/pixel-conform.mjs';
+const p=decodePng('public/art/generated/cozy-seating-v3/ensemble.png'); const colors=new Map();for(let y=150;y<280;y++)for(let x=220;x<600;x++){const o=(y*p.width+x)*4;const [r,g,b,a]=p.pixels.slice(o,o+4);if(a&&r>g+10&&b>=g*.75){const key=[r,g,b].join(',');colors.set(key,(colors.get(key)||0)+1)}} console.log([...colors].sort((a,b)=>b[1]-a[1]).slice(0,35));
+JS" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 186ms:
+[
+  [ '253,229,183', 97 ], [ '253,227,181', 96 ],
+  [ '253,228,182', 96 ], [ '253,228,183', 95 ],
+  [ '253,229,184', 95 ], [ '253,229,182', 92 ],
+  [ '252,131,101', 86 ], [ '253,228,181', 86 ],
+  [ '253,227,180', 85 ], [ '252,131,100', 82 ],
+  [ '253,228,184', 81 ], [ '252,130,100', 81 ],
+  [ '253,230,185', 80 ], [ '253,226,180', 79 ],
+  [ '252,226,180', 79 ], [ '252,129,99', 77 ],
+  [ '251,128,98', 77 ],  [ '251,126,97', 75 ],
+  [ '252,225,179', 74 ], [ '253,226,181', 72 ],
+  [ '253,230,186', 72 ], [ '252,137,106', 72 ],
+  [ '251,128,99', 71 ],  [ '251,124,96', 70 ],
+  [ '252,224,178', 69 ], [ '253,226,179', 68 ],
+  [ '251,124,95', 68 ],  [ '252,135,105', 68 ],
+  [ '252,137,105', 68 ], [ '253,227,182', 67 ],
+  [ '251,125,97', 67 ],  [ '253,228,180', 67 ],
+  [ '252,132,101', 67 ], [ '253,225,179', 66 ],
+  [ '253,230,184', 66 ]
+]
+
+exec
+/bin/zsh -lc "apply_patch <<'PATCH'
+*** Begin Patch
+*** Update File: src/render/extension-table-art.ts
+@@
+-    if ("'!pixels[offset + 3] || red - green < 24 || blue < green * .75 || green > red * .76) continue;
++    if (!pixels[offset + 3] || red - green < (area === '"'reading' ? 12 : 24) || blue < green * .75 || green > red * (area === 'reading' ? .96 : .76)) continue;
+@@
+-    const color = area === 'reading' ? edge && level < .34 ? trim[0] : colors[2] : colors[Math.min(colors.length - 1, Math.floor(level * colors.length))];
++    const color = area === 'reading' ? edge ? trim[0] : colors[row < height * .4 ? 2 : 1] : colors[Math.min(colors.length - 1, Math.floor(level * colors.length))];
+*** Update File: src/render/extension-surfaces.test.ts
+@@
+-    expect(back?.color).toBe(palette.colors.find(color => color.ramp === 'cloth-5' && color.index === 1)?.hex);
++    expect(back?.color).toBe(palette.colors.find(color => color.ramp === 'gingham' && color.index === 1)?.hex);
+     expect(marks.some(mark => mark.alpha < 1 && mark.top >= 99)).toBe(true);
++    expect(marks.some(mark => mark.color === '#e26443' && mark.top === 77)).toBe(true);
++    expect(marks.some(mark => mark.color === '#8c2b20' && mark.left === 119.5)).toBe(true);
++    expect(marks.some(mark => mark.color === '#42251a' && mark.height === 5)).toBe(true);
++    expect(marks.every(mark => mark.left >= 103 && mark.left + mark.width <= 127)).toBe(true);
++  });
++  it('shades the fabric lamp with brass hardware at its existing foot and shade anchors', () => {
++    const marks = record(ctx => readingFurnishing(ctx, 'lamp', 100, 98));
++    expect(marks.some(mark => mark.color === '#f3bd6a' && mark.top === 96)).toBe(true);
++    for (const color of ['#a28e85', '#e5d7ba', '#efdfbe']) expect(marks.some(mark => mark.color === color && mark.top < 75)).toBe(true);
++    expect(marks.some(mark => mark.alpha < 1 && mark.top >= 97)).toBe(true);
++    expect(Math.min(...marks.map(mark => mark.top))).toBe(65);
+@@
+ describe('geometry-preserving extension table colourways', () => {
++  it('replaces red and pale check pigments with a calm cream field and silhouette trim', () => {
++    const pixels = new Uint8ClampedArray(8 * 10 * 4);
++    for (let row = 1; row < 7; row++) for (let col = 1; col < 7; col++) {
++      pixels.set(col % 2 ? [252, 131, 101, 255] : [253, 229, 183, 255], (row * 8 + col) * 4);
++    }
++    const alpha = pixels.filter((_, index) => index % 4 === 3);
++    remapTablecloth(pixels, 8, 10, 'reading');
++    const color = (col: number, row: number) => [...pixels.slice((row * 8 + col) * 4, (row * 8 + col) * 4 + 3)];
++    expect(color(2, 2)).toEqual([239, 223, 190]);
++    expect(color(3, 2)).toEqual(color(2, 2));
++    expect(color(2, 5)).toEqual([229, 215, 186]);
++    expect(color(1, 3)).toEqual([140, 43, 32]);
++    expect(pixels.filter((_, index) => index % 4 === 3)).toEqual(alpha);
++  });
+*** End Patch
+PATCH
+ART_GRID_OUT=artifacts/art-grid/round-3b node scripts/extension-room-qa.mjs > artifacts/art-grid/round-3b/render.log 2>&1
+npx vitest run src/render/extension-surfaces.test.ts > artifacts/art-grid/round-3b/focused-tests.log 2>&1" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 4955ms:
+exec
+/bin/zsh -lc "node --input-type=module <<'JS'
+import {decodePng} from './scripts/pixel-conform.mjs';const p=decodePng('artifacts/art-grid/round-3b/reading-day.png');const colors=new Map();for(let y=173;y<193;y++)for(let x=107;x<151;x++){const o=(y*p.width+x)*4;const rgb=[...p.pixels.slice(o,o+3)];const k=rgb.join(',');colors.set(k,(colors.get(k)||0)+1)}console.log([...colors].sort((a,b)=>b[1]-a[1]).slice(0,30));
+JS
+npx tsc --noEmit > artifacts/art-grid/round-3b/tsc.log 2>&1; echo "'$? > artifacts/art-grid/round-3b/tsc.status
+npm run build > artifacts/art-grid/round-3b/build.log 2>&1; echo $? > artifacts/art-grid/round-3b/build.status
+npx vitest run --reporter=json --outputFile=artifacts/art-grid/round-3b/vitest-results.json > artifacts/art-grid/round-3b/vitest.log 2>&1; echo $? > artifacts/art-grid/round-3b/vitest.status' in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+codex
+Chair and lamp shading look better in offline renders. I’m removing the remaining cloth speckles and checking for unrelated changes.
+
+exec
+/bin/zsh -lc "apply_patch <<'PATCH'
+*** Begin Patch
+*** Update File: src/render/extension-table-art.ts
+@@
+-    if ("'!pixels[offset + 3] || red - green < (area === '"'reading' ? 12 : 24) || blue < green * .75 || green > red * (area === 'reading' ? .96 : .76)) continue;
++    if ("'!pixels[offset + 3] || red - green < (area === '"'reading' ? 12 : 24) || blue < green * (area === 'reading' ? .6 : .75) || green > red * (area === 'reading' ? .96 : .76)) continue;
+*** Update File: src/render/extension-surfaces.test.ts
+@@
+-      pixels.set(col % 2 ? [252, 131, 101, 255] : [253, 229, 183, 255], (row * 8 + col) * 4);
++      pixels.set(col % 3 === 0 ? [251, 142, 97, 255] : col % 2 ? [252, 131, 101, 255] : [253, 229, 183, 255], (row * 8 + col) * 4);
+*** Update File: scripts/extension-room-qa.mjs
+@@
+   save(canvas,area+(hour===21?'-night':'-day'));
++  if (area === 'reading') {
++    const corner = new SoftwareCanvas(840,720);
++    corner.getContext('2d').drawImage(canvas,0,0,280,240,0,0,840,720);
++    save(corner,'reading-corner'+(hour===21?'-night':'-day'));
++  }
+*** End Patch
+PATCH
+ART_GRID_OUT=artifacts/art-grid/round-3b node scripts/extension-room-qa.mjs > artifacts/art-grid/round-3b/render.log 2>&1
+npx vitest run src/render/extension-surfaces.test.ts > artifacts/art-grid/round-3b/focused-tests.log 2>&1" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 6577ms:
+ succeeded in 58710ms:
+[
+  [ '239,223,190', 716 ],
+  [ '229,215,186', 132 ],
+  [ '251,142,97', 17 ],
+  [ '239,184,110', 7 ],
+  [ '226,100,67', 4 ],
+  [ '218,91,56', 3 ],
+  [ '246,200,123', 1 ]
+]
+
+exec
+/bin/zsh -lc "cat artifacts/art-grid/round-3b/{tsc.status,build.status}; tail -8 artifacts/art-grid/round-3b/vitest.log; cat artifacts/art-grid/round-3b/focused-tests.log | tail -8; git diff --stat; node --input-type=module <<'JS'
+import fs from 'node:fs'; import crypto from 'node:crypto';
+for(const name of fs.readdirSync('/tmp/reading-3b-before').filter(n=>n.endsWith('.png')&&"'!n.startsWith('"'reading'))){const a=fs.readFileSync('/tmp/reading-3b-before/'+name);const b=fs.readFileSync('artifacts/art-grid/round-3b/'+name); console.log(name,a.equals(b)?'IDENTICAL':'CHANGED');}
+JS" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 258ms:
+ README.md                                          |   4 +-
+ src/render/cozy-world-art.ts                       |   2 +
+ src/render/decor-art.ts                            |   8 +-
+ src/render/fine-sprite-art.ts                      |   5 +
+ src/render/furniture-art.ts                        |  12 +-
+ src/render/generated-service-props.test.ts         |  39 ++-
+ src/render/generated-wall-art.test.ts              |  33 ++-
+ src/render/kitchen-art.ts                          |  52 ++--
+ src/render/lighting.ts                             |   5 +-
+ src/render/main-room-lighting.test.ts              |  26 +-
+ src/render/main-room-lighting.ts                   |  51 ++--
+ src/render/passages.test.ts                        |   6 +-
+ src/render/passages.ts                             |  21 +-
+ .../phaser/cafe-scene-generated-bitmap.test.ts     |  69 +++--
+ src/render/phaser/cafe-scene.ts                    | 169 ++++++-----
+ src/render/pixel-room-shell.ts                     |  42 +--
+ src/render/region-art.ts                           |  38 ++-
+ src/render/room-art.ts                             | 316 ++++++---------------
+ src/render/rug-join.test.ts                        |  36 +--
+ src/render/sign-lettering.test.ts                  |  65 ++++-
+ src/render/sign-lettering.ts                       |  83 ++++++
+ src/render/thought-text.test.ts                    |  32 ++-
+ src/render/thought-text.ts                         |  51 +++-
+ src/render/viewport-frame.ts                       |   5 +-
+ src/ui/fullscreen-layout.test.ts                   |  39 ++-
+ src/ui/fullscreen-layout.ts                        |  30 +-
+ 26 files changed, 718 insertions(+), 521 deletions(-)
+(node:93838) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+greenhouse-day.png IDENTICAL
+greenhouse-night.png IDENTICAL
+kitchen-day.png IDENTICAL
+kitchen-night.png IDENTICAL
+kitchen-reserved.png IDENTICAL
+terrace-day.png IDENTICAL
+terrace-night.png IDENTICAL
+thought-en.png IDENTICAL
+thought-zh.png IDENTICAL
+
+  ✓ Inspect captures and reading-room rendering
+  ✓ Redraw targeted reading-room details
+  → Render and verify scoped changes
+exec
+/bin/zsh -lc "node --input-type=module <<'JS'
+import fs from 'node:fs';
+const j=JSON.parse(fs.readFileSync('artifacts/art-grid/round-3b/vitest-results.json'));console.log(Object.fromEntries(Object.entries(j).filter(([k])=>k.startsWith('num'))));const failed=[];for(const s of j.testResults){let n=0; for(const t of s.assertionResults??[])if(t.status==='failed'){failed.push(s.name.replace(process.cwd()+'/', '')+' :: '+t.fullName);n++} if(s.status==='failed'&&"'!n)failed.push('"'[suite] '+s.name.replace(process.cwd()+'/', ''));}const baseline=fs.readFileSync('artifacts/art-grid/foundation-test-failures.txt','utf8').trim().split('\\n');const newFailures=failed.filter(n=>"'!baseline.includes(n));console.log('"'failed entries',failed.length,'baseline',baseline.length,'new',newFailures);fs.writeFileSync('artifacts/art-grid/round-3b/failure-comparison.json',JSON.stringify({failedTests:j.numFailedTests,failedSuites:j.numFailedTestSuites,baselineEntries:baseline.length,newFailures,resolved:baseline.filter(n=>"'!failed.includes(n))},null,2)+'"'\\n');
+JS
+npx tsc --noEmit > artifacts/art-grid/round-3b/tsc.log 2>&1; echo "'$? > artifacts/art-grid/round-3b/tsc.status
+npm run build > artifacts/art-grid/round-3b/build.log 2>&1; echo $? > artifacts/art-grid/round-3b/build.status
+node scripts/pixel-conform.mjs check artifacts/art-grid/round-3b/reading-*.png artifacts/art-grid/round-3b/greenhouse-*.png artifacts/art-grid/round-3b/terrace-*.png artifacts/art-grid/round-3b/kitchen-*.png artifacts/art-grid/round-3b/thought-*.png > artifacts/art-grid/round-3b/pixel-check.log 2>&1; echo $? > artifacts/art-grid/round-3b/pixel-check.status' in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 4790ms:
+exec
+/bin/zsh -lc 'npx vitest run --reporter=json --outputFile=artifacts/art-grid/round-3b/vitest-results.json > artifacts/art-grid/round-3b/vitest.log 2>&1; echo $? > artifacts/art-grid/round-3b/vitest.status' in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+exec
+/bin/zsh -lc "cat artifacts/art-grid/round-3b/{tsc.status,build.status,pixel-check.status}; tail -4 artifacts/art-grid/round-3b/build.log; cat artifacts/art-grid/round-3b/pixel-check.log; git diff --check -- src/render/region-art.ts; nl -ba src/render/extension-table-art.ts | head -38; nl -ba src/render/region-art.ts | sed -n '201,227p'; tail -6 artifacts/art-grid/round-3b/vitest.log" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 105ms:
+(node:94033) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:94047) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:94048) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+ succeeded in 53042ms:
+codex
+Build and pixel checks pass. The final suite has 103 baseline failures, none new; non-reading renders remain byte-identical.
+
+exec
+/bin/zsh -lc "node --input-type=module <<'JS'
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+const out='artifacts/art-grid/round-3b';
+const results=JSON.parse(fs.readFileSync(out+'/vitest-results.json'));
+const baseline=fs.readFileSync('artifacts/art-grid/foundation-test-failures.txt','utf8').trim().split('\\n');
+const failures=[];
+for(const suite of results.testResults){let count=0;for(const test of suite.assertionResults??[])if(test.status==='failed'){failures.push(suite.name.replace(process.cwd()+'/', '')+' :: '+test.fullName);count++;}if(suite.status==='failed'&&"'!count)failures.push('"'[suite] '+suite.name.replace(process.cwd()+'/', ''));}
+const comparison={failedTests:results.numFailedTests,baselineFile:'artifacts/art-grid/foundation-test-failures.txt',newFailures:failures.filter(name=>"'!baseline.includes(name)),resolved:baseline.filter(name=>!failures.includes(name))};
+fs.writeFileSync(out+'"'/failure-comparison.json',JSON.stringify(comparison,null,2)+'\\n');
+const unchanged=fs.readdirSync('/tmp/reading-3b-before').filter(name=>name.endsWith('.png')&&"'!name.startsWith('"'reading')).map(name=>({file:name,identical:fs.readFileSync('/tmp/reading-3b-before/'+name).equals(fs.readFileSync(out+'/'+name)),sha256:crypto.createHash('sha256').update(fs.readFileSync(out+'/'+name)).digest('hex')}));
+const report={round:'3b',scope:'Unlocked reading-room artwork only; existing uncommitted work retained. No commits, stash, runtime PNG edits or historical asset deletions.',fixes:{armchairs:'2x-grid rust/burgundy velvet, warm one-art-pixel outlines, rounded arms, piped seat cushion, tufting, top-left highlights, lower-right shade, wooden feet and contact shadows; anchors and envelope retained.',lamp:'Brass stem, finial and weighted base; shaded cream fabric shade and contact shadow. Existing night lamp-pool code, anchor and parameters unchanged.',tablecloth:'Palette-only calm cream top and shaded cream drape with burgundy silhouette trim. Broad pale/coral check pigments remapped consistently; alpha, geometry and seats unchanged.',windowLight:'Reading windows now use the existing main-room golden pane painter instead of the old rectangle-like extension patches. Built-in chairs/lamp paint after floor light, retaining their background layer and anchors.'},filesChanged:['src/render/extension-surfaces.ts','src/render/extension-table-art.ts','src/render/region-art.ts','src/render/extension-surfaces.test.ts','scripts/extension-room-qa.mjs'],verification:{tsc:{command:'npx tsc --noEmit',exitCode:Number(fs.readFileSync(out+'/tsc.status','utf8'))},build:{command:'npm run build',exitCode:Number(fs.readFileSync(out+'/build.status','utf8'))},vitest:{command:'npx vitest run --reporter=json --outputFile='+out+'/vitest-results.json',exitCode:Number(fs.readFileSync(out+'/vitest.status','utf8')),passed:results.numPassedTests,failed:results.numFailedTests,pending:results.numPendingTests,newFailures:comparison.newFailures,focused:'14/14 extension surface tests pass'},pixelConform:{command:'node scripts/pixel-conform.mjs check <all 13 newly generated PNGs>',exitCode:Number(fs.readFileSync(out+'/pixel-check.status','utf8')),passed:13},unchangedComparisonRenders:unchanged},renders:['reading-day.png','reading-night.png','reading-corner-day.png','reading-corner-night.png'],remainingGaps:['Real Chrome captures are pending external review as requested. Offline software-canvas composites use production painters and palette snapping, but do not emulate Phaser actor sorting/camera or tabletop vase overlays. Existing 103 baseline test failures remain.']};
+fs.writeFileSync(out+'/report.json',JSON.stringify(report,null,2)+'\\n');
+console.log(JSON.stringify({passed:results.numPassedTests,failed:results.numFailedTests,pending:results.numPendingTests,newFailures:comparison.newFailures,unchanged:unchanged.every(item=>item.identical),report:out+'/report.json'},null,2));
+if(comparison.newFailures.length||results.numFailedTests"'!==103||unchanged.some(item=>!item.identical))process.exitCode=1;
+JS
+nl -ba src/render/extension-surfaces.test.ts | sed -n '"'56,86p'; git status --short | tail -8" in /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+ succeeded in 107ms:
+?? src/render/extension-table-art.ts
+?? src/render/main-room-surfaces.test.ts
+?? src/render/main-room-surfaces.ts
+?? src/render/phaser/cafe-scene-sign-readiness.test.ts
+?? src/render/pixel-resample.ts
+?? src/render/room-sign-projection.test.ts
+?? src/render/world-art-grid.test.ts
+?? src/render/world-art-grid.ts
+
+  ✓ Inspect captures and reading-room rendering
+  ✓ Redraw targeted reading-room details
+  ✓ Render and verify scoped changes
+codex
+**Fixes**
+1. Armchairs: rust/burgundy upholstery, rounded arms, piped cushions, warm outlines, highlights, lower-right shading, wooden feet and contact shadows. Anchors, envelope and depth retained.
+2. Floor lamp: brass hardware and base, shaded cream fabric shade and contact shadow. Night lamp pool unchanged.
+3. Tablecloth: palette-only calm cream top and shaded drape with burgundy edge trim; removed speckles/check noise. Geometry, alpha, seats and poses unchanged.
+4. Window light: replaced reading-room smudges with the main room’s golden pane painter; floor light now paints behind the built-in furniture.
+
+**Files Changed**
+- `src/render/extension-surfaces.ts:85`, `src/render/extension-table-art.ts:8`, `src/render/region-art.ts:207`
+- `src/render/extension-surfaces.test.ts:59`, `scripts/extension-room-qa.mjs:9`
+- Offline renders, logs and `artifacts/art-grid/round-3b/report.json:1`
+
+**Verification**
+- `npx tsc --noEmit` and `npm run build`: passed.
+- Vitest: 2,501 passed; **103 baseline failures, zero new failures**. Focused tests: 14/14 passed.
+- Pixel conformity: all 13 generated PNGs passed. Non-reading comparison renders are byte-identical.
+
+**Remaining Gaps**
+Real Chrome review remains pending as requested; offline renders do not verify Phaser camera/actor sorting. No commits or stash; existing work and historical assets preserved.
+tokens used
+140,723
+**Fixes**
+1. Armchairs: rust/burgundy upholstery, rounded arms, piped cushions, warm outlines, highlights, lower-right shading, wooden feet and contact shadows. Anchors, envelope and depth retained.
+2. Floor lamp: brass hardware and base, shaded cream fabric shade and contact shadow. Night lamp pool unchanged.
+3. Tablecloth: palette-only calm cream top and shaded drape with burgundy edge trim; removed speckles/check noise. Geometry, alpha, seats and poses unchanged.
+4. Window light: replaced reading-room smudges with the main room’s golden pane painter; floor light now paints behind the built-in furniture.
+
+**Files Changed**
+- `src/render/extension-surfaces.ts:85`, `src/render/extension-table-art.ts:8`, `src/render/region-art.ts:207`
+- `src/render/extension-surfaces.test.ts:59`, `scripts/extension-room-qa.mjs:9`
+- Offline renders, logs and `artifacts/art-grid/round-3b/report.json:1`
+
+**Verification**
+- `npx tsc --noEmit` and `npm run build`: passed.
+- Vitest: 2,501 passed; **103 baseline failures, zero new failures**. Focused tests: 14/14 passed.
+- Pixel conformity: all 13 generated PNGs passed. Non-reading comparison renders are byte-identical.
+
+**Remaining Gaps**
+Real Chrome review remains pending as requested; offline renders do not verify Phaser camera/actor sorting. No commits or stash; existing work and historical assets preserved.

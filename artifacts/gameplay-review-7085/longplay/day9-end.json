@@ -1,0 +1,207 @@
+{
+  "day": 9,
+  "phase": "open",
+  "dayTime": 244.62356000001975,
+  "coins": 9707.41011944372,
+  "served": 817,
+  "pantry": {
+    "beans": 32,
+    "milk": 12,
+    "flour": 37,
+    "butter": 9,
+    "eggs": 15,
+    "sugar": 28,
+    "tea": 15,
+    "spice": 0,
+    "cocoa": 0,
+    "cream": 0,
+    "fruit": 0,
+    "matcha": 0
+  },
+  "speed": 4,
+  "partners": {
+    "roster": {
+      "yue": {
+        "xp": 330,
+        "workedDays": 9,
+        "lastWorkedDay": 9,
+        "specialty": null,
+        "unlocked": 3,
+        "read": [],
+        "todayDay": 9,
+        "todayJobs": 39,
+        "todayUnlocks": 0
+      },
+      "lin": {
+        "xp": 357,
+        "workedDays": 7,
+        "lastWorkedDay": 9,
+        "specialty": null,
+        "unlocked": 3,
+        "read": [],
+        "todayDay": 9,
+        "todayJobs": 54,
+        "todayUnlocks": 0
+      },
+      "ari": {
+        "xp": 175,
+        "workedDays": 6,
+        "lastWorkedDay": 9,
+        "specialty": null,
+        "unlocked": 3,
+        "read": [],
+        "todayDay": 9,
+        "todayJobs": 33,
+        "todayUnlocks": 0
+      },
+      "mei": {
+        "xp": 26,
+        "workedDays": 3,
+        "lastWorkedDay": 9,
+        "specialty": null,
+        "unlocked": 2,
+        "read": [],
+        "todayDay": 9,
+        "todayJobs": 8,
+        "todayUnlocks": 1
+      }
+    },
+    "active": {
+      "barista": [
+        "lin"
+      ],
+      "server": [
+        "yue",
+        "ari"
+      ],
+      "cook": [
+        "mei"
+      ]
+    }
+  },
+  "items": {
+    "espresso": 10,
+    "americano": 1,
+    "latte": 1,
+    "cappuccino": 0,
+    "flatwhite": 0,
+    "cortado": 0,
+    "mocha": 0,
+    "vienna": 0,
+    "macchiato": 0,
+    "coldbrew": 0,
+    "dirty": 0,
+    "pourover": 0,
+    "creamcoffee": 0,
+    "affogato": 0,
+    "blacktea": 1,
+    "hotchoc": 0,
+    "lemontea": 0,
+    "chai": 0,
+    "fruittea": 0,
+    "hojicha": 0,
+    "matcha": 0,
+    "frappe": 0,
+    "smoothie": 0,
+    "milktea": 0,
+    "matchafloat": 0,
+    "roll": 1,
+    "bagel": 1,
+    "baguette": 0,
+    "cheesebun": 0,
+    "pretzel": 0,
+    "focaccia": 0,
+    "ciabatta": 0,
+    "raisinbread": 0,
+    "sourdough": 0,
+    "rye": 0,
+    "chocobread": 0,
+    "shokupan": 0,
+    "brioche": 0,
+    "fruitbrioche": 0,
+    "garlicbread": 0,
+    "donut": 1,
+    "scone": 0,
+    "cookie": 0,
+    "croissant": 0,
+    "painchoc": 0,
+    "brownie": 0,
+    "cinnamon": 0,
+    "muffin": 0,
+    "creampuff": 0,
+    "melonpan": 0,
+    "eggtart": 0,
+    "cake": 0,
+    "swissroll": 0,
+    "cheesecake": 0,
+    "macaron": 0
+  },
+  "upgrades": {
+    "marketing": 2,
+    "machine": 2,
+    "barista": 1,
+    "server": 1,
+    "cook": 0,
+    "tables": 2
+  },
+  "kitchen": true,
+  "regions": [],
+  "today": {
+    "reviews": {
+      "stars": [
+        5,
+        0,
+        6,
+        4,
+        94
+      ],
+      "reasons": {
+        "skilledTaste": 94,
+        "steady": 4,
+        "incomplete": 6,
+        "soldOut": 5
+      },
+      "totalScore": 462
+    },
+    "served": 104,
+    "missed": 5,
+    "soldOut": 5,
+    "queueLost": 0,
+    "tableLost": 0,
+    "extraLost": 6,
+    "doorLost": 0,
+    "shortages": {
+      "bagel": 4,
+      "donut": 3,
+      "roll": 4
+    },
+    "revenue": 2504,
+    "ingredientCost": 399,
+    "petCost": 10.872158222223083,
+    "promotionCost": 0,
+    "sales": {
+      "roll": 23,
+      "americano": 19,
+      "espresso": 19,
+      "donut": 22,
+      "latte": 18,
+      "blacktea": 17,
+      "bagel": 15
+    },
+    "baked": {
+      "roll": 23,
+      "bagel": 20,
+      "donut": 24
+    }
+  },
+  "pets": [
+    {
+      "id": "ginger",
+      "careSeconds": 101.24595999995941,
+      "autoRefill": true,
+      "personality": "playful",
+      "preferredArea": "main",
+      "preferredSpot": "explore"
+    }
+  ]
+}

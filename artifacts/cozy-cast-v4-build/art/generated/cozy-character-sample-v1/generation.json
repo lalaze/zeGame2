@@ -1,0 +1,234 @@
+{
+  "tool": "built-in image_gen",
+  "dimensions": [
+    1536,
+    1024
+  ],
+  "grid": [
+    5,
+    3
+  ],
+  "boundsConvention": "x0,y0,x1,y1; exclusive right/bottom; alpha >100",
+  "poses": [
+    "front-idle",
+    "front-walk-left",
+    "front-walk-right",
+    "back-idle",
+    "back-walk-left",
+    "back-walk-right",
+    "right-idle",
+    "right-walk-left",
+    "right-walk-right",
+    "right-seated-lap",
+    "right-seated-reach",
+    "right-seated-reach-lower",
+    "left-seated-lap",
+    "left-seated-reach",
+    "left-seated-reach-lower"
+  ],
+  "assets": {
+    "owner": {
+      "path": "/workspace/scratch/cddd7dded254/generated_images/exec-9fd2220a-8c01-4ed2-824e-a339449767e5.png",
+      "bounds": [
+        [
+          108,
+          29,
+          268,
+          339
+        ],
+        [
+          401,
+          29,
+          557,
+          343
+        ],
+        [
+          689,
+          28,
+          845,
+          342
+        ],
+        [
+          976,
+          31,
+          1131,
+          339
+        ],
+        [
+          1279,
+          28,
+          1440,
+          342
+        ],
+        [
+          110,
+          359,
+          266,
+          673
+        ],
+        [
+          383,
+          359,
+          557,
+          673
+        ],
+        [
+          672,
+          359,
+          850,
+          673
+        ],
+        [
+          953,
+          362,
+          1137,
+          675
+        ],
+        [
+          1247,
+          398,
+          1433,
+          676
+        ],
+        [
+          99,
+          717,
+          278,
+          995
+        ],
+        [
+          399,
+          722,
+          577,
+          995
+        ],
+        [
+          676,
+          713,
+          869,
+          995
+        ],
+        [
+          953,
+          720,
+          1128,
+          995
+        ],
+        [
+          1263,
+          722,
+          1442,
+          998
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. Production 2D cozy cafe game animation sprite atlas, exactly 1536x1024 landscape, actual transparent alpha background. Image 1 is style reference only: match its chunky rounded cozy customer, warm low-contrast brown contours and soft clean pixel clusters. Create cafe OWNER with smooth simple warm-brown bun hair, cream blouse, muted moss-green apron, cream/tan trousers, rounded brown shoes. Friendly simplified face. Moderately chibi proportions: head including hair only 35–38% of total standing height, rounded torso 35%, sturdy short thick legs about28%. Soft rounded hair masses, no spikes, no thin limbs, no big baby head, no black hard outlines. Warm soft upper-left light on character; no shadows outside silhouette.\nLAYOUT must be exact 5 columns by3 rows of15 isolated poses, regular equal-sized invisible cells, ample transparent margins/gutters, character centered within each cell. No text or numbers, no grid lines, no background, no furniture or props. Consistent anatomy, face, clothing, scale, head and feet landmarks in every frame; each standing character about260 pixels tall, seated character about230 pixels tall.\nExact row-major poses:\nrow1 cells0–4: FRONT idle; FRONT walk left foot forward; FRONT walk right foot forward; BACK idle; BACK walk left foot forward.\nrow2 cells5–9: BACK walk right foot forward; RIGHT-facing profile idle; RIGHT profile walk left foot forward; RIGHT profile walk right foot forward; RIGHT profile seated on invisible chair, knees bent90 degrees, hands at lap.\nrow3 cells10–14: RIGHT seated reaching slightly down with one hand; RIGHT seated reaching lower with one hand; LEFT profile seated hands at lap; LEFT seated reaching slightly down; LEFT seated reaching lower.\nExactly one whole isolated character per cell, never show chair. Genuinely transparent pixels around every pose; no brown/gray background, no checkerboard artwork. Pixel-art sprite treatment with rounded chunky forms faithful to reference café.",
+      "repairPrompt": "Edit the attached transparent sprite atlas. Preserve image dimensions1536x1024, character design, grid locations, alpha transparency and ALL poses except exactly two frames. Make the following two fixes:\n1. TOP ROW THIRD character (zero-based index2): change its gait to the opposite of top row second character. Put the foot on the LEFT SIDE OF THE IMAGE fully forward at the bottom (its right foot), and put the foot on the RIGHT SIDE OF THE IMAGE backward raised. Opposite arm swing: arm on RIGHT SIDE OF IMAGE bends forward; arm on LEFT SIDE extends back. Current two frames are duplicates; this must be visibly opposite.\n2. MIDDLE ROW FIRST character (zero-based index5, back view): opposite gait of top row FIFTH. Put the foot on the RIGHT SIDE OF IMAGE backward/raised and the foot on the LEFT SIDE OF IMAGE forward/low, with opposite arm swing to top row fifth. Preserve its back-view orientation.\nOnly these2 characters change. Do not change any other character. Keep smooth brown bun hair, cream blouse, moss apron, cream trousers, brown shoes, rounded pixel art. No background, no glow, no shadows. Actual transparent alpha.",
+      "fullyTransparentFraction": 0.6027386983
+    },
+    "customer": {
+      "path": "/workspace/scratch/cddd7dded254/generated_images/exec-d54a919c-cafb-4d6c-b279-a83c3c2de99c.png",
+      "bounds": [
+        [
+          90,
+          37,
+          274,
+          336
+        ],
+        [
+          378,
+          37,
+          562,
+          337
+        ],
+        [
+          665,
+          37,
+          850,
+          337
+        ],
+        [
+          966,
+          37,
+          1151,
+          335
+        ],
+        [
+          1257,
+          37,
+          1440,
+          335
+        ],
+        [
+          97,
+          366,
+          283,
+          662
+        ],
+        [
+          383,
+          365,
+          562,
+          668
+        ],
+        [
+          672,
+          365,
+          853,
+          667
+        ],
+        [
+          954,
+          369,
+          1150,
+          666
+        ],
+        [
+          1240,
+          387,
+          1448,
+          668
+        ],
+        [
+          65,
+          710,
+          262,
+          990
+        ],
+        [
+          352,
+          715,
+          566,
+          983
+        ],
+        [
+          663,
+          707,
+          872,
+          983
+        ],
+        [
+          953,
+          708,
+          1156,
+          988
+        ],
+        [
+          1257,
+          712,
+          1471,
+          988
+        ]
+      ],
+      "prompt": "Use case: stylized-concept. NEW production sprite atlas on genuinely transparent alpha background, landscape1536x1024. Image1 is the primary approved cafe style and customer appearance reference. Image2 is a supporting clothing/pixel shading style reference for cohesion ONLY, not pose placement reference. Create15 whole isolated poses of ONE CUSTOMER: long softly rounded warm brown hair, terracotta sweater, cream trousers, rounded brown shoes. Like the seated woman of image1, without mug or furniture. Chunky rounded forms, short sturdy legs, warm low contrast brown outlines, simple chunky pixel clusters, upper-left warm light. Head including hair35–38% of standing body height, rounded torso35%, sturdy legs28%. No oversized head, spikes or thin legs. Keep identical scale and identity across frames.\nEXACT invisible regular5 columns x3 rows. Each character260px tall (seated230px), fully centered in its cell with at least30px clean transparent padding on all sides. Horizontal cell centers154,461,768,1075,1382px. Row centers171,512,853px. This is crucial for automatic cutting: every pose stays inside its cell; no overlap, no cutoff. Transparent gutters separate all15 sprites. No borders, labels, numbers or text.\nRow1 (left to right): FRONT idle; FRONT walking LEFT FOOT CLEARLY FORWARD; FRONT walking RIGHT FOOT CLEARLY FORWARD (visibly opposite legs, not repeated pose); BACK idle; BACK walking left foot forward.\nRow2: BACK walking right foot forward; RIGHT-FACING idle; RIGHT-FACING walking left foot forward; RIGHT-FACING walking right foot forward with visibly opposite arm-leg swing; RIGHT-FACING seated, knees bent90degrees and hands resting in lap.\nRow3: RIGHT-FACING seated reaching slightly down with one hand; RIGHT-FACING seated reaching lower; LEFT-FACING seated hands in lap; LEFT-FACING seated reaching slightly down; LEFT-FACING seated reaching lower.\nNo chair, no mug, no furniture, no separate items, no floor or shadows. Clear alpha, no colored glow or matte outside silhouettes. Exactly15 distinct poses.",
+      "repairPrompt": "Edit attached transparent sprite atlas, preserve1536x1024 and everything except the two specified poses. Same long warm brown hair, terracotta sweater, cream trousers, brown shoes, same rounded pixel art. Correct alternate WALKING FOOT PHASES in exactly two cells: top row THIRD character(index2), and middle row FIRST(index5). For top row THIRD, MIRROR THE BODY POSE BELOW NECK horizontally so the forward long leg and big foreground shoe are now on the LEFT of its body rather than RIGHT, and forward bent arm now on RIGHT rather than LEFT. Leave face and hair unchanged, face looking straight at camera. For middle row FIRST (BACK view), mirror its body pose so the foreground extended foot is on LEFT and the raised/backward foot is on RIGHT, arm swing opposite top row fifth. Keep hair showing BACK of head. These are alternate left/right walking frames. Keep all other thirteen characters exactly unchanged. Actual transparent alpha background, no colored halo or shadows. Keep isolated poses in same places.",
+      "fullyTransparentFraction": 0.5732262929
+    }
+  },
+  "qa": {
+    "alphaRange": [
+      0,
+      254
+    ],
+    "assessment": "Both revised whole sheets visually acceptable and cohesive for sample integration. Fifteen poses each, no furniture or props, rounded warm pixel-art styling. Alternate forward feet repaired. Owner front arm swing remains imperfect; standing heads are somewhat larger than requested 35–38%. Low-alpha fringe remains and sprites are not exactly centered in equal grid cells. Use explicit bounds, consistent scaling and foot anchors. No image compositing or pixel edits performed."
+  }
+}

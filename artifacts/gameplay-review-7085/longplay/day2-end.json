@@ -1,0 +1,145 @@
+{
+  "day": 2,
+  "phase": "open",
+  "dayTime": 243.64376000001928,
+  "coins": 696.7653760000001,
+  "served": 105,
+  "pantry": {
+    "beans": 34,
+    "milk": 0,
+    "flour": 0,
+    "butter": 0,
+    "eggs": 0,
+    "sugar": 0,
+    "tea": 0,
+    "spice": 0,
+    "cocoa": 0,
+    "cream": 0,
+    "fruit": 0,
+    "matcha": 0
+  },
+  "speed": 4,
+  "partners": {
+    "roster": {
+      "yue": {
+        "xp": 63,
+        "workedDays": 2,
+        "lastWorkedDay": 2,
+        "specialty": null,
+        "unlocked": 2,
+        "read": [],
+        "todayDay": 2,
+        "todayJobs": 36,
+        "todayUnlocks": 1
+      }
+    },
+    "active": {
+      "barista": [],
+      "server": [
+        "yue"
+      ],
+      "cook": []
+    }
+  },
+  "items": {
+    "espresso": 4,
+    "americano": 1,
+    "latte": 0,
+    "cappuccino": 0,
+    "flatwhite": 0,
+    "cortado": 0,
+    "mocha": 0,
+    "vienna": 0,
+    "macchiato": 0,
+    "coldbrew": 0,
+    "dirty": 0,
+    "pourover": 0,
+    "creamcoffee": 0,
+    "affogato": 0,
+    "blacktea": 0,
+    "hotchoc": 0,
+    "lemontea": 0,
+    "chai": 0,
+    "fruittea": 0,
+    "hojicha": 0,
+    "matcha": 0,
+    "frappe": 0,
+    "smoothie": 0,
+    "milktea": 0,
+    "matchafloat": 0,
+    "roll": 0,
+    "bagel": 0,
+    "baguette": 0,
+    "cheesebun": 0,
+    "pretzel": 0,
+    "focaccia": 0,
+    "ciabatta": 0,
+    "raisinbread": 0,
+    "sourdough": 0,
+    "rye": 0,
+    "chocobread": 0,
+    "shokupan": 0,
+    "brioche": 0,
+    "fruitbrioche": 0,
+    "garlicbread": 0,
+    "donut": 0,
+    "scone": 0,
+    "cookie": 0,
+    "croissant": 0,
+    "painchoc": 0,
+    "brownie": 0,
+    "cinnamon": 0,
+    "muffin": 0,
+    "creampuff": 0,
+    "melonpan": 0,
+    "eggtart": 0,
+    "cake": 0,
+    "swissroll": 0,
+    "cheesecake": 0,
+    "macaron": 0
+  },
+  "upgrades": {
+    "marketing": 0,
+    "machine": 0,
+    "barista": 0,
+    "server": 0,
+    "cook": 0,
+    "tables": 0
+  },
+  "kitchen": false,
+  "regions": [],
+  "today": {
+    "reviews": {
+      "stars": [
+        0,
+        0,
+        0,
+        30,
+        25
+      ],
+      "reasons": {
+        "standardTaste": 30,
+        "skilledTaste": 25
+      },
+      "totalScore": 232.5
+    },
+    "served": 55,
+    "missed": 0,
+    "soldOut": 0,
+    "queueLost": 0,
+    "tableLost": 0,
+    "extraLost": 0,
+    "doorLost": 0,
+    "shortages": {},
+    "revenue": 640.9999999999999,
+    "ingredientCost": 56,
+    "petCost": 0,
+    "promotionCost": 0,
+    "sales": {
+      "americano": 33,
+      "espresso": 22
+    },
+    "baked": {}
+  },
+  "pets": []
+}

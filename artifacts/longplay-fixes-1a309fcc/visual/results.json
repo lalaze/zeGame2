@@ -1,0 +1,23 @@
+{
+  "checks": [
+    {
+      "pass": true,
+      "label": "visual fixture ready"
+    },
+    {
+      "pass": true,
+      "label": "no fixture runtime errors",
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "shots": [
+    "artifacts/longplay-fixes-1a309fcc/visual/kitchen-01.jpg",
+    "artifacts/longplay-fixes-1a309fcc/visual/kitchen-02.jpg",
+    "artifacts/longplay-fixes-1a309fcc/visual/reading-01.jpg",
+    "artifacts/longplay-fixes-1a309fcc/visual/reading-02.jpg",
+    "artifacts/longplay-fixes-1a309fcc/visual/greenhouse-01.jpg",
+    "artifacts/longplay-fixes-1a309fcc/visual/greenhouse-02.jpg"
+  ],
+  "failed": []
+}

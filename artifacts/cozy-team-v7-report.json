@@ -1,0 +1,142 @@
+{
+  "checked": 576,
+  "rows": [
+    {
+      "role": "owner",
+      "height": 39.333333333333336,
+      "foot": {
+        "x": 16,
+        "y": 42
+      },
+      "carry": {
+        "x": 16,
+        "y": 28.501745635910222
+      },
+      "options": {
+        "skin": {
+          "standing": 4,
+          "seated": 4,
+          "expected": 4
+        },
+        "hair": {
+          "standing": 6,
+          "seated": 6,
+          "expected": 6
+        },
+        "shirt": {
+          "standing": 8,
+          "seated": 8,
+          "expected": 8
+        },
+        "pants": {
+          "standing": 3,
+          "seated": 3,
+          "expected": 3
+        }
+      }
+    },
+    {
+      "role": "barista",
+      "height": 39.333333333333336,
+      "foot": {
+        "x": 16,
+        "y": 42
+      },
+      "carry": {
+        "x": 16,
+        "y": 28.501745635910222
+      },
+      "options": {
+        "skin": {
+          "standing": 4,
+          "seated": 4,
+          "expected": 4
+        },
+        "hair": {
+          "standing": 6,
+          "seated": 6,
+          "expected": 6
+        },
+        "shirt": {
+          "standing": 8,
+          "seated": 8,
+          "expected": 8
+        },
+        "pants": {
+          "standing": 3,
+          "seated": 3,
+          "expected": 3
+        }
+      }
+    },
+    {
+      "role": "server",
+      "height": 39.333333333333336,
+      "foot": {
+        "x": 16,
+        "y": 42
+      },
+      "carry": {
+        "x": 16,
+        "y": 28.501745635910222
+      },
+      "options": {
+        "skin": {
+          "standing": 4,
+          "seated": 4,
+          "expected": 4
+        },
+        "hair": {
+          "standing": 6,
+          "seated": 6,
+          "expected": 6
+        },
+        "shirt": {
+          "standing": 8,
+          "seated": 8,
+          "expected": 8
+        },
+        "pants": {
+          "standing": 3,
+          "seated": 3,
+          "expected": 3
+        }
+      }
+    },
+    {
+      "role": "cook",
+      "height": 37,
+      "foot": {
+        "x": 16,
+        "y": 42
+      },
+      "carry": {
+        "x": 16,
+        "y": 29.230534351145042
+      },
+      "options": {
+        "skin": {
+          "standing": 4,
+          "seated": 4,
+          "expected": 4
+        },
+        "hair": {
+          "standing": 6,
+          "seated": 6,
+          "expected": 6
+        },
+        "shirt": {
+          "standing": 8,
+          "seated": 8,
+          "expected": 8
+        },
+        "pants": {
+          "standing": 3,
+          "seated": 3,
+          "expected": 3
+        }
+      }
+    }
+  ],
+  "failures": []
+}

@@ -1,0 +1,13 @@
+{
+  "failedTests": 103,
+  "baselineFile": "artifacts/art-grid/foundation-test-failures.txt",
+  "newFailures": [],
+  "resolved": [
+    "src/render/generated-wall-art.test.ts :: selected main-wall bitmaps and live overlays uses the actual new window aperture for floor sunlight, with dynamic night suppression",
+    "src/render/rug-join.test.ts :: main entry rug at scene height 240 has continuous woven material through the T junction and the former floor gap",
+    "src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps purchased rug_blue separate from the cross runner",
+    "src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps purchased rug_red separate from the cross runner",
+    "src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps purchased rug_round separate from the cross runner",
+    "src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps the top border continuous and turns the lower borders down each side"
+  ]
+}

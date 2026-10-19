@@ -1,0 +1,21 @@
+{
+  "tool": "built-in image_gen",
+  "styleReference": "../cafe-style-sample-v1/sample.png",
+  "asset": "furniture-atlas.png",
+  "sha256": "25add5f3c380fe74fb9c2619e566ecc8605ba500b7276943952920568712f652",
+  "width": 1254,
+  "height": 1254,
+  "layout": {
+    "columns": 2,
+    "rows": 2,
+    "parts": [
+      "table",
+      "chair",
+      "cabinet",
+      "window"
+    ]
+  },
+  "integration": "Separate sprites, transparent dynamic window panes, original foot/seat simulation anchors and live counter objects. Main dining room only.",
+  "prompt": "Use case: stylized-concept. Asset type: production transparent 2D game furniture sprite atlas, square 1024 x 1024. The supplied café image is a STYLE REFERENCE ONLY. Match its beautifully warm chunky, rounded, substantial pixel-art woodwork, rich chestnut outline, small blocky highlights and coherent cream/red/oak/moss-green palette. Create exactly FOUR isolated furniture objects on genuinely transparent alpha, arranged in a strict invisible 2-by-2 grid of equal square cells. Wide fully transparent outer margins and cross-shaped gutters; each object completely within its quadrant, no contact between objects. Top left: ONLY the sample's broad rounded red-and-cream gingham round table with draping scalloped tablecloth and substantial warm oak pedestal/feet, low three-quarter view, no vase or other table objects. Top right: ONLY a thick honey-oak chair facing RIGHT, backrest at left, seat extending right, moss-green thick rounded seat cushion, low three-quarter view matching the table and sample; four sturdy legs and warm subtle highlights. Bottom left: ONLY a single warm oak cupboard module, thick rounded top, one broad drawer above one raised panel cabinet door, tiny brass pulls, substantial curved bevels and sturdy short base, mostly frontal with subtle visible right side, same view and light. Bottom right: ONLY an isolated warm oak window frame with a center crossbar and red-cream gingham curtains tied back on both sides, curtain rod and sill. All four glass pane APERTURES MUST BE ENTIRELY TRANSPARENT holes: do not draw sky, clouds, scenery, trees, blue, glass reflections, glazing, walls or any background within the window; game code will supply scenery behind these holes. Keep curtain/frame thick, warm and rounded like reference. Consistent pixel scale, upper-left warm light, deliberately limited palette, clearly pixel-stepped silhouettes and highlights, no smooth vector edges, no blur, no gradients. No humans, no floors, no walls, no detached objects, no labels or text, no grid lines, no cast/drop shadows, no backdrop. Four production cutout sprites, each centered in its own equal cell.",
+  "revisionPrompt": "Precise production sprite-sheet layout edit. Keep these exact four beautiful furniture sprites, style, colors, shapes, and fully transparent background. Change ONLY their scale and layout to enforce wide clean alpha-zero gutters: a square 2x2 equal-cell atlas. Reduce EACH object to 72% of its present scale and center it within its own quadrant. Top left table centered at 25% canvas width, 25% canvas height. Top right chair centered at 75% width,25% height. Bottom left cupboard centered 25% width,75% height. Bottom right curtain-window frame centered 75% width,75% height. EACH object entirely bounded within 6% to 44%, or 56% to 94%, of total width and height for its quadrant; a fully transparent cross-shaped gutter 12% of total canvas width and height between the four objects. Keep the entire outer 6% canvas border entirely transparent. No object may cross the vertical or horizontal centerline. Preserve the chair facing right with back on left and green seat. Preserve round gingham table, cabinet, and transparent window apertures. All empty spaces including four window apertures must be pure alpha zero with no stray pixels or translucent residues. No floor, no shadows, no backdrop, no labels, no grid lines, no new elements. Match original pixel art, do not smooth or blur."
+}

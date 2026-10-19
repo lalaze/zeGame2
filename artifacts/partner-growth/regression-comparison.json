@@ -1,0 +1,104 @@
+{
+  "baseline": {
+    "total": 2572,
+    "passed": 2422,
+    "failed": 109,
+    "pending": 41
+  },
+  "current": {
+    "total": 2589,
+    "passed": 2439,
+    "failed": 109,
+    "pending": 41
+  },
+  "added": [],
+  "resolved": [],
+  "partnerSuites": [
+    {
+      "name": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/src/game/partner-regression.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "partner growth through real simulation transitions attributes brewing and successful table delivery to separate on-duty people",
+          "status": "passed"
+        },
+        {
+          "name": "partner growth through real simulation transitions credits cooks once per completed shelf batch, never for automatic morning baking",
+          "status": "passed"
+        },
+        {
+          "name": "partner growth through real simulation transitions does not advance work, inventory, money or timers while paused at dt=0",
+          "status": "passed"
+        },
+        {
+          "name": "partner growth through real simulation transitions refreshes in-flight work without granting XP; completed jobs continue after refresh",
+          "status": "passed"
+        },
+        {
+          "name": "partner growth through real simulation transitions credits a finished brew exactly once while its order waits for a full pass",
+          "status": "passed"
+        },
+        {
+          "name": "partner growth through real simulation transitions forced close reports only completed work and cannot farm XP by closing again",
+          "status": "passed"
+        },
+        {
+          "name": "partner growth through real simulation transitions normal closing allows pending work to finish and settlement adds no extra credit",
+          "status": "passed"
+        },
+        {
+          "name": "partner growth through real simulation transitions keeps reserves idle, then credits the replacement on the next working day",
+          "status": "passed"
+        },
+        {
+          "name": "partner growth through real simulation transitions repairs legacy paid staff slots without charges, fabricated jobs or duplicate active people",
+          "status": "passed"
+        },
+        {
+          "name": "partner growth through real simulation transitions reaches every story chapter from real server deliveries across business days",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/src/game/partner-style-measurement.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "fixed-seed qualified six-focus partner operating measurements compares baseline, both all-role specialties, and each isolated role choice",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/src/game/partners.test.ts",
+      "status": "passed",
+      "tests": [
+        {
+          "name": "partner starter-server vertical slice keeps all legacy purchased slots without recharging or invented experience",
+          "status": "passed"
+        },
+        {
+          "name": "partner starter-server vertical slice separates reserve candidates from capacity and only swaps when closed",
+          "status": "passed"
+        },
+        {
+          "name": "partner starter-server vertical slice earns server XP only from actual successful sim deliveries; paired refresh is identical",
+          "status": "passed"
+        },
+        {
+          "name": "partner starter-server vertical slice requires real worked business days; reading and prep cannot farm XP",
+          "status": "passed"
+        },
+        {
+          "name": "partner starter-server vertical slice prices mutually exclusive closed-shop training with explicit throughput tradeoffs",
+          "status": "passed"
+        },
+        {
+          "name": "partner starter-server vertical slice retains bought upgrades while repairing malformed roster records",
+          "status": "passed"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "results": [
+    {
+      "label": "inline loader is indeterminate before bundle",
+      "pass": true
+    },
+    {
+      "label": "inline cream café card renders before bundle",
+      "pass": true
+    },
+    {
+      "label": "measured partial progress while actual image requests held",
+      "pass": true,
+      "value": 137,
+      "max": 388,
+      "text": "35% · 137 / 388",
+      "ready": false
+    },
+    {
+      "label": "desktop card fits viewport",
+      "pass": true,
+      "x": 380,
+      "y": 241.25,
+      "w": 440,
+      "h": 317.5,
+      "overflow": false
+    },
+    {
+      "label": "mobile card fits viewport",
+      "pass": true,
+      "x": 20,
+      "y": 271,
+      "w": 350,
+      "h": 302,
+      "overflow": false
+    },
+    {
+      "label": "small card fits viewport",
+      "pass": true,
+      "x": 20,
+      "y": 133,
+      "w": 280,
+      "h": 302,
+      "overflow": false
+    },
+    {
+      "label": "landscape card fits viewport",
+      "pass": true,
+      "x": 202,
+      "y": 36.25,
+      "w": 440,
+      "h": 317.5,
+      "overflow": false
+    },
+    {
+      "label": "reduced motion removes steam and fade",
+      "pass": true
+    },
+    {
+      "label": "real assets and scene finish before ready",
+      "pass": true
+    },
+    {
+      "label": "real image failure shows accessible retry and detail in card",
+      "pass": true
+    },
+    {
+      "label": "retry reload reaches real ready state",
+      "pass": true
+    }
+  ],
+  "shots": [
+    "artifacts/loading-desktop.jpg",
+    "artifacts/loading-mobile.jpg",
+    "artifacts/loading-failure-mobile.jpg"
+  ],
+  "failed": []
+}

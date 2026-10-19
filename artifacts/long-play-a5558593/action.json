@@ -1,0 +1,1 @@
+{"id":"stopqa","stop":true,"code":"fs.writeFileSync(dir+'/console-errors.json',JSON.stringify(errors,null,2));return {completedDays:11,finalDay:12,errors:errors.length,artifacts:fs.readdirSync(dir).filter(f=>!['action.json','result.json'].includes(f))};"}

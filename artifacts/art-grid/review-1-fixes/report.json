@@ -1,0 +1,88 @@
+{
+  "review": "main-room round 1 fixes",
+  "inspectedInputs": [
+    "artifacts/art-grid/review-1/zh-day-main.png",
+    "artifacts/art-grid/review-1/zh-night-main.png",
+    "artifacts/art-grid/review-1/en-1630-main.png",
+    "artifacts/art-grid/review-1/zh-day-counter-closeup.png",
+    "artifacts/art-grid/review-1/zh-day-window-closeup.png",
+    "artifacts/art-grid/review-1/zh-day-pickup-closeup.png",
+    "artifacts/art-grid/review-1/zh-day-rug-tables-closeup.png",
+    "artifacts/art-grid/review-1/zh-live-game-1440.png",
+    "artifacts/art-grid/review-1/before-redraw-zh-day-main.png"
+  ],
+  "fixes": {
+    "1": "Removed hex plaques. Pixel ZH is awaited by the existing scene preload/create barrier and explicitly by the fixture. Both main-room paint signatures and the glyph cache depend on font readiness. Unsupported characters use a 12px platform CJK raster thresholded to a binary mask. Complete ink bounds come from a larger scratch canvas. Main-room labels paint after the wall/counter projection so thin columns survive. Measuring, 20-code-point name limits and ellipsis remain; text has one art pixel of horizontal padding per edge.",
+    "2": "Default cabinets now have dark walnut recesses, raised panels, inner cove molding, honey bevels, brass U pulls, top-left highlights and bottom-right shading. Counter, back-bar and window cabinet calls share the same painter. Walnut, marble, pink and gold retain separate palette ramps.",
+    "3": "Pickup has a single recessed cavity, horizontal shadow bands, polished steel shelves and two small heat lamps; vertical door divisions are removed. Shelf planes, all six passSlot anchors and PASS_BELL are unchanged. Plates and bell remain live scene overlays.",
+    "4": "T runner now has layered woven binding, cream piping, broad diamond motifs, finished end embroidery and a finished welcome mat for purchased-rug configurations. Motif cells are at least 4 art pixels. The T footprint, uninterrupted join and purchased-rug separation remain.",
+    "5": "The default sill_none deliberately leaves the sill clean. Existing equipped cactus/tulips/bonsai options still use native crisp grid painters at the same anchor."
+  },
+  "files": {
+    "runtime": [
+      "src/render/sign-lettering.ts",
+      "src/render/phaser/cafe-scene.ts",
+      "src/render/main-room-surfaces.ts",
+      "src/render/room-art.ts"
+    ],
+    "qa": [
+      "scripts/art-grid-fixture.html",
+      "scripts/art-grid-qa.mjs",
+      "scripts/review-main-room-qa.mjs",
+      "scripts/art-grid-offline-fonts.swift"
+    ],
+    "tests": [
+      "src/render/sign-lettering.test.ts",
+      "src/render/rug-join.test.ts",
+      "src/render/phaser/cafe-scene-sign-readiness.test.ts",
+      "src/render/room-sign-projection.test.ts"
+    ]
+  },
+  "intentionalTestChanges": {
+    "src/render/sign-lettering.test.ts": "The old no-DOM distinct hexadecimal-mask expectation becomes fixed-size binary replacement masks and a real platform-raster test. Native Chinese scratch pixels use the new 24x32 buffer with centered ink; bottom strokes and alpha threshold stay checked. Added complete OPEN/营业中 fitting checks at projected plaque widths. Accent distinction, name limits, measuring, ellipsis and save round trips remain.",
+    "src/render/rug-join.test.ts": "Top and side binding probes now admit the two woven linen colors instead of requiring the old single flat stripe. Existing T-continuity, footprint, edge and purchased-rug separation tests remain.",
+    "src/render/phaser/cafe-scene-sign-readiness.test.ts": "New tests: hold the real preload/create path until the font resolves; invalidate both layers with time frozen when FontFace becomes loaded.",
+    "src/render/room-sign-projection.test.ts": "New regression: final lettering pixels paint after the plane resample and remain half-room-pixel rectangles."
+  },
+  "qa": {
+    "fixture": "scripts/art-grid-fixture.html?style=cream|mint|rose",
+    "cli": "node scripts/art-grid-qa.mjs --style=cream|mint|rose",
+    "defaultStyle": "cream",
+    "offlineCommand": "node scripts/review-main-room-qa.mjs",
+    "offlineOutput": "artifacts/art-grid/review-1-fixes",
+    "offlineCaveats": "Native architecture boards use actual painters and actual JS glyph masks fed macOS CoreText rasters. They omit runtime projection, legacy windows/props, characters and lighting. Window openings and the six sample plate marks are QA stand-ins, not runtime replacements. Browser Canvas/Phaser captures are deliberately left to the user."
+  },
+  "verification": {
+    "typescript": "npx tsc --noEmit: pass",
+    "build": "npm run build: pass; build.log",
+    "tests": "See test-comparison.json and tests.json; compare failed names and discovery suites against foundation-test-failures.txt",
+    "png": "node scripts/pixel-conform.mjs check artifacts/art-grid/review-1-fixes/*.png: all six pass",
+    "syntax": "node --check on the two QA scripts: pass",
+    "diff": "git diff --check: pass",
+    "testResults": {
+      "tests": 2630,
+      "passed": 2486,
+      "failed": 103,
+      "skipped": 41,
+      "baselineFailures": 109,
+      "baselineSuiteFailures": 4,
+      "newFailures": [],
+      "suiteFailures": [
+        "scripts/cozy-cafe-art.test.mjs",
+        "scripts/loading-progress.test.ts",
+        "scripts/main-reference-art.test.mjs",
+        "scripts/reference-character-art.test.mjs"
+      ],
+      "newSuiteFailures": []
+    }
+  },
+  "previews": [
+    "cream-native-composite.png",
+    "mint-native-composite.png",
+    "rose-native-composite.png",
+    "cabinet-finishes.png",
+    "signage-native.png",
+    "sill-options.png"
+  ],
+  "remaining": "Real Chrome follow-up captures still needed from the user; platform fallback glyph appearance follows the installed CJK fonts. All five requested code/art fixes are implemented. No new animation or runtime PNG pack. No simulation, save, HUD, character or other-room change. No commit or stash."
+}

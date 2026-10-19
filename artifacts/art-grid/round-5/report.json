@@ -1,0 +1,213 @@
+{
+  "round": 5,
+  "date": "2026-10-16",
+  "scope": "HTML/CSS interface chrome only. No gameplay, economy, save, canvas art, IDs, data attributes, ARIA roles or labels changed. No commits or git stash. Existing unrelated working-tree edits preserved.",
+  "implementationStatus": "implemented; browser visual acceptance pending outside the sandbox",
+  "changes": {
+    "1_frames": "Master-palette walnut/honey cabinet frames and brass-edged cream cards, zero-blur pixel shadows, top-left highlights and bottom-right shades. Interface art pixel = 2 CSS px, independent of world camera zoom. Covers management, dialogs, onboarding, region cards, HUD, status, guidance, catalog cards, toasts and chips.",
+    "2_buttons": "Raised paper/sage/terracotta buttons, 2 CSS px pressed travel, non-color selected edge indicators, selected hover states, opaque readable disabled states and double-contrast keyboard focus. Includes customization swatches and choice cards.",
+    "3_hierarchy": "Shared name/money/day/rating/status/action materials, transparent overlay containers retained. Right tool faces inset 4 CSS px vertically and 2 horizontally inside unchanged hit rectangles, exposing more art. No responsive positioning, room fitting, zoom logic or drawer focus code changed.",
+    "4_forms": "Native checkbox semantics retained with square CSS checkmark; inset text/number fields, palette placeholders, stepped select chevrons, raised existing +/- controls, pixel progress tracks/fills and +/- disclosures. Native number spin controls and select popups retained. Forced-colors native fallback supplied.",
+    "5_typography": "Pixelify Sans and Pixel ZH retained; fields inherit locale font, phone fields/selects use 16px; no new fonts or text-content changes."
+  },
+  "filesChanged": [
+    "src/style.css",
+    "src/ui/pixel-chrome.test.ts",
+    "docs/art-grid/README.md",
+    "artifacts/art-grid/round-5/report.json"
+  ],
+  "verification": {
+    "typescript": {
+      "command": "npx tsc --noEmit",
+      "exitCode": 0,
+      "passed": true,
+      "log": "artifacts/art-grid/round-5/typecheck.log"
+    },
+    "build": {
+      "command": "npm run build",
+      "exitCode": 0,
+      "passed": true,
+      "log": "artifacts/art-grid/round-5/build.log"
+    },
+    "focusedTests": {
+      "command": "npx vitest run src/ui/pixel-chrome.test.ts src/ui/palette-contrast.test.ts",
+      "exitCode": 0,
+      "passed": 21,
+      "newChromeTests": 9,
+      "existingContrastTests": 12,
+      "log": "artifacts/art-grid/round-5/chrome-tests.log"
+    },
+    "fullSuite": {
+      "command": "npx vitest run --reporter=json --reporter=default --outputFile.json=artifacts/art-grid/round-5/vitest-results.json",
+      "exitCode": 1,
+      "passed": 2513,
+      "failed": 103,
+      "skipped": 41,
+      "baseline": "artifacts/art-grid/foundation-test-failures.txt",
+      "newFailures": [],
+      "unchangedBaselineFailureEntries": 107,
+      "baselineSuiteLoadFailures": [
+        "[suite] scripts/cozy-cafe-art.test.mjs",
+        "[suite] scripts/loading-progress.test.ts",
+        "[suite] scripts/main-reference-art.test.mjs",
+        "[suite] scripts/reference-character-art.test.mjs"
+      ],
+      "baselineEntriesNotFailing": [
+        "src/render/generated-wall-art.test.ts :: selected main-wall bitmaps and live overlays uses the actual new window aperture for floor sunlight, with dynamic night suppression",
+        "src/render/rug-join.test.ts :: main entry rug at scene height 240 has continuous woven material through the T junction and the former floor gap",
+        "src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps purchased rug_blue separate from the cross runner",
+        "src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps purchased rug_red separate from the cross runner",
+        "src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps purchased rug_round separate from the cross runner",
+        "src/render/rug-join.test.ts :: main entry rug at scene height 240 keeps the top border continuous and turns the lower borders down each side"
+      ],
+      "comparisonNote": "All 103 failed assertions and four suite-load failures are in the supplied baseline. Six baseline entries no longer fail in the pre-existing redraw work; no claim that the CSS fixes those rendering tests.",
+      "existingTestContractChanges": "None. No existing test was weakened or edited.",
+      "log": "artifacts/art-grid/round-5/vitest.log",
+      "results": "artifacts/art-grid/round-5/vitest-results.json"
+    },
+    "cssPalette": {
+      "passed": true,
+      "uniqueColors": 22,
+      "source": "docs/art-grid/palette.json"
+    },
+    "pixelConform": {
+      "command": "node scripts/pixel-conform.mjs check <new PNGs>",
+      "status": "not_applicable",
+      "newPngCount": 0,
+      "reason": "All new frame/control artwork is CSS; no PNG or historical asset was created, modified or deleted."
+    },
+    "dpr": {
+      "devicePixelRatios": [
+        1,
+        2,
+        3
+      ],
+      "automated": "Frame, outline, bevel and pressed dimensions are integer multiples of 2 CSS px and map to whole device pixels.",
+      "browserRasterValidation": "pending; CSS dimensions alone do not establish browser paint-origin alignment or text raster quality"
+    },
+    "contrastComparison": [
+      {
+        "foreground": "paper-light",
+        "background": "green",
+        "before": 5.64,
+        "after": 6.64
+      },
+      {
+        "foreground": "paper-light",
+        "background": "green-dark",
+        "before": 7.98,
+        "after": 8.52
+      },
+      {
+        "foreground": "paper-light",
+        "background": "wood",
+        "before": 8.35,
+        "after": 10.8
+      },
+      {
+        "foreground": "paper-light",
+        "background": "terracotta",
+        "before": 6.04,
+        "after": 8.75
+      },
+      {
+        "foreground": "ink",
+        "background": "paper",
+        "before": 10.38,
+        "after": 13.04
+      },
+      {
+        "foreground": "muted",
+        "background": "paper",
+        "before": 5.5,
+        "after": 8.13
+      },
+      {
+        "foreground": "brass-ink",
+        "background": "paper",
+        "before": 5.81,
+        "after": 6.96
+      },
+      {
+        "foreground": "ink",
+        "background": "cream",
+        "before": 11.33,
+        "after": 14.91
+      },
+      {
+        "foreground": "muted",
+        "background": "cream",
+        "before": 6,
+        "after": 9.29
+      },
+      {
+        "foreground": "brass-ink",
+        "background": "cream",
+        "before": 6.34,
+        "after": 7.96
+      },
+      {
+        "foreground": "disabled-ink",
+        "background": "disabled-paper",
+        "before": 3.95,
+        "after": 5.19
+      }
+    ],
+    "whitespace": {
+      "command": "git diff --check",
+      "passed": true
+    },
+    "browserOrServerStarted": false
+  },
+  "visualReview": {
+    "beforeImagesInspected": [
+      "artifacts/art-grid/round-5/ui-before-desktop.png",
+      "artifacts/art-grid/round-5/ui-before-phone.png",
+      "artifacts/art-grid/round-5/ui-before-desktop-drawer.png",
+      "artifacts/art-grid/round-5/ui-before-phone-drawer.png",
+      "artifacts/art-grid/round-5/ui-before-desktop-dialog.png",
+      "artifacts/art-grid/round-5/ui-before-onboarding.png"
+    ],
+    "environment": "No Chrome, browser automation or local server was started; requested browser captures must be taken outside this sandbox.",
+    "matrix": {
+      "viewports": [
+        "390x844",
+        "320x568",
+        "844x390",
+        "667x375",
+        "860x700",
+        "1440x1000"
+      ],
+      "devicePixelRatios": [
+        1,
+        2,
+        3
+      ],
+      "locales": [
+        "en",
+        "zh"
+      ]
+    },
+    "captureStates": [
+      "Closed/open shop HUD; name, money, day/speed/close chips, rating/team/regulars, tools, bottom actions and room zoom controls.",
+      "All six management tabs with long catalogs; selected filters, affordability-disabled actions, bakery +/- controls, goal and progress, pause badge and scroll header.",
+      "Prepare dialog with checked/unchecked/disabled menu items, ingredient forecast disclosure and bakery quantity fields.",
+      "Settings, money breakdown, reviews, regular journal, team, café style, signature drink research and region/map dialogs; long English and Chinese content.",
+      "Every onboarding step, especially color/hair swatches, name fields, theme choices and back/next actions."
+    ],
+    "checklist": [
+      "Inspect at native capture resolution: warm 2 CSS px outlines, top-left highlights and bottom-right shades; no soft shadow blur or seams at DPR 1/2/3.",
+      "Check hover/pressed/selected/disabled/focus combinations, including selected chips, inset tool faces, drawer balance/close and customization swatches.",
+      "Tab/Shift+Tab/Escape through mobile drawer and dialogs; verify focus trapping, focus restoration, readable non-clipped focus rings and pause/resume badges.",
+      "Verify >=44px phone targets, including labels around 20px checkboxes and the existing separate +/- buttons. Ensure transparent tool margins still accept taps.",
+      "Verify no horizontal overflow (document scrollWidth <= clientWidth), unclipped catalog fields and Chinese copy, and independent panel/dialog scrolling.",
+      "Verify 320px portrait and short landscape with every overlay; safe-area edges, open/close buttons, doorway targets and zoom controls must remain reachable.",
+      "Verify room fitting, pinch zoom, panning, overview visibility and arranging overlays still behave unchanged.",
+      "Check OS/browser-owned number spinner glyphs and select popup readability, forced-colors mode, keyboard activation and reduced-motion mode."
+    ]
+  },
+  "remainingGaps": [
+    "Actual browser screenshots, DPR paint crispness, responsive overflow/touch geometry and live focus/pinch/zoom acceptance remain unverified because this sandbox cannot run Chrome or bind a server.",
+    "Native number-spinner arrow glyphs and select popup internals remain platform-rendered. Their surrounding controls and existing +/- buttons are pixel styled; no custom replacement was introduced because it would change control behavior beyond styling-only scope."
+  ]
+}

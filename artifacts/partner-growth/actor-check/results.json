@@ -1,0 +1,38 @@
+{
+  "results": [
+    {
+      "pass": true,
+      "label": "localhost is secure context"
+    },
+    {
+      "pass": true,
+      "label": "no save-session blocker"
+    },
+    {
+      "pass": true,
+      "label": "ordinary fresh new game"
+    },
+    {
+      "pass": true,
+      "label": "rendered partner click opens matching profile",
+      "hit": {
+        "x": 1121.2123737559584,
+        "y": 412.4999842643738,
+        "id": "yue",
+        "names": [
+          "小月",
+          "Yue"
+        ]
+      },
+      "opened": {
+        "name": "Yue",
+        "profile": true
+      }
+    }
+  ],
+  "shots": [
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/actor-check/before-click.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/partner-growth/actor-check/matching-profile.png"
+  ],
+  "errors": []
+}

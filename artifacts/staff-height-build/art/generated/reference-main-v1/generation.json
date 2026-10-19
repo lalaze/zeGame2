@@ -1,0 +1,15 @@
+{
+  "asset": "espresso.png",
+  "generator": "built-in image_gen",
+  "transparent_background": true,
+  "sha256": "cc5159fa5fd6c78cead19886440ee173affb594341739680ed6aadca52497ac5",
+  "width": 1430,
+  "height": 1100,
+  "opaqueBounds": {
+    "x": 132,
+    "y": 222,
+    "right": 1298,
+    "bottom": 930
+  },
+  "prompt": "Use case: stylized-concept. Asset type: transparent game sprite, a single compact espresso machine for a cozy pixel-art cafe. Front-facing with a very slight elevated view, so a narrow top plane is visible; no sideways isometric angle. The object is a blue-gray enamel rectangular commercial espresso machine, with ivory/chrome top and bottom trim, three small white cups sitting on top, a tiny red rectangular indicator in its center, dark espresso dispensing bay and two portafilter handles below, short dark feet. Warm late-morning light from upper left. Style: lovingly hand-painted 1990s JRPG pixel art, crisp visibly stepped 2D pixel clusters, warm brown outlines, restrained shading, muted blue-gray metal and ivory highlights. Match a cozy country cafe with golden-brown oak cabinets and red gingham tablecloths. Simple solid rectangular shape, NOT a gold antique steampunk machine, not photorealistic, not glossy 3D. Entire machine centered, generous transparent margin on every side, genuine transparent background, no floor, no scenery, no cast shadow beyond small contact shadow, no words, no watermark. Shape wider than tall, approximately 1.3:1. Output only the standalone sprite."
+}

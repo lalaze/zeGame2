@@ -1,0 +1,97 @@
+{
+  "round": "3b",
+  "scope": "Unlocked reading-room artwork only; existing uncommitted work retained. No commits, stash, runtime PNG edits or historical asset deletions.",
+  "fixes": {
+    "armchairs": "2x-grid rust/burgundy velvet, warm one-art-pixel outlines, rounded arms, piped seat cushion, tufting, top-left highlights, lower-right shade, wooden feet and contact shadows; anchors and envelope retained.",
+    "lamp": "Brass stem, finial and weighted base; shaded cream fabric shade and contact shadow. Existing night lamp-pool code, anchor and parameters unchanged.",
+    "tablecloth": "Palette-only calm cream top and shaded cream drape with burgundy silhouette trim. Broad pale/coral check pigments remapped consistently; alpha, geometry and seats unchanged.",
+    "windowLight": "Reading windows now use the existing main-room golden pane painter instead of the old rectangle-like extension patches. Built-in chairs/lamp paint after floor light, retaining their background layer and anchors."
+  },
+  "filesChanged": [
+    "src/render/extension-surfaces.ts",
+    "src/render/extension-table-art.ts",
+    "src/render/region-art.ts",
+    "src/render/extension-surfaces.test.ts",
+    "scripts/extension-room-qa.mjs"
+  ],
+  "verification": {
+    "tsc": {
+      "command": "npx tsc --noEmit",
+      "exitCode": 0
+    },
+    "build": {
+      "command": "npm run build",
+      "exitCode": 0
+    },
+    "vitest": {
+      "command": "npx vitest run --reporter=json --outputFile=artifacts/art-grid/round-3b/vitest-results.json",
+      "exitCode": 1,
+      "passed": 2501,
+      "failed": 103,
+      "pending": 41,
+      "newFailures": [],
+      "focused": "14/14 extension surface tests pass"
+    },
+    "pixelConform": {
+      "command": "node scripts/pixel-conform.mjs check <all 13 newly generated PNGs>",
+      "exitCode": 0,
+      "passed": 13
+    },
+    "unchangedComparisonRenders": [
+      {
+        "file": "greenhouse-day.png",
+        "identical": true,
+        "sha256": "5d257d49a6f80561b955a441961b17f73f6f3f2aabd776644f3d6db25f67d9d5"
+      },
+      {
+        "file": "greenhouse-night.png",
+        "identical": true,
+        "sha256": "cd70b6feaf127733e4d12224611fe69dd4faf763808c55bfdfcc4a2b5765d10f"
+      },
+      {
+        "file": "kitchen-day.png",
+        "identical": true,
+        "sha256": "d66070d39b4c2cf499d170caedb4082f18ffa56a8ecc4279b34bdd5df71baae3"
+      },
+      {
+        "file": "kitchen-night.png",
+        "identical": true,
+        "sha256": "3c2a238364d5f1d5dde71a91edecbb8bbe89ac9a039de7a054ed11078ae3156b"
+      },
+      {
+        "file": "kitchen-reserved.png",
+        "identical": true,
+        "sha256": "6dff4c24bc33a8761c0f8284c1c15e00a6feaf411e3f69c274760ba673bca833"
+      },
+      {
+        "file": "terrace-day.png",
+        "identical": true,
+        "sha256": "38b6db246a814b8d03ad13971df48f9c8a87156265b55e7a0fc5cd930ca1f117"
+      },
+      {
+        "file": "terrace-night.png",
+        "identical": true,
+        "sha256": "879f7a1729df23044ab15379e6f65d9f963581ff46c15746344254947fb3b167"
+      },
+      {
+        "file": "thought-en.png",
+        "identical": true,
+        "sha256": "95fb1dacba9915353a8c57700084cf6c6aed04e4288c2345cc5b849ec92fe6ab"
+      },
+      {
+        "file": "thought-zh.png",
+        "identical": true,
+        "sha256": "07d34e0e9bf9fecd623772bb0813f30350057922092728db9a21a6da7440409f"
+      }
+    ]
+  },
+  "renders": [
+    "reading-day.png",
+    "reading-night.png",
+    "reading-corner-day.png",
+    "reading-corner-night.png"
+  ],
+  "remainingGaps": [
+    "Real Chrome captures are pending external review as requested. Offline software-canvas composites use production painters and palette snapping, but do not emulate Phaser actor sorting/camera or tabletop vase overlays. Existing 103 baseline test failures remain."
+  ]
+}

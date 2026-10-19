@@ -1,0 +1,13 @@
+(node:83650) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS artifacts/art-grid/round-3/greenhouse-day.png 640×480 art px (320×240 room px)
+PASS artifacts/art-grid/round-3/greenhouse-night.png 640×480 art px (320×240 room px)
+PASS artifacts/art-grid/round-3/kitchen-day.png 640×480 art px (320×240 room px)
+PASS artifacts/art-grid/round-3/kitchen-night.png 640×480 art px (320×240 room px)
+PASS artifacts/art-grid/round-3/kitchen-reserved.png 640×480 art px (320×240 room px)
+PASS artifacts/art-grid/round-3/reading-day.png 640×480 art px (320×240 room px)
+PASS artifacts/art-grid/round-3/reading-night.png 640×480 art px (320×240 room px)
+PASS artifacts/art-grid/round-3/terrace-day.png 640×480 art px (320×240 room px)
+PASS artifacts/art-grid/round-3/terrace-night.png 640×480 art px (320×240 room px)
+PASS artifacts/art-grid/round-3/thought-en.png 172×36 art px (86×18 room px)
+PASS artifacts/art-grid/round-3/thought-zh.png 116×37 art px (58×18.5 room px)

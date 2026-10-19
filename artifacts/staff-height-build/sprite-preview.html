@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register("./sw.js", { updateViaCache: 'none' }).catch(() => {});</script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>小豆咖啡馆 · 素材图鉴</title>
+  <style>*{box-sizing:border-box}body{color:#49382e;background:#f2ecdc;margin:0;font:15px/1.6 system-ui,sans-serif}main{max-width:1180px;margin:auto;padding:40px 24px}header{border-bottom:1px solid #c5b596;padding-bottom:24px}small{color:#80694f}h1{margin:8px 0;font-size:32px}p{max-width:720px}a{color:inherit}nav,.downloads{flex-wrap:wrap;gap:10px;margin:20px 0;display:flex}button,.downloads a{font:inherit;color:#49382e;cursor:pointer;background:#fff8e7;border:1px solid #b8a482;border-radius:4px;padding:9px 16px;text-decoration:none}button[aria-pressed=true],.downloads a{color:#fff8e7;background:#496b55;border-color:#496b55}button:focus-visible,a:focus-visible{outline-offset:3px;outline:3px solid #b88240}.gallery{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;display:grid}.asset{background:#fff8e9;border:1px solid #d2c4a8;border-radius:5px;min-width:0;margin:0;text-decoration:none;overflow:hidden}.art{background:repeating-conic-gradient(#eee9dc 0 25%,#e5dfd0 0 50%) 0/16px 16px;place-items:center;height:108px;display:grid}.art img{image-rendering:pixelated;object-fit:contain;max-width:88%;max-height:96px}body.dark .art{background:repeating-conic-gradient(#302f30 0 25%,#383637 0 50%) 0/16px 16px}.caption{padding:9px 12px}.caption b{font-size:14px;display:block}.caption small{word-break:break-all;font-size:10px}.rooms{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;display:grid}.rooms canvas{width:100%;height:auto;image-rendering:pixelated;display:block}.rooms figcaption{padding:8px 12px}.rooms figure{background:#e8dcc1;border:1px solid #b8a482;margin:0}h2{margin-top:32px;font-size:20px}footer{color:#80694f;margin-top:36px;font-size:13px}@media (width<=500px){main{padding:24px 16px}h1{font-size:26px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}</style>
+  <script type="module" crossorigin src="./assets/artwork-BpAXEMT3.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/region-art-gG3HwM-g.js">
+</head>
+<body><main>
+  <header><small>TINY BEAN CAFÉ / ART COLLECTION</small><h1>小豆咖啡馆 · 素材图鉴</h1><p>暖木、奶油瓷器、鼠尾草绿与黄铜。游戏同源绘制的食物、人物、家具和房间素材；点击单张素材即可下载透明 PNG。</p><div class="downloads"><a id="archive">下载整包 ZIP</a><a id="sheet">下载完整 PNG 图集</a><a id="manifest">下载坐标 JSON</a><button id="background" aria-pressed="false">深色底预览</button></div><small id="count" role="status"></small></header>
+  <nav id="filters" aria-label="素材分类"></nav><section id="gallery" class="gallery" aria-label="可下载素材"></section>
+  <h2>空间与材质</h2><p>五个房间的固定日光预览，使用游戏内同一套绘制代码。点击房间可下载原尺寸背景。</p><section id="rooms" class="rooms"></section>
+  <h2>30 种顾客造型</h2><p>8 种发型、10 种服装与专属配饰；每轮不重复出场。下方预览包括站立、行走、坐姿与抚猫动作。12 位剧情熟客沿用各自固定造型。</p>
+  <button id="motion">暂停走路</button><canvas id="cast" width="576" height="580" aria-label="30 种顾客造型动态预览" style="display:block;width:100%;max-width:1152px;height:auto;image-rendering:pixelated;background:#f2e4ce"></canvas>
+  <footer>PNG 使用透明底与整数像素；JSON 的 frame 是图集坐标，sourceSize 是原素材尺寸。此页面不读取或改写游戏存档。<a href="./">返回游戏</a></footer>
+</main></body>
+</html>

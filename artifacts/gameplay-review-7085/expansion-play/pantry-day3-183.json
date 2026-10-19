@@ -1,0 +1,160 @@
+{
+  "day": 3,
+  "phase": "open",
+  "dayTime": 186.27924000000755,
+  "coins": 883.8879061729286,
+  "served": 160,
+  "pantry": {
+    "beans": 24,
+    "milk": 10,
+    "flour": 0,
+    "butter": 0,
+    "eggs": 0,
+    "sugar": 0,
+    "tea": 9,
+    "spice": 0,
+    "cocoa": 0,
+    "cream": 0,
+    "fruit": 0,
+    "matcha": 0
+  },
+  "speed": 4,
+  "partners": {
+    "roster": {
+      "yue": {
+        "xp": 86,
+        "workedDays": 3,
+        "lastWorkedDay": 3,
+        "specialty": null,
+        "unlocked": 3,
+        "read": [],
+        "todayDay": 3,
+        "todayJobs": 32,
+        "todayUnlocks": 1
+      },
+      "lin": {
+        "xp": 26,
+        "workedDays": 1,
+        "lastWorkedDay": 3,
+        "specialty": null,
+        "unlocked": 1,
+        "read": [],
+        "todayDay": 3,
+        "todayJobs": 26,
+        "todayUnlocks": 1
+      }
+    },
+    "active": {
+      "barista": [
+        "lin"
+      ],
+      "server": [
+        "yue"
+      ],
+      "cook": []
+    }
+  },
+  "items": {
+    "espresso": 7,
+    "americano": 1,
+    "latte": 1,
+    "cappuccino": 0,
+    "flatwhite": 0,
+    "cortado": 0,
+    "mocha": 0,
+    "vienna": 0,
+    "macchiato": 0,
+    "coldbrew": 0,
+    "dirty": 0,
+    "pourover": 0,
+    "creamcoffee": 0,
+    "affogato": 0,
+    "blacktea": 1,
+    "hotchoc": 0,
+    "lemontea": 0,
+    "chai": 0,
+    "fruittea": 0,
+    "hojicha": 0,
+    "matcha": 0,
+    "frappe": 0,
+    "smoothie": 0,
+    "milktea": 0,
+    "matchafloat": 0,
+    "roll": 0,
+    "bagel": 0,
+    "baguette": 0,
+    "cheesebun": 0,
+    "pretzel": 0,
+    "focaccia": 0,
+    "ciabatta": 0,
+    "raisinbread": 0,
+    "sourdough": 0,
+    "rye": 0,
+    "chocobread": 0,
+    "shokupan": 0,
+    "brioche": 0,
+    "fruitbrioche": 0,
+    "garlicbread": 0,
+    "donut": 0,
+    "scone": 0,
+    "cookie": 0,
+    "croissant": 0,
+    "painchoc": 0,
+    "brownie": 0,
+    "cinnamon": 0,
+    "muffin": 0,
+    "creampuff": 0,
+    "melonpan": 0,
+    "eggtart": 0,
+    "cake": 0,
+    "swissroll": 0,
+    "cheesecake": 0,
+    "macaron": 0
+  },
+  "upgrades": {
+    "marketing": 1,
+    "machine": 1,
+    "barista": 1,
+    "server": 0,
+    "cook": 0,
+    "tables": 0
+  },
+  "kitchen": false,
+  "regions": [],
+  "today": {
+    "reviews": {
+      "stars": [
+        0,
+        0,
+        0,
+        36,
+        19
+      ],
+      "reasons": {
+        "skilledTaste": 19,
+        "standardTaste": 36
+      },
+      "totalScore": 229.5
+    },
+    "served": 55,
+    "missed": 0,
+    "soldOut": 0,
+    "queueLost": 0,
+    "tableLost": 0,
+    "extraLost": 0,
+    "doorLost": 0,
+    "shortages": {},
+    "revenue": 784.8000000000002,
+    "ingredientCost": 92,
+    "petCost": 0,
+    "promotionCost": 0,
+    "sales": {
+      "espresso": 14,
+      "blacktea": 11,
+      "americano": 17,
+      "latte": 13
+    },
+    "baked": {}
+  },
+  "pets": []
+}

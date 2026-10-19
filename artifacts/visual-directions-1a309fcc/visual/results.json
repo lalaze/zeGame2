@@ -1,0 +1,80 @@
+{
+  "checks": [
+    {
+      "pass": true,
+      "label": "visual fixture ready"
+    },
+    {
+      "pass": true,
+      "label": "ordinary guests use reduced leg extension"
+    },
+    {
+      "pass": true,
+      "label": "approved sample keeps existing proportion"
+    },
+    {
+      "pass": true,
+      "label": "sample roster shares furniture-relative height band",
+      "metrics": [
+        {
+          "role": "owner",
+          "id": 0,
+          "height": 39.333333333333336,
+          "extension": 0
+        },
+        {
+          "role": "barista",
+          "id": 0,
+          "height": 39.333333333333336,
+          "extension": 0
+        },
+        {
+          "role": "server",
+          "id": 0,
+          "height": 39.333333333333336,
+          "extension": 0
+        },
+        {
+          "role": "cook",
+          "id": 0,
+          "height": 37,
+          "extension": 0
+        },
+        {
+          "role": "customer",
+          "id": 1,
+          "height": 38.2,
+          "extension": 9
+        },
+        {
+          "role": "customer",
+          "id": 2,
+          "height": 39.2,
+          "extension": 4
+        },
+        {
+          "role": "customer",
+          "id": 3,
+          "height": 37.53333333333334,
+          "extension": 4
+        }
+      ]
+    },
+    {
+      "pass": true,
+      "label": "no fixture runtime errors",
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "shots": [
+    "artifacts/visual-directions-1a309fcc/visual/main-01.jpg",
+    "artifacts/visual-directions-1a309fcc/visual/main-02.jpg",
+    "artifacts/visual-directions-1a309fcc/visual/kitchen-01.jpg",
+    "artifacts/visual-directions-1a309fcc/visual/kitchen-02.jpg",
+    "artifacts/visual-directions-1a309fcc/visual/reading-01.jpg",
+    "artifacts/visual-directions-1a309fcc/visual/reading-02.jpg",
+    "artifacts/visual-directions-1a309fcc/visual/character-roster.jpg"
+  ],
+  "failed": []
+}
