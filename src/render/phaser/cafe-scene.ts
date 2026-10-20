@@ -38,7 +38,7 @@ import { menuItems } from '../../game/economy';
 import { formatMoney } from '../../game/format';
 import { COLS, FLOOR_ROWS, WALL_ROWS, WALL_TOP, CELL, canPlace, cellFree, furnitureDef } from '../../game/furniture';
 import { BENCH, BINS, DISH_PIT, PASTRY_FRIDGE, RACK, cookHome, installedEquipment, stationSpot, STATION_SECONDS, type Station } from '../../game/kitchen';
-import { CAT_SPOTS, MAX_TABLES, PASS, PASS_BELL, PASS_SLOT_W, passSlot, SCENE_W, WINDOWS, areaOrigin, areaBounds, kitchenFloorY, doorwayY, baristaSpot, doorPlantSpots, floorY, sceneHeight, seatApproach, seatSpot, tableArea, tablePos } from '../../game/layout';
+import { CAT_SPOTS, COUNTER, MAX_TABLES, PASS, PASS_BELL, PASS_SLOT_W, passSlot, SCENE_W, WINDOWS, areaOrigin, areaBounds, kitchenFloorY, doorwayY, baristaSpot, doorPlantSpots, floorY, sceneHeight, seatApproach, seatSpot, tableArea, tablePos } from '../../game/layout';
 import { AREA_IDS, activeTableIndices, areaAtX, isAreaOpen, mainTableCount, regionOffset, type AreaId } from '../../game/regions';
 import { seated, type Cook, type Customer, type Server, type Sim, type SimEvent, type Walker } from '../../game/sim';
 import type { GameState } from '../../game/state';
@@ -48,6 +48,7 @@ import { drawText, textWidth } from '../font';
 import { GHOST_BAD, GHOST_OK, floorFurnitureBounds, paintFloorFurniture, paintWallFurniture } from '../furniture-art';
 import { paintPassageFloor, paintRoomBoundaries } from '../passages';
 import { lightingAt, roomAmbient, type Lighting } from '../lighting';
+import { nightLightMap, type LightPool } from '../night-light-map';
 import { previewLightDate } from '../preview-light';
 import { businessLightDate } from '../business-light';
 import { BENCH_RISE, BINS_RISE, DISH_PIT_RISE, FRIDGE_RISE, RACK_RISE, paintBench, paintBins, paintDishPit, paintKitchen, paintPastryFridge, paintRack } from '../kitchen-art';
@@ -99,6 +100,7 @@ const DEPTH = {
   frontWall: 100000,
   /** The time-of-day color grade over each room, and lamp light on top of it. */
   grade: 100000.5,
+  lightMap: 100000.55,
   glow: 100000.6,
   overlay: 100001,
   particles: 100002,
@@ -117,14 +119,14 @@ const PAD = 20;
 const color = (hex: string) => parseInt(hex.slice(1, 7), 16);
 
 const LAMP = '#ffcf7a';
+/** A fixture lights the room well beyond its own glow. */
+const POOL_REACH = 2.2;
 
 /** A light in a room, in that room's coordinates. */
-interface Lamp {
-  x: number;
-  y: number;
+interface Lamp extends LightPool {
+  /** The glow around the fixture itself; 0 for light with no visible source. */
   radius: number;
   color: string;
-  strength: number;
 }
 
 /** Every light in a room: its ceiling fixtures and built-in lamps, and lamps the player placed. */
@@ -132,11 +134,14 @@ function lampsIn(area: AreaId, state: GameState): Lamp[] {
   const lamps: Lamp[] = [];
   const add = (x: number, y: number, radius: number, strength = 1, tint = LAMP, anchor?: PixelPoint, plane = MAIN_WALL_PLANE) => {
     const point = area !== 'main' ? { x, y } : anchor ? projectMainAttachment({ x, y }, anchor) : projectMainPlaneWorld({ x, y }, plane);
-    lamps.push({ ...point, radius, color: tint, strength });
+    lamps.push({ ...point, radius, pool: radius * POOL_REACH, color: tint, strength });
   };
   if (area === 'main') {
     // Existing permanent wall lanterns must illuminate their actual positions.
-    add(80.5, 21, 26, .55); add(223.5, 19, 26, .55);
+    add(80.5, 21, 26); add(223.5, 19, 26);
+    // The back bar's work light keeps the counter the warmest place in the room after dark.
+    const bar = projectMainPlaneWorld({ x: COUNTER.x + COUNTER.w / 2, y: COUNTER.top - 6 }, MAIN_COUNTER_PLANE);
+    lamps.push({ ...bar, radius: 0, pool: 92, color: LAMP, strength: .85 });
     const ceiling = state.decor.equipped.ceiling;
     if (ceiling === 'ceiling_pendants') for (const x of [36, 132, 188, 284]) add(x, 13, 26);
     if (ceiling === 'ceiling_chandelier') add(SCENE_W / 2, 9, 46);
@@ -151,6 +156,8 @@ function lampsIn(area: AreaId, state: GameState): Lamp[] {
     add(218, 56, 26, 0.6, '#ffa64a');
   } else if (area === 'reading') {
     add(100, floorY(98) - 27, 30);
+    // The painted wall sconces either side of the window.
+    for (const x of [88, 231]) add(x, 29, 18, .8);
   } else if (area === 'terrace') {
     for (let x = 22; x < SCENE_W; x += 34) add(x, 19 + Math.round(Math.sin((x / SCENE_W) * Math.PI) * 12), 14, 0.9);
   }
@@ -166,6 +173,13 @@ function lampsIn(area: AreaId, state: GameState): Lamp[] {
       const bounds = floorFurnitureBounds(piece.id, cx, foot), wick = getGeneratedFurnitureAdapter()?.overlay(piece.id)?.points.wick;
       add(wick ? bounds.x - o.x + wick.x : cx - o.x, bounds.y - o.y + (wick?.y ?? 4), 30, 1, LAMP, { x: cx - o.x, y: foot - o.y });
     }
+  }
+  // An unseen pendant over each dining table pools light on the tabletop after dark.
+  const o = areaOrigin(area);
+  for (const i of activeTableIndices(state)) {
+    if (tableArea(i) !== area) continue;
+    const table = area === 'main' ? projectMainWorld(tablePos(i)) : tablePos(i);
+    lamps.push({ x: table.x - o.x, y: table.y - o.y - 8, radius: 0, pool: 40, color: LAMP, strength: .9 });
   }
   return lamps;
 }
@@ -248,6 +262,7 @@ export class CafeScene extends Phaser.Scene {
   private bellRang = -1;
   private canGrade = false;
   private grades = new Map<AreaId, Phaser.GameObjects.Rectangle>();
+  private lightMaps = new Map<AreaId, Phaser.GameObjects.Image>();
   private glows!: Pool<Phaser.GameObjects.Image>;
   private overviewFrame!: Phaser.GameObjects.Graphics;
   private ghostCells!: Phaser.GameObjects.Graphics;
@@ -434,6 +449,7 @@ export class CafeScene extends Phaser.Scene {
     for (const area of AREA_IDS) {
       const grade = this.add.rectangle(0, 0, SCENE_W, 1, 0xffffff).setOrigin(0, 0).setDepth(DEPTH.grade);
       this.grades.set(area, grade.setBlendMode(Phaser.BlendModes.MULTIPLY));
+      this.lightMaps.set(area, this.add.image(0, 0, '__WHITE').setOrigin(0, 0).setDepth(DEPTH.lightMap).setVisible(false).setBlendMode(Phaser.BlendModes.MULTIPLY));
     }
     this.glows = new Pool(() => this.add.image(0, 0, '__WHITE').setDepth(DEPTH.glow).setBlendMode(Phaser.BlendModes.ADD));
     this.overviewFrame = this.add.graphics().setDepth(DEPTH.overview);
@@ -746,15 +762,21 @@ export class CafeScene extends Phaser.Scene {
   }
 
   /**
-   * The time of day over a room: its color grade, and warm pools around each light
-   * that come up as it gets dark. Locked rooms stay unlit.
+   * The time of day over a room: its color grade, then after dark a light map that
+   * leaves the room in cool shade except where its lamps reach, and a glow around
+   * each fixture. Locked rooms stay unlit.
    */
   private drawLight(area: AreaId, visible: boolean, state: GameState, light: Lighting): void {
-    const o = areaOrigin(area);
-    const ambient = roomAmbient(light, area, !isAreaOpen(state, area));
+    const o = areaOrigin(area), open = isAreaOpen(state, area);
+    const ambient = roomAmbient(light, area, !open);
     this.grades.get(area)!.setVisible(visible && this.canGrade && ambient !== '#ffffff').setPosition(o.x, o.y).setSize(SCENE_W, areaBounds(area).h).setFillStyle(color(ambient));
-    if (!visible || light.lamps < 0.01 || !isAreaOpen(state, area)) return;
-    for (const lamp of lampsIn(area, state)) {
+    const lamps = visible && open && (light.dark > .01 || light.lamps >= .01) ? lampsIn(area, state) : [];
+    // The windowless kitchen keeps its even tube light.
+    const map = this.lightMaps.get(area)!.setVisible(visible && this.canGrade && area !== 'kitchen' && light.dark > .01);
+    if (map.visible && area !== 'kitchen') map.setTexture(this.lightMapTexture(area, lamps)).setPosition(o.x, o.y).setAlpha(light.dark);
+    if (!visible || light.lamps < 0.01 || !open) return;
+    for (const lamp of lamps) {
+      if (!lamp.radius) continue;
       const density = area === 'main' ? 1 : WORLD_ART_DENSITY;
       const key = baked(this.textures, `glow-soft-${lamp.radius}-${lamp.color}${area === 'main' ? '' : '-extension'}`, lamp.radius * 2 * density, lamp.radius * 2 * density, ctx => {
         if (area === 'main') paintGlow(ctx, lamp.radius, lamp.color, true);
@@ -762,6 +784,18 @@ export class CafeScene extends Phaser.Scene {
       });
       this.glows.next().setTexture(key).setScale(1 / density).setPosition(o.x + lamp.x, o.y + lamp.y).setAlpha(light.lamps * lamp.strength);
     }
+  }
+
+  /** One light-map texture per room, repainted only when its lamps or size change. */
+  private lightMapKeys = new Map<AreaId, string>();
+  private lightMapTexture(area: Exclude<AreaId, 'kitchen'>, lamps: readonly Lamp[]): string {
+    const h = Math.ceil(areaBounds(area).h);
+    const key = `night-light-${area}-${h}-` + lamps.map(l => `${Math.round(l.x)},${Math.round(l.y)},${l.pool},${l.strength}`).join(';');
+    const old = this.lightMapKeys.get(area);
+    if (old === key && this.textures.exists(key)) return key;
+    if (old && old !== key && this.textures.exists(old)) this.textures.remove(old);
+    this.lightMapKeys.set(area, key);
+    return baked(this.textures, key, SCENE_W, h, ctx => ctx.putImageData(new ImageData(nightLightMap(area, SCENE_W, h, lamps) as Uint8ClampedArray<ArrayBuffer>, SCENE_W, h), 0, 0));
   }
 
   private drawCat(state: GameState, t: number, o: { x: number; y: number }): void {

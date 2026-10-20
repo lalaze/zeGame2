@@ -630,6 +630,15 @@ export class RoomPainter {
       if (this.density > 1) {
         if (!getGeneratedMainEnvironmentAdapter()?.paintWindowScenery(ctx, x, y, w, h, light.dark, t, false))
           paintPixelWindowVillage(ctx, x, y, w, h, light.dark);
+        else if (light.dark > 0) {
+          // The painted trees and roofs fall into blue silhouette below the night sky.
+          const top = y + h * .3, fade = h * .2;
+          for (let row = top; row < y + h; row += .5) {
+            ctx.globalAlpha = light.dark * .62 * Math.min(1, (row - top) / fade);
+            this.r(x, row, w, .5, '#16213a');
+          }
+          ctx.globalAlpha = 1;
+        }
       }
       else {
         this.r(x, y + h - 10, w, 10, land('#7cbf5e', '#243d33'));

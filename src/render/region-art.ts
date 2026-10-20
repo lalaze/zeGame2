@@ -9,6 +9,7 @@ import { paintFloorFurniture } from './furniture-art';
 import { beam, type Lighting } from './lighting';
 import { paintSunbeam } from './room-art';
 import { generatedMainSource } from './generated-main-art';
+import { nightBackdrop } from './night-backdrop';
 import { extensionFloor, extensionRunner, extensionWindowPatch, readingDoor, readingFurnishing } from './extension-surfaces';
 import { paintWindowBounce } from './main-room-lighting';
 
@@ -80,6 +81,9 @@ export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, l
     if (light.dark > 0) {
       ctx.globalAlpha = light.dark * .48; ctx.fillStyle = '#283837';
       ctx.fillRect(0, 0, SCENE_W, FLOOR_Y);
+      // The painted daytime sky gives way to night through the glass.
+      const night = nightBackdrop(ctx, backdrop, SCENE_W, FLOOR_Y);
+      if (night) { ctx.globalAlpha = light.dark; ctx.drawImage(night, 0, 0, SCENE_W, FLOOR_Y); }
     }
     ctx.restore();
     if (reading) {

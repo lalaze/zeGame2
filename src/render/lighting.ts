@@ -44,7 +44,7 @@ interface Key {
 }
 
 const NIGHT: Omit<Key, 'hour'> = {
-  ambient: '#6c72a8',
+  ambient: '#5868a8',
   sky: ['#141a3c', '#1e2452', '#262d63'],
   cloud: '#3a4270',
   sun: 0,
@@ -63,7 +63,7 @@ const KEYS: Key[] = [
   { hour: 15.5, ambient: '#fff3dc', sky: ['#7fbde6', '#a0cdea', '#c8e0ea'], cloud: '#ffffff', sun: 0.8, sunColor: '#fff0c0', disc: '#fff3a0', lamps: 0, dark: 0 },
   { hour: 17.5, ambient: '#ffd6a0', sky: ['#f0a070', '#f6b97f', '#fbd59a'], cloud: '#ffe0c0', sun: 1, sunColor: '#ffc777', disc: '#ffd27a', lamps: 0.3, dark: 0.1 },
   { hour: 19, ambient: '#c890a8', sky: ['#7a5a9a', '#e07a6a', '#f6a96b'], cloud: '#f0a0a0', sun: 0.35, sunColor: '#ff9f6a', disc: '#ff8a5a', lamps: 0.8, dark: 0.5 },
-  { hour: 20, ambient: '#8e86b8', sky: ['#2a2f6a', '#3a3f7a', '#6a5a8a'], cloud: '#5a5a8a', sun: 0, sunColor: '#ff9f6a', disc: '#ff8a5a', lamps: 1, dark: 0.85 },
+  { hour: 20, ambient: '#7e80b6', sky: ['#2a2f6a', '#3a3f7a', '#6a5a8a'], cloud: '#5a5a8a', sun: 0, sunColor: '#ff9f6a', disc: '#ff8a5a', lamps: 1, dark: 0.85 },
   { hour: 21, ...NIGHT },
   { hour: 24, ...NIGHT },
 ];
@@ -103,15 +103,17 @@ export function lightingAt(hour: number): Lighting {
  * sky and the glasshouse nearly so, while the walled rooms keep some of their own light,
  * and the windowless kitchen runs on its tube lights.
  */
-const EXPOSURE: Record<AreaId, number> = { main: 0.48, reading: 0.45, greenhouse: 0.9, terrace: 1, kitchen: 0.35 };
+const EXPOSURE: Record<AreaId, number> = { main: 0.6, reading: 0.45, greenhouse: 0.9, terrace: 1, kitchen: 0.35 };
+/**
+ * How much of the room's own warm light tempers the night sky's color. The darkness
+ * itself, and the lamplight, come from each room's night light map. Locked rooms stay unlit.
+ */
+const NIGHT_WARMTH: Record<AreaId, number> = { main: 0.3, reading: 0.35, greenhouse: 0.16, terrace: 0.1, kitchen: 0.65 };
 
 /** The color a room is multiplied by. */
 export const roomAmbient = (light: Lighting, area: AreaId, locked = false) => {
-  // Main-room night keeps warm material identity while leaving enough value
-  // separation for local lantern pools. Outdoor rooms retain sky exposure.
-  const warmth = area === 'main' ? .82 : locked ? 0 : area === 'greenhouse' ? .24 : area === 'terrace' ? .16 : .65;
-  const ambient = mix(light.ambient, '#d6ac7b', light.dark * warmth);
-  return mix('#ffffff', ambient, area === 'main' ? .60 : EXPOSURE[area]);
+  const ambient = mix(light.ambient, '#d6ac7b', light.dark * (locked ? 0 : NIGHT_WARMTH[area]));
+  return mix('#ffffff', ambient, EXPOSURE[area]);
 };
 
 /**
