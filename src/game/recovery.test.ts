@@ -115,7 +115,7 @@ describe('one-bean emergency restock', () => {
   it('blocks any currently claimable sequential reward', () => {
     const examples: [string, (s: GameState) => void][] = [
       ['espresso5', (s) => { s.items.espresso = 5; }],
-      ['roll', (s) => { s.kitchen = true; s.items.roll = 1; }],
+      ['americano', (s) => { s.items.americano = 1; }],
       ['milk', (s) => { s.pantry.milk = 20; }],
       ['sign', (s) => { s.upgrades.machine = 1; }],
       ['decor', (s) => { s.decor.stored.plant_fern = 1; }],

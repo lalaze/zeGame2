@@ -205,6 +205,15 @@ describe('honest cost explanations', () => {
     expect(advice.action).toMatchObject({ kind: 'reduceBake', item: 'roll', amount: 0, cost: 0 });
   });
 
+  it('does not suggest a smaller batch for a dish that also sold out during the day', () => {
+    // Day 5 of the playtest: Butter Roll ran out three times, then five late rolls went stale.
+    const state = ready(); state.kitchen = true; state.items.roll = 1; state.onMenu = ['roll'];
+    state.bakePlan.roll = 6; state.pantry.flour = state.pantry.butter = 1000;
+    const cost = servingCost('roll') * 5;
+    const advice = settlementAdvice(report({ soldOut: 3, shortages: { roll: 3 }, baked: { roll: 32 }, stale: { roll: 5 }, staleCost: cost }), state);
+    expect(advice.action).toMatchObject({ kind: 'reviewBake', item: 'roll', cost: 0 });
+  });
+
   it('pauses only a real live promotion and avoids renewing an expired one', () => {
     const state = ready(); state.promotion = { id: 'clipLocal', paused: false, remaining: 20 };
     const day = report({ promotionCost: 30, profit: -10 });

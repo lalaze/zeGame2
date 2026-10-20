@@ -13,6 +13,7 @@ export class FirstServiceGuide {
   private expandedTools = false;
   private completed = false;
   private signature = '';
+  private shownStep: FirstServiceStep | null = null;
   private key = '';
   constructor(private state: () => GameState, private storage: GuardedStorage, private actions: Actions) {
     this.element.className = 'first-service';
@@ -62,6 +63,13 @@ export class FirstServiceGuide {
     const step = this.completed ? 'complete' : firstServiceStep(this.state(), this.checkedStock);
     // Reopening is the end of the introductory focus, but keep the success card
     // until dismissed so the user gets a clear finish rather than a vanishing UI.
+    // Planning day 2 is the first real choice: unlocks, upgrades and decor must be on
+    // hand then, since today's menu is fixed once the doors open.
+    if (this.active && step === 'reopen' && !this.expandedTools) {
+      this.expandedTools = true;
+      this.actions.allTools();
+      this.persist();
+    }
     if (this.active && step === 'complete' && !this.completed) {
       this.completed = true;
       if (!this.expandedTools) { this.expandedTools = true; this.actions.allTools(); }
@@ -83,7 +91,11 @@ export class FirstServiceGuide {
     const signature = `${this.element.hidden}:${step}:${getLocale()}:${this.expandedTools}`;
     if (signature === this.signature) return;
     this.signature = signature;
-    const detailsOpen = this.element.querySelector<HTMLDetailsElement>('.guide-details')?.open ?? (step === 'stock' || step === 'prepare' || step === 'observe');
+    // Steps shown during service open folded, so the card does not cover the dining room.
+    const entering = this.shownStep !== step;
+    this.shownStep = step;
+    const detailsOpen = entering && (step === 'close' || step === 'complete') ? false
+      : this.element.querySelector<HTMLDetailsElement>('.guide-details')?.open ?? (step === 'stock' || step === 'prepare' || step === 'observe');
     const focused = (document.activeElement as HTMLElement | null)?.dataset.guideAction;
     const hadFocus = this.element.contains(document.activeElement);
     const number: Record<FirstServiceStep, number> = { stock: 1, prepare: 2, observe: 3, close: 4, closing: 4, reopen: 5, complete: 6 };

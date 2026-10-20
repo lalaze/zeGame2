@@ -1439,9 +1439,14 @@ export class CafeScene extends Phaser.Scene {
 
   /** "+$12" rising from a sale and fading out. */
   private addFloater(e: Extract<SimEvent, { type: 'sale' }>): void {
-    // Sale events are emitted 52 logical pixels above their customer feet.
-    const customer = this.sim.customers.find(c => c.x === e.x && c.y === e.y + 52 && seated(c));
-    const anchor = customer ? tablePos(Math.floor(customer.seat / 2)) : { x: e.x, y: e.y + 52 };
+    // The paying visit is named by id. Older events carry none; those still have their
+    // coordinates, which are emitted 52 logical pixels above the customer's feet.
+    const customer = e.customerId === undefined ? undefined : this.sim.customers.find((c) => c.id === e.customerId);
+    // A seated guest is anchored on their table, so the pop-up rises over the table
+    // instead of drifting with the walk cycle. Everyone else keeps their own spot.
+    const anchor = customer && seated(customer) && customer.seat >= 0
+      ? tablePos(Math.floor(customer.seat / 2))
+      : { x: e.x, y: e.y + 52 };
     const presented = projectMainAttachment(e, anchor);
     // Stack pop-ups that would land on top of a fresh one.
     let y = presented.y;
@@ -1510,16 +1515,21 @@ export class CafeScene extends Phaser.Scene {
     const tables = mainTableCount(state);
     const maskKey = placementMaskKey(state, this.view.area, def.surface, ghost.skip);
     if (this.ghostMaskCache?.key !== maskKey || this.ghostMaskCache.cells !== cells) {
-      cells.clear().fillStyle(color('#2a1410'), 0.3);
       const rows = def.surface === 'wall' ? WALL_ROWS : FLOOR_ROWS;
       const start = regionOffset(this.view.area) / CELL;
+      const free: { x: number; y: number; w: number; h: number }[] = [];
+      cells.clear().fillStyle(color('#2a1410'), 0.3);
       for (let row = 0; row < rows; row++) {
         for (let col = start; col < start + COLS; col++) {
-          if (cellFree(state, def.surface, col, row, tables, ghost.skip)) continue;
           const cell = cellRect(def.surface, col, row, 1, 1);
-          cells.fillPoints(polygon(cell), true);
+          if (cellFree(state, def.surface, col, row, tables, ghost.skip)) free.push(cell);
+          else cells.fillPoints(polygon(cell), true);
         }
       }
+      // Free cells are lit, not just left undimmed: in a well-used room they can be
+      // a few small pockets that a uniform dark wash would otherwise hide.
+      cells.fillStyle(color('#fcf9df'), 0.35);
+      for (const cell of free) cells.fillPoints(polygon(cell), true);
       this.ghostMaskCache = { key: maskKey, cells };
     }
     const rect = cellRect(def.surface, ghost.col, ghost.row, def.w, def.h);

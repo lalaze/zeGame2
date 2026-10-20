@@ -2,6 +2,10 @@ import { DAY_SECONDS } from './data';
 
 export const BUSINESS_OPEN_HOUR = 8;
 export const BUSINESS_HOURS = 12;
+/** Simulation seconds per business hour: rates and timers are shown on the clock the HUD uses. */
+export const SECONDS_PER_BUSINESS_HOUR = DAY_SECONDS / BUSINESS_HOURS;
+/** Simulation seconds as business-clock seconds, for formatDuration. */
+export const businessSeconds = (seconds: number) => seconds * 3600 / SECONDS_PER_BUSINESS_HOUR;
 
 /** Saved simulation seconds mapped to the 12-hour trading day, held at closing. */
 export function businessElapsedMinutes(seconds: number): number {

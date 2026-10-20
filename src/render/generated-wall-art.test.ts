@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { MENU } from '../game/data';
 import { menuItems } from '../game/economy';
+
 import { FLOOR_Y, WINDOWS } from '../game/layout';
 import { createInitialState } from '../game/state';
 const nativeText = vi.fn();
@@ -167,6 +168,53 @@ describe('selected main-wall bitmaps and live overlays',()=>{
     expect(seen).toEqual(menuItems(state).map(item=>item.id));
     const wrapped=recording();new RoomPainter(wrapped.ctx,2,false).drawMenuBoard(state,32);
     expect(images(wrapped.events).filter(image=>image.source.itemId).map(image=>image.source.itemId)).toEqual(seen.slice(0,3));
+  });
+
+  it('keeps long dish names and late-game prices whole on the chalkboard',()=>{
+    installWalls();const state=createInitialState(0);state.kitchen=true;
+    // "Chai Latte" and "Lemon Black Tea" used to end in an ellipsis on the board.
+    state.onMenu=['chai','lemontea','americano'];for(const id of state.onMenu)state.items[id]=1;
+    // Late-game levels make the prices long too ("$5500").
+    state.items.chai=30;state.items.lemontea=25;state.items.americano=6;
+    const sign=vi.spyOn(lettering,'paintPixelSignText');
+    new RoomPainter(recording().ctx,2,false).drawMenuBoard(state);
+    const drawn=sign.mock.calls.map((call)=>call[1]);
+    expect(drawn).toContain(t('item.chai'));
+    expect(drawn).toContain(t('item.lemontea'));
+    expect(drawn).toContain(t('item.americano'));
+    for(const text of drawn)expect(text).not.toContain('…');
+    // Nothing is elided: every label fits its box at whatever pen size it was given.
+    for(const call of sign.mock.calls.slice(2)){
+      const[,text,,,width,,,pen]=call;
+      const scale=pen??1;
+      expect(scale).toBeGreaterThanOrEqual(0.5);expect(scale).toBeLessThanOrEqual(1);
+      expect(lettering.pixelSignWidth(text,scale)).toBeLessThanOrEqual(width-1);
+    }
+    // A short menu keeps the established full-size lettering.
+    vi.mocked(lettering.paintPixelSignText).mockClear();
+    new RoomPainter(recording().ctx,2,false).drawMenuBoard(createInitialState(0));
+    expect(lettering.paintPixelSignText).toHaveBeenCalled();
+    expect(vi.mocked(lettering.paintPixelSignText).mock.calls.every((call)=>call[7]===undefined)).toBe(true);
+  });
+
+  it.each(['en','zh'] as const)('keeps every name and price whole through the live wall projection in %s',(locale)=>{
+    // The playtest board: a levelled Espresso, two new drinks, and a lone Butter Roll on page 2.
+    const before=getLocale();setLocale(locale);installWalls();const state=createInitialState(0);state.kitchen=true;
+    try{
+    state.onMenu=['espresso','americano','latte','roll'];state.items.espresso=5;state.items.americano=1;state.items.latte=1;state.items.roll=1;
+    const sign=vi.spyOn(lettering,'paintPixelSignText');
+    for(const time of[0,8]){
+      sign.mockClear();
+      new RoomPainter(recording().ctx,2,true).drawMenuBoard(state,time);
+      const rows=sign.mock.calls.filter((call)=>call[1]!==t('board.today')&&!/^\d\/\d$/.test(call[1]));
+      expect(rows.length).toBe(time===0?6:2);
+      for(const[,text,,,width,,,pen]of rows){
+        expect(text).not.toContain('…');expect(text).not.toContain('≈');
+        expect(lettering.pixelSignWidth(text,pen??1)).toBeLessThanOrEqual(width-1);
+      }
+    }
+    expect(sign.mock.calls.map((call)=>call[1])).toContain(t('item.roll'));
+    } finally {setLocale(before);}
   });
 
   it('does not bake menu contents and keeps the legacy board fallback',()=>{

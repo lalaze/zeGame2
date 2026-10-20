@@ -1,6 +1,7 @@
 // @vitest-environment happy-dom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { buyUpgrade, cookCount, quoteUpgrade } from '../game/economy';
+import { DAY_SECONDS } from '../game/data';
+import { arrivalRate, buyUpgrade, cookCount, quoteUpgrade } from '../game/economy';
 import { createInitialState, deserialize, serialize, type GameState } from '../game/state';
 import { setLocale, t } from '../i18n';
 import { Panel } from './panel';
@@ -46,11 +47,25 @@ describe('kitchen expansion upgrade', () => {
     showUpgrades(state);
     expect(cookButton().disabled).toBe(true);
     expect(cookRow().querySelector('.lv')!.textContent).toBe('');
-    expect(cookRow().textContent).toContain('Open the kitchen first');
+    expect(cookRow().textContent).toContain(t('effect.cookLocked'));
+    // No "locked → locked" preview, and no money hint: the kitchen, not cash, is the blocker.
+    expect(cookRow().querySelector('.sub')!.textContent).not.toContain('→');
+    expect(cookRow().querySelector<HTMLElement>('[data-price-details]')!.hidden).toBe(true);
+    state.coins = 0; showUpgrades(state);
+    expect(cookRow().querySelector<HTMLElement>('[data-price-details]')!.hidden).toBe(true);
     expect(cookRow().textContent).toContain('More floor space and +1 cook');
     expect(cookRow().textContent).toContain('3 stages; expand for $900, then $9000');
     expect(buyUpgrade(state, 'cook', 1)).toBe(false);
     expect(state.upgrades.cook).toBe(0);
+  });
+
+  it('states the sign\'s traffic in guests per business day, the forecast\'s unit', () => {
+    const state = createInitialState(0);
+    showUpgrades(state);
+    const row = document.querySelector('[data-buy="upgrade:marketing"]')!.closest<HTMLElement>('.row')!;
+    const after = { ...state, upgrades: { ...state.upgrades, marketing: 1 } };
+    expect(row.textContent).toContain(`${t('effect.marketing', { n: Math.round(arrivalRate(state) * DAY_SECONDS) })} → ${t('effect.marketing', { n: Math.round(arrivalRate(after) * DAY_SECONDS) })}`);
+    expect(row.textContent).not.toContain('/min');
   });
 
   it('shows all three stages, preserves purchase prices, and caps repeat purchases', () => {

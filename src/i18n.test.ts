@@ -3,7 +3,13 @@ import { INGREDIENTS, MENU, UPGRADES } from './game/data';
 import { formatDuration } from './game/format';
 import { detectLocale, messagesFor, setLocale, t, tList, type MessageKey } from './i18n';
 
-const placeholders = (s: string) => [...s.matchAll(/\{(\w+)\}/g)].map((m) => m[1]).sort();
+const placeholders = (s: string) => {
+  // Plural markers such as `{n, dish|dishes}` carry the same placeholder `{n}`.
+  const base = s.replace(/\{(\w+),\s*[^{}|]*\|[^{}]*\}/g, '{$1}');
+  return [...new Set([...base.matchAll(/\{(\w+)\}/g)].map((m) => m[1]))].sort();
+};
+/** List length, ignoring the `|` that separates plural forms inside a marker. */
+const listLength = (s: string) => s.replace(/\{(\w+),\s*[^{}|]*\|[^{}]*\}/g, '').split('|').length;
 
 describe('i18n', () => {
   afterEach(() => setLocale('en'));
@@ -14,8 +20,30 @@ describe('i18n', () => {
     expect(Object.keys(zh).sort()).toEqual(Object.keys(en).sort());
     for (const key of Object.keys(en) as MessageKey[]) {
       expect(placeholders(zh[key]), key).toEqual(placeholders(en[key]));
-      expect(zh[key].split('|').length, key).toBe(en[key].split('|').length);
+      expect(listLength(zh[key]), key).toBe(listLength(en[key]));
       expect(zh[key].trim(), key).not.toBe('');
+    }
+  });
+
+  it('picks the singular form for one and the plural for everything else', () => {
+    expect(t('rating.summary', { n: 1, score: '4.00' })).toBe('1 review · Average 4.00 stars');
+    expect(t('rating.summary', { n: 2, score: '4.00' })).toBe('2 reviews · Average 4.00 stars');
+    expect(t('regular.ui.unread', { n: 1 })).toBe('1 unread story');
+    expect(t('report.reason.lowStock', { n: 1 })).toBe(
+      'The pantry can no longer make 1 menu dish. This alone does not mean customers were lost.');
+    expect(t('report.reason.lowStock', { n: 3 })).toContain('3 menu dishes');
+    expect(t('report.partnerJobs', { n: 1 })).toBe('1 job');
+    expect(t('report.partnerNewStories', { n: 1 })).toBe('1 new story');
+    // Zero and fractions read as plurals.
+    expect(t('menu.left', { n: 0 })).toBe('0 servings in stock');
+    expect(t('menu.left', { n: 1 })).toBe('1 serving in stock');
+    // Chinese keeps one form and never shows the marker.
+    setLocale('zh');
+    expect(t('rating.summary', { n: 1, score: '4.00' })).toBe('1 条 · 平均 4.00 星');
+    expect(t('report.reason.lowStock', { n: 1 })).toContain('1 道菜单商品');
+    expect(t('report.partnerJobs', { n: 2 })).toBe('2 次工作');
+    for (const key of Object.keys(messagesFor('zh')) as MessageKey[]) {
+      expect(t(key, { n: 1, count: 1, max: 1, score: '4.0', price: '$1', items: 'x', money: '$1', item: 'x', extra: 1, total: 1, pct: 1, day: 1, stars: '1', h: 1, m: 1, s: 1, name: 'x', baked: 1, goal: 'x', reward: '$1', sold: 1, slot: 1 }), key).not.toMatch(/\{[a-z]+,/);
     }
   });
 

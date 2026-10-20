@@ -6,6 +6,17 @@
   /* Fusion Pixel by TakWolf (OFL 1.1), subset to the characters the game uses. */
   src: url('./assets/pixel-zh.woff2') format('woff2');
 }
+/* Pixelify Sans draws 5 almost like S ("50" reads "SO"), so English text takes its
+   digits from Fusion Pixel, as Chinese text already does, with one design pixel of
+   space on each side (scripts/pixel-digits.mjs). */
+@font-face {
+  font-family: 'Pixel Digits';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('./assets/pixel-digits.woff2') format('woff2');
+  unicode-range: U+0030-0039;
+}
 
 :root {
   /* Walnut, warm ivory, sage and brass match the café materials. */
@@ -89,7 +100,9 @@ body {
 }
 
 body {
-  font-family: 'Pixelify Sans', 'Pixel ZH', ui-monospace, monospace;
+  font-family: 'Pixel Digits', 'Pixelify Sans', 'Pixel ZH', ui-monospace, monospace;
+  /* Pixelify Sans draws its fi/fl ligatures as an "A"-like glyph ("Arst", "conArm"). */
+  font-variant-ligatures: none;
   font-size: 16px;
   color: var(--ink);
   background-color: #302b28;
@@ -978,11 +991,14 @@ html:lang(zh) body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  line-height: 1.15;
+  gap: 2px;
+  /* Chinese sub-lines need room for descenders; 1.15 made them collide. */
+  line-height: 1.3;
 }
 
 .prep-name small {
   font-size: 12px;
+  line-height: 1.35;
   color: var(--muted);
 }
 
@@ -2179,7 +2195,7 @@ button.coins { display: block; width: 100%; min-height: 32px; padding: 0; border
 .signature-dose { display: grid; grid-template-columns: 36px minmax(0, 1fr) 104px; align-items: center; gap: 8px; border-bottom: 1px solid var(--wood-light); padding-bottom: 6px; }
 .signature-dose img { width: 32px; height: 32px; }
 .signature-dose small { grid-column: 2 / -1; font-size: 11px; color: var(--muted); }
-.signature-dose select { grid-column: 3; grid-row: 1; width: 100%; color: var(--ink); background: var(--cream); border: 2px solid var(--wood-light); font: inherit; font-size: 12px; }
+.signature-dose select { grid-column: 3; grid-row: 1; width: 100%; padding: 4px 28px 4px 8px; color: var(--ink); background-color: var(--cream); border: 2px solid var(--wood-light); font: inherit; font-size: 12px; }
 .signature-summary { background: var(--cream); padding: 10px; border: 2px solid var(--wood-light); }
 .signature-metrics { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; font-size: 13px; }
 .signature-metrics dd { margin: 0; text-align: right; font-weight: bold; }
@@ -2572,7 +2588,8 @@ body {
 #save-session-notice {
   background: var(--paper-grain), var(--cream) !important;
   color: var(--ink) !important;
-  font: 18px/1.6 'Pixelify Sans', 'Pixel ZH', ui-monospace, monospace !important;
+  font: 18px/1.6 'Pixel Digits', 'Pixelify Sans', 'Pixel ZH', ui-monospace, monospace !important;
+  font-variant-ligatures: none !important;
   box-shadow: inset 0 0 0 8px var(--wood), inset 0 0 0 10px var(--wood-light);
 }
 html:lang(zh) #save-session-notice { font-family: 'Pixel ZH', 'Pixelify Sans', ui-monospace, monospace !important; }
@@ -2680,6 +2697,12 @@ body.fullscreen-cafe .day-hud {
 }
 body.fullscreen-cafe .day-clock { flex: 1 0 100%; }
 body.fullscreen-cafe .day-hud .chip { min-width: 44px; min-height: 44px; margin: 0 2px; padding: 4px 7px; }
+/* With room to spare, the clock sits beside the speed buttons. A one-row panel stays
+   clear of the windowsill, so the window cat and OPEN sign remain visible and tappable. */
+@media (min-width: 900px) and (min-height: 560px) {
+  body.fullscreen-cafe .day-hud { flex-wrap: nowrap; align-items: center; max-width: min(500px, calc(100% - 185px)); }
+  body.fullscreen-cafe .day-clock { flex: 0 1 auto; min-width: 0; }
+}
 
 
 body.fullscreen-cafe .open-btn {
@@ -2791,9 +2814,10 @@ body.fullscreen-cafe .toast {
   }
   body.fullscreen-cafe .hud .brand { max-width: calc(100% - 150px); padding: 6px 8px; }
   body.fullscreen-cafe .hud .money { width: 118px; min-height: 58px; padding: 4px 8px; }
-  body.fullscreen-cafe .money .coins { min-height: 32px; font-size: 20px; }
+  /* The balance opens amount details, so it keeps a full 44px touch target. */
+  body.fullscreen-cafe .money .coins { min-height: 44px; font-size: 20px; }
   body.fullscreen-cafe .money .rate { font-size: 11px; }
-  body.fullscreen-cafe .cafe-status-bar { top: calc(var(--edge-top) + 70px); width: 118px; }
+  body.fullscreen-cafe .cafe-status-bar { top: calc(var(--edge-top) + 80px); width: 118px; }
   body.fullscreen-cafe .day-hud {
     top: calc(var(--edge-top) + 58px); max-width: calc(100% - 154px); width: 224px;
     padding: 6px; gap: 6px; font-size: 12px;
@@ -2875,14 +2899,19 @@ body.fullscreen-cafe .environment-art {
   image-rendering: pixelated; pointer-events: none; user-select: none;
 }
 
-/* A small next-step strip; the existing detailed copy remains discoverable. */
+/* A small next-step strip; the existing detailed copy remains discoverable.
+   It sits in the right-hand floor space so the left dining bay, tables and the
+   service-status row stay visible while the guide is up. */
 body.fullscreen-cafe .first-service {
-  left: var(--edge-left); bottom: calc(var(--edge-bottom) + 66px);
+  left: auto; right: var(--edge-right); bottom: calc(var(--edge-bottom) + 66px);
   width: min(360px, calc(100% - var(--edge-left) - var(--edge-right)));
   padding: 7px 8px; max-height: min(300px, 46dvh);
   transform: none; overflow: auto; font-size: 12px;
   background: var(--cream); border: 2px solid var(--wood-light);
 }
+/* Keep the open drawer's column clear. */
+body.fullscreen-cafe.drawer-open .first-service { right: calc(var(--edge-right) + min(380px, calc(100% - var(--edge-left) - var(--edge-right))) + 12px); }
+body.fullscreen-cafe.mobile-drawer-open .first-service { display: none; }
 body.fullscreen-cafe .guide-heading { display: flex; align-items: flex-start; gap: 8px; }
 body.fullscreen-cafe .guide-details { flex: 1; min-width: 0; }
 body.fullscreen-cafe .guide-details > summary {
@@ -2947,20 +2976,31 @@ body.fullscreen-cafe .drawer-balance { max-width: 50%; min-width: 0; overflow-wr
 
 /* Reserve separate rows for view controls, receipts, and the expandable guide. */
 body.fullscreen-cafe { --view-tip-bottom: calc(var(--edge-bottom) + 124px); }
+/* The service-status chip keeps its own row; the guide sits one row above it. */
+body.fullscreen-cafe { --status-row: 52px; }
 body.fullscreen-cafe .first-service {
-  bottom: calc(var(--view-tip-bottom) + var(--toast-clearance, 0px));
-  max-height: min(300px, 46dvh, calc(100dvh - var(--edge-top) - var(--view-tip-bottom) - var(--toast-clearance, 0px) - 12px));
+  bottom: calc(var(--view-tip-bottom) + var(--status-row) + var(--toast-clearance, 0px));
+  max-height: min(300px, 46dvh, calc(100dvh - var(--edge-top) - var(--view-tip-bottom) - var(--status-row) - var(--toast-clearance, 0px) - 12px));
 }
 
 /* Only the canvas is magnified; management and controls keep their touch sizes. */
 .room-zoom-controls { position: absolute; z-index: 12; left: 50%; bottom: calc(64px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); display: flex; gap: 4px; }
 .room-zoom-controls button { min-width: 44px; min-height: 44px; padding: 6px 10px; }
 body.fullscreen-cafe:has(.scene-wrap.is-overview) .first-service { visibility: hidden; pointer-events: none; }
+/* The map needs the whole building; rating, team and regulars return with the room view. */
+body.fullscreen-cafe:has(.scene-wrap.is-overview) .cafe-status-bar { visibility: hidden; pointer-events: none; }
+/* A dialog is the current step; the card behind it would only repeat or contradict it. */
+body.fullscreen-cafe:has(#modal-root .modal-overlay) .first-service { visibility: hidden; pointer-events: none; }
 .room-zoom-controls.is-overview #room-zoom-out,
 .room-zoom-controls.is-overview #room-zoom-in { display: none; }
 .stage:has(.scene-wrap.is-panning) .room-zoom-controls,
 .stage:has(.scene-wrap.arranging) .room-zoom-controls { visibility: hidden; pointer-events: none; }
 @media (max-height: 500px) { .room-zoom-controls { left: auto; right: 12px; bottom: 72px; transform: none; } }
+/* On wide screens the view controls sit just left of the street door, so arriving
+   guests are not hidden behind Overview as they walk in. */
+@media (min-width: 900px) and (min-height: 501px) {
+  body.fullscreen-cafe .room-zoom-controls:not(.is-overview) { left: calc(50% - 70px); transform: translateX(-100%); }
+}
 @media (max-height: 500px) { body.fullscreen-cafe.shortcuts-open .room-zoom-controls { visibility: hidden; pointer-events: none; } }
 
 :root {
@@ -3208,7 +3248,8 @@ input:not([type="checkbox"]):not([type="radio"]), select, textarea {
 input::placeholder, textarea::placeholder { color: var(--muted); opacity: 1; }
 input[type="number"] { accent-color: var(--green-dark); }
 input[type="number"]::-webkit-inner-spin-button { opacity: 1; min-height: 32px; cursor: pointer; }
-select {
+select, .signature-dose select {
+  /* The lab select is listed again so its `background` shorthand above cannot erase the arrow. */
   appearance: none; padding-right: 28px;
   background-image: linear-gradient(var(--ink), var(--ink)), linear-gradient(var(--ink), var(--ink)), linear-gradient(var(--ink), var(--ink));
   background-size: 10px 2px, 6px 2px, 2px 2px;

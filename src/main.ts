@@ -11,10 +11,10 @@ import { showLivingCat } from './ui/living-cats';
 import type { CatId } from './game/pets';
 import { DAY_SECONDS, SPEEDS } from './game/data';
 import { openShop, type DayReport } from './game/day';
-import { formatBusinessClock, formatBusinessDuration } from './game/business-clock';
+import { businessSeconds, formatBusinessClock, formatBusinessDuration } from './game/business-clock';
 import { expectedCustomers, menuItems, tipMultiplier, unlockedItems } from './game/economy';
-import { canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
-import { formatMoney, formatTransactionMoney } from './game/format';
+import { blocksNextTable, canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
+import { formatDuration, formatMoney, formatTransactionMoney } from './game/format';
 import { MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
 import { adjacentArea, isAreaOpen, mainTableCount, regionOffset } from './game/regions';
 import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, furnitureDef } from './game/furniture';
@@ -193,8 +193,12 @@ previewExit.addEventListener('click', () => {
   panel.clearTablePreview();
   showPanelTab('upgrades');
 });
+// Set once the panel exists; the first layout pass runs before that.
+let panelSimplifiedTabs: ((available: boolean) => void) | null = null;
 function updateDrawerLabels(): void {
   roomViewport?.refreshLabels();
+  // Phones have no shortcut rail, so the guided first shift must keep every tab.
+  panelSimplifiedTabs?.(shortcuts.available);
   previewExit.textContent = chinese() ? '返回升级' : 'Back to upgrades';
   $('drawer-title').textContent = t('panel.title');
   $('drawer-close').setAttribute('aria-label', chinese() ? '关闭管理' : 'Close management');
@@ -266,6 +270,8 @@ const panel = new Panel(
     }
   },
 );
+panelSimplifiedTabs = (available) => panel.setSimplifiedTabs(available);
+updateDrawerLabels();
 
 /** Opening a management task also reveals the panel if the player folded it away. */
 function showPanelTab(tab: 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | 'promotion'): void {
@@ -291,7 +297,8 @@ function revealAllTools(): void {
 }
 const guide = new FirstServiceGuide(() => state, storage, {
   prepare: () => prepareDay(),
-  close: () => closeDay(),
+  // The guide's own Close step is an explicit, labelled choice.
+  close: () => closeDay(true),
   status: () => operationBtn.click(),
   allTools: revealAllTools,
 });
@@ -437,7 +444,7 @@ function arrangeTap(x: number, y: number): void {
   if (!ok) {
     // Show where it was tapped, in red, so it's clear why.
     scene.ghost = { ...scene.ghost!, col, row };
-    toast(t('arrange.blocked'));
+    toast(t(blocksNextTable(state, arrange.id, col, row, tables) ? 'arrange.reservedTable' : 'arrange.blocked'));
     return;
   }
   for (let i = 0; i < 6; i++) scene.sparkle(x + (Math.random() - 0.5) * 16, y - Math.random() * 16);
@@ -548,9 +555,11 @@ function updateDayHud(): void {
   const status = operationMonitor.update(state, sim);
   operationBtn.textContent = t(status.kind === 'ingredients' ? 'flow.shortageTitle' : `ops.${status.kind}`);
   if (!open) operationMonitor.reset();
-  $('day-hud').hidden = !isAreaOpen(state, scene.area);
+  // While closed, the money card already reads "Closed · Day N"; the clock panel returns at opening.
+  $('day-hud').hidden = !open || !isAreaOpen(state, scene.area);
   for (const b of speedBtns) b.classList.toggle('active', Number(b.dataset.speed) === state.speed);
-  openBtn.hidden = open || !state.profile || scene.area !== 'main';
+  // Planning works from any room; the day can start without walking back to the counter.
+  openBtn.hidden = open || !state.profile;
   const label = t('day.open', { n: state.day });
   if (openBtn.textContent !== label) openBtn.textContent = label;
   hint.hidden = !open || guide.simplify || !!storage.preference(HINT_KEY);
@@ -591,8 +600,16 @@ function prepareDay(): void {
 openBtn.addEventListener('click', prepareDay);
 
 /** The player ends the day: the doors shut and the books are settled. */
-function closeDay(): void {
-  if (state.phase === 'open') {
+function closeDay(confirmed = false): void {
+  if (state.phase === 'open' && !confirmed) {
+    // Closing cannot be undone and sits beside the speed buttons, so the HUD asks first.
+    showModal({ title: t('day.closeConfirm.title'),
+      body: t('day.closeConfirm.body', { clock: formatBusinessClock(state.dayTime), time: formatDuration(businessSeconds(Math.max(0, DAY_SECONDS - state.dayTime))) }),
+      buttons: [
+        { label: t('day.closeConfirm.keep'), primary: true },
+        { label: t('day.close'), danger: true, onClick: () => closeDay(true) },
+      ] });
+  } else if (state.phase === 'open') {
     sim.beginClosing(state);
     saveGame(); updateDayHud();
   } else if (state.phase === 'closing') {
@@ -602,7 +619,7 @@ function closeDay(): void {
     ] });
   }
 }
-closeBtn.addEventListener('click', closeDay);
+closeBtn.addEventListener('click', () => closeDay());
 $('reputation-btn').addEventListener('click', () => showReputation(state));
 $('partners-btn').addEventListener('click', () => showPartners(state, sim, saveGame));
 $('regular-guests-btn').addEventListener('click', () => showRegularGuests(state, saveGame));

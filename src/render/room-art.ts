@@ -1,7 +1,7 @@
 import { curtainSource, TEXTILE_COLORS } from './textile-styles';
 import { artRamp, mainTimber, mainCabinet, mainWall, mainFloor, mainCarpet, mainRug, mainSillPlant, mainSkyDisc, mainPickup, counterMaterial } from './main-room-surfaces';
 import { getLocale, t } from '../i18n';
-import { paintPixelSignText as paintSignText } from './sign-lettering';
+import { paintPixelSignText as paintSignText, pixelSignWidth } from './sign-lettering';
 import { displayItemName } from '../ui/item-name';
 import { formatTransactionMoney } from '../game/format';
 import { mainKeyLight, paintWindowBounce } from './main-room-lighting';
@@ -52,7 +52,7 @@ import { paintFineTrailingPlant } from './fine-plant-art';
 import { generatedMainRaster, paintGeneratedMain } from './generated-main-art';
 
 const WOOD = { base: '#865332', hi: '#c98c4d', lo: '#67432b', dark: '#543425' };
-type RoomLabel = [text: string, cx: number, y: number, width: number, height: number, color: string];
+type RoomLabel = [text: string, cx: number, y: number, width: number, height: number, color: string, scale?: number];
 type WindowBounds = { x: number; y: number; w: number; h: number };
 
 // Alpha-visible foot anchors from the selected, unchanged service PNG manifest.
@@ -380,23 +380,41 @@ export class RoomPainter {
       const iw = icon.width * scale, ih = icon.height * scale;
       ctx.drawImage(fineSpriteArt(icon).canvas, left + (size - iw) / 2, top + (size - ih) / 2, iw, ih);
     };
+    // A shop's own board shows the rounded price it charges, without the ledger's "≈".
     const priceOf = (item: typeof today[number]) => formatTransactionMoney(
-      item.id.startsWith('sig:') ? item.basePrice : itemPrice(item, state.items[item.id]));
+      item.id.startsWith('sig:') ? item.basePrice : itemPrice(item, state.items[item.id])).replace(/^≈/, '');
+    // Lettering keeps its size when a plane narrows the board, so each box is sized
+    // for its projected interior: a box of `boxFor(w)` still holds `w` after projection
+    // (the extra quarter unit absorbs floating-point loss in width * plane).
+    const plane = this.labels ? this.labelPlane : 1;
+    const boxFor = (textWidth: number) => (Math.ceil(textWidth) + 1.25) / plane;
+    const pens = [1, 0.75, 0.5] as const;
     if (today.length === 0) {
       this.sign(ctx, t('board.empty'), x + width / 2, y + 18, width - 8, 7, muted);
     } else if (today.length === 1) {
       const item = today[0], textLeft = x + 29, textWidth = width - 31;
+      const name = displayItemName(item.id, state), price = priceOf(item);
+      const pen = pens.find((s) => boxFor(Math.max(pixelSignWidth(name, s), pixelSignWidth(price, s))) <= textWidth) ?? 0.5;
       iconAt(item.id, x + 6, y + 13, 17);
-      this.sign(ctx, displayItemName(item.id, state), textLeft + textWidth / 2, y + 12, textWidth, 8, chalk);
-      this.sign(ctx, priceOf(item), textLeft + textWidth / 2, y + 23, textWidth, 7, gold);
+      this.sign(ctx, name, textLeft + textWidth / 2, y + 12, textWidth, 8, chalk, pen === 1 ? undefined : pen);
+      this.sign(ctx, price, textLeft + textWidth / 2, y + 23, textWidth, 7, gold, pen === 1 ? undefined : pen);
     } else {
-      today.slice(page * 3, page * 3 + 3).forEach((item, i) => {
+      // Names and prices are measured with the same pen the board paints with, so a
+      // long late-game price ("$5500", "$13.9K") gets the room it needs instead of
+      // becoming "$18…". A page whose widest row still cannot fit steps the pen down
+      // a size, which keeps every name and price whole rather than elided.
+      const iconWidth = 8, gap = 2, rowWidth = width - iconWidth - gap;
+      const rows = today.slice(page * 3, page * 3 + 3).map((item) => ({ id: item.id, price: priceOf(item), name: displayItemName(item.id, state) }));
+      const layout = (pen: number) => rows.map((row) => {
+        const priceWidth = boxFor(pixelSignWidth(row.price, pen));
+        return { ...row, priceWidth, nameWidth: Math.min(rowWidth - priceWidth, boxFor(pixelSignWidth(row.name, pen))), fits: priceWidth + boxFor(pixelSignWidth(row.name, pen)) <= rowWidth };
+      });
+      const scale = pens.find((pen) => layout(pen).every((row) => row.fits)) ?? 0.5;
+      layout(scale).forEach((row, i) => {
         const rowY = y + 11 + i * 7.5;
-        const price = priceOf(item), priceWidth = Math.min(30, Math.max(12, textWidth(price) + 3));
-        const nameWidth = width - 11 - priceWidth;
-        iconAt(item.id, x + 1, rowY, 6.5);
-        this.sign(ctx, displayItemName(item.id, state), x + 9 + nameWidth / 2, rowY, nameWidth, 6.5, chalk);
-        this.sign(ctx, price, x + width - priceWidth / 2, rowY, priceWidth, 6.5, gold);
+        iconAt(row.id, x + 1, rowY, 6.5);
+        this.sign(ctx, row.name, x + iconWidth + row.nameWidth / 2, rowY, row.nameWidth, 6.5, chalk, scale);
+        this.sign(ctx, row.price, x + width - row.priceWidth / 2, rowY, row.priceWidth, 6.5, gold, scale);
       });
     }
   }
@@ -451,6 +469,8 @@ export class RoomPainter {
   private projectedFloor: HTMLCanvasElement | null = null;
   private floorSignature = '';
   private labels: RoomLabel[] | null = null;
+  /** Horizontal factor the current plane applies to label boxes, but not to their glyphs. */
+  private labelPlane = 1;
 
   private sign(ctx: CanvasRenderingContext2D, ...label: RoomLabel): void {
     if (this.labels) this.labels.push(label);
@@ -468,19 +488,19 @@ export class RoomPainter {
     const target = this.ctx, ctx = source.getContext('2d')!;
     ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, source.width, source.height);
     ctx.setTransform(2, 0, 0, 2, 0, 0); ctx.imageSmoothingEnabled = false;
-    const labels: RoomLabel[] = [], previousLabels = this.labels;
-    this.labels = labels; this.ctx = ctx;
-    try { paint(); } finally { this.ctx = target; this.labels = previousLabels; }
     const a = projectMainPlaneWorld({ x: 0, y: footY }, footY);
     const b = projectMainPlaneWorld({ x: SCENE_W, y: footY }, footY);
+    const labels: RoomLabel[] = [], previousLabels = this.labels, previousPlane = this.labelPlane;
+    this.labels = labels; this.ctx = ctx; this.labelPlane = (b.x - a.x) / SCENE_W;
+    try { paint(); } finally { this.ctx = target; this.labels = previousLabels; this.labelPlane = previousPlane; }
     target.save(); target.imageSmoothingEnabled = false;
     target.drawImage(source, Math.round(a.x * 2) / 2, 0, Math.round((b.x - a.x) * 2) / 2, H);
     target.restore();
     // Lettering is painted AFTER the horizontal plane resample. One-art-pixel
     // Chinese strokes must not be dropped by the room's 90% wall projection.
-    for (const [text, cx, y, width, height, color] of labels) {
+    for (const [text, cx, y, width, height, color, scale] of labels) {
       paintSignText(target, text, projectMainPlaneWorld({ x: cx, y: footY }, footY).x,
-        y, width * (b.x - a.x) / SCENE_W, height, color);
+        y, width * (b.x - a.x) / SCENE_W, height, color, scale);
     }
   }
 

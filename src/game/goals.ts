@@ -16,7 +16,8 @@ const daysDone = (s: GameState) => s.day - 1;
 export const GOALS: readonly GoalDef[] = [
   { id: 'firstDay', reward: 30, progress: (s) => [daysDone(s), 1] },
   { id: 'espresso5', reward: 40, progress: (s) => [s.items.espresso, 5] },
-  { id: 'roll', reward: 60, progress: (s) => [s.items.roll, 1] },
+  // A second drink comes before baking: food needs the $800 kitchen, which the capacity goal covers.
+  { id: 'americano', reward: 60, progress: (s) => [s.items.americano, 1] },
   { id: 'latte', reward: 80, progress: (s) => [s.items.latte, 1] },
   { id: 'milk', reward: 60, progress: (s) => [Math.min(s.pantry.milk, 20), 20] },
   { id: 'sign', reward: 100, progress: (s) => [Math.max(s.upgrades.marketing, s.upgrades.machine), 1] },

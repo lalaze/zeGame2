@@ -4,7 +4,7 @@ import { promotionPlan } from '../game/promotion';
 import { forecastPetTraffic } from '../game/pets';
 import { BAKE_STEP, type ItemId } from '../game/data';
 import { checkOpen } from '../game/day';
-import { canPrepareItem, bakeForForecast, dayDemand, expectedCustomers, isBakery, menuItems, readyServings, recipe, restock, restockQuote, setBakePlan, setOnMenu, suggestedBake, unlockedItems } from '../game/economy';
+import { averageDishPrice, canPrepareItem, bakeForForecast, dayDemand, expectedCustomers, isBakery, menuItems, readyServings, recipe, restock, restockQuote, setBakePlan, setOnMenu, suggestedBake, unlockedItems } from '../game/economy';
 import { reputationTraffic } from '../game/reputation';
 import { trafficPercent } from './reputation';
 import { kitchenLoad } from '../game/kitchen';
@@ -90,6 +90,7 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
       ${starterStock ? `<p class="note prep-starter">${t('prep.starterStock', { n: formatNumber(readyServings(state, 'espresso')) })}</p>` : ''}
       ${hasBakery ? `<p class="note prep-bakery-hint">${t('prep.bakeryHint')}</p>` : ''}
       <div class="prep-list">${rows}</div>
+      ${onMenu.size > 1 ? `<p class="note prep-average">${t('prep.average', { price: formatMoney(averageDishPrice(state)) })}</p>` : ''}
       ${onMenu.size === 0 ? `<p class="note warn prep-empty-menu" id="prep-empty-menu">${t('prep.emptyMenu')}</p>` : ''}
       ${hasBakery ? `<button class="pixel-btn small ghost" data-focus="forecast" data-forecast ${[...onMenu].some(isBakery) ? '' : 'disabled'}>${t('bake.all')}</button>` : ''}
       ${kitchenLoad(state) > 1 ? `<p class="note warn">${t('prep.capacity')}</p>` : ''}
@@ -141,7 +142,7 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
   });
   body.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;
-    if (target.closest('[data-signature-research]')) { showSignatureDrinks(state, onChange); return; }
+    if (target.closest('[data-signature-research]')) { showSignatureDrinks(state, onChange, () => showPrepare(state, onStart, onChange)); return; }
     const step = target.closest<HTMLButtonElement>('button[data-bake]');
     if (step) {
       const [id, dir] = step.dataset.bake!.split(':') as [ItemId, string];

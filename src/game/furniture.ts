@@ -174,6 +174,16 @@ function fits(state: GameState, def: FurnitureDef, col: number, row: number, tab
   });
 }
 
+/**
+ * Whether a floor piece at (col, row) would sit on the main café's next table spot,
+ * which stays clear so buying a table never has to move furniture out of the way.
+ */
+export function blocksNextTable(state: GameState, id: string, col: number, row: number, tables: number): boolean {
+  const def = furnitureDef(id);
+  if (!def || def.surface !== 'floor' || tables >= MAX_TABLES || areaAtX(col * CELL) !== 'main' || !isAreaOpen(state, 'main')) return false;
+  return overlaps(footprint(def, col, row), tableRect(tables));
+}
+
 /** Whether a single cell is free, for drawing the grid while placing. */
 export function cellFree(state: GameState, surface: Surface, col: number, row: number, tables: number, skip = -1): boolean {
   return fits(state, { id: '', category: 'decoration', surface, w: 1, h: 1, cost: 0, comfort: 0 }, col, row, tables, skip);

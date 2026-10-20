@@ -2,6 +2,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { closeModal, isModalOpen, showModal } from './modal';
 import { showOnboarding } from './onboarding';
+import { t } from '../i18n';
 import { containDialogFocus } from './dialog-focus';
 import { isComposingKey, usesNativeKeyboard } from './keyboard';
 
@@ -149,6 +150,17 @@ describe('onboarding keyboard', () => {
     expect(document.activeElement?.id).toBe('opener');
   });
 
+  it('names owner swatches by their visible group and reports which one is chosen', () => {
+    start();
+    press(document.querySelector('#cafe-name')!, 'Enter');
+    const apron = document.querySelector<HTMLElement>('.swatches[data-key="shirt"]')!;
+    expect(apron.getAttribute('role')).toBe('group');
+    expect(apron.getAttribute('aria-label')).toBe(t('ob.char.apron'));
+    const [first] = apron.querySelectorAll<HTMLButtonElement>('.swatch');
+    expect(first.getAttribute('aria-label')).toBe(`${t('ob.char.apron')} 1`);
+    expect(document.querySelector('[aria-label^="shirt"], [aria-label^="hairStyle"]')).toBeNull();
+    expect([...apron.querySelectorAll('.swatch')].filter((b) => b.getAttribute('aria-pressed') === 'true')).toHaveLength(1);
+  });
   it('advances a normal Enter in the name field and keeps focus inside the new step', () => {
     start();
     press(document.querySelector('#cafe-name')!, 'Enter');

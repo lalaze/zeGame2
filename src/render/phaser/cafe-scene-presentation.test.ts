@@ -61,4 +61,29 @@ describe('scene projection attachment groups', () => {
     expect(images.find(i => i.key === 'cup')).toMatchObject({ x: foot.x - 9, y: table.y - 24 });
     expect(scene.customerPoint(customer).x).toBe(foot.x - 20);
   });
+
+  it('anchors a sale pop-up on the paying guest, not on stale coordinates', () => {
+    const { scene } = harness();
+    const table = tablePos(0);
+    // A seated guest pays; their coordinates may drift with the walk cycle.
+    const guest = { id: 42, seat: 0, phase: 'waiting', look: {}, x: table.x + 9, y: table.y + 3 };
+    scene.sim.customers = [guest]; scene.sim.seats = [42, null];
+    scene.add = {
+      bitmapText: () => ({}),
+      container: () => ({ setDepth: () => undefined, setY: () => undefined, destroy: () => undefined, alpha: 1 }),
+    };
+    scene.tweens = { add: () => undefined, killTweensOf: () => undefined };
+    scene.floaters = [];
+    scene.view = { viewX: 0, viewY: 0, viewWidth: 320, viewHeight: 240, sales: [], sparkle: () => undefined };
+    const floater = scene as unknown as { addFloater: (e: unknown) => void };
+    // The event names the visit, so the pop-up lands over their table.
+    floater.addFloater({ type: 'sale', amount: 3, x: guest.x, y: guest.y - 52, vip: false, customerId: 42 });
+    expect(scene.floaters).toHaveLength(1);
+    const seatX = projectMainWorld(table).x;
+    expect(Math.abs(scene.floaters[0].x - seatX)).toBeLessThan(30);
+    // A guest who already left keeps their own recorded spot.
+    floater.addFloater({ type: 'sale', amount: 5, x: 210, y: 90, vip: false, customerId: 999 });
+    expect(scene.floaters).toHaveLength(2);
+    expect(Math.abs(scene.floaters[1].x - projectMainWorld({ x: 210, y: 142 }).x)).toBeLessThan(30);
+  });
 });

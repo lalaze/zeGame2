@@ -113,7 +113,12 @@ export function settlementAdvice(report: DayReport, state: GameState): Settlemen
 
     if (cancelled || unfinishedBakeCost > EPSILON) return { kind: 'finishService', tab: 'menu', cost: 0 };
     if (staleCount) {
-      const item = (Object.keys(report.stale) as ItemId[]).find((id) => state.onMenu.includes(id) && isBakery(id) && (state.bakePlan[id] ?? 0) > 0);
+      // A dish that also ran short was baked at the wrong time, not too much: a smaller
+      // batch would only add stock-outs, so it gets the schedule review instead.
+      const short = (id: ItemId) => (report.shortages[id] ?? 0) > 0;
+      const item = (Object.keys(report.stale) as ItemId[]).find((id) => state.onMenu.includes(id) && isBakery(id) && (state.bakePlan[id] ?? 0) > 0 && !short(id));
+      const mistimed = (Object.keys(report.stale) as ItemId[]).find((id) => state.onMenu.includes(id) && isBakery(id) && short(id));
+      if (!item && mistimed) return { kind: 'reviewBake', tab: 'menu', cost: 0, item: mistimed };
       if (item) return { kind: 'reduceBake', tab: 'menu', cost: 0, item, amount: Math.max(0, (state.bakePlan[item] ?? 0) - Math.max(1, report.stale[item] ?? 0)) };
       const bakery = onMenu.find(({ id }) => isBakery(id));
       return bakery ? { kind: 'reviewBake', tab: 'menu', cost: 0, item: bakery.id } : { kind: 'watchService', tab: 'menu', cost: 0 };

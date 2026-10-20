@@ -74,7 +74,8 @@ function art(id: SignatureArtKey): HTMLImageElement {
 }
 
 /** A single mounted dialog isolates focus; every mutation is checked against live state. */
-export function showSignatureDrinks(state: GameState, onChange: () => void): void {
+/** `onClose` reopens whatever dialog led here, such as Prepare, instead of dropping back to the room. */
+export function showSignatureDrinks(state: GameState, onChange: () => void, onClose?: () => void): void {
   const words = copy[getLocale()];
   const root = element('div', '', 'signature-research');
   let base: Base = 'coffee';
@@ -197,8 +198,8 @@ export function showSignatureDrinks(state: GameState, onChange: () => void): voi
     page(button(words.back, 'back', () => { notice = ''; showList(); }), element('h3', drink.name), art(def.base), element('p', drink.onMenu ? words.listed : words.unlisted), summary(id), status(), name, actions, ...(full ? [element('p', words.menuFull, 'note')] : []), deletion);
   }
   showList();
-  showModal({ title: words.title, body: root, focusableBody: true, buttons: [{ label: words.close }] });
+  showModal({ title: words.title, body: root, focusableBody: true, buttons: [{ label: words.close, onClick: onClose }] });
   const dialog = root.closest<HTMLElement>('[role="dialog"]')!; dialog.classList.add('signature-modal');
-  dialog.addEventListener('keydown', event => { if (event.key === 'Escape' && !isComposingKey(event)) { event.preventDefault(); event.stopPropagation(); closeModal(); } });
+  dialog.addEventListener('keydown', event => { if (event.key === 'Escape' && !isComposingKey(event)) { event.preventDefault(); event.stopPropagation(); closeModal(); onClose?.(); } });
 }
 export const showSignatureResearch = showSignatureDrinks;

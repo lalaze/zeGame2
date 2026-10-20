@@ -1,20 +1,33 @@
 import { PARTNERS, PARTNER_ROLES, PARTNER_NODES, PARTNER_RECRUIT_COST, PARTNER_TRAIN_COST, PARTNER_TRAIN_XP, partnerSlots, partnerUnread, syncPartners, recruitPartner, assignPartner, trainPartner, readPartnerChapter, type PartnerDefinition, type PartnerRole } from '../game/partners';
 import { PARTNER_STORIES } from '../game/partner-stories';
+import { formatTransactionMoney } from '../game/format';
 import type { GameState } from '../game/state';
 import type { Sim } from '../game/sim';
-import { getLocale } from '../i18n';
+import { getLocale, pluralForm } from '../i18n';
 import { character, toDataURL } from '../render/sprites';
 import { fineSpriteArt } from '../render/fine-sprite-art';
 import { showModal } from './modal';
 export const partnerText = (zh: string, en: string) => getLocale() === 'zh' ? zh : en;
+/** Localized count of a countable noun in this screen's ad-hoc bilingual copy. */
+export const partnerCount = (n: number, zhUnit: string, one: string, many: string) =>
+  `${n} ${pluralForm(getLocale() === 'zh' ? zhUnit : `${one}|${many}`, n)}`;
 const roleName = (r: PartnerRole) => ({ barista: partnerText('咖啡师','Barista'), server: partnerText('服务员','Server'), cook: partnerText('厨师','Cook') })[r];
 const node = <K extends keyof HTMLElementTagNameMap>(tag: K, value: string, cls = '') => {
   const n = document.createElement(tag); n.textContent = value; n.className = cls; return n;
 };
 export function updatePartnersButton(state: GameState): void {
   const b = document.getElementById('partners-btn'); if (!b) return;
-  const count = partnerUnread(state), label = partnerText('伙伴','Team') + (count ? ' · ' + count : '');
-  if (b.textContent !== label) b.textContent = label;
+  // Unread stories get the same badge as Regulars, so "Team · 3" is never read as a headcount.
+  const count = partnerUnread(state), label = partnerText('伙伴','Team');
+  let name = b.querySelector<HTMLElement>('[data-partner-label]'), badge = b.querySelector<HTMLElement>('[data-partner-unread]');
+  if (!name || !badge) {
+    name = node('span', label); name.dataset.partnerLabel = '';
+    badge = node('span', '', 'regular-unread-badge'); badge.dataset.partnerUnread = ''; badge.setAttribute('aria-hidden', 'true');
+    b.replaceChildren(name, badge);
+  }
+  if (name.textContent !== label) name.textContent = label;
+  if (badge.textContent !== String(count)) badge.textContent = String(count);
+  badge.hidden = count === 0;
   b.setAttribute('aria-label', partnerText('咖啡馆伙伴','Café partners') + (count ? partnerText('，未读故事 ',', unread stories ') + count : ''));
 }
 function specialtyDescription(role: PartnerRole, choice: 'a' | 'b'): string {
@@ -57,15 +70,20 @@ export function showPartners(state: GameState, sim: Sim, save: () => void, selec
   }
   function list(): void {
     const intro=node('div','', 'regular-intro');
-    intro.append(node('h3',partnerText('一起把日子过好','Good days, together')),node('p',partnerText('9 位候选伙伴，每种职业 3 位。候选与上岗名额分开；已购岗位的人手免费保留。店主单独工作，不占伙伴名额。','Nine candidates, three per role. Your roster and active slots are separate; purchased staffing stays yours free. The owner works separately.'),'note'),
+    intro.append(node('h3',partnerText('一起把日子过好','Good days, together')),node('p',partnerText('9 位候选伙伴，每种职业 3 位。在「升级」里购买的岗位会自动免费补足人手；招募伙伴可以决定由谁上岗。店主始终一起工作，不占岗位。','Nine candidates, three per role. Every staff slot you buy in Upgrades is filled automatically at no extra cost; recruiting a partner lets you choose who fills it. The owner always works too and never takes a slot.'),'note'),
     node('p',partnerText('关店后可以招募、换班和培养。故事随实际工作与不同营业日解锁，随时可稍后再看。','Recruit, assign and train while closed. Stories unlock through real work across business days; read whenever you like.'),'note'));
     const cards=node('div','', 'regular-cards');
     for(const role of PARTNER_ROLES) {
       cards.append(node('h3',roleName(role)+' · '+partnerText('上岗 ','Active ')+state.partners.active[role].length+'/'+partnerSlots(state,role)));
+      if(!partnerSlots(state,role)) cards.append(node('p',{
+        barista:partnerText('还没有咖啡师岗位：在「升级」里雇用咖啡师即可增加。店主会照常在吧台工作。','No barista slots yet: Hire Barista in Upgrades adds one. The owner keeps brewing at the counter.'),
+        server:partnerText('还没有服务员岗位：在「升级」里雇用服务员即可增加。','No server slots yet: Hire Server in Upgrades adds one.'),
+        cook:partnerText('还没有厨师岗位：建好后厨后会自带一位厨师。','No cook slots yet: building the kitchen comes with one cook.'),
+      }[role],'note'));
       for(const p of PARTNERS.filter(p=>p.role===role)) {
         const c=node('section','', 'regular-profile'); c.dataset.partner=p.id; c.append(identity(p));
         const progress=state.partners.roster[p.id], active=state.partners.active[role].includes(p.id);
-        c.append(node('p',progress ? (active?partnerText('在岗','On duty'):partnerText('候补','Reserve'))+' · '+progress.xp+' XP · '+progress.workedDays+partnerText(' 个营业日',' business days') : partnerText('尚未加入','Not recruited'),'note'));
+        c.append(node('p',progress ? (active?partnerText('在岗','On duty'):partnerText('候补','Reserve'))+' · '+progress.xp+' XP · '+partnerCount(progress.workedDays,'个营业日','business day','business days') : partnerText('尚未加入','Not recruited'),'note'));
         const open=action(partnerText('查看伙伴','View partner'),()=>profile(p.id)); open.dataset.partnerOpen=p.id; c.append(open); cards.append(c);
       }
     }
@@ -91,9 +109,14 @@ export function showPartners(state: GameState, sim: Sim, save: () => void, selec
     if(!progress) {
       const recruit=action(partnerText('招募候补 · ','Recruit reserve · ')+'$'+PARTNER_RECRUIT_COST,()=>commit(recruitPartner(state,id),id),state.phase!=='prep'||state.coins<PARTNER_RECRUIT_COST||p.role==='cook'&&!state.kitchen);
       recruit.dataset.partnerRecruit=id;
+      // A disabled button always says what it is waiting for.
+      const waiting=state.phase!=='prep' ? partnerText('营业中不能招募，打烊后再来。','Recruiting opens after closing.')
+        : p.role==='cook'&&!state.kitchen ? partnerText('先建好后厨，才能招募厨师。','Build the kitchen first to recruit a cook.')
+        : state.coins<PARTNER_RECRUIT_COST ? partnerText('还差 ','Need ')+formatTransactionMoney(PARTNER_RECRUIT_COST-state.coins)+partnerText('。',' more.') : '';
       card.append(node('p',partnerText('招募不增加岗位。购买岗位仍会自动补足人手；厨房伙伴需先建厨房。','Recruiting does not add a slot. Purchased slots still supply staff automatically; cooks need an installed kitchen.'),'note'),recruit);
+      if(waiting) { const reason=node('p',waiting,'note warn'); reason.id='partner-recruit-reason'; recruit.setAttribute('aria-describedby',reason.id); card.append(reason); }
     } else {
-      card.append(node('p',currentWork(p)),node('p',progress.xp+' XP · '+progress.workedDays+partnerText(' 个营业日',' business days')+' · '+partnerText('故事 ','Stories ')+progress.unlocked+'/3','note'));
+      card.append(node('p',currentWork(p)),node('p',progress.xp+' XP · '+partnerCount(progress.workedDays,'个营业日','business day','business days')+' · '+partnerText('故事 ','Stories ')+progress.unlocked+'/3','note'));
       const assignments=node('div','', 'regular-reading-actions');
       for(let slot=0;slot<partnerSlots(state,p.role);slot++) {
         const b=action(partnerText('安排岗位 ','Assign slot ')+(slot+1)+(state.partners.active[p.role][slot]===id?' ✓':''),()=>commit(assignPartner(state,id,slot),id),state.phase!=='prep'||state.partners.active[p.role][slot]===id);
@@ -108,7 +131,7 @@ export function showPartners(state: GameState, sim: Sim, save: () => void, selec
       card.append(node('h4',partnerText('伙伴故事','Partner stories')));
       PARTNER_NODES.forEach((n,index)=>{
         const unlocked=index<progress.unlocked;
-        const label=partnerText('第 ','Chapter ')+(index+1)+(unlocked ? progress.read.includes(index)?partnerText(' · 回看',' · Replay'):partnerText(' · 新故事',' · New') : ' · '+n.jobs+partnerText(' 次工作 / ',' jobs / ')+n.days+partnerText(' 个营业日',' business days'));
+        const label=partnerText('第 ','Chapter ')+(index+1)+(unlocked ? progress.read.includes(index)?partnerText(' · 回看',' · Replay'):partnerText(' · 新故事',' · New') : ' · '+partnerCount(n.jobs,'次工作','job','jobs')+partnerText(' / ',' / ')+partnerCount(n.days,'个营业日','business day','business days'));
         const b=action(label,()=>story(id,index),!unlocked); b.dataset.partnerChapter=String(index); card.append(b);
       });
       card.append(node('p',partnerText('每次实际制作、成功交付或完成烘焙批次获得 1 XP。离线、阅读、暂停与未完成工作不计经验。','Each real brew, successful delivery or completed baking batch earns 1 XP. Offline time, reading, pauses and unfinished work earn none.'),'note'));

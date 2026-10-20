@@ -192,7 +192,8 @@ export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, l
 
   if (reading && !locked) readingDoor(ctx, FLOOR_Y, light);
   const word = reading ? 'BOOK NOOK' : terrace ? 'GARDEN PATIO' : 'GLASSHOUSE';
-  const width = textWidth(word) + 14, signX = reading ? 70 : 160;
+  // The reading room's sign hangs right of its rear doorway, clear of the café-name plate.
+  const width = textWidth(word) + 14, signX = reading ? SCENE_W - 70 : 160;
   timberBeam(ctx, signX - width / 2 - 1, 7, width + 2, 13, false, reading ? '#865332' : '#627451');
   r(signX - width / 2 + 3, 10, width - 6, 7, reading ? '#67432b' : '#42553d');
   drawText(ctx, word, signX - textWidth(word) / 2, 11, '#f4e6c7');

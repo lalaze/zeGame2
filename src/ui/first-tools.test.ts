@@ -169,6 +169,24 @@ describe('first-shift management disclosure', () => {
     expect(query('.menu-filter').hidden).toBe(false);
   });
 
+  it('keeps every tab reachable in the first-shift view where no shortcut rail exists', () => {
+    // Phones open the drawer directly, so hiding tabs there would strand the player.
+    const panel = panelFor();
+    panel.setSimplifiedTabs(false);
+    panel.setIntroMode(true);
+    expect(query('#panel').classList.contains('intro-mode')).toBe(false);
+    for (const name of tabs) expect(button(`[data-tab="${name}"]`).hidden).toBe(false);
+    // Browsing another tab directly still works and lands on its content.
+    button('[data-tab="upgrades"]').click();
+    expect(button('[data-tab="upgrades"]').getAttribute('aria-selected')).toBe('true');
+    expect(query('#list').children.length).toBeGreaterThan(0);
+    // Desktop keeps the focused first-shift view.
+    panel.setSimplifiedTabs(true);
+    panel.showTab('menu');
+    panel.setIntroMode(true);
+    expect(button('[data-tab="pets"]').hidden).toBe(true);
+  });
+
   it('moves focus from newly hidden controls to Menu while leaving outside focus alone', () => {
     const panel = panelFor();
     panel.showTab('upgrades');

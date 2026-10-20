@@ -8,6 +8,7 @@ import type { LivingCatControls } from './living-cats';
 import {
   BAKE_STEP,
   CATEGORIES,
+  DAY_SECONDS,
   MENU,
   PRICE_MILESTONES,
   UPGRADES,
@@ -20,6 +21,7 @@ import { DECOR_SLOTS, comfort, decorDef, decorForSlot, ownsDecor, useDecor, type
 import { FURNITURE, buyFurniture, furnitureDef, placedCount, storedCount, type FurnishingCategory } from '../game/furniture';
 import {
   arrivalRate,
+  averageDishPrice,
   bakeForForecast,
   baristaCount,
   buyIngredient,
@@ -106,6 +108,7 @@ interface RowRefs {
   recipe: HTMLElement | null;
   bake: HTMLElement | null;
   taste: HTMLButtonElement | null;
+  tradeoff: HTMLElement | null;
 }
 
 interface TileRefs {
@@ -140,7 +143,7 @@ function iconUrl(key: string, make: () => HTMLCanvasElement): string {
 function upgradeEffect(state: GameState, id: UpgradeId): string {
   switch (id) {
     case 'marketing':
-      return t('effect.marketing', { n: (arrivalRate(state) * 60).toFixed(1) });
+      return t('effect.marketing', { n: Math.round(arrivalRate(state) * DAY_SECONDS) });
     case 'machine':
       return t('effect.machine', { n: (1 / prepMultiplier(state)).toFixed(2) });
     case 'barista':
@@ -180,6 +183,8 @@ export class Panel {
   }
   private scrollPositions = new Map<Tab, number>();
   private introMode = false;
+  /** The first-shift view hides the other tabs only where a shortcut rail can reveal them. */
+  private simplifiedTabs = true;
   private promotionPanel: PromotionPanel | null = null;
   private petPanel: PetPanel | null = null;
   // Keep browsing choices across DOM rebuilds without adding them to GameState.
@@ -284,7 +289,7 @@ export class Panel {
     this.introMode = enabled;
     this.clearTablePreview();
     const previousTab = this.tab;
-    if (enabled && this.tab !== 'menu' && this.tab !== 'pantry') {
+    if (enabled && this.simplifiedTabs && this.tab !== 'menu' && this.tab !== 'pantry') {
       this.scrollPositions.set(this.tab, readPanelScroll(this.list, this.scroller));
       this.tab = 'menu';
     }
@@ -292,6 +297,17 @@ export class Panel {
     this.update();
     if (previousTab !== this.tab) this.restoreTabScroll(this.tab);
     this.restoreVisibleFocus(focused);
+  }
+
+  /**
+   * Whether the first-shift view may hide the other four tabs. On phones the only way
+   * in is the drawer itself (there is no shortcut rail to reveal them), so the tabs
+   * stay available or the player could never reach upgrades, décor, cats or promotion.
+   */
+  setSimplifiedTabs(available: boolean): void {
+    if (this.simplifiedTabs === available) return;
+    this.simplifiedTabs = available;
+    this.updateControls();
   }
 
   showTab(tab: Tab): void {
@@ -401,9 +417,11 @@ export class Panel {
 
   private updateControls(): void {
     const tab = this.tab;
-    this.root.classList.toggle('intro-mode', this.introMode);
+    // A hidden tab must always keep a way back; otherwise leave the whole row reachable.
+    const hideOthers = this.introMode && this.simplifiedTabs;
+    this.root.classList.toggle('intro-mode', hideOthers);
     this.root.querySelectorAll<HTMLElement>('[data-tab]').forEach((o) => {
-      o.hidden = this.introMode && o.dataset.tab !== 'menu' && o.dataset.tab !== 'pantry';
+      o.hidden = hideOthers && o.dataset.tab !== 'menu' && o.dataset.tab !== 'pantry';
       o.classList.toggle('active', o.dataset.tab === tab);
       o.setAttribute('aria-selected', String(o.dataset.tab === tab));
     });
@@ -727,6 +745,7 @@ export class Panel {
         <div class="info">
           <div class="name">${name} <span class="lv"></span></div>
           <div class="sub"></div>
+          ${isItem ? '<p class="note menu-tradeoff" hidden></p>' : ''}
           <button type="button" class="money-details" data-price-details="${kind}:${id}" aria-haspopup="dialog"></button>
           ${recipeHtml}
           ${isItem ? `<button class="taste-chip" data-taste="${id}" aria-haspopup="dialog"><span class="taste-label"></span><small class="taste-progress"></small></button>` : ''}
@@ -762,6 +781,7 @@ export class Panel {
         recipe: el.querySelector('.recipe .left'),
         bake: el.querySelector('.bake'),
         taste: el.querySelector('button[data-taste]'),
+        tradeoff: el.querySelector('.menu-tradeoff'),
       });
     }
   }
@@ -959,6 +979,7 @@ export class Panel {
       this.varietyNote.textContent = t('menu.variety', {
         n: menuItems(s).length,
         pct: Math.round(varietyBonus(s) * 100),
+        price: formatMoney(averageDishPrice(s)),
       });
     }
     for (const [key, refs] of this.rows) {
@@ -1001,10 +1022,18 @@ export class Panel {
         const on = eligible && s.onMenu.includes(def.id);
         if (!eligible) refs.sub.textContent = t('menu.requiresKitchen');
         refs.el.classList.toggle('off-menu', level > 0 && !on);
+        if (refs.tradeoff) {
+          // Guests pick dishes evenly, so a cheap new dish quietly lowers the average order.
+          const today = menuItems(s), before = averageDishPrice(s, today);
+          const after = eligible && !on && today.length ? averageDishPrice(s, [...today, def]) : before;
+          refs.tradeoff.hidden = after >= before - 0.005;
+          if (!refs.tradeoff.hidden) refs.tradeoff.textContent = t(level === 0 ? 'menu.tradeoffNew' : 'menu.tradeoff', { before: formatMoney(before), after: formatMoney(after) });
+        }
         if (refs.toggle) {
           refs.toggle.hidden = level === 0;
           refs.toggle.textContent = on ? t('menu.on') : t('menu.off');
           refs.toggle.classList.toggle('active', on);
+          refs.toggle.setAttribute('aria-pressed', String(on));
           refs.toggle.disabled = !prep || !eligible;
           refs.toggle.title = !eligible ? t('menu.requiresKitchen') : prep ? '' : t('menu.lockedOpen');
         }
@@ -1051,10 +1080,12 @@ export class Panel {
           ? s.kitchen ? t('upgrade.cook.stage', { n: level + 1, total: def.max + 1 }) : ''
           : `${level}/${def.max}`;
         const after = { ...s, upgrades: { ...s.upgrades, [def.id]: Math.min(def.max, level + q.count) } };
-        refs.sub.textContent = `${upgradeDesc(def.id)} · ${upgradeEffect(s, def.id)}${maxed ? '' : ` → ${upgradeEffect(after, def.id)}`}`;
+        // A locked upgrade has no "after" to preview, and money is not what it is waiting for.
+        const locked = upgradeLocked(s, def.id);
+        refs.sub.textContent = `${upgradeDesc(def.id)} · ${upgradeEffect(s, def.id)}${maxed || locked ? '' : ` → ${upgradeEffect(after, def.id)}`}`;
         refs.btnLabel.textContent = maxed ? t('btn.maxed') : q.count > 1 ? `+${q.count}` : t('btn.buy');
         refs.btnCost.textContent = maxed ? '' : formatMoney(q.cost);
-        this.updateMoneyDetails(refs, q.cost, maxed);
+        this.updateMoneyDetails(refs, q.cost, maxed || locked);
         refs.btn.disabled = maxed || !q.affordable;
       }
     }

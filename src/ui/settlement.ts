@@ -43,6 +43,12 @@ export function settlementHtml(report: DayReport, state: GameState): { body: str
   const advice = settlementAdvice(report, state);
   const totalBaked = Object.values(report.baked).reduce<number>((sum, n) => sum + (n ?? 0), 0);
   const staleCount = Object.values(report.stale).reduce<number>((sum, n) => sum + (n ?? 0), 0);
+  // Stale leftovers of a dish that also sold out point to batch timing, not an oversized bake.
+  const staleEntries = Object.entries(report.stale).filter(([, n]) => (n ?? 0) > 0);
+  const staleGroups = ([
+    ['report.staleItems', staleEntries.filter(([id]) => !(report.shortages[id as ItemId] ?? 0))],
+    ['report.staleShort', staleEntries.filter(([id]) => (report.shortages[id as ItemId] ?? 0) > 0)],
+  ] as const).filter(([, entries]) => entries.length);
   const best = report.bestSeller;
   const bestHtml = best
     ? `<p class="report-best"><img src="${toDataURL(itemArtwork(best), 1)}" alt="" />${t('report.best', { item: htmlItemName(best, state), n: report.sales[best] ?? 0 })}</p>`
@@ -59,6 +65,7 @@ export function settlementHtml(report: DayReport, state: GameState): { body: str
         ${row(text('report.cost'), '−' + formatAccountMoney(advice.totalCost))}
       </dl>
       <div class="report-profit${report.profit < 0 ? ' loss' : ''}"><span>${t('report.profit')}</span><b class="big-money">${report.profit < 0 ? '−' : '+'}${formatAccountMoney(Math.abs(report.profit))}</b></div>
+      ${report.day === 1 && report.ingredientCost > 0 ? `<p class="note report-starter">${t('report.starterNote')}</p>` : ''}
     </section>
     <section class="report-guidance" aria-label="${text('report.nextStep')}">
       <p class="report-reason">${primaryReasons.map(reasonText).join(' ')}</p>
@@ -66,7 +73,7 @@ export function settlementHtml(report: DayReport, state: GameState): { body: str
       <p class="report-action"><b>${text('report.nextStep')}:</b> ${actionText(advice)}</p>
       ${advice.action.kind === 'restock' || advice.action.kind === 'upgrade' ? '' : `<p class="note report-stock-priority">${text('report.stockFirst')}</p>`}
     </section>
-    ${report.partners?.length ? '<section class="report-partners"><h3>'+partnerText('今日伙伴贡献','Today’s partner contributions')+'</h3><ul>'+report.partners.map(p=>'<li>'+(partnerDefinition(p.id)?.name[getLocale()] ?? '')+' · '+p.jobs+partnerText(' 次工作',' jobs')+' · '+p.xp+' XP'+(p.unlocked?' · '+p.unlocked+partnerText(' 个新故事',' new stories'):'')+'</li>').join('')+'</ul></section>' : ''}
+    ${report.partners?.length ? '<section class="report-partners"><h3>'+partnerText('今日伙伴贡献','Today’s partner contributions')+'</h3><ul>'+report.partners.map(p=>'<li>'+(partnerDefinition(p.id)?.name[getLocale()] ?? '')+' · '+text('report.partnerJobs',{n:p.jobs})+' · '+p.xp+' XP'+(p.unlocked?' · '+text('report.partnerNewStories',{n:p.unlocked}):'')+'</li>').join('')+'</ul></section>' : ''}
     <details class="report-details">
       <summary>${text('report.details')}</summary>
       <dl class="stats">
@@ -82,13 +89,13 @@ export function settlementHtml(report: DayReport, state: GameState): { body: str
         ${totalBaked ? row(t('report.baked'), totalBaked.toLocaleString()) + row(t('report.stale'), staleCount ? t('report.staleValue', { n: staleCount, money: formatMoney(report.staleCost) }) : '0') : ''}
       </dl>
       <p class="note">${text('report.costNote')}</p>
-      <p class="note">${businessElapsedMinutes(report.duration) >= 1 ? t('report.perMinute', { money: formatMoney(report.profit / businessElapsedMinutes(report.duration)) }) : t('report.shortSample')}</p>
+      <p class="note">${businessElapsedMinutes(report.duration) >= 1 ? t('report.perMinute', { money: formatAccountMoney(report.profit / businessElapsedMinutes(report.duration)) }) : t('report.shortSample')}</p>
       ${secondaryReasons.length ? `<p class="note">${secondaryReasons.map(reasonText).join(' ')}</p>` : ''}
       ${ratingReportHtml(report)}
       ${bestHtml}
       ${Object.keys(report.shortages).length ? `<p class="note">${t('report.shortages', { items: Object.entries(report.shortages).map(([id, n]) => `${htmlItemName(id as ItemId, state)} ×${n}`).join(t('list.sep')) })}</p>` : ''}
       ${report.shelfSoldOut.length ? `<p class="note">${t('report.shelfOut', { items: list(report.shelfSoldOut) })}</p>` : ''}
-      ${staleCount ? `<p class="note">${t('report.staleItems', { items: Object.entries(report.stale).map(([id, n]) => `${htmlItemName(id as ItemId, state)} ×${n}`).join(t('list.sep')) })}</p>` : ''}
+      ${staleGroups.map(([key, entries]) => `<p class="note">${t(key, { items: entries.map(([id, n]) => `${htmlItemName(id as ItemId, state)} ×${n}`).join(t('list.sep')) })}</p>`).join('')}
       ${report.outOfStock.length ? `<p class="note warn">${t('report.outOfStock', { items: list(report.outOfStock) })}</p>` : ''}
     </details>`;
   return { body, recommendedTab: advice.action.tab, advice };

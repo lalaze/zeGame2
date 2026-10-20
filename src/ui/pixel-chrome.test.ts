@@ -11,6 +11,25 @@ const declarations = (selector: string) => [...chrome.matchAll(/([^{}]+)\{([^{}]
   .map(match => match[2]).join('\n');
 
 describe('café pixel chrome', () => {
+  it('takes digits from Fusion Pixel, since Pixelify Sans draws 5 almost like S', () => {
+    const face = [...css.matchAll(/@font-face\s*\{([^{}]*)\}/g)].map(match => match[1]).find(rule => rule.includes("'Pixel Digits'"))!;
+    expect(face).toMatch(/unicode-range:\s*U\+0030-0039;/);
+    expect(face).toContain("url('./assets/pixel-digits.woff2')");
+    const stacks = [...css.matchAll(/font(?:-family)?:[^;]*'Pixelify Sans'[^;]*;/g)].map(match => match[0]);
+    // Every English text stack except the "···" settings glyph puts the digits first.
+    for (const stack of stacks.filter(stack => !stack.startsWith("font-family: 'Pixelify Sans', ui-monospace"))) {
+      if (stack.includes("'Pixel ZH', 'Pixelify Sans'")) continue; // Chinese stacks already use Fusion Pixel digits
+      expect(stack, stack).toMatch(/'Pixel Digits', 'Pixelify Sans'/);
+    }
+  });
+
+  it('turns off Pixelify Sans ligatures, whose fi/fl glyph reads as "A"', () => {
+    const body = [...css.matchAll(/(?:^|\})\s*body\s*\{([^{}]*)\}/g)].map(match => match[1]).join('\n');
+    expect(body).toMatch(/font-variant-ligatures:\s*none/);
+    // A `font` shorthand resets ligatures, so any element using one must turn them off again.
+    for (const [, rule] of css.matchAll(/\{([^{}]*\bfont:[ \t]*(?![ \t]|inherit)[^;]+;[^{}]*)\}/g)) expect(rule).toMatch(/font-variant-ligatures:\s*none/);
+  });
+
   it('uses only master-palette colors in the final material layer', () => {
     const materialColors = [...chrome.matchAll(/#[\da-f]{6,8}\b/gi)].map(match => match[0]);
     expect(materialColors.length).toBeGreaterThan(20);

@@ -180,6 +180,17 @@ export function prepTime(state: GameState, id: ItemId): number {
   return menuItem(id).prepTime * prepMultiplier(state) * stylePrepMultiplier(state, id);
 }
 
+/**
+ * Guests pick their main dish evenly from today's menu, so this is the typical
+ * takeaway price of one dish. Locked dishes are priced as they would be at Lv1.
+ */
+export function averageDishPrice(state: GameState, items: readonly MenuItemDef[] = menuItems(state)): number {
+  if (items.length === 0) return 0;
+  const price = (m: MenuItemDef) => (m.id.startsWith('sig:') ? m.basePrice : itemPrice(m, Math.max(1, state.items[m.id] ?? 0)))
+    * tipMultiplier(state) * styleSaleMultiplier(state, m.id, false, [m.id]);
+  return items.reduce((sum, m) => sum + price(m), 0) / items.length;
+}
+
 /** Today's menu: unlocked items the player chose to sell. */
 export function menuItems(state: GameState): MenuItemDef[] {
   return [...MENU.filter((m) => state.items[m.id] > 0 && canPrepareItem(state, m.id) && state.onMenu.includes(m.id)), ...state.signatureDrinks.recipes.filter((r) => r.onMenu).map((r) => signatureDefinition(r.id)!).filter(Boolean)];

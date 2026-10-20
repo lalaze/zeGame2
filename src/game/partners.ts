@@ -7,7 +7,7 @@ const define = (id: string, role: PartnerRole, zh: string, en: string, appearanc
   look: { skin: appearance % 4, hair: appearance % 6, hairStyle: appearance % 4, shirt: (appearance * 3) % 8, pants: appearance % 3 },
 });
 export const PARTNERS: PartnerDefinition[] = [
-  define('lin', 'barista', '林芽', 'Lin', 1), define('theo', 'barista', '西奥', 'Theo', 2), define('mira', 'barista', '米拉', 'Mira', 3),
+  define('lin', 'barista', '林芽', 'Lin', 1), define('theo', 'barista', '麦洛', 'Milo', 2), define('mira', 'barista', '米拉', 'Mira', 3),
   define('yue', 'server', '小月', 'Yue', 0), define('ari', 'server', '阿栗', 'Ari', 1), define('noah', 'server', '诺亚', 'Noah', 2),
   define('mei', 'cook', '梅子', 'Mei', 0), define('hugo', 'cook', '雨果', 'Hugo', 1), define('sora', 'cook', '空', 'Sora', 2),
 ];

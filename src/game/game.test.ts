@@ -29,6 +29,7 @@ import {
   DEFAULT_ART_SPOT,
   FURNITURE,
   buyFurniture,
+  blocksNextTable,
   canPlace,
   evictBlocked,
   moveFurniture,
@@ -153,12 +154,20 @@ describe('simulation', () => {
     const s = openState();
     const sim = new Sim(seeded(1));
     let sales = 0;
+    const paying = new Set<number>();
     for (let t = 0; t < 600; t += 0.05) {
       s.dayTime = 0;
-      sales += sim.update(s, 0.05).filter((e) => e.type === 'sale').length;
+      for (const event of sim.update(s, 0.05)) {
+        if (event.type !== 'sale') continue;
+        sales++;
+        // Every sale names the visit that paid, so the renderer never has to guess.
+        expect(event.customerId).toBeTypeOf('number');
+        paying.add(event.customerId!);
+      }
     }
     expect(sales).toBeGreaterThan(50);
     expect(s.served).toBe(sales);
+    expect(paying.size).toBeLessThanOrEqual(sales);
     expect(s.coins).toBeGreaterThan(0);
     expect(s.totalEarned).toBe(s.coins);
   });
@@ -329,6 +338,17 @@ describe('goals', () => {
     expect(s.coins).toBe(GOALS[0].reward);
     expect(s.goal).toBe(1);
     expect(claimGoal(s)).toBe(0);
+  });
+
+  it('keeps the early goals reachable before the $800 kitchen', () => {
+    // Goals unlock one at a time, so nothing before the capacity goal may need food.
+    const capacity = GOALS.findIndex((g) => g.id === 'table');
+    expect(GOALS.slice(0, capacity).map((g) => g.id)).not.toContain('roll');
+    expect(GOALS[2].id).toBe('americano');
+    const s = createInitialState(0); s.goal = 2; s.coins = 40;
+    expect(goalDone(s)).toBe(false);
+    expect(buyItem(s, 'americano', 1)).toBe(true);
+    expect(goalDone(s)).toBe(true);
   });
 
   it('every goal is reachable and ends cleanly', () => {
@@ -883,6 +903,17 @@ describe('furniture', () => {
     expect(canPlace(s, 'art_cat', 15, 0, 2)).toBe(false);
     expect(canPlace(s, 'sconce', 9, 0, 2)).toBe(true);
     expect(canPlace(s, 'sconce', 11, 0, 2)).toBe(false); // the clock
+  });
+
+  it('names the next table spot as the reason a floor piece is refused there', () => {
+    const s = rich();
+    expect(canPlace(s, 'bench', 3, 9, 2)).toBe(false);
+    expect(blocksNextTable(s, 'bench', 3, 9, 2)).toBe(true);
+    expect(blocksNextTable(s, 'bench', 3, 9, 3)).toBe(false); // once that table is built, the spot moves on
+    expect(blocksNextTable(s, 'bench', 2, 1, 2)).toBe(false); // a built table, not the reserved spot
+    expect(blocksNextTable(s, 'bench', 18, 8, 2)).toBe(false); // the walkway
+    expect(blocksNextTable(s, 'sconce', 9, 0, 2)).toBe(false); // wall pieces never use table spots
+    expect(blocksNextTable(s, 'bench', 3, 9, MAX_TABLES)).toBe(false); // every table is built
   });
 
   it('moves and stores placed pieces', () => {

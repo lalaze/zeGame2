@@ -139,7 +139,7 @@ try {
         check(before.dayTime === after.dayTime && JSON.stringify(before.partners) === JSON.stringify(after.partners), 'open-day modal pauses work and XP', { before, after }); pauseChecked = true; await cleanDialogs();
       }
       // Close through UI after at least 90 game seconds; allow pending orders to settle naturally.
-      s = await snapshot(); if (s.phase === 'open' && s.dayTime >= 90) await click('#close-btn');
+      s = await snapshot(); if (s.phase === 'open' && s.dayTime >= 90) { await click('#close-btn'); await click('#modal-root .modal .pixel-btn.danger'); }
       await wait(2500);
     }
     if (Date.now() - lastProgress > 15_000) { lastProgress = Date.now(); log('Ordinary play progress', await snapshot()); }

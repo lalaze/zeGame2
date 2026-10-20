@@ -226,16 +226,22 @@ export function showOnboarding(opts: Options): void {
     preview.append(ownerPreview.canvas);
     releasePreview = ownerPreview.dispose;
     const palettes: Partial<Record<keyof Look, string[]>> = { skin: SKINS, hair: HAIRS, shirt: SHIRTS };
+    // Screen readers hear the visible group name ("Apron 3"), never the save-format key.
+    const groupLabels: Partial<Record<keyof Look, string>> = { skin: t('ob.char.skin'), hairStyle: t('ob.char.style'), hair: t('ob.char.hair'), shirt: t('ob.char.apron') };
 
     const paint = (repaintOwner = true) => {
       if (repaintOwner) ownerPreview.update(draft.look);
       body.querySelectorAll<HTMLElement>('.swatches').forEach((group) => {
         const key = group.dataset.key as keyof Look;
+        const label = groupLabels[key] ?? key;
+        group.setAttribute('role', 'group');
+        group.setAttribute('aria-label', label);
         group.replaceChildren(
           ...Array.from({ length: LOOK_RANGES[key] }, (_, i) => {
             const b = document.createElement('button');
             b.className = 'swatch' + (draft.look[key] === i ? ' active' : '');
-            b.setAttribute('aria-label', `${key} ${i + 1}`);
+            b.setAttribute('aria-label', `${label} ${i + 1}`);
+            b.setAttribute('aria-pressed', String(draft.look[key] === i));
             const colors = palettes[key];
             if (colors) b.style.background = colors[i];
             else {
@@ -309,14 +315,13 @@ export function showOnboarding(opts: Options): void {
 
   function opening(body: HTMLElement): void {
     const cafe = escapeHtml(cleanName(draft.cafeName));
-    const owner = escapeHtml(cleanName(draft.ownerName) || t('ob.char.defaultName'));
     body.innerHTML = `
       <h2>${t('ob.open.title')}</h2>
       <div class="opening-scene">
         <div class="name-sign"><span>${cafe}</span></div>
         <div class="opening-owner"></div>
       </div>
-      <p>${t('ob.open.body', { owner, cafe })}</p>`;
+      <p>${t('ob.open.body', { cafe })}</p>`;
     const ownerPreview = createGeneratedOwnerPreview(draft.look, 6);
     body.querySelector('.opening-owner')!.append(ownerPreview.canvas);
     releasePreview = ownerPreview.dispose;

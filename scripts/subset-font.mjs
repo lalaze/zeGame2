@@ -2,6 +2,7 @@
 // Chinese translation uses. Runs automatically before `dev` and `build`.
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import subsetFont from 'subset-font';
+import { buildPixelDigits } from './pixel-digits.mjs';
 
 const SOURCE =
   'node_modules/@fontsource/fusion-pixel-12px-proportional-sc/files/fusion-pixel-12px-proportional-sc-latin-400-normal.woff2';
@@ -21,3 +22,9 @@ const out = await subsetFont(readFileSync(SOURCE), text, { targetFormat: 'woff2'
 mkdirSync('src/assets', { recursive: true });
 writeFileSync(OUT, out);
 console.log(`${OUT}: ${new Set(text).size} glyphs, ${(out.length / 1024).toFixed(1)} KB`);
+
+// English text takes its digits from Fusion Pixel too (Pixelify's 5 reads as S).
+const DIGITS_OUT = 'src/assets/pixel-digits.woff2';
+const digits = await buildPixelDigits(readFileSync(SOURCE));
+writeFileSync(DIGITS_OUT, digits);
+console.log(`${DIGITS_OUT}: 10 digits, ${digits.length} bytes`);

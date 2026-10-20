@@ -175,7 +175,8 @@ export interface Server extends Walker {
 }
 
 export type SimEvent =
-  | { type: 'sale'; amount: number; x: number; y: number; vip: boolean }
+  /** `customerId` names the paying visit so the renderer can anchor the pop-up on them. */
+  | { type: 'sale'; amount: number; x: number; y: number; vip: boolean; customerId?: number }
   | { type: 'bell'; x: number; y: number }
   | { type: 'walkout'; x: number; y: number }
   | { type: 'soldout'; item: ItemId; x: number; y: number }
@@ -745,7 +746,7 @@ export class Sim {
     state.today.served++;
     state.today.revenue += amount;
     for (const id of bought) state.today.sales[id] = (state.today.sales[id] ?? 0) + 1;
-    events.push({ type: 'sale', amount, x: c.x, y: c.y - 52, vip: c.vip });
+    events.push({ type: 'sale', amount, x: c.x, y: c.y - 52, vip: c.vip, customerId: c.id });
     this.review(state, c, mealReview(state, bought, c.waitSeconds, c.missingExtra));
     recordServings(state, bought);
     recordStyleHandoff(state, bought, c.dineIn);

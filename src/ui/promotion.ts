@@ -1,6 +1,8 @@
 import { uiIcon } from './pixel-icons';
 import { arrivalRate, baseArrivalRate, menuItems, serviceCapacity, servingsLeft } from '../game/economy';
 import { formatAccountMoney, formatDuration, formatTransactionMoney as formatMoney } from '../game/format';
+import { SECONDS_PER_BUSINESS_HOUR, businessSeconds } from '../game/business-clock';
+import { DAY_SECONDS } from '../game/data';
 import { PROMOTION_PLANS, bookPromotion, promotionPlan, togglePromotion } from '../game/promotion';
 import type { GameState } from '../game/state';
 import { t } from '../i18n';
@@ -38,7 +40,7 @@ export class PromotionPanel {
         root.append(header);
       }
       const card = document.createElement('section'); card.className = 'promo-card'; card.dataset.promo = plan.id;
-      card.innerHTML = `<h4>${t(`promo.${plan.id}`)}</h4><p class="promo-offer">${t('promo.offer', { pct: Math.round(plan.boost * 100), minutes: plan.seconds / 60 })}</p>
+      card.innerHTML = `<h4>${t(`promo.${plan.id}`)}</h4><p class="promo-offer">${t('promo.offer', { pct: Math.round(plan.boost * 100), hours: plan.seconds / SECONDS_PER_BUSINESS_HOUR })}</p>
         <p class="promo-estimate note"></p><p class="promo-plan-risk note"></p><p class="promo-unavailable note"></p>
         <button class="pixel-btn small" data-book-promo="${plan.id}">${t('promo.book', { cost: formatMoney(plan.cost) })}</button>`;
       const btn = card.querySelector('button')!;
@@ -57,24 +59,25 @@ export class PromotionPanel {
   update(): void {
     const s = this.state;
     const campaign = s.promotion;
-    const base = baseArrivalRate(s) * 60;
-    const capacity = serviceCapacity(s) * 60;
+    // Rates are guests per business day, the same unit as the opening forecast.
+    const base = baseArrivalRate(s) * DAY_SECONDS;
+    const capacity = serviceCapacity(s) * DAY_SECONDS;
     const menu = menuItems(s);
     const emptyStock = menu.some((item) => servingsLeft(s, item.id) < 1);
     this.summary.textContent = t('promo.summary', { cost: formatAccountMoney(s.today.promotionCost) });
-    this.pressure.textContent = t('promo.pressure', { arrivals: (arrivalRate(s) * 60).toFixed(1), capacity: capacity.toFixed(1) });
+    this.pressure.textContent = t('promo.pressure', { arrivals: Math.round(arrivalRate(s) * DAY_SECONDS), capacity: Math.round(capacity) });
     this.active.hidden = !campaign;
     if (campaign) {
       const plan = promotionPlan(campaign.id)!;
       this.activeName.textContent = `${t(`promo.platform.${plan.platform}`)} · ${t(`promo.${plan.id}`)}`;
       const status = campaign.paused ? t('promo.paused') : s.phase === 'open' ? t('promo.running') : t('promo.waiting');
-      this.activeStatus.textContent = t('promo.active', { status, time: formatDuration(Math.ceil(campaign.remaining)), pct: Math.round(plan.boost * 100) });
+      this.activeStatus.textContent = t('promo.active', { status, time: formatDuration(Math.ceil(businessSeconds(campaign.remaining))), pct: Math.round(plan.boost * 100) });
       this.progress.value = campaign.remaining / plan.seconds;
       this.pause.textContent = t(campaign.paused ? 'promo.resume' : 'promo.pause');
     }
     for (const row of this.rows) {
       const boosted = base * (1 + row.plan.boost);
-      row.estimate.textContent = t('promo.estimate', { before: base.toFixed(1), after: boosted.toFixed(1) });
+      row.estimate.textContent = t('promo.estimate', { before: Math.round(base), after: Math.round(boosted) });
       const risk = !menu.length ? 'noMenu' : emptyStock ? 'stock' : boosted > capacity ? 'overload' : boosted > capacity * 0.85 ? 'busy' : 'headroom';
       row.risk.textContent = t(`promo.${risk}`);
       row.risk.classList.toggle('warn', risk !== 'headroom');

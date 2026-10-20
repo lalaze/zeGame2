@@ -14,6 +14,8 @@ export function paintSignText(ctx: CanvasRenderingContext2D, text: string, cx: n
   ctx.save();
   ctx.beginPath(); ctx.rect(cx - width / 2, y, width, height); ctx.clip();
   ctx.font = Math.max(5, height - 1) + 'px "Pixel ZH", "Pixelify Sans", sans-serif';
+  // optimizeSpeed turns off ligatures: Pixelify Sans draws fi/fl as an "A"-like glyph.
+  if ('textRendering' in ctx) ctx.textRendering = 'optimizeSpeed';
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = color;
   const label = fitSignLabel(text, width - 2, value => ctx.measureText(value).width);
   ctx.fillText(label, cx, y + height / 2);
@@ -90,12 +92,21 @@ export function pixelSignGlyph(ch: string): SignMask {
   masks.set(key,mask);
   return mask;
 }
-export function paintPixelSignText(ctx:CanvasRenderingContext2D,text:string,cx:number,y:number,width:number,height:number,color:string):void {
-  const measure=(value:string)=>Math.max(0,[...value].reduce((sum,ch)=>sum+pixelSignGlyph(ch).width+1,0)-1)/2;
+/** Width of pixel sign lettering at the drawer's half-scale pen, in logical units. */
+export const pixelSignWidth = (text: string, scale = 1): number =>
+  (Math.max(0, [...text].reduce((sum, ch) => sum + pixelSignGlyph(ch).width + 1, 0) - 1) / 2) * scale;
+
+/**
+ * Draws small pixel lettering centred in its box. `scale` shrinks the glyph grid
+ * (0.5 = the original half-scale pen) so a crowded row can stay whole instead of
+ * losing characters to an ellipsis; the fitted label is measured at the same scale.
+ */
+export function paintPixelSignText(ctx:CanvasRenderingContext2D,text:string,cx:number,y:number,width:number,height:number,color:string,scale=1):void {
+  const measure=(value:string)=>pixelSignWidth(value,scale);
   const label=fitSignLabel(text,width-1,measure);
   let left=Math.round((cx-measure(label)/2)*2)/2;
-  const top=Math.round((y+(height-6)/2)*2)/2;
+  const top=Math.round((y+(height-6*scale)/2)*2)/2;
   ctx.save();ctx.beginPath();ctx.rect(Math.round((cx-width/2)*2)/2,y,width,height);ctx.clip();ctx.fillStyle=color;
-  for(const ch of label){const mask=pixelSignGlyph(ch);for(let row=0;row<mask.height;row++)for(let col=0;col<mask.width;col++)if(mask.bits[row*mask.width+col])ctx.fillRect(left+col/2,top+row/2,.5,.5);left+=(mask.width+1)/2;}
+  for(const ch of label){const mask=pixelSignGlyph(ch);for(let row=0;row<mask.height;row++)for(let col=0;col<mask.width;col++)if(mask.bits[row*mask.width+col])ctx.fillRect(left+col/2*scale,top+row/2*scale,.5*scale,.5*scale);left+=(mask.width+1)/2*scale;}
   ctx.restore();
 }

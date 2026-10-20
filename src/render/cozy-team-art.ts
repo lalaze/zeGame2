@@ -24,6 +24,9 @@ const PANTS = ['#53637b', '#85664f', '#585464'];
 let families: Pose[][] = [], seated: Pose[][] = [], chef: Pose[] = [], chefSeated: Pose[] = [];
 let pending: Promise<void> | null = null, epoch = 0;
 const canvas = (w: number, h: number) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+// Poses are read back (alpha cleanup, top edge, seated cut, mirroring), so every
+// canvas here is CPU-backed from its first context: attributes cannot change later.
+const context = (c: HTMLCanvasElement) => c.getContext('2d', { willReadFrequently: true })!;
 const mod = (n: number, length: number) => ((Math.trunc(n) % length) + length) % length;
 
 export function validateTeamManifest(m: TeamManifest): void {
@@ -51,7 +54,7 @@ export function preloadCozyTeam(): Promise<void> {
       const image = await load(sheet.file);
       return sheet.bounds.map(([x, y, right, bottom], index) => {
         if (right > image.naturalWidth || bottom > image.naturalHeight) throw Error('Cozy team pose outside atlas');
-        const source = canvas(right - x, bottom - y), ctx = source.getContext('2d')!;
+        const source = canvas(right - x, bottom - y), ctx = context(source);
         ctx.drawImage(image, x, y, source.width, source.height, 0, 0, source.width, source.height);
         const pixels = ctx.getImageData(0, 0, source.width, source.height);
         for (let i = 3; i < pixels.data.length; i += 4) if (pixels.data[i] < 100) pixels.data[i] = 0;
@@ -90,28 +93,28 @@ function paintPose(p: Pose, look: Look, role: Exclude<Role, 'customer'>, sit: bo
     cloth: shadeRamp(hexRgb(CLOTH[mod(look.shirt, CLOTH.length)])),
     pants: shadeRamp(hexRgb(PANTS[mod(look.pants, PANTS.length)])),
   };
-  const art = canvas(width * D, height * D), ctx = art.getContext('2d')!;
+  const art = canvas(width * D, height * D), ctx = context(art);
   const image = ctx.createImageData(art.width, art.height);
   image.data.set(paintTeamPose(grid, colours)); ctx.putImageData(image, 0, 0);
   return art;
 }
 function publish(art: HTMLCanvasElement): HTMLCanvasElement {
-  const result = canvas(art.width / D, art.height / D); result.getContext('2d')!.drawImage(art, 0, 0, result.width, result.height);
+  const result = canvas(art.width / D, art.height / D); context(result).drawImage(art, 0, 0, result.width, result.height);
   registerFineSpriteArt(result, art, D); return result;
 }
 function mirror(art: HTMLCanvasElement): HTMLCanvasElement {
-  const result = canvas(art.width, art.height), ctx = result.getContext('2d')!;
+  const result = canvas(art.width, art.height), ctx = context(result);
   ctx.translate(result.width, 0); ctx.scale(-1, 1); ctx.drawImage(art, 0, 0); return result;
 }
 function top(art: HTMLCanvasElement): number {
-  const data = art.getContext('2d')!.getImageData(0, 0, art.width, art.height).data;
+  const data = context(art).getImageData(0, 0, art.width, art.height).data;
   for (let y = 0; y < art.height; y++) for (let x = 0; x < art.width; x++) if (data[(y * art.width + x) * 4 + 3] > 100) return y / D;
   return 0;
 }
 /** Cut the table overlap at pixel centres, so a diagonal never adds translucent fringe. */
 function seatedForeground(art: HTMLCanvasElement, neck: Point, hand: Point): HTMLCanvasElement {
-  const result = canvas(art.width, art.height), ctx = result.getContext('2d')!;
-  const image = art.getContext('2d')!.getImageData(0, 0, art.width, art.height);
+  const result = canvas(art.width, art.height), ctx = context(result);
+  const image = context(art).getImageData(0, 0, art.width, art.height);
   const edge = [{ x: 0, y: neck.y }, { x: neck.x - 4, y: neck.y + 2 },
     { x: neck.x + 3, y: hand.y + 1.5 }, { x: art.width / D, y: hand.y + 1.5 }];
   for (let x = 0; x < art.width; x++) {

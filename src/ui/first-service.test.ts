@@ -72,6 +72,25 @@ describe('skippable and replayable first service guidance', () => {
     expect(document.querySelector('[role=dialog]')!.textContent).toContain('Stock for the day');
     expect(JSON.stringify(s)).toBe(before);
   });
+  it('opens the in-service close step folded so the card does not cover the dining room', () => {
+    const { s, guide } = setup();
+    s.phase = 'open'; guide.update();
+    expect(guide.element.querySelector<HTMLDetailsElement>('details')!.open).toBe(true);
+    s.dayTime = 45; guide.update();
+    const details = guide.element.querySelector<HTMLDetailsElement>('details')!;
+    expect(details.open).toBe(false);
+    details.open = true; s.today.served = 9; guide.update();
+    expect(guide.element.querySelector<HTMLDetailsElement>('details')!.open).toBe(true);
+  });
+  it('reveals every tool for day-2 planning, before the menu locks at opening', () => {
+    const { s, actions, guide } = setup();
+    expect(guide.simplify).toBe(true);
+    s.day = 2; s.phase = 'prep'; guide.update();
+    expect(guide.simplify).toBe(false); expect(actions.allTools).toHaveBeenCalledOnce();
+    expect(guide.element.querySelector('[data-guide-action="tools"]')).toBeNull();
+    s.phase = 'open'; guide.update();
+    expect(actions.allTools).toHaveBeenCalledOnce();
+  });
   it('does not rebuild or steal focus on repeated ticks and restores all tools on reopen', () => {
     const { s, actions, guide } = setup();
     const btn = guide.element.querySelector<HTMLButtonElement>('button')!; btn.focus(); guide.update();

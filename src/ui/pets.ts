@@ -1,5 +1,6 @@
 import { CATS, CAT_GROUPS, CARE_SECONDS, MAX_CARE_SECONDS, MAX_PETS, adoptCat, petActive, petTraffic, refillPet, type CatGroup, type CatId } from '../game/pets';
 import { formatAccountMoney, formatTransactionMoney as formatMoney } from '../game/format';
+import { SECONDS_PER_BUSINESS_HOUR } from '../game/business-clock';
 import type { GameState } from '../game/state';
 import { t } from '../i18n';
 import { catFrames, toDataURL } from '../render/sprites';
@@ -82,7 +83,7 @@ export class PetPanel {
       el.className = 'pet-card';
       el.dataset.pet = cat.id;
       el.innerHTML = `<div class="pet-heading"><img alt="" /><div><h3>${t(`pet.${cat.id}.name`)}</h3><p class="note">${t(`pet.${cat.id}.desc`)}</p></div><span class="pet-bonus">+${Math.round(cat.traffic * 100)}%</span></div>
-        <p class="note">${t('pet.cost', { cost: formatMoney(cat.careCost), min: CARE_SECONDS / 60 })}</p>
+        <p class="note">${t('pet.cost', { cost: formatMoney(cat.careCost), hours: CARE_SECONDS / SECONDS_PER_BUSINESS_HOUR })}</p>
         <p class="pet-status"></p><progress max="${MAX_CARE_SECONDS}" value="0" aria-label="${t('pet.supplies')}"></progress>
         <div class="pet-actions"><button class="pixel-btn small" data-adopt>${t('pet.adopt', { cost: formatMoney(cat.adoption) })}</button><button class="pixel-btn small ghost" data-refill>${t('pet.refill', { cost: formatMoney(cat.careCost) })}</button></div>
         <label class="pet-auto"><input type="checkbox" /> ${t('pet.auto')}</label>`;

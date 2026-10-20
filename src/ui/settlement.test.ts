@@ -1,5 +1,6 @@
 // @vitest-environment happy-dom
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { businessElapsedMinutes } from '../game/business-clock';
 import type { DayReport } from '../game/day';
 import { GOALS } from '../game/goals';
 import { createInitialState, emptyDay } from '../game/state';
@@ -70,6 +71,31 @@ describe('progressive settlement disclosure', () => {
     const reason = document.querySelector('.report-reason')!.textContent!;
     for (const value of ['$27.00', '$12.00', '$6.00', '$4.00', '$7.00']) expect(reason).toContain(value);
     expect(document.querySelector('.report-action')!.textContent).toContain(t('report.action.finishService'));
+  });
+
+  it.each(['en', 'zh'] as const)('explains on day 1 that the starter beans counted as a cost were free in %s', (locale) => {
+    setLocale(locale); const state = createInitialState(0); state.day = 2;
+    document.body.innerHTML = settlementHtml(day(), state).body;
+    expect(document.querySelector('.report-starter')!.textContent).toBe(t('report.starterNote'));
+    document.body.innerHTML = settlementHtml(day({ day: 2 }), state).body;
+    expect(document.querySelector('.report-starter')).toBeNull();
+  });
+
+  it('shows profit per game minute in cents rather than rounding small amounts to $0', () => {
+    const state = createInitialState(0); state.goal = GOALS.length;
+    document.body.innerHTML = settlementHtml(day({ profit: 86, revenue: 123, ingredientCost: 37 }), state).body;
+    const perMinute = (86 / businessElapsedMinutes(120)).toFixed(2);
+    expect(document.body.textContent).toContain(t('report.perMinute', { money: `$${perMinute}` }));
+    expect(perMinute).not.toBe('0.00');
+  });
+
+  it.each(['en', 'zh'] as const)('separates stale leftovers of a dish that also sold out from an oversized bake in %s', (locale) => {
+    setLocale(locale); const state = createInitialState(0); state.goal = GOALS.length; state.kitchen = true;
+    document.body.innerHTML = settlementHtml(day({ shortages: { roll: 3 }, baked: { roll: 32, bagel: 10 }, stale: { roll: 5, bagel: 4 }, staleCost: 36 }), state).body;
+    const notes = [...document.querySelectorAll('details .note')].map((note) => note.textContent ?? '');
+    const short = notes.find((note) => note.includes(t('item.roll')) && note.includes('×5'))!;
+    expect(short).toBe(t('report.staleShort', { items: `${t('item.roll')} ×5` }));
+    expect(notes).toContain(t('report.staleItems', { items: `${t('item.bagel')} ×4` }));
   });
 
   it('all new advice messages are translated without unresolved placeholders', () => {

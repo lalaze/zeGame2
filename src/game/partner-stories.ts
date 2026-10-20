@@ -8,11 +8,11 @@ export const PARTNER_STORIES: Record<string, { intro: { zh: string; en: string }
     ],
   },
   theo: {
-    intro: { zh: '西奥喜欢琢磨声音，从咖啡器具的轻响里也能听出一小段旋律。', en: 'Theo loves noticing sounds and can hear a tiny melody in the gentle clatter of coffee tools.' },
+    intro: { zh: '麦洛喜欢琢磨声音，从咖啡器具的轻响里也能听出一小段旋律。', en: 'Milo loves noticing sounds and can hear a tiny melody in the gentle clatter of coffee tools.' },
     chapters: [
-      { zh: '西奥悄悄给工作时听到的声音编了节拍，却总在最后一拍打喷嚏。他把这段曲子暂时命名为「差一点完成」。', en: 'Theo made a rhythm from the sounds of his work, then sneezed on the final beat. For now, the piece was called “Almost Finished.”' },
-      { zh: '西奥发现，同伴的脚步和笑声根本不肯按他的节拍来。他索性给曲子多留了几拍，觉得这样反而更好听。', en: 'Theo discovered that his teammates’ footsteps and laughter refused to follow his rhythm. He added a few extra beats and liked the tune better that way.' },
-      { zh: '西奥终于哼完了那段小曲，却没有把它写成乐谱。「每天都会有新的声音嘛。」他说完，又给结尾添了一声轻轻的笑。', en: 'Theo finally hummed the whole little tune, but decided against writing it down. “There’ll be new sounds tomorrow,” he said, adding a quiet laugh to the ending.' },
+      { zh: '麦洛悄悄给工作时听到的声音编了节拍，却总在最后一拍打喷嚏。他把这段曲子暂时命名为「差一点完成」。', en: 'Milo made a rhythm from the sounds of his work, then sneezed on the final beat. For now, the piece was called “Almost Finished.”' },
+      { zh: '麦洛发现，同伴的脚步和笑声根本不肯按他的节拍来。他索性给曲子多留了几拍，觉得这样反而更好听。', en: 'Milo discovered that his teammates’ footsteps and laughter refused to follow his rhythm. He added a few extra beats and liked the tune better that way.' },
+      { zh: '麦洛终于哼完了那段小曲，却没有把它写成乐谱。「每天都会有新的声音嘛。」他说完，又给结尾添了一声轻轻的笑。', en: 'Milo finally hummed the whole little tune, but decided against writing it down. “There’ll be new sounds tomorrow,” he said, adding a quiet laugh to the ending.' },
     ],
   },
   mira: {
