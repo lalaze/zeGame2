@@ -93,7 +93,8 @@ const unhex = text => [1, 3, 5].map(i => parseInt(text.slice(i, i + 2), 16));
 const distance = (a, b) => (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2;
 
 function loadPalette(file) {
-  const colours = JSON.parse(fs.readFileSync(file, 'utf8')).colors.map(c => unhex(c.hex));
+  // Team ramps' extra midtones are for the recoloured staff only, not for conforming other artwork.
+  const colours = JSON.parse(fs.readFileSync(file, 'utf8')).colors.filter(c => !(c.ramp ?? '').startsWith('team-')).map(c => unhex(c.hex));
   return { colours, lab: colours.map(c => oklab(...c)), cache: new Map() };
 }
 function nearest(palette, r, g, b) {
@@ -292,7 +293,8 @@ function ramps() {
   for (const entry of spec.generated) entry.colors.forEach((base, option) =>
     shadeRamp(unhex(base), entry.shades).forEach((rgb, index) =>
       colours.push({ hex: hex(rgb), ramp: entry.colors.length > 1 ? `${entry.ramp}-${option}` : entry.ramp, index, lightness: +oklab(...rgb)[0].toFixed(3) })));
-  const unique = [...new Map(colours.map(c => [c.hex, c])).values()];
+  // A colour shared by several ramps keeps its first ramp's name, so adding a ramp never relabels another.
+  const unique = [...colours.reduce((seen, c) => seen.has(c.hex) ? seen : seen.set(c.hex, c), new Map()).values()];
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, JSON.stringify({ spec: specFile, reference: spec.reference, colors: unique }, null, 2) + '\n');
   if (swatch) {

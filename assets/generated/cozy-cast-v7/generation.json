@@ -1,0 +1,130 @@
+{
+  "version": 7,
+  "tool": "built-in image_gen (Codex)",
+  "references": [
+    "../cozy-cast-v6/sources/group-N.png (identity and layout)",
+    "sources/group-0.png (approved rendering; sheets 1-9)",
+    "../../../public/art/generated/cafe-style-sample-v1/sample.png",
+    "../../../public/art/generated/cozy-world-v2/region-reading.png"
+  ],
+  "outputs": [
+    {
+      "ids": [
+        27,
+        0,
+        17
+      ],
+      "source": "sources/group-0.png",
+      "prompt": "prompt-0.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a1591b-8ce4-7733-a778-ffe213b6a286/exec-c136340b-3c13-408d-9438-346136761836.png",
+      "note": "pilot candidate a (selected over candidate b); style anchor for sheets 1-9"
+    },
+    {
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "source": "sources/group-1.png",
+      "prompt": "prompt-1.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a15934-244d-7e33-a876-ba0db11da460/exec-485e780d-5631-42bc-aa17-ecdaa4d8f901.png",
+      "attempts": 1
+    },
+    {
+      "ids": [
+        4,
+        5,
+        6
+      ],
+      "source": "sources/group-2.png",
+      "prompt": "prompt-2.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a15934-244d-7e33-a876-ba0db11da460/exec-63d8db1a-e942-4294-afbb-73fcfa3a750a.png",
+      "attempts": 1
+    },
+    {
+      "ids": [
+        7,
+        8,
+        9
+      ],
+      "source": "sources/group-3.png",
+      "prompt": "prompt-3.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a15934-244d-7e33-a876-ba0db11da460/exec-0ee60794-736b-4d41-91bd-cb4d65be84f5.png",
+      "attempts": 1
+    },
+    {
+      "ids": [
+        10,
+        11,
+        12
+      ],
+      "source": "sources/group-4.png",
+      "prompt": "prompt-4.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a15934-29c3-7ab2-a9d0-12be9c446cf0/exec-ee31d519-3b5b-437c-897f-cfa08a00c140.png",
+      "attempts": 1
+    },
+    {
+      "ids": [
+        13,
+        14,
+        15
+      ],
+      "source": "sources/group-5.png",
+      "prompt": "prompt-5.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a15934-29c3-7ab2-a9d0-12be9c446cf0/exec-5fbe92e8-beba-41f2-9e0c-0f80ae417739.png",
+      "attempts": 1
+    },
+    {
+      "ids": [
+        16,
+        18,
+        19
+      ],
+      "source": "sources/group-6.png",
+      "prompt": "prompt-6.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a15934-29c3-7ab2-a9d0-12be9c446cf0/exec-1fa88253-3de4-433b-a244-81762fec7781.png",
+      "attempts": 1
+    },
+    {
+      "ids": [
+        20,
+        21,
+        22
+      ],
+      "source": "sources/group-7.png",
+      "prompt": "prompt-7.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a15934-304b-75b0-bf36-0edb2bacaddc/exec-d5c17e5f-c7e9-45a7-a5e4-c5ca959e4d48.png",
+      "attempts": 1,
+      "editPrompt": "prompt-7-edit.txt",
+      "selected": "/Users/lalaze/.codex/generated_images/01a15934-304b-75b0-bf36-0edb2bacaddc/exec-1ada71fc-5ef0-41f7-9b02-45adbfa955b3.png"
+    },
+    {
+      "ids": [
+        23,
+        24,
+        25
+      ],
+      "source": "sources/group-8.png",
+      "prompt": "prompt-8.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a15934-304b-75b0-bf36-0edb2bacaddc/exec-3c38f7b9-6a99-4fed-a249-c19db4ee4fe5.png",
+      "attempts": 1
+    },
+    {
+      "ids": [
+        26,
+        28,
+        29
+      ],
+      "source": "sources/group-9.png",
+      "prompt": "prompt-9.txt",
+      "original": "/Users/lalaze/.codex/generated_images/01a15934-304b-75b0-bf36-0edb2bacaddc/exec-e3972763-b553-47f8-a424-c25357069204.png",
+      "attempts": 1
+    }
+  ],
+  "records": [
+    "candidates/generation.json",
+    "candidates/generation-groups-1-3.json",
+    "candidates/generation-groups-4-6.json",
+    "candidates/generation-groups-7-9.json"
+  ]
+}

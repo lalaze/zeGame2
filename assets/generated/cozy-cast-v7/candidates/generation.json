@@ -1,0 +1,77 @@
+{
+  "tool": "image_gen.imagegen",
+  "reference_image_paths": [
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v6/sources/group-0.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cafe-style-sample-v1/sample.png",
+    "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cozy-world-v2/region-reading.png"
+  ],
+  "prompt_file": "../prompt-0.txt",
+  "candidates": [
+    {
+      "candidate": "a",
+      "saved_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/candidates/group-0-a.png",
+      "tool": "image_gen.imagegen",
+      "reference_image_paths": [
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v6/sources/group-0.png",
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cafe-style-sample-v1/sample.png",
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cozy-world-v2/region-reading.png"
+      ],
+      "original_generated_file_path": "/Users/lalaze/.codex/generated_images/01a1591b-8ce4-7733-a778-ffe213b6a286/exec-c136340b-3c13-408d-9438-346136761836.png",
+      "edit_prompts": [],
+      "exact_generation_prompt": "Create a production pixel-art animation atlas for a cozy cafe game. Repaint the three characters from attached image 1 with the SAME identities, outfits, proportions, poses and layout, but with much richer rendering that matches the attached cafe interior (images 2 and 3). Each character is ONE anatomically connected full figure, head nestled directly between rounded shoulders, chin almost touching collar, ZERO visible long neck, 2.3 heads tall, large rounded head, short broad torso, short chunky legs, small brown shoes. The neck is at most one native pixel and mostly hidden by collar/hair. Side profile head is centered over shoulders, relaxed upright spine. Rendering: crisp handcrafted pixel art with four to five shades per material; consistent warm amber key light from the upper left (warm highlights on hair crown, shoulders and the left side of faces/sleeves, cooler deeper shadow on the lower right and under the chin); visible material texture (wool weave on coats, knit ribs on cardigans, soft trouser folds at knees, leather sheen on shoes); hair painted as distinct locks with 2\u20133 highlight strands; eyes with a coloured iris, a one-pixel white highlight and a dark upper lash line; soft blush; tiny nose and mouth. Clean warm dark-brown outlines (never black). No gradients, no blur, no anti-aliased soft edges, no drop shadows, no glow. Consistent scale and identity in every pose.\nOUTPUT: square 1536x1536 PNG sprite sheet, TRANSPARENT background. EXACTLY SIX COLUMNS and SIX ROWS of equal 256x256 cells, 36 separate full-body characters total. No labels, no grid lines, no props, no chairs, no tables, no ground shadows. Each sprite fully inside its cell with at least 24px margin on every side; nothing may cross into a neighbouring cell. Each identity occupies TWO consecutive rows, 12 poses each.\nFor each pair of rows: first row columns 1-6 = front neutral, front left-foot step, front right-foot step, rear neutral, rear left-foot step, rear right-foot step. Second row columns 1-6 = RIGHT profile neutral, RIGHT profile left-foot step, RIGHT profile right-foot step, RIGHT-facing seated upright arms reaching horizontally to tabletop height, RIGHT-facing seated leaning slightly forward petting a cat below with lowered hand, same seated petting hand slightly further down. Seated poses: bottom on an invisible chair, thighs approximately horizontal, knees bent 90 degrees, shins vertical, feet low. Head remains attached snugly to collar during all actions. No separate heads or body parts. No cats, no chairs.\nIdentity A in rows 1-2: pale peach skin, fluffy short golden blond hair, mustard duffle coat with cream toggle closures, blue-grey trousers, brown ankle boots.\nIdentity B in rows 3-4: pale peach skin, fluffy short dark-brown hair, warm round thin brown glasses, rust-red cardigan over cream shirt, brown trousers, brown shoes.\nIdentity C in rows 5-6: light tan skin, fluffy short blue-grey hair, warm round thin brown glasses, muted blue duffle coat with cream toggles, brown trousers, brown shoes.\nMatch the compact connected proportions of attached image 1, while using pixel-art textures. Ensure all 36 complete figures, six columns per row.\nSTRICT OUTPUT GEOMETRY: render at exactly 1536 by 1536 pixels. Cell centers X = 128, 384, 640, 896, 1152, 1408; Y = 128, 384, 640, 896, 1152, 1408. Each figure bounding box must be no wider than 176 pixels and no taller than 200 pixels, centered in its own cell, leaving clear transparent gutters at every row and column boundary including outer edges. Keep all feet clear of the lower cell edge by at least 28 pixels. Do not enlarge figures to fill gutters. All figures remain separated. Walking left-foot and right-foot poses must visibly alternate the leading foot, rather than duplicate the same step.",
+      "attempts": 3,
+      "selected_attempt": 2,
+      "pixel_dimensions": [
+        1254,
+        1254
+      ],
+      "validation": {
+        "real_alpha": true,
+        "figures": 36,
+        "layout": "6 columns by 6 rows",
+        "pose_order": "Matches v6; repeated leading feet accepted by requester.",
+        "identities": "Consistent",
+        "props_cats_chairs_labels": false,
+        "neighboring_figure_overlap": false,
+        "notes": "Exact 24px cell margins not achieved; transparent figure gutters present. Soft antialiased edges and some painterly shading remain.",
+        "alpha_zero_pixel_count": 827411,
+        "partial_alpha_pixel_count": 743067
+      },
+      "original_bytes_preserved": true,
+      "sha256": "500f69c30f041659419e60054744974b6a0bd640563af58f55df7f9f8610659f"
+    },
+    {
+      "candidate": "b",
+      "saved_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/candidates/group-0-b.png",
+      "tool": "image_gen.imagegen",
+      "reference_image_paths": [
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v6/sources/group-0.png",
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cafe-style-sample-v1/sample.png",
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cozy-world-v2/region-reading.png"
+      ],
+      "original_generated_file_path": "/Users/lalaze/.codex/generated_images/01a1591b-8ce4-7733-a778-ffe213b6a286/exec-593520c6-db10-493d-8d7d-b60ffd0a8855.png",
+      "edit_prompts": [],
+      "exact_generation_prompt": "Create a production pixel-art animation atlas for a cozy cafe game. Repaint the three characters from attached image 1 with the SAME identities, outfits, proportions, poses and layout, but with much richer rendering that matches the attached cafe interior (images 2 and 3). Each character is ONE anatomically connected full figure, head nestled directly between rounded shoulders, chin almost touching collar, ZERO visible long neck, 2.3 heads tall, large rounded head, short broad torso, short chunky legs, small brown shoes. The neck is at most one native pixel and mostly hidden by collar/hair. Side profile head is centered over shoulders, relaxed upright spine. Rendering: crisp handcrafted pixel art with four to five shades per material; consistent warm amber key light from the upper left (warm highlights on hair crown, shoulders and the left side of faces/sleeves, cooler deeper shadow on the lower right and under the chin); visible material texture (wool weave on coats, knit ribs on cardigans, soft trouser folds at knees, leather sheen on shoes); hair painted as distinct locks with 2\u20133 highlight strands; eyes with a coloured iris, a one-pixel white highlight and a dark upper lash line; soft blush; tiny nose and mouth. Clean warm dark-brown outlines (never black). No gradients, no blur, no anti-aliased soft edges, no drop shadows, no glow. Consistent scale and identity in every pose.\nOUTPUT: square 1536x1536 PNG sprite sheet, TRANSPARENT background. EXACTLY SIX COLUMNS and SIX ROWS of equal 256x256 cells, 36 separate full-body characters total. No labels, no grid lines, no props, no chairs, no tables, no ground shadows. Each sprite fully inside its cell with at least 24px margin on every side; nothing may cross into a neighbouring cell. Each identity occupies TWO consecutive rows, 12 poses each.\nFor each pair of rows: first row columns 1-6 = front neutral, front left-foot step, front right-foot step, rear neutral, rear left-foot step, rear right-foot step. Second row columns 1-6 = RIGHT profile neutral, RIGHT profile left-foot step, RIGHT profile right-foot step, RIGHT-facing seated upright arms reaching horizontally to tabletop height, RIGHT-facing seated leaning slightly forward petting a cat below with lowered hand, same seated petting hand slightly further down. Seated poses: bottom on an invisible chair, thighs approximately horizontal, knees bent 90 degrees, shins vertical, feet low. Head remains attached snugly to collar during all actions. No separate heads or body parts. No cats, no chairs.\nIdentity A in rows 1-2: pale peach skin, fluffy short golden blond hair, mustard duffle coat with cream toggle closures, blue-grey trousers, brown ankle boots.\nIdentity B in rows 3-4: pale peach skin, fluffy short dark-brown hair, warm round thin brown glasses, rust-red cardigan over cream shirt, brown trousers, brown shoes.\nIdentity C in rows 5-6: light tan skin, fluffy short blue-grey hair, warm round thin brown glasses, muted blue duffle coat with cream toggles, brown trousers, brown shoes.\nMatch the compact connected proportions of attached image 1, while using pixel-art textures. Ensure all 36 complete figures, six columns per row.\nSTRICT OUTPUT GEOMETRY: render at exactly 1536 by 1536 pixels. Cell centers X = 128, 384, 640, 896, 1152, 1408; Y = 128, 384, 640, 896, 1152, 1408. Each figure bounding box must be no wider than 176 pixels and no taller than 200 pixels, centered in its own cell, leaving clear transparent gutters at every row and column boundary including outer edges. Keep all feet clear of the lower cell edge by at least 28 pixels. Do not enlarge figures to fill gutters. All figures remain separated. Walking left-foot and right-foot poses must visibly alternate the leading foot, rather than duplicate the same step.\nThis is a fresh pixel-art repaint, not a near-duplicate tracing: use visibly discrete square pixel clusters matching images 2 and 3. Preserve the identity and pose order of image 1 but make the LEFT step and RIGHT step distinct alternating animation frames. The requested output canvas is 1536x1536, not 1254x1254. Reduce each sprite enough to guarantee at least 24 pixels of transparent empty space on ALL FOUR sides within its equal cell. Especially leave generous empty space above each head and below each shoe in all six rows.",
+      "attempts": 3,
+      "selected_attempt": 3,
+      "pixel_dimensions": [
+        1254,
+        1254
+      ],
+      "validation": {
+        "real_alpha": true,
+        "figures": 36,
+        "layout": "6 columns by 6 rows",
+        "pose_order": "Matches v6; repeated leading feet accepted by requester.",
+        "identities": "Consistent",
+        "props_cats_chairs_labels": false,
+        "neighboring_figure_overlap": false,
+        "notes": "Exact 24px cell margins not achieved; transparent figure gutters present. Soft antialiased edges and some painterly shading remain.",
+        "alpha_zero_pixel_count": 844117,
+        "partial_alpha_pixel_count": 726772
+      },
+      "original_bytes_preserved": true,
+      "sha256": "50aa9f4eaf15118893f939054e93efcf4d1d117b244f87eefd8b68eb355dfd39"
+    }
+  ]
+}

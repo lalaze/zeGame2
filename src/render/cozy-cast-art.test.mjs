@@ -13,7 +13,7 @@ import { diningDecorationPreview } from './dining-decoration-art';
 import { decorIcon } from './decor-art';
 import { centerpieceSprite } from './table-centerpiece-art';
 
-const base = 'public/art/generated/cozy-cast-v6/';
+const base = 'public/art/generated/cozy-cast-v7/';
 const manifest = () => JSON.parse(fs.readFileSync(base + 'manifest.json', 'utf8'));
 const diningBase = 'public/art/generated/cozy-dining-v3/';
 const diningManifest = () => JSON.parse(fs.readFileSync(diningBase + 'manifest.json', 'utf8'));
@@ -127,7 +127,7 @@ describe('whole-figure density-2 guest family', () => {
     const partial = manifest(); partial.characters[0].frames.pop(); expect(() => validateCastManifest(partial)).toThrow();
     const duplicate = manifest(); duplicate.characters[1].id = 0; expect(() => validateCastManifest(duplicate)).toThrow();
     const invalid = manifest(); invalid.characters[0].frames[0].hand[1] = NaN; expect(() => validateCastManifest(invalid)).toThrow();
-    const legacy = manifest(); legacy.version = 5; expect(() => validateCastManifest(legacy)).toThrow();
+    const legacy = manifest(); legacy.version = 6; expect(() => validateCastManifest(legacy)).toThrow();
   });
   it('preserves the authored complete figure without relocating or stretching its head', () => {
     for (const design of CUSTOMER_CAST) {

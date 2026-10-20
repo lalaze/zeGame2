@@ -6,7 +6,8 @@ import { resampleRgba } from '../src/render/pixel-resample.ts';
 
 const root = 'assets/generated/cozy-cast-v6', out = 'public/art/generated/cozy-cast-v6';
 const groups = [[27,0,17],[1,2,3],[4,5,6],[7,8,9],[10,11,12],[13,14,15],[16,18,19],[20,21,22],[23,24,25],[26,28,29]];
-const palette = JSON.parse(fs.readFileSync('docs/art-grid/palette.json')).colors.map(c => [1,3,5].map(i => parseInt(c.hex.slice(i,i+2),16)));
+// Team ramps' extra midtones are for the recoloured staff only; guests keep the three-shade ramps their looks swap.
+const palette = JSON.parse(fs.readFileSync('docs/art-grid/palette.json')).colors.filter(c => !c.ramp.startsWith('team-')).map(c => [1,3,5].map(i => parseInt(c.hex.slice(i,i+2),16)));
 const labs = palette.map(c => oklab(...c)), colours = new Map();
 const snap = (r,g,b) => {
   const key = r*65536+g*256+b;

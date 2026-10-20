@@ -447,6 +447,51 @@
       "colors": [
         "#9a9c98"
       ]
+    },
+    {
+      "ramp": "team-skin",
+      "shades": 5,
+      "colors": [
+        "#f4cfad",
+        "#dfaa7d",
+        "#b67c55",
+        "#80533f"
+      ]
+    },
+    {
+      "ramp": "team-hair",
+      "shades": 5,
+      "colors": [
+        "#594237",
+        "#976546",
+        "#dfb96f",
+        "#b9674e",
+        "#626782",
+        "#cc8c9f"
+      ]
+    },
+    {
+      "ramp": "team-cloth",
+      "shades": 5,
+      "colors": [
+        "#bb6b58",
+        "#799ba7",
+        "#8ba477",
+        "#d3a453",
+        "#9b87af",
+        "#cf929e",
+        "#69a295",
+        "#e5d7ba"
+      ]
+    },
+    {
+      "ramp": "team-pants",
+      "shades": 5,
+      "colors": [
+        "#53637b",
+        "#85664f",
+        "#585464"
+      ]
     }
   ]
 }

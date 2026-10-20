@@ -1,0 +1,110 @@
+[
+  {
+    "sheet": 1,
+    "tool": "image_gen.imagegen",
+    "reference_image_paths": [
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v6/sources/group-1.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/candidates/group-0-a.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cafe-style-sample-v1/sample.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cozy-world-v2/region-reading.png"
+    ],
+    "prompt_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/prompt-1.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "original_generated_file_path": "/Users/lalaze/.codex/generated_images/01a15934-244d-7e33-a876-ba0db11da460/exec-485e780d-5631-42bc-aa17-ecdaa4d8f901.png",
+        "pixel_dimensions": [
+          1254,
+          1254
+        ]
+      }
+    ],
+    "selected_attempt": 1,
+    "edit_prompts": [],
+    "edit_result_path": null,
+    "pixel_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verification": {
+      "minimum": 0,
+      "maximum": 255,
+      "fully_transparent_pixels": 661810
+    },
+    "saved_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/sources/group-1.png",
+    "visual_review": "36 separate figures in 6 by 6 layout; correct pose grouping; accessories retained; no cats, furniture, labels or ground shadows.",
+    "remaining_imperfections": "Tight margins follow the source layout rather than the requested 24px inset; repeated leading feet in some steps are permitted."
+  },
+  {
+    "sheet": 2,
+    "tool": "image_gen.imagegen",
+    "reference_image_paths": [
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v6/sources/group-2.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/candidates/group-0-a.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cafe-style-sample-v1/sample.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cozy-world-v2/region-reading.png"
+    ],
+    "prompt_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/prompt-2.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "original_generated_file_path": "/Users/lalaze/.codex/generated_images/01a15934-244d-7e33-a876-ba0db11da460/exec-63d8db1a-e942-4294-afbb-73fcfa3a750a.png",
+        "pixel_dimensions": [
+          1254,
+          1254
+        ]
+      }
+    ],
+    "selected_attempt": 1,
+    "edit_prompts": [],
+    "edit_result_path": null,
+    "pixel_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verification": {
+      "minimum": 0,
+      "maximum": 255,
+      "fully_transparent_pixels": 748594
+    },
+    "saved_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/sources/group-2.png",
+    "visual_review": "36 separate figures in 6 by 6 layout; correct pose grouping; accessories retained; no cats, furniture, labels or ground shadows.",
+    "remaining_imperfections": "Tight margins follow the source layout rather than the requested 24px inset; repeated leading feet in some steps are permitted."
+  },
+  {
+    "sheet": 3,
+    "tool": "image_gen.imagegen",
+    "reference_image_paths": [
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v6/sources/group-3.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/candidates/group-0-a.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cafe-style-sample-v1/sample.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cozy-world-v2/region-reading.png"
+    ],
+    "prompt_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/prompt-3.txt",
+    "attempts": [
+      {
+        "attempt": 1,
+        "original_generated_file_path": "/Users/lalaze/.codex/generated_images/01a15934-244d-7e33-a876-ba0db11da460/exec-0ee60794-736b-4d41-91bd-cb4d65be84f5.png",
+        "pixel_dimensions": [
+          1254,
+          1254
+        ]
+      }
+    ],
+    "selected_attempt": 1,
+    "edit_prompts": [],
+    "edit_result_path": null,
+    "pixel_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_verification": {
+      "minimum": 0,
+      "maximum": 255,
+      "fully_transparent_pixels": 750594
+    },
+    "saved_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/sources/group-3.png",
+    "visual_review": "36 separate figures in 6 by 6 layout; correct pose grouping; accessories retained; no cats, furniture, labels or ground shadows.",
+    "remaining_imperfections": "Tight margins follow the source layout rather than the requested 24px inset; repeated leading feet in some steps are permitted."
+  }
+]

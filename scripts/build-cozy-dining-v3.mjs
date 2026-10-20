@@ -5,7 +5,8 @@ import { resampleRgba } from '../src/render/pixel-resample.ts';
 const root='assets/generated/cozy-dining-v3',out='public/art/generated/cozy-dining-v3';
 const handContacts=JSON.parse(fs.readFileSync(`${root}/contacts.json`));
 const groups=[[27,0,17],[1,2,3],[4,5,6],[7,8,9],[10,11,12],[13,14,15],[16,18,19],[20,21,22],[23,24,25],[26,28,29]];
-const palette=JSON.parse(fs.readFileSync('docs/art-grid/palette.json')).colors.map(c=>[1,3,5].map(i=>parseInt(c.hex.slice(i,i+2),16))),labs=palette.map(c=>oklab(...c)),cache=new Map();
+// Team ramps' extra midtones are for the recoloured staff only.
+const palette=JSON.parse(fs.readFileSync('docs/art-grid/palette.json')).colors.filter(c=>!c.ramp.startsWith('team-')).map(c=>[1,3,5].map(i=>parseInt(c.hex.slice(i,i+2),16))),labs=palette.map(c=>oklab(...c)),cache=new Map();
 function snap(p){for(let n=0;n<p.length;n+=4){if(p[n+3]<128){p.fill(0,n,n+4);continue}p[n+3]=255;const key=p[n]*65536+p[n+1]*256+p[n+2];if(!cache.has(key)){const lab=oklab(p[n],p[n+1],p[n+2]);let best=0,d=Infinity;labs.forEach((v,i)=>{const e=v.reduce((a,c,k)=>a+(c-lab[k])**2,0);if(e<d){best=i;d=e}});cache.set(key,palette[best])}p.set(cache.get(key),n)}return p}
 // Trace the actual outer palm in the complete painting, not a guessed wrist.
 function palm(pixels,w,h,pet){

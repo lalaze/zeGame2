@@ -1,0 +1,88 @@
+{
+  "sheets": [
+    {
+      "sheet": 7,
+      "tool": "image_gen.imagegen",
+      "reference_image_paths": [
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v6/sources/group-7.png",
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/candidates/group-0-a.png",
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cafe-style-sample-v1/sample.png",
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cozy-world-v2/region-reading.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "original_generated_file_path": "/Users/lalaze/.codex/generated_images/01a15934-304b-75b0-bf36-0edb2bacaddc/exec-d5c17e5f-c7e9-45a7-a5e4-c5ca959e4d48.png"
+        }
+      ],
+      "selected_attempt": 1,
+      "edit_passes": [
+        {
+          "prompt_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/prompt-7-edit.txt",
+          "prompt": "Change only one defect: add the same thin warm-brown round glasses worn by identity B to the two seated petting figures in row 4, columns 5 and 6. Glasses must sit visibly over the eye and connect to the ear, matching the glasses in row 4 columns 1–4. Preserve all 36 full figures, their positions, size, identity, poses, rendering, outfits, other accessories and all transparent gaps exactly. Keep a genuinely transparent background. No cats, chairs, props or shadows. Do not change any other pixels unnecessarily.",
+          "reference_image_paths": [
+            "/Users/lalaze/.codex/generated_images/01a15934-304b-75b0-bf36-0edb2bacaddc/exec-d5c17e5f-c7e9-45a7-a5e4-c5ca959e4d48.png"
+          ],
+          "original_generated_file_path": "/Users/lalaze/.codex/generated_images/01a15934-304b-75b0-bf36-0edb2bacaddc/exec-1ada71fc-5ef0-41f7-9b02-45adbfa955b3.png"
+        }
+      ],
+      "pixel_dimensions": [
+        1254,
+        1254
+      ],
+      "selected_output": "/Users/lalaze/.codex/generated_images/01a15934-304b-75b0-bf36-0edb2bacaddc/exec-1ada71fc-5ef0-41f7-9b02-45adbfa955b3.png",
+      "saved_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/sources/group-7.png",
+      "remaining_imperfections": "Some step poses repeat the leading foot, as permitted. Cell margins are tighter than requested, but figures remain visually separate."
+    },
+    {
+      "sheet": 8,
+      "tool": "image_gen.imagegen",
+      "reference_image_paths": [
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v6/sources/group-8.png",
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/candidates/group-0-a.png",
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cafe-style-sample-v1/sample.png",
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cozy-world-v2/region-reading.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "original_generated_file_path": "/Users/lalaze/.codex/generated_images/01a15934-304b-75b0-bf36-0edb2bacaddc/exec-3c38f7b9-6a99-4fed-a249-c19db4ee4fe5.png"
+        }
+      ],
+      "selected_attempt": 1,
+      "edit_passes": [],
+      "pixel_dimensions": [
+        1254,
+        1254
+      ],
+      "selected_output": "/Users/lalaze/.codex/generated_images/01a15934-304b-75b0-bf36-0edb2bacaddc/exec-3c38f7b9-6a99-4fed-a249-c19db4ee4fe5.png",
+      "saved_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/sources/group-8.png",
+      "remaining_imperfections": "Some step poses repeat the leading foot, as permitted. Cell margins are tighter than requested, but figures remain visually separate."
+    },
+    {
+      "sheet": 9,
+      "tool": "image_gen.imagegen",
+      "reference_image_paths": [
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v6/sources/group-9.png",
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/candidates/group-0-a.png",
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cafe-style-sample-v1/sample.png",
+        "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cozy-world-v2/region-reading.png"
+      ],
+      "attempts": [
+        {
+          "attempt": 1,
+          "original_generated_file_path": "/Users/lalaze/.codex/generated_images/01a15934-304b-75b0-bf36-0edb2bacaddc/exec-e3972763-b553-47f8-a424-c25357069204.png"
+        }
+      ],
+      "selected_attempt": 1,
+      "edit_passes": [],
+      "pixel_dimensions": [
+        1254,
+        1254
+      ],
+      "selected_output": "/Users/lalaze/.codex/generated_images/01a15934-304b-75b0-bf36-0edb2bacaddc/exec-e3972763-b553-47f8-a424-c25357069204.png",
+      "saved_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/sources/group-9.png",
+      "remaining_imperfections": "Some step poses repeat the leading foot, as permitted. Cell margins are tighter than requested, but figures remain visually separate."
+    }
+  ]
+}

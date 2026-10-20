@@ -5,8 +5,9 @@
  * directly (or recolouring them pixel by pixel) leaves speckled hair, stray skin and
  * hair tints on clothes and faces, and a ragged contour. Instead each painted pixel is
  * labelled with a material, the labels are voted straight onto the 2× world grid, and
- * every material is drawn with the three shades of its master-palette ramp
- * (docs/art-grid/palette.json) inside one clean warm contour.
+ * every material is drawn with the five shades of its master-palette team ramp
+ * (docs/art-grid/palette.json) inside one clean warm contour, so painted hair locks
+ * and fabric folds survive at world size.
  *
  * No DOM: the runtime, unit tests and Node scripts share these functions.
  */
@@ -17,7 +18,10 @@ export type TeamRole = 'owner' | 'barista' | 'server' | 'cook';
 /** Straight (non-premultiplied) RGBA, alpha already cut to 0 below 100. */
 export type PoseImage = { data: Uint8ClampedArray; width: number; height: number; anchors: PoseAnchors };
 export type Rgb = readonly [number, number, number];
-export type Ramp = readonly [Rgb, Rgb, Rgb];
+/** Deep shadow, shadow, base, light, highlight. */
+export type Ramp = readonly [Rgb, Rgb, Rgb, Rgb, Rgb];
+/** Index of a ramp's base shade. */
+export const BASE = 2;
 
 export const MATERIAL = { clear: 0, skin: 1, hair: 2, cloth: 3, pants: 4, ink: 5, feature: 6, other: 7 } as const;
 /** Face details keep their own small colours instead of a three-shade ramp. */
@@ -28,7 +32,7 @@ export type PoseSegmentation = {
   width: number; height: number;
   /** MATERIAL per source pixel. */
   material: Uint8Array;
-  /** Shade 0–2 for ramp materials, FEATURE kind for features, palette index for others. */
+  /** Shade 0–4 for ramp materials, FEATURE kind for features, palette index for others. */
   tone: Uint8Array;
 };
 
@@ -38,10 +42,11 @@ export type Placement = { x: number; y: number; scale: number };
 
 // ---------------------------------------------------------------- colour
 
-/** The ramp builder of scripts/pixel-conform.mjs: shadows cooler and deeper, highlights warmer. */
+/** The five-shade ramp builder of scripts/pixel-conform.mjs (the `team-*` ramps): shadows cooler and deeper, highlights warmer. */
 export function shadeRamp(base: Rgb): Ramp {
   const toward = (target: Rgb, amount: number) => base.map((v, k) => Math.round(v + (target[k] - v) * amount)) as unknown as Rgb;
-  return [toward([70, 40, 60], 0.42), base, toward([255, 236, 196], 0.38)];
+  const shadow: Rgb = [70, 40, 60], light: Rgb = [255, 236, 196];
+  return [toward(shadow, 0.42), toward(shadow, 0.21), base, toward(light, 0.19), toward(light, 0.38)];
 }
 export const hexRgb = (hex: string): Rgb => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16)) as unknown as Rgb;
 
@@ -171,9 +176,10 @@ function hairMask(p: PoseImage, skin: Uint8Array, neckY: number, sit: boolean, c
 const INK_LUMA = 52;
 /** Painted contour ink within this many source pixels of the silhouette is redrawn as one clean world pixel. */
 const CONTOUR_REACH = 6;
-/** Share of hair, cloth and trousers drawn in their shadow and highlight shades. */
-const SHADES: Record<number, [shadow: number, light: number]> = { 2: [.30, .08], 3: [.25, .10], 4: [.25, .08] };
-/** Faces are painted almost flat: only clearly darker skin is shadow, clearly brighter is highlight. */
+/** Share of hair, cloth and trousers drawn in each shade below and above the base, by brightness rank. */
+const SHADES: Record<number, [deep: number, shadow: number, light: number, highlight: number]> = {
+  2: [.10, .22, .13, .06], 3: [.08, .20, .14, .05], 4: [.10, .18, .12, .05] };
+/** Faces stay soft: clearly darker skin takes the shadow shade, much darker the deep one; clearly brighter is light. */
 const SKIN_SHADOW = 24, SKIN_LIGHT = 22;
 /** Passages this close to face skin do not count as leading out of the face (fringe tips touch eyes). */
 const FACE_GAP = 3;
@@ -301,24 +307,29 @@ function faceDetails(p: PoseImage, face: Island, box: Box, material: Uint8Array,
   }
 }
 
-/** Split each recoloured material into shadow / base / highlight by its own brightness. */
+/** Split each recoloured material into its five shades by its own brightness. */
 function shadeTones(p: PoseImage, face: Island, material: Uint8Array, tone: Uint8Array): void {
   const { data } = p, lum = (n: number) => luma(data[n * 4], data[n * 4 + 1], data[n * 4 + 2]);
   // Skin follows the face's own base tone, so cheeks and jaw stay one flat colour.
   const reference = face.length ? face : [...material.keys()].filter(n => material[n] === MATERIAL.skin);
   if (reference.length) {
     const sorted = reference.map(lum).sort((a, b) => a - b), base = sorted[sorted.length >> 1];
-    for (let n = 0; n < material.length; n++) if (material[n] === MATERIAL.skin) { const v = lum(n); tone[n] = v < base - SKIN_SHADOW ? 0 : v > base + SKIN_LIGHT ? 2 : 1; }
+    for (let n = 0; n < material.length; n++) if (material[n] === MATERIAL.skin) {
+      const v = lum(n); tone[n] = v < base - 2 * SKIN_SHADOW ? 0 : v < base - SKIN_SHADOW ? 1 : v > base + SKIN_LIGHT ? 3 : BASE;
+    }
   }
   for (const m of [MATERIAL.hair, MATERIAL.cloth, MATERIAL.pants]) {
     const histogram = new Uint32Array(256); let total = 0;
     for (let n = 0; n < material.length; n++) if (material[n] === m) { histogram[Math.round(lum(n))]++; total++; }
     if (!total) continue;
-    const [shadow, highlight] = SHADES[m];
-    let low = 0, high = 255;
-    for (let v = 0, seen = 0; v < 256; v++) { seen += histogram[v]; if (seen >= total * shadow) { low = v; break; } }
-    for (let v = 255, seen = 0; v >= 0; v--) { seen += histogram[v]; if (seen >= total * highlight) { high = v; break; } }
-    for (let n = 0; n < material.length; n++) if (material[n] === m) { const v = lum(n); tone[n] = v < low ? 0 : v > high ? 2 : 1; }
+    const [deep, shadow, light, highlight] = SHADES[m];
+    // Brightness at which the darkest / brightest `share` of this material's pixels ends.
+    const below = (share: number) => { for (let v = 0, seen = 0; v < 256; v++) { seen += histogram[v]; if (seen >= total * share) return v; } return 255; };
+    const above = (share: number) => { for (let v = 255, seen = 0; v >= 0; v--) { seen += histogram[v]; if (seen >= total * share) return v; } return 0; };
+    const cuts = [below(deep), below(deep + shadow), above(light + highlight), above(highlight)];
+    for (let n = 0; n < material.length; n++) if (material[n] === m) {
+      const v = lum(n); tone[n] = v < cuts[0] ? 0 : v < cuts[1] ? 1 : v > cuts[3] ? 4 : v > cuts[2] ? 3 : BASE;
+    }
   }
 }
 
@@ -358,7 +369,8 @@ export type GridPose = { width: number; height: number; material: Uint8Array; to
 
 /**
  * Each world pixel takes the material covering most of its source footprint (or stays
- * clear), then that material's most common shade. Nothing is averaged into new colours.
+ * clear), then that material's average shade (most common detail for faces and props).
+ * Nothing is averaged into new colours.
  */
 export function voteTeamPose(seg: PoseSegmentation, place: Placement, width: number, height: number): GridPose {
   const material = new Uint8Array(width * height), tone = new Uint8Array(width * height);
@@ -387,7 +399,12 @@ export function voteTeamPose(seg: PoseSegmentation, place: Placement, width: num
       let m = 0;
       for (let k = 1; k < weight.length; k++) if (weight[k] * PRIORITY[k] > weight[m] * PRIORITY[m]) m = k;
       let t = 0;
-      for (let k = 1; k < TONES; k++) if (toneWeight[m * TONES + k] > toneWeight[m * TONES + t]) t = k;
+      if (m && m <= MATERIAL.pants) {
+        // Shades are ordered: the footprint's average shade keeps folds and locks as clean bands.
+        let sum = 0, total = 0;
+        for (let k = 0; k < 5; k++) { sum += k * toneWeight[m * TONES + k]; total += toneWeight[m * TONES + k]; }
+        t = total ? Math.round(sum / total) : BASE;
+      } else for (let k = 1; k < TONES; k++) if (toneWeight[m * TONES + k] > toneWeight[m * TONES + t]) t = k;
       material[ty * width + tx] = m; tone[ty * width + tx] = t;
     }
   }
@@ -418,8 +435,9 @@ function despeckle(grid: GridPose): void {
       if (best >= 0) { nextMaterial[at] = Math.floor(best / TONES); nextTone[at] = best % TONES; }
       continue;
     }
+    // A lone shade one step from its neighbours is a lock or fold highlight; only stray outliers are smoothed.
     const same = around.filter(v => material[v] === m);
-    if (same.length < 2 || same.some(v => tone[v] === tone[at])) continue;
+    if (same.length < 2 || same.some(v => Math.abs(tone[v] - tone[at]) < 2)) continue;
     const counts = new Map<number, number>();
     for (const v of same) counts.set(tone[v], (counts.get(tone[v]) ?? 0) + 1);
     let best = tone[at], score = 0;
@@ -449,12 +467,12 @@ const ROSE: Rgb = [214, 96, 96], LIP: Rgb = [140, 43, 32];
 export function paintTeamPose(grid: GridPose, colours: TeamColours): Uint8ClampedArray {
   const out = new Uint8ClampedArray(grid.width * grid.height * 4);
   const snap = (rgb: Rgb): Rgb => OTHER_PALETTE[nearestOther(...rgb)];
-  const feature: Rgb[] = [INK_EYE, GLINT, snap(mixRgb(colours.skin[1], ROSE, .3)), snap(mixRgb(colours.skin[0], LIP, .5))];
+  const feature: Rgb[] = [INK_EYE, GLINT, snap(mixRgb(colours.skin[BASE], ROSE, .3)), snap(mixRgb(colours.skin[0], LIP, .5))];
   const ramps: (Ramp | null)[] = [null, colours.skin, colours.hair, colours.cloth, colours.pants];
   for (let at = 0; at < grid.material.length; at++) {
     const m = grid.material[at], t = grid.tone[at];
     if (!m) continue;
-    const rgb = m <= MATERIAL.pants ? ramps[m]![Math.min(2, t)] : m === MATERIAL.ink ? INK_LINE
+    const rgb = m <= MATERIAL.pants ? ramps[m]![Math.min(4, t)] : m === MATERIAL.ink ? INK_LINE
       : m === MATERIAL.feature ? feature[t] ?? INK_EYE : OTHER_PALETTE[t] ?? INK_LINE;
     out[at * 4] = rgb[0]; out[at * 4 + 1] = rgb[1]; out[at * 4 + 2] = rgb[2]; out[at * 4 + 3] = 255;
   }

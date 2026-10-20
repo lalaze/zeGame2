@@ -42,7 +42,7 @@ describe('team art on the world pixel grid', () => {
   it('paints ramps and facial details using only master-palette colours and binary alpha', () => {
     const material: number[] = [MATERIAL.clear], tone = [0];
     for (const m of [MATERIAL.skin, MATERIAL.hair, MATERIAL.cloth, MATERIAL.pants])
-      for (let t = 0; t < 3; t++) { material.push(m); tone.push(t); }
+      for (let t = 0; t < 5; t++) { material.push(m); tone.push(t); }
     for (const t of Object.values(FEATURE)) { material.push(MATERIAL.feature); tone.push(t); }
     const pixels = paintTeamPose({ width: material.length, height: 1, material: new Uint8Array(material), tone: new Uint8Array(tone) }, colours);
     const allowed = new Set(palette.colors.map(c => c.hex.toLowerCase()));

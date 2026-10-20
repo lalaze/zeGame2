@@ -1,0 +1,101 @@
+[
+  {
+    "sheet": 4,
+    "tool": "image_gen.imagegen",
+    "reference_image_paths": [
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v6/sources/group-4.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/candidates/group-0-a.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cafe-style-sample-v1/sample.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cozy-world-v2/region-reading.png"
+    ],
+    "attempts": [
+      {
+        "attempt": 1,
+        "original_generated_file_path": "/Users/lalaze/.codex/generated_images/01a15934-29c3-7ab2-a9d0-12be9c446cf0/exec-ee31d519-3b5b-437c-897f-cfa08a00c140.png",
+        "pixel_dimensions": [
+          1254,
+          1254
+        ]
+      }
+    ],
+    "selected_attempt": 1,
+    "edit_prompts": [],
+    "edit_result_path": null,
+    "saved_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/sources/group-4.png",
+    "pixel_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_validation": {
+      "transparent_pixels": 790386,
+      "opaque_pixels": 1595
+    },
+    "visual_review": "36 separate figures in 6x6; pose order and accessories retained; no cats, furniture, labels or ground shadows. Tight vertical margins inherited from reference layout; some step poses repeat the leading foot."
+  },
+  {
+    "sheet": 5,
+    "tool": "image_gen.imagegen",
+    "reference_image_paths": [
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v6/sources/group-5.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/candidates/group-0-a.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cafe-style-sample-v1/sample.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cozy-world-v2/region-reading.png"
+    ],
+    "attempts": [
+      {
+        "attempt": 1,
+        "original_generated_file_path": "/Users/lalaze/.codex/generated_images/01a15934-29c3-7ab2-a9d0-12be9c446cf0/exec-5fbe92e8-beba-41f2-9e0c-0f80ae417739.png",
+        "pixel_dimensions": [
+          1254,
+          1254
+        ]
+      }
+    ],
+    "selected_attempt": 1,
+    "edit_prompts": [],
+    "edit_result_path": null,
+    "saved_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/sources/group-5.png",
+    "pixel_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_validation": {
+      "transparent_pixels": 747684,
+      "opaque_pixels": 1380
+    },
+    "visual_review": "36 separate figures in 6x6; pose order and accessories retained; no cats, furniture, labels or ground shadows. Tight vertical margins inherited from reference layout; some step poses repeat the leading foot."
+  },
+  {
+    "sheet": 6,
+    "tool": "image_gen.imagegen",
+    "reference_image_paths": [
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v6/sources/group-6.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/candidates/group-0-a.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cafe-style-sample-v1/sample.png",
+      "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/public/art/generated/cozy-world-v2/region-reading.png"
+    ],
+    "attempts": [
+      {
+        "attempt": 1,
+        "original_generated_file_path": "/Users/lalaze/.codex/generated_images/01a15934-29c3-7ab2-a9d0-12be9c446cf0/exec-1fa88253-3de4-433b-a244-81762fec7781.png",
+        "pixel_dimensions": [
+          1254,
+          1254
+        ]
+      }
+    ],
+    "selected_attempt": 1,
+    "edit_prompts": [],
+    "edit_result_path": null,
+    "saved_path": "/Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/assets/generated/cozy-cast-v7/sources/group-6.png",
+    "pixel_dimensions": [
+      1254,
+      1254
+    ],
+    "alpha_validation": {
+      "transparent_pixels": 743545,
+      "opaque_pixels": 1717
+    },
+    "visual_review": "36 separate figures in 6x6; pose order and accessories retained; no cats, furniture, labels or ground shadows. Tight vertical margins inherited from reference layout; some step poses repeat the leading foot."
+  }
+]
