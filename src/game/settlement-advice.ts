@@ -1,4 +1,5 @@
 import type { IngredientId, ItemId, UpgradeId } from './data';
+import { CHAPTERS, claimableChapter } from './milestones';
 import type { DayReport } from './day';
 import { canPrepareItem, ingredientDef, isBakery, menuItems, prepTime, quoteUpgrade, recipe, restock, restockQuote, servingCost, servingsLeft, unlockedItems } from './economy';
 import { currentGoal, goalDone } from './goals';
@@ -13,7 +14,7 @@ export interface SettlementReason {
   extra?: number;
   amount?: number;
 }
-export type SettlementActionKind = 'claimGoal' | 'restock' | 'useStock' | 'switchMenu' | 'restartRecipe' | 'emergency' | 'dayGoal' | 'ownedDecor' | 'reduceBake' | 'reviewBake' | 'pausePromotion' | 'skipPromotion' | 'petRefill' | 'keepPetRefillOff' | 'finishService' | 'watchPass' | 'upgrade' | 'helpCounter' | 'watchService' | 'keepGoing';
+export type SettlementActionKind = 'claimGoal' | 'claimChapter' | 'restock' | 'useStock' | 'switchMenu' | 'restartRecipe' | 'emergency' | 'dayGoal' | 'ownedDecor' | 'reduceBake' | 'reviewBake' | 'pausePromotion' | 'skipPromotion' | 'petRefill' | 'keepPetRefillOff' | 'finishService' | 'watchPass' | 'upgrade' | 'helpCounter' | 'watchService' | 'keepGoing';
 export interface SettlementAction {
   kind: SettlementActionKind;
   tab: SettlementTab;
@@ -83,6 +84,8 @@ export function settlementAdvice(report: DayReport, state: GameState): Settlemen
 
   function nextAction(): SettlementAction {
     if (claimableGoal) return { kind: 'claimGoal', tab: 'menu', cost: 0, goal: claimableGoal.id, reward: claimableGoal.reward };
+    const chapter = claimableChapter(state);
+    if (chapter !== null) return { kind: 'claimChapter', tab: 'menu', cost: 0, goal: CHAPTERS[chapter].id };
 
     // Reproduce the existing affordable restock calculation on a private pantry.
     // A full forecast is never promised when only a partial top-up can be bought.

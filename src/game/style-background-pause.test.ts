@@ -7,6 +7,7 @@ import { bakeForForecast, restock } from './economy';
 import { formatMoney, formatTransactionMoney } from './format';
 import { MIN_SCENE_H, setKitchenLevel, setSceneHeight } from './layout';
 import { MomentDirector } from './moments';
+import { checkMilestones } from './milestones';
 import { adoptCat } from './pets';
 import { bookPromotion } from './promotion';
 import { Sim } from './sim';
@@ -57,6 +58,8 @@ function liveFrame(withCare = true) {
     // Real optional moments: they must never start or fade while the café is blocked.
     moments: new MomentDirector(() => 0.5), cuedMoment: null, MOMENT_HINT_KEY: 'moment-hint-',
     momentStage: () => ({ area: 'main', cats: [] }), storage: { preference: () => '1', setPreference: vi.fn() }, toast: vi.fn(),
+    // Real milestone checks: they read state and never advance the café.
+    checkMilestones, milestoneName: (id: string) => id,
   };
   const frame = new Function(...Object.keys(dependencies), `${frameSource}\nreturn frame;`)(...Object.values(dependencies)) as (dt: number) => void;
   const tick = new Function('delta', `${sceneTick}\nreturn dt;`) as (this: { initialized: boolean; loadingFailed: boolean; hooks: { tick: typeof frame } }, delta: number) => number;

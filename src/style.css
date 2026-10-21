@@ -176,6 +176,25 @@ html:lang(zh) body {
   text-overflow: ellipsis;
 }
 
+/* The café name, and under it the title its milestones earned. */
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.brand-title {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.2;
+  opacity: 0.85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 480px) {
+  .brand-title { display: none; }
+}
+
 .money {
   text-align: center;
   line-height: 1.05;
@@ -1214,6 +1233,89 @@ html:lang(zh) body {
 
 .claim {
   flex-shrink: 0;
+}
+
+/* After the guided goals, the card follows the café milestones. */
+.goal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.goal-actions .claim {
+  flex: 1 1 160px;
+  white-space: normal;
+  line-height: 1.25;
+}
+.milestone-book-btn {
+  flex-shrink: 0;
+  min-height: 32px;
+}
+.goal .goal-progress {
+  white-space: normal;
+}
+
+/* The milestone book: each opened chapter, its milestones and reward. */
+.milestone-book > p:first-child {
+  margin-top: 0;
+}
+.milestone-chapter {
+  margin: 12px 0 0;
+  padding: 10px;
+  background: #f9ecd0;
+  box-shadow: var(--border);
+}
+.milestone-chapter.done {
+  background: #e6f0d4;
+}
+.milestone-chapter.locked {
+  opacity: 0.75;
+}
+.milestone-chapter h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+.milestone-status {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--green-dark);
+}
+.milestone-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+.milestone-list li {
+  display: grid;
+  grid-template-columns: 16px 1fr auto;
+  column-gap: 6px;
+  align-items: baseline;
+  line-height: 1.35;
+}
+.milestone-list li.done .milestone-name {
+  color: var(--muted);
+}
+.milestone-mark {
+  font-weight: 700;
+  color: var(--green-dark);
+}
+.milestone-progress {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.milestone-list .bar {
+  grid-column: 2 / 4;
+  display: block;
+  margin-top: 3px;
+}
+.report-milestones {
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  background: #e6f0d4;
+  border-left: 3px solid var(--green);
 }
 
 /* ------------------------------------------------------------ decor shop */

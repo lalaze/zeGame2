@@ -2,6 +2,7 @@ import { parsePartners, type PartnerState } from './partners';
 import { emptySignatureDrinks, parseSignatureDrinks, signatureDefinition, type SignatureState } from './signature-drinks';
 import { parseCafeStyle, type CafeStyleState } from './styles';
 import { emptyRegularGuests, parseRegularGuests, type RegularGuestState } from './regular-guests';
+import { emptyMilestones, parseMilestones, type MilestoneState } from './milestones';
 import { parsePromotion, type Promotion } from './promotion';
 import {
   INGREDIENTS,
@@ -23,7 +24,7 @@ import { parseTaste, type TasteState } from './taste';
 import { emptyReviews, parseReputation, parseReviews, type Reputation, type ReviewSummary } from './reputation';
 
 export const SAVE_KEY = 'tiny-bean-cafe/save';
-export const SAVE_VERSION = 17;
+export const SAVE_VERSION = 18;
 
 export interface Look {
   skin: number;
@@ -97,6 +98,8 @@ export interface GameState {
   signatureDrinks: SignatureState;
   cafeStyle: CafeStyleState;
   regularGuests: RegularGuestState;
+  /** The café milestone track that follows the guided goals (save v18). */
+  milestones: MilestoneState;
   promotion: Promotion | null;
   pets: Pet[];
   reputation: Reputation;
@@ -155,6 +158,7 @@ export function createInitialState(now: number): GameState {
     signatureDrinks: emptySignatureDrinks(),
     cafeStyle: parseCafeStyle(null),
     regularGuests: emptyRegularGuests(),
+    milestones: emptyMilestones(),
     pets: [],
     promotion: null,
     reputation: { recent: [] },
@@ -300,6 +304,7 @@ export function deserialize(raw: string | null, now: number): GameState {
 
   base.day = Math.max(1, Math.floor(num(data.day, 1)));
   base.regularGuests = parseRegularGuests(data.regularGuests, base.day);
+  base.milestones = parseMilestones(data.milestones);
   base.partners = parsePartners(data.partners, base);
   base.phase = data.phase === 'closing' ? 'closing' : data.phase === 'open' ? 'open' : 'prep';
   base.dayTime = base.phase !== 'prep' ? num(data.dayTime, 0) : 0;

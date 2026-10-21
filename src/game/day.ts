@@ -3,6 +3,7 @@ import { reputationScore, reputationTraffic } from './reputation';
 import type { ItemId } from './data';
 import { bakeMorning, dayDemand, isBakery, menuItems, projectMorningBake, recipe, servingsLeft, servingCost, soldOutItems, suggestedBake } from './economy';
 import { emptyDay, type DayStats, type GameState } from './state';
+import { checkMilestones, milestonesReachedOn, recordDay } from './milestones';
 
 export interface DayReport extends DayStats {
   partners?: PartnerContribution[];
@@ -21,6 +22,8 @@ export interface DayReport extends DayStats {
   /** Unsold breads and pastries that went stale at closing, and what they cost to bake. */
   stale: Partial<Record<ItemId, number>>;
   staleCost: number;
+  /** Café milestones reached when the day closed. */
+  newMilestones?: string[];
 }
 
 export type OpenCheck = { ok: true } | { ok: false; reason: 'emptyMenu' } | { ok: false; reason: 'lowStock'; items: ItemId[] };
@@ -96,6 +99,11 @@ export function finishDay(state: GameState): DayReport {
     stale,
     staleCost,
   };
+  // The day's best-ever results, judged while it is still this day (its weather included).
+  recordDay(state, report);
+  checkMilestones(state);
+  // Everything reached today, including milestones the live check already marked during service.
+  report.newMilestones = milestonesReachedOn(state, report.day);
   if (state.kitchen) state.shelf = {};
   state.inProduction = {};
   state.phase = 'prep';

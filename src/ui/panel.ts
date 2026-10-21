@@ -61,6 +61,8 @@ import {
 } from '../game/economy';
 import { formatTransactionMoney as formatMoney, formatNumber } from '../game/format';
 import { GOALS, claimGoal, currentGoal, goalDone } from '../game/goals';
+import { milestonesStarted } from '../game/milestones';
+import { claimChapterWithToast, milestoneCard, showMilestoneBook } from './milestones';
 import type { GameState } from '../game/state';
 import { mainTableCount } from '../game/regions';
 import { MAX_TABLES } from '../game/layout';
@@ -90,7 +92,7 @@ export interface PantryTaskContext {
   detail: string;
   ingredients: readonly IngredientId[];
 }
-export type PurchaseKind = 'item' | 'upgrade' | 'decor' | 'goal' | 'ingredient' | 'menu' | 'recipe' | 'pet' | 'promotion';
+export type PurchaseKind = 'item' | 'upgrade' | 'decor' | 'goal' | 'milestone' | 'ingredient' | 'menu' | 'recipe' | 'pet' | 'promotion';
 
 /** How many units one tap buys in the pantry. */
 const PANTRY_AMOUNTS = [10, 50, 200] as const;
@@ -272,7 +274,14 @@ export class Panel {
     );
     list.addEventListener('click', (e) => this.onListClick(e));
     goalEl.addEventListener('click', (e) => {
-      if (!(e.target as HTMLElement).closest('button[data-claim]')) return;
+      const target = e.target as HTMLElement;
+      if (target.closest('button[data-milestone-book]')) { showMilestoneBook(this.state); return; }
+      if (target.closest('button[data-claim-chapter]')) {
+        const reward = claimChapterWithToast(this.state);
+        if (reward) { this.onPurchase('milestone', reward.chapter.id); this.update(); }
+        return;
+      }
+      if (!target.closest('button[data-claim]')) return;
       const reward = claimGoal(this.state);
       if (reward > 0) {
         this.onPurchase('goal', String(reward));
@@ -873,6 +882,17 @@ export class Panel {
 
   private updateGoal(): void {
     const goal = currentGoal(this.state);
+    if (!goal && milestonesStarted(this.state) && !this.pantryTask) {
+      // After the guided goals, the same card follows the café milestones.
+      this.goalEl.hidden = false;
+      const card = milestoneCard(this.state);
+      const sig = `milestone|${card.sig}`;
+      if (sig === this.goalSig) return;
+      this.goalSig = sig;
+      this.goalEl.classList.toggle('done', card.done);
+      this.goalEl.innerHTML = card.html;
+      return;
+    }
     if (!goal || this.pantryTask) {
       this.goalEl.hidden = true;
       return;

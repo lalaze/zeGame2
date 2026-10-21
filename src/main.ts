@@ -45,6 +45,8 @@ import { cafeInteractionEnabled } from './ui/cafe-interaction';
 import { showRecommendation } from './ui/moments';
 import { displayItemName } from './ui/item-name';
 import { conditionHud } from './ui/conditions';
+import { checkMilestones, recordMomentAnswered } from './game/milestones';
+import { cafeTitle, milestoneName } from './ui/milestones';
 import { MomentDirector, type Moment, type MomentStage } from './game/moments';
 import { FullscreenDrawer } from './ui/fullscreen-drawer';
 import { ManagementShortcuts } from './ui/management-shortcuts';
@@ -262,6 +264,8 @@ const panel = new Panel(
     const burst = kind === 'goal' ? 14 : 5;
     for (let i = 0; i < burst; i++) scene.sparkle(20 + Math.random() * 150, 30 + Math.random() * 40);
     if (kind === 'goal') toast(t('goal.claimed', { reward: formatMoney(Number(id)) }));
+    // A claimed chapter gives the café a new title.
+    if (kind === 'milestone') updateBrand();
   },
   (request) => startArrange(request),
   {
@@ -477,6 +481,10 @@ function updateBrand(): void {
   const name = state.profile?.cafeName ?? t('app.title');
   $('hud-cafe-name').textContent = name;
   $('stage-sign-name').textContent = name;
+  // The latest milestone chapter's title, under the name.
+  const title = cafeTitle(state), titleEl = $('hud-cafe-title');
+  if (titleEl.textContent !== title) titleEl.textContent = title;
+  titleEl.hidden = !title;
 }
 
 let shownStats = '';
@@ -659,9 +667,10 @@ function showReport(report: DayReport): void {
     title: t('report.title', { n: report.day }), icon: ownerIcon(), body,
     buttons: [
       { label: t('report.next'), primary: true, onClick: prepareDay },
-      { label: advice.claimableGoal ? t('guide.viewReward') : t(`tab.${recommendedTab}`), onClick: () => {
+      { label: advice.claimableGoal || advice.action.kind === 'claimChapter' ? t('guide.viewReward') : t(`tab.${recommendedTab}`), onClick: () => {
         showPanelTab(recommendedTab);
         if (advice.claimableGoal) $('goal').querySelector<HTMLButtonElement>('[data-claim]')?.focus();
+        else if (advice.action.kind === 'claimChapter') $('goal').querySelector<HTMLButtonElement>('[data-claim-chapter]')?.focus();
       } },
     ],
   });
@@ -749,7 +758,7 @@ function openSettings(): void {
       ${import.meta.env.DEV ? `<p><button type="button" class="pixel-btn danger" data-test-restart>${t('settings.testRestart')}</button></p><p class="note">${t('settings.testRestartHint')}</p>` : ''}
       ${
         profile
-          ? `<div class="profile-row"><img src="${ownerIcon()}" alt="" /><div><b class="profile-cafe"></b><div class="note profile-owner"></div></div>
+          ? `<div class="profile-row"><img src="${ownerIcon()}" alt="" /><div><b class="profile-cafe"></b><div class="note profile-title" hidden></div><div class="note profile-owner"></div></div>
              <button class="pixel-btn ghost small" data-edit-profile>${t('settings.edit')}</button></div>`
           : ''
       }
@@ -777,6 +786,9 @@ function openSettings(): void {
   if (cafeEl && profile) {
     cafeEl.textContent = profile.cafeName;
     document.querySelector('.profile-owner')!.textContent = profile.ownerName || t('ob.char.defaultName');
+    const titleEl = document.querySelector<HTMLElement>('.profile-title')!, title = cafeTitle(state);
+    titleEl.textContent = title ? t('milestone.cafeTitle', { title }) : '';
+    titleEl.hidden = !title;
   }
   document.querySelector('[data-guide-replay]')?.addEventListener('click', () => guide.showHelp());
   document.querySelector('[data-test-restart]')?.addEventListener('click', confirmRestart);
@@ -873,11 +885,14 @@ function openMoment(): void {
       !cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused)) return;
   if (moment.kind === 'greet') {
     const name = moments.greet(state, sim);
-    if (name) toast(t('moment.greet.toast', { name: t(name) }));
+    if (!name) return;
+    recordMomentAnswered(state);
+    toast(t('moment.greet.toast', { name: t(name) }));
   } else if (moment.kind === 'cat') {
     const catId = moment.spot?.catId;
     const coins = moments.tidy(state);
     if (coins === null) return;
+    recordMomentAnswered(state);
     // The culprit gets a fuss anyway.
     if (catId && scene.livingCats.actors.has(catId as CatId)) scene.petResidentCat(catId as CatId);
     else { scene.catSpot = CAT_SPOT; scene.petCat(); }
@@ -887,11 +902,13 @@ function openMoment(): void {
     scene.flashAtMoment();
     const coins = moments.photo(state, sim);
     if (coins === null) return;
+    recordMomentAnswered(state);
     scene.tipAtMoment(coins);
     toast(t('moment.photo.toast', { money: formatMoney(coins) }));
   } else if (moment.kind === 'delivery') {
     const gift = moments.signDelivery(state);
     if (!gift) return;
+    recordMomentAnswered(state);
     scene.flashAtMoment();
     toast(t('moment.delivery.toast', { item: displayItemName(gift.item, state), n: gift.servings }));
   } else {
@@ -899,7 +916,9 @@ function openMoment(): void {
     if (!guest) return;
     showRecommendation(state, guest, moment.options, (item) => {
       const verdict = moments.recommend(sim, item);
-      if (verdict) toast(t(`moment.recommend.toast.${verdict}`));
+      if (!verdict) return;
+      recordMomentAnswered(state);
+      toast(t(`moment.recommend.toast.${verdict}`));
     }, () => moments.dismiss());
   }
 }
@@ -1072,6 +1091,9 @@ function frame(dt: number): void {
         ? t('hud.today', { money: formatMoney(state.today.revenue) })
         : t('hud.closed', { n: state.day });
     if (rate !== shownRate) rateEl.textContent = shownRate = rate;
+    // Milestones you reach by buying or growing (a room, comfort) show up straight away.
+    const reached = checkMilestones(state);
+    if (reached.length) toast(t('milestone.toast.reached', { name: reached.map(milestoneName).join(t('list.sep')) }));
     panel.update();
     regionsUI.update();
     updateStats();

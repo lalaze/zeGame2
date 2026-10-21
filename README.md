@@ -66,7 +66,7 @@ What to spend the day's revenue on:
   - **Decor and Furniture:** two separate catalogs with 39 pieces (plants, lamps, a bookshelf, an armchair, a cat bed, a piano, paintings, a wall clock and more) that you place wherever there's room. Buy one and tap a free spot in the café; the free cells light up and the piece shows green where it fits; tapping the spot reserved for the next table says so. **Arrange café** lets you tap any placed piece to move it or put it back in storage. Floor pieces go anywhere except the counter, the walkway from the door, the tables and the spot the next table will take (expanding the shop moves anything in the way to storage); wall pieces go either side of the menu board. Each kind adds its comfort once, however many you place. Cards show wall/floor placement and grid footprint. Decorative seats do not add service capacity; service tables remain in Upgrades. The new collection adds lavender, a succulent, daisies, two café posters, a wreath, ivy, bunting, a brass lantern, a coffee bean display, a sideboard, loveseat, stool, glass cabinet, magazine rack and coffee cart.
   - **Finishes:** seven spots: wallpaper, floor, counter, windowsill, ceiling, rug and neon sign. You buy each item once, then can switch between owned items for free.
   - Comfort raises tips by 1% per point.
-- **Goals:** a checklist of 15 goals with cash rewards walks you through the loop in order. Capacity goals accept alternative investments (kitchen, tables or rooms; different staff roles), and variety counts unlocked dishes without forcing all of them onto the menu.
+- **Goals:** a checklist of 15 goals with cash rewards walks you through the loop in order. Once they're done, the same card follows the café milestones (below). Capacity goals accept alternative investments (kitchen, tables or rooms; different staff roles), and variety counts unlocked dishes without forcing all of them onto the menu.
 - **Tap the café** (or press <kbd>Space</kbd>) to help brew, at most once per game second. Successful help sparkles at the working baristas; rapid clicking gives no extra benefit. Tap the cat on the windowsill to pet it.
 - **Service status:** a compact button explains sustained ingredient shortages, baking waits, counter queues or finished-order backlogs and points to the relevant management tab.
 - Now and then a VIP customer with a crown shows up and pays 5×.
@@ -80,6 +80,21 @@ What to spend the day's revenue on:
 ### Little thoughts
 
 Customers and staff occasionally share short, localized thought clouds about what they are doing. Dine-in guests have consistent cosmetic flavor preferences, with affectionate likes and gentle dislikes after their order arrives. These thoughts never change orders, prices, tips, patience, or save data. At most one compact cloud appears at once, for up to 3.6 seconds; they avoid service indicators and disappear during dialogs, room transitions, the map, and furniture placement. Thought clouds add no animation. A guest's reply to one of the little moments below speaks at once and stays up for 5 seconds.
+
+### Café milestones
+
+When the 15 guided goals are done (usually around day 11), the goal card moves on to a second track: four chapters of four milestones, running to about day 45. Milestones complete by themselves, and stay complete even if, say, the rating dips later. Three milestones done in a chapter open the next chapter, so a single hard one never stalls the track. All four earn that chapter's reward, claimed from the goal card: a café title shown under the café name, and a free finish (equipped if it's more comfortable than the current one, or paid out at its price if you already own it). **All milestones** opens the milestone book. It shows every open chapter with its progress, the titles earned so far, and the name of the next chapter.
+
+| Chapter | Milestones | Reward |
+| --- | --- | --- |
+| 1 · Neighbourhood café | Open the Glasshouse · serve 1,000 guests in total · 12 dishes at Practiced taste · a 60-guest day with nobody leaving disappointed | Hanging Vines |
+| 2 · Local favourite | A 150-guest day · a 4.0★ rating (over 50 reviews) · win over a special day · every regular's whole story | Blue Rug |
+| 3 · Talk of the town | Open the Garden patio · 5 Signature recipes · answer 60 little moments · serve 3,000 guests in total | Marble counter |
+| 4 · Beloved institution | A 180-guest day · a 150-guest day with nobody leaving disappointed · win over 3 kinds of special day · 90 comfort | Herringbone floor |
+
+A disappointed guest is one who came in and left without their order: it sold out, they gave up in the queue or at a table, or **Settle now** cancelled it. Guests turned away by a full queue never came in, so they don't count. You win over a special day (rain, heat, a crisp morning or market day) when that day's popular dishes make up at least half of your sales, with 40 or more sold. Regulars' stories count once their chapters are earned, read or not. Best days, special days won and answered moments are saved from the start, so they count as soon as their chapter opens. The day's report lists every milestone reached that day, including any completed during service or preparation, and points to a reward waiting to be claimed. Save version 18 stores the track. Older saves start with no records, rather than invented ones.
+
+In a 60-day check with two scripted new cafés (5 seeds each), a careful player that adapts the menu to the weather and stops advertising while it loses guests finished the chapters around days 16, 23, 27 and 58. A greedy player that never adapts finished around days 14, 28 and 45, but never earned the 4.0★ rating, so chapter 2 stayed unclaimed. Plan, thresholds and evidence are in [docs/milestones](docs/milestones/PLAN.md).
 
 ### Daily conditions
 
@@ -135,6 +150,7 @@ To add or change text, edit `src/locales/en.json` and `src/locales/zh.json`. The
 | `src/game/day.ts` | Opening checks, the shop clock, and closing a day into its report |
 | `src/game/sim.ts`, `src/game/sim-snapshot.ts`, `src/game/operations.ts` | Customer/staff simulation, validated live-service snapshots and sustained bottleneck feedback |
 | `src/game/moments.ts`, `src/game/flavors.ts`, `src/ui/moments.ts` | Optional service moments, guests' lasting tastes and dish flavor notes, the recommendation dialog |
+| `src/game/milestones.ts`, `src/ui/milestones.ts` | Café milestones: chapters, day records, sticky completion and chapter rewards; the goal card and milestone book |
 | `src/game/conditions.ts`, `src/ui/conditions.ts`, `src/render/weather-art.ts` | Daily conditions and their effects on demand, the preparation card and report preview, rain on the windows |
 | `src/game/state.ts` | Save format, loading and validation |
 | `src/render/phaser/` | The [Phaser 4](https://phaser.io) game that draws the café: game loop, camera, input, baked room textures, characters and props as sprites sorted by depth, particles and pop-up text |
