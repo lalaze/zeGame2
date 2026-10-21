@@ -469,7 +469,7 @@
   "ops.ingredients": "Missing ingredients · details",
   "ops.ingredients.detail": "An available menu item cannot be made. Buy the missing ingredients in the Pantry. More staff will not solve an ingredient shortage.",
   "ops.delivery": "Finished orders waiting · details",
-  "ops.delivery.detail": "Orders are waiting on the pass. Servers, rather than faster brewing, can clear finished plates. Farther rooms also take longer to reach.",
+  "ops.delivery.detail": "Orders are waiting on the pass. Servers, rather than faster brewing, can clear finished plates, and a larger pass keeps baristas working through a rush. Farther rooms also take longer to reach.",
   "ops.baking": "Shelf empty · replenishment underway",
   "ops.baking.detail": "A cook is making this dish. A larger morning batch can bridge the wait; fewer baked dishes or more cooks can ease a busy kitchen.",
   "ops.shelf": "Baked goods unavailable · details",
@@ -1371,5 +1371,11 @@
   "milestone.weatherKinds3": "Win over 3 different kinds of special day",
   "milestone.smoothDay150": "Serve 150 guests in a day with nobody leaving disappointed",
   "milestone.comfort90": "Reach 90 comfort",
-  "milestone.needsReviews": "needs {n} reviews"
+  "milestone.needsReviews": "needs {n} reviews",
+  "upgrade.pass.name": "Expand the Pass",
+  "upgrade.pass.desc": "Room for 6 more finished table orders on the pass, so baristas aren’t left holding plates",
+  "effect.pass": "Holds {n} plates",
+  "upgrade.server.roomLimit": "Open another room to hire more",
+  "ops.turnedAway": "Guests turned away · details",
+  "ops.turnedAway.detail": "The line is full, so new guests are being turned away at the door. Baristas are holding finished table orders because the pass is full: the servers can’t carry plates out fast enough. Hire another server (each opened room allows one more) or expand the pass in Upgrades. Faster brewing won’t help."
 }

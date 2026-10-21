@@ -1,6 +1,6 @@
 import { signatureDefinition } from './signature-drinks';
 import { regularGuestDefinition } from './regular-guests';
-import { MENU, PASS_SLOTS } from './data';
+import { MAX_PASS_SLOTS, MENU } from './data';
 import { MAX_SCENE_H, MIN_SCENE_H, TOTAL_TABLE_SPOTS } from './layout';
 import { CUSTOMER_CAST, validCustomerCastSnapshot, type CustomerCastSnapshot } from './customer-cast';
 import { STATION_SECONDS } from './kitchen';
@@ -51,7 +51,7 @@ export function validSnapshot(value: unknown, state: GameState): value is SimSna
   if (!obj(value) || value.version !== 1 && value.version !== 2 || value.version === 2 && value.kitchenLevel !== (state.kitchen ? state.upgrades.cook : 0) || value.day !== state.day || value.phase !== state.phase || value.served !== state.today.served ||
     !finite(value.height) || value.height < (value.version === 1 ? 192 : MIN_SCENE_H) || value.height > MAX_SCENE_H || !finite(value.spawnTimer) || !integer(value.nextId) || !positive(value.boostCooldown) || value.boostCooldown > 1 ||
     !list(value.customers, 150, customer) || !list(value.baristas, 4, barista) || !list(value.cooks, 3, cook) || !list(value.servers, 3, server) ||
-    !list(value.queue, 6, integer) || !list(value.seats, TOTAL_TABLE_SPOTS * 2, nullableId) || !list(value.pass, PASS_SLOTS, plate) || !list(value.rack, 3, item)) return false;
+    !list(value.queue, 6, integer) || !list(value.seats, TOTAL_TABLE_SPOTS * 2, nullableId) || !list(value.pass, MAX_PASS_SLOTS, plate) || !list(value.rack, 3, item)) return false;
   if (value.version === 2 && (!validCustomerCastSnapshot(value.customerCast) || !integer(value.castRandomState) || value.castRandomState > 0xffffffff)) return false;
   const s = value as unknown as SimSnapshot;
   // A syntactically valid custom recipe must still exist in this economic save.

@@ -55,7 +55,8 @@ describe('chair-access placement guard', () => {
     expect(restored.decor.placed.some(p => p.id === 'plant_fern')).toBe(false);
     expect(restored.decor.stored.plant_fern).toBe(1);
     expect(restored.coins).toBe(original.coins);
-    expect(restored.items).toEqual(original.items); expect(restored.upgrades).toEqual(original.upgrades);
+    // Upgrades added after the save (the larger pass) load at their first level.
+    expect(restored.items).toEqual(original.items); expect(restored.upgrades).toEqual({ ...original.upgrades, pass: 0 });
     expect(restored.pets).toEqual(original.pets); expect(restored.regions).toEqual(original.regions);
     expect(evictBlocked(restored, mainTableCount(restored))).toBe(0);
     expect(consumeFurnitureMovesOnLoad(restored)).toBe(1);

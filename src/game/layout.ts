@@ -143,9 +143,9 @@ export const passSlot = (i: number) => ({
 export const PASS_BELL = { x: PASS.x + PASS.w - 6, y: PASS.top - 1 };
 /** Where a server stands to take plates off the pass. */
 export const passSpot = () => ({ x: PASS.x + PASS.w / 2 + 6, y: COUNTER.bottom + 8 });
-/** Servers wait beside the pass between deliveries. */
-export const MAX_SERVERS = 3;
-export const serverHome = (i: number) => ({ x: 264 + i * 17, y: 119 });
+/** Servers wait beside the pass between deliveries, three to a row, the second row staggered. */
+export const MAX_SERVERS = 6;
+export const serverHome = (i: number) => ({ x: 264 + (i % 3) * 17 + (i >= 3 ? 8 : 0), y: 119 + Math.floor(i / 3) * 14 });
 
 export const MAX_BARISTAS = 4;
 /** Baristas stand close enough that the fourth leaves room for the pass. */

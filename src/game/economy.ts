@@ -1,8 +1,9 @@
 import { signatureDefinition, setSignatureOnMenu } from './signature-drinks';
-import { stylePrepMultiplier, styleSaleMultiplier, styleOrderPairs, styleComboChance, styleArrivalMultiplier, styleTablePatienceExtra } from './styles';
+import { stylePrepMultiplier, styleSaleMultiplier, styleOrderPairs, styleComboChance, styleArrivalMultiplier, styleSeatChance, styleTablePatienceExtra } from './styles';
 import { promotionTraffic } from './promotion';
 import { petTraffic, forecastPetTraffic } from './pets';
-import { conditionPatience, conditionTraffic, menuWeights } from './conditions';
+import { conditionPatience, conditionSeating, conditionTraffic, menuWeights } from './conditions';
+import { roomRoute, tableArea } from './layout';
 import {
   BASE_ARRIVAL_RATE,
   MAX_VARIETY_BONUS,
@@ -14,6 +15,7 @@ import {
   ITEM_COST_GROWTH,
   LEVEL_COST_MULTIPLIER,
   MENU,
+  PASS_SLOTS,
   PRICE_MILESTONES,
   SERVICE_OVERHEAD,
   UPGRADES,
@@ -125,10 +127,22 @@ export function quoteItem(state: GameState, id: ItemId, amount: BuyAmount): Quot
 /** Cooks work in the kitchen, so there's no hiring them until it's built. */
 export const upgradeLocked = (state: GameState, id: UpgradeId) => id === 'cook' && !state.kitchen;
 
+/**
+ * How far an upgrade can go right now. Servers are limited by the building: two hires to
+ * begin with and one more per opened room, since every room sends them further.
+ */
+export function upgradeMax(state: GameState, id: UpgradeId): number {
+  const def = upgradeDef(id);
+  return id === 'server' ? Math.min(def.max, 2 + state.regions.length) : def.max;
+}
+
+/** Finished table orders the pass can hold before baristas have to keep hold of them. */
+export const passCapacity = (state: GameState) => PASS_SLOTS * (1 + (state.upgrades.pass ?? 0));
+
 export function quoteUpgrade(state: GameState, id: UpgradeId, amount: BuyAmount): Quote {
   const def = upgradeDef(id);
   const level = state.upgrades[id];
-  const q = quote(def.baseCost, def.growth, level, state.coins, amount, def.max - level);
+  const q = quote(def.baseCost, def.growth, level, state.coins, amount, upgradeMax(state, id) - level);
   return upgradeLocked(state, id) ? { ...q, affordable: false } : q;
 }
 
@@ -254,12 +268,55 @@ export function orderShares(items: readonly MenuItemDef[], state?: GameState): M
   return shares;
 }
 
-/** Customers per second the staff can actually serve. */
-export function serviceCapacity(state: GameState, items = menuItems(state)): number {
+/** Customers per second the baristas can take orders from and serve at the counter. */
+export function counterCapacity(state: GameState, items = menuItems(state)): number {
   if (items.length === 0) return 0;
   let prep = 0;
   for (const [id, share] of orderShares(items, state)) prep += share * prepTime(state, id);
   return baristaCount(state) / (prep + SERVICE_OVERHEAD);
+}
+
+/**
+ * A server's round trip from the pass, and how many plates it carries, by how far the
+ * tables are (waypoints on the route from the main room). Measured in the simulation:
+ * the main room, the Reading Room, the Glasshouse and the Garden patio.
+ */
+const SERVER_TRIPS: readonly [route: number, seconds: number, plates: number][] = [[0, 5.8, 1.96], [4, 14.7, 2.01], [9, 21.4, 2.43], [13, 29, 2.61]];
+/** Share of guests who stay at a table when the floor keeps up, at the base seating chance. */
+const DINE_IN_SHARE = 0.52, BASE_SEAT_CHANCE = 0.6;
+/** A larger pass lets servers leave with fuller trays and baristas keep working through rushes. */
+const PASS_FLOW = [1, 1.3, 1.7] as const;
+/** Roughly how long a guest holds a seat: walking over, waiting for the order and eating it. */
+const SEAT_SECONDS = 30;
+
+function serverTrip(route: number): { seconds: number; plates: number } {
+  const i = SERVER_TRIPS.findIndex(([r]) => r >= route);
+  if (i <= 0) return { seconds: SERVER_TRIPS[i < 0 ? SERVER_TRIPS.length - 1 : 0][1], plates: SERVER_TRIPS[i < 0 ? SERVER_TRIPS.length - 1 : 0][2] };
+  const [r0, s0, p0] = SERVER_TRIPS[i - 1], [r1, s1, p1] = SERVER_TRIPS[i], f = (route - r0) / (r1 - r0);
+  return { seconds: s0 + (s1 - s0) * f, plates: p0 + (p1 - p0) * f };
+}
+
+/**
+ * Customers per second the floor staff can keep up with: finished table orders leave the
+ * pass only as fast as the servers carry them, and a full pass stops the baristas. Infinite
+ * while the tables are too few for the servers to fall behind.
+ */
+export function tableServiceCapacity(state: GameState, items = menuItems(state)): number {
+  const tables = activeTableIndices(state);
+  if (items.length === 0 || tables.length === 0) return Infinity;
+  const route = tables.reduce((sum, i) => sum + roomRoute('main', tableArea(i)).length, 0) / tables.length;
+  const trip = serverTrip(route);
+  const plates = serverCount(state) * trip.plates / trip.seconds * PASS_FLOW[Math.min(PASS_FLOW.length - 1, state.upgrades.pass ?? 0)];
+  // Guests only dine in at free seats, so a small dining room can't outpace its servers.
+  if (tables.length * 2 / SEAT_SECONDS <= plates) return Infinity;
+  const seatChance = items.reduce((sum, m) => sum + styleSeatChance(state, [m.id]), 0) / items.length;
+  const dineIn = DINE_IN_SHARE * seatChance / BASE_SEAT_CHANCE * conditionSeating(state);
+  return dineIn > 0 ? plates / dineIn : Infinity;
+}
+
+/** Customers per second the staff can actually serve: the counter, or the floor if it falls behind. */
+export function serviceCapacity(state: GameState, items = menuItems(state)): number {
+  return Math.min(counterCapacity(state, items), tableServiceCapacity(state, items));
 }
 
 export function earn(state: GameState, amount: number): void {

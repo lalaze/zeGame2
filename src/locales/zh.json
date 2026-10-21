@@ -469,7 +469,7 @@
   "ops.ingredients": "原料不足 · 查看详情",
   "ops.ingredients.detail": "菜单上有菜品缺少原料。请在仓库补充下面列出的原料，增加员工无法解决原料短缺。",
   "ops.delivery": "成品等待送餐 · 查看详情",
-  "ops.delivery.detail": "出餐台有成品积压。增加服务员有助于送出成品；加快制作无法直接清空出餐台。远处房间也需要更长的送餐时间。",
+  "ops.delivery.detail": "出餐台有成品积压。增加服务员有助于送出成品，扩建出餐台能让咖啡师在高峰时继续工作；加快制作无法直接清空出餐台。远处房间也需要更长的送餐时间。",
   "ops.baking": "货架暂空 · 正在补货",
   "ops.baking.detail": "厨师正在制作这道菜。增加晨烤量可覆盖等待时间；减少烘焙品种或增加厨师有助于缓解厨房繁忙。",
   "ops.shelf": "烘焙暂缺 · 查看详情",
@@ -1371,5 +1371,11 @@
   "milestone.weatherKinds3": "征服 3 种不同的特别日子",
   "milestone.smoothDay150": "一天接待 150 位客人，且没有客人失望离开",
   "milestone.comfort90": "舒适度达到 90",
-  "milestone.needsReviews": "需要 {n} 条评价"
+  "milestone.needsReviews": "需要 {n} 条评价",
+  "upgrade.pass.name": "扩建出餐台",
+  "upgrade.pass.desc": "出餐台多放 6 份做好的堂食餐点，咖啡师不用再端着餐盘干等",
+  "effect.pass": "可放 {n} 份",
+  "upgrade.server.roomLimit": "开放新区域后可雇更多",
+  "ops.turnedAway": "有客人被拒之门外 · 详情",
+  "ops.turnedAway.detail": "队伍已满，新来的客人在门口被拒。出餐台放满了，咖啡师只能端着做好的堂食餐点干等：服务员送餐跟不上。可以在升级里再雇一名服务员（每开放一个区域可多雇一名），或扩建出餐台。加快制作没有帮助。"
 }

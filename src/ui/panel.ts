@@ -37,6 +37,8 @@ import {
   serverCount,
   cookCount,
   upgradeLocked,
+  upgradeMax,
+  passCapacity,
   servingsLeft,
   setBakePlan,
   setOnMenu,
@@ -156,6 +158,8 @@ function upgradeEffect(state: GameState, id: UpgradeId): string {
       return upgradeLocked(state, id) ? t('effect.cookLocked') : t('effect.cook', { n: cookCount(state) });
     case 'tables':
       return t('effect.tables', { n: mainTableCount(state) });
+    case 'pass':
+      return t('effect.pass', { n: passCapacity(state) });
   }
 }
 
@@ -1095,14 +1099,16 @@ export class Panel {
         const def = upgradeDef(id as UpgradeId);
         const level = s.upgrades[def.id];
         const q = quoteUpgrade(s, def.id, this.buyAmount);
-        const maxed = level >= def.max;
+        // Servers are limited by the rooms opened so far; the card says what opens more.
+        const max = upgradeMax(s, def.id), roomBound = max < def.max;
+        const maxed = level >= max;
         refs.level.textContent = def.id === 'cook'
           ? s.kitchen ? t('upgrade.cook.stage', { n: level + 1, total: def.max + 1 }) : ''
-          : `${level}/${def.max}`;
-        const after = { ...s, upgrades: { ...s.upgrades, [def.id]: Math.min(def.max, level + q.count) } };
+          : `${level}/${max}`;
+        const after = { ...s, upgrades: { ...s.upgrades, [def.id]: Math.min(max, level + q.count) } };
         // A locked upgrade has no "after" to preview, and money is not what it is waiting for.
         const locked = upgradeLocked(s, def.id);
-        refs.sub.textContent = `${upgradeDesc(def.id)} · ${upgradeEffect(s, def.id)}${maxed || locked ? '' : ` → ${upgradeEffect(after, def.id)}`}`;
+        refs.sub.textContent = `${upgradeDesc(def.id)} · ${upgradeEffect(s, def.id)}${maxed || locked ? '' : ` → ${upgradeEffect(after, def.id)}`}${maxed && roomBound ? ` · ${t('upgrade.server.roomLimit')}` : ''}`;
         refs.btnLabel.textContent = maxed ? t('btn.maxed') : q.count > 1 ? `+${q.count}` : t('btn.buy');
         refs.btnCost.textContent = maxed ? '' : formatMoney(q.cost);
         this.updateMoneyDetails(refs, q.cost, maxed || locked);

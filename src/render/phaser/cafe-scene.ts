@@ -35,6 +35,7 @@ import { extensionTable, remapTablecloth } from '../extension-table-art';
 import { extensionLampPool } from '../extension-surfaces';
 import { ThoughtBubbles, URGENT_THOUGHT, placeThought, thoughtBubbleWidth, type ThoughtRect } from '../thought-bubbles';
 import { menuItems } from '../../game/economy';
+import { PASS_SLOTS } from '../../game/data';
 import { formatMoney } from '../../game/format';
 import { COLS, FLOOR_ROWS, WALL_ROWS, WALL_TOP, CELL, canPlace, cellFree, furnitureDef } from '../../game/furniture';
 import { BENCH, BINS, DISH_PIT, PASTRY_FRIDGE, RACK, cookHome, installedEquipment, stationSpot, STATION_SECONDS, type Station } from '../../game/kitchen';
@@ -874,8 +875,13 @@ export class CafeScene extends Phaser.Scene {
 
   /** Plates waiting on the pass, and its bell, which jiggles when rung. */
   private drawPass(t: number, o: { x: number; y: number }): void {
+    // An expanded pass stacks further plates on the same six spots, a little higher each layer.
+    const plates = this.sim.pass.length;
     this.sim.pass.forEach((plate, i) => {
-      const slot = projectMainPlaneWorld(passSlot(i), MAIN_COUNTER_PLANE);
+      const spot = i % PASS_SLOTS, layer = Math.floor(i / PASS_SLOTS);
+      const top = layer === Math.floor((plates - 1 - spot) / PASS_SLOTS);
+      const base = projectMainPlaneWorld(passSlot(spot), MAIN_COUNTER_PLANE);
+      const slot = { x: base.x, y: base.y - layer * 3 };
       const depth = DEPTH.counter + 0.5 + i * 0.01;
       const tableware = getGeneratedTablewareAdapter();
       const generatedDish = tableware?.sprite('shallow-plate');
@@ -885,10 +891,10 @@ export class CafeScene extends Phaser.Scene {
         ctx.fillStyle = '#fdf6ec';
         ctx.fillRect(1, 0, PASS_SLOT_W - 2, 1);
       });
-      // Unoutlined icons, like the menu board's, so three fit side by side.
+      // Unoutlined icons, like the menu board's, so three fit side by side; only the top of a stack shows its dish.
       const icon = itemIcon(plate.items[0], false);
       const supportY = generatedDish ? tableware?.support('shallow-plate')?.y ?? 1 : 1;
-      this.image(icon, o.x + slot.x + Math.floor((PASS_SLOT_W - icon.width) / 2), o.y + slot.y - 3 + supportY - icon.height, depth);
+      if (top) this.image(icon, o.x + slot.x + Math.floor((PASS_SLOT_W - icon.width) / 2), o.y + slot.y - 3 + supportY - icon.height, depth);
       this.image(dish, o.x + slot.x, o.y + slot.y - 3, depth + 0.001);
     });
     const ringing = t - this.bellRang < 0.6;

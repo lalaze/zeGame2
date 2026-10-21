@@ -1050,7 +1050,7 @@ export function ingredientIcon(id: IngredientId): HTMLCanvasElement {
 
 // ---------------------------------------------------------------- upgrades
 
-const UPGRADE_ENVELOPES = { marketing: [12, 10], machine: [12, 9], tables: [12, 8] } as const;
+const UPGRADE_ENVELOPES = { marketing: [12, 10], machine: [12, 9], tables: [12, 8], pass: [12, 10] } as const;
 
 const upgradeCache = new Map<UpgradeId, HTMLCanvasElement>();
 const staffPortraitFrames = new Map<UpgradeId, HTMLCanvasElement>();
@@ -1072,7 +1072,7 @@ export function upgradeIcon(id: UpgradeId): HTMLCanvasElement {
     return c;
   }
   const replacement = id === 'marketing' ? getGeneratedFurnitureAdapter()?.icon('aframe') :
-    id === 'tables' ? cozyCafeSprite('table') : generatedMainSource('reference-machine');
+    id === 'tables' ? cozyCafeSprite('table') : id === 'machine' ? generatedMainSource('reference-machine') : null;
   if (replacement) {
     const source = replacement instanceof HTMLCanvasElement ? fineSpriteArt(replacement).canvas : replacement;
     if (upgradeSources.get(id) === source) return upgradeCache.get(id)!;

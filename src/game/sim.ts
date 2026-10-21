@@ -5,7 +5,7 @@ import { recordRegularGuestArrival, recordRegularGuestDeparture, recordRegularGu
 import { CUSTOMER_CAST, CustomerCastCycle } from './customer-cast';
 import { updatePromotion } from './promotion';
 import { updatePetCare } from './pets';
-import { DAY_SECONDS, MAX_QUEUE, PASS_SLOTS, RING_AGAIN, VIP_CHANCE, type ItemId } from './data';
+import { DAY_SECONDS, MAX_QUEUE, RING_AGAIN, VIP_CHANCE, type ItemId } from './data';
 import { finishDay, type DayReport } from './day';
 import { CELL, furnitureDef } from './furniture';
 import { routeFloorSegment, segmentCrossesObstacle, type FloorObstacle, type FloorPoint } from './navigation';
@@ -19,6 +19,7 @@ import {
   earn,
   hasServiceSupply,
   menuItems,
+  passCapacity,
   patienceSeconds,
   prepTime,
   salePrice,
@@ -831,9 +832,9 @@ export class Sim {
    * A table order is ready: onto the pass, and ring for a server. With the pass
    * full the barista holds on to it, and keeps calling, until there's room.
    */
-  private sendToPass(c: Customer, i: number, events: SimEvent[]): void {
+  private sendToPass(state: GameState, c: Customer, i: number, events: SimEvent[]): void {
     const b = this.baristas[i];
-    if (this.pass.length >= PASS_SLOTS) {
+    if (this.pass.length >= passCapacity(state)) {
       if (b.calling <= 0) b.calling = CALL_SECONDS;
       return;
     }
@@ -1085,7 +1086,7 @@ export class Sim {
       const c = this.find(b.customerId);
       if (c && c.phase !== 'exiting' && !b.brewCredited) { recordPartnerWork(state, b.partnerId); b.brewCredited = true; }
       if (!c || c.phase === 'exiting') b.customerId = null;
-      else if (c.dineIn) this.sendToPass(c, i, events);
+      else if (c.dineIn) this.sendToPass(state, c, i, events);
       // A takeaway order waits for its customer to reach the counter.
       else if (c.phase === 'ordering') this.serveAtCounter(state, b, c, events);
     });

@@ -1,11 +1,12 @@
 import { styleStationMultiplier } from './styles';
-import { isBakery, menuItems, recipe, servingsLeft } from './economy';
+import { isBakery, menuItems, passCapacity, recipe, servingsLeft } from './economy';
+import { MAX_QUEUE } from './data';
 import { batchSteps, STATION_SECONDS } from './kitchen';
 import type { IngredientId, ItemId } from './data';
 import type { Sim } from './sim';
 import type { GameState } from './state';
 
-export type OperationKind = 'closing' | 'ingredients' | 'delivery' | 'baking' | 'shelf' | 'counter' | 'quiet' | 'steady';
+export type OperationKind = 'closing' | 'ingredients' | 'turnedAway' | 'delivery' | 'baking' | 'shelf' | 'counter' | 'quiet' | 'steady';
 export interface OperationStatus { kind: OperationKind; item?: ItemId; ingredients?: IngredientId[]; seconds?: number; }
 
 export function operationStatus(state: GameState, sim: Sim): OperationStatus {
@@ -13,7 +14,9 @@ export function operationStatus(state: GameState, sim: Sim): OperationStatus {
   const items = menuItems(state);
   const unavailable = items.find((m) => servingsLeft(state, m.id) < 1 && (!isBakery(m.id) || !(state.shelf[m.id] ?? 0)) && !(state.inProduction[m.id] ?? 0));
   if (unavailable) return { kind: 'ingredients', item: unavailable.id, ingredients: recipe(unavailable.id).filter(([id, n]) => state.pantry[id] < n).map(([id]) => id) };
-  if (sim.baristas.some((_, i) => sim.isHolding(i)) || sim.pass.length >= 3) return { kind: 'delivery' };
+  // Plates backing up on the pass. With the line full too, new guests are being turned away.
+  if (sim.baristas.some((_, i) => sim.isHolding(i)) || sim.pass.length >= Math.max(3, passCapacity(state) / 2))
+    return { kind: sim.queue.length >= MAX_QUEUE ? 'turnedAway' : 'delivery' };
   const empty = items.find((m) => isBakery(m.id) && !(state.shelf[m.id] ?? 0));
   if (empty) {
     const cook = sim.cooks.find((c) => c.batch?.item === empty.id);

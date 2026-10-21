@@ -156,3 +156,12 @@ Final check (60 days, 5 seeds; median day a chapter's four milestones were all d
 |---|---:|---:|---:|---:|
 | Careful (adapts menu, stops advertising while losing guests) | 16 | 23 (3/5) | 27 | 58 (3/5) |
 | Greedy | 14 | never (0/5, no 4.0★) | 28 | 45 (4/5) |
+
+## Re-check after the table-service changes (2026-10-21)
+
+Expand the Pass and the room-based server limit removed the late-game cap on guests (see [docs/table-service](../table-service/README.md)), so cafés now serve far more guests late on. A 55-day re-check, 5 seeds each:
+
+- **Careful player** (also bakes more of what sold out and hires cooks): chapter 1 around day 16, chapter 2 around day 19 (4.0★ on day 19), chapter 4 around day 37. A 180-guest day now comes around day 25, and a 150-guest smooth day around day 25. Chapter 3 finished around day 40 in this run because it answered only about 1.5 moments a day; its other three milestones opened chapter 4 on time.
+- **Greedy player:** its pastry shelves run out most days at the higher volume, so the smooth-day and rating milestones stay out of reach. Chapter 1 stops at 3 of 4, chapter 2 never completes, and chapter 3 finishes around day 40. That's the intended skill check, and the 3-of-4 rule keeps its track moving.
+
+The thresholds are unchanged.
