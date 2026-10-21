@@ -15,6 +15,7 @@ import { MACHINE_X, MACHINE_Y } from './room-art';
 import { RoomCamera } from './room-camera';
 import { MAIN_COUNTER_PLANE, MAIN_WALL_PLANE, projectMainAttachment, projectMainPlaneWorld, projectMainWorld, unprojectMainPlaneWorld, unprojectMainWorld } from './main-pixel-presentation';
 import type { PixelPoint } from './pixel-projection';
+import type { MomentKind, MomentReaction, MomentSpot } from '../game/moments';
 
 /** A piece of furniture being placed or moved, and where it would go. */
 export interface Ghost {
@@ -57,7 +58,7 @@ export class CafeView {
   private focusedKitchenHeight = 0;
   private presentedPointer: PixelPoint | null = null;
   private presentedResidentCatPoints = new Map<CatId, PixelPoint>();
-  private effectAnchors = new WeakMap<Effect, { anchor?: PixelPoint; plane?: number }>();
+  private effectAnchors = new WeakMap<Effect, { anchor?: PixelPoint; plane?: number; presented?: boolean }>();
 
   /** Frame the physical room, rather than the unused remainder of its grid cell. */
   private roomFocus() {
@@ -70,6 +71,14 @@ export class CafeView {
   paused = false;
   /** An explicit, temporary next-table preview; never saved or treated as a seat. */
   tablePreview = false;
+  /** The optional moment waiting on the player, cued above its guest or its spot. */
+  moment: { kind: MomentKind; customerId?: number; spot?: MomentSpot } | null = null;
+  /** A guest's spoken reply to the player's answer. */
+  momentReaction: MomentReaction | null = null;
+  /** Where the moment's cue and subject are painted this frame, in presented pixels. */
+  momentTarget: { x: number; y: number; w: number; h: number } | null = null;
+  /** Coins a moment paid out, waiting to pop up over the spot the player tapped. */
+  readonly tips: { amount: number; x: number; y: number }[] = [];
   /** Set while the player is placing or moving a piece. */
   ghost: Ghost | null = null;
   /** Seconds the cat stays happy after being petted. */
@@ -113,14 +122,15 @@ export class CafeView {
     finally { this.presentedPointer = previous; }
   }
 
-  private queueEffect(effect: Effect, anchor?: PixelPoint, plane?: number): void {
+  private queueEffect(effect: Effect, anchor?: PixelPoint, plane?: number, presented = false): void {
     this.effects.push(effect);
-    this.effectAnchors.set(effect, { anchor, plane });
+    this.effectAnchors.set(effect, { anchor, plane, presented });
   }
 
   /** Effects keep their owner's displacement even when emitted above its head. */
   effectPoint(effect: Effect): PixelPoint {
     const attachment = this.effectAnchors.get(effect);
+    if (attachment?.presented) return { x: effect.x, y: effect.y };
     if (attachment?.plane !== undefined) return projectMainPlaneWorld(effect, attachment.plane);
     return attachment?.anchor ? projectMainAttachment(effect, attachment.anchor) : projectMainWorld(effect);
   }
@@ -187,6 +197,29 @@ export class CafeView {
     const rect = cellRect('floor', col, row, def.w, def.h);
     return [...this.livingCats.actors.values()].every((cat) =>
       cat.x < rect.x - 4 || cat.x > rect.x + rect.w + 4 || cat.y < rect.y - 4 || cat.y > rect.y + rect.h + 4);
+  }
+
+  /** Whether a tap lands on the waiting moment's cue or its subject, at least `reach` wide. */
+  hitMoment(x: number, y: number, reach: number): boolean {
+    const target = this.momentTarget, point = this.presentedPointer ?? { x, y };
+    if (!target || this.overview || this.panning) return false;
+    const cx = target.x + target.w / 2, half = Math.max(reach, target.w / 2);
+    return Math.abs(point.x - cx) <= half && point.y >= target.y - 2 && point.y <= target.y + target.h + 2;
+  }
+
+  /** Pop the coins a moment paid over where its cue was. */
+  tipAtMoment(amount: number): void {
+    const target = this.momentTarget;
+    if (target && amount > 0) this.tips.push({ amount, x: target.x + target.w / 2, y: target.y + 6 });
+  }
+
+  /** A little camera flash: sparkles around the posing guest. */
+  flashAtMoment(): void {
+    const target = this.momentTarget;
+    if (!target) return;
+    for (let i = 0; i < 5; i++) {
+      this.queueEffect({ kind: 'sparkle', x: target.x + target.w / 2 - 8 + i * 4, y: target.y + 10 + (i % 2) * 6 }, undefined, undefined, true);
+    }
   }
 
   /** Returns true if the tap landed on the cat. */

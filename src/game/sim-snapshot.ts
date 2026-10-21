@@ -39,7 +39,8 @@ const customer = (x: unknown) => obj(x) && walker(x) && look(x.look) && integer(
   (x.missingExtra === undefined || typeof x.missingExtra === 'boolean') &&
   ['queue','toCounter','ordering','toSeat','waiting','sitting','exiting'].includes(String(x.phase)) &&
   ['patience','timer','moodTimer','spot','seat'].every((k) => finite(x[k])) && Number.isInteger(x.seat) && Number(x.seat) >= -1 && Number(x.seat) < TOTAL_TABLE_SPOTS * 2 &&
-  ['vip','hasCup','soldOut','dineIn'].every((k) => typeof x[k] === 'boolean') && [null,'happy','sad'].includes(x.mood as null);
+  ['vip','hasCup','soldOut','dineIn'].every((k) => typeof x[k] === 'boolean') && [null,'happy','sad'].includes(x.mood as null) &&
+  (x.momentTip === undefined || finite(x.momentTip) && Number(x.momentTip) >= 0 && Number(x.momentTip) <= 1);
 const barista = (x: unknown) => obj(x) && look(x.look) && nullableId(x.customerId) && ['remaining','total','calling'].every((k) => finite(x[k]));
 const cook = (x: unknown) => obj(x) && walker(x) && look(x.look) && (x.batch === null || obj(x.batch) && item(x.batch.item) && integer(x.batch.n) && x.batch.n > 0 && x.batch.n <= 5 &&
   list(x.batch.steps, 16, (s) => typeof s === 'string' && Object.hasOwn(STATION_SECONDS, s)) && integer(x.batch.step) && x.batch.step < x.batch.steps.length && finite(x.batch.timer));

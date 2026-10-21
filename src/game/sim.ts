@@ -1,4 +1,5 @@
 import { syncPartners, activePartner, recordPartnerWork, partnerServerSpeed, partnerTraySize, partnerBrewMultiplier, partnerCookSpeed, partnerStationTime } from './partners';
+import { conditionSeating, menuWeights, weightedIndex } from './conditions';
 import { recordStyleHandoff, styleOrderPairs, styleComboChance, styleSeatChance, styleStationMultiplier, styleDwellExtra, styleServerMultiplier } from './styles';
 import { recordRegularGuestArrival, recordRegularGuestDeparture, recordRegularGuestService, regularGuestForAppearance, regularGuestOrder } from './regular-guests';
 import { CUSTOMER_CAST, CustomerCastCycle } from './customer-cast';
@@ -119,6 +120,8 @@ export interface Customer extends Walker {
   soldOut: boolean;
   /** Having it at a table, brought over by a server, rather than to take away. */
   dineIn: boolean;
+  /** Extra share of the bill for a moment the player answered (a recommendation or a greeting). */
+  momentTip?: number;
 }
 
 export interface Barista {
@@ -621,7 +624,9 @@ export class Sim {
   private spawn(state: GameState): void {
     const menu = menuItems(state);
     if (menu.length === 0) return;
-    const main = menu[this.randInt(menu.length)];
+    // Still one draw: today's condition only reshapes which dish it lands on.
+    const weights = menuWeights(state, menu);
+    const main = weights ? menu[weightedIndex(weights, this.rng())] : menu[this.randInt(menu.length)];
     const pairs = styleOrderPairs(state, main, menu);
     const extra = pairs.length > 0 && this.rng() < styleComboChance(state, main, pairs) ? pairs[this.randInt(pairs.length)].id : null;
     const pos = queueSpot(this.queue.length);
@@ -740,7 +745,7 @@ export class Sim {
   private charge(state: GameState, c: Customer, events: SimEvent[]): void {
     const bought = (c.extra ? [c.order, c.extra] : [c.order]).filter((id) => canPrepareItem(state, id));
     if (bought.length === 0) return;
-    const amount = bought.reduce((sum, id) => sum + salePrice(state, id, c.vip, c.dineIn, bought), 0);
+    const amount = bought.reduce((sum, id) => sum + salePrice(state, id, c.vip, c.dineIn, bought), 0) * (1 + (c.momentTip ?? 0));
     earn(state, amount);
     state.served++;
     state.today.served++;
@@ -802,7 +807,7 @@ export class Sim {
       b.total = b.remaining = prepTime(state, c.order) * partnerBrewMultiplier(state, b.partnerId, isBakery(c.order)) + (c.extra ? prepTime(state, c.extra) * partnerBrewMultiplier(state, b.partnerId, isBakery(c.extra)) : 0);
       // With a table free, some stay: they take a seat and the order is brought over.
       const seat = this.freeSeat(state);
-      if (seat >= 0 && this.rng() < styleSeatChance(state, c.extra ? [c.order, c.extra] : [c.order])) {
+      if (seat >= 0 && this.rng() < styleSeatChance(state, c.extra ? [c.order, c.extra] : [c.order]) * conditionSeating(state)) {
         this.seats[seat] = c.id;
         c.seat = seat;
         c.dineIn = true;

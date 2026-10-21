@@ -1,5 +1,5 @@
-import type { ItemId, StaticItemId } from '../game/data';
-import { signatureDefinition } from '../game/signature-drinks';
+import { todayCondition, type ConditionId } from '../game/conditions';
+import { guestIdentity, guestTaste, itemFlavors } from '../game/flavors';
 import { Sim, seated, type Customer } from '../game/sim';
 import type { GameState } from '../game/state';
 import type { MessageKey } from '../i18n';
@@ -19,104 +19,11 @@ export interface ThoughtCandidate {
   context: string;
 }
 
-type Flavor = 'bold' | 'milky' | 'cocoa' | 'sweet' | 'tea' | 'spiced' | 'fruity' | 'buttery' | 'toasty' | 'tangy';
-const FLAVORS: readonly Flavor[] = ['bold', 'milky', 'cocoa', 'sweet', 'tea', 'spiced', 'fruity', 'buttery', 'toasty', 'tangy'];
-
-/**
- * Deliberately authored flavor notes, not an inference from category or price.
- * Kept in the view: these are subjective daydreams, never recipe/economy data.
- * Record<StaticItemId, ...> requires an authored choice for every stock dish.
- * Custom recipes derive cosmetic notes from their immutable ingredients.
- */
-const ITEM_FLAVORS: Record<StaticItemId, readonly Flavor[]> = {
-  espresso: ['bold'],
-  americano: ['bold'],
-  latte: ['milky', 'bold'],
-  cappuccino: ['milky', 'bold'],
-  flatwhite: ['bold', 'milky'],
-  cortado: ['bold', 'milky'],
-  mocha: ['cocoa', 'milky'],
-  vienna: ['bold', 'milky', 'cocoa'],
-  macchiato: ['sweet', 'milky'],
-  coldbrew: ['bold', 'sweet'],
-  dirty: ['bold', 'milky'],
-  pourover: ['bold'],
-  creamcoffee: ['bold', 'milky', 'sweet'],
-  affogato: ['sweet', 'milky', 'bold'],
-  blacktea: ['tea'],
-  hotchoc: ['cocoa', 'sweet'],
-  lemontea: ['tea', 'tangy', 'fruity'],
-  chai: ['spiced', 'tea', 'milky'],
-  fruittea: ['tea', 'fruity', 'sweet'],
-  hojicha: ['tea', 'toasty', 'milky'],
-  matcha: ['tea', 'milky'],
-  frappe: ['sweet', 'milky'],
-  smoothie: ['fruity', 'milky'],
-  milktea: ['tea', 'milky'],
-  matchafloat: ['tea', 'milky', 'sweet'],
-  roll: ['buttery', 'toasty'],
-  bagel: ['toasty'],
-  baguette: ['toasty'],
-  cheesebun: ['milky', 'buttery'],
-  pretzel: ['toasty', 'buttery'],
-  focaccia: ['spiced', 'toasty'],
-  ciabatta: ['toasty'],
-  raisinbread: ['fruity', 'sweet', 'toasty'],
-  sourdough: ['tangy', 'toasty'],
-  rye: ['spiced', 'toasty'],
-  chocobread: ['cocoa', 'milky', 'buttery'],
-  shokupan: ['milky', 'sweet'],
-  brioche: ['buttery', 'sweet'],
-  fruitbrioche: ['fruity', 'buttery', 'sweet'],
-  garlicbread: ['spiced', 'buttery'],
-  donut: ['sweet'],
-  scone: ['buttery', 'fruity'],
-  cookie: ['sweet', 'buttery', 'cocoa'],
-  croissant: ['buttery', 'toasty'],
-  painchoc: ['cocoa', 'buttery'],
-  brownie: ['cocoa', 'sweet'],
-  cinnamon: ['spiced', 'sweet'],
-  muffin: ['fruity', 'sweet'],
-  creampuff: ['milky', 'buttery', 'sweet'],
-  melonpan: ['sweet', 'buttery'],
-  eggtart: ['milky', 'buttery'],
-  cake: ['fruity', 'sweet'],
-  swissroll: ['milky', 'fruity', 'sweet'],
-  cheesecake: ['tangy', 'milky'],
-  macaron: ['sweet'],
-};
-
-/** Immutable recipe flavors; display-only and independent of delivery accounting. */
-function itemFlavors(id: ItemId): readonly Flavor[] {
-  const custom = signatureDefinition(id);
-  if (!custom) return ITEM_FLAVORS[id as StaticItemId] ?? [];
-  const recipe = custom.recipe;
-  const flavors: Flavor[] = [];
-  if (recipe.beans) flavors.push('bold');
-  if (recipe.milk || recipe.cream) flavors.push('milky');
-  if (recipe.cocoa) flavors.push('cocoa');
-  if (recipe.sugar) flavors.push('sweet');
-  if (recipe.tea || recipe.matcha) flavors.push('tea');
-  if (recipe.spice) flavors.push('spiced');
-  if (recipe.fruit) flavors.push('fruity');
-  return flavors;
-}
-
-function identity(c: Customer): number {
-  if (Number.isInteger(c.appearanceId) && c.appearanceId! >= 0) return c.appearanceId!;
-  // Old/test customers without a cast ID still keep a stable, appearance-based taste.
-  const l = c.look;
-  return (((l.skin * 6 + l.hair) * 4 + l.hairStyle) * 8 + l.shirt) * 3 + l.pants;
-}
-
 type Thought = Pick<ThoughtCandidate, 'key' | 'priority' | 'context'>;
 const thought = (key: MessageKey, context: string, priority: number): Thought => ({ key, context, priority });
 
 function taste(c: Customer): Thought {
-  const person = identity(c);
-  const liked = FLAVORS[person % FLAVORS.length];
-  // With ten flavors these can never be the same; tastes persist across visits.
-  const avoided = FLAVORS[(person * 3 + 5) % FLAVORS.length];
+  const { liked, avoided } = guestTaste(c);
   const items = c.extra ? [c.order, c.extra] : [c.order];
   for (const item of items) {
     const flavors = itemFlavors(item);
@@ -125,16 +32,19 @@ function taste(c: Customer): Thought {
     if (flavors.includes(avoided))
       return thought(`thought.dislike.${avoided}`, `taste:dislike:${item}:${avoided}`, 50);
   }
-  return thought(person % 2 ? 'thought.customer.enjoy' : 'thought.customer.cozy', 'taste:enjoy', 40);
+  return thought(guestIdentity(c) % 2 ? 'thought.customer.enjoy' : 'thought.customer.cozy', 'taste:enjoy', 40);
 }
 
-function customerThought(c: Customer): Thought | null {
+function customerThought(c: Customer, weather: ConditionId): Thought | null {
   // The existing order and crossed-out sold-out icons have right of way.
   if (c.phase === 'ordering' || (c.soldOut && c.moodTimer > 0)) return null;
   switch (c.phase) {
     case 'queue':
       if (c.patience < 12) return thought('thought.customer.urgent', 'queue:urgent', 100);
-      if (c.stride < 24) return thought('thought.customer.arrive', 'queue:arrive', 35);
+      // Walking in, guests notice what kind of day it is.
+      if (c.stride < 24) return weather === 'fair'
+        ? thought('thought.customer.arrive', 'queue:arrive', 35)
+        : thought(`thought.weather.${weather}`, 'queue:arrive', 35);
       return thought('thought.customer.queue', 'queue:waiting', 30);
     case 'toCounter':
       return thought('thought.customer.myTurn', 'counter:approaching', 45);
@@ -176,8 +86,9 @@ export function thoughtCandidates(sim: Sim, state: GameState): ThoughtCandidate[
     candidates.push({ id, x, y, ...value });
   };
 
+  const weather = todayCondition(state).id;
   for (const c of sim.customers) {
-    const value = customerThought(c);
+    const value = customerThought(c, weather);
     if (value) add(`customer:${c.id}`, c.x, c.y - CHAR_H - (seated(c) ? 5 : 0), value);
   }
 

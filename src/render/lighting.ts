@@ -99,6 +99,33 @@ export function lightingAt(hour: number): Lighting {
 }
 
 /**
+ * The day's weather over the light. Rain greys the sky, hides the sun and brings the
+ * lamps on early; a hot day brightens and warms it; a crisp morning cools it a little.
+ * Other days (including market and quiet days) keep the plain light.
+ */
+export function weatherLight(light: Lighting, weather: string): Lighting {
+  if (weather === 'rain') return {
+    ...light,
+    ambient: mix(light.ambient, '#aeb7c7', 0.55),
+    sky: [mix(light.sky[0], '#7e8897', 0.7), mix(light.sky[1], '#929bab', 0.7), mix(light.sky[2], '#a6aebb', 0.7)],
+    cloud: mix(light.cloud, '#bcc3cd', 0.6),
+    lamps: Math.max(light.lamps, 0.4),
+    sun: { ...light.sun, elevation: 0, strength: light.sun.strength * 0.15 },
+  };
+  if (weather === 'hot') return {
+    ...light,
+    ambient: mix(light.ambient, '#fff0d2', 0.3),
+    sun: { ...light.sun, strength: Math.min(1, light.sun.strength * 1.25) },
+  };
+  if (weather === 'crisp') return {
+    ...light,
+    ambient: mix(light.ambient, '#e6eefc', 0.25),
+    sky: [mix(light.sky[0], '#6ea6e0', 0.25), mix(light.sky[1], '#8dbbe8', 0.25), mix(light.sky[2], '#b4d3ef', 0.25)],
+  };
+  return light;
+}
+
+/**
  * How much of the outdoor light reaches each room: the garden patio is open to the
  * sky and the glasshouse nearly so, while the walled rooms keep some of their own light,
  * and the windowless kitchen runs on its tube lights.

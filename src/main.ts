@@ -8,14 +8,14 @@ import { PlayFlow } from './ui/play-flow';
 import { pantryTaskContext } from './ui/play-flow-context';
 import { trafficHud } from './ui/traffic-status';
 import { showLivingCat } from './ui/living-cats';
-import type { CatId } from './game/pets';
+import { petActive, type CatId } from './game/pets';
 import { DAY_SECONDS, SPEEDS } from './game/data';
 import { openShop, type DayReport } from './game/day';
 import { businessSeconds, formatBusinessClock, formatBusinessDuration } from './game/business-clock';
 import { expectedCustomers, menuItems, tipMultiplier, unlockedItems } from './game/economy';
 import { blocksNextTable, canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
 import { formatDuration, formatMoney, formatTransactionMoney } from './game/format';
-import { MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
+import { CAT_SPOT, MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
 import { adjacentArea, isAreaOpen, mainTableCount, regionOffset } from './game/regions';
 import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, furnitureDef } from './game/furniture';
 import { acquireSaveSession, watchSavePage, type SaveSession } from './game/save-session';
@@ -42,6 +42,10 @@ import { showCafeStyles, updateCafeStyleButton } from './ui/cafe-styles';
 import { RegionsUI, areaName } from './ui/regions';
 import { FirstServiceGuide } from './ui/first-service';
 import { cafeInteractionEnabled } from './ui/cafe-interaction';
+import { showRecommendation } from './ui/moments';
+import { displayItemName } from './ui/item-name';
+import { conditionHud } from './ui/conditions';
+import { MomentDirector, type Moment, type MomentStage } from './game/moments';
 import { FullscreenDrawer } from './ui/fullscreen-drawer';
 import { ManagementShortcuts } from './ui/management-shortcuts';
 import { fitFullscreenRoom } from './ui/fullscreen-layout';
@@ -58,6 +62,8 @@ import { settlementHtml } from './ui/settlement';
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 
 const HINT_KEY = 'tiny-bean-cafe/hint-done';
+/** Shown once per kind, the first time a guest has a moment for the player. */
+const MOMENT_HINT_KEY = 'tiny-bean-cafe/moment-hint-';
 const AUTOSAVE_MS = 5000;
 const SIM_STEP = 0.05;
 
@@ -102,6 +108,9 @@ function startGame(session: SaveSession, loading: ReturnType<typeof startupLoadi
 let startupComplete = false;
 let state: GameState = session.state;
 const sim = session.sim;
+/** Optional service moments; never saved, never run while the café is paused. */
+const moments = new MomentDirector();
+let cuedMoment: Moment | null = null;
 const scene = new CafeView();
 
 function updateTemporaryNotice(): void {
@@ -538,7 +547,8 @@ function updateDayHud(): void {
   const clock = formatBusinessClock(state.dayTime);
   const time = closing ? `${clock} · ${t('day.closing')}` : open ? t('day.openFor', { clock, time: formatBusinessDuration(state.dayTime) }) : t('day.closed');
   const traffic = trafficHud(state);
-  const baseText = `${t('day.label', { n: state.day })} · ${time}`;
+  const condition = conditionHud(state);
+  const baseText = `${t('day.label', { n: state.day })}${condition ? ` · ${condition}` : ''} · ${time}`;
   const rhythmText = traffic ? `${traffic.label} → ${traffic.nextLabel}` : '';
   const text = `${baseText}${rhythmText ? ` · ${rhythmText}` : ''}`;
   if (dayClockBase.textContent !== baseText) dayClockBase.textContent = baseText;
@@ -802,6 +812,7 @@ function resetGame(): void {
   storage.setPreference(HINT_KEY, '');
   guide.reset();
   sim.reset();
+  moments.reset();
   scene.livingCats.reset();
   scene.selectedCat = null;
   operationMonitor.reset();
@@ -848,6 +859,64 @@ function tapAt(x: number, y: number): void {
   helpBrew();
 }
 
+/** Whether a tap lands on the waiting moment's cue or its subject. */
+function momentAt(x: number, y: number): boolean {
+  // Touchable at 44 CSS pixels even in a compact café, like the cats.
+  const reach = Math.max(10, 22 * SCENE_W / Math.max(1, $('scene-area').getBoundingClientRect().width));
+  return !!moments.active && scene.hitMoment(x, y, reach);
+}
+
+/** Answer the waiting moment. Only a recommendation asks anything more. */
+function openMoment(): void {
+  const moment = moments.active;
+  if (!moment || state.phase !== 'open' || arrange || scene.panning || scene.overview ||
+      !cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused)) return;
+  if (moment.kind === 'greet') {
+    const name = moments.greet(state, sim);
+    if (name) toast(t('moment.greet.toast', { name: t(name) }));
+  } else if (moment.kind === 'cat') {
+    const catId = moment.spot?.catId;
+    const coins = moments.tidy(state);
+    if (coins === null) return;
+    // The culprit gets a fuss anyway.
+    if (catId && scene.livingCats.actors.has(catId as CatId)) scene.petResidentCat(catId as CatId);
+    else { scene.catSpot = CAT_SPOT; scene.petCat(); }
+    scene.tipAtMoment(coins);
+    toast(t('moment.cat.toast', { money: formatMoney(coins) }));
+  } else if (moment.kind === 'photo') {
+    scene.flashAtMoment();
+    const coins = moments.photo(state, sim);
+    if (coins === null) return;
+    scene.tipAtMoment(coins);
+    toast(t('moment.photo.toast', { money: formatMoney(coins) }));
+  } else if (moment.kind === 'delivery') {
+    const gift = moments.signDelivery(state);
+    if (!gift) return;
+    scene.flashAtMoment();
+    toast(t('moment.delivery.toast', { item: displayItemName(gift.item, state), n: gift.servings }));
+  } else {
+    const guest = sim.customers.find(c => c.id === moment.customerId);
+    if (!guest) return;
+    showRecommendation(state, guest, moment.options, (item) => {
+      const verdict = moments.recommend(sim, item);
+      if (verdict) toast(t(`moment.recommend.toast.${verdict}`));
+    }, () => moments.dismiss());
+  }
+}
+
+/** What the player can see right now, for choosing where a moment may start. */
+function momentStage(): MomentStage {
+  const area = scene.overview || scene.panning ? null : scene.area;
+  // Awake residents standing still in this room, or the visiting cat on the windowsill.
+  const cats = state.pets.length
+    ? [...scene.livingCats.actors.values()]
+      .filter(cat => cat.area === area && !cat.route.length && !cat.interaction && !cat.resting &&
+        state.pets.some(p => p.id === cat.id && petActive(p)))
+      .map(cat => ({ id: cat.id, x: cat.x, y: cat.y, area: cat.area }))
+    : area === 'main' ? [{ id: 'window', x: CAT_SPOT.x, y: CAT_SPOT.y, area: 'main' as const, sill: true }] : [];
+  return { area, cats };
+}
+
 /** The button and scene share one optional, persisted service-help cooldown. */
 function helpBrew(): boolean {
   if (!cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused) || arrange || scene.panning || scene.overview || state.phase === 'prep' || !sim.boost()) return false;
@@ -868,6 +937,7 @@ function pointerDown(x: number, y: number): void {
     return;
   }
   if (arrange) arrangeTap(x, y);
+  else if (momentAt(x, y)) openMoment();
   else {
     const actors = [
       ...sim.baristas.map((b, i) => ({ ...sim.baristaPose(i), partnerId: b.partnerId })),
@@ -910,6 +980,9 @@ window.addEventListener('keydown', (e) => {
     return;
   } else if (e.key === 'Escape' && playFlow.handleEscape(e)) {
     return;
+  } else if (e.key === 'Enter' && moments.active && !isModalOpen() && !onboarding) {
+    e.preventDefault();
+    if (!e.repeat) openMoment();
   } else if (e.key === ' ' && !isModalOpen() && !onboarding) {
     e.preventDefault();
     if (!e.repeat) tapAt(areaOrigin(scene.area).x + 110 + Math.random() * 100, areaOrigin(scene.area).y + 70);
@@ -958,6 +1031,18 @@ function frame(dt: number): void {
     const report = sim.closeShop(state);
     if (report) showReport(report);
   }
+
+  moments.update(state, sim, simDt, paused ? 0 : dt, momentStage());
+  if (moments.active && moments.active !== cuedMoment) {
+    const key = MOMENT_HINT_KEY + moments.active.kind;
+    if (!storage.preference(key)) {
+      toast(t(`moment.hint.${moments.active.kind}`));
+      storage.setPreference(key, '1');
+    }
+  }
+  cuedMoment = moments.active;
+  scene.moment = moments.active && { kind: moments.active.kind, customerId: moments.active.customerId, spot: moments.active.spot };
+  scene.momentReaction = moments.reaction;
 
   // Settlement can open a dialog in this frame; hide thoughts immediately.
   scene.paused = paused || isModalOpen();

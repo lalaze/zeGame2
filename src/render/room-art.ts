@@ -42,6 +42,7 @@ import { textWidth } from './font';
 import { type Lighting, type Sun } from './lighting';
 import { OUTLINE, itemIcon, pixelSprite } from './sprites';
 import { paintPixelWindowVillage } from './pixel-window-village';
+import { paintRain } from './weather-art';
 import { pixelFloorDoorLight, projectFloorLayer } from './pixel-floor-projection';
 import { MAIN_WALL_PLANE, MAIN_COUNTER_PLANE, mainPixelProjection, projectMainPlaneWorld } from './main-pixel-presentation';
 import { paintPixelRoomShell } from './pixel-room-shell';
@@ -309,6 +310,8 @@ export class RoomPainter {
   kitchenDoor = 0;
   private wallpaper = 'wall_cream';
   curtain = 'curtain_classic';
+  /** Rain on the window glass: the time it falls by, or null on a dry day. */
+  rain: number | null = null;
 
   constructor(public ctx: CanvasRenderingContext2D, readonly density = 1, private readonly project = true) {}
 
@@ -645,6 +648,7 @@ export class RoomPainter {
         this.r(x, y + h - 4, w, 4, land('#5ea24a', '#1b3029'));
         treeLine(ctx, x, y + h - 21, w, 17, light.dark);
       }
+      if (this.rain !== null) paintRain(ctx, x, y, w, h, this.rain);
       glassReflection(ctx, x, y, w, h, 0.13);
       ctx.restore();
     }

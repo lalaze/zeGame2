@@ -21,7 +21,7 @@ import runtimeCatalog from '../../../assets/generated/runtime-catalog-v1/runtime
 import { createGeneratedFurnitureArt, GENERATED_FURNITURE_IDS, generatedFurnitureKey } from '../generated-furniture-art';
 import { createGeneratedDecorArt, GENERATED_DECOR_SOURCE_IDS } from '../generated-decor-art';
 import { createGeneratedIngredientArt, GENERATED_INGREDIENT_IDS } from '../generated-ingredient-art';
-import { UI_ART, paintThoughtFrame, paintOrderFrame, paintSoldOutFrame, paintSoldOutCross, paintCallBubble, paintAckBubble } from '../ui-art';
+import { UI_ART, paintThoughtFrame, paintOrderFrame, paintSoldOutFrame, paintSoldOutCross, paintCallBubble, paintAckBubble, paintMomentCue, paintParcel, paintSpilledCup } from '../ui-art';
 import { paintServiceCup, paintServiceTray, paintTableTent } from '../service-props-art';
 import { styleStationMultiplier } from '../../game/styles';
 import { petActive } from '../../game/pets';
@@ -33,7 +33,7 @@ import { thoughtCandidates } from '../thoughts';
 import { thoughtTextRaster, thoughtTextWidth, wrapThoughtText } from '../thought-text';
 import { extensionTable, remapTablecloth } from '../extension-table-art';
 import { extensionLampPool } from '../extension-surfaces';
-import { ThoughtBubbles, placeThought, thoughtBubbleWidth, type ThoughtRect } from '../thought-bubbles';
+import { ThoughtBubbles, URGENT_THOUGHT, placeThought, thoughtBubbleWidth, type ThoughtRect } from '../thought-bubbles';
 import { menuItems } from '../../game/economy';
 import { formatMoney } from '../../game/format';
 import { COLS, FLOOR_ROWS, WALL_ROWS, WALL_TOP, CELL, canPlace, cellFree, furnitureDef } from '../../game/furniture';
@@ -47,7 +47,8 @@ import { paintCeiling, paintNeon, shadow } from '../decor-art';
 import { drawText, textWidth } from '../font';
 import { GHOST_BAD, GHOST_OK, floorFurnitureBounds, paintFloorFurniture, paintWallFurniture } from '../furniture-art';
 import { paintPassageFloor, paintRoomBoundaries } from '../passages';
-import { lightingAt, roomAmbient, type Lighting } from '../lighting';
+import { lightingAt, roomAmbient, weatherLight, type Lighting } from '../lighting';
+import { todayCondition } from '../../game/conditions';
 import { nightLightMap, type LightPool } from '../night-light-map';
 import { previewLightDate } from '../preview-light';
 import { businessLightDate } from '../business-light';
@@ -497,7 +498,8 @@ export class CafeScene extends Phaser.Scene {
     const t = time / 1000;
     // Windows, room lights and wall clocks share the saved business-day clock.
     const now = previewLightDate(businessLightDate(state), window.location.href);
-    const light = lightingAt(now.getHours() + now.getMinutes() / 60);
+    // The weather of the day being planned or run tints the sky and the light.
+    const light = weatherLight(lightingAt(now.getHours() + now.getMinutes() / 60), todayCondition(state).id);
     this.currentLight = light;
     const viewX = Math.round(view.viewX);
     const viewY = Math.round(view.viewY);
@@ -519,7 +521,9 @@ export class CafeScene extends Phaser.Scene {
       this.drawLight(area, visible, state, light);
     }
     this.glows.end();
+    view.momentTarget = null;
     this.drawFloorStanding(state, t);
+    this.drawMomentSpot(t);
     this.sim.customers.forEach((c, i) => this.drawCustomerOverlay(c, t, DEPTH.overlay + i * 0.001));
     this.drawThoughts(state, dt);
     this.images.end();
@@ -681,9 +685,11 @@ export class CafeScene extends Phaser.Scene {
       return;
     }
     if (area === 'main') {
-      const backSig = [tick, H, getLocale(), signFontRevision(), state.profile?.cafeName, Object.values(decor).join(','), menuItems(state).map((m) => m.id).join(','), state.phase, placed, now.getTime(), this.view.kitchenDoor.toFixed(2)].join('|');
+      const rainy = todayCondition(state).id === 'rain';
+      const backSig = [tick, H, getLocale(), signFontRevision(), state.profile?.cafeName, Object.values(decor).join(','), menuItems(state).map((m) => m.id).join(','), state.phase, placed, now.getTime(), this.view.kitchenDoor.toFixed(2), rainy].join('|');
       this.paint(back, o.x, o.y, backSig, (p) => {
         p.kitchenDoor = this.view.kitchenDoor;
+        p.rain = rainy ? (this.motionPreference.matches ? 0 : t) : null;
         p.curtain = decor.curtain;
         const ctx = p.ctx;
         p.drawWall(decor.wallpaper, t);
@@ -1331,6 +1337,16 @@ export class CafeScene extends Phaser.Scene {
       candidates.push({ id, key: 'pet.living.thought.response', x: guest.x, y: guest.y - CHAR_H - 5,
         priority: 8, context: `cat-response:${cat.id}` });
     }
+    // A guest with a moment cue stays quiet; their reply to the player speaks at once.
+    const cue = view.moment, reply = view.momentReaction;
+    if (cue?.customerId !== undefined) candidates = candidates.filter(c => c.id !== `customer:${cue.customerId}`);
+    const replying = reply && this.sim.customers.find(c => c.id === reply.customerId);
+    if (reply && replying && inRoom(replying)) {
+      const id = `customer:${replying.id}`;
+      candidates = candidates.filter(c => c.id !== id);
+      candidates.push({ id, key: reply.key, x: replying.x, y: replying.y - CHAR_H - (seated(replying) ? 5 : 0),
+        priority: URGENT_THOUGHT, context: reply.context });
+    }
     candidates = candidates.map(candidate => {
       const customer = candidate.id.startsWith('customer:') ? this.sim.customers.find(c => `customer:${c.id}` === candidate.id) : undefined;
       const foot = customer ?? { x: candidate.x, y: candidate.y + CHAR_H };
@@ -1354,6 +1370,7 @@ export class CafeScene extends Phaser.Scene {
       if (c.mood === 'happy') occupied.push({ x: presented.x - 5, y: top - 19, w: 10, h: 17 });
       if ((c.phase === 'queue' && c.patience < 12) || (c.phase === 'waiting' && c.timer < 15))
         occupied.push({ x: presented.x - 5, y: top - 5, w: 12, h: 3 });
+      if (view.moment?.customerId === c.id) occupied.push({ x: presented.x - 8, y: top - 21, w: 16, h: 18 });
     }
     this.sim.baristas.forEach((b, i) => {
       const pose = this.sim.baristaPose(i);
@@ -1383,6 +1400,7 @@ export class CafeScene extends Phaser.Scene {
       if (guest) occupied.push({ x: this.customerPoint(guest).x - 10, y: guest.y - 14, w: 20, h: 30 });
     }
     for (const f of this.floaters) occupied.push({ x: f.x - 24, y: f.pos.y - 10, w: 48, h: 20 });
+    if (view.moment?.spot && view.momentTarget) occupied.push(view.momentTarget);
     for (const c of selected) {
       const text = translate(c.key);
       const key = `thought-pixel-${signFontRevision()}-${getLocale()}-${c.key}`;
@@ -1399,7 +1417,9 @@ export class CafeScene extends Phaser.Scene {
         });
       }
       const texture = this.textures.get(key).getSourceImage();
-      const placement = placeThought(c, texture.width / 2, texture.height / 2, bounds, occupied);
+      // A reply to the player must be seen: if nothing is clear, it may overlap indicators.
+      const placement = placeThought(c, texture.width / 2, texture.height / 2, bounds, occupied) ??
+        (c.priority >= URGENT_THOUGHT ? placeThought(c, texture.width / 2, texture.height / 2, bounds, []) : null);
       if (!placement) continue;
       occupied.push(placement, ...placement.dots);
       this.image(key, placement.x, placement.y, DEPTH.overlay + 10).setScale(1 / WORLD_ART_DENSITY);
@@ -1455,6 +1475,43 @@ export class CafeScene extends Phaser.Scene {
     } else if (((c.phase === 'queue' && c.patience < 12) || (c.phase === 'waiting' && c.timer < 15)) && Math.floor(t * 2) % 2 === 0) {
       for (let i = 0; i < 3; i++) this.rect(x - 4 + i * 4, top - 4, 2, 2, OUTLINE, depth + 0.0001);
     }
+    const moment = this.view.moment;
+    if (moment?.customerId === c.id && c.phase !== 'ordering') {
+      // An optional moment: a small slip above the guest, gently bobbing to catch the eye.
+      const cueTop = top - 18 - (c.vip ? 6 : 0);
+      this.momentCue(moment.kind, x, cueTop, t, depth + 0.0004);
+      // The guest is part of the target too: the head and shoulders when seated, the whole figure standing.
+      const bottom = seated(c) ? top + 18 : this.customerPoint(c).y + 2;
+      this.view.momentTarget = { x: x - 9, y: cueTop, w: 18, h: bottom - cueTop };
+    }
+  }
+
+  /** A moment's slip, gently bobbing to catch the eye unless motion is reduced. */
+  private momentCue(kind: NonNullable<CafeView['moment']>['kind'], x: number, y: number, t: number, depth: number): void {
+    const bob = this.motionPreference.matches || this.view.paused ? 0 : Math.floor(t * 2) % 2;
+    const cue = baked(this.textures, `moment-cue-${kind}`, 13, 14, ctx => paintMomentCue(ctx, kind));
+    this.image(cue, x - 6, y - bob, depth);
+  }
+
+  /** The cup the cat knocked over, or the parcel by the door, with its cue above. */
+  private drawMomentSpot(t: number): void {
+    const moment = this.view.moment, spot = moment?.spot;
+    if (!moment || !spot) return;
+    const p = spot.sill ? projectMainPlaneWorld(spot, MAIN_WALL_PLANE) : projectMainWorld(spot);
+    let top: number;
+    if (moment.kind === 'delivery') {
+      const parcel = baked(this.textures, 'moment-parcel', 14, 12, paintParcel);
+      this.shadow(p.x, p.y, 14, DEPTH.floor + spot.y + 0.34);
+      this.litImage(parcel, Math.round(p.x) - 7, Math.round(p.y) - 11, DEPTH.floor + spot.y + 0.35, p);
+      top = p.y - 11;
+    } else {
+      const cup = baked(this.textures, 'moment-spilled-cup', 14, 7, paintSpilledCup);
+      this.image(cup, Math.round(p.x) - 7, Math.round(p.y) - 6, spot.sill ? DEPTH.cat + 0.01 : DEPTH.floor + spot.y + 0.002);
+      top = p.y - 6;
+    }
+    const cueTop = Math.round(top) - 16;
+    this.momentCue(moment.kind, Math.round(p.x), cueTop, t, DEPTH.overlay);
+    this.view.momentTarget = { x: p.x - 9, y: cueTop, w: 18, h: p.y + 2 - cueTop };
   }
 
   private spawnEffects(): void {
@@ -1469,6 +1526,7 @@ export class CafeScene extends Phaser.Scene {
       }
     }
     for (const sale of this.view.sales.splice(0)) this.addFloater(sale);
+    for (const tip of this.view.tips.splice(0)) this.floatText('+' + formatMoney(tip.amount), tip.x, tip.y, false);
   }
 
   /** "+$12" rising from a sale and fading out. */
@@ -1482,20 +1540,25 @@ export class CafeScene extends Phaser.Scene {
       ? tablePos(Math.floor(customer.seat / 2))
       : { x: e.x, y: e.y + 52 };
     const presented = projectMainAttachment(e, anchor);
+    this.floatText('+' + formatMoney(e.amount), presented.x, presented.y, e.vip);
+    if (e.vip) for (let i = 0; i < 8; i++) this.view.sparkle(e.x + (Math.random() - 0.5) * 24, e.y + Math.random() * 14, anchor);
+  }
+
+  /** Text rising from a presented point and fading out. */
+  private floatText(text: string, px: number, py: number, vip: boolean): void {
     // Stack pop-ups that would land on top of a fresh one.
-    let y = presented.y;
-    while (this.floaters.some((f) => Math.abs(f.x - presented.x) < 28 && Math.abs(f.pos.y - y) < 8)) y -= 8;
-    const text = '+' + formatMoney(e.amount);
+    let y = py;
+    while (this.floaters.some((f) => Math.abs(f.x - px) < 28 && Math.abs(f.pos.y - y) < 8)) y -= 8;
     const w = textWidth(text);
     const view = this.view;
-    const x = Math.min(view.viewX + view.viewWidth - w - 2, Math.max(view.viewX + 2, presented.x - w / 2));
+    const x = Math.min(view.viewX + view.viewWidth - w - 2, Math.max(view.viewX + 2, px - w / 2));
     const object = this.add
       .container(Math.round(x), y, [
         this.add.bitmapText(0, 0, PIXEL_FONT_HALO, text),
-        this.add.bitmapText(0, 0, e.vip ? PIXEL_FONT_VIP : PIXEL_FONT, text),
+        this.add.bitmapText(0, 0, vip ? PIXEL_FONT_VIP : PIXEL_FONT, text),
       ])
       .setDepth(DEPTH.floaters);
-    const floater: Floater = { x: presented.x, pos: { y }, object };
+    const floater: Floater = { x: px, pos: { y }, object };
     this.floaters.push(floater);
     this.tweens.add({
       targets: floater.pos,
@@ -1506,7 +1569,6 @@ export class CafeScene extends Phaser.Scene {
     });
     this.tweens.add({ targets: object, alpha: 0, delay: (FLOATER_LIFE - 0.4) * 1000, duration: 400 });
     if (this.floaters.length > MAX_FLOATERS) this.removeFloater(this.floaters[0]);
-    if (e.vip) for (let i = 0; i < 8; i++) this.view.sparkle(e.x + (Math.random() - 0.5) * 24, e.y + Math.random() * 14, anchor);
   }
 
   private removeFloater(floater: Floater): void {

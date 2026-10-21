@@ -57,6 +57,11 @@ export function placeThought(c: Pick<ThoughtCandidate, 'id' | 'x' | 'y'>, w: num
   return null;
 }
 
+/** Candidates at or above this priority answer the player: they speak at once, ahead of chatter. */
+export const URGENT_THOUGHT = 1000;
+/** A reply can be a line of a regular's story, so it stays up a little longer. */
+const URGENT_SECONDS = 5;
+
 /** Renderer-only state: real seconds, no random draws, never part of a save. */
 export class ThoughtBubbles {
   private active = new Map<string, { context: string; until: number }>();
@@ -78,7 +83,13 @@ export class ThoughtBubbles {
       if (!live.has(id) || live.get(id)!.context !== a.context || a.until <= this.now) this.active.delete(id);
     }
     for (const id of this.cooldown.keys()) if (!live.has(id)) this.cooldown.delete(id);
-    if (this.active.size < 1 && this.now >= this.next) {
+    const urgent = candidates.find(c => c.priority >= URGENT_THOUGHT && !this.active.has(c.id) && this.cooldown.get(c.id)?.context !== c.context);
+    if (urgent) {
+      this.active.clear();
+      this.active.set(urgent.id, { context: urgent.context, until: this.now + URGENT_SECONDS });
+      this.cooldown.set(urgent.id, { until: this.now + 19, context: urgent.context });
+      this.next = this.now + 2.4;
+    } else if (this.active.size < 1 && this.now >= this.next) {
       const c = candidates.filter(c => {
         const previous = this.cooldown.get(c.id);
         // A first taste must still fit into a short visit after a queue/service thought.

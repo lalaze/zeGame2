@@ -95,3 +95,56 @@ export function paintAckBubble(ctx: CanvasRenderingContext2D): void {
   rect(ctx, 3, 6, 1, 1, UI_ART.sageShade);
   rect(ctx, 3, 9, 1, 1, UI_ART.ink);
 }
+
+/** Glyphs for the optional service moments, each drawn in its own ink. */
+const MOMENT_GLYPHS = {
+  // A question for a recommendation.
+  recommend: { color: UI_ART.timberShade, rows: ['.###.', '##.##', '...##', '..##.', '..#..', '.....', '..#..'] },
+  // A regular's wave.
+  greet: { color: UI_ART.warning, rows: ['.#.#.#.', '.#.#.#.', '.#####.', '######.', '.#####.', '..####.', '...##..'] },
+  // A paw print: the cat has been up to something.
+  cat: { color: UI_ART.timber, rows: ['#..#..#', '#..#..#', '.......', '..###..', '.#####.', '.#####.', '..###..'] },
+  // A little camera.
+  photo: { color: UI_ART.ink, rows: ['..##.....', '#########', '###...###', '##.....##', '##.....##', '###...###', '#########'] },
+  // A taped parcel.
+  delivery: { color: UI_ART.brassShade, rows: ['.#####.', '#..#..#', '#######', '#..#..#', '#..#..#', '#..#..#', '#######'] },
+} as const;
+export type MomentGlyph = keyof typeof MOMENT_GLYPHS;
+
+/** A moment's cue: the order slip with its glyph, on a 13 × 14 canvas. */
+export function paintMomentCue(ctx: CanvasRenderingContext2D, kind: MomentGlyph): void {
+  paintOrderFrame(ctx, 11, 10);
+  const { rows, color } = MOMENT_GLYPHS[kind];
+  const left = 1 + Math.floor((11 - rows[0].length) / 2), top = 2;
+  rows.forEach((row, y) => [...row].forEach((ch, x) => { if (ch === '#') rect(ctx, left + x, top + y, 1, 1, color); }));
+}
+
+/** A mug the cat knocked over, on its side with coffee running out, on a 14 × 7 canvas. */
+const SPILLED_CUP = [
+  '..kkk.........',
+  '..k.k.........',
+  'kkkkkkk.......',
+  'kLLLLLk...d...',
+  'kCCCCCkd....d.',
+  'kSSSSSkdhd.d..',
+  '.kkkkkddddhddd',
+];
+export function paintSpilledCup(ctx: CanvasRenderingContext2D): void {
+  const colors: Record<string, string> = {
+    // Dark coffee with a bright glint, so the puddle shows on a wooden sill as well as the floor.
+    k: UI_ART.ink, L: UI_ART.light, C: UI_ART.cream, S: UI_ART.paperShade, d: UI_ART.ink, h: UI_ART.timberLight,
+  };
+  SPILLED_CUP.forEach((row, y) => [...row].forEach((ch, x) => { if (colors[ch]) rect(ctx, x, y, 1, 1, colors[ch]); }));
+}
+
+/** A taped cardboard parcel standing on the floor, on a 14 × 12 canvas. */
+export function paintParcel(ctx: CanvasRenderingContext2D): void {
+  rect(ctx, 1, 0, 12, 1, UI_ART.ink);
+  rect(ctx, 0, 1, 14, 11, UI_ART.ink);
+  rect(ctx, 1, 1, 12, 2, UI_ART.brassLight);
+  rect(ctx, 1, 4, 12, 7, UI_ART.brass);
+  rect(ctx, 1, 9, 12, 2, UI_ART.brassShade);
+  rect(ctx, 6, 1, 2, 10, UI_ART.paperShade);
+  rect(ctx, 6, 1, 2, 2, UI_ART.cream);
+  rect(ctx, 2, 5, 3, 2, UI_ART.light);
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ThoughtBubbles, placeThought, thoughtBubbleWidth } from './thought-bubbles';
+import { ThoughtBubbles, URGENT_THOUGHT, placeThought, thoughtBubbleWidth } from './thought-bubbles';
 import type { ThoughtCandidate } from './thoughts';
 const c = (id: string, priority = 1): ThoughtCandidate => ({ id, priority, key: 'thought.arrival' as ThoughtCandidate['key'], context: 'queue', x: 160, y: 100 });
 function tick(b: ThoughtBubbles, seconds: number, candidates = [c('a'), c('b'), c('c')], room = 'main', enabled = true) {
@@ -12,6 +12,14 @@ describe('thought bubble pacing', () => {
     const b = new ThoughtBubbles();
     expect(tick(b, 1, [c('a'), c('b', 9), c('c')]).map(c => c.id)).toEqual(['b']);
     for (let i = 0; i < 60; i++) expect(tick(b, .25).length).toBeLessThanOrEqual(2);
+  });
+  it('lets a reply to the player speak at once, even mid-thought and during cooldown, but only once', () => {
+    const b = new ThoughtBubbles();
+    expect(tick(b, 1, [c('a'), c('b')]).map(c => c.id)).toEqual(['a']);
+    const reply = { ...c('b', URGENT_THOUGHT), context: 'moment:1' };
+    expect(b.update(.1, 'main', true, [c('a'), reply]).map(c => c.id)).toEqual(['b']);
+    expect(tick(b, 5, [c('a'), { ...c('b'), context: 'queue' }]).map(c => c.id)).not.toContain('b');
+    expect(tick(b, 1, [c('a'), reply]).map(c => c.id)).not.toContain('b');
   });
   it('does not repeat a character during cooldown', () => {
     const b = new ThoughtBubbles();

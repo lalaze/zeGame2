@@ -917,6 +917,28 @@ html:lang(zh) body {
   color: var(--muted);
 }
 
+/* A guest's recommendation request: their wish, then one button per dish. */
+.moment-quote {
+  font-size: 16px;
+}
+.moment-options {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0;
+}
+.moment-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-height: 44px;
+  text-align: left;
+}
+.moment-option-notes {
+  font-size: 13px;
+  color: var(--muted);
+}
+
 .big-money {
   font-size: 34px;
   font-weight: 600;
@@ -2147,6 +2169,20 @@ button.coins { display: block; width: 100%; min-height: 32px; padding: 0; border
 .style-stage-details .done { color: var(--green-dark); }
 .style-keep { padding: 4px 0; }
 .prep-style { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 12px; padding: 10px; background: #e3e8cb; border-left: 3px solid var(--green); }
+/* The day's condition: what it calls for, above the menu it should shape. */
+.prep-condition { margin: 0 0 12px; padding: 10px; background: #e6ebf2; border-left: 3px solid #6f86a3; overflow-wrap: anywhere; }
+.prep-condition.condition-hot { background: #f8e2c4; border-left-color: #c9793b; }
+.prep-condition.condition-crisp { background: #e2ecf3; border-left-color: #5d8fb5; }
+.prep-condition.condition-market { background: #efe3c9; border-left-color: #a0763c; }
+.prep-condition.condition-quiet { background: #e6e8dc; border-left-color: #7d8a6a; }
+.prep-condition b { font-size: 14px; }
+.prep-condition p { margin: 4px 0; }
+.prep-condition ul { margin: 4px 0 0; padding-left: 18px; line-height: 1.45; }
+.prep-condition .condition-match { margin: 6px 0 0; }
+.prep-condition .condition-match.on { color: var(--green-dark); }
+.prep-name small.condition-tag.favored { color: var(--green-dark); }
+.prep-name small.condition-tag.less { color: #8c5a43; }
+.report-tomorrow { margin: 8px 0 0; padding: 8px 10px; background: #e6ebf2; border-left: 3px solid #6f86a3; }
 .prep-style > div { flex: 1 1 160px; }
 .prep-style b { font-size: 14px; }
 .prep-style p { margin-bottom: 0; }

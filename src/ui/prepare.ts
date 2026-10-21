@@ -16,6 +16,7 @@ import { itemArtwork, toDataURL } from '../render/sprites';
 import { showModal } from './modal';
 import { prepStyleSummary, showCafeStyles } from './cafe-styles';
 import { ingredientName, itemName } from './panel';
+import { dishConditionHtml, prepConditionHtml } from './conditions';
 
 export function showPrepare(state: GameState, onStart: () => void, onChange: () => void): void {
   const body = document.createElement('div');
@@ -79,14 +80,14 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
       })}</small>` : '';
       return `<div class="prep-row${on ? '' : ' off'}${on && low.has(m.id) ? ' low' : ''}">
         <label class="prep-select"><input type="checkbox" data-focus="dish-${m.id}" data-dish="${m.id}" ${on ? 'checked' : ''} ${eligible ? '' : 'disabled'} />
-        <img src="${toDataURL(itemArtwork(m.id), 1)}" alt="" /><span class="prep-name"><b>${itemName(m.id, state)}</b><small>${note}</small>${ingredients}<small>${tasteLabel(state, m.id)}</small></span></label>${bake}</div>`;
+        <img src="${toDataURL(itemArtwork(m.id), 1)}" alt="" /><span class="prep-name"><b>${itemName(m.id, state)}</b><small>${note}</small>${ingredients}<small>${tasteLabel(state, m.id)}</small>${eligible ? dishConditionHtml(state, m.id) : ''}</span></label>${bake}</div>`;
     }).join('');
     const quote = restockQuote(state);
     const full = quote.cost <= 0;
     const missing = Object.entries(quote.buy).map(([id, n]) => `${ingredientName(id as keyof GameState['pantry'])} ×${n}`).join(t('list.sep'));
     const starterStock = state.day === 1 && state.totalEarned === 0 && full
       && onMenu.size === 1 && onMenu.has('espresso') && readyServings(state, 'espresso') > 0;
-    body.innerHTML = `<p>${t('prep.menuHint')}</p><button class="pixel-btn small ghost signature-entry" data-signature-research>${t('signature.entry')}</button>
+    body.innerHTML = `${prepConditionHtml(state, menuItems(state))}<p>${t('prep.menuHint')}</p><button class="pixel-btn small ghost signature-entry" data-signature-research>${t('signature.entry')}</button>
       ${starterStock ? `<p class="note prep-starter">${t('prep.starterStock', { n: formatNumber(readyServings(state, 'espresso')) })}</p>` : ''}
       ${hasBakery ? `<p class="note prep-bakery-hint">${t('prep.bakeryHint')}</p>` : ''}
       <div class="prep-list">${rows}</div>

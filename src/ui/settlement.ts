@@ -11,6 +11,7 @@ import type { GameState } from '../game/state';
 import { t, type MessageKey } from '../i18n';
 import { itemArtwork, toDataURL } from '../render/sprites';
 import { ratingReportHtml } from './reputation';
+import { tomorrowConditionHtml } from './conditions';
 
 const text = (key: string, params?: Record<string, string | number>) => t(key as MessageKey, params);
 const itemName = (id: ItemId) => htmlItemName(id);
@@ -72,6 +73,7 @@ export function settlementHtml(report: DayReport, state: GameState): { body: str
       ${goal ? `<p class="report-goal">${text('report.goalReady', { goal: text(`goal.${goal.id}`), reward: formatMoney(goal.reward) })}</p>` : ''}
       <p class="report-action"><b>${text('report.nextStep')}:</b> ${actionText(advice)}</p>
       ${advice.action.kind === 'restock' || advice.action.kind === 'upgrade' ? '' : `<p class="note report-stock-priority">${text('report.stockFirst')}</p>`}
+      ${tomorrowConditionHtml(state, report.day)}
     </section>
     ${report.partners?.length ? '<section class="report-partners"><h3>'+partnerText('今日伙伴贡献','Today’s partner contributions')+'</h3><ul>'+report.partners.map(p=>'<li>'+(partnerDefinition(p.id)?.name[getLocale()] ?? '')+' · '+text('report.partnerJobs',{n:p.jobs})+' · '+p.xp+' XP'+(p.unlocked?' · '+text('report.partnerNewStories',{n:p.unlocked}):'')+'</li>').join('')+'</ul></section>' : ''}
     <details class="report-details">

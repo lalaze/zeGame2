@@ -79,7 +79,34 @@ What to spend the day's revenue on:
 
 ### Little thoughts
 
-Customers and staff occasionally share short, localized thought clouds about what they are doing. Dine-in guests have consistent cosmetic flavor preferences, with affectionate likes and gentle dislikes after their order arrives. These thoughts never change orders, prices, tips, patience, or save data. At most one compact cloud appears at once, for up to 3.6 seconds; they avoid service indicators and disappear during dialogs, room transitions, the map, and furniture placement. Thought clouds add no animation.
+Customers and staff occasionally share short, localized thought clouds about what they are doing. Dine-in guests have consistent cosmetic flavor preferences, with affectionate likes and gentle dislikes after their order arrives. These thoughts never change orders, prices, tips, patience, or save data. At most one compact cloud appears at once, for up to 3.6 seconds; they avoid service indicators and disappear during dialogs, room transitions, the map, and furniture placement. Thought clouds add no animation. A guest's reply to one of the little moments below speaks at once and stays up for 5 seconds.
+
+### Daily conditions
+
+From day 3, every business day has a condition. It appears in a card at the top of the menu preparation, next to the day number on the clock, and a day ahead at the end of the day's report so you can stock up. Each café gets its own sequence, worked out from its creation time and the day number: reloading never changes it, and the same condition never lasts three days running. About two days in five are fair, and a fair day changes nothing.
+
+| Condition | Chance | Effect |
+| --- | --- | --- |
+| Fair weather | 40% | None. |
+| Rainy day | 15% | Tea, chocolate and milky dishes are popular; iced drinks less so. 10% more guests while the menu has something popular, and more of them stay at a table. Grey skies, rain on the windows, lamps on early. |
+| Hot day | 12% | Iced and fruity dishes are popular; chocolate and spiced ones less so. 10% more guests while the menu has something popular. Brighter, warmer light. |
+| Crisp morning | 13% | Spiced and toasty dishes are popular; iced drinks less so. 10% more guests while the menu has something popular. Cooler, clearer light. |
+| Market day | 10% | 20% more guests, and most of them take their order away. Bread and pastries are popular. |
+| Quiet day | 10% | 15% fewer guests, but they wait 15 seconds longer and stay at a table more often. |
+
+Guests pick a popular dish 1.6 times as often as an ordinary one, and a less popular one 0.6 times as often. If a dish counts as both, less popular wins: an iced frappé is still iced on a rainy day. Popularity uses the same flavor notes as guests' thoughts and the recommendation moment, and the preparation list tags each dish. The arrivals forecast, suggested bakes, restock quote, kitchen planning and the simulation all use the same numbers. Arriving guests mention the day in their thoughts.
+
+### Little moments
+
+Every 20–40 real seconds of open service, something small may happen in the room you're looking at. Because the gap is measured in real time, higher speeds don't bring more of them. A slip with an icon bobs above it: tap it, or press <kbd>Enter</kbd>, to answer. If you ignore it, it fades after 14 seconds and changes nothing. Moments never start while the game is paused, while the map is open, or in a room you can't see, and each guest is asked at most once per visit. A short hint explains each kind the first time it appears.
+
+- **"What would you recommend?"** A guest in line says what they're in the mood for. You pick one of two of today's dishes, of the same kind as their order: one they'd love and one they wouldn't, each shown with the flavor notes behind guests' thoughts. They order your pick and add 50% to the bill for a perfect match, 15% for a fair one, nothing for a miss. **Let them choose** keeps their own order.
+- **A regular waves.** Wave back and they say a line about the story they're living right now: the chapter they'll tell next in the Regulars journal, or the last one once their story is done. They wait 8 seconds longer and tip 20%.
+- **The cat knocks over a cup.** Tidy up, and a guest who saw it all tips half the price of an average dish. The culprit (a resident cat, or the visiting windowsill cat) still gets a fuss.
+- **A guest wants a photo.** Take a seated guest's picture and they tip three-quarters of an average dish.
+- **A delivery arrives.** Up to two parcels a day appear inside the front door. Signing for one adds the ingredients for 3–12 servings of one of today's dishes to the pantry.
+
+Tips and rewards count toward today's revenue. Moments use their own random numbers and only the player's answers change the café: unanswered, the simulation, balance audits and seeded tests run exactly as before. A cue is never saved; an answered tip already on a guest's bill is saved with that visit.
 
 ### Neighborhood regulars
 
@@ -107,6 +134,8 @@ To add or change text, edit `src/locales/en.json` and `src/locales/zh.json`. The
 | `src/game/economy.ts` | Prices, costs, bulk buying, today's menu, pantry and restocking, income and away earnings (pure functions) |
 | `src/game/day.ts` | Opening checks, the shop clock, and closing a day into its report |
 | `src/game/sim.ts`, `src/game/sim-snapshot.ts`, `src/game/operations.ts` | Customer/staff simulation, validated live-service snapshots and sustained bottleneck feedback |
+| `src/game/moments.ts`, `src/game/flavors.ts`, `src/ui/moments.ts` | Optional service moments, guests' lasting tastes and dish flavor notes, the recommendation dialog |
+| `src/game/conditions.ts`, `src/ui/conditions.ts`, `src/render/weather-art.ts` | Daily conditions and their effects on demand, the preparation card and report preview, rain on the windows |
 | `src/game/state.ts` | Save format, loading and validation |
 | `src/render/phaser/` | The [Phaser 4](https://phaser.io) game that draws the café: game loop, camera, input, baked room textures, characters and props as sprites sorted by depth, particles and pop-up text |
 | `src/render/lighting.ts` | Time-of-day lighting: keyframed sky, sun, color grade and lamp levels that every part of the scene reads from |
