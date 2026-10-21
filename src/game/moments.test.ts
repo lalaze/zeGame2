@@ -100,6 +100,22 @@ describe('café moments', () => {
     }
   });
 
+  it('keeps to the same rhythm when the line is full of regulars', () => {
+    const state = cafe(), sim = new Sim(seeded(8)), director = new MomentDirector(seeded(6));
+    const regulars = REGULAR_GUESTS.map((g) => g.id);
+    let moments = 0;
+    for (let n = 0; n < 180 / 0.05; n++) {
+      sim.update(state, 0.05);
+      sim.customers.forEach((c, i) => { c.regularGuestId ??= regulars[i % regulars.length]; });
+      const before = director.active;
+      director.update(state, sim, 0.05, 0.05, WITH_CAT);
+      if (director.active && director.active !== before) { moments++; director.greet(state, sim); }
+    }
+    // A three-minute day at 1×: the first after 12 seconds, then one every 20–40.
+    expect(moments).toBeGreaterThanOrEqual(5);
+    expect(moments).toBeLessThanOrEqual(9);
+  });
+
   it('only starts a moment in the room on screen', () => {
     const { state, sim } = line();
     const director = new MomentDirector(seeded(2));
@@ -161,7 +177,10 @@ describe('café moments', () => {
     const { state, sim, guest } = line();
     guest.regularGuestId = 'mina';
     const director = new MomentDirector(seeded(1));
+    // Regulars wait for the same rhythm as everything else, then go first.
     director.update(state, sim, 7, 7);
+    expect(director.active).toBeNull();
+    director.update(state, sim, 6, 6);
     expect(director.active).toMatchObject({ kind: 'greet', customerId: guest.id });
     expect(director.greet(state, sim)).toBe('regular.guest.mina.name');
     expect(guest).toMatchObject({ momentTip: GREET_TIP, patience: 60 + GREET_PATIENCE, mood: 'happy' });

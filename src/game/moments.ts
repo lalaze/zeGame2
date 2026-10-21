@@ -62,7 +62,7 @@ export const SAMPLE_SERVINGS = { min: 3, max: 12 } as const;
 export const DELIVERIES_PER_DAY = 2;
 /** Real seconds of open service before the first moment and between later ones. The
  * speed setting changes how fast a day passes, not how often the player is asked. */
-const FIRST_GAP = 12, GAP_MIN = 20, GAP_SPREAD = 20, GREET_GAP = 6;
+const FIRST_GAP = 12, GAP_MIN = 20, GAP_SPREAD = 20;
 /** Real seconds a cue waits for a tap before quietly fading. */
 export const CUE_SECONDS = 14;
 /** Long enough to read a line of a regular's story. */
@@ -172,11 +172,12 @@ export class MomentDirector {
     if (simDt <= 0 || realDt <= 0) return;
     this.since += realDt;
     const unasked = (c: Customer) => !this.offered.has(c.id);
-    if (stage.area === 'main' && this.since >= GREET_GAP) {
+    if (this.since < this.nextGap || !stage.area) return;
+    // A regular in line comes first: their story is the rarest thing to see.
+    if (stage.area === 'main') {
       const regular = sim.customers.find((c) => c.regularGuestId && c.phase === 'queue' && unasked(c));
       if (regular) return this.start({ kind: 'greet', customerId: regular.id, options: [], age: 0 });
     }
-    if (this.since < this.nextGap || !stage.area) return;
     const offers: Partial<Record<Pickable, () => Moment | null>> = {};
     if (stage.area === 'main') {
       offers.recommend = () => {
