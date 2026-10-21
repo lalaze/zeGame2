@@ -3,11 +3,11 @@ import { createHash } from 'node:crypto';
 import { execSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, readdirSync, renameSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { INGREDIENTS, MENU, UPGRADES, ITEM_COST_GROWTH, type ItemId, type UpgradeId } from '../src/game/data';
+import { INGREDIENTS, MENU, UPGRADES, type ItemId, type UpgradeId } from '../src/game/data';
 import { MIN_SCENE_H, setSceneHeight, setKitchenLevel } from '../src/game/layout';
 import { GOALS } from '../src/game/goals';
 import { openShop } from '../src/game/day';
-import { bakeForForecast, bulkCost, buyItem, buyUpgrade, dayNeeds, buyIngredient, restock, menuItems, servingCost } from '../src/game/economy';
+import { bakeForForecast, bulkCost, buyItem, buyUpgrade, dayNeeds, buyIngredient, itemLevelsCost, restock, menuItems, servingCost } from '../src/game/economy';
 import { KITCHEN_COST, unlockKitchen } from '../src/game/kitchen';
 import { adoptCat, CARE_SECONDS, catDef, CATS, type CatId } from '../src/game/pets';
 import { bookPromotion, promotionPlan, PROMOTION_PLANS, type PromotionId } from '../src/game/promotion';
@@ -81,7 +81,7 @@ export function liquidAssets(s: GameState) {
 }
 export function fixtureInfo(stage: Stage) {
   const s = fixture(stage);
-  const recipeCost = MENU.reduce((sum, m) => sum + (s.items[m.id] ? bulkCost(m.baseCost, ITEM_COST_GROWTH, m.id === 'espresso' ? 1 : 0, s.items[m.id] - (m.id === 'espresso' ? 1 : 0)) : 0), 0);
+  const recipeCost = MENU.reduce((sum, m) => sum + (s.items[m.id] ? itemLevelsCost(m, m.id === 'espresso' ? 1 : 0, s.items[m.id] - (m.id === 'espresso' ? 1 : 0)) : 0), 0);
   const upgradesCost = UPGRADES.reduce((sum, u) => sum + bulkCost(u.baseCost, u.growth, 0, s.upgrades[u.id]), 0);
   const kitchenCost = s.kitchen ? KITCHEN_COST : 0;
   const regionsCost = REGIONS.filter((r) => s.regions.includes(r.id)).reduce((sum, r) => sum + r.cost, 0);

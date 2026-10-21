@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { COMBO_CHANCE, DAY_SECONDS, MENU, PASS_SLOTS, UPGRADES, VARIETY_BONUS } from './data';
+import { COMBO_CHANCE, DAY_SECONDS, ITEM_COST_GROWTH, LEVEL_COST_MULTIPLIER, MENU, PASS_SLOTS, UPGRADES, VARIETY_BONUS } from './data';
 import { checkOpen, openShop, type DayReport } from './day';
 import {
   arrivalRate,
@@ -11,6 +11,7 @@ import {
   buyItem,
   buyUpgrade,
   isItemAvailable,
+  itemLevelsCost,
   itemPrice,
   maxAffordable,
   milestoneMultiplier,
@@ -113,6 +114,28 @@ describe('economy', () => {
     const q = quoteItem(s, 'espresso', 'max');
     expect(q.count).toBe(1);
     expect(q.affordable).toBe(false);
+  });
+
+  it('charges the base cost to unlock a dish and ten times as much for each level after', () => {
+    const s = createInitialState(0);
+    const americano = MENU.find((m) => m.id === 'americano')!, espresso = MENU.find((m) => m.id === 'espresso')!;
+    const level = (def: typeof espresso, from: number) => def.baseCost * LEVEL_COST_MULTIPLIER * ITEM_COST_GROWTH ** from;
+    expect(quoteItem(s, 'americano', 1).cost).toBe(americano.baseCost);
+    expect(quoteItem(s, 'espresso', 1).cost).toBe(level(espresso, 1));
+    // Buying several at once from locked: the unlock, then level-ups.
+    expect(quoteItem(s, 'americano', 10).cost).toBeCloseTo(americano.baseCost + [...Array(9)].reduce((sum, _, i) => sum + level(americano, 1 + i), 0), 6);
+    expect(itemLevelsCost(americano, 0, 10)).toBe(quoteItem(s, 'americano', 10).cost);
+    // Max from locked unlocks first and only adds the level-ups the rest of the money covers.
+    s.coins = americano.baseCost + level(americano, 1) + level(americano, 2) - 0.01;
+    expect(quoteItem(s, 'americano', 'max')).toMatchObject({ count: 2, affordable: true });
+    expect(buyItem(s, 'americano', 'max')).toBe(true);
+    expect(s.items.americano).toBe(2);
+    expect(s.coins).toBeCloseTo(level(americano, 2) - 0.01, 6);
+    s.coins = americano.baseCost - 1;
+    expect(quoteItem(s, 'latte', 'max')).toMatchObject({ count: 1, affordable: false });
+    // Prices of dishes already levelled are unchanged; only the next levels cost more.
+    s.items.espresso = 20;
+    expect(itemPrice(espresso, 20)).toBe(espresso.basePrice * 20 * 2 * (1 + 0.8 * (20 - 10) / (25 - 10)));
   });
 
 });

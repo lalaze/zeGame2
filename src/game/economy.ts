@@ -12,6 +12,7 @@ import {
   INGREDIENTS,
   RECIPES,
   ITEM_COST_GROWTH,
+  LEVEL_COST_MULTIPLIER,
   MENU,
   PRICE_MILESTONES,
   SERVICE_OVERHEAD,
@@ -97,10 +98,27 @@ function quote(base: number, growth: number, level: number, coins: number, amoun
   return { count, cost, affordable: cost <= coins };
 }
 
+/** What `n` more levels of a dish cost from `level`: the unlock at its base cost, every level-up after it at LEVEL_COST_MULTIPLIER times that. */
+export function itemLevelsCost(def: Pick<MenuItemDef, 'baseCost'>, level: number, n: number): number {
+  if (n <= 0) return 0;
+  const levelUp = def.baseCost * LEVEL_COST_MULTIPLIER;
+  return level > 0 ? bulkCost(levelUp, ITEM_COST_GROWTH, level, n) : def.baseCost + bulkCost(levelUp, ITEM_COST_GROWTH, 1, n - 1);
+}
+
+function itemQuote(def: MenuItemDef, level: number, coins: number, amount: BuyAmount): Quote {
+  const levelUp = def.baseCost * LEVEL_COST_MULTIPLIER;
+  if (level > 0) return quote(levelUp, ITEM_COST_GROWTH, level, coins, amount, Infinity);
+  // Unlocking first, then any further levels bought together with it.
+  if (amount !== 'max') { const cost = itemLevelsCost(def, 0, amount); return { count: amount, cost, affordable: cost <= coins }; }
+  if (coins < def.baseCost) return { count: 1, cost: def.baseCost, affordable: false };
+  const more = maxAffordable(levelUp, ITEM_COST_GROWTH, 1, coins - def.baseCost);
+  return { count: 1 + more, cost: itemLevelsCost(def, 0, 1 + more), affordable: true };
+}
+
 export function quoteItem(state: GameState, id: ItemId, amount: BuyAmount): Quote {
   const def = menuItem(id);
   if (id.startsWith('sig:')) return { count: 0, cost: 0, affordable: false };
-  const q = quote(def.baseCost, ITEM_COST_GROWTH, state.items[id], state.coins, amount, Infinity);
+  const q = itemQuote(def, state.items[id], state.coins, amount);
   return isItemAvailable(state, id) ? q : { ...q, affordable: false };
 }
 

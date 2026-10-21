@@ -1,10 +1,10 @@
 /** Preregistered earned-capability union follow-up. Original v1 harness is unchanged. */
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync, readdirSync } from 'node:fs';
-import { INGREDIENTS, MENU, type ItemId, type UpgradeId } from '../src/game/data';
+import { INGREDIENTS, ITEM_COST_GROWTH, MENU, type ItemId, type UpgradeId } from '../src/game/data';
 import { openShop, type DayReport } from '../src/game/day';
 import { useDecor, DECOR_SLOTS, decorDef, comfort } from '../src/game/decor';
-import { bakeForForecast, buyItem, buyUpgrade, menuItems, restock, restockQuote, servingCost } from '../src/game/economy';
+import { bakeForForecast, buyUpgrade, isItemAvailable, menuItems, restock, restockQuote, servingCost, setOnMenu } from '../src/game/economy';
 import { buyFurniture, canPlace, COLS, FLOOR_ROWS, placeFurniture } from '../src/game/furniture';
 import { GOALS } from '../src/game/goals';
 import { unlockKitchen } from '../src/game/kitchen';
@@ -43,8 +43,19 @@ export function buildUnionPortfolio(route: FrontierRoute) {
     const cash = before - s.coins; ledger.push({ kind, id, cash, capital: cash - prepaidCare, prepaidCare });
     if (s.coins + 1e-6 < stockReserve) throw new Error('Union purchase consumed reserve');
   };
+  // The union was preregistered when every recipe level cost baseCost × 1.12^level. Level-ups
+  // now cost LEVEL_COST_MULTIPLIER times as much (2026-10-21); charge the frozen purchases at
+  // their historical price so the setup, ledger and expected cash stay exactly as registered.
+  const historicalRecipe = (id: ItemId) => {
+    const def = MENU.find(m => m.id === id)!, cost = def.baseCost * ITEM_COST_GROWTH ** s.items[id];
+    if (!isItemAvailable(s, id) || cost > s.coins) return false;
+    const unlocking = s.items[id] === 0;
+    s.coins -= cost; s.items[id] += 1;
+    if (unlocking && s.phase === 'prep') setOnMenu(s, id, true);
+    return true;
+  };
   if (UNION.kitchen) transact('kitchen', 'kitchen', () => unlockKitchen(s));
-  for (const m of MENU) while (s.items[m.id] < UNION.items[m.id]) transact('recipe', m.id, () => buyItem(s, m.id, 1));
+  for (const m of MENU) while (s.items[m.id] < UNION.items[m.id]) transact('recipe', m.id, () => historicalRecipe(m.id));
   for (const id of Object.keys(UNION.upgrades).sort() as UpgradeId[]) while (s.upgrades[id] < UNION.upgrades[id]) transact('upgrade', id, () => buyUpgrade(s, id, 1));
   for (const id of ['reading', 'greenhouse', 'terrace'] as RegionId[]) if (UNION.regions.includes(id)) transact('region', id, () => unlockRegion(s, id));
   for (const id of UNION.pets as CatId[]) transact('cat', id, () => adoptCat(s, id), catDef(id)!.careCost);

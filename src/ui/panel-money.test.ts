@@ -52,18 +52,19 @@ describe('purchase amount presentation', () => {
     setLocale(locale);
     const state = createInitialState(0); state.coins = 66;
     const { panel } = panelFor(state);
-    const buy = button('[data-buy="item:espresso"]');
-    expect(buy.querySelector('.cost')!.textContent).toBe('$8.96');
+    const buy = button('[data-buy="item:americano"]');
+    expect(buy.querySelector('.cost')!.textContent).toBe('$40');
     buy.click();
-    expect(state.coins).toBe(57.04);
-    expect(state.items.espresso).toBe(2);
-    expect(buy.querySelector('.cost')!.textContent).toBe(formatTransactionMoney(quoteItem(state, 'espresso', 1).cost));
+    expect(state.coins).toBe(26);
+    expect(state.items.americano).toBe(1);
+    // Unlocking redraws the menu list; the row now offers the first level-up.
+    expect(button('[data-buy="item:americano"]').querySelector('.cost')!.textContent).toBe(formatTransactionMoney(quoteItem(state, 'americano', 1).cost));
     panel.refresh();
-    expect(state.coins).toBe(57.04);
+    expect(state.coins).toBe(26);
   });
 
   it('offers exact details and a shortfall when a rounded price would appear affordable', () => {
-    const state = createInitialState(0); state.items.espresso = 2; state.coins = 10.03;
+    const state = createInitialState(0); state.items.espresso = 2; state.coins = 100.35;
     const { panel } = panelFor(state);
     document.body.insertAdjacentHTML('beforeend', '<div id="modal-root"></div>');
     const buy = button('[data-buy="item:espresso"]');
@@ -78,7 +79,7 @@ describe('purchase amount presentation', () => {
     expect(query('[role="dialog"]').textContent).toContain('$' + String(cost - state.coins));
     closeModal();
     expect(document.activeElement).toBe(details);
-    buy.click(); expect(state.coins).toBe(10.03);
+    buy.click(); expect(state.coins).toBe(100.35);
     state.coins = cost; panel.update();
     expect(buy.disabled).toBe(false);
     expect(details.textContent).toBe('Amounts');
@@ -105,17 +106,17 @@ describe('purchase amount presentation', () => {
   });
 
   it('quotes Max at activation time when a sale arrives between display refreshes', () => {
-    const state = createInitialState(0); state.coins = 10;
+    const state = createInitialState(0); state.coins = 100;
     panelFor(state);
     document.body.insertAdjacentHTML('beforeend', '<div id="modal-root"></div>');
     button('[data-amount="max"]').click();
     const oldCost = quoteItem(state, 'espresso', 'max').cost;
-    state.coins = 100;
+    state.coins = 300;
     const liveCost = quoteItem(state, 'espresso', 'max').cost;
     expect(liveCost).not.toBe(oldCost);
     button('[data-price-details="item:espresso"]').click();
     expect(query('[role="dialog"]').textContent).toContain('Price: $' + String(liveCost));
-    expect(query('[role="dialog"]').textContent).toContain('Balance: $100');
+    expect(query('[role="dialog"]').textContent).toContain('Balance: $300');
   });
 });
 

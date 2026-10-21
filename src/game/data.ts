@@ -74,7 +74,7 @@ export interface MenuItemDef {
   basePrice: number;
   /** Seconds a barista needs to make it (or plate it, for bakery items), before machine upgrades. */
   prepTime: number;
-  /** Cost to unlock (level 0 -> 1). Later levels grow by ITEM_COST_GROWTH. */
+  /** Cost to unlock (level 0 -> 1). Later levels cost LEVEL_COST_MULTIPLIER times as much, growing by ITEM_COST_GROWTH. */
   baseCost: number;
 }
 
@@ -161,6 +161,12 @@ export const UPGRADES: readonly UpgradeDef[] = [
 ];
 
 export const ITEM_COST_GROWTH = 1.12;
+/**
+ * A level-up costs this many times the dish's unlock price (before growth). Each level
+ * raises the price by a whole base price, so at the unlock price early levels paid for
+ * themselves within a few servings and the whole building was bought in about ten days.
+ */
+export const LEVEL_COST_MULTIPLIER = 10;
 /** Every item level listed here doubles that item's price. */
 export const PRICE_MILESTONES = [10, 25, 50, 100, 150, 200, 300] as const;
 
