@@ -10,7 +10,7 @@ import { styleStationMultiplier } from './styles';
 //   pastry fridge where cakes set, and the door to the pastry case).
 // The hand sink sits between storage and prep, and the dish pit is by the door,
 // where dirty plates come back in, away from the food.
-import { DAY_SECONDS, COOK_BATCH, type IngredientId, type ItemId } from './data';
+import { DAY_SECONDS, COOK_BATCHES, type IngredientId, type ItemId } from './data';
 import { cookCount, dayDemand, fillBakePlan, isBakery, menuItems, recipe, servingCost, servingsLeft, unlockedItems } from './economy';
 import { FLOOR_Y, areaOrigin, doorwayY, kitchenFloorY, kitchenHeight } from './layout';
 import { routeFloorSegment, type FloorObstacle, type FloorPoint } from './navigation';
@@ -244,24 +244,36 @@ export function batchSeconds(item: ItemId, state?: GameState): number {
   return seconds;
 }
 
-/** One shared estimate for the morning shelf, reorder level and kitchen workload. */
+/** Portions per batch at this kitchen's stage. */
+export const cookBatch = (state: GameState) => COOK_BATCHES[Math.max(0, Math.min(COOK_BATCHES.length - 1, state.upgrades.cook))];
+
+/**
+ * One shared estimate for the morning shelf, reorder level and kitchen workload. While
+ * the cooks can keep up, the morning bake only bridges until the first fresh batch. When
+ * the day's forecast is more than they can make, the morning bake covers it in full:
+ * baking ahead costs no cook time, and cooks who wait for a shelf to run low before
+ * starting would otherwise fall behind for the rest of the day.
+ */
 export function bakeryPlan(state: GameState): Map<ItemId, { rate: number; lead: number; morning: number; trigger: number }> {
   const demand = dayDemand(state);
   const dishes = menuItems(state).filter((m) => isBakery(m.id));
   const cooks = Math.max(1, cookCount(state));
-  const cycle = dishes.reduce((sum, m) => sum + batchSeconds(m.id, state), 0) / cooks;
+  const seconds = new Map(dishes.map((m) => [m.id, batchSeconds(m.id, state)]));
+  const cycle = dishes.reduce((sum, m) => sum + seconds.get(m.id)!, 0) / cooks;
+  const load = dishes.reduce((sum, m) => sum + (demand.get(m.id) ?? 0) / DAY_SECONDS * seconds.get(m.id)! / cookBatch(state), 0) / cooks;
   return new Map(dishes.map((m) => {
-    const rate = (demand.get(m.id) ?? 0) / DAY_SECONDS;
-    const lead = Math.max(batchSeconds(m.id, state), cycle);
+    const forecast = demand.get(m.id) ?? 0, rate = forecast / DAY_SECONDS;
+    const lead = Math.max(seconds.get(m.id)!, cycle);
     // At most a forecast's worth; slow-selling dishes need only one spare serving.
-    const trigger = Math.min(Math.ceil(rate * DAY_SECONDS), Math.max(1, Math.ceil(rate * lead) + 1));
-    return [m.id, { rate, lead, trigger, morning: trigger }];
+    const trigger = Math.min(Math.ceil(forecast), Math.max(1, Math.ceil(rate * lead) + 1));
+    const morning = state.kitchen && load > 1 ? Math.max(trigger, Math.ceil(forecast)) : trigger;
+    return [m.id, { rate, lead, trigger, morning }];
   }));
 }
 
 export function kitchenLoad(state: GameState): number {
   if (!state.kitchen) return 0;
-  return [...bakeryPlan(state)].reduce((sum, [id, p]) => sum + p.rate * batchSeconds(id, state) / COOK_BATCH, 0) / cookCount(state);
+  return [...bakeryPlan(state)].reduce((sum, [id, p]) => sum + p.rate * batchSeconds(id, state) / cookBatch(state), 0) / cookCount(state);
 }
 
 export function nextBatch(state: GameState, baking: readonly ItemId[]): { item: ItemId; n: number } | null {
@@ -271,7 +283,7 @@ export function nextBatch(state: GameState, baking: readonly ItemId[]): { item: 
     if (baking.includes(item)) continue;
     const left = state.shelf[item] ?? 0;
     if (left > plan.trigger) continue;
-    const n = Math.min(COOK_BATCH, servingsLeft(state, item), Math.max(1, Math.ceil(plan.rate * DAY_SECONDS)));
+    const n = Math.min(cookBatch(state), servingsLeft(state, item), Math.max(1, Math.ceil(plan.rate * DAY_SECONDS)));
     const urgency = left / Math.max(plan.rate, 0.001) - plan.lead;
     if (n >= 1 && (!best || urgency < best.urgency)) best = { item, n, urgency };
   }

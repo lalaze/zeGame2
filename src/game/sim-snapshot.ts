@@ -1,6 +1,6 @@
 import { signatureDefinition } from './signature-drinks';
 import { regularGuestDefinition } from './regular-guests';
-import { MAX_PASS_SLOTS, MENU } from './data';
+import { MAX_COOK_BATCH, MAX_PASS_SLOTS, MENU } from './data';
 import { MAX_SCENE_H, MIN_SCENE_H, TOTAL_TABLE_SPOTS } from './layout';
 import { CUSTOMER_CAST, validCustomerCastSnapshot, type CustomerCastSnapshot } from './customer-cast';
 import { STATION_SECONDS } from './kitchen';
@@ -42,7 +42,7 @@ const customer = (x: unknown) => obj(x) && walker(x) && look(x.look) && integer(
   ['vip','hasCup','soldOut','dineIn'].every((k) => typeof x[k] === 'boolean') && [null,'happy','sad'].includes(x.mood as null) &&
   (x.momentTip === undefined || finite(x.momentTip) && Number(x.momentTip) >= 0 && Number(x.momentTip) <= 1);
 const barista = (x: unknown) => obj(x) && look(x.look) && nullableId(x.customerId) && ['remaining','total','calling'].every((k) => finite(x[k]));
-const cook = (x: unknown) => obj(x) && walker(x) && look(x.look) && (x.batch === null || obj(x.batch) && item(x.batch.item) && integer(x.batch.n) && x.batch.n > 0 && x.batch.n <= 5 &&
+const cook = (x: unknown) => obj(x) && walker(x) && look(x.look) && (x.batch === null || obj(x.batch) && item(x.batch.item) && integer(x.batch.n) && x.batch.n > 0 && x.batch.n <= MAX_COOK_BATCH &&
   list(x.batch.steps, 16, (s) => typeof s === 'string' && Object.hasOwn(STATION_SECONDS, s)) && integer(x.batch.step) && x.batch.step < x.batch.steps.length && finite(x.batch.timer));
 const server = (x: unknown) => obj(x) && walker(x) && look(x.look) && ['idle','toPass','delivering','returning'].includes(String(x.phase)) && list(x.plates, 3, plate) && finite(x.ack);
 

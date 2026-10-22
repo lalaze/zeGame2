@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { COOK_BATCH } from './data';
+import { COOK_BATCHES } from './data';
+/** A first-stage kitchen. */
+const COOK_BATCH = COOK_BATCHES[0];
 import { openShop } from './day';
 import { recipe, servingCost } from './economy';
 import { acquireSaveSession, watchSavePage, SAVE_LOCK } from './save-session';

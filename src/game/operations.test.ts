@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { MENU, PRICE_MILESTONES, type ItemId } from './data';
 import { openShop } from './day';
 import { bakeForForecast, dayDemand, dayNeeds, itemPrice, milestoneMultiplier, restock, setBakePlan, suggestedBake } from './economy';
-import { bakeryPlan, cookHome, kitchenObstacles, kitchenPath, nextBatch, stationSpot } from './kitchen';
+import { bakeryPlan, cookHome, kitchenLoad, kitchenObstacles, kitchenPath, nextBatch, stationSpot } from './kitchen';
 import { areaBounds, doorwayY, FLOOR_Y } from './layout';
 import { segmentCrossesObstacle, type FloorPoint } from './navigation';
 import { OperationMonitor, operationStatus } from './operations';
@@ -98,6 +98,10 @@ describe('production planning', () => {
   });
   it('does not double-buy shelf goods or batches already paid for', () => {
     const s = ready(['roll']);
+    // A kitchen that keeps up bakes a small morning batch and refills during the day.
+    s.upgrades.cook = 2;
+    expect(kitchenLoad(s)).toBeLessThan(1);
+    bakeForForecast(s);
     const need = dayNeeds(s).flour!;
     openShop(s);
     const left = s.shelf.roll!;

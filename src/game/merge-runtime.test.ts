@@ -153,6 +153,8 @@ describe('merged service persistence and kitchen rules', () => {
 
   it('resets staff jobs, navigation, customer cycles and tap cooldown for a new café', () => {
     const s = shop(2); const sim = new Sim(rng()); tick(s, sim, 25);
+    // Bigger kitchens finish bigger batches quickly; catch a cook mid-batch.
+    for (let n = 0; n < 60 && !sim.cooks.some((c) => c.batch); n++) tick(s, sim, 1);
     expect(sim.cooks.some((c) => c.batch)).toBe(true);
     sim.reset();
     expect(sim.cooks).toEqual([]); expect(sim.customers).toEqual([]); expect(sim.rack).toEqual([]);

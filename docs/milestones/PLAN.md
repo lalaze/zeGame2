@@ -165,3 +165,12 @@ Expand the Pass and the room-based server limit removed the late-game cap on gue
 - **Greedy player:** its pastry shelves run out most days at the higher volume, so the smooth-day and rating milestones stay out of reach. Chapter 1 stops at 3 of 4, chapter 2 never completes, and chapter 3 finishes around day 40. That's the intended skill check, and the 3-of-4 rule keeps its track moving.
 
 The thresholds are unchanged.
+
+## Re-check after the kitchen changes (2026-10-21)
+
+With bigger kitchen batches and a morning bake that covers the forecast when the cooks can't (see [docs/kitchen](../kitchen/README.md)), pastry sold-outs fell to a few a day. 55 days, 5 seeds each:
+
+- **Careful player:** chapter 1 around day 23, chapter 3 around 25, chapter 4 around 37. The 4.0★ rating, which closes chapter 2, came around day 48: with empty shelves fixed, ratings of about 3.2–3.4★ are set by waiting times in a busy café.
+- **Greedy player:** chapter 1 around day 14 (its smooth day is back, on day 11), chapter 3 around 26, chapter 4 around 38; never 4.0★.
+
+The 4.0★ rating is now the slowest milestone in chapter 2. Thresholds are unchanged; if chapter 2 feels too slow in play, the rating threshold is the one to revisit.

@@ -1,5 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { COOK_BATCH, MENU } from './data';
+import { COOK_BATCHES, MENU } from './data';
+/** These kitchens are at their first stage. */
+const COOK_BATCH = COOK_BATCHES[0];
 import { openShop } from './day';
 import { buyUpgrade, cookCount, dayNeeds, isBakery } from './economy';
 import { canPlace } from './furniture';
@@ -20,6 +22,7 @@ import {
   nextBatch,
   stationSpot,
   unlockKitchen,
+  cookBatch,
   type Station,
 } from './kitchen';
 import { MAX_SCENE_H, MIN_SCENE_H, areaAtPoint, areaBounds, doorwayY, kitchenFloorY, kitchenHeight, resizeRoomPoint, roomRoute, setKitchenLevel, setSceneHeight } from './layout';
@@ -223,7 +226,8 @@ describe('the kitchen', () => {
           if (events.some((e) => e.type === 'restock' && e.item === item.id)) {
             const cook = sim.cooks[0];
             expect({ x: cook.x, y: cook.y }).toEqual({ x: 202, y: 88 });
-            expect(state.today.baked[item.id]).toBe(COOK_BATCH);
+            // Bigger kitchens bake bigger batches.
+            expect(state.today.baked[item.id]).toBe(cookBatch(state));
             delivered = true;
             state.phase = 'prep';
           }

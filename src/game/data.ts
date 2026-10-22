@@ -290,7 +290,12 @@ export const RECIPES: Record<StaticItemId, Partial<Record<IngredientId, number>>
 /** Morning-bake amounts change in steps of this many. */
 export const BAKE_STEP = 5;
 /** How many of a bread or pastry a cook bakes at a time. */
-export const COOK_BATCH = BAKE_STEP;
+/**
+ * Portions a cook makes per batch, by kitchen stage: a bigger kitchen means bigger trays,
+ * so the walk from storage to the door is shared by more portions.
+ */
+export const COOK_BATCHES = [BAKE_STEP, 7, 10] as const;
+export const MAX_COOK_BATCH = COOK_BATCHES[COOK_BATCHES.length - 1];
 
 /** Chance a customer adds a bakery item to a drink order, or a drink to a bakery order. */
 export const COMBO_CHANCE = 0.35;
