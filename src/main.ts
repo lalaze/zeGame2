@@ -3,6 +3,7 @@ import { RoomViewport } from './ui/room-viewport';
 import '@fontsource/pixelify-sans/400.css';
 import '@fontsource/pixelify-sans/600.css';
 import './style.css';
+import './ui/ledger.css';
 
 import { PlayFlow } from './ui/play-flow';
 import { pantryTaskContext } from './ui/play-flow-context';
@@ -49,6 +50,7 @@ import { checkMilestones, recordMomentAnswered } from './game/milestones';
 import { cafeTitle, milestoneName } from './ui/milestones';
 import { MomentDirector, type Moment, type MomentStage } from './game/moments';
 import { FullscreenDrawer } from './ui/fullscreen-drawer';
+import { updateLedgerTheme } from './ui/ledger-theme';
 import { ManagementShortcuts } from './ui/management-shortcuts';
 import { fitFullscreenRoom } from './ui/fullscreen-layout';
 import { ArrangeFocus } from './ui/arrange-focus';
@@ -481,6 +483,7 @@ function updateBrand(): void {
   const name = state.profile?.cafeName ?? t('app.title');
   $('hud-cafe-name').textContent = name;
   $('stage-sign-name').textContent = name;
+  $('drawer-cafe-name').textContent = name;
   // The latest milestone chapter's title, under the name.
   const title = cafeTitle(state), titleEl = $('hud-cafe-title');
   if (titleEl.textContent !== title) titleEl.textContent = title;
@@ -546,6 +549,9 @@ $('app').append(playFlow.element);
 
 
 function updateDayHud(): void {
+  updateLedgerTheme(state);
+  const ledgerDay = t('day.label', { n: state.day });
+  if ($('drawer-day').textContent !== ledgerDay) $('drawer-day').textContent = ledgerDay;
   updateReputationButton(state);
   updateRegularGuestsButton(state);
   updatePartnersButton(state);

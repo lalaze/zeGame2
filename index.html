@@ -172,7 +172,8 @@
         <button class="drawer-backdrop" id="drawer-backdrop" type="button" aria-label="Close management" tabindex="-1" hidden></button>
         <aside class="panel" id="management-panel" aria-labelledby="drawer-title" hidden>
           <header class="drawer-header">
-            <div><strong id="drawer-title">Manage café</strong><small class="drawer-pause" id="drawer-pause" hidden>Paused</small></div>
+            <div class="ledger-heading"><small id="drawer-cafe-name" class="ledger-cafe-name"></small><strong id="drawer-title">Café ledger</strong><small class="drawer-pause" id="drawer-pause" hidden>Paused</small></div>
+            <span id="drawer-day" class="ledger-day"></span>
             <button id="drawer-balance" type="button" class="pixel-btn small drawer-balance"></button>
             <button id="drawer-close" type="button" class="pixel-btn small" aria-label="Close management">×</button>
           </header>
@@ -186,6 +187,7 @@
           </nav>
           <div class="panel-scroll">
           <div class="goal" id="goal" hidden></div>
+          <div class="ledger-tools">
           <div class="buy-amount">
             <span data-i18n="buy.label">Buy</span>
             <button data-amount="1" class="chip active">x1</button>
@@ -198,6 +200,7 @@
             <button data-cat="tea" class="chip" data-i18n="catShort.tea">Tea</button>
             <button data-cat="bread" class="chip" data-i18n="catShort.bread">Bread</button>
             <button data-cat="pastry" class="chip" data-i18n="catShort.pastry">Sweets</button>
+          </div>
           </div>
           <div class="buy-amount pantry-amount" hidden>
             <span data-i18n="buy.label">Buy</span>
