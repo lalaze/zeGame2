@@ -1,6 +1,11 @@
 import { getLocale } from '../i18n';
 
 export const MAX_ROOM_ZOOM = 3;
+/** Leave room for the compact phone HUD while making people large enough to tap. */
+export function mobileRoomZoom(width: number, height: number, roomHeight: number): number {
+  if (width > 860 || width >= height || roomHeight <= 0) return 1;
+  return Math.max(1, Math.min(1.8, (height - 176) / roomHeight));
+}
 export function clampRoomPan(value: number, room: number, viewport: number, zoom: number): number {
   const limit = Math.max(0, (room * zoom - viewport) / 2);
   return Math.max(-limit, Math.min(limit, value));
@@ -27,8 +32,10 @@ export class RoomViewport {
   private abort = new AbortController();
   private previousTouchAction: string;
   private presentation = '';
+  private wasOverview = false;
   constructor(private canvas: HTMLCanvasElement, private stage: HTMLElement,
-    private enabled: () => boolean, private context: () => string, private overview?: RoomOverview) {
+    private enabled: () => boolean, private context: () => string, private overview?: RoomOverview,
+    private defaultZoom: () => number = () => 1) {
     this.previousTouchAction = canvas.style.touchAction;
     canvas.style.touchAction = 'none';
     this.controls.className = 'room-zoom-controls';
@@ -44,9 +51,8 @@ export class RoomViewport {
     this.minus.addEventListener('click', () => { if (enabled() && !this.overview?.isActive()) this.setZoom(this.zoom - .5); }, { signal });
     this.resetButton.addEventListener('click', () => {
       if (!this.enabled()) return;
-      this.reset();
       this.overview?.toggle();
-      this.apply();
+      this.reset();
     }, { signal });
     window.addEventListener('pointerdown', this.down, { capture: true, signal });
     window.addEventListener('pointermove', this.move, { capture: true, signal });
@@ -55,14 +61,20 @@ export class RoomViewport {
     window.addEventListener('blur', this.cancel, { signal });
     window.addEventListener('resize', this.onResize, { signal });
     document.addEventListener('visibilitychange', this.cancel, { signal });
-    this.apply();
+    this.reset();
   }
   refresh(): void {
+    if (this.wasOverview !== !!this.overview?.isActive()) this.reset();
     if (this.points.size && (!this.enabled() || this.overview?.isActive() || this.gestureContext !== this.context())) this.cancel();
     if (this.presentation !== `${this.enabled()}:${!!this.overview?.isActive()}`) this.apply();
   }
   refreshLabels(): void { this.apply(); }
-  reset(): void { this.cancel(); this.zoom = 1; this.x = this.y = 0; this.apply(); }
+  reset(): void {
+    this.cancel();
+    this.wasOverview = !!this.overview?.isActive();
+    this.zoom = this.wasOverview ? 1 : Math.max(1, Math.min(MAX_ROOM_ZOOM, this.defaultZoom()));
+    this.x = this.y = 0; this.apply();
+  }
   private onResize = () => this.reset();
   private cancel = () => { this.points.clear(); this.gestureContext = null; this.dragStart = null; this.dragging = false; };
   private down = (event: PointerEvent) => {

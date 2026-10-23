@@ -12,6 +12,17 @@ const node = <K extends keyof HTMLElementTagNameMap>(tag: K, text: string) => {
   const el = document.createElement(tag); el.textContent = text; return el;
 };
 
+/** The same read/dismiss actions become one short invitation on a phone. */
+function compactInvitation(hear: HTMLButtonElement, later: HTMLButtonElement, label: string, detail: string): void {
+  hear.classList.add('life-read'); later.classList.add('life-later');
+  const full = node('span', hear.textContent ?? ''); full.className = 'life-full-label';
+  const compact = node('span', label); compact.className = 'life-compact-label';
+  hear.replaceChildren(full, compact); hear.setAttribute('aria-label', `${label} · ${detail}`);
+  const laterFull = node('span', later.textContent ?? ''); laterFull.className = 'life-full-label';
+  const dismiss = node('span', '×'); dismiss.className = 'life-compact-label'; dismiss.setAttribute('aria-hidden', 'true');
+  later.setAttribute('aria-label', later.textContent ?? ''); later.replaceChildren(laterFull, dismiss);
+}
+
 /** One optional unlocked conversation per day. It never pauses service by itself. */
 export class CafeLife {
   readonly element = document.createElement('section');
@@ -35,6 +46,7 @@ export class CafeLife {
       const preview = node('p', t(wishEvent === 'map' ? 'wish.mina.map.title' : 'wish.mina.return'));
       const hear = node('button', t('wish.mina.notice.read')); hear.className = 'chip';
       const later = node('button', t('life.later')); later.className = 'chip';
+      compactInvitation(hear, later, heading.textContent!, preview.textContent!);
       const dismiss = () => { this.dismissed = true; this.element.hidden = true; };
       hear.addEventListener('click', () => {
         if (!hear.isConnected) return;
@@ -64,6 +76,7 @@ export class CafeLife {
         const heading = node('b', title), preview = node('p', t('life.preview', { title: t(guest.chapters[chapter].titleKey) }));
         const hear = node('button', t('life.read')); hear.className = 'chip';
         const later = node('button', t('life.later')); later.className = 'chip';
+        compactInvitation(hear, later, t('mobile.story', { name: t(guest.nameKey) }), preview.textContent!);
         const dismiss = () => { this.dismissed = true; this.element.hidden = true; };
         later.addEventListener('click', dismiss);
         hear.addEventListener('click', () => {

@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
 import { beforeEach, afterEach, it, expect, vi } from 'vitest';
-import { RoomViewport, clampRoomPan } from './room-viewport';
+import { RoomViewport, clampRoomPan, mobileRoomZoom } from './room-viewport';
 import { bindCanvasTaps, type CanvasTaps } from '../render/phaser/canvas-taps';
 let view: RoomViewport, taps: CanvasTaps, canvas: HTMLCanvasElement, allowed: boolean, context: string;
 const tap = vi.fn();
@@ -85,4 +85,29 @@ it('invalidates a held gesture when a dialog opens even if it closes before rele
  allowed=false;view.refresh();allowed=true;
  pointer('pointermove',280,2);pointer('pointerup',280,2);pointer('pointerup',100);
  expect(canvas.dataset.roomZoom).toBe('1');
+});
+
+it('starts a phone close enough to drag, keeps tap coordinates, and restores framing after the map', () => {
+  view.destroy();
+  let overview = false;
+  const stage = document.querySelector<HTMLElement>('#stage')!;
+  view = new RoomViewport(canvas, stage, () => allowed, () => context,
+    { isActive: () => overview, toggle: () => { overview = !overview; } }, () => 1.8);
+  expect(canvas.dataset.roomZoom).toBe('1.8');
+  pointer('pointerdown', 160); pointer('pointermove', 210); pointer('pointerup', 210);
+  expect(Number(canvas.dataset.roomPan!.split(',')[0])).toBe(50);
+  expect(tap).not.toHaveBeenCalled();
+  pointer('pointerdown', 160); pointer('pointerup', 160);
+  expect(tap).toHaveBeenCalledExactlyOnceWith(160 - 50 / 1.8, 120);
+  document.querySelector<HTMLButtonElement>('#room-zoom-reset')!.click();
+  expect(overview).toBe(true); expect(canvas.dataset.roomZoom).toBe('1');
+  document.querySelector<HTMLButtonElement>('#room-zoom-reset')!.click();
+  expect(canvas.dataset.roomZoom).toBe('1.8'); expect(canvas.dataset.roomPan).toBe('0,0');
+});
+
+it('fits the near view between phone controls and preserves the desktop and landscape fit', () => {
+  expect(mobileRoomZoom(390, 844, 292.5)).toBe(1.8);
+  expect(mobileRoomZoom(320, 568, 240) * 240).toBeLessThanOrEqual(568 - 176);
+  expect(mobileRoomZoom(844, 390, 292.5)).toBe(1);
+  expect(mobileRoomZoom(1440, 1000, 960)).toBe(1);
 });

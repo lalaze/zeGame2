@@ -1520,5 +1520,11 @@
   "memory.unavailable": "Not currently ready on the regular menu. They can order something else.",
   "memory.reportHeading": "A taste to remember",
   "memory.reportLearned": "{n} guests found a drink they want to have again.",
-  "memory.reportReturned": "{n} returning guests enjoyed a remembered drink again."
+  "memory.reportReturned": "{n} returning guests enjoyed a remembered drink again.",
+  "mobile.more": "More",
+  "mobile.controls": "Café controls",
+  "mobile.close": "Close café controls",
+  "mobile.actions": "Café actions",
+  "mobile.viewHint": "Drag to look around · Pinch to zoom",
+  "mobile.story": "{name} · A story to share"
 }

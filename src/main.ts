@@ -1,9 +1,11 @@
 import { showFirstOpening } from './ui/first-opening';
-import { RoomViewport } from './ui/room-viewport';
+import { RoomViewport, mobileRoomZoom } from './ui/room-viewport';
+import { MobileCafeHud } from './ui/mobile-cafe-hud';
 import '@fontsource/pixelify-sans/400.css';
 import '@fontsource/pixelify-sans/600.css';
 import './style.css';
 import './ui/ledger.css';
+import './ui/mobile-cafe-hud.css';
 
 import { PlayFlow } from './ui/play-flow';
 import { pantryTaskContext } from './ui/play-flow-context';
@@ -167,12 +169,12 @@ for (const type of ['click', 'pointerdown', 'keydown']) {
 const canvas = $<HTMLCanvasElement>('scene');
 const stage = $('stage');
 let roomViewport: RoomViewport | undefined;
+let mobileHud: MobileCafeHud | undefined;
 
 const sign = $('stage-sign');
 const stats = $('stage-stats');
 // Overlays never participate in room sizing. The original floor plan is unchanged.
 function fitCanvas(): void {
-  roomViewport?.reset();
   stats.hidden = sign.hidden = true;
   const previousHeight = sceneHeight();
   setSceneHeight(MIN_SCENE_H);
@@ -181,6 +183,7 @@ function fitCanvas(): void {
     scene.setOverview(scene.overview, true);
   }
   cafe.resize(fitFullscreenRoom(stage.clientWidth, stage.clientHeight, window.devicePixelRatio || 1, SCENE_W, sceneHeight()), { width: stage.clientWidth, height: stage.clientHeight });
+  roomViewport?.reset();
 }
 new ResizeObserver(fitCanvas).observe(stage);
 
@@ -248,6 +251,7 @@ function updateDrawerLabels(): void {
 }
 
 function updatePanelVisibility(restoreFocus = true): void {
+  if (!panelCollapsed) mobileHud?.close(false);
   panelRoot.setAttribute('aria-label', t('panel.title'));
   layout.classList.toggle('panel-collapsed', panelCollapsed);
   if (!panelCollapsed) shortcuts.setOpen(false);
@@ -370,8 +374,8 @@ stage.append($('day-hud'), $('cafe-style-btn'), $('open-btn'), arrangeBar);
 let arrangementHadDrawer = false;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const regionsUI = new RegionsUI($('area-edges'), $('region-card'), () => state, (area) => {
-  roomViewport?.reset();
   scene.moveToArea(area, reducedMotion.matches);
+  roomViewport?.reset();
   sceneWrap.classList.toggle('has-front-passage', !!adjacentArea(area, 'down'));
   canvas.setAttribute('aria-label', areaName(area));
   if (arrange && !isAreaOpen(state, area)) {
@@ -388,12 +392,14 @@ const regionsUI = new RegionsUI($('area-edges'), $('region-card'), () => state, 
   for (let i = 0; i < 16; i++) scene.sparkle(origin.x + 40 + Math.random() * 240, origin.y + 70 + Math.random() * 60);
   updateDayHud();
 }, (show) => {
-  roomViewport?.reset();
   scene.setOverview(show, reducedMotion.matches);
+  roomViewport?.reset();
   canvas.setAttribute('aria-label', show ? t('area.overviewHint') : areaName(scene.area));
 });
 
 function showArrange(): void {
+  mobileHud?.close(false);
+  roomViewport?.reset();
   if (arrange && !panelCollapsed) {
     arrangementHadDrawer = true;
     setPanelCollapsed(true, false);
@@ -608,6 +614,9 @@ function updateDayHud(): void {
   hint.hidden = !open || guide.simplify || !!storage.preference(HINT_KEY);
   updateGuide();
   playFlow.update();
+  mobileHud?.update(state.profile?.cafeName ?? 'Tiny Bean Café',
+    `${t('day.label', { n: state.day })} · ${open ? clock : t('day.closed')}`,
+    !open, text, condition);
 }
 
 for (const b of speedBtns) {
@@ -881,6 +890,7 @@ function locateResident(id: CatId): void {
   regionsUI.select(actor.area);
   scene.focusResidentCat(id, reducedMotion.matches);
   catLocateExit.hidden = false;
+  roomViewport?.reset();
   catLocateExit.focus({ preventScroll: true });
   toast(t('pet.living.located', { name: t(`pet.${id}.name`) }));
 }
@@ -1024,6 +1034,7 @@ window.addEventListener('keydown', (e) => {
   // Preserve native activation and editing; Esc can still close a dialog.
   if (isComposingKey(e)) return;
   const onboarding = !!document.querySelector('.onboard-overlay');
+  if (!isModalOpen() && !onboarding && mobileHud?.handleKey(e)) return;
   if (usesNativeKeyboard(e.target) && e.key !== 'Escape') return;
   if (e.key === 'Escape' && panel.tablePreviewRequested && !isModalOpen()) {
     panel.clearTablePreview();
@@ -1130,7 +1141,10 @@ function frame(dt: number): void {
   uiTimer -= dt;
   if (uiTimer <= 0) {
     uiTimer = 0.25;
-    cafeLife.update(state, sim.customers, !scene.paused && panelCollapsed && !arrange && scene.area === 'main' && !scene.overview);
+    // The frame contract test evaluates this function in isolation without the
+    // mobile HUD instance; keep that harness (and early loading frames) safe.
+    const mobileToolsOpen = typeof mobileHud !== 'undefined' && !!mobileHud?.expanded;
+    cafeLife.update(state, sim.customers, !scene.paused && panelCollapsed && !mobileToolsOpen && !arrange && scene.area === 'main' && !scene.overview);
     const rate =
       state.phase !== 'prep'
         ? t('hud.today', { money: formatMoney(state.today.revenue) })
@@ -1148,13 +1162,21 @@ function frame(dt: number): void {
 
 const cafe = new CafeGame(canvas, scene, sim, () => state, {
   tick: (dt) => { roomViewport?.refresh(); frame(dt); }, pointerDown, pointerMove, interactionState: () => arrange,
-  interactionEnabled: () => startupComplete && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused),
+  interactionEnabled: () => startupComplete && !mobileHud?.expanded && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused),
   loadingProgress: (loaded, total) => loading.progress(loaded, total),
 });
 roomViewport = new RoomViewport(canvas, stage,
   () => startupComplete && !scene.panning && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused),
   () => [scene.area, scene.overview, arrange?.mode, arrange?.mode === 'place' ? arrange.id : '', state.phase].join(':'),
-  { isActive: () => scene.overview, toggle: () => regionsUI.toggleOverview() });
+  { isActive: () => scene.overview, toggle: () => regionsUI.toggleOverview() },
+  () => arrange || !catLocateExit.hidden || !isAreaOpen(state, scene.area) ? 1
+    : mobileRoomZoom(stage.clientWidth, stage.clientHeight, canvas.parentElement!.clientHeight));
+mobileHud = new MobileCafeHud($('app'), {
+  money: document.querySelector<HTMLElement>('.money')!, day: $('day-hud'), status: operationBtn,
+  people: document.querySelector<HTMLElement>('.cafe-status-bar')!, style: $('cafe-style-btn'),
+  settings: $<HTMLButtonElement>('settings-btn'), pantry: playFlow.pantryButton, help: playFlow.helpButton,
+  open: openBtn, manage: panelToggle, zoom: $('room-zoom-controls'), overview: $<HTMLButtonElement>('room-zoom-reset'),
+});
 fitCanvas();
 panel.update();
 regionsUI.select('main');
@@ -1187,6 +1209,7 @@ waitForStartupReady(cafe.ready, document.fonts.ready).then(() =>
   clearInterval(autosaveTimer);
   session.close();
   loading.fail(error);
+  mobileHud?.destroy();
   roomViewport?.destroy();
   cafe.destroy();
 });

@@ -94,7 +94,8 @@ export class FirstServiceGuide {
     // Steps shown during service open folded, so the card does not cover the dining room.
     const entering = this.shownStep !== step;
     this.shownStep = step;
-    const detailsOpen = entering && (step === 'close' || step === 'complete') ? false
+    const detailsOpen = entering && (step === 'close' || step === 'complete'
+      || (step === 'observe' && window.matchMedia('(max-width: 860px)').matches)) ? false
       : this.element.querySelector<HTMLDetailsElement>('.guide-details')?.open ?? (step === 'stock' || step === 'prepare' || step === 'observe');
     const focused = (document.activeElement as HTMLElement | null)?.dataset.guideAction;
     const hadFocus = this.element.contains(document.activeElement);

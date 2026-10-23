@@ -1520,5 +1520,11 @@
   "memory.unavailable": "当前常规菜单或原料还没备好这杯，客人会照常选其他餐品。",
   "memory.reportHeading": "被记住的味道",
   "memory.reportLearned": "有 {n} 位客人记住了喜欢的饮品，下次还想再来一杯。",
-  "memory.reportReturned": "有 {n} 位回头客又喝到了之前记住的味道。"
+  "memory.reportReturned": "有 {n} 位回头客又喝到了之前记住的味道。",
+  "mobile.more": "更多",
+  "mobile.controls": "店内操作",
+  "mobile.close": "关闭店内操作",
+  "mobile.actions": "咖啡馆操作",
+  "mobile.viewHint": "拖动查看 · 双指缩放",
+  "mobile.story": "{name} · 有新故事"
 }
