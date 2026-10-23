@@ -1,0 +1,20 @@
+{
+  "method": "Synthetic valid empty late-day café, 0.1 simulation second before closing. Actual Sim.update starts and completes batch, then actual closeShop settles it; no source mutation.",
+  "started": {
+    "time": 179.95000000000002,
+    "customers": 0,
+    "batches": {
+      "roll": 5
+    },
+    "cost": 20
+  },
+  "duration": 202.45000000000513,
+  "served": 0,
+  "baked": {
+    "roll": 5
+  },
+  "stale": {
+    "roll": 5
+  },
+  "profit": -20
+}

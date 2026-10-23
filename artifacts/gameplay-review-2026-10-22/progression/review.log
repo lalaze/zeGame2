@@ -1,0 +1,19 @@
+(node:36558) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36586) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+ RUN  v5.0.3 /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+
+(node:36587) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+stdout | artifacts/gameplay-review-2026-10-22/progression/review.test.ts > records isolated current mechanics and paired pure-tea service samples
+{"summary":[{"marketing":0,"custom":false,"served":30.2,"missed":0,"profit":247.4,"rating":4.009677419354839},{"marketing":0,"custom":true,"served":44,"missed":0,"profit":443,"rating":4.095242866334881},{"marketing":4,"custom":false,"served":39,"missed":0,"profit":337.8,"rating":3.446153846153846},{"marketing":4,"custom":true,"served":80.6,"missed":0,"profit":808.55,"rating":4.298800000000004},{"marketing":12,"custom":false,"served":39,"missed":0,"profit":316.2,"rating":3.194871794871795},{"marketing":12,"custom":true,"served":104,"missed":0,"profit":1115,"rating":4.237600000000002}],"goalGate":{"day":12,"served":1500,"focus":"garden","current":"latte","complete":false,"milestonesStarted":false},"catGate":{"owned":["ginger","tabby","black"],"cash":98800,"fourthAdoption":false},"staffing":{"actualServers":6,"namedPartnerSlots":3}}
+
+ ✓ artifacts/gameplay-review-2026-10-22/progression/review.test.ts > records isolated current mechanics and paired pure-tea service samples 728ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  05:41:08
+   Duration  921ms (tests 85%, transform 12%, import 2%)
+

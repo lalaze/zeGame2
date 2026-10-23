@@ -31,32 +31,32 @@
       "seconds": 300,
       "served": 52,
       "throughputPerMinute": 10.4,
-      "meanPaidWaitSeconds": 8.082692307692295,
+      "meanPaidWaitSeconds": 8.132692307692293,
       "paidWaitSamples": 52,
-      "revenue": 818.6783999999994,
-      "ingredientCost": 218,
+      "revenue": 824.9699999999995,
+      "ingredientCost": 194,
       "petCost": 38.00000000000226,
-      "profit": 562.6783999999972,
+      "profit": 592.9699999999972,
       "trainingCapitalCost": 0,
-      "profitAfterTrainingCapital": 562.6783999999972,
-      "averageTicket": 15.743815384615374,
+      "profitAfterTrainingCapital": 592.9699999999972,
+      "averageTicket": 15.864807692307682,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 25,
+      "staleCost": 0,
       "routeHandoffs": {
         "tableServed": 24,
         "catServed": 47,
-        "fastServed": 10,
+        "fastServed": 9,
         "teaPairs": 4
       },
       "jobs": {
         "yue": 24,
         "lin": 25,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -66,32 +66,32 @@
       "seconds": 300,
       "served": 52,
       "throughputPerMinute": 10.4,
-      "meanPaidWaitSeconds": 8.001923076923065,
+      "meanPaidWaitSeconds": 7.951923076923065,
       "paidWaitSamples": 52,
-      "revenue": 934.3667999999994,
-      "ingredientCost": 225,
+      "revenue": 829.1215999999994,
+      "ingredientCost": 199,
       "petCost": 38.00000000000226,
-      "profit": 671.3667999999972,
+      "profit": 592.1215999999971,
       "trainingCapitalCost": 240,
-      "profitAfterTrainingCapital": 431.36679999999717,
-      "averageTicket": 17.968592307692298,
+      "profitAfterTrainingCapital": 352.1215999999971,
+      "averageTicket": 15.944646153846142,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 30,
+      "staleCost": 5,
       "routeHandoffs": {
         "tableServed": 26,
-        "catServed": 49,
+        "catServed": 50,
         "fastServed": 7,
-        "teaPairs": 7
+        "teaPairs": 6
       },
       "jobs": {
         "yue": 26,
-        "lin": 24,
-        "mei": 4
+        "lin": 23,
+        "mei": 3
       }
     },
     {
@@ -104,11 +104,11 @@
       "meanPaidWaitSeconds": 7.555102040816315,
       "paidWaitSamples": 49,
       "revenue": 742.3231999999997,
-      "ingredientCost": 219,
+      "ingredientCost": 194,
       "petCost": 38.00000000000226,
-      "profit": 485.3231999999974,
+      "profit": 510.3231999999974,
       "trainingCapitalCost": 240,
-      "profitAfterTrainingCapital": 245.32319999999743,
+      "profitAfterTrainingCapital": 270.3231999999974,
       "averageTicket": 15.149453061224484,
       "missed": 0,
       "queueLost": 0,
@@ -116,7 +116,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 45,
+      "staleCost": 20,
       "routeHandoffs": {
         "tableServed": 24,
         "catServed": 47,
@@ -126,7 +126,7 @@
       "jobs": {
         "yue": 24,
         "lin": 23,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -134,34 +134,34 @@
       "training": "barista-a",
       "seed": 731,
       "seconds": 300,
-      "served": 49,
-      "throughputPerMinute": 9.8,
-      "meanPaidWaitSeconds": 7.799999999999988,
-      "paidWaitSamples": 49,
-      "revenue": 759.5715999999994,
-      "ingredientCost": 214,
+      "served": 50,
+      "throughputPerMinute": 10,
+      "meanPaidWaitSeconds": 7.535999999999989,
+      "paidWaitSamples": 50,
+      "revenue": 849.7083999999995,
+      "ingredientCost": 191,
       "petCost": 38.00000000000226,
-      "profit": 507.57159999999715,
+      "profit": 620.7083999999973,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 427.57159999999715,
-      "averageTicket": 15.501461224489784,
+      "profitAfterTrainingCapital": 540.7083999999973,
+      "averageTicket": 16.99416799999999,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 35,
+      "staleCost": 15,
       "routeHandoffs": {
-        "tableServed": 24,
-        "catServed": 47,
-        "fastServed": 8,
+        "tableServed": 25,
+        "catServed": 49,
+        "fastServed": 7,
         "teaPairs": 3
       },
       "jobs": {
-        "yue": 24,
+        "yue": 25,
         "lin": 23,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -171,32 +171,32 @@
       "seconds": 300,
       "served": 53,
       "throughputPerMinute": 10.6,
-      "meanPaidWaitSeconds": 7.116981132075463,
+      "meanPaidWaitSeconds": 7.171698113207538,
       "paidWaitSamples": 53,
-      "revenue": 813.5851999999995,
-      "ingredientCost": 218,
+      "revenue": 819.8767999999995,
+      "ingredientCost": 194,
       "petCost": 38.00000000000226,
-      "profit": 557.5851999999973,
+      "profit": 587.8767999999973,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 477.58519999999726,
-      "averageTicket": 15.350664150943388,
+      "profitAfterTrainingCapital": 507.8767999999973,
+      "averageTicket": 15.469373584905652,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 30,
+      "staleCost": 5,
       "routeHandoffs": {
         "tableServed": 22,
         "catServed": 51,
-        "fastServed": 11,
+        "fastServed": 10,
         "teaPairs": 3
       },
       "jobs": {
         "yue": 22,
         "lin": 26,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -206,14 +206,14 @@
       "seconds": 300,
       "served": 51,
       "throughputPerMinute": 10.2,
-      "meanPaidWaitSeconds": 8.029411764705868,
+      "meanPaidWaitSeconds": 8.064705882352927,
       "paidWaitSamples": 51,
       "revenue": 822.8299999999994,
-      "ingredientCost": 223,
+      "ingredientCost": 198,
       "petCost": 38.00000000000226,
-      "profit": 561.8299999999971,
+      "profit": 586.8299999999971,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 481.8299999999971,
+      "profitAfterTrainingCapital": 506.8299999999971,
       "averageTicket": 16.13392156862744,
       "missed": 0,
       "queueLost": 0,
@@ -221,17 +221,17 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 30,
+      "staleCost": 5,
       "routeHandoffs": {
         "tableServed": 24,
         "catServed": 49,
         "fastServed": 7,
-        "teaPairs": 5
+        "teaPairs": 6
       },
       "jobs": {
         "yue": 24,
         "lin": 23,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -244,11 +244,11 @@
       "meanPaidWaitSeconds": 7.771153846153835,
       "paidWaitSamples": 52,
       "revenue": 921.3555999999993,
-      "ingredientCost": 216,
+      "ingredientCost": 191,
       "petCost": 38.00000000000226,
-      "profit": 667.355599999997,
+      "profit": 692.355599999997,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 587.355599999997,
+      "profitAfterTrainingCapital": 612.355599999997,
       "averageTicket": 17.71837692307691,
       "missed": 1,
       "queueLost": 0,
@@ -256,7 +256,7 @@
       "doorLost": 0,
       "soldOut": 1,
       "unfinishedAtClose": 0,
-      "staleCost": 25,
+      "staleCost": 0,
       "routeHandoffs": {
         "tableServed": 22,
         "catServed": 51,
@@ -266,7 +266,7 @@
       "jobs": {
         "yue": 22,
         "lin": 25,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -276,32 +276,32 @@
       "seconds": 300,
       "served": 52,
       "throughputPerMinute": 10.4,
-      "meanPaidWaitSeconds": 8.082692307692295,
+      "meanPaidWaitSeconds": 8.132692307692293,
       "paidWaitSamples": 52,
-      "revenue": 818.6783999999994,
-      "ingredientCost": 218,
+      "revenue": 824.9699999999995,
+      "ingredientCost": 194,
       "petCost": 38.00000000000226,
-      "profit": 562.6783999999972,
+      "profit": 592.9699999999972,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 482.67839999999717,
-      "averageTicket": 15.743815384615374,
+      "profitAfterTrainingCapital": 512.9699999999972,
+      "averageTicket": 15.864807692307682,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 25,
+      "staleCost": 0,
       "routeHandoffs": {
         "tableServed": 24,
         "catServed": 47,
-        "fastServed": 10,
+        "fastServed": 9,
         "teaPairs": 4
       },
       "jobs": {
         "yue": 24,
         "lin": 25,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -311,32 +311,32 @@
       "seconds": 300,
       "served": 52,
       "throughputPerMinute": 10.4,
-      "meanPaidWaitSeconds": 8.092307692307678,
+      "meanPaidWaitSeconds": 8.132692307692293,
       "paidWaitSamples": 52,
-      "revenue": 840.0783999999994,
-      "ingredientCost": 218,
+      "revenue": 824.9699999999995,
+      "ingredientCost": 194,
       "petCost": 38.00000000000226,
-      "profit": 584.0783999999971,
+      "profit": 592.9699999999972,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 504.07839999999715,
-      "averageTicket": 16.155353846153837,
+      "profitAfterTrainingCapital": 512.9699999999972,
+      "averageTicket": 15.864807692307682,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 20,
+      "staleCost": 0,
       "routeHandoffs": {
         "tableServed": 24,
         "catServed": 47,
-        "fastServed": 10,
-        "teaPairs": 5
+        "fastServed": 9,
+        "teaPairs": 4
       },
       "jobs": {
         "yue": 24,
         "lin": 25,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -349,11 +349,11 @@
       "meanPaidWaitSeconds": 10.248148148148125,
       "paidWaitSamples": 54,
       "revenue": 1120.2900000000002,
-      "ingredientCost": 282,
+      "ingredientCost": 257,
       "petCost": 38.00000000000226,
-      "profit": 800.2899999999979,
+      "profit": 825.2899999999979,
       "trainingCapitalCost": 0,
-      "profitAfterTrainingCapital": 800.2899999999979,
+      "profitAfterTrainingCapital": 825.2899999999979,
       "averageTicket": 20.746111111111116,
       "missed": 1,
       "queueLost": 0,
@@ -361,7 +361,7 @@
       "doorLost": 0,
       "soldOut": 1,
       "unfinishedAtClose": 0,
-      "staleCost": 30,
+      "staleCost": 5,
       "routeHandoffs": {
         "tableServed": 29,
         "catServed": 52,
@@ -371,7 +371,7 @@
       "jobs": {
         "yue": 29,
         "lin": 25,
-        "mei": 6
+        "mei": 5
       }
     },
     {
@@ -384,11 +384,11 @@
       "meanPaidWaitSeconds": 9.427999999999981,
       "paidWaitSamples": 50,
       "revenue": 1051.81,
-      "ingredientCost": 271,
+      "ingredientCost": 246,
       "petCost": 38.00000000000226,
-      "profit": 742.8099999999977,
+      "profit": 767.8099999999977,
       "trainingCapitalCost": 240,
-      "profitAfterTrainingCapital": 502.8099999999977,
+      "profitAfterTrainingCapital": 527.8099999999977,
       "averageTicket": 21.036199999999997,
       "missed": 1,
       "queueLost": 0,
@@ -396,7 +396,7 @@
       "doorLost": 0,
       "soldOut": 1,
       "unfinishedAtClose": 0,
-      "staleCost": 25,
+      "staleCost": 0,
       "routeHandoffs": {
         "tableServed": 25,
         "catServed": 47,
@@ -406,7 +406,7 @@
       "jobs": {
         "yue": 25,
         "lin": 25,
-        "mei": 6
+        "mei": 5
       }
     },
     {
@@ -419,11 +419,11 @@
       "meanPaidWaitSeconds": 10.851999999999977,
       "paidWaitSamples": 50,
       "revenue": 1182.3500000000001,
-      "ingredientCost": 284,
+      "ingredientCost": 259,
       "petCost": 38.00000000000226,
-      "profit": 860.3499999999979,
+      "profit": 885.3499999999979,
       "trainingCapitalCost": 240,
-      "profitAfterTrainingCapital": 620.3499999999979,
+      "profitAfterTrainingCapital": 645.3499999999979,
       "averageTicket": 23.647000000000002,
       "missed": 0,
       "queueLost": 0,
@@ -431,7 +431,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 40,
+      "staleCost": 15,
       "routeHandoffs": {
         "tableServed": 24,
         "catServed": 48,
@@ -441,7 +441,7 @@
       "jobs": {
         "yue": 24,
         "lin": 25,
-        "mei": 6
+        "mei": 5
       }
     },
     {
@@ -451,22 +451,22 @@
       "seconds": 300,
       "served": 51,
       "throughputPerMinute": 10.2,
-      "meanPaidWaitSeconds": 9.737254901960767,
+      "meanPaidWaitSeconds": 9.792156862745081,
       "paidWaitSamples": 51,
-      "revenue": 1301.12,
-      "ingredientCost": 282,
+      "revenue": 1307.54,
+      "ingredientCost": 258,
       "petCost": 38.00000000000226,
-      "profit": 981.1199999999976,
+      "profit": 1011.5399999999977,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 901.1199999999976,
-      "averageTicket": 25.512156862745098,
+      "profitAfterTrainingCapital": 931.5399999999977,
+      "averageTicket": 25.638039215686273,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 30,
+      "staleCost": 5,
       "routeHandoffs": {
         "tableServed": 23,
         "catServed": 50,
@@ -476,7 +476,7 @@
       "jobs": {
         "yue": 23,
         "lin": 26,
-        "mei": 6
+        "mei": 5
       }
     },
     {
@@ -489,11 +489,11 @@
       "meanPaidWaitSeconds": 10.657999999999982,
       "paidWaitSamples": 50,
       "revenue": 1182.3500000000001,
-      "ingredientCost": 284,
+      "ingredientCost": 259,
       "petCost": 38.00000000000226,
-      "profit": 860.3499999999979,
+      "profit": 885.3499999999979,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 780.3499999999979,
+      "profitAfterTrainingCapital": 805.3499999999979,
       "averageTicket": 23.647000000000002,
       "missed": 0,
       "queueLost": 0,
@@ -501,7 +501,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 40,
+      "staleCost": 15,
       "routeHandoffs": {
         "tableServed": 24,
         "catServed": 48,
@@ -511,7 +511,7 @@
       "jobs": {
         "yue": 24,
         "lin": 25,
-        "mei": 6
+        "mei": 5
       }
     },
     {
@@ -521,14 +521,14 @@
       "seconds": 300,
       "served": 48,
       "throughputPerMinute": 9.6,
-      "meanPaidWaitSeconds": 10.78749999999998,
+      "meanPaidWaitSeconds": 10.760416666666645,
       "paidWaitSamples": 48,
       "revenue": 1087.12,
-      "ingredientCost": 278,
+      "ingredientCost": 253,
       "petCost": 38.00000000000226,
-      "profit": 771.1199999999976,
+      "profit": 796.1199999999976,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 691.1199999999976,
+      "profitAfterTrainingCapital": 716.1199999999976,
       "averageTicket": 22.64833333333333,
       "missed": 1,
       "queueLost": 0,
@@ -536,17 +536,17 @@
       "doorLost": 0,
       "soldOut": 1,
       "unfinishedAtClose": 0,
-      "staleCost": 25,
+      "staleCost": 0,
       "routeHandoffs": {
         "tableServed": 21,
         "catServed": 46,
-        "fastServed": 3,
+        "fastServed": 4,
         "teaPairs": 9
       },
       "jobs": {
         "yue": 21,
         "lin": 25,
-        "mei": 6
+        "mei": 5
       }
     },
     {
@@ -556,32 +556,32 @@
       "seconds": 300,
       "served": 51,
       "throughputPerMinute": 10.2,
-      "meanPaidWaitSeconds": 10.529411764705863,
+      "meanPaidWaitSeconds": 11.305882352941154,
       "paidWaitSamples": 51,
-      "revenue": 985.4700000000001,
-      "ingredientCost": 276,
+      "revenue": 1170.58,
+      "ingredientCost": 255,
       "petCost": 38.00000000000226,
-      "profit": 671.4699999999979,
+      "profit": 877.5799999999977,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 591.4699999999979,
-      "averageTicket": 19.32294117647059,
+      "profitAfterTrainingCapital": 797.5799999999977,
+      "averageTicket": 22.95254901960784,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 45,
+      "staleCost": 5,
       "routeHandoffs": {
-        "tableServed": 30,
-        "catServed": 49,
-        "fastServed": 4,
-        "teaPairs": 5
+        "tableServed": 29,
+        "catServed": 47,
+        "fastServed": 2,
+        "teaPairs": 7
       },
       "jobs": {
-        "yue": 30,
-        "lin": 25,
-        "mei": 6
+        "yue": 29,
+        "lin": 26,
+        "mei": 5
       }
     },
     {
@@ -594,11 +594,11 @@
       "meanPaidWaitSeconds": 10.248148148148125,
       "paidWaitSamples": 54,
       "revenue": 1120.2900000000002,
-      "ingredientCost": 282,
+      "ingredientCost": 257,
       "petCost": 38.00000000000226,
-      "profit": 800.2899999999979,
+      "profit": 825.2899999999979,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 720.2899999999979,
+      "profitAfterTrainingCapital": 745.2899999999979,
       "averageTicket": 20.746111111111116,
       "missed": 1,
       "queueLost": 0,
@@ -606,7 +606,7 @@
       "doorLost": 0,
       "soldOut": 1,
       "unfinishedAtClose": 0,
-      "staleCost": 30,
+      "staleCost": 5,
       "routeHandoffs": {
         "tableServed": 29,
         "catServed": 52,
@@ -616,7 +616,7 @@
       "jobs": {
         "yue": 29,
         "lin": 25,
-        "mei": 6
+        "mei": 5
       }
     },
     {
@@ -624,34 +624,34 @@
       "training": "cook-b",
       "seed": 731,
       "seconds": 300,
-      "served": 51,
-      "throughputPerMinute": 10.2,
-      "meanPaidWaitSeconds": 10.46862745098037,
-      "paidWaitSamples": 51,
-      "revenue": 1143.8299999999997,
-      "ingredientCost": 277,
+      "served": 52,
+      "throughputPerMinute": 10.4,
+      "meanPaidWaitSeconds": 10.3230769230769,
+      "paidWaitSamples": 52,
+      "revenue": 1132.06,
+      "ingredientCost": 254,
       "petCost": 38.00000000000226,
-      "profit": 828.8299999999974,
+      "profit": 840.0599999999977,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 748.8299999999974,
-      "averageTicket": 22.42803921568627,
+      "profitAfterTrainingCapital": 760.0599999999977,
+      "averageTicket": 21.770384615384614,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 20,
+      "staleCost": 0,
       "routeHandoffs": {
         "tableServed": 26,
-        "catServed": 48,
-        "fastServed": 2,
+        "catServed": 49,
+        "fastServed": 3,
         "teaPairs": 8
       },
       "jobs": {
         "yue": 26,
-        "lin": 26,
-        "mei": 6
+        "lin": 27,
+        "mei": 5
       }
     },
     {
@@ -664,11 +664,11 @@
       "meanPaidWaitSeconds": 7.376470588235284,
       "paidWaitSamples": 51,
       "revenue": 786.1503999999999,
-      "ingredientCost": 227,
+      "ingredientCost": 177,
       "petCost": 38.00000000000226,
-      "profit": 521.1503999999976,
+      "profit": 571.1503999999976,
       "trainingCapitalCost": 0,
-      "profitAfterTrainingCapital": 521.1503999999976,
+      "profitAfterTrainingCapital": 571.1503999999976,
       "averageTicket": 15.414713725490193,
       "missed": 0,
       "queueLost": 0,
@@ -676,7 +676,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 50,
+      "staleCost": 0,
       "routeHandoffs": {
         "tableServed": 20,
         "catServed": 49,
@@ -686,7 +686,7 @@
       "jobs": {
         "yue": 20,
         "lin": 23,
-        "mei": 4
+        "mei": 2
       }
     },
     {
@@ -699,11 +699,11 @@
       "meanPaidWaitSeconds": 6.928846153846144,
       "paidWaitSamples": 52,
       "revenue": 968.9919999999998,
-      "ingredientCost": 220,
+      "ingredientCost": 195,
       "petCost": 38.00000000000226,
-      "profit": 710.9919999999976,
+      "profit": 735.9919999999976,
       "trainingCapitalCost": 240,
-      "profitAfterTrainingCapital": 470.9919999999976,
+      "profitAfterTrainingCapital": 495.9919999999976,
       "averageTicket": 18.634461538461537,
       "missed": 0,
       "queueLost": 0,
@@ -711,7 +711,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 40,
+      "staleCost": 15,
       "routeHandoffs": {
         "tableServed": 21,
         "catServed": 50,
@@ -721,7 +721,7 @@
       "jobs": {
         "yue": 21,
         "lin": 26,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -729,34 +729,34 @@
       "training": "all-b",
       "seed": 731,
       "seconds": 300,
-      "served": 52,
-      "throughputPerMinute": 10.4,
-      "meanPaidWaitSeconds": 6.913461538461528,
-      "paidWaitSamples": 52,
-      "revenue": 806.3947999999999,
-      "ingredientCost": 219,
+      "served": 51,
+      "throughputPerMinute": 10.2,
+      "meanPaidWaitSeconds": 7.074509803921559,
+      "paidWaitSamples": 51,
+      "revenue": 806.0523999999999,
+      "ingredientCost": 198,
       "petCost": 38.00000000000226,
-      "profit": 549.3947999999976,
+      "profit": 570.0523999999976,
       "trainingCapitalCost": 240,
-      "profitAfterTrainingCapital": 309.39479999999764,
-      "averageTicket": 15.507592307692306,
+      "profitAfterTrainingCapital": 330.05239999999765,
+      "averageTicket": 15.804949019607841,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 45,
+      "staleCost": 25,
       "routeHandoffs": {
         "tableServed": 21,
-        "catServed": 49,
-        "fastServed": 12,
-        "teaPairs": 3
+        "catServed": 48,
+        "fastServed": 11,
+        "teaPairs": 4
       },
       "jobs": {
         "yue": 21,
-        "lin": 24,
-        "mei": 4
+        "lin": 23,
+        "mei": 3
       }
     },
     {
@@ -766,22 +766,22 @@
       "seconds": 300,
       "served": 52,
       "throughputPerMinute": 10.4,
-      "meanPaidWaitSeconds": 7.5461538461538336,
+      "meanPaidWaitSeconds": 7.599999999999986,
       "paidWaitSamples": 52,
-      "revenue": 872.1356000000001,
-      "ingredientCost": 226,
+      "revenue": 878.5556,
+      "ingredientCost": 202,
       "petCost": 38.00000000000226,
-      "profit": 608.1355999999978,
+      "profit": 638.5555999999978,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 528.1355999999978,
-      "averageTicket": 16.77183846153846,
+      "profitAfterTrainingCapital": 558.5555999999978,
+      "averageTicket": 16.8953,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 30,
+      "staleCost": 5,
       "routeHandoffs": {
         "tableServed": 21,
         "catServed": 49,
@@ -791,7 +791,7 @@
       "jobs": {
         "yue": 21,
         "lin": 26,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -804,11 +804,11 @@
       "meanPaidWaitSeconds": 6.768749999999991,
       "paidWaitSamples": 48,
       "revenue": 720.4951999999998,
-      "ingredientCost": 194,
+      "ingredientCost": 169,
       "petCost": 38.00000000000226,
-      "profit": 488.49519999999757,
+      "profit": 513.4951999999976,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 408.49519999999757,
+      "profitAfterTrainingCapital": 433.49519999999757,
       "averageTicket": 15.010316666666663,
       "missed": 0,
       "queueLost": 0,
@@ -816,7 +816,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 35,
+      "staleCost": 10,
       "routeHandoffs": {
         "tableServed": 19,
         "catServed": 47,
@@ -826,7 +826,7 @@
       "jobs": {
         "yue": 19,
         "lin": 24,
-        "mei": 3
+        "mei": 2
       }
     },
     {
@@ -836,22 +836,22 @@
       "seconds": 300,
       "served": 53,
       "throughputPerMinute": 10.6,
-      "meanPaidWaitSeconds": 6.3943396226415,
+      "meanPaidWaitSeconds": 6.447169811320744,
       "paidWaitSamples": 53,
-      "revenue": 766.0343999999998,
-      "ingredientCost": 212,
+      "revenue": 772.4543999999997,
+      "ingredientCost": 188,
       "petCost": 38.00000000000226,
-      "profit": 516.0343999999975,
+      "profit": 546.4543999999975,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 436.0343999999975,
-      "averageTicket": 14.453479245283015,
+      "profitAfterTrainingCapital": 466.45439999999746,
+      "averageTicket": 14.574611320754713,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 40,
+      "staleCost": 15,
       "routeHandoffs": {
         "tableServed": 21,
         "catServed": 52,
@@ -861,7 +861,7 @@
       "jobs": {
         "yue": 21,
         "lin": 25,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -871,32 +871,32 @@
       "seconds": 300,
       "served": 51,
       "throughputPerMinute": 10.2,
-      "meanPaidWaitSeconds": 7.09607843137254,
+      "meanPaidWaitSeconds": 7.005882352941168,
       "paidWaitSamples": 51,
-      "revenue": 914.5075999999999,
-      "ingredientCost": 208,
+      "revenue": 893.1075999999999,
+      "ingredientCost": 183,
       "petCost": 38.00000000000226,
-      "profit": 668.5075999999976,
+      "profit": 672.1075999999977,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 588.5075999999976,
-      "averageTicket": 17.93152156862745,
+      "profitAfterTrainingCapital": 592.1075999999977,
+      "averageTicket": 17.511913725490196,
       "missed": 1,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 1,
       "unfinishedAtClose": 0,
-      "staleCost": 20,
+      "staleCost": 0,
       "routeHandoffs": {
         "tableServed": 19,
         "catServed": 49,
         "fastServed": 11,
-        "teaPairs": 4
+        "teaPairs": 3
       },
       "jobs": {
         "yue": 19,
         "lin": 24,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -909,11 +909,11 @@
       "meanPaidWaitSeconds": 7.376470588235284,
       "paidWaitSamples": 51,
       "revenue": 786.1503999999999,
-      "ingredientCost": 227,
+      "ingredientCost": 177,
       "petCost": 38.00000000000226,
-      "profit": 521.1503999999976,
+      "profit": 571.1503999999976,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 441.1503999999976,
+      "profitAfterTrainingCapital": 491.1503999999976,
       "averageTicket": 15.414713725490193,
       "missed": 0,
       "queueLost": 0,
@@ -921,7 +921,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 50,
+      "staleCost": 0,
       "routeHandoffs": {
         "tableServed": 20,
         "catServed": 49,
@@ -931,7 +931,7 @@
       "jobs": {
         "yue": 20,
         "lin": 23,
-        "mei": 4
+        "mei": 2
       }
     },
     {
@@ -944,11 +944,11 @@
       "meanPaidWaitSeconds": 7.376470588235284,
       "paidWaitSamples": 51,
       "revenue": 786.1503999999999,
-      "ingredientCost": 227,
+      "ingredientCost": 177,
       "petCost": 38.00000000000226,
-      "profit": 521.1503999999976,
+      "profit": 571.1503999999976,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 441.1503999999976,
+      "profitAfterTrainingCapital": 491.1503999999976,
       "averageTicket": 15.414713725490193,
       "missed": 0,
       "queueLost": 0,
@@ -956,7 +956,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 50,
+      "staleCost": 0,
       "routeHandoffs": {
         "tableServed": 20,
         "catServed": 49,
@@ -966,7 +966,7 @@
       "jobs": {
         "yue": 20,
         "lin": 23,
-        "mei": 4
+        "mei": 2
       }
     },
     {
@@ -976,32 +976,32 @@
       "seconds": 300,
       "served": 50,
       "throughputPerMinute": 10,
-      "meanPaidWaitSeconds": 7.6299999999999875,
+      "meanPaidWaitSeconds": 7.399999999999989,
       "paidWaitSamples": 50,
-      "revenue": 745.9183999999998,
-      "ingredientCost": 221,
+      "revenue": 724.3257999999997,
+      "ingredientCost": 171,
       "petCost": 38.00000000000226,
-      "profit": 486.9183999999975,
+      "profit": 515.3257999999975,
       "trainingCapitalCost": 0,
-      "profitAfterTrainingCapital": 486.9183999999975,
-      "averageTicket": 14.918367999999996,
+      "profitAfterTrainingCapital": 515.3257999999975,
+      "averageTicket": 14.486515999999995,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 45,
+      "staleCost": 0,
       "routeHandoffs": {
-        "tableServed": 20,
-        "catServed": 46,
-        "fastServed": 16,
+        "tableServed": 19,
+        "catServed": 47,
+        "fastServed": 17,
         "teaPairs": 5
       },
       "jobs": {
-        "yue": 20,
+        "yue": 19,
         "lin": 22,
-        "mei": 4
+        "mei": 2
       }
     },
     {
@@ -1011,32 +1011,32 @@
       "seconds": 300,
       "served": 47,
       "throughputPerMinute": 9.4,
-      "meanPaidWaitSeconds": 7.223404255319137,
+      "meanPaidWaitSeconds": 7.125531914893606,
       "paidWaitSamples": 47,
-      "revenue": 733.6561999999999,
-      "ingredientCost": 217,
+      "revenue": 712.2561999999999,
+      "ingredientCost": 167,
       "petCost": 38.00000000000226,
-      "profit": 478.6561999999976,
+      "profit": 507.25619999999765,
       "trainingCapitalCost": 240,
-      "profitAfterTrainingCapital": 238.65619999999763,
-      "averageTicket": 15.609706382978722,
+      "profitAfterTrainingCapital": 267.25619999999765,
+      "averageTicket": 15.154387234042552,
       "missed": 2,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 2,
       "unfinishedAtClose": 0,
-      "staleCost": 45,
+      "staleCost": 0,
       "routeHandoffs": {
         "tableServed": 17,
-        "catServed": 45,
+        "catServed": 46,
         "fastServed": 13,
         "teaPairs": 4
       },
       "jobs": {
         "yue": 17,
         "lin": 21,
-        "mei": 4
+        "mei": 2
       }
     },
     {
@@ -1049,11 +1049,11 @@
       "meanPaidWaitSeconds": 7.67346938775509,
       "paidWaitSamples": 49,
       "revenue": 738.8135999999998,
-      "ingredientCost": 228,
+      "ingredientCost": 178,
       "petCost": 38.00000000000226,
-      "profit": 472.81359999999756,
+      "profit": 522.8135999999976,
       "trainingCapitalCost": 240,
-      "profitAfterTrainingCapital": 232.81359999999756,
+      "profitAfterTrainingCapital": 282.81359999999756,
       "averageTicket": 15.077828571428569,
       "missed": 0,
       "queueLost": 0,
@@ -1061,7 +1061,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 55,
+      "staleCost": 5,
       "routeHandoffs": {
         "tableServed": 22,
         "catServed": 46,
@@ -1071,7 +1071,7 @@
       "jobs": {
         "yue": 22,
         "lin": 23,
-        "mei": 4
+        "mei": 2
       }
     },
     {
@@ -1081,32 +1081,32 @@
       "seconds": 300,
       "served": 49,
       "throughputPerMinute": 9.8,
-      "meanPaidWaitSeconds": 7.557142857142844,
+      "meanPaidWaitSeconds": 7.332653061224478,
       "paidWaitSamples": 49,
-      "revenue": 853.1109999999999,
-      "ingredientCost": 218,
+      "revenue": 718.0983999999997,
+      "ingredientCost": 169,
       "petCost": 38.00000000000226,
-      "profit": 597.1109999999976,
+      "profit": 511.09839999999747,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 517.1109999999976,
-      "averageTicket": 17.410428571428568,
-      "missed": 0,
+      "profitAfterTrainingCapital": 431.09839999999747,
+      "averageTicket": 14.655069387755097,
+      "missed": 1,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
-      "soldOut": 0,
+      "soldOut": 1,
       "unfinishedAtClose": 0,
-      "staleCost": 40,
+      "staleCost": 0,
       "routeHandoffs": {
         "tableServed": 19,
-        "catServed": 47,
-        "fastServed": 15,
+        "catServed": 48,
+        "fastServed": 16,
         "teaPairs": 5
       },
       "jobs": {
         "yue": 19,
         "lin": 22,
-        "mei": 4
+        "mei": 2
       }
     },
     {
@@ -1114,24 +1114,24 @@
       "training": "barista-b",
       "seed": 731,
       "seconds": 300,
-      "served": 49,
-      "throughputPerMinute": 9.8,
-      "meanPaidWaitSeconds": 6.9387755102040725,
-      "paidWaitSamples": 49,
-      "revenue": 745.0409999999997,
-      "ingredientCost": 215,
+      "served": 50,
+      "throughputPerMinute": 10,
+      "meanPaidWaitSeconds": 6.895999999999994,
+      "paidWaitSamples": 50,
+      "revenue": 748.2509999999997,
+      "ingredientCost": 191,
       "petCost": 38.00000000000226,
-      "profit": 492.04099999999744,
+      "profit": 519.2509999999975,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 412.04099999999744,
-      "averageTicket": 15.204918367346933,
+      "profitAfterTrainingCapital": 439.2509999999975,
+      "averageTicket": 14.965019999999996,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 40,
+      "staleCost": 15,
       "routeHandoffs": {
         "tableServed": 18,
         "catServed": 47,
@@ -1141,7 +1141,7 @@
       "jobs": {
         "yue": 18,
         "lin": 22,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -1151,32 +1151,32 @@
       "seconds": 300,
       "served": 54,
       "throughputPerMinute": 10.8,
-      "meanPaidWaitSeconds": 7.227777777777767,
+      "meanPaidWaitSeconds": 7.194444444444435,
       "paidWaitSamples": 54,
-      "revenue": 811.3809999999995,
-      "ingredientCost": 225,
+      "revenue": 799.4183999999995,
+      "ingredientCost": 202,
       "petCost": 38.00000000000226,
-      "profit": 548.3809999999972,
+      "profit": 559.4183999999972,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 468.38099999999724,
-      "averageTicket": 15.025574074074065,
+      "profitAfterTrainingCapital": 479.4183999999972,
+      "averageTicket": 14.804044444444434,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 35,
+      "staleCost": 15,
       "routeHandoffs": {
-        "tableServed": 22,
-        "catServed": 53,
-        "fastServed": 15,
-        "teaPairs": 5
+        "tableServed": 21,
+        "catServed": 52,
+        "fastServed": 16,
+        "teaPairs": 6
       },
       "jobs": {
-        "yue": 22,
+        "yue": 21,
         "lin": 26,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -1189,11 +1189,11 @@
       "meanPaidWaitSeconds": 7.873999999999988,
       "paidWaitSamples": 50,
       "revenue": 899.6987999999996,
-      "ingredientCost": 220,
+      "ingredientCost": 195,
       "petCost": 38.00000000000226,
-      "profit": 641.6987999999973,
+      "profit": 666.6987999999973,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 561.6987999999973,
+      "profitAfterTrainingCapital": 586.6987999999973,
       "averageTicket": 17.99397599999999,
       "missed": 0,
       "queueLost": 0,
@@ -1201,7 +1201,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 30,
+      "staleCost": 5,
       "routeHandoffs": {
         "tableServed": 22,
         "catServed": 48,
@@ -1211,7 +1211,7 @@
       "jobs": {
         "yue": 22,
         "lin": 25,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -1221,32 +1221,32 @@
       "seconds": 300,
       "served": 50,
       "throughputPerMinute": 10,
-      "meanPaidWaitSeconds": 7.6299999999999875,
+      "meanPaidWaitSeconds": 7.399999999999989,
       "paidWaitSamples": 50,
-      "revenue": 745.9183999999998,
-      "ingredientCost": 221,
+      "revenue": 724.3257999999997,
+      "ingredientCost": 171,
       "petCost": 38.00000000000226,
-      "profit": 486.9183999999975,
+      "profit": 515.3257999999975,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 406.9183999999975,
-      "averageTicket": 14.918367999999996,
+      "profitAfterTrainingCapital": 435.32579999999746,
+      "averageTicket": 14.486515999999995,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 45,
+      "staleCost": 0,
       "routeHandoffs": {
-        "tableServed": 20,
-        "catServed": 46,
-        "fastServed": 16,
+        "tableServed": 19,
+        "catServed": 47,
+        "fastServed": 17,
         "teaPairs": 5
       },
       "jobs": {
-        "yue": 20,
+        "yue": 19,
         "lin": 22,
-        "mei": 4
+        "mei": 2
       }
     },
     {
@@ -1256,32 +1256,32 @@
       "seconds": 300,
       "served": 50,
       "throughputPerMinute": 10,
-      "meanPaidWaitSeconds": 7.6299999999999875,
+      "meanPaidWaitSeconds": 7.399999999999989,
       "paidWaitSamples": 50,
-      "revenue": 745.9183999999998,
-      "ingredientCost": 221,
+      "revenue": 724.3257999999997,
+      "ingredientCost": 171,
       "petCost": 38.00000000000226,
-      "profit": 486.9183999999975,
+      "profit": 515.3257999999975,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 406.9183999999975,
-      "averageTicket": 14.918367999999996,
+      "profitAfterTrainingCapital": 435.32579999999746,
+      "averageTicket": 14.486515999999995,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 45,
+      "staleCost": 0,
       "routeHandoffs": {
-        "tableServed": 20,
-        "catServed": 46,
-        "fastServed": 16,
+        "tableServed": 19,
+        "catServed": 47,
+        "fastServed": 17,
         "teaPairs": 5
       },
       "jobs": {
-        "yue": 20,
+        "yue": 19,
         "lin": 22,
-        "mei": 4
+        "mei": 2
       }
     },
     {
@@ -1291,32 +1291,32 @@
       "seconds": 300,
       "served": 47,
       "throughputPerMinute": 9.4,
-      "meanPaidWaitSeconds": 9.982978723404235,
+      "meanPaidWaitSeconds": 10.042553191489342,
       "paidWaitSamples": 47,
-      "revenue": 1195.4468,
-      "ingredientCost": 273,
+      "revenue": 1205.5904,
+      "ingredientCost": 249,
       "petCost": 38.00000000000226,
-      "profit": 884.4467999999977,
+      "profit": 918.5903999999978,
       "trainingCapitalCost": 0,
-      "profitAfterTrainingCapital": 884.4467999999977,
-      "averageTicket": 25.43503829787234,
+      "profitAfterTrainingCapital": 918.5903999999978,
+      "averageTicket": 25.650859574468086,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 40,
+      "staleCost": 15,
       "routeHandoffs": {
         "tableServed": 25,
         "catServed": 45,
         "fastServed": 7,
-        "teaPairs": 13
+        "teaPairs": 14
       },
       "jobs": {
         "yue": 25,
         "lin": 22,
-        "mei": 6
+        "mei": 5
       }
     },
     {
@@ -1326,22 +1326,22 @@
       "seconds": 300,
       "served": 49,
       "throughputPerMinute": 9.8,
-      "meanPaidWaitSeconds": 9.348979591836718,
+      "meanPaidWaitSeconds": 9.373469387755083,
       "paidWaitSamples": 49,
-      "revenue": 1333.4554,
-      "ingredientCost": 251,
+      "revenue": 1340.4532000000002,
+      "ingredientCost": 227,
       "petCost": 38.00000000000226,
-      "profit": 1044.4553999999978,
+      "profit": 1075.4531999999979,
       "trainingCapitalCost": 240,
-      "profitAfterTrainingCapital": 804.4553999999978,
-      "averageTicket": 27.213375510204084,
+      "profitAfterTrainingCapital": 835.4531999999979,
+      "averageTicket": 27.356187755102045,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 25,
+      "staleCost": 0,
       "routeHandoffs": {
         "tableServed": 25,
         "catServed": 47,
@@ -1351,7 +1351,7 @@
       "jobs": {
         "yue": 25,
         "lin": 24,
-        "mei": 5
+        "mei": 4
       }
     },
     {
@@ -1361,22 +1361,22 @@
       "seconds": 300,
       "served": 50,
       "throughputPerMinute": 10,
-      "meanPaidWaitSeconds": 9.817999999999982,
+      "meanPaidWaitSeconds": 9.703999999999981,
       "paidWaitSamples": 50,
-      "revenue": 1335.1245999999999,
-      "ingredientCost": 277,
+      "revenue": 1328.7045999999998,
+      "ingredientCost": 251,
       "petCost": 38.00000000000226,
-      "profit": 1020.1245999999976,
+      "profit": 1039.7045999999975,
       "trainingCapitalCost": 240,
-      "profitAfterTrainingCapital": 780.1245999999976,
-      "averageTicket": 26.702491999999996,
+      "profitAfterTrainingCapital": 799.7045999999975,
+      "averageTicket": 26.574091999999997,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 35,
+      "staleCost": 10,
       "routeHandoffs": {
         "tableServed": 24,
         "catServed": 48,
@@ -1385,8 +1385,8 @@
       },
       "jobs": {
         "yue": 24,
-        "lin": 24,
-        "mei": 6
+        "lin": 25,
+        "mei": 5
       }
     },
     {
@@ -1396,32 +1396,32 @@
       "seconds": 300,
       "served": 51,
       "throughputPerMinute": 10.2,
-      "meanPaidWaitSeconds": 10.117647058823513,
+      "meanPaidWaitSeconds": 9.921568627450963,
       "paidWaitSamples": 51,
-      "revenue": 1270.8604,
-      "ingredientCost": 279,
+      "revenue": 1250.0382,
+      "ingredientCost": 254,
       "petCost": 38.00000000000226,
-      "profit": 953.8603999999978,
+      "profit": 958.0381999999977,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 873.8603999999978,
-      "averageTicket": 24.918831372549022,
+      "profitAfterTrainingCapital": 878.0381999999977,
+      "averageTicket": 24.51055294117647,
       "missed": 1,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 1,
       "unfinishedAtClose": 0,
-      "staleCost": 30,
+      "staleCost": 10,
       "routeHandoffs": {
-        "tableServed": 27,
-        "catServed": 47,
-        "fastServed": 8,
+        "tableServed": 26,
+        "catServed": 48,
+        "fastServed": 10,
         "teaPairs": 14
       },
       "jobs": {
-        "yue": 27,
+        "yue": 26,
         "lin": 27,
-        "mei": 6
+        "mei": 5
       }
     },
     {
@@ -1431,32 +1431,32 @@
       "seconds": 300,
       "served": 50,
       "throughputPerMinute": 10,
-      "meanPaidWaitSeconds": 9.981999999999982,
+      "meanPaidWaitSeconds": 10.083999999999982,
       "paidWaitSamples": 50,
-      "revenue": 1412.0362,
-      "ingredientCost": 282,
+      "revenue": 1422.1798000000001,
+      "ingredientCost": 258,
       "petCost": 38.00000000000226,
-      "profit": 1092.0361999999977,
+      "profit": 1126.1797999999978,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 1012.0361999999977,
-      "averageTicket": 28.240724,
+      "profitAfterTrainingCapital": 1046.1797999999978,
+      "averageTicket": 28.443596000000003,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 35,
+      "staleCost": 10,
       "routeHandoffs": {
         "tableServed": 27,
         "catServed": 47,
         "fastServed": 6,
-        "teaPairs": 15
+        "teaPairs": 16
       },
       "jobs": {
         "yue": 27,
         "lin": 25,
-        "mei": 6
+        "mei": 5
       }
     },
     {
@@ -1466,32 +1466,32 @@
       "seconds": 300,
       "served": 49,
       "throughputPerMinute": 9.8,
-      "meanPaidWaitSeconds": 11.265306122448955,
+      "meanPaidWaitSeconds": 10.98571428571426,
       "paidWaitSamples": 49,
-      "revenue": 1417.964,
-      "ingredientCost": 280,
+      "revenue": 1403.4976,
+      "ingredientCost": 256,
       "petCost": 38.00000000000226,
-      "profit": 1099.9639999999977,
+      "profit": 1109.4975999999976,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 1019.9639999999977,
-      "averageTicket": 28.93804081632653,
+      "profitAfterTrainingCapital": 1029.4975999999976,
+      "averageTicket": 28.642808163265304,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 30,
+      "staleCost": 10,
       "routeHandoffs": {
         "tableServed": 27,
-        "catServed": 46,
+        "catServed": 47,
         "fastServed": 7,
-        "teaPairs": 15
+        "teaPairs": 16
       },
       "jobs": {
         "yue": 27,
-        "lin": 26,
-        "mei": 6
+        "lin": 27,
+        "mei": 5
       }
     },
     {
@@ -1499,34 +1499,34 @@
       "training": "server-b",
       "seed": 731,
       "seconds": 300,
-      "served": 49,
-      "throughputPerMinute": 9.8,
-      "meanPaidWaitSeconds": 10.19183673469386,
-      "paidWaitSamples": 49,
-      "revenue": 1238.3324000000005,
-      "ingredientCost": 273,
+      "served": 48,
+      "throughputPerMinute": 9.6,
+      "meanPaidWaitSeconds": 10.549999999999981,
+      "paidWaitSamples": 48,
+      "revenue": 1300.8418000000004,
+      "ingredientCost": 250,
       "petCost": 38.00000000000226,
-      "profit": 927.3323999999982,
+      "profit": 1012.8417999999981,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 847.3323999999982,
-      "averageTicket": 25.272089795918376,
+      "profitAfterTrainingCapital": 932.8417999999981,
+      "averageTicket": 27.100870833333342,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 40,
+      "staleCost": 5,
       "routeHandoffs": {
-        "tableServed": 26,
-        "catServed": 47,
-        "fastServed": 6,
-        "teaPairs": 13
+        "tableServed": 24,
+        "catServed": 46,
+        "fastServed": 5,
+        "teaPairs": 15
       },
       "jobs": {
-        "yue": 26,
+        "yue": 24,
         "lin": 24,
-        "mei": 6
+        "mei": 5
       }
     },
     {
@@ -1536,32 +1536,32 @@
       "seconds": 300,
       "served": 47,
       "throughputPerMinute": 9.4,
-      "meanPaidWaitSeconds": 9.982978723404235,
+      "meanPaidWaitSeconds": 10.042553191489342,
       "paidWaitSamples": 47,
-      "revenue": 1195.4468,
-      "ingredientCost": 273,
+      "revenue": 1205.5904,
+      "ingredientCost": 249,
       "petCost": 38.00000000000226,
-      "profit": 884.4467999999977,
+      "profit": 918.5903999999978,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 804.4467999999977,
-      "averageTicket": 25.43503829787234,
+      "profitAfterTrainingCapital": 838.5903999999978,
+      "averageTicket": 25.650859574468086,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 40,
+      "staleCost": 15,
       "routeHandoffs": {
         "tableServed": 25,
         "catServed": 45,
         "fastServed": 7,
-        "teaPairs": 13
+        "teaPairs": 14
       },
       "jobs": {
         "yue": 25,
         "lin": 22,
-        "mei": 6
+        "mei": 5
       }
     },
     {
@@ -1571,32 +1571,32 @@
       "seconds": 300,
       "served": 47,
       "throughputPerMinute": 9.4,
-      "meanPaidWaitSeconds": 9.982978723404235,
+      "meanPaidWaitSeconds": 10.042553191489342,
       "paidWaitSamples": 47,
-      "revenue": 1195.4468,
-      "ingredientCost": 273,
+      "revenue": 1205.5904,
+      "ingredientCost": 249,
       "petCost": 38.00000000000226,
-      "profit": 884.4467999999977,
+      "profit": 918.5903999999978,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 804.4467999999977,
-      "averageTicket": 25.43503829787234,
+      "profitAfterTrainingCapital": 838.5903999999978,
+      "averageTicket": 25.650859574468086,
       "missed": 0,
       "queueLost": 0,
       "tableLost": 0,
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 40,
+      "staleCost": 15,
       "routeHandoffs": {
         "tableServed": 25,
         "catServed": 45,
         "fastServed": 7,
-        "teaPairs": 13
+        "teaPairs": 14
       },
       "jobs": {
         "yue": 25,
         "lin": 22,
-        "mei": 6
+        "mei": 5
       }
     },
     {
@@ -1609,11 +1609,11 @@
       "meanPaidWaitSeconds": 7.337777777777766,
       "paidWaitSamples": 45,
       "revenue": 796.0799999999999,
-      "ingredientCost": 212,
+      "ingredientCost": 187,
       "petCost": 38.00000000000226,
-      "profit": 546.0799999999977,
+      "profit": 571.0799999999977,
       "trainingCapitalCost": 0,
-      "profitAfterTrainingCapital": 546.0799999999977,
+      "profitAfterTrainingCapital": 571.0799999999977,
       "averageTicket": 17.690666666666665,
       "missed": 0,
       "queueLost": 0,
@@ -1621,7 +1621,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 45,
+      "staleCost": 20,
       "routeHandoffs": {
         "tableServed": 21,
         "catServed": 44,
@@ -1631,7 +1631,7 @@
       "jobs": {
         "yue": 21,
         "lin": 19,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -1644,11 +1644,11 @@
       "meanPaidWaitSeconds": 7.015217391304336,
       "paidWaitSamples": 46,
       "revenue": 818.5499999999998,
-      "ingredientCost": 197,
+      "ingredientCost": 172,
       "petCost": 38.00000000000226,
-      "profit": 583.5499999999976,
+      "profit": 608.5499999999976,
       "trainingCapitalCost": 240,
-      "profitAfterTrainingCapital": 343.54999999999757,
+      "profitAfterTrainingCapital": 368.54999999999757,
       "averageTicket": 17.794565217391302,
       "missed": 0,
       "queueLost": 0,
@@ -1656,7 +1656,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 35,
+      "staleCost": 10,
       "routeHandoffs": {
         "tableServed": 21,
         "catServed": 44,
@@ -1666,7 +1666,7 @@
       "jobs": {
         "yue": 21,
         "lin": 22,
-        "mei": 3
+        "mei": 2
       }
     },
     {
@@ -1679,11 +1679,11 @@
       "meanPaidWaitSeconds": 7.657142857142845,
       "paidWaitSamples": 49,
       "revenue": 1082.84,
-      "ingredientCost": 218,
+      "ingredientCost": 193,
       "petCost": 38.00000000000226,
-      "profit": 826.8399999999976,
+      "profit": 851.8399999999976,
       "trainingCapitalCost": 240,
-      "profitAfterTrainingCapital": 586.8399999999976,
+      "profitAfterTrainingCapital": 611.8399999999976,
       "averageTicket": 22.09877551020408,
       "missed": 0,
       "queueLost": 0,
@@ -1691,7 +1691,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 30,
+      "staleCost": 5,
       "routeHandoffs": {
         "tableServed": 21,
         "catServed": 47,
@@ -1701,7 +1701,7 @@
       "jobs": {
         "yue": 21,
         "lin": 22,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -1714,11 +1714,11 @@
       "meanPaidWaitSeconds": 7.313333333333321,
       "paidWaitSamples": 45,
       "revenue": 796.0799999999999,
-      "ingredientCost": 212,
+      "ingredientCost": 187,
       "petCost": 38.00000000000226,
-      "profit": 546.0799999999977,
+      "profit": 571.0799999999977,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 466.07999999999765,
+      "profitAfterTrainingCapital": 491.07999999999765,
       "averageTicket": 17.690666666666665,
       "missed": 0,
       "queueLost": 0,
@@ -1726,7 +1726,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 45,
+      "staleCost": 20,
       "routeHandoffs": {
         "tableServed": 21,
         "catServed": 44,
@@ -1736,7 +1736,7 @@
       "jobs": {
         "yue": 21,
         "lin": 20,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -1749,11 +1749,11 @@
       "meanPaidWaitSeconds": 7.535416666666656,
       "paidWaitSamples": 48,
       "revenue": 1057.1599999999999,
-      "ingredientCost": 221,
+      "ingredientCost": 196,
       "petCost": 38.00000000000226,
-      "profit": 798.1599999999976,
+      "profit": 823.1599999999976,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 718.1599999999976,
+      "profitAfterTrainingCapital": 743.1599999999976,
       "averageTicket": 22.024166666666662,
       "missed": 0,
       "queueLost": 0,
@@ -1761,7 +1761,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 45,
+      "staleCost": 20,
       "routeHandoffs": {
         "tableServed": 21,
         "catServed": 46,
@@ -1771,7 +1771,7 @@
       "jobs": {
         "yue": 21,
         "lin": 22,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -1784,11 +1784,11 @@
       "meanPaidWaitSeconds": 7.808510638297858,
       "paidWaitSamples": 47,
       "revenue": 982.2599999999998,
-      "ingredientCost": 221,
+      "ingredientCost": 196,
       "petCost": 38.00000000000226,
-      "profit": 723.2599999999975,
+      "profit": 748.2599999999975,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 643.2599999999975,
+      "profitAfterTrainingCapital": 668.2599999999975,
       "averageTicket": 20.899148936170207,
       "missed": 0,
       "queueLost": 0,
@@ -1796,7 +1796,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 35,
+      "staleCost": 10,
       "routeHandoffs": {
         "tableServed": 22,
         "catServed": 45,
@@ -1806,7 +1806,7 @@
       "jobs": {
         "yue": 22,
         "lin": 21,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -1819,11 +1819,11 @@
       "meanPaidWaitSeconds": 7.415555555555545,
       "paidWaitSamples": 45,
       "revenue": 796.0799999999999,
-      "ingredientCost": 212,
+      "ingredientCost": 187,
       "petCost": 38.00000000000226,
-      "profit": 546.0799999999977,
+      "profit": 571.0799999999977,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 466.07999999999765,
+      "profitAfterTrainingCapital": 491.07999999999765,
       "averageTicket": 17.690666666666665,
       "missed": 0,
       "queueLost": 0,
@@ -1831,7 +1831,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 45,
+      "staleCost": 20,
       "routeHandoffs": {
         "tableServed": 21,
         "catServed": 44,
@@ -1841,7 +1841,7 @@
       "jobs": {
         "yue": 21,
         "lin": 19,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -1854,11 +1854,11 @@
       "meanPaidWaitSeconds": 7.337777777777766,
       "paidWaitSamples": 45,
       "revenue": 796.0799999999999,
-      "ingredientCost": 212,
+      "ingredientCost": 187,
       "petCost": 38.00000000000226,
-      "profit": 546.0799999999977,
+      "profit": 571.0799999999977,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 466.07999999999765,
+      "profitAfterTrainingCapital": 491.07999999999765,
       "averageTicket": 17.690666666666665,
       "missed": 0,
       "queueLost": 0,
@@ -1866,7 +1866,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 45,
+      "staleCost": 20,
       "routeHandoffs": {
         "tableServed": 21,
         "catServed": 44,
@@ -1876,7 +1876,7 @@
       "jobs": {
         "yue": 21,
         "lin": 19,
-        "mei": 4
+        "mei": 3
       }
     },
     {
@@ -1889,11 +1889,11 @@
       "meanPaidWaitSeconds": 7.337777777777766,
       "paidWaitSamples": 45,
       "revenue": 796.0799999999999,
-      "ingredientCost": 212,
+      "ingredientCost": 187,
       "petCost": 38.00000000000226,
-      "profit": 546.0799999999977,
+      "profit": 571.0799999999977,
       "trainingCapitalCost": 80,
-      "profitAfterTrainingCapital": 466.07999999999765,
+      "profitAfterTrainingCapital": 491.07999999999765,
       "averageTicket": 17.690666666666665,
       "missed": 0,
       "queueLost": 0,
@@ -1901,7 +1901,7 @@
       "doorLost": 0,
       "soldOut": 0,
       "unfinishedAtClose": 0,
-      "staleCost": 45,
+      "staleCost": 20,
       "routeHandoffs": {
         "tableServed": 21,
         "catServed": 44,
@@ -1911,7 +1911,7 @@
       "jobs": {
         "yue": 21,
         "lin": 19,
-        "mei": 4
+        "mei": 3
       }
     }
   ]

@@ -1,0 +1,110 @@
+[
+  {
+    "path": "src/style.css",
+    "sha256": "65c31e4c5e3982cb6fbbea3cbe777567606cb1f470a2e02b65fa2def31cd6929"
+  },
+  {
+    "path": "src/ui/signature-drinks.ts",
+    "sha256": "42241b4ed67755789a92efed72c9f3311df4483b71b323fb7b9e83e93436cf41"
+  },
+  {
+    "path": "src/ui/panel.ts",
+    "sha256": "7890a101092a3437efc190443560435a35322e019c1614ef45404dbf7ef64d94"
+  },
+  {
+    "path": "src/ui/cafe-feedback.test.ts",
+    "sha256": "cda367a579a3af9689309e6162f0ba7253b4dc68021c140774d579e4c18156c7"
+  },
+  {
+    "path": "src/ui/modal.ts",
+    "sha256": "e484766234f880b2e74f5923eeb7e5ae8e6355e7d162bf9bd4df6f181ccc7505"
+  },
+  {
+    "path": "src/ui/panel-money.test.ts",
+    "sha256": "82ca647baa219d13c651423b26bb976275df74d3df2fb0970f7488598435d0fb"
+  },
+  {
+    "path": "src/ui/signature-drinks.test.ts",
+    "sha256": "8aeb3cea3bb9bbdcbc74af9e480d09b68f662660eeba60bc20ab11449be93fa6"
+  },
+  {
+    "path": "src/ui/cafe-life.ts",
+    "sha256": "44bb318305bbe7cfa48cc949a51ebf947c9dade75954fa6fef82edc5e635004b"
+  },
+  {
+    "path": "src/locales/zh.json",
+    "sha256": "e03c5dbceade9f6ea7b0e800abc10f54c6c8b6fd538de4b1cac0668e2bbe0bf6"
+  },
+  {
+    "path": "src/locales/en.json",
+    "sha256": "75d2c0abbec3af6f8d72acd99147b6ebe29b6ca0735be62e3f7480ae5fc01818"
+  },
+  {
+    "path": "src/game/signature-drinks.ts",
+    "sha256": "8cdaa8ddce8aefbe92e0b361ac655cb9cd12188478caa4856cb66019d96937a3"
+  },
+  {
+    "path": "src/game/data.ts",
+    "sha256": "ee6481d067769289d32c913d6da8455ff1e2305d0ead2cba149d9aa02e561b4c"
+  },
+  {
+    "path": "src/game/menu-stock.test.ts",
+    "sha256": "52243cb2f47fc2b815960f3f9c3c7e95da57566570fd793a427d90886a6fa9e7"
+  },
+  {
+    "path": "src/game/economy-invariants.test.ts",
+    "sha256": "25ec802ecefef4df1cbed3c36f8dfe300b9f16e48e2c0aad10fca83cfe17bc79"
+  },
+  {
+    "path": "src/game/restock-forecast.test.ts",
+    "sha256": "186613f12b09ea14dafc37ab1b8488b1cc30bdebbcab5ce9713dd182bdfea82f"
+  },
+  {
+    "path": "src/game/signature-balance.test.ts",
+    "sha256": "8166520f6dd76bd0d34e5561b00379ad4cffcc82729a9475b433ed8a88f9e003"
+  },
+  {
+    "path": "src/game/cafe-feedback.test.ts",
+    "sha256": "858062f178f2497980abf6cefa9ea3c02c1ad2802e972027609c7602bb6200ee"
+  },
+  {
+    "path": "src/game/game.test.ts",
+    "sha256": "0f44760294ff08edb511da5e466f1491396cbfe7d25c59ddcc4f1fc6edfc321b"
+  },
+  {
+    "path": "src/game/goals.test.ts",
+    "sha256": "f4ca119b6c447ef1798242ad1df237635ef7543c5fdf590862f7aa4f9ee826f1"
+  },
+  {
+    "path": "src/game/signature-foundation.test.ts",
+    "sha256": "faaedaf8e5fb92f5d9b8e743eb108513de186d65f921e693675c3f21868f26ee"
+  },
+  {
+    "path": "src/game/kitchen-closing.test.ts",
+    "sha256": "aa1a8aeec8e3cf9900d5b5eecc86893168adfdfc9b0ab5e7d620b9b0149061b2"
+  },
+  {
+    "path": "src/game/kitchen.ts",
+    "sha256": "661549a31599cd6bb379da96945cedb85ec468321a51d90acb189b8a415d0a08"
+  },
+  {
+    "path": "src/game/goals.ts",
+    "sha256": "e817da43c77603fde3d96bedd90b1deccab36c95a454b4a8c60e957b01f14d52"
+  },
+  {
+    "path": "src/game/economy.ts",
+    "sha256": "7f0912144863211ef677a9fb4ce738c5b53d02106d431484b40f1d5ffd4bd36e"
+  },
+  {
+    "path": "src/game/sim.ts",
+    "sha256": "c670e2a33958ce5c6d8e842ae11f6423a5308853f65b3388cf3d630fdf21feb5"
+  },
+  {
+    "path": "src/assets/pixel-zh.woff2",
+    "sha256": "4a595de3c22035916fc1fa2e87e7687e1ce52b8c960b78d7d2ed7c640a702256"
+  },
+  {
+    "path": "scripts/play-flow-balance-mechanism.test.ts",
+    "sha256": "7c529251acc633e47328b020559753b47c2fefeaf336fa5980f94fada5199c4d"
+  }
+]

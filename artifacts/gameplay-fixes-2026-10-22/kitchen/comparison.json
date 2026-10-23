@@ -1,0 +1,245 @@
+{
+  "method": "Paired fixture comparison against the saved 90-day baseline: 2 menus × 3 kitchen stages × 15 seeds. These are independent synthetic day-3 states, not a 90-day progression.",
+  "limitations": [
+    "Includes all current gameplay fixes, especially changed forecast demand and stock buffers; not an isolated causal estimate of the kitchen cutoff.",
+    "Daily operating profit excludes staff and kitchen capital costs. Pantry stock is paid but unconsumed ingredients do not enter operating profit.",
+    "The inherited lateStarted field is a heuristic of cost increases while a batch is in production, not an exact count of batch starts. Use daysWithInProgressAtClose for closing workload.",
+    "Seeded arrivals share the baseline inputs but gameplay state changes can alter subsequent random draws."
+  ],
+  "lateBatch": {
+    "before": {
+      "remainingDay": 0.09999999999999432,
+      "nextBatch": {
+        "item": "roll",
+        "n": 5
+      },
+      "productionSeconds": 28.49284818342959
+    },
+    "after": {
+      "remainingDay": 0.09999999999999432,
+      "nextBatch": null,
+      "productionSeconds": 28.49284818342959
+    }
+  },
+  "totals": {
+    "profit": {
+      "before": 56740,
+      "after": 57885,
+      "delta": 1145
+    },
+    "served": {
+      "before": 7348,
+      "after": 7277,
+      "delta": -71
+    },
+    "soldOut": {
+      "before": 89,
+      "after": 159,
+      "delta": 70
+    },
+    "staleCost": {
+      "before": 2787,
+      "after": 1197,
+      "delta": -1590
+    },
+    "duration": {
+      "before": 16692.60000000071,
+      "after": 16463.850000000657,
+      "delta": -228.75000000005457
+    }
+  },
+  "comparison": [
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "before": {
+        "menu": "espresso+roll",
+        "cooks": 1,
+        "profit": 335.8666666666667,
+        "served": 75.2,
+        "soldOut": 0.13333333333333333,
+        "staleCost": 21.333333333333332,
+        "duration": 185.3533333333412,
+        "daysWithInProgressAtClose": 6
+      },
+      "after": {
+        "menu": "espresso+roll",
+        "cooks": 1,
+        "profit": 347.06666666666666,
+        "served": 74.93333333333334,
+        "soldOut": 0.4666666666666667,
+        "staleCost": 8.8,
+        "duration": 182.3133333333405,
+        "daysWithInProgressAtClose": 0
+      },
+      "delta": {
+        "profit": 11.199999999999989,
+        "served": -0.2666666666666657,
+        "soldOut": 0.33333333333333337,
+        "staleCost": -12.533333333333331,
+        "duration": -3.0400000000007026,
+        "daysWithInProgressAtClose": -6
+      }
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "before": {
+        "menu": "espresso+roll",
+        "cooks": 2,
+        "profit": 342.53333333333336,
+        "served": 74.8,
+        "soldOut": 0.5333333333333333,
+        "staleCost": 23.466666666666665,
+        "duration": 188.3800000000086,
+        "daysWithInProgressAtClose": 12
+      },
+      "after": {
+        "menu": "espresso+roll",
+        "cooks": 2,
+        "profit": 355.46666666666664,
+        "served": 73.86666666666666,
+        "soldOut": 1.5333333333333334,
+        "staleCost": 1.3333333333333333,
+        "duration": 182.24333333334056,
+        "daysWithInProgressAtClose": 0
+      },
+      "delta": {
+        "profit": 12.93333333333328,
+        "served": -0.9333333333333371,
+        "soldOut": 1,
+        "staleCost": -22.133333333333333,
+        "duration": -6.136666666668049,
+        "daysWithInProgressAtClose": -12
+      }
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "before": {
+        "menu": "espresso+roll",
+        "cooks": 3,
+        "profit": 319.73333333333335,
+        "served": 75,
+        "soldOut": 0.4666666666666667,
+        "staleCost": 24.8,
+        "duration": 186.74000000000822,
+        "daysWithInProgressAtClose": 8
+      },
+      "after": {
+        "menu": "espresso+roll",
+        "cooks": 3,
+        "profit": 336,
+        "served": 73.86666666666666,
+        "soldOut": 1.5333333333333334,
+        "staleCost": 2.6666666666666665,
+        "duration": 181.74333333334047,
+        "daysWithInProgressAtClose": 0
+      },
+      "delta": {
+        "profit": 16.26666666666665,
+        "served": -1.13333333333334,
+        "soldOut": 1.0666666666666669,
+        "staleCost": -22.133333333333333,
+        "duration": -4.99666666666775,
+        "daysWithInProgressAtClose": -8
+      }
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "before": {
+        "menu": "espresso+roll+bagel+donut",
+        "cooks": 1,
+        "profit": 912.4,
+        "served": 88.06666666666666,
+        "soldOut": 1.6666666666666667,
+        "staleCost": 39.8,
+        "duration": 184.3066666666743,
+        "daysWithInProgressAtClose": 0
+      },
+      "after": {
+        "menu": "espresso+roll+bagel+donut",
+        "cooks": 1,
+        "profit": 936.4,
+        "served": 87.93333333333334,
+        "soldOut": 1.8,
+        "staleCost": 30.333333333333332,
+        "duration": 184.543333333341,
+        "daysWithInProgressAtClose": 0
+      },
+      "delta": {
+        "profit": 24,
+        "served": -0.13333333333332575,
+        "soldOut": 0.1333333333333333,
+        "staleCost": -9.466666666666665,
+        "duration": 0.23666666666670721,
+        "daysWithInProgressAtClose": 0
+      }
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "before": {
+        "menu": "espresso+roll+bagel+donut",
+        "cooks": 2,
+        "profit": 934.6,
+        "served": 89.2,
+        "soldOut": 1.3333333333333333,
+        "staleCost": 39.6,
+        "duration": 184.2166666666743,
+        "daysWithInProgressAtClose": 1
+      },
+      "after": {
+        "menu": "espresso+roll+bagel+donut",
+        "cooks": 2,
+        "profit": 933.4666666666667,
+        "served": 88,
+        "soldOut": 2.066666666666667,
+        "staleCost": 22.4,
+        "duration": 183.30000000000746,
+        "daysWithInProgressAtClose": 0
+      },
+      "delta": {
+        "profit": -1.1333333333333258,
+        "served": -1.2000000000000028,
+        "soldOut": 0.7333333333333336,
+        "staleCost": -17.200000000000003,
+        "duration": -0.9166666666668561,
+        "daysWithInProgressAtClose": -1
+      }
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "before": {
+        "menu": "espresso+roll+bagel+donut",
+        "cooks": 3,
+        "profit": 937.5333333333333,
+        "served": 87.6,
+        "soldOut": 1.8,
+        "staleCost": 36.8,
+        "duration": 183.84333333334087,
+        "daysWithInProgressAtClose": 1
+      },
+      "after": {
+        "menu": "espresso+roll+bagel+donut",
+        "cooks": 3,
+        "profit": 950.6,
+        "served": 86.53333333333333,
+        "soldOut": 3.2,
+        "staleCost": 14.266666666666667,
+        "duration": 183.44666666667413,
+        "daysWithInProgressAtClose": 0
+      },
+      "delta": {
+        "profit": 13.06666666666672,
+        "served": -1.0666666666666629,
+        "soldOut": 1.4000000000000001,
+        "staleCost": -22.53333333333333,
+        "duration": -0.3966666666667322,
+        "daysWithInProgressAtClose": -1
+      }
+    }
+  ]
+}

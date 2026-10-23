@@ -1,0 +1,81 @@
+(node:2127) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+ RUN  v5.0.3 /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+
+(node:2128) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ❯ src/game/restock-forecast.test.ts (5 tests | 5 failed) 1006ms
+   ❯ reliable menu preparation (5)
+     × keeps newly unlocked recipes off the selected menu until explicitly added, including after reload 4ms
+     × includes the assigned barista’s real preparation specialty in the forecast 1ms
+     × recommended stock handles ordinary mixed-menu variation on fair days 379ms
+     × recommended stock handles ordinary mixed-menu variation on rain days 315ms
+     × recommended stock handles ordinary mixed-menu variation on market days 307ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/game/restock-forecast.test.ts > reliable menu preparation > keeps newly unlocked recipes off the selected menu until explicitly added, including after reload
+AssertionError: expected [ 'espresso', 'americano' ] to deeply equal [ 'espresso' ]
+
+- Expected
++ Received
+
+  [
+    "espresso",
++   "americano",
+  ]
+
+ ❯ src/game/restock-forecast.test.ts:20:26
+     18|     expect(buyItem(state, 'americano', 1)).toBe(true);
+     19|     expect(state.items.americano).toBe(1);
+     20|     expect(state.onMenu).toEqual(['espresso']);
+       |                          ^
+     21|     const loaded = deserialize(serialize(state), 0);
+     22|     expect(loaded.onMenu).toEqual(['espresso']);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  src/game/restock-forecast.test.ts > reliable menu preparation > includes the assigned barista’s real preparation specialty in the forecast
+AssertionError: expected 0.8333333333333334 to be greater than 0.8333333333333334
+ ❯ src/game/restock-forecast.test.ts:34:36
+     32|     const ordinary = counterCapacity(state);
+     33|     state.partners.roster[partner].specialty = 'a';
+     34|     expect(counterCapacity(state)).toBeGreaterThan(ordinary);
+       |                                    ^
+     35|     state.partners.roster[partner].specialty = 'b';
+     36|     expect(counterCapacity(state)).toBeLessThan(ordinary);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  src/game/restock-forecast.test.ts > reliable menu preparation > recommended stock handles ordinary mixed-menu variation on fair days
+AssertionError: expected 18 to be less than or equal to 4
+ ❯ src/game/restock-forecast.test.ts:58:23
+     56|       totalLost += report.soldOut;
+     57|     }
+     58|     expect(stockouts).toBeLessThanOrEqual(4);
+       |                       ^
+     59|     expect(totalLost / 20).toBeLessThanOrEqual(.6);
+     60|   }, 30000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  src/game/restock-forecast.test.ts > reliable menu preparation > recommended stock handles ordinary mixed-menu variation on rain days
+ FAIL  src/game/restock-forecast.test.ts > reliable menu preparation > recommended stock handles ordinary mixed-menu variation on market days
+AssertionError: expected 17 to be less than or equal to 4
+ ❯ src/game/restock-forecast.test.ts:58:23
+     56|       totalLost += report.soldOut;
+     57|     }
+     58|     expect(stockouts).toBeLessThanOrEqual(4);
+       |                       ^
+     59|     expect(totalLost / 20).toBeLessThanOrEqual(.6);
+     60|   }, 30000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed (5)
+   Start at  08:52:30
+   Duration  1.21s (tests 88%, transform 9%, import 2%)
+

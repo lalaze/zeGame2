@@ -1,0 +1,504 @@
+{
+  "scope": "Current-source isolated mechanics; 5 seeded paired single-menu day-3 simulations at each marketing level, 180s arrivals plus accepted-service drain. Endowed stocks and upgrades; not fresh-save progression or proof of global dominance. Custom trial costs 0.25 tea and is excluded from operating-profit field.",
+  "economics": [
+    {
+      "base": "coffee",
+      "level": 1,
+      "stock": {
+        "price": 3,
+        "cost": 1,
+        "prep": 1.2,
+        "taste": 4,
+        "affinity": {
+          "commuter": 1,
+          "leisure": 0.25,
+          "teaTime": 0.25
+        }
+      },
+      "custom": {
+        "price": 3.75,
+        "cost": 1,
+        "prep": 1.2,
+        "taste": 4,
+        "affinity": {
+          "commuter": 1,
+          "leisure": 0.25,
+          "teaTime": 0.25
+        }
+      }
+    },
+    {
+      "base": "coffee",
+      "level": 5,
+      "stock": {
+        "price": 20.333333333333336,
+        "cost": 1,
+        "prep": 1.2,
+        "taste": 4,
+        "affinity": {
+          "commuter": 1,
+          "leisure": 0.25,
+          "teaTime": 0.25
+        }
+      },
+      "custom": {
+        "price": 25.41666666666667,
+        "cost": 1,
+        "prep": 1.2,
+        "taste": 4,
+        "affinity": {
+          "commuter": 1,
+          "leisure": 0.25,
+          "teaTime": 0.25
+        }
+      }
+    },
+    {
+      "base": "coffee",
+      "level": 10,
+      "stock": {
+        "price": 60,
+        "cost": 1,
+        "prep": 1.2,
+        "taste": 4,
+        "affinity": {
+          "commuter": 1,
+          "leisure": 0.25,
+          "teaTime": 0.25
+        }
+      },
+      "custom": {
+        "price": 75,
+        "cost": 1,
+        "prep": 1.2,
+        "taste": 4,
+        "affinity": {
+          "commuter": 1,
+          "leisure": 0.25,
+          "teaTime": 0.25
+        }
+      }
+    },
+    {
+      "base": "tea",
+      "level": 1,
+      "stock": {
+        "price": 9,
+        "cost": 2,
+        "prep": 4,
+        "taste": 4,
+        "affinity": {
+          "commuter": 0.3,
+          "leisure": 0.35,
+          "teaTime": 1
+        }
+      },
+      "custom": {
+        "price": 11.25,
+        "cost": 2,
+        "prep": 1.2,
+        "taste": 4,
+        "affinity": {
+          "commuter": 0.6,
+          "leisure": 0.35,
+          "teaTime": 1
+        }
+      }
+    },
+    {
+      "base": "tea",
+      "level": 5,
+      "stock": {
+        "price": 61,
+        "cost": 2,
+        "prep": 4,
+        "taste": 4,
+        "affinity": {
+          "commuter": 0.3,
+          "leisure": 0.35,
+          "teaTime": 1
+        }
+      },
+      "custom": {
+        "price": 76.25,
+        "cost": 2,
+        "prep": 1.2,
+        "taste": 4,
+        "affinity": {
+          "commuter": 0.6,
+          "leisure": 0.35,
+          "teaTime": 1
+        }
+      }
+    },
+    {
+      "base": "tea",
+      "level": 10,
+      "stock": {
+        "price": 180,
+        "cost": 2,
+        "prep": 4,
+        "taste": 4,
+        "affinity": {
+          "commuter": 0.3,
+          "leisure": 0.35,
+          "teaTime": 1
+        }
+      },
+      "custom": {
+        "price": 225,
+        "cost": 2,
+        "prep": 1.2,
+        "taste": 4,
+        "affinity": {
+          "commuter": 0.6,
+          "leisure": 0.35,
+          "teaTime": 1
+        }
+      }
+    }
+  ],
+  "summary": [
+    {
+      "marketing": 0,
+      "custom": false,
+      "served": 30.2,
+      "missed": 0,
+      "profit": 247.4,
+      "rating": 4.009677419354839
+    },
+    {
+      "marketing": 0,
+      "custom": true,
+      "served": 44,
+      "missed": 0,
+      "profit": 443,
+      "rating": 4.095242866334881
+    },
+    {
+      "marketing": 4,
+      "custom": false,
+      "served": 39,
+      "missed": 0,
+      "profit": 337.8,
+      "rating": 3.446153846153846
+    },
+    {
+      "marketing": 4,
+      "custom": true,
+      "served": 80.6,
+      "missed": 0,
+      "profit": 808.55,
+      "rating": 4.298800000000004
+    },
+    {
+      "marketing": 12,
+      "custom": false,
+      "served": 39,
+      "missed": 0,
+      "profit": 316.2,
+      "rating": 3.194871794871795
+    },
+    {
+      "marketing": 12,
+      "custom": true,
+      "served": 104,
+      "missed": 0,
+      "profit": 1115,
+      "rating": 4.237600000000002
+    }
+  ],
+  "runs": [
+    {
+      "seed": 12,
+      "custom": false,
+      "marketing": 0,
+      "served": 31,
+      "missed": 0,
+      "profit": 217,
+      "rating": 4.016129032258065
+    },
+    {
+      "seed": 12,
+      "custom": true,
+      "marketing": 0,
+      "served": 42,
+      "missed": 0,
+      "profit": 388.5,
+      "rating": 4.085714285714288
+    },
+    {
+      "seed": 98,
+      "custom": false,
+      "marketing": 0,
+      "served": 28,
+      "missed": 0,
+      "profit": 232,
+      "rating": 4
+    },
+    {
+      "seed": 98,
+      "custom": true,
+      "marketing": 0,
+      "served": 46,
+      "missed": 0,
+      "profit": 425.5,
+      "rating": 4.1043478260869595
+    },
+    {
+      "seed": 143,
+      "custom": false,
+      "marketing": 0,
+      "served": 31,
+      "missed": 0,
+      "profit": 325,
+      "rating": 4.016129032258065
+    },
+    {
+      "seed": 143,
+      "custom": true,
+      "marketing": 0,
+      "served": 45,
+      "missed": 0,
+      "profit": 506.25,
+      "rating": 4.100000000000003
+    },
+    {
+      "seed": 731,
+      "custom": false,
+      "marketing": 0,
+      "served": 30,
+      "missed": 0,
+      "profit": 210,
+      "rating": 4
+    },
+    {
+      "seed": 731,
+      "custom": true,
+      "marketing": 0,
+      "served": 43,
+      "missed": 0,
+      "profit": 442.75,
+      "rating": 4.090697674418608
+    },
+    {
+      "seed": 1091,
+      "custom": false,
+      "marketing": 0,
+      "served": 31,
+      "missed": 0,
+      "profit": 253,
+      "rating": 4.016129032258065
+    },
+    {
+      "seed": 1091,
+      "custom": true,
+      "marketing": 0,
+      "served": 44,
+      "missed": 0,
+      "profit": 452,
+      "rating": 4.095454545454548
+    },
+    {
+      "seed": 12,
+      "custom": false,
+      "marketing": 4,
+      "served": 39,
+      "missed": 0,
+      "profit": 345,
+      "rating": 3.4615384615384617
+    },
+    {
+      "seed": 12,
+      "custom": true,
+      "marketing": 4,
+      "served": 79,
+      "missed": 0,
+      "profit": 775.75,
+      "rating": 4.294000000000004
+    },
+    {
+      "seed": 98,
+      "custom": false,
+      "marketing": 4,
+      "served": 39,
+      "missed": 0,
+      "profit": 273,
+      "rating": 3.3846153846153846
+    },
+    {
+      "seed": 98,
+      "custom": true,
+      "marketing": 4,
+      "served": 81,
+      "missed": 0,
+      "profit": 794.25,
+      "rating": 4.300000000000003
+    },
+    {
+      "seed": 143,
+      "custom": false,
+      "marketing": 4,
+      "served": 39,
+      "missed": 0,
+      "profit": 381,
+      "rating": 3.3846153846153846
+    },
+    {
+      "seed": 143,
+      "custom": true,
+      "marketing": 4,
+      "served": 81,
+      "missed": 0,
+      "profit": 749.25,
+      "rating": 4.300000000000003
+    },
+    {
+      "seed": 731,
+      "custom": false,
+      "marketing": 4,
+      "served": 39,
+      "missed": 0,
+      "profit": 273,
+      "rating": 3.5641025641025643
+    },
+    {
+      "seed": 731,
+      "custom": true,
+      "marketing": 4,
+      "served": 80,
+      "missed": 0,
+      "profit": 830,
+      "rating": 4.300000000000003
+    },
+    {
+      "seed": 1091,
+      "custom": false,
+      "marketing": 4,
+      "served": 39,
+      "missed": 0,
+      "profit": 417,
+      "rating": 3.4358974358974357
+    },
+    {
+      "seed": 1091,
+      "custom": true,
+      "marketing": 4,
+      "served": 82,
+      "missed": 0,
+      "profit": 893.5,
+      "rating": 4.300000000000003
+    },
+    {
+      "seed": 12,
+      "custom": false,
+      "marketing": 12,
+      "served": 39,
+      "missed": 0,
+      "profit": 345,
+      "rating": 3.2051282051282053
+    },
+    {
+      "seed": 12,
+      "custom": true,
+      "marketing": 12,
+      "served": 104,
+      "missed": 0,
+      "profit": 1007,
+      "rating": 4.222000000000001
+    },
+    {
+      "seed": 98,
+      "custom": false,
+      "marketing": 12,
+      "served": 39,
+      "missed": 0,
+      "profit": 309,
+      "rating": 3.2051282051282053
+    },
+    {
+      "seed": 98,
+      "custom": true,
+      "marketing": 12,
+      "served": 104,
+      "missed": 0,
+      "profit": 1232,
+      "rating": 4.246000000000002
+    },
+    {
+      "seed": 143,
+      "custom": false,
+      "marketing": 12,
+      "served": 39,
+      "missed": 0,
+      "profit": 309,
+      "rating": 3.1794871794871793
+    },
+    {
+      "seed": 143,
+      "custom": true,
+      "marketing": 12,
+      "served": 104,
+      "missed": 0,
+      "profit": 1187,
+      "rating": 4.244000000000002
+    },
+    {
+      "seed": 731,
+      "custom": false,
+      "marketing": 12,
+      "served": 39,
+      "missed": 0,
+      "profit": 345,
+      "rating": 3.2051282051282053
+    },
+    {
+      "seed": 731,
+      "custom": true,
+      "marketing": 12,
+      "served": 104,
+      "missed": 0,
+      "profit": 1052,
+      "rating": 4.246000000000002
+    },
+    {
+      "seed": 1091,
+      "custom": false,
+      "marketing": 12,
+      "served": 39,
+      "missed": 0,
+      "profit": 273,
+      "rating": 3.1794871794871793
+    },
+    {
+      "seed": 1091,
+      "custom": true,
+      "marketing": 12,
+      "served": 104,
+      "missed": 0,
+      "profit": 1097,
+      "rating": 4.230000000000001
+    }
+  ],
+  "goalGate": {
+    "day": 12,
+    "served": 1500,
+    "focus": "garden",
+    "current": "latte",
+    "complete": false,
+    "milestonesStarted": false
+  },
+  "catGate": {
+    "owned": [
+      "ginger",
+      "tabby",
+      "black"
+    ],
+    "cash": 98800,
+    "fourthAdoption": false
+  },
+  "staffing": {
+    "actualServers": 6,
+    "namedPartnerSlots": 3
+  }
+}

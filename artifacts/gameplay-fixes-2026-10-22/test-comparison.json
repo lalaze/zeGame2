@@ -1,0 +1,22 @@
+{
+  "baseline": {
+    "passed": 2691,
+    "failed": 133,
+    "skipped": 42
+  },
+  "verifiedFinal": {
+    "passed": 2725,
+    "failed": 133,
+    "skipped": 52,
+    "total": 2910
+  },
+  "newFailures": [],
+  "resolved": [],
+  "method": "Complete final suite, then a targeted rerun of the corrected diagnostic day-transition helper and its two related runner suites. Raw whole-suite and rerun reports are retained.",
+  "reports": [
+    "baseline-full-tests.json",
+    "delivery-tests.json",
+    "delivery-harness-recheck.json"
+  ],
+  "diagnosticFix": "The midpoint-restock experiment now settles, restocks and opens the next day when a bakery closes early, matching the reference exact-clock policy. Its aggregate ledger includes settled days."
+}

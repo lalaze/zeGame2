@@ -1,0 +1,137 @@
+AggregateError: 
+    at internalConnectMultiple (node:net:1135:18)
+    at internalConnectMultiple (node:net:1211:5)
+    at internalConnectMultiple (node:net:1211:5)
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+    at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+  code: 'EPERM',
+  [errors]: [
+    Error: connect EPERM ::1:3000 - Local (:::0)
+        at internalConnectMultiple (node:net:1207:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect EPERM 127.0.0.1:3000 - Local (0.0.0.0:0)
+        at internalConnectMultiple (node:net:1207:16)
+        at internalConnectMultiple (node:net:1211:5)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+AggregateError: 
+    at internalConnectMultiple (node:net:1135:18)
+    at internalConnectMultiple (node:net:1211:5)
+    at internalConnectMultiple (node:net:1211:5)
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+    at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+  code: 'EPERM',
+  [errors]: [
+    Error: connect EPERM ::1:3000 - Local (:::0)
+        at internalConnectMultiple (node:net:1207:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect EPERM 127.0.0.1:3000 - Local (0.0.0.0:0)
+        at internalConnectMultiple (node:net:1207:16)
+        at internalConnectMultiple (node:net:1211:5)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+AggregateError: 
+    at internalConnectMultiple (node:net:1135:18)
+    at internalConnectMultiple (node:net:1211:5)
+    at internalConnectMultiple (node:net:1211:5)
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+    at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+  code: 'EPERM',
+  [errors]: [
+    Error: connect EPERM ::1:3000 - Local (:::0)
+        at internalConnectMultiple (node:net:1207:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect EPERM 127.0.0.1:3000 - Local (0.0.0.0:0)
+        at internalConnectMultiple (node:net:1207:16)
+        at internalConnectMultiple (node:net:1211:5)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+AggregateError: 
+    at internalConnectMultiple (node:net:1135:18)
+    at internalConnectMultiple (node:net:1211:5)
+    at internalConnectMultiple (node:net:1211:5)
+    at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+    at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+  code: 'EPERM',
+  [errors]: [
+    Error: connect EPERM ::1:3000 - Local (:::0)
+        at internalConnectMultiple (node:net:1207:16)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000
+    },
+    Error: connect EPERM 127.0.0.1:3000 - Local (0.0.0.0:0)
+        at internalConnectMultiple (node:net:1207:16)
+        at internalConnectMultiple (node:net:1211:5)
+        at defaultTriggerAsyncIdScope (node:internal/async_hooks:472:18)
+        at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1553:7)
+        at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:134:8) {
+      errno: -1,
+      code: 'EPERM',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000
+    }
+  ]
+}
+JSON report written to /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth/artifacts/gameplay-fixes-2026-10-22/baseline-tests.json

@@ -1,0 +1,29 @@
+{
+  "scope": "Isolated temporary cafe on production preview; no real save modified. Real UI actions through day 2, Chinese desktop and 390px mobile.",
+  "menu": [
+    "Unlocking Americano left it off the menu and showed the explanation.",
+    "Explicit menu toggle listed it without spending again."
+  ],
+  "goal": "Any recipe Lv2 shown as the second goal.",
+  "story": {
+    "chapter": "Theo: The 7:42",
+    "method": "Same final mobile CSS injected into the ongoing temporary cafe to preserve progress; final production build includes the rule.",
+    "viewport": 390,
+    "documentWidth": 390,
+    "beforeClick": {
+      "storyVisible": true,
+      "guideVisibility": "hidden",
+      "buttonReachable": true
+    },
+    "afterLater": {
+      "storyHidden": true,
+      "guideVisibility": "visible"
+    },
+    "screenshots": [
+      "11-story-clearance-mobile.png",
+      "12-story-opened-mobile.png",
+      "13-guide-restored-mobile.png"
+    ]
+  },
+  "cleanup": "Named session gameplay-fixes-20261022 closed."
+}

@@ -1,0 +1,17 @@
+{
+  "fixture": "Separate temporary Chrome profile, day 3 established café; money and recipes endowed solely for UI checks. Normal service then played through days 3 and 4; this is not fresh-save progression evidence.",
+  "browser": "Installed Chrome, desktop CSS viewports 1280×720 and 1280×900; mobile emulation 390×844 and 360×780. No physical phone testing.",
+  "checks": [
+    "Combined weather/audience card; adding Latte changes suited groups from Commuters to Commuters + Leisure guests",
+    "Audience disclosure remains open after menu selection",
+    "Forecast bake and restock executed using real buttons",
+    "Saved live day 4 state retained visit classification and continued service after reload",
+    "Normal day 4 settlement: 44 served; commuter 11, leisure 22, tea-time 11; pairings 3, 11, 7",
+    "Day 4 revenue 1359.60, profit 1153.60; new day 5 counters reset",
+    "360px Chinese page width 360px and modal width 320px; English 390px page width 390px",
+    "No browser errors reported"
+  ],
+  "automationNote": "A 25-second wait for the report timed out while the business day was still running; the following actual click and snapshot verified the completed report. No game failure inferred.",
+  "preview": "http://100.96.195.115:5287",
+  "storageContext": "Isolated Chrome marked only this local test origin secure so live-save reload could be checked. Ordinary HTTP access uses the game’s existing temporary mode."
+}

@@ -1,0 +1,1726 @@
+[
+  {
+    "weather": "fair",
+    "cash": 0,
+    "plan": {
+      "buy": {},
+      "cost": 0,
+      "balance": 0,
+      "missing": {
+        "beans": 60,
+        "milk": 25,
+        "tea": 18
+      },
+      "missingCost": 146
+    },
+    "capacity": 0.2892496432944802,
+    "coins": 0,
+    "pantry": {
+      "beans": 0,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "fair",
+    "cash": 0.5,
+    "plan": {
+      "buy": {},
+      "cost": 0,
+      "balance": 0.5,
+      "missing": {
+        "beans": 60,
+        "milk": 25,
+        "tea": 18
+      },
+      "missingCost": 146
+    },
+    "capacity": 0.2892496432944802,
+    "coins": 0.5,
+    "pantry": {
+      "beans": 0,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "fair",
+    "cash": 1,
+    "plan": {
+      "buy": {
+        "beans": 1
+      },
+      "cost": 1,
+      "balance": 0,
+      "missing": {
+        "beans": 59,
+        "milk": 25,
+        "tea": 18
+      },
+      "missingCost": 145
+    },
+    "capacity": 0.2892496432944802,
+    "coins": 0,
+    "pantry": {
+      "beans": 1,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "fair",
+    "cash": 2,
+    "plan": {
+      "buy": {
+        "beans": 1
+      },
+      "cost": 1,
+      "balance": 1,
+      "missing": {
+        "beans": 59,
+        "milk": 25,
+        "tea": 18
+      },
+      "missingCost": 145
+    },
+    "capacity": 0.2892496432944802,
+    "coins": 1,
+    "pantry": {
+      "beans": 1,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "fair",
+    "cash": 3,
+    "plan": {
+      "buy": {
+        "beans": 1
+      },
+      "cost": 1,
+      "balance": 2,
+      "missing": {
+        "beans": 59,
+        "milk": 25,
+        "tea": 18
+      },
+      "missingCost": 145
+    },
+    "capacity": 0.2892496432944802,
+    "coins": 2,
+    "pantry": {
+      "beans": 1,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "fair",
+    "cash": 5,
+    "plan": {
+      "buy": {
+        "beans": 2
+      },
+      "cost": 2,
+      "balance": 3,
+      "missing": {
+        "beans": 58,
+        "milk": 25,
+        "tea": 18
+      },
+      "missingCost": 144
+    },
+    "capacity": 0.2892496432944802,
+    "coins": 3,
+    "pantry": {
+      "beans": 2,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "fair",
+    "cash": 10,
+    "plan": {
+      "buy": {
+        "beans": 4,
+        "milk": 1,
+        "tea": 1
+      },
+      "cost": 8,
+      "balance": 2,
+      "missing": {
+        "beans": 56,
+        "milk": 24,
+        "tea": 17
+      },
+      "missingCost": 138
+    },
+    "capacity": 0.2892496432944802,
+    "coins": 2,
+    "pantry": {
+      "beans": 4,
+      "milk": 1,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 1,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "fair",
+    "cash": 25,
+    "plan": {
+      "buy": {
+        "beans": 10,
+        "milk": 4,
+        "tea": 3
+      },
+      "cost": 24,
+      "balance": 1,
+      "missing": {
+        "beans": 50,
+        "milk": 21,
+        "tea": 15
+      },
+      "missingCost": 122
+    },
+    "capacity": 0.2892496432944802,
+    "coins": 1,
+    "pantry": {
+      "beans": 10,
+      "milk": 4,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 3,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "fair",
+    "cash": 50,
+    "plan": {
+      "buy": {
+        "beans": 20,
+        "milk": 8,
+        "tea": 6
+      },
+      "cost": 48,
+      "balance": 2,
+      "missing": {
+        "beans": 40,
+        "milk": 17,
+        "tea": 12
+      },
+      "missingCost": 98
+    },
+    "capacity": 0.2892496432944802,
+    "coins": 2,
+    "pantry": {
+      "beans": 20,
+      "milk": 8,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 6,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "fair",
+    "cash": 75,
+    "plan": {
+      "buy": {
+        "beans": 30,
+        "milk": 12,
+        "tea": 9
+      },
+      "cost": 72,
+      "balance": 3,
+      "missing": {
+        "beans": 30,
+        "milk": 13,
+        "tea": 9
+      },
+      "missingCost": 74
+    },
+    "capacity": 0.2892496432944802,
+    "coins": 3,
+    "pantry": {
+      "beans": 30,
+      "milk": 12,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 9,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "fair",
+    "cash": 100,
+    "plan": {
+      "buy": {
+        "beans": 41,
+        "milk": 17,
+        "tea": 12
+      },
+      "cost": 99,
+      "balance": 1,
+      "missing": {
+        "beans": 19,
+        "milk": 8,
+        "tea": 6
+      },
+      "missingCost": 47
+    },
+    "capacity": 0.2892496432944802,
+    "coins": 1,
+    "pantry": {
+      "beans": 41,
+      "milk": 17,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 12,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "fair",
+    "cash": 150,
+    "plan": {
+      "buy": {
+        "beans": 60,
+        "milk": 25,
+        "tea": 18
+      },
+      "cost": 146,
+      "balance": 4,
+      "missing": {},
+      "missingCost": 0
+    },
+    "capacity": 0.2892496432944802,
+    "coins": 4,
+    "pantry": {
+      "beans": 60,
+      "milk": 25,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 18,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "fair",
+    "cash": 1000,
+    "plan": {
+      "buy": {
+        "beans": 60,
+        "milk": 25,
+        "tea": 18
+      },
+      "cost": 146,
+      "balance": 854,
+      "missing": {},
+      "missingCost": 0
+    },
+    "capacity": 0.2892496432944802,
+    "coins": 854,
+    "pantry": {
+      "beans": 60,
+      "milk": 25,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 18,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "rain",
+    "cash": 0,
+    "plan": {
+      "buy": {},
+      "cost": 0,
+      "balance": 0,
+      "missing": {
+        "beans": 46,
+        "milk": 27,
+        "tea": 21
+      },
+      "missingCost": 142
+    },
+    "capacity": 0.2429250787735131,
+    "coins": 0,
+    "pantry": {
+      "beans": 0,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "rain",
+    "cash": 0.5,
+    "plan": {
+      "buy": {},
+      "cost": 0,
+      "balance": 0.5,
+      "missing": {
+        "beans": 46,
+        "milk": 27,
+        "tea": 21
+      },
+      "missingCost": 142
+    },
+    "capacity": 0.2429250787735131,
+    "coins": 0.5,
+    "pantry": {
+      "beans": 0,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "rain",
+    "cash": 1,
+    "plan": {
+      "buy": {
+        "beans": 1
+      },
+      "cost": 1,
+      "balance": 0,
+      "missing": {
+        "beans": 45,
+        "milk": 27,
+        "tea": 21
+      },
+      "missingCost": 141
+    },
+    "capacity": 0.2429250787735131,
+    "coins": 0,
+    "pantry": {
+      "beans": 1,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "rain",
+    "cash": 2,
+    "plan": {
+      "buy": {
+        "beans": 1
+      },
+      "cost": 1,
+      "balance": 1,
+      "missing": {
+        "beans": 45,
+        "milk": 27,
+        "tea": 21
+      },
+      "missingCost": 141
+    },
+    "capacity": 0.2429250787735131,
+    "coins": 1,
+    "pantry": {
+      "beans": 1,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "rain",
+    "cash": 3,
+    "plan": {
+      "buy": {
+        "beans": 1
+      },
+      "cost": 1,
+      "balance": 2,
+      "missing": {
+        "beans": 45,
+        "milk": 27,
+        "tea": 21
+      },
+      "missingCost": 141
+    },
+    "capacity": 0.2429250787735131,
+    "coins": 2,
+    "pantry": {
+      "beans": 1,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "rain",
+    "cash": 5,
+    "plan": {
+      "buy": {
+        "beans": 1
+      },
+      "cost": 1,
+      "balance": 4,
+      "missing": {
+        "beans": 45,
+        "milk": 27,
+        "tea": 21
+      },
+      "missingCost": 141
+    },
+    "capacity": 0.2429250787735131,
+    "coins": 4,
+    "pantry": {
+      "beans": 1,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "rain",
+    "cash": 10,
+    "plan": {
+      "buy": {
+        "beans": 3,
+        "milk": 1,
+        "tea": 1
+      },
+      "cost": 7,
+      "balance": 3,
+      "missing": {
+        "beans": 43,
+        "milk": 26,
+        "tea": 20
+      },
+      "missingCost": 135
+    },
+    "capacity": 0.2429250787735131,
+    "coins": 3,
+    "pantry": {
+      "beans": 3,
+      "milk": 1,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 1,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "rain",
+    "cash": 25,
+    "plan": {
+      "buy": {
+        "beans": 8,
+        "milk": 4,
+        "tea": 3
+      },
+      "cost": 22,
+      "balance": 3,
+      "missing": {
+        "beans": 38,
+        "milk": 23,
+        "tea": 18
+      },
+      "missingCost": 120
+    },
+    "capacity": 0.2429250787735131,
+    "coins": 3,
+    "pantry": {
+      "beans": 8,
+      "milk": 4,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 3,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "rain",
+    "cash": 50,
+    "plan": {
+      "buy": {
+        "beans": 16,
+        "milk": 9,
+        "tea": 7
+      },
+      "cost": 48,
+      "balance": 2,
+      "missing": {
+        "beans": 30,
+        "milk": 18,
+        "tea": 14
+      },
+      "missingCost": 94
+    },
+    "capacity": 0.2429250787735131,
+    "coins": 2,
+    "pantry": {
+      "beans": 16,
+      "milk": 9,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 7,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "rain",
+    "cash": 75,
+    "plan": {
+      "buy": {
+        "beans": 24,
+        "milk": 14,
+        "tea": 11
+      },
+      "cost": 74,
+      "balance": 1,
+      "missing": {
+        "beans": 22,
+        "milk": 13,
+        "tea": 10
+      },
+      "missingCost": 68
+    },
+    "capacity": 0.2429250787735131,
+    "coins": 1,
+    "pantry": {
+      "beans": 24,
+      "milk": 14,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 11,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "rain",
+    "cash": 100,
+    "plan": {
+      "buy": {
+        "beans": 32,
+        "milk": 19,
+        "tea": 14
+      },
+      "cost": 98,
+      "balance": 2,
+      "missing": {
+        "beans": 14,
+        "milk": 8,
+        "tea": 7
+      },
+      "missingCost": 44
+    },
+    "capacity": 0.2429250787735131,
+    "coins": 2,
+    "pantry": {
+      "beans": 32,
+      "milk": 19,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 14,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "rain",
+    "cash": 150,
+    "plan": {
+      "buy": {
+        "beans": 46,
+        "milk": 27,
+        "tea": 21
+      },
+      "cost": 142,
+      "balance": 8,
+      "missing": {},
+      "missingCost": 0
+    },
+    "capacity": 0.2429250787735131,
+    "coins": 8,
+    "pantry": {
+      "beans": 46,
+      "milk": 27,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 21,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "rain",
+    "cash": 1000,
+    "plan": {
+      "buy": {
+        "beans": 46,
+        "milk": 27,
+        "tea": 21
+      },
+      "cost": 142,
+      "balance": 858,
+      "missing": {},
+      "missingCost": 0
+    },
+    "capacity": 0.2429250787735131,
+    "coins": 858,
+    "pantry": {
+      "beans": 46,
+      "milk": 27,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 21,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "hot",
+    "cash": 0,
+    "plan": {
+      "buy": {},
+      "cost": 0,
+      "balance": 0,
+      "missing": {
+        "beans": 54,
+        "milk": 31,
+        "tea": 13
+      },
+      "missingCost": 142
+    },
+    "capacity": 0.24804029226673954,
+    "coins": 0,
+    "pantry": {
+      "beans": 0,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "hot",
+    "cash": 0.5,
+    "plan": {
+      "buy": {},
+      "cost": 0,
+      "balance": 0.5,
+      "missing": {
+        "beans": 54,
+        "milk": 31,
+        "tea": 13
+      },
+      "missingCost": 142
+    },
+    "capacity": 0.24804029226673954,
+    "coins": 0.5,
+    "pantry": {
+      "beans": 0,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "hot",
+    "cash": 1,
+    "plan": {
+      "buy": {
+        "beans": 1
+      },
+      "cost": 1,
+      "balance": 0,
+      "missing": {
+        "beans": 53,
+        "milk": 31,
+        "tea": 13
+      },
+      "missingCost": 141
+    },
+    "capacity": 0.24804029226673954,
+    "coins": 0,
+    "pantry": {
+      "beans": 1,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "hot",
+    "cash": 2,
+    "plan": {
+      "buy": {
+        "beans": 1
+      },
+      "cost": 1,
+      "balance": 1,
+      "missing": {
+        "beans": 53,
+        "milk": 31,
+        "tea": 13
+      },
+      "missingCost": 141
+    },
+    "capacity": 0.24804029226673954,
+    "coins": 1,
+    "pantry": {
+      "beans": 1,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "hot",
+    "cash": 3,
+    "plan": {
+      "buy": {
+        "beans": 1
+      },
+      "cost": 1,
+      "balance": 2,
+      "missing": {
+        "beans": 53,
+        "milk": 31,
+        "tea": 13
+      },
+      "missingCost": 141
+    },
+    "capacity": 0.24804029226673954,
+    "coins": 2,
+    "pantry": {
+      "beans": 1,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "hot",
+    "cash": 5,
+    "plan": {
+      "buy": {
+        "beans": 1,
+        "milk": 1
+      },
+      "cost": 3,
+      "balance": 2,
+      "missing": {
+        "beans": 53,
+        "milk": 30,
+        "tea": 13
+      },
+      "missingCost": 139
+    },
+    "capacity": 0.24804029226673954,
+    "coins": 2,
+    "pantry": {
+      "beans": 1,
+      "milk": 1,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "hot",
+    "cash": 10,
+    "plan": {
+      "buy": {
+        "beans": 3,
+        "milk": 2
+      },
+      "cost": 7,
+      "balance": 3,
+      "missing": {
+        "beans": 51,
+        "milk": 29,
+        "tea": 13
+      },
+      "missingCost": 135
+    },
+    "capacity": 0.24804029226673954,
+    "coins": 3,
+    "pantry": {
+      "beans": 3,
+      "milk": 2,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "hot",
+    "cash": 25,
+    "plan": {
+      "buy": {
+        "beans": 9,
+        "milk": 5,
+        "tea": 2
+      },
+      "cost": 23,
+      "balance": 2,
+      "missing": {
+        "beans": 45,
+        "milk": 26,
+        "tea": 11
+      },
+      "missingCost": 119
+    },
+    "capacity": 0.24804029226673954,
+    "coins": 2,
+    "pantry": {
+      "beans": 9,
+      "milk": 5,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 2,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "hot",
+    "cash": 50,
+    "plan": {
+      "buy": {
+        "beans": 19,
+        "milk": 10,
+        "tea": 4
+      },
+      "cost": 47,
+      "balance": 3,
+      "missing": {
+        "beans": 35,
+        "milk": 21,
+        "tea": 9
+      },
+      "missingCost": 95
+    },
+    "capacity": 0.24804029226673954,
+    "coins": 3,
+    "pantry": {
+      "beans": 19,
+      "milk": 10,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 4,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "hot",
+    "cash": 75,
+    "plan": {
+      "buy": {
+        "beans": 28,
+        "milk": 16,
+        "tea": 6
+      },
+      "cost": 72,
+      "balance": 3,
+      "missing": {
+        "beans": 26,
+        "milk": 15,
+        "tea": 7
+      },
+      "missingCost": 70
+    },
+    "capacity": 0.24804029226673954,
+    "coins": 3,
+    "pantry": {
+      "beans": 28,
+      "milk": 16,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 6,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "hot",
+    "cash": 100,
+    "plan": {
+      "buy": {
+        "beans": 38,
+        "milk": 21,
+        "tea": 9
+      },
+      "cost": 98,
+      "balance": 2,
+      "missing": {
+        "beans": 16,
+        "milk": 10,
+        "tea": 4
+      },
+      "missingCost": 44
+    },
+    "capacity": 0.24804029226673954,
+    "coins": 2,
+    "pantry": {
+      "beans": 38,
+      "milk": 21,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 9,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "hot",
+    "cash": 150,
+    "plan": {
+      "buy": {
+        "beans": 54,
+        "milk": 31,
+        "tea": 13
+      },
+      "cost": 142,
+      "balance": 8,
+      "missing": {},
+      "missingCost": 0
+    },
+    "capacity": 0.24804029226673954,
+    "coins": 8,
+    "pantry": {
+      "beans": 54,
+      "milk": 31,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 13,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "hot",
+    "cash": 1000,
+    "plan": {
+      "buy": {
+        "beans": 54,
+        "milk": 31,
+        "tea": 13
+      },
+      "cost": 142,
+      "balance": 858,
+      "missing": {},
+      "missingCost": 0
+    },
+    "capacity": 0.24804029226673954,
+    "coins": 858,
+    "pantry": {
+      "beans": 54,
+      "milk": 31,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 13,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "market",
+    "cash": 0,
+    "plan": {
+      "buy": {},
+      "cost": 0,
+      "balance": 0,
+      "missing": {
+        "beans": 68,
+        "milk": 18,
+        "tea": 21
+      },
+      "missingCost": 146
+    },
+    "capacity": 0.34163838256765466,
+    "coins": 0,
+    "pantry": {
+      "beans": 0,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "market",
+    "cash": 0.5,
+    "plan": {
+      "buy": {},
+      "cost": 0,
+      "balance": 0.5,
+      "missing": {
+        "beans": 68,
+        "milk": 18,
+        "tea": 21
+      },
+      "missingCost": 146
+    },
+    "capacity": 0.34163838256765466,
+    "coins": 0.5,
+    "pantry": {
+      "beans": 0,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "market",
+    "cash": 1,
+    "plan": {
+      "buy": {
+        "beans": 1
+      },
+      "cost": 1,
+      "balance": 0,
+      "missing": {
+        "beans": 67,
+        "milk": 18,
+        "tea": 21
+      },
+      "missingCost": 145
+    },
+    "capacity": 0.34163838256765466,
+    "coins": 0,
+    "pantry": {
+      "beans": 1,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "market",
+    "cash": 2,
+    "plan": {
+      "buy": {
+        "beans": 1
+      },
+      "cost": 1,
+      "balance": 1,
+      "missing": {
+        "beans": 67,
+        "milk": 18,
+        "tea": 21
+      },
+      "missingCost": 145
+    },
+    "capacity": 0.34163838256765466,
+    "coins": 1,
+    "pantry": {
+      "beans": 1,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "market",
+    "cash": 3,
+    "plan": {
+      "buy": {
+        "beans": 1
+      },
+      "cost": 1,
+      "balance": 2,
+      "missing": {
+        "beans": 67,
+        "milk": 18,
+        "tea": 21
+      },
+      "missingCost": 145
+    },
+    "capacity": 0.34163838256765466,
+    "coins": 2,
+    "pantry": {
+      "beans": 1,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "market",
+    "cash": 5,
+    "plan": {
+      "buy": {
+        "beans": 2
+      },
+      "cost": 2,
+      "balance": 3,
+      "missing": {
+        "beans": 66,
+        "milk": 18,
+        "tea": 21
+      },
+      "missingCost": 144
+    },
+    "capacity": 0.34163838256765466,
+    "coins": 3,
+    "pantry": {
+      "beans": 2,
+      "milk": 0,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 0,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "market",
+    "cash": 10,
+    "plan": {
+      "buy": {
+        "beans": 4,
+        "milk": 1,
+        "tea": 1
+      },
+      "cost": 8,
+      "balance": 2,
+      "missing": {
+        "beans": 64,
+        "milk": 17,
+        "tea": 20
+      },
+      "missingCost": 138
+    },
+    "capacity": 0.34163838256765466,
+    "coins": 2,
+    "pantry": {
+      "beans": 4,
+      "milk": 1,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 1,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "market",
+    "cash": 25,
+    "plan": {
+      "buy": {
+        "beans": 11,
+        "milk": 3,
+        "tea": 3
+      },
+      "cost": 23,
+      "balance": 2,
+      "missing": {
+        "beans": 57,
+        "milk": 15,
+        "tea": 18
+      },
+      "missingCost": 123
+    },
+    "capacity": 0.34163838256765466,
+    "coins": 2,
+    "pantry": {
+      "beans": 11,
+      "milk": 3,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 3,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "market",
+    "cash": 50,
+    "plan": {
+      "buy": {
+        "beans": 23,
+        "milk": 6,
+        "tea": 7
+      },
+      "cost": 49,
+      "balance": 1,
+      "missing": {
+        "beans": 45,
+        "milk": 12,
+        "tea": 14
+      },
+      "missingCost": 97
+    },
+    "capacity": 0.34163838256765466,
+    "coins": 1,
+    "pantry": {
+      "beans": 23,
+      "milk": 6,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 7,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "market",
+    "cash": 75,
+    "plan": {
+      "buy": {
+        "beans": 34,
+        "milk": 9,
+        "tea": 10
+      },
+      "cost": 72,
+      "balance": 3,
+      "missing": {
+        "beans": 34,
+        "milk": 9,
+        "tea": 11
+      },
+      "missingCost": 74
+    },
+    "capacity": 0.34163838256765466,
+    "coins": 3,
+    "pantry": {
+      "beans": 34,
+      "milk": 9,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 10,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "market",
+    "cash": 100,
+    "plan": {
+      "buy": {
+        "beans": 46,
+        "milk": 12,
+        "tea": 14
+      },
+      "cost": 98,
+      "balance": 2,
+      "missing": {
+        "beans": 22,
+        "milk": 6,
+        "tea": 7
+      },
+      "missingCost": 48
+    },
+    "capacity": 0.34163838256765466,
+    "coins": 2,
+    "pantry": {
+      "beans": 46,
+      "milk": 12,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 14,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "market",
+    "cash": 150,
+    "plan": {
+      "buy": {
+        "beans": 68,
+        "milk": 18,
+        "tea": 21
+      },
+      "cost": 146,
+      "balance": 4,
+      "missing": {},
+      "missingCost": 0
+    },
+    "capacity": 0.34163838256765466,
+    "coins": 4,
+    "pantry": {
+      "beans": 68,
+      "milk": 18,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 21,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  },
+  {
+    "weather": "market",
+    "cash": 1000,
+    "plan": {
+      "buy": {
+        "beans": 68,
+        "milk": 18,
+        "tea": 21
+      },
+      "cost": 146,
+      "balance": 854,
+      "missing": {},
+      "missingCost": 0
+    },
+    "capacity": 0.34163838256765466,
+    "coins": 854,
+    "pantry": {
+      "beans": 68,
+      "milk": 18,
+      "flour": 0,
+      "butter": 0,
+      "eggs": 0,
+      "sugar": 0,
+      "tea": 21,
+      "spice": 0,
+      "cocoa": 0,
+      "cream": 0,
+      "fruit": 0,
+      "matcha": 0
+    }
+  }
+]

@@ -1,0 +1,4716 @@
+{
+  "method": "Synthetic controlled day-3 states; 15 seeded runs per menu and kitchen size; paid forecast stock, automatic service, no moments; current gameplay fixes, including the new forecast and kitchen closing policy with one extra final-batch portion when expected unmet demand is positive. Staff costs excluded from daily operating profit.",
+  "lateBatch": {
+    "remainingDay": 0.09999999999999432,
+    "nextBatch": null,
+    "productionSeconds": 28.49284818342959
+  },
+  "stockAtOpen": {
+    "buy": {
+      "beans": 59
+    },
+    "cost": 59
+  },
+  "stockAtEnd": {
+    "buy": {
+      "beans": 59
+    },
+    "cost": 59
+  },
+  "summary": [
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "profit": 346.53333333333336,
+      "served": 75.06666666666666,
+      "soldOut": 0.26666666666666666,
+      "staleCost": 9.866666666666667,
+      "duration": 182.21000000000717,
+      "daysWithInProgressAtClose": 0
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "profit": 358.93333333333334,
+      "served": 74.2,
+      "soldOut": 1.1333333333333333,
+      "staleCost": 3.466666666666667,
+      "duration": 182.05666666667383,
+      "daysWithInProgressAtClose": 0
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "profit": 337.46666666666664,
+      "served": 74.2,
+      "soldOut": 1.2666666666666666,
+      "staleCost": 3.2,
+      "duration": 182.25000000000722,
+      "daysWithInProgressAtClose": 0
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "profit": 931.6,
+      "served": 88.2,
+      "soldOut": 1.7333333333333334,
+      "staleCost": 31.933333333333334,
+      "duration": 184.61000000000772,
+      "daysWithInProgressAtClose": 0
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "profit": 940.5333333333333,
+      "served": 88.66666666666667,
+      "soldOut": 1.3333333333333333,
+      "staleCost": 24.733333333333334,
+      "duration": 183.6200000000075,
+      "daysWithInProgressAtClose": 0
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "profit": 954.1333333333333,
+      "served": 87,
+      "soldOut": 2.466666666666667,
+      "staleCost": 16.933333333333334,
+      "duration": 183.23333333334074,
+      "daysWithInProgressAtClose": 0
+    }
+  ],
+  "runs": [
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 1,
+      "forecast": {
+        "espresso": 44.32075905209481,
+        "roll": 48.15405010821054
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26752250060116967,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 49
+        }
+      },
+      "bake": {
+        "roll": 49
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 394,
+      "served": 66,
+      "soldOut": 1,
+      "baked": {
+        "roll": 53
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 180.45000000000678
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 2,
+      "forecast": {
+        "espresso": 44.32075905209481,
+        "roll": 48.15405010821054
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26752250060116967,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 49
+        }
+      },
+      "bake": {
+        "roll": 49
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {},
+        "shelf": {
+          "roll": 6
+        }
+      },
+      "lateStarted": 0,
+      "profit": 288,
+      "served": 67,
+      "soldOut": 0,
+      "baked": {
+        "roll": 49
+      },
+      "stale": {
+        "roll": 6
+      },
+      "staleCost": 24,
+      "duration": 182.95000000000735
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 3,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 48
+        }
+      },
+      "bake": {
+        "roll": 48
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {},
+        "shelf": {
+          "roll": 4
+        }
+      },
+      "lateStarted": 0,
+      "profit": 462,
+      "served": 79,
+      "soldOut": 0,
+      "baked": {
+        "roll": 48
+      },
+      "stale": {
+        "roll": 4
+      },
+      "staleCost": 16,
+      "duration": 183.05000000000737
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 4,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 48
+        }
+      },
+      "bake": {
+        "roll": 48
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {},
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 320,
+      "served": 75,
+      "soldOut": 1,
+      "baked": {
+        "roll": 48
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 181.450000000007
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 5,
+      "forecast": {
+        "espresso": 43.900084582618994,
+        "roll": 44.67057178803738
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.24816984326687433,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 45
+        }
+      },
+      "bake": {
+        "roll": 45
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {},
+        "shelf": {
+          "roll": 7
+        }
+      },
+      "lateStarted": 0,
+      "profit": 230,
+      "served": 64,
+      "soldOut": 0,
+      "baked": {
+        "roll": 45
+      },
+      "stale": {
+        "roll": 6
+      },
+      "staleCost": 24,
+      "duration": 181.65000000000705
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 6,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 48
+        }
+      },
+      "bake": {
+        "roll": 48
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {},
+        "shelf": {
+          "roll": 3
+        }
+      },
+      "lateStarted": 0,
+      "profit": 340,
+      "served": 78,
+      "soldOut": 0,
+      "baked": {
+        "roll": 48
+      },
+      "stale": {
+        "roll": 3
+      },
+      "staleCost": 12,
+      "duration": 181.15000000000694
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 7,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 48
+        }
+      },
+      "bake": {
+        "roll": 48
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {},
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 370,
+      "served": 80,
+      "soldOut": 1,
+      "baked": {
+        "roll": 48
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 183.45000000000746
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 8,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 48
+        }
+      },
+      "bake": {
+        "roll": 48
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 362,
+      "served": 76,
+      "soldOut": 0,
+      "baked": {
+        "roll": 52
+      },
+      "stale": {
+        "roll": 2
+      },
+      "staleCost": 8,
+      "duration": 181.400000000007
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 9,
+      "forecast": {
+        "espresso": 37.87173698891051,
+        "roll": 43.551339934166414
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.24195188852314675,
+          "lead": 28.49284818342959,
+          "trigger": 8,
+          "morning": 44
+        }
+      },
+      "bake": {
+        "roll": 44
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {},
+        "shelf": {
+          "roll": 4
+        }
+      },
+      "lateStarted": 0,
+      "profit": 298,
+      "served": 56,
+      "soldOut": 0,
+      "baked": {
+        "roll": 44
+      },
+      "stale": {
+        "roll": 4
+      },
+      "staleCost": 16,
+      "duration": 185.25000000000787
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 10,
+      "forecast": {
+        "espresso": 64.50415985181843,
+        "roll": 66.24584014818156
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.3680324452676753,
+          "lead": 28.49284818342959,
+          "trigger": 12,
+          "morning": 67
+        }
+      },
+      "bake": {
+        "roll": 67
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 530,
+      "served": 102,
+      "soldOut": 0,
+      "baked": {
+        "roll": 69
+      },
+      "stale": {
+        "roll": 1
+      },
+      "staleCost": 4,
+      "duration": 180.80000000000686
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 11,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 48
+        }
+      },
+      "bake": {
+        "roll": 48
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 326,
+      "served": 76,
+      "soldOut": 0,
+      "baked": {
+        "roll": 50
+      },
+      "stale": {
+        "roll": 1
+      },
+      "staleCost": 4,
+      "duration": 181.400000000007
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 12,
+      "forecast": {
+        "espresso": 37.87173698891051,
+        "roll": 43.551339934166414
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.24195188852314675,
+          "lead": 28.49284818342959,
+          "trigger": 8,
+          "morning": 44
+        }
+      },
+      "bake": {
+        "roll": 44
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {},
+        "shelf": {
+          "roll": 7
+        }
+      },
+      "lateStarted": 0,
+      "profit": 198,
+      "served": 59,
+      "soldOut": 0,
+      "baked": {
+        "roll": 44
+      },
+      "stale": {
+        "roll": 7
+      },
+      "staleCost": 28,
+      "duration": 185.10000000000784
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 13,
+      "forecast": {
+        "espresso": 64.50415985181843,
+        "roll": 66.24584014818156
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.3680324452676753,
+          "lead": 28.49284818342959,
+          "trigger": 12,
+          "morning": 67
+        }
+      },
+      "bake": {
+        "roll": 67
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 450,
+      "served": 104,
+      "soldOut": 1,
+      "baked": {
+        "roll": 72
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 181.350000000007
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 14,
+      "forecast": {
+        "espresso": 44.32075905209481,
+        "roll": 48.15405010821054
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26752250060116967,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 49
+        }
+      },
+      "bake": {
+        "roll": 49
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 1
+        }
+      },
+      "lateStarted": 0,
+      "profit": 330,
+      "served": 69,
+      "soldOut": 0,
+      "baked": {
+        "roll": 51
+      },
+      "stale": {
+        "roll": 1
+      },
+      "staleCost": 4,
+      "duration": 180.45000000000678
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 1,
+      "seed": 15,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 48
+        }
+      },
+      "bake": {
+        "roll": 48
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {},
+        "shelf": {
+          "roll": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 300,
+      "served": 75,
+      "soldOut": 0,
+      "baked": {
+        "roll": 48
+      },
+      "stale": {
+        "roll": 2
+      },
+      "staleCost": 8,
+      "duration": 183.25000000000742
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 1,
+      "forecast": {
+        "espresso": 44.32075905209481,
+        "roll": 48.15405010821054
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26752250060116967,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 382,
+      "served": 66,
+      "soldOut": 0,
+      "baked": {
+        "roll": 47
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 180.20000000000672
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 2,
+      "forecast": {
+        "espresso": 44.32075905209481,
+        "roll": 48.15405010821054
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26752250060116967,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 280,
+      "served": 65,
+      "soldOut": 3,
+      "baked": {
+        "roll": 46
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 180.75000000000685
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 3,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 406,
+      "served": 75,
+      "soldOut": 2,
+      "baked": {
+        "roll": 48
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 181.0000000000069
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 4,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 2
+        }
+      },
+      "lateStarted": 1,
+      "profit": 358,
+      "served": 79,
+      "soldOut": 0,
+      "baked": {
+        "roll": 52
+      },
+      "stale": {
+        "roll": 2
+      },
+      "staleCost": 8,
+      "duration": 180.0500000000067
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 5,
+      "forecast": {
+        "espresso": 43.900084582618994,
+        "roll": 44.67057178803738
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.24816984326687433,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 260,
+      "served": 72,
+      "soldOut": 0,
+      "baked": {
+        "roll": 44
+      },
+      "stale": {
+        "roll": 2
+      },
+      "staleCost": 8,
+      "duration": 183.45000000000746
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 6,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 410,
+      "served": 75,
+      "soldOut": 0,
+      "baked": {
+        "roll": 50
+      },
+      "stale": {
+        "roll": 1
+      },
+      "staleCost": 4,
+      "duration": 182.45000000000724
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 7,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 366,
+      "served": 79,
+      "soldOut": 0,
+      "baked": {
+        "roll": 48
+      },
+      "stale": {
+        "roll": 1
+      },
+      "staleCost": 4,
+      "duration": 182.65000000000728
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 8,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 430,
+      "served": 71,
+      "soldOut": 1,
+      "baked": {
+        "roll": 47
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 182.3500000000072
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 9,
+      "forecast": {
+        "espresso": 37.87173698891051,
+        "roll": 43.551339934166414
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.24195188852314675,
+          "lead": 28.49284818342959,
+          "trigger": 8,
+          "morning": 8
+        }
+      },
+      "bake": {
+        "roll": 8
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 3
+        }
+      },
+      "lateStarted": 0,
+      "profit": 268,
+      "served": 56,
+      "soldOut": 0,
+      "baked": {
+        "roll": 39
+      },
+      "stale": {
+        "roll": 2
+      },
+      "staleCost": 8,
+      "duration": 181.65000000000705
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 10,
+      "forecast": {
+        "espresso": 64.50415985181843,
+        "roll": 66.24584014818156
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.3680324452676753,
+          "lead": 28.49284818342959,
+          "trigger": 12,
+          "morning": 12
+        }
+      },
+      "bake": {
+        "roll": 12
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 364,
+      "served": 95,
+      "soldOut": 6,
+      "baked": {
+        "roll": 59
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 181.0000000000069
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 11,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 1
+        }
+      },
+      "lateStarted": 0,
+      "profit": 376,
+      "served": 75,
+      "soldOut": 1,
+      "baked": {
+        "roll": 47
+      },
+      "stale": {
+        "roll": 1
+      },
+      "staleCost": 4,
+      "duration": 182.2500000000072
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 12,
+      "forecast": {
+        "espresso": 37.87173698891051,
+        "roll": 43.551339934166414
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.24195188852314675,
+          "lead": 28.49284818342959,
+          "trigger": 8,
+          "morning": 8
+        }
+      },
+      "bake": {
+        "roll": 8
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 1
+        }
+      },
+      "lateStarted": 0,
+      "profit": 278,
+      "served": 54,
+      "soldOut": 0,
+      "baked": {
+        "roll": 38
+      },
+      "stale": {
+        "roll": 1
+      },
+      "staleCost": 4,
+      "duration": 185.50000000000793
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 13,
+      "forecast": {
+        "espresso": 64.50415985181843,
+        "roll": 66.24584014818156
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.3680324452676753,
+          "lead": 28.49284818342959,
+          "trigger": 12,
+          "morning": 12
+        }
+      },
+      "bake": {
+        "roll": 12
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 412,
+      "served": 101,
+      "soldOut": 4,
+      "baked": {
+        "roll": 58
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 181.8000000000071
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 14,
+      "forecast": {
+        "espresso": 44.32075905209481,
+        "roll": 48.15405010821054
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26752250060116967,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 4
+        }
+      },
+      "lateStarted": 0,
+      "profit": 408,
+      "served": 69,
+      "soldOut": 0,
+      "baked": {
+        "roll": 47
+      },
+      "stale": {
+        "roll": 3
+      },
+      "staleCost": 12,
+      "duration": 184.15000000000762
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 2,
+      "seed": 15,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 386,
+      "served": 81,
+      "soldOut": 0,
+      "baked": {
+        "roll": 50
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 181.60000000000704
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 1,
+      "forecast": {
+        "espresso": 44.32075905209481,
+        "roll": 48.15405010821054
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26752250060116967,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 390,
+      "served": 67,
+      "soldOut": 1,
+      "baked": {
+        "roll": 51
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 181.25000000000696
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 2,
+      "forecast": {
+        "espresso": 44.32075905209481,
+        "roll": 48.15405010821054
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26752250060116967,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 5
+        }
+      },
+      "lateStarted": 0,
+      "profit": 260,
+      "served": 67,
+      "soldOut": 0,
+      "baked": {
+        "roll": 47
+      },
+      "stale": {
+        "roll": 5
+      },
+      "staleCost": 20,
+      "duration": 180.75000000000685
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 3,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 336,
+      "served": 81,
+      "soldOut": 0,
+      "baked": {
+        "roll": 45
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 184.1000000000076
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 4,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 334,
+      "served": 73,
+      "soldOut": 5,
+      "baked": {
+        "roll": 51
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 183.00000000000736
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 5,
+      "forecast": {
+        "espresso": 43.900084582618994,
+        "roll": 44.67057178803738
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.24816984326687433,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 260,
+      "served": 64,
+      "soldOut": 0,
+      "baked": {
+        "roll": 49
+      },
+      "stale": {
+        "roll": 2
+      },
+      "staleCost": 8,
+      "duration": 180.00000000000668
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 6,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 352,
+      "served": 75,
+      "soldOut": 1,
+      "baked": {
+        "roll": 46
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 181.15000000000694
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 7,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 1
+        }
+      },
+      "lateStarted": 0,
+      "profit": 364,
+      "served": 80,
+      "soldOut": 0,
+      "baked": {
+        "roll": 44
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 184.15000000000762
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 8,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 3
+        }
+      },
+      "lateStarted": 0,
+      "profit": 436,
+      "served": 75,
+      "soldOut": 0,
+      "baked": {
+        "roll": 51
+      },
+      "stale": {
+        "roll": 2
+      },
+      "staleCost": 8,
+      "duration": 183.35000000000744
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 9,
+      "forecast": {
+        "espresso": 37.87173698891051,
+        "roll": 43.551339934166414
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.24195188852314675,
+          "lead": 28.49284818342959,
+          "trigger": 8,
+          "morning": 8
+        }
+      },
+      "bake": {
+        "roll": 8
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 1
+        }
+      },
+      "lateStarted": 0,
+      "profit": 270,
+      "served": 55,
+      "soldOut": 0,
+      "baked": {
+        "roll": 45
+      },
+      "stale": {
+        "roll": 1
+      },
+      "staleCost": 4,
+      "duration": 183.10000000000738
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 10,
+      "forecast": {
+        "espresso": 64.50415985181843,
+        "roll": 66.24584014818156
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.3680324452676753,
+          "lead": 28.49284818342959,
+          "trigger": 12,
+          "morning": 12
+        }
+      },
+      "bake": {
+        "roll": 12
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 448,
+      "served": 103,
+      "soldOut": 1,
+      "baked": {
+        "roll": 61
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 182.7000000000073
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 11,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 326,
+      "served": 74,
+      "soldOut": 3,
+      "baked": {
+        "roll": 45
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 181.10000000000693
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 12,
+      "forecast": {
+        "espresso": 37.87173698891051,
+        "roll": 43.551339934166414
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.24195188852314675,
+          "lead": 28.49284818342959,
+          "trigger": 8,
+          "morning": 8
+        }
+      },
+      "bake": {
+        "roll": 8
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 260,
+      "served": 58,
+      "soldOut": 2,
+      "baked": {
+        "roll": 43
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 182.85000000000733
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 13,
+      "forecast": {
+        "espresso": 64.50415985181843,
+        "roll": 66.24584014818156
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.3680324452676753,
+          "lead": 28.49284818342959,
+          "trigger": 12,
+          "morning": 12
+        }
+      },
+      "bake": {
+        "roll": 12
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 434,
+      "served": 97,
+      "soldOut": 6,
+      "baked": {
+        "roll": 61
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 181.20000000000695
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 14,
+      "forecast": {
+        "espresso": 44.32075905209481,
+        "roll": 48.15405010821054
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26752250060116967,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 228,
+      "served": 62,
+      "soldOut": 0,
+      "baked": {
+        "roll": 39
+      },
+      "stale": {
+        "roll": 2
+      },
+      "staleCost": 8,
+      "duration": 180.5000000000068
+    },
+    {
+      "menu": "espresso+roll",
+      "cooks": 3,
+      "seed": 15,
+      "forecast": {
+        "espresso": 52.536929283341244,
+        "roll": 47.04307071665876
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.26135039287032646,
+          "lead": 28.49284818342959,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 364,
+      "served": 82,
+      "soldOut": 0,
+      "baked": {
+        "roll": 39
+      },
+      "stale": {},
+      "staleCost": 0,
+      "duration": 184.5500000000077
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 1,
+      "forecast": {
+        "espresso": 46.87449104250277,
+        "roll": 18.714662440243163,
+        "bagel": 18.714662440243163,
+        "donut": 36.32402838838815
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.10397034689023979,
+          "lead": 87.63877390980932,
+          "trigger": 11,
+          "morning": 19
+        },
+        "bagel": {
+          "rate": 0.10397034689023979,
+          "lead": 87.63877390980932,
+          "trigger": 11,
+          "morning": 19
+        },
+        "donut": {
+          "rate": 0.2018001577132675,
+          "lead": 87.63877390980932,
+          "trigger": 19,
+          "morning": 37
+        }
+      },
+      "bake": {
+        "roll": 19,
+        "bagel": 19,
+        "donut": 37
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0
+        },
+        "shelf": {
+          "roll": 5,
+          "bagel": 7,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 966,
+      "served": 78,
+      "soldOut": 2,
+      "baked": {
+        "roll": 19,
+        "bagel": 19,
+        "donut": 40
+      },
+      "stale": {
+        "roll": 5,
+        "bagel": 7
+      },
+      "staleCost": 34,
+      "duration": 181.30000000000697
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 2,
+      "forecast": {
+        "espresso": 46.87449104250277,
+        "roll": 18.714662440243163,
+        "bagel": 18.714662440243163,
+        "donut": 36.32402838838815
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.10397034689023979,
+          "lead": 87.63877390980932,
+          "trigger": 11,
+          "morning": 19
+        },
+        "bagel": {
+          "rate": 0.10397034689023979,
+          "lead": 87.63877390980932,
+          "trigger": 11,
+          "morning": 19
+        },
+        "donut": {
+          "rate": 0.2018001577132675,
+          "lead": 87.63877390980932,
+          "trigger": 19,
+          "morning": 37
+        }
+      },
+      "bake": {
+        "roll": 19,
+        "bagel": 19,
+        "donut": 37
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 3,
+          "bagel": 0,
+          "donut": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 1041,
+      "served": 85,
+      "soldOut": 3,
+      "baked": {
+        "roll": 19,
+        "bagel": 24,
+        "donut": 37
+      },
+      "stale": {
+        "roll": 3,
+        "donut": 2
+      },
+      "staleCost": 22,
+      "duration": 185.10000000000784
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 3,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 87.63877390980932,
+          "trigger": 12,
+          "morning": 22
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 87.63877390980932,
+          "trigger": 12,
+          "morning": 22
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 87.63877390980932,
+          "trigger": 15,
+          "morning": 28
+        }
+      },
+      "bake": {
+        "roll": 22,
+        "bagel": 22,
+        "donut": 28
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 1,
+          "bagel": 0,
+          "donut": 7
+        }
+      },
+      "lateStarted": 0,
+      "profit": 1152,
+      "served": 89,
+      "soldOut": 1,
+      "baked": {
+        "roll": 22,
+        "bagel": 27,
+        "donut": 28
+      },
+      "stale": {
+        "roll": 1,
+        "donut": 7
+      },
+      "staleCost": 39,
+      "duration": 183.2000000000074
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 4,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 87.63877390980932,
+          "trigger": 12,
+          "morning": 22
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 87.63877390980932,
+          "trigger": 12,
+          "morning": 22
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 87.63877390980932,
+          "trigger": 15,
+          "morning": 28
+        }
+      },
+      "bake": {
+        "roll": 22,
+        "bagel": 22,
+        "donut": 28
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 4,
+          "bagel": 0,
+          "donut": 5
+        }
+      },
+      "lateStarted": 0,
+      "profit": 779,
+      "served": 89,
+      "soldOut": 0,
+      "baked": {
+        "roll": 22,
+        "bagel": 24,
+        "donut": 31
+      },
+      "stale": {
+        "roll": 4,
+        "donut": 5
+      },
+      "staleCost": 41,
+      "duration": 184.0500000000076
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 5,
+      "forecast": {
+        "espresso": 43.99904477459448,
+        "roll": 17.950318654040526,
+        "bagel": 17.950318654040526,
+        "donut": 34.719351149952885
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.09972399252244736,
+          "lead": 87.63877390980932,
+          "trigger": 10,
+          "morning": 18
+        },
+        "bagel": {
+          "rate": 0.09972399252244736,
+          "lead": 87.63877390980932,
+          "trigger": 10,
+          "morning": 18
+        },
+        "donut": {
+          "rate": 0.1928852841664049,
+          "lead": 87.63877390980932,
+          "trigger": 18,
+          "morning": 35
+        }
+      },
+      "bake": {
+        "roll": 18,
+        "bagel": 18,
+        "donut": 35
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "bagel": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 1,
+          "bagel": 1,
+          "donut": 5
+        }
+      },
+      "lateStarted": 0,
+      "profit": 919,
+      "served": 87,
+      "soldOut": 0,
+      "baked": {
+        "roll": 20,
+        "bagel": 23,
+        "donut": 35
+      },
+      "stale": {
+        "roll": 1,
+        "bagel": 1,
+        "donut": 4
+      },
+      "staleCost": 26,
+      "duration": 187.5500000000084
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 6,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 87.63877390980932,
+          "trigger": 12,
+          "morning": 22
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 87.63877390980932,
+          "trigger": 12,
+          "morning": 22
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 87.63877390980932,
+          "trigger": 15,
+          "morning": 28
+        }
+      },
+      "bake": {
+        "roll": 22,
+        "bagel": 22,
+        "donut": 28
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 7,
+          "donut": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 862,
+      "served": 93,
+      "soldOut": 0,
+      "baked": {
+        "roll": 24,
+        "bagel": 22,
+        "donut": 28
+      },
+      "stale": {
+        "bagel": 7,
+        "donut": 2
+      },
+      "staleCost": 24,
+      "duration": 186.50000000000816
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 7,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 87.63877390980932,
+          "trigger": 12,
+          "morning": 22
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 87.63877390980932,
+          "trigger": 12,
+          "morning": 22
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 87.63877390980932,
+          "trigger": 15,
+          "morning": 28
+        }
+      },
+      "bake": {
+        "roll": 22,
+        "bagel": 22,
+        "donut": 28
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 0,
+          "donut": 6
+        }
+      },
+      "lateStarted": 0,
+      "profit": 908,
+      "served": 92,
+      "soldOut": 5,
+      "baked": {
+        "roll": 24,
+        "bagel": 24,
+        "donut": 28
+      },
+      "stale": {
+        "donut": 5
+      },
+      "staleCost": 25,
+      "duration": 188.0000000000085
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 8,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 87.63877390980932,
+          "trigger": 12,
+          "morning": 22
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 87.63877390980932,
+          "trigger": 12,
+          "morning": 22
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 87.63877390980932,
+          "trigger": 15,
+          "morning": 28
+        }
+      },
+      "bake": {
+        "roll": 22,
+        "bagel": 22,
+        "donut": 28
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "bagel": 0,
+          "donut": 0
+        },
+        "shelf": {
+          "roll": 5,
+          "bagel": 4,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 977,
+      "served": 89,
+      "soldOut": 5,
+      "baked": {
+        "roll": 22,
+        "bagel": 26,
+        "donut": 29
+      },
+      "stale": {
+        "roll": 5,
+        "bagel": 4
+      },
+      "staleCost": 28,
+      "duration": 180.5000000000068
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 9,
+      "forecast": {
+        "espresso": 41.05572852725379,
+        "roll": 16.05791911291586,
+        "bagel": 16.05791911291586,
+        "donut": 32.422445222962395
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.08921066173842146,
+          "lead": 87.63877390980932,
+          "trigger": 9,
+          "morning": 17
+        },
+        "bagel": {
+          "rate": 0.08921066173842146,
+          "lead": 87.63877390980932,
+          "trigger": 9,
+          "morning": 17
+        },
+        "donut": {
+          "rate": 0.18012469568312442,
+          "lead": 87.63877390980932,
+          "trigger": 17,
+          "morning": 33
+        }
+      },
+      "bake": {
+        "roll": 17,
+        "bagel": 17,
+        "donut": 33
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0
+        },
+        "shelf": {
+          "roll": 6,
+          "bagel": 2,
+          "donut": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 896,
+      "served": 71,
+      "soldOut": 0,
+      "baked": {
+        "roll": 17,
+        "bagel": 17,
+        "donut": 36
+      },
+      "stale": {
+        "roll": 6,
+        "bagel": 2,
+        "donut": 2
+      },
+      "staleCost": 38,
+      "duration": 187.65000000000842
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 10,
+      "forecast": {
+        "espresso": 56.45954501151574,
+        "roll": 32.78549200975421,
+        "bagel": 32.78549200975421,
+        "donut": 25.320822320327192
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.18214162227641226,
+          "lead": 87.63877390980932,
+          "trigger": 17,
+          "morning": 33
+        },
+        "bagel": {
+          "rate": 0.18214162227641226,
+          "lead": 87.63877390980932,
+          "trigger": 17,
+          "morning": 33
+        },
+        "donut": {
+          "rate": 0.14067123511292884,
+          "lead": 87.63877390980932,
+          "trigger": 14,
+          "morning": 26
+        }
+      },
+      "bake": {
+        "roll": 33,
+        "bagel": 33,
+        "donut": 26
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0
+        },
+        "shelf": {
+          "roll": 2,
+          "bagel": 10,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 1196,
+      "served": 112,
+      "soldOut": 4,
+      "baked": {
+        "roll": 33,
+        "bagel": 33,
+        "donut": 28
+      },
+      "stale": {
+        "roll": 2,
+        "bagel": 9
+      },
+      "staleCost": 26,
+      "duration": 183.90000000000757
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 11,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 87.63877390980932,
+          "trigger": 12,
+          "morning": 22
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 87.63877390980932,
+          "trigger": 12,
+          "morning": 22
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 87.63877390980932,
+          "trigger": 15,
+          "morning": 28
+        }
+      },
+      "bake": {
+        "roll": 22,
+        "bagel": 22,
+        "donut": 28
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "roll": 0,
+          "donut": 0
+        },
+        "shelf": {
+          "roll": 1,
+          "bagel": 1,
+          "donut": 5
+        }
+      },
+      "lateStarted": 0,
+      "profit": 814,
+      "served": 86,
+      "soldOut": 0,
+      "baked": {
+        "roll": 24,
+        "bagel": 22,
+        "donut": 30
+      },
+      "stale": {
+        "roll": 1,
+        "donut": 5
+      },
+      "staleCost": 29,
+      "duration": 185.00000000000782
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 12,
+      "forecast": {
+        "espresso": 41.05572852725379,
+        "roll": 16.05791911291586,
+        "bagel": 16.05791911291586,
+        "donut": 32.422445222962395
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.08921066173842146,
+          "lead": 87.63877390980932,
+          "trigger": 9,
+          "morning": 17
+        },
+        "bagel": {
+          "rate": 0.08921066173842146,
+          "lead": 87.63877390980932,
+          "trigger": 9,
+          "morning": 17
+        },
+        "donut": {
+          "rate": 0.18012469568312442,
+          "lead": 87.63877390980932,
+          "trigger": 17,
+          "morning": 33
+        }
+      },
+      "bake": {
+        "roll": 17,
+        "bagel": 17,
+        "donut": 33
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 3,
+          "donut": 7
+        }
+      },
+      "lateStarted": 0,
+      "profit": 765,
+      "served": 73,
+      "soldOut": 0,
+      "baked": {
+        "roll": 17,
+        "bagel": 17,
+        "donut": 35
+      },
+      "stale": {
+        "bagel": 3,
+        "donut": 6
+      },
+      "staleCost": 36,
+      "duration": 186.45000000000815
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 13,
+      "forecast": {
+        "espresso": 56.45954501151574,
+        "roll": 32.78549200975421,
+        "bagel": 32.78549200975421,
+        "donut": 25.320822320327192
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.18214162227641226,
+          "lead": 87.63877390980932,
+          "trigger": 17,
+          "morning": 33
+        },
+        "bagel": {
+          "rate": 0.18214162227641226,
+          "lead": 87.63877390980932,
+          "trigger": 17,
+          "morning": 33
+        },
+        "donut": {
+          "rate": 0.14067123511292884,
+          "lead": 87.63877390980932,
+          "trigger": 14,
+          "morning": 26
+        }
+      },
+      "bake": {
+        "roll": 33,
+        "bagel": 33,
+        "donut": 26
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0
+        },
+        "shelf": {
+          "roll": 7,
+          "bagel": 6,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 882,
+      "served": 112,
+      "soldOut": 2,
+      "baked": {
+        "roll": 33,
+        "bagel": 33,
+        "donut": 28
+      },
+      "stale": {
+        "roll": 7,
+        "bagel": 6
+      },
+      "staleCost": 40,
+      "duration": 180.45000000000678
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 14,
+      "forecast": {
+        "espresso": 46.87449104250277,
+        "roll": 18.714662440243163,
+        "bagel": 18.714662440243163,
+        "donut": 36.32402838838815
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.10397034689023979,
+          "lead": 87.63877390980932,
+          "trigger": 11,
+          "morning": 19
+        },
+        "bagel": {
+          "rate": 0.10397034689023979,
+          "lead": 87.63877390980932,
+          "trigger": 11,
+          "morning": 19
+        },
+        "donut": {
+          "rate": 0.2018001577132675,
+          "lead": 87.63877390980932,
+          "trigger": 19,
+          "morning": 37
+        }
+      },
+      "bake": {
+        "roll": 19,
+        "bagel": 19,
+        "donut": 37
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 3,
+          "donut": 5
+        }
+      },
+      "lateStarted": 0,
+      "profit": 884,
+      "served": 81,
+      "soldOut": 1,
+      "baked": {
+        "roll": 21,
+        "bagel": 19,
+        "donut": 40
+      },
+      "stale": {
+        "bagel": 3,
+        "donut": 5
+      },
+      "staleCost": 31,
+      "duration": 185.10000000000784
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 1,
+      "seed": 15,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 87.63877390980932,
+          "trigger": 12,
+          "morning": 22
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 87.63877390980932,
+          "trigger": 12,
+          "morning": 22
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 87.63877390980932,
+          "trigger": 15,
+          "morning": 28
+        }
+      },
+      "bake": {
+        "roll": 22,
+        "bagel": 22,
+        "donut": 28
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 11,
+          "bagel": 0,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 933,
+      "served": 86,
+      "soldOut": 3,
+      "baked": {
+        "roll": 22,
+        "bagel": 24,
+        "donut": 31
+      },
+      "stale": {
+        "roll": 10
+      },
+      "staleCost": 40,
+      "duration": 184.40000000000768
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 1,
+      "forecast": {
+        "espresso": 46.87449104250277,
+        "roll": 18.714662440243163,
+        "bagel": 18.714662440243163,
+        "donut": 36.32402838838815
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.10397034689023979,
+          "lead": 43.81938695490466,
+          "trigger": 6,
+          "morning": 6
+        },
+        "bagel": {
+          "rate": 0.10397034689023979,
+          "lead": 43.81938695490466,
+          "trigger": 6,
+          "morning": 6
+        },
+        "donut": {
+          "rate": 0.2018001577132675,
+          "lead": 43.81938695490466,
+          "trigger": 10,
+          "morning": 10
+        }
+      },
+      "bake": {
+        "roll": 6,
+        "bagel": 6,
+        "donut": 10
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "roll": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 3,
+          "bagel": 0,
+          "donut": 4
+        }
+      },
+      "lateStarted": 0,
+      "profit": 950,
+      "served": 84,
+      "soldOut": 2,
+      "baked": {
+        "roll": 15,
+        "bagel": 20,
+        "donut": 40
+      },
+      "stale": {
+        "roll": 3,
+        "donut": 4
+      },
+      "staleCost": 32,
+      "duration": 183.80000000000754
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 2,
+      "forecast": {
+        "espresso": 46.87449104250277,
+        "roll": 18.714662440243163,
+        "bagel": 18.714662440243163,
+        "donut": 36.32402838838815
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.10397034689023979,
+          "lead": 43.81938695490466,
+          "trigger": 6,
+          "morning": 6
+        },
+        "bagel": {
+          "rate": 0.10397034689023979,
+          "lead": 43.81938695490466,
+          "trigger": 6,
+          "morning": 6
+        },
+        "donut": {
+          "rate": 0.2018001577132675,
+          "lead": 43.81938695490466,
+          "trigger": 10,
+          "morning": 10
+        }
+      },
+      "bake": {
+        "roll": 6,
+        "bagel": 6,
+        "donut": 10
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "roll": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 5,
+          "bagel": 5,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 984,
+      "served": 82,
+      "soldOut": 4,
+      "baked": {
+        "roll": 20,
+        "bagel": 22,
+        "donut": 38
+      },
+      "stale": {
+        "roll": 5,
+        "bagel": 5
+      },
+      "staleCost": 30,
+      "duration": 182.7000000000073
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 3,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 43.81938695490466,
+          "trigger": 7,
+          "morning": 7
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 43.81938695490466,
+          "trigger": 7,
+          "morning": 7
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 43.81938695490466,
+          "trigger": 8,
+          "morning": 8
+        }
+      },
+      "bake": {
+        "roll": 7,
+        "bagel": 7,
+        "donut": 8
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "roll": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 2,
+          "bagel": 0,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 1043,
+      "served": 92,
+      "soldOut": 1,
+      "baked": {
+        "roll": 24,
+        "bagel": 24,
+        "donut": 29
+      },
+      "stale": {
+        "roll": 2
+      },
+      "staleCost": 8,
+      "duration": 181.25000000000696
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 4,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 43.81938695490466,
+          "trigger": 7,
+          "morning": 7
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 43.81938695490466,
+          "trigger": 7,
+          "morning": 7
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 43.81938695490466,
+          "trigger": 8,
+          "morning": 8
+        }
+      },
+      "bake": {
+        "roll": 7,
+        "bagel": 7,
+        "donut": 8
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "roll": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 5,
+          "bagel": 4,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 963,
+      "served": 93,
+      "soldOut": 1,
+      "baked": {
+        "roll": 24,
+        "bagel": 20,
+        "donut": 31
+      },
+      "stale": {
+        "roll": 5,
+        "bagel": 4
+      },
+      "staleCost": 28,
+      "duration": 182.20000000000718
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 5,
+      "forecast": {
+        "espresso": 43.99904477459448,
+        "roll": 17.950318654040526,
+        "bagel": 17.950318654040526,
+        "donut": 34.719351149952885
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.09972399252244736,
+          "lead": 43.81938695490466,
+          "trigger": 6,
+          "morning": 6
+        },
+        "bagel": {
+          "rate": 0.09972399252244736,
+          "lead": 43.81938695490466,
+          "trigger": 6,
+          "morning": 6
+        },
+        "donut": {
+          "rate": 0.1928852841664049,
+          "lead": 43.81938695490466,
+          "trigger": 10,
+          "morning": 10
+        }
+      },
+      "bake": {
+        "roll": 6,
+        "bagel": 6,
+        "donut": 10
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "roll": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 5,
+          "bagel": 5,
+          "donut": 3
+        }
+      },
+      "lateStarted": 0,
+      "profit": 963,
+      "served": 85,
+      "soldOut": 0,
+      "baked": {
+        "roll": 19,
+        "bagel": 20,
+        "donut": 39
+      },
+      "stale": {
+        "roll": 5,
+        "bagel": 5,
+        "donut": 2
+      },
+      "staleCost": 40,
+      "duration": 185.3500000000079
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 6,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 43.81938695490466,
+          "trigger": 7,
+          "morning": 7
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 43.81938695490466,
+          "trigger": 7,
+          "morning": 7
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 43.81938695490466,
+          "trigger": 8,
+          "morning": 8
+        }
+      },
+      "bake": {
+        "roll": 7,
+        "bagel": 7,
+        "donut": 8
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "roll": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 6,
+          "donut": 1
+        }
+      },
+      "lateStarted": 0,
+      "profit": 878,
+      "served": 92,
+      "soldOut": 0,
+      "baked": {
+        "roll": 24,
+        "bagel": 21,
+        "donut": 24
+      },
+      "stale": {
+        "bagel": 6
+      },
+      "staleCost": 12,
+      "duration": 187.9500000000085
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 7,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 43.81938695490466,
+          "trigger": 7,
+          "morning": 7
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 43.81938695490466,
+          "trigger": 7,
+          "morning": 7
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 43.81938695490466,
+          "trigger": 8,
+          "morning": 8
+        }
+      },
+      "bake": {
+        "roll": 7,
+        "bagel": 7,
+        "donut": 8
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "roll": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 3,
+          "donut": 5
+        }
+      },
+      "lateStarted": 0,
+      "profit": 987,
+      "served": 93,
+      "soldOut": 0,
+      "baked": {
+        "roll": 19,
+        "bagel": 16,
+        "donut": 31
+      },
+      "stale": {
+        "bagel": 3,
+        "donut": 4
+      },
+      "staleCost": 26,
+      "duration": 186.3000000000081
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 8,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 43.81938695490466,
+          "trigger": 7,
+          "morning": 7
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 43.81938695490466,
+          "trigger": 7,
+          "morning": 7
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 43.81938695490466,
+          "trigger": 8,
+          "morning": 8
+        }
+      },
+      "bake": {
+        "roll": 7,
+        "bagel": 7,
+        "donut": 8
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "roll": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 2,
+          "donut": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 822,
+      "served": 84,
+      "soldOut": 2,
+      "baked": {
+        "roll": 23,
+        "bagel": 21,
+        "donut": 24
+      },
+      "stale": {
+        "bagel": 2,
+        "donut": 2
+      },
+      "staleCost": 14,
+      "duration": 184.65000000000774
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 9,
+      "forecast": {
+        "espresso": 41.05572852725379,
+        "roll": 16.05791911291586,
+        "bagel": 16.05791911291586,
+        "donut": 32.422445222962395
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.08921066173842146,
+          "lead": 43.81938695490466,
+          "trigger": 5,
+          "morning": 5
+        },
+        "bagel": {
+          "rate": 0.08921066173842146,
+          "lead": 43.81938695490466,
+          "trigger": 5,
+          "morning": 5
+        },
+        "donut": {
+          "rate": 0.18012469568312442,
+          "lead": 43.81938695490466,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 5,
+        "bagel": 5,
+        "donut": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "roll": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 3,
+          "bagel": 2,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 999,
+      "served": 72,
+      "soldOut": 1,
+      "baked": {
+        "roll": 14,
+        "bagel": 19,
+        "donut": 35
+      },
+      "stale": {
+        "roll": 2,
+        "bagel": 2
+      },
+      "staleCost": 12,
+      "duration": 184.0000000000076
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 10,
+      "forecast": {
+        "espresso": 56.45954501151574,
+        "roll": 32.78549200975421,
+        "bagel": 32.78549200975421,
+        "donut": 25.320822320327192
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.18214162227641226,
+          "lead": 43.81938695490466,
+          "trigger": 9,
+          "morning": 33
+        },
+        "bagel": {
+          "rate": 0.18214162227641226,
+          "lead": 43.81938695490466,
+          "trigger": 9,
+          "morning": 33
+        },
+        "donut": {
+          "rate": 0.14067123511292884,
+          "lead": 43.81938695490466,
+          "trigger": 8,
+          "morning": 26
+        }
+      },
+      "bake": {
+        "roll": 33,
+        "bagel": 33,
+        "donut": 26
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0
+        },
+        "shelf": {
+          "roll": 6,
+          "bagel": 0,
+          "donut": 6
+        }
+      },
+      "lateStarted": 0,
+      "profit": 890,
+      "served": 113,
+      "soldOut": 3,
+      "baked": {
+        "roll": 33,
+        "bagel": 33,
+        "donut": 28
+      },
+      "stale": {
+        "roll": 6,
+        "donut": 5
+      },
+      "staleCost": 49,
+      "duration": 184.75000000000776
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 11,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 43.81938695490466,
+          "trigger": 7,
+          "morning": 7
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 43.81938695490466,
+          "trigger": 7,
+          "morning": 7
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 43.81938695490466,
+          "trigger": 8,
+          "morning": 8
+        }
+      },
+      "bake": {
+        "roll": 7,
+        "bagel": 7,
+        "donut": 8
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "roll": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 1,
+          "donut": 4
+        }
+      },
+      "lateStarted": 0,
+      "profit": 857,
+      "served": 84,
+      "soldOut": 0,
+      "baked": {
+        "roll": 17,
+        "bagel": 21,
+        "donut": 29
+      },
+      "stale": {
+        "bagel": 1,
+        "donut": 4
+      },
+      "staleCost": 22,
+      "duration": 185.55000000000794
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 12,
+      "forecast": {
+        "espresso": 41.05572852725379,
+        "roll": 16.05791911291586,
+        "bagel": 16.05791911291586,
+        "donut": 32.422445222962395
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.08921066173842146,
+          "lead": 43.81938695490466,
+          "trigger": 5,
+          "morning": 5
+        },
+        "bagel": {
+          "rate": 0.08921066173842146,
+          "lead": 43.81938695490466,
+          "trigger": 5,
+          "morning": 5
+        },
+        "donut": {
+          "rate": 0.18012469568312442,
+          "lead": 43.81938695490466,
+          "trigger": 9,
+          "morning": 9
+        }
+      },
+      "bake": {
+        "roll": 5,
+        "bagel": 5,
+        "donut": 9
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "roll": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 2,
+          "bagel": 4,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 946,
+      "served": 76,
+      "soldOut": 0,
+      "baked": {
+        "roll": 18,
+        "bagel": 12,
+        "donut": 32
+      },
+      "stale": {
+        "roll": 2,
+        "bagel": 4
+      },
+      "staleCost": 16,
+      "duration": 183.10000000000738
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 13,
+      "forecast": {
+        "espresso": 56.45954501151574,
+        "roll": 32.78549200975421,
+        "bagel": 32.78549200975421,
+        "donut": 25.320822320327192
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.18214162227641226,
+          "lead": 43.81938695490466,
+          "trigger": 9,
+          "morning": 33
+        },
+        "bagel": {
+          "rate": 0.18214162227641226,
+          "lead": 43.81938695490466,
+          "trigger": 9,
+          "morning": 33
+        },
+        "donut": {
+          "rate": 0.14067123511292884,
+          "lead": 43.81938695490466,
+          "trigger": 8,
+          "morning": 26
+        }
+      },
+      "bake": {
+        "roll": 33,
+        "bagel": 33,
+        "donut": 26
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 9,
+          "bagel": 1,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 1054,
+      "served": 110,
+      "soldOut": 2,
+      "baked": {
+        "roll": 33,
+        "bagel": 39,
+        "donut": 26
+      },
+      "stale": {
+        "roll": 9,
+        "bagel": 1
+      },
+      "staleCost": 38,
+      "duration": 180.70000000000684
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 14,
+      "forecast": {
+        "espresso": 46.87449104250277,
+        "roll": 18.714662440243163,
+        "bagel": 18.714662440243163,
+        "donut": 36.32402838838815
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.10397034689023979,
+          "lead": 43.81938695490466,
+          "trigger": 6,
+          "morning": 6
+        },
+        "bagel": {
+          "rate": 0.10397034689023979,
+          "lead": 43.81938695490466,
+          "trigger": 6,
+          "morning": 6
+        },
+        "donut": {
+          "rate": 0.2018001577132675,
+          "lead": 43.81938695490466,
+          "trigger": 10,
+          "morning": 10
+        }
+      },
+      "bake": {
+        "roll": 6,
+        "bagel": 6,
+        "donut": 10
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "roll": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 2,
+          "donut": 2
+        }
+      },
+      "lateStarted": 1,
+      "profit": 925,
+      "served": 85,
+      "soldOut": 1,
+      "baked": {
+        "roll": 21,
+        "bagel": 18,
+        "donut": 39
+      },
+      "stale": {
+        "bagel": 2,
+        "donut": 2
+      },
+      "staleCost": 14,
+      "duration": 182.00000000000713
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 2,
+      "seed": 15,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 43.81938695490466,
+          "trigger": 7,
+          "morning": 7
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 43.81938695490466,
+          "trigger": 7,
+          "morning": 7
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 43.81938695490466,
+          "trigger": 8,
+          "morning": 8
+        }
+      },
+      "bake": {
+        "roll": 7,
+        "bagel": 7,
+        "donut": 8
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "roll": 0,
+          "bagel": 0
+        },
+        "shelf": {
+          "roll": 5,
+          "bagel": 0,
+          "donut": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 847,
+      "served": 85,
+      "soldOut": 3,
+      "baked": {
+        "roll": 21,
+        "bagel": 26,
+        "donut": 29
+      },
+      "stale": {
+        "roll": 5,
+        "donut": 2
+      },
+      "staleCost": 30,
+      "duration": 180.00000000000668
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 1,
+      "forecast": {
+        "espresso": 46.87449104250277,
+        "roll": 18.714662440243163,
+        "bagel": 18.714662440243163,
+        "donut": 36.32402838838815
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.10397034689023979,
+          "lead": 29.212924636603105,
+          "trigger": 5,
+          "morning": 5
+        },
+        "bagel": {
+          "rate": 0.10397034689023979,
+          "lead": 29.24795941867988,
+          "trigger": 5,
+          "morning": 5
+        },
+        "donut": {
+          "rate": 0.2018001577132675,
+          "lead": 29.89796630769985,
+          "trigger": 8,
+          "morning": 8
+        }
+      },
+      "bake": {
+        "roll": 5,
+        "bagel": 5,
+        "donut": 8
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 1,
+          "donut": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 807,
+      "served": 83,
+      "soldOut": 2,
+      "baked": {
+        "roll": 21,
+        "bagel": 15,
+        "donut": 33
+      },
+      "stale": {
+        "bagel": 1,
+        "donut": 2
+      },
+      "staleCost": 12,
+      "duration": 181.75000000000708
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 2,
+      "forecast": {
+        "espresso": 46.87449104250277,
+        "roll": 18.714662440243163,
+        "bagel": 18.714662440243163,
+        "donut": 36.32402838838815
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.10397034689023979,
+          "lead": 29.212924636603105,
+          "trigger": 5,
+          "morning": 5
+        },
+        "bagel": {
+          "rate": 0.10397034689023979,
+          "lead": 29.24795941867988,
+          "trigger": 5,
+          "morning": 5
+        },
+        "donut": {
+          "rate": 0.2018001577132675,
+          "lead": 29.89796630769985,
+          "trigger": 8,
+          "morning": 8
+        }
+      },
+      "bake": {
+        "roll": 5,
+        "bagel": 5,
+        "donut": 8
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 1,
+          "bagel": 7,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 914,
+      "served": 84,
+      "soldOut": 2,
+      "baked": {
+        "roll": 21,
+        "bagel": 22,
+        "donut": 30
+      },
+      "stale": {
+        "bagel": 7
+      },
+      "staleCost": 14,
+      "duration": 186.10000000000807
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 3,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 29.212924636603105,
+          "trigger": 5,
+          "morning": 5
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 29.24795941867988,
+          "trigger": 5,
+          "morning": 5
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 29.89796630769985,
+          "trigger": 6,
+          "morning": 6
+        }
+      },
+      "bake": {
+        "roll": 5,
+        "bagel": 5,
+        "donut": 6
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 2,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 825,
+      "served": 92,
+      "soldOut": 1,
+      "baked": {
+        "roll": 20,
+        "bagel": 22,
+        "donut": 29
+      },
+      "stale": {
+        "bagel": 2
+      },
+      "staleCost": 4,
+      "duration": 184.60000000000773
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 4,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 29.212924636603105,
+          "trigger": 5,
+          "morning": 5
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 29.24795941867988,
+          "trigger": 5,
+          "morning": 5
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 29.89796630769985,
+          "trigger": 6,
+          "morning": 6
+        }
+      },
+      "bake": {
+        "roll": 5,
+        "bagel": 5,
+        "donut": 6
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 6,
+          "bagel": 0,
+          "donut": 3
+        }
+      },
+      "lateStarted": 0,
+      "profit": 905,
+      "served": 84,
+      "soldOut": 4,
+      "baked": {
+        "roll": 20,
+        "bagel": 26,
+        "donut": 29
+      },
+      "stale": {
+        "roll": 6,
+        "donut": 3
+      },
+      "staleCost": 39,
+      "duration": 186.35000000000812
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 5,
+      "forecast": {
+        "espresso": 43.99904477459448,
+        "roll": 17.950318654040526,
+        "bagel": 17.950318654040526,
+        "donut": 34.719351149952885
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.09972399252244736,
+          "lead": 29.212924636603105,
+          "trigger": 4,
+          "morning": 4
+        },
+        "bagel": {
+          "rate": 0.09972399252244736,
+          "lead": 29.24795941867988,
+          "trigger": 4,
+          "morning": 4
+        },
+        "donut": {
+          "rate": 0.1928852841664049,
+          "lead": 29.89796630769985,
+          "trigger": 7,
+          "morning": 7
+        }
+      },
+      "bake": {
+        "roll": 4,
+        "bagel": 4,
+        "donut": 7
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 2,
+          "bagel": 0,
+          "donut": 3
+        }
+      },
+      "lateStarted": 0,
+      "profit": 1030,
+      "served": 86,
+      "soldOut": 0,
+      "baked": {
+        "roll": 19,
+        "bagel": 23,
+        "donut": 36
+      },
+      "stale": {
+        "roll": 2,
+        "donut": 3
+      },
+      "staleCost": 23,
+      "duration": 182.20000000000718
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 6,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 29.212924636603105,
+          "trigger": 5,
+          "morning": 5
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 29.24795941867988,
+          "trigger": 5,
+          "morning": 5
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 29.89796630769985,
+          "trigger": 6,
+          "morning": 6
+        }
+      },
+      "bake": {
+        "roll": 5,
+        "bagel": 5,
+        "donut": 6
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 6,
+          "bagel": 1,
+          "donut": 3
+        }
+      },
+      "lateStarted": 0,
+      "profit": 880,
+      "served": 91,
+      "soldOut": 0,
+      "baked": {
+        "roll": 24,
+        "bagel": 22,
+        "donut": 26
+      },
+      "stale": {
+        "roll": 6,
+        "bagel": 1,
+        "donut": 3
+      },
+      "staleCost": 41,
+      "duration": 182.05000000000715
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 7,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 29.212924636603105,
+          "trigger": 5,
+          "morning": 5
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 29.24795941867988,
+          "trigger": 5,
+          "morning": 5
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 29.89796630769985,
+          "trigger": 6,
+          "morning": 6
+        }
+      },
+      "bake": {
+        "roll": 5,
+        "bagel": 5,
+        "donut": 6
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 6,
+          "donut": 1
+        }
+      },
+      "lateStarted": 0,
+      "profit": 1158,
+      "served": 87,
+      "soldOut": 6,
+      "baked": {
+        "roll": 24,
+        "bagel": 25,
+        "donut": 30
+      },
+      "stale": {
+        "bagel": 6,
+        "donut": 1
+      },
+      "staleCost": 17,
+      "duration": 181.70000000000707
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 8,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 29.212924636603105,
+          "trigger": 5,
+          "morning": 5
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 29.24795941867988,
+          "trigger": 5,
+          "morning": 5
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 29.89796630769985,
+          "trigger": 6,
+          "morning": 6
+        }
+      },
+      "bake": {
+        "roll": 5,
+        "bagel": 5,
+        "donut": 6
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 0,
+          "donut": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 872,
+      "served": 88,
+      "soldOut": 2,
+      "baked": {
+        "roll": 24,
+        "bagel": 22,
+        "donut": 28
+      },
+      "stale": {
+        "donut": 1
+      },
+      "staleCost": 5,
+      "duration": 186.80000000000823
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 9,
+      "forecast": {
+        "espresso": 41.05572852725379,
+        "roll": 16.05791911291586,
+        "bagel": 16.05791911291586,
+        "donut": 32.422445222962395
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.08921066173842146,
+          "lead": 29.212924636603105,
+          "trigger": 4,
+          "morning": 4
+        },
+        "bagel": {
+          "rate": 0.08921066173842146,
+          "lead": 29.24795941867988,
+          "trigger": 4,
+          "morning": 4
+        },
+        "donut": {
+          "rate": 0.18012469568312442,
+          "lead": 29.89796630769985,
+          "trigger": 7,
+          "morning": 7
+        }
+      },
+      "bake": {
+        "roll": 4,
+        "bagel": 4,
+        "donut": 7
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 1,
+          "bagel": 3,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 919,
+      "served": 69,
+      "soldOut": 1,
+      "baked": {
+        "roll": 16,
+        "bagel": 14,
+        "donut": 33
+      },
+      "stale": {
+        "bagel": 3
+      },
+      "staleCost": 6,
+      "duration": 181.10000000000693
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 10,
+      "forecast": {
+        "espresso": 56.45954501151574,
+        "roll": 32.78549200975421,
+        "bagel": 32.78549200975421,
+        "donut": 25.320822320327192
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.18214162227641226,
+          "lead": 29.212924636603105,
+          "trigger": 7,
+          "morning": 7
+        },
+        "bagel": {
+          "rate": 0.18214162227641226,
+          "lead": 29.24795941867988,
+          "trigger": 7,
+          "morning": 7
+        },
+        "donut": {
+          "rate": 0.14067123511292884,
+          "lead": 29.89796630769985,
+          "trigger": 6,
+          "morning": 6
+        }
+      },
+      "bake": {
+        "roll": 7,
+        "bagel": 7,
+        "donut": 6
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "bagel": 0,
+          "roll": 0,
+          "donut": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 4,
+          "donut": 3
+        }
+      },
+      "lateStarted": 0,
+      "profit": 1041,
+      "served": 105,
+      "soldOut": 6,
+      "baked": {
+        "roll": 37,
+        "bagel": 33,
+        "donut": 21
+      },
+      "stale": {
+        "bagel": 4,
+        "donut": 3
+      },
+      "staleCost": 23,
+      "duration": 182.10000000000716
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 11,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 29.212924636603105,
+          "trigger": 5,
+          "morning": 5
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 29.24795941867988,
+          "trigger": 5,
+          "morning": 5
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 29.89796630769985,
+          "trigger": 6,
+          "morning": 6
+        }
+      },
+      "bake": {
+        "roll": 5,
+        "bagel": 5,
+        "donut": 6
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 1,
+          "donut": 1
+        }
+      },
+      "lateStarted": 0,
+      "profit": 1043,
+      "served": 85,
+      "soldOut": 2,
+      "baked": {
+        "roll": 17,
+        "bagel": 20,
+        "donut": 31
+      },
+      "stale": {
+        "bagel": 1,
+        "donut": 1
+      },
+      "staleCost": 7,
+      "duration": 184.80000000000777
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 12,
+      "forecast": {
+        "espresso": 41.05572852725379,
+        "roll": 16.05791911291586,
+        "bagel": 16.05791911291586,
+        "donut": 32.422445222962395
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.08921066173842146,
+          "lead": 29.212924636603105,
+          "trigger": 4,
+          "morning": 4
+        },
+        "bagel": {
+          "rate": 0.08921066173842146,
+          "lead": 29.24795941867988,
+          "trigger": 4,
+          "morning": 4
+        },
+        "donut": {
+          "rate": 0.18012469568312442,
+          "lead": 29.89796630769985,
+          "trigger": 7,
+          "morning": 7
+        }
+      },
+      "bake": {
+        "roll": 4,
+        "bagel": 4,
+        "donut": 7
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 4,
+          "donut": 0
+        }
+      },
+      "lateStarted": 0,
+      "profit": 968,
+      "served": 72,
+      "soldOut": 3,
+      "baked": {
+        "roll": 18,
+        "bagel": 14,
+        "donut": 36
+      },
+      "stale": {
+        "bagel": 4
+      },
+      "staleCost": 8,
+      "duration": 180.00000000000668
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 13,
+      "forecast": {
+        "espresso": 56.45954501151574,
+        "roll": 32.78549200975421,
+        "bagel": 32.78549200975421,
+        "donut": 25.320822320327192
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.18214162227641226,
+          "lead": 29.212924636603105,
+          "trigger": 7,
+          "morning": 7
+        },
+        "bagel": {
+          "rate": 0.18214162227641226,
+          "lead": 29.24795941867988,
+          "trigger": 7,
+          "morning": 7
+        },
+        "donut": {
+          "rate": 0.14067123511292884,
+          "lead": 29.89796630769985,
+          "trigger": 6,
+          "morning": 6
+        }
+      },
+      "bake": {
+        "roll": 7,
+        "bagel": 7,
+        "donut": 6
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "bagel": 0,
+          "roll": 0,
+          "donut": 0
+        },
+        "shelf": {
+          "roll": 6,
+          "bagel": 0,
+          "donut": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 1114,
+      "served": 111,
+      "soldOut": 2,
+      "baked": {
+        "roll": 35,
+        "bagel": 29,
+        "donut": 28
+      },
+      "stale": {
+        "roll": 6,
+        "donut": 2
+      },
+      "staleCost": 34,
+      "duration": 182.45000000000724
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 14,
+      "forecast": {
+        "espresso": 46.87449104250277,
+        "roll": 18.714662440243163,
+        "bagel": 18.714662440243163,
+        "donut": 36.32402838838815
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.10397034689023979,
+          "lead": 29.212924636603105,
+          "trigger": 5,
+          "morning": 5
+        },
+        "bagel": {
+          "rate": 0.10397034689023979,
+          "lead": 29.24795941867988,
+          "trigger": 5,
+          "morning": 5
+        },
+        "donut": {
+          "rate": 0.2018001577132675,
+          "lead": 29.89796630769985,
+          "trigger": 8,
+          "morning": 8
+        }
+      },
+      "bake": {
+        "roll": 5,
+        "bagel": 5,
+        "donut": 8
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 3,
+          "donut": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 1028,
+      "served": 81,
+      "soldOut": 4,
+      "baked": {
+        "roll": 21,
+        "bagel": 18,
+        "donut": 36
+      },
+      "stale": {
+        "bagel": 3,
+        "donut": 2
+      },
+      "staleCost": 16,
+      "duration": 181.25000000000696
+    },
+    {
+      "menu": "espresso+roll+bagel+donut",
+      "cooks": 3,
+      "seed": 15,
+      "forecast": {
+        "espresso": 49.68711045723361,
+        "roll": 21.45720646430604,
+        "bagel": 21.45720646430604,
+        "donut": 27.57347661415433
+      },
+      "plan": {
+        "roll": {
+          "rate": 0.119206702579478,
+          "lead": 29.212924636603105,
+          "trigger": 5,
+          "morning": 5
+        },
+        "bagel": {
+          "rate": 0.119206702579478,
+          "lead": 29.24795941867988,
+          "trigger": 5,
+          "morning": 5
+        },
+        "donut": {
+          "rate": 0.15318598118974627,
+          "lead": 29.89796630769985,
+          "trigger": 6,
+          "morning": 6
+        }
+      },
+      "bake": {
+        "roll": 5,
+        "bagel": 5,
+        "donut": 6
+      },
+      "atClose": {
+        "time": 180.00000000000668,
+        "inProduction": {
+          "donut": 0,
+          "bagel": 0,
+          "roll": 0
+        },
+        "shelf": {
+          "roll": 0,
+          "bagel": 0,
+          "donut": 2
+        }
+      },
+      "lateStarted": 0,
+      "profit": 808,
+      "served": 87,
+      "soldOut": 2,
+      "baked": {
+        "roll": 24,
+        "bagel": 21,
+        "donut": 26
+      },
+      "stale": {
+        "donut": 1
+      },
+      "staleCost": 5,
+      "duration": 185.25000000000787
+    }
+  ]
+}
