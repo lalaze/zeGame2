@@ -978,7 +978,11 @@ export class CafeScene extends Phaser.Scene {
       });
       if (!this.view.overview) this.image(key, painted.x + 7, painted.y - 17, DEPTH.overlay + 0.5);
       if (selected) {
-        this.rect(painted.x - 11, painted.y + 2, 22, 1, '#f8d68a', depth + 0.003);
+        for (const x of [painted.x - 13, painted.x + 9]) {
+          for (const y of [painted.y - 22, painted.y + 3]) {
+            this.rect(x, y, 5, 2, '#f8d68a', DEPTH.overlay + 0.4);
+          }
+        }
       }
       // A real visual-only pair owns this response; proximity alone never pets.
       if (!this.view.overview && cat.interaction?.phase === 'response' && state.pets.some(p => p.id === cat.id && petActive(p))) {
