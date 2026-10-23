@@ -19,7 +19,9 @@ const near = (a: number, b: number, label: string) => { if (!Number.isFinite(a) 
 export function validateFlowRow(r: FlowRow, setup: any) {
   near(r.openSeconds + r.closingSeconds, r.seconds, 'clock');
   if (!FLOW_HORIZONS.includes(r.seconds)) throw new Error('Unregistered horizon');
-  if (r.seconds === 180 && (r.openSeconds !== 180 || r.completedDays !== 0 || r.terminalPhase !== 'open')) throw new Error('Primary terminal drain');
+  // At 180 s the trading day ends (dcacd65): the cafe may have just begun closing, but never settled or drained.
+  // Evidence recorded before that change ends open.
+  if (r.seconds === 180 && (r.openSeconds !== 180 || r.closingSeconds !== 0 || r.completedDays !== 0 || !['open', 'closing'].includes(r.terminalPhase))) throw new Error('Primary terminal drain');
   near(r.assets.cash + r.assets.pantry + r.assets.care + r.assets.promotion, r.assets.total, 'asset total');
   near(r.assets.total - r.budget, r.netLiquidProfit, 'net wealth');
   near(r.revenue - r.ingredientExpense - r.careExpense - r.promotionExpense, r.operatingProfit, 'operating profit');

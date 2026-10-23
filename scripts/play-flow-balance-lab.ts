@@ -77,16 +77,19 @@ export function customFlowSample(scenario: Scenario, seed: number, seconds = STY
   let openTicks = 0, closingTicks = 0, liveOpen = 0, liveClosing = 0;
   let ingredientsPurchased = 0, promotionsPurchased = 0, queueRemovedAtClosing = 0;
   let promotionBookingAttempts = 0, promotionBookingFailures = 0, cashConstrainedRestocks = 0;
+  // As in styleSample: the sim also closes on its own (dcacd65), so count every dismissed queue.
+  const beginClosing = sim.beginClosing.bind(sim);
+  sim.beginClosing = (state) => {
+    if (state.phase === 'open') queueRemovedAtClosing += sim.customers.filter(c => c.phase === 'queue').length;
+    beginClosing(state);
+  };
   let rolling = { revenue: 0, ingredientCost: 0, petCost: 0, promotionCost: 0 };
   const settled: { endedAt: number; openSeconds: number; closingSeconds: number; report: DayReport }[] = [];
   const checkpoints: { seconds: number; operating: number; netLiquid: number; capitalRecovered: boolean }[] = [];
   let paybackSeconds: number | null = null;
   for (let tick = 0; tick < ticks; tick++) {
     const now = tick * STYLE_DT;
-    if (s.phase === 'open' && liveOpen === STYLE_OPEN_SECONDS / STYLE_DT) {
-      queueRemovedAtClosing += sim.customers.filter(c => c.phase === 'queue').length;
-      sim.beginClosing(s);
-    }
+    if (s.phase === 'open' && liveOpen === STYLE_OPEN_SECONDS / STYLE_DT) sim.beginClosing(s);
     if (s.phase === 'closing' && sim.finishedService) {
       const report = sim.closeShop(s)!;
       for (const key of ['revenue', 'ingredientCost', 'petCost', 'promotionCost'] as const) rolling[key] += report[key];
