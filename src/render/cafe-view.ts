@@ -54,6 +54,7 @@ export class CafeView {
   readonly livingCats = new LivingCats();
   selectedCat: CatId | null = null;
   catSelectionSeconds = 0;
+  private locatingCat = false;
   private steamTimer = 0;
   private focusedKitchenHeight = 0;
   private presentedPointer: PixelPoint | null = null;
@@ -98,6 +99,7 @@ export class CafeView {
   get panning(): boolean { return this.camera.moving; }
 
   moveToArea(area: AreaId, immediate = false): void {
+    this.locatingCat = false;
     this.area = area;
     this.overview = false;
     this.focusedKitchenHeight = kitchenHeight();
@@ -106,6 +108,7 @@ export class CafeView {
 
   /** The map shows the whole building, three rooms across and two deep, centered. */
   setOverview(show: boolean, immediate = false): void {
+    this.locatingCat = false;
     this.overview = show;
     const H = sceneHeight();
     this.focusedKitchenHeight = kitchenHeight();
@@ -181,6 +184,18 @@ export class CafeView {
     this.catSelectionSeconds = 6;
   }
 
+  /** Reveal the painted resident, then return to the normal room framing. */
+  focusResidentCat(id: CatId, immediate = false): void {
+    const cat = this.livingCats.actors.get(id);
+    if (!cat) return;
+    this.moveToArea(cat.area, immediate);
+    this.selectResidentCat(id);
+    this.locatingCat = true;
+    const point = this.presentedResidentCatPoints.get(id) ?? projectMainWorld(cat);
+    const zoom = 1.6;
+    this.camera.moveTo({ x: point.x - SCENE_W / (2 * zoom), y: point.y - 8 - sceneHeight() / (2 * zoom) }, immediate, zoom);
+  }
+
   petResidentCat(id: CatId): boolean {
     const cat = this.livingCats.actors.get(id);
     if (!cat || !this.livingCats.interact(id)) return false;
@@ -250,6 +265,10 @@ export class CafeView {
     if (!this.paused) {
       this.catHappy = Math.max(0, this.catHappy - dt);
       this.catSelectionSeconds = Math.max(0, this.catSelectionSeconds - dt);
+      if (this.locatingCat && this.catSelectionSeconds === 0) {
+        this.locatingCat = false;
+        this.camera.moveTo(this.roomFocus());
+      }
     }
     const through = sim.cooks.some((_, i) => {
       const at = sim.cookStation(i);

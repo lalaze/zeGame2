@@ -187,6 +187,7 @@ describe('six directions and responsive structure', () => {
 
   it.each(['en', 'zh'] as const)('explains the first kitchen and bread budget for bakery in %s', locale => {
     setLocale(locale); const state = createInitialState(0); state.items.espresso = 5;
+    state.cafeStyle.introductions = ['bakery'];
     setCafeStyle(state, 'bakery'); showCafeStyles(state, vi.fn());
     expect(select('.style-next').textContent).toContain(t('style.hint.bakeryKitchen'));
     expect(select('.style-next').textContent).toContain('$800');

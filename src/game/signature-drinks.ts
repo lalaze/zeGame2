@@ -27,6 +27,10 @@ export interface SignatureDefinition {
   basePrice: number; prepTime: number; baseCost: number;
   recipe: SignatureRecipe; cost: number; quality: number; flavor: string[]; feedback: string[];
 }
+/** Renaming a single serving of espresso or black tea adds no new recipe value. */
+export const isPlainSignatureCopy = (def: SignatureDefinition): boolean =>
+  (def.base === 'coffee' || def.base === 'tea')
+  && Object.keys(def.recipe).length === 1 && def.recipe[BASE_INGREDIENT[def.base]] === 1;
 export const emptySignatureDrinks = (): SignatureState => ({ recipes: [], tested: [], served: {} });
 const record = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
 const cleanName = (v: unknown): string => typeof v === 'string' ? [...v.replace(/[\u0000-\u001f\u007f]/g, '').trim()].slice(0, 24).join('') : '';
@@ -76,6 +80,9 @@ export function signatureDefinition(id: string): SignatureDefinition | null {
   const cost = Object.entries(recipe).reduce((sum, [ing, n]) => sum + INGREDIENTS.find((i) => i.id === ing)!.cost * n, 0);
   const units = Object.values(recipe).reduce((sum, n) => sum + n, 0);
   const additions = Object.keys(recipe).length - 1;
+  // Tea must steep just like the stock black tea. Preserve the existing coffee,
+  // milk and fruit assembly rhythm; extra doses/additions still take more work.
+  const basePrepTime = base === 'tea' ? MENU.find(item => item.id === 'blacktea')!.prepTime : 1.2;
   const flavor = [base === 'coffee' ? 'roasted' : base === 'tea' ? 'fragrant' : base === 'milk' ? 'creamy' : 'fruity'];
   if (recipe.sugar) flavor.push(recipe.sugar === 2 ? 'sweet' : 'lightly sweet');
   if ((recipe.milk || recipe.cream) && base !== 'milk') flavor.push('creamy');
@@ -100,7 +107,7 @@ export function signatureDefinition(id: string): SignatureDefinition | null {
   if (recipe.spice === 2) feedback.push('Double spice creates a bold, warming finish.');
   return { id: validation.id!, base, category: base === 'coffee' ? 'coffee' : 'tea', recipe, cost,
     basePrice: Math.round((cost * 1.6 + 2) * 100) / 100,
-    prepTime: Math.round((3 + 0.65 * units + 0.5 * additions) * 100) / 100,
+    prepTime: Math.round((basePrepTime + 0.35 * (units - 1) + 0.25 * additions) * 100) / 100,
     baseCost: 0, quality, flavor, feedback };
 }
 
@@ -108,7 +115,7 @@ export const isSignatureId = (id: unknown): id is SignatureId => typeof id === '
 
 /** Ingredients become available only through actually unlocked, usable menus. */
 export function availableSignatureIngredients(state: SignatureGameState): IngredientId[] {
-  const available = new Set<IngredientId>();
+  const available = new Set<IngredientId>(['milk', 'sugar']);
   for (const m of MENU) {
     if (!(state.items[m.id]! > 0) || !state.kitchen && (!isDrink(m.category) || m.id === 'affogato' || m.id === 'matchafloat')) continue;
     for (const ing of Object.keys(RECIPES[m.id as keyof typeof RECIPES])) available.add(ing as IngredientId);

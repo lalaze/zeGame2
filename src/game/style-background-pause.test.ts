@@ -50,7 +50,7 @@ function liveFrame(withCare = true) {
     document, state, sim, session, scene, drawer, startupComplete: true,
     panelCollapsed: true, panelRoot: document.createElement('aside'),
     detachedTablePreview: false, previewExit: document.createElement('button'), stage: document.createElement('section'),
-    SIM_STEP: simStep, isModalOpen: () => modal, showReport,
+    SIM_STEP: simStep, isModalOpen: () => modal, showReport, showSoldOut: vi.fn(() => { modal = true; }), cafeLife: { update: vi.fn() },
     sceneWrap: document.createElement('div'), arrangeFocus: { update: vi.fn() }, arrange: null,
     drawerBalance: document.createElement('button'), coinsEl: document.createElement('button'), rateEl: document.createElement('div'),
     formatMoney, formatTransactionMoney, t, panel: { update: vi.fn(), tablePreviewRequested: false, clearTablePreview: vi.fn() }, regionsUI: { update: vi.fn() },

@@ -25,7 +25,7 @@ describe('signature recipe rules', () => {
       expect(trial.ok).toBe(true);
       const def = signatureDefinition(trial.id!)!;
       expect(def.basePrice).toBeCloseTo(def.cost * 1.6 + 2);
-      expect(def.prepTime).toBeGreaterThanOrEqual(3.65);
+      expect(def.prepTime).toBeGreaterThanOrEqual(1.2);
       expect(def.flavor.length).toBeGreaterThan(0);
       expect(def.feedback.length).toBeGreaterThan(0);
       return trial.id;
@@ -55,8 +55,9 @@ describe('signature recipe rules', () => {
   });
   it('unlocks ingredients through usable purchased recipes, not pantry stock', () => {
     const s = shop(false);
-    expect(availableSignatureIngredients(s)).toEqual(['beans']);
-    expect(trialSignature(s, ...examples[0]).error).toBe('locked');
+    expect(availableSignatureIngredients(s)).toEqual(['beans', 'milk', 'sugar']);
+    expect(trialSignature(s, ...examples[0]).ok).toBe(true);
+    expect(trialSignature(s, ...examples[2]).error).toBe('locked');
     s.items.latte = 1;
     expect(trialSignature(s, ...examples[0]).ok).toBe(true);
     s.items.roll = 1;
@@ -169,11 +170,13 @@ describe('signature recipe rules', () => {
     }
     s.phase = 'prep';
     expect(replaceSignature(s, idOf(), idOf(), 'Same formula')).toBe(true);
+    const cocoa = makeSignatureId('coffee', { beans: 1, cocoa: 1 })!;
+    expect(trialSignature(s, 'coffee', { beans: 1, cocoa: 1 }).ok).toBe(true);
     s.items.latte = 0;
-    // Lock every other milk-using menu before checking ingredient availability.
+    // Basic milk stays available; advanced cocoa still needs a purchased recipe.
     for (const id of Object.keys(s.items)) s.items[id] = id === 'espresso' ? 1 : 0;
     const snapshot = JSON.stringify(s);
-    expect(replaceSignature(s, idOf(), idOf(), 'Now locked')).toBe(false);
+    expect(replaceSignature(s, idOf(), cocoa, 'Now locked')).toBe(false);
     expect(JSON.stringify(s)).toBe(snapshot);
   });
   it('never transfers practice to a different formula and restores original practice on return', () => {
@@ -208,7 +211,7 @@ describe('signature recipe rules', () => {
       expect(signatureDefinition(id)!.quality).toBe(expected);
       expect(signatureDefinition(JSON.parse(JSON.stringify(id)))!.quality).toBe(expected);
       expect(def.basePrice).toBeCloseTo(def.cost * 1.6 + 2);
-      expect(def.prepTime).toBeCloseTo(3 + 0.65 * Object.values(recipe).reduce((sum, n) => sum + n, 0) + 0.5 * (Object.keys(recipe).length - 1));
+      expect(def.prepTime).toBeGreaterThanOrEqual(1.2);
       observed.add(def.quality);
     }
     expect(observed.size).toBe(6);

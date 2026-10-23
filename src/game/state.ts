@@ -1,4 +1,5 @@
 import { parsePartners, type PartnerState } from './partners';
+import { emptyGuestStats, parseGuestStats, type GuestDayStats } from './customer-demand';
 import { emptySignatureDrinks, parseSignatureDrinks, signatureDefinition, type SignatureState } from './signature-drinks';
 import { parseCafeStyle, type CafeStyleState } from './styles';
 import { emptyRegularGuests, parseRegularGuests, type RegularGuestState } from './regular-guests';
@@ -24,7 +25,7 @@ import { parseTaste, type TasteState } from './taste';
 import { emptyReviews, parseReputation, parseReviews, type Reputation, type ReviewSummary } from './reputation';
 
 export const SAVE_KEY = 'tiny-bean-cafe/save';
-export const SAVE_VERSION = 18;
+export const SAVE_VERSION = 19;
 
 export interface Look {
   skin: number;
@@ -54,6 +55,7 @@ export interface DecorState {
 
 /** Running totals for the business day in progress, shown in the end-of-day report. */
 export interface DayStats {
+  guests: GuestDayStats;
   reviews: ReviewSummary;
   served: number;
   /** Customers who left without buying: the line was too slow or their order was sold out. */
@@ -77,6 +79,7 @@ export interface DayStats {
 }
 
 export const emptyDay = (): DayStats => ({
+  guests: emptyGuestStats(),
   reviews: emptyReviews(),
   served: 0,
   missed: 0,
@@ -388,6 +391,7 @@ function parseDay(value: unknown): DayStats {
   const day = emptyDay();
   if (!value || typeof value !== 'object') return day;
   const d = value as Record<string, unknown>;
+  day.guests = parseGuestStats(d.guests);
   day.reviews = parseReviews(d.reviews);
   day.served = Math.floor(num(d.served, 0));
   day.missed = Math.floor(num(d.missed, 0));

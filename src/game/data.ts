@@ -185,8 +185,8 @@ export const PASS_SLOTS = 6;
 export const MAX_PASS_SLOTS = PASS_SLOTS * 3;
 /** Seconds before a barista rings again for an order nobody has picked up. */
 export const RING_AGAIN = 6;
-/** Average seconds a service spot is busy on walking, beyond brewing. */
-export const SERVICE_OVERHEAD = 1.2;
+/** Shared by walking customers and the queue-to-counter capacity forecast. */
+export const CUSTOMER_WALK_SPEED = 62;
 
 // ---------------------------------------------------------------- ingredients
 

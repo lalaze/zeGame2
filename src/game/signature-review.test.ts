@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { createInitialState, deserialize, serialize } from './state';
 import { consumeServing, servingCost, salePrice, baseArrivalRate } from './economy';
-import { makeSignatureId, saveSignature, setSignatureOnMenu, trialSignature, renameSignature, deleteSignature, replaceSignature } from './signature-drinks';
+import { makeSignatureId, saveSignature, setSignatureOnMenu, trialSignature, renameSignature, deleteSignature, replaceSignature, signatureDefinition } from './signature-drinks';
 import { recordServings, tasteScore } from './taste';
 import { setCafeStyle, styleStages } from './styles';
 import { openShop } from './day';
@@ -63,6 +63,7 @@ describe('independent signature feature integration review', () => {
   });
   it('attempted live deletion leaves an active snapshot and exactly-once handoff intact', () => {
     const s = setup(); s.onMenu = [];
+    for (const [ing, n] of Object.entries(signatureDefinition(id)!.recipe)) s.pantry[ing as keyof typeof s.pantry] = n!;
     openShop(s);
     const sim = new Sim(() => 0);
     for (let i = 0; i < 3000 && !sim.customers.some(c => c.phase === 'waiting'); i++) sim.update(s, .05);

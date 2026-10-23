@@ -278,12 +278,25 @@ export function kitchenLoad(state: GameState): number {
 
 export function nextBatch(state: GameState, baking: readonly ItemId[]): { item: ItemId; n: number } | null {
   if (!state.kitchen || state.phase !== 'open') return null;
+  const remaining = DAY_SECONDS - state.dayTime;
   let best: { item: ItemId; n: number; urgency: number } | null = null;
   for (const [item, plan] of bakeryPlan(state)) {
     if (baking.includes(item)) continue;
     const left = state.shelf[item] ?? 0;
     if (left > plan.trigger) continue;
-    const n = Math.min(cookBatch(state), servingsLeft(state, item), Math.max(1, Math.ceil(plan.rate * DAY_SECONDS)));
+    // The full production cycle includes the trip to the café and the return,
+    // leaving a small buffer for the final delivery. Reorder lead also includes
+    // other dishes' work, so use this batch's own route for the closing cutoff.
+    const lead = batchSeconds(item, state);
+    if (remaining <= lead) continue;
+    // Existing servings sell while the cook works. Only replenish demand that
+    // can still be served after delivery, accounting for any stock left then.
+    const shelfAtDelivery = Math.max(0, left - plan.rate * lead) + (state.inProduction[item] ?? 0);
+    const needed = Math.ceil(plan.rate * (remaining - lead) - shelfAtDelivery);
+    // Keep a small demand-variation reserve rather than baking exactly the mean.
+    // The tray cap still applies; sufficient shelf stock never starts a batch.
+    const reserve = Math.ceil(1.65 * Math.sqrt(plan.rate * remaining));
+    const n = Math.min(cookBatch(state), servingsLeft(state, item), needed > 0 ? needed + reserve : 0);
     const urgency = left / Math.max(plan.rate, 0.001) - plan.lead;
     if (n >= 1 && (!best || urgency < best.urgency)) best = { item, n, urgency };
   }

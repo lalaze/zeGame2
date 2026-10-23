@@ -86,7 +86,8 @@ export function showModal(opts: ModalOptions): void {
 
 let toastTimer = 0;
 export function toast(message: string): void {
-  const el = document.getElementById('toast')!;
+  const el = document.getElementById('toast');
+  if (!el) return;
   el.textContent = message;
   el.hidden = false;
   el.classList.remove('show');

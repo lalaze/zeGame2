@@ -1,3 +1,4 @@
+import { demandReportHtml, tomorrowDemandHtml } from './customer-demand';
 import { partnerDefinition } from '../game/partners';
 import { getLocale } from '../i18n';
 import { partnerText } from './partners';
@@ -77,7 +78,9 @@ export function settlementHtml(report: DayReport, state: GameState): { body: str
       ${advice.action.kind === 'restock' || advice.action.kind === 'upgrade' ? '' : `<p class="note report-stock-priority">${text('report.stockFirst')}</p>`}
       ${report.newMilestones?.length ? `<p class="report-milestones">${text('milestone.report', { items: report.newMilestones.map(milestoneName).join(t('list.sep')) })}</p>` : ''}
       ${tomorrowConditionHtml(state, report.day)}
+      ${tomorrowDemandHtml(state, report.day)}
     </section>
+    ${demandReportHtml(report)}
     ${report.partners?.length ? '<section class="report-partners"><h3>'+partnerText('今日伙伴贡献','Today’s partner contributions')+'</h3><ul>'+report.partners.map(p=>'<li>'+(partnerDefinition(p.id)?.name[getLocale()] ?? '')+' · '+text('report.partnerJobs',{n:p.jobs})+' · '+p.xp+' XP'+(p.unlocked?' · '+text('report.partnerNewStories',{n:p.unlocked}):'')+'</li>').join('')+'</ul></section>' : ''}
     <details class="report-details">
       <summary>${text('report.details')}</summary>

@@ -1,5 +1,5 @@
 import { CATS, CAT_GROUPS, CARE_SECONDS, MAX_CARE_SECONDS, MAX_PETS, adoptCat, petActive, petTraffic, refillPet, type CatGroup, type CatId } from '../game/pets';
-import { formatAccountMoney, formatTransactionMoney as formatMoney } from '../game/format';
+import { formatAccountMoney, formatNumber, formatTransactionMoney as formatMoney } from '../game/format';
 import { SECONDS_PER_BUSINESS_HOUR } from '../game/business-clock';
 import type { GameState } from '../game/state';
 import { t } from '../i18n';
@@ -164,8 +164,8 @@ export class PetPanel {
     for (const r of this.rows) {
       const pet = s.pets.find((pet) => pet.id === r.cat.id);
       r.el.hidden = mode === 'owned' ? !pet : r.cat.id !== selected;
-      r.adopt.hidden = !!pet;
-      r.adopt.disabled = s.pets.length >= MAX_PETS || s.phase !== 'prep' || s.coins < r.cat.adoption;
+      r.adopt.hidden = !!pet && !pet.fosterUntilDay;
+      r.adopt.disabled = s.pets.length >= MAX_PETS && !pet?.fosterUntilDay || s.phase !== 'prep' || s.coins < r.cat.adoption;
       r.refill.hidden = !pet;
       r.auto.parentElement!.hidden = !pet;
       r.progress.hidden = !pet;
@@ -183,9 +183,9 @@ export class PetPanel {
       r.locate.disabled = !this.living.locate || !actor;
       r.interact.disabled = !this.living.interact || !actor || !petActive(pet);
       r.interact.title = t(petActive(pet) ? 'pet.living.petHint' : 'pet.living.needsCare');
-      const seconds = Math.ceil(pet.careSeconds);
-      const time = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
-      r.status.textContent = petActive(pet) ? t('pet.ready', { time }) : t('pet.resting');
+      const time = formatNumber(Math.ceil(pet.careSeconds / SECONDS_PER_BUSINESS_HOUR * 10) / 10);
+      r.status.textContent = pet.fosterUntilDay ? t('pet.foster') : petActive(pet) ? t('pet.ready', { time }) : t('pet.resting');
+      r.refill.hidden = r.auto.parentElement!.hidden = !!pet.fosterUntilDay;
       r.progress.value = pet.careSeconds;
       r.auto.checked = pet.autoRefill;
       r.refill.disabled = s.coins < r.cat.careCost || pet.careSeconds + CARE_SECONDS > MAX_CARE_SECONDS + 1e-8;

@@ -1,4 +1,7 @@
-import { htmlItemName } from './item-name';
+import { demandEnabled } from '../game/customer-demand';
+import { conditionTraffic } from '../game/conditions';
+import { menuTrafficMultiplier } from '../game/economy';
+import { displayItemName, htmlItemName } from './item-name';
 import { showSignatureDrinks } from './signature-drinks';
 import { readPanelScroll, restorePanelScroll } from './panel-scroll';
 import { showMoneyDetails } from './money-details';
@@ -34,6 +37,7 @@ import {
   recipe,
   restock,
   restockQuote,
+  restockPlan,
   serverCount,
   cookCount,
   upgradeLocked,
@@ -210,6 +214,7 @@ export class Panel {
   private slotNotes = new Map<DecorSlot, HTMLElement>();
   private comfortNote: HTMLElement | null = null;
   private goalSig = '';
+  private goalExpanded = false;
   private lastFocus = new Map<Tab, string>();
   private navigationListeners = new Set<(tab: PanelTab) => void>();
   private suppressFocus = false;
@@ -279,6 +284,13 @@ export class Panel {
     list.addEventListener('click', (e) => this.onListClick(e));
     goalEl.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
+      const toggle = target.closest<HTMLButtonElement>('[data-goal-toggle]');
+      if (toggle) {
+        this.goalExpanded = !this.goalExpanded;
+        this.goalEl.classList.toggle('goal-expanded', this.goalExpanded);
+        toggle.setAttribute('aria-expanded', String(this.goalExpanded));
+        return;
+      }
       if (target.closest('button[data-milestone-book]')) { showMilestoneBook(this.state); return; }
       if (target.closest('button[data-claim-chapter]')) {
         const reward = claimChapterWithToast(this.state);
@@ -591,6 +603,7 @@ export class Panel {
       return;
     }
     const [kind, id] = btn.dataset.buy!.split(':') as ['item' | 'upgrade', string];
+    const unlocking = kind === 'item' && this.state.items[id as ItemId] === 0;
     const ok =
       kind === 'item' ? buyItem(this.state, id as ItemId, this.buyAmount) : buyUpgrade(this.state, id as UpgradeId, this.buyAmount);
     if (!ok) return;
@@ -598,6 +611,7 @@ export class Panel {
     this.pop(btn.closest('.row'));
     this.onPurchase(kind, id);
     this.update();
+    if (unlocking) toast(t('menu.unlockedOff', { item: displayItemName(id as ItemId, this.state) }));
   }
 
   private pop(el: Element | null): void {
@@ -895,6 +909,7 @@ export class Panel {
       this.goalSig = sig;
       this.goalEl.classList.toggle('done', card.done);
       this.goalEl.innerHTML = card.html;
+      this.compactGoal();
       return;
     }
     if (!goal || this.pantryTask) {
@@ -920,6 +935,27 @@ export class Panel {
         }
       </div>
       ${done ? '' : `<div class="bar"><i style="width:${pct}%"></i></div><div class="goal-progress">${formatNumber(Math.min(cur, target))} / ${formatNumber(target)}</div>`}`;
+    this.compactGoal();
+  }
+
+  private compactGoal(): void {
+    const detail = document.createElement('div');
+    detail.className = 'goal-details'; detail.id = `${this.goalEl.id}-details`;
+    detail.append(...this.goalEl.childNodes);
+    const toggle = document.createElement('button');
+    toggle.className = 'goal-toggle'; toggle.dataset.goalToggle = '';
+    toggle.type = 'button';
+    toggle.setAttribute('aria-controls', detail.id);
+    const title = document.createElement('span');
+    title.textContent = detail.querySelector('.goal-text')?.textContent ?? '';
+    const progress = document.createElement('small');
+    progress.textContent = detail.querySelector('.goal-progress, .claim')?.textContent ?? '';
+    toggle.append(title, progress);
+    // Completed goals reveal their claim action immediately.
+    if (this.goalEl.classList.contains('done')) this.goalExpanded = true;
+    toggle.setAttribute('aria-expanded', String(this.goalExpanded));
+    this.goalEl.classList.toggle('goal-expanded', this.goalExpanded);
+    this.goalEl.append(toggle, detail);
   }
 
   update(): void {
@@ -1000,7 +1036,7 @@ export class Panel {
       this.bakeAllBtn.hidden = !prep || !menuItems(s).some((m) => isBakery(m.id));
     }
     if (this.varietyNote) {
-      this.varietyNote.textContent = t('menu.variety', {
+      this.varietyNote.textContent = t(demandEnabled(s) ? 'demand.menuSummary' : 'menu.variety', {
         n: menuItems(s).length,
         pct: Math.round(varietyBonus(s) * 100),
         price: formatMoney(averageDishPrice(s)),
@@ -1047,11 +1083,20 @@ export class Panel {
         if (!eligible) refs.sub.textContent = t('menu.requiresKitchen');
         refs.el.classList.toggle('off-menu', level > 0 && !on);
         if (refs.tradeoff) {
-          // Guests pick dishes evenly, so a cheap new dish quietly lowers the average order.
+          // Preview both demand and main-dish price; a lower average need not mean lower daily earnings.
           const today = menuItems(s), before = averageDishPrice(s, today);
           const after = eligible && !on && today.length ? averageDishPrice(s, [...today, def]) : before;
-          refs.tradeoff.hidden = after >= before - 0.005;
-          if (!refs.tradeoff.hidden) refs.tradeoff.textContent = t(level === 0 ? 'menu.tradeoffNew' : 'menu.tradeoff', { before: formatMoney(before), after: formatMoney(after) });
+          if (demandEnabled(s)) {
+            refs.tradeoff.hidden = !eligible || on || !today.length;
+            if (!refs.tradeoff.hidden) {
+              const next = [...today, def];
+              const change = Math.round((menuTrafficMultiplier(s, next) * conditionTraffic(s, next) / (menuTrafficMultiplier(s, today) * conditionTraffic(s, today)) - 1) * 100);
+              refs.tradeoff.textContent = t('demand.tradeoff', { before: formatMoney(before), after: formatMoney(after), change: `${change >= 0 ? '+' : ''}${change}%` });
+            }
+          } else {
+            refs.tradeoff.hidden = after >= before - 0.005;
+            if (!refs.tradeoff.hidden) refs.tradeoff.textContent = t(level === 0 ? 'menu.tradeoffNew' : 'menu.tradeoff', { before: formatMoney(before), after: formatMoney(after) });
+          }
         }
         if (refs.toggle) {
           refs.toggle.hidden = level === 0;
@@ -1121,16 +1166,19 @@ export class Panel {
     const s = this.state;
     const needs = dayNeeds(s);
     const restockQ = restockQuote(s);
+    const plan = restockPlan(s);
     if (this.pantryNote) this.pantryNote.textContent = t('pantry.forecast', { n: formatNumber(expectedCustomers(s)) }) + (restockQ.cost > s.coins ? ` · ${t('prep.partial', { money: formatMoney(s.coins) })}` : '');
     if (this.restockBtn) {
       const full = restockQ.cost <= 0;
-      this.restockBtn.textContent = full ? t('pantry.full') : t('pantry.restock', { price: formatMoney(restockQ.cost) });
-      this.restockBtn.disabled = full || s.coins <= 0;
+      this.restockBtn.textContent = full ? t('pantry.full') : t(plan.missingCost > 0 ? 'pantry.budgetRestock' : 'pantry.restock', { price: formatMoney(plan.cost) });
+      this.restockBtn.disabled = full || plan.cost <= 0;
       this.restockBtn.classList.toggle('is-complete', full);
       const reason = this.list.querySelector<HTMLElement>('.restock-reason');
       if (reason) {
-        reason.hidden = full || s.coins > 0;
-        reason.textContent = reason.hidden ? '' : t('money.short', { money: formatMoney(restockQ.cost - s.coins) });
+        reason.hidden = full;
+        const names = (items: typeof plan.buy) => Object.entries(items).map(([id, n]) => `${ingredientName(id as IngredientId)} ×${n}`).join(t('list.sep'));
+        reason.textContent = full ? '' : t('pantry.plan', { items: names(plan.buy) || t('prep.noPurchase'), balance: formatMoney(plan.balance) })
+          + (plan.missingCost > 0 ? ' ' + t('pantry.unmet', { items: names(plan.missing), price: formatMoney(plan.missingCost) }) : '');
       }
     }
     for (const [key, refs] of this.rows) {

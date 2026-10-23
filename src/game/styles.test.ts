@@ -43,7 +43,7 @@ describe('café style foundation and first complete route', () => {
   it('offers attainable first steps even before route capital is owned', () => {
     const s=createInitialState(0);
     for(const id of STYLE_IDS){const stages=styleStages(s,id);expect(stages.map(x=>x.id)).toEqual(['early','mid','late']);expect(stages.every(x=>x.goals.length>=3)).toBe(true);expect(nextStyleGoal(s,id)).not.toBeNull();}
-    expect(nextStyleGoal(s,'bakery')!.id).toBe('espresso5');expect(nextStyleGoal(s,'cats')!.id).toBe('espresso5');
+    expect(nextStyleGoal(s,'bakery')!.id).toBe('bakeryWelcome');expect(nextStyleGoal(s,'cats')!.id).toBe('catWelcome');
   });
   it('a genuine zero-coin coffee opening makes money without manual boosts or endowed fixtures', () => {
     const s=createInitialState(0);setCafeStyle(s,'coffee');openShop(s);const sim=new Sim(rng(123));

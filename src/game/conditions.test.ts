@@ -3,7 +3,7 @@ import en from '../locales/en.json';
 import zh from '../locales/zh.json';
 import {
   CONDITIONS, FAVORED_WEIGHT, FIRST_CONDITION_DAY, LESS_WEIGHT, conditionOn, dishMood, menuWeights, todayCondition, weightedIndex,
-  type ConditionId,
+  conditionTraffic, type ConditionId,
 } from './conditions';
 import { INGREDIENTS, type ItemId } from './data';
 import { openShop } from './day';
@@ -52,12 +52,12 @@ describe('daily conditions', () => {
     expect(week(1760000000000)).not.toBe(week(1760000123456));
   });
 
-  it('change nothing at all on a fair day', () => {
+  it('add no weather modifier on a fair day while the first two days keep even choices', () => {
     const day = dayOf('fair');
     const fair = cafe(day), first = cafe(1);
     expect(menuWeights(fair, menuItems(fair))).toBeNull();
-    for (const share of orderShares(menuItems(fair), fair).values()) expect(share).toBe(1 / DRINKS.length);
-    expect(arrivalRate(fair)).toBe(arrivalRate(first));
+    for (const share of orderShares(menuItems(first), first).values()) expect(share).toBe(1 / DRINKS.length);
+    expect(conditionTraffic(fair, menuItems(fair))).toBe(1);
     expect(patienceSeconds(fair)).toBe(patienceSeconds(first));
     expect(tablePatience(fair)).toBe(tablePatience(first));
   });
@@ -71,15 +71,17 @@ describe('daily conditions', () => {
     expect(dishMood(state, 'coldbrew')).toBe('less');
     expect(dishMood(state, 'espresso')).toBeNull();
     const shares = orderShares(menuItems(state), state);
-    expect(shares.get('blacktea')! / shares.get('espresso')!).toBeCloseTo(FAVORED_WEIGHT, 9);
+    const fairShares = orderShares(menuItems(state), { ...state, day: dayOf('fair') });
+    expect(shares.get('blacktea')!).toBeGreaterThan(fairShares.get('blacktea')!);
+    expect(menuWeights(state, menuItems(state))![2]).toBe(FAVORED_WEIGHT);
     const demand = dayDemand(state);
-    expect(demand.get('blacktea')!).toBeGreaterThan(demand.get('espresso')!);
+    expect(demand.get('blacktea')! / demand.get('espresso')!).toBeCloseTo(shares.get('blacktea')! / shares.get('espresso')!, 9);
     // A menu with something popular draws 10% more guests; one without, the usual crowd.
     const plain = cafe(state.day, ['espresso', 'coldbrew']), fairDay = cafe(dayOf('fair'), ['espresso', 'coldbrew']);
-    expect(arrivalRate(plain)).toBeCloseTo(arrivalRate(fairDay), 12);
-    expect(orderShares(menuItems(plain), plain).get('coldbrew')! / orderShares(menuItems(plain), plain).get('espresso')!).toBeCloseTo(LESS_WEIGHT, 9);
+    expect(conditionTraffic(plain, menuItems(plain))).toBe(conditionTraffic(fairDay, menuItems(fairDay)));
+    expect(menuWeights(plain, menuItems(plain))).toEqual([1, LESS_WEIGHT]);
     const matched = cafe(state.day, ['espresso', 'blacktea']), matchedFair = cafe(dayOf('fair'), ['espresso', 'blacktea']);
-    expect(arrivalRate(matched) / arrivalRate(matchedFair)).toBeCloseTo(1.1, 9);
+    expect(conditionTraffic(matched, menuItems(matched)) / conditionTraffic(matchedFair, menuItems(matchedFair))).toBeCloseTo(1.1, 9);
   });
 
   it('bring a bigger takeaway crowd on market day and a calm, patient one on a quiet day', () => {

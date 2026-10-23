@@ -8,6 +8,8 @@ import './ui/ledger.css';
 import { PlayFlow } from './ui/play-flow';
 import { pantryTaskContext } from './ui/play-flow-context';
 import { trafficHud } from './ui/traffic-status';
+import { showSoldOut } from './ui/sold-out';
+import { CafeLife, closingStory } from './ui/cafe-life';
 import { showLivingCat } from './ui/living-cats';
 import { petActive, type CatId } from './game/pets';
 import { DAY_SECONDS, SPEEDS } from './game/data';
@@ -206,6 +208,17 @@ previewExit.addEventListener('click', () => {
   panel.clearTablePreview();
   showPanelTab('upgrades');
 });
+const catLocateExit = document.createElement('button');
+catLocateExit.className = 'pixel-btn cat-locate-exit';
+catLocateExit.hidden = true;
+stage.append(catLocateExit);
+catLocateExit.addEventListener('click', () => {
+  catLocateExit.hidden = true;
+  regionsUI.select(scene.area);
+  showPanelTab('pets');
+  if (catLocateContext) panel.restoreBrowsingContext(catLocateContext);
+});
+let catLocateContext: ReturnType<Panel['captureBrowsingContext']> | null = null;
 // Set once the panel exists; the first layout pass runs before that.
 let panelSimplifiedTabs: ((available: boolean) => void) | null = null;
 function updateDrawerLabels(): void {
@@ -213,6 +226,7 @@ function updateDrawerLabels(): void {
   // Phones have no shortcut rail, so the guided first shift must keep every tab.
   panelSimplifiedTabs?.(shortcuts.available);
   previewExit.textContent = chinese() ? '返回升级' : 'Back to upgrades';
+  catLocateExit.textContent = chinese() ? '返回猫咪详情' : 'Back to cats';
   $('drawer-title').textContent = t('panel.title');
   $('drawer-close').setAttribute('aria-label', chinese() ? '关闭管理' : 'Close management');
   $('drawer-pause').textContent = chinese() ? '已暂停 · 关闭后继续' : 'Paused · close to resume';
@@ -290,6 +304,7 @@ updateDrawerLabels();
 
 /** Opening a management task also reveals the panel if the player folded it away. */
 function showPanelTab(tab: 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | 'promotion'): void {
+  catLocateExit.hidden = true;
   setPanelCollapsed(false);
   panel.showTab(tab);
   updateDrawerLabels();
@@ -543,6 +558,8 @@ const playFlow = new PlayFlow({
   pantryContext: (shortage) => pantryTaskContext(state, sim, shortage),
 });
 const trafficSummary = document.createElement('span');
+const cafeLife = new CafeLife(saveGame);
+stage.append(cafeLife.element);
 trafficSummary.className = 'traffic-summary';
 playFlow.element.prepend(trafficSummary);
 $('app').append(playFlow.element);
@@ -563,14 +580,14 @@ function updateDayHud(): void {
   const traffic = trafficHud(state);
   const condition = conditionHud(state);
   const baseText = `${t('day.label', { n: state.day })}${condition ? ` · ${condition}` : ''} · ${time}`;
-  const rhythmText = traffic ? `${traffic.label} → ${traffic.nextLabel}` : '';
+  const rhythmText = traffic?.story ?? '';
   const text = `${baseText}${rhythmText ? ` · ${rhythmText}` : ''}`;
   if (dayClockBase.textContent !== baseText) dayClockBase.textContent = baseText;
   if (dayClockTraffic.textContent !== rhythmText) dayClockTraffic.textContent = rhythmText;
   if (trafficSummary.textContent !== rhythmText) trafficSummary.textContent = rhythmText;
   trafficSummary.hidden = dayClockTraffic.hidden = !traffic;
-  dayClock.title = traffic?.description ?? '';
-  dayClock.setAttribute('aria-label', traffic ? `${text}. ${traffic.description}` : text);
+  dayClock.title = traffic?.story ?? '';
+  dayClock.setAttribute('aria-label', text);
   $('day-speed').hidden = !open;
   closeBtn.hidden = !open;
   closeBtn.textContent = t(closing ? 'day.finishNow' : 'day.close');
@@ -669,8 +686,12 @@ function showReport(report: DayReport): void {
   panel.refresh();
   updateDayHud();
   const { body, recommendedTab, advice } = settlementHtml(report, state);
+  const reportBody = document.createElement('div');
+  reportBody.innerHTML = body;
+  const story = closingStory(state, report, saveGame);
+  if (story) reportBody.querySelector('.report-summary')?.after(story);
   showModal({
-    title: t('report.title', { n: report.day }), icon: ownerIcon(), body,
+    title: t('report.title', { n: report.day }), icon: ownerIcon(), body: reportBody,
     buttons: [
       { label: t('report.next'), primary: true, onClick: prepareDay },
       { label: advice.claimableGoal || advice.action.kind === 'claimChapter' ? t('guide.viewReward') : t(`tab.${recommendedTab}`), onClick: () => {
@@ -847,8 +868,12 @@ function locateResident(id: CatId): void {
   scene.livingCats.update(state, 0, sim);
   const actor = scene.livingCats.actors.get(id);
   if (!actor) return;
+  catLocateContext = panelCollapsed ? null : panel.captureBrowsingContext();
+  setPanelCollapsed(true, false);
   regionsUI.select(actor.area);
-  scene.selectResidentCat(id);
+  scene.focusResidentCat(id, reducedMotion.matches);
+  catLocateExit.hidden = false;
+  catLocateExit.focus({ preventScroll: true });
   toast(t('pet.living.located', { name: t(`pet.${id}.name`) }));
 }
 
@@ -1051,8 +1076,12 @@ function frame(dt: number): void {
     saveGame();
     updateDayHud();
     toast(t(state.dayTime >= DAY_SECONDS ? 'toast.hoursClosing' : 'toast.soldOutClosing'));
+    if (state.dayTime < DAY_SECONDS) showSoldOut(state, () => {
+      sim.resumeAfterRestock(state);
+      saveGame(); panel.refresh(); updateDayHud();
+    }, () => { saveGame(); });
   }
-  if (!paused && state.phase === 'closing' && sim.finishedService) {
+  if (!paused && !isModalOpen() && state.phase === 'closing' && sim.finishedService) {
     const report = sim.closeShop(state);
     if (report) showReport(report);
   }
@@ -1092,6 +1121,7 @@ function frame(dt: number): void {
   uiTimer -= dt;
   if (uiTimer <= 0) {
     uiTimer = 0.25;
+    cafeLife.update(state, sim.customers, !scene.paused && panelCollapsed && !arrange && scene.area === 'main' && !scene.overview);
     const rate =
       state.phase !== 'prep'
         ? t('hud.today', { money: formatMoney(state.today.revenue) })

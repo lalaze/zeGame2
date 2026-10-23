@@ -6,6 +6,8 @@ import { adoptCat } from '../game/pets';
 import { areaOrigin, MIN_SCENE_H, setSceneHeight } from '../game/layout';
 import { CELL } from '../game/furniture';
 import { regionOffset } from '../game/regions';
+import { projectMainWorld } from './main-pixel-presentation';
+import { Sim } from '../game/sim';
 
 afterEach(() => setSceneHeight(MIN_SCENE_H));
 function residents() {
@@ -14,6 +16,22 @@ function residents() {
   const view = new CafeView(); view.livingCats.update(state, 0); return { state, view };
 }
 describe('resident view interaction', () => {
+  it('locates a resident from overview, centers its painted position and restores the room', () => {
+    const { view } = residents();
+    const sim = new Sim();
+    const cat = view.livingCats.actors.get('ginger')!;
+    view.setOverview(true, true);
+    view.focusResidentCat(cat.id, true);
+    const painted = projectMainWorld(cat);
+    expect(view.overview).toBe(false);
+    expect(view.area).toBe(cat.area);
+    expect(view.viewX + view.viewWidth / 2).toBeCloseTo(painted.x);
+    expect(view.viewY + view.viewHeight / 2).toBeCloseTo(painted.y - 8);
+    expect(view.zoom).toBeGreaterThan(1);
+    expect(view.selectedCat).toBe(cat.id);
+    view.update(6.1, sim); view.update(1, sim);
+    expect(view.zoom).toBe(1);
+  });
   it('finds each real actor only in its room and ignores old window decorations', () => {
     const { view } = residents();
     for (const actor of view.livingCats.actors.values()) {

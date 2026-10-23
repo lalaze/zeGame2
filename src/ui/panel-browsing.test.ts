@@ -49,6 +49,18 @@ function resetScrollOnRebuild(list: HTMLElement, scroller = list) {
   });
 }
 
+it('keeps a compact goal expandable across progress updates and exposes claimable rewards', () => {
+  const { panel, state } = panelFor();
+  expect(button('[data-goal-toggle]').getAttribute('aria-expanded')).toBe('false');
+  button('[data-goal-toggle]').click();
+  expect(button('[data-goal-toggle]').getAttribute('aria-expanded')).toBe('true');
+  panel.update(); expect(button('[data-goal-toggle]').getAttribute('aria-expanded')).toBe('true');
+  button('[data-goal-toggle]').click();
+  state.day = 2; panel.update();
+  expect(button('[data-goal-toggle]').getAttribute('aria-expanded')).toBe('true');
+  expect(button('[data-claim]')).not.toBeNull();
+});
+
 beforeEach(() => setLocale('en'));
 afterEach(() => {
   setLocale('en');

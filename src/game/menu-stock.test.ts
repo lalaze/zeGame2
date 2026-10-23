@@ -15,7 +15,7 @@ function menuState(ids: ItemId[]) {
   return state;
 }
 
-describe('unlocking dishes without changing an open menu', () => {
+describe('unlocking dishes without changing the selected menu', () => {
   it.each(['roll', 'americano'] as const)('keeps a live %s unlock off-menu until explicitly selected in prep', (id) => {
     const state = createInitialState(0);
     state.coins = 1e6;
@@ -38,12 +38,16 @@ describe('unlocking dishes without changing an open menu', () => {
     if (id === 'roll') expect(state.bakePlan.roll).toBeGreaterThan(0);
   });
 
-  it('preserves prep auto-enabling and bake plans', () => {
+  it('waits for explicit prep selection before enabling dishes and suggesting a bake', () => {
     const state = createInitialState(0);
     state.coins = 1e6;
     state.kitchen = true;
     expect(buyItem(state, 'roll', 1)).toBe(true);
     expect(buyItem(state, 'americano', 1)).toBe(true);
+    expect(state.onMenu).toEqual(['espresso']);
+    expect(state.bakePlan.roll).toBeUndefined();
+    setOnMenu(state, 'roll', true);
+    setOnMenu(state, 'americano', true);
     expect(state.onMenu).toEqual(['espresso', 'americano', 'roll']);
     expect(state.bakePlan.roll).toBeGreaterThan(0);
   });

@@ -1,11 +1,12 @@
 import { syncPartners, activePartner, recordPartnerWork, partnerServerSpeed, partnerTraySize, partnerBrewMultiplier, partnerCookSpeed, partnerStationTime } from './partners';
-import { conditionSeating, menuWeights, weightedIndex } from './conditions';
-import { recordStyleHandoff, styleOrderPairs, styleComboChance, styleSeatChance, styleStationMultiplier, styleDwellExtra, styleServerMultiplier } from './styles';
+import { weightedIndex } from './conditions';
+import type { GuestKind } from './customer-demand';
+import { recordStyleHandoff, styleStationMultiplier, styleDwellExtra, styleServerMultiplier } from './styles';
 import { recordRegularGuestArrival, recordRegularGuestDeparture, recordRegularGuestService, regularGuestForAppearance, regularGuestOrder } from './regular-guests';
 import { CUSTOMER_CAST, CustomerCastCycle } from './customer-cast';
 import { updatePromotion } from './promotion';
 import { updatePetCare } from './pets';
-import { DAY_SECONDS, MAX_QUEUE, RING_AGAIN, VIP_CHANCE, type ItemId } from './data';
+import { CUSTOMER_WALK_SPEED, DAY_SECONDS, MAX_QUEUE, RING_AGAIN, VIP_CHANCE, type ItemId } from './data';
 import { finishDay, type DayReport } from './day';
 import { CELL, furnitureDef } from './furniture';
 import { routeFloorSegment, segmentCrossesObstacle, type FloorObstacle, type FloorPoint } from './navigation';
@@ -19,6 +20,8 @@ import {
   earn,
   hasServiceSupply,
   menuItems,
+  orderChoices,
+  orderSeatChance,
   passCapacity,
   patienceSeconds,
   prepTime,
@@ -94,6 +97,8 @@ export interface Walker {
 }
 
 export interface Customer extends Walker {
+  /** Reason for this visit; absent on visits saved before demand was introduced. */
+  guestKind?: GuestKind;
   /** One review per visit, persisted with in-flight orders. */
   reviewed: boolean;
   waitSeconds: number;
@@ -186,7 +191,7 @@ export type SimEvent =
   | { type: 'soldout'; item: ItemId; x: number; y: number }
   | { type: 'restock'; item: ItemId; n: number };
 
-export const WALK_SPEED = 62;
+export const WALK_SPEED = CUSTOMER_WALK_SPEED;
 /** Servers walk briskly. */
 export const SERVER_SPEED = WALK_SPEED * 1.5;
 /** A tray holds this many orders, delivered nearest room first. */
@@ -346,8 +351,18 @@ export class Sim {
   beginClosing(state: GameState): void {
     if (state.phase !== 'open') return;
     state.phase = 'closing';
-    for (const c of this.customers) if (c.phase === 'queue') this.exit(c);
+    for (const c of this.customers) if (c.phase === 'queue') {
+      if (c.guestKind) state.today.guests[c.guestKind].dismissed++;
+      this.exit(c);
+    }
     this.queue = [];
+  }
+
+  /** Keep the same ledger, clock and accepted orders after a sold-out restock. */
+  resumeAfterRestock(state: GameState): boolean {
+    if (state.phase !== 'closing' || state.dayTime >= DAY_SECONDS || !hasServiceSupply(state)) return false;
+    state.phase = 'open';
+    return true;
   }
 
   get finishedService(): boolean {
@@ -625,11 +640,12 @@ export class Sim {
   private spawn(state: GameState): void {
     const menu = menuItems(state);
     if (menu.length === 0) return;
-    // Still one draw: today's condition only reshapes which dish it lands on.
-    const weights = menuWeights(state, menu);
-    const main = weights ? menu[weightedIndex(weights, this.rng())] : menu[this.randInt(menu.length)];
-    const pairs = styleOrderPairs(state, main, menu);
-    const extra = pairs.length > 0 && this.rng() < styleComboChance(state, main, pairs) ? pairs[this.randInt(pairs.length)].id : null;
+    // One joint draw selects the visit's purpose and main dish. Forecasts use
+    // these same choices, including the route-aware pairing distribution.
+    const choices = orderChoices(menu, state);
+    const choice = choices[weightedIndex(choices.map(option => option.probability), this.rng())];
+    const { main, pairs } = choice;
+    const extra = pairs.length > 0 && this.rng() < choice.comboChance ? pairs[weightedIndex(choice.pairWeights, this.rng())].id : null;
     const pos = queueSpot(this.queue.length);
     const door = doorSpot();
     // Keep exactly the old five appearance RNG draws: adding a visual cast must
@@ -641,6 +657,7 @@ export class Sim {
     const visitId = regularGuest ? recordRegularGuestArrival(state, regularGuest.id) : null;
     const chosen = regularGuestOrder(state, regularGuest?.id, main.id, extra);
     const c: Customer = {
+      ...(choice.kind ? { guestKind: choice.kind } : {}),
       id: this.nextId++,
       reviewed: false,
       waitSeconds: 0,
@@ -668,6 +685,7 @@ export class Sim {
       stride: 0,
       via: [],
     };
+    if (c.guestKind) state.today.guests[c.guestKind].arrived++;
     this.customers.push(c);
     this.queue.push(c.id);
     this.walk(c, pos);
@@ -739,11 +757,18 @@ export class Sim {
   private review(state: GameState, c: Customer, review: ReviewInput): void {
     if (c.reviewed) return;
     c.reviewed = true;
+    if (c.guestKind) {
+      const stats = state.today.guests[c.guestKind];
+      if (review.reason === 'soldOut') stats.stockLost++;
+      if (review.reason === 'queueWait' || review.reason === 'tableWait') stats.waitLost++;
+      if (review.reason === 'cancelled') stats.cancelled++;
+    }
     recordReview(state, review);
   }
 
   /** The customer pays for their order, wherever they get it. */
   private charge(state: GameState, c: Customer, events: SimEvent[]): void {
+    if (c.hasCup) return;
     const bought = (c.extra ? [c.order, c.extra] : [c.order]).filter((id) => canPrepareItem(state, id));
     if (bought.length === 0) return;
     const amount = bought.reduce((sum, id) => sum + salePrice(state, id, c.vip, c.dineIn, bought), 0) * (1 + (c.momentTip ?? 0));
@@ -751,6 +776,12 @@ export class Sim {
     state.served++;
     state.today.served++;
     state.today.revenue += amount;
+    if (c.guestKind) {
+      const stats = state.today.guests[c.guestKind];
+      stats.served++;
+      stats.revenue += amount;
+      if (bought.length > 1) stats.paired++;
+    }
     for (const id of bought) state.today.sales[id] = (state.today.sales[id] ?? 0) + 1;
     events.push({ type: 'sale', amount, x: c.x, y: c.y - 52, vip: c.vip, customerId: c.id });
     this.review(state, c, mealReview(state, bought, c.waitSeconds, c.missingExtra));
@@ -808,7 +839,7 @@ export class Sim {
       b.total = b.remaining = prepTime(state, c.order) * partnerBrewMultiplier(state, b.partnerId, isBakery(c.order)) + (c.extra ? prepTime(state, c.extra) * partnerBrewMultiplier(state, b.partnerId, isBakery(c.extra)) : 0);
       // With a table free, some stay: they take a seat and the order is brought over.
       const seat = this.freeSeat(state);
-      if (seat >= 0 && this.rng() < styleSeatChance(state, c.extra ? [c.order, c.extra] : [c.order]) * conditionSeating(state)) {
+      if (seat >= 0 && this.rng() < orderSeatChance(state, c.extra ? [c.order, c.extra] : [c.order], c.guestKind)) {
         this.seats[seat] = c.id;
         c.seat = seat;
         c.dineIn = true;
@@ -1018,7 +1049,10 @@ export class Sim {
     this.spawnTimer -= arrivalSeconds;
     if (dt > 0 && this.spawnTimer <= 0) {
       // Jittered so customers don't march in like clockwork.
-      this.spawnTimer = (0.5 + this.rng()) / arrivalRate(state);
+      const rate = arrivalRate(state);
+      // An empty preparation menu must not leave an infinite saved timer that
+      // prevents arrivals after the player selects dishes and opens again.
+      this.spawnTimer = rate > 0 ? (0.5 + this.rng()) / rate : 1;
       if (state.phase === 'open') {
         if (this.queue.length < MAX_QUEUE) this.spawn(state);
         else state.today.doorLost++;
@@ -1111,6 +1145,7 @@ export class Sim {
   closeShop(state: GameState): DayReport | null {
     if (state.phase === 'prep') return null;
     for (const c of this.customers) {
+      if (c.phase === 'queue' && c.guestKind) state.today.guests[c.guestKind].dismissed++;
       if (c.phase === 'toCounter' || c.phase === 'ordering' || c.phase === 'toSeat' || c.phase === 'waiting') {
         this.review(state, c, { stars: 1, reason: 'cancelled' });
       }

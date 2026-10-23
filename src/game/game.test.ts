@@ -609,6 +609,8 @@ describe('business day', () => {
     s.coins = 1000;
     s.kitchen = true;
     buyItem(s, 'roll', 1);
+    expect(s.onMenu).toEqual(['espresso']);
+    setOnMenu(s, 'roll', true);
     expect(s.onMenu).toEqual(['espresso', 'roll']);
     expect(checkOpen(s)).toEqual({ ok: false, reason: 'lowStock', items: ['roll'] });
     setOnMenu(s, 'roll', false);
@@ -748,6 +750,7 @@ describe('morning bake', () => {
     s.coins = 1000;
     s.kitchen = true;
     buyItem(s, 'roll', 1);
+    setOnMenu(s, 'roll', true);
     s.pantry.flour = 100;
     s.pantry.butter = 100;
     s.pantry.beans = 1e6;
@@ -766,6 +769,7 @@ describe('morning bake', () => {
     s.coins = 1000;
     s.kitchen = true;
     buyItem(s, 'roll', 1);
+    setOnMenu(s, 'roll', true);
     expect(s.bakePlan.roll).toBe(suggestedBake(s, 'roll'));
     expect(Number.isInteger(s.bakePlan.roll)).toBe(true);
     expect(s.bakePlan.roll).toBeGreaterThan(0);

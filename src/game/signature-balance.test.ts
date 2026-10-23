@@ -40,11 +40,12 @@ function scenario(id: ItemId, marketing: number, seed: number) {
 }
 
 describe('reproducible signature drink balance checks', () => {
-  it('retains a preparation tradeoff instead of a free duplicate of espresso', () => {
+  it('keeps plain copies at base margin while rewarding slower inventive blends', () => {
     const s = createInitialState(0);
     const id = choices[2].id;
-    expect(salePrice(s, id) - servingCost(id)).toBeGreaterThan(salePrice(s, 'espresso') - servingCost('espresso'));
-    expect((salePrice(s, id) - servingCost(id)) / prepTime(s, id)).toBeLessThan((salePrice(s, 'espresso') - servingCost('espresso')) / prepTime(s, 'espresso'));
+    expect(salePrice(s, id) - servingCost(id)).toBe(salePrice(s, 'espresso') - servingCost('espresso'));
+    expect((salePrice(s, id) - servingCost(id)) / prepTime(s, id)).toBe((salePrice(s, 'espresso') - servingCost('espresso')) / prepTime(s, 'espresso'));
+    expect(salePrice(s, choices[3].id) - servingCost(choices[3].id)).toBeGreaterThan(salePrice(s, id) - servingCost(id));
     expect(prepTime(s, choices[4].id)).toBeGreaterThan(prepTime(s, choices[3].id));
   });
   it('runs equal-staff, equal-stock low/high demand service samples with reconciled books', () => {

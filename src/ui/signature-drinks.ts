@@ -6,7 +6,7 @@ import {
   trialSignature, saveSignature, replaceSignature, renameSignature, deleteSignature, setSignatureOnMenu, listSignatureDrinks,
 } from '../game/signature-drinks';
 import { formatTransactionMoney as money } from '../game/format';
-import { salePrice, prepTime } from '../game/economy';
+import { salePrice, prepTime, buyIngredient, ingredientDef } from '../game/economy';
 import { tasteScore, tasteTier, SKILLED_SERVINGS, SIGNATURE_SERVINGS } from '../game/taste';
 import { getLocale } from '../i18n';
 import { signatureDrinkArt, type SignatureArtKey } from '../render/signature-drink-art';
@@ -18,7 +18,7 @@ type Recipe = Partial<Record<IngredientId, number>>;
 const copy = {
   en: {
     doseRules: 'Base: 1–2 portions. Each addition: 0–2 portions. Up to 3 addition types and 6 portions in total.', pairingRules: 'Game pairing rules: coffee cannot pair with fruit or matcha; tea cannot pair with cocoa; fruit and cocoa cannot mix. Incompatible additions are hidden.', quality: 'Recipe quality', rating: 'Current taste', practice: 'Recipe practice', delivered: 'Servings delivered', standard: 'New recipe', skilled: 'Practiced', signature: 'Mastered', next: 'Next milestone', growth: 'Practice grows only when a customer receives this drink. Tastings, saving and renaming give no experience. At 30 deliveries it becomes practiced; at 100 it masters automatically, with no research fee.', mastered: 'Mastery reached. Keep serving your house favorite.', edit: 'Edit formula', title: 'Signature drinks', close: 'Close', create: 'Develop a drink', empty: 'Your recipe book is waiting for its first drink.',
-    intro: 'Create a house recipe, taste a small sample, then save it to your collection.', collection: 'Recipe book', back: 'Back to recipes',
+    intro: 'Milk and sugar are available from day one. House recipes inherit your espresso or tea technique and grow through serving. One portion of plain coffee or tea keeps the base price; extra portions or additions earn a 25% premium. Tea needs steeping time, and additions take longer.', collection: 'Recipe book', back: 'Back to recipes',
     base: '1 · Choose a base', additions: '2 · Add ingredients', preview: '3 · Taste & refine', name: '4 · Name your drink',
     prep: 'Research and menu changes are available during preparation only.', locked: 'Unlock a menu recipe using this ingredient first.',
     dose: 'Dose', none: 'None', light: '1 portion', extra: '2 portions', cost: 'Ingredients / serving', price: 'Current sale price', time: 'Current preparation time', margin: 'Ingredient margin / serving',
@@ -34,7 +34,7 @@ const copy = {
   },
   zh: {
     doseRules: '基底用量为 1–2 份，每种配料为 0–2 份；最多 3 种配料，总用量不超过 6 份。', pairingRules: '游戏搭配规则：咖啡不能搭配水果或抹茶，茶不能搭配可可，水果与可可不能混用。不兼容的配料会隐藏。', quality: '配方基础品质', rating: '当前口味评分', practice: '配方熟练度', delivered: '已交付杯数', standard: '新配方', skilled: '熟练', signature: '招牌大师', next: '下一目标', growth: '只有顾客实际收到饮品才会增加熟练度。试饮、保存和改名均不增加经验。交付 30 杯后熟练，100 杯后自动精通，无需支付研发费。', mastered: '已精通这款配方，继续为顾客送上你的招牌风味吧。', edit: '调整配方', title: '招牌饮品', close: '关闭', create: '研发饮品', empty: '配方本正等待你的第一款饮品。',
-    intro: '搭配专属配方，少量试饮，再收入你的配方本。', collection: '配方本', back: '返回配方本',
+    intro: '开局即可使用牛奶和糖。招牌承接浓缩或红茶的制作技术，交付后继续成长。单份纯咖啡或纯茶与基础款同价；增加用量或配料可享 25% 溢价。茶需要浸泡时间，加料也会增加耗时。', collection: '配方本', back: '返回配方本',
     base: '1 · 选择基底', additions: '2 · 添加配料', preview: '3 · 试饮与调整', name: '4 · 为饮品取名',
     prep: '仅可在准备营业时研发饮品和调整菜单。', locked: '先解锁使用此食材的菜单配方。',
     dose: '用量', none: '不添加', light: '1 份', extra: '2 份', cost: '每杯食材成本', price: '当前售价', time: '当前制作时间', margin: '每杯食材毛利',
@@ -165,7 +165,15 @@ export function showSignatureDrinks(state: GameState, onChange: () => void, onCl
     if (id && validation.ok) preview.append(summary(id));
     else preview.append(element('p', validation.error === 'incompatible' ? words.incompatible : words.invalid));
     preview.append(element('p', words.trialRule, 'note'));
-    if (Object.keys(missing).length) preview.append(element('h4', words.shortage), ingredients(missing));
+    if (Object.keys(missing).length) {
+      preview.append(element('h4', words.shortage), ingredients(missing));
+      const cost = Object.entries(missing).reduce((sum, [ing, n]) => sum + Math.ceil(n!) * ingredientDef(ing as IngredientId).cost, 0);
+      preview.append(button(`${getLocale() === 'zh' ? '购买试饮缺少的食材' : 'Buy missing tasting ingredients'} · ${money(cost)}`, 'buy-trial', () => {
+        if (!prep() || state.coins < cost) return;
+        for (const [ing, n] of Object.entries(missing)) buyIngredient(state, ing as IngredientId, Math.ceil(n!));
+        onChange(); showWorkbench('trial');
+      }, !prep() || locked || state.coins < cost));
+    }
     if (locked) preview.append(element('p', words.locked, 'note'));
     preview.append(button(words.trial, 'trial', () => {
       const result = trialSignature(state, base, recipe);

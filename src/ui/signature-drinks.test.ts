@@ -29,6 +29,16 @@ beforeEach(() => { setLocale('en'); document.body.innerHTML = '<button id="opene
 afterEach(() => { closeModal(); setLocale('en'); document.body.replaceChildren(); });
 
 describe('signature drink research workbench', () => {
+  it('offers early milk and sugar and buys only the missing whole units for a tasting', () => {
+    const state = createInitialState(0); state.coins = 20;
+    const changed = vi.fn(); showSignatureDrinks(state, changed); click('create');
+    expect(document.querySelector<HTMLSelectElement>('[data-signature-dose="milk"]')!.disabled).toBe(false);
+    expect(document.querySelector<HTMLSelectElement>('[data-signature-dose="sugar"]')!.disabled).toBe(false);
+    dose('milk', 1); expect(action('trial').disabled).toBe(true);
+    click('buy-trial'); expect(state.coins).toBe(18); expect(state.pantry.milk).toBe(1);
+    expect(action('trial').disabled).toBe(false); click('trial');
+    expect(state.pantry.milk).toBe(.75); expect(changed).toHaveBeenCalledTimes(2);
+  });
   it('walks base, compatible doses, exact paid trial, naming, menu, rename and deletion', () => {
     const state = ready(); const changed = vi.fn(); const coins = state.coins;
     showSignatureDrinks(state, changed); click('create');
@@ -77,6 +87,17 @@ describe('signature drink research workbench', () => {
     const id = makeSignatureId('coffee', { beans: 1, milk: 1 })!;
     const values = [...document.querySelectorAll('.signature-metrics dd')].map(el => el.textContent);
     expect(values).toEqual([formatTransactionMoney(3), formatTransactionMoney(salePrice(state, id)), `${prepTime(state, id)}s`, formatTransactionMoney(salePrice(state, id) - 3)]);
+  });
+  it('explains plain-copy pricing and shows the tea brewing time in both languages', () => {
+    const state = ready();
+    for (const locale of ['en', 'zh'] as const) {
+      setLocale(locale); showSignatureDrinks(state, vi.fn());
+      expect(document.body.textContent).toContain(locale === 'en' ? 'One portion of plain coffee or tea keeps the base price' : '单份纯咖啡或纯茶与基础款同价');
+      click('create'); click('base:tea');
+      const values = [...document.querySelectorAll('.signature-metrics dd')].map(el => el.textContent);
+      expect(values).toEqual([formatTransactionMoney(2), formatTransactionMoney(salePrice(state, 'blacktea')), '4s', formatTransactionMoney(salePrice(state, 'blacktea') - 2)]);
+      closeModal();
+    }
   });
   it('explains delivery-only practice, current formula rating and automatic 30/100 mastery bilingually', () => {
     const state = ready(); const result = trialSignature(state, 'coffee', { beans: 1, cream: 2 });

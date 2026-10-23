@@ -83,6 +83,7 @@ export function finishDay(state: GameState): DayReport {
   }
   const report: DayReport = {
     ...today,
+    guests: structuredClone(today.guests),
     partners: partnerContributions(state),
     reviews: structuredClone(today.reviews),
     rating: reputationScore(state.reputation),
@@ -99,6 +100,15 @@ export function finishDay(state: GameState): DayReport {
     stale,
     staleCost,
   };
+  // Loaned care and sample stock end with this day; paid adoption is retained.
+  state.pets = state.pets.filter(p => !p.fosterUntilDay || p.fosterUntilDay > state.day);
+  if (state.cafeStyle.bakeryTrialDay === state.day) {
+    delete state.cafeStyle.bakeryTrialDay;
+    if (!state.kitchen) {
+      delete state.shelf.roll;
+      state.onMenu = state.onMenu.filter(id => id !== 'roll');
+    }
+  }
   // The day's best-ever results, judged while it is still this day (its weather included).
   recordDay(state, report);
   checkMilestones(state);

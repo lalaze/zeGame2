@@ -1,6 +1,6 @@
 import { formatNumber } from '../game/format';
 import type { GameState } from '../game/state';
-import { STYLE_IDS, currentStyleStage, nextStyleGoal, setCafeStyle, styleStages, type CafeStyleId, type StyleGoal } from '../game/styles';
+import { STYLE_IDS, currentStyleStage, nextStyleGoal, setCafeStyle, startStyleWelcome, styleStages, type CafeStyleId, type StyleGoal } from '../game/styles';
 import { t, type MessageKey } from '../i18n';
 import { isComposingKey } from './keyboard';
 import { closeModal, showModal } from './modal';
@@ -18,7 +18,7 @@ function text<K extends keyof HTMLElementTagNameMap>(tag: K, value: string, clas
 
 function goalHint(goal: StyleGoal, focus: CafeStyleId): string {
   const id = goal.id;
-  const hint = /Signature|^signature/.test(id) ? 'taste'
+  const hint = /Welcome$/.test(id) ? 'welcome' : /Signature|^signature/.test(id) ? 'taste'
     : /^(machine|barista|server|cook)/.test(id) ? 'upgrade'
     : /^fastServed/.test(id) ? 'fastService'
     : /^teaPairs/.test(id) ? 'teaPairs' : /^catServed/.test(id) ? 'catService' : /^tableServed/.test(id) ? 'tableService'
@@ -110,6 +110,22 @@ export function showCafeStyles(state: GameState, onChange: () => void, onBack?: 
       render('style-heading');
     });
     card.append(choose);
+    if ((viewed === 'cats' || viewed === 'bakery') && active) {
+      const id = viewed;
+      const activeTrial = id === 'cats' ? state.pets.some(p => p.fosterUntilDay === state.day) : state.cafeStyle.bakeryTrialDay === state.day;
+      const eligible = !state.cafeStyle.introductions?.includes(id) && (id === 'cats' ? state.pets.length === 0 : !state.kitchen);
+      if (activeTrial) card.append(text('p', t(id === 'cats' ? 'style.welcome.catActive' : 'style.welcome.bakeryActive'), 'style-welcome-status'));
+      else if (eligible) {
+        const welcome = text('button', t(id === 'cats' ? 'style.welcome.startCats' : 'style.welcome.startBakery'), 'pixel-btn');
+        welcome.type = 'button'; welcome.dataset.styleWelcome = id;
+        welcome.disabled = state.phase !== 'prep';
+        welcome.addEventListener('click', () => {
+          if (!live() || !welcome.isConnected || !startStyleWelcome(state, id)) return;
+          onChange(); render('style-heading');
+        });
+        card.append(text('p', t(`style.welcome.${id}`), 'note'), welcome);
+      }
+    }
     if (state.phase !== 'prep') card.append(text('p', t('style.ui.closeOnly'), 'note style-closed-only'));
     card.querySelector('h3')!.dataset.styleFocus = 'style-heading';
     card.querySelector('h3')!.tabIndex = -1;

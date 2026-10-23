@@ -1,7 +1,7 @@
 /** Reversible operating choices. Purchased systems are never tied to a class. */
 import { COMBO_CHANCE, MENU, isDrink, type MenuItemDef, type ItemId } from './data';
 import { comfort } from './decor';
-import { petActive } from './pets';
+import { petActive, CARE_SECONDS } from './pets';
 import { reputationScore } from './reputation';
 import { signatureDefinition } from './signature-drinks';
 import { tasteTier } from './taste';
@@ -11,7 +11,12 @@ export const STYLE_IDS = ['coffee', 'bakery', 'cats', 'takeaway', 'garden', 'com
 export type CafeStyleId = typeof STYLE_IDS[number];
 export const HANDOFF_COUNTERS = ['tableServed', 'catServed', 'fastServed', 'teaPairs'] as const;
 export type HandoffCounter = typeof HANDOFF_COUNTERS[number];
-export interface CafeStyleState { focus: CafeStyleId | null; handoffs: Record<HandoffCounter, number> }
+export interface CafeStyleState {
+  focus: CafeStyleId | null;
+  handoffs: Record<HandoffCounter, number>;
+  introductions?: ('cats' | 'bakery')[];
+  bakeryTrialDay?: number;
+}
 export const emptyStyleHandoffs = (): Record<HandoffCounter, number> => ({ tableServed: 0, catServed: 0, fastServed: 0, teaPairs: 0 });
 export const isCafeStyle = (id: unknown): id is CafeStyleId => STYLE_IDS.some((style) => style === id);
 export function parseCafeStyle(value: unknown): CafeStyleState {
@@ -22,7 +27,31 @@ export function parseCafeStyle(value: unknown): CafeStyleState {
     const n = (source as Record<string, unknown>)[id];
     if (typeof n === 'number' && Number.isSafeInteger(n) && n >= 0) handoffs[id] = Math.min(1_000_000_000, n);
   }
-  return { focus: isCafeStyle(focus) ? focus : null, handoffs };
+  const out: CafeStyleState = { focus: isCafeStyle(focus) ? focus : null, handoffs };
+  if (value && typeof value === 'object') {
+    const saved = value as Partial<CafeStyleState>;
+    if (Array.isArray(saved.introductions)) out.introductions = [...new Set(saved.introductions.filter(id => id === 'cats' || id === 'bakery'))];
+    if (Number.isSafeInteger(saved.bakeryTrialDay) && saved.bakeryTrialDay! > 0 && out.introductions?.includes('bakery')) out.bakeryTrialDay = saved.bakeryTrialDay;
+  }
+  return out;
+}
+
+/** A finite, saved welcome experience. Switching styles cannot repeat the grant. */
+export function startStyleWelcome(s: GameState, id: 'cats' | 'bakery'): boolean {
+  if (s.phase !== 'prep' || s.cafeStyle.focus !== id || s.cafeStyle.introductions?.includes(id)) return false;
+  if (id === 'cats') {
+    if (s.pets.length) return false;
+    s.pets.push({ id: 'ginger', careSeconds: CARE_SECONDS, autoRefill: false, fosterUntilDay: s.day });
+  } else {
+    if (s.kitchen) return false;
+    s.items.roll = Math.max(1, s.items.roll);
+    s.shelf.roll = (s.shelf.roll ?? 0) + 6;
+    s.bakePlan.roll = 0;
+    if (!s.onMenu.includes('roll')) s.onMenu.push('roll');
+    s.cafeStyle.bakeryTrialDay = s.day;
+  }
+  (s.cafeStyle.introductions ??= []).push(id);
+  return true;
 }
 export function setCafeStyle(state: GameState, id: CafeStyleId | null): boolean {
   if (state.phase !== 'prep' || id !== null && !isCafeStyle(id)) return false;
@@ -51,7 +80,7 @@ export function styleStages(s: GameState, id: CafeStyleId): StyleStage[] {
   const sales = (name: string, cats: string[], target: number) => goal(name, servings(s, cats), target);
   const research = (name: string, cats: string[], target: number) => goal(name, signatures(s, cats), target);
   const kitchen = () => goal('kitchen', Number(s.kitchen), 1);
-  const cat = (target: number) => goal(`cats${target}`, s.pets.length, target);
+  const cat = (target: number) => goal(`cats${target}`, s.pets.filter(p => !p.fosterUntilDay).length, target);
   const handoff = (name: HandoffCounter, target: number) => goal(`${name}${target}`, s.cafeStyle.handoffs[name], target);
   const bookshelf = () => goal('bookshelf', Number(s.decor.placed.some((p) => p.id === 'bookshelf')), 1);
   const reliable = () => goal('reliable', s.reputation.recent.length >= 20 ? reputationScore(s.reputation) : 0, 4.2);
@@ -62,12 +91,12 @@ export function styleStages(s: GameState, id: CafeStyleId): StyleStage[] {
       [item('flatwhite', 10), upgrade('machine', 4), research('coffeeSignature2', ['coffee'], 2)],
     ],
     bakery: [
-      [item('espresso', 5), kitchen(), item('roll', 3)],
+      [goal('bakeryWelcome', Number(!!(s.kitchen || s.cafeStyle.introductions?.includes('bakery'))), 1), kitchen(), item('roll', 3)],
       [item('donut', 3), upgrade('cook', 1), sales('bakery100', ['bread', 'pastry'], 100)],
       [item('croissant', 5), upgrade('cook', 2), research('bakerySignature2', ['bread', 'pastry'], 2)],
     ],
     cats: [
-      [item('espresso', 5), cat(1), cozy(5)],
+      [goal('catWelcome', Number(!!(s.pets.length > 0 || s.cafeStyle.introductions?.includes('cats'))), 1), cat(1), cozy(5)],
       [cat(2), upgrade('server', 1), cozy(15)],
       [cat(3), cozy(30), handoff('catServed', 300)],
     ],

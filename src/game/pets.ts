@@ -29,7 +29,7 @@ export interface PetPreferences {
   preferredArea: CatArea;
   preferredSpot: CatSpot;
 }
-export interface Pet extends Partial<PetPreferences> { id: CatId; careSeconds: number; autoRefill: boolean }
+export interface Pet extends Partial<PetPreferences> { id: CatId; careSeconds: number; autoRefill: boolean; fosterUntilDay?: number }
 
 // Explicit ID-based defaults remain stable when the catalog order changes. Every
 // resident has its own combination, including cats adopted from legacy saves.
@@ -82,6 +82,13 @@ export function forecastPetTraffic(state: GameState): number {
 /** Adoption includes the first care pack. Its supplies are expensed as consumed. */
 export function adoptCat(state: GameState, id: string): boolean {
   const cat = catDef(id);
+  const foster = state.pets.find(p => p.id === id && p.fosterUntilDay);
+  if (cat && foster && state.phase === 'prep' && state.coins >= cat.adoption) {
+    state.coins -= cat.adoption;
+    delete foster.fosterUntilDay;
+    foster.autoRefill = true;
+    return true;
+  }
   if (!cat || state.pets.length >= MAX_PETS || state.phase !== 'prep' || state.pets.some((pet) => pet.id === id) || state.coins < cat.adoption) return false;
   state.coins -= cat.adoption;
   state.pets.push({ id: cat.id, careSeconds: CARE_SECONDS, autoRefill: true, ...petPreferences({ id: cat.id }) });
@@ -101,6 +108,7 @@ export function refillPet(state: GameState, id: string): boolean {
 export function updatePetCare(state: GameState, dt: number): void {
   if (state.phase !== 'open' || !Number.isFinite(dt) || dt <= 0) return;
   for (const pet of state.pets) {
+    if (pet.fosterUntilDay) continue;
     const cat = catDef(pet.id)!;
     let remaining = dt;
     while (remaining > EPSILON) {
@@ -127,6 +135,7 @@ export function parsePets(value: unknown): Pet[] {
     if (!cat || result.some((pet) => pet.id === cat.id)) continue;
     const care = typeof p.careSeconds === 'number' && Number.isFinite(p.careSeconds) ? p.careSeconds : 0;
     result.push({ id: cat.id, careSeconds: Math.max(0, Math.min(MAX_CARE_SECONDS, care)), autoRefill: p.autoRefill === true,
+      ...(typeof p.fosterUntilDay === 'number' && Number.isSafeInteger(p.fosterUntilDay) && p.fosterUntilDay > 0 ? { fosterUntilDay: p.fosterUntilDay } : {}),
       ...petPreferences({ id: cat.id, personality: p.personality as CatPersonality, preferredArea: p.preferredArea as CatArea, preferredSpot: p.preferredSpot as CatSpot }),
     });
   }

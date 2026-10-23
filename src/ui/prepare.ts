@@ -1,10 +1,11 @@
+import { prepDemandHtml, dishDemandHtml } from './customer-demand';
 import { showSignatureDrinks } from './signature-drinks';
 import { canEmergencyRestock, emergencyRestock } from '../game/recovery';
 import { promotionPlan } from '../game/promotion';
 import { forecastPetTraffic } from '../game/pets';
 import { BAKE_STEP, type ItemId } from '../game/data';
 import { checkOpen } from '../game/day';
-import { averageDishPrice, canPrepareItem, bakeForForecast, dayDemand, expectedCustomers, isBakery, menuItems, readyServings, recipe, restock, restockQuote, setBakePlan, setOnMenu, suggestedBake, unlockedItems } from '../game/economy';
+import { averageDishPrice, canPrepareItem, bakeForForecast, dayDemand, expectedCustomers, isBakery, menuItems, readyServings, recipe, restock, restockQuote, restockPlan, setBakePlan, setOnMenu, suggestedBake, unlockedItems } from '../game/economy';
 import { reputationTraffic } from '../game/reputation';
 import { trafficPercent } from './reputation';
 import { kitchenLoad } from '../game/kitchen';
@@ -16,7 +17,7 @@ import { itemArtwork, toDataURL } from '../render/sprites';
 import { showModal } from './modal';
 import { prepStyleSummary, showCafeStyles } from './cafe-styles';
 import { ingredientName, itemName } from './panel';
-import { dishConditionHtml, prepConditionHtml } from './conditions';
+import { dishConditionHtml } from './conditions';
 
 export function showPrepare(state: GameState, onStart: () => void, onChange: () => void): void {
   const body = document.createElement('div');
@@ -58,6 +59,7 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
     const scrollTop = scroller?.scrollTop ?? 0;
     const focus = document.activeElement?.getAttribute('data-focus');
     const detailsOpen = body.querySelector<HTMLDetailsElement>('.prep-details')?.open ?? false;
+    const demandOpen = body.querySelector<HTMLDetailsElement>('.demand-details')?.open ?? false;
     const demand = dayDemand(state);
     const onMenu = new Set(menuItems(state).map((m) => m.id));
     const available = unlockedItems(state);
@@ -80,14 +82,16 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
       })}</small>` : '';
       return `<div class="prep-row${on ? '' : ' off'}${on && low.has(m.id) ? ' low' : ''}">
         <label class="prep-select"><input type="checkbox" data-focus="dish-${m.id}" data-dish="${m.id}" ${on ? 'checked' : ''} ${eligible ? '' : 'disabled'} />
-        <img src="${toDataURL(itemArtwork(m.id), 1)}" alt="" /><span class="prep-name"><b>${itemName(m.id, state)}</b><small>${note}</small>${ingredients}<small>${tasteLabel(state, m.id)}</small>${eligible ? dishConditionHtml(state, m.id) : ''}</span></label>${bake}</div>`;
+        <img src="${toDataURL(itemArtwork(m.id), 1)}" alt="" /><span class="prep-name"><b>${itemName(m.id, state)}</b><small>${note}</small>${ingredients}<small>${tasteLabel(state, m.id)}</small>${eligible ? dishConditionHtml(state, m.id) + dishDemandHtml(state, m) : ''}</span></label>${bake}</div>`;
     }).join('');
     const quote = restockQuote(state);
+    const plan = restockPlan(state);
+    const shopping = Object.entries(plan.buy).map(([id, n]) => `${ingredientName(id as keyof GameState['pantry'])} ×${n}`).join(t('list.sep'));
     const full = quote.cost <= 0;
     const missing = Object.entries(quote.buy).map(([id, n]) => `${ingredientName(id as keyof GameState['pantry'])} ×${n}`).join(t('list.sep'));
     const starterStock = state.day === 1 && state.totalEarned === 0 && full
       && onMenu.size === 1 && onMenu.has('espresso') && readyServings(state, 'espresso') > 0;
-    body.innerHTML = `${prepConditionHtml(state, menuItems(state))}<p>${t('prep.menuHint')}</p><button class="pixel-btn small ghost signature-entry" data-signature-research>${t('signature.entry')}</button>
+    body.innerHTML = `${prepDemandHtml(state, menuItems(state))}<p>${t('prep.menuHint')}</p><button class="pixel-btn small ghost signature-entry" data-signature-research>${t('signature.entry')}</button>
       ${starterStock ? `<p class="note prep-starter">${t('prep.starterStock', { n: formatNumber(readyServings(state, 'espresso')) })}</p>` : ''}
       ${hasBakery ? `<p class="note prep-bakery-hint">${t('prep.bakeryHint')}</p>` : ''}
       <div class="prep-list">${rows}</div>
@@ -97,8 +101,8 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
       ${kitchenLoad(state) > 1 ? `<p class="note warn">${t('prep.capacity')}</p>` : ''}
       ${low.size ? `<p class="note warn">${t('prep.low')} ${[...low].map((id) => itemName(id, state)).join(t('list.sep'))} ${t('prep.lowNext')}</p>` : ''}
       ${missing ? `<p class="note">${t('prep.missing', { items: missing })}</p>` : ''}
-      ${quote.cost > state.coins ? `<p class="note warn">${t('prep.partial', { money: formatMoney(state.coins) })}</p>` : ''}
-      ${onMenu.size ? `<button class="pixel-btn small ghost" data-focus="restock" data-restock ${full || state.coins <= 0 ? 'disabled' : ''}>${full ? t('pantry.full') : t('pantry.restock', { price: formatMoney(quote.cost) })}</button>` : ''}
+      ${!full ? `<p class="note restock-preview">${t('pantry.plan', { items: shopping || t('prep.noPurchase'), balance: formatMoney(plan.balance) })}</p>${plan.missingCost > 0 ? `<p class="note warn">${t('pantry.unmet', { items: Object.entries(plan.missing).map(([id, n]) => `${ingredientName(id as keyof GameState['pantry'])} ×${n}`).join(t('list.sep')), price: formatMoney(plan.missingCost) })}</p>` : ''}` : ''}
+      ${onMenu.size ? `<button class="pixel-btn small ghost" data-focus="restock" data-restock ${full || plan.cost <= 0 ? 'disabled' : ''}>${full ? t('pantry.full') : t(plan.missingCost > 0 ? 'pantry.budgetRestock' : 'pantry.restock', { price: formatMoney(plan.cost) })}</button>` : ''}
       ${canEmergencyRestock(state) ? `<p class="note warn">${t('prep.emergencyHint')}</p><button class="pixel-btn small" data-focus="emergency" data-emergency-restock>${t('prep.emergency')}</button>` : ''}
       <p class="note" role="status">${receipt}</p>
       <details class="prep-details" ${detailsOpen ? 'open' : ''}>
@@ -111,6 +115,8 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
         ${state.pets.length ? `<p class="note">${t('pet.forecast', { pct: Math.round((forecastPetTraffic(state) - 1) * 100) })}</p>` : ''}
         ${hasBakery ? `<p class="note">${t('prep.kitchen')}</p>` : ''}
       </details>`;
+    const demandDetails = body.querySelector<HTMLDetailsElement>('.demand-details');
+    if (demandDetails) demandDetails.open = demandOpen;
     body.prepend(prepStyleSummary(state, () => showCafeStyles(state, onChange, () => showPrepare(state, onStart, onChange))));
     const start = document.querySelector<HTMLButtonElement>('.modal-actions [data-start]');
     if (start) {

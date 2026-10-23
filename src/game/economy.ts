@@ -1,9 +1,11 @@
-import { signatureDefinition, setSignatureOnMenu } from './signature-drinks';
+import { signatureDefinition, setSignatureOnMenu, availableSignatureIngredients, isPlainSignatureCopy } from './signature-drinks';
+import { partnerBrewMultiplier } from './partners';
 import { stylePrepMultiplier, styleSaleMultiplier, styleOrderPairs, styleComboChance, styleArrivalMultiplier, styleSeatChance, styleTablePatienceExtra } from './styles';
 import { promotionTraffic } from './promotion';
 import { petTraffic, forecastPetTraffic } from './pets';
-import { conditionPatience, conditionSeating, conditionTraffic, menuWeights } from './conditions';
-import { roomRoute, tableArea } from './layout';
+import { conditionPatience, conditionSeating, conditionTraffic } from './conditions';
+import { demandPlan, demandEnabled, guestComboChance, guestPairWeights, guestSeatingMultiplier, type GuestKind, type MainChoice } from './customer-demand';
+import { queueSpot, serviceSpot, roomRoute, tableArea } from './layout';
 import {
   BASE_ARRIVAL_RATE,
   MAX_VARIETY_BONUS,
@@ -17,7 +19,7 @@ import {
   MENU,
   PASS_SLOTS,
   PRICE_MILESTONES,
-  SERVICE_OVERHEAD,
+  CUSTOMER_WALK_SPEED,
   UPGRADES,
   VIP_MULTIPLIER,
   type IngredientDef,
@@ -30,7 +32,7 @@ import {
 import { comfort } from './decor';
 import { activeTableIndices, regionDemand } from './regions';
 import type { DayStats, GameState } from './state';
-import { bakeryPlan } from './kitchen';
+import { bakeryPlan, nextBatch } from './kitchen';
 import { reputationTraffic } from './reputation';
 
 export type BuyAmount = 1 | 10 | 'max';
@@ -41,7 +43,7 @@ const UPGRADE_BY_ID = Object.fromEntries(UPGRADES.map((u) => [u.id, u])) as Reco
 export const menuItem = (id: ItemId): MenuItemDef => MENU_BY_ID[id] ?? signatureDefinition(id)!;
 // These ice-cream desserts need the kitchen despite their drinks-menu placement.
 export const requiresKitchen = (id: ItemId) => id === 'affogato' || id === 'matchafloat' || !isDrink(menuItem(id).category);
-export const canPrepareItem = (state: GameState, id: ItemId) => !requiresKitchen(id) || state.kitchen;
+export const canPrepareItem = (state: GameState, id: ItemId) => !requiresKitchen(id) || state.kitchen || id === 'roll' && state.cafeStyle.bakeryTrialDay === state.day;
 
 export const upgradeDef = (id: UpgradeId) => UPGRADE_BY_ID[id];
 
@@ -165,11 +167,10 @@ export function buyItem(state: GameState, id: ItemId, amount: BuyAmount): boolea
   if (!isItemAvailable(state, id)) return false;
   const q = quoteItem(state, id, amount);
   if (!q.affordable) return false;
-  const unlocking = state.items[id] === 0;
   state.coins -= q.cost;
   state.items[id] += q.count;
-  // Keep today's menu fixed while open; new dishes can be planned after closing.
-  if (unlocking && state.phase === 'prep') setOnMenu(state, id, true);
+  // Unlocking expands the recipe book. The player chooses whether it belongs on
+  // today's menu; buying a level must never silently dilute their existing offer.
   return true;
 }
 
@@ -194,8 +195,10 @@ export const prepMultiplier = (s: GameState) => 0.9 ** s.upgrades.machine;
 /** Extra customers drawn by a varied menu, as a share (0.12 = +12%). */
 export const varietyBonus = (s: GameState) =>
   Math.min(MAX_VARIETY_BONUS, VARIETY_BONUS * Math.max(0, menuItems(s).length - 1));
+/** Menu-driven arrivals, independent of stock, staff, promotion and reputation. */
+export const menuTrafficMultiplier = (s: GameState, items = menuItems(s)) => demandPlan(s, items).traffic;
 export const baseArrivalRate = (s: GameState) =>
-  BASE_ARRIVAL_RATE * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * (1 + varietyBonus(s)) * reputationTraffic(s.reputation) * petTraffic(s) * styleArrivalMultiplier(s) * conditionTraffic(s, menuItems(s));
+  BASE_ARRIVAL_RATE * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * menuTrafficMultiplier(s) * reputationTraffic(s.reputation) * petTraffic(s) * styleArrivalMultiplier(s) * conditionTraffic(s, menuItems(s));
 export const arrivalRate = (s: GameState) => baseArrivalRate(s) * promotionTraffic(s);
 export const tipMultiplier = (s: GameState) => 1 + comfort(s) / 100;
 /** The café opens with a table in each nook; Expand the Shop adds the rest. */
@@ -206,7 +209,18 @@ export const tablePatience = (s: GameState) => 50 + comfort(s) / 4 + styleTableP
 
 export function salePrice(state: GameState, id: ItemId, vip = false, dineIn = false, meal: readonly ItemId[] = [id]): number {
   if (!canPrepareItem(state, id)) return 0;
-  return (id.startsWith('sig:') ? menuItem(id).basePrice : itemPrice(menuItem(id), state.items[id])) * tipMultiplier(state) * (vip ? VIP_MULTIPLIER : 1) * styleSaleMultiplier(state, id, dineIn, meal);
+  return (id.startsWith('sig:') ? signaturePrice(state, id) : itemPrice(menuItem(id), state.items[id])) * tipMultiplier(state) * (vip ? VIP_MULTIPLIER : 1) * styleSaleMultiplier(state, id, dineIn, meal);
+}
+
+/** Added doses or ingredients earn a 25% house premium; a plain copy retains
+ * its foundation's price. Neither can copy an unrelated late-game drink. */
+export function signaturePrice(state: GameState, id: ItemId): number {
+  const def = signatureDefinition(id)!;
+  const foundation = menuItem(def.base === 'coffee' ? 'espresso' : 'blacktea');
+  const established = state.items[foundation.id] > 0 ? itemPrice(foundation, state.items[foundation.id]) : def.basePrice / 1.25;
+  if (isPlainSignatureCopy(def)) return established;
+  const baseCost = ingredientDef(def.base === 'coffee' ? 'beans' : def.base === 'tea' ? 'tea' : def.base === 'milk' ? 'milk' : 'fruit').cost;
+  return Math.max(def.basePrice, established * 1.25 + Math.max(0, def.cost - baseCost) * 1.6);
 }
 
 export function prepTime(state: GameState, id: ItemId): number {
@@ -214,19 +228,20 @@ export function prepTime(state: GameState, id: ItemId): number {
 }
 
 /**
- * Guests pick their main dish evenly from today's menu, so this is the typical
- * takeaway price of one dish. Locked dishes are priced as they would be at Lv1.
+ * Expected main-dish takeaway price, weighted by today's customer demand.
+ * Locked dishes are priced as they would be at Lv1. Pairings are separate.
  */
 export function averageDishPrice(state: GameState, items: readonly MenuItemDef[] = menuItems(state)): number {
   if (items.length === 0) return 0;
-  const price = (m: MenuItemDef) => (m.id.startsWith('sig:') ? m.basePrice : itemPrice(m, Math.max(1, state.items[m.id] ?? 0)))
+  const price = (m: MenuItemDef) => (m.id.startsWith('sig:') ? signaturePrice(state, m.id) : itemPrice(m, Math.max(1, state.items[m.id] ?? 0)))
     * tipMultiplier(state) * styleSaleMultiplier(state, m.id, false, [m.id]);
-  return items.reduce((sum, m) => sum + price(m), 0) / items.length;
+  return demandPlan(state, items).mains.reduce((sum, choice) => sum + price(choice.main) * choice.probability, 0);
 }
 
 /** Today's menu: unlocked items the player chose to sell. */
 export function menuItems(state: GameState): MenuItemDef[] {
-  return [...MENU.filter((m) => state.items[m.id] > 0 && canPrepareItem(state, m.id) && state.onMenu.includes(m.id)), ...state.signatureDrinks.recipes.filter((r) => r.onMenu).map((r) => signatureDefinition(r.id)!).filter(Boolean)];
+  return [...MENU.filter((m) => state.items[m.id] > 0 && canPrepareItem(state, m.id) && state.onMenu.includes(m.id)
+    && !(m.id === 'roll' && !state.kitchen && state.phase !== 'prep' && (state.shelf.roll ?? 0) < 1)), ...state.signatureDrinks.recipes.filter((r) => r.onMenu).map((r) => signatureDefinition(r.id)!).filter(Boolean)];
 }
 
 export function setOnMenu(state: GameState, id: ItemId, on: boolean): void {
@@ -242,28 +257,34 @@ export function setOnMenu(state: GameState, id: ItemId, on: boolean): void {
 /** Breads and pastries are baked in the morning; drinks are made to order. */
 export const isBakery = (id: ItemId) => !isDrink(menuItem(id).category);
 
-/**
- * How many of each dish an average customer buys. Everyone picks one dish from the
- * menu at random (evenly, unless today's condition favors some); some also add a
- * bakery item to a drink (or a drink to a bakery item).
- */
+export interface OrderChoice extends MainChoice {
+  pairs: MenuItemDef[];
+  pairWeights: number[];
+  comboChance: number;
+}
+
+/** One model shared by arriving guests, ingredient forecasts and service capacity. */
+export function orderChoices(items: readonly MenuItemDef[], state?: GameState): OrderChoice[] {
+  const mains = state ? demandPlan(state, items).mains : items.map(main => ({ main, probability: 1 / items.length }));
+  return mains.map((choice: MainChoice) => {
+    const pairs = styleOrderPairs(state, choice.main, items);
+    return { ...choice, pairs,
+      pairWeights: state ? guestPairWeights(state, choice.kind, pairs) : pairs.map(() => 1),
+      comboChance: pairs.length ? guestComboChance(choice.kind, styleComboChance(state, choice.main, pairs)) : 0,
+    };
+  });
+}
+
+export const orderSeatChance = (state: GameState, meal: readonly ItemId[], kind?: GuestKind) =>
+  Math.min(1, styleSeatChance(state, meal) * conditionSeating(state) * guestSeatingMultiplier(kind));
+
+/** Expected portions per arrival, including actual pairing preferences. */
 export function orderShares(items: readonly MenuItemDef[], state?: GameState): Map<ItemId, number> {
-  const shares = new Map<ItemId, number>();
-  if (items.length === 0) return shares;
-  const weights = state ? menuWeights(state, items) : null;
-  if (weights) {
-    const total = weights.reduce((sum, w) => sum + w, 0);
-    items.forEach((m, i) => shares.set(m.id, weights[i] / total));
-    items.forEach((main, i) => {
-      const pairs = styleOrderPairs(state, main, items);
-      if (pairs.length) for (const extra of pairs) shares.set(extra.id, shares.get(extra.id)! + styleComboChance(state, main, pairs) * weights[i] / total / pairs.length);
-    });
-    return shares;
-  }
-  for (const m of items) shares.set(m.id, 1 / items.length);
-  for (const main of items) {
-    const pairs = styleOrderPairs(state, main, items);
-    if (pairs.length) for (const extra of pairs) shares.set(extra.id, shares.get(extra.id)! + styleComboChance(state, main, pairs) / items.length / pairs.length);
+  const shares = new Map<ItemId, number>(items.map(item => [item.id, 0]));
+  for (const choice of orderChoices(items, state)) {
+    shares.set(choice.main.id, shares.get(choice.main.id)! + choice.probability);
+    const total = choice.pairWeights.reduce((sum, w) => sum + w, 0);
+    choice.pairs.forEach((extra, i) => shares.set(extra.id, shares.get(extra.id)! + choice.probability * choice.comboChance * choice.pairWeights[i] / total));
   }
   return shares;
 }
@@ -271,9 +292,19 @@ export function orderShares(items: readonly MenuItemDef[], state?: GameState): M
 /** Customers per second the baristas can take orders from and serve at the counter. */
 export function counterCapacity(state: GameState, items = menuItems(state)): number {
   if (items.length === 0) return 0;
-  let prep = 0;
-  for (const [id, share] of orderShares(items, state)) prep += share * prepTime(state, id);
-  return baristaCount(state) / (prep + SERVICE_OVERHEAD);
+  const shares = orderShares(items, state), front = queueSpot(0);
+  let capacity = 0;
+  for (let index = 0; index < baristaCount(state); index++) {
+    const partner = index === 0 ? undefined : state.partners.active.barista[index - 1];
+    let prep = 0;
+    for (const [id, share] of shares) prep += share * prepTime(state, id) * partnerBrewMultiplier(state, partner, isBakery(id));
+    const counter = serviceSpot(index);
+    // A queued customer walks from the head of the line to this till. The old
+    // fixed 1.2s overhead described an earlier floor plan and understocked drinks.
+    const walk = Math.hypot(counter.x - front.x, counter.y - front.y) / CUSTOMER_WALK_SPEED;
+    capacity += 1 / (prep + walk);
+  }
+  return capacity;
 }
 
 /**
@@ -309,8 +340,15 @@ export function tableServiceCapacity(state: GameState, items = menuItems(state))
   const plates = serverCount(state) * trip.plates / trip.seconds * PASS_FLOW[Math.min(PASS_FLOW.length - 1, state.upgrades.pass ?? 0)];
   // Guests only dine in at free seats, so a small dining room can't outpace its servers.
   if (tables.length * 2 / SEAT_SECONDS <= plates) return Infinity;
-  const seatChance = items.reduce((sum, m) => sum + styleSeatChance(state, [m.id]), 0) / items.length;
-  const dineIn = DINE_IN_SHARE * seatChance / BASE_SEAT_CHANCE * conditionSeating(state);
+  let seatChance: number;
+  if (demandEnabled(state)) {
+    seatChance = orderChoices(items, state).reduce((sum, choice) => {
+      const pairTotal = choice.pairWeights.reduce((a, b) => a + b, 0);
+      const paired = choice.pairs.reduce((part, extra, i) => part + orderSeatChance(state, [choice.main.id, extra.id], choice.kind) * choice.pairWeights[i] / pairTotal, 0);
+      return sum + choice.probability * ((1 - choice.comboChance) * orderSeatChance(state, [choice.main.id], choice.kind) + choice.comboChance * paired);
+    }, 0);
+  } else seatChance = items.reduce((sum, m) => sum + styleSeatChance(state, [m.id]), 0) / items.length * conditionSeating(state);
+  const dineIn = DINE_IN_SHARE * seatChance / BASE_SEAT_CHANCE;
   return dineIn > 0 ? plates / dineIn : Infinity;
 }
 
@@ -353,8 +391,11 @@ export function readyServings(state: GameState, id: ItemId): number {
 
 /** Whether today's menu has sellable stock or bakery stock the kitchen can replenish. */
 export function hasServiceSupply(state: GameState): boolean {
-  return menuItems(state).some(({ id }) => readyServings(state, id) >= 1 ||
-    state.kitchen && isBakery(id) && ((state.inProduction[id] ?? 0) >= 1 || servingsLeft(state, id) >= 1));
+  const items = menuItems(state);
+  if (items.some(({ id }) => readyServings(state, id) >= 1 || state.kitchen && isBakery(id) && (state.inProduction[id] ?? 0) >= 1)) return true;
+  // Raw flour is no longer serviceable stock when a fresh batch cannot finish
+  // before closing. A stocked bakery may resume from a sold-out closing state.
+  return state.kitchen && nextBatch(state.phase === 'closing' ? { ...state, phase: 'open' } : state, []) !== null;
 }
 
 /**
@@ -408,7 +449,7 @@ export function projectMorningBake(state: GameState): Pick<GameState, 'pantry' |
   // Preserve suspended legacy stock; it becomes usable only when the kitchen is built.
   const shelf: GameState['shelf'] = { ...state.shelf };
   for (const m of menuItems(state)) {
-    if (!isBakery(m.id)) continue;
+    if (!isBakery(m.id) || !state.kitchen) continue;
     const n = Math.min(state.bakePlan[m.id] ?? 0, servingsLeft({ ...state, pantry }, m.id));
     for (const [ing, k] of recipe(m.id)) pantry[ing] -= k * n;
     shelf[m.id] = (shelf[m.id] ?? 0) + n;
@@ -440,6 +481,7 @@ export function bakeMorning(state: GameState): number {
 /** Ingredients that any unlocked dish needs; the pantry only lists these. */
 export function neededIngredients(state: GameState): IngredientDef[] {
   const used = new Set(unlockedItems(state).filter((m) => canPrepareItem(state, m.id)).flatMap((m) => recipe(m.id).map(([ing]) => ing)));
+  for (const ing of availableSignatureIngredients(state)) used.add(ing);
   return INGREDIENTS.filter((i) => used.has(i.id));
 }
 
@@ -478,7 +520,9 @@ export function dayDemand(state: GameState): Map<ItemId, number> {
 /** Ingredients a full day on today's menu uses, with a little to spare. */
 export function dayNeeds(state: GameState): Partial<Record<IngredientId, number>> {
   const needs: Partial<Record<IngredientId, number>> = {};
-  for (const [id, servings] of dayDemand(state)) {
+  const demand = dayDemand(state), customers = expectedCustomers(state);
+  for (const [id, servings] of demand) {
+    if (isBakery(id) && !state.kitchen) continue; // Neighbor-supplied trial stock cannot be replenished here.
     // Cover planned morning production or forecast consumption, never both twice.
     // Live shelf stock and paid in-flight batches reduce future ingredient needs.
     const morning = state.phase === 'prep' ? state.bakePlan[id] ?? 0 : 0;
@@ -488,7 +532,10 @@ export function dayNeeds(state: GameState): Partial<Record<IngredientId, number>
       ? state.kitchen
         ? Math.max(morning, Math.ceil(servings * 1.1) - shelf - inProgress)
         : morning
-      : servings * 1.15;
+      // A percentage alone offers very little protection to less common drinks.
+      // Add a menu-mix reserve (~95th percentile per dish). Raw ingredients keep
+      // overnight; this does not increase perishable morning baking quantities.
+      : servings * 1.15 + 1.65 * Math.sqrt(servings * Math.max(0, 1 - servings / Math.max(1, customers)));
     for (const [ing, n] of recipe(id)) needs[ing] = (needs[ing] ?? 0) + amount * n;
   }
   for (const k of Object.keys(needs) as IngredientId[]) needs[k] = Math.ceil(needs[k]!);
@@ -510,10 +557,10 @@ export function restockQuote(state: GameState): { buy: Partial<Record<Ingredient
 }
 
 /** Tops up a forecast proportionally, prioritizing one complete recipe when cash is scarce. */
-export function restock(state: GameState): boolean {
+export function restockPlan(state: GameState): { buy: Partial<Record<IngredientId, number>>; cost: number; balance: number; missing: Partial<Record<IngredientId, number>>; missingCost: number } {
   const q = restockQuote(state);
-  if (q.cost <= 0 || state.coins <= 0) return false;
-  const share = Math.min(1, state.coins / q.cost);
+  if (q.cost <= 0 || state.coins <= 0) return { buy: {}, cost: 0, balance: state.coins, missing: q.buy, missingCost: q.cost };
+  const share = q.cost > 0 ? Math.max(0, Math.min(1, state.coins / q.cost)) : 0;
   let buy = (Object.entries(q.buy) as [IngredientId, number][])
     .map(([ing, n]) => [ing, Math.floor(n * share)] as [IngredientId, number]);
   const projected = { ...state, pantry: { ...state.pantry } };
@@ -529,11 +576,19 @@ export function restock(state: GameState): boolean {
       const cost = deficits.reduce((sum, [ing, n]) => sum + ingredientDef(ing).cost * n, 0);
       return { deficits, cost };
     }).filter(({ cost }) => cost > 0 && cost <= state.coins).sort((a, b) => a.cost - b.cost);
-    if (!recipes.length) return false;
-    buy = recipes[0].deficits;
+    buy = recipes[0]?.deficits ?? [];
   }
+  const planned = Object.fromEntries(buy.filter(([, n]) => n > 0));
+  const cost = buy.reduce((sum, [ing, n]) => sum + ingredientDef(ing).cost * n, 0);
+  const missing = Object.fromEntries(Object.entries(q.buy).map(([ing, n]) => [ing, n - (planned[ing] ?? 0)]).filter(([, n]) => Number(n) > 0));
+  return { buy: planned, cost, balance: state.coins - cost, missing, missingCost: q.cost - cost };
+}
+
+/** Execute the same quote shown before purchase. */
+export function restock(state: GameState): boolean {
+  const plan = restockPlan(state);
   let bought = false;
-  for (const [ing, count] of buy) {
+  for (const [ing, count] of Object.entries(plan.buy) as [IngredientId, number][]) {
     if (count > 0 && buyIngredient(state, ing, count)) bought = true;
   }
   return bought;

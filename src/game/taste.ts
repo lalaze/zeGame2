@@ -21,7 +21,9 @@ export const tasteTier = (state: GameState, id: ItemId): TasteTier => {
 export const tasteScore = (state: GameState, id: ItemId): number => {
   const tier = tasteTier(state, id);
   const custom = signatureDefinition(id);
-  return custom ? Math.min(5, Math.round((custom.quality + { standard: 0, skilled: 0.3, signature: 0.5 }[tier]) * 10) / 10)
+  const foundation = custom?.base === 'coffee' ? 'espresso' : 'blacktea';
+  const inherited = custom ? { standard: 4, skilled: 4.5, signature: 5 }[tasteTier(state, foundation)] + custom.quality - 4 : 0;
+  return custom ? Math.min(5, Math.round((Math.max(custom.quality, inherited) + { standard: 0, skilled: 0.3, signature: 0.5 }[tier]) * 10) / 10)
     : ({ standard: 4, skilled: 4.5, signature: 5 })[tier];
 };
 

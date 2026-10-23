@@ -1,4 +1,5 @@
 import { signatureDefinition } from './signature-drinks';
+import { isGuestKind } from './customer-demand';
 import { regularGuestDefinition } from './regular-guests';
 import { MAX_COOK_BATCH, MAX_PASS_SLOTS, MENU } from './data';
 import { MAX_SCENE_H, MIN_SCENE_H, TOTAL_TABLE_SPOTS } from './layout';
@@ -31,6 +32,7 @@ const walker = (x: Obj) => point(x) && point({ x: x.tx, y: x.ty }) && positive(x
 const nullableId = (x: unknown) => x === null || integer(x);
 const plate = (x: unknown) => obj(x) && integer(x.customerId) && list(x.items, 2, item) && integer(x.barista) && x.barista < 4 && (x.server === null || integer(x.server) && x.server < 3) && finite(x.waited);
 const customer = (x: unknown) => obj(x) && walker(x) && look(x.look) && integer(x.id) && item(x.order) && (x.extra === null || item(x.extra)) &&
+  (x.guestKind === undefined || isGuestKind(x.guestKind)) &&
   (x.appearanceId === undefined || integer(x.appearanceId) && x.appearanceId < CUSTOMER_CAST.length) &&
   (x.regularGuestId === undefined || typeof x.regularGuestId === 'string') &&
   (x.regularGuestVisitId === undefined || integer(x.regularGuestVisitId) && x.regularGuestVisitId > 0) &&

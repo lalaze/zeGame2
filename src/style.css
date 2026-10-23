@@ -1185,6 +1185,7 @@ html:lang(zh) body {
   background: #fff3cf;
   box-shadow: var(--frame);
 }
+.goal-toggle { display: none; }
 
 .goal.done {
   background: #e6f5d8;
@@ -2968,6 +2969,34 @@ body.fullscreen-cafe .toast {
   body.fullscreen-cafe #management-panel {
     width: min(420px, calc(100% - var(--edge-left) - var(--edge-right)));
   }
+  body.fullscreen-cafe .drawer-header { min-height: 48px; padding: 2px 8px; gap: 6px; }
+  body.fullscreen-cafe .drawer-header > div { flex: 1; min-width: 0; }
+  body.fullscreen-cafe .drawer-header strong { font-size: 15px; }
+  body.fullscreen-cafe .drawer-pause { font-size: 10px; }
+  body.fullscreen-cafe .panel .tabs { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 3px; padding: 4px 6px; }
+  body.fullscreen-cafe .panel .tab { font-size: 11px; padding: 2px 0; overflow-wrap: anywhere; }
+  body.fullscreen-cafe .panel .tab::before { display: none; }
+  body.fullscreen-cafe .goal { margin: 4px 10px; padding: 0 8px; }
+  body.fullscreen-cafe .goal-toggle {
+    display: flex; align-items: center; gap: 8px; width: 100%; padding: 4px 0;
+    border: 0; background: none; color: var(--ink); text-align: left; font: inherit; font-size: 13px;
+  }
+  body.fullscreen-cafe .goal-toggle > span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  body.fullscreen-cafe .goal-toggle > small { max-width: 35%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; }
+  body.fullscreen-cafe .goal-toggle::after { content: '+'; }
+  body.fullscreen-cafe .goal-expanded .goal-toggle::after { content: '−'; }
+  body.fullscreen-cafe .goal:not(.goal-expanded) .goal-details { display: none; }
+  body.fullscreen-cafe .goal-details { padding-bottom: 8px; }
+  body.fullscreen-cafe .panel .buy-amount { display: flex; align-items: center; gap: 4px; padding: 2px 10px; }
+  body.fullscreen-cafe .panel .buy-amount .chip { flex: 1; margin: 0; padding-block: 2px; }
+  body.fullscreen-cafe .pet-intro { padding-bottom: 4px; }
+  body.fullscreen-cafe .pet-intro h3 { display: none; }
+  body.fullscreen-cafe .pet-intro p { margin: 4px 0; font-size: 12px; line-height: 1.35; }
+  body.fullscreen-cafe .pet-intro details summary { min-height: 44px; display: flex; align-items: center; }
+  body.fullscreen-cafe .pet-tabs, body.fullscreen-cafe .pet-filters { gap: 4px; padding-bottom: 6px; }
+  body.fullscreen-cafe .pet-filters { flex-wrap: nowrap; overflow-x: auto; }
+  body.fullscreen-cafe .pet-filters .chip { flex-shrink: 0; }
+  body.fullscreen-cafe .pet-choice { padding-block: 4px; gap: 3px; }
   body.fullscreen-cafe.mobile-drawer-open .hud,
   body.fullscreen-cafe.mobile-drawer-open .cafe-status-bar { visibility: hidden; }
   body.fullscreen-cafe .open-btn { max-width: calc(100% - 190px); font-size: 14px; padding: 8px; }
@@ -3020,6 +3049,27 @@ body.fullscreen-cafe .table-preview-exit {
   max-width: calc(100% - 156px); padding: 8px 14px; white-space: normal;
 }
 body.fullscreen-cafe .table-preview-exit:active { transform: translate(-50%, 1px); }
+body.fullscreen-cafe .cat-locate-exit {
+  position: absolute; z-index: 9; left: 50%; bottom: calc(var(--view-tip-bottom) + var(--toast-clearance, 0px) + 12px);
+  transform: translateX(-50%); min-height: 44px; max-width: calc(100% - 32px);
+}
+.cafe-life {
+  position: absolute; z-index: 8; left: var(--edge-left); bottom: calc(var(--edge-bottom) + 68px);
+  width: min(340px, calc(100% - 32px)); padding: 8px 10px; background: var(--cream);
+  box-shadow: var(--paper-card); font-size: 13px;
+}
+.cafe-life p { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin: 6px 0; }
+.cafe-life button { min-height: 44px; margin: 0 6px 0 0; }
+.closing-story { margin-block: 12px; padding: 10px; background: var(--cream); }
+.closing-story summary { cursor: pointer; min-height: 44px; align-content: center; }
+.closing-story p { line-height: 1.6; }
+body.drawer-open .cafe-life,
+body:has(.modal-overlay) .cafe-life,
+body.arranging-cafe .cafe-life { display: none; }
+@media (max-width: 860px) {
+  .cafe-life { bottom: calc(var(--edge-bottom) + 188px); width: min(340px, calc(100% - 32px)); }
+  body.fullscreen-cafe .day-traffic { max-width: 100%; }
+}
 
 /* Replace the three existing .environment rules; append the guide rules after
    all current fullscreen rules. room-scale is the exact CSS display scale. */
@@ -3121,6 +3171,18 @@ body.fullscreen-cafe .first-service {
   max-height: min(300px, 46dvh, calc(100dvh - var(--edge-top) - var(--view-tip-bottom) - var(--status-row) - var(--toast-clearance, 0px) - 12px));
 }
 
+/* One invitation at a time on phones. The guide returns as soon as the player
+   reads or dismisses the story; neither prompt covers the other's touch targets. */
+@media (max-width: 860px) {
+  body.fullscreen-cafe .cafe-life {
+    bottom: calc(var(--view-tip-bottom) + var(--status-row) + var(--toast-clearance, 0px));
+  }
+  body.fullscreen-cafe #app.has-guide:has(.cafe-life:not([hidden])) > .first-service {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
 /* Only the canvas is magnified; management and controls keep their touch sizes. */
 .room-zoom-controls { position: absolute; z-index: 12; left: 50%; bottom: calc(64px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); display: flex; gap: 4px; }
 .room-zoom-controls button { min-width: 44px; min-height: 44px; padding: 6px 10px; }
@@ -3192,3 +3254,20 @@ body.fullscreen-cafe:has(#modal-root .modal-overlay) .first-service { visibility
   .opening-steps li { font-size: 12px; }
   .first-opening h3 { font-size: 18px; }
 }
+/* Compact daily audience guidance, shared by preparation and the day report. */
+.prep-demand, .report-demand {
+  margin-block: 12px;
+  padding: 10px 12px;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  overflow-wrap: anywhere;
+}
+.prep-demand p, .report-demand p { margin: 6px 0; }
+.prep-demand summary, .report-demand summary {
+  cursor: pointer;
+  min-height: 44px;
+  align-content: center;
+}
+.demand-group { padding-block: 8px; border-top: 1px dotted currentColor; }
+.demand-group > b, .demand-group > span { display: block; }
+.demand-group > span, .demand-dish { font-size: .85em; }

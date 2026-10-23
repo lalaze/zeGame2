@@ -2,7 +2,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { MENU, INGREDIENTS } from '../game/data';
 import { openShop } from '../game/day';
-import { restockQuote, servingsLeft } from '../game/economy';
+import { restockPlan, servingsLeft } from '../game/economy';
 import { operationStatus } from '../game/operations';
 import { makeSignatureId, saveSignature, setSignatureOnMenu, trialSignature } from '../game/signature-drinks';
 import { Sim } from '../game/sim';
@@ -188,7 +188,7 @@ describe('reversible service Pantry task', () => {
     expect(trialSignature(s, 'coffee', formula).ok).toBe(true); const id = makeSignatureId('coffee', formula)!;
     saveSignature(s, id, '<b>莓 & 雲</b>'); setSignatureOnMenu(s, id, true); s.onMenu = [];
     for (const ing of INGREDIENTS) s.pantry[ing.id] = 0; s.pantry.milk = .75; s.coins = 5; s.phase = 'open';
-    const f = fixture(s); const before = serialize(s), quote = restockQuote(s);
+    const f = fixture(s); const before = serialize(s), quote = restockPlan(s);
     f.flow.openPantry(true); expect(serialize(s)).toBe(before);
     expect(q('.pantry-task-context').textContent).toContain('<b>莓 & 雲</b>'); expect(q('.pantry-task-context').querySelector('b')).toBeNull();
     expect(document.querySelectorAll('.pantry-shortfall')).toHaveLength(2);

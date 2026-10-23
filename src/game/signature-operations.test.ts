@@ -32,9 +32,9 @@ describe('signature drinks in real café operations', () => {
   it('gives richer milk an actual taste/review benefit without hiding its cost and preparation tradeoff', () => {
     const { s, id } = ready();
     const price = salePrice(s, id);
-    expect(price).toBe(salePrice(s, 'latte'));
+    expect(price).toBeGreaterThan(salePrice(s, 'latte'));
     expect(servingCost(id)).toBeGreaterThan(servingCost('latte'));
-    expect(prepTime(s, id)).toBeGreaterThan(prepTime(s, 'latte'));
+    expect(prepTime(s, id)).toBeLessThan(prepTime(s, 'latte'));
     expect(signatureDefinition(id)!.quality).toBe(4.3);
     expect(mealTaste(s, [id])).toBeGreaterThan(mealTaste(s, ['latte']));
     expect(mealReview(s, [id], 8, false).stars).toBe(4.3);

@@ -1,7 +1,7 @@
 // @vitest-environment happy-dom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createInitialState, serialize } from '../game/state';
-import { setLocale } from '../i18n';
+import { setLocale, t } from '../i18n';
 import { closeModal } from './modal';
 import { quoteItem } from '../game/economy';
 import { formatTransactionMoney } from '../game/format';
@@ -48,6 +48,24 @@ afterEach(() => {
 });
 
 describe('purchase amount presentation', () => {
+  it.each(['en', 'zh'] as const)('unlocks a recipe without changing the menu, then lets the player add it in %s', locale => {
+    setLocale(locale);
+    const state = createInitialState(0); state.coins = 1000;
+    panelFor(state);
+    document.body.insertAdjacentHTML('beforeend', '<div id="toast" hidden></div>');
+    button('[data-buy="item:americano"]').click();
+    expect(state.items.americano).toBe(1);
+    expect(state.onMenu).toEqual(['espresso']);
+    expect(query('#toast').textContent).toBe(t('menu.unlockedOff', { item: t('item.americano') }));
+    const toggle = button('[data-menu="americano"]');
+    expect(toggle.hidden).toBe(false);
+    expect(toggle.getAttribute('aria-pressed')).toBe('false');
+    const coins = state.coins;
+    toggle.click();
+    expect(state.onMenu).toEqual(['espresso', 'americano']);
+    expect(state.coins).toBe(coins);
+  });
+
   it.each(['en', 'zh'] as const)('shows exact first price and post-purchase balance in %s', (locale) => {
     setLocale(locale);
     const state = createInitialState(0); state.coins = 66;
@@ -132,13 +150,14 @@ describe('quiet pantry status presentation', () => {
     expect(restock.classList.contains('is-complete')).toBe(false);
     expect(restock.disabled).toBe(true);
     expect(query('.restock-reason').hidden).toBe(false);
-    expect(query('.restock-reason').textContent).toContain('Need');
+    expect(query('.restock-reason').textContent).toContain('Still needed');
     expect(restock.getAttribute('aria-describedby')).toBe('pantry-restock-reason');
     const buy = button('[data-buy="ing:beans"]');
     buy.click(); expect(state.coins).toBe(0); expect(state.pantry.beans).toBe(0);
     state.coins = 100; panel.update();
     expect(restock.disabled).toBe(false);
-    expect(query('.restock-reason').hidden).toBe(true);
+    expect(query('.restock-reason').hidden).toBe(false);
+    expect(query('.restock-reason').textContent).toContain('Balance afterward');
     expect(buy.disabled).toBe(false);
     buy.click(); expect(state.coins).toBe(90); expect(state.pantry.beans).toBe(10);
   });

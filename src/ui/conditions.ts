@@ -33,8 +33,8 @@ export function prepConditionHtml(state: GameState, menu: readonly { id: ItemId 
   return `<section class="prep-condition condition-${condition.id}" aria-label="${escape(t('condition.today', { name: conditionName(condition) }))}">
     <b>${escape(t('condition.today', { name: conditionName(condition) }))}</b>
     <p>${escape(t(`condition.${condition.id}.intro` as MessageKey))}</p>
-    <ul>${conditionEffects(condition).map((line) => `<li>${escape(line)}</li>`).join('')}</ul>
-    ${status}
+    ${condition.favored.length ? `<p>${escape(t('condition.popular', { items: condition.favored.map(tasteName).join(t('list.sep')) }))}</p>` : ''}
+    <details><summary>${escape(t('prep.details'))}</summary><ul>${conditionEffects(condition).map((line) => `<li>${escape(line)}</li>`).join('')}</ul>${status}</details>
   </section>`;
 }
 

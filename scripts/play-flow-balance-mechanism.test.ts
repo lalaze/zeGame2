@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { expect, it } from 'vitest';
-import { openShop } from '../src/game/day';
+import { openShop, type DayReport } from '../src/game/day';
 import { bakeForForecast, restock } from '../src/game/economy';
 import { bookPromotion } from '../src/game/promotion';
 import { reputationScore } from '../src/game/reputation';
@@ -19,18 +19,30 @@ function sample(scenario: typeof scenarios[number], seed: number, refill: boolea
   const sim = new Sim(() => { n = (Math.imul(n, 1664525) + 1013904223) >>> 0; return n / 2 ** 32; });
   const initialHash = objectHash(s), receipts: { atSeconds: number; cash: number; pantryBefore: number; pantryAfter: number }[] = [];
   const promotion = PRESSURES[scenario.route.pressure];
-  const beforePromotion = s.coins;
-  if (promotion && !bookPromotion(s, promotion)) throw new Error('Promotion rejected');
-  const promotionsPurchased = beforePromotion - s.coins;
+  let promotionsPurchased = 0;
   const buyStock = (atSeconds: number) => { const before = s.coins, pantryBefore = styleAssets(s).pantry; restock(s); receipts.push({ atSeconds, cash: before - s.coins, pantryBefore, pantryAfter: styleAssets(s).pantry }); };
-  bakeForForecast(s); buyStock(0); openShop(s);
+  const startDay = (atSeconds: number) => {
+    const before = s.coins;
+    if (promotion && !s.promotion) bookPromotion(s, promotion);
+    promotionsPurchased += before - s.coins;
+    bakeForForecast(s); buyStock(atSeconds); openShop(s);
+  };
+  startDay(0);
   const firstUpdateHash = objectHash(s);
+  const settled: DayReport[] = [];
   let peakQueue = 0;
   for (let tick = 0; tick < 180 / STYLE_DT; tick++) {
+    // Match the reference's exact-clock policy when a bakery sells out and
+    // finishes closing before the horizon: settle, restock and open the next day.
+    if (s.phase === 'closing' && sim.finishedService) settled.push(sim.closeShop(s)!);
+    if (s.phase === 'prep') startDay(tick * STYLE_DT);
     if (refill && tick === 90 / STYLE_DT) buyStock(90);
     sim.update(s, STYLE_DT); peakQueue = Math.max(peakQueue, sim.queue.length);
   }
-  const { revenue, ingredientCost: ingredientExpense, petCost: careExpense, promotionCost: promotionExpense, served, missed, doorLost, soldOut, queueLost, tableLost } = s.today;
+  const days = [...settled, s.today];
+  const sum = (key: 'revenue' | 'ingredientCost' | 'petCost' | 'promotionCost' | 'served' | 'missed' | 'doorLost' | 'soldOut' | 'queueLost' | 'tableLost') => days.reduce((total, day) => total + day[key], 0);
+  const revenue = sum('revenue'), ingredientExpense = sum('ingredientCost'), careExpense = sum('petCost'), promotionExpense = sum('promotionCost');
+  const served = sum('served'), missed = sum('missed'), doorLost = sum('doorLost'), soldOut = sum('soldOut'), queueLost = sum('queueLost'), tableLost = sum('tableLost');
   const assets = styleAssets(s), operatingProfit = revenue - ingredientExpense - careExpense - promotionExpense;
   const includedCare = setup.ledger.reduce((sum, p) => sum + p.prepaidCare, 0), carePurchased = careExpense + assets.care - includedCare;
   const ingredientsPurchased = receipts.reduce((sum, r) => sum + r.cash, 0), totalCashOut = setup.cashSpent + ingredientsPurchased + promotionsPurchased + carePurchased;

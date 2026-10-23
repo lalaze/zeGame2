@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createInitialState, deserialize, serialize, SAVE_VERSION, type GameState } from './state';
-import { deleteSignature, makeSignatureId, renameSignature, saveSignature, setSignatureOnMenu, trialSignature } from './signature-drinks';
+import { deleteSignature, makeSignatureId, renameSignature, saveSignature, setSignatureOnMenu, trialSignature, signatureDefinition } from './signature-drinks';
 import { recordServings, researchSignature, tasteTier } from './taste';
 import { fastDrinkMeal, setCafeStyle, stylePrepMultiplier, styleSaleMultiplier, styleStages, teaPastryMeal } from './styles';
 import { mealReview, recordReview, parseReputation } from './reputation';
@@ -140,7 +140,7 @@ describe('signature recipe saves and immutable history', () => {
     setCafeStyle(state, 'coffee');
     expect(stylePrepMultiplier(state, coffee)).toBe(1.12);
     expect(styleSaleMultiplier(state, coffee)).toBe(1.04);
-    expect(fastDrinkMeal([coffee])).toBe(false);
+    expect(fastDrinkMeal([coffee])).toBe(true);
     expect(teaPastryMeal([tea, 'scone'])).toBe(true);
     recordServings(state, Array(100).fill(coffee));
     expect(styleSaleMultiplier(state, coffee)).toBe(1.12);
@@ -191,6 +191,8 @@ describe('signature recipe saves and immutable history', () => {
   it('restores an in-flight custom order, delivers once, and rejects missing or corrupt recipes', () => {
     const state = fixture();
     state.onMenu = [];
+    // Bound supply to one order, independently of the current preparation speed.
+    for (const [ing, n] of Object.entries(signatureDefinition(coffee)!.recipe)) state.pantry[ing as keyof typeof state.pantry] = n!;
     openShop(state);
     const sim = new Sim(() => 0);
     until(state, sim, () => sim.customers.some((c) => c.phase === 'waiting'));
