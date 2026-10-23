@@ -18,7 +18,7 @@
 <canvas id="scene" aria-label="Actual CafeGame renderer with populated QA fixture"></canvas>
 <p id="scene-summary"></p>
 <small>Customers cover two seated directions, walking up/down/left/right, and a takeaway cup. The customized owner and barista render behind the counter; the server carries a tray. The kitchen contains three customized cooks. Positions move only inside this fixture; no user actions or purchases run.</small>
-<h2>All 30 customers and four customized staff</h2>
+<h2>All 36 customers, six new partners and four customized staff</h2>
 <canvas id="roster" aria-label="Full reference-art roster"></canvas>
 <h2>Every production pose</h2>
 <p class="legend"><b class="foot">Orange: foot</b><b class="seat">Blue: seated hip</b><b class="hand">Purple: pet contact</b>Crosses are declared anchors. These sheets draw fineSpriteArt backing canvases, with production offsets. Names show the exact frame keys.</p>
@@ -69,14 +69,16 @@ try {
   ]);
   const {preloadReferenceCharacters,resolveReferenceCharacter,referenceCharacterOffset,referenceCharacterContacts}=reference;
   await preloadReferenceCharacters();
+  const {PARTNERS}=await import('/src/game/partners.ts');
   const staff=[
     {name:'Customized owner',role:'owner',look:{skin:3,hair:5,hairStyle:2,shirt:4,pants:2}},
     {name:'Customized barista',role:'barista',look:{skin:1,hair:2,hairStyle:3,shirt:6,pants:1}},
     {name:'Customized server',role:'server',look:{skin:2,hair:4,hairStyle:1,shirt:5,pants:0}},
-    {name:'Customized cook',role:'cook',look:{skin:0,hair:3,hairStyle:0,shirt:7,pants:2}}
+    {name:'Customized cook',role:'cook',look:{skin:0,hair:3,hairStyle:0,shirt:7,pants:2}},
+    ...PARTNERS.slice(9).map(p=>({name:p.name.zh,role:p.role,look:p.look}))
   ];
   const identities=[...CUSTOMER_CAST.map(c=>({name:`${String(c.id+1).padStart(2,'0')} ${c.name}`,role:'customer',look:c.look,appearanceId:c.id})),...staff];
-  check('All 30 customer identities are present',CUSTOMER_CAST.length===30,CUSTOMER_CAST.length);
+  check('All 36 customer identities are present',CUSTOMER_CAST.length===36,CUSTOMER_CAST.length);
   const descriptors=[...['down','up','right','left'].flatMap(direction=>[0,1,2].map(i=>({name:`${direction}[${i}]`,get:f=>f[direction][i],seated:false,pet:false,left:direction==='left'}))),
     {name:'sitRight',get:f=>f.sitRight,seated:true,pet:false,left:false},{name:'sitLeft',get:f=>f.sitLeft,seated:true,pet:false,left:true},
     ...['Right','Left'].flatMap(direction=>[0,1].map(i=>({name:`sitPet${direction}[${i}]`,get:f=>f[`sitPet${direction}`][i],seated:true,pet:true,left:direction==='Left'})))];
@@ -121,7 +123,7 @@ try {
     rc.fillStyle='#44352d';rc.textAlign='center';rc.font='12px system-ui';rc.fillText(who.name,cx+cellW/2,cy+142,cellW-8);rc.font='10px system-ui';rc.fillText(who.role,cx+cellW/2,cy+158);
     if(who.role==='customer')downHashes.push(hashPixels(fineSpriteArt(frames.down[0]).canvas).hash);
   }
-  check('All customer front portraits remain visually distinct',new Set(downHashes).size===30,new Set(downHashes).size);
+  check('All customer front portraits remain visually distinct',new Set(downHashes).size===CUSTOMER_CAST.length,new Set(downHashes).size);
 
   // Fresh, isolated state only. Do not import main.ts, session ownership or save loaders here.
   layout.setSceneHeight(240);

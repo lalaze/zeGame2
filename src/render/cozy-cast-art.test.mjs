@@ -13,9 +13,9 @@ import { diningDecorationPreview } from './dining-decoration-art';
 import { decorIcon } from './decor-art';
 import { centerpieceSprite } from './table-centerpiece-art';
 
-const base = 'public/art/generated/cozy-cast-v7/';
+const base = 'public/art/generated/cozy-cast-v8/';
 const manifest = () => JSON.parse(fs.readFileSync(base + 'manifest.json', 'utf8'));
-const diningBase = 'public/art/generated/cozy-dining-v3/';
+const diningBase = 'public/art/generated/cozy-dining-v4/';
 const diningManifest = () => JSON.parse(fs.readFileSync(diningBase + 'manifest.json', 'utf8'));
 function palmEdge(frame, meta) {
   const data=pixels(frame);let right=0;
@@ -85,7 +85,7 @@ describe('whole-figure density-2 guest family', () => {
       }
     }
   });
-  it('uses 90 complete person-and-chair paintings with one ground baseline', () => {
+  it('uses 108 complete person-and-chair paintings with one ground baseline', () => {
     const pack=diningManifest();expect(pack.characters.map(c=>c.id)).toEqual(CUSTOMER_CAST.map(c=>c.id));
     expect(pack.embeddedChair).toBe(true);
     for(const design of CUSTOMER_CAST){
@@ -121,7 +121,7 @@ describe('whole-figure density-2 guest family', () => {
     }
     expect(changed).toBeGreaterThan(30);
   });
-  it('requires all 30 identities and 12 complete poses per identity', () => {
+  it('requires all 36 identities and 12 complete poses per identity', () => {
     const pack = manifest(); expect(() => validateCastManifest(pack)).not.toThrow();
     expect(pack.characters.map(c => c.id)).toEqual(CUSTOMER_CAST.map(c => c.id));
     const partial = manifest(); partial.characters[0].frames.pop(); expect(() => validateCastManifest(partial)).toThrow();
@@ -155,7 +155,7 @@ describe('whole-figure density-2 guest family', () => {
       }
     }
   });
-  it('keeps all 540 rendered poses on the native palette, with mirrored pixels and chair contacts', () => {
+  it('keeps all 648 rendered poses on the native palette, with mirrored pixels and chair contacts', () => {
     expect(batchCharactersReady()).toBe(true);
     const allowed = new Set(JSON.parse(fs.readFileSync('docs/art-grid/palette.json')).colors.map(c => c.hex));
     for (const design of CUSTOMER_CAST) {

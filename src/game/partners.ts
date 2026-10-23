@@ -10,6 +10,19 @@ export const PARTNERS: PartnerDefinition[] = [
   define('lin', 'barista', '林芽', 'Lin', 1), define('theo', 'barista', '麦洛', 'Milo', 2), define('mira', 'barista', '米拉', 'Mira', 3),
   define('yue', 'server', '小月', 'Yue', 0), define('ari', 'server', '阿栗', 'Ari', 1), define('noah', 'server', '诺亚', 'Noah', 2),
   define('mei', 'cook', '梅子', 'Mei', 0), define('hugo', 'cook', '雨果', 'Hugo', 1), define('sora', 'cook', '空', 'Sora', 2),
+  // Append reserves so existing saves keep their original automatic hires and slot order.
+  { id: 'qinghe', role: 'barista', name: { zh: '青禾', en: 'Qinghe' }, appearance: 4,
+    look: { skin: 2, hair: 0, hairStyle: 4, shirt: 6, pants: 1 } },
+  { id: 'amber', role: 'barista', name: { zh: '琥珀', en: 'Amber' }, appearance: 5,
+    look: { skin: 0, hair: 3, hairStyle: 5, shirt: 3, pants: 0 } },
+  { id: 'xiaoman', role: 'server', name: { zh: '小满', en: 'Xiaoman' }, appearance: 6,
+    look: { skin: 1, hair: 1, hairStyle: 6, shirt: 5, pants: 0 } },
+  { id: 'holly', role: 'server', name: { zh: '冬青', en: 'Holly' }, appearance: 7,
+    look: { skin: 3, hair: 0, hairStyle: 7, shirt: 1, pants: 2 } },
+  { id: 'chestnut', role: 'cook', name: { zh: '栗子', en: 'Chestnut' }, appearance: 3,
+    look: { skin: 2, hair: 1, hairStyle: 0, shirt: 3, pants: 1 } },
+  { id: 'bailu', role: 'cook', name: { zh: '白露', en: 'Bailu' }, appearance: 4,
+    look: { skin: 0, hair: 4, hairStyle: 1, shirt: 4, pants: 2 } },
 ];
 export const partnerDefinition = (id: string | undefined) => PARTNERS.find(p => p.id === id);
 export interface PartnerProgress {

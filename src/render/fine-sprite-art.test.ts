@@ -109,7 +109,7 @@ describe('independent fine-grid character artwork', () => {
     }
   });
 
-  it('keeps thirty distinct appearances, three gait frames, and both petting gestures', () => {
+  it('keeps thirty-six distinct appearances, three gait frames, and both petting gestures', () => {
     const fronts = new Set<string>(), seats = new Set<string>(), pets = new Set<string>();
     for (const design of CUSTOMER_CAST) {
       const f = character(design.look, 'customer', design.id);
@@ -124,7 +124,7 @@ describe('independent fine-grid character artwork', () => {
         for (const [key, color] of seated) if (Number(key.split(',')[1]) < 34) expect(pet.get(key)).toBe(color);
       }
     }
-    expect([fronts.size, seats.size, pets.size]).toEqual([30, 30, 30]);
+    expect([fronts.size, seats.size, pets.size]).toEqual([CUSTOMER_CAST.length, CUSTOMER_CAST.length, CUSTOMER_CAST.length]);
   });
 
   it('returns stable source, artwork, metadata and mirrored objects without repaint allocations', () => {

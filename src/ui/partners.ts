@@ -70,7 +70,7 @@ export function showPartners(state: GameState, sim: Sim, save: () => void, selec
   }
   function list(): void {
     const intro=node('div','', 'regular-intro');
-    intro.append(node('h3',partnerText('一起把日子过好','Good days, together')),node('p',partnerText('9 位候选伙伴，每种职业 3 位。在「升级」里购买的岗位会自动免费补足人手；招募伙伴可以决定由谁上岗。店主始终一起工作，不占岗位。','Nine candidates, three per role. Every staff slot you buy in Upgrades is filled automatically at no extra cost; recruiting a partner lets you choose who fills it. The owner always works too and never takes a slot.'),'note'),
+    intro.append(node('h3',partnerText('一起把日子过好','Good days, together')),node('p',partnerText(`${PARTNERS.length} 位候选伙伴，每种职业 ${PARTNERS.filter(p=>p.role==='barista').length} 位。在「升级」里购买的岗位会自动免费补足人手；招募伙伴可以决定由谁上岗。店主始终一起工作，不占岗位。`,`${PARTNERS.length} candidates, ${PARTNERS.filter(p=>p.role==='barista').length} per role. Every staff slot you buy in Upgrades is filled automatically at no extra cost; recruiting a partner lets you choose who fills it. The owner always works too and never takes a slot.`),'note'),
     node('p',partnerText('关店后可以招募、换班和培养。故事随实际工作与不同营业日解锁，随时可稍后再看。','Recruit, assign and train while closed. Stories unlock through real work across business days; read whenever you like.'),'note'));
     const cards=node('div','', 'regular-cards');
     for(const role of PARTNER_ROLES) {

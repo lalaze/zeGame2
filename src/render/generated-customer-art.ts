@@ -3,6 +3,8 @@ import type { Look } from '../game/state';
 import { fineSpriteArt, registerFineSpriteArt } from './fine-sprite-art';
 import type { CharacterFrames, Role } from './sprites';
 
+/** The archived density-4 pack covers the original 30 guests only. New guests use cozy-cast-v8. */
+export const LEGACY_GENERATED_CUSTOMER_CAST = Object.freeze(CUSTOMER_CAST.slice(0, 30));
 const WALK_DIRECTIONS = ['down', 'up', 'right'] as const;
 const WALK_STATES = ['stand', 'stepA', 'stepB'] as const;
 const SEAT_DIRECTIONS = ['right', 'left'] as const;
@@ -17,7 +19,7 @@ const POSES: readonly CustomerPose[] = Object.freeze([
   ...SEAT_DIRECTIONS.flatMap(direction => SEAT_STATES.map(state => `${direction}-${state}` as const)),
 ]);
 const NO_FRAME_IDS: readonly GeneratedCustomerFrameId[] = Object.freeze([]);
-const FRAME_IDS = Object.freeze(CUSTOMER_CAST.map(design => Object.freeze(POSES.map(pose =>
+const FRAME_IDS = Object.freeze(LEGACY_GENERATED_CUSTOMER_CAST.map(design => Object.freeze(POSES.map(pose =>
   `${design.id === 0 ? 'mina' : `customer-${design.id}`}-${pose}` as GeneratedCustomerFrameId))));
 /** Stable source IDs: original Mina IDs for cast 0, candidate filenames for cast 1–29. */
 export const GENERATED_CUSTOMER_FRAME_IDS: readonly GeneratedCustomerFrameId[] = Object.freeze(FRAME_IDS.flat());
@@ -96,7 +98,7 @@ const ZERO = Object.freeze({ x: 0, y: 0 });
 const PET_OFFSET = Object.freeze({ x: -2, y: 0 });
 const WALK_FOOT = Object.freeze({ x: 9, y: 27 });
 function cast(appearanceId: number | undefined): CustomerDesign | undefined {
-  return appearanceId !== undefined && Number.isInteger(appearanceId) ? CUSTOMER_CAST[appearanceId] : undefined;
+  return appearanceId !== undefined && Number.isInteger(appearanceId) ? LEGACY_GENERATED_CUSTOMER_CAST[appearanceId] : undefined;
 }
 const sameLook = (look: Readonly<Look>, design: CustomerDesign): boolean =>
   LOOK_KEYS.every(key => look[key] === design.look[key]);
@@ -258,7 +260,7 @@ export function createGeneratedCustomerArt(manifest: GeneratedCustomerManifest |
   const maps: ContactMaps = { offsets: new WeakMap(), contacts: new WeakMap() };
   const baked = new Map<number, BakedIdentity>();
   // Iterate the fixed roster rather than growing a map from untrusted input IDs.
-  for (const design of CUSTOMER_CAST) {
+  for (const design of LEGACY_GENERATED_CUSTOMER_CAST) {
     const candidates = manifests.filter(candidate => candidate.appearanceId === design.id);
     if (candidates.length !== 1) continue;
     try {

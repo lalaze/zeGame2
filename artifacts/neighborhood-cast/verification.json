@@ -1,0 +1,45 @@
+{
+  "scope": "Six new ordinary guests and six reserve partners integrated into the existing game.",
+  "focusedTests": {
+    "passed": 598,
+    "skipped": 1,
+    "files": 12
+  },
+  "productionBuild": "passed",
+  "sourceBaseline": {
+    "beforeFailures": 118,
+    "afterFailures": 118,
+    "newFailures": 0,
+    "method": "Copied the pre-existing working tree into a temporary directory, restored only task-edited clean files to their pre-task HEAD contents, omitted the new expansion test, and ran src tests in both copies. All other user edits were retained. Comparison is by file and full test name."
+  },
+  "browser": {
+    "viewportWidths": [
+      1280,
+      390
+    ],
+    "galleryCards": 12,
+    "partnerCards": 15,
+    "horizontalOverflow": false,
+    "loadedPortraits": true,
+    "runtimeErrors": 0,
+    "qaIdentities": 46,
+    "qaPoses": 828,
+    "qaAssertions": 3867,
+    "visuallyReviewed": [
+      "gallery-desktop.png",
+      "gallery-mobile.png",
+      "partner-mobile.png",
+      "game-seating.png",
+      "game-seating-traveler.png"
+    ],
+    "guestSceneIds": [
+      30,
+      35
+    ],
+    "profile": "Isolated temporary agent-browser session; game onboarding and partner profile inspection did not modify the user’s browser save."
+  },
+  "limitations": [
+    "Full repository suite is not green. Source baseline comparison confirms 118 existing failures; script and historical evidence tests were not baseline-compared.",
+    "New staff use individually configured existing cozy-team-v7 artwork; only the guest atlases were newly image-generated."
+  ]
+}

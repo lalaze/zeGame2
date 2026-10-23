@@ -124,9 +124,13 @@ Every 20–40 real seconds of open service, something small may happen in the ro
 
 Tips and rewards count toward today's revenue. Moments use their own random numbers and only the player's answers change the café: unanswered, the simulation, balance audits and seeded tests run exactly as before. A cue is never saved; an answered tip already on a guest's bill is saved with that visit.
 
+### Café cast and team
+
+The café has 36 rotating guest appearances and 15 recruitable staff, five in each role. The newest six guests include a silver-haired knitter, a beret-wearing sketcher and a raincoat-wearing visitor with braids. Six reserve partners—Qinghe, Amber, Xiaoman, Holly, Chestnut and Bailu—each have a distinct look and three bilingual work stories. Recruit and assign them from **Team** while closed; recruiting changes who can fill a purchased slot, not the number of slots. Existing saves keep their original staff and guest IDs. Artwork, prompts and build instructions are in [the cast expansion notes](assets/generated/neighborhood-cast-v1/README.md).
+
 ### Neighborhood regulars
 
-Twelve named regulars bring five short story chapters each, in English and Chinese. They use fixed pixel appearances from the existing customer cast and arrive in the ordinary queue: no extra arrivals or reward multipliers. Two become eligible on each of café days 1, 3, 5, 7, 9 and 11. A cast member returns once per shuffled 30-arrival cycle; eligibility is not a guaranteed visit that day.
+Twelve named regulars bring five short story chapters each, in English and Chinese. They use fixed pixel appearances from the existing customer cast and arrive in the ordinary queue: no extra arrivals or reward multipliers. Two become eligible on each of café days 1, 3, 5, 7, 9 and 11. A cast member returns once per shuffled 36-arrival cycle; eligibility is not a guaranteed visit that day.
 
 Each chapter needs another successful handoff and a minimum business day (debut day, then +2, +4, +6 and +8); at most one chapter unlocks per person per day. Failed visits, reading and reopening the game do not advance a story. You never need to log in on consecutive real-world days, unlock a favorite drink, or finish someone else's story. When a preferred drink is selected, unlocked and currently supplyable, it replaces the drink slot in that regular's order; otherwise ordinary menu selection remains. Food-only orders, combo rules, stock consumption, reviews and payment formulas remain unchanged.
 
@@ -177,7 +181,7 @@ Indoor night lighting preserves legibility. Added dust animation respects reduce
 Open `sprite-preview.html` on the development or built site for the asset gallery.
 It uses the same painters as the game, with category filters, light/dark preview,
 individual PNG downloads, a transparent atlas and its frame manifest. It does not
-read or write game saves. The gallery generates its ZIP, PNG atlas and JSON from the current artwork, including all 30 regular customers. Historical reference exports remain in `public/art/`. The downloaded `tiny-bean-assets.zip` includes individual
+read or write game saves. The gallery generates its ZIP, PNG atlas and JSON from the current artwork, including all 36 customer appearances and 15 named staff. Historical reference exports remain in `public/art/`. The downloaded `tiny-bean-assets.zip` includes individual
 PNGs, the atlas, coordinates and backgrounds: 980 sprite frames
 (including all 55 dishes, 168 cat frames and the complete 30-customer cast) and five room backgrounds.
 Character exports also show one sample appearance per role; the game still generates all player appearances.

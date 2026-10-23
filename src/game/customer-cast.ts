@@ -45,6 +45,12 @@ const rows: readonly CastRow[] = [
   ['金盏牛角扣', 0, 2, 0, 3, 0, 'duffle', 'none', '#9c775c'],
   ['紫苏小领衫', 3, 0, 1, 4, 2, 'sailor', 'headband', '#eeddb6'],
   ['蜜桃旅行包', 1, 5, 2, 5, 1, 'scarf', 'satchel', '#ae7159'],
+  ['银发织衫', 0, 4, 1, 4, 2, 'cardigan', 'glasses', '#d8c8b4'],
+  ['红帽画手', 3, 0, 7, 2, 0, 'vest', 'satchel', '#bb6b58'],
+  ['雨巷双辫', 1, 0, 6, 3, 1, 'duffle', 'none', '#8ba477'],
+  ['松绿书商', 1, 1, 5, 2, 1, 'vest', 'glasses', '#e5d7ba'],
+  ['珊瑚发带', 3, 0, 7, 5, 2, 'dress', 'headband', '#e5d7ba'],
+  ['麦穗旅人', 0, 2, 7, 1, 2, 'jacket', 'satchel', '#d3a453'],
 ];
 export const CUSTOMER_CAST: readonly CustomerDesign[] = Object.freeze(rows.map((r, id) => Object.freeze({
   id, name: r[0], look: Object.freeze({ skin: r[1], hair: r[2], hairStyle: r[3] % 4, shirt: r[4], pants: r[5] }),

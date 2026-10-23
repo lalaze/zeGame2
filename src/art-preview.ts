@@ -8,6 +8,7 @@ import { makeSignatureId, type SignatureBase, type SignatureRecipe } from './gam
 import { paintServiceCup, paintServiceTray, paintTableVase, paintTableTent } from './render/service-props-art';
 import { paintCallBubble, paintAckBubble, paintOrderFrame, paintSoldOutFrame, paintSoldOutCross, paintThoughtFrame } from './render/ui-art';
 import { CUSTOMER_CAST } from './game/customer-cast';
+import { PARTNERS } from './game/partners';
 import { CATS } from './game/pets';
 import { INGREDIENTS, MENU, UPGRADES } from './game/data';
 import { DECOR } from './game/decor';
@@ -64,6 +65,11 @@ roles.forEach(([role, name], i) => {
   add(`character/${role}/sit-right`, '人物', `${name} · 坐姿右`, frames.sitRight);
   for (const side of ['Left', 'Right'] as const) frames[`sitPet${side}`].forEach((canvas, frame) => add(`character/${role}/sit-pet-${side.toLowerCase()}-${frame}`, '人物', `${name} · 抚猫 ${side} ${frame + 1}`, canvas));
 });
+for (const partner of PARTNERS) {
+  const frames = character(partner.look, partner.role, partner.appearance);
+  for (const direction of ['down', 'up', 'left', 'right'] as const) frames[direction].forEach((canvas, frame) =>
+    add(`partner/${partner.id}/${direction}-${frame}`, '店员伙伴', `${partner.name.zh} · ${direction} ${frame + 1}`, canvas));
+}
 for (const design of CUSTOMER_CAST) {
   const frames = character(design.look, 'customer', design.id);
   for (const direction of ['down', 'up', 'left', 'right'] as const) frames[direction].forEach((canvas, frame) =>
@@ -130,6 +136,23 @@ const manifestText = JSON.stringify({ image: 'tiny-bean-art.png', size: { w: she
 manifest.href = `data:application/json;charset=utf-8,${encodeURIComponent(manifestText)}`;
 manifest.download = 'tiny-bean-art.json';
 
+const newcomers = document.querySelector('#newcomers');
+if (newcomers) {
+  const portraits = [
+    ...CUSTOMER_CAST.slice(30).map(p => ({ name: p.name, detail: '新顾客', frame: character(p.look, 'customer', p.id).stand })),
+    ...PARTNERS.slice(9).map(p => ({ name: p.name.zh, detail: { barista: '咖啡师', server: '服务员', cook: '厨师' }[p.role], frame: character(p.look, p.role, p.appearance).stand })),
+  ];
+  for (const person of portraits) {
+    const card = document.createElement('figure'); card.className = 'asset';
+    const art = document.createElement('div'); art.className = 'art';
+    const img = document.createElement('img'), source = fineSpriteArt(person.frame).canvas;
+    img.src = source.toDataURL(); img.alt = person.name; img.width = source.width; img.height = source.height; art.append(img);
+    const caption = document.createElement('figcaption'); caption.className = 'caption';
+    const name = document.createElement('b'); name.textContent = person.name;
+    const detail = document.createElement('small'); detail.textContent = person.detail;
+    caption.append(name, detail); card.append(art, caption); newcomers.append(card);
+  }
+}
 const gallery = document.querySelector('#gallery')!;
 const count = document.querySelector('#count')!;
 const buttons: HTMLButtonElement[] = [];

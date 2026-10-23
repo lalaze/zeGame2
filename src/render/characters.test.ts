@@ -90,7 +90,7 @@ describe('redesigned café cast', () => {
     roles.forEach(role => character(saved, role));
     expect(saved).toEqual({ ...look, hairStyle: 2, shirt: 6 });
   });
-  it('renders thirty unique designs in every direction without palette or anchor regressions', () => {
+  it('renders thirty-six unique designs in every direction without palette or anchor regressions', () => {
     const signatures = new Set<string>();
     for (const design of CUSTOMER_CAST) {
       const f = character(design.look, 'customer', design.id);
@@ -105,7 +105,7 @@ describe('redesigned café cast', () => {
       expect([f.sitRight.width, f.sitRight.height]).toEqual([18, 26]);
       expect(character(design.look, 'customer', design.id)).toBe(f);
     }
-    expect(signatures.size).toBe(30);
+    expect(signatures.size).toBe(CUSTOMER_CAST.length);
   });
   it('keys customer artwork by design and ignores customer-only IDs for staff', () => {
     expect(character(look, 'customer', 0)).not.toBe(character(look, 'customer', 1));

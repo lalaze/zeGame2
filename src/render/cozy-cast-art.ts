@@ -24,7 +24,7 @@ const mod = (value: number, length: number) => ((Math.trunc(value) % length) + l
 function canvas(width: number, height: number) { const result = document.createElement('canvas'); result.width = width; result.height = height; return result; }
 
 export function validateCastManifest(manifest: Manifest): void {
-  if (manifest.version !== 7 || manifest.density !== CAST_ART_DENSITY || manifest.width !== W / 2 || manifest.height !== H / 2 ||
+  if (manifest.version !== 8 || manifest.density !== CAST_ART_DENSITY || manifest.width !== W / 2 || manifest.height !== H / 2 ||
     manifest.characters?.length !== CUSTOMER_CAST.length || new Set(manifest.characters.map(sheet => sheet.id)).size !== CUSTOMER_CAST.length)
     throw Error('Incomplete whole-figure cast manifest');
   for (const sheet of manifest.characters) {
@@ -45,7 +45,7 @@ export function preloadBatchCharacters(): Promise<void> {
   if (pending) return pending;
   const generation = epoch;
   pending = (async () => {
-    const base = import.meta.env.BASE_URL + 'art/generated/cozy-cast-v7/';
+    const base = import.meta.env.BASE_URL + 'art/generated/cozy-cast-v8/';
     const response = await fetch(base + 'manifest.json');
     if (!response.ok) throw Error('Missing whole-figure cast manifest');
     const manifest: Manifest = await response.json(); validateCastManifest(manifest);
@@ -59,11 +59,11 @@ export function preloadBatchCharacters(): Promise<void> {
       });
       return [sheet.id, poses] as const;
     }));
-    const diningBase=import.meta.env.BASE_URL+'art/generated/cozy-dining-v3/';
+    const diningBase=import.meta.env.BASE_URL+'art/generated/cozy-dining-v4/';
     const diningResponse=await fetch(diningBase+'manifest.json');
     if(!diningResponse.ok)throw Error('Missing matched dining cast');
     const dining=await diningResponse.json();
-    if(dining.version!==3||dining.density!==2||!dining.embeddedChair||dining.characters.length!==CUSTOMER_CAST.length)throw Error('Incomplete matched dining cast');
+    if(dining.version!==4||dining.density!==2||!dining.embeddedChair||dining.characters.length!==CUSTOMER_CAST.length)throw Error('Incomplete matched dining cast');
     const seated=await Promise.all(dining.characters.map(async(sheet:Sheet)=>{
       if(sheet.frames.length!==3)throw Error('Missing matched dining pose');
       const image=new Image();image.src=diningBase+sheet.file;await image.decode();

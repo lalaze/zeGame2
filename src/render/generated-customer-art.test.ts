@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it, vi } from 'vitest';
-import { CUSTOMER_CAST } from '../game/customer-cast';
+import { LEGACY_GENERATED_CUSTOMER_CAST as CUSTOMER_CAST } from './generated-customer-art';
 import { fineSpriteArt, logicalCrop } from './fine-sprite-art';
 import { createGeneratedCustomerArt, GENERATED_CUSTOMER_FRAME_IDS, generatedCustomerEligible, generatedCustomerFrameIds, generatedCustomerFrameId,
   type GeneratedCustomerFrameId, type GeneratedCustomerFrameMeta, type GeneratedCustomerIdentity,

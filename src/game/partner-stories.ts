@@ -1,4 +1,52 @@
 export const PARTNER_STORIES: Record<string, { intro: { zh: string; en: string }; chapters: { zh: string; en: string }[] }> = {
+  qinghe: {
+    intro: { zh: '青禾扎着高马尾，习惯用薄荷绿的笔记录香气。她最喜欢的词是「慢慢来」。', en: 'Qinghe wears a high ponytail and records aromas in mint-green ink. Her favorite reminder is “Take your time.”' },
+    chapters: [
+      { zh: '青禾给第一杯练习作品写下「雨后的木头」。她闻了闻笔帽，又补上一句：「也可能是刚削好的铅笔。」', en: 'Qinghe described her first practice cup as “Wood after rain.” After sniffing a pen cap, she added, “Possibly a freshly sharpened pencil.”' },
+      { zh: '忙起来时，青禾的香气笔记只剩几个小圆圈。伙伴猜那是咖啡豆，她笑着说，那是提醒自己记得呼吸。', en: 'During a rush, Qinghe’s aroma notes became tiny circles. A teammate guessed coffee beans. She smiled: they were reminders to breathe.' },
+      { zh: '青禾把新笔记本的第一页留给大家。最后上面写着「热面包」「干净围裙」和「有人替我接下一单」。她觉得第三种最好闻。', en: 'Qinghe left the first page of a new notebook for everyone: “Warm bread,” “Clean aprons,” and “Someone taking my next order.” The third smelled best to her.' },
+    ],
+  },
+  amber: {
+    intro: { zh: '琥珀留着赤棕侧分短发，穿蜂蜜色工作衫。她把修好旧东西当作一种休息。', en: 'Amber has auburn side-parted hair and a honey-colored work shirt. Mending old things is her favorite way to unwind.' },
+    chapters: [
+      { zh: '琥珀发现休息室的抽屉会吱呀作响，随手记进修理本。她没有急着拆开它，先问清楚里面是谁珍藏的饼干。', en: 'Amber noted a squeaky break-room drawer in her repair book. Before taking it apart, she checked whose treasured biscuits were inside.' },
+      { zh: '抽屉修好了，琥珀却把那枚旧木把手留下。她在背面写了日期，说旧东西也值得有一次毕业纪念。', en: 'The drawer was fixed, but Amber kept its old wooden handle. She dated the back: old things deserved a graduation keepsake too.' },
+      { zh: '伙伴送来一个坏掉的小音乐盒。琥珀这次邀请大家一起拆，零件摆满桌面。修好后，她说最好听的是刚才大家一起屏住呼吸的那一秒。', en: 'A teammate brought a broken music box. Amber invited everyone to help. Once it played, she said the best sound had been their shared breath of anticipation.' },
+    ],
+  },
+  xiaoman: {
+    intro: { zh: '小满梳着双辫，喜欢玫瑰色围裙，也喜欢把平凡的小事认真庆祝一下。', en: 'Xiaoman wears twin braids and a rose-colored apron. She likes finding small, ordinary things worth celebrating.' },
+    chapters: [
+      { zh: '小满把第一次平稳送到桌边的托盘叫作「今日小胜利」。她没拍照，只在口袋的小纸条上画了一颗歪星星。', en: 'Xiaoman named her first steady tray delivery “Today’s Small Victory.” Instead of a photo, she drew a crooked star on a pocket-sized note.' },
+      { zh: '小纸条上多了「记住同伴喜欢的茶」和「及时说了需要帮忙」。小满发现，值得庆祝的事不一定要做得漂亮。', en: 'Her notes gained “Remembered a teammate’s tea” and “Asked for help in time.” Xiaoman realized that something need not look impressive to be worth celebrating.' },
+      { zh: '小满把满是星星的纸条折成信封，里面留了一张空白纸。她递给新伙伴：「今天的小胜利，轮到你来发现啦。」', en: 'Xiaoman folded her star-filled note into an envelope with a blank slip inside. She handed it to a new teammate: “Your turn to find today’s small victory.”' },
+    ],
+  },
+  holly: {
+    intro: { zh: '冬青有蓬松的深色卷发，穿雾蓝工作衫。她记得住许多人的名字，也认真记得自己的休息时间。', en: 'Holly has soft dark curls and a mist-blue work shirt. She remembers people’s names, and remembers to take her own breaks too.' },
+    chapters: [
+      { zh: '冬青把一位客人的名字念错了，重新问了一遍，又轻轻重复。收工时她说，记住一个人，要从愿意听清楚开始。', en: 'Holly mispronounced a guest’s name, asked again, and repeated it gently. Remembering someone, she said afterward, starts with listening carefully.' },
+      { zh: '冬青在休息时收到伙伴递来的水杯，才发现自己的习惯也被人记住了。她把杯子捧了好一会儿，说今天的水特别甜。', en: 'A teammate brought Holly water during her break. Realizing someone had remembered her habits too, she held the cup and said today’s water tasted especially sweet.' },
+      { zh: '冬青不用再靠便签记大家的名字了。她把空下来的小夹板挂在休息室，写上「今天也有人记得你」。', en: 'Holly no longer needed notes for everyone’s names. She hung the spare clipboard in the break room and wrote, “Someone remembered you today, too.”' },
+    ],
+  },
+  chestnut: {
+    intro: { zh: '栗子的暖棕肤色和栗色短发很配。他喜欢烤箱开门时的香气，也会给失败的面团起外号。', en: 'Chestnut has warm brown skin and chestnut hair. He loves the scent of an opening oven and gives nicknames to dough that goes awry.' },
+    chapters: [
+      { zh: '一块练习面团塌了，栗子给它起名「打盹的枕头」。他把原因记清楚，再认真揉起下一块。枕头没有成为借口。', en: 'A practice dough collapsed, so Chestnut named it “Napping Pillow.” He wrote down what went wrong, then kneaded another. The nickname was not an excuse.' },
+      { zh: '栗子终于做出均匀的一盘，却先给伙伴看那张写满修改的纸。他说，香气是从这些小字里一点点长出来的。', en: 'After baking an even tray, Chestnut first showed his teammate a page of revisions. The lovely smell, he said, had grown a little at a time from those notes.' },
+      { zh: '新伙伴问起那张「打盹的枕头」画像，栗子笑着翻出旧笔记。这次他没有急着示范，而是腾出位置，让对方自己试一试。', en: 'A new teammate asked about the “Napping Pillow” sketch. Chestnut found his old notes, then made room at the bench for them to try it themselves.' },
+    ],
+  },
+  bailu: {
+    intro: { zh: '白露把灰蓝头发收进厨师帽，喜欢淡紫工作服。她会把季节写成一句很短的诗。', en: 'Bailu tucks slate-blue hair beneath her chef’s hat and favors lavender work clothes. She writes the seasons as tiny poems.' },
+    chapters: [
+      { zh: '白露今天写的是「清晨，面粉落了一场小雪」。伙伴提醒她先擦台面，她于是添上后半句：「然后我们把冬天收好。」', en: 'Bailu wrote, “At dawn, the flour fell like snow.” Reminded to wipe the bench, she added, “Then we tidied winter away.”' },
+      { zh: '忙了一天，白露只写下「大家都吃上了热的」。她原本想换个更漂亮的句子，读了两遍，决定就这样留下。', en: 'After a busy day, Bailu wrote only, “Everyone had something warm.” She considered a prettier sentence, read it twice, and kept it as it was.' },
+      { zh: '白露把短诗订成小册，最后一页没有字，只有大家签的名字。她说，这一页读起来，最像咖啡馆的声音。', en: 'Bailu bound her poems into a booklet. Its final page held only everyone’s signatures. Read aloud, she said, that page sounded most like the café.' },
+    ],
+  },
   lin: {
     intro: { zh: '林芽把咖啡香当作一天的天气预报，也喜欢给每次小进步画一片叶子。', en: 'Lin reads the day’s forecast in the scent of coffee and draws a little leaf for every small step forward.' },
     chapters: [
