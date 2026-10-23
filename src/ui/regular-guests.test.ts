@@ -9,9 +9,20 @@ import { messagesFor, setLocale, t } from '../i18n';
 import { closeModal, isModalOpen, showModal } from './modal';
 import { showRegularGuests, updateRegularGuestsButton } from './regular-guests';
 
+// One stand canvas per cast appearance, as the scene's character() keeps; tests may swap one
+// for generated art. Each prints as its appearance id, so portraits read `portrait-<id>`.
+const stands = vi.hoisted(() => new Map<number, HTMLCanvasElement>());
 vi.mock('../render/sprites', () => ({
-  character: (_look: unknown, _role: unknown, appearanceId: number) => ({ stand: appearanceId }),
-  toDataURL: (appearanceId: number) => `data:image/png;base64,portrait-${appearanceId}`,
+  character: (_look: unknown, _role: unknown, appearanceId: number) => {
+    let stand = stands.get(appearanceId);
+    if (!stand) {
+      stand = document.createElement('canvas'); stand.width = 18; stand.height = 28;
+      stand.toString = () => String(appearanceId);
+      stands.set(appearanceId, stand);
+    }
+    return { stand };
+  },
+  toDataURL: (canvas: HTMLCanvasElement) => `data:image/png;base64,portrait-${canvas}`,
 }));
 
 const styles = readFileSync('src/style.css', 'utf8');
@@ -246,30 +257,26 @@ describe('bilingual and long journal construction', () => {
 
 
 describe('generated regular portrait identity', () => {
+  // character() resolves generated art itself, so the journal shows whatever stand the scene uses.
   it('replaces an already cached legacy portrait with the same generated stand used in the scene', async () => {
-    const { setGeneratedCustomerAdapter } = await import('../render/generated-main-art');
     const { registerFineSpriteArt } = await import('../render/fine-sprite-art');
     const state = createInitialState(0); unlock(state, 1);
-    setGeneratedCustomerAdapter(null);
     showRegularGuests(state, () => {});
-    expect(select<HTMLImageElement>('.regular-portrait').src).toBe('data:image/png;base64,portrait-0');
+    expect(select<HTMLImageElement>('.regular-portrait').src).toBe(`data:image/png;base64,portrait-${guest.appearanceId}`);
     closeModal();
+    const legacy = stands.get(guest.appearanceId)!;
     const logical = document.createElement('canvas'); logical.width = 18; logical.height = 28;
     const backing = document.createElement('canvas'); backing.width = 72; backing.height = 112;
     backing.toString = () => 'generated-mina';
     registerFineSpriteArt(logical, backing, 4);
-    setGeneratedCustomerAdapter({ ready: true, scales: {walking: 1, seated: 1},
-      readyAppearanceIds: [0], sourceFrameIds: [],
-      scalesFor: appearanceId => appearanceId === 0 ? { walking: 1, seated: 1 } : null,
-      resolve: (identity, fallback) => identity.appearanceId === 0 ? { frames: {...fallback, stand: logical}, generated: true } : {frames: fallback, generated: false},
-      drawOffset: () => ({x: 0, y: 0}), contactPoints: () => null });
+    stands.set(guest.appearanceId, logical);
     try {
       showRegularGuests(state, () => {});
       expect(select<HTMLImageElement>('.regular-portrait').src).toBe('data:image/png;base64,portrait-generated-mina');
       closeModal();
-      setGeneratedCustomerAdapter(null);
+      stands.set(guest.appearanceId, legacy);
       showRegularGuests(state, () => {});
-      expect(select<HTMLImageElement>('.regular-portrait').src).toBe('data:image/png;base64,portrait-0');
-    } finally { closeModal(); setGeneratedCustomerAdapter(null); }
+      expect(select<HTMLImageElement>('.regular-portrait').src).toBe(`data:image/png;base64,portrait-${guest.appearanceId}`);
+    } finally { closeModal(); stands.set(guest.appearanceId, legacy); }
   });
 });
