@@ -1,4 +1,3 @@
-import { readFileSync } from 'node:fs';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { CUSTOMER_CAST } from '../../game/customer-cast';
 import { MIN_SCENE_H, seatApproach, seatSpot, setSceneHeight } from '../../game/layout';
@@ -6,14 +5,23 @@ import type { LivingCatActor } from '../../game/living-cats';
 import type { Customer } from '../../game/sim';
 import { createInitialState } from '../../game/state';
 import { fineSpriteArt } from '../fine-sprite-art';
-import { createGeneratedCustomerArt, type GeneratedCustomerManifest } from '../generated-customer-art';
-import manifestJson from '../generated-customer-manifest.json';
+import { WORLD_ART_DENSITY, worldSpriteArt } from '../world-art-grid';
 import { createGeneratedCatArt, type GeneratedCatManifest } from '../generated-cat-art';
 import catManifestJson from '../generated-cat-manifest.json';
 import { residentCatFlipX } from '../living-cat-pose';
 import { projectMainWorld } from '../main-pixel-presentation';
-import { catFrames } from '../sprites';
+import { catFrames, character, CHAR_H } from '../sprites';
 
+// The scene reads a seated guest's reaching hand from the cast art's contact points, which only
+// exist once that art has loaded. Tests register a hand on the cast frames the scene draws.
+const hands = vi.hoisted(() => new WeakMap<object, { x: number; y: number }>());
+vi.mock('../reference-character-art', async importOriginal => {
+  const actual = await importOriginal<typeof import('../reference-character-art')>();
+  return { ...actual, referenceCharacterContacts: (frame: HTMLCanvasElement) => {
+    const petContact = hands.get(frame);
+    return petContact ? { petContact } as unknown as ReturnType<typeof actual.referenceCharacterContacts> : actual.referenceCharacterContacts(frame);
+  } };
+});
 vi.mock('phaser', () => ({ default: { Scene: class {} } }));
 import { CafeScene } from './cafe-scene';
 
@@ -42,6 +50,13 @@ type HarnessScene = {
   seatedCustomerPose(index: number, side: 0 | 1, customer: Customer, time: number, pair?: LivingCatActor): Pose;
 };
 
+/** The petting poses' reaching hand: low at the front of the seated figure, below the upper-body crop. */
+function registerHands(customer: Customer): void {
+  const frames = character(customer.look, 'customer', customer.appearanceId);
+  for (const sprite of frames.sitPetRight) hands.set(sprite, { x: sprite.width - 3, y: CHAR_H - 5 });
+  for (const sprite of frames.sitPetLeft) hands.set(sprite, { x: 3, y: CHAR_H - 5 });
+}
+
 function harness(side: 0 | 1, elapsed = 0, quiet = false, paused = false, generatedCat = false) {
   const state = createInitialState(0);
   state.pets = [{ id: 'siamese', careSeconds: 100, autoRefill: true }];
@@ -50,14 +65,7 @@ function harness(side: 0 | 1, elapsed = 0, quiet = false, paused = false, genera
   const cat: LivingCatActor = { id: 'siamese', ...seatApproach(0, side), area: 'main', personality: 'affectionate',
     behavior: 'watch', remaining: 4, elapsed: 2, facing: side === 0 ? 1 : -1, stride: 40,
     affection: 2, route: [], targetKind: 'people', resting: false, interaction: { guestId: 1, phase: 'response', elapsed } };
-  const manifest = manifestJson as GeneratedCustomerManifest;
-  const sources = Object.fromEntries(manifest.frames.map(meta => {
-    const id = `mina-${meta.direction}-${meta.state}`;
-    const bytes = readFileSync(new URL(`../../../assets/generated/original-main-actors-v1/customer-0-v1/${id}.png`, import.meta.url));
-    return [id, { width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20) } as HTMLCanvasElement];
-  }));
-  const adapter = createGeneratedCustomerArt(manifest, sources);
-  expect(adapter.ready).toBe(true);
+  registerHands(customer);
   const catManifest = catManifestJson as GeneratedCatManifest;
   const catSources = Object.fromEntries(catManifest.frames.map(meta => [`siamese-${meta.state}`,
     { width: meta.size[0], height: meta.size[1] } as HTMLCanvasElement]));
@@ -67,26 +75,29 @@ function harness(side: 0 | 1, elapsed = 0, quiet = false, paused = false, genera
   const images: ImageStub[] = [];
   const shadow = vi.fn();
   const scene = Object.assign(Object.create(CafeScene.prototype), {
-    generatedCustomers: adapter, generatedCats: catAdapter, generatedPetOffsets: new WeakMap(),
+    generatedCats: catAdapter, generatedPetOffsets: new WeakMap(),
     textures: { exists: (key: string) => uploaded.has(key), addCanvas: (key: string, source: HTMLCanvasElement) => uploaded.set(key, source) },
     images: { next: () => { const image = new ImageStub(); images.push(image); return image; } },
     sim: { customers: [customer], seats: side === 0 ? [1, null] : [null, 1] },
     view: { clearPresentedResidentCatPoints: vi.fn(), setPresentedResidentCatPoint: vi.fn(), livingCats: { actors: new Map([['siamese', cat]]) }, paused, overview: false, selectedCat: null, catSelectionSeconds: 0 },
     motionPreference: { matches: quiet }, getState: () => state, shadow, rect: vi.fn(),
   }) as HarnessScene;
-  return { scene, state, customer, cat, adapter, catAdapter, images, uploaded, shadow };
+  const handOf = (sprite: HTMLCanvasElement) => hands.get(sprite);
+  return { scene, state, customer, cat, handOf, catAdapter, images, uploaded, shadow };
 }
 
 beforeEach(() => { setSceneHeight(MIN_SCENE_H); vi.stubGlobal('document', { createElement: () => new CanvasStub() }); });
 afterEach(() => { vi.unstubAllGlobals(); setSceneHeight(MIN_SCENE_H); });
 
-describe('generated Mina hand and resident cat attachment', () => {
+describe('seated guest hand and resident cat attachment', () => {
   for (const side of [0, 1] as const) for (const elapsed of [0, 0.65]) for (const mode of ['animated', 'reduced', 'paused'] as const) {
     it(`aligns seat ${side}, elapsed ${elapsed}, ${mode}, without moving simulation objects`, () => {
       const h = harness(side, elapsed, mode === 'reduced', mode === 'paused');
       const before = JSON.stringify({ state: h.state, customer: h.customer, cat: h.cat });
       const pose = h.scene.seatedCustomerPose(0, side, h.customer, 0);
-      const contact = h.adapter.contactPoints(pose.sprite)!.petContact!;
+      // Paired in the response, the guest sits in a petting pose that has a hand.
+      const contact = h.handOf(pose.sprite)!;
+      expect(contact).toBeDefined();
       const hand = { x: Math.round(pose.x * 2) / 2 + contact.x, y: Math.round(pose.y * 2) / 2 + contact.y };
       h.scene.drawResidents(h.state);
       h.scene.drawTable(0, 0, 1174.1);
@@ -106,18 +117,20 @@ describe('generated Mina hand and resident cat attachment', () => {
       expect(h.shadow.mock.calls[0].slice(0, 3)).toEqual([painted.x, painted.y, 10]);
       const tag = h.images.find(image => image.key.startsWith('resident-tag-'))!;
       expect(tag.x).toBe(Math.round((painted.x + 7) * 2) / 2);
-      const character = h.images.filter(image => h.uploaded.get(image.key) === fineSpriteArt(pose.sprite).canvas);
-      expect(character).toHaveLength(3); // whole body, original upper-body crop, wrist-only patch
-      const [whole, upper, wrist] = character;
-      expect(upper.crop).toEqual([0, 0, 88, 80]);
+      const art = fineSpriteArt(pose.sprite), density = art.density;
+      const sitter = h.images.filter(image => h.uploaded.get(image.key) === art.canvas);
+      expect(sitter).toHaveLength(3); // whole body, original upper-body crop, wrist-only patch
+      const [whole, upper, wrist] = sitter;
+      expect(upper.crop).toEqual([0, 0, pose.sprite.width * density, (CHAR_H - 8) * density]);
       expect(whole.depth).toBeLessThan(catImage.depth);
       expect(wrist.depth).toBeGreaterThan(catImage.depth);
       expect([wrist.x, wrist.y]).toEqual([whole.x, whole.y]);
-      expect(wrist.scaleX).toBe(0.25);
-      const [x, y, width, height] = wrist.crop!.map(n => n / 4);
+      expect(wrist.scaleX).toBe(1 / density);
+      const [x, y, width, height] = wrist.crop!.map(n => n / density);
       expect(x).toBeLessThanOrEqual(contact.x); expect(x + width).toBeGreaterThan(contact.x);
       expect(y).toBeLessThanOrEqual(contact.y); expect(y + height).toBeGreaterThan(contact.y);
-      expect(y).toBeGreaterThanOrEqual(20);
+      // Only the hand is redrawn over the cat, never the torso above the upper-body crop.
+      expect(y).toBeGreaterThanOrEqual(CHAR_H - 8);
       expect(width).toBeLessThanOrEqual(6); expect(height).toBeLessThanOrEqual(6);
       expect(JSON.stringify({ state: h.state, customer: h.customer, cat: h.cat })).toBe(before);
     });
@@ -152,35 +165,43 @@ describe('generated Mina hand and resident cat attachment', () => {
     expect(h.scene.residentPaintPoint(h.cat, h.state)).toEqual(projectMainWorld(h.cat));
   });
 
-  it.each(['other-cast', 'different-look', 'unpaired', 'not-seated', 'inactive-pet', 'missing-adapter'] as const)('keeps %s on the exact existing cat anchor', variant => {
+  it.each(['no-hand-contact', 'unpaired', 'not-seated', 'inactive-pet'] as const)('keeps %s on the exact existing cat anchor', variant => {
     const h = harness(0);
-    if (variant === 'other-cast') { h.customer.appearanceId = 1; h.customer.look = { ...CUSTOMER_CAST[1].look }; }
-    if (variant === 'different-look') h.customer.look = { ...h.customer.look, hair: 2 };
+    if (variant === 'no-hand-contact') {
+      // Another guest whose art has no reaching hand (or has not loaded) leaves the cat where it stands.
+      h.customer.appearanceId = 1; h.customer.look = { ...CUSTOMER_CAST[1].look };
+      const frames = character(h.customer.look, 'customer', 1);
+      expect([...frames.sitPetRight, ...frames.sitPetLeft].some(sprite => h.handOf(sprite))).toBe(false);
+    }
     if (variant === 'unpaired') delete h.cat.interaction;
     if (variant === 'not-seated') h.customer.phase = 'exiting';
     if (variant === 'inactive-pet') h.state.pets[0].careSeconds = 0;
-    if (variant === 'missing-adapter') Object.assign(h.scene, { generatedCustomers: null });
     expect(h.scene.residentPaintPoint(h.cat, h.state)).toEqual(projectMainWorld(h.cat));
     h.scene.drawResidents(h.state);
     h.scene.drawTable(0, 0, 1174.1);
-    expect(h.images.some(image => image.crop && image.crop[1] >= 80)).toBe(false);
+    // No wrist patch: nothing below the upper-body crop is drawn over the cat.
+    expect(h.images.some(image => image.crop && image.crop[1] / (1 / image.scaleY) >= CHAR_H - 8)).toBe(false);
   });
 });
 
 
-describe('generated Siamese and Mina metadata contact', () => {
+describe('generated Siamese crown on the seated guest hand', () => {
   for (const side of [0, 1] as const) for (const elapsed of [0, 0.65]) for (const quiet of [false, true]) {
     it(`aligns generated cat crown seat${side}, elapsed${elapsed}, reduced${quiet}`, () => {
       const h = harness(side, elapsed, quiet, false, true);
       const before = JSON.stringify({ state: h.state, customer: h.customer, cat: h.cat });
       const pose = h.scene.seatedCustomerPose(0, side, h.customer, 0);
-      const hand = h.adapter.contactPoints(pose.sprite)!.petContact!;
+      const hand = h.handOf(pose.sprite)!;
+      expect(hand).toBeDefined();
       const raised = h.catAdapter!.resolve('siamese', catFrames('siamese')).frames.lookUp;
       h.scene.drawResidents(h.state);
-      const image = h.images.find(image => h.uploaded.get(image.key) === fineSpriteArt(raised).canvas)!;
+      // The scene resamples every sprite onto the world art grid (12cfd34), whatever its source density.
+      const art = worldSpriteArt(raised);
+      const image = h.images.find(image => h.uploaded.get(image.key) === art.canvas)!;
       expect(image).toBeDefined();
       expect(image.flipX).toBe(residentCatFlipX(false, h.cat.facing));
-      expect(image.scaleX).toBe(0.25);
+      expect(fineSpriteArt(raised).density).toBe(4);
+      expect(image.scaleX).toBe(1 / WORLD_ART_DENSITY);
       const head = h.catAdapter!.contactPoints(raised, image.flipX)!.headContact;
       expect(Math.abs(image.x + head.x - (Math.round(pose.x * 2) / 2 + hand.x))).toBeLessThanOrEqual(0.25);
       expect(Math.abs(image.y + head.y - (Math.round(pose.y * 2) / 2 + hand.y))).toBeLessThanOrEqual(0.25);
