@@ -2,7 +2,7 @@ import { signatureDefinition } from './signature-drinks';
 import { isGuestKind } from './customer-demand';
 import { regularGuestDefinition } from './regular-guests';
 import { MAX_COOK_BATCH, MAX_PASS_SLOTS, MENU } from './data';
-import { MAX_SCENE_H, MIN_SCENE_H, TOTAL_TABLE_SPOTS } from './layout';
+import { MAX_SCENE_H, MAX_SERVERS, MIN_SCENE_H, TOTAL_TABLE_SPOTS } from './layout';
 import { CUSTOMER_CAST, validCustomerCastSnapshot, type CustomerCastSnapshot } from './customer-cast';
 import { STATION_SECONDS } from './kitchen';
 import type { Barista, Cook, Customer, Plate, Server } from './sim';
@@ -30,7 +30,7 @@ const walker = (x: Obj) => point(x) && point({ x: x.tx, y: x.ty }) && positive(x
   (x.pathBlocked === undefined || typeof x.pathBlocked === 'boolean') &&
   (x.journey === undefined || list(x.journey, 64, point));
 const nullableId = (x: unknown) => x === null || integer(x);
-const plate = (x: unknown) => obj(x) && integer(x.customerId) && list(x.items, 2, item) && integer(x.barista) && x.barista < 4 && (x.server === null || integer(x.server) && x.server < 3) && finite(x.waited);
+const plate = (x: unknown) => obj(x) && integer(x.customerId) && list(x.items, 2, item) && integer(x.barista) && x.barista < 4 && (x.server === null || integer(x.server) && x.server < MAX_SERVERS) && finite(x.waited);
 const customer = (x: unknown) => obj(x) && walker(x) && look(x.look) && integer(x.id) && item(x.order) && (x.extra === null || item(x.extra)) &&
   (x.guestKind === undefined || isGuestKind(x.guestKind)) &&
   (x.appearanceId === undefined || integer(x.appearanceId) && x.appearanceId < CUSTOMER_CAST.length) &&
@@ -52,7 +52,7 @@ const server = (x: unknown) => obj(x) && walker(x) && look(x.look) && ['idle','t
 export function validSnapshot(value: unknown, state: GameState): value is SimSnapshot {
   if (!obj(value) || value.version !== 1 && value.version !== 2 || value.version === 2 && value.kitchenLevel !== (state.kitchen ? state.upgrades.cook : 0) || value.day !== state.day || value.phase !== state.phase || value.served !== state.today.served ||
     !finite(value.height) || value.height < (value.version === 1 ? 192 : MIN_SCENE_H) || value.height > MAX_SCENE_H || !finite(value.spawnTimer) || !integer(value.nextId) || !positive(value.boostCooldown) || value.boostCooldown > 1 ||
-    !list(value.customers, 150, customer) || !list(value.baristas, 4, barista) || !list(value.cooks, 3, cook) || !list(value.servers, 3, server) ||
+    !list(value.customers, 150, customer) || !list(value.baristas, 4, barista) || !list(value.cooks, 3, cook) || !list(value.servers, MAX_SERVERS, server) ||
     !list(value.queue, 6, integer) || !list(value.seats, TOTAL_TABLE_SPOTS * 2, nullableId) || !list(value.pass, MAX_PASS_SLOTS, plate) || !list(value.rack, 3, item)) return false;
   if (value.version === 2 && (!validCustomerCastSnapshot(value.customerCast) || !integer(value.castRandomState) || value.castRandomState > 0xffffffff)) return false;
   const s = value as unknown as SimSnapshot;

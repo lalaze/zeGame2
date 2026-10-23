@@ -81,6 +81,22 @@ describe('table service', () => {
     expect(large.snapshot).toBe(true);
   });
 
+  it('saves and restores a service with every server hired', () => {
+    const s = grown();
+    s.upgrades.server = upgradeMax(s, 'server');
+    openShop(s);
+    const sim = new Sim(seeded(7));
+    for (let n = 0; n < 600; n++) sim.update(s, 0.05);
+    expect(sim.servers).toHaveLength(MAX_SERVERS);
+    expect(sim.customers.length).toBeGreaterThan(0);
+    const snapshot = JSON.parse(JSON.stringify(sim.snapshot(s)));
+    expect(validSnapshot(snapshot, s)).toBe(true);
+    const restored = new Sim(seeded(7));
+    expect(restored.restore(snapshot, s)).toBe(true);
+    expect(restored.servers).toHaveLength(MAX_SERVERS);
+    expect(restored.customers.map((c) => c.id)).toEqual(sim.customers.map((c) => c.id));
+  });
+
   it('forecasts what the floor staff can carry, not just what the counter can make', () => {
     const s = grown();
     // A small café never outpaces its servers.
