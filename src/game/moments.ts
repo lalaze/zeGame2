@@ -181,7 +181,7 @@ export class MomentDirector {
     const offers: Partial<Record<Pickable, () => Moment | null>> = {};
     if (stage.area === 'main') {
       offers.recommend = () => {
-        const waiting = sim.customers.filter((c) => c.phase === 'queue' && !c.regularGuestId && unasked(c) && c.patience >= MIN_PATIENCE);
+        const waiting = sim.customers.filter((c) => c.phase === 'queue' && !c.regularGuestId && !c.trialSale && unasked(c) && c.patience >= MIN_PATIENCE);
         while (waiting.length) {
           const c = waiting.splice(Math.floor(this.random() * waiting.length), 1)[0];
           const options = recommendOptions(state, sim, c, this.random);
@@ -222,7 +222,7 @@ export class MomentDirector {
   recommend(sim: Sim, item: ItemId): RecommendVerdict | null {
     const m = this.active;
     const c = m?.kind === 'recommend' && m.options.includes(item) ? sim.customers.find((x) => x.id === m.customerId) : undefined;
-    if (!c || c.phase !== 'queue') { this.end(); return null; }
+    if (!c || c.phase !== 'queue' || c.trialSale) { this.end(); return null; }
     const verdict = recommendVerdict(item, guestTaste(c));
     c.order = item;
     c.momentTip = RECOMMEND_TIP[verdict];

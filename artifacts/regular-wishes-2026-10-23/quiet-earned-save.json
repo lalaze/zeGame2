@@ -1,0 +1,806 @@
+{
+  "bakePlan": {},
+  "cafeStyle": {
+    "focus": null,
+    "handoffs": {
+      "catServed": 0,
+      "fastServed": 43,
+      "tableServed": 37,
+      "teaPairs": 0
+    }
+  },
+  "coins": 1276,
+  "createdAt": 1780000000000,
+  "day": 4,
+  "dayTime": 0,
+  "decor": {
+    "equipped": {
+      "ceiling": "ceiling_none",
+      "centerpiece": "centerpiece_flowers",
+      "counter": "counter_oak",
+      "curtain": "curtain_classic",
+      "floor": "floor_checker",
+      "neon": "neon_none",
+      "rug": "rug_none",
+      "sill": "sill_none",
+      "tablecloth": "tablecloth_classic",
+      "wallpaper": "wall_cream"
+    },
+    "owned": [
+      "tablecloth_classic",
+      "tablecloth_mint",
+      "tablecloth_rose",
+      "centerpiece_flowers",
+      "centerpiece_none",
+      "curtain_classic",
+      "curtain_sage",
+      "curtain_rose",
+      "wall_cream",
+      "wall_mint",
+      "wall_rose",
+      "floor_checker",
+      "floor_planks",
+      "floor_mint",
+      "counter_oak",
+      "counter_sage",
+      "counter_blush",
+      "sill_none",
+      "ceiling_none",
+      "rug_none",
+      "neon_none"
+    ],
+    "placed": [
+      {
+        "col": 11,
+        "id": "clock",
+        "row": 0
+      },
+      {
+        "col": 27,
+        "id": "mugrack",
+        "row": 3
+      }
+    ],
+    "stored": {}
+  },
+  "goal": 0,
+  "inProduction": {},
+  "items": {
+    "affogato": 0,
+    "americano": 0,
+    "bagel": 0,
+    "baguette": 0,
+    "blacktea": 0,
+    "brioche": 0,
+    "brownie": 0,
+    "cake": 0,
+    "cappuccino": 0,
+    "chai": 0,
+    "cheesebun": 0,
+    "cheesecake": 0,
+    "chocobread": 0,
+    "ciabatta": 0,
+    "cinnamon": 0,
+    "coldbrew": 0,
+    "cookie": 0,
+    "cortado": 0,
+    "creamcoffee": 0,
+    "creampuff": 0,
+    "croissant": 0,
+    "dirty": 0,
+    "donut": 0,
+    "eggtart": 0,
+    "espresso": 1,
+    "flatwhite": 0,
+    "focaccia": 0,
+    "frappe": 0,
+    "fruitbrioche": 0,
+    "fruittea": 0,
+    "garlicbread": 0,
+    "hojicha": 0,
+    "hotchoc": 0,
+    "latte": 1,
+    "lemontea": 0,
+    "macaron": 0,
+    "macchiato": 0,
+    "matcha": 0,
+    "matchafloat": 0,
+    "melonpan": 0,
+    "milktea": 0,
+    "mocha": 0,
+    "muffin": 0,
+    "painchoc": 0,
+    "pourover": 0,
+    "pretzel": 0,
+    "raisinbread": 0,
+    "roll": 0,
+    "rye": 0,
+    "scone": 0,
+    "shokupan": 0,
+    "smoothie": 0,
+    "sourdough": 0,
+    "swissroll": 0,
+    "vienna": 0
+  },
+  "kitchen": false,
+  "milestones": {
+    "claimed": [],
+    "done": [],
+    "reachedOn": {},
+    "records": {
+      "bestDay": 43,
+      "bestSmoothDay": 43,
+      "momentsAnswered": 0,
+      "weatherWins": []
+    }
+  },
+  "onMenu": [
+    "espresso"
+  ],
+  "pantry": {
+    "beans": 920,
+    "butter": 0,
+    "cocoa": 0,
+    "cream": 0,
+    "eggs": 0,
+    "flour": 0,
+    "fruit": 0,
+    "matcha": 0,
+    "milk": 1000,
+    "spice": 0,
+    "sugar": 0,
+    "tea": 0
+  },
+  "partners": {
+    "active": {
+      "barista": [],
+      "cook": [],
+      "server": [
+        "yue"
+      ]
+    },
+    "roster": {
+      "yue": {
+        "lastWorkedDay": 3,
+        "read": [],
+        "specialty": null,
+        "todayDay": 3,
+        "todayJobs": 11,
+        "todayUnlocks": 1,
+        "unlocked": 2,
+        "workedDays": 2,
+        "xp": 37
+      }
+    }
+  },
+  "pets": [],
+  "phase": "prep",
+  "profile": {
+    "cafeName": "米娜心愿测试",
+    "look": {
+      "hair": 0,
+      "hairStyle": 0,
+      "pants": 0,
+      "shirt": 0,
+      "skin": 0
+    },
+    "ownerName": "测试店主"
+  },
+  "promotion": null,
+  "regions": [],
+  "regularGuests": {
+    "guests": {
+      "iris": {
+        "firstMetDay": 3,
+        "lastUnlockDay": 3,
+        "pendingDay": 3,
+        "pendingVisitIds": [],
+        "readChapters": [],
+        "served": 1,
+        "servedVisitIds": [
+          5
+        ],
+        "unlockedChapters": [
+          0
+        ]
+      },
+      "mina": {
+        "firstMetDay": 1,
+        "lastUnlockDay": 3,
+        "pendingDay": 3,
+        "pendingVisitIds": [],
+        "readChapters": [],
+        "served": 3,
+        "servedVisitIds": [
+          1,
+          2,
+          4
+        ],
+        "unlockedChapters": [
+          0,
+          1
+        ]
+      },
+      "nico": {
+        "firstMetDay": 3,
+        "lastUnlockDay": 3,
+        "pendingDay": 3,
+        "pendingVisitIds": [],
+        "readChapters": [],
+        "served": 2,
+        "servedVisitIds": [
+          7,
+          8
+        ],
+        "unlockedChapters": [
+          0
+        ]
+      },
+      "theo": {
+        "firstMetDay": 2,
+        "lastUnlockDay": 3,
+        "pendingDay": 3,
+        "pendingVisitIds": [],
+        "readChapters": [],
+        "served": 2,
+        "servedVisitIds": [
+          3,
+          6
+        ],
+        "unlockedChapters": [
+          0,
+          1
+        ]
+      }
+    },
+    "nextVisitId": 9
+  },
+  "regularWishes": {
+    "mina": {
+      "acceptedDay": 2,
+      "choice": "quiet",
+      "completedDay": 3,
+      "displayed": true,
+      "paused": false,
+      "rehearsedDay": 2
+    }
+  },
+  "reputation": {
+    "recent": [
+      {
+        "day": 2,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 2,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 2,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 2,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 2,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 2,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 2,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      },
+      {
+        "day": 3,
+        "items": [
+          "espresso"
+        ],
+        "reason": "skilledTaste",
+        "stars": 4.5,
+        "taste": 4.5
+      }
+    ]
+  },
+  "served": 80,
+  "shelf": {},
+  "signatureDrinks": {
+    "recipes": [],
+    "served": {},
+    "tested": []
+  },
+  "speed": 4,
+  "taste": {
+    "served": {
+      "espresso": 80
+    },
+    "signature": []
+  },
+  "today": {
+    "baked": {},
+    "doorLost": 0,
+    "extraLost": 0,
+    "guests": {
+      "commuter": {
+        "arrived": 0,
+        "cancelled": 0,
+        "dismissed": 0,
+        "paired": 0,
+        "revenue": 0,
+        "served": 0,
+        "stockLost": 0,
+        "waitLost": 0
+      },
+      "leisure": {
+        "arrived": 0,
+        "cancelled": 0,
+        "dismissed": 0,
+        "paired": 0,
+        "revenue": 0,
+        "served": 0,
+        "stockLost": 0,
+        "waitLost": 0
+      },
+      "teaTime": {
+        "arrived": 0,
+        "cancelled": 0,
+        "dismissed": 0,
+        "paired": 0,
+        "revenue": 0,
+        "served": 0,
+        "stockLost": 0,
+        "waitLost": 0
+      }
+    },
+    "ingredientCost": 0,
+    "missed": 0,
+    "petCost": 0,
+    "promotionCost": 0,
+    "queueLost": 0,
+    "revenue": 0,
+    "reviews": {
+      "reasons": {},
+      "stars": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "totalScore": 0
+    },
+    "sales": {},
+    "served": 0,
+    "shortages": {},
+    "soldOut": 0,
+    "tableLost": 0
+  },
+  "totalEarned": 276,
+  "upgrades": {
+    "barista": 0,
+    "cook": 0,
+    "machine": 0,
+    "marketing": 0,
+    "pass": 0,
+    "server": 0,
+    "tables": 0
+  },
+  "version": 20
+}

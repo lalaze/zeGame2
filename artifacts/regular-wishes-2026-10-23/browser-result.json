@@ -1,0 +1,21 @@
+{
+  "choice": {
+    "acceptedDay": 2,
+    "choice": "milky",
+    "completedDay": 3,
+    "displayed": true,
+    "paused": false,
+    "rehearsedDay": 2
+  },
+  "containsMilkDedication": true,
+  "day": 4,
+  "errorsCheckedSeparately": true,
+  "fixture": true,
+  "mapVisible": true,
+  "modalOverflow": false,
+  "pageOverflow": false,
+  "viewport": {
+    "height": 844,
+    "width": 390
+  }
+}

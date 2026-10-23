@@ -1,4 +1,5 @@
 import { partnerContributions, type PartnerContribution } from './partners';
+import { beginTrialSales, finishTrialSales, trialSaleItem, TRIAL_SALE_LIMIT, type TrialSaleReport } from './trial-sales';
 import { reputationScore, reputationTraffic } from './reputation';
 import type { ItemId } from './data';
 import { bakeMorning, dayDemand, isBakery, menuItems, projectMorningBake, recipe, servingsLeft, servingCost, soldOutItems, suggestedBake } from './economy';
@@ -6,6 +7,7 @@ import { emptyDay, type DayStats, type GameState } from './state';
 import { checkMilestones, milestonesReachedOn, recordDay } from './milestones';
 
 export interface DayReport extends DayStats {
+  trialSale?: TrialSaleReport;
   partners?: PartnerContribution[];
   rating: number;
   ratingCount: number;
@@ -50,6 +52,8 @@ export function checkOpen(state: GameState): OpenCheck {
       for (const [ing, n] of recipe(m.id)) projected.pantry[ing] -= n * Math.min(ready, needed);
     }
   }
+  const trial = trialSaleItem(state);
+  if (trial && servingsLeft(projected, trial) < TRIAL_SALE_LIMIT) low.push(trial);
   return low.length > 0 ? { ok: false, reason: 'lowStock', items: low } : { ok: true };
 }
 
@@ -58,6 +62,7 @@ export function openShop(state: GameState): number {
   if (state.phase !== 'prep') return 0;
   state.dayTime = 0;
   state.today = emptyDay();
+  beginTrialSales(state);
   state.phase = 'open';
   return bakeMorning(state);
 }
@@ -99,6 +104,7 @@ export function finishDay(state: GameState): DayReport {
     shelfSoldOut,
     stale,
     staleCost,
+    trialSale: finishTrialSales(state),
   };
   // Loaned care and sample stock end with this day; paid adoption is retained.
   state.pets = state.pets.filter(p => !p.fosterUntilDay || p.fosterUntilDay > state.day);

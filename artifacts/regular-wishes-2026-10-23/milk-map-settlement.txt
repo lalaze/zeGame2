@@ -1,0 +1,51 @@
+- document:
+  - banner:
+    - text: Mina milk wish QA
+    - button "Balance $1511. View amount details" [ref=e1]: $1511
+    - text: Closed · Day 4
+    - button "Expand management panel" [ref=e2]: Manage
+    - button "Settings" [ref=e3]: ···
+  - button "★ 4.25 / 5 · Review traffic +6% · View customer reviews" [ref=e4]: ★ 4.25 / 5
+  - button "Café partners, unread stories 2" [ref=e5]: Team
+  - button "Regular guests · 6 unread stories" [ref=e6]: Regulars
+  - main:
+    - navigation "Café areas" [ref=e7]:
+      - button "Preview Kitchen to the left" [ref=e8]
+      - button "Preview Reading room to the right" [ref=e9]
+    - button "Café style · Your own mix" [ref=e10]: Style
+    - button "Prepare menu · Day 4" [ref=e11]
+    - group "Room zoom":
+      - button "Zoom out" [ref=e12] [disabled]: −
+      - button "View the whole café; select a room to enter" [ref=e13] [disabled]: Overview
+      - button "Zoom in" [ref=e14] [disabled]: +
+  - dialog "Day 3 settlement":
+    - heading "Day 3 settlement" [ref=e15] [level=2]
+    - region "Day 3 settlement" [ref=e16]:
+      - term: Customers served
+      - definition: "50"
+      - term: Revenue
+      - definition: $274.00
+      - term: Costs used
+      - definition: −$82.00
+      - text: Profit +$192.00
+    - group: + After closing, Yue would like a chat
+    - heading "Mina’s hand-drawn map" [ref=e17] [level=3]
+    - paragraph: "On Mina’s finished map, the café is a cup under a little curl of cloud: “For the owner who prepared that milky drink for me. A story can begin with a cup, too.”"
+    - paragraph: The map hangs on the front of the main café counter. Visit the regulars journal to read its dedication or put it away.
+    - region "Next step" [ref=e18]:
+      - paragraph: Your café completed orders without recorded stock, waiting or waste losses.
+      - paragraph: "Goal complete: Open the shop and finish your first day. Claim $30 from the goal card before planning tomorrow."
+      - paragraph: "Next step: Claim the $30 goal reward first, then check tomorrow's ingredients."
+      - paragraph: Keep ingredient money aside before buying upgrades or adding new dishes.
+      - paragraph: "Tomorrow: Crisp morning. Popular: spiced, toasty. Less popular: iced drinks."
+      - paragraph: "Tomorrow’s guests: More commuters are passing by. Keep coffee moving and consider a batch of bread."
+    - region "Who your menu served" [ref=e19]:
+      - text: Who your menu served
+      - paragraph: "Most served: Commuters, 33 visits."
+      - group: + See visits, pairings and service losses
+    - heading "Today’s partner contributions" [ref=e20] [level=3]
+    - list:
+      - listitem: Yue · 14 jobs · 33 XP · 1 new story
+    - group: + Day details & cost breakdown
+    - button "Plan tomorrow" [ref=e21]
+    - button "View goal reward" [ref=e22]

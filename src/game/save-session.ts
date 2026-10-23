@@ -26,7 +26,11 @@ export class SaveSession {
     this.state = deserialize(this.expected, now);
     let runtime: unknown;
     try { runtime = JSON.parse(this.expected ?? '{}').runtime; } catch { /* invalid save uses defaults */ }
-    if (!this.sim.restore(runtime, this.state)) this.state.inProduction = {};
+    if (!this.sim.restore(runtime, this.state)) {
+      this.state.inProduction = {};
+      // Lost unprepared orders release their places; consumed cups keep their cost/quota.
+      if (this.state.trialSales.active) this.state.trialSales.active.reserved = 0;
+    }
   }
 
   save(state: GameState): SaveResult {

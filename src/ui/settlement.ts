@@ -1,4 +1,5 @@
 import { demandReportHtml, tomorrowDemandHtml } from './customer-demand';
+import { regularWishReportHtml } from './regular-wishes';
 import { partnerDefinition } from '../game/partners';
 import { getLocale } from '../i18n';
 import { partnerText } from './partners';
@@ -71,6 +72,8 @@ export function settlementHtml(report: DayReport, state: GameState): { body: str
       <div class="report-profit${report.profit < 0 ? ' loss' : ''}"><span>${t('report.profit')}</span><b class="big-money">${report.profit < 0 ? '−' : '+'}${formatAccountMoney(Math.abs(report.profit))}</b></div>
       ${report.day === 1 && report.ingredientCost > 0 ? `<p class="note report-starter">${t('report.starterNote')}</p>` : ''}
     </section>
+    ${regularWishReportHtml(state, report.day)}
+    ${report.trialSale ? '<div data-trial-report></div>' : ''}
     <section class="report-guidance" aria-label="${text('report.nextStep')}">
       <p class="report-reason">${primaryReasons.map(reasonText).join(' ')}</p>
       ${goal ? `<p class="report-goal">${text('report.goalReady', { goal: text(`goal.${goal.id}`), reward: formatMoney(goal.reward) })}</p>` : ''}

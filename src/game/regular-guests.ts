@@ -1,6 +1,7 @@
 import { signatureDefinition } from './signature-drinks';
 import { isDrink, MENU, type ItemId } from './data';
-import { readyServings } from './economy';
+import { menuItems, readyServings } from './economy';
+import { isMinaWishDrink, minaWish, recordMinaWishHandoff, type WishHandoff } from './regular-wishes';
 import { REGULAR_GUESTS } from './regular-guests-content';
 import type { GameState } from './state';
 
@@ -58,7 +59,7 @@ export function recordRegularGuestArrival(state: GameState, id: string): number 
 }
 
 /** Called only at the existing, successful payment/handoff point. No economic effects. */
-export function recordRegularGuestService(state: GameState, id: string, visitId: number): number | null {
+export function recordRegularGuestService(state: GameState, id: string, visitId: number, handoff?: WishHandoff): number | null {
   const progress = regularGuestProgress(state, id);
   const guest = regularGuestDefinition(id);
   if (!progress || !guest || state.day < guest.debutDay || state.phase === 'prep' ||
@@ -71,6 +72,7 @@ export function recordRegularGuestService(state: GameState, id: string, visitId:
     progress.servedVisitIds.shift();
   }
   progress.served = Math.min(MAX_COUNT, progress.served + 1);
+  if (id === 'mina' && handoff) recordMinaWishHandoff(state, handoff);
   const index = progress.unlockedChapters.length;
   const requirement = regularGuestChapterRequirement(id, index);
   if (!requirement || progress.lastUnlockDay === state.day || progress.served < requirement.served || state.day < requirement.day) return null;
@@ -105,6 +107,15 @@ export function regularGuestUnreadCount(state: GameState, id?: string): number {
 /** Replace only a drink slot; preserve whether the original order was a combo and consume no RNG. */
 export function regularGuestOrder(state: GameState, id: string | undefined, order: ItemId, extra: ItemId | null): { order: ItemId; extra: ItemId | null } {
   const guest = id ? regularGuestDefinition(id) : undefined;
+  const wish = id === 'mina' ? minaWish(state) : null;
+  if (wish?.choice === 'milky' && !wish.paused && wish.rehearsedDay === null) {
+    const milkDrink = menuItems(state).find(item => isMinaWishDrink(item.id) && readyServings(state, item.id) >= 1);
+    const original = MENU.find(item => item.id === order) ?? signatureDefinition(order);
+    if (milkDrink && original) {
+      if (isDrink(original.category)) return { order: milkDrink.id, extra };
+      if (extra !== null) return { order, extra: milkDrink.id };
+    }
+  }
   if (!guest || state.day < guest.debutDay || state.items[guest.preferredDrink] <= 0 ||
     !state.onMenu.includes(guest.preferredDrink) || readyServings(state, guest.preferredDrink) < 1) return { order, extra };
   const drink = MENU.find((item) => item.id === guest.preferredDrink);

@@ -41,6 +41,7 @@ function customerThought(c: Customer, weather: ConditionId): Thought | null {
   switch (c.phase) {
     case 'queue':
       if (c.patience < 12) return thought('thought.customer.urgent', 'queue:urgent', 100);
+      if (c.trialSale) return thought('trial.thought', 'queue:trial', 60);
       // Walking in, guests notice what kind of day it is.
       if (c.stride < 24) return weather === 'fair'
         ? thought('thought.customer.arrive', 'queue:arrive', 35)

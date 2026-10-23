@@ -13,6 +13,7 @@ export interface SignatureDrink { id: SignatureId; name: string; onMenu: boolean
 export interface SignatureState { recipes: SignatureDrink[]; tested: string[]; served: Record<string, number> }
 /** Structural interface avoids importing state/economy and their initialization cycle. */
 export interface SignatureGameState {
+  trialSales?: { selected: string | null };
   phase: 'prep' | 'open' | 'closing';
   items: Partial<Record<string, number>>;
   pantry: Record<IngredientId, number>;
@@ -162,6 +163,7 @@ export function replaceSignature(state: SignatureGameState, oldId: string, newId
   const title = cleanName(name);
   if (index < 0 || !def || !title || !signatures.tested.includes(newId) || !unlocked(state, def) || signatures.recipes.some((r, i) => i !== index && r.id === newId)) return false;
   signatures.recipes[index] = { id: def.id, name: title, onMenu: signatures.recipes[index].onMenu };
+  if (oldId !== newId && state.trialSales?.selected === oldId) state.trialSales.selected = null;
   return true;
 }
 export function renameSignature(state: SignatureGameState, id: string, name: string): boolean {
@@ -176,6 +178,7 @@ export function deleteSignature(state: SignatureGameState, id: string): boolean 
   const index = state.signatureDrinks.recipes.findIndex((r) => r.id === id);
   if (index < 0) return false;
   state.signatureDrinks.recipes.splice(index, 1);
+  if (state.trialSales?.selected === id) state.trialSales.selected = null;
   return true;
 }
 export function setSignatureOnMenu(state: SignatureGameState, id: string, onMenu: boolean): boolean {
@@ -184,6 +187,7 @@ export function setSignatureOnMenu(state: SignatureGameState, id: string, onMenu
   if (state.phase !== 'prep' || !recipe) return false;
   if (onMenu && !recipe.onMenu && (recipes.filter((r) => r.onMenu).length >= MAX_SIGNATURE_MENU || !unlocked(state, signatureDefinition(id)!))) return false;
   recipe.onMenu = onMenu;
+  if (onMenu && state.trialSales?.selected === id) state.trialSales.selected = null;
   return true;
 }
 

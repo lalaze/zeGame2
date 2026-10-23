@@ -1,0 +1,71 @@
+{
+  "condition": "fair",
+  "createdAt": 3,
+  "day": 3,
+  "kind": "deterministic pure function check, no live-state changes; excludes regular overrides, tips, VIP, capacity and reinvestment",
+  "menus": [
+    {
+      "affinity": [
+        {
+          "id": "espresso",
+          "values": [
+            1,
+            0.25,
+            0.25
+          ]
+        }
+      ],
+      "expectedBaseMainPrice": 20.333333333333336,
+      "items": [
+        "espresso"
+      ],
+      "prepTime": [
+        {
+          "id": "espresso",
+          "seconds": 1.2
+        }
+      ],
+      "traffic": 1
+    },
+    {
+      "affinity": [
+        {
+          "id": "espresso",
+          "values": [
+            1,
+            0.25,
+            0.25
+          ]
+        },
+        {
+          "id": "americano",
+          "values": [
+            1,
+            0.25,
+            0.25
+          ]
+        }
+      ],
+      "expectedBaseMainPrice": 12.666666666666668,
+      "items": [
+        "espresso",
+        "americano"
+      ],
+      "prepTime": [
+        {
+          "id": "espresso",
+          "seconds": 1.2
+        },
+        {
+          "id": "americano",
+          "seconds": 2.4
+        }
+      ],
+      "traffic": 1
+    }
+  ],
+  "prices": {
+    "americanoLv1": 5,
+    "espressoLv5": 20.333333333333336
+  }
+}

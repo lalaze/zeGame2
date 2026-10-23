@@ -1,0 +1,17 @@
+{
+  "day": 2,
+  "feedback": {
+    "fine": 1,
+    "love": 1,
+    "meh": 1
+  },
+  "ingredientCost": 12,
+  "item": "latte",
+  "practiceBefore": 28,
+  "prepared": 4,
+  "qualityBefore": 4,
+  "reserved": 0,
+  "revenue": 30,
+  "served": 3,
+  "visits": 13
+}

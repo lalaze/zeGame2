@@ -1,4 +1,6 @@
 import { curtainSource, TEXTILE_COLORS } from './textile-styles';
+import { minaMapChoice } from '../game/regular-wishes';
+import { paintMinaMap } from './regular-wish-art';
 import { artRamp, mainTimber, mainCabinet, mainWall, mainFloor, mainCarpet, mainRug, mainSillPlant, mainSkyDisc, mainPickup, counterMaterial } from './main-room-surfaces';
 import { getLocale, t } from '../i18n';
 import { paintPixelSignText as paintSignText, pixelSignWidth } from './sign-lettering';
@@ -1144,6 +1146,8 @@ export class RoomPainter {
     this.r(109, 113, 29, 8, artRamp('sage')[0]);
     this.r(109, 113, 29, .5, artRamp('sage')[2]);
     this.sign(this.ctx, getLocale() === 'zh' ? '点单' : 'ORDER', 123.5, 113, 27, 8, artRamp('cloth-7')[2]);
+    const map = minaMapChoice(state);
+    if (map) paintMinaMap(this.ctx, 181, 108, map);
 
     // Tip jar, in the gap between the first two baristas.
     const coins = Math.min(4, 1 + Math.floor(state.today.served / 15));

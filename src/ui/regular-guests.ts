@@ -7,6 +7,7 @@ import { character, toDataURL } from '../render/sprites';
 import { fineSpriteArt } from '../render/fine-sprite-art';
 import { isComposingKey } from './keyboard';
 import { closeModal, showModal } from './modal';
+import { regularWishCard } from './regular-wishes';
 
 /** Quiet HUD discovery: a numeric badge, never a toast or automatic pause. */
 export function updateRegularGuestsButton(state: GameState): void {
@@ -98,6 +99,10 @@ export function showRegularGuests(state: GameState, saveRead: () => void): void 
         text('p', t('regular.ui.preference', { drink: t(`item.${guest.preferredDrink}`) }), 'regular-preference'),
         text('p', `${t('regular.ui.served', { n: progress.served })} · ${t('regular.ui.progress', { n: progress.unlockedChapters.length, total: guest.chapters.length })}`, 'note'),
       );
+      if (guest.id === 'mina') {
+        const wish = regularWishCard(state, saveRead);
+        if (wish) card.append(wish);
+      }
     }
     return card;
   }

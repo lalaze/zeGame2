@@ -1,0 +1,35 @@
+{
+  "documentWidth": 390,
+  "milk": 0,
+  "onMenu": [
+    "espresso"
+  ],
+  "overflow": [],
+  "practice": 33,
+  "reportText": "第 2 天试卖 · 拿铁\n\n制作 5/5 杯 · 成功送达 5 杯\n\n收入 $50.00 · 原料消耗 $15.00 · 毛利 $35.00\n\n口味反馈：喜欢 2 · 还不错 2 · 不合口味 1\n\n已积累 5 份制作熟练度 · 配方味道 4.0 → 4.5\n\n以上金额已计入当天账目。毛利仅扣已消耗的试卖原料；口味反馈来自这些顾客的风味偏好，服务评价照常计入口碑。\n\n再试一天\n正式上架",
+  "trial": {
+    "day": 2,
+    "feedback": {
+      "fine": 2,
+      "love": 2,
+      "meh": 1
+    },
+    "ingredientCost": 15,
+    "item": "latte",
+    "practiceBefore": 28,
+    "prepared": 5,
+    "qualityAfter": 4.5,
+    "qualityBefore": 4,
+    "revenue": 50,
+    "served": 5
+  },
+  "width": 390,
+  "wish": {
+    "acceptedDay": 2,
+    "choice": "milky",
+    "completedDay": null,
+    "displayed": false,
+    "paused": false,
+    "rehearsedDay": 2
+  }
+}

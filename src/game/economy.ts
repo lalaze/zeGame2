@@ -1,4 +1,6 @@
 import { signatureDefinition, setSignatureOnMenu, availableSignatureIngredients, isPlainSignatureCopy } from './signature-drinks';
+import { minaReservedTable } from './regular-wishes';
+import { canTrialDrink, reserveTrialSale, trialOfferDue, trialSaleItem, trialSaleRemaining } from './trial-sales';
 import { partnerBrewMultiplier } from './partners';
 import { stylePrepMultiplier, styleSaleMultiplier, styleOrderPairs, styleComboChance, styleArrivalMultiplier, styleSeatChance, styleTablePatienceExtra } from './styles';
 import { promotionTraffic } from './promotion';
@@ -251,7 +253,26 @@ export function setOnMenu(state: GameState, id: ItemId, on: boolean): void {
   if (on && state.items[id] > 0) set.add(id);
   else set.delete(id);
   state.onMenu = MENU.filter((m) => set.has(m.id)).map((m) => m.id);
+  if (on && state.onMenu.includes(id) && state.trialSales?.selected === id) state.trialSales.selected = null;
   fillBakePlan(state);
+}
+
+/** A normal arrival may swap its one drink slot for a limited trial cup. */
+export function offerTrialSale(state: GameState, order: ItemId, extra: ItemId | null, regularId?: string): { order: ItemId; extra: ItemId | null; trialSale?: 'reserved' } {
+  const item = trialSaleItem(state);
+  const mainDrink = isDrink(menuItem(order).category);
+  const extraDrink = extra !== null && isDrink(menuItem(extra).category);
+  if (!item || !mainDrink && !extraDrink || !trialOfferDue(state, regularId)) return { order, extra };
+  if (readyServings(state, item) <= state.trialSales.active!.reserved || !reserveTrialSale(state, regularId)) return { order, extra };
+  return { order: mainDrink ? item : order, extra: mainDrink ? extra : item, trialSale: 'reserved' };
+}
+
+/** Promoting uses the ordinary menu API, including the three-custom-drink limit. */
+export function promoteTrialSale(state: GameState): boolean {
+  const item = state.trialSales.last?.item;
+  if (state.phase !== 'prep' || !item || !canTrialDrink(state, item)) return false;
+  setOnMenu(state, item, true);
+  return menuItems(state).some(def => def.id === item);
 }
 
 /** Breads and pastries are baked in the morning; drinks are made to order. */
@@ -333,7 +354,8 @@ function serverTrip(route: number): { seconds: number; plates: number } {
  * while the tables are too few for the servers to fall behind.
  */
 export function tableServiceCapacity(state: GameState, items = menuItems(state)): number {
-  const tables = activeTableIndices(state);
+  // Until Mina receives her order, her table is unavailable to ordinary guests.
+  const tables = activeTableIndices(state).filter(index => index !== minaReservedTable(state));
   if (items.length === 0 || tables.length === 0) return Infinity;
   const route = tables.reduce((sum, i) => sum + roomRoute('main', tableArea(i)).length, 0) / tables.length;
   const trip = serverTrip(route);
@@ -539,6 +561,10 @@ export function dayNeeds(state: GameState): Partial<Record<IngredientId, number>
     for (const [ing, n] of recipe(id)) needs[ing] = (needs[ing] ?? 0) + amount * n;
   }
   for (const k of Object.keys(needs) as IngredientId[]) needs[k] = Math.ceil(needs[k]!);
+  // A conservative five-cup reserve, not an unlimited menu-demand multiplier.
+  // Unused raw ingredients keep; ordinary-menu forecasts remain estimates.
+  const trial = trialSaleItem(state);
+  if (trial) for (const [ing, n] of recipe(trial)) needs[ing] = (needs[ing] ?? 0) + trialSaleRemaining(state) * n;
   return needs;
 }
 

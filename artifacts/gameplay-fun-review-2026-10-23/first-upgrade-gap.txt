@@ -1,0 +1,84 @@
+- document:
+  - status: 临时咖啡馆：本次进度不会保存，已有存档不会更改。启用浏览器存储和 Web Locks 后，请刷新以恢复存档游戏。
+  - banner:
+    - text: 雨巷试营业
+    - button "余额 $87，查看金额详情" [ref=e1]: $87
+    - text: 休息中 · 第 2 天
+    - button "收起经营面板" [ref=e2] [expanded]: 管理
+    - button "设置" [ref=e3]: ···
+  - button "★ 4.00 / 5 · 口碑客流 ±0% · 查看顾客评价" [ref=e4]: ★ 4.00 / 5
+  - button "咖啡馆伙伴，未读故事 1" [ref=e5]: 伙伴
+  - button "熟客记录" [ref=e6]: 熟客
+  - region "开店小指南" [ref=e7]:
+    - group: + 5/6 · 补好货，再次开店
+    - button "准备下一天" [ref=e8]
+  - main:
+    - navigation "咖啡馆区域" [ref=e9]:
+      - button "查看左侧的后厨" [ref=e10]: 后厨
+      - button "查看右侧的阅读休息室" [ref=e11]: 阅读休息室
+    - button "经营风格 · 自由混搭" [ref=e12]: 风格
+    - button "准备菜单 · 第 2 天" [ref=e13]
+    - group "房间视图缩放":
+      - button "缩小房间" [ref=e14] [disabled]: −
+      - button "查看全店地图，点击房间进入" [ref=e15]: 全景
+      - button "放大房间" [ref=e16]: +
+    - complementary "经营手账":
+      - text: 雨巷试营业
+      - strong: 经营手账
+      - text: 第 2 天
+      - button "余额 $87，查看金额详情" [ref=e17] [nth=1]: 余额：$87
+      - button "关闭管理" [ref=e18]: ×
+      - tablist:
+        - tab "菜单" [ref=e19] [selected]
+        - tab "食材" [ref=e20]
+        - tab "升级" [ref=e21]
+        - tab "装扮" [ref=e22]
+        - tab "猫咪" [ref=e23]
+        - tab "推广" [ref=e24]
+      - text: 目标 2/15 把任一道菜品升到 2 级 奖励 $40 1 / 2 购买
+      - button "x1" [ref=e25] [pressed]
+      - button "x10" [ref=e26]
+      - button "最大" [ref=e27]
+      - button "全部" [ref=e28] [pressed]
+      - button "咖啡" [ref=e29]
+      - button "茶饮" [ref=e30]
+      - button "面包" [ref=e31]
+      - button "甜点" [ref=e32]
+      - button "招牌饮品研发" [ref=e33]
+      - text: 菜单上有 1 道餐点 · 种类丰富让顾客 +0% · 平均单价 $3。顾客会在各道餐点间平均选择，有些会点一杯饮品再配一份烘焙。
+      - heading "咖啡 1/14" [ref=e34] [level=3]
+      - text: 浓缩咖啡 Lv 1 售价 $3 · 原料 $1 · 1.2秒 · 售价 $3 → ≈$6.53
+      - button "还差 ≈$2.6" [ref=e35]
+      - img "咖啡豆"
+      - text: 可做 35 份
+      - button "浓缩咖啡 · 味道 4.0 · 标准配方 · 已售 15/30 份 · 下一档 4.5 分" [ref=e36]: 味道 4.0 · 标准配方 已售 15/30 份 · 下一档 4.5 分
+      - button "在售" [ref=e37] [pressed]
+      - button "升级 ≈$89.6" [ref=e38] [disabled]
+      - text: 美式咖啡 售价 $5 · 售价 $0 → $5
+      - button "金额详情" [ref=e39]
+      - img "咖啡豆"
+      - text: 可做 35 份
+      - button "解锁 $40" [ref=e40]
+      - text: "? ??? 先解锁这一类里的上一道"
+      - heading "茶与饮品 0/11" [ref=e41] [level=3]
+      - text: 伯爵红茶 售价 $9 · 售价 $0 → $9
+      - button "还差 $3" [ref=e42]
+      - img "茶叶"
+      - text: 可做 0 份
+      - button "解锁 $90" [ref=e43] [disabled]
+      - text: "? ??? 先解锁这一类里的上一道"
+      - heading "面包 0/15" [ref=e44] [level=3]
+      - text: 黄油小餐包 需先建造后厨，才能制作和售卖食物。
+      - button "金额详情" [ref=e45] [nth=1]
+      - img "面粉"
+      - img "黄油"
+      - button "解锁 $30" [ref=e46] [disabled]
+      - text: "? ??? 先解锁这一类里的上一道"
+      - heading "甜点与蛋糕 0/15" [ref=e47] [level=3]
+      - text: 糖霜甜甜圈 需先建造后厨，才能制作和售卖食物。
+      - button "还差 $213" [ref=e48]
+      - img "面粉"
+      - img "糖"
+      - img "鸡蛋"
+      - button "解锁 $300" [ref=e49] [disabled]
+      - text: "? ??? 先解锁这一类里的上一道"

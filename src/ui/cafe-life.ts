@@ -5,6 +5,8 @@ import { regularGuestDefinition, regularGuestProgress, markRegularGuestChapterRe
 import type { GameState } from '../game/state';
 import { getLocale, t } from '../i18n';
 import { showModal } from './modal';
+import { minaWish } from '../game/regular-wishes';
+import { regularWishCard } from './regular-wishes';
 
 const node = <K extends keyof HTMLElementTagNameMap>(tag: K, text: string) => {
   const el = document.createElement(tag); el.textContent = text; return el;
@@ -24,6 +26,26 @@ export class CafeLife {
     const day = `${state.createdAt}:${state.day}`;
     if (this.day && this.day !== day) { this.dismissed = true; this.element.replaceChildren(); }
     this.day = day;
+    const wish = minaWish(state);
+    const wishEvent = wish?.completedDay === state.day ? 'map' : wish?.rehearsedDay === state.day ? 'rehearsed' : null;
+    const wishKey = `${day}:mina:${wishEvent}`;
+    if (visible && state.phase === 'open' && wishEvent && !this.offered.has(wishKey)
+        && visitors.some(visitor => visitor.regularGuestId === 'mina')) {
+      const heading = node('b', t(`wish.mina.notice.${wishEvent}`));
+      const preview = node('p', t(wishEvent === 'map' ? 'wish.mina.map.title' : 'wish.mina.return'));
+      const hear = node('button', t('wish.mina.notice.read')); hear.className = 'chip';
+      const later = node('button', t('life.later')); later.className = 'chip';
+      const dismiss = () => { this.dismissed = true; this.element.hidden = true; };
+      hear.addEventListener('click', () => {
+        if (!hear.isConnected) return;
+        dismiss();
+        const body = regularWishCard(state, this.save);
+        if (body) showModal({ title: t('wish.mina.title'), body, buttons: [{ label: t('regular.ui.close') }] });
+      });
+      later.addEventListener('click', dismiss);
+      this.element.replaceChildren(heading, preview, hear, later);
+      this.offered.add(wishKey); this.offered.add(day); this.dismissed = false;
+    }
     if (visible && state.phase === 'open' && !this.offered.has(day)) {
       let story: { guest: NonNullable<ReturnType<typeof regularGuestDefinition>>; chapter: number } | undefined;
       for (const visitor of visitors) {

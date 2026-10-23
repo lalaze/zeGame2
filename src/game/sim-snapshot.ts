@@ -36,6 +36,7 @@ const customer = (x: unknown) => obj(x) && walker(x) && look(x.look) && integer(
   (x.appearanceId === undefined || integer(x.appearanceId) && x.appearanceId < CUSTOMER_CAST.length) &&
   (x.regularGuestId === undefined || typeof x.regularGuestId === 'string') &&
   (x.regularGuestVisitId === undefined || integer(x.regularGuestVisitId) && x.regularGuestVisitId > 0) &&
+  (x.trialSale === undefined || x.trialSale === 'reserved' || x.trialSale === 'prepared') &&
   (x.reviewed === undefined || typeof x.reviewed === 'boolean') &&
   (x.waitSeconds === undefined || positive(x.waitSeconds)) &&
   (x.missingExtra === undefined || typeof x.missingExtra === 'boolean') &&
@@ -66,6 +67,13 @@ export function validSnapshot(value: unknown, state: GameState): value is SimSna
     ...s.cooks.flatMap((cook) => cook.batch === null ? [] : [cook.batch.item]),
   ];
   if (!inFlight.every(savedRecipe)) return false;
+  const trial = state.trialSales?.active;
+  const trying = s.customers.filter(c => c.trialSale);
+  if (trying.some(c => !trial || trial.day !== state.day || c.hasCup || c.phase === 'exiting'
+      || c.order !== trial.item && c.extra !== trial.item
+      || (c.trialSale === 'reserved' ? !['queue', 'toCounter'].includes(c.phase) : !['ordering', 'toSeat', 'waiting'].includes(c.phase)))) return false;
+  if (trying.filter(c => c.trialSale === 'reserved').length !== (trial?.reserved ?? 0)
+      || trying.filter(c => c.trialSale === 'prepared').length > (trial ? trial.prepared - trial.served : 0)) return false;
   if (!state.kitchen && s.cooks.length > 0) return false;
   // Legacy live customers without narrative fields retain their original identity.
   // Present fields must agree with their saved appearance, debut and visit receipt.

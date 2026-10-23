@@ -3,6 +3,8 @@ import { weightedIndex } from './conditions';
 import type { GuestKind } from './customer-demand';
 import { recordStyleHandoff, styleStationMultiplier, styleDwellExtra, styleServerMultiplier } from './styles';
 import { recordRegularGuestArrival, recordRegularGuestDeparture, recordRegularGuestService, regularGuestForAppearance, regularGuestOrder } from './regular-guests';
+import { minaReservedTable } from './regular-wishes';
+import { recordTrialPrepared, recordTrialServed, releaseTrialSale } from './trial-sales';
 import { CUSTOMER_CAST, CustomerCastCycle } from './customer-cast';
 import { updatePromotion } from './promotion';
 import { updatePetCare } from './pets';
@@ -20,6 +22,7 @@ import {
   earn,
   hasServiceSupply,
   menuItems,
+  offerTrialSale,
   orderChoices,
   orderSeatChance,
   passCapacity,
@@ -27,6 +30,7 @@ import {
   prepTime,
   salePrice,
   serverCount,
+  servingCost,
   tablePatience,
 } from './economy';
 import {
@@ -110,6 +114,8 @@ export interface Customer extends Walker {
   /** Narrative identity is fixed at arrival, never inferred for an older live visit. */
   regularGuestId?: string;
   regularGuestVisitId?: number;
+  /** Quota reservation follows this live order until preparation, handoff or exit. */
+  trialSale?: 'reserved' | 'prepared';
   look: Look;
   order: ItemId;
   /** A bakery item with a drink, or a drink with a bakery item. */
@@ -655,7 +661,8 @@ export class Sim {
     const appearance = this.customerCast.next();
     const regularGuest = regularGuestForAppearance(appearance.id, state.day);
     const visitId = regularGuest ? recordRegularGuestArrival(state, regularGuest.id) : null;
-    const chosen = regularGuestOrder(state, regularGuest?.id, main.id, extra);
+    const regularOrder = regularGuestOrder(state, regularGuest?.id, main.id, extra);
+    const chosen = offerTrialSale(state, regularOrder.order, regularOrder.extra, regularGuest?.id);
     const c: Customer = {
       ...(choice.kind ? { guestKind: choice.kind } : {}),
       id: this.nextId++,
@@ -672,6 +679,7 @@ export class Sim {
       look: { ...appearance.look },
       order: chosen.order,
       extra: chosen.extra,
+      ...(chosen.trialSale ? { trialSale: chosen.trialSale } : {}),
       vip: this.rng() < VIP_CHANCE,
       patience: patienceSeconds(state),
       spot: -1,
@@ -728,6 +736,8 @@ export class Sim {
   }
 
   private exit(c: Customer): void {
+    if (c.trialSale === 'reserved' && this.floorState) releaseTrialSale(this.floorState);
+    delete c.trialSale;
     if (this.floorState && c.regularGuestId && c.regularGuestVisitId !== undefined) {
       recordRegularGuestDeparture(this.floorState, c.regularGuestId, c.regularGuestVisitId);
     }
@@ -749,8 +759,14 @@ export class Sim {
     return [...roomRoute(from, area), { x: areaOrigin(area).x + 160, y: approach.y }, approach];
   }
 
-  private freeSeat(state: GameState): number {
-    const available = activeTableIndices(state).flatMap((i) => [i * 2, i * 2 + 1]).filter((i) => this.seats[i] === null);
+  private freeSeat(state: GameState, c: Customer): number {
+    const reserved = minaReservedTable(state);
+    if (reserved !== null && c.regularGuestId === 'mina') {
+      const seat = [reserved * 2, reserved * 2 + 1].find(i => this.seats[i] === null);
+      if (seat !== undefined) return seat;
+    }
+    const available = activeTableIndices(state).filter(i => i !== reserved)
+      .flatMap((i) => [i * 2, i * 2 + 1]).filter((i) => this.seats[i] === null);
     return available.length > 0 ? available[this.randInt(available.length)] : -1;
   }
 
@@ -783,11 +799,16 @@ export class Sim {
       if (bought.length > 1) stats.paired++;
     }
     for (const id of bought) state.today.sales[id] = (state.today.sales[id] ?? 0) + 1;
+    const trial = state.trialSales.active;
+    if (c.trialSale === 'prepared' && trial && bought.includes(trial.item)) {
+      recordTrialServed(state, salePrice(state, trial.item, c.vip, c.dineIn, bought) * (1 + (c.momentTip ?? 0)), c);
+    }
+    delete c.trialSale;
     events.push({ type: 'sale', amount, x: c.x, y: c.y - 52, vip: c.vip, customerId: c.id });
     this.review(state, c, mealReview(state, bought, c.waitSeconds, c.missingExtra));
     recordServings(state, bought);
     recordStyleHandoff(state, bought, c.dineIn);
-    if (c.regularGuestId && c.regularGuestVisitId !== undefined) recordRegularGuestService(state, c.regularGuestId, c.regularGuestVisitId);
+    if (c.regularGuestId && c.regularGuestVisitId !== undefined) recordRegularGuestService(state, c.regularGuestId, c.regularGuestVisitId, { seat: c.seat, items: bought });
     c.hasCup = true;
     c.mood = 'happy';
     c.moodTimer = 1.5;
@@ -813,6 +834,7 @@ export class Sim {
   private arrive(state: GameState, c: Customer, events: SimEvent[]): void {
     if (c.phase === 'toCounter') {
       const b = this.baristas[c.spot];
+      const trial = c.trialSale === 'reserved' ? state.trialSales.active?.item : null;
       if (!consumeServing(state, c.order, state.today)) {
         // Out of ingredients: sorry, no sale.
         b.customerId = null;
@@ -828,18 +850,25 @@ export class Sim {
         this.exit(c);
         return;
       }
+      if (trial === c.order) {
+        recordTrialPrepared(state, servingCost(c.order)); c.trialSale = 'prepared';
+      }
       // The add-on is skipped (not a deal breaker) if it has sold out.
       if (c.extra && !consumeServing(state, c.extra, state.today)) {
         state.today.extraLost++;
         c.missingExtra = true;
         state.today.shortages[c.extra] = (state.today.shortages[c.extra] ?? 0) + 1;
+        if (c.trialSale === 'reserved') { releaseTrialSale(state); delete c.trialSale; }
         c.extra = null;
+      } else if (c.extra && trial === c.extra) {
+        recordTrialPrepared(state, servingCost(c.extra)); c.trialSale = 'prepared';
       }
       c.phase = 'ordering';
       b.total = b.remaining = prepTime(state, c.order) * partnerBrewMultiplier(state, b.partnerId, isBakery(c.order)) + (c.extra ? prepTime(state, c.extra) * partnerBrewMultiplier(state, b.partnerId, isBakery(c.extra)) : 0);
       // With a table free, some stay: they take a seat and the order is brought over.
-      const seat = this.freeSeat(state);
-      if (seat >= 0 && this.rng() < orderSeatChance(state, c.extra ? [c.order, c.extra] : [c.order], c.guestKind)) {
+      const seat = this.freeSeat(state, c);
+      const invited = c.regularGuestId === 'mina' && minaReservedTable(state) === Math.floor(seat / 2);
+      if (seat >= 0 && (this.rng() < orderSeatChance(state, c.extra ? [c.order, c.extra] : [c.order], c.guestKind) || invited)) {
         this.seats[seat] = c.id;
         c.seat = seat;
         c.dineIn = true;

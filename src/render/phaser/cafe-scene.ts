@@ -1,4 +1,6 @@
 import { remapTextile } from '../textile-styles';
+import { minaMapChoice, minaReservedTable } from '../../game/regular-wishes';
+import { paintMinaReservation } from '../regular-wish-art';
 import { centerpieceSprite } from '../table-centerpiece-art';
 import { loadSignFonts, signFontRevision } from '../sign-lettering';
 import { insideRoomFrame } from '../viewport-frame';
@@ -725,6 +727,7 @@ export class CafeScene extends Phaser.Scene {
       const counter = this.layer('room-main-counter', DEPTH.counter);
       const shelf = state.phase !== 'prep' ? state.shelf : state.bakePlan;
       const counterSig = [
+        minaMapChoice(state),
         H, getLocale(), signFontRevision(),
         decor.counter,
         state.upgrades.machine,
@@ -1238,6 +1241,7 @@ export class CafeScene extends Phaser.Scene {
 
   /** A round table with its two chairs, anyone sitting at it, and their drinks. */
   private drawTable(index: number, t: number, depth: number, preview = false): void {
+    const state = this.getState?.();
     const logicalTable = tablePos(index);
     const table = projectMainWorld(logicalTable);
     const tableShift = table.x - logicalTable.x;
@@ -1314,6 +1318,10 @@ export class CafeScene extends Phaser.Scene {
       }
     }
     // Their order once it's arrived; until then, the table number for the server to find.
+    if (!preview && state && index === minaReservedTable(state)) {
+      const key = baked(this.textures, 'mina-reservation', 15, 10, paintMinaReservation);
+      this.image(key, table.x - 7, cy - 9, next());
+    }
     for (const side of [0, 1] as const) {
       const c = diners[side];
       if (c?.phase === 'sitting') this.cup(table.x + (side === 0 ? -9 : 4), cy - 5, next());

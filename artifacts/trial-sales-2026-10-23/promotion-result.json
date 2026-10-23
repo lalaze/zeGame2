@@ -1,0 +1,28 @@
+{
+  "day": 3,
+  "documentWidth": 390,
+  "onMenu": [
+    "espresso",
+    "latte"
+  ],
+  "overflow": [],
+  "result": {
+    "day": 2,
+    "feedback": {
+      "fine": 2,
+      "love": 2,
+      "meh": 1
+    },
+    "ingredientCost": 15,
+    "item": "latte",
+    "practiceBefore": 28,
+    "prepared": 5,
+    "qualityAfter": 4.5,
+    "qualityBefore": 4,
+    "revenue": 50,
+    "served": 5
+  },
+  "selected": null,
+  "text": "Day 2 trial · Latte\n\nPrepared 5/5 cups · Delivered 5\n\nRevenue $50.00 · Ingredients used $15.00 · Gross profit $35.00\n\nFlavor feedback: loved it 2 · fine 2 · not their taste 1\n\nAdded 5 delivered portions of practice · Recipe taste 4.0 → 4.5\n\nThese amounts are already in today’s accounts. Gross profit deducts consumed trial ingredients only. Flavor feedback reflects these guests’ preferences; service reviews still count toward reputation.\n\nTry another day\nOn the regular menu",
+  "width": 390
+}

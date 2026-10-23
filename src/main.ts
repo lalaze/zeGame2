@@ -10,6 +10,7 @@ import { pantryTaskContext } from './ui/play-flow-context';
 import { trafficHud } from './ui/traffic-status';
 import { showSoldOut } from './ui/sold-out';
 import { CafeLife, closingStory } from './ui/cafe-life';
+import { trialResultCard } from './ui/trial-sales';
 import { showLivingCat } from './ui/living-cats';
 import { petActive, type CatId } from './game/pets';
 import { DAY_SECONDS, SPEEDS } from './game/data';
@@ -688,6 +689,10 @@ function showReport(report: DayReport): void {
   const { body, recommendedTab, advice } = settlementHtml(report, state);
   const reportBody = document.createElement('div');
   reportBody.innerHTML = body;
+  if (report.trialSale) {
+    const trial = trialResultCard(state, () => { saveGame(); panel.refresh(); updateDayHud(); }, report.trialSale);
+    if (trial) reportBody.querySelector('[data-trial-report]')?.append(trial);
+  }
   const story = closingStory(state, report, saveGame);
   if (story) reportBody.querySelector('.report-summary')?.after(story);
   showModal({

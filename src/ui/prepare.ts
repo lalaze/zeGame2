@@ -1,4 +1,6 @@
 import { prepDemandHtml, dishDemandHtml } from './customer-demand';
+import { regularWishCard } from './regular-wishes';
+import { trialSaleCard } from './trial-sales';
 import { showSignatureDrinks } from './signature-drinks';
 import { canEmergencyRestock, emergencyRestock } from '../game/recovery';
 import { promotionPlan } from '../game/promotion';
@@ -60,6 +62,8 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
     const focus = document.activeElement?.getAttribute('data-focus');
     const detailsOpen = body.querySelector<HTMLDetailsElement>('.prep-details')?.open ?? false;
     const demandOpen = body.querySelector<HTMLDetailsElement>('.demand-details')?.open ?? false;
+    const wishOpen = body.querySelector<HTMLDetailsElement>('.wish-plan')?.open;
+    const trialHistoryOpen = body.querySelector<HTMLDetailsElement>('.trial-history')?.open ?? false;
     const demand = dayDemand(state);
     const onMenu = new Set(menuItems(state).map((m) => m.id));
     const available = unlockedItems(state);
@@ -118,6 +122,14 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
     const demandDetails = body.querySelector<HTMLDetailsElement>('.demand-details');
     if (demandDetails) demandDetails.open = demandOpen;
     body.prepend(prepStyleSummary(state, () => showCafeStyles(state, onChange, () => showPrepare(state, onStart, onChange))));
+    const wish = regularWishCard(state, () => { onChange(); render(); }, true);
+    if (wish) body.querySelector('.prep-style')?.after(wish);
+    const wishPlan = wish?.querySelector<HTMLDetailsElement>('.wish-plan');
+    if (wishPlan && wishOpen !== undefined) wishPlan.open = wishOpen;
+    const trial = trialSaleCard(state, () => { onChange(); render(); });
+    if (trial) body.querySelector('.prep-list')?.after(trial);
+    const trialHistory = trial?.querySelector<HTMLDetailsElement>('.trial-history');
+    if (trialHistory) trialHistory.open = trialHistoryOpen;
     const start = document.querySelector<HTMLButtonElement>('.modal-actions [data-start]');
     if (start) {
       start.disabled = onMenu.size === 0;
