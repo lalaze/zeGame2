@@ -7,7 +7,7 @@ import { areaBounds, doorwayY, FLOOR_Y } from './layout';
 import { segmentCrossesObstacle, type FloorPoint } from './navigation';
 import { OperationMonitor, operationStatus } from './operations';
 import { SaveSession } from './save-session';
-import { Sim, type Cook } from './sim';
+import { QUEUE_HELP_PATIENCE, Sim, type Cook } from './sim';
 import type { SimSnapshot } from './sim-snapshot';
 import { createInitialState, deserialize, SAVE_KEY, serialize, type GameState } from './state';
 
@@ -282,6 +282,20 @@ describe('truthful feedback and smoother progression', () => {
     expect(next.boost()).toBe(false);
     tick(s, next, 1);
     expect(next.boost()).toBe(true);
+  });
+  it('lets the player prioritize one queued guest and keeps the shared help cooldown', () => {
+    const s = ready(['latte']); s.upgrades.marketing = 25; openShop(s); const sim = new Sim(rng());
+    for (let i = 0; i < 4000 && sim.queueChoices(3).length < 2; i++) sim.update(s, 0.05);
+    const choices = sim.queueChoices(3);
+    expect(choices.length).toBeGreaterThanOrEqual(2);
+    const chosen = choices[1], before = chosen.patience;
+    expect(sim.prioritizeQueue(s, chosen.id)).toBe(true);
+    expect(sim.queue[0]).toBe(chosen.id);
+    expect(chosen.patience).toBe(before + QUEUE_HELP_PATIENCE);
+    expect(chosen.mood).toBe('happy');
+    expect(sim.prioritizeQueue(s, choices[0].id)).toBe(false);
+    tick(s, sim, 1);
+    expect(sim.prioritizeQueue(s, choices[0].id)).toBe(true);
   });
   it('prioritizes missing ingredients and separates a full pass from brewing', () => {
     const s = ready(['espresso']); openShop(s); const sim = new Sim(); tick(s, sim, 1);

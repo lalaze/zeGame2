@@ -208,6 +208,8 @@ export const SERVER_SPEED = WALK_SPEED * 1.5;
 /** A tray holds this many orders, delivered nearest room first. */
 const TRAY_PLATES = 3;
 const BOOST_SECONDS = 0.3;
+/** A deliberate queue intervention buys one guest a little breathing room. */
+export const QUEUE_HELP_PATIENCE = 8;
 /** How long a dine-in customer stands at the counter ordering before taking a seat. */
 const ORDER_SECONDS = 0.8;
 const CALL_SECONDS = 1.4;
@@ -1232,6 +1234,26 @@ export class Sim {
     }
     if (any) this.boostCooldown = 1;
     return any;
+  }
+
+  /** The first few people in line are the only guests worth presenting as choices. */
+  queueChoices(limit = 3): Customer[] {
+    return this.queue.slice(0, Math.max(0, limit))
+      .map(id => this.find(id))
+      .filter((c): c is Customer => !!c && c.phase === 'queue');
+  }
+
+  /** Move one waiting guest to the counter and give them time to stay with us. */
+  prioritizeQueue(state: GameState, customerId: number): boolean {
+    if (state.phase !== 'open' || this.boostCooldown > 0) return false;
+    const index = this.queue.indexOf(customerId);
+    const customer = this.find(customerId);
+    if (index < 0 || !customer || customer.phase !== 'queue') return false;
+    this.queue.splice(index, 1); this.queue.unshift(customerId); this.relayoutQueue();
+    customer.patience += QUEUE_HELP_PATIENCE;
+    customer.mood = 'happy'; customer.moodTimer = 2;
+    this.boostCooldown = 1;
+    return true;
   }
 
   /** A barista is done but the pass is full, so they're holding a table order. */

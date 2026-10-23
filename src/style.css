@@ -958,6 +958,29 @@ html:lang(zh) body {
   color: var(--muted);
 }
 
+/* Service help presents a few concrete interventions instead of a single
+ * repeatable boost. Keep the cards readable on the same narrow modal used by
+ * the recommendation moments. */
+.service-help-menu {
+  display: grid;
+  gap: 8px;
+}
+.service-help-menu > .note { margin: 0 0 4px; }
+.service-help-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-height: 50px;
+  width: 100%;
+  text-align: left;
+}
+.service-help-option span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
 .big-money {
   font-size: 34px;
   font-weight: 600;
