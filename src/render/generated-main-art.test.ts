@@ -10,7 +10,7 @@ vi.mock('./sprites', () => ({
   pixelSprite: () => ({ width: 18, height: 28 }),
   itemIcon: (id: string) => ({ width: 12, height: 12, itemId: id }),
 }));
-vi.mock('phaser', () => ({ default: { Scene: class {} } }));
+vi.mock('phaser', () => ({ default: { Scene: class {}, Scenes: { Events: { SHUTDOWN: 'shutdown', DESTROY: 'destroy' } } } }));
 
 type Asset = HTMLCanvasElement & { assetId: string };
 const source = (assetId: string, width = 80, height = 40): Asset =>
@@ -90,7 +90,7 @@ describe('generated main-room asset registry and painting', () => {
     const files = Object.values(art.GENERATED_MAIN_ASSETS);
     expect(new Set(files).size).toBe(files.length);
     for (const file of files) {
-      expect(file).toMatch(/^(?:(?:(?:main|staff|service|wall|menu)-v\d+|customer-0-v1|cat-siamese-v1)\/[a-zA-Z0-9-]+|catalog-v1\/(?:menu|ingredients|furniture|decor|environment|tableware|signature|main-static|staff-server|staff-owner)\/[a-zA-Z0-9_-]+|catalog-v1\/(?:customers|cats)\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+)\.png$/);
+      expect(file).toMatch(/^(?:(?:(?:main|main-runner|staff|service|wall|menu|cozy-[a-z]+)-v\d+|customer-0-v1|cat-siamese-v1)\/[a-zA-Z0-9_-]+|catalog-v1\/(?:menu|ingredients|furniture|decor|environment|tableware|signature|main-static|staff-server|staff-owner)\/[a-zA-Z0-9_-]+|catalog-v1\/(?:customers|cats)\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+)\.png$/);
       expect(file.split('/')).not.toContain('sources');
       const bytes = readFileSync(new URL(`../../public/art/generated/${file}`, import.meta.url));
       expect([...bytes.subarray(0, 8)], file).toEqual([137, 80, 78, 71, 13, 10, 26, 10]);
@@ -103,9 +103,13 @@ describe('generated main-room asset registry and painting', () => {
   it('queues each runtime image under its own stable key and the configured base URL', async () => {
     const { CafeScene } = await import('./phaser/cafe-scene');
     const loadImage = vi.fn();
-    const scene = Object.assign(Object.create(CafeScene.prototype), { load: { image: loadImage, on: vi.fn(), once: vi.fn() }, hooks: {} });
+    const scene = Object.assign(Object.create(CafeScene.prototype), { load: { image: loadImage, on: vi.fn(), once: vi.fn() }, hooks: {},
+      events: { once: vi.fn(), off: vi.fn() }, onLoadError: vi.fn() });
     scene.preload();
-    expect(loadImage.mock.calls).toEqual(Object.entries(art.GENERATED_MAIN_ASSETS)
+    // The old generated character packs stay out of the queue: the cast loads as its own atlas family.
+    const queued = Object.entries(art.GENERATED_MAIN_ASSETS).filter(([id]) => !/^(?:barista|server|mina|customer)-/.test(id));
+    expect(queued.length).toBeGreaterThan(0);
+    expect(loadImage.mock.calls).toEqual(queued
       .map(([id, file]) => [art.generatedMainKey(id as GeneratedMainId), `${import.meta.env.BASE_URL}art/generated/${file}`]));
   });
 
@@ -198,13 +202,16 @@ describe('generated main-room asset registry and painting', () => {
   });
 });
 
-describe('real density-2 pastry painter with generated empty display', () => {
+// The pastry case is painted by hand with live stock as menu icons (b1d6305): the generated empty
+// display and food bitmaps stay installed for other surfaces but are never painted into it.
+describe('real density-2 pastry case with live stock', () => {
+  const generatedDraws = (draws: Draw[]) => draws.filter(draw => draw.source.assetId !== undefined);
+
   it.each(['prep', 'open', 'closing'] as const)('draws no food with zero %s stock despite installed food bitmaps', phase => {
-    const display = install('display', 1941, 521);
-    install('croissant'); install('cake');
+    install('display', 1941, 521); install('croissant'); install('cake');
     const state = pastryState(phase, 0, 0), before = JSON.stringify(state), recorded = pastryPainter();
     recorded.paint(state);
-    expect(recorded.draws.filter(draw => draw.source === display)).toHaveLength(1);
+    expect(generatedDraws(recorded.draws)).toEqual([]);
     expect(food(recorded.draws)).toEqual([]);
     expect(JSON.stringify(state)).toBe(before);
   });
@@ -213,7 +220,8 @@ describe('real density-2 pastry painter with generated empty display', () => {
     install('display'); install('croissant'); install('cake');
     const recorded = pastryPainter();
     recorded.paint(pastryState('prep', 1, 0));
-    expect(food(recorded.draws)).toEqual(['legacy:roll', 'generated:croissant', 'generated:cake']);
+    expect(food(recorded.draws)).toEqual(['legacy:roll', 'legacy:croissant', 'legacy:cake']);
+    expect(generatedDraws(recorded.draws)).toEqual([]);
     recorded.draws.length = 0;
     recorded.paint(pastryState('prep', 0, 8));
     expect(food(recorded.draws)).toEqual([]);
@@ -223,7 +231,8 @@ describe('real density-2 pastry painter with generated empty display', () => {
     install('display'); install('croissant'); install('cake');
     const state = pastryState(phase, 0, 8), recorded = pastryPainter(), before = JSON.stringify(state);
     recorded.paint(state);
-    expect(food(recorded.draws)).toEqual(['legacy:roll', 'legacy:roll', 'generated:croissant', 'generated:cake']);
+    // A well-stocked dish (eight or more) shows a second portion behind the first.
+    expect(food(recorded.draws)).toEqual(['legacy:roll', 'legacy:roll', 'legacy:croissant', 'legacy:croissant', 'legacy:cake', 'legacy:cake']);
     expect(JSON.stringify(state)).toBe(before);
     for (const id of ['croissant', 'cake', 'roll'] as const) { state.shelf[id] = 0; state.bakePlan[id] = 8; }
     recorded.draws.length = 0;
@@ -231,11 +240,11 @@ describe('real density-2 pastry painter with generated empty display', () => {
     expect(food(recorded.draws)).toEqual([]);
   });
 
-  it('follows menu, ownership and kitchen changes instead of keeping food baked into the display', () => {
-    const display = install('display'); install('croissant'); install('cake');
+  it('follows menu, ownership and kitchen changes instead of keeping food baked into the case', () => {
+    install('display'); install('croissant'); install('cake');
     const state = pastryState('open', 8, 8), recorded = pastryPainter();
     recorded.paint(state);
-    expect(food(recorded.draws)).toContain('generated:croissant');
+    expect(food(recorded.draws)).toContain('legacy:croissant');
     state.onMenu = ['espresso', 'roll'];
     recorded.draws.length = 0; recorded.paint(state);
     expect(food(recorded.draws)).toEqual(['legacy:roll', 'legacy:roll']);
@@ -245,15 +254,7 @@ describe('real density-2 pastry painter with generated empty display', () => {
     state.items.croissant = 1; state.kitchen = false;
     recorded.draws.length = 0; recorded.paint(state);
     expect(food(recorded.draws)).toEqual([]);
-    expect(recorded.draws.filter(draw => draw.source === display)).toHaveLength(1);
-  });
-
-  it('falls back per missing food asset while retaining the generated empty display', () => {
-    const display = install('display'); install('croissant');
-    const recorded = pastryPainter();
-    recorded.paint(pastryState('open', 0, 1));
-    expect(recorded.draws.filter(draw => draw.source === display)).toHaveLength(1);
-    expect(food(recorded.draws)).toEqual(['legacy:roll', 'generated:croissant', 'legacy:cake']);
+    expect(generatedDraws(recorded.draws)).toEqual([]);
   });
 
   it('uses the stock-aware legacy case if the display image is absent', () => {
