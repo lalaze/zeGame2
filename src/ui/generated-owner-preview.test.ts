@@ -3,13 +3,18 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import type { Look } from '../game/state';
 import { fineSpriteArt } from '../render/fine-sprite-art';
-import { preloadReferenceCharacters } from '../render/reference-character-art';
+import { STANDING_CHARACTER_SCALE, preloadReferenceCharacters } from '../render/reference-character-art';
 import { character } from '../render/sprites';
 import { createGeneratedOwnerPreview } from './generated-owner-preview';
 import { showOnboarding } from './onboarding';
 
-vi.mock('../render/reference-character-art', () => ({ preloadReferenceCharacters: vi.fn() }));
+// Only the shared atlas load is controlled; scales and contacts stay the real ones.
+vi.mock('../render/reference-character-art', async importOriginal => ({
+  ...await importOriginal<typeof import('../render/reference-character-art')>(), preloadReferenceCharacters: vi.fn(),
+}));
 vi.mock('../render/decor-art', () => ({ paintCounter: vi.fn(), paintFloor: vi.fn(), paintWainscot: vi.fn(), paintWall: vi.fn() }));
+// The opening step's starter-room previews (55646f5) are painted elsewhere; keep them out of these owner checks.
+vi.mock('../render/starter-theme-preview', () => ({ starterThemePreview: vi.fn(() => document.createElement('canvas')) }));
 vi.mock('../render/sprites', async () => {
   const { registerFineSpriteArt } = await import('../render/fine-sprite-art');
   const cache = new Map();
@@ -85,7 +90,9 @@ describe('reference owner preview', () => {
     load.resolve(); await flush();
     expect(character).toHaveBeenCalledExactlyOnceWith(defaultLook, 'owner');
     expect([preview.canvas.width, preview.canvas.height]).toEqual([54, 84]);
-    expect([preview.canvas.style.width, preview.canvas.style.height]).toEqual(['108px', '168px']);
+    // The cast stands 1.6x the legacy grid in the café; the preview divides that back out.
+    expect([preview.canvas.style.width, preview.canvas.style.height])
+      .toEqual([`${18 * 6 / STANDING_CHARACTER_SCALE}px`, `${28 * 6 / STANDING_CHARACTER_SCALE}px`]);
     expect(preview.canvas.dataset.generatedOwner).toBe('true');
     expect(preview.canvas.dataset.loading).toBe('false');
     expect(draws(preview.canvas)).toHaveBeenLastCalledWith(fineSpriteArt(character(defaultLook, 'owner').stand).canvas, 0, 0);
@@ -208,7 +215,7 @@ describe('onboarding preview lifecycle', () => {
     next(); next(); await flush();
     const openingCanvas = document.querySelector<HTMLCanvasElement>('.opening-owner canvas')!;
     expect(draws(openingCanvas)!.mock.calls.at(-1)).toEqual(first);
-    expect(openingCanvas.style.width).toBe('108px');
+    expect(openingCanvas.style.width).toBe(`${18 * 6 / STANDING_CHARACTER_SCALE}px`);
     next();
     expect(document.querySelector('.onboard-overlay')).toBeNull();
   });
