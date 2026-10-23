@@ -47,7 +47,7 @@ function context() {
   return {ctx:ctx as unknown as CanvasRenderingContext2D,events,stack,translation:()=>[ctx.tx,ctx.ty],clip:()=>ctx.activeClip,smoothing:()=>ctx.imageSmoothingEnabled};
 }
 
-const COUNTER_FINISHES = ['counter_oak', 'counter_walnut', 'counter_marble', 'counter_pink', 'counter_gold'] as const;
+const COUNTER_FINISHES = ['counter_oak', 'counter_sage', 'counter_blush', 'counter_walnut', 'counter_marble', 'counter_pink', 'counter_gold'] as const;
 const serviceSizes={
   'service-machine':[488,433], 'service-cupboard':[536,389],
   'service-cups':[222,294], 'service-jars':[351,304], 'service-basket':[430,235],
@@ -136,43 +136,6 @@ describe.each(COUNTER_FINISHES)('selected main-service bitmap integration (%s)',
       const cue=at(events,x,y,w,h,color)[0];
       expect(cue).toBeDefined();
       expect(events.indexOf(cue)).toBeGreaterThan(events.findIndex(event=>event.kind==='image'&&event.source.assetId==='service-machine'));
-    }
-  });
-
-  it('fits the low cupboard uniformly at the existing contact point and retains the carafe',()=>{
-    installServices();
-    const {ctx,events}=context();
-    new RoomPainter(ctx,2,false).drawServiceCupboards(counter);
-    const draw=images(events).find(event=>event.source.assetId==='service-cupboard')!;
-    expect(draw).toBeDefined();
-    const [x,y,w,h]=draw.args;
-    expect(w/536).toBeCloseTo(h/389,12);
-    expect(x+w/2).toBeCloseTo(MAIN_CUPBOARDS[0].x+20,12);
-    expect(y+h*381/389).toBeCloseTo(108,12);
-    expect(at(events,MAIN_CUPBOARDS[0].x-1,80,42,27)).toHaveLength(0);
-    expect(at(events,275,65,3,5,'#acc6af')).toHaveLength(1);
-    clearGeneratedMainAssets();
-    const fallback=context();
-    new RoomPainter(fallback.ctx,2,false).drawServiceCupboards(counter);
-    expect(at(fallback.events,MAIN_CUPBOARDS[0].x-1,80,42,27)).toHaveLength(1);
-  });
-
-  it('lowers only the generated cupboard attachments and restores the caller transform',()=>{
-    for(const mode of ['generated','missing','low-density']){
-      clearGeneratedMainAssets();
-      if(mode!=='missing')installServices();
-      const record=context(),offset=mode==='generated'?4:0;
-      record.ctx.translate(3,7);
-      new RoomPainter(record.ctx,mode==='low-density'?1:2,false)
-        .drawServiceCupboards(counter);
-      // Carafe, tray and both glasses move together only after a bitmap succeeds.
-      expect(at(record.events,275+3,61+7+offset,3,5,'#acc6af')).toHaveLength(1);
-      expect(at(record.events,286+3,76+7+offset,17,2,'#674b31')).toHaveLength(1);
-      for(const x of [288,296])expect(at(record.events,x+3,70+7+offset,5,1,'#90a995')).toHaveLength(1);
-      expect(record.translation()).toEqual([3,7]);
-      expect(record.stack).toHaveLength(0);
-      record.ctx.fillRect(1,2,3,4);
-      expect(record.events.at(-1)).toMatchObject({kind:'fill',x:4,y:9,w:3,h:4});
     }
   });
 
@@ -269,7 +232,8 @@ describe.each(COUNTER_FINISHES)('selected main-service bitmap integration (%s)',
     expect(at(events,PASS.x-2,PASS.top-1,PASS.w+4,8,'#42251a')).toHaveLength(1);
   });
 
-  it.each(Object.keys(serviceSizes) as (keyof typeof serviceSizes)[])(
+  // The freestanding service cupboard left the room in 619363d: its source is installed but never painted.
+  it.each((Object.keys(serviceSizes) as (keyof typeof serviceSizes)[]).filter(id=>id!=='service-cupboard'))(
     'falls back only for the unavailable %s source',missing=>{
       installServices();
       const state=createInitialState(0);
