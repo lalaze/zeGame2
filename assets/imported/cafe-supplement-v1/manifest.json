@@ -1,0 +1,20 @@
+{
+  "status": "User supplied originals; preserved without edits; not yet integrated into game",
+  "files": [
+    {
+      "file": "pickup-hutch-source.png",
+      "attachment": "35c38b4cb83e8d8a8ab50b6914801cf15712f38c13c09732b7c91e40dada377d.png",
+      "sha256": "35c38b4cb83e8d8a8ab50b6914801cf15712f38c13c09732b7c91e40dada377d"
+    },
+    {
+      "file": "reading-armchair-source.png",
+      "attachment": "7268def88355df96d94e367d12d6763fe617798ed5622757131f1d4992c40d84.png",
+      "sha256": "7268def88355df96d94e367d12d6763fe617798ed5622757131f1d4992c40d84"
+    },
+    {
+      "file": "reading-armchair-small.png",
+      "attachment": "32b0ca0de3dc1349f9ad4bad3bbe7265e19ae2e9e7967bc412117a5d4e9c7c57.png",
+      "sha256": "32b0ca0de3dc1349f9ad4bad3bbe7265e19ae2e9e7967bc412117a5d4e9c7c57"
+    }
+  ]
+}

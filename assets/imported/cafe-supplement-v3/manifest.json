@@ -1,0 +1,248 @@
+{
+  "source": "cafe-next-batch-assets.zip",
+  "status": "Source review complete; barista revision accepted as the preferred candidate. Originals preserved; not integrated.",
+  "assets": [
+    {
+      "file": "greenhouse-door-frame-v2.png",
+      "size": [
+        96,
+        152
+      ],
+      "bbox": [
+        2,
+        2,
+        94,
+        150
+      ],
+      "alpha_zero": 8903,
+      "alpha_partial": 0,
+      "alpha_opaque": 5689,
+      "off_palette_visible": 5689,
+      "sha256": "c758561e110518c8c6e0fff4dab526c37811056e0828fd09919eadeaf96abf11"
+    },
+    {
+      "file": "greenhouse-door-view-v2.png",
+      "size": [
+        96,
+        152
+      ],
+      "bbox": [
+        14,
+        13,
+        82,
+        147
+      ],
+      "alpha_zero": 7378,
+      "alpha_partial": 0,
+      "alpha_opaque": 7214,
+      "off_palette_visible": 7213,
+      "sha256": "2223682fa073b36b03f2ceeb14a371ce6e93dea48e31b347cd80dba6cedca7ca"
+    },
+    {
+      "file": "customer-0-drink-right.png",
+      "size": [
+        320,
+        88
+      ],
+      "bbox": [
+        16,
+        12,
+        307,
+        84
+      ],
+      "alpha_zero": 17604,
+      "alpha_partial": 0,
+      "alpha_opaque": 10556,
+      "off_palette_visible": 3366,
+      "sha256": "e096df3404199f36687a60865906e16bf99e7e01b8a3fa3a059f400cb55ee59e",
+      "frames": [
+        {
+          "index": 0,
+          "bbox": [
+            16,
+            12,
+            67,
+            84
+          ],
+          "bottom_16_changed": 0,
+          "whole_changed": 0
+        },
+        {
+          "index": 1,
+          "bbox": [
+            16,
+            12,
+            65,
+            84
+          ],
+          "bottom_16_changed": 0,
+          "whole_changed": 497
+        },
+        {
+          "index": 2,
+          "bbox": [
+            16,
+            12,
+            65,
+            84
+          ],
+          "bottom_16_changed": 0,
+          "whole_changed": 451
+        },
+        {
+          "index": 3,
+          "bbox": [
+            16,
+            12,
+            67,
+            84
+          ],
+          "bottom_16_changed": 0,
+          "whole_changed": 267
+        }
+      ]
+    },
+    {
+      "file": "barista-tamp-right.png",
+      "size": [
+        256,
+        88
+      ],
+      "bbox": [
+        7,
+        6,
+        246,
+        84
+      ],
+      "alpha_zero": 13979,
+      "alpha_partial": 0,
+      "alpha_opaque": 8549,
+      "off_palette_visible": 8549,
+      "sha256": "eb92a1c76fe0ff0c9cc02f78d1f627df213408015c89664a758f244eaf6b40b2",
+      "frames": [
+        {
+          "index": 0,
+          "bbox": [
+            7,
+            6,
+            54,
+            84
+          ],
+          "bottom_16_changed": 0,
+          "whole_changed": 0
+        },
+        {
+          "index": 1,
+          "bbox": [
+            7,
+            6,
+            52,
+            84
+          ],
+          "bottom_16_changed": 0,
+          "whole_changed": 1019
+        },
+        {
+          "index": 2,
+          "bbox": [
+            7,
+            6,
+            50,
+            84
+          ],
+          "bottom_16_changed": 0,
+          "whole_changed": 1098
+        },
+        {
+          "index": 3,
+          "bbox": [
+            7,
+            6,
+            54,
+            84
+          ],
+          "bottom_16_changed": 0,
+          "whole_changed": 944
+        }
+      ]
+    },
+    {
+      "file": "chef-knead-right.png",
+      "size": [
+        256,
+        88
+      ],
+      "bbox": [
+        7,
+        6,
+        246,
+        84
+      ],
+      "alpha_zero": 13721,
+      "alpha_partial": 0,
+      "alpha_opaque": 8807,
+      "off_palette_visible": 8807,
+      "sha256": "c2f3ebe16750cd5278ed1aa2ff1f139e3d79ad3c60ab2c1c6677764f69f9ed95",
+      "frames": [
+        {
+          "index": 0,
+          "bbox": [
+            7,
+            6,
+            54,
+            84
+          ],
+          "bottom_16_changed": 0,
+          "whole_changed": 0
+        },
+        {
+          "index": 1,
+          "bbox": [
+            7,
+            6,
+            61,
+            84
+          ],
+          "bottom_16_changed": 0,
+          "whole_changed": 1401
+        },
+        {
+          "index": 2,
+          "bbox": [
+            7,
+            6,
+            51,
+            84
+          ],
+          "bottom_16_changed": 0,
+          "whole_changed": 1048
+        },
+        {
+          "index": 3,
+          "bbox": [
+            6,
+            6,
+            54,
+            84
+          ],
+          "bottom_16_changed": 0,
+          "whole_changed": 875
+        }
+      ]
+    }
+  ],
+  "revisions": [
+    {
+      "file": "barista-tamp-right-v2.png",
+      "source_attachment": "dd9721a47866c16ca09b55b7693a0bdf557b27562441fbf69a3bfa7768370282.png",
+      "sha256": "dd9721a47866c16ca09b55b7693a0bdf557b27562441fbf69a3bfa7768370282",
+      "size": [
+        256,
+        88
+      ],
+      "status": "Revised candidate accepted: shallow metal basket and handle are now readable; four-frame layout and stable foot region verified. Not integrated; palette conformance and game contact checks remain.",
+      "supersedes": "barista-tamp-right.png",
+      "preserves_original": true
+    }
+  ]
+}

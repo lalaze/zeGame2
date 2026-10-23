@@ -1,0 +1,96 @@
+{
+  "source": "cafe-art-assets.zip",
+  "status": "Originals preserved; not integrated; see docs/art-supplement-v2-review.md",
+  "assets": [
+    {
+      "file": "greenhouse-door-frame.png",
+      "size": [
+        96,
+        152
+      ],
+      "bbox": [
+        2,
+        2,
+        94,
+        150
+      ],
+      "alpha_zero": 8061,
+      "alpha_partial": 0,
+      "alpha_opaque": 6531,
+      "off_palette_visible": 6531,
+      "sha256": "32a5ae8bf532b8ba298ee6ec5dd4054ff3e634968dfb2acd3d21f7ed0de6aee5"
+    },
+    {
+      "file": "greenhouse-door-view.png",
+      "size": [
+        96,
+        152
+      ],
+      "bbox": [
+        21,
+        29,
+        75,
+        147
+      ],
+      "alpha_zero": 8220,
+      "alpha_partial": 0,
+      "alpha_opaque": 6372,
+      "off_palette_visible": 6371,
+      "sha256": "cea4ca84831493f88e77282dc4c956bfbb09511cadf465ffff70e9292e1e1df5"
+    },
+    {
+      "file": "pastry-case-body.png",
+      "size": [
+        140,
+        34
+      ],
+      "bbox": [
+        2,
+        2,
+        138,
+        32
+      ],
+      "alpha_zero": 714,
+      "alpha_partial": 19,
+      "alpha_opaque": 4027,
+      "off_palette_visible": 4046,
+      "sha256": "cc76f092fdf1b45e81f0be151fb465d382fddbcfc46e22c24bd6bd944cc9e102"
+    },
+    {
+      "file": "pastry-case-glass.png",
+      "size": [
+        140,
+        34
+      ],
+      "bbox": [
+        6,
+        6,
+        134,
+        28
+      ],
+      "alpha_zero": 4605,
+      "alpha_partial": 155,
+      "alpha_opaque": 0,
+      "off_palette_visible": 155,
+      "sha256": "51ab83ac0b13cb512c652ea3e06e4f934a0a304becb040989b5af7d989f0e966"
+    },
+    {
+      "file": "reading-floor-lamp.png",
+      "size": [
+        24,
+        74
+      ],
+      "bbox": [
+        2,
+        2,
+        22,
+        72
+      ],
+      "alpha_zero": 1352,
+      "alpha_partial": 0,
+      "alpha_opaque": 424,
+      "off_palette_visible": 424,
+      "sha256": "8341c5f417d8ffb319e84a8e2d14ac36e49975db2795da5479b8f00d8655f14f"
+    }
+  ]
+}

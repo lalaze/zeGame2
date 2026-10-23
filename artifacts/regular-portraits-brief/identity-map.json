@@ -1,0 +1,146 @@
+[
+  {
+    "id": "mina",
+    "appearanceId": 0,
+    "reference": "mina-reference.png",
+    "source": "public/art/generated/cozy-cast-v7/customer-0.png",
+    "source_sha256": "e2a392ce708a37659c82e90508d11b4bde7c0e18cd5bd0a3b86af21150175360",
+    "pose_indices": [
+      0,
+      6
+    ],
+    "output": "portrait-mina.png"
+  },
+  {
+    "id": "theo",
+    "appearanceId": 17,
+    "reference": "theo-reference.png",
+    "source": "public/art/generated/cozy-cast-v7/customer-17.png",
+    "source_sha256": "9ed4fdfb34ae7674894788a6706f14d27897a3a7042497b9e726a57a0c701218",
+    "pose_indices": [
+      0,
+      6
+    ],
+    "output": "portrait-theo.png"
+  },
+  {
+    "id": "iris",
+    "appearanceId": 10,
+    "reference": "iris-reference.png",
+    "source": "public/art/generated/cozy-cast-v7/customer-10.png",
+    "source_sha256": "b6740cbd0b2caaba83a207346a2c9069c18f23e1e3567e194f121c4e5f525bb3",
+    "pose_indices": [
+      0,
+      6
+    ],
+    "output": "portrait-iris.png"
+  },
+  {
+    "id": "nico",
+    "appearanceId": 4,
+    "reference": "nico-reference.png",
+    "source": "public/art/generated/cozy-cast-v7/customer-4.png",
+    "source_sha256": "eefdce49e186b77e18f1258fa7a43c23a1699877908825e72808338959fd59c3",
+    "pose_indices": [
+      0,
+      6
+    ],
+    "output": "portrait-nico.png"
+  },
+  {
+    "id": "june",
+    "appearanceId": 7,
+    "reference": "june-reference.png",
+    "source": "public/art/generated/cozy-cast-v7/customer-7.png",
+    "source_sha256": "6b90b451c0bdd522c6b33acf7df6bcedce80c23c5104ede1c5d1868cd26bc3d8",
+    "pose_indices": [
+      0,
+      6
+    ],
+    "output": "portrait-june.png"
+  },
+  {
+    "id": "alba",
+    "appearanceId": 13,
+    "reference": "alba-reference.png",
+    "source": "public/art/generated/cozy-cast-v7/customer-13.png",
+    "source_sha256": "ea5492e09b294fd53236bcc55da19281b543892e64dbb2c3675c4c5b2977cad5",
+    "pose_indices": [
+      0,
+      6
+    ],
+    "output": "portrait-alba.png"
+  },
+  {
+    "id": "ren",
+    "appearanceId": 6,
+    "reference": "ren-reference.png",
+    "source": "public/art/generated/cozy-cast-v7/customer-6.png",
+    "source_sha256": "843cc6e3e71c7b7e0b91cf5ecf5e0af38c69081f326157358d606c629e8e0e1b",
+    "pose_indices": [
+      0,
+      6
+    ],
+    "output": "portrait-ren.png"
+  },
+  {
+    "id": "tess",
+    "appearanceId": 2,
+    "reference": "tess-reference.png",
+    "source": "public/art/generated/cozy-cast-v7/customer-2.png",
+    "source_sha256": "771337f6a0a83d8ade5babc35c6e4e2fc5f412b3164e1ed1a056924e0e1ac465",
+    "pose_indices": [
+      0,
+      6
+    ],
+    "output": "portrait-tess.png"
+  },
+  {
+    "id": "sam",
+    "appearanceId": 24,
+    "reference": "sam-reference.png",
+    "source": "public/art/generated/cozy-cast-v7/customer-24.png",
+    "source_sha256": "9ed736236d3c2026c2b4b547bf89a45cdcad262a3f56f19e5b4d7be19a2e6b63",
+    "pose_indices": [
+      0,
+      6
+    ],
+    "output": "portrait-sam.png"
+  },
+  {
+    "id": "vivi",
+    "appearanceId": 21,
+    "reference": "vivi-reference.png",
+    "source": "public/art/generated/cozy-cast-v7/customer-21.png",
+    "source_sha256": "6b8952dc757e12765cc8dca0d416664ffddb964c1d6fc15b430c795ab77b4a47",
+    "pose_indices": [
+      0,
+      6
+    ],
+    "output": "portrait-vivi.png"
+  },
+  {
+    "id": "otto",
+    "appearanceId": 8,
+    "reference": "otto-reference.png",
+    "source": "public/art/generated/cozy-cast-v7/customer-8.png",
+    "source_sha256": "e277e9d7e86cb6c12537b9f3d21150f9bb43757c6491ddeea598c3d5b1922b2f",
+    "pose_indices": [
+      0,
+      6
+    ],
+    "output": "portrait-otto.png"
+  },
+  {
+    "id": "luz",
+    "appearanceId": 29,
+    "reference": "luz-reference.png",
+    "source": "public/art/generated/cozy-cast-v7/customer-29.png",
+    "source_sha256": "4778a12c92caf1997e34e4383b767142bcd786644e1f0b97d7d0b0608285dc75",
+    "pose_indices": [
+      0,
+      6
+    ],
+    "output": "portrait-luz.png"
+  }
+]
