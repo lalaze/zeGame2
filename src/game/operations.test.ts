@@ -164,7 +164,10 @@ describe('gentle closing and saved service', () => {
     expect(sim.closeShop(s)).toBeNull();
     expect(s.day).toBe(2);
   });
-  it.each([12, 291])('refreshes mid-close with in-flight plates and batches without consuming ingredients twice (seed %i)', (seed) => {
+  // The doorway case waits for a cook between the kitchen door and its x=12 waypoint,
+  // rather than trusting a seed to stop there: any change to guest routes shifts the timing.
+  const inDoorway = (cook: Cook) => cook.x >= 0 && cook.x < 12 && cook.y === doorwayY('kitchen', 'right') && cook.tx === 12;
+  it.each([{ seed: 12, doorway: false }, { seed: 291, doorway: true }])('refreshes mid-close with in-flight plates and batches without consuming ingredients twice (seed $seed)', ({ seed, doorway }) => {
     const random = vi.spyOn(Math, 'random').mockImplementation(rng(seed));
     try {
       const store = storage();
@@ -177,7 +180,7 @@ describe('gentle closing and saved service', () => {
       let found = false;
       for (let n = 0; n < 6000; n++) {
         first.sim.update(first.state, 0.05);
-        if (first.sim.cooks.some((c) => c.batch) && first.sim.customers.some((c) => c.phase === 'waiting')) { found = true; break; }
+        if (first.sim.cooks.some((c) => c.batch && (!doorway || inDoorway(c))) && first.sim.customers.some((c) => c.phase === 'waiting')) { found = true; break; }
       }
       expect(found).toBe(true);
       first.sim.beginClosing(first.state);
@@ -188,16 +191,14 @@ describe('gentle closing and saved service', () => {
       const inProduction = { ...first.state.inProduction };
       const expected = withCanonicalCookRoutes(snapshot);
       snapshot.cooks.forEach(expectClearCookRoute);
-      if (seed === 291) {
+      if (doorway) {
         // Preserve the failing doorway case: x >= 0 replans directly to pickup,
         // omitting the old route's still-unreached x=12 doorway waypoint.
-        const cook = snapshot.cooks[0];
-        expect(cook.x).toBeGreaterThanOrEqual(0);
-        expect(cook.x).toBeLessThan(12);
-        expect(cook.y).toBe(doorwayY('kitchen', 'right'));
-        expect(cook.tx).toBe(12);
+        const i = snapshot.cooks.findIndex(inDoorway);
+        expect(i).toBeGreaterThanOrEqual(0);
+        const cook = snapshot.cooks[i];
         expect(cook.journey).toEqual([{ x: 12, y: cook.y }, { x: stationSpot('door').x, y: cook.y }]);
-        expect(expected.cooks[0].tx).toBe(stationSpot('door').x);
+        expect(expected.cooks[i].tx).toBe(stationSpot('door').x);
       }
       first.close();
       // An accepted customer still walking to the counter has not paid ingredients yet.
