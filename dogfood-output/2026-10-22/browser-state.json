@@ -1,0 +1,31 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "http://127.0.0.1:5187",
+      "localStorage": [
+        {
+          "name": "tiny-bean-cafe/first-service/1792643096552",
+          "value": "active"
+        },
+        {
+          "name": "tiny-bean-cafe/save",
+          "value": "{\"version\":18,\"partners\":{\"roster\":{\"yue\":{\"xp\":0,\"workedDays\":0,\"lastWorkedDay\":0,\"specialty\":null,\"unlocked\":0,\"read\":[],\"todayDay\":0,\"todayJobs\":0,\"todayUnlocks\":0}},\"active\":{\"barista\":[],\"server\":[\"yue\"],\"cook\":[]}},\"signatureDrinks\":{\"recipes\":[],\"tested\":[],\"served\":{}},\"cafeStyle\":{\"focus\":null,\"handoffs\":{\"tableServed\":0,\"catServed\":0,\"fastServed\":0,\"teaPairs\":0}},\"regularGuests\":{\"guests\":{},\"nextVisitId\":1},\"milestones\":{\"done\":[],\"reachedOn\":{},\"claimed\":[],\"records\":{\"bestDay\":0,\"bestSmoothDay\":0,\"weatherWins\":[],\"momentsAnswered\":0}},\"pets\":[],\"promotion\":null,\"reputation\":{\"recent\":[]},\"taste\":{\"served\":{},\"signature\":[]},\"coins\":0,\"totalEarned\":0,\"served\":0,\"items\":{\"espresso\":1,\"americano\":0,\"latte\":0,\"cappuccino\":0,\"flatwhite\":0,\"cortado\":0,\"mocha\":0,\"vienna\":0,\"macchiato\":0,\"coldbrew\":0,\"dirty\":0,\"pourover\":0,\"creamcoffee\":0,\"affogato\":0,\"blacktea\":0,\"hotchoc\":0,\"lemontea\":0,\"chai\":0,\"fruittea\":0,\"hojicha\":0,\"matcha\":0,\"frappe\":0,\"smoothie\":0,\"milktea\":0,\"matchafloat\":0,\"roll\":0,\"bagel\":0,\"baguette\":0,\"cheesebun\":0,\"pretzel\":0,\"focaccia\":0,\"ciabatta\":0,\"raisinbread\":0,\"sourdough\":0,\"rye\":0,\"chocobread\":0,\"shokupan\":0,\"brioche\":0,\"fruitbrioche\":0,\"garlicbread\":0,\"donut\":0,\"scone\":0,\"cookie\":0,\"croissant\":0,\"painchoc\":0,\"brownie\":0,\"cinnamon\":0,\"muffin\":0,\"creampuff\":0,\"melonpan\":0,\"eggtart\":0,\"cake\":0,\"swissroll\":0,\"cheesecake\":0,\"macaron\":0},\"upgrades\":{\"marketing\":0,\"machine\":0,\"barista\":0,\"server\":0,\"cook\":0,\"tables\":0,\"pass\":0},\"regions\":[],\"kitchen\":false,\"profile\":null,\"decor\":{\"owned\":[\"tablecloth_classic\",\"tablecloth_mint\",\"tablecloth_rose\",\"centerpiece_flowers\",\"centerpiece_none\",\"curtain_classic\",\"curtain_sage\",\"curtain_rose\",\"wall_cream\",\"wall_mint\",\"wall_rose\",\"floor_checker\",\"floor_planks\",\"floor_mint\",\"counter_oak\",\"counter_sage\",\"counter_blush\",\"sill_none\",\"ceiling_none\",\"rug_none\",\"neon_none\"],\"equipped\":{\"wallpaper\":\"wall_cream\",\"floor\":\"floor_checker\",\"counter\":\"counter_oak\",\"tablecloth\":\"tablecloth_classic\",\"curtain\":\"curtain_classic\",\"centerpiece\":\"centerpiece_flowers\",\"sill\":\"sill_none\",\"ceiling\":\"ceiling_none\",\"rug\":\"rug_none\",\"neon\":\"neon_none\"},\"placed\":[{\"id\":\"clock\",\"col\":11,\"row\":0},{\"id\":\"mugrack\",\"col\":27,\"row\":3}],\"stored\":{}},\"goal\":0,\"phase\":\"prep\",\"day\":1,\"dayTime\":0,\"speed\":1,\"onMenu\":[\"espresso\"],\"pantry\":{\"beans\":50,\"milk\":0,\"flour\":0,\"butter\":0,\"eggs\":0,\"sugar\":0,\"tea\":0,\"spice\":0,\"cocoa\":0,\"cream\":0,\"fruit\":0,\"matcha\":0},\"bakePlan\":{},\"shelf\":{},\"today\":{\"reviews\":{\"stars\":[0,0,0,0,0],\"reasons\":{},\"totalScore\":0},\"served\":0,\"missed\":0,\"soldOut\":0,\"queueLost\":0,\"tableLost\":0,\"extraLost\":0,\"doorLost\":0,\"shortages\":{},\"revenue\":0,\"ingredientCost\":0,\"petCost\":0,\"promotionCost\":0,\"sales\":{},\"baked\":{}},\"inProduction\":{},\"createdAt\":1792643096552}"
+        }
+      ]
+    },
+    {
+      "origin": "http://100.96.195.115:5187",
+      "localStorage": [
+        {
+          "name": "tiny-bean-cafe/first-service/1792643072585",
+          "value": "active"
+        },
+        {
+          "name": "tiny-bean-cafe/locale",
+          "value": "zh"
+        }
+      ]
+    }
+  ]
+}
