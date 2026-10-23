@@ -1,4 +1,4 @@
-import test from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -23,7 +23,8 @@ test('reference treatment retains stock-driven food and shared floor projection'
   const room=source('src/render/room-art.ts');
   assert.match(room,/state.phase === 'prep' \? \(state.bakePlan\[m.id\] \?\? 0\) : \(state.shelf\[m.id\] \?\? 0\)/);
   assert.match(room,/projectFloorLayer\(out, source, mainPixelProjection\(H\)\)/);
-  assert.match(room,/if \(floor === 'floor_checker'\) paintPixelFloorDepth/);
+  // Every floor finish, checker included, shares one material painter before that projection.
+  assert.match(room,/mainFloor\(this\.ctx, floor, H\)/);
   assert.match(room,/this.referenceMachine\(mx - 2, my \+ 24\)/);
   assert.doesNotMatch(room,/paintGeneratedCabinetBand/);
 });

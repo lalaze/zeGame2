@@ -1,4 +1,4 @@
-import test from 'node:test';
+import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
@@ -6,12 +6,14 @@ import { readFileSync } from 'node:fs';
 // run the full app, or replace reference-character-qa.html browser verification.
 const read = path => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('reference art declares the complete five-atlas family and lazy loading', () => {
+// The five reference-characters-v1 atlases were replaced by the cozy cast (guests), cozy team
+// (staff) and seating families; the reference module now loads and delegates to them.
+test('reference art loads the cast, team and seating families lazily and delegates to them', () => {
   const source = read('src/render/reference-character-art.ts');
-  for (const kind of ['short', 'long', 'bob', 'staff', 'chef']) assert.ok(source.includes(`'${kind}'`), kind);
+  for (const family of ['preloadSeatingEnsemble', 'preloadBatchCharacters', 'preloadCozyTeam', 'makeBatchCharacter', 'makeCozyTeam'])
+    assert.ok(source.includes(family), family);
   assert.match(source, /export function preloadReferenceCharacters/);
-  assert.match(source, /reference-characters-v1/);
-  assert.match(source, /registerFineSpriteArt/);
+  for (const file of ['src/render/cozy-cast-art.ts', 'src/render/cozy-team-art.ts']) assert.match(read(file), /registerFineSpriteArt/);
   assert.match(source, /export function referenceCharacterContacts/);
   assert.match(source, /export function referenceCharacterOffset/);
 });
