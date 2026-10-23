@@ -245,7 +245,8 @@ describe('emergency bean experimental accounting', () => {
     const c = CASES.find((c) => c.id === 'normal/early')!; const control = recoverySample(c, SEEDS[1], false, 180); const polled = recoverySample(c, SEEDS[1], true, 180);
     expect(polled.grants).toHaveLength(0); expect(polled.checks).toBe(3600);
     expect(JSON.stringify(polled.observed)).toBe(JSON.stringify(control.observed));
-    expect(polled.observed.completedDays).toBe(0); expect(polled.observed.terminal.state.phase).toBe('open');
+    // The trading day ends at 180 s (dcacd65): the cafe has just begun closing, but nothing settles or drains.
+    expect(polled.observed.completedDays).toBe(0); expect(polled.observed.terminal.state.phase).toBe('closing');
     expect(polled.observed.openSeconds + polled.observed.closingSeconds).toBe(180);
   });
 });

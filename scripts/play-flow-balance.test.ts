@@ -20,7 +20,8 @@ describe('play-flow paired economic contract', () => {
     const observed = observedFlowSample(scenario, FLOW_SEEDS[0], 180);
     for (const key of Object.keys(raw) as (keyof typeof raw)[]) expect(observed[key]).toEqual(raw[key]);
     expect(observed.seconds).toBe(180); expect(observed.openSeconds).toBe(180); expect(observed.closingSeconds).toBe(0);
-    expect(observed.completedDays).toBe(0); expect(observed.terminalPhase).toBe('open');
+    // The trading day ends at 180 s (dcacd65): the cafe has just begun closing, but nothing settles or drains.
+    expect(observed.completedDays).toBe(0); expect(observed.terminalPhase).toBe('closing');
     expect(observedFlowSample(scenario, FLOW_SEEDS[0], 180)).toEqual(observed);
   });
   it('accounts for initial fresh beans and paid signature trials without creating cash', () => {

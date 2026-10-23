@@ -237,7 +237,8 @@ describe('fixed total clock and live food accounting', () => {
     const route = fixedRoutes()[0];
     const row = fixedSample(route, SEEDS[0], 180);
     expect(row.totalSeconds).toBe(180); expect(row.openSeconds).toBe(180); expect(row.closingSeconds).toBe(0);
-    expect(row.completedDays).toBe(0); expect(row.terminal.phase).toBe('open');
+    // The trading day ends at 180 s (dcacd65): the cafe has just begun closing, but nothing settles or drains.
+    expect(row.completedDays).toBe(0); expect(row.terminal.phase).toBe('closing');
     expect(row.reconciliationError).toBeCloseTo(0, 6); expect(row.cashLedgerError).toBeCloseTo(0, 6);
     expect(fixedSample(route, SEEDS[0], 180)).toEqual(row);
   });

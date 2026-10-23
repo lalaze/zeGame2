@@ -15,7 +15,9 @@ import { Sim } from '../src/game/sim';
 import { createInitialState, deserialize, serialize } from '../src/game/state';
 
 const DT = 0.05;
-const SEEDS = [13, 517, 2026];
+// 2026 lost its cat-guest interactions once the cafe began closing at the end of the 180 s day
+// (dcacd65); 2027 is the nearest seed whose run still reaches every interaction phase.
+const SEEDS = [13, 517, 2027];
 const rng = (seed: number) => () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
 const hash = (value: unknown) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 function fixture() {

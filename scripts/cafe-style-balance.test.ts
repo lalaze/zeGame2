@@ -36,7 +36,8 @@ describe('six styles fair comparison contract', () => {
   it('stops exactly at the horizon without cancelling service, settling, draining or adding revenue', () => {
     const route = styleRoutes(false)[0], row = styleSample(route, STYLE_SEEDS[0], undefined, 180);
     expect(row.seconds).toBe(180); expect(row.openSeconds).toBe(180); expect(row.closingSeconds).toBe(0);
-    expect(row.completedDays).toBe(0); expect(row.terminalPhase).toBe('open');
+    // The trading day ends at 180 s (dcacd65): the cafe has just begun closing, but nothing settles or drains.
+    expect(row.completedDays).toBe(0); expect(row.terminalPhase).toBe('closing');
     expect(row.reconciliationError).toBeCloseTo(0, 5); expect(row.cashLedgerError).toBeCloseTo(0, 5);
     expect(styleSample(route, STYLE_SEEDS[0], undefined, 180)).toEqual(row);
   });
