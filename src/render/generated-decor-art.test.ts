@@ -55,8 +55,19 @@ function pngPixels(path: string) {
 }
 
 describe('generated decor materials and props adapter', () => {
+  // Decor added later has its own painters: textiles in textile-styles.ts and centerpieces in
+  // table-centerpiece-art.ts (4fe9fb3), counters in main-room-surfaces.ts (55646f5). A new decor id
+  // must join either this generated pack or that list.
+  const OWN_PAINTERS = [
+    'tablecloth_classic', 'tablecloth_mint', 'tablecloth_rose', 'tablecloth_blue', 'tablecloth_lavender', 'tablecloth_linen',
+    'centerpiece_flowers', 'centerpiece_succulent', 'centerpiece_candle',
+    'curtain_classic', 'curtain_sage', 'curtain_rose', 'curtain_blue', 'curtain_linen',
+    'counter_sage', 'counter_blush',
+  ];
   it('covers 31 actual decor IDs with 36 genuine source bitmaps and excludes all four explicit none options', () => {
-    expect([...GENERATED_DECOR_IDS].sort()).toEqual(DECOR.filter(d => !d.id.endsWith('_none')).map(d => d.id).sort());
+    expect(GENERATED_DECOR_IDS).toHaveLength(31);
+    expect([...GENERATED_DECOR_IDS].sort()).toEqual(DECOR.filter(d => !d.id.endsWith('_none') && !OWN_PAINTERS.includes(d.id)).map(d => d.id).sort());
+    for (const id of OWN_PAINTERS) expect(DECOR.some(d => d.id === id), id).toBe(true);
     expect(GENERATED_DECOR_SOURCE_IDS).toHaveLength(36);
     const manifest = JSON.parse(readFileSync('assets/generated/bulk-candidates/decor-materials/renderer-manifest.json', 'utf8'));
     for (const entry of [...manifest.assets, ...manifest.aliases]) {

@@ -182,7 +182,9 @@ describe('unchanged main-room static placements, live overlays and fallback', ()
     const a = before.draws.filter(draw => ids.includes(draw.source.assetId as StaticId));
     const b = after.draws.filter(draw => ids.includes(draw.source.assetId as StaticId));
     expect(b.map(draw => draw.source.assetId)).toEqual(a.map(draw => draw.source.assetId));
-    expect(new Set(b.map(draw => draw.source.assetId))).toEqual(new Set(['wall-lamp', 'wall-window', 'wall-board', 'service-jars', 'service-cups', 'service-basket', 'service-pickup', 'service-cupboard', 'service-machine', 'display', 'croissant', 'cake', 'vine']));
+    // The service cupboard left the room (619363d), the pastry case is painted by hand (b1d6305) and the
+    // pass is drawn by the scene, so those packed sources are installed but never painted here.
+    expect(new Set(b.map(draw => draw.source.assetId))).toEqual(new Set(['wall-lamp', 'wall-window', 'wall-board', 'service-jars', 'service-cups', 'service-basket', 'service-machine', 'vine']));
     for (let i = 0; i < a.length; i++) {
       const scale = metadata[b[i].source.assetId as StaticId].scale, old = a[i], next = b[i];
       const crop = old.args.length === 8 ? old.args.slice(0, 4) : [0, 0, old.source.width, old.source.height];
@@ -207,22 +209,19 @@ describe('unchanged main-room static placements, live overlays and fallback', ()
     }
   });
 
-  it.each(['counter_oak', 'counter_walnut', 'counter_marble', 'counter_pink', 'counter_gold'])('keeps service fixtures and upgrade effects unchanged with %s', counter => {
+  it.each(['counter_oak', 'counter_sage', 'counter_blush', 'counter_walnut', 'counter_marble', 'counter_pink', 'counter_gold'])('keeps service fixtures and upgrade effects unchanged with %s', counter => {
     const value = state('open'), before = roomRecord(false, value, 12, counter), after = roomRecord(true, value, 12, counter);
     expect(after.geometry).toEqual(before.geometry);
     expect(after.draws.filter(draw => draw.source.assetId === 'service-machine')).toHaveLength(1);
   });
 
-  it('uses current plan/live stock and keeps the empty case independent of menu changes', () => {
+  it('never paints packed display or food sources into the hand-painted pastry case', () => {
     install(true); vi.stubGlobal('document', { createElement: makeCanvas });
     const c = new RecordingCanvas(), painter = new RoomPainter(c.context as unknown as CanvasRenderingContext2D, 2, false) as unknown as { drawPastryCase(value: GameState): void };
     const value = state('prep', 1, 0);
-    const shown = () => c.draws.filter(draw => ['croissant', 'cake'].includes(draw.source.assetId ?? '')).map(draw => draw.source.assetId);
-    painter.drawPastryCase(value); expect(shown()).toEqual(['croissant', 'cake']);
-    c.draws.length = 0; value.phase = 'open'; painter.drawPastryCase(value); expect(shown()).toEqual([]);
-    value.shelf.cake = 1; c.draws.length = 0; painter.drawPastryCase(value); expect(shown()).toEqual(['cake']);
-    value.onMenu = ['espresso']; c.draws.length = 0; painter.drawPastryCase(value); expect(shown()).toEqual([]);
-    expect(c.draws.filter(draw => draw.source.assetId === 'display')).toHaveLength(1);
+    const packed = () => c.draws.filter(draw => ['display', 'croissant', 'cake'].includes(draw.source.assetId ?? ''));
+    painter.drawPastryCase(value); expect(packed()).toEqual([]);
+    value.phase = 'open'; value.shelf.cake = 1; c.draws.length = 0; painter.drawPastryCase(value); expect(packed()).toEqual([]);
   });
 
   it.each(ids)('falls back for missing or wrong-sized %s without accepting an incorrect crop', id => {

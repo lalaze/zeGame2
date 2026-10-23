@@ -24,8 +24,9 @@ function harness() {
     view: { paused: false, livingCats: { actors: new Map() } },
     sim: { customers: [], seats: [] },
     textures: {},
-    image: (sprite: string | { name: string }, x: number, y: number) => {
-      images.push({ key: typeof sprite === 'string' ? sprite : sprite.name, x, y });
+    // Sprites arrive as themselves, or (tray food) wrapped as world art around the sprite.
+    image: (sprite: string | { name?: string; canvas?: { name: string } }, x: number, y: number) => {
+      images.push({ key: typeof sprite === 'string' ? sprite : sprite.name ?? sprite.canvas!.name, x, y });
       return { setCrop: () => undefined };
     },
     shadow: vi.fn(),
@@ -41,8 +42,9 @@ describe('scene projection attachment groups', () => {
     scene.drawServer(server, 1190);
     const foot = projectMainWorld(server);
     expect(images.find(i => i.key === 'down')).toMatchObject({ x: Math.round(foot.x * 2) / 2 - 9, y: 163 });
-    expect(images.find(i => i.key === 'tray')).toMatchObject({ x: Math.round(foot.x * 2) / 2 - 11, y: 173 });
-    expect(images.find(i => i.key === 'food')).toMatchObject({ x: Math.round(foot.x * 2) / 2 - 4, y: 165 });
+    // The tray sits ten pixels above the feet (b377687); the 8px food rests on it.
+    expect(images.find(i => i.key === 'tray')).toMatchObject({ x: Math.round(foot.x * 2) / 2 - 11, y: 180 });
+    expect(images.find(i => i.key === 'food')).toMatchObject({ x: Math.round(foot.x * 2) / 2 - 4, y: 172 });
     expect(server.x).toBe(90);
   });
 

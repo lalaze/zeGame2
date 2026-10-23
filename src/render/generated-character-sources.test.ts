@@ -1,11 +1,8 @@
 // @vitest-environment happy-dom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { CUSTOMER_CAST } from '../game/customer-cast';
-import { recordRegularGuestArrival } from '../game/regular-guests';
-import { createInitialState, type Look } from '../game/state';
-import { createGeneratedOwnerPreview } from '../ui/generated-owner-preview';
+import type { Look } from '../game/state';
 import { closeModal } from '../ui/modal';
-import { showRegularGuests } from '../ui/regular-guests';
 import { fineSpriteArt } from './fine-sprite-art';
 import { createGeneratedCatArt, generatedCatFrameIds, type GeneratedCatFrameId, type GeneratedCatManifest } from './generated-cat-art';
 import catManifestJson from './generated-cat-manifest.json';
@@ -190,7 +187,9 @@ describe('release baked character source packs', () => {
     expect(releaseGeneratedCharacterSources({ kind: 'cat', adapter: next.cat }, next.textures)).toBe(14);
   });
 
-  it('keeps copied final pixels and both shared UI previews functional without original images', () => {
+  // The owner preview and the journal portrait draw the cast from character() since b377687, so
+  // neither reads these packs any more; their copied frames must still survive the release.
+  it('keeps copied final pixels and resolved frames usable without original images', () => {
     const { staff, customer, textures, originals } = fixture();
     const owner = staff.resolve({ role: 'owner', look: ownerLook }, character(ownerLook, 'owner')).frames;
     const mina = customer.resolve(customerIdentity, character(CUSTOMER_CAST[0].look, 'customer', 0)).frames;
@@ -201,20 +200,6 @@ describe('release baked character source packs', () => {
     // Source storage is now inaccessible, not just absent from the registry.
     for (const original of originals) Object.defineProperty(original, 'rgbaSample', { get() { throw new Error('released original was read'); } });
     expect(sample(ownerBacking)).toEqual(ownerPixels); expect(sample(minaBacking)).toEqual(minaPixels);
-    const preview = createGeneratedOwnerPreview(ownerLook, 5);
-    expect(preview.canvas.dataset.generatedOwner).toBe('true');
-    expect(sample(preview.canvas)).toEqual(ownerPixels);
-    preview.update({ ...ownerLook, shirt: 1 });
-    expect(preview.canvas.dataset.generatedOwner).toBe('false');
-    preview.update(ownerLook);
-    expect(sample(preview.canvas)).toEqual(ownerPixels);
-    preview.dispose();
-    const state = createInitialState(0);
-    state.phase = 'open'; state.day = 1;
-    recordRegularGuestArrival(state, 'mina');
-    showRegularGuests(state, vi.fn());
-    expect(toDataURL).toHaveBeenCalledWith(minaBacking, 0.75);
-    expect(document.querySelector('.regular-portrait')).not.toBeNull();
     expect(customer.resolve(customerIdentity, character(CUSTOMER_CAST[0].look, 'customer', 0)).frames).toBe(mina);
     expect(sample(fineSpriteArt(mina.sitPetRight[1]).canvas)).toBeDefined();
   });

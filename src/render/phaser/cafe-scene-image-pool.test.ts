@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { MIN_SCENE_H, seatSpot, setSceneHeight, tablePos } from '../../game/layout';
+import { MIN_SCENE_H, SEAT_OFFSET, seatSpot, setSceneHeight, tablePos } from '../../game/layout';
 import { projectMainWorld } from '../main-pixel-presentation';
 import { fineSpriteArt, registerFineSpriteArt } from '../fine-sprite-art';
 import { character, CHAR_H } from '../sprites';
@@ -81,6 +81,8 @@ function harness(reuseOneImage = true) {
   // Avoid create()/browser boot, but do not replace image() or drawTable().
   const scene = Object.create(CafeScene.prototype) as SceneHarness;
   Object.assign(scene, {
+    // The class field default; Object.create skips initializers.
+    furnitureAlpha: 1,
     textures, images: { next },
     view: { paused: true, livingCats: { actors: new Map() } },
     motionPreference: { matches: true },
@@ -178,7 +180,7 @@ describe('actual CafeScene image dispatch with pooled image objects', () => {
     expect(cropped.scaleY).toBe(0.5);
     expect([cropped.x, cropped.y]).toEqual([whole.x, whole.y]);
     const table = tablePos(0), paintedTable = projectMainWorld(table);
-    expect(cropped.x).toBe(Math.round((paintedTable.x + (side === 0 ? -15 : 15) - 9) * 2) / 2);
+    expect(cropped.x).toBe(Math.round((paintedTable.x + (side === 0 ? -SEAT_OFFSET : SEAT_OFFSET) - 9) * 2) / 2);
     expect(cropped.y).toBe(customer.y - (CHAR_H + 5));
     expect([original.width, original.height]).toEqual([18, 26]);
   });

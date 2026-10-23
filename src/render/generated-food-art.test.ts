@@ -3,13 +3,14 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { inflateSync } from 'node:zlib';
 import { MENU, type ItemId } from '../game/data';
+import { COUNTER, PASTRY_CASE } from '../game/layout';
 import { createInitialState } from '../game/state';
 import { paintPastryFridge, paintRack } from './kitchen-art';
 import { RoomPainter } from './room-art';
 import { fineSpriteArt } from './fine-sprite-art';
 import { createGeneratedFoodArt, GENERATED_FOOD_DENSITY, GENERATED_FOOD_ENVELOPES, GENERATED_FOOD_IDS,
   type GeneratedFoodId, type GeneratedFoodSources } from './generated-food-art';
-import { clearGeneratedMainAssets, getGeneratedFoodAdapter, installGeneratedMainAsset, setGeneratedFoodAdapter } from './generated-main-art';
+import { clearGeneratedMainAssets, getGeneratedFoodAdapter, setGeneratedFoodAdapter } from './generated-main-art';
 import { ITEM_ART, itemArtwork, itemIcon } from './sprites';
 
 type Draw = { source: CanvasImageSource; args: number[]; smoothing: boolean; operation: string };
@@ -308,25 +309,27 @@ describe('generated food bitmap adapter', () => {
     expect(fridge.draws[0].args.slice(2)).toEqual([icon.width, icon.height]);
   });
 
-  it('bottom-centers original display-case pastries at native aspect inside the existing shelf envelopes', () => {
+  // The case is painted by hand with each pastry's menu icon (b1d6305); the generated food adapter supplies them.
+  it('bottom-centers generated display-case pastries at native aspect inside the case', () => {
     const state = createInitialState(0); state.kitchen = true; state.phase = 'prep';
     state.onMenu = ['croissant', 'cake'];
     for (const id of ['croissant', 'cake'] as const) { state.items[id] = 1; state.bakePlan[id] = 1; }
-    const croissant = source(437, 293), cake = source(336, 327);
-    installGeneratedMainAsset('display', source(1941, 521));
-    installGeneratedMainAsset('croissant', croissant); installGeneratedMainAsset('cake', cake);
+    const adapter = fixture().create(); setGeneratedFoodAdapter(adapter);
+    const icons = { croissant: adapter.icon('croissant', true)!, cake: adapter.icon('cake', true)! };
     const canvas = new RecordingCanvas();
     const painter = new RoomPainter(canvas.context as unknown as CanvasRenderingContext2D, 2) as unknown as {
       drawPastryCase(input: typeof state): void;
     };
     painter.drawPastryCase(state);
-    const food = canvas.draws.filter(draw => draw.source === croissant || draw.source === cake);
-    expect(food).toHaveLength(2);
     const bottoms: number[] = [];
-    for (const draw of food) {
-      const [, y, w, h] = draw.args, image = draw.source as HTMLCanvasElement;
-      expect(w / image.width).toBeCloseTo(h / image.height, 12);
-      expect(w).toBeLessThanOrEqual(image === croissant ? 12 : 8); expect(h).toBeLessThanOrEqual(8);
+    for (const [id, icon] of Object.entries(icons)) {
+      const food = canvas.draws.filter(draw => draw.source === fineSpriteArt(icon).canvas);
+      expect(food, id).toHaveLength(1);
+      const [, y, w, h] = food[0].args;
+      expect([w, h]).toEqual([icon.width, icon.height]);
+      expect(w / icon.width).toBeCloseTo(h / icon.height, 12);
+      // Outlined icons fit the narrowest slot of a full five-dish case and its interior height.
+      expect(w).toBeLessThanOrEqual(PASTRY_CASE.w / 5); expect(h).toBeLessThanOrEqual(COUNTER.bottom - COUNTER.front - 6);
       bottoms.push(y + h);
     }
     expect(bottoms[0]).toBe(bottoms[1]);

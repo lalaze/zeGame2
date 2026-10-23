@@ -81,7 +81,8 @@ describe('resident rendering integration', () => {
     const source = sceneSource;
     expect(source.match(/this\.drawResidents\(state\)/g)).toHaveLength(1);
     expect(source).toContain('private drawFloorStanding(state: GameState, t: number): void {\n    this.drawResidents(state);');
-    expect(source).toContain('.setAlpha(1).setFlipX(false)');
+    // Pooled images reset alpha (to the furniture alpha, 1 outside arranging) and flip on every draw.
+    expect(source).toContain('.setAlpha(this.furnitureAlpha).setFlipX(false)');
     expect(source).toContain('.setFlipX(residentCatFlipX(walking, cat.facing))');
   });
 });
@@ -91,7 +92,7 @@ describe('reciprocal guest rendering integration', () => {
     expect(sceneSource).toContain("cat.interaction?.guestId === c.id && cat.interaction.phase === 'response'");
     expect(sceneSource).toContain('frames.sitPetRight : frames.sitPetLeft');
     expect(sceneSource).toContain('this.motionPreference.matches || this.view.paused');
-    expect(sceneSource.match(/sitter\(side, c\)/g)).toHaveLength(2);
+    expect(sceneSource.match(/sitter\(side, ?c\)/g)).toHaveLength(2);
     expect(sceneSource).toContain('quiet ? frames.lookUp : frames.nuzzle');
     expect(sceneSource).not.toContain('c.id % 4 === 0');
   });
