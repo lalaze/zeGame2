@@ -11,6 +11,7 @@ import { trafficHud } from './ui/traffic-status';
 import { showSoldOut } from './ui/sold-out';
 import { CafeLife, closingStory } from './ui/cafe-life';
 import { trialResultCard } from './ui/trial-sales';
+import { guestMemoryReport } from './ui/guest-memories';
 import { showLivingCat } from './ui/living-cats';
 import { petActive, type CatId } from './game/pets';
 import { DAY_SECONDS, SPEEDS } from './game/data';
@@ -689,6 +690,8 @@ function showReport(report: DayReport): void {
   const { body, recommendedTab, advice } = settlementHtml(report, state);
   const reportBody = document.createElement('div');
   reportBody.innerHTML = body;
+  const memories = guestMemoryReport(state, report.day);
+  if (memories) reportBody.querySelector('[data-memory-report]')?.append(memories);
   if (report.trialSale) {
     const trial = trialResultCard(state, () => { saveGame(); panel.refresh(); updateDayHud(); }, report.trialSale);
     if (trial) reportBody.querySelector('[data-trial-report]')?.append(trial);
@@ -951,9 +954,10 @@ function openMoment(): void {
     const guest = sim.customers.find(c => c.id === moment.customerId);
     if (!guest) return;
     showRecommendation(state, guest, moment.options, (item) => {
-      const verdict = moments.recommend(sim, item);
+      const verdict = moments.recommend(state, sim, item);
       if (!verdict) return;
       recordMomentAnswered(state);
+      saveGame();
       toast(t(`moment.recommend.toast.${verdict}`));
     }, () => moments.dismiss());
   }

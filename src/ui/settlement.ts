@@ -74,6 +74,7 @@ export function settlementHtml(report: DayReport, state: GameState): { body: str
     </section>
     ${regularWishReportHtml(state, report.day)}
     ${report.trialSale ? '<div data-trial-report></div>' : ''}
+    <div data-memory-report></div>
     <section class="report-guidance" aria-label="${text('report.nextStep')}">
       <p class="report-reason">${primaryReasons.map(reasonText).join(' ')}</p>
       ${goal ? `<p class="report-goal">${text('report.goalReady', { goal: text(`goal.${goal.id}`), reward: formatMoney(goal.reward) })}</p>` : ''}

@@ -1,0 +1,17 @@
+{
+  "day": 12,
+  "documentWidth": 390,
+  "memory": {
+    "item": "latte",
+    "lastServedDay": 11,
+    "learnedDay": 11,
+    "returns": 2,
+    "source": "recommend"
+  },
+  "menu": [
+    "espresso",
+    "latte"
+  ],
+  "text": "被记住的味道\n\n有 1 位客人记住了喜欢的饮品，下次还想再来一杯。\n\n看看今天的 1 位熟面孔\n\n这些客人记住了你推荐或试卖的饮品。他们照常随客流来访，饮品不在售或原料不足时会正常点单。便笺会保留在熟客记录里。\n\n拿铁\n\n第 11 天，喜欢上了你推荐的这杯。\n\n后来又主动点过这杯 2 次。\n\n正在常规菜单上，也有原料，下次来可以再点。",
+  "width": 390
+}

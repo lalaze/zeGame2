@@ -35,13 +35,19 @@ function taste(c: Customer): Thought {
   return thought(guestIdentity(c) % 2 ? 'thought.customer.enjoy' : 'thought.customer.cozy', 'taste:enjoy', 40);
 }
 
-function customerThought(c: Customer, weather: ConditionId): Thought | null {
+function customerThought(c: Customer, weather: ConditionId, state: GameState): Thought | null {
   // The existing order and crossed-out sold-out icons have right of way.
   if (c.phase === 'ordering' || (c.soldOut && c.moodTimer > 0)) return null;
+  if (c.hasCup) {
+    const memory = c.appearanceId === undefined ? undefined : state.guestMemories[c.appearanceId];
+    if (memory?.learnedDay === state.day && (c.order === memory.item || c.extra === memory.item))
+      return thought('memory.thought.loved', `memory:learned:${memory.item}`, 85);
+  }
   switch (c.phase) {
     case 'queue':
       if (c.patience < 12) return thought('thought.customer.urgent', 'queue:urgent', 100);
       if (c.trialSale) return thought('trial.thought', 'queue:trial', 60);
+      if (c.rememberedOrder) return thought('memory.thought.return', `memory:return:${c.rememberedOrder}`, 65);
       // Walking in, guests notice what kind of day it is.
       if (c.stride < 24) return weather === 'fair'
         ? thought('thought.customer.arrive', 'queue:arrive', 35)
@@ -89,7 +95,7 @@ export function thoughtCandidates(sim: Sim, state: GameState): ThoughtCandidate[
 
   const weather = todayCondition(state).id;
   for (const c of sim.customers) {
-    const value = customerThought(c, weather);
+    const value = customerThought(c, weather, state);
     if (value) add(`customer:${c.id}`, c.x, c.y - CHAR_H - (seated(c) ? 5 : 0), value);
   }
 

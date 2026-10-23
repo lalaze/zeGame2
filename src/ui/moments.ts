@@ -1,5 +1,8 @@
 import type { ItemId } from '../game/data';
 import { guestTaste, itemFlavors } from '../game/flavors';
+import { isBakery, prepTime, salePrice } from '../game/economy';
+import { formatAccountMoney } from '../game/format';
+import { memoryGuest } from '../game/guest-memories';
 import type { Customer } from '../game/sim';
 import type { GameState } from '../game/state';
 import { t, type MessageKey } from '../i18n';
@@ -27,13 +30,18 @@ export function showRecommendation(state: GameState, guest: Customer, options: r
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'pixel-btn ghost moment-option';
+    button.dataset.recommendItem = id;
     const name = document.createElement('span');
     name.className = 'moment-option-name';
     name.textContent = displayItemName(id, state);
     const notes = document.createElement('span');
     notes.className = 'moment-option-notes';
     notes.textContent = itemFlavors(id).map((flavor) => t(`moment.flavor.${flavor}` as MessageKey)).join(' · ');
-    button.append(name, notes);
+    const choice = document.createElement('span'); choice.className = 'moment-option-notes';
+    choice.textContent = t(id === guest.order ? 'memory.keepOrder' : 'memory.tryInstead');
+    const detail = document.createElement('span'); detail.className = 'moment-option-notes';
+    detail.textContent = t('memory.optionDetail', { price: formatAccountMoney(salePrice(state, id)), seconds: prepTime(state, id).toFixed(1) });
+    button.append(choice, name, notes, detail);
     button.addEventListener('click', () => {
       if (!isModalOpen() || !button.isConnected) return;
       closeModal();
@@ -45,5 +53,8 @@ export function showRecommendation(state: GameState, guest: Customer, options: r
   note.className = 'note';
   note.textContent = t('moment.recommend.note');
   body.append(quote, list, note);
+  if (!isBakery(guest.order) && memoryGuest(guest.appearanceId)) {
+    const memory = document.createElement('p'); memory.className = 'note'; memory.textContent = t('memory.recommendNote'); body.append(memory);
+  }
   showModal({ title: t('moment.recommend.title'), body, buttons: [{ label: t('moment.recommend.skip'), onClick: skip }] });
 }

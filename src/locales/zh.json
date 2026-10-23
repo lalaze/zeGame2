@@ -1503,5 +1503,22 @@
   "trial.promoted": "已正式上架",
   "trial.customFull": "自创饮品菜单已满 {n} 款，请先在备店时腾出一个位置。仍可继续限量试卖。",
   "trial.unavailable": "这款配方当前不可用。可以在备店时另选一款饮品试卖。",
-  "trial.noDrinks": "常规菜单还没有饮品，暂不会出现试卖订单。请先上架一种常规饮品。"
+  "trial.noDrinks": "常规菜单还没有饮品，暂不会出现试卖订单。请先上架一种常规饮品。",
+  "memory.keepOrder": "保留原单",
+  "memory.tryInstead": "试试另一款",
+  "memory.optionDetail": "售价 {price} · 制作 {seconds} 秒",
+  "memory.recommendNote": "客人真正喝到并喜欢这杯后，会记住你的推荐。下次来访时，饮品在常规菜单上且有原料，就会再点它。",
+  "memory.thought.loved": "这杯很合口味，下次还想点！",
+  "memory.thought.return": "还想喝上次你推荐的那杯。",
+  "memory.journalTitle": "口味便笺 · {n} 位熟面孔",
+  "memory.reportTitle": "看看今天的 {n} 位熟面孔",
+  "memory.journalNote": "这些客人记住了你推荐或试卖的饮品。他们照常随客流来访，饮品不在售或原料不足时会正常点单。便笺会保留在熟客记录里。",
+  "memory.learned.recommend": "第 {day} 天，喜欢上了你推荐的这杯。",
+  "memory.learned.trial": "第 {day} 天，在试卖中发现了喜欢的味道。",
+  "memory.returned": "后来又主动点过这杯 {n} 次。",
+  "memory.available": "正在常规菜单上，也有原料，下次来可以再点。",
+  "memory.unavailable": "当前常规菜单或原料还没备好这杯，客人会照常选其他餐品。",
+  "memory.reportHeading": "被记住的味道",
+  "memory.reportLearned": "有 {n} 位客人记住了喜欢的饮品，下次还想再来一杯。",
+  "memory.reportReturned": "有 {n} 位回头客又喝到了之前记住的味道。"
 }

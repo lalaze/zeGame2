@@ -1503,5 +1503,22 @@
   "trial.promoted": "On the regular menu",
   "trial.customFull": "All {n} custom-drink menu places are full. Free one during preparation to add this drink. A limited trial is still possible.",
   "trial.unavailable": "This recipe is currently unavailable. Choose another trial drink during preparation.",
-  "trial.noDrinks": "There is no regular drink on the menu yet, so there are no drink orders to try the special. Add a regular drink first."
+  "trial.noDrinks": "There is no regular drink on the menu yet, so there are no drink orders to try the special. Add a regular drink first.",
+  "memory.keepOrder": "Keep the original order",
+  "memory.tryInstead": "Try this instead",
+  "memory.optionDetail": "Price {price} · Preparation {seconds}s",
+  "memory.recommendNote": "A guest who receives and loves your recommended drink will remember it. Their next visit still needs the drink on the regular menu and ingredients in stock.",
+  "memory.thought.loved": "I want this one again next time!",
+  "memory.thought.return": "I would love that drink from last time.",
+  "memory.journalTitle": "Taste notes · {n} familiar faces",
+  "memory.reportTitle": "See today’s {n} familiar faces",
+  "memory.journalNote": "These guests remember a drink they enjoyed after your recommendation or trial. They return with normal traffic; if it is unavailable, they order as usual. Taste notes stay in the regulars journal.",
+  "memory.learned.recommend": "Enjoyed your recommendation on day {day}.",
+  "memory.learned.trial": "Discovered this favorite in the day {day} trial.",
+  "memory.returned": "Ordered this remembered drink again {n} times.",
+  "memory.available": "Ready to order again while it stays on the menu and in stock.",
+  "memory.unavailable": "Not currently ready on the regular menu. They can order something else.",
+  "memory.reportHeading": "A taste to remember",
+  "memory.reportLearned": "{n} guests found a drink they want to have again.",
+  "memory.reportReturned": "{n} returning guests enjoyed a remembered drink again."
 }

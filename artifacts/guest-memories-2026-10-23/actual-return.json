@@ -1,0 +1,52 @@
+{
+  "day": 12,
+  "guest": {
+    "appearanceId": 11,
+    "dineIn": false,
+    "extra": null,
+    "guestKind": "commuter",
+    "hasCup": false,
+    "id": 85,
+    "journey": [
+      {
+        "x": 176,
+        "y": 200
+      }
+    ],
+    "look": {
+      "hair": 0,
+      "hairStyle": 1,
+      "pants": 2,
+      "shirt": 3,
+      "skin": 2
+    },
+    "missingExtra": false,
+    "mood": null,
+    "moodTimer": 0,
+    "order": "latte",
+    "pathBlocked": false,
+    "patience": 38.41332000000008,
+    "phase": "queue",
+    "rememberedOrder": "latte",
+    "reviewed": false,
+    "seat": -1,
+    "soldOut": false,
+    "spot": -1,
+    "stride": 77.8424421426659,
+    "timer": 0,
+    "tx": 176,
+    "ty": 200,
+    "via": [],
+    "vip": false,
+    "waitSeconds": 1.58668,
+    "x": 176,
+    "y": 181.48
+  },
+  "memory": {
+    "item": "latte",
+    "lastServedDay": 11,
+    "learnedDay": 11,
+    "returns": 2,
+    "source": "recommend"
+  }
+}

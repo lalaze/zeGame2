@@ -72,7 +72,7 @@ export function validCustomerCastSnapshot(value: unknown): value is CustomerCast
     new Set(s.remaining).size === s.remaining.length;
 }
 
-/** Each cast member visits once per shuffled cycle; this controls appearance only. */
+/** Each cast member visits once per shuffled cycle, independently of arrival timing. */
 export class CustomerCastCycle {
   private remaining: number[] = [];
   private previous = -1;

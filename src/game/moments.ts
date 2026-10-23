@@ -87,22 +87,21 @@ function claimed(sim: Sim, id: ItemId, guest: Customer): number {
 }
 
 /**
- * Two of today's dishes of the same kind as the guest's own pick (drink or bakery, so
- * combos stay valid), each with stock to spare after everyone ahead: one they would
- * love and one they would not, ideally one they'd rather avoid. Empty when the menu
- * can't offer that real choice.
+ * Keep the original order or try one alternative of the same kind. Two menu items
+ * suffice, even when both have similar flavors; price and preparation still differ.
  */
 export function recommendOptions(state: GameState, sim: Sim, c: Customer, random: () => number): ItemId[] {
   const bakery = isBakery(c.order), taste = guestTaste(c);
   const pool = menuItems(state).map((m) => m.id)
-    .filter((id) => id !== c.order && id !== c.extra && isBakery(id) === bakery && readyServings(state, id) >= claimed(sim, id, c) + 2);
-  const loved = pool.filter((id) => recommendVerdict(id, taste) === 'love');
-  const meh = pool.filter((id) => recommendVerdict(id, taste) === 'meh');
-  const others = meh.length ? meh : pool.filter((id) => recommendVerdict(id, taste) === 'fine');
-  if (!loved.length || !others.length) return [];
-  const pick = (list: ItemId[]) => list[Math.floor(random() * list.length)];
-  const options = [pick(loved), pick(others)];
-  return random() < 0.5 ? options : options.reverse();
+    .filter((id) => id !== c.extra && isBakery(id) === bakery && readyServings(state, id) >= claimed(sim, id, c) + 2);
+  if (!pool.includes(c.order)) return [];
+  const alternatives = pool.filter(id => id !== c.order);
+  if (!alternatives.length) return [];
+  const original = recommendVerdict(c.order, taste);
+  const contrasting = alternatives.filter(id => recommendVerdict(id, taste) !== original);
+  const choices = contrasting.length ? contrasting : alternatives;
+  const best = (['love', 'fine', 'meh'] as const).map(verdict => choices.filter(id => recommendVerdict(id, taste) === verdict)).find(ids => ids.length)!;
+  return [c.order, best[Math.floor(random() * best.length)]];
 }
 
 /** Set down just inside the front door, off the runner: clear of the centred toast and
@@ -145,6 +144,7 @@ export class MomentDirector {
   private last: MomentKind | null = null;
   private day = -1;
   private serial = 0;
+  private recommended = false;
 
   constructor(private random: () => number = Math.random) {}
 
@@ -152,6 +152,7 @@ export class MomentDirector {
   reset(): void {
     this.active = null; this.reaction = null; this.offered.clear();
     this.since = 0; this.nextGap = FIRST_GAP; this.day = -1; this.deliveries = 0; this.last = null;
+    this.recommended = false;
   }
 
   /**
@@ -173,11 +174,6 @@ export class MomentDirector {
     this.since += realDt;
     const unasked = (c: Customer) => !this.offered.has(c.id);
     if (this.since < this.nextGap || !stage.area) return;
-    // A regular in line comes first: their story is the rarest thing to see.
-    if (stage.area === 'main') {
-      const regular = sim.customers.find((c) => c.regularGuestId && c.phase === 'queue' && unasked(c));
-      if (regular) return this.start({ kind: 'greet', customerId: regular.id, options: [], age: 0 });
-    }
     const offers: Partial<Record<Pickable, () => Moment | null>> = {};
     if (stage.area === 'main') {
       offers.recommend = () => {
@@ -189,6 +185,14 @@ export class MomentDirector {
         }
         return null;
       };
+      // The first eligible recommendation takes precedence over incidental tips.
+      // After that, named regulars retain priority. Unanswered simulation is unchanged.
+      if (!this.recommended) {
+        const recommendation = offers.recommend();
+        if (recommendation) return this.start(recommendation);
+      }
+      const regular = sim.customers.find((c) => c.regularGuestId && c.phase === 'queue' && unasked(c));
+      if (regular) return this.start({ kind: 'greet', customerId: regular.id, options: [], age: 0 });
       if (this.deliveries < DELIVERIES_PER_DAY) offers.delivery = () => {
         const gift = deliveryGift(state, this.random);
         return gift ? { kind: 'delivery', options: [], spot: deliverySpot(), gift, age: 0 } : null;
@@ -219,12 +223,16 @@ export class MomentDirector {
   }
 
   /** The player's pick: the guest orders it, and tips by how well it suits them. */
-  recommend(sim: Sim, item: ItemId): RecommendVerdict | null {
+  recommend(state: GameState, sim: Sim, item: ItemId): RecommendVerdict | null {
     const m = this.active;
     const c = m?.kind === 'recommend' && m.options.includes(item) ? sim.customers.find((x) => x.id === m.customerId) : undefined;
-    if (!c || c.phase !== 'queue' || c.trialSale) { this.end(); return null; }
+    if (!c || state.phase !== 'open' || c.phase !== 'queue' || c.trialSale || c.regularGuestId
+        || !menuItems(state).some(m => m.id === item) || isBakery(item) !== isBakery(c.order)
+        || readyServings(state, item) < claimed(sim, item, c) + 1) { this.end(); return null; }
     const verdict = recommendVerdict(item, guestTaste(c));
     c.order = item;
+    c.recommendation = item;
+    if (c.rememberedOrder !== item && c.rememberedOrder !== c.extra) delete c.rememberedOrder;
     c.momentTip = RECOMMEND_TIP[verdict];
     if (verdict === 'love') { c.mood = 'happy'; c.moodTimer = 1.5; }
     this.react(c, `moment.recommend.${verdict}` as MessageKey);
@@ -281,6 +289,7 @@ export class MomentDirector {
   dismiss(): void { this.end(); }
 
   private start(moment: Moment): void {
+    if (moment.kind === 'recommend') this.recommended = true;
     if (moment.customerId !== undefined) this.offered.add(moment.customerId);
     if (moment.kind === 'delivery') this.deliveries++;
     this.active = moment;

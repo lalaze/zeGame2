@@ -3073,6 +3073,15 @@ body.fullscreen-cafe .cat-locate-exit {
 .wish-option p { margin-block: 6px 12px; }
 .wish-map { display: block; width: 186px; max-width: 100%; height: auto; image-rendering: pixelated; margin-block: 12px; }
 .trial-sales, .trial-result { margin-block: 12px; padding: 12px; border: 2px solid var(--wood-light); background: var(--cream); }
+.memory-report { margin-block: 12px; padding: 12px; border: 2px solid var(--wood-light); background: var(--cream); }
+.memory-report h3 { margin: 0 0 8px; font-size: 16px; }
+.guest-memories { margin-block: 12px; min-width: 0; }
+.guest-memories summary { min-height: 44px; padding: 10px; cursor: pointer; background: var(--cream); }
+.guest-memory { display: flex; align-items: flex-start; gap: 12px; margin-top: 12px; padding: 10px; border: 1px solid var(--wood-light); }
+.guest-memory img { flex: 0 0 48px; object-fit: contain; image-rendering: pixelated; }
+.guest-memory > div { min-width: 0; overflow-wrap: anywhere; }
+.guest-memory h4 { margin: 0 0 6px; }
+.guest-memory p { margin: 6px 0; line-height: 1.6; }
 .trial-sales h3, .trial-result h3 { margin: 0 0 8px; font-size: 16px; overflow-wrap: anywhere; }
 .trial-sales p, .trial-result p { line-height: 1.6; }
 .trial-sales label { display: grid; gap: 6px; }

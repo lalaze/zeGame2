@@ -1,0 +1,14 @@
+{
+  "day": 13,
+  "documentWidth": 390,
+  "memory": {
+    "item": "latte",
+    "lastServedDay": 12,
+    "learnedDay": 11,
+    "returns": 3,
+    "source": "recommend"
+  },
+  "notes": "Taste notes · 1 familiar faces\n\nThese guests remember a drink they enjoyed after your recommendation or trial. They return with normal traffic; if it is unavailable, they order as usual. Taste notes stay in the regulars journal.\n\nLatte\n\nEnjoyed your recommendation on day 11.\n\nOrdered this remembered drink again 3 times.\n\nReady to order again while it stays on the menu and in stock.",
+  "overflow": [],
+  "width": 390
+}

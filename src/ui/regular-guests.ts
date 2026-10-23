@@ -8,6 +8,7 @@ import { fineSpriteArt } from '../render/fine-sprite-art';
 import { isComposingKey } from './keyboard';
 import { closeModal, showModal } from './modal';
 import { regularWishCard } from './regular-wishes';
+import { guestMemoryNotes } from './guest-memories';
 
 /** Quiet HUD discovery: a numeric badge, never a toast or automatic pause. */
 export function updateRegularGuestsButton(state: GameState): void {
@@ -127,7 +128,8 @@ export function showRegularGuests(state: GameState, saveRead: () => void): void 
     const unknown = REGULAR_GUESTS.length - met.length;
     // Unknown identities, portraits, roles and chapter titles never enter the DOM.
     if (unknown) cards.append(text('p', t('regular.ui.unknown', { n: unknown }), 'regular-unknown'));
-    page(intro, cards);
+    const memories = guestMemoryNotes(state);
+    page(intro, ...(memories ? [memories] : []), cards);
   }
 
   function showChapters(guest: RegularGuestDefinition): void {

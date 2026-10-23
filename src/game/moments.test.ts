@@ -56,16 +56,20 @@ describe('café moments', () => {
     expect(recommendVerdict('latte', taste)).toBe('meh');
   });
 
-  it('offers two servable dishes of the same kind: one they would love, one they would not', () => {
+  it('offers the original dish and a stocked alternative, including a two-item early menu', () => {
     const { state, sim, guest } = line();
     const options = recommendOptions(state, sim, guest, seeded(5));
     expect(options).toHaveLength(2);
     expect(options).toContain('hotchoc');
-    expect(options).not.toContain(guest.order);
+    expect(options[0]).toBe(guest.order);
     expect(options.every((id) => DRINKS.includes(id))).toBe(true);
-    expect(options.map((id) => recommendVerdict(id, guestTaste(guest))).sort()).toEqual(['love', 'meh']);
-    // Nothing they would love on today's menu: no moment to offer.
+    expect(options.map((id) => recommendVerdict(id, guestTaste(guest))).sort()).toEqual(['fine', 'love']);
+    // A real choice need not contain a perfect match.
     state.onMenu = ['espresso', 'americano', 'latte'];
+    expect(recommendOptions(state, sim, guest, seeded(5))).toEqual(['espresso', 'latte']);
+    state.onMenu = ['espresso', 'americano'];
+    expect(recommendOptions(state, sim, guest, seeded(5))).toEqual(['espresso', 'americano']);
+    state.onMenu = ['espresso'];
     expect(recommendOptions(state, sim, guest, seeded(5))).toEqual([]);
   });
 
@@ -163,7 +167,7 @@ describe('café moments', () => {
     const { state, sim, guest } = line();
     const director = new MomentDirector(seeded(1));
     director.active = { kind: 'recommend', customerId: guest.id, options: ['hotchoc', 'latte'], age: 0 };
-    expect(director.recommend(sim, 'hotchoc')).toBe('love');
+    expect(director.recommend(state, sim, 'hotchoc')).toBe('love');
     expect(guest).toMatchObject({ order: 'hotchoc', momentTip: RECOMMEND_TIP.love, mood: 'happy' });
     expect(director.reaction?.key).toBe('moment.recommend.love');
     expect(director.active).toBeNull();

@@ -1,6 +1,7 @@
 import { signatureDefinition } from './signature-drinks';
 import { isGuestKind } from './customer-demand';
 import { regularGuestDefinition } from './regular-guests';
+import { memoryGuest } from './guest-memories';
 import { MAX_COOK_BATCH, MAX_PASS_SLOTS, MENU } from './data';
 import { MAX_SCENE_H, MAX_SERVERS, MIN_SCENE_H, TOTAL_TABLE_SPOTS } from './layout';
 import { CUSTOMER_CAST, validCustomerCastSnapshot, type CustomerCastSnapshot } from './customer-cast';
@@ -37,6 +38,8 @@ const customer = (x: unknown) => obj(x) && walker(x) && look(x.look) && integer(
   (x.regularGuestId === undefined || typeof x.regularGuestId === 'string') &&
   (x.regularGuestVisitId === undefined || integer(x.regularGuestVisitId) && x.regularGuestVisitId > 0) &&
   (x.trialSale === undefined || x.trialSale === 'reserved' || x.trialSale === 'prepared') &&
+  (x.recommendation === undefined || item(x.recommendation)) &&
+  (x.rememberedOrder === undefined || item(x.rememberedOrder)) &&
   (x.reviewed === undefined || typeof x.reviewed === 'boolean') &&
   (x.waitSeconds === undefined || positive(x.waitSeconds)) &&
   (x.missingExtra === undefined || typeof x.missingExtra === 'boolean') &&
@@ -67,6 +70,11 @@ export function validSnapshot(value: unknown, state: GameState): value is SimSna
     ...s.cooks.flatMap((cook) => cook.batch === null ? [] : [cook.batch.item]),
   ];
   if (!inFlight.every(savedRecipe)) return false;
+  if (s.customers.some(c =>
+    c.recommendation !== undefined && (c.recommendation !== c.order || c.trialSale || c.regularGuestId || c.hasCup || c.phase === 'exiting')
+    || c.rememberedOrder !== undefined && (!memoryGuest(c.appearanceId) || c.trialSale || c.regularGuestId
+      || c.rememberedOrder !== c.order && c.rememberedOrder !== c.extra
+      || !state.guestMemories[c.appearanceId!]))) return false;
   const trial = state.trialSales?.active;
   const trying = s.customers.filter(c => c.trialSale);
   if (trying.some(c => !trial || trial.day !== state.day || c.hasCup || c.phase === 'exiting'

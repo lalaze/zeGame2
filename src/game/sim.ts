@@ -5,6 +5,7 @@ import { recordStyleHandoff, styleStationMultiplier, styleDwellExtra, styleServe
 import { recordRegularGuestArrival, recordRegularGuestDeparture, recordRegularGuestService, regularGuestForAppearance, regularGuestOrder } from './regular-guests';
 import { minaReservedTable } from './regular-wishes';
 import { recordTrialPrepared, recordTrialServed, releaseTrialSale } from './trial-sales';
+import { recordGuestMemory, rememberedOrder } from './guest-memories';
 import { CUSTOMER_CAST, CustomerCastCycle } from './customer-cast';
 import { updatePromotion } from './promotion';
 import { updatePetCare } from './pets';
@@ -116,6 +117,10 @@ export interface Customer extends Walker {
   regularGuestVisitId?: number;
   /** Quota reservation follows this live order until preparation, handoff or exit. */
   trialSale?: 'reserved' | 'prepared';
+  /** A player's pending recommendation; remembered only after a loved drink arrives. */
+  recommendation?: ItemId;
+  /** This visit asked for a previously delivered favorite. No repeat tip is awarded. */
+  rememberedOrder?: ItemId;
   look: Look;
   order: ItemId;
   /** A bakery item with a drink, or a drink with a bakery item. */
@@ -662,7 +667,8 @@ export class Sim {
     const regularGuest = regularGuestForAppearance(appearance.id, state.day);
     const visitId = regularGuest ? recordRegularGuestArrival(state, regularGuest.id) : null;
     const regularOrder = regularGuestOrder(state, regularGuest?.id, main.id, extra);
-    const chosen = offerTrialSale(state, regularOrder.order, regularOrder.extra, regularGuest?.id);
+    const remembered = rememberedOrder(state, appearance.id, regularOrder.order, regularOrder.extra);
+    const chosen = offerTrialSale(state, remembered.order, remembered.extra, regularGuest?.id);
     const c: Customer = {
       ...(choice.kind ? { guestKind: choice.kind } : {}),
       id: this.nextId++,
@@ -680,6 +686,7 @@ export class Sim {
       order: chosen.order,
       extra: chosen.extra,
       ...(chosen.trialSale ? { trialSale: chosen.trialSale } : {}),
+      ...(!chosen.trialSale && remembered.rememberedOrder ? { rememberedOrder: remembered.rememberedOrder } : {}),
       vip: this.rng() < VIP_CHANCE,
       patience: patienceSeconds(state),
       spot: -1,
@@ -736,6 +743,8 @@ export class Sim {
   }
 
   private exit(c: Customer): void {
+    delete c.recommendation;
+    if (!c.hasCup) delete c.rememberedOrder;
     if (c.trialSale === 'reserved' && this.floorState) releaseTrialSale(this.floorState);
     delete c.trialSale;
     if (this.floorState && c.regularGuestId && c.regularGuestVisitId !== undefined) {
@@ -803,6 +812,8 @@ export class Sim {
     if (c.trialSale === 'prepared' && trial && bought.includes(trial.item)) {
       recordTrialServed(state, salePrice(state, trial.item, c.vip, c.dineIn, bought) * (1 + (c.momentTip ?? 0)), c);
     }
+    recordGuestMemory(state, c, bought, c.trialSale === 'prepared' ? trial?.item : undefined);
+    delete c.recommendation;
     delete c.trialSale;
     events.push({ type: 'sale', amount, x: c.x, y: c.y - 52, vip: c.vip, customerId: c.id });
     this.review(state, c, mealReview(state, bought, c.waitSeconds, c.missingExtra));
@@ -855,6 +866,7 @@ export class Sim {
       }
       // The add-on is skipped (not a deal breaker) if it has sold out.
       if (c.extra && !consumeServing(state, c.extra, state.today)) {
+        if (c.rememberedOrder === c.extra) delete c.rememberedOrder;
         state.today.extraLost++;
         c.missingExtra = true;
         state.today.shortages[c.extra] = (state.today.shortages[c.extra] ?? 0) + 1;
