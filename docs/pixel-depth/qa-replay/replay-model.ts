@@ -7,7 +7,10 @@ import { Sim } from '../../../src/game/sim';
 import { deserialize, type GameState } from '../../../src/game/state';
 
 export const STEP_SECONDS = 0.05;
-export const REPLAY_STOPS = { idle: 173, nuzzleA: 338, nuzzleB: 351, petA: 378, petB: 391 } as const;
+// Re-found after the dining redesign (d11d93c) moved seats and slowed the original cat: with
+// seed 1234581938 the Siamese now reaches Mina only after she has left.
+export const REPLAY_STOPS = { idle: 177, nuzzleA: 260, nuzzleB: 273, petA: 300, petB: 313 } as const;
+const CAT_SEED = 694;
 export type ReplayStop = keyof typeof REPLAY_STOPS;
 const seeded = (initial: number) => {
   let seed = initial;
@@ -17,7 +20,7 @@ const seeded = (initial: number) => {
 /** QA owns these engines; there is no save storage or fabricated interaction. */
 export class MinaReplay {
   private simRandom = seeded(52);
-  private catRandom = seeded(1234581938);
+  private catRandom = seeded(CAT_SEED);
   readonly sim = new Sim(() => this.simRandom());
   readonly cats = new LivingCats(() => this.catRandom());
   state!: GameState;
@@ -30,7 +33,7 @@ export class MinaReplay {
     this.sim.reset();
     this.cats.reset();
     this.simRandom = seeded(52);
-    this.catRandom = seeded(1234581938);
+    this.catRandom = seeded(CAT_SEED);
     this.state = deserialize(source, 0);
     if (!adoptCat(this.state, 'siamese')) throw new Error('Synthetic adoption could not be reproduced.');
     openShop(this.state);

@@ -94,7 +94,7 @@ resize();
 void cafe.ready.then(() => {
   ready = true;
   document.querySelectorAll<HTMLButtonElement>('button').forEach(button => { button.disabled = false; });
-  $('loading').textContent = 'Renderer ready. Pet A was reached by 378 normal seeded updates; simulation is frozen.';
+  $('loading').textContent = 'Renderer ready. Pet A was reached by 300 normal seeded updates; simulation is frozen.';
   resize(); status();
 }).catch(error => {
   $('loading').textContent = `Renderer did not become ready: ${String(error)}`;

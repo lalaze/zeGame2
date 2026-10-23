@@ -9,15 +9,15 @@ describe('synthetic Mina component replay', () => {
     replay.reset(stop);
     expect(replay.steps).toBe(REPLAY_STOPS[stop]);
     expect(replay.mina).toMatchObject({ id: 1, appearanceId: 0, regularGuestId: 'mina', phase: 'sitting', seat: 0,
-      x: 85, y: 175, hasCup: true, missingExtra: false, soldOut: false });
+      x: 80, y: 175, hasCup: true, missingExtra: false, soldOut: false });
     expect(replay.state.today.shortages).toEqual({});
     expect(validSnapshot(replay.sim.snapshot(replay.state), replay.state)).toBe(true);
     if (stop === 'idle') expect(replay.cat?.interaction).toBeUndefined();
     else if (stop === 'nuzzleA' || stop === 'nuzzleB') {
-      expect(replay.cat).toMatchObject({ x: 85, y: 187, interaction: { guestId: 1, phase: 'nuzzle' } });
+      expect(replay.cat).toMatchObject({ x: 80, y: 187, interaction: { guestId: 1, phase: 'nuzzle' } });
       expect(replay.cat!.interaction!.elapsed).toBeCloseTo(stop === 'nuzzleA' ? 0 : .65, 12);
     } else {
-      expect(replay.cat).toMatchObject({ x: 85, y: 187, interaction: { guestId: 1, phase: 'response' } });
+      expect(replay.cat).toMatchObject({ x: 80, y: 187, interaction: { guestId: 1, phase: 'response' } });
       expect(replay.petFrame).toBe(stop === 'petA' ? 0 : 1);
     }
   });

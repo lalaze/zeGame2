@@ -38,9 +38,9 @@ real Phaser renderer; there is no substitute hand-drawn screenshot canvas.
 
 ## Reproducible controls
 
-- Seated idle: seed 52 simulation plus seed 1234581938 Siamese engine, 173 updates.
-- Pet A: the same engines, 378 updates. Cat response elapsed is exactly zero.
-- Pet B: 391 updates. Response elapsed is 0.65 seconds, selecting the real second
+- Seated idle: seed 52 simulation plus seed 694 Siamese engine, 177 updates.
+- Pet A: the same engines, 300 updates. Cat response elapsed is exactly zero.
+- Pet B: 313 updates. Response elapsed is 0.65 seconds, selecting the real second
   petting frame.
 - Step +0.05: advances both existing engines normally once.
 - Run / Pause: uses the same fixed-step simulation; Mina can naturally leave.
