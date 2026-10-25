@@ -1,0 +1,45 @@
+/* Keep stock decisions beside opening, even when the recipe list scrolls. */
+.prep-modal .prep-stock-footer {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px 0 0;
+  border-top: 1px solid var(--paper-shadow);
+}
+.prep-modal .prep-stock-summary {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.prep-modal .prep-stock-footer button {
+  flex: 0 1 auto;
+  max-width: 54%;
+  min-height: 44px;
+  margin: 0;
+  white-space: normal;
+}
+.prep-modal .prep-stock-footer.stock-ready { justify-content: flex-start; }
+.prep-modal .prep-stock-footer.stock-ready button { max-width: 100%; opacity: 1; color: var(--green-dark); }
+.prep-modal .modal-actions { border-top: 0; padding-top: 0; margin-top: 10px; }
+.prep-modal .prep-menu-hint { margin: 0 0 10px; }
+.prep-modal .prep-shared-stock { margin: 8px 0; padding: 8px; background: var(--sage-paper); color: var(--green-dark); border-radius: 3px; }
+.prep-modal .prep-disclosure { margin-top: 10px; border: 1px solid var(--paper-shadow); border-radius: 3px; }
+.prep-modal .prep-disclosure > summary { padding: 10px; cursor: pointer; color: var(--green-dark); line-height: 1.5; }
+.prep-modal .prep-disclosure > .prep-style,
+.prep-modal .prep-disclosure > .regular-wish { margin: 0; border: 0; border-top: 1px solid var(--paper-shadow); box-shadow: none; }
+.prep-modal .prep-disclosure > .regular-wish > h3 { display: none; }
+@media (max-width: 480px) {
+  .prep-modal .prep-stock-footer { gap: 8px; margin-top: 8px; padding-top: 8px; }
+  .prep-modal .prep-stock-footer button { font-size: 12px; padding: 8px; }
+  .prep-modal .modal-actions { margin-top: 8px; }
+}
+@media (max-height: 540px) and (orientation: landscape) {
+  .prep-modal .prep-stock-footer { margin-top: 4px; padding-top: 4px; }
+  .prep-modal .modal-actions { margin-top: 4px; }
+}

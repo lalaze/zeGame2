@@ -72,3 +72,26 @@ it('retains the controls behind a dialog so its trigger can regain focus', () =>
   expect(button('mobile-cafe-more').textContent).toBe('More');
   expect(button('settings').textContent).toBe('Settings');
 });
+
+it('keeps the selected service speed visible after More closes, and removes it while preparing', () => {
+  const speed = () => document.querySelector<HTMLElement>('.mobile-cafe-speed')!;
+  const clock = document.querySelector<HTMLButtonElement>('.mobile-cafe-clock')!;
+  for (const multiplier of [1, 2, 4] as const) {
+    button('mobile-cafe-more').click();
+    hud.update('豆豆店', '第 2 天 · 12:00', false, '第 2 天营业中', '晴天', multiplier);
+    hud.close();
+    expect(get('mobile-cafe-tools').hidden).toBe(true);
+    expect(speed().textContent).toBe(`${multiplier}×`);
+    expect(speed().hidden).toBe(false);
+    expect(speed().closest('.mobile-cafe-header')).not.toBeNull();
+    expect(clock.getAttribute('aria-label')).toContain(`速度 ${multiplier}×`);
+  }
+  hud.update('豆豆店', '第 3 天 · 休息中', true, '第 3 天休息中', '', 4);
+  expect(speed().hidden).toBe(true);
+  expect(clock.getAttribute('aria-label')).not.toContain('4×');
+  hud.update('豆豆店', '第 3 天 · 08:00', false, '第 3 天营业中', '', 4);
+  expect(speed().hidden).toBe(false);
+  expect(speed().textContent).toBe('4×');
+  clock.click();
+  expect(hud.expanded).toBe(true);
+});

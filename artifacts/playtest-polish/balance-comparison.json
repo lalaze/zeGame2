@@ -1,0 +1,22 @@
+{
+  "baseline_assertion": "expected 251 to be greater than 294",
+  "current_assertion": "expected 251 to be greater than 294",
+  "sample_rows_identical": true,
+  "sample_row_count": 16,
+  "game_files_different_from_baseline": [
+    "src/game/sim.ts",
+    "src/game/trial-sales.ts"
+  ],
+  "timeout_recheck": {
+    "command": "npm test -- --maxWorkers=1 --testTimeout=30000 scripts/economy-lab.test.ts src/game/table-service.test.ts",
+    "files_passed": 2,
+    "tests_passed": 12,
+    "tests_skipped": 1,
+    "duration_seconds": 10.52
+  },
+  "logs": {
+    "baseline": "/tmp/cafe-polish/baseline-balance.log",
+    "current": "/tmp/cafe-polish/current-balance.log",
+    "timeout_recheck": "/tmp/cafe-polish/current-long-timeout.log"
+  }
+}

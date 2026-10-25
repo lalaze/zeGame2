@@ -80,6 +80,8 @@ export class CafeView {
   momentTarget: { x: number; y: number; w: number; h: number } | null = null;
   /** Coins a moment paid out, waiting to pop up over the spot the player tapped. */
   readonly tips: { amount: number; x: number; y: number }[] = [];
+  /** Brief, truthful feedback anchored on the employee or guest who was helped. */
+  readonly assistanceLabels: { text: string; x: number; y: number }[] = [];
   /** Set while the player is placing or moving a piece. */
   ghost: Ghost | null = null;
   /** Seconds the cat stays happy after being petted. */
@@ -151,6 +153,13 @@ export class CafeView {
 
   sparkle(x: number, y: number, anchor: PixelPoint = { x, y: y + 15 }): void {
     this.queueEffect({ kind: 'sparkle', x, y }, anchor);
+  }
+
+  assistance(text: string, anchor: PixelPoint, kind: 'brew' | 'guest' = 'guest'): void {
+    const point = projectMainAttachment({ x: anchor.x, y: anchor.y - 38 }, anchor);
+    this.assistanceLabels.push({ text, ...point });
+    for (const dx of [-6, 0, 6]) this.sparkle(anchor.x + dx, anchor.y - 25 - Math.abs(dx), anchor);
+    this.queueEffect({ kind: kind === 'brew' ? 'steam' : 'heart', x: anchor.x, y: anchor.y - 28 }, anchor);
   }
 
   /** Clear before each rendered frame, including frames that draw no residents. */

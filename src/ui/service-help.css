@@ -1,0 +1,4 @@
+.service-help-menu .service-help-option { display: flex; flex-direction: row; align-items: center; gap: 12px; }
+.service-help-option .service-help-copy { display: grid; gap: 5px; min-width: 0; }
+.service-help-copy strong { color: var(--ink); font-size: 14px; }
+.service-help-portrait { width: 32px; height: 52px; object-fit: contain; flex: 0 0 32px; image-rendering: pixelated; }

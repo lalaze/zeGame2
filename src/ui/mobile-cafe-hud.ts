@@ -1,4 +1,5 @@
 import { t } from '../i18n';
+import type { Speed } from '../game/data';
 import { MOBILE_MANAGEMENT_QUERY } from './fullscreen-drawer';
 
 interface HudElements {
@@ -25,6 +26,7 @@ export class MobileCafeHud {
   private name = document.createElement('span');
   private time = document.createElement('strong');
   private dayText = document.createElement('span');
+  private speed = document.createElement('span');
   private condition = document.createElement('span');
   private dock = document.createElement('nav');
   private primary = document.createElement('div');
@@ -49,7 +51,10 @@ export class MobileCafeHud {
     this.header.className = 'mobile-cafe-header';
     this.clock.className = 'mobile-cafe-clock';
     this.name.className = 'mobile-cafe-name';
-    this.time.append(this.dayText, this.condition);
+    this.speed.className = 'mobile-cafe-speed';
+    this.speed.hidden = true;
+    this.speed.setAttribute('aria-hidden', 'true');
+    this.time.append(this.dayText, this.speed, this.condition);
     this.clock.append(this.name, this.time);
     this.header.append(this.clock);
     this.dock.className = 'mobile-cafe-dock';
@@ -119,10 +124,11 @@ export class MobileCafeHud {
     this.labels();
   };
 
-  update(name: string, time: string, preparing: boolean, fullLabel: string, condition = ''): void {
+  update(name: string, time: string, preparing: boolean, fullLabel: string, condition = '', speed: Speed = 1): void {
     this.name.textContent = name; this.dayText.textContent = time;
+    this.speed.textContent = `${speed}×`; this.speed.hidden = preparing;
     this.condition.textContent = condition; this.condition.hidden = !condition;
-    this.clock.setAttribute('aria-label', `${fullLabel} · ${t('mobile.controls')}`);
+    this.clock.setAttribute('aria-label', `${fullLabel}${preparing ? '' : ` · ${t('day.speed')} ${speed}×`} · ${t('mobile.controls')}`);
     if (this.active) this.controls.help.hidden = preparing;
     this.labels();
   }

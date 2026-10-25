@@ -1,0 +1,58 @@
+(node:61031) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+> tiny-bean-cafe@0.1.0 test
+> vitest run --maxWorkers=1 scripts/balance.test.ts
+
+(node:61101) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+ RUN  v5.0.3 /Users/lalaze/.paseo/worktrees/2h96yp2x/joyful-sloth
+
+(node:61106) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+stdout | scripts/balance.test.ts > offers a different profitable menu when production, rather than arrivals, limits service
+┌─────────┬──────────┬───────────┬─────────┬────────┬──────┬───────┬────────┐
+│ (index) │ version  │ marketing │ menu    │ profit │ lost │ stale │ served │
+├─────────┼──────────┼───────────┼─────────┼────────┼──────┼───────┼────────┤
+│ 0       │ 'before' │ 0         │ 'fast'  │ 89     │ 0    │ 0     │ 35     │
+│ 1       │ 'before' │ 0         │ 'high'  │ 302    │ 0    │ 0     │ 36     │
+│ 2       │ 'before' │ 0         │ 'mixed' │ 78     │ 0    │ 3     │ 37     │
+│ 3       │ 'before' │ 0         │ 'all'   │ 448    │ 0    │ 10    │ 44     │
+│ 4       │ 'before' │ 25        │ 'fast'  │ 164    │ 0    │ 0     │ 71     │
+│ 5       │ 'before' │ 25        │ 'high'  │ 403    │ 0    │ 0     │ 50     │
+│ 6       │ 'before' │ 25        │ 'mixed' │ 186    │ 0    │ 3     │ 70     │
+│ 7       │ 'before' │ 25        │ 'all'   │ 608    │ 0    │ 12    │ 59     │
+│ 8       │ 'after'  │ 0         │ 'fast'  │ 96     │ 0    │ 0     │ 36     │
+│ 9       │ 'after'  │ 0         │ 'high'  │ 277    │ 0    │ 0     │ 32     │
+│ 10      │ 'after'  │ 0         │ 'mixed' │ 165    │ 0    │ 5     │ 37     │
+│ 11      │ 'after'  │ 0         │ 'all'   │ 404    │ 0    │ 11    │ 39     │
+│ 12      │ 'after'  │ 25        │ 'fast'  │ 251    │ 0    │ 0     │ 104    │
+│ 13      │ 'after'  │ 25        │ 'high'  │ 294    │ 0    │ 0     │ 32     │
+│ 14      │ 'after'  │ 25        │ 'mixed' │ 446    │ 0    │ 4     │ 97     │
+│ 15      │ 'after'  │ 25        │ 'all'   │ 420    │ 0    │ 11    │ 41     │
+└─────────┴──────────┴───────────┴─────────┴────────┴──────┴───────┴────────┘
+
+ ❯ scripts/balance.test.ts (1 test | 1 failed) 31945ms
+   × offers a different profitable menu when production, rather than arrivals, limits service 31945ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  scripts/balance.test.ts > offers a different profitable menu when production, rather than arrivals, limits service
+AssertionError: expected 251 to be greater than 294
+ ❯ scripts/balance.test.ts:47:41
+     45|   console.table(rows);
+     46|   expect(sample(menus.high, 0).profit).toBeGreaterThan(sample(menus.fa…
+     47|   expect(sample(menus.fast, 25).profit).toBeGreaterThan(sample(menus.h…
+       |                                         ^
+     48|   console.table([0,20,2].map((click) => ({ clicks: click === 0 ? 'none…
+     49| }, 120_000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  00:49:31
+   Duration  32.28s (tests 99%, transform 1%)
+

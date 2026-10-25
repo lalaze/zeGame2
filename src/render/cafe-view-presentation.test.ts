@@ -96,6 +96,15 @@ describe('main presentation input and geometry', () => {
     expect(view.effectPoint(view.effects[0])).toEqual(projectMainAttachment(view.effects[0], cat));
   });
 
+  it('keeps assistance feedback and particles anchored on the person who was helped', () => {
+    const view = new CafeView(); const anchor = { x: 94, y: 108 };
+    view.assistance('A little faster!', anchor, 'brew');
+    expect(view.assistanceLabels).toEqual([{ text: 'A little faster!', ...projectMainAttachment({ x: 94, y: 70 }, anchor) }]);
+    expect(view.effects).toHaveLength(4);
+    for (const effect of view.effects) expect(view.effectPoint(effect)).toEqual(projectMainAttachment(effect, anchor));
+    expect(view.effects.at(-1)?.kind).toBe('steam');
+  });
+
   it('projects bell and restock effects with the fixed counter plane', () => {
     const view = new CafeView();
     view.addEvents([{ type: 'bell', x: 244, y: 59 }, { type: 'restock' } as never]);

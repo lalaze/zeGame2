@@ -30,7 +30,8 @@ export function updateRegularGuestsButton(state: GameState): void {
 }
 
 const portraits = new Map<number, { frame: HTMLCanvasElement; source: string }>();
-function portrait(guest: RegularGuestDefinition): HTMLImageElement {
+/** Reuse the exact stand artwork and cache used by the journal and café cast. */
+export function regularGuestPortrait(guest: RegularGuestDefinition): HTMLImageElement {
   const design = CUSTOMER_CAST[guest.appearanceId];
   const frame = character(design.look, 'customer', guest.appearanceId).stand;
   let cached = portraits.get(guest.appearanceId);
@@ -92,7 +93,7 @@ export function showRegularGuests(state: GameState, saveRead: () => void): void 
     identity.append(text('h3', t(guest.nameKey)), text('p', t(guest.roleKey), 'regular-role'));
     const heading = document.createElement('div');
     heading.className = 'regular-heading';
-    heading.append(portrait(guest), identity);
+    heading.append(regularGuestPortrait(guest), identity);
     card.append(heading);
     if (full) {
       card.append(

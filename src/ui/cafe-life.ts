@@ -1,3 +1,4 @@
+import './menu-story-polish.css';
 import type { DayReport } from '../game/day';
 import { partnerDefinition, readPartnerChapter } from '../game/partners';
 import { PARTNER_STORIES } from '../game/partner-stories';
@@ -7,6 +8,7 @@ import { getLocale, t } from '../i18n';
 import { showModal } from './modal';
 import { minaWish } from '../game/regular-wishes';
 import { regularWishCard } from './regular-wishes';
+import { regularGuestPortrait } from './regular-guests';
 
 const node = <K extends keyof HTMLElementTagNameMap>(tag: K, text: string) => {
   const el = document.createElement(tag); el.textContent = text; return el;
@@ -71,7 +73,6 @@ export class CafeLife {
       // they remain eligible while they are still among the café's visitors.
       if (story) {
         const { guest, chapter } = story;
-        const text = t(guest.chapters[chapter].textKey);
         const title = t('life.arrival', { name: t(guest.nameKey) });
         const heading = node('b', title), preview = node('p', t('life.preview', { title: t(guest.chapters[chapter].titleKey) }));
         const hear = node('button', t('life.read')); hear.className = 'chip';
@@ -80,10 +81,18 @@ export class CafeLife {
         const dismiss = () => { this.dismissed = true; this.element.hidden = true; };
         later.addEventListener('click', dismiss);
         hear.addEventListener('click', () => {
-          if (!hear.isConnected) return;
+          if (!hear.isConnected || !regularGuestProgress(state, guest.id)?.unlockedChapters.includes(chapter)) return;
           dismiss();
-          const body = node('p', text);
-          showModal({ title, body, buttons: [
+          const body = document.createElement('article');
+          body.className = 'life-story';
+          body.dataset.lifeRegularStory = guest.id;
+          const identity = document.createElement('header'); identity.className = 'life-story-heading';
+          const chapterHeading = document.createElement('div');
+          chapterHeading.append(node('p', t('regular.ui.chapter', { n: chapter + 1, total: guest.chapters.length })), node('h3', t(guest.chapters[chapter].titleKey)));
+          identity.append(regularGuestPortrait(guest), chapterHeading);
+          body.append(identity);
+          for (const paragraph of t(guest.chapters[chapter].textKey).split(/\n+/).filter(Boolean)) body.append(node('p', paragraph));
+          showModal({ title, body, focusableBody: true, buttons: [
             { label: t('regular.ui.finish'), primary: true, onClick: () => {
               if (markRegularGuestChapterRead(state, guest.id, chapter)) this.save();
             } }, { label: t('life.later') },

@@ -8,6 +8,7 @@ import './ui/ledger.css';
 import './ui/mobile-cafe-hud.css';
 
 import { PlayFlow } from './ui/play-flow';
+import { requestServiceHelp, type ServiceHelpOption } from './ui/service-help';
 import { pantryTaskContext } from './ui/play-flow-context';
 import { trafficHud } from './ui/traffic-status';
 import { showSoldOut } from './ui/sold-out';
@@ -56,6 +57,7 @@ import { checkMilestones, recordMomentAnswered } from './game/milestones';
 import { cafeTitle, milestoneName } from './ui/milestones';
 import { MomentDirector, type Moment, type MomentStage } from './game/moments';
 import { QUEUE_HELP_PATIENCE } from './game/sim';
+import { trialSaleItem } from './game/trial-sales';
 import { FullscreenDrawer } from './ui/fullscreen-drawer';
 import { updateLedgerTheme } from './ui/ledger-theme';
 import { ManagementShortcuts } from './ui/management-shortcuts';
@@ -560,7 +562,7 @@ const playFlow = new PlayFlow({
     panelCollapsed = collapsed; updatePanelVisibility();
   },
   labels: () => ({
-    title: t('flow.title'), help: t('flow.help'), helpHint: t('flow.helpHint'),
+    title: t('flow.title'), help: !sim.helpReady ? t('flow.helpCooldownShort') : serviceHelpOptions().length ? t('flow.help') : t('flow.helpIdle'), helpHint: t('flow.helpHint'),
     pantry: t('flow.pantry'), back: t('flow.back'),
     returnTo: (tab) => tab ? t('flow.return', { tab: t(`tab.${tab}`) }) : t('flow.returnCafe'),
   }),
@@ -617,7 +619,7 @@ function updateDayHud(): void {
   playFlow.update();
   mobileHud?.update(state.profile?.cafeName ?? 'Tiny Bean Café',
     `${t('day.label', { n: state.day })} · ${open ? clock : t('day.closed')}`,
-    !open, text, condition);
+    !open, text, condition, state.speed);
 }
 
 for (const b of speedBtns) {
@@ -992,62 +994,65 @@ function serviceHelpAllowed(): boolean {
     && !arrange && !scene.panning && !scene.overview && state.phase !== 'prep';
 }
 
-function helpOption(title: string, detail: string, action: () => boolean): HTMLButtonElement {
-  const button = document.createElement('button');
-  button.type = 'button'; button.className = 'pixel-btn ghost service-help-option';
-  const heading = document.createElement('strong'); heading.textContent = title;
-  const copy = document.createElement('span'); copy.textContent = detail;
-  button.append(heading, copy);
-  button.addEventListener('click', () => {
-    if (!isModalOpen() || !button.isConnected) return;
-    closeModal();
-    if (!action()) toast(t('flow.helpUnavailable'));
-  });
-  return button;
-}
-
-/** The explicit service shortcut turns a speed boost into a small decision. */
-function openHelpMenu(): boolean {
-  if (!serviceHelpAllowed()) return false;
-  const body = document.createElement('div');
-  body.className = 'service-help-menu';
-  const detail = document.createElement('p'); detail.className = 'note'; detail.textContent = t('flow.helpDetail');
-  body.append(detail);
+function serviceHelpOptions(): ServiceHelpOption[] {
+  const options: ServiceHelpOption[] = [];
+  if (state.phase === 'prep' || !sim.helpReady) return options;
   const hasBrew = sim.baristas.some((_, i) => sim.isBrewing(i) && !sim.isHolding(i));
-  if (hasBrew) body.append(helpOption(t('flow.helpBrew'), t('flow.helpBrewDetail'), () => {
-    const helped = helpBrew();
-    if (helped) toast(t('flow.helpBrewToast'));
-    return helped;
-  }));
-  const choices = sim.queueChoices();
-  choices.forEach((customer, index) => {
+  if (hasBrew) options.push({
+    title: t('flow.helpBrew'), detail: t('flow.helpBrewDetail'),
+    perform: () => {
+      const helped = helpBrew();
+      if (helped) toast(t('flow.helpBrewToast'));
+      return helped;
+    },
+  });
+  const trialItem = trialSaleItem(state);
+  if (state.phase === 'open') sim.queueChoices().forEach((customer, index) => {
     const item = customer.extra
       ? `${displayItemName(customer.order, state)} + ${displayItemName(customer.extra, state)}`
       : displayItemName(customer.order, state);
     const marked = customer.vip ? `${item} ★` : item;
-    body.append(helpOption(
-      t('flow.helpQueue', { item: marked }),
-      `${t('flow.helpQueuePosition', { n: index + 1 })} · ${t('flow.helpQueueDetail', { seconds: QUEUE_HELP_PATIENCE })}`,
-      () => {
-        if (!serviceHelpAllowed() || !sim.prioritizeQueue(state, customer.id)) return false;
-        scene.sparkle(customer.x, customer.y - 28);
+    if (trialItem && sim.canOfferTrialTo(state, customer.id)) options.push({
+      title: t('flow.helpTrial', { item: displayItemName(trialItem, state), n: index + 1 }),
+      detail: t('flow.helpTrialDetail'), guest: customer,
+      perform: () => {
+        if (!serviceHelpAllowed() || !sim.offerTrialTo(state, customer.id)) return false;
+        scene.assistance(t('flow.helpTrialEffect'), customer);
         saveGame();
-        toast(t('flow.helpQueueToast', { item: marked }));
+        toast(t('flow.helpTrialToast', { item: displayItemName(trialItem, state) }));
         return true;
       },
-    ));
+    });
+    const first = index === 0;
+    options.push({
+      title: first ? t('flow.helpComfort') : t('flow.helpQueue', { n: index + 1 }),
+      detail: `${t('flow.helpOrder', { item: marked })} · ${t(first ? 'flow.helpComfortDetail' : 'flow.helpQueueDetail', { seconds: QUEUE_HELP_PATIENCE })}`,
+      guest: customer,
+      perform: () => {
+        if (!serviceHelpAllowed() || !sim.prioritizeQueue(state, customer.id)) return false;
+        scene.assistance(t('flow.helpQueueEffect', { seconds: QUEUE_HELP_PATIENCE }), customer);
+        saveGame();
+        toast(t(first ? 'flow.helpComfortToast' : 'flow.helpQueueToast', { item: marked, seconds: QUEUE_HELP_PATIENCE }));
+        return true;
+      },
+    });
   });
-  if (!hasBrew && !choices.length) {
-    const empty = document.createElement('p'); empty.className = 'note'; empty.textContent = t('flow.helpEmpty'); body.append(empty);
-  }
-  showModal({ title: t('flow.helpTitle'), body, buttons: [{ label: t('flow.helpCancel'), primary: true }] });
-  return true;
+  return options;
 }
 
-/** The scene shortcut keeps its quick, low-friction boost; the dock opens the choice menu. */
+/** A lone action goes straight to the room; several choices share one paused menu. */
+function openHelpMenu(): boolean {
+  if (!serviceHelpAllowed()) return false;
+  if (!sim.helpReady) { toast(t('flow.helpCooldown')); return false; }
+  return requestServiceHelp(serviceHelpOptions(), serviceHelpAllowed);
+}
+
+/** Scene and dock assistance share the same cooldown and visible room feedback. */
 function helpBrew(): boolean {
-  if (!serviceHelpAllowed() || !sim.boost()) return false;
-  sim.baristas.forEach((_, i) => { if (sim.isBrewing(i) && !sim.isHolding(i)) { const p = sim.baristaPose(i); scene.sparkle(p.x, p.y - 15); } });
+  if (!serviceHelpAllowed()) return false;
+  const brewing = sim.baristas.flatMap((_, i) => sim.isBrewing(i) && !sim.isHolding(i) ? [sim.baristaPose(i)] : []);
+  if (!sim.boost()) return false;
+  for (const pose of brewing) scene.assistance(t('flow.helpBrewEffect'), pose, 'brew');
   if (!hint.hidden) {
     hint.hidden = true;
     storage.setPreference(HINT_KEY, '1');

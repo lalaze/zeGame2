@@ -22,6 +22,12 @@ body.mobile-cafe-layout .hud .brand { display: none; }
 .mobile-cafe-name { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 12px; }
 .mobile-cafe-clock strong { display: flex; flex-wrap: wrap; gap: 0 8px; font-size: 13px; line-height: 1.45; }
 .mobile-cafe-clock strong > span { white-space: nowrap; }
+.mobile-cafe-clock .mobile-cafe-speed {
+  align-self: center; padding: 0 5px; border-radius: 3px;
+  background: var(--sage-paper); color: var(--green-dark);
+  font-size: 11px; line-height: 1.6;
+}
+.mobile-cafe-speed[hidden] { display: none; }
 body.fullscreen-cafe .mobile-cafe-header .money {
   position: static; flex: 0 0 auto; max-width: 43%; width: auto; min-height: 0;
   padding: 0 0 0 10px; border: 0; border-left: 1px solid var(--wood-light); background: none; box-shadow: none;
@@ -85,6 +91,10 @@ body.fullscreen-cafe.mobile-drawer-open .mobile-cafe-hud { visibility: hidden; }
 body.fullscreen-cafe.arranging-cafe .mobile-cafe-dock,
 body.fullscreen-cafe.arranging-cafe .mobile-cafe-header { visibility: hidden; }
 body.fullscreen-cafe.mobile-tools-open .first-service { visibility: hidden; pointer-events: none; }
+/* Management temporarily takes the guide's space. Keep the card and its open
+   details in place, so dismissing management restores the player's exact state. */
+body.fullscreen-cafe.shortcuts-open .first-service,
+body.fullscreen-cafe.drawer-open .first-service { visibility: hidden; pointer-events: none; }
 body.fullscreen-cafe.mobile-cafe-layout .first-service {
   bottom: calc(var(--view-tip-bottom) + var(--toast-clearance, 0px) + 10px);
   max-height: min(240px, 38dvh); width: calc(100% - var(--edge-left) - var(--edge-right));

@@ -219,3 +219,62 @@ it('does not redraw a closed preparation dialog when a held pointer releases', (
   expect(document.querySelector('.modal')).toBeNull();
   expect(state.bakePlan.roll).toBe(21);
 });
+
+it('keeps the stock decision beside opening while optional plans stay below the menu', () => {
+  const state = createInitialState(0);
+  state.day = 2; state.items.americano = 1; state.onMenu = ['espresso', 'americano'];
+  state.pantry.beans = 13; state.coins = 100;
+  showPrepare(state, vi.fn(), vi.fn());
+  const footer = document.querySelector<HTMLElement>('.prep-stock-footer')!;
+  const menu = document.querySelector<HTMLElement>('.prep-list')!;
+  const style = document.querySelector<HTMLDetailsElement>('.prep-optional-style')!;
+  expect(footer.closest('.modal-body')).toBeNull();
+  expect(footer.nextElementSibling?.classList.contains('modal-actions')).toBe(true);
+  expect(footer.querySelector('[data-restock]')).not.toBeNull();
+  expect(footer.textContent).toContain(ingredientName('beans'));
+  expect(footer.textContent).toContain('$');
+  expect(style.open).toBe(false);
+  expect(menu.compareDocumentPosition(style) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  const scroller = document.querySelector<HTMLElement>('.modal-body')!;
+  scroller.scrollTop = 240; style.open = true;
+  espresso().focus(); espresso().click();
+  expect(document.querySelector<HTMLDetailsElement>('.prep-optional-style')!.open).toBe(true);
+  expect(scroller.scrollTop).toBe(240);
+  expect(document.activeElement).toBe(espresso());
+  expect(footer.nextElementSibling?.classList.contains('modal-actions')).toBe(true);
+});
+
+it('labels drink capacities as individual limits and names their shared ingredient stock', () => {
+  const state = createInitialState(0);
+  state.items.americano = 1; state.items.latte = 1;
+  state.onMenu = ['espresso', 'americano', 'latte']; state.pantry.beans = 13; state.pantry.milk = 4;
+  showPrepare(state, vi.fn(), vi.fn());
+  expect(document.querySelector('.prep-shared-stock')!.textContent).toBe(t('prep.sharedStock', { items: `${ingredientName('beans')} ×13` }));
+  for (const [id, n] of [['espresso', 13], ['americano', 13], ['latte', 4]] as const) {
+    const row = document.querySelector(`[data-dish="${id}"]`)!.closest('.prep-row')!;
+    expect(row.textContent).toContain(t('prep.onlyDrinkStock', { n }));
+  }
+  document.querySelector<HTMLInputElement>('[data-dish="americano"]')!.click();
+  document.querySelector<HTMLInputElement>('[data-dish="latte"]')!.click();
+  expect(document.querySelector('.prep-shared-stock')).toBeNull();
+});
+
+it('does not lose a footer restock click when a bakery amount is committing on blur', () => {
+  const state = createInitialState(0); state.day = 2; state.coins = 1000; state.kitchen = true; state.items.roll = 1;
+  setOnMenu(state, 'roll', true); state.pantry.beans = 0;
+  const changed = vi.fn(); showPrepare(state, vi.fn(), changed);
+  const frames: FrameRequestCallback[] = [];
+  vi.spyOn(window, 'requestAnimationFrame').mockImplementation(callback => { frames.push(callback); return frames.length; });
+  const amount = document.querySelector<HTMLInputElement>('[data-amount="roll"]')!;
+  const restock = document.querySelector<HTMLButtonElement>('[data-restock]')!;
+  amount.focus(); amount.value = '12';
+  restock.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, pointerId: 9 }));
+  amount.blur(); amount.dispatchEvent(new Event('change', { bubbles: true })); restock.focus();
+  expect(state.bakePlan.roll).toBe(12);
+  expect(frames).toHaveLength(0); expect(restock.isConnected).toBe(true);
+  window.dispatchEvent(new PointerEvent('pointerup', { pointerId: 9 })); restock.click();
+  frames.at(-1)!(0);
+  expect(state.pantry.beans).toBeGreaterThan(0); expect(state.coins).toBeLessThan(1000);
+  expect(changed).toHaveBeenCalledTimes(2);
+  expect(document.activeElement).toBe(espresso());
+});

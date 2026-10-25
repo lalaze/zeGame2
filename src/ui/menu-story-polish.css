@@ -1,0 +1,58 @@
+/* Keep the decision beside its price, separate from today's recipe and practice. */
+.panel .row.menu-item-row .menu-purchase-summary {
+  flex: 1 0 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  border-top: 1px solid var(--paper-shadow);
+  padding-top: 6px;
+}
+.panel .row.menu-item-row .menu-upgrade-preview {
+  flex: 1 1 150px;
+  margin: 0;
+  color: var(--green-dark);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.panel .row.menu-item-row .menu-purchase-summary .money-details {
+  flex: 0 1 auto;
+  margin: 0;
+  min-height: 44px;
+  padding: 4px 0;
+}
+.panel .row.menu-item-row .taste-chip {
+  display: block;
+  margin-top: 8px;
+  padding-block: 8px;
+}
+
+/* The visitor keeps their scene identity when the café pauses to hear a chapter. */
+.life-story .life-story-heading {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 0 0 16px;
+  padding: 4px 0 14px;
+  border-bottom: 1px solid var(--paper-shadow);
+}
+.life-story .life-story-heading > div { min-width: 0; }
+.life-story .life-story-heading p {
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.life-story .life-story-heading h3 {
+  margin: 0;
+  font-family: var(--ledger-serif);
+  font-size: 20px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.life-story > p { line-height: 1.85; }
+@media (max-width: 480px) {
+  .life-story .life-story-heading { gap: 12px; margin-bottom: 12px; }
+  .life-story .life-story-heading h3 { font-size: 18px; }
+}

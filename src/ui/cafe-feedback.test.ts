@@ -4,12 +4,22 @@ import { createInitialState } from '../game/state';
 import { openShop } from '../game/day';
 import { restockPlan } from '../game/economy';
 import { recordRegularGuestArrival, recordRegularGuestService } from '../game/regular-guests';
+import { REGULAR_GUESTS } from '../game/regular-guests-content';
 import { partnerContributions, recordPartnerWork, syncPartners } from '../game/partners';
 import { finishDay } from '../game/day';
 import { setLocale, t } from '../i18n';
 import { CafeLife, closingStory } from './cafe-life';
 import { showSoldOut } from './sold-out';
 import { closeModal, isModalOpen } from './modal';
+
+vi.mock('../render/sprites', () => ({
+  character: (_look: unknown, _role: unknown, appearanceId: number) => {
+    const stand = document.createElement('canvas');
+    stand.width = 18; stand.height = 28; stand.toString = () => String(appearanceId);
+    return { stand };
+  },
+  toDataURL: (canvas: HTMLCanvasElement) => `data:image/png;base64,portrait-${canvas}`,
+}));
 
 beforeEach(() => { setLocale('en'); document.body.innerHTML = '<div id="modal-root"></div>'; });
 afterEach(() => { closeModal(); document.body.replaceChildren(); setLocale('en'); });
@@ -73,6 +83,11 @@ it.each(['en', 'zh'] as const)('waits for a real unlocked story and keeps its te
   expect(life.element.textContent).not.toContain(t('regular.guest.mina.chapter1.text'));
   life.element.querySelector('button')!.click();
   expect(document.querySelector('.modal-body')!.textContent).toContain(t('regular.guest.mina.chapter1.text'));
+  const guest = REGULAR_GUESTS.find(guest => guest.id === 'mina')!;
+  expect(document.querySelector<HTMLImageElement>('.life-story .regular-portrait')!.src).toBe(`data:image/png;base64,portrait-${guest.appearanceId}`);
+  expect(document.querySelector('.life-story-heading h3')!.textContent).toBe(t(guest.chapters[0].titleKey));
+  expect(document.querySelector('.life-story-heading')!.textContent).toContain(t('regular.ui.chapter', { n: 1, total: guest.chapters.length }));
+  expect(document.querySelector('.life-story')!.textContent).not.toContain(t(guest.chapters[1].titleKey));
   expect(document.querySelector('.modal-body')!.textContent).not.toBe(t('regular.guest.mina.personality'));
   closeModal();
   expect(s.regularGuests.guests.mina!.readChapters).toEqual([]);

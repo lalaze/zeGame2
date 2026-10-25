@@ -4,7 +4,7 @@ import type { GuestKind } from './customer-demand';
 import { recordStyleHandoff, styleStationMultiplier, styleDwellExtra, styleServerMultiplier } from './styles';
 import { recordRegularGuestArrival, recordRegularGuestDeparture, recordRegularGuestService, regularGuestForAppearance, regularGuestOrder } from './regular-guests';
 import { minaReservedTable } from './regular-wishes';
-import { recordTrialPrepared, recordTrialServed, releaseTrialSale } from './trial-sales';
+import { recordTrialPrepared, recordTrialServed, releaseTrialSale, canReserveTrialSale, reserveTrialSale, trialSaleItem } from './trial-sales';
 import { recordGuestMemory, rememberedOrder } from './guest-memories';
 import { CUSTOMER_CAST, CustomerCastCycle } from './customer-cast';
 import { updatePromotion } from './promotion';
@@ -29,6 +29,7 @@ import {
   passCapacity,
   patienceSeconds,
   prepTime,
+  readyServings,
   salePrice,
   serverCount,
   servingCost,
@@ -1222,6 +1223,9 @@ export class Sim {
     });
   }
 
+  /** Shared by all assistance actions; querying this never spends the cooldown. */
+  get helpReady(): boolean { return this.boostCooldown <= 0; }
+
   /** Player taps to help: every brewing barista jumps ahead a bit. */
   boost(): boolean {
     if (this.boostCooldown > 0) return false;
@@ -1251,6 +1255,33 @@ export class Sim {
     if (index < 0 || !customer || customer.phase !== 'queue') return false;
     this.queue.splice(index, 1); this.queue.unshift(customerId); this.relayoutQueue();
     customer.patience += QUEUE_HELP_PATIENCE;
+    customer.mood = 'happy'; customer.moodTimer = 2;
+    this.boostCooldown = 1;
+    return true;
+  }
+
+  /** Let the UI offer only trial choices the ordinary transaction can accept. */
+  canOfferTrialTo(state: GameState, customerId: number): boolean {
+    if (state.phase !== 'open' || !this.helpReady) return false;
+    const item = trialSaleItem(state);
+    const customer = this.find(customerId);
+    if (!item || !customer || customer.phase !== 'queue' || customer.trialSale) return false;
+    const drink = !isBakery(customer.order) || customer.extra !== null && !isBakery(customer.extra);
+    return drink && readyServings(state, item) > (state.trialSales.active?.reserved ?? 0)
+      && canReserveTrialSale(state, customer.regularGuestId);
+  }
+
+  /** Spend one help decision to put today's trial cup in a chosen guest's order. */
+  offerTrialTo(state: GameState, customerId: number): boolean {
+    if (!this.canOfferTrialTo(state, customerId)) return false;
+    const item = trialSaleItem(state)!;
+    const customer = this.find(customerId)!;
+    if (!reserveTrialSale(state, customer.regularGuestId)) return false;
+    const mainDrink = !isBakery(customer.order);
+    if (mainDrink) customer.order = item;
+    else customer.extra = item;
+    delete customer.rememberedOrder;
+    customer.trialSale = 'reserved';
     customer.mood = 'happy'; customer.moodTimer = 2;
     this.boostCooldown = 1;
     return true;

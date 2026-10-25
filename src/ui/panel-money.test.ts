@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createInitialState, serialize } from '../game/state';
 import { setLocale, t } from '../i18n';
 import { closeModal } from './modal';
-import { quoteItem } from '../game/economy';
+import { itemPrice, menuItem, prepTime, quoteItem, servingCost, tipMultiplier } from '../game/economy';
 import { formatTransactionMoney } from '../game/format';
 import { Panel } from './panel';
 
@@ -48,6 +48,28 @@ afterEach(() => {
 });
 
 describe('purchase amount presentation', () => {
+  it.each(['en', 'zh'] as const)('separates current recipe figures from the selected upgrade quote in %s', locale => {
+    setLocale(locale);
+    const state = createInitialState(0); state.coins = 1000;
+    const { panel } = panelFor(state);
+    const row = button('[data-buy="item:espresso"]').closest('.row')!;
+    const current = row.querySelector<HTMLElement>('.sub')!;
+    const preview = row.querySelector<HTMLElement>('.menu-upgrade-preview')!;
+    const price = (level: number) => formatTransactionMoney(itemPrice(menuItem('espresso'), level) * tipMultiplier(state));
+    const unchanged = serialize(state);
+    expect(current.textContent).toBe(t('row.each', { price: price(1), cost: formatTransactionMoney(servingCost('espresso')), time: prepTime(state, 'espresso').toFixed(1) }));
+    expect(preview.textContent).toBe(t('row.afterUpgrade', { price: price(2) }));
+    expect(button('[data-price-details="item:espresso"]').closest('.row-actions')).not.toBeNull();
+    for (const [amount, quantity] of [['10', 10], ['max', 'max']] as const) {
+      button(`[data-amount="${amount}"]`).click();
+      expect(preview.textContent).toBe(t('row.afterUpgrade', { price: price(1 + quoteItem(state, 'espresso', quantity).count) }));
+      expect(current.textContent).not.toContain(t('row.afterUpgrade', { price: price(2) }));
+    }
+    expect(serialize(state)).toBe(unchanged);
+    state.items.espresso = 2; panel.refresh();
+    expect(button('[data-buy="item:espresso"]').closest('.row')!.querySelector('.lv')!.textContent).toBe('Lv 2');
+  });
+
   it.each(['en', 'zh'] as const)('unlocks a recipe without changing the menu, then lets the player add it in %s', locale => {
     setLocale(locale);
     const state = createInitialState(0); state.coins = 1000;

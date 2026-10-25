@@ -1545,6 +1545,13 @@ export class CafeScene extends Phaser.Scene {
     }
     for (const sale of this.view.sales.splice(0)) this.addFloater(sale);
     for (const tip of this.view.tips.splice(0)) this.floatText('+' + formatMoney(tip.amount), tip.x, tip.y, false);
+    for (const label of this.view.assistanceLabels.splice(0)) {
+      // Helping from another room must not clamp a remote employee's reply onto
+      // this room's edge. The action's toast still confirms off-screen help.
+      if (label.x < this.view.viewX || label.x > this.view.viewX + this.view.viewWidth
+          || label.y < this.view.viewY || label.y > this.view.viewY + this.view.viewHeight) continue;
+      this.floatText(label.text, label.x, label.y, false, true);
+    }
   }
 
   /** "+$12" rising from a sale and fading out. */
@@ -1563,18 +1570,26 @@ export class CafeScene extends Phaser.Scene {
   }
 
   /** Text rising from a presented point and fading out. */
-  private floatText(text: string, px: number, py: number, vip: boolean): void {
+  private floatText(text: string, px: number, py: number, vip: boolean, localized = false): void {
     // Stack pop-ups that would land on top of a fresh one.
     let y = py;
     while (this.floaters.some((f) => Math.abs(f.x - px) < 28 && Math.abs(f.pos.y - y) < 8)) y -= 8;
-    const w = textWidth(text);
+    // The compact sales atlas only contains Latin letters and numbers. Help
+    // replies use the loaded UI font so Chinese feedback is not silently lost.
+    const letters = localized
+      ? [this.add.text(0, 0, text, {
+        fontFamily: '"Pixel ZH", "Pixelify Sans", sans-serif', fontSize: 12,
+        color: '#fff3ce', stroke: '#49382e', strokeThickness: 2, resolution: 2,
+      }).setScale(2 / 3)]
+      : [
+        this.add.bitmapText(0, 0, PIXEL_FONT_HALO, text),
+        this.add.bitmapText(0, 0, vip ? PIXEL_FONT_VIP : PIXEL_FONT, text),
+      ];
+    const w = localized ? letters[0].displayWidth : textWidth(text);
     const view = this.view;
     const x = Math.min(view.viewX + view.viewWidth - w - 2, Math.max(view.viewX + 2, px - w / 2));
     const object = this.add
-      .container(Math.round(x), y, [
-        this.add.bitmapText(0, 0, PIXEL_FONT_HALO, text),
-        this.add.bitmapText(0, 0, vip ? PIXEL_FONT_VIP : PIXEL_FONT, text),
-      ])
+      .container(Math.round(x), y, letters)
       .setDepth(DEPTH.floaters);
     const floater: Floater = { x: px, pos: { y }, object };
     this.floaters.push(floater);

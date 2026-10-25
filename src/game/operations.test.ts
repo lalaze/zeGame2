@@ -10,6 +10,7 @@ import { SaveSession } from './save-session';
 import { QUEUE_HELP_PATIENCE, Sim, type Cook } from './sim';
 import type { SimSnapshot } from './sim-snapshot';
 import { createInitialState, deserialize, SAVE_KEY, serialize, type GameState } from './state';
+import { selectTrialSale } from './trial-sales';
 
 function ready(ids: ItemId[] = ['espresso', 'roll']) {
   const s = createInitialState(0);
@@ -296,6 +297,36 @@ describe('truthful feedback and smoother progression', () => {
     expect(sim.prioritizeQueue(s, choices[0].id)).toBe(false);
     tick(s, sim, 1);
     expect(sim.prioritizeQueue(s, choices[0].id)).toBe(true);
+  });
+  it('lets the player choose who receives today’s trial without changing the trial quota', () => {
+    const s = ready(['espresso']); s.items.latte = 1; s.upgrades.marketing = 25;
+    expect(selectTrialSale(s, 'latte')).toBe(true);
+    openShop(s); const sim = new Sim(rng());
+    for (let i = 0; i < 4000 && sim.queueChoices(3).length < 1; i++) sim.update(s, 0.05);
+    const chosen = sim.queueChoices(1)[0]; expect(chosen).toBeDefined();
+    const visits = s.trialSales.active!.visits;
+    expect(sim.offerTrialTo(s, chosen.id)).toBe(true);
+    expect(chosen).toMatchObject({ order: 'latte', trialSale: 'reserved' });
+    expect(s.trialSales.active).toMatchObject({ item: 'latte', reserved: 1, visits });
+    expect(sim.offerTrialTo(s, chosen.id)).toBe(false);
+  });
+  it('only advertises trial assistance when stock, quota, guest and cooldown allow the transaction', () => {
+    const s = ready(['espresso']); s.items.latte = 1; s.upgrades.marketing = 25;
+    selectTrialSale(s, 'latte'); openShop(s); const sim = new Sim(rng());
+    for (let i = 0; i < 4000 && !sim.queueChoices().length; i++) sim.update(s, 0.05);
+    const guest = sim.queueChoices()[0]; expect(guest).toBeDefined();
+    const original = structuredClone(s.trialSales.active);
+    expect(sim.canOfferTrialTo(s, guest.id)).toBe(true);
+    expect(s.trialSales.active).toEqual(original);
+    const milk = s.pantry.milk; s.pantry.milk = 0;
+    expect(sim.canOfferTrialTo(s, guest.id)).toBe(false);
+    s.pantry.milk = milk;
+    s.trialSales.active!.prepared = 5;
+    expect(sim.canOfferTrialTo(s, guest.id)).toBe(false);
+    s.trialSales.active!.prepared = 0;
+    expect(sim.offerTrialTo(s, guest.id)).toBe(true);
+    expect(sim.canOfferTrialTo(s, guest.id)).toBe(false);
+    expect(sim.helpReady).toBe(false);
   });
   it('prioritizes missing ingredients and separates a full pass from brewing', () => {
     const s = ready(['espresso']); openShop(s); const sim = new Sim(); tick(s, sim, 1);

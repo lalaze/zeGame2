@@ -21,12 +21,13 @@ it.each(['en', 'zh'] as const)('explains focused menu prices in %s without chang
   const panel = new Panel(document.getElementById('panel')!, document.getElementById('list')!, document.getElementById('goal')!, state, vi.fn(), vi.fn());
   panel.showTab('menu');
   const priceLine = () => document.querySelector('[data-buy="item:espresso"]')!.closest('.row')!.querySelector('.sub')!.textContent!.split(' · ');
-  const price = priceLine()[0]; const upgradePrice = priceLine().at(-1);
+  const upgradeLine = () => document.querySelector('[data-buy="item:espresso"]')!.closest('.row')!.querySelector('.menu-upgrade-preview')!.textContent;
+  const price = priceLine()[0]; const upgradePrice = upgradeLine();
   expect(note()).toBeNull();
   setCafeStyle(state, 'coffee'); const saved = serialize(state);
   panel.update();
   expect(note()!.textContent).toBe(t('style.menu.prices'));
-  expect(priceLine()[0]).toBe(price); expect(priceLine().at(-1)).toBe(upgradePrice);
+  expect(priceLine()[0]).toBe(price); expect(upgradeLine()).toBe(upgradePrice);
   expect(serialize(state)).toBe(saved);
   panel.setIntroMode(true); expect(note()!.textContent).toBe(t('style.menu.prices'));
   panel.showTab('upgrades'); expect(note()).toBeNull();

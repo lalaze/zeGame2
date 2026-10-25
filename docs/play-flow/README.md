@@ -8,7 +8,7 @@ Status, 2026-10-12: complete. Final source passed 1,098 tests with26 skips and p
 
 - A 90-second calm/rising/busy/easing cycle, bounded at 0.9–1.1 and analytically averaging 1. The existing average arrival forecast, price/patience rules and random-draw count stay intact.
 - Current and next phases are always visible while open: in the desktop footer and the existing mobile clock dock.
-- The service shortcut opens a paused choice: speed up active brewing or move one of the first three queued guests to the front and give them eight seconds of patience. Both use the shared once-per-café-second help cooldown; pantry navigation never buys automatically.
+- The service shortcut executes a sole available action immediately; multiple actions open a paused choice: speed up active brewing, hand today's trial drink to a selected guest, reassure the first queued guest, or move another of the first three queued guests to the front and give them eight seconds of patience. Queue choices identify the guest with their existing portrait and order; successful actions show brief scene feedback. No available action leaves the room running, and cooldown/idle states are labelled. Each uses the shared once-per-café-second help cooldown; pantry navigation never buys automatically. A chosen trial still uses the normal five-cup quota, stock, preparation, feedback and memory rules.
 - Pantry Close/Back/Escape returns to the prior tab/category, quantity, scroll, focus and expanded/collapsed panel context. Existing opening/closing, menu/research, modal/background and arrange restrictions remain in force.
 
 ## Local setup and commands

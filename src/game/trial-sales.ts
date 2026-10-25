@@ -83,12 +83,16 @@ export function trialOfferDue(s: GameState, regularId?: string): boolean {
   return run.visits % 3 === 0;
 }
 
-export function reserveTrialSale(s: GameState, regularId?: string): boolean {
+export function canReserveTrialSale(s: GameState, regularId?: string): boolean {
   const run = s.trialSales.active;
   if (s.phase !== 'open' || !run || !trialSaleItem(s)) return false;
   const limit = TRIAL_SALE_LIMIT - (regularId !== 'mina' && trialHeldForMina(s) ? 1 : 0);
-  if (run.prepared + run.reserved >= limit) return false;
-  run.reserved++;
+  return run.prepared + run.reserved < limit;
+}
+
+export function reserveTrialSale(s: GameState, regularId?: string): boolean {
+  if (!canReserveTrialSale(s, regularId)) return false;
+  s.trialSales.active!.reserved++;
   return true;
 }
 

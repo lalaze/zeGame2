@@ -1,3 +1,4 @@
+import './menu-story-polish.css';
 import { demandEnabled } from '../game/customer-demand';
 import { conditionTraffic } from '../game/conditions';
 import { menuTrafficMultiplier } from '../game/economy';
@@ -117,6 +118,7 @@ interface RowRefs {
   bake: HTMLElement | null;
   taste: HTMLButtonElement | null;
   tradeoff: HTMLElement | null;
+  upgradePreview: HTMLElement | null;
 }
 
 interface TileRefs {
@@ -748,6 +750,7 @@ export class Panel {
       }
       const isItem = kind === 'item';
       const isIng = kind === 'ing';
+      if (isItem) el.classList.add('menu-item-row');
       const name = isItem
         ? itemName(id as ItemId)
         : isIng
@@ -773,7 +776,7 @@ export class Panel {
           <div class="name">${name} <span class="lv"></span></div>
           <div class="sub"></div>
           ${isItem ? '<p class="note menu-tradeoff" hidden></p>' : ''}
-          <button type="button" class="money-details" data-price-details="${kind}:${id}" aria-haspopup="dialog"></button>
+          ${!isItem ? `<button type="button" class="money-details" data-price-details="${kind}:${id}" aria-haspopup="dialog"></button>` : ''}
           ${recipeHtml}
           ${isItem ? `<button class="taste-chip" data-taste="${id}" aria-haspopup="dialog"><span class="taste-label"></span><small class="taste-progress"></small></button>` : ''}
           ${
@@ -788,6 +791,7 @@ export class Panel {
           ${isItem || isIng ? '<div class="bar"><i></i></div>' : ''}
         </div>
         <div class="row-actions">
+          ${isItem ? `<div class="menu-purchase-summary"><p class="menu-upgrade-preview" hidden></p><button type="button" class="money-details" data-price-details="${kind}:${id}" aria-haspopup="dialog"></button></div>` : ''}
           ${kind === 'upgrade' && id === 'tables' ? '<button type="button" class="chip" data-table-preview aria-pressed="false"></button>' : ''}
           ${isItem ? `<button class="chip menu-toggle" data-menu="${id}"></button>` : ''}
           <button class="pixel-btn buy" data-buy="${kind}:${id}">
@@ -809,6 +813,7 @@ export class Panel {
         bake: el.querySelector('.bake'),
         taste: el.querySelector('button[data-taste]'),
         tradeoff: el.querySelector('.menu-tradeoff'),
+        upgradePreview: el.querySelector('.menu-upgrade-preview'),
       });
     }
   }
@@ -1065,7 +1070,6 @@ export class Panel {
                 cost: formatMoney(servingCost(def.id)),
               })
             : t('row.sellsFor', { price: formatMoney(def.basePrice * tipMultiplier(s)) });
-        refs.sub.textContent += ` · ${t('row.after', { before: formatMoney(itemPrice(def, level) * tipMultiplier(s)), after: formatMoney(itemPrice(def, level + q.count) * tipMultiplier(s)) })}`;
         const next = nextMilestone(level);
         if (refs.bar) {
           const prev = [0, ...PRICE_MILESTONES].filter((m) => m <= level).pop() ?? 0;
@@ -1079,6 +1083,12 @@ export class Panel {
         refs.btn.disabled = !q.affordable;
         refs.el.classList.toggle('new', level === 0);
         const eligible = canPrepareItem(s, def.id);
+        if (refs.upgradePreview) {
+          refs.upgradePreview.hidden = !eligible || (level === 0 && q.count <= 1);
+          refs.upgradePreview.textContent = refs.upgradePreview.hidden ? '' : t(level > 0 ? 'row.afterUpgrade' : 'row.afterUnlock', {
+            price: formatMoney(itemPrice(def, level + q.count) * tipMultiplier(s)),
+          });
+        }
         const on = eligible && s.onMenu.includes(def.id);
         if (!eligible) refs.sub.textContent = t('menu.requiresKitchen');
         refs.el.classList.toggle('off-menu', level > 0 && !on);
