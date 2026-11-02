@@ -4,6 +4,7 @@
 // The forecast, the suggested bake, the kitchen and the simulation all read the same
 // values below. A fair day changes nothing at all.
 import { MENU, isDrink, type ItemId } from './data';
+import { cafeLocation, locationDef, specialtyWeight } from './locations';
 import { itemFlavors, type Flavor } from './flavors';
 import { signatureDefinition } from './signature-drinks';
 import type { GameState } from './state';
@@ -92,14 +93,17 @@ export function dishMood(state: Pick<GameState, 'createdAt' | 'day'>, id: ItemId
 }
 
 /**
- * How likely guests are to pick each dish, relative to one another. Null when today
- * favors nothing on this menu, so callers keep the exact even pick.
+ * How likely guests are to pick each dish, relative to one another, from the weather
+ * and the branch's local specialties. Null when nothing on this menu stands out, so
+ * callers keep the exact even pick.
  */
-export function menuWeights(state: Pick<GameState, 'createdAt' | 'day'>, items: readonly { id: ItemId }[]): number[] | null {
-  if (!todayCondition(state).favored.length && !todayCondition(state).less.length) return null;
+export function menuWeights(state: Pick<GameState, 'createdAt' | 'day'> & Partial<Pick<GameState, 'chain'>>, items: readonly { id: ItemId }[]): number[] | null {
+  const weather = todayCondition(state).favored.length > 0 || todayCondition(state).less.length > 0;
+  if (!weather && !locationDef(cafeLocation(state)).specialties.length) return null;
   const weights = items.map(({ id }) => {
-    const mood = dishMood(state, id);
-    return mood === 'favored' ? FAVORED_WEIGHT : mood === 'less' ? LESS_WEIGHT : 1;
+    const mood = weather ? dishMood(state, id) : null;
+    // A branch's local specialties are popular whatever the weather.
+    return (mood === 'favored' ? FAVORED_WEIGHT : mood === 'less' ? LESS_WEIGHT : 1) * specialtyWeight(state, id);
   });
   return weights.every((w) => w === weights[0]) ? null : weights;
 }

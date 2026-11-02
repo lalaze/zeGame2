@@ -32,6 +32,7 @@ import {
   type UpgradeDef,
   type UpgradeId,
 } from './data';
+import { specialtyPriceMultiplier } from './locations';
 import { comfort } from './decor';
 import { activeTableIndices, regionDemand } from './regions';
 import type { DayStats, GameState } from './state';
@@ -214,7 +215,7 @@ export const tablePatience = (s: GameState) => 50 + comfort(s) / 4 + styleTableP
 
 export function salePrice(state: GameState, id: ItemId, vip = false, dineIn = false, meal: readonly ItemId[] = [id]): number {
   if (!canPrepareItem(state, id)) return 0;
-  return (id.startsWith('sig:') ? signaturePrice(state, id) : itemPrice(menuItem(id), state.items[id])) * tipMultiplier(state) * chainMultiplier(state) * (vip ? VIP_MULTIPLIER : 1) * styleSaleMultiplier(state, id, dineIn, meal);
+  return (id.startsWith('sig:') ? signaturePrice(state, id) : itemPrice(menuItem(id), state.items[id])) * tipMultiplier(state) * chainMultiplier(state) * specialtyPriceMultiplier(state, id) * (vip ? VIP_MULTIPLIER : 1) * styleSaleMultiplier(state, id, dineIn, meal);
 }
 
 /** Added doses or ingredients earn a 25% house premium; a plain copy retains
@@ -239,7 +240,7 @@ export function prepTime(state: GameState, id: ItemId): number {
 export function averageDishPrice(state: GameState, items: readonly MenuItemDef[] = menuItems(state)): number {
   if (items.length === 0) return 0;
   const price = (m: MenuItemDef) => (m.id.startsWith('sig:') ? signaturePrice(state, m.id) : itemPrice(m, Math.max(1, state.items[m.id] ?? 0)))
-    * tipMultiplier(state) * chainMultiplier(state) * styleSaleMultiplier(state, m.id, false, [m.id]);
+    * tipMultiplier(state) * chainMultiplier(state) * specialtyPriceMultiplier(state, m.id) * styleSaleMultiplier(state, m.id, false, [m.id]);
   return demandPlan(state, items).mains.reduce((sum, choice) => sum + price(choice.main) * choice.probability, 0);
 }
 

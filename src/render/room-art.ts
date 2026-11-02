@@ -44,6 +44,8 @@ import { textWidth } from './font';
 import { type Lighting, type Sun } from './lighting';
 import { OUTLINE, itemIcon, pixelSprite } from './sprites';
 import { paintPixelWindowVillage } from './pixel-window-village';
+import { paintLocationScenery } from './location-scenery';
+import type { LocationId } from '../game/locations';
 import { paintRain } from './weather-art';
 import { pixelFloorDoorLight, projectFloorLayer } from './pixel-floor-projection';
 import { MAIN_WALL_PLANE, MAIN_COUNTER_PLANE, mainPixelProjection, projectMainPlaneWorld } from './main-pixel-presentation';
@@ -314,6 +316,8 @@ export class RoomPainter {
   curtain = 'curtain_classic';
   /** Rain on the window glass: the time it falls by, or null on a dry day. */
   rain: number | null = null;
+  /** Where the café stands, which decides the view from the street windows. */
+  scenery: LocationId = 'town';
 
   constructor(public ctx: CanvasRenderingContext2D, readonly density = 1, private readonly project = true) {}
 
@@ -632,7 +636,8 @@ export class RoomPainter {
       }
       // Hills and a tree line outside, falling into shadow at dusk.
       const land = (day: string, dark: string) => mix(day, dark, light.dark);
-      if (this.density > 1) {
+      if (this.scenery !== 'town') paintLocationScenery(ctx, x, y, w, h, light.dark, t, this.scenery);
+      else if (this.density > 1) {
         if (!getGeneratedMainEnvironmentAdapter()?.paintWindowScenery(ctx, x, y, w, h, light.dark, t, false))
           paintPixelWindowVillage(ctx, x, y, w, h, light.dark);
         else if (light.dark > 0) {

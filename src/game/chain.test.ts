@@ -27,8 +27,8 @@ function grownCafe(earned = 1_000_000) {
 
 describe('café chain', () => {
   it('reads missing or malformed chain data as a first café', () => {
-    expect(parseChain(undefined)).toEqual({ stars: 0, branches: 0, baseEarned: 0 });
-    expect(parseChain({ stars: -2, branches: 1.7, baseEarned: 'lots' })).toEqual({ stars: 0, branches: 1, baseEarned: 0 });
+    expect(parseChain(undefined)).toEqual({ stars: 0, branches: 0, baseEarned: 0, location: 'town' });
+    expect(parseChain({ stars: -2, branches: 1.7, baseEarned: 'lots', location: 'moon' })).toEqual({ stars: 0, branches: 1, baseEarned: 0, location: 'town' });
   });
 
   it('awards stars by the square root of what this branch earned', () => {
@@ -49,7 +49,8 @@ describe('café chain', () => {
     expect(canOpenBranch(state)).toBe(true);
     state.regions = ['reading', 'greenhouse'];
     expect(branchUnlocked(state)).toBe(false);
-    expect(openBranch(state, 2)).toBeNull();
+    expect(openBranch(state, 'seaside', 2)).toBeNull();
+    expect(openBranch(grownCafe(), 'moon' as never, 2)).toBeNull();
     const open = grownCafe();
     open.phase = 'open';
     expect(canOpenBranch(open)).toBe(false);
@@ -58,7 +59,7 @@ describe('café chain', () => {
 
   it('starts the café over and carries the owner, manager, cats, stories and records', () => {
     const state = grownCafe();
-    const next = openBranch(state, 5)!;
+    const next = openBranch(state, 'seaside', 5)!;
     // Starts over.
     expect(next.coins).toBe(0);
     expect(next.items.latte).toBe(0);
@@ -77,7 +78,7 @@ describe('café chain', () => {
     expect(next.goal).toBe(15);
     expect(next.served).toBe(4_000);
     expect(next.createdAt).toBe(state.createdAt);
-    expect(next.chain).toEqual({ stars: 4, branches: 1, baseEarned: 1_000_000 });
+    expect(next.chain).toEqual({ stars: 4, branches: 1, baseEarned: 1_000_000, location: 'seaside' });
     // A normal save of the new branch.
     expect(deserialize(serialize(next), 6)).toEqual(next);
     // The old café is untouched until the game swaps the state.
@@ -85,11 +86,11 @@ describe('café chain', () => {
   });
 
   it('judges the next branch only on what it earns itself', () => {
-    const next = openBranch(grownCafe(), 5)!;
+    const next = openBranch(grownCafe(), 'seaside', 5)!;
     next.regions = ['reading', 'greenhouse', 'terrace'];
     expect(canOpenBranch(next)).toBe(false);
     next.totalEarned += STAR_EARNINGS;
-    expect(openBranch(next, 6)!.chain).toEqual({ stars: 5, branches: 2, baseEarned: 1_000_000 + STAR_EARNINGS });
+    expect(openBranch(next, 'city', 6)!.chain).toEqual({ stars: 5, branches: 2, baseEarned: 1_000_000 + STAR_EARNINGS, location: 'city' });
   });
 
   it('raises every price by ten percent per star', () => {

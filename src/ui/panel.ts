@@ -74,6 +74,8 @@ import type { GameState } from '../game/state';
 import { mainTableCount } from '../game/regions';
 import { AWAY_CAP_SECONDS, MANAGER_COST, awayHourly, hireManager, managerUnlocked } from '../game/manager';
 import { STAR_EARNINGS, branchEarnings, branchUnlocked, canOpenBranch, chainBonusPercent, starsOnBranch } from '../game/chain';
+import { cafeLocation, isSpecialty, specialtyPriceMultiplier } from '../game/locations';
+import { locationName } from './branch-map';
 import { MAX_TABLES } from '../game/layout';
 import { t, type MessageKey } from '../i18n';
 import { toast } from './modal';
@@ -787,7 +789,7 @@ export class Panel {
       el.innerHTML = `
         <img class="icon" alt="" src="${src}" />
         <div class="info">
-          <div class="name">${name} <span class="lv"></span></div>
+          <div class="name">${name}${isItem && isSpecialty(this.state, id as ItemId) ? ` <span class="specialty-tag">${t('menu.specialty')}</span>` : ''} <span class="lv"></span></div>
           <div class="sub"></div>
           ${isItem ? '<p class="note menu-tradeoff" hidden></p>' : ''}
           ${!isItem ? `<button type="button" class="money-details" data-price-details="${kind}:${id}" aria-haspopup="dialog"></button>` : ''}
@@ -907,7 +909,7 @@ export class Panel {
     const s = this.state, unlocked = branchUnlocked(s), stars = starsOnBranch(s);
     card.sub.textContent = unlocked ? t('chain.desc', { pct: chainBonusPercent(1) }) : t('chain.locked');
     card.status.hidden = s.chain.stars === 0 && s.chain.branches === 0;
-    card.status.textContent = t('chain.status', { stars: s.chain.stars, bonus: chainBonusPercent(s.chain.stars), n: s.chain.branches + 1 });
+    card.status.textContent = t('chain.status', { stars: s.chain.stars, bonus: chainBonusPercent(s.chain.stars), n: s.chain.branches + 1, place: locationName(cafeLocation(s)) });
     card.gain.hidden = !unlocked;
     card.gain.textContent = stars > 0
       ? `${t('chain.gain', { stars, money: formatMoney(branchEarnings(s)) })}${s.phase === 'prep' ? '' : ` ${t('chain.closedOnly')}`}`
@@ -1166,7 +1168,7 @@ export class Panel {
         refs.sub.textContent =
           level > 0
             ? t('row.each', {
-                price: formatMoney(itemPrice(def, level) * tipMultiplier(s) * chainMultiplier(s)),
+                price: formatMoney(itemPrice(def, level) * tipMultiplier(s) * chainMultiplier(s) * specialtyPriceMultiplier(s, def.id)),
                 time: prepTime(s, def.id).toFixed(1),
                 cost: formatMoney(servingCost(def.id)),
               })
@@ -1180,14 +1182,14 @@ export class Panel {
         refs.btnLabel.textContent = level === 0 ? t('btn.unlock') : q.count > 1 ? `+${q.count}` : t('btn.levelUp');
         refs.btnCost.textContent = formatMoney(q.cost);
         this.updateMoneyDetails(refs, q.cost);
-        refs.btn.title = t('row.after', { before: formatMoney(itemPrice(def, level) * tipMultiplier(s) * chainMultiplier(s)), after: formatMoney(itemPrice(def, level + q.count) * tipMultiplier(s) * chainMultiplier(s)) });
+        refs.btn.title = t('row.after', { before: formatMoney(itemPrice(def, level) * tipMultiplier(s) * chainMultiplier(s) * specialtyPriceMultiplier(s, def.id)), after: formatMoney(itemPrice(def, level + q.count) * tipMultiplier(s) * chainMultiplier(s) * specialtyPriceMultiplier(s, def.id)) });
         refs.btn.disabled = !q.affordable;
         refs.el.classList.toggle('new', level === 0);
         const eligible = canPrepareItem(s, def.id);
         if (refs.upgradePreview) {
           refs.upgradePreview.hidden = !eligible || (level === 0 && q.count <= 1);
           refs.upgradePreview.textContent = refs.upgradePreview.hidden ? '' : t(level > 0 ? 'row.afterUpgrade' : 'row.afterUnlock', {
-            price: formatMoney(itemPrice(def, level + q.count) * tipMultiplier(s) * chainMultiplier(s)),
+            price: formatMoney(itemPrice(def, level + q.count) * tipMultiplier(s) * chainMultiplier(s) * specialtyPriceMultiplier(s, def.id)),
           });
         }
         const on = eligible && s.onMenu.includes(def.id);

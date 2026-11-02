@@ -21,6 +21,8 @@ import { DAY_SECONDS, SPEEDS } from './game/data';
 import { openShop, type DayReport } from './game/day';
 import { AWAY_CAP_SECONDS, collectAwayEarnings, managerOpen, managerRestock, managerRunsDays } from './game/manager';
 import { canOpenBranch, chainBonusPercent, openBranch, starsOnBranch } from './game/chain';
+import type { LocationId } from './game/locations';
+import { locationName, showBranchMap } from './ui/branch-map';
 import { businessSeconds, formatBusinessClock, formatBusinessDuration } from './game/business-clock';
 import { expectedCustomers, menuItems, tipMultiplier, unlockedItems } from './game/economy';
 import { blocksNextTable, canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
@@ -951,22 +953,27 @@ function confirmRestart(): void {
   });
 }
 
+/** The branch map: pick a place, then confirm what a new branch means. */
+function openBranchMap(): void {
+  if (canOpenBranch(state)) showBranchMap(state, confirmBranch);
+}
+
 /** Hands this café over and starts a new branch, after saying what carries over. */
-function confirmBranch(): void {
+function confirmBranch(location: LocationId): void {
   if (!canOpenBranch(state)) return;
   const stars = starsOnBranch(state), bonus = chainBonusPercent(state.chain.stars + stars);
   const body = document.createElement('div');
-  for (const text of [t('chain.confirm.body', { stars, bonus }), t('chain.confirm.resets'), t('chain.confirm.keeps')]) {
+  for (const text of [t('chain.confirm.where', { place: locationName(location) }), t('chain.confirm.body', { stars, bonus }), t('chain.confirm.resets'), t('chain.confirm.keeps')]) {
     const p = document.createElement('p'); p.textContent = text; body.append(p);
   }
   showModal({ title: t('chain.confirm.title'), icon: ownerIcon(), body, buttons: [
-    { label: t('chain.confirm.cancel'), primary: true },
-    { label: t('chain.confirm.ok'), danger: true, onClick: startBranch },
+    { label: t('chain.confirm.cancel'), primary: true, onClick: openBranchMap },
+    { label: t('chain.confirm.ok'), danger: true, onClick: () => startBranch(location) },
   ] });
 }
 
-function startBranch(): void {
-  const next = openBranch(state, Date.now());
+function startBranch(location: LocationId): void {
+  const next = openBranch(state, location, Date.now());
   if (!next) return;
   if (arrange) { arrange = null; scene.ghost = null; showArrange(); }
   playFlow.cancelPantry();
@@ -984,7 +991,7 @@ function startBranch(): void {
   for (let i = 0; i < 20; i++) scene.sparkle(20 + Math.random() * 280, 30 + Math.random() * 60);
   toast(t('chain.opened', { stars: state.chain.stars, bonus: chainBonusPercent(state.chain.stars) }));
 }
-panelRoot.addEventListener('open-branch', confirmBranch);
+panelRoot.addEventListener('open-branch', openBranchMap);
 
 function resetGame(): void {
   playFlow.cancelPantry();

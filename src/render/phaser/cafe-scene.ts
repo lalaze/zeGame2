@@ -1,4 +1,5 @@
 import { remapTextile } from '../textile-styles';
+import { cafeLocation } from '../../game/locations';
 import { minaMapChoice, minaReservedTable } from '../../game/regular-wishes';
 import { paintMinaReservation } from '../regular-wish-art';
 import { centerpieceSprite } from '../table-centerpiece-art';
@@ -689,11 +690,12 @@ export class CafeScene extends Phaser.Scene {
     }
     if (area === 'main') {
       const rainy = todayCondition(state).id === 'rain';
-      const backSig = [tick, H, getLocale(), signFontRevision(), state.profile?.cafeName, Object.values(decor).join(','), menuItems(state).map((m) => m.id).join(','), state.phase, placed, now.getTime(), this.view.kitchenDoor.toFixed(2), rainy].join('|');
+      const backSig = [tick, H, getLocale(), signFontRevision(), state.profile?.cafeName, Object.values(decor).join(','), menuItems(state).map((m) => m.id).join(','), state.phase, placed, now.getTime(), this.view.kitchenDoor.toFixed(2), rainy, cafeLocation(state)].join('|');
       this.paint(back, o.x, o.y, backSig, (p) => {
         p.kitchenDoor = this.view.kitchenDoor;
         p.rain = rainy ? (this.motionPreference.matches ? 0 : t) : null;
         p.curtain = decor.curtain;
+        p.scenery = cafeLocation(state);
         const ctx = p.ctx;
         p.drawWall(decor.wallpaper, t);
         this.mainOpenings = p.lightOpenings();

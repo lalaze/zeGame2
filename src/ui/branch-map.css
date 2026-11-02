@@ -1,0 +1,28 @@
+/* The branch map: a crisp pixel map with HTML pins, then the chosen place below. */
+.modal.branch-map-modal { width: min(580px, 100%); }
+.branch-map { position: relative; margin: 0 0 6px; border: 2px solid var(--outline, #5b3b2a); border-radius: 3px; overflow: hidden; }
+.branch-map-art { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+.branch-pin {
+  position: absolute; transform: translate(-50%, -50%); padding: 2px 7px; min-height: 26px;
+  font: 600 12px/1.4 var(--ledger-serif, serif); color: #493728; white-space: nowrap;
+  background: #fff8e9; border: 2px solid #8a5a3c; border-radius: 3px; box-shadow: 0 2px 0 #5b3b2a55; cursor: pointer;
+}
+.branch-pin::after { content: ''; position: absolute; left: 50%; bottom: -6px; width: 6px; height: 4px; transform: translateX(-50%); background: #8a5a3c; }
+.branch-pin.selected { background: #a64c3e; border-color: #6e2f26; color: #fff8e9; }
+.branch-pin:focus-visible { outline: 2px solid #2c5e78; outline-offset: 2px; }
+.branch-detail { display: grid; grid-template-columns: 184px minmax(0, 1fr); gap: 12px; align-items: start; margin-top: 8px; }
+.branch-preview { width: 184px; height: 152px; image-rendering: pixelated; border: 4px solid #9a6740; border-radius: 2px; background: #9fd2ee; }
+.branch-info h3 { margin: 0 0 4px; font: 600 18px/1.4 var(--ledger-serif, serif); }
+.branch-info p { margin: 0 0 6px; }
+.branch-specialties { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 10px; margin: 0 0 10px; padding: 0; list-style: none; font-size: 13px; }
+.branch-specialties li { display: flex; align-items: center; gap: 6px; }
+.branch-specialties img { width: 28px; height: 28px; image-rendering: pixelated; }
+.branch-info .pixel-btn { width: 100%; }
+@media (max-width: 520px) {
+  .branch-detail { grid-template-columns: 1fr; }
+  .branch-preview { width: 100%; height: auto; aspect-ratio: 92 / 76; }
+  .branch-pin { font-size: 11px; padding: 1px 5px; }
+}
+
+/* Menu rows mark this branch's local specialties. */
+.specialty-tag { display: inline-block; margin-left: 4px; padding: 0 5px; font: 600 11px/1.6 var(--ledger-serif, serif); color: #fff8e9; background: #2c6e78; border-radius: 2px; vertical-align: middle; }
