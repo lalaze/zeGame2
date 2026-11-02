@@ -11,6 +11,7 @@ import { checkMilestones } from './milestones';
 import { adoptCat } from './pets';
 import { bookPromotion } from './promotion';
 import { Sim } from './sim';
+import { managerRestock, managerRunsDays } from './manager';
 import { createInitialState, serialize } from './state';
 import { t } from '../i18n';
 
@@ -60,11 +61,13 @@ function liveFrame(withCare = true) {
     momentStage: () => ({ area: 'main', cats: [] }), storage: { preference: () => '1', setPreference: vi.fn() }, toast: vi.fn(),
     // Real milestone checks: they read state and never advance the café.
     checkMilestones, milestoneName: (id: string) => id,
+    // Real manager decisions; the opening countdown is observed, not run.
+    DAY_SECONDS: 180, managerRunsDays, managerRestock, managerReport: vi.fn(), managerTick: vi.fn(),
   };
   const frame = new Function(...Object.keys(dependencies), `${frameSource}\nreturn frame;`)(...Object.values(dependencies)) as (dt: number) => void;
   const tick = new Function('delta', `${sceneTick}\nreturn dt;`) as (this: { initialized: boolean; loadingFailed: boolean; hooks: { tick: typeof frame } }, delta: number) => number;
   const rawFrame = (milliseconds: number) => tick.call({ initialized: true, loadingFailed: false, hooks: { tick: frame } }, milliseconds);
-  return { state, sim, session, scene, drawer, showReport, rawFrame, setModal: (open: boolean) => { modal = open; } };
+  return { state, sim, session, scene, drawer, showReport, rawFrame, managerTick: dependencies.managerTick, setModal: (open: boolean) => { modal = open; } };
 }
 
 beforeEach(() => {
@@ -97,6 +100,8 @@ describe('actual main-frame background and modal timing contract', () => {
     expect(run.scene.paused).toBe(true);
     expect(run.scene.livingCats.update.mock.calls.every(call => call[1] === 0)).toBe(true);
     expect(run.showReport).not.toHaveBeenCalled();
+    // The manager is told the café is paused, so it cannot open a day either.
+    expect(run.managerTick.mock.calls.slice(-8).every(call => call[1] === true)).toBe(true);
   });
 
   it.each([1, 2, 4] as const)('resumes at %sx without applying the away-time gap', speed => {
@@ -159,21 +164,23 @@ describe('actual main-frame background and modal timing contract', () => {
     expect(run.scene.livingCats.update.mock.calls.at(-1)?.[1]).toBe(0);
   });
 
-  it('saves on the real visibility handler only when hidden, without advancing the café', () => {
+  it('saves on the real visibility handler when hidden and settles away time on return, without advancing the café', () => {
     const run = liveFrame(); run.rawFrame(100);
     const before = serialize(run.state);
     const saved: string[] = [];
-    const register = new Function('document', 'saveGame', `const handler = ${visibilityCallback}; document.addEventListener('visibilitychange', handler); return () => document.removeEventListener('visibilitychange', handler);`) as (doc: Document, save: () => void) => () => void;
-    const dispose = register(document, () => saved.push(serialize(run.state)));
+    const settleAway = vi.fn();
+    const register = new Function('document', 'leaveCafe', 'settleAway', 'startupComplete', `const handler = ${visibilityCallback}; document.addEventListener('visibilitychange', handler); return () => document.removeEventListener('visibilitychange', handler);`) as (doc: Document, leave: () => void, settle: () => void, started: boolean) => () => void;
+    const dispose = register(document, () => saved.push(serialize(run.state)), settleAway, true);
     try {
       document.dispatchEvent(new Event('visibilitychange'));
-      expect(saved).toHaveLength(0);
+      expect(saved).toHaveLength(0); expect(settleAway).toHaveBeenCalledOnce();
       vi.spyOn(document, 'hidden', 'get').mockReturnValue(true);
       document.dispatchEvent(new Event('visibilitychange'));
       expect(saved).toEqual([before]); expect(serialize(run.state)).toBe(before);
+      expect(settleAway).toHaveBeenCalledOnce();
       vi.spyOn(document, 'hidden', 'get').mockReturnValue(false);
       document.dispatchEvent(new Event('visibilitychange'));
-      expect(saved).toEqual([before]);
+      expect(saved).toEqual([before]); expect(settleAway).toHaveBeenCalledTimes(2);
     } finally { dispose(); }
   });
 });

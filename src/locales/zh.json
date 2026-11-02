@@ -1560,5 +1560,22 @@
   "prep.restockAction": "补齐原料 · {price}",
   "prep.budgetAction": "按预算补货 · {price}",
   "row.afterUpgrade": "升级后售价 {price}",
-  "row.afterUnlock": "解锁并升级后售价 {price}"
+  "row.afterUnlock": "解锁并升级后售价 {price}",
+  "manager.name": "店长",
+  "manager.desc": "替你打理日常营业：按预测烘焙、补货、开门。你不在的时候也会继续赚钱。",
+  "manager.locked": "开放阅读室后可雇佣",
+  "manager.hire": "雇佣",
+  "manager.hired": "已雇佣",
+  "manager.auto.on": "自动营业：开",
+  "manager.auto.off": "自动营业：关",
+  "manager.away": "离线收益：每小时 {money}，最多计算 {hours} 小时",
+  "manager.opening": "店长 {n} 秒后开门",
+  "manager.opened": "店长开门了：第 {n} 天。",
+  "manager.noSupply": "店长的预算不够为今天的菜单备货，自动营业已暂停。补货或调整菜单后，再重新打开自动营业。",
+  "manager.restocked": "卖空了：店长补了货，继续营业。",
+  "manager.dayDone": "第 {n} 天已结算 · 利润 {money}",
+  "away.title": "欢迎回来",
+  "away.body": "你离开了 {time}。店长一直在照看咖啡馆，赚了 {money}。",
+  "away.capped": "离线收益最多计算 {hours} 小时。",
+  "away.collect": "收下"
 }

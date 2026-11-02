@@ -19,6 +19,7 @@ import { showLivingCat } from './ui/living-cats';
 import { petActive, type CatId } from './game/pets';
 import { DAY_SECONDS, SPEEDS } from './game/data';
 import { openShop, type DayReport } from './game/day';
+import { AWAY_CAP_SECONDS, collectAwayEarnings, managerOpen, managerRestock, managerRunsDays } from './game/manager';
 import { businessSeconds, formatBusinessClock, formatBusinessDuration } from './game/business-clock';
 import { expectedCustomers, menuItems, tipMultiplier, unlockedItems } from './game/economy';
 import { blocksNextTable, canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
@@ -78,6 +79,8 @@ const HINT_KEY = 'tiny-bean-cafe/hint-done';
 /** Shown once per kind, the first time a guest has a moment for the player. */
 const MOMENT_HINT_KEY = 'tiny-bean-cafe/moment-hint-';
 const AUTOSAVE_MS = 5000;
+/** Seconds the manager waits in an idle, closed café before opening the next day. */
+const MANAGER_DELAY = 4;
 const SIM_STEP = 0.05;
 
 const storage = new GuardedStorage(() => window.localStorage);
@@ -119,6 +122,8 @@ void Promise.resolve().then(() => acquireSaveSession(storage, navigator.locks, s
 
 function startGame(session: SaveSession, loading: ReturnType<typeof startupLoading>): void {
 let startupComplete = false;
+/** Countdown before the manager opens a quiet, closed café. */
+let managerWait = MANAGER_DELAY;
 let state: GameState = session.state;
 const sim = session.sim;
 /** Optional service moments; never saved, never run while the café is paused. */
@@ -145,7 +150,11 @@ function updateTemporaryNotice(): void {
 }
 updateTemporaryNotice();
 
+// Away time is measured from the last save made while the café was on screen. Until the
+// away earnings from the previous visit are settled, saves leave that time untouched.
+let awaySettled = false;
 function saveGame(): void {
+  if (awaySettled && !document.hidden) state.manager.lastSeen = Date.now();
   const result = session.save(state);
   if (result === 'conflict') sessionNotice(chinese()
     ? '存档已在别处更改。为保护进度，此标签页已暂停。请刷新以载入最新存档。'
@@ -612,7 +621,7 @@ function updateDayHud(): void {
   for (const b of speedBtns) b.classList.toggle('active', Number(b.dataset.speed) === state.speed);
   // Planning works from any room; the day can start without walking back to the counter.
   openBtn.hidden = open || !state.profile;
-  const label = t('day.open', { n: state.day });
+  const label = managerRunsDays(state) && !open ? t('manager.opening', { n: Math.max(1, Math.ceil(managerWait)) }) : t('day.open', { n: state.day });
   if (openBtn.textContent !== label) openBtn.textContent = label;
   hint.hidden = !open || guide.simplify || !!storage.preference(HINT_KEY);
   updateGuide();
@@ -640,6 +649,79 @@ function startDay(): void {
 }
 
 const menuEmpty = () => menuItems(state).length === 0;
+
+/** The manager's morning: forecast bake, restock and open, or stop and say why. */
+function managerStartDay(): void {
+  const result = managerOpen(state);
+  if (!result.ok) {
+    state.manager.auto = false;
+    saveGame(); panel.refresh(); updateDayHud();
+    toast(t('manager.noSupply'));
+    return;
+  }
+  saveGame();
+  toast(t('manager.opened', { n: state.day }));
+  for (let i = 0; i < 16; i++) scene.sparkle(280 + Math.random() * 30, 30 + Math.random() * 50);
+  panel.refresh();
+  updateDayHud();
+}
+
+/**
+ * The manager opens the next day after a short wait in a quiet, closed café; any
+ * pause, dialog, open management panel, arrangement or first-day guide holds them back.
+ */
+function managerTick(dt: number, paused: boolean): void {
+  const idle = managerRunsDays(state) && state.phase === 'prep' && !paused && !!state.profile &&
+    panelCollapsed && !arrange && !guide.openingStep && !mobileHud?.expanded;
+  if (!idle) managerWait = MANAGER_DELAY;
+  else if ((managerWait -= dt) <= 0) {
+    managerWait = MANAGER_DELAY;
+    managerStartDay();
+  }
+}
+
+/**
+ * With the manager running days, only a trial result or new milestones open the report.
+ * Unread partner stories wait in the partners book instead of stopping every day.
+ */
+function managerReport(report: DayReport): void {
+  if (report.trialSale || report.newMilestones?.length) {
+    showReport(report);
+    return;
+  }
+  playFlow.returnToPrevious(false);
+  saveGame();
+  panel.refresh();
+  updateDayHud();
+  toast(t('manager.dayDone', { n: report.day, money: formatMoney(report.profit) }));
+}
+
+/** The café leaves the screen: start the away clock and save. */
+function leaveCafe(): void {
+  if (awaySettled) state.manager.lastSeen = Date.now();
+  awaySettled = false;
+  saveGame();
+}
+
+/** Pays what the manager earned since the café was last on screen. */
+function settleAway(): void {
+  if (!session.active) return;
+  const away = collectAwayEarnings(state, Date.now());
+  awaySettled = true;
+  saveGame();
+  if (away.amount <= 0 || !state.profile) return;
+  panel.refresh();
+  const money = formatMoney(away.amount), time = formatDuration(away.seconds);
+  if (isModalOpen() || document.querySelector('.onboard-overlay')) {
+    toast(t('away.body', { time, money }));
+    return;
+  }
+  const body = document.createElement('div');
+  for (const text of [t('away.body', { time, money }), ...(away.capped ? [t('away.capped', { hours: AWAY_CAP_SECONDS / 3600 })] : [])]) {
+    const p = document.createElement('p'); p.textContent = text; body.append(p);
+  }
+  showModal({ title: t('away.title'), icon: ownerIcon(), body, buttons: [{ label: t('away.collect'), primary: true }] });
+}
 
 /** The only way to open: prepare today's menu, then confirm. */
 function prepareDay(): void {
@@ -713,7 +795,7 @@ function showReport(report: DayReport): void {
   showModal({
     title: t('report.title', { n: report.day }), icon: ownerIcon(), body: reportBody,
     buttons: [
-      { label: t('report.next'), primary: true, onClick: prepareDay },
+      { label: t('report.next'), primary: true, onClick: () => { if (!managerRunsDays(state)) prepareDay(); } },
       { label: advice.claimableGoal || advice.action.kind === 'claimChapter' ? t('guide.viewReward') : t(`tab.${recommendedTab}`), onClick: () => {
         showPanelTab(recommendedTab);
         if (advice.claimableGoal) $('goal').querySelector<HTMLButtonElement>('[data-claim]')?.focus();
@@ -1127,10 +1209,11 @@ window.addEventListener('keydown', (e) => {
 
 // ------------------------------------------------------------ saving
 
-// Nothing runs while you're away: the shop pauses with the game and picks up where it
-// left off. Save on the way out so nothing is lost.
+// The live café pauses with the game and picks up where it left off. Save on the way
+// out so nothing is lost; a hired manager's away earnings are paid on the way back.
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) saveGame();
+  if (document.hidden) leaveCafe();
+  else if (startupComplete) settleAway();
 });
 savePage.onClose(() => {
   try { saveGame(); } finally { session.close(); }
@@ -1158,16 +1241,23 @@ function frame(dt: number): void {
   if (wasOpen && state.phase === 'closing') {
     saveGame();
     updateDayHud();
-    toast(t(state.dayTime >= DAY_SECONDS ? 'toast.hoursClosing' : 'toast.soldOutClosing'));
-    if (state.dayTime < DAY_SECONDS) showSoldOut(state, () => {
-      sim.resumeAfterRestock(state);
+    const soldOut = state.dayTime < DAY_SECONDS;
+    if (soldOut && managerRunsDays(state) && managerRestock(state) && sim.resumeAfterRestock(state)) {
       saveGame(); panel.refresh(); updateDayHud();
-    }, () => { saveGame(); });
+      toast(t('manager.restocked'));
+    } else {
+      toast(t(soldOut ? 'toast.soldOutClosing' : 'toast.hoursClosing'));
+      if (soldOut && !managerRunsDays(state)) showSoldOut(state, () => {
+        sim.resumeAfterRestock(state);
+        saveGame(); panel.refresh(); updateDayHud();
+      }, () => { saveGame(); });
+    }
   }
   if (!paused && !isModalOpen() && state.phase === 'closing' && sim.finishedService) {
     const report = sim.closeShop(state);
-    if (report) showReport(report);
+    if (report) (managerRunsDays(state) ? managerReport : showReport)(report);
   }
+  managerTick(dt, paused);
 
   moments.update(state, sim, simDt, paused ? 0 : dt, momentStage());
   if (moments.active && moments.active !== cuedMoment) {
@@ -1257,6 +1347,7 @@ waitForStartupReady(cafe.ready, document.fonts.ready).then(() =>
     loading.complete();
     document.body.classList.add('ready');
     if (!state.profile) startOnboarding();
+    settleAway();
     const movedFurniture = consumeFurnitureMovesOnLoad(state);
     if (movedFurniture > 0) {
       saveGame();

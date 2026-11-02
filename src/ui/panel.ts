@@ -72,6 +72,7 @@ import { milestonesStarted } from '../game/milestones';
 import { claimChapterWithToast, milestoneCard, showMilestoneBook } from './milestones';
 import type { GameState } from '../game/state';
 import { mainTableCount } from '../game/regions';
+import { AWAY_CAP_SECONDS, AWAY_EFFICIENCY, MANAGER_COST, expectedDayProfit, hireManager, managerUnlocked } from '../game/manager';
 import { MAX_TABLES } from '../game/layout';
 import { t, type MessageKey } from '../i18n';
 import { toast } from './modal';
@@ -209,6 +210,7 @@ export class Panel {
   private bakeAllBtn: HTMLButtonElement | null = null;
   private pantryNote: HTMLElement | null = null;
   private restockBtn: HTMLButtonElement | null = null;
+  private managerCard: { sub: HTMLElement; away: HTMLElement; hire: HTMLButtonElement; auto: HTMLButtonElement } | null = null;
   private signature = '';
   private rows = new Map<string, RowRefs>();
   private tiles = new Map<string, TileRefs>();
@@ -641,7 +643,7 @@ export class Panel {
   private visibleKeys(): string[] {
     if (this.tab === 'promotion') return ['promotion'];
     if (this.tab === 'pets') return ['pets'];
-    if (this.tab === 'upgrades') return UPGRADES.map((u) => `upgrade:${u.id}`);
+    if (this.tab === 'upgrades') return ['manager', ...UPGRADES.map((u) => `upgrade:${u.id}`)];
     if (this.tab === 'decor') return ['decor', this.decorCategory];
     if (this.tab === 'pantry') return ['pantry', ...neededIngredients(this.state).map((i) => `ing:${i.id}`)];
     const stylePriceNote = ['signature-workbench', ...(this.state.cafeStyle.focus ? ['style-prices'] : [])];
@@ -680,6 +682,7 @@ export class Panel {
     this.comfortNote = null;
     this.pantryNote = null;
     this.restockBtn = null;
+    this.managerCard = null;
     this.varietyNote = null;
     this.bakeAllBtn = null;
     if (this.tab === 'promotion') {
@@ -719,6 +722,10 @@ export class Panel {
       }
       if (kind === 'pantry') {
         this.buildPantryIntro();
+        continue;
+      }
+      if (kind === 'manager') {
+        this.buildManagerCard();
         continue;
       }
       if (kind === 'variety') {
@@ -816,6 +823,53 @@ export class Panel {
         upgradePreview: el.querySelector('.menu-upgrade-preview'),
       });
     }
+  }
+
+  /** The shop manager: hired once, then switched on or off. */
+  private buildManagerCard(): void {
+    const el = document.createElement('div');
+    el.className = 'row manager-card';
+    el.innerHTML = `
+      <div class="info">
+        <div class="name">${t('manager.name')}</div>
+        <div class="sub"></div>
+        <div class="note manager-away"></div>
+      </div>
+      <div class="row-actions">
+        <button class="pixel-btn buy" data-manager-hire></button>
+        <button class="chip" data-manager-auto aria-pressed="true"></button>
+      </div>`;
+    const hire = el.querySelector<HTMLButtonElement>('[data-manager-hire]')!;
+    const auto = el.querySelector<HTMLButtonElement>('[data-manager-auto]')!;
+    hire.addEventListener('click', () => {
+      if (!hireManager(this.state)) return;
+      this.pop(el);
+      this.onPurchase('upgrade', 'manager');
+      this.update();
+    });
+    auto.addEventListener('click', () => {
+      this.state.manager.auto = !this.state.manager.auto;
+      this.onPurchase('upgrade', 'manager');
+      this.update();
+    });
+    this.list.append(el);
+    this.managerCard = { sub: el.querySelector('.sub')!, away: el.querySelector('.manager-away')!, hire, auto };
+  }
+
+  private updateManagerCard(): void {
+    const card = this.managerCard;
+    if (!card) return;
+    const s = this.state, { hired, auto } = s.manager, unlocked = managerUnlocked(s);
+    card.sub.textContent = unlocked || hired ? t('manager.desc') : t('manager.locked');
+    const perHour = expectedDayProfit(s) / DAY_SECONDS * 3600 * AWAY_EFFICIENCY;
+    card.away.hidden = !hired;
+    card.away.textContent = t('manager.away', { money: formatMoney(perHour), hours: AWAY_CAP_SECONDS / 3600 });
+    card.hire.hidden = hired;
+    card.hire.textContent = `${t('manager.hire')} ${formatMoney(MANAGER_COST)}`;
+    card.hire.disabled = !unlocked || s.coins < MANAGER_COST;
+    card.auto.hidden = !hired;
+    card.auto.textContent = t(auto ? 'manager.auto.on' : 'manager.auto.off');
+    card.auto.setAttribute('aria-pressed', String(auto));
   }
 
   private buildPantryIntro(): void {
@@ -1035,6 +1089,7 @@ export class Panel {
       this.updatePantry();
       return;
     }
+    this.updateManagerCard();
 
     const prep = s.phase === 'prep';
     if (this.bakeAllBtn) {

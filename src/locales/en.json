@@ -1560,5 +1560,22 @@
   "prep.restockAction": "Restock · {price}",
   "prep.budgetAction": "Within budget · {price}",
   "row.afterUpgrade": "After upgrade: {price} each",
-  "row.afterUnlock": "After unlocking and upgrading: {price} each"
+  "row.afterUnlock": "After unlocking and upgrading: {price} each",
+  "manager.name": "Shop Manager",
+  "manager.desc": "Runs ordinary days for you: bakes for the forecast, stocks the pantry and opens. Keeps earning while you're away.",
+  "manager.locked": "Can be hired once the Reading Room is open",
+  "manager.hire": "Hire",
+  "manager.hired": "Hired",
+  "manager.auto.on": "Auto days: on",
+  "manager.auto.off": "Auto days: off",
+  "manager.away": "Away earnings: {money} per hour, for up to {hours} hours",
+  "manager.opening": "Manager opens in {n}s",
+  "manager.opened": "The manager opened day {n}.",
+  "manager.noSupply": "The manager can't afford stock for today's menu, so auto days are paused. Restock or change the menu, then switch them back on.",
+  "manager.restocked": "Sold out: the manager restocked and kept serving.",
+  "manager.dayDone": "Day {n} settled · profit {money}",
+  "away.title": "Welcome back",
+  "away.body": "You were away for {time}. The manager kept the café going and earned {money}.",
+  "away.capped": "Away earnings stop after {hours} hours.",
+  "away.collect": "Collect"
 }

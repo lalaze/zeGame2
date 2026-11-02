@@ -8,6 +8,7 @@ import { emptyTrialSales, parseTrialSales, type TrialSalesState } from './trial-
 import { parseGuestMemories, type GuestMemories } from './guest-memories';
 import { emptyMilestones, parseMilestones, type MilestoneState } from './milestones';
 import { parsePromotion, type Promotion } from './promotion';
+import { emptyManager, parseManager, type ManagerState } from './manager';
 import {
   INGREDIENTS,
   MENU,
@@ -28,7 +29,7 @@ import { parseTaste, type TasteState } from './taste';
 import { emptyReviews, parseReputation, parseReviews, type Reputation, type ReviewSummary } from './reputation';
 
 export const SAVE_KEY = 'tiny-bean-cafe/save';
-export const SAVE_VERSION = 22;
+export const SAVE_VERSION = 23;
 
 export interface Look {
   skin: number;
@@ -110,6 +111,8 @@ export interface GameState {
   /** The café milestone track that follows the guided goals (save v18). */
   milestones: MilestoneState;
   promotion: Promotion | null;
+  /** The shop manager who runs days and earns while you're away (save v23). */
+  manager: ManagerState;
   pets: Pet[];
   reputation: Reputation;
   taste: TasteState;
@@ -171,6 +174,7 @@ export function createInitialState(now: number): GameState {
     trialSales: emptyTrialSales(),
     guestMemories: {},
     milestones: emptyMilestones(),
+    manager: emptyManager(now),
     pets: [],
     promotion: null,
     reputation: { recent: [] },
@@ -337,6 +341,7 @@ export function deserialize(raw: string | null, now: number): GameState {
   base.today = parseDay(data.today);
   base.pets = parsePets(data.pets);
   base.promotion = parsePromotion(data.promotion);
+  base.manager = parseManager(data.manager, now);
   // Older saves only retain per-dish sales for the current day; carry that
   // evidence forward without inventing a split of the lifetime customer total.
   base.taste = parseTaste(data.taste, num(data.version, 1) < 10 ? base.today.sales : {});
@@ -358,8 +363,8 @@ export function deserialize(raw: string | null, now: number): GameState {
     base.coins += bulkCost(200, 2.2, 0, oldDecor);
     base.upgrades.tables = Math.max(base.upgrades.tables, [3, 6, 10].filter((l) => oldDecor >= l).length);
   }
-  // The Shift Manager, who earned while the game was closed, has retired: what was
-  // spent hiring them comes back. The upgrade isn't saved any more, so this happens once.
+  // The old leveled Shift Manager upgrade retired before v23's manager: what was spent
+  // hiring them comes back. The upgrade isn't saved any more, so this happens once.
   const manager = Math.min(5, Math.floor(num(upgrades.manager, 0)));
   if (manager > 0) base.coins += bulkCost(500, 4, 0, manager);
   // Anything placed off the grid or in a table's way goes to storage.
