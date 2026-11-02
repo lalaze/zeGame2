@@ -1577,5 +1577,20 @@
   "away.title": "欢迎回来",
   "away.body": "你离开了 {time}。店长一直在照看咖啡馆，赚了 {money}。",
   "away.capped": "离线收益最多计算 {hours} 小时。",
-  "away.collect": "收下"
+  "away.collect": "收下",
+  "chain.name": "连锁分店",
+  "chain.locked": "开放花园露台后，就可以把这家店交出去，从头开一家新分店。",
+  "chain.desc": "新分店从零开始，并按这家店赚到的钱获得连锁星。每颗星让之后所有店的售价永久提高 {pct}%。",
+  "chain.status": "连锁星 {stars} · 售价 +{bonus}% · 第 {n} 家店",
+  "chain.gain": "现在开分店可获得 {stars} 颗连锁星（这家店已赚 {money}）。",
+  "chain.next": "这家店再赚到 {money}，就能拿到下一颗星。",
+  "chain.closedOnly": "只能在打烊时开分店。",
+  "chain.open": "开新分店",
+  "chain.confirm.title": "开一家新分店？",
+  "chain.confirm.body": "你将获得 {stars} 颗连锁星，之后售价 +{bonus}%。",
+  "chain.confirm.resets": "从头开始：金钱、菜品解锁和等级、食材、升级和员工、房间和厨房、装修和家具、评分、菜品熟练度、推广。",
+  "chain.confirm.keeps": "会带过去：你和店名、店长、天数、伙伴和他们的故事、熟客、常驻猫咪、自创饮品、里程碑和称号。",
+  "chain.confirm.ok": "开分店",
+  "chain.confirm.cancel": "再等等",
+  "chain.opened": "新分店开张了！连锁星 {stars} 颗，售价 +{bonus}%。"
 }

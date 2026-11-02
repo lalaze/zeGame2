@@ -20,6 +20,7 @@ import { petActive, type CatId } from './game/pets';
 import { DAY_SECONDS, SPEEDS } from './game/data';
 import { openShop, type DayReport } from './game/day';
 import { AWAY_CAP_SECONDS, collectAwayEarnings, managerOpen, managerRestock, managerRunsDays } from './game/manager';
+import { canOpenBranch, chainBonusPercent, openBranch, starsOnBranch } from './game/chain';
 import { businessSeconds, formatBusinessClock, formatBusinessDuration } from './game/business-clock';
 import { expectedCustomers, menuItems, tipMultiplier, unlockedItems } from './game/economy';
 import { blocksNextTable, canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
@@ -124,6 +125,8 @@ function startGame(session: SaveSession, loading: ReturnType<typeof startupLoadi
 let startupComplete = false;
 /** Countdown before the manager opens a quiet, closed café. */
 let managerWait = MANAGER_DELAY;
+/** Whether the manager is counting down right now (nothing is holding them back). */
+let managerCounting = false;
 let state: GameState = session.state;
 const sim = session.sim;
 /** Optional service moments; never saved, never run while the café is paused. */
@@ -621,7 +624,7 @@ function updateDayHud(): void {
   for (const b of speedBtns) b.classList.toggle('active', Number(b.dataset.speed) === state.speed);
   // Planning works from any room; the day can start without walking back to the counter.
   openBtn.hidden = open || !state.profile;
-  const label = managerRunsDays(state) && !open ? t('manager.opening', { n: Math.max(1, Math.ceil(managerWait)) }) : t('day.open', { n: state.day });
+  const label = managerCounting && !open ? t('manager.opening', { n: Math.max(1, Math.ceil(managerWait)) }) : t('day.open', { n: state.day });
   if (openBtn.textContent !== label) openBtn.textContent = label;
   hint.hidden = !open || guide.simplify || !!storage.preference(HINT_KEY);
   updateGuide();
@@ -673,6 +676,7 @@ function managerStartDay(): void {
 function managerTick(dt: number, paused: boolean): void {
   const idle = managerRunsDays(state) && state.phase === 'prep' && !paused && !!state.profile &&
     panelCollapsed && !arrange && !guide.openingStep && !mobileHud?.expanded;
+  managerCounting = idle;
   if (!idle) managerWait = MANAGER_DELAY;
   else if ((managerWait -= dt) <= 0) {
     managerWait = MANAGER_DELAY;
@@ -946,6 +950,41 @@ function confirmRestart(): void {
     ],
   });
 }
+
+/** Hands this café over and starts a new branch, after saying what carries over. */
+function confirmBranch(): void {
+  if (!canOpenBranch(state)) return;
+  const stars = starsOnBranch(state), bonus = chainBonusPercent(state.chain.stars + stars);
+  const body = document.createElement('div');
+  for (const text of [t('chain.confirm.body', { stars, bonus }), t('chain.confirm.resets'), t('chain.confirm.keeps')]) {
+    const p = document.createElement('p'); p.textContent = text; body.append(p);
+  }
+  showModal({ title: t('chain.confirm.title'), icon: ownerIcon(), body, buttons: [
+    { label: t('chain.confirm.cancel'), primary: true },
+    { label: t('chain.confirm.ok'), danger: true, onClick: startBranch },
+  ] });
+}
+
+function startBranch(): void {
+  const next = openBranch(state, Date.now());
+  if (!next) return;
+  if (arrange) { arrange = null; scene.ghost = null; showArrange(); }
+  playFlow.cancelPantry();
+  state = next;
+  sim.reset();
+  moments.reset();
+  scene.livingCats.reset();
+  scene.selectedCat = null;
+  operationMonitor.reset();
+  panel.setState(state);
+  regionsUI.select('main');
+  updateBrand();
+  saveGame();
+  updateDayHud();
+  for (let i = 0; i < 20; i++) scene.sparkle(20 + Math.random() * 280, 30 + Math.random() * 60);
+  toast(t('chain.opened', { stars: state.chain.stars, bonus: chainBonusPercent(state.chain.stars) }));
+}
+panelRoot.addEventListener('open-branch', confirmBranch);
 
 function resetGame(): void {
   playFlow.cancelPantry();

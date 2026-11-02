@@ -16,8 +16,13 @@ export interface ManagerState {
 }
 
 export const MANAGER_COST = 2_500;
-/** Away earnings are this share of what a normal day on the current menu makes. */
-export const AWAY_EFFICIENCY = 0.5;
+/**
+ * Away, the manager runs this many ordinary days per real hour (a day takes three
+ * minutes at 1× on screen). Scripted fresh cafés reinvest about a day's profit a day
+ * while it grows 10–15% daily, so a full night away is worth roughly six days of
+ * progress: welcome, without replacing play or the on-screen auto days.
+ */
+export const AWAY_DAYS_PER_HOUR = 1;
 /** Time beyond this is not paid; come back to keep the café growing. */
 export const AWAY_CAP_SECONDS = 8 * 60 * 60;
 /** Shorter absences (a tab switch, a reload) earn nothing and show nothing. */
@@ -56,6 +61,9 @@ export function expectedDayProfit(state: GameState): number {
   return Math.max(0, profit);
 }
 
+/** What an hour away earns with the current menu. */
+export const awayHourly = (state: GameState) => expectedDayProfit(state) * AWAY_DAYS_PER_HOUR;
+
 export interface AwayEarnings {
   /** Paid seconds away, after the cap. */
   seconds: number;
@@ -69,8 +77,7 @@ export function awayEarnings(state: GameState, now: number): AwayEarnings {
   const away = Math.max(0, (now - state.manager.lastSeen) / 1000);
   if (!state.manager.hired || away < AWAY_MIN_SECONDS) return { seconds: 0, capped: false, amount: 0 };
   const seconds = Math.min(away, AWAY_CAP_SECONDS);
-  // A business day takes DAY_SECONDS at normal speed.
-  const amount = Math.floor(expectedDayProfit(state) / DAY_SECONDS * seconds * AWAY_EFFICIENCY);
+  const amount = Math.floor(awayHourly(state) * seconds / 3600);
   return { seconds, capped: away > AWAY_CAP_SECONDS, amount };
 }
 

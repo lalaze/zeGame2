@@ -163,6 +163,9 @@ export const UPGRADES: readonly UpgradeDef[] = [
   { id: 'pass', baseCost: 12_000, growth: 10, max: 2 },
 ];
 
+/** Each chain star (earned by opening a new branch) permanently raises every sale price this much. */
+export const CHAIN_STAR_BONUS = 0.1;
+
 export const ITEM_COST_GROWTH = 1.12;
 /**
  * A level-up costs this many times the dish's unlock price (before growth). Each level

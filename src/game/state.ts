@@ -9,6 +9,7 @@ import { parseGuestMemories, type GuestMemories } from './guest-memories';
 import { emptyMilestones, parseMilestones, type MilestoneState } from './milestones';
 import { parsePromotion, type Promotion } from './promotion';
 import { emptyManager, parseManager, type ManagerState } from './manager';
+import { emptyChain, parseChain, type ChainState } from './chain';
 import {
   INGREDIENTS,
   MENU,
@@ -113,6 +114,8 @@ export interface GameState {
   promotion: Promotion | null;
   /** The shop manager who runs days and earns while you're away (save v23). */
   manager: ManagerState;
+  /** Chain stars and branches opened so far (save v23). */
+  chain: ChainState;
   pets: Pet[];
   reputation: Reputation;
   taste: TasteState;
@@ -175,6 +178,7 @@ export function createInitialState(now: number): GameState {
     guestMemories: {},
     milestones: emptyMilestones(),
     manager: emptyManager(now),
+    chain: emptyChain(),
     pets: [],
     promotion: null,
     reputation: { recent: [] },
@@ -342,6 +346,7 @@ export function deserialize(raw: string | null, now: number): GameState {
   base.pets = parsePets(data.pets);
   base.promotion = parsePromotion(data.promotion);
   base.manager = parseManager(data.manager, now);
+  base.chain = parseChain(data.chain);
   // Older saves only retain per-dish sales for the current day; carry that
   // evidence forward without inventing a split of the lifetime customer total.
   base.taste = parseTaste(data.taste, num(data.version, 1) < 10 ? base.today.sales : {});

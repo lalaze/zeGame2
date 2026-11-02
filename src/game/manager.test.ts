@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { DAY_SECONDS, type IngredientId } from './data';
 import {
   AWAY_CAP_SECONDS,
-  AWAY_EFFICIENCY,
+  AWAY_DAYS_PER_HOUR,
   AWAY_MIN_SECONDS,
   MANAGER_COST,
   awayEarnings,
@@ -79,7 +79,7 @@ describe('shop manager', () => {
 
   it('pays part of a normal day for time away, from the first minute up to the cap', () => {
     const state = hired(0);
-    const perSecond = expectedDayProfit(state) / DAY_SECONDS * AWAY_EFFICIENCY;
+    const perSecond = expectedDayProfit(state) * AWAY_DAYS_PER_HOUR / 3600;
     expect(awayEarnings(state, (AWAY_MIN_SECONDS - 1) * 1000).amount).toBe(0);
     expect(awayEarnings(state, 2 * HOUR)).toEqual({ seconds: 7200, capped: false, amount: Math.floor(perSecond * 7200) });
     const week = awayEarnings(state, 7 * 24 * HOUR);

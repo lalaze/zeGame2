@@ -1577,5 +1577,20 @@
   "away.title": "Welcome back",
   "away.body": "You were away for {time}. The manager kept the café going and earned {money}.",
   "away.capped": "Away earnings stop after {hours} hours.",
-  "away.collect": "Collect"
+  "away.collect": "Collect",
+  "chain.name": "Café chain",
+  "chain.locked": "Once the Garden Patio is open, you can hand this café over and start a new branch.",
+  "chain.desc": "A new branch starts from scratch and earns chain stars for what this café made. Each star raises every price by {pct}%, for good.",
+  "chain.status": "Chain stars {stars} · prices +{bonus}% · café no. {n}",
+  "chain.gain": "Open a branch now for {stars} {stars, star|stars} (this café has earned {money}).",
+  "chain.next": "The next star needs {money} earned at this café.",
+  "chain.closedOnly": "Branches open while the café is closed.",
+  "chain.open": "Open a new branch",
+  "chain.confirm.title": "Open a new branch?",
+  "chain.confirm.body": "You'll get {stars} chain {stars, star|stars}: prices +{bonus}% from now on.",
+  "chain.confirm.resets": "Starts over: money, recipes and levels, pantry, upgrades and staff, rooms and kitchen, decor and furniture, rating, flavor practice and promotions.",
+  "chain.confirm.keeps": "Comes along: you and your café's name, the shop manager, day count, partners and their stories, regulars, resident cats, custom drinks, milestones and titles.",
+  "chain.confirm.ok": "Open the branch",
+  "chain.confirm.cancel": "Not yet",
+  "chain.opened": "The new branch is open! {stars} chain {stars, star|stars}, prices +{bonus}%."
 }

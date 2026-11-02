@@ -24,6 +24,7 @@ import {
   CUSTOMER_WALK_SPEED,
   UPGRADES,
   VIP_MULTIPLIER,
+  CHAIN_STAR_BONUS,
   type IngredientDef,
   type IngredientId,
   type ItemId,
@@ -203,6 +204,8 @@ export const baseArrivalRate = (s: GameState) =>
   BASE_ARRIVAL_RATE * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * menuTrafficMultiplier(s) * reputationTraffic(s.reputation) * petTraffic(s) * styleArrivalMultiplier(s) * conditionTraffic(s, menuItems(s));
 export const arrivalRate = (s: GameState) => baseArrivalRate(s) * promotionTraffic(s);
 export const tipMultiplier = (s: GameState) => 1 + comfort(s) / 100;
+/** Chain stars from earlier branches raise every price, permanently. */
+export const chainMultiplier = (s: GameState) => 1 + CHAIN_STAR_BONUS * s.chain.stars;
 /** The café opens with a table in each nook; Expand the Shop adds the rest. */
 export const tableCount = (s: GameState) => activeTableIndices(s).length;
 export const patienceSeconds = (s: GameState) => 40 + comfort(s) / 5 + conditionPatience(s);
@@ -211,7 +214,7 @@ export const tablePatience = (s: GameState) => 50 + comfort(s) / 4 + styleTableP
 
 export function salePrice(state: GameState, id: ItemId, vip = false, dineIn = false, meal: readonly ItemId[] = [id]): number {
   if (!canPrepareItem(state, id)) return 0;
-  return (id.startsWith('sig:') ? signaturePrice(state, id) : itemPrice(menuItem(id), state.items[id])) * tipMultiplier(state) * (vip ? VIP_MULTIPLIER : 1) * styleSaleMultiplier(state, id, dineIn, meal);
+  return (id.startsWith('sig:') ? signaturePrice(state, id) : itemPrice(menuItem(id), state.items[id])) * tipMultiplier(state) * chainMultiplier(state) * (vip ? VIP_MULTIPLIER : 1) * styleSaleMultiplier(state, id, dineIn, meal);
 }
 
 /** Added doses or ingredients earn a 25% house premium; a plain copy retains
@@ -236,7 +239,7 @@ export function prepTime(state: GameState, id: ItemId): number {
 export function averageDishPrice(state: GameState, items: readonly MenuItemDef[] = menuItems(state)): number {
   if (items.length === 0) return 0;
   const price = (m: MenuItemDef) => (m.id.startsWith('sig:') ? signaturePrice(state, m.id) : itemPrice(m, Math.max(1, state.items[m.id] ?? 0)))
-    * tipMultiplier(state) * styleSaleMultiplier(state, m.id, false, [m.id]);
+    * tipMultiplier(state) * chainMultiplier(state) * styleSaleMultiplier(state, m.id, false, [m.id]);
   return demandPlan(state, items).mains.reduce((sum, choice) => sum + price(choice.main) * choice.probability, 0);
 }
 
