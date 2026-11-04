@@ -1,0 +1,997 @@
+{
+  "schemaVersion": 1,
+  "packId": "travel-reserve-v1",
+  "generator": "scripts/build-reserve-library.mjs",
+  "files": [
+    {
+      "path": "manifest.json",
+      "bytes": 197625,
+      "sha256": "b108ef4066a2c342ca4619e95de8a0d4e41bf4f9c901d81b89e20a841d8290ef"
+    },
+    {
+      "path": "catalog.js",
+      "bytes": 131377,
+      "sha256": "97b23eda4ab1f4f6f68f52a7f27d9ae0e4ffe23d7fbdb56e1dc849cbcd1aea0a"
+    },
+    {
+      "path": "atlas.png",
+      "bytes": 82587,
+      "sha256": "81964301e4a47bdc4c79bbbff3510590d290b4a374fd29c31b991f8e13d362de"
+    },
+    {
+      "path": "contact-sheet.png",
+      "bytes": 113822,
+      "sha256": "5d88904aaba84367c6b67b868f5afcf17de8054ddba8d1d5ea87c74eb6bb6688"
+    },
+    {
+      "path": "verification-report.json",
+      "bytes": 57290,
+      "sha256": "3d9e4d0302a4f11645eea1e627786adcd38321a5a3b1e15c7ec25dcc96ff4e15"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1408,
+      "sha256": "600bdf4539ec74f1c1af4fac285bb8364bbc579795907e193df285fd56b076a5"
+    },
+    {
+      "path": "sprites/travel-lighthouse-spring.png",
+      "bytes": 730,
+      "sha256": "7b33cd15d102962a09c0796c3c6956a21a35fcae0d8a7d53f2583bad0da67027"
+    },
+    {
+      "path": "sprites/travel-lighthouse-summer.png",
+      "bytes": 792,
+      "sha256": "cd6756fdeaac843a15f346eef642aaff0a8332fd177c4c8e35261999ce7b7ad8"
+    },
+    {
+      "path": "sprites/travel-lighthouse-autumn.png",
+      "bytes": 707,
+      "sha256": "31655e0f9bbb2e96eb9b268f49fe435c97e2307506e1c3b9b7ce6ffc9fda2501"
+    },
+    {
+      "path": "sprites/travel-lighthouse-winter.png",
+      "bytes": 761,
+      "sha256": "757711e3966bc3ddaac5951e27cbbe0a6476cda71f6753e0c9e42dc873b0bffa"
+    },
+    {
+      "path": "sprites/travel-sailboat-spring.png",
+      "bytes": 600,
+      "sha256": "505e224000f2b24946249327fcb8c3526d3ba591a64eb0f7ea9ca213ae813b3a"
+    },
+    {
+      "path": "sprites/travel-sailboat-summer.png",
+      "bytes": 650,
+      "sha256": "b3d7b8a683b98823d71f34dc751ca156fe998c80e148f99740e1ee517a0b761e"
+    },
+    {
+      "path": "sprites/travel-sailboat-autumn.png",
+      "bytes": 648,
+      "sha256": "cef612cf3e0084969985c1729a2eb8585de06b86613e77c1e0283b42677e0fd3"
+    },
+    {
+      "path": "sprites/travel-sailboat-winter.png",
+      "bytes": 636,
+      "sha256": "7dfd0fdde6408de43d8ee92d7c4a479a3b8cc77f220403ef3f857d972ae3f204"
+    },
+    {
+      "path": "sprites/travel-brass-telescope-spring.png",
+      "bytes": 761,
+      "sha256": "2ac47bdfde0a3ed17b2db1cd5bdd0771ce4ec1487b69225a5d26e373130b8581"
+    },
+    {
+      "path": "sprites/travel-brass-telescope-summer.png",
+      "bytes": 771,
+      "sha256": "e51d511f11b1fd406f5dbc7db3c4b2859e733347b20a3542127c6bec714ae346"
+    },
+    {
+      "path": "sprites/travel-brass-telescope-autumn.png",
+      "bytes": 805,
+      "sha256": "1acba9dd6b46610f1c8115051aa147b30f06143d7d36aa9f86e6cc2c9d983ba4"
+    },
+    {
+      "path": "sprites/travel-brass-telescope-winter.png",
+      "bytes": 803,
+      "sha256": "f21246e27d335769b0b8064bbcd27d66353f30a46ecf2517cfaf05b548cebc51"
+    },
+    {
+      "path": "sprites/travel-ship-wheel-spring.png",
+      "bytes": 979,
+      "sha256": "f4938e56dfc7256af312a8be35ba1be16b6f5190a68e4edb4c1124e265c3c3e4"
+    },
+    {
+      "path": "sprites/travel-ship-wheel-summer.png",
+      "bytes": 1000,
+      "sha256": "184185fdac1e63a1fbc37f64a33c9aed78ec9a8bbbd46c4259e2ed27c225cfff"
+    },
+    {
+      "path": "sprites/travel-ship-wheel-autumn.png",
+      "bytes": 991,
+      "sha256": "a6e597bd8b76cf01941bb4ac54e1158525ae0420db63f95ec6714debd1f3010a"
+    },
+    {
+      "path": "sprites/travel-ship-wheel-winter.png",
+      "bytes": 1025,
+      "sha256": "59262e8d4e7d5cddf194a5e7e7ea2e7211fd6955cec1cc936758fbe2a9156b71"
+    },
+    {
+      "path": "sprites/travel-anchor-model-spring.png",
+      "bytes": 750,
+      "sha256": "de16b38a433a5ae00bf9333b4829c0d544b7ea819e9c27d6dd8823f7f0ed535d"
+    },
+    {
+      "path": "sprites/travel-anchor-model-summer.png",
+      "bytes": 758,
+      "sha256": "90079d00f36ffe2b12d55d7ecfbf00abf049a5cd54cb6f0b1c434d8cd5e6907a"
+    },
+    {
+      "path": "sprites/travel-anchor-model-autumn.png",
+      "bytes": 767,
+      "sha256": "1b388a550868e677cd0efc050b5cb7e8d75b8e097ab872b5b4b43b779b3c655c"
+    },
+    {
+      "path": "sprites/travel-anchor-model-winter.png",
+      "bytes": 773,
+      "sha256": "d398e7f941ee440b7fbae8812331b045aef38e8a39917d54a93ef7158710c24d"
+    },
+    {
+      "path": "sprites/travel-diving-helmet-spring.png",
+      "bytes": 965,
+      "sha256": "2c38a2d34d77f9a5908312b3c354fa0449eed128a108ec91e6e10e3bd64f9704"
+    },
+    {
+      "path": "sprites/travel-diving-helmet-summer.png",
+      "bytes": 930,
+      "sha256": "d2718fc285f2575e58c42a38d3e9c337efd941e4e87e0d3f5a6003129a1e2579"
+    },
+    {
+      "path": "sprites/travel-diving-helmet-autumn.png",
+      "bytes": 918,
+      "sha256": "3efc40b3db855a367f08f9afcd7629d4eff08543912df4e0384b346539a08cce"
+    },
+    {
+      "path": "sprites/travel-diving-helmet-winter.png",
+      "bytes": 915,
+      "sha256": "b7e916e1fcf9a20c635e86608db09deacec9ec38dd2d0e42d0c5572ab305ad18"
+    },
+    {
+      "path": "sprites/travel-buoy-model-spring.png",
+      "bytes": 698,
+      "sha256": "f6433b0890cf986ddd248b9b21638fa856d80f5a29a390cb21bf21422b7dc97d"
+    },
+    {
+      "path": "sprites/travel-buoy-model-summer.png",
+      "bytes": 720,
+      "sha256": "911bc3208651eb2033596d93f1490f9de334d27f8a264e389482518554b95ddb"
+    },
+    {
+      "path": "sprites/travel-buoy-model-autumn.png",
+      "bytes": 714,
+      "sha256": "088db29aad0c9030589b252f99f7e5a61637b4282145add51790a13911d6bc04"
+    },
+    {
+      "path": "sprites/travel-buoy-model-winter.png",
+      "bytes": 668,
+      "sha256": "55b2b2161f9211cd0b863d134b18fce404f590410f2a97ed31375eaf79dca3c1"
+    },
+    {
+      "path": "sprites/travel-sextant-spring.png",
+      "bytes": 800,
+      "sha256": "e9c3ce4128bcc4098b74ccc7f46e859ed04e26cf9001c003c67a756c6b4c1665"
+    },
+    {
+      "path": "sprites/travel-sextant-summer.png",
+      "bytes": 796,
+      "sha256": "9a9fba2eebc67d40e54752f4d0f36c4c7ed5fcdcd5bf6866b5ef876073b23230"
+    },
+    {
+      "path": "sprites/travel-sextant-autumn.png",
+      "bytes": 808,
+      "sha256": "22882d1c86b1f92e09b86bfe959834c7c16513df0116b2cef4998118f56cf5eb"
+    },
+    {
+      "path": "sprites/travel-sextant-winter.png",
+      "bytes": 837,
+      "sha256": "6dce30d757d129afa9a100caf09dcd843a10026ded2407342c02a62c8ef34f55"
+    },
+    {
+      "path": "sprites/travel-compass-spring.png",
+      "bytes": 847,
+      "sha256": "4a41ab917c22195549b5dcff5087355700a11865549ab39b17c10aa87f9da810"
+    },
+    {
+      "path": "sprites/travel-compass-summer.png",
+      "bytes": 859,
+      "sha256": "e76d0a0b84fa4e77875d894e8f2012269bb124b9aa357d88fcb363e3ad8e41f0"
+    },
+    {
+      "path": "sprites/travel-compass-autumn.png",
+      "bytes": 935,
+      "sha256": "5c35b6f0ea38bbf53de0ec01ec42bff351c764fe78ad1c9073f63918d67afefa"
+    },
+    {
+      "path": "sprites/travel-compass-winter.png",
+      "bytes": 897,
+      "sha256": "945b75cfd63ee6e0f35ea7fffd6fcfd8e2b7ab92ff25f83f799fbebba3966a62"
+    },
+    {
+      "path": "sprites/travel-globe-spring.png",
+      "bytes": 1089,
+      "sha256": "cc59a04bdd46339b5253b0520b5519c5c17d952d059c4eed2700560785835b1d"
+    },
+    {
+      "path": "sprites/travel-globe-summer.png",
+      "bytes": 1093,
+      "sha256": "e546bb1f8080bcb755e4790a8415a47e8e53e6347a69efb75064a06b61de210d"
+    },
+    {
+      "path": "sprites/travel-globe-autumn.png",
+      "bytes": 1112,
+      "sha256": "437fda108e094f6b52d3651f1e8103c9de3f0f28780297c5e14e57e5f23b75a8"
+    },
+    {
+      "path": "sprites/travel-globe-winter.png",
+      "bytes": 1106,
+      "sha256": "467fbb899f0357a311a726a4c4bab652f85807264490e5fba55a9dc619d5cc5e"
+    },
+    {
+      "path": "sprites/travel-suitcase-spring.png",
+      "bytes": 721,
+      "sha256": "294f912c6d2794b75ac7056e321c126dcd4597e51886ef845b6a7ccabba3c4a0"
+    },
+    {
+      "path": "sprites/travel-suitcase-summer.png",
+      "bytes": 717,
+      "sha256": "4b90c8005f4b1d4e0f319f199243fd044405fc46eba4f95b125f27a2dfec989a"
+    },
+    {
+      "path": "sprites/travel-suitcase-autumn.png",
+      "bytes": 742,
+      "sha256": "81350b16cbeed46c00f081d498c7a95d7a646229066b94e3d4d5992c4c7ec2b0"
+    },
+    {
+      "path": "sprites/travel-suitcase-winter.png",
+      "bytes": 757,
+      "sha256": "4d41515dc8891b9d52bf7af8fd470338ff657599376bfc850fc51ca8c668dd21"
+    },
+    {
+      "path": "sprites/travel-map-scroll-spring.png",
+      "bytes": 794,
+      "sha256": "4921855179fd7a8f0ab022b416250381c575c631b720b68091fca9a9d511f1a5"
+    },
+    {
+      "path": "sprites/travel-map-scroll-summer.png",
+      "bytes": 833,
+      "sha256": "d605cfd266a3db24e5b1dcf75ec048e37c902562267366c1073bbf3f61a09cd6"
+    },
+    {
+      "path": "sprites/travel-map-scroll-autumn.png",
+      "bytes": 849,
+      "sha256": "a578816a92bfeacc034eeefc03501d877284881fad2b4209b6529f6391341aff"
+    },
+    {
+      "path": "sprites/travel-map-scroll-winter.png",
+      "bytes": 843,
+      "sha256": "7be43eea40eecc3190454a8a454a9c6aa9cf8a71f0ed067cf78e61dfa3e2a1ae"
+    },
+    {
+      "path": "sprites/travel-travel-album-spring.png",
+      "bytes": 691,
+      "sha256": "7e224a7cc93b57ee3cbb4005af32a7c5bbd40b46d9838f4a732bfbce07d100e0"
+    },
+    {
+      "path": "sprites/travel-travel-album-summer.png",
+      "bytes": 670,
+      "sha256": "09eb25ac1edca7dd0db84a87ac07631facabe9c633f5cd9fd8184ac59fdc2829"
+    },
+    {
+      "path": "sprites/travel-travel-album-autumn.png",
+      "bytes": 687,
+      "sha256": "1f181fecc1ded0b7eed20665535b3a4673644323521e844899fa12a04ca832fd"
+    },
+    {
+      "path": "sprites/travel-travel-album-winter.png",
+      "bytes": 701,
+      "sha256": "041598eeeb425fff70194389e9391506e523a3dcf8a92de977102da1d6f81a17"
+    },
+    {
+      "path": "sprites/travel-binoculars-spring.png",
+      "bytes": 813,
+      "sha256": "906a64b9c8e155d6fadbea2413078d5aa7b4f895fda38ea5ab41714c92c55ac9"
+    },
+    {
+      "path": "sprites/travel-binoculars-summer.png",
+      "bytes": 759,
+      "sha256": "886d4817c9a69bb42e8b110b34e06bbe2029c423a3a99eca4d3c004fcc406a21"
+    },
+    {
+      "path": "sprites/travel-binoculars-autumn.png",
+      "bytes": 795,
+      "sha256": "88eb48ebd7c1263dd303d1051ef63bd3958396e87198f621fb61ab4aa50c91ab"
+    },
+    {
+      "path": "sprites/travel-binoculars-winter.png",
+      "bytes": 797,
+      "sha256": "02b5b9ce0fedee5c513042001cf24e05733e08515cbba12774bdd3cabb887770"
+    },
+    {
+      "path": "sprites/travel-passport-wallet-spring.png",
+      "bytes": 684,
+      "sha256": "7bec0aafd7fa28f9b4de7e46d293d58322c06a3e695ff4fa5a92b583918605c3"
+    },
+    {
+      "path": "sprites/travel-passport-wallet-summer.png",
+      "bytes": 700,
+      "sha256": "355e796f7e7a5e5faee423d3edad8cc85b5fc909741c72499eaeac072deea6fd"
+    },
+    {
+      "path": "sprites/travel-passport-wallet-autumn.png",
+      "bytes": 687,
+      "sha256": "28d09e58b2d611065d505fe0b169c4d853b5f774d96b1225ebe244d0584fcb68"
+    },
+    {
+      "path": "sprites/travel-passport-wallet-winter.png",
+      "bytes": 710,
+      "sha256": "86d0f73bad1d8fbd2c884babc0437c307c6a55a15db100ffb812486247c54b8b"
+    },
+    {
+      "path": "sprites/travel-postcard-rack-spring.png",
+      "bytes": 754,
+      "sha256": "c3360058626e5ed42f5f872bab22b43a9021e0eec9d8176afb1a56276a19ef92"
+    },
+    {
+      "path": "sprites/travel-postcard-rack-summer.png",
+      "bytes": 707,
+      "sha256": "26cdc3a4e5a92e0de570e3ce815384f78b636e3e09d98d53c3f4ecab2a04751e"
+    },
+    {
+      "path": "sprites/travel-postcard-rack-autumn.png",
+      "bytes": 700,
+      "sha256": "41a2f7186028eb267f1e11e66cddcf122e4afa0c86a5b03f3938e83bd2201325"
+    },
+    {
+      "path": "sprites/travel-postcard-rack-winter.png",
+      "bytes": 702,
+      "sha256": "42960cee2bbc3fdb8cc9fedb1862ee68d086eccca5c56949e7f2cae061dc50b5"
+    },
+    {
+      "path": "sprites/travel-shell-box-spring.png",
+      "bytes": 738,
+      "sha256": "4ba0a7f7f85d5f66c1a4dda0785cef8571f4a03e7f02f6d986a128f64ea599d5"
+    },
+    {
+      "path": "sprites/travel-shell-box-summer.png",
+      "bytes": 746,
+      "sha256": "799d5f8338bf825ef0c9fb7d9538388294f857a37bc9c5b634d7f4e0088e815d"
+    },
+    {
+      "path": "sprites/travel-shell-box-autumn.png",
+      "bytes": 728,
+      "sha256": "c7a008b1d4537ae9be2a2e77aba35eb98c72461a750569da72f3ee3a14fd136b"
+    },
+    {
+      "path": "sprites/travel-shell-box-winter.png",
+      "bytes": 788,
+      "sha256": "0c5a2c116c7b7ce6766d851e2054d1faef5b16385fe2f041a5363088ece49662"
+    },
+    {
+      "path": "sprites/travel-coral-spring.png",
+      "bytes": 917,
+      "sha256": "d016b5a44da00f773994c4ea0785adfef3013a14aeb2b839a7ebd484ae64d17d"
+    },
+    {
+      "path": "sprites/travel-coral-summer.png",
+      "bytes": 963,
+      "sha256": "bd153c157818a2fdb4a7b4282fa1a773dbde34fd6dcfd920e4c9ed915fed417c"
+    },
+    {
+      "path": "sprites/travel-coral-autumn.png",
+      "bytes": 901,
+      "sha256": "2377e4ddee9c87efed06f3150495b692593ca7b4cbfbefc9260c6e0de159a359"
+    },
+    {
+      "path": "sprites/travel-coral-winter.png",
+      "bytes": 913,
+      "sha256": "7b29c435a8ca7995571f94c1267f7f4f77732fa708fc28cdbf808ef02c8c9c04"
+    },
+    {
+      "path": "sprites/travel-ammonite-spring.png",
+      "bytes": 749,
+      "sha256": "f73c0c51734850eb662e7d3779906fa2e60e5e0b3aecd74ecb8650466e421edc"
+    },
+    {
+      "path": "sprites/travel-ammonite-summer.png",
+      "bytes": 790,
+      "sha256": "9733936ebbca24ba80f9304931bb97ac6a30270e0a480ca221579f99f4aaa62b"
+    },
+    {
+      "path": "sprites/travel-ammonite-autumn.png",
+      "bytes": 789,
+      "sha256": "ac4c7516210b82f020711d4917b35e3c4d940e61b2a69a3ba752765a171557d7"
+    },
+    {
+      "path": "sprites/travel-ammonite-winter.png",
+      "bytes": 767,
+      "sha256": "37d6339d3da21a6e3a4787b497995b226114b7dfbb342cbda5062108c7d71c6b"
+    },
+    {
+      "path": "sprites/travel-sea-glass-spring.png",
+      "bytes": 662,
+      "sha256": "57de95f9fd1e2607d9c6f34df3d0f8d40fd2741f1de5b09dfae4c66b138c4e3a"
+    },
+    {
+      "path": "sprites/travel-sea-glass-summer.png",
+      "bytes": 670,
+      "sha256": "e8568e2f2e227f2a5ec9a5350d49873a384c69a8b129352fb75042990f32dc08"
+    },
+    {
+      "path": "sprites/travel-sea-glass-autumn.png",
+      "bytes": 665,
+      "sha256": "ed83b774bf49efb2ea8b007479934cd4f061d328b9941ad204fd33c06d1f1499"
+    },
+    {
+      "path": "sprites/travel-sea-glass-winter.png",
+      "bytes": 671,
+      "sha256": "6ce27ebd2076ff59a1e18292ffb31fe6eda721e94db25978de240467c915bac7"
+    },
+    {
+      "path": "sprites/travel-driftwood-spring.png",
+      "bytes": 773,
+      "sha256": "6a5c4a0d4c47a8bfb72b95abe261c923bbd5fbc091088f756624f1de29d7338c"
+    },
+    {
+      "path": "sprites/travel-driftwood-summer.png",
+      "bytes": 756,
+      "sha256": "a73d99903847a3b67e57751afb40d30ef95e813ea77dac01dec0d03b17df3637"
+    },
+    {
+      "path": "sprites/travel-driftwood-autumn.png",
+      "bytes": 716,
+      "sha256": "1e9591edfa01e4d008710939b8c3e3bcbea4d83c7ebcfb516eab4953e8b2103c"
+    },
+    {
+      "path": "sprites/travel-driftwood-winter.png",
+      "bytes": 736,
+      "sha256": "aa2a370cedd68e809435a46044f25b3e38d843c236434a8b51cfb99912f3f8e4"
+    },
+    {
+      "path": "sprites/travel-starfish-frame-spring.png",
+      "bytes": 721,
+      "sha256": "0842b1511ec05264042eac36801d11a4c28f2976e45c32dd13c438e904cd47b8"
+    },
+    {
+      "path": "sprites/travel-starfish-frame-summer.png",
+      "bytes": 706,
+      "sha256": "0d5d243f83bf079d9985896d9051bafe5db5d8cdd43c50880f4134649864d8f9"
+    },
+    {
+      "path": "sprites/travel-starfish-frame-autumn.png",
+      "bytes": 708,
+      "sha256": "fa2cd99adfa46695791a08b9adfccc5a6d91fb9dbca0c818175b6c8f2a1b6f8c"
+    },
+    {
+      "path": "sprites/travel-starfish-frame-winter.png",
+      "bytes": 735,
+      "sha256": "7f2b141de84ba845287aba5aadd277c091de4184f40b8ac0b1380c161ec58959"
+    },
+    {
+      "path": "sprites/travel-pearl-oyster-spring.png",
+      "bytes": 867,
+      "sha256": "096086698a1dcc197ca0554bb43b931b2925924700fe8359d905b6a2401b97f0"
+    },
+    {
+      "path": "sprites/travel-pearl-oyster-summer.png",
+      "bytes": 865,
+      "sha256": "29d84d75f1e0588e0724498669ab0d66361b03904243c6f059d21148e270f5dd"
+    },
+    {
+      "path": "sprites/travel-pearl-oyster-autumn.png",
+      "bytes": 888,
+      "sha256": "bfc26e73afa86335bbb60f62888f58e39a406affd4b109ae13098df49bf6a3ce"
+    },
+    {
+      "path": "sprites/travel-pearl-oyster-winter.png",
+      "bytes": 882,
+      "sha256": "2afef195dbf0d19e626b98d11318c363bf961c8ceb11e2f3e434c7fb87a5ac5b"
+    },
+    {
+      "path": "sprites/travel-sand-bottle-spring.png",
+      "bytes": 698,
+      "sha256": "5b7b344c47f7c93f2d21523f6cc9ec209b77c485a11d985c576c97cb807e5a2d"
+    },
+    {
+      "path": "sprites/travel-sand-bottle-summer.png",
+      "bytes": 680,
+      "sha256": "8a1a8a3e7360910067a9ca820447f8b56909be126c2fd4c9d60f2797692d5766"
+    },
+    {
+      "path": "sprites/travel-sand-bottle-autumn.png",
+      "bytes": 680,
+      "sha256": "ef96aa47284277d8a18720c505e7fc04d0eb6f94dbb55d57037affc3bf3ed921"
+    },
+    {
+      "path": "sprites/travel-sand-bottle-winter.png",
+      "bytes": 710,
+      "sha256": "ab3663561283f8e521653ab5533e7b5c2caa3324df89f69672856b04818d7c35"
+    },
+    {
+      "path": "sprites/travel-mineral-plinth-spring.png",
+      "bytes": 722,
+      "sha256": "943250086874bf8306a7a9512b9cae58a0169bda4a3155496ef9834dba267715"
+    },
+    {
+      "path": "sprites/travel-mineral-plinth-summer.png",
+      "bytes": 707,
+      "sha256": "eb5c309035838079cab7a9da18e6d032e138f827d6a88cf7729ecf9c474b33b5"
+    },
+    {
+      "path": "sprites/travel-mineral-plinth-autumn.png",
+      "bytes": 744,
+      "sha256": "fcd69b4ef0e74d532e541ca80d8954676ac6afa90fe45ad423afb7cbd577489b"
+    },
+    {
+      "path": "sprites/travel-mineral-plinth-winter.png",
+      "bytes": 750,
+      "sha256": "f41e2ca01f794df367a0a7d390eeb46f826406de10f02b6e1ed9c6df8cf47894"
+    },
+    {
+      "path": "sprites/travel-geode-spring.png",
+      "bytes": 898,
+      "sha256": "8840376fb4bada91e6f8c7ba6de8eba4db5145f045ab365ecf6bb4503c4dba4a"
+    },
+    {
+      "path": "sprites/travel-geode-summer.png",
+      "bytes": 936,
+      "sha256": "b7411c55a4ece9a180e6691ed0f5a1e0295121cdb36a63e20e0548aa0cf5ad18"
+    },
+    {
+      "path": "sprites/travel-geode-autumn.png",
+      "bytes": 953,
+      "sha256": "01c22063c9ae76907559e9ed550cf400f313a341c12abc08ec29582643289e0e"
+    },
+    {
+      "path": "sprites/travel-geode-winter.png",
+      "bytes": 1020,
+      "sha256": "9d1946d00601706381a80188201f728e3c4d88b71e00a4d337b1806ac3355895"
+    },
+    {
+      "path": "sprites/travel-fossil-slab-spring.png",
+      "bytes": 726,
+      "sha256": "20977daf7e68acab10836a021b01f1479043d8c3616cff0ab8885377ee650966"
+    },
+    {
+      "path": "sprites/travel-fossil-slab-summer.png",
+      "bytes": 758,
+      "sha256": "5e09d4dee38373aa2c5014e2238c24c5258c63d06c983790673e6fca37b433c8"
+    },
+    {
+      "path": "sprites/travel-fossil-slab-autumn.png",
+      "bytes": 730,
+      "sha256": "f2b99ef4d527094430d7313c6e7864b917bbea7efabccf0c06fdeeb23fc7d5fb"
+    },
+    {
+      "path": "sprites/travel-fossil-slab-winter.png",
+      "bytes": 756,
+      "sha256": "9d0e2be119bc2f6d2adba8b60aa5c71b9284d02dbf302ab19e26c2abb23dc843"
+    },
+    {
+      "path": "sprites/travel-meteorite-spring.png",
+      "bytes": 703,
+      "sha256": "62e9117c216a45586ead5f6781f1b2bf69d5754d4d352d2cdb4e74235818681b"
+    },
+    {
+      "path": "sprites/travel-meteorite-summer.png",
+      "bytes": 716,
+      "sha256": "40fa3b3c4d840267b85b49c1348d27284081020b6740912b9d49ff946222005f"
+    },
+    {
+      "path": "sprites/travel-meteorite-autumn.png",
+      "bytes": 710,
+      "sha256": "c458543629756b6a7542eb385c0a94ed1e2e037f81641e30f8e23c0906afb2e7"
+    },
+    {
+      "path": "sprites/travel-meteorite-winter.png",
+      "bytes": 755,
+      "sha256": "6221abda278ffd6cc29c8e9a0b129e1dbb5fc2e2e8161336ea7248a5e07036ae"
+    },
+    {
+      "path": "sprites/travel-crystal-cluster-spring.png",
+      "bytes": 658,
+      "sha256": "595aa59b69fad3b1f5f10b561cc544e7130906544b31e23323cf43bef1c8c434"
+    },
+    {
+      "path": "sprites/travel-crystal-cluster-summer.png",
+      "bytes": 720,
+      "sha256": "d2be5a2eff195014ae6d70706f5f71dc0babcf1c72858c2b24d83aec04bb05f8"
+    },
+    {
+      "path": "sprites/travel-crystal-cluster-autumn.png",
+      "bytes": 685,
+      "sha256": "8252341393f63cf1dc6d69b583715d4ff931ccfba2d3c5bd7e932a167832e8b3"
+    },
+    {
+      "path": "sprites/travel-crystal-cluster-winter.png",
+      "bytes": 673,
+      "sha256": "6c2e53bc0fc7b1a95eaf508de9404efddbf3a60eb5a1d00ae6079969e1529600"
+    },
+    {
+      "path": "sprites/travel-desert-rose-spring.png",
+      "bytes": 861,
+      "sha256": "60113616b2cc8e6f37853ad042558dc2a048b7b3d4d79be93a3bd26970ba3da4"
+    },
+    {
+      "path": "sprites/travel-desert-rose-summer.png",
+      "bytes": 898,
+      "sha256": "eb599b6dfa1475c6cc22cf928c44f332537f6a913a1a36260de56d85064cef25"
+    },
+    {
+      "path": "sprites/travel-desert-rose-autumn.png",
+      "bytes": 911,
+      "sha256": "efe3f00e5c8464a9d0edcd7b4333b1b511a4731febbb60f5d3a34a372245a231"
+    },
+    {
+      "path": "sprites/travel-desert-rose-winter.png",
+      "bytes": 897,
+      "sha256": "08a91391a9dc1d7e494246d64e689bc0a81ed5a340110d597b69f02c919ccb52"
+    },
+    {
+      "path": "sprites/travel-rock-strata-spring.png",
+      "bytes": 709,
+      "sha256": "3154019478d210980cedef979d79448c2b4e6dc39a0ecb4f8ba1a53ef247ca4c"
+    },
+    {
+      "path": "sprites/travel-rock-strata-summer.png",
+      "bytes": 722,
+      "sha256": "012232588e8371e5aaf7a665209679d06061c373f98bf4cb575779117eefe6e2"
+    },
+    {
+      "path": "sprites/travel-rock-strata-autumn.png",
+      "bytes": 744,
+      "sha256": "505cf2ca5a40213af817a907d75cb755ce4934c35bcbe53b2c9e15d0de448328"
+    },
+    {
+      "path": "sprites/travel-rock-strata-winter.png",
+      "bytes": 703,
+      "sha256": "b3b09fd8aece9c10506ebdbb9f6a9c8ab4060282138367503b55594ec6aa054e"
+    },
+    {
+      "path": "sprites/travel-volcanic-core-spring.png",
+      "bytes": 583,
+      "sha256": "6924fa47a90af3aaef9fb2a8edce747b954cb2ad0c69ef2215c8b0a04b6eafec"
+    },
+    {
+      "path": "sprites/travel-volcanic-core-summer.png",
+      "bytes": 616,
+      "sha256": "24bd0b7da8866ef263744bba6a959b6ede99acd6d8c21a30407f5cae479fff8a"
+    },
+    {
+      "path": "sprites/travel-volcanic-core-autumn.png",
+      "bytes": 615,
+      "sha256": "8b2647799632eca76e7c3e75c46638d74781c35bb0fdc2801e4ce431ca6a6732"
+    },
+    {
+      "path": "sprites/travel-volcanic-core-winter.png",
+      "bytes": 636,
+      "sha256": "9481e12f1d07f7d0b98b5d1ead54b7a7204237becdf538bf7aea676ca878e704"
+    },
+    {
+      "path": "sprites/travel-specimen-frame-spring.png",
+      "bytes": 645,
+      "sha256": "87995def9d9e52ef46703feb86c58ff9239e5ba56880efb159e9cc4e68eb36cf"
+    },
+    {
+      "path": "sprites/travel-specimen-frame-summer.png",
+      "bytes": 660,
+      "sha256": "ee170a4bb7f1a315b5193d4c4d3190c2f9c36de94bab5f20164a93e6d89b508c"
+    },
+    {
+      "path": "sprites/travel-specimen-frame-autumn.png",
+      "bytes": 625,
+      "sha256": "edf32879369b264ffb33a125c461bc9d65092062c86dbf42e610f4af35097970"
+    },
+    {
+      "path": "sprites/travel-specimen-frame-winter.png",
+      "bytes": 639,
+      "sha256": "5381dde86e16a198d410790198382c9d50684e2aabd27355a3fd1fa68755de3c"
+    },
+    {
+      "path": "sprites/travel-mushroom-study-spring.png",
+      "bytes": 669,
+      "sha256": "68da280ce85f66077386893e9612823d5d23330ee69b8e485d54af4eb7a2e833"
+    },
+    {
+      "path": "sprites/travel-mushroom-study-summer.png",
+      "bytes": 642,
+      "sha256": "4fef9531a39ef53ce6396bd4b095f49893c1f4e3c794d0dfc03bfa9f80d5dd12"
+    },
+    {
+      "path": "sprites/travel-mushroom-study-autumn.png",
+      "bytes": 725,
+      "sha256": "046891c3fceb59487a19811922e7c939e410c03c3b7a014f46dcdecd23ce1295"
+    },
+    {
+      "path": "sprites/travel-mushroom-study-winter.png",
+      "bytes": 799,
+      "sha256": "d7c987f6626407167b0db8a060a86882779ea4989b994198ebfc471c3546a424"
+    },
+    {
+      "path": "sprites/travel-fern-press-spring.png",
+      "bytes": 830,
+      "sha256": "89243e059bf8c01966496117bf85f539f7fa11513f52c11a55db685d89c290d7"
+    },
+    {
+      "path": "sprites/travel-fern-press-summer.png",
+      "bytes": 831,
+      "sha256": "ce961b5924ff4543d1d53100da9fbe0f285bd70005aaf3b7ba011851a16b8155"
+    },
+    {
+      "path": "sprites/travel-fern-press-autumn.png",
+      "bytes": 839,
+      "sha256": "0f0b305054340b5e3af11d6f8fc8c6d68bf235ae5c9b9cd3d339cad1f0849e70"
+    },
+    {
+      "path": "sprites/travel-fern-press-winter.png",
+      "bytes": 847,
+      "sha256": "08c4b69210814df1570448af4d407961060918c826d09bf20fed8484387e406f"
+    },
+    {
+      "path": "sprites/travel-pinecone-study-spring.png",
+      "bytes": 897,
+      "sha256": "3c211eb75560277c5a36121edbcb2c8e5b2560d5b9da4ab407306e948eb0863d"
+    },
+    {
+      "path": "sprites/travel-pinecone-study-summer.png",
+      "bytes": 758,
+      "sha256": "02d71958b753e60c2de148466075c78ba520949e44bbb86312e1aa9c0a16c67c"
+    },
+    {
+      "path": "sprites/travel-pinecone-study-autumn.png",
+      "bytes": 768,
+      "sha256": "78f4135da87dea23fd04214d28505159991d3035b680871ace9d3ca35e62cd38"
+    },
+    {
+      "path": "sprites/travel-pinecone-study-winter.png",
+      "bytes": 790,
+      "sha256": "15a8e76db5495f463aced8075a623d849f0e8c9a970e3fef36ffdcf93809db05"
+    },
+    {
+      "path": "sprites/travel-butterfly-case-spring.png",
+      "bytes": 748,
+      "sha256": "cdc03c360be62138b906485460bae341b845ee9e4e4297e2df5b4a2cb69f1c28"
+    },
+    {
+      "path": "sprites/travel-butterfly-case-summer.png",
+      "bytes": 754,
+      "sha256": "3f9c78d046b793f308743ebbd3caedddabb8b9aed667bded7d5722d3b7f7b989"
+    },
+    {
+      "path": "sprites/travel-butterfly-case-autumn.png",
+      "bytes": 761,
+      "sha256": "bc341380ff6328c889ca3de13854312ce24e9b38fd1dcf4de845e7498c34cff5"
+    },
+    {
+      "path": "sprites/travel-butterfly-case-winter.png",
+      "bytes": 791,
+      "sha256": "9df24324e0b71c1413bd6381202869b323fe6e20b79a7a5e4cd951ca3ce261bc"
+    },
+    {
+      "path": "sprites/travel-feather-stand-spring.png",
+      "bytes": 942,
+      "sha256": "8b072a4b83c6baa7f60827f0fd73ad4ff793f4ab0e3393909aecc8fd23ac9f7e"
+    },
+    {
+      "path": "sprites/travel-feather-stand-summer.png",
+      "bytes": 984,
+      "sha256": "cbe79f5b7ba6d781fe8f1747b9f5ce8a4c1ad836477c7ae22bd009a6f2689420"
+    },
+    {
+      "path": "sprites/travel-feather-stand-autumn.png",
+      "bytes": 885,
+      "sha256": "26ba7fcec87cf3ca33453bf6ab64a894e361949cc5a7455bd3001121ee9f5ec0"
+    },
+    {
+      "path": "sprites/travel-feather-stand-winter.png",
+      "bytes": 1028,
+      "sha256": "d8ad6ad65a5f3ce9208d030f365b727032355c68e5e9be8f39c6829033641139"
+    },
+    {
+      "path": "sprites/travel-seed-cabinet-spring.png",
+      "bytes": 548,
+      "sha256": "c9eafcfc417ea39605e5749b60d01b9c876a3a5807e388e60c3a341c6f73ff58"
+    },
+    {
+      "path": "sprites/travel-seed-cabinet-summer.png",
+      "bytes": 549,
+      "sha256": "1c62ec556ee4eee6661f67b86a69ae0668dd605666827a20747acc7157863fa9"
+    },
+    {
+      "path": "sprites/travel-seed-cabinet-autumn.png",
+      "bytes": 543,
+      "sha256": "a73841e1406979ca5ff1722fcdcc6b597bf705ee59ba8c8f671f22d4f061fbed"
+    },
+    {
+      "path": "sprites/travel-seed-cabinet-winter.png",
+      "bytes": 581,
+      "sha256": "a86dc072532d8c9e748af7377d614e9eb5cbe1cf3547d5b1b70bfa2adf50067f"
+    },
+    {
+      "path": "sprites/travel-moss-cross-section-spring.png",
+      "bytes": 817,
+      "sha256": "67b7f64ec4f8286253d8e398e86d672a31617395647d61b8b526425af342d5b5"
+    },
+    {
+      "path": "sprites/travel-moss-cross-section-summer.png",
+      "bytes": 856,
+      "sha256": "7303289d2a1fae95b90b017e623c72f2b309a3e65c5e2f7babf25623e255d3dc"
+    },
+    {
+      "path": "sprites/travel-moss-cross-section-autumn.png",
+      "bytes": 769,
+      "sha256": "756bd08050a4ca31824b05dda419d1bceede6d3f4abe7f59b38930af4bc51346"
+    },
+    {
+      "path": "sprites/travel-moss-cross-section-winter.png",
+      "bytes": 728,
+      "sha256": "0b7961a4920c767bbf93d7c289307563a1eb6c920922981b4ccaa2b86db228ea"
+    },
+    {
+      "path": "sprites/travel-tea-hills-spring.png",
+      "bytes": 804,
+      "sha256": "5f5bfcc0a0383a2d973e51831a0083d6e553838a2fe8003fa911b76daf962dd7"
+    },
+    {
+      "path": "sprites/travel-tea-hills-summer.png",
+      "bytes": 814,
+      "sha256": "f1a8b3f4ebefeab71c2edc46f88d2fc8ec50d254c38e6688bb42a31c02547e7b"
+    },
+    {
+      "path": "sprites/travel-tea-hills-autumn.png",
+      "bytes": 792,
+      "sha256": "fbc85cf68706876617dbf02de236c26e75a1de438945891286f679aba810b33b"
+    },
+    {
+      "path": "sprites/travel-tea-hills-winter.png",
+      "bytes": 838,
+      "sha256": "ef78715db9abe017d4a79522f98ad6e996efe803cae6f9bfc73a66897b846e91"
+    },
+    {
+      "path": "sprites/travel-windmill-model-spring.png",
+      "bytes": 920,
+      "sha256": "4da5782fb7f11b825c9d62e83ea0680abcb7e37828596c5d3960853343bb784e"
+    },
+    {
+      "path": "sprites/travel-windmill-model-summer.png",
+      "bytes": 993,
+      "sha256": "757ce6fe5b4d0edeb251d17791da6793ac409748b068564be664eeec99037406"
+    },
+    {
+      "path": "sprites/travel-windmill-model-autumn.png",
+      "bytes": 974,
+      "sha256": "54de575e3f5c7d39ba2d90459ceeffd7973bff8fda2eee939d0c03b77311bfec"
+    },
+    {
+      "path": "sprites/travel-windmill-model-winter.png",
+      "bytes": 978,
+      "sha256": "d29fec1a962ab35ce4ab6b30f44101b9759f5f8a02c125edf0d3243b1f21c409"
+    },
+    {
+      "path": "sprites/travel-stone-bridge-spring.png",
+      "bytes": 777,
+      "sha256": "7d52e602269bb51e8a5f71ec88243dd0987216f96f011fe4b4e9020941adf6bd"
+    },
+    {
+      "path": "sprites/travel-stone-bridge-summer.png",
+      "bytes": 666,
+      "sha256": "f76a9f6a0b1f16f3b5cd7f89533449b4929cb53290819b2220554126e67d6837"
+    },
+    {
+      "path": "sprites/travel-stone-bridge-autumn.png",
+      "bytes": 673,
+      "sha256": "39e48bf187abf61408de68dd8e0460907d656b1a218ed42c29ee302726578c26"
+    },
+    {
+      "path": "sprites/travel-stone-bridge-winter.png",
+      "bytes": 658,
+      "sha256": "259f9d06100b6b515701c79b0ed1b922568ee924848b6d3b3c6957e56ca31b30"
+    },
+    {
+      "path": "sprites/travel-alpine-peaks-spring.png",
+      "bytes": 741,
+      "sha256": "a13f8763ac60e2e1fb0642a2958c6aaff8bc862ed97bf0740fe729ed2a66bdd5"
+    },
+    {
+      "path": "sprites/travel-alpine-peaks-summer.png",
+      "bytes": 758,
+      "sha256": "9afb72098ad7be8eeca49c64adad31c042dafc55fa17ff28f8039d8cc0006e78"
+    },
+    {
+      "path": "sprites/travel-alpine-peaks-autumn.png",
+      "bytes": 774,
+      "sha256": "8b17ad4949c9c27bfa7297b1b351506411a312732ea73680b52af87025d7069d"
+    },
+    {
+      "path": "sprites/travel-alpine-peaks-winter.png",
+      "bytes": 703,
+      "sha256": "642b9c6feed4331d3181217d55a80f36023013268d642230cbec3ea67ccec8da"
+    },
+    {
+      "path": "sprites/travel-hourglass-spring.png",
+      "bytes": 795,
+      "sha256": "57e34615ff832ea77e73e775817fb7b31c39dd32b79e77512f6db8fa166a0365"
+    },
+    {
+      "path": "sprites/travel-hourglass-summer.png",
+      "bytes": 764,
+      "sha256": "68e1d8607b86c1f415a808b3ef8e573e940576fde657add99cb9770111a0a93d"
+    },
+    {
+      "path": "sprites/travel-hourglass-autumn.png",
+      "bytes": 809,
+      "sha256": "52cf6e2a417a755237898c83de6af66e9e2b2a6c0da0d4fcfb5b672803901390"
+    },
+    {
+      "path": "sprites/travel-hourglass-winter.png",
+      "bytes": 765,
+      "sha256": "5688afee428dc282d3add03a0cb954387dd117a1b7524b1c3918e6b2f6c60c29"
+    },
+    {
+      "path": "sprites/travel-observatory-model-spring.png",
+      "bytes": 779,
+      "sha256": "0f37726e4f647e6191effc94ec2a1ca3421f0a08e0e13261114a25891cbbb5f7"
+    },
+    {
+      "path": "sprites/travel-observatory-model-summer.png",
+      "bytes": 774,
+      "sha256": "f678187d6b663b43dfc3a9a06691c6ddc8b5a3dcf10fad987a0c7b815886fd26"
+    },
+    {
+      "path": "sprites/travel-observatory-model-autumn.png",
+      "bytes": 772,
+      "sha256": "ce673f9014b2fb3cae70df4db4e090bcbee660f7db5a71e90d6c9c1b255c5379"
+    },
+    {
+      "path": "sprites/travel-observatory-model-winter.png",
+      "bytes": 751,
+      "sha256": "725fbe6afd4a2ffed06e219e1e75581e9ac2cb07fc34be17743f0fdc19edf223"
+    },
+    {
+      "path": "sprites/travel-pagoda-model-spring.png",
+      "bytes": 728,
+      "sha256": "83b317eea4769b9de9e4cf82d0ff304e21c2d19c7e8ac3b094becd219a7c0952"
+    },
+    {
+      "path": "sprites/travel-pagoda-model-summer.png",
+      "bytes": 707,
+      "sha256": "537dfdcf2d788ee770f51aec9bec2e67a6039c7024920fed9b067d66b0b030c2"
+    },
+    {
+      "path": "sprites/travel-pagoda-model-autumn.png",
+      "bytes": 749,
+      "sha256": "91be19898fdf2ad840590d9d82dc6f41b2182d38772d9a1d57918e69ac92f3e5"
+    },
+    {
+      "path": "sprites/travel-pagoda-model-winter.png",
+      "bytes": 707,
+      "sha256": "6fd14f46aacf2780990c8ab17ecc76b7868dd2d5993070fae0649d4fe9d5aa3b"
+    },
+    {
+      "path": "sprites/travel-railway-model-spring.png",
+      "bytes": 837,
+      "sha256": "496a898b2e487e649e318828971dd8fbe493b241fc189c010afe7a2efa651d86"
+    },
+    {
+      "path": "sprites/travel-railway-model-summer.png",
+      "bytes": 864,
+      "sha256": "5f34ed0ef30e73905933c6ec928945f3b2871fd33e1d64653b6af70aa75d8ca2"
+    },
+    {
+      "path": "sprites/travel-railway-model-autumn.png",
+      "bytes": 837,
+      "sha256": "778f8748c201c4b7ac58a565d7eda1d6d25776d45e355a76a01e41fe45cc1e96"
+    },
+    {
+      "path": "sprites/travel-railway-model-winter.png",
+      "bytes": 873,
+      "sha256": "b670fd8319a93bc64added6c1927ec4d260de6a127bf9559e3205ced39e78e8d"
+    }
+  ]
+}

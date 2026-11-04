@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "effects": 16,
+  "clips": 32,
+  "frames": 256,
+  "pngFiles": 289,
+  "checks": {
+    "nativeDensity2": true,
+    "binaryAlpha": true,
+    "masterPalette": true,
+    "transparentPadding2": true,
+    "nonemptyFrames": true,
+    "noRepeatedFramesWithinClip": true,
+    "deterministicRepaint": true,
+    "decodedPngReadback": true,
+    "stripAndAtlasReadback": true,
+    "offlineCatalog": true
+  },
+  "limitations": [
+    "This check does not judge animation aesthetics.",
+    "Feedback effects marked loop=false should play once in production; the preview repeats them after a pause.",
+    "No animation hooks or gameplay changes are installed."
+  ]
+}

@@ -1,0 +1,2344 @@
+{
+  "schemaVersion": 1,
+  "packId": "neighborhood-reserve-v1",
+  "status": "passed",
+  "counts": {
+    "sprites": 192,
+    "baseShapes": 48,
+    "variantsPerBase": 4,
+    "categories": 6,
+    "distinctBaseSilhouettes": 48,
+    "nonRecolorVariantPairs": 288,
+    "atlasPixelsCompared": 1769472
+  },
+  "checks": {
+    "sourcePreflight": true,
+    "dimensions": true,
+    "nativeDensity2": true,
+    "binaryAlpha": true,
+    "masterPalette": true,
+    "transparentPadding3": true,
+    "noExactDuplicates": true,
+    "noPureRecolorVariants": true,
+    "distinctBaseSilhouettes": true,
+    "stableAnchors": true,
+    "safePaths": true,
+    "deterministicSourceRendering": true,
+    "pngDecode": true,
+    "atlasReadback": true,
+    "contactSheetReadback": true,
+    "offlineCatalog": true,
+    "reserveNotIntegrated": true
+  },
+  "sprites": [
+    {
+      "id": "street-mailbox-spring",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 61,
+        "height": 71
+      },
+      "opaquePixels": 2045,
+      "colors": 12,
+      "pixelSha256": "311f9c25d3e74c47a6849c436e38ca1688fc19753799b9e85bd0996f6bf39974"
+    },
+    {
+      "id": "street-mailbox-summer",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 61,
+        "height": 71
+      },
+      "opaquePixels": 2187,
+      "colors": 13,
+      "pixelSha256": "e6ccb8fb5c16ce8ed961364246be91dc30e58aeb216a4d50f6cadf59b8acb19b"
+    },
+    {
+      "id": "street-mailbox-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 61,
+        "height": 71
+      },
+      "opaquePixels": 2227,
+      "colors": 12,
+      "pixelSha256": "73277e67cf99d29766a8ce8f4b014935129c4949d72e11f3adc6fe59cfcb4f76"
+    },
+    {
+      "id": "street-mailbox-winter",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 61,
+        "height": 71
+      },
+      "opaquePixels": 2089,
+      "colors": 12,
+      "pixelSha256": "613c04071222e03fd6882eac72ae7e224278581235bcbfd73d374d6fccbc3ee0"
+    },
+    {
+      "id": "street-newspaper-box-spring",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 3029,
+      "colors": 13,
+      "pixelSha256": "3fe628f1c4d3fe45d6b105840585bb883fa9be141b20ed27b7deb082ac02e0be"
+    },
+    {
+      "id": "street-newspaper-box-summer",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 63,
+        "height": 70
+      },
+      "opaquePixels": 3308,
+      "colors": 13,
+      "pixelSha256": "e21dfb10acd71d865a8edfdaae40bb64f5a1b910b4e71e066489204247d7b349"
+    },
+    {
+      "id": "street-newspaper-box-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 3070,
+      "colors": 13,
+      "pixelSha256": "fd415f7d31d01f3dc3f3820e8c4699674bdc37265a9a0dbb547196a4cd0a5e14"
+    },
+    {
+      "id": "street-newspaper-box-winter",
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 62,
+        "height": 68
+      },
+      "opaquePixels": 3243,
+      "colors": 14,
+      "pixelSha256": "2f72260945dc4ebb6108c0136c5b9a95e631e3778b386bafd47b885b5be7bee9"
+    },
+    {
+      "id": "street-parcel-locker-spring",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 3668,
+      "colors": 13,
+      "pixelSha256": "9ff43be84798b924b4b35c81452e1ba5bea8a05a1684c34af81f514ceae382e8"
+    },
+    {
+      "id": "street-parcel-locker-summer",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 3684,
+      "colors": 13,
+      "pixelSha256": "1b5b7b7c94632e96ba92614f89652027dafff658c31c65a9b619c76fb65bc612"
+    },
+    {
+      "id": "street-parcel-locker-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 12,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 3736,
+      "colors": 13,
+      "pixelSha256": "e4ccdf467a3dcaeb6a2180989b4ed5d043d217b328b072d0ea01bcc606e3eba4"
+    },
+    {
+      "id": "street-parcel-locker-winter",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 61,
+        "height": 72
+      },
+      "opaquePixels": 3780,
+      "colors": 13,
+      "pixelSha256": "7cb174d0d02896372e87de705cfd69118033a1753ff797abd3c68c9ec14a272e"
+    },
+    {
+      "id": "street-notice-board-spring",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 3232,
+      "colors": 15,
+      "pixelSha256": "ff51f841bb7f7520bee6affa32336f6befb88148a6f2cbb30fd80e01b27d707e"
+    },
+    {
+      "id": "street-notice-board-summer",
+      "bounds": {
+        "x": 17,
+        "y": 11,
+        "width": 65,
+        "height": 73
+      },
+      "opaquePixels": 3447,
+      "colors": 15,
+      "pixelSha256": "72769ec44b8e6cb5f9a358700736f31760211b359b635b7ea73778c3314cae22"
+    },
+    {
+      "id": "street-notice-board-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2989,
+      "colors": 15,
+      "pixelSha256": "f12fc9acd5a4d44ea98c7401303223fe8362866a28d4987a66f0008d5527e0bc"
+    },
+    {
+      "id": "street-notice-board-winter",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 3411,
+      "colors": 16,
+      "pixelSha256": "56bf48b855fbca30a5ef13a381ed30536f9a2be9cf66b9dcb0387c7ef03ca0eb"
+    },
+    {
+      "id": "street-street-clock-spring",
+      "bounds": {
+        "x": 18,
+        "y": 5,
+        "width": 61,
+        "height": 79
+      },
+      "opaquePixels": 1954,
+      "colors": 11,
+      "pixelSha256": "cc26049fd3ac746159767f670d10325f55418b4d3c38d18b7376d257cf9c193c"
+    },
+    {
+      "id": "street-street-clock-summer",
+      "bounds": {
+        "x": 18,
+        "y": 9,
+        "width": 61,
+        "height": 75
+      },
+      "opaquePixels": 2011,
+      "colors": 11,
+      "pixelSha256": "35da007325542382e16a69c2a96bdc5cf447d742c5a7d8226ba9604bfb8bbb05"
+    },
+    {
+      "id": "street-street-clock-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 9,
+        "width": 61,
+        "height": 75
+      },
+      "opaquePixels": 2034,
+      "colors": 12,
+      "pixelSha256": "7615ef80b432f570ce7723d9962386e18621e1bcd46f1de4ada6322cacbfa9b8"
+    },
+    {
+      "id": "street-street-clock-winter",
+      "bounds": {
+        "x": 18,
+        "y": 9,
+        "width": 61,
+        "height": 75
+      },
+      "opaquePixels": 2047,
+      "colors": 11,
+      "pixelSha256": "8a3e5ac43455b0053464c1705a0e817334c91d23bdf43e7c88a1f0913d63d75a"
+    },
+    {
+      "id": "street-direction-sign-spring",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 1809,
+      "colors": 12,
+      "pixelSha256": "73f2d6488e6ddb624bf9a67844dde952c01b4502de1e9462f8e5accb72b93d8f"
+    },
+    {
+      "id": "street-direction-sign-summer",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 2018,
+      "colors": 13,
+      "pixelSha256": "8779b2d15b8f04be537f8c684fa56133561e27b57a30d18860fb20377181168a"
+    },
+    {
+      "id": "street-direction-sign-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 1870,
+      "colors": 11,
+      "pixelSha256": "26cb70df90ffa863a4b52df0ab979b7bdb5cacec76b9b3e0951566a56c88a8e6"
+    },
+    {
+      "id": "street-direction-sign-winter",
+      "bounds": {
+        "x": 18,
+        "y": 10,
+        "width": 61,
+        "height": 74
+      },
+      "opaquePixels": 2009,
+      "colors": 11,
+      "pixelSha256": "75e4773a356418ac1f9cd718592c548148b512d55d0e9ee64fcc709d9b5fe1f9"
+    },
+    {
+      "id": "street-menu-easel-spring",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 64,
+        "height": 65
+      },
+      "opaquePixels": 2610,
+      "colors": 14,
+      "pixelSha256": "8a8668276eaf117fa059637ed37b9f0571763d452d780949c66e13b7b42c5738"
+    },
+    {
+      "id": "street-menu-easel-summer",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 64,
+        "height": 71
+      },
+      "opaquePixels": 2869,
+      "colors": 13,
+      "pixelSha256": "d541bb8ebd8a46c0685cbd519e894c6c94ea1257c64b3e61393a66803b44099a"
+    },
+    {
+      "id": "street-menu-easel-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 64,
+        "height": 65
+      },
+      "opaquePixels": 2793,
+      "colors": 13,
+      "pixelSha256": "e0794b82c4fece91a4cdb8766b018eceaf53a9a852630106c5bb3d9a20a885c7"
+    },
+    {
+      "id": "street-menu-easel-winter",
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 64,
+        "height": 68
+      },
+      "opaquePixels": 2744,
+      "colors": 14,
+      "pixelSha256": "6c73f2a4c9fc6440df228b9e75b9818e4216b12c3689ecf31d22e2a02e199bc4"
+    },
+    {
+      "id": "street-queue-post-spring",
+      "bounds": {
+        "x": 12,
+        "y": 21,
+        "width": 73,
+        "height": 63
+      },
+      "opaquePixels": 1439,
+      "colors": 11,
+      "pixelSha256": "e8b2c5b97dc77961bf22738d1a82205cbe6156943c6dc8171b3ef551c6b06939"
+    },
+    {
+      "id": "street-queue-post-summer",
+      "bounds": {
+        "x": 12,
+        "y": 21,
+        "width": 73,
+        "height": 63
+      },
+      "opaquePixels": 1564,
+      "colors": 12,
+      "pixelSha256": "25cc2dffe6653621a4bfc9b66e6292370ab63037a2ab56b81786e9590ac04f9d"
+    },
+    {
+      "id": "street-queue-post-autumn",
+      "bounds": {
+        "x": 12,
+        "y": 21,
+        "width": 73,
+        "height": 63
+      },
+      "opaquePixels": 1659,
+      "colors": 14,
+      "pixelSha256": "a825b62b170cb3d4ea85cf7d29b090778e5b04c46dd4d4808bce4058d2960675"
+    },
+    {
+      "id": "street-queue-post-winter",
+      "bounds": {
+        "x": 12,
+        "y": 21,
+        "width": 73,
+        "height": 63
+      },
+      "opaquePixels": 1477,
+      "colors": 11,
+      "pixelSha256": "2ef66ed1a1eb73810a3a1b7b4e9ba26fd4c6e1cb7d15e774c6eb644767303dfd"
+    },
+    {
+      "id": "street-slat-bench-spring",
+      "bounds": {
+        "x": 17,
+        "y": 26,
+        "width": 63,
+        "height": 58
+      },
+      "opaquePixels": 2376,
+      "colors": 11,
+      "pixelSha256": "4beccc510e42eef3320426f4ca11849d6c720a5abacfe28ca26be64bf7528723"
+    },
+    {
+      "id": "street-slat-bench-summer",
+      "bounds": {
+        "x": 17,
+        "y": 26,
+        "width": 63,
+        "height": 58
+      },
+      "opaquePixels": 2433,
+      "colors": 11,
+      "pixelSha256": "82b8e2b7dd7309beb63659607c01b0440861ee834b34a455f07c985e0db02b6b"
+    },
+    {
+      "id": "street-slat-bench-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 26,
+        "width": 63,
+        "height": 58
+      },
+      "opaquePixels": 2424,
+      "colors": 9,
+      "pixelSha256": "030ee57b71921d32d39b8908ed14acf812383b937b2684a4db6fd22099160fc9"
+    },
+    {
+      "id": "street-slat-bench-winter",
+      "bounds": {
+        "x": 17,
+        "y": 26,
+        "width": 63,
+        "height": 58
+      },
+      "opaquePixels": 2498,
+      "colors": 11,
+      "pixelSha256": "8b87123314c6a05e22edd441ec4dbd39c5b739beaf598fe0853f50ae1c3635a1"
+    },
+    {
+      "id": "street-bike-rack-spring",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 64,
+        "height": 56
+      },
+      "opaquePixels": 2148,
+      "colors": 7,
+      "pixelSha256": "0384f4b4809a4b0a57b8e98222af6ab1fac4cfb10cc29d29a354b404f92f774a"
+    },
+    {
+      "id": "street-bike-rack-summer",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 64,
+        "height": 56
+      },
+      "opaquePixels": 1994,
+      "colors": 6,
+      "pixelSha256": "1577662058cb54b9d86b2aecb99e570b321fea71be720be4a3190bc776e65b3b"
+    },
+    {
+      "id": "street-bike-rack-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 64,
+        "height": 56
+      },
+      "opaquePixels": 2160,
+      "colors": 9,
+      "pixelSha256": "b8217c5c59b0b68a9e3d17b383473f31e12990bdc81ff0b6d1519365a65061af"
+    },
+    {
+      "id": "street-bike-rack-winter",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 64,
+        "height": 58
+      },
+      "opaquePixels": 2191,
+      "colors": 8,
+      "pixelSha256": "e1d914d619f77873d963531da4baa7460f9c7fe191a6a26c8c44e96666c272ae"
+    },
+    {
+      "id": "street-parked-bicycle-spring",
+      "bounds": {
+        "x": 10,
+        "y": 27,
+        "width": 78,
+        "height": 57
+      },
+      "opaquePixels": 1743,
+      "colors": 12,
+      "pixelSha256": "e5bac4090f7d6112edfd07041e18e07c40be33c959e026f9ad46a16998d05911"
+    },
+    {
+      "id": "street-parked-bicycle-summer",
+      "bounds": {
+        "x": 10,
+        "y": 27,
+        "width": 78,
+        "height": 57
+      },
+      "opaquePixels": 1674,
+      "colors": 13,
+      "pixelSha256": "b8ad98489cafac2db254d0972d8f6e440d7c9f3514a1a9977f4b8650b87b919d"
+    },
+    {
+      "id": "street-parked-bicycle-autumn",
+      "bounds": {
+        "x": 10,
+        "y": 22,
+        "width": 78,
+        "height": 62
+      },
+      "opaquePixels": 1984,
+      "colors": 13,
+      "pixelSha256": "188508db525dbb758b5a0a5a856c1e29de3880eb76258c2cf782f03bdea837c3"
+    },
+    {
+      "id": "street-parked-bicycle-winter",
+      "bounds": {
+        "x": 10,
+        "y": 27,
+        "width": 78,
+        "height": 57
+      },
+      "opaquePixels": 1762,
+      "colors": 13,
+      "pixelSha256": "f330caa101615f0406ff1a2758163696b33b6172494ba66464669b86dc95753c"
+    },
+    {
+      "id": "street-scooter-spring",
+      "bounds": {
+        "x": 17,
+        "y": 21,
+        "width": 67,
+        "height": 63
+      },
+      "opaquePixels": 1233,
+      "colors": 14,
+      "pixelSha256": "d68eb9b458a1ebbd0e9490ba37965e2ee8d3438777902f900be1c619a2c7f839"
+    },
+    {
+      "id": "street-scooter-summer",
+      "bounds": {
+        "x": 17,
+        "y": 21,
+        "width": 67,
+        "height": 63
+      },
+      "opaquePixels": 1353,
+      "colors": 14,
+      "pixelSha256": "9bf630710de6b2bc3d975cd139e863b01bd22c435e9c22ece920d8dfbde419a4"
+    },
+    {
+      "id": "street-scooter-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 21,
+        "width": 67,
+        "height": 63
+      },
+      "opaquePixels": 1258,
+      "colors": 14,
+      "pixelSha256": "f0333018f0a757d5b6ee589340c805f4edaf48fc4adc02304fa5d60974304430"
+    },
+    {
+      "id": "street-scooter-winter",
+      "bounds": {
+        "x": 17,
+        "y": 21,
+        "width": 67,
+        "height": 63
+      },
+      "opaquePixels": 1238,
+      "colors": 14,
+      "pixelSha256": "9da59e72294773d0075130cf6628ef28ce22f024d48bb6fb086b4902e4aa46f1"
+    },
+    {
+      "id": "street-skateboard-spring",
+      "bounds": {
+        "x": 15,
+        "y": 42,
+        "width": 68,
+        "height": 42
+      },
+      "opaquePixels": 1430,
+      "colors": 11,
+      "pixelSha256": "984383f43dc50a5173885ffbc987b5fc8d8c66bb9a26af80168ab5814819ac71"
+    },
+    {
+      "id": "street-skateboard-summer",
+      "bounds": {
+        "x": 15,
+        "y": 42,
+        "width": 68,
+        "height": 42
+      },
+      "opaquePixels": 1430,
+      "colors": 14,
+      "pixelSha256": "0b4454f446ad34cef0034f135d64d2e63cc23187e84e66cef8ff44b943240758"
+    },
+    {
+      "id": "street-skateboard-autumn",
+      "bounds": {
+        "x": 15,
+        "y": 31,
+        "width": 68,
+        "height": 53
+      },
+      "opaquePixels": 1748,
+      "colors": 12,
+      "pixelSha256": "9caf8ffe999e4aaffaf1cba0e83bda96795f01193eb731c49d9ac17853b817e1"
+    },
+    {
+      "id": "street-skateboard-winter",
+      "bounds": {
+        "x": 15,
+        "y": 23,
+        "width": 68,
+        "height": 61
+      },
+      "opaquePixels": 1710,
+      "colors": 12,
+      "pixelSha256": "58e45e81d908c02f75aa23ac2e6d40577a578c655dd3fb56f815aa52bbcc5e17"
+    },
+    {
+      "id": "street-wagon-spring",
+      "bounds": {
+        "x": 18,
+        "y": 29,
+        "width": 73,
+        "height": 55
+      },
+      "opaquePixels": 2323,
+      "colors": 14,
+      "pixelSha256": "e0ec61f5f208d7021c7590484e86139d4bca979b0e2c9144b716657bf0dc8659"
+    },
+    {
+      "id": "street-wagon-summer",
+      "bounds": {
+        "x": 18,
+        "y": 29,
+        "width": 73,
+        "height": 55
+      },
+      "opaquePixels": 1929,
+      "colors": 13,
+      "pixelSha256": "3c2b57f2d6044dd2e271ce36ddf9b0c8bf3f6d0390278ce245c03eaec8b9b63e"
+    },
+    {
+      "id": "street-wagon-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 29,
+        "width": 73,
+        "height": 55
+      },
+      "opaquePixels": 2178,
+      "colors": 14,
+      "pixelSha256": "5cdd10532537534ca09101dd010cbeef93f49960acf12bcaa96fdae5cbd98ed9"
+    },
+    {
+      "id": "street-wagon-winter",
+      "bounds": {
+        "x": 18,
+        "y": 29,
+        "width": 73,
+        "height": 55
+      },
+      "opaquePixels": 2554,
+      "colors": 13,
+      "pixelSha256": "b4beb3d318002a4e7451d5f4cc456c46e1f1bbc4868e1f0365035ac40c78a8d6"
+    },
+    {
+      "id": "street-handcart-spring",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 1916,
+      "colors": 13,
+      "pixelSha256": "de39b9bc052be86f866fae79c53e328b4fc491d669b621c69c29e077928d4ae0"
+    },
+    {
+      "id": "street-handcart-summer",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 2010,
+      "colors": 14,
+      "pixelSha256": "37a8e5f572f87f70520f95a4da038d56e9d716a465d52ebad595e60fe723e5b3"
+    },
+    {
+      "id": "street-handcart-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 2306,
+      "colors": 13,
+      "pixelSha256": "628f3acc8acec2d24413831a42d6bb4a324fc4edd349cb1a1a6b94fbd62dc07b"
+    },
+    {
+      "id": "street-handcart-winter",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 1806,
+      "colors": 14,
+      "pixelSha256": "0a86c042eef68158dfea011eec6509e500ffa88f4a89e4a26e1dd48e9e4b66e2"
+    },
+    {
+      "id": "street-parking-bollard-spring",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 1577,
+      "colors": 11,
+      "pixelSha256": "9a75e535566ac9f98baa9d10e036f383036dda7ef2fcf9cf54b224b267d99792"
+    },
+    {
+      "id": "street-parking-bollard-summer",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 67,
+        "height": 63
+      },
+      "opaquePixels": 1650,
+      "colors": 9,
+      "pixelSha256": "60c4b674e75aa53e0bc3327116f5648533571d6e10c7f91f57f799f685c14942"
+    },
+    {
+      "id": "street-parking-bollard-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 1547,
+      "colors": 12,
+      "pixelSha256": "214535e628b74dc4ed278d77f91fdcd98431640a1729cf25ea1861c25ed5f9c6"
+    },
+    {
+      "id": "street-parking-bollard-winter",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 1609,
+      "colors": 9,
+      "pixelSha256": "2f965092682bf8c39e3d4974cc52f7b86864946e754dc0b7aa8d3e19faefa352"
+    },
+    {
+      "id": "street-umbrella-rack-spring",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 1786,
+      "colors": 11,
+      "pixelSha256": "6b7e98915b4c9824bc0c851444cbd23a8c7db78055dab13c288ca9fd53b4b29a"
+    },
+    {
+      "id": "street-umbrella-rack-summer",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 62,
+        "height": 66
+      },
+      "opaquePixels": 2107,
+      "colors": 13,
+      "pixelSha256": "790838513f35803d4bc7323ef4b44df34ecdf51dbfcfb546455c574f4606484e"
+    },
+    {
+      "id": "street-umbrella-rack-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 1888,
+      "colors": 11,
+      "pixelSha256": "b7122b3e21cb326c2afcce6fadcee6111f71ce99bce62a697019ddecfb5563b6"
+    },
+    {
+      "id": "street-umbrella-rack-winter",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2130,
+      "colors": 11,
+      "pixelSha256": "d6cd88088c3c6e8d92811c5ab39406bb1f132608559bd373f5d45ea7a25110f5"
+    },
+    {
+      "id": "street-rain-boots-spring",
+      "bounds": {
+        "x": 18,
+        "y": 32,
+        "width": 63,
+        "height": 52
+      },
+      "opaquePixels": 1958,
+      "colors": 9,
+      "pixelSha256": "7729ef86b3e881809a6ec58f4231bafdccd7f8d64c46de7eb086deb625a6aa84"
+    },
+    {
+      "id": "street-rain-boots-summer",
+      "bounds": {
+        "x": 18,
+        "y": 32,
+        "width": 63,
+        "height": 52
+      },
+      "opaquePixels": 1958,
+      "colors": 8,
+      "pixelSha256": "a39afca0e0cb5eaa4f4a916ddbd6a4044e68fc56bd89dbc46fbffbacd4c1da43"
+    },
+    {
+      "id": "street-rain-boots-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 63,
+        "height": 64
+      },
+      "opaquePixels": 2028,
+      "colors": 9,
+      "pixelSha256": "19e44af35e7b9c4917849d7f45d6a3aae837c9e90192b7716531b4786cec0b43"
+    },
+    {
+      "id": "street-rain-boots-winter",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 63,
+        "height": 56
+      },
+      "opaquePixels": 2133,
+      "colors": 8,
+      "pixelSha256": "d50e531bfddf4c6b6bd87189e0db87d219df8a2afc40404b542f13fcd75b7007"
+    },
+    {
+      "id": "street-doormat-spring",
+      "bounds": {
+        "x": 17,
+        "y": 40,
+        "width": 65,
+        "height": 44
+      },
+      "opaquePixels": 2387,
+      "colors": 11,
+      "pixelSha256": "d7d73695736926dc62e9d6e8509b304c5f2b18b95369ba73bada5f59621999c3"
+    },
+    {
+      "id": "street-doormat-summer",
+      "bounds": {
+        "x": 17,
+        "y": 40,
+        "width": 65,
+        "height": 44
+      },
+      "opaquePixels": 2387,
+      "colors": 10,
+      "pixelSha256": "71e7f7ecbb2df1b0600facd2814a0ad2c8c1278d2cfc8dc6598ddd234fb72fff"
+    },
+    {
+      "id": "street-doormat-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 40,
+        "width": 65,
+        "height": 44
+      },
+      "opaquePixels": 2387,
+      "colors": 11,
+      "pixelSha256": "559a9f9b29a0f811e27cbef0d5eacc85c30284182b29dee568dc580cb0d0582b"
+    },
+    {
+      "id": "street-doormat-winter",
+      "bounds": {
+        "x": 17,
+        "y": 39,
+        "width": 65,
+        "height": 45
+      },
+      "opaquePixels": 2422,
+      "colors": 8,
+      "pixelSha256": "106da3d07be6c35805e2c919c9cd2ac5fb2adecb85227124fffaed2bd7e5e0e5"
+    },
+    {
+      "id": "street-boot-scraper-spring",
+      "bounds": {
+        "x": 18,
+        "y": 37,
+        "width": 61,
+        "height": 47
+      },
+      "opaquePixels": 1908,
+      "colors": 12,
+      "pixelSha256": "53fe7593631f2384b25a64c65bac5c63f163b1a4d2d019aacabc2d319f8b68f4"
+    },
+    {
+      "id": "street-boot-scraper-summer",
+      "bounds": {
+        "x": 18,
+        "y": 36,
+        "width": 61,
+        "height": 48
+      },
+      "opaquePixels": 1934,
+      "colors": 13,
+      "pixelSha256": "7db564823d9df69e15025162d57f1183a284ce66e4fb05cf7926d25e331b645b"
+    },
+    {
+      "id": "street-boot-scraper-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 37,
+        "width": 65,
+        "height": 47
+      },
+      "opaquePixels": 2155,
+      "colors": 12,
+      "pixelSha256": "6fbb39d405b56b7104c4316664496e3b8042d4bd520650bee48dce5785720771"
+    },
+    {
+      "id": "street-boot-scraper-winter",
+      "bounds": {
+        "x": 18,
+        "y": 35,
+        "width": 61,
+        "height": 49
+      },
+      "opaquePixels": 2182,
+      "colors": 13,
+      "pixelSha256": "50b16fd8c965fbafa4b74d106f897d406e86bdd0ab896ce717bef2eef48b4236"
+    },
+    {
+      "id": "street-doorbell-pillar-spring",
+      "bounds": {
+        "x": 18,
+        "y": 10,
+        "width": 61,
+        "height": 74
+      },
+      "opaquePixels": 1718,
+      "colors": 14,
+      "pixelSha256": "b7735b5a7d6b605e8fd18ff5fd732ffcdafdc4022f3446557307a0511e66ada9"
+    },
+    {
+      "id": "street-doorbell-pillar-summer",
+      "bounds": {
+        "x": 18,
+        "y": 10,
+        "width": 61,
+        "height": 74
+      },
+      "opaquePixels": 1830,
+      "colors": 14,
+      "pixelSha256": "014055435ed6885bf656189cc565a3b35107b6a0616c2e73f57c99f11ab8a8f6"
+    },
+    {
+      "id": "street-doorbell-pillar-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 10,
+        "width": 61,
+        "height": 74
+      },
+      "opaquePixels": 1900,
+      "colors": 15,
+      "pixelSha256": "37d825fedd0a7f7b510810eb498d192277836e84bd0c7f270b25edcf4516bb98"
+    },
+    {
+      "id": "street-doorbell-pillar-winter",
+      "bounds": {
+        "x": 18,
+        "y": 10,
+        "width": 61,
+        "height": 74
+      },
+      "opaquePixels": 1777,
+      "colors": 15,
+      "pixelSha256": "9e6f9db5f10f172cd0bb342090b66241bcbf1a70fbabb9a00b843fe12510134c"
+    },
+    {
+      "id": "street-shoe-cubby-spring",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 62,
+        "height": 64
+      },
+      "opaquePixels": 3478,
+      "colors": 11,
+      "pixelSha256": "546197dc9693f146cedc77b72b9044edc73e6964847dca0e824b020dad63becc"
+    },
+    {
+      "id": "street-shoe-cubby-summer",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 62,
+        "height": 64
+      },
+      "opaquePixels": 3478,
+      "colors": 11,
+      "pixelSha256": "aa4f7b7f3f2839161ae095e53a5dbc1ea9eb747ad79b386130ff7f607616487f"
+    },
+    {
+      "id": "street-shoe-cubby-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 62,
+        "height": 64
+      },
+      "opaquePixels": 3478,
+      "colors": 10,
+      "pixelSha256": "37a34c3221329d7a53f6de4909ec88f1d58cb0de514b8d6db74d1c5b497b439c"
+    },
+    {
+      "id": "street-shoe-cubby-winter",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 62,
+        "height": 66
+      },
+      "opaquePixels": 3583,
+      "colors": 11,
+      "pixelSha256": "85945bd1acf0a0dd9c1d969c7ec5b0701ffe3bab5559c429a14a1376feac74d2"
+    },
+    {
+      "id": "street-coat-hook-spring",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 1563,
+      "colors": 11,
+      "pixelSha256": "a95c40b57f2a255e56ec0b73c44f914e7522cf4f948a2eee85e63660c67e4d48"
+    },
+    {
+      "id": "street-coat-hook-summer",
+      "bounds": {
+        "x": 18,
+        "y": 25,
+        "width": 61,
+        "height": 59
+      },
+      "opaquePixels": 1364,
+      "colors": 12,
+      "pixelSha256": "10b87bf4f8bc057abe1f15f5daf4ec2acf75a5068bd9509139b66bca8d3a6807"
+    },
+    {
+      "id": "street-coat-hook-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 1832,
+      "colors": 11,
+      "pixelSha256": "ec25b2cf1e06ff6d7fa8f2f4e6662c1d004624399a3b58d93f2d3c0dc818b7d3"
+    },
+    {
+      "id": "street-coat-hook-winter",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 1908,
+      "colors": 12,
+      "pixelSha256": "3e0182ee4425e6419e9bf17f9c9041e0de133664786653dd9a57ff6d100d7ccd"
+    },
+    {
+      "id": "street-folding-screen-spring",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 3149,
+      "colors": 10,
+      "pixelSha256": "6e89df7947434f31d6e4b23cfa6c5c40d3c7875c9a7594a9edf6f95587071b25"
+    },
+    {
+      "id": "street-folding-screen-summer",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 3149,
+      "colors": 9,
+      "pixelSha256": "f287ae58323cc73e8f2a16a0fabf6c552ce48bf8b5114a865682db29482783ac"
+    },
+    {
+      "id": "street-folding-screen-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 3149,
+      "colors": 9,
+      "pixelSha256": "fd9db3bba04526bc2b8a231f075565830307dac3aeddd05c26ebe1f5bd75d181"
+    },
+    {
+      "id": "street-folding-screen-winter",
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "opaquePixels": 3231,
+      "colors": 9,
+      "pixelSha256": "13da03c38615f78c8d5194444cb1f6ff6d6e04bb366b714e919f9e0fea848397"
+    },
+    {
+      "id": "street-birdhouse-spring",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 2055,
+      "colors": 13,
+      "pixelSha256": "b63de764bbc17e4ec8fe5f6ffbb23c94f97924aedcc9803ba09491e359f10cf9"
+    },
+    {
+      "id": "street-birdhouse-summer",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 2036,
+      "colors": 11,
+      "pixelSha256": "5a13ad049d1972b02b130e04aafb68fbc4023d2807988f1fc6b18a03d515b8a5"
+    },
+    {
+      "id": "street-birdhouse-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 2046,
+      "colors": 13,
+      "pixelSha256": "4bc54cb414f1e23b84cf89aa9cff03d40bb1e5c58b91f94e5e3827f13630b8f4"
+    },
+    {
+      "id": "street-birdhouse-winter",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 2132,
+      "colors": 10,
+      "pixelSha256": "7b65b101477623c69daf20d4d0cb6249ffb0bcd9da9b9ef1727b1cea380d4258"
+    },
+    {
+      "id": "street-birdbath-spring",
+      "bounds": {
+        "x": 18,
+        "y": 27,
+        "width": 61,
+        "height": 57
+      },
+      "opaquePixels": 1998,
+      "colors": 12,
+      "pixelSha256": "ef1a2dff9483ebb9a3bb7bb64879b4c2ab1df15373d2e8c17d8884f18da5723d"
+    },
+    {
+      "id": "street-birdbath-summer",
+      "bounds": {
+        "x": 18,
+        "y": 27,
+        "width": 61,
+        "height": 57
+      },
+      "opaquePixels": 1846,
+      "colors": 8,
+      "pixelSha256": "f4038f01b92d47e9ff2825129c2047dd8dab81210ee53c200a2b55ddfa353d97"
+    },
+    {
+      "id": "street-birdbath-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 61,
+        "height": 56
+      },
+      "opaquePixels": 1903,
+      "colors": 13,
+      "pixelSha256": "10b0de72f7774527ed5b87c9b0670152b05d011863b120dd329df84cdee974c5"
+    },
+    {
+      "id": "street-birdbath-winter",
+      "bounds": {
+        "x": 18,
+        "y": 33,
+        "width": 61,
+        "height": 51
+      },
+      "opaquePixels": 1824,
+      "colors": 8,
+      "pixelSha256": "c7ac9641059431598363acc4bcbe98ff694353285bed47331ca99e4bf7c0e8f9"
+    },
+    {
+      "id": "street-feeder-spring",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 61,
+        "height": 71
+      },
+      "opaquePixels": 1815,
+      "colors": 14,
+      "pixelSha256": "f06c9bdfeff1fe8ed53ad6cb208311d618ba1a4228a2c42812bed215e6f26f13"
+    },
+    {
+      "id": "street-feeder-summer",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 61,
+        "height": 71
+      },
+      "opaquePixels": 1865,
+      "colors": 17,
+      "pixelSha256": "255ddffac860118cbb7a64a2c2125b178338448ec74095b67dc4dd00ffc85133"
+    },
+    {
+      "id": "street-feeder-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 61,
+        "height": 71
+      },
+      "opaquePixels": 1835,
+      "colors": 10,
+      "pixelSha256": "89e0d077a2b9e534713a896946d3a39696f35938534eb41cf7c305c14795bdec"
+    },
+    {
+      "id": "street-feeder-winter",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 61,
+        "height": 71
+      },
+      "opaquePixels": 1807,
+      "colors": 11,
+      "pixelSha256": "0b13d88e453bc3939f33dbe043c7b5b4f17ecebf1e28f4d165596daf62a7a8c2"
+    },
+    {
+      "id": "street-insect-hotel-spring",
+      "bounds": {
+        "x": 18,
+        "y": 9,
+        "width": 61,
+        "height": 75
+      },
+      "opaquePixels": 2784,
+      "colors": 13,
+      "pixelSha256": "d8f54fcac5bcd8f9b83aba5a95bfbd218e7b432be52a290b74b6826830cc9064"
+    },
+    {
+      "id": "street-insect-hotel-summer",
+      "bounds": {
+        "x": 18,
+        "y": 9,
+        "width": 61,
+        "height": 75
+      },
+      "opaquePixels": 2784,
+      "colors": 11,
+      "pixelSha256": "781bfc78284c05e7abe04a3d70dcedb0140db9cf3ae39f454a9593d1545734c4"
+    },
+    {
+      "id": "street-insect-hotel-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 9,
+        "width": 61,
+        "height": 75
+      },
+      "opaquePixels": 2784,
+      "colors": 10,
+      "pixelSha256": "49f73d3a9ee8ad312a5ed48dbef4e1f1af6f627c412a4d27781bc4e8f3e1fd67"
+    },
+    {
+      "id": "street-insect-hotel-winter",
+      "bounds": {
+        "x": 18,
+        "y": 9,
+        "width": 61,
+        "height": 75
+      },
+      "opaquePixels": 2784,
+      "colors": 11,
+      "pixelSha256": "add54fb6a3cb3d7dc03ba31f7c5f3ca1c5f6732f8ba18fa922149cd3e056c8f7"
+    },
+    {
+      "id": "street-stone-fountain-spring",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 2155,
+      "colors": 8,
+      "pixelSha256": "33fc65502417b34881818bbc0ed48252ac4acc95efc38b951fab423967ac65c0"
+    },
+    {
+      "id": "street-stone-fountain-summer",
+      "bounds": {
+        "x": 18,
+        "y": 10,
+        "width": 61,
+        "height": 74
+      },
+      "opaquePixels": 2210,
+      "colors": 8,
+      "pixelSha256": "5866216a707e84d13b7d0380abcd00f89c82476e9946275c1ed5acc8819ff6c8"
+    },
+    {
+      "id": "street-stone-fountain-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 2112,
+      "colors": 10,
+      "pixelSha256": "d9e32cfc257d50d7d3e90a1b951291d1a7503f5531366e2a86c7ae8a32c36d67"
+    },
+    {
+      "id": "street-stone-fountain-winter",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 2078,
+      "colors": 7,
+      "pixelSha256": "21247d8dd00020876b6226db357a8da00a199cf28a3c0764af84e9145c204630"
+    },
+    {
+      "id": "street-water-pump-spring",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 62,
+        "height": 64
+      },
+      "opaquePixels": 1611,
+      "colors": 15,
+      "pixelSha256": "53397169c1dc9a6e44794c9b8c1e302be310a2d5aacbdbdfa18c3f29fc964532"
+    },
+    {
+      "id": "street-water-pump-summer",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 62,
+        "height": 64
+      },
+      "opaquePixels": 1639,
+      "colors": 13,
+      "pixelSha256": "e19d851d75d8e52df041f76c18eaa68dcebaf5e3d6aca9fc7e6ee431f667636d"
+    },
+    {
+      "id": "street-water-pump-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 62,
+        "height": 64
+      },
+      "opaquePixels": 1502,
+      "colors": 13,
+      "pixelSha256": "2ae5e9d01d39f184b63294e0532a03770a21cb9bac0a5122ad5e42871262c4a8"
+    },
+    {
+      "id": "street-water-pump-winter",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 62,
+        "height": 66
+      },
+      "opaquePixels": 1592,
+      "colors": 13,
+      "pixelSha256": "473fa623b3553624a6d3e5e9436a1785976306cf0576b01c3659da2e7a267c44"
+    },
+    {
+      "id": "street-rain-barrel-spring",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 2879,
+      "colors": 15,
+      "pixelSha256": "8daf5aa98a5bf3a49d5157be57ada5bb13e4bab5f3f3d61eff7ffefbb402e201"
+    },
+    {
+      "id": "street-rain-barrel-summer",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 2820,
+      "colors": 15,
+      "pixelSha256": "7fb1900d9e913f257d93b1b8f87c0e7bc564e369a02f0cc3122698cb2497ca2c"
+    },
+    {
+      "id": "street-rain-barrel-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 3031,
+      "colors": 14,
+      "pixelSha256": "bd16a67a83561aff1c80b041dff4660de01227a7b26a8820fee8becbfb22d642"
+    },
+    {
+      "id": "street-rain-barrel-winter",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 2790,
+      "colors": 15,
+      "pixelSha256": "d15483e7b3d89a41029a467a058892411fed67bdae556851314c4d69391595f2"
+    },
+    {
+      "id": "street-hose-reel-spring",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2608,
+      "colors": 15,
+      "pixelSha256": "868634e9e57ad19c542d2dd9e071eceabe64d45ad8c3688aff98e80f42adba49"
+    },
+    {
+      "id": "street-hose-reel-summer",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 62,
+        "height": 66
+      },
+      "opaquePixels": 2711,
+      "colors": 15,
+      "pixelSha256": "53e8043f4d72701a1215bc27e0fbb4052450f16fcdd99a882e1e036ee26d5b10"
+    },
+    {
+      "id": "street-hose-reel-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2521,
+      "colors": 16,
+      "pixelSha256": "dfbcbbe33a540675118e3ffaaf753ac56008840bbc20f85cf99c927f45b6b0bf"
+    },
+    {
+      "id": "street-hose-reel-winter",
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 61,
+        "height": 68
+      },
+      "opaquePixels": 2777,
+      "colors": 12,
+      "pixelSha256": "143f6526a8fdc665f4a57efad6bb3efccee0d7767a20d95b4e570c86bed9dd87"
+    },
+    {
+      "id": "street-flower-cart-spring",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 2576,
+      "colors": 16,
+      "pixelSha256": "c2ba5220b1221055bd7b22c917aae9053ffa20b1fbee39ea8674c9bc8416d3aa"
+    },
+    {
+      "id": "street-flower-cart-summer",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 69,
+        "height": 70
+      },
+      "opaquePixels": 2821,
+      "colors": 17,
+      "pixelSha256": "53d4ff895f0bf79c10b6b1518739f1cb72dae367a59af0bbab1b19b98f2dabb7"
+    },
+    {
+      "id": "street-flower-cart-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 2574,
+      "colors": 15,
+      "pixelSha256": "1ffab147f40cbd56209ca43bfb2f52a043cfa507e4202618df85edb8d8ea6a04"
+    },
+    {
+      "id": "street-flower-cart-winter",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 2447,
+      "colors": 15,
+      "pixelSha256": "79487c8c63d2850012e4eed1aa63473c1fb78c84376138deeb19a012bf81014c"
+    },
+    {
+      "id": "street-lattice-panel-spring",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2224,
+      "colors": 11,
+      "pixelSha256": "e63f4930fde72f1c9a23236b69034e0bc9386d75004dc13a81b71529a05f681c"
+    },
+    {
+      "id": "street-lattice-panel-summer",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2322,
+      "colors": 12,
+      "pixelSha256": "7be9feb98f26cd954e301ae12a3cbe995fd83b2fb1a76ed480442fb0a56ef881"
+    },
+    {
+      "id": "street-lattice-panel-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2204,
+      "colors": 9,
+      "pixelSha256": "d7e6fbcb17b903da001fcb6f17f9d6967773f4bb558ecea19732ba51fcc1e166"
+    },
+    {
+      "id": "street-lattice-panel-winter",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2288,
+      "colors": 10,
+      "pixelSha256": "0bd68d48eaab1bf19c58eefd2ae8276a3a2d51364d30e94362f4af762a070cbc"
+    },
+    {
+      "id": "street-raised-bed-spring",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2425,
+      "colors": 12,
+      "pixelSha256": "a44bfae2acf4157ba3fb336d5f27e56e4981acc6a99715466f798c3f4af285e4"
+    },
+    {
+      "id": "street-raised-bed-summer",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2534,
+      "colors": 15,
+      "pixelSha256": "01876529a4eb702c57b055e7c572d9f26b0c3c4cf02eed6ce2d97dc943f9eef9"
+    },
+    {
+      "id": "street-raised-bed-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2414,
+      "colors": 11,
+      "pixelSha256": "e5b4076915db8466ced911f57ed90ed7e2ecc57b4d224d3a260eb17cc8b57af9"
+    },
+    {
+      "id": "street-raised-bed-winter",
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "opaquePixels": 2675,
+      "colors": 10,
+      "pixelSha256": "f57a75c29feeac74337ed8c80201c121d0d46c12ed8e9b5a3f88a26b50c1d6f6"
+    },
+    {
+      "id": "street-seedling-tray-spring",
+      "bounds": {
+        "x": 18,
+        "y": 35,
+        "width": 63,
+        "height": 49
+      },
+      "opaquePixels": 2467,
+      "colors": 11,
+      "pixelSha256": "c4a6f07940f2b1020850c8a15ab10ad013cb2ffe9885ea60b413132255a1e4b9"
+    },
+    {
+      "id": "street-seedling-tray-summer",
+      "bounds": {
+        "x": 18,
+        "y": 33,
+        "width": 63,
+        "height": 51
+      },
+      "opaquePixels": 2542,
+      "colors": 11,
+      "pixelSha256": "d517886e9da14ecc22bef2e8936cdd742b4c5ea16a3dae2178392606b9d33618"
+    },
+    {
+      "id": "street-seedling-tray-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 37,
+        "width": 63,
+        "height": 47
+      },
+      "opaquePixels": 2440,
+      "colors": 12,
+      "pixelSha256": "b3d65667f06c6a9f7ec47e38cdaebff04d92a4f3efde16d32d9a713ca4319ec5"
+    },
+    {
+      "id": "street-seedling-tray-winter",
+      "bounds": {
+        "x": 18,
+        "y": 27,
+        "width": 63,
+        "height": 57
+      },
+      "opaquePixels": 2896,
+      "colors": 11,
+      "pixelSha256": "e4b24608f6df236551ee3a657737fdf75802f2390ff1b00b2f05164172256c93"
+    },
+    {
+      "id": "street-garden-tool-stand-spring",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 2207,
+      "colors": 12,
+      "pixelSha256": "1a417e46209db306c0cc083729e39136d3dff78dac29f63ba56016b3bd62ce93"
+    },
+    {
+      "id": "street-garden-tool-stand-summer",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 2180,
+      "colors": 11,
+      "pixelSha256": "3060a14cfd3605db3f426e6293e7ed280fe5b2e5e26110d44a1279672d1a582a"
+    },
+    {
+      "id": "street-garden-tool-stand-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 2169,
+      "colors": 12,
+      "pixelSha256": "323dc94ec70be7bfc27caa8989f33267a3ef9b483a849e9887da20b827c17904"
+    },
+    {
+      "id": "street-garden-tool-stand-winter",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 2440,
+      "colors": 13,
+      "pixelSha256": "da5869c0eb4b01e63493e4a7596a2a02538bcd75f2c85537c2ded91f2d0223cf"
+    },
+    {
+      "id": "street-compost-bin-spring",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 2425,
+      "colors": 9,
+      "pixelSha256": "d4b5ffe48b154c13a25358a00c4187badaf4bfef0926928c4f545d17a8908b1d"
+    },
+    {
+      "id": "street-compost-bin-summer",
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 61,
+        "height": 68
+      },
+      "opaquePixels": 2745,
+      "colors": 10,
+      "pixelSha256": "90cda43e017e5be34bf1ea75e479dfd0aaa8970e623fa9104c396ac7ba64002b"
+    },
+    {
+      "id": "street-compost-bin-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "opaquePixels": 2443,
+      "colors": 10,
+      "pixelSha256": "2046ee4f3849d2d64db03ef3a46d16ebd2f593ec344536b36fca01c2b58e0eca"
+    },
+    {
+      "id": "street-compost-bin-winter",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 2534,
+      "colors": 10,
+      "pixelSha256": "e92d988273ab4a4c9f81f4c9b3b6421dbc3f58489a307805be367a5f81d3e8c1"
+    },
+    {
+      "id": "street-cold-frame-spring",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 62,
+        "height": 58
+      },
+      "opaquePixels": 2998,
+      "colors": 13,
+      "pixelSha256": "3fa1c1305cd1b5193ab5f08223ebcb5f88510e41dc4842634e477918836db4d2"
+    },
+    {
+      "id": "street-cold-frame-summer",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 62,
+        "height": 66
+      },
+      "opaquePixels": 3408,
+      "colors": 11,
+      "pixelSha256": "b5ee5ce55e279dde0ba35f5fe0992d5567a16e62ec78cc1d191eedad150474bd"
+    },
+    {
+      "id": "street-cold-frame-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 62,
+        "height": 58
+      },
+      "opaquePixels": 2998,
+      "colors": 12,
+      "pixelSha256": "0de59b9243e0ed7ebe9728dec6c41e4783cf9ed5f4ba9fe484d0f2165679758f"
+    },
+    {
+      "id": "street-cold-frame-winter",
+      "bounds": {
+        "x": 18,
+        "y": 25,
+        "width": 62,
+        "height": 59
+      },
+      "opaquePixels": 3029,
+      "colors": 11,
+      "pixelSha256": "38e8dfdf679ab949915521eee447b54821fbb154ed2e05ee0e6acb5692a74f10"
+    },
+    {
+      "id": "street-stepping-stones-spring",
+      "bounds": {
+        "x": 15,
+        "y": 29,
+        "width": 67,
+        "height": 55
+      },
+      "opaquePixels": 1873,
+      "colors": 10,
+      "pixelSha256": "78c93622ba95c435013bc498397b5e3d977073de8875a0efd9c9ebc5b760d867"
+    },
+    {
+      "id": "street-stepping-stones-summer",
+      "bounds": {
+        "x": 15,
+        "y": 29,
+        "width": 67,
+        "height": 55
+      },
+      "opaquePixels": 1856,
+      "colors": 8,
+      "pixelSha256": "135a4bbda44f8c259aae401dbb7bbb497474d000f325c2e21bf48f5c207f7f97"
+    },
+    {
+      "id": "street-stepping-stones-autumn",
+      "bounds": {
+        "x": 15,
+        "y": 29,
+        "width": 67,
+        "height": 55
+      },
+      "opaquePixels": 1856,
+      "colors": 9,
+      "pixelSha256": "978bcba99097459752e4c1388989012f7ea2107aae04655a72dae5b9cd1b8b84"
+    },
+    {
+      "id": "street-stepping-stones-winter",
+      "bounds": {
+        "x": 15,
+        "y": 29,
+        "width": 67,
+        "height": 55
+      },
+      "opaquePixels": 1856,
+      "colors": 9,
+      "pixelSha256": "1e07ddd41dbc6198f07b300217daaef7d44713f09495459a4c6d51cdf87ca416"
+    },
+    {
+      "id": "street-gate-panel-spring",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2428,
+      "colors": 12,
+      "pixelSha256": "61bbf61edca720ceeae2bca58ccfc93a71e5dcced729a11385f5c33cebc94ec1"
+    },
+    {
+      "id": "street-gate-panel-summer",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2441,
+      "colors": 13,
+      "pixelSha256": "4f140c19721ed5847ef28b8db124584d73b366f0bb42298ba187c20c9f42feb4"
+    },
+    {
+      "id": "street-gate-panel-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2428,
+      "colors": 13,
+      "pixelSha256": "cd0f2551b8d5df5e7b6d35fa9b788063da2557409df67a6b00c2978d471bf6ee"
+    },
+    {
+      "id": "street-gate-panel-winter",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2510,
+      "colors": 12,
+      "pixelSha256": "77868d8e22bb6a6c83bc69a32e3703ac7218f4b6ef31ebbba9b2f888b4c6654b"
+    },
+    {
+      "id": "street-fence-corner-spring",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 64,
+        "height": 63
+      },
+      "opaquePixels": 2355,
+      "colors": 10,
+      "pixelSha256": "cd750aad6379ee4038e70c55fb6026cf38d6509b146183e88f95fddca43bbd5f"
+    },
+    {
+      "id": "street-fence-corner-summer",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 64,
+        "height": 63
+      },
+      "opaquePixels": 2411,
+      "colors": 12,
+      "pixelSha256": "e86a55f134139f7f5c84c32df5a3f88d60ac189f5c28eb821b311b629660df71"
+    },
+    {
+      "id": "street-fence-corner-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 64,
+        "height": 63
+      },
+      "opaquePixels": 2366,
+      "colors": 9,
+      "pixelSha256": "ac11fe5d8caf663e90fa6b76e526a86fc44d9a9284c055cca10196a2a1c36836"
+    },
+    {
+      "id": "street-fence-corner-winter",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 64,
+        "height": 63
+      },
+      "opaquePixels": 2385,
+      "colors": 8,
+      "pixelSha256": "5140c19283a5d29ee1c1ce55d72c314095aaf91a9fa12d7a7665ee335434906a"
+    },
+    {
+      "id": "street-firewood-rack-spring",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2668,
+      "colors": 10,
+      "pixelSha256": "f733dc9c091c10d3e9c10ee334a4f7e20866b6a354f79c1a408046bed1516f2c"
+    },
+    {
+      "id": "street-firewood-rack-summer",
+      "bounds": {
+        "x": 18,
+        "y": 30,
+        "width": 61,
+        "height": 54
+      },
+      "opaquePixels": 2428,
+      "colors": 11,
+      "pixelSha256": "e3861976898ce079b5685a4561d17651060bbd7a58e9f2c692164a9ad1a9b060"
+    },
+    {
+      "id": "street-firewood-rack-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2978,
+      "colors": 11,
+      "pixelSha256": "3e7be78b211bcf3ee3a9ceff886f02a424d91b9438c36d58799d7331f54e8f7c"
+    },
+    {
+      "id": "street-firewood-rack-winter",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2825,
+      "colors": 11,
+      "pixelSha256": "2919b59f548cbed3924fc4189a3f4b70a159d6ee8552013ed3b0f2fcb1099602"
+    },
+    {
+      "id": "street-recycling-station-spring",
+      "bounds": {
+        "x": 18,
+        "y": 29,
+        "width": 61,
+        "height": 55
+      },
+      "opaquePixels": 2403,
+      "colors": 12,
+      "pixelSha256": "ab42ace7121ae7416ce149710d1cf092cb4f44633460936988710089eb854454"
+    },
+    {
+      "id": "street-recycling-station-summer",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2501,
+      "colors": 12,
+      "pixelSha256": "f2bba9cea7a9196c6e4a158041ab64c3bfa77de0f3747f0277365d9c4ac32874"
+    },
+    {
+      "id": "street-recycling-station-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 2488,
+      "colors": 15,
+      "pixelSha256": "2ad0502475521173fd554a23ef9f443b8a33f6a6577379bb9f2371d707caae89"
+    },
+    {
+      "id": "street-recycling-station-winter",
+      "bounds": {
+        "x": 18,
+        "y": 31,
+        "width": 61,
+        "height": 53
+      },
+      "opaquePixels": 2435,
+      "colors": 12,
+      "pixelSha256": "3faf1e8d9faa48bc3e5714da96d17fab7bbd841194b6f4b09586ef2685ba2340"
+    },
+    {
+      "id": "street-street-drain-spring",
+      "bounds": {
+        "x": 16,
+        "y": 38,
+        "width": 67,
+        "height": 46
+      },
+      "opaquePixels": 2491,
+      "colors": 10,
+      "pixelSha256": "c819db3ad2886713b52a1624c0c36e7d517f279767c7ba8a70194da2f206688e"
+    },
+    {
+      "id": "street-street-drain-summer",
+      "bounds": {
+        "x": 17,
+        "y": 38,
+        "width": 66,
+        "height": 46
+      },
+      "opaquePixels": 2474,
+      "colors": 7,
+      "pixelSha256": "10c2017597731ebe43ad0856e36ad3804cbeb8e36d62207f1da54c2f15945f3e"
+    },
+    {
+      "id": "street-street-drain-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 38,
+        "width": 66,
+        "height": 46
+      },
+      "opaquePixels": 2474,
+      "colors": 12,
+      "pixelSha256": "4807cf1a79f56e93d0371a92d59f2e19cbe89ae1dfc87c8691ab27d4c70b95fe"
+    },
+    {
+      "id": "street-street-drain-winter",
+      "bounds": {
+        "x": 17,
+        "y": 38,
+        "width": 66,
+        "height": 46
+      },
+      "opaquePixels": 2474,
+      "colors": 7,
+      "pixelSha256": "9a59d51ce978374509362e293749aeebd54feda557bd7486cc0a33431faf7897"
+    },
+    {
+      "id": "street-watering-trough-spring",
+      "bounds": {
+        "x": 17,
+        "y": 31,
+        "width": 64,
+        "height": 53
+      },
+      "opaquePixels": 2346,
+      "colors": 12,
+      "pixelSha256": "795abd76bdb5891a028ad35af132d4a35574b2b9be1432c29b4f508cb238cb16"
+    },
+    {
+      "id": "street-watering-trough-summer",
+      "bounds": {
+        "x": 17,
+        "y": 20,
+        "width": 64,
+        "height": 64
+      },
+      "opaquePixels": 2451,
+      "colors": 11,
+      "pixelSha256": "1f70190a5c0b1034e59447c8b1f91e4b6c8f46ad4fb8b10ae181dde944de75d9"
+    },
+    {
+      "id": "street-watering-trough-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 26,
+        "width": 64,
+        "height": 58
+      },
+      "opaquePixels": 2327,
+      "colors": 11,
+      "pixelSha256": "2ad54379c10dfb5add633ab9d191522ffc7befdc77a135e4935d524ebdf3b8dd"
+    },
+    {
+      "id": "street-watering-trough-winter",
+      "bounds": {
+        "x": 17,
+        "y": 36,
+        "width": 64,
+        "height": 48
+      },
+      "opaquePixels": 2299,
+      "colors": 8,
+      "pixelSha256": "09284efea43a752f5bc2a641263e65dfe3e7fff7278aee0a6d9c9ae078d930d7"
+    },
+    {
+      "id": "street-patio-parasol-spring",
+      "bounds": {
+        "x": 14,
+        "y": 11,
+        "width": 69,
+        "height": 73
+      },
+      "opaquePixels": 2027,
+      "colors": 12,
+      "pixelSha256": "b0f69f3fa9b25dd05d8ca356cf7964777b8329107012baa561ac4a1095aecaac"
+    },
+    {
+      "id": "street-patio-parasol-summer",
+      "bounds": {
+        "x": 14,
+        "y": 11,
+        "width": 69,
+        "height": 73
+      },
+      "opaquePixels": 2006,
+      "colors": 10,
+      "pixelSha256": "89265f58bc6ec61df04a05eb83803c80c5de802d56729f7f5daa0f3731758975"
+    },
+    {
+      "id": "street-patio-parasol-autumn",
+      "bounds": {
+        "x": 14,
+        "y": 11,
+        "width": 69,
+        "height": 73
+      },
+      "opaquePixels": 2021,
+      "colors": 11,
+      "pixelSha256": "4a9c066961f25fc365de0e543c28eee2dfa880ba0350fedb7a6c1f3e3f2ded7a"
+    },
+    {
+      "id": "street-patio-parasol-winter",
+      "bounds": {
+        "x": 18,
+        "y": 12,
+        "width": 61,
+        "height": 72
+      },
+      "opaquePixels": 1267,
+      "colors": 8,
+      "pixelSha256": "9ad563e64537e0491292fbf72d96850b938f150f3a2b15b8b36204e15c5625aa"
+    },
+    {
+      "id": "street-weather-vane-spring",
+      "bounds": {
+        "x": 18,
+        "y": 9,
+        "width": 66,
+        "height": 75
+      },
+      "opaquePixels": 1499,
+      "colors": 16,
+      "pixelSha256": "aac526e4a0d35567eeb3b2c2f1a0d3f499c67b9f678334cdb8a793192009f364"
+    },
+    {
+      "id": "street-weather-vane-summer",
+      "bounds": {
+        "x": 18,
+        "y": 9,
+        "width": 66,
+        "height": 75
+      },
+      "opaquePixels": 1530,
+      "colors": 16,
+      "pixelSha256": "8c54caa6f54fa8e64960be8d2b29855bba1c7868a2f2eb6fd493cfe719467798"
+    },
+    {
+      "id": "street-weather-vane-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 9,
+        "width": 66,
+        "height": 75
+      },
+      "opaquePixels": 1585,
+      "colors": 16,
+      "pixelSha256": "84ff92428dca9881b2fd70f1d8646d8175d52bd7e2ce97f1882b95de6cb8dcfd"
+    },
+    {
+      "id": "street-weather-vane-winter",
+      "bounds": {
+        "x": 18,
+        "y": 9,
+        "width": 66,
+        "height": 75
+      },
+      "opaquePixels": 1586,
+      "colors": 16,
+      "pixelSha256": "148bc5cd0cb70ffc46685aa0d3cef810e75ab9c2e0a4875f1c68b9fc168ec1b9"
+    }
+  ],
+  "limitations": [
+    "Programmatic checks do not replace visual review.",
+    "Catalog framing is not an in-game size contract.",
+    "No game integration, economics or save changes."
+  ]
+}

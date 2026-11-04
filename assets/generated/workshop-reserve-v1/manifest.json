@@ -1,0 +1,7793 @@
+{
+  "schemaVersion": 1,
+  "packId": "workshop-reserve-v1",
+  "titleZh": "咖啡烘焙工坊储备",
+  "titleEn": "Coffee and Bakery Workshop Reserve",
+  "status": "reserve",
+  "integrated": false,
+  "generator": "scripts/build-reserve-library.mjs",
+  "source": "scripts/reserve-workshop-art.mjs",
+  "provenance": "Original programmatically drawn pixel artwork; no external art or model-generated images.",
+  "density": 2,
+  "alpha": "binary",
+  "palette": {
+    "source": "docs/art-grid/palette.json"
+  },
+  "anchorConvention": "Normalized coordinates; common baseline at art pixel (48,90). Canvas is a catalog frame, not a production placement contract.",
+  "counts": {
+    "sprites": 192,
+    "baseShapes": 48,
+    "variantsPerBase": 4,
+    "categories": 6
+  },
+  "categories": [
+    "workshop-coffee",
+    "workshop-roasting",
+    "workshop-preparation",
+    "workshop-molds",
+    "workshop-ingredients",
+    "workshop-organization"
+  ],
+  "categoryLabels": [
+    {
+      "id": "workshop-coffee",
+      "nameZh": "咖啡萃取",
+      "nameEn": "Coffee extraction"
+    },
+    {
+      "id": "workshop-roasting",
+      "nameZh": "烘豆工坊",
+      "nameEn": "Roasting workshop"
+    },
+    {
+      "id": "workshop-preparation",
+      "nameZh": "面点工具",
+      "nameEn": "Pastry preparation"
+    },
+    {
+      "id": "workshop-molds",
+      "nameZh": "模具烤具",
+      "nameEn": "Molds and bakeware"
+    },
+    {
+      "id": "workshop-ingredients",
+      "nameZh": "备料食材",
+      "nameEn": "Prepared ingredients"
+    },
+    {
+      "id": "workshop-organization",
+      "nameZh": "计量与整理",
+      "nameEn": "Measuring and organization"
+    }
+  ],
+  "seasons": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+  ],
+  "variants": [
+    {
+      "id": "spring",
+      "nameZh": "春日",
+      "nameEn": "Spring"
+    },
+    {
+      "id": "summer",
+      "nameZh": "夏日",
+      "nameEn": "Summer"
+    },
+    {
+      "id": "autumn",
+      "nameZh": "秋日",
+      "nameEn": "Autumn"
+    },
+    {
+      "id": "winter",
+      "nameZh": "冬日",
+      "nameEn": "Winter"
+    }
+  ],
+  "baseShapes": [
+    {
+      "id": "workshop-burr-grinder",
+      "nameZh": "锥刀磨豆机",
+      "nameEn": "Burr grinder",
+      "category": "workshop-coffee",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-milk-pitcher",
+      "nameZh": "拉花缸",
+      "nameEn": "Milk pitcher",
+      "category": "workshop-coffee",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-tamper",
+      "nameZh": "压粉器",
+      "nameEn": "Coffee tamper",
+      "category": "workshop-coffee",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-knock-box",
+      "nameZh": "敲渣盒",
+      "nameEn": "Knock box",
+      "category": "workshop-coffee",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-espresso-scale",
+      "nameZh": "萃取电子秤",
+      "nameEn": "Espresso scale",
+      "category": "workshop-coffee",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-syphon",
+      "nameZh": "虹吸咖啡器",
+      "nameEn": "Coffee syphon",
+      "category": "workshop-coffee",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-moka-pot",
+      "nameZh": "八角摩卡壶",
+      "nameEn": "Octagonal moka pot",
+      "category": "workshop-coffee",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-coldbrew-tower",
+      "nameZh": "冷萃滴滤塔",
+      "nameEn": "Cold brew tower",
+      "category": "workshop-coffee",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-drum-roaster",
+      "nameZh": "滚筒烘豆机",
+      "nameEn": "Drum roaster",
+      "category": "workshop-roasting",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-cooling-sieve",
+      "nameZh": "咖啡豆冷却筛",
+      "nameEn": "Bean cooling sieve",
+      "category": "workshop-roasting",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-green-bean-sack",
+      "nameZh": "生豆麻袋",
+      "nameEn": "Green bean sack",
+      "category": "workshop-roasting",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-roast-tray",
+      "nameZh": "分级焙豆盘",
+      "nameEn": "Roast grading tray",
+      "category": "workshop-roasting",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-bean-scoop",
+      "nameZh": "咖啡豆铲",
+      "nameEn": "Bean scoop",
+      "category": "workshop-roasting",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-sample-trier",
+      "nameZh": "烘豆取样器",
+      "nameEn": "Roast sample trier",
+      "category": "workshop-roasting",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-bean-sorting-board",
+      "nameZh": "生豆分选板",
+      "nameEn": "Bean sorting board",
+      "category": "workshop-roasting",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-chaff-bin",
+      "nameZh": "银皮收集箱",
+      "nameEn": "Chaff collector",
+      "category": "workshop-roasting",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-rolling-pin",
+      "nameZh": "擀面杖",
+      "nameEn": "Rolling pin",
+      "category": "workshop-preparation",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-balloon-whisk",
+      "nameZh": "球形打蛋器",
+      "nameEn": "Balloon whisk",
+      "category": "workshop-preparation",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-stand-mixer",
+      "nameZh": "立式厨师机",
+      "nameEn": "Stand mixer",
+      "category": "workshop-preparation",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-dough-scraper",
+      "nameZh": "切面刮板",
+      "nameEn": "Dough scraper",
+      "category": "workshop-preparation",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-pastry-brush",
+      "nameZh": "糕点刷",
+      "nameEn": "Pastry brush",
+      "category": "workshop-preparation",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-flour-sifter",
+      "nameZh": "手摇面粉筛",
+      "nameEn": "Flour sifter",
+      "category": "workshop-preparation",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-piping-bag",
+      "nameZh": "裱花袋",
+      "nameEn": "Piping bag",
+      "category": "workshop-preparation",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-dough-docker",
+      "nameZh": "面团打孔滚轮",
+      "nameEn": "Dough docker",
+      "category": "workshop-preparation",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-loaf-mold",
+      "nameZh": "长方吐司模",
+      "nameEn": "Loaf mold",
+      "category": "workshop-molds",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-muffin-pan",
+      "nameZh": "玛芬连模",
+      "nameEn": "Muffin pan",
+      "category": "workshop-molds",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-bundt-mold",
+      "nameZh": "环形咕咕霍夫模",
+      "nameEn": "Bundt mold",
+      "category": "workshop-molds",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-proofing-basket",
+      "nameZh": "藤纹发酵篮",
+      "nameEn": "Proofing basket",
+      "category": "workshop-molds",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-cooling-rack",
+      "nameZh": "方格冷却架",
+      "nameEn": "Cooling rack",
+      "category": "workshop-molds",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-baking-sheet",
+      "nameZh": "浅沿烤盘",
+      "nameEn": "Baking sheet",
+      "category": "workshop-molds",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-springform-pan",
+      "nameZh": "活底圆模",
+      "nameEn": "Springform pan",
+      "category": "workshop-molds",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-cookie-cutters",
+      "nameZh": "压饼模具组",
+      "nameEn": "Cookie cutters",
+      "category": "workshop-molds",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-flour-sack",
+      "nameZh": "折口面粉袋",
+      "nameEn": "Flour sack",
+      "category": "workshop-ingredients",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-butter-dish",
+      "nameZh": "切块黄油碟",
+      "nameEn": "Butter dish",
+      "category": "workshop-ingredients",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-dough-ball",
+      "nameZh": "醒发面团",
+      "nameEn": "Resting dough",
+      "category": "workshop-ingredients",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-yeast-bottle",
+      "nameZh": "酵母培养瓶",
+      "nameEn": "Yeast culture bottle",
+      "category": "workshop-ingredients",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-egg-crate",
+      "nameZh": "鸡蛋分格盒",
+      "nameEn": "Egg crate",
+      "category": "workshop-ingredients",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-cocoa-canister",
+      "nameZh": "可可原料筒",
+      "nameEn": "Cocoa canister",
+      "category": "workshop-ingredients",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-vanilla-tubes",
+      "nameZh": "香草荚管架",
+      "nameEn": "Vanilla pod tubes",
+      "category": "workshop-ingredients",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-nut-hopper",
+      "nameZh": "坚果配料斗",
+      "nameEn": "Nut ingredient hopper",
+      "category": "workshop-ingredients",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-dial-scale",
+      "nameZh": "指针厨师秤",
+      "nameEn": "Dial kitchen scale",
+      "category": "workshop-organization",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-measuring-jug",
+      "nameZh": "刻度量杯",
+      "nameEn": "Measuring jug",
+      "category": "workshop-organization",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-measuring-spoons",
+      "nameZh": "量匙串",
+      "nameEn": "Measuring spoon set",
+      "category": "workshop-organization",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-kitchen-timer",
+      "nameZh": "机械计时器",
+      "nameEn": "Mechanical kitchen timer",
+      "category": "workshop-organization",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-thermometer",
+      "nameZh": "糖浆温度计",
+      "nameEn": "Sugar thermometer",
+      "category": "workshop-organization",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-utensil-rail",
+      "nameZh": "厨具横架",
+      "nameEn": "Utensil rail",
+      "category": "workshop-organization",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-spice-drawer",
+      "nameZh": "香料抽屉柜",
+      "nameEn": "Spice drawer cabinet",
+      "category": "workshop-organization",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    },
+    {
+      "id": "workshop-towel-roller",
+      "nameZh": "厨房布巾卷架",
+      "nameEn": "Kitchen towel roller",
+      "category": "workshop-organization",
+      "tags": [
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ]
+    }
+  ],
+  "atlas": {
+    "path": "atlas.png",
+    "width": 1152,
+    "height": 1536,
+    "columns": 12,
+    "rows": 16,
+    "cellWidth": 96,
+    "cellHeight": 96
+  },
+  "contactSheet": {
+    "path": "contact-sheet.png",
+    "width": 1344,
+    "height": 1856,
+    "columns": 12,
+    "cellWidth": 112,
+    "cellHeight": 116,
+    "labels": "1-based manifest sprite ordinal; opaque inspection background"
+  },
+  "sprites": [
+    {
+      "id": "workshop-burr-grinder-spring",
+      "nameZh": "春日·锥刀磨豆机",
+      "nameEn": "Spring Burr grinder",
+      "category": "workshop-coffee",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-burr-grinder",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-burr-grinder-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "6c41622f346d03a9bd964106998709ffd6208d73e3ad7e5f39287fff7069ba06"
+    },
+    {
+      "id": "workshop-burr-grinder-summer",
+      "nameZh": "夏日·锥刀磨豆机",
+      "nameEn": "Summer Burr grinder",
+      "category": "workshop-coffee",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-burr-grinder",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-burr-grinder-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "9f24eafc7d95a30a17f279ee29e49d86f1c7d73e51b5c915551a4469f032cbeb"
+    },
+    {
+      "id": "workshop-burr-grinder-autumn",
+      "nameZh": "秋日·锥刀磨豆机",
+      "nameEn": "Autumn Burr grinder",
+      "category": "workshop-coffee",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-burr-grinder",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-burr-grinder-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "ffbbbeb08b6c12ae0a03eb8eba323d75b1161cab8e4252d2cb4883133fa327f3"
+    },
+    {
+      "id": "workshop-burr-grinder-winter",
+      "nameZh": "冬日·锥刀磨豆机",
+      "nameEn": "Winter Burr grinder",
+      "category": "workshop-coffee",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-burr-grinder",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-burr-grinder-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f079c40c0ca17292dcec4f3c63efa169f2b2c590933f70c8840f6cfb481bdb42"
+    },
+    {
+      "id": "workshop-milk-pitcher-spring",
+      "nameZh": "春日·拉花缸",
+      "nameEn": "Spring Milk pitcher",
+      "category": "workshop-coffee",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-milk-pitcher",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-milk-pitcher-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "18ee2e0cad3fdb52612e3c1c5db11bf5844af7ac9ea0b43e1c37d1b710e37b94"
+    },
+    {
+      "id": "workshop-milk-pitcher-summer",
+      "nameZh": "夏日·拉花缸",
+      "nameEn": "Summer Milk pitcher",
+      "category": "workshop-coffee",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-milk-pitcher",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-milk-pitcher-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "d5acc29a5c56ddd7886021f5d32f3cf9ad0322205c42342ce9f1da11e18623c0"
+    },
+    {
+      "id": "workshop-milk-pitcher-autumn",
+      "nameZh": "秋日·拉花缸",
+      "nameEn": "Autumn Milk pitcher",
+      "category": "workshop-coffee",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-milk-pitcher",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-milk-pitcher-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "1a4093b4f79d6d5aa34d64cd4951a463de0ed4a38f05eb12178b4f2c7b5ad2b7"
+    },
+    {
+      "id": "workshop-milk-pitcher-winter",
+      "nameZh": "冬日·拉花缸",
+      "nameEn": "Winter Milk pitcher",
+      "category": "workshop-coffee",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-milk-pitcher",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-milk-pitcher-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "25bca80441d4c9e2802f1f74c2ab6f053db958d9b77c34786511a4108315862c"
+    },
+    {
+      "id": "workshop-tamper-spring",
+      "nameZh": "春日·压粉器",
+      "nameEn": "Spring Coffee tamper",
+      "category": "workshop-coffee",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-tamper",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-tamper-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f1293df7d8d1855dae2ed4685ba1d0f245f31cb5080c0b37e18ea30b67071182"
+    },
+    {
+      "id": "workshop-tamper-summer",
+      "nameZh": "夏日·压粉器",
+      "nameEn": "Summer Coffee tamper",
+      "category": "workshop-coffee",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-tamper",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-tamper-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "370894d3bbf9b654382ed09c4f1b900f69cb8dc0788818048258bd43a203567d"
+    },
+    {
+      "id": "workshop-tamper-autumn",
+      "nameZh": "秋日·压粉器",
+      "nameEn": "Autumn Coffee tamper",
+      "category": "workshop-coffee",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-tamper",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-tamper-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "a5aac978f27da635614c7c4ea509e100355167350d1b210eefc18f21bf7402a9"
+    },
+    {
+      "id": "workshop-tamper-winter",
+      "nameZh": "冬日·压粉器",
+      "nameEn": "Winter Coffee tamper",
+      "category": "workshop-coffee",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-tamper",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-tamper-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 0,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "c9ad22637ba42ee9f336025a64835db5b483ccad66bd1c63ab88a9d3ed9dc81c"
+    },
+    {
+      "id": "workshop-knock-box-spring",
+      "nameZh": "春日·敲渣盒",
+      "nameEn": "Spring Knock box",
+      "category": "workshop-coffee",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-knock-box",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-knock-box-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "4fc3d59bc2fb2fb8b617d58a433f50e9328ffe5bfb0b6ccc80d3a48279ea2981"
+    },
+    {
+      "id": "workshop-knock-box-summer",
+      "nameZh": "夏日·敲渣盒",
+      "nameEn": "Summer Knock box",
+      "category": "workshop-coffee",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-knock-box",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-knock-box-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "eee1a34d9d8e2808e971f932ee2cc1296be50bfac4fbc39d968bdb987f74ce04"
+    },
+    {
+      "id": "workshop-knock-box-autumn",
+      "nameZh": "秋日·敲渣盒",
+      "nameEn": "Autumn Knock box",
+      "category": "workshop-coffee",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-knock-box",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-knock-box-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "b6dc61ffaaef3ea4eafa4cd327d7304b401e9d673d9b2f862343db5aa44a8a25"
+    },
+    {
+      "id": "workshop-knock-box-winter",
+      "nameZh": "冬日·敲渣盒",
+      "nameEn": "Winter Knock box",
+      "category": "workshop-coffee",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-knock-box",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-knock-box-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "e0d285fa8fedff454f28fa75b0a97f7a420803ba65e78bf09eec48ad303514cb"
+    },
+    {
+      "id": "workshop-espresso-scale-spring",
+      "nameZh": "春日·萃取电子秤",
+      "nameEn": "Spring Espresso scale",
+      "category": "workshop-coffee",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-espresso-scale",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-espresso-scale-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "2304281849107124e660f77c78f63f091c056b5c46d09271e4aa9cdc822d3f4c"
+    },
+    {
+      "id": "workshop-espresso-scale-summer",
+      "nameZh": "夏日·萃取电子秤",
+      "nameEn": "Summer Espresso scale",
+      "category": "workshop-coffee",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-espresso-scale",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-espresso-scale-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "01d1eea541687f3f0de6c05dba9abe6fecd2678e156161ff363f0496789c463f"
+    },
+    {
+      "id": "workshop-espresso-scale-autumn",
+      "nameZh": "秋日·萃取电子秤",
+      "nameEn": "Autumn Espresso scale",
+      "category": "workshop-coffee",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-espresso-scale",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-espresso-scale-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "e96eec2f1a0a7b9feb6b5ab8fc8cffe4229d2ad1a3bab4fb41f464d4e3f22570"
+    },
+    {
+      "id": "workshop-espresso-scale-winter",
+      "nameZh": "冬日·萃取电子秤",
+      "nameEn": "Winter Espresso scale",
+      "category": "workshop-coffee",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-espresso-scale",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-espresso-scale-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "1649dbc6ccc9350982e2f71a9584990a1edd1f1aa23c4885e3c8fd095658ed76"
+    },
+    {
+      "id": "workshop-syphon-spring",
+      "nameZh": "春日·虹吸咖啡器",
+      "nameEn": "Spring Coffee syphon",
+      "category": "workshop-coffee",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-syphon",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-syphon-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "9c3de33697b2519f52814ed4316bc9f77cb1472676f7f37c0c86b61ea15e990d"
+    },
+    {
+      "id": "workshop-syphon-summer",
+      "nameZh": "夏日·虹吸咖啡器",
+      "nameEn": "Summer Coffee syphon",
+      "category": "workshop-coffee",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-syphon",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-syphon-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f39277ca5afbff59c7d05055e5e823ede90d231d5cdaf408c0e4d81574e14cd1"
+    },
+    {
+      "id": "workshop-syphon-autumn",
+      "nameZh": "秋日·虹吸咖啡器",
+      "nameEn": "Autumn Coffee syphon",
+      "category": "workshop-coffee",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-syphon",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-syphon-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "216c6122d109759c3d8475fdf07f2bda1828c1047389611435b804e1c266ca66"
+    },
+    {
+      "id": "workshop-syphon-winter",
+      "nameZh": "冬日·虹吸咖啡器",
+      "nameEn": "Winter Coffee syphon",
+      "category": "workshop-coffee",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-syphon",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-syphon-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 96,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "dd386f93471a30b28b514eafbd5a1bdc927f5fb69e8eb277e5c362819b7f89b3"
+    },
+    {
+      "id": "workshop-moka-pot-spring",
+      "nameZh": "春日·八角摩卡壶",
+      "nameEn": "Spring Octagonal moka pot",
+      "category": "workshop-coffee",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-moka-pot",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-moka-pot-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 192,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "5bd04336d634a3d11c0eb9c5218cb2df2060e08d06dc2bf4ba149f96950cb8af"
+    },
+    {
+      "id": "workshop-moka-pot-summer",
+      "nameZh": "夏日·八角摩卡壶",
+      "nameEn": "Summer Octagonal moka pot",
+      "category": "workshop-coffee",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-moka-pot",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-moka-pot-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 192,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "5cbe161c369ad913346b1fbeb5049728854d6ed6f51b9baa72b95ee27ec9b12f"
+    },
+    {
+      "id": "workshop-moka-pot-autumn",
+      "nameZh": "秋日·八角摩卡壶",
+      "nameEn": "Autumn Octagonal moka pot",
+      "category": "workshop-coffee",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-moka-pot",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-moka-pot-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 192,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "51a783edcb06c458ba536b85af3fa56c3dfd7578789022982a253c4f02bff6c0"
+    },
+    {
+      "id": "workshop-moka-pot-winter",
+      "nameZh": "冬日·八角摩卡壶",
+      "nameEn": "Winter Octagonal moka pot",
+      "category": "workshop-coffee",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-moka-pot",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-moka-pot-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 192,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "87c83e622af9da6801b5911a6065a6071974115b009aeb71841593d9758a3385"
+    },
+    {
+      "id": "workshop-coldbrew-tower-spring",
+      "nameZh": "春日·冷萃滴滤塔",
+      "nameEn": "Spring Cold brew tower",
+      "category": "workshop-coffee",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-coldbrew-tower",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-coldbrew-tower-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 192,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "6ef9075f597968eb1971b4a334adbef414686814490f1887b98f3531ad36951f"
+    },
+    {
+      "id": "workshop-coldbrew-tower-summer",
+      "nameZh": "夏日·冷萃滴滤塔",
+      "nameEn": "Summer Cold brew tower",
+      "category": "workshop-coffee",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-coldbrew-tower",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-coldbrew-tower-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 192,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "e181343eccdf82500917322558d7836e814e89b6412ac756827ad8877f959b3b"
+    },
+    {
+      "id": "workshop-coldbrew-tower-autumn",
+      "nameZh": "秋日·冷萃滴滤塔",
+      "nameEn": "Autumn Cold brew tower",
+      "category": "workshop-coffee",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-coldbrew-tower",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-coldbrew-tower-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 192,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "e12dd62faf08efcd465fd4bf61ef4447994d99aeaa5396d92547f622a3d2ed22"
+    },
+    {
+      "id": "workshop-coldbrew-tower-winter",
+      "nameZh": "冬日·冷萃滴滤塔",
+      "nameEn": "Winter Cold brew tower",
+      "category": "workshop-coffee",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-coldbrew-tower",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-coffee",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-coldbrew-tower-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 192,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "25b33f20de64969cdb0f37e297a3616f84f8eecc9fa095c64152739dca8abc92"
+    },
+    {
+      "id": "workshop-drum-roaster-spring",
+      "nameZh": "春日·滚筒烘豆机",
+      "nameEn": "Spring Drum roaster",
+      "category": "workshop-roasting",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-drum-roaster",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-drum-roaster-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 192,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "3086ac2f2ce34e16512adb0eb6ecefccee1ff8a74974606384f42420d78e3f29"
+    },
+    {
+      "id": "workshop-drum-roaster-summer",
+      "nameZh": "夏日·滚筒烘豆机",
+      "nameEn": "Summer Drum roaster",
+      "category": "workshop-roasting",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-drum-roaster",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-drum-roaster-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 192,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "de35d1878d631f905ec4f6dce30839086bad03db44617489c71c1d1a90b62cd9"
+    },
+    {
+      "id": "workshop-drum-roaster-autumn",
+      "nameZh": "秋日·滚筒烘豆机",
+      "nameEn": "Autumn Drum roaster",
+      "category": "workshop-roasting",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-drum-roaster",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-drum-roaster-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 192,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "eb4805363629c04b995f396f87f58cb5e6e7abb5c316fe1928c7fed65ae74eb2"
+    },
+    {
+      "id": "workshop-drum-roaster-winter",
+      "nameZh": "冬日·滚筒烘豆机",
+      "nameEn": "Winter Drum roaster",
+      "category": "workshop-roasting",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-drum-roaster",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-drum-roaster-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 192,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "4db219a04c80c46c6047cbe7c9ca88ac8b5d68c95d2702cd40f009b51c33009c"
+    },
+    {
+      "id": "workshop-cooling-sieve-spring",
+      "nameZh": "春日·咖啡豆冷却筛",
+      "nameEn": "Spring Bean cooling sieve",
+      "category": "workshop-roasting",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-cooling-sieve",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cooling-sieve-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 288,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "78271b0b5e810ea07694ec6b955e0c4e3009a550ad733213d2af38b6ab52b5ea"
+    },
+    {
+      "id": "workshop-cooling-sieve-summer",
+      "nameZh": "夏日·咖啡豆冷却筛",
+      "nameEn": "Summer Bean cooling sieve",
+      "category": "workshop-roasting",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-cooling-sieve",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cooling-sieve-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 288,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "1606194419b7a0a4043266ea1af4305077d2adf0c42bacbac3eb652950965ef4"
+    },
+    {
+      "id": "workshop-cooling-sieve-autumn",
+      "nameZh": "秋日·咖啡豆冷却筛",
+      "nameEn": "Autumn Bean cooling sieve",
+      "category": "workshop-roasting",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-cooling-sieve",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cooling-sieve-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 288,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "2c2e3349bd127fcd5919aedca03c824a616211e360dee82e33814bc1de4d8ad7"
+    },
+    {
+      "id": "workshop-cooling-sieve-winter",
+      "nameZh": "冬日·咖啡豆冷却筛",
+      "nameEn": "Winter Bean cooling sieve",
+      "category": "workshop-roasting",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-cooling-sieve",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cooling-sieve-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 288,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "912f9872371b93a97032dcc59b5de6abe0e812f6be22bb59372f995732a2525b"
+    },
+    {
+      "id": "workshop-green-bean-sack-spring",
+      "nameZh": "春日·生豆麻袋",
+      "nameEn": "Spring Green bean sack",
+      "category": "workshop-roasting",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-green-bean-sack",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-green-bean-sack-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 288,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "426e88a96a7636994bb365a4046bb72319033e5392bb68a0d37b786d9419c2c7"
+    },
+    {
+      "id": "workshop-green-bean-sack-summer",
+      "nameZh": "夏日·生豆麻袋",
+      "nameEn": "Summer Green bean sack",
+      "category": "workshop-roasting",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-green-bean-sack",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-green-bean-sack-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 288,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "7a9e0d66db9b1074e06dc608a2b2f715fa5340c1729d7cd2f4d85821ed75d916"
+    },
+    {
+      "id": "workshop-green-bean-sack-autumn",
+      "nameZh": "秋日·生豆麻袋",
+      "nameEn": "Autumn Green bean sack",
+      "category": "workshop-roasting",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-green-bean-sack",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-green-bean-sack-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 288,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "3bcc4cdfd6349e3c23689b3ae19f74a077ece0377b993a7d98dc05aafcee865c"
+    },
+    {
+      "id": "workshop-green-bean-sack-winter",
+      "nameZh": "冬日·生豆麻袋",
+      "nameEn": "Winter Green bean sack",
+      "category": "workshop-roasting",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-green-bean-sack",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-green-bean-sack-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 288,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "bd8a7776d935271bacf6da7ab6cca72c0384a0d9c7e105badb689e9bbc0163d7"
+    },
+    {
+      "id": "workshop-roast-tray-spring",
+      "nameZh": "春日·分级焙豆盘",
+      "nameEn": "Spring Roast grading tray",
+      "category": "workshop-roasting",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-roast-tray",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-roast-tray-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 288,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "34ce808235f732320ff6a65a67bc6629f030f36f9708001e28990f10dc02b22f"
+    },
+    {
+      "id": "workshop-roast-tray-summer",
+      "nameZh": "夏日·分级焙豆盘",
+      "nameEn": "Summer Roast grading tray",
+      "category": "workshop-roasting",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-roast-tray",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-roast-tray-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 288,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "8a6e72ebf0eaf5e9a0d3c81eafacd4049dc872c13e73a491c6c9c0276503c50d"
+    },
+    {
+      "id": "workshop-roast-tray-autumn",
+      "nameZh": "秋日·分级焙豆盘",
+      "nameEn": "Autumn Roast grading tray",
+      "category": "workshop-roasting",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-roast-tray",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-roast-tray-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 288,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "8341ebf8e6f4c357e4840d87749de386f1dd164c987cc52391f5e85fd64f062c"
+    },
+    {
+      "id": "workshop-roast-tray-winter",
+      "nameZh": "冬日·分级焙豆盘",
+      "nameEn": "Winter Roast grading tray",
+      "category": "workshop-roasting",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-roast-tray",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-roast-tray-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 288,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "dbfcc52612bb3e84ca5cde45df231dcafce63f2d9d32a845da93041c0ae2ebb9"
+    },
+    {
+      "id": "workshop-bean-scoop-spring",
+      "nameZh": "春日·咖啡豆铲",
+      "nameEn": "Spring Bean scoop",
+      "category": "workshop-roasting",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-bean-scoop",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-bean-scoop-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 384,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "aaf7793d794185634aeb62126079641485ef3a181227af504ca3868a6f2b071e"
+    },
+    {
+      "id": "workshop-bean-scoop-summer",
+      "nameZh": "夏日·咖啡豆铲",
+      "nameEn": "Summer Bean scoop",
+      "category": "workshop-roasting",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-bean-scoop",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-bean-scoop-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 384,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "3fabbf1bca86d9e8f6f39aca4849fcdc4bf8a67c7b4b1118e2eb78f23fec20f3"
+    },
+    {
+      "id": "workshop-bean-scoop-autumn",
+      "nameZh": "秋日·咖啡豆铲",
+      "nameEn": "Autumn Bean scoop",
+      "category": "workshop-roasting",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-bean-scoop",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-bean-scoop-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 384,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "48b638bbd15cb40e4ed21d8a786728252fa848208bce6a4063d7b4f972aac794"
+    },
+    {
+      "id": "workshop-bean-scoop-winter",
+      "nameZh": "冬日·咖啡豆铲",
+      "nameEn": "Winter Bean scoop",
+      "category": "workshop-roasting",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-bean-scoop",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-bean-scoop-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 384,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f15d7acb16ca67950051dd28bf020cb3fa9711898a452a0a1d7edc3c5f816153"
+    },
+    {
+      "id": "workshop-sample-trier-spring",
+      "nameZh": "春日·烘豆取样器",
+      "nameEn": "Spring Roast sample trier",
+      "category": "workshop-roasting",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-sample-trier",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-sample-trier-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 384,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f14f1bef0ce4b597430df7ae086ed058cfcb2e5031bf025780ee034dc06e8bc4"
+    },
+    {
+      "id": "workshop-sample-trier-summer",
+      "nameZh": "夏日·烘豆取样器",
+      "nameEn": "Summer Roast sample trier",
+      "category": "workshop-roasting",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-sample-trier",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-sample-trier-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 384,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "38da03458656c8b931fbd5f727b5df57605f7de03f14999363c82bc101a41ff5"
+    },
+    {
+      "id": "workshop-sample-trier-autumn",
+      "nameZh": "秋日·烘豆取样器",
+      "nameEn": "Autumn Roast sample trier",
+      "category": "workshop-roasting",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-sample-trier",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-sample-trier-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 384,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "3ba23103a0156c92e703bc4db39e41352e71e581224305b8e05911538fd44dea"
+    },
+    {
+      "id": "workshop-sample-trier-winter",
+      "nameZh": "冬日·烘豆取样器",
+      "nameEn": "Winter Roast sample trier",
+      "category": "workshop-roasting",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-sample-trier",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-sample-trier-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 384,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "575988b6aec05c49357f74cf97c3513537a4afe7193f25c4c81bcfd33c4bbbf3"
+    },
+    {
+      "id": "workshop-bean-sorting-board-spring",
+      "nameZh": "春日·生豆分选板",
+      "nameEn": "Spring Bean sorting board",
+      "category": "workshop-roasting",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-bean-sorting-board",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-bean-sorting-board-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 384,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "924aca58fe79cf693074f1a4ecfed0f7d280be3f5173d4eb2dfe88fdf8d6ffc3"
+    },
+    {
+      "id": "workshop-bean-sorting-board-summer",
+      "nameZh": "夏日·生豆分选板",
+      "nameEn": "Summer Bean sorting board",
+      "category": "workshop-roasting",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-bean-sorting-board",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-bean-sorting-board-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 384,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "5031b5b593a3037fc78d9cb61a51903d6cc1e80255980651ae501b6e9e886d09"
+    },
+    {
+      "id": "workshop-bean-sorting-board-autumn",
+      "nameZh": "秋日·生豆分选板",
+      "nameEn": "Autumn Bean sorting board",
+      "category": "workshop-roasting",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-bean-sorting-board",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-bean-sorting-board-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 384,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "e8d8d15fc8f376abc005d8ceddff35dff2969d3161445bd91d44d8f912b6f0ed"
+    },
+    {
+      "id": "workshop-bean-sorting-board-winter",
+      "nameZh": "冬日·生豆分选板",
+      "nameEn": "Winter Bean sorting board",
+      "category": "workshop-roasting",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-bean-sorting-board",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-bean-sorting-board-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 384,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "472072571820b00898b64f5d8497dd00878cc5b4ae819a7857db4153ed844f0a"
+    },
+    {
+      "id": "workshop-chaff-bin-spring",
+      "nameZh": "春日·银皮收集箱",
+      "nameEn": "Spring Chaff collector",
+      "category": "workshop-roasting",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-chaff-bin",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-chaff-bin-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 480,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "d714ebb0df2748ccb9ba3193e896ee5d115305982491ab11403e1e3db32e9d10"
+    },
+    {
+      "id": "workshop-chaff-bin-summer",
+      "nameZh": "夏日·银皮收集箱",
+      "nameEn": "Summer Chaff collector",
+      "category": "workshop-roasting",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-chaff-bin",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-chaff-bin-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 480,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "02d36ad4a958405e15d319f4415cbed4140dddd72b380d42e15e10615af800f6"
+    },
+    {
+      "id": "workshop-chaff-bin-autumn",
+      "nameZh": "秋日·银皮收集箱",
+      "nameEn": "Autumn Chaff collector",
+      "category": "workshop-roasting",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-chaff-bin",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-chaff-bin-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 480,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "c7328523d59c98024795b0f7d46d1222bbbe093f7b7119571da26fd87da91a1f"
+    },
+    {
+      "id": "workshop-chaff-bin-winter",
+      "nameZh": "冬日·银皮收集箱",
+      "nameEn": "Winter Chaff collector",
+      "category": "workshop-roasting",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-chaff-bin",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-roasting",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-chaff-bin-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 480,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "9832994cbaccaa6843642eba2a71b15264b81d64eee518c10ebc9f2816afe19d"
+    },
+    {
+      "id": "workshop-rolling-pin-spring",
+      "nameZh": "春日·擀面杖",
+      "nameEn": "Spring Rolling pin",
+      "category": "workshop-preparation",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-rolling-pin",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-rolling-pin-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 480,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "22b74ab30d29395da4997b54efd9c80567a8f4985e164d5f88f8352f31a77c38"
+    },
+    {
+      "id": "workshop-rolling-pin-summer",
+      "nameZh": "夏日·擀面杖",
+      "nameEn": "Summer Rolling pin",
+      "category": "workshop-preparation",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-rolling-pin",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-rolling-pin-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 480,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "3e9191a0b6e8d08c3162bf6a6989eff33763b36ba6175dc293d16a54d584af1e"
+    },
+    {
+      "id": "workshop-rolling-pin-autumn",
+      "nameZh": "秋日·擀面杖",
+      "nameEn": "Autumn Rolling pin",
+      "category": "workshop-preparation",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-rolling-pin",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-rolling-pin-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 480,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "a2b71d67aa13f17094cdf3e9c0393a14fbee06f43f574cbce6f939e738311eee"
+    },
+    {
+      "id": "workshop-rolling-pin-winter",
+      "nameZh": "冬日·擀面杖",
+      "nameEn": "Winter Rolling pin",
+      "category": "workshop-preparation",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-rolling-pin",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-rolling-pin-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 480,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "13057581e6f0cf59a4874f29cd314f9d67a947b2199a448a334aebe3d0cadbbc"
+    },
+    {
+      "id": "workshop-balloon-whisk-spring",
+      "nameZh": "春日·球形打蛋器",
+      "nameEn": "Spring Balloon whisk",
+      "category": "workshop-preparation",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-balloon-whisk",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-balloon-whisk-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 480,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "dcf715fd876f3304e8c3c4957b37799eba0271aca6bb6e6fecf564ed8f4eeab3"
+    },
+    {
+      "id": "workshop-balloon-whisk-summer",
+      "nameZh": "夏日·球形打蛋器",
+      "nameEn": "Summer Balloon whisk",
+      "category": "workshop-preparation",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-balloon-whisk",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-balloon-whisk-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 480,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "b078d113cefa2322d4799b01b89ddfef8796b4104944ab02646d4c4119fd61e9"
+    },
+    {
+      "id": "workshop-balloon-whisk-autumn",
+      "nameZh": "秋日·球形打蛋器",
+      "nameEn": "Autumn Balloon whisk",
+      "category": "workshop-preparation",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-balloon-whisk",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-balloon-whisk-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 480,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "4a3afcd5343c1a9e501ddcdced050230594178b4a63e7335e0873a7bc75a63a4"
+    },
+    {
+      "id": "workshop-balloon-whisk-winter",
+      "nameZh": "冬日·球形打蛋器",
+      "nameEn": "Winter Balloon whisk",
+      "category": "workshop-preparation",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-balloon-whisk",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-balloon-whisk-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 480,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "d349ebc66df0490b3c430b8ec60d5a4d01d7c6919eb43736c857541eac13c24f"
+    },
+    {
+      "id": "workshop-stand-mixer-spring",
+      "nameZh": "春日·立式厨师机",
+      "nameEn": "Spring Stand mixer",
+      "category": "workshop-preparation",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-stand-mixer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-stand-mixer-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 576,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "750d8ce988a0a0a4ee7aa0591dabaa7213d30ae9b608502f41561662391ec4f8"
+    },
+    {
+      "id": "workshop-stand-mixer-summer",
+      "nameZh": "夏日·立式厨师机",
+      "nameEn": "Summer Stand mixer",
+      "category": "workshop-preparation",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-stand-mixer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-stand-mixer-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 576,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "65ffdcbd03284653ffe329b7082221e8d66d0fcc2c107f5f4d5606e68bb8eabf"
+    },
+    {
+      "id": "workshop-stand-mixer-autumn",
+      "nameZh": "秋日·立式厨师机",
+      "nameEn": "Autumn Stand mixer",
+      "category": "workshop-preparation",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-stand-mixer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-stand-mixer-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 576,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "50ba210752bd0a21aa7d3ee0d51df55655ba59dac479a499f117c77f7048f750"
+    },
+    {
+      "id": "workshop-stand-mixer-winter",
+      "nameZh": "冬日·立式厨师机",
+      "nameEn": "Winter Stand mixer",
+      "category": "workshop-preparation",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-stand-mixer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-stand-mixer-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 576,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "868adf25f78eee4b0cf89f20b49caedb6bee036cb4248bc3fdf25fc218d1d00f"
+    },
+    {
+      "id": "workshop-dough-scraper-spring",
+      "nameZh": "春日·切面刮板",
+      "nameEn": "Spring Dough scraper",
+      "category": "workshop-preparation",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-dough-scraper",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dough-scraper-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 576,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "e36cf5e8c53f4e1bccae775ce8391b84b70ae5866b0affd90c38e109c3ecd241"
+    },
+    {
+      "id": "workshop-dough-scraper-summer",
+      "nameZh": "夏日·切面刮板",
+      "nameEn": "Summer Dough scraper",
+      "category": "workshop-preparation",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-dough-scraper",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dough-scraper-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 576,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "fb0e87081c7f8a5b75c961df6b13d2044925e4cd67ab86ebc4495c3c02d2f1b6"
+    },
+    {
+      "id": "workshop-dough-scraper-autumn",
+      "nameZh": "秋日·切面刮板",
+      "nameEn": "Autumn Dough scraper",
+      "category": "workshop-preparation",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-dough-scraper",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dough-scraper-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 576,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "2946cd6c0fc82a65b5983f1766a383fd6b571f51da6c699602ce9b9e26236a11"
+    },
+    {
+      "id": "workshop-dough-scraper-winter",
+      "nameZh": "冬日·切面刮板",
+      "nameEn": "Winter Dough scraper",
+      "category": "workshop-preparation",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-dough-scraper",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dough-scraper-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 576,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "142b7ec8f1afc7dde86ad829ba2dd827e6c811b41275cfeb644ed6dabdbd3dfd"
+    },
+    {
+      "id": "workshop-pastry-brush-spring",
+      "nameZh": "春日·糕点刷",
+      "nameEn": "Spring Pastry brush",
+      "category": "workshop-preparation",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-pastry-brush",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-pastry-brush-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 576,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "cab2a9d66df6068b6cc1a7c74f2d838d571004c6801b48eb9b0e528a25859ddc"
+    },
+    {
+      "id": "workshop-pastry-brush-summer",
+      "nameZh": "夏日·糕点刷",
+      "nameEn": "Summer Pastry brush",
+      "category": "workshop-preparation",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-pastry-brush",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-pastry-brush-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 576,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "275bfb3cf0c3dd71e30b48742cb1602801f4e2cc051ec7975d5311ac1a95c2b3"
+    },
+    {
+      "id": "workshop-pastry-brush-autumn",
+      "nameZh": "秋日·糕点刷",
+      "nameEn": "Autumn Pastry brush",
+      "category": "workshop-preparation",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-pastry-brush",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-pastry-brush-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 576,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "fd5968d986a5d4c27d2997ca5d12df3f8a4d0864d814478b83543725449a1b28"
+    },
+    {
+      "id": "workshop-pastry-brush-winter",
+      "nameZh": "冬日·糕点刷",
+      "nameEn": "Winter Pastry brush",
+      "category": "workshop-preparation",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-pastry-brush",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-pastry-brush-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 576,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "2516b55ab0d87fa08e04e25b1c05b530a160cdc115dc55ec067fff848ec20832"
+    },
+    {
+      "id": "workshop-flour-sifter-spring",
+      "nameZh": "春日·手摇面粉筛",
+      "nameEn": "Spring Flour sifter",
+      "category": "workshop-preparation",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-flour-sifter",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-flour-sifter-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 672,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "d126ec4125b42797bfd0f5f680715dc842351180a133300ce6a86fd2768016d0"
+    },
+    {
+      "id": "workshop-flour-sifter-summer",
+      "nameZh": "夏日·手摇面粉筛",
+      "nameEn": "Summer Flour sifter",
+      "category": "workshop-preparation",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-flour-sifter",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-flour-sifter-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 672,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "57e760c2047ed379edd8c8bb239e5d71fd554a731215a8c02938d3a195c9a70c"
+    },
+    {
+      "id": "workshop-flour-sifter-autumn",
+      "nameZh": "秋日·手摇面粉筛",
+      "nameEn": "Autumn Flour sifter",
+      "category": "workshop-preparation",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-flour-sifter",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-flour-sifter-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 672,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f60981f09e8bc354995171056c4cf81b3250db6bb5e9238cf38a94c2fb76d97c"
+    },
+    {
+      "id": "workshop-flour-sifter-winter",
+      "nameZh": "冬日·手摇面粉筛",
+      "nameEn": "Winter Flour sifter",
+      "category": "workshop-preparation",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-flour-sifter",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-flour-sifter-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 672,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f3a4d04234281d6e37918816ef9fa1aa07171c46fd7d64db9f5ebf31ecf92f3f"
+    },
+    {
+      "id": "workshop-piping-bag-spring",
+      "nameZh": "春日·裱花袋",
+      "nameEn": "Spring Piping bag",
+      "category": "workshop-preparation",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-piping-bag",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-piping-bag-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 672,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "0966318b5b3dd865116f6f6005824787d7ba28cda46f5a727b405795c997d175"
+    },
+    {
+      "id": "workshop-piping-bag-summer",
+      "nameZh": "夏日·裱花袋",
+      "nameEn": "Summer Piping bag",
+      "category": "workshop-preparation",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-piping-bag",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-piping-bag-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 672,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "7e9023be1df8d00a2f592af2c8daa993ad2acc1d7e6c07e97c6e7837ad58ad39"
+    },
+    {
+      "id": "workshop-piping-bag-autumn",
+      "nameZh": "秋日·裱花袋",
+      "nameEn": "Autumn Piping bag",
+      "category": "workshop-preparation",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-piping-bag",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-piping-bag-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 672,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "b5936b2867b0aee319e5d2fb1ece667e2a88e5782fa3ee69d092188b313ad2e4"
+    },
+    {
+      "id": "workshop-piping-bag-winter",
+      "nameZh": "冬日·裱花袋",
+      "nameEn": "Winter Piping bag",
+      "category": "workshop-preparation",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-piping-bag",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-piping-bag-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 672,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "b719b4e97c081e0cc28bc756440d7de9038406510c775d41fbcab78e81cef6f1"
+    },
+    {
+      "id": "workshop-dough-docker-spring",
+      "nameZh": "春日·面团打孔滚轮",
+      "nameEn": "Spring Dough docker",
+      "category": "workshop-preparation",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-dough-docker",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dough-docker-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 672,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "a5904a85032e31ac0dadb41bc73f9801840605ff4719e570d46034b2b8d4c122"
+    },
+    {
+      "id": "workshop-dough-docker-summer",
+      "nameZh": "夏日·面团打孔滚轮",
+      "nameEn": "Summer Dough docker",
+      "category": "workshop-preparation",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-dough-docker",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dough-docker-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 672,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "56d5d0bb13058b951dc813e71bfe649b1a8ca57dee98649adf05c6f3baff6956"
+    },
+    {
+      "id": "workshop-dough-docker-autumn",
+      "nameZh": "秋日·面团打孔滚轮",
+      "nameEn": "Autumn Dough docker",
+      "category": "workshop-preparation",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-dough-docker",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dough-docker-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 672,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "09a168d91bb40aa5f68a7a867c9650745005efd540d26e2423a5c7f6c082a9ba"
+    },
+    {
+      "id": "workshop-dough-docker-winter",
+      "nameZh": "冬日·面团打孔滚轮",
+      "nameEn": "Winter Dough docker",
+      "category": "workshop-preparation",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-dough-docker",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-preparation",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dough-docker-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 672,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "151bffce895daa6e54dd7b27594d2f8fac28dd95f1e674b8f47d342300a7f5c3"
+    },
+    {
+      "id": "workshop-loaf-mold-spring",
+      "nameZh": "春日·长方吐司模",
+      "nameEn": "Spring Loaf mold",
+      "category": "workshop-molds",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-loaf-mold",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-loaf-mold-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 768,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "7f30981d95e75fe11de499106fef0bbb6ceb6a5dc89ed9b9bcb42b05b49da538"
+    },
+    {
+      "id": "workshop-loaf-mold-summer",
+      "nameZh": "夏日·长方吐司模",
+      "nameEn": "Summer Loaf mold",
+      "category": "workshop-molds",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-loaf-mold",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-loaf-mold-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 768,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f8f329bf18a6531423bcfc16e5893362e59190384d7e804e9decd4a81ea3a9e2"
+    },
+    {
+      "id": "workshop-loaf-mold-autumn",
+      "nameZh": "秋日·长方吐司模",
+      "nameEn": "Autumn Loaf mold",
+      "category": "workshop-molds",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-loaf-mold",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-loaf-mold-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 768,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "aa0845e9399948c887354f2fd6efbd0a72c2cd2baf1e9a493c50a318b08f29ea"
+    },
+    {
+      "id": "workshop-loaf-mold-winter",
+      "nameZh": "冬日·长方吐司模",
+      "nameEn": "Winter Loaf mold",
+      "category": "workshop-molds",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-loaf-mold",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-loaf-mold-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 768,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "3793d4c58d7e6c2686da4b8083ac82e1939571d34bd2025a47fc354b43db44a8"
+    },
+    {
+      "id": "workshop-muffin-pan-spring",
+      "nameZh": "春日·玛芬连模",
+      "nameEn": "Spring Muffin pan",
+      "category": "workshop-molds",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-muffin-pan",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-muffin-pan-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 768,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "7d31bf5a7a5bd725bfb840c8d932ba44ed119e4373c02d221f11559aa9c3e96c"
+    },
+    {
+      "id": "workshop-muffin-pan-summer",
+      "nameZh": "夏日·玛芬连模",
+      "nameEn": "Summer Muffin pan",
+      "category": "workshop-molds",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-muffin-pan",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-muffin-pan-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 768,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "98ae95866337b34fd244b26eb39bd332905f3ac891d31ecbbf3f029455b13942"
+    },
+    {
+      "id": "workshop-muffin-pan-autumn",
+      "nameZh": "秋日·玛芬连模",
+      "nameEn": "Autumn Muffin pan",
+      "category": "workshop-molds",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-muffin-pan",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-muffin-pan-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 768,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "ea4dda95448331dd3f9171380c73f2c946b43ca1f6f4ea76c91232034682f6d7"
+    },
+    {
+      "id": "workshop-muffin-pan-winter",
+      "nameZh": "冬日·玛芬连模",
+      "nameEn": "Winter Muffin pan",
+      "category": "workshop-molds",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-muffin-pan",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-muffin-pan-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 768,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "9fc61f40e3fd32966d418f04dff58643bef3caef6370a0bf737af50e42304a01"
+    },
+    {
+      "id": "workshop-bundt-mold-spring",
+      "nameZh": "春日·环形咕咕霍夫模",
+      "nameEn": "Spring Bundt mold",
+      "category": "workshop-molds",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-bundt-mold",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-bundt-mold-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 768,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f0f6d39588cd08a15b09d273ab3170b8c6737cddc9c713561992a930b9acb217"
+    },
+    {
+      "id": "workshop-bundt-mold-summer",
+      "nameZh": "夏日·环形咕咕霍夫模",
+      "nameEn": "Summer Bundt mold",
+      "category": "workshop-molds",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-bundt-mold",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-bundt-mold-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 768,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "2f68c9c5e1c6dac66257947e2eea8ff0e62a4ce7f19b198ea836cd9af691bcc9"
+    },
+    {
+      "id": "workshop-bundt-mold-autumn",
+      "nameZh": "秋日·环形咕咕霍夫模",
+      "nameEn": "Autumn Bundt mold",
+      "category": "workshop-molds",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-bundt-mold",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-bundt-mold-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 768,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "6ed76fb1de7c277192d807e24f669988e0b6224ea30416e5fe860fe06d171491"
+    },
+    {
+      "id": "workshop-bundt-mold-winter",
+      "nameZh": "冬日·环形咕咕霍夫模",
+      "nameEn": "Winter Bundt mold",
+      "category": "workshop-molds",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-bundt-mold",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-bundt-mold-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 768,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "18a02ccbc3848a928d91c16432b980dab1d0931089aa87b8cbf131afe921372a"
+    },
+    {
+      "id": "workshop-proofing-basket-spring",
+      "nameZh": "春日·藤纹发酵篮",
+      "nameEn": "Spring Proofing basket",
+      "category": "workshop-molds",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-proofing-basket",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-proofing-basket-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 864,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "ccf1422ab4c7bc11aeb594e6e50dce55b74f85c61c746ce8b1be49c0236544be"
+    },
+    {
+      "id": "workshop-proofing-basket-summer",
+      "nameZh": "夏日·藤纹发酵篮",
+      "nameEn": "Summer Proofing basket",
+      "category": "workshop-molds",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-proofing-basket",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-proofing-basket-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 864,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "4abdd21217279de6438312528f380ad9e8a76c68e4477c57c4e5e146de6bbfc3"
+    },
+    {
+      "id": "workshop-proofing-basket-autumn",
+      "nameZh": "秋日·藤纹发酵篮",
+      "nameEn": "Autumn Proofing basket",
+      "category": "workshop-molds",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-proofing-basket",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-proofing-basket-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 864,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "539f67877403c8014a5c06a7f36f49c1b91218e3802db9fd414df7794f869439"
+    },
+    {
+      "id": "workshop-proofing-basket-winter",
+      "nameZh": "冬日·藤纹发酵篮",
+      "nameEn": "Winter Proofing basket",
+      "category": "workshop-molds",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-proofing-basket",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-proofing-basket-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 864,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "4a057589a2119b6150ae99db64be0506679c2d2568d804e5a46d8e72396ff04d"
+    },
+    {
+      "id": "workshop-cooling-rack-spring",
+      "nameZh": "春日·方格冷却架",
+      "nameEn": "Spring Cooling rack",
+      "category": "workshop-molds",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-cooling-rack",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cooling-rack-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 864,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "0841b14e53c2cbad64348f7f214af0cd7987ae22518b7e20f2a20729f1290668"
+    },
+    {
+      "id": "workshop-cooling-rack-summer",
+      "nameZh": "夏日·方格冷却架",
+      "nameEn": "Summer Cooling rack",
+      "category": "workshop-molds",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-cooling-rack",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cooling-rack-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 864,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "8dafc4a73183bd02a5a86e8dc5d07066d397c4cbd370e5fbffa85b3d2411b995"
+    },
+    {
+      "id": "workshop-cooling-rack-autumn",
+      "nameZh": "秋日·方格冷却架",
+      "nameEn": "Autumn Cooling rack",
+      "category": "workshop-molds",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-cooling-rack",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cooling-rack-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 864,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "49469afb5e07095bce4e806f830303a9afbd53d810593c07122ebda97e15c5c0"
+    },
+    {
+      "id": "workshop-cooling-rack-winter",
+      "nameZh": "冬日·方格冷却架",
+      "nameEn": "Winter Cooling rack",
+      "category": "workshop-molds",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-cooling-rack",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cooling-rack-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 864,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "8d1c56039f6f7e87762ca1ba98c6ac988f9e58c82a5e7596f6853340037f59be"
+    },
+    {
+      "id": "workshop-baking-sheet-spring",
+      "nameZh": "春日·浅沿烤盘",
+      "nameEn": "Spring Baking sheet",
+      "category": "workshop-molds",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-baking-sheet",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-baking-sheet-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 864,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "0674f25b68cad8c2a6bb93e0e90b50650b2229676e10a8a809e5436072d17261"
+    },
+    {
+      "id": "workshop-baking-sheet-summer",
+      "nameZh": "夏日·浅沿烤盘",
+      "nameEn": "Summer Baking sheet",
+      "category": "workshop-molds",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-baking-sheet",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-baking-sheet-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 864,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f3ae762a3e94d2e349075f260d20c67280c63a1327861688c11c3f9290ba7be5"
+    },
+    {
+      "id": "workshop-baking-sheet-autumn",
+      "nameZh": "秋日·浅沿烤盘",
+      "nameEn": "Autumn Baking sheet",
+      "category": "workshop-molds",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-baking-sheet",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-baking-sheet-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 864,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "e75f6ac2dc94d148d63d35e82f1a97084cc2e07660b58cd128d370582b4872b1"
+    },
+    {
+      "id": "workshop-baking-sheet-winter",
+      "nameZh": "冬日·浅沿烤盘",
+      "nameEn": "Winter Baking sheet",
+      "category": "workshop-molds",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-baking-sheet",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-baking-sheet-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 864,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "ed925efefcbb56d915eccf518bcf3d0d84bc0ec4d5157dd8ade85d6bd4d74a86"
+    },
+    {
+      "id": "workshop-springform-pan-spring",
+      "nameZh": "春日·活底圆模",
+      "nameEn": "Spring Springform pan",
+      "category": "workshop-molds",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-springform-pan",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-springform-pan-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 960,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "38a2a8b6106338b0ca8da2348847a98dce74aa358767c4cc4f8e417761e01435"
+    },
+    {
+      "id": "workshop-springform-pan-summer",
+      "nameZh": "夏日·活底圆模",
+      "nameEn": "Summer Springform pan",
+      "category": "workshop-molds",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-springform-pan",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-springform-pan-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 960,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "8dac988e38dae09c3c067f84d3dd067747adeb902f1994180ede4b22da6996d9"
+    },
+    {
+      "id": "workshop-springform-pan-autumn",
+      "nameZh": "秋日·活底圆模",
+      "nameEn": "Autumn Springform pan",
+      "category": "workshop-molds",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-springform-pan",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-springform-pan-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 960,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "8b19de429061bd5a58238999b4faa5fc5f7a242ec3e0bb96ba9b5668d9c343e4"
+    },
+    {
+      "id": "workshop-springform-pan-winter",
+      "nameZh": "冬日·活底圆模",
+      "nameEn": "Winter Springform pan",
+      "category": "workshop-molds",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-springform-pan",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-springform-pan-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 960,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "55ea50f8327f12fe167b3ac20a3c33e24f2a9afd4b7bf3f4a15cca333a8e05a8"
+    },
+    {
+      "id": "workshop-cookie-cutters-spring",
+      "nameZh": "春日·压饼模具组",
+      "nameEn": "Spring Cookie cutters",
+      "category": "workshop-molds",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-cookie-cutters",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cookie-cutters-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 960,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f8f23f1b82447da6bd0920a745882ac9cc379c87ec81ab28b854248d8bb8826c"
+    },
+    {
+      "id": "workshop-cookie-cutters-summer",
+      "nameZh": "夏日·压饼模具组",
+      "nameEn": "Summer Cookie cutters",
+      "category": "workshop-molds",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-cookie-cutters",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cookie-cutters-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 960,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "c58f006ae948af9def12a597f6cd2cb3c971ee507b5490a7b91da61da20ee0a7"
+    },
+    {
+      "id": "workshop-cookie-cutters-autumn",
+      "nameZh": "秋日·压饼模具组",
+      "nameEn": "Autumn Cookie cutters",
+      "category": "workshop-molds",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-cookie-cutters",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cookie-cutters-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 960,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "0a3a32e872006977a2da2c6f19065003c96d628946501837b520f93706f17472"
+    },
+    {
+      "id": "workshop-cookie-cutters-winter",
+      "nameZh": "冬日·压饼模具组",
+      "nameEn": "Winter Cookie cutters",
+      "category": "workshop-molds",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-cookie-cutters",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-molds",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cookie-cutters-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 960,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "6f8742dbf3b068519e42aea6b3cd212f6338bca94034c655f559679fa87aff50"
+    },
+    {
+      "id": "workshop-flour-sack-spring",
+      "nameZh": "春日·折口面粉袋",
+      "nameEn": "Spring Flour sack",
+      "category": "workshop-ingredients",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-flour-sack",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-flour-sack-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 960,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "1f284c0582ee741582e7c7cee2ba657339fe9a5c4078c48c1b503e21039c5522"
+    },
+    {
+      "id": "workshop-flour-sack-summer",
+      "nameZh": "夏日·折口面粉袋",
+      "nameEn": "Summer Flour sack",
+      "category": "workshop-ingredients",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-flour-sack",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-flour-sack-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 960,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "1d6c2626f42a1c4312107dcc3da2656fb1e947e1d584d5a9831cbf56a8c66a8c"
+    },
+    {
+      "id": "workshop-flour-sack-autumn",
+      "nameZh": "秋日·折口面粉袋",
+      "nameEn": "Autumn Flour sack",
+      "category": "workshop-ingredients",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-flour-sack",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-flour-sack-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 960,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "ad5fc7543e876842b3e0d0d121cfb60809441534e016ef6c38e851fc0e50c2ee"
+    },
+    {
+      "id": "workshop-flour-sack-winter",
+      "nameZh": "冬日·折口面粉袋",
+      "nameEn": "Winter Flour sack",
+      "category": "workshop-ingredients",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-flour-sack",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-flour-sack-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 960,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "ebb8b3a6919d3debfdefdb0c82803d49df73c7f17a87f0f20846fec5b3f94725"
+    },
+    {
+      "id": "workshop-butter-dish-spring",
+      "nameZh": "春日·切块黄油碟",
+      "nameEn": "Spring Butter dish",
+      "category": "workshop-ingredients",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-butter-dish",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-butter-dish-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 1056,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "1106e432d70ed158d0708ef85d3ac1b41f4f6df5dfede5f0ec5ba323d6928531"
+    },
+    {
+      "id": "workshop-butter-dish-summer",
+      "nameZh": "夏日·切块黄油碟",
+      "nameEn": "Summer Butter dish",
+      "category": "workshop-ingredients",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-butter-dish",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-butter-dish-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 1056,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "2735382222bd2f80dcca3924b943f0b834b7722cda38bb5b78a678f837374c1c"
+    },
+    {
+      "id": "workshop-butter-dish-autumn",
+      "nameZh": "秋日·切块黄油碟",
+      "nameEn": "Autumn Butter dish",
+      "category": "workshop-ingredients",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-butter-dish",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-butter-dish-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 1056,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "d6996156fbcccd3dea7fe6a70fda9a22923e1cb86f90a481363fc33aab73dac3"
+    },
+    {
+      "id": "workshop-butter-dish-winter",
+      "nameZh": "冬日·切块黄油碟",
+      "nameEn": "Winter Butter dish",
+      "category": "workshop-ingredients",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-butter-dish",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-butter-dish-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 1056,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "daebeb0530ab23732001177e8fc2add8f1ae3fccdbe15230b4013aea6ce941fb"
+    },
+    {
+      "id": "workshop-dough-ball-spring",
+      "nameZh": "春日·醒发面团",
+      "nameEn": "Spring Resting dough",
+      "category": "workshop-ingredients",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-dough-ball",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dough-ball-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 1056,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "a64d0577bbfad2370306e409c457de182aad9a16273b3d1d69fce2f9d182924f"
+    },
+    {
+      "id": "workshop-dough-ball-summer",
+      "nameZh": "夏日·醒发面团",
+      "nameEn": "Summer Resting dough",
+      "category": "workshop-ingredients",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-dough-ball",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dough-ball-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 1056,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "c554a5660fc9a629897b986b0e898eb8813d73ac13740990678c80b2d72bedf2"
+    },
+    {
+      "id": "workshop-dough-ball-autumn",
+      "nameZh": "秋日·醒发面团",
+      "nameEn": "Autumn Resting dough",
+      "category": "workshop-ingredients",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-dough-ball",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dough-ball-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 1056,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f0007a7547705e6e587c88493731fbe5217d986b4d81d3bb92e86683699d2961"
+    },
+    {
+      "id": "workshop-dough-ball-winter",
+      "nameZh": "冬日·醒发面团",
+      "nameEn": "Winter Resting dough",
+      "category": "workshop-ingredients",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-dough-ball",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dough-ball-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 1056,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "8186649b3616afb0513e95a5161c4fcbaee2842db0417cc55b195615086caeb9"
+    },
+    {
+      "id": "workshop-yeast-bottle-spring",
+      "nameZh": "春日·酵母培养瓶",
+      "nameEn": "Spring Yeast culture bottle",
+      "category": "workshop-ingredients",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-yeast-bottle",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-yeast-bottle-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 1056,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "1fc3d256ff07af99aac48af12a75e5603b801784e93fd2aeaef374d53da89de5"
+    },
+    {
+      "id": "workshop-yeast-bottle-summer",
+      "nameZh": "夏日·酵母培养瓶",
+      "nameEn": "Summer Yeast culture bottle",
+      "category": "workshop-ingredients",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-yeast-bottle",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-yeast-bottle-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 1056,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "a20d39b36dfd485cdeffb0bce4831d5a0c0605c455c379c4f4d9f4e8ccd1663d"
+    },
+    {
+      "id": "workshop-yeast-bottle-autumn",
+      "nameZh": "秋日·酵母培养瓶",
+      "nameEn": "Autumn Yeast culture bottle",
+      "category": "workshop-ingredients",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-yeast-bottle",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-yeast-bottle-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 1056,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "05aa04d6174af3927079d0831e7ae6117bd5f1ba001ac596c5dbb141cef5c4af"
+    },
+    {
+      "id": "workshop-yeast-bottle-winter",
+      "nameZh": "冬日·酵母培养瓶",
+      "nameEn": "Winter Yeast culture bottle",
+      "category": "workshop-ingredients",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-yeast-bottle",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-yeast-bottle-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 1056,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "e6fa809d056b2a514f6d6598c3643c4cfc51b7466722180be9a88dbb70ae0dc7"
+    },
+    {
+      "id": "workshop-egg-crate-spring",
+      "nameZh": "春日·鸡蛋分格盒",
+      "nameEn": "Spring Egg crate",
+      "category": "workshop-ingredients",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-egg-crate",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-egg-crate-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 1152,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "0c96ea60b37056a97e7a108186f3001b53745795d6ff5b398463e566dc357506"
+    },
+    {
+      "id": "workshop-egg-crate-summer",
+      "nameZh": "夏日·鸡蛋分格盒",
+      "nameEn": "Summer Egg crate",
+      "category": "workshop-ingredients",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-egg-crate",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-egg-crate-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 1152,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "24a8a291ea30ca4c3949d5f1422d5116e9336d928a4a14a227c844a53e213da0"
+    },
+    {
+      "id": "workshop-egg-crate-autumn",
+      "nameZh": "秋日·鸡蛋分格盒",
+      "nameEn": "Autumn Egg crate",
+      "category": "workshop-ingredients",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-egg-crate",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-egg-crate-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 1152,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "287abef83cdbec3c8b92f5e3f7798d6061303ac2f55ce77d083e1ec3415fb65d"
+    },
+    {
+      "id": "workshop-egg-crate-winter",
+      "nameZh": "冬日·鸡蛋分格盒",
+      "nameEn": "Winter Egg crate",
+      "category": "workshop-ingredients",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-egg-crate",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-egg-crate-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 1152,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f7d91039d2ba1e3938538d1489614e2d08068fa9522bf4e9d036c1cdf501cfe5"
+    },
+    {
+      "id": "workshop-cocoa-canister-spring",
+      "nameZh": "春日·可可原料筒",
+      "nameEn": "Spring Cocoa canister",
+      "category": "workshop-ingredients",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-cocoa-canister",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cocoa-canister-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 1152,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "03905fabaa198da3c4227ce126e94a83235370f81b408514c513be1c5acf366f"
+    },
+    {
+      "id": "workshop-cocoa-canister-summer",
+      "nameZh": "夏日·可可原料筒",
+      "nameEn": "Summer Cocoa canister",
+      "category": "workshop-ingredients",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-cocoa-canister",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cocoa-canister-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 1152,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "77a905990b5c9f15263ac2cdd16745a1728109d31c61fd96c72f2bbda74c19ec"
+    },
+    {
+      "id": "workshop-cocoa-canister-autumn",
+      "nameZh": "秋日·可可原料筒",
+      "nameEn": "Autumn Cocoa canister",
+      "category": "workshop-ingredients",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-cocoa-canister",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cocoa-canister-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 1152,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "9b5c5f5780043e15530b3764527eaa213d058f3216c1454100730ae6b8b0d130"
+    },
+    {
+      "id": "workshop-cocoa-canister-winter",
+      "nameZh": "冬日·可可原料筒",
+      "nameEn": "Winter Cocoa canister",
+      "category": "workshop-ingredients",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-cocoa-canister",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-cocoa-canister-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 1152,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "b9ce69e3bd37483b34091487d86ab3b514bc996471315aaa7404884cea90fb0f"
+    },
+    {
+      "id": "workshop-vanilla-tubes-spring",
+      "nameZh": "春日·香草荚管架",
+      "nameEn": "Spring Vanilla pod tubes",
+      "category": "workshop-ingredients",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-vanilla-tubes",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-vanilla-tubes-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 1152,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "8a6299da99e677a3a9f61ee836170e0bd7bcc8759ccd028334db68734414cd0c"
+    },
+    {
+      "id": "workshop-vanilla-tubes-summer",
+      "nameZh": "夏日·香草荚管架",
+      "nameEn": "Summer Vanilla pod tubes",
+      "category": "workshop-ingredients",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-vanilla-tubes",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-vanilla-tubes-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 1152,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "88750a864727ba5b1457edddfa248993648485bfcaf4ee42c247a71cf9dba5f6"
+    },
+    {
+      "id": "workshop-vanilla-tubes-autumn",
+      "nameZh": "秋日·香草荚管架",
+      "nameEn": "Autumn Vanilla pod tubes",
+      "category": "workshop-ingredients",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-vanilla-tubes",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-vanilla-tubes-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 1152,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "daee7b499e2ec17120a252ec4705b8072cadb67db39d3f5b9e908aa371fb3300"
+    },
+    {
+      "id": "workshop-vanilla-tubes-winter",
+      "nameZh": "冬日·香草荚管架",
+      "nameEn": "Winter Vanilla pod tubes",
+      "category": "workshop-ingredients",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-vanilla-tubes",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-vanilla-tubes-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 1152,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "ea09bcf851b3c8553c2f7727b64a1e77134cdc2692066f1242d9f48850b428d5"
+    },
+    {
+      "id": "workshop-nut-hopper-spring",
+      "nameZh": "春日·坚果配料斗",
+      "nameEn": "Spring Nut ingredient hopper",
+      "category": "workshop-ingredients",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-nut-hopper",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-nut-hopper-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 1248,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "54f8a30f93a3c215562865d3fd9f671f95903b7413b3358eaf8d18760e9ee368"
+    },
+    {
+      "id": "workshop-nut-hopper-summer",
+      "nameZh": "夏日·坚果配料斗",
+      "nameEn": "Summer Nut ingredient hopper",
+      "category": "workshop-ingredients",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-nut-hopper",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-nut-hopper-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 1248,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "de09a558ca316b15a5bf51352d9533b7cb6edd9b3ca774b0a1af069a49d83088"
+    },
+    {
+      "id": "workshop-nut-hopper-autumn",
+      "nameZh": "秋日·坚果配料斗",
+      "nameEn": "Autumn Nut ingredient hopper",
+      "category": "workshop-ingredients",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-nut-hopper",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-nut-hopper-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 1248,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "1845e7ce86f8c08b4bf0a62e4fa9d99cd19c678d49e7e4b945d66403f904136c"
+    },
+    {
+      "id": "workshop-nut-hopper-winter",
+      "nameZh": "冬日·坚果配料斗",
+      "nameEn": "Winter Nut ingredient hopper",
+      "category": "workshop-ingredients",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-nut-hopper",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-ingredients",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-nut-hopper-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 1248,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f6390ed578dfedb23f14b3650dfd71b69f2098f36ed08b7ed9ccbde7391fed41"
+    },
+    {
+      "id": "workshop-dial-scale-spring",
+      "nameZh": "春日·指针厨师秤",
+      "nameEn": "Spring Dial kitchen scale",
+      "category": "workshop-organization",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-dial-scale",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dial-scale-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 1248,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "b27b3a95d07f584f400d3678934ee9dff5d1bc63cf88a533af6255013aa3b22f"
+    },
+    {
+      "id": "workshop-dial-scale-summer",
+      "nameZh": "夏日·指针厨师秤",
+      "nameEn": "Summer Dial kitchen scale",
+      "category": "workshop-organization",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-dial-scale",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dial-scale-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 1248,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "44612ae150972cc96919d8d5bd24467e8755e1d67827b94265db176ba38e40e8"
+    },
+    {
+      "id": "workshop-dial-scale-autumn",
+      "nameZh": "秋日·指针厨师秤",
+      "nameEn": "Autumn Dial kitchen scale",
+      "category": "workshop-organization",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-dial-scale",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dial-scale-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 1248,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "eb6f2ebd28da9145c511f37420e121a8e8c9e3a7897ccaf06af817ce15326439"
+    },
+    {
+      "id": "workshop-dial-scale-winter",
+      "nameZh": "冬日·指针厨师秤",
+      "nameEn": "Winter Dial kitchen scale",
+      "category": "workshop-organization",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-dial-scale",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-dial-scale-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 1248,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "42e28e620e50fa3ec97b16a9989f49b66c2c60e3c3a1f950d54bb02a3f3566b9"
+    },
+    {
+      "id": "workshop-measuring-jug-spring",
+      "nameZh": "春日·刻度量杯",
+      "nameEn": "Spring Measuring jug",
+      "category": "workshop-organization",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-measuring-jug",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-measuring-jug-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 1248,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "1d0078453e6e1b0a2e12f3c702a24203ad5ba7716a438b14d2d80ce12333aaef"
+    },
+    {
+      "id": "workshop-measuring-jug-summer",
+      "nameZh": "夏日·刻度量杯",
+      "nameEn": "Summer Measuring jug",
+      "category": "workshop-organization",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-measuring-jug",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-measuring-jug-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 1248,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "54395fbf9d4cbe3d63e9ad4a51e923e58cf368180e9cd10677ff11bfc462d564"
+    },
+    {
+      "id": "workshop-measuring-jug-autumn",
+      "nameZh": "秋日·刻度量杯",
+      "nameEn": "Autumn Measuring jug",
+      "category": "workshop-organization",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-measuring-jug",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-measuring-jug-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 1248,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "ae092065b85856c2deaea06c4dba4448f749721c7c1344031fa3363a591a5784"
+    },
+    {
+      "id": "workshop-measuring-jug-winter",
+      "nameZh": "冬日·刻度量杯",
+      "nameEn": "Winter Measuring jug",
+      "category": "workshop-organization",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-measuring-jug",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-measuring-jug-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 1248,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "3796eccebdacf5db8c8ed8077bebfb6689c1917b7814a355acb00e6727a9e9b8"
+    },
+    {
+      "id": "workshop-measuring-spoons-spring",
+      "nameZh": "春日·量匙串",
+      "nameEn": "Spring Measuring spoon set",
+      "category": "workshop-organization",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-measuring-spoons",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-measuring-spoons-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 1344,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "8492e5647c5a732de4790a4b9c3e08bc7d05c19d95a61f98bdfbb0dd3ffe1756"
+    },
+    {
+      "id": "workshop-measuring-spoons-summer",
+      "nameZh": "夏日·量匙串",
+      "nameEn": "Summer Measuring spoon set",
+      "category": "workshop-organization",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-measuring-spoons",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-measuring-spoons-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 1344,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f6b8c66dec46c854eb63348a23469207bd0933b5e56f3efa801e8ec1130162e9"
+    },
+    {
+      "id": "workshop-measuring-spoons-autumn",
+      "nameZh": "秋日·量匙串",
+      "nameEn": "Autumn Measuring spoon set",
+      "category": "workshop-organization",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-measuring-spoons",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-measuring-spoons-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 1344,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "a990221477ca405caa69e47fffe6eb5fcbafd653c9d30b5247a8d1f759aa25f0"
+    },
+    {
+      "id": "workshop-measuring-spoons-winter",
+      "nameZh": "冬日·量匙串",
+      "nameEn": "Winter Measuring spoon set",
+      "category": "workshop-organization",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-measuring-spoons",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-measuring-spoons-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 1344,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "35fd9dba49dfc67a8d1984ae94b30fb7c5fc8f30f95e6a25164c18020daa3f40"
+    },
+    {
+      "id": "workshop-kitchen-timer-spring",
+      "nameZh": "春日·机械计时器",
+      "nameEn": "Spring Mechanical kitchen timer",
+      "category": "workshop-organization",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-kitchen-timer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-kitchen-timer-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 1344,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "f5b9e3788f157d3816e512502c1c69ade8aab4d3cd354201350dafefa98b4095"
+    },
+    {
+      "id": "workshop-kitchen-timer-summer",
+      "nameZh": "夏日·机械计时器",
+      "nameEn": "Summer Mechanical kitchen timer",
+      "category": "workshop-organization",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-kitchen-timer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-kitchen-timer-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 1344,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "ef88b3ca469bb0b3b1b180757c84858109b73160b906de277aa5ee62cafbfbc1"
+    },
+    {
+      "id": "workshop-kitchen-timer-autumn",
+      "nameZh": "秋日·机械计时器",
+      "nameEn": "Autumn Mechanical kitchen timer",
+      "category": "workshop-organization",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-kitchen-timer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-kitchen-timer-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 1344,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "4be65c04d195d7f6b047ae6e04a349b273b3139a4fe2b3bc784ddaff1921e257"
+    },
+    {
+      "id": "workshop-kitchen-timer-winter",
+      "nameZh": "冬日·机械计时器",
+      "nameEn": "Winter Mechanical kitchen timer",
+      "category": "workshop-organization",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-kitchen-timer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-kitchen-timer-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 1344,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "0c57e912485785aa1a2ce74a8ed8b144ce189614d88f63cbe50c50a3b8b32e9f"
+    },
+    {
+      "id": "workshop-thermometer-spring",
+      "nameZh": "春日·糖浆温度计",
+      "nameEn": "Spring Sugar thermometer",
+      "category": "workshop-organization",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-thermometer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-thermometer-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 1344,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "128ba60713f5319c7f14863a9d00ffd709260ab0982a6ee37e5945ac80b606ad"
+    },
+    {
+      "id": "workshop-thermometer-summer",
+      "nameZh": "夏日·糖浆温度计",
+      "nameEn": "Summer Sugar thermometer",
+      "category": "workshop-organization",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-thermometer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-thermometer-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 1344,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "eadf4fa5d99173e716627c518235e75000150e62df7ac2c62d60f68e03dbf17b"
+    },
+    {
+      "id": "workshop-thermometer-autumn",
+      "nameZh": "秋日·糖浆温度计",
+      "nameEn": "Autumn Sugar thermometer",
+      "category": "workshop-organization",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-thermometer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-thermometer-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 1344,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "87918da58a941ea18301784f3e2b6778d5d6ab875040efbdfb3786fe16381757"
+    },
+    {
+      "id": "workshop-thermometer-winter",
+      "nameZh": "冬日·糖浆温度计",
+      "nameEn": "Winter Sugar thermometer",
+      "category": "workshop-organization",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-thermometer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-thermometer-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 1344,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "3dd904d1a8a533e18846d29361b7c1df9c6dc3c214b33f3c183a3b9c5b88606a"
+    },
+    {
+      "id": "workshop-utensil-rail-spring",
+      "nameZh": "春日·厨具横架",
+      "nameEn": "Spring Utensil rail",
+      "category": "workshop-organization",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-utensil-rail",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-utensil-rail-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 0,
+        "y": 1440,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "eb3c14cd3a96d38ab5b4357cc8a3df1458de0acf4e1092966e3e86c49f6c8922"
+    },
+    {
+      "id": "workshop-utensil-rail-summer",
+      "nameZh": "夏日·厨具横架",
+      "nameEn": "Summer Utensil rail",
+      "category": "workshop-organization",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-utensil-rail",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-utensil-rail-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 96,
+        "y": 1440,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "37b2b7ca2744a8e1a43c426ef2672d6d252653cfa8df33ad383171583b3fad4f"
+    },
+    {
+      "id": "workshop-utensil-rail-autumn",
+      "nameZh": "秋日·厨具横架",
+      "nameEn": "Autumn Utensil rail",
+      "category": "workshop-organization",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-utensil-rail",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-utensil-rail-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 192,
+        "y": 1440,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "65e73b7f0e819c6d17968b26e159dd1f65e8ae87e71839de9353d3cae09fbed1"
+    },
+    {
+      "id": "workshop-utensil-rail-winter",
+      "nameZh": "冬日·厨具横架",
+      "nameEn": "Winter Utensil rail",
+      "category": "workshop-organization",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-utensil-rail",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-utensil-rail-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 288,
+        "y": 1440,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "5742f51c56cdb3c433b00aac9baae8b5e6b222c04e3cdd3bb6bac10ee2fd76ce"
+    },
+    {
+      "id": "workshop-spice-drawer-spring",
+      "nameZh": "春日·香料抽屉柜",
+      "nameEn": "Spring Spice drawer cabinet",
+      "category": "workshop-organization",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-spice-drawer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-spice-drawer-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 384,
+        "y": 1440,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "49280ff380ce507aa0834311e1a049df293be7ea9a06240e97aa28f184e966f5"
+    },
+    {
+      "id": "workshop-spice-drawer-summer",
+      "nameZh": "夏日·香料抽屉柜",
+      "nameEn": "Summer Spice drawer cabinet",
+      "category": "workshop-organization",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-spice-drawer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-spice-drawer-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 480,
+        "y": 1440,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "e53470bfa3196b7e5ba477c72a435e221f25aff82f5003d93c8edbb0f944ecab"
+    },
+    {
+      "id": "workshop-spice-drawer-autumn",
+      "nameZh": "秋日·香料抽屉柜",
+      "nameEn": "Autumn Spice drawer cabinet",
+      "category": "workshop-organization",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-spice-drawer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-spice-drawer-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 576,
+        "y": 1440,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "7babdfdc95f63b0d67c2fb07a1b83a4cbdad33d12f2f3d30b5709e8342bd33c2"
+    },
+    {
+      "id": "workshop-spice-drawer-winter",
+      "nameZh": "冬日·香料抽屉柜",
+      "nameEn": "Winter Spice drawer cabinet",
+      "category": "workshop-organization",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-spice-drawer",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-spice-drawer-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 672,
+        "y": 1440,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "90a46c880250060a9cb3ad412886f207e712d74e5decfd170a748e501ac6deb7"
+    },
+    {
+      "id": "workshop-towel-roller-spring",
+      "nameZh": "春日·厨房布巾卷架",
+      "nameEn": "Spring Kitchen towel roller",
+      "category": "workshop-organization",
+      "season": "spring",
+      "variant": "spring",
+      "baseShape": "workshop-towel-roller",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "spring",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-towel-roller-spring.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 768,
+        "y": 1440,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "0e9149c7272d43b301a10373e423bfd7d6cc4a36519786df8b160889cadebbbe"
+    },
+    {
+      "id": "workshop-towel-roller-summer",
+      "nameZh": "夏日·厨房布巾卷架",
+      "nameEn": "Summer Kitchen towel roller",
+      "category": "workshop-organization",
+      "season": "summer",
+      "variant": "summer",
+      "baseShape": "workshop-towel-roller",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "summer",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-towel-roller-summer.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 864,
+        "y": 1440,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "c4deea0d09a1bfc67e97b9404c488ac5858413647e1810aad83ae9bc3c6b5f1d"
+    },
+    {
+      "id": "workshop-towel-roller-autumn",
+      "nameZh": "秋日·厨房布巾卷架",
+      "nameEn": "Autumn Kitchen towel roller",
+      "category": "workshop-organization",
+      "season": "autumn",
+      "variant": "autumn",
+      "baseShape": "workshop-towel-roller",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "autumn",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-towel-roller-autumn.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 960,
+        "y": 1440,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "6ca7b51b277d4d0c10e1484ee006a4ec8e6ef3bcb5dda3c7f9e2fde08860d19a"
+    },
+    {
+      "id": "workshop-towel-roller-winter",
+      "nameZh": "冬日·厨房布巾卷架",
+      "nameEn": "Winter Kitchen towel roller",
+      "category": "workshop-organization",
+      "season": "winter",
+      "variant": "winter",
+      "baseShape": "workshop-towel-roller",
+      "tags": [
+        "reserve",
+        "native-2x",
+        "workshop-reserve-v1",
+        "workshop-organization",
+        "winter",
+        "workshop",
+        "production",
+        "native-96",
+        "seasonal-tooling"
+      ],
+      "path": "sprites/workshop-towel-roller-winter.png",
+      "width": 96,
+      "height": 96,
+      "logicalWidth": 48,
+      "logicalHeight": 48,
+      "density": 2,
+      "anchor": {
+        "x": 0.5,
+        "y": 0.9375
+      },
+      "atlas": {
+        "x": 1056,
+        "y": 1440,
+        "width": 96,
+        "height": 96
+      },
+      "pixelSha256": "b3c06e6b9ddc82ce33f1abe66540dc28c379c931de2c53b12baa44cac135f7fc"
+    }
+  ]
+}

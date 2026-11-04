@@ -1,0 +1,997 @@
+{
+  "schemaVersion": 1,
+  "packId": "neighborhood-reserve-v1",
+  "generator": "scripts/build-reserve-library.mjs",
+  "files": [
+    {
+      "path": "manifest.json",
+      "bytes": 194719,
+      "sha256": "62640813df7603502e9824bb5475abdc93193521a6e9fa602769f36fb19cdb2f"
+    },
+    {
+      "path": "catalog.js",
+      "bytes": 130637,
+      "sha256": "74304c21ec2b542ccfb61c29237434ab99b1924d3bddbe456c23dbf1f9df7912"
+    },
+    {
+      "path": "atlas.png",
+      "bytes": 72194,
+      "sha256": "56aba92169b853b4d474bcdb3fb1c7106f8d72b1b167fcdbaac940825f55040b"
+    },
+    {
+      "path": "contact-sheet.png",
+      "bytes": 103721,
+      "sha256": "0c428d86f5ccfb55e87bd616b4ac02266d8ad5c3f6025642e4125052abe33158"
+    },
+    {
+      "path": "verification-report.json",
+      "bytes": 57303,
+      "sha256": "152e357ea73764f223937e310cfced87c5b054b1e6f67cad9c43d2d1ce6edd20"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1432,
+      "sha256": "47fa38dd72e03677ddfdddc772c1e97e249041e89ffd4bd94b8b839fe6ea28ec"
+    },
+    {
+      "path": "sprites/street-mailbox-spring.png",
+      "bytes": 598,
+      "sha256": "32847a6009a186f16102831d934181d77852959a419a42b1d441eaeb69955347"
+    },
+    {
+      "path": "sprites/street-mailbox-summer.png",
+      "bytes": 640,
+      "sha256": "10645e6653d78c72ec60687417e5a8dcba600de1a7a25afa2e5c7e7fa98c98bd"
+    },
+    {
+      "path": "sprites/street-mailbox-autumn.png",
+      "bytes": 636,
+      "sha256": "7e4fa453b7f46981f904eb032a6dec025aa762c22890020eb8e0ee76cc356229"
+    },
+    {
+      "path": "sprites/street-mailbox-winter.png",
+      "bytes": 533,
+      "sha256": "85e25d0ffc8bf728ae84ef56549694d15298946826e13b50add671ce7522d6d6"
+    },
+    {
+      "path": "sprites/street-newspaper-box-spring.png",
+      "bytes": 639,
+      "sha256": "95aaf53728b1307116e940458092e27d673bdce9b2bba60e5c4fe2f5c9bf04f6"
+    },
+    {
+      "path": "sprites/street-newspaper-box-summer.png",
+      "bytes": 593,
+      "sha256": "e9afb8c9be42050ce68e16bc4be6354104476858e5e9adb2dd748c78fdcea723"
+    },
+    {
+      "path": "sprites/street-newspaper-box-autumn.png",
+      "bytes": 610,
+      "sha256": "70b1679eb88b6bad64c4e52ba522f2055fa034d8756ab56bc4e4eb6f0d3498dd"
+    },
+    {
+      "path": "sprites/street-newspaper-box-winter.png",
+      "bytes": 624,
+      "sha256": "e278f3b44d09da05ff8da94321f58f07afd4e8e093dd2b23813996d000d54b11"
+    },
+    {
+      "path": "sprites/street-parcel-locker-spring.png",
+      "bytes": 669,
+      "sha256": "c50b9eaf7b48fa6938c969b2c295139ecf7b35459f7617997a99433b5e81d3fe"
+    },
+    {
+      "path": "sprites/street-parcel-locker-summer.png",
+      "bytes": 712,
+      "sha256": "dae470d4a6323c1dbcdf5ffb9fd778467e35911b79257a008af19585ee9696d3"
+    },
+    {
+      "path": "sprites/street-parcel-locker-autumn.png",
+      "bytes": 676,
+      "sha256": "566da9ad6bfaed407a4cc3eea3099b8d5848a32c10c9207f74498811afc458d8"
+    },
+    {
+      "path": "sprites/street-parcel-locker-winter.png",
+      "bytes": 652,
+      "sha256": "2e4c6280c7a7b1949b45473bce6d766466ef02f083c749abbe4151086c3a88e4"
+    },
+    {
+      "path": "sprites/street-notice-board-spring.png",
+      "bytes": 620,
+      "sha256": "b6bcb9170d2c423dc7039f0c3c207405bae966a7014b453b5e80c0963a4935ef"
+    },
+    {
+      "path": "sprites/street-notice-board-summer.png",
+      "bytes": 627,
+      "sha256": "7bbfbabdeff55049bc78445a7cb25199b0ee8caf8b28201a36b34c7983e3eed4"
+    },
+    {
+      "path": "sprites/street-notice-board-autumn.png",
+      "bytes": 606,
+      "sha256": "d186ddda5199e4a1b5cfc2a5784ca8c626616847aaa5886cf7e9a77567c85650"
+    },
+    {
+      "path": "sprites/street-notice-board-winter.png",
+      "bytes": 643,
+      "sha256": "cfed155071146c220cde84862d3da1bba211a6d533cb051665f3607f5bbe4ebe"
+    },
+    {
+      "path": "sprites/street-street-clock-spring.png",
+      "bytes": 742,
+      "sha256": "2375e38af421a31023429b478ce1a5597e7ccf8518057733947e0b1864625e9a"
+    },
+    {
+      "path": "sprites/street-street-clock-summer.png",
+      "bytes": 676,
+      "sha256": "d875487a06a2be7f82ed8cb8008aa6ad640898208d431a97c2da628b8e9fb358"
+    },
+    {
+      "path": "sprites/street-street-clock-autumn.png",
+      "bytes": 724,
+      "sha256": "a4ba192091668739d18d662e7809a993ea0f58dd1c67ab5f728ddbb89cc00a81"
+    },
+    {
+      "path": "sprites/street-street-clock-winter.png",
+      "bytes": 710,
+      "sha256": "6a0889d191460f85a85e7194b718f86b2ddd407b015fe995e2eaf1a76e7ec69b"
+    },
+    {
+      "path": "sprites/street-direction-sign-spring.png",
+      "bytes": 521,
+      "sha256": "7282436e1e2654cb004759008256c0d00f5b31838f8ef5cc6c7cb91b6b40a3ac"
+    },
+    {
+      "path": "sprites/street-direction-sign-summer.png",
+      "bytes": 559,
+      "sha256": "96cd56e194690e41e27b317d61b64158ddd992ce0429222e9c79cae9bfce10ab"
+    },
+    {
+      "path": "sprites/street-direction-sign-autumn.png",
+      "bytes": 576,
+      "sha256": "0f962b7f7d210adb7b27d0f26712ffb41ee47ce45ae2e222af1eda7ae71f557d"
+    },
+    {
+      "path": "sprites/street-direction-sign-winter.png",
+      "bytes": 595,
+      "sha256": "8581369a037610ada0de128e5fa61b72a9e69adf213b4e043f2b71ad935efd74"
+    },
+    {
+      "path": "sprites/street-menu-easel-spring.png",
+      "bytes": 558,
+      "sha256": "91cee90721abced79f509a6c56c1cdf03616a29f5080860f3b58773778cec96c"
+    },
+    {
+      "path": "sprites/street-menu-easel-summer.png",
+      "bytes": 543,
+      "sha256": "dc25d0ac4835292294638477c5babcbabc56aa155d66dc5f9dd9297adf1ba3a0"
+    },
+    {
+      "path": "sprites/street-menu-easel-autumn.png",
+      "bytes": 599,
+      "sha256": "de229320d4efad313ae95d5a21c068f74f44ea6308f168295532fbbb87ae85cd"
+    },
+    {
+      "path": "sprites/street-menu-easel-winter.png",
+      "bytes": 596,
+      "sha256": "7db5143c717a2f44269002af0017bb4ec278858132505a04270cfffc569aad29"
+    },
+    {
+      "path": "sprites/street-queue-post-spring.png",
+      "bytes": 647,
+      "sha256": "b8184495da8b9228bf8f02e8db67c684634122bc89f1cb8d24359fd087499f8a"
+    },
+    {
+      "path": "sprites/street-queue-post-summer.png",
+      "bytes": 684,
+      "sha256": "6d88ab2d6e41b6fa68a7a7fc849147870632c09d359c59b95db835b5c75efaa5"
+    },
+    {
+      "path": "sprites/street-queue-post-autumn.png",
+      "bytes": 637,
+      "sha256": "c060d41ce4c4fee8858ddfcc4dc12589b601ec58481f60016eab92939d24f0e9"
+    },
+    {
+      "path": "sprites/street-queue-post-winter.png",
+      "bytes": 684,
+      "sha256": "451232f1e3418b4eedd1f0eb3e68afabd7b17690b0b073c0986e8e0bd9fc2224"
+    },
+    {
+      "path": "sprites/street-slat-bench-spring.png",
+      "bytes": 525,
+      "sha256": "d316777c269f6c9d78a4abd27f380ad5469151d97c93fadba4a0652d5b067249"
+    },
+    {
+      "path": "sprites/street-slat-bench-summer.png",
+      "bytes": 640,
+      "sha256": "9a485cc4f4bc45f5c5a35bc431bdd9a8a6d84f288550714ecfdaa9e596648dff"
+    },
+    {
+      "path": "sprites/street-slat-bench-autumn.png",
+      "bytes": 558,
+      "sha256": "9e609dcb879ca27af2540bc1fdf85e79b8070dbee6569c19561b6d7ce587f130"
+    },
+    {
+      "path": "sprites/street-slat-bench-winter.png",
+      "bytes": 617,
+      "sha256": "f3a7300cd5929402b230bdc24c495d8780e58c3fdc3d872e34b607344bdc0762"
+    },
+    {
+      "path": "sprites/street-bike-rack-spring.png",
+      "bytes": 495,
+      "sha256": "67de8d48b91301963f1c78de0d553d1e8a382706e9b8447a8763a617177241c3"
+    },
+    {
+      "path": "sprites/street-bike-rack-summer.png",
+      "bytes": 572,
+      "sha256": "cff2d14449e9abff49cbb09a1587fb74f28b1de619b9ed89cf4d7b364ca637da"
+    },
+    {
+      "path": "sprites/street-bike-rack-autumn.png",
+      "bytes": 482,
+      "sha256": "4b67135d59fd2d42426f8052b4fd517e798b25522b8f45f3d46e2836bc05e48e"
+    },
+    {
+      "path": "sprites/street-bike-rack-winter.png",
+      "bytes": 477,
+      "sha256": "79e90e0a8c089d483e11c2fe580465483d1aceb9dc7e1847d3156510e51b64e5"
+    },
+    {
+      "path": "sprites/street-parked-bicycle-spring.png",
+      "bytes": 878,
+      "sha256": "6dc35c5d09720511f0e6d9da6a2e5348633aff99df133439cd9f600093424854"
+    },
+    {
+      "path": "sprites/street-parked-bicycle-summer.png",
+      "bytes": 883,
+      "sha256": "84380618968a7054c25ab9387b3f983f3df0594b1e1da9e60f54281b2fe32588"
+    },
+    {
+      "path": "sprites/street-parked-bicycle-autumn.png",
+      "bytes": 972,
+      "sha256": "9471e8dfa2e57e52b739cff6b60486da521970f8790b14d85f049b8d1fff3cda"
+    },
+    {
+      "path": "sprites/street-parked-bicycle-winter.png",
+      "bytes": 946,
+      "sha256": "88845bdecc99beac9e1b3bd1762e4ca090dc93193fb3d283633d73a3f0e12e50"
+    },
+    {
+      "path": "sprites/street-scooter-spring.png",
+      "bytes": 603,
+      "sha256": "f3641de8ae6d1ac80ed6af59022436e181e681b47dc69565a5668eb297c0a2c7"
+    },
+    {
+      "path": "sprites/street-scooter-summer.png",
+      "bytes": 594,
+      "sha256": "b3ab6ce312892f7fb1f9e21a46d663d8c6e3529b8827c570b08cab5aa402431e"
+    },
+    {
+      "path": "sprites/street-scooter-autumn.png",
+      "bytes": 631,
+      "sha256": "d76184a8ac27730271adf7553a48ba7f372f09ab26be130ad202c7761b081f5d"
+    },
+    {
+      "path": "sprites/street-scooter-winter.png",
+      "bytes": 590,
+      "sha256": "cef26823d45257c219c86bdf498611523847ce03cf2fe3559b284361e7e65915"
+    },
+    {
+      "path": "sprites/street-skateboard-spring.png",
+      "bytes": 619,
+      "sha256": "35a19f97349197bf64d1d169978b315d134c44efcc33808743c3b36fa1da4ad7"
+    },
+    {
+      "path": "sprites/street-skateboard-summer.png",
+      "bytes": 633,
+      "sha256": "46394626de6f2ca548f36fecf2c9d1326bc8401adcaf03947c96caad6a19cc54"
+    },
+    {
+      "path": "sprites/street-skateboard-autumn.png",
+      "bytes": 682,
+      "sha256": "26e8a70e9d0e45ada242dba669b9da3f2848f988bd16dcbe253c756c1ca37f4e"
+    },
+    {
+      "path": "sprites/street-skateboard-winter.png",
+      "bytes": 702,
+      "sha256": "ea08449aac42db6b0d039bd0d1a201416d4b3072a9cf425d3e67e6279a958c65"
+    },
+    {
+      "path": "sprites/street-wagon-spring.png",
+      "bytes": 783,
+      "sha256": "9c224f438dd2d777a15d4dde60186fafdb101e01db315787f1efec1671ac045e"
+    },
+    {
+      "path": "sprites/street-wagon-summer.png",
+      "bytes": 708,
+      "sha256": "e7c982a7da6765aa2603761a00dc380d4ed045c55a7d3e030f60c65501545f8a"
+    },
+    {
+      "path": "sprites/street-wagon-autumn.png",
+      "bytes": 723,
+      "sha256": "c7b8c655b08a6b020db908fce0f45bf604545be77656a6e0c718befa4f1ca13c"
+    },
+    {
+      "path": "sprites/street-wagon-winter.png",
+      "bytes": 707,
+      "sha256": "e581b95a4474a40316174d4c7935d7273ebd78102d0344ae3e796a976fcfdfff"
+    },
+    {
+      "path": "sprites/street-handcart-spring.png",
+      "bytes": 732,
+      "sha256": "006efd7547904c8596d3667ff62633a3b08a9b4954e271be6ff5f3879621213f"
+    },
+    {
+      "path": "sprites/street-handcart-summer.png",
+      "bytes": 713,
+      "sha256": "074f5d430ffcf8aa7377aa5b021096b02cf45a426bc1e918488c28689a27325f"
+    },
+    {
+      "path": "sprites/street-handcart-autumn.png",
+      "bytes": 846,
+      "sha256": "844e69e2af15efcb9334edb043d9f3959f5a9478d921e78b55aff6eae6ddf3ab"
+    },
+    {
+      "path": "sprites/street-handcart-winter.png",
+      "bytes": 811,
+      "sha256": "8f66e1b3dd9b8bddb5b41190b4eb55153e22337e2ff59fd2cb7025716a178c68"
+    },
+    {
+      "path": "sprites/street-parking-bollard-spring.png",
+      "bytes": 538,
+      "sha256": "5eaa485875376ce24a5eafa273aa7fe12155b59215e2b6da0f6b0c99f1dd77b1"
+    },
+    {
+      "path": "sprites/street-parking-bollard-summer.png",
+      "bytes": 570,
+      "sha256": "9dc1d983f4c4edd975ab000532aa87db7d7b63e7cc4d0730751251a923cb400c"
+    },
+    {
+      "path": "sprites/street-parking-bollard-autumn.png",
+      "bytes": 525,
+      "sha256": "53fa1f4c0a85439531337b11391a15c004937b414e75bc4b6db99242bdfe025b"
+    },
+    {
+      "path": "sprites/street-parking-bollard-winter.png",
+      "bytes": 515,
+      "sha256": "9c199e95e177949d112ff582841ced0181f1914289fbe1c7222c0cee2239d6b7"
+    },
+    {
+      "path": "sprites/street-umbrella-rack-spring.png",
+      "bytes": 686,
+      "sha256": "319f6a6e4c0b932adbe0db4915f92c06e06b4266c02bee2f05cd6ccedc57a27c"
+    },
+    {
+      "path": "sprites/street-umbrella-rack-summer.png",
+      "bytes": 735,
+      "sha256": "1304d7712d3e3211cb49c0d97d4a754380667209c56b16bc8e52b5fe4bc3a807"
+    },
+    {
+      "path": "sprites/street-umbrella-rack-autumn.png",
+      "bytes": 718,
+      "sha256": "95fa0bb1dcba641c89d03383f699b36e7485b41b91482f1b69587ff96c1b1d5f"
+    },
+    {
+      "path": "sprites/street-umbrella-rack-winter.png",
+      "bytes": 777,
+      "sha256": "932406fd21df7ece9d6d4cd5f8dc75d37a19234948b36f6e70a1968cc3e6d6a8"
+    },
+    {
+      "path": "sprites/street-rain-boots-spring.png",
+      "bytes": 446,
+      "sha256": "0fa5000e56fa81db952ca6cb3204423ff4e9abe94c789fbdbabec4c0456617ca"
+    },
+    {
+      "path": "sprites/street-rain-boots-summer.png",
+      "bytes": 439,
+      "sha256": "76b6078bc219e6dd428e8e4d9746f2beb2da979f43cd78e8b2d1ebeb0eddd1be"
+    },
+    {
+      "path": "sprites/street-rain-boots-autumn.png",
+      "bytes": 517,
+      "sha256": "9ba89f5b064588ac8d9d1b9892456750073413d4fe265fc4024b4e1eb1d068df"
+    },
+    {
+      "path": "sprites/street-rain-boots-winter.png",
+      "bytes": 431,
+      "sha256": "a7fc0ad30405d5489f21b34f0565c89a66af5b9b57052f8556edb63ee51a7301"
+    },
+    {
+      "path": "sprites/street-doormat-spring.png",
+      "bytes": 549,
+      "sha256": "82ca272ad8f74216946b0182c2ee8f4e845aa9f6c70de0ea69996e6d085e75c9"
+    },
+    {
+      "path": "sprites/street-doormat-summer.png",
+      "bytes": 589,
+      "sha256": "d5d35a13af072ee62fe0182172edec3d92c92c8a405843491c48f9ce3f468805"
+    },
+    {
+      "path": "sprites/street-doormat-autumn.png",
+      "bytes": 563,
+      "sha256": "14995d443160ef3da64f1a3eea1b4950c6915fc25829f1f162f588f02d3dc200"
+    },
+    {
+      "path": "sprites/street-doormat-winter.png",
+      "bytes": 559,
+      "sha256": "df5558a15d474c0191c5b0da1d8fbb9d2204af908dff884d7322c8803cedf66a"
+    },
+    {
+      "path": "sprites/street-boot-scraper-spring.png",
+      "bytes": 467,
+      "sha256": "8e78d67ceafa9e057dc19a59e4f098f482d512825a669d028fb5cb072dd68de3"
+    },
+    {
+      "path": "sprites/street-boot-scraper-summer.png",
+      "bytes": 471,
+      "sha256": "fa9309489de5149a93747efb0dd02e4b37ed9fe37a40ffc62135f1f98e4a1e5b"
+    },
+    {
+      "path": "sprites/street-boot-scraper-autumn.png",
+      "bytes": 514,
+      "sha256": "fb769e0c2b0fdfb846001c512039d8939a0a869bdb26e94aafcf99486852fbc5"
+    },
+    {
+      "path": "sprites/street-boot-scraper-winter.png",
+      "bytes": 507,
+      "sha256": "7f62d926ec8779e425d811225d510b626742d5e48b7f291eadea27e2e2b299d5"
+    },
+    {
+      "path": "sprites/street-doorbell-pillar-spring.png",
+      "bytes": 551,
+      "sha256": "2805aa4ce8af1385cd5fc32e1ca4319678baf599dd4eef5f101c542d86d95d70"
+    },
+    {
+      "path": "sprites/street-doorbell-pillar-summer.png",
+      "bytes": 565,
+      "sha256": "c0375f9b75a1425ef9aa9616d0c9ceb86ecda066229417ff95ae2886897e43d1"
+    },
+    {
+      "path": "sprites/street-doorbell-pillar-autumn.png",
+      "bytes": 606,
+      "sha256": "9aed1d60fac00fcdded430174e144c7665b080144c5311cb9ce015e84198dcdb"
+    },
+    {
+      "path": "sprites/street-doorbell-pillar-winter.png",
+      "bytes": 562,
+      "sha256": "2c0ae97392bd629044244cfa29280b89a329b91e407e5da6661009be38531976"
+    },
+    {
+      "path": "sprites/street-shoe-cubby-spring.png",
+      "bytes": 550,
+      "sha256": "4fab43f4dc09682b626d0716bc146f9527523b3177ffaf4915fa2ba311283542"
+    },
+    {
+      "path": "sprites/street-shoe-cubby-summer.png",
+      "bytes": 581,
+      "sha256": "8a89448feffd94df32b4906abb6239137cef9f9ee1587e347ec4e6d4ac4198b0"
+    },
+    {
+      "path": "sprites/street-shoe-cubby-autumn.png",
+      "bytes": 552,
+      "sha256": "f7d6a637819d2cf1be8cd124b330d5acd6a5530737c5b9ecd4b23aeb34da9028"
+    },
+    {
+      "path": "sprites/street-shoe-cubby-winter.png",
+      "bytes": 591,
+      "sha256": "85bd1f22d7346643f84172b5d736fcaf1099ab1d6d01fc7e71a547b4e078b1cf"
+    },
+    {
+      "path": "sprites/street-coat-hook-spring.png",
+      "bytes": 558,
+      "sha256": "beb9886923fa686fb5a85cfc60d47bc486563eccf68c9f8677cc3c9eeb45439d"
+    },
+    {
+      "path": "sprites/street-coat-hook-summer.png",
+      "bytes": 574,
+      "sha256": "edc0827de8ae3e9cad9ab000954c99f7457c9f731be329e6d4f312dece82fd3d"
+    },
+    {
+      "path": "sprites/street-coat-hook-autumn.png",
+      "bytes": 601,
+      "sha256": "1527b066e0de5393c3a6c0917a3f3a7e142bf85b00e9d39f9755dd3a214ed039"
+    },
+    {
+      "path": "sprites/street-coat-hook-winter.png",
+      "bytes": 662,
+      "sha256": "3d4d1953c852f9f86bafaf2d52037f09ba1222e10401b6fbf8015f826cbac860"
+    },
+    {
+      "path": "sprites/street-folding-screen-spring.png",
+      "bytes": 677,
+      "sha256": "80d1d39ff7ef1bbc91ee063e25ba8bdfbade08349091eec0f22c448ecbad0dc1"
+    },
+    {
+      "path": "sprites/street-folding-screen-summer.png",
+      "bytes": 659,
+      "sha256": "67398ef2a6c0cc37dbfa3ab0e9b93ef621276894ce5ec9378a271c35d29cd692"
+    },
+    {
+      "path": "sprites/street-folding-screen-autumn.png",
+      "bytes": 650,
+      "sha256": "fb4abd9b7df88b4d34e33226a05ab5132d3079ebe0c24914062a3ef0631a0456"
+    },
+    {
+      "path": "sprites/street-folding-screen-winter.png",
+      "bytes": 673,
+      "sha256": "cd741aaf712de3c2e87093ba1a3e6b1cfb32005e0c447214c71b3e9a46851dc8"
+    },
+    {
+      "path": "sprites/street-birdhouse-spring.png",
+      "bytes": 789,
+      "sha256": "b1653600986cc51a7569494c3cf081a60a1d453350205bf829ac86b22a9dc813"
+    },
+    {
+      "path": "sprites/street-birdhouse-summer.png",
+      "bytes": 685,
+      "sha256": "336824ec52db907046d65fc273ff5280cebbf9d574fbff76bbecde1d6de39d7d"
+    },
+    {
+      "path": "sprites/street-birdhouse-autumn.png",
+      "bytes": 728,
+      "sha256": "eb7998eaf714d55e10b46b3fdd84c0f55e4538c8c246cc27865d0be2d13457f5"
+    },
+    {
+      "path": "sprites/street-birdhouse-winter.png",
+      "bytes": 648,
+      "sha256": "f20520fde165b09b8c23f0c70ed1a6f62b8bd034bdfd4be4236afadb680e6e7c"
+    },
+    {
+      "path": "sprites/street-birdbath-spring.png",
+      "bytes": 770,
+      "sha256": "4402df9241a0a1f1bdc6e30c266898b6b637a488ddf9cc31afa305fa07f4b1f9"
+    },
+    {
+      "path": "sprites/street-birdbath-summer.png",
+      "bytes": 614,
+      "sha256": "4b77422867c4fbfd748a7655594c391c65c90a86c7f5231594b3f3f781329fa2"
+    },
+    {
+      "path": "sprites/street-birdbath-autumn.png",
+      "bytes": 732,
+      "sha256": "71dbc747ea978123f6caa74de6974fc168965e5d133c8f74bf3d1f6b6ddd6998"
+    },
+    {
+      "path": "sprites/street-birdbath-winter.png",
+      "bytes": 623,
+      "sha256": "eb7f454f0f575506c0298b94e8fdc8328b19c722f0dc29fc1eb5d6782a4c1670"
+    },
+    {
+      "path": "sprites/street-feeder-spring.png",
+      "bytes": 676,
+      "sha256": "d6c85b1dfdb5f86fef4f667850b6720bdce2bbcd2e66dc8059e847ed7bb53812"
+    },
+    {
+      "path": "sprites/street-feeder-summer.png",
+      "bytes": 702,
+      "sha256": "8144156eea8fc44b08cc31cbd1681ba7767ccc911289a1191cbcc5bf9e076466"
+    },
+    {
+      "path": "sprites/street-feeder-autumn.png",
+      "bytes": 595,
+      "sha256": "da188f39b14626b3f3e9907f6e3197be43f00583a9e955900bd2489888c41216"
+    },
+    {
+      "path": "sprites/street-feeder-winter.png",
+      "bytes": 595,
+      "sha256": "52a07d7d04b63bd90e031f562b29cb7e4c69bc487b498d2c2c2a028fd04de7a7"
+    },
+    {
+      "path": "sprites/street-insect-hotel-spring.png",
+      "bytes": 767,
+      "sha256": "be91a3dd16196c44f1b3bf3ece7e0b6d73a27fd20338714542e04f1de8323164"
+    },
+    {
+      "path": "sprites/street-insect-hotel-summer.png",
+      "bytes": 761,
+      "sha256": "608bf5e29d6b2420e9f35cac5cd99b0d587dc4c76957376f2a004b8b2c60b613"
+    },
+    {
+      "path": "sprites/street-insect-hotel-autumn.png",
+      "bytes": 732,
+      "sha256": "767614b1e01fe00cef041ad8b7881e15f8ad82ef2f6b80748a608bb63503b627"
+    },
+    {
+      "path": "sprites/street-insect-hotel-winter.png",
+      "bytes": 763,
+      "sha256": "9daa70b0659c522f088eccd84afcf299745b9c4e53b03a71bf12d077364a7e19"
+    },
+    {
+      "path": "sprites/street-stone-fountain-spring.png",
+      "bytes": 782,
+      "sha256": "8f364f1c3abe2ee8e350c08aad719bcaa15beb2bdbdc75ecc7ceee9deccea383"
+    },
+    {
+      "path": "sprites/street-stone-fountain-summer.png",
+      "bytes": 852,
+      "sha256": "16edccb2ba4bf3ef7b3977fa5be7a3617a9d77b1556ac9efb5b1605ec13fbf3e"
+    },
+    {
+      "path": "sprites/street-stone-fountain-autumn.png",
+      "bytes": 795,
+      "sha256": "6759462e0815ba801dee19af7443f7567983c741d58f8801b5d26ddc83601595"
+    },
+    {
+      "path": "sprites/street-stone-fountain-winter.png",
+      "bytes": 707,
+      "sha256": "a1e6715309acaff86d98c95c41de04a4da934517dcb32e598eac0d4c7b433367"
+    },
+    {
+      "path": "sprites/street-water-pump-spring.png",
+      "bytes": 630,
+      "sha256": "fa55972251f2ca624b88f26cd9c6ad671623445b77bd52e52daeace137a5fb83"
+    },
+    {
+      "path": "sprites/street-water-pump-summer.png",
+      "bytes": 586,
+      "sha256": "5012745ae7f42470b0745c7c2a60b19b4ab5996b37e395f493932a689e273961"
+    },
+    {
+      "path": "sprites/street-water-pump-autumn.png",
+      "bytes": 559,
+      "sha256": "9e7b91a036953c9ab1d245cf99b6ee84ef42d6a0a3988db958bb35d3bc06bcb0"
+    },
+    {
+      "path": "sprites/street-water-pump-winter.png",
+      "bytes": 610,
+      "sha256": "8c9ce217e5d30df636b5a82e882eda2f144ddfb75dccb96489f95b2428e9f27d"
+    },
+    {
+      "path": "sprites/street-rain-barrel-spring.png",
+      "bytes": 606,
+      "sha256": "8d2820d336b2748b7749f6249e35b033378c737584718f1cad6a268c920694fe"
+    },
+    {
+      "path": "sprites/street-rain-barrel-summer.png",
+      "bytes": 614,
+      "sha256": "e56de54f459430029f8cee04dc48862d9979534b80123ceb95c48450b838cf5e"
+    },
+    {
+      "path": "sprites/street-rain-barrel-autumn.png",
+      "bytes": 627,
+      "sha256": "c1b56462bbe3840e661cb5cfa636e3514a4af8089d8d46ae53371f50a14e5555"
+    },
+    {
+      "path": "sprites/street-rain-barrel-winter.png",
+      "bytes": 599,
+      "sha256": "1847b0f5ce42a1b588617ccc3b4b7a3ab967346a17d572714eadfb39065d1cde"
+    },
+    {
+      "path": "sprites/street-hose-reel-spring.png",
+      "bytes": 907,
+      "sha256": "2c3b2d5add1b6f33d29be368f511caf9596506337f64392b6262522e31bc478f"
+    },
+    {
+      "path": "sprites/street-hose-reel-summer.png",
+      "bytes": 975,
+      "sha256": "ad6967adfcad2589a44af8e55721020addf43aa3a8031b6db5007d41585097cd"
+    },
+    {
+      "path": "sprites/street-hose-reel-autumn.png",
+      "bytes": 884,
+      "sha256": "245d63fcc738ca02efa0d7f72a1579ee1467697b65b7ecd26a93eff4dd801293"
+    },
+    {
+      "path": "sprites/street-hose-reel-winter.png",
+      "bytes": 568,
+      "sha256": "9856753245b64adfc879671080accec091a9c750d5eaa4d10eb9d187a26eb1df"
+    },
+    {
+      "path": "sprites/street-flower-cart-spring.png",
+      "bytes": 882,
+      "sha256": "cab904529bc3db35def7564fd89ebafb1057c129892b89eff1ca8354ef4a4d5e"
+    },
+    {
+      "path": "sprites/street-flower-cart-summer.png",
+      "bytes": 946,
+      "sha256": "46721f46040c745fdc2375b269a723ba394a690100fa41608f9c0d7795976c0a"
+    },
+    {
+      "path": "sprites/street-flower-cart-autumn.png",
+      "bytes": 936,
+      "sha256": "f9a0f5e50b39d8b22c9acd32155b59a22ea8e89d45cce47b7c94595535a5da87"
+    },
+    {
+      "path": "sprites/street-flower-cart-winter.png",
+      "bytes": 918,
+      "sha256": "2754fb008d1fa408543b649bc22b8808698dfed61ad6ba4a2aa56b17cf91bafa"
+    },
+    {
+      "path": "sprites/street-lattice-panel-spring.png",
+      "bytes": 887,
+      "sha256": "1c478d6297ea5efa18049f0b8ee662d2d2d9c84126e6d855f85f05d46c4a815a"
+    },
+    {
+      "path": "sprites/street-lattice-panel-summer.png",
+      "bytes": 981,
+      "sha256": "4fff785a8a024bd4e434e28df695a6d91ab4c61e17bb162728b94a78780a0533"
+    },
+    {
+      "path": "sprites/street-lattice-panel-autumn.png",
+      "bytes": 928,
+      "sha256": "9b885ff6df9ee87bfbcd916c0c8a64c7a561d3d5d7dccada8ed945bcd9a18c64"
+    },
+    {
+      "path": "sprites/street-lattice-panel-winter.png",
+      "bytes": 923,
+      "sha256": "a3db5177c3861822293062e54fff0c0b66a5293e72abb9cfcd43a1b81e2c1739"
+    },
+    {
+      "path": "sprites/street-raised-bed-spring.png",
+      "bytes": 633,
+      "sha256": "251612268d4ae65aa14c6e3a7815444c73dd4fe45d468909dc52bdfab0d3ed00"
+    },
+    {
+      "path": "sprites/street-raised-bed-summer.png",
+      "bytes": 774,
+      "sha256": "fb07558edb2415ef8d8121d4c108fc4ee76d8da7191d6a3d2056e8ec32990e09"
+    },
+    {
+      "path": "sprites/street-raised-bed-autumn.png",
+      "bytes": 686,
+      "sha256": "6f91892af27478982a715790f66e8bc2ad2da65b4703aeb006eb523f1374a383"
+    },
+    {
+      "path": "sprites/street-raised-bed-winter.png",
+      "bytes": 597,
+      "sha256": "aca4e50dca834d1b3f02b518aa77611c6281ed8747b70109be9d4c6fc162ecf9"
+    },
+    {
+      "path": "sprites/street-seedling-tray-spring.png",
+      "bytes": 608,
+      "sha256": "57637ed67c27e34e2e56359c611aa01cdbf0c128129b529090c8e91f37d8f2f5"
+    },
+    {
+      "path": "sprites/street-seedling-tray-summer.png",
+      "bytes": 683,
+      "sha256": "aeeaac76e2f25c8dc0de100d2a6c4819dab9f4e7c62c702dbd7ca9431076d885"
+    },
+    {
+      "path": "sprites/street-seedling-tray-autumn.png",
+      "bytes": 587,
+      "sha256": "79b2146cd50680d64316e887329ac76f06b09a41af6a156623ebdfbedb467cde"
+    },
+    {
+      "path": "sprites/street-seedling-tray-winter.png",
+      "bytes": 600,
+      "sha256": "ba8989c65bb4996af8a70ee852dcccd165389a4c32a2ddb917662265c9c2ad24"
+    },
+    {
+      "path": "sprites/street-garden-tool-stand-spring.png",
+      "bytes": 622,
+      "sha256": "67c23dbba58e1c588f65f0ecd2a510771d42fe41b58f7f1724090283eb3576a4"
+    },
+    {
+      "path": "sprites/street-garden-tool-stand-summer.png",
+      "bytes": 644,
+      "sha256": "58290045486ab6435d550c2ca03c60a88b31a668bed88ce9258dfe027ecc9a78"
+    },
+    {
+      "path": "sprites/street-garden-tool-stand-autumn.png",
+      "bytes": 638,
+      "sha256": "0d040e468ac4c03937fb21c7c2cba069fe94043b5caaa2ababbe1e63e9cbfce4"
+    },
+    {
+      "path": "sprites/street-garden-tool-stand-winter.png",
+      "bytes": 720,
+      "sha256": "e78237223b577d66d0a9989209fddecf0a8c9664fd20003c4efe219dc293df1b"
+    },
+    {
+      "path": "sprites/street-compost-bin-spring.png",
+      "bytes": 435,
+      "sha256": "d2b0b402495438152724a1c163162968d8e4fc69f03ff034ea62e3d9c0b159af"
+    },
+    {
+      "path": "sprites/street-compost-bin-summer.png",
+      "bytes": 490,
+      "sha256": "eaf103435deb82a4f0988842c20a54554571aa25dcd423b380492a9d1c5b22f6"
+    },
+    {
+      "path": "sprites/street-compost-bin-autumn.png",
+      "bytes": 533,
+      "sha256": "a7f3c767c3fe267464a8c0ad547c7b9d7e8c5573b9066b1408053296d7c97f92"
+    },
+    {
+      "path": "sprites/street-compost-bin-winter.png",
+      "bytes": 503,
+      "sha256": "1ec23745e773f5fa487df438f00cf62721dddb1da80617ba5cf2152e01f6591f"
+    },
+    {
+      "path": "sprites/street-cold-frame-spring.png",
+      "bytes": 722,
+      "sha256": "f50b89a4d7817a946445d32dde4271627c263d2245435a61d30bf52b8a4ef605"
+    },
+    {
+      "path": "sprites/street-cold-frame-summer.png",
+      "bytes": 710,
+      "sha256": "0a01a85ea6671b6075df8ee484944a7f8490c71e6b0ef3739f90eaeb7382619c"
+    },
+    {
+      "path": "sprites/street-cold-frame-autumn.png",
+      "bytes": 668,
+      "sha256": "dcb47a99e682c99958e9ff395ac266827fc76655037a8bf12c274663762197a2"
+    },
+    {
+      "path": "sprites/street-cold-frame-winter.png",
+      "bytes": 666,
+      "sha256": "508fb88542f700110745cf7d15948ccd433fd32979912d41a17348ec1a64c87f"
+    },
+    {
+      "path": "sprites/street-stepping-stones-spring.png",
+      "bytes": 504,
+      "sha256": "79313128bc12053c8d91337c2d29278db2b4d5886e1ba12969b8392c85e383b5"
+    },
+    {
+      "path": "sprites/street-stepping-stones-summer.png",
+      "bytes": 532,
+      "sha256": "72500f241086d651399a55d0944ec727d8fa9efffd46255365d4b40c75678db4"
+    },
+    {
+      "path": "sprites/street-stepping-stones-autumn.png",
+      "bytes": 547,
+      "sha256": "da1ff32ace767339fddd1cc99ab279fab3c54d0b782fa4c48f0dbd991a8b5e8f"
+    },
+    {
+      "path": "sprites/street-stepping-stones-winter.png",
+      "bytes": 639,
+      "sha256": "b49a1dfe3bde28579f35f675f7c57225f7051ca514a14ec02b08b8b0890a3b5f"
+    },
+    {
+      "path": "sprites/street-gate-panel-spring.png",
+      "bytes": 636,
+      "sha256": "b88b75066f81f2bde2dbeaf82fa087735c960f543733b05bf6d694ff252f385d"
+    },
+    {
+      "path": "sprites/street-gate-panel-summer.png",
+      "bytes": 645,
+      "sha256": "a5ebc4a403418c9e921e35026be8d3438e280ebd8d79b6e2d58b571ed1c840ab"
+    },
+    {
+      "path": "sprites/street-gate-panel-autumn.png",
+      "bytes": 663,
+      "sha256": "f091e3d938807ff181b663187d3c2d1311e4bb8bb413381fe86181a0b8341115"
+    },
+    {
+      "path": "sprites/street-gate-panel-winter.png",
+      "bytes": 685,
+      "sha256": "e89569006df95adb322fd01d85450b0566c19935b4b1aa003eb3d88637ff4c3b"
+    },
+    {
+      "path": "sprites/street-fence-corner-spring.png",
+      "bytes": 688,
+      "sha256": "f71a087a421875a4415deb2adc92e9180fbbe9f10b9bf58c39ec1b3f02d53293"
+    },
+    {
+      "path": "sprites/street-fence-corner-summer.png",
+      "bytes": 770,
+      "sha256": "401c27feb985dafc05d0a17b094b2706f0e1afb0b9a0a37f47e7dc32bfab106b"
+    },
+    {
+      "path": "sprites/street-fence-corner-autumn.png",
+      "bytes": 694,
+      "sha256": "da226a7845081d041b0431bf16ec6ecf4e9d50d05d6adabfa4e61d8ae8bd96a7"
+    },
+    {
+      "path": "sprites/street-fence-corner-winter.png",
+      "bytes": 660,
+      "sha256": "3e864c53c4b653accbe132d08a3fa2ea7b1c164fd6d518a07bb999ab7621e6dd"
+    },
+    {
+      "path": "sprites/street-firewood-rack-spring.png",
+      "bytes": 689,
+      "sha256": "c30e7791230e3c2b624e141159cf957dcc044e3fc79d14610367403ed2481d5e"
+    },
+    {
+      "path": "sprites/street-firewood-rack-summer.png",
+      "bytes": 715,
+      "sha256": "e1b4264ba63be12124d9a0304c26c264e1dbd961448ab5f15ea3486c42cc29ba"
+    },
+    {
+      "path": "sprites/street-firewood-rack-autumn.png",
+      "bytes": 727,
+      "sha256": "79055d322a92b7ef9a869c1ead81e634825b91858a4789a9ca5596344b14327e"
+    },
+    {
+      "path": "sprites/street-firewood-rack-winter.png",
+      "bytes": 760,
+      "sha256": "63465cc989721d6836373c421b2b5d3c223b9a297a57ddb83ea9cd549f96df8b"
+    },
+    {
+      "path": "sprites/street-recycling-station-spring.png",
+      "bytes": 567,
+      "sha256": "90e82db94f34a2b2ee023a58f872fffe1994672a4904ed21f7acc4d4a6b88fb2"
+    },
+    {
+      "path": "sprites/street-recycling-station-summer.png",
+      "bytes": 553,
+      "sha256": "9c4bfced5c87edb5e1a2b3fb398f00ba1b2599b0643d33745734173f1aa0e876"
+    },
+    {
+      "path": "sprites/street-recycling-station-autumn.png",
+      "bytes": 546,
+      "sha256": "c5dd6dd99fc809a78a5ce86e8a7fea97e645f2e97ef8d3fd98f82f4fdd801a07"
+    },
+    {
+      "path": "sprites/street-recycling-station-winter.png",
+      "bytes": 527,
+      "sha256": "7894f16d1016e07254ad9b7fbc923d782a6c11bd8d47a628949b3024aed65e29"
+    },
+    {
+      "path": "sprites/street-street-drain-spring.png",
+      "bytes": 557,
+      "sha256": "c77c6549736d36814cf9dad7ea7e59bb40d3be1fe74f0b1410656d77b6d0d0f2"
+    },
+    {
+      "path": "sprites/street-street-drain-summer.png",
+      "bytes": 505,
+      "sha256": "32c790c460bf23736fca459fe5960fee3fd6d2e74769eb17bc82fb5e7e5717d3"
+    },
+    {
+      "path": "sprites/street-street-drain-autumn.png",
+      "bytes": 586,
+      "sha256": "f68c565046da5485b4b74f4df359aa9c154b55569a3a19221c8bfb46e9440270"
+    },
+    {
+      "path": "sprites/street-street-drain-winter.png",
+      "bytes": 560,
+      "sha256": "8d889f94a3374b2eefcbc355c1e3ec1e4363f8e22e48323489fdabd4422af5cf"
+    },
+    {
+      "path": "sprites/street-watering-trough-spring.png",
+      "bytes": 667,
+      "sha256": "afde465572585b1702a64ed4f82021833e4458f7f66745fc655d8e9198a9457a"
+    },
+    {
+      "path": "sprites/street-watering-trough-summer.png",
+      "bytes": 671,
+      "sha256": "c047c99fa835da3bb393ecd0db6ace9a606c51e8c0e7567ba24c7300f69ed45a"
+    },
+    {
+      "path": "sprites/street-watering-trough-autumn.png",
+      "bytes": 646,
+      "sha256": "144312f215835f8ec28196f9d8bba1b538f1529a7bb7f5042b97fdbded246c24"
+    },
+    {
+      "path": "sprites/street-watering-trough-winter.png",
+      "bytes": 591,
+      "sha256": "3b736a38b0dabe34e22a7af9cb832ceb923b7712b20f8cf8feada5cb41b50ad9"
+    },
+    {
+      "path": "sprites/street-patio-parasol-spring.png",
+      "bytes": 687,
+      "sha256": "0cde0a83aeb5b0477de4231e2ef9af24e690232f2acf9f69162bd449a981d1cb"
+    },
+    {
+      "path": "sprites/street-patio-parasol-summer.png",
+      "bytes": 711,
+      "sha256": "a87a70d30da61ced63ae13987f331b0d9e3ff009d0efecfb3ec471b37cb1528c"
+    },
+    {
+      "path": "sprites/street-patio-parasol-autumn.png",
+      "bytes": 748,
+      "sha256": "7c691c7b645ddfc0be1f131be1966bc0a80087c16b10cca9b2fbec99ca4664c0"
+    },
+    {
+      "path": "sprites/street-patio-parasol-winter.png",
+      "bytes": 482,
+      "sha256": "9c9f7689e62efa0c727fac179499a06c532f841f1350fb8841611d427720920b"
+    },
+    {
+      "path": "sprites/street-weather-vane-spring.png",
+      "bytes": 877,
+      "sha256": "0dce4e82d2bb50e6a1434193779d01fd6646abb06327e8c568e6b304ef59f80f"
+    },
+    {
+      "path": "sprites/street-weather-vane-summer.png",
+      "bytes": 890,
+      "sha256": "ecbe0b1f8e1fe11e228d0354aebca06593d02f3741769e66bc54bd58e843fffb"
+    },
+    {
+      "path": "sprites/street-weather-vane-autumn.png",
+      "bytes": 871,
+      "sha256": "be655a1cf83fc2947bcd70494ceee06c7542a48feef77e66c8a7677da3706252"
+    },
+    {
+      "path": "sprites/street-weather-vane-winter.png",
+      "bytes": 912,
+      "sha256": "9147e9b422fb5473a4b06ef691bb7aa1bb86dcc735f2af8e3192a73a104ab08c"
+    }
+  ]
+}

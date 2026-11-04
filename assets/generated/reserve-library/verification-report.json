@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "packs": 5,
+  "sprites": 960,
+  "baseShapes": 240,
+  "uniqueIds": 960,
+  "uniquePixelHashes": 960,
+  "note": "Cross-pack exact-duplicate and manifest/decoded-PNG checks; not a visual-quality verdict."
+}

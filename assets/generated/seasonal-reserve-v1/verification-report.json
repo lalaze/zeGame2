@@ -1,0 +1,3900 @@
+{
+  "schemaVersion": 1,
+  "packId": "seasonal-reserve-v1",
+  "status": "passed",
+  "command": "node scripts/build-seasonal-reserve.mjs --check",
+  "counts": {
+    "sprites": 192,
+    "baseShapes": 48,
+    "representativeBaseSilhouettes": 48,
+    "seasons": 4,
+    "categories": 6,
+    "pngFiles": 194,
+    "nonRecolorVariantPairs": 288,
+    "atlasPixelsCompared": 1769472
+  },
+  "checks": {
+    "pngDecode": true,
+    "dimensions": true,
+    "nativeDensity2": true,
+    "binaryAlpha": true,
+    "masterPaletteOnly": true,
+    "transparentRgbClean": true,
+    "transparentPaddingAtLeast2": true,
+    "nonemptyDetailedSprites": true,
+    "noExactDuplicates": true,
+    "noPureRecolorVariants": true,
+    "distinctBaseSilhouettes": true,
+    "atlasPixelReadback": true,
+    "atlasNonoverlap": true,
+    "safeRelativePaths": true,
+    "stableUniqueIds": true,
+    "bilingualNames": true,
+    "normalizedContactAnchors": true,
+    "deterministicRegeneration": true,
+    "offlineCatalogMatchesManifest": true,
+    "reserveNotIntegrated": true
+  },
+  "artifacts": {
+    "atlas": {
+      "path": "atlas.png",
+      "width": 1152,
+      "height": 1536,
+      "pixelSha256": "fdb5bdedfea30d8a76d652a3f10a45c8d4eeb966a62dbdb944d410f65b1f3bda",
+      "fileSha256": "63f0260b5b3e5d5a8ebd7f7ccabcbaa9a396e504583ed845b30a339455145f12"
+    },
+    "contactSheet": {
+      "path": "contact-sheet.png",
+      "width": 1344,
+      "height": 1856,
+      "fileSha256": "80bf470cabcfa93e8b3f7e7a1339db5b5e90cba47e8cea586fe3d68ab5800ccf"
+    }
+  },
+  "limitations": [
+    "Machine checks do not replace human visual review.",
+    "These are unregistered reserve assets, not new gameplay or runtime content.",
+    "Contact sheet intentionally has an opaque on-palette background."
+  ],
+  "sprites": [
+    {
+      "id": "tea-cup-spring",
+      "path": "sprites/tea-cup-spring.png",
+      "pixelSha256": "7b84969136c0e4d27ab99419ebdcf7fad704dfefc75bc724575eba5c9f4ee59f",
+      "opaquePixels": 1863,
+      "colors": 9,
+      "bounds": {
+        "x": 17,
+        "y": 23,
+        "width": 63,
+        "height": 61
+      },
+      "padding": {
+        "left": 17,
+        "top": 23,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "tea-cup-summer",
+      "path": "sprites/tea-cup-summer.png",
+      "pixelSha256": "0880817ad6227c0c167095c9c1b7882e65c6db17134f89eac5af61652e4e2f79",
+      "opaquePixels": 1953,
+      "colors": 12,
+      "bounds": {
+        "x": 17,
+        "y": 24,
+        "width": 63,
+        "height": 60
+      },
+      "padding": {
+        "left": 17,
+        "top": 24,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "tea-cup-autumn",
+      "path": "sprites/tea-cup-autumn.png",
+      "pixelSha256": "81f979740af0783c036a46b4eff345d737f3470f0ded45f59e4acd358169d2dd",
+      "opaquePixels": 1855,
+      "colors": 10,
+      "bounds": {
+        "x": 17,
+        "y": 23,
+        "width": 63,
+        "height": 61
+      },
+      "padding": {
+        "left": 17,
+        "top": 23,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "tea-cup-winter",
+      "path": "sprites/tea-cup-winter.png",
+      "pixelSha256": "97fb24e5480c69579fd96bf3c0860e51e705b8149a667780c97496f8e5606440",
+      "opaquePixels": 1966,
+      "colors": 11,
+      "bounds": {
+        "x": 17,
+        "y": 32,
+        "width": 63,
+        "height": 52
+      },
+      "padding": {
+        "left": 17,
+        "top": 32,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "iced-tumbler-spring",
+      "path": "sprites/iced-tumbler-spring.png",
+      "pixelSha256": "9976dfa865ccd9461da3e71064def8ee2f0d3247742b8361cbeb751076c64b84",
+      "opaquePixels": 2090,
+      "colors": 10,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 70
+      },
+      "padding": {
+        "left": 19,
+        "top": 15,
+        "right": 18,
+        "bottom": 11
+      },
+      "status": "passed"
+    },
+    {
+      "id": "iced-tumbler-summer",
+      "path": "sprites/iced-tumbler-summer.png",
+      "pixelSha256": "dbd2f2b1f35d2f6d99141d6f8d50ebd4c31c72cb31b988e9782adf7a61db8d34",
+      "opaquePixels": 2064,
+      "colors": 11,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 70
+      },
+      "padding": {
+        "left": 19,
+        "top": 15,
+        "right": 18,
+        "bottom": 11
+      },
+      "status": "passed"
+    },
+    {
+      "id": "iced-tumbler-autumn",
+      "path": "sprites/iced-tumbler-autumn.png",
+      "pixelSha256": "e8da1aa1d8324eaf5d049e8a03c0be4a878e9b274348b7ab5d9f2e292e0b892a",
+      "opaquePixels": 1979,
+      "colors": 10,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 70
+      },
+      "padding": {
+        "left": 19,
+        "top": 15,
+        "right": 18,
+        "bottom": 11
+      },
+      "status": "passed"
+    },
+    {
+      "id": "iced-tumbler-winter",
+      "path": "sprites/iced-tumbler-winter.png",
+      "pixelSha256": "d6efa88e133d4ea08b1d816d71d067ef07366d76a8ba9391866176ccd16f2fd9",
+      "opaquePixels": 2006,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 70
+      },
+      "padding": {
+        "left": 19,
+        "top": 15,
+        "right": 18,
+        "bottom": 11
+      },
+      "status": "passed"
+    },
+    {
+      "id": "tea-pot-spring",
+      "path": "sprites/tea-pot-spring.png",
+      "pixelSha256": "31e9c7f6e9656ea223b1defb97a00671bc9d0acbd77109b6343361efc9381a55",
+      "opaquePixels": 2628,
+      "colors": 12,
+      "bounds": {
+        "x": 14,
+        "y": 22,
+        "width": 69,
+        "height": 62
+      },
+      "padding": {
+        "left": 14,
+        "top": 22,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "tea-pot-summer",
+      "path": "sprites/tea-pot-summer.png",
+      "pixelSha256": "4b541376060fef0c31f8e276d5ba52b0dae59383b2566ef2fcfaae71392b1786",
+      "opaquePixels": 2634,
+      "colors": 13,
+      "bounds": {
+        "x": 14,
+        "y": 22,
+        "width": 69,
+        "height": 62
+      },
+      "padding": {
+        "left": 14,
+        "top": 22,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "tea-pot-autumn",
+      "path": "sprites/tea-pot-autumn.png",
+      "pixelSha256": "10615c0ecf80042f3238e9a8b678c190e9bdfc9a4994da274e274cff6c772345",
+      "opaquePixels": 2611,
+      "colors": 13,
+      "bounds": {
+        "x": 14,
+        "y": 22,
+        "width": 69,
+        "height": 62
+      },
+      "padding": {
+        "left": 14,
+        "top": 22,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "tea-pot-winter",
+      "path": "sprites/tea-pot-winter.png",
+      "pixelSha256": "2c59acc33a358af3dca711ea66994a0f10488fc37be1ba09ac58a868b859a0ba",
+      "opaquePixels": 2625,
+      "colors": 14,
+      "bounds": {
+        "x": 14,
+        "y": 22,
+        "width": 69,
+        "height": 64
+      },
+      "padding": {
+        "left": 14,
+        "top": 22,
+        "right": 13,
+        "bottom": 10
+      },
+      "status": "passed"
+    },
+    {
+      "id": "coffee-dripper-spring",
+      "path": "sprites/coffee-dripper-spring.png",
+      "pixelSha256": "6822664a747920fb9a35eb5f1cbe9598886d26bf936d1b95e86f74c9a8b1dbf5",
+      "opaquePixels": 1991,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "width": 59,
+        "height": 68
+      },
+      "padding": {
+        "left": 19,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "coffee-dripper-summer",
+      "path": "sprites/coffee-dripper-summer.png",
+      "pixelSha256": "e4e25ae3aee94454c8123b3404df78e88b5c21bf23e9c9349514778827d0a80f",
+      "opaquePixels": 2062,
+      "colors": 15,
+      "bounds": {
+        "x": 16,
+        "y": 12,
+        "width": 62,
+        "height": 72
+      },
+      "padding": {
+        "left": 16,
+        "top": 12,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "coffee-dripper-autumn",
+      "path": "sprites/coffee-dripper-autumn.png",
+      "pixelSha256": "89ba3f16feae2bcdc71714ccc56c40aedc62e0b8837d24f1cf952d16568e7c2f",
+      "opaquePixels": 1946,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 18,
+        "width": 59,
+        "height": 66
+      },
+      "padding": {
+        "left": 19,
+        "top": 18,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "coffee-dripper-winter",
+      "path": "sprites/coffee-dripper-winter.png",
+      "pixelSha256": "d8ed0f300d1b43893ad61814f959db3e98fe7b727a8b1ded09cf1c5b1371056f",
+      "opaquePixels": 2003,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 73
+      },
+      "padding": {
+        "left": 19,
+        "top": 15,
+        "right": 18,
+        "bottom": 8
+      },
+      "status": "passed"
+    },
+    {
+      "id": "parfait-spring",
+      "path": "sprites/parfait-spring.png",
+      "pixelSha256": "3cb03fb6d2f27937154ae45121912a1e433db4bc24b768bf65f48a3623f4ba52",
+      "opaquePixels": 2086,
+      "colors": 10,
+      "bounds": {
+        "x": 19,
+        "y": 11,
+        "width": 59,
+        "height": 75
+      },
+      "padding": {
+        "left": 19,
+        "top": 11,
+        "right": 18,
+        "bottom": 10
+      },
+      "status": "passed"
+    },
+    {
+      "id": "parfait-summer",
+      "path": "sprites/parfait-summer.png",
+      "pixelSha256": "333719010478f3bbebb6f204c2ddc49415c038e15d203c3ad99b20ced2eb2180",
+      "opaquePixels": 2080,
+      "colors": 10,
+      "bounds": {
+        "x": 19,
+        "y": 7,
+        "width": 59,
+        "height": 79
+      },
+      "padding": {
+        "left": 19,
+        "top": 7,
+        "right": 18,
+        "bottom": 10
+      },
+      "status": "passed"
+    },
+    {
+      "id": "parfait-autumn",
+      "path": "sprites/parfait-autumn.png",
+      "pixelSha256": "7b1595994ea907f95ba77da89f58d9dbd39577ba916c782e4d6d8dc16400ac61",
+      "opaquePixels": 2034,
+      "colors": 11,
+      "bounds": {
+        "x": 19,
+        "y": 12,
+        "width": 59,
+        "height": 74
+      },
+      "padding": {
+        "left": 19,
+        "top": 12,
+        "right": 18,
+        "bottom": 10
+      },
+      "status": "passed"
+    },
+    {
+      "id": "parfait-winter",
+      "path": "sprites/parfait-winter.png",
+      "pixelSha256": "f748343c02ca8f5e715e96a30b23b49a8fcf76b2097d47b5264c32002f4b5ed4",
+      "opaquePixels": 2048,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 11,
+        "width": 59,
+        "height": 75
+      },
+      "padding": {
+        "left": 19,
+        "top": 11,
+        "right": 18,
+        "bottom": 10
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cake-slice-spring",
+      "path": "sprites/cake-slice-spring.png",
+      "pixelSha256": "160bd16996a3b09c57b2163bf98711c09f0deba19e67e0185e62929113268128",
+      "opaquePixels": 2553,
+      "colors": 9,
+      "bounds": {
+        "x": 15,
+        "y": 22,
+        "width": 67,
+        "height": 62
+      },
+      "padding": {
+        "left": 15,
+        "top": 22,
+        "right": 14,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cake-slice-summer",
+      "path": "sprites/cake-slice-summer.png",
+      "pixelSha256": "6f828e8ce3d8f598e25a10338336152196e3a48c1eacecbc21b01b44f84523d2",
+      "opaquePixels": 2549,
+      "colors": 11,
+      "bounds": {
+        "x": 15,
+        "y": 19,
+        "width": 67,
+        "height": 65
+      },
+      "padding": {
+        "left": 15,
+        "top": 19,
+        "right": 14,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cake-slice-autumn",
+      "path": "sprites/cake-slice-autumn.png",
+      "pixelSha256": "0571dfb79b928f6cef9cf6de5778c3cf36412f47c559ce0b33d97b69f9c89d71",
+      "opaquePixels": 2527,
+      "colors": 10,
+      "bounds": {
+        "x": 15,
+        "y": 24,
+        "width": 67,
+        "height": 60
+      },
+      "padding": {
+        "left": 15,
+        "top": 24,
+        "right": 14,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cake-slice-winter",
+      "path": "sprites/cake-slice-winter.png",
+      "pixelSha256": "8cbe70c3c157bf47ed4be5c0a15abf698be3db94d601d5cc73bc36c019c544ab",
+      "opaquePixels": 2527,
+      "colors": 13,
+      "bounds": {
+        "x": 15,
+        "y": 24,
+        "width": 67,
+        "height": 60
+      },
+      "padding": {
+        "left": 15,
+        "top": 24,
+        "right": 14,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "fruit-tart-spring",
+      "path": "sprites/fruit-tart-spring.png",
+      "pixelSha256": "98c7474f6f369e6aed3cc75c71153554e55651713990b8a31ca76582f8e5bde7",
+      "opaquePixels": 1953,
+      "colors": 12,
+      "bounds": {
+        "x": 17,
+        "y": 42,
+        "width": 63,
+        "height": 42
+      },
+      "padding": {
+        "left": 17,
+        "top": 42,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "fruit-tart-summer",
+      "path": "sprites/fruit-tart-summer.png",
+      "pixelSha256": "3aa0bde7dc58112f3aa0677f2926baf458c8b74c3aa68cdc2c1e348ff90bd3c3",
+      "opaquePixels": 1988,
+      "colors": 14,
+      "bounds": {
+        "x": 17,
+        "y": 38,
+        "width": 63,
+        "height": 46
+      },
+      "padding": {
+        "left": 17,
+        "top": 38,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "fruit-tart-autumn",
+      "path": "sprites/fruit-tart-autumn.png",
+      "pixelSha256": "a5915e71d0533ed9bd4cd3a1a1f09d87af2277a7c72de619d092ca8f6ae86477",
+      "opaquePixels": 1929,
+      "colors": 13,
+      "bounds": {
+        "x": 17,
+        "y": 44,
+        "width": 63,
+        "height": 40
+      },
+      "padding": {
+        "left": 17,
+        "top": 44,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "fruit-tart-winter",
+      "path": "sprites/fruit-tart-winter.png",
+      "pixelSha256": "14a8ac1661a9fbbfeae6574e3aa4816428fbdbb60ee648f4786390fe4027491b",
+      "opaquePixels": 1928,
+      "colors": 15,
+      "bounds": {
+        "x": 17,
+        "y": 44,
+        "width": 63,
+        "height": 40
+      },
+      "padding": {
+        "left": 17,
+        "top": 44,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "croissant-spring",
+      "path": "sprites/croissant-spring.png",
+      "pixelSha256": "a608d5b415cff7b86e1637768de74bfc2a35db941400e29a8e9e6de257402385",
+      "opaquePixels": 2084,
+      "colors": 11,
+      "bounds": {
+        "x": 15,
+        "y": 30,
+        "width": 65,
+        "height": 54
+      },
+      "padding": {
+        "left": 15,
+        "top": 30,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "croissant-summer",
+      "path": "sprites/croissant-summer.png",
+      "pixelSha256": "ba9db352033c572186573e5fdb9dc0e3447856c01040faf8f0e63b0ae73ac45d",
+      "opaquePixels": 2101,
+      "colors": 13,
+      "bounds": {
+        "x": 15,
+        "y": 27,
+        "width": 65,
+        "height": 57
+      },
+      "padding": {
+        "left": 15,
+        "top": 27,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "croissant-autumn",
+      "path": "sprites/croissant-autumn.png",
+      "pixelSha256": "2013692a194b4b9ca442664ae50dcfb368b9405e103b9f659b46c184ae95bfc2",
+      "opaquePixels": 2075,
+      "colors": 12,
+      "bounds": {
+        "x": 15,
+        "y": 30,
+        "width": 65,
+        "height": 54
+      },
+      "padding": {
+        "left": 15,
+        "top": 30,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "croissant-winter",
+      "path": "sprites/croissant-winter.png",
+      "pixelSha256": "efc5fdc6b4af7646b401f455786512001993d593258a90a875859ad25bc362b2",
+      "opaquePixels": 2082,
+      "colors": 13,
+      "bounds": {
+        "x": 15,
+        "y": 30,
+        "width": 65,
+        "height": 54
+      },
+      "padding": {
+        "left": 15,
+        "top": 30,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bud-vase-spring",
+      "path": "sprites/bud-vase-spring.png",
+      "pixelSha256": "7366ec84811bcf28557293e5da6768685de1555d087120183908b2f138a2b3a4",
+      "opaquePixels": 1342,
+      "colors": 11,
+      "bounds": {
+        "x": 19,
+        "y": 14,
+        "width": 59,
+        "height": 70
+      },
+      "padding": {
+        "left": 19,
+        "top": 14,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bud-vase-summer",
+      "path": "sprites/bud-vase-summer.png",
+      "pixelSha256": "daec2339cdcab458534280cc0f053b8dcb545b04a39da7d0a74f9949f168b2ae",
+      "opaquePixels": 1340,
+      "colors": 11,
+      "bounds": {
+        "x": 19,
+        "y": 10,
+        "width": 59,
+        "height": 74
+      },
+      "padding": {
+        "left": 19,
+        "top": 10,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bud-vase-autumn",
+      "path": "sprites/bud-vase-autumn.png",
+      "pixelSha256": "2227347180d6bf2ba37228ff425dc04c49c15a01838064cb3f2d59caac409730",
+      "opaquePixels": 1282,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "width": 59,
+        "height": 68
+      },
+      "padding": {
+        "left": 19,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bud-vase-winter",
+      "path": "sprites/bud-vase-winter.png",
+      "pixelSha256": "ea66a40e7e99456fffd9f2b43c8e4e90efce4c8b9d05c44badd6e781014f0d68",
+      "opaquePixels": 1313,
+      "colors": 11,
+      "bounds": {
+        "x": 19,
+        "y": 13,
+        "width": 59,
+        "height": 71
+      },
+      "padding": {
+        "left": 19,
+        "top": 13,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "herb-pot-spring",
+      "path": "sprites/herb-pot-spring.png",
+      "pixelSha256": "2dec3edc8b1cbafad9a813e55eab9be26e96d63fcd6918a892c5381d55cc79f0",
+      "opaquePixels": 1724,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 17,
+        "width": 59,
+        "height": 67
+      },
+      "padding": {
+        "left": 19,
+        "top": 17,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "herb-pot-summer",
+      "path": "sprites/herb-pot-summer.png",
+      "pixelSha256": "6c055af3a29412abd0fb8f15697d3b6439dfcf423b77ee0d494d0fb46017a3ac",
+      "opaquePixels": 1701,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 13,
+        "width": 59,
+        "height": 71
+      },
+      "padding": {
+        "left": 19,
+        "top": 13,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "herb-pot-autumn",
+      "path": "sprites/herb-pot-autumn.png",
+      "pixelSha256": "b8002985061768652949846d08ea6575e08c03a5708a7f1a4e9b5ca482caa9f0",
+      "opaquePixels": 1581,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 59,
+        "height": 65
+      },
+      "padding": {
+        "left": 19,
+        "top": 19,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "herb-pot-winter",
+      "path": "sprites/herb-pot-winter.png",
+      "pixelSha256": "6f146560f3397e4356b3b78fabdffa815d653082672aded6baff1de8cf9d5a26",
+      "opaquePixels": 1655,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "width": 59,
+        "height": 68
+      },
+      "padding": {
+        "left": 19,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "watering-can-spring",
+      "path": "sprites/watering-can-spring.png",
+      "pixelSha256": "d2606aec67ad7c2c19a03b24d7956fca90778e83589004799b3ca6eb2854fccb",
+      "opaquePixels": 2389,
+      "colors": 11,
+      "bounds": {
+        "x": 5,
+        "y": 14,
+        "width": 78,
+        "height": 70
+      },
+      "padding": {
+        "left": 5,
+        "top": 14,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "watering-can-summer",
+      "path": "sprites/watering-can-summer.png",
+      "pixelSha256": "484293d93382f278fb255f266cca6eca5e6fcb2d00df8b9dae3b9657974e7f0a",
+      "opaquePixels": 2381,
+      "colors": 11,
+      "bounds": {
+        "x": 5,
+        "y": 10,
+        "width": 78,
+        "height": 74
+      },
+      "padding": {
+        "left": 5,
+        "top": 10,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "watering-can-autumn",
+      "path": "sprites/watering-can-autumn.png",
+      "pixelSha256": "e5868f7bb689b324d174d220777067a1f71d7e7b591f9f8db7abb2db76eb8c62",
+      "opaquePixels": 2339,
+      "colors": 12,
+      "bounds": {
+        "x": 5,
+        "y": 16,
+        "width": 78,
+        "height": 68
+      },
+      "padding": {
+        "left": 5,
+        "top": 16,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "watering-can-winter",
+      "path": "sprites/watering-can-winter.png",
+      "pixelSha256": "23687b6520b612477884c8ffd49a90e905b9733589b6d2a3ff55bac3427fdbf0",
+      "opaquePixels": 2351,
+      "colors": 10,
+      "bounds": {
+        "x": 5,
+        "y": 13,
+        "width": 78,
+        "height": 71
+      },
+      "padding": {
+        "left": 5,
+        "top": 13,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "terrarium-spring",
+      "path": "sprites/terrarium-spring.png",
+      "pixelSha256": "ab0524b36cbc190b4a7339160790b5be2c56164da742d856e3802cf1f06645cd",
+      "opaquePixels": 2510,
+      "colors": 17,
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 59,
+        "height": 63
+      },
+      "padding": {
+        "left": 19,
+        "top": 21,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "terrarium-summer",
+      "path": "sprites/terrarium-summer.png",
+      "pixelSha256": "c2ee1014602fa5fc421bc451a6e4720d233b5774090f80fb0253867ffdb45909",
+      "opaquePixels": 2510,
+      "colors": 17,
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 59,
+        "height": 63
+      },
+      "padding": {
+        "left": 19,
+        "top": 21,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "terrarium-autumn",
+      "path": "sprites/terrarium-autumn.png",
+      "pixelSha256": "cd6215649571bfcc217a44fed283bfd9320eb3917a986b6b6ee979dbc85952a2",
+      "opaquePixels": 2510,
+      "colors": 18,
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 59,
+        "height": 63
+      },
+      "padding": {
+        "left": 19,
+        "top": 21,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "terrarium-winter",
+      "path": "sprites/terrarium-winter.png",
+      "pixelSha256": "372194ee602e83b1617408c0bc44de86762ad3eb693d847a574e583e1e1b8f81",
+      "opaquePixels": 2510,
+      "colors": 16,
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 59,
+        "height": 63
+      },
+      "padding": {
+        "left": 19,
+        "top": 21,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "hanging-planter-spring",
+      "path": "sprites/hanging-planter-spring.png",
+      "pixelSha256": "0929a1db3be57bcc598e47a67a04f93f3547498507203eddbfabb9baedba638a",
+      "opaquePixels": 1564,
+      "colors": 17,
+      "bounds": {
+        "x": 19,
+        "y": 8,
+        "width": 59,
+        "height": 76
+      },
+      "padding": {
+        "left": 19,
+        "top": 8,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "hanging-planter-summer",
+      "path": "sprites/hanging-planter-summer.png",
+      "pixelSha256": "7e832feeb588b443bb123e6513123b681d19d02f16f3bcfa2d86acac36f4cc4b",
+      "opaquePixels": 1555,
+      "colors": 17,
+      "bounds": {
+        "x": 19,
+        "y": 8,
+        "width": 59,
+        "height": 76
+      },
+      "padding": {
+        "left": 19,
+        "top": 8,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "hanging-planter-autumn",
+      "path": "sprites/hanging-planter-autumn.png",
+      "pixelSha256": "fc3befcb4db29315b0fe73e42747542586d6516dfa16a57df33d04df83e704e9",
+      "opaquePixels": 1519,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 8,
+        "width": 59,
+        "height": 76
+      },
+      "padding": {
+        "left": 19,
+        "top": 8,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "hanging-planter-winter",
+      "path": "sprites/hanging-planter-winter.png",
+      "pixelSha256": "2d7826d18525f8744d4dbb6c27c32dad8a373d7824116ac5fc2f3a2de6f628e7",
+      "opaquePixels": 1539,
+      "colors": 16,
+      "bounds": {
+        "x": 19,
+        "y": 8,
+        "width": 59,
+        "height": 76
+      },
+      "padding": {
+        "left": 19,
+        "top": 8,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bonsai-spring",
+      "path": "sprites/bonsai-spring.png",
+      "pixelSha256": "11d3dfd6ba6e9a927a2b11498d19f51ca2e176c7d4ce227af40472959a598d26",
+      "opaquePixels": 2221,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 60,
+        "height": 64
+      },
+      "padding": {
+        "left": 19,
+        "top": 20,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bonsai-summer",
+      "path": "sprites/bonsai-summer.png",
+      "pixelSha256": "f1e2eb343172c77c48caa64afdbfc38897039733ac52ab77b435250ce9a7c9c0",
+      "opaquePixels": 2248,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "width": 60,
+        "height": 68
+      },
+      "padding": {
+        "left": 19,
+        "top": 16,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bonsai-autumn",
+      "path": "sprites/bonsai-autumn.png",
+      "pixelSha256": "66dc261e273167ad1b9410fe446fa7a356675eb4a8b9ec73e5140a586e716135",
+      "opaquePixels": 2210,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 60,
+        "height": 63
+      },
+      "padding": {
+        "left": 19,
+        "top": 21,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bonsai-winter",
+      "path": "sprites/bonsai-winter.png",
+      "pixelSha256": "20df5e9baebef28a85f6ca885a2cb3660fe60ddb8ceafe291405d27d8be564b4",
+      "opaquePixels": 2222,
+      "colors": 11,
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 60,
+        "height": 65
+      },
+      "padding": {
+        "left": 19,
+        "top": 19,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "flower-basket-spring",
+      "path": "sprites/flower-basket-spring.png",
+      "pixelSha256": "104c954d37ac5095550748cbbdd0501f9ced810cf16c87c2891922ab2387b911",
+      "opaquePixels": 2395,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "width": 59,
+        "height": 68
+      },
+      "padding": {
+        "left": 19,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "flower-basket-summer",
+      "path": "sprites/flower-basket-summer.png",
+      "pixelSha256": "870c24b8e1024f0bae30ef7beaa265a9056b80e8ab3530008c1d31420aff844d",
+      "opaquePixels": 2338,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "width": 59,
+        "height": 68
+      },
+      "padding": {
+        "left": 19,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "flower-basket-autumn",
+      "path": "sprites/flower-basket-autumn.png",
+      "pixelSha256": "8525f5a6cb25ff4caceed8447d8ce54508987f526a9d9e9468a265418714cee3",
+      "opaquePixels": 2227,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "width": 59,
+        "height": 68
+      },
+      "padding": {
+        "left": 19,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "flower-basket-winter",
+      "path": "sprites/flower-basket-winter.png",
+      "pixelSha256": "9504f9da52e1d19fde21f71e30c9720d0ac6dc78e2cf8fa652217b819a0996a4",
+      "opaquePixels": 2323,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "width": 59,
+        "height": 68
+      },
+      "padding": {
+        "left": 19,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "propagation-rack-spring",
+      "path": "sprites/propagation-rack-spring.png",
+      "pixelSha256": "81dc45206abbc1f51703693cbf9e5bbf16b31e431ff53f80ce90fe9010d8480c",
+      "opaquePixels": 2221,
+      "colors": 16,
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 60,
+        "height": 64
+      },
+      "padding": {
+        "left": 18,
+        "top": 20,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "propagation-rack-summer",
+      "path": "sprites/propagation-rack-summer.png",
+      "pixelSha256": "a334e59dc50af4453a52bc87d0564a6209ffec353666847b53463cecf6b1e8c4",
+      "opaquePixels": 2218,
+      "colors": 16,
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 60,
+        "height": 68
+      },
+      "padding": {
+        "left": 18,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "propagation-rack-autumn",
+      "path": "sprites/propagation-rack-autumn.png",
+      "pixelSha256": "2909fa8e04c839e0b9f65bb401d09aab0536dce4335e8e0dcf70c6ae023ca0ff",
+      "opaquePixels": 2138,
+      "colors": 17,
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 60,
+        "height": 62
+      },
+      "padding": {
+        "left": 18,
+        "top": 22,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "propagation-rack-winter",
+      "path": "sprites/propagation-rack-winter.png",
+      "pixelSha256": "97947a87d83405dd427c665d9022755d361825441112b0861d530e03d19cf4d5",
+      "opaquePixels": 2222,
+      "colors": 16,
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 60,
+        "height": 66
+      },
+      "padding": {
+        "left": 18,
+        "top": 18,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "ribbon-box-spring",
+      "path": "sprites/ribbon-box-spring.png",
+      "pixelSha256": "acc6be67547b064fd1fbcd648d268a9b262268ede5ee42743baf972561d6f4b7",
+      "opaquePixels": 2470,
+      "colors": 10,
+      "bounds": {
+        "x": 19,
+        "y": 30,
+        "width": 59,
+        "height": 54
+      },
+      "padding": {
+        "left": 19,
+        "top": 30,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "ribbon-box-summer",
+      "path": "sprites/ribbon-box-summer.png",
+      "pixelSha256": "0e07e76a079855d1312ec22e1a6191a6a7fc06540a4469038b8a84037114ba73",
+      "opaquePixels": 2468,
+      "colors": 11,
+      "bounds": {
+        "x": 19,
+        "y": 30,
+        "width": 59,
+        "height": 54
+      },
+      "padding": {
+        "left": 19,
+        "top": 30,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "ribbon-box-autumn",
+      "path": "sprites/ribbon-box-autumn.png",
+      "pixelSha256": "2fe55f474b4646bac8fede206cf01d4f5f32447ffcb7961cd7a5e3c62ca57fff",
+      "opaquePixels": 2468,
+      "colors": 11,
+      "bounds": {
+        "x": 19,
+        "y": 30,
+        "width": 59,
+        "height": 54
+      },
+      "padding": {
+        "left": 19,
+        "top": 30,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "ribbon-box-winter",
+      "path": "sprites/ribbon-box-winter.png",
+      "pixelSha256": "c4ccc8512ba791bb2547b7d6ab1789a2de4bb7040a87b96621b8d7cc66566b3f",
+      "opaquePixels": 2469,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 30,
+        "width": 59,
+        "height": 54
+      },
+      "padding": {
+        "left": 19,
+        "top": 30,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "paper-bag-spring",
+      "path": "sprites/paper-bag-spring.png",
+      "pixelSha256": "44d3e9e3102c62b27d693b707e17cc2dd772e5c63f2a81fd2801654317971802",
+      "opaquePixels": 2686,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 17,
+        "width": 59,
+        "height": 67
+      },
+      "padding": {
+        "left": 19,
+        "top": 17,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "paper-bag-summer",
+      "path": "sprites/paper-bag-summer.png",
+      "pixelSha256": "8ca9e210a63645a52959775290370e1e8b8fad10244d874cd953680c7f4fc248",
+      "opaquePixels": 2686,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 17,
+        "width": 59,
+        "height": 67
+      },
+      "padding": {
+        "left": 19,
+        "top": 17,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "paper-bag-autumn",
+      "path": "sprites/paper-bag-autumn.png",
+      "pixelSha256": "66e15f161df05e90c20a829ae1cdb33a11b2ab6dc7a2dd66d935c9b40b87820d",
+      "opaquePixels": 2686,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 17,
+        "width": 59,
+        "height": 67
+      },
+      "padding": {
+        "left": 19,
+        "top": 17,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "paper-bag-winter",
+      "path": "sprites/paper-bag-winter.png",
+      "pixelSha256": "4f0e8385a7f0ca33d59f341abe5817d23e5bac44ec786c99389d5b7a41b14b4a",
+      "opaquePixels": 2686,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 17,
+        "width": 59,
+        "height": 67
+      },
+      "padding": {
+        "left": 19,
+        "top": 17,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "picnic-basket-spring",
+      "path": "sprites/picnic-basket-spring.png",
+      "pixelSha256": "4170baa3cb40278978dbea369edfe67c16dd3f0d35ad1e238754b8e0fe7555cd",
+      "opaquePixels": 2238,
+      "colors": 11,
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "padding": {
+        "left": 18,
+        "top": 20,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "picnic-basket-summer",
+      "path": "sprites/picnic-basket-summer.png",
+      "pixelSha256": "de534c10319f52e3b76538ec613936b24652ccd494f4f654b6dac991e04aac21",
+      "opaquePixels": 2244,
+      "colors": 13,
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "padding": {
+        "left": 18,
+        "top": 20,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "picnic-basket-autumn",
+      "path": "sprites/picnic-basket-autumn.png",
+      "pixelSha256": "57a084ca09994fb9c7742993f0c51747a33e3c786f02ca5b2feeea365372ea07",
+      "opaquePixels": 2219,
+      "colors": 12,
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "padding": {
+        "left": 18,
+        "top": 20,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "picnic-basket-winter",
+      "path": "sprites/picnic-basket-winter.png",
+      "pixelSha256": "3537ed9dbb6859a781875e832a085afa413aeb14c3452a1a888b94c3ca13eeb0",
+      "opaquePixels": 2227,
+      "colors": 14,
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "padding": {
+        "left": 18,
+        "top": 20,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bento-spring",
+      "path": "sprites/bento-spring.png",
+      "pixelSha256": "ab4770c4c838a6119d240af8907a07986487345f85b54483213cbdc412a3c49f",
+      "opaquePixels": 2652,
+      "colors": 15,
+      "bounds": {
+        "x": 17,
+        "y": 34,
+        "width": 63,
+        "height": 50
+      },
+      "padding": {
+        "left": 17,
+        "top": 34,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bento-summer",
+      "path": "sprites/bento-summer.png",
+      "pixelSha256": "35100002ca9126718cf8692a147c8f53243ce53fa59cce2c05c600ec48f1d59d",
+      "opaquePixels": 2652,
+      "colors": 12,
+      "bounds": {
+        "x": 17,
+        "y": 34,
+        "width": 63,
+        "height": 50
+      },
+      "padding": {
+        "left": 17,
+        "top": 34,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bento-autumn",
+      "path": "sprites/bento-autumn.png",
+      "pixelSha256": "7f2bb273c1f4963358960ff3b1cf9ea4617bed3ae4aa16b359faf18d631fbbb4",
+      "opaquePixels": 2652,
+      "colors": 16,
+      "bounds": {
+        "x": 17,
+        "y": 34,
+        "width": 63,
+        "height": 50
+      },
+      "padding": {
+        "left": 17,
+        "top": 34,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bento-winter",
+      "path": "sprites/bento-winter.png",
+      "pixelSha256": "bb35b6eb6158a22417f15deedda4aa6439627bb26097688ec5b31f78793b10ab",
+      "opaquePixels": 2652,
+      "colors": 14,
+      "bounds": {
+        "x": 17,
+        "y": 34,
+        "width": 63,
+        "height": 50
+      },
+      "padding": {
+        "left": 17,
+        "top": 34,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cup-carrier-spring",
+      "path": "sprites/cup-carrier-spring.png",
+      "pixelSha256": "84eb88e40cb756b57954fdfc9f18035b20a669c8a6616f4eb19adfc158526f16",
+      "opaquePixels": 2467,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 31,
+        "width": 59,
+        "height": 53
+      },
+      "padding": {
+        "left": 19,
+        "top": 31,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cup-carrier-summer",
+      "path": "sprites/cup-carrier-summer.png",
+      "pixelSha256": "9fd126b1a3d22bc408e59787d2148b988190c1fe709979d7538a6f8694a67c68",
+      "opaquePixels": 2487,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 27,
+        "width": 59,
+        "height": 57
+      },
+      "padding": {
+        "left": 19,
+        "top": 27,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cup-carrier-autumn",
+      "path": "sprites/cup-carrier-autumn.png",
+      "pixelSha256": "ef3fd95dee807f8a12adab1fb9e2ec5a3d9dd1d38890870b35b794fa4218e424",
+      "opaquePixels": 2475,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 32,
+        "width": 59,
+        "height": 52
+      },
+      "padding": {
+        "left": 19,
+        "top": 32,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cup-carrier-winter",
+      "path": "sprites/cup-carrier-winter.png",
+      "pixelSha256": "69e9fce4bb61be056587d2083cf25a3524ce502e190ec4d4f213f1e1a3a13a5c",
+      "opaquePixels": 2467,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 28,
+        "width": 59,
+        "height": 56
+      },
+      "padding": {
+        "left": 19,
+        "top": 28,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cookie-tin-spring",
+      "path": "sprites/cookie-tin-spring.png",
+      "pixelSha256": "531240b05ff86ffdaff897d06d21f2ecd18a5f0fc6e0abb58694ab20e075d345",
+      "opaquePixels": 2766,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 23,
+        "width": 59,
+        "height": 61
+      },
+      "padding": {
+        "left": 19,
+        "top": 23,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cookie-tin-summer",
+      "path": "sprites/cookie-tin-summer.png",
+      "pixelSha256": "bb077932e7a77d7875fc5b77edada85ba625258f07b9bac8828b542165f9df8b",
+      "opaquePixels": 2776,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 59,
+        "height": 63
+      },
+      "padding": {
+        "left": 19,
+        "top": 21,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cookie-tin-autumn",
+      "path": "sprites/cookie-tin-autumn.png",
+      "pixelSha256": "a2421ea1ed0688c76eb59d707e42d8577ceb8ca2a1e65d63773cc1989ee092ee",
+      "opaquePixels": 2766,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 23,
+        "width": 59,
+        "height": 61
+      },
+      "padding": {
+        "left": 19,
+        "top": 23,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cookie-tin-winter",
+      "path": "sprites/cookie-tin-winter.png",
+      "pixelSha256": "939f4331c21bb827fa7952ba2a2843307477587d808be0fd43b8f0ce18a04033",
+      "opaquePixels": 2766,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 23,
+        "width": 59,
+        "height": 61
+      },
+      "padding": {
+        "left": 19,
+        "top": 23,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "hamper-spring",
+      "path": "sprites/hamper-spring.png",
+      "pixelSha256": "2b230c5cd5c099642bc562af139a605f958c1a760536143c83dbe33af3a5c6f8",
+      "opaquePixels": 2860,
+      "colors": 15,
+      "bounds": {
+        "x": 18,
+        "y": 12,
+        "width": 60,
+        "height": 72
+      },
+      "padding": {
+        "left": 18,
+        "top": 12,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "hamper-summer",
+      "path": "sprites/hamper-summer.png",
+      "pixelSha256": "463154a661b349440643594e1479834b5c6ffec480bcb4610f652b2557745a41",
+      "opaquePixels": 2870,
+      "colors": 15,
+      "bounds": {
+        "x": 18,
+        "y": 12,
+        "width": 60,
+        "height": 72
+      },
+      "padding": {
+        "left": 18,
+        "top": 12,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "hamper-autumn",
+      "path": "sprites/hamper-autumn.png",
+      "pixelSha256": "9ce17624b932a461d7288d1cbe16330dea165584a45ed6db9bd18ed8efc25a99",
+      "opaquePixels": 2829,
+      "colors": 16,
+      "bounds": {
+        "x": 18,
+        "y": 12,
+        "width": 60,
+        "height": 72
+      },
+      "padding": {
+        "left": 18,
+        "top": 12,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "hamper-winter",
+      "path": "sprites/hamper-winter.png",
+      "pixelSha256": "dec080e71bea54172691cf473313c7d6b75bba4774dd3c6c98dd64dce0969949",
+      "opaquePixels": 2838,
+      "colors": 15,
+      "bounds": {
+        "x": 18,
+        "y": 12,
+        "width": 60,
+        "height": 72
+      },
+      "padding": {
+        "left": 18,
+        "top": 12,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cake-box-spring",
+      "path": "sprites/cake-box-spring.png",
+      "pixelSha256": "5fe3b0057f0b13f9e45b088096155145691d6cfc50080fe7831d1832791b311d",
+      "opaquePixels": 2817,
+      "colors": 11,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 60,
+        "height": 69
+      },
+      "padding": {
+        "left": 19,
+        "top": 15,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cake-box-summer",
+      "path": "sprites/cake-box-summer.png",
+      "pixelSha256": "0fe598740cfe817f24748bd4fcb6eaf6c1bd49c31489b57760512c9f9ee1c82b",
+      "opaquePixels": 2817,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 60,
+        "height": 69
+      },
+      "padding": {
+        "left": 19,
+        "top": 15,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cake-box-autumn",
+      "path": "sprites/cake-box-autumn.png",
+      "pixelSha256": "7225735758424aa81fb163019e5e380900b71a87d3abca0256de902f6b5f087f",
+      "opaquePixels": 2817,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 60,
+        "height": 69
+      },
+      "padding": {
+        "left": 19,
+        "top": 15,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cake-box-winter",
+      "path": "sprites/cake-box-winter.png",
+      "pixelSha256": "0d1a58001fad9cc9b75682ca25d60e41af8fa40a63f3728c1022a209ce119be5",
+      "opaquePixels": 2817,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 60,
+        "height": 69
+      },
+      "padding": {
+        "left": 19,
+        "top": 15,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "armchair-spring",
+      "path": "sprites/armchair-spring.png",
+      "pixelSha256": "8b08f9bd515bb6c65ae1b77729e204e863eed0b49130eccfed399e454fba37bc",
+      "opaquePixels": 3215,
+      "colors": 14,
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 60,
+        "height": 68
+      },
+      "padding": {
+        "left": 18,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "armchair-summer",
+      "path": "sprites/armchair-summer.png",
+      "pixelSha256": "608dca0b39b05eeb50dbfd4940c2dd908bd68050a4a393d6404595fab0df78d2",
+      "opaquePixels": 3215,
+      "colors": 14,
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 60,
+        "height": 68
+      },
+      "padding": {
+        "left": 18,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "armchair-autumn",
+      "path": "sprites/armchair-autumn.png",
+      "pixelSha256": "1e21886c3a8d8f723164a5f1e2b4c4da5af718eba38bc472257815ea788c4735",
+      "opaquePixels": 3215,
+      "colors": 15,
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 60,
+        "height": 68
+      },
+      "padding": {
+        "left": 18,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "armchair-winter",
+      "path": "sprites/armchair-winter.png",
+      "pixelSha256": "d07371def9a01e35dcc9829200ebc02b09c7df3220e971fa9df32f662e867806",
+      "opaquePixels": 3215,
+      "colors": 14,
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 60,
+        "height": 68
+      },
+      "padding": {
+        "left": 18,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "floor-lamp-spring",
+      "path": "sprites/floor-lamp-spring.png",
+      "pixelSha256": "28fbd8efce1ae2957e0e41570ffd60308da23e2b059c8ec80af7486a97a75a0a",
+      "opaquePixels": 1829,
+      "colors": 11,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "width": 59,
+        "height": 68
+      },
+      "padding": {
+        "left": 19,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "floor-lamp-summer",
+      "path": "sprites/floor-lamp-summer.png",
+      "pixelSha256": "ec27169dc7541c4680b13fa6dcb5c69c33439fefc24dad706d4f62f1540bdbc3",
+      "opaquePixels": 1840,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "width": 59,
+        "height": 68
+      },
+      "padding": {
+        "left": 19,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "floor-lamp-autumn",
+      "path": "sprites/floor-lamp-autumn.png",
+      "pixelSha256": "9d279fd97c954d7f8b5af9de16aeb7d3525bcd98810b5505015819023ccda915",
+      "opaquePixels": 1817,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "width": 59,
+        "height": 68
+      },
+      "padding": {
+        "left": 19,
+        "top": 16,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "floor-lamp-winter",
+      "path": "sprites/floor-lamp-winter.png",
+      "pixelSha256": "b6a4508b38f28c5cb867d99ef5b961f7ac40b5260398f2a3b1528c256c1bdc8f",
+      "opaquePixels": 1840,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "width": 59,
+        "height": 71
+      },
+      "padding": {
+        "left": 19,
+        "top": 16,
+        "right": 18,
+        "bottom": 9
+      },
+      "status": "passed"
+    },
+    {
+      "id": "book-stack-spring",
+      "path": "sprites/book-stack-spring.png",
+      "pixelSha256": "d0d0e0d77c1635b83279093a83bbcd492f3e2fe9bd079e9e70c81dfba61c8bb9",
+      "opaquePixels": 2588,
+      "colors": 10,
+      "bounds": {
+        "x": 19,
+        "y": 22,
+        "width": 59,
+        "height": 62
+      },
+      "padding": {
+        "left": 19,
+        "top": 22,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "book-stack-summer",
+      "path": "sprites/book-stack-summer.png",
+      "pixelSha256": "f3384d9d97d3b88a55ca460272fe30bf8eb0117b88d201dc26801c9e2f6665fd",
+      "opaquePixels": 2579,
+      "colors": 11,
+      "bounds": {
+        "x": 19,
+        "y": 18,
+        "width": 59,
+        "height": 66
+      },
+      "padding": {
+        "left": 19,
+        "top": 18,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "book-stack-autumn",
+      "path": "sprites/book-stack-autumn.png",
+      "pixelSha256": "735b753e410738d8fc0bf6cca3ee4416e060e37c66e92da10d6e531bbe539e14",
+      "opaquePixels": 2515,
+      "colors": 11,
+      "bounds": {
+        "x": 19,
+        "y": 24,
+        "width": 59,
+        "height": 60
+      },
+      "padding": {
+        "left": 19,
+        "top": 24,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "book-stack-winter",
+      "path": "sprites/book-stack-winter.png",
+      "pixelSha256": "fe84e768f4d892a6035cb6a03b2f254441ef029793713168c9a86e4c6674d735",
+      "opaquePixels": 2549,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "padding": {
+        "left": 19,
+        "top": 22,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "open-book-spring",
+      "path": "sprites/open-book-spring.png",
+      "pixelSha256": "f0f6975ea8ba84ed2bedb340ed227dc8ca5150f1746bbe95b1c1c59139b9cb76",
+      "opaquePixels": 2403,
+      "colors": 11,
+      "bounds": {
+        "x": 16,
+        "y": 33,
+        "width": 64,
+        "height": 51
+      },
+      "padding": {
+        "left": 16,
+        "top": 33,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "open-book-summer",
+      "path": "sprites/open-book-summer.png",
+      "pixelSha256": "b0ac67a49b25dd3fe641c971a19a5c078e24f431ed0ca16683b226137db3025f",
+      "opaquePixels": 2412,
+      "colors": 11,
+      "bounds": {
+        "x": 16,
+        "y": 29,
+        "width": 64,
+        "height": 55
+      },
+      "padding": {
+        "left": 16,
+        "top": 29,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "open-book-autumn",
+      "path": "sprites/open-book-autumn.png",
+      "pixelSha256": "14d36cb65e7a1d85c155a06ec27b20e9a4f74952589cd97cacb0a84ec9c418fa",
+      "opaquePixels": 2383,
+      "colors": 12,
+      "bounds": {
+        "x": 16,
+        "y": 35,
+        "width": 64,
+        "height": 49
+      },
+      "padding": {
+        "left": 16,
+        "top": 35,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "open-book-winter",
+      "path": "sprites/open-book-winter.png",
+      "pixelSha256": "e4615b86234342f8e31d4b621dcc615a920a267fa41425b85669642b9251f836",
+      "opaquePixels": 2393,
+      "colors": 12,
+      "bounds": {
+        "x": 16,
+        "y": 32,
+        "width": 64,
+        "height": 52
+      },
+      "padding": {
+        "left": 16,
+        "top": 32,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bookcase-spring",
+      "path": "sprites/bookcase-spring.png",
+      "pixelSha256": "d6b5bf8a46dc2a908125186f17cdf74e923e1b508285d273155fb3a00a9dd9f9",
+      "opaquePixels": 3555,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 12,
+        "width": 59,
+        "height": 72
+      },
+      "padding": {
+        "left": 19,
+        "top": 12,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bookcase-summer",
+      "path": "sprites/bookcase-summer.png",
+      "pixelSha256": "5c75bdc3b7f9b6a6872f8f6dba37c3c0a91dbb543bf93e5d37cd4dd20d31f207",
+      "opaquePixels": 3557,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 11,
+        "width": 59,
+        "height": 73
+      },
+      "padding": {
+        "left": 19,
+        "top": 11,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bookcase-autumn",
+      "path": "sprites/bookcase-autumn.png",
+      "pixelSha256": "4b7b23dd767e9b1374b51beffddeb8f58d93837bba6ee4439b47693b741fd8ae",
+      "opaquePixels": 3555,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 12,
+        "width": 59,
+        "height": 72
+      },
+      "padding": {
+        "left": 19,
+        "top": 12,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bookcase-winter",
+      "path": "sprites/bookcase-winter.png",
+      "pixelSha256": "4eccf547ec96fa2665989f78b83696787928cf4407bc30f783c0c7f0a0a5a594",
+      "opaquePixels": 3555,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 12,
+        "width": 59,
+        "height": 72
+      },
+      "padding": {
+        "left": 19,
+        "top": 12,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "side-table-spring",
+      "path": "sprites/side-table-spring.png",
+      "pixelSha256": "000faa43cbb74cebaedcc1dec49e0fcd4eaf33f0ada5128af4b79ff07c9d114d",
+      "opaquePixels": 2085,
+      "colors": 12,
+      "bounds": {
+        "x": 17,
+        "y": 26,
+        "width": 66,
+        "height": 58
+      },
+      "padding": {
+        "left": 17,
+        "top": 26,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "side-table-summer",
+      "path": "sprites/side-table-summer.png",
+      "pixelSha256": "14c9653c422eb4dcfc72c50c80dac961698e4ea44894836bbfca2131e6c9d51d",
+      "opaquePixels": 2077,
+      "colors": 13,
+      "bounds": {
+        "x": 17,
+        "y": 22,
+        "width": 66,
+        "height": 62
+      },
+      "padding": {
+        "left": 17,
+        "top": 22,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "side-table-autumn",
+      "path": "sprites/side-table-autumn.png",
+      "pixelSha256": "37128836bd19049ff9b2ec6e7900f3367b2f06f8f536a56712bc4012eb373010",
+      "opaquePixels": 2028,
+      "colors": 13,
+      "bounds": {
+        "x": 17,
+        "y": 26,
+        "width": 66,
+        "height": 58
+      },
+      "padding": {
+        "left": 17,
+        "top": 26,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "side-table-winter",
+      "path": "sprites/side-table-winter.png",
+      "pixelSha256": "d035a7d1553fcf32e8ed499729fae2a7de54cb3ab002a99f7d98152766f47083",
+      "opaquePixels": 2044,
+      "colors": 12,
+      "bounds": {
+        "x": 17,
+        "y": 25,
+        "width": 66,
+        "height": 59
+      },
+      "padding": {
+        "left": 17,
+        "top": 25,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "record-player-spring",
+      "path": "sprites/record-player-spring.png",
+      "pixelSha256": "535ead21ccf96d0a4ab922b70c0fbd23bce16888b2c415647b68348e40450d68",
+      "opaquePixels": 3226,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 60,
+        "height": 64
+      },
+      "padding": {
+        "left": 19,
+        "top": 20,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "record-player-summer",
+      "path": "sprites/record-player-summer.png",
+      "pixelSha256": "5a91deecfa83af7c02769827a11625d5514add866e998a749cd66be9513a08fe",
+      "opaquePixels": 3228,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 60,
+        "height": 65
+      },
+      "padding": {
+        "left": 19,
+        "top": 19,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "record-player-autumn",
+      "path": "sprites/record-player-autumn.png",
+      "pixelSha256": "1e4d8634dfde093a9d3717a4ef968d440a5715e6137a484da393a61965fefcf8",
+      "opaquePixels": 3226,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 60,
+        "height": 64
+      },
+      "padding": {
+        "left": 19,
+        "top": 20,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "record-player-winter",
+      "path": "sprites/record-player-winter.png",
+      "pixelSha256": "3d0209ffb3eb73f003fdfa1f1d8505bb755cd35a0ebfe2ca7472a9d5a16a8943",
+      "opaquePixels": 3226,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 60,
+        "height": 64
+      },
+      "padding": {
+        "left": 19,
+        "top": 20,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cushion-spring",
+      "path": "sprites/cushion-spring.png",
+      "pixelSha256": "a653cb38b90b3f7f446473cf091f403f6cd8d381eb62f499deaccd8c8b271ab6",
+      "opaquePixels": 2199,
+      "colors": 11,
+      "bounds": {
+        "x": 15,
+        "y": 36,
+        "width": 63,
+        "height": 48
+      },
+      "padding": {
+        "left": 15,
+        "top": 36,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cushion-summer",
+      "path": "sprites/cushion-summer.png",
+      "pixelSha256": "076aeeeb01a626ea5ee9cf65fd019b50d9059e026441b1e06076069ddfc43f4d",
+      "opaquePixels": 2199,
+      "colors": 12,
+      "bounds": {
+        "x": 15,
+        "y": 36,
+        "width": 63,
+        "height": 48
+      },
+      "padding": {
+        "left": 15,
+        "top": 36,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cushion-autumn",
+      "path": "sprites/cushion-autumn.png",
+      "pixelSha256": "8ecf8bfe97b580885f800a1056a25eeb0d91c3c4288dc339c093465b84d0bf1a",
+      "opaquePixels": 2199,
+      "colors": 12,
+      "bounds": {
+        "x": 15,
+        "y": 36,
+        "width": 63,
+        "height": 48
+      },
+      "padding": {
+        "left": 15,
+        "top": 36,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cushion-winter",
+      "path": "sprites/cushion-winter.png",
+      "pixelSha256": "adab814d987aca7c9d46933e6b75e686de78e961eef0dc4f763a04f08e903891",
+      "opaquePixels": 2199,
+      "colors": 13,
+      "bounds": {
+        "x": 15,
+        "y": 36,
+        "width": 63,
+        "height": 48
+      },
+      "padding": {
+        "left": 15,
+        "top": 36,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "lantern-spring",
+      "path": "sprites/lantern-spring.png",
+      "pixelSha256": "1e1f6c103a42d14a4674acbbe630707cfee7089eea0880a5a85cbda70a55d863",
+      "opaquePixels": 2099,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 10,
+        "width": 59,
+        "height": 74
+      },
+      "padding": {
+        "left": 19,
+        "top": 10,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "lantern-summer",
+      "path": "sprites/lantern-summer.png",
+      "pixelSha256": "13ad3af188004a05480a0c5d08de20d856566406c1a574c7503d32ead3ac22ad",
+      "opaquePixels": 2099,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 10,
+        "width": 59,
+        "height": 74
+      },
+      "padding": {
+        "left": 19,
+        "top": 10,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "lantern-autumn",
+      "path": "sprites/lantern-autumn.png",
+      "pixelSha256": "8071da82ea286898e7034379d4a7ae8e697ab51661ab912965f45fdab0bcbaa4",
+      "opaquePixels": 2099,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 10,
+        "width": 59,
+        "height": 74
+      },
+      "padding": {
+        "left": 19,
+        "top": 10,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "lantern-winter",
+      "path": "sprites/lantern-winter.png",
+      "pixelSha256": "24070818c2c7bd9220b4e45db279624054eacec55dbf287783a0f29c9773a50a",
+      "opaquePixels": 2099,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 10,
+        "width": 59,
+        "height": 74
+      },
+      "padding": {
+        "left": 19,
+        "top": 10,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "candle-holder-spring",
+      "path": "sprites/candle-holder-spring.png",
+      "pixelSha256": "32eab47ef195725663d9e8744adcec52e0e7e8a6eb3648f37be710c013b8488a",
+      "opaquePixels": 1686,
+      "colors": 9,
+      "bounds": {
+        "x": 19,
+        "y": 10,
+        "width": 60,
+        "height": 74
+      },
+      "padding": {
+        "left": 19,
+        "top": 10,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "candle-holder-summer",
+      "path": "sprites/candle-holder-summer.png",
+      "pixelSha256": "5faca259c9f3ed7e443fc2b0f6586cf181fc62e5906e32e235b43340ff6bd4b5",
+      "opaquePixels": 1674,
+      "colors": 10,
+      "bounds": {
+        "x": 19,
+        "y": 10,
+        "width": 60,
+        "height": 74
+      },
+      "padding": {
+        "left": 19,
+        "top": 10,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "candle-holder-autumn",
+      "path": "sprites/candle-holder-autumn.png",
+      "pixelSha256": "9df010bd4d43601a978ec87f2a16b859f0ef79fc25e7bd43240107a3c982d480",
+      "opaquePixels": 1633,
+      "colors": 10,
+      "bounds": {
+        "x": 19,
+        "y": 10,
+        "width": 60,
+        "height": 74
+      },
+      "padding": {
+        "left": 19,
+        "top": 10,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "candle-holder-winter",
+      "path": "sprites/candle-holder-winter.png",
+      "pixelSha256": "280b4e24c55e45d5a74e837674e0dc85273200a02869713abcb70691e05ff9d9",
+      "opaquePixels": 1642,
+      "colors": 11,
+      "bounds": {
+        "x": 19,
+        "y": 10,
+        "width": 60,
+        "height": 74
+      },
+      "padding": {
+        "left": 19,
+        "top": 10,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "wreath-spring",
+      "path": "sprites/wreath-spring.png",
+      "pixelSha256": "652316af5dfe28b9dce72db8ce3976f70d8226ad3901fbb00d9eabf68b201b6d",
+      "opaquePixels": 1951,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 13,
+        "width": 59,
+        "height": 71
+      },
+      "padding": {
+        "left": 19,
+        "top": 13,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "wreath-summer",
+      "path": "sprites/wreath-summer.png",
+      "pixelSha256": "bea74e586575404d61f8a0215812dd9dcb3c0cebaeddfbc818e6e306cc635e04",
+      "opaquePixels": 1989,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 9,
+        "width": 59,
+        "height": 75
+      },
+      "padding": {
+        "left": 19,
+        "top": 9,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "wreath-autumn",
+      "path": "sprites/wreath-autumn.png",
+      "pixelSha256": "f6ed763890c90e12d06df999700be8734c5c0673abbd3aa0e15d7443806cf963",
+      "opaquePixels": 1906,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 69
+      },
+      "padding": {
+        "left": 19,
+        "top": 15,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "wreath-winter",
+      "path": "sprites/wreath-winter.png",
+      "pixelSha256": "af70cb5308062e313770a27d43f317d344f3c6996ac28dd5a9a476af57c913e9",
+      "opaquePixels": 2035,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 11,
+        "width": 60,
+        "height": 73
+      },
+      "padding": {
+        "left": 19,
+        "top": 11,
+        "right": 17,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bunting-stand-spring",
+      "path": "sprites/bunting-stand-spring.png",
+      "pixelSha256": "5005ffff485b4cdbcb93fb48e40a8b060d53407d006cac855bfa825f81343673",
+      "opaquePixels": 1796,
+      "colors": 12,
+      "bounds": {
+        "x": 8,
+        "y": 18,
+        "width": 80,
+        "height": 66
+      },
+      "padding": {
+        "left": 8,
+        "top": 18,
+        "right": 8,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bunting-stand-summer",
+      "path": "sprites/bunting-stand-summer.png",
+      "pixelSha256": "e7d5ac8bdb9c1d6671e2ff499757c89fd2402619073f4efb744b47c70efdf817",
+      "opaquePixels": 1721,
+      "colors": 13,
+      "bounds": {
+        "x": 8,
+        "y": 18,
+        "width": 80,
+        "height": 66
+      },
+      "padding": {
+        "left": 8,
+        "top": 18,
+        "right": 8,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bunting-stand-autumn",
+      "path": "sprites/bunting-stand-autumn.png",
+      "pixelSha256": "366ba00190c77c9010f9d9a15fa92de0b7a9a11f2ae4b573f91957fef4e2023c",
+      "opaquePixels": 1502,
+      "colors": 13,
+      "bounds": {
+        "x": 8,
+        "y": 18,
+        "width": 80,
+        "height": 66
+      },
+      "padding": {
+        "left": 8,
+        "top": 18,
+        "right": 8,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "bunting-stand-winter",
+      "path": "sprites/bunting-stand-winter.png",
+      "pixelSha256": "b5ffebd3d2fe92b4abfe38becd6b0500033cbf76413b51dc915e341743ffb57e",
+      "opaquePixels": 1572,
+      "colors": 14,
+      "bounds": {
+        "x": 8,
+        "y": 18,
+        "width": 80,
+        "height": 66
+      },
+      "padding": {
+        "left": 8,
+        "top": 18,
+        "right": 8,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "snow-globe-spring",
+      "path": "sprites/snow-globe-spring.png",
+      "pixelSha256": "743bbdde0d513205368c5067798f99dd9b4e7bb403cb71fba36a446d0fc42aa0",
+      "opaquePixels": 3038,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 69
+      },
+      "padding": {
+        "left": 19,
+        "top": 15,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "snow-globe-summer",
+      "path": "sprites/snow-globe-summer.png",
+      "pixelSha256": "2d60742f4bf812ac95de9f305b2b2377bca7f06e05b15bb675b0acfa8ea49a40",
+      "opaquePixels": 3038,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 69
+      },
+      "padding": {
+        "left": 19,
+        "top": 15,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "snow-globe-autumn",
+      "path": "sprites/snow-globe-autumn.png",
+      "pixelSha256": "affb857b03a20b8b8655d9db97f043a113f7b3795ad3b267068d0fbf986352f8",
+      "opaquePixels": 3038,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 69
+      },
+      "padding": {
+        "left": 19,
+        "top": 15,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "snow-globe-winter",
+      "path": "sprites/snow-globe-winter.png",
+      "pixelSha256": "bfd861115a8ba1df8f3da30198ed4187742af46f11fca8b2d8cf322d2fe9518c",
+      "opaquePixels": 3038,
+      "colors": 16,
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 69
+      },
+      "padding": {
+        "left": 19,
+        "top": 15,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "music-box-spring",
+      "path": "sprites/music-box-spring.png",
+      "pixelSha256": "9e5f553edd48865165ead004765fa36159267db93c567465a248f343ca12199e",
+      "opaquePixels": 3006,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 23,
+        "width": 67,
+        "height": 61
+      },
+      "padding": {
+        "left": 19,
+        "top": 23,
+        "right": 10,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "music-box-summer",
+      "path": "sprites/music-box-summer.png",
+      "pixelSha256": "86c14ba37f0ae9561487c398147282a8068a3923c3026b5f0186b77e63b8b4ed",
+      "opaquePixels": 3006,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 23,
+        "width": 67,
+        "height": 61
+      },
+      "padding": {
+        "left": 19,
+        "top": 23,
+        "right": 10,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "music-box-autumn",
+      "path": "sprites/music-box-autumn.png",
+      "pixelSha256": "dd8f2dc479d6ccd3be2839c145f7b9c6236675ee6293f5ecd6706a597d2b11f1",
+      "opaquePixels": 3006,
+      "colors": 16,
+      "bounds": {
+        "x": 19,
+        "y": 23,
+        "width": 67,
+        "height": 61
+      },
+      "padding": {
+        "left": 19,
+        "top": 23,
+        "right": 10,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "music-box-winter",
+      "path": "sprites/music-box-winter.png",
+      "pixelSha256": "a16db150470beb6e820cec5740cc98c219c3cadf2af5fb815f2a05fb7b5af0f1",
+      "opaquePixels": 3006,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 23,
+        "width": 67,
+        "height": 61
+      },
+      "padding": {
+        "left": 19,
+        "top": 23,
+        "right": 10,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "paper-pinwheel-spring",
+      "path": "sprites/paper-pinwheel-spring.png",
+      "pixelSha256": "cf38cd657743ca01ebd969ad69158cf1ae8376ecc1dd81d32784901be627c965",
+      "opaquePixels": 1618,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 59,
+        "height": 65
+      },
+      "padding": {
+        "left": 19,
+        "top": 19,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "paper-pinwheel-summer",
+      "path": "sprites/paper-pinwheel-summer.png",
+      "pixelSha256": "f3bdb579773ff3ee183ca6f009bd17d92f43d4b8584f1c0c2966a90b36fc0496",
+      "opaquePixels": 1617,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 59,
+        "height": 65
+      },
+      "padding": {
+        "left": 19,
+        "top": 19,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "paper-pinwheel-autumn",
+      "path": "sprites/paper-pinwheel-autumn.png",
+      "pixelSha256": "a7a54269d4b7d643a1683978e28a297610959144fe2ace1be4f8030e7a9003f3",
+      "opaquePixels": 1582,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 59,
+        "height": 65
+      },
+      "padding": {
+        "left": 19,
+        "top": 19,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "paper-pinwheel-winter",
+      "path": "sprites/paper-pinwheel-winter.png",
+      "pixelSha256": "9670fcc7480f0fff9e29a4dec4c71ba5158f2b5c83eaf27a18be48efa147e614",
+      "opaquePixels": 1592,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 59,
+        "height": 66
+      },
+      "padding": {
+        "left": 19,
+        "top": 19,
+        "right": 18,
+        "bottom": 11
+      },
+      "status": "passed"
+    },
+    {
+      "id": "miniature-house-spring",
+      "path": "sprites/miniature-house-spring.png",
+      "pixelSha256": "20c6744b5a722185bb5534bb5bb16ae2283f1472642a330eb8886b3c72e2d905",
+      "opaquePixels": 2664,
+      "colors": 15,
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 64,
+        "height": 64
+      },
+      "padding": {
+        "left": 18,
+        "top": 20,
+        "right": 14,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "miniature-house-summer",
+      "path": "sprites/miniature-house-summer.png",
+      "pixelSha256": "655af27fcd6b9ab2da4ef69b6b8d9baef4f99bcc8c046f5c9051b3ba081f42ed",
+      "opaquePixels": 2675,
+      "colors": 14,
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 64,
+        "height": 64
+      },
+      "padding": {
+        "left": 18,
+        "top": 20,
+        "right": 14,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "miniature-house-autumn",
+      "path": "sprites/miniature-house-autumn.png",
+      "pixelSha256": "67fedaf87ed659451f0d1df1d955b780a73192407cbe83424c98cd9997e107ce",
+      "opaquePixels": 2643,
+      "colors": 16,
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 64,
+        "height": 64
+      },
+      "padding": {
+        "left": 18,
+        "top": 20,
+        "right": 14,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "miniature-house-winter",
+      "path": "sprites/miniature-house-winter.png",
+      "pixelSha256": "9d2deeda081a1484db22a4111d496851e292fbfe9f4df61c2b1d3c9d6d954188",
+      "opaquePixels": 2673,
+      "colors": 13,
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 66,
+        "height": 65
+      },
+      "padding": {
+        "left": 18,
+        "top": 20,
+        "right": 12,
+        "bottom": 11
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cat-bed-spring",
+      "path": "sprites/cat-bed-spring.png",
+      "pixelSha256": "db1694213aa41b6ffec5d3aeaec601e37828596a3a43d17c2111511eecf2f347",
+      "opaquePixels": 2337,
+      "colors": 10,
+      "bounds": {
+        "x": 17,
+        "y": 30,
+        "width": 63,
+        "height": 54
+      },
+      "padding": {
+        "left": 17,
+        "top": 30,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cat-bed-summer",
+      "path": "sprites/cat-bed-summer.png",
+      "pixelSha256": "70b9dc1e8e0b2a6b110f0412b4215dfc4b0253d79ef86af93e45aac3a394cd21",
+      "opaquePixels": 2331,
+      "colors": 11,
+      "bounds": {
+        "x": 17,
+        "y": 30,
+        "width": 63,
+        "height": 54
+      },
+      "padding": {
+        "left": 17,
+        "top": 30,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cat-bed-autumn",
+      "path": "sprites/cat-bed-autumn.png",
+      "pixelSha256": "12d657f3d7ac1a16a77e0c4f7b8850ee695acbccff01146241cceda76f07d146",
+      "opaquePixels": 2328,
+      "colors": 11,
+      "bounds": {
+        "x": 17,
+        "y": 30,
+        "width": 63,
+        "height": 54
+      },
+      "padding": {
+        "left": 17,
+        "top": 30,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cat-bed-winter",
+      "path": "sprites/cat-bed-winter.png",
+      "pixelSha256": "03ce8d5373e9c837456515f5523dc8ca7def3434796fdbc5eaf6af66f548f0f3",
+      "opaquePixels": 2356,
+      "colors": 11,
+      "bounds": {
+        "x": 17,
+        "y": 30,
+        "width": 63,
+        "height": 54
+      },
+      "padding": {
+        "left": 17,
+        "top": 30,
+        "right": 16,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "scratching-post-spring",
+      "path": "sprites/scratching-post-spring.png",
+      "pixelSha256": "a4efcf39fb3c3976bc3fd76c3457acff9cef5b62fe89049398960c360b8bf032",
+      "opaquePixels": 2054,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 64,
+        "height": 64
+      },
+      "padding": {
+        "left": 19,
+        "top": 20,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "scratching-post-summer",
+      "path": "sprites/scratching-post-summer.png",
+      "pixelSha256": "f231671c0635edd14a54d2e6fd4d1b3f5ca98edd09a0f2b91b6d61c507f6fdd8",
+      "opaquePixels": 2029,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 63,
+        "height": 64
+      },
+      "padding": {
+        "left": 19,
+        "top": 20,
+        "right": 14,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "scratching-post-autumn",
+      "path": "sprites/scratching-post-autumn.png",
+      "pixelSha256": "9df00d75395accd3391e0a779afb27398455928a55758a3ccfd22e91fc05e27e",
+      "opaquePixels": 1932,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 62,
+        "height": 64
+      },
+      "padding": {
+        "left": 19,
+        "top": 20,
+        "right": 15,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "scratching-post-winter",
+      "path": "sprites/scratching-post-winter.png",
+      "pixelSha256": "aa3cf148d076c86d2cf480a5616eb43fc36bc84925512a377850bf74ea5338c9",
+      "opaquePixels": 2003,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 63,
+        "height": 67
+      },
+      "padding": {
+        "left": 19,
+        "top": 20,
+        "right": 14,
+        "bottom": 9
+      },
+      "status": "passed"
+    },
+    {
+      "id": "food-bowls-spring",
+      "path": "sprites/food-bowls-spring.png",
+      "pixelSha256": "8d2d5033f2a0a5594c1a2c92acfddb53a9ccfd27c4bce19450aca0ff2472eff8",
+      "opaquePixels": 1976,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 36,
+        "width": 62,
+        "height": 48
+      },
+      "padding": {
+        "left": 19,
+        "top": 36,
+        "right": 15,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "food-bowls-summer",
+      "path": "sprites/food-bowls-summer.png",
+      "pixelSha256": "e2c8a18bcd2f47fe54468f30b0dc430c94069b47feb06a18a081a8daf0924f76",
+      "opaquePixels": 1960,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 32,
+        "width": 62,
+        "height": 52
+      },
+      "padding": {
+        "left": 19,
+        "top": 32,
+        "right": 15,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "food-bowls-autumn",
+      "path": "sprites/food-bowls-autumn.png",
+      "pixelSha256": "d0f24405dd24615385f76aa3017d2bfe5bb83244316cf561bcd18ec128149d20",
+      "opaquePixels": 1899,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 38,
+        "width": 62,
+        "height": 46
+      },
+      "padding": {
+        "left": 19,
+        "top": 38,
+        "right": 15,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "food-bowls-winter",
+      "path": "sprites/food-bowls-winter.png",
+      "pixelSha256": "5f1b343fda1809dab915abf66699616a8a1fb5fea9a63da1f9e51e13d4f22637",
+      "opaquePixels": 1911,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 36,
+        "width": 62,
+        "height": 48
+      },
+      "padding": {
+        "left": 19,
+        "top": 36,
+        "right": 15,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "fish-toy-spring",
+      "path": "sprites/fish-toy-spring.png",
+      "pixelSha256": "12c54f0e2544043aaf179f01265b89ed6ed3b99954cd0b3e7dbc90e6969a9ca2",
+      "opaquePixels": 1848,
+      "colors": 10,
+      "bounds": {
+        "x": 15,
+        "y": 34,
+        "width": 63,
+        "height": 50
+      },
+      "padding": {
+        "left": 15,
+        "top": 34,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "fish-toy-summer",
+      "path": "sprites/fish-toy-summer.png",
+      "pixelSha256": "71ca8da089348f94150f65c2412ce7b7876919bacd35b0574bc9269d3f8619bd",
+      "opaquePixels": 1863,
+      "colors": 11,
+      "bounds": {
+        "x": 15,
+        "y": 34,
+        "width": 63,
+        "height": 50
+      },
+      "padding": {
+        "left": 15,
+        "top": 34,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "fish-toy-autumn",
+      "path": "sprites/fish-toy-autumn.png",
+      "pixelSha256": "e9237560bf57d15cc90607d69dadbba7cb20acf0504e4369dd1c30f99274438d",
+      "opaquePixels": 1824,
+      "colors": 11,
+      "bounds": {
+        "x": 15,
+        "y": 34,
+        "width": 63,
+        "height": 50
+      },
+      "padding": {
+        "left": 15,
+        "top": 34,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "fish-toy-winter",
+      "path": "sprites/fish-toy-winter.png",
+      "pixelSha256": "0b851713c3a725b157950d06fec0fdb7ad7de2eaa3696aaab5959d20f220cc1b",
+      "opaquePixels": 1857,
+      "colors": 12,
+      "bounds": {
+        "x": 15,
+        "y": 34,
+        "width": 63,
+        "height": 54
+      },
+      "padding": {
+        "left": 15,
+        "top": 34,
+        "right": 18,
+        "bottom": 8
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cat-tunnel-spring",
+      "path": "sprites/cat-tunnel-spring.png",
+      "pixelSha256": "a43ea9deb5de3a55f07c72f5d788c446e7fca6a2ff879283cf568d2b48b1caf8",
+      "opaquePixels": 3204,
+      "colors": 12,
+      "bounds": {
+        "x": 9,
+        "y": 29,
+        "width": 75,
+        "height": 55
+      },
+      "padding": {
+        "left": 9,
+        "top": 29,
+        "right": 12,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cat-tunnel-summer",
+      "path": "sprites/cat-tunnel-summer.png",
+      "pixelSha256": "d20e8542ba722c8e059fd680cbd23204db6634ff46b5d9168c6277edd8677636",
+      "opaquePixels": 3204,
+      "colors": 13,
+      "bounds": {
+        "x": 9,
+        "y": 29,
+        "width": 75,
+        "height": 55
+      },
+      "padding": {
+        "left": 9,
+        "top": 29,
+        "right": 12,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cat-tunnel-autumn",
+      "path": "sprites/cat-tunnel-autumn.png",
+      "pixelSha256": "52db62c33cddfd3ae464565d5b2ec0b1edf331c7cefb44c02f63bc0debfd0ba2",
+      "opaquePixels": 3204,
+      "colors": 13,
+      "bounds": {
+        "x": 9,
+        "y": 29,
+        "width": 75,
+        "height": 55
+      },
+      "padding": {
+        "left": 9,
+        "top": 29,
+        "right": 12,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cat-tunnel-winter",
+      "path": "sprites/cat-tunnel-winter.png",
+      "pixelSha256": "6b51f091a1c9f40ddea6442f5c362a94e6d33aa864938927bce2e06101282b26",
+      "opaquePixels": 3204,
+      "colors": 14,
+      "bounds": {
+        "x": 9,
+        "y": 29,
+        "width": 75,
+        "height": 55
+      },
+      "padding": {
+        "left": 9,
+        "top": 29,
+        "right": 12,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "climbing-tree-spring",
+      "path": "sprites/climbing-tree-spring.png",
+      "pixelSha256": "536313adb5fccd487bff81ff41f5405833db24a65704d71325fa6799b55532d3",
+      "opaquePixels": 2316,
+      "colors": 13,
+      "bounds": {
+        "x": 13,
+        "y": 17,
+        "width": 73,
+        "height": 67
+      },
+      "padding": {
+        "left": 13,
+        "top": 17,
+        "right": 10,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "climbing-tree-summer",
+      "path": "sprites/climbing-tree-summer.png",
+      "pixelSha256": "2d9b0a220b70e45c1dc5f4d77266d90b84637950fe26083ca21a81c0011f3954",
+      "opaquePixels": 2323,
+      "colors": 13,
+      "bounds": {
+        "x": 13,
+        "y": 17,
+        "width": 73,
+        "height": 67
+      },
+      "padding": {
+        "left": 13,
+        "top": 17,
+        "right": 10,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "climbing-tree-autumn",
+      "path": "sprites/climbing-tree-autumn.png",
+      "pixelSha256": "1b69724b3cfaa4df436b1b68d601c6e01a56b6d35eff168fef5ae33daf78f6eb",
+      "opaquePixels": 2279,
+      "colors": 14,
+      "bounds": {
+        "x": 13,
+        "y": 17,
+        "width": 73,
+        "height": 67
+      },
+      "padding": {
+        "left": 13,
+        "top": 17,
+        "right": 10,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "climbing-tree-winter",
+      "path": "sprites/climbing-tree-winter.png",
+      "pixelSha256": "bf09cdc1325f1800a59ab88776442396c006beb1f7cc3ac4d3205091b0fc483f",
+      "opaquePixels": 2311,
+      "colors": 12,
+      "bounds": {
+        "x": 13,
+        "y": 17,
+        "width": 74,
+        "height": 67
+      },
+      "padding": {
+        "left": 13,
+        "top": 17,
+        "right": 9,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cat-carrier-spring",
+      "path": "sprites/cat-carrier-spring.png",
+      "pixelSha256": "c2b05451b6ce7d6dd57ee0ffeff5561d791107ac0e4848b41a2f913d1f8f62e6",
+      "opaquePixels": 3131,
+      "colors": 12,
+      "bounds": {
+        "x": 19,
+        "y": 14,
+        "width": 64,
+        "height": 70
+      },
+      "padding": {
+        "left": 19,
+        "top": 14,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cat-carrier-summer",
+      "path": "sprites/cat-carrier-summer.png",
+      "pixelSha256": "793c98a3fb0ac83b07f4257d8559b34a981912b29d47881dd1e027be941b0bad",
+      "opaquePixels": 3131,
+      "colors": 14,
+      "bounds": {
+        "x": 19,
+        "y": 14,
+        "width": 64,
+        "height": 70
+      },
+      "padding": {
+        "left": 19,
+        "top": 14,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cat-carrier-autumn",
+      "path": "sprites/cat-carrier-autumn.png",
+      "pixelSha256": "b8a0687124cc62376e57617e9f6e6f763ebf06175da5c1fb2bdf5ad4932e0f0f",
+      "opaquePixels": 3131,
+      "colors": 13,
+      "bounds": {
+        "x": 19,
+        "y": 14,
+        "width": 64,
+        "height": 70
+      },
+      "padding": {
+        "left": 19,
+        "top": 14,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "cat-carrier-winter",
+      "path": "sprites/cat-carrier-winter.png",
+      "pixelSha256": "3bd38985c43f30eea68958771cfb6e1503b0c41aa9712afd410893beea448011",
+      "opaquePixels": 3131,
+      "colors": 15,
+      "bounds": {
+        "x": 19,
+        "y": 14,
+        "width": 64,
+        "height": 70
+      },
+      "padding": {
+        "left": 19,
+        "top": 14,
+        "right": 13,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "yarn-basket-spring",
+      "path": "sprites/yarn-basket-spring.png",
+      "pixelSha256": "bde80073babb85d62358900bdbb0a3b80f8269fb22f1f7565364174be52b714a",
+      "opaquePixels": 2592,
+      "colors": 12,
+      "bounds": {
+        "x": 17,
+        "y": 27,
+        "width": 61,
+        "height": 57
+      },
+      "padding": {
+        "left": 17,
+        "top": 27,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "yarn-basket-summer",
+      "path": "sprites/yarn-basket-summer.png",
+      "pixelSha256": "056d620d36a94d2544a0f0b0f5f092c58a9cd045b01d1d0ae6b9ea930a131e48",
+      "opaquePixels": 2594,
+      "colors": 13,
+      "bounds": {
+        "x": 17,
+        "y": 27,
+        "width": 61,
+        "height": 57
+      },
+      "padding": {
+        "left": 17,
+        "top": 27,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "yarn-basket-autumn",
+      "path": "sprites/yarn-basket-autumn.png",
+      "pixelSha256": "35823e7288451c07929e3147d38c7f7186ee4aadc6e8a7f3dd3594a5efb1bcdd",
+      "opaquePixels": 2592,
+      "colors": 13,
+      "bounds": {
+        "x": 17,
+        "y": 27,
+        "width": 61,
+        "height": 57
+      },
+      "padding": {
+        "left": 17,
+        "top": 27,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    },
+    {
+      "id": "yarn-basket-winter",
+      "path": "sprites/yarn-basket-winter.png",
+      "pixelSha256": "b666fac943d2ec2fb7ed39a5ee46c77fcb6504676184ef940a1a3f1e318f37d5",
+      "opaquePixels": 2592,
+      "colors": 14,
+      "bounds": {
+        "x": 17,
+        "y": 27,
+        "width": 61,
+        "height": 57
+      },
+      "padding": {
+        "left": 17,
+        "top": 27,
+        "right": 18,
+        "bottom": 12
+      },
+      "status": "passed"
+    }
+  ]
+}

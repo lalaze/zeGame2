@@ -1,0 +1,2344 @@
+{
+  "schemaVersion": 1,
+  "packId": "travel-reserve-v1",
+  "status": "passed",
+  "counts": {
+    "sprites": 192,
+    "baseShapes": 48,
+    "variantsPerBase": 4,
+    "categories": 6,
+    "distinctBaseSilhouettes": 48,
+    "nonRecolorVariantPairs": 288,
+    "atlasPixelsCompared": 1769472
+  },
+  "checks": {
+    "sourcePreflight": true,
+    "dimensions": true,
+    "nativeDensity2": true,
+    "binaryAlpha": true,
+    "masterPalette": true,
+    "transparentPadding3": true,
+    "noExactDuplicates": true,
+    "noPureRecolorVariants": true,
+    "distinctBaseSilhouettes": true,
+    "stableAnchors": true,
+    "safePaths": true,
+    "deterministicSourceRendering": true,
+    "pngDecode": true,
+    "atlasReadback": true,
+    "contactSheetReadback": true,
+    "offlineCatalog": true,
+    "reserveNotIntegrated": true
+  },
+  "sprites": [
+    {
+      "id": "travel-lighthouse-spring",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 2113,
+      "colors": 17,
+      "pixelSha256": "1b9fd00f75f242149b5a3e7f53ab16b3594b0ab40b77c0b815066be387e3809c"
+    },
+    {
+      "id": "travel-lighthouse-summer",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 62,
+        "height": 70
+      },
+      "opaquePixels": 2123,
+      "colors": 16,
+      "pixelSha256": "cc1f966d4e46cd9c3187dba783fcb35fac9de1516779d3ef7264e9342e2bc3a6"
+    },
+    {
+      "id": "travel-lighthouse-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 2019,
+      "colors": 16,
+      "pixelSha256": "e79279f5a26b8601bcde3595db27c5a1dbfad6744b54ee1bf15884a6c4a453eb"
+    },
+    {
+      "id": "travel-lighthouse-winter",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 61,
+        "height": 71
+      },
+      "opaquePixels": 2091,
+      "colors": 16,
+      "pixelSha256": "f4dfad1317a54581e9d8caeeb5b22fc68dcfaae3c787a7c011f8fdcc15d2a77a"
+    },
+    {
+      "id": "travel-sailboat-spring",
+      "bounds": {
+        "x": 17,
+        "y": 15,
+        "width": 62,
+        "height": 69
+      },
+      "opaquePixels": 1992,
+      "colors": 10,
+      "pixelSha256": "6c819f2d2bd105e57988b7f3f33dff0fd3eb714f366a2a3caef3d5c74f0898da"
+    },
+    {
+      "id": "travel-sailboat-summer",
+      "bounds": {
+        "x": 17,
+        "y": 15,
+        "width": 62,
+        "height": 69
+      },
+      "opaquePixels": 2196,
+      "colors": 10,
+      "pixelSha256": "947e1dcc4749ba6a099109249f31a2612c67e584bc340f8f4ead4ae72c618e05"
+    },
+    {
+      "id": "travel-sailboat-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 15,
+        "width": 62,
+        "height": 69
+      },
+      "opaquePixels": 1912,
+      "colors": 9,
+      "pixelSha256": "13987cef0ef67e43cc8dee412caaccfed7b4e9f4660e60b7e2b43d70a7b27aca"
+    },
+    {
+      "id": "travel-sailboat-winter",
+      "bounds": {
+        "x": 17,
+        "y": 15,
+        "width": 62,
+        "height": 69
+      },
+      "opaquePixels": 1924,
+      "colors": 10,
+      "pixelSha256": "655091d380a5bbce76daa6d8860b00d46a1687eb0f7b90fa3caef128d8dd9bde"
+    },
+    {
+      "id": "travel-brass-telescope-spring",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 62,
+        "height": 66
+      },
+      "opaquePixels": 1501,
+      "colors": 10,
+      "pixelSha256": "70ab834309599bd7dc5e0f3a023c27626d0c58221ae7a85e757811bc8a12b57f"
+    },
+    {
+      "id": "travel-brass-telescope-summer",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 67,
+        "height": 67
+      },
+      "opaquePixels": 1550,
+      "colors": 10,
+      "pixelSha256": "335627e688b4bba5bc22342f6932e557d763fc24100349d13c0298781c3394a9"
+    },
+    {
+      "id": "travel-brass-telescope-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 62,
+        "height": 66
+      },
+      "opaquePixels": 1553,
+      "colors": 10,
+      "pixelSha256": "7d05836af0bc43efad9ba7b42bd8eab5cbb85d51da13cda5c06ff1c344623681"
+    },
+    {
+      "id": "travel-brass-telescope-winter",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 62,
+        "height": 66
+      },
+      "opaquePixels": 1473,
+      "colors": 10,
+      "pixelSha256": "55c9aa6ba22a543288fd3aaf52ad55a5165eb9de733d2d03e8a821fef1e28a4e"
+    },
+    {
+      "id": "travel-ship-wheel-spring",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 62,
+        "height": 70
+      },
+      "opaquePixels": 2043,
+      "colors": 10,
+      "pixelSha256": "2c87ab1a7ea31a1b0f19ffb1bcf0a76a198d58926f32b64743d5fd5edcc83b82"
+    },
+    {
+      "id": "travel-ship-wheel-summer",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 2103,
+      "colors": 10,
+      "pixelSha256": "908ecf357c16523556bfabde5a02c95c8ae60037c5706eee9b8c4138a7e03bf8"
+    },
+    {
+      "id": "travel-ship-wheel-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 2059,
+      "colors": 10,
+      "pixelSha256": "1ca6e3ee40446926d766a687e58ae8b4008fbcb906409e8654134b49b1d2b5e2"
+    },
+    {
+      "id": "travel-ship-wheel-winter",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 2089,
+      "colors": 10,
+      "pixelSha256": "6ccb5a187dd69f82b86bc34d93edfe47a02aded6333493d45cc8a8622df2ab51"
+    },
+    {
+      "id": "travel-anchor-model-spring",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 1594,
+      "colors": 9,
+      "pixelSha256": "caa50917cc824236e9192af880c373e26cb14c292a199a17f3cd74f5b8b70ad6"
+    },
+    {
+      "id": "travel-anchor-model-summer",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 1619,
+      "colors": 9,
+      "pixelSha256": "5c305b6281eb787254d96e61880dbcee93217420cf746991ad3ff80ed4581258"
+    },
+    {
+      "id": "travel-anchor-model-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 1640,
+      "colors": 9,
+      "pixelSha256": "c5cb184b9e4d92273d0ddf1f475a424f7447903850ea85a6f8bae2a7bf70c6cd"
+    },
+    {
+      "id": "travel-anchor-model-winter",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 1628,
+      "colors": 10,
+      "pixelSha256": "b991bdb8bf423c3852b75c4c1a94e9102e6155c6bacd342a08fbb1fbdbab430f"
+    },
+    {
+      "id": "travel-diving-helmet-spring",
+      "bounds": {
+        "x": 17,
+        "y": 17,
+        "width": 62,
+        "height": 67
+      },
+      "opaquePixels": 2987,
+      "colors": 12,
+      "pixelSha256": "8b96eda87f424a877d022f2a7427752ad7972b5fdd2e5a99ede6d1c6f2428ff3"
+    },
+    {
+      "id": "travel-diving-helmet-summer",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 66,
+        "height": 67
+      },
+      "opaquePixels": 2973,
+      "colors": 12,
+      "pixelSha256": "87bb5588cbbcf2b8818bff439a3f7cf8a7867371ffa22b7688537bd41c47be40"
+    },
+    {
+      "id": "travel-diving-helmet-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 61,
+        "height": 68
+      },
+      "opaquePixels": 2919,
+      "colors": 12,
+      "pixelSha256": "0b4b49cac3289d90fbf9adac411f793605cb80ac07412b46fd5440363ce2e350"
+    },
+    {
+      "id": "travel-diving-helmet-winter",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 2893,
+      "colors": 13,
+      "pixelSha256": "94a1dbff0914f221de1c1573eb67292a476d8dea1787de7d8264cbb7646d4add"
+    },
+    {
+      "id": "travel-buoy-model-spring",
+      "bounds": {
+        "x": 18,
+        "y": 7,
+        "width": 61,
+        "height": 77
+      },
+      "opaquePixels": 1730,
+      "colors": 12,
+      "pixelSha256": "d56171cd8028327b8ad54a90d777b560eb8f2d92409b33ee3c217334ab4c0b51"
+    },
+    {
+      "id": "travel-buoy-model-summer",
+      "bounds": {
+        "x": 18,
+        "y": 7,
+        "width": 61,
+        "height": 77
+      },
+      "opaquePixels": 1787,
+      "colors": 13,
+      "pixelSha256": "c57979355b7a6d0efd827650f82a4d830dffb94551c8d7e2ab7eeff0af3db7df"
+    },
+    {
+      "id": "travel-buoy-model-autumn",
+      "bounds": {
+        "x": 15,
+        "y": 7,
+        "width": 64,
+        "height": 77
+      },
+      "opaquePixels": 1783,
+      "colors": 13,
+      "pixelSha256": "606a1c36dff83905f4338012bf5d8cdd49946614e7d00c06f34a2103ab95494d"
+    },
+    {
+      "id": "travel-buoy-model-winter",
+      "bounds": {
+        "x": 18,
+        "y": 7,
+        "width": 61,
+        "height": 77
+      },
+      "opaquePixels": 1728,
+      "colors": 12,
+      "pixelSha256": "1b28882f446c3baa1289d620c5f3e388c069a081f6c99eeedc451dabe2280117"
+    },
+    {
+      "id": "travel-sextant-spring",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 1690,
+      "colors": 13,
+      "pixelSha256": "25e0bc926634b121437a26cdde718d22e375c9c04271dd91fca9f4a9bda1cd26"
+    },
+    {
+      "id": "travel-sextant-summer",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 1679,
+      "colors": 13,
+      "pixelSha256": "1d85737b9d2feb6d0bff4b7be9d1a83cc48bc15fd0f3d10ff6f98978d740621b"
+    },
+    {
+      "id": "travel-sextant-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 1731,
+      "colors": 13,
+      "pixelSha256": "5eae135efdf57c20fa0811cc04463ee48f58589e052e29901ba8bafe7794d27e"
+    },
+    {
+      "id": "travel-sextant-winter",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 1764,
+      "colors": 14,
+      "pixelSha256": "650e11f79a4344c8618d4703314874447615cd64697140a5a52d17773b68170c"
+    },
+    {
+      "id": "travel-compass-spring",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 62,
+        "height": 71
+      },
+      "opaquePixels": 3067,
+      "colors": 10,
+      "pixelSha256": "164b015074bdaef1d1857de496bd3f733ebccbd60eba24046cc173278bf98a80"
+    },
+    {
+      "id": "travel-compass-summer",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 62,
+        "height": 71
+      },
+      "opaquePixels": 3067,
+      "colors": 11,
+      "pixelSha256": "83a738870f43a97469bc2666a6ec6c5ab2f6d8d8795404fe38018c966810c687"
+    },
+    {
+      "id": "travel-compass-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 62,
+        "height": 71
+      },
+      "opaquePixels": 3067,
+      "colors": 11,
+      "pixelSha256": "2456cca44e042a71656a2772004985165eb3b35f9c3ee6b0e50e890083bdff5f"
+    },
+    {
+      "id": "travel-compass-winter",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 62,
+        "height": 71
+      },
+      "opaquePixels": 3067,
+      "colors": 11,
+      "pixelSha256": "74c32b9d3ab323d40028154738beb0a215bef2c248e1152e7d52838af7fdfc53"
+    },
+    {
+      "id": "travel-globe-spring",
+      "bounds": {
+        "x": 18,
+        "y": 12,
+        "width": 61,
+        "height": 72
+      },
+      "opaquePixels": 2713,
+      "colors": 16,
+      "pixelSha256": "6cb4b27230808d1bbcfc98b0a6595ae5f80114cad3b1c2f3f4a0b487ee49e986"
+    },
+    {
+      "id": "travel-globe-summer",
+      "bounds": {
+        "x": 18,
+        "y": 12,
+        "width": 61,
+        "height": 72
+      },
+      "opaquePixels": 2713,
+      "colors": 16,
+      "pixelSha256": "1e69f14ac64ebf859cdce7d9fe8197b1b2b46ca24e991bbd48aa0634441ea0e7"
+    },
+    {
+      "id": "travel-globe-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 12,
+        "width": 61,
+        "height": 72
+      },
+      "opaquePixels": 2713,
+      "colors": 16,
+      "pixelSha256": "f44184c611a882306604c559dd58ed31f7448a0bb246f3a2c0640ed88d6c9731"
+    },
+    {
+      "id": "travel-globe-winter",
+      "bounds": {
+        "x": 18,
+        "y": 12,
+        "width": 61,
+        "height": 72
+      },
+      "opaquePixels": 2713,
+      "colors": 17,
+      "pixelSha256": "9d14105d150092bc0e2381bad458dca01e49e6ddb7fd9e44b0f61d6f399ffc4f"
+    },
+    {
+      "id": "travel-suitcase-spring",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 64,
+        "height": 67
+      },
+      "opaquePixels": 3022,
+      "colors": 13,
+      "pixelSha256": "08698ecafde22ee975be416c72b2a749a954b3516afe1e119c17b92df9086ae2"
+    },
+    {
+      "id": "travel-suitcase-summer",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 3004,
+      "colors": 12,
+      "pixelSha256": "4c27f133290c989b3ee994d821be2ea327601111db198b7336e4aecf2b487d48"
+    },
+    {
+      "id": "travel-suitcase-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 3004,
+      "colors": 12,
+      "pixelSha256": "0a5e6f91a2d962ad7ed4b871cfae7bb0958cb7a43b82abc23f9ee215c1a6ae10"
+    },
+    {
+      "id": "travel-suitcase-winter",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 3078,
+      "colors": 12,
+      "pixelSha256": "a290819213b17a4ced248b6003fb82b219c8e2c6bcb7951147da6c5e2a549577"
+    },
+    {
+      "id": "travel-map-scroll-spring",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2598,
+      "colors": 11,
+      "pixelSha256": "11f0ea4d85abdf65bacda16bb56dc575e97597ef8ab98e6c5560010d6510628a"
+    },
+    {
+      "id": "travel-map-scroll-summer",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2598,
+      "colors": 11,
+      "pixelSha256": "bdf6a1c576ab70ceca81f31aeaee8e55cae8c1a27a0c214365b6209b4aa86344"
+    },
+    {
+      "id": "travel-map-scroll-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2598,
+      "colors": 10,
+      "pixelSha256": "d0f1b741bd18f901955f41b85bbb3b774285e4e1642ed2101e34158b6684d5f1"
+    },
+    {
+      "id": "travel-map-scroll-winter",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2814,
+      "colors": 12,
+      "pixelSha256": "f1c9165b693d2263fbb283cadd8b2f3f7d347c9e79ab4ff77e00fd34e3395c43"
+    },
+    {
+      "id": "travel-travel-album-spring",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 3153,
+      "colors": 16,
+      "pixelSha256": "07d179df96eb96d1997a37c4791367c1c1b41cd8725f52e530dba81fc64f87c7"
+    },
+    {
+      "id": "travel-travel-album-summer",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 3152,
+      "colors": 12,
+      "pixelSha256": "23fac28008f6779c0faecf194ff5a647e6455bc7bc1700f5c2526c8fcee10fbb"
+    },
+    {
+      "id": "travel-travel-album-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 3155,
+      "colors": 15,
+      "pixelSha256": "e139bbeda8f401518c986f85d03b31cf265519ec8dcc84160e9f188dc367ee21"
+    },
+    {
+      "id": "travel-travel-album-winter",
+      "bounds": {
+        "x": 18,
+        "y": 12,
+        "width": 61,
+        "height": 72
+      },
+      "opaquePixels": 3292,
+      "colors": 14,
+      "pixelSha256": "8c4b4b9e3055ba82b2421c94674563397f15fe78e47bd8dd5598a13cae7468f8"
+    },
+    {
+      "id": "travel-binoculars-spring",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 61,
+        "height": 56
+      },
+      "opaquePixels": 2587,
+      "colors": 13,
+      "pixelSha256": "86f84a53167adbd33ee67d38e055e0c61d8388ba50a4f60188d678f799bd999b"
+    },
+    {
+      "id": "travel-binoculars-summer",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 2647,
+      "colors": 13,
+      "pixelSha256": "5084cbe1a2069afdb64c310d22bc60d07e9022a36033e8d1607938fa3cbfefd6"
+    },
+    {
+      "id": "travel-binoculars-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 61,
+        "height": 56
+      },
+      "opaquePixels": 2603,
+      "colors": 14,
+      "pixelSha256": "ca8d50070e32ab6434690ac09e1be7ba46de3453995e78f43ad5ceefcdb84e99"
+    },
+    {
+      "id": "travel-binoculars-winter",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 61,
+        "height": 56
+      },
+      "opaquePixels": 2569,
+      "colors": 14,
+      "pixelSha256": "5469e0ff1ea835d6d773eebd88ca7f99c76719c8bf4f20f11bc735afdfaad264"
+    },
+    {
+      "id": "travel-passport-wallet-spring",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2552,
+      "colors": 12,
+      "pixelSha256": "416034991a4141af31324da3bdda026f1e617e195c1caf6161d33ba70a541c90"
+    },
+    {
+      "id": "travel-passport-wallet-summer",
+      "bounds": {
+        "x": 18,
+        "y": 13,
+        "width": 61,
+        "height": 71
+      },
+      "opaquePixels": 2667,
+      "colors": 12,
+      "pixelSha256": "2fc37c70440dc4dccd1c799d97a01426d3ecb9078d95b0d2bf168d1e632b431d"
+    },
+    {
+      "id": "travel-passport-wallet-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "opaquePixels": 2460,
+      "colors": 13,
+      "pixelSha256": "bbc668e9bc193d5b50ca86d3e9e71bbf78dd1206c8b74b60d63d427993e7fea1"
+    },
+    {
+      "id": "travel-passport-wallet-winter",
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 61,
+        "height": 68
+      },
+      "opaquePixels": 2598,
+      "colors": 13,
+      "pixelSha256": "b146e0fe7957174df1f42a7881db98d320a7aceaf0d2cb2f7e0a156a89328764"
+    },
+    {
+      "id": "travel-postcard-rack-spring",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 2619,
+      "colors": 14,
+      "pixelSha256": "52edfd8be293b3189b1a7a27adfa48cbc532fb989f66408114169a434ead1c6f"
+    },
+    {
+      "id": "travel-postcard-rack-summer",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 2585,
+      "colors": 11,
+      "pixelSha256": "b12aac2b24a48bdb950235348f31251f47bd8564fb6b967454bee70656dbf20f"
+    },
+    {
+      "id": "travel-postcard-rack-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 2652,
+      "colors": 10,
+      "pixelSha256": "561290a5e4c418d3dd136efa7956516b131905f306d03da46beaad07d971d401"
+    },
+    {
+      "id": "travel-postcard-rack-winter",
+      "bounds": {
+        "x": 18,
+        "y": 12,
+        "width": 61,
+        "height": 72
+      },
+      "opaquePixels": 2647,
+      "colors": 10,
+      "pixelSha256": "b7b934d61e6ce0f0b62553c32ea25f4b2866ece30cc12afb811c696aade37627"
+    },
+    {
+      "id": "travel-shell-box-spring",
+      "bounds": {
+        "x": 17,
+        "y": 22,
+        "width": 64,
+        "height": 62
+      },
+      "opaquePixels": 3570,
+      "colors": 11,
+      "pixelSha256": "245cf76b6d18a3cb7c5b221480630fc8cea460557a254b0bd32cf64b1a50c127"
+    },
+    {
+      "id": "travel-shell-box-summer",
+      "bounds": {
+        "x": 17,
+        "y": 22,
+        "width": 64,
+        "height": 62
+      },
+      "opaquePixels": 3570,
+      "colors": 12,
+      "pixelSha256": "f23e059d4421fd5f67b6df11adc60ad70361c3a257f30d9eab47c9520555ce07"
+    },
+    {
+      "id": "travel-shell-box-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 22,
+        "width": 64,
+        "height": 62
+      },
+      "opaquePixels": 3570,
+      "colors": 8,
+      "pixelSha256": "3698c6fd9533ed8181ced72219891c14effd816913c65b738c3734d2118331c4"
+    },
+    {
+      "id": "travel-shell-box-winter",
+      "bounds": {
+        "x": 17,
+        "y": 22,
+        "width": 64,
+        "height": 62
+      },
+      "opaquePixels": 3570,
+      "colors": 11,
+      "pixelSha256": "108358e6080d8f8209be1967e7d795b346dcec38c5320db883db44384d509511"
+    },
+    {
+      "id": "travel-coral-spring",
+      "bounds": {
+        "x": 16,
+        "y": 13,
+        "width": 67,
+        "height": 71
+      },
+      "opaquePixels": 1975,
+      "colors": 12,
+      "pixelSha256": "542af5d5b0bafffc60f102d0938b6e561727bd32da6a26978e9e6823faa09e99"
+    },
+    {
+      "id": "travel-coral-summer",
+      "bounds": {
+        "x": 16,
+        "y": 15,
+        "width": 67,
+        "height": 69
+      },
+      "opaquePixels": 2053,
+      "colors": 11,
+      "pixelSha256": "6fb2ef36d2d31c3200bd06c24eb404ad2af703d4e69587e6362f7a41f41f2f19"
+    },
+    {
+      "id": "travel-coral-autumn",
+      "bounds": {
+        "x": 16,
+        "y": 15,
+        "width": 67,
+        "height": 69
+      },
+      "opaquePixels": 2021,
+      "colors": 11,
+      "pixelSha256": "e6d1ffd4e7f6fd4e944869ecd71f8b8eb183ce319eb6f4518465068a1767a2cb"
+    },
+    {
+      "id": "travel-coral-winter",
+      "bounds": {
+        "x": 16,
+        "y": 15,
+        "width": 67,
+        "height": 69
+      },
+      "opaquePixels": 2006,
+      "colors": 9,
+      "pixelSha256": "54d3d41d9bede275d65441f9a3bbf05a4dca04960e14b54346fa0140e5baa3af"
+    },
+    {
+      "id": "travel-ammonite-spring",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2771,
+      "colors": 9,
+      "pixelSha256": "59609e814af5266d9e7a67a6674fa64181c06450d6fea151e682d778fe34f7a0"
+    },
+    {
+      "id": "travel-ammonite-summer",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2878,
+      "colors": 10,
+      "pixelSha256": "7c4b78e1001c1dc619b25173d0e5bcfcad6489b89dc72ae911de829a87160885"
+    },
+    {
+      "id": "travel-ammonite-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2771,
+      "colors": 10,
+      "pixelSha256": "f669a5356521f06be01d16f54accaf05f5797191c0d0fdc1df55b3060ef5c3f3"
+    },
+    {
+      "id": "travel-ammonite-winter",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2781,
+      "colors": 10,
+      "pixelSha256": "bf675e45d1336e38bb097eba4d2589f56e6c42461ac7940bd80fcafe13722cdf"
+    },
+    {
+      "id": "travel-sea-glass-spring",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 2019,
+      "colors": 13,
+      "pixelSha256": "edca749a02d318425fcdee96e5e09bb0f3c7f8b5c72a3c5ecd379ca158ad7806"
+    },
+    {
+      "id": "travel-sea-glass-summer",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 2087,
+      "colors": 12,
+      "pixelSha256": "d3609290ff9dec7c42a74528c3a54823c1baff08612045fb4fffbad51dc19d40"
+    },
+    {
+      "id": "travel-sea-glass-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 2075,
+      "colors": 13,
+      "pixelSha256": "2b9bd4d154bc9c3cfac976ca3594241576bd898f72112fe4d816bad9797bc1cb"
+    },
+    {
+      "id": "travel-sea-glass-winter",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2102,
+      "colors": 11,
+      "pixelSha256": "6485e282263a1de7afd1f7ff86f9db725a5e745abc334ffb5d3bca665c63f3e9"
+    },
+    {
+      "id": "travel-driftwood-spring",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 1743,
+      "colors": 9,
+      "pixelSha256": "5d7ce75376f371cafa147ca9df0ad044e0ca45e19f6ae615b204856a8bcda04e"
+    },
+    {
+      "id": "travel-driftwood-summer",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 1818,
+      "colors": 8,
+      "pixelSha256": "125fcf541683055570ece4eed325e669b7a6be90d102fafce59c46b5e7eb8b94"
+    },
+    {
+      "id": "travel-driftwood-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 1709,
+      "colors": 8,
+      "pixelSha256": "77c99559a49a01324aad2821dac34fee94dc6ddf6fd9fb666c6a5e836b52fbb5"
+    },
+    {
+      "id": "travel-driftwood-winter",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 1743,
+      "colors": 7,
+      "pixelSha256": "468658fa7eea1af1668fcabcbc3dfbc0887494c4430a3bf9410e846499820ad3"
+    },
+    {
+      "id": "travel-starfish-frame-spring",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 3087,
+      "colors": 10,
+      "pixelSha256": "f322fa75ff24adfeb1fac93a09b8589fc9fe1cb8963036a2b42602f9d90f4f41"
+    },
+    {
+      "id": "travel-starfish-frame-summer",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 3087,
+      "colors": 11,
+      "pixelSha256": "3d3f55ce28c3a744860d9c5165735c01e1aaca48b444d5e823355a83db8b3c7d"
+    },
+    {
+      "id": "travel-starfish-frame-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 3087,
+      "colors": 9,
+      "pixelSha256": "f544178c75082d75148aa4135766a02971adde143b0f7d9e36a3828d26c03cfa"
+    },
+    {
+      "id": "travel-starfish-frame-winter",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 3087,
+      "colors": 10,
+      "pixelSha256": "4f9fb677fbd3beb3142f4520905a3709a9d426e064f61cb36c61c054fe62ebb9"
+    },
+    {
+      "id": "travel-pearl-oyster-spring",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2723,
+      "colors": 11,
+      "pixelSha256": "8af5d7536a1db354653218d3dc0f8eb4fe519b36ce571ee51516a1b5ff77acc3"
+    },
+    {
+      "id": "travel-pearl-oyster-summer",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2723,
+      "colors": 11,
+      "pixelSha256": "24d769ab03bb4fd17b9b9e05410a6f9ceeb3540e9352863d3d02371f6978b388"
+    },
+    {
+      "id": "travel-pearl-oyster-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2740,
+      "colors": 13,
+      "pixelSha256": "a5194ac9903a495fc9bec0463b59aa6338f0744ce0917916834d54d29868a23a"
+    },
+    {
+      "id": "travel-pearl-oyster-winter",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2728,
+      "colors": 11,
+      "pixelSha256": "a3b5cc206ef4f97c6758229f235f7b6dbefed31346b5c9a8ae127a720257eb37"
+    },
+    {
+      "id": "travel-sand-bottle-spring",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2283,
+      "colors": 13,
+      "pixelSha256": "fb4d01778a3c38ad9b418bdee9d12474a3815316525fd4b586ddd4bc101f804f"
+    },
+    {
+      "id": "travel-sand-bottle-summer",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 2251,
+      "colors": 13,
+      "pixelSha256": "24dc08637f1bd88e82a6b946dcb9b1861ce988d6a7109c33f3cdc687ce30d9fd"
+    },
+    {
+      "id": "travel-sand-bottle-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2226,
+      "colors": 13,
+      "pixelSha256": "d382c7d6b2d5ce0c4996756c3942a4b94fc19a9b87361ba9238868ffad50fe4a"
+    },
+    {
+      "id": "travel-sand-bottle-winter",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2222,
+      "colors": 14,
+      "pixelSha256": "2985ebeea4c70fcd3eba9dec3171f587d741ac669eaa31158ab776679eedac50"
+    },
+    {
+      "id": "travel-mineral-plinth-spring",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 2099,
+      "colors": 15,
+      "pixelSha256": "a727f80baffcd10a7544faebbc3c6af7a6c6c5b88ddb3dbc045e45c811c192af"
+    },
+    {
+      "id": "travel-mineral-plinth-summer",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 2191,
+      "colors": 14,
+      "pixelSha256": "ab5500da0847540152a84b371f9628c8617baaff39fc015d4c457a3670a8ac4f"
+    },
+    {
+      "id": "travel-mineral-plinth-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 2089,
+      "colors": 17,
+      "pixelSha256": "28a22225696693cad482ab4485124b0dc82b8be7cdec9acbbc3316e1cd35af9f"
+    },
+    {
+      "id": "travel-mineral-plinth-winter",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 2253,
+      "colors": 14,
+      "pixelSha256": "6d8da6cc4855ee1602371cf035ba9e35f2d1e20d6c079fd016562f7e67b50b06"
+    },
+    {
+      "id": "travel-geode-spring",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2784,
+      "colors": 13,
+      "pixelSha256": "11c78132ff74f2527eec448f22b00f6b0e899c3997365a93f68fe9fced53f727"
+    },
+    {
+      "id": "travel-geode-summer",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2784,
+      "colors": 12,
+      "pixelSha256": "43a4e4eca6b91787714121d1f92e1ed632f4076e4984309badce1382d4ebcaa9"
+    },
+    {
+      "id": "travel-geode-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2784,
+      "colors": 13,
+      "pixelSha256": "449ed52ce0edc65560fa81ea9da0e8b1c7a8726027964211b31ed8d81dfd16b4"
+    },
+    {
+      "id": "travel-geode-winter",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2784,
+      "colors": 13,
+      "pixelSha256": "a8a47dde5c08c5bf2ca7c3aa0d2d9f006d256baa6dfe2d0153db6fa23763d136"
+    },
+    {
+      "id": "travel-fossil-slab-spring",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2821,
+      "colors": 8,
+      "pixelSha256": "7f602b2fd8504c62353f397c5e8b864e82feb660d53e3de6df40109ca70cd5a4"
+    },
+    {
+      "id": "travel-fossil-slab-summer",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2821,
+      "colors": 8,
+      "pixelSha256": "247dfa36414f8e53eca7be9453a561c6279b83ee68ba7197a9707895c60bfcd9"
+    },
+    {
+      "id": "travel-fossil-slab-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2821,
+      "colors": 9,
+      "pixelSha256": "c43ed24a97327d8f5784aef3c41c10ccbe732d5296c74b377f0b682f99a67bd5"
+    },
+    {
+      "id": "travel-fossil-slab-winter",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2821,
+      "colors": 10,
+      "pixelSha256": "83dfa5f77201cfd4baa4a7a0ef86eba0d32a42e3ec0611231d8c81c19165753b"
+    },
+    {
+      "id": "travel-meteorite-spring",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 2369,
+      "colors": 12,
+      "pixelSha256": "e0bad87c5ff694f35a572eed18812da774ef91681e1d8fdc2adf2b3b6fb50b93"
+    },
+    {
+      "id": "travel-meteorite-summer",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 2372,
+      "colors": 12,
+      "pixelSha256": "3fccb3458f762bbf0116e58cf3ba6607beeb5ead2244d702847c3b6e27c6000d"
+    },
+    {
+      "id": "travel-meteorite-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 2369,
+      "colors": 12,
+      "pixelSha256": "7f0e1d7bfc998386321dd847a955a657161a21357dc09d01e710c4371157856a"
+    },
+    {
+      "id": "travel-meteorite-winter",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 2370,
+      "colors": 12,
+      "pixelSha256": "17bd6bec8528c145a042f9fc03c726e017d5ff6405c25d24550ce616723bcfbc"
+    },
+    {
+      "id": "travel-crystal-cluster-spring",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2340,
+      "colors": 13,
+      "pixelSha256": "1f2ec30ef143109a34635df5eb90ca029ff6a748f3f6576bdb63140cd78bdc1d"
+    },
+    {
+      "id": "travel-crystal-cluster-summer",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 2514,
+      "colors": 12,
+      "pixelSha256": "89c2d4a7491249c88d72e3273e57c0e406788c4d94cb2746ed82cf856538a279"
+    },
+    {
+      "id": "travel-crystal-cluster-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2446,
+      "colors": 14,
+      "pixelSha256": "9722aa16b22e53c67c6bde8c583e143cf5a6af4362082af15acadbf9f79484b4"
+    },
+    {
+      "id": "travel-crystal-cluster-winter",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 2499,
+      "colors": 13,
+      "pixelSha256": "7752bb141336cd68e5d4a28ecaf6c6104c0b664d13b9bd82d36594593391fd0b"
+    },
+    {
+      "id": "travel-desert-rose-spring",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 2205,
+      "colors": 8,
+      "pixelSha256": "90c500103af9e455fa22402adb919cf63f41e3aeb41ebb03afeefa05e12fcc9a"
+    },
+    {
+      "id": "travel-desert-rose-summer",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 2264,
+      "colors": 9,
+      "pixelSha256": "2ed7f9dbfeb41f4e659fc99be4f0a527fe5a3fb3e0e7c4c3491d667881be81f4"
+    },
+    {
+      "id": "travel-desert-rose-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 2258,
+      "colors": 10,
+      "pixelSha256": "0360e4aef6d2a13e73413094e2fa5ae9333a93fe334dc111152b3b863d4c1e6f"
+    },
+    {
+      "id": "travel-desert-rose-winter",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2280,
+      "colors": 8,
+      "pixelSha256": "195b82c532c857a2e3d775232e97f651cab23db880caf03adf50b2720bc60144"
+    },
+    {
+      "id": "travel-rock-strata-spring",
+      "bounds": {
+        "x": 18,
+        "y": 25,
+        "width": 61,
+        "height": 59
+      },
+      "opaquePixels": 2703,
+      "colors": 13,
+      "pixelSha256": "63f5c6a76a24fa9edbb5f14ed0a245077ebdb3bed9811d57bcc75908dc6263cc"
+    },
+    {
+      "id": "travel-rock-strata-summer",
+      "bounds": {
+        "x": 18,
+        "y": 25,
+        "width": 61,
+        "height": 59
+      },
+      "opaquePixels": 2703,
+      "colors": 10,
+      "pixelSha256": "d158e8f82082a254af0e2c3b104bd649ce3c786d9622dedc830c357a792534a5"
+    },
+    {
+      "id": "travel-rock-strata-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 25,
+        "width": 61,
+        "height": 59
+      },
+      "opaquePixels": 2703,
+      "colors": 10,
+      "pixelSha256": "f513b876cc27f54b5b755d4503ff0b877992515c708fdba0a8144e1ea4636a31"
+    },
+    {
+      "id": "travel-rock-strata-winter",
+      "bounds": {
+        "x": 18,
+        "y": 25,
+        "width": 61,
+        "height": 59
+      },
+      "opaquePixels": 2705,
+      "colors": 10,
+      "pixelSha256": "9c312273ef06804edd3850c430bfc8e74133aebead34e0764bcab5781bfc5a40"
+    },
+    {
+      "id": "travel-volcanic-core-spring",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 1898,
+      "colors": 13,
+      "pixelSha256": "70a053d561ed5fddcb8042a6b6d9426d9d89d6b2b1f1bda446a96b13e8b214b7"
+    },
+    {
+      "id": "travel-volcanic-core-summer",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 1898,
+      "colors": 13,
+      "pixelSha256": "29b02ef7fca5bb3ad774621156982beb0b00f83d9e6b663b745117391cbccd8f"
+    },
+    {
+      "id": "travel-volcanic-core-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 1898,
+      "colors": 13,
+      "pixelSha256": "df97e31ffb137abaec58412ba4d77b1a00bad8cc6662cfe24878e19784960b89"
+    },
+    {
+      "id": "travel-volcanic-core-winter",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 1913,
+      "colors": 13,
+      "pixelSha256": "5c1407263098a0a99ebd6c7d872b754c4c703168b59c73d469c36759805e5d70"
+    },
+    {
+      "id": "travel-specimen-frame-spring",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 3302,
+      "colors": 12,
+      "pixelSha256": "35703d19fde0b2771d91e23aa1c6e99602b327335963522345034b7727ab96e2"
+    },
+    {
+      "id": "travel-specimen-frame-summer",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 3302,
+      "colors": 13,
+      "pixelSha256": "d102a78ae89374ab6fc13c512e4c891053855e513fcdefb8da3bfca16f18859f"
+    },
+    {
+      "id": "travel-specimen-frame-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 3302,
+      "colors": 10,
+      "pixelSha256": "52bb84764690f95124fdfa4babc2bbab79f7794c270040574542f5c25671f99a"
+    },
+    {
+      "id": "travel-specimen-frame-winter",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 3302,
+      "colors": 11,
+      "pixelSha256": "b80811a9a0ab425dd8a37fb880202eff3c5a443052ce366f2feb24018ba2f47c"
+    },
+    {
+      "id": "travel-mushroom-study-spring",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2338,
+      "colors": 9,
+      "pixelSha256": "1afe32d51c9d82c1d609cecfd747c4dfa7d708ec32e168fbb74cbf5dd9a94272"
+    },
+    {
+      "id": "travel-mushroom-study-summer",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2171,
+      "colors": 9,
+      "pixelSha256": "2e5de747815971b060fb9f382e6f5b9dff10214598357bbc983e1ab94510812d"
+    },
+    {
+      "id": "travel-mushroom-study-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2390,
+      "colors": 10,
+      "pixelSha256": "de4ece65bcfefa97b988f514a9720eb743f7eb3dd339ddc5f0b62bd0262f5e3c"
+    },
+    {
+      "id": "travel-mushroom-study-winter",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2295,
+      "colors": 10,
+      "pixelSha256": "8ae4c44c29cc80afeaf19fc5b8069f03f974316ed35a6b0dc41d5a9b1ef36302"
+    },
+    {
+      "id": "travel-fern-press-spring",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 3281,
+      "colors": 11,
+      "pixelSha256": "0fb781f34e4c3cb052c9b3c3288cf9b6d64ac74bbdfe3cc89ff6c5ecb6011a4c"
+    },
+    {
+      "id": "travel-fern-press-summer",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 3281,
+      "colors": 10,
+      "pixelSha256": "12314317fdde9cce24cd734c41b73ad226a8a8abc8aea45d9d3b6d9ae5a070e9"
+    },
+    {
+      "id": "travel-fern-press-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 3281,
+      "colors": 10,
+      "pixelSha256": "3cbf4a52bd86566defb1b2bf8115caea4e97b332fb1237d54a439c8b9c2dde10"
+    },
+    {
+      "id": "travel-fern-press-winter",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 3281,
+      "colors": 11,
+      "pixelSha256": "88020d3acd46b2a18c7eddc612f56fdabb811fdc9f531a29d464014314ee02e8"
+    },
+    {
+      "id": "travel-pinecone-study-spring",
+      "bounds": {
+        "x": 14,
+        "y": 20,
+        "width": 65,
+        "height": 64
+      },
+      "opaquePixels": 2301,
+      "colors": 11,
+      "pixelSha256": "973144492620e5aa0a9ff45ae6ff64ba9c3a92b2df453ca7efca9ba8feafa263"
+    },
+    {
+      "id": "travel-pinecone-study-summer",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 1988,
+      "colors": 9,
+      "pixelSha256": "2af7b355b73cab1b5f118f3235304597df525057d5e5aba199eb47fb958abcf7"
+    },
+    {
+      "id": "travel-pinecone-study-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2383,
+      "colors": 10,
+      "pixelSha256": "eb7ff7169194266519426c526d467cf5522fafa3eae591b8a4dd73a3ab39005b"
+    },
+    {
+      "id": "travel-pinecone-study-winter",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2142,
+      "colors": 8,
+      "pixelSha256": "8cb252648ece1e98d46829c2d495769c9b1f9cb7f5cf1fd0324a26e565c91381"
+    },
+    {
+      "id": "travel-butterfly-case-spring",
+      "bounds": {
+        "x": 18,
+        "y": 25,
+        "width": 61,
+        "height": 59
+      },
+      "opaquePixels": 3109,
+      "colors": 14,
+      "pixelSha256": "8f754a61a4fa2ec3d113990fa421ead44c5775cbe8bdeab407b87e5bd802f95c"
+    },
+    {
+      "id": "travel-butterfly-case-summer",
+      "bounds": {
+        "x": 18,
+        "y": 25,
+        "width": 61,
+        "height": 59
+      },
+      "opaquePixels": 3109,
+      "colors": 13,
+      "pixelSha256": "3dab109b2f2da7fb903e23419e30ddeef1d7ab074c9a7c7929c78c2fb0547d67"
+    },
+    {
+      "id": "travel-butterfly-case-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 25,
+        "width": 61,
+        "height": 59
+      },
+      "opaquePixels": 3109,
+      "colors": 14,
+      "pixelSha256": "ea9c1f43892c939d6edf29563873bfacdc0a26e39045f61e313a0862b250cb38"
+    },
+    {
+      "id": "travel-butterfly-case-winter",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 3285,
+      "colors": 15,
+      "pixelSha256": "9610175b8c3ef2a22413b3ecdddf9c69256f23bc9923b16499054dbecbdc979a"
+    },
+    {
+      "id": "travel-feather-stand-spring",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 1771,
+      "colors": 12,
+      "pixelSha256": "7ea89af4bf6019ae723939c00d7764f025f4ab8c44e1759ea18eebb1d12e2ab7"
+    },
+    {
+      "id": "travel-feather-stand-summer",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 1787,
+      "colors": 12,
+      "pixelSha256": "925302ceddd7cf5b2acb308a61008f364a8d30bf36fbf95786634eeee9c5c406"
+    },
+    {
+      "id": "travel-feather-stand-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 1576,
+      "colors": 11,
+      "pixelSha256": "633b890772885fb683587f3e94823eeecba11e7b2881ad9201423cbd2515be4a"
+    },
+    {
+      "id": "travel-feather-stand-winter",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 1820,
+      "colors": 10,
+      "pixelSha256": "8f29fabdfe88241f127f7f7ca0c4a7707a5db49c219b9168a50267d8beae51a6"
+    },
+    {
+      "id": "travel-seed-cabinet-spring",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 3178,
+      "colors": 10,
+      "pixelSha256": "0084734dc839e78799401987e451c4ebd821ff876637743b6ef12da1423cf37f"
+    },
+    {
+      "id": "travel-seed-cabinet-summer",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 3178,
+      "colors": 10,
+      "pixelSha256": "29912c4425ba23d8240dd26f389d2c81d8e179066a3bd27155a7382e7256014c"
+    },
+    {
+      "id": "travel-seed-cabinet-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 3178,
+      "colors": 10,
+      "pixelSha256": "3b9a94a60d7643f7d64b884298f5c84328eeeea18bbeac5a8fac47c17f03db5f"
+    },
+    {
+      "id": "travel-seed-cabinet-winter",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 3403,
+      "colors": 11,
+      "pixelSha256": "deecc83bc40bf33dfc560c1643cda0ec68b21668b609b2a468168d71277d7ab2"
+    },
+    {
+      "id": "travel-moss-cross-section-spring",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 2452,
+      "colors": 13,
+      "pixelSha256": "404084e7315ead56044af2603ebcd110054f66576571bd5adf44a912573559ed"
+    },
+    {
+      "id": "travel-moss-cross-section-summer",
+      "bounds": {
+        "x": 18,
+        "y": 9,
+        "width": 61,
+        "height": 75
+      },
+      "opaquePixels": 2514,
+      "colors": 11,
+      "pixelSha256": "2c0a6cb015c259b9261293b3681b49f9e2ed0956e712f77d66963be2894beb35"
+    },
+    {
+      "id": "travel-moss-cross-section-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 29,
+        "width": 61,
+        "height": 55
+      },
+      "opaquePixels": 2396,
+      "colors": 11,
+      "pixelSha256": "bc96b75854ea4fd2e5c2b6d6ee075568004f1e806eabc3bc27a7bfae11526f4e"
+    },
+    {
+      "id": "travel-moss-cross-section-winter",
+      "bounds": {
+        "x": 18,
+        "y": 32,
+        "width": 61,
+        "height": 52
+      },
+      "opaquePixels": 2354,
+      "colors": 11,
+      "pixelSha256": "5bc3581ad16de6bda0f029ee879c4189155e1ba056a13b414e9de364163c758e"
+    },
+    {
+      "id": "travel-tea-hills-spring",
+      "bounds": {
+        "x": 18,
+        "y": 29,
+        "width": 62,
+        "height": 55
+      },
+      "opaquePixels": 2426,
+      "colors": 13,
+      "pixelSha256": "1502938faf9bacc7fadc57c401600634fdade003d84ef6ac99783d21dc501679"
+    },
+    {
+      "id": "travel-tea-hills-summer",
+      "bounds": {
+        "x": 18,
+        "y": 29,
+        "width": 62,
+        "height": 55
+      },
+      "opaquePixels": 2485,
+      "colors": 11,
+      "pixelSha256": "5350aaedbbe94599c460a473796f44ba0068e23e946974c4dcae633552019f84"
+    },
+    {
+      "id": "travel-tea-hills-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 29,
+        "width": 62,
+        "height": 55
+      },
+      "opaquePixels": 2426,
+      "colors": 10,
+      "pixelSha256": "76a5329b370d2e4128b5f0aef3f537b47b700f0a7a31bd8bb5a9b126ab62ae03"
+    },
+    {
+      "id": "travel-tea-hills-winter",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 62,
+        "height": 56
+      },
+      "opaquePixels": 2437,
+      "colors": 11,
+      "pixelSha256": "77a75787be38034bebf497cd47269e6ba9e8cf720eaeff7a3d449a976b3f1766"
+    },
+    {
+      "id": "travel-windmill-model-spring",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 2173,
+      "colors": 11,
+      "pixelSha256": "dc5ea79e74a4beaab54ad4b88aad5ab4af07bb2ca3121e413af807b1369f0ba6"
+    },
+    {
+      "id": "travel-windmill-model-summer",
+      "bounds": {
+        "x": 18,
+        "y": 9,
+        "width": 61,
+        "height": 75
+      },
+      "opaquePixels": 2171,
+      "colors": 13,
+      "pixelSha256": "d405819239c0a998322b180eeacddffb8264cab034880434f1c42f6825d0b1b1"
+    },
+    {
+      "id": "travel-windmill-model-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 8,
+        "width": 61,
+        "height": 76
+      },
+      "opaquePixels": 2118,
+      "colors": 11,
+      "pixelSha256": "ed7b6488305955fb0358ef1cc3127cf21cd8b90316e5c418d2a47cecae035e21"
+    },
+    {
+      "id": "travel-windmill-model-winter",
+      "bounds": {
+        "x": 18,
+        "y": 7,
+        "width": 61,
+        "height": 77
+      },
+      "opaquePixels": 2109,
+      "colors": 11,
+      "pixelSha256": "035fa8a3f5b66a5c332f40eda58667040e183363a5992ad2e46acab374c64cf8"
+    },
+    {
+      "id": "travel-stone-bridge-spring",
+      "bounds": {
+        "x": 12,
+        "y": 39,
+        "width": 69,
+        "height": 44
+      },
+      "opaquePixels": 1687,
+      "colors": 14,
+      "pixelSha256": "40cd7c30cc1d35ef8b8c4dd801d6a4f102bcf4a6d5ca5c5a1c45edfd71bdd175"
+    },
+    {
+      "id": "travel-stone-bridge-summer",
+      "bounds": {
+        "x": 17,
+        "y": 39,
+        "width": 64,
+        "height": 44
+      },
+      "opaquePixels": 1639,
+      "colors": 11,
+      "pixelSha256": "0e9e486a85bc5839a667830a3476d66ccd4c4786e8a14bbbcaf2182c4da1b810"
+    },
+    {
+      "id": "travel-stone-bridge-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 39,
+        "width": 64,
+        "height": 44
+      },
+      "opaquePixels": 1682,
+      "colors": 11,
+      "pixelSha256": "804f8c8d529d16e15396f80bf4c7b3a8c9f598f6357d8c62f0d90d20d651f544"
+    },
+    {
+      "id": "travel-stone-bridge-winter",
+      "bounds": {
+        "x": 17,
+        "y": 38,
+        "width": 64,
+        "height": 45
+      },
+      "opaquePixels": 1669,
+      "colors": 11,
+      "pixelSha256": "db9e3f9e0111990474c2d31a4367942f456199d1f9b8259eaa1afda685e59696"
+    },
+    {
+      "id": "travel-alpine-peaks-spring",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 63,
+        "height": 63
+      },
+      "opaquePixels": 2247,
+      "colors": 14,
+      "pixelSha256": "279849a150d10add8e10856ebfa5a3ff04c3bb455b1d0c5b55236e3d99520783"
+    },
+    {
+      "id": "travel-alpine-peaks-summer",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 63,
+        "height": 63
+      },
+      "opaquePixels": 2287,
+      "colors": 15,
+      "pixelSha256": "c3cb91347b07beb115a4e331a520315e55b40425251d78fc33094c5079d58203"
+    },
+    {
+      "id": "travel-alpine-peaks-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 63,
+        "height": 63
+      },
+      "opaquePixels": 2247,
+      "colors": 13,
+      "pixelSha256": "a223e9e8335c6035ce1639c626ab188e442dfa85ebde77be35642597cb74171e"
+    },
+    {
+      "id": "travel-alpine-peaks-winter",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 63,
+        "height": 63
+      },
+      "opaquePixels": 2255,
+      "colors": 12,
+      "pixelSha256": "4b7ba523871a9f9ec26b447c7a7abee0d47c3184edbbc8b8d3a4b89941d26afb"
+    },
+    {
+      "id": "travel-hourglass-spring",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 2176,
+      "colors": 13,
+      "pixelSha256": "fe6eeab123c6a9b8ce0fab946a4fb4d8f6721f7aae1eac3f07c913d0cbd50a91"
+    },
+    {
+      "id": "travel-hourglass-summer",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 2199,
+      "colors": 12,
+      "pixelSha256": "caba47a7d32d7a6dc7fe07d59bdc4fb6e63c529d42d2d9a78b73672364df3db1"
+    },
+    {
+      "id": "travel-hourglass-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 17,
+        "width": 62,
+        "height": 67
+      },
+      "opaquePixels": 2231,
+      "colors": 12,
+      "pixelSha256": "9e97c39d26f8974426294e7283a7b89b3afdadc247cd59f3dfe1640cb66d94ee"
+    },
+    {
+      "id": "travel-hourglass-winter",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 2200,
+      "colors": 12,
+      "pixelSha256": "5e7ac64a2e7bc6bfacaec3059e37e99805e9c5fc2af5bf4e626f3edb67822520"
+    },
+    {
+      "id": "travel-observatory-model-spring",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 2788,
+      "colors": 17,
+      "pixelSha256": "2f9da4a88258f6a07c139823d2b51ed998f5799d5514d2569695b9d45d40b7b2"
+    },
+    {
+      "id": "travel-observatory-model-summer",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2854,
+      "colors": 15,
+      "pixelSha256": "9cc68f81cd7baad1ebf88cec66feaba7fda794384d0ea26e5dcc959dd0609835"
+    },
+    {
+      "id": "travel-observatory-model-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2773,
+      "colors": 15,
+      "pixelSha256": "1e584edf1a97d1de1f39e42b4842793c7aa8b499424e7538e42c4bf742029dcd"
+    },
+    {
+      "id": "travel-observatory-model-winter",
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "opaquePixels": 2774,
+      "colors": 15,
+      "pixelSha256": "4d61d864e5e2cf897644a66fa2ba790f5e9b222fa75fb24831e92a8dfe1d887a"
+    },
+    {
+      "id": "travel-pagoda-model-spring",
+      "bounds": {
+        "x": 18,
+        "y": 6,
+        "width": 61,
+        "height": 78
+      },
+      "opaquePixels": 1994,
+      "colors": 15,
+      "pixelSha256": "86e1dd3fabf4dc00733dd2f30bbd31d5aacd8b7e765915e6bc73bb6201c52167"
+    },
+    {
+      "id": "travel-pagoda-model-summer",
+      "bounds": {
+        "x": 18,
+        "y": 6,
+        "width": 61,
+        "height": 78
+      },
+      "opaquePixels": 1998,
+      "colors": 13,
+      "pixelSha256": "7e8f388ebe11061940b0976cf59da7d45e0d727aece43e699fe6544f36455811"
+    },
+    {
+      "id": "travel-pagoda-model-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 6,
+        "width": 61,
+        "height": 78
+      },
+      "opaquePixels": 2029,
+      "colors": 14,
+      "pixelSha256": "572513792e63e8f25c2302267b8c4c07a7c5631366860f0db2308bc035defe4e"
+    },
+    {
+      "id": "travel-pagoda-model-winter",
+      "bounds": {
+        "x": 18,
+        "y": 6,
+        "width": 61,
+        "height": 78
+      },
+      "opaquePixels": 1989,
+      "colors": 12,
+      "pixelSha256": "d87a3a0e956caf5541ea11e5847a85bf9862df23ee03db16964d9885071e5341"
+    },
+    {
+      "id": "travel-railway-model-spring",
+      "bounds": {
+        "x": 16,
+        "y": 26,
+        "width": 65,
+        "height": 58
+      },
+      "opaquePixels": 2539,
+      "colors": 14,
+      "pixelSha256": "9891dad401f62119882fa932720538d455f5c81290632f9b746f1513c22f3351"
+    },
+    {
+      "id": "travel-railway-model-summer",
+      "bounds": {
+        "x": 16,
+        "y": 18,
+        "width": 65,
+        "height": 66
+      },
+      "opaquePixels": 2677,
+      "colors": 13,
+      "pixelSha256": "4e918e1fc5076f8beb308cd48940b8f0460e46cbf3306c541b3e09700e36a1a6"
+    },
+    {
+      "id": "travel-railway-model-autumn",
+      "bounds": {
+        "x": 16,
+        "y": 26,
+        "width": 65,
+        "height": 58
+      },
+      "opaquePixels": 2526,
+      "colors": 13,
+      "pixelSha256": "31c28ebca4752a522ac34ebf89773690d35a3e9a70cbec7e5b90914f0d3692ab"
+    },
+    {
+      "id": "travel-railway-model-winter",
+      "bounds": {
+        "x": 16,
+        "y": 26,
+        "width": 65,
+        "height": 58
+      },
+      "opaquePixels": 2557,
+      "colors": 14,
+      "pixelSha256": "5e01384f1e8b64cbdbc20b79ade9d1a2c2a57b15faeedf6099f486cdb34ca76d"
+    }
+  ],
+  "limitations": [
+    "Programmatic checks do not replace visual review.",
+    "Catalog framing is not an in-game size contract.",
+    "No game integration, economics or save changes."
+  ]
+}

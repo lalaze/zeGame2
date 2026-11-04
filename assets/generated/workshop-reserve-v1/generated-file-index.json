@@ -1,0 +1,997 @@
+{
+  "schemaVersion": 1,
+  "packId": "workshop-reserve-v1",
+  "generator": "scripts/build-reserve-library.mjs",
+  "files": [
+    {
+      "path": "manifest.json",
+      "bytes": 195390,
+      "sha256": "cd15f008e5f6cfa221a9d7051ce5f25f548095572f6073e6b8afd44712b0348d"
+    },
+    {
+      "path": "catalog.js",
+      "bytes": 131304,
+      "sha256": "dc44ab8fdd3c9c37b3f59cbb5f8b57cd4f945cf3aa2c5576f1f3f36a7bb74dfe"
+    },
+    {
+      "path": "atlas.png",
+      "bytes": 68090,
+      "sha256": "904d42af5b470e1c7a6eb7143ad5ec6359a480c92ca430bacd7a3282db432caa"
+    },
+    {
+      "path": "contact-sheet.png",
+      "bytes": 99885,
+      "sha256": "7a2706d45ee7e19773b363f6dbadab871d3c0fb1a0f94687f10fce279267b97d"
+    },
+    {
+      "path": "verification-report.json",
+      "bytes": 57742,
+      "sha256": "bddb63b811f8174bf6932e14618d3713c8371d2f1ed8d7557cb67649be51cf7f"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1411,
+      "sha256": "f4e1c61972e114196308c82600ddee09f4e73674ac51dc3a059715f189cb2ae4"
+    },
+    {
+      "path": "sprites/workshop-burr-grinder-spring.png",
+      "bytes": 801,
+      "sha256": "0f81d44076bc8886009b257633f565ac4d2b5674193d9bcddc1436fae42bf9a8"
+    },
+    {
+      "path": "sprites/workshop-burr-grinder-summer.png",
+      "bytes": 769,
+      "sha256": "ab9c0e2229059679c56e16dd7ba155d21e40f3724181e4e3aff2d9901c43a09b"
+    },
+    {
+      "path": "sprites/workshop-burr-grinder-autumn.png",
+      "bytes": 764,
+      "sha256": "a5b42b69acd43d314216dae4d0ddd6be2b2b4ea94a965ff91a4ff81c5c7046e2"
+    },
+    {
+      "path": "sprites/workshop-burr-grinder-winter.png",
+      "bytes": 764,
+      "sha256": "9edb3bb6a14528942a32e0ce3e9c2a427598adb1b6581a4f7a4224352694bd70"
+    },
+    {
+      "path": "sprites/workshop-milk-pitcher-spring.png",
+      "bytes": 520,
+      "sha256": "5ddc9a6434269d98f0ba01c64063b5367d8425b10d4828c1c61d8f98015e66c9"
+    },
+    {
+      "path": "sprites/workshop-milk-pitcher-summer.png",
+      "bytes": 585,
+      "sha256": "a577d801417f4adcfd9ebb6861ee340a39a798a4b5750354d35b746f82043eb3"
+    },
+    {
+      "path": "sprites/workshop-milk-pitcher-autumn.png",
+      "bytes": 578,
+      "sha256": "7a105127d1ebbdb44d619872a58ae4d5715fb85f86b0eb0a872be7265a27fcd5"
+    },
+    {
+      "path": "sprites/workshop-milk-pitcher-winter.png",
+      "bytes": 591,
+      "sha256": "025ed33fd588ec2ea807482406290673d2934cb17d4e68e8dc3170bb00a278b3"
+    },
+    {
+      "path": "sprites/workshop-tamper-spring.png",
+      "bytes": 571,
+      "sha256": "cd2bf54dd227a3dccd62895931f78c9931810466a11961bf1cc03f2fa1834563"
+    },
+    {
+      "path": "sprites/workshop-tamper-summer.png",
+      "bytes": 586,
+      "sha256": "21307f8fc0c9d25295372c495e78d0b673a53d92c813278068862d0db7a22510"
+    },
+    {
+      "path": "sprites/workshop-tamper-autumn.png",
+      "bytes": 580,
+      "sha256": "e95c7c596cd9d2145e630a4d0cfaad82fbf7a4b1a9e677f34606afc92ba44d5d"
+    },
+    {
+      "path": "sprites/workshop-tamper-winter.png",
+      "bytes": 617,
+      "sha256": "db47981c9f8bc9081ace3ec048a8676a5570eb3e267f7d3fce15f217ba3cf348"
+    },
+    {
+      "path": "sprites/workshop-knock-box-spring.png",
+      "bytes": 521,
+      "sha256": "e52277173923f34eef4c972f7892a7e9db68f50256d424b02a06fc1fae621116"
+    },
+    {
+      "path": "sprites/workshop-knock-box-summer.png",
+      "bytes": 575,
+      "sha256": "c0b7dcd6e66e06c9f3f314470dc8ec2bb6eb6de10c12f29b29dbf0df7b590f4f"
+    },
+    {
+      "path": "sprites/workshop-knock-box-autumn.png",
+      "bytes": 585,
+      "sha256": "fd9ce50a2448d38ce0b01e4966092d91adb9602fa339523c64fc8c8d35252feb"
+    },
+    {
+      "path": "sprites/workshop-knock-box-winter.png",
+      "bytes": 630,
+      "sha256": "98c11827b1a387329aa3184ab0a4ecab3bb461ebd43402fe176cfd139b68bebf"
+    },
+    {
+      "path": "sprites/workshop-espresso-scale-spring.png",
+      "bytes": 586,
+      "sha256": "ac7a15dc4c0d29497636e5b45c2141ce564e0885d6d69fb82dab56b630aa3b03"
+    },
+    {
+      "path": "sprites/workshop-espresso-scale-summer.png",
+      "bytes": 533,
+      "sha256": "b51cdca2202d47fcde6826ec217ec82b1aec7076ec1c910484b50bad9fee73cd"
+    },
+    {
+      "path": "sprites/workshop-espresso-scale-autumn.png",
+      "bytes": 593,
+      "sha256": "e4276e1fe522cb621c50ff6f413ddf6546fa2a63c52c5adcd1129c22884bc05e"
+    },
+    {
+      "path": "sprites/workshop-espresso-scale-winter.png",
+      "bytes": 560,
+      "sha256": "8f8a37e19151fd377b919fae720a71b4f3a9b7ce7e48a8de7699a8a1c50993cd"
+    },
+    {
+      "path": "sprites/workshop-syphon-spring.png",
+      "bytes": 796,
+      "sha256": "6583599b1f8b5d6821fac20eb6fbe80cab707cc28f3676623ba87e180434beab"
+    },
+    {
+      "path": "sprites/workshop-syphon-summer.png",
+      "bytes": 828,
+      "sha256": "a718333308bf8127c7cce1d591369b833e481a5147380a66ef0090128e00feda"
+    },
+    {
+      "path": "sprites/workshop-syphon-autumn.png",
+      "bytes": 780,
+      "sha256": "28819c66aa80f9d79b26c16abf4ae129c4eca036f3a8adf0c9d575920f6d20a6"
+    },
+    {
+      "path": "sprites/workshop-syphon-winter.png",
+      "bytes": 786,
+      "sha256": "031a154e9166ebfc9ef25e237bf07784a865407bc8c0ecd56d19c7eb83c1afc5"
+    },
+    {
+      "path": "sprites/workshop-moka-pot-spring.png",
+      "bytes": 670,
+      "sha256": "1583c4dce4827133e69e983e28c6f491db291b9039faca6e2acaef163d3c8784"
+    },
+    {
+      "path": "sprites/workshop-moka-pot-summer.png",
+      "bytes": 721,
+      "sha256": "87c76d1cf6d2baced7c582e7fc44ed90712c9198e127df4ca8ab2423415c4079"
+    },
+    {
+      "path": "sprites/workshop-moka-pot-autumn.png",
+      "bytes": 704,
+      "sha256": "b6c03b755d0b9fd066fcf211ff3912efaa4ac40f1aade8db01b076f169606859"
+    },
+    {
+      "path": "sprites/workshop-moka-pot-winter.png",
+      "bytes": 675,
+      "sha256": "40eef212e6cb1d2343fd08f8bf66a807cc787e79d4dfd12ab6e3e99dc577039f"
+    },
+    {
+      "path": "sprites/workshop-coldbrew-tower-spring.png",
+      "bytes": 865,
+      "sha256": "d82249bdd81e7ab8e7667698f6133efae42c2613622f626aeb67c28ec1f5cba6"
+    },
+    {
+      "path": "sprites/workshop-coldbrew-tower-summer.png",
+      "bytes": 887,
+      "sha256": "7f377f7fcdf04c043f86217db20dcb190973e362ce96bd0f23c3de275e695006"
+    },
+    {
+      "path": "sprites/workshop-coldbrew-tower-autumn.png",
+      "bytes": 848,
+      "sha256": "d1d51583354d1951b68f13fa900f5e32229c6a1cd69f6a86137a7b656321886d"
+    },
+    {
+      "path": "sprites/workshop-coldbrew-tower-winter.png",
+      "bytes": 865,
+      "sha256": "0fe134e2992d802207de982191a0ff2a6a86a247dde26bbfc87300abfa0e42d1"
+    },
+    {
+      "path": "sprites/workshop-drum-roaster-spring.png",
+      "bytes": 874,
+      "sha256": "412bdfb185cbbed0b7465bcc9c25d63a0dee86bb5d5e8688eda09402de7f53ce"
+    },
+    {
+      "path": "sprites/workshop-drum-roaster-summer.png",
+      "bytes": 941,
+      "sha256": "1a9de674f33a86c5d79a18ba03974f73708fce7ff33c6a191c001bb9699c3d1f"
+    },
+    {
+      "path": "sprites/workshop-drum-roaster-autumn.png",
+      "bytes": 929,
+      "sha256": "69bad9d482800e4b04e9a6717f6b6eb3dce3f8d9c2fb3638ebe2f63fd77cde29"
+    },
+    {
+      "path": "sprites/workshop-drum-roaster-winter.png",
+      "bytes": 973,
+      "sha256": "08036eb609ce9e364ad53bc972d981e4cc622e8338017294a9ec68019f037c1f"
+    },
+    {
+      "path": "sprites/workshop-cooling-sieve-spring.png",
+      "bytes": 667,
+      "sha256": "267aaee2b18404b6906734f3bfbff6e2f90e21547661c0d1de1812ff0aed204a"
+    },
+    {
+      "path": "sprites/workshop-cooling-sieve-summer.png",
+      "bytes": 732,
+      "sha256": "fc2a1ab1ffd748678884e6023301b41574bf9380e0a42c6a8c2fbe76deb3ff9b"
+    },
+    {
+      "path": "sprites/workshop-cooling-sieve-autumn.png",
+      "bytes": 758,
+      "sha256": "1065362eb13e6a86f6df08565e9e90d507eccd42fee84dacefe3250c70ceb794"
+    },
+    {
+      "path": "sprites/workshop-cooling-sieve-winter.png",
+      "bytes": 807,
+      "sha256": "3cc65da714b43cb35c50395f6bd20251105e1d3e36111db107e3110799bd809b"
+    },
+    {
+      "path": "sprites/workshop-green-bean-sack-spring.png",
+      "bytes": 681,
+      "sha256": "eb2fd0fd09c381903b0c0802404d41549a57b1c48fd1eb27794841d80ccf1389"
+    },
+    {
+      "path": "sprites/workshop-green-bean-sack-summer.png",
+      "bytes": 816,
+      "sha256": "cfc76ec08ab2527f3a0dece40f1f515947249c714776c43d2724245448ae1bd6"
+    },
+    {
+      "path": "sprites/workshop-green-bean-sack-autumn.png",
+      "bytes": 728,
+      "sha256": "07220b17ed609931fcacf262b7b0529b7e133c8abd356410238de175b02b81c3"
+    },
+    {
+      "path": "sprites/workshop-green-bean-sack-winter.png",
+      "bytes": 680,
+      "sha256": "a481f9b626f782945d959bd955d2922a3bbee813478c81a21864e7f4837e1bd7"
+    },
+    {
+      "path": "sprites/workshop-roast-tray-spring.png",
+      "bytes": 576,
+      "sha256": "ec8f56ab76daf5b540b761de91afedf5a41f68a740796bdf622cdb4141e159fd"
+    },
+    {
+      "path": "sprites/workshop-roast-tray-summer.png",
+      "bytes": 572,
+      "sha256": "4b061cb2bfdb70a9e7a224ca9be0b97ee256b7bdac641644f4245257a0db5bad"
+    },
+    {
+      "path": "sprites/workshop-roast-tray-autumn.png",
+      "bytes": 666,
+      "sha256": "dd3fa8ce9ba09d61be0d9608b791ce8d698e46fd357031b081fa9d217f31ae98"
+    },
+    {
+      "path": "sprites/workshop-roast-tray-winter.png",
+      "bytes": 555,
+      "sha256": "7f545ce48608103d39c01ba1301f8d1b555d4633818199f1151b92e973eeea08"
+    },
+    {
+      "path": "sprites/workshop-bean-scoop-spring.png",
+      "bytes": 644,
+      "sha256": "600a3d4f3e0e61e00061320641a6ab86425264f52429f170d22ee3b555ec3d18"
+    },
+    {
+      "path": "sprites/workshop-bean-scoop-summer.png",
+      "bytes": 651,
+      "sha256": "e6a862d42995a952b19aab16d9522183f6b1982ccccd28a37975e429a4f1de84"
+    },
+    {
+      "path": "sprites/workshop-bean-scoop-autumn.png",
+      "bytes": 695,
+      "sha256": "4eb925d4aa76e1fec7a8d3f0976f3c979e411947129f34919629d4cef9e2dcb5"
+    },
+    {
+      "path": "sprites/workshop-bean-scoop-winter.png",
+      "bytes": 732,
+      "sha256": "cc58b006a6581dec82b29896164e1d33eed6bfeadd152b08485ee5ee8b921145"
+    },
+    {
+      "path": "sprites/workshop-sample-trier-spring.png",
+      "bytes": 560,
+      "sha256": "46c43462ff49ac099f35f50d9fddde9aaf359c3f3bc9742c54698b8de15813c4"
+    },
+    {
+      "path": "sprites/workshop-sample-trier-summer.png",
+      "bytes": 631,
+      "sha256": "2eb34dc4720ee8b115e2fc77d3e64fe77017dc4657101a2c618b70b9b3147830"
+    },
+    {
+      "path": "sprites/workshop-sample-trier-autumn.png",
+      "bytes": 616,
+      "sha256": "3a985d1061a8bd8d17ebf01ac96ebe204e774a56dd2bb93adc0817fb42c45609"
+    },
+    {
+      "path": "sprites/workshop-sample-trier-winter.png",
+      "bytes": 644,
+      "sha256": "cf467c7b18c82d6b4f9a441de52cbc9d3d803461ae47311d048930e900170901"
+    },
+    {
+      "path": "sprites/workshop-bean-sorting-board-spring.png",
+      "bytes": 557,
+      "sha256": "3de6404348f960be682034e3374443a3f698e32b8f184b67f94653ae9ce78638"
+    },
+    {
+      "path": "sprites/workshop-bean-sorting-board-summer.png",
+      "bytes": 646,
+      "sha256": "6921277ead707202e4baa5100000972c58f1715e0b1fe3b65d897b167677397c"
+    },
+    {
+      "path": "sprites/workshop-bean-sorting-board-autumn.png",
+      "bytes": 559,
+      "sha256": "eebb7264cb05e0e60fe395719a8b8cf894926259bdfce769fc6f4b4d9be3ae04"
+    },
+    {
+      "path": "sprites/workshop-bean-sorting-board-winter.png",
+      "bytes": 550,
+      "sha256": "aad0e50b3a369495cdf3810dd9eeefef5f808a2bb07dc9214495e1991fd6ca41"
+    },
+    {
+      "path": "sprites/workshop-chaff-bin-spring.png",
+      "bytes": 524,
+      "sha256": "f833d0b09eb0bea13458a6c3f238754d121af36d1950b0599499d1270260fcbc"
+    },
+    {
+      "path": "sprites/workshop-chaff-bin-summer.png",
+      "bytes": 571,
+      "sha256": "b8ddb2bf64da76301827c680b4f269d8569ebe64e0f149e0071c82035f0bac9c"
+    },
+    {
+      "path": "sprites/workshop-chaff-bin-autumn.png",
+      "bytes": 536,
+      "sha256": "4827669d5339a4563d57ec5d58e10e458e23b94dc61c0606fc272144049387c0"
+    },
+    {
+      "path": "sprites/workshop-chaff-bin-winter.png",
+      "bytes": 553,
+      "sha256": "f1b4d6394caa8e83824ff1d86662f2da6666dbb71ec3a2753184f7b682b00743"
+    },
+    {
+      "path": "sprites/workshop-rolling-pin-spring.png",
+      "bytes": 775,
+      "sha256": "be9704f0df076d160876e0673391742f982e39fc9ea14fc8137cbae31c6e1914"
+    },
+    {
+      "path": "sprites/workshop-rolling-pin-summer.png",
+      "bytes": 778,
+      "sha256": "4a448f9bfbcdaae5a588d8c296ae3bb49d4a0a0df442e4852c11824c1ea80182"
+    },
+    {
+      "path": "sprites/workshop-rolling-pin-autumn.png",
+      "bytes": 737,
+      "sha256": "f457c62fed6d15c50cf867251b2e123473cd92322f4dae39df066a3ca92ccf4b"
+    },
+    {
+      "path": "sprites/workshop-rolling-pin-winter.png",
+      "bytes": 764,
+      "sha256": "ddc5c0513893698eacf7306e673d44dd924f553c8c91f77125de4301220c0f65"
+    },
+    {
+      "path": "sprites/workshop-balloon-whisk-spring.png",
+      "bytes": 609,
+      "sha256": "79af5015392ffda4014814ed6d75ebd031e29a839951b1b9a8286caaa78e3028"
+    },
+    {
+      "path": "sprites/workshop-balloon-whisk-summer.png",
+      "bytes": 668,
+      "sha256": "c93b2d97a6b19de6f2404e05fe6969724170d3fe96b440600146c9e49ca265ec"
+    },
+    {
+      "path": "sprites/workshop-balloon-whisk-autumn.png",
+      "bytes": 703,
+      "sha256": "0381bc81d1d4b60d24be6de72612be4596b9b1f36d3fcb2d555677dec62cac25"
+    },
+    {
+      "path": "sprites/workshop-balloon-whisk-winter.png",
+      "bytes": 667,
+      "sha256": "89cf1dd6f44d4daa4aa31c171f9533ddee4032a22d278e97cd1caf840d5e99da"
+    },
+    {
+      "path": "sprites/workshop-stand-mixer-spring.png",
+      "bytes": 671,
+      "sha256": "f4ddcb5203b8176def5c71b370af6640d44731779bd1760a7102dcfe82d1daf2"
+    },
+    {
+      "path": "sprites/workshop-stand-mixer-summer.png",
+      "bytes": 782,
+      "sha256": "73d47cbff39d9648b3bddfc425ece86acf6843cf821a549364827709dd966a33"
+    },
+    {
+      "path": "sprites/workshop-stand-mixer-autumn.png",
+      "bytes": 681,
+      "sha256": "4dd58d745a0eb9cbc4285d0143380eedb5555dd2dcba346c5c42b7044915dd6d"
+    },
+    {
+      "path": "sprites/workshop-stand-mixer-winter.png",
+      "bytes": 644,
+      "sha256": "eff1ec0cdf922cba4239aa714e34bab964d4e2ed0299a7857c38a4162369fc9c"
+    },
+    {
+      "path": "sprites/workshop-dough-scraper-spring.png",
+      "bytes": 766,
+      "sha256": "d0c24addf259bb09d876e03e34db6e70f5c781bc50c10c9ef64a22ce9314e90c"
+    },
+    {
+      "path": "sprites/workshop-dough-scraper-summer.png",
+      "bytes": 758,
+      "sha256": "2f5736f62b3306c859f0c6e8141004b9efe93fcea3500d853022657b2d589166"
+    },
+    {
+      "path": "sprites/workshop-dough-scraper-autumn.png",
+      "bytes": 732,
+      "sha256": "406df3fd940ee5c05435266a11f4112cd9f9aeb089a406460d0d9ca673b4f68b"
+    },
+    {
+      "path": "sprites/workshop-dough-scraper-winter.png",
+      "bytes": 769,
+      "sha256": "b1136f4a36f986ccd874d8c79c0485c463c20cc5015c462e40f9ff557b7b1129"
+    },
+    {
+      "path": "sprites/workshop-pastry-brush-spring.png",
+      "bytes": 802,
+      "sha256": "f9edae512126395ee1f1b2c7b44b5b978a740a025018c7f24d8a354d558db7e0"
+    },
+    {
+      "path": "sprites/workshop-pastry-brush-summer.png",
+      "bytes": 798,
+      "sha256": "ffc63b7533512d1e7e9421374670a59d3a5434dac84644ded6cf2ea764df34b2"
+    },
+    {
+      "path": "sprites/workshop-pastry-brush-autumn.png",
+      "bytes": 760,
+      "sha256": "c626ab59d757573df2b638cee74376160f384b3df9b0032774f2e4e95d514aee"
+    },
+    {
+      "path": "sprites/workshop-pastry-brush-winter.png",
+      "bytes": 797,
+      "sha256": "0b3d07216649ee660b55a229fecdf07f03d4dd85082ffee71776d911c018ab2c"
+    },
+    {
+      "path": "sprites/workshop-flour-sifter-spring.png",
+      "bytes": 566,
+      "sha256": "22461eaeec17cf3d1b1336d37a27e6682fce691131a868f47033a7ff242db089"
+    },
+    {
+      "path": "sprites/workshop-flour-sifter-summer.png",
+      "bytes": 571,
+      "sha256": "db15c73763c177708ddfcc949ba3f188934ff930a5308afe7e82189f0a004952"
+    },
+    {
+      "path": "sprites/workshop-flour-sifter-autumn.png",
+      "bytes": 673,
+      "sha256": "1fb64866fb4665918969cc908f36b245804c991b7017232d149c1f55812dfb08"
+    },
+    {
+      "path": "sprites/workshop-flour-sifter-winter.png",
+      "bytes": 577,
+      "sha256": "007993224b1ffc95c7cd386a546f97548f707559734b5884c2741998f50ae7cf"
+    },
+    {
+      "path": "sprites/workshop-piping-bag-spring.png",
+      "bytes": 755,
+      "sha256": "525b665a193306f0829b6a19b07bc1492a3413347b3eabd43d3a80bbfaa20770"
+    },
+    {
+      "path": "sprites/workshop-piping-bag-summer.png",
+      "bytes": 787,
+      "sha256": "9618976cd9df06c320ff71245d33fb87c0cf362176e892cda6ef9fbe135a661d"
+    },
+    {
+      "path": "sprites/workshop-piping-bag-autumn.png",
+      "bytes": 730,
+      "sha256": "2db08209d0ce9d49d9bd8be515222a5b5b797c797ccaafcbe502b395a3e6d095"
+    },
+    {
+      "path": "sprites/workshop-piping-bag-winter.png",
+      "bytes": 768,
+      "sha256": "d4d1c3356e27e9f10691a266474e6579adb018793bbbfd348dc1a330fecc48d1"
+    },
+    {
+      "path": "sprites/workshop-dough-docker-spring.png",
+      "bytes": 843,
+      "sha256": "72ba11e247b05465cfb2fb34b0bd1fb27a3d76bf00b1da9c98305bfb56c2c8c9"
+    },
+    {
+      "path": "sprites/workshop-dough-docker-summer.png",
+      "bytes": 807,
+      "sha256": "e08aab7d531bfee2a4d6682643788f6c55cdd1ef1c85ef60e23e3ab63ebe5a1c"
+    },
+    {
+      "path": "sprites/workshop-dough-docker-autumn.png",
+      "bytes": 780,
+      "sha256": "09afc25be78a283541651589f632d79891c79fec07295b1158ce04099228784a"
+    },
+    {
+      "path": "sprites/workshop-dough-docker-winter.png",
+      "bytes": 799,
+      "sha256": "9108bdb161fa9e7d00ceb5475086660fc474ee014e2b89410dded0fc52d025ed"
+    },
+    {
+      "path": "sprites/workshop-loaf-mold-spring.png",
+      "bytes": 531,
+      "sha256": "c98cc3f510599831d42f275220d9b891a0b3abfefede0596d766865ce6448fa0"
+    },
+    {
+      "path": "sprites/workshop-loaf-mold-summer.png",
+      "bytes": 594,
+      "sha256": "dae052b2fa9e494bde2d60a7dff56b962cb6969d9c540fdd4e5cbb447a13364e"
+    },
+    {
+      "path": "sprites/workshop-loaf-mold-autumn.png",
+      "bytes": 568,
+      "sha256": "a027895238ebcdc5d5182ab014a1a4d4f1bd45ce091e6359b90f1516822f60f0"
+    },
+    {
+      "path": "sprites/workshop-loaf-mold-winter.png",
+      "bytes": 561,
+      "sha256": "39fe12341dedc324b5f071185c14054b9ec91804dca454815839557f590a3be6"
+    },
+    {
+      "path": "sprites/workshop-muffin-pan-spring.png",
+      "bytes": 613,
+      "sha256": "466c554872cbbb21b27dfe8ad2e3b3aa9d9a41666acc57e32be0cfcddb4d5514"
+    },
+    {
+      "path": "sprites/workshop-muffin-pan-summer.png",
+      "bytes": 646,
+      "sha256": "e16b12b1d3f7952825574dbeeee89a1fc35cfc5793703b21bbf8ff3fee66d570"
+    },
+    {
+      "path": "sprites/workshop-muffin-pan-autumn.png",
+      "bytes": 640,
+      "sha256": "1a4b65924eacefdacf8628d13e745f6a8b0c19b79c0e8aca8f671cecffa7baff"
+    },
+    {
+      "path": "sprites/workshop-muffin-pan-winter.png",
+      "bytes": 638,
+      "sha256": "02d3e7fb28285603b286cf91bf58e351de1f8a3cfcaba6709cf6647000a337f5"
+    },
+    {
+      "path": "sprites/workshop-bundt-mold-spring.png",
+      "bytes": 826,
+      "sha256": "fff727ccc186cb4cbcb0027a20d6f9987391f212640ffd868d2d0cd01631ebac"
+    },
+    {
+      "path": "sprites/workshop-bundt-mold-summer.png",
+      "bytes": 815,
+      "sha256": "0afb223f8d839f9f17c521e20b52d7ebe87d90a43c906edc5fb15e04bc53b968"
+    },
+    {
+      "path": "sprites/workshop-bundt-mold-autumn.png",
+      "bytes": 784,
+      "sha256": "b78576c0dc73ff081ecfca56d665ed44de352a22ac5619180a522f23959a7655"
+    },
+    {
+      "path": "sprites/workshop-bundt-mold-winter.png",
+      "bytes": 835,
+      "sha256": "e93361d5dcb1f1e64eb1f7da41a4a7e38a9b85cedd63aa1a78f2692f05a85bf1"
+    },
+    {
+      "path": "sprites/workshop-proofing-basket-spring.png",
+      "bytes": 620,
+      "sha256": "8c80820e4afa6ba6db81e9688cf41eab7808d1fb69fb830290e579e907c50715"
+    },
+    {
+      "path": "sprites/workshop-proofing-basket-summer.png",
+      "bytes": 643,
+      "sha256": "6fe8530ce604619738dc3d8371bb127ecfe0ad12eca0bbc5d13cf21d49d55978"
+    },
+    {
+      "path": "sprites/workshop-proofing-basket-autumn.png",
+      "bytes": 660,
+      "sha256": "073e00cdfe73bc65e76209e3f24ac9a45e8e64fe2ac22e04332f4e849e95a990"
+    },
+    {
+      "path": "sprites/workshop-proofing-basket-winter.png",
+      "bytes": 558,
+      "sha256": "b357181131287c233cf99c4f53084521903af3909e2b2df9be7d3e05e9b0a073"
+    },
+    {
+      "path": "sprites/workshop-cooling-rack-spring.png",
+      "bytes": 509,
+      "sha256": "518a2057a4177fa77f26f9b7d84dfd0f9f3c92454482039cece57c6f020365ba"
+    },
+    {
+      "path": "sprites/workshop-cooling-rack-summer.png",
+      "bytes": 568,
+      "sha256": "5b70958e9a7ff3d049db295c0353be1efb116cccfce9ae3f96d52eb461e025e8"
+    },
+    {
+      "path": "sprites/workshop-cooling-rack-autumn.png",
+      "bytes": 544,
+      "sha256": "ea5762970c3acea4225186e446df6749379cede2d03f3ffa48c87525d4561f66"
+    },
+    {
+      "path": "sprites/workshop-cooling-rack-winter.png",
+      "bytes": 533,
+      "sha256": "016b8f2d96b70cbcfe1ee204a6e4dc47959f8c3859c07d750c2ed370fd035496"
+    },
+    {
+      "path": "sprites/workshop-baking-sheet-spring.png",
+      "bytes": 464,
+      "sha256": "99eccbd53db4ab1ff6532786ec98e1e9ed9e54d146b0436bbbe39226e6bfd2ad"
+    },
+    {
+      "path": "sprites/workshop-baking-sheet-summer.png",
+      "bytes": 535,
+      "sha256": "fb190267c0f02b7c696658ad1284e47d57b0d4c717135a23bdfdc9c851c6ed77"
+    },
+    {
+      "path": "sprites/workshop-baking-sheet-autumn.png",
+      "bytes": 452,
+      "sha256": "59a7dcc1e9bd444537d58a48f295b4a1c17bc37c0bcbec80f237dc1511f0087d"
+    },
+    {
+      "path": "sprites/workshop-baking-sheet-winter.png",
+      "bytes": 544,
+      "sha256": "18cae6e083bc6042015eff705290786adb196118e560a412dece641a59a5ddcb"
+    },
+    {
+      "path": "sprites/workshop-springform-pan-spring.png",
+      "bytes": 526,
+      "sha256": "5d0b0c4e6b2ca742a48b49c2687697bc2729bb9798ea2d1933915364efc846b7"
+    },
+    {
+      "path": "sprites/workshop-springform-pan-summer.png",
+      "bytes": 584,
+      "sha256": "6596868cde6c374258ccd3fd10bf611846ca8aab3fdab292cfbca240243b26fb"
+    },
+    {
+      "path": "sprites/workshop-springform-pan-autumn.png",
+      "bytes": 549,
+      "sha256": "026bbd38afc5dbbb0dcbb6dcba0985ac5675144c0f1bb3afe2fce060b6508c46"
+    },
+    {
+      "path": "sprites/workshop-springform-pan-winter.png",
+      "bytes": 638,
+      "sha256": "b9fd65d255ca74782855ea462f2992b0098e9270a52a2fed4594378f6ec59791"
+    },
+    {
+      "path": "sprites/workshop-cookie-cutters-spring.png",
+      "bytes": 628,
+      "sha256": "a09c92796d1786b45d9723715f3b189be8467a1db168ec6c309d7615de2beb5a"
+    },
+    {
+      "path": "sprites/workshop-cookie-cutters-summer.png",
+      "bytes": 675,
+      "sha256": "c5e7ac6ac9e6f8933f0a2676694a3e325bd05456db997c33ab235d90222d5188"
+    },
+    {
+      "path": "sprites/workshop-cookie-cutters-autumn.png",
+      "bytes": 704,
+      "sha256": "0aaf1124ce88a4fe242900b65953f9b7c3ddb0fb425fd8bf38a649919744c79e"
+    },
+    {
+      "path": "sprites/workshop-cookie-cutters-winter.png",
+      "bytes": 791,
+      "sha256": "a3cd219f835bcc6ba4634f0df2ac59a438e66b5a9d100c99339567b36838d577"
+    },
+    {
+      "path": "sprites/workshop-flour-sack-spring.png",
+      "bytes": 531,
+      "sha256": "b362d85e9dad010f8851f56a49c51dca0892392b8be79f49ef17918c90713fcd"
+    },
+    {
+      "path": "sprites/workshop-flour-sack-summer.png",
+      "bytes": 635,
+      "sha256": "a19c4dec7d0f6f56139251adcce7b422647a299eb098a4991ce58e89e5847039"
+    },
+    {
+      "path": "sprites/workshop-flour-sack-autumn.png",
+      "bytes": 524,
+      "sha256": "3dd81ab40af30d25c15764a059ad57f39e7bbab808bcd5c65387f852192202d6"
+    },
+    {
+      "path": "sprites/workshop-flour-sack-winter.png",
+      "bytes": 595,
+      "sha256": "2406be0f2793485aa5bd9a06ed18e454bf734137d05fc776d15391eed829d486"
+    },
+    {
+      "path": "sprites/workshop-butter-dish-spring.png",
+      "bytes": 560,
+      "sha256": "64c96c250be18668b2cc25ad51c83e80a9d28acf6e954761e9ebe9cbabd866c0"
+    },
+    {
+      "path": "sprites/workshop-butter-dish-summer.png",
+      "bytes": 597,
+      "sha256": "bfcc3b12dd55e1f0fb76227da6920fe4314f46eb24ea34e7e02fd13b0d2a3b84"
+    },
+    {
+      "path": "sprites/workshop-butter-dish-autumn.png",
+      "bytes": 585,
+      "sha256": "51c6b930fd3180d2b40ef28c0eaa3664a06dc8eb90a480c710a78bdbc50d83bc"
+    },
+    {
+      "path": "sprites/workshop-butter-dish-winter.png",
+      "bytes": 669,
+      "sha256": "bf1f9f152d691f91dce5df6c066ecd3f9f2ae8650a91c4e30195a6ef10257577"
+    },
+    {
+      "path": "sprites/workshop-dough-ball-spring.png",
+      "bytes": 549,
+      "sha256": "9c69890e6772940dd2a426ee92cb44ff0977d400cbae74851c6e62a8cab7bcc7"
+    },
+    {
+      "path": "sprites/workshop-dough-ball-summer.png",
+      "bytes": 534,
+      "sha256": "6e60bb9a0335dde73368847e3fe910e6ae0ba8ecb3ebf7044913e12b0d8c6a59"
+    },
+    {
+      "path": "sprites/workshop-dough-ball-autumn.png",
+      "bytes": 574,
+      "sha256": "0482c14cda03096b2cb0065c90b09675fb62d50518eaec883d76985e576ef87e"
+    },
+    {
+      "path": "sprites/workshop-dough-ball-winter.png",
+      "bytes": 605,
+      "sha256": "0fb50ed606b653012169046e76df01d890739b7a4eb56ef47f62494609895ffb"
+    },
+    {
+      "path": "sprites/workshop-yeast-bottle-spring.png",
+      "bytes": 497,
+      "sha256": "d2887dbdf13de52ff6b28f87c992d4a5a003c419de570b476d438fb413e3acd1"
+    },
+    {
+      "path": "sprites/workshop-yeast-bottle-summer.png",
+      "bytes": 503,
+      "sha256": "36d61582fb3fdaff88e205ddeed9aa57504190ad7731c57bc73c5ae7b082745f"
+    },
+    {
+      "path": "sprites/workshop-yeast-bottle-autumn.png",
+      "bytes": 484,
+      "sha256": "b8d42dcddf9020f17c7b4a80a722c7931846343f8c6113c5c6502b52df8dd0d4"
+    },
+    {
+      "path": "sprites/workshop-yeast-bottle-winter.png",
+      "bytes": 472,
+      "sha256": "be6997635e4d30b90b0423b4d49a271d67a5c6e34cde68934c9c3c414a6b3b6e"
+    },
+    {
+      "path": "sprites/workshop-egg-crate-spring.png",
+      "bytes": 671,
+      "sha256": "c62b93d9c2150a1e1fd32f664c44a867af6cfd0893ec39d7387546634d94c225"
+    },
+    {
+      "path": "sprites/workshop-egg-crate-summer.png",
+      "bytes": 660,
+      "sha256": "246424ed3482c852dea98dca5d9c54f2a1cc2ce3826daf095d81f8038af92388"
+    },
+    {
+      "path": "sprites/workshop-egg-crate-autumn.png",
+      "bytes": 643,
+      "sha256": "471b1c71448a043fc23f6de9a519c9ce3a2911d077f86d1ca13047e5ccfb3b79"
+    },
+    {
+      "path": "sprites/workshop-egg-crate-winter.png",
+      "bytes": 782,
+      "sha256": "7c1409902ab2cd2eb0f43995bd23ea3d8b3dbbc1c53088963b628b72e58095a1"
+    },
+    {
+      "path": "sprites/workshop-cocoa-canister-spring.png",
+      "bytes": 599,
+      "sha256": "a6b13572a80e410f7a973546ce9e895998029345389e8f22056eab97c201e0dc"
+    },
+    {
+      "path": "sprites/workshop-cocoa-canister-summer.png",
+      "bytes": 576,
+      "sha256": "361391dba7e7b0333a60c54e01ea6d42867b99d61538f3c7f1d0b3d49f8331cf"
+    },
+    {
+      "path": "sprites/workshop-cocoa-canister-autumn.png",
+      "bytes": 508,
+      "sha256": "cf29c2a759a2c8ac7df0e5c23b6dca7c1e0947742637048490aba253ff392d7d"
+    },
+    {
+      "path": "sprites/workshop-cocoa-canister-winter.png",
+      "bytes": 512,
+      "sha256": "e44aacc2333ba8f09526adc92df37d113e62454fc33a097d56cfb007dc557ad6"
+    },
+    {
+      "path": "sprites/workshop-vanilla-tubes-spring.png",
+      "bytes": 582,
+      "sha256": "34a7ae333b9e79ef092f0c8cdb9603db1bcd16f0203022fb9e4fb066c7005feb"
+    },
+    {
+      "path": "sprites/workshop-vanilla-tubes-summer.png",
+      "bytes": 610,
+      "sha256": "b8b6868ecd6b08df6f348774155235a10305420b0cf28c9b6e5f1b05d376474f"
+    },
+    {
+      "path": "sprites/workshop-vanilla-tubes-autumn.png",
+      "bytes": 606,
+      "sha256": "5e5c99f53259ef00c84223a6ee8a25d179577f2b84d3a45a3b4086c681a87eb1"
+    },
+    {
+      "path": "sprites/workshop-vanilla-tubes-winter.png",
+      "bytes": 575,
+      "sha256": "0f6c2cbc1c4a3cb08ab00a237402e35a6ca0b90261bf48861362a5f57ac0c6d9"
+    },
+    {
+      "path": "sprites/workshop-nut-hopper-spring.png",
+      "bytes": 822,
+      "sha256": "d648801eedbd51df0088d019a98e9b95ef7388a5f028d889c28da19e37c93096"
+    },
+    {
+      "path": "sprites/workshop-nut-hopper-summer.png",
+      "bytes": 852,
+      "sha256": "5ce1c5f95016a7d1b310673b338428939b8d9606f62c2a79f51d17a97dcab9ef"
+    },
+    {
+      "path": "sprites/workshop-nut-hopper-autumn.png",
+      "bytes": 814,
+      "sha256": "fb796674d6c9608860f6185d262d804819f0db40e5407d5d73be2b249b03f985"
+    },
+    {
+      "path": "sprites/workshop-nut-hopper-winter.png",
+      "bytes": 847,
+      "sha256": "70ea614d3a93c9b90a94a67ebf986a7d2093f0a2b1a55ae79bca2f46422fc9c3"
+    },
+    {
+      "path": "sprites/workshop-dial-scale-spring.png",
+      "bytes": 835,
+      "sha256": "7e771052b3cd8f254a5aebe8607712b477152c35fb5059cb6d5ca8249b6893b3"
+    },
+    {
+      "path": "sprites/workshop-dial-scale-summer.png",
+      "bytes": 791,
+      "sha256": "e42dd547af536137ab7001f476a7f9e1eb9bba7eb77cd1e9bc7cd82ad3dc91eb"
+    },
+    {
+      "path": "sprites/workshop-dial-scale-autumn.png",
+      "bytes": 773,
+      "sha256": "b91ce140660f9aa494876a14274cbc48df21173a7462004600e79dba61bee77a"
+    },
+    {
+      "path": "sprites/workshop-dial-scale-winter.png",
+      "bytes": 808,
+      "sha256": "b6a6e9018111065665a802fbe663e663f8ffeb9e4ab115c1cb345549b7e4f9ae"
+    },
+    {
+      "path": "sprites/workshop-measuring-jug-spring.png",
+      "bytes": 557,
+      "sha256": "501a69fbc7398e83699a831792c8e364c74a4af6380a93fcb33768296bbc7d12"
+    },
+    {
+      "path": "sprites/workshop-measuring-jug-summer.png",
+      "bytes": 586,
+      "sha256": "c8e08fd0fc8bd8849208f0093797d87c2f57f562875c03edfdaa7f34717a8291"
+    },
+    {
+      "path": "sprites/workshop-measuring-jug-autumn.png",
+      "bytes": 568,
+      "sha256": "7a0e22c6dba16d2d855675969645471d807d45b40901972dc85e274986a811d6"
+    },
+    {
+      "path": "sprites/workshop-measuring-jug-winter.png",
+      "bytes": 597,
+      "sha256": "177213314f28813a19d732b6d0f9755aed9aab12c179eae2afc8116d1f42e784"
+    },
+    {
+      "path": "sprites/workshop-measuring-spoons-spring.png",
+      "bytes": 741,
+      "sha256": "e0d013dd6e0f4cd10b1d742007c2e5fc45f0467b0fdfe3c9eb36675639f00706"
+    },
+    {
+      "path": "sprites/workshop-measuring-spoons-summer.png",
+      "bytes": 737,
+      "sha256": "17d81e10ee27682919e31e0853ca23517cd590df4ec47d9c4691cccd436ac104"
+    },
+    {
+      "path": "sprites/workshop-measuring-spoons-autumn.png",
+      "bytes": 656,
+      "sha256": "94144d4db96427cade3fa0e4725b1e6a088a139ee8cb9ef3978cd57f7da653d8"
+    },
+    {
+      "path": "sprites/workshop-measuring-spoons-winter.png",
+      "bytes": 762,
+      "sha256": "3a8dceb67fa8e38fbc79c6be8fd83927db5ca5eaeda390eaf0fd8cda6757766f"
+    },
+    {
+      "path": "sprites/workshop-kitchen-timer-spring.png",
+      "bytes": 795,
+      "sha256": "701d84710c69e415987aad6493419c3f912c91e6e215b4da5ee195de064da401"
+    },
+    {
+      "path": "sprites/workshop-kitchen-timer-summer.png",
+      "bytes": 799,
+      "sha256": "b460eedd6d52e6edc7b1af8cf60ad77f2029c3008c7e39c5ca70cb34ef4911df"
+    },
+    {
+      "path": "sprites/workshop-kitchen-timer-autumn.png",
+      "bytes": 808,
+      "sha256": "21cfe524f2e7e2a923737968ce83c6012b26da7e35b395d25eadde80615d66fe"
+    },
+    {
+      "path": "sprites/workshop-kitchen-timer-winter.png",
+      "bytes": 825,
+      "sha256": "158c433cd44ca116c76e070add72ab0ff1a7de28277bf4ebf1964111b7c23f99"
+    },
+    {
+      "path": "sprites/workshop-thermometer-spring.png",
+      "bytes": 518,
+      "sha256": "e5069c7d2bfa970463213c93804bb251cc59250ef557a48f4263bce763bea2f5"
+    },
+    {
+      "path": "sprites/workshop-thermometer-summer.png",
+      "bytes": 595,
+      "sha256": "05921061158721f92e8d54490a26209aa1f909c9718b49a6f3c38cc5eba52ae0"
+    },
+    {
+      "path": "sprites/workshop-thermometer-autumn.png",
+      "bytes": 590,
+      "sha256": "40040600316614b443d25c3a040ec66e0fbea6d9e395f893b4a1cf8553f918a4"
+    },
+    {
+      "path": "sprites/workshop-thermometer-winter.png",
+      "bytes": 613,
+      "sha256": "66dd6538ff315eba353b29e423e451ff335bc04e9b903f596fd54140f89e17e5"
+    },
+    {
+      "path": "sprites/workshop-utensil-rail-spring.png",
+      "bytes": 578,
+      "sha256": "77d5329109f1930b0e10bdcb5dc3af81d15685bd22a3ea0340e9e09c648eb34d"
+    },
+    {
+      "path": "sprites/workshop-utensil-rail-summer.png",
+      "bytes": 580,
+      "sha256": "289050a290e62f6b56a31436293124e20146433fb857d815fec2d1f58554192e"
+    },
+    {
+      "path": "sprites/workshop-utensil-rail-autumn.png",
+      "bytes": 576,
+      "sha256": "8859d0c9e2932e095e25be111e993fa54c39c72ed9cf70773ca3ccb578a6a5b2"
+    },
+    {
+      "path": "sprites/workshop-utensil-rail-winter.png",
+      "bytes": 640,
+      "sha256": "a06502a38ddd8156021329cfb1ab36f8c78a34039cfea125e74762ba48a8433d"
+    },
+    {
+      "path": "sprites/workshop-spice-drawer-spring.png",
+      "bytes": 594,
+      "sha256": "99cfa659a94f6df7435b974588ede8c4c614cdff0360c77e806b03cc2f5b4a8b"
+    },
+    {
+      "path": "sprites/workshop-spice-drawer-summer.png",
+      "bytes": 574,
+      "sha256": "3348cc4c67213784f7aebd403ee998993e4689a4e566c797903e5fd0756ba91e"
+    },
+    {
+      "path": "sprites/workshop-spice-drawer-autumn.png",
+      "bytes": 560,
+      "sha256": "1a1b554ab81068eaac7de88ef5f07f078252d4e75e83a2687bf5f88125d7c1ff"
+    },
+    {
+      "path": "sprites/workshop-spice-drawer-winter.png",
+      "bytes": 567,
+      "sha256": "fd85afa558979c22959e8cb43b4ca9f6a06d88854bd8661729c04c5d0c4bbcfe"
+    },
+    {
+      "path": "sprites/workshop-towel-roller-spring.png",
+      "bytes": 609,
+      "sha256": "f17eb5baebc6d70e2ed29523f36c2578a10fbddd6cef2bb4a592eaf7a01b389a"
+    },
+    {
+      "path": "sprites/workshop-towel-roller-summer.png",
+      "bytes": 637,
+      "sha256": "e72bb832a1cf7037531d6ca1139f43e3086b79aedd231280e6c629cc4bbe4952"
+    },
+    {
+      "path": "sprites/workshop-towel-roller-autumn.png",
+      "bytes": 651,
+      "sha256": "9095034bdb1e5721cbe03901df8ce243035316e5471d37e32d170390588925a4"
+    },
+    {
+      "path": "sprites/workshop-towel-roller-winter.png",
+      "bytes": 657,
+      "sha256": "94a7d162efd2c2b211bdc84c28eb60cd88982b620e7e5b09dcfcd1c931e6316a"
+    }
+  ]
+}

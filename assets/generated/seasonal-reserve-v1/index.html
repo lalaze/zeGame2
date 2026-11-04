@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>四季储物间 · Tiny Bean Café</title>
+<style>
+:root{color-scheme:light;--ink:#46362f;--paper:#faf5e9;--edge:#d7cab4;--sage:#46604e}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 system-ui,sans-serif}header,main,footer{max-width:1440px;margin:auto;padding:28px}header{padding-top:48px}small,.eyebrow{font-size:12px;letter-spacing:.12em;color:var(--sage)}h1{font-size:clamp(30px,5vw,52px);line-height:1.15;margin:12px 0}h1 span{font-weight:400;color:#88735e}p{max-width:780px}.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:end;background:#eee6d6;border:1px solid var(--edge);padding:18px;border-radius:12px}label{display:grid;gap:5px;font-size:12px}input,select,button,a.download{font:inherit;color:inherit;min-height:42px;border:1px solid #b9aa94;border-radius:6px;background:#fffaf1;padding:9px 12px}input{width:min(320px,75vw)}button,a.download{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #658c6b;outline-offset:3px}button[aria-pressed=true]{background:var(--sage);color:white}.links{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}.download{display:inline-flex;text-decoration:none}#count{margin:22px 0 14px;color:var(--sage)}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:16px}.card{overflow:hidden;border:1px solid var(--edge);background:#fffaf1;border-radius:10px}.art{display:grid;place-items:center;min-height:215px;padding:10px;background-color:#eee7da;background-image:linear-gradient(45deg,#e3dacb 25%,transparent 25%),linear-gradient(-45deg,#e3dacb 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#e3dacb 75%),linear-gradient(-45deg,transparent 75%,#e3dacb 75%);background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0}.grid[data-background=dark] .art{background:#302e32}.grid[data-background=light] .art{background:#fffdf6}.art img{image-rendering:pixelated;max-width:100%;object-fit:contain}.info{padding:14px}.info h2{font-size:16px;margin:0 0 2px}.en{font-size:12px;color:#796e63;margin:0 0 8px}.id{display:block;font:11px/1.5 ui-monospace,monospace;overflow-wrap:anywhere;color:#796e63}.meta{font-size:12px;margin:8px 0}.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}.actions a,.actions button{font-size:12px}.badge{display:inline-block;padding:3px 9px;background:#e4eadc;border-radius:12px;font-size:12px}.empty{padding:40px;text-align:center;border:1px dashed var(--edge)}footer{font-size:12px;border-top:1px solid var(--edge);margin-top:24px}#status{min-height:24px;font-size:12px}a{color:var(--sage)}@media(max-width:500px){header,main,footer{padding:20px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.art{min-height:150px}.info{padding:10px}.info h2{font-size:14px}.tools{padding:12px}input{width:100%}.search{flex:1 0 100%}}
+</style>
+</head>
+<body>
+<header><div class="eyebrow">TINY BEAN CAFÉ / ASSET RESERVE 01</div><h1>四季储物间 <span>Seasonal reserve</span></h1><p>为未来的小店更新准备的饮品、甜点、花植与生活小物。原生 2× 像素网格、项目主色板、透明背景。这里是<strong>备用素材</strong>，尚未接入游戏菜单、商店或存档。</p><div class="links"><a class="download" href="../reserve-library/index.html">查看全部后续素材包 →</a><a class="download" href="atlas.png" download>下载透明图集</a><a class="download" href="manifest.json" download>下载尺寸与坐标索引</a><a class="download" href="contact-sheet.png" download>下载总览图</a><a class="download" href="README.md">制作与使用说明</a></div></header>
+<main><div class="tools"><label class="search">搜索名称 / 标签 / ID<input id="search" type="search" placeholder="试试：拿铁、花、winter…"></label><label>类别<select id="category"><option value="">全部类别</option></select></label><label>季节<select id="season"><option value="">全部季节</option></select></label><label>预览倍率<select id="zoom"><option value="1">原始 1×</option><option value="2" selected>像素 2×</option></select></label><label>背景<select id="background"><option value="checker">透明棋盘</option><option value="light">浅色</option><option value="dark">深色</option></select></label><button id="reset" type="button">重置筛选</button></div><div id="count" role="status" aria-live="polite"></div><div id="status" role="status" aria-live="polite"></div><div class="grid" id="grid" data-background="checker"></div><noscript>请启用 JavaScript 查看筛选画廊，或直接打开上方总览图。</noscript></main>
+<footer>不联网、不读写游戏存档、不加载游戏引擎。可以直接打开本页，也可以在开发服务器访问此目录。将某个素材投入使用前，仍需确认实际场景中的比例、锚点及遮挡。</footer>
+<script src="catalog.js"></script>
+<script>
+'use strict';
+const manifest = window.SEASONAL_RESERVE;
+const $ = id => document.getElementById(id);
+const categoryNames = {cafe:'饮品与甜点',botanical:'花植摆件',gift:'礼盒外卖',festival:'节庆装饰',drinks:'季节饮品',desserts:'烘焙甜点',plants:'花植摆件',gifts:'礼盒外卖',reading:'阅读角',festive:'节庆装饰',cats:'猫咪生活',decor:'装饰小物',packaging:'礼盒外卖',pastries:'烘焙甜点',cat:'猫咪生活'};
+const seasonNames = {spring:'春日',summer:'盛夏',autumn:'暖秋',winter:'冬夜',all:'四季通用'};
+function text(tag,value,className){const el=document.createElement(tag);el.textContent=value;if(className)el.className=className;return el;}
+function option(select,value,label){const el=text('option',label);el.value=value;select.append(el);}
+function render(){
+ const query=$('search').value.trim().toLocaleLowerCase();
+ const chosen=manifest.sprites.filter(s=>(!$('category').value||s.category===$('category').value)&&(!$('season').value||s.season===$('season').value)&&(!query||[s.id,s.nameZh,s.nameEn,...s.tags].join(' ').toLocaleLowerCase().includes(query)));
+ $('count').textContent=`${chosen.length} / ${manifest.sprites.length} 张素材 · ${manifest.counts.baseShapes} 种基础造型 · 未接入游戏`;
+ $('grid').replaceChildren();
+ if(!chosen.length){$('grid').append(text('p','没有找到匹配项，试试其他关键词或重置筛选。','empty'));return;}
+ const fragment=document.createDocumentFragment();
+ for(const s of chosen){
+  const card=text('article','','card'),art=text('div','','art'),img=document.createElement('img');
+  img.src=s.path;img.alt=s.nameZh;img.loading='lazy';img.width=s.width*Number($('zoom').value);img.height=s.height*Number($('zoom').value);
+  img.addEventListener('error',()=>{$('status').textContent='部分图片无法读取，请运行素材生成器后重新打开本页。';});
+  art.append(img);card.append(art);
+  const info=text('div','','info');info.append(text('h2',s.nameZh),text('p',s.nameEn,'en'),text('span',seasonNames[s.season]||s.season,'badge'),text('code',s.id,'id'),text('p',`${s.width}×${s.height} px · 逻辑 ${s.logicalWidth}×${s.logicalHeight}`,'meta'));
+  const actions=text('div','','actions'),link=text('a','下载 PNG');link.href=s.path;link.download=s.id+'.png';
+  const copy=text('button','复制 ID');copy.type='button';copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(s.id);$('status').textContent=`已复制 ${s.id}`;}catch{$('status').textContent=`当前浏览器不允许剪贴板访问，请手动复制：${s.id}`;}});
+  actions.append(link,copy);info.append(actions);card.append(info);fragment.append(card);
+ }
+ $('grid').append(fragment);
+}
+if(!manifest||!Array.isArray(manifest.sprites)){$('count').textContent='素材索引尚未生成：请运行 node scripts/build-seasonal-reserve.mjs，再刷新本页。';}
+else{
+ for(const category of [...new Set(manifest.sprites.map(s=>s.category))].sort())option($('category'),category,categoryNames[category]||category);
+ for(const season of [...new Set(manifest.sprites.map(s=>s.season))])option($('season'),season,seasonNames[season]||season);
+ $('search').addEventListener('input',render);for(const id of ['category','season','zoom'])$(id).addEventListener('change',render);
+ $('background').addEventListener('change',()=>{$('grid').dataset.background=$('background').value;});
+ $('reset').addEventListener('click',()=>{$('search').value='';$('category').value='';$('season').value='';$('zoom').value='2';$('background').value='checker';$('grid').dataset.background='checker';$('status').textContent='';render();});render();
+}
+</script>
+</body>
+</html>

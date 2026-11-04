@@ -1,0 +1,425 @@
+{
+  "note": "Two representative base shapes per category; ordinal labels match this list, not the complete library.",
+  "sprites": [
+    {
+      "ordinal": 1,
+      "id": "tea-cup-spring",
+      "nameZh": "春日花语·花沿茶杯",
+      "path": "../seasonal-reserve-v1/sprites/tea-cup-spring.png",
+      "packId": "seasonal-reserve-v1"
+    },
+    {
+      "ordinal": 2,
+      "id": "iced-tumbler-summer",
+      "nameZh": "夏日果香·冰饮高杯",
+      "path": "../seasonal-reserve-v1/sprites/iced-tumbler-summer.png",
+      "packId": "seasonal-reserve-v1"
+    },
+    {
+      "ordinal": 3,
+      "id": "bud-vase-autumn",
+      "nameZh": "秋日拾叶·细颈花瓶",
+      "path": "../seasonal-reserve-v1/sprites/bud-vase-autumn.png",
+      "packId": "seasonal-reserve-v1"
+    },
+    {
+      "ordinal": 4,
+      "id": "herb-pot-winter",
+      "nameZh": "冬日暖意·香草陶盆",
+      "path": "../seasonal-reserve-v1/sprites/herb-pot-winter.png",
+      "packId": "seasonal-reserve-v1"
+    },
+    {
+      "ordinal": 5,
+      "id": "ribbon-box-spring",
+      "nameZh": "春日花语·蝴蝶结礼盒",
+      "path": "../seasonal-reserve-v1/sprites/ribbon-box-spring.png",
+      "packId": "seasonal-reserve-v1"
+    },
+    {
+      "ordinal": 6,
+      "id": "paper-bag-summer",
+      "nameZh": "夏日果香·牛皮纸外卖袋",
+      "path": "../seasonal-reserve-v1/sprites/paper-bag-summer.png",
+      "packId": "seasonal-reserve-v1"
+    },
+    {
+      "ordinal": 7,
+      "id": "armchair-autumn",
+      "nameZh": "秋日拾叶·软垫阅读椅",
+      "path": "../seasonal-reserve-v1/sprites/armchair-autumn.png",
+      "packId": "seasonal-reserve-v1"
+    },
+    {
+      "ordinal": 8,
+      "id": "floor-lamp-winter",
+      "nameZh": "冬日暖意·褶皱落地灯",
+      "path": "../seasonal-reserve-v1/sprites/floor-lamp-winter.png",
+      "packId": "seasonal-reserve-v1"
+    },
+    {
+      "ordinal": 9,
+      "id": "lantern-spring",
+      "nameZh": "春日花语·提梁灯笼",
+      "path": "../seasonal-reserve-v1/sprites/lantern-spring.png",
+      "packId": "seasonal-reserve-v1"
+    },
+    {
+      "ordinal": 10,
+      "id": "candle-holder-summer",
+      "nameZh": "夏日果香·三枝烛台",
+      "path": "../seasonal-reserve-v1/sprites/candle-holder-summer.png",
+      "packId": "seasonal-reserve-v1"
+    },
+    {
+      "ordinal": 11,
+      "id": "cat-bed-autumn",
+      "nameZh": "秋日拾叶·猫耳软窝",
+      "path": "../seasonal-reserve-v1/sprites/cat-bed-autumn.png",
+      "packId": "seasonal-reserve-v1"
+    },
+    {
+      "ordinal": 12,
+      "id": "scratching-post-winter",
+      "nameZh": "冬日暖意·剑麻抓柱",
+      "path": "../seasonal-reserve-v1/sprites/scratching-post-winter.png",
+      "packId": "seasonal-reserve-v1"
+    },
+    {
+      "ordinal": 13,
+      "id": "workshop-burr-grinder-spring",
+      "nameZh": "春日·锥刀磨豆机",
+      "path": "../workshop-reserve-v1/sprites/workshop-burr-grinder-spring.png",
+      "packId": "workshop-reserve-v1"
+    },
+    {
+      "ordinal": 14,
+      "id": "workshop-milk-pitcher-summer",
+      "nameZh": "夏日·拉花缸",
+      "path": "../workshop-reserve-v1/sprites/workshop-milk-pitcher-summer.png",
+      "packId": "workshop-reserve-v1"
+    },
+    {
+      "ordinal": 15,
+      "id": "workshop-drum-roaster-autumn",
+      "nameZh": "秋日·滚筒烘豆机",
+      "path": "../workshop-reserve-v1/sprites/workshop-drum-roaster-autumn.png",
+      "packId": "workshop-reserve-v1"
+    },
+    {
+      "ordinal": 16,
+      "id": "workshop-cooling-sieve-winter",
+      "nameZh": "冬日·咖啡豆冷却筛",
+      "path": "../workshop-reserve-v1/sprites/workshop-cooling-sieve-winter.png",
+      "packId": "workshop-reserve-v1"
+    },
+    {
+      "ordinal": 17,
+      "id": "workshop-rolling-pin-spring",
+      "nameZh": "春日·擀面杖",
+      "path": "../workshop-reserve-v1/sprites/workshop-rolling-pin-spring.png",
+      "packId": "workshop-reserve-v1"
+    },
+    {
+      "ordinal": 18,
+      "id": "workshop-balloon-whisk-summer",
+      "nameZh": "夏日·球形打蛋器",
+      "path": "../workshop-reserve-v1/sprites/workshop-balloon-whisk-summer.png",
+      "packId": "workshop-reserve-v1"
+    },
+    {
+      "ordinal": 19,
+      "id": "workshop-loaf-mold-autumn",
+      "nameZh": "秋日·长方吐司模",
+      "path": "../workshop-reserve-v1/sprites/workshop-loaf-mold-autumn.png",
+      "packId": "workshop-reserve-v1"
+    },
+    {
+      "ordinal": 20,
+      "id": "workshop-muffin-pan-winter",
+      "nameZh": "冬日·玛芬连模",
+      "path": "../workshop-reserve-v1/sprites/workshop-muffin-pan-winter.png",
+      "packId": "workshop-reserve-v1"
+    },
+    {
+      "ordinal": 21,
+      "id": "workshop-flour-sack-spring",
+      "nameZh": "春日·折口面粉袋",
+      "path": "../workshop-reserve-v1/sprites/workshop-flour-sack-spring.png",
+      "packId": "workshop-reserve-v1"
+    },
+    {
+      "ordinal": 22,
+      "id": "workshop-butter-dish-summer",
+      "nameZh": "夏日·切块黄油碟",
+      "path": "../workshop-reserve-v1/sprites/workshop-butter-dish-summer.png",
+      "packId": "workshop-reserve-v1"
+    },
+    {
+      "ordinal": 23,
+      "id": "workshop-dial-scale-autumn",
+      "nameZh": "秋日·指针厨师秤",
+      "path": "../workshop-reserve-v1/sprites/workshop-dial-scale-autumn.png",
+      "packId": "workshop-reserve-v1"
+    },
+    {
+      "ordinal": 24,
+      "id": "workshop-measuring-jug-winter",
+      "nameZh": "冬日·刻度量杯",
+      "path": "../workshop-reserve-v1/sprites/workshop-measuring-jug-winter.png",
+      "packId": "workshop-reserve-v1"
+    },
+    {
+      "ordinal": 25,
+      "id": "street-mailbox-spring",
+      "nameZh": "春日·拱顶邮筒",
+      "path": "../neighborhood-reserve-v1/sprites/street-mailbox-spring.png",
+      "packId": "neighborhood-reserve-v1"
+    },
+    {
+      "ordinal": 26,
+      "id": "street-newspaper-box-summer",
+      "nameZh": "夏日·报纸售卖箱",
+      "path": "../neighborhood-reserve-v1/sprites/street-newspaper-box-summer.png",
+      "packId": "neighborhood-reserve-v1"
+    },
+    {
+      "ordinal": 27,
+      "id": "street-slat-bench-autumn",
+      "nameZh": "秋日·木条长凳",
+      "path": "../neighborhood-reserve-v1/sprites/street-slat-bench-autumn.png",
+      "packId": "neighborhood-reserve-v1"
+    },
+    {
+      "ordinal": 28,
+      "id": "street-bike-rack-winter",
+      "nameZh": "冬日·自行车停放架",
+      "path": "../neighborhood-reserve-v1/sprites/street-bike-rack-winter.png",
+      "packId": "neighborhood-reserve-v1"
+    },
+    {
+      "ordinal": 29,
+      "id": "street-umbrella-rack-spring",
+      "nameZh": "春日·雨伞收纳架",
+      "path": "../neighborhood-reserve-v1/sprites/street-umbrella-rack-spring.png",
+      "packId": "neighborhood-reserve-v1"
+    },
+    {
+      "ordinal": 30,
+      "id": "street-rain-boots-summer",
+      "nameZh": "夏日·一双雨靴",
+      "path": "../neighborhood-reserve-v1/sprites/street-rain-boots-summer.png",
+      "packId": "neighborhood-reserve-v1"
+    },
+    {
+      "ordinal": 31,
+      "id": "street-birdhouse-autumn",
+      "nameZh": "秋日·挂柱鸟屋",
+      "path": "../neighborhood-reserve-v1/sprites/street-birdhouse-autumn.png",
+      "packId": "neighborhood-reserve-v1"
+    },
+    {
+      "ordinal": 32,
+      "id": "street-birdbath-winter",
+      "nameZh": "冬日·浅盘鸟浴",
+      "path": "../neighborhood-reserve-v1/sprites/street-birdbath-winter.png",
+      "packId": "neighborhood-reserve-v1"
+    },
+    {
+      "ordinal": 33,
+      "id": "street-flower-cart-spring",
+      "nameZh": "春日·带篷花车",
+      "path": "../neighborhood-reserve-v1/sprites/street-flower-cart-spring.png",
+      "packId": "neighborhood-reserve-v1"
+    },
+    {
+      "ordinal": 34,
+      "id": "street-lattice-panel-summer",
+      "nameZh": "夏日·攀藤格栅",
+      "path": "../neighborhood-reserve-v1/sprites/street-lattice-panel-summer.png",
+      "packId": "neighborhood-reserve-v1"
+    },
+    {
+      "ordinal": 35,
+      "id": "street-gate-panel-autumn",
+      "nameZh": "秋日·独立庭院门",
+      "path": "../neighborhood-reserve-v1/sprites/street-gate-panel-autumn.png",
+      "packId": "neighborhood-reserve-v1"
+    },
+    {
+      "ordinal": 36,
+      "id": "street-fence-corner-winter",
+      "nameZh": "冬日·木栅栏转角",
+      "path": "../neighborhood-reserve-v1/sprites/street-fence-corner-winter.png",
+      "packId": "neighborhood-reserve-v1"
+    },
+    {
+      "ordinal": 37,
+      "id": "hobby-typewriter-spring",
+      "nameZh": "春日·便携打字机",
+      "path": "../hobby-reserve-v1/sprites/hobby-typewriter-spring.png",
+      "packId": "hobby-reserve-v1"
+    },
+    {
+      "ordinal": 38,
+      "id": "hobby-quill-ink-summer",
+      "nameZh": "夏日·羽笔墨水台",
+      "path": "../hobby-reserve-v1/sprites/hobby-quill-ink-summer.png",
+      "packId": "hobby-reserve-v1"
+    },
+    {
+      "ordinal": 39,
+      "id": "hobby-easel-autumn",
+      "nameZh": "秋日·微型写生画架",
+      "path": "../hobby-reserve-v1/sprites/hobby-easel-autumn.png",
+      "packId": "hobby-reserve-v1"
+    },
+    {
+      "ordinal": 40,
+      "id": "hobby-palette-winter",
+      "nameZh": "冬日·拇指孔调色板",
+      "path": "../hobby-reserve-v1/sprites/hobby-palette-winter.png",
+      "packId": "hobby-reserve-v1"
+    },
+    {
+      "ordinal": 41,
+      "id": "hobby-sewing-box-spring",
+      "nameZh": "春日·展开针线盒",
+      "path": "../hobby-reserve-v1/sprites/hobby-sewing-box-spring.png",
+      "packId": "hobby-reserve-v1"
+    },
+    {
+      "ordinal": 42,
+      "id": "hobby-table-loom-summer",
+      "nameZh": "夏日·桌面织布机",
+      "path": "../hobby-reserve-v1/sprites/hobby-table-loom-summer.png",
+      "packId": "hobby-reserve-v1"
+    },
+    {
+      "ordinal": 43,
+      "id": "hobby-guitar-autumn",
+      "nameZh": "秋日·木吉他支架",
+      "path": "../hobby-reserve-v1/sprites/hobby-guitar-autumn.png",
+      "packId": "hobby-reserve-v1"
+    },
+    {
+      "ordinal": 44,
+      "id": "hobby-violin-winter",
+      "nameZh": "冬日·小提琴陈列座",
+      "path": "../hobby-reserve-v1/sprites/hobby-violin-winter.png",
+      "packId": "hobby-reserve-v1"
+    },
+    {
+      "ordinal": 45,
+      "id": "hobby-chess-board-spring",
+      "nameZh": "春日·木制棋盘",
+      "path": "../hobby-reserve-v1/sprites/hobby-chess-board-spring.png",
+      "packId": "hobby-reserve-v1"
+    },
+    {
+      "ordinal": 46,
+      "id": "hobby-puzzle-tray-summer",
+      "nameZh": "夏日·拼图工作盘",
+      "path": "../hobby-reserve-v1/sprites/hobby-puzzle-tray-summer.png",
+      "packId": "hobby-reserve-v1"
+    },
+    {
+      "ordinal": 47,
+      "id": "hobby-camera-autumn",
+      "nameZh": "秋日·折叠皮腔相机",
+      "path": "../hobby-reserve-v1/sprites/hobby-camera-autumn.png",
+      "packId": "hobby-reserve-v1"
+    },
+    {
+      "ordinal": 48,
+      "id": "hobby-film-reels-winter",
+      "nameZh": "冬日·胶片卷陈列台",
+      "path": "../hobby-reserve-v1/sprites/hobby-film-reels-winter.png",
+      "packId": "hobby-reserve-v1"
+    },
+    {
+      "ordinal": 49,
+      "id": "travel-lighthouse-spring",
+      "nameZh": "春日·灯塔模型",
+      "path": "../travel-reserve-v1/sprites/travel-lighthouse-spring.png",
+      "packId": "travel-reserve-v1"
+    },
+    {
+      "ordinal": 50,
+      "id": "travel-sailboat-summer",
+      "nameZh": "夏日·帆船模型",
+      "path": "../travel-reserve-v1/sprites/travel-sailboat-summer.png",
+      "packId": "travel-reserve-v1"
+    },
+    {
+      "ordinal": 51,
+      "id": "travel-compass-autumn",
+      "nameZh": "秋日·翻盖指南针",
+      "path": "../travel-reserve-v1/sprites/travel-compass-autumn.png",
+      "packId": "travel-reserve-v1"
+    },
+    {
+      "ordinal": 52,
+      "id": "travel-globe-winter",
+      "nameZh": "冬日·古典地球仪",
+      "path": "../travel-reserve-v1/sprites/travel-globe-winter.png",
+      "packId": "travel-reserve-v1"
+    },
+    {
+      "ordinal": 53,
+      "id": "travel-shell-box-spring",
+      "nameZh": "春日·贝壳分格盒",
+      "path": "../travel-reserve-v1/sprites/travel-shell-box-spring.png",
+      "packId": "travel-reserve-v1"
+    },
+    {
+      "ordinal": 54,
+      "id": "travel-coral-summer",
+      "nameZh": "夏日·珊瑚枝标本",
+      "path": "../travel-reserve-v1/sprites/travel-coral-summer.png",
+      "packId": "travel-reserve-v1"
+    },
+    {
+      "ordinal": 55,
+      "id": "travel-mineral-plinth-autumn",
+      "nameZh": "秋日·矿石陈列底座",
+      "path": "../travel-reserve-v1/sprites/travel-mineral-plinth-autumn.png",
+      "packId": "travel-reserve-v1"
+    },
+    {
+      "ordinal": 56,
+      "id": "travel-geode-winter",
+      "nameZh": "冬日·晶洞切面座",
+      "path": "../travel-reserve-v1/sprites/travel-geode-winter.png",
+      "packId": "travel-reserve-v1"
+    },
+    {
+      "ordinal": 57,
+      "id": "travel-specimen-frame-spring",
+      "nameZh": "春日·植物标本框",
+      "path": "../travel-reserve-v1/sprites/travel-specimen-frame-spring.png",
+      "packId": "travel-reserve-v1"
+    },
+    {
+      "ordinal": 58,
+      "id": "travel-mushroom-study-summer",
+      "nameZh": "夏日·蘑菇标本座",
+      "path": "../travel-reserve-v1/sprites/travel-mushroom-study-summer.png",
+      "packId": "travel-reserve-v1"
+    },
+    {
+      "ordinal": 59,
+      "id": "travel-tea-hills-autumn",
+      "nameZh": "秋日·茶园山丘微景",
+      "path": "../travel-reserve-v1/sprites/travel-tea-hills-autumn.png",
+      "packId": "travel-reserve-v1"
+    },
+    {
+      "ordinal": 60,
+      "id": "travel-windmill-model-winter",
+      "nameZh": "冬日·石塔风车模型",
+      "path": "../travel-reserve-v1/sprites/travel-windmill-model-winter.png",
+      "packId": "travel-reserve-v1"
+    }
+  ]
+}

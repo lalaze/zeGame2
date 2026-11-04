@@ -1,0 +1,993 @@
+{
+  "schemaVersion": 1,
+  "packId": "seasonal-reserve-v1",
+  "generator": "scripts/build-seasonal-reserve.mjs",
+  "notes": "This file inventories generator-owned files only; excludes itself and any manually maintained gallery or README.",
+  "files": [
+    {
+      "path": "manifest.json",
+      "bytes": 174588,
+      "sha256": "47e4b29bd9c6dbdf29b7af3827c18cbb8576176a5de561a70c84a538270a26ec"
+    },
+    {
+      "path": "catalog.js",
+      "bytes": 115708,
+      "sha256": "7c3097bb4ca22db121f5b2783380bcf04a033a0f3167b6b7f745c905017b7393"
+    },
+    {
+      "path": "atlas.png",
+      "bytes": 84885,
+      "sha256": "63f0260b5b3e5d5a8ebd7f7ccabcbaa9a396e504583ed845b30a339455145f12"
+    },
+    {
+      "path": "contact-sheet.png",
+      "bytes": 115374,
+      "sha256": "80bf470cabcfa93e8b3f7e7a1339db5b5e90cba47e8cea586fe3d68ab5800ccf"
+    },
+    {
+      "path": "verification-report.json",
+      "bytes": 91413,
+      "sha256": "ac5a6fe01ce16cb22fdb49cb14d528e2b1b0d4fb62399bdd2616aea22d1c848f"
+    },
+    {
+      "path": "sprites/tea-cup-spring.png",
+      "bytes": 655,
+      "sha256": "5baf4082dfe9c08de722c808a981d4c8b1b0090c34e5049771e5e3999166fa15"
+    },
+    {
+      "path": "sprites/tea-cup-summer.png",
+      "bytes": 734,
+      "sha256": "4f47b908dfe3e3698d1317604f8d5948c1f1c71c691d95e16dac3d62d4b12287"
+    },
+    {
+      "path": "sprites/tea-cup-autumn.png",
+      "bytes": 662,
+      "sha256": "69febf34bb8ad1a18a396b984490aafd480be6e7674685ef2babc62d9292b6bd"
+    },
+    {
+      "path": "sprites/tea-cup-winter.png",
+      "bytes": 707,
+      "sha256": "8c8288b64f9f265a0f6f75baf229991d8fd956a6c392f91cd18d2ea6aaee5eb4"
+    },
+    {
+      "path": "sprites/iced-tumbler-spring.png",
+      "bytes": 728,
+      "sha256": "9fc3185c53c84c5c8ef03ee6f9de7fdc9b3836eaa92d67e6d7875ab7b7e5a4a9"
+    },
+    {
+      "path": "sprites/iced-tumbler-summer.png",
+      "bytes": 718,
+      "sha256": "61324eb3a22baf06b7c9ae5dced1aec3deeea24a744d8d6427f1685266b22f52"
+    },
+    {
+      "path": "sprites/iced-tumbler-autumn.png",
+      "bytes": 691,
+      "sha256": "177de378b99688e07e73153de053fce166808acd1a07abde286af57c81dbd8e3"
+    },
+    {
+      "path": "sprites/iced-tumbler-winter.png",
+      "bytes": 733,
+      "sha256": "42ec8eae48cefe7515b4f8636ff3028f2555e1efa8abb3674360c2d04b709113"
+    },
+    {
+      "path": "sprites/tea-pot-spring.png",
+      "bytes": 894,
+      "sha256": "d62df33d925d0b1a38914f4151200092bde600e863b35b8da64162b66d4ce197"
+    },
+    {
+      "path": "sprites/tea-pot-summer.png",
+      "bytes": 871,
+      "sha256": "eb09008a4ca9ffcd609eab14574c46499bf6aa22feb18550c4085477bd2799d7"
+    },
+    {
+      "path": "sprites/tea-pot-autumn.png",
+      "bytes": 850,
+      "sha256": "fd8fd928241c4160e3b95b94bc6439b0a7917f0181edd06d5f87589ef13b7229"
+    },
+    {
+      "path": "sprites/tea-pot-winter.png",
+      "bytes": 922,
+      "sha256": "ff81693d86c918d409e5c03e6b9a1f2b9a90960de33fd3ae6d7fca6903dc4c3b"
+    },
+    {
+      "path": "sprites/coffee-dripper-spring.png",
+      "bytes": 779,
+      "sha256": "9b4283390184933c2a6b47a6c3b41ae5dc7376485e2f244fa9a7f8b051aca963"
+    },
+    {
+      "path": "sprites/coffee-dripper-summer.png",
+      "bytes": 807,
+      "sha256": "f3cc682ce3c898a46570240100074460c9e56a13100ed5b043e234337d65eda8"
+    },
+    {
+      "path": "sprites/coffee-dripper-autumn.png",
+      "bytes": 792,
+      "sha256": "c3e0ba8932ee277f6ea80ff4f6b848d2a92b2fbef47929c03b91fa340479bced"
+    },
+    {
+      "path": "sprites/coffee-dripper-winter.png",
+      "bytes": 830,
+      "sha256": "9d1b20fe437d389f21bad89af821b04cb30268fa80ffeae28e2e509c1a818381"
+    },
+    {
+      "path": "sprites/parfait-spring.png",
+      "bytes": 829,
+      "sha256": "4d83d29ad6ad0c292aa67d94e61b64ab41b01e586d0396e4c897e9956c93a3cb"
+    },
+    {
+      "path": "sprites/parfait-summer.png",
+      "bytes": 851,
+      "sha256": "d6a09731c65d156fdb4f06c490348489b0dbd996f9d764b5355b736e73bb7d13"
+    },
+    {
+      "path": "sprites/parfait-autumn.png",
+      "bytes": 832,
+      "sha256": "1897e5f9453cdbcc373b8e3cffcf4eef9267dfbeb54bac1ddbd6c0b86e4d8b46"
+    },
+    {
+      "path": "sprites/parfait-winter.png",
+      "bytes": 858,
+      "sha256": "38d45406a3b99a7977b8be3b390ec79ec888fa251d040f4ecc4090a75eeb7b03"
+    },
+    {
+      "path": "sprites/cake-slice-spring.png",
+      "bytes": 783,
+      "sha256": "1ce11cb9f9cbdf6e4bb544a2ae2bf20d1f4135bb1a72e0db8604bb07a7c3c977"
+    },
+    {
+      "path": "sprites/cake-slice-summer.png",
+      "bytes": 810,
+      "sha256": "4f1a20c1de2b37180c796650742675f41bac5a1c5f8e4478ea22ebb4be3dda45"
+    },
+    {
+      "path": "sprites/cake-slice-autumn.png",
+      "bytes": 800,
+      "sha256": "029990c055641a075a2540dbd752aeadbe2d5cb7df50663ca9f3eb5594ba125c"
+    },
+    {
+      "path": "sprites/cake-slice-winter.png",
+      "bytes": 829,
+      "sha256": "ef26ba07b537e18fd201952d4dbcb61f15e0bba51a5904e0512b7d9eddd32b7e"
+    },
+    {
+      "path": "sprites/fruit-tart-spring.png",
+      "bytes": 825,
+      "sha256": "2d0ae0435154ded6c6219f86271a8bbf63a0323c5af35d7c3fa2b9173f91cb79"
+    },
+    {
+      "path": "sprites/fruit-tart-summer.png",
+      "bytes": 872,
+      "sha256": "5eec89f4acc8ec0b01e1e791000fb63042356cec10c9ef23744928fcf4e43c42"
+    },
+    {
+      "path": "sprites/fruit-tart-autumn.png",
+      "bytes": 810,
+      "sha256": "d2d3870fb64c6b63a16c31a61ac6d5727f24e2243445ee7aa3d620262f49872b"
+    },
+    {
+      "path": "sprites/fruit-tart-winter.png",
+      "bytes": 856,
+      "sha256": "66b51ef97f9921369d8b53be383d2ac4b47001596777db17c148171d5c29f58f"
+    },
+    {
+      "path": "sprites/croissant-spring.png",
+      "bytes": 773,
+      "sha256": "3647fb0b57fe781373887a93943175a98ed2cc8bb1a2fa9780e82b5f3625ec67"
+    },
+    {
+      "path": "sprites/croissant-summer.png",
+      "bytes": 785,
+      "sha256": "9a2df90d776e7d508faec239d6f0d2524af777ff9cf5558b81abb37572c09b30"
+    },
+    {
+      "path": "sprites/croissant-autumn.png",
+      "bytes": 791,
+      "sha256": "bd648385c94e925447a8c80c1278917792581ac87208b546108f53b9849a8aa6"
+    },
+    {
+      "path": "sprites/croissant-winter.png",
+      "bytes": 817,
+      "sha256": "39482169a611a0a6cd75421ece34d98a8b589ea112c25c348f6efb877aebf989"
+    },
+    {
+      "path": "sprites/bud-vase-spring.png",
+      "bytes": 617,
+      "sha256": "446c1fe8f2ebecee40127ccc6554b28a2601ed670cb8ae1cd346d8a57e7c33d3"
+    },
+    {
+      "path": "sprites/bud-vase-summer.png",
+      "bytes": 649,
+      "sha256": "8ae2bcfec3f6115ce46c23415328319c3a1482af608a9634ac801a3ddbc45111"
+    },
+    {
+      "path": "sprites/bud-vase-autumn.png",
+      "bytes": 641,
+      "sha256": "4bdbb6620b5c5a512e19d2cd6ce530be4002df00827c257091ee033301da3d95"
+    },
+    {
+      "path": "sprites/bud-vase-winter.png",
+      "bytes": 663,
+      "sha256": "c947216c7330e8ea7e7df45bf8c712b0bf40f057d089994ac9ef0e2fde10c1b3"
+    },
+    {
+      "path": "sprites/herb-pot-spring.png",
+      "bytes": 707,
+      "sha256": "e51de25c4ae49d2c2dadd832a7484b4b8e87516e3fa7d0ba818872bb0fa5f0e2"
+    },
+    {
+      "path": "sprites/herb-pot-summer.png",
+      "bytes": 731,
+      "sha256": "efc428645364d3353791f102d395c2fa42a1ecdf9ce0ba5df3059fd8428439a7"
+    },
+    {
+      "path": "sprites/herb-pot-autumn.png",
+      "bytes": 705,
+      "sha256": "d10193a69546e1c0993e3cc80ed9489d3303a3c1518b195987ab87aaeabd7198"
+    },
+    {
+      "path": "sprites/herb-pot-winter.png",
+      "bytes": 726,
+      "sha256": "5227005387b537e38b0050488f502fc781d013407cea8d32ed5dc00752cc4871"
+    },
+    {
+      "path": "sprites/watering-can-spring.png",
+      "bytes": 939,
+      "sha256": "29308a81164b3eec0a439548e273ea9af1b25a681d1c19c84e89eceeebb37425"
+    },
+    {
+      "path": "sprites/watering-can-summer.png",
+      "bytes": 948,
+      "sha256": "09049fe09de9c84eb495f3901f5974511df07f8af31045686e23f2c8dc506255"
+    },
+    {
+      "path": "sprites/watering-can-autumn.png",
+      "bytes": 950,
+      "sha256": "03d86058fe86330583a3428f51b1eb2ae42fc0024ed71a26cbfe375c179b6ce6"
+    },
+    {
+      "path": "sprites/watering-can-winter.png",
+      "bytes": 961,
+      "sha256": "ef999e366d9462cf4d41bf628158230f9544bf4569442b38d9d70cdc4517dddb"
+    },
+    {
+      "path": "sprites/terrarium-spring.png",
+      "bytes": 821,
+      "sha256": "8843b66ad7b8fdc6c4036cce186545ab62393bea4f6cd92f03228721914c99ed"
+    },
+    {
+      "path": "sprites/terrarium-summer.png",
+      "bytes": 847,
+      "sha256": "47ab759ad8ef3cd32b2a2b22157838501793ce425ae55584ca19b142281c1281"
+    },
+    {
+      "path": "sprites/terrarium-autumn.png",
+      "bytes": 846,
+      "sha256": "3c0760e790db55f2229e81690889a4231ed78efd902e7ab06cc5628ffaf0c54e"
+    },
+    {
+      "path": "sprites/terrarium-winter.png",
+      "bytes": 851,
+      "sha256": "ea2f0cb21841f3924382f8ae3eda3dafbc6a577a6184e50394a488494eef11ee"
+    },
+    {
+      "path": "sprites/hanging-planter-spring.png",
+      "bytes": 880,
+      "sha256": "ca08fa033fb444426c7188d15b3cb162ea80bf1a008738e6a395f12ff367da34"
+    },
+    {
+      "path": "sprites/hanging-planter-summer.png",
+      "bytes": 875,
+      "sha256": "d951bf91c09318a150fed0fdc2912bf3a74fe5f2bca92846f6aeeadffaed83d4"
+    },
+    {
+      "path": "sprites/hanging-planter-autumn.png",
+      "bytes": 880,
+      "sha256": "8a116aa577cd4cee8057d5558b6ea95a597a62befc83459c1a9f6866b10ecdaa"
+    },
+    {
+      "path": "sprites/hanging-planter-winter.png",
+      "bytes": 875,
+      "sha256": "840714b640a53bdc209247f9f3dc5851c81f9ec4a87e877aedfa9713ab6cad56"
+    },
+    {
+      "path": "sprites/bonsai-spring.png",
+      "bytes": 730,
+      "sha256": "a974747cf6571dccfa9cdfb991e7464818fc32fedc25d81c7a3d57adac71cf79"
+    },
+    {
+      "path": "sprites/bonsai-summer.png",
+      "bytes": 744,
+      "sha256": "2bf9fc4716bef0f5fb6940f75d80517831304a2cad158d35f5e2fb87611ec470"
+    },
+    {
+      "path": "sprites/bonsai-autumn.png",
+      "bytes": 741,
+      "sha256": "90832958d2a997795936a8becb3e4eaab3603415a94ef8d69473f1a5c6797a7b"
+    },
+    {
+      "path": "sprites/bonsai-winter.png",
+      "bytes": 773,
+      "sha256": "f448a9501bebed2e4d83c8c1925b510823586ecf06a81fdcb560839f9e1ef2fa"
+    },
+    {
+      "path": "sprites/flower-basket-spring.png",
+      "bytes": 1002,
+      "sha256": "e7aca87fc55ac7c5b01a09986c5cfe842a469e507606eea3cf3afe63027fcc51"
+    },
+    {
+      "path": "sprites/flower-basket-summer.png",
+      "bytes": 1021,
+      "sha256": "155157b7e5fab0bcfd590ceb77ff82158b1e573ae19f99e3bda2608270eac01b"
+    },
+    {
+      "path": "sprites/flower-basket-autumn.png",
+      "bytes": 1025,
+      "sha256": "dcb7b1bfd19846adef96f566cff2c96eec4ee1d396acf623afa3f78b9143e9a6"
+    },
+    {
+      "path": "sprites/flower-basket-winter.png",
+      "bytes": 1040,
+      "sha256": "4c614e65eeb6fb3276437ee43e9731905651a1f64fd7c34ce4c23a9776e3b5fa"
+    },
+    {
+      "path": "sprites/propagation-rack-spring.png",
+      "bytes": 671,
+      "sha256": "47e0f950ba56e1f58a02c50f0dc440a7a63847a6e7a38582396d8e48b135a11b"
+    },
+    {
+      "path": "sprites/propagation-rack-summer.png",
+      "bytes": 695,
+      "sha256": "db58797c8ebe2ce0a47a7f8dcc88a719375564ca041a1e1b023e2107bf104e0b"
+    },
+    {
+      "path": "sprites/propagation-rack-autumn.png",
+      "bytes": 673,
+      "sha256": "b178040e10eaa5147331d1e9f3158943b20226dc64e9f95d9ba22fb9c9a9b860"
+    },
+    {
+      "path": "sprites/propagation-rack-winter.png",
+      "bytes": 741,
+      "sha256": "249b736ccb88bcb3854bbc5b5da2dc6c67c07b723537b1ac6cdd08b02a7d8911"
+    },
+    {
+      "path": "sprites/ribbon-box-spring.png",
+      "bytes": 580,
+      "sha256": "b27df443b6d97bebd5023ba0c3bb33eec871bb7549042209b3e03501cb68acb4"
+    },
+    {
+      "path": "sprites/ribbon-box-summer.png",
+      "bytes": 579,
+      "sha256": "1804c577af8e79c25e7f93d6d4635a802e7040c7ae564d51c294d74b8561b853"
+    },
+    {
+      "path": "sprites/ribbon-box-autumn.png",
+      "bytes": 583,
+      "sha256": "6f92af9bcf5f8c2b494ef902bc21341830db11e6d880a753e19d085a76bb83cd"
+    },
+    {
+      "path": "sprites/ribbon-box-winter.png",
+      "bytes": 612,
+      "sha256": "48e9515c46fe971431a233167d8679b2ac2a6da0f5d01066ec064e3a9d6e2aea"
+    },
+    {
+      "path": "sprites/paper-bag-spring.png",
+      "bytes": 651,
+      "sha256": "1b0d86c0adb33ef7f9845008fe41e3c20bc7fa826a7aac6e1a4565f490a7dbef"
+    },
+    {
+      "path": "sprites/paper-bag-summer.png",
+      "bytes": 670,
+      "sha256": "fcd0fbab1f30e22f610c3e1510eb5ef328e291e67ebd127332f1a5774e426c22"
+    },
+    {
+      "path": "sprites/paper-bag-autumn.png",
+      "bytes": 653,
+      "sha256": "43c67a7e6604ffc3985a6c4b8b8a814bb08e65abacdb7fe68926e3aa1690969d"
+    },
+    {
+      "path": "sprites/paper-bag-winter.png",
+      "bytes": 690,
+      "sha256": "3d6d768f6e68e897588e8b7c3fcb74c9189f0b3cd980f8316bfccc370a258ef7"
+    },
+    {
+      "path": "sprites/picnic-basket-spring.png",
+      "bytes": 696,
+      "sha256": "20032220e6cdc4f4e668ce67d45af874610883f7615c6577f7e29582491f748e"
+    },
+    {
+      "path": "sprites/picnic-basket-summer.png",
+      "bytes": 679,
+      "sha256": "247caa96983c5466fadbb10dcca8165e307c66f007dcc5e735652b992c080b35"
+    },
+    {
+      "path": "sprites/picnic-basket-autumn.png",
+      "bytes": 667,
+      "sha256": "2f678817adf81270ec5728c4f28c29f9d715497ab2df4d0b1bf2f4c56449d629"
+    },
+    {
+      "path": "sprites/picnic-basket-winter.png",
+      "bytes": 701,
+      "sha256": "efa983d97f70b2a1eb22773c85f4b8b92d726195cebb8571380c1bdd4b94621c"
+    },
+    {
+      "path": "sprites/bento-spring.png",
+      "bytes": 721,
+      "sha256": "027768723e7b210ea25d7c9b943402d42a3f3f39f3302b1b9847f821f0318d96"
+    },
+    {
+      "path": "sprites/bento-summer.png",
+      "bytes": 693,
+      "sha256": "27548449c1ed1a84abba56bf9cc07d02e492639b50f505bc248a9ea00d2f7795"
+    },
+    {
+      "path": "sprites/bento-autumn.png",
+      "bytes": 716,
+      "sha256": "e21a45801b545344f6c3257f21da8d6743a2b3eeb7742a909b25fc91890e408a"
+    },
+    {
+      "path": "sprites/bento-winter.png",
+      "bytes": 740,
+      "sha256": "a80ad855dc5b27c6ec027e8eda953196b2483664af908b095b359def6beda5c0"
+    },
+    {
+      "path": "sprites/cup-carrier-spring.png",
+      "bytes": 715,
+      "sha256": "15d7ae19f02721e8f55a4e32b8b9133ec8fbe1c21189fb62e683ac017ff38bea"
+    },
+    {
+      "path": "sprites/cup-carrier-summer.png",
+      "bytes": 747,
+      "sha256": "c4b4b7da46a0f619e1ed6dcf45b10a7a8288966df9113ea163e2e6d1a7f77535"
+    },
+    {
+      "path": "sprites/cup-carrier-autumn.png",
+      "bytes": 711,
+      "sha256": "56aac225a897774ec9ab0584248fe4c5166b885c86dc217bb6ee931d19cb6d5c"
+    },
+    {
+      "path": "sprites/cup-carrier-winter.png",
+      "bytes": 759,
+      "sha256": "0bc482e3300a46354ffdbc9d22660e263374d721392ce4a123e21617a31a9969"
+    },
+    {
+      "path": "sprites/cookie-tin-spring.png",
+      "bytes": 918,
+      "sha256": "3825c1406b3733e4a7e0163eb76dcab0b4a707e6606260d802ed5ee2a7d1b244"
+    },
+    {
+      "path": "sprites/cookie-tin-summer.png",
+      "bytes": 908,
+      "sha256": "8df22fda3720c11b4b4b2ab5d9483facaecc1f5c9186f33a37191d992f0606b4"
+    },
+    {
+      "path": "sprites/cookie-tin-autumn.png",
+      "bytes": 915,
+      "sha256": "49d751158582f53e155152b396d2bdf1027c63f390473a72b902f60da919be36"
+    },
+    {
+      "path": "sprites/cookie-tin-winter.png",
+      "bytes": 912,
+      "sha256": "304fc8cbc61a7975ac5b15cddc6da342f2a6d3c7bd4805d48faaa8d3eb51cd98"
+    },
+    {
+      "path": "sprites/hamper-spring.png",
+      "bytes": 942,
+      "sha256": "29cb6f6a9db04314cf6511b501b25bf5d77fcec96b219f8a34a4d1c8b7aeafa3"
+    },
+    {
+      "path": "sprites/hamper-summer.png",
+      "bytes": 958,
+      "sha256": "40ae5360356d41c7cdd9e109576176d0de129ded9348f346d1ecc6a215a56480"
+    },
+    {
+      "path": "sprites/hamper-autumn.png",
+      "bytes": 958,
+      "sha256": "d8634df97503d2ff5542d2d071955e7fad46e8b683ee283ba5ad959aef1f0d90"
+    },
+    {
+      "path": "sprites/hamper-winter.png",
+      "bytes": 975,
+      "sha256": "5327c686cad87df8051b1ade2cdb224190ba64bdfac1f20881df8a66d091dfc2"
+    },
+    {
+      "path": "sprites/cake-box-spring.png",
+      "bytes": 679,
+      "sha256": "730ad483d0c09eac67235fbd7277839a0943a79f394f0766f3ba60a99ec37057"
+    },
+    {
+      "path": "sprites/cake-box-summer.png",
+      "bytes": 699,
+      "sha256": "0bf2a346370af127f9f5c7ad8814bd678c49f3411d14254417b8135b052a7dd6"
+    },
+    {
+      "path": "sprites/cake-box-autumn.png",
+      "bytes": 699,
+      "sha256": "8de179b4e1bcebc9b90f3e2992715eafbcbf4c50914eef58da91c0f13c6c9a70"
+    },
+    {
+      "path": "sprites/cake-box-winter.png",
+      "bytes": 730,
+      "sha256": "987919eacff6591a8e297068e3f1356183ab91c5b52c12895ae9135745633fdd"
+    },
+    {
+      "path": "sprites/armchair-spring.png",
+      "bytes": 797,
+      "sha256": "f860826d007bc6fe16f0dfdebf53ccd692171721ba03db4abff57d42e42e51b1"
+    },
+    {
+      "path": "sprites/armchair-summer.png",
+      "bytes": 793,
+      "sha256": "56c7628e78abfd91c8db73a51b0c468f5c1bba82fd53759ae1079bf7c30b8c3b"
+    },
+    {
+      "path": "sprites/armchair-autumn.png",
+      "bytes": 800,
+      "sha256": "434f44d66a955cf440383be79551faf6b9e47bf5e71bcda6e61400e50af8010b"
+    },
+    {
+      "path": "sprites/armchair-winter.png",
+      "bytes": 812,
+      "sha256": "dde5c519722e614fecac1c17ef8defc3b29d8459d2c09532adcd14f3f382961f"
+    },
+    {
+      "path": "sprites/floor-lamp-spring.png",
+      "bytes": 740,
+      "sha256": "cae11bdbec21eecbaca87c61de00daa7519e228d039716c72a4c534d8b7a8e67"
+    },
+    {
+      "path": "sprites/floor-lamp-summer.png",
+      "bytes": 776,
+      "sha256": "f5f11648d04926671096e9afba31a18c2f6f8c38bcfa7136b7bef8489783990d"
+    },
+    {
+      "path": "sprites/floor-lamp-autumn.png",
+      "bytes": 764,
+      "sha256": "23d78369708152bf8983d24cf3eb9b93846374fac57d1bf797e84ddf32695bd7"
+    },
+    {
+      "path": "sprites/floor-lamp-winter.png",
+      "bytes": 803,
+      "sha256": "31e7d6fa25720bce0112aae118e11eef93f13c6e796ecb5abb2acf1e8df9d502"
+    },
+    {
+      "path": "sprites/book-stack-spring.png",
+      "bytes": 570,
+      "sha256": "85d0c09f2f79ab7ef6b58bd5b493f637745048befc34b530abaa17bc3be3c957"
+    },
+    {
+      "path": "sprites/book-stack-summer.png",
+      "bytes": 598,
+      "sha256": "1106ca2576e3ad28e7548053a17713df287d80d22e18fc5fc51d37140b5b41b6"
+    },
+    {
+      "path": "sprites/book-stack-autumn.png",
+      "bytes": 570,
+      "sha256": "04968c154012ff95358c45a2cfb63cc34280825eaca8924472cde0042d98d3a8"
+    },
+    {
+      "path": "sprites/book-stack-winter.png",
+      "bytes": 630,
+      "sha256": "3b07c3c8ef2257722a43207e6a257d483f81e9c477ce0abf51b3b865ce0764e6"
+    },
+    {
+      "path": "sprites/open-book-spring.png",
+      "bytes": 676,
+      "sha256": "64d988820035d2fb05b307944a430d17cc305c205881b945e8a47e2d5faa524d"
+    },
+    {
+      "path": "sprites/open-book-summer.png",
+      "bytes": 689,
+      "sha256": "5725b6a599014541719a6f9a1ab4065336d915a59e2fe4c4cc5c43d298ccf1c4"
+    },
+    {
+      "path": "sprites/open-book-autumn.png",
+      "bytes": 679,
+      "sha256": "e0a7069c8b0fd4db98d0cd9ea172808cafcf533a0c2ec0e2ad559d50f8d1531a"
+    },
+    {
+      "path": "sprites/open-book-winter.png",
+      "bytes": 697,
+      "sha256": "01d0e0cd751258868f282e28919e9e74eefbcf6e2da04fc96e715ed03a9f5efd"
+    },
+    {
+      "path": "sprites/bookcase-spring.png",
+      "bytes": 656,
+      "sha256": "c812e49c8ce3357745464a5ee1a7f3b72bf66daabb661a9daf1eeb9b0b4a5739"
+    },
+    {
+      "path": "sprites/bookcase-summer.png",
+      "bytes": 711,
+      "sha256": "40916dd2a717cf461a3d2c7f0ab688320e66b588f5e08929c27963e11f62a975"
+    },
+    {
+      "path": "sprites/bookcase-autumn.png",
+      "bytes": 662,
+      "sha256": "095a58ef5fdbb937f1a2fb1dd696ba457670dc3b325e2d4f8a84ca1d97a48f93"
+    },
+    {
+      "path": "sprites/bookcase-winter.png",
+      "bytes": 719,
+      "sha256": "9fd8c6304005a98fce66f9a037061cfee21b5bcdc5602ea5ccde3aba5060f595"
+    },
+    {
+      "path": "sprites/side-table-spring.png",
+      "bytes": 775,
+      "sha256": "7b2ce696b834a762e184348a0868ef8ab08e3618fda2deecc4b6aa0da126aaa7"
+    },
+    {
+      "path": "sprites/side-table-summer.png",
+      "bytes": 785,
+      "sha256": "ec40d33ec6b6024ce093b5e7457cc9eecbd88422f2d1a6c0647304d9974a548c"
+    },
+    {
+      "path": "sprites/side-table-autumn.png",
+      "bytes": 777,
+      "sha256": "7d5535939874732e74c2027f57146e2f420b1d9c383d4fef9ebcc7e70f697f65"
+    },
+    {
+      "path": "sprites/side-table-winter.png",
+      "bytes": 794,
+      "sha256": "1d6153c2380785b0a4f3146cc7abff2f82f3c78bad681c2995e38476872fd2a5"
+    },
+    {
+      "path": "sprites/record-player-spring.png",
+      "bytes": 687,
+      "sha256": "52578456fc0568a01ab3ae8867a9b51d28457f148085bcc13b22f34eb681d568"
+    },
+    {
+      "path": "sprites/record-player-summer.png",
+      "bytes": 704,
+      "sha256": "e1bf73cd4eabe7550a12d3aadb1f4dcf0ac65c0a0551e962e0ba250e586b54c1"
+    },
+    {
+      "path": "sprites/record-player-autumn.png",
+      "bytes": 693,
+      "sha256": "fa6e2c94a31aa24f20ab12a9d8991fd88a601383b2306b83ad5c17e549b29dc3"
+    },
+    {
+      "path": "sprites/record-player-winter.png",
+      "bytes": 725,
+      "sha256": "f836893bb9eb143a453148e9eac04c9b2ad062ba120febe5b71d33f11edc08eb"
+    },
+    {
+      "path": "sprites/cushion-spring.png",
+      "bytes": 741,
+      "sha256": "b8823199078c9cd8b3423ff24eeba63018508423b46850b678f1e8c9cf1d2c02"
+    },
+    {
+      "path": "sprites/cushion-summer.png",
+      "bytes": 714,
+      "sha256": "6e6637aa000fa2d4c9624f7c832194d5d357356ab4f5db72bfa35c9d2b4e8d17"
+    },
+    {
+      "path": "sprites/cushion-autumn.png",
+      "bytes": 713,
+      "sha256": "124f69ef8e28b1df249134b71f6d2ecd0faf4ec29d4e178bca25c93aa956316c"
+    },
+    {
+      "path": "sprites/cushion-winter.png",
+      "bytes": 751,
+      "sha256": "a18db11d685992ccb0d6fc6bec2ca8caa230c6333d5c30cff9afff389f060cb0"
+    },
+    {
+      "path": "sprites/lantern-spring.png",
+      "bytes": 724,
+      "sha256": "16936f0c3a2e0fe91c1b22f882c11d677599394db26846450f4d67e0cdf9df34"
+    },
+    {
+      "path": "sprites/lantern-summer.png",
+      "bytes": 745,
+      "sha256": "a65ca233a21232f90b9a2a7ba513393410f6eadaaef40ca26a0e0e8207a6621b"
+    },
+    {
+      "path": "sprites/lantern-autumn.png",
+      "bytes": 718,
+      "sha256": "98422757c5388b04b3844cd0c594c4cefefbcd616a7d38c6f19b7bbee0561dd9"
+    },
+    {
+      "path": "sprites/lantern-winter.png",
+      "bytes": 755,
+      "sha256": "519fc06bc0d7eb6d38f54e002250f525c372dc4b73150e15a32d018cd192b81e"
+    },
+    {
+      "path": "sprites/candle-holder-spring.png",
+      "bytes": 740,
+      "sha256": "6d6f14e606f5a06df21c57986e174d9d4b4f673f8b58d5e081ac10832c0ba8f2"
+    },
+    {
+      "path": "sprites/candle-holder-summer.png",
+      "bytes": 728,
+      "sha256": "cd857b0ad20b10f577846ee1ca1b91253571f683fb38fb5c1371837a2d7f6b63"
+    },
+    {
+      "path": "sprites/candle-holder-autumn.png",
+      "bytes": 722,
+      "sha256": "0d4ea14c50d68522668e5de4a24c2b399127615982294d2b13b5b86da00739b5"
+    },
+    {
+      "path": "sprites/candle-holder-winter.png",
+      "bytes": 744,
+      "sha256": "0b8e974e2f82b1ba9f753ff2e4caed1134b99cae9b5610df1621b37f59781eee"
+    },
+    {
+      "path": "sprites/wreath-spring.png",
+      "bytes": 953,
+      "sha256": "ce30808991a85f8a4b9087ee8d337028d70a8980f97b53a351ec0070abc8ed4e"
+    },
+    {
+      "path": "sprites/wreath-summer.png",
+      "bytes": 1001,
+      "sha256": "11fa79256cceb9c9d689de39ae2762cdc3fb370fa76404cfacc65643c3c314a3"
+    },
+    {
+      "path": "sprites/wreath-autumn.png",
+      "bytes": 971,
+      "sha256": "b8e6804469f2cb56d9ca6c3e66f321b590188222476187310d74e581f2cfe0e1"
+    },
+    {
+      "path": "sprites/wreath-winter.png",
+      "bytes": 1134,
+      "sha256": "741a22650989cd1b9073c6ade4d5de23e92a8d1f3afa2c546cc5638c470d9f57"
+    },
+    {
+      "path": "sprites/bunting-stand-spring.png",
+      "bytes": 775,
+      "sha256": "9f797594dc1cb070be64547f42fb4fffe9302d167cbe26b2cd1368cece6275cf"
+    },
+    {
+      "path": "sprites/bunting-stand-summer.png",
+      "bytes": 754,
+      "sha256": "369c56244f91125ffada7abc77f45b62c6799687e0ae3d2674597a3c56abf587"
+    },
+    {
+      "path": "sprites/bunting-stand-autumn.png",
+      "bytes": 738,
+      "sha256": "64ec662852b94466c01c4b1ed032f462188df5c14c4993f312927f0fabf17a3d"
+    },
+    {
+      "path": "sprites/bunting-stand-winter.png",
+      "bytes": 765,
+      "sha256": "79fee9573ccb73f0c2fb471c89ea844e02c5b81c21466aaa0e16541993fcaab1"
+    },
+    {
+      "path": "sprites/snow-globe-spring.png",
+      "bytes": 780,
+      "sha256": "bcea7a2888c68040f544630b45ede9a7992841d1dd3e8715210da4b27dcd8ee7"
+    },
+    {
+      "path": "sprites/snow-globe-summer.png",
+      "bytes": 792,
+      "sha256": "5f324a7c2fee23641f0622a917b8f1671609ef0cdd20d0dd9185ebeabb591372"
+    },
+    {
+      "path": "sprites/snow-globe-autumn.png",
+      "bytes": 795,
+      "sha256": "32df3fbf822f6cca76e2d5ce81f0425a85d43690bfb82aea92e4efe0ce4ffc8b"
+    },
+    {
+      "path": "sprites/snow-globe-winter.png",
+      "bytes": 820,
+      "sha256": "c99f06cce099aa1d1664edba12f42c1e09d58cbc1e2c0139aa46eb4418f5f4eb"
+    },
+    {
+      "path": "sprites/music-box-spring.png",
+      "bytes": 786,
+      "sha256": "91f21362d1f8d4b568c1224f4b9a54ec93799b73feab9fc2a749ac3120947f49"
+    },
+    {
+      "path": "sprites/music-box-summer.png",
+      "bytes": 762,
+      "sha256": "54229f770c1d1ce67747a32c208f097447ccc76a12fe5b99a2bf06beb8597ac8"
+    },
+    {
+      "path": "sprites/music-box-autumn.png",
+      "bytes": 771,
+      "sha256": "05fd88e371a47b87d76d463fa1ebc46f75a3a93148abfe62477f9e136205ac5f"
+    },
+    {
+      "path": "sprites/music-box-winter.png",
+      "bytes": 787,
+      "sha256": "9ec4963dd1d0d94f7f64441b993546c16618af77078b079ea76cffb212ee3c59"
+    },
+    {
+      "path": "sprites/paper-pinwheel-spring.png",
+      "bytes": 783,
+      "sha256": "fc9cd2a55058994832b29182dc1ce892efe223f1e78a2ffecf252b6d751eeef8"
+    },
+    {
+      "path": "sprites/paper-pinwheel-summer.png",
+      "bytes": 790,
+      "sha256": "88b584d965e44289eb508da18f3d625de45b902894d44aaceedd65d5a946c649"
+    },
+    {
+      "path": "sprites/paper-pinwheel-autumn.png",
+      "bytes": 777,
+      "sha256": "8766158d27b8981cbadb3220573fb823245425ffd6cb4a28f3cfa73dff8fc831"
+    },
+    {
+      "path": "sprites/paper-pinwheel-winter.png",
+      "bytes": 806,
+      "sha256": "548e2fdd98c49c5cd0f3831fc521297dce1e814d90197ec795d2652bc5ce0a15"
+    },
+    {
+      "path": "sprites/miniature-house-spring.png",
+      "bytes": 816,
+      "sha256": "daebe01c3b0324af52b28f4b95d65b478b727fd7c14426de29c648452743e875"
+    },
+    {
+      "path": "sprites/miniature-house-summer.png",
+      "bytes": 827,
+      "sha256": "e84223e801661fee25a02b61c72ef81a5bcf10b76345e514d01e0cdfd32c3eb0"
+    },
+    {
+      "path": "sprites/miniature-house-autumn.png",
+      "bytes": 830,
+      "sha256": "6e92520a15fd883b0e0ffed537fcfddfba875e4d1156825b89a31f1c6dcae830"
+    },
+    {
+      "path": "sprites/miniature-house-winter.png",
+      "bytes": 856,
+      "sha256": "148ce2cd13faa2f2502e9c1df9b26c85358a287aebcfc8757202ee73eaa31ac0"
+    },
+    {
+      "path": "sprites/cat-bed-spring.png",
+      "bytes": 744,
+      "sha256": "48fd380988c205b96f4d1d61c8b002e6f61ebe877a965982f29e653b3bb6a322"
+    },
+    {
+      "path": "sprites/cat-bed-summer.png",
+      "bytes": 754,
+      "sha256": "18e774928375e2b8cd92659c8f50bd0ec1e66acf8055f456596d5063dd0f0070"
+    },
+    {
+      "path": "sprites/cat-bed-autumn.png",
+      "bytes": 768,
+      "sha256": "3b8e3d88c6e675ee73c0ca8901868fa886ccd321d45c143a33c35c2dc15289c4"
+    },
+    {
+      "path": "sprites/cat-bed-winter.png",
+      "bytes": 781,
+      "sha256": "f8d0fae57a887e9dbcc4070e839b7e318376e76a0d42d6f345af557864a1c2ab"
+    },
+    {
+      "path": "sprites/scratching-post-spring.png",
+      "bytes": 693,
+      "sha256": "9de0cfac45ee2c025174dd5898e65551bb87a742e5b5305c6c32df4af79190fb"
+    },
+    {
+      "path": "sprites/scratching-post-summer.png",
+      "bytes": 682,
+      "sha256": "5fbe11981da348108eaef4a34dc5669a6567192ad096c0e871be9ee6e1d81696"
+    },
+    {
+      "path": "sprites/scratching-post-autumn.png",
+      "bytes": 669,
+      "sha256": "894b62ec04827d2426b4ab568990bcfd1613ec7aa8c1d8269ac06e8892c9bfb4"
+    },
+    {
+      "path": "sprites/scratching-post-winter.png",
+      "bytes": 718,
+      "sha256": "a33a02ce57cf0ad3388c3ea03d1a7c6638c7a756c926126b3304dd905f2a0c0c"
+    },
+    {
+      "path": "sprites/food-bowls-spring.png",
+      "bytes": 615,
+      "sha256": "c867de9570a416bf71c69b56ba5b190bf42bd3116a8231a6ab78cafce1c70a4e"
+    },
+    {
+      "path": "sprites/food-bowls-summer.png",
+      "bytes": 623,
+      "sha256": "f6319a2580d25b805a4cce5b3f13667fa74b2c6c4da8f13315d11511fac3af80"
+    },
+    {
+      "path": "sprites/food-bowls-autumn.png",
+      "bytes": 599,
+      "sha256": "20991d64de17e7d6f40232c3f0fe8401b301cdefb438afd10c3d38577d119dfd"
+    },
+    {
+      "path": "sprites/food-bowls-winter.png",
+      "bytes": 616,
+      "sha256": "6d924da427f75ac14505dafdafde0386a3007ae25f45d6a7ef3b9d748becbdd9"
+    },
+    {
+      "path": "sprites/fish-toy-spring.png",
+      "bytes": 714,
+      "sha256": "5e104020cdc20639125275bf4d3e1fc1e63c68126b337ec87859427ae4ff8be1"
+    },
+    {
+      "path": "sprites/fish-toy-summer.png",
+      "bytes": 739,
+      "sha256": "f89b6ad1e07cfcf08f4852573c5ef21f61eeff4abcac27fd76126966984b6107"
+    },
+    {
+      "path": "sprites/fish-toy-autumn.png",
+      "bytes": 736,
+      "sha256": "fe3c7e32badca196cca95433d8a912cee17090ada98b4b0529766332cdcc7d28"
+    },
+    {
+      "path": "sprites/fish-toy-winter.png",
+      "bytes": 790,
+      "sha256": "b569ce2bc65a4368287f61f1417c0c0e64400a8bfedd0bb834fef8d1dd9f3f32"
+    },
+    {
+      "path": "sprites/cat-tunnel-spring.png",
+      "bytes": 936,
+      "sha256": "6633c667480676ac3a26b14f095c45bef64e20828e34a2daf4a129cd0f263b7c"
+    },
+    {
+      "path": "sprites/cat-tunnel-summer.png",
+      "bytes": 962,
+      "sha256": "ffef688d39157b1fc3c4deafa1b6fa090263f8d6e353300a478988ee98d326b0"
+    },
+    {
+      "path": "sprites/cat-tunnel-autumn.png",
+      "bytes": 940,
+      "sha256": "8683a94a20bc90687c83d5c0463d1d42cdff2110d7fb4c57f20ee29334136779"
+    },
+    {
+      "path": "sprites/cat-tunnel-winter.png",
+      "bytes": 999,
+      "sha256": "a5c06578213c863075304d758acead6fef66139ab00550bd8d5aa1333283dfca"
+    },
+    {
+      "path": "sprites/climbing-tree-spring.png",
+      "bytes": 811,
+      "sha256": "f03ba13c1e11ed3f333005be59cb4d56d6577f00bf9fdc14684199f670b3c250"
+    },
+    {
+      "path": "sprites/climbing-tree-summer.png",
+      "bytes": 833,
+      "sha256": "99ca7479e5749ce615d8f6e5a6197fee0e0eafd316c2fb00ceee27a029d65c6f"
+    },
+    {
+      "path": "sprites/climbing-tree-autumn.png",
+      "bytes": 817,
+      "sha256": "8c5eeefeeaa8b80983f3c343c287d1e807632ba9b3f569b02953209169be9185"
+    },
+    {
+      "path": "sprites/climbing-tree-winter.png",
+      "bytes": 854,
+      "sha256": "9bcc79e06e8a1d6700572893d9a773d894ee599f37f7ee7d8d08211da6435e0a"
+    },
+    {
+      "path": "sprites/cat-carrier-spring.png",
+      "bytes": 816,
+      "sha256": "c8ca6b7b07ae2cd919c8de20d212ee45d3ac7acc628f4deabd66d5e7628848d9"
+    },
+    {
+      "path": "sprites/cat-carrier-summer.png",
+      "bytes": 832,
+      "sha256": "ba94342ae2b8fe61f158865da1fa05c6333b1c53db73b4a0519c85149e4a762d"
+    },
+    {
+      "path": "sprites/cat-carrier-autumn.png",
+      "bytes": 835,
+      "sha256": "02b0feb123d6a0109366926c7b8bcb9dcb1261c664b91f13c88519e773c572ca"
+    },
+    {
+      "path": "sprites/cat-carrier-winter.png",
+      "bytes": 864,
+      "sha256": "d6313c7489e123806aa166813bd70f34528be7db13edb50f0176628e88db41df"
+    },
+    {
+      "path": "sprites/yarn-basket-spring.png",
+      "bytes": 811,
+      "sha256": "e885f8dce0f9f975b8bbe39ac44b80da3309f189f1fda6f598e6ff4bfd7b7587"
+    },
+    {
+      "path": "sprites/yarn-basket-summer.png",
+      "bytes": 808,
+      "sha256": "94371bc57acd045ac2faba409d1de69c2ca0a72664f935a125837ab34e040227"
+    },
+    {
+      "path": "sprites/yarn-basket-autumn.png",
+      "bytes": 801,
+      "sha256": "b62b3ea57defe65cb5477e78f42d872b468fdffe5c7d4a42c43f4dc1a9f7aa1d"
+    },
+    {
+      "path": "sprites/yarn-basket-winter.png",
+      "bytes": 836,
+      "sha256": "58d26bc58ef92acfcaf31f5a9cf63c05dd4a5908bef4cf89b0b71ce753cc0b04"
+    }
+  ]
+}

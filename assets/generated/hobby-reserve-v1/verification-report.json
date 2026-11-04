@@ -1,0 +1,2344 @@
+{
+  "schemaVersion": 1,
+  "packId": "hobby-reserve-v1",
+  "status": "passed",
+  "counts": {
+    "sprites": 192,
+    "baseShapes": 48,
+    "variantsPerBase": 4,
+    "categories": 6,
+    "distinctBaseSilhouettes": 48,
+    "nonRecolorVariantPairs": 288,
+    "atlasPixelsCompared": 1769472
+  },
+  "checks": {
+    "sourcePreflight": true,
+    "dimensions": true,
+    "nativeDensity2": true,
+    "binaryAlpha": true,
+    "masterPalette": true,
+    "transparentPadding3": true,
+    "noExactDuplicates": true,
+    "noPureRecolorVariants": true,
+    "distinctBaseSilhouettes": true,
+    "stableAnchors": true,
+    "safePaths": true,
+    "deterministicSourceRendering": true,
+    "pngDecode": true,
+    "atlasReadback": true,
+    "contactSheetReadback": true,
+    "offlineCatalog": true,
+    "reserveNotIntegrated": true
+  },
+  "sprites": [
+    {
+      "id": "hobby-typewriter-spring",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 65,
+        "height": 69
+      },
+      "opaquePixels": 3179,
+      "colors": 13,
+      "pixelSha256": "d908e0e8942b6e6d197d206cf4f327e77bad060c8f91f1456eda498248c1ff19"
+    },
+    {
+      "id": "hobby-typewriter-summer",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 65,
+        "height": 69
+      },
+      "opaquePixels": 3179,
+      "colors": 13,
+      "pixelSha256": "250abb1c597991386ca10bd1ceaa65a8ea7039b0686cca398a5df054c50fe61d"
+    },
+    {
+      "id": "hobby-typewriter-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 65,
+        "height": 69
+      },
+      "opaquePixels": 3179,
+      "colors": 14,
+      "pixelSha256": "4538d3862b5475d08a59cd88bc8327ab24544bc1843763cdce5b7a1386768fea"
+    },
+    {
+      "id": "hobby-typewriter-winter",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 65,
+        "height": 69
+      },
+      "opaquePixels": 3179,
+      "colors": 14,
+      "pixelSha256": "3308085816a203a6febe52e333b9ca817aee43f2dc22592b49f9c298a707c762"
+    },
+    {
+      "id": "hobby-quill-ink-spring",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 1706,
+      "colors": 13,
+      "pixelSha256": "d9645a7f8d9a65617047606af77d2fb091ae2d741c727c783bf4c19c8ced76c4"
+    },
+    {
+      "id": "hobby-quill-ink-summer",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 1785,
+      "colors": 13,
+      "pixelSha256": "e8e2fc6ad86ec7c6d733d8c39bd839ef71bb48269189fa2da84c753232239cbb"
+    },
+    {
+      "id": "hobby-quill-ink-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 1715,
+      "colors": 15,
+      "pixelSha256": "285a0b556b042f0cdb3bd74d3a8502b0348a9a976e0d83c34f5658fe375ea32e"
+    },
+    {
+      "id": "hobby-quill-ink-winter",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 1797,
+      "colors": 12,
+      "pixelSha256": "9bcb3ca933df6d993012d3aada39e4429780e70e214a2c5709a29be6b5681900"
+    },
+    {
+      "id": "hobby-pen-tray-spring",
+      "bounds": {
+        "x": 16,
+        "y": 37,
+        "width": 64,
+        "height": 47
+      },
+      "opaquePixels": 2659,
+      "colors": 10,
+      "pixelSha256": "4550f924bbd05c2e08c645853ea41e0049634d5068ed93c9474704d1b42c2f68"
+    },
+    {
+      "id": "hobby-pen-tray-summer",
+      "bounds": {
+        "x": 16,
+        "y": 37,
+        "width": 64,
+        "height": 47
+      },
+      "opaquePixels": 2661,
+      "colors": 10,
+      "pixelSha256": "3aac18dbd543068fef6131eb2af180cf96c494540561fe844de5dae8da6002f6"
+    },
+    {
+      "id": "hobby-pen-tray-autumn",
+      "bounds": {
+        "x": 16,
+        "y": 37,
+        "width": 64,
+        "height": 47
+      },
+      "opaquePixels": 2657,
+      "colors": 12,
+      "pixelSha256": "a8e3f7e4478db3aa329c939aa578afb0ac88a5401d0e6c0ec0adab240bcf2e25"
+    },
+    {
+      "id": "hobby-pen-tray-winter",
+      "bounds": {
+        "x": 16,
+        "y": 25,
+        "width": 64,
+        "height": 59
+      },
+      "opaquePixels": 3283,
+      "colors": 12,
+      "pixelSha256": "2703f4bd69ef5fd217d79e43c97c58edf1cc3fc737951d8aec743ad5c09cb4a9"
+    },
+    {
+      "id": "hobby-seal-press-spring",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 1742,
+      "colors": 15,
+      "pixelSha256": "1db8cee9ff8b9aa806eeda03df0bd270a2ca97dc1d6cca4640ce70bd31e5de42"
+    },
+    {
+      "id": "hobby-seal-press-summer",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 1734,
+      "colors": 15,
+      "pixelSha256": "5b69a70eb37b4ec699808b41f99648eb0bdfe4e50d859446d40e120c812f2436"
+    },
+    {
+      "id": "hobby-seal-press-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 1725,
+      "colors": 15,
+      "pixelSha256": "18dd92b08c6d4f9e0d99350363c702c8cdd3c0d56126453b5c2a73d000a73390"
+    },
+    {
+      "id": "hobby-seal-press-winter",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 1718,
+      "colors": 15,
+      "pixelSha256": "d13d659cce3beffc766dbbd53976a4f05646a7e1b08511020670827f5acbb718"
+    },
+    {
+      "id": "hobby-letter-rack-spring",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2482,
+      "colors": 12,
+      "pixelSha256": "853aa8d8880a7bb55b523d5c2ffff9009803647d7b277890e90d7581474782de"
+    },
+    {
+      "id": "hobby-letter-rack-summer",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2566,
+      "colors": 11,
+      "pixelSha256": "aacf4317ada4e74f712621cfac90fca8ed9ff65dda24fa99a8c4b322d4062bf7"
+    },
+    {
+      "id": "hobby-letter-rack-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 2740,
+      "colors": 10,
+      "pixelSha256": "b0af24feb1e3c86e5c02b8344d94d8befa87ac4fdd09d1675f20b800d7e66b82"
+    },
+    {
+      "id": "hobby-letter-rack-winter",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 2521,
+      "colors": 13,
+      "pixelSha256": "524150f5cfa59a3ca931a03696109d86fafc6cb24ceb78b70c97baf4da8ac7a3"
+    },
+    {
+      "id": "hobby-calligraphy-rest-spring",
+      "bounds": {
+        "x": 16,
+        "y": 19,
+        "width": 63,
+        "height": 65
+      },
+      "opaquePixels": 2044,
+      "colors": 9,
+      "pixelSha256": "32640a6458f2aaf86aa94052887cdf8ec946d87dd68f695167fa06e196037d87"
+    },
+    {
+      "id": "hobby-calligraphy-rest-summer",
+      "bounds": {
+        "x": 16,
+        "y": 33,
+        "width": 63,
+        "height": 51
+      },
+      "opaquePixels": 1755,
+      "colors": 9,
+      "pixelSha256": "eefbcf3b737e596b8e4d14bb06a614388c61814ec7d7278728c2007d61280b37"
+    },
+    {
+      "id": "hobby-calligraphy-rest-autumn",
+      "bounds": {
+        "x": 16,
+        "y": 23,
+        "width": 63,
+        "height": 61
+      },
+      "opaquePixels": 1820,
+      "colors": 11,
+      "pixelSha256": "54ce2b07238aab5c512c96535b609bbf1db07369972189ac0f0cd606f4655e18"
+    },
+    {
+      "id": "hobby-calligraphy-rest-winter",
+      "bounds": {
+        "x": 16,
+        "y": 18,
+        "width": 63,
+        "height": 66
+      },
+      "opaquePixels": 2079,
+      "colors": 9,
+      "pixelSha256": "d4093478a401607a26c36c1b07ad1acc2a2d1acda464321402d0b56744352c3c"
+    },
+    {
+      "id": "hobby-pencil-sharpener-spring",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 63,
+        "height": 70
+      },
+      "opaquePixels": 2386,
+      "colors": 15,
+      "pixelSha256": "34101845e669474de3667210f268a28c8f1761e9356ff5b100eb77420dd67def"
+    },
+    {
+      "id": "hobby-pencil-sharpener-summer",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 63,
+        "height": 70
+      },
+      "opaquePixels": 2388,
+      "colors": 15,
+      "pixelSha256": "ac628940d2464c26defac36e9103efd34d1b336b1eaee7c9ee753970cf353449"
+    },
+    {
+      "id": "hobby-pencil-sharpener-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 63,
+        "height": 70
+      },
+      "opaquePixels": 2392,
+      "colors": 15,
+      "pixelSha256": "c65f55077a26054f566d3d6bafcb9284f9dff2ad87ccd6a2a1b06bf36fb772da"
+    },
+    {
+      "id": "hobby-pencil-sharpener-winter",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 63,
+        "height": 70
+      },
+      "opaquePixels": 2398,
+      "colors": 15,
+      "pixelSha256": "7705b1e629650a67b24ec626c3cc980139e2c2dd165126cbcb59ddc1fd36ab26"
+    },
+    {
+      "id": "hobby-bookmark-stand-spring",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 1981,
+      "colors": 12,
+      "pixelSha256": "1b08b7a22931e848b0fd42e4623e9846140adedc92e4e04011ad0d3e1437a165"
+    },
+    {
+      "id": "hobby-bookmark-stand-summer",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 1981,
+      "colors": 12,
+      "pixelSha256": "983d182e857b913d1d5da15368fd677bb29be9c73addb60aec8db464d45efd67"
+    },
+    {
+      "id": "hobby-bookmark-stand-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 1981,
+      "colors": 12,
+      "pixelSha256": "12046aa165c36fa9fd34d2b9e72de5933bc7e5f4704fa42570f4111302c224d6"
+    },
+    {
+      "id": "hobby-bookmark-stand-winter",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 1996,
+      "colors": 12,
+      "pixelSha256": "4aa501d5b2425422057b90713dd7b02c90b22b69590d23c0c0fc7f0ea131a1a0"
+    },
+    {
+      "id": "hobby-easel-spring",
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 61,
+        "height": 68
+      },
+      "opaquePixels": 2557,
+      "colors": 16,
+      "pixelSha256": "bd915c3fdcc16bfc1d524c169fc785d2ddaef90711131757b2dbf3483b101cf3"
+    },
+    {
+      "id": "hobby-easel-summer",
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 61,
+        "height": 68
+      },
+      "opaquePixels": 2700,
+      "colors": 14,
+      "pixelSha256": "d2d2cfd3d1e16ed2956c1b6241e4f3d2ebcccd98b9195069f17acd3c80c10601"
+    },
+    {
+      "id": "hobby-easel-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 61,
+        "height": 68
+      },
+      "opaquePixels": 2577,
+      "colors": 14,
+      "pixelSha256": "0638b7b113c8aa8084811627a5c2fde23e2332cd60dd5ed000df00744b10d570"
+    },
+    {
+      "id": "hobby-easel-winter",
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 61,
+        "height": 68
+      },
+      "opaquePixels": 2557,
+      "colors": 15,
+      "pixelSha256": "0fe0b1b44053414c688816ac60d584dcf7cf6d5f7a09678fb5d0698415f5c698"
+    },
+    {
+      "id": "hobby-palette-spring",
+      "bounds": {
+        "x": 18,
+        "y": 10,
+        "width": 61,
+        "height": 74
+      },
+      "opaquePixels": 2453,
+      "colors": 13,
+      "pixelSha256": "2f292831a389e6e7712aabbbfa41b5e0115367494c49a8a05c4ce3879e00b948"
+    },
+    {
+      "id": "hobby-palette-summer",
+      "bounds": {
+        "x": 18,
+        "y": 10,
+        "width": 61,
+        "height": 74
+      },
+      "opaquePixels": 2454,
+      "colors": 13,
+      "pixelSha256": "9f3cbefba09c9e56d1b59b72d8a6854310a431c2c0eabacead301211a320c6c7"
+    },
+    {
+      "id": "hobby-palette-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 10,
+        "width": 65,
+        "height": 74
+      },
+      "opaquePixels": 2550,
+      "colors": 16,
+      "pixelSha256": "4ce509dfd74d7257a9d70d5945103597f9a444c7b5a35ab2e42a6934cdcb1f7f"
+    },
+    {
+      "id": "hobby-palette-winter",
+      "bounds": {
+        "x": 18,
+        "y": 10,
+        "width": 61,
+        "height": 74
+      },
+      "opaquePixels": 2453,
+      "colors": 13,
+      "pixelSha256": "ff2aed5cf0d1cc9144cc9c011a83bad0f74d7f6f94310b9d17e8fdad0b5781b1"
+    },
+    {
+      "id": "hobby-paint-tubes-spring",
+      "bounds": {
+        "x": 17,
+        "y": 24,
+        "width": 63,
+        "height": 60
+      },
+      "opaquePixels": 3448,
+      "colors": 15,
+      "pixelSha256": "03717c66826446b9ab5d3c06f23ccf472027243707406a7297971c3f126fcd44"
+    },
+    {
+      "id": "hobby-paint-tubes-summer",
+      "bounds": {
+        "x": 17,
+        "y": 24,
+        "width": 63,
+        "height": 60
+      },
+      "opaquePixels": 3448,
+      "colors": 14,
+      "pixelSha256": "5cd170f123ff2326767197f6fc9749dc00995bae540f769bb79717dff5aa2e10"
+    },
+    {
+      "id": "hobby-paint-tubes-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 24,
+        "width": 63,
+        "height": 60
+      },
+      "opaquePixels": 3449,
+      "colors": 15,
+      "pixelSha256": "d2ac9ab9da45df313aec08ea8de579c5f4beb2a02593ad2e7922768b1318647e"
+    },
+    {
+      "id": "hobby-paint-tubes-winter",
+      "bounds": {
+        "x": 17,
+        "y": 24,
+        "width": 63,
+        "height": 60
+      },
+      "opaquePixels": 3448,
+      "colors": 16,
+      "pixelSha256": "65b163897c7d974b071f910cb4bfa22c6c224294e3146a404c45e2eb81bcc299"
+    },
+    {
+      "id": "hobby-brush-roll-spring",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 66,
+        "height": 70
+      },
+      "opaquePixels": 2923,
+      "colors": 11,
+      "pixelSha256": "03763f92759e48596a7368eeed282fae6aec330c6df931f3c1c6e99de8985c1c"
+    },
+    {
+      "id": "hobby-brush-roll-summer",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 66,
+        "height": 70
+      },
+      "opaquePixels": 2941,
+      "colors": 11,
+      "pixelSha256": "c16a2530eb217c903b9e73450dd248b88298c267e8612b9ff3c7153933a6d1a8"
+    },
+    {
+      "id": "hobby-brush-roll-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 66,
+        "height": 70
+      },
+      "opaquePixels": 2959,
+      "colors": 11,
+      "pixelSha256": "b5b3069e8cdb6664db07938a2f3e5487debe572e1b853d9b9e614298217bf916"
+    },
+    {
+      "id": "hobby-brush-roll-winter",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 66,
+        "height": 70
+      },
+      "opaquePixels": 2923,
+      "colors": 12,
+      "pixelSha256": "3d97b4890fa009fbb58f3951a5ad9752ceee8264e69824f5ca2e0bab3a74cb3a"
+    },
+    {
+      "id": "hobby-pastel-case-spring",
+      "bounds": {
+        "x": 17,
+        "y": 24,
+        "width": 63,
+        "height": 60
+      },
+      "opaquePixels": 3386,
+      "colors": 14,
+      "pixelSha256": "ef360583824d4925ec2edbed76d0c5a6077b56edefc39b12e7397620614ef537"
+    },
+    {
+      "id": "hobby-pastel-case-summer",
+      "bounds": {
+        "x": 17,
+        "y": 24,
+        "width": 63,
+        "height": 60
+      },
+      "opaquePixels": 3386,
+      "colors": 14,
+      "pixelSha256": "653839a0f2f5ce745d61906a934367c349ad0be69999deb05f561d6ed5f556e0"
+    },
+    {
+      "id": "hobby-pastel-case-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 24,
+        "width": 63,
+        "height": 60
+      },
+      "opaquePixels": 3386,
+      "colors": 14,
+      "pixelSha256": "9a5d5b959757123a8be5f97ad4aea02f7a703632274209f6d3ef4eff5d7e0e69"
+    },
+    {
+      "id": "hobby-pastel-case-winter",
+      "bounds": {
+        "x": 17,
+        "y": 24,
+        "width": 63,
+        "height": 60
+      },
+      "opaquePixels": 3386,
+      "colors": 15,
+      "pixelSha256": "ab88a770d9d3a59857916393083576f4fb721984a7a0cb7e5e4a45edd1d94c00"
+    },
+    {
+      "id": "hobby-drafting-compass-spring",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 3067,
+      "colors": 11,
+      "pixelSha256": "14a68efe17f21ca9a78636ec7762571dd1778a6b004e89dae53a1b32499a34c8"
+    },
+    {
+      "id": "hobby-drafting-compass-summer",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 3067,
+      "colors": 11,
+      "pixelSha256": "bf58afe75914a18567e9835020989a7d102df04116c02281ea193cf4b4564c88"
+    },
+    {
+      "id": "hobby-drafting-compass-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 3067,
+      "colors": 11,
+      "pixelSha256": "799a7b0bbe2c2b4e0db4fecb559ce3f87c120336ef0545576b1e59f5ce408d6a"
+    },
+    {
+      "id": "hobby-drafting-compass-winter",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 3067,
+      "colors": 11,
+      "pixelSha256": "0f52b4425fd061cfbf359f6783c0ecea2b107287981d46f5a3fba23bc1992ecf"
+    },
+    {
+      "id": "hobby-print-brayer-spring",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2465,
+      "colors": 12,
+      "pixelSha256": "f89ad75921b8d28f514476f0e29aad039f45f5f1c1483236db0a4c7d72bba77f"
+    },
+    {
+      "id": "hobby-print-brayer-summer",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2465,
+      "colors": 12,
+      "pixelSha256": "c490d5236f9502dcf2b381cabf87ac05024676c65816c1b4610f09bebcc12ee2"
+    },
+    {
+      "id": "hobby-print-brayer-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2465,
+      "colors": 12,
+      "pixelSha256": "e8e6221024130d37484586b83a81fd94f90040991e3c2f365408224b4f44f1c8"
+    },
+    {
+      "id": "hobby-print-brayer-winter",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2465,
+      "colors": 12,
+      "pixelSha256": "3220da535f6e6cfc86a1fae964edaeb2bcc50615d04c449103b06fa97a033f83"
+    },
+    {
+      "id": "hobby-mini-print-press-spring",
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 62,
+        "height": 68
+      },
+      "opaquePixels": 2425,
+      "colors": 13,
+      "pixelSha256": "8b058df91177ed5c21c2e60272f70da888143c7f5c22cc0e363309708214dba8"
+    },
+    {
+      "id": "hobby-mini-print-press-summer",
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 69,
+        "height": 68
+      },
+      "opaquePixels": 2489,
+      "colors": 13,
+      "pixelSha256": "09a9e0e734142d222f74aa2e15ed96c680dc1bfc0134d4e265e5fd37747f33ed"
+    },
+    {
+      "id": "hobby-mini-print-press-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 62,
+        "height": 68
+      },
+      "opaquePixels": 2425,
+      "colors": 13,
+      "pixelSha256": "464f9bfb690fcec13604f63aacc0d9c3eb81cf75b04c4a5964e6e767895cfef7"
+    },
+    {
+      "id": "hobby-mini-print-press-winter",
+      "bounds": {
+        "x": 18,
+        "y": 16,
+        "width": 69,
+        "height": 68
+      },
+      "opaquePixels": 2489,
+      "colors": 13,
+      "pixelSha256": "92bbb77e4da949a7b39ff08acaf3591e6f5f05da9cf97f70eeb1343440ea1104"
+    },
+    {
+      "id": "hobby-sewing-box-spring",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 62,
+        "height": 60
+      },
+      "opaquePixels": 3283,
+      "colors": 17,
+      "pixelSha256": "67807667985ab2a6dcdf1fa55f6f6b9e1271c0c964aa217f7684cc8c394b10c5"
+    },
+    {
+      "id": "hobby-sewing-box-summer",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 62,
+        "height": 60
+      },
+      "opaquePixels": 3283,
+      "colors": 17,
+      "pixelSha256": "50ee955f2ad6508c27abfd34e1de27e81767025911eb8b1907f421153e39790d"
+    },
+    {
+      "id": "hobby-sewing-box-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 62,
+        "height": 60
+      },
+      "opaquePixels": 3283,
+      "colors": 18,
+      "pixelSha256": "fd1b6e249c8908cae9aefe23968fddb1cf3e17c1dc7d5da1abd953be466f95f4"
+    },
+    {
+      "id": "hobby-sewing-box-winter",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 62,
+        "height": 60
+      },
+      "opaquePixels": 3283,
+      "colors": 18,
+      "pixelSha256": "ea62bb9795cb317778e29f2a930d727d10080ce9d9a8eafae1a29bacf8650ed3"
+    },
+    {
+      "id": "hobby-table-loom-spring",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 2318,
+      "colors": 11,
+      "pixelSha256": "cd32761cb0c556518da2fdaec23151e2c19411b7f703142b8635c07a08aac580"
+    },
+    {
+      "id": "hobby-table-loom-summer",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 2268,
+      "colors": 11,
+      "pixelSha256": "c068e0acf431725f6ccb662c6308a159e79a3ab5c6e27fbde1560b43165f4ed8"
+    },
+    {
+      "id": "hobby-table-loom-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 2218,
+      "colors": 11,
+      "pixelSha256": "b8db4260197654d9ad0fcbfe3465a9cbe8aeb3e2c22902e1c3d1cb498e8c850e"
+    },
+    {
+      "id": "hobby-table-loom-winter",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 2168,
+      "colors": 11,
+      "pixelSha256": "e980fca7848e48c574bf50900d8c7563e9398695c49090b6984a3dac158b9646"
+    },
+    {
+      "id": "hobby-embroidery-hoop-spring",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 2944,
+      "colors": 14,
+      "pixelSha256": "16aa787cdfa906191b9f2f14ea5cbf6f95a1ce9009dc8d0d3e084c4460d0d7df"
+    },
+    {
+      "id": "hobby-embroidery-hoop-summer",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 2944,
+      "colors": 13,
+      "pixelSha256": "48a17cd38b44da34229e43da68955719bc9b30c5806ea1565dc185dd884a3f38"
+    },
+    {
+      "id": "hobby-embroidery-hoop-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 2944,
+      "colors": 12,
+      "pixelSha256": "02d0b4227173672889ef2c15b8b519d14f9f40feda90c61361544381a3704669"
+    },
+    {
+      "id": "hobby-embroidery-hoop-winter",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 2944,
+      "colors": 12,
+      "pixelSha256": "d7ccb4265f265b83e2bc2c1687851e0ebd06a879adf746223c96de715ac2f45c"
+    },
+    {
+      "id": "hobby-crochet-tools-spring",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2802,
+      "colors": 8,
+      "pixelSha256": "970f5031272bd25ee33eed1f7fd736a13e64770007f1146747a9887a4006ce6d"
+    },
+    {
+      "id": "hobby-crochet-tools-summer",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2763,
+      "colors": 9,
+      "pixelSha256": "b2843a2da6a1a4f9f7cd3d52b2de981bfb5f125fef935a419117c9e8a9fa2dcc"
+    },
+    {
+      "id": "hobby-crochet-tools-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2778,
+      "colors": 11,
+      "pixelSha256": "c4b4d517945c4942bc5b73f5d467c6ffc916eea98a6947c4c79eec1c5c2c3fd7"
+    },
+    {
+      "id": "hobby-crochet-tools-winter",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2802,
+      "colors": 10,
+      "pixelSha256": "33d52b462d92d640b99b6e39f0c3f1a7aa099165a5d25f6933c184dbb233e1d3"
+    },
+    {
+      "id": "hobby-knitting-swatches-spring",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 1953,
+      "colors": 13,
+      "pixelSha256": "22151b937aa2c38031367570be79b95be53a2bc53f577ff368e1a41f74c6110c"
+    },
+    {
+      "id": "hobby-knitting-swatches-summer",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 1737,
+      "colors": 13,
+      "pixelSha256": "b1fbc552e66a50422cd11ff8ae52c7c51b2a1d4ab4f4f661852c5c4a7cc8972e"
+    },
+    {
+      "id": "hobby-knitting-swatches-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 2088,
+      "colors": 13,
+      "pixelSha256": "3c19484d62966bd47f812aac83c61616419669764b0be1d82ac2d07122cb9621"
+    },
+    {
+      "id": "hobby-knitting-swatches-winter",
+      "bounds": {
+        "x": 18,
+        "y": 15,
+        "width": 61,
+        "height": 69
+      },
+      "opaquePixels": 2203,
+      "colors": 14,
+      "pixelSha256": "e044f8ae79034706d0f314ad752185d0821361141470bafbb04da7b8819fdacf"
+    },
+    {
+      "id": "hobby-spool-rack-spring",
+      "bounds": {
+        "x": 18,
+        "y": 27,
+        "width": 61,
+        "height": 57
+      },
+      "opaquePixels": 2139,
+      "colors": 15,
+      "pixelSha256": "198485f967eaa6a93a398b702506a1420f062cdc089f57381e8de896df07b657"
+    },
+    {
+      "id": "hobby-spool-rack-summer",
+      "bounds": {
+        "x": 18,
+        "y": 27,
+        "width": 61,
+        "height": 57
+      },
+      "opaquePixels": 1957,
+      "colors": 15,
+      "pixelSha256": "a468dd34a96f383f530a71614a9a163f08b1774a3d686c2844c1719c57ba82f3"
+    },
+    {
+      "id": "hobby-spool-rack-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 64,
+        "height": 60
+      },
+      "opaquePixels": 2194,
+      "colors": 16,
+      "pixelSha256": "8fd8037fcaebfb3d2117fc450b3c64c6fc2ee0fa8c8762c023ca58717057ca9f"
+    },
+    {
+      "id": "hobby-spool-rack-winter",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 61,
+        "height": 60
+      },
+      "opaquePixels": 2158,
+      "colors": 15,
+      "pixelSha256": "1cfb67dcce7d50e00e70072d1ee03a470e5ab77af4888eea9906dc2cfa1b99eb"
+    },
+    {
+      "id": "hobby-lace-shuttle-spring",
+      "bounds": {
+        "x": 18,
+        "y": 32,
+        "width": 61,
+        "height": 52
+      },
+      "opaquePixels": 2234,
+      "colors": 11,
+      "pixelSha256": "2c59f58007f3dfc55c3e724726777c912ed73a092156d85d3c8debfc3ed0d6a5"
+    },
+    {
+      "id": "hobby-lace-shuttle-summer",
+      "bounds": {
+        "x": 18,
+        "y": 32,
+        "width": 61,
+        "height": 52
+      },
+      "opaquePixels": 2234,
+      "colors": 11,
+      "pixelSha256": "41b71cc744aa2fb00d61fc7a5bfdc956fd56866af525613d8a455f662e99e3d5"
+    },
+    {
+      "id": "hobby-lace-shuttle-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 32,
+        "width": 61,
+        "height": 52
+      },
+      "opaquePixels": 2234,
+      "colors": 11,
+      "pixelSha256": "48344a7ccc4ffba4de269b27057996a3deba7a1e3396fb1f7c4f9310b1039bfb"
+    },
+    {
+      "id": "hobby-lace-shuttle-winter",
+      "bounds": {
+        "x": 18,
+        "y": 32,
+        "width": 61,
+        "height": 52
+      },
+      "opaquePixels": 2287,
+      "colors": 11,
+      "pixelSha256": "c2d09e3ff410b540c10d6374ba3583714d962092dc6dedc0a88f7cee695edc72"
+    },
+    {
+      "id": "hobby-felt-animals-spring",
+      "bounds": {
+        "x": 18,
+        "y": 7,
+        "width": 61,
+        "height": 77
+      },
+      "opaquePixels": 2310,
+      "colors": 7,
+      "pixelSha256": "954a16baaaefbe1ba9c778025bf76971601db89cb5213924585e1fcc3a34828c"
+    },
+    {
+      "id": "hobby-felt-animals-summer",
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "opaquePixels": 2147,
+      "colors": 7,
+      "pixelSha256": "0cf49bcb5a732a79192f7cfeaeded3131464abd898516eacd05f309e68ba76c7"
+    },
+    {
+      "id": "hobby-felt-animals-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2299,
+      "colors": 7,
+      "pixelSha256": "e33c96205f947cae69bc4841e43cae646bcf81400a3016c37eced72c73c5290c"
+    },
+    {
+      "id": "hobby-felt-animals-winter",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2245,
+      "colors": 9,
+      "pixelSha256": "545bc9169791e6f8a112f2092c1856bda91826615c5a8fbaa909b95833d2a71b"
+    },
+    {
+      "id": "hobby-guitar-spring",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 1856,
+      "colors": 10,
+      "pixelSha256": "13967157d04ca6d12fc7daf6e40bd700ea4ae8285c4d098317ecbdd2f410c6d6"
+    },
+    {
+      "id": "hobby-guitar-summer",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 1789,
+      "colors": 11,
+      "pixelSha256": "8c36c9fd27f22f3ee61522d4d5d65ce06689b29062043fc7abaee4fb62b0ea94"
+    },
+    {
+      "id": "hobby-guitar-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 2019,
+      "colors": 9,
+      "pixelSha256": "567473627d1260045b82077045165fc7dcfca08558ad9808f6dabf1889b7b434"
+    },
+    {
+      "id": "hobby-guitar-winter",
+      "bounds": {
+        "x": 18,
+        "y": 11,
+        "width": 61,
+        "height": 73
+      },
+      "opaquePixels": 1777,
+      "colors": 13,
+      "pixelSha256": "57b120d0611a7e9506e5a0a086d34e68b947fdf2a8132ad7f6c8001e08d1659a"
+    },
+    {
+      "id": "hobby-violin-spring",
+      "bounds": {
+        "x": 18,
+        "y": 10,
+        "width": 61,
+        "height": 74
+      },
+      "opaquePixels": 1885,
+      "colors": 10,
+      "pixelSha256": "f1b393457ca5604c9a303f7ab2ac59323f699576ae021bcd5a56c63cc939a171"
+    },
+    {
+      "id": "hobby-violin-summer",
+      "bounds": {
+        "x": 18,
+        "y": 10,
+        "width": 61,
+        "height": 74
+      },
+      "opaquePixels": 1913,
+      "colors": 11,
+      "pixelSha256": "306489ae995c7d91ccfafe32cd9308608f2fe075e57ae2f4abcfa94f9d3b4b33"
+    },
+    {
+      "id": "hobby-violin-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 10,
+        "width": 61,
+        "height": 74
+      },
+      "opaquePixels": 1893,
+      "colors": 10,
+      "pixelSha256": "0ce8ed8238875a650453e285d2ce677641e492ea7e1b24efa444f9947faa0a95"
+    },
+    {
+      "id": "hobby-violin-winter",
+      "bounds": {
+        "x": 18,
+        "y": 10,
+        "width": 61,
+        "height": 74
+      },
+      "opaquePixels": 1919,
+      "colors": 10,
+      "pixelSha256": "cd09af019dac4e11ca447eb319dc0fbb8bf04c6675740f4df9d1212be49d457d"
+    },
+    {
+      "id": "hobby-metronome-spring",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2308,
+      "colors": 10,
+      "pixelSha256": "330d042ef0f8cce160662ca1c06c71d64154868f6e57e99212d55911fb1f181d"
+    },
+    {
+      "id": "hobby-metronome-summer",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2308,
+      "colors": 10,
+      "pixelSha256": "33df93afa89297e7efbd79483a12b16a38ef28246eabf7624a42bf2f7589dbc1"
+    },
+    {
+      "id": "hobby-metronome-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2308,
+      "colors": 10,
+      "pixelSha256": "df5ca778d3552957eb963eec3f8fa4c7568c993d9efa8af310263c5f49584e23"
+    },
+    {
+      "id": "hobby-metronome-winter",
+      "bounds": {
+        "x": 18,
+        "y": 14,
+        "width": 61,
+        "height": 70
+      },
+      "opaquePixels": 2442,
+      "colors": 11,
+      "pixelSha256": "27a1641732406601be7c8f46929fe2f816e4528c2ee003f41a6acf6cd992c58a"
+    },
+    {
+      "id": "hobby-record-rack-spring",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 61,
+        "height": 56
+      },
+      "opaquePixels": 2656,
+      "colors": 12,
+      "pixelSha256": "b07407d5aa50a00f1183d391169f42d44df8fd46510a8699060582b00e7670de"
+    },
+    {
+      "id": "hobby-record-rack-summer",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 64,
+        "height": 56
+      },
+      "opaquePixels": 2955,
+      "colors": 12,
+      "pixelSha256": "686663970bc5444684d49f899478721393cc19a0595bdbea9bed072903344a8d"
+    },
+    {
+      "id": "hobby-record-rack-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 61,
+        "height": 56
+      },
+      "opaquePixels": 2656,
+      "colors": 12,
+      "pixelSha256": "53ee26a24f678c5ad12b7636514bb9290d83cccbda1f1021a4851288ef4fba8d"
+    },
+    {
+      "id": "hobby-record-rack-winter",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 64,
+        "height": 56
+      },
+      "opaquePixels": 2955,
+      "colors": 12,
+      "pixelSha256": "8c803916473fbf6e257b001bb8d15924440244cc02f42ff210e9dabdbfa616e2"
+    },
+    {
+      "id": "hobby-accordion-spring",
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "opaquePixels": 2840,
+      "colors": 12,
+      "pixelSha256": "fb89a10aaab90ad48b5f1240cadc29700dba5f2a99b9881bb55958e0ef9d0e62"
+    },
+    {
+      "id": "hobby-accordion-summer",
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "opaquePixels": 2840,
+      "colors": 12,
+      "pixelSha256": "aae682381b11ccc7994ff7a864c90f1dd5c7a7de4408fcd00768324e2fa44e2d"
+    },
+    {
+      "id": "hobby-accordion-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "opaquePixels": 2842,
+      "colors": 12,
+      "pixelSha256": "b4b69b310834ecf54d5849c430c706046d09b4de35e3afddd4ecfff812c515ea"
+    },
+    {
+      "id": "hobby-accordion-winter",
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "opaquePixels": 2843,
+      "colors": 14,
+      "pixelSha256": "36f3e29bddeacaae420bb7fffdd4fe4bc55c370ead2206396058a1ad9acb3302"
+    },
+    {
+      "id": "hobby-thumb-piano-spring",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 2301,
+      "colors": 12,
+      "pixelSha256": "03421075da70d3d64ed4849255576703489480c08cd88cbee920fef3be39b5fb"
+    },
+    {
+      "id": "hobby-thumb-piano-summer",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 2304,
+      "colors": 11,
+      "pixelSha256": "16adbf65ad392c1aff123b91f77fa12dc1b368011c652fd27c98a7ee8e8da721"
+    },
+    {
+      "id": "hobby-thumb-piano-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 2301,
+      "colors": 11,
+      "pixelSha256": "db66b00caa6c801aaa8e58c4023da17b9a61d3d51c24ec1d59e39886ab247c42"
+    },
+    {
+      "id": "hobby-thumb-piano-winter",
+      "bounds": {
+        "x": 18,
+        "y": 26,
+        "width": 61,
+        "height": 58
+      },
+      "opaquePixels": 2301,
+      "colors": 14,
+      "pixelSha256": "2d56bd7705871e044277ba0f8b863d7dea98de8fc515ffd703696bb0c59139d2"
+    },
+    {
+      "id": "hobby-hand-drum-spring",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 2394,
+      "colors": 10,
+      "pixelSha256": "a3c2b164472e7a3e883d934ebd1fc863345b138903ddb0a8ea704704e1c14f61"
+    },
+    {
+      "id": "hobby-hand-drum-summer",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 2471,
+      "colors": 10,
+      "pixelSha256": "f8caf137cd97074c84433678faf7fd17c7500440cef42f05edfbf9d2503982fc"
+    },
+    {
+      "id": "hobby-hand-drum-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 2411,
+      "colors": 10,
+      "pixelSha256": "23f59f8e674b0813d0e698e5303f2ae427e591858b9e997376196e010f722696"
+    },
+    {
+      "id": "hobby-hand-drum-winter",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2594,
+      "colors": 10,
+      "pixelSha256": "fde29257471bc89c1954afcdeaf6685740624bbbf5abf218f8bd1f71a47d81da"
+    },
+    {
+      "id": "hobby-harmonica-case-spring",
+      "bounds": {
+        "x": 16,
+        "y": 35,
+        "width": 65,
+        "height": 49
+      },
+      "opaquePixels": 2867,
+      "colors": 14,
+      "pixelSha256": "9b90659585a68525e7057beed510513359e3bd163adcfb01559549586ea98d67"
+    },
+    {
+      "id": "hobby-harmonica-case-summer",
+      "bounds": {
+        "x": 16,
+        "y": 35,
+        "width": 65,
+        "height": 49
+      },
+      "opaquePixels": 2867,
+      "colors": 14,
+      "pixelSha256": "539e9c420fcf2893c2fdf702f5bd5ee41ad8c36311f6e0fd2719768865d615d7"
+    },
+    {
+      "id": "hobby-harmonica-case-autumn",
+      "bounds": {
+        "x": 16,
+        "y": 35,
+        "width": 65,
+        "height": 49
+      },
+      "opaquePixels": 2867,
+      "colors": 13,
+      "pixelSha256": "93b847805dd579785f09fb68099080a4bc9f636170e1c197a634408307d9fd70"
+    },
+    {
+      "id": "hobby-harmonica-case-winter",
+      "bounds": {
+        "x": 16,
+        "y": 35,
+        "width": 65,
+        "height": 49
+      },
+      "opaquePixels": 2867,
+      "colors": 14,
+      "pixelSha256": "4b9c164d3ea75ad53bf55b9144173ca8994ac5b2bd1c4a702fe39549fe502d04"
+    },
+    {
+      "id": "hobby-chess-board-spring",
+      "bounds": {
+        "x": 17,
+        "y": 38,
+        "width": 64,
+        "height": 46
+      },
+      "opaquePixels": 2540,
+      "colors": 8,
+      "pixelSha256": "ae6cde2a6a0e06b3c94f2f8ff7ace5f761187fa06d5f731aaf2dfc884d81d1fd"
+    },
+    {
+      "id": "hobby-chess-board-summer",
+      "bounds": {
+        "x": 17,
+        "y": 36,
+        "width": 64,
+        "height": 48
+      },
+      "opaquePixels": 2561,
+      "colors": 8,
+      "pixelSha256": "96026046888a3d50ccff0029de72c3678cdcd15bb5edde57c7b524c5943360f8"
+    },
+    {
+      "id": "hobby-chess-board-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 40,
+        "width": 64,
+        "height": 44
+      },
+      "opaquePixels": 2533,
+      "colors": 8,
+      "pixelSha256": "8aabc407c630bb2edbf5fbf7c50f53dff50ef7c23774c4cfab31cccf303d2b8b"
+    },
+    {
+      "id": "hobby-chess-board-winter",
+      "bounds": {
+        "x": 17,
+        "y": 36,
+        "width": 64,
+        "height": 48
+      },
+      "opaquePixels": 2561,
+      "colors": 8,
+      "pixelSha256": "c9de5e134fea5874713cd07c37076114d5c4ade5765d0b1d4c0d81e974536d63"
+    },
+    {
+      "id": "hobby-puzzle-tray-spring",
+      "bounds": {
+        "x": 16,
+        "y": 31,
+        "width": 65,
+        "height": 53
+      },
+      "opaquePixels": 2972,
+      "colors": 14,
+      "pixelSha256": "a9dbefdcd383254922e33849b3ac6b121cd800e44bf73efc5b690167d33a0ad7"
+    },
+    {
+      "id": "hobby-puzzle-tray-summer",
+      "bounds": {
+        "x": 16,
+        "y": 31,
+        "width": 65,
+        "height": 53
+      },
+      "opaquePixels": 2972,
+      "colors": 14,
+      "pixelSha256": "4bfdb871cbca34f54d8900a7bdaf95af7979c925eec437d099fa742d94dc2489"
+    },
+    {
+      "id": "hobby-puzzle-tray-autumn",
+      "bounds": {
+        "x": 16,
+        "y": 31,
+        "width": 65,
+        "height": 53
+      },
+      "opaquePixels": 2972,
+      "colors": 14,
+      "pixelSha256": "878e429925e60d0eaf564a14c1812654687f10bc5c93026fe6fe30b36c111bce"
+    },
+    {
+      "id": "hobby-puzzle-tray-winter",
+      "bounds": {
+        "x": 16,
+        "y": 31,
+        "width": 65,
+        "height": 53
+      },
+      "opaquePixels": 2972,
+      "colors": 13,
+      "pixelSha256": "0c98ae55a78471663bed0e28e8cbe93a0daf70cac6252d9300dcf7680bbef27d"
+    },
+    {
+      "id": "hobby-domino-rack-spring",
+      "bounds": {
+        "x": 18,
+        "y": 38,
+        "width": 61,
+        "height": 46
+      },
+      "opaquePixels": 2161,
+      "colors": 10,
+      "pixelSha256": "7b36b244519d1722e7ff6cea540e13d23578f33dfe590958f2d1959f2b0ddaf9"
+    },
+    {
+      "id": "hobby-domino-rack-summer",
+      "bounds": {
+        "x": 18,
+        "y": 38,
+        "width": 61,
+        "height": 46
+      },
+      "opaquePixels": 2125,
+      "colors": 10,
+      "pixelSha256": "112f2977a77952d009d543207389ff1db0ca2c2efffcecab48c2ed40c27d2f48"
+    },
+    {
+      "id": "hobby-domino-rack-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 38,
+        "width": 61,
+        "height": 46
+      },
+      "opaquePixels": 2161,
+      "colors": 10,
+      "pixelSha256": "f30e5f79740d57d0a2e3d5938cadca8abc339af3e79e0c5923e7c06e66b0a94e"
+    },
+    {
+      "id": "hobby-domino-rack-winter",
+      "bounds": {
+        "x": 18,
+        "y": 27,
+        "width": 61,
+        "height": 57
+      },
+      "opaquePixels": 2335,
+      "colors": 10,
+      "pixelSha256": "92e55c1f6ad5b090b0fb7db24c7724070db16089de3462bbdeee32dfffcd2664"
+    },
+    {
+      "id": "hobby-tangram-spring",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 61,
+        "height": 56
+      },
+      "opaquePixels": 2885,
+      "colors": 17,
+      "pixelSha256": "2917c6940c3f9ce1ff9ebfa8a60c2f99922b10cb6345f9aea5f5ec4770f546b4"
+    },
+    {
+      "id": "hobby-tangram-summer",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 61,
+        "height": 56
+      },
+      "opaquePixels": 2885,
+      "colors": 17,
+      "pixelSha256": "6c741f143748d5c13b2c8a6638e88a438d93ba3e8e475befd5d05720a98f7da2"
+    },
+    {
+      "id": "hobby-tangram-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 3050,
+      "colors": 18,
+      "pixelSha256": "f5fdd011945d112daa0e45e2064b36e0adccd75f8263baa6d1bf03a5ac2b4984"
+    },
+    {
+      "id": "hobby-tangram-winter",
+      "bounds": {
+        "x": 18,
+        "y": 28,
+        "width": 61,
+        "height": 56
+      },
+      "opaquePixels": 2885,
+      "colors": 18,
+      "pixelSha256": "2086b8f69603e12ba73f2ecabb42cdc24b06ec1fd0107859c933a1c749a7fc3c"
+    },
+    {
+      "id": "hobby-marble-solitaire-spring",
+      "bounds": {
+        "x": 17,
+        "y": 37,
+        "width": 63,
+        "height": 47
+      },
+      "opaquePixels": 2303,
+      "colors": 10,
+      "pixelSha256": "473c421198f87a4ff59399672e85528b3f73db4a9e428df7570d82f9f0ba449e"
+    },
+    {
+      "id": "hobby-marble-solitaire-summer",
+      "bounds": {
+        "x": 17,
+        "y": 37,
+        "width": 63,
+        "height": 47
+      },
+      "opaquePixels": 2303,
+      "colors": 9,
+      "pixelSha256": "461fd6dc23d49028c581ebc46c6b2ab07089998546915709d0e932cc26cc53d5"
+    },
+    {
+      "id": "hobby-marble-solitaire-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 37,
+        "width": 63,
+        "height": 47
+      },
+      "opaquePixels": 2302,
+      "colors": 10,
+      "pixelSha256": "2c5cc3ba345fc2436d8c92af2feca8adde77dfb1dfdd6a68d1f6e95a3c116339"
+    },
+    {
+      "id": "hobby-marble-solitaire-winter",
+      "bounds": {
+        "x": 17,
+        "y": 37,
+        "width": 63,
+        "height": 47
+      },
+      "opaquePixels": 2315,
+      "colors": 12,
+      "pixelSha256": "540b074cd04f8194ff1e8ad450ed6e02e38f1dae02d9953ce950143e4ccb4a93"
+    },
+    {
+      "id": "hobby-dice-tower-spring",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2478,
+      "colors": 8,
+      "pixelSha256": "e2f8c8cc4533becf4bee45cd770312de3da5a00472b3963d8b2089bf26235a09"
+    },
+    {
+      "id": "hobby-dice-tower-summer",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2478,
+      "colors": 8,
+      "pixelSha256": "cf2d483be483c6bb771d31ec88dcc38f1a2f5472931af36d1e6dbaa3a5bc0d2b"
+    },
+    {
+      "id": "hobby-dice-tower-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2478,
+      "colors": 8,
+      "pixelSha256": "1c61e2bb6fdf9dd34361d6ddce77bbb8abd14946ec8be5444bab982628b90287"
+    },
+    {
+      "id": "hobby-dice-tower-winter",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2513,
+      "colors": 10,
+      "pixelSha256": "dcd92042a1118262c6ac91ea631e73b8e2ee2553ccd14293e69b3c9d04dcecc3"
+    },
+    {
+      "id": "hobby-wooden-abacus-spring",
+      "bounds": {
+        "x": 18,
+        "y": 32,
+        "width": 61,
+        "height": 52
+      },
+      "opaquePixels": 2687,
+      "colors": 9,
+      "pixelSha256": "da472cadcfd25e93b08e97a5e1e8c4573b588c4640fcd06c9f7d6efc191d5630"
+    },
+    {
+      "id": "hobby-wooden-abacus-summer",
+      "bounds": {
+        "x": 18,
+        "y": 32,
+        "width": 61,
+        "height": 52
+      },
+      "opaquePixels": 2687,
+      "colors": 9,
+      "pixelSha256": "e254e2165f81f794c22877b14cbd0efc9f86e50984d2a292f3a363d18e231052"
+    },
+    {
+      "id": "hobby-wooden-abacus-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 32,
+        "width": 61,
+        "height": 52
+      },
+      "opaquePixels": 2687,
+      "colors": 9,
+      "pixelSha256": "02e8220d898c233f1c2cb7bd8ea87aa09358ea714945ad2fe0fee92a8b49a2c4"
+    },
+    {
+      "id": "hobby-wooden-abacus-winter",
+      "bounds": {
+        "x": 18,
+        "y": 25,
+        "width": 61,
+        "height": 59
+      },
+      "opaquePixels": 2897,
+      "colors": 10,
+      "pixelSha256": "42b541e27051d33c18c6a2b753dea75a842b3c89ae6a4842cf6e1128aa6ac1e4"
+    },
+    {
+      "id": "hobby-mechanical-puzzle-spring",
+      "bounds": {
+        "x": 18,
+        "y": 30,
+        "width": 61,
+        "height": 54
+      },
+      "opaquePixels": 1983,
+      "colors": 8,
+      "pixelSha256": "021caf791083480ef22f9fee7a6192de2f8fabd7194b5970355350b76706a67a"
+    },
+    {
+      "id": "hobby-mechanical-puzzle-summer",
+      "bounds": {
+        "x": 18,
+        "y": 30,
+        "width": 61,
+        "height": 54
+      },
+      "opaquePixels": 2051,
+      "colors": 10,
+      "pixelSha256": "0b221e795673546df7ede6062c450b6fea062c3a133478953b285d67a106891d"
+    },
+    {
+      "id": "hobby-mechanical-puzzle-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 30,
+        "width": 61,
+        "height": 54
+      },
+      "opaquePixels": 1986,
+      "colors": 8,
+      "pixelSha256": "298a76c1410670429adb0b01f0bab7d26e499fbd9ef939f4eb8f0d3b3ee3c5f5"
+    },
+    {
+      "id": "hobby-mechanical-puzzle-winter",
+      "bounds": {
+        "x": 18,
+        "y": 30,
+        "width": 61,
+        "height": 54
+      },
+      "opaquePixels": 2059,
+      "colors": 10,
+      "pixelSha256": "2720ff7f8186fd4707902dcd6cba29d1e297801d8bd1d692f4a8baf38274a405"
+    },
+    {
+      "id": "hobby-camera-spring",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2435,
+      "colors": 14,
+      "pixelSha256": "866a5e3ca0f794dd58562785c54f80fd726f2a625a655ddf52e73d03eb0e4924"
+    },
+    {
+      "id": "hobby-camera-summer",
+      "bounds": {
+        "x": 18,
+        "y": 12,
+        "width": 61,
+        "height": 72
+      },
+      "opaquePixels": 2568,
+      "colors": 14,
+      "pixelSha256": "44aa7f1b89a8746e054a69adce0f6ff249ccd6c58994b76ef579ad7244ef880a"
+    },
+    {
+      "id": "hobby-camera-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 29,
+        "width": 61,
+        "height": 55
+      },
+      "opaquePixels": 2437,
+      "colors": 13,
+      "pixelSha256": "293e1a0528a186b9dea097e62b6a6475f2091abe84fb7bed627d243b8e2ec7a3"
+    },
+    {
+      "id": "hobby-camera-winter",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2539,
+      "colors": 13,
+      "pixelSha256": "4bacb4e319338f340dfd0465f31ba2a1204ae8c19d8f8b1db6be3df68a4a8058"
+    },
+    {
+      "id": "hobby-film-reels-spring",
+      "bounds": {
+        "x": 16,
+        "y": 28,
+        "width": 63,
+        "height": 56
+      },
+      "opaquePixels": 2579,
+      "colors": 12,
+      "pixelSha256": "bb5beef2733a505541cb7861b8d9710349e4a64040ca0ece4365a71d6b55ff73"
+    },
+    {
+      "id": "hobby-film-reels-summer",
+      "bounds": {
+        "x": 16,
+        "y": 28,
+        "width": 63,
+        "height": 56
+      },
+      "opaquePixels": 2579,
+      "colors": 12,
+      "pixelSha256": "3afb146ee19692f8f2d7753ad9fffee844cabdca9ce961db5e9181e22f32269d"
+    },
+    {
+      "id": "hobby-film-reels-autumn",
+      "bounds": {
+        "x": 16,
+        "y": 28,
+        "width": 63,
+        "height": 56
+      },
+      "opaquePixels": 2759,
+      "colors": 12,
+      "pixelSha256": "77b072c189b89a57a65449f53ce3da8755d740ab5fcbb0c6383c625d156aba8f"
+    },
+    {
+      "id": "hobby-film-reels-winter",
+      "bounds": {
+        "x": 16,
+        "y": 28,
+        "width": 63,
+        "height": 56
+      },
+      "opaquePixels": 2579,
+      "colors": 12,
+      "pixelSha256": "d0a7e4d0c0c705969ca8f719dfd8a36e8faedee069e996317bbddc980d99c78a"
+    },
+    {
+      "id": "hobby-ceramic-tools-spring",
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "opaquePixels": 2136,
+      "colors": 11,
+      "pixelSha256": "637cd2ba8111c8814d70dc4192fe142b78b0c4421afe92dffd3c82de452fee19"
+    },
+    {
+      "id": "hobby-ceramic-tools-summer",
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "opaquePixels": 2138,
+      "colors": 11,
+      "pixelSha256": "5ec4ee46b2372e62b0a64aaea81a089f1345befce7f1b99986a4b7961f2f8e07"
+    },
+    {
+      "id": "hobby-ceramic-tools-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "opaquePixels": 2138,
+      "colors": 11,
+      "pixelSha256": "2d6c44c44e7fc0035578bf8f489ec75a69f24d2850dda7ca547f2ad9c9ec2b3f"
+    },
+    {
+      "id": "hobby-ceramic-tools-winter",
+      "bounds": {
+        "x": 18,
+        "y": 22,
+        "width": 61,
+        "height": 62
+      },
+      "opaquePixels": 2136,
+      "colors": 13,
+      "pixelSha256": "3603f1ee86392aaca8822b6af183b9ab21b8e9985d9705951aa55d796fc77def"
+    },
+    {
+      "id": "hobby-clay-sculpture-spring",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 1968,
+      "colors": 7,
+      "pixelSha256": "39ae335b5c0353d5e0fb5212e56318c3862a96bc5c65ba314d529156a6902d7f"
+    },
+    {
+      "id": "hobby-clay-sculpture-summer",
+      "bounds": {
+        "x": 18,
+        "y": 31,
+        "width": 61,
+        "height": 53
+      },
+      "opaquePixels": 1447,
+      "colors": 7,
+      "pixelSha256": "6e54628803958b7a1533091cac7e5e472455f99081906f72ee57a6d8a08fc0d4"
+    },
+    {
+      "id": "hobby-clay-sculpture-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 1870,
+      "colors": 7,
+      "pixelSha256": "b442d6fa21473ff0f8c4f1c6328dc1b20588da179da4a4e89401d2b00046e700"
+    },
+    {
+      "id": "hobby-clay-sculpture-winter",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 2021,
+      "colors": 7,
+      "pixelSha256": "6391c777fd8386cd7603b45a8c354dc28f6776c0dea291843d01279dc6f9169e"
+    },
+    {
+      "id": "hobby-paper-cranes-spring",
+      "bounds": {
+        "x": 18,
+        "y": 32,
+        "width": 66,
+        "height": 52
+      },
+      "opaquePixels": 1489,
+      "colors": 10,
+      "pixelSha256": "e083851eb1b10f4f8c8b47affacb6a549f22c59ddf04a2109ef82449592e9e8a"
+    },
+    {
+      "id": "hobby-paper-cranes-summer",
+      "bounds": {
+        "x": 17,
+        "y": 12,
+        "width": 62,
+        "height": 72
+      },
+      "opaquePixels": 1622,
+      "colors": 10,
+      "pixelSha256": "f538cb8b02a43e998720dac3adcfa4ee1bd06fac4fa870f3fd453eb8fb2d56c9"
+    },
+    {
+      "id": "hobby-paper-cranes-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 32,
+        "width": 61,
+        "height": 52
+      },
+      "opaquePixels": 1219,
+      "colors": 9,
+      "pixelSha256": "3090a229ee4b66d9a1fecb3564ffd5fe5de429512137824ffd253f70ca94ddd3"
+    },
+    {
+      "id": "hobby-paper-cranes-winter",
+      "bounds": {
+        "x": 18,
+        "y": 32,
+        "width": 61,
+        "height": 52
+      },
+      "opaquePixels": 1452,
+      "colors": 10,
+      "pixelSha256": "4b61fc38451fce93f89a6966b8ea88dc0331881b5951c19ec99c957633598315"
+    },
+    {
+      "id": "hobby-model-plane-spring",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 64,
+        "height": 64
+      },
+      "opaquePixels": 1672,
+      "colors": 13,
+      "pixelSha256": "1160ce31c310ca0bfdd7a0805a781401a9e83be285178f0b333ad061fb0d52c5"
+    },
+    {
+      "id": "hobby-model-plane-summer",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 64,
+        "height": 64
+      },
+      "opaquePixels": 1716,
+      "colors": 13,
+      "pixelSha256": "821fce2431a7c1de643898281fa8d4ae2a58ce3ba16d9e1ca72b13258852a76f"
+    },
+    {
+      "id": "hobby-model-plane-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 64,
+        "height": 64
+      },
+      "opaquePixels": 1705,
+      "colors": 13,
+      "pixelSha256": "70b7fc42426a4c9c7508177ea6f6e17426ea2dabff5073425ef5aabab96f3311"
+    },
+    {
+      "id": "hobby-model-plane-winter",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 64,
+        "height": 64
+      },
+      "opaquePixels": 1707,
+      "colors": 13,
+      "pixelSha256": "d12033bb9430cb6d1f139bd30192da8e6b9acd2cb51da9ebc9deead98187fa3a"
+    },
+    {
+      "id": "hobby-stamp-album-spring",
+      "bounds": {
+        "x": 18,
+        "y": 20,
+        "width": 61,
+        "height": 64
+      },
+      "opaquePixels": 2997,
+      "colors": 12,
+      "pixelSha256": "d0d3f86dabfc107e05b2e6b5dda8224326d1c3c0c38c683b9e0e514244383dee"
+    },
+    {
+      "id": "hobby-stamp-album-summer",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 3006,
+      "colors": 12,
+      "pixelSha256": "2e0717e17db83dd5184d80e8872ed8c61c84f19d2ca72914495b13ecfe365f41"
+    },
+    {
+      "id": "hobby-stamp-album-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 18,
+        "width": 61,
+        "height": 66
+      },
+      "opaquePixels": 2977,
+      "colors": 13,
+      "pixelSha256": "9f10d2472398447e57be838eeb2333e6bb1f2d2d7e3c78241176257c9b8d119f"
+    },
+    {
+      "id": "hobby-stamp-album-winter",
+      "bounds": {
+        "x": 18,
+        "y": 19,
+        "width": 61,
+        "height": 65
+      },
+      "opaquePixels": 3018,
+      "colors": 12,
+      "pixelSha256": "3100e1af85f96f47168df6d46f23e9ad2fb15372212e35fc17756796d74bbca6"
+    },
+    {
+      "id": "hobby-bead-board-spring",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 62,
+        "height": 60
+      },
+      "opaquePixels": 3004,
+      "colors": 12,
+      "pixelSha256": "7340cfae8785d4d9b5467712c0cfb197f66ec080ba5afbb46f5a3975d82ad300"
+    },
+    {
+      "id": "hobby-bead-board-summer",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 62,
+        "height": 60
+      },
+      "opaquePixels": 3004,
+      "colors": 11,
+      "pixelSha256": "9150e4d92a9a1bdd60dc2e37a0fb19992a0ba62fafd72f34ca806148b26ea447"
+    },
+    {
+      "id": "hobby-bead-board-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 24,
+        "width": 62,
+        "height": 60
+      },
+      "opaquePixels": 3004,
+      "colors": 12,
+      "pixelSha256": "38470ac8cbbfe22ec0e38e6e1754e21fd3e3a2dc9a78220671a6d0ceaf1e5c75"
+    },
+    {
+      "id": "hobby-bead-board-winter",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 62,
+        "height": 61
+      },
+      "opaquePixels": 3035,
+      "colors": 12,
+      "pixelSha256": "b790a00707933713244c0771c7bc55a24a146dcecfd762926d397e34155087fa"
+    }
+  ],
+  "limitations": [
+    "Programmatic checks do not replace visual review.",
+    "Catalog framing is not an in-game size contract.",
+    "No game integration, economics or save changes."
+  ]
+}

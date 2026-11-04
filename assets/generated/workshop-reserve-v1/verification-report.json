@@ -1,0 +1,2344 @@
+{
+  "schemaVersion": 1,
+  "packId": "workshop-reserve-v1",
+  "status": "passed",
+  "counts": {
+    "sprites": 192,
+    "baseShapes": 48,
+    "variantsPerBase": 4,
+    "categories": 6,
+    "distinctBaseSilhouettes": 48,
+    "nonRecolorVariantPairs": 288,
+    "atlasPixelsCompared": 1769472
+  },
+  "checks": {
+    "sourcePreflight": true,
+    "dimensions": true,
+    "nativeDensity2": true,
+    "binaryAlpha": true,
+    "masterPalette": true,
+    "transparentPadding3": true,
+    "noExactDuplicates": true,
+    "noPureRecolorVariants": true,
+    "distinctBaseSilhouettes": true,
+    "stableAnchors": true,
+    "safePaths": true,
+    "deterministicSourceRendering": true,
+    "pngDecode": true,
+    "atlasReadback": true,
+    "contactSheetReadback": true,
+    "offlineCatalog": true,
+    "reserveNotIntegrated": true
+  },
+  "sprites": [
+    {
+      "id": "workshop-burr-grinder-spring",
+      "bounds": {
+        "x": 19,
+        "y": 5,
+        "width": 59,
+        "height": 79
+      },
+      "opaquePixels": 2395,
+      "colors": 16,
+      "pixelSha256": "6c41622f346d03a9bd964106998709ffd6208d73e3ad7e5f39287fff7069ba06"
+    },
+    {
+      "id": "workshop-burr-grinder-summer",
+      "bounds": {
+        "x": 19,
+        "y": 13,
+        "width": 59,
+        "height": 71
+      },
+      "opaquePixels": 2447,
+      "colors": 16,
+      "pixelSha256": "9f24eafc7d95a30a17f279ee29e49d86f1c7d73e51b5c915551a4469f032cbeb"
+    },
+    {
+      "id": "workshop-burr-grinder-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 13,
+        "width": 59,
+        "height": 71
+      },
+      "opaquePixels": 2349,
+      "colors": 16,
+      "pixelSha256": "ffbbbeb08b6c12ae0a03eb8eba323d75b1161cab8e4252d2cb4883133fa327f3"
+    },
+    {
+      "id": "workshop-burr-grinder-winter",
+      "bounds": {
+        "x": 19,
+        "y": 13,
+        "width": 59,
+        "height": 71
+      },
+      "opaquePixels": 2408,
+      "colors": 16,
+      "pixelSha256": "f079c40c0ca17292dcec4f3c63efa169f2b2c590933f70c8840f6cfb481bdb42"
+    },
+    {
+      "id": "workshop-milk-pitcher-spring",
+      "bounds": {
+        "x": 19,
+        "y": 27,
+        "width": 60,
+        "height": 57
+      },
+      "opaquePixels": 2188,
+      "colors": 8,
+      "pixelSha256": "18ee2e0cad3fdb52612e3c1c5db11bf5844af7ac9ea0b43e1c37d1b710e37b94"
+    },
+    {
+      "id": "workshop-milk-pitcher-summer",
+      "bounds": {
+        "x": 19,
+        "y": 16,
+        "width": 60,
+        "height": 68
+      },
+      "opaquePixels": 2219,
+      "colors": 9,
+      "pixelSha256": "d5acc29a5c56ddd7886021f5d32f3cf9ad0322205c42342ce9f1da11e18623c0"
+    },
+    {
+      "id": "workshop-milk-pitcher-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 60,
+        "height": 65
+      },
+      "opaquePixels": 2256,
+      "colors": 9,
+      "pixelSha256": "1a4093b4f79d6d5aa34d64cd4951a463de0ed4a38f05eb12178b4f2c7b5ad2b7"
+    },
+    {
+      "id": "workshop-milk-pitcher-winter",
+      "bounds": {
+        "x": 19,
+        "y": 14,
+        "width": 60,
+        "height": 70
+      },
+      "opaquePixels": 2277,
+      "colors": 11,
+      "pixelSha256": "25bca80441d4c9e2802f1f74c2ab6f053db958d9b77c34786511a4108315862c"
+    },
+    {
+      "id": "workshop-tamper-spring",
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 59,
+        "height": 64
+      },
+      "opaquePixels": 1677,
+      "colors": 13,
+      "pixelSha256": "f1293df7d8d1855dae2ed4685ba1d0f245f31cb5080c0b37e18ea30b67071182"
+    },
+    {
+      "id": "workshop-tamper-summer",
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 59,
+        "height": 64
+      },
+      "opaquePixels": 1658,
+      "colors": 12,
+      "pixelSha256": "370894d3bbf9b654382ed09c4f1b900f69cb8dc0788818048258bd43a203567d"
+    },
+    {
+      "id": "workshop-tamper-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 59,
+        "height": 64
+      },
+      "opaquePixels": 1635,
+      "colors": 12,
+      "pixelSha256": "a5aac978f27da635614c7c4ea509e100355167350d1b210eefc18f21bf7402a9"
+    },
+    {
+      "id": "workshop-tamper-winter",
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 59,
+        "height": 64
+      },
+      "opaquePixels": 1660,
+      "colors": 13,
+      "pixelSha256": "c9ad22637ba42ee9f336025a64835db5b483ccad66bd1c63ab88a9d3ed9dc81c"
+    },
+    {
+      "id": "workshop-knock-box-spring",
+      "bounds": {
+        "x": 19,
+        "y": 35,
+        "width": 59,
+        "height": 49
+      },
+      "opaquePixels": 2305,
+      "colors": 10,
+      "pixelSha256": "4fc3d59bc2fb2fb8b617d58a433f50e9328ffe5bfb0b6ccc80d3a48279ea2981"
+    },
+    {
+      "id": "workshop-knock-box-summer",
+      "bounds": {
+        "x": 19,
+        "y": 35,
+        "width": 63,
+        "height": 49
+      },
+      "opaquePixels": 2414,
+      "colors": 10,
+      "pixelSha256": "eee1a34d9d8e2808e971f932ee2cc1296be50bfac4fbc39d968bdb987f74ce04"
+    },
+    {
+      "id": "workshop-knock-box-autumn",
+      "bounds": {
+        "x": 16,
+        "y": 35,
+        "width": 62,
+        "height": 49
+      },
+      "opaquePixels": 2464,
+      "colors": 11,
+      "pixelSha256": "b6dc61ffaaef3ea4eafa4cd327d7304b401e9d673d9b2f862343db5aa44a8a25"
+    },
+    {
+      "id": "workshop-knock-box-winter",
+      "bounds": {
+        "x": 19,
+        "y": 26,
+        "width": 59,
+        "height": 58
+      },
+      "opaquePixels": 2505,
+      "colors": 13,
+      "pixelSha256": "e0d285fa8fedff454f28fa75b0a97f7a420803ba65e78bf09eec48ad303514cb"
+    },
+    {
+      "id": "workshop-espresso-scale-spring",
+      "bounds": {
+        "x": 19,
+        "y": 41,
+        "width": 60,
+        "height": 43
+      },
+      "opaquePixels": 1996,
+      "colors": 15,
+      "pixelSha256": "2304281849107124e660f77c78f63f091c056b5c46d09271e4aa9cdc822d3f4c"
+    },
+    {
+      "id": "workshop-espresso-scale-summer",
+      "bounds": {
+        "x": 19,
+        "y": 37,
+        "width": 60,
+        "height": 47
+      },
+      "opaquePixels": 2084,
+      "colors": 15,
+      "pixelSha256": "01d1eea541687f3f0de6c05dba9abe6fecd2678e156161ff363f0496789c463f"
+    },
+    {
+      "id": "workshop-espresso-scale-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 39,
+        "width": 60,
+        "height": 45
+      },
+      "opaquePixels": 2016,
+      "colors": 16,
+      "pixelSha256": "e96eec2f1a0a7b9feb6b5ab8fc8cffe4229d2ad1a3bab4fb41f464d4e3f22570"
+    },
+    {
+      "id": "workshop-espresso-scale-winter",
+      "bounds": {
+        "x": 19,
+        "y": 31,
+        "width": 60,
+        "height": 53
+      },
+      "opaquePixels": 2048,
+      "colors": 13,
+      "pixelSha256": "1649dbc6ccc9350982e2f71a9584990a1edd1f1aa23c4885e3c8fd095658ed76"
+    },
+    {
+      "id": "workshop-syphon-spring",
+      "bounds": {
+        "x": 19,
+        "y": 12,
+        "width": 63,
+        "height": 72
+      },
+      "opaquePixels": 2199,
+      "colors": 15,
+      "pixelSha256": "9c3de33697b2519f52814ed4316bc9f77cb1472676f7f37c0c86b61ea15e990d"
+    },
+    {
+      "id": "workshop-syphon-summer",
+      "bounds": {
+        "x": 19,
+        "y": 12,
+        "width": 59,
+        "height": 72
+      },
+      "opaquePixels": 2242,
+      "colors": 14,
+      "pixelSha256": "f39277ca5afbff59c7d05055e5e823ede90d231d5cdaf408c0e4d81574e14cd1"
+    },
+    {
+      "id": "workshop-syphon-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 9,
+        "width": 59,
+        "height": 75
+      },
+      "opaquePixels": 2236,
+      "colors": 14,
+      "pixelSha256": "216c6122d109759c3d8475fdf07f2bda1828c1047389611435b804e1c266ca66"
+    },
+    {
+      "id": "workshop-syphon-winter",
+      "bounds": {
+        "x": 19,
+        "y": 12,
+        "width": 59,
+        "height": 72
+      },
+      "opaquePixels": 2158,
+      "colors": 15,
+      "pixelSha256": "dd386f93471a30b28b514eafbd5a1bdc927f5fb69e8eb277e5c362819b7f89b3"
+    },
+    {
+      "id": "workshop-moka-pot-spring",
+      "bounds": {
+        "x": 15,
+        "y": 13,
+        "width": 65,
+        "height": 71
+      },
+      "opaquePixels": 2817,
+      "colors": 10,
+      "pixelSha256": "5bd04336d634a3d11c0eb9c5218cb2df2060e08d06dc2bf4ba149f96950cb8af"
+    },
+    {
+      "id": "workshop-moka-pot-summer",
+      "bounds": {
+        "x": 19,
+        "y": 13,
+        "width": 61,
+        "height": 71
+      },
+      "opaquePixels": 2788,
+      "colors": 11,
+      "pixelSha256": "5cbe161c369ad913346b1fbeb5049728854d6ed6f51b9baa72b95ee27ec9b12f"
+    },
+    {
+      "id": "workshop-moka-pot-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 13,
+        "width": 61,
+        "height": 71
+      },
+      "opaquePixels": 2949,
+      "colors": 12,
+      "pixelSha256": "51a783edcb06c458ba536b85af3fa56c3dfd7578789022982a253c4f02bff6c0"
+    },
+    {
+      "id": "workshop-moka-pot-winter",
+      "bounds": {
+        "x": 19,
+        "y": 13,
+        "width": 61,
+        "height": 71
+      },
+      "opaquePixels": 2792,
+      "colors": 12,
+      "pixelSha256": "87c83e622af9da6801b5911a6065a6071974115b009aeb71841593d9758a3385"
+    },
+    {
+      "id": "workshop-coldbrew-tower-spring",
+      "bounds": {
+        "x": 19,
+        "y": 11,
+        "width": 59,
+        "height": 73
+      },
+      "opaquePixels": 2151,
+      "colors": 15,
+      "pixelSha256": "6ef9075f597968eb1971b4a334adbef414686814490f1887b98f3531ad36951f"
+    },
+    {
+      "id": "workshop-coldbrew-tower-summer",
+      "bounds": {
+        "x": 19,
+        "y": 11,
+        "width": 63,
+        "height": 73
+      },
+      "opaquePixels": 2216,
+      "colors": 14,
+      "pixelSha256": "e181343eccdf82500917322558d7836e814e89b6412ac756827ad8877f959b3b"
+    },
+    {
+      "id": "workshop-coldbrew-tower-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 11,
+        "width": 59,
+        "height": 73
+      },
+      "opaquePixels": 2131,
+      "colors": 14,
+      "pixelSha256": "e12dd62faf08efcd465fd4bf61ef4447994d99aeaa5396d92547f622a3d2ed22"
+    },
+    {
+      "id": "workshop-coldbrew-tower-winter",
+      "bounds": {
+        "x": 19,
+        "y": 11,
+        "width": 59,
+        "height": 73
+      },
+      "opaquePixels": 2271,
+      "colors": 15,
+      "pixelSha256": "25b33f20de64969cdb0f37e297a3616f84f8eecc9fa095c64152739dca8abc92"
+    },
+    {
+      "id": "workshop-drum-roaster-spring",
+      "bounds": {
+        "x": 19,
+        "y": 17,
+        "width": 63,
+        "height": 67
+      },
+      "opaquePixels": 2858,
+      "colors": 14,
+      "pixelSha256": "3086ac2f2ce34e16512adb0eb6ecefccee1ff8a74974606384f42420d78e3f29"
+    },
+    {
+      "id": "workshop-drum-roaster-summer",
+      "bounds": {
+        "x": 19,
+        "y": 17,
+        "width": 63,
+        "height": 67
+      },
+      "opaquePixels": 3030,
+      "colors": 14,
+      "pixelSha256": "de35d1878d631f905ec4f6dce30839086bad03db44617489c71c1d1a90b62cd9"
+    },
+    {
+      "id": "workshop-drum-roaster-autumn",
+      "bounds": {
+        "x": 15,
+        "y": 17,
+        "width": 67,
+        "height": 67
+      },
+      "opaquePixels": 2907,
+      "colors": 15,
+      "pixelSha256": "eb4805363629c04b995f396f87f58cb5e6e7abb5c316fe1928c7fed65ae74eb2"
+    },
+    {
+      "id": "workshop-drum-roaster-winter",
+      "bounds": {
+        "x": 19,
+        "y": 17,
+        "width": 63,
+        "height": 67
+      },
+      "opaquePixels": 3110,
+      "colors": 14,
+      "pixelSha256": "4db219a04c80c46c6047cbe7c9ca88ac8b5d68c95d2702cd40f009b51c33009c"
+    },
+    {
+      "id": "workshop-cooling-sieve-spring",
+      "bounds": {
+        "x": 11,
+        "y": 36,
+        "width": 75,
+        "height": 48
+      },
+      "opaquePixels": 2340,
+      "colors": 11,
+      "pixelSha256": "78271b0b5e810ea07694ec6b955e0c4e3009a550ad733213d2af38b6ab52b5ea"
+    },
+    {
+      "id": "workshop-cooling-sieve-summer",
+      "bounds": {
+        "x": 11,
+        "y": 33,
+        "width": 75,
+        "height": 51
+      },
+      "opaquePixels": 2383,
+      "colors": 11,
+      "pixelSha256": "1606194419b7a0a4043266ea1af4305077d2adf0c42bacbac3eb652950965ef4"
+    },
+    {
+      "id": "workshop-cooling-sieve-autumn",
+      "bounds": {
+        "x": 11,
+        "y": 33,
+        "width": 75,
+        "height": 51
+      },
+      "opaquePixels": 2435,
+      "colors": 10,
+      "pixelSha256": "2c2e3349bd127fcd5919aedca03c824a616211e360dee82e33814bc1de4d8ad7"
+    },
+    {
+      "id": "workshop-cooling-sieve-winter",
+      "bounds": {
+        "x": 11,
+        "y": 26,
+        "width": 75,
+        "height": 58
+      },
+      "opaquePixels": 2437,
+      "colors": 11,
+      "pixelSha256": "912f9872371b93a97032dcc59b5de6abe0e812f6be22bb59372f995732a2525b"
+    },
+    {
+      "id": "workshop-green-bean-sack-spring",
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 59,
+        "height": 64
+      },
+      "opaquePixels": 2699,
+      "colors": 12,
+      "pixelSha256": "426e88a96a7636994bb365a4046bb72319033e5392bb68a0d37b786d9419c2c7"
+    },
+    {
+      "id": "workshop-green-bean-sack-summer",
+      "bounds": {
+        "x": 19,
+        "y": 23,
+        "width": 63,
+        "height": 61
+      },
+      "opaquePixels": 2634,
+      "colors": 15,
+      "pixelSha256": "7a9e0d66db9b1074e06dc608a2b2f715fa5340c1729d7cd2f4d85821ed75d916"
+    },
+    {
+      "id": "workshop-green-bean-sack-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 23,
+        "width": 61,
+        "height": 61
+      },
+      "opaquePixels": 2799,
+      "colors": 12,
+      "pixelSha256": "3bcc4cdfd6349e3c23689b3ae19f74a077ece0377b993a7d98dc05aafcee865c"
+    },
+    {
+      "id": "workshop-green-bean-sack-winter",
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 59,
+        "height": 64
+      },
+      "opaquePixels": 2648,
+      "colors": 13,
+      "pixelSha256": "bd8a7776d935271bacf6da7ab6cca72c0384a0d9c7e105badb689e9bbc0163d7"
+    },
+    {
+      "id": "workshop-roast-tray-spring",
+      "bounds": {
+        "x": 17,
+        "y": 44,
+        "width": 65,
+        "height": 40
+      },
+      "opaquePixels": 2182,
+      "colors": 12,
+      "pixelSha256": "34ce808235f732320ff6a65a67bc6629f030f36f9708001e28990f10dc02b22f"
+    },
+    {
+      "id": "workshop-roast-tray-summer",
+      "bounds": {
+        "x": 17,
+        "y": 32,
+        "width": 65,
+        "height": 52
+      },
+      "opaquePixels": 2368,
+      "colors": 9,
+      "pixelSha256": "8a6e72ebf0eaf5e9a0d3c81eafacd4049dc872c13e73a491c6c9c0276503c50d"
+    },
+    {
+      "id": "workshop-roast-tray-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 28,
+        "width": 65,
+        "height": 56
+      },
+      "opaquePixels": 2364,
+      "colors": 11,
+      "pixelSha256": "8341ebf8e6f4c357e4840d87749de386f1dd164c987cc52391f5e85fd64f062c"
+    },
+    {
+      "id": "workshop-roast-tray-winter",
+      "bounds": {
+        "x": 17,
+        "y": 29,
+        "width": 65,
+        "height": 55
+      },
+      "opaquePixels": 2396,
+      "colors": 10,
+      "pixelSha256": "dbfcc52612bb3e84ca5cde45df231dcafce63f2d9d32a845da93041c0ae2ebb9"
+    },
+    {
+      "id": "workshop-bean-scoop-spring",
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 62,
+        "height": 63
+      },
+      "opaquePixels": 1812,
+      "colors": 13,
+      "pixelSha256": "aaf7793d794185634aeb62126079641485ef3a181227af504ca3868a6f2b071e"
+    },
+    {
+      "id": "workshop-bean-scoop-summer",
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 62,
+        "height": 63
+      },
+      "opaquePixels": 1812,
+      "colors": 11,
+      "pixelSha256": "3fabbf1bca86d9e8f6f39aca4849fcdc4bf8a67c7b4b1118e2eb78f23fec20f3"
+    },
+    {
+      "id": "workshop-bean-scoop-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 62,
+        "height": 63
+      },
+      "opaquePixels": 1945,
+      "colors": 10,
+      "pixelSha256": "48b638bbd15cb40e4ed21d8a786728252fa848208bce6a4063d7b4f972aac794"
+    },
+    {
+      "id": "workshop-bean-scoop-winter",
+      "bounds": {
+        "x": 19,
+        "y": 10,
+        "width": 64,
+        "height": 74
+      },
+      "opaquePixels": 1851,
+      "colors": 12,
+      "pixelSha256": "f15d7acb16ca67950051dd28bf020cb3fa9711898a452a0a1d7edc3c5f816153"
+    },
+    {
+      "id": "workshop-sample-trier-spring",
+      "bounds": {
+        "x": 19,
+        "y": 18,
+        "width": 60,
+        "height": 66
+      },
+      "opaquePixels": 1034,
+      "colors": 12,
+      "pixelSha256": "f14f1bef0ce4b597430df7ae086ed058cfcb2e5031bf025780ee034dc06e8bc4"
+    },
+    {
+      "id": "workshop-sample-trier-summer",
+      "bounds": {
+        "x": 19,
+        "y": 18,
+        "width": 62,
+        "height": 66
+      },
+      "opaquePixels": 1253,
+      "colors": 9,
+      "pixelSha256": "38da03458656c8b931fbd5f727b5df57605f7de03f14999363c82bc101a41ff5"
+    },
+    {
+      "id": "workshop-sample-trier-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 18,
+        "width": 60,
+        "height": 66
+      },
+      "opaquePixels": 1149,
+      "colors": 11,
+      "pixelSha256": "3ba23103a0156c92e703bc4db39e41352e71e581224305b8e05911538fd44dea"
+    },
+    {
+      "id": "workshop-sample-trier-winter",
+      "bounds": {
+        "x": 19,
+        "y": 18,
+        "width": 60,
+        "height": 66
+      },
+      "opaquePixels": 1103,
+      "colors": 12,
+      "pixelSha256": "575988b6aec05c49357f74cf97c3513537a4afe7193f25c4c81bcfd33c4bbbf3"
+    },
+    {
+      "id": "workshop-bean-sorting-board-spring",
+      "bounds": {
+        "x": 17,
+        "y": 32,
+        "width": 65,
+        "height": 52
+      },
+      "opaquePixels": 2743,
+      "colors": 12,
+      "pixelSha256": "924aca58fe79cf693074f1a4ecfed0f7d280be3f5173d4eb2dfe88fdf8d6ffc3"
+    },
+    {
+      "id": "workshop-bean-sorting-board-summer",
+      "bounds": {
+        "x": 17,
+        "y": 32,
+        "width": 65,
+        "height": 52
+      },
+      "opaquePixels": 2743,
+      "colors": 14,
+      "pixelSha256": "5031b5b593a3037fc78d9cb61a51903d6cc1e80255980651ae501b6e9e886d09"
+    },
+    {
+      "id": "workshop-bean-sorting-board-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 32,
+        "width": 68,
+        "height": 52
+      },
+      "opaquePixels": 2828,
+      "colors": 10,
+      "pixelSha256": "e8d8d15fc8f376abc005d8ceddff35dff2969d3161445bd91d44d8f912b6f0ed"
+    },
+    {
+      "id": "workshop-bean-sorting-board-winter",
+      "bounds": {
+        "x": 17,
+        "y": 28,
+        "width": 65,
+        "height": 56
+      },
+      "opaquePixels": 2895,
+      "colors": 13,
+      "pixelSha256": "472072571820b00898b64f5d8497dd00878cc5b4ae819a7857db4153ed844f0a"
+    },
+    {
+      "id": "workshop-chaff-bin-spring",
+      "bounds": {
+        "x": 19,
+        "y": 25,
+        "width": 59,
+        "height": 59
+      },
+      "opaquePixels": 2513,
+      "colors": 9,
+      "pixelSha256": "d714ebb0df2748ccb9ba3193e896ee5d115305982491ab11403e1e3db32e9d10"
+    },
+    {
+      "id": "workshop-chaff-bin-summer",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 59,
+        "height": 65
+      },
+      "opaquePixels": 2528,
+      "colors": 11,
+      "pixelSha256": "02d36ad4a958405e15d319f4415cbed4140dddd72b380d42e15e10615af800f6"
+    },
+    {
+      "id": "workshop-chaff-bin-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 25,
+        "width": 59,
+        "height": 59
+      },
+      "opaquePixels": 2377,
+      "colors": 11,
+      "pixelSha256": "c7328523d59c98024795b0f7d46d1222bbbe093f7b7119571da26fd87da91a1f"
+    },
+    {
+      "id": "workshop-chaff-bin-winter",
+      "bounds": {
+        "x": 19,
+        "y": 25,
+        "width": 59,
+        "height": 59
+      },
+      "opaquePixels": 2617,
+      "colors": 10,
+      "pixelSha256": "9832994cbaccaa6843642eba2a71b15264b81d64eee518c10ebc9f2816afe19d"
+    },
+    {
+      "id": "workshop-rolling-pin-spring",
+      "bounds": {
+        "x": 17,
+        "y": 22,
+        "width": 65,
+        "height": 62
+      },
+      "opaquePixels": 2350,
+      "colors": 9,
+      "pixelSha256": "22b74ab30d29395da4997b54efd9c80567a8f4985e164d5f88f8352f31a77c38"
+    },
+    {
+      "id": "workshop-rolling-pin-summer",
+      "bounds": {
+        "x": 17,
+        "y": 22,
+        "width": 65,
+        "height": 62
+      },
+      "opaquePixels": 2350,
+      "colors": 9,
+      "pixelSha256": "3e9191a0b6e8d08c3162bf6a6989eff33763b36ba6175dc293d16a54d584af1e"
+    },
+    {
+      "id": "workshop-rolling-pin-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 22,
+        "width": 65,
+        "height": 62
+      },
+      "opaquePixels": 2350,
+      "colors": 9,
+      "pixelSha256": "a2b71d67aa13f17094cdf3e9c0393a14fbee06f43f574cbce6f939e738311eee"
+    },
+    {
+      "id": "workshop-rolling-pin-winter",
+      "bounds": {
+        "x": 17,
+        "y": 22,
+        "width": 65,
+        "height": 62
+      },
+      "opaquePixels": 2363,
+      "colors": 11,
+      "pixelSha256": "13057581e6f0cf59a4874f29cd314f9d67a947b2199a448a334aebe3d0cadbbc"
+    },
+    {
+      "id": "workshop-balloon-whisk-spring",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 59,
+        "height": 65
+      },
+      "opaquePixels": 875,
+      "colors": 11,
+      "pixelSha256": "dcf715fd876f3304e8c3c4957b37799eba0271aca6bb6e6fecf564ed8f4eeab3"
+    },
+    {
+      "id": "workshop-balloon-whisk-summer",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 59,
+        "height": 65
+      },
+      "opaquePixels": 1112,
+      "colors": 12,
+      "pixelSha256": "b078d113cefa2322d4799b01b89ddfef8796b4104944ab02646d4c4119fd61e9"
+    },
+    {
+      "id": "workshop-balloon-whisk-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 63,
+        "height": 65
+      },
+      "opaquePixels": 1060,
+      "colors": 10,
+      "pixelSha256": "4a3afcd5343c1a9e501ddcdced050230594178b4a63e7335e0873a7bc75a63a4"
+    },
+    {
+      "id": "workshop-balloon-whisk-winter",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 59,
+        "height": 65
+      },
+      "opaquePixels": 1094,
+      "colors": 12,
+      "pixelSha256": "d349ebc66df0490b3c430b8ec60d5a4d01d7c6919eb43736c857541eac13c24f"
+    },
+    {
+      "id": "workshop-stand-mixer-spring",
+      "bounds": {
+        "x": 19,
+        "y": 24,
+        "width": 59,
+        "height": 60
+      },
+      "opaquePixels": 2755,
+      "colors": 12,
+      "pixelSha256": "750d8ce988a0a0a4ee7aa0591dabaa7213d30ae9b608502f41561662391ec4f8"
+    },
+    {
+      "id": "workshop-stand-mixer-summer",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 59,
+        "height": 65
+      },
+      "opaquePixels": 2801,
+      "colors": 12,
+      "pixelSha256": "65ffdcbd03284653ffe329b7082221e8d66d0fcc2c107f5f4d5606e68bb8eabf"
+    },
+    {
+      "id": "workshop-stand-mixer-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 24,
+        "width": 59,
+        "height": 60
+      },
+      "opaquePixels": 2770,
+      "colors": 13,
+      "pixelSha256": "50ba210752bd0a21aa7d3ee0d51df55655ba59dac479a499f117c77f7048f750"
+    },
+    {
+      "id": "workshop-stand-mixer-winter",
+      "bounds": {
+        "x": 19,
+        "y": 24,
+        "width": 59,
+        "height": 60
+      },
+      "opaquePixels": 2862,
+      "colors": 12,
+      "pixelSha256": "868adf25f78eee4b0cf89f20b49caedb6bee036cb4248bc3fdf25fc218d1d00f"
+    },
+    {
+      "id": "workshop-dough-scraper-spring",
+      "bounds": {
+        "x": 17,
+        "y": 24,
+        "width": 65,
+        "height": 60
+      },
+      "opaquePixels": 2592,
+      "colors": 12,
+      "pixelSha256": "e36cf5e8c53f4e1bccae775ce8391b84b70ae5866b0affd90c38e109c3ecd241"
+    },
+    {
+      "id": "workshop-dough-scraper-summer",
+      "bounds": {
+        "x": 17,
+        "y": 24,
+        "width": 65,
+        "height": 60
+      },
+      "opaquePixels": 2592,
+      "colors": 12,
+      "pixelSha256": "fb0e87081c7f8a5b75c961df6b13d2044925e4cd67ab86ebc4495c3c02d2f1b6"
+    },
+    {
+      "id": "workshop-dough-scraper-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 24,
+        "width": 65,
+        "height": 60
+      },
+      "opaquePixels": 2592,
+      "colors": 11,
+      "pixelSha256": "2946cd6c0fc82a65b5983f1766a383fd6b571f51da6c699602ce9b9e26236a11"
+    },
+    {
+      "id": "workshop-dough-scraper-winter",
+      "bounds": {
+        "x": 17,
+        "y": 24,
+        "width": 65,
+        "height": 60
+      },
+      "opaquePixels": 2593,
+      "colors": 13,
+      "pixelSha256": "142b7ec8f1afc7dde86ad829ba2dd827e6c811b41275cfeb644ed6dabdbd3dfd"
+    },
+    {
+      "id": "workshop-pastry-brush-spring",
+      "bounds": {
+        "x": 17,
+        "y": 22,
+        "width": 65,
+        "height": 62
+      },
+      "opaquePixels": 2054,
+      "colors": 14,
+      "pixelSha256": "cab2a9d66df6068b6cc1a7c74f2d838d571004c6801b48eb9b0e528a25859ddc"
+    },
+    {
+      "id": "workshop-pastry-brush-summer",
+      "bounds": {
+        "x": 17,
+        "y": 22,
+        "width": 65,
+        "height": 62
+      },
+      "opaquePixels": 2054,
+      "colors": 13,
+      "pixelSha256": "275bfb3cf0c3dd71e30b48742cb1602801f4e2cc051ec7975d5311ac1a95c2b3"
+    },
+    {
+      "id": "workshop-pastry-brush-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 22,
+        "width": 65,
+        "height": 62
+      },
+      "opaquePixels": 2054,
+      "colors": 12,
+      "pixelSha256": "fd5968d986a5d4c27d2997ca5d12df3f8a4d0864d814478b83543725449a1b28"
+    },
+    {
+      "id": "workshop-pastry-brush-winter",
+      "bounds": {
+        "x": 17,
+        "y": 12,
+        "width": 65,
+        "height": 72
+      },
+      "opaquePixels": 2140,
+      "colors": 13,
+      "pixelSha256": "2516b55ab0d87fa08e04e25b1c05b530a160cdc115dc55ec067fff848ec20832"
+    },
+    {
+      "id": "workshop-flour-sifter-spring",
+      "bounds": {
+        "x": 19,
+        "y": 24,
+        "width": 62,
+        "height": 60
+      },
+      "opaquePixels": 2300,
+      "colors": 10,
+      "pixelSha256": "d126ec4125b42797bfd0f5f680715dc842351180a133300ce6a86fd2768016d0"
+    },
+    {
+      "id": "workshop-flour-sifter-summer",
+      "bounds": {
+        "x": 19,
+        "y": 24,
+        "width": 62,
+        "height": 60
+      },
+      "opaquePixels": 2271,
+      "colors": 10,
+      "pixelSha256": "57e760c2047ed379edd8c8bb239e5d71fd554a731215a8c02938d3a195c9a70c"
+    },
+    {
+      "id": "workshop-flour-sifter-autumn",
+      "bounds": {
+        "x": 14,
+        "y": 24,
+        "width": 67,
+        "height": 60
+      },
+      "opaquePixels": 2360,
+      "colors": 13,
+      "pixelSha256": "f60981f09e8bc354995171056c4cf81b3250db6bb5e9238cf38a94c2fb76d97c"
+    },
+    {
+      "id": "workshop-flour-sifter-winter",
+      "bounds": {
+        "x": 19,
+        "y": 24,
+        "width": 62,
+        "height": 60
+      },
+      "opaquePixels": 2509,
+      "colors": 11,
+      "pixelSha256": "f3a4d04234281d6e37918816ef9fa1aa07171c46fd7d64db9f5ebf31ecf92f3f"
+    },
+    {
+      "id": "workshop-piping-bag-spring",
+      "bounds": {
+        "x": 17,
+        "y": 14,
+        "width": 65,
+        "height": 70
+      },
+      "opaquePixels": 2935,
+      "colors": 13,
+      "pixelSha256": "0966318b5b3dd865116f6f6005824787d7ba28cda46f5a727b405795c997d175"
+    },
+    {
+      "id": "workshop-piping-bag-summer",
+      "bounds": {
+        "x": 17,
+        "y": 14,
+        "width": 65,
+        "height": 70
+      },
+      "opaquePixels": 2935,
+      "colors": 13,
+      "pixelSha256": "7e9023be1df8d00a2f592af2c8daa993ad2acc1d7e6c07e97c6e7837ad58ad39"
+    },
+    {
+      "id": "workshop-piping-bag-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 14,
+        "width": 65,
+        "height": 70
+      },
+      "opaquePixels": 2935,
+      "colors": 13,
+      "pixelSha256": "b5936b2867b0aee319e5d2fb1ece667e2a88e5782fa3ee69d092188b313ad2e4"
+    },
+    {
+      "id": "workshop-piping-bag-winter",
+      "bounds": {
+        "x": 17,
+        "y": 14,
+        "width": 65,
+        "height": 70
+      },
+      "opaquePixels": 2935,
+      "colors": 13,
+      "pixelSha256": "b719b4e97c081e0cc28bc756440d7de9038406510c775d41fbcab78e81cef6f1"
+    },
+    {
+      "id": "workshop-dough-docker-spring",
+      "bounds": {
+        "x": 17,
+        "y": 19,
+        "width": 66,
+        "height": 65
+      },
+      "opaquePixels": 2380,
+      "colors": 12,
+      "pixelSha256": "a5904a85032e31ac0dadb41bc73f9801840605ff4719e570d46034b2b8d4c122"
+    },
+    {
+      "id": "workshop-dough-docker-summer",
+      "bounds": {
+        "x": 17,
+        "y": 19,
+        "width": 66,
+        "height": 65
+      },
+      "opaquePixels": 2380,
+      "colors": 12,
+      "pixelSha256": "56d5d0bb13058b951dc813e71bfe649b1a8ca57dee98649adf05c6f3baff6956"
+    },
+    {
+      "id": "workshop-dough-docker-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 19,
+        "width": 66,
+        "height": 65
+      },
+      "opaquePixels": 2383,
+      "colors": 13,
+      "pixelSha256": "09a168d91bb40aa5f68a7a867c9650745005efd540d26e2423a5c7f6c082a9ba"
+    },
+    {
+      "id": "workshop-dough-docker-winter",
+      "bounds": {
+        "x": 17,
+        "y": 19,
+        "width": 66,
+        "height": 65
+      },
+      "opaquePixels": 2380,
+      "colors": 13,
+      "pixelSha256": "151bffce895daa6e54dd7b27594d2f8fac28dd95f1e674b8f47d342300a7f5c3"
+    },
+    {
+      "id": "workshop-loaf-mold-spring",
+      "bounds": {
+        "x": 19,
+        "y": 35,
+        "width": 59,
+        "height": 49
+      },
+      "opaquePixels": 2309,
+      "colors": 10,
+      "pixelSha256": "7f30981d95e75fe11de499106fef0bbb6ceb6a5dc89ed9b9bcb42b05b49da538"
+    },
+    {
+      "id": "workshop-loaf-mold-summer",
+      "bounds": {
+        "x": 19,
+        "y": 35,
+        "width": 59,
+        "height": 49
+      },
+      "opaquePixels": 2309,
+      "colors": 10,
+      "pixelSha256": "f8f329bf18a6531423bcfc16e5893362e59190384d7e804e9decd4a81ea3a9e2"
+    },
+    {
+      "id": "workshop-loaf-mold-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 33,
+        "width": 59,
+        "height": 51
+      },
+      "opaquePixels": 2376,
+      "colors": 9,
+      "pixelSha256": "aa0845e9399948c887354f2fd6efbd0a72c2cd2baf1e9a493c50a318b08f29ea"
+    },
+    {
+      "id": "workshop-loaf-mold-winter",
+      "bounds": {
+        "x": 19,
+        "y": 32,
+        "width": 59,
+        "height": 52
+      },
+      "opaquePixels": 2421,
+      "colors": 9,
+      "pixelSha256": "3793d4c58d7e6c2686da4b8083ac82e1939571d34bd2025a47fc354b43db44a8"
+    },
+    {
+      "id": "workshop-muffin-pan-spring",
+      "bounds": {
+        "x": 16,
+        "y": 36,
+        "width": 67,
+        "height": 48
+      },
+      "opaquePixels": 2894,
+      "colors": 7,
+      "pixelSha256": "7d31bf5a7a5bd725bfb840c8d932ba44ed119e4373c02d221f11559aa9c3e96c"
+    },
+    {
+      "id": "workshop-muffin-pan-summer",
+      "bounds": {
+        "x": 16,
+        "y": 36,
+        "width": 67,
+        "height": 48
+      },
+      "opaquePixels": 2894,
+      "colors": 8,
+      "pixelSha256": "98ae95866337b34fd244b26eb39bd332905f3ac891d31ecbbf3f029455b13942"
+    },
+    {
+      "id": "workshop-muffin-pan-autumn",
+      "bounds": {
+        "x": 16,
+        "y": 36,
+        "width": 67,
+        "height": 48
+      },
+      "opaquePixels": 2894,
+      "colors": 10,
+      "pixelSha256": "ea4dda95448331dd3f9171380c73f2c946b43ca1f6f4ea76c91232034682f6d7"
+    },
+    {
+      "id": "workshop-muffin-pan-winter",
+      "bounds": {
+        "x": 16,
+        "y": 22,
+        "width": 67,
+        "height": 62
+      },
+      "opaquePixels": 3253,
+      "colors": 8,
+      "pixelSha256": "9fc61f40e3fd32966d418f04dff58643bef3caef6370a0bf737af50e42304a01"
+    },
+    {
+      "id": "workshop-bundt-mold-spring",
+      "bounds": {
+        "x": 19,
+        "y": 33,
+        "width": 61,
+        "height": 51
+      },
+      "opaquePixels": 2529,
+      "colors": 9,
+      "pixelSha256": "f0f6d39588cd08a15b09d273ab3170b8c6737cddc9c713561992a930b9acb217"
+    },
+    {
+      "id": "workshop-bundt-mold-summer",
+      "bounds": {
+        "x": 19,
+        "y": 33,
+        "width": 61,
+        "height": 51
+      },
+      "opaquePixels": 2529,
+      "colors": 9,
+      "pixelSha256": "2f68c9c5e1c6dac66257947e2eea8ff0e62a4ce7f19b198ea836cd9af691bcc9"
+    },
+    {
+      "id": "workshop-bundt-mold-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 33,
+        "width": 61,
+        "height": 51
+      },
+      "opaquePixels": 2529,
+      "colors": 10,
+      "pixelSha256": "6ed76fb1de7c277192d807e24f669988e0b6224ea30416e5fe860fe06d171491"
+    },
+    {
+      "id": "workshop-bundt-mold-winter",
+      "bounds": {
+        "x": 19,
+        "y": 33,
+        "width": 65,
+        "height": 51
+      },
+      "opaquePixels": 2628,
+      "colors": 11,
+      "pixelSha256": "18a02ccbc3848a928d91c16432b980dab1d0931089aa87b8cbf131afe921372a"
+    },
+    {
+      "id": "workshop-proofing-basket-spring",
+      "bounds": {
+        "x": 19,
+        "y": 38,
+        "width": 59,
+        "height": 46
+      },
+      "opaquePixels": 2131,
+      "colors": 8,
+      "pixelSha256": "ccf1422ab4c7bc11aeb594e6e50dce55b74f85c61c746ce8b1be49c0236544be"
+    },
+    {
+      "id": "workshop-proofing-basket-summer",
+      "bounds": {
+        "x": 19,
+        "y": 39,
+        "width": 59,
+        "height": 45
+      },
+      "opaquePixels": 2104,
+      "colors": 8,
+      "pixelSha256": "4abdd21217279de6438312528f380ad9e8a76c68e4477c57c4e5e146de6bbfc3"
+    },
+    {
+      "id": "workshop-proofing-basket-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 36,
+        "width": 59,
+        "height": 48
+      },
+      "opaquePixels": 2175,
+      "colors": 8,
+      "pixelSha256": "539f67877403c8014a5c06a7f36f49c1b91218e3802db9fd414df7794f869439"
+    },
+    {
+      "id": "workshop-proofing-basket-winter",
+      "bounds": {
+        "x": 19,
+        "y": 39,
+        "width": 59,
+        "height": 45
+      },
+      "opaquePixels": 2108,
+      "colors": 10,
+      "pixelSha256": "4a057589a2119b6150ae99db64be0506679c2d2568d804e5a46d8e72396ff04d"
+    },
+    {
+      "id": "workshop-cooling-rack-spring",
+      "bounds": {
+        "x": 19,
+        "y": 33,
+        "width": 60,
+        "height": 51
+      },
+      "opaquePixels": 1634,
+      "colors": 8,
+      "pixelSha256": "0841b14e53c2cbad64348f7f214af0cd7987ae22518b7e20f2a20729f1290668"
+    },
+    {
+      "id": "workshop-cooling-rack-summer",
+      "bounds": {
+        "x": 19,
+        "y": 33,
+        "width": 60,
+        "height": 51
+      },
+      "opaquePixels": 1618,
+      "colors": 10,
+      "pixelSha256": "8dafc4a73183bd02a5a86e8dc5d07066d397c4cbd370e5fbffa85b3d2411b995"
+    },
+    {
+      "id": "workshop-cooling-rack-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 33,
+        "width": 60,
+        "height": 51
+      },
+      "opaquePixels": 1815,
+      "colors": 9,
+      "pixelSha256": "49469afb5e07095bce4e806f830303a9afbd53d810593c07122ebda97e15c5c0"
+    },
+    {
+      "id": "workshop-cooling-rack-winter",
+      "bounds": {
+        "x": 19,
+        "y": 33,
+        "width": 60,
+        "height": 51
+      },
+      "opaquePixels": 1682,
+      "colors": 10,
+      "pixelSha256": "8d1c56039f6f7e87762ca1ba98c6ac988f9e58c82a5e7596f6853340037f59be"
+    },
+    {
+      "id": "workshop-baking-sheet-spring",
+      "bounds": {
+        "x": 15,
+        "y": 34,
+        "width": 69,
+        "height": 50
+      },
+      "opaquePixels": 3043,
+      "colors": 7,
+      "pixelSha256": "0674f25b68cad8c2a6bb93e0e90b50650b2229676e10a8a809e5436072d17261"
+    },
+    {
+      "id": "workshop-baking-sheet-summer",
+      "bounds": {
+        "x": 15,
+        "y": 34,
+        "width": 69,
+        "height": 50
+      },
+      "opaquePixels": 3043,
+      "colors": 11,
+      "pixelSha256": "f3ae762a3e94d2e349075f260d20c67280c63a1327861688c11c3f9290ba7be5"
+    },
+    {
+      "id": "workshop-baking-sheet-autumn",
+      "bounds": {
+        "x": 15,
+        "y": 34,
+        "width": 69,
+        "height": 50
+      },
+      "opaquePixels": 3043,
+      "colors": 10,
+      "pixelSha256": "e75f6ac2dc94d148d63d35e82f1a97084cc2e07660b58cd128d370582b4872b1"
+    },
+    {
+      "id": "workshop-baking-sheet-winter",
+      "bounds": {
+        "x": 15,
+        "y": 34,
+        "width": 69,
+        "height": 50
+      },
+      "opaquePixels": 3043,
+      "colors": 10,
+      "pixelSha256": "ed925efefcbb56d915eccf518bcf3d0d84bc0ec4d5157dd8ade85d6bd4d74a86"
+    },
+    {
+      "id": "workshop-springform-pan-spring",
+      "bounds": {
+        "x": 19,
+        "y": 35,
+        "width": 59,
+        "height": 49
+      },
+      "opaquePixels": 2056,
+      "colors": 10,
+      "pixelSha256": "38a2a8b6106338b0ca8da2348847a98dce74aa358767c4cc4f8e417761e01435"
+    },
+    {
+      "id": "workshop-springform-pan-summer",
+      "bounds": {
+        "x": 19,
+        "y": 35,
+        "width": 59,
+        "height": 49
+      },
+      "opaquePixels": 2056,
+      "colors": 11,
+      "pixelSha256": "8dac988e38dae09c3c067f84d3dd067747adeb902f1994180ede4b22da6996d9"
+    },
+    {
+      "id": "workshop-springform-pan-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 35,
+        "width": 59,
+        "height": 49
+      },
+      "opaquePixels": 2056,
+      "colors": 12,
+      "pixelSha256": "8b19de429061bd5a58238999b4faa5fc5f7a242ec3e0bb96ba9b5668d9c343e4"
+    },
+    {
+      "id": "workshop-springform-pan-winter",
+      "bounds": {
+        "x": 19,
+        "y": 24,
+        "width": 59,
+        "height": 60
+      },
+      "opaquePixels": 2540,
+      "colors": 9,
+      "pixelSha256": "55ea50f8327f12fe167b3ac20a3c33e24f2a9afd4b7bf3f4a15cca333a8e05a8"
+    },
+    {
+      "id": "workshop-cookie-cutters-spring",
+      "bounds": {
+        "x": 17,
+        "y": 42,
+        "width": 65,
+        "height": 42
+      },
+      "opaquePixels": 2073,
+      "colors": 11,
+      "pixelSha256": "f8f23f1b82447da6bd0920a745882ac9cc379c87ec81ab28b854248d8bb8826c"
+    },
+    {
+      "id": "workshop-cookie-cutters-summer",
+      "bounds": {
+        "x": 17,
+        "y": 41,
+        "width": 65,
+        "height": 43
+      },
+      "opaquePixels": 2028,
+      "colors": 11,
+      "pixelSha256": "c58f006ae948af9def12a597f6cd2cb3c971ee507b5490a7b91da61da20ee0a7"
+    },
+    {
+      "id": "workshop-cookie-cutters-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 42,
+        "width": 65,
+        "height": 42
+      },
+      "opaquePixels": 2088,
+      "colors": 11,
+      "pixelSha256": "0a3a32e872006977a2da2c6f19065003c96d628946501837b520f93706f17472"
+    },
+    {
+      "id": "workshop-cookie-cutters-winter",
+      "bounds": {
+        "x": 17,
+        "y": 27,
+        "width": 65,
+        "height": 57
+      },
+      "opaquePixels": 2320,
+      "colors": 13,
+      "pixelSha256": "6f8742dbf3b068519e42aea6b3cd212f6338bca94034c655f559679fa87aff50"
+    },
+    {
+      "id": "workshop-flour-sack-spring",
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 59,
+        "height": 64
+      },
+      "opaquePixels": 2643,
+      "colors": 8,
+      "pixelSha256": "1f284c0582ee741582e7c7cee2ba657339fe9a5c4078c48c1b503e21039c5522"
+    },
+    {
+      "id": "workshop-flour-sack-summer",
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 62,
+        "height": 64
+      },
+      "opaquePixels": 2689,
+      "colors": 12,
+      "pixelSha256": "1d6c2626f42a1c4312107dcc3da2656fb1e947e1d584d5a9831cbf56a8c66a8c"
+    },
+    {
+      "id": "workshop-flour-sack-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 18,
+        "width": 59,
+        "height": 66
+      },
+      "opaquePixels": 2706,
+      "colors": 10,
+      "pixelSha256": "ad5fc7543e876842b3e0d0d121cfb60809441534e016ef6c38e851fc0e50c2ee"
+    },
+    {
+      "id": "workshop-flour-sack-winter",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 59,
+        "height": 65
+      },
+      "opaquePixels": 2646,
+      "colors": 8,
+      "pixelSha256": "ebb8b3a6919d3debfdefdb0c82803d49df73c7f17a87f0f20846fec5b3f94725"
+    },
+    {
+      "id": "workshop-butter-dish-spring",
+      "bounds": {
+        "x": 16,
+        "y": 40,
+        "width": 65,
+        "height": 44
+      },
+      "opaquePixels": 2024,
+      "colors": 12,
+      "pixelSha256": "1106e432d70ed158d0708ef85d3ac1b41f4f6df5dfede5f0ec5ba323d6928531"
+    },
+    {
+      "id": "workshop-butter-dish-summer",
+      "bounds": {
+        "x": 16,
+        "y": 40,
+        "width": 65,
+        "height": 44
+      },
+      "opaquePixels": 2024,
+      "colors": 12,
+      "pixelSha256": "2735382222bd2f80dcca3924b943f0b834b7722cda38bb5b78a678f837374c1c"
+    },
+    {
+      "id": "workshop-butter-dish-autumn",
+      "bounds": {
+        "x": 16,
+        "y": 40,
+        "width": 65,
+        "height": 44
+      },
+      "opaquePixels": 2024,
+      "colors": 13,
+      "pixelSha256": "d6996156fbcccd3dea7fe6a70fda9a22923e1cb86f90a481363fc33aab73dac3"
+    },
+    {
+      "id": "workshop-butter-dish-winter",
+      "bounds": {
+        "x": 16,
+        "y": 25,
+        "width": 65,
+        "height": 59
+      },
+      "opaquePixels": 2616,
+      "colors": 12,
+      "pixelSha256": "daebeb0530ab23732001177e8fc2add8f1ae3fccdbe15230b4013aea6ce941fb"
+    },
+    {
+      "id": "workshop-dough-ball-spring",
+      "bounds": {
+        "x": 17,
+        "y": 41,
+        "width": 65,
+        "height": 43
+      },
+      "opaquePixels": 2161,
+      "colors": 9,
+      "pixelSha256": "a64d0577bbfad2370306e409c457de182aad9a16273b3d1d69fce2f9d182924f"
+    },
+    {
+      "id": "workshop-dough-ball-summer",
+      "bounds": {
+        "x": 17,
+        "y": 47,
+        "width": 65,
+        "height": 37
+      },
+      "opaquePixels": 1914,
+      "colors": 9,
+      "pixelSha256": "c554a5660fc9a629897b986b0e898eb8813d73ac13740990678c80b2d72bedf2"
+    },
+    {
+      "id": "workshop-dough-ball-autumn",
+      "bounds": {
+        "x": 17,
+        "y": 41,
+        "width": 65,
+        "height": 43
+      },
+      "opaquePixels": 2138,
+      "colors": 8,
+      "pixelSha256": "f0007a7547705e6e587c88493731fbe5217d986b4d81d3bb92e86683699d2961"
+    },
+    {
+      "id": "workshop-dough-ball-winter",
+      "bounds": {
+        "x": 17,
+        "y": 38,
+        "width": 65,
+        "height": 46
+      },
+      "opaquePixels": 2301,
+      "colors": 11,
+      "pixelSha256": "8186649b3616afb0513e95a5161c4fcbaee2842db0417cc55b195615086caeb9"
+    },
+    {
+      "id": "workshop-yeast-bottle-spring",
+      "bounds": {
+        "x": 19,
+        "y": 17,
+        "width": 59,
+        "height": 67
+      },
+      "opaquePixels": 2487,
+      "colors": 6,
+      "pixelSha256": "1fc3d256ff07af99aac48af12a75e5603b801784e93fd2aeaef374d53da89de5"
+    },
+    {
+      "id": "workshop-yeast-bottle-summer",
+      "bounds": {
+        "x": 19,
+        "y": 10,
+        "width": 59,
+        "height": 74
+      },
+      "opaquePixels": 2402,
+      "colors": 11,
+      "pixelSha256": "a20d39b36dfd485cdeffb0bce4831d5a0c0605c455c379c4f4d9f4e8ccd1663d"
+    },
+    {
+      "id": "workshop-yeast-bottle-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 59,
+        "height": 63
+      },
+      "opaquePixels": 2333,
+      "colors": 10,
+      "pixelSha256": "05aa04d6174af3927079d0831e7ae6117bd5f1ba001ac596c5dbb141cef5c4af"
+    },
+    {
+      "id": "workshop-yeast-bottle-winter",
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 59,
+        "height": 63
+      },
+      "opaquePixels": 2333,
+      "colors": 10,
+      "pixelSha256": "e6fa809d056b2a514f6d6598c3643c4cfc51b7466722180be9a88dbb70ae0dc7"
+    },
+    {
+      "id": "workshop-egg-crate-spring",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 63,
+        "height": 63
+      },
+      "opaquePixels": 3278,
+      "colors": 6,
+      "pixelSha256": "0c96ea60b37056a97e7a108186f3001b53745795d6ff5b398463e566dc357506"
+    },
+    {
+      "id": "workshop-egg-crate-summer",
+      "bounds": {
+        "x": 18,
+        "y": 35,
+        "width": 63,
+        "height": 49
+      },
+      "opaquePixels": 2665,
+      "colors": 6,
+      "pixelSha256": "24a8a291ea30ca4c3949d5f1422d5116e9336d928a4a14a227c844a53e213da0"
+    },
+    {
+      "id": "workshop-egg-crate-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 35,
+        "width": 63,
+        "height": 49
+      },
+      "opaquePixels": 2665,
+      "colors": 8,
+      "pixelSha256": "287abef83cdbec3c8b92f5e3f7798d6061303ac2f55ce77d083e1ec3415fb65d"
+    },
+    {
+      "id": "workshop-egg-crate-winter",
+      "bounds": {
+        "x": 18,
+        "y": 34,
+        "width": 63,
+        "height": 50
+      },
+      "opaquePixels": 2677,
+      "colors": 8,
+      "pixelSha256": "f7d91039d2ba1e3938538d1489614e2d08068fa9522bf4e9d036c1cdf501cfe5"
+    },
+    {
+      "id": "workshop-cocoa-canister-spring",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 59,
+        "height": 65
+      },
+      "opaquePixels": 2663,
+      "colors": 13,
+      "pixelSha256": "03905fabaa198da3c4227ce126e94a83235370f81b408514c513be1c5acf366f"
+    },
+    {
+      "id": "workshop-cocoa-canister-summer",
+      "bounds": {
+        "x": 19,
+        "y": 27,
+        "width": 63,
+        "height": 57
+      },
+      "opaquePixels": 2351,
+      "colors": 11,
+      "pixelSha256": "77a905990b5c9f15263ac2cdd16745a1728109d31c61fd96c72f2bbda74c19ec"
+    },
+    {
+      "id": "workshop-cocoa-canister-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 31,
+        "width": 59,
+        "height": 53
+      },
+      "opaquePixels": 2440,
+      "colors": 8,
+      "pixelSha256": "9b5c5f5780043e15530b3764527eaa213d058f3216c1454100730ae6b8b0d130"
+    },
+    {
+      "id": "workshop-cocoa-canister-winter",
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 59,
+        "height": 63
+      },
+      "opaquePixels": 2653,
+      "colors": 9,
+      "pixelSha256": "b9ce69e3bd37483b34091487d86ab3b514bc996471315aaa7404884cea90fb0f"
+    },
+    {
+      "id": "workshop-vanilla-tubes-spring",
+      "bounds": {
+        "x": 18,
+        "y": 23,
+        "width": 60,
+        "height": 61
+      },
+      "opaquePixels": 2315,
+      "colors": 9,
+      "pixelSha256": "8a6299da99e677a3a9f61ee836170e0bd7bcc8759ccd028334db68734414cd0c"
+    },
+    {
+      "id": "workshop-vanilla-tubes-summer",
+      "bounds": {
+        "x": 19,
+        "y": 22,
+        "width": 59,
+        "height": 62
+      },
+      "opaquePixels": 2333,
+      "colors": 10,
+      "pixelSha256": "88750a864727ba5b1457edddfa248993648485bfcaf4ee42c247a71cf9dba5f6"
+    },
+    {
+      "id": "workshop-vanilla-tubes-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 59,
+        "height": 63
+      },
+      "opaquePixels": 2231,
+      "colors": 10,
+      "pixelSha256": "daee7b499e2ec17120a252ec4705b8072cadb67db39d3f5b9e908aa371fb3300"
+    },
+    {
+      "id": "workshop-vanilla-tubes-winter",
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 59,
+        "height": 64
+      },
+      "opaquePixels": 2231,
+      "colors": 9,
+      "pixelSha256": "ea09bcf851b3c8553c2f7727b64a1e77134cdc2692066f1242d9f48850b428d5"
+    },
+    {
+      "id": "workshop-nut-hopper-spring",
+      "bounds": {
+        "x": 19,
+        "y": 17,
+        "width": 59,
+        "height": 67
+      },
+      "opaquePixels": 2442,
+      "colors": 15,
+      "pixelSha256": "54f8a30f93a3c215562865d3fd9f671f95903b7413b3358eaf8d18760e9ee368"
+    },
+    {
+      "id": "workshop-nut-hopper-summer",
+      "bounds": {
+        "x": 19,
+        "y": 17,
+        "width": 59,
+        "height": 67
+      },
+      "opaquePixels": 2442,
+      "colors": 14,
+      "pixelSha256": "de09a558ca316b15a5bf51352d9533b7cb6edd9b3ca774b0a1af069a49d83088"
+    },
+    {
+      "id": "workshop-nut-hopper-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 17,
+        "width": 59,
+        "height": 67
+      },
+      "opaquePixels": 2442,
+      "colors": 14,
+      "pixelSha256": "1845e7ce86f8c08b4bf0a62e4fa9d99cd19c678d49e7e4b945d66403f904136c"
+    },
+    {
+      "id": "workshop-nut-hopper-winter",
+      "bounds": {
+        "x": 19,
+        "y": 12,
+        "width": 59,
+        "height": 72
+      },
+      "opaquePixels": 2520,
+      "colors": 14,
+      "pixelSha256": "f6390ed578dfedb23f14b3650dfd71b69f2098f36ed08b7ed9ccbde7391fed41"
+    },
+    {
+      "id": "workshop-dial-scale-spring",
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 69
+      },
+      "opaquePixels": 2525,
+      "colors": 12,
+      "pixelSha256": "b27b3a95d07f584f400d3678934ee9dff5d1bc63cf88a533af6255013aa3b22f"
+    },
+    {
+      "id": "workshop-dial-scale-summer",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 59,
+        "height": 65
+      },
+      "opaquePixels": 2426,
+      "colors": 12,
+      "pixelSha256": "44612ae150972cc96919d8d5bd24467e8755e1d67827b94265db176ba38e40e8"
+    },
+    {
+      "id": "workshop-dial-scale-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 11,
+        "width": 59,
+        "height": 73
+      },
+      "opaquePixels": 2602,
+      "colors": 14,
+      "pixelSha256": "eb6f2ebd28da9145c511f37420e121a8e8c9e3a7897ccaf06af817ce15326439"
+    },
+    {
+      "id": "workshop-dial-scale-winter",
+      "bounds": {
+        "x": 19,
+        "y": 9,
+        "width": 59,
+        "height": 75
+      },
+      "opaquePixels": 2553,
+      "colors": 12,
+      "pixelSha256": "42e28e620e50fa3ec97b16a9989f49b66c2c60e3c3a1f950d54bb02a3f3566b9"
+    },
+    {
+      "id": "workshop-measuring-jug-spring",
+      "bounds": {
+        "x": 19,
+        "y": 26,
+        "width": 62,
+        "height": 58
+      },
+      "opaquePixels": 2403,
+      "colors": 8,
+      "pixelSha256": "1d0078453e6e1b0a2e12f3c702a24203ad5ba7716a438b14d2d80ce12333aaef"
+    },
+    {
+      "id": "workshop-measuring-jug-summer",
+      "bounds": {
+        "x": 19,
+        "y": 17,
+        "width": 62,
+        "height": 67
+      },
+      "opaquePixels": 2433,
+      "colors": 9,
+      "pixelSha256": "54395fbf9d4cbe3d63e9ad4a51e923e58cf368180e9cd10677ff11bfc462d564"
+    },
+    {
+      "id": "workshop-measuring-jug-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 20,
+        "width": 62,
+        "height": 64
+      },
+      "opaquePixels": 2431,
+      "colors": 8,
+      "pixelSha256": "ae092065b85856c2deaea06c4dba4448f749721c7c1344031fa3363a591a5784"
+    },
+    {
+      "id": "workshop-measuring-jug-winter",
+      "bounds": {
+        "x": 19,
+        "y": 14,
+        "width": 62,
+        "height": 70
+      },
+      "opaquePixels": 2481,
+      "colors": 11,
+      "pixelSha256": "3796eccebdacf5db8c8ed8077bebfb6689c1917b7814a355acb00e6727a9e9b8"
+    },
+    {
+      "id": "workshop-measuring-spoons-spring",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 1467,
+      "colors": 8,
+      "pixelSha256": "8492e5647c5a732de4790a4b9c3e08bc7d05c19d95a61f98bdfbb0dd3ffe1756"
+    },
+    {
+      "id": "workshop-measuring-spoons-summer",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 61,
+        "height": 63
+      },
+      "opaquePixels": 1464,
+      "colors": 8,
+      "pixelSha256": "f6b8c66dec46c854eb63348a23469207bd0933b5e56f3efa801e8ec1130162e9"
+    },
+    {
+      "id": "workshop-measuring-spoons-autumn",
+      "bounds": {
+        "x": 18,
+        "y": 21,
+        "width": 60,
+        "height": 63
+      },
+      "opaquePixels": 1157,
+      "colors": 8,
+      "pixelSha256": "a990221477ca405caa69e47fffe6eb5fcbafd653c9d30b5247a8d1f759aa25f0"
+    },
+    {
+      "id": "workshop-measuring-spoons-winter",
+      "bounds": {
+        "x": 18,
+        "y": 17,
+        "width": 61,
+        "height": 67
+      },
+      "opaquePixels": 1535,
+      "colors": 8,
+      "pixelSha256": "35fd9dba49dfc67a8d1984ae94b30fb7c5fc8f30f95e6a25164c18020daa3f40"
+    },
+    {
+      "id": "workshop-kitchen-timer-spring",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 59,
+        "height": 65
+      },
+      "opaquePixels": 2385,
+      "colors": 12,
+      "pixelSha256": "f5b9e3788f157d3816e512502c1c69ade8aab4d3cd354201350dafefa98b4095"
+    },
+    {
+      "id": "workshop-kitchen-timer-summer",
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 59,
+        "height": 63
+      },
+      "opaquePixels": 2495,
+      "colors": 12,
+      "pixelSha256": "ef88b3ca469bb0b3b1b180757c84858109b73160b906de277aa5ee62cafbfbc1"
+    },
+    {
+      "id": "workshop-kitchen-timer-autumn",
+      "bounds": {
+        "x": 15,
+        "y": 27,
+        "width": 63,
+        "height": 57
+      },
+      "opaquePixels": 2350,
+      "colors": 15,
+      "pixelSha256": "4be65c04d195d7f6b047ae6e04a349b273b3139a4fe2b3bc784ddaff1921e257"
+    },
+    {
+      "id": "workshop-kitchen-timer-winter",
+      "bounds": {
+        "x": 19,
+        "y": 11,
+        "width": 59,
+        "height": 73
+      },
+      "opaquePixels": 2463,
+      "colors": 12,
+      "pixelSha256": "0c57e912485785aa1a2ce74a8ed8b144ce189614d88f63cbe50c50a3b8b32e9f"
+    },
+    {
+      "id": "workshop-thermometer-spring",
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 69
+      },
+      "opaquePixels": 1639,
+      "colors": 15,
+      "pixelSha256": "128ba60713f5319c7f14863a9d00ffd709260ab0982a6ee37e5945ac80b606ad"
+    },
+    {
+      "id": "workshop-thermometer-summer",
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 69
+      },
+      "opaquePixels": 1730,
+      "colors": 15,
+      "pixelSha256": "eadf4fa5d99173e716627c518235e75000150e62df7ac2c62d60f68e03dbf17b"
+    },
+    {
+      "id": "workshop-thermometer-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 69
+      },
+      "opaquePixels": 1916,
+      "colors": 15,
+      "pixelSha256": "87918da58a941ea18301784f3e2b6778d5d6ab875040efbdfb3786fe16381757"
+    },
+    {
+      "id": "workshop-thermometer-winter",
+      "bounds": {
+        "x": 19,
+        "y": 15,
+        "width": 59,
+        "height": 69
+      },
+      "opaquePixels": 1729,
+      "colors": 18,
+      "pixelSha256": "3dd904d1a8a533e18846d29361b7c1df9c6dc3c214b33f3c183a3b9c5b88606a"
+    },
+    {
+      "id": "workshop-utensil-rail-spring",
+      "bounds": {
+        "x": 19,
+        "y": 23,
+        "width": 59,
+        "height": 61
+      },
+      "opaquePixels": 2100,
+      "colors": 11,
+      "pixelSha256": "eb3c14cd3a96d38ab5b4357cc8a3df1458de0acf4e1092966e3e86c49f6c8922"
+    },
+    {
+      "id": "workshop-utensil-rail-summer",
+      "bounds": {
+        "x": 19,
+        "y": 23,
+        "width": 59,
+        "height": 61
+      },
+      "opaquePixels": 2089,
+      "colors": 11,
+      "pixelSha256": "37b2b7ca2744a8e1a43c426ef2672d6d252653cfa8df33ad383171583b3fad4f"
+    },
+    {
+      "id": "workshop-utensil-rail-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 23,
+        "width": 59,
+        "height": 61
+      },
+      "opaquePixels": 2101,
+      "colors": 11,
+      "pixelSha256": "65e73b7f0e819c6d17968b26e159dd1f65e8ae87e71839de9353d3cae09fbed1"
+    },
+    {
+      "id": "workshop-utensil-rail-winter",
+      "bounds": {
+        "x": 19,
+        "y": 23,
+        "width": 59,
+        "height": 61
+      },
+      "opaquePixels": 2194,
+      "colors": 13,
+      "pixelSha256": "5742f51c56cdb3c433b00aac9baae8b5e6b222c04e3cdd3bb6bac10ee2fd76ce"
+    },
+    {
+      "id": "workshop-spice-drawer-spring",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 60,
+        "height": 65
+      },
+      "opaquePixels": 3481,
+      "colors": 14,
+      "pixelSha256": "49280ff380ce507aa0834311e1a049df293be7ea9a06240e97aa28f184e966f5"
+    },
+    {
+      "id": "workshop-spice-drawer-summer",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 60,
+        "height": 65
+      },
+      "opaquePixels": 3481,
+      "colors": 11,
+      "pixelSha256": "e53470bfa3196b7e5ba477c72a435e221f25aff82f5003d93c8edbb0f944ecab"
+    },
+    {
+      "id": "workshop-spice-drawer-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 60,
+        "height": 65
+      },
+      "opaquePixels": 3481,
+      "colors": 11,
+      "pixelSha256": "7babdfdc95f63b0d67c2fb07a1b83a4cbdad33d12f2f3d30b5709e8342bd33c2"
+    },
+    {
+      "id": "workshop-spice-drawer-winter",
+      "bounds": {
+        "x": 19,
+        "y": 19,
+        "width": 60,
+        "height": 65
+      },
+      "opaquePixels": 3481,
+      "colors": 11,
+      "pixelSha256": "90a46c880250060a9cb3ad412886f207e712d74e5decfd170a748e501ac6deb7"
+    },
+    {
+      "id": "workshop-towel-roller-spring",
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 59,
+        "height": 63
+      },
+      "opaquePixels": 2487,
+      "colors": 11,
+      "pixelSha256": "0e9149c7272d43b301a10373e423bfd7d6cc4a36519786df8b160889cadebbbe"
+    },
+    {
+      "id": "workshop-towel-roller-summer",
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 59,
+        "height": 63
+      },
+      "opaquePixels": 2488,
+      "colors": 11,
+      "pixelSha256": "c4deea0d09a1bfc67e97b9404c488ac5858413647e1810aad83ae9bc3c6b5f1d"
+    },
+    {
+      "id": "workshop-towel-roller-autumn",
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 59,
+        "height": 63
+      },
+      "opaquePixels": 2603,
+      "colors": 11,
+      "pixelSha256": "6ca7b51b277d4d0c10e1484ee006a4ec8e6ef3bcb5dda3c7f9e2fde08860d19a"
+    },
+    {
+      "id": "workshop-towel-roller-winter",
+      "bounds": {
+        "x": 19,
+        "y": 21,
+        "width": 59,
+        "height": 63
+      },
+      "opaquePixels": 2485,
+      "colors": 11,
+      "pixelSha256": "b3c06e6b9ddc82ce33f1abe66540dc28c379c931de2c53b12baa44cac135f7fc"
+    }
+  ],
+  "limitations": [
+    "Programmatic checks do not replace visual review.",
+    "Catalog framing is not an in-game size contract.",
+    "No game integration, economics or save changes."
+  ]
+}

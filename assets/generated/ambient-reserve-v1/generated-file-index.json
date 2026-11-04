@@ -1,0 +1,1466 @@
+{
+  "generator": "scripts/build-ambient-reserve.mjs",
+  "packId": "ambient-reserve-v1",
+  "files": [
+    {
+      "path": "frames/steam-curl-gentle-0.png",
+      "sha256": "46140c64f7f5aa63a855762a71d2e3e796944d00454109497e445e192d44b284",
+      "bytes": 236
+    },
+    {
+      "path": "frames/steam-curl-gentle-1.png",
+      "sha256": "8e803afbbe7dd7c589e4f67aeea400a5a72206f1af6e7a5ddc3b5ecfa9fe3e8d",
+      "bytes": 239
+    },
+    {
+      "path": "frames/steam-curl-gentle-2.png",
+      "sha256": "097d77a1d5c473735da742ae0e68f3f921fd160e749f9cbc1768bbd4c01544aa",
+      "bytes": 247
+    },
+    {
+      "path": "frames/steam-curl-gentle-3.png",
+      "sha256": "bac6374c7caaf6b00b9cdaf7b98fa0860bd4e496aacbddb9d5e1e40dfcd593b1",
+      "bytes": 255
+    },
+    {
+      "path": "frames/steam-curl-gentle-4.png",
+      "sha256": "c08bfc9372c7af8411ecaca4e33f6442301a84c6d947eb5d02ba60fdddc8364d",
+      "bytes": 248
+    },
+    {
+      "path": "frames/steam-curl-gentle-5.png",
+      "sha256": "aa89ddf4a427459b0bcbd5f0acb7ff2e2a6588500ea14dabf98b789224e433dc",
+      "bytes": 240
+    },
+    {
+      "path": "frames/steam-curl-gentle-6.png",
+      "sha256": "94722655cb6131f8461fe2b6c52d6118b33c42392233f3c1ff120a0f15e87837",
+      "bytes": 243
+    },
+    {
+      "path": "frames/steam-curl-gentle-7.png",
+      "sha256": "4a871f2db2620003986302caeed54230f3583042202b02e51a7c73ef84ad97bc",
+      "bytes": 244
+    },
+    {
+      "path": "strips/steam-curl-gentle.png",
+      "sha256": "9e1b544f8da4292ef17ba1cd9050c9962098d62619319d476044ec3e88d941cb",
+      "bytes": 986
+    },
+    {
+      "path": "frames/steam-curl-lively-0.png",
+      "sha256": "091c70f3deea130288dbde189ea534902930ff36bc5ea12291c6fa779fe1f926",
+      "bytes": 322
+    },
+    {
+      "path": "frames/steam-curl-lively-1.png",
+      "sha256": "172e2e0e3b3009db7049e3bc4739b4c645a535d28c2b22384d45add4e5958c8c",
+      "bytes": 331
+    },
+    {
+      "path": "frames/steam-curl-lively-2.png",
+      "sha256": "217a4363f6a394c02de0cfdeb3a8bb75a5ca6fec3ff501485933eeb04799dd20",
+      "bytes": 330
+    },
+    {
+      "path": "frames/steam-curl-lively-3.png",
+      "sha256": "d53c09b09a03cec7601dc69ca3475ddcff4749ec8efa73ef5ef23cdfc2d220d5",
+      "bytes": 334
+    },
+    {
+      "path": "frames/steam-curl-lively-4.png",
+      "sha256": "bf667fdcd53488a0dd1545b9f40e29429fdb1510dd3dbd33207d2181bad8ab1a",
+      "bytes": 309
+    },
+    {
+      "path": "frames/steam-curl-lively-5.png",
+      "sha256": "928d4fbfc241cbeb4d5dbd6f8066f532bb89fc9c1deef9444d2a7267a16ee857",
+      "bytes": 330
+    },
+    {
+      "path": "frames/steam-curl-lively-6.png",
+      "sha256": "82d0328eb97e20ce5b1039b88d7d2e51077bf1053e936d54c816e3a12146b505",
+      "bytes": 323
+    },
+    {
+      "path": "frames/steam-curl-lively-7.png",
+      "sha256": "9f0b1efdf122b6b5fe8b0dc8362c341ac4c6f7490021e2f1741e960d34b2fe45",
+      "bytes": 336
+    },
+    {
+      "path": "strips/steam-curl-lively.png",
+      "sha256": "7549831a9b9ff5a0ad7c399538d547bbfced34287b0808369704154ff025a675",
+      "bytes": 1491
+    },
+    {
+      "path": "frames/coffee-drip-gentle-0.png",
+      "sha256": "504805f1f7e300d6cf035d3e3ca5424b3ce2644d06b8d611b0d44cabdef2a2e3",
+      "bytes": 202
+    },
+    {
+      "path": "frames/coffee-drip-gentle-1.png",
+      "sha256": "050e4c7eeaaf72baff1be805cb6e853593571556aa495cf8ab28d98dfaf48774",
+      "bytes": 212
+    },
+    {
+      "path": "frames/coffee-drip-gentle-2.png",
+      "sha256": "b2266252a11a62c65b2c8d86db69d85e21e2bb79cb07932941f190c2dd12b076",
+      "bytes": 221
+    },
+    {
+      "path": "frames/coffee-drip-gentle-3.png",
+      "sha256": "64cec706a60c9fb2ca6390be5cb3fda2cdbf1af256ca9682b434c5c30c27ce00",
+      "bytes": 201
+    },
+    {
+      "path": "frames/coffee-drip-gentle-4.png",
+      "sha256": "8b90d834939875a02aeee084e8ba9f46fdab95fbee7b54171116223f7ba53e1b",
+      "bytes": 210
+    },
+    {
+      "path": "frames/coffee-drip-gentle-5.png",
+      "sha256": "f4b967dbc389a2d905ccb950edf360b09073689845b00fd0134bcbe3b87899ae",
+      "bytes": 224
+    },
+    {
+      "path": "frames/coffee-drip-gentle-6.png",
+      "sha256": "5be820e8c86cec931e3a61e9c9c80918302b9bbdfa69f437cc8757747c59602e",
+      "bytes": 202
+    },
+    {
+      "path": "frames/coffee-drip-gentle-7.png",
+      "sha256": "61731c6ba3399149bec025e37d6d6494a77f7233bf0146f0e65ed4a50c43f75f",
+      "bytes": 212
+    },
+    {
+      "path": "strips/coffee-drip-gentle.png",
+      "sha256": "41510e8d522f23a5d0e91544224cb69879f4638c017ad924c6d592793aa757c8",
+      "bytes": 725
+    },
+    {
+      "path": "frames/coffee-drip-lively-0.png",
+      "sha256": "7a5a6d227072568112d1981d824bb777b181bfc497d00f6d8adb290f3f48a41d",
+      "bytes": 245
+    },
+    {
+      "path": "frames/coffee-drip-lively-1.png",
+      "sha256": "7e650c4fe2b1393b1170026722056a36648c008cef1aac0be403809485af8e7d",
+      "bytes": 241
+    },
+    {
+      "path": "frames/coffee-drip-lively-2.png",
+      "sha256": "a7dbf50ded3fc5b656ea9a741b0e45aad9643fd358671c798ba3da627120d87a",
+      "bytes": 251
+    },
+    {
+      "path": "frames/coffee-drip-lively-3.png",
+      "sha256": "79addac4997a45c86ce48d971c336563b000a666be5b247eb93e2c16e0c5eff8",
+      "bytes": 240
+    },
+    {
+      "path": "frames/coffee-drip-lively-4.png",
+      "sha256": "784e4a59d3b3701e1cfa486e1b4b07d8d56bd5dd9ca6b9bf006a1721769b63a7",
+      "bytes": 240
+    },
+    {
+      "path": "frames/coffee-drip-lively-5.png",
+      "sha256": "0048945204e37831c931b78a1a2e35e8e3b18d451fe0ca4d70af3754f746d0c2",
+      "bytes": 248
+    },
+    {
+      "path": "frames/coffee-drip-lively-6.png",
+      "sha256": "55f7290d756a0b5ed7c66a9d67c28822b9f5ac8e9ca5564e956120fc2a9a21c6",
+      "bytes": 244
+    },
+    {
+      "path": "frames/coffee-drip-lively-7.png",
+      "sha256": "48a4110719c960686a6f3d28b23cf63fc3dff31620211eb907263bbca07e7b2c",
+      "bytes": 240
+    },
+    {
+      "path": "strips/coffee-drip-lively.png",
+      "sha256": "70406781f6714e3305467d69470be68beb20e694def025fda63b6de52ecb0280",
+      "bytes": 855
+    },
+    {
+      "path": "frames/kettle-puff-gentle-0.png",
+      "sha256": "1ad0a8ce54279e78b1620557d309938791ea7fabe9ec76f942c4ab69acd3a9c7",
+      "bytes": 194
+    },
+    {
+      "path": "frames/kettle-puff-gentle-1.png",
+      "sha256": "e9156c683f702c3fa6e502e6c393203773aff0cb04dbdb2c71970562b60f6cda",
+      "bytes": 196
+    },
+    {
+      "path": "frames/kettle-puff-gentle-2.png",
+      "sha256": "08af80fb66de3dc21b7e30e32d4b0780dd29c400eba0e89b623d7909336475cb",
+      "bytes": 206
+    },
+    {
+      "path": "frames/kettle-puff-gentle-3.png",
+      "sha256": "14513dcfd04636d980471f941a789e880b490f1024067da85b23f543e0d75df2",
+      "bytes": 206
+    },
+    {
+      "path": "frames/kettle-puff-gentle-4.png",
+      "sha256": "5eeace08b38a83fb0f79af9cc51d114918e15a7880ea202fbddc59e9e389c038",
+      "bytes": 204
+    },
+    {
+      "path": "frames/kettle-puff-gentle-5.png",
+      "sha256": "e115df20ed730908517475ae51fa2c626f5377a1b76869f4137ac4c01ce33a2f",
+      "bytes": 202
+    },
+    {
+      "path": "frames/kettle-puff-gentle-6.png",
+      "sha256": "bd95c65811ee3a4313ba5aee437f195f650f3fd6ccedfea9531845bd777e48a1",
+      "bytes": 208
+    },
+    {
+      "path": "frames/kettle-puff-gentle-7.png",
+      "sha256": "6f5c7f7d0b9efed927c7c6bb7c0b88d39750b161dbaaba06473dd268b2623a6f",
+      "bytes": 205
+    },
+    {
+      "path": "strips/kettle-puff-gentle.png",
+      "sha256": "e63ae11e28d0996786890aa1f0828b66bc7a0268767ced65609e3823694e8dbc",
+      "bytes": 672
+    },
+    {
+      "path": "frames/kettle-puff-lively-0.png",
+      "sha256": "3df809d4031c317100b11e7169cce2a461ddce6b343d4c0778aa1a7c283a9a4e",
+      "bytes": 240
+    },
+    {
+      "path": "frames/kettle-puff-lively-1.png",
+      "sha256": "6edc080113859b6864d9091bdb90ee614564a8a3dca9f260991a849b9d2d8b52",
+      "bytes": 235
+    },
+    {
+      "path": "frames/kettle-puff-lively-2.png",
+      "sha256": "9a8687b52354d9faf199170f90a2d0fc4174e6c626dbdecbbc64a86e6bed0d85",
+      "bytes": 248
+    },
+    {
+      "path": "frames/kettle-puff-lively-3.png",
+      "sha256": "b325c90d43c60e0828ec25d1c87de034acf716a629cad4b6659aa21ae4cb5b8e",
+      "bytes": 238
+    },
+    {
+      "path": "frames/kettle-puff-lively-4.png",
+      "sha256": "89c9422ef49feb05fcd6cddabb8ae7240e0ffa259c4783f66c8967447b14de8d",
+      "bytes": 237
+    },
+    {
+      "path": "frames/kettle-puff-lively-5.png",
+      "sha256": "d0f89a16f0a03aff3565a6dbbe672fd42c7b26df0b6ce4c3f74b3a0b4e32b7dd",
+      "bytes": 236
+    },
+    {
+      "path": "frames/kettle-puff-lively-6.png",
+      "sha256": "a4dbf77c4f3adf742072c9c16d7bbfebd37a95906d211de2431898674dbf7392",
+      "bytes": 247
+    },
+    {
+      "path": "frames/kettle-puff-lively-7.png",
+      "sha256": "0391f12ae686b1b555552a4339c4c890a6203671526613fdb0045a087f9b8584",
+      "bytes": 243
+    },
+    {
+      "path": "strips/kettle-puff-lively.png",
+      "sha256": "54dd6830a0e2269fc29190ca0487d510a0117e94ada6a5a44f076d83ce06c148",
+      "bytes": 813
+    },
+    {
+      "path": "frames/sugar-sparkle-gentle-0.png",
+      "sha256": "0d1ee28fb8902c9e9fef48f8ca80c63e83f6ba2aceb34eb3618597af6d752829",
+      "bytes": 178
+    },
+    {
+      "path": "frames/sugar-sparkle-gentle-1.png",
+      "sha256": "f1834b463f32d7b979c730a2fc0436ba2a0819c3f9bf73fd405478fe65ba1a77",
+      "bytes": 195
+    },
+    {
+      "path": "frames/sugar-sparkle-gentle-2.png",
+      "sha256": "3f29661f84efa274fbeb2a86458b0967eae524eafcc9ad25cd5a6b23cf1b7e4d",
+      "bytes": 177
+    },
+    {
+      "path": "frames/sugar-sparkle-gentle-3.png",
+      "sha256": "57455e6ce27b5cc2796fd5745f8b0c7c81f87c9d0c81470f5b183b7825667999",
+      "bytes": 183
+    },
+    {
+      "path": "frames/sugar-sparkle-gentle-4.png",
+      "sha256": "5afbd1183b1334a49ffb8b2f56052a163750592221eaedb6103f361625dc81f1",
+      "bytes": 184
+    },
+    {
+      "path": "frames/sugar-sparkle-gentle-5.png",
+      "sha256": "2e95491c4c718ebf6ca59c0f4a0f1260c817575c966c923de218bfa533311772",
+      "bytes": 174
+    },
+    {
+      "path": "frames/sugar-sparkle-gentle-6.png",
+      "sha256": "fad7531e1f91f454538c338692abfc029ada18e95836ea10f9372ae303dd3955",
+      "bytes": 183
+    },
+    {
+      "path": "frames/sugar-sparkle-gentle-7.png",
+      "sha256": "8866455f87c264a3ff832d0dd35467c6f36152dff966b87aac50db05c268b404",
+      "bytes": 193
+    },
+    {
+      "path": "strips/sugar-sparkle-gentle.png",
+      "sha256": "c497ffb0feafcee42c432345a2a5cd85f4025a822782c3cf9a29f7b0ae918d49",
+      "bytes": 667
+    },
+    {
+      "path": "frames/sugar-sparkle-lively-0.png",
+      "sha256": "40d88f5fe5998e04d9bc1f18386ff8d2dee5c7ffc0136460536e2a0172021ca8",
+      "bytes": 207
+    },
+    {
+      "path": "frames/sugar-sparkle-lively-1.png",
+      "sha256": "244535dc6e4cd7120c9a8877191c1a5e7c3e6a89e534be9a0aee83eaa8bc4531",
+      "bytes": 213
+    },
+    {
+      "path": "frames/sugar-sparkle-lively-2.png",
+      "sha256": "3700ba0d9cfd7c352a44681a1b285579a1f40f7e7c99733f8d03a2e832f8caaf",
+      "bytes": 209
+    },
+    {
+      "path": "frames/sugar-sparkle-lively-3.png",
+      "sha256": "28b8965c1506bcd18d28fd0631cf289775f369f0ea9ed9ec10a2d998fb022051",
+      "bytes": 200
+    },
+    {
+      "path": "frames/sugar-sparkle-lively-4.png",
+      "sha256": "d5d51a99294b8ca086c8d44f6b81bd8d89e0dcb84e47860cb98bb35c61b2fed4",
+      "bytes": 196
+    },
+    {
+      "path": "frames/sugar-sparkle-lively-5.png",
+      "sha256": "16156b9c5936a4f294d3198368b5485e789b4b195691042543978884b7ed26ff",
+      "bytes": 200
+    },
+    {
+      "path": "frames/sugar-sparkle-lively-6.png",
+      "sha256": "fc919b3076c41f69c723bf7c1568f73d2f0eb3c74c0eb838e189194cecd4b9f0",
+      "bytes": 201
+    },
+    {
+      "path": "frames/sugar-sparkle-lively-7.png",
+      "sha256": "c6ed7d1e8306815d18caf023dcdbc8e747d3248c1ff82e628ed4f6e7598d7267",
+      "bytes": 214
+    },
+    {
+      "path": "strips/sugar-sparkle-lively.png",
+      "sha256": "4a5bf86fb5c0d2b787dfdbccb4ed3618c9f017dfbc3ee0189262dc89dae31b86",
+      "bytes": 820
+    },
+    {
+      "path": "frames/falling-leaves-gentle-0.png",
+      "sha256": "8e9e45afa41c74ac380404ba837e7850f8d7b1c5f538114df78683b23782f4ef",
+      "bytes": 268
+    },
+    {
+      "path": "frames/falling-leaves-gentle-1.png",
+      "sha256": "d8f213f2708a52d4b2dace0abe1e0ee1b2960e7854fa39062672a04aa5296459",
+      "bytes": 281
+    },
+    {
+      "path": "frames/falling-leaves-gentle-2.png",
+      "sha256": "af46ba1dcf4f60f701fd08b3714ac7ac7b13e4c5b94a0fef7ccfea9035d28362",
+      "bytes": 304
+    },
+    {
+      "path": "frames/falling-leaves-gentle-3.png",
+      "sha256": "1366746171febda7ef8c21529fa65b622e0a4493389bab70492181fdc787f89e",
+      "bytes": 298
+    },
+    {
+      "path": "frames/falling-leaves-gentle-4.png",
+      "sha256": "4d92753b9ce363429292bcda52f6d665500a83b3074d5f58bbc8a7d7c830563e",
+      "bytes": 271
+    },
+    {
+      "path": "frames/falling-leaves-gentle-5.png",
+      "sha256": "a5bd592317a6cf137866d13b8999f99cd5bef8f7de0d185c832f13b347c05583",
+      "bytes": 303
+    },
+    {
+      "path": "frames/falling-leaves-gentle-6.png",
+      "sha256": "01a7465d11cb299f26036e4de688bf429436a01d751380edd6a40b452e767827",
+      "bytes": 299
+    },
+    {
+      "path": "frames/falling-leaves-gentle-7.png",
+      "sha256": "31c0befb2143b0ba9acfaa56e581cf5b143302f604f076ee7aecd1d310eca207",
+      "bytes": 270
+    },
+    {
+      "path": "strips/falling-leaves-gentle.png",
+      "sha256": "fc7fcf0be22ad0d066bfa338559317675d8cc3067996ee7fac9971c11e10a6a4",
+      "bytes": 902
+    },
+    {
+      "path": "frames/falling-leaves-lively-0.png",
+      "sha256": "068c702d662546392ee7fc235f8996489f96e7120e582fec1100df10661d526f",
+      "bytes": 375
+    },
+    {
+      "path": "frames/falling-leaves-lively-1.png",
+      "sha256": "d898fb00115246c2c9227b896995894edd570306d43490d83c885982e7b69209",
+      "bytes": 355
+    },
+    {
+      "path": "frames/falling-leaves-lively-2.png",
+      "sha256": "74065ceec0039ac479b268fffc08cd25496e62f52b9bd0fcd04a472d0373cdb5",
+      "bytes": 373
+    },
+    {
+      "path": "frames/falling-leaves-lively-3.png",
+      "sha256": "9f319b77f10ce8e2acdd98c473bb6fb9fbde833b6b23f147368ccbe5956e2b51",
+      "bytes": 381
+    },
+    {
+      "path": "frames/falling-leaves-lively-4.png",
+      "sha256": "b8b9f3028a655f397d6bcfd395cc2f5f8f05b05b5ce478687d74acf091eff26b",
+      "bytes": 357
+    },
+    {
+      "path": "frames/falling-leaves-lively-5.png",
+      "sha256": "78b5c1148e32f05e066e776c6c7be4c9d38e2e02f2ed2cba373f2786e11ff6e5",
+      "bytes": 392
+    },
+    {
+      "path": "frames/falling-leaves-lively-6.png",
+      "sha256": "2c03cf55de846f9da53a9d61b7c71c5a0aed0af0cc61b9345d16f073df4f4750",
+      "bytes": 377
+    },
+    {
+      "path": "frames/falling-leaves-lively-7.png",
+      "sha256": "bb195fc7330a9c99211a8d7230c2b7e0b81962cf9647c7d97f7be0a57bf7d387",
+      "bytes": 370
+    },
+    {
+      "path": "strips/falling-leaves-lively.png",
+      "sha256": "1b21ac41c9b810c50739b7d1a9b29ca320fa991f236276562084bd8c2af1a6ed",
+      "bytes": 1205
+    },
+    {
+      "path": "frames/petal-drift-gentle-0.png",
+      "sha256": "9ad06d04eabc40ff1b65f6ed81438ec54d1550943f60785ee613a865564f1081",
+      "bytes": 187
+    },
+    {
+      "path": "frames/petal-drift-gentle-1.png",
+      "sha256": "3f407551bdb1534f92eb356027617af61706e40ec9bfb4facb18823ac53550c1",
+      "bytes": 212
+    },
+    {
+      "path": "frames/petal-drift-gentle-2.png",
+      "sha256": "4bb621d8040ead6e8f0b7fd367cc82a251629519856d6a2e317d1d9fcf91f719",
+      "bytes": 188
+    },
+    {
+      "path": "frames/petal-drift-gentle-3.png",
+      "sha256": "dfbb1b9b9e6a48f1c58e804ed664c0c5ff78b384e93559528a597da75f3a92fa",
+      "bytes": 212
+    },
+    {
+      "path": "frames/petal-drift-gentle-4.png",
+      "sha256": "0bacd078f92cde813bac2a5478924f92cc7812d3d4cf74fd10c1fd32794e68ed",
+      "bytes": 187
+    },
+    {
+      "path": "frames/petal-drift-gentle-5.png",
+      "sha256": "f0fd1df0b4f0fc8c7012da3fbc0854259b9f5439994acba1cffec1bba75f9330",
+      "bytes": 213
+    },
+    {
+      "path": "frames/petal-drift-gentle-6.png",
+      "sha256": "376f612fab1159ed5caf5d3c1381473ea17c19ee2fc7753c51102daaa4e643a9",
+      "bytes": 188
+    },
+    {
+      "path": "frames/petal-drift-gentle-7.png",
+      "sha256": "a4d0edfab7c75bfee4ea38289e94821a4de5ed2bcd86e18486245bff89a5cb11",
+      "bytes": 214
+    },
+    {
+      "path": "strips/petal-drift-gentle.png",
+      "sha256": "f6e32bab3ca9adaf38640d4d77858f647ab38b8a7cca05961f3e5f0686514964",
+      "bytes": 653
+    },
+    {
+      "path": "frames/petal-drift-lively-0.png",
+      "sha256": "3f8a9984fb48575a56e899b7b2213fddaca9dcd6c5d41f980e250f8ef5c4032b",
+      "bytes": 224
+    },
+    {
+      "path": "frames/petal-drift-lively-1.png",
+      "sha256": "40c8188023b8d5fce92532dea2b897bbc9353e7909fa041d23e67385fc6ec4aa",
+      "bytes": 244
+    },
+    {
+      "path": "frames/petal-drift-lively-2.png",
+      "sha256": "9ae084e8142cac0d8173b12bc9162df182f1b71d1e72246a1709d20052e059e2",
+      "bytes": 216
+    },
+    {
+      "path": "frames/petal-drift-lively-3.png",
+      "sha256": "bdb26b15024873c0e8b14bf3c520f16255faeae379bcd032dc3f61e24ef07cbe",
+      "bytes": 273
+    },
+    {
+      "path": "frames/petal-drift-lively-4.png",
+      "sha256": "b50792c250cb88699cf138921a30e5ad9ce88179940c3046c8a6d9a66369dd40",
+      "bytes": 211
+    },
+    {
+      "path": "frames/petal-drift-lively-5.png",
+      "sha256": "3309160919e914c177021e2a787177c9d8e993687965ff2688ec8520ab14222d",
+      "bytes": 242
+    },
+    {
+      "path": "frames/petal-drift-lively-6.png",
+      "sha256": "53c4f2ea08215a37010a5c712c2e74cf45d10fc7441e22c3befc0506d809df8d",
+      "bytes": 230
+    },
+    {
+      "path": "frames/petal-drift-lively-7.png",
+      "sha256": "09a830c6a9f9452d9b9672ac6ec861eff8e38c9c3161cd5893fb3bb372c8dd89",
+      "bytes": 275
+    },
+    {
+      "path": "strips/petal-drift-lively.png",
+      "sha256": "69993cbd2ce00cc0260a7fbad31a426a42647fa28ebd4bdcd8a7fbb116c49216",
+      "bytes": 800
+    },
+    {
+      "path": "frames/snow-flurry-gentle-0.png",
+      "sha256": "8e1d22c9d262c3feeb7be55221e87e8109f1d2e2dd3fa200a0fcdcc74add8df8",
+      "bytes": 164
+    },
+    {
+      "path": "frames/snow-flurry-gentle-1.png",
+      "sha256": "17d84ff4c2bd3a2b56bc2d5247b33e7223b6c34a5ee035d72fda96a3ecc43c47",
+      "bytes": 166
+    },
+    {
+      "path": "frames/snow-flurry-gentle-2.png",
+      "sha256": "269b6f00a922cfe75a8651b1fa9e27ec66de2c8cb2d376a953047a2c826682ff",
+      "bytes": 165
+    },
+    {
+      "path": "frames/snow-flurry-gentle-3.png",
+      "sha256": "adb3afa8aefaeb1c50d6246536b069ab01c0a621e66945269ec1ab6bd340235b",
+      "bytes": 166
+    },
+    {
+      "path": "frames/snow-flurry-gentle-4.png",
+      "sha256": "330c3d5bbede82261dfa696d4308f3b9433797be1b318349b6cd8d3b90f881bc",
+      "bytes": 164
+    },
+    {
+      "path": "frames/snow-flurry-gentle-5.png",
+      "sha256": "60a9ce3a3aa71a4c34fb90032b2072aee1db130467ae1f2173fafd63d1258c50",
+      "bytes": 165
+    },
+    {
+      "path": "frames/snow-flurry-gentle-6.png",
+      "sha256": "f243ea7d3af17bea26caba4ccfbd56695b296c6f5f5843512fd2cb1f8e90cc72",
+      "bytes": 166
+    },
+    {
+      "path": "frames/snow-flurry-gentle-7.png",
+      "sha256": "3bbaf9099e3a4c95308b7fcbd19f05916c84db5f68c29b4f83b19ffc24d3ba28",
+      "bytes": 165
+    },
+    {
+      "path": "strips/snow-flurry-gentle.png",
+      "sha256": "7c9e559414a454abf372e3caf323cc02686ef11018dcd731871efb63d9141212",
+      "bytes": 526
+    },
+    {
+      "path": "frames/snow-flurry-lively-0.png",
+      "sha256": "91a959adfaa30abba519fecdccea3c59266b73b7b3e9a99b158c959781993bfb",
+      "bytes": 175
+    },
+    {
+      "path": "frames/snow-flurry-lively-1.png",
+      "sha256": "30e6c997a24e72c44eb7759b22605c91c2f1b7f676b607d9a478591039e25028",
+      "bytes": 178
+    },
+    {
+      "path": "frames/snow-flurry-lively-2.png",
+      "sha256": "a8d018405a7dc46a37a7599860f1ac2cd08540c69baa56db429ffff510d41d88",
+      "bytes": 176
+    },
+    {
+      "path": "frames/snow-flurry-lively-3.png",
+      "sha256": "39198dc75cf17417d6f108ea7c60d5b38bd3603d2a7d0b3491789947ad00c2ed",
+      "bytes": 179
+    },
+    {
+      "path": "frames/snow-flurry-lively-4.png",
+      "sha256": "040b305278093d54c4e4d2f23ae0d56433209db02a14fbaabadd0b9eabd97e1b",
+      "bytes": 175
+    },
+    {
+      "path": "frames/snow-flurry-lively-5.png",
+      "sha256": "928bf6e1b70d49b155dec065e628e9055d4a09cca44a7a292f006233469fff2f",
+      "bytes": 177
+    },
+    {
+      "path": "frames/snow-flurry-lively-6.png",
+      "sha256": "bb021760705c270c70c78f6828851ca27553cd8833d2374e1553334b1590a901",
+      "bytes": 178
+    },
+    {
+      "path": "frames/snow-flurry-lively-7.png",
+      "sha256": "12218c4f53ebebfaa6837a14f676bbf1f29d0bf385176491d725f79ca8f90eed",
+      "bytes": 176
+    },
+    {
+      "path": "strips/snow-flurry-lively.png",
+      "sha256": "87e519c7979f62dbca4d44e374ef936268a7a20f3319c8c3a1027393afa7175a",
+      "bytes": 605
+    },
+    {
+      "path": "frames/rain-ripples-gentle-0.png",
+      "sha256": "903db4104114778621bb4cc829a23efe1cb47084de06f6689a1bf1535f7d0628",
+      "bytes": 178
+    },
+    {
+      "path": "frames/rain-ripples-gentle-1.png",
+      "sha256": "0b4838a07b42b87d9c1c01773a13f9b5f6065d45b91d20f1ff70e51259aba6c6",
+      "bytes": 173
+    },
+    {
+      "path": "frames/rain-ripples-gentle-2.png",
+      "sha256": "e9da02f9d5fa41725551626bc6d1ef1b75f4ef79707c1cf0bbb0cc372ce82e8c",
+      "bytes": 146
+    },
+    {
+      "path": "frames/rain-ripples-gentle-3.png",
+      "sha256": "b1cce0b18dd5bc80da1e719f5a44010665c17911406cc826222a2d83f6310534",
+      "bytes": 175
+    },
+    {
+      "path": "frames/rain-ripples-gentle-4.png",
+      "sha256": "d57fa263a16abd025032a2bc87dc5e60fc25e7eef67e95a35088c7c46100eaca",
+      "bytes": 172
+    },
+    {
+      "path": "frames/rain-ripples-gentle-5.png",
+      "sha256": "bdb5006b87fc1112f782a100cb40dbf49ed7176abce862565380d89684155a79",
+      "bytes": 152
+    },
+    {
+      "path": "frames/rain-ripples-gentle-6.png",
+      "sha256": "e1bbb37ff7926dfcb79b819d872a5f65cb2c21ed65a72ee141c6440301a9c73a",
+      "bytes": 160
+    },
+    {
+      "path": "frames/rain-ripples-gentle-7.png",
+      "sha256": "b37770839b1f3eb5a9941f34210f963993a2483080eb7d27961f9244dfff0c18",
+      "bytes": 159
+    },
+    {
+      "path": "strips/rain-ripples-gentle.png",
+      "sha256": "6744a528f65f0c51c308473a6a4020874800e28c352344fca1d7059c631f157f",
+      "bytes": 549
+    },
+    {
+      "path": "frames/rain-ripples-lively-0.png",
+      "sha256": "99f1785d51a48c6a3b107d9c84da926e694defc1ea5a43b6efaf43a0132c416e",
+      "bytes": 216
+    },
+    {
+      "path": "frames/rain-ripples-lively-1.png",
+      "sha256": "6e38f23f32158b932e30352e5e324b8666ccaa15a9cd2bdd23e0cff23bc59c11",
+      "bytes": 210
+    },
+    {
+      "path": "frames/rain-ripples-lively-2.png",
+      "sha256": "c22f2eba57389c0780562c48120f0dd537c81d844feaf0c55704fc2d641cfbd7",
+      "bytes": 199
+    },
+    {
+      "path": "frames/rain-ripples-lively-3.png",
+      "sha256": "b2274401a8c9b1284f4ba71852f299867e5d2122f089e01f24b48bb697141119",
+      "bytes": 228
+    },
+    {
+      "path": "frames/rain-ripples-lively-4.png",
+      "sha256": "76268ef84579851538aa2c2d23847040af3c186ab7ed0428d7ae262f7e21440b",
+      "bytes": 196
+    },
+    {
+      "path": "frames/rain-ripples-lively-5.png",
+      "sha256": "469369d3e84937f0bfd7cd1fb199bfee02d44cb1c0e2490be8523acee6c57a64",
+      "bytes": 207
+    },
+    {
+      "path": "frames/rain-ripples-lively-6.png",
+      "sha256": "3f675ffe5c43088382a8d092ba945002115c5505b8140adef76374729f04051c",
+      "bytes": 207
+    },
+    {
+      "path": "frames/rain-ripples-lively-7.png",
+      "sha256": "7e0bded25ce9c76f099c752d70b9cd17883677424c905c107b3e5bf34f844289",
+      "bytes": 181
+    },
+    {
+      "path": "strips/rain-ripples-lively.png",
+      "sha256": "6374064f6cb03107639c11bdb202ce4fa522b6aa8f89f6d77578c13f1469a60c",
+      "bytes": 756
+    },
+    {
+      "path": "frames/candle-flicker-gentle-0.png",
+      "sha256": "e8bdc1f47caf4c98ee403778a2bbb40ec2bc5c9ae7bc9210ff3f3fb7f38f53f5",
+      "bytes": 275
+    },
+    {
+      "path": "frames/candle-flicker-gentle-1.png",
+      "sha256": "f540be9518c92d3c065de3f0ada42d2136fff87edb6203090e07c836d20f59b9",
+      "bytes": 283
+    },
+    {
+      "path": "frames/candle-flicker-gentle-2.png",
+      "sha256": "1aa91d126c28a82b924d5c7cf6ff5bf8e59af44e6e114ef6e3a7675aa316e53b",
+      "bytes": 280
+    },
+    {
+      "path": "frames/candle-flicker-gentle-3.png",
+      "sha256": "15bbc682d79d9c53220444021b788f2ac4bd14468fbe028796e081bd24e4ecd7",
+      "bytes": 295
+    },
+    {
+      "path": "frames/candle-flicker-gentle-4.png",
+      "sha256": "cbb90c726e52773927546457caae8d8928c75b534479c113c8cad59b906ea575",
+      "bytes": 276
+    },
+    {
+      "path": "frames/candle-flicker-gentle-5.png",
+      "sha256": "0f22a42aab0916206ea0624a5ccdd1b31cfa42e35ed00c860a5b961252592824",
+      "bytes": 294
+    },
+    {
+      "path": "frames/candle-flicker-gentle-6.png",
+      "sha256": "b9622f749d0fc8116c1378d78e3480b6786a7b43bf8371ee5fec3bab9e637493",
+      "bytes": 282
+    },
+    {
+      "path": "frames/candle-flicker-gentle-7.png",
+      "sha256": "ab3f4fcf94cb72def3d18a6d16a5910658de85057fb4433aeee877f504aa5a5a",
+      "bytes": 283
+    },
+    {
+      "path": "strips/candle-flicker-gentle.png",
+      "sha256": "63acf384d67e7ec7fb6051eb0e2958d9bc133baedfaadccdc48c4854ddfb0382",
+      "bytes": 733
+    },
+    {
+      "path": "frames/candle-flicker-lively-0.png",
+      "sha256": "c5fc20666ec55679bc2bca26a4753fb6df07cf9904ba62a54cb3c54bb1539b5a",
+      "bytes": 304
+    },
+    {
+      "path": "frames/candle-flicker-lively-1.png",
+      "sha256": "cbb14c967ef138ae03256aa8e467fa4b603155f652e6a8609c473d3bfc41b011",
+      "bytes": 306
+    },
+    {
+      "path": "frames/candle-flicker-lively-2.png",
+      "sha256": "0ab2e9be06e2bc1fba597c825d72116d1211209cd4047122de7624bcee71ae5d",
+      "bytes": 307
+    },
+    {
+      "path": "frames/candle-flicker-lively-3.png",
+      "sha256": "541c4f8aa8ff364a9ac838d386b1e7fe86e364de22251c62c1f372b53965ab01",
+      "bytes": 320
+    },
+    {
+      "path": "frames/candle-flicker-lively-4.png",
+      "sha256": "66044cdc17b8ad4f489ed837e42bc511624d9e451af69a27398580c32b6fe810",
+      "bytes": 310
+    },
+    {
+      "path": "frames/candle-flicker-lively-5.png",
+      "sha256": "004573c4e8b040d20add30fd8197408b80dbbb9f7fd2ca1c51a2c573ab877f18",
+      "bytes": 311
+    },
+    {
+      "path": "frames/candle-flicker-lively-6.png",
+      "sha256": "077bd174e50bc23b3d6159daacd6cae4e5911e52e98ee45a39e49aaa45ee4dc8",
+      "bytes": 306
+    },
+    {
+      "path": "frames/candle-flicker-lively-7.png",
+      "sha256": "a5f4a7a9a5cfebf962c106a3e327b2128dbb60e1bba1c6fe29c40b170275908e",
+      "bytes": 308
+    },
+    {
+      "path": "strips/candle-flicker-lively.png",
+      "sha256": "902ecddbb8c4c82f41cc5dd3163d7c218d32c7d8f921fff4183af0741296641e",
+      "bytes": 822
+    },
+    {
+      "path": "frames/water-ripple-gentle-0.png",
+      "sha256": "10e87e381f460a35dec2ee377eb8a677a977961039c131f19ada63228558e01e",
+      "bytes": 157
+    },
+    {
+      "path": "frames/water-ripple-gentle-1.png",
+      "sha256": "64f60ebd568d6d7c393e428254915abaac1aeb42d82b90db29e9e5baef8b86f0",
+      "bytes": 154
+    },
+    {
+      "path": "frames/water-ripple-gentle-2.png",
+      "sha256": "6e95fa0645795696b9365b5cfeea981ef73b6b578e7f2577fb853dfba51bc47c",
+      "bytes": 164
+    },
+    {
+      "path": "frames/water-ripple-gentle-3.png",
+      "sha256": "116acc41fced3944a07a2e71796b8e43377b40572819ee417959d3019478633e",
+      "bytes": 166
+    },
+    {
+      "path": "frames/water-ripple-gentle-4.png",
+      "sha256": "ae26dc564cf9c7409c614e12262a314fe229274f446769900d2765a3277df8d0",
+      "bytes": 182
+    },
+    {
+      "path": "frames/water-ripple-gentle-5.png",
+      "sha256": "949439fd369bf138222944e14c7ecf555aec249425b9282417ad7b69138d15cb",
+      "bytes": 187
+    },
+    {
+      "path": "frames/water-ripple-gentle-6.png",
+      "sha256": "6a7e379cbad6bcce29889dc1b40edec665912e92e24a726bdca1c3f20bf7ae3b",
+      "bytes": 175
+    },
+    {
+      "path": "frames/water-ripple-gentle-7.png",
+      "sha256": "66c32eb83761f1cb18ae0e0e4e61b10e54c9c9cbbab194a3007b556c91cd0d28",
+      "bytes": 177
+    },
+    {
+      "path": "strips/water-ripple-gentle.png",
+      "sha256": "342f34b8e397e62e2f0655a2bc2f18e8873e937abf2903a96e45b81da45dbb36",
+      "bytes": 621
+    },
+    {
+      "path": "frames/water-ripple-lively-0.png",
+      "sha256": "ae26dc564cf9c7409c614e12262a314fe229274f446769900d2765a3277df8d0",
+      "bytes": 182
+    },
+    {
+      "path": "frames/water-ripple-lively-1.png",
+      "sha256": "949439fd369bf138222944e14c7ecf555aec249425b9282417ad7b69138d15cb",
+      "bytes": 187
+    },
+    {
+      "path": "frames/water-ripple-lively-2.png",
+      "sha256": "6a7e379cbad6bcce29889dc1b40edec665912e92e24a726bdca1c3f20bf7ae3b",
+      "bytes": 175
+    },
+    {
+      "path": "frames/water-ripple-lively-3.png",
+      "sha256": "66c32eb83761f1cb18ae0e0e4e61b10e54c9c9cbbab194a3007b556c91cd0d28",
+      "bytes": 177
+    },
+    {
+      "path": "frames/water-ripple-lively-4.png",
+      "sha256": "b223b92983d6167fa85f8a3adf77cc6f3f1ccb06eabf34299f79baf9b7c12d63",
+      "bytes": 189
+    },
+    {
+      "path": "frames/water-ripple-lively-5.png",
+      "sha256": "42ac35f05d1ac9ff4c8d5efa5e87a47daca37661bb048f6d4883c723dfd19159",
+      "bytes": 191
+    },
+    {
+      "path": "frames/water-ripple-lively-6.png",
+      "sha256": "6e95fa0645795696b9365b5cfeea981ef73b6b578e7f2577fb853dfba51bc47c",
+      "bytes": 164
+    },
+    {
+      "path": "frames/water-ripple-lively-7.png",
+      "sha256": "116acc41fced3944a07a2e71796b8e43377b40572819ee417959d3019478633e",
+      "bytes": 166
+    },
+    {
+      "path": "strips/water-ripple-lively.png",
+      "sha256": "71205cb7b8cd82d5524cd60f52a497c549b02fb13f29b47d8e42bb25f7d273a6",
+      "bytes": 659
+    },
+    {
+      "path": "frames/clean-bubbles-gentle-0.png",
+      "sha256": "8ddc9017d51758d94bcf10555f244d712cd9211f0f73505b211731cf9734e3e8",
+      "bytes": 224
+    },
+    {
+      "path": "frames/clean-bubbles-gentle-1.png",
+      "sha256": "30d9876fbbdcf90f26c9091d837643ccc4568a07228d36e924d1aa2a96695132",
+      "bytes": 217
+    },
+    {
+      "path": "frames/clean-bubbles-gentle-2.png",
+      "sha256": "0801b0fd4f3064fa8431e9b668ff42219433e19bd4f47b85136382d60fb8b79b",
+      "bytes": 227
+    },
+    {
+      "path": "frames/clean-bubbles-gentle-3.png",
+      "sha256": "9b862ebe32d43a57e41621f9ed2c235cb3ec5b56f0689c9cba4dc0a581861f22",
+      "bytes": 212
+    },
+    {
+      "path": "frames/clean-bubbles-gentle-4.png",
+      "sha256": "bd58612eca75dd93bfc92984607c1a3e01033f07313a5bf5bb06126e1dd7025a",
+      "bytes": 226
+    },
+    {
+      "path": "frames/clean-bubbles-gentle-5.png",
+      "sha256": "a19101cde0ce9281d3a2c5e15fcc2a473f925886a27cb1ed3dd45df628b031e7",
+      "bytes": 223
+    },
+    {
+      "path": "frames/clean-bubbles-gentle-6.png",
+      "sha256": "79862539630e00cdc5bee217e538407d69b422f656cd722e3405ed8b161462ea",
+      "bytes": 237
+    },
+    {
+      "path": "frames/clean-bubbles-gentle-7.png",
+      "sha256": "da6050f026fae1fc14958b439459fa05a24bfa3299b88a1d5d0b787e9479a6f4",
+      "bytes": 210
+    },
+    {
+      "path": "strips/clean-bubbles-gentle.png",
+      "sha256": "3c54f0eb2511a82cc1a9b0882c0011b41e61286718bec97d8d1b6277fb08da59",
+      "bytes": 942
+    },
+    {
+      "path": "frames/clean-bubbles-lively-0.png",
+      "sha256": "4dd1c404d3b5f1c483408a61e0a8bf2bdd9cfb4cb5b8ba94ace825c531177181",
+      "bytes": 269
+    },
+    {
+      "path": "frames/clean-bubbles-lively-1.png",
+      "sha256": "403446651bdc79c2509a2477df3c121f1aacc4e2016d3e89c00bec4913619940",
+      "bytes": 259
+    },
+    {
+      "path": "frames/clean-bubbles-lively-2.png",
+      "sha256": "d92b22be32c3bc1e16088d5cae908f33360794cab59aee73c2c3ff50a57fc869",
+      "bytes": 291
+    },
+    {
+      "path": "frames/clean-bubbles-lively-3.png",
+      "sha256": "abde77591921f72bc45c5ecba88b930404e0b5dace2898186076594800db499c",
+      "bytes": 271
+    },
+    {
+      "path": "frames/clean-bubbles-lively-4.png",
+      "sha256": "373760a4aacdba7768bef4177f7d6cb43765436225426f48ddf153dabd0093f0",
+      "bytes": 290
+    },
+    {
+      "path": "frames/clean-bubbles-lively-5.png",
+      "sha256": "a6825e2ef075567352d3b6e1c5790071a610aad5a87b66897b475adae0a8024a",
+      "bytes": 261
+    },
+    {
+      "path": "frames/clean-bubbles-lively-6.png",
+      "sha256": "b34bc3c0a5fd39f79e013fc1087dde9e6eb3aa3d6633bc8b25e23dca04bcba6d",
+      "bytes": 284
+    },
+    {
+      "path": "frames/clean-bubbles-lively-7.png",
+      "sha256": "0b678da3b35f32c566185b5e6b653e8797ee567e04cbf0a2ed80810f1a85dbc6",
+      "bytes": 266
+    },
+    {
+      "path": "strips/clean-bubbles-lively.png",
+      "sha256": "d35939522d2e868998eac916e2e15d6940f3360dfa7af141f099ad5c72a1dce4",
+      "bytes": 1229
+    },
+    {
+      "path": "frames/flour-dust-gentle-0.png",
+      "sha256": "ffd241958a815e23c74621bec8b71e63d7fa92de33acc92862b135594efae85a",
+      "bytes": 170
+    },
+    {
+      "path": "frames/flour-dust-gentle-1.png",
+      "sha256": "101809c285ab881c583cd3bcdbb17455090cf93024acb67a085da462d91719bb",
+      "bytes": 174
+    },
+    {
+      "path": "frames/flour-dust-gentle-2.png",
+      "sha256": "aae564ea23c457bb2fc8acc615daebb3c421f74f2fb3e6b5beae6eccdd415cc6",
+      "bytes": 171
+    },
+    {
+      "path": "frames/flour-dust-gentle-3.png",
+      "sha256": "9fbc5cc68d3dbbe6538915ecdd16a83b5b5bf864841516d67e03ad3057da5e55",
+      "bytes": 173
+    },
+    {
+      "path": "frames/flour-dust-gentle-4.png",
+      "sha256": "e6d45d456843c7812965b1ba09e73b2b40a01abbcec8c8caa26e84610084693a",
+      "bytes": 171
+    },
+    {
+      "path": "frames/flour-dust-gentle-5.png",
+      "sha256": "c3dac4424ae33433babec6d4a240091377510b64950c5fcb1a3536ff88196df1",
+      "bytes": 173
+    },
+    {
+      "path": "frames/flour-dust-gentle-6.png",
+      "sha256": "bc902767b44c654ac0c0f37cdb1fcb2b2164fb0ecbc527d93ac7d02e637e8a30",
+      "bytes": 170
+    },
+    {
+      "path": "frames/flour-dust-gentle-7.png",
+      "sha256": "de86daa7b20b42bb0f3d7c6914c6b1d0227b4ea88c083728983ca660511114fa",
+      "bytes": 172
+    },
+    {
+      "path": "strips/flour-dust-gentle.png",
+      "sha256": "918be4176cc92e461fb57c01a19ce853c7562f4391da5b698a5c196926d1fa6c",
+      "bytes": 535
+    },
+    {
+      "path": "frames/flour-dust-lively-0.png",
+      "sha256": "1e34629b3185f69ff04dd7cd33d591a46b67b900e421e38d3f6ffe35f076d8f3",
+      "bytes": 194
+    },
+    {
+      "path": "frames/flour-dust-lively-1.png",
+      "sha256": "fa068ecbb3c0c21db1ed7eb3e7af57cff134b9cbcaa927a62dbba212c35475a8",
+      "bytes": 196
+    },
+    {
+      "path": "frames/flour-dust-lively-2.png",
+      "sha256": "6e241f1d0e7c8d2a5a173f4c880bff884c33669d29adb2f31a973e738a9937ae",
+      "bytes": 203
+    },
+    {
+      "path": "frames/flour-dust-lively-3.png",
+      "sha256": "4c19b517d6ec16dc740197ac1697dfd5e4490c58b61d711f6f9b8017e1c0e823",
+      "bytes": 204
+    },
+    {
+      "path": "frames/flour-dust-lively-4.png",
+      "sha256": "b8e940bb7d044bca649121c1df13563af8943e41e11c802acb4ea86c98b1699f",
+      "bytes": 186
+    },
+    {
+      "path": "frames/flour-dust-lively-5.png",
+      "sha256": "91ab199474f4c12bcce38a925088d081fc3a31083a93ce1b2e3fc717bbea7fe6",
+      "bytes": 192
+    },
+    {
+      "path": "frames/flour-dust-lively-6.png",
+      "sha256": "b6be76e1ba618ae5ab49df41d6adce93a64cebc8bd58a27988418eb7af2f17a2",
+      "bytes": 190
+    },
+    {
+      "path": "frames/flour-dust-lively-7.png",
+      "sha256": "a0e0c592acac83104917e0e281bac182c17dc3c34fa0dc2d6ff9ad5aa9932a9e",
+      "bytes": 195
+    },
+    {
+      "path": "strips/flour-dust-lively.png",
+      "sha256": "a8f8569655e665dfb2685a2db0b551b9cf8e91d9c26e9e8b0972f0214ecdf023",
+      "bytes": 662
+    },
+    {
+      "path": "frames/coin-glint-gentle-0.png",
+      "sha256": "a4c0b0310f8619e4fa0e41874efbd7165e71a68131e03686d61888308d04d6b1",
+      "bytes": 202
+    },
+    {
+      "path": "frames/coin-glint-gentle-1.png",
+      "sha256": "23d68f8c94c3935f1f508c5d8ed88fb9974962df03ee62fa3f5bea8406d7e848",
+      "bytes": 268
+    },
+    {
+      "path": "frames/coin-glint-gentle-2.png",
+      "sha256": "18141346338324af2b19e965bed23a7d284340f11f8f4a0e7b8ab30ff495686c",
+      "bytes": 289
+    },
+    {
+      "path": "frames/coin-glint-gentle-3.png",
+      "sha256": "379f96f42735203644e4e19fadd121a6bbca75a4ebf5d6659aabc3d79548dd3a",
+      "bytes": 251
+    },
+    {
+      "path": "frames/coin-glint-gentle-4.png",
+      "sha256": "7611570ee7852fe852c5162c23698dda9d73708f5d62f0044d4dcd493a3ccfa4",
+      "bytes": 222
+    },
+    {
+      "path": "frames/coin-glint-gentle-5.png",
+      "sha256": "f4536a3af579c9c393eee0706e80262de3bed7c5337c460f62e2a295126ffc36",
+      "bytes": 270
+    },
+    {
+      "path": "frames/coin-glint-gentle-6.png",
+      "sha256": "aa847a5e053e8ae11c749f58711483db96af2a1e65f5e88b85ab9098e742ead1",
+      "bytes": 269
+    },
+    {
+      "path": "frames/coin-glint-gentle-7.png",
+      "sha256": "44ebdc22953d103889c6b60b25112b0e9653128d5acd05491427f1f1bf5599ea",
+      "bytes": 269
+    },
+    {
+      "path": "strips/coin-glint-gentle.png",
+      "sha256": "c0bdce3fad28e58addd4f58c88c4ef46c4002c217ea6626cfc843ff3efb9dd58",
+      "bytes": 942
+    },
+    {
+      "path": "frames/coin-glint-lively-0.png",
+      "sha256": "cf4778274b11e98bb00cbf43c85ca2405ea4d91f6da9c31eb13811786a674244",
+      "bytes": 220
+    },
+    {
+      "path": "frames/coin-glint-lively-1.png",
+      "sha256": "e895630116463cb65c5a48fb668507f0d98295cd1a6d458a567ea8627b8bbf42",
+      "bytes": 290
+    },
+    {
+      "path": "frames/coin-glint-lively-2.png",
+      "sha256": "f0590ee73589f82676f1b105ccbecb6afabd7f62fd8881d51929401c8f95f472",
+      "bytes": 308
+    },
+    {
+      "path": "frames/coin-glint-lively-3.png",
+      "sha256": "b8cf20320d96113597d994b6266701e711c5d30f94d3d28b5058be89f8bec918",
+      "bytes": 273
+    },
+    {
+      "path": "frames/coin-glint-lively-4.png",
+      "sha256": "7f8b98558b84fe99526e62917bf89d031df15fd221bcb0fd09a21208f11caeb6",
+      "bytes": 241
+    },
+    {
+      "path": "frames/coin-glint-lively-5.png",
+      "sha256": "6fff43506102810cfb6c2c859d5c4ddbeb6c0ee061fe6dd6b52ebaf7f13ccb7b",
+      "bytes": 291
+    },
+    {
+      "path": "frames/coin-glint-lively-6.png",
+      "sha256": "134cac7469008db1667df7e54c4fba07bfa732fc6c3175cee8ba3ea9209e3fc6",
+      "bytes": 287
+    },
+    {
+      "path": "frames/coin-glint-lively-7.png",
+      "sha256": "b7a09da70a923035fcb0e43da59ed946e5dea637c6ba937f882d2ffe55e0dbcc",
+      "bytes": 290
+    },
+    {
+      "path": "strips/coin-glint-lively.png",
+      "sha256": "0e70855ed012a18eb854d1115490198dc5e764109f6881fe182ade0ccf9489a7",
+      "bytes": 987
+    },
+    {
+      "path": "frames/heart-pop-gentle-0.png",
+      "sha256": "34fc4dc18342fc2ff51c1db73c76c0418afd9968ff271e68b1a6aff58cdb4066",
+      "bytes": 183
+    },
+    {
+      "path": "frames/heart-pop-gentle-1.png",
+      "sha256": "9e9fefb3c4aa3049882b47a458a731b2644d75e15a46dede107b55bf8e3fec32",
+      "bytes": 202
+    },
+    {
+      "path": "frames/heart-pop-gentle-2.png",
+      "sha256": "8114bca638ef82d1950097735eb2e61d24ee24d87b86c9ce51ccc23625d95c0a",
+      "bytes": 226
+    },
+    {
+      "path": "frames/heart-pop-gentle-3.png",
+      "sha256": "4a7174d12f7e463e2b229a51fbd5f717630d9c6f75e2f0f72a0015868d41d25a",
+      "bytes": 226
+    },
+    {
+      "path": "frames/heart-pop-gentle-4.png",
+      "sha256": "ce0878076cbefa7e49865f303d081cc228dade8474d74213c22cd6126950e035",
+      "bytes": 213
+    },
+    {
+      "path": "frames/heart-pop-gentle-5.png",
+      "sha256": "5c7e86ea2a731f5fca7ecd6e3d7b0bab4229d6a6989068eea414389c8e4318eb",
+      "bytes": 208
+    },
+    {
+      "path": "frames/heart-pop-gentle-6.png",
+      "sha256": "9323bd4aeef3d73e718756eebf0feef7cfe2b867183ca816553f529295d0a4a8",
+      "bytes": 192
+    },
+    {
+      "path": "frames/heart-pop-gentle-7.png",
+      "sha256": "d1133440888d73af3466f3439aa4304b4dadabdc47ba4a32a6f60393e8f0dbee",
+      "bytes": 164
+    },
+    {
+      "path": "strips/heart-pop-gentle.png",
+      "sha256": "3d41ed6de46b66da73118cd3bb593226caf63cad5d094566da2b0014b5f907c4",
+      "bytes": 704
+    },
+    {
+      "path": "frames/heart-pop-lively-0.png",
+      "sha256": "34c0591ae8a31d0b26d1c34ee6152011b930466a6405ce139a21283538a83708",
+      "bytes": 227
+    },
+    {
+      "path": "frames/heart-pop-lively-1.png",
+      "sha256": "89593605a9dda9213ed3245a9d51ceafc7ee8b2d37adf123c0f846c05ce04a45",
+      "bytes": 260
+    },
+    {
+      "path": "frames/heart-pop-lively-2.png",
+      "sha256": "2243fcc6fbaa9b99f2f9c8012d2b632590680b6f09fb501522d9cd016a9b66a7",
+      "bytes": 306
+    },
+    {
+      "path": "frames/heart-pop-lively-3.png",
+      "sha256": "89514a936e012d7885cb1239996001c2f903f6dd8297b6300be77aa6fc263776",
+      "bytes": 314
+    },
+    {
+      "path": "frames/heart-pop-lively-4.png",
+      "sha256": "2ab79095780628a38b87eed15e2aa9580c77aee4fb8e76c3cbdbe18a2ccbc53b",
+      "bytes": 284
+    },
+    {
+      "path": "frames/heart-pop-lively-5.png",
+      "sha256": "ffbfde34c2cdddaca0e44d15d407a6742c2bbe29d015068dfb1637525a11cccf",
+      "bytes": 263
+    },
+    {
+      "path": "frames/heart-pop-lively-6.png",
+      "sha256": "765e8548cb10351c3ba5247360b433f6fae13ce7d5bcc74a870f0f48c41cc351",
+      "bytes": 235
+    },
+    {
+      "path": "frames/heart-pop-lively-7.png",
+      "sha256": "3b0c938cc0289b711800eb3d8cbe6911d68717d04a759b2e3179e12f75c8f048",
+      "bytes": 181
+    },
+    {
+      "path": "strips/heart-pop-lively.png",
+      "sha256": "617e86dba2acfb92e994b1c37a7ffd144303184217163b1d886bfa9b723c10c4",
+      "bytes": 1054
+    },
+    {
+      "path": "frames/music-notes-gentle-0.png",
+      "sha256": "b9a1213d7039b04f82f39db2600f3d8d5ebd048f79ea96ac4ed4f899a7f6f025",
+      "bytes": 260
+    },
+    {
+      "path": "frames/music-notes-gentle-1.png",
+      "sha256": "70d4362f35e5ecf24a63133811a03f5c8298edf2db6c95419c4fac100ddb846f",
+      "bytes": 249
+    },
+    {
+      "path": "frames/music-notes-gentle-2.png",
+      "sha256": "78140d911c1d6a0b15fdb0fe4f9fc1c03889afdfac5cbbe044b558cb20077fec",
+      "bytes": 253
+    },
+    {
+      "path": "frames/music-notes-gentle-3.png",
+      "sha256": "795f9b1849170d1d5394965738343cdf947b10314e8dff5450affc3c2db1fb81",
+      "bytes": 245
+    },
+    {
+      "path": "frames/music-notes-gentle-4.png",
+      "sha256": "f69a95f6be14e2651eb49a1e5484fa21c5ad1a92ec6c5e570b9a59fad0e33f15",
+      "bytes": 260
+    },
+    {
+      "path": "frames/music-notes-gentle-5.png",
+      "sha256": "82688383842a43e43c7ccabd66e44f3e538aec1786fd52ccd6dd9a1e03056ef1",
+      "bytes": 252
+    },
+    {
+      "path": "frames/music-notes-gentle-6.png",
+      "sha256": "0810dfe83f29408fad9636de2907c9f170aaae32da946af3504dd9cdab148bd8",
+      "bytes": 255
+    },
+    {
+      "path": "frames/music-notes-gentle-7.png",
+      "sha256": "04a1e6951dcb609454e04c46f4de31fad39b8e257db6730c64e1ccf2861f0c73",
+      "bytes": 251
+    },
+    {
+      "path": "strips/music-notes-gentle.png",
+      "sha256": "3b3700028413b30f409ce1c8007a3dd72de130d61a460e415f7bfc8dd46431ad",
+      "bytes": 945
+    },
+    {
+      "path": "frames/music-notes-lively-0.png",
+      "sha256": "127a8c2ece18cbc88f73259b02b1e073cf02fc9fe9b90af743f15e75412f88d9",
+      "bytes": 295
+    },
+    {
+      "path": "frames/music-notes-lively-1.png",
+      "sha256": "915f385d14985459062f083a150a70d084fa14d334a85ed08f29a83f1dfb5ce0",
+      "bytes": 293
+    },
+    {
+      "path": "frames/music-notes-lively-2.png",
+      "sha256": "198f1b389a0df6ac2780ae3b7be82d7a29f7820df58f53f73ce076238a42136b",
+      "bytes": 300
+    },
+    {
+      "path": "frames/music-notes-lively-3.png",
+      "sha256": "1db98313c22b11a86d1d98d3cb86d0b5c0c96a0fa4297b5a32ec0d0d28a2c8aa",
+      "bytes": 288
+    },
+    {
+      "path": "frames/music-notes-lively-4.png",
+      "sha256": "f771fbd70e62a2399c578d70257391822977644b28cae7528292df6907ee86ef",
+      "bytes": 305
+    },
+    {
+      "path": "frames/music-notes-lively-5.png",
+      "sha256": "598fdab46f93e7554daa3503cef6dff6d07fb34543d812151d91059c3c6b2fb3",
+      "bytes": 306
+    },
+    {
+      "path": "frames/music-notes-lively-6.png",
+      "sha256": "60641e1e236ea4ad12764e586c58368cfb27c12bd76ab2c539d1446a027327a8",
+      "bytes": 297
+    },
+    {
+      "path": "frames/music-notes-lively-7.png",
+      "sha256": "a1213369f38863a0c80b1056b3b014c253a2b5a3e16999d2de338a17412f16f6",
+      "bytes": 301
+    },
+    {
+      "path": "strips/music-notes-lively.png",
+      "sha256": "bbca7fed1df5afefff355f2300a146ab32ab3a17d33965c83cdd79ab4868a780",
+      "bytes": 1061
+    },
+    {
+      "path": "frames/delivery-ping-gentle-0.png",
+      "sha256": "e57f4a9938562c85e1f1f3252aef1c72a4effdc56aaee983a0a5695acad8125e",
+      "bytes": 180
+    },
+    {
+      "path": "frames/delivery-ping-gentle-1.png",
+      "sha256": "4709beae17743c3b6379c3c48ee6fcf89e341064adaffd98f99a7dbd3fea6de2",
+      "bytes": 220
+    },
+    {
+      "path": "frames/delivery-ping-gentle-2.png",
+      "sha256": "c40269b67940195e1e94ad7d929418311bf40b1f2762cf8ef152cde380192867",
+      "bytes": 251
+    },
+    {
+      "path": "frames/delivery-ping-gentle-3.png",
+      "sha256": "d5eb0ae892cdf2b7a974c9e2c6f7f7d51ea9141ae3f549e5cb240f2c7ede4d4a",
+      "bytes": 263
+    },
+    {
+      "path": "frames/delivery-ping-gentle-4.png",
+      "sha256": "34239d59b8e782a50bfb4fb71a42fbf72184473c0001240b3742e343d3e5fd1c",
+      "bytes": 254
+    },
+    {
+      "path": "frames/delivery-ping-gentle-5.png",
+      "sha256": "8e02f51e8cce759934329e957ac5e274c48cecff3a1a280427859052cad7ee6e",
+      "bytes": 260
+    },
+    {
+      "path": "frames/delivery-ping-gentle-6.png",
+      "sha256": "db5d30ff040f6bdbf78b6550473a77284d27627964d0f2bc568255e6a769b334",
+      "bytes": 290
+    },
+    {
+      "path": "frames/delivery-ping-gentle-7.png",
+      "sha256": "8b21100cdd82172dd5b256e0365c7039604fcecdce3685ea4c264a4dc37a9aed",
+      "bytes": 273
+    },
+    {
+      "path": "strips/delivery-ping-gentle.png",
+      "sha256": "6dc79a0533fe3deb49b4bb86bf78c2ff586e23435b87b6a0f07daa5d7e4da0ec",
+      "bytes": 1062
+    },
+    {
+      "path": "frames/delivery-ping-lively-0.png",
+      "sha256": "fef041dfb5aeb586a9f0d381a08f283222be4ec7acca9bad9c069b48c4462097",
+      "bytes": 191
+    },
+    {
+      "path": "frames/delivery-ping-lively-1.png",
+      "sha256": "c5f492ced3e1905838677982d2c647917b83101c25af21bc6499c91ade24c5d7",
+      "bytes": 235
+    },
+    {
+      "path": "frames/delivery-ping-lively-2.png",
+      "sha256": "17536a2f85d3df678a3f145410abe6d1364f45815e9d750b6076c7a77d875cb5",
+      "bytes": 269
+    },
+    {
+      "path": "frames/delivery-ping-lively-3.png",
+      "sha256": "7cc7d8e34ff3aaa254bd8c709e979829ba4f8da78d239568c6c02c9155dbc06a",
+      "bytes": 277
+    },
+    {
+      "path": "frames/delivery-ping-lively-4.png",
+      "sha256": "ba4a0eddcdc8d4cc5b5f47bc7f4aa53cad03471ef6fe23ff4479347eeca8226e",
+      "bytes": 267
+    },
+    {
+      "path": "frames/delivery-ping-lively-5.png",
+      "sha256": "d12c9c80e60898bbe2356afe0940714b0ef2de65eea407ab2b3dc823c6d7b100",
+      "bytes": 270
+    },
+    {
+      "path": "frames/delivery-ping-lively-6.png",
+      "sha256": "923d73f4a5457f7556d67b2614b9a74b6ba1c74058cf3c873403d8c8799ad3ad",
+      "bytes": 301
+    },
+    {
+      "path": "frames/delivery-ping-lively-7.png",
+      "sha256": "55afdbb1a1e443c4cc20e2d6e907cffc590cf3f9147fa205f45f3dd77e8fa486",
+      "bytes": 286
+    },
+    {
+      "path": "strips/delivery-ping-lively.png",
+      "sha256": "eb35058f9c73fb7121c16181f53ff2df549b7e26bcf3c45a58205bde49f6c732",
+      "bytes": 1188
+    },
+    {
+      "path": "atlas.png",
+      "sha256": "2e7be20bb4543b695b9cefdc109a41ea83f924a5ae7566e5bfcd0ddb93814265",
+      "bytes": 24841
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "b08fe139e9239c687cf2a1424526e32d4330d03f9942baa7aef1dc954b29bf5e",
+      "bytes": 110021
+    },
+    {
+      "path": "catalog.js",
+      "sha256": "6ddbe59617e1c6b2d87dc61f6559e0e6b011fc220d30647bf93b5a4a02892c11",
+      "bytes": 65061
+    },
+    {
+      "path": "verification-report.json",
+      "sha256": "956063cd94534c476619bd506a923507b84e992e71830276b080b024b38969fa",
+      "bytes": 674
+    }
+  ]
+}
