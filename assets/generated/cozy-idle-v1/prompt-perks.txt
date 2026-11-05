@@ -1,0 +1,17 @@
+Use case: stylized-concept
+Asset type: Tiny Bean Café game bitmap sprite sheet, source-perks.png.
+The two attached screenshots of the café and the region map are STYLE REFERENCE ONLY. Create NEW perk objects, do not redraw the screenshots.
+Style: cozy low-resolution pixel art with crisp visible square pixel clusters, simple warm rounded silhouettes, soft dark-brown outlines, honey-oak wood, cream, sage green, red gingham, aged brass, light from the upper left. Match the main café's palette, outline weight, pixel scale and lighting. No smooth vector art, no photorealism.
+
+Layout: panoramic 3:1 transparent PNG. EXACTLY SIX equally sized, approximately square perk icon groups, ONE left-to-right row, same pixel scale, vertically centered. Six equal-width slots. Each whole group fits inside the middle 65% of its slot, with generous fully transparent gaps and outer margins. Every group is separate and independently croppable, no object crosses a slot boundary, no second row, no clipping. Transparent padding above and below the row.
+
+EXACT left-to-right order:
+1. A brass cash register with an EXTRA drawer pulled out and visible gold coins inside. Blank keys and completely blank display with no digits.
+2. A small reddish brick bread oven with a warm glowing oven mouth and a loaf resting on its wooden bread peel; the peel and loaf are part of this single oven icon group.
+3. A yellow builder's hard hat resting on rolled-up blueprints, with a hammer. Blueprints show only abstract architectural lines, absolutely no lettering or numbers.
+4. A stack of cream pastry boxes tied together with red twine, one small gold sparkle on top. Blank boxes, no branding.
+5. A manager's honey-oak clipboard with cream paper and a gold star badge pinned to it. Paper is blank or contains only simple short nonalphabetic horizontal strokes, no readable writing.
+6. A round cat bed with a red-and-cream gingham cushion and a feather toy tucked into the bed; no cat.
+
+Each is one recognizable compact icon composition, consistent apparent size, isolated with no circle, square tile, medallion, frame, background or base behind it. Real alpha transparency around EVERY object and through all gaps. No floor, no ground strip, no pedestal, no cast-shadow plate, no drop shadow outside silhouettes. Shading stays on the objects. Oven glow stays inside its mouth.
+Absolutely NO text, letters, digits, words, logos, watermarks, captions, labels or numerals anywhere. Six icon groups only, exact order.

@@ -20,31 +20,34 @@ const source=fs.readFileSync('index.html','utf8');
 const boot='<script id="loader-bootstrap">'+source.split('<script id="loader-bootstrap">')[1].split('</script>')[0]+'</script>';
 const html=source.split('<div id="app">')[0]+boot+'</body></html>';
 const file='artifacts/loading-local-preview.html';
-fs.writeFileSync(file,html.replaceAll('./loading-carry-staff-v2.png',pathToFileURL(path.resolve('public/loading-carry-staff-v2.png')).href));
+fs.writeFileSync(file,html.replaceAll('./loading-carry-strip.png',pathToFileURL(path.resolve('public/loading-carry-strip.png')).href));
 const target=await send('Target.createTarget',{url:'about:blank'},null);session=(await send('Target.attachToTarget',{targetId:target.targetId,flatten:true},null)).sessionId;
 await send('Runtime.enable');await send('Page.enable');
 await send('Emulation.setDeviceMetricsOverride',{width:1200,height:800,deviceScaleFactor:1,mobile:false});
 await send('Page.navigate',{url:pathToFileURL(path.resolve(file)).href});await delay(600);
-check(await ev('new Promise(resolve=>{const i=new Image();i.onload=()=>resolve(i.naturalWidth===1254&&i.naturalHeight===1254);i.onerror=()=>resolve(false);i.src=document.querySelector(".loader-pose image").href.baseVal})'),'actual alpha atlas decodes');
-check(await ev('!document.querySelector(".loader-coffee")&&document.querySelectorAll(".loader-pose").length===4'),'four whole carry poses replace separate cup overlay');
+check(await ev('new Promise(resolve=>{const i=new Image();i.onload=()=>resolve(i.naturalWidth===1344&&i.naturalHeight===216);i.onerror=()=>resolve(false);i.src=document.querySelector(".loader-strip").src})'),'eight-frame walk strip decodes');
+check(await ev('!document.querySelector(".loader-coffee")&&document.querySelectorAll(".loader-strip").length===1&&!document.querySelector(".loader-pose")'),'one strip carries the whole walk cycle');
+check(await ev('getComputedStyle(document.querySelector(".loader-strip")).animationName!=="none"&&getComputedStyle(document.querySelector(".loader-strip")).willChange==="transform"&&getComputedStyle(document.querySelector(".loader-figure")).animationName==="none"'),'walk animates a transform only');
 const gait=[];
-for(let i=0;i<8;i++){await delay(110);gait.push(await ev('({x:document.querySelector(".loader-walker").getBoundingClientRect().x,poses:Array.from(document.querySelectorAll(".loader-pose")).map(e=>getComputedStyle(e).opacity),progress:document.querySelector("progress").hasAttribute("value")})'));}
+for(let i=0;i<16;i++){await delay(55);gait.push(await ev('({x:document.querySelector(".loader-walker").getBoundingClientRect().x,poses:[getComputedStyle(document.querySelector(".loader-strip")).transform],progress:document.querySelector("progress").hasAttribute("value")})'));}
 const activity=[];
 for(let i=0;i<3;i++){activity.push(await ev('getComputedStyle(document.querySelector(".loader-track"),"::after").left'));await delay(200);}
 check(new Set(activity).size>1&&await ev('!document.querySelector("progress").hasAttribute("value")'),'pre-module activity moves without a fake percentage',{activity});
-check(new Set(gait.map(p=>p.x)).size===1&&new Set(gait.map(p=>JSON.stringify(p.poses))).size===4&&gait.every(p=>!p.progress),'all four gait frames advance in place without inventing progress',{gait});
+check(new Set(gait.map(p=>p.x)).size===1&&new Set(gait.map(p=>JSON.stringify(p.poses))).size>=6&&gait.every(p=>!p.progress),'the walk frames advance in place without inventing progress',{gait});
 const progressPositions=[];
 for(const value of [0,.25,.8,1]){
 progressPositions.push(await ev('(()=>{document.querySelector("progress").value='+value+';const w=document.querySelector(".loader-walker"),r=w.getBoundingClientRect(),p=document.querySelector(".loader-walkway").getBoundingClientRect();return {x:r.x,center:r.x+r.width/2,expected:p.x+p.width/2,facing:getComputedStyle(document.querySelector(".loader-figure")).transform}})()'));
 await delay(220);
 }
-check(progressPositions.every(p=>Math.abs(p.center-p.expected)<.5&&p.facing==='none')&&new Set(progressPositions.map(p=>p.x)).size===1,'staff stays centered at 0, 25, 80 and 100 percent without turning',{progressPositions});
+// The figure only bobs vertically: never a mirrored (turned) matrix.
+const unturned=(m)=>m==='none'||Number(m.slice(m.indexOf('(')+1).split(',')[0])>0;
+check(progressPositions.every(p=>Math.abs(p.center-p.expected)<.5&&unturned(p.facing))&&new Set(progressPositions.map(p=>p.x)).size===1,'staff stays centered at 0, 25, 80 and 100 percent without turning',{progressPositions});
 await ev('document.querySelector("progress").removeAttribute("value")');
-for(let frame=0;frame<4;frame++){
-await ev('document.querySelectorAll(".loader-walker,.loader-figure").forEach(e=>{const a=e.getAnimations()[0];if(a){a.pause();a.currentTime=1500}});document.querySelectorAll(".loader-pose").forEach(e=>{const a=e.getAnimations()[0];a.pause();a.currentTime='+String(frame*200+50)+'})');
+for(let frame=0;frame<8;frame++){
+await ev('document.querySelectorAll(".loader-strip").forEach(e=>{const a=e.getAnimations()[0];if(a){a.pause();a.currentTime='+String(frame*100+30)+'}})');
 await screenshot('pose-'+frame);
 }
-await ev('document.querySelectorAll(".loader-walker,.loader-figure,.loader-pose").forEach(e=>e.getAnimations()[0]?.play())');
+await ev('document.querySelectorAll(".loader-strip").forEach(e=>e.getAnimations()[0]?.play())');
 for(const [name,width,height,mobile] of [['desktop',1200,800,false],['mobile',390,844,true],['small',320,568,true],['landscape',844,390,true]]){
 await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile});await delay(160);
 const box=await ev('(()=>{const r=document.querySelector(".loader-content").getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height,overflow:document.documentElement.scrollWidth>innerWidth}})()');
@@ -52,11 +55,11 @@ check(box.x>=0&&box.y>=0&&box.x+box.w<=width&&box.y+box.h<=height&&!box.overflow
 if(name==='desktop'||name==='mobile')await screenshot(name);
 }
 await send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
-check(await ev('Array.from(document.querySelectorAll(".loader-walker,.loader-figure,.loader-pose")).every(e=>getComputedStyle(e).animationName==="none")&&getComputedStyle(document.querySelector(".loader-pose")).opacity==="1"'),'reduced motion stationary carry pose');
+check(await ev('Array.from(document.querySelectorAll(".loader-figure,.loader-strip,.loader-shadow")).every(e=>getComputedStyle(e).animationName==="none")&&getComputedStyle(document.querySelector(".loader-strip")).transform==="none"'),'reduced motion stationary carry pose');
 check(await ev('getComputedStyle(document.querySelector(".loader-track"),"::after").animationName==="none"'),'reduced motion stops indeterminate activity');
 await send('Emulation.setEmulatedMedia',{features:[]});
 await ev('document.querySelector("#loader").setAttribute("aria-busy","false")');
-check(await ev('Array.from(document.querySelectorAll(".loader-walker,.loader-figure,.loader-pose")).every(e=>getComputedStyle(e).animationPlayState==="paused")'),'idle/failure CSS stops decorative walk');
+check(await ev('getComputedStyle(document.querySelector(".loader-strip")).animationPlayState==="paused"'),'idle/failure CSS stops decorative walk');
 await ev('document.querySelector("#loader").setAttribute("aria-busy","true");const s=document.createElement("script");s.id="game-entry";s.type="module";s.src="./missing-entry-for-qa.js";document.body.append(s)');
 for(let i=0;i<50;i++){await delay(100);if(await ev('!!document.querySelector("#loader [role=alert]")'))break;}
 check(await ev('document.querySelector("progress").hidden&&!document.querySelector("[data-loading-retry]").hidden&&!!document.querySelector("#loader [role=alert]")'),'actual missing entry module surfaces failure and retry');

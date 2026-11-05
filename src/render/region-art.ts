@@ -1,4 +1,5 @@
 import { FLOOR_Y, SCENE_W, floorY } from '../game/layout';
+import { paintConstruction } from './idle-props-art';
 import type { RegionId } from '../game/regions';
 import { paintFloor, paintWall } from './decor-art';
 import { passageRunner } from './passages';
@@ -63,7 +64,8 @@ function gardenBox(ctx: Ctx, x: number, y: number, width: number, flowers: boole
 }
 
 /** Each extension has authored architecture, while all routing geometry stays local. */
-export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, light: Lighting, locked: boolean): void {
+/** `building`: the room is paid for and being built, so its builders' tools are out. */
+export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, light: Lighting, locked: boolean, building = false): void {
   const r = (x: number, y: number, w: number, h: number, color: string) => rect(ctx, x, y, w, h, color);
   const reading = id === 'reading', terrace = id === 'terrace';
   paintWall(ctx, reading ? 'wall_cream' : 'wall_mint', 0, 0, SCENE_W, FLOOR_Y, t);
@@ -229,6 +231,8 @@ export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, l
       r(x + 7, y - 13, 6, 5, '#ecdbb2'); r(x + 8, y - 12, 4, 1, '#a78c64');
       for (let d = 0; d < 13; d++) r(x + 3 + d, y - 16 + d, 2, 1, '#d0aa74');
     }
-    ctx.save(); ctx.globalAlpha = 0.15; r(0, 0, SCENE_W, height, '#584b38'); ctx.restore();
+    if (building) paintConstruction(ctx, floorY, height);
+    // A room being built is lit a little more than one nobody has paid for yet.
+    ctx.save(); ctx.globalAlpha = building ? 0.08 : 0.15; r(0, 0, SCENE_W, height, '#584b38'); ctx.restore();
   }
 }

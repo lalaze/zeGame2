@@ -7,6 +7,8 @@ import { paintLocationPreview } from '../render/location-scenery';
 import { itemArtwork, toDataURL } from '../render/sprites';
 import { displayItemName } from './item-name';
 import { showModal } from './modal';
+import { franchisesIn } from '../game/chain-bonuses';
+import { placeBonusText, shopImage } from './chain-ui';
 
 export const locationName = (id: LocationId) => t(`location.${id}.name` as MessageKey);
 
@@ -35,7 +37,13 @@ export function showBranchMap(state: GameState, pick: (location: LocationId) => 
     pin.dataset.location = location.id;
     pin.style.left = `${location.pin[0] * 100}%`;
     pin.style.top = `${location.pin[1] * 100}%`;
-    pin.textContent = location.id === here ? `${locationName(location.id)} · ${t('map.current')}` : locationName(location.id);
+    // Each place's little storefront stands above its pin, lit where a franchise already is.
+    const shop = document.createElement('img');
+    shop.className = 'branch-shop';
+    shop.alt = '';
+    shop.src = shopImage(location.id);
+    pin.classList.toggle('franchised', franchisesIn(state, location.id) > 0);
+    pin.append(shop, location.id === here ? `${locationName(location.id)} · ${t('map.current')}` : locationName(location.id));
     pin.addEventListener('click', () => { selected = location.id; update(); });
     pins.set(location.id, pin);
     map.append(pin);
@@ -61,13 +69,15 @@ export function showBranchMap(state: GameState, pick: (location: LocationId) => 
   specialtyNote.className = 'note';
   const list = document.createElement('ul');
   list.className = 'branch-specialties';
+  const bonusNote = document.createElement('p');
+  bonusNote.className = 'note branch-bonus';
   const open = document.createElement('button');
   open.type = 'button';
   open.className = 'pixel-btn';
   open.dataset.openHere = '';
   open.textContent = t('map.open');
   open.addEventListener('click', () => pick(selected));
-  info.append(title, desc, specialtyNote, list, open);
+  info.append(title, desc, specialtyNote, list, bonusNote, open);
   detail.append(preview, info);
   body.append(map, hint, detail);
 
@@ -83,6 +93,8 @@ export function showBranchMap(state: GameState, pick: (location: LocationId) => 
     specialtyNote.textContent = def.specialties.length
       ? t('map.specialties', { pct: Math.round(SPECIALTY_PRICE_BONUS * 100) })
       : t('map.noSpecialties');
+    const here = franchisesIn(state, selected);
+    bonusNote.textContent = `${here ? `${t('map.franchises', { n: here })} ` : ''}${t('map.bonus', { bonus: placeBonusText(selected, here + 1) })}`;
     list.replaceChildren(...def.specialties.map((id) => {
       const li = document.createElement('li');
       const icon = document.createElement('img');

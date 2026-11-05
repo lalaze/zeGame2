@@ -3,14 +3,14 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import type { Look } from '../game/state';
 import { fineSpriteArt } from '../render/fine-sprite-art';
-import { STANDING_CHARACTER_SCALE, preloadReferenceCharacters } from '../render/reference-character-art';
+import { STANDING_CHARACTER_SCALE, preloadReferenceLook } from '../render/reference-character-art';
 import { character } from '../render/sprites';
 import { createGeneratedOwnerPreview } from './generated-owner-preview';
 import { showOnboarding } from './onboarding';
 
 // Only the shared atlas load is controlled; scales and contacts stay the real ones.
 vi.mock('../render/reference-character-art', async importOriginal => ({
-  ...await importOriginal<typeof import('../render/reference-character-art')>(), preloadReferenceCharacters: vi.fn(),
+  ...await importOriginal<typeof import('../render/reference-character-art')>(), preloadReferenceLook: vi.fn(),
 }));
 vi.mock('../render/decor-art', () => ({ paintCounter: vi.fn(), paintFloor: vi.fn(), paintWainscot: vi.fn(), paintWall: vi.fn() }));
 // The opening step's starter-room previews (55646f5) are painted elsewhere; keep them out of these owner checks.
@@ -51,7 +51,7 @@ const flush = async () => { await Promise.resolve(); await Promise.resolve(); aw
 beforeEach(() => {
   vi.clearAllMocks();
   load = deferred();
-  vi.mocked(preloadReferenceCharacters).mockReturnValue(load.promise);
+  vi.mocked(preloadReferenceLook).mockReturnValue(load.promise);
   vi.stubGlobal('Image', vi.fn(() => { throw new Error('Preview must use the shared atlas loader.'); }));
   vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockImplementation(function (this: HTMLCanvasElement) {
     let ctx = contexts.get(this);
@@ -113,11 +113,11 @@ describe('reference owner preview', () => {
   });
 
   it('uses an already decoded shared family without a preview-specific image request', async () => {
-    vi.mocked(preloadReferenceCharacters).mockResolvedValue(undefined);
+    vi.mocked(preloadReferenceLook).mockResolvedValue(undefined);
     const createImage = vi.fn();
     const preview = createGeneratedOwnerPreview(defaultLook, 5, 'char-sprite', { createImage });
     await flush();
-    expect(preloadReferenceCharacters).toHaveBeenCalledOnce();
+    expect(preloadReferenceLook).toHaveBeenCalledOnce();
     expect(preview.canvas.dataset.generatedOwner).toBe('true');
     expect(createImage).not.toHaveBeenCalled();
     expect(Image).not.toHaveBeenCalled();
@@ -126,7 +126,7 @@ describe('reference owner preview', () => {
 
   it('ignores an old result after switching to a newer custom look', async () => {
     const newer = deferred(), custom = { ...defaultLook, shirt: 1 };
-    vi.mocked(preloadReferenceCharacters).mockReturnValueOnce(load.promise).mockReturnValueOnce(newer.promise);
+    vi.mocked(preloadReferenceLook).mockReturnValueOnce(load.promise).mockReturnValueOnce(newer.promise);
     const preview = createGeneratedOwnerPreview(defaultLook, 5);
     preview.update(custom);
     load.resolve(); await flush();
@@ -140,7 +140,7 @@ describe('reference owner preview', () => {
 
   it('ignores stale requests even after returning to the same look', async () => {
     const newer = deferred();
-    vi.mocked(preloadReferenceCharacters).mockReturnValueOnce(load.promise).mockReturnValue(newer.promise);
+    vi.mocked(preloadReferenceLook).mockReturnValueOnce(load.promise).mockReturnValue(newer.promise);
     const preview = createGeneratedOwnerPreview(defaultLook, 5);
     preview.update({ ...defaultLook, hair: 1 }); preview.update(defaultLook);
     load.resolve(); await flush();
@@ -153,7 +153,7 @@ describe('reference owner preview', () => {
 
   it('ignores an old rejection after a newer look has finished', async () => {
     const newer = deferred(), custom = { ...defaultLook, hair: 1 };
-    vi.mocked(preloadReferenceCharacters).mockReturnValueOnce(load.promise).mockReturnValueOnce(newer.promise);
+    vi.mocked(preloadReferenceLook).mockReturnValueOnce(load.promise).mockReturnValueOnce(newer.promise);
     const preview = createGeneratedOwnerPreview(defaultLook, 5);
     preview.update(custom); newer.resolve(); await flush();
     load.reject(new Error('stale failure')); await flush();
@@ -167,7 +167,7 @@ describe('reference owner preview', () => {
     const preview = createGeneratedOwnerPreview(defaultLook, 5);
     load.reject(new Error('atlas failed')); await flush();
     const retry = deferred();
-    vi.mocked(preloadReferenceCharacters).mockReturnValue(retry.promise);
+    vi.mocked(preloadReferenceLook).mockReturnValue(retry.promise);
     preview.update(defaultLook);
     expect(preview.canvas.dataset.loadError).toBeUndefined();
     expect(preview.canvas.dataset.loading).toBe('true');
@@ -181,7 +181,7 @@ describe('reference owner preview', () => {
     const preview = createGeneratedOwnerPreview(defaultLook, 5);
     preview.dispose(); preview.dispose(); preview.update(defaultLook);
     load.resolve(); await flush();
-    expect(preloadReferenceCharacters).toHaveBeenCalledOnce();
+    expect(preloadReferenceLook).toHaveBeenCalledOnce();
     expect(character).not.toHaveBeenCalled();
     expect(drawCount(preview.canvas)).toBe(0);
   });

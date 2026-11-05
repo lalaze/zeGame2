@@ -1,0 +1,13 @@
+Use case: stylized-concept.
+Asset type: production sprite sheet for Tiny Bean Café, a cozy pixel-art café game.
+Style references: the two attached screenshots show the existing café and glasshouse. Use them only for palette, pixel clusters, outline weight, lighting and camera angle. Do not reproduce either room or its UI.
+Style/medium: warm, rounded, carefully hand-placed pixel art with crisp visible square pixel clusters, simple readable silhouettes, restrained stepped shading, soft dark-brown pixel outlines. Honey-oak wood, pale pine, warm cream, sage green, kraft brown, muted red accents and warm gold. No smooth vector edges or realistic rendering.
+Camera/lighting: front-facing elevated game view showing the front and a little of the top, matching the café furniture in the screenshots. Gentle upper-left lighting.
+Scene/backdrop: genuinely transparent PNG canvas with actual alpha=0 empty pixels around and between objects. No background, no floor, no ground plane, no cast shadows or drop-shadow plates, no painted checkerboard.
+Constraints: no text, no letters, no numbers, no logos, no watermark. All objects entirely in frame with generous transparent padding.
+Primary request: exactly three versions of the SAME small clear-glass tip jar on one wide landscape transparent canvas, side by side in a single horizontal row. Identical jar silhouette, dimensions, rim height, baseline, neck, twine bow, blank kraft tag, camera angle and lighting in all three versions. Evenly spaced with large completely transparent gutters for independent cropping.
+Jar design: clear squat glass jar the size of a large café mug, with a wide round mouth, soft pale highlight at the upper left, subtle warm glass edges, twine bow around the neck, and a small BLANK kraft paper tag hanging from the twine. No lid. Glass should remain visibly clear with real partial alpha in clear areas.
+LEFT: almost empty, exactly four gold coins resting on the bottom.
+MIDDLE: half full of warm gold coins, with the pile rising to halfway up the jar body.
+RIGHT: overflowing, gold coins filling the jar and heaped above its rim, with exactly two extra gold coins leaning against its base.
+Composition: repeat the jar body at exactly the same size and vertical position, not increasing jar sizes. Only the coin quantity changes. Exactly three jar versions, all fully visible, isolated with generous transparent padding. No writing or currency symbols on the coins or tags.

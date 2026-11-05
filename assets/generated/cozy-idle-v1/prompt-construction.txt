@@ -1,0 +1,12 @@
+Use case: stylized-concept.
+Asset type: production sprite sheet for Tiny Bean Café, a cozy pixel-art café game.
+Style references: the two attached screenshots show the existing café and glasshouse. Use them only for palette, pixel clusters, outline weight, lighting and camera angle. Do not reproduce either room or its UI.
+Style/medium: warm, rounded, carefully hand-placed pixel art with crisp visible square pixel clusters, simple readable silhouettes, restrained stepped shading, soft dark-brown pixel outlines. Honey-oak wood, pale pine, warm cream, sage green, kraft brown, muted red accents and warm gold. No smooth vector edges or realistic rendering.
+Camera/lighting: front-facing elevated game view showing the front and a little of the top, matching the café furniture in the screenshots. Gentle upper-left lighting.
+Scene/backdrop: genuinely transparent PNG canvas with actual alpha=0 empty pixels around and between objects. No background, no floor, no ground plane, no cast shadows or drop-shadow plates, no painted checkerboard.
+Constraints: no text, no letters, no numbers, no logos, no watermark. All objects entirely in frame with generous transparent padding.
+Primary request: exactly three distinct construction-prop groups on one wide landscape transparent canvas, laid out left to right, evenly separated by generous completely empty transparent gaps so each group can be cropped independently. Same world scale and shared horizontal floor baseline. They would stand on the café floor and be roughly café-chair height; the ladder may be slightly taller.
+LEFT group: one wooden sawhorse with exactly three stacked pale pine planks lying horizontally across its top, plus a small red metal toolbox at its foot.
+MIDDLE group: one open folding wooden stepladder, with two paint buckets beside it, one sage green and one warm cream. Both lids are ajar; a paintbrush rests on one bucket. Include a neatly folded off-white drop cloth beside the buckets. The ladder, buckets and folded cloth form this single group.
+RIGHT group: one small wooden A-frame sign board in honey oak. Its cream inset board shows only one simple dark-brown pictogram of a crossed hammer and wrench. Absolutely no writing.
+Composition: three isolated groups only, left, middle, right; large transparent gutters at least one-quarter of a group's width between groups; no overlapping between groups. Keep the chair-scale proportions coherent across all three.

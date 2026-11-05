@@ -1,0 +1,66 @@
+{
+  "source": "assets/loading/source-walk.png",
+  "cell": [
+    315,
+    404
+  ],
+  "scale": 0.5346534653465347,
+  "frames": [
+    {
+      "left": 106,
+      "right": 368,
+      "top": 16,
+      "bottom": 404,
+      "anchor": 225.9427660687949
+    },
+    {
+      "left": 570,
+      "right": 810,
+      "top": 25,
+      "bottom": 404,
+      "anchor": 668.6558682693247
+    },
+    {
+      "left": 1034,
+      "right": 1254,
+      "top": 18,
+      "bottom": 404,
+      "anchor": 1113.244263473054
+    },
+    {
+      "left": 1461,
+      "right": 1697,
+      "top": 9,
+      "bottom": 401,
+      "anchor": 1556.7292883254997
+    },
+    {
+      "left": 106,
+      "right": 368,
+      "top": 461,
+      "bottom": 850,
+      "anchor": 226.70632358526396
+    },
+    {
+      "left": 570,
+      "right": 810,
+      "top": 469,
+      "bottom": 850,
+      "anchor": 668.5979767521035
+    },
+    {
+      "left": 1034,
+      "right": 1255,
+      "top": 462,
+      "bottom": 850,
+      "anchor": 1113.4216718266255
+    },
+    {
+      "left": 1459,
+      "right": 1697,
+      "top": 453,
+      "bottom": 843,
+      "anchor": 1557.009931425869
+    }
+  ]
+}

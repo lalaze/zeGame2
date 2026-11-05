@@ -1706,8 +1706,8 @@ html:lang(zh) body {
 }
 
 .styles .swatch {
-  width: 32px;
-  height: 28px;
+  width: 40px;
+  height: 36px;
 }
 
 .swatch-sprite {
@@ -1715,6 +1715,9 @@ html:lang(zh) body {
   height: auto;
   image-rendering: pixelated;
 }
+
+/* With this many hairstyles the heads must be large enough to tell apart. */
+.styles .swatch-sprite { width: 34px; }
 
 .themes {
   display: flex;
@@ -2054,6 +2057,13 @@ html:lang(zh) body {
   summary { align-content: center; }
   .swatches { gap: 8px; }
   .styles .swatch, .swatch { width: 44px; height: 44px; }
+  .styles .swatch { width: 52px; height: 52px; }
+  .styles .swatch-sprite { width: 46px; }
+  /* Thirty-two hairstyles would push the preview off a phone: two rows to swipe through instead. */
+  .swatches.styles {
+    display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, 52px); grid-auto-columns: 52px; justify-content: start;
+    overflow-x: auto; overscroll-behavior-x: contain; padding: 6px; scrollbar-width: thin;
+  }
   .pet-auto { padding-block: 6px; }
   .prep-select input, .pet-auto input { min-height: 0; }
   .pixel-input, .bake-input { font-size: 16px; }

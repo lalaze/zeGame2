@@ -1,10 +1,16 @@
 import { describe, expect, it } from 'vitest';
 import { DAY_SECONDS, type IngredientId } from './data';
 import {
-  AWAY_CAP_SECONDS,
   AWAY_DAYS_PER_HOUR,
   AWAY_MIN_SECONDS,
   MANAGER_COST,
+  MANAGER_UNLOCK_DAY,
+  OVERFLOW_MAX_SECONDS,
+  OVERFLOW_SHARE,
+  TILL_COSTS,
+  TILL_HOURS,
+  WELCOME_MIN,
+  WELCOME_MIN_SECONDS,
   awayEarnings,
   collectAwayEarnings,
   expectedDayProfit,
@@ -13,6 +19,9 @@ import {
   managerRestock,
   managerRunsDays,
   parseManager,
+  tillSeconds,
+  tillUpgradeCost,
+  upgradeTill,
 } from './manager';
 import { createInitialState, deserialize, serialize, SAVE_VERSION } from './state';
 
@@ -30,6 +39,8 @@ function hired(now = 0) {
   const state = cafe();
   expect(hireManager(state)).toBe(true);
   state.manager.lastSeen = now;
+  // Most checks are about the till itself, not the one-time welcome-back gift.
+  state.manager.welcomed = true;
   return state;
 }
 
@@ -37,27 +48,42 @@ describe('shop manager', () => {
   it('starts unhired and survives a save round trip', () => {
     const state = hired(123);
     state.manager.auto = false;
+    state.manager.till = 2;
     const restored = deserialize(serialize(state), 456);
     expect(restored.version).toBe(SAVE_VERSION);
-    expect(restored.manager).toEqual({ hired: true, auto: false, lastSeen: 123 });
+    expect(restored.manager).toEqual({ hired: true, auto: false, lastSeen: 123, till: 2, welcomed: true });
   });
 
   it('gives older saves no manager and starts their away clock at load', () => {
     const old = JSON.parse(serialize(cafe()));
     delete old.manager;
     old.version = 22;
-    expect(deserialize(JSON.stringify(old), 789).manager).toEqual({ hired: false, auto: true, lastSeen: 789 });
+    expect(deserialize(JSON.stringify(old), 789).manager).toEqual({ hired: false, auto: true, lastSeen: 789, till: 0, welcomed: false });
   });
 
-  it('never trusts a last-seen time in the future', () => {
+  it('keeps the eight hours a v23 manager already paid, without a second welcome', () => {
+    const old = JSON.parse(serialize(hired(100)));
+    old.manager = { hired: true, auto: true, lastSeen: 100 };
+    old.version = 23;
+    const manager = deserialize(JSON.stringify(old), 200).manager;
+    expect(TILL_HOURS[manager.till]).toBe(8);
+    expect(manager.welcomed).toBe(true);
+  });
+
+  it('never trusts a last-seen time in the future or an unknown till', () => {
     expect(parseManager({ hired: true, lastSeen: 5_000 }, 1_000).lastSeen).toBe(1_000);
-    expect(parseManager({ hired: 'yes', lastSeen: -1 }, 1_000)).toEqual({ hired: false, auto: true, lastSeen: 1_000 });
+    expect(parseManager({ hired: 'yes', lastSeen: -1 }, 1_000)).toEqual({ hired: false, auto: true, lastSeen: 1_000, till: 0, welcomed: false });
+    expect(parseManager({ hired: true, till: 99, welcomed: false }, 0).till).toBe(TILL_HOURS.length - 1);
+    expect(parseManager({ hired: true, till: -3 }, 0).till).toBe(0);
+    expect(parseManager({ hired: true, till: 1.5 }, 0).till).toBe(TILL_HOURS.indexOf(8));
   });
 
-  it('can be hired once, after the first extra room, for its price', () => {
+  it('can be hired once, from day 3 (or with an extra room), for its price', () => {
     const locked = cafe();
     locked.regions = [];
     expect(hireManager(locked)).toBe(false);
+    locked.day = MANAGER_UNLOCK_DAY;
+    expect(hireManager(locked)).toBe(true);
     expect(hireManager(cafe(MANAGER_COST - 1))).toBe(false);
 
     const state = cafe(MANAGER_COST + 10);
@@ -77,17 +103,53 @@ describe('shop manager', () => {
     expect(expectedDayProfit(state)).toBe(0);
   });
 
-  it('pays part of a normal day for time away, from the first minute up to the cap', () => {
+  it('fills the till at full rate up to its size, then at a trickle for a day, then stops', () => {
     const state = hired(0);
     const perSecond = expectedDayProfit(state) * AWAY_DAYS_PER_HOUR / 3600;
+    const cap = tillSeconds(state);
+    expect(cap).toBe(TILL_HOURS[0] * 3600);
     expect(awayEarnings(state, (AWAY_MIN_SECONDS - 1) * 1000).amount).toBe(0);
-    expect(awayEarnings(state, 2 * HOUR)).toEqual({ seconds: 7200, capped: false, amount: Math.floor(perSecond * 7200) });
+    const half = awayEarnings(state, cap / 2 * 1000);
+    expect(half).toEqual({ seconds: cap / 2, fill: 0.5, full: false, amount: Math.floor(perSecond * cap / 2), welcome: 0 });
+    const later = awayEarnings(state, (cap + 3600) * 1000);
+    expect(later.full).toBe(true);
+    expect(later.fill).toBe(1);
+    expect(later.amount).toBe(Math.floor(perSecond * (cap + OVERFLOW_SHARE * 3600)));
     const week = awayEarnings(state, 7 * 24 * HOUR);
-    expect(week).toEqual({ seconds: AWAY_CAP_SECONDS, capped: true, amount: Math.floor(perSecond * AWAY_CAP_SECONDS) });
+    expect(week.amount).toBe(Math.floor(perSecond * (cap + OVERFLOW_SHARE * OVERFLOW_MAX_SECONDS)));
 
     const unhired = cafe();
     unhired.manager.lastSeen = 0;
     expect(awayEarnings(unhired, 2 * HOUR).amount).toBe(0);
+  });
+
+  it('pays the first real absence at least the welcome-back minimum, once', () => {
+    const state = cafe(MANAGER_COST);
+    state.onMenu = [];
+    expect(hireManager(state)).toBe(true);
+    state.manager.lastSeen = 0;
+    // A quick tab switch neither pays the gift nor uses it up.
+    expect(collectAwayEarnings(state, (WELCOME_MIN_SECONDS - 1) * 1000).welcome).toBe(0);
+    expect(state.manager.welcomed).toBe(false);
+    const first = collectAwayEarnings(state, state.manager.lastSeen + WELCOME_MIN_SECONDS * 1000);
+    expect(first).toMatchObject({ amount: WELCOME_MIN, welcome: WELCOME_MIN });
+    expect(state.coins).toBe(WELCOME_MIN);
+    expect(collectAwayEarnings(state, state.manager.lastSeen + 2 * HOUR).welcome).toBe(0);
+  });
+
+  it('sells bigger tills in order, to a hired manager who can pay', () => {
+    const state = cafe(TILL_COSTS[0]);
+    expect(upgradeTill(state)).toBe(false);
+    state.manager.hired = true;
+    expect(tillUpgradeCost(state)).toBe(TILL_COSTS[0]);
+    expect(upgradeTill(state)).toBe(true);
+    expect(state.coins).toBe(0);
+    expect(tillSeconds(state)).toBe(TILL_HOURS[1] * 3600);
+    expect(upgradeTill(state)).toBe(false);
+    state.manager.till = TILL_HOURS.length - 1;
+    state.coins = Number.MAX_SAFE_INTEGER;
+    expect(tillUpgradeCost(state)).toBeNull();
+    expect(upgradeTill(state)).toBe(false);
   });
 
   it('collects away earnings once and restarts the clock', () => {

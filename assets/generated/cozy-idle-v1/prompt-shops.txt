@@ -1,0 +1,18 @@
+Use case: stylized-concept
+Asset type: Tiny Bean Café game bitmap sprite sheet, source-shops.png.
+Use the two attached screenshots ONLY as style reference: the warm cozy pixel-art café and its region map. Create NEW assets; do not redraw either screenshot.
+Style: carefully hand-placed, visibly square pixel clusters, warm rounded silhouettes, soft dark-brown outlines of consistent weight, honey-oak wood, cream stucco, sage green, red gingham, brass accents, gentle light from the upper left. Match the café reference, not a modern vector or smooth painted illustration.
+
+Canvas/composition: a very wide horizontal transparent PNG containing EXACTLY FIVE separate miniature café buildings, all seen straight from the front, all the same approximate size and same pixel scale. ONE left-to-right row, aligned along one baseline, generous completely transparent gaps between each building and generous transparent outer margins. Each occupies its own equal-width slot; leave at least a quarter-building-width empty between the full silhouettes. All roofs, smoke, accessories and ground strips must fit wholly inside their own slot. No overlap, no cropping, no second row.
+
+EXACT left-to-right order:
+1. OLD TOWN: cream stucco café, red-and-white gingham awning, completely blank honey-oak wooden sign, warm windows, a little attached cobblestone strip directly beneath the building.
+2. MOUNTAIN WOODS: log-cabin café, snow on roof, stone chimney and small wisp of smoke, one small pine beside it, tiny attached natural ground strip.
+3. CITY: narrow red-brick café, sage-green awning, tall windows, one street lamp beside it, tiny attached paving strip.
+4. SEASIDE: white-and-blue clapboard café, blue-and-cream striped awning, life ring on the wall, a little attached sand strip.
+5. FLOWER FIELDS: cottage café with flower boxes, a tiny windmill rising behind it, short rows of tulips on its tiny attached ground strip.
+
+Transparency: genuinely clear alpha background around every sprite, including gaps between sprites, no opaque canvas and no simulated checkerboard. The small ground strips explicitly requested belong only to their respective buildings; no continuous floor, backdrop, platform or drop-shadow plate. Restrict shading to the objects themselves.
+Absolutely NO text, letters, numbers, logos, watermarks, labels, captions or readable marks anywhere. Every signboard is completely blank. Exactly five complete storefront groups, no people, no extra buildings outside these five groups.
+
+CORRECTION FOR THIS GENERATION: the five building groups must be substantially smaller within the canvas so there are wide clear gaps. Use a panoramic 3:1 canvas, five equal slots; each complete group uses only about 65% of its slot width, centered in the slot, leaving 35% as empty alpha gutters. Whole row occupies only the middle 65% of canvas height, with ample top and bottom alpha. Never fill the canvas edge-to-edge. Leave a completely transparent vertical corridor between every pair, including all roof smoke and accessories. Use chunkier low-resolution game pixel clusters and simple restrained surface detail, with crisp square stepped edges matching the attached café screenshot. No colored fringes, glows, or stray pixels outside the silhouettes. Preserve all five specified subjects and their exact order.

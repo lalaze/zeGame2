@@ -183,6 +183,11 @@ const SHADES: Record<number, [deep: number, shadow: number, light: number, highl
 const SKIN_SHADOW = 24, SKIN_LIGHT = 22;
 /** Passages this close to face skin do not count as leading out of the face (fringe tips touch eyes). */
 const FACE_GAP = 3;
+/**
+ * Painted eyes reach near black. Anything else dark that the face encloses, like brows, a
+ * moustache or a sideburn, never gets this dark: it is facial hair and follows the hair colour.
+ */
+const FACIAL_HAIR_DARKEST = 25;
 
 export type SegmentOptions = { role: TeamRole; sit: boolean; back: boolean };
 type Box = { left: number; right: number; top: number; bottom: number };
@@ -216,7 +221,7 @@ export function segmentTeamPose(p: PoseImage, o: SegmentOptions): PoseSegmentati
     if (m === MATERIAL.other) tone[n] = nearestOther(r, g, b);
   }
   const box = face.length >= 40 ? islandBox(face, width) : null;
-  if (box) reclaimNeck(p, box, neckY, material);
+  if (box) { reclaimNeck(p, box, neckY, material); reclaimChin(p, box, material); }
   growSkin(p, material);
   if (box) faceDetails(p, face, box, material, tone);
   shadeTones(p, face, material, tone);
@@ -240,6 +245,15 @@ function reclaimNeck(p: PoseImage, face: Box, neckY: number, material: Uint8Arra
   for (let y = Math.max(0, top); y <= bottom; y++) for (let x = Math.max(0, Math.round(middle - half)); x <= Math.min(width - 1, Math.round(middle + half)); x++) {
     const n = y * width + x, i = n * 4;
     if (material[n] === MATERIAL.hair && luma(data[i], data[i + 1], data[i + 2]) > 80) material[n] = MATERIAL.skin;
+  }
+}
+
+/** A pale highlight on the chin misses the face island (a moustache can cut it off entirely) and would pass for shirt. */
+function reclaimChin(p: PoseImage, face: Box, material: Uint8Array): void {
+  const { data, width } = p;
+  for (let y = face.top; y <= face.bottom; y++) for (let x = face.left; x <= face.right; x++) {
+    const n = y * width + x, i = n * 4, r = data[i], greenShare = data[i + 1] / r, blueShare = data[i + 2] / r;
+    if (material[n] === MATERIAL.other && r > 215 && greenShare > .7 && greenShare < .92 && blueShare > .55 && blueShare < .85) material[n] = MATERIAL.skin;
   }
 }
 
@@ -285,6 +299,7 @@ function faceDetails(p: PoseImage, face: Island, box: Box, material: Uint8Array,
     const lums = island.map(at => luma(data[at * 4], data[at * 4 + 1], data[at * 4 + 2]));
     const darkest = Math.min(...lums);
     const redness = island.reduce((a, at) => a + data[at * 4] - data[at * 4 + 1], 0) / island.length;
+    if (darkest >= FACIAL_HAIR_DARKEST && darkest < 80) { island.forEach(at => { material[at] = MATERIAL.hair; }); return; }
     const kind = darkest < 80 ? FEATURE.eye : redness > 30 ? FEATURE.mouth : -1;
     if (kind === FEATURE.eye && island.length > 20) eyes.push(islandBox(island, width));
     island.forEach((at, k) => {

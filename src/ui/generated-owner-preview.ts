@@ -1,6 +1,6 @@
 import type { Look } from '../game/state';
 import { fineSpriteArt } from '../render/fine-sprite-art';
-import { STANDING_CHARACTER_SCALE, preloadReferenceCharacters } from '../render/reference-character-art';
+import { STANDING_CHARACTER_SCALE, preloadReferenceLook } from '../render/reference-character-art';
 import { character } from '../render/sprites';
 
 export interface GeneratedOwnerPreview {
@@ -34,7 +34,7 @@ export function createGeneratedOwnerPreview(initialLook: Look, cssScale: number,
     const snapshot = { ...look };
     canvas.dataset.loading = 'true';
     delete canvas.dataset.loadError;
-    void preloadReferenceCharacters().then(() => {
+    void preloadReferenceLook(snapshot).then(() => {
       if (disposed || token !== generation) return;
       const frame = character(snapshot, 'owner').stand;
       const art = fineSpriteArt(frame);

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>小豆咖啡馆 · 放置玩法演示</title>
+<style>
+  body { font: 16px/1.6 system-ui, sans-serif; background: #f4e6c7; color: #493728; max-width: 560px; margin: 32px auto; padding: 0 16px; }
+  h1 { font-size: 22px; } .card { background: #fff8e9; border: 2px solid #8a5a3c; border-radius: 6px; padding: 12px 16px; margin: 14px 0; }
+  button { font: 600 16px system-ui; background: #a64c3e; color: #fff8e9; border: 0; border-radius: 4px; padding: 10px 16px; cursor: pointer; }
+  ul { margin: 6px 0 10px; padding-left: 20px; } .note { color: #7a6552; font-size: 14px; }
+</style>
+</head>
+<body>
+<h1>放置玩法演示存档</h1>
+<p class="note">临时页面，只在开发服务器上。载入会覆盖<b>这个地址</b>下的存档，然后打开游戏。请先关掉其他打开着游戏的标签页。</p>
+<div class="card">
+  <h2>A · 离开 3 小时后回来</h2>
+  <ul>
+    <li>回来弹窗：收银台、加盟店收入、做好的外送订单、猫咪礼物</li>
+    <li>窗台上有猫咪礼物，点一下捡起来</li>
+    <li>玻璃花房装修中（往右再往上走），露天庭院已预约</li>
+    <li>主店墙上挂着连锁地图；"升级"页有收银台、订单、连锁天赋</li>
+  </ul>
+  <button data-demo="return">载入并打开游戏</button>
+</div>
+<div class="card">
+  <h2>B · 整栋楼已完工，可以开分店</h2>
+  <ul>
+    <li>"升级 → 连锁分店"：交出后的收入、五地版图、连锁天赋（12 颗星）</li>
+    <li>点"开新分店"：地图上的五家店面、地点加成、确认弹窗</li>
+  </ul>
+  <button data-demo="branch">载入并打开游戏</button>
+</div>
+<script>
+const BASE = {"version":24,"partners":{"roster":{"yue":{"xp":0,"workedDays":0,"lastWorkedDay":0,"specialty":null,"unlocked":0,"read":[],"todayDay":0,"todayJobs":0,"todayUnlocks":0}},"active":{"barista":[],"server":["yue"],"cook":[]}},"signatureDrinks":{"recipes":[],"tested":[],"served":{}},"cafeStyle":{"focus":null,"handoffs":{"tableServed":0,"catServed":0,"fastServed":0,"teaPairs":0}},"regularGuests":{"guests":{},"nextVisitId":1},"regularWishes":{"mina":null},"trialSales":{"selected":null,"active":null,"last":null},"guestMemories":{},"milestones":{"done":[],"reachedOn":{},"claimed":[],"records":{"bestDay":0,"bestSmoothDay":0,"weatherWins":[],"momentsAnswered":0}},"manager":{"hired":true,"auto":false,"lastSeen":0,"till":1,"welcomed":true},"chain":{"stars":0,"branches":0,"baseEarned":0,"location":"town","franchises":[],"franchiseSince":1792683693380,"perks":[]},"orders":{"active":null,"delivered":0},"catGifts":{"waiting":[],"next":1792698093380,"brought":0,"found":{}},"pets":[{"id":"ginger","careSeconds":3600,"autoRefill":true},{"id":"calico","careSeconds":3600,"autoRefill":true}],"promotion":null,"reputation":{"recent":[]},"taste":{"served":{},"signature":[]},"coins":500000,"totalEarned":500000,"served":0,"items":{"espresso":12,"americano":12,"latte":12,"cappuccino":0,"flatwhite":0,"cortado":0,"mocha":0,"vienna":0,"macchiato":0,"coldbrew":0,"dirty":0,"pourover":0,"creamcoffee":0,"affogato":0,"blacktea":12,"hotchoc":0,"lemontea":12,"chai":0,"fruittea":0,"hojicha":0,"matcha":0,"frappe":0,"smoothie":0,"milktea":0,"matchafloat":0,"roll":12,"bagel":0,"baguette":0,"cheesebun":0,"pretzel":0,"focaccia":0,"ciabatta":0,"raisinbread":0,"sourdough":0,"rye":0,"chocobread":0,"shokupan":0,"brioche":0,"fruitbrioche":0,"garlicbread":0,"donut":0,"scone":12,"cookie":0,"croissant":0,"painchoc":0,"brownie":0,"cinnamon":0,"muffin":0,"creampuff":0,"melonpan":0,"eggtart":0,"cake":0,"swissroll":0,"cheesecake":0,"macaron":0},"upgrades":{"marketing":6,"machine":4,"barista":1,"server":1,"cook":0,"tables":0,"pass":0},"regions":[],"construction":[],"kitchen":true,"profile":{"cafeName":"小豆咖啡馆","ownerName":"","look":{"skin":0,"hair":0,"hairStyle":0,"shirt":0,"pants":0}},"decor":{"owned":["tablecloth_classic","tablecloth_mint","tablecloth_rose","centerpiece_flowers","centerpiece_none","curtain_classic","curtain_sage","curtain_rose","wall_cream","wall_mint","wall_rose","floor_checker","floor_planks","floor_mint","counter_oak","counter_sage","counter_blush","sill_none","ceiling_none","rug_none","neon_none"],"equipped":{"wallpaper":"wall_cream","floor":"floor_checker","counter":"counter_oak","tablecloth":"tablecloth_classic","curtain":"curtain_classic","centerpiece":"centerpiece_flowers","sill":"sill_none","ceiling":"ceiling_none","rug":"rug_none","neon":"neon_none"},"placed":[{"id":"clock","col":11,"row":0},{"id":"mugrack","col":27,"row":3}],"stored":{}},"goal":15,"phase":"prep","day":12,"dayTime":0,"speed":1,"onMenu":["espresso","latte","lemontea","roll"],"pantry":{"beans":300,"milk":300,"flour":300,"butter":300,"eggs":300,"sugar":300,"tea":300,"spice":300,"cocoa":300,"cream":300,"fruit":300,"matcha":300},"bakePlan":{},"shelf":{},"today":{"guests":{"commuter":{"arrived":0,"served":0,"paired":0,"stockLost":0,"waitLost":0,"cancelled":0,"dismissed":0,"revenue":0},"leisure":{"arrived":0,"served":0,"paired":0,"stockLost":0,"waitLost":0,"cancelled":0,"dismissed":0,"revenue":0},"teaTime":{"arrived":0,"served":0,"paired":0,"stockLost":0,"waitLost":0,"cancelled":0,"dismissed":0,"revenue":0}},"reviews":{"stars":[0,0,0,0,0],"reasons":{},"totalScore":0},"served":0,"missed":0,"soldOut":0,"queueLost":0,"tableLost":0,"extraLost":0,"doorLost":0,"shortages":{},"revenue":0,"ingredientCost":0,"petCost":0,"promotionCost":0,"sales":{},"baked":{}},"inProduction":{},"createdAt":1792683693380};
+const H = 3600e3, M = 60e3;
+function demo(kind) {
+  const now = Date.now(), s = JSON.parse(JSON.stringify(BASE));
+  s.chain = { stars: 12, branches: 2, baseEarned: 0, location: 'forest', franchises: [{ location: 'town', hourly: 40000 }, { location: 'seaside', hourly: 90000 }], franchiseSince: now - 3 * H, perks: [] };
+  s.decor.placed = [...s.decor.placed, { id: 'chain_map', col: 27, row: 0 }];
+  if (kind === 'return') {
+    s.manager.lastSeen = now - 3 * H;
+    s.regions = ['reading'];
+    s.construction = [{ id: 'greenhouse', finishAt: now + 2 * H }, { id: 'terrace', finishAt: now + 2 * H + 12 * H }];
+    s.orders = { active: { kind: 'tea', item: 'latte', servings: 40, cost: 80, payout: 48000, finishAt: now - 10 * M }, delivered: 3 };
+    s.catGifts = { waiting: [{ id: 0, cat: 'ginger', kind: 'leaf', spot: 0 }], next: now - 30 * M, brought: 1, found: { acorn: 1 } };
+  } else {
+    s.manager.lastSeen = now;
+    s.chain.franchiseSince = now - 2 * H;
+    s.regions = ['reading', 'greenhouse', 'terrace'];
+    s.construction = [];
+    s.totalEarned = 5e6;
+    s.catGifts = { waiting: [{ id: 0, cat: 'calico', kind: 'coin', spot: 2 }], next: now + 4 * H, brought: 1, found: {} };
+  }
+  localStorage.setItem('tiny-bean-cafe/locale', 'zh');
+  localStorage.setItem('tiny-bean-cafe/save', JSON.stringify(s));
+  location.href = './';
+}
+document.querySelectorAll('[data-demo]').forEach((b) => b.addEventListener('click', () => demo(b.dataset.demo)));
+</script>
+</body>
+</html>

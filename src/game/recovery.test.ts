@@ -243,7 +243,8 @@ describe('one-bean emergency restock', () => {
     const bean = INGREDIENTS.find((i) => i.id === 'beans')!.cost;
     for (const cost of [...INGREDIENTS.map((i) => i.cost), ...MENU.map((m) => m.baseCost), ...UPGRADES.map((u) => u.baseCost),
       ...DECOR.filter((d) => d.cost > 0).map((d) => d.cost), ...FURNITURE.filter((d) => d.cost > 0).map((d) => d.cost)]) expect(cost).toBeGreaterThanOrEqual(bean);
-    for (const d of [...DECOR, ...FURNITURE].filter((d) => d.cost === 0)) expect(d.comfort).toBe(0);
+    // Chain rewards cost nothing but can't be bought at all: they come with a new branch.
+    for (const d of [...DECOR, ...FURNITURE].filter((d) => d.cost === 0 && !(d as { reward?: boolean }).reward)) expect(d.comfort).toBe(0);
   });
 
   it('does not create sale revenue, cash, earned totals or a hidden expense for the grant', () => {

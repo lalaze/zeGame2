@@ -1,3 +1,4 @@
+import type { GiftKind } from '../game/cat-gifts';
 // What the café scene is showing, independent of how it's drawn: the camera, the
 // room in view, the piece being arranged, the cat and kitchen door, and effects
 // waiting to be spawned. The Phaser scene (render/phaser/) reads this every frame.
@@ -78,6 +79,10 @@ export class CafeView {
   momentReaction: MomentReaction | null = null;
   /** Where the moment's cue and subject are painted this frame, in presented pixels. */
   momentTarget: { x: number; y: number; w: number; h: number } | null = null;
+  /** Cat gifts waiting on the main café's windowsills (see game/cat-gifts). */
+  gifts: readonly { id: number; kind: GiftKind; spot: number }[] = [];
+  /** Where each gift is painted this frame, in presented pixels. */
+  giftTargets: { id: number; x: number; y: number; w: number; h: number }[] = [];
   /** Coins a moment paid out, waiting to pop up over the spot the player tapped. */
   readonly tips: { amount: number; x: number; y: number }[] = [];
   /** Brief, truthful feedback anchored on the employee or guest who was helped. */
@@ -231,7 +236,22 @@ export class CafeView {
     return Math.abs(point.x - cx) <= half && point.y >= target.y - 2 && point.y <= target.y + target.h + 2;
   }
 
-  /** Pop the coins a moment paid over where its cue was. */
+/** The gift a tap lands on, at least `reach` wide, or null. */
+  hitGift(x: number, y: number, reach: number): number | null {
+    if (this.overview || this.panning) return null;
+    const point = this.presentedPointer ?? { x, y };
+    const hit = this.giftTargets.find((g) => Math.abs(point.x - (g.x + g.w / 2)) <= Math.max(reach / 2, g.w / 2) &&
+      point.y >= g.y - reach / 2 && point.y <= g.y + g.h + 2);
+    return hit ? hit.id : null;
+  }
+
+  /** Pop the coins a gift paid over the sill it was on. */
+  tipAtGift(id: number, amount: number): void {
+    const target = this.giftTargets.find((g) => g.id === id);
+    if (target && amount > 0) this.tips.push({ amount, x: target.x + target.w / 2, y: target.y });
+  }
+
+    /** Pop the coins a moment paid over where its cue was. */
   tipAtMoment(amount: number): void {
     const target = this.momentTarget;
     if (target && amount > 0) this.tips.push({ amount, x: target.x + target.w / 2, y: target.y + 6 });

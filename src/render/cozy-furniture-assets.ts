@@ -53,7 +53,10 @@ export const COZY_FURNITURE_ASSETS = {
   "decor-neon_cafe-unlit": "cozy-furniture-v2/decor-neon_cafe-unlit.png",
   "furniture-coatrack": "cozy-furniture-v2/furniture-coatrack.png",
   "furniture-plant_snake": "cozy-furniture-v2/furniture-plant_snake.png",
-  "furniture-plant_lavender": "cozy-furniture-v2/furniture-plant_lavender.png"
+  "furniture-plant_lavender": "cozy-furniture-v2/furniture-plant_lavender.png",
+  // Chain rewards (assets/generated/cozy-idle-v1).
+  "furniture-chain_map": "cozy-idle-v1/furniture-chain_map.png",
+  "furniture-chain_plaque": "cozy-idle-v1/furniture-chain_plaque.png"
 } as const;
 
 /** Source sizes and anchors are preserved; these interactive points follow the redrawn artwork. */

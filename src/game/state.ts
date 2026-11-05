@@ -10,6 +10,8 @@ import { emptyMilestones, parseMilestones, type MilestoneState } from './milesto
 import { parsePromotion, type Promotion } from './promotion';
 import { emptyManager, parseManager, type ManagerState } from './manager';
 import { emptyChain, parseChain, type ChainState } from './chain';
+import { emptyOrders, parseOrders, type OrdersState } from './orders';
+import { emptyCatGifts, parseCatGifts, type CatGiftState } from './cat-gifts';
 import {
   INGREDIENTS,
   MENU,
@@ -23,14 +25,14 @@ import {
 import { DECOR, DECOR_SLOTS, STARTER_THEMES, decorDef, type DecorSlot } from './decor';
 import { bakeMorning, bulkCost, dayNeeds, fillBakePlan } from './economy';
 import { DEFAULT_ART_SPOT, STARTER_FURNITURE, canPlace, evictBlocked, furnitureDef, type Placed } from './furniture';
-import { REGIONS, mainTableCount, type RegionId } from './regions';
+import { REGIONS, mainTableCount, parseConstruction, type Construction, type RegionId } from './regions';
 
 import { parsePets, type Pet } from './pets';
 import { parseTaste, type TasteState } from './taste';
 import { emptyReviews, parseReputation, parseReviews, type Reputation, type ReviewSummary } from './reputation';
 
 export const SAVE_KEY = 'tiny-bean-cafe/save';
-export const SAVE_VERSION = 23;
+export const SAVE_VERSION = 24;
 
 export interface Look {
   skin: number;
@@ -40,7 +42,8 @@ export interface Look {
   pants: number;
 }
 
-export const LOOK_RANGES: Record<keyof Look, number> = { skin: 4, hair: 6, hairStyle: 4, shirt: 8, pants: 3 };
+/** hairStyle covers every cozy team family (render/cozy-team-art TEAM_HAIRSTYLES). */
+export const LOOK_RANGES: Record<keyof Look, number> = { skin: 4, hair: 6, hairStyle: 32, shirt: 8, pants: 3 };
 
 /** Who runs the café. Null until the player finishes the opening flow. */
 export interface Profile {
@@ -116,6 +119,10 @@ export interface GameState {
   manager: ManagerState;
   /** Chain stars and branches opened so far (save v23). */
   chain: ChainState;
+  /** The manager's catering order, running in real time (save v24). */
+  orders: OrdersState;
+  /** Little things the resident cats leave on the windowsills (save v24). */
+  catGifts: CatGiftState;
   pets: Pet[];
   reputation: Reputation;
   taste: TasteState;
@@ -127,6 +134,8 @@ export interface GameState {
   upgrades: Record<UpgradeId, number>;
   /** Connected rooms opened in order, in addition to the original café. */
   regions: RegionId[];
+  /** The next rooms, paid for and being built in real time, in order (save v24). */
+  construction: Construction[];
   /** Whether the kitchen has been built, where cooks bake fresh batches during the day. */
   kitchen: boolean;
   profile: Profile | null;
@@ -178,7 +187,9 @@ export function createInitialState(now: number): GameState {
     guestMemories: {},
     milestones: emptyMilestones(),
     manager: emptyManager(now),
-    chain: emptyChain(),
+    chain: emptyChain(now),
+    orders: emptyOrders(),
+    catGifts: emptyCatGifts(now),
     pets: [],
     promotion: null,
     reputation: { recent: [] },
@@ -189,6 +200,7 @@ export function createInitialState(now: number): GameState {
     items,
     upgrades,
     regions: [],
+    construction: [],
     kitchen: false,
     profile: null,
     decor: defaultDecor(),
@@ -311,6 +323,7 @@ export function deserialize(raw: string | null, now: number): GameState {
       base.regions.push(r.id);
     }
   }
+  base.construction = parseConstruction(data.construction, base.regions, now);
   base.kitchen = data.kitchen === true;
 
   base.cafeStyle = parseCafeStyle(data.cafeStyle);
@@ -344,9 +357,11 @@ export function deserialize(raw: string | null, now: number): GameState {
     : unlocked;
   base.today = parseDay(data.today);
   base.pets = parsePets(data.pets);
+  base.catGifts = parseCatGifts(data.catGifts, now, base.pets.map((p) => p.id));
   base.promotion = parsePromotion(data.promotion);
   base.manager = parseManager(data.manager, now);
-  base.chain = parseChain(data.chain);
+  base.chain = parseChain(data.chain, now);
+  base.orders = parseOrders(data.orders, now);
   // Older saves only retain per-dish sales for the current day; carry that
   // evidence forward without inventing a split of the lifetime customer total.
   base.taste = parseTaste(data.taste, num(data.version, 1) < 10 ? base.today.sales : {});

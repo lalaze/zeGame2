@@ -255,7 +255,28 @@ const SHELF = lazy(() => canvas(32, 16, (r) => {
   r(24, 8, 5, 3, '#6d472f'); r(25, 6, 1, 4, CREAM); r(26, 8, 2, 2, '#ddc695');
 }));
 
+/** Fallback for the chain's framed map (the generated bitmap is the usual art). */
+const CHAIN_MAP = lazy(() => canvas(26, 20, (r) => {
+  r(0, 0, 26, 20, OUTLINE); r(1, 1, 24, 18, LIGHT_WOOD.base); r(1, 1, 24, 1, LIGHT_WOOD.hi);
+  r(3, 3, 20, 14, '#efe2c1');
+  r(4, 4, 6, 4, '#8f9fb8'); r(5, 4, 2, 1, '#f4f1ea');            // mountains
+  r(16, 4, 6, 4, '#c79a74'); r(17, 5, 1, 2, '#6e8fb0');          // city
+  r(4, 12, 7, 4, '#d58aa8'); r(4, 13, 7, 1, '#e6c75b');          // flower stripes
+  r(17, 11, 6, 6, '#7fb7d1'); r(16, 14, 2, 3, '#e8d39b');        // sea and beach
+  r(11, 8, 4, 3, '#b8694a');                                      // old town
+  for (const [x, y] of [[7, 7], [19, 6], [13, 8], [8, 12], [19, 12]]) { r(x, y, 1, 1, '#b8342b'); r(x, y + 1, 1, 1, OUTLINE); }
+}));
+/** Fallback for the five-places brass plaque. */
+const CHAIN_PLAQUE = lazy(() => canvas(12, 12, (r) => {
+  r(0, 0, 12, 12, OUTLINE); r(1, 1, 10, 10, WOOD.base); r(1, 1, 10, 1, WOOD.hi);
+  r(2, 4, 8, 4, BRASS); r(2, 4, 8, 1, '#f0cc87');
+  for (let i = 0; i < 5; i++) r(2 + i * 2 - (i > 0 ? 1 : 0) + 1, 6, 1, 1, '#7a5626');
+  for (const [x, y] of [[2, 2], [9, 2], [2, 9], [9, 9]]) r(x, y, 1, 1, BRASS);
+}));
+
 const SPRITES: Record<string, () => HTMLCanvasElement> = {
+  chain_map: CHAIN_MAP,
+  chain_plaque: CHAIN_PLAQUE,
   plant_fig: FIG,
   plant_snake: SNAKE_PLANT,
   coatrack: COAT_RACK,

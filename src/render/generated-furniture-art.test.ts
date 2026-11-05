@@ -40,7 +40,7 @@ function fixture(packed = false) {
 }
 
 describe('generated furniture catalog and renderer', () => {
-  it('covers all 39 placeable IDs and unchanged archived PNGs, including three reusable aliases', () => {
+  it('covers every placeable ID and unchanged archived PNGs, including three reusable aliases', () => {
     expect([...GENERATED_FURNITURE_IDS].sort()).toEqual(FURNITURE.map(f => f.id).sort());
     const manifest = JSON.parse(readFileSync('assets/generated/bulk-candidates/furniture/renderer-manifest.json', 'utf8'));
     for (const entry of [...manifest.assets, ...manifest.aliases]) {
@@ -129,20 +129,20 @@ describe('generated furniture catalog and renderer', () => {
     const fail = vi.fn(() => { if (fail.mock.calls.length === 4) throw new Error('partial clock'); return f.createCanvas(); });
     const partial = createGeneratedFurnitureArt(f.sources, { createCanvas: fail });
     expect(partial.sprite('clock')).toBeUndefined(); expect(partial.icon('clock')).toBeUndefined();
-    expect(partial.readyIds).toHaveLength(38);
-    expect(f.create().readyIds).toHaveLength(39);
+    expect(partial.readyIds).toHaveLength(FURNITURE.length - 1);
+    expect(f.create().readyIds).toHaveLength(FURNITURE.length);
     expect(createGeneratedFurnitureArt(f.sources, { createCanvas: () => { throw new Error('no canvas'); } }).ready).toBe(false);
   });
 
-  it('bounds allocation to 156 cached canvases and never allocates for world paint or repeated lookups', () => {
+  it('bounds allocation to four cached canvases a piece and never allocates for world paint or repeated lookups', () => {
     const f = fixture(true), adapter = f.create(), c = new RecordingCanvas();
-    expect(f.createCanvas).toHaveBeenCalledTimes(156);
+    expect(f.createCanvas).toHaveBeenCalledTimes(FURNITURE.length * 4);
     const original = adapter.icon('clock');
     for (let n = 0; n < 20; n++) for (const id of GENERATED_FURNITURE_IDS) {
       expect(adapter.sprite(id)).toBeDefined(); expect(adapter.icon(id)).toBeDefined(); adapter.overlay(id);
       adapter.paintFloor(ctx(c), id, 20, 40); adapter.paintWall(ctx(c), id, 0, 0, new Date(2000, 0, 1));
     }
-    expect(adapter.icon('clock')).toBe(original); expect(f.createCanvas).toHaveBeenCalledTimes(156);
+    expect(adapter.icon('clock')).toBe(original); expect(f.createCanvas).toHaveBeenCalledTimes(FURNITURE.length * 4);
     expect(adapter.sprite('unknown')).toBeUndefined(); expect(adapter.icon('unknown')).toBeUndefined();
     expect(adapter.paintFloor(ctx(c), 'unknown', 1, 2)).toBe(false);
     expect(adapter.paintWall(ctx(c), 'unknown', 1, 2, new Date())).toBe(false);

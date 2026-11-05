@@ -39,6 +39,20 @@ describe('team art on the world pixel grid', () => {
     const seg = segmentTeamPose({ width: 10, height: 10, data, anchors: {} }, { role: 'owner', sit: false, back: false });
     expect([...seg.material].every(m => m === MATERIAL.clear)).toBe(true);
   });
+  it('treats a moustache or brow the face encloses as hair, and only near-black as an eye', () => {
+    const width = 60, height = 100, data = new Uint8ClampedArray(width * height * 4);
+    const fill = (x0: number, y0: number, x1: number, y1: number, [r, g, b]: number[]) => {
+      for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) data.set([r, g, b, 255], (y * width + x) * 4);
+    };
+    fill(12, 15, 48, 44, [245, 205, 170]); // face
+    fill(20, 22, 26, 30, [20, 10, 8]); // eye
+    fill(22, 36, 38, 40, [100, 58, 40]); // moustache
+    const seg = segmentTeamPose({ width, height, data, anchors: {} }, { role: 'owner', sit: false, back: false });
+    const at = (x: number, y: number) => seg.material[y * width + x];
+    expect(at(30, 37)).toBe(MATERIAL.hair);
+    expect(at(23, 26)).toBe(MATERIAL.feature);
+    expect(seg.tone[26 * width + 23]).toBe(FEATURE.eye);
+  });
   it('paints ramps and facial details using only master-palette colours and binary alpha', () => {
     const material: number[] = [MATERIAL.clear], tone = [0];
     for (const m of [MATERIAL.skin, MATERIAL.hair, MATERIAL.cloth, MATERIAL.pants])

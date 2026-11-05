@@ -1,7 +1,7 @@
 import './menu-story-polish.css';
 import { demandEnabled } from '../game/customer-demand';
 import { conditionTraffic } from '../game/conditions';
-import { chainMultiplier, menuTrafficMultiplier } from '../game/economy';
+import { chainPriceMultiplier, menuTrafficMultiplier } from '../game/economy';
 import { displayItemName, htmlItemName } from './item-name';
 import { showSignatureDrinks } from './signature-drinks';
 import { readPanelScroll, restorePanelScroll } from './panel-scroll';
@@ -66,15 +66,19 @@ import {
   upgradeDef,
   type BuyAmount,
 } from '../game/economy';
-import { formatTransactionMoney as formatMoney, formatNumber } from '../game/format';
+import { formatDuration, formatTransactionMoney as formatMoney, formatNumber } from '../game/format';
 import { GOALS, claimGoal, currentGoal, goalDone } from '../game/goals';
 import { milestonesStarted } from '../game/milestones';
 import { claimChapterWithToast, milestoneCard, showMilestoneBook } from './milestones';
 import type { GameState } from '../game/state';
 import { mainTableCount } from '../game/regions';
-import { AWAY_CAP_SECONDS, MANAGER_COST, awayHourly, hireManager, managerUnlocked } from '../game/manager';
-import { STAR_EARNINGS, branchEarnings, branchUnlocked, canOpenBranch, chainBonusPercent, starsOnBranch } from '../game/chain';
-import { cafeLocation, isSpecialty, specialtyPriceMultiplier } from '../game/locations';
+import { MANAGER_COST, MANAGER_UNLOCK_DAY, OVERFLOW_SHARE, TILL_HOURS, awayHourly, hireManager, managerUnlocked, tillSeconds, tillUpgradeCost, upgradeTill } from '../game/manager';
+import { FRANCHISE_SHARE, STAR_EARNINGS, branchEarnings, nextStarAt, branchUnlocked, canOpenBranch, chainBonusPercent, collectFranchises, franchiseEarnings, franchiseHourly, starsOnBranch } from '../game/chain';
+import { buildShare } from '../game/regions';
+import { chainComplete, starsFree } from '../game/chain-bonuses';
+import { chainPlaces, completeBonusPercent, placeBonusText, showChainPerks } from './chain-ui';
+import { ORDERS, collectOrder, orderBlock, orderLeft, orderReady, quoteOrder, startOrder, type OrderKind } from '../game/orders';
+import { cafeLocation, isSpecialty } from '../game/locations';
 import { locationName } from './branch-map';
 import { MAX_TABLES } from '../game/layout';
 import { t, type MessageKey } from '../i18n';
@@ -213,8 +217,12 @@ export class Panel {
   private bakeAllBtn: HTMLButtonElement | null = null;
   private pantryNote: HTMLElement | null = null;
   private restockBtn: HTMLButtonElement | null = null;
-  private managerCard: { sub: HTMLElement; away: HTMLElement; hire: HTMLButtonElement; auto: HTMLButtonElement } | null = null;
-  private chainCard: { sub: HTMLElement; status: HTMLElement; gain: HTMLElement; open: HTMLButtonElement } | null = null;
+  private managerCard: { sub: HTMLElement; away: HTMLElement; franchise: HTMLElement; hire: HTMLButtonElement; auto: HTMLButtonElement; till: HTMLButtonElement; collect: HTMLButtonElement } | null = null;
+  private chainCard: {
+    sub: HTMLElement; status: HTMLElement; perks: HTMLElement; gain: HTMLElement; open: HTMLButtonElement;
+    handover: HTMLElement; map: HTMLElement; placesNote: HTMLElement; places: HTMLElement; complete: HTMLElement; perksButton: HTMLButtonElement; placesSig: string;
+  } | null = null;
+  private ordersCard: { sub: HTMLElement; status: HTMLElement; options: Map<OrderKind, HTMLButtonElement>; collect: HTMLButtonElement } | null = null;
   private signature = '';
   private rows = new Map<string, RowRefs>();
   private tiles = new Map<string, TileRefs>();
@@ -647,7 +655,7 @@ export class Panel {
   private visibleKeys(): string[] {
     if (this.tab === 'promotion') return ['promotion'];
     if (this.tab === 'pets') return ['pets'];
-    if (this.tab === 'upgrades') return ['manager', 'chain', ...UPGRADES.map((u) => `upgrade:${u.id}`)];
+    if (this.tab === 'upgrades') return ['manager', 'orders', 'chain', ...UPGRADES.map((u) => `upgrade:${u.id}`)];
     if (this.tab === 'decor') return ['decor', this.decorCategory];
     if (this.tab === 'pantry') return ['pantry', ...neededIngredients(this.state).map((i) => `ing:${i.id}`)];
     const stylePriceNote = ['signature-workbench', ...(this.state.cafeStyle.focus ? ['style-prices'] : [])];
@@ -687,6 +695,7 @@ export class Panel {
     this.pantryNote = null;
     this.restockBtn = null;
     this.managerCard = null;
+    this.ordersCard = null;
     this.chainCard = null;
     this.varietyNote = null;
     this.bakeAllBtn = null;
@@ -731,6 +740,10 @@ export class Panel {
       }
       if (kind === 'manager') {
         this.buildManagerCard();
+        continue;
+      }
+      if (kind === 'orders') {
+        this.buildOrdersCard();
         continue;
       }
       if (kind === 'chain') {
@@ -834,7 +847,7 @@ export class Panel {
     }
   }
 
-  /** The shop manager: hired once, then switched on or off. */
+  /** The shop manager: hired once, then switched on or off; the till they fill grows with upgrades. */
   private buildManagerCard(): void {
     const el = document.createElement('div');
     el.className = 'row manager-card';
@@ -843,17 +856,36 @@ export class Panel {
         <div class="name">${t('manager.name')}</div>
         <div class="sub"></div>
         <div class="note manager-away"></div>
+        <div class="note manager-franchise"></div>
       </div>
       <div class="row-actions">
         <button class="pixel-btn buy" data-manager-hire></button>
+        <button class="pixel-btn buy" data-manager-till></button>
+        <button class="pixel-btn buy" data-manager-collect></button>
         <button class="chip" data-manager-auto aria-pressed="true"></button>
       </div>`;
     const hire = el.querySelector<HTMLButtonElement>('[data-manager-hire]')!;
     const auto = el.querySelector<HTMLButtonElement>('[data-manager-auto]')!;
+    const till = el.querySelector<HTMLButtonElement>('[data-manager-till]')!;
+    const collect = el.querySelector<HTMLButtonElement>('[data-manager-collect]')!;
     hire.addEventListener('click', () => {
       if (!hireManager(this.state)) return;
       this.pop(el);
       this.onPurchase('upgrade', 'manager');
+      this.update();
+    });
+    till.addEventListener('click', () => {
+      if (!upgradeTill(this.state)) return;
+      this.pop(el);
+      this.onPurchase('upgrade', 'till');
+      this.update();
+    });
+    collect.addEventListener('click', () => {
+      const amount = collectFranchises(this.state, Date.now());
+      if (amount <= 0) return;
+      this.pop(el);
+      toast(t('manager.collected', { money: formatMoney(amount) }));
+      this.onPurchase('upgrade', 'franchise');
       this.update();
     });
     auto.addEventListener('click', () => {
@@ -862,23 +894,95 @@ export class Panel {
       this.update();
     });
     this.list.append(el);
-    this.managerCard = { sub: el.querySelector('.sub')!, away: el.querySelector('.manager-away')!, hire, auto };
+    this.managerCard = { sub: el.querySelector('.sub')!, away: el.querySelector('.manager-away')!, franchise: el.querySelector('.manager-franchise')!, hire, auto, till, collect };
   }
 
   private updateManagerCard(): void {
     const card = this.managerCard;
     if (!card) return;
     const s = this.state, { hired, auto } = s.manager, unlocked = managerUnlocked(s);
-    card.sub.textContent = unlocked || hired ? t('manager.desc') : t('manager.locked');
-    const perHour = awayHourly(s);
+    card.sub.textContent = unlocked || hired ? t('manager.desc') : t('manager.locked', { n: MANAGER_UNLOCK_DAY });
+    const hours = tillSeconds(s) / 3600, next = TILL_HOURS[s.manager.till + 1], cost = tillUpgradeCost(s);
     card.away.hidden = !hired;
-    card.away.textContent = t('manager.away', { money: formatMoney(perHour), hours: AWAY_CAP_SECONDS / 3600 });
+    card.away.textContent = `${t('manager.away', { money: formatMoney(awayHourly(s)), hours, pct: Math.round(OVERFLOW_SHARE * 100) })}${cost === null ? ` ${t('manager.till.max', { hours })}` : ''}`;
     card.hire.hidden = hired;
     card.hire.textContent = `${t('manager.hire')} ${formatMoney(MANAGER_COST)}`;
     card.hire.disabled = !unlocked || s.coins < MANAGER_COST;
+    card.till.hidden = !hired || cost === null;
+    if (cost !== null) {
+      card.till.textContent = `${t('manager.till', { hours, next })} ${formatMoney(cost)}`;
+      card.till.disabled = s.coins < cost;
+    }
+    // Franchise pay fills the till on screen too, so it can be collected from here.
+    const franchises = s.chain.franchises.length, waiting = franchiseEarnings(s, Date.now());
+    card.franchise.hidden = card.collect.hidden = franchises === 0;
+    if (franchises > 0) {
+      card.franchise.textContent = `${t('manager.franchise', { n: franchises, money: formatMoney(franchiseHourly(s)), waiting: formatMoney(waiting.amount) })}${waiting.full ? ` ${t('manager.franchise.full')}` : ''}`;
+      card.collect.textContent = t('manager.collect', { money: formatMoney(waiting.amount) });
+      card.collect.disabled = waiting.amount <= 0;
+    }
     card.auto.hidden = !hired;
     card.auto.textContent = t(auto ? 'manager.auto.on' : 'manager.auto.off');
     card.auto.setAttribute('aria-pressed', String(auto));
+  }
+
+  /** Catering orders: pick one on the way out, collect it when it's done. */
+  private buildOrdersCard(): void {
+    const el = document.createElement('div');
+    el.className = 'row manager-card orders-card';
+    el.innerHTML = `
+      <div class="info">
+        <div class="name">${t('orders.name')}</div>
+        <div class="sub"></div>
+        <div class="note orders-status"></div>
+      </div>
+      <div class="row-actions">
+        ${ORDERS.map((o) => `<button class="pixel-btn buy" data-order="${o.id}"></button>`).join('')}
+        <button class="pixel-btn buy" data-order-collect></button>
+      </div>`;
+    const options = new Map(ORDERS.map((o) => [o.id, el.querySelector<HTMLButtonElement>(`[data-order="${o.id}"]`)!]));
+    for (const [kind, button] of options) button.addEventListener('click', () => {
+      const order = startOrder(this.state, kind, Date.now());
+      if (!order) return;
+      this.pop(el);
+      toast(t('orders.started', { name: t(`orders.${kind}`), time: formatDuration(orderLeft(this.state, Date.now())) }));
+      this.onPurchase('upgrade', 'order');
+      this.update();
+    });
+    const collect = el.querySelector<HTMLButtonElement>('[data-order-collect]')!;
+    collect.addEventListener('click', () => {
+      const order = collectOrder(this.state, Date.now());
+      if (!order) return;
+      this.pop(el);
+      toast(t('orders.delivered', { name: t(`orders.${order.kind}`), money: formatMoney(order.payout) }));
+      this.onPurchase('upgrade', 'order');
+      this.update();
+    });
+    this.list.append(el);
+    this.ordersCard = { sub: el.querySelector('.sub')!, status: el.querySelector('.orders-status')!, options, collect };
+  }
+
+  private updateOrdersCard(): void {
+    const card = this.ordersCard;
+    if (!card) return;
+    const s = this.state, now = Date.now(), active = s.orders.active, ready = orderReady(s, now);
+    card.sub.textContent = s.manager.hired ? t('orders.desc') : t('orders.locked');
+    card.status.hidden = !active && (!s.manager.hired || orderBlock(s, 'office') !== 'noMenu');
+    card.status.textContent = active
+      ? ready ? t('orders.ready', { name: t(`orders.${active.kind}`), money: formatMoney(active.payout) })
+        : t('orders.active', { name: t(`orders.${active.kind}`), n: active.servings, item: displayItemName(active.item, s), time: formatDuration(orderLeft(s, now)) })
+      : t('orders.noMenu');
+    for (const [kind, button] of card.options) {
+      const q = quoteOrder(s, kind);
+      button.hidden = !!active || !q;
+      if (!q) continue;
+      const def = ORDERS.find((o) => o.id === kind)!;
+      button.textContent = t('orders.option', { name: t(`orders.${kind}`), time: formatDuration(def.hours * 3600), money: formatMoney(q.payout - q.cost) });
+      button.title = t('orders.terms', { n: q.servings, item: displayItemName(q.item, s), cost: formatMoney(q.cost), payout: formatMoney(q.payout) });
+      button.disabled = orderBlock(s, kind) !== null;
+    }
+    card.collect.hidden = !ready;
+    if (ready && active) card.collect.textContent = t('manager.collect', { money: formatMoney(active.payout) });
   }
 
   /** Opening a new branch; the game swaps in the new café (see main.ts). */
@@ -890,33 +994,59 @@ export class Panel {
         <div class="name">${t('chain.name')}</div>
         <div class="sub"></div>
         <div class="note chain-status"></div>
+        <div class="note chain-perks"></div>
         <div class="note chain-gain"></div>
+        <div class="note chain-handover"></div>
+        <div class="chain-map">
+          <p class="note chain-places-note"></p>
+          <div class="chain-places-host"></div>
+          <p class="note chain-complete"></p>
+        </div>
       </div>
       <div class="row-actions">
         <button class="pixel-btn buy" data-open-branch></button>
+        <button class="pixel-btn ghost" data-chain-perks></button>
       </div>`;
     const open = el.querySelector<HTMLButtonElement>('[data-open-branch]')!;
     open.addEventListener('click', () => {
       if (canOpenBranch(this.state)) this.root.dispatchEvent(new CustomEvent('open-branch', { bubbles: true }));
     });
+    const perksButton = el.querySelector<HTMLButtonElement>('[data-chain-perks]')!;
+    perksButton.addEventListener('click', () => showChainPerks(this.state, () => { this.onPurchase('upgrade', 'perk'); this.update(); }));
     this.list.append(el);
-    this.chainCard = { sub: el.querySelector('.sub')!, status: el.querySelector('.chain-status')!, gain: el.querySelector('.chain-gain')!, open };
+    this.chainCard = {
+      sub: el.querySelector('.sub')!, status: el.querySelector('.chain-status')!, perks: el.querySelector('.chain-perks')!, gain: el.querySelector('.chain-gain')!, open,
+      handover: el.querySelector('.chain-handover')!, map: el.querySelector('.chain-map')!, placesNote: el.querySelector('.chain-places-note')!,
+      places: el.querySelector('.chain-places-host')!, complete: el.querySelector('.chain-complete')!, perksButton, placesSig: '',
+    };
   }
 
   private updateChainCard(): void {
     const card = this.chainCard;
     if (!card) return;
     const s = this.state, unlocked = branchUnlocked(s), stars = starsOnBranch(s);
-    card.sub.textContent = unlocked ? t('chain.desc', { pct: chainBonusPercent(1) }) : t('chain.locked');
+    card.sub.textContent = unlocked ? t('chain.desc', { pct: chainBonusPercent(1), share: Math.round(FRANCHISE_SHARE * 100) }) : t('chain.locked');
+    card.perks.hidden = !unlocked && s.chain.branches === 0;
+    card.perks.textContent = t('chain.perks', { pct: Math.round(buildShare(s.chain.branches + 1) * 100) });
     card.status.hidden = s.chain.stars === 0 && s.chain.branches === 0;
-    card.status.textContent = t('chain.status', { stars: s.chain.stars, bonus: chainBonusPercent(s.chain.stars), n: s.chain.branches + 1, place: locationName(cafeLocation(s)) });
+    card.status.textContent = t('chain.status', { stars: s.chain.stars, bonus: chainBonusPercent(starsFree(s)), n: s.chain.branches + 1, place: locationName(cafeLocation(s)) });
     card.gain.hidden = !unlocked;
     card.gain.textContent = stars > 0
-      ? `${t('chain.gain', { stars, money: formatMoney(branchEarnings(s)) })}${s.phase === 'prep' ? '' : ` ${t('chain.closedOnly')}`}`
+      ? `${t('chain.gain', { stars, money: formatMoney(branchEarnings(s)) })} ${t('chain.next', { money: formatMoney(nextStarAt(s) - branchEarnings(s)) })}${s.phase === 'prep' ? '' : ` ${t('chain.closedOnly')}`}`
       : t('chain.next', { money: formatMoney(STAR_EARNINGS - branchEarnings(s)) });
     card.open.hidden = !unlocked;
     card.open.textContent = t('chain.open');
     card.open.disabled = !canOpenBranch(s);
+    // What handing this café over would add: the number that decides when to do it.
+    card.handover.hidden = !unlocked;
+    card.handover.textContent = t('chain.handover', { money: formatMoney(awayHourly(s) * FRANCHISE_SHARE), bonus: placeBonusText(cafeLocation(s)) });
+    card.map.hidden = !unlocked && s.chain.branches === 0;
+    card.placesNote.textContent = t('chain.places');
+    const sig = s.chain.franchises.map((f) => f.location).join(',');
+    if (sig !== card.placesSig) { card.placesSig = sig; card.places.replaceChildren(chainPlaces(s)); }
+    card.complete.textContent = t(chainComplete(s) ? 'chain.completeDone' : 'chain.complete', { pct: completeBonusPercent() });
+    card.perksButton.hidden = s.chain.stars === 0;
+    card.perksButton.textContent = `${t('chain.perksOpen')} · ${starsFree(s)}★`;
   }
 
   private buildPantryIntro(): void {
@@ -948,7 +1078,9 @@ export class Panel {
     this.list.append(filters);
 
     if (this.decorCategory !== 'renovation') {
-      const catalog = FURNITURE.filter((d) => d.category === this.decorCategory).sort((a, b) => a.cost - b.cost);
+      // Chain rewards appear once the chain has given them.
+      const catalog = FURNITURE.filter((d) => d.category === this.decorCategory && (!d.reward || storedCount(this.state, d.id) + placedCount(this.state, d.id) > 0))
+        .sort((a, b) => a.cost - b.cost);
       // Buy into storage, then choose a free wall or floor position.
       const furniture = document.createElement('section');
       furniture.className = 'decor-slot furniture';
@@ -1137,6 +1269,7 @@ export class Panel {
       return;
     }
     this.updateManagerCard();
+    this.updateOrdersCard();
     this.updateChainCard();
 
     const prep = s.phase === 'prep';
@@ -1168,7 +1301,7 @@ export class Panel {
         refs.sub.textContent =
           level > 0
             ? t('row.each', {
-                price: formatMoney(itemPrice(def, level) * tipMultiplier(s) * chainMultiplier(s) * specialtyPriceMultiplier(s, def.id)),
+                price: formatMoney(itemPrice(def, level) * tipMultiplier(s) * chainPriceMultiplier(s, def.id)),
                 time: prepTime(s, def.id).toFixed(1),
                 cost: formatMoney(servingCost(def.id)),
               })
@@ -1182,14 +1315,14 @@ export class Panel {
         refs.btnLabel.textContent = level === 0 ? t('btn.unlock') : q.count > 1 ? `+${q.count}` : t('btn.levelUp');
         refs.btnCost.textContent = formatMoney(q.cost);
         this.updateMoneyDetails(refs, q.cost);
-        refs.btn.title = t('row.after', { before: formatMoney(itemPrice(def, level) * tipMultiplier(s) * chainMultiplier(s) * specialtyPriceMultiplier(s, def.id)), after: formatMoney(itemPrice(def, level + q.count) * tipMultiplier(s) * chainMultiplier(s) * specialtyPriceMultiplier(s, def.id)) });
+        refs.btn.title = t('row.after', { before: formatMoney(itemPrice(def, level) * tipMultiplier(s) * chainPriceMultiplier(s, def.id)), after: formatMoney(itemPrice(def, level + q.count) * tipMultiplier(s) * chainPriceMultiplier(s, def.id)) });
         refs.btn.disabled = !q.affordable;
         refs.el.classList.toggle('new', level === 0);
         const eligible = canPrepareItem(s, def.id);
         if (refs.upgradePreview) {
           refs.upgradePreview.hidden = !eligible || (level === 0 && q.count <= 1);
           refs.upgradePreview.textContent = refs.upgradePreview.hidden ? '' : t(level > 0 ? 'row.afterUpgrade' : 'row.afterUnlock', {
-            price: formatMoney(itemPrice(def, level + q.count) * tipMultiplier(s) * chainMultiplier(s) * specialtyPriceMultiplier(s, def.id)),
+            price: formatMoney(itemPrice(def, level + q.count) * tipMultiplier(s) * chainPriceMultiplier(s, def.id)),
           });
         }
         const on = eligible && s.onMenu.includes(def.id);

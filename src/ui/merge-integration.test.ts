@@ -162,7 +162,8 @@ describe('merged management tabs', () => {
       query<HTMLButtonElement>(`[data-decor-category="${category}"]`).click();
       expect(document.activeElement).toBe(query(`[data-decor-category="${category}"]`));
       const actual = [...document.querySelectorAll<HTMLElement>('[data-furnishing]')].map((el) => el.dataset.furnishing).sort();
-      expect(actual).toEqual(FURNITURE.filter((piece) => piece.category === category).map((piece) => piece.id).sort());
+      // Chain rewards show only once the chain has given them.
+      expect(actual).toEqual(FURNITURE.filter((piece) => piece.category === category && !piece.reward).map((piece) => piece.id).sort());
     }
     query<HTMLButtonElement>('[data-decor-category="renovation"]').click();
     expect(document.querySelectorAll('[data-furnishing]')).toHaveLength(0);

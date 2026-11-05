@@ -28,4 +28,13 @@ export const COZY_WORLD_ASSETS = {
   'tableware-empty-plate': 'cozy-world-v2/tableware-empty-plate.png',
   'tableware-shallow-plate': 'cozy-world-v2/tableware-shallow-plate.png',
   'tableware-shallow-tray': 'cozy-world-v2/tableware-shallow-tray.png',
+  // Idle layer (assets/generated/cozy-idle-v1): building work, the till jar, a catering order.
+  'build-sawhorse': 'cozy-idle-v1/build-sawhorse.png',
+  'build-ladder': 'cozy-idle-v1/build-ladder.png',
+  'build-sign': 'cozy-idle-v1/build-sign.png',
+  'till-jar-0': 'cozy-idle-v1/till-jar-0.png',
+  'till-jar-1': 'cozy-idle-v1/till-jar-1.png',
+  'till-jar-2': 'cozy-idle-v1/till-jar-2.png',
+  'order-takeaway': 'cozy-idle-v1/order-takeaway.png',
+  ...Object.fromEntries(['leaf', 'yarn', 'feather', 'ribbon', 'acorn', 'coin'].map(id => [`gift-${id}`, `cozy-idle-v1/gift-${id}.png`])) as Record<`gift-${'leaf' | 'yarn' | 'feather' | 'ribbon' | 'acorn' | 'coin'}`, string>,
 } as const;

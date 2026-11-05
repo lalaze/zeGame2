@@ -1,0 +1,21 @@
+Create a corrected walk-cycle sprite sheet of the exact café server in the attached reference. The reference is for character identity and pixel-art style only; replace its four poses with EIGHT distinct walking poses.
+
+ONE transparent PNG, landscape layout, exactly TWO ROWS OF FOUR equally sized full-body sprites. Eight separate characters total, same scale and proportions, generous clear alpha gutters, all facing RIGHT. Feet share the same ground baseline within each row. No clipped sprites.
+
+Preserve the reference character exactly: warm rounded pixel art, dark-brown outlines, cream newsboy cap, short brown hair, cream short-sleeved shirt, dark green apron with a small yellow pin and pocket, grey-brown trousers, brown shoes. Hands carry a wooden tray with one white coffee cup level before the chest. Keep the same head, torso, arms, horizontal tray, upright cup in every frame, just a tiny vertical bob.
+
+There are two persistent legs: NEAR leg is LIGHT grey-brown with LIGHT brown shoe. FAR leg is DARK brown-grey with DARK brown shoe. Never swap their colors. When limbs cross the LIGHT near limb occludes the DARK far limb. The DARK limb must remain dark when reaching forward. Moderate careful walking stride.
+
+Read the following poses left to right on the top row, then left to right on the bottom row:
+1. CONTACT. LIGHT leg forward to RIGHT, straight, heel grounded. DARK leg behind to LEFT, straight, heel lifted and toe grounded.
+2. DOWN. LIGHT leg supports in front with knee bent, body slightly lower. DARK leg trails behind, lifting off.
+3. PASSING. LIGHT leg vertical under hip supporting weight. DARK leg bent and lifted with DARK knee ahead to RIGHT and DARK foot above ground.
+4. UP. LIGHT leg back to LEFT pushing off on toe. DARK leg stretched forward to RIGHT preparing heel strike. Body slightly higher.
+5. OPPOSITE CONTACT. DARK leg forward to RIGHT, straight, heel grounded. LIGHT leg behind to LEFT, straight, heel lifted and toe grounded. Frame 5 must be the opposite leg arrangement of frame 1.
+6. OPPOSITE DOWN. DARK leg supports in front, knee bent, body slightly lower. LIGHT leg trails behind, lifting off.
+7. OPPOSITE PASSING. DARK leg vertical under hip supporting weight. LIGHT leg bent and lifted with LIGHT knee ahead to RIGHT and LIGHT foot above ground.
+8. OPPOSITE UP. DARK leg back to LEFT pushing off on toe. LIGHT leg stretched forward to RIGHT preparing heel strike, body slightly higher.
+
+Check especially: top-row fourth sprite has DARK leg forward and LIGHT leg behind; bottom-row fourth has LIGHT leg forward and DARK leg behind. Top-row third has DARK knee raised; bottom-row third has LIGHT knee raised. Do not duplicate the top row in the bottom row. All eight are the same character at the same scale, steady tray, restrained body bob.
+
+Background must be entirely real alpha transparency: isolated clean sprites with empty transparent pixels everywhere else. Absolutely no background patterns, no checkerboard, no colored halos, no floor, no shadows, no borders or grid lines, no text, labels, letters, numbers or watermark.

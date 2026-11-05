@@ -43,6 +43,9 @@ export const GENERATED_FURNITURE_CATALOG = {
   sconce: {"file":"wall-v1/brass-wall-lamp.png","size":[206,294],"surface":"wall","logicalEnvelope":[8,16],"footprintCells":[1,2],"anchor":{"x":103.0,"y":147.0,"kind":"wall-center"}},
   vase_daisies: {"file":"main-v2/flower-vase.png","size":[264,281],"surface":"floor","logicalEnvelope":[14,25],"footprintCells":[2,1],"anchor":{"x":132.0,"y":268,"kind":"floor-foot"}},
   hanging_ivy: {"file":"main-v1/vine.png","size":[388,453],"surface":"wall","logicalEnvelope":[14,24],"footprintCells":[2,3],"anchor":{"x":194.0,"y":225.5,"kind":"wall-center"},"overlayPoints":{"potRim":{"x":292,"y":108},"leftAttachment":{"x":240,"y":93},"rightAttachment":{"x":341,"y":97}}},
+  // Chain rewards, cropped tight by scripts/pack-idle-props.mjs.
+  chain_map: {"file":"cozy-idle-v1/furniture-chain_map.png","size":[256,193],"surface":"wall","logicalEnvelope":[26,20],"footprintCells":[4,3],"anchor":{"x":128,"y":193,"kind":"wall-bottom-center"}},
+  chain_plaque: {"file":"cozy-idle-v1/furniture-chain_plaque.png","size":[89,87],"surface":"wall","logicalEnvelope":[15,15],"footprintCells":[2,2],"anchor":{"x":44.5,"y":87,"kind":"wall-bottom-center"}},
 } as const;
 
 export type GeneratedFurnitureId = keyof typeof GENERATED_FURNITURE_CATALOG;

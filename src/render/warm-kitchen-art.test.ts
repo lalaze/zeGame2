@@ -54,8 +54,8 @@ beforeAll(() => vi.stubGlobal('document', { createElement: createCanvas }));
 afterAll(() => vi.unstubAllGlobals());
 
 describe('reference A furniture coverage and registration', () => {
-  it('provides distinct, nonempty cached icons for the entire 39-piece catalog', () => {
-    expect(FURNITURE).toHaveLength(39);
+  it('provides distinct, nonempty cached icons for the entire 41-piece catalog', () => {
+    expect(FURNITURE).toHaveLength(41);
     const signatures = new Set<string>();
     for (const def of FURNITURE) {
       const icon = furnitureIcon(def.id);

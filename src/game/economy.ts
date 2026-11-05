@@ -1,3 +1,5 @@
+import { placePriceMultiplier, placeTrafficMultiplier, starsFree } from './chain-bonuses';
+import { itemFlavors } from './flavors';
 import { signatureDefinition, setSignatureOnMenu, availableSignatureIngredients, isPlainSignatureCopy } from './signature-drinks';
 import { minaReservedTable } from './regular-wishes';
 import { canTrialDrink, reserveTrialSale, trialOfferDue, trialSaleItem, trialSaleRemaining } from './trial-sales';
@@ -202,11 +204,17 @@ export const varietyBonus = (s: GameState) =>
 /** Menu-driven arrivals, independent of stock, staff, promotion and reputation. */
 export const menuTrafficMultiplier = (s: GameState, items = menuItems(s)) => demandPlan(s, items).traffic;
 export const baseArrivalRate = (s: GameState) =>
-  BASE_ARRIVAL_RATE * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * menuTrafficMultiplier(s) * reputationTraffic(s.reputation) * petTraffic(s) * styleArrivalMultiplier(s) * conditionTraffic(s, menuItems(s));
+  BASE_ARRIVAL_RATE * placeTrafficMultiplier(s) * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * menuTrafficMultiplier(s) * reputationTraffic(s.reputation) * petTraffic(s) * styleArrivalMultiplier(s) * conditionTraffic(s, menuItems(s));
 export const arrivalRate = (s: GameState) => baseArrivalRate(s) * promotionTraffic(s);
 export const tipMultiplier = (s: GameState) => 1 + comfort(s) / 100;
-/** Chain stars from earlier branches raise every price, permanently. */
-export const chainMultiplier = (s: GameState) => 1 + CHAIN_STAR_BONUS * s.chain.stars;
+/** Chain stars from earlier branches raise every price, permanently, unless spent on perks. */
+export const chainMultiplier = (s: GameState) => 1 + CHAIN_STAR_BONUS * starsFree(s);
+/**
+ * Everything the chain adds to one dish's price: unspent stars, the local specialty and
+ * franchise places. Shared by sales, forecasts and the Menu tab.
+ */
+export const chainPriceMultiplier = (s: GameState, id: ItemId) =>
+  chainMultiplier(s) * specialtyPriceMultiplier(s, id) * placePriceMultiplier(s, menuItem(id).category, itemFlavors(id));
 /** The café opens with a table in each nook; Expand the Shop adds the rest. */
 export const tableCount = (s: GameState) => activeTableIndices(s).length;
 export const patienceSeconds = (s: GameState) => 40 + comfort(s) / 5 + conditionPatience(s);
@@ -215,7 +223,7 @@ export const tablePatience = (s: GameState) => 50 + comfort(s) / 4 + styleTableP
 
 export function salePrice(state: GameState, id: ItemId, vip = false, dineIn = false, meal: readonly ItemId[] = [id]): number {
   if (!canPrepareItem(state, id)) return 0;
-  return (id.startsWith('sig:') ? signaturePrice(state, id) : itemPrice(menuItem(id), state.items[id])) * tipMultiplier(state) * chainMultiplier(state) * specialtyPriceMultiplier(state, id) * (vip ? VIP_MULTIPLIER : 1) * styleSaleMultiplier(state, id, dineIn, meal);
+  return (id.startsWith('sig:') ? signaturePrice(state, id) : itemPrice(menuItem(id), state.items[id])) * tipMultiplier(state) * chainPriceMultiplier(state, id) * (vip ? VIP_MULTIPLIER : 1) * styleSaleMultiplier(state, id, dineIn, meal);
 }
 
 /** Added doses or ingredients earn a 25% house premium; a plain copy retains

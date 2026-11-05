@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { STAR_EARNINGS, branchUnlocked, canOpenBranch, openBranch, parseChain, starsOnBranch } from './chain';
+import { FRANCHISE_SHARE, STAR_EARNINGS, branchEarnings, nextStarAt, starsFor, branchUnlocked, canOpenBranch, collectFranchises, franchiseEarnings, franchiseHourly, openBranch, parseChain, starsOnBranch } from './chain';
 import { adoptCat } from './pets';
 import { createInitialState, deserialize, serialize } from './state';
 import { salePrice } from './economy';
-import { hireManager } from './manager';
+import { OVERFLOW_SHARE, awayHourly, hireManager, tillSeconds } from './manager';
+
+const HOUR = 3_600_000;
 
 function grownCafe(earned = 1_000_000) {
   const state = createInitialState(1);
@@ -27,21 +29,34 @@ function grownCafe(earned = 1_000_000) {
 
 describe('café chain', () => {
   it('reads missing or malformed chain data as a first café', () => {
-    expect(parseChain(undefined)).toEqual({ stars: 0, branches: 0, baseEarned: 0, location: 'town' });
-    expect(parseChain({ stars: -2, branches: 1.7, baseEarned: 'lots', location: 'moon' })).toEqual({ stars: 0, branches: 1, baseEarned: 0, location: 'town' });
+    expect(parseChain(undefined, 7)).toEqual({ stars: 0, branches: 0, baseEarned: 0, location: 'town', franchises: [], franchiseSince: 7, perks: [] });
+    expect(parseChain({ stars: -2, branches: 1.7, baseEarned: 'lots', location: 'moon' }, 7)).toEqual({ stars: 0, branches: 1, baseEarned: 0, location: 'town', franchises: [], franchiseSince: 7, perks: [] });
   });
 
-  it('awards stars by the square root of what this branch earned', () => {
+  it('keeps only valid franchises and never a franchise clock in the future', () => {
+    const chain = parseChain({ franchises: [{ location: 'town', hourly: 50 }, { location: 'moon', hourly: 5 }, { location: 'city', hourly: -1 }, null, { location: 'city', hourly: 9 }], franchiseSince: 99 }, 10);
+    expect(chain.franchises).toEqual([{ location: 'town', hourly: 50 }, { location: 'city', hourly: 9 }]);
+    expect(chain.franchiseSince).toBe(10);
+  });
+
+  it('awards a star at the first threshold and one more for every doubling after it', () => {
     const state = grownCafe(0);
+    expect(starsOnBranch(state)).toBe(0);
+    state.totalEarned = STAR_EARNINGS - 1;
     expect(starsOnBranch(state)).toBe(0);
     state.totalEarned = STAR_EARNINGS;
     expect(starsOnBranch(state)).toBe(1);
-    state.totalEarned = 4 * STAR_EARNINGS - 1;
+    expect(nextStarAt(state)).toBe(2 * STAR_EARNINGS);
+    state.totalEarned = 2 * STAR_EARNINGS - 1;
     expect(starsOnBranch(state)).toBe(1);
-    state.totalEarned = 4 * STAR_EARNINGS;
+    state.totalEarned = 2 * STAR_EARNINGS;
     expect(starsOnBranch(state)).toBe(2);
-    state.chain.baseEarned = 3 * STAR_EARNINGS;
-    expect(starsOnBranch(state)).toBe(1);
+    state.totalEarned = 1024 * STAR_EARNINGS;
+    expect(starsOnBranch(state)).toBe(11);
+    state.chain.baseEarned = 1020 * STAR_EARNINGS;
+    expect(starsOnBranch(state)).toBe(3);
+    // Earnings a thousand times larger bring ten more stars, not thirty times as many.
+    expect(starsFor(1e15) - starsFor(1e12)).toBe(10);
   });
 
   it('opens only with the whole building open, while closed, and with a star to gain', () => {
@@ -78,7 +93,8 @@ describe('café chain', () => {
     expect(next.goal).toBe(15);
     expect(next.served).toBe(4_000);
     expect(next.createdAt).toBe(state.createdAt);
-    expect(next.chain).toEqual({ stars: 4, branches: 1, baseEarned: 1_000_000, location: 'seaside' });
+    expect(next.chain).toEqual({ stars: starsFor(1_000_000), branches: 1, baseEarned: 1_000_000, location: 'seaside', franchises: [{ location: 'town', hourly: awayHourly(state) * FRANCHISE_SHARE }], franchiseSince: 5, perks: [] });
+    expect(next.chain.franchises[0].hourly).toBeGreaterThan(0);
     // A normal save of the new branch.
     expect(deserialize(serialize(next), 6)).toEqual(next);
     // The old café is untouched until the game swaps the state.
@@ -90,7 +106,37 @@ describe('café chain', () => {
     next.regions = ['reading', 'greenhouse', 'terrace'];
     expect(canOpenBranch(next)).toBe(false);
     next.totalEarned += STAR_EARNINGS;
-    expect(openBranch(next, 'city', 6)!.chain).toEqual({ stars: 5, branches: 2, baseEarned: 1_000_000 + STAR_EARNINGS, location: 'city' });
+    const third = openBranch(next, 'city', 6)!;
+    expect(third.chain).toMatchObject({ stars: starsFor(1_000_000) + 1, branches: 2, baseEarned: 1_000_000 + STAR_EARNINGS, location: 'city' });
+    expect(third.chain.franchises.map(f => f.location)).toEqual(['town', 'seaside']);
+  });
+
+  it('pays franchises into the till at the till’s size, on screen or away, without counting toward stars', () => {
+    const next = openBranch(grownCafe(), 'seaside', 0)!;
+    const hourly = franchiseHourly(next), cap = tillSeconds(next) / 3600;
+    expect(franchiseEarnings(next, HOUR / 2)).toEqual({ amount: Math.floor(hourly / 2), fill: 0.5 / cap, full: false });
+    const late = franchiseEarnings(next, (cap + 10) * HOUR);
+    expect(late.full).toBe(true);
+    expect(late.amount).toBe(Math.floor(hourly * (cap + 10 * OVERFLOW_SHARE)));
+    const stars = starsOnBranch(next), earned = branchEarnings(next);
+    expect(collectFranchises(next, HOUR)).toBe(Math.floor(hourly));
+    expect(next.coins).toBe(Math.floor(hourly));
+    expect(branchEarnings(next)).toBe(earned);
+    expect(starsOnBranch(next)).toBe(stars);
+    expect(franchiseEarnings(next, HOUR).amount).toBe(0);
+    expect(collectFranchises(createInitialState(0), HOUR)).toBe(0);
+  });
+
+  it('hands what the franchises have waiting to the next branch, outside its stars', () => {
+    const second = openBranch(grownCafe(), 'seaside', 0)!;
+    second.regions = ['reading', 'greenhouse', 'terrace'];
+    second.totalEarned += STAR_EARNINGS;
+    const waiting = franchiseEarnings(second, HOUR).amount;
+    expect(waiting).toBeGreaterThan(0);
+    const third = openBranch(second, 'city', HOUR)!;
+    expect(third.coins).toBe(waiting);
+    expect(branchEarnings(third)).toBe(0);
+    expect(third.chain.franchiseSince).toBe(HOUR);
   });
 
   it('raises every price by ten percent per star', () => {

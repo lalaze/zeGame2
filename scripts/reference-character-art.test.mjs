@@ -43,7 +43,7 @@ test('actual scene preloads references and uses matching seated and pet anchors'
 });
 
 test('custom owner preview and both asset export entrypoints preload reference art', () => {
-  for (const path of ['src/ui/generated-owner-preview.ts','src/art-preview.ts','sprite-preview.html']) assert.match(read(path), /preloadReferenceCharacters\(/, path);
+  for (const path of ['src/ui/generated-owner-preview.ts','src/art-preview.ts','sprite-preview.html']) assert.match(read(path), /preloadReference(?:Characters|Look)\(/, path);
 });
 
 test('visual QA uses actual painters and isolated state with visible failure reporting', () => {

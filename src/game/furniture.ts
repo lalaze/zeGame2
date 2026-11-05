@@ -21,10 +21,14 @@ export interface FurnitureDef {
   cost: number;
   /** Each kind placed adds its comfort once, however many copies are out. */
   comfort: number;
+  /** Given by the café chain rather than sold (see chain.ts); the catalog shows it once owned. */
+  reward?: boolean;
 }
 
 export const FURNITURE: readonly FurnitureDef[] = [
   { id: 'clock', category: 'decoration', surface: 'wall', w: 3, h: 3, cost: 0, comfort: 0 },
+  { id: 'chain_map', category: 'decoration', surface: 'wall', w: 4, h: 3, cost: 0, comfort: 6, reward: true },
+  { id: 'chain_plaque', category: 'decoration', surface: 'wall', w: 2, h: 2, cost: 0, comfort: 10, reward: true },
   { id: 'mugrack', category: 'furniture', surface: 'wall', w: 4, h: 2, cost: 0, comfort: 0 },
   { id: 'plant_fern', category: 'decoration', surface: 'floor', w: 2, h: 1, cost: 100, comfort: 3 },
   { id: 'plant_snake', category: 'decoration', surface: 'floor', w: 1, h: 1, cost: 180, comfort: 3 },
@@ -195,7 +199,7 @@ export const placedCount = (state: GameState, id: string) => state.decor.placed.
 /** Buys one into storage. Returns false if it can't be afforded. */
 export function buyFurniture(state: GameState, id: string): boolean {
   const def = furnitureDef(id);
-  if (!def || state.coins < def.cost) return false;
+  if (!def || def.reward || state.coins < def.cost) return false;
   state.coins -= def.cost;
   state.decor.stored[id] = storedCount(state, id) + 1;
   return true;

@@ -1,4 +1,4 @@
-import { referenceCharacterContacts } from '../render/reference-character-art';
+import { preloadReferenceLook, referenceCharacterContacts, referenceOwnerFront } from '../render/reference-character-art';
 import { COZY_OWNER_LOOK } from '../render/cozy-character-art';
 // The opening flow: name the café, create the owner, pick a starter style.
 // Also reused (name + character only) when editing the profile later.
@@ -6,7 +6,7 @@ import { STARTER_THEMES } from '../game/decor';
 import { LOOK_RANGES, NAME_MAX, cleanName, type Look, type Profile } from '../game/state';
 import { LOCALES, getLocale, setLocale, t, tList, type Locale, type MessageKey } from '../i18n';
 import { starterThemePreview } from '../render/starter-theme-preview';
-import { HAIRS, HEAD_ROWS, SHIRTS, SKINS, character } from '../render/sprites';
+import { HAIRS, HEAD_ROWS, SHIRTS, SKINS } from '../render/sprites';
 
 import { containDialogFocus, focusDialog } from './dialog-focus';
 import { isComposingKey } from './keyboard';
@@ -229,6 +229,14 @@ export function showOnboarding(opts: Options): void {
     // Screen readers hear the visible group name ("Apron 3"), never the save-format key.
     const groupLabels: Partial<Record<keyof Look, string>> = { skin: t('ob.char.skin'), hairStyle: t('ob.char.style'), hair: t('ob.char.hair'), shirt: t('ob.char.apron') };
 
+    const headCrop = (figure: HTMLCanvasElement) => {
+      const crop = document.createElement('canvas'), contact = referenceCharacterContacts(figure);
+      crop.width = figure.width;
+      crop.height = Math.ceil(contact?.headHeight ?? HEAD_ROWS - 3);
+      crop.getContext('2d')!.drawImage(figure, 0, -(contact?.head?.y ?? 0));
+      crop.className = 'swatch-sprite';
+      return crop;
+    };
     const paint = (repaintOwner = true) => {
       if (repaintOwner) ownerPreview.update(draft.look);
       body.querySelectorAll<HTMLElement>('.swatches').forEach((group) => {
@@ -245,15 +253,15 @@ export function showOnboarding(opts: Options): void {
             const colors = palettes[key];
             if (colors) b.style.background = colors[i];
             else {
-              const head = character({ ...draft.look, hairStyle: i }, 'owner').stand;
-              const crop = document.createElement('canvas');
-              crop.width = head.width;
-              const contact=referenceCharacterContacts(head);
-              crop.height = Math.ceil(contact?.headHeight ?? HEAD_ROWS - 3);
-              const headY=contact?.head?.y ?? 0;
-              crop.getContext('2d')!.drawImage(head, 0, -headY);
-              crop.className = 'swatch-sprite';
-              b.append(crop);
+              // Only the front pose is painted, and each hairstyle's sheet arrives on its own:
+              // a button stays empty until then rather than showing some other hair.
+              const look = { ...draft.look, hairStyle: i };
+              const front = referenceOwnerFront(look);
+              if (front) b.append(headCrop(front));
+              else void preloadReferenceLook(look).then(() => {
+                const loaded = referenceOwnerFront(look);
+                if (loaded && b.isConnected) b.append(headCrop(loaded));
+              });
             }
             b.addEventListener('click', () => {
               draft.look[key] = i;
@@ -262,6 +270,10 @@ export function showOnboarding(opts: Options): void {
             return b;
           }),
         );
+        // On a phone the hairstyles swipe sideways: a random or restored pick may start out of sight.
+        const picked = group.querySelector('.active')?.getBoundingClientRect(), frame = group.getBoundingClientRect();
+        if (picked && picked.left < frame.left) group.scrollLeft -= frame.left - picked.left + 8;
+        else if (picked && picked.right > frame.right) group.scrollLeft += picked.right - frame.right + 8;
       });
     };
     const owner = body.querySelector<HTMLInputElement>('#owner-name')!;

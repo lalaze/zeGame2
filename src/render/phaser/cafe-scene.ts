@@ -1,4 +1,6 @@
 import { remapTextile } from '../textile-styles';
+import { GIFT_SPOTS } from '../../game/cat-gifts';
+import { orderWaiting, tillJarLevel } from '../idle-props-art';
 import { cafeLocation } from '../../game/locations';
 import { minaMapChoice, minaReservedTable } from '../../game/regular-wishes';
 import { paintMinaReservation } from '../regular-wish-art';
@@ -528,6 +530,7 @@ export class CafeScene extends Phaser.Scene {
     view.momentTarget = null;
     this.drawFloorStanding(state, t);
     this.drawMomentSpot(t);
+    this.drawGifts(t);
     this.sim.customers.forEach((c, i) => this.drawCustomerOverlay(c, t, DEPTH.overlay + i * 0.001));
     this.drawThoughts(state, dt);
     this.images.end();
@@ -739,6 +742,7 @@ export class CafeScene extends Phaser.Scene {
         menuItems(state).map((m) => m.id).join(','),
         JSON.stringify(shelf),
         Math.min(4, 1 + Math.floor(state.today.served / 15)),
+        tillJarLevel(state, Date.now()), orderWaiting(state, Date.now()),
       ].join('|');
       this.paint(counter, o.x, o.y, counterSig, (p) => { p.drawCounter(state, decor.counter, t, cups); p.drawCounterLight(light); });
     } else if (area === 'kitchen') {
@@ -752,9 +756,10 @@ export class CafeScene extends Phaser.Scene {
     } else {
       const offset = regionOffset(area);
       const locked = !isAreaOpen(state, area);
-      this.paint(back, o.x, o.y, [tick, H, placed, now.getTime(), locked, signFontRevision()].join('|'), (p) => {
+      const building = locked && state.construction.some((c) => c.id === area);
+      this.paint(back, o.x, o.y, [tick, H, placed, now.getTime(), locked, building, signFontRevision()].join('|'), (p) => {
         const ctx = p.ctx;
-        paintRegion(ctx, area, H, t, light, locked);
+        paintRegion(ctx, area, H, t, light, locked, building);
         state.decor.placed.forEach((piece, i) => {
           const def = furnitureDef(piece.id);
           const x = piece.col * CELL;
@@ -1511,6 +1516,25 @@ export class CafeScene extends Phaser.Scene {
     const bob = this.motionPreference.matches || this.view.paused ? 0 : Math.floor(t * 2) % 2;
     const cue = baked(this.textures, `moment-cue-${kind}`, 13, 14, ctx => paintMomentCue(ctx, kind));
     this.image(cue, x - 6, y - bob, depth);
+  }
+
+  /** Cat gifts on the main café's windowsills; each one is tappable and now and then glints. */
+  private drawGifts(t: number): void {
+    this.view.giftTargets = [];
+    for (const gift of this.view.gifts ?? []) {
+      const spot = GIFT_SPOTS[gift.spot];
+      if (!spot) continue;
+      const p = projectMainPlaneWorld(spot, MAIN_WALL_PLANE);
+      const id = `gift-${gift.kind}` as const, source = generatedMainSource(id);
+      const scale = source ? Math.min(9 / source.width, 8 / source.height) : 1;
+      const w = source ? Math.round(source.width * scale * 2) / 2 : 6, h = source ? Math.round(source.height * scale * 2) / 2 : 5;
+      const x = Math.round((p.x - w / 2) * 2) / 2, y = Math.round((p.y - h) * 2) / 2;
+      if (!this.generatedPicture(id, x, y, w, h, DEPTH.cat + 0.01)) this.rect(x, y, w, h, '#d4a24c', DEPTH.cat + 0.01);
+      this.view.giftTargets.push({ id: gift.id, x, y, w, h });
+      // A small glint every few seconds says there's something to pick up.
+      const beat = (t + gift.id * 0.7) % 3;
+      if (beat < 0.25) this.rect(x + w - 1.5, y - 1.5 - Math.round(beat * 8) / 2, 1, 1, '#fff6d8', DEPTH.cat + 0.02);
+    }
   }
 
   /** The cup the cat knocked over, or the parcel by the door, with its cue above. */

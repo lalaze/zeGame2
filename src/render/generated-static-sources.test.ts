@@ -80,9 +80,10 @@ function fixture(options: { missing?: readonly GeneratedMainId[]; failed?: reado
 }
 
 describe('release baked static catalog sources', () => {
-  it('releases exactly 87 ready catalog sources without invalidating their published adapters', () => {
+  it('releases exactly 89 ready catalog sources without invalidating their published adapters', () => {
     const f = fixture();
-    expect(staticIds).toHaveLength(87);
+    // 87, plus the chain's map and plaque.
+    expect(staticIds).toHaveLength(89);
     expect(releaseGeneratedStaticSources(f.textures)).toBe(staticIds.length);
     expect(f.textures.remove.mock.calls.map(([key]) => key)).toEqual(staticIds.map(generatedMainKey));
     for (const id of staticIds) {

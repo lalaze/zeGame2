@@ -1,3 +1,4 @@
+import { GIFT_KINDS, giftKindsFound } from '../game/cat-gifts';
 import { CATS, CAT_GROUPS, CARE_SECONDS, MAX_CARE_SECONDS, MAX_PETS, adoptCat, petActive, petTraffic, refillPet, type CatGroup, type CatId } from '../game/pets';
 import { formatAccountMoney, formatNumber, formatTransactionMoney as formatMoney } from '../game/format';
 import { SECONDS_PER_BUSINESS_HOUR } from '../game/business-clock';
@@ -25,6 +26,8 @@ export function createPetBrowsingState(state: GameState): PetBrowsingState {
 
 export class PetPanel {
   private summary: HTMLElement;
+  /** The cats' treasure box: gift kinds found so far (game/cat-gifts). */
+  private treasure: HTMLElement;
   private rows;
   private tiles;
   private filters: HTMLElement;
@@ -42,9 +45,10 @@ export class PetPanel {
   ) {
     const intro = document.createElement('div');
     intro.className = 'pet-intro';
-    intro.innerHTML = `<h3>${t('pet.title')}</h3><p class="note">${t('pet.intro', { count: CATS.length, max: MAX_PETS })}</p><p class="pet-summary" role="status"></p><details class="note"><summary>${t('pet.careHelp')}</summary><p>${t('pet.accounting')}</p></details>`;
+    intro.innerHTML = `<h3>${t('pet.title')}</h3><p class="note">${t('pet.intro', { count: CATS.length, max: MAX_PETS })}</p><p class="pet-summary" role="status"></p><p class="note pet-treasure"></p><details class="note"><summary>${t('pet.careHelp')}</summary><p>${t('pet.accounting')}</p></details>`;
     root.append(intro);
     this.summary = intro.querySelector('.pet-summary')!;
+    this.treasure = intro.querySelector('.pet-treasure')!;
     const nav = document.createElement('div');
     nav.className = 'pet-tabs';
     this.tabs = (['catalog', 'owned'] as const).map((mode) => {
@@ -151,6 +155,8 @@ export class PetPanel {
     const candidates = CATS.filter((cat) => this.browsing.group === 'all' || cat.group === this.browsing.group);
     if (!candidates.some((cat) => cat.id === this.browsing.selected)) this.browsing.selected = candidates[0].id;
     const { mode, group, selected } = this.browsing;
+    const picked = Object.values(s.catGifts.found).reduce((n, v) => n + (v ?? 0), 0);
+    this.treasure.textContent = picked ? t('gift.box', { n: giftKindsFound(s), total: GIFT_KINDS.length, count: picked }) : t('gift.boxHint');
     this.summary.textContent = t('pet.summary', { n: s.pets.length, max: MAX_PETS, pct: Math.round((petTraffic(s) - 1) * 100), cost: formatAccountMoney(s.today.petCost) });
     this.grid.hidden = this.filters.hidden = mode !== 'catalog';
     this.empty.hidden = mode !== 'owned' || s.pets.length > 0;

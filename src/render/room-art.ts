@@ -1,4 +1,5 @@
 import { curtainSource, TEXTILE_COLORS } from './textile-styles';
+import { orderWaiting, paintIdleProp, tillJarId, tillJarLevel } from './idle-props-art';
 import { minaMapChoice } from '../game/regular-wishes';
 import { paintMinaMap } from './regular-wish-art';
 import { artRamp, mainTimber, mainCabinet, mainWall, mainFloor, mainCarpet, mainRug, mainSillPlant, mainSkyDisc, mainPickup, counterMaterial } from './main-room-surfaces';
@@ -1154,9 +1155,14 @@ export class RoomPainter {
     const map = minaMapChoice(state);
     if (map) paintMinaMap(this.ctx, 181, 108, map);
 
-    // Tip jar, in the gap between the first two baristas.
+    // Tip jar, in the gap between the first two baristas: the generated jar when loaded.
     const coins = Math.min(4, 1 + Math.floor(state.today.served / 15));
     const jx = baristaSpot(0).x + 11;
+    const nowMs = Date.now();
+    if (this.density > 1 && orderWaiting(state, nowMs)) paintIdleProp(this.ctx, 'order-takeaway', 226, top + 7, 13, 11);
+    if (this.density > 1 && paintIdleProp(this.ctx, tillJarId(tillJarLevel(state, nowMs)), jx + 3.5, top + 6, 11, 13)) {
+      // The painted jar below is the fallback.
+    } else {
     this.r(jx, top - 4, 7, 1, '#758c79');
     this.r(jx - 1, top - 3, 9, 9, '#6e8471');
     this.r(jx, top - 3, 7, 10, '#c8d6b7');
@@ -1168,6 +1174,7 @@ export class RoomPainter {
     this.r(jx + 3, top + 1, 1, 1, '#a68145');
     this.r(jx - 1, top - 5, 9, 2, '#a77941');
     this.r(jx, top - 5, 7, 1, '#ddba78');
+    }
 
     // A card reader lying flat on the counter, low enough not to hide the first barista.
     const px = MACHINE_X + 32;

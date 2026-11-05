@@ -1,0 +1,396 @@
+{
+  "generator": "built-in image_gen (Codex)",
+  "processing": "split at empty columns, trim transparent exterior, uniform nearest-neighbor resize per sheet; no redraw, recolor or alpha cleanup",
+  "crops": {
+    "build-sawhorse": {
+      "source": "assets/generated/cozy-idle-v1/source-construction.png",
+      "file": "public/art/generated/cozy-idle-v1/build-sawhorse.png",
+      "sourceBox": [
+        44,
+        219,
+        563,
+        448
+      ],
+      "scale": 0.4186046511627907,
+      "size": [
+        236,
+        188
+      ]
+    },
+    "build-ladder": {
+      "source": "assets/generated/cozy-idle-v1/source-construction.png",
+      "file": "public/art/generated/cozy-idle-v1/build-ladder.png",
+      "sourceBox": [
+        702,
+        84,
+        860,
+        579
+      ],
+      "scale": 0.4186046511627907,
+      "size": [
+        360,
+        242
+      ]
+    },
+    "build-sign": {
+      "source": "assets/generated/cozy-idle-v1/source-construction.png",
+      "file": "public/art/generated/cozy-idle-v1/build-sign.png",
+      "sourceBox": [
+        1693,
+        242,
+        406,
+        425
+      ],
+      "scale": 0.4186046511627907,
+      "size": [
+        170,
+        178
+      ]
+    },
+    "till-jar-0": {
+      "source": "assets/generated/cozy-idle-v1/source-jar.png",
+      "file": "public/art/generated/cozy-idle-v1/till-jar-0.png",
+      "sourceBox": [
+        209,
+        90,
+        446,
+        549
+      ],
+      "scale": 0.4371584699453552,
+      "size": [
+        195,
+        240
+      ]
+    },
+    "till-jar-1": {
+      "source": "assets/generated/cozy-idle-v1/source-jar.png",
+      "file": "public/art/generated/cozy-idle-v1/till-jar-1.png",
+      "sourceBox": [
+        882,
+        90,
+        446,
+        549
+      ],
+      "scale": 0.4371584699453552,
+      "size": [
+        195,
+        240
+      ]
+    },
+    "till-jar-2": {
+      "source": "assets/generated/cozy-idle-v1/source-jar.png",
+      "file": "public/art/generated/cozy-idle-v1/till-jar-2.png",
+      "sourceBox": [
+        1554,
+        90,
+        446,
+        549
+      ],
+      "scale": 0.4371584699453552,
+      "size": [
+        195,
+        240
+      ]
+    },
+    "order-takeaway": {
+      "source": "assets/generated/cozy-idle-v1/source-takeaway.png",
+      "file": "public/art/generated/cozy-idle-v1/order-takeaway.png",
+      "sourceBox": [
+        215,
+        173,
+        1099,
+        698
+      ],
+      "scale": 0.3275705186533212,
+      "size": [
+        360,
+        229
+      ]
+    },
+    "gift-leaf": {
+      "source": "assets/generated/cozy-idle-v1/source-gifts.png",
+      "file": "public/art/generated/cozy-idle-v1/gift-leaf.png",
+      "sourceBox": [
+        60,
+        246,
+        278,
+        259
+      ],
+      "scale": 0.4953560371517028,
+      "size": [
+        138,
+        128
+      ]
+    },
+    "gift-yarn": {
+      "source": "assets/generated/cozy-idle-v1/source-gifts.png",
+      "file": "public/art/generated/cozy-idle-v1/gift-yarn.png",
+      "sourceBox": [
+        414,
+        260,
+        305,
+        246
+      ],
+      "scale": 0.4953560371517028,
+      "size": [
+        151,
+        122
+      ]
+    },
+    "gift-feather": {
+      "source": "assets/generated/cozy-idle-v1/source-gifts.png",
+      "file": "public/art/generated/cozy-idle-v1/gift-feather.png",
+      "sourceBox": [
+        772,
+        261,
+        292,
+        240
+      ],
+      "scale": 0.4953560371517028,
+      "size": [
+        145,
+        119
+      ]
+    },
+    "gift-ribbon": {
+      "source": "assets/generated/cozy-idle-v1/source-gifts.png",
+      "file": "public/art/generated/cozy-idle-v1/gift-ribbon.png",
+      "sourceBox": [
+        1128,
+        286,
+        323,
+        210
+      ],
+      "scale": 0.4953560371517028,
+      "size": [
+        160,
+        104
+      ]
+    },
+    "gift-acorn": {
+      "source": "assets/generated/cozy-idle-v1/source-gifts.png",
+      "file": "public/art/generated/cozy-idle-v1/gift-acorn.png",
+      "sourceBox": [
+        1543,
+        243,
+        217,
+        264
+      ],
+      "scale": 0.4953560371517028,
+      "size": [
+        107,
+        131
+      ]
+    },
+    "gift-coin": {
+      "source": "assets/generated/cozy-idle-v1/source-gifts.png",
+      "file": "public/art/generated/cozy-idle-v1/gift-coin.png",
+      "sourceBox": [
+        1857,
+        243,
+        263,
+        255
+      ],
+      "scale": 0.4953560371517028,
+      "size": [
+        130,
+        126
+      ]
+    },
+    "shop-town": {
+      "source": "assets/generated/cozy-idle-v1/source-shops.png",
+      "file": "public/art/generated/cozy-idle-v1/shop-town.png",
+      "sourceBox": [
+        109,
+        195,
+        321,
+        383
+      ],
+      "scale": 0.4177545691906005,
+      "size": [
+        134,
+        160
+      ]
+    },
+    "shop-forest": {
+      "source": "assets/generated/cozy-idle-v1/source-shops.png",
+      "file": "public/art/generated/cozy-idle-v1/shop-forest.png",
+      "sourceBox": [
+        515,
+        195,
+        321,
+        383
+      ],
+      "scale": 0.4177545691906005,
+      "size": [
+        134,
+        160
+      ]
+    },
+    "shop-city": {
+      "source": "assets/generated/cozy-idle-v1/source-shops.png",
+      "file": "public/art/generated/cozy-idle-v1/shop-city.png",
+      "sourceBox": [
+        932,
+        195,
+        321,
+        383
+      ],
+      "scale": 0.4177545691906005,
+      "size": [
+        134,
+        160
+      ]
+    },
+    "shop-seaside": {
+      "source": "assets/generated/cozy-idle-v1/source-shops.png",
+      "file": "public/art/generated/cozy-idle-v1/shop-seaside.png",
+      "sourceBox": [
+        1329,
+        195,
+        321,
+        383
+      ],
+      "scale": 0.4177545691906005,
+      "size": [
+        134,
+        160
+      ]
+    },
+    "shop-flowers": {
+      "source": "assets/generated/cozy-idle-v1/source-shops.png",
+      "file": "public/art/generated/cozy-idle-v1/shop-flowers.png",
+      "sourceBox": [
+        1737,
+        195,
+        321,
+        383
+      ],
+      "scale": 0.4177545691906005,
+      "size": [
+        134,
+        160
+      ]
+    },
+    "perk-till": {
+      "source": "assets/generated/cozy-idle-v1/source-perks.png",
+      "file": "public/art/generated/cozy-idle-v1/perk-till.png",
+      "sourceBox": [
+        34,
+        185,
+        335,
+        368
+      ],
+      "scale": 0.34782608695652173,
+      "size": [
+        117,
+        128
+      ]
+    },
+    "perk-kitchen": {
+      "source": "assets/generated/cozy-idle-v1/source-perks.png",
+      "file": "public/art/generated/cozy-idle-v1/perk-kitchen.png",
+      "sourceBox": [
+        395,
+        185,
+        335,
+        368
+      ],
+      "scale": 0.34782608695652173,
+      "size": [
+        117,
+        128
+      ]
+    },
+    "perk-builders": {
+      "source": "assets/generated/cozy-idle-v1/source-perks.png",
+      "file": "public/art/generated/cozy-idle-v1/perk-builders.png",
+      "sourceBox": [
+        741,
+        185,
+        335,
+        368
+      ],
+      "scale": 0.34782608695652173,
+      "size": [
+        117,
+        128
+      ]
+    },
+    "perk-catering": {
+      "source": "assets/generated/cozy-idle-v1/source-perks.png",
+      "file": "public/art/generated/cozy-idle-v1/perk-catering.png",
+      "sourceBox": [
+        1094,
+        185,
+        335,
+        368
+      ],
+      "scale": 0.34782608695652173,
+      "size": [
+        117,
+        128
+      ]
+    },
+    "perk-manager": {
+      "source": "assets/generated/cozy-idle-v1/source-perks.png",
+      "file": "public/art/generated/cozy-idle-v1/perk-manager.png",
+      "sourceBox": [
+        1441,
+        185,
+        335,
+        368
+      ],
+      "scale": 0.34782608695652173,
+      "size": [
+        117,
+        128
+      ]
+    },
+    "perk-cats": {
+      "source": "assets/generated/cozy-idle-v1/source-perks.png",
+      "file": "public/art/generated/cozy-idle-v1/perk-cats.png",
+      "sourceBox": [
+        1796,
+        185,
+        335,
+        368
+      ],
+      "scale": 0.34782608695652173,
+      "size": [
+        117,
+        128
+      ]
+    },
+    "furniture-chain_map": {
+      "source": "assets/generated/cozy-idle-v1/source-keepsakes.png",
+      "file": "public/art/generated/cozy-idle-v1/furniture-chain_map.png",
+      "sourceBox": [
+        139,
+        60,
+        960,
+        724
+      ],
+      "scale": 0.26666666666666666,
+      "size": [
+        256,
+        193
+      ]
+    },
+    "furniture-chain_plaque": {
+      "source": "assets/generated/cozy-idle-v1/source-keepsakes.png",
+      "file": "public/art/generated/cozy-idle-v1/furniture-chain_plaque.png",
+      "sourceBox": [
+        1374,
+        255,
+        333,
+        325
+      ],
+      "scale": 0.26666666666666666,
+      "size": [
+        89,
+        87
+      ]
+    }
+  }
+}

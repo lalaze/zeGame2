@@ -19,8 +19,13 @@ import { showLivingCat } from './ui/living-cats';
 import { petActive, type CatId } from './game/pets';
 import { DAY_SECONDS, SPEEDS } from './game/data';
 import { openShop, type DayReport } from './game/day';
-import { AWAY_CAP_SECONDS, collectAwayEarnings, managerOpen, managerRestock, managerRunsDays } from './game/manager';
-import { canOpenBranch, chainBonusPercent, openBranch, starsOnBranch } from './game/chain';
+import { AWAY_MIN_SECONDS, OVERFLOW_SHARE, awayHourly, collectAwayEarnings, managerOpen, managerRestock, managerRunsDays, tillSeconds } from './game/manager';
+import { FRANCHISE_SHARE, canOpenBranch, chainBonusPercent, collectFranchises, openBranch, starsOnBranch } from './game/chain';
+import { franchisesIn, starsFree } from './game/chain-bonuses';
+import { placeBonusText } from './ui/chain-ui';
+import { cafeLocation } from './game/locations';
+import { collectOrder, orderReady } from './game/orders';
+import { bringGifts, collectGift } from './game/cat-gifts';
 import type { LocationId } from './game/locations';
 import { locationName, showBranchMap } from './ui/branch-map';
 import { businessSeconds, formatBusinessClock, formatBusinessDuration } from './game/business-clock';
@@ -28,7 +33,7 @@ import { expectedCustomers, menuItems, tipMultiplier, unlockedItems } from './ga
 import { blocksNextTable, canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
 import { formatDuration, formatMoney, formatTransactionMoney } from './game/format';
 import { CAT_SPOT, MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
-import { adjacentArea, isAreaOpen, mainTableCount, regionOffset } from './game/regions';
+import { adjacentArea, buildSeconds, buildShare, finishConstruction, isAreaOpen, mainTableCount, regionOffset, type AreaId, type RegionId } from './game/regions';
 import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, furnitureDef } from './game/furniture';
 import { acquireSaveSession, watchSavePage, type SaveSession } from './game/save-session';
 import { applyTheme, comfort } from './game/decor';
@@ -39,6 +44,7 @@ import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale
 import { CafeView } from './render/cafe-view';
 import { CafeGame } from './render/phaser/game';
 import { character, toDataURL } from './render/sprites';
+import { wantCozyTeamStyle } from './render/cozy-team-art';
 import { fineSpriteArt } from './render/fine-sprite-art';
 import { showMoneyDetails } from './ui/money-details';
 import { closeModal, isModalOpen, showModal, toast } from './ui/modal';
@@ -130,6 +136,8 @@ let managerWait = MANAGER_DELAY;
 /** Whether the manager is counting down right now (nothing is holding them back). */
 let managerCounting = false;
 let state: GameState = session.state;
+// A returning owner's own hairstyle loads with the game's art (other owner looks wait until picked).
+if (state.profile) wantCozyTeamStyle(state.profile.look.hairStyle);
 const sim = session.sim;
 /** Optional service moments; never saved, never run while the café is paused. */
 const moments = new MomentDirector();
@@ -401,18 +409,72 @@ const regionsUI = new RegionsUI($('area-edges'), $('region-card'), () => state, 
     showArrange();
   } else if (arrange?.mode === 'place') holdPiece(arrange.id, arrange.moving, arrange.fromBrowse);
   updateDayHud();
-}, () => {
+}, (result) => {
   saveGame();
   panel.refresh();
-  toast(t('area.opened', { name: areaName(scene.area) }));
-  const origin = areaOrigin(scene.area);
-  for (let i = 0; i < 16; i++) scene.sparkle(origin.x + 40 + Math.random() * 240, origin.y + 70 + Math.random() * 60);
+  if (result.kind === 'building') {
+    toast(t(result.booked ? 'area.bookedToast' : 'area.started', { name: areaName(result.id), time: formatDuration(buildSeconds(state, result.id)) }));
+  } else {
+    toast(t('area.opened', { name: areaName(scene.area) }));
+    sparkleRoom(scene.area);
+  }
   updateDayHud();
 }, (show) => {
   scene.setOverview(show, reducedMotion.matches);
   roomViewport?.reset();
   canvas.setAttribute('aria-label', show ? t('area.overviewHint') : areaName(scene.area));
 });
+
+function sparkleRoom(area: AreaId): void {
+  const origin = areaOrigin(area);
+  for (let i = 0; i < 16; i++) scene.sparkle(origin.x + 40 + Math.random() * 240, origin.y + 70 + Math.random() * 60);
+}
+
+/** Resident cats leave gifts on the windowsills in real time; the scene shows what's waiting. */
+function tickCatGifts(): void {
+  const brought = state.profile ? bringGifts(state, Date.now()) : [];
+  scene.gifts = state.catGifts.waiting;
+  if (!brought.length) return;
+  saveGame();
+  toast(t('gift.arrived', { cat: t(`pet.${brought[0].cat}.name`) }));
+}
+
+/** Picking up a gift from the windowsill. */
+function pickUpGift(id: number): void {
+  const picked = collectGift(state, id);
+  if (!picked) return;
+  scene.tipAtGift(id, picked.amount);
+  scene.gifts = state.catGifts.waiting;
+  saveGame();
+  panel.refresh();
+  toast(`${t('gift.collected', { cat: t(`pet.${picked.gift.cat}.name`), gift: t(`gift.${picked.gift.kind}`), money: formatMoney(picked.amount) })}${picked.first ? ` ${t('gift.first')}` : ''}`);
+}
+
+/** A catering order that finishes on screen is announced once; it waits on the Upgrades tab to be collected. */
+let announcedOrder = 0;
+function announceReadyOrder(): void {
+  const order = state.orders.active;
+  if (!order || order.finishAt === announcedOrder || !orderReady(state, Date.now())) return;
+  announcedOrder = order.finishAt;
+  toast(t('orders.readyToast', { name: t(`orders.${order.kind}`) }));
+  panel.refresh();
+}
+
+/** Rooms whose building is done open as soon as the café is closed, as a bought room always did. */
+function openFinishedRooms(): RegionId[] {
+  if (!state.construction.length || state.phase !== 'prep' || !state.profile) return [];
+  const opened = finishConstruction(state, Date.now());
+  if (!opened.length) return opened;
+  saveGame();
+  panel.refresh();
+  regionsUI.update();
+  updateDayHud();
+  for (const id of opened) {
+    toast(t('area.opened', { name: areaName(id) }));
+    if (scene.area === id) sparkleRoom(id);
+  }
+  return opened;
+}
 
 function showArrange(): void {
   mobileHud?.close(false);
@@ -676,6 +738,10 @@ function managerStartDay(): void {
  * pause, dialog, open management panel, arrangement or first-day guide holds them back.
  */
 function managerTick(dt: number, paused: boolean): void {
+  // The builders work in real time too; a finished room opens before the next day starts.
+  if (!paused) openFinishedRooms();
+  if (!paused) announceReadyOrder();
+  if (!paused) tickCatGifts();
   const idle = managerRunsDays(state) && state.phase === 'prep' && !paused && !!state.profile &&
     panelCollapsed && !arrange && !guide.openingStep && !mobileHud?.expanded;
   managerCounting = idle;
@@ -707,23 +773,62 @@ function leaveCafe(): void {
   if (awaySettled) state.manager.lastSeen = Date.now();
   awaySettled = false;
   saveGame();
+  awayTitleTimer ??= setInterval(updateAwayTitle, 60_000);
 }
 
-/** Pays what the manager earned since the café was last on screen. */
+/** In a background tab, the title shows how full the till is, so a glance says when to come back. */
+let awayTitleTimer: ReturnType<typeof setInterval> | undefined;
+function updateAwayTitle(): void {
+  if (!document.hidden || !state.manager.hired || !state.profile) return;
+  const fill = Math.min(1, (Date.now() - state.manager.lastSeen) / 1000 / tillSeconds(state));
+  document.title = orderReady(state, Date.now()) ? t('title.order', { name: t('app.title') })
+    : fill >= 1 ? t('title.full', { name: t('app.title') }) : t('title.till', { pct: Math.floor(fill * 100), name: t('app.title') });
+}
+
+function restoreTitle(): void {
+  if (awayTitleTimer !== undefined) clearInterval(awayTitleTimer);
+  awayTitleTimer = undefined;
+  document.title = t('app.title');
+}
+
+/** Empties the till: what the manager and the franchises earned since the café was last on screen. */
 function settleAway(): void {
+  restoreTitle();
   if (!session.active) return;
-  const away = collectAwayEarnings(state, Date.now());
+  const now = Date.now();
+  // Franchise pay waits in the till for a real absence (or the Collect button), not every tab switch.
+  const awaySeconds = Math.max(0, (now - state.manager.lastSeen) / 1000);
+  const wasAway = awaySeconds >= AWAY_MIN_SECONDS;
+  const away = collectAwayEarnings(state, now);
+  const franchise = wasAway ? collectFranchises(state, now) : 0;
+  const order = wasAway ? collectOrder(state, now) : null;
+  if (order) announcedOrder = order.finishAt;
+  const built = wasAway && state.profile ? finishConstruction(state, now) : [];
+  const gifts = wasAway && state.profile ? bringGifts(state, now).length : 0;
   awaySettled = true;
   saveGame();
-  if (away.amount <= 0 || !state.profile) return;
+  if ((away.amount <= 0 && franchise <= 0 && !order && !built.length && !gifts) || !state.profile) return;
   panel.refresh();
-  const money = formatMoney(away.amount), time = formatDuration(away.seconds);
+  regionsUI.update();
+  updateDayHud();
+  const parts = [away.amount, franchise, order?.payout ?? 0].filter((n) => n > 0);
+  const lines = [
+    t('away.body', { time: formatDuration(awaySeconds) }),
+    ...(away.amount > 0 ? [t('away.till', { money: formatMoney(away.amount), pct: Math.round(away.fill * 100) })] : []),
+    ...(franchise > 0 ? [t('away.franchise', { money: formatMoney(franchise) })] : []),
+    ...(order ? [t('away.order', { name: t(`orders.${order.kind}`), money: formatMoney(order.payout) })] : []),
+    ...(parts.length > 1 ? [t('away.total', { money: formatMoney(parts.reduce((a, b) => a + b, 0)) })] : []),
+    ...(away.welcome > 0 ? [t('away.welcome', { money: formatMoney(away.welcome) })] : []),
+    ...(away.full ? [t('away.full', { hours: tillSeconds(state) / 3600, pct: Math.round(OVERFLOW_SHARE * 100) })] : []),
+    ...built.map((id) => t('away.built', { name: areaName(id) })),
+    ...(gifts ? [t('away.gifts', { n: state.catGifts.waiting.length })] : []),
+  ];
   if (isModalOpen() || document.querySelector('.onboard-overlay')) {
-    toast(t('away.body', { time, money }));
+    toast(lines.slice(1).join(' '));
     return;
   }
   const body = document.createElement('div');
-  for (const text of [t('away.body', { time, money }), ...(away.capped ? [t('away.capped', { hours: AWAY_CAP_SECONDS / 3600 })] : [])]) {
+  for (const text of lines) {
     const p = document.createElement('p'); p.textContent = text; body.append(p);
   }
   showModal({ title: t('away.title'), icon: ownerIcon(), body, buttons: [{ label: t('away.collect'), primary: true }] });
@@ -961,9 +1066,12 @@ function openBranchMap(): void {
 /** Hands this café over and starts a new branch, after saying what carries over. */
 function confirmBranch(location: LocationId): void {
   if (!canOpenBranch(state)) return;
-  const stars = starsOnBranch(state), bonus = chainBonusPercent(state.chain.stars + stars);
+  const stars = starsOnBranch(state), bonus = chainBonusPercent(starsFree(state) + stars);
   const body = document.createElement('div');
-  for (const text of [t('chain.confirm.where', { place: locationName(location) }), t('chain.confirm.body', { stars, bonus }), t('chain.confirm.resets'), t('chain.confirm.keeps')]) {
+  const perks = t('chain.perks', { pct: Math.round(buildShare(state.chain.branches + 1) * 100) });
+  const here = cafeLocation(state);
+  const franchise = t('chain.confirm.franchise', { place: locationName(here), money: formatMoney(awayHourly(state) * FRANCHISE_SHARE), bonus: placeBonusText(here, franchisesIn(state, here) + 1) });
+  for (const text of [t('chain.confirm.where', { place: locationName(location) }), t('chain.confirm.body', { stars, bonus }), franchise, t('chain.confirm.resets'), t('chain.confirm.keeps'), perks]) {
     const p = document.createElement('p'); p.textContent = text; body.append(p);
   }
   showModal({ title: t('chain.confirm.title'), icon: ownerIcon(), body, buttons: [
@@ -989,7 +1097,7 @@ function startBranch(location: LocationId): void {
   saveGame();
   updateDayHud();
   for (let i = 0; i < 20; i++) scene.sparkle(20 + Math.random() * 280, 30 + Math.random() * 60);
-  toast(t('chain.opened', { stars: state.chain.stars, bonus: chainBonusPercent(state.chain.stars) }));
+  toast(t('chain.opened', { stars: state.chain.stars, bonus: chainBonusPercent(starsFree(state)) }));
 }
 panelRoot.addEventListener('open-branch', openBranchMap);
 
@@ -1196,7 +1304,9 @@ function pointerDown(x: number, y: number): void {
     if (area) regionsUI.select(area);
     return;
   }
+  const gift = arrange ? null : scene.hitGift(x, y, Math.max(10, 22 * SCENE_W / Math.max(1, $('scene-area').getBoundingClientRect().width)));
   if (arrange) arrangeTap(x, y);
+  else if (gift !== null && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused)) pickUpGift(gift);
   else if (momentAt(x, y)) openMoment();
   else {
     const actors = [
