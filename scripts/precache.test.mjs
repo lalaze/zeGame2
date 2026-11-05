@@ -1,9 +1,10 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { existsSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join, posix } from 'node:path';
 import { runInNewContext } from 'node:vm';
-import { generateServiceWorker, offlinePrecache } from './precache.mjs';
+import { generateServiceWorker, isPrecached, offlinePrecache } from './precache.mjs';
 import { build } from 'vite';
 
 const templatePath = new URL('../public/sw.js', import.meta.url);
@@ -12,7 +13,7 @@ afterEach(async () => {
   await Promise.all(temporary.splice(0).map((path) => rm(path, { recursive: true, force: true })));
 });
 
-async function buildFixture(extraFiles = {}) {
+async function buildFixture(extraFiles = {}, runtimeArt) {
   const dir = await mkdtemp(join(tmpdir(), 'cafe-precache-'));
   temporary.push(dir);
   await mkdir(join(dir, 'assets'));
@@ -26,8 +27,11 @@ async function buildFixture(extraFiles = {}) {
     'assets/app-123.js.map': 'excluded source map',
     'sw.js': 'old worker',
     ...extraFiles,
-  })) await writeFile(join(dir, name), body);
-  return { dir, ...(await generateServiceWorker(dir, templatePath)) };
+  })) {
+    await mkdir(dirname(join(dir, name)), { recursive: true });
+    await writeFile(join(dir, name), body);
+  }
+  return { dir, ...(await generateServiceWorker(dir, templatePath, runtimeArt)) };
 }
 
 function worker(source, scope = 'https://example.test/games/cafe/', existing = new Map()) {
@@ -102,7 +106,7 @@ describe('production offline app shell', () => {
     const app = worker(source, scope);
     await app.lifecycle('install');
     expect(app.fetch).toHaveBeenCalledTimes(manifest.length);
-    expect(app.fetch.mock.calls.every(([request]) => request.cache === 'reload')).toBe(true);
+    expect(app.fetch.mock.calls.every(([request]) => request.cache === 'no-cache')).toBe(true);
     await app.lifecycle('activate');
     expect(app.claim).toHaveBeenCalledOnce();
     app.goOffline();
@@ -181,7 +185,7 @@ describe('production offline app shell', () => {
     expect(active).toBe(0);
     expect(peak).toBe(4);
     expect(app.fetch.mock.calls.map(([request]) => request.url)).toEqual(urls);
-    expect(app.fetch.mock.calls.every(([request]) => request.cache === 'reload')).toBe(true);
+    expect(app.fetch.mock.calls.every(([request]) => request.cache === 'no-cache')).toBe(true);
   });
 
   it('holds installation open until the final shell asset in the final batch has downloaded', async () => {
@@ -280,9 +284,9 @@ describe('production offline app shell', () => {
     retry.fetch.mockImplementation(async (request) => new Response(`retry: ${request.url}`));
     await retry.lifecycle('install');
     expect(retry.fetch.mock.calls.map(([request]) => request.url)).toEqual(urls);
-    expect(retry.fetch.mock.calls.every(([request]) => request.cache === 'reload')).toBe(true);
+    expect(retry.fetch.mock.calls.every(([request]) => request.cache === 'no-cache')).toBe(true);
     expect(retry.existing.get(newKeys[0])).toBe(partial);
-    expect([...partial.keys()]).toEqual(urls);
+    expect([...partial.keys()]).toEqual([...urls, new URL('./__revisions__', scope).href]);
     expect(retry.caches.delete).not.toHaveBeenCalled();
     expect(retry.claim).not.toHaveBeenCalled();
     expect(retry.skipWaiting).not.toHaveBeenCalled();
@@ -322,6 +326,124 @@ describe('production offline app shell', () => {
     app.goOffline();
     expect(await (await app.request('./index.html', 'navigate')).text()).toBe('https://example.test/games/cafe/index.html');
     expect(await (await app.request('./new-asset.js')).text()).toContain('new-asset.js');
+  });
+});
+
+
+describe('what a player downloads, and what an update costs', () => {
+  const scope = 'https://example.test/games/cafe/';
+  const runtimeArt = new Set(['art/opening.png', 'art/kept-png.png']);
+  const art = {
+    'art/opening.gif': 'opening', 'art/kept-png.png': 'glass', 'art/pack/manifest.json': '{}',
+    'art/lazy.gif': 'lazy', 'art/lazy-changing.gif': 'lazy v1', 'art/never-used.gif': 'never',
+  };
+  const url = (path) => new URL(path, scope).href;
+  const version = (existing) => [...existing.keys()];
+
+  it('precaches the app, pack manifests and opening art, whichever format it ships in', async () => {
+    const { manifest } = await buildFixture(art, runtimeArt);
+    expect(manifest).toEqual(expect.arrayContaining(['./index.html', './art/opening.gif', './art/kept-png.png', './art/pack/manifest.json']));
+    for (const path of ['./art/lazy.gif', './art/lazy-changing.gif', './art/never-used.gif']) expect(manifest).not.toContain(path);
+  });
+
+  it('downloads other art only when asked for, then keeps it offline', async () => {
+    const { source, manifest } = await buildFixture(art, runtimeArt);
+    const app = worker(source, scope);
+    await app.lifecycle('install');
+    await app.lifecycle('activate');
+    expect(app.fetch).toHaveBeenCalledTimes(manifest.length);
+    expect(await (await app.request('./art/lazy.gif')).text()).toBe(url('./art/lazy.gif'));
+    app.goOffline();
+    expect(await (await app.request('./art/lazy.gif')).text()).toBe(url('./art/lazy.gif'));
+    expect(await (await app.request('./art/opening.gif')).text()).toBe(url('./art/opening.gif'));
+    await expect(app.request('./art/never-used.gif')).rejects.toThrow('Offline');
+  });
+
+  it('checks with the server before storing art on first use, so an older HTTP-cached copy is not kept', async () => {
+    const { source } = await buildFixture(art, runtimeArt);
+    const app = worker(source, scope);
+    await app.lifecycle('install');
+    await app.request('./art/lazy.gif');
+    const [request, init] = app.fetch.mock.calls.at(-1);
+    expect(request.url).toBe(url('./art/lazy.gif'));
+    expect(init.cache).toBe('no-cache');
+  });
+
+  it('an update fetches only changed precached files and carries over unchanged art picked up on use', async () => {
+    const { dir, source } = await buildFixture(art, runtimeArt);
+    const first = worker(source, scope);
+    await first.lifecycle('install');
+    await first.lifecycle('activate');
+    await first.request('./art/lazy.gif');
+    await first.request('./art/lazy-changing.gif');
+    const oldCache = version(first.existing)[0];
+
+    await writeFile(join(dir, 'art/opening.gif'), 'opening v2');
+    await writeFile(join(dir, 'art/lazy-changing.gif'), 'lazy v2');
+    const next = await generateServiceWorker(dir, templatePath, runtimeArt);
+    expect(next.source).not.toBe(source);
+    const second = worker(next.source, scope, first.existing);
+    await second.lifecycle('install');
+    expect(second.fetch.mock.calls.map(([request]) => request.url)).toEqual([url('./art/opening.gif')]);
+    expect(second.fetch.mock.calls[0][0].cache).toBe('no-cache');
+    // Nothing is deleted until the new version takes over.
+    expect(first.existing.has(oldCache)).toBe(true);
+    await second.lifecycle('activate');
+    expect(version(first.existing)).toHaveLength(1);
+    expect(first.existing.has(oldCache)).toBe(false);
+
+    second.goOffline();
+    expect(await (await second.request('./art/lazy.gif')).text()).toBe(url('./art/lazy.gif'));
+    expect(await (await second.request('./art/kept-png.png')).text()).toBe(url('./art/kept-png.png'));
+    // Its stale copy was dropped rather than served as if it were the new file.
+    await expect(second.request('./art/lazy-changing.gif')).rejects.toThrow('Offline');
+  });
+
+  it('never reuses a cache whose install did not finish', async () => {
+    const { dir, source, manifest } = await buildFixture(art, runtimeArt);
+    const first = worker(source, scope);
+    await first.lifecycle('install');
+    await first.lifecycle('activate');
+
+    await writeFile(join(dir, 'index.html'), 'second build');
+    const second = await generateServiceWorker(dir, templatePath, runtimeArt);
+    const failing = worker(second.source, scope, first.existing);
+    failing.fetch.mockImplementation(async () => { throw new TypeError('Dropped connection'); });
+    await expect(failing.lifecycle('install')).rejects.toThrow('Dropped connection');
+
+    // The partial second cache holds a copy of every unchanged file; only the first counts.
+    await writeFile(join(dir, 'index.html'), 'third build');
+    const third = await generateServiceWorker(dir, templatePath, runtimeArt);
+    const retry = worker(third.source, scope, first.existing);
+    const firstCache = first.existing.get(version(first.existing)[0]);
+    const partial = first.existing.get(version(first.existing)[1]);
+    expect(partial.has(url('./__revisions__'))).toBe(false);
+    partial.set(url('./assets/app-123.js'), new Response('corrupt partial copy'));
+    await retry.lifecycle('install');
+    expect(retry.fetch.mock.calls.map(([request]) => request.url)).toEqual([url('./index.html')]);
+    await retry.lifecycle('activate');
+    retry.goOffline();
+    expect(await (await retry.request('./assets/app-123.js')).text()).toBe(await firstCache.get(url('./assets/app-123.js')).clone().text());
+    expect(manifest).toContain('./assets/app-123.js');
+  });
+
+  it('precaches every image the game requests while opening', async () => {
+    const { GENERATED_MAIN_ASSETS } = await import('../src/render/generated-main-art');
+    const { default: dining } = await import('../src/render/dining-table-manifest.json');
+    const pack = (name) => JSON.parse(readFileSync(`public/art/generated/${name}/manifest.json`, 'utf8'));
+    const inPack = (name, sheets) => sheets.map((sheet) => posix.normalize(`art/generated/${name}/${sheet.file}`));
+    const team = pack('cozy-team-v8');
+    const opening = [
+      // Mirrors CafeScene.preload and the loaders it waits for.
+      ...Object.entries(GENERATED_MAIN_ASSETS).filter(([id]) => !/^(?:barista|server|mina|customer)-/.test(id)).map(([, file]) => `art/generated/${file}`),
+      ...inPack('cozy-cast-v8', pack('cozy-cast-v8').characters), ...inPack('cozy-dining-v4', pack('cozy-dining-v4').characters),
+      ...inPack('cozy-cats-v2', pack('cozy-cats-v2').breeds),
+      ...inPack('cozy-team-v8', [...team.families.slice(0, 8), team.chef, ...team.seated.slice(0, 2), team.chefSeated]),
+      ...['ensemble', 'petting', 'idle-v4'].map((name) => `art/generated/cozy-seating-v3/${name}.gif`), dining.file,
+    ];
+    expect(opening.length).toBeGreaterThan(400);
+    expect(opening.filter((name) => !isPrecached(name))).toEqual([]);
+    for (const name of opening) expect(existsSync(`public/${name}`), name).toBe(true);
   });
 });
 
