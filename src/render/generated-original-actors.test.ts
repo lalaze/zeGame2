@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { describe, expect, it, vi } from 'vitest';
+import { artMaster, imageSize } from '../../scripts/art-files.mjs';
 import runtime from '../../assets/generated/runtime-catalog-v1/runtime.json';
 import catalog from '../../assets/generated/runtime-catalog-v1/catalog.json';
 import archive from '../../assets/generated/original-main-actors-v1/manifest.json';
@@ -24,9 +25,9 @@ const families = [
   { name: 'customer', original: customerOriginal, packed: runtime.customerManifests.find(manifest => manifest.appearanceId === 0)!, frameId: (frame: Frame) => `mina-${frame.direction}-${frame.state}` },
   { name: 'cat', original: catOriginal, packed: runtime.catManifests.find(manifest => manifest.breed === 'siamese')!, frameId: (frame: Frame) => `siamese-${frame.state}` },
 ] as const;
-const bytes = (file: string) => readFileSync(new URL(`../../${file}`, import.meta.url));
+const bytes = (file: string) => readFileSync(new URL(`../../${artMaster(file)}`, import.meta.url));
 const hash = (value: Buffer) => createHash('sha256').update(value).digest('hex');
-const size = (value: Buffer) => [value.readUInt32BE(16), value.readUInt32BE(20)];
+const size = (value: Buffer) => imageSize(value) as number[];
 const fake = (width = 18, height = 28) => ({ width, height }) as HTMLCanvasElement;
 const sourcesFor = (family: typeof families[number], original = false) => Object.fromEntries(family.original.frames.map(frame => {
   const id = family.frameId(frame), file = original ? archive.images.find(row => row.key === id)!.file :
@@ -83,7 +84,7 @@ describe('archived original actors and 192px production metadata', () => {
       const exported = catalog.images.find(image => image.key === row.key)!;
       expect(exported.source).toBe(row.file); expect(exported.sourceSha256).toBe(row.sha256);
       expect(hash(bytes(exported.file))).toBe(exported.sha256);
-      expect(`public/art/generated/${GENERATED_MAIN_ASSETS[row.key as keyof typeof GENERATED_MAIN_ASSETS]}`).toBe(exported.file);
+      expect(artMaster(`public/art/generated/${GENERATED_MAIN_ASSETS[row.key as keyof typeof GENERATED_MAIN_ASSETS]}`)).toBe(artMaster(exported.file));
       expect(exported.file).not.toBe(row.previousPublicFile);
     }
     for (const row of archive.manifests) expect(hash(bytes(row.file))).toBe(row.sha256);

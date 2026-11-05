@@ -3,7 +3,7 @@
   "processing": "Rectangular extraction, nearest-neighbor resize, 8px transparent safety border; no recoloring or alpha masking.",
   "assets": {
     "cozy-grinder": {
-      "file": "cozy-grinder.png",
+      "file": "cozy-grinder.gif",
       "source": "source-atlas.png",
       "sourceRect": {
         "left": 189,
@@ -32,7 +32,7 @@
       "sha256": "dcc86bba3419d69ddf9637037d80980dc7d84ffde636d55a83cd12142a21855c"
     },
     "cozy-milk-pitcher": {
-      "file": "cozy-milk-pitcher.png",
+      "file": "cozy-milk-pitcher.gif",
       "source": "source-atlas.png",
       "sourceRect": {
         "left": 747,
@@ -61,7 +61,7 @@
       "sha256": "883154fe3a233823a7473f3117e03ef46bbd4ae8be644f16e93fa56105793b89"
     },
     "cozy-cake-dome": {
-      "file": "cozy-cake-dome.png",
+      "file": "cozy-cake-dome.gif",
       "source": "source-atlas.png",
       "sourceRect": {
         "left": 105,
@@ -102,7 +102,7 @@
       "sha256": "39b3844ba772b3ec8da3d79ef9b133d33ad61c3e79ed9839e5e33e0c3181e635"
     },
     "cozy-table-tent": {
-      "file": "cozy-table-tent.png",
+      "file": "cozy-table-tent.gif",
       "source": "source-atlas.png",
       "sourceRect": {
         "left": 727,

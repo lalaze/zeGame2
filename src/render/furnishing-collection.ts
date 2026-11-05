@@ -148,6 +148,15 @@ const pieces: Record<string, () => HTMLCanvasElement> = {
     r(24, 13, 4, 9, CREAM); for (let y = 14; y < 22; y += 3) r(24, y, 4, 1, '#aa5944');
     r(4, 23, 3, 3, INK); r(25, 23, 3, 3, INK); r(4, 23, 1, 2, EDGE); r(25, 23, 1, 2, WOOD);
   }),
+  gingham_table: art(30, 20, (r) => {
+    r(13, 12, 4, 5, INK); r(14, 12, 2, 5, WOOD);
+    r(8, 17, 14, 3, INK); r(9, 17, 12, 1, EDGE); r(9, 18, 12, 1, WOOD);
+    for (const [y, x, w] of [[0, 5, 20], [1, 2, 26], [2, 0, 30], [4, 0, 30], [6, 0, 30], [8, 1, 28], [10, 2, 26], [12, 4, 22]]) r(x, y, w, 2, INK);
+    for (let y = 1; y < 13; y += 2) for (let x = 1; x < 29; x += 2) {
+      if (y >= 11 && (x < 5 || x > 24) || y >= 9 && (x < 3 || x > 26) || y < 2 && (x < 3 || x > 26)) continue;
+      r(x, y, 2, 2, (x + y) % 4 === 2 ? '#c8493a' : CREAM);
+    }
+  }),
   round_stool: art(14, 18, (r) => {
     r(2, 6, 3, 12, INK); r(9, 6, 3, 12, INK); r(3, 7, 1, 10, EDGE); r(10, 7, 1, 10, WOOD);
     r(4, 12, 6, 2, INK); r(4, 12, 6, 1, EDGE); r(0, 2, 14, 5, INK); r(2, 0, 10, 7, INK);

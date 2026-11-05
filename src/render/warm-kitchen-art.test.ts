@@ -54,8 +54,8 @@ beforeAll(() => vi.stubGlobal('document', { createElement: createCanvas }));
 afterAll(() => vi.unstubAllGlobals());
 
 describe('reference A furniture coverage and registration', () => {
-  it('provides distinct, nonempty cached icons for the entire 41-piece catalog', () => {
-    expect(FURNITURE).toHaveLength(41);
+  it('provides distinct, nonempty cached icons for the entire 42-piece catalog', () => {
+    expect(FURNITURE).toHaveLength(42);
     const signatures = new Set<string>();
     for (const def of FURNITURE) {
       const icon = furnitureIcon(def.id);
@@ -72,7 +72,7 @@ describe('reference A furniture coverage and registration', () => {
       plant_fig: [16, 23], plant_snake: [9, 17], coatrack: [10, 28], lamp: [13, 24],
       aframe: [16, 19], bench: [32, 16], catbed: [18, 11], bookshelf: [32, 34],
       armchair: [24, 22], gramophone: [18, 22], piano: [40, 30],
-      sideboard: [30, 26], sofa: [32, 26], round_stool: [14, 18], display_cabinet: [24, 36],
+      sideboard: [30, 26], gingham_table: [30, 20], sofa: [32, 26], round_stool: [14, 18], display_cabinet: [24, 36],
       magazine_rack: [16, 24], coffee_cart: [30, 28],
     };
     for (const [id, [w, h]] of Object.entries(dimensions)) expect(floorFurnitureBounds(id, 100, 140), id).toEqual({ x: 100 - w / 2, y: 141 - h, w, h });

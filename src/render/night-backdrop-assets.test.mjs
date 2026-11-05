@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { artMaster } from '../../scripts/art-files.mjs';
 import { decodePng } from '../../scripts/pixel-conform.mjs';
 import { FLOOR_Y, SCENE_W } from '../game/layout';
 import { nightSkyMask, paintNightSky } from './night-backdrop';
@@ -13,7 +14,7 @@ const scenes = [
 
 describe.each([1, WORLD_ART_DENSITY])('painted night backdrops at density %i', density => {
   it.each(scenes)('repaints warm clouds and preserves flowers, lamps and furnishings in $area', ({ area, clouds, props }) => {
-    const source = decodePng(`public/art/generated/cozy-world-v2/region-${area}.png`);
+    const source = decodePng(artMaster(`public/art/generated/cozy-world-v2/region-${area}.gif`));
     const width = SCENE_W * density, height = FLOOR_Y * density;
     const data = resampleRgba(source.pixels, source.width, source.height, width, height);
     const offset = ([x, y]) => Math.floor(y / source.height * height) * width + Math.floor(x / source.width * width);

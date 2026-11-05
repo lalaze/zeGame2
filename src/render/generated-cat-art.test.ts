@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { inflateSync } from 'node:zlib';
 import { describe, expect, it, vi } from 'vitest';
+import { artMaster, imageSize } from '../../scripts/art-files.mjs';
 import { CATS, type CatId } from '../game/pets';
 import { fineSpriteArt, logicalCrop } from './fine-sprite-art';
 import { createGeneratedCatArt, generatedCatFrameIds, GENERATED_CAT_BREEDS, GENERATED_CAT_ENVELOPE, GENERATED_CAT_FRAME_IDS, GENERATED_CAT_STATES,
@@ -390,8 +391,8 @@ describe('complete generated packs for all twelve cat identities', () => {
     const packed = runtime.catManifests;
     for (const pack of runtime.catManifests) for (const meta of pack.frames) {
       const id = `${pack.breed as CatId}-${meta.state}` as const;
-      const png = readFileSync(new URL(`../../public/art/generated/${runtime.assets[id]}`, import.meta.url));
-      sources[id] = fake(png.readUInt32BE(16), png.readUInt32BE(20));
+      const [width, height] = imageSize(readFileSync(artMaster(`public/art/generated/${runtime.assets[id]}`)));
+      sources[id] = fake(width, height);
     }
     const adapter = create(packed);
     expect(adapter.errors).toEqual([]);

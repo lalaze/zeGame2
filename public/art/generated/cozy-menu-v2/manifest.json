@@ -4,7 +4,7 @@
   "processing": "Rectangular extraction; nearest-neighbor fit; transparent safety border. Original atlas alpha retained without threshold masking or recoloring.",
   "assets": {
     "espresso": {
-      "file": "espresso.png",
+      "file": "espresso.gif",
       "source": "sources/coffee-atlas.png",
       "sourceSize": [
         1254,
@@ -38,7 +38,7 @@
       "sha256": "734a9bfe690132c215a98e22ac8d2947e30e8da066e5f9d907a93ef214f4e5f8"
     },
     "americano": {
-      "file": "americano.png",
+      "file": "americano.gif",
       "source": "sources/coffee-atlas.png",
       "sourceSize": [
         1254,
@@ -72,7 +72,7 @@
       "sha256": "b6759d740dedb55f3c0cb41b21b8f958563c29454a7cd97c131493b77f017fe9"
     },
     "latte": {
-      "file": "latte.png",
+      "file": "latte.gif",
       "source": "sources/coffee-atlas.png",
       "sourceSize": [
         1254,
@@ -106,7 +106,7 @@
       "sha256": "fb67bcec04dfdbf9de84ab295776dadbfd63d9f8792ed6466b4c4de27f4bd77f"
     },
     "cappuccino": {
-      "file": "cappuccino.png",
+      "file": "cappuccino.gif",
       "source": "sources/coffee-atlas.png",
       "sourceSize": [
         1254,
@@ -140,7 +140,7 @@
       "sha256": "2faa6277c9fe940cd4105bbff541a50b0ba51d5ee84c365ef0ae92744ff58e32"
     },
     "flatwhite": {
-      "file": "flatwhite.png",
+      "file": "flatwhite.gif",
       "source": "sources/coffee-atlas.png",
       "sourceSize": [
         1254,
@@ -174,7 +174,7 @@
       "sha256": "9101da060f6a8aaa1268edf7b93cb61b377d2660f85932c8212b11a7d7264f27"
     },
     "cortado": {
-      "file": "cortado.png",
+      "file": "cortado.gif",
       "source": "sources/coffee-atlas.png",
       "sourceSize": [
         1254,
@@ -208,7 +208,7 @@
       "sha256": "3e98fd3e2b353b631a0d26a59a9e3a9bb94ad5eba43a3bdbf984cf142aa07f7a"
     },
     "mocha": {
-      "file": "mocha.png",
+      "file": "mocha.gif",
       "source": "sources/coffee-atlas.png",
       "sourceSize": [
         1254,
@@ -242,7 +242,7 @@
       "sha256": "2628d5cd861f9194cf081b7b5c33f8d540446c0d544150202fb0ab706c1e8c71"
     },
     "vienna": {
-      "file": "vienna.png",
+      "file": "vienna.gif",
       "source": "sources/coffee-atlas.png",
       "sourceSize": [
         1254,
@@ -276,7 +276,7 @@
       "sha256": "11383ca52b1d8e1b98c1c810c12d71824389ada538d853feec7398b5c9b25bc4"
     },
     "macchiato": {
-      "file": "macchiato.png",
+      "file": "macchiato.gif",
       "source": "sources/coffee-atlas.png",
       "sourceSize": [
         1254,
@@ -310,7 +310,7 @@
       "sha256": "37b6ace572343e6b1ef5e8f135527d67e982039580268e3dfc4f99a15b01fa57"
     },
     "coldbrew": {
-      "file": "coldbrew.png",
+      "file": "coldbrew.gif",
       "source": "sources/coffee-atlas.png",
       "sourceSize": [
         1254,
@@ -344,7 +344,7 @@
       "sha256": "7c0e55c462f13db4893b3888d43358b3dbdd7afc1760b75bf4950922e1c158f1"
     },
     "dirty": {
-      "file": "dirty.png",
+      "file": "dirty.gif",
       "source": "sources/coffee-atlas.png",
       "sourceSize": [
         1254,
@@ -378,7 +378,7 @@
       "sha256": "e4c2dc1b27557dd9a641ef471ea2472bf9c154d755bcc761ec77ad504a23819f"
     },
     "pourover": {
-      "file": "pourover.png",
+      "file": "pourover.gif",
       "source": "sources/coffee-atlas.png",
       "sourceSize": [
         1254,
@@ -412,7 +412,7 @@
       "sha256": "276419f0bd6ac864ea8d2bacecb82c05389978333017a709323e1affdc64138b"
     },
     "creamcoffee": {
-      "file": "creamcoffee.png",
+      "file": "creamcoffee.gif",
       "source": "sources/coffee-atlas.png",
       "sourceSize": [
         1254,
@@ -446,7 +446,7 @@
       "sha256": "78f9ee8e9650f94d770d0319a6a5c897f63016d632709c7a65ff75429ac3248f"
     },
     "affogato": {
-      "file": "affogato.png",
+      "file": "affogato.gif",
       "source": "sources/coffee-atlas.png",
       "sourceSize": [
         1254,
@@ -480,7 +480,7 @@
       "sha256": "03eaddf70e1e8cf89c65f8078fd7096d5a8ec093df845f07e0907f8147c3102e"
     },
     "blacktea": {
-      "file": "blacktea.png",
+      "file": "blacktea.gif",
       "source": "sources/drinks-atlas.png",
       "sourceSize": [
         1254,
@@ -514,7 +514,7 @@
       "sha256": "0db675c4312d32c85f059a1e923cb21e2d5353b43d4cc4312e5511810fafff83"
     },
     "hotchoc": {
-      "file": "hotchoc.png",
+      "file": "hotchoc.gif",
       "source": "sources/drinks-atlas.png",
       "sourceSize": [
         1254,
@@ -548,7 +548,7 @@
       "sha256": "6ecfb9fb7cd031098df76e803add6a5cbd9566d56a5465c88a28968d8e4f57a9"
     },
     "lemontea": {
-      "file": "lemontea.png",
+      "file": "lemontea.gif",
       "source": "sources/drinks-atlas.png",
       "sourceSize": [
         1254,
@@ -582,7 +582,7 @@
       "sha256": "ab01febe4db834d5c8b5632d119e6abe84cd70ae093cbbd2d0d8012d90c0d5b2"
     },
     "chai": {
-      "file": "chai.png",
+      "file": "chai.gif",
       "source": "sources/drinks-atlas.png",
       "sourceSize": [
         1254,
@@ -616,7 +616,7 @@
       "sha256": "8bd9258224c0cf79bbda91c160d1c6f53af31e371e53c8b9c947a541a923c22d"
     },
     "fruittea": {
-      "file": "fruittea.png",
+      "file": "fruittea.gif",
       "source": "sources/drinks-atlas.png",
       "sourceSize": [
         1254,
@@ -650,7 +650,7 @@
       "sha256": "d3775ce2f6beef13900a678332448d2ee3680b466f59bd8737b1289667d38205"
     },
     "hojicha": {
-      "file": "hojicha.png",
+      "file": "hojicha.gif",
       "source": "sources/drinks-atlas.png",
       "sourceSize": [
         1254,
@@ -684,7 +684,7 @@
       "sha256": "990d380ad2fc726a07f0ffe0661e7b8883fc4fc00f82550464f88766ec8505be"
     },
     "matcha": {
-      "file": "matcha.png",
+      "file": "matcha.gif",
       "source": "sources/drinks-atlas.png",
       "sourceSize": [
         1254,
@@ -718,7 +718,7 @@
       "sha256": "7ffe867d73b644f962e6b7da5f55db94fdccd360c4f25f330d4377f85057c043"
     },
     "frappe": {
-      "file": "frappe.png",
+      "file": "frappe.gif",
       "source": "sources/drinks-atlas.png",
       "sourceSize": [
         1254,
@@ -752,7 +752,7 @@
       "sha256": "8c6382e38f3c8267748c172d7022e89d04da2948db8edf560f88a983d2b4a48e"
     },
     "smoothie": {
-      "file": "smoothie.png",
+      "file": "smoothie.gif",
       "source": "sources/drinks-atlas.png",
       "sourceSize": [
         1254,
@@ -786,7 +786,7 @@
       "sha256": "dc12f968a713689aadab977fb7160f57973a05074297ac7d5fe4831018fd475c"
     },
     "milktea": {
-      "file": "milktea.png",
+      "file": "milktea.gif",
       "source": "sources/drinks-atlas.png",
       "sourceSize": [
         1254,
@@ -820,7 +820,7 @@
       "sha256": "4d8246b40565e63aff147d56ff3d0b1cdad0f102223e52d8427e867eb259b999"
     },
     "matchafloat": {
-      "file": "matchafloat.png",
+      "file": "matchafloat.gif",
       "source": "sources/drinks-atlas.png",
       "sourceSize": [
         1254,
@@ -854,7 +854,7 @@
       "sha256": "85a0b59574a53b17f995071c99d2a5c145f72c2c6eb83c53681fd8f87448883e"
     },
     "roll": {
-      "file": "roll.png",
+      "file": "roll.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -888,7 +888,7 @@
       "sha256": "d1dc7ec2e54132516daf4a3c34f68ce106af33a6fd0299cd7f5b2d7fc5b79f49"
     },
     "bagel": {
-      "file": "bagel.png",
+      "file": "bagel.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -922,7 +922,7 @@
       "sha256": "a2115a28fb9c281ed3b69031a69145a87250870ad0422f9bb4ca4bd3bd126494"
     },
     "baguette": {
-      "file": "baguette.png",
+      "file": "baguette.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -956,7 +956,7 @@
       "sha256": "b868fa7abf8495e16a6b993f338998cf5e3e6bf5c8ad5878c31d85d9d699cae7"
     },
     "cheesebun": {
-      "file": "cheesebun.png",
+      "file": "cheesebun.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -990,7 +990,7 @@
       "sha256": "35182a622daca8751b434bbc409d199ce78247c17c1310d1f6ca6b1caae57616"
     },
     "pretzel": {
-      "file": "pretzel.png",
+      "file": "pretzel.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -1024,7 +1024,7 @@
       "sha256": "ef860fc93ee85bab786faaa83087487ad651b87b45f18686ef0d86b739b8fc4f"
     },
     "focaccia": {
-      "file": "focaccia.png",
+      "file": "focaccia.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -1058,7 +1058,7 @@
       "sha256": "2e99b7556d8be73f89d7f66eff8835851a754a95b25113096dcaf94a6fa0b7ad"
     },
     "ciabatta": {
-      "file": "ciabatta.png",
+      "file": "ciabatta.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -1092,7 +1092,7 @@
       "sha256": "907097c076007536fad931af92815a43fc6dc3e4d20eb76ddb48ec62d7f15406"
     },
     "raisinbread": {
-      "file": "raisinbread.png",
+      "file": "raisinbread.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -1126,7 +1126,7 @@
       "sha256": "311b8c2f091139152522602b48e376b3990295c4571a76aeb9729320b501093f"
     },
     "sourdough": {
-      "file": "sourdough.png",
+      "file": "sourdough.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -1160,7 +1160,7 @@
       "sha256": "d3216c12a3520d1a28d9576dfa73bddd10b5dea48d3965afc7a0e035d5da4e9d"
     },
     "rye": {
-      "file": "rye.png",
+      "file": "rye.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -1194,7 +1194,7 @@
       "sha256": "948511251c688ce1380a7720d5bd38f3d3c3f36f4afb38d058444f18885419f2"
     },
     "chocobread": {
-      "file": "chocobread.png",
+      "file": "chocobread.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -1228,7 +1228,7 @@
       "sha256": "9e9f0570f5fe818b8afbb03ff5fcae7190501116dba09aceb20ed098e3ddf6e0"
     },
     "shokupan": {
-      "file": "shokupan.png",
+      "file": "shokupan.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -1262,7 +1262,7 @@
       "sha256": "04808114f8e7e69778479f46bb827000cb7dcf8b033924ad7986060cc0ca129d"
     },
     "brioche": {
-      "file": "brioche.png",
+      "file": "brioche.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -1296,7 +1296,7 @@
       "sha256": "9aba10416c7b274c7bfe0745224448b21675f17c6e3223ab3dffeb330b277723"
     },
     "fruitbrioche": {
-      "file": "fruitbrioche.png",
+      "file": "fruitbrioche.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -1330,7 +1330,7 @@
       "sha256": "c6d52284b744460623c2d4fff48ae39ab7551c6dd6f4afcdd9f33d4ac5857ba9"
     },
     "garlicbread": {
-      "file": "garlicbread.png",
+      "file": "garlicbread.gif",
       "source": "sources/bread-atlas.png",
       "sourceSize": [
         1254,
@@ -1364,7 +1364,7 @@
       "sha256": "247d8947796d66dac60fb6309bfce957cbf05453d23acd8b31092eee46d13e60"
     },
     "donut": {
-      "file": "donut.png",
+      "file": "donut.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1398,7 +1398,7 @@
       "sha256": "f0e1beb2a0a98aa6ed67bec2e41928c445e25f4053b6fd9508c046030464a6fe"
     },
     "scone": {
-      "file": "scone.png",
+      "file": "scone.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1432,7 +1432,7 @@
       "sha256": "8f6831062a7b8f0b48e27ca3c3a5cf5ad761be1ebeac974b3b36ab048e3f5fa6"
     },
     "cookie": {
-      "file": "cookie.png",
+      "file": "cookie.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1466,7 +1466,7 @@
       "sha256": "c8db8471ed2b87e889f426f61c2aef150b0ed3a9609aa74fbd5d73620a0ac7d7"
     },
     "croissant": {
-      "file": "croissant.png",
+      "file": "croissant.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1500,7 +1500,7 @@
       "sha256": "38f31ef8aef9ef6da1e7f1c0edeed688b3a36852db4c1fa0535b5fc543c2fb69"
     },
     "painchoc": {
-      "file": "painchoc.png",
+      "file": "painchoc.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1534,7 +1534,7 @@
       "sha256": "c7c85e80855b2829bbc8c4b625d8f71e711bcaca193e749fbfabf07e2710888f"
     },
     "brownie": {
-      "file": "brownie.png",
+      "file": "brownie.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1568,7 +1568,7 @@
       "sha256": "67e80005cefa29e2262149c9ca0be8616bd0f3b17850fcb5aa10a8460709c124"
     },
     "cinnamon": {
-      "file": "cinnamon.png",
+      "file": "cinnamon.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1602,7 +1602,7 @@
       "sha256": "ba4e026bf112a49601a14359a235776c2566b2695a09e0e4a6fed8a692f21000"
     },
     "muffin": {
-      "file": "muffin.png",
+      "file": "muffin.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1636,7 +1636,7 @@
       "sha256": "66b3269ced5071a137100838571e57b3c6c336a838c060b3434ae57a70327e3e"
     },
     "creampuff": {
-      "file": "creampuff.png",
+      "file": "creampuff.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1670,7 +1670,7 @@
       "sha256": "3e2bcc5bcf8652b84806af2e8ed8f508ba3d25fb58f3a6c51706f6063729c1cd"
     },
     "melonpan": {
-      "file": "melonpan.png",
+      "file": "melonpan.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1704,7 +1704,7 @@
       "sha256": "3af81d5b1fa2ccbfa621779ed93287007744bfbef1fe3d17963384082548bfe5"
     },
     "eggtart": {
-      "file": "eggtart.png",
+      "file": "eggtart.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1738,7 +1738,7 @@
       "sha256": "e5a153c1a9c6309d77120b53eb043e72a2498a4eabcb1b6f9c4a0f625671e725"
     },
     "cake": {
-      "file": "cake.png",
+      "file": "cake.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1772,7 +1772,7 @@
       "sha256": "ec593e57a19fbfabeccdf02d7ebab08c7af8060fc7b03a2e4c1a5fe11b0d38a7"
     },
     "swissroll": {
-      "file": "swissroll.png",
+      "file": "swissroll.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1806,7 +1806,7 @@
       "sha256": "a9a7568d14937cd329763e293c0f91e3971dc0de2d585dd16f3462859adc0295"
     },
     "cheesecake": {
-      "file": "cheesecake.png",
+      "file": "cheesecake.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1840,7 +1840,7 @@
       "sha256": "e5004c2ac808fb167195c21fb65f9020529ca6c0063e3449d4751eb513567c94"
     },
     "macaron": {
-      "file": "macaron.png",
+      "file": "macaron.gif",
       "source": "sources/dessert-atlas.png",
       "sourceSize": [
         1254,
@@ -1874,7 +1874,7 @@
       "sha256": "84589fcd5e7fe8e98c894c7012dd1c008b6cfe51627a3a59269cb9175e98d1f1"
     },
     "ingredient-beans": {
-      "file": "ingredient-beans.png",
+      "file": "ingredient-beans.gif",
       "source": "sources/pantry-atlas.png",
       "sourceSize": [
         1254,
@@ -1908,7 +1908,7 @@
       "sha256": "8a50eef789b7e3e2962215a53bd283145ca2bc1ce10ed063dcff3636b97a82eb"
     },
     "ingredient-milk": {
-      "file": "ingredient-milk.png",
+      "file": "ingredient-milk.gif",
       "source": "sources/pantry-atlas.png",
       "sourceSize": [
         1254,
@@ -1942,7 +1942,7 @@
       "sha256": "56e874de26244c107b71da0a35dd216d747bfc7c3f203030aa98b28bc04cd758"
     },
     "ingredient-flour": {
-      "file": "ingredient-flour.png",
+      "file": "ingredient-flour.gif",
       "source": "sources/pantry-atlas.png",
       "sourceSize": [
         1254,
@@ -1976,7 +1976,7 @@
       "sha256": "b28938dd974a72d70a39649ba8101d55a6443810a02cb1e23114a07f02194e2e"
     },
     "ingredient-butter": {
-      "file": "ingredient-butter.png",
+      "file": "ingredient-butter.gif",
       "source": "sources/pantry-atlas.png",
       "sourceSize": [
         1254,
@@ -2010,7 +2010,7 @@
       "sha256": "07de5305b9bda50881b6e362bc6c70cfe3d3b1a6f893f76c8576328a7c6adfaa"
     },
     "ingredient-eggs": {
-      "file": "ingredient-eggs.png",
+      "file": "ingredient-eggs.gif",
       "source": "sources/pantry-atlas.png",
       "sourceSize": [
         1254,
@@ -2044,7 +2044,7 @@
       "sha256": "8a2d3ecb646c49177003a93be5b9e42373bda8ede338c45e9d51e8b8b73e9f87"
     },
     "ingredient-sugar": {
-      "file": "ingredient-sugar.png",
+      "file": "ingredient-sugar.gif",
       "source": "sources/pantry-atlas.png",
       "sourceSize": [
         1254,
@@ -2078,7 +2078,7 @@
       "sha256": "af4fc23f915f4ceefb71221fc6d258e20ab8514b3762b9c7f1b4dc26011c59d3"
     },
     "ingredient-tea": {
-      "file": "ingredient-tea.png",
+      "file": "ingredient-tea.gif",
       "source": "sources/pantry-atlas.png",
       "sourceSize": [
         1254,
@@ -2112,7 +2112,7 @@
       "sha256": "2790ee8d7f24b05af210287f46ce69dc4e50db1c943c9b36daab68dcca2463cc"
     },
     "ingredient-spice": {
-      "file": "ingredient-spice.png",
+      "file": "ingredient-spice.gif",
       "source": "sources/pantry-atlas.png",
       "sourceSize": [
         1254,
@@ -2146,7 +2146,7 @@
       "sha256": "5f9a0c8f0257aa1fa1854434ee07d75475b3b34ca52ab412e4897d7ed20ad5c5"
     },
     "ingredient-cocoa": {
-      "file": "ingredient-cocoa.png",
+      "file": "ingredient-cocoa.gif",
       "source": "sources/pantry-atlas.png",
       "sourceSize": [
         1254,
@@ -2180,7 +2180,7 @@
       "sha256": "33c179cdd92f3058b0c7269a0e00c631fa3c13646560acf5e7157c4a02631d67"
     },
     "ingredient-cream": {
-      "file": "ingredient-cream.png",
+      "file": "ingredient-cream.gif",
       "source": "sources/pantry-atlas.png",
       "sourceSize": [
         1254,
@@ -2214,7 +2214,7 @@
       "sha256": "4112f5ddbdfad27c33ca9ab6ed1a86fa66438fa30beafd491546b34dbcde62b3"
     },
     "ingredient-fruit": {
-      "file": "ingredient-fruit.png",
+      "file": "ingredient-fruit.gif",
       "source": "sources/pantry-atlas.png",
       "sourceSize": [
         1254,
@@ -2248,7 +2248,7 @@
       "sha256": "05226f0334f1c4abd461c585eb19db37984fa56315edb06f1ea6a2538448b1f9"
     },
     "ingredient-matcha": {
-      "file": "ingredient-matcha.png",
+      "file": "ingredient-matcha.gif",
       "source": "sources/pantry-atlas.png",
       "sourceSize": [
         1254,

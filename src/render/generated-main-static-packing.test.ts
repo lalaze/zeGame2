@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { artMaster, imageSize } from '../../scripts/art-files.mjs';
 import archive from '../../assets/generated/original-main-static-v1/manifest.json';
 import catalog from '../../assets/generated/runtime-catalog-v1/catalog.json';
 import runtime from '../../assets/generated/runtime-catalog-v1/runtime.json';
@@ -18,15 +19,15 @@ import { WINDOWS } from '../game/layout';
 type StaticId = keyof typeof runtime.mainStaticMetadata;
 const ids = Object.keys(runtime.mainStaticMetadata) as StaticId[];
 const foods = ['espresso', 'latte', 'eggtart', 'croissant', 'cake'] as const;
-const retained = { 'cabinet-top': 'main-v1/cabinet-top.png', 'cabinet-front': 'main-v1/cabinet-front.png',
-  plant: 'main-v1/plant.png', table: 'main-v2/table-no-vase.png', 'chair-right': 'main-v2/chair-facing-right.png',
-  'chair-left': 'main-v2/chair-facing-left.png', vase: 'main-v2/flower-vase.png' } as const;
-const fileBytes = (file: string) => readFileSync(new URL(`../../${file}`, import.meta.url));
+const retained = { 'cabinet-top': 'main-v1/cabinet-top.gif', 'cabinet-front': 'main-v1/cabinet-front.gif',
+  plant: 'main-v1/plant.png', table: 'main-v2/table-no-vase.gif', 'chair-right': 'main-v2/chair-facing-right.gif',
+  'chair-left': 'main-v2/chair-facing-left.gif', vase: 'main-v2/flower-vase.png' } as const;
+const fileBytes = (file: string) => readFileSync(new URL(`../../${artMaster(file)}`, import.meta.url));
 const hash = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 // Archive comparisons exercise the frozen v1 export, independently of whichever
 // generation the live registry currently selects. Current overrides are tested below.
 const fileFor = (id: StaticId, packed: boolean) => packed ? `public/art/generated/${runtime.assets[id]}` : archive.images.find(row => row.key === id)!.file;
-const size = (file: string) => { const png = fileBytes(file); return [png.readUInt32BE(16), png.readUInt32BE(20)] as const; };
+const size = (file: string) => imageSize(fileBytes(file)) as [number, number];
 type Source = HTMLCanvasElement & { assetId?: string };
 const fakeSource = (id: string, width: number, height: number) => ({ assetId: id, width, height }) as Source;
 const metadata = runtime.mainStaticMetadata as Readonly<Record<StaticId, GeneratedRasterMetadata>>;
@@ -91,7 +92,7 @@ describe('main static archive and exact production geometry', () => {
       expect(original.length).toBe(entry.bytes); expect(hash(original)).toBe(entry.sha256);
       expect(row.source).toBe(entry.file); expect(row.sourceSha256).toBe(entry.sha256);
       expect(hash(fileBytes(row.file))).toBe(row.sha256);
-      expect(`public/art/generated/${runtime.assets[entry.key as StaticId]}`).toBe(row.file);
+      expect(artMaster(`public/art/generated/${runtime.assets[entry.key as StaticId]}`)).toBe(artMaster(row.file));
       expect(row.file).not.toBe(entry.previousPublicFile);
     }
     for (const [id, path] of Object.entries(retained)) {
@@ -139,7 +140,7 @@ describe('current cozy replacements remain compatible with authored geometry', (
 
   it.each(redraws)('selects redrawn %s pixels while preserving its coordinate and destination contract', id => {
     const expected = `${(foods as readonly string[]).includes(id) ? 'cozy-menu-v2' : 'cozy-world-v2'}/${id}.png`;
-    expect(GENERATED_MAIN_ASSETS[id]).toBe(expected);
+    expect(artMaster(`public/art/generated/${GENERATED_MAIN_ASSETS[id]}`)).toBe(artMaster(`public/art/generated/${expected}`));
     const file = `public/art/generated/${expected}`, dimensions = size(file), meta = metadata[id];
     expect(hash(fileBytes(file))).not.toBe(hash(fileBytes(fileFor(id, true))));
     // New art uses the same authored canvas, so old attachment coordinates and

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { test } from 'vitest';
 const read = path => readFileSync(path, 'utf8');
 test('coherent atlas is a production asset and all four isolated parts are decoded', () => {
-  assert.match(read('src/render/generated-main-art.ts'), /'cozy-cafe-atlas': 'cozy-cafe-v1\/furniture-atlas.png'/);
+  assert.match(read('src/render/generated-main-art.ts'), /'cozy-cafe-atlas': 'cozy-cafe-v1\/furniture-atlas.gif'/);
   const source = read('src/render/cozy-cafe-art.ts');
   assert.match(source, /\['table', 'chair', 'cabinet', 'window'\]/);
   assert.match(source, /current !== source/);

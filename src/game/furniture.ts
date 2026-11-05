@@ -62,6 +62,7 @@ export const FURNITURE: readonly FurnitureDef[] = [
   { id: 'lantern', category: 'decoration', surface: 'floor', w: 2, h: 1, cost: 650, comfort: 5 },
   { id: 'bean_display', category: 'decoration', surface: 'floor', w: 3, h: 1, cost: 950, comfort: 6 },
   { id: 'sideboard', category: 'furniture', surface: 'floor', w: 4, h: 2, cost: 1800, comfort: 6 },
+  { id: 'gingham_table', category: 'furniture', surface: 'floor', w: 4, h: 2, cost: 2400, comfort: 7 },
   { id: 'sofa', category: 'furniture', surface: 'floor', w: 4, h: 2, cost: 3500, comfort: 8 },
   { id: 'round_stool', category: 'furniture', surface: 'floor', w: 2, h: 1, cost: 320, comfort: 3 },
   { id: 'display_cabinet', category: 'furniture', surface: 'floor', w: 3, h: 2, cost: 6500, comfort: 9 },

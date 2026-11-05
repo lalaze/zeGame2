@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { inflateSync } from 'node:zlib';
+import { artMaster } from '../../scripts/art-files.mjs';
 import { DECOR } from '../game/decor';
 import { fineSpriteArt } from './fine-sprite-art';
 import { createGeneratedDecorArt, GENERATED_COUNTER_BANDS, GENERATED_DECOR_ASSETS, GENERATED_DECOR_CATALOG, GENERATED_DECOR_IDS,
@@ -72,7 +73,7 @@ describe('generated decor materials and props adapter', () => {
     const manifest = JSON.parse(readFileSync('assets/generated/bulk-candidates/decor-materials/renderer-manifest.json', 'utf8'));
     for (const entry of [...manifest.assets, ...manifest.aliases]) {
       const key = `${entry.id}-${entry.state}` as GeneratedDecorSourceId, meta = GENERATED_DECOR_CATALOG[key];
-      const bytes = readFileSync(resolve('assets/generated/bulk-candidates/decor-materials', entry.file));
+      const bytes = readFileSync(artMaster(resolve('assets/generated/bulk-candidates/decor-materials', entry.file)));
       expect([bytes.readUInt32BE(16), bytes.readUInt32BE(20)]).toEqual(meta.size);
       expect(meta.anchor).toEqual(entry.anchor);
       expect(GENERATED_DECOR_ASSETS[key]).toBe(`catalog-v1/decor/${key}.png`);
@@ -189,7 +190,7 @@ describe('generated decor materials and props adapter', () => {
       const key = `${entry.id}-${entry.state}` as GeneratedDecorSourceId, crop = GENERATED_COUNTER_BANDS[key]!;
       for (const path of [resolve('assets/generated/bulk-candidates/decor-materials', entry.file),
         resolve('public/art/generated', GENERATED_DECOR_ASSETS[key])]) {
-        const image = pngPixels(path), meta = GENERATED_DECOR_CATALOG[key];
+        const image = pngPixels(artMaster(path)), meta = GENERATED_DECOR_CATALOG[key];
         const sx = Math.max(image.w, image.h) / Math.max(...meta.size), sy = sx;
         const left = Math.ceil(crop.repeatX * sx), right = Math.floor((crop.repeatX + crop.repeatW) * sx);
         const top = Math.ceil(crop.y * sy), bottom = Math.floor((crop.y + crop.h) * sy);

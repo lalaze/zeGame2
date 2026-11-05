@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { createInitialState, type GameState } from '../game/state';
 import type { GeneratedMainId } from './generated-main-art';
+import { imageSize } from '../../scripts/art-files.mjs';
 
 // Leave the generated registry and RoomPainter logic real. A labeled legacy
 // icon makes the fallback observable without a browser or pixel rasterizer.
@@ -86,17 +87,16 @@ function food(draws: Draw[]): string[] {
 }
 
 describe('generated main-room asset registry and painting', () => {
-  it('references only existing runtime PNGs with positive dimensions', () => {
+  it('references only existing runtime images with positive dimensions', () => {
     const files = Object.values(art.GENERATED_MAIN_ASSETS);
     expect(new Set(files).size).toBe(files.length);
     for (const file of files) {
-      expect(file).toMatch(/^(?:(?:(?:main|main-runner|staff|service|wall|menu|cozy-[a-z]+)-v\d+|customer-0-v1|cat-siamese-v1)\/[a-zA-Z0-9_-]+|catalog-v1\/(?:menu|ingredients|furniture|decor|environment|tableware|signature|main-static|staff-server|staff-owner)\/[a-zA-Z0-9_-]+|catalog-v1\/(?:customers|cats)\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+)\.png$/);
+      expect(file).toMatch(/^(?:(?:(?:main|main-runner|staff|service|wall|menu|cozy-[a-z]+)-v\d+|customer-0-v1|cat-siamese-v1)\/[a-zA-Z0-9_-]+|catalog-v1\/(?:menu|ingredients|furniture|decor|environment|tableware|signature|main-static|staff-server|staff-owner)\/[a-zA-Z0-9_-]+|catalog-v1\/(?:customers|cats)\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+)\.(?:png|gif)$/);
       expect(file.split('/')).not.toContain('sources');
       const bytes = readFileSync(new URL(`../../public/art/generated/${file}`, import.meta.url));
-      expect([...bytes.subarray(0, 8)], file).toEqual([137, 80, 78, 71, 13, 10, 26, 10]);
-      expect(bytes.toString('ascii', 12, 16), file).toBe('IHDR');
-      expect(bytes.readUInt32BE(16), file).toBeGreaterThan(0);
-      expect(bytes.readUInt32BE(20), file).toBeGreaterThan(0);
+      const [width, height] = imageSize(bytes);
+      expect(width, file).toBeGreaterThan(0);
+      expect(height, file).toBeGreaterThan(0);
     }
   });
 

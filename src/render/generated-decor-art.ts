@@ -36,8 +36,8 @@ export const GENERATED_DECOR_CATALOG = {
   'neon_cafe-unlit': {"id":"neon_cafe","state":"unlit","slot":"neon","size":[2091,384],"anchor":{"x":1045.5,"y":192.0,"kind":"wall-center"},"file":"bulk-candidates/decor-props/sprites/neon_cafe.png","kind":"sprite","logicalEnvelope":[42,14]},
   'neon_heart-unlit': {"id":"neon_heart","state":"unlit","slot":"neon","size":[936,841],"anchor":{"x":468.0,"y":420.5,"kind":"wall-center"},"file":"bulk-candidates/decor-props/sprites/neon_heart.png","kind":"sprite","logicalEnvelope":[8,8]},
   'neon_cup-unlit': {"id":"neon_cup","state":"unlit","slot":"neon","size":[1129,1199],"anchor":{"x":564.5,"y":599.5,"kind":"wall-center"},"file":"bulk-candidates/decor-props/sprites/neon_cup.png","kind":"sprite","logicalEnvelope":[9,10]},
-  'counter_oak-top': {"id":"counter_oak","state":"top","slot":"counter","size":[580,60],"anchor":{"x":0,"y":0,"kind":"module-origin"},"file":"main-v1/cabinet-top.png","kind":"counter"},
-  'counter_oak-front': {"id":"counter_oak","state":"front","slot":"counter","size":[190,138],"anchor":{"x":0,"y":0,"kind":"module-origin"},"file":"main-v1/cabinet-front.png","kind":"counter"},
+  'counter_oak-top': {"id":"counter_oak","state":"top","slot":"counter","size":[580,60],"anchor":{"x":0,"y":0,"kind":"module-origin"},"file":"main-v1/cabinet-top.gif","kind":"counter"},
+  'counter_oak-front': {"id":"counter_oak","state":"front","slot":"counter","size":[190,138],"anchor":{"x":0,"y":0,"kind":"module-origin"},"file":"main-v1/cabinet-front.gif","kind":"counter"},
 } as const;
 
 export type GeneratedDecorSourceId = keyof typeof GENERATED_DECOR_CATALOG;

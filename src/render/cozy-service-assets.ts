@@ -1,9 +1,9 @@
 /** Additional service props redrawn from the approved cozy cafe style. */
 export const COZY_SERVICE_ASSETS = {
-  "cozy-grinder": "cozy-service-v2/cozy-grinder.png",
-  "cozy-milk-pitcher": "cozy-service-v2/cozy-milk-pitcher.png",
-  "cozy-cake-dome": "cozy-service-v2/cozy-cake-dome.png",
-  "cozy-table-tent": "cozy-service-v2/cozy-table-tent.png"
+  "cozy-grinder": "cozy-service-v2/cozy-grinder.gif",
+  "cozy-milk-pitcher": "cozy-service-v2/cozy-milk-pitcher.gif",
+  "cozy-cake-dome": "cozy-service-v2/cozy-cake-dome.gif",
+  "cozy-table-tent": "cozy-service-v2/cozy-table-tent.gif"
 } as const;
 
 /** Pixel coordinates in each delivered PNG, including its transparent border. */

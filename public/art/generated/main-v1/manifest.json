@@ -190,9 +190,9 @@
     },
     {
       "id": "cabinet-top",
-      "file": "cabinet-top.png",
+      "file": "cabinet-top.gif",
       "storage": "runtime",
-      "repositoryFile": "public/art/generated/main-v1/cabinet-top.png",
+      "repositoryFile": "public/art/generated/main-v1/cabinet-top.gif",
       "url": "/art/generated/main-v1/cabinet-top.png",
       "source": "furniture",
       "sourceSha256": "de0455009ce45dca677f7aa9a1296891d00f5a84a56feeeb148e3cf241515811",
@@ -266,9 +266,9 @@
     },
     {
       "id": "cabinet-front",
-      "file": "cabinet-front.png",
+      "file": "cabinet-front.gif",
       "storage": "runtime",
-      "repositoryFile": "public/art/generated/main-v1/cabinet-front.png",
+      "repositoryFile": "public/art/generated/main-v1/cabinet-front.gif",
       "url": "/art/generated/main-v1/cabinet-front.png",
       "source": "furniture",
       "sourceSha256": "de0455009ce45dca677f7aa9a1296891d00f5a84a56feeeb148e3cf241515811",

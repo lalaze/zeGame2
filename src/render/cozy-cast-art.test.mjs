@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import fs from 'node:fs';
 import { installOfflineCanvas } from '../../scripts/cast-offline-canvas.mjs';
+import { artMaster } from '../../scripts/art-files.mjs';
 import { decodePng } from '../../scripts/pixel-conform.mjs';
 import { batchCharactersReady, clearBatchCharacters, makeBatchCharacter, preloadBatchCharacters, validateCastManifest } from './cozy-cast-art';
 import { fineSpriteArt } from './fine-sprite-art';
@@ -131,8 +132,8 @@ describe('whole-figure density-2 guest family', () => {
   });
   it('preserves the authored complete figure without relocating or stretching its head', () => {
     for (const design of CUSTOMER_CAST) {
-      const sheet = manifest().characters[design.id], walking = decodePng(base + sheet.file);
-      const dining = decodePng(diningBase + diningManifest().characters[design.id].file);
+      const sheet = manifest().characters[design.id], walking = decodePng(artMaster(base + sheet.file));
+      const dining = decodePng(artMaster(diningBase + diningManifest().characters[design.id].file));
       const frames = makeBatchCharacter(design.look, 'customer', design.id, () => {});
       const ordered = [...frames.down, ...frames.up, ...frames.right, frames.sitRight, ...frames.sitPetRight];
       for (const [index, frame] of ordered.entries()) {

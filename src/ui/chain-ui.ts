@@ -12,8 +12,8 @@ import { showModal, toast } from './modal';
 
 const ART = `${import.meta.env.BASE_URL}art/generated/cozy-idle-v1/`;
 /** The little storefront that stands for a place on the map and in the chain card. */
-export const shopImage = (place: LocationId) => `${ART}shop-${place}.png`;
-export const perkImage = (id: PerkId) => `${ART}perk-${id}.png`;
+export const shopImage = (place: LocationId) => `${ART}shop-${place}.gif`;
+export const perkImage = (id: PerkId) => `${ART}perk-${id}.gif`;
 
 const pct = (share: number) => Math.round(share * 100);
 const hours = (h: number) => Math.round(h * 10) / 10;

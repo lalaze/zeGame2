@@ -10,7 +10,7 @@
   "breeds": [
     {
       "breed": "ginger",
-      "file": "ginger.png",
+      "file": "ginger.gif",
       "size": [
         1254,
         1254
@@ -344,7 +344,7 @@
     },
     {
       "breed": "tuxedo",
-      "file": "tuxedo.png",
+      "file": "tuxedo.gif",
       "size": [
         1254,
         1254
@@ -678,7 +678,7 @@
     },
     {
       "breed": "calico",
-      "file": "calico.png",
+      "file": "calico.gif",
       "size": [
         1254,
         1254
@@ -1012,7 +1012,7 @@
     },
     {
       "breed": "tabby",
-      "file": "tabby.png",
+      "file": "tabby.gif",
       "size": [
         1254,
         1254
@@ -1346,7 +1346,7 @@
     },
     {
       "breed": "black",
-      "file": "black.png",
+      "file": "black.gif",
       "size": [
         1254,
         1254
@@ -1680,7 +1680,7 @@
     },
     {
       "breed": "white",
-      "file": "white.png",
+      "file": "white.gif",
       "size": [
         1254,
         1254
@@ -2014,7 +2014,7 @@
     },
     {
       "breed": "british",
-      "file": "british.png",
+      "file": "british.gif",
       "size": [
         1254,
         1254
@@ -2348,7 +2348,7 @@
     },
     {
       "breed": "american",
-      "file": "american.png",
+      "file": "american.gif",
       "size": [
         1254,
         1254
@@ -2682,7 +2682,7 @@
     },
     {
       "breed": "siamese",
-      "file": "siamese.png",
+      "file": "siamese.gif",
       "size": [
         1254,
         1254
@@ -3016,7 +3016,7 @@
     },
     {
       "breed": "ragdoll",
-      "file": "ragdoll.png",
+      "file": "ragdoll.gif",
       "size": [
         1254,
         1254
@@ -3350,7 +3350,7 @@
     },
     {
       "breed": "persian",
-      "file": "persian.png",
+      "file": "persian.gif",
       "size": [
         1254,
         1254
@@ -3684,7 +3684,7 @@
     },
     {
       "breed": "mainecoon",
-      "file": "mainecoon.png",
+      "file": "mainecoon.gif",
       "size": [
         1254,
         1254

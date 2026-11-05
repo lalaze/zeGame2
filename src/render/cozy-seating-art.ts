@@ -43,7 +43,7 @@ export function preloadSeatingEnsemble():Promise<void> {
   if(atlas&&petAtlas&&idleAtlas&&tableAtlas)return Promise.resolve();
   if(pending)return pending;
   const generation=epoch;
-  const files=['ensemble.png','petting.png','idle-v4.png'].map(name=>'art/generated/cozy-seating-v3/'+name);
+  const files=['ensemble.gif','petting.gif','idle-v4.gif'].map(name=>'art/generated/cozy-seating-v3/'+name);
   files.push(diningTable.file);
   pending=Promise.all(files.map(async file=>{
     const image=new Image();image.src=import.meta.env.BASE_URL+file;

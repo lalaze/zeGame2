@@ -1,3 +1,4 @@
+import { artMaster } from './art-files.mjs';
 import { decodePng } from './pixel-conform.mjs';
 
 export class RasterCanvas {
@@ -77,7 +78,7 @@ export function installOfflineCanvas() {
   globalThis.HTMLCanvasElement = RasterCanvas;
   globalThis.ImageData = class { constructor(data, width, height) { Object.assign(this, { data, width, height }); } };
   globalThis.Image = globalThis.HTMLImageElement = class {
-    async decode() { const decoded = decodePng('public/' + this.src.replace(/^\//, '')); Object.assign(this, decoded, { naturalWidth: decoded.width, naturalHeight: decoded.height }); }
+    async decode() { const decoded = decodePng(artMaster('public/' + this.src.replace(/^\//, ''))); Object.assign(this, decoded, { naturalWidth: decoded.width, naturalHeight: decoded.height }); }
   };
   globalThis.document = { createElement: name => { if (name !== 'canvas') throw Error('Offline canvas only'); return new RasterCanvas(); } };
 }

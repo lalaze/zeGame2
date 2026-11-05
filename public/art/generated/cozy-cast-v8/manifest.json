@@ -6,7 +6,7 @@
   "characters": [
     {
       "id": 0,
-      "file": "../cozy-cast-v7/customer-0.png",
+      "file": "../cozy-cast-v7/customer-0.gif",
       "source": "sources/group-0.png",
       "scale": 0.37142857142857144,
       "seatedScale": 0.37142857142857144,
@@ -387,7 +387,7 @@
     },
     {
       "id": 1,
-      "file": "../cozy-cast-v7/customer-1.png",
+      "file": "../cozy-cast-v7/customer-1.gif",
       "source": "sources/group-1.png",
       "scale": 0.3561643835616438,
       "seatedScale": 0.3561643835616438,
@@ -768,7 +768,7 @@
     },
     {
       "id": 2,
-      "file": "../cozy-cast-v7/customer-2.png",
+      "file": "../cozy-cast-v7/customer-2.gif",
       "source": "sources/group-1.png",
       "scale": 0.35294117647058826,
       "seatedScale": 0.35294117647058826,
@@ -1149,7 +1149,7 @@
     },
     {
       "id": 3,
-      "file": "../cozy-cast-v7/customer-3.png",
+      "file": "../cozy-cast-v7/customer-3.gif",
       "source": "sources/group-1.png",
       "scale": 0.39195979899497485,
       "seatedScale": 0.39195979899497485,
@@ -1530,7 +1530,7 @@
     },
     {
       "id": 4,
-      "file": "../cozy-cast-v7/customer-4.png",
+      "file": "../cozy-cast-v7/customer-4.gif",
       "source": "sources/group-2.png",
       "scale": 0.3786407766990291,
       "seatedScale": 0.3786407766990291,
@@ -1911,7 +1911,7 @@
     },
     {
       "id": 5,
-      "file": "../cozy-cast-v7/customer-5.png",
+      "file": "../cozy-cast-v7/customer-5.gif",
       "source": "sources/group-2.png",
       "scale": 0.37681159420289856,
       "seatedScale": 0.37681159420289856,
@@ -2292,7 +2292,7 @@
     },
     {
       "id": 6,
-      "file": "../cozy-cast-v7/customer-6.png",
+      "file": "../cozy-cast-v7/customer-6.gif",
       "source": "sources/group-2.png",
       "scale": 0.3880597014925373,
       "seatedScale": 0.3880597014925373,
@@ -2673,7 +2673,7 @@
     },
     {
       "id": 7,
-      "file": "../cozy-cast-v7/customer-7.png",
+      "file": "../cozy-cast-v7/customer-7.gif",
       "source": "sources/group-3.png",
       "scale": 0.37320574162679426,
       "seatedScale": 0.37320574162679426,
@@ -3054,7 +3054,7 @@
     },
     {
       "id": 8,
-      "file": "../cozy-cast-v7/customer-8.png",
+      "file": "../cozy-cast-v7/customer-8.gif",
       "source": "sources/group-3.png",
       "scale": 0.375,
       "seatedScale": 0.375,
@@ -3435,7 +3435,7 @@
     },
     {
       "id": 9,
-      "file": "../cozy-cast-v7/customer-9.png",
+      "file": "../cozy-cast-v7/customer-9.gif",
       "source": "sources/group-3.png",
       "scale": 0.4105263157894737,
       "seatedScale": 0.4105263157894737,
@@ -3816,7 +3816,7 @@
     },
     {
       "id": 10,
-      "file": "../cozy-cast-v7/customer-10.png",
+      "file": "../cozy-cast-v7/customer-10.gif",
       "source": "sources/group-4.png",
       "scale": 0.3880597014925373,
       "seatedScale": 0.3880597014925373,
@@ -4197,7 +4197,7 @@
     },
     {
       "id": 11,
-      "file": "../cozy-cast-v7/customer-11.png",
+      "file": "../cozy-cast-v7/customer-11.gif",
       "source": "sources/group-4.png",
       "scale": 0.38613861386138615,
       "seatedScale": 0.38613861386138615,
@@ -4578,7 +4578,7 @@
     },
     {
       "id": 12,
-      "file": "../cozy-cast-v7/customer-12.png",
+      "file": "../cozy-cast-v7/customer-12.gif",
       "source": "sources/group-4.png",
       "scale": 0.3979591836734694,
       "seatedScale": 0.3979591836734694,
@@ -4959,7 +4959,7 @@
     },
     {
       "id": 13,
-      "file": "../cozy-cast-v7/customer-13.png",
+      "file": "../cozy-cast-v7/customer-13.gif",
       "source": "sources/group-5.png",
       "scale": 0.35294117647058826,
       "seatedScale": 0.35294117647058826,
@@ -5340,7 +5340,7 @@
     },
     {
       "id": 14,
-      "file": "../cozy-cast-v7/customer-14.png",
+      "file": "../cozy-cast-v7/customer-14.gif",
       "source": "sources/group-5.png",
       "scale": 0.39,
       "seatedScale": 0.39,
@@ -5721,7 +5721,7 @@
     },
     {
       "id": 15,
-      "file": "../cozy-cast-v7/customer-15.png",
+      "file": "../cozy-cast-v7/customer-15.gif",
       "source": "sources/group-5.png",
       "scale": 0.38613861386138615,
       "seatedScale": 0.38613861386138615,
@@ -6102,7 +6102,7 @@
     },
     {
       "id": 16,
-      "file": "../cozy-cast-v7/customer-16.png",
+      "file": "../cozy-cast-v7/customer-16.gif",
       "source": "sources/group-6.png",
       "scale": 0.3786407766990291,
       "seatedScale": 0.3786407766990291,
@@ -6483,7 +6483,7 @@
     },
     {
       "id": 17,
-      "file": "../cozy-cast-v7/customer-17.png",
+      "file": "../cozy-cast-v7/customer-17.gif",
       "source": "sources/group-0.png",
       "scale": 0.39,
       "seatedScale": 0.39,
@@ -6864,7 +6864,7 @@
     },
     {
       "id": 18,
-      "file": "../cozy-cast-v7/customer-18.png",
+      "file": "../cozy-cast-v7/customer-18.gif",
       "source": "sources/group-6.png",
       "scale": 0.3577981651376147,
       "seatedScale": 0.3577981651376147,
@@ -7245,7 +7245,7 @@
     },
     {
       "id": 19,
-      "file": "../cozy-cast-v7/customer-19.png",
+      "file": "../cozy-cast-v7/customer-19.gif",
       "source": "sources/group-6.png",
       "scale": 0.35944700460829493,
       "seatedScale": 0.35944700460829493,
@@ -7626,7 +7626,7 @@
     },
     {
       "id": 20,
-      "file": "../cozy-cast-v7/customer-20.png",
+      "file": "../cozy-cast-v7/customer-20.gif",
       "source": "sources/group-7.png",
       "scale": 0.3696682464454976,
       "seatedScale": 0.3696682464454976,
@@ -8007,7 +8007,7 @@
     },
     {
       "id": 21,
-      "file": "../cozy-cast-v7/customer-21.png",
+      "file": "../cozy-cast-v7/customer-21.gif",
       "source": "sources/group-7.png",
       "scale": 0.3696682464454976,
       "seatedScale": 0.3696682464454976,
@@ -8388,7 +8388,7 @@
     },
     {
       "id": 22,
-      "file": "../cozy-cast-v7/customer-22.png",
+      "file": "../cozy-cast-v7/customer-22.gif",
       "source": "sources/group-7.png",
       "scale": 0.39593908629441626,
       "seatedScale": 0.39593908629441626,
@@ -8769,7 +8769,7 @@
     },
     {
       "id": 23,
-      "file": "../cozy-cast-v7/customer-23.png",
+      "file": "../cozy-cast-v7/customer-23.gif",
       "source": "sources/group-8.png",
       "scale": 0.3561643835616438,
       "seatedScale": 0.3561643835616438,
@@ -9150,7 +9150,7 @@
     },
     {
       "id": 24,
-      "file": "../cozy-cast-v7/customer-24.png",
+      "file": "../cozy-cast-v7/customer-24.gif",
       "source": "sources/group-8.png",
       "scale": 0.34977578475336324,
       "seatedScale": 0.34977578475336324,
@@ -9531,7 +9531,7 @@
     },
     {
       "id": 25,
-      "file": "../cozy-cast-v7/customer-25.png",
+      "file": "../cozy-cast-v7/customer-25.gif",
       "source": "sources/group-8.png",
       "scale": 0.3939393939393939,
       "seatedScale": 0.3939393939393939,
@@ -9912,7 +9912,7 @@
     },
     {
       "id": 26,
-      "file": "../cozy-cast-v7/customer-26.png",
+      "file": "../cozy-cast-v7/customer-26.gif",
       "source": "sources/group-9.png",
       "scale": 0.3786407766990291,
       "seatedScale": 0.3786407766990291,
@@ -10293,7 +10293,7 @@
     },
     {
       "id": 27,
-      "file": "../cozy-cast-v7/customer-27.png",
+      "file": "../cozy-cast-v7/customer-27.gif",
       "source": "sources/group-0.png",
       "scale": 0.3696682464454976,
       "seatedScale": 0.3696682464454976,
@@ -10674,7 +10674,7 @@
     },
     {
       "id": 28,
-      "file": "../cozy-cast-v7/customer-28.png",
+      "file": "../cozy-cast-v7/customer-28.gif",
       "source": "sources/group-9.png",
       "scale": 0.3406113537117904,
       "seatedScale": 0.3406113537117904,
@@ -11055,7 +11055,7 @@
     },
     {
       "id": 29,
-      "file": "../cozy-cast-v7/customer-29.png",
+      "file": "../cozy-cast-v7/customer-29.gif",
       "source": "sources/group-9.png",
       "scale": 0.4,
       "seatedScale": 0.4,
@@ -11436,7 +11436,7 @@
     },
     {
       "id": 30,
-      "file": "customer-30.png",
+      "file": "customer-30.gif",
       "source": "sources/group-0.png",
       "scale": 0.3577981651376147,
       "seatedScale": 0.3577981651376147,
@@ -11817,7 +11817,7 @@
     },
     {
       "id": 31,
-      "file": "customer-31.png",
+      "file": "customer-31.gif",
       "source": "sources/group-0.png",
       "scale": 0.35454545454545455,
       "seatedScale": 0.35454545454545455,
@@ -12198,7 +12198,7 @@
     },
     {
       "id": 32,
-      "file": "customer-32.png",
+      "file": "customer-32.gif",
       "source": "sources/group-0.png",
       "scale": 0.3939393939393939,
       "seatedScale": 0.3939393939393939,
@@ -12579,7 +12579,7 @@
     },
     {
       "id": 33,
-      "file": "customer-33.png",
+      "file": "customer-33.gif",
       "source": "sources/group-1.png",
       "scale": 0.3577981651376147,
       "seatedScale": 0.3577981651376147,
@@ -12960,7 +12960,7 @@
     },
     {
       "id": 34,
-      "file": "customer-34.png",
+      "file": "customer-34.gif",
       "source": "sources/group-1.png",
       "scale": 0.3436123348017621,
       "seatedScale": 0.3436123348017621,
@@ -13341,7 +13341,7 @@
     },
     {
       "id": 35,
-      "file": "customer-35.png",
+      "file": "customer-35.gif",
       "source": "sources/group-1.png",
       "scale": 0.3786407766990291,
       "seatedScale": 0.3786407766990291,

@@ -15,7 +15,7 @@ import { createInitialState, type GameState } from '../game/state';
 import { WINDOWS } from '../game/layout';
 const ids = Object.keys(runtime.mainStaticMetadata) as (keyof typeof runtime.mainStaticMetadata)[];
 const foods = ['espresso', 'latte', 'eggtart', 'croissant', 'cake'] as const;
-const retained = { 'cabinet-top': 'main-v1/cabinet-top.png', 'cabinet-front': 'main-v1/cabinet-front.png', plant: 'main-v1/plant.png', table: 'main-v2/table-no-vase.png', 'chair-right': 'main-v2/chair-facing-right.png', 'chair-left': 'main-v2/chair-facing-left.png', vase: 'main-v2/flower-vase.png' } as const;
+const retained = { 'cabinet-top': 'main-v1/cabinet-top.gif', 'cabinet-front': 'main-v1/cabinet-front.gif', plant: 'main-v1/plant.png', table: 'main-v2/table-no-vase.gif', 'chair-right': 'main-v2/chair-facing-right.gif', 'chair-left': 'main-v2/chair-facing-left.gif', vase: 'main-v2/flower-vase.png' } as const;
 const metadata = runtime.mainStaticMetadata;
 const fileBytes = (file: string) => readFileSync(new URL(`../../${file}`, import.meta.url));
 const fileFor = (id: keyof typeof metadata, packed: boolean) => packed ? `public/art/generated/${GENERATED_MAIN_ASSETS[id]}` : archive.images.find(row => row.key === id)!.file;

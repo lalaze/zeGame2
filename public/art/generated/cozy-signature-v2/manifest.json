@@ -103,7 +103,7 @@
       "sha256": "253147d8256138412212f7e9b12f866dce505dca2eb36f64ff1cae9ed4cf9ed6"
     },
     "liquid-coffee": {
-      "file": "liquid-coffee.png",
+      "file": "liquid-coffee.gif",
       "source": "sources/liquids-atlas.png",
       "sourceRect": {
         "left": 78,
@@ -128,7 +128,7 @@
       "sha256": "ef9fa8e90a6067cbef9364d32eeefffbb24a41bd875a9ff28e7e885badadd63e"
     },
     "liquid-tea": {
-      "file": "liquid-tea.png",
+      "file": "liquid-tea.gif",
       "source": "sources/liquids-atlas.png",
       "sourceRect": {
         "left": 689,
@@ -153,7 +153,7 @@
       "sha256": "73ad37f0874dde86388b4c243222bed666345ebaed0836e4ee8c8a41e03e7998"
     },
     "liquid-milk": {
-      "file": "liquid-milk.png",
+      "file": "liquid-milk.gif",
       "source": "sources/liquids-atlas.png",
       "sourceRect": {
         "left": 79,
@@ -178,7 +178,7 @@
       "sha256": "e0c9f840801285a4ae030026285a757eb22995910b06d0ebfcd2c855e552b941"
     },
     "liquid-fruit": {
-      "file": "liquid-fruit.png",
+      "file": "liquid-fruit.gif",
       "source": "sources/liquids-atlas.png",
       "sourceRect": {
         "left": 689,
@@ -203,7 +203,7 @@
       "sha256": "954022dc1996933ce36a832826e1d2519fcf368e82b068b6db48a92711ffca38"
     },
     "topping-sugar": {
-      "file": "topping-sugar.png",
+      "file": "topping-sugar.gif",
       "source": "sources/toppings-atlas.png",
       "sourceRect": {
         "left": 74,
@@ -228,7 +228,7 @@
       "sha256": "422d90eb0a98b13d521dcdd471c0d1794c4c711107d16a32ab313413433bfbe3"
     },
     "topping-spice": {
-      "file": "topping-spice.png",
+      "file": "topping-spice.gif",
       "source": "sources/toppings-atlas.png",
       "sourceRect": {
         "left": 457,
@@ -253,7 +253,7 @@
       "sha256": "2823fc9d199b94c46adbdb5f8a9f02aac91ed53abd0d9b5446b7638b340babf0"
     },
     "topping-cocoa": {
-      "file": "topping-cocoa.png",
+      "file": "topping-cocoa.gif",
       "source": "sources/toppings-atlas.png",
       "sourceRect": {
         "left": 887,
@@ -278,7 +278,7 @@
       "sha256": "8d1bfb6d13244d2a5e4ee848ff6f02072fb6edf63c997ecd60bf6fce0ce984f1"
     },
     "topping-cream": {
-      "file": "topping-cream.png",
+      "file": "topping-cream.gif",
       "source": "sources/toppings-atlas.png",
       "sourceRect": {
         "left": 51,
@@ -303,7 +303,7 @@
       "sha256": "46918b344379df426454a2c757226afea2f4817b51accc4646cadf629e57bf29"
     },
     "topping-fruit": {
-      "file": "topping-fruit.png",
+      "file": "topping-fruit.gif",
       "source": "sources/toppings-atlas.png",
       "sourceRect": {
         "left": 471,
@@ -328,7 +328,7 @@
       "sha256": "9c07a393cd2c25c70f10c29c59e78ec4c058263985f8cb2f66472b612852e82b"
     },
     "topping-matcha": {
-      "file": "topping-matcha.png",
+      "file": "topping-matcha.gif",
       "source": "sources/toppings-atlas.png",
       "sourceRect": {
         "left": 887,

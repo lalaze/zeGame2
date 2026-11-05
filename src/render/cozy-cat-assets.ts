@@ -41,7 +41,7 @@ export function validateCozyCatManifest(manifest: CozyCatManifest): void {
     throw Error('Invalid cozy cat atlas family');
   const ids = new Set<CatId>();
   for (const breed of manifest.breeds) {
-    if (!CATS.some(cat => cat.id === breed.breed) || ids.has(breed.breed) || breed.file !== breed.breed + '.png' ||
+    if (!CATS.some(cat => cat.id === breed.breed) || ids.has(breed.breed) || breed.file !== breed.breed + '.gif' ||
         breed.size?.length !== 2 || breed.size.some(n => !Number.isFinite(n) || n <= 0) ||
         !Number.isFinite(breed.scale) || breed.scale <= 0 || breed.frames?.length !== GENERATED_CAT_STATES.length)
       throw Error('Invalid cozy cat breed');
