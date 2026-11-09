@@ -1,0 +1,22 @@
+(node:65145) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:65176) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+ RUN  v5.0.3 /Volumes/data/code/zeGame2
+
+(node:65177) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:65178) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:65179) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+ Test Files  3 passed (3)
+      Tests  53 passed (53)
+   Start at  21:55:25
+   Duration  1.49s (tests 54%, transform 18%, environment 18%, import 9%, worker 1%)
+
+    Isolate  3 workers spawned · ~134ms startup each (spawn + environment, per file)
+             at least ~268ms faster with isolate: false — reuses workers across files instead of one per file
+

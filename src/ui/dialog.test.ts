@@ -11,6 +11,18 @@ vi.mock('../render/sprites', () => ({
   character: () => ({ stand: document.createElement('canvas') }),
 }));
 
+// Dialog tests own focus/keyboard behaviour; the real raster pack is exercised
+// in browser QA, and must not start network loads in this DOM-only fixture.
+vi.mock('../render/reference-character-art', () => ({
+  STANDING_CHARACTER_SCALE: 1,
+  preloadReferenceLook: () => Promise.resolve(),
+  referenceOwnerFront: () => null,
+  referenceCharacterContacts: () => null,
+}));
+vi.mock('./generated-owner-preview', () => ({
+  createGeneratedOwnerPreview: () => ({canvas:document.createElement('canvas'),update:vi.fn(),dispose:vi.fn()}),
+}));
+
 beforeEach(() => {
   document.body.innerHTML = '<main><button id="opener">Open</button></main><aside inert>Already inert</aside><div id="modal-root"></div>';
   document.querySelector<HTMLButtonElement>('#opener')!.focus();

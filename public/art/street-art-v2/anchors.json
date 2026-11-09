@@ -1,0 +1,98 @@
+{
+  "cafe": {
+    "width": 236,
+    "height": 292,
+    "signY": 136,
+    "doorX": 170,
+    "sourceCrop": [
+      8,
+      8,
+      362,
+      446
+    ]
+  },
+  "vacant-brick": {
+    "width": 230,
+    "height": 280,
+    "signY": 126,
+    "doorX": 116,
+    "sourceCrop": [
+      8,
+      8,
+      353,
+      427
+    ]
+  },
+  "bookshop": {
+    "width": 222,
+    "height": 294,
+    "signY": 142,
+    "doorX": 182,
+    "sourceCrop": [
+      8,
+      8,
+      342,
+      448
+    ]
+  },
+  "plant-shop": {
+    "width": 236,
+    "height": 236,
+    "signY": 82,
+    "doorX": 120,
+    "sourceCrop": [
+      8,
+      8,
+      362,
+      361
+    ]
+  },
+  "florist": {
+    "width": 230,
+    "height": 288,
+    "signY": 136,
+    "doorX": 108,
+    "sourceCrop": [
+      8,
+      8,
+      352,
+      439
+    ]
+  },
+  "pottery": {
+    "width": 242,
+    "height": 288,
+    "signY": 138,
+    "doorX": 192,
+    "sourceCrop": [
+      8,
+      8,
+      371,
+      439
+    ]
+  },
+  "tea-shop": {
+    "width": 236,
+    "height": 286,
+    "signY": 132,
+    "doorX": 184,
+    "sourceCrop": [
+      8,
+      8,
+      362,
+      437
+    ]
+  },
+  "vacant-blue": {
+    "width": 244,
+    "height": 282,
+    "signY": 128,
+    "doorX": 56,
+    "sourceCrop": [
+      8,
+      8,
+      373,
+      432
+    ]
+  }
+}

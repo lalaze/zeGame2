@@ -2,7 +2,7 @@
   font-family: 'Pixel ZH';
   font-style: normal;
   font-weight: 400;
-  font-display: block;
+  font-display: swap;
   /* Fusion Pixel by TakWolf (OFL 1.1), subset to the characters the game uses. */
   src: url('./assets/pixel-zh.woff2') format('woff2');
 }
@@ -291,7 +291,7 @@ html:lang(zh) body {
 .area-down svg { transform: rotate(90deg); }
 .area-arrow.locked .area-arrow-sign { background: #e7c89b; }
 .area-arrow:hover .area-arrow-sign { background: #fff2ce; }
-.area-arrow:active .area-arrow-sign { transform: translateY(2px); }
+.area-arrow:active .area-arrow-sign { box-shadow: inset 2px 2px #493426; }
 .area-arrow:focus-visible { outline: 3px solid var(--green-dark); outline-offset: 4px; }
 .area-destination { position: absolute; top: calc(100% + 7px); left: 0; padding: 3px 5px; background: var(--cream); border: 2px solid var(--ink); font-size: 12px; line-height: 1.25; white-space: nowrap; }
 .area-right .area-destination { left: auto; right: 0; }
@@ -651,7 +651,7 @@ html:lang(zh) body {
 
 .pixel-btn:active:not(:disabled) {
   box-shadow: inset 3px 3px 0 0 #00000033, var(--border);
-  transform: translateY(1px);
+
 }
 
 .pixel-btn:focus-visible,
@@ -3081,7 +3081,7 @@ body.fullscreen-cafe .table-preview-exit {
   transform: translateX(-50%); min-width: 44px; min-height: 44px;
   max-width: calc(100% - 156px); padding: 8px 14px; white-space: normal;
 }
-body.fullscreen-cafe .table-preview-exit:active { transform: translate(-50%, 1px); }
+body.fullscreen-cafe .table-preview-exit:active { transform: translateX(-50%); }
 body.fullscreen-cafe .cat-locate-exit {
   position: absolute; z-index: 9; left: 50%; bottom: calc(var(--view-tip-bottom) + var(--toast-clearance, 0px) + 12px);
   transform: translateX(-50%); min-height: 44px; max-width: calc(100% - 32px);

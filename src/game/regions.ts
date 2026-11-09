@@ -2,14 +2,16 @@ import { PERK_BUILD_SHARE, hasPerk } from './chain-bonuses';
 import type { GameState } from './state';
 
 /**
- * The rooms behind the main café, opened in order. Each takes real time to build once
- * paid for (it finishes while you're away too), so the building grows over days rather
- * than in one sitting, however fast the café earns. Timings: docs/idle-pacing.
+ * Legacy connected-room definitions. Keep stable coordinates and routing so a saved
+ * pre-v26 service can finish safely. Live expansion now buys independent properties
+ * through streets.ts; SaveSession migrates these assets instead of selling new rooms.
  */
 export const REGIONS = [
   { id: 'reading', cost: 1_200, tables: 4, demand: 0.1, buildSeconds: 60 * 60 },
   { id: 'greenhouse', cost: 18_000, tables: 4, demand: 0.15, buildSeconds: 12 * 60 * 60 },
   { id: 'terrace', cost: 240_000, tables: 4, demand: 0.2, buildSeconds: 48 * 60 * 60 },
+  { id: 'workshop', cost: 600_000, tables: 4, demand: 0.12, buildSeconds: 24 * 60 * 60 },
+  { id: 'observatory', cost: 1_800_000, tables: 4, demand: 0.16, buildSeconds: 36 * 60 * 60 },
 ] as const;
 /** Each branch opened so far makes building this much quicker: 1 / (1 + this × branches)... */
 export const BUILD_SPEEDUP_PER_BRANCH = 1.5;
@@ -19,8 +21,8 @@ export const MIN_BUILD_SHARE = 0.25;
 export type RegionId = (typeof REGIONS)[number]['id'];
 /** The dining rooms, and the kitchen behind the scenes. */
 export type AreaId = 'main' | RegionId | 'kitchen';
-// The kitchen comes last so the furniture grid's columns for the other rooms never move.
-export const AREA_IDS: readonly AreaId[] = ['main', ...REGIONS.map((r) => r.id), 'kitchen'];
+// Append new rooms after the original kitchen slot: saved furniture coordinates never move.
+export const AREA_IDS: readonly AreaId[] = ['main', 'reading', 'greenhouse', 'terrace', 'kitchen', 'workshop', 'observatory'];
 export type Direction = 'left' | 'right' | 'up' | 'down';
 /**
  * The front rooms face the street; the glasshouse and garden sit behind them, and
@@ -29,6 +31,7 @@ export type Direction = 'left' | 'right' | 'up' | 'down';
 export const AREA_GRID: Record<AreaId, { col: number; row: number }> = {
   kitchen: { col: -1, row: 1 }, main: { col: 0, row: 1 }, reading: { col: 1, row: 1 },
   greenhouse: { col: 1, row: 0 }, terrace: { col: 0, row: 0 },
+  workshop: { col: -1, row: 0 }, observatory: { col: -1, row: -1 },
 };
 /** Shared doorways, rather than an ordering of screens. The garden has no street entrance. */
 export const AREA_LINKS: readonly { from: AreaId; to: AreaId; direction: Direction }[] = [
@@ -36,6 +39,8 @@ export const AREA_LINKS: readonly { from: AreaId; to: AreaId; direction: Directi
   { from: 'main', to: 'reading', direction: 'right' },
   { from: 'reading', to: 'greenhouse', direction: 'up' },
   { from: 'greenhouse', to: 'terrace', direction: 'left' },
+  { from: 'terrace', to: 'workshop', direction: 'left' },
+  { from: 'workshop', to: 'observatory', direction: 'up' },
 ];
 export const oppositeDirection = (direction: Direction): Direction =>
   ({ left: 'right', right: 'left', up: 'down', down: 'up' } as const)[direction];

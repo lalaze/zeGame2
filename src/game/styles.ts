@@ -6,6 +6,7 @@ import { reputationScore } from './reputation';
 import { signatureDefinition } from './signature-drinks';
 import { tasteTier } from './taste';
 import type { GameState } from './state';
+import { ownsStreetBusiness } from './streets';
 
 export const STYLE_IDS = ['coffee', 'bakery', 'cats', 'takeaway', 'garden', 'community'] as const;
 export type CafeStyleId = typeof STYLE_IDS[number];
@@ -76,7 +77,7 @@ export function styleStages(s: GameState, id: CafeStyleId): StyleStage[] {
   const item = (name: ItemId, target: number) => goal(`${name}${target}`, s.items[name], target);
   const upgrade = (name: keyof GameState['upgrades'], target: number) => goal(`${name}${target}`, s.upgrades[name], target);
   const cozy = (target: number) => goal(`comfort${target}`, comfort(s), target);
-  const region = (name: 'reading' | 'greenhouse' | 'terrace') => goal(name, Number(s.regions.includes(name)), 1);
+  const region = (name: 'reading' | 'greenhouse' | 'terrace') => goal(name, Number(s.regions.includes(name) || ownsStreetBusiness(s, name)), 1);
   const sales = (name: string, cats: string[], target: number) => goal(name, servings(s, cats), target);
   const research = (name: string, cats: string[], target: number) => goal(name, signatures(s, cats), target);
   const kitchen = () => goal('kitchen', Number(s.kitchen), 1);

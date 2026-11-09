@@ -1,0 +1,16 @@
+[
+  {
+    "mode": "stalled-font",
+    "elapsed": 90418,
+    "ready": false,
+    "text": "Tiny Bean Café\n\n咖啡馆未能完成加载。请检查网络，然后重新加载。\n\n重新加载\nCafé startup timed out",
+    "phase": "error",
+    "fonts": "loading",
+    "loaded": 399,
+    "total": 404,
+    "pending": [
+      "http://127.0.0.1:4174/assets/pixel-zh-C-Ka8rhJ.woff2"
+    ],
+    "errors": []
+  }
+]

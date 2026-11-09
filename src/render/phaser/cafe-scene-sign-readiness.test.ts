@@ -5,7 +5,7 @@ vi.mock('phaser',()=>({default:{Scene:class{},Scenes:{Events:{SHUTDOWN:'shutdown
 vi.mock('../reference-character-art',async(importOriginal)=>({...await importOriginal<typeof import('../reference-character-art')>(),preloadReferenceCharacters:vi.fn(async()=>{})}));
 vi.mock('../cozy-cat-assets',async(importOriginal)=>({...await importOriginal<typeof import('../cozy-cat-assets')>(),preloadCozyCats:vi.fn(async()=>{})}));
 import { CafeScene } from './cafe-scene';
-afterEach(()=>vi.unstubAllGlobals());
+afterEach(()=>{vi.unstubAllGlobals();vi.useRealTimers();});
 it('invalidates both main-room lettering layers when the pixel font becomes ready, even while time is frozen',()=>{
   const face={family:'"Pixel ZH"',status:'loading'};
   vi.stubGlobal('document',{fonts:new Set([face])});
@@ -40,4 +40,12 @@ it('holds the first scene paint behind the pending font download in the real pre
   finish();await new Promise(resolve=>setTimeout(resolve,0));
   expect(createCafe).toHaveBeenCalledOnce();expect(scene.initialized).toBe(true);
   expect(onLoadError).not.toHaveBeenCalled();
+});
+
+it('creates the actual scene with platform lettering after the optional font fallback deadline',async()=>{
+ vi.useFakeTimers();vi.stubGlobal('document',{fonts:{load:vi.fn(()=>new Promise(()=>{}))}});
+ const createCafe=vi.fn(),onLoadError=vi.fn();
+ const scene=Object.assign(Object.create(CafeScene.prototype),{events:{once:vi.fn(),off:vi.fn()},hooks:{},load:{on:vi.fn(),once:vi.fn(),image:vi.fn()},loadGeneration:0,createCafe,onLoadError});
+ scene.preload();scene.create();await vi.advanceTimersByTimeAsync(1999);expect(createCafe).not.toHaveBeenCalled();
+ await vi.advanceTimersByTimeAsync(1);expect(createCafe).toHaveBeenCalledOnce();expect(scene.initialized).toBe(true);expect(onLoadError).not.toHaveBeenCalled();expect(vi.getTimerCount()).toBe(0);
 });

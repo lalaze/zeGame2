@@ -1,0 +1,28 @@
+[
+  {
+    "mode": "fresh",
+    "elapsed": 2064,
+    "ready": true,
+    "text": "Tiny Bean Café\n\n咖啡馆已就绪\n\n100%\n已加载 404 / 404 项素材\n启动\n加载素材\n布置店铺",
+    "phase": "ready",
+    "fonts": "loaded",
+    "loaded": 404,
+    "total": 404,
+    "pending": [],
+    "errors": []
+  },
+  {
+    "mode": "stalled-font",
+    "elapsed": 5185,
+    "ready": false,
+    "text": "Tiny Bean Café\n\n咖啡馆未能完成加载。请检查网络，然后重新加载。\n\n重新加载\nCafé startup timed out",
+    "phase": "error",
+    "fonts": "loading",
+    "loaded": 399,
+    "total": 404,
+    "pending": [
+      "http://127.0.0.1:4174/assets/pixel-zh-C-Ka8rhJ.woff2"
+    ],
+    "errors": []
+  }
+]

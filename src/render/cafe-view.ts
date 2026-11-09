@@ -71,6 +71,8 @@ export class CafeView {
   overview = false;
   /** Mirrors the page's pause state, so transient thoughts disappear behind dialogs. */
   paused = false;
+  /** Fullscreen street covers the café; UI/real-time production still tick. */
+  renderSuspended = false;
   /** An explicit, temporary next-table preview; never saved or treated as a seat. */
   tablePreview = false;
   /** The optional moment waiting on the player, cued above its guest or its spot. */
@@ -113,13 +115,13 @@ export class CafeView {
     this.camera.moveTo(this.roomFocus(), immediate);
   }
 
-  /** The map shows the whole building, three rooms across and two deep, centered. */
+  /** The expanded building occupies three columns and three rows. */
   setOverview(show: boolean, immediate = false): void {
     this.locatingCat = false;
     this.overview = show;
     const H = sceneHeight();
     this.focusedKitchenHeight = kitchenHeight();
-    this.camera.moveTo(show ? { x: -SCENE_W, y: -H * 1.5 } : this.roomFocus(), immediate, show ? 1 / 3 : 1);
+    this.camera.moveTo(show ? { x: -SCENE_W, y: -H * 2 } : this.roomFocus(), immediate, show ? 1 / 3 : 1);
   }
 
   // ------------------------------------------------------------ effects

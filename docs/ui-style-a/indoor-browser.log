@@ -1,0 +1,178 @@
+(node:7284) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS rendered page uses final published entry
+PASS mobile-390: document stays within viewport
+PASS mobile-390-header: cream frame fits viewport
+PASS mobile-390-header: shared frame and pixel family
+PASS mobile-390-dock: cream frame fits viewport
+PASS mobile-390-dock: shared frame and pixel family
+PASS mobile-390-dock: targets remain at least 44px and unmasked
+PASS mobile-390: cafe name has readable cream-surface contrast
+PASS mobile-390-home: actual custom pixel glyphs .mobile-cafe-name
+PASS mobile-390-home: actual custom pixel glyphs .mobile-cafe-clock strong
+PASS mobile-390-home: actual custom pixel glyphs #coins
+PASS mobile-390-management: cream frame fits viewport
+PASS mobile-390-management: shared frame and pixel family
+PASS mobile-390-tabs: targets remain at least 44px and unmasked
+PASS mobile-390-panel: actual custom pixel glyphs #drawer-title
+PASS mobile-390-panel: actual custom pixel glyphs #drawer-balance
+PASS mobile-390-panel: actual custom pixel glyphs #management-panel .tab.active
+PASS mobile-390-panel: actual custom pixel glyphs #management-panel .row .name
+PASS mobile-390: pressing tab does not move hit area
+PASS mobile-390-decor: cream frame fits viewport
+PASS mobile-390-decor: shared frame and pixel family
+PASS mobile-390: pantry remains navigable
+PASS mobile-390-settings: cream frame fits viewport
+PASS mobile-390-settings: shared frame and pixel family
+PASS mobile-390-settings: targets remain at least 44px and unmasked
+PASS mobile-390: destructive reset stays distinct from primary green
+PASS mobile-390-settings: actual custom pixel glyphs .modal h2
+PASS mobile-390-settings: actual custom pixel glyphs .profile-cafe
+PASS mobile-390-settings: actual custom pixel glyphs .stats dd
+PASS mobile-390: profile input is native and 16px
+PASS mobile-390-profile: cream frame fits viewport
+PASS mobile-390-profile: shared frame and pixel family
+PASS mobile-390: input focus is visible and not clipped
+PASS mobile-390: cafe/street round trip preserves profile/assets
+PASS reduced motion removes component transitions
+PASS forced colours keep visible native control borders
+PASS rendered page uses final published entry
+PASS mobile-360: document stays within viewport
+PASS mobile-360-header: cream frame fits viewport
+PASS mobile-360-header: shared frame and pixel family
+PASS mobile-360-dock: cream frame fits viewport
+PASS mobile-360-dock: shared frame and pixel family
+PASS mobile-360-dock: targets remain at least 44px and unmasked
+PASS mobile-360: cafe name has readable cream-surface contrast
+PASS mobile-360-home: actual custom pixel glyphs .mobile-cafe-name
+PASS mobile-360-home: actual custom pixel glyphs .mobile-cafe-clock strong
+PASS mobile-360-home: actual custom pixel glyphs #coins
+PASS mobile-360-management: cream frame fits viewport
+PASS mobile-360-management: shared frame and pixel family
+PASS mobile-360-tabs: targets remain at least 44px and unmasked
+PASS mobile-360-panel: actual custom pixel glyphs #drawer-title
+PASS mobile-360-panel: actual custom pixel glyphs #drawer-balance
+PASS mobile-360-panel: actual custom pixel glyphs #management-panel .tab.active
+PASS mobile-360-panel: actual custom pixel glyphs #management-panel .row .name
+PASS mobile-360: pressing tab does not move hit area
+PASS mobile-360-decor: cream frame fits viewport
+PASS mobile-360-decor: shared frame and pixel family
+PASS mobile-360: pantry remains navigable
+PASS mobile-360-settings: cream frame fits viewport
+PASS mobile-360-settings: shared frame and pixel family
+PASS mobile-360-settings: targets remain at least 44px and unmasked
+PASS mobile-360: destructive reset stays distinct from primary green
+PASS mobile-360-settings: actual custom pixel glyphs .modal h2
+PASS mobile-360-settings: actual custom pixel glyphs .profile-cafe
+PASS mobile-360-settings: actual custom pixel glyphs .stats dd
+PASS mobile-360: profile input is native and 16px
+PASS mobile-360-profile: cream frame fits viewport
+PASS mobile-360-profile: shared frame and pixel family
+PASS mobile-360: input focus is visible and not clipped
+PASS mobile-360: cafe/street round trip preserves profile/assets
+PASS rendered page uses final published entry
+PASS mobile-526: document stays within viewport
+PASS mobile-526-header: cream frame fits viewport
+PASS mobile-526-header: shared frame and pixel family
+PASS mobile-526-dock: cream frame fits viewport
+PASS mobile-526-dock: shared frame and pixel family
+PASS mobile-526-dock: targets remain at least 44px and unmasked
+PASS mobile-526: cafe name has readable cream-surface contrast
+PASS mobile-526-home: actual custom pixel glyphs .mobile-cafe-name
+PASS mobile-526-home: actual custom pixel glyphs .mobile-cafe-clock strong
+PASS mobile-526-home: actual custom pixel glyphs #coins
+PASS mobile-526-management: cream frame fits viewport
+PASS mobile-526-management: shared frame and pixel family
+PASS mobile-526-tabs: targets remain at least 44px and unmasked
+PASS mobile-526-panel: actual custom pixel glyphs #drawer-title
+PASS mobile-526-panel: actual custom pixel glyphs #drawer-balance
+PASS mobile-526-panel: actual custom pixel glyphs #management-panel .tab.active
+PASS mobile-526-panel: actual custom pixel glyphs #management-panel .row .name
+PASS mobile-526: pressing tab does not move hit area
+PASS mobile-526-decor: cream frame fits viewport
+PASS mobile-526-decor: shared frame and pixel family
+PASS mobile-526: pantry remains navigable
+PASS mobile-526-settings: cream frame fits viewport
+PASS mobile-526-settings: shared frame and pixel family
+PASS mobile-526-settings: targets remain at least 44px and unmasked
+PASS mobile-526: destructive reset stays distinct from primary green
+PASS mobile-526-settings: actual custom pixel glyphs .modal h2
+PASS mobile-526-settings: actual custom pixel glyphs .profile-cafe
+PASS mobile-526-settings: actual custom pixel glyphs .stats dd
+PASS mobile-526: profile input is native and 16px
+PASS mobile-526-profile: cream frame fits viewport
+PASS mobile-526-profile: shared frame and pixel family
+PASS mobile-526: input focus is visible and not clipped
+PASS mobile-526: cafe/street round trip preserves profile/assets
+PASS rendered page uses final published entry
+PASS desktop: document stays within viewport
+PASS desktop: cafe name has readable cream-surface contrast
+PASS desktop-home: actual custom pixel glyphs #hud-cafe-name
+PASS desktop-home: actual custom pixel glyphs #coins
+PASS desktop-home: actual custom pixel glyphs #reputation-score
+PASS desktop-management: cream frame fits viewport
+PASS desktop-management: shared frame and pixel family
+PASS desktop-tabs: targets remain at least 44px and unmasked
+PASS desktop-panel: actual custom pixel glyphs #drawer-title
+PASS desktop-panel: actual custom pixel glyphs #drawer-balance
+PASS desktop-panel: actual custom pixel glyphs #management-panel .tab.active
+PASS desktop-panel: actual custom pixel glyphs #management-panel .row .name
+PASS desktop: pressing tab does not move hit area
+PASS desktop-decor: cream frame fits viewport
+PASS desktop-decor: shared frame and pixel family
+PASS desktop: pantry remains navigable
+PASS desktop-settings: cream frame fits viewport
+PASS desktop-settings: shared frame and pixel family
+PASS desktop-settings: targets remain at least 44px and unmasked
+PASS desktop: destructive reset stays distinct from primary green
+PASS desktop-settings: actual custom pixel glyphs .modal h2
+PASS desktop-settings: actual custom pixel glyphs .profile-cafe
+PASS desktop-settings: actual custom pixel glyphs .stats dd
+PASS desktop: profile input is native and 16px
+PASS desktop-profile: cream frame fits viewport
+PASS desktop-profile: shared frame and pixel family
+PASS desktop: input focus is visible and not clipped
+PASS desktop: cafe/street round trip preserves profile/assets
+PASS rendered page uses final published entry
+PASS mobile-568: document stays within viewport
+PASS mobile-568-header: cream frame fits viewport
+PASS mobile-568-header: shared frame and pixel family
+PASS mobile-568-dock: cream frame fits viewport
+PASS mobile-568-dock: shared frame and pixel family
+PASS mobile-568-dock: targets remain at least 44px and unmasked
+PASS mobile-568: cafe name has readable cream-surface contrast
+PASS mobile-568-home: actual custom pixel glyphs .mobile-cafe-name
+PASS mobile-568-home: actual custom pixel glyphs .mobile-cafe-clock strong
+PASS mobile-568-home: actual custom pixel glyphs #coins
+PASS mobile-568-management: cream frame fits viewport
+PASS mobile-568-management: shared frame and pixel family
+PASS mobile-568-tabs: targets remain at least 44px and unmasked
+PASS mobile-568-panel: actual custom pixel glyphs #drawer-title
+PASS mobile-568-panel: actual custom pixel glyphs #drawer-balance
+PASS mobile-568-panel: actual custom pixel glyphs #management-panel .tab.active
+PASS mobile-568-panel: actual custom pixel glyphs #management-panel .row .name
+PASS mobile-568: pressing tab does not move hit area
+PASS mobile-568-decor: cream frame fits viewport
+PASS mobile-568-decor: shared frame and pixel family
+PASS mobile-568: pantry remains navigable
+PASS mobile-568-settings: cream frame fits viewport
+PASS mobile-568-settings: shared frame and pixel family
+PASS mobile-568-settings: targets remain at least 44px and unmasked
+PASS mobile-568: destructive reset stays distinct from primary green
+PASS mobile-568-settings: actual custom pixel glyphs .modal h2
+PASS mobile-568-settings: actual custom pixel glyphs .profile-cafe
+PASS mobile-568-settings: actual custom pixel glyphs .stats dd
+PASS mobile-568: profile input is native and 16px
+PASS mobile-568-profile: cream frame fits viewport
+PASS mobile-568-profile: shared frame and pixel family
+PASS mobile-568: input focus is visible and not clipped
+PASS mobile-568: cafe/street round trip preserves profile/assets
+PASS rendered page uses final published entry
+PASS English panel: cream frame fits viewport
+PASS English panel: shared frame and pixel family
+PASS English panel: actual custom pixel glyphs #drawer-title
+PASS English panel: actual custom pixel glyphs #drawer-balance
+PASS rendered page uses final published entry
+PASS equipped rose theme still changes action ink
+PASS no indoor page/console errors
+PASS no failed indoor HTTP resources

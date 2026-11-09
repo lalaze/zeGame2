@@ -1,0 +1,201 @@
+/* One continuous world, with its controls floating above the street. */
+.modal-overlay.street-overlay { padding: 0; background: #e5e8d0; backdrop-filter: none; }
+.modal.street-modal { width: 100%; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 0; border: 0; border-radius: 0; display: flex; flex-direction: column; background: #f8f0dc; color: #4e3c29; overflow: hidden; }
+.street-modal > h2, .street-modal > .modal-actions { display: none; }
+.street-modal > .modal-body { flex: 1; padding: 0; margin: 0; overflow: hidden; max-height: none; min-height: 0; }
+.street-view { --street-wall: #dec6a0; --street-trim: #76513b; --street-roof: #a86e50; --street-accent: #758164; --street-sky: #dce7df; --street-paving: #c4b59a; height: 100%; display: flex; flex-direction: column; }
+.street-view [hidden] { display: none !important; }
+.street-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 20px; background: #faf3e2; border-bottom: 2px solid #d6c7a7; z-index: 2; }
+.street-toolbar strong { font-size: 14px; }
+.street-toolbar button { min-height: 42px; font-size: 12px; }
+.street-choices { display: flex; gap: 6px; padding: 8px 20px; overflow-x: auto; flex-shrink: 0; scrollbar-width: thin; }
+.street-choice { flex: 1 0 145px; padding: 7px 12px; border: 1px solid #cfbd9c; background: #f3ead7; color: #68543e; text-align: left; cursor: pointer; font: inherit; }
+.street-choice span, .street-choice small { display: block; }
+.street-choice span { font-size: 14px; font-weight: 700; }
+.street-choice small { font-size: 10px; margin-top: 3px; opacity: .85; }
+.street-choice[aria-pressed="true"] { color: #fff8e7; background: #596b52; border-color: #45583f; }
+.street-summary { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 2px 20px 8px; }
+.street-summary strong { font-size: 18px; }
+.street-summary p { font-size: 12px; margin: 3px 0; }
+.street-summary button { font-size: 11px; min-height: 40px; flex-shrink: 0; }
+.street-layout { flex: 1; min-height: 0; position: relative; }
+.street-panorama { height: 100%; width: 100%; overflow-x: auto; overflow-y: hidden; background: var(--street-sky); scrollbar-color: #8b7757 #d9cdb4; scrollbar-width: thin; cursor: grab; touch-action: pan-y; user-select: none; overscroll-behavior-x: contain; }
+.street-panorama.is-dragging, .street-panorama.is-dragging * { cursor: grabbing; }
+.street-scenery { position: relative; width: 2260px; min-width: 100%; height: 100%; min-height: 380px; isolation: isolate; background: linear-gradient(var(--street-sky), #eef0d6 56%, #b8c398 56%, #a4b184 67%, var(--street-paving) 67%); }
+.street-cloud { position: absolute; width: 240px; height: auto; top: 16px; opacity: .8; }
+.cloud-0 { left: 110px; }.cloud-1 { left: 680px; top: 55px; }.cloud-2 { left: 1480px; top: 22px; }
+.street-skyline, .street-distant, .street-tree-line { position: absolute; inset: 0; pointer-events: none; }
+.street-village { position: absolute; bottom: 360px; width: 360px; opacity: .75; filter: saturate(.7); }
+.village-0 { left: 10px; }.village-1 { left: 650px; }.village-2 { left: 1310px; }.village-3 { left: 1950px; }
+.street-tree { width: 350px; height: 310px; position: absolute; object-fit: contain; bottom: 205px; }
+.tree-0 { left: -100px; }.tree-1 { left: 275px; }.tree-2 { left: 625px; }.tree-3 { left: 975px; }.tree-4 { left: 1325px; }.tree-5 { left: 1675px; }.tree-6 { left: 2010px; }
+.street-storefronts { display: flex; align-items: flex-end; gap: 82px; position: absolute; left: 55px; bottom: 181px; z-index: 6; }
+.street-shop { display: block; position: relative; width: 268px; height: 320px; flex: 0 0 268px; border: 0; padding: 0; background: transparent; color: #513721; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.street-shop:nth-child(even) { transform: translateY(8px); }
+.street-shop-art { position: absolute; inset: 0; display: block; pointer-events: none; filter: drop-shadow(5px 9px 0 #584d3026); }
+.street-view img { image-rendering: pixelated; pointer-events: none; }
+.street-building { width: 100%; height: 100%; object-fit: fill; }
+.street-shop-sign { position: absolute; top: var(--sign-top); left: 21%; width: 59%; line-height: 23px; font-size: 14px; font-weight: 700; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff8df; text-shadow: -1px -1px #573318, 1px -1px #573318, -1px 1px #573318, 1px 1px #573318; pointer-events: none; }
+.street-shop-caption { display: contents; text-align: center; pointer-events: none; }
+.street-shop-caption strong { position: absolute; top: var(--sign-top); left: 21%; width: 59%; color: #513721; line-height: 23px; font-size: 13px; color: #fff8df; text-shadow: -1px -1px #573318, 1px -1px #573318, -1px 1px #573318, 1px 1px #573318; }
+.street-shop-caption small { position: absolute; z-index: 3; top: 102%; left: 50%; translate: -50% 0; width: max-content; max-width: 95%; font-size: 12px; padding: 4px 8px; color: #453a26; background: #f3e6c9; border: 1px solid #a99570; }
+.street-shop[aria-pressed="true"] { filter: drop-shadow(0 0 5px #fff8ca); }
+.street-shop:focus-visible { outline: 3px solid #fff6be; outline-offset: 5px; }
+.street-shop-ready .street-shop-caption small { background: #45634b; color: #fff5c6; border: 2px solid #f4dd93; }
+.street-shop-ready .street-shop-caption small::before { content: '+'; margin-right: 5px; font-weight: bold; }
+.street-shop[data-status="sale"] .street-shop-sign, .street-shop[data-status="vacant"] .street-shop-sign, .street-shop[data-status="locked"] .street-shop-sign { top: 67%; left: 33%; width: 34%; padding: 7px 1px; background: #f7e9c9; border: 3px solid #8b513c; box-shadow: 3px 3px #48332150; transform: rotate(-3deg); color: #84503b; text-shadow: none; }
+.street-shop[data-status="locked"] .street-shop-sign { color: #666255; border-color: #77725f; }
+.street-construction { position: absolute; inset: 0; }
+.street-ladder { position: absolute; left: 0; bottom: 4%; height: 65%; width: 40%; object-fit: contain; }
+.street-hoarding { position: absolute; bottom: 4%; left: 9%; width: 84%; height: 31%; background: repeating-linear-gradient(90deg, #d6b78c 0 31px, #987651 31px 34px); border: 5px solid #856346; box-shadow: inset 0 5px #e9cca3, 3px 5px #49392f66; }
+.street-hoarding::after { content: ''; position: absolute; left: 0; right: 0; bottom: 8px; height: 12px; background: repeating-linear-gradient(120deg, #66573d 0 14px, #ebc779 14px 28px); }
+.street-barrier { position: absolute; bottom: -10%; right: -2%; width: 48%; }
+.street-pavement { position: absolute; bottom: 92px; height: 125px; width: 100%; background: repeating-linear-gradient(0deg, transparent 0 29px, #7c6e4726 29px 31px), repeating-linear-gradient(90deg, #d2c6a8 0 59px, #b4a98e 59px 62px); border-top: 5px solid #c1b296; border-bottom: 9px solid #8a8873; box-shadow: 0 3px #ddd1b3; z-index: 1; }
+.street-road { position: absolute; bottom: 0; height: 92px; width: 100%; background: repeating-linear-gradient(90deg, #e1d9b688 0 40px, transparent 40px 96px) 0 48px / 100% 4px no-repeat, repeating-linear-gradient(0deg, #9d9e8b 0 3px, #a6a793 3px 6px); }
+.street-furniture { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+.street-furniture > span { position: absolute; bottom: 100px; width: 120px; height: 120px; }
+.street-furniture img { width: 100%; height: 100%; object-fit: contain; }
+.street-neighbors { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+.street-walker { position: absolute; bottom: 84px; left: calc(var(--start) + 90px); width: 80px; height: 88px; animation: street-stroll 32s linear var(--delay) infinite; }
+.street-walker i, .street-shop-visitor i { display: block; width: 80px; height: 88px; background: var(--guest) 0 0 / 960px 88px; animation: street-step .65s steps(3) infinite; }
+.street-walker:nth-child(even) { bottom: 80px; animation-direction: reverse; }
+.street-walker:nth-child(even) i { transform: scaleX(-1); }
+.street-shop-visitor { display: none; position: absolute; z-index: 1; left: calc(50% - 40px); bottom: 8px; width: 80px; height: 88px; pointer-events: none; animation: street-enter 14s linear infinite; }
+.street-shop-open .street-shop-visitor { display: block; }
+.street-shop:nth-child(even) .street-shop-visitor { animation-delay: -6s; }
+@keyframes street-stroll { from { translate: -130px 0; } to { translate: 470px 0; } }
+@keyframes street-step { from { background-position-x: -480px; } to { background-position-x: -720px; } }
+@keyframes street-enter { 0%, 12% { translate: 65px 36px; opacity: 1; } 35% { translate: 0 -8px; opacity: 1; } 40%, 65% { translate: 0 -12px; opacity: 0; } 70% { translate: 0 -8px; opacity: 1; } 90%, 100% { translate: -85px 36px; opacity: 1; } }
+.street-walk-controls { position: absolute; bottom: 20px; left: 50%; translate: -50% 0; z-index: 6; max-width: calc(100% - 24px); display: flex; align-items: center; gap: 12px; padding: 6px; background: #fff4dbed; border: 1px solid #c2ad86; box-shadow: 3px 4px #4d44322b; }
+.street-walk-controls button { min-width: 44px; min-height: 44px; font-size: 22px; }
+.street-walk-controls p { font-size: 12px; margin: 0; text-align: center; }
+.street-walk-controls small { display: block; font-size: 11px; margin-top: 4px; }
+.street-detail { position: absolute; z-index: 8; top: 14px; right: 18px; width: 332px; max-width: calc(100% - 24px); max-height: calc(100% - 32px); overflow-y: auto; overscroll-behavior: contain; padding: 18px; background: #fff5e0f5; border: 2px solid #a58a63; box-shadow: 6px 8px #44362635; color: #503e2b; scrollbar-width: thin; }
+.street-detail-close { float: right; min-width: 44px; min-height: 44px; font-size: 24px; margin: -10px -10px 0 8px; }
+.street-eyebrow { font-size: 11px; color: #806a4c; }
+.street-detail h3 { margin: 8px 0 10px; font-size: 20px; }
+.street-detail p { margin: 8px 0; line-height: 1.5; font-size: 12px; }
+.street-detail-status { font-weight: 700; }
+.street-detail label { display: block; margin: 10px 0 6px; font-size: 12px; }
+.street-detail select { width: 100%; min-height: 44px; background: #fff9ed; border: 1px solid #b8a280; padding: 8px; color: #503e2b; font: inherit; font-size: 13px; }
+.street-price-breakdown { padding: 9px; background: #f0e4c8; white-space: pre-line; }
+.street-income { border-top: 1px dashed #c6b694; padding-top: 9px; }
+.street-detail progress { width: 100%; height: 8px; accent-color: #687d55; }
+.street-schedules { display: flex; gap: 5px; flex-wrap: wrap; }
+.street-schedules button { min-height: 40px; flex: 1; font-size: 11px; }
+.street-schedules [aria-pressed="true"] { background: #d9e2c9; border-color: #7c8d61; }
+.street-actions { display: flex; flex-direction: column; gap: 8px; }
+.street-actions button { min-height: 44px; width: 100%; font-size: 13px; white-space: normal; }
+.street-view button:focus-visible, .street-panorama:focus-visible { outline: 3px solid #a35a32; outline-offset: -3px; }
+@media (max-height: 740px) and (min-width: 701px) {
+  .street-shop { width: 268px; height: 320px; flex-basis: 268px; }
+  .street-storefronts { gap: 82px; }
+}
+@media (max-width: 700px) {
+  .street-toolbar { padding: max(6px, env(safe-area-inset-top)) 8px 6px; gap: 5px; flex-wrap: wrap; }
+  .street-toolbar strong { font-size: 10px; margin-left: auto; }
+  .street-toolbar button { font-size: 11px; padding: 5px 8px; }
+  .street-choices { padding: 6px 8px; gap: 5px; }
+  .street-choice { flex-basis: 118px; padding: 6px 10px; min-height: 48px; }
+  .street-choice span { font-size: 12px; }.street-choice small { font-size: 10px; }
+  .street-summary { padding: 2px 8px 7px; gap: 5px; }
+  .street-summary strong { font-size: 14px; }
+  .street-summary p { font-size: 10px; max-width: 180px; }
+  .street-summary button { max-width: 145px; font-size: 10px; white-space: normal; padding: 5px; }
+  .street-shop { width: 268px; height: 320px; flex-basis: 268px; }
+  .street-storefronts { left: 30px; gap: 82px; bottom: 181px; }
+  .street-shop-sign { font-size: 12px; line-height: 20px; }
+  .street-walk-controls { bottom: 18px; gap: 5px; width: calc(100% - 24px); }
+  .street-walk-controls p { flex: 1; font-size: 11px; }
+  .street-walk-controls small { font-size: 10px; }
+  .street-detail { top: auto; bottom: 0; right: 0; width: 100%; max-width: 100%; max-height: 76%; padding: 12px 16px max(16px, env(safe-area-inset-bottom)); border: 0; border-top: 3px solid #a58a63; box-sizing: border-box; border-radius: 12px 12px 0 0; }
+  .street-detail::before { content: ''; display: block; height: 4px; width: 40px; background: #bba88b; margin: -4px auto 10px; border-radius: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .street-view *, .street-view *::before, .street-view *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .street-shop-open .street-shop-visitor { display: none; }
+}
+.street-shop-open .street-shop-caption strong, .street-shop[data-status="building"] .street-shop-caption strong, .street-home .street-shop-caption strong { display: none; }
+.street-modal > .modal-body { scrollbar-gutter: auto; padding-right: 0; }
+@media (max-width: 700px) {
+  .street-shop-caption strong { font-size: 12px; line-height: 20px; }
+  .street-village { bottom: 320px; }
+}
+.street-scenery { overflow: hidden; }
+@media (max-height: 560px) {
+  .street-toolbar { padding-top: 3px; padding-bottom: 3px; }
+  .street-summary p, .street-choice small { display: none; }
+  .street-summary { padding-bottom: 3px; }
+  .street-choice { min-height: 36px; }
+  .street-scenery { min-height: 0; }
+  .street-shop { width: 268px; height: 320px; flex-basis: 268px; }
+  .street-storefronts { bottom: 115px; gap: 82px; }
+  .street-pavement { bottom: 65px; height: 80px; }
+  .street-road { height: 65px; }
+  .street-walk-controls { bottom: 8px; }
+  .street-walk-controls button { min-height: 36px; }
+  .street-furniture > span { bottom: 70px; width: 90px; height: 90px; }
+  .street-walker { bottom: 16px; }
+  .street-walker:nth-child(even) { bottom: 8px; }
+  .street-detail { top: 0; bottom: 0; max-height: 100%; }
+}
+
+.street-confirm { border-top: 2px solid #bd9b67; padding-top: 8px; }
+.street-confirm h4 { margin: 4px 0; font-size: 16px; }
+.street-confirm [data-street-confirm-quote] { font-size: 14px; font-weight: 700; }
+/* Approved raster v2. Logical pixels use one integer scale throughout each viewport. */
+.street-view { --pixel-scale: 3; --plot-pitch: 420px; --plot-width: 366px; --ground: 210px; }
+.street-scenery { background: linear-gradient(#a3d3fa, #b4dafa 62%, #bbd1b0 62%); }
+.street-hills { position: absolute; left: 0; right: 0; bottom: calc(var(--ground) + 130px); height: 360px; background: url('/art/street-art-v2/hills.png') repeat-x bottom / 2304px 360px; image-rendering: pixelated; }
+.street-cloud { width: 357px; opacity: .96; top: 35px; }
+.cloud-1 { top: 95px; left: 900px; width: 238px; }.cloud-2 { left: 1820px; top: 25px; }
+.street-village { bottom: calc(var(--ground) + 220px); width: 195px; opacity: .72; filter: none; }
+.village-0 { left: 230px; }.village-1 { left: 810px; }.village-2 { left: 1320px; }.village-3 { left: 1840px; }.village-4 { left: 2350px; }
+.street-storefronts { left: 36px; bottom: var(--ground); gap: 54px; }
+.street-shop { width: var(--plot-width); height: 450px; flex-basis: var(--plot-width); }
+.street-shop:nth-child(even) { transform: none; }
+.street-shop-art { inset: auto; bottom: 0; left: 50%; translate: -50% 0; width: calc(var(--shop-width) * var(--pixel-scale)); height: calc(var(--shop-height) * var(--pixel-scale)); filter: none; }
+.street-shop-art::after { content: ''; position: absolute; z-index: -1; bottom: -8px; left: 0; width: 100%; height: 27px; background: url('/art/street-art-v2/shadow.png') center / 100% 100%; image-rendering: pixelated; }
+.street-building { width: 100%; height: 100%; object-fit: contain; }
+.street-shop-sign, .street-shop-caption strong { top: auto; bottom: calc((var(--shop-height) - var(--sign-y)) * var(--pixel-scale) - 12px); left: 50%; translate: -50% 0; width: calc(var(--shop-width) * var(--pixel-scale) * .78); line-height: 24px; font-size: 15px; color: #392619; text-shadow: 0 1px #ffe1a0; }
+.street-shop[data-storefront="florist"] .street-shop-sign { text-shadow: none; }
+.street-shop[data-status="sale"] .street-shop-sign, .street-shop[data-status="vacant"] .street-shop-sign, .street-shop[data-status="locked"] .street-shop-sign { top: auto; bottom: calc(var(--shop-height) * var(--pixel-scale) * .19); left: 50%; width: 108px; line-height: 22px; font-size: 14px; color: #603b27; background: #fff0cc; text-shadow: none; }
+.street-shop-caption small { top: calc(100% + 28px); font-size: 12px; z-index: 4; }
+.street-pavement { bottom: 0; height: var(--ground); border: 0; box-shadow: none; background: url('/art/street-art-v2/paving.png') repeat 0 0 / 432px 96px; image-rendering: pixelated; }
+.street-pavement::before { content: ''; position: absolute; left: 0; right: 0; top: -2px; height: 90px; background: url('/art/street-art-v2/curb.png') repeat-x 0 0 / 432px 90px; image-rendering: pixelated; }
+.street-road { display: none; }
+.street-furniture > .street-bench { left: calc(390px + var(--gap) * var(--plot-pitch)); bottom: calc(var(--ground) - 8px); width: 72px; height: 42px; }
+.street-furniture > .street-lamp { left: calc(411px + var(--gap) * var(--plot-pitch)); bottom: var(--ground); width: 44px; height: 224px; }
+.street-walker { bottom: 72px; }.street-walker:nth-child(even) { bottom: 80px; }
+.street-shop-visitor { left: calc((var(--plot-width) - var(--shop-width) * var(--pixel-scale)) / 2 + var(--door-x) * var(--pixel-scale) - 40px); bottom: 0; }
+@media (max-width: 700px), (max-height: 740px) {
+  .street-view { --pixel-scale: 2; --plot-pitch: 300px; --plot-width: 252px; --ground: 180px; }
+  .street-storefronts { left: 18px; gap: 48px; }
+  .street-shop { width: var(--plot-width); height: 300px; flex-basis: var(--plot-width); }
+  .street-shop-sign, .street-shop-caption strong { font-size: 12px; line-height: 20px; bottom: calc((var(--shop-height) - var(--sign-y)) * var(--pixel-scale) - 10px); }
+  .street-shop-caption small { top: calc(100% + 22px); font-size: 11px; }
+  .street-cloud { width: 238px; }.cloud-1 { width: 170px; }
+  .street-hills { height: 240px; bottom: calc(var(--ground) + 80px); background-size: 1536px 240px; }
+  .street-village { bottom: calc(var(--ground) + 145px); width: 130px; }
+  .street-pavement { background-size: 288px 64px; }
+  .street-pavement::before { height: 60px; background-size: 288px 60px; }
+  .street-furniture > .street-bench { left: calc(270px + var(--gap) * var(--plot-pitch)); }
+  .street-furniture > .street-lamp { left: calc(281px + var(--gap) * var(--plot-pitch)); height: 168px; width: 33px; }
+  .street-walker { bottom: 68px; }.street-walker:nth-child(even) { bottom: 72px; }
+}
+@media (max-height: 560px) {
+  .street-view { --ground: 100px; }
+  .street-walker { bottom: 8px; }.street-walker:nth-child(even) { bottom: 12px; }
+  .street-shop-caption small { top: calc(100% + 12px); }
+}
+/* Extend only the sampled near-hill colour below the extracted horizon: no sky gaps. */
+.street-hills::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 160px; background: #aac4a4; }
+/* Alternate sparse furnishings instead of stacking a bench underneath every lamp. */
+.street-bench:nth-of-type(4n + 1), .street-lamp:nth-of-type(4n) { display: none; }
+.street-cloud.cloud-1 { width: 357px; }
+.street-furniture > .street-lamp { width: 45px; height: 225px; }
+@media (max-width: 700px), (max-height: 740px) {
+  .street-cloud.cloud-1 { width: 238px; }
+  .street-furniture > .street-bench { width: 48px; height: 28px; }
+  .street-furniture > .street-lamp { width: 30px; height: 150px; }
+}

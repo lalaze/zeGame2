@@ -1,0 +1,177 @@
+(node:61258) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS 390: final entry is actually rendered
+PASS mobile-390: no document overflow
+PASS mobile-390-normal: no default inset or drop-shadow
+PASS mobile-390-normal: single 2px outline, no border-image
+PASS mobile-390-normal: targets >=44 and keyboard box unmasked
+PASS mobile-390: dock has one quiet 1px line
+PASS mobile-390-hover-#room-zoom-reset: no default inset or drop-shadow
+PASS mobile-390-hover-#room-zoom-reset: single 2px outline, no border-image
+PASS mobile-390-hover-#room-zoom-reset: targets >=44 and keyboard box unmasked
+PASS mobile-390-pressed-#room-zoom-reset: no default inset or drop-shadow
+PASS mobile-390-pressed-#room-zoom-reset: single 2px outline, no border-image
+PASS mobile-390-pressed-#room-zoom-reset: targets >=44 and keyboard box unmasked
+PASS mobile-390: #room-zoom-reset hit box is stable while pressed
+PASS mobile-390-hover-.mobile-cafe-primary button:visible: no default inset or drop-shadow
+PASS mobile-390-hover-.mobile-cafe-primary button:visible: single 2px outline, no border-image
+PASS mobile-390-hover-.mobile-cafe-primary button:visible: targets >=44 and keyboard box unmasked
+PASS mobile-390-pressed-.mobile-cafe-primary button:visible: no default inset or drop-shadow
+PASS mobile-390-pressed-.mobile-cafe-primary button:visible: single 2px outline, no border-image
+PASS mobile-390-pressed-.mobile-cafe-primary button:visible: targets >=44 and keyboard box unmasked
+PASS mobile-390: .mobile-cafe-primary button:visible hit box is stable while pressed
+PASS mobile-390-hover-#panel-toggle: no default inset or drop-shadow
+PASS mobile-390-hover-#panel-toggle: single 2px outline, no border-image
+PASS mobile-390-hover-#panel-toggle: targets >=44 and keyboard box unmasked
+PASS mobile-390-pressed-#panel-toggle: no default inset or drop-shadow
+PASS mobile-390-pressed-#panel-toggle: single 2px outline, no border-image
+PASS mobile-390-pressed-#panel-toggle: targets >=44 and keyboard box unmasked
+PASS mobile-390: #panel-toggle hit box is stable while pressed
+PASS mobile-390-hover-#mobile-cafe-more: no default inset or drop-shadow
+PASS mobile-390-hover-#mobile-cafe-more: single 2px outline, no border-image
+PASS mobile-390-hover-#mobile-cafe-more: targets >=44 and keyboard box unmasked
+PASS mobile-390-pressed-#mobile-cafe-more: no default inset or drop-shadow
+PASS mobile-390-pressed-#mobile-cafe-more: single 2px outline, no border-image
+PASS mobile-390-pressed-#mobile-cafe-more: targets >=44 and keyboard box unmasked
+PASS mobile-390: #mobile-cafe-more hit box is stable while pressed
+PASS mobile-390: keyboard focus remains visible and unmasked
+PASS mobile-390: focus is inside dock
+PASS mobile-390-panel: no default inset or drop-shadow
+PASS mobile-390-panel: single 2px outline, no border-image
+PASS mobile-390-panel: targets >=44 and keyboard box unmasked
+PASS mobile-390: panel shell is a single line without shadow
+PASS mobile-390-street: no default inset or drop-shadow
+PASS mobile-390-street: single 2px outline, no border-image
+PASS mobile-390-street: targets >=44 and keyboard box unmasked
+PASS mobile-390: street/home controls still work
+PASS 526: final entry is actually rendered
+PASS mobile-526: no document overflow
+PASS mobile-526-normal: no default inset or drop-shadow
+PASS mobile-526-normal: single 2px outline, no border-image
+PASS mobile-526-normal: targets >=44 and keyboard box unmasked
+PASS mobile-526: dock has one quiet 1px line
+PASS mobile-526-hover-#room-zoom-reset: no default inset or drop-shadow
+PASS mobile-526-hover-#room-zoom-reset: single 2px outline, no border-image
+PASS mobile-526-hover-#room-zoom-reset: targets >=44 and keyboard box unmasked
+PASS mobile-526-pressed-#room-zoom-reset: no default inset or drop-shadow
+PASS mobile-526-pressed-#room-zoom-reset: single 2px outline, no border-image
+PASS mobile-526-pressed-#room-zoom-reset: targets >=44 and keyboard box unmasked
+PASS mobile-526: #room-zoom-reset hit box is stable while pressed
+PASS mobile-526-hover-.mobile-cafe-primary button:visible: no default inset or drop-shadow
+PASS mobile-526-hover-.mobile-cafe-primary button:visible: single 2px outline, no border-image
+PASS mobile-526-hover-.mobile-cafe-primary button:visible: targets >=44 and keyboard box unmasked
+PASS mobile-526-pressed-.mobile-cafe-primary button:visible: no default inset or drop-shadow
+PASS mobile-526-pressed-.mobile-cafe-primary button:visible: single 2px outline, no border-image
+PASS mobile-526-pressed-.mobile-cafe-primary button:visible: targets >=44 and keyboard box unmasked
+PASS mobile-526: .mobile-cafe-primary button:visible hit box is stable while pressed
+PASS mobile-526-hover-#panel-toggle: no default inset or drop-shadow
+PASS mobile-526-hover-#panel-toggle: single 2px outline, no border-image
+PASS mobile-526-hover-#panel-toggle: targets >=44 and keyboard box unmasked
+PASS mobile-526-pressed-#panel-toggle: no default inset or drop-shadow
+PASS mobile-526-pressed-#panel-toggle: single 2px outline, no border-image
+PASS mobile-526-pressed-#panel-toggle: targets >=44 and keyboard box unmasked
+PASS mobile-526: #panel-toggle hit box is stable while pressed
+PASS mobile-526-hover-#mobile-cafe-more: no default inset or drop-shadow
+PASS mobile-526-hover-#mobile-cafe-more: single 2px outline, no border-image
+PASS mobile-526-hover-#mobile-cafe-more: targets >=44 and keyboard box unmasked
+PASS mobile-526-pressed-#mobile-cafe-more: no default inset or drop-shadow
+PASS mobile-526-pressed-#mobile-cafe-more: single 2px outline, no border-image
+PASS mobile-526-pressed-#mobile-cafe-more: targets >=44 and keyboard box unmasked
+PASS mobile-526: #mobile-cafe-more hit box is stable while pressed
+PASS mobile-526: keyboard focus remains visible and unmasked
+PASS mobile-526: focus is inside dock
+PASS mobile-526-panel: no default inset or drop-shadow
+PASS mobile-526-panel: single 2px outline, no border-image
+PASS mobile-526-panel: targets >=44 and keyboard box unmasked
+PASS mobile-526: panel shell is a single line without shadow
+PASS mobile-526-street: no default inset or drop-shadow
+PASS mobile-526-street: single 2px outline, no border-image
+PASS mobile-526-street: targets >=44 and keyboard box unmasked
+PASS mobile-526: street/home controls still work
+PASS 360: final entry is actually rendered
+PASS mobile-360: no document overflow
+PASS mobile-360-normal: no default inset or drop-shadow
+PASS mobile-360-normal: single 2px outline, no border-image
+PASS mobile-360-normal: targets >=44 and keyboard box unmasked
+PASS mobile-360: dock has one quiet 1px line
+PASS mobile-360-hover-#room-zoom-reset: no default inset or drop-shadow
+PASS mobile-360-hover-#room-zoom-reset: single 2px outline, no border-image
+PASS mobile-360-hover-#room-zoom-reset: targets >=44 and keyboard box unmasked
+PASS mobile-360-pressed-#room-zoom-reset: no default inset or drop-shadow
+PASS mobile-360-pressed-#room-zoom-reset: single 2px outline, no border-image
+PASS mobile-360-pressed-#room-zoom-reset: targets >=44 and keyboard box unmasked
+PASS mobile-360: #room-zoom-reset hit box is stable while pressed
+PASS mobile-360-hover-.mobile-cafe-primary button:visible: no default inset or drop-shadow
+PASS mobile-360-hover-.mobile-cafe-primary button:visible: single 2px outline, no border-image
+PASS mobile-360-hover-.mobile-cafe-primary button:visible: targets >=44 and keyboard box unmasked
+PASS mobile-360-pressed-.mobile-cafe-primary button:visible: no default inset or drop-shadow
+PASS mobile-360-pressed-.mobile-cafe-primary button:visible: single 2px outline, no border-image
+PASS mobile-360-pressed-.mobile-cafe-primary button:visible: targets >=44 and keyboard box unmasked
+PASS mobile-360: .mobile-cafe-primary button:visible hit box is stable while pressed
+PASS mobile-360-hover-#panel-toggle: no default inset or drop-shadow
+PASS mobile-360-hover-#panel-toggle: single 2px outline, no border-image
+PASS mobile-360-hover-#panel-toggle: targets >=44 and keyboard box unmasked
+PASS mobile-360-pressed-#panel-toggle: no default inset or drop-shadow
+PASS mobile-360-pressed-#panel-toggle: single 2px outline, no border-image
+PASS mobile-360-pressed-#panel-toggle: targets >=44 and keyboard box unmasked
+PASS mobile-360: #panel-toggle hit box is stable while pressed
+PASS mobile-360-hover-#mobile-cafe-more: no default inset or drop-shadow
+PASS mobile-360-hover-#mobile-cafe-more: single 2px outline, no border-image
+PASS mobile-360-hover-#mobile-cafe-more: targets >=44 and keyboard box unmasked
+PASS mobile-360-pressed-#mobile-cafe-more: no default inset or drop-shadow
+PASS mobile-360-pressed-#mobile-cafe-more: single 2px outline, no border-image
+PASS mobile-360-pressed-#mobile-cafe-more: targets >=44 and keyboard box unmasked
+PASS mobile-360: #mobile-cafe-more hit box is stable while pressed
+PASS mobile-360: keyboard focus remains visible and unmasked
+PASS mobile-360: focus is inside dock
+PASS mobile-360-panel: no default inset or drop-shadow
+PASS mobile-360-panel: single 2px outline, no border-image
+PASS mobile-360-panel: targets >=44 and keyboard box unmasked
+PASS mobile-360: panel shell is a single line without shadow
+PASS mobile-360-street: no default inset or drop-shadow
+PASS mobile-360-street: single 2px outline, no border-image
+PASS mobile-360-street: targets >=44 and keyboard box unmasked
+PASS mobile-360: street/home controls still work
+PASS 1440: final entry is actually rendered
+PASS desktop: no document overflow
+PASS desktop-normal: no default inset or drop-shadow
+PASS desktop-normal: single 2px outline, no border-image
+PASS desktop-normal: targets >=44 and keyboard box unmasked
+PASS desktop-hover-#panel-toggle: no default inset or drop-shadow
+PASS desktop-hover-#panel-toggle: single 2px outline, no border-image
+PASS desktop-hover-#panel-toggle: targets >=44 and keyboard box unmasked
+PASS desktop-pressed-#panel-toggle: no default inset or drop-shadow
+PASS desktop-pressed-#panel-toggle: single 2px outline, no border-image
+PASS desktop-pressed-#panel-toggle: targets >=44 and keyboard box unmasked
+PASS desktop: #panel-toggle hit box is stable while pressed
+PASS desktop-hover-#settings-btn: no default inset or drop-shadow
+PASS desktop-hover-#settings-btn: single 2px outline, no border-image
+PASS desktop-hover-#settings-btn: targets >=44 and keyboard box unmasked
+PASS desktop-pressed-#settings-btn: no default inset or drop-shadow
+PASS desktop-pressed-#settings-btn: single 2px outline, no border-image
+PASS desktop-pressed-#settings-btn: targets >=44 and keyboard box unmasked
+PASS desktop: #settings-btn hit box is stable while pressed
+PASS desktop-hover-#room-zoom-reset: no default inset or drop-shadow
+PASS desktop-hover-#room-zoom-reset: single 2px outline, no border-image
+PASS desktop-hover-#room-zoom-reset: targets >=44 and keyboard box unmasked
+PASS desktop-pressed-#room-zoom-reset: no default inset or drop-shadow
+PASS desktop-pressed-#room-zoom-reset: single 2px outline, no border-image
+PASS desktop-pressed-#room-zoom-reset: targets >=44 and keyboard box unmasked
+PASS desktop: #room-zoom-reset hit box is stable while pressed
+PASS desktop: keyboard focus remains visible and unmasked
+PASS desktop-panel: no default inset or drop-shadow
+PASS desktop-panel: single 2px outline, no border-image
+PASS desktop-panel: targets >=44 and keyboard box unmasked
+PASS desktop: panel shell is a single line without shadow
+PASS desktop-street: no default inset or drop-shadow
+PASS desktop-street: single 2px outline, no border-image
+PASS desktop-street: targets >=44 and keyboard box unmasked
+PASS desktop: street/home controls still work
+PASS no page or console errors
+PASS no failed resources
+PASS HTTP final bytes index.html
+PASS HTTP final bytes sw.js
+PASS HTTP final bytes assets/game-Cf-GtJBg.js
+PASS HTTP final bytes assets/region-art-DtWf97mz.js
+PASS HTTP final bytes assets/phaser-D8EC1TLR.js
+PASS HTTP final bytes assets/game-BiXdOF27.css

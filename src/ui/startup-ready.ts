@@ -3,10 +3,15 @@ export const STARTUP_TIMEOUT_MS = 90_000;
 export async function waitForStartupReady(
   rendererReady: Promise<unknown>,
   fontsReady: Promise<unknown>,
+  diagnostics?: () => string,
 ): Promise<void> {
   let rendererTimer: ReturnType<typeof setTimeout> | undefined;
   const rendererDeadline = new Promise<never>((_, reject) => {
-    rendererTimer = setTimeout(() => reject(new Error('Café startup timed out')), STARTUP_TIMEOUT_MS);
+    rendererTimer = setTimeout(() => {
+      let detail = '';
+      try { detail = diagnostics?.() ?? ''; } catch { detail = 'Startup diagnostics unavailable'; }
+      reject(new Error('Café startup timed out' + (detail ? `\n${detail}` : '')));
+    }, STARTUP_TIMEOUT_MS);
   });
   let fontTimer: ReturnType<typeof setTimeout> | undefined;
   const fontDeadline = new Promise<void>((resolve) => {

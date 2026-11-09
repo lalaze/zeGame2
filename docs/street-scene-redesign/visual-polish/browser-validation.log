@@ -1,0 +1,45 @@
+(node:99207) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS 1440px running pedestrians stay fully in front of stone platforms
+PASS 1440px status labels stay legible above pedestrians
+PASS 1440px pedestrians stay above the floating navigation controls
+PASS 1440px both pedestrian lanes are on the foreground road
+PASS 1440px screenshot uses genuinely running animation
+PASS 1440px reduced-motion entry visitors are hidden
+PASS 1440px reduced-motion retains the six street pedestrians without animation
+PASS 1440px right window merchandise remains visible
+PASS 1440px page stays within viewport
+PASS 360px running pedestrians stay fully in front of stone platforms
+PASS 360px status labels stay legible above pedestrians
+PASS 360px pedestrians stay above the floating navigation controls
+PASS 360px both pedestrian lanes are on the foreground road
+PASS 360px screenshot uses genuinely running animation
+PASS 360px reduced-motion entry visitors are hidden
+PASS 360px reduced-motion retains the six street pedestrians without animation
+PASS 360px right window merchandise remains visible
+PASS 360px page stays within viewport
+PASS 390px running pedestrians stay fully in front of stone platforms
+PASS 390px status labels stay legible above pedestrians
+PASS 390px pedestrians stay above the floating navigation controls
+PASS 390px both pedestrian lanes are on the foreground road
+PASS 390px screenshot uses genuinely running animation
+PASS 390px reduced-motion entry visitors are hidden
+PASS 390px reduced-motion retains the six street pedestrians without animation
+PASS 390px right window merchandise remains visible
+PASS 390px page stays within viewport
+PASS rental signs have no inherited text outline
+PASS rental text contrast is at least 4.5:1
+PASS business sign outline remains intact
+PASS existing 4174 index.html exactly matches final dist
+PASS existing 4174 sw.js exactly matches final dist
+PASS existing 4174 assets/game-Hj7PjAum.js exactly matches final dist
+PASS existing 4174 assets/region-art-CwpHi1Uq.js exactly matches final dist
+PASS existing 4174 assets/phaser-D8EC1TLR.js exactly matches final dist
+PASS existing 4174 assets/game-Dw8Uq1Wk.css exactly matches final dist
+PASS TLS index.html exactly matches final dist
+PASS TLS sw.js exactly matches final dist
+PASS TLS assets/game-Hj7PjAum.js exactly matches final dist
+PASS TLS assets/region-art-CwpHi1Uq.js exactly matches final dist
+PASS TLS assets/phaser-D8EC1TLR.js exactly matches final dist
+PASS TLS assets/game-Dw8Uq1Wk.css exactly matches final dist
+PASS browser has no page or console errors

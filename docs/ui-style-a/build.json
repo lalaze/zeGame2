@@ -1,0 +1,16 @@
+{
+  "stage": "/private/tmp/zeGame2-ui-style-a-stage-t0GGlM",
+  "dist": "/Volumes/data/code/zeGame2/dist",
+  "version": "e6dd0aee7fccab1dbff0",
+  "files": 1340,
+  "retainedOldHashedFiles": 42,
+  "entrySha256": "1e42e3fcb5149de4e41a602ae9b705693c6a808ccac33b0a6dbbac18ac7991bb",
+  "workerSha256": "4c2187a873b2457da98070a59d23ba7db571455d85dbdad7f2b2e494a4648395",
+  "entryBundles": [
+    "assets/game-D8zhlV7q.js",
+    "assets/region-art-DtWf97mz.js",
+    "assets/phaser-D8EC1TLR.js",
+    "assets/game-DOiyzF6t.css"
+  ],
+  "publishedAt": "2026-11-09T08:35:02.481Z"
+}

@@ -1,0 +1,131 @@
+(node:8297) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS desktop: visible controls at least 44px
+PASS desktop: pixel font and square/unclipped button boxes
+PASS desktop: hint never overlaps arrow columns
+PASS desktop: resource counter stays between navigation buttons
+PASS desktop: top chrome leaves street space
+PASS desktop: bottom route bar stays in viewport
+PASS locked route stays previewable with text and lock mark
+PASS keyboard tab focus has an unclipped outline
+PASS pressed buttons never move their hit boxes
+PASS default street is the interactive raster world, no detail/payment panel
+PASS home and both stable vacant designs are present
+PASS original desktop doubleclick coordinates never charge
+PASS doubleclick new shop door opens details without purchasing
+PASS guard-disabled confirm has distinct disabled ink
+PASS desktop-confirm: actual pixel glyphs [data-street-home]
+PASS desktop-confirm: actual pixel glyphs [data-street-wallet]
+PASS desktop-confirm: actual pixel glyphs .street-choice span
+PASS desktop-confirm: actual pixel glyphs .street-choice small
+PASS desktop-confirm: actual pixel glyphs .street-summary p
+PASS desktop-confirm: actual pixel glyphs .street-walk-controls p
+PASS desktop-confirm: actual pixel glyphs .street-detail h3
+PASS desktop-confirm: actual pixel glyphs [data-street-confirm-quote]
+PASS land quote alone leaves coins unchanged
+PASS explicit confirmation buys only land
+PASS fitout quote is a separate unpaid action
+PASS separate fitout confirmation starts the correct building
+PASS building has new bookshop and physical fence
+PASS shop keyboard arrows move focus without opening
+PASS mouse drag pans without detail or charges
+PASS cross-street empty address does not inherit owned business
+PASS returning street preserves independent construction
+PASS home storefront returns to live cafe
+PASS all five business-specific storefronts are distinct
+PASS harvest cannot pay the same batches twice
+PASS running animation actually moves pedestrians
+PASS status tags paint above animated people
+PASS reduced motion hides only decorative entrants, retains walkers
+PASS reduced motion tags remain readable
+PASS vacant, construction, sale and open coexist
+PASS 360x800: visible controls at least 44px
+PASS 360x800: pixel font and square/unclipped button boxes
+PASS 360x800: hint never overlaps arrow columns
+PASS 360x800: resource counter stays between navigation buttons
+PASS 360x800: top chrome leaves street space
+PASS 360x800: bottom route bar stays in viewport
+PASS 360: viewport has no document overflow
+PASS 360: real touch drag pans without opening or spending
+PASS 360: tap opens contained bottom drawer
+PASS 360: pixel drawer fits without horizontal overflow
+PASS 360: drawer and confirm controls retain 44px targets
+PASS 360: home returns with all assets intact
+PASS 390x844: visible controls at least 44px
+PASS 390x844: pixel font and square/unclipped button boxes
+PASS 390x844: hint never overlaps arrow columns
+PASS 390x844: resource counter stays between navigation buttons
+PASS 390x844: top chrome leaves street space
+PASS 390x844: bottom route bar stays in viewport
+PASS 390: viewport has no document overflow
+PASS 390: real touch drag pans without opening or spending
+PASS 390: tap opens contained bottom drawer
+PASS 390: pixel drawer fits without horizontal overflow
+PASS 390: drawer and confirm controls retain 44px targets
+PASS 390: home returns with all assets intact
+PASS 526x760: visible controls at least 44px
+PASS 526x760: pixel font and square/unclipped button boxes
+PASS 526x760: hint never overlaps arrow columns
+PASS 526x760: resource counter stays between navigation buttons
+PASS 526x760: top chrome leaves street space
+PASS 526x760: bottom route bar stays in viewport
+PASS 526: viewport has no document overflow
+PASS 526: real touch drag pans without opening or spending
+PASS 526: tap opens contained bottom drawer
+PASS 526: pixel drawer fits without horizontal overflow
+PASS 526: drawer and confirm controls retain 44px targets
+PASS 526: home returns with all assets intact
+PASS 568x415: visible controls at least 44px
+PASS 568x415: pixel font and square/unclipped button boxes
+PASS 568x415: hint never overlaps arrow columns
+PASS 568x415: resource counter stays between navigation buttons
+PASS 568x415: top chrome leaves street space
+PASS 568x415: bottom route bar stays in viewport
+PASS 568: viewport has no document overflow
+PASS 568: real touch drag pans without opening or spending
+PASS 568: tap opens contained bottom drawer
+PASS 568: pixel drawer fits without horizontal overflow
+PASS 568: drawer and confirm controls retain 44px targets
+PASS 568: home returns with all assets intact
+PASS 390-confirm: pixel drawer fits without horizontal overflow
+PASS 390-confirm: drawer and confirm controls retain 44px targets
+PASS mobile-confirm: actual pixel glyphs [data-street-home]
+PASS mobile-confirm: actual pixel glyphs [data-street-wallet]
+PASS mobile-confirm: actual pixel glyphs .street-choice span
+PASS mobile-confirm: actual pixel glyphs .street-choice small
+PASS mobile-confirm: actual pixel glyphs .street-summary p
+PASS mobile-confirm: actual pixel glyphs .street-walk-controls p
+PASS mobile-confirm: actual pixel glyphs .street-detail h3
+PASS mobile-confirm: actual pixel glyphs [data-street-confirm-quote]
+PASS mobile Escape cancels payment without money or asset changes
+PASS English storefront sign uses live translated UI text
+PASS English mobile document remains within viewport
+PASS English-360: visible controls at least 44px
+PASS English-360: pixel font and square/unclipped button boxes
+PASS English-360: hint never overlaps arrow columns
+PASS English-360: resource counter stays between navigation buttons
+PASS English-360: top chrome leaves street space
+PASS English-360: bottom route bar stays in viewport
+PASS font stall still reaches true first-frame readiness
+PASS new SW registration waits for main first frame
+PASS all 16 new PNGs cache before any street visit
+PASS offline first street has every storefront/scenery img
+PASS offline pavement layer is cached
+PASS no application page errors
+PASS no failing HTTP resource responses in working browser origin
+PASS HTTP final bytes: index.html
+PASS HTTP final bytes: sw.js
+PASS HTTP final bytes: assets/game-D8zhlV7q.js
+PASS HTTP final bytes: assets/region-art-DtWf97mz.js
+PASS HTTP final bytes: assets/phaser-D8EC1TLR.js
+PASS HTTP final bytes: assets/game-DOiyzF6t.css
+PASS HTTP final bytes: art/street-art-v2/cafe.png
+PASS HTTP final bytes: art/street-art-v2/paving.png
+PASS HTTPS final bytes: index.html
+PASS HTTPS final bytes: sw.js
+PASS HTTPS final bytes: assets/game-D8zhlV7q.js
+PASS HTTPS final bytes: assets/region-art-DtWf97mz.js
+PASS HTTPS final bytes: assets/phaser-D8EC1TLR.js
+PASS HTTPS final bytes: assets/game-DOiyzF6t.css
+PASS HTTPS final bytes: art/street-art-v2/cafe.png
+PASS HTTPS final bytes: art/street-art-v2/paving.png

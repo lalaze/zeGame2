@@ -4,6 +4,8 @@ import { earn } from './economy';
 import { awayHourly, paidSeconds, tillSeconds } from './manager';
 import { createInitialState, deserialize, type GameState } from './state';
 import { isLocation, type LocationId } from './locations';
+import { collectAllProjects } from './room-projects';
+import { ownsStreetBusiness } from './streets';
 
 /**
  * The café chain: once the whole building is open, the owner can hand the café over
@@ -115,8 +117,8 @@ export function starsFor(earned: number): number {
 /** What this branch must have earned in all for one more star. */
 export const nextStarAt = (state: GameState) => STAR_EARNINGS * 2 ** starsOnBranch(state);
 
-/** A new branch opens once every room of this one is open. */
-export const branchUnlocked = (state: GameState) => state.regions.includes('terrace');
+/** The original terrace milestone still opens branching; later rooms are optional. */
+export const branchUnlocked = (state: GameState) => state.regions.includes('terrace') || ownsStreetBusiness(state, 'terrace');
 
 export const canOpenBranch = (state: GameState) =>
   branchUnlocked(state) && state.phase === 'prep' && starsOnBranch(state) > 0;
@@ -136,12 +138,18 @@ export function openBranch(state: GameState, location: LocationId, now: number):
   const waiting = franchiseEarnings(state, now).amount;
   const franchises = [...state.chain.franchises, { location: state.chain.location, hourly: awayHourly(state) * FRANCHISE_SHARE }].slice(-MAX_FRANCHISES);
   const fresh = createInitialState(state.createdAt);
+  // Settle side businesses on a copy; branch previews must never mutate the old café.
+  const settled = { ...state, roomProjects: structuredClone(state.roomProjects) };
+  const projectReward = collectAllProjects(settled, now);
   const carried: GameState = {
     ...fresh,
     profile: state.profile,
     manager: state.manager,
     // The catering order is the owner's, not the building's: it carries on.
     orders: state.orders,
+    roomProjects: { ...settled.roomProjects, facilities: {} },
+    // Purchased street properties remain the owner's assets across café handovers.
+    streets: structuredClone(state.streets),
     milestones: state.milestones,
     goal: state.goal,
     day: state.day,
@@ -156,11 +164,11 @@ export function openBranch(state: GameState, location: LocationId, now: number):
     catGifts: state.catGifts,
     signatureDrinks: state.signatureDrinks,
     cafeStyle: { ...state.cafeStyle, bakeryTrialDay: undefined },
-    coins: fresh.coins + waiting,
-    totalEarned: state.totalEarned + waiting,
+    coins: fresh.coins + waiting + projectReward.coins,
+    totalEarned: state.totalEarned + waiting + projectReward.coins,
     chain: {
       stars: state.chain.stars + starsOnBranch(state), branches: state.chain.branches + 1,
-      baseEarned: state.totalEarned + waiting, location, franchises, franchiseSince: now, perks: [...state.chain.perks],
+      baseEarned: state.totalEarned + waiting + projectReward.coins, location, franchises, franchiseSince: now, perks: [...state.chain.perks],
     },
     // The kitchen perk: every new branch opens with its kitchen already built.
     kitchen: hasPerk(state, 'kitchen'),

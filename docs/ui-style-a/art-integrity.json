@@ -1,0 +1,21 @@
+{
+  "unchangedApprovedPNGCount": 16,
+  "sha256": {
+    "bench.png": "ef9328df69a625863ce416632bb2e0d9ba92ec5272665dd526885c7c228887a9",
+    "bookshop.png": "d8986b86c474d121393831b839dfcfdeb634e33cbc0e09e419990e008ac24841",
+    "cafe.png": "1aeeb5d464cc46852f438c5e4509d7cc27c9215cbdb04d5132251102c6cfe43a",
+    "cloud.png": "ea6c703fffd461e2745399c5ee3e96ed9e9e618238b0e6f15097205b50488ee1",
+    "curb.png": "fd657a969ce775d2cc4b78deaa0c95030d189110787ece1b5940a2e3ae6af9ca",
+    "florist.png": "3dcf587f335f5afeb10ee9f9c3eee5d339f87f498a3dd97ef0c7103874374304",
+    "hills.png": "c92b0de3efa47bf8692bedf95c48edcbaef20126388e1a696c4486c64026cc1c",
+    "lamp.png": "651999bcb5db4c5c8dc8943386dc59cf565ee86d5aae0772bbc29dfd95c7417c",
+    "paving.png": "f16c0cc9ebd39b8313d6e86f49753165041ca54f72fc985f470c8c269e2e246b",
+    "plant-shop.png": "b29a79dd457f468e3184056c0099186836fe5d4be9106348d3e40c76f60d5514",
+    "pottery.png": "19e561cccfe46d35e107b90feff1981445c9ed9b785542715425980cf60db9ff",
+    "shadow.png": "58c9a8fdba4fdcf06b138f5384ab411b26da6feee194ef44e8d87b70b3c8fef8",
+    "tea-shop.png": "f1a9edc5d5ca2eb5da30602b5fb0004ff176923e83cbcc1673b0bf88e7a156df",
+    "town.png": "3ad222d98128316d8d90e3bb0cd7dfee2fbceb9a82e1921f09ae93a8764d2d31",
+    "vacant-blue.png": "c653733bdfe748586e1fc8471481dc819860407d8a608f902e21bc1a0228eaae",
+    "vacant-brick.png": "cfb35b4c6a7538c5335e16450c4078ecb16d334fe6f59c7c03dbab890623008e"
+  }
+}

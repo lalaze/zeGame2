@@ -167,6 +167,8 @@ function lampsIn(area: AreaId, state: GameState): Lamp[] {
     for (const x of [88, 231]) add(x, 29, 18, .8);
   } else if (area === 'terrace') {
     for (let x = 22; x < SCENE_W; x += 34) add(x, 19 + Math.round(Math.sin((x / SCENE_W) * Math.PI) * 12), 14, 0.9);
+  } else if (area === 'workshop' || area === 'observatory') {
+    for (const x of [126, 192]) add(x, 29, 22, .8);
   }
   for (const piece of state.decor.placed) {
     const def = furnitureDef(piece.id);
@@ -291,6 +293,7 @@ export class CafeScene extends Phaser.Scene {
     super('cafe');
   }
 
+  startupPhase = 'artwork loading';
   private loadingFailed = false;
   private initialized = false;
   private loadGeneration = 0;
@@ -338,12 +341,15 @@ export class CafeScene extends Phaser.Scene {
   create(): void {
     if (this.loadingFailed) return;
     const generation = this.loadGeneration;
+    this.startupPhase = 'character atlases / optional lettering';
     // Phaser does not await async create methods. Keep its update loop gated
     // until all human art has decoded and the scene is fully initialized.
     void (this.referenceCharactersReady ?? Promise.all([preloadReferenceCharacters(), preloadCozyCats(), loadSignFonts()])).then(() => {
       if (generation !== this.loadGeneration || this.loadingFailed) return;
+      this.startupPhase = 'scene initialization';
       this.createCafe();
       this.initialized = true;
+      this.startupPhase = 'first frame';
     }).catch(error => {
       if (generation !== this.loadGeneration || this.loadingFailed) return;
       this.loadingFailed = true;
@@ -500,6 +506,10 @@ export class CafeScene extends Phaser.Scene {
     this.tapInput?.refresh();
 
     const view = this.view;
+    // Keep hooks.tick running: the DOM street and real-time production need it.
+    // Hide the camera as well as skipping draw preparation and texture work.
+    this.cameras.main.visible = !view.renderSuspended;
+    if (view.renderSuspended) return;
     const state = this.getState();
     const t = time / 1000;
     // Windows, room lights and wall clocks share the saved business-day clock.
@@ -522,7 +532,7 @@ export class CafeScene extends Phaser.Scene {
     this.glows.begin();
     for (const area of AREA_IDS) {
       const o = areaBounds(area);
-      const visible = o.x < left + camera.width / zoom && o.x + o.w > left && o.y < top + camera.height / zoom && o.y + o.h > top;
+      const visible = (area === 'main' || area === 'kitchen') && o.x < left + camera.width / zoom && o.x + o.w > left && o.y < top + camera.height / zoom && o.y + o.h > top;
       this.drawRoom(area, visible, state, t, now, light);
       this.drawLight(area, visible, state, light);
     }

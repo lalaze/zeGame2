@@ -1,0 +1,464 @@
+{
+  "checks": [
+    "1440px running pedestrians stay fully in front of stone platforms",
+    "1440px status labels stay legible above pedestrians",
+    "1440px pedestrians stay above the floating navigation controls",
+    "1440px both pedestrian lanes are on the foreground road",
+    "1440px screenshot uses genuinely running animation",
+    "1440px reduced-motion entry visitors are hidden",
+    "1440px reduced-motion retains the six street pedestrians without animation",
+    "1440px right window merchandise remains visible",
+    "1440px page stays within viewport",
+    "360px running pedestrians stay fully in front of stone platforms",
+    "360px status labels stay legible above pedestrians",
+    "360px pedestrians stay above the floating navigation controls",
+    "360px both pedestrian lanes are on the foreground road",
+    "360px screenshot uses genuinely running animation",
+    "360px reduced-motion entry visitors are hidden",
+    "360px reduced-motion retains the six street pedestrians without animation",
+    "360px right window merchandise remains visible",
+    "360px page stays within viewport",
+    "390px running pedestrians stay fully in front of stone platforms",
+    "390px status labels stay legible above pedestrians",
+    "390px pedestrians stay above the floating navigation controls",
+    "390px both pedestrian lanes are on the foreground road",
+    "390px screenshot uses genuinely running animation",
+    "390px reduced-motion entry visitors are hidden",
+    "390px reduced-motion retains the six street pedestrians without animation",
+    "390px right window merchandise remains visible",
+    "390px page stays within viewport",
+    "rental signs have no inherited text outline",
+    "rental text contrast is at least 4.5:1",
+    "business sign outline remains intact",
+    "existing 4174 index.html exactly matches final dist",
+    "existing 4174 sw.js exactly matches final dist",
+    "existing 4174 assets/game-Hj7PjAum.js exactly matches final dist",
+    "existing 4174 assets/region-art-CwpHi1Uq.js exactly matches final dist",
+    "existing 4174 assets/phaser-D8EC1TLR.js exactly matches final dist",
+    "existing 4174 assets/game-Dw8Uq1Wk.css exactly matches final dist",
+    "TLS index.html exactly matches final dist",
+    "TLS sw.js exactly matches final dist",
+    "TLS assets/game-Hj7PjAum.js exactly matches final dist",
+    "TLS assets/region-art-CwpHi1Uq.js exactly matches final dist",
+    "TLS assets/phaser-D8EC1TLR.js exactly matches final dist",
+    "TLS assets/game-Dw8Uq1Wk.css exactly matches final dist",
+    "browser has no page or console errors"
+  ],
+  "errors": [],
+  "data": {
+    "360": {
+      "moving": {
+        "stoneBottom": 671,
+        "labelBottom": 707.390625,
+        "controlsTop": 768,
+        "walkers": [
+          {
+            "top": 672,
+            "bottom": 760,
+            "x": 265.6243896484375,
+            "cssBottom": "84px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 676,
+            "bottom": 764,
+            "x": 679.3756103515625,
+            "cssBottom": "80px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 672,
+            "bottom": 760,
+            "x": 495.6243896484375,
+            "cssBottom": "84px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 676,
+            "bottom": 764,
+            "x": 1209.3756103515625,
+            "cssBottom": "80px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 672,
+            "bottom": 760,
+            "x": 1325.6243896484375,
+            "cssBottom": "84px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 676,
+            "bottom": 764,
+            "x": 1739.375732421875,
+            "cssBottom": "80px",
+            "animation": "street-stroll",
+            "display": "block"
+          }
+        ],
+        "readable": true
+      },
+      "reduced": {
+        "stoneBottom": 671,
+        "labelBottom": 707.390625,
+        "controlsTop": 768,
+        "walkers": [
+          {
+            "top": 672,
+            "bottom": 760,
+            "x": -130,
+            "cssBottom": "84px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 676,
+            "bottom": 764,
+            "x": 210,
+            "cssBottom": "80px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 672,
+            "bottom": 760,
+            "x": 550,
+            "cssBottom": "84px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 676,
+            "bottom": 764,
+            "x": 890,
+            "cssBottom": "80px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 672,
+            "bottom": 760,
+            "x": 1230,
+            "cssBottom": "84px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 676,
+            "bottom": 764,
+            "x": 1570,
+            "cssBottom": "80px",
+            "animation": "none",
+            "display": "block"
+          }
+        ],
+        "readable": true
+      }
+    },
+    "390": {
+      "moving": {
+        "stoneBottom": 671,
+        "labelBottom": 707.390625,
+        "controlsTop": 768,
+        "walkers": [
+          {
+            "top": 672,
+            "bottom": 760,
+            "x": 265.9393310546875,
+            "cssBottom": "84px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 676,
+            "bottom": 764,
+            "x": 679.0606689453125,
+            "cssBottom": "80px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 672,
+            "bottom": 760,
+            "x": 495.93939208984375,
+            "cssBottom": "84px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 676,
+            "bottom": 764,
+            "x": 1209.0606689453125,
+            "cssBottom": "80px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 672,
+            "bottom": 760,
+            "x": 1325.9393310546875,
+            "cssBottom": "84px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 676,
+            "bottom": 764,
+            "x": 1739.060546875,
+            "cssBottom": "80px",
+            "animation": "street-stroll",
+            "display": "block"
+          }
+        ],
+        "readable": true
+      },
+      "reduced": {
+        "stoneBottom": 671,
+        "labelBottom": 707.390625,
+        "controlsTop": 768,
+        "walkers": [
+          {
+            "top": 672,
+            "bottom": 760,
+            "x": -130,
+            "cssBottom": "84px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 676,
+            "bottom": 764,
+            "x": 210,
+            "cssBottom": "80px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 672,
+            "bottom": 760,
+            "x": 550,
+            "cssBottom": "84px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 676,
+            "bottom": 764,
+            "x": 890,
+            "cssBottom": "80px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 672,
+            "bottom": 760,
+            "x": 1230,
+            "cssBottom": "84px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 676,
+            "bottom": 764,
+            "x": 1570,
+            "cssBottom": "80px",
+            "animation": "none",
+            "display": "block"
+          }
+        ],
+        "readable": true
+      }
+    },
+    "1440": {
+      "moving": {
+        "stoneBottom": 787,
+        "labelBottom": 823.390625,
+        "controlsTop": 882,
+        "walkers": [
+          {
+            "top": 788,
+            "bottom": 876,
+            "x": 616.2506103515625,
+            "cssBottom": "84px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 792,
+            "bottom": 880,
+            "x": 1028.7493896484375,
+            "cssBottom": "80px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 788,
+            "bottom": 876,
+            "x": 846.2506103515625,
+            "cssBottom": "84px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 792,
+            "bottom": 880,
+            "x": 1558.7493896484375,
+            "cssBottom": "80px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 788,
+            "bottom": 876,
+            "x": 1676.2506103515625,
+            "cssBottom": "84px",
+            "animation": "street-stroll",
+            "display": "block"
+          },
+          {
+            "top": 792,
+            "bottom": 880,
+            "x": 2088.749267578125,
+            "cssBottom": "80px",
+            "animation": "street-stroll",
+            "display": "block"
+          }
+        ],
+        "readable": true
+      },
+      "reduced": {
+        "stoneBottom": 787,
+        "labelBottom": 823.390625,
+        "controlsTop": 882,
+        "walkers": [
+          {
+            "top": 788,
+            "bottom": 876,
+            "x": 220,
+            "cssBottom": "84px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 792,
+            "bottom": 880,
+            "x": 560,
+            "cssBottom": "80px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 788,
+            "bottom": 876,
+            "x": 900,
+            "cssBottom": "84px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 792,
+            "bottom": 880,
+            "x": 1240,
+            "cssBottom": "80px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 788,
+            "bottom": 876,
+            "x": 1580,
+            "cssBottom": "84px",
+            "animation": "none",
+            "display": "block"
+          },
+          {
+            "top": 792,
+            "bottom": 880,
+            "x": 1920,
+            "cssBottom": "80px",
+            "animation": "none",
+            "display": "block"
+          }
+        ],
+        "readable": true
+      }
+    },
+    "rental": {
+      "shadow": "none",
+      "color": "rgb(132, 80, 59)",
+      "background": "rgb(247, 233, 201)",
+      "contrast": 5.468456516049506
+    },
+    "served": {
+      "http://127.0.0.1:4174": [
+        {
+          "path": "index.html",
+          "sha256": "3482ea123efb610ca2cee9ecabd7c5446d4fbcd04d506dce9a14b3c38572de2f",
+          "bytes": 19393
+        },
+        {
+          "path": "sw.js",
+          "sha256": "f6b2109c67d96524a6bf9dbbd08fb243e685c6421067990a8cb092ed9b5cc40d",
+          "bytes": 108869
+        },
+        {
+          "path": "assets/game-Hj7PjAum.js",
+          "sha256": "e8e51f92303f18c00f00e5f2b69ee10ec71bc34b453b7750f6de7ddf1d5e0f03",
+          "bytes": 397068
+        },
+        {
+          "path": "assets/region-art-CwpHi1Uq.js",
+          "sha256": "ad5c86fef926ab705eed3f3ec01a5a322f683853b61fd250f0337ba390d238ba",
+          "bytes": 999713
+        },
+        {
+          "path": "assets/phaser-D8EC1TLR.js",
+          "sha256": "2946ccb85768a4543d0f38bba7bc7dbe3e24404149b4c91558d8504c44d079b8",
+          "bytes": 1374100
+        },
+        {
+          "path": "assets/game-Dw8Uq1Wk.css",
+          "sha256": "f001d3590b3dc93ee32996dce8ac8fd36a5d02690a530b734128d34fc593b539",
+          "bytes": 158423
+        }
+      ],
+      "https://lalazemac-mini.tailcec3d.ts.net:4174": [
+        {
+          "path": "index.html",
+          "sha256": "3482ea123efb610ca2cee9ecabd7c5446d4fbcd04d506dce9a14b3c38572de2f",
+          "bytes": 19393
+        },
+        {
+          "path": "sw.js",
+          "sha256": "f6b2109c67d96524a6bf9dbbd08fb243e685c6421067990a8cb092ed9b5cc40d",
+          "bytes": 108869
+        },
+        {
+          "path": "assets/game-Hj7PjAum.js",
+          "sha256": "e8e51f92303f18c00f00e5f2b69ee10ec71bc34b453b7750f6de7ddf1d5e0f03",
+          "bytes": 397068
+        },
+        {
+          "path": "assets/region-art-CwpHi1Uq.js",
+          "sha256": "ad5c86fef926ab705eed3f3ec01a5a322f683853b61fd250f0337ba390d238ba",
+          "bytes": 999713
+        },
+        {
+          "path": "assets/phaser-D8EC1TLR.js",
+          "sha256": "2946ccb85768a4543d0f38bba7bc7dbe3e24404149b4c91558d8504c44d079b8",
+          "bytes": 1374100
+        },
+        {
+          "path": "assets/game-Dw8Uq1Wk.css",
+          "sha256": "f001d3590b3dc93ee32996dce8ac8fd36a5d02690a530b734128d34fc593b539",
+          "bytes": 158423
+        }
+      ]
+    }
+  }
+}

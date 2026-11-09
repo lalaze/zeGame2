@@ -1,0 +1,2522 @@
+{
+  "publishedVersion": "e6dd0aee7fccab1dbff0",
+  "entry": "assets/game-D8zhlV7q.js",
+  "checks": [
+    "rendered page uses final published entry",
+    "mobile-390: document stays within viewport",
+    "mobile-390-header: cream frame fits viewport",
+    "mobile-390-header: shared frame and pixel family",
+    "mobile-390-dock: cream frame fits viewport",
+    "mobile-390-dock: shared frame and pixel family",
+    "mobile-390-dock: targets remain at least 44px and unmasked",
+    "mobile-390: cafe name has readable cream-surface contrast",
+    "mobile-390-home: actual custom pixel glyphs .mobile-cafe-name",
+    "mobile-390-home: actual custom pixel glyphs .mobile-cafe-clock strong",
+    "mobile-390-home: actual custom pixel glyphs #coins",
+    "mobile-390-management: cream frame fits viewport",
+    "mobile-390-management: shared frame and pixel family",
+    "mobile-390-tabs: targets remain at least 44px and unmasked",
+    "mobile-390-panel: actual custom pixel glyphs #drawer-title",
+    "mobile-390-panel: actual custom pixel glyphs #drawer-balance",
+    "mobile-390-panel: actual custom pixel glyphs #management-panel .tab.active",
+    "mobile-390-panel: actual custom pixel glyphs #management-panel .row .name",
+    "mobile-390: pressing tab does not move hit area",
+    "mobile-390-decor: cream frame fits viewport",
+    "mobile-390-decor: shared frame and pixel family",
+    "mobile-390: pantry remains navigable",
+    "mobile-390-settings: cream frame fits viewport",
+    "mobile-390-settings: shared frame and pixel family",
+    "mobile-390-settings: targets remain at least 44px and unmasked",
+    "mobile-390: destructive reset stays distinct from primary green",
+    "mobile-390-settings: actual custom pixel glyphs .modal h2",
+    "mobile-390-settings: actual custom pixel glyphs .profile-cafe",
+    "mobile-390-settings: actual custom pixel glyphs .stats dd",
+    "mobile-390: profile input is native and 16px",
+    "mobile-390-profile: cream frame fits viewport",
+    "mobile-390-profile: shared frame and pixel family",
+    "mobile-390: input focus is visible and not clipped",
+    "mobile-390: cafe/street round trip preserves profile/assets",
+    "reduced motion removes component transitions",
+    "forced colours keep visible native control borders",
+    "rendered page uses final published entry",
+    "mobile-360: document stays within viewport",
+    "mobile-360-header: cream frame fits viewport",
+    "mobile-360-header: shared frame and pixel family",
+    "mobile-360-dock: cream frame fits viewport",
+    "mobile-360-dock: shared frame and pixel family",
+    "mobile-360-dock: targets remain at least 44px and unmasked",
+    "mobile-360: cafe name has readable cream-surface contrast",
+    "mobile-360-home: actual custom pixel glyphs .mobile-cafe-name",
+    "mobile-360-home: actual custom pixel glyphs .mobile-cafe-clock strong",
+    "mobile-360-home: actual custom pixel glyphs #coins",
+    "mobile-360-management: cream frame fits viewport",
+    "mobile-360-management: shared frame and pixel family",
+    "mobile-360-tabs: targets remain at least 44px and unmasked",
+    "mobile-360-panel: actual custom pixel glyphs #drawer-title",
+    "mobile-360-panel: actual custom pixel glyphs #drawer-balance",
+    "mobile-360-panel: actual custom pixel glyphs #management-panel .tab.active",
+    "mobile-360-panel: actual custom pixel glyphs #management-panel .row .name",
+    "mobile-360: pressing tab does not move hit area",
+    "mobile-360-decor: cream frame fits viewport",
+    "mobile-360-decor: shared frame and pixel family",
+    "mobile-360: pantry remains navigable",
+    "mobile-360-settings: cream frame fits viewport",
+    "mobile-360-settings: shared frame and pixel family",
+    "mobile-360-settings: targets remain at least 44px and unmasked",
+    "mobile-360: destructive reset stays distinct from primary green",
+    "mobile-360-settings: actual custom pixel glyphs .modal h2",
+    "mobile-360-settings: actual custom pixel glyphs .profile-cafe",
+    "mobile-360-settings: actual custom pixel glyphs .stats dd",
+    "mobile-360: profile input is native and 16px",
+    "mobile-360-profile: cream frame fits viewport",
+    "mobile-360-profile: shared frame and pixel family",
+    "mobile-360: input focus is visible and not clipped",
+    "mobile-360: cafe/street round trip preserves profile/assets",
+    "rendered page uses final published entry",
+    "mobile-526: document stays within viewport",
+    "mobile-526-header: cream frame fits viewport",
+    "mobile-526-header: shared frame and pixel family",
+    "mobile-526-dock: cream frame fits viewport",
+    "mobile-526-dock: shared frame and pixel family",
+    "mobile-526-dock: targets remain at least 44px and unmasked",
+    "mobile-526: cafe name has readable cream-surface contrast",
+    "mobile-526-home: actual custom pixel glyphs .mobile-cafe-name",
+    "mobile-526-home: actual custom pixel glyphs .mobile-cafe-clock strong",
+    "mobile-526-home: actual custom pixel glyphs #coins",
+    "mobile-526-management: cream frame fits viewport",
+    "mobile-526-management: shared frame and pixel family",
+    "mobile-526-tabs: targets remain at least 44px and unmasked",
+    "mobile-526-panel: actual custom pixel glyphs #drawer-title",
+    "mobile-526-panel: actual custom pixel glyphs #drawer-balance",
+    "mobile-526-panel: actual custom pixel glyphs #management-panel .tab.active",
+    "mobile-526-panel: actual custom pixel glyphs #management-panel .row .name",
+    "mobile-526: pressing tab does not move hit area",
+    "mobile-526-decor: cream frame fits viewport",
+    "mobile-526-decor: shared frame and pixel family",
+    "mobile-526: pantry remains navigable",
+    "mobile-526-settings: cream frame fits viewport",
+    "mobile-526-settings: shared frame and pixel family",
+    "mobile-526-settings: targets remain at least 44px and unmasked",
+    "mobile-526: destructive reset stays distinct from primary green",
+    "mobile-526-settings: actual custom pixel glyphs .modal h2",
+    "mobile-526-settings: actual custom pixel glyphs .profile-cafe",
+    "mobile-526-settings: actual custom pixel glyphs .stats dd",
+    "mobile-526: profile input is native and 16px",
+    "mobile-526-profile: cream frame fits viewport",
+    "mobile-526-profile: shared frame and pixel family",
+    "mobile-526: input focus is visible and not clipped",
+    "mobile-526: cafe/street round trip preserves profile/assets",
+    "rendered page uses final published entry",
+    "desktop: document stays within viewport",
+    "desktop: cafe name has readable cream-surface contrast",
+    "desktop-home: actual custom pixel glyphs #hud-cafe-name",
+    "desktop-home: actual custom pixel glyphs #coins",
+    "desktop-home: actual custom pixel glyphs #reputation-score",
+    "desktop-management: cream frame fits viewport",
+    "desktop-management: shared frame and pixel family",
+    "desktop-tabs: targets remain at least 44px and unmasked",
+    "desktop-panel: actual custom pixel glyphs #drawer-title",
+    "desktop-panel: actual custom pixel glyphs #drawer-balance",
+    "desktop-panel: actual custom pixel glyphs #management-panel .tab.active",
+    "desktop-panel: actual custom pixel glyphs #management-panel .row .name",
+    "desktop: pressing tab does not move hit area",
+    "desktop-decor: cream frame fits viewport",
+    "desktop-decor: shared frame and pixel family",
+    "desktop: pantry remains navigable",
+    "desktop-settings: cream frame fits viewport",
+    "desktop-settings: shared frame and pixel family",
+    "desktop-settings: targets remain at least 44px and unmasked",
+    "desktop: destructive reset stays distinct from primary green",
+    "desktop-settings: actual custom pixel glyphs .modal h2",
+    "desktop-settings: actual custom pixel glyphs .profile-cafe",
+    "desktop-settings: actual custom pixel glyphs .stats dd",
+    "desktop: profile input is native and 16px",
+    "desktop-profile: cream frame fits viewport",
+    "desktop-profile: shared frame and pixel family",
+    "desktop: input focus is visible and not clipped",
+    "desktop: cafe/street round trip preserves profile/assets",
+    "rendered page uses final published entry",
+    "mobile-568: document stays within viewport",
+    "mobile-568-header: cream frame fits viewport",
+    "mobile-568-header: shared frame and pixel family",
+    "mobile-568-dock: cream frame fits viewport",
+    "mobile-568-dock: shared frame and pixel family",
+    "mobile-568-dock: targets remain at least 44px and unmasked",
+    "mobile-568: cafe name has readable cream-surface contrast",
+    "mobile-568-home: actual custom pixel glyphs .mobile-cafe-name",
+    "mobile-568-home: actual custom pixel glyphs .mobile-cafe-clock strong",
+    "mobile-568-home: actual custom pixel glyphs #coins",
+    "mobile-568-management: cream frame fits viewport",
+    "mobile-568-management: shared frame and pixel family",
+    "mobile-568-tabs: targets remain at least 44px and unmasked",
+    "mobile-568-panel: actual custom pixel glyphs #drawer-title",
+    "mobile-568-panel: actual custom pixel glyphs #drawer-balance",
+    "mobile-568-panel: actual custom pixel glyphs #management-panel .tab.active",
+    "mobile-568-panel: actual custom pixel glyphs #management-panel .row .name",
+    "mobile-568: pressing tab does not move hit area",
+    "mobile-568-decor: cream frame fits viewport",
+    "mobile-568-decor: shared frame and pixel family",
+    "mobile-568: pantry remains navigable",
+    "mobile-568-settings: cream frame fits viewport",
+    "mobile-568-settings: shared frame and pixel family",
+    "mobile-568-settings: targets remain at least 44px and unmasked",
+    "mobile-568: destructive reset stays distinct from primary green",
+    "mobile-568-settings: actual custom pixel glyphs .modal h2",
+    "mobile-568-settings: actual custom pixel glyphs .profile-cafe",
+    "mobile-568-settings: actual custom pixel glyphs .stats dd",
+    "mobile-568: profile input is native and 16px",
+    "mobile-568-profile: cream frame fits viewport",
+    "mobile-568-profile: shared frame and pixel family",
+    "mobile-568: input focus is visible and not clipped",
+    "mobile-568: cafe/street round trip preserves profile/assets",
+    "rendered page uses final published entry",
+    "English panel: cream frame fits viewport",
+    "English panel: shared frame and pixel family",
+    "English panel: actual custom pixel glyphs #drawer-title",
+    "English panel: actual custom pixel glyphs #drawer-balance",
+    "rendered page uses final published entry",
+    "equipped rose theme still changes action ink",
+    "no indoor page/console errors",
+    "no failed indoor HTTP resources"
+  ],
+  "runs": [
+    {
+      "name": "mobile-390-header",
+      "box": {
+        "x": 12,
+        "y": 12,
+        "width": 366,
+        "height": 79,
+        "top": 12,
+        "right": 378,
+        "bottom": 91,
+        "left": 12
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-390-dock",
+      "box": {
+        "x": 12,
+        "y": 762.40625,
+        "width": 366,
+        "height": 69.59375,
+        "top": 762.40625,
+        "right": 378,
+        "bottom": 832,
+        "left": 12
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-390-dock",
+      "targets": [
+        {
+          "text": "街道",
+          "box": {
+            "x": 22,
+            "y": 772.40625,
+            "width": 74.53125,
+            "height": 49.59375,
+            "top": 772.40625,
+            "right": 96.53125,
+            "bottom": 822,
+            "left": 22
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "准备菜单 · 第 3 天",
+          "box": {
+            "x": 102.53125,
+            "y": 772.40625,
+            "width": 115.546875,
+            "height": 49.59375,
+            "top": 772.40625,
+            "right": 218.078125,
+            "bottom": 822,
+            "left": 102.53125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "管理",
+          "box": {
+            "x": 224.078125,
+            "y": 772.40625,
+            "width": 74.546875,
+            "height": 49.59375,
+            "top": 772.40625,
+            "right": 298.625,
+            "bottom": 822,
+            "left": 224.078125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "更多",
+          "box": {
+            "x": 304.625,
+            "y": 772.40625,
+            "width": 63.375,
+            "height": 49.59375,
+            "top": 772.40625,
+            "right": 368,
+            "bottom": 822,
+            "left": 304.625
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-management",
+      "box": {
+        "x": 12,
+        "y": 12,
+        "width": 366,
+        "height": 820,
+        "top": 12,
+        "right": 378,
+        "bottom": 832,
+        "left": 12
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-390-tabs",
+      "targets": [
+        {
+          "text": "菜单",
+          "box": {
+            "x": 24,
+            "y": 163.1875,
+            "width": 53.65625,
+            "height": 51.59375,
+            "top": 163.1875,
+            "right": 77.65625,
+            "bottom": 214.78125,
+            "left": 24
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "食材",
+          "box": {
+            "x": 81.65625,
+            "y": 163.1875,
+            "width": 53.671875,
+            "height": 51.59375,
+            "top": 163.1875,
+            "right": 135.328125,
+            "bottom": 214.78125,
+            "left": 81.65625
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "升级",
+          "box": {
+            "x": 139.328125,
+            "y": 163.1875,
+            "width": 53.671875,
+            "height": 51.59375,
+            "top": 163.1875,
+            "right": 193,
+            "bottom": 214.78125,
+            "left": 139.328125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "装扮",
+          "box": {
+            "x": 197,
+            "y": 163.1875,
+            "width": 53.65625,
+            "height": 51.59375,
+            "top": 163.1875,
+            "right": 250.65625,
+            "bottom": 214.78125,
+            "left": 197
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "猫咪",
+          "box": {
+            "x": 254.65625,
+            "y": 163.1875,
+            "width": 53.671875,
+            "height": 51.59375,
+            "top": 163.1875,
+            "right": 308.328125,
+            "bottom": 214.78125,
+            "left": 254.65625
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "推广",
+          "box": {
+            "x": 312.328125,
+            "y": 163.1875,
+            "width": 53.671875,
+            "height": 51.59375,
+            "top": 163.1875,
+            "right": 366,
+            "bottom": 214.78125,
+            "left": 312.328125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-decor",
+      "box": {
+        "x": 12,
+        "y": 12,
+        "width": 366,
+        "height": 820,
+        "top": 12,
+        "right": 378,
+        "bottom": 832,
+        "left": 12
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-390-settings",
+      "box": {
+        "x": 20,
+        "y": 125.859375,
+        "width": 350,
+        "height": 592.265625,
+        "top": 125.859375,
+        "right": 370,
+        "bottom": 718.125,
+        "left": 20
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-390-settings",
+      "targets": [
+        {
+          "text": "编辑咖啡馆",
+          "box": {
+            "x": 216,
+            "y": 210.453125,
+            "width": 98,
+            "height": 44,
+            "top": 210.453125,
+            "right": 314,
+            "bottom": 254.453125,
+            "left": 216
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "重看开店指南",
+          "box": {
+            "x": 43,
+            "y": 282.453125,
+            "width": 112,
+            "height": 44,
+            "top": 282.453125,
+            "right": 155,
+            "bottom": 326.453125,
+            "left": 43
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "English",
+          "box": {
+            "x": 84,
+            "y": 329.453125,
+            "width": 67,
+            "height": 44,
+            "top": 329.453125,
+            "right": 151,
+            "bottom": 373.453125,
+            "left": 84
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "中文",
+          "box": {
+            "x": 165,
+            "y": 329.453125,
+            "width": 52.265625,
+            "height": 44,
+            "top": 329.453125,
+            "right": 217.265625,
+            "bottom": 373.453125,
+            "left": 165
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "回去工作",
+          "box": {
+            "x": 169,
+            "y": 653.125,
+            "width": 76,
+            "height": 44,
+            "top": 653.125,
+            "right": 245,
+            "bottom": 697.125,
+            "left": 169
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "重置咖啡馆",
+          "box": {
+            "x": 261,
+            "y": 653.125,
+            "width": 88,
+            "height": 44,
+            "top": 653.125,
+            "right": 349,
+            "bottom": 697.125,
+            "left": 261
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-profile",
+      "box": {
+        "x": 20,
+        "y": 261.21875,
+        "width": 350,
+        "height": 321.546875,
+        "top": 261.21875,
+        "right": 370,
+        "bottom": 582.765625,
+        "left": 20
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-360-header",
+      "box": {
+        "x": 12,
+        "y": 12,
+        "width": 336,
+        "height": 79,
+        "top": 12,
+        "right": 348,
+        "bottom": 91,
+        "left": 12
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-360-dock",
+      "box": {
+        "x": 12,
+        "y": 718.40625,
+        "width": 336,
+        "height": 69.59375,
+        "top": 718.40625,
+        "right": 348,
+        "bottom": 788,
+        "left": 12
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-360-dock",
+      "targets": [
+        {
+          "text": "街道",
+          "box": {
+            "x": 22,
+            "y": 728.40625,
+            "width": 67.71875,
+            "height": 49.59375,
+            "top": 728.40625,
+            "right": 89.71875,
+            "bottom": 778,
+            "left": 22
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "准备菜单 · 第 3 天",
+          "box": {
+            "x": 95.71875,
+            "y": 728.40625,
+            "width": 104.984375,
+            "height": 49.59375,
+            "top": 728.40625,
+            "right": 200.703125,
+            "bottom": 778,
+            "left": 95.71875
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "管理",
+          "box": {
+            "x": 206.703125,
+            "y": 728.40625,
+            "width": 67.71875,
+            "height": 49.59375,
+            "top": 728.40625,
+            "right": 274.421875,
+            "bottom": 778,
+            "left": 206.703125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "更多",
+          "box": {
+            "x": 280.421875,
+            "y": 728.40625,
+            "width": 57.578125,
+            "height": 49.59375,
+            "top": 728.40625,
+            "right": 338,
+            "bottom": 778,
+            "left": 280.421875
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-management",
+      "box": {
+        "x": 12,
+        "y": 12,
+        "width": 336,
+        "height": 776,
+        "top": 12,
+        "right": 348,
+        "bottom": 788,
+        "left": 12
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-360-tabs",
+      "targets": [
+        {
+          "text": "菜单",
+          "box": {
+            "x": 24,
+            "y": 163.1875,
+            "width": 101.328125,
+            "height": 44,
+            "top": 163.1875,
+            "right": 125.328125,
+            "bottom": 207.1875,
+            "left": 24
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "食材",
+          "box": {
+            "x": 129.328125,
+            "y": 163.1875,
+            "width": 101.328125,
+            "height": 44,
+            "top": 163.1875,
+            "right": 230.65625,
+            "bottom": 207.1875,
+            "left": 129.328125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "升级",
+          "box": {
+            "x": 234.65625,
+            "y": 163.1875,
+            "width": 101.34375,
+            "height": 44,
+            "top": 163.1875,
+            "right": 336,
+            "bottom": 207.1875,
+            "left": 234.65625
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "装扮",
+          "box": {
+            "x": 24,
+            "y": 211.1875,
+            "width": 101.328125,
+            "height": 44,
+            "top": 211.1875,
+            "right": 125.328125,
+            "bottom": 255.1875,
+            "left": 24
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "猫咪",
+          "box": {
+            "x": 129.328125,
+            "y": 211.1875,
+            "width": 101.328125,
+            "height": 44,
+            "top": 211.1875,
+            "right": 230.65625,
+            "bottom": 255.1875,
+            "left": 129.328125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "推广",
+          "box": {
+            "x": 234.65625,
+            "y": 211.1875,
+            "width": 101.34375,
+            "height": 44,
+            "top": 211.1875,
+            "right": 336,
+            "bottom": 255.1875,
+            "left": 234.65625
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-decor",
+      "box": {
+        "x": 12,
+        "y": 12,
+        "width": 336,
+        "height": 776,
+        "top": 12,
+        "right": 348,
+        "bottom": 788,
+        "left": 12
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-360-settings",
+      "box": {
+        "x": 20,
+        "y": 83.0625,
+        "width": 320,
+        "height": 633.859375,
+        "top": 83.0625,
+        "right": 340,
+        "bottom": 716.921875,
+        "left": 20
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-360-settings",
+      "targets": [
+        {
+          "text": "编辑咖啡馆",
+          "box": {
+            "x": 186,
+            "y": 167.65625,
+            "width": 98,
+            "height": 44,
+            "top": 167.65625,
+            "right": 284,
+            "bottom": 211.65625,
+            "left": 186
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "重看开店指南",
+          "box": {
+            "x": 43,
+            "y": 239.65625,
+            "width": 112,
+            "height": 44,
+            "top": 239.65625,
+            "right": 155,
+            "bottom": 283.65625,
+            "left": 43
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "English",
+          "box": {
+            "x": 84,
+            "y": 286.65625,
+            "width": 67,
+            "height": 44,
+            "top": 286.65625,
+            "right": 151,
+            "bottom": 330.65625,
+            "left": 84
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "中文",
+          "box": {
+            "x": 165,
+            "y": 286.65625,
+            "width": 52.265625,
+            "height": 44,
+            "top": 286.65625,
+            "right": 217.265625,
+            "bottom": 330.65625,
+            "left": 165
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "回去工作",
+          "box": {
+            "x": 139,
+            "y": 651.921875,
+            "width": 76,
+            "height": 44,
+            "top": 651.921875,
+            "right": 215,
+            "bottom": 695.921875,
+            "left": 139
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "重置咖啡馆",
+          "box": {
+            "x": 231,
+            "y": 651.921875,
+            "width": 88,
+            "height": 44,
+            "top": 651.921875,
+            "right": 319,
+            "bottom": 695.921875,
+            "left": 231
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-profile",
+      "box": {
+        "x": 20,
+        "y": 239.21875,
+        "width": 320,
+        "height": 321.546875,
+        "top": 239.21875,
+        "right": 340,
+        "bottom": 560.765625,
+        "left": 20
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-526-header",
+      "box": {
+        "x": 12,
+        "y": 12,
+        "width": 502,
+        "height": 79,
+        "top": 12,
+        "right": 514,
+        "bottom": 91,
+        "left": 12
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-526-dock",
+      "box": {
+        "x": 12,
+        "y": 684,
+        "width": 502,
+        "height": 64,
+        "top": 684,
+        "right": 514,
+        "bottom": 748,
+        "left": 12
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-526-dock",
+      "targets": [
+        {
+          "text": "街道",
+          "box": {
+            "x": 22,
+            "y": 694,
+            "width": 105.453125,
+            "height": 44,
+            "top": 694,
+            "right": 127.453125,
+            "bottom": 738,
+            "left": 22
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "准备菜单 · 第 3 天",
+          "box": {
+            "x": 133.453125,
+            "y": 694,
+            "width": 163.453125,
+            "height": 44,
+            "top": 694,
+            "right": 296.90625,
+            "bottom": 738,
+            "left": 133.453125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "管理",
+          "box": {
+            "x": 302.90625,
+            "y": 694,
+            "width": 105.453125,
+            "height": 44,
+            "top": 694,
+            "right": 408.359375,
+            "bottom": 738,
+            "left": 302.90625
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "更多",
+          "box": {
+            "x": 414.359375,
+            "y": 694,
+            "width": 89.640625,
+            "height": 44,
+            "top": 694,
+            "right": 504,
+            "bottom": 738,
+            "left": 414.359375
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-management",
+      "box": {
+        "x": 12,
+        "y": 12,
+        "width": 502,
+        "height": 736,
+        "top": 12,
+        "right": 514,
+        "bottom": 748,
+        "left": 12
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-526-tabs",
+      "targets": [
+        {
+          "text": "菜单",
+          "box": {
+            "x": 24,
+            "y": 163.1875,
+            "width": 76.328125,
+            "height": 51.59375,
+            "top": 163.1875,
+            "right": 100.328125,
+            "bottom": 214.78125,
+            "left": 24
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "食材",
+          "box": {
+            "x": 104.328125,
+            "y": 163.1875,
+            "width": 76.328125,
+            "height": 51.59375,
+            "top": 163.1875,
+            "right": 180.65625,
+            "bottom": 214.78125,
+            "left": 104.328125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "升级",
+          "box": {
+            "x": 184.65625,
+            "y": 163.1875,
+            "width": 76.34375,
+            "height": 51.59375,
+            "top": 163.1875,
+            "right": 261,
+            "bottom": 214.78125,
+            "left": 184.65625
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "装扮",
+          "box": {
+            "x": 265,
+            "y": 163.1875,
+            "width": 76.328125,
+            "height": 51.59375,
+            "top": 163.1875,
+            "right": 341.328125,
+            "bottom": 214.78125,
+            "left": 265
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "猫咪",
+          "box": {
+            "x": 345.328125,
+            "y": 163.1875,
+            "width": 76.328125,
+            "height": 51.59375,
+            "top": 163.1875,
+            "right": 421.65625,
+            "bottom": 214.78125,
+            "left": 345.328125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "推广",
+          "box": {
+            "x": 425.65625,
+            "y": 163.1875,
+            "width": 76.34375,
+            "height": 51.59375,
+            "top": 163.1875,
+            "right": 502,
+            "bottom": 214.78125,
+            "left": 425.65625
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-decor",
+      "box": {
+        "x": 12,
+        "y": 12,
+        "width": 502,
+        "height": 736,
+        "top": 12,
+        "right": 514,
+        "bottom": 748,
+        "left": 12
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-526-settings",
+      "box": {
+        "x": 73,
+        "y": 83.859375,
+        "width": 380,
+        "height": 592.265625,
+        "top": 83.859375,
+        "right": 453,
+        "bottom": 676.125,
+        "left": 73
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-526-settings",
+      "targets": [
+        {
+          "text": "编辑咖啡馆",
+          "box": {
+            "x": 299,
+            "y": 168.453125,
+            "width": 98,
+            "height": 44,
+            "top": 168.453125,
+            "right": 397,
+            "bottom": 212.453125,
+            "left": 299
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "重看开店指南",
+          "box": {
+            "x": 96,
+            "y": 240.453125,
+            "width": 112,
+            "height": 44,
+            "top": 240.453125,
+            "right": 208,
+            "bottom": 284.453125,
+            "left": 96
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "English",
+          "box": {
+            "x": 137,
+            "y": 287.453125,
+            "width": 67,
+            "height": 44,
+            "top": 287.453125,
+            "right": 204,
+            "bottom": 331.453125,
+            "left": 137
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "中文",
+          "box": {
+            "x": 218,
+            "y": 287.453125,
+            "width": 52.265625,
+            "height": 44,
+            "top": 287.453125,
+            "right": 270.265625,
+            "bottom": 331.453125,
+            "left": 218
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "回去工作",
+          "box": {
+            "x": 252,
+            "y": 611.125,
+            "width": 76,
+            "height": 44,
+            "top": 611.125,
+            "right": 328,
+            "bottom": 655.125,
+            "left": 252
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "重置咖啡馆",
+          "box": {
+            "x": 344,
+            "y": 611.125,
+            "width": 88,
+            "height": 44,
+            "top": 611.125,
+            "right": 432,
+            "bottom": 655.125,
+            "left": 344
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-profile",
+      "box": {
+        "x": 33,
+        "y": 219.21875,
+        "width": 460,
+        "height": 321.546875,
+        "top": 219.21875,
+        "right": 493,
+        "bottom": 540.765625,
+        "left": 33
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "desktop-management",
+      "box": {
+        "x": 904,
+        "y": 16,
+        "width": 520,
+        "height": 928,
+        "top": 16,
+        "right": 1424,
+        "bottom": 944,
+        "left": 904
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "desktop-tabs",
+      "targets": [
+        {
+          "text": "菜单",
+          "box": {
+            "x": 928,
+            "y": 156.1875,
+            "width": 75.328125,
+            "height": 53.59375,
+            "top": 156.1875,
+            "right": 1003.328125,
+            "bottom": 209.78125,
+            "left": 928
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "食材",
+          "box": {
+            "x": 1007.328125,
+            "y": 156.1875,
+            "width": 75.328125,
+            "height": 53.59375,
+            "top": 156.1875,
+            "right": 1082.65625,
+            "bottom": 209.78125,
+            "left": 1007.328125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "升级",
+          "box": {
+            "x": 1086.65625,
+            "y": 156.1875,
+            "width": 75.34375,
+            "height": 53.59375,
+            "top": 156.1875,
+            "right": 1162,
+            "bottom": 209.78125,
+            "left": 1086.65625
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "装扮",
+          "box": {
+            "x": 1166,
+            "y": 156.1875,
+            "width": 75.328125,
+            "height": 53.59375,
+            "top": 156.1875,
+            "right": 1241.328125,
+            "bottom": 209.78125,
+            "left": 1166
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "猫咪",
+          "box": {
+            "x": 1245.328125,
+            "y": 156.1875,
+            "width": 75.328125,
+            "height": 53.59375,
+            "top": 156.1875,
+            "right": 1320.65625,
+            "bottom": 209.78125,
+            "left": 1245.328125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "推广",
+          "box": {
+            "x": 1324.65625,
+            "y": 156.1875,
+            "width": 75.34375,
+            "height": 53.59375,
+            "top": 156.1875,
+            "right": 1400,
+            "bottom": 209.78125,
+            "left": 1324.65625
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        }
+      ]
+    },
+    {
+      "name": "desktop-decor",
+      "box": {
+        "x": 904,
+        "y": 16,
+        "width": 520,
+        "height": 928,
+        "top": 16,
+        "right": 1424,
+        "bottom": 944,
+        "left": 904
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "desktop-settings",
+      "box": {
+        "x": 530,
+        "y": 179.859375,
+        "width": 380,
+        "height": 600.265625,
+        "top": 179.859375,
+        "right": 910,
+        "bottom": 780.125,
+        "left": 530
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "desktop-settings",
+      "targets": [
+        {
+          "text": "编辑咖啡馆",
+          "box": {
+            "x": 750,
+            "y": 268.453125,
+            "width": 98,
+            "height": 44,
+            "top": 268.453125,
+            "right": 848,
+            "bottom": 312.453125,
+            "left": 750
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "重看开店指南",
+          "box": {
+            "x": 559,
+            "y": 340.453125,
+            "width": 112,
+            "height": 44,
+            "top": 340.453125,
+            "right": 671,
+            "bottom": 384.453125,
+            "left": 559
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "English",
+          "box": {
+            "x": 600,
+            "y": 387.453125,
+            "width": 67,
+            "height": 44,
+            "top": 387.453125,
+            "right": 667,
+            "bottom": 431.453125,
+            "left": 600
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "中文",
+          "box": {
+            "x": 681,
+            "y": 387.453125,
+            "width": 52.265625,
+            "height": 44,
+            "top": 387.453125,
+            "right": 733.265625,
+            "bottom": 431.453125,
+            "left": 681
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "回去工作",
+          "box": {
+            "x": 703,
+            "y": 711.125,
+            "width": 76,
+            "height": 44,
+            "top": 711.125,
+            "right": 779,
+            "bottom": 755.125,
+            "left": 703
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "重置咖啡馆",
+          "box": {
+            "x": 795,
+            "y": 711.125,
+            "width": 88,
+            "height": 44,
+            "top": 711.125,
+            "right": 883,
+            "bottom": 755.125,
+            "left": 795
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        }
+      ]
+    },
+    {
+      "name": "desktop-profile",
+      "box": {
+        "x": 490,
+        "y": 289,
+        "width": 460,
+        "height": 382,
+        "top": 289,
+        "right": 950,
+        "bottom": 671,
+        "left": 490
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-568-header",
+      "box": {
+        "x": 12,
+        "y": 12,
+        "width": 306.71875,
+        "height": 79,
+        "top": 12,
+        "right": 318.71875,
+        "bottom": 91,
+        "left": 12
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-568-dock",
+      "box": {
+        "x": 243.609375,
+        "y": 333.40625,
+        "width": 312.390625,
+        "height": 69.59375,
+        "top": 333.40625,
+        "right": 556,
+        "bottom": 403,
+        "left": 243.609375
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-568-dock",
+      "targets": [
+        {
+          "text": "街道",
+          "box": {
+            "x": 253.609375,
+            "y": 343.40625,
+            "width": 62.359375,
+            "height": 49.59375,
+            "top": 343.40625,
+            "right": 315.96875,
+            "bottom": 393,
+            "left": 253.609375
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "准备菜单 · 第 3 天",
+          "box": {
+            "x": 321.96875,
+            "y": 343.40625,
+            "width": 96.65625,
+            "height": 49.59375,
+            "top": 343.40625,
+            "right": 418.625,
+            "bottom": 393,
+            "left": 321.96875
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "管理",
+          "box": {
+            "x": 424.625,
+            "y": 343.40625,
+            "width": 62.359375,
+            "height": 49.59375,
+            "top": 343.40625,
+            "right": 486.984375,
+            "bottom": 393,
+            "left": 424.625
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "更多",
+          "box": {
+            "x": 492.984375,
+            "y": 343.40625,
+            "width": 53,
+            "height": 49.59375,
+            "top": 343.40625,
+            "right": 545.984375,
+            "bottom": 393,
+            "left": 492.984375
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        }
+      ]
+    },
+    {
+      "name": "mobile-568-management",
+      "box": {
+        "x": 158.40625,
+        "y": 12,
+        "width": 397.59375,
+        "height": 391,
+        "top": 12,
+        "right": 556,
+        "bottom": 403,
+        "left": 158.40625
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-568-tabs",
+      "targets": [
+        {
+          "text": "菜单",
+          "box": {
+            "x": 170.40625,
+            "y": 109,
+            "width": 58.921875,
+            "height": 44,
+            "top": 109,
+            "right": 229.328125,
+            "bottom": 153,
+            "left": 170.40625
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "食材",
+          "box": {
+            "x": 233.328125,
+            "y": 109,
+            "width": 58.9375,
+            "height": 44,
+            "top": 109,
+            "right": 292.265625,
+            "bottom": 153,
+            "left": 233.328125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "升级",
+          "box": {
+            "x": 296.265625,
+            "y": 109,
+            "width": 58.9375,
+            "height": 44,
+            "top": 109,
+            "right": 355.203125,
+            "bottom": 153,
+            "left": 296.265625
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "装扮",
+          "box": {
+            "x": 359.203125,
+            "y": 109,
+            "width": 58.921875,
+            "height": 44,
+            "top": 109,
+            "right": 418.125,
+            "bottom": 153,
+            "left": 359.203125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "猫咪",
+          "box": {
+            "x": 422.125,
+            "y": 109,
+            "width": 58.9375,
+            "height": 44,
+            "top": 109,
+            "right": 481.0625,
+            "bottom": 153,
+            "left": 422.125
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "推广",
+          "box": {
+            "x": 485.0625,
+            "y": 109,
+            "width": 58.9375,
+            "height": 44,
+            "top": 109,
+            "right": 544,
+            "bottom": 153,
+            "left": 485.0625
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        }
+      ]
+    },
+    {
+      "name": "mobile-568-decor",
+      "box": {
+        "x": 158.40625,
+        "y": 12,
+        "width": 397.59375,
+        "height": 391,
+        "top": 12,
+        "right": 556,
+        "bottom": 403,
+        "left": 158.40625
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-568-settings",
+      "box": {
+        "x": 94,
+        "y": 10,
+        "width": 380,
+        "height": 395,
+        "top": 10,
+        "right": 474,
+        "bottom": 405,
+        "left": 94
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "mobile-568-settings",
+      "targets": [
+        {
+          "text": "编辑咖啡馆",
+          "box": {
+            "x": 320,
+            "y": 94.59375,
+            "width": 98,
+            "height": 44,
+            "top": 94.59375,
+            "right": 418,
+            "bottom": 138.59375,
+            "left": 320
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "重看开店指南",
+          "box": {
+            "x": 117,
+            "y": 166.59375,
+            "width": 112,
+            "height": 44,
+            "top": 166.59375,
+            "right": 229,
+            "bottom": 210.59375,
+            "left": 117
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "English",
+          "box": {
+            "x": 158,
+            "y": 213.59375,
+            "width": 67,
+            "height": 44,
+            "top": 213.59375,
+            "right": 225,
+            "bottom": 257.59375,
+            "left": 158
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "中文",
+          "box": {
+            "x": 239,
+            "y": 213.59375,
+            "width": 52.265625,
+            "height": 44,
+            "top": 213.59375,
+            "right": 291.265625,
+            "bottom": 257.59375,
+            "left": 239
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "回去工作",
+          "box": {
+            "x": 273,
+            "y": 340,
+            "width": 76,
+            "height": 44,
+            "top": 340,
+            "right": 349,
+            "bottom": 384,
+            "left": 273
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        },
+        {
+          "text": "重置咖啡馆",
+          "box": {
+            "x": 365,
+            "y": 340,
+            "width": 88,
+            "height": 44,
+            "top": 340,
+            "right": 453,
+            "bottom": 384,
+            "left": 365
+          },
+          "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+          "clip": "none"
+        }
+      ]
+    },
+    {
+      "name": "mobile-568-profile",
+      "box": {
+        "x": 54,
+        "y": 46.71875,
+        "width": 460,
+        "height": 321.546875,
+        "top": 46.71875,
+        "right": 514,
+        "bottom": 368.265625,
+        "left": 54
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    },
+    {
+      "name": "English panel",
+      "box": {
+        "x": 12,
+        "y": 12,
+        "width": 336,
+        "height": 776,
+        "top": 12,
+        "right": 348,
+        "bottom": 788,
+        "left": 12
+      },
+      "overflow": false,
+      "radius": "0px",
+      "font": "\"Pixel Digits\", \"Pixelify Sans\", \"Pixel ZH\", ui-monospace, monospace",
+      "border": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='%23493426' fill-rule='evenodd' d='M4 0h8v2h2v2h2v8h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3Cpath fill='%23fff9e6' fill-rule='evenodd' d='M4 2h8v2h2v8h-2v2H4v-2H2V4h2zM4 3v1H3v8h1v1h8v-1h1V4h-1V3z'/%3E%3C/svg%3E\")"
+    }
+  ],
+  "fonts": [
+    {
+      "name": "mobile-390-home",
+      "selector": ".mobile-cafe-name",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-home",
+      "selector": ".mobile-cafe-clock strong",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 15
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-home",
+      "selector": "#coins",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 6
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-panel",
+      "selector": "#drawer-title",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 4
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-panel",
+      "selector": "#drawer-balance",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 9
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-panel",
+      "selector": "#management-panel .tab.active",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 2
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-panel",
+      "selector": "#management-panel .row .name",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 9
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-settings",
+      "selector": ".modal h2",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 6
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-settings",
+      "selector": ".profile-cafe",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-settings",
+      "selector": ".stats dd",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 1
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-home",
+      "selector": ".mobile-cafe-name",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-home",
+      "selector": ".mobile-cafe-clock strong",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 13
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-home",
+      "selector": "#coins",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 6
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-panel",
+      "selector": "#drawer-title",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 4
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-panel",
+      "selector": "#drawer-balance",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 9
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-panel",
+      "selector": "#management-panel .tab.active",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 2
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-panel",
+      "selector": "#management-panel .row .name",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 9
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-settings",
+      "selector": ".modal h2",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 6
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-settings",
+      "selector": ".profile-cafe",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-settings",
+      "selector": ".stats dd",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 1
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-home",
+      "selector": ".mobile-cafe-name",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-home",
+      "selector": ".mobile-cafe-clock strong",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 11
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-home",
+      "selector": "#coins",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 6
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-panel",
+      "selector": "#drawer-title",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 4
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-panel",
+      "selector": "#drawer-balance",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 9
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-panel",
+      "selector": "#management-panel .tab.active",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 2
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-panel",
+      "selector": "#management-panel .row .name",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 9
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-settings",
+      "selector": ".modal h2",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 6
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-settings",
+      "selector": ".profile-cafe",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-settings",
+      "selector": ".stats dd",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 1
+        }
+      ]
+    },
+    {
+      "name": "desktop-home",
+      "selector": "#hud-cafe-name",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        }
+      ]
+    },
+    {
+      "name": "desktop-home",
+      "selector": "#coins",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 6
+        }
+      ]
+    },
+    {
+      "name": "desktop-home",
+      "selector": "#reputation-score",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 11
+        }
+      ]
+    },
+    {
+      "name": "desktop-panel",
+      "selector": "#drawer-title",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 4
+        }
+      ]
+    },
+    {
+      "name": "desktop-panel",
+      "selector": "#drawer-balance",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 9
+        }
+      ]
+    },
+    {
+      "name": "desktop-panel",
+      "selector": "#management-panel .tab.active",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 2
+        }
+      ]
+    },
+    {
+      "name": "desktop-panel",
+      "selector": "#management-panel .row .name",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 9
+        }
+      ]
+    },
+    {
+      "name": "desktop-settings",
+      "selector": ".modal h2",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 6
+        }
+      ]
+    },
+    {
+      "name": "desktop-settings",
+      "selector": ".profile-cafe",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        }
+      ]
+    },
+    {
+      "name": "desktop-settings",
+      "selector": ".stats dd",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 1
+        }
+      ]
+    },
+    {
+      "name": "mobile-568-home",
+      "selector": ".mobile-cafe-name",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        }
+      ]
+    },
+    {
+      "name": "mobile-568-home",
+      "selector": ".mobile-cafe-clock strong",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 15
+        }
+      ]
+    },
+    {
+      "name": "mobile-568-home",
+      "selector": "#coins",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 6
+        }
+      ]
+    },
+    {
+      "name": "mobile-568-panel",
+      "selector": "#drawer-title",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 4
+        }
+      ]
+    },
+    {
+      "name": "mobile-568-panel",
+      "selector": "#drawer-balance",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 9
+        }
+      ]
+    },
+    {
+      "name": "mobile-568-panel",
+      "selector": "#management-panel .tab.active",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 2
+        }
+      ]
+    },
+    {
+      "name": "mobile-568-panel",
+      "selector": "#management-panel .row .name",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 9
+        }
+      ]
+    },
+    {
+      "name": "mobile-568-settings",
+      "selector": ".modal h2",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 6
+        }
+      ]
+    },
+    {
+      "name": "mobile-568-settings",
+      "selector": ".profile-cafe",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        }
+      ]
+    },
+    {
+      "name": "mobile-568-settings",
+      "selector": ".stats dd",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 1
+        }
+      ]
+    },
+    {
+      "name": "English panel",
+      "selector": "#drawer-title",
+      "fonts": [
+        {
+          "familyName": "Pixelify Sans",
+          "postScriptName": "PixelifySans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 11
+        }
+      ]
+    },
+    {
+      "name": "English panel",
+      "selector": "#drawer-balance",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        },
+        {
+          "familyName": "Pixelify Sans",
+          "postScriptName": "PixelifySans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 10
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "responses": [],
+  "at": "2026-11-09T08:36:09.801Z"
+}

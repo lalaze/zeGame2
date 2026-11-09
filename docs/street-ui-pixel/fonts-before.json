@@ -1,0 +1,41 @@
+[
+  {
+    "selector": "[data-street-home]",
+    "fonts": [
+      {
+        "familyName": "蘋方-簡",
+        "postScriptName": "PingFangSC-Regular",
+        "isCustomFont": false,
+        "glyphCount": 5
+      }
+    ]
+  },
+  {
+    "selector": ".street-choice span",
+    "fonts": [
+      {
+        "familyName": "蘋方-簡",
+        "postScriptName": "PingFangSC-Semibold",
+        "isCustomFont": false,
+        "glyphCount": 4
+      }
+    ]
+  },
+  {
+    "selector": ".street-walk-controls p",
+    "fonts": [
+      {
+        "familyName": "蘋方-簡",
+        "postScriptName": "PingFangSC-Regular",
+        "isCustomFont": false,
+        "glyphCount": 28
+      },
+      {
+        "familyName": ".SF NS",
+        "postScriptName": ".SFNS-Regular",
+        "isCustomFont": false,
+        "glyphCount": 11
+      }
+    ]
+  }
+]

@@ -1,0 +1,111 @@
+/* Street layout consumes the shared cream-pixel component language. */
+.street-overlay .street-view {
+ --street-ui-ink: var(--ink); --street-ui-face: var(--cream);
+ --street-ui-light: var(--ui-highlight); --street-ui-rim: var(--ui-rim);
+ --street-ui-green: var(--a-accent); --street-ui-shadow: var(--ui-shadow);
+ --street-ui-font: var(--font-pixel); font: 12px/1.5 var(--font-pixel);
+}
+.street-overlay .street-ui-icon { display: inline-block; width: 24px; height: 24px; flex: 0 0 24px; vertical-align: middle; pointer-events: none; }
+/* Top strip: navigation on either side, an inset resource counter in the middle. */
+.street-overlay .street-toolbar { gap: 8px; padding: max(7px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 8px max(12px, env(safe-area-inset-left)); background: #ead5aa; border-bottom: 3px solid var(--street-ui-ink); box-shadow: inset 0 -2px 0 #fff5d4; flex-shrink: 0; }
+.street-overlay .street-toolbar button { display: inline-flex; justify-content: center; align-items: center; gap: 8px; white-space: nowrap; }
+.street-overlay .street-toolbar strong { display: flex; justify-content: center; align-items: center; gap: 8px; min-width: 0; padding: 3px 8px; margin: 0; color: #fff0b9; background: #344b39; border: 2px solid #283a2c; box-shadow: inset 2px 2px #223627, inset -2px -2px #74916a; font-size: 12px; white-space: nowrap; }
+.street-overlay .street-toolbar strong::before { content: ''; flex: 0 0 6px; width: 6px; height: 8px; border: 2px solid #f7cd66; box-shadow: inset 2px 0 #b77f35; }
+/* Map route signs: the icon and written unlock requirement both identify locks.
+   Locked signs remain previewable, so aria-disabled is deliberately not used. */
+.street-overlay .street-choices { gap: 10px; padding: 7px 12px 9px; background: #e9d6b1; scrollbar-color: #77563b #e9d6b1; scroll-padding-inline: 12px; }
+.street-overlay .street-choice { display: grid; grid-template-columns: 16px minmax(0, 1fr); column-gap: 7px; flex: 1 0 168px; min-height: 52px; padding: 6px 12px; text-align: left; }
+.street-overlay .street-choice > span { font-size: 12px; white-space: nowrap; }
+.street-overlay .street-choice small { grid-column: 2; margin: 0; font-size: 12px; line-height: 1.4; opacity: 1; }
+.street-overlay .street-route-marker { display: flex; align-items: center; grid-row: 1 / 3; width: 16px; font-style: normal; }
+.street-overlay .street-route-marker .street-ui-icon { width: 12px; height: 12px; flex-basis: 12px; }
+.street-overlay .street-route-marker .street-ui-icon-lock { display: none; }
+.street-overlay .street-choice[data-locked='true'] { --pixel-face: #e8dabb; color: #705338; }
+.street-overlay .street-choice[data-locked='true'] .street-ui-icon-lock { display: block; }
+.street-overlay .street-choice[data-locked='true'] .street-ui-icon-flag { display: none; }
+.street-overlay .street-choice[aria-pressed='true'] { --pixel-face: var(--street-ui-green); --pixel-edge: #263c2e; color: #fff4c9; }
+
+.street-overlay .street-choice[aria-pressed='true'] small { color: #f3d993; }
+.street-overlay .street-choice[aria-pressed='true']:hover { --pixel-face: #49664b; color: #fff4c9; }
+.street-overlay .street-summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; padding: 0 12px 8px; background: #e9d6b1; border-bottom: 3px solid #6a4d34; box-shadow: inset 0 -2px #fff4d4; flex-shrink: 0; }
+.street-overlay .street-summary > div { min-width: 0; }
+.street-overlay .street-summary strong { color: #334e38; font-size: 12px; }
+.street-overlay .street-summary p { max-width: none; margin: 0; font-size: 12px; line-height: 1.5; }
+.street-overlay .street-summary button { max-width: 180px; padding: 6px 12px; white-space: normal; font-size: 12px; }
+/* Bottom route bar has fixed arrow columns, independent of translated hint length. */
+.street-overlay .street-walk-controls { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; gap: 10px; isolation: isolate; box-sizing: border-box; width: min(580px, calc(100% - 24px)); max-width: calc(100% - 24px); padding: 8px; bottom: max(14px, calc(env(safe-area-inset-bottom) + 8px)); background: transparent; border: 0; border-radius: 0; box-shadow: none; filter: drop-shadow(3px 3px 0 var(--street-ui-shadow)); }
+.street-overlay .street-walk-controls button { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; }
+.street-overlay .street-walk-controls p { min-width: 0; margin: 0; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.street-overlay .street-walk-controls small { display: block; margin-top: 2px; color: #655035; font-size: 12px; line-height: 1.5; }
+/* Details are a framed game panel; no mask on the container or its focus ring. */
+.street-overlay .street-detail { padding: 16px; background: #f8edce; color: var(--street-ui-ink); border: 3px solid var(--street-ui-ink); border-radius: 0; box-shadow: inset 0 0 0 2px #fff8e0, inset 0 0 0 4px #cfad75, 3px 3px 0 #59402c; scrollbar-color: #77563b #f8edce; }
+.street-overlay .street-detail::before { display: none; }
+.street-overlay .street-detail-close { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; margin: -6px -6px 4px 8px; }
+.street-overlay .street-eyebrow { display: inline-block; padding: 2px 5px; color: #fff1c3; background: #3b5741; box-shadow: 2px 2px 0 #b79a60; }
+.street-overlay .street-detail h3 { clear: both; font-size: 16px; line-height: 1.5; margin: 8px 0; }
+.street-overlay .street-detail p { font-size: 12px; line-height: 1.5; }
+.street-overlay .street-detail-status { padding: 6px 8px; color: #334d37; background: #e2e2ba; border-left: 3px solid #3b5741; }
+.street-overlay .street-detail label { font-size: 12px; }
+.street-overlay .street-select-wrap { position: relative; }
+.street-overlay .street-detail select { box-sizing: border-box; min-height: 44px; max-width: 100%; padding: 8px 36px 8px 8px; appearance: none; border: 3px solid #6a4d34; border-radius: 0; background: #fff7df; color: #493426; box-shadow: inset 2px 2px #dfc28d; font-size: 12px; }
+.street-overlay .street-select-arrow { position: absolute; right: 10px; top: 50%; translate: 0 -50%; color: #493426; pointer-events: none; }
+.street-overlay .street-select-arrow .street-ui-icon { width: 12px; height: 12px; }
+.street-overlay .street-price-breakdown { padding: 8px; background: #efdab0; border: 0; box-shadow: inset 3px 0 #bf9153; }
+.street-overlay .street-income { border-top: 2px dashed #af8a54; }
+.street-overlay .street-detail progress { appearance: none; width: 100%; height: 12px; border: 2px solid #58432c; background: #cfba8e; border-radius: 0; }
+.street-overlay .street-detail progress::-webkit-progress-bar { background: #cfba8e; }
+.street-overlay .street-detail progress::-webkit-progress-value { background: #4e704b; box-shadow: inset 0 2px #9db679; }
+.street-overlay .street-detail progress::-moz-progress-bar { background: #4e704b; }
+.street-overlay .street-schedules { gap: 8px; padding-bottom: 4px; }
+.street-overlay .street-schedules button { padding: 6px; font-size: 12px; }
+.street-overlay .street-schedules [aria-pressed='true'],
+.street-overlay .street-actions .pixel-btn:not(.ghost) { --pixel-face: #3b5741; --pixel-edge: #263c2e; color: #fff3c6; }
+.street-overlay .street-actions { gap: 10px; padding: 3px 2px 5px; }
+.street-overlay .street-actions button { width: 100%; min-height: 44px; margin: 0; padding: 10px; font-size: 12px; }
+.street-overlay .street-actions .pixel-btn:disabled { --pixel-face: #d7ccb0; --pixel-edge: #746449; color: #66573d; }
+.street-overlay .street-actions .pixel-btn.ghost { --pixel-face: #f8edce; --pixel-edge: #6a4d34; color: #493426; background: transparent; box-shadow: none; }
+.street-overlay .street-confirm { border-top: 3px solid #b98c4c; padding-top: 10px; }
+.street-overlay .street-confirm h4 { display: inline-block; padding: 4px 8px; background: #4b3b2a; color: #fff0bd; font-size: 12px; margin: 0; box-shadow: 2px 2px 0 #b79560; }
+.street-overlay .street-confirm [data-street-confirm-quote] { padding: 8px; border-left: 3px solid #a96b34; background: #f1dbac; font-size: 12px; font-weight: 400; }
+@media (max-width: 700px) {
+  .street-overlay .street-toolbar { flex-wrap: nowrap; gap: 6px; padding: max(6px, env(safe-area-inset-top)) 8px 8px; }
+  .street-overlay .street-toolbar button { gap: 4px; padding: 7px 10px; }
+  .street-overlay .street-toolbar button .street-ui-icon { width: 12px; height: 12px; flex-basis: 12px; }
+  .street-overlay .street-toolbar strong { margin-left: auto; gap: 4px; padding: 4px; }
+  .street-overlay .street-toolbar strong::before { display: none; }
+  .street-overlay .street-choices { gap: 8px; padding: 6px 8px 8px; }
+  .street-overlay .street-choice { flex-basis: 160px; padding: 5px 10px; }
+  .street-overlay .street-summary { gap: 8px; padding: 0 8px 8px; }
+  .street-overlay .street-summary button { max-width: 148px; padding: 5px 8px; }
+  .street-overlay .street-walk-controls { gap: 6px; width: calc(100% - 20px); max-width: calc(100% - 20px); bottom: max(12px, calc(env(safe-area-inset-bottom) + 8px)); }
+  .street-overlay .street-detail { max-height: 78%; padding: 12px 14px max(16px, env(safe-area-inset-bottom)); border: 3px solid var(--street-ui-ink); border-bottom: 0; }
+}
+@media (max-height: 560px) {
+  .street-overlay .street-toolbar { padding-top: max(4px, env(safe-area-inset-top)); padding-bottom: 6px; }
+  .street-overlay .street-choice { min-height: 44px; }
+  .street-overlay .street-choice small { display: block; }
+  .street-overlay .street-summary { padding-top: 0; padding-bottom: 5px; }
+  .street-overlay .street-summary p { display: none; }
+  .street-overlay .street-walk-controls { bottom: max(8px, env(safe-area-inset-bottom)); padding: 6px; }
+  .street-overlay .street-walk-controls small { display: none; }
+  .street-overlay .street-detail { top: 0; bottom: 0; max-height: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .street-overlay .street-view *, .street-overlay .street-view *::before, .street-overlay .street-view *::after { transition: none; }
+}
+/* Keep unlock requirements on one route-sign line instead of growing every tab. */
+.street-overlay .street-choice { flex-basis: 184px; }
+.street-overlay .street-choice small { white-space: nowrap; }
+@media (max-width: 700px) {
+  .street-overlay .street-choice { flex-basis: 184px; }
+  .street-overlay .street-toolbar strong { flex: 1; white-space: normal; text-align: center; line-height: 1.4; overflow-wrap: anywhere; }
+}
+html:lang(en) .street-overlay .street-choice { flex-basis: 210px; }
+@media (hover: hover) {
+  .street-overlay .street-view .street-choice[aria-pressed='true']:hover:not(:disabled),
+  .street-overlay .street-view .street-schedules [aria-pressed='true']:hover:not(:disabled),
+  .street-overlay .street-view .street-actions .pixel-btn:not(.ghost):hover:not(:disabled) { --pixel-face: #49664b; color: #fff4c9; }
+}
+
+/* Keep translate as a custom-property value: CSS minification must not fold its
+   reset into transform and expose the ledger's separate 1px active translate. */

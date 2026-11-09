@@ -1,4 +1,6 @@
 import './menu-story-polish.css';
+import { streetEntryLabel, showStreetMap } from './streets';
+import type { AreaId } from '../game/regions';
 import { demandEnabled } from '../game/customer-demand';
 import { conditionTraffic } from '../game/conditions';
 import { chainPriceMultiplier, menuTrafficMultiplier } from '../game/economy';
@@ -248,6 +250,7 @@ export class Panel {
     private onArrange: (request: ArrangeRequest) => void,
     private livingCats: LivingCatControls = {},
     private onTablePreview: () => void = () => {},
+    private onVisitArea?: (area: AreaId) => void,
   ) {
     this.pantryTaskNotice = document.createElement('section');
     this.pantryTaskNotice.className = 'pantry-task-context';
@@ -655,7 +658,7 @@ export class Panel {
   private visibleKeys(): string[] {
     if (this.tab === 'promotion') return ['promotion'];
     if (this.tab === 'pets') return ['pets'];
-    if (this.tab === 'upgrades') return ['manager', 'orders', 'chain', ...UPGRADES.map((u) => `upgrade:${u.id}`)];
+    if (this.tab === 'upgrades') return ['room-projects', 'manager', 'orders', 'chain', ...UPGRADES.map((u) => `upgrade:${u.id}`)];
     if (this.tab === 'decor') return ['decor', this.decorCategory];
     if (this.tab === 'pantry') return ['pantry', ...neededIngredients(this.state).map((i) => `ing:${i.id}`)];
     const stylePriceNote = ['signature-workbench', ...(this.state.cafeStyle.focus ? ['style-prices'] : [])];
@@ -719,6 +722,15 @@ export class Panel {
     }
     for (const key of keys) {
       const [kind, id] = key.split(':');
+      if (kind === 'room-projects') {
+        const button = document.createElement('button');
+        button.className = 'pixel-btn ghost projects-entry';
+        button.dataset.roomProjects = '';
+        button.setAttribute('aria-haspopup', 'dialog');
+        button.addEventListener('click', () => showStreetMap(this.state, () => { this.onPurchase('upgrade', 'room-projects'); this.update(); }, this.onVisitArea));
+        this.list.append(button);
+        continue;
+      }
       if (kind === 'signature-workbench') {
         const button = document.createElement('button');
         button.className = 'pixel-btn small ghost signature-entry';
@@ -1217,6 +1229,8 @@ export class Panel {
 
   private updateContents(): void {
     const s = this.state;
+    const projectEntry = this.list.querySelector('[data-room-projects]');
+    if (projectEntry) projectEntry.textContent = streetEntryLabel(s, Date.now());
     const preview = this.list.querySelector<HTMLButtonElement>('[data-table-preview]');
     const previewAvailable = this.tab === 'upgrades' && s.phase === 'prep' && mainTableCount(s) < MAX_TABLES;
     if (!previewAvailable) this.tablePreview = false;

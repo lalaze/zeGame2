@@ -37,6 +37,7 @@ import {
 import { specialtyPriceMultiplier } from './locations';
 import { comfort } from './decor';
 import { activeTableIndices, regionDemand } from './regions';
+import { ownedPlotCount } from './streets';
 import type { DayStats, GameState } from './state';
 import { bakeryPlan, nextBatch } from './kitchen';
 import { reputationTraffic } from './reputation';
@@ -141,7 +142,7 @@ export const upgradeLocked = (state: GameState, id: UpgradeId) => id === 'cook' 
  */
 export function upgradeMax(state: GameState, id: UpgradeId): number {
   const def = upgradeDef(id);
-  return id === 'server' ? Math.min(def.max, 2 + state.regions.length) : def.max;
+  return id === 'server' ? Math.min(def.max, 2 + Math.max(state.regions.length, ownedPlotCount(state))) : def.max;
 }
 
 /** Finished table orders the pass can hold before baristas have to keep hold of them. */

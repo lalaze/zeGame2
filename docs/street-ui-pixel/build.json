@@ -1,0 +1,16 @@
+{
+  "stage": "/private/tmp/zeGame2-street-ui-pixel-stage-zh9HZy",
+  "dist": "/Volumes/data/code/zeGame2/dist",
+  "version": "9330016c9414a1656081",
+  "files": 1340,
+  "retainedOldHashedFiles": 28,
+  "entrySha256": "3921ffb2c9a421c64d258de8d611f2934fc4343309820901f029e6f728aed5de",
+  "workerSha256": "bea7a3a73157c20d7312bae20bae3d706ea96e661d5db0db590b2b2931c59629",
+  "entryBundles": [
+    "assets/game-LOc-ZqtO.js",
+    "assets/region-art-DtWf97mz.js",
+    "assets/phaser-D8EC1TLR.js",
+    "assets/game-CFXWDI5e.css"
+  ],
+  "publishedAt": "2026-11-09T07:27:45.026Z"
+}

@@ -1,0 +1,29 @@
+{
+  "verifiedAt": "2026-11-09T04:20:13.988Z",
+  "files": [
+    {
+      "name": "index.html",
+      "sha256": "8d3487161c40cb32b17c76a81a449240e2a4af3cfd622015546faf0dee0899cd"
+    },
+    {
+      "name": "sw.js",
+      "sha256": "3ca6db978a236b5403a3bb86a54c6135f5cba1823c8d492bbc4abba0cbb72b07"
+    },
+    {
+      "name": "assets/game-BsEZmkNv.js",
+      "sha256": "6957499135e1f05844ae96165551f5fb7633f59ef5e41297774d496e5280e605"
+    },
+    {
+      "name": "assets/region-art-DtWf97mz.js",
+      "sha256": "067278ae07e4525f667b38cf2c57bcc191e07667aff84637aa13da1114c917ed"
+    },
+    {
+      "name": "assets/phaser-D8EC1TLR.js",
+      "sha256": "2946ccb85768a4543d0f38bba7bc7dbe3e24404149b4c91558d8504c44d079b8"
+    },
+    {
+      "name": "assets/game-CAE5aRNa.css",
+      "sha256": "0dec11a2bb5bdc89d487d9a2042a4e9fb08c32fb155a7d3e642ad4170cf9b428"
+    }
+  ]
+}

@@ -47,6 +47,11 @@ describe('pre-module startup feedback', () => {
     expect(document.activeElement).toBe(retry);
     expect(root.textContent).toContain('dependency unavailable');
   });
+  it('catches the production module script after Vite has removed the entry id', () => {
+    const {root}=setup();const script=document.getElementById('game-entry')!;script.removeAttribute('id');script.setAttribute('type','module');
+    script.dispatchEvent(new Event('error'));
+    expect(root.querySelector('[role=alert]')).not.toBeNull();expect(root.textContent).toContain('dependency unavailable');
+  });
   it('hands off cleanly and displays actual measured resource progress', () => {
     vi.useFakeTimers(); const {root,bar,retry}=setup();
     window.dispatchEvent(new Event('cafe:bootstrap-ready'));

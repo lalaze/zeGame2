@@ -20,6 +20,8 @@ const SHADES: Record<Exclude<AreaId, 'kitchen'>, Shade> = {
   reading: { shade: '#7d8fd6', corner: '#4f5a99' },
   greenhouse: { shade: '#b4c0ea', corner: '#7480b8' },
   terrace: { shade: '#bcc6ec', corner: '#7c88bc' },
+  workshop: { shade: '#8a91c8', corner: '#565782' },
+  observatory: { shade: '#a8b5e0', corner: '#6875a6' },
 };
 const WARM = '#ffebbf';
 

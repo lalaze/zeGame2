@@ -19,7 +19,7 @@ export const CATS = [
 ] as const;
 export type CatId = typeof CATS[number]['id'];
 export const CAT_PERSONALITIES = ['playful', 'quiet', 'affectionate'] as const;
-export const CAT_AREAS = ['main', 'reading', 'greenhouse', 'terrace'] as const;
+export const CAT_AREAS = ['main', 'reading', 'greenhouse', 'terrace', 'workshop', 'observatory'] as const;
 export const CAT_SPOTS = ['cozy', 'window', 'explore'] as const;
 export type CatPersonality = typeof CAT_PERSONALITIES[number];
 export type CatArea = typeof CAT_AREAS[number];

@@ -64,7 +64,7 @@ describe('connected café areas', () => {
 
   it('fits each room’s tables and chairs at short and tall scene heights', () => {
     const s = createInitialState(0);
-    s.coins = 1_000_000;
+    s.coins = REGIONS.reduce((sum, r) => sum + r.cost, 0);
     for (const r of REGIONS) unlockRegion(s, r.id);
     for (const h of [MIN_SCENE_H, MAX_SCENE_H]) {
       setSceneHeight(h);

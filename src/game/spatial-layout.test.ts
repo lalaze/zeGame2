@@ -10,7 +10,7 @@ afterEach(() => setSceneHeight(MIN_SCENE_H));
 
 function expandedState() {
   const state = createInitialState(0);
-  state.coins = 1_000_000;
+  state.coins = REGIONS.reduce((sum, r) => sum + r.cost, 0);
   for (const region of REGIONS) unlockRegion(state, region.id);
   state.pantry.beans = 1_000;
   return state;
@@ -52,6 +52,10 @@ describe('physical café floor plan', () => {
 
   it('walks at normal speed through every shared door in both directions and never crosses a solid wall', () => {
     const state = expandedState();
+    // A fully expanded building needs enough staff and visitors to exercise every room.
+    state.upgrades.server = 5;
+    state.upgrades.barista = 3;
+    state.upgrades.marketing = 10;
     openShop(state);
     let seed = 42;
     const sim = new Sim(() => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 2 ** 32; });
@@ -70,14 +74,15 @@ describe('physical café floor plan', () => {
         const connection = areaConnections(a).find((link) => link.to === b);
         expect(connection).toBeDefined();
         if (connection!.direction === 'up' || connection!.direction === 'down') {
-          expect(c.x).toBe(480);
+          expect(c.x).toBe(areaOrigin(a).x + 160);
         } else expect(c.y).toBe(areaOrigin(a).y + passageY());
         crossings.add(`${a}>${b}`);
       }
     }
     // Customers sit in every dining room, and never go into the kitchen.
     expect(seated).toEqual(new Set(AREA_IDS.filter((area) => area !== 'kitchen')));
-    expect(crossings).toEqual(new Set(['main>reading', 'reading>main', 'reading>greenhouse', 'greenhouse>reading', 'greenhouse>terrace', 'terrace>greenhouse']));
+    expect(crossings).toEqual(new Set(AREA_IDS.filter(a => a !== 'kitchen').flatMap(a =>
+      areaConnections(a).filter(c => c.to !== 'kitchen').map(c => `${a}>${c.to}`))));
   });
 
   it('keeps seated and walking customers in their rooms after changing screen height', () => {

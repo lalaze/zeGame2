@@ -1,0 +1,42 @@
+(node:25588) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS default scene has no open management panel
+PASS mouse drag pans without opening or buying
+PASS sign opens quote with separate land and renovation prices
+PASS land is purchased without starting renovation
+PASS purchase moves keyboard focus to business selector
+PASS renovation installs onsite hoarding and spends only fit-out cost
+PASS completed shop opens with display and a ready indicator
+PASS rapid repeated collection pays exactly once
+PASS shop upgrade preserves existing production rules
+PASS Escape closes only detail and restores shop focus
+PASS street switch closes drawer and reveals independent empty property
+PASS cross-street assets remain independent without resetting café
+PASS locked street can be explored but purchase is blocked
+PASS main café door closes street and visits main
+PASS closing street restores opener focus
+PASS keyboard End pans to end of street
+PASS property keyboard focus stays in its context panel
+PASS second Escape exits street
+PASS 360px reduced motion stops all decorative animations
+PASS 360px has no page overflow
+PASS 360px real touch drag pans without opening or buying
+PASS 360px bottom drawer remains inside viewport
+PASS 360px close restores browsing
+PASS 390px reduced motion stops all decorative animations
+PASS 390px has no page overflow
+PASS 390px real touch drag pans without opening or buying
+PASS 390px bottom drawer remains inside viewport
+PASS 390px close restores browsing
+PASS all raster assets decoded successfully
+PASS town renders all five business displays
+PASS flowers renders all five business displays
+PASS seaside renders all five business displays
+PASS forest renders all five business displays
+PASS city renders all five business displays
+PASS English street and context controls are localized
+PASS real game Streets entry opens the scene
+PASS real SaveSession persists v26 purchase and renovation
+PASS real game returns through main café door
+PASS real reload retains ongoing renovation
+PASS browser has no page or console errors and no failed requests

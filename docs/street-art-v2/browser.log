@@ -1,0 +1,56 @@
+(node:33639) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS default street is the interactive raster world, no detail/payment panel
+PASS home and both stable vacant designs are present
+PASS original desktop doubleclick coordinates never charge
+PASS doubleclick new shop door opens details without purchasing
+PASS land quote alone leaves coins unchanged
+PASS explicit confirmation buys only land
+PASS fitout quote is a separate unpaid action
+PASS separate fitout confirmation starts the correct building
+PASS building has new bookshop and physical fence
+PASS shop keyboard arrows move focus without opening
+PASS mouse drag pans without detail or charges
+PASS cross-street empty address does not inherit owned business
+PASS returning street preserves independent construction
+PASS home storefront returns to live cafe
+PASS all five business-specific storefronts are distinct
+PASS harvest cannot pay the same batches twice
+PASS running animation actually moves pedestrians
+PASS status tags paint above animated people
+PASS reduced motion hides only decorative entrants, retains walkers
+PASS reduced motion tags remain readable
+PASS vacant, construction, sale and open coexist
+PASS 360: viewport has no document overflow
+PASS 360: real touch drag pans without opening or spending
+PASS 360: tap opens contained bottom drawer
+PASS 360: home returns with all assets intact
+PASS 390: viewport has no document overflow
+PASS 390: real touch drag pans without opening or spending
+PASS 390: tap opens contained bottom drawer
+PASS 390: home returns with all assets intact
+PASS English storefront sign uses live translated UI text
+PASS English mobile document remains within viewport
+PASS font stall still reaches true first-frame readiness
+PASS new SW registration waits for main first frame
+PASS all 16 new PNGs cache before any street visit
+PASS offline first street has every storefront/scenery img
+PASS offline pavement layer is cached
+PASS no application page errors
+PASS no failing HTTP resource responses in working browser origin
+PASS HTTP final bytes: index.html
+PASS HTTP final bytes: sw.js
+PASS HTTP final bytes: assets/game-COVN2Bm9.js
+PASS HTTP final bytes: assets/region-art-DtWf97mz.js
+PASS HTTP final bytes: assets/phaser-D8EC1TLR.js
+PASS HTTP final bytes: assets/game-DlY-SX4c.css
+PASS HTTP final bytes: art/street-art-v2/cafe.png
+PASS HTTP final bytes: art/street-art-v2/paving.png
+PASS HTTPS final bytes: index.html
+PASS HTTPS final bytes: sw.js
+PASS HTTPS final bytes: assets/game-COVN2Bm9.js
+PASS HTTPS final bytes: assets/region-art-DtWf97mz.js
+PASS HTTPS final bytes: assets/phaser-D8EC1TLR.js
+PASS HTTPS final bytes: assets/game-DlY-SX4c.css
+PASS HTTPS final bytes: art/street-art-v2/cafe.png
+PASS HTTPS final bytes: art/street-art-v2/paving.png

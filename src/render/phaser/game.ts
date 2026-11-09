@@ -35,11 +35,16 @@ export class CafeGame {
   private viewport?: { width: number; height: number };
   /** Resolves once the scene is up and drawing. */
   readonly ready: Promise<void>;
+  get startupStatus(): string { return this.scene.startupPhase; }
 
   constructor(private canvas: HTMLCanvasElement, view: CafeView, sim: Sim, getState: () => GameState, hooks: CafeHooks) {
     let created!: () => void;
     let failed!: (error: Error) => void;
     this.ready = new Promise((resolve, reject) => { created = resolve; failed = reject; });
+    let firstFrame = false;
+    const contextLost = () => { if (!firstFrame) failed(new Error('Graphics context lost before the first café frame')); };
+    canvas.addEventListener('webglcontextlost', contextLost);
+    void this.ready.then(() => { firstFrame = true; }, () => {}).finally(() => canvas.removeEventListener('webglcontextlost', contextLost));
     this.scene = new CafeScene(view, sim, getState, hooks, () => {
       this.booted = true;
       this.apply();

@@ -1,0 +1,16 @@
+{
+  "stage": "/private/tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ",
+  "dist": "/Volumes/data/code/zeGame2/dist",
+  "version": "8375b110b7fe1f9eb105",
+  "files": 1340,
+  "retainedOldHashedFiles": 44,
+  "entrySha256": "7cc9d7c6e250b2d6e3e619e7d4218fc689b634301eac29638e22eb2e0606a8cd",
+  "workerSha256": "9b609ba3e1e7dcc471fc69e82185994f81cef9a268d7d0e929e3065cce95eef9",
+  "entryBundles": [
+    "assets/game-Cf-GtJBg.js",
+    "assets/region-art-DtWf97mz.js",
+    "assets/phaser-D8EC1TLR.js",
+    "assets/game-BiXdOF27.css"
+  ],
+  "publishedAt": "2026-11-09T08:59:28.355Z"
+}

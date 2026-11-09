@@ -1,6 +1,7 @@
 import { Sim } from './sim';
 import { GuardedStorage, type KeyValueStorage } from './storage';
 import { SAVE_KEY, deserialize, serialize, type GameState } from './state';
+import { migrateIndoorShops } from './streets';
 
 export const SAVE_LOCK = `${SAVE_KEY}/writer`;
 export type SaveResult = 'saved' | 'inactive' | 'conflict' | 'unavailable' | 'temporary';
@@ -9,6 +10,7 @@ export type SaveResult = 'saved' | 'inactive' | 'conflict' | 'unavailable' | 'te
  * cloned state: cooks and orders in Sim would retain unpaid work from the clone. */
 export class SaveSession {
   readonly state: GameState;
+  readonly migratedStreetShops: boolean;
   readonly sim = new Sim();
   active = true;
   private expected: string | null;
@@ -24,6 +26,7 @@ export class SaveSession {
     if (result && !result.ok) throw new Error('Save storage is unavailable');
     this.expected = result?.ok ? result.value : null;
     this.state = deserialize(this.expected, now);
+    this.migratedStreetShops = migrateIndoorShops(this.state, now);
     let runtime: unknown;
     try { runtime = JSON.parse(this.expected ?? '{}').runtime; } catch { /* invalid save uses defaults */ }
     if (!this.sim.restore(runtime, this.state)) {

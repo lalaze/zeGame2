@@ -6,6 +6,7 @@ import '@fontsource/pixelify-sans/600.css';
 import './style.css';
 import './ui/ledger.css';
 import './ui/mobile-cafe-hud.css';
+import './ui/cream-pixel.css';
 
 import { PlayFlow } from './ui/play-flow';
 import { requestServiceHelp, type ServiceHelpOption } from './ui/service-help';
@@ -33,7 +34,7 @@ import { expectedCustomers, menuItems, tipMultiplier, unlockedItems } from './ga
 import { blocksNextTable, canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
 import { formatDuration, formatMoney, formatTransactionMoney } from './game/format';
 import { CAT_SPOT, MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
-import { adjacentArea, buildSeconds, buildShare, finishConstruction, isAreaOpen, mainTableCount, regionOffset, type AreaId, type RegionId } from './game/regions';
+import { adjacentArea, buildShare, isAreaOpen, mainTableCount, regionOffset, type AreaId } from './game/regions';
 import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, furnitureDef } from './game/furniture';
 import { acquireSaveSession, watchSavePage, type SaveSession } from './game/save-session';
 import { applyTheme, comfort } from './game/decor';
@@ -58,6 +59,9 @@ import { showRegularGuests, updateRegularGuestsButton } from './ui/regular-guest
 import { showPrepare } from './ui/prepare';
 import { showCafeStyles, updateCafeStyleButton } from './ui/cafe-styles';
 import { RegionsUI, areaName } from './ui/regions';
+import { updateRoomProjectsBook } from './ui/room-projects';
+import { showStreetMap, updateStreetMap } from './ui/streets';
+import { migrateIndoorShops, streetLotIds, streetProduction } from './game/streets';
 import { FirstServiceGuide } from './ui/first-service';
 import { cafeInteractionEnabled } from './ui/cafe-interaction';
 import { showRecommendation } from './ui/moments';
@@ -329,6 +333,7 @@ const panel = new Panel(
       previewExit.focus({ preventScroll: true });
     }
   },
+  (area) => { regionsUI.select(area); if (drawer.media.matches) setPanelCollapsed(true); },
 );
 panelSimplifiedTabs = (available) => panel.setSimplifiedTabs(available);
 updateDrawerLabels();
@@ -409,20 +414,15 @@ const regionsUI = new RegionsUI($('area-edges'), $('region-card'), () => state, 
     showArrange();
   } else if (arrange?.mode === 'place') holdPiece(arrange.id, arrange.moving, arrange.fromBrowse);
   updateDayHud();
-}, (result) => {
-  saveGame();
-  panel.refresh();
-  if (result.kind === 'building') {
-    toast(t(result.booked ? 'area.bookedToast' : 'area.started', { name: areaName(result.id), time: formatDuration(buildSeconds(state, result.id)) }));
-  } else {
-    toast(t('area.opened', { name: areaName(scene.area) }));
-    sparkleRoom(scene.area);
-  }
-  updateDayHud();
-}, (show) => {
-  scene.setOverview(show, reducedMotion.matches);
-  roomViewport?.reset();
-  canvas.setAttribute('aria-label', show ? t('area.overviewHint') : areaName(scene.area));
+}, () => {
+  saveGame(); panel.refresh();
+  toast(t('area.opened', { name: areaName(scene.area) }));
+  sparkleRoom(scene.area); updateDayHud();
+}, () => {
+  showStreetMap(state, () => { saveGame(); panel.refresh(); }, () => {
+    regionsUI.select('main');
+    if (drawer.media.matches) setPanelCollapsed(true);
+  });
 });
 
 function sparkleRoom(area: AreaId): void {
@@ -460,20 +460,11 @@ function announceReadyOrder(): void {
   panel.refresh();
 }
 
-/** Rooms whose building is done open as soon as the café is closed, as a bought room always did. */
-function openFinishedRooms(): RegionId[] {
-  if (!state.construction.length || state.phase !== 'prep' || !state.profile) return [];
-  const opened = finishConstruction(state, Date.now());
-  if (!opened.length) return opened;
-  saveGame();
-  panel.refresh();
-  regionsUI.update();
-  updateDayHud();
-  for (const id of opened) {
-    toast(t('area.opened', { name: areaName(id) }));
-    if (scene.area === id) sparkleRoom(id);
-  }
-  return opened;
+/** Keep an old service intact until closing, then retire its connected-room runtime. */
+function settleLegacyInterior(): void {
+  if (state.phase !== 'prep' || !migrateIndoorShops(state, Date.now())) return;
+  sim.reset(); scene.livingCats.reset();
+  saveGame(); panel.refresh(); regionsUI.select('main'); updateDayHud();
 }
 
 function showArrange(): void {
@@ -739,7 +730,7 @@ function managerStartDay(): void {
  */
 function managerTick(dt: number, paused: boolean): void {
   // The builders work in real time too; a finished room opens before the next day starts.
-  if (!paused) openFinishedRooms();
+  if (!paused) settleLegacyInterior();
   if (!paused) announceReadyOrder();
   if (!paused) tickCatGifts();
   const idle = managerRunsDays(state) && state.phase === 'prep' && !paused && !!state.profile &&
@@ -803,11 +794,11 @@ function settleAway(): void {
   const franchise = wasAway ? collectFranchises(state, now) : 0;
   const order = wasAway ? collectOrder(state, now) : null;
   if (order) announcedOrder = order.finishAt;
-  const built = wasAway && state.profile ? finishConstruction(state, now) : [];
+  const streetReady = wasAway ? streetLotIds(state).filter(id => streetProduction(state, id, now).batches > 0).length : 0;
   const gifts = wasAway && state.profile ? bringGifts(state, now).length : 0;
   awaySettled = true;
   saveGame();
-  if ((away.amount <= 0 && franchise <= 0 && !order && !built.length && !gifts) || !state.profile) return;
+  if ((away.amount <= 0 && franchise <= 0 && !order && !streetReady && !gifts) || !state.profile) return;
   panel.refresh();
   regionsUI.update();
   updateDayHud();
@@ -820,7 +811,7 @@ function settleAway(): void {
     ...(parts.length > 1 ? [t('away.total', { money: formatMoney(parts.reduce((a, b) => a + b, 0)) })] : []),
     ...(away.welcome > 0 ? [t('away.welcome', { money: formatMoney(away.welcome) })] : []),
     ...(away.full ? [t('away.full', { hours: tillSeconds(state) / 3600, pct: Math.round(OVERFLOW_SHARE * 100) })] : []),
-    ...built.map((id) => t('away.built', { name: areaName(id) })),
+    ...(streetReady ? [t('street.awayReady', { n: streetReady })] : []),
     ...(gifts ? [t('away.gifts', { n: state.catGifts.waiting.length })] : []),
   ];
   if (isModalOpen() || document.querySelector('.onboard-overlay')) {
@@ -1434,8 +1425,11 @@ function frame(dt: number): void {
   if (!panel.tablePreviewRequested) detachedTablePreview = false;
   previewExit.hidden = !detachedTablePreview;
   scene.tablePreview = panel.tablePreviewRequested;
-  scene.livingCats.update(state, scene.paused ? 0 : dt, sim);
-  scene.update(dt, sim);
+  scene.renderSuspended = !!document.querySelector('.street-overlay');
+  if (!scene.renderSuspended) {
+    scene.livingCats.update(state, scene.paused ? 0 : dt, sim);
+    scene.update(dt, sim);
+  }
   sceneWrap.classList.toggle('is-panning', scene.panning);
   sceneWrap.classList.toggle('is-overview', scene.overview);
   stage.classList.toggle('is-panning', scene.panning);
@@ -1464,6 +1458,8 @@ function frame(dt: number): void {
     if (reached.length) toast(t('milestone.toast.reached', { name: reached.map(milestoneName).join(t('list.sep')) }));
     panel.update();
     regionsUI.update();
+    updateRoomProjectsBook();
+    updateStreetMap();
     updateStats();
     updateDayHud();
   }
@@ -1494,7 +1490,7 @@ updateDayHud();
 
 // The inline resource progress stays visible until the pixel
 // fonts are in (or after 2s at most) and the café has drawn its first frame.
-waitForStartupReady(cafe.ready, document.fonts.ready).then(() =>
+waitForStartupReady(cafe.ready, document.fonts.ready, () => `${cafe.startupStatus}; ${loading.describe()}`).then(() =>
   new Promise<void>((resolve, reject) => requestAnimationFrame(() => {
     try {
     startupComplete = true;
@@ -1509,6 +1505,11 @@ waitForStartupReady(cafe.ready, document.fonts.ready).then(() =>
       saveGame();
       toast(t('toast.furnitureMovedOnLoad', { n: movedFurniture }));
     }
+    if (session.migratedStreetShops) {
+      saveGame();
+      toast(t(state.phase === 'prep' ? 'street.migrated' : 'street.migratingAfterClose'));
+    }
+    window.dispatchEvent(new Event('cafe:ready'));
     setTimeout(() => $('loader').remove(), 300);
     resolve();
     } catch (error) { reject(error); }

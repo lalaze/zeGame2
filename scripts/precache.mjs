@@ -64,9 +64,10 @@ export function offlinePrecache() {
       return [{
         tag: 'script',
         injectTo: 'head-prepend',
-        // Start installation before the game module and its large dependencies
-        // finish loading. Failure must not prevent ordinary online play.
-        children: `if ('serviceWorker' in navigator) navigator.serviceWorker.register(${JSON.stringify(`${base}sw.js`)}, { updateViaCache: 'none' }).catch(() => {});`,
+        // Cold-start artwork gets the connection first. Registration/install is
+        // independent of readiness and starts only after the first successful frame.
+        // Existing controlling workers still serve a complete offline installation.
+        children: `(() => { const register = () => { if ('serviceWorker' in navigator) navigator.serviceWorker.register(${JSON.stringify(`${base}sw.js`)}, { updateViaCache: 'none' }).catch(() => {}); }; if (document.body?.classList.contains('ready')) register(); else window.addEventListener('cafe:ready', register, { once: true }); })();`,
       }];
     },
     async closeBundle() {

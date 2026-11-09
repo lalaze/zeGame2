@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { MAX_SCENE_H, MIN_SCENE_H, SCENE_W, doorwayY, passageY, setKitchenLevel, setSceneHeight } from '../game/layout';
+import { MAX_SCENE_H, MIN_SCENE_H, SCENE_W, doorwayY, passageY, sceneHeight, setKitchenLevel, setSceneHeight } from '../game/layout';
 import type { AreaId } from '../game/regions';
 import { createInitialState } from '../game/state';
 import { mainFloor } from './main-room-surfaces';
@@ -109,24 +109,14 @@ describe('kitchen doorway threshold', () => {
   });
 });
 
-describe('guest doorway rendering', () => {
-  it.each([false, true])('preserves the main-to-reading doorway (open: %s)', open => {
+describe('street expansion replaces the adjoining guest doorway', () => {
+  it.each([false, true])('keeps a continuous right café wall even with legacy reading ownership (%s)', open => {
     const y = passageY();
-    const guestDoor = (kitchen: boolean, kitchenDoor: number) => boundaries('main', kitchen, kitchenDoor, open)
-      .filter(([x, top, , h]) => x >= SCENE_W - 7 && top >= y - 17 && top + h <= y + 17);
-    const expected: Rect[] = [
-      [313, y - 17, 9, 4, '#493127'], [314, y - 17, 7, 2, '#dec19a'],
-      [313, y + 13, 9, 4, '#493127'], [314, y + 13, 7, 2, '#dec19a'],
-    ];
-    if (!open) expected.push(
-      [315, y - 12, 5, 24, '#916444'],
-      ...[-10, -3, 4, 11].map(offset => [315, y + offset, 5, 2, '#efcf94'] as Rect),
-      [316, y - 2, 3, 4, '#e6b34d'],
-    );
-    // Joinery highlights can add marks; physical doorway layers and all locked
-    // barrier primitives must still exist, independent of the service door.
-    for (const rect of expected) expect(guestDoor(false, 0)).toContainEqual(rect);
-    expect(guestDoor(true, 1)).toEqual(guestDoor(false, 0));
+    const wall = boundaries('main', false, 0, open);
+    expect(wall).toContainEqual([315, 0, 5, sceneHeight(), '#493127']);
+    expect(wall).not.toContainEqual([313, y - 17, 9, 4, '#493127']);
+    const right = (kitchen: boolean, door: number) => boundaries('main', kitchen, door, open).filter(([x]) => x >= 313);
+    expect(right(true, 1)).toEqual(right(false, 0));
     for (const area of ['reading', 'greenhouse', 'terrace'] as const) {
       expect(boundaries(area, true, 1, open).some(rect => SILL_COLORS.includes(rect[4]))).toBe(false);
     }

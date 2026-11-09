@@ -76,7 +76,7 @@ export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, l
   };
   const sky = (painted: string) => mix(painted, light.sky[1], 0.55);
 
-  const backdrop = generatedMainSource(`cozy-region-${id}`);
+  const backdrop = id === 'workshop' || id === 'observatory' ? null : generatedMainSource(`cozy-region-${id}`);
   if (backdrop) {
     ctx.save(); ctx.imageSmoothingEnabled = false;
     ctx.drawImage(backdrop, 0, 0, SCENE_W, FLOOR_Y);
@@ -97,6 +97,49 @@ export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, l
       paintFloorFurniture(ctx, 'bench', 160, floorY(100));
       for (const x of [108, 212]) paintFloorFurniture(ctx, 'plant_fern', x, floorY(98));
     }
+  } else if (id === 'workshop' || id === 'observatory') {
+    const stars = id === 'observatory';
+    paintWall(ctx, stars ? 'wall_mint' : 'wall_cream', 0, 0, SCENE_W, FLOOR_Y, t);
+    timberBeam(ctx, 0, 0, SCENE_W, 7);
+    for (const x of [5, 309]) timberBeam(ctx, x, 4, 6, 77, true);
+    // Keep the centre clear for the workshop's real north doorway.
+    for (const x of [26, 204]) {
+      r(x, 23, 86, 47, ink); r(x + 3, 26, 80, 41, stars ? sky('#374a6b') : sky('#c0d4c7'));
+      glassReflection(ctx, x + 3, 26, 80, 41, .12);
+      if (stars) {
+        for (let i = 0; i < 9; i++) {
+          const sx = x + 9 + i * 8, sy = 31 + (i * 11) % 28;
+          r(sx, sy, 1, 2, light.dark > .3 ? '#fff0c2' : '#c5d0d5');
+          if (i % 3 === 0) r(sx - 1, sy + 1, 3, 1, '#eadcb7');
+        }
+        r(x + 58, 31, 8, 8, '#efddb0'); r(x + 61, 30, 6, 6, sky('#374a6b'));
+      } else treeLine(ctx, x + 3, 42, 80, 25, light.dark);
+      timberBeam(ctx, x + 40, 24, 3, 44, true);
+      timberBeam(ctx, x - 3, 69, 92, 4);
+      cabinetPanel(ctx, x - 4, 76, 94, 16, stars ? '#65564c' : '#a16d49');
+      timberBeam(ctx, x - 6, 73, 98, 4);
+      if (stars) {
+        // A brass telescope on a tripod, and a row of tea tins.
+        for (let i = 0; i < 15; i++) {
+          r(x + 15 + i, 54 - Math.floor(i / 2), 3, 7, '#b69053');
+          r(x + 15 + i, 54 - Math.floor(i / 2), 3, 1, '#ebcd87');
+          r(x + 24 - Math.floor(i / 2), 59 + i, 1, 1, ink);
+          r(x + 24 + Math.floor(i / 2), 59 + i, 1, 1, ink);
+        }
+        for (let i = 0; i < 3; i++) { r(x + 53 + i * 9, 65, 6, 8, '#7a8d88'); r(x + 53 + i * 9, 64, 6, 2, '#d0b778'); }
+      } else {
+        // Drying cups, a clay bowl and pegboard tools identify the pottery studio.
+        for (let i = 0; i < 5; i++) {
+          const px = x + 7 + i * 15;
+          r(px, 62, 9, 10, i % 2 ? '#9daf99' : '#c98d6f');
+          r(px + 1, 61, 7, 2, '#e8caa3'); r(px + 2, 63, 5, 2, '#765242');
+          r(px + 8, 65, 3, 4, '#b38d67');
+        }
+        timberBeam(ctx, x, 17, 84, 4);
+        for (let i = 0; i < 7; i++) { r(x + 7 + i * 11, 7, 2, 9, '#b88b5b'); r(x + 6 + i * 11, 6, 4, 4, '#ddd0ad'); }
+      }
+    }
+    for (const x of [126, 192]) wallLantern(ctx, x, 29);
   } else if (reading) {
     timberBeam(ctx, 0, 0, SCENE_W, 8);
     for (const x of [0, 314]) timberBeam(ctx, x, 0, 6, 80, true);
@@ -197,9 +240,9 @@ export function paintRegion(ctx: Ctx, id: RegionId, height: number, t: number, l
   }
 
   if (reading && !locked) readingDoor(ctx, FLOOR_Y, light);
-  const word = reading ? 'BOOK NOOK' : terrace ? 'GARDEN PATIO' : 'GLASSHOUSE';
-  // The reading room's sign hangs right of its rear doorway, clear of the café-name plate.
-  const width = textWidth(word) + 14, signX = reading ? SCENE_W - 70 : 160;
+  const word = reading ? 'BOOK NOOK' : terrace ? 'GARDEN PATIO' : id === 'workshop' ? 'CLAY STUDIO' : id === 'observatory' ? 'STAR TEA ROOM' : 'GLASSHOUSE';
+  // Rooms with a north doorway hang their sign to its right, clear of the opening.
+  const width = textWidth(word) + 14, signX = reading || id === 'workshop' ? SCENE_W - 70 : 160;
   timberBeam(ctx, signX - width / 2 - 1, 7, width + 2, 13, false, reading ? '#865332' : '#627451');
   r(signX - width / 2 + 3, 10, width - 6, 7, reading ? '#67432b' : '#42553d');
   drawText(ctx, word, signX - textWidth(word) / 2, 11, '#f4e6c7');

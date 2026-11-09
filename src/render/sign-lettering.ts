@@ -37,7 +37,14 @@ export const signFontRevision = () => pixelFontReady() ? 'pixel-ready' : 'platfo
 export async function loadSignFonts(): Promise<void> {
   if (typeof document === 'undefined' || !document.fonts?.load) return;
   // A failed download uses the legible platform mask rather than blocking the game.
-  await document.fonts.load('12px "Pixel ZH"').catch(() => []);
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    await Promise.race([
+      Promise.resolve().then(() => document.fonts.load('12px "Pixel ZH"')).catch(() => []),
+      new Promise<void>(resolve => { timer = setTimeout(resolve, 2000); }),
+    ]);
+  } finally { clearTimeout(timer); }
+  // The font may finish later. signFontRevision invalidates platform masks then.
 }
 function replacementMask(): SignMask {
   const g = glyph('?'), bits = new Uint8Array(12 * 12);

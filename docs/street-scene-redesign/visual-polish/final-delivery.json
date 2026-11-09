@@ -1,0 +1,79 @@
+{
+  "verifiedAt": "2026-11-09T03:30:50.973302+00:00",
+  "lastBuildLogModifiedAt": "2026-11-09T03:28:59.544793+00:00",
+  "buildExit": 0,
+  "buildResult": "✓ built in 6.54s",
+  "tests": {
+    "files": 1,
+    "passed": 14,
+    "failed": 0
+  },
+  "visualChecks": 43,
+  "errors": [],
+  "served": {
+    "http://127.0.0.1:4174": [
+      {
+        "path": "index.html",
+        "sha256": "3482ea123efb610ca2cee9ecabd7c5446d4fbcd04d506dce9a14b3c38572de2f",
+        "bytes": 19393
+      },
+      {
+        "path": "sw.js",
+        "sha256": "f6b2109c67d96524a6bf9dbbd08fb243e685c6421067990a8cb092ed9b5cc40d",
+        "bytes": 108869
+      },
+      {
+        "path": "assets/game-Hj7PjAum.js",
+        "sha256": "e8e51f92303f18c00f00e5f2b69ee10ec71bc34b453b7750f6de7ddf1d5e0f03",
+        "bytes": 397068
+      },
+      {
+        "path": "assets/region-art-CwpHi1Uq.js",
+        "sha256": "ad5c86fef926ab705eed3f3ec01a5a322f683853b61fd250f0337ba390d238ba",
+        "bytes": 999713
+      },
+      {
+        "path": "assets/phaser-D8EC1TLR.js",
+        "sha256": "2946ccb85768a4543d0f38bba7bc7dbe3e24404149b4c91558d8504c44d079b8",
+        "bytes": 1374100
+      },
+      {
+        "path": "assets/game-Dw8Uq1Wk.css",
+        "sha256": "f001d3590b3dc93ee32996dce8ac8fd36a5d02690a530b734128d34fc593b539",
+        "bytes": 158423
+      }
+    ],
+    "https://lalazemac-mini.tailcec3d.ts.net:4174": [
+      {
+        "path": "index.html",
+        "sha256": "3482ea123efb610ca2cee9ecabd7c5446d4fbcd04d506dce9a14b3c38572de2f",
+        "bytes": 19393
+      },
+      {
+        "path": "sw.js",
+        "sha256": "f6b2109c67d96524a6bf9dbbd08fb243e685c6421067990a8cb092ed9b5cc40d",
+        "bytes": 108869
+      },
+      {
+        "path": "assets/game-Hj7PjAum.js",
+        "sha256": "e8e51f92303f18c00f00e5f2b69ee10ec71bc34b453b7750f6de7ddf1d5e0f03",
+        "bytes": 397068
+      },
+      {
+        "path": "assets/region-art-CwpHi1Uq.js",
+        "sha256": "ad5c86fef926ab705eed3f3ec01a5a322f683853b61fd250f0337ba390d238ba",
+        "bytes": 999713
+      },
+      {
+        "path": "assets/phaser-D8EC1TLR.js",
+        "sha256": "2946ccb85768a4543d0f38bba7bc7dbe3e24404149b4c91558d8504c44d079b8",
+        "bytes": 1374100
+      },
+      {
+        "path": "assets/game-Dw8Uq1Wk.css",
+        "sha256": "f001d3590b3dc93ee32996dce8ac8fd36a5d02690a530b734128d34fc593b539",
+        "bytes": 158423
+      }
+    ]
+  }
+}

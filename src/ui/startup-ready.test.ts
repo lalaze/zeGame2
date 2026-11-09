@@ -116,3 +116,7 @@ describe('startup readiness', () => {
     expect(ready).toHaveBeenCalledExactlyOnceWith(undefined);
   });
 });
+
+it('retains a usable timeout failure even if diagnostic collection is denied', async () => {
+ vi.useFakeTimers();const task=waitForStartupReady(new Promise(()=>{}),Promise.resolve(),()=>{throw new Error('denied');});const rejection=expect(task).rejects.toThrow('Startup diagnostics unavailable');await vi.advanceTimersByTimeAsync(STARTUP_TIMEOUT_MS);await rejection;expect(vi.getTimerCount()).toBe(0);vi.useRealTimers();
+});

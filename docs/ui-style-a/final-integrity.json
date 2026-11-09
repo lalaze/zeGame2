@@ -1,0 +1,42 @@
+{
+  "version": "e6dd0aee7fccab1dbff0",
+  "matchingStagedFiles": 1340,
+  "retainedOldEntryResources": [
+    {
+      "name": "assets/game-LOc-ZqtO.js",
+      "sha256": "89c0e4246e2bcfce41646341dbca8fb863bb55dbc7291a0d175758e8997c6eac"
+    },
+    {
+      "name": "assets/region-art-DtWf97mz.js",
+      "sha256": "067278ae07e4525f667b38cf2c57bcc191e07667aff84637aa13da1114c917ed"
+    },
+    {
+      "name": "assets/phaser-D8EC1TLR.js",
+      "sha256": "2946ccb85768a4543d0f38bba7bc7dbe3e24404149b4c91558d8504c44d079b8"
+    },
+    {
+      "name": "assets/game-CFXWDI5e.css",
+      "sha256": "fc2a75e543230cff040ecdf80d675c3dafeea8c1e0506f347860f70a775d267f"
+    }
+  ],
+  "unchangedApprovedPNGs": [
+    "bench.png",
+    "bookshop.png",
+    "cafe.png",
+    "cloud.png",
+    "curb.png",
+    "florist.png",
+    "hills.png",
+    "lamp.png",
+    "paving.png",
+    "plant-shop.png",
+    "pottery.png",
+    "shadow.png",
+    "tea-shop.png",
+    "town.png",
+    "vacant-blue.png",
+    "vacant-brick.png"
+  ],
+  "indexSha256": "1e42e3fcb5149de4e41a602ae9b705693c6a808ccac33b0a6dbbac18ac7991bb",
+  "workerSha256": "4c2187a873b2457da98070a59d23ba7db571455d85dbdad7f2b2e494a4648395"
+}

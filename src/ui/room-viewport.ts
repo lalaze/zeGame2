@@ -135,8 +135,9 @@ export class RoomViewport {
     this.resetButton.title = zh ? '双指缩放，放大后单指拖动；点击恢复全景' : 'Pinch to zoom, drag to pan; click to fit the room';
     this.resetButton.setAttribute('aria-label', (zh ? '恢复房间全景，当前 ' : 'Fit room, current ') + Math.round(this.zoom * 100) + '%');
     if (this.overview) {
-      this.resetButton.textContent = overview ? (zh ? '返回房间' : 'Back to room') : (zh ? '全景' : 'Overview');
-      this.resetButton.title = overview ? (zh ? '返回当前房间' : 'Return to the current room') : (zh ? '查看全店地图，点击房间进入' : 'View the whole café; select a room to enter');
+      this.resetButton.textContent = overview ? (zh ? '返回店内' : 'Back inside') : (zh ? '街道' : 'Streets');
+      this.resetButton.title = overview ? (zh ? '返回当前店铺' : 'Return to the café') : (zh ? '选择街道，购买沿街铺位' : 'Choose a street and buy a storefront');
+      this.resetButton.setAttribute('aria-haspopup', 'dialog');
       this.resetButton.setAttribute('aria-label', this.resetButton.title);
       this.resetButton.setAttribute('aria-pressed', String(overview));
     }

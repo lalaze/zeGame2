@@ -1,0 +1,96 @@
+(node:13908) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS normal: real game reaches first frame
+PASS font-stall: real game reaches first frame
+PASS stalled-font recovery reaches ready while font is still pending
+PASS font-stall: localStorage and IndexedDB progress preserved
+PASS font-fail: real game reaches first frame
+PASS font-fail: localStorage and IndexedDB progress preserved
+PASS slow: real game reaches first frame
+PASS slow: localStorage and IndexedDB progress preserved
+PASS 360x780: cold actual renderer boots
+PASS 390x844: cold actual renderer boots
+PASS 1440x960: cold actual renderer boots
+PASS loading-zh 568x415: title/art/text/button/details centered
+PASS loading-zh 568x415: no horizontal loader overflow
+PASS loading-zh 360x780: title/art/text/button/details centered
+PASS loading-zh 360x780: no horizontal loader overflow
+PASS loading-zh 390x844: title/art/text/button/details centered
+PASS loading-zh 390x844: no horizontal loader overflow
+PASS loading-zh 1440x960: title/art/text/button/details centered
+PASS loading-zh 1440x960: no horizontal loader overflow
+PASS zh: centered loading page reaches ready
+PASS loading-en 568x415: title/art/text/button/details centered
+PASS loading-en 568x415: no horizontal loader overflow
+PASS loading-en 360x780: title/art/text/button/details centered
+PASS loading-en 360x780: no horizontal loader overflow
+PASS loading-en 390x844: title/art/text/button/details centered
+PASS loading-en 390x844: no horizontal loader overflow
+PASS loading-en 1440x960: title/art/text/button/details centered
+PASS loading-en 1440x960: no horizontal loader overflow
+PASS en: centered loading page reaches ready
+PASS zh: real missing-image deadline includes diagnostic phase
+PASS zh: timeout does not assert an unproven network cause
+PASS zh: failure leaves progress intact
+PASS timeout-zh 568x415: title/art/text/button/details centered
+PASS timeout-zh 568x415: no horizontal loader overflow
+PASS timeout-zh 360x780: title/art/text/button/details centered
+PASS timeout-zh 360x780: no horizontal loader overflow
+PASS timeout-zh 390x844: title/art/text/button/details centered
+PASS timeout-zh 390x844: no horizontal loader overflow
+PASS timeout-zh 1440x960: title/art/text/button/details centered
+PASS timeout-zh 1440x960: no horizontal loader overflow
+PASS zh: reload safely recovers after request resumes
+PASS en: real missing-image deadline includes diagnostic phase
+PASS en: timeout does not assert an unproven network cause
+PASS en: failure leaves progress intact
+PASS timeout-en 568x415: title/art/text/button/details centered
+PASS timeout-en 568x415: no horizontal loader overflow
+PASS timeout-en 360x780: title/art/text/button/details centered
+PASS timeout-en 360x780: no horizontal loader overflow
+PASS timeout-en 390x844: title/art/text/button/details centered
+PASS timeout-en 390x844: no horizontal loader overflow
+PASS timeout-en 1440x960: title/art/text/button/details centered
+PASS timeout-en 1440x960: no horizontal loader overflow
+PASS en: reload safely recovers after request resumes
+PASS image-fail: reports specific actual failure instead of silently timing out
+PASS image-fail: failure never deletes save or IndexedDB
+PASS module-fail: reports specific actual failure instead of silently timing out
+PASS module-fail: failure never deletes save or IndexedDB
+PASS lost GPU context reports its actual cause before startup deadline
+PASS GPU startup failure preserves progress
+PASS cold SW registration occurs after successful startup
+PASS deferred complete SW still precaches all 23 street PNGs
+PASS complete installed cache starts the real game offline
+Update state: {
+  before: {
+    scope: 'http://127.0.0.1:4174/__startup_qa_1794197868258/',
+    active: 'http://127.0.0.1:4174/__startup_qa_1794197868258/sw.js',
+    controller: 'http://127.0.0.1:4174/__startup_qa_1794197868258/sw.js',
+    href: 'http://127.0.0.1:4174/__startup_qa_1794197868258/'
+  },
+  changes: [],
+  scope: 'http://127.0.0.1:4174/__startup_qa_1794197868258/',
+  activeURL: 'http://127.0.0.1:4174/__startup_qa_1794197868258/sw.js',
+  controllerURL: 'http://127.0.0.1:4174/__startup_qa_1794197868258/sw.js',
+  active: 'activated',
+  waiting: 'installed',
+  controller: 'activated',
+  cacheNames: [
+    'tiny-bean-cafe:http%3A%2F%2F127.0.0.1%3A4174%2F__startup_qa_1794197868258%2F:11346c059f1009590fca',
+    'tiny-bean-cafe:http%3A%2F%2F127.0.0.1%3A4174%2F__startup_qa_1794197868258%2F:948360e08e90039b060b'
+  ]
+}
+PASS updated SW waits while the old controlled client is alive
+PASS both complete old and new application caches survive until activation
+PASS old page remains functional during update with saved progress intact
+PASS new HTML uses its matching new chunk while old worker remains active
+PASS second tab safely acquires the existing save after first tab closes
+PASS new completed SW activates after old page closes and boots offline
+PASS new HTML loads its matching hashed chunk after upgrade
+PASS HTTPS index.html matches final dist
+PASS HTTPS sw.js matches final dist
+PASS HTTPS assets/game-BsEZmkNv.js matches final dist
+PASS HTTPS assets/region-art-DtWf97mz.js matches final dist
+PASS HTTPS assets/phaser-D8EC1TLR.js matches final dist
+PASS HTTPS assets/game-CAE5aRNa.css matches final dist

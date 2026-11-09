@@ -3,6 +3,7 @@ import { DAY_SECONDS } from './data';
 import { openShop } from './day';
 import { bakeForForecast, dayDemand, earn, hasServiceSupply, menuItems, restock, salePrice, servingCost } from './economy';
 import type { GameState } from './state';
+import { hasBlueprint } from './room-projects';
 
 /**
  * The shop manager: an early hire who runs ordinary days on their own and keeps the
@@ -84,7 +85,7 @@ export function expectedDayProfit(state: GameState): number {
 }
 
 /** What an hour away earns with the current menu, while the till has room. */
-export const awayHourly = (state: GameState) => expectedDayProfit(state) * AWAY_DAYS_PER_HOUR * (hasPerk(state, 'manager') ? PERK_AWAY_SHARE : 1);
+export const awayHourly = (state: GameState) => expectedDayProfit(state) * AWAY_DAYS_PER_HOUR * (hasPerk(state, 'manager') ? PERK_AWAY_SHARE : 1) * (hasBlueprint(state, 'ledger') ? 1.1 : 1);
 
 /** Seconds of away pay the till holds now. */
 export const tillSeconds = (state: Pick<GameState, 'manager' | 'chain'>) =>

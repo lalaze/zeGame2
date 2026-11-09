@@ -1,0 +1,75 @@
+{
+  "checks": [
+    "default street is the interactive raster world, no detail/payment panel",
+    "home and both stable vacant designs are present",
+    "original desktop doubleclick coordinates never charge",
+    "doubleclick new shop door opens details without purchasing",
+    "land quote alone leaves coins unchanged",
+    "explicit confirmation buys only land",
+    "fitout quote is a separate unpaid action",
+    "separate fitout confirmation starts the correct building",
+    "building has new bookshop and physical fence",
+    "shop keyboard arrows move focus without opening",
+    "mouse drag pans without detail or charges",
+    "cross-street empty address does not inherit owned business",
+    "returning street preserves independent construction",
+    "home storefront returns to live cafe",
+    "all five business-specific storefronts are distinct",
+    "harvest cannot pay the same batches twice",
+    "running animation actually moves pedestrians",
+    "status tags paint above animated people",
+    "reduced motion hides only decorative entrants, retains walkers",
+    "reduced motion tags remain readable",
+    "vacant, construction, sale and open coexist",
+    "360: viewport has no document overflow",
+    "360: real touch drag pans without opening or spending",
+    "360: tap opens contained bottom drawer",
+    "360: home returns with all assets intact",
+    "390: viewport has no document overflow",
+    "390: real touch drag pans without opening or spending",
+    "390: tap opens contained bottom drawer",
+    "390: home returns with all assets intact",
+    "English storefront sign uses live translated UI text",
+    "English mobile document remains within viewport",
+    "font stall still reaches true first-frame readiness",
+    "new SW registration waits for main first frame",
+    "all 16 new PNGs cache before any street visit",
+    "offline first street has every storefront/scenery img",
+    "offline pavement layer is cached",
+    "no application page errors",
+    "no failing HTTP resource responses in working browser origin",
+    "HTTP final bytes: index.html",
+    "HTTP final bytes: sw.js",
+    "HTTP final bytes: assets/game-COVN2Bm9.js",
+    "HTTP final bytes: assets/region-art-DtWf97mz.js",
+    "HTTP final bytes: assets/phaser-D8EC1TLR.js",
+    "HTTP final bytes: assets/game-DlY-SX4c.css",
+    "HTTP final bytes: art/street-art-v2/cafe.png",
+    "HTTP final bytes: art/street-art-v2/paving.png",
+    "HTTPS final bytes: index.html",
+    "HTTPS final bytes: sw.js",
+    "HTTPS final bytes: assets/game-COVN2Bm9.js",
+    "HTTPS final bytes: assets/region-art-DtWf97mz.js",
+    "HTTPS final bytes: assets/phaser-D8EC1TLR.js",
+    "HTTPS final bytes: assets/game-DlY-SX4c.css",
+    "HTTPS final bytes: art/street-art-v2/cafe.png",
+    "HTTPS final bytes: art/street-art-v2/paving.png"
+  ],
+  "runs": [
+    {
+      "httpsChromium": "Error: page.goto: net::ERR_CONNECTION_CLOSED at https://lalazemac-mini.tailcec3d.ts.net:4174/",
+      "limitation": "HTTPS bytes checked separately via curl; browser QA uses existing secure loopback, not a physical device."
+    },
+    {
+      "fontReadyProbe": {
+        "ready": 2884,
+        "registered": [
+          2884
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "badResponses": [],
+  "at": "2026-11-09T06:53:33.309Z"
+}

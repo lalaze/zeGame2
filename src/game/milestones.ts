@@ -14,6 +14,7 @@ import { REGULAR_GUESTS } from './regular-guests-content';
 import { reputationScore } from './reputation';
 import type { GameState } from './state';
 import { tasteTier } from './taste';
+import { ownsStreetBusiness } from './streets';
 
 export interface MilestoneRecords {
   /** Most guests served in one day. */
@@ -60,7 +61,7 @@ const RATING_REVIEWS = 50;
 export const OPEN_AFTER = 3;
 /** A special day is won when its popular dishes sell at least this many, and make up this share of sales. */
 export const WEATHER_WIN = { popular: 40, share: 0.5 } as const;
-const room = (s: GameState, id: 'greenhouse' | 'terrace'): [number, number] => [Number(s.regions.includes(id)), 1];
+const room = (s: GameState, id: 'greenhouse' | 'terrace'): [number, number] => [Number(s.regions.includes(id) || ownsStreetBusiness(s, id)), 1];
 const rating = (s: GameState, target: number): [number, number] => [reputationScore(s.reputation), target];
 /** A rating over too few reviews isn't a reputation yet. */
 export const enoughReviews = (s: GameState) => s.reputation.recent.length >= RATING_REVIEWS;

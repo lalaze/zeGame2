@@ -1,0 +1,51 @@
+(node:98928) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS main café has real GPU draw calls before street
+PASS 1440x960 double click at 1265,600 spends nothing
+PASS fresh pointer click and detail-zero activation cannot penetrate newly opened panel
+PASS requesting land payment does not buy or renovate
+PASS fresh confirmation surface rejects immediate activation
+PASS keyboard cancel and repeated Enter spend nothing
+PASS explicit land confirmation charges exactly 9000 only
+PASS repeated original storefront gesture cannot start default renovation
+PASS fit-out request needs its own separate confirmation
+PASS explicit fit-out confirmation starts paid construction exactly once
+PASS occluded café produces zero GPU draw calls while street ticks
+PASS Right arrow on storefront focuses next shop without opening drawer
+PASS native business select keeps keyboard editing focus
+PASS return to café restores GPU rendering
+PASS finished SW precaches all street PNGs before first street visit
+PASS first offline town scene has all images
+PASS first offline flowers scene has all images
+PASS first offline seaside scene has all images
+PASS first offline forest scene has all images
+PASS first offline city scene has all images
+PASS town storefronts use exact 2x pixel scale
+PASS town business names stay inside authored wooden sign
+PASS flowers storefronts use exact 2x pixel scale
+PASS flowers business names stay inside authored wooden sign
+PASS seaside storefronts use exact 2x pixel scale
+PASS seaside business names stay inside authored wooden sign
+PASS forest storefronts use exact 2x pixel scale
+PASS forest business names stay inside authored wooden sign
+PASS city storefronts use exact 2x pixel scale
+PASS city business names stay inside authored wooden sign
+PASS normal-motion visitor actually moves between screenshots
+PASS production CSS pedestrian URLs resolve to real image responses
+PASS labels remain on top throughout running visitor animation
+PASS double collection still pays once and disables subsequent collection
+PASS reduced-motion visitors and pedestrians stop animation
+PASS reduced-motion labels remain readable
+PASS 360px real touch drags without opening shop
+PASS 360px page has no overflow
+PASS 360px running labels remain on top
+PASS 360px static labels remain on top
+PASS 390px real touch drags without opening shop
+PASS 390px page has no overflow
+PASS 390px running labels remain on top
+PASS 390px static labels remain on top
+PASS real v25 entry migrates five lots without charging
+PASS v25 facility level, goods, construction and stored furniture survive
+PASS migrated goods pay 360 coins and 24 inspiration exactly once
+PASS v25 migrated reload neither duplicates assets nor rewards
+PASS no page errors, console errors or HTTP failures

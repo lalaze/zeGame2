@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
 import { afterEach, describe, expect, it } from 'vitest';
-import { MIN_SCENE_H, MAX_SCENE_H, kitchenHeight, passageY, setKitchenLevel, setSceneHeight } from '../game/layout';
+import { MIN_SCENE_H, MAX_SCENE_H, kitchenHeight, setKitchenLevel, setSceneHeight } from '../game/layout';
 import { createInitialState } from '../game/state';
 import { RegionsUI } from './regions';
 
@@ -18,7 +18,7 @@ describe('staff door controls', () => {
       ui.select('main');
       const top = (direction: string) => parseFloat(edges.querySelector<HTMLElement>(`[data-direction="${direction}"]`)!.style.top);
       expect(top('left')).toBeCloseTo(88 / height * 100, 5);
-      expect(top('right')).toBeCloseTo(passageY() / height * 100, 5);
+      expect(edges.querySelector<HTMLElement>('[data-direction="right"]')!.hidden).toBe(true);
       ui.select('kitchen');
       expect(top('right')).toBeCloseTo((88 + (height - kitchenHeight()) / 2) / height * 100, 5);
       expect(card.hidden).toBe(true);

@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, posix } from 'node:path';
 import { runInNewContext } from 'node:vm';
@@ -49,7 +49,12 @@ function worker(source, scope = 'https://example.test/games/cafe/', existing = n
       if (!existing.has(name)) existing.set(name, new Map());
       const entries = existing.get(name);
       return {
-        match: async (request) => entries.get(keyOf(request))?.clone(),
+        // A crossorigin script or stylesheet carries an Origin header the precache request didn't.
+        match: async (request, options) => {
+          const hit = entries.get(keyOf(request));
+          const originDiffers = request.mode === 'cors' && hit?.headers.get('vary')?.includes('Origin');
+          return originDiffers && !options?.ignoreVary ? undefined : hit?.clone();
+        },
         put: async (request, response) => { entries.set(keyOf(request), response.clone()); },
         addAll: async (requests) => {
           const responses = await Promise.all(requests.map((request) => fetch(request)));
@@ -359,6 +364,17 @@ describe('what a player downloads, and what an update costs', () => {
     await expect(app.request('./art/never-used.gif')).rejects.toThrow('Offline');
   });
 
+  it('serves crossorigin scripts offline even when the host sends Vary: Origin', async () => {
+    const { source } = await buildFixture(art, runtimeArt);
+    const app = worker(source, scope);
+    app.fetch.mockImplementation(async (request) => new Response(request.url, { headers: { Vary: 'Origin' } }));
+    await app.lifecycle('install');
+    await app.lifecycle('activate');
+    app.goOffline();
+    app.fetch.mockImplementation(async () => { throw new TypeError('Offline'); });
+    expect(await (await app.request('./assets/app-123.js', 'cors')).text()).toBe(url('./assets/app-123.js'));
+  });
+
   it('checks with the server before storing art on first use, so an older HTTP-cached copy is not kept', async () => {
     const { source } = await buildFixture(art, runtimeArt);
     const app = worker(source, scope);
@@ -449,7 +465,7 @@ describe('what a player downloads, and what an update costs', () => {
 
 
 describe('Vite precache integration', () => {
-  it.each(['./', '/games/cafe/'])('injects early production registration and precaches actual output at base %s', async (base) => {
+  it.each(['./', '/games/cafe/'])('defers production registration until the café is ready and precaches actual output at base %s', async (base) => {
     const root = await mkdtemp(join(tmpdir(), 'cafe-vite-'));
     temporary.push(root);
     await mkdir(join(root, 'public'));
@@ -462,7 +478,12 @@ describe('Vite precache integration', () => {
     const html = await readFile(join(root, 'dist/index.html'), 'utf8');
     const source = await readFile(join(root, 'dist/sw.js'), 'utf8');
     expect(html).toContain(`register("${base}sw.js", { updateViaCache: 'none' })`);
-    expect(html.indexOf('serviceWorker.register')).toBeLessThan(html.indexOf('type="module"'));
+    const register = vi.fn(() => Promise.resolve()); const listeners = new Map();
+    const registration = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+    runInNewContext(registration, { document: { body: { classList: { contains: () => false } } }, navigator: { serviceWorker: { register } }, window: { addEventListener: (name, fn, opts) => { listeners.set(name, fn); expect(opts.once).toBe(true); } } });
+    expect(register).not.toHaveBeenCalled();
+    expect(listeners.has('cafe:ready')).toBe(true);listeners.get('cafe:ready')();
+    expect(register).toHaveBeenCalledWith(`${base}sw.js`, { updateViaCache: 'none' });
     expect(source).not.toContain('__PRECACHE_');
     expect(source).toMatch(/\.\/assets\/index-[^" ]+\.js/);
     expect(source).toMatch(/\.\/assets\/index-[^" ]+\.css/);
@@ -471,5 +492,38 @@ describe('Vite precache integration', () => {
     await app.lifecycle('install');
     app.goOffline();
     expect((await app.request('./', 'navigate')).ok).toBe(true);
+  });
+});
+
+// Street art must work on the first offline street visit, before any runtime fetch.
+describe('first offline street visit', () => {
+  it('precaches every shipped street PNG and serves them after installation without prior use', async () => {
+    const names = readdirSync('public/art/street-scene').filter(name => name.endsWith('.png')).map(name => `art/street-scene/${name}`);
+    expect(names.length).toBeGreaterThanOrEqual(22);
+    expect(names.filter(name => !isPrecached(name))).toEqual([]);
+    const { source, manifest } = await buildFixture(Object.fromEntries(names.map(name => [name, readFileSync(`public/${name}`)])));
+    for (const name of names) expect(manifest).toContain(`./${name}`);
+    const app = worker(source); await app.lifecycle('install'); await app.lifecycle('activate'); app.goOffline();
+    for (const name of names) expect((await app.request(`./${name}`)).ok).toBe(true);
+  });
+});
+
+// All approved storefront/scenery layers must exist before a first offline street visit.
+describe('approved street art v2 offline contract', () => {
+  it('registers every generated PNG and actually precaches its bytes', async () => {
+    const folder = new URL('../public/art/street-art-v2/', import.meta.url);
+    const names = readdirSync(folder).filter(name => name.endsWith('.png'));
+    // Preserve all approved originals while allowing independently authored depth layers.
+    expect(names).toEqual(expect.arrayContaining([
+      'bench.png', 'bookshop.png', 'cafe.png', 'cloud.png', 'curb.png', 'florist.png',
+      'hills.png', 'lamp.png', 'paving.png', 'plant-shop.png', 'pottery.png',
+      'shadow.png', 'tea-shop.png', 'town.png', 'vacant-blue.png', 'vacant-brick.png',
+    ]));
+    const files = Object.fromEntries(names.map(name => [`art/street-art-v2/${name}`, readFileSync(new URL(name, folder))]));
+    for (const name of Object.keys(files)) expect(isPrecached(name), name).toBe(true);
+    const { source, manifest } = await buildFixture(files);
+    for (const name of Object.keys(files)) expect(manifest).toContain(`./${name}`);
+    const app = worker(source); await app.lifecycle('install'); await app.lifecycle('activate'); app.goOffline();
+    for (const name of Object.keys(files)) expect((await app.request(`./${name}`)).ok, name).toBe(true);
   });
 });

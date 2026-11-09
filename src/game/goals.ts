@@ -3,6 +3,7 @@ import { MENU, isDrink } from './data';
 import { earn, menuItems, readyServings, unlockedItems } from './economy';
 import type { GameState } from './state';
 import { styleStages } from './styles';
+import { ownedPlotCount } from './streets';
 
 export interface GoalDef {
   /** Translation key suffix: goal.<id> */
@@ -30,7 +31,7 @@ export const GOALS: readonly GoalDef[] = [
   { id: 'milk', reward: 60, progress: (s) => [Math.min(20, Math.max(s.pantry.milk, drinkSupply(s))), 20] },
   { id: 'sign', reward: 100, progress: (s) => [Math.max(s.upgrades.marketing, s.upgrades.machine), 1] },
   { id: 'decor', reward: 150, progress: (s) => [hasBoughtDecor(s) ? 1 : 0, 1] },
-  { id: 'table', reward: 400, progress: (s) => [Math.max(s.upgrades.tables, Number(s.kitchen), s.regions.length), 1] },
+  { id: 'table', reward: 400, progress: (s) => [Math.max(s.upgrades.tables, Number(s.kitchen), s.regions.length, ownedPlotCount(s)), 1] },
   { id: 'barista', reward: 500, progress: (s) => [Math.max(s.upgrades.barista, s.upgrades.server, s.upgrades.cook), 1] },
   { id: 'days5', reward: 800, progress: (s) => [daysDone(s), 5] },
   { id: 'variety', reward: 1_000, progress: (s) => [Math.max(unlockedItems(s).length, completedStyleStages(s, 1) * 6), 6] },

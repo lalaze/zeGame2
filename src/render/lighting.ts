@@ -130,12 +130,12 @@ export function weatherLight(light: Lighting, weather: string): Lighting {
  * sky and the glasshouse nearly so, while the walled rooms keep some of their own light,
  * and the windowless kitchen runs on its tube lights.
  */
-const EXPOSURE: Record<AreaId, number> = { main: 0.6, reading: 0.45, greenhouse: 0.9, terrace: 1, kitchen: 0.35 };
+const EXPOSURE: Record<AreaId, number> = { main: 0.6, reading: 0.45, greenhouse: 0.9, terrace: 1, kitchen: 0.35, workshop: 0.5, observatory: 0.85 };
 /**
  * How much of the room's own warm light tempers the night sky's color. The darkness
  * itself, and the lamplight, come from each room's night light map. Locked rooms stay unlit.
  */
-const NIGHT_WARMTH: Record<AreaId, number> = { main: 0.3, reading: 0.35, greenhouse: 0.16, terrace: 0.1, kitchen: 0.65 };
+const NIGHT_WARMTH: Record<AreaId, number> = { main: 0.3, reading: 0.35, greenhouse: 0.16, terrace: 0.1, kitchen: 0.65, workshop: 0.45, observatory: 0.2 };
 
 /** The color a room is multiplied by. */
 export const roomAmbient = (light: Lighting, area: AreaId, locked = false) => {

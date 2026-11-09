@@ -1,0 +1,42 @@
+(node:54653) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:54683) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+vite v8.3.3 building client environment for production...
+transforming...
+✓ 232 modules transformed.
+
+(!) outDir /tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+computing gzip size...
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/pixelify-sans-cyrillic-400-normal-DfOZNMlW.woff        4.41 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/pixelify-sans-cyrillic-600-normal-B3EuUOZG.woff        4.47 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/sprite-preview.html                                           4.64 kB │ gzip:   2.53 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/pixelify-sans-latin-ext-400-normal-DdH6zlBQ.woff2      5.36 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/pixelify-sans-latin-ext-600-normal-Dha6RiOG.woff2      5.56 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/pixelify-sans-latin-ext-400-normal-BkfTUL4s.woff       7.44 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/pixelify-sans-latin-ext-600-normal-CDaIumwU.woff       7.65 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/pixelify-sans-latin-400-normal-DLrIX9QE.woff2          7.69 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/pixelify-sans-latin-600-normal-Dd_Dy7u5.woff2          8.21 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/pixelify-sans-latin-400-normal-JapMNN6Z.woff          10.26 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/pixelify-sans-latin-600-normal-BNlgYbDL.woff          10.77 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/index.html                                                   20.32 kB │ gzip:   6.03 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/pixel-zh-C-Ka8rhJ.woff2                               50.88 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/game-BiXdOF27.css                                    182.75 kB │ gzip:  42.61 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/artwork-dZolC-Ad.js                                   12.30 kB │ gzip:   5.19 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/game-Cf-GtJBg.js                                     400.14 kB │ gzip: 136.72 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/region-art-DtWf97mz.js                               999.84 kB │ gzip: 298.31 kB
+../../../../tmp/zeGame2-ui-style-a-border-fix-stage-NJaUMZ/assets/phaser-D8EC1TLR.js                                 1,374.10 kB │ gzip: 357.33 kB
+
+✓ built in 5.64s
+[33m[PLUGIN_TIMINGS] [0mJavaScript callbacks ran for 5.8s. The build took 5.6s. Callbacks such as `closeBundle` run after the build ends, so callback time can be more than build time.
+The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - plugin vite:prepare-out-dir renderStart (83%, 4.7s, 1 call)
+Additional callback time came from the callbacks below and from callbacks under 1s.
+2 callbacks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - plugin vite:css transform (16 calls)
+  - plugin vite:build-html transform (2 calls)
+See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+

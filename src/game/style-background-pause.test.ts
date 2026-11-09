@@ -55,7 +55,7 @@ function liveFrame(withCare = true) {
     sceneWrap: document.createElement('div'), arrangeFocus: { update: vi.fn() }, arrange: null,
     drawerBalance: document.createElement('button'), coinsEl: document.createElement('button'), rateEl: document.createElement('div'),
     formatMoney, formatTransactionMoney, t, panel: { update: vi.fn(), tablePreviewRequested: false, clearTablePreview: vi.fn() }, regionsUI: { update: vi.fn() },
-    updateStats: vi.fn(), updateDayHud: vi.fn(),
+    updateStats: vi.fn(), updateDayHud: vi.fn(), updateRoomProjectsBook: vi.fn(), updateStreetMap: vi.fn(),
     // Real optional moments: they must never start or fade while the café is blocked.
     moments: new MomentDirector(() => 0.5), cuedMoment: null, MOMENT_HINT_KEY: 'moment-hint-',
     momentStage: () => ({ area: 'main', cats: [] }), storage: { preference: () => '1', setPreference: vi.fn() }, toast: vi.fn(),
@@ -67,7 +67,7 @@ function liveFrame(withCare = true) {
   const frame = new Function(...Object.keys(dependencies), `${frameSource}\nreturn frame;`)(...Object.values(dependencies)) as (dt: number) => void;
   const tick = new Function('delta', `${sceneTick}\nreturn dt;`) as (this: { initialized: boolean; loadingFailed: boolean; hooks: { tick: typeof frame } }, delta: number) => number;
   const rawFrame = (milliseconds: number) => tick.call({ initialized: true, loadingFailed: false, hooks: { tick: frame } }, milliseconds);
-  return { state, sim, session, scene, drawer, showReport, rawFrame, managerTick: dependencies.managerTick, setModal: (open: boolean) => { modal = open; } };
+  return { state, sim, session, scene, drawer, showReport, rawFrame, streetUpdates: dependencies.updateStreetMap, managerTick: dependencies.managerTick, setModal: (open: boolean) => { modal = open; } };
 }
 
 beforeEach(() => {
@@ -78,6 +78,24 @@ beforeEach(() => {
 afterEach(() => { vi.restoreAllMocks(); document.body.replaceChildren(); setSceneHeight(MIN_SCENE_H); setKitchenLevel(0); });
 
 describe('actual main-frame background and modal timing contract', () => {
+  it('keeps the Phaser tick active but disables its camera and skips drawing while covered', () => {
+    const prefix = sceneSource.slice(sceneSource.indexOf('  update(time: number, delta: number): void {'), sceneSource.indexOf('    const state = this.getState();', sceneSource.indexOf('  update(time: number, delta: number): void {')));
+    const run = new Function('time', 'delta', prefix.replace('  update(time: number, delta: number): void {', '') + '\nreturn true;');
+    const target = { initialized: true, loadingFailed: false, view: { renderSuspended: true }, hooks: { tick: vi.fn() }, cameras: { main: { visible: true } } };
+    expect(run.call(target, 0, 16)).toBeUndefined();expect(target.hooks.tick).toHaveBeenCalledOnce();expect(target.cameras.main.visible).toBe(false);
+    target.view.renderSuspended = false;
+    expect(run.call(target, 0, 16)).toBe(true);expect(target.cameras.main.visible).toBe(true);
+  });
+  it('skips the occluded café view while keeping street updates alive, then resumes on return', () => {
+    const run = liveFrame(); run.setModal(true);
+    const street = document.createElement('div');street.className = 'street-overlay';document.body.append(street);
+    run.scene.update.mockClear();run.scene.livingCats.update.mockClear();
+    for (let i = 0; i < 20; i++) run.rawFrame(250);
+    expect(run.scene.update).not.toHaveBeenCalled();expect(run.scene.livingCats.update).not.toHaveBeenCalled();
+    expect(run.streetUpdates).toHaveBeenCalled();
+    street.remove();run.setModal(false);run.rawFrame(16);
+    expect(run.scene.update).toHaveBeenCalledOnce();expect(run.scene.livingCats.update).toHaveBeenCalledOnce();
+  });
   it.each(['hidden tab', 'modal', 'inactive save session', 'save notice', 'onboarding', 'mobile drawer'] as const)('does not advance any real simulation or care while blocked by %s', blocker => {
     const run = liveFrame();
     for (let frame = 0; frame < 80; frame++) run.rawFrame(250);

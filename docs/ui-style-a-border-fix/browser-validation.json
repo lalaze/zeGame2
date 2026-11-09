@@ -1,0 +1,4370 @@
+{
+  "version": "8375b110b7fe1f9eb105",
+  "checks": [
+    "390: final entry is actually rendered",
+    "mobile-390: no document overflow",
+    "mobile-390-normal: no default inset or drop-shadow",
+    "mobile-390-normal: single 2px outline, no border-image",
+    "mobile-390-normal: targets >=44 and keyboard box unmasked",
+    "mobile-390: dock has one quiet 1px line",
+    "mobile-390-hover-#room-zoom-reset: no default inset or drop-shadow",
+    "mobile-390-hover-#room-zoom-reset: single 2px outline, no border-image",
+    "mobile-390-hover-#room-zoom-reset: targets >=44 and keyboard box unmasked",
+    "mobile-390-pressed-#room-zoom-reset: no default inset or drop-shadow",
+    "mobile-390-pressed-#room-zoom-reset: single 2px outline, no border-image",
+    "mobile-390-pressed-#room-zoom-reset: targets >=44 and keyboard box unmasked",
+    "mobile-390: #room-zoom-reset hit box is stable while pressed",
+    "mobile-390-hover-.mobile-cafe-primary button:visible: no default inset or drop-shadow",
+    "mobile-390-hover-.mobile-cafe-primary button:visible: single 2px outline, no border-image",
+    "mobile-390-hover-.mobile-cafe-primary button:visible: targets >=44 and keyboard box unmasked",
+    "mobile-390-pressed-.mobile-cafe-primary button:visible: no default inset or drop-shadow",
+    "mobile-390-pressed-.mobile-cafe-primary button:visible: single 2px outline, no border-image",
+    "mobile-390-pressed-.mobile-cafe-primary button:visible: targets >=44 and keyboard box unmasked",
+    "mobile-390: .mobile-cafe-primary button:visible hit box is stable while pressed",
+    "mobile-390-hover-#panel-toggle: no default inset or drop-shadow",
+    "mobile-390-hover-#panel-toggle: single 2px outline, no border-image",
+    "mobile-390-hover-#panel-toggle: targets >=44 and keyboard box unmasked",
+    "mobile-390-pressed-#panel-toggle: no default inset or drop-shadow",
+    "mobile-390-pressed-#panel-toggle: single 2px outline, no border-image",
+    "mobile-390-pressed-#panel-toggle: targets >=44 and keyboard box unmasked",
+    "mobile-390: #panel-toggle hit box is stable while pressed",
+    "mobile-390-hover-#mobile-cafe-more: no default inset or drop-shadow",
+    "mobile-390-hover-#mobile-cafe-more: single 2px outline, no border-image",
+    "mobile-390-hover-#mobile-cafe-more: targets >=44 and keyboard box unmasked",
+    "mobile-390-pressed-#mobile-cafe-more: no default inset or drop-shadow",
+    "mobile-390-pressed-#mobile-cafe-more: single 2px outline, no border-image",
+    "mobile-390-pressed-#mobile-cafe-more: targets >=44 and keyboard box unmasked",
+    "mobile-390: #mobile-cafe-more hit box is stable while pressed",
+    "mobile-390: keyboard focus remains visible and unmasked",
+    "mobile-390: focus is inside dock",
+    "mobile-390-panel: no default inset or drop-shadow",
+    "mobile-390-panel: single 2px outline, no border-image",
+    "mobile-390-panel: targets >=44 and keyboard box unmasked",
+    "mobile-390: panel shell is a single line without shadow",
+    "mobile-390-street: no default inset or drop-shadow",
+    "mobile-390-street: single 2px outline, no border-image",
+    "mobile-390-street: targets >=44 and keyboard box unmasked",
+    "mobile-390: street/home controls still work",
+    "526: final entry is actually rendered",
+    "mobile-526: no document overflow",
+    "mobile-526-normal: no default inset or drop-shadow",
+    "mobile-526-normal: single 2px outline, no border-image",
+    "mobile-526-normal: targets >=44 and keyboard box unmasked",
+    "mobile-526: dock has one quiet 1px line",
+    "mobile-526-hover-#room-zoom-reset: no default inset or drop-shadow",
+    "mobile-526-hover-#room-zoom-reset: single 2px outline, no border-image",
+    "mobile-526-hover-#room-zoom-reset: targets >=44 and keyboard box unmasked",
+    "mobile-526-pressed-#room-zoom-reset: no default inset or drop-shadow",
+    "mobile-526-pressed-#room-zoom-reset: single 2px outline, no border-image",
+    "mobile-526-pressed-#room-zoom-reset: targets >=44 and keyboard box unmasked",
+    "mobile-526: #room-zoom-reset hit box is stable while pressed",
+    "mobile-526-hover-.mobile-cafe-primary button:visible: no default inset or drop-shadow",
+    "mobile-526-hover-.mobile-cafe-primary button:visible: single 2px outline, no border-image",
+    "mobile-526-hover-.mobile-cafe-primary button:visible: targets >=44 and keyboard box unmasked",
+    "mobile-526-pressed-.mobile-cafe-primary button:visible: no default inset or drop-shadow",
+    "mobile-526-pressed-.mobile-cafe-primary button:visible: single 2px outline, no border-image",
+    "mobile-526-pressed-.mobile-cafe-primary button:visible: targets >=44 and keyboard box unmasked",
+    "mobile-526: .mobile-cafe-primary button:visible hit box is stable while pressed",
+    "mobile-526-hover-#panel-toggle: no default inset or drop-shadow",
+    "mobile-526-hover-#panel-toggle: single 2px outline, no border-image",
+    "mobile-526-hover-#panel-toggle: targets >=44 and keyboard box unmasked",
+    "mobile-526-pressed-#panel-toggle: no default inset or drop-shadow",
+    "mobile-526-pressed-#panel-toggle: single 2px outline, no border-image",
+    "mobile-526-pressed-#panel-toggle: targets >=44 and keyboard box unmasked",
+    "mobile-526: #panel-toggle hit box is stable while pressed",
+    "mobile-526-hover-#mobile-cafe-more: no default inset or drop-shadow",
+    "mobile-526-hover-#mobile-cafe-more: single 2px outline, no border-image",
+    "mobile-526-hover-#mobile-cafe-more: targets >=44 and keyboard box unmasked",
+    "mobile-526-pressed-#mobile-cafe-more: no default inset or drop-shadow",
+    "mobile-526-pressed-#mobile-cafe-more: single 2px outline, no border-image",
+    "mobile-526-pressed-#mobile-cafe-more: targets >=44 and keyboard box unmasked",
+    "mobile-526: #mobile-cafe-more hit box is stable while pressed",
+    "mobile-526: keyboard focus remains visible and unmasked",
+    "mobile-526: focus is inside dock",
+    "mobile-526-panel: no default inset or drop-shadow",
+    "mobile-526-panel: single 2px outline, no border-image",
+    "mobile-526-panel: targets >=44 and keyboard box unmasked",
+    "mobile-526: panel shell is a single line without shadow",
+    "mobile-526-street: no default inset or drop-shadow",
+    "mobile-526-street: single 2px outline, no border-image",
+    "mobile-526-street: targets >=44 and keyboard box unmasked",
+    "mobile-526: street/home controls still work",
+    "360: final entry is actually rendered",
+    "mobile-360: no document overflow",
+    "mobile-360-normal: no default inset or drop-shadow",
+    "mobile-360-normal: single 2px outline, no border-image",
+    "mobile-360-normal: targets >=44 and keyboard box unmasked",
+    "mobile-360: dock has one quiet 1px line",
+    "mobile-360-hover-#room-zoom-reset: no default inset or drop-shadow",
+    "mobile-360-hover-#room-zoom-reset: single 2px outline, no border-image",
+    "mobile-360-hover-#room-zoom-reset: targets >=44 and keyboard box unmasked",
+    "mobile-360-pressed-#room-zoom-reset: no default inset or drop-shadow",
+    "mobile-360-pressed-#room-zoom-reset: single 2px outline, no border-image",
+    "mobile-360-pressed-#room-zoom-reset: targets >=44 and keyboard box unmasked",
+    "mobile-360: #room-zoom-reset hit box is stable while pressed",
+    "mobile-360-hover-.mobile-cafe-primary button:visible: no default inset or drop-shadow",
+    "mobile-360-hover-.mobile-cafe-primary button:visible: single 2px outline, no border-image",
+    "mobile-360-hover-.mobile-cafe-primary button:visible: targets >=44 and keyboard box unmasked",
+    "mobile-360-pressed-.mobile-cafe-primary button:visible: no default inset or drop-shadow",
+    "mobile-360-pressed-.mobile-cafe-primary button:visible: single 2px outline, no border-image",
+    "mobile-360-pressed-.mobile-cafe-primary button:visible: targets >=44 and keyboard box unmasked",
+    "mobile-360: .mobile-cafe-primary button:visible hit box is stable while pressed",
+    "mobile-360-hover-#panel-toggle: no default inset or drop-shadow",
+    "mobile-360-hover-#panel-toggle: single 2px outline, no border-image",
+    "mobile-360-hover-#panel-toggle: targets >=44 and keyboard box unmasked",
+    "mobile-360-pressed-#panel-toggle: no default inset or drop-shadow",
+    "mobile-360-pressed-#panel-toggle: single 2px outline, no border-image",
+    "mobile-360-pressed-#panel-toggle: targets >=44 and keyboard box unmasked",
+    "mobile-360: #panel-toggle hit box is stable while pressed",
+    "mobile-360-hover-#mobile-cafe-more: no default inset or drop-shadow",
+    "mobile-360-hover-#mobile-cafe-more: single 2px outline, no border-image",
+    "mobile-360-hover-#mobile-cafe-more: targets >=44 and keyboard box unmasked",
+    "mobile-360-pressed-#mobile-cafe-more: no default inset or drop-shadow",
+    "mobile-360-pressed-#mobile-cafe-more: single 2px outline, no border-image",
+    "mobile-360-pressed-#mobile-cafe-more: targets >=44 and keyboard box unmasked",
+    "mobile-360: #mobile-cafe-more hit box is stable while pressed",
+    "mobile-360: keyboard focus remains visible and unmasked",
+    "mobile-360: focus is inside dock",
+    "mobile-360-panel: no default inset or drop-shadow",
+    "mobile-360-panel: single 2px outline, no border-image",
+    "mobile-360-panel: targets >=44 and keyboard box unmasked",
+    "mobile-360: panel shell is a single line without shadow",
+    "mobile-360-street: no default inset or drop-shadow",
+    "mobile-360-street: single 2px outline, no border-image",
+    "mobile-360-street: targets >=44 and keyboard box unmasked",
+    "mobile-360: street/home controls still work",
+    "1440: final entry is actually rendered",
+    "desktop: no document overflow",
+    "desktop-normal: no default inset or drop-shadow",
+    "desktop-normal: single 2px outline, no border-image",
+    "desktop-normal: targets >=44 and keyboard box unmasked",
+    "desktop-hover-#panel-toggle: no default inset or drop-shadow",
+    "desktop-hover-#panel-toggle: single 2px outline, no border-image",
+    "desktop-hover-#panel-toggle: targets >=44 and keyboard box unmasked",
+    "desktop-pressed-#panel-toggle: no default inset or drop-shadow",
+    "desktop-pressed-#panel-toggle: single 2px outline, no border-image",
+    "desktop-pressed-#panel-toggle: targets >=44 and keyboard box unmasked",
+    "desktop: #panel-toggle hit box is stable while pressed",
+    "desktop-hover-#settings-btn: no default inset or drop-shadow",
+    "desktop-hover-#settings-btn: single 2px outline, no border-image",
+    "desktop-hover-#settings-btn: targets >=44 and keyboard box unmasked",
+    "desktop-pressed-#settings-btn: no default inset or drop-shadow",
+    "desktop-pressed-#settings-btn: single 2px outline, no border-image",
+    "desktop-pressed-#settings-btn: targets >=44 and keyboard box unmasked",
+    "desktop: #settings-btn hit box is stable while pressed",
+    "desktop-hover-#room-zoom-reset: no default inset or drop-shadow",
+    "desktop-hover-#room-zoom-reset: single 2px outline, no border-image",
+    "desktop-hover-#room-zoom-reset: targets >=44 and keyboard box unmasked",
+    "desktop-pressed-#room-zoom-reset: no default inset or drop-shadow",
+    "desktop-pressed-#room-zoom-reset: single 2px outline, no border-image",
+    "desktop-pressed-#room-zoom-reset: targets >=44 and keyboard box unmasked",
+    "desktop: #room-zoom-reset hit box is stable while pressed",
+    "desktop: keyboard focus remains visible and unmasked",
+    "desktop-panel: no default inset or drop-shadow",
+    "desktop-panel: single 2px outline, no border-image",
+    "desktop-panel: targets >=44 and keyboard box unmasked",
+    "desktop: panel shell is a single line without shadow",
+    "desktop-street: no default inset or drop-shadow",
+    "desktop-street: single 2px outline, no border-image",
+    "desktop-street: targets >=44 and keyboard box unmasked",
+    "desktop: street/home controls still work",
+    "no page or console errors",
+    "no failed resources",
+    "HTTP final bytes index.html",
+    "HTTP final bytes sw.js",
+    "HTTP final bytes assets/game-Cf-GtJBg.js",
+    "HTTP final bytes assets/region-art-DtWf97mz.js",
+    "HTTP final bytes assets/phaser-D8EC1TLR.js",
+    "HTTP final bytes assets/game-BiXdOF27.css"
+  ],
+  "styles": [
+    {
+      "name": "mobile-390-normal",
+      "rows": [
+        {
+          "id": "room-zoom-reset",
+          "text": "街道",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 19,
+            "y": 779.40625,
+            "width": 75.90625,
+            "height": 45.59375,
+            "top": 779.40625,
+            "right": 94.90625,
+            "bottom": 825,
+            "left": 19
+          }
+        },
+        {
+          "id": "open-btn",
+          "text": "准备菜单 · 第 3 天",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 100.90625,
+            "y": 779.40625,
+            "width": 117.65625,
+            "height": 45.59375,
+            "top": 779.40625,
+            "right": 218.5625,
+            "bottom": 825,
+            "left": 100.90625
+          }
+        },
+        {
+          "id": "panel-toggle",
+          "text": "管理",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 224.5625,
+            "y": 779.40625,
+            "width": 75.90625,
+            "height": 45.59375,
+            "top": 779.40625,
+            "right": 300.46875,
+            "bottom": 825,
+            "left": 224.5625
+          }
+        },
+        {
+          "id": "mobile-cafe-more",
+          "text": "更多",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 306.46875,
+            "y": 779.40625,
+            "width": 64.515625,
+            "height": 45.59375,
+            "top": 779.40625,
+            "right": 370.984375,
+            "bottom": 825,
+            "left": 306.46875
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-dock",
+      "rows": [
+        {
+          "id": "",
+          "text": "街道准备菜单 · 第 3 天店员照看中管理更多",
+          "border": "1px solid rgb(158, 125, 86)",
+          "borderWidth": "1px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 12,
+            "y": 772.40625,
+            "width": 366,
+            "height": 59.59375,
+            "top": 772.40625,
+            "right": 378,
+            "bottom": 832,
+            "left": 12
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-hover-#room-zoom-reset",
+      "rows": [
+        {
+          "id": "room-zoom-reset",
+          "text": "街道",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 19,
+            "y": 779.40625,
+            "width": 75.90625,
+            "height": 45.59375,
+            "top": 779.40625,
+            "right": 94.90625,
+            "bottom": 825,
+            "left": 19
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-pressed-#room-zoom-reset",
+      "rows": [
+        {
+          "id": "room-zoom-reset",
+          "text": "街道",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.220078 0.31749 0.223686)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 19,
+            "y": 779.40625,
+            "width": 75.90625,
+            "height": 45.59375,
+            "top": 779.40625,
+            "right": 94.90625,
+            "bottom": 825,
+            "left": 19
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-hover-.mobile-cafe-primary button:visible",
+      "rows": [
+        {
+          "id": "open-btn",
+          "text": "准备菜单 · 第 3 天",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 100.90625,
+            "y": 779.40625,
+            "width": 117.65625,
+            "height": 45.59375,
+            "top": 779.40625,
+            "right": 218.5625,
+            "bottom": 825,
+            "left": 100.90625
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-pressed-.mobile-cafe-primary button:visible",
+      "rows": [
+        {
+          "id": "open-btn",
+          "text": "准备菜单 · 第 3 天",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.220078 0.31749 0.223686)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 100.90625,
+            "y": 779.40625,
+            "width": 117.65625,
+            "height": 45.59375,
+            "top": 779.40625,
+            "right": 218.5625,
+            "bottom": 825,
+            "left": 100.90625
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-hover-#panel-toggle",
+      "rows": [
+        {
+          "id": "panel-toggle",
+          "text": "管理",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 224.5625,
+            "y": 779.40625,
+            "width": 75.90625,
+            "height": 45.59375,
+            "top": 779.40625,
+            "right": 300.46875,
+            "bottom": 825,
+            "left": 224.5625
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-pressed-#panel-toggle",
+      "rows": [
+        {
+          "id": "panel-toggle",
+          "text": "管理",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.92 0.865882 0.757647)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 224.5625,
+            "y": 779.40625,
+            "width": 75.90625,
+            "height": 45.59375,
+            "top": 779.40625,
+            "right": 300.46875,
+            "bottom": 825,
+            "left": 224.5625
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-hover-#mobile-cafe-more",
+      "rows": [
+        {
+          "id": "mobile-cafe-more",
+          "text": "更多",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 306.46875,
+            "y": 779.40625,
+            "width": 64.515625,
+            "height": 45.59375,
+            "top": 779.40625,
+            "right": 370.984375,
+            "bottom": 825,
+            "left": 306.46875
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-pressed-#mobile-cafe-more",
+      "rows": [
+        {
+          "id": "mobile-cafe-more",
+          "text": "更多",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.92 0.865882 0.757647)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 306.46875,
+            "y": 779.40625,
+            "width": 64.515625,
+            "height": 45.59375,
+            "top": 779.40625,
+            "right": 370.984375,
+            "bottom": 825,
+            "left": 306.46875
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-panel",
+      "rows": [
+        {
+          "id": "drawer-balance",
+          "text": "余额：$12340",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 270,
+            "y": 99.1875,
+            "width": 92,
+            "height": 44,
+            "top": 99.1875,
+            "right": 362,
+            "bottom": 143.1875,
+            "left": 270
+          }
+        },
+        {
+          "id": "drawer-close",
+          "text": "×",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 318,
+            "y": 25,
+            "width": 44,
+            "height": 44,
+            "top": 25,
+            "right": 362,
+            "bottom": 69,
+            "left": 318
+          }
+        },
+        {
+          "id": "",
+          "text": "菜单",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "brightness(0) invert(0.94) sepia(0.12)"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 22,
+            "y": 161.1875,
+            "width": 54.328125,
+            "height": 47.59375,
+            "top": 161.1875,
+            "right": 76.328125,
+            "bottom": 208.78125,
+            "left": 22
+          }
+        },
+        {
+          "id": "",
+          "text": "食材",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 80.328125,
+            "y": 161.1875,
+            "width": 54.328125,
+            "height": 47.59375,
+            "top": 161.1875,
+            "right": 134.65625,
+            "bottom": 208.78125,
+            "left": 80.328125
+          }
+        },
+        {
+          "id": "",
+          "text": "升级",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 138.65625,
+            "y": 161.1875,
+            "width": 54.328125,
+            "height": 47.59375,
+            "top": 161.1875,
+            "right": 192.984375,
+            "bottom": 208.78125,
+            "left": 138.65625
+          }
+        },
+        {
+          "id": "",
+          "text": "装扮",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 196.984375,
+            "y": 161.1875,
+            "width": 54.34375,
+            "height": 47.59375,
+            "top": 161.1875,
+            "right": 251.328125,
+            "bottom": 208.78125,
+            "left": 196.984375
+          }
+        },
+        {
+          "id": "",
+          "text": "猫咪",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 255.328125,
+            "y": 161.1875,
+            "width": 54.328125,
+            "height": 47.59375,
+            "top": 161.1875,
+            "right": 309.65625,
+            "bottom": 208.78125,
+            "left": 255.328125
+          }
+        },
+        {
+          "id": "",
+          "text": "推广",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 313.65625,
+            "y": 161.1875,
+            "width": 54.328125,
+            "height": 47.59375,
+            "top": 161.1875,
+            "right": 367.984375,
+            "bottom": 208.78125,
+            "left": 313.65625
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-390-street",
+      "rows": [
+        {
+          "id": "",
+          "text": "回到咖啡馆",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 12,
+            "y": 6,
+            "width": 95,
+            "height": 44,
+            "top": 6,
+            "right": 107,
+            "bottom": 50,
+            "left": 12
+          }
+        },
+        {
+          "id": "",
+          "text": "经营蓝图",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 294,
+            "y": 6,
+            "width": 84,
+            "height": 44,
+            "top": 6,
+            "right": 378,
+            "bottom": 50,
+            "left": 294
+          }
+        },
+        {
+          "id": "",
+          "text": "橡木老街可以选址",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 8,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 192,
+            "bottom": 114.796875,
+            "left": 8
+          }
+        },
+        {
+          "id": "",
+          "text": "花市小街拥有 2 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 200,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 384,
+            "bottom": 114.796875,
+            "left": 200
+          }
+        },
+        {
+          "id": "",
+          "text": "海风步行街拥有 4 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 392,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 576,
+            "bottom": 114.796875,
+            "left": 392
+          }
+        },
+        {
+          "id": "",
+          "text": "杉影木街拥有 7 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 584,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 768,
+            "bottom": 114.796875,
+            "left": 584
+          }
+        },
+        {
+          "id": "",
+          "text": "钟楼商街拥有 10 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 776,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 960,
+            "bottom": 114.796875,
+            "left": 776
+          }
+        },
+        {
+          "id": "",
+          "text": "所有街道收获 · $0",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(221, 209, 181)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 250,
+            "y": 122.796875,
+            "width": 128,
+            "height": 44,
+            "top": 122.796875,
+            "right": 378,
+            "bottom": 166.796875,
+            "left": 250
+          }
+        },
+        {
+          "id": "",
+          "text": "",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 22,
+            "y": 780,
+            "width": 44,
+            "height": 44,
+            "top": 780,
+            "right": 66,
+            "bottom": 824,
+            "left": 22
+          }
+        },
+        {
+          "id": "",
+          "text": "",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 332,
+            "y": 780,
+            "width": 44,
+            "height": 44,
+            "top": 780,
+            "right": 376,
+            "bottom": 824,
+            "left": 332
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-normal",
+      "rows": [
+        {
+          "id": "room-zoom-reset",
+          "text": "街道",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 19,
+            "y": 697,
+            "width": 106.8125,
+            "height": 44,
+            "top": 697,
+            "right": 125.8125,
+            "bottom": 741,
+            "left": 19
+          }
+        },
+        {
+          "id": "open-btn",
+          "text": "准备菜单 · 第 3 天",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 131.8125,
+            "y": 697,
+            "width": 165.5625,
+            "height": 44,
+            "top": 697,
+            "right": 297.375,
+            "bottom": 741,
+            "left": 131.8125
+          }
+        },
+        {
+          "id": "panel-toggle",
+          "text": "管理",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 303.375,
+            "y": 697,
+            "width": 106.828125,
+            "height": 44,
+            "top": 697,
+            "right": 410.203125,
+            "bottom": 741,
+            "left": 303.375
+          }
+        },
+        {
+          "id": "mobile-cafe-more",
+          "text": "更多",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 416.203125,
+            "y": 697,
+            "width": 90.78125,
+            "height": 44,
+            "top": 697,
+            "right": 506.984375,
+            "bottom": 741,
+            "left": 416.203125
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-dock",
+      "rows": [
+        {
+          "id": "",
+          "text": "街道准备菜单 · 第 3 天店员照看中管理更多",
+          "border": "1px solid rgb(158, 125, 86)",
+          "borderWidth": "1px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 12,
+            "y": 690,
+            "width": 502,
+            "height": 58,
+            "top": 690,
+            "right": 514,
+            "bottom": 748,
+            "left": 12
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-hover-#room-zoom-reset",
+      "rows": [
+        {
+          "id": "room-zoom-reset",
+          "text": "街道",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 19,
+            "y": 697,
+            "width": 106.8125,
+            "height": 44,
+            "top": 697,
+            "right": 125.8125,
+            "bottom": 741,
+            "left": 19
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-pressed-#room-zoom-reset",
+      "rows": [
+        {
+          "id": "room-zoom-reset",
+          "text": "街道",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.220078 0.31749 0.223686)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 19,
+            "y": 697,
+            "width": 106.8125,
+            "height": 44,
+            "top": 697,
+            "right": 125.8125,
+            "bottom": 741,
+            "left": 19
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-hover-.mobile-cafe-primary button:visible",
+      "rows": [
+        {
+          "id": "open-btn",
+          "text": "准备菜单 · 第 3 天",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 131.8125,
+            "y": 697,
+            "width": 165.5625,
+            "height": 44,
+            "top": 697,
+            "right": 297.375,
+            "bottom": 741,
+            "left": 131.8125
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-pressed-.mobile-cafe-primary button:visible",
+      "rows": [
+        {
+          "id": "open-btn",
+          "text": "准备菜单 · 第 3 天",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.220078 0.31749 0.223686)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 131.8125,
+            "y": 697,
+            "width": 165.5625,
+            "height": 44,
+            "top": 697,
+            "right": 297.375,
+            "bottom": 741,
+            "left": 131.8125
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-hover-#panel-toggle",
+      "rows": [
+        {
+          "id": "panel-toggle",
+          "text": "管理",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 303.375,
+            "y": 697,
+            "width": 106.828125,
+            "height": 44,
+            "top": 697,
+            "right": 410.203125,
+            "bottom": 741,
+            "left": 303.375
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-pressed-#panel-toggle",
+      "rows": [
+        {
+          "id": "panel-toggle",
+          "text": "管理",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.92 0.865882 0.757647)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 303.375,
+            "y": 697,
+            "width": 106.828125,
+            "height": 44,
+            "top": 697,
+            "right": 410.203125,
+            "bottom": 741,
+            "left": 303.375
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-hover-#mobile-cafe-more",
+      "rows": [
+        {
+          "id": "mobile-cafe-more",
+          "text": "更多",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 416.203125,
+            "y": 697,
+            "width": 90.78125,
+            "height": 44,
+            "top": 697,
+            "right": 506.984375,
+            "bottom": 741,
+            "left": 416.203125
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-pressed-#mobile-cafe-more",
+      "rows": [
+        {
+          "id": "mobile-cafe-more",
+          "text": "更多",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.92 0.865882 0.757647)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 416.203125,
+            "y": 697,
+            "width": 90.78125,
+            "height": 44,
+            "top": 697,
+            "right": 506.984375,
+            "bottom": 741,
+            "left": 416.203125
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-panel",
+      "rows": [
+        {
+          "id": "drawer-balance",
+          "text": "余额：$12340",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 406,
+            "y": 99.1875,
+            "width": 92,
+            "height": 44,
+            "top": 99.1875,
+            "right": 498,
+            "bottom": 143.1875,
+            "left": 406
+          }
+        },
+        {
+          "id": "drawer-close",
+          "text": "×",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 454,
+            "y": 25,
+            "width": 44,
+            "height": 44,
+            "top": 25,
+            "right": 498,
+            "bottom": 69,
+            "left": 454
+          }
+        },
+        {
+          "id": "",
+          "text": "菜单",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "brightness(0) invert(0.94) sepia(0.12)"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 22,
+            "y": 161.1875,
+            "width": 77,
+            "height": 47.59375,
+            "top": 161.1875,
+            "right": 99,
+            "bottom": 208.78125,
+            "left": 22
+          }
+        },
+        {
+          "id": "",
+          "text": "食材",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 103,
+            "y": 161.1875,
+            "width": 77,
+            "height": 47.59375,
+            "top": 161.1875,
+            "right": 180,
+            "bottom": 208.78125,
+            "left": 103
+          }
+        },
+        {
+          "id": "",
+          "text": "升级",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 184,
+            "y": 161.1875,
+            "width": 77,
+            "height": 47.59375,
+            "top": 161.1875,
+            "right": 261,
+            "bottom": 208.78125,
+            "left": 184
+          }
+        },
+        {
+          "id": "",
+          "text": "装扮",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 265,
+            "y": 161.1875,
+            "width": 77,
+            "height": 47.59375,
+            "top": 161.1875,
+            "right": 342,
+            "bottom": 208.78125,
+            "left": 265
+          }
+        },
+        {
+          "id": "",
+          "text": "猫咪",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 346,
+            "y": 161.1875,
+            "width": 77,
+            "height": 47.59375,
+            "top": 161.1875,
+            "right": 423,
+            "bottom": 208.78125,
+            "left": 346
+          }
+        },
+        {
+          "id": "",
+          "text": "推广",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 427,
+            "y": 161.1875,
+            "width": 77,
+            "height": 47.59375,
+            "top": 161.1875,
+            "right": 504,
+            "bottom": 208.78125,
+            "left": 427
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-526-street",
+      "rows": [
+        {
+          "id": "",
+          "text": "回到咖啡馆",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 12,
+            "y": 6,
+            "width": 95,
+            "height": 44,
+            "top": 6,
+            "right": 107,
+            "bottom": 50,
+            "left": 12
+          }
+        },
+        {
+          "id": "",
+          "text": "经营蓝图",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 430,
+            "y": 6,
+            "width": 84,
+            "height": 44,
+            "top": 6,
+            "right": 514,
+            "bottom": 50,
+            "left": 430
+          }
+        },
+        {
+          "id": "",
+          "text": "橡木老街可以选址",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 8,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 192,
+            "bottom": 114.796875,
+            "left": 8
+          }
+        },
+        {
+          "id": "",
+          "text": "花市小街拥有 2 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 200,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 384,
+            "bottom": 114.796875,
+            "left": 200
+          }
+        },
+        {
+          "id": "",
+          "text": "海风步行街拥有 4 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 392,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 576,
+            "bottom": 114.796875,
+            "left": 392
+          }
+        },
+        {
+          "id": "",
+          "text": "杉影木街拥有 7 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 584,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 768,
+            "bottom": 114.796875,
+            "left": 584
+          }
+        },
+        {
+          "id": "",
+          "text": "钟楼商街拥有 10 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 776,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 960,
+            "bottom": 114.796875,
+            "left": 776
+          }
+        },
+        {
+          "id": "",
+          "text": "所有街道收获 · $0",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(221, 209, 181)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 386,
+            "y": 122.796875,
+            "width": 128,
+            "height": 44,
+            "top": 122.796875,
+            "right": 514,
+            "bottom": 166.796875,
+            "left": 386
+          }
+        },
+        {
+          "id": "",
+          "text": "",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 22,
+            "y": 696,
+            "width": 44,
+            "height": 44,
+            "top": 696,
+            "right": 66,
+            "bottom": 740,
+            "left": 22
+          }
+        },
+        {
+          "id": "",
+          "text": "",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 468,
+            "y": 696,
+            "width": 44,
+            "height": 44,
+            "top": 696,
+            "right": 512,
+            "bottom": 740,
+            "left": 468
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-normal",
+      "rows": [
+        {
+          "id": "room-zoom-reset",
+          "text": "街道",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 19,
+            "y": 735.40625,
+            "width": 69.078125,
+            "height": 45.59375,
+            "top": 735.40625,
+            "right": 88.078125,
+            "bottom": 781,
+            "left": 19
+          }
+        },
+        {
+          "id": "open-btn",
+          "text": "准备菜单 · 第 3 天",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 94.078125,
+            "y": 735.40625,
+            "width": 107.09375,
+            "height": 45.59375,
+            "top": 735.40625,
+            "right": 201.171875,
+            "bottom": 781,
+            "left": 94.078125
+          }
+        },
+        {
+          "id": "panel-toggle",
+          "text": "管理",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 207.171875,
+            "y": 735.40625,
+            "width": 69.09375,
+            "height": 45.59375,
+            "top": 735.40625,
+            "right": 276.265625,
+            "bottom": 781,
+            "left": 207.171875
+          }
+        },
+        {
+          "id": "mobile-cafe-more",
+          "text": "更多",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 282.265625,
+            "y": 735.40625,
+            "width": 58.71875,
+            "height": 45.59375,
+            "top": 735.40625,
+            "right": 340.984375,
+            "bottom": 781,
+            "left": 282.265625
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-dock",
+      "rows": [
+        {
+          "id": "",
+          "text": "街道准备菜单 · 第 3 天店员照看中管理更多",
+          "border": "1px solid rgb(158, 125, 86)",
+          "borderWidth": "1px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 12,
+            "y": 728.40625,
+            "width": 336,
+            "height": 59.59375,
+            "top": 728.40625,
+            "right": 348,
+            "bottom": 788,
+            "left": 12
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-hover-#room-zoom-reset",
+      "rows": [
+        {
+          "id": "room-zoom-reset",
+          "text": "街道",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 19,
+            "y": 735.40625,
+            "width": 69.078125,
+            "height": 45.59375,
+            "top": 735.40625,
+            "right": 88.078125,
+            "bottom": 781,
+            "left": 19
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-pressed-#room-zoom-reset",
+      "rows": [
+        {
+          "id": "room-zoom-reset",
+          "text": "街道",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.220078 0.31749 0.223686)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 19,
+            "y": 735.40625,
+            "width": 69.078125,
+            "height": 45.59375,
+            "top": 735.40625,
+            "right": 88.078125,
+            "bottom": 781,
+            "left": 19
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-hover-.mobile-cafe-primary button:visible",
+      "rows": [
+        {
+          "id": "open-btn",
+          "text": "准备菜单 · 第 3 天",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 94.078125,
+            "y": 735.40625,
+            "width": 107.09375,
+            "height": 45.59375,
+            "top": 735.40625,
+            "right": 201.171875,
+            "bottom": 781,
+            "left": 94.078125
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-pressed-.mobile-cafe-primary button:visible",
+      "rows": [
+        {
+          "id": "open-btn",
+          "text": "准备菜单 · 第 3 天",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.220078 0.31749 0.223686)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 94.078125,
+            "y": 735.40625,
+            "width": 107.09375,
+            "height": 45.59375,
+            "top": 735.40625,
+            "right": 201.171875,
+            "bottom": 781,
+            "left": 94.078125
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-hover-#panel-toggle",
+      "rows": [
+        {
+          "id": "panel-toggle",
+          "text": "管理",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 207.171875,
+            "y": 735.40625,
+            "width": 69.09375,
+            "height": 45.59375,
+            "top": 735.40625,
+            "right": 276.265625,
+            "bottom": 781,
+            "left": 207.171875
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-pressed-#panel-toggle",
+      "rows": [
+        {
+          "id": "panel-toggle",
+          "text": "管理",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.92 0.865882 0.757647)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 207.171875,
+            "y": 735.40625,
+            "width": 69.09375,
+            "height": 45.59375,
+            "top": 735.40625,
+            "right": 276.265625,
+            "bottom": 781,
+            "left": 207.171875
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-hover-#mobile-cafe-more",
+      "rows": [
+        {
+          "id": "mobile-cafe-more",
+          "text": "更多",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 282.265625,
+            "y": 735.40625,
+            "width": 58.71875,
+            "height": 45.59375,
+            "top": 735.40625,
+            "right": 340.984375,
+            "bottom": 781,
+            "left": 282.265625
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-pressed-#mobile-cafe-more",
+      "rows": [
+        {
+          "id": "mobile-cafe-more",
+          "text": "更多",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.92 0.865882 0.757647)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 282.265625,
+            "y": 735.40625,
+            "width": 58.71875,
+            "height": 45.59375,
+            "top": 735.40625,
+            "right": 340.984375,
+            "bottom": 781,
+            "left": 282.265625
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-panel",
+      "rows": [
+        {
+          "id": "drawer-balance",
+          "text": "余额：$12340",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 240,
+            "y": 99.1875,
+            "width": 92,
+            "height": 44,
+            "top": 99.1875,
+            "right": 332,
+            "bottom": 143.1875,
+            "left": 240
+          }
+        },
+        {
+          "id": "drawer-close",
+          "text": "×",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 288,
+            "y": 25,
+            "width": 44,
+            "height": 44,
+            "top": 25,
+            "right": 332,
+            "bottom": 69,
+            "left": 288
+          }
+        },
+        {
+          "id": "",
+          "text": "菜单",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "brightness(0) invert(0.94) sepia(0.12)"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 22,
+            "y": 161.1875,
+            "width": 102.65625,
+            "height": 44,
+            "top": 161.1875,
+            "right": 124.65625,
+            "bottom": 205.1875,
+            "left": 22
+          }
+        },
+        {
+          "id": "",
+          "text": "食材",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 128.65625,
+            "y": 161.1875,
+            "width": 102.671875,
+            "height": 44,
+            "top": 161.1875,
+            "right": 231.328125,
+            "bottom": 205.1875,
+            "left": 128.65625
+          }
+        },
+        {
+          "id": "",
+          "text": "升级",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 235.328125,
+            "y": 161.1875,
+            "width": 102.65625,
+            "height": 44,
+            "top": 161.1875,
+            "right": 337.984375,
+            "bottom": 205.1875,
+            "left": 235.328125
+          }
+        },
+        {
+          "id": "",
+          "text": "装扮",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 22,
+            "y": 209.1875,
+            "width": 102.65625,
+            "height": 44,
+            "top": 209.1875,
+            "right": 124.65625,
+            "bottom": 253.1875,
+            "left": 22
+          }
+        },
+        {
+          "id": "",
+          "text": "猫咪",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 128.65625,
+            "y": 209.1875,
+            "width": 102.671875,
+            "height": 44,
+            "top": 209.1875,
+            "right": 231.328125,
+            "bottom": 253.1875,
+            "left": 128.65625
+          }
+        },
+        {
+          "id": "",
+          "text": "推广",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 235.328125,
+            "y": 209.1875,
+            "width": 102.65625,
+            "height": 44,
+            "top": 209.1875,
+            "right": 337.984375,
+            "bottom": 253.1875,
+            "left": 235.328125
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile-360-street",
+      "rows": [
+        {
+          "id": "",
+          "text": "回到咖啡馆",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 12,
+            "y": 6,
+            "width": 95,
+            "height": 44,
+            "top": 6,
+            "right": 107,
+            "bottom": 50,
+            "left": 12
+          }
+        },
+        {
+          "id": "",
+          "text": "经营蓝图",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 264,
+            "y": 6,
+            "width": 84,
+            "height": 44,
+            "top": 6,
+            "right": 348,
+            "bottom": 50,
+            "left": 264
+          }
+        },
+        {
+          "id": "",
+          "text": "橡木老街可以选址",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 8,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 192,
+            "bottom": 114.796875,
+            "left": 8
+          }
+        },
+        {
+          "id": "",
+          "text": "花市小街拥有 2 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 200,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 384,
+            "bottom": 114.796875,
+            "left": 200
+          }
+        },
+        {
+          "id": "",
+          "text": "海风步行街拥有 4 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 392,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 576,
+            "bottom": 114.796875,
+            "left": 392
+          }
+        },
+        {
+          "id": "",
+          "text": "杉影木街拥有 7 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 584,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 768,
+            "bottom": 114.796875,
+            "left": 584
+          }
+        },
+        {
+          "id": "",
+          "text": "钟楼商街拥有 10 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 776,
+            "y": 66,
+            "width": 184,
+            "height": 48.796875,
+            "top": 66,
+            "right": 960,
+            "bottom": 114.796875,
+            "left": 776
+          }
+        },
+        {
+          "id": "",
+          "text": "所有街道收获 · $0",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(221, 209, 181)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 220,
+            "y": 122.796875,
+            "width": 128,
+            "height": 44,
+            "top": 122.796875,
+            "right": 348,
+            "bottom": 166.796875,
+            "left": 220
+          }
+        },
+        {
+          "id": "",
+          "text": "",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 22,
+            "y": 736,
+            "width": 44,
+            "height": 44,
+            "top": 736,
+            "right": 66,
+            "bottom": 780,
+            "left": 22
+          }
+        },
+        {
+          "id": "",
+          "text": "",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 302,
+            "y": 736,
+            "width": 44,
+            "height": 44,
+            "top": 736,
+            "right": 346,
+            "bottom": 780,
+            "left": 302
+          }
+        }
+      ]
+    },
+    {
+      "name": "desktop-normal",
+      "rows": [
+        {
+          "id": "panel-toggle",
+          "text": "管理",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 1357,
+            "y": 897,
+            "width": 64,
+            "height": 44,
+            "top": 897,
+            "right": 1421,
+            "bottom": 941,
+            "left": 1357
+          }
+        },
+        {
+          "id": "settings-btn",
+          "text": "···",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 19,
+            "y": 897,
+            "width": 44,
+            "height": 44,
+            "top": 897,
+            "right": 63,
+            "bottom": 941,
+            "left": 19
+          }
+        },
+        {
+          "id": "room-zoom-reset",
+          "text": "街道",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 545,
+            "y": 849,
+            "width": 48,
+            "height": 44,
+            "top": 849,
+            "right": 593,
+            "bottom": 893,
+            "left": 545
+          }
+        }
+      ]
+    },
+    {
+      "name": "desktop-hover-#panel-toggle",
+      "rows": [
+        {
+          "id": "panel-toggle",
+          "text": "管理",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 1 0.947059 0.841177)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 1357,
+            "y": 897,
+            "width": 64,
+            "height": 44,
+            "top": 897,
+            "right": 1421,
+            "bottom": 941,
+            "left": 1357
+          }
+        }
+      ]
+    },
+    {
+      "name": "desktop-pressed-#panel-toggle",
+      "rows": [
+        {
+          "id": "panel-toggle",
+          "text": "管理",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.92 0.865882 0.757647)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 1357,
+            "y": 897,
+            "width": 64,
+            "height": 44,
+            "top": 897,
+            "right": 1421,
+            "bottom": 941,
+            "left": 1357
+          }
+        }
+      ]
+    },
+    {
+      "name": "desktop-hover-#settings-btn",
+      "rows": [
+        {
+          "id": "settings-btn",
+          "text": "···",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 1 0.947059 0.841177)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 19,
+            "y": 897,
+            "width": 44,
+            "height": 44,
+            "top": 897,
+            "right": 63,
+            "bottom": 941,
+            "left": 19
+          }
+        }
+      ]
+    },
+    {
+      "name": "desktop-pressed-#settings-btn",
+      "rows": [
+        {
+          "id": "settings-btn",
+          "text": "···",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.92 0.865882 0.757647)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 19,
+            "y": 897,
+            "width": 44,
+            "height": 44,
+            "top": 897,
+            "right": 63,
+            "bottom": 941,
+            "left": 19
+          }
+        }
+      ]
+    },
+    {
+      "name": "desktop-hover-#room-zoom-reset",
+      "rows": [
+        {
+          "id": "room-zoom-reset",
+          "text": "街道",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.315294 0.410588 0.318824)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 545,
+            "y": 849,
+            "width": 48,
+            "height": 44,
+            "top": 849,
+            "right": 593,
+            "bottom": 893,
+            "left": 545
+          }
+        }
+      ]
+    },
+    {
+      "name": "desktop-pressed-#room-zoom-reset",
+      "rows": [
+        {
+          "id": "room-zoom-reset",
+          "text": "街道",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "color(srgb 0.220078 0.31749 0.223686)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 545,
+            "y": 849,
+            "width": 48,
+            "height": 44,
+            "top": 849,
+            "right": 593,
+            "bottom": 893,
+            "left": 545
+          }
+        }
+      ]
+    },
+    {
+      "name": "desktop-panel",
+      "rows": [
+        {
+          "id": "drawer-balance",
+          "text": "余额：$12340",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 1308,
+            "y": 92.1875,
+            "width": 92,
+            "height": 44,
+            "top": 92.1875,
+            "right": 1400,
+            "bottom": 136.1875,
+            "left": 1308
+          }
+        },
+        {
+          "id": "drawer-close",
+          "text": "×",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 1356,
+            "y": 34,
+            "width": 44,
+            "height": 44,
+            "top": 34,
+            "right": 1400,
+            "bottom": 78,
+            "left": 1356
+          }
+        },
+        {
+          "id": "",
+          "text": "菜单",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "brightness(0) invert(0.94) sepia(0.12)"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 926,
+            "y": 154.1875,
+            "width": 76,
+            "height": 49.59375,
+            "top": 154.1875,
+            "right": 1002,
+            "bottom": 203.78125,
+            "left": 926
+          }
+        },
+        {
+          "id": "",
+          "text": "食材",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 1006,
+            "y": 154.1875,
+            "width": 76,
+            "height": 49.59375,
+            "top": 154.1875,
+            "right": 1082,
+            "bottom": 203.78125,
+            "left": 1006
+          }
+        },
+        {
+          "id": "",
+          "text": "升级",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 1086,
+            "y": 154.1875,
+            "width": 76,
+            "height": 49.59375,
+            "top": 154.1875,
+            "right": 1162,
+            "bottom": 203.78125,
+            "left": 1086
+          }
+        },
+        {
+          "id": "",
+          "text": "装扮",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 1166,
+            "y": 154.1875,
+            "width": 76,
+            "height": 49.59375,
+            "top": 154.1875,
+            "right": 1242,
+            "bottom": 203.78125,
+            "left": 1166
+          }
+        },
+        {
+          "id": "",
+          "text": "猫咪",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 1246,
+            "y": 154.1875,
+            "width": 76,
+            "height": 49.59375,
+            "top": 154.1875,
+            "right": 1322,
+            "bottom": 203.78125,
+            "left": 1246
+          }
+        },
+        {
+          "id": "",
+          "text": "推广",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "\"\"",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 1326,
+            "y": 154.1875,
+            "width": 76,
+            "height": 49.59375,
+            "top": 154.1875,
+            "right": 1402,
+            "bottom": 203.78125,
+            "left": 1326
+          }
+        }
+      ]
+    },
+    {
+      "name": "desktop-street",
+      "rows": [
+        {
+          "id": "",
+          "text": "回到咖啡馆",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 16,
+            "y": 7,
+            "width": 116,
+            "height": 44,
+            "top": 7,
+            "right": 132,
+            "bottom": 51,
+            "left": 16
+          }
+        },
+        {
+          "id": "",
+          "text": "经营蓝图",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(255, 240, 210)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 1320,
+            "y": 7,
+            "width": 104,
+            "height": 44,
+            "top": 7,
+            "right": 1424,
+            "bottom": 51,
+            "left": 1320
+          }
+        },
+        {
+          "id": "",
+          "text": "橡木老街可以选址",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 12,
+            "y": 68,
+            "width": 275.1875,
+            "height": 50.796875,
+            "top": 68,
+            "right": 287.1875,
+            "bottom": 118.796875,
+            "left": 12
+          }
+        },
+        {
+          "id": "",
+          "text": "花市小街拥有 2 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 297.1875,
+            "y": 68,
+            "width": 275.203125,
+            "height": 50.796875,
+            "top": 68,
+            "right": 572.390625,
+            "bottom": 118.796875,
+            "left": 297.1875
+          }
+        },
+        {
+          "id": "",
+          "text": "海风步行街拥有 4 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 582.390625,
+            "y": 68,
+            "width": 275.203125,
+            "height": 50.796875,
+            "top": 68,
+            "right": 857.59375,
+            "bottom": 118.796875,
+            "left": 582.390625
+          }
+        },
+        {
+          "id": "",
+          "text": "杉影木街拥有 7 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 867.59375,
+            "y": 68,
+            "width": 275.203125,
+            "height": 50.796875,
+            "top": 68,
+            "right": 1142.796875,
+            "bottom": 118.796875,
+            "left": 867.59375
+          }
+        },
+        {
+          "id": "",
+          "text": "钟楼商街拥有 10 间铺位后开放",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(232, 218, 187)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 1152.796875,
+            "y": 68,
+            "width": 275.203125,
+            "height": 50.796875,
+            "top": 68,
+            "right": 1428,
+            "bottom": 118.796875,
+            "left": 1152.796875
+          }
+        },
+        {
+          "id": "",
+          "text": "所有街道收获 · $0",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(221, 209, 181)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 1288,
+            "y": 127.796875,
+            "width": 136,
+            "height": 44,
+            "top": 127.796875,
+            "right": 1424,
+            "bottom": 171.796875,
+            "left": 1288
+          }
+        },
+        {
+          "id": "",
+          "text": "",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 442,
+            "y": 894,
+            "width": 44,
+            "height": 44,
+            "top": 894,
+            "right": 486,
+            "bottom": 938,
+            "left": 442
+          }
+        },
+        {
+          "id": "",
+          "text": "",
+          "border": "2px solid rgb(73, 52, 38)",
+          "borderWidth": "2px",
+          "image": "none",
+          "shadow": "none",
+          "filter": "none",
+          "outline": "none",
+          "outlineWidth": "3px",
+          "clip": "none",
+          "bg": "rgb(61, 88, 62)",
+          "before": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "after": {
+            "content": "none",
+            "shadow": "none",
+            "filter": "none"
+          },
+          "box": {
+            "x": 962,
+            "y": 894,
+            "width": 44,
+            "height": 44,
+            "top": 894,
+            "right": 1006,
+            "bottom": 938,
+            "left": 962
+          }
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "responses": [],
+  "at": "2026-11-09T09:01:51.867Z"
+}

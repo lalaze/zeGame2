@@ -32,7 +32,7 @@ export function paintPassageFloor(ctx: CanvasRenderingContext2D, area: AreaId, l
   // The same jute runner as the entrance; the glasshouse and garden get a paler, sun-bleached one.
   const jute = area === 'main' || area === 'reading' ? RUNNER_BASE : '#d9d7b8';
   const left = area !== 'main' && adjacentArea(area, 'left');
-  const right = adjacentArea(area, 'right');
+  const right = area !== 'main' && adjacentArea(area, 'right');
   const start = area === 'main' ? 64 : left ? 0 : 146;
   const end = right ? 320 : 174;
   // The runner to the glasshouse tucks under the cross runner.
@@ -45,7 +45,7 @@ export function paintPassageFloor(ctx: CanvasRenderingContext2D, area: AreaId, l
   if (area !== 'main' && !locked) extensionRunnerJunction(ctx, area, y);
   ctx.fillStyle = '#b29770';
   for (const direction of ['left', 'right'] as const) {
-    if (!adjacentArea(area, direction) || (area === 'main' && direction === 'left')) continue;
+    if (!adjacentArea(area, direction) || area === 'main') continue;
     const x = direction === 'left' ? 0 : 312;
     ctx.fillRect(x, y - 12, 8, 24);
     ctx.fillStyle = '#f3dfb8';
@@ -81,7 +81,7 @@ export function paintRoomBoundaries(ctx: CanvasRenderingContext2D, area: AreaId,
   for (const direction of ['left', 'right'] as const) {
     const x = direction === 'left' ? 0 : SCENE_W - 5;
     const y = doorwayY(area, direction);
-    const connected = adjacentArea(area, direction);
+    const connected = area === 'main' && direction === 'right' ? null : adjacentArea(area, direction);
     const segments = connected ? [[0, y - 14], [y + 14, height - y - 14]] : [[0, height]];
     for (const [top, h] of segments) {
       r(x, top, 5, h, ink);

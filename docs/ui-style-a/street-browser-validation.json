@@ -1,0 +1,862 @@
+{
+  "checks": [
+    "desktop: visible controls at least 44px",
+    "desktop: pixel font and square/unclipped button boxes",
+    "desktop: hint never overlaps arrow columns",
+    "desktop: resource counter stays between navigation buttons",
+    "desktop: top chrome leaves street space",
+    "desktop: bottom route bar stays in viewport",
+    "locked route stays previewable with text and lock mark",
+    "keyboard tab focus has an unclipped outline",
+    "pressed buttons never move their hit boxes",
+    "default street is the interactive raster world, no detail/payment panel",
+    "home and both stable vacant designs are present",
+    "original desktop doubleclick coordinates never charge",
+    "doubleclick new shop door opens details without purchasing",
+    "guard-disabled confirm has distinct disabled ink",
+    "desktop-confirm: actual pixel glyphs [data-street-home]",
+    "desktop-confirm: actual pixel glyphs [data-street-wallet]",
+    "desktop-confirm: actual pixel glyphs .street-choice span",
+    "desktop-confirm: actual pixel glyphs .street-choice small",
+    "desktop-confirm: actual pixel glyphs .street-summary p",
+    "desktop-confirm: actual pixel glyphs .street-walk-controls p",
+    "desktop-confirm: actual pixel glyphs .street-detail h3",
+    "desktop-confirm: actual pixel glyphs [data-street-confirm-quote]",
+    "land quote alone leaves coins unchanged",
+    "explicit confirmation buys only land",
+    "fitout quote is a separate unpaid action",
+    "separate fitout confirmation starts the correct building",
+    "building has new bookshop and physical fence",
+    "shop keyboard arrows move focus without opening",
+    "mouse drag pans without detail or charges",
+    "cross-street empty address does not inherit owned business",
+    "returning street preserves independent construction",
+    "home storefront returns to live cafe",
+    "all five business-specific storefronts are distinct",
+    "harvest cannot pay the same batches twice",
+    "running animation actually moves pedestrians",
+    "status tags paint above animated people",
+    "reduced motion hides only decorative entrants, retains walkers",
+    "reduced motion tags remain readable",
+    "vacant, construction, sale and open coexist",
+    "360x800: visible controls at least 44px",
+    "360x800: pixel font and square/unclipped button boxes",
+    "360x800: hint never overlaps arrow columns",
+    "360x800: resource counter stays between navigation buttons",
+    "360x800: top chrome leaves street space",
+    "360x800: bottom route bar stays in viewport",
+    "360: viewport has no document overflow",
+    "360: real touch drag pans without opening or spending",
+    "360: tap opens contained bottom drawer",
+    "360: pixel drawer fits without horizontal overflow",
+    "360: drawer and confirm controls retain 44px targets",
+    "360: home returns with all assets intact",
+    "390x844: visible controls at least 44px",
+    "390x844: pixel font and square/unclipped button boxes",
+    "390x844: hint never overlaps arrow columns",
+    "390x844: resource counter stays between navigation buttons",
+    "390x844: top chrome leaves street space",
+    "390x844: bottom route bar stays in viewport",
+    "390: viewport has no document overflow",
+    "390: real touch drag pans without opening or spending",
+    "390: tap opens contained bottom drawer",
+    "390: pixel drawer fits without horizontal overflow",
+    "390: drawer and confirm controls retain 44px targets",
+    "390: home returns with all assets intact",
+    "526x760: visible controls at least 44px",
+    "526x760: pixel font and square/unclipped button boxes",
+    "526x760: hint never overlaps arrow columns",
+    "526x760: resource counter stays between navigation buttons",
+    "526x760: top chrome leaves street space",
+    "526x760: bottom route bar stays in viewport",
+    "526: viewport has no document overflow",
+    "526: real touch drag pans without opening or spending",
+    "526: tap opens contained bottom drawer",
+    "526: pixel drawer fits without horizontal overflow",
+    "526: drawer and confirm controls retain 44px targets",
+    "526: home returns with all assets intact",
+    "568x415: visible controls at least 44px",
+    "568x415: pixel font and square/unclipped button boxes",
+    "568x415: hint never overlaps arrow columns",
+    "568x415: resource counter stays between navigation buttons",
+    "568x415: top chrome leaves street space",
+    "568x415: bottom route bar stays in viewport",
+    "568: viewport has no document overflow",
+    "568: real touch drag pans without opening or spending",
+    "568: tap opens contained bottom drawer",
+    "568: pixel drawer fits without horizontal overflow",
+    "568: drawer and confirm controls retain 44px targets",
+    "568: home returns with all assets intact",
+    "390-confirm: pixel drawer fits without horizontal overflow",
+    "390-confirm: drawer and confirm controls retain 44px targets",
+    "mobile-confirm: actual pixel glyphs [data-street-home]",
+    "mobile-confirm: actual pixel glyphs [data-street-wallet]",
+    "mobile-confirm: actual pixel glyphs .street-choice span",
+    "mobile-confirm: actual pixel glyphs .street-choice small",
+    "mobile-confirm: actual pixel glyphs .street-summary p",
+    "mobile-confirm: actual pixel glyphs .street-walk-controls p",
+    "mobile-confirm: actual pixel glyphs .street-detail h3",
+    "mobile-confirm: actual pixel glyphs [data-street-confirm-quote]",
+    "mobile Escape cancels payment without money or asset changes",
+    "English storefront sign uses live translated UI text",
+    "English mobile document remains within viewport",
+    "English-360: visible controls at least 44px",
+    "English-360: pixel font and square/unclipped button boxes",
+    "English-360: hint never overlaps arrow columns",
+    "English-360: resource counter stays between navigation buttons",
+    "English-360: top chrome leaves street space",
+    "English-360: bottom route bar stays in viewport",
+    "font stall still reaches true first-frame readiness",
+    "new SW registration waits for main first frame",
+    "all 16 new PNGs cache before any street visit",
+    "offline first street has every storefront/scenery img",
+    "offline pavement layer is cached",
+    "no application page errors",
+    "no failing HTTP resource responses in working browser origin",
+    "HTTP final bytes: index.html",
+    "HTTP final bytes: sw.js",
+    "HTTP final bytes: assets/game-D8zhlV7q.js",
+    "HTTP final bytes: assets/region-art-DtWf97mz.js",
+    "HTTP final bytes: assets/phaser-D8EC1TLR.js",
+    "HTTP final bytes: assets/game-DOiyzF6t.css",
+    "HTTP final bytes: art/street-art-v2/cafe.png",
+    "HTTP final bytes: art/street-art-v2/paving.png",
+    "HTTPS final bytes: index.html",
+    "HTTPS final bytes: sw.js",
+    "HTTPS final bytes: assets/game-D8zhlV7q.js",
+    "HTTPS final bytes: assets/region-art-DtWf97mz.js",
+    "HTTPS final bytes: assets/phaser-D8EC1TLR.js",
+    "HTTPS final bytes: assets/game-DOiyzF6t.css",
+    "HTTPS final bytes: art/street-art-v2/cafe.png",
+    "HTTPS final bytes: art/street-art-v2/paving.png"
+  ],
+  "runs": [
+    {
+      "httpsChromium": "Error: page.goto: net::ERR_CONNECTION_CLOSED at https://lalazemac-mini.tailcec3d.ts.net:4174/",
+      "limitation": "HTTPS bytes checked separately via curl; browser QA uses existing secure loopback, not a physical device."
+    },
+    {
+      "name": "desktop",
+      "geometry": {
+        "boxes": [
+          {
+            "text": "回到咖啡馆",
+            "width": 120,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "经营蓝图",
+            "width": 108,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "橡木老街可以选址",
+            "width": 275.1875,
+            "height": 54.796875,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "花市小街拥有 2 间铺位后开放",
+            "width": 275.203125,
+            "height": 54.796875,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "海风步行街拥有 4 间铺位后开放",
+            "width": 275.203125,
+            "height": 54.796875,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "杉影木街拥有 7 间铺位后开放",
+            "width": 275.203125,
+            "height": 54.796875,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "钟楼商街拥有 10 间铺位后开放",
+            "width": 275.203125,
+            "height": 54.796875,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "所有街道收获 · $0",
+            "width": 140,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "",
+            "width": 44,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "",
+            "width": 44,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          }
+        ],
+        "layout": {
+          "x": 0,
+          "y": 185.796875,
+          "width": 1440,
+          "height": 774.203125,
+          "top": 185.796875,
+          "right": 1440,
+          "bottom": 960,
+          "left": 0
+        },
+        "bottom": {
+          "x": 430,
+          "y": 882,
+          "width": 580,
+          "height": 64,
+          "top": 882,
+          "right": 1010,
+          "bottom": 946,
+          "left": 430
+        },
+        "separated": true,
+        "resourceFits": true
+      }
+    },
+    {
+      "name": "360x800",
+      "geometry": {
+        "boxes": [
+          {
+            "text": "回到咖啡馆",
+            "width": 99,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "经营蓝图",
+            "width": 88,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "橡木老街可以选址",
+            "width": 184,
+            "height": 52.796875,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "所有街道收获 · ≈$176K",
+            "width": 148,
+            "height": 54,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "",
+            "width": 44,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "",
+            "width": 44,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          }
+        ],
+        "layout": {
+          "x": 0,
+          "y": 190.796875,
+          "width": 360,
+          "height": 609.203125,
+          "top": 190.796875,
+          "right": 360,
+          "bottom": 800,
+          "left": 0
+        },
+        "bottom": {
+          "x": 10,
+          "y": 712,
+          "width": 340,
+          "height": 76,
+          "top": 712,
+          "right": 350,
+          "bottom": 788,
+          "left": 10
+        },
+        "separated": true,
+        "resourceFits": true
+      }
+    },
+    {
+      "name": "390x844",
+      "geometry": {
+        "boxes": [
+          {
+            "text": "回到咖啡馆",
+            "width": 99,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "经营蓝图",
+            "width": 88,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "橡木老街可以选址",
+            "width": 184,
+            "height": 52.796875,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "花市小街可以选址",
+            "width": 184,
+            "height": 52.796875,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "所有街道收获 · ≈$176K",
+            "width": 148,
+            "height": 54,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "",
+            "width": 44,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "",
+            "width": 44,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          }
+        ],
+        "layout": {
+          "x": 0,
+          "y": 190.796875,
+          "width": 390,
+          "height": 653.203125,
+          "top": 190.796875,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        },
+        "bottom": {
+          "x": 10,
+          "y": 768,
+          "width": 370,
+          "height": 64,
+          "top": 768,
+          "right": 380,
+          "bottom": 832,
+          "left": 10
+        },
+        "separated": true,
+        "resourceFits": true
+      }
+    },
+    {
+      "name": "526x760",
+      "geometry": {
+        "boxes": [
+          {
+            "text": "回到咖啡馆",
+            "width": 99,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "经营蓝图",
+            "width": 88,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "橡木老街可以选址",
+            "width": 184,
+            "height": 52.796875,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "花市小街可以选址",
+            "width": 184,
+            "height": 52.796875,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "所有街道收获 · ≈$176K",
+            "width": 148,
+            "height": 54,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "",
+            "width": 44,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "",
+            "width": 44,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          }
+        ],
+        "layout": {
+          "x": 0,
+          "y": 190.796875,
+          "width": 526,
+          "height": 569.203125,
+          "top": 190.796875,
+          "right": 526,
+          "bottom": 760,
+          "left": 0
+        },
+        "bottom": {
+          "x": 10,
+          "y": 684,
+          "width": 506,
+          "height": 64,
+          "top": 684,
+          "right": 516,
+          "bottom": 748,
+          "left": 10
+        },
+        "separated": true,
+        "resourceFits": true
+      }
+    },
+    {
+      "name": "568x415",
+      "geometry": {
+        "boxes": [
+          {
+            "text": "回到咖啡馆",
+            "width": 99,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "经营蓝图",
+            "width": 88,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "橡木老街可以选址",
+            "width": 184,
+            "height": 52.796875,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "花市小街可以选址",
+            "width": 184,
+            "height": 52.796875,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "所有街道收获 · ≈$176K",
+            "width": 148,
+            "height": 54,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "",
+            "width": 44,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          },
+          {
+            "text": "",
+            "width": 44,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel ZH\", \"Pixelify Sans\", ui-monospace, monospace"
+          }
+        ],
+        "layout": {
+          "x": 0,
+          "y": 183.796875,
+          "width": 568,
+          "height": 231.203125,
+          "top": 183.796875,
+          "right": 568,
+          "bottom": 415,
+          "left": 0
+        },
+        "bottom": {
+          "x": 10,
+          "y": 343,
+          "width": 548,
+          "height": 64,
+          "top": 343,
+          "right": 558,
+          "bottom": 407,
+          "left": 10
+        },
+        "separated": true,
+        "resourceFits": true
+      }
+    },
+    {
+      "name": "English-360",
+      "geometry": {
+        "boxes": [
+          {
+            "text": "Back to the café",
+            "width": 135.765625,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel Digits\", \"Pixelify Sans\", \"Pixel ZH\", ui-monospace, monospace"
+          },
+          {
+            "text": "Blueprints",
+            "width": 100.140625,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel Digits\", \"Pixelify Sans\", \"Pixel ZH\", ui-monospace, monospace"
+          },
+          {
+            "text": "Oak LaneProperties available",
+            "width": 210,
+            "height": 52.796875,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel Digits\", \"Pixelify Sans\", \"Pixel ZH\", ui-monospace, monospace"
+          },
+          {
+            "text": "Collect across all streets · ≈$176K",
+            "width": 148,
+            "height": 54,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel Digits\", \"Pixelify Sans\", \"Pixel ZH\", ui-monospace, monospace"
+          },
+          {
+            "text": "",
+            "width": 44,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel Digits\", \"Pixelify Sans\", \"Pixel ZH\", ui-monospace, monospace"
+          },
+          {
+            "text": "",
+            "width": 44,
+            "height": 44,
+            "radius": "0px",
+            "clip": "none",
+            "font": "\"Pixel Digits\", \"Pixelify Sans\", \"Pixel ZH\", ui-monospace, monospace"
+          }
+        ],
+        "layout": {
+          "x": 0,
+          "y": 190.796875,
+          "width": 360,
+          "height": 609.203125,
+          "top": 190.796875,
+          "right": 360,
+          "bottom": 800,
+          "left": 0
+        },
+        "bottom": {
+          "x": 10,
+          "y": 712,
+          "width": 340,
+          "height": 76,
+          "top": 712,
+          "right": 350,
+          "bottom": 788,
+          "left": 10
+        },
+        "separated": true,
+        "resourceFits": true
+      }
+    },
+    {
+      "fontReadyProbe": {
+        "ready": 2689.7000000476837,
+        "registered": [
+          2689.7999999523163
+        ]
+      }
+    }
+  ],
+  "fontRows": [
+    {
+      "name": "desktop-confirm",
+      "selector": "[data-street-home]",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        }
+      ]
+    },
+    {
+      "name": "desktop-confirm",
+      "selector": "[data-street-wallet]",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 13
+        }
+      ]
+    },
+    {
+      "name": "desktop-confirm",
+      "selector": ".street-choice span",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 4
+        }
+      ]
+    },
+    {
+      "name": "desktop-confirm",
+      "selector": ".street-choice small",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 4
+        }
+      ]
+    },
+    {
+      "name": "desktop-confirm",
+      "selector": ".street-summary p",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 12
+        }
+      ]
+    },
+    {
+      "name": "desktop-confirm",
+      "selector": ".street-walk-controls p",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 39
+        }
+      ]
+    },
+    {
+      "name": "desktop-confirm",
+      "selector": ".street-detail h3",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 10
+        }
+      ]
+    },
+    {
+      "name": "desktop-confirm",
+      "selector": "[data-street-confirm-quote]",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 39
+        }
+      ]
+    },
+    {
+      "name": "mobile-confirm",
+      "selector": "[data-street-home]",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 5
+        }
+      ]
+    },
+    {
+      "name": "mobile-confirm",
+      "selector": "[data-street-wallet]",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 13
+        }
+      ]
+    },
+    {
+      "name": "mobile-confirm",
+      "selector": ".street-choice span",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 4
+        }
+      ]
+    },
+    {
+      "name": "mobile-confirm",
+      "selector": ".street-choice small",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 4
+        }
+      ]
+    },
+    {
+      "name": "mobile-confirm",
+      "selector": ".street-summary p",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 12
+        }
+      ]
+    },
+    {
+      "name": "mobile-confirm",
+      "selector": ".street-walk-controls p",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 39
+        }
+      ]
+    },
+    {
+      "name": "mobile-confirm",
+      "selector": ".street-detail h3",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 10
+        }
+      ]
+    },
+    {
+      "name": "mobile-confirm",
+      "selector": "[data-street-confirm-quote]",
+      "fonts": [
+        {
+          "familyName": "Fusion Pixel 12px Proportional zh_hans",
+          "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+          "isCustomFont": true,
+          "glyphCount": 39
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "badResponses": [],
+  "at": "2026-11-09T08:37:03.978Z"
+}

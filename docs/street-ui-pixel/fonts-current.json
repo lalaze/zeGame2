@@ -1,0 +1,35 @@
+[
+  {
+    "selector": "[data-street-home]",
+    "fonts": [
+      {
+        "familyName": "Fusion Pixel 12px Proportional zh_hans",
+        "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+        "isCustomFont": true,
+        "glyphCount": 5
+      }
+    ]
+  },
+  {
+    "selector": ".street-choice span",
+    "fonts": [
+      {
+        "familyName": "Fusion Pixel 12px Proportional zh_hans",
+        "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+        "isCustomFont": true,
+        "glyphCount": 4
+      }
+    ]
+  },
+  {
+    "selector": ".street-walk-controls p",
+    "fonts": [
+      {
+        "familyName": "Fusion Pixel 12px Proportional zh_hans",
+        "postScriptName": "Fusion-Pixel-12px-Proportional-zh_hans-Regular",
+        "isCustomFont": true,
+        "glyphCount": 39
+      }
+    ]
+  }
+]

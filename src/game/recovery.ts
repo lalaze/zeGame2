@@ -4,7 +4,7 @@ import { DECOR_SLOTS, decorDef } from './decor';
 import { canPrepareItem, ingredientDef, recipe, servingsLeft, unlockedItems } from './economy';
 import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, canPlace, furnitureDef } from './furniture';
 import { currentGoal, goalDone, GOALS } from './goals';
-import { REGIONS, mainTableCount, regionOffset } from './regions';
+import { AREA_IDS, REGIONS, mainTableCount, regionOffset } from './regions';
 import type { GameState } from './state';
 
 const count = (value: unknown): value is number => Number.isSafeInteger(value) && (value as number) >= 0;
@@ -96,7 +96,7 @@ function searchComfortLayout(state: GameState, needed: number, tables: number, k
   const groups = [...shapes.values()];
   for (const group of groups) group.comforts.sort((a, b) => b - a);
   groups.sort((a, b) => b.comforts[0] - a.comforts[0]);
-  const width = COLS * (REGIONS.length + 1);
+  const width = COLS * AREA_IDS.length;
   const candidates: { comfort: number; masks: bigint[]; groupEnd: number }[] = [];
   for (const { def, comforts } of groups) {
     const masks: bigint[] = [];

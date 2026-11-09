@@ -1,0 +1,181 @@
+/* A / cream pixel. Shared primitives for the existing indoor and outdoor UI.
+   Canvas/world art is never filtered or replaced. Legacy ledger selectors retain
+   layout while their semantic font, colour and frame tokens resolve to this kit. */
+:root:root {
+  --font-pixel: 'Pixel Digits', 'Pixelify Sans', 'Pixel ZH', ui-monospace, monospace;
+  --ui-font: var(--font-pixel);
+  --ledger-serif: var(--font-pixel);
+  --a-accent: #3d583e; --a-accent-dark: #263d2d; --a-accent-soft: #e3e6c9;
+  --accent: var(--a-accent); --accent-dark: var(--a-accent-dark); --accent-soft: var(--a-accent-soft);
+  --ink: #493426; --muted: #6a583e;
+  --cream: #fff0d2; --paper: #f6e4c0; --paper-light: #fff6df;
+  --paper-shadow: #c8a675; --wood: #705239; --wood-light: #b98e59;
+  --green: var(--a-accent); --green-dark: var(--a-accent-dark); --sage-paper: var(--a-accent-soft);
+  --ui-highlight: #fff9e6; --ui-rim: #c69d65; --ui-shadow: #73543b;
+  --ui-still: 0px 0px;
+  --paper-grain: none;
+  --frame: 0 0 0 1px #9e7d56;
+  --paper-card: 0 0 0 1px #9e7d56;
+  --button-edge: none;
+  --button-pressed: none;
+}
+:root:root:lang(zh) { --font-pixel: 'Pixel ZH', 'Pixelify Sans', ui-monospace, monospace; }
+/* Equipped wallpaper still changes action ink. A remains the cream frame/form. */
+:root[data-ledger-theme='mint'] { --a-accent: #3f6957; --a-accent-dark: #2d5041; --a-accent-soft: #e2e9dc; }
+:root[data-ledger-theme='rose'] { --a-accent: #89516a; --a-accent-dark: #683b50; --a-accent-soft: #f0e0e1; }
+:root[data-ledger-theme='terracotta'] { --a-accent: #8a4935; --a-accent-dark: #683826; --a-accent-soft: #f1e0ce; }
+:root[data-ledger-theme='walnut'] { --a-accent: #66503c; --a-accent-dark: #50392c; --a-accent-soft: #eae0d0; }
+:root[data-ledger-theme='midnight'] { --a-accent: #405879; --a-accent-dark: #30425d; --a-accent-soft: #e1e5e9; }
+body, body :is(.panel,.modal,.onboard,.region-card) { font-family: var(--font-pixel) !important; font-variant-ligatures: none; }
+body :is(button,input,select,textarea,h1,h2,h3,h4,strong,b) { font-family: var(--font-pixel) !important; font-variant-ligatures: none; font-weight: 400 !important; }
+/* One normative button primitive, including generated modal/management actions.
+   !important is intentional at this migration boundary: old ledger selectors have
+   per-page decorative rules. Size/position/display remain owned by their layouts. */
+body button:not(:where(.street-shop,.mobile-cafe-clock,.drawer-backdrop,.mobile-tools-backdrop,.area-arrow)) {
+  --pixel-face: var(--cream); --pixel-text: var(--ink);
+  min-width: 44px !important; min-height: 44px !important;
+  border: 2px solid var(--ink) !important;
+  border-image: none !important;
+  border-radius: 0 !important;
+  background: var(--pixel-face) padding-box !important;
+  color: var(--pixel-text) !important;
+  box-shadow: none !important;
+  filter: none !important;
+  text-shadow: none !important; transition: none !important;
+  font-size: 12px;
+}
+body :is(.pixel-btn:not(.ghost),.tab.active,.chip.active,.menu-toggle.active,button[aria-selected='true'],button[aria-pressed='true'],.mobile-cafe-primary>button,[data-street-prev],[data-street-next]) {
+  --pixel-face: var(--a-accent) !important; --pixel-text: var(--paper-light) !important;
+}
+body :is(.pixel-btn.ghost,.chip,.tab) { --pixel-face: var(--cream); --pixel-text: var(--ink); }
+body button.danger { --pixel-face: #8d4232 !important; --pixel-text: var(--paper-light) !important; }
+@media (hover: hover) {
+  body button:not(:where(.street-shop,.mobile-cafe-clock,.drawer-backdrop,.mobile-tools-backdrop,.area-arrow)):hover:not(:disabled) { background-color: color-mix(in srgb, var(--pixel-face), white 10%) !important; }
+}
+body button:not(.area-arrow) { translate: var(--ui-still) !important; }
+body button:active:not(:disabled) { background-color: color-mix(in srgb, var(--pixel-face), black 8%) !important; }
+body button:disabled { --pixel-face: #ddd1b5 !important; --pixel-text: #6c6048 !important; cursor: not-allowed; opacity: 1 !important; border-style: dashed; }
+body button:disabled::selection { background: transparent; }
+body :is(button,input,select,textarea,summary,[tabindex]):focus-visible { outline: 3px solid #ac4d27 !important; outline-offset: 3px !important; }
+body :is(input,select,textarea):not([type='checkbox']):not([type='radio']) { font-size: 16px !important; min-height: 44px; border: 2px solid var(--ink) !important; border-radius: 0 !important; background-color: var(--paper-light) !important; color: var(--ink) !important; box-shadow: none !important; }
+body :is(input[type='checkbox'],input[type='radio']) { accent-color: var(--a-accent); }
+body label:has(input:is([type='checkbox'],[type='radio'])) { min-height: 44px; }
+/* Single-line cream shell. No nested highlight rings or decorative shadows. */
+body :is(.panel,.modal,.onboard,.region-card,.mobile-cafe-header,.mobile-cafe-dock,.mobile-cafe-tools,.street-walk-controls,.street-detail) {
+  border: 2px solid var(--ink) !important;
+  border-image: none !important;
+  border-radius: 0 !important;
+  background: var(--cream) padding-box !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+body .modal.street-modal { border: 0 !important; border-image: none !important; box-shadow: none !important; background: var(--cream) !important; }
+body :is(.modal-overlay,.onboard-overlay) { backdrop-filter: none; }
+body .modal h2 { font-size: 24px; line-height: 1.4; border-bottom: 2px solid var(--paper-shadow); padding-bottom: 8px; margin-bottom: 10px; }
+body .modal h3 { font-size: 18px; }
+body .modal :is(p,label,.note) { line-height: 1.6; }
+body :is(.row,.pet-card,.promo-card,.regular-profile,.signature-card,.style-current,.signature-summary,.taste-overview,.rating-overview,.rating-report,.prep-row,.report-profit,.profile-row,.project-card,.project-blueprint,.projects-summary,.goal,.milestone) { background-color: var(--paper-light); border-color: var(--paper-shadow); border-radius: 0; box-shadow: none; }
+body details>summary { border-radius: 0; background: var(--a-accent-soft); border: 2px solid var(--paper-shadow); }
+/* Compact management header and separate, readable menu tabs/cards. */
+body.fullscreen-cafe .panel { padding: 10px; background-image: none; }
+body.fullscreen-cafe .drawer-header { min-height: 96px; padding: 6px 2px 8px; border-bottom: 2px solid var(--paper-shadow); }
+body.fullscreen-cafe .drawer-header strong { font-size: 24px; letter-spacing: 0; }
+body.fullscreen-cafe .drawer-header::after { display: none; }
+body .ledger-cafe-name { letter-spacing: 0; font-size: 12px; }
+body.fullscreen-cafe .drawer-balance { margin: 0; padding: 4px 8px; font-size: 12px; }
+body.fullscreen-cafe #drawer-close { font-size: 24px; }
+body.fullscreen-cafe .panel .tabs { gap: 4px; padding: 8px 4px; }
+body.fullscreen-cafe .panel .tab { min-height: 56px; font-size: 12px; padding: 4px 2px; gap: 2px; }
+body .panel .goal { padding: 8px 10px; border: 2px solid var(--paper-shadow); background: var(--a-accent-soft); box-shadow: none; }
+body .panel .goal::before { display: none; }
+body .panel .goal-text { font-size: 14px; }
+body .panel .goal-reward { transform: none; }
+body .panel .ledger-tools { flex-wrap: wrap; gap: 8px; }
+body .panel .ledger-tools>.buy-amount { margin-left: auto; }
+body .panel .menu-filter { gap: 6px; }
+body .panel .menu-filter .chip { font-size: 12px; padding: 5px; min-height: 44px; }
+body .panel .row { gap: 8px 12px; padding: 12px 4px; border-bottom: 2px solid var(--paper-shadow); }
+body .panel .row .name { font-size: 16px; }
+body .panel .row .icon { border-radius: 0; }
+body .panel .row .buy .label,body .panel .row .buy .cost { font-size: 12px; }
+/* Scene chrome is kept small; the room/furniture/camera are untouched. */
+body.fullscreen-cafe .hud .brand,body.fullscreen-cafe .hud .money,body.fullscreen-cafe .day-hud,body.fullscreen-cafe .operation-status,body.fullscreen-cafe .cafe-status-bar button { border-radius: 0; background: var(--cream); box-shadow: var(--frame); }
+body .mobile-cafe-header { padding: 6px 8px; }
+body .mobile-cafe-clock { min-height: 44px; gap: 3px; }
+body .mobile-cafe-name { color: var(--ink); font-size: 12px; }
+body .mobile-cafe-clock strong { font-size: 12px; }
+body.fullscreen-cafe .mobile-cafe-header .money { border-left: 2px solid var(--ui-rim); padding-left: 8px; box-shadow: none; background: none; }
+body.fullscreen-cafe .mobile-cafe-header .money .coins { font-size: 18px; padding: 0 4px; }
+body.fullscreen-cafe .mobile-cafe-header .money .rate { font-size: 12px; }
+body .mobile-cafe-dock { gap: 6px; padding: 6px; border: 1px solid #9e7d56 !important; }
+body.fullscreen-cafe .mobile-cafe-dock button { padding: 4px 2px; font-size: 12px; line-height: 1.4; }
+body.fullscreen-cafe .mobile-cafe-dock #panel-toggle { --pixel-face: var(--cream); --pixel-text: var(--ink); }
+body .mobile-cafe-tools { padding: 10px; }
+body :is(.reputation-bar,.hint,.arrange-text,.stage-stats span,.area-destination) { border-radius: 0; }
+/* Street chrome now uses exactly the same tokens and button primitive. */
+body .street-overlay .street-toolbar,body .street-overlay .street-choices,body .street-overlay .street-summary { background: var(--cream); }
+body .street-overlay .street-toolbar { border-bottom: 2px solid var(--paper-shadow); }
+body .street-overlay .street-summary { border-bottom: 2px solid var(--ink); }
+body .street-overlay .street-toolbar strong { color: var(--ink); background: var(--paper-light); border-color: var(--paper-shadow); box-shadow: none; }
+body .street-overlay .street-toolbar strong::before { border-color: #bd872f; }
+body .street-overlay .street-choice { min-height: 52px; }
+body .street-overlay .street-choice small { color: var(--pixel-text); }
+body .street-overlay .street-walk-controls { padding: 6px; }
+body .street-overlay .street-detail h3 { font-size: 18px; }
+body .street-overlay .street-detail .street-select-arrow { right: 12px; }
+body .street-overlay .street-shop-caption small { border: 2px solid var(--ink); border-radius: 0; background-color: var(--cream); }
+body .street-overlay .street-shop-ready .street-shop-caption small { background: var(--a-accent); color: var(--paper-light); }
+@media (max-width: 700px) {
+ body.fullscreen-cafe .panel .tabs { padding-inline: 0; gap: 4px; }
+ body.fullscreen-cafe .panel .tab { min-width: 0; font-size: 12px; }
+ body .panel .list { padding-inline: 2px; }
+ body .panel .row { grid-template-columns: 44px minmax(0,1fr); gap: 8px; }
+ body .panel .row .icon { width: 44px; height: 44px; }
+ body .modal { padding: 14px; }
+ body .street-overlay .street-toolbar { gap: 6px; }
+ body .street-overlay .street-toolbar strong { padding: 3px; }
+}
+@media (max-height: 500px) {
+ body .mobile-cafe-header { width: min(380px,54%); }
+ body .mobile-cafe-name { font-size: 12px; }
+ body .mobile-cafe-clock strong { font-size: 12px; }
+ body .mobile-cafe-dock { width: min(370px,55%); }
+ body.fullscreen-cafe .drawer-header { min-height: 80px; }
+ body .modal { max-height: calc(100dvh - 20px); }
+}
+@media (prefers-reduced-motion: reduce) {
+ body *,body *::before,body *::after { scroll-behavior: auto !important; transition: none !important; }
+}
+@media (forced-colors: active) {
+ body button,body :is(.panel,.modal,.onboard,.mobile-cafe-header,.mobile-cafe-dock,.street-detail,.street-walk-controls) { border-image: none !important; border: 2px solid ButtonText !important; background: Canvas !important; color: CanvasText !important; box-shadow: none !important; filter: none !important; }
+ body button:is([aria-pressed='true'],[aria-selected='true'],.active) { border-style: double !important; border-width: 4px !important; }
+ body button:disabled { border-style: dashed !important; }
+}
+/* Small shared grid marks use currentColor, not emoji or additional requests. */
+:root {
+ --a-icon-map: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M1 1h4v1h2V1h4v9H7v1H5v-1H1zm2 2v5h2V3zm4 0v5h2V3z'/%3E%3C/svg%3E");
+ --a-icon-shop: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 1h8v2h1v3h-1v5H2V6H1V3h1zm1 5v4h2V7h2v3h2V6z'/%3E%3C/svg%3E");
+ --a-icon-more: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M1 1h10v2H1zm0 4h10v2H1zm0 4h10v2H1z'/%3E%3C/svg%3E");
+ --a-icon-cup: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M1 2h8v1h2v4H9v2H2V8H1zm8 2v2h1V4zM0 10h11v1H0z'/%3E%3C/svg%3E");
+}
+body .mobile-cafe-dock :is(#room-zoom-reset,#panel-toggle,#mobile-cafe-more) { display: flex; justify-content: center; align-items: center; gap: 4px; }
+body .mobile-cafe-dock :is(#room-zoom-reset,#panel-toggle,#mobile-cafe-more)::before,body .mobile-cafe-name::before { content: ''; display: inline-block; flex: 0 0 12px; width: 12px; height: 12px; background: currentColor; mask: var(--a-icon-shop) center / contain no-repeat; }
+body .mobile-cafe-dock #room-zoom-reset::before { mask-image: var(--a-icon-map); }
+body .mobile-cafe-dock #mobile-cafe-more::before { mask-image: var(--a-icon-more); }
+body .mobile-cafe-name::before { mask-image: var(--a-icon-cup); margin-right: 5px; vertical-align: -1px; }
+
+/* UI surfaces appear as a single frame, with no cross-fade into the room. */
+body :is(.modal-overlay,.modal,.panel,.mobile-cafe-tools) { animation: none !important; transition: none !important; }
+body.fullscreen-cafe .mobile-cafe-dock #panel-toggle { padding: 4px 2px; white-space: nowrap; }
+body.fullscreen-cafe .edge-tools { border-radius: 0; border: 2px solid var(--ink); box-shadow: var(--frame); }
+/* These primary actions share the same form; disable state also has a written
+   browser affordance/semantic disabled flag, rather than relying on hue. */
+body button:disabled { background-image: repeating-linear-gradient(135deg, transparent 0 7px, #4934260b 7px 9px) !important; }
+
+body .swatches { flex-wrap: wrap; }
+/* Semantic variants outrank primary/selected ink, including guard-disabled payments. */
+body button.pixel-btn.danger { --pixel-face: #8d4232 !important; --pixel-text: var(--paper-light) !important; }
+body button:disabled:disabled { --pixel-face: #ddd1b5 !important; --pixel-text: #6c6048 !important; }
+/* The old wood HUD inherited ivory lettering; cream HUDs require dark ink. */
+body.fullscreen-cafe .hud .brand,
+body.fullscreen-cafe .hud :is(.brand-name,.brand-title) { color: var(--ink); text-shadow: none; }

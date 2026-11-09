@@ -8,6 +8,11 @@ const CACHE = `${PREFIX}${VERSION}`;
 const SHELL = new URL('./index.html', SCOPE).href;
 /** Written last, so a cache that has one is known to come from a finished install. */
 const REVISIONS = new URL('./__revisions__', SCOPE).href;
+/**
+ * Everything cached here is a static file. A host's Vary: Origin must not hide it from a
+ * crossorigin script, which sends an Origin header the install request didn't.
+ */
+const ANY_VARY = { ignoreVary: true };
 
 async function finishedInstalls() {
   const names = (await caches.keys()).filter((name) => name.startsWith(PREFIX) && name !== CACHE);
@@ -34,7 +39,7 @@ self.addEventListener('install', (event) => {
       const url = new URL(path, SCOPE).href;
       let kept;
       for (const install of installs) {
-        if (install.revisions[path] === revision) kept = await install.cache.match(url);
+        if (install.revisions[path] === revision) kept = await install.cache.match(url, ANY_VARY);
         if (kept) break;
       }
       if (kept) await cache.put(url, kept);
@@ -82,9 +87,9 @@ self.addEventListener('fetch', (event) => {
       const page = new URL(req.url);
       page.search = '';
       page.hash = '';
-      const cachedPage = await cache.match(page.href);
+      const cachedPage = await cache.match(page.href, ANY_VARY);
       if (cachedPage) return cachedPage;
-      const shell = await cache.match(SHELL);
+      const shell = await cache.match(SHELL, ANY_VARY);
       if (!shell) return Response.error();
       // A relative-base build must reopen at its app root. Serving its HTML at
       // a nested bookmark would resolve ./assets against the wrong directory.
@@ -97,7 +102,7 @@ self.addEventListener('fetch', (event) => {
   }
   event.respondWith((async () => {
     const cache = await caches.open(CACHE);
-    const cached = await cache.match(req);
+    const cached = await cache.match(req, ANY_VARY);
     if (cached) return cached;
     // What gets stored here counts as this version's copy from now on, so it must not be an
     // older build's file left in the browser's HTTP cache.

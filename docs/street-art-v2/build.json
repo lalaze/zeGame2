@@ -1,0 +1,16 @@
+{
+  "stage": "/private/tmp/zeGame2-street-art-v2-stage-wpRS9y",
+  "dist": "/Volumes/data/code/zeGame2/dist",
+  "version": "584b7889ebac72a92c37",
+  "files": 1340,
+  "retainedOldHashedFiles": 20,
+  "entrySha256": "4560a9223389ed35eead3a0e8fa550040c8ef0964af6571b0bafc541fc7a665e",
+  "workerSha256": "8ed3c780f64e058357c100cd2c46c9660bc36e2341f7caab69d528a37bc473a9",
+  "entryBundles": [
+    "assets/game-COVN2Bm9.js",
+    "assets/region-art-DtWf97mz.js",
+    "assets/phaser-D8EC1TLR.js",
+    "assets/game-DlY-SX4c.css"
+  ],
+  "publishedAt": "2026-11-09T06:51:18.001Z"
+}

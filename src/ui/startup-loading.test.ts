@@ -35,3 +35,9 @@ describe('startup loading feedback', () => {
     root.remove();
   });
 });
+
+it('reports a timeout without asserting network failure and preserves phase diagnostics', () => {
+ const page = new DOMParser().parseFromString(readFileSync('index.html','utf8'),'text/html');const root=document.importNode(page.getElementById('loader')!,true);document.body.append(root);
+ const loading=startupLoading(root,true,vi.fn());loading.progress(399,404);loading.fail(new Error('Café startup timed out'));
+ expect(root.textContent).not.toContain('检查网络');expect(root.textContent).toContain('images=399/404');expect(root.textContent).toContain('进度未被清除');root.remove();
+});

@@ -1,0 +1,183 @@
+{
+  "referenceSha256": "c9725546a8b2c10d08b1d7248ed7cae02d87d22da8ca84309e1cc9c871932447",
+  "storefrontZipSha256": "70dc9fdd663d39f5c80727029a2a098b8b054aab130d254432cb02f4a4c86ff6",
+  "storefrontSources": {
+    "01-cafe.png": "80a0f64292dda5f6c8b054c0ee640325a920d11fb969d3b75e3420bcd81d17ca",
+    "02-vacant-brick.png": "85b91f24aa5b477d6db1b0629388996fed596c5a26761ab21c437220e47fba41",
+    "03-bookshop.png": "288fc7744d0fa4a34f3aff1262466e73c412e46c76b20ca062fad8d2a135a670",
+    "04-plant-shop.png": "26440121581d64de725565f381dfc034bff7972af20fdde4b5fddc28aa9a27bb",
+    "05-florist.png": "6146ff6c57f65b901d10a9f6a97283f2654537e6f5f09d84a14013270bab5425",
+    "06-pottery.png": "96e9e510f93efe5e391914c5c763773e8f817977ee4dcf9d23402ade46a1b3d1",
+    "07-tea-shop.png": "ee6d12f36d164127c63fe834b3febfaffdfd905a3c31938ebf67ee486bebc1da",
+    "08-vacant-blue.png": "49f161659f097d05c1618ef79712bec531449eaed01aae7f9b228e9460199f86"
+  },
+  "pngs": {
+    "bench.png": {
+      "size": [
+        24,
+        14
+      ],
+      "bytes": 935,
+      "sha256": "ef9328df69a625863ce416632bb2e0d9ba92ec5272665dd526885c7c228887a9"
+    },
+    "bookshop.png": {
+      "size": [
+        111,
+        147
+      ],
+      "bytes": 33386,
+      "sha256": "d8986b86c474d121393831b839dfcfdeb634e33cbc0e09e419990e008ac24841"
+    },
+    "cafe.png": {
+      "size": [
+        118,
+        146
+      ],
+      "bytes": 32665,
+      "sha256": "1aeeb5d464cc46852f438c5e4509d7cc27c9215cbdb04d5132251102c6cfe43a"
+    },
+    "cloud.png": {
+      "size": [
+        119,
+        39
+      ],
+      "bytes": 2219,
+      "sha256": "ea6c703fffd461e2745399c5ee3e96ed9e9e618238b0e6f15097205b50488ee1"
+    },
+    "curb.png": {
+      "size": [
+        144,
+        30
+      ],
+      "bytes": 6645,
+      "sha256": "fd657a969ce775d2cc4b78deaa0c95030d189110787ece1b5940a2e3ae6af9ca"
+    },
+    "florist.png": {
+      "size": [
+        115,
+        144
+      ],
+      "bytes": 35768,
+      "sha256": "3dcf587f335f5afeb10ee9f9c3eee5d339f87f498a3dd97ef0c7103874374304"
+    },
+    "hills.png": {
+      "size": [
+        768,
+        120
+      ],
+      "bytes": 1327,
+      "sha256": "c92b0de3efa47bf8692bedf95c48edcbaef20126388e1a696c4486c64026cc1c"
+    },
+    "lamp.png": {
+      "size": [
+        15,
+        75
+      ],
+      "bytes": 1395,
+      "sha256": "651999bcb5db4c5c8dc8943386dc59cf565ee86d5aae0772bbc29dfd95c7417c"
+    },
+    "paving.png": {
+      "size": [
+        144,
+        32
+      ],
+      "bytes": 1531,
+      "sha256": "f16c0cc9ebd39b8313d6e86f49753165041ca54f72fc985f470c8c269e2e246b"
+    },
+    "plant-shop.png": {
+      "size": [
+        118,
+        118
+      ],
+      "bytes": 30498,
+      "sha256": "b29a79dd457f468e3184056c0099186836fe5d4be9106348d3e40c76f60d5514"
+    },
+    "pottery.png": {
+      "size": [
+        121,
+        144
+      ],
+      "bytes": 34591,
+      "sha256": "19e561cccfe46d35e107b90feff1981445c9ed9b785542715425980cf60db9ff"
+    },
+    "shadow.png": {
+      "size": [
+        136,
+        9
+      ],
+      "bytes": 155,
+      "sha256": "58c9a8fdba4fdcf06b138f5384ab411b26da6feee194ef44e8d87b70b3c8fef8"
+    },
+    "tea-shop.png": {
+      "size": [
+        118,
+        143
+      ],
+      "bytes": 33339,
+      "sha256": "f1a9edc5d5ca2eb5da30602b5fb0004ff176923e83cbcc1673b0bf88e7a156df"
+    },
+    "town.png": {
+      "size": [
+        65,
+        41
+      ],
+      "bytes": 3129,
+      "sha256": "3ad222d98128316d8d90e3bb0cd7dfee2fbceb9a82e1921f09ae93a8764d2d31"
+    },
+    "vacant-blue.png": {
+      "size": [
+        122,
+        141
+      ],
+      "bytes": 33468,
+      "sha256": "c653733bdfe748586e1fc8471481dc819860407d8a608f902e21bc1a0228eaae"
+    },
+    "vacant-brick.png": {
+      "size": [
+        115,
+        140
+      ],
+      "bytes": 30987,
+      "sha256": "cfb35b4c6a7538c5335e16450c4078ecb16d334fe6f59c7c03dbab890623008e"
+    }
+  },
+  "coordinates": "source PNG coordinates; storefront alpha bbox reduced 3:1 nearest, runtime desktop 3x / mobile 2x",
+  "sceneryCrops": {
+    "cloud": [
+      104,
+      82,
+      342,
+      160
+    ],
+    "town": [
+      674,
+      274,
+      804,
+      356
+    ],
+    "brickFace": [
+      340,
+      866,
+      476,
+      894
+    ],
+    "curb": [
+      360,
+      714,
+      648,
+      774
+    ],
+    "bench": [
+      688,
+      650,
+      796,
+      712
+    ],
+    "lamp": [
+      1114,
+      500,
+      1158,
+      724
+    ]
+  }
+}

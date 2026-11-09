@@ -12,6 +12,8 @@ import { emptyManager, parseManager, type ManagerState } from './manager';
 import { emptyChain, parseChain, type ChainState } from './chain';
 import { emptyOrders, parseOrders, type OrdersState } from './orders';
 import { emptyCatGifts, parseCatGifts, type CatGiftState } from './cat-gifts';
+import { emptyRoomProjects, parseRoomProjects, type RoomProjectsState } from './room-projects';
+import { emptyStreetEstate, parseStreetEstate, type StreetEstate } from './streets';
 import {
   INGREDIENTS,
   MENU,
@@ -32,7 +34,7 @@ import { parseTaste, type TasteState } from './taste';
 import { emptyReviews, parseReputation, parseReviews, type Reputation, type ReviewSummary } from './reputation';
 
 export const SAVE_KEY = 'tiny-bean-cafe/save';
-export const SAVE_VERSION = 24;
+export const SAVE_VERSION = 26;
 
 export interface Look {
   skin: number;
@@ -123,6 +125,8 @@ export interface GameState {
   orders: OrdersState;
   /** Little things the resident cats leave on the windowsills (save v24). */
   catGifts: CatGiftState;
+  roomProjects: RoomProjectsState;
+  streets: StreetEstate;
   pets: Pet[];
   reputation: Reputation;
   taste: TasteState;
@@ -132,9 +136,9 @@ export interface GameState {
   served: number;
   items: Record<ItemId, number>;
   upgrades: Record<UpgradeId, number>;
-  /** Connected rooms opened in order, in addition to the original café. */
+  /** Legacy connected rooms, retained only until an in-progress service finishes migration. */
   regions: RegionId[];
-  /** The next rooms, paid for and being built in real time, in order (save v24). */
+  /** Legacy construction bookings; live sessions transfer these to street properties. */
   construction: Construction[];
   /** Whether the kitchen has been built, where cooks bake fresh batches during the day. */
   kitchen: boolean;
@@ -190,6 +194,8 @@ export function createInitialState(now: number): GameState {
     chain: emptyChain(now),
     orders: emptyOrders(),
     catGifts: emptyCatGifts(now),
+    roomProjects: emptyRoomProjects(),
+    streets: emptyStreetEstate(),
     pets: [],
     promotion: null,
     reputation: { recent: [] },
@@ -362,6 +368,8 @@ export function deserialize(raw: string | null, now: number): GameState {
   base.manager = parseManager(data.manager, now);
   base.chain = parseChain(data.chain, now);
   base.orders = parseOrders(data.orders, now);
+  base.roomProjects = parseRoomProjects(data.roomProjects, base, now);
+  base.streets = parseStreetEstate(data.streets, now);
   // Older saves only retain per-dish sales for the current day; carry that
   // evidence forward without inventing a split of the lifetime customer total.
   base.taste = parseTaste(data.taste, num(data.version, 1) < 10 ? base.today.sales : {});

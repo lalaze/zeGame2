@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "real game Streets entry opens full screen scene",
+    "real v26 SaveSession persists purchase and renovation exactly",
+    "real main café returns through shop door",
+    "reload restores building and ongoing renovation",
+    "real game produces no page errors"
+  ],
+  "errors": []
+}

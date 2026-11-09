@@ -15,15 +15,19 @@ export interface ModalOptions {
   icon?: string;
   /** Text-only long dialogs need a keyboard-scrollable body within the focus trap. */
   focusableBody?: boolean;
+  /** Optional layered Escape behavior, including when native controls blur to body. */
+  onEscape?: () => void;
 }
 
 let open: HTMLElement | null = null;
 let releaseFocus: (() => void) | null = null;
 let titleId = 0;
+let releaseEscape: (() => void) | null = null;
 
 export const isModalOpen = () => open !== null;
 
 export function closeModal(): void {
+  releaseEscape?.(); releaseEscape = null;
   open?.remove();
   open = null;
   const release = releaseFocus;
@@ -82,6 +86,14 @@ export function showModal(opts: ModalOptions): void {
   root.append(overlay);
   open = overlay;
   releaseFocus = containDialogFocus(box, overlay);
+  if (opts.onEscape) {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || open !== overlay || event.isComposing) return;
+      event.preventDefault(); event.stopImmediatePropagation(); opts.onEscape?.();
+    };
+    document.addEventListener('keydown', handleEscape, true);
+    releaseEscape = () => document.removeEventListener('keydown', handleEscape, true);
+  }
 }
 
 let toastTimer = 0;
