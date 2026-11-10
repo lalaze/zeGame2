@@ -1,0 +1,5 @@
+STYLE: copy the top-row character of image 1 exactly: the same compact chibi proportions (about 2.3 heads tall), face with two small dark oval eyes and soft blush, hair shape, outfit, colours, outline and the same big-pixel size. True low-resolution pixel art built from large crisp square pixels, each one flat colour, at most three shades per material and one warm dark-brown outline (never pure black). No gradients, no anti-aliasing, no blur, no glow, no ground shadow, no props, no text.
+
+SHEET: all frames in one horizontal row, evenly spaced, each figure fully separate with clear empty space around it, all at the same scale with feet on the same baseline.
+
+EDGES: every figure is fully enclosed by its dark-brown outline, the same crisp outline as in image 1. The background is completely transparent right up to that outline: no pale halo, no soft fringe, no semi-transparent pixels.

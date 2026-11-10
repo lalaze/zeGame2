@@ -1,0 +1,5 @@
+{"type":"thread.started","thread_id":"01a1c4e9-23ee-74c1-ae96-f2284f7cde09"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"I’ll pass the three references and your brief directly to the image generator once."}}
+{"type":"item.completed","item":{"id":"item_1","type":"agent_message","text":"DONE"}}
+{"type":"turn.completed","usage":{"input_tokens":49789,"cached_input_tokens":43392,"cache_write_input_tokens":0,"output_tokens":1247,"reasoning_output_tokens":0}}

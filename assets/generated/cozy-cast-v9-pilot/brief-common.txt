@@ -1,0 +1,27 @@
+Create a production pixel-art character sheet for a cozy cafe management game. The sprites stand and sit inside the cafe room shown in the references (side-on room, furniture in a slight top-down three-quarter view; never isometric).
+
+ATTACHED IMAGES
+1 = approved scene style sample: lighting, palette, pixel size. The seated girl shows how characters should be rendered next to the furniture.
+2 = the current in-game sprites, attached for scale and pose vocabulary only.
+3 = the cafe room these sprites live in.
+4 = master palette. Pick colours from it.
+
+OUTPUT
+One landscape PNG (3:2, 1536x1024), fully TRANSPARENT background. EXACTLY 6 columns and 3 rows of equal cells: 18 separate full-body figures. No labels, numbers, grid lines, props, chairs, tables, cats, ground shadows or backdrop. Every figure sits fully inside its own cell with a clear empty margin on all sides; nothing touches or crosses a neighbouring cell. Same character scale in every cell; feet on one baseline within each row.
+
+Each row is ONE character. Columns, left to right:
+1. front view, standing neutral
+2. front view, walking, left foot forward
+3. RIGHT profile, standing neutral
+4. RIGHT profile, walking mid-stride
+5. rear view, standing neutral
+6. RIGHT-facing, seated on an invisible chair: thighs horizontal, shins vertical, feet low, forearms reaching forward to table height
+
+Row 1: young woman, pale peach skin, short fluffy dark-brown hair, thin round brown glasses, rust-red cardigan over a cream shirt, brown trousers, brown shoes.
+Row 2: young man, light tan skin, long loose dark-brown wavy hair to the shoulders, teal hoodie with cream drawstrings, slate trousers, brown shoes.
+Row 3: woman, deep brown skin, dark-brown hair in a high round bun with a cream headband, mustard dress with a cream collar, blue-grey leggings, brown shoes.
+The same character must keep identical head size, hair, outfit and colours in all six poses.
+
+PIXEL DISCIPLINE (most important)
+In game each figure is only about 76 pixels tall and is seen about 45 pixels tall on a phone. Paint true low-resolution pixel art: build every figure out of large crisp square pixels, roughly 76 big pixels from hair top to shoe sole, each big pixel one flat colour, the same big-pixel size across the whole sheet. At most three shades per material plus one warm dark-brown outline (never pure black). No gradients, no anti-aliasing, no blur, no soft edges, no noise or dithering, no fine fabric texture, no glow. Warm key light from the upper left. Each character must be recognisable from silhouette and colour blocks alone at thumbnail size: clearly different hair shapes and clothing shapes.
+

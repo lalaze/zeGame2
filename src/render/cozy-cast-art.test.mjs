@@ -14,9 +14,9 @@ import { diningDecorationPreview } from './dining-decoration-art';
 import { decorIcon } from './decor-art';
 import { centerpieceSprite } from './table-centerpiece-art';
 
-const base = 'public/art/generated/cozy-cast-v8/';
+const base = 'public/art/generated/cozy-cast-v9/';
 const manifest = () => JSON.parse(fs.readFileSync(base + 'manifest.json', 'utf8'));
-const diningBase = 'public/art/generated/cozy-dining-v4/';
+const diningBase = 'public/art/generated/cozy-dining-v5/';
 const diningManifest = () => JSON.parse(fs.readFileSync(diningBase + 'manifest.json', 'utf8'));
 function palmEdge(frame, meta) {
   const data=pixels(frame);let right=0;
@@ -129,6 +129,44 @@ describe('whole-figure density-2 guest family', () => {
     const duplicate = manifest(); duplicate.characters[1].id = 0; expect(() => validateCastManifest(duplicate)).toThrow();
     const invalid = manifest(); invalid.characters[0].frames[0].hand[1] = NaN; expect(() => validateCastManifest(invalid)).toThrow();
     const legacy = manifest(); legacy.version = 6; expect(() => validateCastManifest(legacy)).toThrow();
+  });
+  it('gives every repainted guest a six-frame walk cycle in each direction, on the standing baseline', () => {
+    const pack = manifest(), allowed = new Set(JSON.parse(fs.readFileSync('docs/art-grid/palette.json')).colors.map(c => c.hex));
+    const repainted = pack.characters.filter(sheet => sheet.cycle);
+    expect(repainted.map(sheet => sheet.id)).toEqual(CUSTOMER_CAST.map(c => c.id));
+    for (const sheet of repainted) {
+      const design = CUSTOMER_CAST[sheet.id], contacts = new Map();
+      const frames = makeBatchCharacter(design.look, 'customer', design.id, (frame, points) => contacts.set(frame, points));
+      const top = frame => { const data = pixels(frame); for (let n = 3; n < data.length; n += 4) if (data[n]) return Math.floor(n / 4 / 80); return -1; };
+      for (const side of ['down', 'up', 'right', 'left']) {
+        expect(frames.walk[side], `${sheet.id}/${side}`).toHaveLength(6);
+        for (const [index, frame] of frames.walk[side].entries()) {
+          const data = pixels(frame), label = `${sheet.id}/${side}/${index}`;
+          expect([frame.width, frame.height, fineSpriteArt(frame).density], label).toEqual([40, 44, 2]);
+          expect(contacts.get(frame).foot, label).toEqual({ x: 20, y: 42 });
+          let ink = 0, bad = 0, floor = 0;
+          for (let n = 0; n < data.length; n += 4) if (data[n + 3]) {
+            ink++; floor = Math.max(floor, Math.floor(n / 4 / 80));
+            const x = n / 4 % 80, y = Math.floor(n / 4 / 80);
+            if (data[n + 3] !== 255 || x === 0 || x === 79 || y === 0 || y === 87 || !allowed.has('#' + Array.from(data.subarray(n, n + 3)).map(v => v.toString(16).padStart(2, '0')).join(''))) bad++;
+          }
+          expect(ink, label).toBeGreaterThan(800); expect(bad, label).toBe(0);
+          expect(floor, `${label}: lowest foot on the ground`).toBe(83);
+          // The head neither jumps nor shrinks while walking: at most a few art pixels of bob.
+          expect(Math.abs(top(frame) - top(frames[side][0])), `${label}: steady head`).toBeLessThanOrEqual(6);
+        }
+        expect(new Set(frames.walk[side]).size, `${sheet.id}/${side}: distinct frames`).toBe(6);
+      }
+      for (let i = 0; i < 6; i++) {
+        const a = pixels(frames.walk.right[i]), b = pixels(frames.walk.left[i]); let equal = true;
+        for (let y = 0; y < 88 && equal; y++) for (let x = 0; x < 80; x++) for (let k = 0; k < 4; k++) if (a[(y * 80 + x) * 4 + k] !== b[(y * 80 + 79 - x) * 4 + k]) equal = false;
+        expect(equal, `${sheet.id}: left mirrors right, frame ${i}`).toBe(true);
+      }
+    }
+    const short = manifest(), cut = short.characters.find(sheet => sheet.cycle); cut.cycle.frames.pop();
+    expect(() => validateCastManifest(short)).toThrow();
+    const moved = manifest(); moved.characters.find(sheet => sheet.cycle).cycle.frames[7].box[1] = 0;
+    expect(() => validateCastManifest(moved)).toThrow();
   });
   it('preserves the authored complete figure without relocating or stretching its head', () => {
     for (const design of CUSTOMER_CAST) {

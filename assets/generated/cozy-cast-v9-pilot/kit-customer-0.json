@@ -1,0 +1,9 @@
+{
+  "title": "顾客「晨读常客」· B 风格整套动作",
+  "intro": "第一位用 Codex GIF 流水线做完整套动作的顾客，放在真实地板上和现在的版本对比。",
+  "id": 0,
+  "front": "assets/generated/cozy-cast-v9-pilot/frames/b-customer-0-walk-front",
+  "back": "assets/generated/cozy-cast-v9-pilot/frames/b-customer-0-walk-back",
+  "right": "assets/generated/cozy-cast-v9-pilot/frames/b-customer-0-walk-right",
+  "seated": "assets/generated/cozy-cast-v9-pilot/frames/b-customer-0-seated"
+}

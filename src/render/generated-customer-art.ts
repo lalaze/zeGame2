@@ -3,7 +3,7 @@ import type { Look } from '../game/state';
 import { fineSpriteArt, registerFineSpriteArt } from './fine-sprite-art';
 import type { CharacterFrames, Role } from './sprites';
 
-/** The archived density-4 pack covers the original 30 guests only. New guests use cozy-cast-v8. */
+/** The archived density-4 pack covers the original 30 guests only. New guests use cozy-cast-v9. */
 export const LEGACY_GENERATED_CUSTOMER_CAST = Object.freeze(CUSTOMER_CAST.slice(0, 30));
 const WALK_DIRECTIONS = ['down', 'up', 'right'] as const;
 const WALK_STATES = ['stand', 'stepA', 'stepB'] as const;

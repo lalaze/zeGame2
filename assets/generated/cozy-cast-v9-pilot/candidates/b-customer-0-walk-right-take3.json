@@ -1,0 +1,20 @@
+{
+  "tool": "codex exec: built-in image generation, frames assembled by Codex",
+  "thread": "01a1c453-8a1b-7362-ab4d-f24084db5ffe",
+  "frames": 6,
+  "cell": 256,
+  "prompts": [
+    "assets/generated/cozy-cast-v9-pilot/prompts/character-0.txt",
+    "assets/generated/cozy-cast-v9-pilot/prompts/action-walk-right.txt",
+    "assets/generated/cozy-cast-v9-pilot/prompts/style-b.txt"
+  ],
+  "references": [
+    "assets/generated/cozy-cast-v9-pilot/candidates/direction-b-1.png"
+  ],
+  "generatedSheets": [
+    "/Users/lalaze/.codex/generated_images/01a1c453-8a1b-7362-ab4d-f24084db5ffe/exec-79d280ca-09c4-41f3-b1f1-c5d80ff94002.png"
+  ],
+  "codexSaid": "DONE  [out.gif](out.gif) has slight torso variation, extra shading, a higher final knee lift, and colours approximated by the GIF palette.",
+  "sha256": "770b4e5890df3f5a09521e3d4f0a69976c84e50273f314c27b9eab40b0424680",
+  "seconds": 204
+}

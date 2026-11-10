@@ -1,0 +1,33 @@
+{
+  "tool": "codex exec: one built-in image generation, rows cut into GIFs by Codex",
+  "thread": "01a1c45b-725f-7d53-a5f1-e31c10895905",
+  "rows": [
+    "walk-front",
+    "walk-back",
+    "walk-right",
+    "seated"
+  ],
+  "cols": 7,
+  "cell": 256,
+  "prompts": [
+    "assets/generated/cozy-cast-v9/prompts/customer-19.txt"
+  ],
+  "references": [
+    "assets/generated/cozy-cast-v9/style-b.png",
+    "assets/generated/cozy-cast-v9/refs/customer-19.png"
+  ],
+  "generatedSheets": [
+    "/Users/lalaze/.codex/generated_images/01a1c45b-725f-7d53-a5f1-e31c10895905/exec-d9f51b2c-2b8d-41e8-a8f3-1396d39dd23f.png"
+  ],
+  "imageCalls": 1,
+  "missing": [],
+  "codexSaid": "Created all five files in the current directory.  The generated artwork has soft edges and pose/chair variations; GIF encoding required palette quantization and binary transparency.  DONE",
+  "sha256": {
+    "sheet.png": "287bb34aab7daa5d2c6eda0cfac70714cc54ee9ccbaec49f8b2b981d445f06f3",
+    "walk-front.gif": "2d19132ea57da1bd77b2a619ec4b49d8bbd1e8fb97bac00bc7716e9704a9380f",
+    "walk-back.gif": "5bc46bc2458f7b67010cb190c9775816a2e466792644ee62f695c994e95ab7f8",
+    "walk-right.gif": "42b8ccf4773e04e4b5fd942c43892843331fb32962545555633185d311b3cae6",
+    "seated.gif": "81c852659ce586af8a20488273a0569cbed36cb9f1db2c706326664fde10b1b5"
+  },
+  "seconds": 378
+}

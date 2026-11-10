@@ -1,0 +1,341 @@
+{
+  "sheet": "assets/generated/cozy-cast-v9-pilot/candidates/direction-c-1.png",
+  "size": [
+    1536,
+    1024
+  ],
+  "keyedBackdrop": false,
+  "frame": [
+    80,
+    88
+  ],
+  "rows": [
+    {
+      "row": 0,
+      "file": "assets/generated/cozy-cast-v9-pilot/frames/direction-c-1-row0.png",
+      "scale": 0.2746,
+      "standingHeight": 77,
+      "colours": 58,
+      "sourcePixelsPerGamePixel": 3.64,
+      "paintedPixelSize": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "meanPaletteDistance": 0.0177,
+      "frames": [
+        {
+          "box": [
+            22,
+            7,
+            35,
+            77
+          ],
+          "sourceBox": [
+            96,
+            33,
+            223,
+            315
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            22,
+            6,
+            35,
+            78
+          ],
+          "sourceBox": [
+            342,
+            32,
+            470,
+            316
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            23,
+            7,
+            33,
+            77
+          ],
+          "sourceBox": [
+            579,
+            34,
+            700,
+            316
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            22,
+            7,
+            35,
+            77
+          ],
+          "sourceBox": [
+            827,
+            34,
+            955,
+            316
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            23,
+            6,
+            34,
+            78
+          ],
+          "sourceBox": [
+            1071,
+            33,
+            1194,
+            316
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            22,
+            9,
+            38,
+            72
+          ],
+          "sourceBox": [
+            1303,
+            54,
+            1443,
+            316
+          ],
+          "sourcePixel": 1
+        }
+      ]
+    },
+    {
+      "row": 1,
+      "file": "assets/generated/cozy-cast-v9-pilot/frames/direction-c-1-row1.png",
+      "scale": 0.2609,
+      "standingHeight": 78,
+      "colours": 55,
+      "sourcePixelsPerGamePixel": 3.83,
+      "paintedPixelSize": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "meanPaletteDistance": 0.0204,
+      "frames": [
+        {
+          "box": [
+            22,
+            6,
+            35,
+            78
+          ],
+          "sourceBox": [
+            91,
+            360,
+            224,
+            659
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            22,
+            6,
+            35,
+            78
+          ],
+          "sourceBox": [
+            339,
+            360,
+            472,
+            659
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            24,
+            6,
+            32,
+            78
+          ],
+          "sourceBox": [
+            579,
+            360,
+            701,
+            658
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            19,
+            6,
+            41,
+            78
+          ],
+          "sourceBox": [
+            809,
+            361,
+            965,
+            659
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            23,
+            6,
+            33,
+            78
+          ],
+          "sourceBox": [
+            1072,
+            360,
+            1199,
+            659
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            21,
+            8,
+            39,
+            74
+          ],
+          "sourceBox": [
+            1299,
+            377,
+            1449,
+            659
+          ],
+          "sourcePixel": 1
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "file": "assets/generated/cozy-cast-v9-pilot/frames/direction-c-1-row2.png",
+      "scale": 0.2557,
+      "standingHeight": 78,
+      "colours": 66,
+      "sourcePixelsPerGamePixel": 3.91,
+      "paintedPixelSize": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "meanPaletteDistance": 0.0196,
+      "frames": [
+        {
+          "box": [
+            22,
+            6,
+            36,
+            78
+          ],
+          "sourceBox": [
+            87,
+            694,
+            228,
+            999
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            23,
+            7,
+            34,
+            77
+          ],
+          "sourceBox": [
+            341,
+            699,
+            475,
+            1001
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            24,
+            8,
+            31,
+            76
+          ],
+          "sourceBox": [
+            573,
+            700,
+            696,
+            999
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            20,
+            8,
+            39,
+            76
+          ],
+          "sourceBox": [
+            806,
+            701,
+            957,
+            1000
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            22,
+            7,
+            36,
+            77
+          ],
+          "sourceBox": [
+            1060,
+            699,
+            1200,
+            1000
+          ],
+          "sourcePixel": 1
+        },
+        {
+          "box": [
+            20,
+            11,
+            41,
+            70
+          ],
+          "sourceBox": [
+            1289,
+            726,
+            1450,
+            1000
+          ],
+          "sourcePixel": 1
+        }
+      ]
+    }
+  ]
+}

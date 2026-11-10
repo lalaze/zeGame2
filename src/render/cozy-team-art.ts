@@ -15,7 +15,8 @@ export type TeamContacts = { foot: Point; head: Point; headHeight: number; headS
   legExtension: number; carryContact?: Point; seatContact?: Point; petContact?: Point };
 /**
  * Hairstyle families, in save order (a saved look stores the index). The first eight are
- * the original cozy-team-v7 figures; the rest were added in cozy-team-v8, men first.
+ * the original eight figures; the rest were added later, men first. All were repainted as
+ * pixel art with walk cycles in cozy-team-v9.
  */
 export const TEAM_HAIRSTYLES = ['short', 'bun', 'long', 'bob', 'pony', 'sidepart', 'braids', 'waves',
   'crop', 'curls', 'undercut', 'slick', 'beard', 'buzz', 'pixie', 'buns', 'afro', 'bangs', 'twintails', 'curtain',
@@ -27,6 +28,11 @@ export const TEAM_HAIRSTYLES = ['short', 'bun', 'long', 'bob', 'pony', 'sidepart
 export const TEAM_BASE_STYLES = 8;
 /** A look whose sheet failed keeps its stand-in this long before trying again (the scene asks every frame). */
 const STYLE_RETRY_MS = 30_000;
+/** A walking sheet holds nine standing poses (stand, step, step for front, back and right) and then a six-frame walk cycle for each of those views. */
+export const TEAM_CYCLE_FRAMES = 6;
+const STANDING_POSES = 9, WALK_POSES = STANDING_POSES + TEAM_CYCLE_FRAMES * 3;
+/** 0 front, 1 back, 2 right profile. */
+const poseView = (index: number) => index < STANDING_POSES ? Math.floor(index / 3) : Math.floor((index - STANDING_POSES) / TEAM_CYCLE_FRAMES);
 /** Each seated sheet holds four hairstyles, three poses each. */
 const SEATED_PER_SHEET = 4;
 export const TEAM_STANDING_SIZE = Object.freeze({ width: 32, height: 44, footX: 16, footY: 42, figureHeight: 40 });
@@ -49,7 +55,7 @@ const context = (c: HTMLCanvasElement) => c.getContext('2d', { willReadFrequentl
 const mod = (n: number, length: number) => ((Math.trunc(n) % length) + length) % length;
 
 export function validateTeamManifest(m: TeamManifest): void {
-  if (m.families?.length !== TEAM_HAIRSTYLES.length || m.families.some(s => s.bounds?.length !== 9) || m.chef?.bounds?.length !== 9 ||
+  if (m.families?.length !== TEAM_HAIRSTYLES.length || m.families.some(s => s.bounds?.length !== WALK_POSES) || m.chef?.bounds?.length !== WALK_POSES ||
       m.seated?.length !== TEAM_HAIRSTYLES.length / SEATED_PER_SHEET || m.seated.some(s => s.bounds?.length !== SEATED_PER_SHEET * 3) || m.chefSeated?.bounds?.length !== 3)
     throw Error('Incomplete cozy team poses');
   for (const sheet of [...m.families, m.chef, ...m.seated, m.chefSeated]) {
@@ -64,7 +70,7 @@ export function cozyTeamStyleReady(style: number): boolean {
 }
 /** Everything the café needs to open; owner looks arrive through preloadCozyTeamStyle. */
 export function cozyTeamReady(): boolean {
-  return baseStyles().every(cozyTeamStyleReady) && chef.length === 9 && chefSeated.length === 3;
+  return baseStyles().every(cozyTeamStyleReady) && chef.length === WALK_POSES && chefSeated.length === 3;
 }
 /** The always-loaded family a look wears while its own sheet is on its way. */
 export function cozyTeamStandIn(style: number): number { return mod(style, TEAM_BASE_STYLES); }
@@ -72,11 +78,10 @@ export function clearCozyTeam(): void {
   epoch++; families = []; seated = []; chef = []; chefSeated = []; pending = null; manifestLoad = null;
   sheetImages.clear(); styleLoads.clear(); gridCache = new WeakMap();
 }
-const assetBase = () => import.meta.env.BASE_URL + 'art/generated/cozy-team-v8/';
+const assetBase = () => import.meta.env.BASE_URL + 'art/generated/cozy-team-v9/';
 function teamManifest(): Promise<TeamManifest> {
   if (manifestLoad) return manifestLoad;
   const generation = epoch;
-  // The v8 manifest lists the v7 sheets (by relative path) as well as its own.
   manifestLoad = (async () => {
     const response = await fetch(assetBase() + 'manifest.json');
     if (!response.ok) throw Error('Missing cozy team manifest');
@@ -209,9 +214,10 @@ type SetContacts = (frame: HTMLCanvasElement, contacts: TeamContacts) => void;
 function standingFrame(poses: Pose[], look: Look, role: Exclude<Role, 'customer'>, set: SetContacts, index: number, mirrored = false): HTMLCanvasElement {
   const { scale, width, height, foot } = teamStandingTransform(poses), p = poses[index];
   const dx = foot.x - p.width * scale / 2, dy = foot.y - p.height * scale;
-  const art = paintPose(p, look, role, false, index >= 3 && index < 6, dx, dy, scale, width, height);
+  const view = poseView(index);
+  const art = paintPose(p, look, role, false, view === 1, dx, dy, scale, width, height);
   const painted = mirrored ? mirror(art) : art, frame = publish(painted);
-  const hand = p.anchors.hand ?? { x: p.width * (index >= 6 ? .80 : .50), y: p.height * .66 };
+  const hand = p.anchors.hand ?? { x: p.width * (view === 2 ? .80 : .50), y: p.height * .66 };
   set(frame, { foot, head: { x: foot.x, y: top(painted) }, headHeight: dy + (p.anchors.neck?.y ?? p.height * (role === 'cook' ? .48 : .46)) * scale - top(painted) + 1, headScale: scale, bodyScale: scale, legExtension: 0,
     carryContact: { x: mirrored ? width - dx - hand.x * scale : dx + hand.x * scale, y: dy + hand.y * scale } });
   return frame;
@@ -246,8 +252,14 @@ export function makeCozyTeam(look: Look, role: Exclude<Role, 'customer'>, set: S
     set(frame, { foot: floorContact, head: { x: flip(neck).x, y: top(painted) }, headHeight: neck.y - top(painted) + 1, seatContact: flip(hip), headScale: scale, bodyScale: scale, legExtension: 0, ...(petContact ? { petContact } : {}) });
     return frame;
   };
-  // The source front/back steps share the same leading leg. Mirror the second
-  // authored step as a whole figure to alternate feet without lengthening limbs.
-  const down = [make(0), make(1), make(1, true)], up = [make(3), make(4), make(4, true)], right = [6, 7, 8].map(i => make(i)), left = [6, 7, 8].map(i => make(i, true));
-  return { down, up, right, left, stand: down[0], sitRight: seat(0), sitLeft: seat(0, true), sitPetRight: [seat(1), seat(2)], sitPetLeft: [seat(1, true), seat(2, true)] };
+  const down = [0, 1, 2].map(i => make(i)), up = [3, 4, 5].map(i => make(i)), right = [6, 7, 8].map(i => make(i)), left = [6, 7, 8].map(i => make(i, true));
+  // Walk cycles are painted on first use, a direction at a time: a figure that only ever
+  // stands behind the counter never pays for them.
+  const cycle = (view: number, mirrored = false) => {
+    let frames: HTMLCanvasElement[] | null = null;
+    return () => frames ??= Array.from({ length: TEAM_CYCLE_FRAMES }, (_, n) => make(STANDING_POSES + view * TEAM_CYCLE_FRAMES + n, mirrored));
+  };
+  const cycles = { down: cycle(0), up: cycle(1), right: cycle(2), left: cycle(2, true) };
+  const walk = { get down() { return cycles.down(); }, get up() { return cycles.up(); }, get right() { return cycles.right(); }, get left() { return cycles.left(); } };
+  return { down, up, right, left, walk, stand: down[0], sitRight: seat(0), sitLeft: seat(0, true), sitPetRight: [seat(1), seat(2)], sitPetLeft: [seat(1, true), seat(2, true)] };
 }

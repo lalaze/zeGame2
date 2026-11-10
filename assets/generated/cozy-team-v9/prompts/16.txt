@@ -1,0 +1,29 @@
+Create a production pixel-art animation sheet for ONE member of a cozy cafe's staff.
+
+ATTACHED IMAGES
+1 = the approved pixel-art style for the staff. Paint exactly like this: the same big square pixels, crisp dark-brown outline, face (two dark oval eyes, soft blush, small smile), body proportions and flat colour blocks.
+2 = the current sprites of this staff look. Use image 2 only for WHO this is: the hairstyle (and any facial hair) and the outfit design. Do NOT copy its soft painted rendering.
+3 = the current seated poses of this look. Use image 3 for the three seated poses and the chair, repainted in the style of image 1.
+
+CHARACTER, identical in all 24 figures: rounded chibi proportions, head about 45% of the total height, short body and legs, mitten hands, empty hands. Light peach skin with rosy cheeks. Cream collared shirt with rolled sleeves. Dark sage-green bib apron with two small brass buttons, one front pocket, crossed back straps and a back bow. Cream trousers. Brown shoes. No hat, glasses or other accessories.
+HAIR: chestnut brown. Woman: big round voluminous curly chestnut afro, a rounded cloud silhouette of tight curls surrounding the head. Same rich chestnut color as reference, no black hair. Keep big afro within each cell with transparent margins, same body scale. Back row shows full round curly afro and apron bow below.
+
+COLOURS: flat colours only, taken from this list and nothing else.
+skin #FAC498, skin shadow #E4A078, blush #F08C82
+hair light #C47848, hair #9C5836, hair shadow #703A26
+shirt and trousers cream #F0E0C0, cream light #FCF2DA, cream shadow #D6C09C
+apron sage #60764C, sage light #7C9262, sage shadow #465A3A
+shoes #80462C, shoe shadow #5C3020, brass #E8B650
+chair wood #E8A038, chair wood shadow #C87C24, chair cushion #3A7062
+outline #301B16, eyes #140C0C, eye glint #FFFFFF
+Hair uses ONLY the three hair colours. Skin uses ONLY the two skin colours and the blush.
+
+SHEET: one landscape image, fully transparent background, a grid of 7 columns and 4 rows of equal cells, all figures at the same scale. Every figure is fully inside its own cell with clear empty space on all sides; nothing touches or overlaps a neighbour. No labels, numbers, grid lines, ground shadows or backdrop.
+Row 1, FRONT view (facing the viewer). Column 1: standing still, feet together, arms at the sides. Columns 2 to 7: a walk cycle in place: right foot stepping forward; right foot planted with the body one pixel lower; left foot lifting; left foot stepping forward; left foot planted with the body one pixel lower; right foot lifting.
+Row 2, BACK view (facing away, no face visible): the same seven poses seen from behind. The crossed apron straps and the apron bow are visible.
+Row 3, strict RIGHT profile. Column 1: standing still. Columns 2 to 7: a walk cycle in place: right foot contact in front; right leg passing under the body; left leg lifting forward; left foot contact in front; left leg passing under the body; right leg lifting forward. Arms swing gently opposite to the legs.
+In rows 1 to 3 the character stays upright, never crouching, squatting or leaning. Head, hair and torso keep the same size, shape and facing; only arms and legs change. A lifted foot rises only a little.
+Row 4 has ONLY THREE figures, in columns 1, 2 and 3; columns 4 to 7 of row 4 stay completely empty and transparent. The three figures sit on the wooden chair of image 3, seen in the same three-quarter view as image 3 (body turned toward the lower right, backrest behind on the left). The chair is identical in all three. Column 1: sitting upright, both hands resting on the lap. Column 2: leaning forward, one arm reaching forward and down past the knees. Column 3: the same lean, the hand reaching a little lower.
+
+PIXEL DISCIPLINE (most important): true low-resolution pixel art built from large crisp square pixels, each one a single flat colour from the list above, the same pixel size across the whole sheet, roughly 80 big pixels from hair top to shoe sole. No gradients, no anti-aliasing, no blur, no noise or dithering, no texture, no glow.
+EDGES: every figure is fully enclosed by the dark outline; the background is completely transparent right up to it, with no halo or soft fringe.

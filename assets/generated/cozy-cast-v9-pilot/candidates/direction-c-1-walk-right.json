@@ -1,0 +1,18 @@
+{
+  "tool": "codex exec: built-in image generation, frames assembled by Codex",
+  "thread": "01a1c445-0ae5-7f73-8f19-eef44e3173ab",
+  "frames": 6,
+  "cell": 256,
+  "prompts": [
+    "assets/generated/cozy-cast-v9-pilot/walk-right.txt"
+  ],
+  "references": [
+    "assets/generated/cozy-cast-v9-pilot/candidates/direction-c-1.png"
+  ],
+  "generatedSheets": [
+    "/Users/lalaze/.codex/generated_images/01a1c445-0ae5-7f73-8f19-eef44e3173ab/exec-cab360d7-b308-4ac0-87e9-fb3c07e4e084.png"
+  ],
+  "codexSaid": "DONE  out.gif is complete; GIF encoding required palette quantization, and the generated artwork has slight texture variations from the reference.",
+  "sha256": "010cb9369ec22b198ede225f8d3d32ff13438655dedf78cb43321c9ad38734af",
+  "seconds": 222
+}

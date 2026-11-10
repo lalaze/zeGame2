@@ -209,13 +209,18 @@ export function segmentTeamPose(p: PoseImage, o: SegmentOptions): PoseSegmentati
     // Furniture is authored into seated poses; it keeps its own (snapped) colours.
     const nearHand = ((x - hand.x) / (width * .18)) ** 2 + ((y - hand.y) / (height * .12)) ** 2 < 1;
     const furniture = o.sit && !nearHand && ((y > height * .31 && x < neckX - width * .17) || (y > hipY && x < width * .50));
+    // The apron is known by its colour, so it is claimed before the chair's zone: on a seated
+    // figure it drapes over the lap, well inside the area the chair otherwise owns. The cook's
+    // apron is a warm brown like the chair, so golden wood (as in hairMask) is ruled out first.
+    const torso = y > neckY - height * (cook ? .025 : .04) && y < hipY + height * .07;
+    const wood = o.sit && b / r < .25 && g / r > .48;
+    const apron = cook ? !wood && r > g * 1.15 && g > b * 1.12 && r > 95 && r - g > 32 : g > r * .85 && g > b * 1.18 && r < 185;
     let m: number = MATERIAL.other;
     if (skin[n]) m = MATERIAL.skin;
     else if (hair[n]) m = MATERIAL.hair;
     else if (lum < INK_LUMA) m = MATERIAL.ink;
+    else if (torso && apron) m = MATERIAL.cloth;
     else if (furniture) m = MATERIAL.other;
-    else if (!cook && y > neckY - height * .04 && y < hipY + height * .07 && g > r * .85 && g > b * 1.18 && r < 185) m = MATERIAL.cloth;
-    else if (cook && y > neckY - height * .025 && y < hipY + height * .07 && r > g * 1.15 && g > b * 1.12 && r > 95 && r - g > 32) m = MATERIAL.cloth;
     else if (y > hipY - height * .035 && y < height * (o.sit ? .90 : .91) && (!o.sit || x > width * .43) && r > g && g > b && g / r > .55 && b / r > .27) m = MATERIAL.pants;
     material[n] = m;
     if (m === MATERIAL.other) tone[n] = nearestOther(r, g, b);
@@ -342,8 +347,10 @@ function shadeTones(p: PoseImage, face: Island, material: Uint8Array, tone: Uint
     const below = (share: number) => { for (let v = 0, seen = 0; v < 256; v++) { seen += histogram[v]; if (seen >= total * share) return v; } return 255; };
     const above = (share: number) => { for (let v = 255, seen = 0; v >= 0; v--) { seen += histogram[v]; if (seen >= total * share) return v; } return 0; };
     const cuts = [below(deep), below(deep + shadow), above(light + highlight), above(highlight)];
+    // Compare the same rounded brightness the histogram counted: a flat colour whose brightness
+    // rounds up would otherwise fall below its own cut and turn a whole apron into shadow.
     for (let n = 0; n < material.length; n++) if (material[n] === m) {
-      const v = lum(n); tone[n] = v < cuts[0] ? 0 : v < cuts[1] ? 1 : v > cuts[3] ? 4 : v > cuts[2] ? 3 : BASE;
+      const v = Math.round(lum(n)); tone[n] = v < cuts[0] ? 0 : v < cuts[1] ? 1 : v > cuts[3] ? 4 : v > cuts[2] ? 3 : BASE;
     }
   }
 }

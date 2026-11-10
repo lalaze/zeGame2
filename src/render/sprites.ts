@@ -674,6 +674,22 @@ export interface CharacterFrames {
   sitPetRight: readonly [HTMLCanvasElement, HTMLCanvasElement];
   sitPetLeft: readonly [HTMLCanvasElement, HTMLCanvasElement];
   stand: HTMLCanvasElement;
+  /** A full walk cycle per direction, for figures that have one. It replaces stand/stepA/stepB while walking. */
+  walk?: Record<'down' | 'up' | 'left' | 'right', HTMLCanvasElement[]>;
+}
+/** Distance walked during one full walk cycle (two steps), in the units of a walker's stride. */
+export const WALK_CYCLE_STRIDE = 20;
+/**
+ * The frame a figure shows after walking `stride`. A painted cycle plays every frame once per
+ * two steps and carries its own rise and fall; without one the figure alternates its two step
+ * poses through the standing pose and bobs a pixel on each step.
+ */
+export function walkFrame(frames: CharacterFrames, facing: Facing, stride: number, walking: boolean): { frame: HTMLCanvasElement; bob: number } {
+  if (!walking) return { frame: frames[facing][0], bob: 0 };
+  const cycle = frames.walk?.[facing];
+  if (cycle?.length) return { frame: cycle[Math.floor(Math.max(0, stride) * cycle.length / WALK_CYCLE_STRIDE) % cycle.length], bob: 0 };
+  const pose = [1, 0, 2, 0][Math.floor(Math.max(0, stride) / (WALK_CYCLE_STRIDE / 4)) % 4];
+  return { frame: frames[facing][pose], bob: pose ? 1 : 0 };
 }
 export const CHAR_H = 28;
 const charCache = new Map<string, CharacterFrames>();

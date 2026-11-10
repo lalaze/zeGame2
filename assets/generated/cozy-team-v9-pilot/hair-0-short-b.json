@@ -1,0 +1,16 @@
+{
+  "tool": "codex exec built-in image generation",
+  "thread": "01a1c468-c8c8-7a63-a9ab-6a0e1ec40c34",
+  "resumed": false,
+  "prompts": [
+    "assets/generated/cozy-team-v9-pilot/family-brief.txt"
+  ],
+  "references": [
+    "assets/generated/cozy-cast-v9/style-b.png",
+    "public/art/generated/cozy-team-v7/hair-0-short-v1.png"
+  ],
+  "original": "/Users/lalaze/.codex/generated_images/01a1c468-c8c8-7a63-a9ab-6a0e1ec40c34/exec-e86cc4cd-b7cf-4626-bf98-5e9f2651ee39.png",
+  "extraImagesThisRun": [],
+  "sha256": "d66772ebf6d319dddb0d07ef12f770fbd1a35bc9fedb3c7b9880c19c8659f793",
+  "seconds": 62
+}

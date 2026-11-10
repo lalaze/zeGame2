@@ -1,0 +1,2 @@
+STYLE DIRECTION A - match the approved sample
+Render the people like the seated girl in image 1, NOT like image 2. About 3 heads tall; the head is only a little wider than the shoulders. Simple calm face: two small dark oval eyes with no white sclera, no eyelashes and no large anime eyes, a soft blush, a tiny or absent mouth. Natural hair volume painted as a few large shapes. Soft rounded body with readable arms and legs, hands as small mitten shapes. Glasses are a thin one-pixel frame with no lens glare.

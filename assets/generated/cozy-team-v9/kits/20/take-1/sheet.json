@@ -1,0 +1,17 @@
+{
+  "tool": "codex exec built-in image generation",
+  "thread": "01a1c4e6-bf47-7661-92e4-8c9ca01f46ef",
+  "resumed": false,
+  "prompts": [
+    "assets/generated/cozy-team-v9/prompts/20.txt"
+  ],
+  "references": [
+    "assets/generated/cozy-team-v9/style-b-staff.png",
+    "assets/generated/cozy-team-v8/hair-20-fauxhawk-v1.png",
+    "assets/generated/cozy-team-v9/refs/20-seated.png"
+  ],
+  "original": "/Users/lalaze/.codex/generated_images/01a1c4e6-bf47-7661-92e4-8c9ca01f46ef/exec-7c92c780-b642-4bc2-b03a-3c2fb77188c3.png",
+  "extraImagesThisRun": [],
+  "sha256": "58a50ddd4366c311fce8755cb3aee665608f39adccdb44284c92f018b47d148d",
+  "seconds": 157
+}

@@ -1,0 +1,19 @@
+Create a production pixel-art animation sheet for ONE customer of a cozy cafe management game.
+
+ATTACHED IMAGES
+1 = the approved style sheet. Paint in exactly this style: compact chibi build about 2.3 heads tall, face with two small dark oval eyes and a soft blush, hair as a few big clean shapes, flat readable colour blocks, a crisp warm dark-brown outline, the same big-pixel size.
+2 = the current in-game sprites of THIS customer, enlarged (front, back, right profile, and seated on the cafe chair). Use image 2 only for WHO this is: hairstyle and hair colour, skin tone, outfit, accessories, and for the chair. Do NOT copy its rendering: no large glossy eyes, no soft shading, no fuzzy texture.
+
+CHARACTER: warm brown skin, dark-brown high ponytail with pink bow, muted blue cardigan over cream shirt, slate trousers, brown shoes. Head size, hair shape, outfit, accessories and every colour stay identical in all 28 figures. Accessories such as glasses, bows, headbands, hats and satchels appear in every pose where they would be visible.
+
+SHEET: one landscape image, fully transparent background, EXACTLY 7 columns and 4 rows of equal cells, 28 separate figures, all at the same scale. Every figure is fully inside its own cell with clear empty space on all sides; nothing touches or overlaps a neighbour. No labels, numbers, grid lines, ground shadows or backdrop.
+
+Row 1, FRONT view (facing the viewer). Column 1: standing still, feet together, arms at the sides. Columns 2 to 7: a walk cycle in place: right foot stepping forward; right foot planted with the body one pixel lower; left foot lifting; left foot stepping forward; left foot planted with the body one pixel lower; right foot lifting.
+Row 2, BACK view (facing away, no face visible): the same seven poses seen from behind.
+Row 3, RIGHT profile. Column 1: standing still. Columns 2 to 7: a walk cycle in place: right foot contact in front; right leg passing under the body; left leg lifting forward; left foot contact in front; left leg passing under the body; right leg lifting forward. Arms swing gently opposite to the legs.
+In rows 1 to 3 the character stays upright, never crouching, squatting or leaning. Head, hair and torso keep the same size, shape and facing; only arms and legs change. A lifted foot rises only a little.
+Row 4, SEATED on the cafe chair from image 2 (honey-wood dining chair, sage-green cushion, backrest on the left), the character facing RIGHT in profile. The chair is drawn in all seven cells, identical in size, shape and position; hips, legs and feet do not move. Column 1: sitting upright, both forearms reaching forward at table height (no table drawn). Column 2: leaning forward, the near arm lowered beside the knees to pet a cat (no cat drawn), eyes open. Column 3: the same lean, hand a little lower, eyes closed in a happy smile. Column 4: sitting upright, holding a small cream coffee cup at chest height. Column 5: raising the cup toward the mouth. Column 6: sipping, the cup tilted slightly at the lips. Column 7: lowering the cup back to chest height.
+
+PIXEL DISCIPLINE (most important): in game each figure is only about 76 pixels tall and is seen about 45 pixels tall on a phone. Paint true low-resolution pixel art: every figure is built from large crisp square pixels, roughly 76 big pixels from hair top to shoe sole, each big pixel one flat colour, the same big-pixel size across the whole sheet. At most three shades per material plus one warm dark-brown outline (never pure black). No gradients, no anti-aliasing, no blur, no noise or dithering, no fine fabric texture, no glow. Warm key light from the upper left.
+
+EDGES: every figure is fully enclosed by its dark-brown outline. The background is completely transparent right up to that outline: no pale halo, no soft fringe, no semi-transparent pixels.

@@ -1,0 +1,17 @@
+{
+  "tool": "codex exec built-in image generation",
+  "thread": "01a1c4db-92d1-7852-8492-ce707fa145c5",
+  "resumed": false,
+  "prompts": [
+    "assets/generated/cozy-team-v9/prompts/chef.txt"
+  ],
+  "references": [
+    "assets/generated/cozy-team-v9/style-b-staff.png",
+    "public/art/generated/cozy-team-v7/chef-walk.png",
+    "public/art/generated/cozy-team-v7/chef-seated.png"
+  ],
+  "original": "/Users/lalaze/.codex/generated_images/01a1c4db-92d1-7852-8492-ce707fa145c5/exec-15f724c4-9f08-48ec-a788-4389cfdb9036.png",
+  "extraImagesThisRun": [],
+  "sha256": "0fc8fc371568de85817548b6fa9483386b5c5389d239c76c1d381d54cc0b8bd4",
+  "seconds": 104
+}

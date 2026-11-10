@@ -2,8 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync, statSync } from 'node:fs';
 import { TEAM_BASE_STYLES, TEAM_HAIRSTYLES, TEAM_STANDING_SIZE, clearCozyTeam, cozyTeamReady, cozyTeamStyleReady, preloadCozyTeam, preloadCozyTeamStyle, teamStandingTransform, validateTeamManifest, wantCozyTeamStyle, type TeamManifest } from './cozy-team-art';
 
-// The v8 manifest lists every family; v7 sheets are referenced from it by relative path.
-const manifest = (): TeamManifest => JSON.parse(readFileSync('public/art/generated/cozy-team-v8/manifest.json', 'utf8'));
+const manifest = (): TeamManifest => JSON.parse(readFileSync('public/art/generated/cozy-team-v9/manifest.json', 'utf8'));
 
 describe('whole-figure cozy team art', () => {
   it('keeps every existing hairstyle ID in place and all authored animation poses', () => {
@@ -14,7 +13,7 @@ describe('whole-figure cozy team art', () => {
     const m = manifest();
     expect(() => validateTeamManifest(m)).not.toThrow();
     for (const sheet of [...m.families, m.chef, ...m.seated, m.chefSeated]) {
-      const png = readFileSync(`public/art/generated/cozy-team-v8/${sheet.file}`);
+      const png = readFileSync(`public/art/generated/cozy-team-v9/${sheet.file}`);
       expect(png.subarray(1, 4).toString()).toBe('PNG');
       const width = png.readUInt32BE(16), height = png.readUInt32BE(20);
       for (const [x, y, r, b] of sheet.bounds) {
@@ -81,7 +80,7 @@ describe('loading owner looks on demand', () => {
   it('decodes one look when asked, sharing its seated sheet with its neighbour', async () => {
     await preloadCozyTeam(); requested.length = 0;
     await Promise.all([preloadCozyTeamStyle(12), preloadCozyTeamStyle(13)]);
-    expect(names().sort()).toEqual(['hair-12-beard-v1.png', 'hair-13-buzz-v1.png', 'seated-d.png']);
+    expect(names().sort()).toEqual(['hair-12-beard-v2.png', 'hair-13-buzz-v2.png', 'seated-d-v2.png']);
     expect(cozyTeamStyleReady(12)).toBe(true);
     expect(cozyTeamStyleReady(14)).toBe(false);
   });
@@ -98,6 +97,6 @@ describe('loading owner looks on demand', () => {
   });
   it('keeps the owner-only sheets small enough to ship', () => {
     for (const sheet of [...manifest().families.slice(TEAM_BASE_STYLES), ...manifest().seated.slice(TEAM_BASE_STYLES / 4)])
-      expect(statSync(`public/art/generated/cozy-team-v8/${sheet.file}`).size).toBeLessThan(200_000);
+      expect(statSync(`public/art/generated/cozy-team-v9/${sheet.file}`).size).toBeLessThan(200_000);
   });
 });

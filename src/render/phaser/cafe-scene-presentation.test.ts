@@ -8,7 +8,7 @@ vi.mock('./textures', () => ({ baked: (_manager: unknown, key: string) => key, c
 vi.mock('../sprites', () => {
   const sprite = (name: string) => ({ name, width: 18, height: 28 });
   const frames = { down: [sprite('down')], up: [sprite('up')], left: [sprite('left')], right: [sprite('right')], sitRight: sprite('sit-right'), sitLeft: sprite('sit-left') };
-  return { CHAR_H: 28, OUTLINE: '#39281f', character: () => frames, itemIcon: () => ({ name: 'food', width: 8, height: 8 }), catFrames: () => ({}), crownSprite: () => sprite('crown'), dropSprite: () => sprite('drop'), heartSprite: () => sprite('heart'), pixelSprite: () => sprite('pixel') };
+  return { CHAR_H: 28, OUTLINE: '#39281f', walkFrame: (f: Record<string, unknown[]>, facing: string) => ({ frame: f[facing][0], bob: 0 }), character: () => frames, itemIcon: () => ({ name: 'food', width: 8, height: 8 }), catFrames: () => ({}), crownSprite: () => sprite('crown'), dropSprite: () => sprite('drop'), heartSprite: () => sprite('heart'), pixelSprite: () => sprite('pixel') };
 });
 vi.mock('../room-art', () => ({ RoomPainter: class {}, TABLE_CX: 16, TABLE_TOP_DY: 19, TABLE: () => ({ name: 'table', width: 33, height: 27 }), CHAIR_RIGHT: () => ({ name: 'chair-right', width: 15, height: 26 }), CHAIR_LEFT: () => ({ name: 'chair-left', width: 15, height: 26 }) }));
 

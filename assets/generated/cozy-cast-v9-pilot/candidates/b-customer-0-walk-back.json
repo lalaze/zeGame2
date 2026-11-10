@@ -1,0 +1,20 @@
+{
+  "tool": "codex exec: built-in image generation, frames assembled by Codex",
+  "thread": "01a1c448-1b69-72e1-a1e0-35496ea83a77",
+  "frames": 6,
+  "cell": 256,
+  "prompts": [
+    "assets/generated/cozy-cast-v9-pilot/prompts/character-0.txt",
+    "assets/generated/cozy-cast-v9-pilot/prompts/action-walk-back.txt",
+    "assets/generated/cozy-cast-v9-pilot/prompts/style-b.txt"
+  ],
+  "references": [
+    "assets/generated/cozy-cast-v9-pilot/candidates/direction-b-1.png"
+  ],
+  "generatedSheets": [
+    "/Users/lalaze/.codex/generated_images/01a1c448-1b69-72e1-a1e0-35496ea83a77/exec-2aaca2ef-29e4-4a47-957c-7b84f9dd3c1a.png"
+  ],
+  "codexSaid": "Created `out.gif`; deviations are minor generated shape variation and GIF-required palette and alpha reduction. DONE",
+  "sha256": "d0e73184e94972b4f6d85302a79f16eeb6338c8d9d57dc62e9e058dbf2954de6",
+  "seconds": 382
+}

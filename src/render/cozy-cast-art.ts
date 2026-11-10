@@ -8,7 +8,10 @@ import { registerSeatingUnit } from './cozy-seating-art';
 type Point = { x: number; y: number };
 type PoseMeta = { box: number[]; top: number; neck: number[]; foot: number[]; hip: number[]; hand: number[] };
 type Pose = PoseMeta & { source: HTMLCanvasElement };
-type Sheet = { id: number; file: string; scale: number; frames: PoseMeta[] };
+/** Six-frame walk cycles: one row per direction (front, back, right) in their own atlas. */
+type Cycle = { file: string; frames: PoseMeta[] };
+type Sheet = { id: number; file: string; scale: number; frames: PoseMeta[]; cycle?: Cycle };
+export const CAST_CYCLE_FRAMES = 6;
 type Manifest = { version: number; density: number; width: number; height: number; characters: Sheet[] };
 type Contacts = { foot: Point; head: Point; headHeight: number; headScale: number; bodyScale: number; legExtension: number; carryContact: Point; seatContact?: Point; petContact?: Point };
 export const CAST_ART_DENSITY = 2;
@@ -16,6 +19,7 @@ export const CAST_STANDING_SIZE = Object.freeze({ width: 40, height: 44, footX: 
 const W = CAST_STANDING_SIZE.width * CAST_ART_DENSITY, H = CAST_STANDING_SIZE.height * CAST_ART_DENSITY;
 const figures = new Map<number, Pose[]>();
 const diningFigures = new Map<number, Pose[]>();
+const cycleFigures = new Map<number, Pose[]>();
 let pending: Promise<void> | null = null, epoch = 0;
 const ramps = new Map<string, string[]>();
 for (const color of palette.colors) { const ramp = ramps.get(color.ramp) ?? []; ramp.push(color.hex); ramps.set(color.ramp, ramp); }
@@ -24,7 +28,7 @@ const mod = (value: number, length: number) => ((Math.trunc(value) % length) + l
 function canvas(width: number, height: number) { const result = document.createElement('canvas'); result.width = width; result.height = height; return result; }
 
 export function validateCastManifest(manifest: Manifest): void {
-  if (manifest.version !== 8 || manifest.density !== CAST_ART_DENSITY || manifest.width !== W / 2 || manifest.height !== H / 2 ||
+  if (manifest.version !== 9 || manifest.density !== CAST_ART_DENSITY || manifest.width !== W / 2 || manifest.height !== H / 2 ||
     manifest.characters?.length !== CUSTOMER_CAST.length || new Set(manifest.characters.map(sheet => sheet.id)).size !== CUSTOMER_CAST.length)
     throw Error('Incomplete whole-figure cast manifest');
   for (const sheet of manifest.characters) {
@@ -36,16 +40,26 @@ export function validateCastManifest(manifest: Manifest): void {
         [pose.neck, pose.foot, pose.hip, pose.hand].some(point => !point || point.length !== 2 || point.some(value => !Number.isInteger(value)) || point[0] < 0 || point[0] > W || point[1] < 0 || point[1] > H))
         throw Error('Invalid whole-figure cast bounds or contacts');
     }
+    if (sheet.cycle) {
+      if (!sheet.cycle.file || sheet.cycle.frames?.length !== CAST_CYCLE_FRAMES * 3) throw Error('Invalid whole-figure walk cycle');
+      for (const [index, pose] of sheet.cycle.frames.entries()) {
+        const column = index % CAST_CYCLE_FRAMES, row = Math.floor(index / CAST_CYCLE_FRAMES);
+        if (pose.box?.length !== 4 || pose.box[0] !== column * W || pose.box[1] !== row * H || pose.box[2] !== (column + 1) * W || pose.box[3] !== (row + 1) * H ||
+          !Number.isInteger(pose.top) || pose.top < 1 || pose.top >= H ||
+          [pose.neck, pose.foot, pose.hip, pose.hand].some(point => !point || point.length !== 2 || point.some(value => !Number.isInteger(value)) || point[0] < 0 || point[0] > W || point[1] < 0 || point[1] > H))
+          throw Error('Invalid whole-figure walk cycle bounds or contacts');
+      }
+    }
   }
 }
-export function clearBatchCharacters(): void { epoch++; figures.clear(); diningFigures.clear(); pending = null; }
+export function clearBatchCharacters(): void { epoch++; figures.clear(); diningFigures.clear(); cycleFigures.clear(); pending = null; }
 export function batchCharactersReady(): boolean { return figures.size === CUSTOMER_CAST.length && diningFigures.size === CUSTOMER_CAST.length; }
 export function preloadBatchCharacters(): Promise<void> {
   if (batchCharactersReady()) return Promise.resolve();
   if (pending) return pending;
   const generation = epoch;
   pending = (async () => {
-    const base = import.meta.env.BASE_URL + 'art/generated/cozy-cast-v8/';
+    const base = import.meta.env.BASE_URL + 'art/generated/cozy-cast-v9/';
     const response = await fetch(base + 'manifest.json');
     if (!response.ok) throw Error('Missing whole-figure cast manifest');
     const manifest: Manifest = await response.json(); validateCastManifest(manifest);
@@ -57,13 +71,23 @@ export function preloadBatchCharacters(): Promise<void> {
         source.getContext('2d')!.drawImage(image, pose.box[0], 0, W, H, 0, 0, W, H);
         return { ...pose, source };
       });
-      return [sheet.id, poses] as const;
+      let cycle: Pose[] | null = null;
+      if (sheet.cycle) {
+        const walk = new Image(); walk.src = base + sheet.cycle.file; await walk.decode();
+        if (walk.naturalWidth !== W * CAST_CYCLE_FRAMES || walk.naturalHeight !== H * 3) throw Error('Invalid whole-figure walk cycle atlas size');
+        cycle = sheet.cycle.frames.map(pose => {
+          const source = canvas(W, H);
+          source.getContext('2d')!.drawImage(walk, pose.box[0], pose.box[1], W, H, 0, 0, W, H);
+          return { ...pose, source };
+        });
+      }
+      return [sheet.id, poses, cycle] as const;
     }));
-    const diningBase=import.meta.env.BASE_URL+'art/generated/cozy-dining-v4/';
+    const diningBase=import.meta.env.BASE_URL+'art/generated/cozy-dining-v5/';
     const diningResponse=await fetch(diningBase+'manifest.json');
     if(!diningResponse.ok)throw Error('Missing matched dining cast');
     const dining=await diningResponse.json();
-    if(dining.version!==4||dining.density!==2||!dining.embeddedChair||dining.characters.length!==CUSTOMER_CAST.length)throw Error('Incomplete matched dining cast');
+    if(dining.version!==5||dining.density!==2||!dining.embeddedChair||dining.characters.length!==CUSTOMER_CAST.length)throw Error('Incomplete matched dining cast');
     const seated=await Promise.all(dining.characters.map(async(sheet:Sheet)=>{
       if(sheet.frames.length!==3)throw Error('Missing matched dining pose');
       const image=new Image();image.src=diningBase+sheet.file;await image.decode();
@@ -71,7 +95,7 @@ export function preloadBatchCharacters(): Promise<void> {
       return [sheet.id,sheet.frames.map(pose=>{const source=canvas(W,H);source.getContext('2d')!.drawImage(image,pose.box[0],0,W,H,0,0,W,H);return{...pose,source};})] as const;
     }));
     if (generation === epoch) {
-      decoded.forEach(([id, poses]) => figures.set(id, poses));
+      decoded.forEach(([id, poses, cycle]) => { figures.set(id, poses); if (cycle) cycleFigures.set(id, cycle); });
       seated.forEach(([id, poses])=>diningFigures.set(id,poses));
     }
   })().catch(error => { if (generation === epoch) pending = null; throw error; });
@@ -110,8 +134,8 @@ function mirror(source: HTMLCanvasElement): HTMLCanvasElement {
 export function makeBatchCharacter(look: Look, role: Role, appearanceId: number | undefined, setContacts: (frame: HTMLCanvasElement, contacts: Contacts) => void): CharacterFrames | null {
   if (!batchCharactersReady() || role !== 'customer') return null;
   const design = CUSTOMER_CAST[mod(appearanceId ?? 0, CUSTOMER_CAST.length)], poses = figures.get(design.id)!;
-  const make = (index: number, mirrored = false): HTMLCanvasElement => {
-    const seated = index >= 9, pose = seated ? diningFigures.get(design.id)![index-9] : poses[index];
+  const make = (index: number, mirrored = false, pose: Pose = index >= 9 ? diningFigures.get(design.id)![index - 9] : poses[index]): HTMLCanvasElement => {
+    const seated = index >= 9;
     // Neck landmarks describe the intact painting; they never position a head.
     const art = paintPose(pose, look, design.look);
     const frame = publish(mirrored ? mirror(art) : art);
@@ -134,5 +158,8 @@ export function makeBatchCharacter(look: Look, role: Role, appearanceId: number 
     return frame;
   };
   const down = [0, 1, 2].map(index => make(index)), up = [3, 4, 5].map(index => make(index)), right = [6, 7, 8].map(index => make(index)), left = [6, 7, 8].map(index => make(index, true));
-  return { down, up, right, left, stand: down[0], sitRight: make(9), sitLeft: make(9, true), sitPetRight: [make(10), make(11)], sitPetLeft: [make(10, true), make(11, true)] };
+  // Walk cycles are standing poses: index 0 gives them the standing contacts.
+  const cycle = cycleFigures.get(design.id), stride = (row: number, mirrored = false) => cycle!.slice(row * CAST_CYCLE_FRAMES, (row + 1) * CAST_CYCLE_FRAMES).map(pose => make(0, mirrored, pose));
+  const walk = cycle ? { down: stride(0), up: stride(1), right: stride(2), left: stride(2, true) } : undefined;
+  return { down, up, right, left, stand: down[0], sitRight: make(9), sitLeft: make(9, true), sitPetRight: [make(10), make(11)], sitPetLeft: [make(10, true), make(11, true)], ...(walk ? { walk } : {}) };
 }

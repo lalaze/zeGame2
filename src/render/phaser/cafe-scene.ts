@@ -61,7 +61,7 @@ import { businessLightDate } from '../business-light';
 import { BENCH_RISE, BINS_RISE, DISH_PIT_RISE, FRIDGE_RISE, RACK_RISE, paintBench, paintBins, paintDishPit, paintKitchen, paintPastryFridge, paintRack } from '../kitchen-art';
 import { paintRegion } from '../region-art';
 import { CHAIR_LEFT, CHAIR_RIGHT, RoomPainter, TABLE, TABLE_CX, TABLE_TOP_DY, type CounterCup } from '../room-art';
-import { CHAR_H, OUTLINE, catFrames, character, crownSprite, dropSprite, heartSprite, itemIcon, pixelSprite, type CharacterFrames, type Facing } from '../sprites';
+import { CHAR_H, OUTLINE, walkFrame, catFrames, character, crownSprite, dropSprite, heartSprite, itemIcon, pixelSprite, type CharacterFrames, type Facing } from '../sprites';
 import { PIXEL_FONT, PIXEL_FONT_HALO, PIXEL_FONT_VIP, addPixelFonts } from './pixel-font';
 import { baked, canvasKey } from './textures';
 import { type FineSpriteArt } from '../fine-sprite-art';
@@ -1095,15 +1095,11 @@ export class CafeScene extends Phaser.Scene {
   private drawWalker(w: Walker, frames: CharacterFrames, standing: Facing, depth: number) {
     const facing = this.facing(w, standing);
     const walking = w.x !== w.tx || w.y !== w.ty;
-    const step = Math.floor(w.stride / 5);
-    let idx = 0;
-    if (walking) idx = [1, 0, 2, 0][step % 4];
     const painted = projectMainWorld(w);
     const x = Math.round(painted.x * 2) / 2;
     const y = Math.round(painted.y);
     this.shadow(x, y, 12, depth);
-    const bob = walking && idx !== 0 ? 1 : 0;
-    const frame=frames[facing][idx],foot=referenceCharacterContacts(frame)?.foot;
+    const { frame, bob } = walkFrame(frames, facing, w.stride, walking), foot = referenceCharacterContacts(frame)?.foot;
     this.litImage(frame, x - (foot?.x??9), y - (foot?.y??CHAR_H-1) - bob, depth + 0.001, { x, y });
     const carryContact=referenceCharacterContacts(frame)?.carryContact;
     return { x, y, bob, facing, carryX: carryContact && foot ? x - foot.x + carryContact.x : undefined, carryY: carryContact && foot ? y - foot.y + carryContact.y - bob : undefined, legExtension: referenceCharacterContacts(frame)?.legExtension ?? 0, scale: foot ? STANDING_CHARACTER_SCALE : 1, height: foot ? foot.y - (referenceCharacterContacts(frame)?.head?.y ?? 0) : CHAR_H - 1 };

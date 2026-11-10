@@ -1,0 +1,19 @@
+{
+  "tool": "codex exec built-in image generation",
+  "thread": "01a1c43a-9b3f-7b33-8ce4-05b92b4950ba",
+  "resumed": false,
+  "prompts": [
+    "assets/generated/cozy-cast-v9-pilot/brief-common.txt",
+    "assets/generated/cozy-cast-v9-pilot/direction-c.txt"
+  ],
+  "references": [
+    "public/art/generated/cafe-style-sample-v1/sample.png",
+    "assets/generated/cozy-cast-v7/sources/group-0.png",
+    "artifacts/art-grid/review-3b/day/main-tables.png",
+    "docs/art-grid/palette.png"
+  ],
+  "original": "/Users/lalaze/.codex/generated_images/01a1c43a-9b3f-7b33-8ce4-05b92b4950ba/exec-bb0b9b6e-f32e-4e31-a466-93deb23d96a4.png",
+  "extraImagesThisRun": [],
+  "sha256": "dd0c5ce322ad90e9664be8660c98c5898009187d8728e3afabc9317a8b6c8a31",
+  "seconds": 114
+}

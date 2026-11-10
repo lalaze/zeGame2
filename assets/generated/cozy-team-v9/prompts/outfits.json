@@ -1,0 +1,12 @@
+{
+  "staff": {
+    "outfit": "Cream collared shirt with rolled sleeves. Dark sage-green bib apron with two small brass buttons, one front pocket, crossed back straps and a back bow. Cream trousers. Brown shoes. No hat, glasses or other accessories.",
+    "outfitColours": "shirt and trousers cream #F0E0C0, cream light #FCF2DA, cream shadow #D6C09C\napron sage #60764C, sage light #7C9262, sage shadow #465A3A",
+    "backDetail": "The crossed apron straps and the apron bow are visible."
+  },
+  "chef": {
+    "outfit": "A tall soft cream chef hat. Cream double-breasted chef jacket with rolled sleeves and small brown buttons. Terracotta-red bib apron with one front pocket, crossed back straps and a back bow. Taupe-brown trousers. Brown shoes. No glasses or other accessories.",
+    "outfitColours": "hat and jacket cream #F0E0C0, cream light #FCF2DA, cream shadow #D6C09C\napron terracotta #B65C3C, terracotta light #CE704A, terracotta shadow #8C422C\ntrousers taupe #786450, taupe shadow #5C4C3C",
+    "backDetail": "The crossed apron straps, the apron bow and the back of the chef hat are visible."
+  }
+}

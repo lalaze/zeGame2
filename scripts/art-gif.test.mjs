@@ -38,7 +38,7 @@ describe('runtime art converted to GIF', () => {
       'src/render/cozy-furniture-assets.ts', 'src/render/cozy-service-assets.ts', 'src/render/cozy-signature-registration.ts', 'src/render/generated-main-art.ts']
       .map((file) => readFileSync(file, 'utf8')).join('\n');
     expect(moved.filter((file) => sources.includes(`/${file}`) || sources.includes(`"${file}"`) || sources.includes(`'${file}'`))).toEqual([]);
-    for (const [pack, list] of [['cozy-cast-v8', 'characters'], ['cozy-dining-v4', 'characters'], ['cozy-cats-v2', 'breeds']]) {
+    for (const [pack, list] of [['cozy-cast-v9', 'characters'], ['cozy-dining-v5', 'characters'], ['cozy-cats-v2', 'breeds']]) {
       const manifest = JSON.parse(readFileSync(`public/art/generated/${pack}/manifest.json`, 'utf8'));
       for (const { file } of manifest[list]) expect(existsSync(`public/art/generated/${pack}/${file}`), file).toBe(true);
     }

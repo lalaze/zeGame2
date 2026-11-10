@@ -1,0 +1,23 @@
+{
+  "gif": "assets/generated/cozy-cast-v9-pilot/candidates/b-customer-0-walk-right-take2.gif",
+  "frames": 6,
+  "sourceFrame": [
+    256,
+    256
+  ],
+  "sourceFigure": [
+    148,
+    228
+  ],
+  "frame": [
+    80,
+    88
+  ],
+  "figure": [
+    51,
+    78
+  ],
+  "scale": 0.3421,
+  "colours": 34,
+  "rimPixelsPeeled": 5
+}

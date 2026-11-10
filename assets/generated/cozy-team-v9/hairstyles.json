@@ -1,0 +1,134 @@
+{
+ "0": {
+  "name": "short",
+  "hair": "short wavy hair with a soft parted fringe, ears partly covered"
+ },
+ "1": {
+  "name": "bun",
+  "hair": "hair gathered in a low round bun at the back, soft side fringe"
+ },
+ "2": {
+  "name": "long",
+  "hair": "long loose wavy hair falling past the shoulders"
+ },
+ "3": {
+  "name": "bob",
+  "hair": "chin-length rounded bob"
+ },
+ "4": {
+  "name": "pony",
+  "hair": "a high ponytail with a soft fringe"
+ },
+ "5": {
+  "name": "sidepart",
+  "hair": "short neat side-parted hair"
+ },
+ "6": {
+  "name": "braids",
+  "hair": "two braids hanging over the shoulders"
+ },
+ "7": {
+  "name": "waves",
+  "hair": "shoulder-length soft waves"
+ },
+ "8": {
+  "name": "crop",
+  "hair": "Man: neat short chestnut crop, short at sides and back, a small soft quiff at front. Ears showing."
+ },
+ "9": {
+  "name": "curls",
+  "hair": "Man: short tight chestnut curls all over, a little volume on top. Clearly small tight rounded curls, short sides/back."
+ },
+ "10": {
+  "name": "undercut",
+  "hair": "Man: chestnut undercut, sides and back clipped very short and longer top swept to one side. Clearly visible clipped back in middle row and clipped side in right-facing profile. Use chestnut tones, no new colors."
+ },
+ "11": {
+  "name": "slick",
+  "hair": "Man: medium-length chestnut hair combed straight BACK from forehead, tidy smooth swept-back locks, ears visible, no hanging bangs or side part. Back view shows neatly combed-back hair."
+ },
+ "12": {
+  "name": "beard",
+  "hair": "Man: short chestnut side-parted hair AND a neat short full beard in exactly the same chestnut brown. Thicker chestnut eyebrows. Beard follows cheeks, jaw and chin, small tidy moustache; retain visible dark oval eyes, peach face, rosy cheeks and small smile. Beard visible in front/profile, absent on back of head."
+ },
+ "13": {
+  "name": "buzz",
+  "hair": "Man: very short even chestnut buzz cut following the rounded head shape, a thin uniform close-cropped hair layer with tiny soft hair texture, no quiff or longer strands. Thicker chestnut eyebrows.  Clearly close-cropped back and sides."
+ },
+ "14": {
+  "name": "pixie",
+  "hair": "Woman: short chestnut pixie cut with soft side-swept bangs, ears showing, delicate tapered short nape. Do not reuse the reference shaggy bob: this is a clearly short pixie."
+ },
+ "15": {
+  "name": "buns",
+  "hair": "Woman: two round chestnut space buns on top of head, one on each side, with short loose strands at front. Hair buns formed only of chestnut hair, no ribbons or ties visible. Both buns visible and consistent in back row."
+ },
+ "16": {
+  "name": "afro",
+  "hair": "Woman: big round voluminous curly chestnut afro, a rounded cloud silhouette of tight curls surrounding the head. Same rich chestnut color as reference, no black hair. Keep big afro within each cell with transparent margins, same body scale. Back row shows full round curly afro and apron bow below."
+ },
+ "17": {
+  "name": "bangs",
+  "hair": "Woman: long STRAIGHT chestnut hair to mid-back with STRAIGHT BLUNT BANGS across forehead. Clearly straight smooth lengths, no waves/curls. Back view shows straight mid-back hair, front view long hair beside shoulders. Back apron bow visible below hair."
+ },
+ "18": {
+  "name": "twintails",
+  "hair": "Woman: two LOW chestnut twin tails resting OVER THE SHOULDERS, side bangs. Both separate low tails visible in front; back view shows low attachment points near nape and two tails draping forward over shoulders, apron back bow visible. Hair only, no accessories, colored ties, ribbons or bows."
+ },
+ "19": {
+  "name": "curtain",
+  "hair": "Woman: shoulder-length layered chestnut hair with CURTAIN BANGS parted in the MIDDLE, symmetrical soft face-framing sections separated at center forehead. Hair stops at shoulders, layered soft ends, clearly distinct from long hair and blunt bangs. Back row shows shoulder-length layers and apron bow."
+ },
+ "20": {
+  "name": "fauxhawk",
+  "hair": "Man with SHORT CLIPPED SIDES and a clearly raised soft faux-hawk ridge running along the center of the head from forehead to rear crown. The ridge is rounded chestnut tufts, not hard spikes. Ears exposed. The front view must clearly show narrow high central ridge and low clipped sides; back view must clearly show central ridge tapering down with clipped sides; right-facing profile must show the continuous raised ridge from front to back. This must be unmistakably a fauxhawk, distinct from a plain short or swept haircut."
+ },
+ "21": {
+  "name": "manbun",
+  "hair": "Man with rich chestnut hair pulled back smoothly into ONE SMALL ROUND BUN at the BACK OF THE CROWN, a few loose chestnut strands by the hairline. The bun is made of hair, with no visible elastic or accessory. Ears exposed, gathered directional hair strands visible. Back row must clearly show a single round crown bun above the nape, and right-facing profile must clearly show bun projecting from back of crown. Front view shows pulled-back hair and subtle bun peeking over crown. Clearly a manbun, not pigtails or two buns."
+ },
+ "22": {
+  "name": "shaggy",
+  "hair": "Man with MESSY SHAGGY MEDIUM LENGTH chestnut hair covering the ears and the TOP OF THE COLLAR. Tousled layered tufts and uneven soft ends around the sides and nape, slightly rumpled fringe, dark oval eyes still visible. Back and right-facing profile show medium shaggy hair reaching the top of the shirt collar. Distinctly messier and longer than the short template, but not long hair. No facial hair."
+ },
+ "23": {
+  "name": "centerpart",
+  "hair": "Man with CHIN-LENGTH chestnut hair parted precisely in the MIDDLE, with two CURTAINS falling either side of the face down to jaw/chin level. An unmistakable central part, symmetric soft curtains, forehead opening in the middle; dark oval eyes clearly visible. Back view shows a central part and chin-length rounded curtain bob silhouette around the nape; right-facing profile shows chin-length curtain strands and the face facing right. Clearly chin-length middle-part curtains, distinct from a swept short haircut or shag. No facial hair."
+ },
+ "24": {
+  "name": "mustache",
+  "hair": "Man with SHORT NEAT chestnut hair, a NEAT FULL MOUSTACHE in exactly the SAME CHESTNUT BROWN as the hair, and THICKER CHESTNUT EYEBROWS. Moustache is a small tidy full two-lobed shape centered above the small smiling mouth, clearly readable in all front and right-profile cells. No beard, no chin hair, no sideburn extensions. Back row shows only the back of the short neat haircut, never facial features. Ears exposed. Keep the reference's two dark oval eyes and rosy cheeks."
+ },
+ "25": {
+  "name": "locs",
+  "hair": "Man with SHORT CHUNKY TWISTED LOCS all over the head, in the SAME rich CHESTNUT BROWN as the references. Each loc is a thick, clearly separated short rope-like twisted lock with slightly loose ends; several rounded chunky locs hang around forehead and sides, ears partly visible. Back and right-facing profile must clearly show individual short twisted locs across the crown and nape. No beads, cuffs, bands, ties, accessories, black hair, long dreadlocks, curls or plain shaggy strands. The silhouette must clearly read short chunky twisted locs. No facial hair."
+ },
+ "26": {
+  "name": "halfup",
+  "hair": "Woman: long chestnut hair worn half up. Gather the upper half into ONE small rounded bun made of hair high at the back/crown; lower half falls loose in long soft locks to mid-back. This is visibly a half-up bun hairstyle, not fully up, not a plain long hairstyle, not two buns. Clearly show the small top bun in front, back and right profile. In back views the loose hair ends above the apron bow so that the bow remains visible."
+ },
+ "27": {
+  "name": "sidebraid",
+  "hair": "Woman: ONE long thick chestnut braid worn forward over one shoulder, soft side fringe. The back view shows the braid starting at the nape and draping over the shoulder; made only of hair, no ribbon"
+ },
+ "28": {
+  "name": "braidcrown",
+  "hair": "Woman: thick chestnut braids wrapped all the way around the head like a natural braided crown, made entirely of hair. A clearly interwoven plait arches around the upper forehead and temples and continues around the back of the head. All the long hair is tucked into the crown, ears showing clearly; no loose long hair, no ponytail, no bun, no actual crown or accessories. Back views must show the thick woven braid wrapping around the head above the nape, with both ears and apron bow visible. Front row middle forward shoe on viewer right; front row right forward shoe on viewer left. Back row middle forward shoe sole on viewer right; back row right forward shoe sole on viewer left. These opposite-foot poses are essential, unlike duplicate poses in the references. Keep eyes and smiles, cream shirt and trousers, dark sage apron, chestnut hair and brown shoes precisely matched."
+ },
+ "29": {
+  "name": "curlybob",
+  "hair": "Woman: a SHORT CHIN-LENGTH chestnut bob made of many springy compact corkscrew curls. Rounded bob silhouette ends at the jaw/chin, with curly fringe and clearly defined little looping spiral locks. It must not be long hair, not a plain wavy bob, not a large afro: compact chin-length bob with unmistakable springy curls. Back views show the same short curly bob at nape and both crossed apron straps plus bow below. Profile shows chin-length ringed curls. Front middle shoe forward on viewer RIGHT and front right shoe forward on viewer LEFT; back middle sole forward on viewer RIGHT and back right sole forward on viewer LEFT. Make these walking columns alternate feet, rather than duplicating the reference walk pose. Keep same reference chestnut brown, cream and dark sage colours, exact face and figure proportions."
+ },
+ "30": {
+  "name": "asymbob",
+  "hair": "Woman: a clearly ASYMMETRIC chestnut bob. Her anatomical RIGHT side (viewer LEFT in front view) is SHORT, neatly cropped around and just above the visible ear. Her anatomical LEFT side (viewer RIGHT in front view) is LONG, falling in a smooth rounded thick lock exactly to the jaw. A broad SIDE-SWEPT FRINGE sweeps diagonally from the short side toward the long side; keep both dark oval eyes visible. The difference in side lengths must be obvious. No shaved scalp, no extra skin colours, no undercut graphic, no accessories, no waves or curls. Back view shows the same uneven bob hemline: viewer RIGHT short by ear, viewer LEFT long to jaw/nape. Right-facing profile shows the short right side and exposed ear with the long far side/fringe visible appropriately. Retain rounded soft storybook pixel rendering; make it a bob, not a pixie or plain symmetric short hairstyle."
+ },
+ "31": {
+  "name": "ringlets",
+  "hair": "Woman: LONG rich chestnut hair falling in LARGE BOUNCY RINGLET CURLS to MID-BACK. Each long lock is a distinct thick corkscrew or vertical helical spiral, with multiple rounded turns stacked down its length. Smooth rounded crown and soft side fringe over the same face, then large dangling spiral ringlets framing both cheeks and shoulders, continuing around the back. This must read unmistakably as long cylindrical ringlets, not plain long wavy hair, not a short curly bob. Back views show several long spiral locks with curled tips ending at mid-back just above the sage apron bow, so the bow is visible. Right profile shows long bouncy ringlets behind her, with clear spiral curled ends. No accessories or hair ribbons. Keep cream rolled-sleeve shirt, sage bib apron and cream trousers unchanged."
+ },
+ "chef": {
+  "name": "chef",
+  "hair": "short curly chestnut hair showing under a tall cream chef hat"
+ }
+}

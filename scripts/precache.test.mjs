@@ -448,13 +448,14 @@ describe('what a player downloads, and what an update costs', () => {
     const { default: dining } = await import('../src/render/dining-table-manifest.json');
     const pack = (name) => JSON.parse(readFileSync(`public/art/generated/${name}/manifest.json`, 'utf8'));
     const inPack = (name, sheets) => sheets.map((sheet) => posix.normalize(`art/generated/${name}/${sheet.file}`));
-    const team = pack('cozy-team-v8');
+    const team = pack('cozy-team-v9');
     const opening = [
       // Mirrors CafeScene.preload and the loaders it waits for.
       ...Object.entries(GENERATED_MAIN_ASSETS).filter(([id]) => !/^(?:barista|server|mina|customer)-/.test(id)).map(([, file]) => `art/generated/${file}`),
-      ...inPack('cozy-cast-v8', pack('cozy-cast-v8').characters), ...inPack('cozy-dining-v4', pack('cozy-dining-v4').characters),
+      ...inPack('cozy-cast-v9', pack('cozy-cast-v9').characters), ...inPack('cozy-cast-v9', pack('cozy-cast-v9').characters.map((sheet) => sheet.cycle)),
+      ...inPack('cozy-dining-v5', pack('cozy-dining-v5').characters),
       ...inPack('cozy-cats-v2', pack('cozy-cats-v2').breeds),
-      ...inPack('cozy-team-v8', [...team.families.slice(0, 8), team.chef, ...team.seated.slice(0, 2), team.chefSeated]),
+      ...inPack('cozy-team-v9', [...team.families.slice(0, 8), team.chef, ...team.seated.slice(0, 2), team.chefSeated]),
       ...['ensemble', 'petting', 'idle-v4'].map((name) => `art/generated/cozy-seating-v3/${name}.gif`), dining.file,
     ];
     expect(opening.length).toBeGreaterThan(400);

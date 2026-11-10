@@ -1,0 +1,20 @@
+{
+  "tool": "codex exec: built-in image generation, frames assembled by Codex",
+  "thread": "01a1c448-1b64-76f1-ae58-55608bb61330",
+  "frames": 6,
+  "cell": 256,
+  "prompts": [
+    "assets/generated/cozy-cast-v9-pilot/prompts/character-0.txt",
+    "assets/generated/cozy-cast-v9-pilot/prompts/action-walk-front.txt",
+    "assets/generated/cozy-cast-v9-pilot/prompts/style-b.txt"
+  ],
+  "references": [
+    "assets/generated/cozy-cast-v9-pilot/candidates/direction-b-1.png"
+  ],
+  "generatedSheets": [
+    "/Users/lalaze/.codex/generated_images/01a1c448-1b64-76f1-ae58-55608bb61330/exec-07bff9f1-892f-4886-89d2-343ec9737d92.png"
+  ],
+  "codexSaid": "DONE  The generated poses vary slightly from the requested sequence, and GIF encoding required palette reduction.",
+  "sha256": "c491cb8989f279b4ef9fe13db15851525558639f0041d9847e3f23b11ffcc939",
+  "seconds": 352
+}

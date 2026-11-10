@@ -1,0 +1,18 @@
+{
+  "tool": "codex exec: built-in image generation, frames assembled by Codex",
+  "thread": "01a1c445-0ae5-71b0-a220-604e9d819c97",
+  "frames": 6,
+  "cell": 256,
+  "prompts": [
+    "assets/generated/cozy-cast-v9-pilot/walk-right.txt"
+  ],
+  "references": [
+    "assets/generated/cozy-cast-v9-pilot/candidates/direction-a-1.png"
+  ],
+  "generatedSheets": [
+    "/Users/lalaze/.codex/generated_images/01a1c445-0ae5-71b0-a220-604e9d819c97/exec-abe4f477-e689-44f8-af8f-68ddd8312e68.png"
+  ],
+  "codexSaid": "Generated artwork retains some texture and slight head/torso variation from the brief.  DONE",
+  "sha256": "d0593fbae39e2b5e3260caadf17fe03bab8f14cea327b7cd2cea0e3a18621818",
+  "seconds": 242
+}

@@ -1,0 +1,33 @@
+{
+  "tool": "codex exec: one built-in image generation, rows cut into GIFs by Codex",
+  "thread": "01a1c47a-0f78-71e1-bb1d-2af08ba15126",
+  "rows": [
+    "walk-front",
+    "walk-back",
+    "walk-right",
+    "seated"
+  ],
+  "cols": 7,
+  "cell": 256,
+  "prompts": [
+    "assets/generated/cozy-cast-v9/prompts/customer-24.txt"
+  ],
+  "references": [
+    "assets/generated/cozy-cast-v9/style-b.png",
+    "assets/generated/cozy-cast-v9/refs/customer-24.png"
+  ],
+  "generatedSheets": [
+    "/Users/lalaze/.codex/generated_images/01a1c47a-0f78-71e1-bb1d-2af08ba15126/exec-2ccd0045-8836-4e52-b4ee-ff1d2fa0edbc.png"
+  ],
+  "imageCalls": 1,
+  "missing": [],
+  "codexSaid": "Created [walk-front.gif](/private/var/folders/hq/d4k1wkrx2294gzlxg5nhpfdm0000gn/T/art-gen-kit-OLjIST/walk-front.gif), [walk-back.gif](/private/var/folders/hq/d4k1wkrx2294gzlxg5nhpfdm0000gn/T/art-gen-kit-OLjIST/walk-back.gif), [walk-right.gif](/private/var/folders/hq/d4k1wkrx2294gzlxg5nhpfdm0000gn/T/art-gen-kit-OLjIST/walk-right.gif), [seated.gif](/private/var/folders/hq/d4k1wkrx2294gzlxg5nhpfdm0000gn/T/art-gen-kit-OLjIST/seated.gif), and untouched [sheet.png](/private/var/folders/hq/d4k1wkrx2294",
+  "sha256": {
+    "sheet.png": "406f4de5cba8a97f2809bf4165cecf6a77784efd7c637ef7a9166f32bd22b1d7",
+    "walk-front.gif": "4ca7ab308c7a11d06d724a16b7c4f53a27874082c1e348aa9e55604b7506ba49",
+    "walk-back.gif": "8cf72594729f4a6a88144613cd7702e1480ffc8b1149f2761b1d93f683a03f83",
+    "walk-right.gif": "7ac8be83cd646adcff67c043af4cc42a9218056e427f0e2818280e5e10e460d7",
+    "seated.gif": "255d15ea4c64ebb9dff7dbbe5e53e1bfdf719cb421372d27dd7c98e852a8419a"
+  },
+  "seconds": 293
+}

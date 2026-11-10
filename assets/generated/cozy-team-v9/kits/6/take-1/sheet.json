@@ -1,0 +1,17 @@
+{
+  "tool": "codex exec built-in image generation",
+  "thread": "01a1c4e1-bb4a-7a42-ac70-8c89845f6b89",
+  "resumed": false,
+  "prompts": [
+    "assets/generated/cozy-team-v9/prompts/6.txt"
+  ],
+  "references": [
+    "assets/generated/cozy-team-v9/style-b-staff.png",
+    "public/art/generated/cozy-team-v7/hair-6-braids-v1.png",
+    "assets/generated/cozy-team-v9/refs/6-seated.png"
+  ],
+  "original": "/Users/lalaze/.codex/generated_images/01a1c4e1-bb4a-7a42-ac70-8c89845f6b89/exec-1ca5fb6b-183c-478f-a9aa-28b5509fc433.png",
+  "extraImagesThisRun": [],
+  "sha256": "030e13a07e98c9b532d2f84a4076e6e802f29f58d26ae80f782d07e3d964b168",
+  "seconds": 158
+}

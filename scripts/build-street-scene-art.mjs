@@ -24,5 +24,6 @@ for (const [id, source] of Object.entries(sprites)) {
   if (!fs.existsSync(source)) throw Error(`Missing source ${source}`);
   execFileSync('sips', ['-s', 'format', 'png', source, '--out', `${out}/${id}.png`], { stdio: 'ignore' });
 }
-for (let i = 0; i < 4; i++) execFileSync('sips', ['-s', 'format', 'png', `public/art/generated/cozy-cast-v7/customer-${i}.gif`, '--out', `${out}/guest-${i}.png`], { stdio: 'ignore' });
+// Street walkers reuse the first four café guests' twelve-pose sheets (the profile poses are frames 6 to 8).
+for (let i = 0; i < 4; i++) fs.copyFileSync(`assets/art-masters/art/generated/cozy-cast-v9/customer-${i}.png`, `${out}/guest-${i}.png`);
 fs.writeFileSync(`${out}/README.md`, '# Street scene sprites\n\nStatic first frames of existing café art, extracted with `node scripts/build-street-scene-art.mjs` (macOS sips). No new external artwork. Shop sprites: cozy-idle-v1; scenery and displays: cozy-world-v2 / cozy-furniture-v2; pedestrians: cozy-cast-v7; street furniture: neighborhood-reserve-v1 (original reserve-library art). PNG sheets animate only through CSS, disabled by prefers-reduced-motion.\n');

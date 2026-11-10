@@ -1,0 +1,3 @@
+STYLE: copy the top-row character of image 1 exactly: the same compact chibi proportions (about 2.3 heads tall when standing), face with a small dark oval eye and soft blush, hair shape, outfit, colours, outline and the same big-pixel size. Paint the chair in the same pixel style. True low-resolution pixel art built from large crisp square pixels, each one flat colour, at most three shades per material and one warm dark-brown outline (never pure black). No gradients, no anti-aliasing, no blur, no glow, no ground shadow, no table, no cat, no text.
+
+SHEET: the 3 frames in one horizontal row, evenly spaced, each fully separate with clear empty space around it, all at the same scale with the chair legs on the same baseline.
