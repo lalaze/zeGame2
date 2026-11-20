@@ -173,6 +173,17 @@ describe('onboarding keyboard', () => {
     expect(document.querySelector('[aria-label^="shirt"], [aria-label^="hairStyle"]')).toBeNull();
     expect([...apron.querySelectorAll('.swatch')].filter((b) => b.getAttribute('aria-pressed') === 'true')).toHaveLength(1);
   });
+  it('hands colour swatches their colour as a variable the shared button face paints', () => {
+    start();
+    press(document.querySelector('#cafe-name')!, 'Enter');
+    for (const [key, color] of [['skin', 'tan'], ['hair', 'brown'], ['shirt', 'red']]) {
+      const first = document.querySelector<HTMLElement>(`.swatches[data-key="${key}"] .swatch`)!;
+      expect(first.classList.contains('swatch-color'), key).toBe(true);
+      expect(first.style.getPropertyValue('--swatch'), key).toBe(color);
+    }
+    // Hairstyle buttons show a head, not a colour, and keep the accent face when chosen.
+    expect(document.querySelector('.swatches[data-key="hairStyle"] .swatch-color')).toBeNull();
+  });
   it('advances a normal Enter in the name field and keeps focus inside the new step', () => {
     start();
     press(document.querySelector('#cafe-name')!, 'Enter');

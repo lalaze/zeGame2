@@ -49,6 +49,9 @@ body :is(.pixel-btn:not(.ghost),.tab.active,.chip.active,.menu-toggle.active,but
 }
 body :is(.pixel-btn.ghost,.chip,.tab) { --pixel-face: var(--cream); --pixel-text: var(--ink); }
 body button.danger { --pixel-face: #8d4232 !important; --pixel-text: var(--paper-light) !important; }
+/* A colour swatch is its colour, chosen or not; the chosen one gets the ledger's ring instead of the accent face. */
+body button.swatch.swatch-color { --pixel-face: var(--swatch) !important; }
+body button.swatch.swatch-color[aria-pressed='true'] { box-shadow: 0 0 0 2px var(--cream), 0 0 0 4px var(--a-accent) !important; }
 @media (hover: hover) {
   body button:not(:where(.street-shop,.mobile-cafe-clock,.drawer-backdrop,.mobile-tools-backdrop,.area-arrow)):hover:not(:disabled) { background-color: color-mix(in srgb, var(--pixel-face), white 10%) !important; }
 }

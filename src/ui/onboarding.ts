@@ -251,7 +251,8 @@ export function showOnboarding(opts: Options): void {
             b.setAttribute('aria-label', `${label} ${i + 1}`);
             b.setAttribute('aria-pressed', String(draft.look[key] === i));
             const colors = palettes[key];
-            if (colors) b.style.background = colors[i];
+            // The colour travels as a variable: the shared button face (cream-pixel.css) paints it.
+            if (colors) { b.classList.add('swatch-color'); b.style.setProperty('--swatch', colors[i]); }
             else {
               // Only the front pose is painted, and each hairstyle's sheet arrives on its own:
               // a button stays empty until then rather than showing some other hair.

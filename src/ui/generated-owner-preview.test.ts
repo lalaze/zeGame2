@@ -195,7 +195,7 @@ describe('onboarding preview lifecycle', () => {
     const preview = document.querySelector<HTMLCanvasElement>('.char-preview canvas')!;
     document.querySelectorAll<HTMLButtonElement>('[data-key="shirt"] button')[1].click();
     expect(document.querySelector('.char-preview canvas')).toBe(preview);
-    expect(document.querySelectorAll<HTMLButtonElement>('[data-key="shirt"] button')[0].style.background).toBe('#bb6b58');
+    expect(document.querySelectorAll<HTMLButtonElement>('[data-key="shirt"] button')[0].style.getPropertyValue('--swatch')).toBe('#bb6b58');
     // Hairstyle swatches also call character; isolate the deferred owner paint.
     vi.mocked(character).mockClear();
     load.resolve(); await flush();

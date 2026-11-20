@@ -1701,6 +1701,8 @@ html:lang(zh) body {
   place-items: center;
 }
 
+.swatch-color { background: var(--swatch); }
+
 .swatch.active {
   box-shadow: 0 0 0 2px var(--ink), 0 0 0 5px var(--gold);
 }
