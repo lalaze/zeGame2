@@ -4,8 +4,8 @@ import anchors from '../../public/art/street-art-v2/anchors.json';
 
 const base = import.meta.env.BASE_URL;
 // CSS custom properties resolve against the stylesheet: use document-absolute URLs.
-export const streetSpriteUrl = (name: string) => new URL(`${base}art/street-scene/${name}.png`, document.baseURI).href;
-const approvedUrl = (name: string) => new URL(`${base}art/street-art-v2/${name}.png`, document.baseURI).href;
+export const streetSpriteUrl = (name: string) => new URL(`${base}art/street-scene/${name}.webp`, document.baseURI).href;
+const approvedUrl = (name: string) => new URL(`${base}art/street-art-v2/${name}.webp`, document.baseURI).href;
 export const streetSprite = (name: string, className = '') => `<img class="${className}" src="${streetSpriteUrl(name)}" alt="" draggable="false" decoding="async">`;
 const approvedSprite = (name: string, className = '') => `<img class="${className}" src="${approvedUrl(name)}" alt="" draggable="false" decoding="async">`;
 type Business = RegionId | 'cafe' | null;

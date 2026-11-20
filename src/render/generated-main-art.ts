@@ -55,13 +55,13 @@ export function setGeneratedTablewareAdapter(adapter: GeneratedTablewareAdapter 
 /** Historical main-scene keys retained as fallbacks below the current pack. */
 const ORIGINAL_MAIN_ASSETS = {
   'reference-machine': 'reference-main-v1/espresso.png',
-  'cozy-cafe-atlas': 'cozy-cafe-v1/furniture-atlas.gif',
-  'cabinet-top': 'main-v1/cabinet-top.gif',
-  'cabinet-front': 'main-v1/cabinet-front.gif',
+  'cozy-cafe-atlas': 'cozy-cafe-v1/furniture-atlas.webp',
+  'cabinet-top': 'main-v1/cabinet-top.webp',
+  'cabinet-front': 'main-v1/cabinet-front.webp',
   plant: 'main-v1/plant.png',
-  table: 'main-v2/table-no-vase.gif',
-  'chair-right': 'main-v2/chair-facing-right.gif',
-  'chair-left': 'main-v2/chair-facing-left.gif',
+  table: 'main-v2/table-no-vase.webp',
+  'chair-right': 'main-v2/chair-facing-right.webp',
+  'chair-left': 'main-v2/chair-facing-left.webp',
   vase: 'main-v2/flower-vase.png',
 } as const;
 

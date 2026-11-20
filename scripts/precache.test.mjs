@@ -337,9 +337,9 @@ describe('production offline app shell', () => {
 
 describe('what a player downloads, and what an update costs', () => {
   const scope = 'https://example.test/games/cafe/';
-  const runtimeArt = new Set(['art/opening.png', 'art/kept-png.png']);
+  const runtimeArt = new Set(['art/opening.png', 'art/kept-png.png', 'art/opening-webp.png']);
   const art = {
-    'art/opening.gif': 'opening', 'art/kept-png.png': 'glass', 'art/pack/manifest.json': '{}',
+    'art/opening.gif': 'opening', 'art/kept-png.png': 'glass', 'art/opening-webp.webp': 'webp', 'art/pack/manifest.json': '{}',
     'art/lazy.gif': 'lazy', 'art/lazy-changing.gif': 'lazy v1', 'art/never-used.gif': 'never',
   };
   const url = (path) => new URL(path, scope).href;
@@ -347,7 +347,7 @@ describe('what a player downloads, and what an update costs', () => {
 
   it('precaches the app, pack manifests and opening art, whichever format it ships in', async () => {
     const { manifest } = await buildFixture(art, runtimeArt);
-    expect(manifest).toEqual(expect.arrayContaining(['./index.html', './art/opening.gif', './art/kept-png.png', './art/pack/manifest.json']));
+    expect(manifest).toEqual(expect.arrayContaining(['./index.html', './art/opening.gif', './art/kept-png.png', './art/opening-webp.webp', './art/pack/manifest.json']));
     for (const path of ['./art/lazy.gif', './art/lazy-changing.gif', './art/never-used.gif']) expect(manifest).not.toContain(path);
   });
 
@@ -456,7 +456,7 @@ describe('what a player downloads, and what an update costs', () => {
       ...inPack('cozy-dining-v5', pack('cozy-dining-v5').characters),
       ...inPack('cozy-cats-v2', pack('cozy-cats-v2').breeds),
       ...inPack('cozy-team-v9', [...team.families.slice(0, 8), team.chef, ...team.seated.slice(0, 2), team.chefSeated]),
-      ...['ensemble', 'petting', 'idle-v4'].map((name) => `art/generated/cozy-seating-v3/${name}.gif`), dining.file,
+      ...['ensemble', 'petting', 'idle-v4'].map((name) => `art/generated/cozy-seating-v3/${name}.webp`), dining.file,
     ];
     expect(opening.length).toBeGreaterThan(400);
     expect(opening.filter((name) => !isPrecached(name))).toEqual([]);
@@ -498,8 +498,8 @@ describe('Vite precache integration', () => {
 
 // Street art must work on the first offline street visit, before any runtime fetch.
 describe('first offline street visit', () => {
-  it('precaches every shipped street PNG and serves them after installation without prior use', async () => {
-    const names = readdirSync('public/art/street-scene').filter(name => name.endsWith('.png')).map(name => `art/street-scene/${name}`);
+  it('precaches every shipped street image and serves them after installation without prior use', async () => {
+    const names = readdirSync('public/art/street-scene').filter(name => name.endsWith('.webp')).map(name => `art/street-scene/${name}`);
     expect(names.length).toBeGreaterThanOrEqual(22);
     expect(names.filter(name => !isPrecached(name))).toEqual([]);
     const { source, manifest } = await buildFixture(Object.fromEntries(names.map(name => [name, readFileSync(`public/${name}`)])));
@@ -511,14 +511,14 @@ describe('first offline street visit', () => {
 
 // All approved storefront/scenery layers must exist before a first offline street visit.
 describe('approved street art v2 offline contract', () => {
-  it('registers every generated PNG and actually precaches its bytes', async () => {
+  it('registers every generated image and actually precaches its bytes', async () => {
     const folder = new URL('../public/art/street-art-v2/', import.meta.url);
-    const names = readdirSync(folder).filter(name => name.endsWith('.png'));
+    const names = readdirSync(folder).filter(name => name.endsWith('.webp'));
     // Preserve all approved originals while allowing independently authored depth layers.
     expect(names).toEqual(expect.arrayContaining([
-      'bench.png', 'bookshop.png', 'cafe.png', 'cloud.png', 'curb.png', 'florist.png',
-      'hills.png', 'lamp.png', 'paving.png', 'plant-shop.png', 'pottery.png',
-      'shadow.png', 'tea-shop.png', 'town.png', 'vacant-blue.png', 'vacant-brick.png',
+      'bench.webp', 'bookshop.webp', 'cafe.webp', 'cloud.webp', 'curb.webp', 'florist.webp',
+      'hills.webp', 'lamp.webp', 'paving.webp', 'plant-shop.webp', 'pottery.webp',
+      'shadow.webp', 'tea-shop.webp', 'town.webp', 'vacant-blue.webp', 'vacant-brick.webp',
     ]));
     const files = Object.fromEntries(names.map(name => [`art/street-art-v2/${name}`, readFileSync(new URL(name, folder))]));
     for (const name of Object.keys(files)) expect(isPrecached(name), name).toBe(true);

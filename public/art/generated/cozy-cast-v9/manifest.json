@@ -6,9 +6,9 @@
   "characters": [
     {
       "id": 0,
-      "file": "customer-0.gif",
+      "file": "customer-0.webp",
       "cycle": {
-        "file": "customer-0-walk.gif",
+        "file": "customer-0-walk.webp",
         "frames": [
           {
             "box": [
@@ -770,9 +770,9 @@
     },
     {
       "id": 1,
-      "file": "customer-1.gif",
+      "file": "customer-1.webp",
       "cycle": {
-        "file": "customer-1-walk.gif",
+        "file": "customer-1-walk.webp",
         "frames": [
           {
             "box": [
@@ -1534,9 +1534,9 @@
     },
     {
       "id": 2,
-      "file": "customer-2.gif",
+      "file": "customer-2.webp",
       "cycle": {
-        "file": "customer-2-walk.gif",
+        "file": "customer-2-walk.webp",
         "frames": [
           {
             "box": [
@@ -2298,9 +2298,9 @@
     },
     {
       "id": 3,
-      "file": "customer-3.gif",
+      "file": "customer-3.webp",
       "cycle": {
-        "file": "customer-3-walk.gif",
+        "file": "customer-3-walk.webp",
         "frames": [
           {
             "box": [
@@ -3062,9 +3062,9 @@
     },
     {
       "id": 4,
-      "file": "customer-4.gif",
+      "file": "customer-4.webp",
       "cycle": {
-        "file": "customer-4-walk.gif",
+        "file": "customer-4-walk.webp",
         "frames": [
           {
             "box": [
@@ -3826,9 +3826,9 @@
     },
     {
       "id": 5,
-      "file": "customer-5.gif",
+      "file": "customer-5.webp",
       "cycle": {
-        "file": "customer-5-walk.gif",
+        "file": "customer-5-walk.webp",
         "frames": [
           {
             "box": [
@@ -4590,9 +4590,9 @@
     },
     {
       "id": 6,
-      "file": "customer-6.gif",
+      "file": "customer-6.webp",
       "cycle": {
-        "file": "customer-6-walk.gif",
+        "file": "customer-6-walk.webp",
         "frames": [
           {
             "box": [
@@ -5354,9 +5354,9 @@
     },
     {
       "id": 7,
-      "file": "customer-7.gif",
+      "file": "customer-7.webp",
       "cycle": {
-        "file": "customer-7-walk.gif",
+        "file": "customer-7-walk.webp",
         "frames": [
           {
             "box": [
@@ -6118,9 +6118,9 @@
     },
     {
       "id": 8,
-      "file": "customer-8.gif",
+      "file": "customer-8.webp",
       "cycle": {
-        "file": "customer-8-walk.gif",
+        "file": "customer-8-walk.webp",
         "frames": [
           {
             "box": [
@@ -6882,9 +6882,9 @@
     },
     {
       "id": 9,
-      "file": "customer-9.gif",
+      "file": "customer-9.webp",
       "cycle": {
-        "file": "customer-9-walk.gif",
+        "file": "customer-9-walk.webp",
         "frames": [
           {
             "box": [
@@ -7646,9 +7646,9 @@
     },
     {
       "id": 10,
-      "file": "customer-10.gif",
+      "file": "customer-10.webp",
       "cycle": {
-        "file": "customer-10-walk.gif",
+        "file": "customer-10-walk.webp",
         "frames": [
           {
             "box": [
@@ -8410,9 +8410,9 @@
     },
     {
       "id": 11,
-      "file": "customer-11.gif",
+      "file": "customer-11.webp",
       "cycle": {
-        "file": "customer-11-walk.gif",
+        "file": "customer-11-walk.webp",
         "frames": [
           {
             "box": [
@@ -9174,9 +9174,9 @@
     },
     {
       "id": 12,
-      "file": "customer-12.gif",
+      "file": "customer-12.webp",
       "cycle": {
-        "file": "customer-12-walk.gif",
+        "file": "customer-12-walk.webp",
         "frames": [
           {
             "box": [
@@ -9938,9 +9938,9 @@
     },
     {
       "id": 13,
-      "file": "customer-13.gif",
+      "file": "customer-13.webp",
       "cycle": {
-        "file": "customer-13-walk.gif",
+        "file": "customer-13-walk.webp",
         "frames": [
           {
             "box": [
@@ -10702,9 +10702,9 @@
     },
     {
       "id": 14,
-      "file": "customer-14.gif",
+      "file": "customer-14.webp",
       "cycle": {
-        "file": "customer-14-walk.gif",
+        "file": "customer-14-walk.webp",
         "frames": [
           {
             "box": [
@@ -11466,9 +11466,9 @@
     },
     {
       "id": 15,
-      "file": "customer-15.gif",
+      "file": "customer-15.webp",
       "cycle": {
-        "file": "customer-15-walk.gif",
+        "file": "customer-15-walk.webp",
         "frames": [
           {
             "box": [
@@ -12230,9 +12230,9 @@
     },
     {
       "id": 16,
-      "file": "customer-16.gif",
+      "file": "customer-16.webp",
       "cycle": {
-        "file": "customer-16-walk.gif",
+        "file": "customer-16-walk.webp",
         "frames": [
           {
             "box": [
@@ -12994,9 +12994,9 @@
     },
     {
       "id": 17,
-      "file": "customer-17.gif",
+      "file": "customer-17.webp",
       "cycle": {
-        "file": "customer-17-walk.gif",
+        "file": "customer-17-walk.webp",
         "frames": [
           {
             "box": [
@@ -13758,9 +13758,9 @@
     },
     {
       "id": 18,
-      "file": "customer-18.gif",
+      "file": "customer-18.webp",
       "cycle": {
-        "file": "customer-18-walk.gif",
+        "file": "customer-18-walk.webp",
         "frames": [
           {
             "box": [
@@ -14522,9 +14522,9 @@
     },
     {
       "id": 19,
-      "file": "customer-19.gif",
+      "file": "customer-19.webp",
       "cycle": {
-        "file": "customer-19-walk.gif",
+        "file": "customer-19-walk.webp",
         "frames": [
           {
             "box": [
@@ -15286,9 +15286,9 @@
     },
     {
       "id": 20,
-      "file": "customer-20.gif",
+      "file": "customer-20.webp",
       "cycle": {
-        "file": "customer-20-walk.gif",
+        "file": "customer-20-walk.webp",
         "frames": [
           {
             "box": [
@@ -16050,9 +16050,9 @@
     },
     {
       "id": 21,
-      "file": "customer-21.gif",
+      "file": "customer-21.webp",
       "cycle": {
-        "file": "customer-21-walk.gif",
+        "file": "customer-21-walk.webp",
         "frames": [
           {
             "box": [
@@ -16814,9 +16814,9 @@
     },
     {
       "id": 22,
-      "file": "customer-22.gif",
+      "file": "customer-22.webp",
       "cycle": {
-        "file": "customer-22-walk.gif",
+        "file": "customer-22-walk.webp",
         "frames": [
           {
             "box": [
@@ -17578,9 +17578,9 @@
     },
     {
       "id": 23,
-      "file": "customer-23.gif",
+      "file": "customer-23.webp",
       "cycle": {
-        "file": "customer-23-walk.gif",
+        "file": "customer-23-walk.webp",
         "frames": [
           {
             "box": [
@@ -18342,9 +18342,9 @@
     },
     {
       "id": 24,
-      "file": "customer-24.gif",
+      "file": "customer-24.webp",
       "cycle": {
-        "file": "customer-24-walk.gif",
+        "file": "customer-24-walk.webp",
         "frames": [
           {
             "box": [
@@ -19106,9 +19106,9 @@
     },
     {
       "id": 25,
-      "file": "customer-25.gif",
+      "file": "customer-25.webp",
       "cycle": {
-        "file": "customer-25-walk.gif",
+        "file": "customer-25-walk.webp",
         "frames": [
           {
             "box": [
@@ -19870,9 +19870,9 @@
     },
     {
       "id": 26,
-      "file": "customer-26.gif",
+      "file": "customer-26.webp",
       "cycle": {
-        "file": "customer-26-walk.gif",
+        "file": "customer-26-walk.webp",
         "frames": [
           {
             "box": [
@@ -20634,9 +20634,9 @@
     },
     {
       "id": 27,
-      "file": "customer-27.gif",
+      "file": "customer-27.webp",
       "cycle": {
-        "file": "customer-27-walk.gif",
+        "file": "customer-27-walk.webp",
         "frames": [
           {
             "box": [
@@ -21398,9 +21398,9 @@
     },
     {
       "id": 28,
-      "file": "customer-28.gif",
+      "file": "customer-28.webp",
       "cycle": {
-        "file": "customer-28-walk.gif",
+        "file": "customer-28-walk.webp",
         "frames": [
           {
             "box": [
@@ -22162,9 +22162,9 @@
     },
     {
       "id": 29,
-      "file": "customer-29.gif",
+      "file": "customer-29.webp",
       "cycle": {
-        "file": "customer-29-walk.gif",
+        "file": "customer-29-walk.webp",
         "frames": [
           {
             "box": [
@@ -22926,9 +22926,9 @@
     },
     {
       "id": 30,
-      "file": "customer-30.gif",
+      "file": "customer-30.webp",
       "cycle": {
-        "file": "customer-30-walk.gif",
+        "file": "customer-30-walk.webp",
         "frames": [
           {
             "box": [
@@ -23690,9 +23690,9 @@
     },
     {
       "id": 31,
-      "file": "customer-31.gif",
+      "file": "customer-31.webp",
       "cycle": {
-        "file": "customer-31-walk.gif",
+        "file": "customer-31-walk.webp",
         "frames": [
           {
             "box": [
@@ -24454,9 +24454,9 @@
     },
     {
       "id": 32,
-      "file": "customer-32.gif",
+      "file": "customer-32.webp",
       "cycle": {
-        "file": "customer-32-walk.gif",
+        "file": "customer-32-walk.webp",
         "frames": [
           {
             "box": [
@@ -25218,9 +25218,9 @@
     },
     {
       "id": 33,
-      "file": "customer-33.gif",
+      "file": "customer-33.webp",
       "cycle": {
-        "file": "customer-33-walk.gif",
+        "file": "customer-33-walk.webp",
         "frames": [
           {
             "box": [
@@ -25982,9 +25982,9 @@
     },
     {
       "id": 34,
-      "file": "customer-34.gif",
+      "file": "customer-34.webp",
       "cycle": {
-        "file": "customer-34-walk.gif",
+        "file": "customer-34-walk.webp",
         "frames": [
           {
             "box": [
@@ -26746,9 +26746,9 @@
     },
     {
       "id": 35,
-      "file": "customer-35.gif",
+      "file": "customer-35.webp",
       "cycle": {
-        "file": "customer-35-walk.gif",
+        "file": "customer-35-walk.webp",
         "frames": [
           {
             "box": [

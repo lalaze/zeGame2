@@ -8,6 +8,7 @@
 // first seated pose rests on the tabletop ellipse, and both petting hands are painted pixels.
 import fs from 'node:fs';
 import { decodePng } from '../pixel-conform.mjs';
+import { artMaster } from '../art-files.mjs';
 
 const DINING = 'public/art/generated/cozy-dining-v5', W = 80, H = 88;
 // The tabletop in seated-frame coordinates (art pixels), from SEATING_LAYOUT and the dining table manifest.
@@ -17,7 +18,7 @@ const manifest = JSON.parse(fs.readFileSync(`${DINING}/manifest.json`, 'utf8'));
 const problems = [];
 for (const sheet of manifest.characters) {
   if (!/^customer-\d+\.png$/.test(sheet.file)) continue;
-  const image = decodePng(`${DINING}/${sheet.file}`), solid = (frame, x, y) => x >= 0 && y >= 0 && x < W && y < H && image.pixels[(y * image.width + frame * W + x) * 4 + 3] > 0;
+  const image = decodePng(artMaster(`${DINING}/${sheet.file}`)), solid = (frame, x, y) => x >= 0 && y >= 0 && x < W && y < H && image.pixels[(y * image.width + frame * W + x) * 4 + 3] > 0;
   const notes = [];
   sheet.frames.forEach((meta, frame) => {
     let floor = 0, top = H;

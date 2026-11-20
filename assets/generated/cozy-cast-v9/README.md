@@ -24,6 +24,7 @@ transparency), and `kit.json` records the prompt, references and Codex thread.
 ```sh
 node scripts/art-gen/cast-batch.mjs --ids=8,26 --take=2   # new takes; --all for everyone
 node scripts/build-cozy-cast-v9.mjs                        # compile the packs (newest take wins)
+node scripts/convert-art-webp.mjs                          # ship them as lossless WebP
 node scripts/art-gen/cast-check.mjs                        # seating contracts, per guest
 npx vitest run src/render/cozy-cast-art.test.mjs
 ```
@@ -38,6 +39,8 @@ sprites Codex was shown so it knew who each guest is. One kit takes Codex about 
 - `public/art/generated/cozy-cast-v9/customer-N-walk.gif`: six-frame cycles, a row per direction.
 - `public/art/generated/cozy-dining-v5/customer-N.gif`: the three seated poses with the chair.
 - PNG masters under `assets/art-masters/`, rows in `assets/art-masters/conversion.json`.
+
+`scripts/convert-art-webp.mjs` then turns each GIF into a lossless WebP with the same pixels.
 
 Frames are 80x88 art pixels, snapped to the guest palette with on/off transparency. Standing
 figures are 78 px tall with feet on y=84 and the head centred on x=40; seated figures keep the

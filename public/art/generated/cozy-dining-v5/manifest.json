@@ -7,7 +7,7 @@
   "characters": [
     {
       "id": 0,
-      "file": "customer-0.gif",
+      "file": "customer-0.webp",
       "source": "kits/customer-0/take-1/sheet.png",
       "scale": 0.371,
       "frames": [
@@ -90,7 +90,7 @@
     },
     {
       "id": 1,
-      "file": "customer-1.gif",
+      "file": "customer-1.webp",
       "source": "kits/customer-1/take-1/sheet.png",
       "scale": 0.3562,
       "frames": [
@@ -173,7 +173,7 @@
     },
     {
       "id": 2,
-      "file": "customer-2.gif",
+      "file": "customer-2.webp",
       "source": "kits/customer-2/take-1/sheet.png",
       "scale": 0.375,
       "frames": [
@@ -256,7 +256,7 @@
     },
     {
       "id": 3,
-      "file": "customer-3.gif",
+      "file": "customer-3.webp",
       "source": "kits/customer-3/take-1/sheet.png",
       "scale": 0.3786,
       "frames": [
@@ -339,7 +339,7 @@
     },
     {
       "id": 4,
-      "file": "customer-4.gif",
+      "file": "customer-4.webp",
       "source": "kits/customer-4/take-1/sheet.png",
       "scale": 0.3679,
       "frames": [
@@ -422,7 +422,7 @@
     },
     {
       "id": 5,
-      "file": "customer-5.gif",
+      "file": "customer-5.webp",
       "source": "kits/customer-5/take-1/sheet.png",
       "scale": 0.3645,
       "frames": [
@@ -505,7 +505,7 @@
     },
     {
       "id": 6,
-      "file": "customer-6.gif",
+      "file": "customer-6.webp",
       "source": "kits/customer-6/take-1/sheet.png",
       "scale": 0.3645,
       "frames": [
@@ -588,7 +588,7 @@
     },
     {
       "id": 7,
-      "file": "customer-7.gif",
+      "file": "customer-7.webp",
       "source": "kits/customer-7/take-1/sheet.png",
       "scale": 0.3436,
       "frames": [
@@ -671,7 +671,7 @@
     },
     {
       "id": 8,
-      "file": "customer-8.gif",
+      "file": "customer-8.webp",
       "source": "kits/customer-8/take-1/sheet.png",
       "scale": 0.3662,
       "frames": [
@@ -754,7 +754,7 @@
     },
     {
       "id": 9,
-      "file": "customer-9.gif",
+      "file": "customer-9.webp",
       "source": "kits/customer-9/take-1/sheet.png",
       "scale": 0.375,
       "frames": [
@@ -837,7 +837,7 @@
     },
     {
       "id": 10,
-      "file": "customer-10.gif",
+      "file": "customer-10.webp",
       "source": "kits/customer-10/take-1/sheet.png",
       "scale": 0.3744,
       "frames": [
@@ -920,7 +920,7 @@
     },
     {
       "id": 11,
-      "file": "customer-11.gif",
+      "file": "customer-11.webp",
       "source": "kits/customer-11/take-1/sheet.png",
       "scale": 0.3644,
       "frames": [
@@ -1003,7 +1003,7 @@
     },
     {
       "id": 12,
-      "file": "customer-12.gif",
+      "file": "customer-12.webp",
       "source": "kits/customer-12/take-1/sheet.png",
       "scale": 0.3661,
       "frames": [
@@ -1086,7 +1086,7 @@
     },
     {
       "id": 13,
-      "file": "customer-13.gif",
+      "file": "customer-13.webp",
       "source": "kits/customer-13/take-1/sheet.png",
       "scale": 0.3467,
       "frames": [
@@ -1169,7 +1169,7 @@
     },
     {
       "id": 14,
-      "file": "customer-14.gif",
+      "file": "customer-14.webp",
       "source": "kits/customer-14/take-1/sheet.png",
       "scale": 0.3796,
       "frames": [
@@ -1252,7 +1252,7 @@
     },
     {
       "id": 15,
-      "file": "customer-15.gif",
+      "file": "customer-15.webp",
       "source": "kits/customer-15/take-1/sheet.png",
       "scale": 0.3732,
       "frames": [
@@ -1335,7 +1335,7 @@
     },
     {
       "id": 16,
-      "file": "customer-16.gif",
+      "file": "customer-16.webp",
       "source": "kits/customer-16/take-1/sheet.png",
       "scale": 0.3868,
       "frames": [
@@ -1418,7 +1418,7 @@
     },
     {
       "id": 17,
-      "file": "customer-17.gif",
+      "file": "customer-17.webp",
       "source": "kits/customer-17/take-1/sheet.png",
       "scale": 0.3529,
       "frames": [
@@ -1501,7 +1501,7 @@
     },
     {
       "id": 18,
-      "file": "customer-18.gif",
+      "file": "customer-18.webp",
       "source": "kits/customer-18/take-1/sheet.png",
       "scale": 0.3645,
       "frames": [
@@ -1584,7 +1584,7 @@
     },
     {
       "id": 19,
-      "file": "customer-19.gif",
+      "file": "customer-19.webp",
       "source": "kits/customer-19/take-1/sheet.png",
       "scale": 0.3611,
       "frames": [
@@ -1667,7 +1667,7 @@
     },
     {
       "id": 20,
-      "file": "customer-20.gif",
+      "file": "customer-20.webp",
       "source": "kits/customer-20/take-1/sheet.png",
       "scale": 0.3727,
       "frames": [
@@ -1750,7 +1750,7 @@
     },
     {
       "id": 21,
-      "file": "customer-21.gif",
+      "file": "customer-21.webp",
       "source": "kits/customer-21/take-1/sheet.png",
       "scale": 0.3727,
       "frames": [
@@ -1833,7 +1833,7 @@
     },
     {
       "id": 22,
-      "file": "customer-22.gif",
+      "file": "customer-22.webp",
       "source": "kits/customer-22/take-1/sheet.png",
       "scale": 0.3779,
       "frames": [
@@ -1916,7 +1916,7 @@
     },
     {
       "id": 23,
-      "file": "customer-23.gif",
+      "file": "customer-23.webp",
       "source": "kits/customer-23/take-1/sheet.png",
       "scale": 0.3796,
       "frames": [
@@ -1999,7 +1999,7 @@
     },
     {
       "id": 24,
-      "file": "customer-24.gif",
+      "file": "customer-24.webp",
       "source": "kits/customer-24/take-1/sheet.png",
       "scale": 0.3628,
       "frames": [
@@ -2082,7 +2082,7 @@
     },
     {
       "id": 25,
-      "file": "customer-25.gif",
+      "file": "customer-25.webp",
       "source": "kits/customer-25/take-1/sheet.png",
       "scale": 0.3768,
       "frames": [
@@ -2165,7 +2165,7 @@
     },
     {
       "id": 26,
-      "file": "customer-26.gif",
+      "file": "customer-26.webp",
       "source": "kits/customer-26/take-1/sheet.png",
       "scale": 0.375,
       "frames": [
@@ -2248,7 +2248,7 @@
     },
     {
       "id": 27,
-      "file": "customer-27.gif",
+      "file": "customer-27.webp",
       "source": "kits/customer-27/take-1/sheet.png",
       "scale": 0.3662,
       "frames": [
@@ -2331,7 +2331,7 @@
     },
     {
       "id": 28,
-      "file": "customer-28.gif",
+      "file": "customer-28.webp",
       "source": "kits/customer-28/take-1/sheet.png",
       "scale": 0.3596,
       "frames": [
@@ -2414,7 +2414,7 @@
     },
     {
       "id": 29,
-      "file": "customer-29.gif",
+      "file": "customer-29.webp",
       "source": "kits/customer-29/take-1/sheet.png",
       "scale": 0.3644,
       "frames": [
@@ -2497,7 +2497,7 @@
     },
     {
       "id": 30,
-      "file": "customer-30.gif",
+      "file": "customer-30.webp",
       "source": "kits/customer-30/take-1/sheet.png",
       "scale": 0.3679,
       "frames": [
@@ -2580,7 +2580,7 @@
     },
     {
       "id": 31,
-      "file": "customer-31.gif",
+      "file": "customer-31.webp",
       "source": "kits/customer-31/take-1/sheet.png",
       "scale": 0.3645,
       "frames": [
@@ -2663,7 +2663,7 @@
     },
     {
       "id": 32,
-      "file": "customer-32.gif",
+      "file": "customer-32.webp",
       "source": "kits/customer-32/take-1/sheet.png",
       "scale": 0.3697,
       "frames": [
@@ -2746,7 +2746,7 @@
     },
     {
       "id": 33,
-      "file": "customer-33.gif",
+      "file": "customer-33.webp",
       "source": "kits/customer-33/take-1/sheet.png",
       "scale": 0.3744,
       "frames": [
@@ -2829,7 +2829,7 @@
     },
     {
       "id": 34,
-      "file": "customer-34.gif",
+      "file": "customer-34.webp",
       "source": "kits/customer-34/take-1/sheet.png",
       "scale": 0.3451,
       "frames": [
@@ -2912,7 +2912,7 @@
     },
     {
       "id": 35,
-      "file": "customer-35.gif",
+      "file": "customer-35.webp",
       "source": "kits/customer-35/take-1/sheet.png",
       "scale": 0.3714,
       "frames": [

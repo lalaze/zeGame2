@@ -48,6 +48,7 @@ brightness the histogram counted (a flat colour could otherwise fall below its o
 node scripts/art-gen/team-batch.mjs --ids=12,chef --take=2    # new takes; --all for everyone
 node scripts/art-gen/team-review.mjs --out=/tmp/staff-review  # every pose, recoloured, to look over
 node scripts/build-team-v9.mjs                                # compile the pack (newest take wins)
+node scripts/convert-art-webp.mjs                             # ship it as lossless WebP
 npx vitest run src/render/cozy-team-art.test.ts src/render/team-pixel-art.test.ts
 ```
 

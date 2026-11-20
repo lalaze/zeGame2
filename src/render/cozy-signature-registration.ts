@@ -105,18 +105,18 @@ export const COZY_SIGNATURE_VESSELS = {
 } as const;
 
 export const COZY_SIGNATURE_ASSETS = {
-  "signature-cup-coffee": "cozy-signature-v2/cup-coffee.png",
-  "signature-cup-tea": "cozy-signature-v2/cup-tea.png",
-  "signature-cup-milk": "cozy-signature-v2/cup-milk.png",
-  "signature-cup-fruit": "cozy-signature-v2/cup-fruit.png",
-  "signature-liquid-coffee": "cozy-signature-v2/liquid-coffee.gif",
-  "signature-liquid-tea": "cozy-signature-v2/liquid-tea.gif",
-  "signature-liquid-milk": "cozy-signature-v2/liquid-milk.gif",
-  "signature-liquid-fruit": "cozy-signature-v2/liquid-fruit.gif",
-  "signature-topping-sugar": "cozy-signature-v2/topping-sugar.gif",
-  "signature-topping-spice": "cozy-signature-v2/topping-spice.gif",
-  "signature-topping-cocoa": "cozy-signature-v2/topping-cocoa.gif",
-  "signature-topping-cream": "cozy-signature-v2/topping-cream.gif",
-  "signature-topping-fruit": "cozy-signature-v2/topping-fruit.gif",
-  "signature-topping-matcha": "cozy-signature-v2/topping-matcha.gif"
+  "signature-cup-coffee": "cozy-signature-v2/cup-coffee.webp",
+  "signature-cup-tea": "cozy-signature-v2/cup-tea.webp",
+  "signature-cup-milk": "cozy-signature-v2/cup-milk.webp",
+  "signature-cup-fruit": "cozy-signature-v2/cup-fruit.webp",
+  "signature-liquid-coffee": "cozy-signature-v2/liquid-coffee.webp",
+  "signature-liquid-tea": "cozy-signature-v2/liquid-tea.webp",
+  "signature-liquid-milk": "cozy-signature-v2/liquid-milk.webp",
+  "signature-liquid-fruit": "cozy-signature-v2/liquid-fruit.webp",
+  "signature-topping-sugar": "cozy-signature-v2/topping-sugar.webp",
+  "signature-topping-spice": "cozy-signature-v2/topping-spice.webp",
+  "signature-topping-cocoa": "cozy-signature-v2/topping-cocoa.webp",
+  "signature-topping-cream": "cozy-signature-v2/topping-cream.webp",
+  "signature-topping-fruit": "cozy-signature-v2/topping-fruit.webp",
+  "signature-topping-matcha": "cozy-signature-v2/topping-matcha.webp"
 } as const;

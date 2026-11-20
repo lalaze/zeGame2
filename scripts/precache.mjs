@@ -20,7 +20,7 @@ const RUNTIME_ART = new Set(JSON.parse(readFileSync(new URL('./runtime-art.json'
  * art is cached the first time something asks for it.
  */
 export function isPrecached(name, runtimeArt = RUNTIME_ART) {
-  return !name.startsWith('art/') || name.endsWith('/manifest.json') || runtimeArt.has(name.replace(/\.gif$/, '.png'));
+  return !name.startsWith('art/') || name.endsWith('/manifest.json') || runtimeArt.has(name.replace(/\.(gif|webp)$/, '.png'));
 }
 
 // Run after Vite has written both its hashed bundles and copied public files.

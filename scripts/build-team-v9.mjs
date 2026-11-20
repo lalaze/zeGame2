@@ -6,7 +6,8 @@
 //   manifest.json        pose bounds in the order src/render/cozy-team-art.ts reads them
 // Each kit is one generated sheet (scripts/art-gen/team-batch.mjs) with its colours snapped to
 // the source colours the recolouring pipeline labels reliably (scripts/art-gen/team-kit.mjs).
-// Sheets stay PNG: the pipeline reads exact colours. selected.json may pin a take per look.
+// Sheets are exact-colour PNGs: the pipeline reads exact colours. Run scripts/convert-art-webp.mjs
+// afterwards; it ships them as lossless WebP, which keeps every colour. selected.json may pin a take per look.
 //
 //   node scripts/build-team-v9.mjs [--partial]
 // --partial stands look 0 in for looks that have no kit yet (for trying the loader early).

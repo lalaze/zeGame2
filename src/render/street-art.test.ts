@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { streetShopAsset, streetShopArt, styleStreetShop, streetSceneryArt } from './street-art';
 import anchors from '../../public/art/street-art-v2/anchors.json';
+import { imageSize } from '../../scripts/art-files.mjs';
 describe('approved storefront geometry', () => {
   it('maps all six businesses and both vacant façades without legacy overlays', () => {
     const expected = { cafe:'cafe', reading:'bookshop', greenhouse:'plant-shop', terrace:'florist', workshop:'pottery', observatory:'tea-shop' } as const;
@@ -17,8 +18,8 @@ describe('approved storefront geometry', () => {
   });
   it('preserves every raster aspect ratio and has an authored sign/door anchor', () => {
     for (const [key, a] of Object.entries(anchors)) {
-      const png=readFileSync(`${process.cwd()}/public/art/street-art-v2/${key}.png`);
-      expect(a.width).toBe(png.readUInt32BE(16)*2); expect(a.height).toBe(png.readUInt32BE(20)*2);
+      const [width, height]=imageSize(readFileSync(`${process.cwd()}/public/art/street-art-v2/${key}.webp`));
+      expect(a.width).toBe(width*2); expect(a.height).toBe(height*2);
       expect(a.signY).toBeGreaterThan(0); expect(a.signY).toBeLessThan(a.height);
       expect(a.doorX).toBeGreaterThan(0); expect(a.doorX).toBeLessThan(a.width);
     }
@@ -31,6 +32,6 @@ describe('approved storefront geometry', () => {
     expect(html.match(/class="street-walker /g)).toHaveLength(6);
     const css=readFileSync(`${process.cwd()}/src/ui/streets.css`,'utf8');
     expect(css).toContain('.street-shop-open .street-shop-visitor { display: none; }');
-    expect(css).toContain('street-art-v2/paving.png');expect(css).toContain('street-art-v2/curb.png');
+    expect(css).toContain('street-art-v2/paving.webp');expect(css).toContain('street-art-v2/curb.webp');
   });
 });

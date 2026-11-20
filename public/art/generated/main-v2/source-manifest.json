@@ -91,7 +91,7 @@
   },
   {
     "name": "table-no-vase",
-    "file": "table-no-vase.gif",
+    "file": "table-no-vase.webp",
     "source": "seating-production-sheet.png",
     "source_crop": [
       175,
@@ -151,7 +151,7 @@
   },
   {
     "name": "chair-facing-right",
-    "file": "chair-facing-right.gif",
+    "file": "chair-facing-right.webp",
     "source": "seating-production-sheet.png",
     "source_crop": [
       240,
@@ -181,7 +181,7 @@
   },
   {
     "name": "chair-facing-left",
-    "file": "chair-facing-left.gif",
+    "file": "chair-facing-left.webp",
     "source": "seating-production-sheet.png",
     "source_crop": [
       931,

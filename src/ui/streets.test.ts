@@ -89,8 +89,8 @@ describe('street selection and property management', () => {
   });
   it('uses document-absolute sprite URLs in CSS variables for production stylesheets', () => {
     open();
-    expect(streetSceneryArt()).toMatch(/--guest:url\('http[^']+\/art\/street-scene\/guest-0.png'\)/);
-    expect(button('[data-plot="01"]').style.getPropertyValue('--guest')).toMatch(/url\("http.*\/art\/street-scene\/guest-2.png"\)/);
+    expect(streetSceneryArt()).toMatch(/--guest:url\('http[^']+\/art\/street-scene\/guest-0.webp'\)/);
+    expect(button('[data-plot="01"]').style.getPropertyValue('--guest')).toMatch(/url\("http.*\/art\/street-scene\/guest-2.webp"\)/);
   });
   it('starts at the top, previews locked streets, and separates land purchase from fitting out', () => {
     const { state, changed } = open();
@@ -127,11 +127,11 @@ describe('street selection and property management', () => {
   it('uses approved complete storefronts, stable vacant variants and onsite renovation', () => {
     const book = streetShopArt('town', 'reading', 'open'), tea = streetShopArt('town', 'observatory', 'open');
     for (const art of [book, tea]) { expect(art).toContain('/art/street-art-v2/'); expect(art).not.toContain('<svg'); expect(art).not.toContain('street-window'); }
-    expect(book).toContain('bookshop.png'); expect(tea).toContain('tea-shop.png');
+    expect(book).toContain('bookshop.webp'); expect(tea).toContain('tea-shop.webp');
     expect(streetShopArt('town', 'reading', 'building')).toContain('street-hoarding');
-    expect(streetShopArt('town', null, 'sale')).toContain('vacant-brick.png');
-    expect(streetShopArt('town', null, 'vacant', '02')).toContain('vacant-blue.png');
-    expect(streetShopArt('seaside', 'reading', 'open')).toContain('bookshop.png');
+    expect(streetShopArt('town', null, 'sale')).toContain('vacant-brick.webp');
+    expect(streetShopArt('town', null, 'vacant', '02')).toContain('vacant-blue.webp');
+    expect(streetShopArt('seaside', 'reading', 'open')).toContain('bookshop.webp');
     open(); expect(button('[data-plot="01"]').dataset.storefront).toBe('vacant-brick');
     expect(button('[data-plot="02"]').dataset.storefront).toBe('vacant-blue');
   });

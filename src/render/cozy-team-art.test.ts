@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync, statSync } from 'node:fs';
+import { imageSize } from '../../scripts/art-files.mjs';
 import { TEAM_BASE_STYLES, TEAM_HAIRSTYLES, TEAM_STANDING_SIZE, clearCozyTeam, cozyTeamReady, cozyTeamStyleReady, preloadCozyTeam, preloadCozyTeamStyle, teamStandingTransform, validateTeamManifest, wantCozyTeamStyle, type TeamManifest } from './cozy-team-art';
 
 const manifest = (): TeamManifest => JSON.parse(readFileSync('public/art/generated/cozy-team-v9/manifest.json', 'utf8'));
@@ -13,9 +14,7 @@ describe('whole-figure cozy team art', () => {
     const m = manifest();
     expect(() => validateTeamManifest(m)).not.toThrow();
     for (const sheet of [...m.families, m.chef, ...m.seated, m.chefSeated]) {
-      const png = readFileSync(`public/art/generated/cozy-team-v9/${sheet.file}`);
-      expect(png.subarray(1, 4).toString()).toBe('PNG');
-      const width = png.readUInt32BE(16), height = png.readUInt32BE(20);
+      const [width, height] = imageSize(readFileSync(`public/art/generated/cozy-team-v9/${sheet.file}`));
       for (const [x, y, r, b] of sheet.bounds) {
         expect(x).toBeGreaterThanOrEqual(0); expect(y).toBeGreaterThanOrEqual(0);
         expect(r).toBeLessThanOrEqual(width); expect(b).toBeLessThanOrEqual(height);
@@ -80,7 +79,7 @@ describe('loading owner looks on demand', () => {
   it('decodes one look when asked, sharing its seated sheet with its neighbour', async () => {
     await preloadCozyTeam(); requested.length = 0;
     await Promise.all([preloadCozyTeamStyle(12), preloadCozyTeamStyle(13)]);
-    expect(names().sort()).toEqual(['hair-12-beard-v2.png', 'hair-13-buzz-v2.png', 'seated-d-v2.png']);
+    expect(names().sort()).toEqual(['hair-12-beard-v2.webp', 'hair-13-buzz-v2.webp', 'seated-d-v2.webp']);
     expect(cozyTeamStyleReady(12)).toBe(true);
     expect(cozyTeamStyleReady(14)).toBe(false);
   });

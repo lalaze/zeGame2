@@ -7,7 +7,7 @@
     {
       "id": "bookshelf",
       "key": "furniture-bookshelf",
-      "file": "furniture-bookshelf.gif",
+      "file": "furniture-bookshelf.webp",
       "atlas": "furniture-a-atlas.png",
       "crop": {
         "left": 413,
@@ -41,7 +41,7 @@
     {
       "id": "catbed",
       "key": "furniture-catbed",
-      "file": "furniture-catbed.gif",
+      "file": "furniture-catbed.webp",
       "atlas": "furniture-a-atlas.png",
       "crop": {
         "left": 857,
@@ -75,7 +75,7 @@
     {
       "id": "aframe",
       "key": "furniture-aframe",
-      "file": "furniture-aframe.gif",
+      "file": "furniture-aframe.webp",
       "atlas": "furniture-a-atlas.png",
       "crop": {
         "left": 49,
@@ -109,7 +109,7 @@
     {
       "id": "lamp",
       "key": "furniture-lamp",
-      "file": "furniture-lamp.gif",
+      "file": "furniture-lamp.webp",
       "atlas": "furniture-a-atlas.png",
       "crop": {
         "left": 533,
@@ -143,7 +143,7 @@
     {
       "id": "bench",
       "key": "furniture-bench",
-      "file": "furniture-bench.gif",
+      "file": "furniture-bench.webp",
       "atlas": "furniture-a-atlas.png",
       "crop": {
         "left": 808,
@@ -177,7 +177,7 @@
     {
       "id": "armchair",
       "key": "furniture-armchair",
-      "file": "furniture-armchair.gif",
+      "file": "furniture-armchair.webp",
       "atlas": "furniture-a-atlas.png",
       "crop": {
         "left": 32,
@@ -211,7 +211,7 @@
     {
       "id": "gramophone",
       "key": "furniture-gramophone",
-      "file": "furniture-gramophone.gif",
+      "file": "furniture-gramophone.webp",
       "atlas": "furniture-a-atlas.png",
       "crop": {
         "left": 479,
@@ -245,7 +245,7 @@
     {
       "id": "piano",
       "key": "furniture-piano",
-      "file": "furniture-piano.gif",
+      "file": "furniture-piano.webp",
       "atlas": "furniture-a-atlas.png",
       "crop": {
         "left": 799,
@@ -279,7 +279,7 @@
     {
       "id": "sofa",
       "key": "furniture-sofa",
-      "file": "furniture-sofa.gif",
+      "file": "furniture-sofa.webp",
       "atlas": "furniture-b-atlas.png",
       "crop": {
         "left": 26,
@@ -313,7 +313,7 @@
     {
       "id": "round_stool",
       "key": "furniture-round_stool",
-      "file": "furniture-round_stool.gif",
+      "file": "furniture-round_stool.webp",
       "atlas": "furniture-b-atlas.png",
       "crop": {
         "left": 580,
@@ -347,7 +347,7 @@
     {
       "id": "lantern",
       "key": "furniture-lantern",
-      "file": "furniture-lantern.gif",
+      "file": "furniture-lantern.webp",
       "atlas": "furniture-b-atlas.png",
       "crop": {
         "left": 951,
@@ -381,7 +381,7 @@
     {
       "id": "bean_display",
       "key": "furniture-bean_display",
-      "file": "furniture-bean_display.gif",
+      "file": "furniture-bean_display.webp",
       "atlas": "furniture-b-atlas.png",
       "crop": {
         "left": 21,
@@ -415,7 +415,7 @@
     {
       "id": "sideboard",
       "key": "furniture-sideboard",
-      "file": "furniture-sideboard.gif",
+      "file": "furniture-sideboard.webp",
       "atlas": "furniture-b-atlas.png",
       "crop": {
         "left": 410,
@@ -449,7 +449,7 @@
     {
       "id": "display_cabinet",
       "key": "furniture-display_cabinet",
-      "file": "furniture-display_cabinet.gif",
+      "file": "furniture-display_cabinet.webp",
       "atlas": "furniture-b-atlas.png",
       "crop": {
         "left": 918,
@@ -483,7 +483,7 @@
     {
       "id": "magazine_rack",
       "key": "furniture-magazine_rack",
-      "file": "furniture-magazine_rack.gif",
+      "file": "furniture-magazine_rack.webp",
       "atlas": "furniture-b-atlas.png",
       "crop": {
         "left": 56,
@@ -517,7 +517,7 @@
     {
       "id": "coffee_cart",
       "key": "furniture-coffee_cart",
-      "file": "furniture-coffee_cart.gif",
+      "file": "furniture-coffee_cart.webp",
       "atlas": "furniture-b-atlas.png",
       "crop": {
         "left": 412,
@@ -551,7 +551,7 @@
     {
       "id": "sconce",
       "key": "furniture-sconce",
-      "file": "furniture-sconce.gif",
+      "file": "furniture-sconce.webp",
       "atlas": "furniture-b-atlas.png",
       "crop": {
         "left": 947,
@@ -585,7 +585,7 @@
     {
       "id": "plant_fern",
       "key": "furniture-plant_fern",
-      "file": "furniture-plant_fern.gif",
+      "file": "furniture-plant_fern.webp",
       "atlas": "plants-atlas.png",
       "crop": {
         "left": 19,
@@ -619,7 +619,7 @@
     {
       "id": "plant_fig",
       "key": "furniture-plant_fig",
-      "file": "furniture-plant_fig.gif",
+      "file": "furniture-plant_fig.webp",
       "atlas": "plants-atlas.png",
       "crop": {
         "left": 780,
@@ -653,7 +653,7 @@
     {
       "id": "plant_monstera",
       "key": "furniture-plant_monstera",
-      "file": "furniture-plant_monstera.gif",
+      "file": "furniture-plant_monstera.webp",
       "atlas": "plants-atlas.png",
       "crop": {
         "left": 24,
@@ -687,7 +687,7 @@
     {
       "id": "plant_lemon",
       "key": "furniture-plant_lemon",
-      "file": "furniture-plant_lemon.gif",
+      "file": "furniture-plant_lemon.webp",
       "atlas": "plants-atlas.png",
       "crop": {
         "left": 402,
@@ -721,7 +721,7 @@
     {
       "id": "plant_succulent",
       "key": "furniture-plant_succulent",
-      "file": "furniture-plant_succulent.gif",
+      "file": "furniture-plant_succulent.webp",
       "atlas": "plants-atlas.png",
       "crop": {
         "left": 89,
@@ -755,7 +755,7 @@
     {
       "id": "vase_daisies",
       "key": "furniture-vase_daisies",
-      "file": "furniture-vase_daisies.gif",
+      "file": "furniture-vase_daisies.webp",
       "atlas": "plants-atlas.png",
       "crop": {
         "left": 442,
@@ -789,7 +789,7 @@
     {
       "id": "hanging_ivy",
       "key": "furniture-hanging_ivy",
-      "file": "furniture-hanging_ivy.gif",
+      "file": "furniture-hanging_ivy.webp",
       "atlas": "plants-atlas.png",
       "crop": {
         "left": 793,
@@ -823,7 +823,7 @@
     {
       "id": "sill_cactus-default",
       "key": "decor-sill_cactus-default",
-      "file": "decor-sill_cactus-default.gif",
+      "file": "decor-sill_cactus-default.webp",
       "atlas": "plants-atlas.png",
       "crop": {
         "left": 121,
@@ -857,7 +857,7 @@
     {
       "id": "sill_tulips-default",
       "key": "decor-sill_tulips-default",
-      "file": "decor-sill_tulips-default.gif",
+      "file": "decor-sill_tulips-default.webp",
       "atlas": "plants-atlas.png",
       "crop": {
         "left": 412,
@@ -891,7 +891,7 @@
     {
       "id": "sill_bonsai-default",
       "key": "decor-sill_bonsai-default",
-      "file": "decor-sill_bonsai-default.gif",
+      "file": "decor-sill_bonsai-default.webp",
       "atlas": "plants-atlas.png",
       "crop": {
         "left": 755,
@@ -925,7 +925,7 @@
     {
       "id": "clock",
       "key": "furniture-clock",
-      "file": "furniture-clock.gif",
+      "file": "furniture-clock.webp",
       "atlas": "wall-atlas.png",
       "crop": {
         "left": 60,
@@ -959,7 +959,7 @@
     {
       "id": "mugrack",
       "key": "furniture-mugrack",
-      "file": "furniture-mugrack.gif",
+      "file": "furniture-mugrack.webp",
       "atlas": "wall-atlas.png",
       "crop": {
         "left": 386,
@@ -993,7 +993,7 @@
     {
       "id": "shelf",
       "key": "furniture-shelf",
-      "file": "furniture-shelf.gif",
+      "file": "furniture-shelf.webp",
       "atlas": "wall-atlas.png",
       "crop": {
         "left": 828,
@@ -1027,7 +1027,7 @@
     {
       "id": "wreath_season",
       "key": "furniture-wreath_season",
-      "file": "furniture-wreath_season.gif",
+      "file": "furniture-wreath_season.webp",
       "atlas": "wall-atlas.png",
       "crop": {
         "left": 887,
@@ -1061,7 +1061,7 @@
     {
       "id": "poster_coffee",
       "key": "furniture-poster_coffee",
-      "file": "furniture-poster_coffee.gif",
+      "file": "furniture-poster_coffee.webp",
       "atlas": "wall-atlas.png",
       "crop": {
         "left": 57,
@@ -1095,7 +1095,7 @@
     {
       "id": "poster_bakery",
       "key": "furniture-poster_bakery",
-      "file": "furniture-poster_bakery.gif",
+      "file": "furniture-poster_bakery.webp",
       "atlas": "wall-atlas.png",
       "crop": {
         "left": 458,
@@ -1129,7 +1129,7 @@
     {
       "id": "art_landscape",
       "key": "furniture-art_landscape",
-      "file": "furniture-art_landscape.gif",
+      "file": "furniture-art_landscape.webp",
       "atlas": "wall-atlas.png",
       "crop": {
         "left": 813,
@@ -1163,7 +1163,7 @@
     {
       "id": "art_cat",
       "key": "furniture-art_cat",
-      "file": "furniture-art_cat.gif",
+      "file": "furniture-art_cat.webp",
       "atlas": "accent-atlas.png",
       "crop": {
         "left": 28,
@@ -1197,7 +1197,7 @@
     {
       "id": "art_bean",
       "key": "furniture-art_bean",
-      "file": "furniture-art_bean.gif",
+      "file": "furniture-art_bean.webp",
       "atlas": "accent-atlas.png",
       "crop": {
         "left": 431,
@@ -1231,7 +1231,7 @@
     {
       "id": "art_starry",
       "key": "furniture-art_starry",
-      "file": "furniture-art_starry.gif",
+      "file": "furniture-art_starry.webp",
       "atlas": "accent-atlas.png",
       "crop": {
         "left": 835,
@@ -1265,7 +1265,7 @@
     {
       "id": "ceiling_pendants-unlit",
       "key": "decor-ceiling_pendants-unlit",
-      "file": "decor-ceiling_pendants-unlit.gif",
+      "file": "decor-ceiling_pendants-unlit.webp",
       "atlas": "accent-atlas.png",
       "crop": {
         "left": 958,
@@ -1299,7 +1299,7 @@
     {
       "id": "ceiling_chandelier-unlit",
       "key": "decor-ceiling_chandelier-unlit",
-      "file": "decor-ceiling_chandelier-unlit.gif",
+      "file": "decor-ceiling_chandelier-unlit.webp",
       "atlas": "accent-atlas.png",
       "crop": {
         "left": 53,
@@ -1333,7 +1333,7 @@
     {
       "id": "rug_red-default",
       "key": "decor-rug_red-default",
-      "file": "decor-rug_red-default.gif",
+      "file": "decor-rug_red-default.webp",
       "atlas": "accent-atlas.png",
       "crop": {
         "left": 411,
@@ -1367,7 +1367,7 @@
     {
       "id": "rug_blue-default",
       "key": "decor-rug_blue-default",
-      "file": "decor-rug_blue-default.gif",
+      "file": "decor-rug_blue-default.webp",
       "atlas": "accent-atlas.png",
       "crop": {
         "left": 822,
@@ -1401,7 +1401,7 @@
     {
       "id": "rug_round-default",
       "key": "decor-rug_round-default",
-      "file": "decor-rug_round-default.gif",
+      "file": "decor-rug_round-default.webp",
       "atlas": "accent-atlas.png",
       "crop": {
         "left": 29,
@@ -1435,7 +1435,7 @@
     {
       "id": "neon_heart-unlit",
       "key": "decor-neon_heart-unlit",
-      "file": "decor-neon_heart-unlit.gif",
+      "file": "decor-neon_heart-unlit.webp",
       "atlas": "accent-atlas.png",
       "crop": {
         "left": 915,
@@ -1469,7 +1469,7 @@
     {
       "id": "neon_cup-unlit",
       "key": "decor-neon_cup-unlit",
-      "file": "decor-neon_cup-unlit.gif",
+      "file": "decor-neon_cup-unlit.webp",
       "atlas": "neon-cup.png",
       "crop": {
         "left": 286,
@@ -1503,7 +1503,7 @@
     {
       "id": "garland",
       "key": "furniture-garland",
-      "file": "furniture-garland.gif",
+      "file": "furniture-garland.webp",
       "atlas": "wide-accents-atlas.png",
       "crop": {
         "left": 23,
@@ -1537,7 +1537,7 @@
     {
       "id": "wall_pennants",
       "key": "furniture-wall_pennants",
-      "file": "furniture-wall_pennants.gif",
+      "file": "furniture-wall_pennants.webp",
       "atlas": "wide-accents-atlas.png",
       "crop": {
         "left": 18,
@@ -1571,7 +1571,7 @@
     {
       "id": "ceiling_lights-unlit",
       "key": "decor-ceiling_lights-unlit",
-      "file": "decor-ceiling_lights-unlit.gif",
+      "file": "decor-ceiling_lights-unlit.webp",
       "atlas": "wide-accents-atlas.png",
       "crop": {
         "left": 18,
@@ -1605,7 +1605,7 @@
     {
       "id": "ceiling_vines-default",
       "key": "decor-ceiling_vines-default",
-      "file": "decor-ceiling_vines-default.gif",
+      "file": "decor-ceiling_vines-default.webp",
       "atlas": "wide-accents-atlas.png",
       "crop": {
         "left": 27,
@@ -1639,7 +1639,7 @@
     {
       "id": "neon_cafe-unlit",
       "key": "decor-neon_cafe-unlit",
-      "file": "decor-neon_cafe-unlit.gif",
+      "file": "decor-neon_cafe-unlit.webp",
       "atlas": "wide-accents-atlas.png",
       "crop": {
         "left": 33,
@@ -1673,7 +1673,7 @@
     {
       "id": "coatrack",
       "key": "furniture-coatrack",
-      "file": "furniture-coatrack.gif",
+      "file": "furniture-coatrack.webp",
       "atlas": "slender-props-atlas.png",
       "crop": {
         "left": 112,
@@ -1707,7 +1707,7 @@
     {
       "id": "plant_snake",
       "key": "furniture-plant_snake",
-      "file": "furniture-plant_snake.gif",
+      "file": "furniture-plant_snake.webp",
       "atlas": "slender-props-atlas.png",
       "crop": {
         "left": 497,
@@ -1741,7 +1741,7 @@
     {
       "id": "plant_lavender",
       "key": "furniture-plant_lavender",
-      "file": "furniture-plant_lavender.gif",
+      "file": "furniture-plant_lavender.webp",
       "atlas": "slender-props-atlas.png",
       "crop": {
         "left": 943,

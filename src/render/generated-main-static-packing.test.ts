@@ -19,9 +19,9 @@ import { WINDOWS } from '../game/layout';
 type StaticId = keyof typeof runtime.mainStaticMetadata;
 const ids = Object.keys(runtime.mainStaticMetadata) as StaticId[];
 const foods = ['espresso', 'latte', 'eggtart', 'croissant', 'cake'] as const;
-const retained = { 'cabinet-top': 'main-v1/cabinet-top.gif', 'cabinet-front': 'main-v1/cabinet-front.gif',
-  plant: 'main-v1/plant.png', table: 'main-v2/table-no-vase.gif', 'chair-right': 'main-v2/chair-facing-right.gif',
-  'chair-left': 'main-v2/chair-facing-left.gif', vase: 'main-v2/flower-vase.png' } as const;
+const retained = { 'cabinet-top': 'main-v1/cabinet-top.webp', 'cabinet-front': 'main-v1/cabinet-front.webp',
+  plant: 'main-v1/plant.png', table: 'main-v2/table-no-vase.webp', 'chair-right': 'main-v2/chair-facing-right.webp',
+  'chair-left': 'main-v2/chair-facing-left.webp', vase: 'main-v2/flower-vase.png' } as const;
 const fileBytes = (file: string) => readFileSync(new URL(`../../${artMaster(file)}`, import.meta.url));
 const hash = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 // Archive comparisons exercise the frozen v1 export, independently of whichever

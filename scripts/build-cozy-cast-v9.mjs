@@ -6,9 +6,9 @@
 // A customer's kit is one generated sheet (scripts/art-gen/codex-kit.mjs), so every pose shares
 // colours and proportions. selected.json may pin a take per id; otherwise the newest take wins.
 //
-// Like the rest of the runtime art (scripts/convert-art-gif.mjs) each sheet ships as a single-frame
-// GIF; its PNG is kept in assets/art-masters and recorded in conversion.json. Sheets are already
-// on the palette with on/off transparency, so the GIF is exact.
+// Each sheet is written as a single-frame GIF and its PNG kept in assets/art-masters (rows in
+// conversion.json). Sheets are already on the palette with on/off transparency, so the GIF is
+// exact. Run scripts/convert-art-webp.mjs afterwards: the game loads the WebP.
 //
 //   node scripts/build-cozy-cast-v9.mjs [--partial]
 // --partial keeps the shipped v7/v8 art for customers that have no kit yet.

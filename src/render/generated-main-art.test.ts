@@ -91,7 +91,7 @@ describe('generated main-room asset registry and painting', () => {
     const files = Object.values(art.GENERATED_MAIN_ASSETS);
     expect(new Set(files).size).toBe(files.length);
     for (const file of files) {
-      expect(file).toMatch(/^(?:(?:(?:main|main-runner|staff|service|wall|menu|cozy-[a-z]+)-v\d+|customer-0-v1|cat-siamese-v1)\/[a-zA-Z0-9_-]+|catalog-v1\/(?:menu|ingredients|furniture|decor|environment|tableware|signature|main-static|staff-server|staff-owner)\/[a-zA-Z0-9_-]+|catalog-v1\/(?:customers|cats)\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+)\.(?:png|gif)$/);
+      expect(file).toMatch(/^(?:(?:(?:main|main-runner|staff|service|wall|menu|cozy-[a-z]+)-v\d+|customer-0-v1|cat-siamese-v1)\/[a-zA-Z0-9_-]+|catalog-v1\/(?:menu|ingredients|furniture|decor|environment|tableware|signature|main-static|staff-server|staff-owner)\/[a-zA-Z0-9_-]+|catalog-v1\/(?:customers|cats)\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+)\.(?:png|gif|webp)$/);
       expect(file.split('/')).not.toContain('sources');
       const bytes = readFileSync(new URL(`../../public/art/generated/${file}`, import.meta.url));
       const [width, height] = imageSize(bytes);
