@@ -6,7 +6,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 import json, hashlib
 ROOT=Path(__file__).resolve().parents[2]
-SRC=ROOT/'docs/street-art-v2/source'
+SRC=ROOT/'assets/generated/street-art-v2/source'
 OUT=ROOT/'public/art/street-art-v2'
 OUT.mkdir(parents=True,exist_ok=True)
 N=Image.Resampling.NEAREST

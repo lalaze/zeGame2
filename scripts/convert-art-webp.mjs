@@ -6,11 +6,16 @@
 // in cozy-team-v9 that load when first worn. Each target's PNG master stays in, or moves to,
 // assets/art-masters, which is where tests and offline tools read pixels (scripts/art-files.mjs).
 //
+// Art that shipped as GIF before (`quantised` in webp.json) keeps shipping that GIF reduction of
+// its full-colour master (scripts/art-quantise.mjs), so a pack rebuild ships what it shipped
+// before. A file new to one of those packs is reduced too unless it is glass or mostly soft.
+//
 // Safe to re-run: a PNG or GIF a pack script writes into public/ replaces that file's WebP, and a
 // PNG becomes its new master. Revert with git.
 import fs from 'node:fs';
 import path from 'node:path';
 import sharp from '/Users/lalaze/.nvm/versions/node/v22.23.2/lib/node_modules/sharp/lib/index.js';
+import { reduce, reducesNewFile } from './art-quantise.mjs';
 
 const PUBLIC = 'public', MASTERS = 'assets/art-masters', REPORT = `${MASTERS}/webp.json`;
 /** Loaded on demand rather than precached, so not in runtime-art.json. */
@@ -53,8 +58,8 @@ async function pixels(file) {
   return { data, width: info.width, height: info.height };
 }
 
-async function encode(file) {
-  const source = await pixels(file);
+/** Lossless WebP of the given pixels, checked against them. */
+async function encode(source, file) {
   const raw = { width: source.width, height: source.height, channels: 4 };
   const webp = await sharp(source.data, { raw }).webp({ lossless: true, effort: 6 }).toBuffer();
   const back = await sharp(webp).ensureAlpha().raw().toBuffer();
@@ -100,6 +105,7 @@ function applyTemplates() {
 const previous = fs.existsSync(REPORT) ? JSON.parse(fs.readFileSync(REPORT, 'utf8')) : [];
 const rows = new Map(previous.map((row) => [row.file, row]));
 const fresh = { '.gif': new Set(), '.png': new Set() };
+let reduced = 0;
 const queue = targets();
 await Promise.all(Array.from({ length: 6 }, async () => {
   while (queue.length) {
@@ -112,7 +118,11 @@ await Promise.all(Array.from({ length: 6 }, async () => {
       continue;
     }
     const source = ext === '.png' ? png : gif;
-    const { webp, source: decoded, raw } = await encode(source);
+    const decoded = await pixels(source);
+    const known = rows.get(file);
+    const quantised = known ? Boolean(known.quantised) : reducesNewFile(file, decoded);
+    const { webp, raw } = await encode(quantised ? await reduce(decoded) : decoded, file);
+    if (quantised) reduced++;
     const bytes = fs.statSync(source).size;
     fs.writeFileSync(out, webp);
     if (ext === '.png') move(png, master);
@@ -129,7 +139,7 @@ await Promise.all(Array.from({ length: 6 }, async () => {
       fs.rmSync(stale, { force: true });
       fresh[kind].add(withExt(file, kind));
     }
-    rows.set(file, { file, from: ext.slice(1), bytes, webp: webp.length });
+    rows.set(file, { file, from: ext.slice(1), bytes, webp: webp.length, ...(quantised && { quantised: true }) });
   }
 }));
 
@@ -140,4 +150,4 @@ const changed = rewriteReferences(fresh['.gif'], '.gif') + rewriteReferences(fre
 applyTemplates();
 const mb = (bytes) => (bytes / 1048576).toFixed(2);
 const before = report.reduce((sum, row) => sum + row.bytes, 0), after = report.reduce((sum, row) => sum + row.webp, 0);
-console.log(`${fresh['.gif'].size} GIF + ${fresh['.png'].size} PNG -> WebP this run; ${report.length} files ${mb(before)} MB -> ${mb(after)} MB; ${changed} text files`);
+console.log(`${fresh['.gif'].size} GIF + ${fresh['.png'].size} PNG -> WebP this run (${reduced} reduced to GIF colours); ${report.length} files ${mb(before)} MB -> ${mb(after)} MB; ${changed} text files`);

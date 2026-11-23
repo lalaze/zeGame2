@@ -25,6 +25,9 @@ every one is still in git history before that date.
   `build-cozy-cast-v7.mjs`, `build-neighborhood-cast.mjs`) need their sources from it.
 - Screenshots linked from READMEs under `docs/` are at the same path in the library.
 
+The library also has `docs/street-art-v2/source/`, which moved back into git the same day as
+`assets/generated/street-art-v2/source/` because it rebuilds the street. That copy is a duplicate.
+
 ## What stays in git
 
 What the game ships (`public/art`, its PNG masters in `assets/art-masters`) and what rebuilds it

@@ -15,8 +15,9 @@ their phone, in portrait with touch, so check UI changes at phone size first.
 | Path | What it is |
 | --- | --- |
 | `public/art/` | What the game ships: lossless WebP. Never edit it by hand |
-| `assets/art-masters/` | The PNG master of every shipped WebP; tests and offline tools read pixels here (`artMaster()` in `scripts/art-files.mjs`). `webp.json` lists them. |
+| `assets/art-masters/` | The PNG master of every shipped WebP; tests and offline tools read pixels here (`artMaster()` in `scripts/art-files.mjs`). `webp.json` lists them. For 414 files that once shipped as GIF, the master is the full-colour original and `convert-art-webp.mjs` ships its GIF reduction (`quantised` in `webp.json`, `gifEra` in `assets/generated/PACKS.json`) |
 | `scripts/runtime-art.json` | The art downloaded at install, by PNG name. Anything else loads on demand |
+| `assets/generated/PACKS.json` | Every pack under `public/art`: what loads it, its sources, its build commands and whether it can be regenerated. Look here first; `scripts/art-packs.test.mjs` keeps it in step |
 | `assets/generated/<pack>/` | What rebuilds shipped art: kits, prompts, references, manifests, chosen takes. Current packs have a README with their regenerate, build and check commands (start with `cozy-cast-v9` and `cozy-team-v9`) |
 | `assets/legacy-packs/` | Packs the game no longer loads that scripts still read. Not live |
 | `/Volumes/data/zeGame2-library` | The art library, outside git, at the same repo-relative paths: rejected and superseded generations, retired art, the `bulk-candidates` source crops, QA screenshots and video. See `assets/ART-LIBRARY.md` |

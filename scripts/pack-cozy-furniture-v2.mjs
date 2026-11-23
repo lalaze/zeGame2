@@ -5,6 +5,16 @@ import sharp from '/Users/lalaze/.nvm/versions/node/v22.23.2/lib/node_modules/sh
 // Packaging only: original image-generated RGBA pixels are cropped and uniformly
 // resized with nearest-neighbor sampling. No drawing, recoloring or alpha cleanup.
 const root = 'public/art/generated/cozy-furniture-v2';
+/** Furnishings other scripts pack, kept in the catalog this script rewrites. */
+const PACKED_ELSEWHERE = {
+  // scripts/pack-gingham-table.mjs
+  'furniture-gingham_table': 'cozy-furniture-v2/furniture-gingham_table.webp',
+};
+/** Chain rewards, packed by scripts/pack-idle-props.mjs. */
+const CHAIN_REWARDS = {
+  'furniture-chain_map': 'cozy-idle-v1/furniture-chain_map.webp',
+  'furniture-chain_plaque': 'cozy-idle-v1/furniture-chain_plaque.webp',
+};
 const prompts = JSON.parse(await fs.readFile(`${root}/prompts.json`, 'utf8'));
 const catalogFrom = async (file, symbol) => {
   const source = await fs.readFile(file, 'utf8');
@@ -58,7 +68,8 @@ for (const [atlasIndex, atlas] of prompts.atlases.entries()) {
     const output = await sharp({ create: { width, height, channels: 4, background: '#00000000' } }).composite([{ input: cutout, left, top }]).png().toBuffer();
     const file = `${key}.png`;
     await fs.writeFile(`${root}/${file}`, output);
-    assets[key] = `cozy-furniture-v2/${file}`;
+    // The catalog names what ships: scripts/convert-art-webp.mjs turns this PNG into that WebP.
+    assets[key] = `cozy-furniture-v2/${key}.webp`;
     const point = p => ({ x: (left + (p.x - crop.left) * rw / crop.width) / packedScale, y: (top + (p.y - crop.top) * rh / crop.height) / packedScale });
     if (id === 'clock') overlays[id] = { clock: { dial: point(authoredPoints.clock.dial), minute: authoredPoints.clock.minute * scale / packedScale, hour: authoredPoints.clock.hour * scale / packedScale } };
     else if (authoredPoints[id]) overlays[id] = { overlayPoints: Object.fromEntries(Object.entries(authoredPoints[id]).map(([k,p]) => [k, point(p)])) };
@@ -71,5 +82,13 @@ for (const [atlasIndex, atlas] of prompts.atlases.entries()) {
 }
 if (entries.filter(e=>e.key.startsWith('furniture-')).length !== 39 || entries.filter(e=>e.key.startsWith('decor-')).length !== 13) throw new Error('Incomplete replacement coverage');
 await fs.writeFile(`${root}/manifest.json`, JSON.stringify({ generator: 'built-in image_gen', processing: 'RGBA crop, uniform nearest-neighbor resize, transparent canvas packing; no procedural drawing', furnitureCount: 39, decorSpriteCount: 13, assets: entries, overlayCorrections: overlays },null,2)+'\n');
-await fs.writeFile('src/render/cozy-furniture-assets.ts', `import { GENERATED_FURNITURE_CATALOG } from './generated-furniture-art';\n\n/** All 39 placed furnishings and 13 decor sprites redrawn against the cozy cafe reference. */\nexport const COZY_FURNITURE_ASSETS = ${JSON.stringify(assets,null,2)} as const;\n\n/** Source sizes and anchors are preserved; these interactive points follow the redrawn artwork. */\nexport const COZY_FURNITURE_CATALOG = {\n  ...GENERATED_FURNITURE_CATALOG,\n${Object.entries(overlays).map(([id,value])=>`  ${id}: { ...GENERATED_FURNITURE_CATALOG.${id}, ...${JSON.stringify(value)} },`).join('\n')}\n} as const;\n`);
+// Refuse to lose a furnishing someone listed by hand: it belongs in PACKED_ELSEWHERE.
+const listed = (await fs.readFile('src/render/cozy-furniture-assets.ts', 'utf8')).split('COZY_FURNITURE_ASSETS = {')[1]?.split('} as const')[0] ?? '';
+const known = new Set([...Object.keys(assets), ...Object.keys(PACKED_ELSEWHERE), ...Object.keys(CHAIN_REWARDS)]);
+const dropped = [...listed.matchAll(/^\s*"([^"]+)":/gm)].map(([, key]) => key).filter((key) => !known.has(key));
+if (dropped.length) throw new Error(`Would drop ${dropped.join(', ')} from src/render/cozy-furniture-assets.ts; add them to PACKED_ELSEWHERE`);
+const line = ([key, file]) => `  ${JSON.stringify(key)}: ${JSON.stringify(file)}`;
+const assetLines = [...Object.entries(assets), ...Object.entries(PACKED_ELSEWHERE)].map(line).join(',\n')
+  + ',\n  // Chain rewards (assets/generated/cozy-idle-v1).\n' + Object.entries(CHAIN_REWARDS).map(line).join(',\n');
+await fs.writeFile('src/render/cozy-furniture-assets.ts', `import { GENERATED_FURNITURE_CATALOG } from './generated-furniture-art';\n\n/** All 39 placed furnishings and 13 decor sprites redrawn against the cozy cafe reference. */\nexport const COZY_FURNITURE_ASSETS = {\n${assetLines}\n} as const;\n\n/** Source sizes and anchors are preserved; these interactive points follow the redrawn artwork. */\nexport const COZY_FURNITURE_CATALOG = {\n  ...GENERATED_FURNITURE_CATALOG,\n${Object.entries(overlays).map(([id,value])=>`  ${id}: { ...GENERATED_FURNITURE_CATALOG.${id}, ...${JSON.stringify(value)} },`).join('\n')}\n} as const;\n`);
 console.log(JSON.stringify({ furniture: 39, decorSprites: 13, count: entries.length, edges: entries.reduce((n,e)=>n+e.edgePixels,0) }));

@@ -1,0 +1,101 @@
+{
+  "source": "docs/street-art-v2/source/approved-street-scenery-v4.png",
+  "sourceSha256": "c9725546a8b2c10d08b1d7248ed7cae02d87d22da8ca84309e1cc9c871932447",
+  "assets": {
+    "depth-town": {
+      "size": [
+        65,
+        38
+      ],
+      "sourceCrops": [
+        [
+          674,
+          274,
+          804,
+          350
+        ]
+      ],
+      "sha256": "83adb4641bf67787e8b6858f5add38635977177bfa71e8a982f39f87bc3983fa"
+    },
+    "depth-hamlet": {
+      "size": [
+        58,
+        16
+      ],
+      "sourceCrops": [
+        [
+          1120,
+          320,
+          1236,
+          352
+        ]
+      ],
+      "sha256": "5be2d578dbca4a240c8c23fc71ebd517baeaa37dcee8a98fbb09ca03bcfdc0ec"
+    },
+    "depth-cloud-small": {
+      "size": [
+        58,
+        20
+      ],
+      "sourceCrops": [
+        [
+          608,
+          160,
+          724,
+          200
+        ]
+      ],
+      "sha256": "101b9c9e61f4bb2781f1e66faa451b4d804d643e842fd2379ed4da468a2a53ba"
+    },
+    "depth-field": {
+      "size": [
+        164,
+        148
+      ],
+      "sourceCrops": [],
+      "sha256": "38061c0d389bf11b7fae8a44e55b965b2358a0d7e1dc48ead6078f13e7c2497e"
+    },
+    "depth-tree": {
+      "size": [
+        67,
+        92
+      ],
+      "sourceCrops": [
+        [
+          672,
+          410,
+          806,
+          594
+        ]
+      ],
+      "sha256": "1e2c120f444b615f476a083166e926830828e24c439872ff7ec59d9a8a9f1342"
+    },
+    "depth-hedge": {
+      "size": [
+        54,
+        19
+      ],
+      "sourceCrops": [
+        [
+          6,
+          332,
+          38,
+          358
+        ],
+        [
+          68,
+          324,
+          102,
+          356
+        ],
+        [
+          344,
+          320,
+          376,
+          350
+        ]
+      ],
+      "sha256": "222d8586a204d5be36930099f780aa334b7f8683a844533f2f30603337314a63"
+    }
+  }
+}

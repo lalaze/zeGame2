@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { decodePng, encodePng, oklab } from '../pixel-conform.mjs';
+import { librarySource } from '../art-files.mjs';
 
 export const FW = 80, FH = 88;   // one character frame, in art pixels (40x44 room pixels)
 export const blank = (width, height) => ({ width, height, pixels: new Uint8ClampedArray(width * height * 4) });
@@ -24,9 +25,9 @@ export function scaled(image, factor) {
   }
   return result;
 }
-/** The main room at art density. The fixture screenshot is 4 device px per room px; art is 2. */
+/** The main room at art density. The fixture screenshot (a QA capture, so in the art library) is 4 device px per room px; art is 2. */
 export function roomArt() {
-  const shot = decodePng('artifacts/art-grid/review-3b/day/main-full.png'), room = blank(shot.width / 2, shot.height / 2);
+  const shot = decodePng(librarySource('artifacts/art-grid/review-3b/day/main-full.png')), room = blank(shot.width / 2, shot.height / 2);
   for (let y = 0; y < room.height; y++) for (let x = 0; x < room.width; x++)
     room.pixels.set(shot.pixels.subarray((y * 2 * shot.width + x * 2) * 4, (y * 2 * shot.width + x * 2) * 4 + 4), (y * room.width + x) * 4);
   return room;
