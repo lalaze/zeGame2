@@ -236,7 +236,8 @@
     "assets/generated/menu-v1": "The image_gen sheet behind catalog-v1's espresso, latte and egg tart; its crops are archived in original-main-static-v1.",
     "assets/generated/wall-v1": "The image_gen sheet behind catalog-v1's window, chalkboard and wall lamp; its crops are archived in original-main-static-v1.",
     "assets/generated/cafe-attendant-v1": "Only the prompt of a retired attendant sprite. Nothing reads it.",
-    "assets/generated/art-direction-v1": "The target shot of the art direction chosen on 2026-11-23 (soft, cozy cross-section). Not in the game yet."
+    "assets/generated/art-direction-v1": "The target shot of the art direction chosen on 2026-11-23 (soft, cozy cross-section). Not in the game yet.",
+    "assets/generated/floor-sample-v1": "The cross-section floors, decor, furniture, staff and guests, drawn by the game's trial floors view (`?floors`, src/render/floors). Only build/ (WebP and JSON) is in git; the Codex takes are in the art library. Loaded from assets/ by the dev server only, so not in a build. Candidates, not shipped."
   },
   "gifEra": "e0b819f shipped most art as GIF and kept each full-colour original as its master in assets/art-masters; 8d17e2f then shipped the GIF pixels as WebP. So in the packs with mastersDiffer, the master is the original (more colours, soft alpha) and players see its GIF reduction (on/off alpha, at most 256 colours). convert-art-webp keeps applying that reduction (scripts/art-quantise.mjs) to every file marked quantised in webp.json, and to files new to these packs unless they are glass or mostly soft, so a rebuild ships what shipped before. scripts/art-quantise.test.mjs checks the reduction still reproduces the shipped pixels."
 }

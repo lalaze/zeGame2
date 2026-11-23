@@ -10,6 +10,7 @@ every one is still in git history before that date.
 | `dogfood-output/` | Playtest recordings and screenshots |
 | images, video and zips under `artifacts/` and `docs/` | QA screenshots and recordings. Their JSON, logs and notes stay in git, because tests read them |
 | `assets/art-retired/` | Retired packs |
+| `assets/generated/floor-sample-v1/kits/`, `refs/` and `build/*.png` | Codex takes, references and PNG strips of the cross-section trial (2026-11-23, never in git; `moved-2026-11-23.json` lists them). Its build scripts read them from here |
 
 `.gitignore` covers all of these paths, so a screenshot or recording written under `docs/` or
 `artifacts/` stays out of git; move it to the same path in the library if it is worth keeping.

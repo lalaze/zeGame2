@@ -31,6 +31,10 @@ src/assets/pixel-digits.woff2
 /assets/generated/cozy-team-v9-pilot/
 /assets/generated/staff-v1/
 /assets/generated/neighborhood-cast-v1/
+# The cross-section trial's Codex takes and intermediate strips; its WebP and JSON in build/ stay in git.
+/assets/generated/floor-sample-v1/kits/
+/assets/generated/floor-sample-v1/refs/
+/assets/generated/floor-sample-v1/build/*.png
 /assets/generated/bulk-candidates/**/*.png
 /assets/generated/bulk-candidates/**/*.jpg
 /assets/generated/bulk-candidates/**/*.webp

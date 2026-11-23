@@ -44,6 +44,7 @@ import { consumeFurnitureMovesOnLoad, createInitialState, type GameState } from 
 import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale, t, type Locale } from './i18n';
 import { CafeView } from './render/cafe-view';
 import { CafeGame } from './render/phaser/game';
+import { FloorsGame } from './render/floors/floors-game';
 import { character, toDataURL } from './render/sprites';
 import { wantCozyTeamStyle } from './render/cozy-team-art';
 import { fineSpriteArt } from './render/fine-sprite-art';
@@ -196,6 +197,10 @@ for (const type of ['click', 'pointerdown', 'keydown']) {
 // ------------------------------------------------------------ display
 
 const canvas = $<HTMLCanvasElement>('scene');
+// `?floors` draws the café as the cross-section building (assets/generated/art-direction-v1)
+// instead of the pixel room. A trial: its art loads from assets/, which only the dev server serves.
+const floorsView = new URLSearchParams(location.search).has('floors');
+const CafeRenderer = floorsView ? FloorsGame : CafeGame;
 const stage = $('stage');
 let roomViewport: RoomViewport | undefined;
 let mobileHud: MobileCafeHud | undefined;
@@ -1465,16 +1470,22 @@ function frame(dt: number): void {
   }
 }
 
-const cafe = new CafeGame(canvas, scene, sim, () => state, {
+const cafe = new CafeRenderer(canvas, scene, sim, () => state, {
   tick: (dt) => { roomViewport?.refresh(); frame(dt); }, pointerDown, pointerMove, interactionState: () => arrange,
   interactionEnabled: () => startupComplete && !mobileHud?.expanded && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused),
+  tapTarget: (target) => {
+    if (target.kind === 'moment') openMoment();
+    else if (target.kind === 'partner') showPartners(state, sim, saveGame, target.id);
+    else helpBrew();
+  },
   loadingProgress: (loaded, total) => loading.progress(loaded, total),
 });
+// The floors view scrolls itself; the room zoom stays off there but keeps its place in the HUD.
 roomViewport = new RoomViewport(canvas, stage,
-  () => startupComplete && !scene.panning && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused),
+  () => !floorsView && startupComplete && !scene.panning && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused),
   () => [scene.area, scene.overview, arrange?.mode, arrange?.mode === 'place' ? arrange.id : '', state.phase].join(':'),
   { isActive: () => scene.overview, toggle: () => regionsUI.toggleOverview() },
-  () => arrange || !catLocateExit.hidden || !isAreaOpen(state, scene.area) ? 1
+  () => floorsView || arrange || !catLocateExit.hidden || !isAreaOpen(state, scene.area) ? 1
     : mobileRoomZoom(stage.clientWidth, stage.clientHeight, canvas.parentElement!.clientHeight));
 mobileHud = new MobileCafeHud($('app'), {
   money: document.querySelector<HTMLElement>('.money')!, day: $('day-hud'), status: operationBtn,

@@ -18,7 +18,7 @@ import { t } from '../i18n';
 const mainSource = readFileSync('src/main.ts', 'utf8');
 const sceneSource = readFileSync('src/render/phaser/cafe-scene.ts', 'utf8');
 const frameStart = mainSource.indexOf('let uiTimer = 0;');
-const frameEnd = mainSource.indexOf('\nconst cafe = new CafeGame', frameStart);
+const frameEnd = mainSource.indexOf('\nconst cafe = new ', frameStart);
 if (frameStart < 0 || frameEnd < 0) throw new Error('Main frame boundaries changed; update the source-execution test harness.');
 const frameSource = mainSource.slice(frameStart, frameEnd).replace('function frame(dt: number): void {', 'function frame(dt) {');
 const simStep = Number(mainSource.match(/const SIM_STEP = ([\d.]+);/)?.[1]);

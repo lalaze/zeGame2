@@ -1,0 +1,5 @@
+Image 1 is a finished background of this cozy café game. Repaint it exactly: the same composition, camera, framing, scale, line work and colours, and the same image size and aspect ratio. Everything that is kept stays exactly where it is, at exactly the same size and shape.
+
+Paint everything that is not kept in one flat solid pure magenta, exactly #FF00FF, with no shading, no texture, no outlines, no shadows and no gradients: the walls, the floor and the shadows on it, the ceiling slab, the floor slab, the outer walls and their cut edges, the door and its frame, the view outside, the window frame, the staircase, the ivy outside, and every object not listed below. No people, no text, no watermark.
+
+KEEP, in full colour and unchanged:

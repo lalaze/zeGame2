@@ -1,0 +1,3 @@
+Image 1 is an empty room of this cozy café game. Repaint it exactly: the same composition, camera, framing, scale, line work and soft warm lighting, and the same image size and aspect ratio. Keep every edge where it is: the outer walls and their cut edges, the ceiling and floor slabs, the door, the staircase and the corners between walls and floor.
+
+The one change:

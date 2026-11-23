@@ -1,0 +1,10 @@
+Image 1 is the approved art direction of this cozy café game and image 2 shows its café floor with the characters at their in-game size. Paint a character sprite sheet in exactly that style: thin warm-brown outlines, soft pastel colours with gentle soft shading, cute round proportions (the head is about 40% of the body height), dot eyes and rosy cheeks.
+
+SHEET: one landscape image with a fully transparent background, EXACTLY 4 columns and 2 rows of equal cells: 8 separate full-body figures of the SAME character, all at the same scale. Each figure is fully inside its own cell with clear empty space on all sides; nothing touches or overlaps a neighbour. No labels, numbers, grid lines, ground shadows, props on the ground or backdrop. Crisp edges with no pale halo.
+
+Row 1, walking to the right seen exactly from the side, a smooth 4-frame walk cycle: (1) right foot forward, heel touching down; (2) passing pose, legs together, body slightly higher; (3) left foot forward, heel touching down; (4) passing pose again. Arms swing opposite to the legs.
+Row 2: (1) standing facing the viewer, arms relaxed; (2) standing facing the viewer, smiling happily with closed curved eyes; (3) standing still facing right, seen from the side; (4) standing seen from behind.
+
+The head size, hairstyle, outfit, colours and accessories are identical in all 8 figures.
+
+CHARACTER:

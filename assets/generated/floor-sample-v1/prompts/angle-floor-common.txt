@@ -1,0 +1,5 @@
+Image 1 is the approved art direction of this cozy café game. Image 2 is the café's ground floor, painted with the game's camera: a high-angle dollhouse cutaway, looking into the floor from the front and about 35 degrees down, front wall removed, side walls slanting slightly inward, a deep floor area.
+
+Paint another floor of the same building with EXACTLY the same camera, framing, scale, wall and slab thickness, colours, line work and image size as image 2, so the floors stack one above the other: the outer walls in the same place at the left and right edges, the ceiling slab at the top and the floor slab at the bottom. No people at all, no text, no signs with words, no user interface, no watermark.
+
+THIS FLOOR:

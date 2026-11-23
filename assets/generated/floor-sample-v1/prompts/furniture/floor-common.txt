@@ -1,0 +1,6 @@
+Image 1 is the approved art direction of this cozy café game. Image 2 is the café's ground floor seen with the game's camera: from the front and about 35 degrees from above. Paint furniture and decorations for this café in exactly that style, the same camera angle as the tables and chairs in image 2, and the same scale, as a sprite sheet: one landscape image with a fully transparent background, EXACTLY 4 columns and 2 rows of equal cells, 8 separate objects. Each object is fully inside its own cell with clear empty space around it; nothing touches or overlaps a neighbour. No floor, no ground shadows, no labels, no numbers, no grid lines, no backdrop. Crisp edges with no pale halo.
+
+SCALE: the chair in the first cell is exactly as big as the chairs in image 2, and every other object is sized realistically next to that chair (a bookshelf is much taller than the chair, a cat bed much smaller).
+
+Cell 1: one wooden café chair with a cream cushion, exactly like the chairs in image 2.
+Cells 2 to 8, left to right along the top row, then the bottom row:

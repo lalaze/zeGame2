@@ -95,7 +95,14 @@ export interface CafeHooks {
   interactionEnabled?(): boolean;
   /** Decoded images ready for texture installation, not just downloaded bytes. */
   loadingProgress?(loaded: number, total: number): void;
+  /**
+   * A tap a renderer has already matched to what is under it, for renderers whose picture does
+   * not use the Sim's floor plan (render/floors): the waiting moment, a named partner, or the café.
+   */
+  tapTarget?(target: CafeTapTarget): void;
 }
+
+export type CafeTapTarget = { kind: 'moment' } | { kind: 'partner'; id: string } | { kind: 'cafe' };
 
 // Back to front. Everything standing on the floor sorts by where its feet are.
 const DEPTH = {

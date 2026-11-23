@@ -1,0 +1,212 @@
+{
+ "plant_fern": {
+  "width": 186,
+  "height": 209,
+  "surface": "floor"
+ },
+ "plant_snake": {
+  "width": 110,
+  "height": 230,
+  "surface": "floor"
+ },
+ "aframe": {
+  "width": 177,
+  "height": 180,
+  "surface": "floor"
+ },
+ "plant_fig": {
+  "width": 174,
+  "height": 261,
+  "surface": "floor"
+ },
+ "lamp": {
+  "width": 105,
+  "height": 251,
+  "surface": "floor"
+ },
+ "coatrack": {
+  "width": 120,
+  "height": 253,
+  "surface": "floor"
+ },
+ "plant_monstera": {
+  "width": 229,
+  "height": 247,
+  "surface": "floor"
+ },
+ "bench": {
+  "width": 267,
+  "height": 208,
+  "surface": "floor"
+ },
+ "catbed": {
+  "width": 177,
+  "height": 122,
+  "surface": "floor"
+ },
+ "bookshelf": {
+  "width": 170,
+  "height": 281,
+  "surface": "floor"
+ },
+ "armchair": {
+  "width": 185,
+  "height": 212,
+  "surface": "floor"
+ },
+ "plant_lemon": {
+  "width": 188,
+  "height": 271,
+  "surface": "floor"
+ },
+ "gramophone": {
+  "width": 142,
+  "height": 266,
+  "surface": "floor"
+ },
+ "piano": {
+  "width": 239,
+  "height": 279,
+  "surface": "floor"
+ },
+ "plant_lavender": {
+  "width": 244,
+  "height": 184,
+  "surface": "floor"
+ },
+ "plant_succulent": {
+  "width": 105,
+  "height": 191,
+  "surface": "floor"
+ },
+ "vase_daisies": {
+  "width": 156,
+  "height": 241,
+  "surface": "floor"
+ },
+ "lantern": {
+  "width": 95,
+  "height": 203,
+  "surface": "floor"
+ },
+ "bean_display": {
+  "width": 213,
+  "height": 226,
+  "surface": "floor"
+ },
+ "sideboard": {
+  "width": 257,
+  "height": 217,
+  "surface": "floor"
+ },
+ "gingham_table": {
+  "width": 261,
+  "height": 215,
+  "surface": "floor"
+ },
+ "sofa": {
+  "width": 267,
+  "height": 169,
+  "surface": "floor"
+ },
+ "round_stool": {
+  "width": 137,
+  "height": 167,
+  "surface": "floor"
+ },
+ "display_cabinet": {
+  "width": 206,
+  "height": 279,
+  "surface": "floor"
+ },
+ "magazine_rack": {
+  "width": 195,
+  "height": 205,
+  "surface": "floor"
+ },
+ "coffee_cart": {
+  "width": 235,
+  "height": 272,
+  "surface": "floor"
+ },
+ "clock": {
+  "width": 252,
+  "height": 300,
+  "surface": "wall"
+ },
+ "chain_map": {
+  "width": 300,
+  "height": 263,
+  "surface": "wall"
+ },
+ "chain_plaque": {
+  "width": 300,
+  "height": 203,
+  "surface": "wall"
+ },
+ "mugrack": {
+  "width": 300,
+  "height": 133,
+  "surface": "wall"
+ },
+ "art_landscape": {
+  "width": 300,
+  "height": 261,
+  "surface": "wall"
+ },
+ "sconce": {
+  "width": 283,
+  "height": 284,
+  "surface": "wall"
+ },
+ "garland": {
+  "width": 300,
+  "height": 172,
+  "surface": "wall"
+ },
+ "shelf": {
+  "width": 300,
+  "height": 208,
+  "surface": "wall"
+ },
+ "art_cat": {
+  "width": 300,
+  "height": 256,
+  "surface": "wall"
+ },
+ "art_bean": {
+  "width": 300,
+  "height": 255,
+  "surface": "wall"
+ },
+ "art_starry": {
+  "width": 300,
+  "height": 254,
+  "surface": "wall"
+ },
+ "poster_coffee": {
+  "width": 214,
+  "height": 300,
+  "surface": "wall"
+ },
+ "poster_bakery": {
+  "width": 214,
+  "height": 300,
+  "surface": "wall"
+ },
+ "wreath_season": {
+  "width": 294,
+  "height": 300,
+  "surface": "wall"
+ },
+ "hanging_ivy": {
+  "width": 223,
+  "height": 300,
+  "surface": "wall"
+ },
+ "wall_pennants": {
+  "width": 300,
+  "height": 127,
+  "surface": "wall"
+ }
+}

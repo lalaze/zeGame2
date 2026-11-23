@@ -1,0 +1,3 @@
+Image 1 is the approved art direction of this cozy café game. Image 2 is the café's ground floor; its back wall has framed pictures, shelves and lamps. Paint things that hang on a café wall in exactly that style, seen straight from the front, flat against the wall, as a sprite sheet: one landscape image with a fully transparent background, EXACTLY 4 columns and 2 rows of equal cells, 8 separate objects. Each object is fully inside its own cell with clear empty space around it; nothing touches or overlaps a neighbour. No wall, no shadows, no labels, no numbers, no grid lines, no backdrop. Keep any writing out: no letters or words anywhere. Crisp edges with no pale halo.
+
+Cells left to right along the top row, then the bottom row:

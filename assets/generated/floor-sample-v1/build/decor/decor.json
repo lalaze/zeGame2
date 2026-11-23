@@ -1,0 +1,135 @@
+{
+ "1f": {
+  "height": 883,
+  "back": [
+   "decor/1f/shell.webp",
+   "decor/1f/shadow.webp",
+   "decor/1f/fixtures.webp"
+  ],
+  "front": [
+   "decor/1f/fixtures-front.webp"
+  ],
+  "slots": {
+   "wallpaper": {
+    "wall_cream": "decor/1f/wall_cream.webp",
+    "wall_mint": "decor/1f/wall_mint.webp",
+    "wall_rose": "decor/1f/wall_rose.webp",
+    "wall_dots": "decor/1f/wall_dots.webp",
+    "wall_brick": "decor/1f/wall_brick.webp",
+    "wall_walnut": "decor/1f/wall_walnut.webp",
+    "wall_stars": "decor/1f/wall_stars.webp"
+   },
+   "floor": {
+    "floor_planks": "decor/1f/floor_planks.webp",
+    "floor_mint": "decor/1f/floor_mint.webp",
+    "floor_terrazzo": "decor/1f/floor_terrazzo.webp",
+    "floor_herringbone": "decor/1f/floor_herringbone.webp",
+    "floor_marble": "decor/1f/floor_marble.webp",
+    "floor_checker": "decor/1f/floor_checker.webp"
+   },
+   "rug": {
+    "rug_red": "decor/1f/rug_red.webp",
+    "rug_blue": "decor/1f/rug_blue.webp",
+    "rug_round": "decor/1f/rug_round.webp"
+   },
+   "tablecloth": {
+    "tablecloth_classic": "decor/1f/tablecloth_classic.webp",
+    "tablecloth_mint": "decor/1f/tablecloth_mint.webp",
+    "tablecloth_rose": "decor/1f/tablecloth_rose.webp",
+    "tablecloth_blue": "decor/1f/tablecloth_blue.webp",
+    "tablecloth_lavender": "decor/1f/tablecloth_lavender.webp",
+    "tablecloth_linen": "decor/1f/tablecloth_linen.webp"
+   },
+   "centerpiece": {
+    "centerpiece_flowers": "decor/1f/centerpiece_flowers.webp",
+    "centerpiece_succulent": "decor/1f/centerpiece_succulent.webp",
+    "centerpiece_candle": "decor/1f/centerpiece_candle.webp"
+   },
+   "ceiling": {
+    "ceiling_lights": "decor/1f/ceiling_lights.webp",
+    "ceiling_vines": "decor/1f/ceiling_vines.webp",
+    "ceiling_pendants": "decor/1f/ceiling_pendants.webp",
+    "ceiling_chandelier": "decor/1f/ceiling_chandelier.webp"
+   },
+   "neon": {
+    "neon_cafe": "decor/1f/neon_cafe.webp",
+    "neon_heart": "decor/1f/neon_heart.webp",
+    "neon_cup": "decor/1f/neon_cup.webp"
+   },
+   "sill": {},
+   "counter": {
+    "counter_oak": "decor/1f/counter_oak.webp",
+    "counter_sage": "decor/1f/counter_sage.webp",
+    "counter_blush": "decor/1f/counter_blush.webp",
+    "counter_walnut": "decor/1f/counter_walnut.webp",
+    "counter_marble": "decor/1f/counter_marble.webp",
+    "counter_pink": "decor/1f/counter_pink.webp",
+    "counter_gold": "decor/1f/counter_gold.webp"
+   },
+   "curtain": {}
+  },
+  "counterDepth": 525
+ },
+ "2f": {
+  "height": 877,
+  "back": [
+   "decor/2f/shell.webp",
+   "decor/2f/shadow.webp",
+   "decor/2f/fixtures.webp"
+  ],
+  "front": [],
+  "slots": {
+   "wallpaper": {
+    "wall_cream": "decor/2f/wall_cream.webp",
+    "wall_mint": "decor/2f/wall_mint.webp",
+    "wall_rose": "decor/2f/wall_rose.webp",
+    "wall_dots": "decor/2f/wall_dots.webp",
+    "wall_brick": "decor/2f/wall_brick.webp",
+    "wall_walnut": "decor/2f/wall_walnut.webp",
+    "wall_stars": "decor/2f/wall_stars.webp"
+   },
+   "floor": {
+    "floor_planks": "decor/2f/floor_planks.webp",
+    "floor_mint": "decor/2f/floor_mint.webp",
+    "floor_terrazzo": "decor/2f/floor_terrazzo.webp",
+    "floor_herringbone": "decor/2f/floor_herringbone.webp",
+    "floor_marble": "decor/2f/floor_marble.webp",
+    "floor_checker": "decor/2f/floor_checker.webp"
+   },
+   "rug": {},
+   "tablecloth": {
+    "tablecloth_classic": "decor/2f/tablecloth_classic.webp",
+    "tablecloth_mint": "decor/2f/tablecloth_mint.webp",
+    "tablecloth_rose": "decor/2f/tablecloth_rose.webp",
+    "tablecloth_blue": "decor/2f/tablecloth_blue.webp",
+    "tablecloth_lavender": "decor/2f/tablecloth_lavender.webp",
+    "tablecloth_linen": "decor/2f/tablecloth_linen.webp"
+   },
+   "centerpiece": {
+    "centerpiece_flowers": "decor/2f/centerpiece_flowers.webp",
+    "centerpiece_succulent": "decor/2f/centerpiece_succulent.webp",
+    "centerpiece_candle": "decor/2f/centerpiece_candle.webp"
+   },
+   "ceiling": {
+    "ceiling_lights": "decor/2f/ceiling_lights.webp",
+    "ceiling_vines": "decor/2f/ceiling_vines.webp",
+    "ceiling_pendants": "decor/2f/ceiling_pendants.webp",
+    "ceiling_chandelier": "decor/2f/ceiling_chandelier.webp"
+   },
+   "neon": {},
+   "sill": {
+    "sill_cactus": "decor/2f/sill_cactus.webp",
+    "sill_tulips": "decor/2f/sill_tulips.webp",
+    "sill_bonsai": "decor/2f/sill_bonsai.webp"
+   },
+   "counter": {},
+   "curtain": {
+    "curtain_classic": "decor/2f/curtain_classic.webp",
+    "curtain_sage": "decor/2f/curtain_sage.webp",
+    "curtain_rose": "decor/2f/curtain_rose.webp",
+    "curtain_blue": "decor/2f/curtain_blue.webp",
+    "curtain_linen": "decor/2f/curtain_linen.webp"
+   }
+  }
+ }
+}

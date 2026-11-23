@@ -1,0 +1,9 @@
+Image 1 is the approved art direction of this cozy café game. Image 2 is the existing sprite sheet of ONE character: keep exactly the same face, hairstyle, outfit, accessories, colours, proportions, line weight and size.
+
+Paint a NEW sprite sheet of this same character: one landscape image with a fully transparent background, EXACTLY 4 columns and 3 rows of equal cells, 12 separate full-body figures at the same scale as image 2. Each figure is fully inside its own cell with clear empty space on all sides; nothing touches or overlaps a neighbour. No labels, numbers, grid lines, ground shadows, chairs, props or backdrop. Crisp edges with no pale halo.
+
+Row 1, walking TOWARD the viewer (front view, seen slightly from above), a smooth 4-frame walk cycle: (1) left foot forward; (2) passing pose, legs together; (3) right foot forward; (4) passing pose again.
+Row 2, walking AWAY from the viewer (back view), the same 4-frame walk cycle.
+Row 3, sitting on an invisible chair of normal height, side view facing right, both feet resting on the floor, the chair NOT drawn: (1) sitting with hands in the lap; (2) holding a white coffee cup in both hands at the chest; (3) sipping from the cup, eyes closed; (4) laughing happily, holding the cup.
+
+The head size, hairstyle, outfit, colours and accessories are identical in all 12 figures and match image 2.

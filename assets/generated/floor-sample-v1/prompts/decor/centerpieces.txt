@@ -1,0 +1,5 @@
+Image 1 is the approved art direction of this cozy café game. Image 2 is the café's ground floor: on each table stands a small white vase of flowers. Paint small table decorations in exactly that style and at exactly that size, as a sprite sheet: one landscape image with a fully transparent background, EXACTLY 3 separate objects in one row, each with clear empty space around it, seen from the same slightly-above angle. No labels, no table, no shadows, no backdrop. Crisp edges with no pale halo.
+
+1. A small white ceramic vase with white and yellow daisies.
+2. A small succulent in a little terracotta pot.
+3. A short cream pillar candle with a small warm flame, in a little brass dish.
