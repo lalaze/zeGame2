@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { inflateSync } from 'node:zlib';
 import { describe, expect, it, vi } from 'vitest';
-import { artMaster, imageSize } from '../../scripts/art-files.mjs';
+import { artMaster, hasArtLibrary, imageSize, librarySource } from '../../scripts/art-files.mjs';
 import { CATS, type CatId } from '../game/pets';
 import { fineSpriteArt, logicalCrop } from './fine-sprite-art';
 import { createGeneratedCatArt, generatedCatFrameIds, GENERATED_CAT_BREEDS, GENERATED_CAT_ENVELOPE, GENERATED_CAT_FRAME_IDS, GENERATED_CAT_STATES,
@@ -258,7 +258,7 @@ function allBreedFixture() {
     const id = `${manifest.breed}-${meta.state}` as GeneratedCatFrameId;
     const path = manifest.breed === 'siamese' ? `assets/generated/original-main-actors-v1/cat-siamese-v1/${id}.png`
       : `assets/generated/bulk-candidates/cats/${manifest.breed}/${id}.png`;
-    const png = readFileSync(new URL(`../../${path}`, import.meta.url));
+    const png = readFileSync(librarySource(path));
     sources[id] = fake(png.readUInt32BE(16), png.readUInt32BE(20));
   }
   const createCanvas = vi.fn(() => new RecordingCanvas() as unknown as HTMLCanvasElement);
@@ -267,7 +267,8 @@ function allBreedFixture() {
   return { manifests, sources, createCanvas, create };
 }
 
-describe('complete generated packs for all twelve cat identities', () => {
+// The eleven breeds' source crops live in the art library, outside git.
+describe.skipIf(!hasArtLibrary)('complete generated packs for all twelve cat identities', () => {
   it('bakes the actual twelve manifest/PNG dimensions into 168 distinct poses without clipping or identity remapping', () => {
     const { manifests, sources, create, createCanvas } = allBreedFixture();
     const adapter = create([...manifests].reverse());

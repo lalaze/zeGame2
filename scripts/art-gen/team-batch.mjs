@@ -14,7 +14,7 @@ import { spawn } from 'node:child_process';
 import { decodePng, encodePng } from '../pixel-conform.mjs';
 import { blank, blit } from './lib.mjs';
 
-const ROOT = 'assets/generated/cozy-team-v9', V7 = 'public/art/generated/cozy-team-v7', V8 = 'assets/generated/cozy-team-v8';
+const ROOT = 'assets/generated/cozy-team-v9', V7 = 'assets/legacy-packs/cozy-team-v7', V8 = 'assets/generated/cozy-team-v8';
 const opt = (name, fallback) => process.argv.find(a => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 const styles = JSON.parse(fs.readFileSync(`${ROOT}/hairstyles.json`, 'utf8')), outfits = JSON.parse(fs.readFileSync(`${ROOT}/prompts/outfits.json`, 'utf8'));
 const ids = process.argv.includes('--all') ? Object.keys(styles) : (opt('ids', '') || '').split(',').filter(Boolean);

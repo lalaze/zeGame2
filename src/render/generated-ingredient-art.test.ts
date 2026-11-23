@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
+import { hasArtLibrary, librarySource } from '../../scripts/art-files.mjs';
 import { INGREDIENTS, type IngredientId } from '../game/data';
 import { fineSpriteArt } from './fine-sprite-art';
 import { createGeneratedFoodArt } from './generated-food-art';
@@ -52,8 +53,9 @@ describe('generated ingredient bitmap adapter', () => {
       expect([icon.width, icon.height]).toEqual([old.width, old.height]);
       expect([w + 2, h + 2]).toEqual(row.logical);
     }
-    for (const asset of manifest.assets) {
-      const bytes = readFileSync(`assets/generated/bulk-candidates/menu/${asset.file}`);
+    // Source crops live in the art library, outside git.
+    if (hasArtLibrary) for (const asset of manifest.assets) {
+      const bytes = readFileSync(librarySource(`assets/generated/bulk-candidates/menu/${asset.file}`));
       expect([bytes.readUInt32BE(16), bytes.readUInt32BE(20)]).toEqual(asset.size);
     }
   });

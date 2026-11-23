@@ -1,4 +1,4 @@
-// Builds public/art/generated/cozy-team-v8 from the Codex image_gen sheets in
+// Builds assets/legacy-packs/cozy-team-v8 from the Codex image_gen sheets in
 // assets/generated/cozy-team-v8: packs each sheet at half size in a palette (a pose is still
 // over twice its final size, and each sheet drops from about 1.2 MB to about 110 KB), finds
 // every pose's bounds from its transparent gaps (falling back to the even grid), adds the
@@ -7,7 +7,7 @@
 import fs from 'node:fs/promises';
 import sharp from '/Users/lalaze/.nvm/versions/node/v22.23.2/lib/node_modules/sharp/lib/index.js';
 
-const SRC = 'assets/generated/cozy-team-v8', OUT = 'public/art/generated/cozy-team-v8', V7 = 'public/art/generated/cozy-team-v7';
+const SRC = 'assets/generated/cozy-team-v8', OUT = 'assets/legacy-packs/cozy-team-v8', V7 = 'assets/legacy-packs/cozy-team-v7';
 const NEW_STYLES = ['crop', 'curls', 'undercut', 'slick', 'beard', 'buzz', 'pixie', 'buns', 'afro', 'bangs', 'twintails', 'curtain',
   // Second batch.
   'fauxhawk', 'manbun', 'shaggy', 'centerpart', 'mustache', 'locs', 'halfup', 'sidebraid', 'braidcrown', 'curlybob', 'asymbob', 'ringlets'];

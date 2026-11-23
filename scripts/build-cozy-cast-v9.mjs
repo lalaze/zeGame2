@@ -10,8 +10,8 @@
 // conversion.json). Sheets are already on the palette with on/off transparency, so the GIF is
 // exact. Run scripts/convert-art-webp.mjs afterwards: the game loads the WebP.
 //
-//   node scripts/build-cozy-cast-v9.mjs [--partial]
-// --partial keeps the shipped v7/v8 art for customers that have no kit yet.
+//   node scripts/build-cozy-cast-v9.mjs
+// Every customer needs a kit: the v7/v8 packs that once filled gaps (--partial) no longer ship.
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
@@ -21,8 +21,7 @@ import { kitFrames } from './art-gen/kit-frames.mjs';
 import sharp from '/Users/lalaze/.nvm/versions/node/v22.23.2/lib/node_modules/sharp/lib/index.js';
 
 const ROOT = 'assets/generated/cozy-cast-v9', CAST = 'public/art/generated/cozy-cast-v9', DINING = 'public/art/generated/cozy-dining-v5';
-const OLD_CAST = 'public/art/generated/cozy-cast-v8', OLD_DINING = 'public/art/generated/cozy-dining-v4';
-const partial = process.argv.includes('--partial'), COUNT = 36;
+const COUNT = 36;
 const MASTERS = 'assets/art-masters', REPORT = `${MASTERS}/conversion.json`, shipped = [];
 /** Write a sheet: PNG master under assets/art-masters, single-frame GIF under public. Returns the GIF's file name. */
 async function ship(dir, name, image) {
@@ -36,7 +35,6 @@ async function ship(dir, name, image) {
   return `${name}.gif`;
 }
 const selected = fs.existsSync(`${ROOT}/selected.json`) ? JSON.parse(fs.readFileSync(`${ROOT}/selected.json`, 'utf8')) : {};
-const oldCast = JSON.parse(fs.readFileSync(`${OLD_CAST}/manifest.json`, 'utf8')), oldDining = JSON.parse(fs.readFileSync(`${OLD_DINING}/manifest.json`, 'utf8'));
 /** Walk-sheet columns: 0 stands; 1 and 4 are the two forward steps, the poses v8 called stepA/stepB. */
 const STAND = 0, STEP_A = 1, STEP_B = 4, CYCLE = [1, 2, 3, 4, 5, 6];
 
@@ -49,7 +47,6 @@ function kitOf(id) {
   return take && takes.includes(take) ? `${base}/${take}` : null;
 }
 const meta = (frame, index) => ({ box: [index * FW, 0, (index + 1) * FW, FH], top: frame.top, neck: frame.neck, foot: frame.foot, hip: frame.hip, hand: frame.hand });
-const relocate = (file, from, to) => path.posix.relative(to, path.posix.join(from, file));
 
 for (const dir of [CAST, DINING]) fs.mkdirSync(dir, { recursive: true });
 const cast = { version: 9, density: 2, width: FW / 2, height: FH / 2, characters: [] };
@@ -57,14 +54,7 @@ const dining = { version: 5, density: 2, width: FW / 2, height: FH / 2, embedded
 const report = [];
 for (let id = 0; id < COUNT; id++) {
   const kit = kitOf(id);
-  if (!kit) {
-    if (!partial) throw Error(`No kit for customer ${id} (use --partial to keep the shipped art)`);
-    const a = oldCast.characters.find(c => c.id === id), b = oldDining.characters.find(c => c.id === id);
-    cast.characters.push({ ...a, file: relocate(a.file, OLD_CAST, CAST) });
-    dining.characters.push({ ...b, file: relocate(b.file, OLD_DINING, DINING) });
-    report.push(`${id}: shipped art kept`);
-    continue;
-  }
+  if (!kit) throw Error(`No kit for customer ${id}`);
   const { walk, seated, report: frames } = kitFrames(kit);
   // Twelve poses in the v8 order: front, back, right (stand, step, step), then the three seated.
   const strip = blank(FW * 12, FH), poses = [];

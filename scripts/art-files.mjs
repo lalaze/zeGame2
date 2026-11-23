@@ -2,6 +2,22 @@
 // PNG master lives in assets/art-masters (see scripts/convert-art-webp.mjs).
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+/**
+ * Art that left git (source crops, rejected takes, retired packs, QA screenshots and video) keeps
+ * its repo-relative path in this folder; see assets/ART-LIBRARY.md. ZEGAME_ART_LIBRARY points elsewhere.
+ */
+export const ART_LIBRARY = process.env.ZEGAME_ART_LIBRARY || '/Volumes/data/zeGame2-library';
+/** False on a machine without the library, where checks against moved source art are skipped. */
+export const hasArtLibrary = fs.existsSync(ART_LIBRARY);
+const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+
+/** The absolute path of a repo file (repo-relative or absolute), or of its art-library copy once it left git. */
+export function librarySource(file) {
+  const absolute = path.resolve(ROOT, file);
+  return fs.existsSync(absolute) ? absolute : path.join(ART_LIBRARY, path.relative(ROOT, absolute));
+}
 
 /** The PNG a public file was encoded from, or the file itself if it was never converted. */
 export function artMaster(file) {

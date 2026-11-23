@@ -6,7 +6,7 @@ import { resampleRgba } from '../src/render/pixel-resample.ts';
 {
 // Compile complete new figures using the same v7 crop, scale and palette rules.
 
-const root = 'assets/generated/neighborhood-cast-v1', out = 'public/art/generated/cozy-cast-v8';
+const root = 'assets/generated/neighborhood-cast-v1', out = 'assets/legacy-packs/cozy-cast-v8';
 const groups = [[30,31,32],[33,34,35]];
 // Team ramps' extra midtones are for the recoloured staff only; guests keep the three-shade ramps their looks swap.
 const palette = JSON.parse(fs.readFileSync('docs/art-grid/palette.json')).colors.filter(c => !c.ramp.startsWith('team-')).map(c => [1,3,5].map(i => parseInt(c.hex.slice(i,i+2),16)));
@@ -104,7 +104,7 @@ for(const [group,ids] of groups.entries()) {
     manifest.characters.push({id,file:filename,source:`sources/group-${group}.png`,scale,seatedScale,frames});
   }
 }
-manifest.characters.push(...JSON.parse(fs.readFileSync('public/art/generated/cozy-cast-v7/manifest.json')).characters.map(c=>({...c,file:'../cozy-cast-v7/'+c.file})));
+manifest.characters.push(...JSON.parse(fs.readFileSync('assets/legacy-packs/cozy-cast-v7/manifest.json')).characters.map(c=>({...c,file:'../cozy-cast-v7/'+c.file})));
 manifest.characters.sort((a,b)=>a.id-b.id);
 fs.mkdirSync(out,{recursive:true});fs.writeFileSync(`${out}/manifest.json`,JSON.stringify(manifest,null,2)+'\n');
 console.log('Compiled walking cast:', manifest.characters.length);
@@ -112,7 +112,7 @@ console.log('Compiled walking cast:', manifest.characters.length);
 
 {
 // Compile complete authored chair-and-person units. No body-part transforms.
-const root='assets/generated/neighborhood-cast-v1',out='public/art/generated/cozy-dining-v4';
+const root='assets/generated/neighborhood-cast-v1',out='assets/legacy-packs/cozy-dining-v4';
 const handContacts=JSON.parse(fs.readFileSync(`${root}/contacts.json`));
 const groups=[[30,31,32],[33,34,35]];
 // Team ramps' extra midtones are for the recoloured staff only.

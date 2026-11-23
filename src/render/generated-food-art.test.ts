@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { inflateSync } from 'node:zlib';
+import { hasArtLibrary, librarySource } from '../../scripts/art-files.mjs';
 import { MENU, type ItemId } from '../game/data';
 import { COUNTER, PASTRY_CASE } from '../game/layout';
 import { createInitialState } from '../game/state';
@@ -151,7 +152,8 @@ describe('generated food bitmap adapter', () => {
       .toEqual([...GENERATED_FOOD_IDS].sort());
     for (const asset of manifest.assets) {
       expect(asset.logicalBare).toEqual(GENERATED_FOOD_ENVELOPES[asset.itemId as GeneratedFoodId]);
-      const bytes = readFileSync(`assets/generated/bulk-candidates/menu/${asset.file}`);
+      if (!hasArtLibrary) continue; // source crops live in the art library, outside git
+      const bytes = readFileSync(librarySource(`assets/generated/bulk-candidates/menu/${asset.file}`));
       expect([bytes.readUInt32BE(16), bytes.readUInt32BE(20)]).toEqual(asset.size);
     }
   });

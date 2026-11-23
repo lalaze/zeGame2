@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw
 
 
 ROOT = Path('assets/generated/cozy-cast-v5')
-OUT = Path('public/art/generated/cozy-cast-v5')
+OUT = Path('assets/legacy-packs/cozy-cast-v5')
 PALETTE = json.loads(Path('docs/art-grid/palette.json').read_text())['colors']
 RAMPS = {}
 for entry in PALETTE:
@@ -212,6 +212,6 @@ manifest['heads'] = {'file': 'heads.png', 'poses': poses}
 (OUT / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
 files = list((ROOT / 'sources').glob('*.png')) + list(OUT.glob('*')) + list(ROOT.glob('*.md'))
 files += [ROOT / 'generation.json']
-files += [Path('scripts/build-cozy-cast-v5.py'), Path('docs/art-grid/palette.json'), Path('public/art/generated/cozy-team-v7/hair-0-short-v1.png'), Path('public/art/generated/cafe-style-sample-v1/sample.png')]
+files += [Path('scripts/build-cozy-cast-v5.py'), Path('docs/art-grid/palette.json'), Path('assets/legacy-packs/cozy-team-v7/hair-0-short-v1.png'), Path('assets/legacy-packs/cafe-style-sample-v1/sample.png')]
 hashes = {str(file): hashlib.sha256(file.read_bytes()).hexdigest() for file in sorted(files)}
 (ROOT / 'hashes.json').write_text(json.dumps(hashes, indent=2) + '\n')

@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
+import { hasArtLibrary, librarySource } from '../../scripts/art-files.mjs';
 import staticArchive from '../../assets/generated/original-main-static-v1/manifest.json';
 import { FURNITURE } from '../game/furniture';
 import { fineSpriteArt } from './fine-sprite-art';
@@ -47,9 +48,11 @@ describe('generated furniture catalog and renderer', () => {
       const id = entry.id as GeneratedFurnitureId, meta = GENERATED_FURNITURE_CATALOG[id];
       const originalFile = resolve('assets/generated/bulk-candidates/furniture', entry.file);
       const archived = staticArchive.images.find(row => resolve(row.previousPublicFile) === originalFile);
-      const bytes = readFileSync(archived ? resolve(archived.file) : originalFile);
-      if (archived) expect(createHash('sha256').update(bytes).digest('hex')).toBe(archived.sha256);
-      expect([bytes.readUInt32BE(16), bytes.readUInt32BE(20)]).toEqual(meta.size);
+      if (archived || hasArtLibrary) { // unarchived source crops live in the art library, outside git
+        const bytes = readFileSync(archived ? resolve(archived.file) : librarySource(originalFile));
+        if (archived) expect(createHash('sha256').update(bytes).digest('hex')).toBe(archived.sha256);
+        expect([bytes.readUInt32BE(16), bytes.readUInt32BE(20)]).toEqual(meta.size);
+      }
       expect(meta.anchor).toEqual(entry.anchor);
       expect(meta.logicalEnvelope).toEqual(entry.logicalEnvelope);
       expect(meta.footprintCells).toEqual([FURNITURE.find(f => f.id === id)!.w, FURNITURE.find(f => f.id === id)!.h]);

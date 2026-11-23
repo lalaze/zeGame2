@@ -1,7 +1,0 @@
-Attached image 2 shows the current in-game seated frames: use it ONLY for the chair (carved honey-wood dining chair with a sage-green cushion, seen from its right side, back rest on the left), the pose layout and how big the chair is relative to the person. Do NOT copy the person's face, eyes or hair rendering from image 2.
-
-ACTION: the character sits on that chair facing RIGHT, in profile. The chair is drawn in every frame, identical in size, shape and position; the character's hips, legs and feet do not move. Exactly 3 frames in order:
-1. sitting upright, both forearms reaching forward at table height as if resting on a table edge (no table drawn);
-2. leaning slightly forward, the near arm lowered toward the floor beside the knees to pet a cat (no cat drawn), eyes open looking down;
-3. the same lean, hand a little lower, eyes closed in a happy smile.
-Only the upper body, head and arms change between frames.

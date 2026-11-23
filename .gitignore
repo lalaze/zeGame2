@@ -19,3 +19,33 @@ src/assets/pixel-digits.woff2
 .cozy-cafe-*/
 .art-qa-*
 .cafe-style-sample-*
+
+# Kept out of git in the art library, at the same paths (assets/ART-LIBRARY.md):
+# rejected and superseded generations, retired art, source crops, and QA screenshots and video.
+/dogfood-output/
+/assets/art-retired/
+/assets/generated/cozy-cast-v5/
+/assets/generated/cozy-cast-v6/
+/assets/generated/cozy-cast-v7/
+/assets/generated/cozy-cast-v9-pilot/
+/assets/generated/cozy-team-v9-pilot/
+/assets/generated/staff-v1/
+/assets/generated/neighborhood-cast-v1/
+/assets/generated/bulk-candidates/**/*.png
+/assets/generated/bulk-candidates/**/*.jpg
+/assets/generated/bulk-candidates/**/*.webp
+/assets/generated/bulk-candidates/**/*.gif
+/artifacts/**/*.png
+/artifacts/**/*.jpg
+/artifacts/**/*.jpeg
+/artifacts/**/*.gif
+/artifacts/**/*.webm
+/artifacts/**/*.mp4
+/artifacts/**/*.zip
+/docs/**/*.png
+/docs/**/*.jpg
+/docs/**/*.jpeg
+/docs/**/*.gif
+/docs/**/*.webm
+/docs/**/*.mp4
+/docs/**/*.zip

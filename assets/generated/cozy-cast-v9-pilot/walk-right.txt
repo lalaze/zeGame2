@@ -1,7 +1,0 @@
-Attached image 1 is a pixel-art character sheet. Animate the character in its TOP ROW (young woman, pale peach skin, short fluffy dark-brown hair, thin round brown glasses, rust-red cardigan over a cream shirt, brown trousers, brown shoes).
-
-ACTION: a relaxed walk cycle in RIGHT profile, walking in place. Frames in order: right foot contact, right leg passing with the body slightly lower, left leg lifting, left foot contact, left leg passing, right leg lifting. Arms swing gently opposite to the legs. The head, hair and torso keep the same size and shape in every frame and bob by at most one big pixel; only the arms and legs change.
-
-STYLE: copy the top-row character of image 1 exactly: the same head-to-body proportions, face, hair shape, outfit, colours, outline and the same big-pixel size. True low-resolution pixel art built from large crisp square pixels, each one flat colour, at most three shades per material and one warm dark-brown outline (never pure black). No gradients, no anti-aliasing, no blur, no glow, no ground shadow, no props, no text.
-
-SHEET: all frames in one horizontal row, evenly spaced, each figure fully separate with clear empty space around it, all at the same scale with feet on the same baseline.

@@ -24,7 +24,7 @@ const report = {
     typescript: { command: 'npx tsc --noEmit', passed: !/error TS\d/.test(fs.readFileSync(directory + '/tsc.log', 'utf8')), log: directory + '/tsc.log' },
     build: { command: 'npm run build', passed: /built in/.test(buildLog) && !/error TS\d/.test(buildLog), log: directory + '/build.log' },
     tests: { command: 'npx vitest run', passed: results.numPassedTests, failed: results.numFailedTests, baselineFailedTests: 103, baselineSuiteLoadFailures: suites, newFailures, unchangedBaselineFailures: failures.filter(name => baseline.has(name)).length, log: directory + '/vitest.log', results: directory + '/vitest-results.json' },
-    palette: { command: 'node scripts/pixel-conform.mjs check public/art/generated/cozy-cast-v5/*.png', pngs: (pixelLog.match(/^PASS /gm) ?? []).length, passed: !/^FAIL /m.test(pixelLog) && (pixelLog.match(/^PASS /gm) ?? []).length === 13, log: directory + '/pixel-check.log' },
+    palette: { command: 'node scripts/pixel-conform.mjs check assets/legacy-packs/cozy-cast-v5/*.png', pngs: (pixelLog.match(/^PASS /gm) ?? []).length, passed: !/^FAIL /m.test(pixelLog) && (pixelLog.match(/^PASS /gm) ?? []).length === 13, log: directory + '/pixel-check.log' },
     nativeFramesChecked: metrics.nativeFrames, offPaletteGuestPixels: metrics.offPalettePixels,
     guestStandingHeight: range(guests.map(row => row.standingHeight)), staffStandingHeight: range(metrics.rows.filter(row => row.role !== 'customer').map(row => row.standingHeight)),
     guestHeadHeight: range(guests.map(row => row.headHeight)),
@@ -41,7 +41,7 @@ const report = {
 };
 fs.writeFileSync(directory + '/report.json', JSON.stringify(report, null, 2) + '\n');
 const root = 'assets/generated/cozy-cast-v5';
-const files = [...fs.readdirSync(root + '/sources').map(name => root + '/sources/' + name), ...fs.readdirSync('public/art/generated/cozy-cast-v5').map(name => 'public/art/generated/cozy-cast-v5/' + name), root + '/README.md', root + '/prompts.md', root + '/generation.json', 'scripts/build-cozy-cast-v5.py', 'docs/art-grid/palette.json', 'public/art/generated/cozy-team-v7/hair-0-short-v1.png', 'public/art/generated/cafe-style-sample-v1/sample.png'];
+const files = [...fs.readdirSync(root + '/sources').map(name => root + '/sources/' + name), ...fs.readdirSync('assets/legacy-packs/cozy-cast-v5').map(name => 'assets/legacy-packs/cozy-cast-v5/' + name), root + '/README.md', root + '/prompts.md', root + '/generation.json', 'scripts/build-cozy-cast-v5.py', 'docs/art-grid/palette.json', 'assets/legacy-packs/cozy-team-v7/hair-0-short-v1.png', 'assets/legacy-packs/cafe-style-sample-v1/sample.png'];
 fs.writeFileSync(root + '/hashes.json', JSON.stringify(Object.fromEntries(files.sort().map(file => [file, crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex')])), null, 2) + '\n');
 if (newFailures.length || metrics.offPalettePixels || !report.verification.palette.passed || !report.verification.typescript.passed || !report.verification.build.passed) throw Error('Cast verification failed; see report.json');
 console.log(JSON.stringify({ passed: results.numPassedTests, baselineFailures: results.numFailedTests, newFailures, nativeFrames: metrics.nativeFrames, runtimePngs: report.verification.palette.pngs }));

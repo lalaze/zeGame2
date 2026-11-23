@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { hasArtLibrary, librarySource } from '../../scripts/art-files.mjs';
 import { createGeneratedMainEnvironmentArt, GENERATED_MAIN_ENVIRONMENT_CATALOG,
   GENERATED_MAIN_ENVIRONMENT_DENSITY, GENERATED_MAIN_ENVIRONMENT_IDS, generatedMainEnvironmentKey,
   type GeneratedMainEnvironmentAlignment, type GeneratedMainEnvironmentId, type GeneratedMainEnvironmentSources,
@@ -63,14 +64,15 @@ function uniform(d: Draw) {
 }
 
 describe('generated main environment bitmap adapter', () => {
-  it('selects only the six requested modules and preserves their immutable manifest and PNG hashes', () => {
+  // The source modules live in the art library, outside git.
+  it.skipIf(!hasArtLibrary)('selects only the six requested modules and preserves their immutable manifest and PNG hashes', () => {
     expect(GENERATED_MAIN_ENVIRONMENT_IDS).toEqual(['main-horizontal-beam', 'main-corner-post',
       'foreground-threshold', 'outdoor-tree-line', 'village-roof-cluster', 'cloud']);
     const manifest = JSON.parse(readFileSync('assets/generated/bulk-candidates/environments/manifest.json', 'utf8'));
     for (const id of GENERATED_MAIN_ENVIRONMENT_IDS) {
       const entry = manifest.assets.find((asset: { id: string }) => asset.id === id);
       const meta = GENERATED_MAIN_ENVIRONMENT_CATALOG[id];
-      const bytes = readFileSync(`assets/generated/bulk-candidates/environments/${entry.file}`);
+      const bytes = readFileSync(librarySource(`assets/generated/bulk-candidates/environments/${entry.file}`));
       expect(meta.size).toEqual(entry.size); expect(meta.bbox).toEqual(entry.bbox);
       expect([bytes.readUInt32BE(16), bytes.readUInt32BE(20)]).toEqual(meta.size);
       expect(createHash('sha256').update(bytes).digest('hex')).toBe(entry.sha256);

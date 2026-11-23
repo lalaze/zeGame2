@@ -8,7 +8,9 @@
 const fs = require('node:fs'); const path = require('node:path'); const crypto = require('node:crypto');
 const { createCanvas, loadImage } = require('@napi-rs/canvas');
 const ROOT = path.resolve(__dirname, '..');
+// Manifests stay in git; the crops they name live in the art library (scripts/art-files.mjs).
 const CANDIDATES = path.join(ROOT, 'assets/generated/bulk-candidates');
+const ART_LIBRARY = process.env.ZEGAME_ART_LIBRARY || '/Volumes/data/zeGame2-library';
 const OUTPUT = path.join(ROOT, 'public/art/generated/catalog-v1');
 const REPORT = path.join(ROOT, 'assets/generated/runtime-catalog-v1');
 const ORIGINAL_ACTORS = path.join(ROOT, 'assets/generated/original-main-actors-v1');
@@ -22,6 +24,9 @@ const read = p => JSON.parse(fs.readFileSync(p, 'utf8'));
 const catalog = originalActorsOnly || signatureOnly || mainStaticOnly ? read(path.join(REPORT, 'catalog.json')) :
   { version: 1, sampling: 'Canvas nearest, isotropic scale, ceil canvas; no source crop or recolor', assets: {}, images: [] };
 async function exportImage(key, source, outputRelative, maxEdge, forcedScale) {
+  // A crop that left git is read from the art library but still recorded under its repo path.
+  const recorded = source, moved = path.join(ART_LIBRARY, path.relative(ROOT, source));
+  if (!fs.existsSync(source) && fs.existsSync(moved)) source = moved;
   // Old authoring alias manifests still name public crops. Resolve only an exact,
   // hash-verified archived path after those originals leave the shipping tree.
   if (!fs.existsSync(source)) {
@@ -40,7 +45,7 @@ async function exportImage(key, source, outputRelative, maxEdge, forcedScale) {
   const png = canvas.toBuffer('image/png');
   const output = path.join(OUTPUT, outputRelative); fs.mkdirSync(path.dirname(output), { recursive: true }); fs.writeFileSync(output, png);
   catalog.assets[key] = `catalog-v1/${outputRelative}`;
-  catalog.images.push({ key, file: path.relative(ROOT, output), source: path.relative(ROOT, source), sourceSha256: sha(bytes),
+  catalog.images.push({ key, file: path.relative(ROOT, output), source: path.relative(ROOT, source === moved ? recorded : source), sourceSha256: sha(bytes),
     sha256: sha(png), originalSize: [img.width, img.height], size: [width, height], scale, bytes: png.length });
   return { scale, size: [width,height] };
 }

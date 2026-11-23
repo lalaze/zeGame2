@@ -19,7 +19,7 @@ saved look's ramps. So these sheets are not final pixels but sources for that pi
 
 `sheet.json` records the prompt, references and Codex thread. Codex was shown the previous
 family sheet and seated row of the same look (`refs/`, `../cozy-team-v8`,
-`public/art/generated/cozy-team-v7`) so each hairstyle stays the one players saved.
+`assets/legacy-packs/cozy-team-v7`) so each hairstyle stays the one players saved.
 
 ## From sheet to source colours
 

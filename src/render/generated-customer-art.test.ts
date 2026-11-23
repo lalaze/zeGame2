@@ -1,5 +1,7 @@
 import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it, vi } from 'vitest';
+import { hasArtLibrary, librarySource } from '../../scripts/art-files.mjs';
 import { LEGACY_GENERATED_CUSTOMER_CAST as CUSTOMER_CAST } from './generated-customer-art';
 import { fineSpriteArt, logicalCrop } from './fine-sprite-art';
 import { createGeneratedCustomerArt, GENERATED_CUSTOMER_FRAME_IDS, generatedCustomerEligible, generatedCustomerFrameIds, generatedCustomerFrameId,
@@ -233,15 +235,16 @@ describe('atomic generated Mina identity', () => {
 });
 
 // Read the authored source dimensions, rather than inventing a uniform frame
-// size. Runtime packaging may resize each complete sheet family uniformly.
-const castPacks = CUSTOMER_CAST.map(design => {
+// size. Runtime packaging may resize each complete sheet family uniformly. Casts 1-29 have their
+// source crops in the art library, outside git; without it the suites that need them skip.
+const castPacks = (hasArtLibrary ? CUSTOMER_CAST : []).map(design => {
   const directory = design.id === 0 ? '../../assets/generated/original-main-actors-v1/customer-0-v1/'
     : `../../assets/generated/bulk-candidates/customers/cast-${String(design.id).padStart(2, '0')}/`;
   const manifest = (design.id === 0 ? structuredClone(manifestJson)
     : JSON.parse(readFileSync(new URL(`${directory}renderer-manifest.json`, import.meta.url), 'utf8'))) as GeneratedCustomerManifest;
   const sources: Partial<Record<GeneratedCustomerFrameId, CanvasImageSource>> = {};
   for (const id of generatedCustomerFrameIds(design.id)) {
-    const bytes = readFileSync(new URL(`${directory}${id}.png`, import.meta.url));
+    const bytes = readFileSync(librarySource(fileURLToPath(new URL(`${directory}${id}.png`, import.meta.url))));
     sources[id] = fake(bytes.readUInt32BE(16), bytes.readUInt32BE(20));
   }
   return { manifest, sources };
@@ -256,7 +259,7 @@ function castFixture(manifests: readonly GeneratedCustomerManifest[] = allManife
   return { adapter, createCanvas };
 }
 
-describe('all thirty fixed generated customer identities', () => {
+describe.skipIf(!hasArtLibrary)('all thirty fixed generated customer identities', () => {
   it('exports immutable, unique source mappings for every cast and only valid authored poses', () => {
     expect(CUSTOMER_CAST).toHaveLength(30);
     expect(GENERATED_CUSTOMER_FRAME_IDS).toHaveLength(450);
@@ -448,7 +451,7 @@ describe('all thirty fixed generated customer identities', () => {
   });
 });
 
-describe('customer cache construction isolation', () => {
+describe.skipIf(!hasArtLibrary)('customer cache construction isolation', () => {
   it('does not publish partial contacts or retain another identity after a canvas failure', () => {
     const allocated: HTMLCanvasElement[] = [];
     let attempts = 0;

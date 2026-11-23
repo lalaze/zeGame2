@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { inflateSync } from 'node:zlib';
+import { hasArtLibrary, librarySource } from '../../scripts/art-files.mjs';
 import { fineSpriteArt } from './fine-sprite-art';
 import {
   createGeneratedTablewareArt, GENERATED_TABLEWARE_ASSETS, GENERATED_TABLEWARE_CATALOG,
@@ -122,11 +123,12 @@ describe('generated main-scene tableware and effects', () => {
     expect(canvases.every(canvas => canvas.fills.length === 0)).toBe(true);
   });
 
-  it('keeps archived transparent edges and faint alpha inside the complete source rectangle', () => {
+  // Five of the seven sources live in the art library, outside git.
+  it.skipIf(!hasArtLibrary)('keeps archived transparent edges and faint alpha inside the complete source rectangle', () => {
     const adapter = fixture().create();
     for (const id of GENERATED_TABLEWARE_IDS) {
       const asset = archivedAssets.find(asset => asset.id === id)!;
-      const bytes = readFileSync(`assets/generated/${GENERATED_TABLEWARE_CATALOG[id].file}`);
+      const bytes = readFileSync(librarySource(`assets/generated/${GENERATED_TABLEWARE_CATALOG[id].file}`));
       expect(createHash('sha256').update(bytes).digest('hex')).toBe(asset.sha256);
       const { width, height, pixels } = pngPixels(bytes);
       expect([width, height]).toEqual(asset.size);

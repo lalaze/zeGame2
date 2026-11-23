@@ -1,2 +1,0 @@
-STYLE DIRECTION B - cleaned-up chibi
-Keep the compact chibi build of image 2 (about 2.3 heads tall, round head, short limbs, no visible neck) but fix what image 2 gets wrong. Faces are simplified to two small dark oval eyes and a soft blush, with no large glossy anime eyes. Hair is a few big clean shapes with a clearly different silhouette for each character rather than the same fluffy ball. Clothing is flat readable colour blocks with one highlight and one shadow shade. Glasses are a thin one-pixel frame with no lens glare.
