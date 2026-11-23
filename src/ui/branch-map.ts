@@ -5,6 +5,7 @@ import { t, type MessageKey } from '../i18n';
 import { paintBranchMap } from '../render/branch-map-art';
 import { paintLocationPreview } from '../render/location-scenery';
 import { itemArtwork, toDataURL } from '../render/sprites';
+import { iconArt } from './icon-art';
 import { displayItemName } from './item-name';
 import { showModal } from './modal';
 import { franchisesIn } from '../game/chain-bonuses';
@@ -99,7 +100,7 @@ export function showBranchMap(state: GameState, pick: (location: LocationId) => 
       const li = document.createElement('li');
       const icon = document.createElement('img');
       icon.alt = '';
-      icon.src = toDataURL(itemArtwork(id), 1);
+      icon.src = iconArt(`item:${id}`) ?? toDataURL(itemArtwork(id), 1);
       li.append(icon, displayItemName(id, state));
       return li;
     }));

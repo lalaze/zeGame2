@@ -7,6 +7,9 @@ import type { GameState } from '../../game/state';
 import type { CafeView } from '../cafe-view';
 import type { CafeHooks } from '../phaser/cafe-scene';
 import type { CafeSize } from '../phaser/game';
+import { installFloorsUi } from '../../ui/floors-ui';
+import { setIconArt } from '../../ui/icon-art';
+import { floorsIconArt } from './floors-icons';
 import { FLOORS_ART, FloorsScene, SHEETS, type DecorManifest, type FurnitureManifest, type SheetSize } from './floors-scene';
 
 function supportsWebGL(): boolean {
@@ -22,6 +25,8 @@ export class FloorsGame {
   get startupStatus(): string { return this.scene?.status ?? 'loading sheet sizes'; }
 
   constructor(private canvas: HTMLCanvasElement, view: CafeView, sim: Sim, getState: () => GameState, hooks: CafeHooks) {
+    // The page around the building takes the floors view's paper look.
+    installFloorsUi(canvas.ownerDocument.body);
     let created!: () => void, failed!: (error: Error) => void;
     this.ready = new Promise((resolve, reject) => { created = resolve; failed = reject; });
     void this.start(view, sim, getState, hooks, created, failed).catch(failed);
@@ -37,6 +42,10 @@ export class FloorsGame {
     // The decor layers are optional: without them the floors are drawn as single pictures.
     const decor = await fetch(`${FLOORS_ART}decor/decor.json`).then(r => (r.ok ? r.json() as Promise<DecorManifest> : null)).catch(() => null);
     const furniture = await fetch(`${FLOORS_ART}furniture/furniture.json`).then(r => (r.ok ? r.json() as Promise<FurnitureManifest> : null)).catch(() => null);
+    // The ledger shows the floors' own pictures: menu, pantry and upgrade icons, furniture and decor.
+    const list = (path: string) => fetch(`${FLOORS_ART}${path}`).then(r => (r.ok ? r.json() as Promise<string[]> : [])).catch(() => []);
+    const [thumbs, icons] = await Promise.all([list('thumbs/thumbs.json'), list('icons/icons.json')]);
+    setIconArt(floorsIconArt(FLOORS_ART, furniture, thumbs, icons));
     this.scene = new FloorsScene(view, sim, getState, hooks, sizes, () => { this.apply(); created(); }, failed, decor, furniture);
     // Browser checks read the building's camera and actors from here.
     if (import.meta.env.DEV) (window as unknown as { floorsScene?: FloorsScene }).floorsScene = this.scene;

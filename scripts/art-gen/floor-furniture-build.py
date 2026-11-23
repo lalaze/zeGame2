@@ -61,7 +61,8 @@ def seams(profile, parts):
     return edges + [len(profile)]
 
 
-def cells(sheet):
+def cells(sheet, cols=4, rows=2):
+    """The objects of a sheet of cols x rows separate objects, row by row (None for an empty cell)."""
     alpha = sheet[..., 3]
     # A pale veil around the objects (some sheets have one) is cut away: only near-opaque paint stays.
     veil = ((alpha > 20) & (alpha < 200)).sum() / max(1, (alpha >= 200).sum())
@@ -73,19 +74,19 @@ def cells(sheet):
         sheet = sheet.copy()
         sheet[..., 3] = alpha.astype(np.uint8)
     solid = alpha > 128
-    ys = seams(solid.sum(axis=1), 2)
+    ys = seams(solid.sum(axis=1), rows)
     out = []
-    for r in range(2):
+    for r in range(rows):
         band = solid[ys[r]:ys[r + 1]]
-        xs = seams(band.sum(axis=0), 4)
-        for c in range(4):
+        xs = seams(band.sum(axis=0), cols)
+        for c in range(cols):
             part = solid[ys[r]:ys[r + 1], xs[c]:xs[c + 1]]
-            rows, cols = np.where(part.any(axis=1))[0], np.where(part.any(axis=0))[0]
-            if not len(rows):
+            ink_rows, ink_cols = np.where(part.any(axis=1))[0], np.where(part.any(axis=0))[0]
+            if not len(ink_rows):
                 out.append(None)
                 continue
-            top, left = ys[r] + rows[0], xs[c] + cols[0]
-            piece = sheet[top:ys[r] + rows[-1] + 1, left:xs[c] + cols[-1] + 1].copy()
+            top, left = ys[r] + ink_rows[0], xs[c] + ink_cols[0]
+            piece = sheet[top:ys[r] + ink_rows[-1] + 1, left:xs[c] + ink_cols[-1] + 1].copy()
             # Drop what belongs to a neighbour: keep pixels of this cell only.
             out.append(piece)
     return out

@@ -17,6 +17,7 @@ import type { GameState } from '../game/state';
 import { t } from '../i18n';
 import { tasteLabel } from './taste';
 import { itemArtwork, toDataURL } from '../render/sprites';
+import { iconArt } from './icon-art';
 import { showModal } from './modal';
 import { cafeStyleName, prepStyleSummary, showCafeStyles } from './cafe-styles';
 import { ingredientName, itemName } from './panel';
@@ -101,7 +102,7 @@ export function showPrepare(state: GameState, onStart: () => void, onChange: () 
       })}</small>` : '';
       return `<div class="prep-row${on ? '' : ' off'}${on && low.has(m.id) ? ' low' : ''}">
         <label class="prep-select"><input type="checkbox" data-focus="dish-${m.id}" data-dish="${m.id}" ${on ? 'checked' : ''} ${eligible ? '' : 'disabled'} />
-        <img src="${toDataURL(itemArtwork(m.id), 1)}" alt="" /><span class="prep-name"><b>${itemName(m.id, state)}</b><small>${note}</small>${ingredients}<small>${tasteLabel(state, m.id)}</small>${eligible ? dishConditionHtml(state, m.id) + dishDemandHtml(state, m) : ''}</span></label>${bake}</div>`;
+        <img src="${iconArt(`item:${m.id}`) ?? toDataURL(itemArtwork(m.id), 1)}" alt="" /><span class="prep-name"><b>${itemName(m.id, state)}</b><small>${note}</small>${ingredients}<small>${tasteLabel(state, m.id)}</small>${eligible ? dishConditionHtml(state, m.id) + dishDemandHtml(state, m) : ''}</span></label>${bake}</div>`;
     }).join('');
     const quote = restockQuote(state);
     const plan = restockPlan(state);

@@ -14,22 +14,36 @@ export interface Spot extends FloorPoint { aisle: number }
 /** One leg of a walk. `jump` appears there (the far end of a flight of stairs); `fadeOut` leaves through it. */
 export interface Step extends FloorPoint { jump?: boolean; fadeOut?: boolean }
 
-/** Each floor's image and the plate rows it was cut from (scripts/art-gen/floor-sample-plates.mjs). */
-export const FLOOR_ART: Record<FloorId, { image: string; top: number; height: number }> = {
-  roof: { image: 'roof', top: 0, height: 905 },
+/**
+ * Each floor's image and the plate rows it was cut from (scripts/art-gen/floor-sample-plates.mjs).
+ * The top floor is drawn from the attic picture (scripts/art-gen/floor-frame-build.py), which keeps
+ * the plate's rows and carries the roof `above` them.
+ */
+export const FLOOR_ART: Record<FloorId, { image: string; top: number; height: number; above?: number }> = {
+  roof: { image: 'frame/attic', top: 0, height: 905, above: 427 },
   'floor-3': { image: 'floor-2', top: 24, height: 877 },
   'floor-2': { image: 'floor-2', top: 24, height: 877 },
   ground: { image: 'floor-1', top: 24, height: 883 },
   basement: { image: 'basement', top: 30, height: 911 },
 };
 export const WORLD_W = 1672;
+/**
+ * The building's frame around its floors (build/frame/frame.json): the ground floor stands at street
+ * level, so the street's picture runs on below it; with a basement the street is cut open, a band of
+ * its paving and earth (SOIL_BAND) over the basement and more earth (SOIL_BELOW) under it.
+ */
+export const FRAME = { street: 836, soilBand: 150, soilBelow: 420, beam: 70, pillar: 76 } as const;
 /** Bottom up, so the stairs can be followed floor by floor. */
 const LEVELS: FloorId[] = ['basement', 'ground', 'floor-2', 'floor-3', 'roof'];
 
 export interface Building {
   /** Top down, as drawn. */
   floors: FloorId[];
+  /** Where each floor's plate starts; the roof's picture reaches FLOOR_ART.roof.above higher. */
   offsets: Partial<Record<FloorId, number>>;
+  /** The street level: the ground floor's front edge. */
+  street: number;
+  /** The whole picture, roof to the bottom of the street or the earth. */
   height: number;
 }
 
@@ -44,9 +58,15 @@ export function building(tables: number, kitchen: boolean): Building {
   floors.push('ground');
   if (kitchen) floors.push('basement');
   const offsets: Partial<Record<FloorId, number>> = {};
-  let height = 0;
-  for (const floor of floors) { offsets[floor] = height; height += FLOOR_ART[floor].height; }
-  return { floors, offsets, height };
+  let height = FLOOR_ART.roof.above ?? 0, street = 0;
+  for (const floor of floors) {
+    if (floor === 'basement') height += FRAME.soilBand;
+    offsets[floor] = height;
+    height += FLOOR_ART[floor].height;
+    if (floor === 'ground') street = height;
+  }
+  height += kitchen ? FRAME.soilBelow : FRAME.street;
+  return { floors, offsets, street, height };
 }
 
 export function worldPoint(b: Building, p: FloorPoint): Point {
@@ -68,8 +88,12 @@ const STAIRS: Partial<Record<FloorId, { foot: Point; top: Point; landing: Spot }
   'floor-3': { foot: { x: 1480, y: 748 }, top: { x: 1418, y: 78 }, landing: spot('floor-3', 1330, 700, 700) },
 };
 
-export const DOOR = spot('ground', 255, 578, GROUND_AISLE);
-/** Six places in line, the head nearest the till; the tail reaches the open door. */
+/**
+ * The front step, on the street just below the ground floor's front edge, between the two front
+ * tables: guests walk in from the street here and leave the same way.
+ */
+export const DOOR = spot('ground', 836, 935, GROUND_AISLE);
+/** Six places in line, the head nearest the till; the tail reaches towards the window seat. */
 export const QUEUE: Spot[] = [[612, 606], [510, 608], [408, 610], [318, 614], [246, 598], [186, 584]]
   .map(([x, y]) => spot('ground', x, y, GROUND_AISLE));
 /** Behind the counter: the owner in the middle, then the hired baristas. */

@@ -1,0 +1,68 @@
+{
+ "attic": {
+  "width": 1672,
+  "height": 1332,
+  "plateTop": 427,
+  "eave": 550
+ },
+ "pillar": {
+  "width": 76,
+  "height": 815
+ },
+ "beam": {
+  "width": 1672,
+  "height": 114
+ },
+ "awning": {
+  "width": 1520,
+  "height": 123
+ },
+ "door-left": {
+  "width": 104,
+  "height": 720
+ },
+ "door-right": {
+  "width": 104,
+  "height": 720
+ },
+ "step": {
+  "width": 320,
+  "height": 86
+ },
+ "side-window": {
+  "x": 0,
+  "y": 40,
+  "width": 600,
+  "height": 760
+ },
+ "wall-attic": {
+  "width": 1672,
+  "height": 1332
+ },
+ "wall-seating": {
+  "width": 1672,
+  "height": 877
+ },
+ "wall-ground": {
+  "width": 1672,
+  "height": 883
+ },
+ "street": {
+  "width": 1672,
+  "height": 836,
+  "top": "#ebaf9b",
+  "bottom": "#656c34"
+ },
+ "soil": {
+  "width": 1672,
+  "height": 836,
+  "top": "#cd9283",
+  "bottom": "#65362b"
+ },
+ "sky": {
+  "width": 1672,
+  "height": 836,
+  "top": "#8dc3fc",
+  "bottom": "#8d8c59"
+ }
+}

@@ -1,0 +1,5 @@
+Image 1 is the approved art direction of this cozy café game. Image 2 is the café's ground floor. Paint small icons for the game's ledger (its menu, pantry and upgrades) in exactly that style: soft hand-drawn illustration, thin warm-brown outlines, gentle low-saturation colours, soft shading with warm light from the upper left. Each object is seen from a slight high angle (about 30 degrees down), centred in its cell, at the same scale as the others and filling most of the cell, with a bold, simple silhouette that still reads when shown 48 pixels wide.
+
+Sprite sheet: one landscape image with a fully transparent background, EXACTLY 2 columns and 1 row of equal cells, 2 separate objects. Each object is fully inside its own cell with clear empty space around it; nothing touches or overlaps a neighbour. No table or counter under them, no cast shadows, no labels, no numbers, no grid lines, no backdrop. Keep any writing out: no letters or words anywhere. Crisp edges with no pale halo.
+
+Cells left to right:

@@ -37,3 +37,43 @@ describe.skipIf(!manifest)('floors decor layers', () => {
     }
   });
 });
+
+const thumbsPath = `${BUILD}/thumbs/thumbs.json`;
+const thumbs = existsSync(thumbsPath) ? JSON.parse(readFileSync(thumbsPath, 'utf8')) as string[] : null;
+
+describe.skipIf(!thumbs)('floors ledger thumbnails', () => {
+  it('has a thumbnail for every decor option, the empty choices included', () => {
+    expect([...thumbs!].sort()).toEqual(DECOR.map(d => d.id).sort());
+    for (const id of thumbs!) expect(existsSync(`${BUILD}/thumbs/${id}.webp`), id).toBe(true);
+  });
+
+  it('shows floors art for furniture and decor, and leaves every other icon drawn', async () => {
+    const { floorsIconArt } = await import('./floors-icons');
+    const art = floorsIconArt('/art/', { lamp: {} }, thumbs!);
+    expect(art('furniture:lamp')).toBe('/art/furniture/lamp.webp');
+    expect(art('furniture:piano')).toBeUndefined();
+    expect(art('decor:wall_mint')).toBe('/art/thumbs/wall_mint.webp');
+    // Tablecloth and centerpiece keys carry the table setting after the id.
+    expect(art('decor:tablecloth_mint:tablecloth_mint:centerpiece_none')).toBe('/art/thumbs/tablecloth_mint.webp');
+    expect(art('item:latte')).toBeUndefined();
+    expect(art('ing:milk')).toBeUndefined();
+    const painted = floorsIconArt('/art/', null, [], ['item:latte', 'ing:milk']);
+    expect(painted('item:latte')).toBe('/art/icons/item-latte.webp');
+    expect(painted('ing:milk')).toBe('/art/icons/ing-milk.webp');
+    expect(painted('upgrade:barista')).toBeUndefined();
+  });
+});
+
+const iconsPath = `${BUILD}/icons/icons.json`;
+const icons = existsSync(iconsPath) ? JSON.parse(readFileSync(iconsPath, 'utf8')) as string[] : null;
+
+describe.skipIf(!icons)('floors ledger icons', () => {
+  it('names only real menu items, ingredients and upgrades, with files that exist', async () => {
+    const { MENU, INGREDIENTS, UPGRADES } = await import('../../game/data');
+    const known = new Set([...MENU.map(m => `item:${m.id}`), ...INGREDIENTS.map(i => `ing:${i.id}`), ...UPGRADES.map(u => `upgrade:${u.id}`)]);
+    for (const key of icons!) {
+      expect(known.has(key), key).toBe(true);
+      expect(existsSync(`${BUILD}/icons/${key.replace(':', '-')}.webp`), key).toBe(true);
+    }
+  });
+});

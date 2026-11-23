@@ -70,6 +70,53 @@ a cell that is free under the game's rules; wall pieces hang on the ground floor
 game's two free stretches of wall map. The decor build clears the fixed decor there and the potted
 plants in the front corners.
 
+## The building's frame and outer walls
+
+The floors stand in one building (`scripts/art-gen/floor-frame-build.py`, takes in `kits/frame/<piece>`,
+prompts in `prompts/frame/`; chosen 2026-11-23 from the mockups in the library's
+`mock/building-frame`, version B with the front entrance F1 and an outer-wall switch):
+
+- `attic`: the top floor under a pitched tiled roof with a chimney and a round gable window. The take
+  repaints the roof plate with magenta above it (`kits/frame/attic/input.png`); the build keeps the
+  plate below the parapet, so the floor's seats and routes do not move (`FLOOR_ART.roof.above`).
+- `pillar` (repeating) down both sides from the eaves to the street, a `beam` over every join.
+- `street` under the ground floor, which stands at street level; with a basement the street is cut
+  open (`soil`: its paving and the earth) over and around it. `sky` behind the roof.
+- The ground floor's open front: `awning`, folded `door-left`/`door-right`, and the `step` guests come
+  in by (`DOOR` in `src/render/floors/floors-layout.ts`). Its old side door is covered by
+  `side-window` (window, window seat and plant), painted on magenta over the plate in its starting
+  decor; take 2 is used, take 1 left the door showing past its plant.
+- `wall-attic`, `wall-seating`, `wall-ground`: the front walls shown when the player turns the outer
+  walls on (the button under the money, `src/ui/floors-ui.ts`); the basement then sinks into the earth.
+
+    uv run --with pillow --with numpy python scripts/art-gen/floor-frame-build.py
+
+writes `build/frame/*.webp` and `build/frame/frame.json`; `FRAME` and `FLOOR_ART.roof` in
+`floors-layout.ts` must match it (`floors-layout.test.ts` checks).
+
+## Ledger pictures
+
+In the floors view the ledger shows this pack's art instead of its pixel icons (`src/ui/icon-art.ts`,
+set up by `floorsIconArt` in `src/render/floors/floors-game.ts`): furniture tiles show
+`build/furniture/<id>.webp`, and decor tiles a thumbnail of each option standing in its floor,
+
+    uv run --with pillow python scripts/art-gen/floor-thumbs-build.py
+
+which composites `build/decor` with the starting choice in every other slot and crops around the
+slot (3:2, 240 px wide) into `build/thumbs/<option>.webp` and `build/thumbs/thumbs.json`.
+
+The menu, pantry and upgrade icons (74: every menu item, ingredient and upgrade) are painted for this
+style in ten sheets (`kits/icons/<sheet>`, prompts in `prompts/icons/`: `common.txt`, or
+`common-pair.txt` for the two-object `upgrades` sheet, followed by the sheet's own list):
+
+    node scripts/art-gen/codex-image.mjs --out=assets/generated/floor-sample-v1/kits/icons/drinks-1/take-1/sheet.png \
+      --prompt=assets/generated/floor-sample-v1/prompts/icons/common.txt,assets/generated/floor-sample-v1/prompts/icons/drinks-1.txt \
+      --ref=assets/generated/art-direction-v1/target-shot.png --ref=assets/generated/floor-sample-v1/kits/angle-plate-1f/take-1/plate.png
+    uv run --with pillow --with numpy python scripts/art-gen/floor-icons-build.py
+
+The build cuts each sheet in the order `SHEETS` lists the icon keys (and the take it uses) into
+`build/icons/<kind>-<id>.webp` (160 px squares) and `build/icons/icons.json`.
+
 ## Regenerate and build
 
     node scripts/art-gen/codex-image.mjs --out=assets/generated/floor-sample-v1/kits/guest-beret/take-2/moves.png \

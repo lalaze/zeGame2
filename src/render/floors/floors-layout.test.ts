@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { STATION_SECONDS, type Station } from '../../game/kitchen';
-import { DOOR, FLOOR_ART, QUEUE, SERVICE, building, cookHome, kitchenPlace, kitchenSpot, route, tableSeats, worldPoint } from './floors-layout';
+import { DOOR, FLOOR_ART, FRAME, QUEUE, SERVICE, building, cookHome, kitchenPlace, kitchenSpot, route, tableSeats, worldPoint } from './floors-layout';
 
 describe('floors building', () => {
   it('opens a floor above for tables three to five and another for six to eight, and a basement with the kitchen', () => {
@@ -10,11 +10,19 @@ describe('floors building', () => {
     expect(building(6, true).floors).toEqual(['roof', 'floor-3', 'floor-2', 'ground', 'basement']);
   });
 
-  it('stacks the floors without gaps, top down', () => {
+  it('stacks the floors under the roof, the street at the ground floor and the basement below it', () => {
     const b = building(6, true);
-    let y = 0;
-    for (const floor of b.floors) { expect(b.offsets[floor]).toBe(y); y += FLOOR_ART[floor].height; }
-    expect(b.height).toBe(y);
+    let y = FLOOR_ART.roof.above!;
+    for (const floor of b.floors) {
+      if (floor === 'basement') { expect(b.street).toBe(y); y += FRAME.soilBand; }
+      expect(b.offsets[floor]).toBe(y);
+      y += FLOOR_ART[floor].height;
+    }
+    expect(b.height).toBe(y + FRAME.soilBelow);
+    // Without a basement the street runs on below the ground floor.
+    const small = building(2, false);
+    expect(small.street).toBe(small.offsets.ground! + FLOOR_ART.ground.height);
+    expect(small.height).toBe(small.street + FRAME.street);
     // A point on a floor's plate lands inside that floor's band.
     const counter = worldPoint(b, SERVICE[0]);
     expect(counter.y).toBeGreaterThan(b.offsets.ground!);
@@ -93,5 +101,24 @@ describe('floors furniture', () => {
     }
     // The starter clock and mug rack hang on the ground floor's cleared wall.
     for (const p of STARTER_FURNITURE) expect(gameWallRectToPlate(footprint(furnitureDef(p.id)!, p.col, p.row)), p.id).not.toBeNull();
+  });
+});
+
+describe('floors frame', () => {
+  it('matches the frame pictures it lays out', async () => {
+    const { existsSync, readFileSync } = await import('node:fs');
+    const path = 'assets/generated/floor-sample-v1/build/frame/frame.json';
+    if (!existsSync(path)) return;
+    const frame = JSON.parse(readFileSync(path, 'utf8'));
+    expect(frame.attic.height - frame.attic.plateTop).toBe(FLOOR_ART.roof.height);
+    expect(frame.attic.plateTop).toBe(FLOOR_ART.roof.above);
+    expect(frame.street.height).toBe(FRAME.street);
+    expect(frame.pillar.width).toBe(FRAME.pillar);
+    expect(frame.soil.height).toBeGreaterThanOrEqual(FRAME.soilBand + 1);
+    for (const piece of ['attic', 'pillar', 'beam', 'street', 'soil', 'sky', 'awning', 'door-left', 'door-right', 'step', 'side-window', 'wall-attic', 'wall-seating', 'wall-ground']) {
+      expect(existsSync(`assets/generated/floor-sample-v1/build/frame/${piece}.webp`), piece).toBe(true);
+    }
+    expect(frame['wall-seating'].height).toBe(FLOOR_ART['floor-2'].height);
+    expect(frame['wall-ground'].height).toBe(FLOOR_ART.ground.height);
   });
 });

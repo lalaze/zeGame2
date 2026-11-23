@@ -3,6 +3,7 @@ import type { GameState } from '../game/state';
 import { formatNumber } from '../game/format';
 import { t } from '../i18n';
 import { itemArtwork, toDataURL } from '../render/sprites';
+import { iconArt } from './icon-art';
 import { closeModal, showModal } from './modal';
 
 type Step = 'stock' | 'menu' | 'open';
@@ -27,7 +28,7 @@ export function showFirstOpening(state: GameState, onStart: () => void, onChange
       `<li${id === step ? ' aria-current="step"' : ''}><span>${i + 1}</span>${t(`opening.${id}.label`)}</li>`).join('')}</ol>
       <h3>${t(`opening.${step}.title`)}</h3><p>${t(`opening.${step}.body`)}</p>
       ${step === 'stock' ? `<div class="opening-stock"><b>${formatNumber(state.pantry.beans)}</b><span>${t('opening.beans')}</span></div><p class="opening-note">${t('opening.stockCount', { n: formatNumber(count) })}</p>` : ''}
-      ${step === 'menu' ? `<label class="opening-menu"><input type="checkbox" data-opening-menu ${selected() ? 'checked' : ''} /><img src="${toDataURL(itemArtwork('espresso'), 1)}" alt="" /><span><b>${t('item.espresso')}</b><small>${t('opening.recipe')}</small></span></label>${!selected() ? `<p class="opening-warning" role="status">${t('opening.selectHint')}</p>` : ''}` : ''}
+      ${step === 'menu' ? `<label class="opening-menu"><input type="checkbox" data-opening-menu ${selected() ? 'checked' : ''} /><img src="${iconArt('item:espresso') ?? toDataURL(itemArtwork('espresso'), 1)}" alt="" /><span><b>${t('item.espresso')}</b><small>${t('opening.recipe')}</small></span></label>${!selected() ? `<p class="opening-warning" role="status">${t('opening.selectHint')}</p>` : ''}` : ''}
       ${step === 'open' ? `<ul class="opening-ready"><li>${t('opening.menuReady')}</li><li>${t('opening.stockReady', { n: formatNumber(count) })}</li><li>${t('opening.teamReady')}</li></ul><p class="opening-note">${t('opening.afterOpen')}</p>` : ''}
       ${!ready() ? `<p class="opening-warning" role="status">${t('opening.noStock')}</p>` : ''}
       <button class="chip opening-advanced" data-opening-advanced>${t('opening.advanced')}</button>`;

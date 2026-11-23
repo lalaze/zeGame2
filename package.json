@@ -15,7 +15,7 @@
     "balance": "vitest run scripts/balance.test.ts --silent=false --disableConsoleIntercept",
     "balance:lab": "ECONOMY_LAB=1 vitest run scripts/economy-lab.test.ts --silent=false --disableConsoleIntercept",
     "balance:idle": "IDLE_PACING=1 vitest run scripts/idle-pacing.test.ts --silent=false --disableConsoleIntercept",
-    "balance:compare":"node scripts/compare-economy.mjs",
+    "balance:compare": "node scripts/compare-economy.mjs",
     "balance:frontier": "INVESTMENT_FRONTIER=1 vitest run scripts/investment-frontier.test.ts --silent=false --disableConsoleIntercept",
     "balance:long": "ECONOMY_LONG_HORIZON=1 vitest run scripts/economy-long-horizon.test.ts --silent=false --disableConsoleIntercept",
     "balance:long-supplement": "ECONOMY_LONG_HORIZON_SUPPLEMENT=1 vitest run scripts/economy-long-horizon-supplement.test.ts --silent=false --disableConsoleIntercept",
@@ -35,6 +35,7 @@
     "vitest": "^5.0.3"
   },
   "dependencies": {
+    "@fontsource-variable/nunito": "^5.3.0",
     "@fontsource/fusion-pixel-12px-proportional-sc": "^5.3.0",
     "@fontsource/pixelify-sans": "^5.3.0",
     "phaser": "^4.2.1"

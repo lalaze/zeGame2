@@ -14,11 +14,12 @@ import type { CafeView } from '../cafe-view';
 import type { CafeHooks } from '../phaser/cafe-scene';
 import {
   BARISTAS, COUNTER_FRONT, DISPLAY, DOOR, FLOOR_ART, LIFT_HATCH, LIFT_TOP, OVEN_MOUTH, PASS, QUEUE, SERVER_HOMES, SERVICE, STEAM,
-  FURNITURE_SPOTS, TABLE_FRONT, WORLD_W, building, cookHome, gameWallRectToPlate, kitchenPlace, kitchenSpot, plateToGameWall, route,
+  FRAME, FURNITURE_SPOTS, TABLE_FRONT, WORLD_W, building, cookHome, gameWallRectToPlate, kitchenPlace, kitchenSpot, plateToGameWall, route,
   spotCell, spotOf, tableSeats, worldPoint,
   type Building, type FloorId, type FloorPoint, type FurnitureSpot, type KitchenPlace, type Point, type Spot, type Step,
 } from './floors-layout';
 import { makeTextures } from './textures';
+import { outerWallShown, setOuterWall } from '../../ui/floors-ui';
 
 export const FLOORS_ART = `${import.meta.env.BASE_URL}assets/generated/floor-sample-v1/build/`;
 export interface SheetSize { frameWidth: number; frameHeight: number }
@@ -58,10 +59,29 @@ const castArt = (appearance: number) => `cast-${String(appearance).padStart(2, '
 const LOOK_WAIT = 2;
 export const SHEETS = ['owner', 'barista', ...GUEST_ART, ...GUEST_ART.map(key => `${key}-moves`),
   'cook-chef', 'cook-scarf', 'cook-chef-work', 'cook-scarf-work'];
-const IMAGES = ['roof', 'floor-2', 'floor-1', 'basement', 'counter-front', 'table-front'];
+const IMAGES = ['frame/attic', 'floor-2', 'floor-1', 'basement', 'counter-front', 'table-front',
+  'frame/sky', 'frame/pillar', 'frame/beam', 'frame/street', 'frame/soil',
+  'frame/awning', 'frame/door-left', 'frame/door-right', 'frame/step', 'frame/side-window',
+  'frame/wall-attic', 'frame/wall-seating', 'frame/wall-ground'];
+/**
+ * The frame's colours where its pictures end (build/frame/frame.json): the sky above the sky
+ * picture's top, the hedge under the street's bottom, the earth under the soil's.
+ */
+const FRAME_EDGES = { sky: 0x8dc3fc, street: 0x656c34, soil: 0x65362b } as const;
+/** Pillars and beams stand in front of everyone; the page's arrange marks and bubbles stay above them. */
+const FRAME_DEPTH = 50000;
+/** Where the roof's slopes reach the sides, below the top floor's plate top (build/frame/frame.json `eave` less `plateTop`). */
+const EAVE = 123;
+/** The ground floor's open front: the awning tucks under the beam, this far below the floor's top, and is drawn this tall. */
+const AWNING = { top: 18, height: 84 } as const;
+/** Where the window that replaced the ground floor's side door sits on its plate (build/frame/frame.json). */
+const SIDE_WINDOW = { x: 0, y: 40 } as const;
+/** Each storey's front wall, shown when the player closes the building (build/frame/wall-*). */
+const WALLS: Partial<Record<FloorId, string>> = { roof: 'frame/wall-attic', 'floor-3': 'frame/wall-seating', 'floor-2': 'frame/wall-seating', ground: 'frame/wall-ground' };
+/** The front walls stand in front of everyone inside, under the pillars, beams and awning. */
+const WALL_DEPTH = FRAME_DEPTH - 3;
 /** View pixels per second, and how much faster someone walks once the Sim has them there already. */
 const WALK = 240, HURRY = 2.2;
-const SKY = 0xd5e6ee, EARTH = 0x6e523f;
 /** How far past its ends the building can be dragged, as a share of the screen. */
 const OVERSCROLL = 1 / 3;
 
@@ -99,6 +119,16 @@ export class FloorsScene extends Phaser.Scene {
   private ghostSprite: Phaser.GameObjects.Image | null = null;
   private arranging = false;
   private earth!: Phaser.GameObjects.Rectangle;
+  private sky!: Phaser.GameObjects.Image;
+  private street!: Phaser.GameObjects.Image;
+  private soilBand!: Phaser.GameObjects.Image;
+  private soilBelow!: Phaser.GameObjects.Image;
+  private frameParts: Phaser.GameObjects.GameObject[] = [];
+  /** The front walls, and the open front's folded doors that they replace. */
+  private walls: Phaser.GameObjects.Image[] = [];
+  private openDoors: Phaser.GameObjects.Image[] = [];
+  /** How far the walls have faded in, 0 (open) to 1 (closed). */
+  private wallAlpha = 0;
   private counterFront!: Phaser.GameObjects.Image;
   private tableFront!: Phaser.GameObjects.Image;
   private glow!: Phaser.GameObjects.Image;
@@ -144,8 +174,13 @@ export class FloorsScene extends Phaser.Scene {
 
   create(): void {
     makeTextures(this);
-    this.cameras.main.setBackgroundColor(SKY);
-    this.earth = this.add.rectangle(0, 0, WORLD_W, 4000, EARTH).setOrigin(0, 0).setDepth(-2);
+    this.cameras.main.setBackgroundColor(FRAME_EDGES.sky);
+    this.earth = this.add.rectangle(0, 0, WORLD_W, 4000, FRAME_EDGES.street).setOrigin(0, 0).setDepth(-3);
+    this.sky = this.add.image(0, 0, 'frame/sky').setOrigin(0, 1).setDepth(-10);
+    this.street = this.add.image(0, 0, 'frame/street').setOrigin(0, 0).setDepth(-3);
+    // The street cut open over a basement: its paving and the top of the earth, then earth under the basement.
+    this.soilBand = this.add.image(0, 0, 'frame/soil').setOrigin(0, 0).setDepth(-3).setCrop(0, 0, WORLD_W, FRAME.soilBand);
+    this.soilBelow = this.add.image(0, 0, 'frame/soil').setOrigin(0, 0).setDepth(-3).setCrop(0, FRAME.soilBand, WORLD_W, FRAME.soilBelow);
     this.counterFront = this.add.image(0, 0, 'counter-front').setOrigin(0, 0);
     this.tableFront = this.add.image(0, 0, 'table-front').setOrigin(0, 0);
     this.freeCells = this.add.graphics().setDepth(99000);
@@ -215,6 +250,75 @@ export class FloorsScene extends Phaser.Scene {
     return false;
   }
 
+  /**
+   * The building's frame (build/frame): the sky behind the roof, a pillar down each side from the
+   * eaves to the street, a beam over each join between floors, and the street at the ground floor,
+   * or with a basement the street cut open over it and the earth around it.
+   */
+  private layoutFrame(b: Building): void {
+    for (const part of this.frameParts) part.destroy();
+    const roof = b.offsets.roof ?? 0, eave = roof + EAVE;
+    this.sky.setY(eave + 120);
+    const span = b.street - eave;
+    this.frameParts = [
+      this.add.tileSprite(0, eave, FRAME.pillar, span, 'frame/pillar').setOrigin(0, 0).setDepth(FRAME_DEPTH),
+      this.add.tileSprite(WORLD_W - FRAME.pillar, eave, FRAME.pillar, span, 'frame/pillar').setOrigin(0, 0).setFlipX(true).setDepth(FRAME_DEPTH),
+      // A beam over each join above the street.
+      ...b.floors.slice(1).filter(floor => floor !== 'basement').map(floor =>
+        this.add.image(0, b.offsets[floor]!, 'frame/beam').setOrigin(0, .5).setDisplaySize(WORLD_W, FRAME.beam).setDepth(FRAME_DEPTH - 1)),
+    ];
+    // The ground floor's open front: awning, folded-back doors at its corners, the step guests come in by.
+    const ground = b.offsets.ground ?? 0;
+    this.frameParts.push(
+      this.add.image(FRAME.pillar, ground + AWNING.top, 'frame/awning').setOrigin(0, 0)
+        .setDisplaySize(WORLD_W - 2 * FRAME.pillar, AWNING.height).setDepth(FRAME_DEPTH - 2),
+      ...(this.openDoors = [
+        this.add.image(FRAME.pillar, b.street, 'frame/door-left').setOrigin(0, 1).setDepth(FRAME_DEPTH - 2),
+        this.add.image(WORLD_W - FRAME.pillar, b.street, 'frame/door-right').setOrigin(1, 1).setDepth(FRAME_DEPTH - 2),
+      ]),
+      this.add.image(DOOR.x, b.street - 16, 'frame/step').setOrigin(.5, 0).setDepth(b.street - 1),
+      // The old side door is a window now, drawn over the decor's wall and floor, under its tables.
+      this.add.image(SIDE_WINDOW.x, worldPoint(b, { floor: 'ground', ...SIDE_WINDOW }).y, 'frame/side-window').setOrigin(0, 0)
+        .setDepth(LAYER_DEPTH + LAYER_STEP * (BACK_LAYERS.indexOf('fixtures') + .5)),
+    );
+    // The front walls; underground, the basement is hidden in the earth.
+    this.walls = b.floors.flatMap(floor => {
+      const y = b.offsets[floor]!, key = WALLS[floor];
+      if (key) return [this.add.image(0, y - (FLOOR_ART[floor].above ?? 0), key).setOrigin(0, 0).setDepth(WALL_DEPTH)];
+      // The soil picture below its paving, stretched over the basement and the earth under it.
+      const soil = this.textures.getFrame('frame/soil'), rows = soil.height - FRAME.soilBand;
+      const stretch = (FLOOR_ART[floor].height + FRAME.soilBelow) / rows;
+      return [this.add.image(0, y - FRAME.soilBand * stretch, 'frame/soil').setOrigin(0, 0).setScale(1, stretch)
+        .setCrop(0, FRAME.soilBand, WORLD_W, rows).setDepth(WALL_DEPTH)];
+    });
+    this.frameParts.push(...this.walls);
+    this.showWalls(0);
+    const basement = b.offsets.basement;
+    this.street.setY(b.street).setVisible(basement === undefined);
+    this.soilBand.setY(b.street).setVisible(basement !== undefined);
+    if (basement !== undefined) this.soilBelow.setY(basement + FLOOR_ART.basement.height - FRAME.soilBand);
+    this.soilBelow.setVisible(basement !== undefined);
+    this.earth.setY(b.height).setFillStyle(basement === undefined ? FRAME_EDGES.street : FRAME_EDGES.soil);
+  }
+
+  /**
+   * Fades the front walls towards the player's choice: closed seen from the street, open while
+   * arranging furniture. `dt` 0 just applies the current fade.
+   */
+  private showWalls(dt: number): void {
+    const target = outerWallShown() && !this.arranging ? 1 : 0;
+    this.wallAlpha = dt ? Phaser.Math.Linear(this.wallAlpha, target, Math.min(1, dt * 8)) : this.wallAlpha;
+    if (Math.abs(this.wallAlpha - target) < .01) this.wallAlpha = target;
+    for (const wall of this.walls) wall.setAlpha(this.wallAlpha).setVisible(this.wallAlpha > 0);
+    for (const door of this.openDoors) door.setAlpha(1 - this.wallAlpha);
+  }
+
+  /** Someone out on the street, in front of the ground floor, stands in front of the building's front walls. */
+  private depthAt(p: FloorPoint): number {
+    const y = this.built ? worldPoint(this.built, p).y : p.y;
+    return this.built && p.floor === 'ground' && y > this.built.street ? y + FRAME_DEPTH : y;
+  }
+
   /** The canvas changed size: fit the building's width to it. */
   resized(): void {
     if (!this.ready) return;
@@ -226,12 +330,14 @@ export class FloorsScene extends Phaser.Scene {
   private frameCamera(): void {
     const b = this.built;
     if (!b) return;
-    const cam = this.cameras.main, half = cam.height / cam.zoom / 2;
-    if (this.focusY < 0) this.focusY = worldPoint(b, { floor: 'ground', x: 0, y: 450 }).y;
-    // The page's bars cover the top and bottom of the café, so the building can be dragged a
-    // third of a screen past either end, even when it would fit.
-    const slack = half * 2 * OVERSCROLL;
-    const low = Math.min(half, b.height / 2) - slack, high = Math.max(b.height - half, b.height / 2) + slack;
+    const cam = this.cameras.main, view = cam.height / cam.zoom, half = view / 2;
+    // At rest the street is two thirds of the way down, with the floors above it and the street
+    // under the page's bottom bars; a small café shows its whole roof, clear of the page's top bar.
+    const rest = Math.min(b.street - view * .18, half - view * .1);
+    if (this.focusY < 0) this.focusY = rest;
+    // The building can be dragged a third of a screen up into the sky, and down to its bottom.
+    const slack = view * OVERSCROLL;
+    const low = Math.min(rest, half) - slack, high = Math.max(rest, b.height - half) + slack / 3;
     this.focusY = Phaser.Math.Clamp(this.focusY, low, high);
     cam.centerOn(WORLD_W / 2, this.focusY);
   }
@@ -278,12 +384,12 @@ export class FloorsScene extends Phaser.Scene {
     const counterDepth = worldPoint(next, COUNTER_FRONT).y;
     this.floorImages = next.floors.flatMap(floor => {
       const y = next.offsets[floor]!, decor = layers(floor).filter(l => this.textures.exists(l.key));
-      if (!decor.length) return [this.add.image(0, y, FLOOR_ART[floor].image).setOrigin(0, 0).setDepth(LAYER_DEPTH)];
+      if (!decor.length) return [this.add.image(0, y - (FLOOR_ART[floor].above ?? 0), FLOOR_ART[floor].image).setOrigin(0, 0).setDepth(LAYER_DEPTH)];
       return decor.map(l => this.add.image(0, y, l.key).setOrigin(0, 0)
         .setDepth(l.front ? counterDepth + l.order * .01 : LAYER_DEPTH + l.order * LAYER_STEP));
     });
     this.decorSignature = missing.length ? '' : signature;
-    this.earth.setY(next.height);
+    this.layoutFrame(next);
     const groundTop = worldPoint(next, { floor: 'ground', x: 0, y: 0 }).y;
     // Drawn with decor layers, the ground floor's counter is one of them.
     this.counterFront.setY(groundTop).setDepth(counterDepth).setVisible(!layers('ground').length);
@@ -305,6 +411,7 @@ export class FloorsScene extends Phaser.Scene {
     if (this.view.renderSuspended) { this.drainView(); return; }
     const state = this.getState();
     const b = this.layoutBuilding(state);
+    this.showWalls(dt);
     const active = activeTableIndices(state);
     const step = this.view.paused ? 0 : dt;
     this.syncCustomers(b, active, step);
@@ -333,7 +440,9 @@ export class FloorsScene extends Phaser.Scene {
     // Touchable at 44 CSS pixels, like the room's own targets.
     const reach = this.cssToCanvas(22) / this.cameras.main.zoom;
     const moment = this.view.moment;
-    const subject = moment?.customerId === undefined ? undefined : this.customers.get(moment.customerId);
+    // Behind the walls only the cue floating over them can be touched; people are reached once it opens.
+    const walled = this.wallAlpha > .5 && !!this.built && y < this.built.street;
+    const subject = moment?.customerId === undefined || walled ? undefined : this.customers.get(moment.customerId);
     if (moment && ((this.cue?.visible && Math.hypot(x - this.cue.x, y - (this.cue.y - this.cue.displayHeight / 2)) <= reach + this.cue.displayWidth / 2)
         || (subject && subject.sprite.getBounds().contains(x, y)))) {
       target({ kind: 'moment' });
@@ -344,9 +453,11 @@ export class FloorsScene extends Phaser.Scene {
       ...this.sim.servers.map((s, i) => [this.servers[i]?.sprite, s.partnerId] as [Phaser.GameObjects.Sprite, string | undefined]),
       ...this.sim.cooks.map((c, i) => [this.cooks[i]?.sprite, c.partnerId] as [Phaser.GameObjects.Sprite, string | undefined]),
     ];
-    const partner = staff.filter(([sprite, id]) => id && sprite?.visible && sprite.getBounds().contains(x, y))
+    const partner = walled ? undefined : staff.filter(([sprite, id]) => id && sprite?.visible && sprite.getBounds().contains(x, y))
       .sort(([a], [b]) => b.y - a.y)[0];
     if (partner) { target({ kind: 'partner', id: partner[1]! }); return; }
+    // With the walls up the café plays on behind its windows; a tap on the wall itself opens it.
+    if (walled) { setOuterWall(false); return; }
     target({ kind: 'cafe' });
   }
 
@@ -597,10 +708,10 @@ export class FloorsScene extends Phaser.Scene {
   /** Puts the sprite (and anything it carries) where the actor stands. */
   private place(b: Building, actor: Actor, carrying: boolean): void {
     const p = worldPoint(b, actor.at);
-    actor.sprite.setPosition(p.x, p.y).setDepth(p.y);
+    actor.sprite.setPosition(p.x, p.y).setDepth(this.depthAt(actor.at));
     if (carrying && !actor.cup) actor.cup = this.add.image(0, 0, 'cup').setOrigin(.5, 1);
     if (!carrying && actor.cup) { actor.cup.destroy(); actor.cup = undefined; }
-    actor.cup?.setPosition(p.x + (actor.sprite.flipX ? -30 : 30), p.y - 104).setDepth(p.y + .01).setAlpha(actor.sprite.alpha);
+    actor.cup?.setPosition(p.x + (actor.sprite.flipX ? -30 : 30), p.y - 104).setDepth(this.depthAt(actor.at) + .01).setAlpha(actor.sprite.alpha);
   }
 
   private remove(actor: Actor): void {

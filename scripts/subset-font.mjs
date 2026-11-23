@@ -28,3 +28,12 @@ const DIGITS_OUT = 'src/assets/pixel-digits.woff2';
 const digits = await buildPixelDigits(readFileSync(SOURCE));
 writeFileSync(DIGITS_OUT, digits);
 console.log(`${DIGITS_OUT}: 10 digits, ${digits.length} bytes`);
+
+// The floors view (?floors) draws its UI in Nunito (OFL 1.1), a rounded face that matches the
+// soft hand-drawn café; Chinese falls back to the system sans. Latin, digits and the symbols in
+// money and times only, with the weight axis kept.
+const ROUND_SOURCE = 'node_modules/@fontsource-variable/nunito/files/nunito-latin-wght-normal.woff2';
+const ROUND_OUT = 'src/assets/round-latin.woff2';
+const round = await subsetFont(readFileSync(ROUND_SOURCE), ascii + '¥×·…—–“”‘’→←↑↓★☆♥✓', { targetFormat: 'woff2' });
+writeFileSync(ROUND_OUT, round);
+console.log(`${ROUND_OUT}: ${(round.length / 1024).toFixed(1)} KB`);

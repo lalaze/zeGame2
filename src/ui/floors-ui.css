@@ -1,0 +1,364 @@
+/* The floors view's UI (?floors): "paper journal", chosen on 2026-11-23 to match the soft
+   hand-drawn cross-section. Cream paper, thin warm-brown outlines, a stamped shadow under each
+   card, sage for the main action and dusty rose for what is selected, a rounded face.
+   Everything is scoped to body.floors-view (installFloorsUi), so the pixel view keeps its look.
+   Rules start with :root body.floors-view to outrank the pixel layers (cream-pixel.css and the
+   HUD refresh), which use !important at body level. */
+@font-face {
+  font-family: 'Floors Round';
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+  /* Nunito by Vernon Adams et al. (OFL 1.1), subset to Latin (scripts/subset-font.mjs). */
+  src: url('../assets/round-latin.woff2') format('woff2');
+}
+
+:root body.floors-view {
+  --fl-paper: #fbf3e4; --fl-paper-2: #f3e6cc; --fl-paper-light: #fffaf0;
+  --fl-ink: #4f3b2f; --fl-muted: #7d6656; --fl-line: #7a5a44; --fl-soft-line: #dcc6a4;
+  --fl-stitch: rgb(122 90 68 / .35); --fl-stamp: rgb(79 59 47 / .28);
+  --fl-sage: #6c8c68; --fl-sage-dark: #526f4f; --fl-sage-soft: #e3ebd8;
+  --fl-rose: #ecc3bd; --fl-rose-dark: #b07a75; --fl-gold: #d29a32; --fl-danger: #b5614f;
+  --fl-font: 'Floors Round', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', 'Noto Sans CJK SC',
+    'Source Han Sans SC', 'Microsoft YaHei', system-ui, sans-serif;
+  /* The pixel layers' tokens, re-pointed so every surface built on them follows. Tokens defined
+     on :root from other tokens (--accent, --green) are resolved there, so they are set again. */
+  --font-pixel: var(--fl-font); --ui-font: var(--fl-font); --ledger-serif: var(--fl-font);
+  --ink: var(--fl-ink); --muted: var(--fl-muted); --brown: var(--fl-line);
+  --cream: var(--fl-paper); --paper: var(--fl-paper-2); --paper-light: var(--fl-paper-light);
+  --paper-shadow: var(--fl-soft-line); --ui-rim: var(--fl-soft-line);
+  --wood: var(--fl-line); --wood-light: #c8a57f; --wood-hi: #ead6b4; --wood-lo: #6a4d3a;
+  --a-accent: var(--fl-sage); --a-accent-dark: var(--fl-sage-dark); --a-accent-soft: var(--fl-sage-soft);
+  --accent: var(--fl-sage); --accent-dark: var(--fl-sage-dark); --accent-soft: var(--fl-sage-soft);
+  --green: var(--fl-sage); --green-dark: var(--fl-sage-dark); --sage-paper: var(--fl-sage-soft);
+  --gold: #f1cf86;
+  --px: 2px;
+  --border: 0 0 0 2px var(--fl-line);
+  --frame: 0 0 0 2px var(--fl-line);
+  --paper-card: 0 3px 0 var(--fl-stamp);
+  --game-paper: var(--fl-paper);
+  font-family: var(--fl-font) !important;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+}
+:root body.floors-view :is(button,input,select,textarea,strong,b) { font-weight: 700 !important; }
+:root body.floors-view :is(h1,h2,h3,h4) { font-weight: 800 !important; }
+/* The floors art is painted, not pixel art: let it scale smoothly. */
+:root body.floors-view img[src$='.webp'] { image-rendering: auto; }
+
+/* ------------------------------------------------------------------ icons */
+:root body.floors-view :is([data-game-icon],[data-floors-icon])::before {
+  content: '' !important; display: inline-block; vertical-align: middle;
+  width: 20px !important; height: 20px !important; flex: 0 0 20px !important; margin: 0;
+  background: currentColor !important; filter: none !important; image-rendering: auto !important;
+  mask: var(--floors-icon) center / contain no-repeat !important;
+  -webkit-mask: var(--floors-icon) center / contain no-repeat !important;
+}
+:root body.floors-view [data-game-icon="map"] { --floors-icon: var(--floors-icon-map); }
+:root body.floors-view [data-game-icon="menu"] { --floors-icon: var(--floors-icon-menu); }
+:root body.floors-view [data-game-icon="book"] { --floors-icon: var(--floors-icon-book); }
+:root body.floors-view [data-game-icon="more"] { --floors-icon: var(--floors-icon-more); }
+:root body.floors-view [data-game-icon="pantry"] { --floors-icon: var(--floors-icon-pantry); }
+:root body.floors-view [data-game-icon="upgrades"] { --floors-icon: var(--floors-icon-upgrades); }
+:root body.floors-view [data-game-icon="decor"] { --floors-icon: var(--floors-icon-decor); }
+:root body.floors-view [data-game-icon="pets"] { --floors-icon: var(--floors-icon-pets); }
+:root body.floors-view [data-game-icon="promotion"] { --floors-icon: var(--floors-icon-promotion); }
+:root body.floors-view [data-game-icon="coin"] { --floors-icon: var(--floors-icon-coin); }
+:root body.floors-view [data-game-icon="star"] { --floors-icon: var(--floors-icon-star); }
+:root body.floors-view [data-game-icon="people"] { --floors-icon: var(--floors-icon-people); }
+:root body.floors-view [data-game-icon="settings"] { --floors-icon: var(--floors-icon-settings); }
+:root body.floors-view [data-game-icon="close"] { --floors-icon: var(--floors-icon-close); }
+/* The floors view's own marks win over the pixel HUD's where both are set. */
+:root body.floors-view [data-floors-icon="map"] { --floors-icon: var(--floors-icon-map); }
+:root body.floors-view [data-floors-icon="menu"] { --floors-icon: var(--floors-icon-menu); }
+:root body.floors-view [data-floors-icon="help"] { --floors-icon: var(--floors-icon-help); }
+:root body.floors-view [data-floors-icon="book"] { --floors-icon: var(--floors-icon-book); }
+:root body.floors-view [data-floors-icon="more"] { --floors-icon: var(--floors-icon-more); }
+:root body.floors-view [data-floors-icon="pantry"] { --floors-icon: var(--floors-icon-pantry); }
+:root body.floors-view [data-floors-icon="upgrades"] { --floors-icon: var(--floors-icon-upgrades); }
+:root body.floors-view [data-floors-icon="decor"] { --floors-icon: var(--floors-icon-decor); }
+:root body.floors-view [data-floors-icon="pets"] { --floors-icon: var(--floors-icon-pets); }
+:root body.floors-view [data-floors-icon="promotion"] { --floors-icon: var(--floors-icon-promotion); }
+:root body.floors-view [data-floors-icon="coin"] { --floors-icon: var(--floors-icon-coin); }
+:root body.floors-view [data-floors-icon="star"] { --floors-icon: var(--floors-icon-star); }
+:root body.floors-view [data-floors-icon="people"] { --floors-icon: var(--floors-icon-people); }
+:root body.floors-view [data-floors-icon="settings"] { --floors-icon: var(--floors-icon-settings); }
+:root body.floors-view [data-floors-icon="close"] { --floors-icon: var(--floors-icon-close); }
+:root body.floors-view [data-floors-icon="chevron"] { --floors-icon: var(--floors-icon-chevron); }
+:root body.floors-view [data-floors-icon="wall"] { --floors-icon: var(--floors-icon-wall); }
+:root body.floors-view [data-floors-icon="clock"] { --floors-icon: var(--floors-icon-clock); }
+:root body.floors-view [data-floors-icon="spark"] { --floors-icon: var(--floors-icon-spark); }
+
+/* ------------------------------------------------------------------ buttons and fields */
+:root body.floors-view button:not(:where(.street-shop,.mobile-cafe-clock,.drawer-backdrop,.mobile-tools-backdrop,.area-arrow)) {
+  --pixel-face: var(--fl-paper); --pixel-text: var(--fl-ink);
+  border: 2px solid var(--fl-line) !important;
+  border-radius: 14px !important;
+  background-image: none !important;
+  box-shadow: 0 3px 0 var(--fl-stamp) !important;
+  font-size: 13px;
+  line-height: 1.35;
+}
+:root body.floors-view :is(.pixel-btn:not(.ghost),.mobile-cafe-primary>button,[data-street-prev],[data-street-next]) {
+  --pixel-face: var(--fl-sage) !important; --pixel-text: var(--fl-paper-light) !important;
+}
+:root body.floors-view :is(.pixel-btn:not(.ghost),.mobile-cafe-primary>button,[data-street-prev],[data-street-next]):not(:disabled) {
+  border-color: var(--fl-sage-dark) !important; box-shadow: 0 3px 0 var(--fl-sage-dark) !important;
+}
+:root body.floors-view :is(.pixel-btn.ghost,.chip,.tab) { --pixel-face: var(--fl-paper); --pixel-text: var(--fl-ink); }
+:root body.floors-view :is(.tab.active,.chip.active,.menu-toggle.active,button[aria-selected='true'],button[aria-pressed='true']) {
+  --pixel-face: var(--fl-rose) !important; --pixel-text: var(--fl-ink) !important;
+  border-color: var(--fl-rose-dark) !important; box-shadow: 0 3px 0 var(--fl-rose-dark) !important;
+}
+:root body.floors-view button.danger,
+:root body.floors-view button.pixel-btn.danger {
+  --pixel-face: var(--fl-danger) !important; --pixel-text: var(--fl-paper-light) !important;
+  border-color: #8c4436 !important; box-shadow: 0 3px 0 #8c4436 !important;
+}
+:root body.floors-view button:active:not(:disabled) { translate: 0 2px !important; box-shadow: 0 1px 0 var(--fl-stamp) !important; }
+:root body.floors-view button:disabled,
+:root body.floors-view button:disabled:disabled {
+  --pixel-face: #efe5d3 !important; --pixel-text: #8f7c6b !important;
+  border-color: #b9a38a !important; border-style: dashed !important;
+  box-shadow: none !important; background-image: none !important;
+}
+:root body.floors-view button.swatch.swatch-color { --pixel-face: var(--swatch) !important; }
+:root body.floors-view :is(button,input,select,textarea,summary,[tabindex]):focus-visible { outline: 3px solid #c07a4f !important; outline-offset: 3px !important; }
+:root body.floors-view :is(input,select,textarea):not([type='checkbox']):not([type='radio']) {
+  border: 2px solid var(--fl-line) !important; border-radius: 12px !important;
+  background-color: var(--fl-paper-light) !important; color: var(--fl-ink) !important;
+}
+:root body.floors-view :is(input[type='checkbox'],input[type='radio'],progress) { accent-color: var(--fl-sage); }
+:root body.floors-view progress {
+  appearance: none; -webkit-appearance: none; height: 8px; border: 0; border-radius: 99px; overflow: hidden; background: #eadcc4;
+}
+:root body.floors-view progress::-webkit-progress-bar { background: #eadcc4; border-radius: 99px; }
+:root body.floors-view progress::-webkit-progress-value { background: var(--fl-sage); border-radius: 99px; }
+:root body.floors-view progress::-moz-progress-bar { background: var(--fl-sage); border-radius: 99px; }
+
+/* ------------------------------------------------------------------ cards, sheets and dialogs */
+:root body.floors-view :is(.panel,.modal,.onboard,.region-card,.mobile-cafe-tools,.street-detail,.street-walk-controls) {
+  border: 2px solid var(--fl-line) !important;
+  border-radius: 24px !important;
+  background: var(--fl-paper) padding-box !important;
+  box-shadow: 0 4px 0 var(--fl-stamp), 0 12px 28px rgb(43 30 22 / .2) !important;
+}
+:root body.floors-view :is(.modal-overlay,.onboard-overlay) { background: rgb(43 30 22 / .42); }
+:root body.floors-view .modal h2 {
+  font-size: 22px; line-height: 1.35; color: var(--fl-ink);
+  border-bottom: 2px dashed var(--fl-stitch); padding-bottom: 10px; margin-bottom: 12px;
+}
+:root body.floors-view .modal h3 { font-size: 16px; }
+:root body.floors-view .modal :is(p,label,.note) { line-height: 1.65; }
+:root body.floors-view :is(.row,.pet-card,.promo-card,.regular-profile,.signature-card,.style-current,.signature-summary,.taste-overview,.rating-overview,.rating-report,.prep-row,.report-profit,.profile-row,.project-card,.project-blueprint,.projects-summary,.milestone) {
+  background-color: var(--fl-paper-light); border-color: var(--fl-soft-line); border-radius: 16px;
+}
+:root body.floors-view .toast {
+  padding: 8px 14px; border: 2px solid var(--fl-line); border-radius: 14px;
+  background: var(--fl-paper); color: var(--fl-ink); box-shadow: 0 3px 0 var(--fl-stamp); font-weight: 700;
+}
+
+/* ------------------------------------------------------------------ phone HUD: two plaques and a row of tools */
+:root body.floors-view .mobile-cafe-header {
+  padding: 0; gap: 8px; align-items: stretch;
+  background: none !important; border: 0 !important; box-shadow: none !important;
+}
+:root body.floors-view :is(.mobile-cafe-clock,.mobile-cafe-header .money) {
+  position: relative; padding: 8px 14px; gap: 3px; min-height: 58px; justify-content: center;
+  background: var(--fl-paper) !important; color: var(--fl-ink) !important;
+  border: 2px solid var(--fl-line) !important; border-radius: 18px !important;
+  box-shadow: 0 3px 0 var(--fl-stamp) !important;
+  outline: 1.5px dashed var(--fl-stitch); outline-offset: -7px;
+}
+:root body.floors-view .mobile-cafe-name { color: var(--fl-ink) !important; font-size: 16px; font-weight: 800; line-height: 1.25; }
+:root body.floors-view .mobile-cafe-name::before {
+  width: 18px; height: 18px; margin-right: 6px; vertical-align: -3px;
+  mask: var(--floors-icon-menu) center / contain no-repeat; -webkit-mask: var(--floors-icon-menu) center / contain no-repeat;
+}
+:root body.floors-view .mobile-cafe-clock strong { color: var(--fl-muted); font-size: 12px; font-weight: 600 !important; line-height: 1.4; }
+:root body.floors-view .mobile-cafe-clock .mobile-cafe-speed {
+  padding: 0 7px; border-radius: 99px; background: var(--fl-sage); color: var(--fl-paper-light); font-size: 11px; font-weight: 800;
+}
+:root body.floors-view .mobile-cafe-header .money { display: flex; align-items: center; max-width: 44%; }
+:root body.floors-view .mobile-cafe-header .money .coins {
+  --pixel-face: transparent !important; --pixel-text: var(--fl-ink) !important;
+  border: 0 !important; box-shadow: none !important; min-height: 40px !important; padding: 0;
+  gap: 6px; font-size: 21px; font-weight: 800 !important; font-variant-numeric: tabular-nums;
+}
+:root body.floors-view .mobile-cafe-header .money .coins::before { width: 22px !important; height: 22px !important; flex-basis: 22px !important; background: var(--fl-gold) !important; }
+:root body.floors-view .mobile-cafe-dock {
+  grid-template-columns: .9fr 1.8fr .9fr .9fr; gap: 8px; padding: 0;
+  background: none !important; border: 0 !important; box-shadow: none !important;
+}
+/* The pixel HUD paints the street button wood by id, so it is named by id here too. */
+:root body.floors-view .mobile-cafe-dock #room-zoom-reset { --pixel-face: var(--fl-paper) !important; --pixel-text: var(--fl-ink) !important; }
+:root body.floors-view .mobile-cafe-dock button {
+  --pixel-face: var(--fl-paper) !important; --pixel-text: var(--fl-ink) !important;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  min-height: 64px !important; padding: 6px 4px; border-radius: 16px !important; font-size: 13px; line-height: 1.25;
+}
+:root body.floors-view .mobile-cafe-dock #room-zoom-reset:disabled { --pixel-face: #efe5d3 !important; --pixel-text: #8f7c6b !important; }
+:root body.floors-view .mobile-cafe-dock button::before { width: 24px !important; height: 24px !important; flex-basis: 24px !important; }
+:root body.floors-view .mobile-cafe-dock .mobile-cafe-primary > button:not(:disabled) {
+  --pixel-face: var(--fl-sage) !important; --pixel-text: var(--fl-paper-light) !important;
+  outline: 1.5px dashed rgb(255 250 240 / .6); outline-offset: -7px;
+}
+:root body.floors-view .mobile-cafe-dock :is(#panel-toggle,#mobile-cafe-more)[aria-expanded='true'] {
+  --pixel-face: var(--fl-rose) !important; --pixel-text: var(--fl-ink) !important;
+  border-color: var(--fl-rose-dark) !important; box-shadow: 0 3px 0 var(--fl-rose-dark) !important;
+}
+:root body.floors-view .mobile-tools-backdrop { background: rgb(43 30 22 / .3); }
+:root body.floors-view .mobile-tools-heading {
+  margin: -2px 0 10px; padding: 0 0 10px; background: none; color: var(--fl-ink);
+  border-bottom: 2px dashed var(--fl-stitch);
+}
+:root body.floors-view .mobile-tools-heading strong { font-size: 18px; }
+/* The building has one fixed zoom: no zoom buttons, and no pinch hint. */
+:root body.floors-view :is(.mobile-view-tools,.mobile-view-hint) { display: none !important; }
+
+/* ------------------------------------------------------------------ first-day guide card */
+:root body.floors-view .first-service {
+  padding: 12px 14px; border: 2px solid var(--fl-line); border-radius: 20px;
+  background: var(--fl-paper); box-shadow: 0 3px 0 var(--fl-stamp);
+  outline: 1.5px dashed var(--fl-stitch); outline-offset: -7px;
+}
+:root body.floors-view .first-service .guide-actions button { white-space: nowrap; padding-inline: 12px; }
+
+/* ------------------------------------------------------------------ the ledger */
+:root body.floors-view #management-panel { overflow: hidden; }
+:root body.floors-view .drawer-header {
+  background: none !important; color: var(--fl-ink) !important;
+  border: 0 !important; border-bottom: 2px dashed var(--fl-stitch) !important;
+  min-height: 0; padding: 16px 16px 12px;
+}
+:root body.floors-view :is(.ledger-cafe-name,.ledger-day,.drawer-pause) { color: var(--fl-muted) !important; font-size: 12px; }
+:root body.floors-view .drawer-header strong { color: var(--fl-ink); font-size: 24px; font-weight: 800 !important; }
+/* Ids here: both are .pixel-btn, which the main-action rule above paints sage. */
+:root body.floors-view #drawer-balance {
+  --pixel-face: transparent !important; --pixel-text: var(--fl-ink) !important;
+  border: 0 !important; box-shadow: none !important; padding: 0; gap: 6px; font-size: 13px;
+}
+:root body.floors-view #drawer-balance::before { background: var(--fl-gold) !important; }
+:root body.floors-view :is(#drawer-close,.mobile-tools-heading button) {
+  --pixel-face: var(--fl-paper) !important; --pixel-text: var(--fl-ink) !important;
+  border: 2px solid var(--fl-line) !important; box-shadow: 0 3px 0 var(--fl-stamp) !important;
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0;
+  font-size: 0 !important; border-radius: 14px !important;
+}
+:root body.floors-view :is(#drawer-close,.mobile-tools-heading button)::before { width: 22px !important; height: 22px !important; flex-basis: 22px !important; }
+:root body.floors-view .panel .tabs {
+  gap: 6px; padding: 12px 12px 10px; background: none; border: 0;
+}
+:root body.floors-view .panel .tab {
+  --pixel-face: var(--fl-paper); --pixel-text: var(--fl-ink);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  min-height: 60px; padding: 7px 0 6px; border: 2px solid var(--fl-line) !important;
+  border-radius: 14px 14px 8px 8px !important; font-size: 12px;
+}
+:root body.floors-view .panel .tab::before { width: 22px !important; height: 22px !important; flex-basis: 22px !important; }
+:root body.floors-view .panel .tab.active { border-color: var(--fl-rose-dark) !important; }
+:root body.floors-view .panel .panel-scroll { padding: 4px 14px 14px; }
+:root body.floors-view .panel .goal {
+  margin: 4px 0 12px; padding: 4px 6px; border: 2px dashed var(--fl-sage) !important; border-radius: 14px;
+  background: var(--fl-sage-soft); color: var(--fl-ink);
+}
+:root body.floors-view .panel .goal .goal-toggle { --pixel-face: transparent !important; border: 0 !important; box-shadow: none !important; }
+:root body.floors-view .panel .menu-cat {
+  padding: 12px 2px 6px; border-bottom: 2px dashed var(--fl-stitch); color: var(--fl-ink); font-size: 15px;
+}
+:root body.floors-view .panel .list { gap: 10px; padding: 8px 0 20px; }
+:root body.floors-view .panel .row {
+  margin: 10px 0 0; padding: 12px; border: 2px solid var(--fl-soft-line) !important; border-radius: 16px;
+  background: var(--fl-paper-light) !important;
+}
+:root body.floors-view .panel .row .icon { border-radius: 12px; background: var(--fl-paper-2); }
+:root body.floors-view .panel .row .name { color: var(--fl-ink); font-size: 18px; font-weight: 800; }
+:root body.floors-view .panel .row .lv { color: var(--fl-muted); }
+:root body.floors-view .panel :is(.signature-entry,.taste-chip,.money-details) { --pixel-face: transparent; box-shadow: none !important; }
+:root body.floors-view .panel .signature-entry { border: 0 !important; border-bottom: 2px dashed var(--fl-stitch) !important; border-radius: 0 !important; }
+:root body.floors-view .panel .row .menu-toggle.active {
+  --pixel-face: var(--fl-sage-soft) !important; --pixel-text: var(--fl-sage-dark) !important;
+  border-color: var(--fl-sage) !important; box-shadow: 0 3px 0 var(--fl-sage) !important;
+}
+
+/* ------------------------------------------------------------------ the first-day opening dialog */
+:root body.floors-view .opening-steps li { border-bottom: 3px solid rgb(122 90 68 / .25); color: rgb(79 59 47 / .6); opacity: 1; font-weight: 700; background: none; }
+:root body.floors-view .opening-steps li[aria-current='step'] { color: var(--fl-ink); border-color: var(--fl-sage); background: none; }
+:root body.floors-view .opening-steps span { font-weight: 800; }
+:root body.floors-view .opening-stock { background: var(--fl-paper-2); border: 2px dashed rgb(122 90 68 / .45); border-radius: 16px; }
+:root body.floors-view .opening-stock b { color: var(--fl-sage-dark); font-size: 44px; font-weight: 800 !important; font-variant-numeric: tabular-nums; }
+:root body.floors-view .opening-note { color: var(--fl-sage-dark); }
+
+/* ------------------------------------------------------------------ onboarding */
+:root body.floors-view .ob-dots i { border-radius: 99px; }
+:root body.floors-view :is(.name-sign,.stage-sign) span {
+  padding: 8px 20px; border: 2px solid var(--fl-line); border-radius: 14px;
+  background: var(--fl-paper-2); color: var(--fl-ink); text-shadow: none; font-weight: 800;
+  box-shadow: 0 3px 0 var(--fl-stamp); outline: 1.5px dashed var(--fl-stitch); outline-offset: -7px;
+}
+
+/* ------------------------------------------------------------------ folding notes */
+:root body.floors-view details { border-radius: 14px; }
+:root body.floors-view details > summary {
+  border: 0 !important; border-radius: 12px; background: var(--fl-sage-soft); color: var(--fl-sage-dark); font-weight: 700;
+}
+:root body.floors-view .guide-details > summary { background: none; }
+:root body.floors-view .opening-ready { border: 2px dashed var(--fl-sage); border-radius: 16px; background: var(--fl-paper-light); }
+
+/* ------------------------------------------------------------------ arranging furniture */
+:root body.floors-view :is(.arrange-text,.hint,.reputation-bar,.area-destination) { border-radius: 14px; }
+:root body.floors-view .arrange-text {
+  padding: 8px 14px; border: 2px solid var(--fl-line); background: var(--fl-paper); color: var(--fl-ink);
+  box-shadow: 0 3px 0 var(--fl-stamp); font-weight: 700;
+}
+:root body.floors-view #arrange-done {
+  --pixel-face: var(--fl-sage) !important; --pixel-text: var(--fl-paper-light) !important;
+  border-color: var(--fl-sage-dark) !important; box-shadow: 0 3px 0 var(--fl-sage-dark) !important; padding-inline: 18px;
+}
+
+/* ------------------------------------------------------------------ the ledger's filters, and the way to the kitchen */
+:root body.floors-view .panel :is(.menu-filter,.buy-amount) .chip { border: 2px solid var(--fl-line) !important; }
+:root body.floors-view .panel :is(.menu-filter,.buy-amount) .chip:is(.active,[aria-pressed='true']) { border-color: var(--fl-rose-dark) !important; }
+:root body.floors-view .area-arrow-sign {
+  border: 2px solid var(--fl-line); border-radius: 14px; background: var(--fl-paper);
+  box-shadow: 0 3px 0 var(--fl-stamp); color: var(--fl-ink);
+}
+:root body.floors-view .area-arrow.locked .area-arrow-sign { background: var(--fl-paper-2); border-style: dashed; }
+:root body.floors-view .area-arrow-sign svg { display: none; }
+:root body.floors-view .area-arrow-sign::before {
+  content: ''; width: 20px; height: 20px; background: currentColor;
+  mask: var(--floors-icon-chevron) center / contain no-repeat; -webkit-mask: var(--floors-icon-chevron) center / contain no-repeat;
+}
+:root body.floors-view .area-left .area-arrow-sign::before { rotate: 180deg; }
+:root body.floors-view .area-up .area-arrow-sign::before { rotate: -90deg; }
+:root body.floors-view .area-down .area-arrow-sign::before { rotate: 90deg; }
+:root body.floors-view .area-destination { border: 2px solid var(--fl-line); border-radius: 10px; background: var(--fl-paper); font-weight: 700; }
+
+/* ------------------------------------------------------------------ ledger pictures from the floors art (icon-art.ts) */
+:root body.floors-view .tile img.tile-icon[src$='.webp'] {
+  width: 100%; height: 76px; object-fit: contain; background: none; box-shadow: none;
+}
+/* Decor options are cut from their floor: show them as small framed pictures. */
+:root body.floors-view .tile img.tile-icon[src*='/thumbs/'] {
+  height: auto; aspect-ratio: 3 / 2; object-fit: cover; border: 2px solid var(--fl-soft-line); border-radius: 12px;
+}
+
+/* Menu, pantry and upgrade icons painted for the floors: no pixel tile behind them. */
+:root body.floors-view :is(.row .icon,.prep-row img,.report-best img,.opening-menu img,img[data-ingredient])[src$='.webp'] {
+  object-fit: contain; box-shadow: none; filter: none;
+}
+:root body.floors-view .row .icon[src$='.webp'] { background: var(--fl-paper-2); border-radius: 14px; padding: 2px; }
+/* The phone ledger keeps an icon column on every row; the manager, orders and chain cards have no
+   icon, so their text spans the card instead of squeezing into that column. */
+:root body.floors-view .panel .row.manager-card > .info { grid-column: 1 / -1; }
+:root body.floors-view .opening-menu { border: 2px dashed var(--fl-sage); border-radius: 16px; background: var(--fl-paper-light); }
+
+/* ------------------------------------------------------------------ the outer walls' button, under the money */
+:root body.floors-view .floors-wall-btn {
+  position: absolute; z-index: 9; top: calc(var(--edge-top, 8px) + 70px); right: var(--edge-right, 12px);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+  width: 56px; min-height: 56px !important; padding: 4px 0; font-size: 11px; line-height: 1.2;
+  border-radius: 18px !important; pointer-events: auto;
+}
+:root body.floors-view .floors-wall-btn::before { width: 22px !important; height: 22px !important; flex-basis: 22px !important; }
+:root body.floors-view:is(.arranging-cafe,.mobile-drawer-open,.mobile-tools-open) .floors-wall-btn { display: none; }

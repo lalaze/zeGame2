@@ -89,6 +89,7 @@ import { showTaste, tasteLabel, tasteProgressLabel } from './taste';
 import { decorIcon } from '../render/decor-art';
 import { furnitureIcon } from '../render/furniture-art';
 import { ingredientIcon, itemArtwork, toDataURL, upgradeIcon } from '../render/sprites';
+import { iconArt } from './icon-art';
 
 export type PanelTab = 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | 'promotion';
 type Tab = PanelTab;
@@ -149,6 +150,8 @@ export type ArrangeRequest = { kind: 'place'; id: string } | { kind: 'arrange' }
 
 const iconUrls = new WeakMap<HTMLCanvasElement, Map<number, string>>();
 function iconUrl(key: string, make: () => HTMLCanvasElement): string {
+  const art = iconArt(key);
+  if (art) return art;
   const canvas = make(), scale = key.startsWith('item:') ? 1 : 4;
   let urls = iconUrls.get(canvas);
   if (!urls) { urls = new Map(); iconUrls.set(canvas, urls); }

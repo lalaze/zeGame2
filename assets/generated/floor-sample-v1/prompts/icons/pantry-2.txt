@@ -1,0 +1,9 @@
+Cells 1 to 3 are pantry stock, each standing on its own; cells 4 to 8 are café upgrades, each shown as one object.
+1. A small cream jug of cream next to a wedge of cheese.
+2. A small wooden basket of strawberries, lemons and blueberries.
+3. A matcha tin with a bamboo whisk and a little pile of green powder.
+4. A brown barista apron hanging on a peg, a milk pitcher beside it.
+5. A round serving tray carrying a cup of coffee and a slice of cake.
+6. A white chef's hat with a wooden rolling pin.
+7. A polished cream and copper espresso machine with two group heads.
+8. A chalkboard A-frame sign with a doodled coffee cup and steam on it.

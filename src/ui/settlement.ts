@@ -12,6 +12,7 @@ import { settlementAdvice, type SettlementAdvice, type SettlementReason, type Se
 import type { GameState } from '../game/state';
 import { t, type MessageKey } from '../i18n';
 import { itemArtwork, toDataURL } from '../render/sprites';
+import { iconArt } from './icon-art';
 import { ratingReportHtml } from './reputation';
 import { tomorrowConditionHtml } from './conditions';
 import { milestoneName } from './milestones';
@@ -56,7 +57,7 @@ export function settlementHtml(report: DayReport, state: GameState): { body: str
   ] as const).filter(([, entries]) => entries.length);
   const best = report.bestSeller;
   const bestHtml = best
-    ? `<p class="report-best"><img src="${toDataURL(itemArtwork(best), 1)}" alt="" />${t('report.best', { item: htmlItemName(best, state), n: report.sales[best] ?? 0 })}</p>`
+    ? `<p class="report-best"><img src="${iconArt(`item:${best}`) ?? toDataURL(itemArtwork(best), 1)}" alt="" />${t('report.best', { item: htmlItemName(best, state), n: report.sales[best] ?? 0 })}</p>`
     : `<p>${t('report.none')}</p>`;
   const goal = advice.claimableGoal;
   // Profit loss drivers stay together even when several costs contributed.
