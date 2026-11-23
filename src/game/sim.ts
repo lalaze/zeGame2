@@ -70,7 +70,7 @@ import {
 } from './layout';
 import { batchSteps, cookHome, kitchenPath, nextBatch, shelveBatch, startBatch, stationSpot, kitchenObstacles, STATION_SECONDS, type Station } from './kitchen';
 import { AREA_IDS, activeTableIndices, adjacentArea, areaAtX, areaConnections, regionOffset, type AreaId } from './regions';
-import type { GameState, Look } from './state';
+import { withoutHairClash, type GameState, type Look } from './state';
 import { validSnapshot, type SimSnapshot } from './sim-snapshot';
 
 import { recordReview, mealReview, type ReviewInput } from './reputation';
@@ -474,16 +474,17 @@ export class Sim {
     }
     this.kitchenStage = stage;
     this.refreshNavigation(state);
+    // Staff looks drop a clashing hair colour without an extra draw, so the RNG sequence is unchanged.
     while (this.baristas.length < baristaCount(state)) {
-      this.baristas.push({ look: this.randomLook(), customerId: null, remaining: 0, total: 0, calling: 0 });
+      this.baristas.push({ look: withoutHairClash(this.randomLook()), customerId: null, remaining: 0, total: 0, calling: 0 });
     }
     while (this.servers.length < serverCount(state)) {
       const home = serverHome(this.servers.length);
-      this.servers.push({ ...home, tx: home.x, ty: home.y, stride: 0, via: [], look: this.randomLook(), phase: 'idle', plates: [], ack: 0 });
+      this.servers.push({ ...home, tx: home.x, ty: home.y, stride: 0, via: [], look: withoutHairClash(this.randomLook()), phase: 'idle', plates: [], ack: 0 });
     }
     while (this.cooks.length < cookCount(state)) {
       const home = cookHome(this.cooks.length);
-      this.cooks.push({ x: home.x, y: home.y, tx: home.x, ty: home.y, stride: 0, via: [], look: this.randomLook(), batch: null });
+      this.cooks.push({ x: home.x, y: home.y, tx: home.x, ty: home.y, stride: 0, via: [], look: withoutHairClash(this.randomLook()), batch: null });
     }
     this.baristas.forEach((barista, i) => {
       if (i === 0) { barista.partnerId = undefined; return; }

@@ -206,6 +206,29 @@ describe('onboarding preview lifecycle', () => {
     expect(initial.look.shirt).toBe(0);
   });
 
+  it('never offers golden hair with the deepest skin, by hand or at random', () => {
+    const onDone = vi.fn();
+    showOnboarding({ mode: 'edit', initial: profile(), onLocale: vi.fn(), onDone }); next();
+    const swatch = (key: string, i: number) => document.querySelectorAll<HTMLButtonElement>(`[data-key="${key}"] button`)[i];
+    const picked = (key: string) => [...document.querySelectorAll<HTMLButtonElement>(`[data-key="${key}"] button`)]
+      .findIndex((button) => button.getAttribute('aria-pressed') === 'true');
+    swatch('hair', 2).click();
+    expect(swatch('hair', 2).disabled).toBe(false);
+    swatch('skin', 3).click();
+    expect([picked('skin'), picked('hair')]).toEqual([3, 0]);
+    expect(swatch('hair', 2).disabled).toBe(true);
+    expect([0, 1, 3, 4, 5].map((i) => swatch('hair', i).disabled)).toEqual([false, false, false, false, false]);
+    swatch('hair', 2).click();
+    expect(picked('hair')).toBe(0);
+    // The dice draw skin, hair, hairstyle, apron, trousers: the clashing first roll is rolled again.
+    const rolls = [.8, .4, 0, 0, 0, .8, .7, 0, 0, 0];
+    vi.spyOn(Math, 'random').mockImplementation(() => rolls.shift() ?? 0);
+    document.querySelector<HTMLButtonElement>('[data-random]')!.click();
+    expect([picked('skin'), picked('hair')]).toEqual([3, 4]);
+    next();
+    expect(onDone.mock.calls[0][0].profile.look).toMatchObject({ skin: 3, hair: 4 });
+  });
+
   it('uses the same fine standing frame on character and opening steps', async () => {
     showOnboarding({ mode: 'new', initial: profile(), onLocale: vi.fn(), onDone: vi.fn() });
     next(); next();

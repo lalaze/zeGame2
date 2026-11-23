@@ -47,6 +47,14 @@ export interface Look {
 /** hairStyle covers every cozy team family (render/cozy-team-art TEAM_HAIRSTYLES). */
 export const LOOK_RANGES: Record<keyof Look, number> = { skin: 4, hair: 6, hairStyle: 32, shirt: 8, pants: 3 };
 
+/** Hair colours never paired with a skin tone (the user's call): golden hair (#dfb96f) on the deepest skin (#80533f). */
+const HAIR_CLASHES: Readonly<Record<number, readonly number[]>> = { 3: [2] };
+/** Dark brown, which every skin tone wears. */
+const CLASH_FREE_HAIR = 0;
+export const hairClashes = (look: Pick<Look, 'skin' | 'hair'>): boolean => HAIR_CLASHES[look.skin]?.includes(look.hair) ?? false;
+/** The look itself, or with dark brown hair in place of a clashing colour. */
+export const withoutHairClash = (look: Look): Look => (hairClashes(look) ? { ...look, hair: CLASH_FREE_HAIR } : look);
+
 /** Who runs the café. Null until the player finishes the opening flow. */
 export interface Profile {
   cafeName: string;
@@ -259,9 +267,10 @@ function parseProfile(value: unknown): Profile | null {
   return {
     cafeName,
     ownerName: cleanName(p.ownerName),
-    look: Object.fromEntries(
+    // Owners created before the pairing was ruled out lose only the clashing hair colour.
+    look: withoutHairClash(Object.fromEntries(
       (Object.keys(LOOK_RANGES) as (keyof Look)[]).map((k) => [k, int(look[k], LOOK_RANGES[k])]),
-    ) as unknown as Look,
+    ) as unknown as Look),
   };
 }
 

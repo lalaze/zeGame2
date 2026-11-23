@@ -3,7 +3,7 @@ import { COZY_OWNER_LOOK } from '../render/cozy-character-art';
 // The opening flow: name the café, create the owner, pick a starter style.
 // Also reused (name + character only) when editing the profile later.
 import { STARTER_THEMES } from '../game/decor';
-import { LOOK_RANGES, NAME_MAX, cleanName, type Look, type Profile } from '../game/state';
+import { LOOK_RANGES, NAME_MAX, cleanName, hairClashes, withoutHairClash, type Look, type Profile } from '../game/state';
 import { LOCALES, getLocale, setLocale, t, tList, type Locale, type MessageKey } from '../i18n';
 import { starterThemePreview } from '../render/starter-theme-preview';
 import { HAIRS, HEAD_ROWS, SHIRTS, SKINS } from '../render/sprites';
@@ -37,9 +37,12 @@ const escapeHtml = (s: string) =>
 const randomOf = <T>(list: readonly T[]) => list[Math.floor(Math.random() * list.length)];
 
 function randomLook(): Look {
-  return Object.fromEntries(
-    (Object.keys(LOOK_RANGES) as (keyof Look)[]).map((k) => [k, Math.floor(Math.random() * LOOK_RANGES[k])]),
-  ) as unknown as Look;
+  for (;;) {
+    const look = Object.fromEntries(
+      (Object.keys(LOOK_RANGES) as (keyof Look)[]).map((k) => [k, Math.floor(Math.random() * LOOK_RANGES[k])]),
+    ) as unknown as Look;
+    if (!hairClashes(look)) return look;
+  }
 }
 
 export function showOnboarding(opts: Options): void {
@@ -250,6 +253,8 @@ export function showOnboarding(opts: Options): void {
             b.className = 'swatch' + (draft.look[key] === i ? ' active' : '');
             b.setAttribute('aria-label', `${label} ${i + 1}`);
             b.setAttribute('aria-pressed', String(draft.look[key] === i));
+            // A hair colour that clashes with the chosen skin is not offered; picking that skin swaps it out.
+            if (key === 'hair' && hairClashes({ ...draft.look, hair: i })) b.disabled = true;
             const colors = palettes[key];
             // The colour travels as a variable: the shared button face (cream-pixel.css) paints it.
             if (colors) { b.classList.add('swatch-color'); b.style.setProperty('--swatch', colors[i]); }
@@ -265,7 +270,7 @@ export function showOnboarding(opts: Options): void {
               });
             }
             b.addEventListener('click', () => {
-              draft.look[key] = i;
+              draft.look = withoutHairClash({ ...draft.look, [key]: i });
               paint();
             });
             return b;
