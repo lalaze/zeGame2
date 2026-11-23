@@ -1,0 +1,12 @@
+Concept art for a cozy café management idle game played on a phone in portrait. Paint one target shot: it must look like a real in-game screenshot of a finished, polished game, not a poster.
+
+LAYOUT (the core of this direction): the café is a narrow multi-storey building shown in cross-section, front wall removed, floors stacked vertically and filling the screen width, like a cut-away dollhouse. From top to bottom:
+- Rooftop terrace: string lights, two small tables, potted plants, a cat sleeping in the sun.
+- Second floor: the seating room, guests at small tables reading, chatting and drinking coffee.
+- Ground floor: the counter with an espresso machine and a cake display, the owner taking an order, a short queue, the entrance door opening onto the street pavement.
+- Basement: kitchen and coffee roastery, a cook at the oven, sacks of beans, a small roasting drum.
+A staircase on one side connects the floors, and a staff member carries a tray up the stairs. Each floor is a clear horizontal band separated by a visible floor slab, so the whole café reads at a glance. Each floor has a small round upgrade button and a little coin counter, as an idle game would.
+Characters are small but readable, about one tenth of the screen height.
+UI: a slim status bar at the top with the café name 慢慢咖啡, 第 1 天 and the money; a row of four buttons at the bottom (街道, 帮忙, 管理, 更多). The UI belongs to the same art style. Keep text short and legible. No watermark, no signature, no extra text.
+
+STYLE:

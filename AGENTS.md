@@ -20,10 +20,11 @@ their phone, in portrait with touch, so check UI changes at phone size first.
 | `assets/generated/PACKS.json` | Every pack under `public/art`: what loads it, its sources, its build commands and whether it can be regenerated. Look here first; `scripts/art-packs.test.mjs` keeps it in step |
 | `assets/generated/<pack>/` | What rebuilds shipped art: kits, prompts, references, manifests, chosen takes. Current packs have a README with their regenerate, build and check commands (start with `cozy-cast-v9` and `cozy-team-v9`) |
 | `assets/legacy-packs/` | Packs the game no longer loads that scripts still read. Not live |
-| `/Volumes/data/zeGame2-library` | The art library, outside git, at the same repo-relative paths: rejected and superseded generations, retired art, the `bulk-candidates` source crops, QA screenshots and video. See `assets/ART-LIBRARY.md` |
+| `/Volumes/data/zeGame2-library` | The art library, outside git, at the same repo-relative paths: retired art, QA screenshots and video. See `assets/ART-LIBRARY.md` |
 
-Style references: `assets/generated/cozy-cast-v9/style-b.png` for characters, `docs/art-grid/palette.json`
-for the palette.
+Art direction: on 2026-11-23 the user chose a new look for the whole game, a soft, cozy cross-section
+(`assets/generated/art-direction-v1`). New art follows it. Until it replaces the shipped art, the
+shipped style is style B (`assets/generated/cozy-cast-v9/style-b.png`, palette `docs/art-grid/palette.json`).
 
 ## Rules for art
 

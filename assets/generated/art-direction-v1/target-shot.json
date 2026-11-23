@@ -1,0 +1,15 @@
+{
+  "tool": "codex exec built-in image generation",
+  "thread": "01a2071f-09c3-7a32-af48-5092e5eac3ad",
+  "resumed": false,
+  "prompts": [
+    "assets/generated/art-direction-v1/prompts/common.txt",
+    "assets/generated/art-direction-v1/prompts/style.txt"
+  ],
+  "references": [],
+  "original": "/Users/lalaze/.codex/generated_images/01a2071f-09c3-7a32-af48-5092e5eac3ad/exec-6495eadd-4837-4253-9d7a-93a9569f9644.png",
+  "extraImagesThisRun": [],
+  "sha256": "d97174c582e0e51ac6a59195247c994440b2421f14013dded25d5be5ad4bd70c",
+  "seconds": 77,
+  "chosen": "2026-11-23: direction N of 17 concept shots"
+}

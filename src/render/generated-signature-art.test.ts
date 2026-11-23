@@ -2,7 +2,7 @@ import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { hasArtLibrary, librarySource } from '../../scripts/art-files.mjs';
+import { hasSourceCrops, librarySource } from '../../scripts/art-files.mjs';
 import { BASE_INGREDIENT, SIGNATURE_ADDONS, SIGNATURE_BASES, makeSignatureId, signatureDefinition, type SignatureRecipe } from '../game/signature-drinks';
 import { createGeneratedSignatureArt, GENERATED_SIGNATURE_IDS, setGeneratedSignatureAdapter, signatureRequiredLayers, type GeneratedSignatureSources } from './generated-signature-art';
 import { signatureDrinkCanvas, signatureDrinkIcon } from './signature-drink-art';
@@ -33,7 +33,7 @@ describe.skipIf(!native)('real PNG signature composition',()=>{
   clearGeneratedMainAssets();expect(partial.canvas(id)).toBeUndefined();
  });
  // The full original lives in the art library, outside git.
- it.skipIf(!hasArtLibrary)('rejects full originals and mismatched rasters instead of silently sampling the top-left',async()=>{
+ it.skipIf(!hasSourceCrops)('rejects full originals and mismatched rasters instead of silently sampling the top-left',async()=>{
   const original=await native!.loadImage(librarySource('assets/generated/bulk-candidates/ui/cup-coffee.png'));
   const wrong=createGeneratedSignatureArt({...sources,'cup-coffee':original},{createCanvas:make});
   expect(wrong.readyIds).not.toContain('cup-coffee');expect(wrong.canvas('sig:coffee:beans=1')).toBeUndefined();

@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { hasArtLibrary, librarySource } from '../../scripts/art-files.mjs';
+import { hasSourceCrops, librarySource } from '../../scripts/art-files.mjs';
 import { createGeneratedMainEnvironmentArt, GENERATED_MAIN_ENVIRONMENT_CATALOG,
   GENERATED_MAIN_ENVIRONMENT_DENSITY, GENERATED_MAIN_ENVIRONMENT_IDS, generatedMainEnvironmentKey,
   type GeneratedMainEnvironmentAlignment, type GeneratedMainEnvironmentId, type GeneratedMainEnvironmentSources,
@@ -65,7 +65,7 @@ function uniform(d: Draw) {
 
 describe('generated main environment bitmap adapter', () => {
   // The source modules live in the art library, outside git.
-  it.skipIf(!hasArtLibrary)('selects only the six requested modules and preserves their immutable manifest and PNG hashes', () => {
+  it.skipIf(!hasSourceCrops)('selects only the six requested modules and preserves their immutable manifest and PNG hashes', () => {
     expect(GENERATED_MAIN_ENVIRONMENT_IDS).toEqual(['main-horizontal-beam', 'main-corner-post',
       'foreground-threshold', 'outdoor-tree-line', 'village-roof-cluster', 'cloud']);
     const manifest = JSON.parse(readFileSync('assets/generated/bulk-candidates/environments/manifest.json', 'utf8'));

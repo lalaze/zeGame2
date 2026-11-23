@@ -101,7 +101,7 @@
       "loadedBy": ["src/render/generated-decor-art.ts", "src/render/generated-furniture-art.ts", "src/render/generated-signature-art.ts", "src/render/generated-tableware-art.ts"],
       "sources": ["assets/generated/bulk-candidates", "assets/generated/original-main-actors-v1", "assets/generated/original-main-static-v1", "assets/generated/server-canonical-v1", "assets/generated/shallow-tableware-v1", "assets/generated/runtime-catalog-v1"],
       "build": ["node scripts/pack-runtime-catalog.cjs"],
-      "checked": "not run: needs @napi-rs/canvas, which is not installed, and the bulk-candidates crops in the art library",
+      "checked": "not run: needs @napi-rs/canvas, which is not installed, and the bulk-candidates crops, deleted from the art library on 2026-11-23 (restore them from git history before 8f2c6b1)",
       "notes": "816 files, 170 of them opening art. Gathers the earlier one-off generations (cats, guests, owner, server, menu, wall, service props, tableware) into one pack."
     },
     "art/generated/cozy-world-v2": {
@@ -235,7 +235,8 @@
     "assets/generated/reserve-library": "A browsable gallery of the reserve packs (scripts/package-reserve-library.py).",
     "assets/generated/menu-v1": "The image_gen sheet behind catalog-v1's espresso, latte and egg tart; its crops are archived in original-main-static-v1.",
     "assets/generated/wall-v1": "The image_gen sheet behind catalog-v1's window, chalkboard and wall lamp; its crops are archived in original-main-static-v1.",
-    "assets/generated/cafe-attendant-v1": "Only the prompt of a retired attendant sprite. Nothing reads it."
+    "assets/generated/cafe-attendant-v1": "Only the prompt of a retired attendant sprite. Nothing reads it.",
+    "assets/generated/art-direction-v1": "The target shot of the art direction chosen on 2026-11-23 (soft, cozy cross-section). Not in the game yet."
   },
   "gifEra": "e0b819f shipped most art as GIF and kept each full-colour original as its master in assets/art-masters; 8d17e2f then shipped the GIF pixels as WebP. So in the packs with mastersDiffer, the master is the original (more colours, soft alpha) and players see its GIF reduction (on/off alpha, at most 256 colours). convert-art-webp keeps applying that reduction (scripts/art-quantise.mjs) to every file marked quantised in webp.json, and to files new to these packs unless they are glass or mostly soft, so a rebuild ships what shipped before. scripts/art-quantise.test.mjs checks the reduction still reproduces the shipped pixels."
 }

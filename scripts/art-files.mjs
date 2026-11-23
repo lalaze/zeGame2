@@ -11,6 +11,11 @@ import { fileURLToPath } from 'node:url';
 export const ART_LIBRARY = process.env.ZEGAME_ART_LIBRARY || '/Volumes/data/zeGame2-library';
 /** False on a machine without the library, where checks against moved source art are skipped. */
 export const hasArtLibrary = fs.existsSync(ART_LIBRARY);
+/**
+ * Whether the bulk-candidates source crops of catalog-v1 are in the library. They were deleted on
+ * 2026-11-23 (assets/ART-LIBRARY.md); restored from git history, the checks against them run again.
+ */
+export const hasSourceCrops = fs.existsSync(path.join(ART_LIBRARY, 'assets/generated/bulk-candidates'));
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 
 /** The absolute path of a repo file (repo-relative or absolute), or of its art-library copy once it left git. */
