@@ -33,7 +33,7 @@ function sample(menu: ItemId[], marketing: number, click = 0) {
 }
 it('offers a different profitable menu when production, rather than arrivals, limits service', () => {
   const current = MENU.map((m) => ({ ...m }));
-  const rows: object[] = [];
+  const rows: ({ version: string; marketing: number; menu: string } & Record<string, number | string>)[] = [];
   // Historical values are a benchmark, not a second production ruleset.
   const legacy: Partial<Record<ItemId, [number, number]>> = { espresso: [3,2], americano:[5,2.2], latte:[10,3], blacktea:[9,2.5], roll:[5,1], bagel:[12,1.5], donut:[20,1] };
   for (const version of ['before','after']) {
@@ -43,7 +43,14 @@ it('offers a different profitable menu when production, rather than arrivals, li
     } finally { MENU.forEach((m, i) => Object.assign(m, current[i])); }
   }
   console.table(rows);
-  expect(sample(menus.high, 0).profit).toBeGreaterThan(sample(menus.fast, 0).profit);
-  expect(sample(menus.fast, 25).profit).toBeGreaterThan(sample(menus.high, 25).profit);
+  // With few guests the dearer drink and the wider menu earn the most. Once the barista is the limit, a
+  // short menu that is quick to make (with something from the kitchen beside it) serves far more and earns more.
+  const now = (menu: string, marketing: number, what: 'profit' | 'served' = 'profit') =>
+    rows.find(row => row.version === 'after' && row.menu === menu && row.marketing === marketing)![what] as number;
+  const best = (marketing: number) => Object.keys(menus).reduce((a, b) => (now(b, marketing) > now(a, marketing) ? b : a));
+  expect(now('high', 0)).toBeGreaterThan(now('fast', 0));
+  expect(best(0)).toBe('all');
+  expect(best(25)).toBe('mixed');
+  expect(now('mixed', 25, 'served')).toBeGreaterThan(2 * now('all', 25, 'served'));
   console.table([0,20,2].map((click) => ({ clicks: click === 0 ? 'none' : click === 20 ? '1/sec' : '10/sec', ...sample(menus.all,25,click) })));
 }, 120_000);

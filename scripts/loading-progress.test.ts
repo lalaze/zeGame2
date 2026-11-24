@@ -70,7 +70,8 @@ describe('first-entry resource progress', () => {
     expect(status.textContent).toContain('could not finish');
     expect(bar.hidden).toBe(true);
     expect(count.hidden).toBe(true);
-    expect(root.querySelector('.loader-detail')?.textContent).toBe('Image unavailable');
+    // The reason first, then what a report of it needs (what had loaded, the screen, the connection).
+    expect(root.querySelector('.loader-detail')?.textContent).toMatch(/^Image unavailable\nimages=2\/12; /);
     expect(button.hidden).toBe(false);
     expect(document.activeElement).toBe(button);
     button.click();
