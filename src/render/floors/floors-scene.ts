@@ -183,7 +183,7 @@ export class FloorsScene extends Phaser.Scene {
   preload(): void {
     this.status = 'loading art';
     for (const key of IMAGES) this.load.image(key, `${FLOORS_ART}${key}.webp`);
-    FloorsSky.preload(this);
+    FloorsSky.preload(this, this.getState());
     for (const key of SHEETS) this.load.spritesheet(key, `${FLOORS_ART}${key}.webp`, this.sheets[key]);
     // The decor the café has on now, for both decorated floors: the building may grow into the second.
     const equipped = this.getState().decor.equipped as Record<string, string>;

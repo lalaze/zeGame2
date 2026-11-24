@@ -8,9 +8,11 @@
 // picture, hands it the building's frame whenever that is laid out, and calls `update` every frame.
 import Phaser from 'phaser';
 import { todayCondition } from '../../game/conditions';
+import { cafeLocation } from '../../game/locations';
 import type { GameState } from '../../game/state';
 import { previewLightDate } from '../preview-light';
 import { FLOOR_ART, FRAME, WORLD_W, worldPoint, type Building } from './floors-layout';
+import { FLOOR_WINDOWS, PLACE_DISC, PLACE_WINDOWS, paintedPlace, placeGlass, placePictures, placeSky, type PaintedPlace, type PlaceWindow } from './floors-places';
 import {
   ROOM_WINDOWS, SKY_NAMES, STREET_LAMP, WALL_LAMPS, floorLamps, previewSky, skyHour, skyLook,
   type Fall, type Lamp, type SkyLook, type SkyName, type SkyTops, type SkyWeather,
@@ -46,6 +48,13 @@ const SHADE_DEPTH = 40000, GLOW_DEPTH = 40001;
 const FRONT_DEPTH = 60000;
 /** Between a room's fixtures (which hold its windows) and what stands in front of them (floors-scene.ts BACK_LAYERS). */
 const GLASS_DEPTH = -2 + .05 * 5.6;
+/**
+ * What a place shows through a window: on a seating floor over the room and under its fixtures, on the
+ * ground floor over the side window; both under the glass's night.
+ */
+const VIEW_DEPTH: Record<PlaceWindow, number> = { '2f': -2 + .05 * 4.5, '1f': -2 + .05 * 5.55 };
+/** The side window's layer starts this far below the ground floor's plate top (SIDE_WINDOW in floors-scene.ts). */
+const SIDE_WINDOW_Y = 16;
 /** How bright a lamp's glow is at full strength, and the glow in the walls' windows. */
 const GLOW = .5, WINDOW_GLOW = .5;
 /** The roof's outline on the top floor's picture, ridge to eaves (as in floor-sky-build.py): rain splashes along it. */
@@ -97,9 +106,15 @@ export class FloorsSky {
   private lamps: Glow[] = [];
   private windowGlows: { image: Phaser.GameObjects.Image; wall: Phaser.GameObjects.Image }[] = [];
   private lampSignature = '';
+  /** The place whose pictures are showing; null is the old town, the building's own sky. */
+  private place: PaintedPlace | null = null;
+  private loadingPlaces = new Set<PaintedPlace>();
+  private views: { image: Phaser.GameObjects.Image; window: PlaceWindow }[] = [];
 
-  /** Queues the sky's pictures with the scene's own. */
-  static preload(scene: Phaser.Scene): void {
+  /** Queues the sky's pictures with the scene's own, and those of the place the café is in. */
+  static preload(scene: Phaser.Scene, state: GameState): void {
+    const place = paintedPlace(cafeLocation(state));
+    if (place) for (const key of placePictures(place)) scene.load.image(key, `${ART}${key}.webp`);
     scene.load.json(MANIFEST, `${ART}sky/sky.json`);
     for (const key of SKY_IMAGES) scene.load.image(key, `${ART}${key}.webp`);
     scene.load.atlas(SPRITES, `${ART}sky/sprites.webp`, `${ART}sky/sprites.json`);
@@ -179,6 +194,14 @@ export class FloorsSky {
       return shape ? [shape.map(([x, y]) => { const p = worldPoint(b, { floor, x, y }); return [p.x, p.y] as [number, number]; })] : [];
     });
     this.glassColour = -1;
+    // What the place shows through those windows.
+    this.views = b.floors.flatMap(floor => {
+      const window = FLOOR_WINDOWS[floor];
+      if (!window) return [];
+      const at = PLACE_WINDOWS[window], y = b.offsets[floor]! + at.y + (window === '1f' ? SIDE_WINDOW_Y : 0);
+      return [{ window, image: keep(scene.add.image(at.x, y, this.place ? placeGlass(this.place, window) : '__DEFAULT').setOrigin(0, 0)
+        .setDepth(VIEW_DEPTH[window]).setVisible(!!this.place)) }];
+    });
     // The light in the front walls' windows.
     this.windowGlows = this.walls.map(wall => ({
       wall,
@@ -209,8 +232,32 @@ export class FloorsSky {
     }
   }
 
-  /** Shows the hour and the weather of the game's day. */
+  /** Shows a place behind the roof and through the windows, once its pictures are here. */
+  private standIn(place: PaintedPlace | null): void {
+    if (place === this.place) return;
+    const { scene } = this;
+    if (place) {
+      const missing = placePictures(place).filter(key => !scene.textures.exists(key));
+      if (missing.length) {
+        if (this.loadingPlaces.has(place)) return;
+        this.loadingPlaces.add(place);
+        for (const key of missing) scene.load.image(key, `${ART}${key}.webp`);
+        if (!scene.load.isLoading()) scene.load.start();
+        return;
+      }
+    }
+    this.place = place;
+    this.daySky.setTexture(place ? placeSky(place, 'day') : 'frame/sky');
+    for (const light of Object.keys(SKY_PICTURES) as (keyof typeof SKY_PICTURES)[]) this.skies[light].setTexture(place ? placeSky(place, light) : SKY_PICTURES[light]);
+    for (const { image, window } of this.views) {
+      if (place) image.setTexture(placeGlass(place, window));
+      image.setVisible(!!place);
+    }
+  }
+
+  /** Shows the hour and the weather of the game's day, in the place the café is in. */
   update(dt: number, state: GameState, b: Building): void {
+    this.standIn(paintedPlace(cafeLocation(state)));
     this.clock += dt;
     const date = previewLightDate(new Date(2000, 0, 1, 0, Math.round(skyHour(state) * 60)), window.location.href);
     const hour = this.preview.hour ?? date.getHours() + date.getMinutes() / 60;
@@ -260,9 +307,9 @@ export class FloorsSky {
       star.setPosition(20 + scatter(i, 1) * (WORLD_W - 40), skyTop - 640 + scatter(i, 2) * 1000)
         .setAlpha(look.stars * twinkle).setVisible(look.stars > .01);
     });
-    const discY = skyTop + DISC.row;
-    this.moon.setPosition(DISC.x, discY).setAlpha(look.moon).setVisible(look.moon > .01);
-    this.sun.setPosition(DISC.x, discY).setAlpha(look.sun).setVisible(look.sun > .01)
+    const disc = this.place ? PLACE_DISC : DISC, discY = skyTop + disc.row;
+    this.moon.setPosition(disc.x, discY).setAlpha(look.moon).setVisible(look.moon > .01);
+    this.sun.setPosition(disc.x, discY).setAlpha(look.sun).setVisible(look.sun > .01)
       .setRotation(this.clock * .05).setScale(DISC.scale * (1 + .03 * Math.sin(this.clock * 1.3)));
 
     // Clouds drift to the right and come round again.

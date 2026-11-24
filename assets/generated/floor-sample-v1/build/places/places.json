@@ -1,0 +1,29 @@
+{
+ "places": [
+  "seaside",
+  "forest",
+  "city",
+  "flowers"
+ ],
+ "lights": [
+  "day",
+  "clear",
+  "dusk",
+  "night",
+  "overcast"
+ ],
+ "windows": {
+  "2f": {
+   "x": 133,
+   "y": 107,
+   "width": 112,
+   "height": 387
+  },
+  "1f": {
+   "x": 140,
+   "y": 94,
+   "width": 127,
+   "height": 320
+  }
+ }
+}

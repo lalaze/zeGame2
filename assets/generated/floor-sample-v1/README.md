@@ -247,6 +247,28 @@ On the dev server `?floors&hour=21&weather=rain` shows that hour (0 to 24) and w
 `snow`); in the page, `floorsSky.preview = { hour: 19, weather: 'crisp' }` changes it without a reload.
 The tints need WebGL: on Phaser's canvas fallback the outside does not darken.
 
+## The places of the branches
+
+A branch (`src/game/locations.ts`) stands somewhere else: the backdrop behind the roof and the view
+through the rooms' windows are the place's (`src/render/floors/floors-places.ts`, drawn by
+`floors-sky.ts`; loaded for the place the café is in). The old town is the sky above. The roof hides all
+of a backdrop but its sky and the outer fifths down to about two thirds of its height, so each place's
+landmarks stand there (`prompts/places/common.txt`); the main one is on the left, as the page's buttons
+cover the right. The takes are in `kits/places`, prompts in `prompts/places/`:
+
+| Take | What it is |
+| --- | --- |
+| `<place>/take-1`, `take-2` | Two compositions of the sunny day (`common.txt` + `<place>-N.txt`), with the place's picture from the branch map as a reference (`refs/places`). The user chose the second of each on 2026-11-24 |
+| `<place>/{clear,dusk,night,overcast}/take-1` | The chosen day in the other lights (`light-common.txt` + `light-<light>.txt`), with the old town's sky in that light as a reference |
+| `window-1f`, `window-2f` | The rooms' two windows (`input.png`) with their glass in magenta (`window-glass.txt`) |
+
+    uv run --with pillow --with numpy python scripts/art-gen/floor-places-build.py
+
+writes `build/places/<place>/*.webp` and `places.json`: it moves a light back onto its day where Codex
+shifted it, runs every sky's top out into the old town's, and cuts the windows' views from
+`build/map/view-*.webp` (the city's from its backdrop). Run it again after `floor-sky-build.py` or
+`floor-map-build.py`. `PLACE_WINDOWS` must match `places.json` (`floors-places.test.ts`).
+
 ## App icon and loading screen
 
 `kits/app/icon-{a,b,c}/take-1/icon.png` are three candidate icons (`prompts/app/icon-common.txt` +
