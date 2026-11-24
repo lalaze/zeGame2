@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Turn the decor takes of assets/generated/floor-sample-v1 into layers the floors view stacks.
 
-    uv run --with pillow --with numpy python scripts/art-gen/floor-decor-build.py
+    uv run --with pillow --with numpy --with scipy python scripts/art-gen/floor-decor-build.py
 
 Every decorated floor (1f is the ground floor, 2f the seating floors) is drawn as layers over its
 empty room (kits/decor-<floor>/shell), each the size of the floor as the page stacks it:
@@ -28,6 +28,7 @@ import sys
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
+from scipy import ndimage as nd
 
 # Takes live in the art library at the same paths (assets/ART-LIBRARY.md); a copy here wins, as
 # with librarySource() in scripts/art-files.mjs.
@@ -51,29 +52,39 @@ FLOORINGS = ['floor_checker', 'floor_planks', 'floor_mint', 'floor_terrazzo', 'f
 COUNTERS = ['counter_oak', 'counter_sage', 'counter_blush', 'counter_walnut', 'counter_marble', 'counter_pink', 'counter_gold']
 CURTAINS = {'curtain_classic': None, 'curtain_sage': (159, 181, 154), 'curtain_rose': (217, 163, 160),
             'curtain_blue': (143, 169, 196), 'curtain_linen': (239, 227, 204)}
+# The neon cup's tubes, the two nails it hangs from (the middle of each, and its radius), how far down and
+# to each side their chains reach, and the colour of its glow.
+CUP_TUBES, CUP_NAILS, CUP_CHAIN, CUP_GLOW = (792, 202, 884, 296), [(804.5, 192.5, 6), (857, 192.5, 6)], (241, 3), (255, 186, 72)
 TABLECLOTHS = {'tablecloth_classic': ((232, 217, 188), 'weave'), 'tablecloth_mint': ((200, 228, 207), 'gingham'),
                'tablecloth_rose': ((240, 200, 198), 'gingham'), 'tablecloth_blue': ((188, 208, 228), 'stripe'),
                'tablecloth_lavender': ((216, 203, 232), 'dots'), 'tablecloth_linen': ((246, 238, 220), 'lace')}
 # Table tops (centre, half width, half depth) and the ground floor's things in front of the staff, in plate pixels.
-TABLES = {'1f': [(566, 709, 90, 33), (1124, 709, 90, 33)],
-          '2f': [(536, 472, 78, 29), (1110, 472, 78, 29), (823, 683, 88, 32)]}
+TABLES = {'1f': [(570, 718, 91, 43), (1125, 718, 88, 43)],
+          '2f': [(536, 476, 78, 34), (1110, 476, 78, 34), (823, 687, 88, 38)]}
+# How thick the rims of the ground floor's tables are, and how far the open floor under them reaches each side.
+RIM, UNDER = 13, [(-62, 62), (-62, 40)]
 FRONT_RECTS = [(1074, 300, 1339, 538), (572, 284, 680, 360), (925, 322, 990, 377)]
 COUNTER_RECT = (455, 340, 1100, 528)
 WINDOW_RECT = (40, 40, 380, 600)
 # What the fixture takes dropped and the plate still has: the low back counter the grinder stands on.
 BACK_COUNTER = (925, 288, 1100, 362)
 # What the second floor's fixture take kept that belongs to the curtain and sill slots.
-SILL_AND_ROD = (90, 40, 380, 600)
+SILL_AND_ROD = [(70, 40, 310, 300), (90, 300, 310, 600)]
 # The ground floor's back wall where the player hangs wall furniture (the game's two free stretches
 # of wall, see WALL_ZONES in src/render/floors/floors-layout.ts): its fixed wall decor comes down.
-WALL_ZONES = [(500, 40, 770, 282), (755, 70, 905, 190)]
-# The front corners' potted plants come out too: those corners are furniture spots (FLOOR_SPOTS there).
-CORNER_PLANTS = [(50, 585, 255, 860), (1465, 630, 1615, 875)]
+WALL_ZONES = [(516, 40, 770, 156), (494, 156, 770, 282), (755, 70, 905, 190)]
+# The front corners' potted plants come out too: those corners are furniture spots (FLOOR_SPOTS there); so does
+# the mat inside the side door, where the window seat is now.
+CORNER_PLANTS = [(50, 537, 255, 860), (200, 535, 345, 650), (1465, 630, 1615, 875)]
+# Where the things added to a room are, by slot or item, and how large a part of one has to be, as a share of its
+# largest: the rest of what a take changed is drift (a table leg, the bricks by the stairs).
+ADDED = {'ceiling': ((60, 0, 1305, 370), .5), 'ceiling_lights': ((60, 0, 1305, 150), .01), 'neon': ((758, 150, 928, 324), 0),
+         'sill': ((110, 350, 330, 630), .5), 'rug': ((430, 500, 1240, 700), .5)}
 LINE = np.array([122, 90, 68], np.float32)
 
 
-def take(floor, name):
-    return source(f'{KITS}/decor-{floor}/{name}/take-1/plate.png')
+def take(floor, name, number=1):
+    return source(f'{KITS}/decor-{floor}/{name}/take-{number}/plate.png')
 
 
 def load(path, mode='RGB'):
@@ -109,13 +120,18 @@ def rect_mask(rects):
     return mask
 
 
-def key(path):
-    """RGBA of a magenta-keyed take: magenta out, its spill pulled from edges, stray outlines dropped."""
+def key(path, soft=200):
+    """RGBA of a magenta-keyed take: magenta out, its spill pulled from edges, stray outlines dropped. `soft` is how
+    pink a pixel may be and still show a little."""
     image = load(path)
     r, g, b = image[..., 0], image[..., 1], image[..., 2]
-    alpha = 1 - np.clip((np.minimum(r, b) - g) / 200, 0, 1)
+    alpha = 1 - np.clip((np.minimum(r, b) - g) / soft, 0, 1)
+    if soft < 200:
+        alpha = blur(alpha, .6)
     opaque = alpha > .5
     near = grow(grow(shrink(opaque, 9), 9), 9)
+    # Thin parts inside a frame (a chair's spindles) belong to it.
+    near |= nd.binary_fill_holes(near & opaque)
     alpha = np.where(near, alpha, 0)
     spill = np.clip(np.minimum(r, b) - g, 0, None) * (alpha < .98)
     rgb = image.copy()
@@ -175,53 +191,89 @@ def added(image, base, threshold=50):
     return blur(mask, 1), float(drift)
 
 
+def parts(mask, slot, name):
+    """The mask of a thing added to a room, without what a take changed elsewhere."""
+    box, least = ADDED.get(name, ADDED[slot])
+    mask = mask * rect_mask([box])
+    labels, n = nd.label(nd.binary_dilation(mask > .05, iterations=2))
+    sizes = nd.sum(mask > .05, labels, range(1, n + 1)) if n else []
+    return mask * np.isin(labels, [i + 1 for i, size in enumerate(sizes) if size >= least * max(sizes)])
+
+
+def lit_cup(image, base):
+    """
+    The neon cup is as pale as the wall it glows on, so its parts are told apart by how they differ from
+    it: its tubes are greener and bluer, its nails and chains darker. The glow is painted again, from the tubes.
+    """
+    difference = image - base
+    tubes = np.clip((difference[..., 1:].max(axis=2) - 8) / 34, 0, 1) * rect_mask([CUP_TUBES])
+    yy, xx = np.mgrid[0:H, 0:W]
+    chains = np.zeros((H, W))
+    for x, y, radius in CUP_NAILS:
+        chains = np.maximum(chains, np.clip(radius + .5 - np.hypot(xx - x, yy - y), 0, 1))
+        links = np.clip(CUP_CHAIN[1] + .5 - np.abs(xx - x), 0, 1) * (yy > y) * (yy < CUP_CHAIN[0])
+        chains = np.maximum(chains, links * np.clip((-difference.sum(axis=2) - 90) / 90, 0, 1))
+    glow = np.clip(blur(tubes, 4) * .75 + blur(tubes, 12) * .7, 0, .6)
+    rgb, alpha = np.zeros_like(image), np.zeros(image.shape[:2], np.float32)
+    for colour, share in ((np.broadcast_to(np.array(CUP_GLOW, np.float32), image.shape), glow), (image, chains), (image, tubes)):
+        out = share + alpha * (1 - share)
+        rgb = np.where(out[..., None] > 0, (colour * share[..., None] + rgb * (alpha * (1 - share))[..., None]) / np.maximum(out, 1e-4)[..., None], rgb)
+        alpha = out
+    return rgb, alpha
+
+
 def tablecloth(floor, colour, pattern):
     """Soft mats on each table top, drawn at four times the size and scaled down."""
     s = 4
     canvas = Image.new('RGBA', (W * s, H * s), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(canvas)
     base = np.array(colour, np.float32)
     dark = tuple(int(v) for v in base * .78)
     light = tuple(int(min(255, v * 1.06 + 8)) for v in base)
     for cx, cy, rx, ry in TABLES[floor]:
         rx, ry = rx * .86, ry * .84
-        box = lambda f: [(cx - rx * f) * s, (cy - ry * f) * s, (cx + rx * f) * s, (cy + ry * f) * s]
-        draw.ellipse(box(1), fill=(*colour, 255), outline=tuple(int(v) for v in LINE) + (255,), width=3 * s)
+        size = (int(rx * 2 * s) + 8 * s, int(ry * 2 * s) + 8 * s)
+        left, top = round(cx * s - size[0] / 2), round(cy * s - size[1] / 2)
+        x0, y0 = size[0] / 2, size[1] / 2
+        box = lambda f: [x0 - rx * f * s, y0 - ry * f * s, x0 + rx * f * s, y0 + ry * f * s]
+        mat = Image.new('RGBA', size, (*colour, 255))
+
+        def over(paint):
+            """Draws on a layer of its own, so what is see-through shows the mat beneath it."""
+            layer = Image.new('RGBA', size, (0, 0, 0, 0))
+            paint(ImageDraw.Draw(layer))
+            mat.alpha_composite(layer)
+
+        def lines(xs, ys, colour, across=0, along=0):
+            for x in xs:
+                over(lambda d: d.line([(x0 + x * s, 0), (x0 + x * s, size[1])], fill=colour, width=round(across * s)))
+            for y in ys:
+                over(lambda d: d.line([(0, y0 + y * s), (size[0], y0 + y * s)], fill=colour, width=round(along * s)))
+
         if pattern == 'gingham':
-            for k in range(-6, 7):
-                x = cx + k * rx / 6
-                draw.line([(x * s, (cy - ry) * s), (x * s, (cy + ry) * s)], fill=(*dark, 90), width=5 * s)
-            for k in range(-3, 4):
-                y = cy + k * ry / 3
-                draw.line([((cx - rx) * s, y * s), ((cx + rx) * s, y * s)], fill=(*dark, 90), width=4 * s)
+            lines([k * rx / 5 for k in range(-5, 6)], [k * ry / 3.4 for k in range(-3, 4)], (*dark, 105), rx / 10, ry / 6.8)
         elif pattern == 'stripe':
-            for k in range(-6, 7, 2):
-                x = cx + k * rx / 6
-                draw.line([(x * s, (cy - ry) * s), (x * s, (cy + ry) * s)], fill=(250, 246, 236, 170), width=6 * s)
+            lines([k * rx / 6 for k in range(-6, 7, 2)], [], (250, 246, 236, 190), rx / 6)
         elif pattern == 'dots':
             for i in range(-5, 6):
                 for j in range(-2, 3):
-                    x, y = cx + i * rx / 5.5 + (j % 2) * rx / 11, cy + j * ry / 2.6
-                    draw.ellipse([(x - 2.2) * s, (y - 1.3) * s, (x + 2.2) * s, (y + 1.3) * s], fill=(250, 246, 236, 220))
+                    x, y = x0 + (i * rx / 5.5 + (j % 2) * rx / 11) * s, y0 + j * ry / 2.6 * s
+                    over(lambda d: d.ellipse([x - 2.6 * s, y - 1.6 * s, x + 2.6 * s, y + 1.6 * s], fill=(250, 246, 236, 225)))
         elif pattern == 'weave':
-            for k in range(-12, 13):
-                x = cx + k * rx / 12
-                draw.line([(x * s, (cy - ry) * s), (x * s, (cy + ry) * s)], fill=(*dark, 40), width=2 * s)
+            lines([k * rx / 12 for k in range(-12, 13)], [k * ry / 8 for k in range(-8, 9)], (*dark, 46), 2, 1.4)
         elif pattern == 'lace':
-            draw.ellipse(box(.82), outline=(*dark, 150), width=2 * s)
+            over(lambda d: d.ellipse(box(.8), outline=(*dark, 150), width=round(1.6 * s)))
             for k in range(36):
                 a = k / 36 * 2 * np.pi
-                x, y = cx + np.cos(a) * rx * .92, cy + np.sin(a) * ry * .92
-                draw.ellipse([(x - 2.4) * s, (y - 1.4) * s, (x + 2.4) * s, (y + 1.4) * s], outline=(*dark, 170), width=s)
+                x, y = x0 + np.cos(a) * rx * .9 * s, y0 + np.sin(a) * ry * .9 * s
+                over(lambda d: d.ellipse([x - 3 * s, y - 1.8 * s, x + 3 * s, y + 1.8 * s], outline=(*dark, 170), width=s))
         # A lighter far half reads as the mat lying on a lit table.
-        draw.chord(box(.92), 180, 360, fill=(*light, 70))
-        # Keep only the mat: the patterns above may run past its edge.
-    mats = Image.new('L', canvas.size, 0)
-    mask_draw = ImageDraw.Draw(mats)
-    for cx, cy, rx, ry in TABLES[floor]:
-        rx, ry = rx * .86, ry * .84
-        mask_draw.ellipse([(cx - rx) * s - 2 * s, (cy - ry) * s - 2 * s, (cx + rx) * s + 2 * s, (cy + ry) * s + 2 * s], fill=255)
-    canvas.putalpha(Image.fromarray(np.minimum(np.asarray(canvas)[..., 3], np.asarray(mats))))
+        over(lambda d: d.chord(box(1), 180, 360, fill=(*light, 60)))
+        over(lambda d: d.ellipse(box(1), outline=(*(int(v) for v in LINE), 255), width=round(2.4 * s)))
+        # Keep only the mat: the patterns run past its edge.
+        shape = Image.new('L', size, 0)
+        ImageDraw.Draw(shape).ellipse(box(1), fill=255)
+        mat.putalpha(shape)
+        canvas.alpha_composite(mat, (left, top))
     out = np.asarray(canvas.resize((W, H), Image.LANCZOS)).astype(np.float32)
     return out[..., :3], out[..., 3] / 255
 
@@ -273,31 +325,42 @@ def main():
         slots['wallpaper'] = {n: write(floor, n, image, blur(wall_mask, 1.5), report) for n, image in walls.items()}
         slots['floor'] = {n: write(floor, n, image, blur(floor_mask, 1.5), report) for n, image in floorings.items()}
         # Fixtures, keyed and aligned onto what the plate has beyond the empty room.
-        rgb, alpha = key(take(floor, 'fixtures'))
+        rgb, alpha = key(take(floor, 'fixtures'), 70)
         rgb, alpha, fit = align(rgb, alpha, changed(plate, shell, 60, 3, .5))
         report.append(f'{floor}/fixtures align {fit}')
         if floor == '1f':
-            # The take painted out the table tops with the vases: take them, and the back counter, from the plate.
-            restore = rect_mask([BACK_COUNTER]) & changed(plate, shell, 40, 1, .5)
+            # The take painted out the table tops with the vases: take them from the plate repainted without
+            # vases, and the back counter from the plate.
+            counter = rect_mask([BACK_COUNTER]) & changed(plate, shell, 40, 1, .5)
             yy, xx = np.mgrid[0:H, 0:W]
+            tops = np.zeros((H, W), bool)
             for cx, cy, rx, ry in TABLES[floor]:
-                restore |= ((xx - cx) / (rx + 3)) ** 2 + ((yy - cy) / (ry + 3)) ** 2 <= 1
-            rgb = np.where(restore[..., None], plate, rgb)
-            alpha = np.maximum(alpha, blur(restore, 1))
+                for down in range(RIM):
+                    tops |= ((xx - cx) / (rx + 1)) ** 2 + ((yy - cy - down) / (ry + 1)) ** 2 <= 1
+            rgb = np.where(counter[..., None], plate, np.where(grow(tops, 3)[..., None], load(take(floor, 'tables')), rgb))
+            # The take's own rims show a little below them, between the table's foot and the chairs.
+            for (cx, cy, rx, ry), (left, right) in zip(TABLES[floor], UNDER):
+                below = (yy > cy) & (np.abs(xx - cx) > 13) & (xx > cx + left) & (xx < cx + right)
+                alpha = np.where(grow(tops, 17) & ~tops & below, 0, alpha)
+            alpha = np.maximum(alpha, blur(counter | tops, 1))
             alpha = alpha * ~rect_mask(WALL_ZONES + CORNER_PLANTS)
         else:
-            alpha = alpha * ~rect_mask([SILL_AND_ROD] + CORNER_PLANTS)
+            alpha = alpha * ~rect_mask(SILL_AND_ROD + CORNER_PLANTS)
         shadow = np.zeros((H, W))
         shadow[10:, 6:] = alpha[:-10, :-6]
         shadow = blur(shadow, 9) * blur(floor_mask, 3) * (1 - alpha) * .42
         slots['rug'] = {}
         if floor == '1f':
+            # Take 2 of each rug is without the vases on the tables, like the plate it is compared with.
             for n in ['rug_red', 'rug_blue', 'rug_round']:
-                if os.path.exists(take(floor, n)):
-                    image = load(take(floor, n))
-                    mask, drift = added(image, plate)
+                if os.path.exists(take(floor, n, 2)):
+                    image = load(take(floor, n, 2))
+                    mask, drift = added(image, load(take(floor, 'tables')))
                     drift_warnings.append((f'{floor}/{n}', drift))
-                    slots['rug'][n] = write(floor, n, image, mask * (1 - alpha), report)
+                    # Where its border is as pale as the floor it shows no change: close those gaps.
+                    whole = parts(mask, 'rug', n) > .5
+                    whole = nd.binary_fill_holes(nd.binary_closing(whole, iterations=9))
+                    slots['rug'][n] = write(floor, n, image, blur(whole, 1) * (1 - alpha), report)
         entry['back'].append(write(floor, 'shadow', np.zeros((H, W, 3)) + [60, 38, 28], shadow, report))
         front = rect_mask(FRONT_RECTS) if floor == '1f' else np.zeros((H, W), bool)
         entry['back'].append(write(floor, 'fixtures', rgb, alpha * ~front, report))
@@ -332,10 +395,12 @@ def main():
                     continue
                 image = load(take(owner, n))
                 mask, drift = added(image, base, 60 if slot == 'neon' else 50)
+                if n == 'neon_cup':
+                    image, mask = lit_cup(image, base)
                 drift_warnings.append((f'{owner}/{n}', drift))
                 if slot == 'neon':
                     mask = mask * (1 - alpha)
-                slots[slot][n] = write(floor, n, image, mask, report)
+                slots[slot][n] = write(floor, n, image, parts(mask, slot, n), report)
         # Counter and curtains.
         slots['counter'] = {}
         if floor == '1f':

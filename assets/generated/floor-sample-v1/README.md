@@ -45,7 +45,9 @@ the game (`src/game/decor.ts`) changes on its own and any combination works. The
 | --- | --- |
 | `shell` | The empty room every layer sits on |
 | `wall_*`, `floor_*` | Repaints of the empty room; cut out with the wall and floor masks all of them agree on |
-| `fixtures` | Magenta repaint of the finished plate keeping what never changes; keyed and aligned back. The ground floor's table tops and back counter come from the plate itself |
+| `fixtures` | Magenta repaint of the finished plate keeping what never changes; keyed and aligned back. The ground floor's back counter comes from the plate itself, its table tops from `tables` |
+| `tables` (`1f`) | The plate repainted without the vases on its two tables |
+| `rug_*` | Take 2 repaints take 1 without the vases (`rug-tables.txt`), so it is compared with `tables`; gaps where a border is as pale as the floor are closed |
 | `counter_*` | Magenta repaints keeping only the counter, restyled |
 | `curtain` | Magenta repaint keeping only the curtains; recoloured for each curtain |
 | `ceiling_*`, `rug_*`, `neon_*`, `sill_*` | One thing added to the empty room or the plate; the layer is what changed |
@@ -54,7 +56,7 @@ the game (`src/game/decor.ts`) changes on its own and any combination works. The
 Tablecloths are drawn by the build script. Counter, rug and neon are downstairs only; curtains and
 the sill upstairs only (the ground floor has no window); the ceiling decor is the same on both.
 
-    uv run --with pillow --with numpy python scripts/art-gen/floor-decor-build.py
+    uv run --with pillow --with numpy --with scipy python scripts/art-gen/floor-decor-build.py
 
 writes `build/decor/<floor>/*.webp` and `build/decor/decor.json`; `src/render/floors/floors-decor.test.ts`
 checks that every decor item has its layers.
