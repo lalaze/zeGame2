@@ -2,7 +2,7 @@
 import { readFileSync } from 'node:fs';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { setLocale } from '../i18n';
-import { FLOORS_ICONS, OUTER_WALL_KEY, floorsIconUrl, installFloorsUi, onOuterWall, outerWallShown, setOuterWall, type FloorsIcon } from './floors-ui';
+import { FLOORS_ICONS, OUTER_WALL_KEY, floorsIconUrl, installFloorsUi, markFloorsIcons, onOuterWall, outerWallShown, setOuterWall, type FloorsIcon } from './floors-ui';
 
 const css = readFileSync('src/ui/floors-ui.css', 'utf8');
 const rules = css.replace(/\/\*[\s\S]*?\*\//g, '');
@@ -41,6 +41,15 @@ describe('floors UI', () => {
     expect(document.querySelector<HTMLElement>('[data-tab="pets"]')!.dataset.floorsIcon).toBe('pets');
     // A mark already set by the page is kept.
     expect(document.getElementById('panel-toggle')!.dataset.floorsIcon).toBe('spark');
+  });
+
+  it('marks controls the page makes after it was switched on, like the phone HUD\'s close button', () => {
+    installFloorsUi(document.body);
+    document.body.insertAdjacentHTML('beforeend', '<div class="mobile-tools-heading"><strong></strong><button>×</button></div>');
+    const close = document.querySelector<HTMLElement>('.mobile-tools-heading button')!;
+    expect(close.dataset.floorsIcon).toBeUndefined();
+    markFloorsIcons(document.body);
+    expect(close.dataset.floorsIcon).toBe('close');
   });
 
   it('draws icons as self-contained SVG masks', () => {

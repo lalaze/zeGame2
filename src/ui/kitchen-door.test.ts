@@ -1,6 +1,7 @@
 // @vitest-environment happy-dom
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { MIN_SCENE_H, MAX_SCENE_H, kitchenHeight, setKitchenLevel, setSceneHeight } from '../game/layout';
+import { KITCHEN_COST } from '../game/kitchen';
 import { createInitialState } from '../game/state';
 import { RegionsUI } from './regions';
 
@@ -23,5 +24,50 @@ describe('staff door controls', () => {
       expect(top('right')).toBeCloseTo((88 + (height - kitchenHeight()) / 2) / height * 100, 5);
       expect(card.hidden).toBe(true);
     }
+  });
+});
+
+describe('the kitchen under the building', () => {
+  function inPlace(coins: number) {
+    const state = createInitialState(0);
+    state.coins = coins;
+    const edges = document.createElement('div'), card = document.createElement('div');
+    document.body.append(edges, card);
+    const moved = vi.fn(), unlocked = vi.fn(), street = vi.fn();
+    const ui = new RegionsUI(edges, card, () => state, moved, unlocked, street, true);
+    ui.select('main');
+    moved.mockClear();
+    const way = () => edges.querySelector<HTMLButtonElement>('[data-direction="left"]')!;
+    return { state, card, ui, moved, unlocked, street, way };
+  }
+
+  it('is offered over the café without leaving it, and can be put off', () => {
+    const { card, moved, way } = inPlace(0);
+    expect(way().hidden).toBe(false);
+    expect(card.hidden).toBe(true);
+    way().click();
+    expect(card.hidden).toBe(false);
+    expect(way().getAttribute('aria-expanded')).toBe('true');
+    expect(card.querySelector<HTMLButtonElement>('[data-expand]')!.disabled).toBe(true);
+    card.querySelector<HTMLButtonElement>('[data-later]')!.click();
+    expect(card.hidden).toBe(true);
+    way().click();
+    way().click();
+    expect(card.hidden).toBe(true);
+    expect(moved).not.toHaveBeenCalled();
+  });
+
+  it('is built from its card, and then leaves no way to wander off', () => {
+    const { state, card, ui, moved, unlocked, way } = inPlace(KITCHEN_COST);
+    way().click();
+    card.querySelector<HTMLButtonElement>('[data-expand]')!.click();
+    expect(state.kitchen).toBe(true);
+    expect(unlocked).toHaveBeenCalledOnce();
+    expect(card.hidden).toBe(true);
+    expect(way().hidden).toBe(true);
+    ui.select('kitchen');
+    ui.move('left');
+    expect(card.hidden).toBe(true);
+    expect(moved).not.toHaveBeenCalled();
   });
 });

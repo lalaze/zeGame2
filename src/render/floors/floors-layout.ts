@@ -69,6 +69,16 @@ export function building(tables: number, kitchen: boolean): Building {
   return { floors, offsets, street, height };
 }
 
+/**
+ * Where the camera rests, as the world y at the middle of a screen `view` tall: a building that fits
+ * between the page's top bar and its bottom bars is shown whole; a taller one with the street two
+ * thirds of the way down, so the counter is always on screen and the upper floors are a drag away.
+ */
+export function restFocus(b: Building, view: number): number {
+  const margin = view * .1;
+  return b.street + margin <= view * .88 ? view / 2 - margin : b.street - view * .18;
+}
+
 export function worldPoint(b: Building, p: FloorPoint): Point {
   return { x: p.x, y: (b.offsets[p.floor] ?? 0) + p.y - FLOOR_ART[p.floor].top };
 }
@@ -96,13 +106,16 @@ export const DOOR = spot('ground', 836, 935, GROUND_AISLE);
 /** Six places in line, the head nearest the till; the tail reaches towards the window seat. */
 export const QUEUE: Spot[] = [[612, 606], [510, 608], [408, 610], [318, 614], [246, 598], [186, 584]]
   .map(([x, y]) => spot('ground', x, y, GROUND_AISLE));
-/** Behind the counter: the owner in the middle, then the hired baristas. */
-export const BARISTAS: FloorPoint[] = [[800, 470], [1010, 462], [640, 470]].map(([x, y]) => ({ floor: 'ground', x, y }));
+/** Behind the counter: the owner in the middle, then the hired baristas, a head's width apart. */
+export const BARISTAS: FloorPoint[] = [[770, 470], [1015, 462], [640, 470], [893, 466]].map(([x, y]) => ({ floor: 'ground', x, y }));
 /** Where a guest orders from each barista. */
 export const SERVICE: Spot[] = BARISTAS.map(b => spot('ground', b.x, 566, GROUND_AISLE));
-/** Where finished table orders wait for a server, and where idle servers stand. */
+/**
+ * Where finished table orders wait for a server, and where idle servers stand: spread about the
+ * floor, by the stairs, either side of the way in and by the window seat, clear of the cake display.
+ */
 export const PASS = spot('ground', 1085, 600, GROUND_AISLE);
-export const SERVER_HOMES: Spot[] = [[1180, 640], [1250, 668], [1110, 668], [1310, 640], [1180, 700]]
+export const SERVER_HOMES: Spot[] = [[1368, 684], [916, 716], [300, 744], [762, 716], [1240, 668], [1120, 660]]
   .map(([x, y]) => spot('ground', x, y, GROUND_AISLE));
 /** The counter, the cake display and what stands on them hide the staff from the waist down. */
 export const COUNTER_FRONT: FloorPoint = { floor: 'ground', x: 0, y: 525 };
@@ -159,13 +172,18 @@ export function kitchenPlace(station: string): KitchenPlace {
   if (station === 'dryStore') return 'dry';
   return 'lift';
 }
-/** Cook `i` at a place: a second cook works beside the first. */
+/** Where the second and third cook at a place stand, from the first: one each side of them, or along the open floor. */
+const COOK_SHIFT: Record<KitchenPlace, readonly [number, number, number]> = {
+  oven: [0, 112, -112], dough: [0, 118, -118], lift: [0, 112, -112], cold: [0, -112, 112], dry: [0, 112, 224],
+};
+/** Cook `i` at a place: up to three cooks work side by side. */
 export function kitchenSpot(place: KitchenPlace, i: number): Spot {
-  const at = KITCHEN[place], shift = place === 'dough' ? 115 : place === 'oven' ? 95 : 70;
-  return { ...at, x: at.x + (i % 2) * shift };
+  const at = KITCHEN[place];
+  return { ...at, x: at.x + COOK_SHIFT[place][i % 3] };
 }
-/** Where each cook waits for the next batch: the baker by the oven, the next cook at the dough table. */
-export const cookHome = (i: number): Spot => kitchenSpot(i % 2 === 0 ? 'oven' : 'dough', Math.floor(i / 2));
+/** Where each cook waits for the next batch: the baker by the oven, the next cook at the dough table, the third by the food lift. */
+const COOK_HOMES: readonly KitchenPlace[] = ['oven', 'dough', 'lift'];
+export const cookHome = (i: number): Spot => kitchenSpot(COOK_HOMES[i % 3], Math.floor(i / 3));
 
 /** The walk across one floor: out to the walkway, along it (via the hub when walkways differ), and in. */
 function across(floor: FloorId, from: Point, fromAisle: number, to: Point, toAisle: number): Step[] {
@@ -217,6 +235,31 @@ export function route(from: FloorPoint, fromAisle: number, to: Spot & { fadeOut?
   }
   return end([...steps, ...across(to.floor, at, aisle, to, to.aisle)]);
 }
+
+// ------------------------------------------------------------ pace
+
+/** View pixels a person walks per second of play, and how many times faster they go at most to keep up with the Sim. */
+export const WALK = 240, CATCH_UP = 3;
+/** Someone the Sim has at their spot already still takes this long to come to a stop there, in seconds. */
+const SETTLE = 1;
+
+/** How far is left to walk along the steps; appearing at the far end of a flight takes no walking. */
+export function stepsLength(from: Point, steps: readonly Step[]): number {
+  let length = 0, at = from;
+  for (const step of steps) {
+    if (!step.jump) length += Math.hypot(step.x - at.x, step.y - at.y);
+    at = step;
+  }
+  return length;
+}
+
+/**
+ * How many times the walking speed someone goes with `left` pixels to walk, when the Sim has them
+ * there in `seconds`: the building's stairs make its walks longer than the Sim's, so they set out
+ * fast enough to arrive with it, as far as that still looks like walking.
+ */
+export const walkPace = (left: number, seconds: number): number =>
+  Math.min(CATCH_UP, Math.max(1, left / (WALK * Math.max(SETTLE, seconds))));
 
 // ------------------------------------------------------------ furniture
 

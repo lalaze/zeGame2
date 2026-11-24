@@ -26,6 +26,7 @@ export const FLOORS_ICONS = {
   close: 'M6.5 6.5l11 11M17.5 6.5l-11 11',
   chevron: 'M9.5 5.5 16 12l-6.5 6.5',
   wall: 'M3.5 11.5 12 4.5l8.5 7M6 9.5v10h12v-10M10 19.5v-5h4v5M14.5 10.5h2.5v2.5h-2.5z',
+  kitchen: 'M7 20v-6.2A4 4 0 0 1 6.6 6a5.6 5.6 0 0 1 10.8 0 4 4 0 0 1-.4 7.8V20zM7 16.8h10',
   clock: 'M20 12a8 8 0 1 1-16 0 8 8 0 0 1 16 0zM12 7.5V12l3 2',
   spark: 'M12 3.5l1.9 5.2 5.6.3-4.4 3.5 1.5 5.4L12 14.8 7.4 17.9l1.5-5.4L4.5 9l5.6-.3z',
 } as const satisfies Record<string, IconSpec>;
@@ -83,14 +84,19 @@ function labelWallButton(): void {
   button.querySelector('span')!.textContent = t('floors.wall');
 }
 
+/** Marks the controls that carry an icon here; call it again for those the page makes later. */
+export function markFloorsIcons(root: HTMLElement = document.body): void {
+  for (const [selector, name] of Object.entries(ICON_HOMES)) {
+    for (const element of root.querySelectorAll<HTMLElement>(selector)) element.dataset.floorsIcon ??= name;
+  }
+}
+
 /** Switch the page to the floors look, with the outer walls' button under the money. */
 export function installFloorsUi(root: HTMLElement = document.body): void {
   const doc = root.ownerDocument, body = doc.body;
   body.classList.add('floors-view');
   for (const name of Object.keys(FLOORS_ICONS) as FloorsIcon[]) body.style.setProperty(`--floors-icon-${name}`, floorsIconUrl(name));
-  for (const [selector, name] of Object.entries(ICON_HOMES)) {
-    for (const element of root.querySelectorAll<HTMLElement>(selector)) element.dataset.floorsIcon ??= name;
-  }
+  markFloorsIcons(root);
   try { wallShown = localStorage.getItem(OUTER_WALL_KEY) === '1'; } catch { wallShown = false; }
   if (!doc.getElementById('floors-wall-btn')) {
     const button = doc.createElement('button');

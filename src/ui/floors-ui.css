@@ -86,6 +86,7 @@
 :root body.floors-view [data-floors-icon="close"] { --floors-icon: var(--floors-icon-close); }
 :root body.floors-view [data-floors-icon="chevron"] { --floors-icon: var(--floors-icon-chevron); }
 :root body.floors-view [data-floors-icon="wall"] { --floors-icon: var(--floors-icon-wall); }
+:root body.floors-view [data-floors-icon="kitchen"] { --floors-icon: var(--floors-icon-kitchen); }
 :root body.floors-view [data-floors-icon="clock"] { --floors-icon: var(--floors-icon-clock); }
 :root body.floors-view [data-floors-icon="spark"] { --floors-icon: var(--floors-icon-spark); }
 
@@ -192,6 +193,7 @@
 }
 /* The pixel HUD paints the street button wood by id, so it is named by id here too. */
 :root body.floors-view .mobile-cafe-dock #room-zoom-reset { --pixel-face: var(--fl-paper) !important; --pixel-text: var(--fl-ink) !important; }
+:root body.floors-view .mobile-cafe-dock #room-zoom-reset:not(:disabled) { border-color: var(--fl-line) !important; box-shadow: 0 3px 0 var(--fl-stamp) !important; }
 :root body.floors-view .mobile-cafe-dock button {
   --pixel-face: var(--fl-paper) !important; --pixel-text: var(--fl-ink) !important;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
@@ -319,20 +321,32 @@
 /* ------------------------------------------------------------------ the ledger's filters, and the way to the kitchen */
 :root body.floors-view .panel :is(.menu-filter,.buy-amount) .chip { border: 2px solid var(--fl-line) !important; }
 :root body.floors-view .panel :is(.menu-filter,.buy-amount) .chip:is(.active,[aria-pressed='true']) { border-color: var(--fl-rose-dark) !important; }
-:root body.floors-view .area-arrow-sign {
-  border: 2px solid var(--fl-line); border-radius: 14px; background: var(--fl-paper);
-  box-shadow: 0 3px 0 var(--fl-stamp); color: var(--fl-ink);
+/* The kitchen is under the café, so nothing leads to it: until it is built, this button under the
+   walls' one offers it (RegionsUI `inPlace`). Inline styles place it at the pixel room's door. */
+:root body.floors-view .area-edges { z-index: 9; }
+:root body.floors-view .area-arrow {
+  top: calc(var(--edge-top, 8px) + 136px) !important; left: auto !important; right: var(--edge-right, 12px);
+  transform: none; width: 56px; min-height: 56px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+  border: 2px solid var(--fl-line); border-radius: 18px; background: var(--fl-paper); color: var(--fl-ink);
+  box-shadow: 0 3px 0 var(--fl-stamp);
 }
-:root body.floors-view .area-arrow.locked .area-arrow-sign { background: var(--fl-paper-2); border-style: dashed; }
+:root body.floors-view .area-arrow[hidden] { display: none; }
+:root body.floors-view .area-arrow[aria-expanded='true'] { background: var(--fl-rose); border-color: var(--fl-rose-dark); box-shadow: 0 3px 0 var(--fl-rose-dark); }
+:root body.floors-view .area-arrow .area-arrow-sign { width: auto; height: auto; border: 0; background: none; box-shadow: none; color: inherit; }
 :root body.floors-view .area-arrow-sign svg { display: none; }
 :root body.floors-view .area-arrow-sign::before {
-  content: ''; width: 20px; height: 20px; background: currentColor;
-  mask: var(--floors-icon-chevron) center / contain no-repeat; -webkit-mask: var(--floors-icon-chevron) center / contain no-repeat;
+  content: ''; width: 22px; height: 22px; background: currentColor;
+  mask: var(--floors-icon-kitchen) center / contain no-repeat; -webkit-mask: var(--floors-icon-kitchen) center / contain no-repeat;
 }
-:root body.floors-view .area-left .area-arrow-sign::before { rotate: 180deg; }
-:root body.floors-view .area-up .area-arrow-sign::before { rotate: -90deg; }
-:root body.floors-view .area-down .area-arrow-sign::before { rotate: 90deg; }
-:root body.floors-view .area-destination { border: 2px solid var(--fl-line); border-radius: 10px; background: var(--fl-paper); font-weight: 700; }
+:root body.floors-view .area-destination {
+  display: block; position: static; padding: 0; border: 0; background: none; box-shadow: none;
+  font-size: 11px; line-height: 1.2; font-weight: 700;
+}
+:root body.floors-view:is(.arranging-cafe,.mobile-drawer-open,.mobile-tools-open) .area-edges,
+:root body.floors-view:is(.arranging-cafe,.mobile-drawer-open) .region-card { display: none; }
+:root body.floors-view .region-card { z-index: 10; padding: 18px 16px 14px; }
+:root body.floors-view .region-card .pixel-btn { display: block; width: 100%; min-height: 44px; margin: 8px 0 0; }
 
 /* ------------------------------------------------------------------ ledger pictures from the floors art (icon-art.ts) */
 :root body.floors-view .tile img.tile-icon[src$='.webp'] {

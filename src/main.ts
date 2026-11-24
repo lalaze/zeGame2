@@ -45,6 +45,7 @@ import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale
 import { CafeView } from './render/cafe-view';
 import { CafeGame } from './render/phaser/game';
 import { FloorsGame } from './render/floors/floors-game';
+import { markFloorsIcons } from './ui/floors-ui';
 import { character, toDataURL } from './render/sprites';
 import { wantCozyTeamStyle } from './render/cozy-team-art';
 import { fineSpriteArt } from './render/fine-sprite-art';
@@ -421,14 +422,14 @@ const regionsUI = new RegionsUI($('area-edges'), $('region-card'), () => state, 
   updateDayHud();
 }, () => {
   saveGame(); panel.refresh();
-  toast(t('area.opened', { name: areaName(scene.area) }));
-  sparkleRoom(scene.area); updateDayHud();
+  toast(t('area.opened', { name: areaName('kitchen') }));
+  sparkleRoom('kitchen'); updateDayHud();
 }, () => {
   showStreetMap(state, () => { saveGame(); panel.refresh(); }, () => {
     regionsUI.select('main');
     if (drawer.media.matches) setPanelCollapsed(true);
   });
-});
+}, floorsView);
 
 function sparkleRoom(area: AreaId): void {
   const origin = areaOrigin(area);
@@ -1482,17 +1483,20 @@ const cafe = new CafeRenderer(canvas, scene, sim, () => state, {
 });
 // The floors view scrolls itself; the room zoom stays off there but keeps its place in the HUD.
 roomViewport = new RoomViewport(canvas, stage,
-  () => !floorsView && startupComplete && !scene.panning && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused),
+  () => startupComplete && !scene.panning && cafeInteractionEnabled(session.active, isModalOpen() || drawer.paused),
   () => [scene.area, scene.overview, arrange?.mode, arrange?.mode === 'place' ? arrange.id : '', state.phase].join(':'),
   { isActive: () => scene.overview, toggle: () => regionsUI.toggleOverview() },
   () => floorsView || arrange || !catLocateExit.hidden || !isAreaOpen(state, scene.area) ? 1
-    : mobileRoomZoom(stage.clientWidth, stage.clientHeight, canvas.parentElement!.clientHeight));
+    : mobileRoomZoom(stage.clientWidth, stage.clientHeight, canvas.parentElement!.clientHeight),
+  () => !floorsView);
 mobileHud = new MobileCafeHud($('app'), {
   money: document.querySelector<HTMLElement>('.money')!, day: $('day-hud'), status: operationBtn,
   people: document.querySelector<HTMLElement>('.cafe-status-bar')!, style: $('cafe-style-btn'),
   settings: $<HTMLButtonElement>('settings-btn'), pantry: playFlow.pantryButton, help: playFlow.helpButton,
   open: openBtn, manage: panelToggle, zoom: $('room-zoom-controls'), overview: $<HTMLButtonElement>('room-zoom-reset'),
 });
+// The HUD's own controls came after the floors view put its icons on the page.
+if (floorsView) markFloorsIcons($('app'));
 fitCanvas();
 panel.update();
 regionsUI.select('main');

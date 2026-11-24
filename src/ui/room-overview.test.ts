@@ -57,6 +57,23 @@ describe('street entry and interior camera', () => {
     expect(openStreet).toHaveBeenCalledOnce();
   });
 
+  it('opens the street from a view that cannot be magnified', () => {
+    viewport.destroy();
+    viewport = new RoomViewport(document.querySelector('canvas')!, document.querySelector('#stage')!, () => allowed,
+      () => 'building', { isActive: () => camera.overview, toggle: () => regions.toggleOverview() }, () => 1, () => false);
+    expect(button('#room-zoom-in').disabled).toBe(true);
+    expect(button('#room-zoom-out').disabled).toBe(true);
+    expect(button('#room-zoom-reset').disabled).toBe(false);
+    button('#room-zoom-in').click();
+    const canvas = document.querySelector('canvas')!;
+    for (const [type, id, x] of [['pointerdown', 1, 10], ['pointerdown', 2, 60], ['pointermove', 2, 200]] as const) {
+      canvas.dispatchEvent(new PointerEvent(type, { pointerId: id, pointerType: 'touch', clientX: x, clientY: 10, bubbles: true }));
+    }
+    expect(canvas.dataset.roomZoom).toBe('1');
+    button('#room-zoom-reset').click();
+    expect(openStreet).toHaveBeenCalledOnce();
+  });
+
   it('viewing properties does not purchase or unlock them', () => {
     const state = createInitialState(0), before = serialize(state);
     const controls = new RegionsUI(document.createElement('div'), document.createElement('div'),

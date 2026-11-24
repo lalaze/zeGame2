@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { STATION_SECONDS, type Station } from '../../game/kitchen';
-import { DOOR, FLOOR_ART, FRAME, QUEUE, SERVICE, building, cookHome, kitchenPlace, kitchenSpot, route, tableSeats, worldPoint } from './floors-layout';
+import { BARISTAS, CATCH_UP, DISPLAY, DOOR, FLOOR_ART, FRAME, QUEUE, SERVER_HOMES, SERVICE, WALK, building, cookHome, kitchenPlace, kitchenSpot, restFocus, route, stepsLength, tableSeats, walkPace, worldPoint, type KitchenPlace } from './floors-layout';
 
 describe('floors building', () => {
   it('opens a floor above for tables three to five and another for six to eight, and a basement with the kitchen', () => {
@@ -68,6 +68,69 @@ describe('floors routes', () => {
   });
 });
 
+describe('floors pace', () => {
+  it('strolls a walk the Sim makes as long as this one, and stops gently at its end', () => {
+    expect(walkPace(WALK * 4, 4)).toBe(1);
+    expect(walkPace(WALK * 2, 6)).toBe(1);
+    expect(walkPace(60, 0)).toBe(1);
+  });
+
+  it('hurries up the stairs to arrive with the Sim, but never faster than catching up allows', () => {
+    expect(walkPace(WALK * 8, 4)).toBe(2);
+    expect(walkPace(WALK * 40, 2)).toBe(CATCH_UP);
+    expect(walkPace(WALK * 40, 0)).toBe(CATCH_UP);
+  });
+
+  it('counts the walk left, not the jump between two flights of stairs', () => {
+    const seat = tableSeats(5, [0, 1, 2, 3, 4, 5])[0];
+    const steps = route(SERVICE[0], SERVICE[0].aisle, seat);
+    expect(stepsLength(SERVICE[0], steps)).toBeGreaterThan(stepsLength(SERVICE[0], route(SERVICE[0], SERVICE[0].aisle, tableSeats(2, [0, 1, 2])[0])));
+    expect(stepsLength({ x: 0, y: 0 }, [{ floor: 'ground', x: 3, y: 4 }, { floor: 'floor-2', x: 900, y: 900, jump: true }, { floor: 'floor-2', x: 900, y: 910 }])).toBe(15);
+    expect(stepsLength({ x: 5, y: 5 }, [])).toBe(0);
+  });
+});
+
+describe('floors camera', () => {
+  /** Where a world point lands on the screen, 0 at its top and 1 at its bottom. */
+  const onScreen = (y: number, focus: number, view: number) => (y - focus) / view + .5;
+  // Building pixels on screen for phones from 360 x 640 to 393 x 851 and up, and a wide desktop window.
+  const phones = [1672 * 640 / 360, 1672 * 851 / 393, 1672 * 915 / 412];
+
+  it('shows a small café whole, clear of the bars', () => {
+    for (const view of phones) {
+      const b = building(2, false), focus = restFocus(b, view);
+      expect(onScreen(0, focus, view)).toBeCloseTo(.1);
+      expect(onScreen(b.street, focus, view)).toBeLessThan(.88);
+    }
+  });
+
+  it('keeps the ground floor on screen however tall the building grows', () => {
+    for (const view of [...phones, 1672 * 800 / 1200]) {
+      for (const tables of [3, 5, 8]) for (const kitchen of [false, true]) {
+        const b = building(tables, kitchen), focus = restFocus(b, view);
+        expect(onScreen(b.street, focus, view), `${tables} tables on ${Math.round(view)}`).toBeCloseTo(.68);
+      }
+    }
+  });
+});
+
+describe('floors staff', () => {
+  it('stands every barista a head apart, the owner near the middle of the counter', () => {
+    const xs = BARISTAS.map(b => b.x).sort((a, b) => a - b);
+    expect(xs).toHaveLength(4);
+    for (let i = 1; i < xs.length; i++) expect(xs[i] - xs[i - 1]).toBeGreaterThanOrEqual(120);
+    expect(BARISTAS[0].x).toBe(xs[1]);
+  });
+
+  it('keeps the first servers apart and out of the way of the cake display', () => {
+    expect(SERVER_HOMES.length).toBeGreaterThanOrEqual(6);
+    for (const [i, a] of SERVER_HOMES.entries()) for (const b of SERVER_HOMES.slice(i + 1)) expect(Math.hypot(a.x - b.x, a.y - b.y)).toBeGreaterThan(100);
+    for (const home of SERVER_HOMES.slice(0, 4)) expect(home.x + 50 < DISPLAY.left || home.x - 50 > DISPLAY.right - 10, String(home.x)).toBe(true);
+    // Nobody waits in the doorway.
+    for (const home of SERVER_HOMES) expect(Math.abs(home.x - DOOR.x)).toBeGreaterThan(70);
+  });
+});
+
 describe('floors kitchen', () => {
   it('gives every kitchen station a place in the basement', () => {
     for (const station of [...Object.keys(STATION_SECONDS), 'door'] as Station[]) {
@@ -79,9 +142,14 @@ describe('floors kitchen', () => {
     expect(kitchenPlace('rack')).toBe('lift');
   });
 
-  it('puts a second cook beside the first, and their homes apart', () => {
-    expect(kitchenSpot('oven', 1).x).toBeGreaterThan(kitchenSpot('oven', 0).x);
-    expect(cookHome(0)).not.toEqual(cookHome(1));
+  it('never stands two of the three cooks in one place', () => {
+    for (const place of ['oven', 'dough', 'cold', 'dry', 'lift'] as KitchenPlace[]) {
+      const xs = [0, 1, 2].map(i => kitchenSpot(place, i).x).sort((a, b) => a - b);
+      expect(xs[1] - xs[0], place).toBeGreaterThanOrEqual(100);
+      expect(xs[2] - xs[1], place).toBeGreaterThanOrEqual(100);
+    }
+    const homes = [0, 1, 2].map(i => cookHome(i));
+    expect(new Set(homes.map(h => `${h.x},${h.y}`)).size).toBe(3);
   });
 });
 

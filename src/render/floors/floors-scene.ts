@@ -2,20 +2,20 @@
 // game's Sim. Nothing here decides anything: each frame it runs the page's tick, reads who is
 // doing what (queueing, ordering, at a table, brewing, carrying plates, baking), and walks each
 // person to the matching spot of floors-layout.ts. The Sim's own floor plan is shorter than the
-// stairs here, so people the Sim has already brought to their spot hurry to catch up.
+// stairs here, so people walk faster the further they have to go, to arrive about when the Sim does.
 import Phaser from 'phaser';
 import { formatMoney } from '../../game/format';
 import { CELL, COLS, WALL_ROWS, WALL_TOP, canPlace, cellFree, footprint, furnitureDef } from '../../game/furniture';
 import { FLOOR_Y, SCENE_W } from '../../game/layout';
 import { activeTableIndices, mainTableCount } from '../../game/regions';
-import type { Customer, Sim } from '../../game/sim';
+import { SERVER_SPEED, WALK_SPEED, type Customer, type Sim, type Walker } from '../../game/sim';
 import type { GameState } from '../../game/state';
 import type { CafeView } from '../cafe-view';
 import type { CafeHooks } from '../phaser/cafe-scene';
 import {
   BARISTAS, COUNTER_FRONT, DISPLAY, DOOR, FLOOR_ART, LIFT_HATCH, LIFT_TOP, OVEN_MOUTH, PASS, QUEUE, SERVER_HOMES, SERVICE, STEAM,
-  FRAME, FURNITURE_SPOTS, TABLE_FRONT, WORLD_W, building, cookHome, gameWallRectToPlate, kitchenPlace, kitchenSpot, plateToGameWall, route,
-  spotCell, spotOf, tableSeats, worldPoint,
+  FRAME, FURNITURE_SPOTS, TABLE_FRONT, WALK, WORLD_W, building, cookHome, gameWallRectToPlate, kitchenPlace, kitchenSpot, plateToGameWall,
+  restFocus, route, spotCell, spotOf, stepsLength, tableSeats, walkPace, worldPoint,
   type Building, type FloorId, type FloorPoint, type FurnitureSpot, type KitchenPlace, type Point, type Spot, type Step,
 } from './floors-layout';
 import { makeTextures } from './textures';
@@ -80,8 +80,14 @@ const SIDE_WINDOW = { x: 0, y: 40 } as const;
 const WALLS: Partial<Record<FloorId, string>> = { roof: 'frame/wall-attic', 'floor-3': 'frame/wall-seating', 'floor-2': 'frame/wall-seating', ground: 'frame/wall-ground' };
 /** The front walls stand in front of everyone inside, under the pillars, beams and awning. */
 const WALL_DEPTH = FRAME_DEPTH - 3;
-/** View pixels per second, and how much faster someone walks once the Sim has them there already. */
-const WALK = 240, HURRY = 2.2;
+/** How much faster than at a stroll their legs move at most, however fast the player runs the day. */
+const LEGS = 3;
+/** Seconds of play until the Sim has someone at the end of their way. */
+function simSeconds(w: Walker, speed: number): number {
+  let x = w.tx, y = w.ty, length = Math.hypot(w.tx - w.x, w.ty - w.y);
+  for (const p of w.via) { length += Math.hypot(p.x - x, p.y - y); x = p.x; y = p.y; }
+  return length / speed;
+}
 /** How far past its ends the building can be dragged, as a share of the screen. */
 const OVERSCROLL = 1 / 3;
 
@@ -98,6 +104,8 @@ interface Actor {
   cup?: Phaser.GameObjects.Image;
   clock: number;
   seen: boolean;
+  /** How many times a stroll they are walking at now; their legs keep up. */
+  rate: number;
   /** The guest's own look while it loads; `art` stands in meanwhile. */
   wants?: string;
 }
@@ -143,8 +151,12 @@ export class FloorsScene extends Phaser.Scene {
   /** Guest looks with their sheets and walks ready, and those on their way. */
   private looks = new Set<string>(GUEST_ART);
   private loadingLooks = new Set<string>();
-  /** World y at the middle of the screen; dragging moves it. */
-  private focusY = -1;
+  /** World y at the middle of the screen. */
+  private focusY = 0;
+  /** Whether the player (or something they asked to see) has moved the camera from where it rests. */
+  private moved = false;
+  /** How many times faster than real time the day runs; people walk at its speed. */
+  private tempo = 1;
   private dragY: number | null = null;
   /** Where a press started, in canvas pixels: a press that barely moves is a tap. */
   private pressAt: { x: number; y: number } | null = null;
@@ -213,6 +225,7 @@ export class FloorsScene extends Phaser.Scene {
     this.input.on('pointermove', (p: Phaser.Input.Pointer) => {
       if (this.dragY === null || !p.isDown) return;
       this.focusY -= (p.y - this.dragY) / this.cameras.main.zoom;
+      this.moved = true;
       this.dragY = p.y;
       this.frameCamera();
     });
@@ -225,7 +238,7 @@ export class FloorsScene extends Phaser.Scene {
       }
     });
     this.input.on('pointerupoutside', () => { this.dragY = this.pressAt = null; });
-    this.input.on('wheel', (_p: unknown, _over: unknown, _dx: number, dy: number) => { this.focusY += dy / this.cameras.main.zoom; this.frameCamera(); });
+    this.input.on('wheel', (_p: unknown, _over: unknown, _dx: number, dy: number) => { this.focusY += dy / this.cameras.main.zoom; this.moved = true; this.frameCamera(); });
 
     this.ready = true;
     this.status = 'drawing';
@@ -331,10 +344,8 @@ export class FloorsScene extends Phaser.Scene {
     const b = this.built;
     if (!b) return;
     const cam = this.cameras.main, view = cam.height / cam.zoom, half = view / 2;
-    // At rest the street is two thirds of the way down, with the floors above it and the street
-    // under the page's bottom bars; a small café shows its whole roof, clear of the page's top bar.
-    const rest = Math.min(b.street - view * .18, half - view * .1);
-    if (this.focusY < 0) this.focusY = rest;
+    const rest = restFocus(b, view);
+    if (!this.moved) this.focusY = rest;
     // The building can be dragged a third of a screen up into the sky, and down to its bottom.
     const slack = view * OVERSCROLL;
     const low = Math.min(rest, half) - slack, high = Math.max(rest, b.height - half) + slack / 3;
@@ -396,7 +407,10 @@ export class FloorsScene extends Phaser.Scene {
     const kitchen = next.offsets.basement !== undefined;
     this.tableFront.setVisible(kitchen);
     if (kitchen) this.tableFront.setY(worldPoint(next, { floor: 'basement', x: 0, y: 0 }).y).setDepth(worldPoint(next, TABLE_FRONT).y);
-    if (before && this.focusY >= 0) this.focusY += (next.offsets.ground ?? 0) - (before.offsets.ground ?? 0);
+    // A new branch starts small: the camera goes back to rest. A building that grows keeps the
+    // ground floor where the player put it on screen.
+    if (before && next.floors.length < before.floors.length) this.moved = false;
+    else if (before && this.moved) this.focusY += (next.offsets.ground ?? 0) - (before.offsets.ground ?? 0);
     this.built = next;
     this.resized();
     return next;
@@ -414,6 +428,7 @@ export class FloorsScene extends Phaser.Scene {
     this.showWalls(dt);
     const active = activeTableIndices(state);
     const step = this.view.paused ? 0 : dt;
+    this.tempo = state.phase === 'prep' ? 1 : state.speed;
     this.syncCustomers(b, active, step);
     this.syncBaristas(b, step);
     this.syncServers(b, active, step);
@@ -566,7 +581,7 @@ export class FloorsScene extends Phaser.Scene {
     if (!!arrange !== this.arranging) {
       this.arranging = !!arrange;
       // Arranging happens downstairs: bring the ground floor into view.
-      if (arrange && ground) { this.focusY = worldPoint(b, { floor: 'ground', x: 0, y: 500 }).y; this.frameCamera(); }
+      if (arrange && ground) { this.moved = true; this.focusY = worldPoint(b, { floor: 'ground', x: 0, y: 500 }).y; this.frameCamera(); }
     }
     let ghost = arrange?.mode === 'place' ? this.view.ghost : null;
     const def = ghost ? furnitureDef(ghost.id) : undefined;
@@ -663,7 +678,7 @@ export class FloorsScene extends Phaser.Scene {
 
   private makeActor(art: string, at: Spot, goal: string): Actor {
     const sprite = this.add.sprite(0, 0, art, SIDE.front).setOrigin(.5, 1);
-    return { sprite, art, at: { floor: at.floor, x: at.x, y: at.y }, aisle: at.aisle, steps: [], goal, clock: Math.random() * 3, seen: true };
+    return { sprite, art, at: { floor: at.floor, x: at.x, y: at.y }, aisle: at.aisle, steps: [], goal, clock: Math.random() * 3, seen: true, rate: 1 };
   }
 
   /** Plans a walk to the goal's spot whenever the goal changes. */
@@ -674,9 +689,10 @@ export class FloorsScene extends Phaser.Scene {
     actor.aisle = spot.aisle;
   }
 
-  /** Walks along the steps; returns how the actor is heading, or null once there. */
-  private walk(actor: Actor, dt: number, hurry: boolean): Way | null {
-    let left = WALK * (hurry ? HURRY : 1) * dt, way: Way | null = null;
+  /** Walks along the steps, to arrive with the Sim in `seconds` of play; returns how the actor is heading, or null once there. */
+  private walk(actor: Actor, dt: number, seconds: number): Way | null {
+    actor.rate = walkPace(stepsLength(actor.at, actor.steps), seconds) * this.tempo;
+    let left = WALK * actor.rate * dt, way: Way | null = null;
     while (actor.steps.length) {
       const next = actor.steps[0];
       if (next.jump) {
@@ -696,12 +712,13 @@ export class FloorsScene extends Phaser.Scene {
     // Fade out climbing into the floor above, or leaving through the door; fade in on arrival.
     const [first, second] = actor.steps;
     const distance = first ? Math.hypot(first.x - actor.at.x, first.y - actor.at.y) : 0;
-    const alpha = second?.jump ? distance / 140 : first?.fadeOut && actor.steps.length === 1 ? distance / 120 : actor.sprite.alpha + dt * 3;
+    const alpha = second?.jump ? distance / 140 : first?.fadeOut && actor.steps.length === 1 ? distance / 120 : actor.sprite.alpha + dt * 3 * actor.rate;
     actor.sprite.setAlpha(Phaser.Math.Clamp(alpha, 0, 1));
     return way;
   }
 
-  private play(actor: Actor, key: string): void {
+  private play(actor: Actor, key: string, rate = 1): void {
+    actor.sprite.anims.timeScale = Math.min(LEGS, rate);
     if (actor.sprite.anims.currentAnim?.key !== key || !actor.sprite.anims.isPlaying) actor.sprite.play(key);
   }
 
@@ -776,8 +793,8 @@ export class FloorsScene extends Phaser.Scene {
     for (const [id, actor] of this.customers) {
       if (actor.seen) continue;
       this.aim(actor, 'door', { ...DOOR, fadeOut: true });
-      const way = this.walk(actor, dt, true);
-      if (way) this.play(actor, `${actor.art}-${way}`);
+      const way = this.walk(actor, dt, 0);
+      if (way) this.play(actor, `${actor.art}-${way}`, actor.rate);
       this.place(b, actor, !!actor.cup);
       if (!actor.steps.length) { this.remove(actor); this.customers.delete(id); this.moods.delete(id); }
     }
@@ -786,16 +803,15 @@ export class FloorsScene extends Phaser.Scene {
   private poseCustomer(b: Building, actor: Actor, c: Customer, active: readonly number[], dt: number): void {
     // A newcomer waits unseen where they are for their own look, then borrows one; they catch up after.
     if (actor.wants && actor.clock < LOOK_WAIT && c.phase !== 'exiting') {
-      actor.clock += dt;
+      actor.clock += dt * this.tempo;
       actor.sprite.setAlpha(0);
       this.place(b, actor, false);
       return;
     }
-    const there = Math.hypot(c.tx - c.x, c.ty - c.y) < 1 && !c.via.length;
-    const way = this.walk(actor, dt, there);
+    const way = this.walk(actor, dt, simSeconds(c, WALK_SPEED));
     const takeaway = c.phase === 'exiting' && c.hasCup && !c.dineIn;
     if (way) {
-      this.play(actor, `${actor.art}-${way}`);
+      this.play(actor, `${actor.art}-${way}`, actor.rate);
     } else {
       actor.sprite.stop();
       actor.clock += dt;
@@ -859,9 +875,8 @@ export class FloorsScene extends Phaser.Scene {
         }
       }
       this.aim(actor, goal, spot);
-      const there = Math.hypot(server.tx - server.x, server.ty - server.y) < 1 && !server.via.length;
-      const way = this.walk(actor, dt, there);
-      if (way) this.play(actor, 'barista-side');
+      const way = this.walk(actor, dt, simSeconds(server, SERVER_SPEED));
+      if (way) this.play(actor, 'barista-side', actor.rate);
       else { actor.sprite.stop(); actor.sprite.setTexture('barista', server.phase === 'idle' ? SIDE.front : SIDE.side); }
       this.place(b, actor, server.phase === 'delivering');
     });
@@ -879,8 +894,8 @@ export class FloorsScene extends Phaser.Scene {
       const station = this.sim.cookStation(i);
       const place: KitchenPlace | null = station ? kitchenPlace(station.station) : null;
       this.aim(actor, place ? `station-${place}` : 'home', place ? kitchenSpot(place, i) : cookHome(i));
-      const way = this.walk(actor, dt, !!station?.working);
-      if (way) this.play(actor, `${art}-${cook.batch ? 'carry' : 'side'}`);
+      const way = this.walk(actor, dt, simSeconds(cook, WALK_SPEED));
+      if (way) this.play(actor, `${art}-${cook.batch ? 'carry' : 'side'}`, actor.rate);
       else if (station?.working && place === 'oven' && art === 'cook-chef') { this.play(actor, 'cook-chef-oven'); actor.sprite.setFlipX(false); }
       else if (station?.working && place === 'dough' && art === 'cook-scarf') { this.play(actor, 'cook-scarf-knead'); actor.sprite.setFlipX(false); }
       else { actor.sprite.stop(); actor.sprite.setTexture(art, station?.working ? SIDE.back : SIDE.front).setFlipX(false); }

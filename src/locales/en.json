@@ -574,6 +574,7 @@
   "area.kitchen.short": "Kitchen",
   "area.kitchen.kicker": "BACK OF HOUSE",
   "area.kitchen.desc": "Start with a compact bakery kitchen. A staff-only doorway behind the bar leads straight to pickup. Expand twice in Upgrades for more floor space and cooks; new equipment arrives as your menu grows.",
+  "area.kitchen.below": "Build a small kitchen under the café. A food lift brings each batch up to the counter; expand it twice in Upgrades to add cooks. A richer menu brings more equipment.",
   "area.kitchen.cook": "+1 cook",
   "area.kitchen.fresh": "Fresh bakes all day",
   "area.kitchen.unlock": "Build the kitchen",

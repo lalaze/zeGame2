@@ -35,7 +35,9 @@ export class RoomViewport {
   private wasOverview = false;
   constructor(private canvas: HTMLCanvasElement, private stage: HTMLElement,
     private enabled: () => boolean, private context: () => string, private overview?: RoomOverview,
-    private defaultZoom: () => number = () => 1) {
+    private defaultZoom: () => number = () => 1,
+    /** Whether the room can be magnified; without it the street button still works. */
+    private zoomable: () => boolean = () => true) {
     this.previousTouchAction = canvas.style.touchAction;
     canvas.style.touchAction = 'none';
     this.controls.className = 'room-zoom-controls';
@@ -47,8 +49,8 @@ export class RoomViewport {
     }
     this.stage.append(this.controls);
     const signal = this.abort.signal;
-    this.plus.addEventListener('click', () => { if (enabled() && !this.overview?.isActive()) this.setZoom(this.zoom + .5); }, { signal });
-    this.minus.addEventListener('click', () => { if (enabled() && !this.overview?.isActive()) this.setZoom(this.zoom - .5); }, { signal });
+    this.plus.addEventListener('click', () => { if (enabled() && zoomable() && !this.overview?.isActive()) this.setZoom(this.zoom + .5); }, { signal });
+    this.minus.addEventListener('click', () => { if (enabled() && zoomable() && !this.overview?.isActive()) this.setZoom(this.zoom - .5); }, { signal });
     this.resetButton.addEventListener('click', () => {
       if (!this.enabled()) return;
       this.overview?.toggle();
@@ -78,7 +80,7 @@ export class RoomViewport {
   private onResize = () => this.reset();
   private cancel = () => { this.points.clear(); this.gestureContext = null; this.dragStart = null; this.dragging = false; };
   private down = (event: PointerEvent) => {
-    if (event.pointerType !== 'touch' || event.target !== this.canvas || !this.enabled() || this.overview?.isActive()) return;
+    if (event.pointerType !== 'touch' || event.target !== this.canvas || !this.enabled() || !this.zoomable() || this.overview?.isActive()) return;
     if (!this.points.size) { this.gestureContext = this.context(); this.dragStart = { x: event.clientX, y: event.clientY }; this.dragging = false; }
     this.points.set(event.pointerId, { x: event.clientX, y: event.clientY });
   };
@@ -142,8 +144,9 @@ export class RoomViewport {
       this.resetButton.setAttribute('aria-pressed', String(overview));
     }
     this.resetButton.disabled = !enabled;
-    this.minus.disabled = !enabled || overview || this.zoom <= 1;
-    this.plus.disabled = !enabled || overview || this.zoom >= MAX_ROOM_ZOOM;
+    const zooms = enabled && !overview && this.zoomable();
+    this.minus.disabled = !zooms || this.zoom <= 1;
+    this.plus.disabled = !zooms || this.zoom >= MAX_ROOM_ZOOM;
   }
   destroy(): void {
     this.abort.abort(); this.cancel(); this.controls.remove();
