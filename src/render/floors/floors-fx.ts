@@ -15,7 +15,8 @@ export const FX_FRAMES = [
   'bubble', 'thought', 'bubble-wide', 'heart', 'rain', 'bang', 'cross', 'hourglass',
   'sparkle', 'puff', 'coin', 'tip', 'bell', 'crown', 'drop', 'bread',
   'cue-recommend', 'cue-greet', 'cue-cat', 'cue-photo', 'cue-delivery', 'tent', 'tray',
-  'takeaway', 'bag', 'cup', 'tray-cups', 'jar',
+  'takeaway', 'bag', 'cup', 'tray-cups', 'jar-0', 'jar-1', 'jar-2', 'order-office', 'order-tea', 'order-banquet',
+  'spill', 'parcel', 'reserved', 'map-quiet', 'map-milky',
 ] as const;
 export type FxFrame = typeof FX_FRAMES[number];
 

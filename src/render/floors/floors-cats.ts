@@ -23,6 +23,7 @@ import {
   type CatPlace, type CatPlan, type CatStep, type CatsManifest,
 } from './floors-cat-places';
 import { IN_WELL_DEPTH } from './floors-decor-layers';
+import { FX } from './floors-fx';
 import { inWell, wellSink, worldPoint, type Building, type FloorPoint, type Point } from './floors-layout';
 
 /** Where each pose is in a breed's strip (CAT_FRAMES). */
@@ -34,6 +35,8 @@ const sheetKey = (breed: string) => `cats/${breed}`;
 const giftKey = (kind: string) => `cats/gift-${kind}`;
 /** Plate pixels a second: a playful cat trots, a quiet one ambles. */
 const SPEED: Record<CatPersonality, number> = { playful: 190, quiet: 120, affectionate: 150 };
+/** How far before its paws the cup a cat knocked over lies. */
+const SPILL_REACH = 62;
 /** How wide a waiting gift is drawn. */
 const GIFT_SIZE = 72;
 /** Just over the terrace's plate, under everything that stands on it. */
@@ -74,6 +77,8 @@ export class FloorsCats {
   private cats = new Map<CatId, Cat>();
   private visitor: Cat | null = null;
   private gifts = new Map<number, Gift>();
+  /** The cup the cat of the moment knocked over. */
+  private spill: { spot: object; at: FloorPoint; over: number; image: Phaser.GameObjects.Image } | null = null;
   private patches: Phaser.GameObjects.Image[] = [];
   private requested = new Set<string>();
   private places: CatPlace[] = [];
@@ -144,6 +149,7 @@ export class FloorsCats {
     this.syncVisitor(b, dt, state);
     this.syncGifts(b);
     this.syncMoment();
+    this.syncSpill(b);
     this.showSelection(b);
     for (const tip of this.view.tips.splice(0)) this.coins(tip.x, tip.y, tip.amount);
   }
@@ -217,6 +223,8 @@ export class FloorsCats {
     // A petted cat stops to enjoy it, unless it is in mid-jump or on the stairs.
     if (moving && !(cat.happy && !cat.hop && cat.alpha >= 1)) { this.walk(cat, dt, SPEED[prefs.personality]); return; }
     if (moving || cat.happy) return;
+    // It stays by the cup it knocked over.
+    if (this.culprit() === cat) return;
     // Out of supplies a cat sleeps where it can, until it is cared for again.
     if (resting && cat.plan === 'nap' && cat.place.naps) return;
     cat.timer -= dt;
@@ -277,7 +285,7 @@ export class FloorsCats {
     const moving = cat.steps.length > 0 || !!cat.hop;
     // The jump's arc, and a little squash of breath in a sleeping cat.
     const lift = cat.hop ? Math.sin(Math.PI * cat.hop.t) * (36 + Math.hypot(cat.hop.to.x - cat.hop.from.x, cat.hop.to.y - cat.hop.from.y) * .18) : 0;
-    const culprit = this.view.moment?.kind === 'cat' && this.view.moment.spot?.catId === cat.id;
+    const culprit = this.culprit() === cat;
     const asleep = !moving && !cat.happy && !culprit && (resting || cat.plan === 'nap');
     let breathe = 1;
     if (cat.hop) { sprite.anims.stop(); sprite.setFrame(cat.hop.t < .5 ? FRAME.walk[0] : FRAME.walk[2]).setFlipX(cat.facingLeft); }
@@ -382,16 +390,40 @@ export class FloorsCats {
     return hits.length ? { kind: 'cat', id: hits[0].cat.id ?? undefined } : null;
   }
 
-  /** Where the cat moment's cue floats: over the cat that made the mess, or the visiting cat. */
-  momentPoint(moment: { kind: string; spot?: { catId?: string } }): Point | null {
-    if (moment.kind !== 'cat') return null;
-    const cat = this.cats.get(moment.spot?.catId as CatId) ?? this.visitor ?? [...this.cats.values()][0];
+  /** The cat that made the mess, or the visiting cat. */
+  private culprit(): Cat | null {
+    const moment = this.view.moment;
+    if (moment?.kind !== 'cat') return null;
+    return this.cats.get(moment.spot?.catId as CatId) ?? this.visitor ?? [...this.cats.values()][0] ?? null;
+  }
+
+  /** Where the cat moment's cue floats: over that cat. */
+  momentPoint(): Point | null {
+    const cat = this.culprit();
     return cat ? this.head(cat) : null;
+  }
+
+  /** The cup it knocked over lies before its paws until it is tidied up (or the moment passes). */
+  private syncSpill(b: Building): void {
+    const cat = this.culprit(), spot = this.view.moment?.spot ?? null;
+    if (this.spill && (!cat || this.spill.spot !== spot)) {
+      const gone = this.spill.image;
+      this.scene.tweens.add({ targets: gone, alpha: 0, duration: 260, onComplete: () => gone.destroy() });
+      this.spill = null;
+    }
+    if (!cat || !spot || !this.scene.textures.exists(FX) || !cat.sprite) return;
+    if (!this.spill && !cat.hop && cat.sprite.alpha > .5) {
+      const at = { ...cat.at, x: cat.at.x + (cat.facingLeft ? -1 : 1) * SPILL_REACH, y: cat.at.y + 4 };
+      this.spill = { spot, at, over: cat.sprite.depth - worldPoint(b, cat.at).y, image: this.scene.add.image(0, 0, FX, 'spill').setOrigin(.5, 1).setFlipX(cat.facingLeft) };
+    }
+    if (!this.spill || b.offsets[this.spill.at.floor] === undefined) return;
+    const at = worldPoint(b, this.spill.at);
+    this.spill.image.setPosition(at.x, at.y).setDepth(at.y + this.spill.over + .3);
   }
 
   /** Tells the page where the cat moment is, so the coins it pays pop there (CafeView.tipAtMoment). */
   private syncMoment(): void {
-    const moment = this.view.moment, at = moment?.kind === 'cat' ? this.momentPoint(moment) : null;
+    const at = this.momentPoint();
     if (at) this.view.momentTarget = { x: at.x, y: at.y - 30, w: 0, h: 0 };
     else if (this.cued) this.view.momentTarget = null;
     this.cued = !!at;

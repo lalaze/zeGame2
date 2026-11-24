@@ -140,6 +140,8 @@ export const stairsOf = (floor: FloorId) => STAIRS[floor];
  * tables: guests walk in from the street here and leave the same way.
  */
 export const DOOR = spot('ground', 836, 935, GROUND_AISLE);
+/** Where a supplier leaves a parcel: on the front step, beside the mat. */
+export const PARCEL: FloorPoint = { floor: 'ground', x: 986, y: 932 };
 /** Today's menu on its board, on the street by the right-hand door: its foot below street level, and its size. */
 export const BOARD = { x: 1546, y: 134, w: 210, h: 244 } as const;
 /** The middle of the blank hanging sign on the ground floor's front wall (pixels of build/frame/wall-ground.webp), and the cup on it. */

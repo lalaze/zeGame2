@@ -1,0 +1,14 @@
+Image 1 is the approved art direction of this cozy café game. Image 2 is the café's ground floor. Image 3 shows small props already painted for it: match their line work, colours, shading and high viewing angle exactly; the glass tip jar at the end of its bottom row is the jar to draw here. Paint small props that stand on the café's counter, tables and floor in exactly that style: soft hand-drawn illustration, thin warm-brown outlines, gentle low-saturation colours, soft shading with warm light from the upper left, seen from a high angle (about 35 degrees down). Each one is centred in its cell and fills most of the cell, with a bold, simple silhouette that still reads when shown 24 pixels wide.
+
+Sprite sheet: one square image with a fully transparent background, EXACTLY 3 columns and 3 rows of equal cells, 9 separate objects. Each object is fully inside its own cell with clear empty space around it; nothing touches or overlaps a neighbour. No table or counter under them, no cast shadows, no labels, no numbers, no grid lines, no backdrop. Keep any writing out: no letters or words anywhere, except the one letter named below. Crisp edges with no pale halo.
+
+Cells left to right along the top row, then the middle row, then the bottom row. The three jars are the same glass jar at the same size and angle, each with the same small dusty-pink heart tag:
+1. The glass tip jar almost empty: only three gold coins lie on its bottom.
+2. The same glass tip jar half full of gold coins.
+3. The same glass tip jar filled to the brim, gold coins heaped up above its rim and one coin leaning against its foot.
+4. A small catering order ready to collect: a kraft-brown cardboard carrier holding four cream takeaway coffee cups with white lids, a folded-over kraft paper bag behind it.
+5. A catering order for tea: two flat cream pastry boxes stacked on each other, tied together with a sage-green ribbon and a bow on top.
+6. A big catering order for a party: three large kraft-brown food boxes stacked up, tied with string, a cream cake box on top with a dusty-pink ribbon and bow.
+7. A cream ceramic coffee cup knocked over on its side, a puddle of brown coffee running out of it, its saucer beside it.
+8. A brown cardboard parcel standing on the floor, sealed with tape, tied with string, a small sage-green leaf sticker on its front.
+9. A folded cream reservation card standing up like a small tent, a single sage-green hand-painted capital letter M on its front, and a short yellow pencil lying in front of it.

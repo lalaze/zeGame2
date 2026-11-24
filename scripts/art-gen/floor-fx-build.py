@@ -3,9 +3,9 @@
 
     uv run --with pillow --with numpy python scripts/art-gen/floor-fx-build.py [--inputs]
 
-Reads the fx sheets (kits/fx/<sheet>/take-N/sheet.png, prompts in prompts/fx/): 4 by 2 separate
-objects on transparency, in the order SHEETS names them, each scaled so its longer side is the
-size given (pixels of the building, where a guest is about 190 tall). Writes
+Reads the fx sheets (kits/fx/<sheet>/take-N/sheet.png, prompts in prompts/fx/): separate objects on
+transparency, in the order SHEETS names them, each scaled so its longer side is the size given
+(pixels of the building, where a guest is about 190 tall). Writes
 
   build/fx/fx.webp, fx.json        every prop and effect in one atlas (Phaser's JSON hash)
   build/fx/items.webp, items.json  every menu picture of build/icons (item-*, sig-*) at ITEM
@@ -44,8 +44,12 @@ SHEETS = {
     'bubbles': (1, 4, 2, [('bubble', 156), ('thought', 176), ('bubble-wide', 250), ('heart', 72), ('rain', 92), ('bang', 96), ('cross', 96), ('hourglass', 92)]),
     'effects': (1, 4, 2, [('sparkle', 64), ('puff', 72), ('coin', 60), ('tip', 92), ('bell', 80), ('crown', 62), ('drop', 46), ('bread', 76)]),
     'cues': (1, 4, 2, [('cue-recommend', 92), ('cue-greet', 92), ('cue-cat', 92), ('cue-photo', 92), ('cue-delivery', 92), ('tent', 52), ('plate', 66), ('tray', 118)]),
-    'tableware': (1, 4, 2, [('takeaway', 60), ('bag', 70), ('cup', 56), ('dough', 96), ('baked', 96), ('stand', 100), ('tray-cups', 112), ('jar', 70)]),
+    'tableware': (1, 4, 2, [('takeaway', 60), ('bag', 70), ('cup', 56), ('dough', 96), ('baked', 96), ('stand', 100), ('tray-cups', 112), (None, 70)]),
+    # The jar is drawn at three levels in its own sheet; the sizes keep its glass the same.
+    'props': (1, 3, 3, [('jar-0', 74), ('jar-1', 74), ('jar-2', 79), ('order-office', 104), ('order-tea', 92), ('order-banquet', 116), ('spill', 74), ('parcel', 100), ('reserved', 64)]),
 }
+# Mina's map, as it hangs in the café: the pictures the dialogs show of it.
+MAPS, MAP_SIZE = {'map-quiet': 'wish-quiet', 'map-milky': 'wish-milky'}, 104
 # Menu pictures are cut down once here, so the game never scales a 160 pixel icon to a table.
 ITEM = 72
 ITEM_COLUMNS = 10
@@ -92,10 +96,15 @@ def fx():
         path = source(f'{P}/kits/fx/{sheet_name}/take-{take}/sheet.png')
         cut = furniture.cells(np.asarray(Image.open(path).convert('RGBA')), cols, rows)
         for (name, side), piece in zip(names, cut):
+            if name is None:
+                continue
             if piece is None:
                 raise SystemExit(f'{sheet_name}: no object for {name}')
             pieces.append((name, fit(Image.fromarray(piece, 'RGBA'), side)))
         print(sheet_name, 'take', take, len(names))
+    for name, icon in MAPS.items():
+        image = Image.open(f'{P}/build/icons/{icon}.webp').convert('RGBA')
+        pieces.append((name, fit(image.crop(image.getchannel('A').point(lambda a: 255 if a > 24 else 0).getbbox()), MAP_SIZE)))
     atlas, frames = pack(pieces, 768)
     save(atlas, frames, 'fx')
     print(len(pieces), 'fx frames', atlas.size)

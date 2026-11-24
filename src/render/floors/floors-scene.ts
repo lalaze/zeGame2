@@ -13,7 +13,7 @@ import type { CafeView } from '../cafe-view';
 import type { CafeHooks } from '../phaser/cafe-scene';
 import {
   BARISTAS, COUNTER_FRONT, DISPLAY, DOOR, FLOOR_ART, LIFT_HATCH, LIFT_TOP, OVEN_MOUTH, PASS, QUEUE, SERVER_HOMES, SERVICE, STEAM,
-  FRAME, FURNITURE_SPOTS, TABLE_FRONT, WALK, WORLD_W, building, cookHome, furnitureSpot, kitchenPlace, kitchenSpot,
+  FRAME, FURNITURE_SPOTS, PARCEL, TABLE_FRONT, WALK, WORLD_W, building, cookHome, furnitureSpot, kitchenPlace, kitchenSpot,
   GROUND_SHIFT, STAIRS_HALL, STAIRS_RAIL, inWell, nextTableSpot, restFocus, route, stepsLength, tableSeats, walkPace, wellSink, worldPoint,
   type Building, type FloorId, type FloorPoint, type FurnitureSpot, type KitchenPlace, type Spot, type Step,
 } from './floors-layout';
@@ -545,8 +545,8 @@ export class FloorsScene extends Phaser.Scene {
     if (moment?.customerId !== undefined) {
       const actor = this.customers.get(moment.customerId);
       if (actor && actor.sprite.alpha > .5) at = this.head(actor);
-    } else if (moment?.kind === 'delivery') at = worldPoint(b, { floor: 'ground', x: DOOR.x + 30, y: DOOR.y - 250 });
-    else if (moment) at = this.cats.momentPoint(moment) ?? worldPoint(b, { floor: 'roof', x: 790, y: 560 });
+    } else if (moment?.kind === 'delivery') at = worldPoint(b, { ...PARCEL, y: PARCEL.y - 108 });
+    else if (moment) at = this.cats.momentPoint() ?? worldPoint(b, { floor: 'roof', x: 790, y: 560 });
     if (!at) { this.cue?.setVisible(false); return; }
     this.cue ??= this.add.image(0, 0, 'bubble-moment').setOrigin(.5, 1).setDepth(100002).setScale(1.5);
     this.cue.setVisible(true).setPosition(at.x, at.y - 14 * Math.abs(Math.sin(this.time.now / 260)));

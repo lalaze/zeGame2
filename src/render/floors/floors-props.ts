@@ -1,17 +1,21 @@
 // What people order, carry and think in the floors view, in its painted art (floors-fx.ts): the
 // drink or pastry in front of each seated guest, the tray a server carries, takeaway cups, finished
-// orders and the bell on the counter, the cake display filled with what is in stock, the order
-// bubbles and thoughts over heads, and the coins, tips and sparkles the page asks for.
+// orders, the tip jar and the bell on the counter, a catering order waiting there, the cake display
+// filled with what is in stock, a parcel at the door, Mina's map and reserved table, the order bubbles
+// and thoughts over heads, and the coins, tips and sparkles the page asks for.
 // The scene (floors-scene.ts) walks everyone; this only reads where they are and what the Sim says.
 import Phaser from 'phaser';
 import { menuItems } from '../../game/economy';
 import { formatMoney } from '../../game/format';
+import { orderReady } from '../../game/orders';
+import { minaMapChoice, minaReservedTable } from '../../game/regular-wishes';
 import type { Customer, Sim } from '../../game/sim';
 import type { GameState } from '../../game/state';
 import { outerWallShown } from '../../ui/floors-ui';
 import type { CafeView } from '../cafe-view';
+import { tillJarLevel } from '../idle-props-art';
 import { FX, FX_CASE, FX_ITEMS, cueTexture, isDrinkItem, isHotDrink, itemFrame, loadFx, type FxFrame } from './floors-fx';
-import { BARISTAS, COUNTER_FRONT, DISPLAY, LIFT_HATCH, LIFT_TOP, SERVICE, tableSeats, worldPoint, type Building, type FloorPoint } from './floors-layout';
+import { BARISTAS, COUNTER_FRONT, DISPLAY, LIFT_HATCH, LIFT_TOP, PARCEL, SERVICE, tableSeats, worldPoint, type Building, type FloorPoint } from './floors-layout';
 
 /** What this needs of one of the scene's walkers. */
 export interface PropActor {
@@ -42,8 +46,11 @@ const SEATED = { sit: 8, hold: 9, sip: 10, laugh: 11 } as const;
 const SIP_CYCLE = { all: 7, table: 3.4, hold: 4.3, sip: 5.5 } as const;
 /** Where things stand on a table, from a seat (plate pixels): the table top's near half, towards the guest. */
 const TABLE = { top: -84, near: 62, single: 46, far: 28, size: 56 } as const;
-/** The ground floor's counter (plate pixels): its top's front edge, the pass beside the display, the bell and the tip jar. */
-const COUNTER = { top: 375, pass: [872, 914, 728], bell: 1066, jar: 742, size: 50 } as const;
+/**
+ * The ground floor's counter (plate pixels): its top's front edge, the pass beside the display, the bell,
+ * the tip jar, a catering order at its left end, and Mina's map hanging on its front.
+ */
+const COUNTER = { top: 375, pass: [872, 914, 728], bell: 1066, jar: 742, order: 520, map: { x: 560, y: 492 }, size: 50 } as const;
 /**
  * The cake display on the ground floor's plate: where its emptied picture goes (floor-fx-build.py
  * CASE, 24 rows lower on the plate than in its layer) and where baked goods stand on its shelves.
@@ -160,7 +167,9 @@ export class FloorsProps {
       }
       if (heads && actor.sprite.visible && actor.sprite.alpha > .6) this.overHead(c, actor);
     }
-    this.onCounter(b, steaming);
+    this.onCounter(b, state, steaming);
+    this.reserved(b, state, active);
+    this.parcel(b);
     this.trays(heads);
     this.batches(heads);
     this.display(b, state);
@@ -248,11 +257,34 @@ export class FloorsProps {
     }
   }
 
-  /** On the counter: the tip jar, the bell, each barista's order as it is finished, and plates waiting on the pass. */
-  private onCounter(b: Building, steaming: boolean): void {
+  /** Mina's table, kept for her until she has sat there. */
+  private reserved(b: Building, state: GameState, active: readonly number[]): void {
+    const table = minaReservedTable(state);
+    if (table === null || !active.includes(table)) return;
+    const [left, right] = tableSeats(table, active);
+    const at = worldPoint(b, { floor: left.floor, x: (left.x + right.x) / 2 + 48, y: left.y + TABLE.top + 12 });
+    this.show('reserved', FX, 'reserved', at.x, at.y, worldPoint(b, left).y + .6);
+  }
+
+  /** The supplier's parcel waits on the front step until it is signed for or taken back. */
+  private parcel(b: Building): void {
+    if (this.view.moment?.kind !== 'delivery') return;
+    const at = worldPoint(b, PARCEL);
+    this.show('parcel', FX, 'parcel', at.x, at.y, at.y);
+  }
+
+  /**
+   * On the counter: the tip jar, the bell, a catering order waiting to go, each barista's order as it is
+   * finished, and plates waiting on the pass; on its front, Mina's map once she has brought it.
+   */
+  private onCounter(b: Building, state: GameState, steaming: boolean): void {
     if (b.offsets.ground === undefined) return;
     const depth = worldPoint(b, COUNTER_FRONT).y + .5, y = worldPoint(b, { floor: 'ground', x: 0, y: COUNTER.top }).y;
-    this.show('jar', FX, 'jar', COUNTER.jar, y, depth);
+    const now = Date.now();
+    this.show('jar', FX, `jar-${tillJarLevel(state, now)}`, COUNTER.jar, y, depth);
+    if (state.orders.active && orderReady(state, now)) this.show('order', FX, `order-${state.orders.active.kind}`, COUNTER.order, y, depth);
+    const map = minaMapChoice(state);
+    if (map) this.show('map', FX, `map-${map}`, COUNTER.map.x, worldPoint(b, { floor: 'ground', ...COUNTER.map }).y, depth);
     const rung = (this.scene.time.now - this.bellRang) / 1000;
     this.show('bell', FX, 'bell', COUNTER.bell, y, depth).setScale(.7).setAngle(rung < .6 ? 14 * Math.sin(rung * 42) * (1 - rung / .6) : 0);
     this.sim.baristas.forEach((barista, i) => {

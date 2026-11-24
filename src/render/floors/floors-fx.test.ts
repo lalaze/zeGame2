@@ -2,7 +2,9 @@ import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { MENU } from '../../game/data';
 import type { MomentKind } from '../../game/moments';
+import { ORDERS } from '../../game/orders';
 import { PROMOTION_PLANS } from '../../game/promotion';
+import { isMinaWishChoice } from '../../game/regular-wishes';
 import { ROOM_PROJECTS } from '../../game/room-projects';
 import { SIGNATURE_BASES } from '../../game/signature-drinks';
 import { CUE_KINDS, FX_FRAMES, SIGNATURE_BASE_ART, isDrinkItem, isHotDrink, itemFrame } from './floors-fx';
@@ -38,6 +40,20 @@ describe.skipIf(!fx || !items || !icons)('floors props and effects art', () => {
     const kinds: Record<MomentKind, true> = { recommend: true, greet: true, cat: true, photo: true, delivery: true };
     expect([...CUE_KINDS].sort()).toEqual(Object.keys(kinds).sort());
     expect(CUE_KINDS.filter(kind => !fx!.frames[`cue-${kind}`])).toEqual([]);
+  });
+
+  it('has a jar for every level, an order of every kind and both of Mina\'s maps', () => {
+    const frames = new Set<string>(FX_FRAMES);
+    expect(([0, 1, 2] as const).filter(level => !frames.has(`jar-${level}`))).toEqual([]);
+    expect(ORDERS.filter(order => !frames.has(`order-${order.id}`))).toEqual([]);
+    const choices = ['quiet', 'milky'];
+    expect(choices.every(isMinaWishChoice)).toBe(true);
+    expect(choices.filter(choice => !frames.has(`map-${choice}`))).toEqual([]);
+    // The glass of the jars is one size, so it does not jump as it fills.
+    const jar = (level: number) => fx!.frames[`jar-${level}`].frame;
+    expect(Math.abs(jar(0).w - jar(1).w)).toBeLessThanOrEqual(2);
+    expect(Math.abs(jar(1).w - jar(2).w)).toBeLessThanOrEqual(4);
+    expect(jar(2).h).toBeGreaterThan(jar(1).h);
   });
 
   it('pictures every menu item and every signature base, as an icon and at table size', () => {

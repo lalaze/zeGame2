@@ -1,7 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { STATION_SECONDS, type Station } from '../../game/kitchen';
 import { BUILDING_SPOTS } from '../../game/building-spots';
-import { BARISTAS, CATCH_UP, DISPLAY, DOOR, FLOOR_ART, FRAME, FURNITURE_SPOTS, QUEUE, SERVER_HOMES, SERVICE, STAIRS_HALL, STAIRS_RAIL, WALK, WORLD_W, building, cookHome, inWell, kitchenPlace, kitchenSpot, restFocus, route, stairsOf, stepsLength, tableSeats, walkPace, wellSink, worldPoint, type KitchenPlace } from './floors-layout';
+import { BARISTAS, CATCH_UP, DISPLAY, DOOR, FLOOR_ART, FRAME, FURNITURE_SPOTS, PARCEL, QUEUE, SERVER_HOMES, SERVICE, STAIRS_HALL, STAIRS_RAIL, WALK, WORLD_W, building, cookHome, inWell, kitchenPlace, kitchenSpot, restFocus, route, stairsOf, stepsLength, tableSeats, walkPace, wellSink, worldPoint, type KitchenPlace } from './floors-layout';
+
+describe('a parcel at the door', () => {
+  it('stands on the front step, beside where guests come and go', () => {
+    expect(PARCEL.floor).toBe(DOOR.floor);
+    expect(Math.abs(PARCEL.y - DOOR.y)).toBeLessThan(10);
+    expect(Math.abs(PARCEL.x - DOOR.x)).toBeGreaterThan(120);
+  });
+});
 
 describe('floors building', () => {
   it('opens a floor above for tables three to five and another for six to eight, and a basement with the kitchen', () => {

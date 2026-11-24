@@ -206,14 +206,14 @@ the portraits through `src/ui/cat-art.ts`. `floors-cats.test.ts` checks the art 
 ## Food, tableware, bubbles and effects
 
 What people order, carry and think is painted too (`kits/fx`, prompts in `prompts/fx/`: `common.txt`
-followed by the sheet's own list). Four sheets of 4×2 separate objects, all take 1:
+followed by the sheet's own list). Four sheets of 4×2 separate objects and one of 3×3, all take 1:
 
 | Sheet | Holds |
 | --- | --- |
 | `bubbles` | Empty speech, thought and wide speech bubbles, heart, rain cloud, exclamation mark, cross, hourglass |
 | `effects` | Sparkle, steam puff, coin, tip, service bell, crown, teardrop, loaf |
 | `cues` | The five moment signs (menu card, wave, paw, camera, parcel), table tent, plate, tray |
-| `tableware` | Takeaway cup, bakery bag, cup and saucer, dough and baked trays, cake stand, tray of cups, tip jar |
+| `tableware` | Takeaway cup, bakery bag, cup and saucer, dough and baked trays, cake stand, tray of cups, an older tip jar (not used) |
 
 `kits/fx/case-empty/take-1/case.png` is the ground floor's cake display repainted with bare shelves
 (`prompts/fx/case-empty.txt`, drawn from `kits/fx/case-empty/input.png`: the display cut from the
@@ -223,6 +223,11 @@ plate onto magenta, which `--inputs` writes).
       --prompt=assets/generated/floor-sample-v1/prompts/fx/common.txt,assets/generated/floor-sample-v1/prompts/fx/bubbles.txt \
       --ref=assets/generated/art-direction-v1/target-shot.png --ref=assets/generated/floor-sample-v1/kits/angle-plate-1f/take-1/plate.png
     uv run --with pillow --with numpy python scripts/art-gen/floor-fx-build.py
+
+`props.txt` (a sheet of 3 by 3, whole by itself) has what comes and goes in the café: the tip jar at three
+levels, a catering order of each kind waiting on the counter, the cup a cat knocked over, a supplier's
+parcel on the front step and the card on Mina's table. Mina's map on the counter's front is the
+dialogs' picture of it (`build/icons/wish-*.webp`). The user chose its take 1 on 2026-11-24.
 
 The build (run it after the icons build, whose pictures it reads) writes `build/fx/fx.webp` and
 `fx.json` (every prop and effect in one atlas, at the size it is drawn in the building),
