@@ -1,0 +1,39 @@
+{
+ "views": [
+  "town",
+  "seaside",
+  "forest",
+  "city",
+  "flowers"
+ ],
+ "regions": [
+  "reading",
+  "greenhouse",
+  "terrace",
+  "workshop",
+  "observatory"
+ ],
+ "places": [
+  "town",
+  "seaside",
+  "forest",
+  "city",
+  "flowers"
+ ],
+ "perks": [
+  "till",
+  "cats",
+  "kitchen",
+  "builders",
+  "catering",
+  "manager"
+ ],
+ "map": {
+  "width": 1280,
+  "height": 800
+ },
+ "pin": {
+  "width": 71,
+  "height": 96
+ }
+}

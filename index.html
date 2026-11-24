@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#865332" />
-    <meta name="description" content="A cozy pixel-art coffee shop: plan the menu, stock the pantry, open for the day and grow your café." />
+    <meta name="theme-color" content="#fbf3e4" />
+    <meta name="description" content="A cozy coffee shop in a little building: plan the menu, stock the pantry, open for the day and grow your café." />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Bean Café" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="icon" id="favicon" href="./icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="./icon-192.png" />
+    <link rel="icon" id="favicon" href="./favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
     <link rel="preload" as="image" href="./loading-carry-strip.png" fetchpriority="high" />
     <title>Tiny Bean Café</title>
     <style>
@@ -105,6 +105,17 @@
     </style>
   </head>
   <body class="fullscreen-cafe">
+    <script>
+      // The game is the cross-section building, so its paper loading screen shows from the first paint
+      // (src/ui/floors-identity.ts does the same once the script has loaded). `?pixel` keeps the pixel
+      // room and the loader below as it is.
+      if (!new URLSearchParams(location.search).has('pixel')) {
+        const app = new URL('./assets/generated/floor-sample-v1/build/app/', document.baseURI).href;
+        document.body.classList.add('floors-view');
+        document.body.style.setProperty('--floors-loading-art', `url("${app}loading.webp")`);
+        document.body.style.setProperty('--floors-app-icon', `url("${app}icon-192.png")`);
+      }
+    </script>
     <div id="loader" aria-busy="true" data-loading-stage="boot">
       <div class="loader-content">
       <p class="loader-title">Tiny Bean Café</p>
@@ -132,7 +143,7 @@
         </div>
         <div class="hud-buttons">
           <button id="panel-toggle" class="pixel-btn small ghost" aria-controls="management-panel" aria-expanded="false">Manage</button>
-          <nav class="edge-tools" id="edge-tools" aria-label="Manage café" hidden><button type="button" data-management-tab="menu" aria-controls="management-panel" aria-expanded="false"><span aria-hidden="true">☕</span><span>menu</span></button><button type="button" data-management-tab="pantry" aria-controls="management-panel" aria-expanded="false"><span aria-hidden="true">▤</span><span>pantry</span></button><button type="button" data-management-tab="upgrades" aria-controls="management-panel" aria-expanded="false"><span aria-hidden="true">↑</span><span>upgrades</span></button><button type="button" data-management-tab="decor" aria-controls="management-panel" aria-expanded="false"><span aria-hidden="true">✿</span><span>decor</span></button><button type="button" data-management-tab="pets" aria-controls="management-panel" aria-expanded="false"><span aria-hidden="true">♧</span><span>pets</span></button><button type="button" data-management-tab="promotion" aria-controls="management-panel" aria-expanded="false"><span aria-hidden="true">★</span><span>promotion</span></button></nav>
+          <nav class="edge-tools" id="edge-tools" aria-label="Manage café" hidden><button type="button" data-management-tab="menu" aria-controls="management-panel" aria-expanded="false"><span>menu</span></button><button type="button" data-management-tab="pantry" aria-controls="management-panel" aria-expanded="false"><span>pantry</span></button><button type="button" data-management-tab="upgrades" aria-controls="management-panel" aria-expanded="false"><span>upgrades</span></button><button type="button" data-management-tab="decor" aria-controls="management-panel" aria-expanded="false"><span>decor</span></button><button type="button" data-management-tab="pets" aria-controls="management-panel" aria-expanded="false"><span>pets</span></button><button type="button" data-management-tab="promotion" aria-controls="management-panel" aria-expanded="false"><span>promotion</span></button></nav>
           <button id="settings-btn" class="pixel-btn small ghost" data-i18n-title="hud.settings">···</button>
         </div>
       </header>

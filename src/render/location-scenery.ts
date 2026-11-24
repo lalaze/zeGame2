@@ -1,6 +1,7 @@
 import { mix } from './color';
 import type { LocationId } from '../game/locations';
 import { paintPixelWindowVillage } from './pixel-window-village';
+import { branchViewArt, paintPicture } from './branch-map-art';
 
 type Ctx = CanvasRenderingContext2D;
 export type BranchScenery = Exclude<LocationId, 'town'>;
@@ -286,11 +287,17 @@ function flowers(r: Rect, tone: Tone, t: number) {
   for (let px = 1; px < 46; px += 6) r(px, 35.5, 0.5, 2.5, p.fence);
 }
 
+/** The branch map's preview canvas (src/ui/branch-map.ts). */
+const PREVIEW_W = 92, PREVIEW_H = 76;
+
 /**
  * A small framed picture of a location's view for the branch map: sky, sun or
  * moon, and the scenery the café windows will show there.
  */
 export function paintLocationPreview(canvas: HTMLCanvasElement, id: LocationId, darkness = 0, t = 0): void {
+  // A look with painted views (the floors view) shows its picture, at eight times this canvas.
+  const picture = branchViewArt(id);
+  if (picture) { paintPicture(canvas, picture, PREVIEW_W * 8, PREVIEW_H * 8); return; }
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
   const { width: w, height: h } = canvas;

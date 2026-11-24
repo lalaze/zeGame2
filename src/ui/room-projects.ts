@@ -6,6 +6,7 @@ import type { GameState } from '../game/state';
 import { t, type MessageKey } from '../i18n';
 import { furnitureIcon } from '../render/furniture-art';
 import { closeModal, showModal, toast } from './modal';
+import { iconArt } from './icon-art';
 
 const name = (id: ProjectId) => t(`projects.${id}.name` as MessageKey);
 const areaName = (id: AreaId) => t(`area.${id}.name` as MessageKey);
@@ -40,7 +41,7 @@ export function showRoomProjects(s: GameState, changed: () => void, visit?: (are
       <p class="note project-timing-note">${t('projects.restartHint')}</p>
       <div class="project-actions"><button class="pixel-btn small" data-project-collect></button><button class="pixel-btn small ghost" data-project-upgrade></button></div>
       <p class="note project-reason" id="project-reason-${def.id}"></p><button class="project-visit chip"></button>`;
-    card.querySelector<HTMLImageElement>('img')!.src = furnitureIcon(def.art).toDataURL();
+    card.querySelector<HTMLImageElement>('img')!.src = iconArt(`furniture:${def.art}`) ?? furnitureIcon(def.art).toDataURL();
     for (const mode of Object.keys(PROJECT_MODES) as ProjectMode[]) {
       const button = document.createElement('button'); button.className = 'chip'; button.dataset.projectMode = mode;
       button.addEventListener('click', () => { if (setProjectMode(s, def.id, mode, Date.now())) finish(); });

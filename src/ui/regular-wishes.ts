@@ -6,6 +6,7 @@ import { paintMinaMap } from '../render/regular-wish-art';
 import { displayItemName } from './item-name';
 import { trialSaleItem, trialSaleRemaining } from '../game/trial-sales';
 import { isDrink } from '../game/data';
+import { iconArt } from './icon-art';
 
 const text = <K extends keyof HTMLElementTagNameMap>(tag: K, value: string, className = '') => {
   const el = document.createElement(tag); el.textContent = value; el.className = className; return el;
@@ -41,10 +42,15 @@ export function regularWishCard(state: GameState, onChange: () => void, compact 
         root.append(text('p', t('wish.mina.map.short'), 'note'));
         return;
       }
-      const art = document.createElement('canvas'); art.width = 124; art.height = 76;
+      const painted = iconArt(`wish:${wish.choice}`);
+      const art = document.createElement(painted ? 'img' : 'canvas');
       art.className = 'wish-map'; art.setAttribute('role', 'img'); art.setAttribute('aria-label', t('wish.mina.map.alt'));
-      const ctx = art.getContext('2d');
-      if (ctx) { ctx.scale(4, 4); paintMinaMap(ctx, 0, 0, wish.choice); }
+      if (art instanceof HTMLImageElement) { art.src = painted!; art.alt = t('wish.mina.map.alt'); }
+      else {
+        art.width = 124; art.height = 76;
+        const ctx = art.getContext('2d');
+        if (ctx) { ctx.scale(4, 4); paintMinaMap(ctx, 0, 0, wish.choice); }
+      }
       root.append(art, text('p', t(`wish.mina.memory.${wish.choice}`)), text('p', t('wish.mina.map.date', { day: wish.completedDay }), 'note'));
       root.append(action(t(wish.displayed ? 'wish.mina.map.hide' : 'wish.mina.map.show'), 'map', () => displayMinaMap(state, !wish.displayed)));
       root.append(text('p', t(wish.displayed ? 'wish.mina.map.hanging' : 'wish.mina.map.stored'), 'note'));

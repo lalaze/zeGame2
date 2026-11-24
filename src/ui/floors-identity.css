@@ -1,0 +1,48 @@
+/* The floors view's loading screen and app icon (floors-identity.ts): the paper journal's page with
+   the painted café on it, in place of the pixel view's dark wood and walking barista. Scoped to
+   body.floors-view like floors-ui.css, whose colours and face it uses; the pixel view's loader is the
+   inline one in index.html. */
+:root body.floors-view #loader {
+  color: var(--fl-ink); font: 500 16px/1.5 var(--fl-font);
+  background: radial-gradient(ellipse at 50% 36%, var(--fl-paper-light) 0, transparent 60%),
+    repeating-linear-gradient(0deg, transparent 0 31px, rgb(122 90 68 / .05) 31px 32px), var(--fl-paper);
+}
+:root body.floors-view #loader .loader-content { width: min(360px, 100%); flex-basis: 360px; }
+/* The painted café takes the walkway's place; the walker stays in the page for the pixel view. */
+:root body.floors-view #loader .loader-walkway {
+  height: min(300px, 76vw, 40vh); margin: 0 0 10px;
+  background: var(--floors-loading-art) center / contain no-repeat;
+}
+:root body.floors-view #loader .loader-walker { display: none; }
+:root body.floors-view #loader .loader-title { color: var(--fl-ink); font-size: clamp(24px, 6.4vw, 30px); font-weight: 800; letter-spacing: .01em; }
+:root body.floors-view #loader .loader-status { color: var(--fl-muted); font-size: 15px; }
+:root body.floors-view #loader .loader-percent { color: var(--fl-sage-dark); font-weight: 800; }
+:root body.floors-view #loader .loader-meter { gap: 10px; margin-top: 14px; }
+:root body.floors-view #loader .loader-track {
+  padding: 3px; border: 2px solid var(--fl-line); border-radius: 999px; overflow: hidden;
+  background: var(--fl-paper-light); box-shadow: 0 3px 0 var(--fl-stamp);
+}
+:root body.floors-view #loader progress { height: 12px; border-radius: 999px; background: transparent; color: var(--fl-sage); accent-color: var(--fl-sage); box-shadow: none; }
+:root body.floors-view #loader progress::-webkit-progress-bar { background: transparent; box-shadow: none; border-radius: 999px; }
+:root body.floors-view #loader progress::-webkit-progress-value { background: var(--fl-sage); box-shadow: inset 0 2px rgb(255 255 255 / .28); border-radius: 999px; }
+:root body.floors-view #loader progress::-moz-progress-bar { background: var(--fl-sage); box-shadow: inset 0 2px rgb(255 255 255 / .28); border-radius: 999px; }
+:root body.floors-view #loader .loader-track:has(progress:indeterminate)::after {
+  top: 3px; bottom: 3px; left: 3px; border-radius: 999px; background: var(--fl-sage);
+}
+:root body.floors-view #loader .loader-count { color: var(--fl-muted); }
+:root body.floors-view #loader .loader-stages { color: var(--fl-muted); font-weight: 700; }
+:root body.floors-view #loader .loader-stages li::before { border-radius: 50%; background: var(--fl-soft-line); box-shadow: 0 0 0 2px var(--fl-line); }
+:root body.floors-view #loader .loader-stages li:not(:last-child)::after { background: var(--fl-soft-line); }
+:root body.floors-view #loader .loader-stages [aria-current="step"] { color: var(--fl-ink); }
+:root body.floors-view #loader .loader-stages [aria-current="step"]::before { background: var(--fl-gold); box-shadow: 0 0 0 2px var(--fl-line), 0 0 0 5px rgb(210 154 50 / .22); }
+:root body.floors-view #loader .loader-stages .done::before,
+:root body.floors-view #loader .loader-stages .done::after { background: var(--fl-sage); }
+:root body.floors-view #loader .loader-retry {
+  border: 2px solid var(--fl-line); border-radius: 14px; background: var(--fl-sage); color: var(--fl-paper-light);
+  box-shadow: 0 3px 0 var(--fl-stamp); font-weight: 700;
+}
+:root body.floors-view #loader .loader-retry:focus-visible { outline: 3px solid var(--fl-sage-dark); }
+:root body.floors-view #loader .loader-detail { color: var(--fl-danger); }
+/* The painted icon wherever the page shows the app's own mark. */
+:root body.floors-view .brand-icon { image-rendering: auto; border-radius: 22%; }
+:root body.floors-view .ob-logo { content: var(--floors-app-icon); image-rendering: auto; border-radius: 22%; }

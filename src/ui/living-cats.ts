@@ -1,5 +1,6 @@
 import { petActive, petPreferences, type CatArea, type CatId, type Pet } from '../game/pets';
 import { t } from '../i18n';
+import { catPortrait } from './cat-art';
 import { showModal } from './modal';
 
 /** Small structural view keeps the pet UI independent of the scene engine. */
@@ -47,6 +48,15 @@ export function livingCatActivity(actor?: LivingCatView): string {
 export function showLivingCat(pet: Pet, actor: LivingCatView | undefined, onPet: () => void, onLocate?: () => void): void {
   const body = document.createElement('div');
   body.className = 'living-cat-detail';
+  // The floors view has a painted portrait of each cat (ui/cat-art.ts).
+  const painted = catPortrait(pet.id);
+  if (painted) {
+    const portrait = document.createElement('img');
+    portrait.className = 'living-cat-portrait';
+    portrait.alt = '';
+    portrait.src = painted;
+    body.append(portrait);
+  }
   for (const text of [livingCatPersonality(pet), livingCatActivity(actor), livingCatPreference(pet), t(petActive(pet) ? 'pet.living.caredFor' : 'pet.living.needsCare'), t('pet.living.petHint')]) {
     const line = document.createElement('p');
     line.textContent = text;

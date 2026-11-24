@@ -8,6 +8,14 @@ const paths = {
   book: 'M1 1h4v1h2V1h4v9H7v1H5v-1H1zm2 2v5h2V3zm4 0v5h2V3z',
   close: 'M1 1h2v2h2v2h2V3h2V1h2v2H9v2H7v2h2v2h2v2H9V9H7V7H5v2H3v2H1V9h2V7h2V5H3V3H1z',
 } as const;
-export function streetIcon(name: keyof typeof paths): string {
+export type StreetIcon = keyof typeof paths;
+/** Marks another look draws instead (the floors view, src/render/floors/floors-street.ts). */
+let painted: ((name: StreetIcon) => string | undefined) | null = null;
+export function setStreetIcons(icons: ((name: StreetIcon) => string | undefined) | null): void {
+  painted = icons;
+}
+export function streetIcon(name: StreetIcon): string {
+  const own = painted?.(name);
+  if (own) return own;
   return `<svg class="street-ui-icon street-ui-icon-${name}" viewBox="0 0 12 12" aria-hidden="true" focusable="false" shape-rendering="crispEdges"><path fill="currentColor" fill-rule="evenodd" d="${paths[name]}"/></svg>`;
 }

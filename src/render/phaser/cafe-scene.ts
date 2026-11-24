@@ -29,7 +29,7 @@ import { createGeneratedIngredientArt, GENERATED_INGREDIENT_IDS } from '../gener
 import { UI_ART, paintThoughtFrame, paintOrderFrame, paintSoldOutFrame, paintSoldOutCross, paintCallBubble, paintAckBubble, paintMomentCue, paintParcel, paintSpilledCup } from '../ui-art';
 import { paintServiceCup, paintServiceTray, paintTableTent } from '../service-props-art';
 import { styleStationMultiplier } from '../../game/styles';
-import { petActive } from '../../game/pets';
+import { petActive, type CatId } from '../../game/pets';
 import type { LivingCatActor } from '../../game/living-cats';
 import { residentCatFlipX } from '../living-cat-pose';
 import Phaser from 'phaser';
@@ -105,7 +105,9 @@ export interface CafeHooks {
   arrangePiece?(index: number): void;
 }
 
-export type CafeTapTarget = { kind: 'moment' } | { kind: 'partner'; id: string } | { kind: 'cafe' };
+export type CafeTapTarget = { kind: 'moment' } | { kind: 'partner'; id: string } | { kind: 'cafe' }
+  /** A cat (a resident by id, or the visiting cat; `card` asks for its card) and a gift a cat left, in the floors view. */
+  | { kind: 'cat'; id?: CatId; card?: boolean } | { kind: 'gift'; id: number };
 
 // Back to front. Everything standing on the floor sorts by where its feet are.
 const DEPTH = {

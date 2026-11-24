@@ -1,0 +1,5 @@
+Image 1 is the approved art direction of this cozy café game. Image 2 is the little town the café stands in, as the game draws it. Image 3 shows four views from a café's windows as the old pixel-art version of the game drew them, one for each place a café can open. Paint those four views again in exactly the style of images 1 and 2: soft hand-drawn illustration, thin warm-brown outlines, gentle low-saturation colours, soft shading with warm afternoon light from the upper left, a pale blue sky with one or two soft clouds. Keep what each view of image 3 shows and roughly where it is.
+
+One landscape image: EXACTLY 2 columns and 2 rows of equal pictures, 4 separate little landscape paintings. Each picture is a complete scene that fills its own rectangle to the edges; a straight band of plain white, equally wide everywhere, separates the pictures and runs around the outside. No frames, no rounded corners, no people in the foreground, no labels. No letters, words or numbers anywhere.
+
+The pictures, left to right along the top row, then the bottom row:

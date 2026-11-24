@@ -1,0 +1,103 @@
+/* Scenery uses the same world coordinates and integer pixel scale as the shops.
+   Keep this after street-pixel.css: scenery geometry is independent of UI skins. */
+.street-view { --street-origin: 36px; }
+.street-panorama { container-type: size; }
+.street-scenery {
+  /* Distribute tall-screen surplus between sky and paving, with a bounded sky. */
+  --ground: max(210px, calc(210px + (100cqh - 750px) * .5));
+  background: #a3d3fa;
+}
+.street-hills {
+  bottom: calc(var(--ground) + 50px * var(--pixel-scale));
+  height: calc(120px * var(--pixel-scale));
+  background-size: calc(768px * var(--pixel-scale)) calc(120px * var(--pixel-scale));
+}
+.street-hills::after {
+  height: calc(52px * var(--pixel-scale));
+  background: #aac4a4;
+}
+.street-depth, .street-depth-clouds, .street-depth-section { position: absolute; inset: 0; pointer-events: none; }
+.street-depth-clouds { z-index: 1; }
+.street-depth { z-index: 2; }
+.street-depth-section { left: calc(var(--street-origin) + var(--section) * var(--plot-pitch)); right: auto; width: var(--plot-pitch); }
+.street-depth img, .street-depth-cloud { position: absolute; height: auto; max-width: none; }
+.street-depth > .street-depth-section::before {
+  content: ''; position: absolute; z-index: -1;
+  left: calc(var(--plot-pitch) * .61 - 42px * var(--pixel-scale));
+  bottom: var(--ground); width: calc(164px * var(--pixel-scale)); height: calc(148px * var(--pixel-scale));
+  background: url('/art/street-art-v2/depth-field.webp') center / 100% 100%; image-rendering: pixelated;
+}
+.street-depth-town {
+  left: calc(var(--plot-pitch) * .61);
+  bottom: calc(var(--ground) + 135px * var(--pixel-scale));
+  width: calc(65px * var(--pixel-scale));
+  opacity: .82;
+}
+.street-depth-hamlet { width: calc(58px * var(--pixel-scale)); }
+.street-depth-hedge {
+  left: calc(var(--plot-pitch) * .2);
+  bottom: calc(var(--ground) + 111px * var(--pixel-scale));
+  width: calc(54px * var(--pixel-scale));
+}
+.street-depth-tree {
+  left: calc(var(--plot-pitch) - 38px * var(--pixel-scale));
+  bottom: var(--ground);
+  width: calc(67px * var(--pixel-scale));
+}
+.street-depth-section:nth-child(even) .street-depth-tree { transform: scaleX(-1); }
+.street-depth-section:nth-child(3n + 1) .street-depth-hedge { transform: scaleX(-1); }
+.street-depth-cloud {
+  left: calc(12px * var(--pixel-scale));
+  top: clamp(12px, calc((100% - var(--ground) - 196px * var(--pixel-scale)) * .5), 90px);
+  width: calc(119px * var(--pixel-scale));
+  opacity: .9;
+}
+.street-depth-clouds .street-depth-section:nth-child(even) .street-depth-cloud { top: clamp(24px, calc((100% - var(--ground) - 184px * var(--pixel-scale)) * .5), 106px); }
+.street-depth-cloud-small { width: calc(58px * var(--pixel-scale)); left: calc(38px * var(--pixel-scale)); }
+/* Furniture and resting pedestrians also remain attached to their street slots. */
+.street-furniture > .street-bench { left: calc(var(--street-origin) + var(--plot-width) + 2px * var(--pixel-scale) + var(--gap) * var(--plot-pitch)); }
+.street-furniture > .street-lamp { left: calc(var(--street-origin) + var(--plot-width) + 9px * var(--pixel-scale) + var(--gap) * var(--plot-pitch)); }
+.street-walker { left: calc(var(--street-origin) + var(--section) * var(--plot-pitch) + var(--plot-width) - 20px * var(--pixel-scale)); bottom: calc(var(--ground) - 112px); }
+.street-walker:nth-child(even) { bottom: calc(var(--ground) - 104px); }
+@media (max-width: 700px), (max-height: 740px) {
+  .street-view { --street-origin: 18px; }
+  .street-scenery { --ground: max(180px, calc(180px + (100cqh - 600px) * .5)); }
+}
+/* Short landscape has a complete 1x native-pixel street, never a cropped 2x roof.
+   Keep all actions and native aspect ratios; compact only the surrounding chrome. */
+@media (max-height: 560px) {
+  .street-view { --pixel-scale: 1; --plot-pitch: 160px; --plot-width: 122px; --street-origin: 18px; }
+  .street-scenery { --ground: 98px; min-height: 0; }
+  .street-storefronts { left: var(--street-origin); gap: 38px; }
+  .street-shop { height: 150px; }
+  .street-shop-art::after { bottom: -3px; height: 9px; }
+  .street-shop-sign, .street-shop-caption strong { font-size: 9px; line-height: 12px; bottom: calc(var(--shop-height) - var(--sign-y) - 6px); }
+  .street-shop[data-status="sale"] .street-shop-sign,
+  .street-shop[data-status="vacant"] .street-shop-sign,
+  .street-shop[data-status="locked"] .street-shop-sign { width: 64px; font-size: 9px; line-height: 12px; padding: 3px 1px; border-width: 2px; }
+  .street-shop-caption small { top: calc(100% + 10px); padding: 2px 4px; font-size: 10px; }
+  .street-pavement { background-size: 144px 32px; }
+  .street-pavement::before { height: 30px; background-size: 144px 30px; }
+  .street-furniture > .street-bench { width: 24px; height: 14px; bottom: calc(var(--ground) - 3px); }
+  .street-furniture > .street-lamp { width: 15px; height: 75px; }
+  .street-walker, .street-walker:nth-child(even) { bottom: 48px; transform: scale(.5); transform-origin: bottom left; }
+  .street-overlay .street-toolbar { padding: 3px 8px; }
+  .street-overlay .street-toolbar button { min-height: 32px; height: 32px; padding: 3px 8px; font-size: 10px; }
+  .street-overlay .street-toolbar .street-ui-icon { width: 12px; height: 12px; flex-basis: 12px; }
+  .street-overlay .street-choices { padding: 3px 8px; gap: 6px; }
+  .street-overlay .street-choice { min-height: 30px; padding: 3px 8px; flex-basis: 136px; }
+  .street-overlay .street-choice small { display: none; }
+  .street-overlay .street-summary { padding: 0 8px 3px; }
+  .street-overlay .street-summary strong { font-size: 12px; }
+  .street-overlay .street-summary button { min-height: 28px; padding: 3px 6px; font-size: 10px; }
+  .street-overlay .street-walk-controls { bottom: 4px; padding: 3px; width: min(460px, calc(100% - 20px)); grid-template-columns: 32px minmax(0, 1fr) 32px; }
+  .street-overlay .street-walk-controls button { min-width: 32px; min-height: 32px; width: 32px; height: 32px; }
+  .street-overlay .street-walk-controls p { font-size: 10px; }
+  /* Override the shared theme's important 44px minimum ONLY in this compact
+     street chrome. Shop hit areas and detail/payment controls remain untouched. */
+  body .street-overlay .street-toolbar button,
+  body .street-overlay .street-walk-controls button { min-height: 32px !important; min-width: 32px !important; }
+  body .street-overlay .street-choice { min-height: 30px !important; }
+  body .street-overlay .street-summary button { min-height: 28px !important; }
+  body .street-overlay .street-walk-controls { padding: 3px; }
+}

@@ -1,0 +1,9 @@
+Grid: 2 columns and 3 rows, 6 clouds, each as in image 2's sky: soft rounded cumulus shapes, flat on the underside, creamy white with pale lavender-blue shade below, no outline, and opaque (the sky must not show through their middle).
+
+Cells left to right, top row first:
+1. a large, wide puffy cloud with five or six rounded tops;
+2. a medium cloud, longer than tall, with three rounded tops;
+3. a small round puff with two tops;
+4. a long, low, flat bank of cloud, four times as wide as tall;
+5. a medium cloud leaning to the right, with a small puff trailing behind it on the left (touching it);
+6. a tiny wisp: one slim, soft streak of cloud.

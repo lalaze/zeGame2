@@ -6,6 +6,13 @@ import { DAY_SECONDS } from '../game/data';
 import { PROMOTION_PLANS, bookPromotion, promotionPlan, togglePromotion } from '../game/promotion';
 import type { GameState } from '../game/state';
 import { t } from '../i18n';
+import { iconArt } from './icon-art';
+
+/** A platform's mark: the painted picture where the view has one, or the pixel sign. */
+function platformArt(platform: 'flash' | 'orange'): string {
+  const art = iconArt(`promo:${platform}`);
+  return art ? `<img class="promo-art" src="${art}" alt="" width="40" height="40" />` : uiIcon(platform === 'flash' ? 'film' : 'spark');
+}
 
 export class PromotionPanel {
   private summary: HTMLElement;
@@ -36,7 +43,7 @@ export class PromotionPanel {
     this.rows = PROMOTION_PLANS.map((plan, index) => {
       if (index === 0 || PROMOTION_PLANS[index - 1].platform !== plan.platform) {
         const header = document.createElement('header'); header.className = `promo-platform ${plan.platform}`;
-        header.innerHTML = `<span aria-hidden="true">${uiIcon(plan.platform === 'flash' ? 'film' : 'spark')}</span><div><h3>${t(`promo.platform.${plan.platform}`)}</h3><p class="note">${t(`promo.platform.${plan.platform}.desc`)}</p></div>`;
+        header.innerHTML = `<span aria-hidden="true">${platformArt(plan.platform)}</span><div><h3>${t(`promo.platform.${plan.platform}`)}</h3><p class="note">${t(`promo.platform.${plan.platform}.desc`)}</p></div>`;
         root.append(header);
       }
       const card = document.createElement('section'); card.className = 'promo-card'; card.dataset.promo = plan.id;

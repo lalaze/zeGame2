@@ -1,0 +1,221 @@
+/* Game chrome: one 2px pixel scale, detached HUD plaques and a tabbed ledger.
+   All selectors are indoor-only; the world, street and camera stay untouched. */
+body.fullscreen-cafe { --game-wood: #51392c; --game-wood-hi: #765039; --game-paper: #fff1d5; }
+body [data-game-icon]::before {
+  content: ''; display: inline-block; width: 20px; height: 20px; flex: 0 0 20px;
+  background: currentColor; mask: var(--game-icon) center / 100% 100% no-repeat;
+  image-rendering: pixelated; vertical-align: middle; pointer-events: none;
+}
+body.fullscreen-cafe :is(.tab,.edge-tools button)[data-game-icon]::before {
+  display: block; width: 24px; height: 24px; flex-basis: 24px;
+  margin: 0; background: currentColor; filter: none;
+}
+body.fullscreen-cafe .hud .brand {
+  min-height: 56px; padding: 8px 16px; gap: 10px;
+  background: var(--game-wood); border: 0; border-bottom: 4px solid #b4844b;
+  box-shadow: 0 4px #38281e40; pointer-events: none;
+}
+body.fullscreen-cafe .hud :is(.brand-name,.brand-title) { color: #fff0ce; }
+body.fullscreen-cafe .brand-icon { width: 32px; height: 32px; image-rendering: pixelated; }
+body.fullscreen-cafe .hud .money {
+  width: auto; min-width: 144px; padding: 4px 12px 8px; background: var(--game-wood);
+  box-shadow: 0 4px #38281e40; color: #f3dba2; border-bottom: 4px solid #b4844b;
+}
+body.fullscreen-cafe button.coins {
+  --pixel-face: transparent; --pixel-text: #ffe2a0;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  border: 0 !important; padding: 0; font-size: 24px; text-decoration: none;
+}
+body.fullscreen-cafe .money .rate { color: #f3ddbd; font-size: 12px; text-align: center; }
+body.fullscreen-cafe .day-hud { top: calc(var(--edge-top) + 68px); background: var(--game-paper); box-shadow: none; }
+/* A single compact desktop toolbelt replaces controls scattered along three edges. */
+body.fullscreen-cafe .game-toolbelt {
+  position: absolute; z-index: 9; bottom: var(--edge-bottom); right: var(--edge-right);
+  display: flex; align-items: stretch; gap: 4px; padding: 6px;
+  background: var(--game-wood); border-bottom: 4px solid #b4844b;
+  max-width: calc(100% - 280px); pointer-events: none;
+}
+body.fullscreen-cafe .game-toolbelt .cafe-status-bar { display: contents; }
+body.fullscreen-cafe .game-toolbelt :is(#panel-toggle,#settings-btn,#cafe-style-btn,.room-zoom-controls) {
+  position: static; inset: auto; transform: none; margin: 0; max-width: none; width: auto;
+}
+body.fullscreen-cafe .game-toolbelt .room-zoom-controls { display: flex; align-items: stretch; gap: 4px; padding: 0; background: none; border: 0; box-shadow: none; }
+body.fullscreen-cafe .game-toolbelt button {
+  --pixel-face: var(--game-wood); --pixel-text: #ffe9c4;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+  border: 0 !important; padding: 6px 12px; min-height: 58px !important;
+  font-size: 12px; pointer-events: auto; white-space: nowrap;
+}
+body.fullscreen-cafe .game-toolbelt #panel-toggle { --pixel-face: #f6dfac; --pixel-text: #51392c; }
+body.fullscreen-cafe .game-toolbelt :is(#room-zoom-out,#room-zoom-in) { padding-inline: 4px; font-size: 20px; }
+body.fullscreen-cafe .game-toolbelt #reputation-btn { max-width: 140px; white-space: normal; }
+body.fullscreen-cafe .game-toolbelt #reputation-traffic,body.fullscreen-cafe .game-toolbelt .reputation-more { display: none; }
+body.fullscreen-cafe .open-btn { left: var(--edge-left); display: flex; align-items: center; gap: 10px; padding: 12px 16px; min-height: 58px !important; font-size: 16px; }
+body.fullscreen-cafe .operation-status { bottom: calc(var(--edge-bottom) + 84px); }
+body.fullscreen-cafe .edge-tools { bottom: calc(var(--edge-bottom) + 88px); display: grid; grid-template-columns: repeat(3, 96px); gap: 4px; padding: 6px; background: var(--game-wood); border: 0 !important; box-shadow: none; }
+body.fullscreen-cafe .edge-tools button { flex-direction: column; justify-content: center; min-width: 0; gap: 6px; padding: 10px 6px; }
+body.fullscreen-cafe.arranging-cafe .game-toolbelt { visibility: hidden; }
+body.fullscreen-cafe.mobile-cafe-layout .game-toolbelt { display: none; }
+/* Detached sign and coin purse. The transparent gap passes clicks to the world. */
+body .mobile-cafe-header {
+  padding: 0; gap: 8px; align-items: flex-start; pointer-events: none;
+  background: none !important; border: 0 !important; box-shadow: none !important;
+}
+body .mobile-cafe-clock {
+  padding: 10px 12px; min-height: 66px; gap: 6px; color: #f8dfb5; pointer-events: auto;
+  background: var(--game-wood); border: 0; border-bottom: 4px solid #b4844b;
+}
+body .mobile-cafe-name { color: #fff0ce; font-size: 14px; line-height: 1.3; }
+body .mobile-cafe-name::before { width: 16px; height: 16px; margin-right: 7px; }
+body .mobile-cafe-clock strong { font-size: 12px; gap: 2px 6px; }
+body.fullscreen-cafe .mobile-cafe-header .money {
+  padding: 4px 10px 6px; max-width: 42%; border: 0; border-bottom: 4px solid #b4844b;
+  background: var(--game-wood); color: #ffdea0; pointer-events: auto;
+}
+body.fullscreen-cafe .mobile-cafe-header .money .coins { font-size: 20px; padding: 0; gap: 4px; }
+body.fullscreen-cafe .mobile-cafe-header .money .rate { display: none; }
+body .mobile-cafe-dock {
+  grid-template-columns: .85fr 1.5fr .85fr .85fr; gap: 4px; padding: 6px;
+  background: var(--game-wood) !important; border: 0 !important; border-bottom: 4px solid #b4844b !important;
+}
+body.fullscreen-cafe .mobile-cafe-dock button {
+  --pixel-face: var(--game-wood); --pixel-text: #ffe9c4;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  min-height: 60px !important; border: 0 !important; padding: 4px; font-size: 12px;
+}
+body.fullscreen-cafe .mobile-cafe-dock #panel-toggle { --pixel-face: #f6dfac; --pixel-text: #51392c; }
+body.fullscreen-cafe .mobile-cafe-dock [data-game-icon]::before { width: 20px; height: 20px; flex-basis: 20px; mask-image: var(--game-icon); }
+body.fullscreen-cafe .mobile-cafe-primary > button { --pixel-face: #3d583e !important; --pixel-text: #fff1d5 !important; }
+body .mobile-cafe-tools { bottom: calc(var(--edge-bottom) + 88px); border: 2px solid var(--game-wood) !important; }
+body .mobile-tools-heading { margin: -10px -10px 8px; padding: 6px 10px; background: var(--game-wood); color: #fff1d5; }
+body.fullscreen-cafe.mobile-cafe-layout { --view-tip-bottom: calc(var(--edge-bottom) + 84px); }
+/* A ledger cover, a real tab index, and one continuous page — no nested frames. */
+body.fullscreen-cafe #management-panel {
+  display: grid; grid-template-columns: 80px minmax(0,1fr); grid-template-rows: auto minmax(0,1fr);
+  width: min(620px, calc(100% - var(--edge-left) - var(--edge-right)));
+  padding: 0; background: var(--game-paper) !important; border: 2px solid var(--game-wood) !important;
+  box-shadow: -6px 6px #38281e30 !important;
+}
+body.fullscreen-cafe .drawer-header {
+  grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0,1fr) auto 44px;
+  min-height: 112px; margin: 0; padding: 14px 18px; gap: 4px 12px;
+  background: var(--game-wood); color: #fff1d5; border: 0; border-bottom: 4px solid #b4844b;
+}
+body.fullscreen-cafe .ledger-cafe-name,body.fullscreen-cafe .ledger-day,body.fullscreen-cafe .drawer-pause { color: #dec7a2; }
+body.fullscreen-cafe .drawer-header strong { font-size: 28px; line-height: 1.3; margin: 0; }
+body.fullscreen-cafe .ledger-heading { padding: 0; }
+body.fullscreen-cafe .drawer-balance {
+  --pixel-face: transparent !important; --pixel-text: #ffe2a0 !important;
+  display: flex; align-items: center; gap: 8px; padding: 0; border: 0 !important; max-width: none; font-size: 14px;
+}
+body.fullscreen-cafe #drawer-close { --pixel-face: #6b4c37; --pixel-text: #fff1d5; border: 0 !important; }
+body.fullscreen-cafe .panel .tabs {
+  display: flex; flex-direction: column; gap: 4px; padding: 10px 6px;
+  background: #e7cfa4; border-right: 2px solid #c4a275; overflow-y: auto;
+}
+body.fullscreen-cafe .panel .tab {
+  --pixel-face: transparent; --pixel-text: #725138;
+  flex: 0 0 auto; min-height: 66px; width: 100%; padding: 7px 2px; gap: 6px;
+  border: 0 !important; font-size: 12px; white-space: normal;
+}
+body.fullscreen-cafe .panel .tab.active { --pixel-face: #3d583e !important; --pixel-text: #fff1d5 !important; }
+body.fullscreen-cafe .panel .panel-scroll { padding: 12px 16px; scrollbar-gutter: stable; }
+body.fullscreen-cafe .panel .list { padding: 8px 0 20px; gap: 0; }
+body.fullscreen-cafe .panel .goal { margin: 0 0 12px; padding: 8px 10px; border: 0; border-left: 4px solid #b38a43; background: #ecdfbd; }
+body.fullscreen-cafe .panel .ledger-tools { display: flex; flex-direction: column; align-items: stretch; gap: 6px; padding: 0; }
+body.fullscreen-cafe .panel .ledger-tools > .buy-amount { order: 2; justify-content: flex-end; margin: 0; padding: 0; }
+body.fullscreen-cafe .panel .menu-filter { display: flex; flex-wrap: wrap; gap: 2px; padding: 0; }
+body.fullscreen-cafe .panel :is(.menu-filter,.buy-amount) .chip { border: 0 !important; --pixel-face: #f1e0bc; padding: 5px 8px; }
+body.fullscreen-cafe .panel .menu-filter .chip { flex: 1; }
+body.fullscreen-cafe .panel .menu-cat { padding: 10px 0 6px; border-bottom: 2px solid #bba073; color: #725138; font-size: 16px; }
+body.fullscreen-cafe .panel .row { padding: 18px 0; background: none; border: 0; border-bottom: 1px solid #cfb58c; gap: 8px 12px; }
+body.fullscreen-cafe .panel .row .icon { background: #f1dfb9; width: 56px; height: 56px; padding: 4px; }
+body.fullscreen-cafe .panel .row .name { font-size: 20px; color: #493426; }
+body.fullscreen-cafe .panel .row .lv { color: #776044; font-size: 12px; }
+body.fullscreen-cafe .panel :is(.signature-entry,.taste-chip,.money-details) { --pixel-face: transparent; border: 0 !important; }
+body.fullscreen-cafe .panel .signature-entry { border-bottom: 1px dashed #bba073 !important; padding-inline: 0; }
+body.fullscreen-cafe .panel .row .row-actions { grid-column: 1 / -1; }
+body.fullscreen-cafe .panel .row .menu-toggle.active { --pixel-face: #e3e6c9 !important; --pixel-text: #3d583e !important; border: 0 !important; }
+body.fullscreen-cafe .panel .row .buy { border: 0 !important; }
+@media (max-width: 1100px) and (min-width: 861px) {
+  body.fullscreen-cafe .game-toolbelt { max-width: calc(100% - 240px); flex-wrap: wrap; justify-content: flex-end; }
+  body.fullscreen-cafe .game-toolbelt button { padding-inline: 8px; }
+  body.fullscreen-cafe .game-toolbelt #reputation-btn { max-width: 100px; }
+}
+@media (max-width: 860px) {
+  body.fullscreen-cafe #management-panel {
+    grid-template-columns: minmax(0,1fr); grid-template-rows: auto auto minmax(0,1fr);
+    width: calc(100% - var(--edge-left) - var(--edge-right));
+  }
+  body.fullscreen-cafe .drawer-header { min-height: 104px; padding: 10px 12px; gap: 2px 8px; }
+  body.fullscreen-cafe .drawer-header strong { font-size: 24px; }
+  body.fullscreen-cafe .drawer-balance { font-size: 12px; }
+  body.fullscreen-cafe .panel .tabs { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 2px; padding: 6px; border-right: 0; border-bottom: 2px solid #c4a275; overflow: visible; }
+  body.fullscreen-cafe .panel .tab { flex-direction: column; min-height: 58px; font-size: 12px; gap: 4px; padding: 4px 0; }
+  body.fullscreen-cafe .panel .tab[data-game-icon]::before { width: 20px; height: 20px; flex-basis: 20px; }
+  body.fullscreen-cafe .panel .panel-scroll { padding: 10px 12px; }
+  body.fullscreen-cafe .panel .row .name { font-size: 18px; }
+  body.fullscreen-cafe .panel .row { grid-template-columns: 48px minmax(0,1fr); }
+  body.fullscreen-cafe .panel .row .icon { width: 48px; height: 48px; }
+  body.fullscreen-cafe .panel .goal { padding: 0 8px; margin-bottom: 8px; }
+  body.fullscreen-cafe .panel .goal-toggle { --pixel-face: transparent; border: 0 !important; }
+}
+@media (max-height: 500px) {
+  body .mobile-cafe-header { width: min(400px,70%); }
+  body .mobile-cafe-clock { min-height: 56px; padding: 6px 10px; }
+  body .mobile-cafe-dock { width: min(370px,68%); left: auto; right: var(--edge-right); }
+  body.fullscreen-cafe .mobile-cafe-dock button { min-height: 52px !important; }
+  body.fullscreen-cafe #management-panel { grid-template-columns: 70px minmax(0,1fr); grid-template-rows: auto minmax(0,1fr); }
+  body.fullscreen-cafe .drawer-header { min-height: 74px; padding: 6px 12px; }
+  body.fullscreen-cafe .ledger-heading { grid-column: 1; }
+  body.fullscreen-cafe .drawer-balance { grid-column: 2; grid-row: 1; }
+  body.fullscreen-cafe .ledger-day { grid-row: 2; }
+  body.fullscreen-cafe .drawer-header strong { font-size: 20px; }
+  body.fullscreen-cafe .panel .tabs { display: flex; flex-direction: column; overflow-y: auto; border: 0; border-right: 2px solid #c4a275; }
+  body.fullscreen-cafe .panel .tab { min-height: 54px; }
+  body.fullscreen-cafe .panel .panel-scroll { padding-block: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body :is(.game-toolbelt,.mobile-cafe-header,.mobile-cafe-dock,#management-panel) { animation: none !important; transition: none !important; }
+}
+@media (forced-colors: active) {
+  body.fullscreen-cafe :is(.game-toolbelt,.mobile-cafe-clock,.mobile-cafe-header .money,.drawer-header) { background: Canvas !important; color: CanvasText !important; border: 2px solid CanvasText !important; }
+  body.fullscreen-cafe :is(.brand-name,.brand-title,.mobile-cafe-name,.ledger-cafe-name,.ledger-day,.drawer-pause,.money .rate) { color: CanvasText !important; }
+}
+/* Final hierarchy adjustments from the first real browser pass. */
+body.fullscreen-cafe .game-toolbelt button:not(:disabled) { --pixel-face: var(--game-wood) !important; --pixel-text: #ffe9c4 !important; }
+body.fullscreen-cafe .game-toolbelt #panel-toggle { --pixel-face: #f6dfac !important; --pixel-text: #51392c !important; }
+body.fullscreen-cafe .game-toolbelt #reputation-score { color: inherit; }
+body.fullscreen-cafe .mobile-cafe-dock :is(#room-zoom-reset,#panel-toggle,#mobile-cafe-more)::before {
+  width: 20px; height: 20px; flex: 0 0 20px; mask: var(--game-icon) center / contain no-repeat;
+}
+body.fullscreen-cafe .mobile-cafe-dock #room-zoom-reset { --pixel-face: var(--game-wood) !important; --pixel-text: #ffe9c4 !important; }
+body.fullscreen-cafe .panel .goal.done .goal-toggle { display: none; }
+body.fullscreen-cafe .panel .goal.done .goal-details { display: block; padding: 8px 0; }
+body.fullscreen-cafe .panel .goal.done .goal-head { margin-bottom: 4px; }
+body.fullscreen-cafe .panel .goal.done .goal-row { gap: 8px; }
+body.fullscreen-cafe .panel .menu-intro { margin-block: 4px; }
+body.fullscreen-cafe .panel .menu-intro p { margin-block: 4px; }
+body.fullscreen-cafe #management-panel.pantry-task .panel-scroll { grid-column: 1 / -1; }
+body.fullscreen-cafe:not(.mobile-cafe-layout) .play-flow-actions {
+  left: var(--edge-left); right: auto; bottom: var(--edge-bottom);
+  max-width: 264px; flex-direction: row; gap: 6px;
+}
+body.fullscreen-cafe:not(.mobile-cafe-layout) .play-flow-actions button {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 58px !important;
+}
+@media (forced-colors: active) {
+  body.fullscreen-cafe .panel .tab,
+  body.fullscreen-cafe .game-toolbelt button,
+  body.fullscreen-cafe .mobile-cafe-dock button,
+  body.fullscreen-cafe .panel :is(.chip,.buy,.menu-toggle,.taste-chip,.money-details),
+  body.fullscreen-cafe :is(#drawer-close,.drawer-balance,button.coins) { border: 2px solid ButtonText !important; }
+  body.fullscreen-cafe .panel .tab.active { border-bottom-width: 4px !important; }
+}
+body.fullscreen-cafe #management-panel.pantry-task { grid-template-columns: minmax(0,1fr); grid-template-rows: auto auto minmax(0,1fr); }
+body.fullscreen-cafe .pantry-task-context { grid-column: 1 / -1; }
+/* Keep the original scene-transition gates after moving the live controls. */
+body.fullscreen-cafe:has(.scene-wrap:is(.is-overview,.is-panning)) .game-toolbelt #cafe-style-btn { visibility: hidden; pointer-events: none; }
+@media (max-width: 860px) {
+  :lang(en) body.fullscreen-cafe .panel .tab { font-size: 11px; white-space: nowrap; overflow-wrap: normal; }
+}

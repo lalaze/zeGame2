@@ -43,7 +43,7 @@ it('keeps existing actions working, hides secondary controls, and restores their
   expect(get('zoom').parentElement).toBe(get('stage'));
   expect(get('manage').parentElement).toBe(get('old-header'));
   expect(get('help').parentElement).toBe(get('play')); expect(get('help').hidden).toBe(false);
-  expect(button('settings').textContent).toBe('···');
+  expect(button('settings').textContent).toBe('设置');
   mobile = true; change();
   expect(get('overview').closest('.mobile-cafe-dock')).not.toBeNull();
   expect(document.querySelectorAll('#overview')).toHaveLength(1);
@@ -94,4 +94,12 @@ it('keeps the selected service speed visible after More closes, and removes it w
   expect(speed().textContent).toBe('4×');
   clock.click();
   expect(hud.expanded).toBe(true);
+});
+
+it('keeps the current settings language when rotating back to desktop', () => {
+  setLocale('en'); hud.update('Bean', 'Day 3', true, 'Closed');
+  mobile = false; change();
+  expect(button('settings').textContent).toBe('Settings');
+  setLocale('zh'); mobile = true; change(); mobile = false; change();
+  expect(button('settings').textContent).toBe('设置');
 });

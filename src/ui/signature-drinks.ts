@@ -11,6 +11,7 @@ import { tasteScore, tasteTier, SKILLED_SERVINGS, SIGNATURE_SERVINGS } from '../
 import { getLocale } from '../i18n';
 import { signatureDrinkArt, type SignatureArtKey } from '../render/signature-drink-art';
 import { showModal, closeModal } from './modal';
+import { iconArt } from './icon-art';
 import { isComposingKey } from './keyboard';
 
 type Base = typeof SIGNATURE_BASES[number];
@@ -69,8 +70,10 @@ const amount = (n: number) => String(n);
 function element<K extends keyof HTMLElementTagNameMap>(tag: K, text = '', cls = ''): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag); node.textContent = text; node.className = cls; return node;
 }
-function art(id: SignatureArtKey): HTMLImageElement {
-  const image = document.createElement('img'); image.src = signatureDrinkArt(id); image.alt = ''; image.width = 48; image.height = 48; return image;
+/** `drink` pictures a base as the finished house drink rather than as its ingredient. */
+function art(id: SignatureArtKey, drink = false): HTMLImageElement {
+  const painted = iconArt(drink ? `sig:${id}` : id === 'coffee' ? 'item:espresso' : `ing:${id}`);
+  const image = document.createElement('img'); image.src = painted ?? signatureDrinkArt(id); image.alt = ''; image.width = 48; image.height = 48; return image;
 }
 
 /** A single mounted dialog isolates focus; every mutation is checked against live state. */
@@ -109,7 +112,7 @@ export function showSignatureDrinks(state: GameState, onChange: () => void, onCl
       const def = signatureDefinition(drink.id); if (!def) continue;
       const card = element('section', '', 'signature-card'); card.dataset.signatureRecipe = drink.id;
       const info = element('div'); info.append(element('h4', drink.name), element('p', drink.onMenu ? words.listed : words.unlisted, 'note'));
-      card.append(art(def.base), info, button(words.detail, `detail:${drink.id}`, () => showDetail(drink.id))); cards.append(card);
+      card.append(art(def.base, true), info, button(words.detail, `detail:${drink.id}`, () => showDetail(drink.id))); cards.append(card);
     }
     if (!drinks.length) cards.append(element('p', words.empty, 'note'));
     page(element('h3', words.collection), element('p', words.intro, 'note'), element('p', `${drinks.length}/${MAX_SIGNATURE_RECIPES} ${words.book} · ${drinks.filter(d => d.onMenu).length}/${MAX_SIGNATURE_MENU} ${words.menu}`, 'signature-count'), status(), cards,
@@ -133,7 +136,7 @@ export function showSignatureDrinks(state: GameState, onChange: () => void, onCl
     for (const value of SIGNATURE_BASES) {
       const unlockedBase = unlocked.includes(BASE_INGREDIENT[value]);
       const b = button(label(value), `base:${value}`, () => { base = value; recipe = { [BASE_INGREDIENT[value]]: 1 }; tastedId = null; notice = ''; showWorkbench(`base:${value}`); }, !prep() || !unlockedBase);
-      b.prepend(art(value)); b.setAttribute('aria-pressed', String(base === value)); if (!unlockedBase) b.title = words.locked; bases.append(b);
+      b.prepend(art(value, true)); b.setAttribute('aria-pressed', String(base === value)); if (!unlockedBase) b.title = words.locked; bases.append(b);
     }
     const doses = element('div', '', 'signature-doses');
     function dose(id: IngredientId, isBase = false): void {
@@ -203,7 +206,7 @@ export function showSignatureDrinks(state: GameState, onChange: () => void, onCl
       button(words.remove, 'delete', () => showDetail(id, true), !prep()));
     const deletion = element('div', '', 'signature-delete');
     if (confirming) deletion.append(element('p', words.confirm), button(words.cancel, 'cancel-delete', () => showDetail(id)), button(words.remove, 'confirm-delete', () => { if (deleteSignature(state, drink.id)) { onChange(); notice = ''; showList(); } else { notice = words.failed; showDetail(id); } }, !prep()));
-    page(button(words.back, 'back', () => { notice = ''; showList(); }), element('h3', drink.name), art(def.base), element('p', drink.onMenu ? words.listed : words.unlisted), summary(id), status(), name, actions, ...(full ? [element('p', words.menuFull, 'note')] : []), deletion);
+    page(button(words.back, 'back', () => { notice = ''; showList(); }), element('h3', drink.name), art(def.base, true), element('p', drink.onMenu ? words.listed : words.unlisted), summary(id), status(), name, actions, ...(full ? [element('p', words.menuFull, 'note')] : []), deletion);
   }
   showList();
   showModal({ title: words.title, body: root, focusableBody: true, buttons: [{ label: words.close, onClick: onClose }] });

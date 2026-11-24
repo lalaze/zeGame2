@@ -66,11 +66,19 @@
  "item:sourdough",
  "item:swissroll",
  "item:vienna",
+ "promo:flash",
+ "promo:orange",
+ "sig:coffee",
+ "sig:fruit",
+ "sig:milk",
+ "sig:tea",
  "upgrade:barista",
  "upgrade:cook",
  "upgrade:machine",
  "upgrade:marketing",
  "upgrade:pass",
  "upgrade:server",
- "upgrade:tables"
+ "upgrade:tables",
+ "wish:milky",
+ "wish:quiet"
 ]

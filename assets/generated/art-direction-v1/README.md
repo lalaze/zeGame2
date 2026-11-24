@@ -7,9 +7,9 @@ low-saturation pastel palette (cream, sage, dusty pink, honey, soft teal) and la
 floor. Characters are cute and round, with dot eyes.
 
 The user picked it (direction N) from 17 concept shots made over three rounds; the rest were
-deleted. It replaces style B (`cozy-cast-v9/style-b.png`) as the reference for new art. Nothing in
-the game uses it yet: what ships is still style B pixel art until the new floors, characters and UI
-exist.
+deleted. It replaces style B (`cozy-cast-v9/style-b.png`) as the reference for new art. Since
+2026-11-24 the game draws it: the building of `src/render/floors/`, with the art of
+`../floor-sample-v1`. The style B pixel room still opens with `?pixel`.
 
 It is a concept, made with Codex image generation (`scripts/art-gen/codex-image.mjs`) from
 `prompts/common.txt` followed by `prompts/style.txt`, without a reference image. Its text, UI and

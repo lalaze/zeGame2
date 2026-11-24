@@ -1,3 +1,4 @@
+import { gameIcon } from './game-chrome';
 import { t } from '../i18n';
 import type { Speed } from '../game/data';
 import { MOBILE_MANAGEMENT_QUERY } from './fullscreen-drawer';
@@ -43,10 +44,8 @@ export class MobileCafeHud {
   private abort = new AbortController();
   private active = false;
   private open = false;
-  private settingsText: string;
 
   constructor(root: HTMLElement, private controls: HudElements) {
-    this.settingsText = controls.settings.textContent ?? '';
     this.element.className = 'mobile-cafe-hud';
     this.header.className = 'mobile-cafe-header';
     this.clock.className = 'mobile-cafe-clock';
@@ -60,6 +59,7 @@ export class MobileCafeHud {
     this.dock.className = 'mobile-cafe-dock';
     this.primary.className = 'mobile-cafe-primary';
     this.more.id = 'mobile-cafe-more'; this.more.className = 'pixel-btn ghost';
+    gameIcon(this.more, 'more');
     this.sheet.id = 'mobile-cafe-tools'; this.sheet.className = 'mobile-cafe-tools';
     this.sheet.setAttribute('aria-labelledby', 'mobile-cafe-tools-title');
     this.backdrop.className = 'mobile-tools-backdrop'; this.backdrop.type = 'button'; this.backdrop.tabIndex = -1;
@@ -119,7 +119,7 @@ export class MobileCafeHud {
     } else {
       // Restore inner controls before restoring their outer container.
       for (const [element, home] of [...this.homes].reverse()) { home.replaceWith(element); }
-      this.homes.clear(); c.help.hidden = false; c.settings.textContent = this.settingsText;
+      this.homes.clear(); c.help.hidden = false; c.settings.textContent = t('hud.settings');
     }
     this.labels();
   };
@@ -164,7 +164,7 @@ export class MobileCafeHud {
   destroy(): void {
     this.close(false); this.abort.abort();
     for (const [element, home] of [...this.homes].reverse()) home.replaceWith(element);
-    this.controls.help.hidden = false; this.controls.settings.textContent = this.settingsText;
+    this.controls.help.hidden = false; this.controls.settings.textContent = t('hud.settings');
     document.body.classList.remove('mobile-cafe-layout'); this.element.remove();
   }
 }

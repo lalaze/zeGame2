@@ -2,6 +2,7 @@ import type { Look } from '../game/state';
 import { fineSpriteArt } from '../render/fine-sprite-art';
 import { STANDING_CHARACTER_SCALE, preloadReferenceLook } from '../render/reference-character-art';
 import { character } from '../render/sprites';
+import { portraitArt } from './portrait-art';
 
 export interface GeneratedOwnerPreview {
   readonly canvas: HTMLCanvasElement;
@@ -34,6 +35,26 @@ export function createGeneratedOwnerPreview(initialLook: Look, cssScale: number,
     const snapshot = { ...look };
     canvas.dataset.loading = 'true';
     delete canvas.dataset.loadError;
+    // The floors view previews its painted owner (portrait-art.ts), as tall as the pixel one.
+    const painted = portraitArt({ look: snapshot });
+    if (painted) {
+      void painted.then(figure => {
+        if (disposed || token !== generation) return;
+        canvas.width = figure.width;
+        canvas.height = figure.height;
+        canvas.style.height = `${28 * cssScale}px`;
+        canvas.style.width = `${28 * cssScale * figure.width / figure.height}px`;
+        canvas.getContext('2d')?.drawImage(figure, 0, 0);
+        canvas.dataset.generatedOwner = 'true';
+        canvas.dataset.portrait = 'painted';
+        canvas.dataset.loading = 'false';
+      }).catch(() => { if (!disposed && token === generation) sprite(snapshot, token); });
+      return;
+    }
+    sprite(snapshot, token);
+  };
+  const sprite = (snapshot: Look, token: number) => {
+    delete canvas.dataset.portrait;
     void preloadReferenceLook(snapshot).then(() => {
       if (disposed || token !== generation) return;
       const frame = character(snapshot, 'owner').stand;

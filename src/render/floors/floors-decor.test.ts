@@ -68,9 +68,13 @@ const iconsPath = `${BUILD}/icons/icons.json`;
 const icons = existsSync(iconsPath) ? JSON.parse(readFileSync(iconsPath, 'utf8')) as string[] : null;
 
 describe.skipIf(!icons)('floors ledger icons', () => {
-  it('names only real menu items, ingredients and upgrades, with files that exist', async () => {
+  it('names only real menu items, ingredients, upgrades and dialog pictures, with files that exist', async () => {
     const { MENU, INGREDIENTS, UPGRADES } = await import('../../game/data');
-    const known = new Set([...MENU.map(m => `item:${m.id}`), ...INGREDIENTS.map(i => `ing:${i.id}`), ...UPGRADES.map(u => `upgrade:${u.id}`)]);
+    const { SIGNATURE_BASES } = await import('../../game/signature-drinks');
+    const { PROMOTION_PLANS } = await import('../../game/promotion');
+    const known = new Set([...MENU.map(m => `item:${m.id}`), ...INGREDIENTS.map(i => `ing:${i.id}`), ...UPGRADES.map(u => `upgrade:${u.id}`),
+      // The dialogs' pictures (floors-fx.test.ts): signature drinks by base, promotion platforms, Mina's map by route.
+      ...SIGNATURE_BASES.map(base => `sig:${base}`), ...PROMOTION_PLANS.map(plan => `promo:${plan.platform}`), 'wish:quiet', 'wish:milky']);
     for (const key of icons!) {
       expect(known.has(key), key).toBe(true);
       expect(existsSync(`${BUILD}/icons/${key.replace(':', '-')}.webp`), key).toBe(true);

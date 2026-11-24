@@ -34,4 +34,24 @@ describe('approved storefront geometry', () => {
     expect(css).toContain('.street-shop-open .street-shop-visitor { display: none; }');
     expect(css).toContain('street-art-v2/paving.webp');expect(css).toContain('street-art-v2/curb.webp');
   });
+  it('covers the middle and both street ends with bounded, noninteractive depth layers', () => {
+    const scene = document.createElement('div'); scene.innerHTML = streetSceneryArt();
+    const depth = scene.querySelector('.street-depth')!;
+    expect(depth.getAttribute('aria-hidden')).toBe('true');
+    const sections = [...depth.querySelectorAll<HTMLElement>('.street-depth-section')];
+    expect(sections.map(s => s.style.getPropertyValue('--section'))).toEqual(['0','1','2','3','4','5','6']);
+    for (const [i, section] of sections.entries()) {
+      for (const name of ['town', 'tree', 'hedge']) {
+        const sprite = section.querySelector<HTMLImageElement>(`.street-depth-${name}`)!;
+        const asset = name === 'town' && i % 3 !== 1 ? 'hamlet' : name;
+        expect(sprite.src).toContain(`/art/street-art-v2/depth-${asset}.webp`);
+        expect(sprite.alt).toBe(''); expect(sprite.getAttribute('draggable')).toBe('false');
+      }
+    }
+    expect(depth.querySelectorAll('button, a, [tabindex]')).toHaveLength(0);
+    expect(depth.querySelectorAll('img')).toHaveLength(21);
+    for (const [i, walker] of [...scene.querySelectorAll<HTMLElement>('.street-walker')].entries()) {
+      expect(walker.style.getPropertyValue('--section')).toBe(String(i));
+    }
+  });
 });

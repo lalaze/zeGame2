@@ -3,6 +3,7 @@ import type { Customer } from '../game/sim';
 import { character, toDataURL } from '../render/sprites';
 import { fineSpriteArt } from '../render/fine-sprite-art';
 import { closeModal, isModalOpen, showModal, toast } from './modal';
+import { showPortrait } from './portrait-art';
 import './service-help.css';
 
 export interface ServiceHelpOption {
@@ -39,10 +40,13 @@ export function requestServiceHelp(options: readonly ServiceHelpOption[], allowe
     const copy = document.createElement('span'); copy.textContent = option.detail;
     const text = document.createElement('span'); text.className = 'service-help-copy'; text.append(heading, copy);
     if (option.guest) {
-      const frames = character(option.guest.look, 'customer', option.guest.appearanceId);
-      const art = fineSpriteArt(frames.stand);
+      const guest = option.guest;
       const portrait = document.createElement('img');
-      portrait.src = toDataURL(art.canvas, 2 / art.density);
+      // The floors view shows the guest as painted in the building, under the look the scene gives them.
+      showPortrait(portrait, { guest: guest.appearanceId ?? guest.id }, () => {
+        const art = fineSpriteArt(character(guest.look, 'customer', guest.appearanceId).stand);
+        return toDataURL(art.canvas, 2 / art.density);
+      });
       portrait.alt = ''; portrait.className = 'service-help-portrait';
       portrait.width = 32; portrait.height = 52;
       button.append(portrait);

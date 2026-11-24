@@ -1,0 +1,5 @@
+/* Painted portraits in the floors view (src/ui/portrait-art.ts): soft pictures, not pixel art. */
+:root body.floors-view [data-portrait="painted"] { image-rendering: auto; }
+:root body.floors-view img[data-portrait="painted"] { object-fit: contain; }
+:root body.floors-view .regular-portrait[data-portrait="painted"] { background: none; }
+:root body.floors-view .swatch-sprite[data-portrait="painted"] { height: auto; }

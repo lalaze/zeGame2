@@ -1,0 +1,484 @@
+{
+ "frames": {
+  "item-affogato": {
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 71,
+    "h": 72
+   }
+  },
+  "item-americano": {
+   "frame": {
+    "x": 74,
+    "y": 0,
+    "w": 69,
+    "h": 72
+   }
+  },
+  "item-bagel": {
+   "frame": {
+    "x": 148,
+    "y": 0,
+    "w": 72,
+    "h": 57
+   }
+  },
+  "item-baguette": {
+   "frame": {
+    "x": 222,
+    "y": 0,
+    "w": 58,
+    "h": 72
+   }
+  },
+  "item-blacktea": {
+   "frame": {
+    "x": 296,
+    "y": 0,
+    "w": 72,
+    "h": 59
+   }
+  },
+  "item-brioche": {
+   "frame": {
+    "x": 370,
+    "y": 0,
+    "w": 72,
+    "h": 72
+   }
+  },
+  "item-brownie": {
+   "frame": {
+    "x": 444,
+    "y": 0,
+    "w": 72,
+    "h": 62
+   }
+  },
+  "item-cake": {
+   "frame": {
+    "x": 518,
+    "y": 0,
+    "w": 72,
+    "h": 67
+   }
+  },
+  "item-cappuccino": {
+   "frame": {
+    "x": 592,
+    "y": 0,
+    "w": 72,
+    "h": 66
+   }
+  },
+  "item-chai": {
+   "frame": {
+    "x": 666,
+    "y": 0,
+    "w": 72,
+    "h": 68
+   }
+  },
+  "item-cheesebun": {
+   "frame": {
+    "x": 0,
+    "y": 74,
+    "w": 72,
+    "h": 56
+   }
+  },
+  "item-cheesecake": {
+   "frame": {
+    "x": 74,
+    "y": 74,
+    "w": 72,
+    "h": 60
+   }
+  },
+  "item-chocobread": {
+   "frame": {
+    "x": 148,
+    "y": 74,
+    "w": 72,
+    "h": 61
+   }
+  },
+  "item-ciabatta": {
+   "frame": {
+    "x": 222,
+    "y": 74,
+    "w": 72,
+    "h": 57
+   }
+  },
+  "item-cinnamon": {
+   "frame": {
+    "x": 296,
+    "y": 74,
+    "w": 72,
+    "h": 61
+   }
+  },
+  "item-coldbrew": {
+   "frame": {
+    "x": 370,
+    "y": 74,
+    "w": 49,
+    "h": 72
+   }
+  },
+  "item-cookie": {
+   "frame": {
+    "x": 444,
+    "y": 74,
+    "w": 72,
+    "h": 57
+   }
+  },
+  "item-cortado": {
+   "frame": {
+    "x": 518,
+    "y": 74,
+    "w": 61,
+    "h": 72
+   }
+  },
+  "item-creamcoffee": {
+   "frame": {
+    "x": 592,
+    "y": 74,
+    "w": 72,
+    "h": 63
+   }
+  },
+  "item-creampuff": {
+   "frame": {
+    "x": 666,
+    "y": 74,
+    "w": 72,
+    "h": 64
+   }
+  },
+  "item-croissant": {
+   "frame": {
+    "x": 0,
+    "y": 148,
+    "w": 72,
+    "h": 59
+   }
+  },
+  "item-dirty": {
+   "frame": {
+    "x": 74,
+    "y": 148,
+    "w": 68,
+    "h": 72
+   }
+  },
+  "item-donut": {
+   "frame": {
+    "x": 148,
+    "y": 148,
+    "w": 72,
+    "h": 59
+   }
+  },
+  "item-eggtart": {
+   "frame": {
+    "x": 222,
+    "y": 148,
+    "w": 72,
+    "h": 58
+   }
+  },
+  "item-espresso": {
+   "frame": {
+    "x": 296,
+    "y": 148,
+    "w": 72,
+    "h": 66
+   }
+  },
+  "item-flatwhite": {
+   "frame": {
+    "x": 370,
+    "y": 148,
+    "w": 72,
+    "h": 65
+   }
+  },
+  "item-focaccia": {
+   "frame": {
+    "x": 444,
+    "y": 148,
+    "w": 72,
+    "h": 61
+   }
+  },
+  "item-frappe": {
+   "frame": {
+    "x": 518,
+    "y": 148,
+    "w": 46,
+    "h": 72
+   }
+  },
+  "item-fruitbrioche": {
+   "frame": {
+    "x": 592,
+    "y": 148,
+    "w": 72,
+    "h": 63
+   }
+  },
+  "item-fruittea": {
+   "frame": {
+    "x": 666,
+    "y": 148,
+    "w": 72,
+    "h": 59
+   }
+  },
+  "item-garlicbread": {
+   "frame": {
+    "x": 0,
+    "y": 222,
+    "w": 72,
+    "h": 59
+   }
+  },
+  "item-hojicha": {
+   "frame": {
+    "x": 74,
+    "y": 222,
+    "w": 72,
+    "h": 59
+   }
+  },
+  "item-hotchoc": {
+   "frame": {
+    "x": 148,
+    "y": 222,
+    "w": 72,
+    "h": 66
+   }
+  },
+  "item-latte": {
+   "frame": {
+    "x": 222,
+    "y": 222,
+    "w": 72,
+    "h": 62
+   }
+  },
+  "item-lemontea": {
+   "frame": {
+    "x": 296,
+    "y": 222,
+    "w": 63,
+    "h": 72
+   }
+  },
+  "item-macaron": {
+   "frame": {
+    "x": 370,
+    "y": 222,
+    "w": 72,
+    "h": 58
+   }
+  },
+  "item-macchiato": {
+   "frame": {
+    "x": 444,
+    "y": 222,
+    "w": 56,
+    "h": 72
+   }
+  },
+  "item-matcha": {
+   "frame": {
+    "x": 518,
+    "y": 222,
+    "w": 72,
+    "h": 59
+   }
+  },
+  "item-matchafloat": {
+   "frame": {
+    "x": 592,
+    "y": 222,
+    "w": 52,
+    "h": 72
+   }
+  },
+  "item-melonpan": {
+   "frame": {
+    "x": 666,
+    "y": 222,
+    "w": 72,
+    "h": 60
+   }
+  },
+  "item-milktea": {
+   "frame": {
+    "x": 0,
+    "y": 296,
+    "w": 72,
+    "h": 58
+   }
+  },
+  "item-mocha": {
+   "frame": {
+    "x": 74,
+    "y": 296,
+    "w": 67,
+    "h": 72
+   }
+  },
+  "item-muffin": {
+   "frame": {
+    "x": 148,
+    "y": 296,
+    "w": 72,
+    "h": 63
+   }
+  },
+  "item-painchoc": {
+   "frame": {
+    "x": 222,
+    "y": 296,
+    "w": 72,
+    "h": 61
+   }
+  },
+  "item-pourover": {
+   "frame": {
+    "x": 296,
+    "y": 296,
+    "w": 57,
+    "h": 72
+   }
+  },
+  "item-pretzel": {
+   "frame": {
+    "x": 370,
+    "y": 296,
+    "w": 72,
+    "h": 56
+   }
+  },
+  "item-raisinbread": {
+   "frame": {
+    "x": 444,
+    "y": 296,
+    "w": 72,
+    "h": 66
+   }
+  },
+  "item-roll": {
+   "frame": {
+    "x": 518,
+    "y": 296,
+    "w": 72,
+    "h": 60
+   }
+  },
+  "item-rye": {
+   "frame": {
+    "x": 592,
+    "y": 296,
+    "w": 72,
+    "h": 58
+   }
+  },
+  "item-scone": {
+   "frame": {
+    "x": 666,
+    "y": 296,
+    "w": 72,
+    "h": 60
+   }
+  },
+  "item-shokupan": {
+   "frame": {
+    "x": 0,
+    "y": 370,
+    "w": 72,
+    "h": 66
+   }
+  },
+  "item-smoothie": {
+   "frame": {
+    "x": 74,
+    "y": 370,
+    "w": 45,
+    "h": 72
+   }
+  },
+  "item-sourdough": {
+   "frame": {
+    "x": 148,
+    "y": 370,
+    "w": 72,
+    "h": 59
+   }
+  },
+  "item-swissroll": {
+   "frame": {
+    "x": 222,
+    "y": 370,
+    "w": 72,
+    "h": 62
+   }
+  },
+  "item-vienna": {
+   "frame": {
+    "x": 296,
+    "y": 370,
+    "w": 65,
+    "h": 72
+   }
+  },
+  "sig-coffee": {
+   "frame": {
+    "x": 370,
+    "y": 370,
+    "w": 69,
+    "h": 72
+   }
+  },
+  "sig-fruit": {
+   "frame": {
+    "x": 444,
+    "y": 370,
+    "w": 43,
+    "h": 72
+   }
+  },
+  "sig-milk": {
+   "frame": {
+    "x": 518,
+    "y": 370,
+    "w": 42,
+    "h": 72
+   }
+  },
+  "sig-tea": {
+   "frame": {
+    "x": 592,
+    "y": 370,
+    "w": 71,
+    "h": 72
+   }
+  }
+ },
+ "meta": {
+  "size": {
+   "w": 740,
+   "h": 444
+  },
+  "scale": "1",
+  "image": "items.webp"
+ }
+}

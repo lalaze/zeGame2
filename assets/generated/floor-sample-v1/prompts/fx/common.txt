@@ -1,0 +1,5 @@
+Image 1 is the approved art direction of this cozy café game. Image 2 is the café's ground floor. Paint small props and effects that the game draws over that building (above its guests' heads, on its tables and in its people's hands) in exactly that style: soft hand-drawn illustration, thin warm-brown outlines, gentle low-saturation colours, soft shading with warm light from the upper left. Each one is centred in its cell and fills most of the cell, with a bold, simple silhouette that still reads when shown 24 pixels wide.
+
+Sprite sheet: one landscape image with a fully transparent background, EXACTLY 4 columns and 2 rows of equal cells, 8 separate objects. Each object is fully inside its own cell with clear empty space around it; nothing touches or overlaps a neighbour. No table or counter under them, no cast shadows, no labels, no numbers, no grid lines, no backdrop. Keep any writing out: no letters or words anywhere. Crisp edges with no pale halo.
+
+Cells left to right along the top row, then the bottom row:

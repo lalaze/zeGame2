@@ -6,6 +6,7 @@ import { t } from '../i18n';
 import { character, toDataURL } from '../render/sprites';
 import { fineSpriteArt } from '../render/fine-sprite-art';
 import { displayItemName } from './item-name';
+import { showPortrait } from './portrait-art';
 
 const text = <K extends keyof HTMLElementTagNameMap>(tag: K, value: string, className = '') => {
   const el = document.createElement(tag); el.textContent = value; el.className = className; return el;
@@ -24,8 +25,11 @@ export function guestMemoryNotes(s: GameState, day?: number): HTMLElement | null
   root.append(text('p', t('memory.journalNote'), 'note'));
   for (const [id, memory] of memories) {
     const card = document.createElement('article'); card.className = 'guest-memory'; card.dataset.memoryGuest = String(id);
-    const cast = CUSTOMER_CAST[id], frame = character(cast.look, 'customer', id).stand, art = fineSpriteArt(frame);
-    const portrait = document.createElement('img'); portrait.src = toDataURL(art.canvas, 3 / art.density); portrait.alt = '';
+    const portrait = document.createElement('img'); portrait.alt = '';
+    showPortrait(portrait, { guest: id }, () => {
+      const art = fineSpriteArt(character(CUSTOMER_CAST[id].look, 'customer', id).stand);
+      return toDataURL(art.canvas, 3 / art.density);
+    });
     portrait.width = 48; portrait.height = 78;
     const body = document.createElement('div');
     body.append(text('h4', name(s, memory)), text('p', t(`memory.learned.${memory.source}`, { day: memory.learnedDay }), 'note'));

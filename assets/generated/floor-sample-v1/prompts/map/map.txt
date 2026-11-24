@@ -1,0 +1,11 @@
+Image 1 is the approved art direction of this cozy café game. Image 2 is the little town the café stands in, as the game draws it. Image 3 is the game's old pixel-art map of the region around that town; the five red dots mark the five places where a café can open. Paint that map again in exactly the style of images 1 and 2: a soft hand-drawn storybook map seen from high above at a gentle angle, thin warm-brown outlines, gentle low-saturation colours (cream, sage, dusty pink, honey, soft teal), soft shading with warm light from the upper left.
+
+Keep the layout of image 3, with every place where its red dot is:
+- in the middle, a little left of the centre: the old town, a cluster of cream houses with terracotta roofs around a small square with a bell tower;
+- top left: snowy mountain peaks with dark green fir woods below them and one log cabin;
+- top right: the city, a block of taller grey-blue and brick buildings with many windows and one tower;
+- bottom right: the coast. The sea fills the lower right corner in soft teal with pale surf along a sandy beach, a red-and-white lighthouse on the shore and a small sailboat;
+- bottom left: flower fields in long stripes of pink, yellow, lilac and white, with a windmill beside them.
+Pale sandy country roads wind from the old town to each of the other four places. Between them lie soft sage-green meadows with a few round trees, hedgerows and tiny ponds.
+
+One landscape image filled edge to edge with the map: no border, no frame, no paper edge, no compass, no pins, no red dots, no labels. No letters, words or numbers anywhere. Leave the country a little plain around each place: the game sets a name label there.

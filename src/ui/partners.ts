@@ -7,6 +7,7 @@ import { getLocale, pluralForm } from '../i18n';
 import { character, toDataURL } from '../render/sprites';
 import { fineSpriteArt } from '../render/fine-sprite-art';
 import { showModal } from './modal';
+import { showPortrait } from './portrait-art';
 export const partnerText = (zh: string, en: string) => getLocale() === 'zh' ? zh : en;
 /** Localized count of a countable noun in this screen's ad-hoc bilingual copy. */
 export const partnerCount = (n: number, zhUnit: string, one: string, many: string) =>
@@ -61,8 +62,10 @@ export function showPartners(state: GameState, sim: Sim, save: () => void, selec
     const title=root.querySelector<HTMLElement>('h3'); if(title) { title.tabIndex=-1; title.focus(); }
   }
   function portrait(p: PartnerDefinition): HTMLImageElement {
-    const frame=character(p.look,p.role,p.appearance).stand, art=fineSpriteArt(frame);
-    const img=node('img','', 'regular-portrait'); img.src=toDataURL(art.canvas,3/art.density); img.alt=''; img.width=48; img.height=78; return img;
+    const img=node('img','', 'regular-portrait'); img.alt=''; img.width=48; img.height=78;
+    // The floors view shows its painted staff (portrait-art.ts); the pixel view, the partner's sprite.
+    showPortrait(img,{look:p.look},()=>{ const art=fineSpriteArt(character(p.look,p.role,p.appearance).stand); return toDataURL(art.canvas,3/art.density); });
+    return img;
   }
   function identity(p: PartnerDefinition): HTMLElement {
     const h=node('div','', 'regular-heading'), title=node('div','', 'regular-identity');

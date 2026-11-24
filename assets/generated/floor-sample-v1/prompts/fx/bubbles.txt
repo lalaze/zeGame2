@@ -1,0 +1,9 @@
+The three bubbles are EMPTY: flat cream paper inside (the game draws a picture in them), one even warm-brown outline, nothing written or drawn in them.
+1. An empty speech bubble: a rounded square of cream paper with a small pointed tail at the middle of its bottom edge.
+2. An empty thought bubble: a fluffy cream cloud with two small round puffs trailing down from the middle of its bottom edge.
+3. An empty wide speech bubble: the same rounded cream paper, twice as wide as it is tall, with a small pointed tail at the middle of its bottom edge.
+4. A plump dusty-pink heart with a small highlight.
+5. A small grey-blue rain cloud with three soft-blue raindrops falling from it.
+6. An exclamation mark shape: a fat honey-yellow teardrop stroke above a round honey-yellow dot, outlined in warm brown.
+7. A hand-drawn cross: two soft brick-red brush strokes crossing in an X, outlined in warm brown.
+8. A small wooden hourglass with honey-coloured sand running through it.

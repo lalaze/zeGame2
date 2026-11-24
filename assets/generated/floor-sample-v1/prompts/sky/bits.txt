@@ -1,0 +1,15 @@
+Grid: 4 columns and 3 rows, 12 pieces. Each fills about two thirds of its cell.
+
+Cells left to right, top row first:
+1. the full moon: a perfectly round pale cream-yellow disc with three soft, slightly darker craters and a thin warm-brown outline;
+2. the sun: a round warm yellow disc with a thin warm-brown outline and a ring of twelve short, soft, rounded rays that do not touch the disc;
+3. a twinkling star: a four-pointed pale yellow sparkle with slim, slightly curved points, no outline;
+4. a falling raindrop as the game draws rain: one slim, straight, pale blue-white streak leaning slightly to the right, pointed at the top and rounded at the bottom, about eight times as long as wide, no outline;
+5. a raindrop's splash on paving: a small flat pale blue-white ring seen from a high angle (an ellipse, wider than tall) with three tiny droplets jumping up from it, no outline;
+6. a snowflake: a simple six-armed white flake with a pale blue thin outline;
+7. a soft snowflake: a small round fluffy white dot with a pale blue thin outline;
+8. an autumn maple leaf, warm orange turning red at its tips, thin warm-brown outline, tilted;
+9. a small oval autumn leaf, honey yellow with a little green at its stem, thin warm-brown outline, tilted the other way;
+10. a party balloon, dusty pink, with a thin string hanging straight down, thin warm-brown outline;
+11. a party balloon, soft teal, with a thin string hanging straight down, thin warm-brown outline;
+12. a small round songbird gliding to the right with its wings spread, soft grey-blue with a cream belly, dot eye, thin warm-brown outline.

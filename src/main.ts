@@ -7,6 +7,8 @@ import './style.css';
 import './ui/ledger.css';
 import './ui/mobile-cafe-hud.css';
 import './ui/cream-pixel.css';
+import './ui/game-ui-refresh.css';
+import { installGameChrome } from './ui/game-chrome';
 
 import { PlayFlow } from './ui/play-flow';
 import { requestServiceHelp, type ServiceHelpOption } from './ui/service-help';
@@ -17,6 +19,7 @@ import { CafeLife, closingStory } from './ui/cafe-life';
 import { trialResultCard } from './ui/trial-sales';
 import { guestMemoryReport } from './ui/guest-memories';
 import { showLivingCat } from './ui/living-cats';
+import { catView, locateCat } from './ui/cat-art';
 import { petActive, type CatId } from './game/pets';
 import { DAY_SECONDS, SPEEDS } from './game/data';
 import { openShop, type DayReport } from './game/day';
@@ -45,13 +48,16 @@ import { LOCALES, LOCALE_KEY, detectLocale, getLocale, onLocaleChange, setLocale
 import { CafeView } from './render/cafe-view';
 import { CafeGame } from './render/phaser/game';
 import { FloorsGame } from './render/floors/floors-game';
+import { installFloorsIdentity } from './ui/floors-identity';
 import { markFloorsIcons } from './ui/floors-ui';
+import { isFloorsView } from './render/floors/floors-view';
 import { character, toDataURL } from './render/sprites';
 import { wantCozyTeamStyle } from './render/cozy-team-art';
 import { fineSpriteArt } from './render/fine-sprite-art';
 import { showMoneyDetails } from './ui/money-details';
 import { closeModal, isModalOpen, showModal, toast } from './ui/modal';
 import { showOnboarding, type OnboardingResult } from './ui/onboarding';
+import { portraitUrl } from './ui/portrait-art';
 import { Panel, decorName, itemName, type ArrangeRequest } from './ui/panel';
 import { OperationMonitor, operationStatus } from './game/operations';
 import { ingredientName } from './ui/panel';
@@ -86,6 +92,8 @@ import { startupLoading } from './ui/startup-loading';
 // Static imports succeeded; the game now owns startup/error feedback.
 window.dispatchEvent(new Event('cafe:bootstrap-ready'));
 trackVisualViewport();
+// The building's icon and loading screen; the pixel view (`?pixel`) keeps the page's own.
+if (isFloorsView()) installFloorsIdentity();
 import { settlementHtml } from './ui/settlement';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -198,9 +206,9 @@ for (const type of ['click', 'pointerdown', 'keydown']) {
 // ------------------------------------------------------------ display
 
 const canvas = $<HTMLCanvasElement>('scene');
-// `?floors` draws the café as the cross-section building (assets/generated/art-direction-v1)
-// instead of the pixel room. A trial: its art loads from assets/, which only the dev server serves.
-const floorsView = new URLSearchParams(location.search).has('floors');
+// The café is the cross-section building (assets/generated/art-direction-v1); `?pixel` draws the
+// pixel room it replaced.
+const floorsView = isFloorsView();
 const CafeRenderer = floorsView ? FloorsGame : CafeGame;
 /** The building has spots of its own for furniture: pieces on the pixel room's grid move to them. Returns how many found none. */
 const settleFurniture = () => (floorsView ? settleInBuilding(state) : 0);
@@ -281,6 +289,8 @@ function updateDrawerLabels(): void {
   panelToggle.setAttribute('aria-controls', folded ? 'edge-tools' : 'management-panel');
   panelToggle.setAttribute('aria-expanded', String(!panelCollapsed || shortcuts.expanded));
   edgeTools.setAttribute('aria-label', t('panel.title'));
+  document.querySelector('.game-toolbelt')?.setAttribute('aria-label', t('mobile.actions'));
+  $('settings-btn').textContent = t('hud.settings');
   for (const button of edgeTools.querySelectorAll<HTMLButtonElement>('[data-management-tab]')) {
     const tab = button.dataset.managementTab as 'menu' | 'pantry' | 'upgrades' | 'decor' | 'pets' | 'promotion';
     button.querySelector('span:last-child')!.textContent = t(`tab.${tab}`);
@@ -329,7 +339,7 @@ const panel = new Panel(
   },
   (request) => startArrange(request),
   {
-    getActor: (id) => scene.livingCats.actors.get(id),
+    getActor: (id) => catView(id) ?? scene.livingCats.actors.get(id),
     locate: (id) => locateResident(id),
     interact: (id) => greetResident(id),
   },
@@ -963,6 +973,9 @@ onLocaleChange(() => {
 
 const ownerIcon = () => {
   if (!state.profile) return toDataURL(character({ skin: 0, hair: 1, hairStyle: 1, shirt: 0, pants: 0 }, 'barista').stand, 3);
+  // The floors view shows its painted owner, once drawn (ui/portrait-art.ts).
+  const painted = portraitUrl({ look: state.profile.look });
+  if (painted) return painted;
   const frames = character(state.profile.look, 'owner');
   const art = fineSpriteArt(frames.stand);
   return toDataURL(art.canvas, 3 / art.density);
@@ -1149,8 +1162,12 @@ function locateResident(id: CatId): void {
   if (!actor) return;
   catLocateContext = panelCollapsed ? null : panel.captureBrowsingContext();
   setPanelCollapsed(true, false);
-  regionsUI.select(actor.area);
-  scene.focusResidentCat(id, reducedMotion.matches);
+  // The floors view scrolls its building to the cat itself; the pixel café moves to the cat's room.
+  if (locateCat(id)) scene.selectResidentCat(id);
+  else {
+    regionsUI.select(actor.area);
+    scene.focusResidentCat(id, reducedMotion.matches);
+  }
   catLocateExit.hidden = false;
   roomViewport?.reset();
   catLocateExit.focus({ preventScroll: true });
@@ -1163,6 +1180,18 @@ function greetResident(id: CatId): void {
     return;
   }
   toast(t('pet.living.greeted', { name: t(`pet.${id}.name`) }));
+}
+
+/**
+ * A cat tapped in the floors view: a resident is marked and petted, the visiting cat just petted.
+ * A tap on a marked resident's name opens its card, as a tap on a resident does in the pixel café.
+ */
+function tapCat(id?: CatId, card = false): void {
+  if (!id) { scene.petCat(); return; }
+  scene.selectResidentCat(id);
+  const pet = state.pets.find(p => p.id === id);
+  if (card && pet) showLivingCat(pet, catView(id) ?? scene.livingCats.actors.get(id), () => greetResident(id), () => locateResident(id));
+  else greetResident(id);
 }
 
 function tapAt(x: number, y: number): void {
@@ -1503,6 +1532,8 @@ const cafe = new CafeRenderer(canvas, scene, sim, () => state, {
   tapTarget: (target) => {
     if (target.kind === 'moment') openMoment();
     else if (target.kind === 'partner') showPartners(state, sim, saveGame, target.id);
+    else if (target.kind === 'cat') tapCat(target.id, target.card);
+    else if (target.kind === 'gift') pickUpGift(target.id);
     else helpBrew();
   },
   arrangeSpot,
@@ -1517,6 +1548,7 @@ roomViewport = new RoomViewport(canvas, stage,
   () => floorsView || arrange || !catLocateExit.hidden || !isAreaOpen(state, scene.area) ? 1
     : mobileRoomZoom(stage.clientWidth, stage.clientHeight, canvas.parentElement!.clientHeight),
   () => !floorsView);
+installGameChrome($('app'));
 mobileHud = new MobileCafeHud($('app'), {
   money: document.querySelector<HTMLElement>('.money')!, day: $('day-hud'), status: operationBtn,
   people: document.querySelector<HTMLElement>('.cafe-status-bar')!, style: $('cafe-style-btn'),

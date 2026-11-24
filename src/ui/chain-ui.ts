@@ -12,8 +12,14 @@ import { showModal, toast } from './modal';
 
 const ART = `${import.meta.env.BASE_URL}art/generated/cozy-idle-v1/`;
 /** The little storefront that stands for a place on the map and in the chain card. */
-export const shopImage = (place: LocationId) => `${ART}shop-${place}.webp`;
-export const perkImage = (id: PerkId) => `${ART}perk-${id}.webp`;
+/** Pictures another look shows for the places and perks (the floors view, src/render/floors/floors-street.ts). */
+export type ChainArt = (kind: 'shop' | 'perk', id: LocationId | PerkId) => string | undefined;
+let painted: ChainArt | null = null;
+export function setChainArt(art: ChainArt | null): void {
+  painted = art;
+}
+export const shopImage = (place: LocationId) => painted?.('shop', place) ?? `${ART}shop-${place}.webp`;
+export const perkImage = (id: PerkId) => painted?.('perk', id) ?? `${ART}perk-${id}.webp`;
 
 const pct = (share: number) => Math.round(share * 100);
 const hours = (h: number) => Math.round(h * 10) / 10;

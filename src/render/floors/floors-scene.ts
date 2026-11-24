@@ -19,9 +19,14 @@ import {
 } from './floors-layout';
 import { BACK_LAYERS, FRONT_LAYERS, type DecorFloor, type DecorManifest } from './floors-decor-layers';
 import { makeTextures } from './textures';
+import { FloorsFront } from './floors-front';
+import { FloorsProps } from './floors-props';
 import { FloorsThoughts, type ThinkingHead } from './floors-thoughts';
 import { t } from '../../i18n';
+import { FloorsCats } from './floors-cats';
+import { StaffTextures } from './floors-looks';
 import { outerWallShown, setOuterWall } from '../../ui/floors-ui';
+import { FloorsSky } from './floors-sky';
 
 export const FLOORS_ART = `${import.meta.env.BASE_URL}assets/generated/floor-sample-v1/build/`;
 export interface SheetSize { frameWidth: number; frameHeight: number }
@@ -120,6 +125,8 @@ export class FloorsScene extends Phaser.Scene {
   private arranging = false;
   private earth!: Phaser.GameObjects.Rectangle;
   private sky!: Phaser.GameObjects.Image;
+  /** The time of day and the weather: skies, night and lamps, clouds, rain (floors-sky.ts). */
+  private skyFx!: FloorsSky;
   private street!: Phaser.GameObjects.Image;
   private soilBand!: Phaser.GameObjects.Image;
   private soilBelow!: Phaser.GameObjects.Image;
@@ -140,6 +147,8 @@ export class FloorsScene extends Phaser.Scene {
   private moods = new Map<number, string | null>();
   private rack: unknown = null;
   private steamTimer = 0;
+  /** The staff's own looks, painted as they are first seen (floors-looks.ts). */
+  private staff!: StaffTextures;
   /** Guest looks with their sheets and walks ready, and those on their way. */
   private looks = new Set<string>(GUEST_ART);
   private loadingLooks = new Set<string>();
@@ -154,6 +163,12 @@ export class FloorsScene extends Phaser.Scene {
   private pressAt: { x: number; y: number } | null = null;
   /** The cue over the moment waiting on the player. */
   private cue: Phaser.GameObjects.Image | null = null;
+  /** Orders on tables and trays, bubbles, coins and the cake display, in painted art (floors-props.ts). */
+  private props!: FloorsProps;
+  /** The café's cats and the gifts they leave (floors-cats.ts). */
+  private cats!: FloorsCats;
+  /** The café's name, its open sign and today's menu outside (floors-front.ts). */
+  private front!: FloorsFront;
   /** What people think, in words (floors-thoughts.ts). */
   private thoughts!: FloorsThoughts;
   /** Where the next table would go, while the page asks (the ledger's preview). */
@@ -168,6 +183,7 @@ export class FloorsScene extends Phaser.Scene {
   preload(): void {
     this.status = 'loading art';
     for (const key of IMAGES) this.load.image(key, `${FLOORS_ART}${key}.webp`);
+    FloorsSky.preload(this);
     for (const key of SHEETS) this.load.spritesheet(key, `${FLOORS_ART}${key}.webp`, this.sheets[key]);
     // The decor the café has on now, for both decorated floors: the building may grow into the second.
     const equipped = this.getState().decor.equipped as Record<string, string>;
@@ -175,17 +191,27 @@ export class FloorsScene extends Phaser.Scene {
     for (const key of decor) this.load.image(key, `${FLOORS_ART}${key}`);
     const pieces = [...new Set(this.getState().decor.placed.map(p => p.id).filter(id => this.furniture?.[id]))].map(furnitureKey);
     for (const key of pieces) this.load.image(key, `${FLOORS_ART}${key}`);
-    const total = IMAGES.length + SHEETS.length + decor.length + pieces.length;
+    // The cats bring their own art, and may ask the camera to follow one.
+    this.cats = new FloorsCats(this, this.view, FLOORS_ART, { focusOn: (y, dt) => { this.moved = true; this.focusY = Phaser.Math.Linear(this.focusY, y, Math.min(1, dt * 6)); this.frameCamera(); } });
+    this.cats.preload(this.getState());
+    const total =IMAGES.length + SHEETS.length + decor.length + pieces.length;
     this.load.on('progress', (share: number) => this.hooks.loadingProgress?.(Math.round(share * total), total));
     this.load.on('loaderror', (file: { key: string }) => this.onFailed(new Error(`Could not load floors art ${file.key}`)));
   }
 
   create(): void {
     makeTextures(this);
+    this.props = new FloorsProps(this, this.sim, this.view, this.getState,
+      { customers: this.customers, servers: this.servers, cooks: this.cooks, baristas: this.baristas, cue: () => this.cue,
+        speaking: () => this.thoughts.speaking }, FLOORS_ART);
     this.thoughts = new FloorsThoughts(this, this.sim, this.view, id => this.thinker(id));
+    this.front = new FloorsFront(this, { frame: FRAME_DEPTH, street: y => y + FRAME_DEPTH, wall: WALL_DEPTH });
+    this.cats.create();
+    this.staff =new StaffTextures(this, WALK / 30);
     this.cameras.main.setBackgroundColor(FRAME_EDGES.sky);
     this.earth = this.add.rectangle(0, 0, WORLD_W, 4000, FRAME_EDGES.street).setOrigin(0, 0).setDepth(-3);
     this.sky = this.add.image(0, 0, 'frame/sky').setOrigin(0, 1).setDepth(-10);
+    this.skyFx = new FloorsSky(this, this.sky);
     this.street = this.add.image(0, 0, 'frame/street').setOrigin(0, 0).setDepth(-3);
     // The street cut open over a basement: its paving and the top of the earth, then earth under the basement.
     this.soilBand = this.add.image(0, 0, 'frame/soil').setOrigin(0, 0).setDepth(-3).setCrop(0, 0, WORLD_W, FRAME.soilBand);
@@ -309,6 +335,8 @@ export class FloorsScene extends Phaser.Scene {
     if (basement !== undefined) this.soilBelow.setY(basement + FLOOR_ART.basement.height - FRAME.soilBand);
     this.soilBelow.setVisible(basement !== undefined);
     this.earth.setY(b.height).setFillStyle(basement === undefined ? FRAME_EDGES.street : FRAME_EDGES.soil);
+    this.front.layout(b);
+    this.skyFx.layout(b, [this.earth, this.street, this.soilBand, this.soilBelow, ...this.frameParts]);
   }
 
   /**
@@ -428,6 +456,7 @@ export class FloorsScene extends Phaser.Scene {
     const state = this.getState();
     const b = this.layoutBuilding(state);
     this.showWalls(dt);
+    this.skyFx.update(dt, state, b);
     const active = activeTableIndices(state);
     const step = this.view.paused ? 0 : dt;
     this.tempo = state.phase === 'prep' ? 1 : state.speed;
@@ -436,10 +465,13 @@ export class FloorsScene extends Phaser.Scene {
     this.syncServers(b, active, step);
     this.syncCooks(b, step);
     this.restock(b);
+    this.props.sync(b, active, step);
+    this.front.update(dt, state, this.wallAlpha);
     this.thoughts.update(step, state, !this.view.paused && !this.arranging && this.wallAlpha < .5);
     this.syncFurniture(b, state);
     this.syncArrange(b, state);
     this.syncTablePreview(b, state, active.length);
+    this.cats.update(b, step, state);
     this.showMoment(b);
     this.drainView();
   }
@@ -467,7 +499,10 @@ export class FloorsScene extends Phaser.Scene {
       target({ kind: 'moment' });
       return;
     }
-    const staff: [Phaser.GameObjects.Sprite, string | undefined][] = [
+    // A gift a cat left, or a cat itself, before whoever stands behind it.
+    const cat = walled ? null : this.cats.tap(x, y, reach);
+    if (cat) { target(cat); return; }
+    const staff:[Phaser.GameObjects.Sprite, string | undefined][] = [
       ...this.sim.baristas.map((b, i) => [this.baristas[i], b.partnerId] as [Phaser.GameObjects.Sprite, string | undefined]),
       ...this.sim.servers.map((s, i) => [this.servers[i]?.sprite, s.partnerId] as [Phaser.GameObjects.Sprite, string | undefined]),
       ...this.sim.cooks.map((c, i) => [this.cooks[i]?.sprite, c.partnerId] as [Phaser.GameObjects.Sprite, string | undefined]),
@@ -488,7 +523,7 @@ export class FloorsScene extends Phaser.Scene {
       const actor = this.customers.get(moment.customerId);
       if (actor && actor.sprite.alpha > .5) at = this.head(actor);
     } else if (moment?.kind === 'delivery') at = worldPoint(b, { floor: 'ground', x: DOOR.x + 30, y: DOOR.y - 250 });
-    else if (moment) at = worldPoint(b, { floor: 'roof', x: 790, y: 560 });
+    else if (moment) at = this.cats.momentPoint(moment) ?? worldPoint(b, { floor: 'roof', x: 790, y: 560 });
     if (!at) { this.cue?.setVisible(false); return; }
     this.cue ??= this.add.image(0, 0, 'bubble-moment').setOrigin(.5, 1).setDepth(100002).setScale(1.5);
     this.cue.setVisible(true).setPosition(at.x, at.y - 14 * Math.abs(Math.sin(this.time.now / 260)));
@@ -815,8 +850,13 @@ export class FloorsScene extends Phaser.Scene {
       this.baristas.push(this.add.sprite(0, 0, i === 0 ? 'owner' : 'barista', SIDE.front).setOrigin(.5, 1));
     }
     let brewing = false;
+    const owner = this.getState().profile?.look;
     list.forEach((barista, i) => {
       const sprite = this.baristas[i], spot = BARISTAS[i % BARISTAS.length];
+      // Everyone wears their own look, the owner the one the player designed; unseen for the moment it takes to paint.
+      const art = this.staff.texture(i === 0 && owner ? owner : barista.look, i === 0 ? 'owner' : 'barista');
+      if (art && sprite.texture.key !== art) sprite.setTexture(art);
+      sprite.setVisible(!!art);
       const p = worldPoint(b, { ...spot, x: spot.x + Math.floor(i / BARISTAS.length) * 60 });
       const working = barista.customerId !== null && barista.total > 0 && barista.remaining > 0;
       brewing ||= working;
@@ -841,6 +881,9 @@ export class FloorsScene extends Phaser.Scene {
       const home = SERVER_HOMES[i % SERVER_HOMES.length];
       let actor = this.servers[i];
       if (!actor) { actor = this.makeActor('barista', home, 'home'); this.servers[i] = actor; }
+      const art = this.staff.texture(server.look, 'barista');
+      if (art) actor.art = art;
+      actor.sprite.setVisible(!!art);
       let goal = 'home', spot: Spot = home;
       if (server.phase === 'toPass') { goal = 'pass'; spot = PASS; }
       else if (server.phase === 'delivering' && server.plates.length) {
@@ -853,8 +896,8 @@ export class FloorsScene extends Phaser.Scene {
       }
       this.aim(actor, goal, spot);
       const way = this.walk(actor, dt, simSeconds(server, SERVER_SPEED));
-      if (way) this.play(actor, 'barista-side', actor.rate);
-      else { actor.sprite.stop(); actor.sprite.setTexture('barista', server.phase === 'idle' ? SIDE.front : SIDE.side); }
+      if (way) this.play(actor, `${actor.art}-side`, actor.rate);
+      else { actor.sprite.stop(); actor.sprite.setTexture(actor.art, server.phase === 'idle' ? SIDE.front : SIDE.side); }
       this.place(b, actor, server.phase === 'delivering');
     });
   }
@@ -865,16 +908,20 @@ export class FloorsScene extends Phaser.Scene {
     while (this.cooks.length > (kitchen ? list.length : 0)) this.remove(this.cooks.pop()!);
     let baking = false;
     if (kitchen) list.forEach((cook, i) => {
-      const art = i % 2 === 0 ? 'cook-chef' : 'cook-scarf';
+      const kind = i % 2 === 0 ? 'cook-chef' : 'cook-scarf';
       let actor = this.cooks[i];
-      if (!actor) { actor = this.makeActor(art, cookHome(i), 'home'); this.cooks[i] = actor; }
+      if (!actor) { actor = this.makeActor(kind, cookHome(i), 'home'); this.cooks[i] = actor; }
+      // The cook in their own skin and hair (floors-looks.ts); unseen for the moment it takes to paint.
+      const painted = this.staff.cook(cook.look, kind), art = painted ?? actor.art;
+      actor.art = art;
+      actor.sprite.setVisible(!!painted);
       const station = this.sim.cookStation(i);
       const place: KitchenPlace | null = station ? kitchenPlace(station.station) : null;
       this.aim(actor, place ? `station-${place}` : 'home', place ? kitchenSpot(place, i) : cookHome(i));
       const way = this.walk(actor, dt, simSeconds(cook, WALK_SPEED));
       if (way) this.play(actor, `${art}-${cook.batch ? 'carry' : 'side'}`, actor.rate);
-      else if (station?.working && place === 'oven' && art === 'cook-chef') { this.play(actor, 'cook-chef-oven'); actor.sprite.setFlipX(false); }
-      else if (station?.working && place === 'dough' && art === 'cook-scarf') { this.play(actor, 'cook-scarf-knead'); actor.sprite.setFlipX(false); }
+      else if (station?.working && place === 'oven' && kind === 'cook-chef') { this.play(actor, `${art}-oven`); actor.sprite.setFlipX(false); }
+      else if (station?.working && place === 'dough' && kind === 'cook-scarf') { this.play(actor, `${art}-knead`); actor.sprite.setFlipX(false); }
       else { actor.sprite.stop(); actor.sprite.setTexture(art, station?.working ? SIDE.back : SIDE.front).setFlipX(false); }
       baking ||= !way && !!station?.working && place === 'oven';
       this.place(b, actor, false);
@@ -893,6 +940,7 @@ export class FloorsScene extends Phaser.Scene {
     const first = this.rack === null;
     this.rack = rack;
     if (first || !rack.length) return;
+    if (this.props.restocked(b, rack[0])) return;
     const display = () => {
       const top = worldPoint(b, { floor: 'ground', x: 0, y: DISPLAY.top }).y, bottom = worldPoint(b, { floor: 'ground', x: 0, y: DISPLAY.bottom }).y;
       this.bubble('bubble-bread', { x: (DISPLAY.left + DISPLAY.right) / 2, y: top - 8 }, 1600);
@@ -912,6 +960,7 @@ export class FloorsScene extends Phaser.Scene {
 
   /** Sales become coins over the guest; the room view's own particles are not drawn here. */
   private drainView(): void {
+    if (this.props.drain(this.built)) return;
     this.view.effects.splice(0);
     this.view.assistanceLabels.splice(0).forEach((label, i) => {
       // Help brewing: the barista at work says so, with a puff of steam.

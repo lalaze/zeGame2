@@ -1,4 +1,49 @@
-import { LOCATIONS } from '../game/locations';
+import { LOCATIONS, type LocationId } from '../game/locations';
+
+/**
+ * Painted pictures another look shows instead of the drawn map and the views from each place's
+ * windows. The floors view (?floors) supplies them (src/render/floors/floors-street.ts).
+ */
+export interface BranchArt {
+  map: string | undefined;
+  view(id: LocationId): string | undefined;
+}
+let painted: BranchArt | null = null;
+export function setBranchArt(art: BranchArt | null): void {
+  painted = art;
+}
+export const branchViewArt = (id: LocationId) => painted?.view(id);
+
+const pictures = new Map<string, HTMLImageElement>();
+/**
+ * Shows a painted picture on a canvas, `width` by `height` pixels, covering it. The picture is
+ * drawn once it has loaded, unless the canvas has been given another one by then.
+ */
+export function paintPicture(canvas: HTMLCanvasElement, url: string, width: number, height: number): void {
+  if (canvas.width !== width) canvas.width = width;
+  if (canvas.height !== height) canvas.height = height;
+  canvas.dataset.picture = url;
+  let image = pictures.get(url);
+  if (!image) {
+    image = new Image();
+    image.decoding = 'async';
+    image.src = url;
+    pictures.set(url, image);
+  }
+  const picture = image;
+  const draw = () => {
+    const ctx = canvas.getContext('2d');
+    if (!ctx || canvas.dataset.picture !== url || !picture.naturalWidth) return;
+    const scale = Math.max(width / picture.naturalWidth, height / picture.naturalHeight);
+    const w = picture.naturalWidth * scale, h = picture.naturalHeight * scale;
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.clearRect(0, 0, width, height);
+    ctx.drawImage(picture, (width - w) / 2, (height - h) / 2, w, h);
+  };
+  if (picture.complete && picture.naturalWidth) draw();
+  else picture.addEventListener('load', draw, { once: true });
+}
 
 /** The branch map is painted at this size and scaled up crisply by CSS. */
 export const MAP_W = 160;
@@ -13,6 +58,7 @@ const coastX = (y: number) => y < 34 ? MAP_W + 1 : 168 - (y - 34) * 1.1 + Math.r
  * to the southwest, joined by country roads. Location pins are HTML, laid over it.
  */
 export function paintBranchMap(canvas: HTMLCanvasElement): void {
+  if (painted?.map) { paintPicture(canvas, painted.map, MAP_W * 8, MAP_H * 8); return; }
   canvas.width = MAP_W;
   canvas.height = MAP_H;
   const ctx = canvas.getContext('2d');

@@ -362,6 +362,11 @@
   object-fit: contain; box-shadow: none; filter: none;
 }
 :root body.floors-view .row .icon[src$='.webp'] { background: var(--fl-paper-2); border-radius: 14px; padding: 2px; }
+/* The painted cats of the pet panel and the cat's card (cat-art.ts): square portraits, no pixel tile. */
+:root body.floors-view :is(.pet-choice,.pet-heading) img[src$='.webp'] {
+  width: 64px; height: 64px; object-fit: contain; background: none; box-shadow: none;
+}
+:root body.floors-view .living-cat-detail img.living-cat-portrait { display: block; width: 112px; height: 112px; margin: 0 auto 6px; object-fit: contain; }
 /* The phone ledger keeps an icon column on every row; the manager, orders and chain cards have no
    icon, so their text spans the card instead of squeezing into that column. */
 :root body.floors-view .panel .row.manager-card > .info { grid-column: 1 / -1; }
@@ -376,6 +381,12 @@
 }
 :root body.floors-view .floors-wall-btn::before { width: 22px !important; height: 22px !important; flex-basis: 22px !important; }
 :root body.floors-view:is(.arranging-cafe,.mobile-drawer-open,.mobile-tools-open) .floors-wall-btn { display: none; }
+
+/* ------------------------------------------------------------------ painted pictures in dialogs */
+/* The promotion platforms and Mina's map (render/floors/floors-icons.ts) take the place of pixel signs. */
+:root body.floors-view .promo-platform > span:has(.promo-art) { width: 48px; height: 48px; background: none !important; border: 0 !important; box-shadow: none !important; }
+:root body.floors-view .promo-platform .promo-art { width: 48px; height: 48px; object-fit: contain; }
+:root body.floors-view img.wish-map { width: 150px; margin-block: 8px; }
 
 /* ------------------------------------------------------------------ cards that kept the pixel look's square corners */
 :root body.floors-view .cafe-life {

@@ -105,6 +105,8 @@ const STAIRS: Partial<Record<FloorId, { foot: Point; top: Point; landing: Spot }
   'floor-2': { foot: { x: 1480, y: 748 }, top: { x: 1418, y: 78 }, landing: spot('floor-2', 1330, 700, 700) },
   'floor-3': { foot: { x: 1480, y: 748 }, top: { x: 1418, y: 78 }, landing: spot('floor-3', 1330, 700, 700) },
 };
+/** A floor's staircase up, for those who plan their own way (the cats, floors-cat-places.ts). */
+export const stairsOf = (floor: FloorId) => STAIRS[floor];
 
 /**
  * The front step, on the street just below the ground floor's front edge, between the two front

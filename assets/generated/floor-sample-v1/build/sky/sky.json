@@ -1,0 +1,131 @@
+{
+ "width": 1672,
+ "height": 836,
+ "skies": {
+  "day": {
+   "image": "frame/sky",
+   "top": "#8dc3fc"
+  },
+  "clear": {
+   "image": "sky/clear",
+   "top": "#9bcdfd"
+  },
+  "dusk": {
+   "image": "sky/dusk",
+   "top": "#817db6"
+  },
+  "night": {
+   "image": "sky/night",
+   "top": "#253271"
+  },
+  "overcast": {
+   "image": "sky/overcast",
+   "top": "#6d7e98"
+  }
+ },
+ "sprites": {
+  "cloud-1": [
+   698,
+   262
+  ],
+  "cloud-2": [
+   515,
+   161
+  ],
+  "cloud-3": [
+   262,
+   108
+  ],
+  "cloud-4": [
+   648,
+   79
+  ],
+  "cloud-5": [
+   453,
+   163
+  ],
+  "cloud-6": [
+   228,
+   42
+  ],
+  "moon": [
+   188,
+   190
+  ],
+  "sun": [
+   232,
+   230
+  ],
+  "star": [
+   55,
+   56
+  ],
+  "drop": [
+   26,
+   84
+  ],
+  "splash": [
+   66,
+   44
+  ],
+  "flake-1": [
+   39,
+   44
+  ],
+  "flake-2": [
+   27,
+   26
+  ],
+  "leaf-1": [
+   67,
+   58
+  ],
+  "leaf-2": [
+   49,
+   44
+  ],
+  "balloon-1": [
+   90,
+   170
+  ],
+  "balloon-2": [
+   90,
+   170
+  ],
+  "bird": [
+   87,
+   70
+  ]
+ },
+ "windows": {
+  "wall-attic": {
+   "image": "sky/glow-wall-attic",
+   "width": 836,
+   "height": 666,
+   "scale": 2,
+   "glass": 0.0596
+  },
+  "wall-seating": {
+   "image": "sky/glow-wall-seating",
+   "width": 836,
+   "height": 438,
+   "scale": 2,
+   "glass": 0.1155
+  },
+  "wall-ground": {
+   "image": "sky/glow-wall-ground",
+   "width": 836,
+   "height": 441,
+   "scale": 2,
+   "glass": 0.2533
+  }
+ },
+ "shade": {
+  "attic": {
+   "image": "sky/shade-attic",
+   "width": 836,
+   "height": 666,
+   "scale": 2
+  }
+ }
+}

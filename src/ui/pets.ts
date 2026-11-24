@@ -7,6 +7,7 @@ import { t } from '../i18n';
 import { catFrames, toDataURL } from '../render/sprites';
 import { fineSpriteArt } from '../render/fine-sprite-art';
 import { getGeneratedCatAdapter } from '../render/generated-main-art';
+import { catPortrait } from './cat-art';
 import { livingCatActivity, livingCatPersonality, livingCatPreference, type LivingCatControls } from './living-cats';
 
 /** Transient browsing choices, owned by Panel rather than the game save. */
@@ -127,6 +128,14 @@ export class PetPanel {
   private updatePortraits(): void {
     const adapter = getGeneratedCatAdapter();
     this.tiles.forEach((tile, index) => {
+      // The floors view shows its painted cats (ui/cat-art.ts).
+      const painted = catPortrait(tile.cat.id);
+      if (painted) {
+        for (const portrait of [tile.portrait, this.rows[index].portrait]) {
+          if (portrait.getAttribute('src') !== painted) portrait.src = painted;
+        }
+        return;
+      }
       const resolved = adapter?.ready ? adapter.resolve(tile.cat.id, tile.frames) : { frames: tile.frames, generated: false };
       // Keep legacy portraits exact, but export generated pixels from their
       // detailed backing rather than upscaling the low-resolution logical frame.

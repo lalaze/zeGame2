@@ -5,6 +5,7 @@ import type { GameState } from '../game/state';
 import { t } from '../i18n';
 import { character, toDataURL } from '../render/sprites';
 import { fineSpriteArt } from '../render/fine-sprite-art';
+import { showPortrait } from './portrait-art';
 import { isComposingKey } from './keyboard';
 import { closeModal, showModal } from './modal';
 import { regularWishCard } from './regular-wishes';
@@ -32,18 +33,21 @@ export function updateRegularGuestsButton(state: GameState): void {
 const portraits = new Map<number, { frame: HTMLCanvasElement; source: string }>();
 /** Reuse the exact stand artwork and cache used by the journal and café cast. */
 export function regularGuestPortrait(guest: RegularGuestDefinition): HTMLImageElement {
-  const design = CUSTOMER_CAST[guest.appearanceId];
-  const frame = character(design.look, 'customer', guest.appearanceId).stand;
-  let cached = portraits.get(guest.appearanceId);
-  if (!cached || cached.frame !== frame) {
-    const art = fineSpriteArt(frame);
-    cached = { frame, source: toDataURL(art.canvas, 3 / art.density) };
-    portraits.set(guest.appearanceId, cached);
-  }
-  const source = cached.source;
+  const sprite = () => {
+    const design = CUSTOMER_CAST[guest.appearanceId];
+    const frame = character(design.look, 'customer', guest.appearanceId).stand;
+    let cached = portraits.get(guest.appearanceId);
+    if (!cached || cached.frame !== frame) {
+      const art = fineSpriteArt(frame);
+      cached = { frame, source: toDataURL(art.canvas, 3 / art.density) };
+      portraits.set(guest.appearanceId, cached);
+    }
+    return cached.source;
+  };
   const image = document.createElement('img');
   image.className = 'regular-portrait';
-  image.src = source;
+  // The floors view shows the guest as painted in the building (portrait-art.ts).
+  showPortrait(image, { guest: guest.appearanceId }, sprite);
   image.alt = ''; // The adjacent heading already names this guest.
   image.width = 48;
   image.height = 78;

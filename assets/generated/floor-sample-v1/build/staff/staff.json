@@ -1,0 +1,538 @@
+{
+ "order": [
+  "short",
+  "bun",
+  "long",
+  "bob",
+  "pony",
+  "sidepart",
+  "braids",
+  "waves",
+  "crop",
+  "curls",
+  "undercut",
+  "slick",
+  "beard",
+  "buzz",
+  "pixie",
+  "buns",
+  "afro",
+  "bangs",
+  "twintails",
+  "curtain",
+  "fauxhawk",
+  "manbun",
+  "shaggy",
+  "centerpart",
+  "mustache",
+  "locs",
+  "halfup",
+  "sidebraid",
+  "braidcrown",
+  "curlybob",
+  "asymbob",
+  "ringlets"
+ ],
+ "fronts": {
+  "cellWidth": 168,
+  "cellHeight": 261,
+  "cols": 8,
+  "rows": 4
+ },
+ "styles": {
+  "short": {
+   "frameWidth": 146,
+   "frameHeight": 259,
+   "frames": 8,
+   "key": {
+    "hair": [ 159,  122,  184
+    ], "apron": [ 154,  186,  119
+    ], "pants": [ 123,  138,  199
+    ], "skin": [ 251,  209,  179
+    ]
+   },
+   "take": 1,
+   "front": 0
+  },
+  "bun": {
+   "frameWidth": 142,
+   "frameHeight": 255,
+   "frames": 8,
+   "key": {
+    "hair": [ 157,  129,  184
+    ], "apron": [ 136,  178,  116
+    ], "pants": [ 128,  149,  197
+    ], "skin": [ 250,  204,  171
+    ]
+   },
+   "take": 1,
+   "front": 1
+  },
+  "long": {
+   "frameWidth": 154,
+   "frameHeight": 260,
+   "frames": 8,
+   "key": {
+    "hair": [ 158,  121,  174
+    ], "apron": [ 142,  172,  122
+    ], "pants": [ 121,  130,  176
+    ], "skin": [ 244,  198,  170
+    ]
+   },
+   "take": 1,
+   "front": 2
+  },
+  "bob": {
+   "frameWidth": 148,
+   "frameHeight": 256,
+   "frames": 8,
+   "key": {
+    "hair": [ 161,  129,  182
+    ], "apron": [ 144,  178,  121
+    ], "pants": [ 121,  142,  192
+    ], "skin": [ 250,  210,  183
+    ]
+   },
+   "take": 1,
+   "front": 3
+  },
+  "pony": {
+   "frameWidth": 168,
+   "frameHeight": 255,
+   "frames": 8,
+   "key": {
+    "hair": [ 166,  126,  186
+    ], "apron": [ 140,  172,  116
+    ], "pants": [ 119,  142,  193
+    ], "skin": [ 247,  200,  171
+    ]
+   },
+   "take": 1,
+   "front": 4
+  },
+  "sidepart": {
+   "frameWidth": 146,
+   "frameHeight": 261,
+   "frames": 8,
+   "key": {
+    "hair": [ 151,  116,  163
+    ], "apron": [ 136,  176,  109
+    ], "pants": [ 129,  144,  186
+    ], "skin": [ 248,  205,  177
+    ]
+   },
+   "take": 1,
+   "front": 5
+  },
+  "braids": {
+   "frameWidth": 150,
+   "frameHeight": 256,
+   "frames": 8,
+   "key": {
+    "hair": [ 166,  132,  192
+    ], "apron": [ 139,  180,  119
+    ], "pants": [ 113,  143,  192
+    ], "skin": [ 251,  212,  182
+    ]
+   },
+   "take": 1,
+   "front": 6
+  },
+  "waves": {
+   "frameWidth": 150,
+   "frameHeight": 256,
+   "frames": 8,
+   "key": {
+    "hair": [ 147,  113,  171
+    ], "apron": [ 145,  176,  122
+    ], "pants": [ 125,  147,  202
+    ], "skin": [ 250,  205,  176
+    ]
+   },
+   "take": 1,
+   "front": 7
+  },
+  "crop": {
+   "frameWidth": 144,
+   "frameHeight": 255,
+   "frames": 8,
+   "key": {
+    "hair": [ 148,  113,  156
+    ], "apron": [ 150,  172,  125
+    ], "pants": [ 129,  140,  184
+    ], "skin": [ 247,  206,  178
+    ]
+   },
+   "take": 1,
+   "front": 8
+  },
+  "curls": {
+   "frameWidth": 144,
+   "frameHeight": 255,
+   "frames": 8,
+   "key": {
+    "hair": [ 138,  110,  155
+    ], "apron": [ 142,  168,  116
+    ], "pants": [ 118,  138,  180
+    ], "skin": [ 250,  208,  176
+    ]
+   },
+   "take": 1,
+   "front": 9
+  },
+  "undercut": {
+   "frameWidth": 142,
+   "frameHeight": 255,
+   "frames": 8,
+   "key": {
+    "hair": [ 144,  116,  167
+    ], "apron": [ 132,  170,  114
+    ], "pants": [ 106,  134,  180
+    ], "skin": [ 244,  202,  174
+    ]
+   },
+   "take": 1,
+   "front": 10
+  },
+  "slick": {
+   "frameWidth": 152,
+   "frameHeight": 257,
+   "frames": 8,
+   "key": {
+    "hair": [ 154,  123,  176
+    ], "apron": [ 146,  180,  120
+    ], "pants": [ 126,  148,  194
+    ], "skin": [ 250,  210,  182
+    ]
+   },
+   "take": 1,
+   "front": 11
+  },
+  "beard": {
+   "frameWidth": 150,
+   "frameHeight": 256,
+   "frames": 8,
+   "key": {
+    "hair": [ 152,  110,  168
+    ], "apron": [ 141,  176,  131
+    ], "pants": [ 120,  142,  188
+    ], "skin": [ 249,  211,  188
+    ]
+   },
+   "take": 1,
+   "front": 12
+  },
+  "buzz": {
+   "frameWidth": 154,
+   "frameHeight": 261,
+   "frames": 8,
+   "key": {
+    "hair": [ 154,  123,  182
+    ], "apron": [ 139,  174,  131
+    ], "pants": [ 116,  132,  180
+    ], "skin": [ 250,  208,  183
+    ]
+   },
+   "take": 1,
+   "front": 13
+  },
+  "pixie": {
+   "frameWidth": 146,
+   "frameHeight": 258,
+   "frames": 8,
+   "key": {
+    "hair": [ 157,  124,  172
+    ], "apron": [ 143,  174,  112
+    ], "pants": [ 112,  132,  188
+    ], "skin": [ 250,  207,  179
+    ]
+   },
+   "take": 1,
+   "front": 14
+  },
+  "buns": {
+   "frameWidth": 146,
+   "frameHeight": 255,
+   "frames": 8,
+   "key": {
+    "hair": [ 150,  108,  172
+    ], "apron": [ 130,  173,  113
+    ], "pants": [ 121,  136,  182
+    ], "skin": [ 246,  204,  178
+    ]
+   },
+   "take": 1,
+   "front": 15
+  },
+  "afro": {
+   "frameWidth": 160,
+   "frameHeight": 257,
+   "frames": 8,
+   "key": {
+    "hair": [ 155,  118,  179
+    ], "apron": [ 133,  178,  116
+    ], "pants": [ 122,  146,  200
+    ], "skin": [ 249,  205,  177
+    ]
+   },
+   "take": 1,
+   "front": 16
+  },
+  "bangs": {
+   "frameWidth": 150,
+   "frameHeight": 257,
+   "frames": 8,
+   "key": {
+    "hair": [ 150,  121,  172
+    ], "apron": [ 143,  176,  121
+    ], "pants": [ 119,  139,  186
+    ], "skin": [ 249,  208,  181
+    ]
+   },
+   "take": 1,
+   "front": 17
+  },
+  "twintails": {
+   "frameWidth": 152,
+   "frameHeight": 255,
+   "frames": 8,
+   "key": {
+    "hair": [ 162,  126,  169
+    ], "apron": [ 149,  172,  120
+    ], "pants": [ 119,  132,  178
+    ], "skin": [ 250,  206,  178
+    ]
+   },
+   "take": 1,
+   "front": 18
+  },
+  "curtain": {
+   "frameWidth": 154,
+   "frameHeight": 257,
+   "frames": 8,
+   "key": {
+    "hair": [ 156,  121,  180
+    ], "apron": [ 130,  178,  126
+    ], "pants": [ 106,  147,  190
+    ], "skin": [ 249,  207,  183
+    ]
+   },
+   "take": 1,
+   "front": 19
+  },
+  "fauxhawk": {
+   "frameWidth": 136,
+   "frameHeight": 255,
+   "frames": 8,
+   "key": {
+    "hair": [ 154,  121,  164
+    ], "apron": [ 141,  174,  121
+    ], "pants": [ 113,  139,  190
+    ], "skin": [ 249,  211,  184
+    ]
+   },
+   "take": 1,
+   "front": 20
+  },
+  "manbun": {
+   "frameWidth": 142,
+   "frameHeight": 255,
+   "frames": 8,
+   "key": {
+    "hair": [ 158,  121,  176
+    ], "apron": [ 138,  171,  116
+    ], "pants": [ 112,  134,  184
+    ], "skin": [ 246,  203,  176
+    ]
+   },
+   "take": 1,
+   "front": 21
+  },
+  "shaggy": {
+   "frameWidth": 142,
+   "frameHeight": 256,
+   "frames": 8,
+   "key": {
+    "hair": [ 147,  119,  164
+    ], "apron": [ 139,  172,  113
+    ], "pants": [ 108,  140,  180
+    ], "skin": [ 250,  203,  172
+    ]
+   },
+   "take": 1,
+   "front": 22
+  },
+  "centerpart": {
+   "frameWidth": 156,
+   "frameHeight": 260,
+   "frames": 8,
+   "key": {
+    "hair": [ 150,  116,  171
+    ], "apron": [ 136,  168,  126
+    ], "pants": [ 115,  132,  180
+    ], "skin": [ 246,  205,  178
+    ]
+   },
+   "take": 1,
+   "front": 23
+  },
+  "mustache": {
+   "frameWidth": 148,
+   "frameHeight": 254,
+   "frames": 8,
+   "key": {
+    "hair": [ 162,  122,  179
+    ], "apron": [ 145,  170,  121
+    ], "pants": [ 114,  138,  181
+    ], "skin": [ 248,  206,  181
+    ]
+   },
+   "take": 1,
+   "front": 24
+  },
+  "locs": {
+   "frameWidth": 146,
+   "frameHeight": 258,
+   "frames": 8,
+   "key": {
+    "hair": [ 148,  113,  159
+    ], "apron": [ 141,  174,  122
+    ], "pants": [ 119,  132,  180
+    ], "skin": [ 245,  202,  174
+    ]
+   },
+   "take": 1,
+   "front": 25
+  },
+  "halfup": {
+   "frameWidth": 146,
+   "frameHeight": 255,
+   "frames": 8,
+   "key": {
+    "hair": [ 162,  122,  182
+    ], "apron": [ 138,  175,  122
+    ], "pants": [ 124,  148,  197
+    ], "skin": [ 248,  207,  182
+    ]
+   },
+   "take": 1,
+   "front": 26
+  },
+  "sidebraid": {
+   "frameWidth": 154,
+   "frameHeight": 259,
+   "frames": 8,
+   "key": {
+    "hair": [ 157,  119,  178
+    ], "apron": [ 148,  178,  113
+    ], "pants": [ 123,  141,  186
+    ], "skin": [ 250,  208,  183
+    ]
+   },
+   "take": 1,
+   "front": 27
+  },
+  "braidcrown": {
+   "frameWidth": 150,
+   "frameHeight": 257,
+   "frames": 8,
+   "key": {
+    "hair": [ 153,  116,  164
+    ], "apron": [ 137,  170,  116
+    ], "pants": [ 112,  129,  182
+    ], "skin": [ 248,  204,  176
+    ]
+   },
+   "take": 1,
+   "front": 28
+  },
+  "curlybob": {
+   "frameWidth": 148,
+   "frameHeight": 261,
+   "frames": 8,
+   "key": {
+    "hair": [ 158,  119,  174
+    ], "apron": [ 136,  167,  114
+    ], "pants": [ 120,  143,  185
+    ], "skin": [ 247,  206,  176
+    ]
+   },
+   "take": 1,
+   "front": 29
+  },
+  "asymbob": {
+   "frameWidth": 140,
+   "frameHeight": 257,
+   "frames": 8,
+   "key": {
+    "hair": [ 160,  122,  175
+    ], "apron": [ 139,  172,  118
+    ], "pants": [ 122,  139,  187
+    ], "skin": [ 250,  209,  180
+    ]
+   },
+   "take": 1,
+   "front": 30
+  },
+  "ringlets": {
+   "frameWidth": 160,
+   "frameHeight": 256,
+   "frames": 8,
+   "key": {
+    "hair": [ 169,  132,  179
+    ], "apron": [ 139,  176,  125
+    ], "pants": [ 114,  146,  190
+    ], "skin": [ 249,  207,  179
+    ]
+   },
+   "take": 1,
+   "front": 31
+  }
+ },
+ "cooks": {
+  "cook-chef": {
+   "frameWidth": 138,
+   "frameHeight": 255,
+   "frames": 8,
+   "key": {
+    "hair": [ 155,  118,  188
+    ], "skin": [ 251,  203,  174
+    ]
+   },
+   "take": 1
+  },
+  "cook-chef-work": {
+   "frameWidth": 286,
+   "frameHeight": 262,
+   "frames": 8,
+   "key": {
+    "hair": [ 164,  126,  194
+    ], "skin": [ 251,  203,  178
+    ]
+   },
+   "take": 1
+  },
+  "cook-scarf": {
+   "frameWidth": 150,
+   "frameHeight": 258,
+   "frames": 8,
+   "key": {
+    "hair": [ 157,  123,  196
+    ], "skin": [ 251,  212,  182
+    ]
+   },
+   "take": 1
+  },
+  "cook-scarf-work": {
+   "frameWidth": 228,
+   "frameHeight": 265,
+   "frames": 8,
+   "key": {
+    "hair": [ 169,  138,  193
+    ], "skin": [ 249,  204,  178
+    ]
+   },
+   "take": 1
+  }
+ }
+}

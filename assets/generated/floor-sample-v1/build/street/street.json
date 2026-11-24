@@ -1,0 +1,175 @@
+{
+ "res": 3,
+ "shops": {
+  "cafe-0": {
+   "width": 220,
+   "height": 292,
+   "signY": 184,
+   "doorX": 110
+  },
+  "cafe-1": {
+   "width": 220,
+   "height": 408,
+   "signY": 300,
+   "doorX": 110
+  },
+  "cafe-2": {
+   "width": 182,
+   "height": 432,
+   "signY": 343,
+   "doorX": 91
+  },
+  "bookshop": {
+   "width": 222,
+   "height": 294,
+   "signY": 141,
+   "doorX": 178
+  },
+  "plant-shop": {
+   "width": 236,
+   "height": 236,
+   "signY": 79,
+   "doorX": 118
+  },
+  "florist": {
+   "width": 230,
+   "height": 288,
+   "signY": 134,
+   "doorX": 110
+  },
+  "pottery": {
+   "width": 242,
+   "height": 288,
+   "signY": 135,
+   "doorX": 190
+  },
+  "tea-shop": {
+   "width": 236,
+   "height": 286,
+   "signY": 135,
+   "doorX": 188
+  },
+  "vacant-brick": {
+   "width": 230,
+   "height": 280,
+   "signY": 128,
+   "doorX": 114
+  },
+  "vacant-blue": {
+   "width": 244,
+   "height": 282,
+   "signY": 131,
+   "doorX": 54
+  }
+ },
+ "scenery": {
+  "scaffold": {
+   "width": 215,
+   "height": 236
+  },
+  "lamp": {
+   "width": 36,
+   "height": 150
+  },
+  "bench": {
+   "width": 48,
+   "height": 28
+  },
+  "depth-tree": {
+   "width": 144,
+   "height": 184
+  },
+  "depth-hedge": {
+   "width": 108,
+   "height": 33
+  },
+  "ladder": {
+   "width": 130,
+   "height": 190
+  },
+  "barrier": {
+   "width": 107,
+   "height": 76
+  },
+  "hoarding": {
+   "width": 149,
+   "height": 92
+  },
+  "mound": {
+   "width": 164,
+   "height": 148
+  },
+  "cloud": {
+   "width": 238,
+   "height": 71
+  },
+  "depth-cloud-small": {
+   "width": 116,
+   "height": 40
+  },
+  "depth-town": {
+   "width": 130,
+   "height": 60
+  },
+  "depth-hamlet": {
+   "width": 116,
+   "height": 36
+  }
+ },
+ "badges": {
+  "sign": {
+   "width": 120,
+   "height": 90
+  },
+  "ready": {
+   "width": 40,
+   "height": 40
+  },
+  "lock": {
+   "width": 40,
+   "height": 40
+  },
+  "flag": {
+   "width": 40,
+   "height": 40
+  },
+  "fitout": {
+   "width": 40,
+   "height": 40
+  },
+  "coin": {
+   "width": 40,
+   "height": 40
+  },
+  "key": {
+   "width": 40,
+   "height": 40
+  },
+  "blueprint": {
+   "width": 40,
+   "height": 40
+  }
+ },
+ "hills": {
+  "span": 3498,
+  "height": 240,
+  "meadow": "#afbc7c"
+ },
+ "ground": {
+  "span": 512,
+  "height": 248,
+  "edge": "#d2ab9e"
+ },
+ "walkers": {
+  "count": 4,
+  "width": 80,
+  "height": 100,
+  "frames": 4,
+  "from": [
+   "cast-03",
+   "cast-11",
+   "cast-20",
+   "cast-27"
+  ]
+ }
+}

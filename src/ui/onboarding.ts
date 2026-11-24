@@ -11,6 +11,7 @@ import { HAIRS, HEAD_ROWS, SHIRTS, SKINS } from '../render/sprites';
 import { containDialogFocus, focusDialog } from './dialog-focus';
 import { isComposingKey } from './keyboard';
 import { createGeneratedOwnerPreview } from './generated-owner-preview';
+import { portraitArt } from './portrait-art';
 import { themeArt } from './theme-art';
 
 let dismissOnboarding: (() => void) | null = null;
@@ -241,6 +242,16 @@ export function showOnboarding(opts: Options): void {
       crop.className = 'swatch-sprite';
       return crop;
     };
+    /** The head of a painted figure (the floors view's portraits): its top, down to the chin. */
+    const paintedHead = (figure: HTMLCanvasElement) => {
+      const crop = document.createElement('canvas');
+      crop.width = figure.width;
+      crop.height = Math.round(figure.height * .45);
+      crop.getContext('2d')!.drawImage(figure, 0, 0);
+      crop.className = 'swatch-sprite';
+      crop.dataset.portrait = 'painted';
+      return crop;
+    };
     const paint = (repaintOwner = true) => {
       if (repaintOwner) ownerPreview.update(draft.look);
       body.querySelectorAll<HTMLElement>('.swatches').forEach((group) => {
@@ -263,8 +274,10 @@ export function showOnboarding(opts: Options): void {
               // Only the front pose is painted, and each hairstyle's sheet arrives on its own:
               // a button stays empty until then rather than showing some other hair.
               const look = { ...draft.look, hairStyle: i };
-              const front = referenceOwnerFront(look);
-              if (front) b.append(headCrop(front));
+              const painted = portraitArt({ look });
+              const front = painted ? null : referenceOwnerFront(look);
+              if (painted) void painted.then(figure => { if (b.isConnected) b.append(paintedHead(figure)); }).catch(() => {});
+              else if (front) b.append(headCrop(front));
               else void preloadReferenceLook(look).then(() => {
                 const loaded = referenceOwnerFront(look);
                 if (loaded && b.isConnected) b.append(headCrop(loaded));

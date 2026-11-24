@@ -1,0 +1,16 @@
+Image 1 is the approved art direction of this cozy café game. Image 2 is an existing sprite sheet of the game's café staff: copy its layout, figure size, body proportions, poses, line weight and soft shading exactly. Paint a new character sprite sheet in exactly that style: thin warm-brown outlines, gentle soft shading, cute round proportions (the head is about 40% of the body height), dot eyes and rosy cheeks.
+
+SHEET: one landscape image with a fully transparent background, EXACTLY 4 columns and 2 rows of equal cells: 8 separate full-body figures of the SAME character, all at the same scale as image 2. Each figure is fully inside its own cell with clear empty space on all sides; nothing touches or overlaps a neighbour. No labels, numbers, grid lines, ground shadows, props on the ground or backdrop. Crisp edges with no pale halo.
+
+Row 1, walking to the right seen exactly from the side, a smooth 4-frame walk cycle: (1) right foot forward, heel touching down; (2) passing pose, legs together, body slightly higher; (3) left foot forward, heel touching down; (4) passing pose again. Arms swing opposite to the legs.
+Row 2: (1) standing facing the viewer, arms relaxed; (2) standing facing the viewer, smiling happily with closed curved eyes; (3) standing still facing right, seen from the side; (4) standing seen from behind.
+
+The head size, hairstyle, outfit, colours and accessories are identical in all 8 figures.
+
+COLOUR KEY (very important). This sheet is a template that software recolours afterwards, so three parts are painted in unusual key colours, each with the same soft shading as image 2 (a lighter and a darker shade of the SAME hue, never grey or brown):
+- ALL the hair, and any eyebrows, beard or moustache: soft VIOLET (base #9C7FD6, lighter #B9A3E6, darker #7458B0).
+- The bib apron with its neck strap, crossed back straps and back bow: soft GREEN (base #6DB877, lighter #93D29A, darker #4A9456).
+- The trousers: soft BLUE (base #6C9EDC, lighter #93BBEA, darker #4A78B8).
+Everything else is natural: skin light peach (#F6D2B4) with rosy pink cheeks, a plain WHITE collared shirt with rolled sleeves shaded in very light grey, medium brown shoes, small dark brown dot eyes, and the usual thin warm dark brown outlines. Violet, green and blue appear nowhere else. No patterns, logos, buttons in other colours, hats, glasses, jewellery, hair ties, ribbons or other accessories.
+
+CHARACTER:

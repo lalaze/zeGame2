@@ -4,9 +4,10 @@
     uv run --with pillow --with numpy python scripts/art-gen/floor-icons-build.py
 
 Each sheet (kits/icons/<sheet>/take-N/sheet.png, prompts in prompts/icons/) holds 8 separate
-objects on transparency, 4 columns by 2 rows (the last one 2 by 1), in the order SHEETS lists their
-icon keys. The keys are the ledger's own (src/ui/panel.ts): item:<menu item>, ing:<ingredient>,
-upgrade:<upgrade>. Every object is trimmed, centred on a square of the same margin and scaled to
+objects on transparency, 4 columns by 2 rows (the `upgrades` sheet 2 by 1), in the order SHEETS
+lists their icon keys. The keys are the ledger's own (src/ui/panel.ts): item:<menu item>,
+ing:<ingredient>, upgrade:<upgrade>; and for the dialogs, sig:<signature drink base>,
+promo:<promotion platform>, wish:<Mina's route>. Every object is trimmed, centred on a square of the same margin and scaled to
 SIZE pixels, so icons of one kind keep the sizes they were painted at relative to each other.
 
 Writes build/icons/<kind>-<id>.webp and build/icons/icons.json (the keys written).
@@ -50,6 +51,8 @@ SHEETS = {
     'pantry-1': (1, 4, 2, ['ing:milk', 'ing:flour', 'ing:butter', 'ing:eggs', 'ing:sugar', 'ing:tea', 'ing:spice', 'ing:cocoa']),
     'pantry-2': (1, 4, 2, ['ing:cream', 'ing:fruit', 'ing:matcha', 'upgrade:barista', 'upgrade:server', 'upgrade:cook', 'upgrade:machine', 'upgrade:marketing']),
     'upgrades': (1, 2, 1, ['upgrade:tables', 'upgrade:pass']),
+    # A signature drink by its base, the two promotion platforms, and Mina's map with either route.
+    'extras-1': (1, 4, 2, ['sig:coffee', 'sig:tea', 'sig:milk', 'sig:fruit', 'promo:flash', 'promo:orange', 'wish:quiet', 'wish:milky']),
 }
 
 

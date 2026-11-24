@@ -10,6 +10,9 @@ import type { CafeSize } from '../phaser/game';
 import { installFloorsUi } from '../../ui/floors-ui';
 import { setIconArt } from '../../ui/icon-art';
 import { floorsIconArt } from './floors-icons';
+import { portraitUrl, setPortraitArt } from '../../ui/portrait-art';
+import { floorsPortraitArt } from './floors-portraits';
+import { installFloorsStreet } from './floors-street';
 import { setThemeArt } from '../../ui/theme-art';
 import type { DecorManifest } from './floors-decor-layers';
 import { FLOORS_ART, FloorsScene, SHEETS, type FurnitureManifest, type SheetSize } from './floors-scene';
@@ -30,6 +33,13 @@ export class FloorsGame {
   constructor(private canvas: HTMLCanvasElement, view: CafeView, sim: Sim, getState: () => GameState, hooks: CafeHooks) {
     // The page around the building takes the floors view's paper look.
     installFloorsUi(canvas.ownerDocument.body);
+    // People shown on the page (partners, guests, the owner being designed) are the painted ones too.
+    setPortraitArt(floorsPortraitArt(FLOORS_ART));
+    // The owner's portrait heads the page's reports: have it drawn before the first one opens.
+    const owner = getState().profile?.look;
+    if (owner) portraitUrl({ look: owner });
+    // The street, the branch map and the chain's pictures are painted too.
+    void installFloorsStreet(FLOORS_ART, getState, canvas.ownerDocument.body);
     let created!: () => void, failed!: (error: Error) => void;
     this.ready = new Promise((resolve, reject) => { created = resolve; failed = reject; });
     void this.start(view, sim, getState, hooks, created, failed).catch(failed);

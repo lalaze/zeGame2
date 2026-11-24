@@ -1,0 +1,9 @@
+Image 1 is the approved art direction of this cozy café game. Image 2 is the sky and the little town behind the café's roof, as the game draws them. Image 3 shows the clouds and far-away villages behind the game's street in its old pixel-art version. Paint the things listed below for the background of that street in exactly the style of images 1 and 2: soft hand-drawn illustration, thin warm-brown outlines, gentle low-saturation colours, soft shading with warm light from the upper left. Far-away things are paler and simpler, as in image 2.
+
+Sprite sheet: one landscape image with a fully transparent background, EXACTLY 2 columns and 2 rows of equal cells, 4 separate objects. Each object is fully inside its own cell with clear empty space around it; nothing touches or overlaps a neighbour. No sky colour, no ground, no labels, no grid lines, no backdrop. No letters or words anywhere. Crisp edges with no pale halo.
+
+Cells left to right along the top row, then the bottom row:
+1. A big, soft, puffy white cloud, wide and low, with a flat underside and gentle cream and pale-blue shading. Fully opaque.
+2. A small soft white cloud of two or three puffs, with the same shading. Fully opaque.
+3. A far-away village seen from the side: a cluster of five little cream houses with terracotta roofs around a slim bell tower with a pointed terracotta cap, and round sage-green tree tops between them. Pale with distance. It ends in a straight, level bottom edge.
+4. A far-away hamlet: two little cream houses with terracotta roofs and one round sage-green bush beside them, pale with distance. Low and wide, with a straight, level bottom edge.

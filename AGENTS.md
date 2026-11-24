@@ -16,6 +16,7 @@ their phone, in portrait with touch, so check UI changes at phone size first.
 | --- | --- |
 | `public/art/` | What the game ships: lossless WebP. Never edit it by hand |
 | `assets/art-masters/` | The PNG master of every shipped WebP; tests and offline tools read pixels here (`artMaster()` in `scripts/art-files.mjs`). `webp.json` lists them. For 414 files that once shipped as GIF, the master is the full-colour original and `convert-art-webp.mjs` ships its GIF reduction (`quantised` in `webp.json`, `gifEra` in `assets/generated/PACKS.json`) |
+| `assets/generated/floor-sample-v1/build/` | What the building ships: painted WebP and JSON written by the pack's own builds (`scripts/art-gen/floor-*-build.*`). `scripts/ship-floors-art.mjs` copies it into a build at the same address, all of it downloaded at install. It does not go through `public/art`, `convert-art-webp.mjs` or `assets/art-masters`; its Codex takes are in the library |
 | `scripts/runtime-art.json` | The art downloaded at install, by PNG name. Anything else loads on demand |
 | `assets/generated/PACKS.json` | Every pack under `public/art`: what loads it, its sources, its build commands and whether it can be regenerated. Look here first; `scripts/art-packs.test.mjs` keeps it in step |
 | `assets/generated/<pack>/` | What rebuilds shipped art: kits, prompts, references, manifests, chosen takes. Current packs have a README with their regenerate, build and check commands (start with `cozy-cast-v9` and `cozy-team-v9`) |
@@ -23,8 +24,12 @@ their phone, in portrait with touch, so check UI changes at phone size first.
 | `/Volumes/data/zeGame2-library` | The art library, outside git, at the same repo-relative paths: retired art, QA screenshots and video. See `assets/ART-LIBRARY.md` |
 
 Art direction: on 2026-11-23 the user chose a new look for the whole game, a soft, cozy cross-section
-(`assets/generated/art-direction-v1`). New art follows it. Until it replaces the shipped art, the
-shipped style is style B (`assets/generated/cozy-cast-v9/style-b.png`, palette `docs/art-grid/palette.json`).
+(`assets/generated/art-direction-v1`), and since 2026-11-24 it is what the game draws: the building of
+`src/render/floors/` with the paper UI of `src/ui/floors-ui.css`, painted with Codex in the pack
+`assets/generated/floor-sample-v1` (its README lists every part and its build command). New art follows
+it. The pixel room it replaced (style B, `assets/generated/cozy-cast-v9/style-b.png`, palette
+`docs/art-grid/palette.json`) still opens with `?pixel`, so its packs under `public/art` still ship and
+the rules below still hold for them.
 
 ## Rules for art
 

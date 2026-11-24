@@ -1,0 +1,95 @@
+{
+ "frames": [
+  "walk0",
+  "walk1",
+  "walk2",
+  "walk3",
+  "sit",
+  "happy",
+  "sleep",
+  "groom"
+ ],
+ "sitHeight": 96,
+ "cats": {
+  "ginger": {
+   "frameWidth": 120,
+   "frameHeight": 104,
+   "take": 1
+  },
+  "tuxedo": {
+   "frameWidth": 120,
+   "frameHeight": 104,
+   "take": 1
+  },
+  "calico": {
+   "frameWidth": 118,
+   "frameHeight": 104,
+   "take": 1
+  },
+  "tabby": {
+   "frameWidth": 120,
+   "frameHeight": 104,
+   "take": 1
+  },
+  "black": {
+   "frameWidth": 120,
+   "frameHeight": 105,
+   "take": 1
+  },
+  "white": {
+   "frameWidth": 118,
+   "frameHeight": 105,
+   "take": 1
+  },
+  "british": {
+   "frameWidth": 120,
+   "frameHeight": 107,
+   "take": 1
+  },
+  "american": {
+   "frameWidth": 118,
+   "frameHeight": 104,
+   "take": 1
+  },
+  "siamese": {
+   "frameWidth": 118,
+   "frameHeight": 102,
+   "take": 1
+  },
+  "ragdoll": {
+   "frameWidth": 134,
+   "frameHeight": 110,
+   "take": 1
+  },
+  "persian": {
+   "frameWidth": 140,
+   "frameHeight": 105,
+   "take": 1
+  },
+  "mainecoon": {
+   "frameWidth": 132,
+   "frameHeight": 116,
+   "take": 1
+  }
+ },
+ "gifts": [
+  "leaf",
+  "yarn",
+  "feather",
+  "ribbon",
+  "acorn",
+  "coin"
+ ],
+ "roof": [
+  {
+   "file": "roof-clear-0.webp",
+   "x": 596,
+   "y": 253
+  },
+  {
+   "file": "roof-clear-1.webp",
+   "x": 664,
+   "y": 559
+  }
+ ]
+}

@@ -1,5 +1,6 @@
 import './streets.css';
 import './street-pixel.css';
+import './street-scenery.css';
 import { streetIcon } from './street-icons';
 import { BUSINESSES, STREETS, STREET_PLOTS, businessDef, buyStreetPlot, collectStreetShop, collectStreetShops, fitOutBlock, fitOutPrice, fitOutSeconds, fitOutStreetPlot, ownedPlotCount, plotPrice, plotPurchaseBlock, setStreetSchedule, streetDef, streetLotId, streetLotIds, streetProduction, streetUnlocked, streetUpgradePrice, streetYieldMultiplier, upgradeStreetShop, type PlotId } from '../game/streets';
 import { PROJECT_MODES, projectCapacity, projectCycleSeconds, projectDef, type ProjectMode } from '../game/room-projects';
@@ -7,7 +8,7 @@ import { cafeLocation, type LocationId } from '../game/locations';
 import type { AreaId, RegionId } from '../game/regions';
 import type { GameState } from '../game/state';
 import { formatDuration, formatTransactionMoney as money } from '../game/format';
-import { streetSceneryArt, streetShopArt, streetSpriteUrl, styleStreetShop } from '../render/street-art';
+import { streetRegionArt, streetSceneryArt, streetShopArt, streetSpriteUrl, styleStreetShop } from '../render/street-art';
 import { t, type MessageKey } from '../i18n';
 import { closeModal, showModal, toast } from './modal';
 import { showRoomProjects } from './room-projects';
@@ -38,7 +39,7 @@ export function showStreetMap(s: GameState, changed: () => void, visit?: (area: 
       <div class="street-skyline" aria-hidden="true">${streetSceneryArt()}</div><div class="street-storefronts"></div><div class="street-pavement" aria-hidden="true"></div><div class="street-road" aria-hidden="true"></div>
       </div></div>
       <div class="street-walk-controls"><button class="chip" data-street-prev aria-label="${t('street.walkLeft')}">${streetIcon('left')}</button><p id="street-walk-hint">${t('street.mapNote')}<small data-street-guidance></small></p><button class="chip" data-street-next aria-label="${t('street.walkRight')}">${streetIcon('right')}</button></div>
-      <section id="street-detail-panel" class="street-detail" aria-labelledby="street-detail-title" hidden><button class="street-detail-close chip" data-street-detail-close aria-label="${t('street.closeDetail')}">${streetIcon('close')}</button><p class="street-eyebrow" data-street-address></p><h3 id="street-detail-title"></h3><p class="street-detail-status" data-street-status></p>
+      <section id="street-detail-panel" class="street-detail" aria-labelledby="street-detail-title" hidden><button class="street-detail-close chip" data-street-detail-close aria-label="${t('street.closeDetail')}">${streetIcon('close')}</button><p class="street-eyebrow" data-street-address></p><img class="street-detail-picture" data-street-picture alt="" draggable="false" hidden><h3 id="street-detail-title"></h3><p class="street-detail-status" data-street-status></p>
       <div class="street-detail-operations"><div data-street-choose-business><label for="street-business">${t('street.businessLabel')}</label><div class="street-select-wrap"><select id="street-business"></select><span class="street-select-arrow" aria-hidden="true">${streetIcon('down')}</span></div><p class="note" data-street-business-description></p></div>
       <p class="street-price-breakdown" data-street-prices></p><p class="street-income" data-street-income></p><progress max="1" value="0" aria-label="${t('projects.progress')}"></progress>
       <div class="street-schedules" role="group" aria-label="${t('projects.schedule')}"></div><p class="note" data-street-schedule-note>${t('projects.restartHint')}</p>
@@ -239,6 +240,10 @@ export function showStreetMap(s: GameState, changed: () => void, visit?: (area: 
     get('[data-street-status]').textContent = building ? t('street.renovating', { time: formatDuration(Math.ceil((lot!.readyAt - now) / 1000)) })
       : running ? output.full ? t('projects.full', { n: output.capacity }) : t('projects.running', { n: output.batches, cap: output.capacity, time: formatDuration(Math.ceil(output.left)) })
         : t(lot ? 'street.chooseUse' : 'street.purchaseHint');
+    // A look with pictures of the businesses (the floors view) shows the one this lot has or would get.
+    const picture = streetRegionArt(lot?.business ?? business), frame = get<HTMLImageElement>('[data-street-picture]');
+    frame.hidden = !picture;
+    if (picture && frame.getAttribute('src') !== picture) frame.src = picture;
     get('[data-street-choose-business]').hidden = !!lot?.business;
     if (document.activeElement !== select) select.value = business;
     for (const option of select.options) {

@@ -1,0 +1,143 @@
+/* The street, the branch map and the chain's pictures in the floors view (?floors): the painted art
+   of assets/generated/floor-sample-v1/build/{street,map} in place of the pixel packs. The screens'
+   own stylesheets (streets.css, street-pixel.css, street-scenery.css, branch-map.css, chain-ui.css)
+   keep the layout; this only undoes what they assume of pixel art and sets the painted backgrounds.
+   src/render/floors/floors-street.ts turns it on (body.floors-street, body.floors-map) once the
+   pictures' manifests are in, and sets the --fl-street-* and --fl-map-* properties used here.
+   Every rule starts with :root body.floors-view, so the pixel view keeps its look. */
+
+/* ------------------------------------------------------------------ the street: scenery */
+:root body.floors-view.floors-street .street-view img { image-rendering: auto; }
+/* The sky of the café's own view (build/frame/sky), paling towards the hills. */
+:root body.floors-view.floors-street .street-scenery { background: linear-gradient(#9ccbf5, #c4e1f6 46%, #e6f0e4 72%, var(--fl-street-meadow, #b5c59a) 72%); }
+:root body.floors-view.floors-street .street-panorama { background: #9ccbf5; }
+:root body.floors-view.floors-street .street-hills {
+  background-image: var(--fl-street-hills); background-size: calc(var(--fl-street-hills-span) * var(--pixel-scale) / 2) 100%; image-rendering: auto;
+}
+:root body.floors-view.floors-street .street-hills::after { background: var(--fl-street-meadow); }
+:root body.floors-view.floors-street .street-depth > .street-depth-section::before { background-image: var(--fl-street-mound); image-rendering: auto; }
+:root body.floors-view.floors-street .street-depth-town { opacity: 1; }
+:root body.floors-view.floors-street .street-depth-cloud { opacity: .96; }
+/* The paving is one painting with its kerb along the top, mirrored into a tile. */
+:root body.floors-view.floors-street .street-pavement {
+  background: var(--fl-street-ground) repeat-x 0 0 / calc(var(--fl-street-ground-span) * var(--pixel-scale)) auto, var(--fl-street-ground-edge);
+  image-rendering: auto;
+}
+:root body.floors-view.floors-street .street-pavement::before { display: none; }
+/* A lamp keeps its painted proportions at the pixel lamp's height. */
+:root body.floors-view.floors-street .street-furniture > .street-lamp { width: auto; aspect-ratio: var(--fl-street-lamp); }
+
+/* ------------------------------------------------------------------ the street: storefronts */
+:root body.floors-view.floors-street .street-shop-art::after {
+  bottom: -7px; left: -3%; width: 106%; height: 16px;
+  background: radial-gradient(closest-side, rgb(79 59 47 / .3), rgb(79 59 47 / 0));
+  image-rendering: auto;
+}
+/* A shop's name is written on its painted signboard. */
+:root body.floors-view.floors-street :is(.street-shop-sign,.street-shop-caption strong) {
+  color: #4a3323; text-shadow: 0 1px 0 rgb(255 240 205 / .75); font-weight: 800;
+}
+/* The board a lot for sale or without a business hangs out: the estate agent's painted one. */
+:root body.floors-view.floors-street .street-shop:is([data-status="sale"],[data-status="vacant"],[data-status="locked"]) .street-shop-sign {
+  width: 124px; aspect-ratio: var(--fl-street-sign); padding: 0; line-height: 1.2;
+  display: flex; align-items: flex-end; justify-content: center; box-sizing: border-box; padding-bottom: 9%;
+  background: var(--fl-street-badge-sign) center / 100% 100% no-repeat; border: 0; border-radius: 0; box-shadow: none;
+  transform: rotate(-3deg); color: #7a4a36; white-space: normal; overflow: visible;
+}
+:root body.floors-view.floors-street .street-shop[data-status="locked"] .street-shop-sign { color: #6f675c; filter: saturate(.55); }
+/* The note under each lot: paper, with a painted badge for what it says. */
+:root body.floors-view.floors-street .street-shop-caption small {
+  padding: 4px 10px; background: var(--fl-paper); color: var(--fl-ink); border: 2px solid var(--fl-line); border-radius: 12px;
+  box-shadow: 0 2px 0 var(--fl-stamp); font-weight: 700;
+}
+:root body.floors-view.floors-street .street-shop-caption small::before {
+  content: ''; display: inline-block; width: 18px; height: 18px; margin: -4px 5px -4px -3px; vertical-align: middle;
+  background: center / contain no-repeat;
+}
+:root body.floors-view.floors-street .street-shop[data-status="sale"] .street-shop-caption small::before { background-image: var(--fl-street-badge-coin); }
+:root body.floors-view.floors-street .street-shop[data-status="locked"] .street-shop-caption small::before { background-image: var(--fl-street-badge-lock); }
+:root body.floors-view.floors-street .street-shop[data-status="vacant"] .street-shop-caption small::before { background-image: var(--fl-street-badge-key); }
+:root body.floors-view.floors-street .street-shop[data-status="building"] .street-shop-caption small::before { background-image: var(--fl-street-badge-fitout); }
+:root body.floors-view.floors-street .street-shop[data-status="open"] .street-shop-caption small::before { display: none; }
+:root body.floors-view.floors-street .street-shop.street-home .street-shop-caption small::before { display: none; }
+:root body.floors-view.floors-street .street-shop.street-shop-ready .street-shop-caption small { background: var(--fl-sage); color: #fffaf0; border-color: var(--fl-sage-dark); }
+:root body.floors-view.floors-street .street-shop.street-shop-ready .street-shop-caption small::before {
+  content: ''; display: inline-block; margin: -4px 5px -4px -3px; font-weight: inherit; background-image: var(--fl-street-badge-ready);
+}
+:root body.floors-view.floors-street .street-shop[aria-pressed="true"] { filter: drop-shadow(0 0 6px #fff6cf); }
+/* A shop being fitted out: the painted hoarding in a row along its foot, ladder and trestle as before. */
+:root body.floors-view.floors-street .street-hoarding {
+  left: 4%; width: 92%; bottom: 0; height: 30%;
+  background: var(--fl-street-hoarding) repeat-x center bottom / auto 100%; border: 0; box-shadow: none;
+}
+:root body.floors-view.floors-street .street-hoarding::after { display: none; }
+:root body.floors-view.floors-street .street-ladder { bottom: 0; }
+:root body.floors-view.floors-street .street-barrier { bottom: -6%; right: -4%; width: 44%; }
+
+/* ------------------------------------------------------------------ the street: people */
+/* The painted guests' side walk: four cells in a strip (build/street/guest-N). */
+:root body.floors-view.floors-street .street-walker { width: var(--fl-street-walker-w); height: var(--fl-street-walker-h); }
+:root body.floors-view.floors-street :is(.street-walker,.street-shop-visitor) i {
+  width: var(--fl-street-walker-w); height: var(--fl-street-walker-h);
+  background: var(--guest) 0 0 / var(--fl-street-walker-strip) var(--fl-street-walker-h) no-repeat;
+  animation: floors-street-step .72s steps(4) infinite;
+}
+:root body.floors-view.floors-street .street-shop-visitor { width: var(--fl-street-walker-w); height: var(--fl-street-walker-h); }
+@keyframes floors-street-step { from { background-position-x: 0; } to { background-position-x: calc(-1 * var(--fl-street-walker-strip)); } }
+
+/* ------------------------------------------------------------------ the street: marks and badges */
+:root body.floors-view.floors-street .street-overlay .street-ui-badge { object-fit: contain; }
+:root body.floors-view.floors-street .street-overlay .street-route-marker { width: 22px; }
+:root body.floors-view.floors-street .street-overlay .street-route-marker .street-ui-badge { width: 22px; height: 22px; flex-basis: 22px; }
+:root body.floors-view.floors-street .street-overlay .street-choice { grid-template-columns: 22px minmax(0, 1fr); }
+:root body.floors-view.floors-street .street-overlay .street-toolbar button .street-ui-icon { width: 18px; height: 18px; flex-basis: 18px; }
+:root body.floors-view.floors-street .street-overlay .street-toolbar button .street-ui-badge { width: 22px; height: 22px; flex-basis: 22px; }
+:root body.floors-view.floors-street .street-overlay .street-select-arrow .street-ui-icon { width: 18px; height: 18px; }
+/* The picture of the business a lot has, or would get, beside its name. */
+:root body.floors-view.floors-street .street-detail-picture {
+  float: left; width: 104px; height: 78px; margin: 4px 12px 6px 0; object-fit: cover;
+  border: 2px solid var(--fl-line); border-radius: 12px; box-shadow: 0 2px 0 var(--fl-stamp); background: var(--fl-paper-2);
+}
+:root body.floors-view.floors-street .street-overlay .street-detail h3 { clear: none; }
+:root body.floors-view.floors-street .street-overlay .street-detail-status { clear: both; }
+
+/* ------------------------------------------------------------------ the branch map */
+:root body.floors-view.floors-map :is(.branch-map-art,.branch-preview) { image-rendering: auto; }
+:root body.floors-view.floors-map .branch-map { border: 2px solid var(--fl-line); border-radius: 14px; box-shadow: 0 3px 0 var(--fl-stamp); }
+:root body.floors-view.floors-map .branch-preview { border: 2px solid var(--fl-line); border-radius: 14px; box-shadow: 0 3px 0 var(--fl-stamp); background: var(--fl-paper-2); }
+:root body.floors-view.floors-map :is(.branch-shop,.chain-places img,.chain-perk-list img,.branch-specialties img) { image-rendering: auto; }
+/* The player's café has no signboard on its front: its name hangs on a paper plate over the awning. */
+:root body.floors-view.floors-street .street-shop.street-home .street-shop-sign {
+  width: auto; max-width: 86%; padding: 1px 12px; line-height: 20px;
+  background: var(--fl-paper); border: 2px solid var(--fl-line); border-radius: 10px; box-shadow: 0 2px 0 var(--fl-stamp); text-shadow: none;
+}
+/* The estate board hangs below the signboard, clear of the lot's name. */
+:root body.floors-view.floors-street .street-shop:is([data-status="sale"],[data-status="vacant"],[data-status="locked"]) .street-shop-sign {
+  width: 112px; bottom: calc(var(--shop-height) * var(--pixel-scale) * .09);
+}
+/* A place on the map: its little café standing on it, a small name plate below, and the painted
+   pin under the place that is picked. */
+:root body.floors-view.floors-map .branch-pin { padding: 1px 8px; min-height: 24px !important; min-width: 0 !important; font-size: 11px; line-height: 1.5; border-radius: 10px !important; box-shadow: 0 2px 0 var(--fl-stamp) !important; }
+:root body.floors-view.floors-map .branch-pin .branch-shop { width: 40px; height: 40px; margin: -40px auto 0; filter: grayscale(.4) opacity(.92); pointer-events: auto; }
+:root body.floors-view.floors-map .branch-pin.franchised .branch-shop { filter: none; }
+:root body.floors-view.floors-map .branch-pin::after { display: none; }
+:root body.floors-view.floors-map .branch-pin.selected::after {
+  display: block; bottom: -20px; width: 14px; height: 19px; background: var(--fl-map-pin) center / contain no-repeat;
+}
+
+/* ------------------------------------------------------------------ the street: paper in place of the pixel plates */
+/* The street picked is rose, so its note is ink, not the pixel look's gold on green. */
+:root body.floors-view.floors-street .street-overlay .street-choice[aria-pressed='true'] small { color: var(--fl-ink); }
+:root body.floors-view.floors-street .street-overlay .street-toolbar strong {
+  padding: 4px 10px; border: 2px solid var(--fl-soft-line); border-radius: 12px; background: var(--fl-paper-light); color: var(--fl-ink); box-shadow: none;
+}
+:root body.floors-view.floors-street .street-overlay :is(.street-toolbar,.street-summary) { border-color: var(--fl-soft-line); }
+:root body.floors-view.floors-street .street-overlay .street-eyebrow {
+  padding: 2px 10px; border-radius: 99px; background: var(--fl-sage); color: var(--fl-paper-light); box-shadow: none; font-weight: 700;
+}
+:root body.floors-view.floors-street .street-overlay .street-detail-status {
+  padding: 8px 12px; border: 2px dashed var(--fl-sage); border-radius: 12px; background: var(--fl-sage-soft); color: var(--fl-sage-dark);
+}
+:root body.floors-view.floors-street .street-overlay .street-price-breakdown { padding: 8px 12px; border: 2px dashed var(--fl-gold); border-radius: 12px; background: #fbeccb; box-shadow: none; }
+/* The street fills the screen: no card edge to round off around it. */
+:root body.floors-view.floors-street .street-overlay > .modal { border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
