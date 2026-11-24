@@ -104,6 +104,8 @@ body.fullscreen-cafe.mobile-cafe-layout .cafe-life {
   bottom: calc(var(--view-tip-bottom) + var(--toast-clearance, 0px) + 10px);
   display: flex; align-items: center; gap: 6px; padding: 4px 6px;
 }
+/* The way back from a table preview stands over the dock, which would cover it. */
+body.fullscreen-cafe.mobile-cafe-layout .table-preview-exit { z-index: 9; bottom: calc(var(--view-tip-bottom) + var(--toast-clearance, 0px) + 12px); }
 body.mobile-cafe-layout .cafe-life > b, body.mobile-cafe-layout .cafe-life > p,
 body.mobile-cafe-layout .cafe-life .life-full-label { display: none; }
 body.mobile-cafe-layout .cafe-life .life-compact-label { display: inline; }

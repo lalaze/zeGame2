@@ -14,25 +14,18 @@ import type { CafeHooks } from '../phaser/cafe-scene';
 import {
   BARISTAS, COUNTER_FRONT, DISPLAY, DOOR, FLOOR_ART, LIFT_HATCH, LIFT_TOP, OVEN_MOUTH, PASS, QUEUE, SERVER_HOMES, SERVICE, STEAM,
   FRAME, FURNITURE_SPOTS, TABLE_FRONT, WALK, WORLD_W, building, cookHome, furnitureSpot, kitchenPlace, kitchenSpot,
-  restFocus, route, stepsLength, tableSeats, walkPace, worldPoint,
+  GROUND_SHIFT, nextTableSpot, restFocus, route, stepsLength, tableSeats, walkPace, worldPoint,
   type Building, type FloorId, type FloorPoint, type FurnitureSpot, type KitchenPlace, type Spot, type Step,
 } from './floors-layout';
+import { BACK_LAYERS, FRONT_LAYERS, type DecorFloor, type DecorManifest } from './floors-decor-layers';
 import { makeTextures } from './textures';
+import { FloorsThoughts, type ThinkingHead } from './floors-thoughts';
+import { t } from '../../i18n';
 import { outerWallShown, setOuterWall } from '../../ui/floors-ui';
 
 export const FLOORS_ART = `${import.meta.env.BASE_URL}assets/generated/floor-sample-v1/build/`;
 export interface SheetSize { frameWidth: number; frameHeight: number }
-/**
- * Decor layers of the ground floor ('1f') and the seating floors ('2f'), from
- * scripts/art-gen/floor-decor-build.py: the fixed layers drawn behind and in front of people, and for
- * each decor slot the layer of each item. An item without a layer on a floor draws nothing there.
- */
-export type DecorManifest = Partial<Record<DecorFloor, { back: string[]; front: string[]; slots: Record<string, Record<string, string>> }>>;
-type DecorFloor = '1f' | '2f';
 const DECOR_FLOORS: Partial<Record<FloorId, DecorFloor>> = { ground: '1f', 'floor-2': '2f', 'floor-3': '2f' };
-/** Back to front: the room, then its surfaces, then what stands in it, then what hangs over it. */
-const BACK_LAYERS = ['shell', 'wallpaper', 'floor', 'rug', 'shadow', 'fixtures', 'tablecloth', 'centerpiece', 'neon', 'sill', 'curtain', 'ceiling'];
-const FRONT_LAYERS = ['counter', 'fixtures-front'];
 /** Back layers stack from this depth up, a step apart; wall furniture hangs between the shadows and the fixtures. */
 const LAYER_DEPTH = -2, LAYER_STEP = .05;
 const WALL_FURNITURE_DEPTH = LAYER_DEPTH + LAYER_STEP * (BACK_LAYERS.indexOf('fixtures') - .4);
@@ -161,6 +154,10 @@ export class FloorsScene extends Phaser.Scene {
   private pressAt: { x: number; y: number } | null = null;
   /** The cue over the moment waiting on the player. */
   private cue: Phaser.GameObjects.Image | null = null;
+  /** What people think, in words (floors-thoughts.ts). */
+  private thoughts!: FloorsThoughts;
+  /** Where the next table would go, while the page asks (the ledger's preview). */
+  private tableMark: { mark: Phaser.GameObjects.Graphics; label: Phaser.GameObjects.Text } | null = null;
 
   constructor(private view: CafeView, private sim: Sim, private getState: () => GameState, private hooks: CafeHooks,
     private sheets: Record<string, SheetSize>, private onFirstFrame: () => void, private onFailed: (error: Error) => void,
@@ -185,6 +182,7 @@ export class FloorsScene extends Phaser.Scene {
 
   create(): void {
     makeTextures(this);
+    this.thoughts = new FloorsThoughts(this, this.sim, this.view, id => this.thinker(id));
     this.cameras.main.setBackgroundColor(FRAME_EDGES.sky);
     this.earth = this.add.rectangle(0, 0, WORLD_W, 4000, FRAME_EDGES.street).setOrigin(0, 0).setDepth(-3);
     this.sky = this.add.image(0, 0, 'frame/sky').setOrigin(0, 1).setDepth(-10);
@@ -395,8 +393,13 @@ export class FloorsScene extends Phaser.Scene {
     this.floorImages = next.floors.flatMap(floor => {
       const y = next.offsets[floor]!, decor = layers(floor).filter(l => this.textures.exists(l.key));
       if (!decor.length) return [this.add.image(0, y - (FLOOR_ART[floor].above ?? 0), FLOOR_ART[floor].image).setOrigin(0, 0).setDepth(LAYER_DEPTH)];
-      return decor.map(l => this.add.image(0, y, l.key).setOrigin(0, 0)
-        .setDepth(l.front ? counterDepth + l.order * .01 : LAYER_DEPTH + l.order * LAYER_STEP));
+      return decor.map(l => {
+        const image = this.add.image(0, y, l.key).setOrigin(0, 0)
+          .setDepth(l.front ? counterDepth + l.order * .01 : LAYER_DEPTH + l.order * LAYER_STEP);
+        const shift = floor === 'ground' && !l.front ? GROUND_SHIFT[equipped[BACK_LAYERS[l.order]] ?? ''] : undefined;
+        if (shift) image.setPosition(shift.dx, y + shift.dy).setCrop(shift.crop.x, shift.crop.y, shift.crop.w, shift.crop.h);
+        return image;
+      });
     });
     this.decorSignature = missing.length ? '' : signature;
     this.layoutFrame(next);
@@ -433,8 +436,10 @@ export class FloorsScene extends Phaser.Scene {
     this.syncServers(b, active, step);
     this.syncCooks(b, step);
     this.restock(b);
+    this.thoughts.update(step, state, !this.view.paused && !this.arranging && this.wallAlpha < .5);
     this.syncFurniture(b, state);
     this.syncArrange(b, state);
+    this.syncTablePreview(b, state, active.length);
     this.showMoment(b);
     this.drainView();
   }
@@ -673,6 +678,49 @@ export class FloorsScene extends Phaser.Scene {
 
   private head(actor: Actor): { x: number; y: number } {
     return { x: actor.sprite.x, y: actor.sprite.y - actor.sprite.displayHeight - 4 };
+  }
+
+  /** The head of whoever a thought belongs to (`customer:7`, `server:0`), if they can be seen. */
+  private thinker(id: string): ThinkingHead | null {
+    const [kind, n] = id.split(':'), i = Number(n);
+    if (kind === 'barista') {
+      const sprite = this.baristas[i];
+      return sprite?.visible ? { ...this.headOf(sprite), arrived: true } : null;
+    }
+    const actor = kind === 'customer' ? this.customers.get(i) : kind === 'server' ? this.servers[i] : this.cooks[i];
+    return actor?.sprite.visible && actor.sprite.alpha > .6 ? { ...this.headOf(actor.sprite), arrived: !actor.steps.length } : null;
+  }
+
+  private headOf(sprite: Phaser.GameObjects.Sprite): { x: number; y: number } {
+    return { x: sprite.x, y: sprite.y - sprite.displayHeight - 4 };
+  }
+
+  /** The ledger's "show where": rings the place of the next table, or the join where a new floor would open for it. */
+  private syncTablePreview(b: Building, state: GameState, tables: number): void {
+    const spot = this.view.tablePreview && state.phase === 'prep' && !this.arranging ? nextTableSpot(tables) : null;
+    if (!spot) {
+      this.tableMark?.mark.destroy();
+      this.tableMark?.label.destroy();
+      this.tableMark = null;
+      return;
+    }
+    const built = b.offsets[spot.floor] !== undefined;
+    // A new floor opens over the topmost one below the roof.
+    const at = built ? worldPoint(b, { ...spot, y: spot.y - 60 }) : { x: WORLD_W / 2, y: b.offsets[b.floors[1]]! };
+    if (!this.tableMark) {
+      const label = this.add.text(0, 0, t(built ? 'floors.nextTable' : 'floors.nextFloor'), {
+        fontFamily: 'ui-rounded, "PingFang SC", system-ui, sans-serif', fontStyle: 'bold', fontSize: '54px', color: '#fffaf0', stroke: '#526f4f', strokeThickness: 14,
+      }).setOrigin(.5, 1).setDepth(100001);
+      this.tableMark = { mark: this.add.graphics().setDepth(99000), label };
+      this.moved = true;
+      this.focusY = at.y;
+      this.frameCamera();
+    }
+    const { mark, label } = this.tableMark;
+    mark.clear().fillStyle(0xe3ebd8, .42).lineStyle(8, 0x6c8c68, .95).setAlpha(.75 + .25 * Math.sin(this.time.now / 280));
+    if (built) mark.fillEllipse(at.x, at.y, 480, 250).strokeEllipse(at.x, at.y, 480, 250);
+    else mark.fillRoundedRect(FRAME.pillar, at.y - 58, WORLD_W - 2 * FRAME.pillar, 116, 40).strokeRoundedRect(FRAME.pillar, at.y - 58, WORLD_W - 2 * FRAME.pillar, 116, 40);
+    label.setPosition(at.x, at.y - (built ? 140 : 70));
   }
 
   // ------------------------------------------------------------ guests

@@ -10,7 +10,10 @@ import type { CafeSize } from '../phaser/game';
 import { installFloorsUi } from '../../ui/floors-ui';
 import { setIconArt } from '../../ui/icon-art';
 import { floorsIconArt } from './floors-icons';
-import { FLOORS_ART, FloorsScene, SHEETS, type DecorManifest, type FurnitureManifest, type SheetSize } from './floors-scene';
+import { setThemeArt } from '../../ui/theme-art';
+import type { DecorManifest } from './floors-decor-layers';
+import { FLOORS_ART, FloorsScene, SHEETS, type FurnitureManifest, type SheetSize } from './floors-scene';
+import { floorsThemePreview } from './floors-theme-preview';
 
 function supportsWebGL(): boolean {
   try { return !!document.createElement('canvas').getContext('webgl'); } catch { return false; }
@@ -41,6 +44,8 @@ export class FloorsGame {
     if (missing.length) throw new Error(`Floors sheets missing: ${missing.join(', ')}`);
     // The decor layers are optional: without them the floors are drawn as single pictures.
     const decor = await fetch(`${FLOORS_ART}decor/decor.json`).then(r => (r.ok ? r.json() as Promise<DecorManifest> : null)).catch(() => null);
+    // The opening flow's starter themes show this building too.
+    setThemeArt(floorsThemePreview(FLOORS_ART, decor));
     const furniture = await fetch(`${FLOORS_ART}furniture/furniture.json`).then(r => (r.ok ? r.json() as Promise<FurnitureManifest> : null)).catch(() => null);
     // The ledger shows the floors' own pictures: menu, pantry and upgrade icons, furniture and decor.
     const list = (path: string) => fetch(`${FLOORS_ART}${path}`).then(r => (r.ok ? r.json() as Promise<string[]> : [])).catch(() => []);

@@ -35,6 +35,18 @@ export const WORLD_W = 1672;
  * its paving and earth (SOIL_BAND) over the basement and more earth (SOIL_BELOW) under it.
  */
 export const FRAME = { street: 836, soilBand: 150, soilBelow: 420, beam: 70, pillar: 76 } as const;
+/**
+ * The awning over the ground floor's open front hides the top of its back wall, and the staff the part
+ * behind their heads: decor drawn there moves clear of them, by item (pendants and vines hang low
+ * enough as they are). The layer is drawn this far from its place, and only the part of it that holds
+ * the piece (layers made by comparing pictures have stray specks elsewhere).
+ */
+export interface DecorShift { dx: number; dy: number; crop: { x: number; y: number; w: number; h: number } }
+const HUNG = { x: 60, y: 0, w: 1245, h: 300 }, NEON: DecorShift = { dx: -318, dy: -10, crop: { x: 758, y: 130, w: 170, h: 170 } };
+export const GROUND_SHIFT: Partial<Record<string, DecorShift>> = {
+  ceiling_lights: { dx: 0, dy: 76, crop: HUNG }, ceiling_chandelier: { dx: 0, dy: 84, crop: HUNG },
+  neon_cafe: NEON, neon_heart: NEON, neon_cup: NEON,
+};
 /** Bottom up, so the stairs can be followed floor by floor. */
 const LEVELS: FloorId[] = ['basement', 'ground', 'floor-2', 'floor-3', 'roof'];
 
@@ -99,6 +111,10 @@ const STAIRS: Partial<Record<FloorId, { foot: Point; top: Point; landing: Spot }
  * tables: guests walk in from the street here and leave the same way.
  */
 export const DOOR = spot('ground', 836, 935, GROUND_AISLE);
+/** Today's menu on its board, on the street by the right-hand door: its foot below street level, and its size. */
+export const BOARD = { x: 1546, y: 134, w: 210, h: 244 } as const;
+/** The middle of the blank hanging sign on the ground floor's front wall (pixels of build/frame/wall-ground.webp), and the cup on it. */
+export const SHOP_SIGN = { x: 583, y: 286, cup: 92 } as const;
 /** Six places in line, the head nearest the till; the tail reaches towards the window seat. */
 export const QUEUE: Spot[] = [[612, 606], [510, 608], [408, 610], [318, 614], [246, 598], [186, 584]]
   .map(([x, y]) => spot('ground', x, y, GROUND_AISLE));
@@ -134,6 +150,12 @@ const upperTables = (floor: FloorId) => [
 /** Every table in the building, in the order the café opens them. */
 const TABLES: Seat[][] = [...GROUND_TABLES, ...upperTables('floor-2'), ...upperTables('floor-3')];
 export const TABLE_SLOTS = TABLES.length;
+
+/** Where the café's next table goes: the middle of its two seats, or null once the building is full. */
+export function nextTableSpot(tables: number): FloorPoint | null {
+  const pair = TABLES[tables];
+  return pair ? { floor: pair[0].floor, x: (pair[0].x + pair[1].x) / 2, y: (pair[0].y + pair[1].y) / 2 } : null;
+}
 
 /**
  * The seats of the café's table with this index. Tables keep their index in the save; the
@@ -281,7 +303,7 @@ const SEATING_SPOTS: Record<string, Where> = {
 const SPOTS: Partial<Record<FloorId, Record<string, Where>>> = {
   ground: {
     left: [272, 872, 168], right: [1402, 874, 164],
-    'wall-1': { x: 560, y: 108, w: 190, h: 100 }, 'wall-2': { x: 770, y: 108, w: 180, h: 100 },
+    'wall-1': { x: 590, y: 108, w: 166, h: 100 }, 'wall-2': { x: 770, y: 108, w: 180, h: 100 },
   },
   'floor-2': SEATING_SPOTS,
   'floor-3': SEATING_SPOTS,

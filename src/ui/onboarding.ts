@@ -11,6 +11,7 @@ import { HAIRS, HEAD_ROWS, SHIRTS, SKINS } from '../render/sprites';
 import { containDialogFocus, focusDialog } from './dialog-focus';
 import { isComposingKey } from './keyboard';
 import { createGeneratedOwnerPreview } from './generated-owner-preview';
+import { themeArt } from './theme-art';
 
 let dismissOnboarding: (() => void) | null = null;
 let headingId = 0;
@@ -299,7 +300,7 @@ export function showOnboarding(opts: Options): void {
       <p class="note">${t('ob.style.hint')}</p>
       <div class="themes"></div>`;
     const wrap = body.querySelector<HTMLElement>('.themes')!;
-    const previews = new Map(STARTER_THEMES.map(th => [th.id, starterThemePreview(th.id)]));
+    const previews = new Map(STARTER_THEMES.map(th => [th.id, themeArt(th.id) ?? starterThemePreview(th.id)]));
     const paint = () => {
       wrap.replaceChildren(
         ...STARTER_THEMES.map((th) => {

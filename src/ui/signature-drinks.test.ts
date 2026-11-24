@@ -86,7 +86,7 @@ describe('signature drink research workbench', () => {
     showSignatureDrinks(state, vi.fn()); click('create'); dose('milk', 1);
     const id = makeSignatureId('coffee', { beans: 1, milk: 1 })!;
     const values = [...document.querySelectorAll('.signature-metrics dd')].map(el => el.textContent);
-    expect(values).toEqual([formatTransactionMoney(3), formatTransactionMoney(salePrice(state, id)), `${prepTime(state, id)}s`, formatTransactionMoney(salePrice(state, id) - 3)]);
+    expect(values).toEqual([formatTransactionMoney(3), formatTransactionMoney(salePrice(state, id)), `${Number(prepTime(state, id).toFixed(2))}s`, formatTransactionMoney(salePrice(state, id) - 3)]);
   });
   it('explains plain-copy pricing and shows the tea brewing time in both languages', () => {
     const state = ready();

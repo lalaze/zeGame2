@@ -119,7 +119,7 @@ export function showSignatureDrinks(state: GameState, onChange: () => void, onCl
     const def = signatureDefinition(id)!;
     const section = element('section', '', 'signature-summary');
     const metrics = element('dl', '', 'signature-metrics');
-    for (const [title, value] of [[words.cost, money(def.cost)], [words.price, money(salePrice(state, def.id))], [words.time, `${amount(prepTime(state, def.id))}s`], [words.margin, money(salePrice(state, def.id) - def.cost)]]) metrics.append(element('dt', title), element('dd', value));
+    for (const [title, value] of [[words.cost, money(def.cost)], [words.price, money(salePrice(state, def.id))], [words.time, `${amount(Number(prepTime(state, def.id).toFixed(2)))}s`], [words.margin, money(salePrice(state, def.id) - def.cost)]]) metrics.append(element('dt', title), element('dd', value));
     const delivered = state.signatureDrinks.served[def.id] ?? 0;
     const tier = tasteTier(state, def.id);
     const growth = element('section', '', 'signature-growth');
