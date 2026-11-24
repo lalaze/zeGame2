@@ -14,10 +14,10 @@ import type { CafeHooks } from '../phaser/cafe-scene';
 import {
   BARISTAS, COUNTER_FRONT, DISPLAY, DOOR, FLOOR_ART, LIFT_HATCH, LIFT_TOP, OVEN_MOUTH, PASS, QUEUE, SERVER_HOMES, SERVICE, STEAM,
   FRAME, FURNITURE_SPOTS, TABLE_FRONT, WALK, WORLD_W, building, cookHome, furnitureSpot, kitchenPlace, kitchenSpot,
-  GROUND_SHIFT, nextTableSpot, restFocus, route, stepsLength, tableSeats, walkPace, worldPoint,
+  GROUND_SHIFT, STAIRS_HALL, STAIRS_RAIL, inWell, nextTableSpot, restFocus, route, stepsLength, tableSeats, walkPace, wellSink, worldPoint,
   type Building, type FloorId, type FloorPoint, type FurnitureSpot, type KitchenPlace, type Spot, type Step,
 } from './floors-layout';
-import { BACK_LAYERS, FRONT_LAYERS, type DecorFloor, type DecorManifest } from './floors-decor-layers';
+import { BACK_LAYERS, FRONT_LAYERS, HALL_DEPTH, IN_WELL_DEPTH, LAYER_DEPTH, LAYER_STEP, type DecorFloor, type DecorManifest } from './floors-decor-layers';
 import { makeTextures } from './textures';
 import { FloorsFront } from './floors-front';
 import { FloorsProps } from './floors-props';
@@ -31,8 +31,7 @@ import { FloorsSky } from './floors-sky';
 export const FLOORS_ART = `${import.meta.env.BASE_URL}assets/generated/floor-sample-v1/build/`;
 export interface SheetSize { frameWidth: number; frameHeight: number }
 const DECOR_FLOORS: Partial<Record<FloorId, DecorFloor>> = { ground: '1f', 'floor-2': '2f', 'floor-3': '2f' };
-/** Back layers stack from this depth up, a step apart; wall furniture hangs between the shadows and the fixtures. */
-const LAYER_DEPTH = -2, LAYER_STEP = .05;
+/** Wall furniture hangs between the shadows and the fixtures. */
 const WALL_FURNITURE_DEPTH = LAYER_DEPTH + LAYER_STEP * (BACK_LAYERS.indexOf('fixtures') - .4);
 /** Sprite size and surface of each furniture piece (scripts/art-gen/floor-furniture-build.py). */
 export type FurnitureManifest = Record<string, { width: number; height: number; surface: 'floor' | 'wall' }>;
@@ -56,7 +55,7 @@ export const SHEETS = ['owner', 'barista', ...GUEST_ART, ...GUEST_ART.map(key =>
   'cook-chef', 'cook-scarf', 'cook-chef-work', 'cook-scarf-work'];
 const IMAGES = ['frame/attic', 'floor-2', 'floor-1', 'basement', 'counter-front', 'table-front',
   'frame/sky', 'frame/pillar', 'frame/beam', 'frame/street', 'frame/soil',
-  'frame/awning', 'frame/door-left', 'frame/door-right', 'frame/step', 'frame/side-window',
+  'frame/awning', 'frame/door-left', 'frame/door-right', 'frame/step', 'frame/side-window', 'frame/stairs-hall', 'frame/stairs-rail',
   'frame/wall-attic', 'frame/wall-seating', 'frame/wall-ground'];
 /**
  * The frame's colours where its pictures end (build/frame/frame.json): the sky above the sky
@@ -65,6 +64,8 @@ const IMAGES = ['frame/attic', 'floor-2', 'floor-1', 'basement', 'counter-front'
 const FRAME_EDGES = { sky: 0x8dc3fc, street: 0x656c34, soil: 0x65362b } as const;
 /** Pillars and beams stand in front of everyone; the page's arrange marks and bubbles stay above them. */
 const FRAME_DEPTH = 50000;
+/** Floors with a stairwell, where the flight from below comes up beside their own. */
+const HALL_FLOORS: ReadonlySet<FloorId> = new Set(['floor-2', 'floor-3']);
 /** Where the roof's slopes reach the sides, below the top floor's plate top (build/frame/frame.json `eave` less `plateTop`). */
 const EAVE = 123;
 /** The ground floor's open front: the awning tucks under the beam, this far below the floor's top, and is drawn this tall. */
@@ -101,6 +102,8 @@ interface Actor {
   seen: boolean;
   /** How many times a stroll they are walking at now; their legs keep up. */
   rate: number;
+  /** How much of them a stairwell's front edge hides, from their feet up (wellSink). */
+  sunk?: number;
   /** The guest's own look while it loads; `art` stands in meanwhile. */
   wants?: string;
 }
@@ -353,6 +356,7 @@ export class FloorsScene extends Phaser.Scene {
 
   /** Someone out on the street, in front of the ground floor, stands in front of the building's front walls. */
   private depthAt(p: FloorPoint): number {
+    if (inWell(p)) return IN_WELL_DEPTH;
     const y = this.built ? worldPoint(this.built, p).y : p.y;
     return this.built && p.floor === 'ground' && y > this.built.street ? y + FRAME_DEPTH : y;
   }
@@ -430,6 +434,16 @@ export class FloorsScene extends Phaser.Scene {
       });
     });
     this.decorSignature = missing.length ? '' : signature;
+    // A seating floor's stairs, over every layer (some left specks on the old staircase they were painted around),
+    // and the stairwell's balustrade in front of who is in it.
+    for (const floor of next.floors) {
+      if (!HALL_FLOORS.has(floor)) continue;
+      const hall = worldPoint(next, { floor, ...STAIRS_HALL }), rail = worldPoint(next, { floor, ...STAIRS_RAIL });
+      this.floorImages.push(
+        this.add.image(hall.x, hall.y, 'frame/stairs-hall').setOrigin(0, 0).setDepth(HALL_DEPTH),
+        this.add.image(rail.x, rail.y, 'frame/stairs-rail').setOrigin(0, 0).setDepth(worldPoint(next, { floor, x: 0, y: STAIRS_RAIL.railFoot }).y),
+      );
+    }
     this.layoutFrame(next);
     const groundTop = worldPoint(next, { floor: 'ground', x: 0, y: 0 }).y;
     // Drawn with decor layers, the ground floor's counter is one of them.
@@ -693,11 +707,14 @@ export class FloorsScene extends Phaser.Scene {
 
   /** Puts the sprite (and anything it carries) where the actor stands. */
   private place(b: Building, actor: Actor, carrying: boolean): void {
-    const p = worldPoint(b, actor.at);
+    const p = worldPoint(b, actor.at), sunk = actor.sunk = wellSink(actor.at);
+    // On the steps in a stairwell: its front edge hides what is below it.
+    if (sunk) actor.sprite.setCrop(0, 0, actor.sprite.width, Math.max(0, actor.sprite.height - sunk));
+    else if (actor.sprite.isCropped) actor.sprite.setCrop();
     actor.sprite.setPosition(p.x, p.y).setDepth(this.depthAt(actor.at));
     if (carrying && !actor.cup) actor.cup = this.add.image(0, 0, 'cup').setOrigin(.5, 1);
     if (!carrying && actor.cup) { actor.cup.destroy(); actor.cup = undefined; }
-    actor.cup?.setPosition(p.x + (actor.sprite.flipX ? -30 : 30), p.y - 104).setDepth(this.depthAt(actor.at) + .01).setAlpha(actor.sprite.alpha);
+    actor.cup?.setPosition(p.x + (actor.sprite.flipX ? -30 : 30), p.y - 104).setDepth(this.depthAt(actor.at) + .01).setAlpha(sunk ? 0 : actor.sprite.alpha);
   }
 
   private remove(actor: Actor): void {

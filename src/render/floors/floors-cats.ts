@@ -22,7 +22,8 @@ import {
   GIFT_PLACES, catNode, catPlaces, catRoute, choosePlace, choosePlan, floorArea, planSeconds, placeRank,
   type CatPlace, type CatPlan, type CatStep, type CatsManifest,
 } from './floors-cat-places';
-import { worldPoint, type Building, type FloorPoint, type Point } from './floors-layout';
+import { IN_WELL_DEPTH } from './floors-decor-layers';
+import { inWell, wellSink, worldPoint, type Building, type FloorPoint, type Point } from './floors-layout';
 
 /** Where each pose is in a breed's strip (CAT_FRAMES). */
 const FRAME = { walk: [0, 1, 2, 3], sit: 4, happy: 5, sleep: 6, groom: 7 } as const;
@@ -293,7 +294,11 @@ export class FloorsCats {
       else if (cat.happy) breathe = 1 + .03 * Math.sin(cat.clock * 12);
     }
     // On a bed a cat is drawn over the bed, which stands a little lower.
-    sprite.setPosition(at.x, at.y - lift).setScale(1, breathe).setAlpha(cat.alpha).setDepth(at.y + (cat.place.kind === 'bed' ? 24 : 0) + .5);
+    // On the steps in a stairwell: its front edge hides what is below it.
+    const sunk = wellSink(cat.at);
+    if (sunk) sprite.setCrop(0, 0, sprite.width, Math.max(0, sprite.height - sunk));
+    else if (sprite.isCropped) sprite.setCrop();
+    sprite.setPosition(at.x, at.y - lift).setScale(1, breathe).setAlpha(cat.alpha).setDepth(inWell(cat.at) ? IN_WELL_DEPTH : at.y + (cat.place.kind === 'bed' ? 24 : 0) + .5);
     if (asleep && dt > 0 && cat.alpha >= 1) {
       cat.snooze -= dt;
       if (cat.snooze <= 0) { cat.snooze = 1.9; this.float('z', at.x + 26, at.y - sprite.displayHeight * .8, 30, sprite.depth + .1); }

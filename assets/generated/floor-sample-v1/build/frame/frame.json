@@ -35,6 +35,18 @@
   "width": 600,
   "height": 760
  },
+ "stairs-hall": {
+  "x": 1288,
+  "y": 47,
+  "width": 324,
+  "height": 728
+ },
+ "stairs-rail": {
+  "x": 1303,
+  "y": 509,
+  "width": 229,
+  "height": 265
+ },
  "wall-attic": {
   "width": 1672,
   "height": 1332

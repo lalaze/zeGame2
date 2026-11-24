@@ -13,6 +13,11 @@ The takes (kits/frame/<piece>/take-1/sheet.png, prompts in prompts/frame/) are:
 - side-window: the ground floor's corner with its side door (kits/frame/side-window/input.png, the plate
   in its starting decor), repainted with an arched window, a window seat and a plant where the door
   was and magenta elsewhere. It covers every bit of the door that the decor layers leave showing.
+- stairs-hall: a seating floor's stairs (chosen 2026-11-24): the stairwell the flight from below comes up
+  in, with its landing, and the flight up to the next floor. Painted over the floor in its starting
+  decor (stairs-hall/take-6, from take-3, which was painted on plain.png with guide.png and design.png),
+  then repainted with everything else in magenta (stairs-hall-key), and once more with only the
+  stairwell's balustrade left (stairs-hall-rail-key), which stands in front of whoever is in the well.
 - wall-attic, wall-seating, wall-ground: the front walls that close the storeys when the player shows
   them, each painted over its storey in its starting decor (kits/frame/wall-*/input.png), then repainted
   with their glass in magenta (kits/frame/glass-*, the wall takes as input); the build uses the glass
@@ -57,6 +62,8 @@ FADE = 90
 TAKES = {'side-window': 2}
 # The side window's take covers this part of the ground floor's plate [left, top, width, height].
 SIDE_WINDOW = (0, 40, 600, 760)
+# The stairs takes cover this part of a seating floor's plate [left, top, width, height].
+STAIRS_HALL = (1160, 24, 512, 877)
 
 
 def take(piece):
@@ -202,6 +209,19 @@ def side_window():
     return {'x': left, 'y': top, 'width': width, 'height': height}
 
 
+def stairs_hall():
+    """A seating floor's stairs, and its stairwell's balustrade alone, each trimmed to what is painted."""
+    left, top, width, height = STAIRS_HALL
+    parts = {}
+    for piece, name in (('stairs-hall-key', 'stairs-hall'), ('stairs-hall-rail-key', 'stairs-rail')):
+        rgba = key(np.asarray(Image.open(take(piece)).convert('RGB').resize((width, height), Image.LANCZOS)))
+        image = Image.fromarray(rgba, 'RGBA')
+        box = image.split()[3].point(lambda a: 255 if a > 24 else 0).getbbox()
+        save(image.crop(box), name)
+        parts[name] = {'x': left + box[0], 'y': top + box[1], 'width': box[2] - box[0], 'height': box[3] - box[1]}
+    return parts
+
+
 def walls(report):
     """The front walls that close each storey when the player shows them: the attic's gable under its
     roof, a seating floor's and the ground floor's shopfront. Their windows (and the shop's open door)
@@ -233,7 +253,7 @@ def plain(piece):
 def main():
     os.makedirs(OUT, exist_ok=True)
     report = {}
-    frame = {'attic': attic(report), 'pillar': pillar(), 'beam': beam(), **front(), 'side-window': side_window()}
+    frame = {'attic': attic(report), 'pillar': pillar(), 'beam': beam(), **front(), 'side-window': side_window(), **stairs_hall()}
     frame.update(walls(report))
     for piece in ('street', 'soil', 'sky'):
         frame[piece] = plain(piece)

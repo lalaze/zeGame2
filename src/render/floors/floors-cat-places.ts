@@ -46,7 +46,7 @@ export interface CatPlace extends FloorPoint {
 export interface CatStep extends FloorPoint { jump?: boolean; hop?: boolean }
 
 type PlaceSpec = Omit<CatPlace, 'floor'>;
-interface FloorPaths { nodes: Record<string, [number, number]>; edges: [string, string][]; entry: string; places: PlaceSpec[] }
+interface FloorPaths { nodes: Record<string, [number, number]>; edges: [string, string][]; entry: string; well?: string; places: PlaceSpec[] }
 
 /**
  * The ground floor: cats keep to the walkway between the counter and the tables, where they can
@@ -67,14 +67,17 @@ const GROUND: FloorPaths = {
 /**
  * A seating floor: the sunny patch under the window and the floor between the back tables on the
  * left, the bookshelf side on the right, joined along the front edge, in front of the front table.
+ * `land` is the open floor beside the stairwell's landing, `stairs` the foot of the flight up.
  */
 const SEATING: FloorPaths = {
   nodes: {
     sun: [322, 652], mid: [556, 648], fl: [322, 886], fm: [560, 886], fc: [830, 886], fr: [1035, 886],
-    r0: [1035, 652], books: [1196, 652], land: [1330, 700],
+    r0: [1035, 652], books: [1196, 652], land: [1288, 645], sc: [1288, 886], stairs: [1552, 836],
   },
-  edges: [['sun', 'mid'], ['sun', 'fl'], ['fl', 'fm'], ['fm', 'fc'], ['fc', 'fr'], ['fr', 'r0'], ['r0', 'books'], ['books', 'land']],
-  entry: 'land',
+  edges: [['sun', 'mid'], ['sun', 'fl'], ['fl', 'fm'], ['fm', 'fc'], ['fc', 'fr'], ['fr', 'r0'], ['r0', 'books'], ['books', 'land'],
+    ['land', 'sc'], ['fr', 'sc'], ['sc', 'stairs']],
+  entry: 'stairs',
+  well: 'land',
   places: [
     { id: 'sun', x: 322, y: 652, kind: 'window', from: 'sun', naps: true, behind: ['window', 'front-2'] },
     { id: 'tables', x: 556, y: 648, kind: 'people', from: 'mid', behind: ['front-3'] },
@@ -105,7 +108,7 @@ const ROOF: FloorPaths = {
 
 const PATHS: Record<CatFloor, FloorPaths> = { ground: GROUND, 'floor-2': SEATING, 'floor-3': SEATING, roof: ROOF };
 /** The path node a cat gets to a cat bed from, at each spot of a floor (none: out of a cat's reach). */
-const SEATING_BEDS = { window: 'sun', 'front-1': 'fl', 'front-2': 'fl', 'front-3': 'fm', 'front-4': 'fr' };
+const SEATING_BEDS = { window: 'sun', 'front-1': 'fl', 'front-2': 'fl', 'front-3': 'fm', 'front-4': 'fr', 'front-5': 'sc' };
 const BED_FROM: Record<CatFloor, Record<string, string>> = {
   ground: { left: 'seat' }, 'floor-2': SEATING_BEDS, 'floor-3': SEATING_BEDS,
   roof: { 'front-1': 't0', 'front-2': 't1', 'front-3': 't3', back: 'wall' },
@@ -125,6 +128,8 @@ export function catNode(id: string): FloorPoint {
 /** Every path node of a floor, and the node at its stairs. */
 export const catNodes = (floor: CatFloor) => Object.keys(PATHS[floor].nodes).map(name => nodeId(floor, name));
 export const catEntry = (floor: CatFloor) => nodeId(floor, PATHS[floor].entry);
+/** The node where the flight from below comes up: by a floor's stairwell, or the roof's door. */
+export const catArrival = (floor: CatFloor) => nodeId(floor, PATHS[floor].well ?? PATHS[floor].entry);
 export const catEdges = (floor: CatFloor) => PATHS[floor].edges.map(([a, b]) => [nodeId(floor, a), nodeId(floor, b)] as [string, string]);
 
 /** The floors of a building cats use, bottom up. */
@@ -248,7 +253,7 @@ function along(from: string, to: string): string[] {
 
 /**
  * The steps from a path node to a place: along the floor's paths, by the stairs to another floor
- * (up a flight and on at the foot of the next, or out of the roof's door; down the same way), and
+ * (up a flight and out of the well there, or out of the roof's door; down the same way), and
  * off the path to the place itself. A cat on a raised place first jumps down to the node it came by.
  */
 export function catRoute(fromNode: string, to: CatPlace, floors: readonly FloorId[]): CatStep[] {
@@ -259,23 +264,20 @@ export function catRoute(fromNode: string, to: CatPlace, floors: readonly FloorI
   if (level < 0 || target < 0) return [];
   while (level !== target) {
     const here = levels[level], up = target > level, next = levels[level + (up ? 1 : -1)];
-    // On the floor it started from, the cat first walks to the stairs.
-    if (here === floorOf(fromNode)) walk(node, catEntry(here));
-    // The flight between two floors belongs to the lower one.
-    const flight = stairsOf(up ? here : next)!;
+    // To the stairs: the foot of the flight up, or the well (or the roof's door) the one below comes up in.
+    walk(node, up ? catEntry(here) : catArrival(here));
     if (up) {
-      steps.push({ floor: here, ...flight.foot }, { floor: here, ...flight.top });
-      // Onto the roof through its door; onto a floor at the foot of its own flight up.
-      const arrival = stairsOf(next)?.foot;
-      steps.push(arrival ? { floor: next, ...arrival, jump: true } : { ...catNode(catEntry(next)), jump: true });
+      steps.push({ floor: here, ...stairsOf(here)!.foot }, { floor: here, ...stairsOf(here)!.top });
+      const arrival = stairsOf(next)?.well;
+      node = catArrival(next);
+      if (arrival) steps.push({ floor: next, ...arrival.inside, jump: true }, { floor: next, ...arrival.lip }, { floor: next, ...arrival.on }, { floor: next, x: arrival.out.x, y: arrival.out.y }, catNode(node));
+      else steps.push({ ...catNode(node), jump: true });
     } else {
-      if (stairsOf(here)) steps.push({ floor: here, ...stairsOf(here)!.foot });
-      steps.push({ floor: next, ...flight.top, jump: true }, { floor: next, ...flight.foot });
+      const leaving = stairsOf(here)?.well, flight = stairsOf(next)!;
+      if (leaving) steps.push({ floor: here, x: leaving.out.x, y: leaving.out.y }, { floor: here, ...leaving.on }, { floor: here, ...leaving.lip }, { floor: here, ...leaving.inside });
+      node = catEntry(next);
+      steps.push({ floor: next, ...flight.top, jump: true }, { floor: next, ...flight.foot }, catNode(node));
     }
-    // A cat passing through goes straight on from the foot of the stairs; one that stays steps off them.
-    const arrived = level + (up ? 1 : -1) === target, on = steps[steps.length - 1], entry = catNode(catEntry(next));
-    if (arrived && Math.hypot(on.x - entry.x, on.y - entry.y) >= 1) steps.push(entry);
-    node = catEntry(next);
     level += up ? 1 : -1;
   }
   walk(node, to.from);
@@ -306,9 +308,10 @@ export function catObstacles(floor: CatFloor): Box[] {
       if (a.floor !== floor) continue;
       boxes.push({ x: a.x - 96, y: a.y - 178, w: b.x - a.x + 192, h: 222 });
     }
-    // The staircase climbs the right wall from its foot to the ceiling.
+    // The staircase climbs the right wall to the ceiling; on a seating floor the stairwell is beside it.
     const flight = stairsOf(floor)!;
-    boxes.push({ x: flight.foot.x - 86, y: 0, w: 300, h: flight.foot.y });
+    if (flight.well) boxes.push({ x: 1520, y: 0, w: 100, h: flight.foot.y }, { x: 1303, y: 548, w: 229, h: 228 });
+    else boxes.push({ x: flight.foot.x - 86, y: 0, w: 300, h: flight.foot.y });
   } else {
     // The terrace's two tables with their chairs, its big planter, the pots by the door and the door itself.
     boxes.push({ x: 345, y: 420, w: 345, h: 245 }, { x: 985, y: 420, w: 345, h: 255 }, { x: 876, y: 400, w: 126, h: 150 },

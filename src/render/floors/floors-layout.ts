@@ -98,13 +98,39 @@ const GROUND_AISLE = 622;
 /** The basement's walkway runs in front of the dough table. */
 const BASEMENT_AISLE = 786;
 /** Where each floor's back and front walkways meet, by the stairs (and left of the dough table downstairs). */
-const HUB_X: Record<FloorId, number> = { roof: 1330, 'floor-3': 1330, 'floor-2': 1330, ground: 1350, basement: 425 };
-/** Each floor's staircase up: its foot, its top, and the open floor next to its foot. */
-const STAIRS: Partial<Record<FloorId, { foot: Point; top: Point; landing: Spot }>> = {
+const HUB_X: Record<FloorId, number> = { roof: 1330, 'floor-3': 1288, 'floor-2': 1288, ground: 1350, basement: 425 };
+/**
+ * A seating floor's stairs (build/frame/stairs-hall.webp): the flight from below comes up through a
+ * stairwell in the floor, beside the flight to the next floor. People climb away from us in the well,
+ * from `inside`, deep in it, to its top step at `lip`, onto the landing (`on`) and off its open left end
+ * (`out`); they go down the same way.
+ */
+interface Well { inside: Point; lip: Point; on: Point; out: Spot }
+const well = (floor: FloorId): Well =>
+  ({ inside: { x: 1463, y: 854 }, lip: { x: 1378, y: 546 }, on: { x: 1372, y: 510 }, out: spot(floor, 1288, 510, 630) });
+/** The front edge of the stairwell (plate row): what is below it of someone in the well is hidden by the floor. */
+const WELL_EDGE = 752;
+/**
+ * Where a seating floor's stairs, and their stairwell's balustrade alone, are on the plate
+ * (build/frame/frame.json). Who stands behind `railFoot` is behind the balustrade.
+ */
+export const STAIRS_HALL = { x: 1288, y: 47 } as const;
+export const STAIRS_RAIL = { x: 1303, y: 509, railFoot: 626 } as const;
+/** Each floor's staircase up: its foot, its top, the open floor next to its foot, and the well the flight from below comes up in. */
+const STAIRS: Partial<Record<FloorId, { foot: Point; top: Point; landing: Spot; well?: Well }>> = {
   ground: { foot: { x: 1486, y: 748 }, top: { x: 1418, y: 78 }, landing: spot('ground', 1350, GROUND_AISLE, GROUND_AISLE) },
-  'floor-2': { foot: { x: 1480, y: 748 }, top: { x: 1418, y: 78 }, landing: spot('floor-2', 1330, 700, 700) },
-  'floor-3': { foot: { x: 1480, y: 748 }, top: { x: 1418, y: 78 }, landing: spot('floor-3', 1330, 700, 700) },
+  'floor-2': { foot: { x: 1556, y: 757 }, top: { x: 1440, y: 78 }, landing: spot('floor-2', 1556, 804, 804), well: well('floor-2') },
+  'floor-3': { foot: { x: 1556, y: 757 }, top: { x: 1440, y: 78 }, landing: spot('floor-3', 1556, 804, 804), well: well('floor-3') },
 };
+/** Whether someone is on the steps in a floor's stairwell. */
+export function inWell(p: FloorPoint): boolean {
+  const at = STAIRS[p.floor]?.well;
+  if (!at) return false;
+  const share = (p.y - at.lip.y) / (at.inside.y - at.lip.y);
+  return share > .002 && share < 1.01 && Math.abs(p.x - at.lip.x - share * (at.inside.x - at.lip.x)) < 3;
+}
+/** How much of someone in a stairwell its front edge hides, from their feet up; 0 for anyone else. */
+export const wellSink = (p: FloorPoint): number => (inWell(p) ? Math.max(0, p.y - WELL_EDGE) : 0);
 /** A floor's staircase up, for those who plan their own way (the cats, floors-cat-places.ts). */
 export const stairsOf = (floor: FloorId) => STAIRS[floor];
 
@@ -222,8 +248,8 @@ function across(floor: FloorId, from: Point, fromAisle: number, to: Point, toAis
 
 /**
  * The steps from where someone stands (on the walkway `aisle` of their floor) to a spot, taking
- * the stairs when it is on another floor: up a flight to its top, on at the foot of the next
- * flight; down from a foot to the top of the flight below, then down it.
+ * the stairs when it is on another floor: up a flight to its top, and out of the well there;
+ * down into the well again, to the top of the flight below and down it.
  */
 export function route(from: FloorPoint, fromAisle: number, to: Spot & { fadeOut?: boolean }): Step[] {
   const end = (steps: Step[]) => {
@@ -239,15 +265,14 @@ export function route(from: FloorPoint, fromAisle: number, to: Spot & { fadeOut?
     if (b > a) {
       const flight = STAIRS[floor]!;
       steps.push(...across(floor, at, aisle, flight.landing, flight.landing.aisle), { floor, ...flight.foot }, { floor, ...flight.top });
-      const next = LEVELS[level + 1];
-      const arrival = STAIRS[next]?.foot ?? flight.top;
-      steps.push({ floor: next, ...arrival, jump: true });
-      at = arrival;
-      aisle = STAIRS[next]?.landing.aisle ?? arrival.y;
-      if (STAIRS[next]) { steps.push(STAIRS[next]!.landing); at = STAIRS[next]!.landing; }
+      const next = LEVELS[level + 1], arrival = STAIRS[next]?.well;
+      steps.push({ floor: next, ...(arrival?.inside ?? flight.top), jump: true });
+      at = arrival?.out ?? flight.top;
+      aisle = arrival?.out.aisle ?? flight.top.y;
+      if (arrival) steps.push({ floor: next, ...arrival.lip }, { floor: next, ...arrival.on }, { floor: next, x: arrival.out.x, y: arrival.out.y });
     } else {
-      const here = STAIRS[floor]!, below = LEVELS[level - 1], flight = STAIRS[below]!;
-      steps.push(...across(floor, at, aisle, here.landing, here.landing.aisle), { floor, ...here.foot });
+      const here = STAIRS[floor]?.well, below = LEVELS[level - 1], flight = STAIRS[below]!;
+      if (here) steps.push(...across(floor, at, aisle, here.out, here.out.aisle), { floor, ...here.on }, { floor, ...here.lip }, { floor, ...here.inside });
       steps.push({ floor: below, ...flight.top, jump: true }, { floor: below, ...flight.foot }, flight.landing);
       at = flight.landing;
       aisle = flight.landing.aisle;
@@ -259,7 +284,7 @@ export function route(from: FloorPoint, fromAisle: number, to: Spot & { fadeOut?
 // ------------------------------------------------------------ pace
 
 /** View pixels a person walks per second of play, and how many times faster they go at most to keep up with the Sim. */
-export const WALK = 240, CATCH_UP = 3;
+export const WALK = 240, CATCH_UP = 3.6;
 /** Someone the Sim has at their spot already still takes this long to come to a stop there, in seconds. */
 const SETTLE = 1;
 
@@ -299,7 +324,7 @@ export interface FurnitureSpot extends BuildingSpot {
 type Where = [x: number, y: number, room: number] | { x: number; y: number; w: number; h: number };
 const SEATING_SPOTS: Record<string, Where> = {
   'front-1': [156, 864, 190], 'front-2': [346, 866, 188], 'front-3': [540, 868, 190],
-  'front-4': [1110, 866, 190], 'front-5': [1480, 866, 190], window: [230, 690, 200],
+  'front-4': [1085, 866, 180], 'front-5': [1252, 866, 140], window: [230, 690, 200],
   'wall-1': { x: 548, y: 244, w: 124, h: 112 }, 'wall-2': { x: 910, y: 262, w: 114, h: 108 }, 'wall-3': { x: 326, y: 236, w: 78, h: 150 },
 };
 const SPOTS: Partial<Record<FloorId, Record<string, Where>>> = {

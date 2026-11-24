@@ -98,6 +98,15 @@ prompts in `prompts/frame/`; chosen 2026-11-23 from the mockups in the library's
 - `wall-attic`, `wall-seating`, `wall-ground`: the front walls shown when the player turns the outer
   walls on (the button under the money, `src/ui/floors-ui.ts`); the basement then sinks into the earth.
 
+A seating floor's stairs are a layer of their own over its wall and floor (`stairs-hall`, chosen by the
+user on 2026-11-24 from several ways two storeys can connect): the flight from below comes up through a
+stairwell with a balustrade, beside the narrower flight to the next floor. They were painted over the
+floor in its starting decor and hide the staircase painted into its shell; `stairs-hall-key` cuts them
+out, `stairs-hall-rail-key` the balustrade alone, which stands in front of whoever is on the steps in the
+well. The plain plaster behind the landing and beside the flight keeps its colour with every wallpaper.
+Where people and cats walk there is in `floors-layout.ts` (`Well`, `inWell`, `wellSink`) and
+`floors-cat-places.ts`. Takes turned down are in `kits/frame/stairs-{door,gap,real}` and `stairwell`.
+
     uv run --with pillow --with numpy python scripts/art-gen/floor-frame-build.py
 
 writes `build/frame/*.webp` and `build/frame/frame.json`; `FRAME` and `FLOOR_ART.roof` in

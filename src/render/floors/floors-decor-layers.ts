@@ -9,3 +9,7 @@ export type DecorFloor = '1f' | '2f';
 /** Back to front: the room, then its surfaces, then what stands in it, then what hangs over it. */
 export const BACK_LAYERS = ['shell', 'wallpaper', 'floor', 'rug', 'shadow', 'fixtures', 'tablecloth', 'centerpiece', 'neon', 'sill', 'curtain', 'ceiling'];
 export const FRONT_LAYERS = ['counter', 'fixtures-front'];
+/** Back layers stack from this depth up, a step apart. */
+export const LAYER_DEPTH = -2, LAYER_STEP = .05;
+/** In front of every back layer: a seating floor's stairs, then who is on the steps in their well. */
+export const HALL_DEPTH = -1.3, IN_WELL_DEPTH = -1.2;

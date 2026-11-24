@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { STATION_SECONDS, type Station } from '../../game/kitchen';
 import { BUILDING_SPOTS } from '../../game/building-spots';
-import { BARISTAS, CATCH_UP, DISPLAY, DOOR, FLOOR_ART, FRAME, FURNITURE_SPOTS, QUEUE, SERVER_HOMES, SERVICE, WALK, WORLD_W, building, cookHome, kitchenPlace, kitchenSpot, restFocus, route, stepsLength, tableSeats, walkPace, worldPoint, type KitchenPlace } from './floors-layout';
+import { BARISTAS, CATCH_UP, DISPLAY, DOOR, FLOOR_ART, FRAME, FURNITURE_SPOTS, QUEUE, SERVER_HOMES, SERVICE, STAIRS_HALL, STAIRS_RAIL, WALK, WORLD_W, building, cookHome, inWell, kitchenPlace, kitchenSpot, restFocus, route, stairsOf, stepsLength, tableSeats, walkPace, wellSink, worldPoint, type KitchenPlace } from './floors-layout';
 
 describe('floors building', () => {
   it('opens a floor above for tables three to five and another for six to eight, and a basement with the kitchen', () => {
@@ -61,6 +61,61 @@ describe('floors routes', () => {
     const down = route(seat, seat.aisle, { ...DOOR, fadeOut: true });
     expect(down.filter(s => s.jump).map(s => s.floor)).toEqual(['ground']);
     expect(end(down)).toMatchObject({ floor: 'ground', x: DOOR.x, y: DOOR.y, fadeOut: true });
+  });
+
+  it('comes up in the stairwell upstairs, onto its landing, and goes down the same way', () => {
+    const seat = tableSeats(2, [0, 1, 2])[0], flight = stairsOf('floor-2')!, { inside, lip, on, out } = flight.well!;
+    const way = [inside, lip, on, { x: out.x, y: out.y }].map(p => ({ floor: 'floor-2', ...p }));
+    const up = route(SERVICE[0], SERVICE[0].aisle, seat), jump = up.findIndex(s => s.jump);
+    expect(up.slice(jump, jump + 4)).toMatchObject(way);
+    expect(up.some(s => s.floor === 'floor-2' && s.x === flight.foot.x && s.y === flight.foot.y)).toBe(false);
+    const down = route(seat, seat.aisle, DOOR), back = down.findIndex(s => s.jump);
+    expect(down.slice(back - 4, back)).toMatchObject([...way].reverse());
+    expect(down[back]).toMatchObject({ floor: 'ground', ...stairsOf('ground')!.top });
+    // Passing through: out of the well, round its front, then up the next flight from its foot.
+    const top = route(SERVICE[0], SERVICE[0].aisle, tableSeats(5, [0, 1, 2, 3, 4, 5])[0]).filter(s => s.floor === 'floor-2');
+    expect(top[0]).toMatchObject(inside);
+    expect(top.at(-2)).toMatchObject(flight.foot);
+    expect(top.at(-1)).toMatchObject(flight.top);
+  });
+
+  it('never walks anyone through the stairwell or its balustrade, but on its steps', () => {
+    // The hole with its balustrade on the plate, slanting to the right towards us.
+    const inside = (p: { x: number; y: number }) => {
+      const share = (p.y - 546) / 230;
+      return share > .03 && share < 1 && p.x > 1306 + 46 * share && p.x < 1444 + 82 * share;
+    };
+    const active = [0, 1, 2, 3, 4, 5, 6, 7], places = [...active.flatMap(t => [...tableSeats(t, active)]), SERVICE[0], DOOR];
+    for (const from of places) for (const to of places) {
+      let at: { floor: string; x: number; y: number } = from;
+      for (const step of route(from, from.aisle, to)) {
+        if (!step.jump && at.floor === step.floor && (step.floor === 'floor-2' || step.floor === 'floor-3')) {
+          for (let k = 0; k <= 20; k++) {
+            const p = { floor: step.floor, x: at.x + (step.x - at.x) * k / 20, y: at.y + (step.y - at.y) * k / 20 };
+            if (inside(p)) expect(inWell(p), `${from.floor} to ${to.floor} at ${Math.round(p.x)},${Math.round(p.y)}`).toBe(true);
+          }
+        }
+        at = step;
+      }
+    }
+  });
+
+  it('hides someone in the well more and more the deeper they are, and nobody else', () => {
+    const flight = stairsOf('floor-2')!, { inside, lip, on } = flight.well!;
+    let before = -1;
+    for (let k = 1; k <= 10; k++) {
+      const at = { floor: 'floor-2' as const, x: lip.x + (inside.x - lip.x) * k / 10, y: lip.y + (inside.y - lip.y) * k / 10 };
+      expect(inWell(at), `step ${k}`).toBe(true);
+      expect(wellSink(at)).toBeGreaterThanOrEqual(before);
+      before = wellSink(at);
+    }
+    expect(before).toBeGreaterThan(80);
+    expect(wellSink({ floor: 'floor-2', ...lip })).toBe(0);
+    expect(inWell({ floor: 'floor-2', ...on })).toBe(false);
+    for (let k = 0; k <= 100; k++) {
+      expect(inWell({ floor: 'floor-2', x: flight.foot.x + (flight.top.x - flight.foot.x) * k / 100, y: flight.foot.y + (flight.top.y - flight.foot.y) * k / 100 }), `climb ${k}`).toBe(false);
+    }
+    expect(inWell({ floor: 'ground', ...inside })).toBe(false);
   });
 
   it('passes through every floor on the way to the top one', () => {
@@ -224,9 +279,11 @@ describe('floors frame', () => {
     expect(frame.street.height).toBe(FRAME.street);
     expect(frame.pillar.width).toBe(FRAME.pillar);
     expect(frame.soil.height).toBeGreaterThanOrEqual(FRAME.soilBand + 1);
-    for (const piece of ['attic', 'pillar', 'beam', 'street', 'soil', 'sky', 'awning', 'door-left', 'door-right', 'step', 'side-window', 'wall-attic', 'wall-seating', 'wall-ground']) {
+    for (const piece of ['attic', 'pillar', 'beam', 'street', 'soil', 'sky', 'awning', 'door-left', 'door-right', 'step', 'side-window', 'stairs-hall', 'stairs-rail', 'wall-attic', 'wall-seating', 'wall-ground']) {
       expect(existsSync(`assets/generated/floor-sample-v1/build/frame/${piece}.webp`), piece).toBe(true);
     }
+    expect([frame['stairs-hall'].x, frame['stairs-hall'].y]).toEqual([STAIRS_HALL.x, STAIRS_HALL.y]);
+    expect([frame['stairs-rail'].x, frame['stairs-rail'].y]).toEqual([STAIRS_RAIL.x, STAIRS_RAIL.y]);
     expect(frame['wall-seating'].height).toBe(FLOOR_ART['floor-2'].height);
     expect(frame['wall-ground'].height).toBe(FLOOR_ART.ground.height);
   });

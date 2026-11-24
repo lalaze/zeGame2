@@ -19,6 +19,8 @@ export interface PropActor {
   art: string;
   at: FloorPoint;
   clock: number;
+  /** How much of them a stairwell's front edge hides, from their feet up (wellSink in floors-layout.ts). */
+  sunk?: number;
   /** The scene's cup in hand: a takeaway guest's becomes a paper cup or a bakery bag, a server's a tray. */
   cup?: Phaser.GameObjects.Image;
 }
@@ -279,7 +281,7 @@ export class FloorsProps {
       // The tray takes the place of the scene's cup.
       actor.cup?.setVisible(false);
       const { sprite } = actor;
-      if (!sprite.visible || sprite.alpha < .05) return;
+      if (!sprite.visible || sprite.alpha < .05 || actor.sunk) return;
       if (server.plates.length > 0 && server.phase !== 'toPass' && server.phase !== 'idle') {
         const x = sprite.x + (sprite.flipX ? -44 : 44), y = sprite.y - 84, depth = sprite.depth + .02;
         const tray = this.show(`tray:${i}`, FX, 'tray', x, y, depth).setScale(.8).setAlpha(sprite.alpha);
