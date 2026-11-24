@@ -244,7 +244,7 @@ front of each served guest (the drink is picked up to sip), a number card while 
 trays with the dishes on them, takeaway cups and bakery bags, finished orders, the pass, the bell and
 the tip jar on the counter, the display filled from the day's bake plan or shelf stock, the batch
 riding the food lift, order bubbles, sold-out crosses, waiting thoughts, impatience, VIP crowns,
-cooks' batches, the moment's cue by kind, sale coins, tips, help given and celebrations.
+cooks' batches, the bars over baristas and cooks at work (drawn in `textures.ts`), the moment's cue by kind, sale coins, tips, help given and celebrations.
 `floors-fx.test.ts` checks that every menu item, signature base and dialog picture has its art and
 that the atlases hold every frame the code names.
 
@@ -357,7 +357,7 @@ The street's takes are in `kits/street/<sheet>/take-1/sheet.png`, prompts in `pr
 | `hills`, `ground` | A strip of far hills on transparency and the cobbled paving; the build mirrors each into a tile that repeats without a seam |
 
 The player's café is not painted again: the build stacks the building's own front walls (`build/frame`)
-over its rooms, one picture per number of seating floors (`cafe-0`, `cafe-1`, `cafe-2`), and the street
+over its rooms as the game shows them (the plates with the window seat and the railed stairs in place), one picture per number of seating floors (`cafe-0`, `cafe-1`, `cafe-2`), and the street
 shows the one that matches the player's building. Walkers are the side walk of four painted guests
 (`build/cast-NN.webp`, frames 0 to 3). Every storefront is fitted into the box of its pixel piece
 (`public/art/street-art-v2/anchors.json`); where the game writes its name and where guests walk in

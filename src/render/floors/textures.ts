@@ -12,6 +12,9 @@ function canvasTexture(scene: Phaser.Scene, key: string, width: number, height: 
 
 const LINE = '#7a5a44', PAPER = '#fffaf0';
 
+/** The bar over someone at work: its paper, and the sage it fills with from the left (the same size, drawn over it). */
+export const BAR = { key: 'bar', fill: 'bar-fill', width: 92, height: 24, edge: 5 } as const;
+
 function drawCup(c: CanvasRenderingContext2D, x: number, y: number, s: number): void {
   c.lineWidth = 3 * s; c.strokeStyle = LINE; c.lineJoin = 'round';
   c.fillStyle = PAPER; c.beginPath(); c.ellipse(x, y + 13 * s, 17 * s, 5 * s, 0, 0, Math.PI * 2); c.fill(); c.stroke();
@@ -72,6 +75,16 @@ export function makeTextures(scene: Phaser.Scene): void {
     c.beginPath();
     for (let k = 0; k < 8; k++) { const r = k % 2 ? 6 : 18, a = k * Math.PI / 4 - Math.PI / 2; c.lineTo(20 + r * Math.cos(a), 20 + r * Math.sin(a)); }
     c.closePath(); c.fill(); c.stroke();
+  });
+  canvasTexture(scene, BAR.key, BAR.width, BAR.height, c => {
+    c.fillStyle = PAPER; c.strokeStyle = LINE; c.lineWidth = 4;
+    c.beginPath(); c.roundRect(2, 2, BAR.width - 4, BAR.height - 4, BAR.height / 2 - 2); c.fill(); c.stroke();
+  });
+  canvasTexture(scene, BAR.fill, BAR.width, BAR.height, c => {
+    const { width: w, height: h, edge: e } = BAR;
+    c.beginPath(); c.roundRect(e, e, w - 2 * e, h - 2 * e, h / 2 - e); c.clip();
+    c.fillStyle = '#7fa27a'; c.fillRect(0, 0, w, h);
+    c.fillStyle = '#a5c39c'; c.fillRect(0, 0, w, e + (h - 2 * e) * .4);
   });
   canvasTexture(scene, 'puff', 40, 40, c => {
     const g = c.createRadialGradient(20, 20, 2, 20, 20, 19);

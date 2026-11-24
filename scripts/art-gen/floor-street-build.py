@@ -58,6 +58,8 @@ RES = 3
 WORLD_W = 1672
 ATTIC = {'above': 427, 'height': 905, 'eave': 550}
 SEATING_H, GROUND_H = 877, 883
+# The first row of a floor's picture on its plate, which the pieces that replaced parts of it are placed on.
+PLATE_TOP = 24
 PILLAR_W, BEAM_H = 76, 70
 AWNING = {'top': 18, 'height': 84}
 # The café's box on the street: as tall as the pixel café with no seating floor; taller cafés rise
@@ -72,6 +74,16 @@ def frame(name):
     return Image.open(f'{BUILD}/frame/{name}.webp').convert('RGBA')
 
 
+def room(floor, pieces):
+    """A floor as the game shows it: its plate with the pieces that took the place of parts of it (frame.json)."""
+    picture = Image.open(f'{BUILD}/{floor}.webp').convert('RGBA')
+    with open(f'{BUILD}/frame/frame.json') as f:
+        places = json.load(f)
+    for name in pieces:
+        picture.alpha_composite(frame(name), (places[name]['x'], places[name]['y'] - PLATE_TOP))
+    return picture
+
+
 def cafe(seating):
     """The café seen from the street with `seating` floors between the attic and the ground floor."""
     height = ATTIC['above'] + ATTIC['height'] + seating * SEATING_H + GROUND_H
@@ -82,12 +94,12 @@ def cafe(seating):
     joins, y = [], ATTIC['above'] + ATTIC['height']
     for _ in range(seating):
         joins.append(y)
-        picture.alpha_composite(Image.open(f'{BUILD}/floor-2.webp').convert('RGBA'), (0, y))
+        picture.alpha_composite(room('floor-2', ['stairs-hall', 'stairs-rail']), (0, y))
         picture.alpha_composite(frame('wall-seating'), (0, y))
         y += SEATING_H
     joins.append(y)
     ground = y
-    picture.alpha_composite(Image.open(f'{BUILD}/floor-1.webp').convert('RGBA'), (0, ground))
+    picture.alpha_composite(room('floor-1', ['side-window']), (0, ground))
     picture.alpha_composite(frame('wall-ground'), (0, ground))
     awning = frame('awning').resize((WORLD_W - 2 * PILLAR_W, AWNING['height']), Image.LANCZOS)
     picture.alpha_composite(awning, (PILLAR_W, ground + AWNING['top']))

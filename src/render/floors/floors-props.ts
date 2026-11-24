@@ -2,7 +2,7 @@
 // drink or pastry in front of each seated guest, the tray a server carries, takeaway cups, finished
 // orders, the tip jar and the bell on the counter, a catering order waiting there, the cake display
 // filled with what is in stock, a parcel at the door, Mina's map and reserved table, the order bubbles
-// and thoughts over heads, and the coins, tips and sparkles the page asks for.
+// and thoughts over heads, the bars over people at work, and the coins, tips and sparkles the page asks for.
 // The scene (floors-scene.ts) walks everyone; this only reads where they are and what the Sim says.
 import Phaser from 'phaser';
 import { menuItems } from '../../game/economy';
@@ -16,6 +16,8 @@ import type { CafeView } from '../cafe-view';
 import { tillJarLevel } from '../idle-props-art';
 import { FX, FX_CASE, FX_ITEMS, cueTexture, isDrinkItem, isHotDrink, itemFrame, loadFx, type FxFrame } from './floors-fx';
 import { BARISTAS, COUNTER_FRONT, DISPLAY, LIFT_HATCH, LIFT_TOP, PARCEL, SERVICE, tableSeats, worldPoint, type Building, type FloorPoint } from './floors-layout';
+import { bakeShare, brewShare } from './floors-work';
+import { BAR } from './textures';
 
 /** What this needs of one of the scene's walkers. */
 export interface PropActor {
@@ -23,6 +25,8 @@ export interface PropActor {
   art: string;
   at: FloorPoint;
   clock: number;
+  /** What is left of their way: empty once they are there. */
+  steps?: readonly unknown[];
   /** How much of them a stairwell's front edge hides, from their feet up (wellSink in floors-layout.ts). */
   sunk?: number;
   /** The scene's cup in hand: a takeaway guest's becomes a paper cup or a bakery bag, a server's a tray. */
@@ -60,6 +64,8 @@ const BUBBLE_DEPTH = 100000;
 const TEXT = { fontFamily: 'ui-rounded, "PingFang SC", system-ui, sans-serif', fontStyle: 'bold', stroke: '#fffaf0' } as const;
 /** How much of a bubble's height, from its bottom, is tail, and so where its picture is centred. */
 const INSIDE: Record<'bubble' | 'thought' | 'bubble-wide', number> = { bubble: .59, thought: .64, 'bubble-wide': .6 };
+/** Where a speech bubble's paper ends and its tail begins, from its bottom. */
+const BUBBLE_FOOT = .2;
 
 type Picture = { texture: string; frame: string; alpha?: number };
 
@@ -171,7 +177,8 @@ export class FloorsProps {
     this.reserved(b, state, active);
     this.parcel(b);
     this.trays(heads);
-    this.batches(heads);
+    this.batches(heads, state);
+    this.brewing(heads);
     this.display(b, state);
     this.cue();
     for (const [key, image] of this.pool) {
@@ -332,15 +339,36 @@ export class FloorsProps {
     });
   }
 
-  /** A cook with a batch on thinks of what it is. */
-  private batches(heads: boolean): void {
+  /** A bar filled as far as the work is, standing on a point. */
+  private bar(key: string, at: { x: number; y: number }, done: number, depth = BUBBLE_DEPTH - 2): void {
+    this.show(key, BAR.key, '__BASE', at.x, at.y, depth);
+    const inside = BAR.width - 2 * BAR.edge;
+    this.show(`${key}:fill`, BAR.fill, '__BASE', at.x, at.y, depth + .01).setCrop(0, 0, BAR.edge + inside * Math.max(.06, done), BAR.height);
+  }
+
+  /** How much of each barista's order is made: on the bubble their guest orders in, which is in front of them, or over their head. */
+  private brewing(heads: boolean): void {
+    if (!heads) return;
+    this.sim.baristas.forEach((barista, i) => {
+      const sprite = this.cast.baristas[i], done = brewShare(barista);
+      if (done === null || !sprite?.visible) return;
+      const key = `say:${barista.customerId}`, said = this.used.has(key) ? this.pool.get(key) : undefined;
+      if (said) this.bar(`brew:${i}`, { x: said.x, y: said.y - said.displayHeight * BUBBLE_FOOT + BAR.height / 2 }, done, BUBBLE_DEPTH + .3);
+      else if (!this.cast.speaking().has(`barista:${i}`)) this.bar(`brew:${i}`, this.head(sprite), done);
+    });
+  }
+
+  /** A cook with a batch on thinks of what it is; at work on it, a bar shows how long they have left there. */
+  private batches(heads: boolean, state: GameState): void {
     if (!heads) return;
     this.sim.cooks.forEach((cook, i) => {
       const actor = this.cast.cooks[i];
       if (!actor || !cook.batch || !actor.sprite.visible || actor.sprite.alpha < .6 || this.cast.speaking().has(`cook:${i}`)) return;
+      const head = this.head(actor.sprite), done = actor.steps?.length ? null : bakeShare(this.sim, state, i);
+      if (done !== null) this.bar(`bake:${i}`, head, done);
       // Cooks work side by side: every other thought floats higher, clear of its neighbour.
-      const head = this.head(actor.sprite);
-      this.bubble(`batch:${i}`, { x: head.x, y: head.y - (i % 2) * 64 }, 'thought', [this.picture(cook.batch.item)], .7);
+      const lift = Math.max(done === null ? 0 : BAR.height, (i % 2) * 64);
+      this.bubble(`batch:${i}`, { x: head.x, y: head.y - lift }, 'thought', [this.picture(cook.batch.item)], .7);
     });
   }
 
