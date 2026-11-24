@@ -30,7 +30,7 @@ works as before. The takes stayed in the library when the art shipped (378 MB of
 | `kits/cook-*/take-1/work.png` | 4×2: the baker at the oven with his peel (back view) or the cook kneading, then a walk carrying a tray (`prompts/work-common.txt` + `prompts/work-<cook>.txt`) |
 | `kits/cast-NN/take-1/{sheet,moves}.png` | The game's 36 guests (`CUSTOMER_CAST`, by appearance), drawn from their descriptions in `../cozy-cast-v9/prompts/customer-N.txt` (`prompts/cast/cast-NN.txt`), with the same two sheets as the guests below |
 | `kits/guest-*/take-1/moves.png` | 4×3: walk towards us, walk away, and four seated poses with a cup (`prompts/moves.txt`, drawn from the guest's `sheet.png`) |
-| `build/` | What the pages load: the floors cut through the middle of each slab, the layers drawn in front of people (`counter-front`, `table-front`), one strip of equal frames per sheet (PNG, and the WebP the game loads), and `sheets.json`, the frame size of every strip |
+| `build/` | What the pages load: the floors cut through the middle of each slab, the layers drawn in front of people (`counter-front`), one strip of equal frames per sheet (PNG, and the WebP the game loads), and `sheets.json`, the frame size of every strip |
 
 These takes are candidates: nothing here is chosen for the game yet. The side-view plates this
 sample started with are in the art library.
@@ -58,6 +58,29 @@ the sill upstairs only (the ground floor has no window); the ceiling decor is th
 
 writes `build/decor/<floor>/*.webp` and `build/decor/decor.json`; `src/render/floors/floors-decor.test.ts`
 checks that every decor item has its layers.
+
+## Upgrades
+
+Two things change as the café is upgraded (`src/render/floors/floors-upgrades.ts`, prompts in
+`prompts/upgrades/`, takes in `kits/upgrades`; the user chose machine set A and the kitchen on
+2026-11-24):
+
+- The espresso machine gets a new look at levels 5, 10 and 15. The old one is erased from the ground
+  floor's fixtures layer and the new one drawn in its place.
+- The basement kitchen is `basement-bare` with pieces on it. Its left half follows the equipment that is
+  installed (`installedEquipment` in `src/game/kitchen.ts`): each piece takes the place of something that
+  stood there before (the proofer and the pastry fridge of the two halves of the shelves, the sheeter of
+  the mixing bowl, and so on). Its right half follows the kitchen's expansions: boarded up, then the
+  roaster under a dust sheet, then the plate as it was first painted.
+
+All kitchen takes are repaints of `kits/angle-plate-basement/take-2` and lie on it to the pixel; pieces
+that overlap on the table were painted once more on magenta.
+
+    uv run --with pillow --with numpy --with scipy python scripts/art-gen/floor-upgrades-build.py
+
+writes `build/upgrades/`; `src/render/floors/floors-upgrades.test.ts` checks that every combination has
+its pieces. The whole plate (`build/basement.webp`) and its table (`build/table-front.webp`), which the
+game drew before, are in the art library.
 
 ## Furniture
 

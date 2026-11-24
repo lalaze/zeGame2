@@ -26,7 +26,8 @@ export const FLOOR_ART: Record<FloorId, { image: string; top: number; height: nu
   'floor-3': { image: 'floor-2', top: 24, height: 877 },
   'floor-2': { image: 'floor-2', top: 24, height: 877 },
   ground: { image: 'floor-1', top: 24, height: 883 },
-  basement: { image: 'basement', top: 30, height: 911 },
+  // Put together from what the kitchen holds (floors-upgrades.ts).
+  basement: { image: 'upgrades/kitchen', top: 30, height: 911 },
 };
 export const WORLD_W = 1672;
 /**
@@ -197,7 +198,7 @@ export function tableSeats(table: number, active: readonly number[]): readonly [
 }
 
 /** Basement spots: the baker's oven and the cook's dough table, each with room for a second cook. */
-const OVEN = spot('basement', 385, 682, BASEMENT_AISLE);
+const OVEN = spot('basement', 428, 690, BASEMENT_AISLE);
 const DOUGH = spot('basement', 690, 612, 612);
 export const LIFT = spot('basement', 1015, 650, BASEMENT_AISLE);
 export const LIFT_HATCH: FloorPoint = { floor: 'basement', x: 1015, y: 382 };
@@ -208,7 +209,7 @@ export const TABLE_FRONT: FloorPoint = { floor: 'basement', x: 0, y: 746 };
 export type KitchenPlace = 'oven' | 'dough' | 'cold' | 'dry' | 'lift';
 const KITCHEN: Record<KitchenPlace, Spot> = {
   oven: OVEN, dough: DOUGH, lift: LIFT,
-  cold: spot('basement', 1280, 720, BASEMENT_AISLE), dry: spot('basement', 220, 760, BASEMENT_AISLE),
+  cold: spot('basement', 1280, 720, BASEMENT_AISLE), dry: spot('basement', 280, 770, BASEMENT_AISLE),
 };
 /** Which part of the basement each of the Sim's kitchen stations is. */
 export function kitchenPlace(station: string): KitchenPlace {
@@ -220,7 +221,7 @@ export function kitchenPlace(station: string): KitchenPlace {
 }
 /** Where the second and third cook at a place stand, from the first: one each side of them, or along the open floor. */
 const COOK_SHIFT: Record<KitchenPlace, readonly [number, number, number]> = {
-  oven: [0, 112, -112], dough: [0, 118, -118], lift: [0, 112, -112], cold: [0, -112, 112], dry: [0, 112, 224],
+  oven: [0, -112, -212], dough: [0, 118, -118], lift: [0, 112, -112], cold: [0, -112, 112], dry: [0, 104, 208],
 };
 /** Cook `i` at a place: up to three cooks work side by side. */
 export function kitchenSpot(place: KitchenPlace, i: number): Spot {

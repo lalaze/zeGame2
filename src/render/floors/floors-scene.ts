@@ -21,6 +21,7 @@ import { BACK_LAYERS, FRONT_LAYERS, HALL_DEPTH, IN_WELL_DEPTH, LAYER_DEPTH, LAYE
 import { makeTextures } from './textures';
 import { FloorsFront } from './floors-front';
 import { FloorsProps } from './floors-props';
+import { FloorsUpgrades, TABLE, TABLE_BOX, machineTier } from './floors-upgrades';
 import { FloorsThoughts, type ThinkingHead } from './floors-thoughts';
 import { t } from '../../i18n';
 import { FloorsCats } from './floors-cats';
@@ -53,7 +54,7 @@ const castArt = (appearance: number) => `cast-${String(appearance).padStart(2, '
 const LOOK_WAIT = 2;
 export const SHEETS = ['owner', 'barista', ...GUEST_ART, ...GUEST_ART.map(key => `${key}-moves`),
   'cook-chef', 'cook-scarf', 'cook-chef-work', 'cook-scarf-work'];
-const IMAGES = ['frame/attic', 'floor-2', 'floor-1', 'basement', 'counter-front', 'table-front',
+const IMAGES = ['frame/attic', 'floor-2', 'floor-1', 'counter-front',
   'frame/sky', 'frame/pillar', 'frame/beam', 'frame/street', 'frame/soil',
   'frame/awning', 'frame/door-left', 'frame/door-right', 'frame/step', 'frame/side-window', 'frame/stairs-hall', 'frame/stairs-rail',
   'frame/wall-attic', 'frame/wall-seating', 'frame/wall-ground'];
@@ -141,6 +142,8 @@ export class FloorsScene extends Phaser.Scene {
   private wallAlpha = 0;
   private counterFront!: Phaser.GameObjects.Image;
   private tableFront!: Phaser.GameObjects.Image;
+  /** The espresso machine and the kitchen as upgraded (floors-upgrades.ts). */
+  private upgrades!: FloorsUpgrades;
   private glow!: Phaser.GameObjects.Image;
   private customers = new Map<number, Actor>();
   private servers: Actor[] = [];
@@ -187,6 +190,7 @@ export class FloorsScene extends Phaser.Scene {
     this.status = 'loading art';
     for (const key of IMAGES) this.load.image(key, `${FLOORS_ART}${key}.webp`);
     FloorsSky.preload(this, this.getState());
+    FloorsUpgrades.preload(this, FLOORS_ART);
     for (const key of SHEETS) this.load.spritesheet(key, `${FLOORS_ART}${key}.webp`, this.sheets[key]);
     // The decor the café has on now, for both decorated floors: the building may grow into the second.
     const equipped = this.getState().decor.equipped as Record<string, string>;
@@ -220,7 +224,9 @@ export class FloorsScene extends Phaser.Scene {
     this.soilBand = this.add.image(0, 0, 'frame/soil').setOrigin(0, 0).setDepth(-3).setCrop(0, 0, WORLD_W, FRAME.soilBand);
     this.soilBelow = this.add.image(0, 0, 'frame/soil').setOrigin(0, 0).setDepth(-3).setCrop(0, FRAME.soilBand, WORLD_W, FRAME.soilBelow);
     this.counterFront = this.add.image(0, 0, 'counter-front').setOrigin(0, 0);
-    this.tableFront = this.add.image(0, 0, 'table-front').setOrigin(0, 0);
+    this.upgrades = new FloorsUpgrades(this);
+    this.upgrades.updateKitchen(this.getState());
+    this.tableFront = this.add.image(TABLE_BOX.x, 0, TABLE).setOrigin(0, 0);
     this.freeSpots = this.add.graphics().setDepth(99000);
     this.ghostMark = this.add.graphics().setDepth(99500);
     this.glow = this.add.image(0, 0, 'glow').setBlendMode(Phaser.BlendModes.ADD).setVisible(false).setDepth(1);
@@ -417,16 +423,18 @@ export class FloorsScene extends Phaser.Scene {
     const wanted = next.floors.flatMap(floor => layers(floor).map(l => l.key));
     const missing = wanted.filter(key => !this.textures.exists(key));
     if (missing.length) this.requestDecor(missing);
-    const signature = next.floors.join() + '|' + wanted.join();
+    const signature = next.floors.join() + '|' + wanted.join() + '|' + machineTier(state.upgrades.machine);
     const sameFloors = !!before && before.floors.join() === next.floors.join();
     if (before && sameFloors && (signature === this.decorSignature || missing.length)) return before;
+    if (next.offsets.basement !== undefined) this.upgrades.updateKitchen(state);
     for (const image of this.floorImages) image.destroy();
     const counterDepth = worldPoint(next, COUNTER_FRONT).y;
     this.floorImages = next.floors.flatMap(floor => {
       const y = next.offsets[floor]!, decor = layers(floor).filter(l => this.textures.exists(l.key));
       if (!decor.length) return [this.add.image(0, y - (FLOOR_ART[floor].above ?? 0), FLOOR_ART[floor].image).setOrigin(0, 0).setDepth(LAYER_DEPTH)];
       return decor.map(l => {
-        const image = this.add.image(0, y, l.key).setOrigin(0, 0)
+        const fixtures = floor === 'ground' && BACK_LAYERS[l.order] === 'fixtures' && !l.front;
+        const image = this.add.image(0, y, fixtures ? this.upgrades.fixturesTexture(l.key, state.upgrades.machine) : l.key).setOrigin(0, 0)
           .setDepth(l.front ? counterDepth + l.order * .01 : LAYER_DEPTH + l.order * LAYER_STEP);
         const shift = floor === 'ground' && !l.front ? GROUND_SHIFT[equipped[BACK_LAYERS[l.order]] ?? ''] : undefined;
         if (shift) image.setPosition(shift.dx, y + shift.dy).setCrop(shift.crop.x, shift.crop.y, shift.crop.w, shift.crop.h);
@@ -450,7 +458,7 @@ export class FloorsScene extends Phaser.Scene {
     this.counterFront.setY(groundTop).setDepth(counterDepth).setVisible(!layers('ground').length);
     const kitchen = next.offsets.basement !== undefined;
     this.tableFront.setVisible(kitchen);
-    if (kitchen) this.tableFront.setY(worldPoint(next, { floor: 'basement', x: 0, y: 0 }).y).setDepth(worldPoint(next, TABLE_FRONT).y);
+    if (kitchen) this.tableFront.setY(next.offsets.basement! + TABLE_BOX.y).setDepth(worldPoint(next, TABLE_FRONT).y);
     // A new branch starts small: the camera goes back to rest. A building that grows keeps the
     // ground floor where the player put it on screen.
     if (before && next.floors.length < before.floors.length) this.moved = false;
@@ -470,6 +478,7 @@ export class FloorsScene extends Phaser.Scene {
     const state = this.getState();
     const b = this.layoutBuilding(state);
     this.showWalls(dt);
+    this.upgrades.update(dt, state);
     this.skyFx.update(dt, state, b);
     const active = activeTableIndices(state);
     const step = this.view.paused ? 0 : dt;
