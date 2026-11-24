@@ -25,6 +25,8 @@ export interface Ghost {
   row: number;
   /** The placed item being moved, which doesn't count as in its own way. */
   skip: number;
+  /** In the building, the spot it would stand at (game/building-spots.ts); the cell means nothing there. */
+  spot?: string;
 }
 
 export interface Effect {
@@ -358,7 +360,7 @@ export class CafeView {
     const hits = state.decor.placed
       .map((p, i) => ({ p, i, def: furnitureDef(p.id) }))
       .filter(({ p, def }) => {
-        if (!def) return false;
+        if (!def || p.spot !== undefined) return false;
         let b =
           def.surface === 'wall'
             ? cellRect('wall', p.col, p.row, def.w, def.h)

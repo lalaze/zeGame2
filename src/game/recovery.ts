@@ -2,7 +2,8 @@ import { parseSignatureDrinks, signatureDefinition } from './signature-drinks';
 import { INGREDIENTS, MENU, UPGRADES } from './data';
 import { DECOR_SLOTS, decorDef } from './decor';
 import { canPrepareItem, ingredientDef, recipe, servingsLeft, unlockedItems } from './economy';
-import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, canPlace, furnitureDef } from './furniture';
+import { buildingSpot } from './building-spots';
+import { CELL, COLS, FLOOR_ROWS, WALL_ROWS, builtSpots, canPlace, furnitureDef } from './furniture';
 import { currentGoal, goalDone, GOALS } from './goals';
 import { AREA_IDS, REGIONS, mainTableCount, regionOffset } from './regions';
 import type { GameState } from './state';
@@ -51,7 +52,8 @@ function validState(state: GameState): boolean {
   const decor = state.decor;
   if (!Array.isArray(decor.owned) || decor.owned.some((id) => !decorDef(id)) ||
     !DECOR_SLOTS.every((slot) => decor.owned.includes(decor.equipped[slot]) && decorDef(decor.equipped[slot])?.slot === slot) ||
-    !Array.isArray(decor.placed) || decor.placed.some((p) => !p || !furnitureDef(p.id) || !count(p.col) || !count(p.row)) ||
+    !Array.isArray(decor.placed) || decor.placed.some((p) => !p || !furnitureDef(p.id) || (p.spot !== undefined
+      ? buildingSpot(p.spot)?.surface !== furnitureDef(p.id)!.surface : !count(p.col) || !count(p.row))) ||
     !decor.stored || typeof decor.stored !== 'object' || Array.isArray(decor.stored) ||
     Object.entries(decor.stored).some(([id, n]) => !furnitureDef(id) || !count(n))) return false;
   return true;
@@ -72,6 +74,14 @@ function canReachOwnedComfort(state: GameState, target: number): boolean {
     ...Object.entries(state.decor.stored).filter(([, n]) => n > 0).map(([id]) => id)]);
   const kinds = [...furniture].map((id) => furnitureDef(id)!).filter((d) => d.comfort > 0).sort((a, b) => a.id.localeCompare(b.id));
   if (kinds.reduce((sum, d) => sum + d.comfort, 0) < needed) return false;
+  if (state.decor.building) {
+    // One piece a spot, and any piece fits any spot on its surface: the cosiest kinds go up first.
+    const spots = builtSpots(state);
+    const reachable = (['floor', 'wall'] as const).flatMap((surface) =>
+      kinds.filter((d) => d.surface === surface).map((d) => d.comfort).sort((a, b) => b - a)
+        .slice(0, spots.filter((spot) => spot.surface === surface).length));
+    return reachable.reduce((sum, n) => sum + n, 0) >= needed;
+  }
   const tables = mainTableCount(state);
   const key = JSON.stringify([needed, tables, state.regions, kinds.map((d) => [d.id, d.surface, d.w, d.h, d.comfort])]);
   const cached = comfortReachability.get(key);

@@ -24,7 +24,8 @@ import {
   type UpgradeId,
 } from '../game/data';
 import { DECOR_SLOTS, comfort, decorDef, decorForSlot, ownsDecor, useDecor, type DecorSlot } from '../game/decor';
-import { FURNITURE, buyFurniture, furnitureDef, placedCount, storedCount, type FurnishingCategory } from '../game/furniture';
+import { BUILDING_SPOTS } from '../game/building-spots';
+import { FURNITURE, builtSpots, buyFurniture, furnitureDef, placedCount, storedCount, type FurnishingCategory, type Surface } from '../game/furniture';
 import {
   arrivalRate,
   averageDishPrice,
@@ -1102,6 +1103,7 @@ export class Panel {
       furniture.innerHTML = `
         <h3 class="menu-cat">${t(`decor.category.${this.decorCategory}`)} <small>${t('decor.catalogCount', { n: catalog.length })}</small></h3>
         <div class="decor-intro note">${t(this.decorCategory === 'decoration' ? 'decor.decorationIntro' : 'furn.intro')}</div>
+        <div class="decor-intro note furniture-spots" hidden></div>
         <button class="pixel-btn small ghost arrange-btn" data-furniture="arrange:">${t('furn.arrange')}</button>
         <div class="decor-grid"></div>`;
       const fgrid = furniture.querySelector('.decor-grid')!;
@@ -1112,7 +1114,7 @@ export class Panel {
         tile.innerHTML = `
           <img class="tile-icon" alt="" src="${iconUrl(`furniture:${def.id}`, () => furnitureIcon(def.id))}" />
           <div class="tile-name">${decorName(def.id)}</div>
-          <div class="tile-footprint">${t(`furn.surface.${def.surface}`)} · ${def.w}×${def.h}</div>
+          <div class="tile-footprint">${t(`furn.surface.${def.surface}`)}${this.state.decor.building ? '' : ` · ${def.w}×${def.h}`}</div>
           <div class="tile-comfort">${def.comfort > 0 ? t('decor.comfort', { n: def.comfort }) : '&nbsp;'}</div>
           <div class="tile-count"></div>
           <button class="pixel-btn tile-btn" data-furniture="buy:${def.id}"></button>
@@ -1264,6 +1266,18 @@ export class Panel {
         refs.btn.textContent = equipped ? t('decor.inUse') : owned ? t('decor.use') : formatMoney(def.cost);
         refs.btn.disabled = equipped || (!owned && s.coins < def.cost);
         refs.btn.classList.toggle('ghost', owned && !equipped);
+      }
+      const spots = this.list.querySelector<HTMLElement>('.furniture-spots');
+      if (spots) {
+        // In the building there are so many spots on each surface, more with every storey.
+        spots.hidden = !s.decor.building;
+        const built = builtSpots(s), out = s.decor.placed.filter((p) => p.spot !== undefined);
+        const count = (surface: Surface) => ({
+          used: out.filter((p) => furnitureDef(p.id)?.surface === surface).length, total: built.filter((spot) => spot.surface === surface).length });
+        const floor = count('floor'), wall = count('wall');
+        const text = t('furn.spots', { floorUsed: floor.used, floor: floor.total, wallUsed: wall.used, wall: wall.total })
+          + (built.length < BUILDING_SPOTS.length ? t('furn.spotsMore') : '');
+        if (spots.textContent !== text) spots.textContent = text;
       }
       for (const [id, refs] of this.furnitureTiles) {
         const def = furnitureDef(id)!;

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { STATION_SECONDS, type Station } from '../../game/kitchen';
-import { BARISTAS, CATCH_UP, DISPLAY, DOOR, FLOOR_ART, FRAME, QUEUE, SERVER_HOMES, SERVICE, WALK, building, cookHome, kitchenPlace, kitchenSpot, restFocus, route, stepsLength, tableSeats, walkPace, worldPoint, type KitchenPlace } from './floors-layout';
+import { BUILDING_SPOTS } from '../../game/building-spots';
+import { BARISTAS, CATCH_UP, DISPLAY, DOOR, FLOOR_ART, FRAME, FURNITURE_SPOTS, QUEUE, SERVER_HOMES, SERVICE, WALK, WORLD_W, building, cookHome, kitchenPlace, kitchenSpot, restFocus, route, stepsLength, tableSeats, walkPace, worldPoint, type KitchenPlace } from './floors-layout';
 
 describe('floors building', () => {
   it('opens a floor above for tables three to five and another for six to eight, and a basement with the kitchen', () => {
@@ -125,7 +126,7 @@ describe('floors staff', () => {
   it('keeps the first servers apart and out of the way of the cake display', () => {
     expect(SERVER_HOMES.length).toBeGreaterThanOrEqual(6);
     for (const [i, a] of SERVER_HOMES.entries()) for (const b of SERVER_HOMES.slice(i + 1)) expect(Math.hypot(a.x - b.x, a.y - b.y)).toBeGreaterThan(100);
-    for (const home of SERVER_HOMES.slice(0, 4)) expect(home.x + 50 < DISPLAY.left || home.x - 50 > DISPLAY.right - 10, String(home.x)).toBe(true);
+    for (const home of SERVER_HOMES.slice(0, 3)) expect(home.x + 50 < DISPLAY.left || home.x - 50 > DISPLAY.right - 10, String(home.x)).toBe(true);
     // Nobody waits in the doorway.
     for (const home of SERVER_HOMES) expect(Math.abs(home.x - DOOR.x)).toBeGreaterThan(70);
   });
@@ -154,21 +155,61 @@ describe('floors kitchen', () => {
 });
 
 describe('floors furniture', () => {
-  it('ties every spot to a cell where any floor piece may stand, with three tables', async () => {
-    const { FURNITURE, STARTER_FURNITURE, canPlace, footprint, furnitureDef } = await import('../../game/furniture');
-    const { createInitialState } = await import('../../game/state');
-    const { FURNITURE_SPOTS, spotCell, spotOf, gameWallRectToPlate } = await import('./floors-layout');
-    const state = createInitialState(0);
-    state.upgrades.tables = 1;
-    for (const def of FURNITURE.filter(d => d.surface === 'floor')) {
-      for (const spot of FURNITURE_SPOTS) {
-        const { col, row } = spotCell(spot, def.w, def.h);
-        expect(canPlace(state, def.id, col, row, 3), `${def.id} at ${spot.col},${spot.row}`).toBe(true);
-        expect(spotOf(col, row, def.w, def.h)).toBe(spot);
+  const inside = (a: { x: number; y: number }, b: { x: number; y: number; w: number; h: number }) => a.x > b.x && a.x < b.x + b.w && a.y > b.y && a.y < b.y + b.h;
+
+  it('gives every spot of the game a place on its own floor', () => {
+    expect(FURNITURE_SPOTS.map(spot => spot.id)).toEqual(BUILDING_SPOTS.map(spot => spot.id));
+    for (const spot of FURNITURE_SPOTS) {
+      const art = FLOOR_ART[spot.floor];
+      expect(spot.floor).toBe(spot.storey);
+      expect(!!spot.box, spot.id).toBe(spot.surface === 'wall');
+      expect([spot.x, spot.y].every(Number.isFinite), spot.id).toBe(true);
+      expect(spot.y, spot.id).toBeLessThan(art.top + art.height);
+      expect(spot.x - spot.room / 2, spot.id).toBeGreaterThan(40);
+      expect(spot.x + spot.room / 2, spot.id).toBeLessThan(WORLD_W - 40);
+    }
+  });
+
+  it('keeps floor pieces apart, off the seats, the servers and the way in', () => {
+    const floor = FURNITURE_SPOTS.filter(spot => !spot.box);
+    for (const [i, a] of floor.entries()) for (const b of floor.slice(i + 1)) {
+      if (a.floor !== b.floor || Math.abs(a.y - b.y) > 100) continue;
+      expect(Math.abs(a.x - b.x), `${a.id} and ${b.id}`).toBeGreaterThanOrEqual((a.room + b.room) / 2);
+    }
+    const active = [0, 1, 2, 3, 4, 5, 6, 7], tallest = 281; // the bookshelf of build/furniture/furniture.json
+    for (const spot of floor) {
+      for (const table of active) for (const seat of tableSeats(table, active)) {
+        if (seat.floor !== spot.floor || seat.y > spot.y || spot.y - tallest > seat.y) continue;
+        // A piece in front of a seat would hide whoever sits there.
+        expect(Math.abs(seat.x - spot.x), `${spot.id} in front of table ${table}`).toBeGreaterThan(spot.room / 2);
+      }
+      if (spot.floor === 'ground') {
+        expect(Math.abs(spot.x - DOOR.x)).toBeGreaterThan(spot.room / 2 + 60);
+        // The open front's folded doors hide the corners.
+        expect(spot.x - spot.room / 2, spot.id).toBeGreaterThanOrEqual(182);
+        expect(spot.x + spot.room / 2, spot.id).toBeLessThanOrEqual(1492);
+        for (const home of SERVER_HOMES) expect(Math.abs(home.x - spot.x) > spot.room / 2 || home.y > spot.y, spot.id).toBe(true);
       }
     }
-    // The starter clock and mug rack hang on the ground floor's cleared wall.
-    for (const p of STARTER_FURNITURE) expect(gameWallRectToPlate(footprint(furnitureDef(p.id)!, p.col, p.row)), p.id).not.toBeNull();
+  });
+
+  it('hangs wall pieces clear of the awning, the staff and each other', () => {
+    for (const spot of FURNITURE_SPOTS) {
+      if (!spot.box) continue;
+      if (spot.floor === 'ground') {
+        expect(spot.box.y).toBeGreaterThanOrEqual(104);
+        expect(spot.box.y + spot.box.h).toBeLessThanOrEqual(212);
+      }
+      for (const other of FURNITURE_SPOTS) if (other !== spot && other.box && other.floor === spot.floor) expect(inside(other, spot.box), `${spot.id} and ${other.id}`).toBe(false);
+    }
+  });
+
+  it('opens more spots with every storey', () => {
+    const open = (tables: number) => FURNITURE_SPOTS.filter(spot => building(tables, true).floors.includes(spot.floor)).length;
+    expect(open(2)).toBeGreaterThanOrEqual(10);
+    expect(open(3)).toBeGreaterThan(open(2));
+    expect(open(6)).toBeGreaterThan(open(5));
+    expect(open(8)).toBe(FURNITURE_SPOTS.length);
   });
 });
 

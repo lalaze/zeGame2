@@ -1,8 +1,11 @@
-// Furniture and props the player buys and places anywhere free on a grid,
-// on the floor or on the two stretches of wall beside the menu board.
+// Furniture and props the player buys and places: in the building (the floors view) at its own spots
+// (building-spots.ts), in the pixel room anywhere free on a grid, on the floor or on the two stretches
+// of wall beside the menu board. A piece is in one or the other: one with a `spot` is in the building,
+// takes no grid cell and stands in nobody's way there.
 //
 // Floor cells are laid out at the minimum scene height (see `floorY` in layout.ts),
 // so a spot that's free there stays free on any screen.
+import { BUILDING_SPOTS, FORMER_CELLS, storeys, type BuildingSpot } from './building-spots';
 import { FLOOR_Y, MAX_TABLES, MIN_SCENE_H, SCENE_W, TABLE_HALF_WIDTH, tableSpotMin } from './layout';
 import type { GameState } from './state';
 import { activeTableIndices, adjacentArea, areaAtX, isAreaOpen, regionOffset } from './regions';
@@ -75,9 +78,11 @@ export const furnitureDef = (id: string) => BY_ID.get(id);
 
 export interface Placed {
   id: string;
-  /** Top-left cell of the footprint. */
+  /** Top-left cell of the footprint; -1 for a piece in the building. */
   col: number;
   row: number;
+  /** The building's spot it stands at (building-spots.ts). */
+  spot?: string;
 }
 
 export const CELL = 8;
@@ -175,7 +180,7 @@ function fits(state: GameState, def: FurnitureDef, col: number, row: number, tab
   }
   return state.decor.placed.every((p, i) => {
     const other = furnitureDef(p.id);
-    return i === skip || !other || other.surface !== def.surface || !overlaps(box, footprint(other, p.col, p.row));
+    return i === skip || !other || p.spot !== undefined || other.surface !== def.surface || !overlaps(box, footprint(other, p.col, p.row));
   });
 }
 
@@ -218,7 +223,7 @@ export function placeFurniture(state: GameState, id: string, col: number, row: n
 /** Moves a placed item to (col, row). */
 export function moveFurniture(state: GameState, index: number, col: number, row: number, tables: number): boolean {
   const p = state.decor.placed[index];
-  if (!p || !canPlace(state, p.id, col, row, tables, index)) return false;
+  if (!p || p.spot !== undefined || !canPlace(state, p.id, col, row, tables, index)) return false;
   p.col = col;
   p.row = row;
   return true;
@@ -230,15 +235,81 @@ export function storeFurniture(state: GameState, index: number): void {
   if (p) state.decor.stored[p.id] = storedCount(state, p.id) + 1;
 }
 
-/** Sends to storage anything a newly built table (or the next table spot) now needs. Returns how many. */
+/** Sends to storage anything a newly built table (or the next table spot) now needs, or whose storey is gone. Returns how many. */
 export function evictBlocked(state: GameState, tables: number): number {
   let moved = 0;
   for (let i = state.decor.placed.length - 1; i >= 0; i--) {
     const p = state.decor.placed[i];
-    if (!canPlace(state, p.id, p.col, p.row, tables, i)) {
+    if (p.spot !== undefined ? !canStand(state, p.id, p.spot, i) : !canPlace(state, p.id, p.col, p.row, tables, i)) {
       storeFurniture(state, i);
       moved++;
     }
+  }
+  return moved;
+}
+
+// ---------------------------------------------------------------- the building's spots
+
+/** The building's spots on the storeys it has now. */
+export function builtSpots(state: GameState): BuildingSpot[] {
+  const built = new Set(storeys(activeTableIndices(state).length));
+  return BUILDING_SPOTS.filter((spot) => built.has(spot.storey));
+}
+
+/** The free spots a piece can go to; `skip` ignores one placed item (the one being moved). */
+export function openSpots(state: GameState, id: string, skip = -1): BuildingSpot[] {
+  const def = furnitureDef(id);
+  if (!def) return [];
+  const taken = new Set(state.decor.placed.flatMap((p, i) => (i === skip || p.spot === undefined ? [] : [p.spot])));
+  return builtSpots(state).filter((spot) => spot.surface === def.surface && !taken.has(spot.id));
+}
+
+export const canStand = (state: GameState, id: string, spot: string, skip = -1): boolean =>
+  openSpots(state, id, skip).some((open) => open.id === spot);
+
+/** Takes one out of storage and stands it at a spot of the building. */
+export function standFurniture(state: GameState, id: string, spot: string): boolean {
+  if (storedCount(state, id) < 1 || !canStand(state, id, spot)) return false;
+  state.decor.stored[id]--;
+  if (state.decor.stored[id] === 0) delete state.decor.stored[id];
+  state.decor.placed.push({ id, col: -1, row: -1, spot });
+  return true;
+}
+
+/** Moves a placed item to a spot of the building. */
+export function moveToSpot(state: GameState, index: number, spot: string): boolean {
+  const p = state.decor.placed[index];
+  if (!p || !canStand(state, p.id, spot, index)) return false;
+  Object.assign(p, { col: -1, row: -1, spot });
+  return true;
+}
+
+/**
+ * Gives everything placed in the pixel room a spot in the building: where the building showed it
+ * before it had spots of its own, else the first free one. The cosiest pieces choose first, a second
+ * copy of a kind last. Those left over go to storage; returns how many.
+ */
+export function settleInBuilding(state: GameState): number {
+  state.decor.building = true;
+  const loose = state.decor.placed.filter((p) => p.spot === undefined);
+  if (!loose.length) return 0;
+  const stand = (p: Placed, spot: string | undefined) => spot !== undefined && moveToSpot(state, state.decor.placed.indexOf(p), spot);
+  for (const p of loose) {
+    const def = furnitureDef(p.id);
+    if (def?.surface !== 'floor') continue;
+    stand(p, FORMER_CELLS.find((cell) => cell.col - Math.floor(def.w / 2) === p.col && cell.row - def.h + 1 === p.row)?.spot);
+  }
+  const kinds = new Set(state.decor.placed.filter((p) => p.spot !== undefined).map((p) => p.id));
+  const waiting = loose.filter((p) => p.spot === undefined).map((p) => {
+    const again = kinds.has(p.id);
+    kinds.add(p.id);
+    return { p, rank: again ? -1 : furnitureDef(p.id)?.comfort ?? 0 };
+  }).sort((a, b) => b.rank - a.rank);
+  let moved = 0;
+  for (const { p } of waiting) {
+    if (stand(p, openSpots(state, p.id)[0]?.id)) continue;
+    storeFurniture(state, state.decor.placed.indexOf(p));
+    moved++;
   }
   return moved;
 }

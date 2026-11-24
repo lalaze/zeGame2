@@ -5,18 +5,17 @@
 // stairs here, so people walk faster the further they have to go, to arrive about when the Sim does.
 import Phaser from 'phaser';
 import { formatMoney } from '../../game/format';
-import { CELL, COLS, WALL_ROWS, WALL_TOP, canPlace, cellFree, footprint, furnitureDef } from '../../game/furniture';
-import { FLOOR_Y, SCENE_W } from '../../game/layout';
-import { activeTableIndices, mainTableCount } from '../../game/regions';
+import { canStand, furnitureDef, openSpots } from '../../game/furniture';
+import { activeTableIndices } from '../../game/regions';
 import { SERVER_SPEED, WALK_SPEED, type Customer, type Sim, type Walker } from '../../game/sim';
 import type { GameState } from '../../game/state';
 import type { CafeView } from '../cafe-view';
 import type { CafeHooks } from '../phaser/cafe-scene';
 import {
   BARISTAS, COUNTER_FRONT, DISPLAY, DOOR, FLOOR_ART, LIFT_HATCH, LIFT_TOP, OVEN_MOUTH, PASS, QUEUE, SERVER_HOMES, SERVICE, STEAM,
-  FRAME, FURNITURE_SPOTS, TABLE_FRONT, WALK, WORLD_W, building, cookHome, gameWallRectToPlate, kitchenPlace, kitchenSpot, plateToGameWall,
-  restFocus, route, spotCell, spotOf, stepsLength, tableSeats, walkPace, worldPoint,
-  type Building, type FloorId, type FloorPoint, type FurnitureSpot, type KitchenPlace, type Point, type Spot, type Step,
+  FRAME, FURNITURE_SPOTS, TABLE_FRONT, WALK, WORLD_W, building, cookHome, furnitureSpot, kitchenPlace, kitchenSpot,
+  restFocus, route, stepsLength, tableSeats, walkPace, worldPoint,
+  type Building, type FloorId, type FloorPoint, type FurnitureSpot, type KitchenPlace, type Spot, type Step,
 } from './floors-layout';
 import { makeTextures } from './textures';
 import { outerWallShown, setOuterWall } from '../../ui/floors-ui';
@@ -40,11 +39,9 @@ const WALL_FURNITURE_DEPTH = LAYER_DEPTH + LAYER_STEP * (BACK_LAYERS.indexOf('fi
 /** Sprite size and surface of each furniture piece (scripts/art-gen/floor-furniture-build.py). */
 export type FurnitureManifest = Record<string, { width: number; height: number; surface: 'floor' | 'wall' }>;
 const furnitureKey = (id: string) => `furniture/${id}.webp`;
-interface PlacedSprite { sprite: Phaser.GameObjects.Image; index: number; at: Point }
-/** Where a piece shows: a floor spot, or a box on the ground floor's back wall (plate pixels); `game` is a point of the game's grid inside it. */
-interface PiecePlace { spot?: FurnitureSpot; box?: { x: number; y: number; w: number; h: number }; game: Point }
+interface PlacedSprite { sprite: Phaser.GameObjects.Image; index: number }
 /** What the page's arrange mode is doing (main.ts `Arrange`). */
-type ArrangeState = { mode?: string; id?: string } | null | undefined;
+type ArrangeState = { mode?: string; id?: string; moving?: number } | null | undefined;
 /** Cells of the sheets cut by scripts/art-gen/soft-frames.mjs. */
 const SIDE = { walk: [0, 1, 2, 3], front: 4, happy: 5, side: 6, back: 7 } as const;
 const MOVES = { down: [0, 1, 2, 3], up: [4, 5, 6, 7], sit: 8, hold: 9, sip: 10, laugh: 11 } as const;
@@ -118,13 +115,15 @@ export class FloorsScene extends Phaser.Scene {
   /** The decor layers the building is drawn with, and those still loading. */
   private decorSignature = '';
   private loadingDecor = new Set<string>();
-  /** Placed furniture on the ground floor, the free cells shown while arranging, and the piece in hand. */
+  /** Furniture out in the building, the open spots shown while arranging, and the piece in hand. */
   private placed: PlacedSprite[] = [];
   private placedSignature = '';
-  private freeCells!: Phaser.GameObjects.Graphics;
+  private freeSpots!: Phaser.GameObjects.Graphics;
   private freeSignature = '';
   private ghostMark!: Phaser.GameObjects.Graphics;
   private ghostSprite: Phaser.GameObjects.Image | null = null;
+  /** The piece in hand already brought into view. */
+  private ghostShown = '';
   private arranging = false;
   private earth!: Phaser.GameObjects.Rectangle;
   private sky!: Phaser.GameObjects.Image;
@@ -195,7 +194,7 @@ export class FloorsScene extends Phaser.Scene {
     this.soilBelow = this.add.image(0, 0, 'frame/soil').setOrigin(0, 0).setDepth(-3).setCrop(0, FRAME.soilBand, WORLD_W, FRAME.soilBelow);
     this.counterFront = this.add.image(0, 0, 'counter-front').setOrigin(0, 0);
     this.tableFront = this.add.image(0, 0, 'table-front').setOrigin(0, 0);
-    this.freeCells = this.add.graphics().setDepth(99000);
+    this.freeSpots = this.add.graphics().setDepth(99000);
     this.ghostMark = this.add.graphics().setDepth(99500);
     this.glow = this.add.image(0, 0, 'glow').setBlendMode(Phaser.BlendModes.ADD).setVisible(false).setDepth(1);
     const rate = WALK / 30;
@@ -492,69 +491,35 @@ export class FloorsScene extends Phaser.Scene {
 
   // ------------------------------------------------------------ furniture
 
-  /** Where a piece shows: at its spot (floor) or in its box on the ground floor's back wall, with a game point inside it. */
-  private piecePlace(id: string, col: number, row: number, spot?: FurnitureSpot): PiecePlace | null {
-    const def = furnitureDef(id);
-    if (!def || col * CELL < 0 || (col + def.w) * CELL > SCENE_W) return null;
-    if (def.surface === 'floor') {
-      if (!spot) return null;
-      return { spot, game: { x: (col + def.w / 2) * CELL, y: FLOOR_Y + (row + def.h) * CELL - 3 } };
-    }
-    const rect = footprint(def, col, row), box = gameWallRectToPlate(rect);
-    return box ? { box, game: { x: rect.x + rect.w / 2, y: rect.y + rect.h / 2 } } : null;
-  }
-
-  /** Puts a furniture sprite at its place: standing on its spot, no wider than the spot allows, or fitted into its box on the wall. */
-  private placeSprite(b: Building, sprite: Phaser.GameObjects.Image, id: string, place: PiecePlace): boolean {
+  /** Puts a furniture sprite at a spot: standing there, no wider than it allows, or fitted into its box on the wall. */
+  private placeSprite(b: Building, sprite: Phaser.GameObjects.Image, id: string, spot: FurnitureSpot): boolean {
     const size = this.furniture?.[id];
-    if (!size) return false;
-    if (place.spot) {
-      if (b.offsets[place.spot.floor] === undefined) return false;
-      const at = worldPoint(b, place.spot);
-      sprite.setOrigin(.5, 1).setPosition(at.x, at.y).setScale(Math.min(1, place.spot.room / size.width)).setDepth(at.y);
-    } else if (place.box) {
-      if (b.offsets.ground === undefined) return false;
-      const top = worldPoint(b, { floor: 'ground', x: place.box.x, y: place.box.y });
-      const scale = Math.min(place.box.w / size.width, place.box.h / size.height);
-      sprite.setOrigin(.5, .5).setPosition(top.x + place.box.w / 2, top.y + place.box.h / 2).setScale(scale).setDepth(WALL_FURNITURE_DEPTH);
+    if (!size || b.offsets[spot.floor] === undefined) return false;
+    const at = worldPoint(b, spot);
+    if (spot.box) {
+      sprite.setOrigin(.5, .5).setPosition(at.x, at.y).setScale(Math.min(spot.box.w / size.width, spot.box.h / size.height)).setDepth(WALL_FURNITURE_DEPTH);
+    } else {
+      sprite.setOrigin(.5, 1).setPosition(at.x, at.y).setScale(Math.min(1, spot.room / size.width)).setDepth(at.y);
     }
     return true;
   }
 
-  /**
-   * Draws the main café's placed furniture, loading pieces the first time they appear. A floor piece
-   * placed off the spots (in the room view, or before this building) takes the nearest free spot.
-   */
+  /** Draws the furniture standing in the building, loading pieces the first time they appear. */
   private syncFurniture(b: Building, state: GameState): void {
-    const taken = new Set<FurnitureSpot>();
-    const pieces = this.furniture ? state.decor.placed.flatMap((p, index) => {
-      const def = furnitureDef(p.id);
-      if (!def || !this.furniture![p.id]) return [];
-      return [{ p, index, def, spot: def.surface === 'floor' ? spotOf(p.col, p.row, def.w, def.h) : undefined }];
+    const shown = this.furniture ? state.decor.placed.flatMap((p, index) => {
+      const spot = furnitureSpot(p.spot);
+      return spot && this.furniture![p.id] && b.offsets[spot.floor] !== undefined ? [{ p, index, spot }] : [];
     }) : [];
-    for (const piece of pieces) if (piece.spot) taken.add(piece.spot);
-    for (const piece of pieces) {
-      if (piece.def.surface !== 'floor' || piece.spot) continue;
-      const centre = piece.p.col + piece.def.w / 2, front = piece.p.row + piece.def.h - 1;
-      piece.spot = FURNITURE_SPOTS.filter(spot => !taken.has(spot))
-        .sort((a, c) => Math.hypot(a.col - centre, a.row - front) - Math.hypot(c.col - centre, c.row - front))[0];
-      if (piece.spot) taken.add(piece.spot);
-    }
-    const shown = pieces.flatMap(piece => {
-      const place = this.piecePlace(piece.p.id, piece.p.col, piece.p.row, piece.spot);
-      return place ? [{ ...piece, place }] : [];
-    });
     const missing = shown.map(({ p }) => furnitureKey(p.id)).filter(key => !this.textures.exists(key));
     if (missing.length) this.requestDecor(missing);
-    const signature = JSON.stringify(shown.map(({ p, index, spot }) => [p.id, p.col, p.row, index, spot?.col])) + `|${b.floors.join()}|${missing.length}`;
+    const signature = JSON.stringify(shown.map(({ p, index }) => [p.id, p.spot, index])) + `|${b.floors.join()}|${missing.length}`;
     if (signature !== this.placedSignature) {
       this.placedSignature = signature;
       for (const piece of this.placed) piece.sprite.destroy();
-      this.placed = shown.filter(({ p }) => this.textures.exists(furnitureKey(p.id))).flatMap(({ p, index, place }) => {
+      this.placed = shown.filter(({ p }) => this.textures.exists(furnitureKey(p.id))).map(({ p, index, spot }) => {
         const sprite = this.add.image(0, 0, furnitureKey(p.id));
-        if (this.placeSprite(b, sprite, p.id, place)) return [{ sprite, index, at: place.game }];
-        sprite.destroy();
-        return [];
+        this.placeSprite(b, sprite, p.id, spot);
+        return { sprite, index };
       });
     }
     // The piece being moved shows as the ghost instead.
@@ -562,87 +527,58 @@ export class FloorsScene extends Phaser.Scene {
     for (const piece of this.placed) piece.sprite.setVisible(piece.index !== moving);
   }
 
-  /** The spots a floor piece can go to now, on floors the building has. */
-  private openSpots(b: Building, state: GameState, id: string, skip: number): FurnitureSpot[] {
-    const def = furnitureDef(id);
-    if (!def || def.surface !== 'floor') return [];
-    const tables = mainTableCount(state);
-    return FURNITURE_SPOTS.filter(spot => {
-      if (b.offsets[spot.floor] === undefined) return false;
-      const { col, row } = spotCell(spot, def.w, def.h);
-      return canPlace(state, id, col, row, tables, skip) && this.sim.furnitureSpaceClear(id, col, row) && this.view.catSpaceClear(id, col, row);
-    });
+  /** Marks a spot: an oval on the floor, the box on the wall. */
+  private markSpot(b: Building, graphics: Phaser.GameObjects.Graphics, spot: FurnitureSpot): void {
+    const at = worldPoint(b, spot);
+    if (spot.box) {
+      const { w, h } = spot.box;
+      graphics.fillRoundedRect(at.x - w / 2, at.y - h / 2, w, h, 12).strokeRoundedRect(at.x - w / 2, at.y - h / 2, w, h, 12);
+    } else {
+      const width = Math.min(spot.room, 220);
+      graphics.fillEllipse(at.x, at.y - 6, width, 56).strokeEllipse(at.x, at.y - 6, width, 56);
+    }
   }
 
-  /** While arranging: the open spots (or free wall cells) for the piece in hand, and the piece where it would go, red where it can't. */
+  /** While arranging: the open spots for the piece in hand, and the piece where it would go, red where it can't. */
   private syncArrange(b: Building, state: GameState): void {
     const arrange = this.hooks.interactionState?.() as ArrangeState;
-    const ground = b.offsets.ground !== undefined;
-    if (!!arrange !== this.arranging) {
-      this.arranging = !!arrange;
-      // Arranging happens downstairs: bring the ground floor into view.
-      if (arrange && ground) { this.moved = true; this.focusY = worldPoint(b, { floor: 'ground', x: 0, y: 500 }).y; this.frameCamera(); }
-    }
+    this.arranging = !!arrange;
     let ghost = arrange?.mode === 'place' ? this.view.ghost : null;
-    const def = ghost ? furnitureDef(ghost.id) : undefined;
-    const tables = mainTableCount(state);
-    // A new floor piece starts at the first open spot, rather than wherever the room view would put it.
-    if (ghost && def?.surface === 'floor' && !spotOf(ghost.col, ghost.row, def.w, def.h)) {
-      const first = this.openSpots(b, state, ghost.id, ghost.skip)[0];
-      const cell = first ? spotCell(first, def.w, def.h) : { col: -99, row: -99 };
-      ghost = this.view.ghost = { ...ghost, ...cell };
+    const open = ghost ? openSpots(state, ghost.id, ghost.skip).flatMap(spot => furnitureSpot(spot.id) ?? []) : [];
+    if (ghost && !ghost.spot && open.length) {
+      // A new piece starts at the open spot nearest the middle of the screen, and is brought into view.
+      const away = (spot: FurnitureSpot) => Math.abs(worldPoint(b, spot).y - this.focusY);
+      ghost = this.view.ghost = { ...ghost, spot: [...open].sort((a, c) => away(a) - away(c))[0].id };
     }
-    const wallBox = (col: number, row: number, w = 1, h = 1) => {
-      const box = gameWallRectToPlate({ x: col * CELL, y: WALL_TOP + row * CELL, w: w * CELL, h: h * CELL });
-      if (!box || !ground) return null;
-      const top = worldPoint(b, { floor: 'ground', x: box.x, y: box.y });
-      return { x: top.x, y: top.y, w: box.w, h: box.h };
-    };
-    const freeSignature = def ? `${def.surface}|${ghost!.id}|${ghost!.skip}|${tables}|${JSON.stringify(state.decor.placed)}|${b.floors.join()}` : '';
+    const spot = furnitureSpot(ghost?.spot);
+    if (spot && ghost!.id + ghost!.skip !== this.ghostShown) {
+      this.ghostShown = ghost!.id + ghost!.skip;
+      const cam = this.cameras.main, y = worldPoint(b, spot).y;
+      if (Math.abs(y - this.focusY) > cam.height / cam.zoom * .28) { this.moved = true; this.focusY = y; this.frameCamera(); }
+    } else if (!ghost) this.ghostShown = '';
+    const freeSignature = ghost ? `${open.map(s => s.id).join()}|${b.floors.join()}` : '';
     if (freeSignature !== this.freeSignature) {
       this.freeSignature = freeSignature;
-      this.freeCells.clear();
-      if (def?.surface === 'floor') {
-        this.freeCells.fillStyle(0xfffaf0, .5).lineStyle(5, 0xfffaf0, .95);
-        for (const spot of this.openSpots(b, state, ghost!.id, ghost!.skip)) {
-          const at = worldPoint(b, spot);
-          this.freeCells.fillEllipse(at.x, at.y - 6, Math.min(spot.room, 220), 56).strokeEllipse(at.x, at.y - 6, Math.min(spot.room, 220), 56);
-        }
-      } else if (def?.surface === 'wall') {
-        this.freeCells.fillStyle(0xfffaf0, .28);
-        for (let row = 0; row < WALL_ROWS; row++) for (let col = 0; col < COLS; col++) {
-          if (!cellFree(state, 'wall', col, row, tables, ghost!.skip)) continue;
-          const box = wallBox(col, row);
-          if (box) this.freeCells.fillRect(box.x + 2, box.y + 2, box.w - 4, box.h - 4);
-        }
-      }
+      this.freeSpots.clear().fillStyle(0xfffaf0, .5).lineStyle(5, 0xfffaf0, .95);
+      for (const free of open) this.markSpot(b, this.freeSpots, free);
     }
     this.ghostMark.clear();
-    const spot = def?.surface === 'floor' ? spotOf(ghost!.col, ghost!.row, def.w, def.h) : undefined;
-    const place = def && ghost!.col > -50 ? this.piecePlace(ghost!.id, ghost!.col, ghost!.row, spot) : null;
-    if (!place || !this.furniture?.[ghost!.id] || !this.textures.exists(furnitureKey(ghost!.id))) {
-      if (def && this.furniture?.[ghost!.id]) this.requestDecor([furnitureKey(ghost!.id)]);
+    if (!ghost || !spot || b.offsets[spot.floor] === undefined || !this.furniture?.[ghost.id] || !this.textures.exists(furnitureKey(ghost.id))) {
+      if (ghost && this.furniture?.[ghost.id]) this.requestDecor([furnitureKey(ghost.id)]);
       this.ghostSprite?.setVisible(false);
       return;
     }
-    const ok = canPlace(state, ghost!.id, ghost!.col, ghost!.row, tables, ghost!.skip)
-      && this.sim.furnitureSpaceClear(ghost!.id, ghost!.col, ghost!.row) && this.view.catSpaceClear(ghost!.id, ghost!.col, ghost!.row);
+    const ok = canStand(state, ghost.id, spot.id, ghost.skip);
     this.ghostMark.lineStyle(6, ok ? 0x4f8a4a : 0xb83a36, .95).fillStyle(ok ? 0x7fbf7a : 0xe0605a, .4);
-    if (place.spot) {
-      const at = worldPoint(b, place.spot);
-      this.ghostMark.fillEllipse(at.x, at.y - 6, Math.min(place.spot.room, 220), 56).strokeEllipse(at.x, at.y - 6, Math.min(place.spot.room, 220), 56);
-    } else if (place.box) {
-      const box = wallBox(ghost!.col, ghost!.row, def!.w, def!.h);
-      if (box) this.ghostMark.fillRect(box.x, box.y, box.w, box.h).strokeRect(box.x, box.y, box.w, box.h);
-    }
-    this.ghostSprite ??= this.add.image(0, 0, furnitureKey(ghost!.id));
-    this.ghostSprite.setTexture(furnitureKey(ghost!.id)).setVisible(true).setAlpha(.85);
-    if (!this.placeSprite(b, this.ghostSprite, ghost!.id, place)) { this.ghostSprite.setVisible(false); return; }
+    this.markSpot(b, this.ghostMark, spot);
+    this.ghostSprite ??= this.add.image(0, 0, furnitureKey(ghost.id));
+    this.ghostSprite.setTexture(furnitureKey(ghost.id)).setVisible(true).setAlpha(.85);
+    this.placeSprite(b, this.ghostSprite, ghost.id, spot);
     this.ghostSprite.setDepth(99600);
     if (ok) this.ghostSprite.clearTint(); else this.ghostSprite.setTint(0xff9a90);
   }
 
-  /** While arranging, a tap picks up the piece under it or puts the one in hand at the spot (or wall cell) under it, by the game's own rules. */
+  /** While arranging, a tap picks up the piece under it or puts the one in hand at the spot under it, by the game's own rules. */
   private arrangeTap(x: number, y: number): boolean {
     const arrange = this.hooks.interactionState?.() as ArrangeState;
     if (!arrange) return false;
@@ -651,26 +587,19 @@ export class FloorsScene extends Phaser.Scene {
     if (arrange.mode === 'browse') {
       const hit = this.placed.filter(piece => piece.sprite.visible && piece.sprite.getBounds().contains(x, y))
         .sort((a, c) => c.sprite.depth - a.sprite.depth)[0];
-      if (hit) this.hooks.pointerDown(hit.at.x, hit.at.y);
+      if (hit) this.hooks.arrangePiece?.(hit.index);
       return true;
     }
-    const def = arrange.id ? furnitureDef(arrange.id) : undefined;
-    if (def?.surface === 'floor') {
-      // The spot nearest the tap, within reach of it.
-      const reach = this.cssToCanvas(30) / this.cameras.main.zoom;
-      const near = FURNITURE_SPOTS.filter(spot => b.offsets[spot.floor] !== undefined).map(spot => {
-        const at = worldPoint(b, spot);
-        return { spot, d: Math.hypot((x - at.x) / Math.max(1, Math.min(spot.room, 220) / 2 + reach), (y - (at.y - 60)) / (140 + reach)) };
-      }).filter(({ d }) => d <= 1).sort((a, c) => a.d - c.d)[0];
-      if (near) {
-        const cell = spotCell(near.spot, def.w, def.h);
-        this.hooks.pointerDown((cell.col + def.w / 2) * CELL, FLOOR_Y + (cell.row + def.h) * CELL - 3);
-      }
-      return true;
-    }
-    if (b.offsets.ground === undefined) return true;
-    const game = plateToGameWall({ x, y: y - b.offsets.ground + FLOOR_ART.ground.top });
-    if (game) this.hooks.pointerDown(game.x, game.y);
+    // The spot nearest the tap, within reach of it.
+    const surface = furnitureDef(arrange.id ?? '')?.surface, reach = this.cssToCanvas(26) / this.cameras.main.zoom;
+    const near = FURNITURE_SPOTS.filter(spot => spot.surface === surface && b.offsets[spot.floor] !== undefined).map(spot => {
+      const at = worldPoint(b, spot);
+      const d = spot.box
+        ? Math.hypot((x - at.x) / (spot.box.w / 2 + reach), (y - at.y) / (spot.box.h / 2 + reach))
+        : Math.hypot((x - at.x) / (Math.min(spot.room, 220) / 2 + reach), (y - (at.y - 60)) / (140 + reach));
+      return { spot, d };
+    }).filter(({ d }) => d <= 1).sort((a, c) => a.d - c.d)[0];
+    if (near) this.hooks.arrangeSpot?.(near.spot.id);
     return true;
   }
 

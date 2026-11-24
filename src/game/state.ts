@@ -26,6 +26,7 @@ import {
 } from './data';
 import { DECOR, DECOR_SLOTS, STARTER_THEMES, decorDef, type DecorSlot } from './decor';
 import { bakeMorning, bulkCost, dayNeeds, fillBakePlan } from './economy';
+import { buildingSpot } from './building-spots';
 import { DEFAULT_ART_SPOT, STARTER_FURNITURE, canPlace, evictBlocked, furnitureDef, type Placed } from './furniture';
 import { REGIONS, mainTableCount, parseConstruction, type Construction, type RegionId } from './regions';
 
@@ -34,7 +35,7 @@ import { parseTaste, type TasteState } from './taste';
 import { emptyReviews, parseReputation, parseReviews, type Reputation, type ReviewSummary } from './reputation';
 
 export const SAVE_KEY = 'tiny-bean-cafe/save';
-export const SAVE_VERSION = 26;
+export const SAVE_VERSION = 27;
 
 export interface Look {
   skin: number;
@@ -69,6 +70,8 @@ export interface DecorState {
   /** Furniture out in the café, and how many of each are in storage. */
   placed: Placed[];
   stored: Record<string, number>;
+  /** Whether the furniture stands at the building's own spots, not on the pixel room's grid (save v27). */
+  building?: boolean;
 }
 
 /** Running totals for the business day in progress, shown in the end-of-day report. */
@@ -288,10 +291,18 @@ function parseDecor(value: unknown, base: DecorState): DecorState {
   let placed = base.placed;
   const stored: Record<string, number> = {};
   if (Array.isArray(d.placed)) {
-    // Spots are checked against the tables once the whole save is read (see deserialize).
+    // Spots are checked against the tables once the whole save is read (see deserialize). Each of the
+    // building's spots holds one piece that belongs there; any other claim to one ends in storage.
+    const taken = new Set<string>();
     placed = d.placed
       .filter((p): p is Placed => !!p && typeof p === 'object' && !!furnitureDef((p as Placed).id))
-      .map((p) => ({ id: p.id, col: Math.floor(num(p.col, -1, -1)), row: Math.floor(num(p.row, -1, -1)) }));
+      .map((p) => {
+        const spot = typeof p.spot === 'string' ? buildingSpot(p.spot) : undefined;
+        if (p.spot === undefined) return { id: p.id, col: Math.floor(num(p.col, -1, -1)), row: Math.floor(num(p.row, -1, -1)) };
+        if (!spot || spot.surface !== furnitureDef(p.id)!.surface || taken.has(spot.id)) return { id: p.id, col: -1, row: -1 };
+        taken.add(spot.id);
+        return { id: p.id, col: -1, row: -1, spot: spot.id };
+      });
     const st = (d.stored ?? {}) as Record<string, unknown>;
     for (const [id, n] of Object.entries(st)) {
       const count = Math.floor(num(n, 0));
@@ -307,7 +318,7 @@ function parseDecor(value: unknown, base: DecorState): DecorState {
       else stored[id] = (stored[id] ?? 0) + 1;
     }
   }
-  return { owned: [...owned], equipped, placed, stored };
+  return { owned: [...owned], equipped, placed, stored, ...(d.building === true ? { building: true } : {}) };
 }
 
 /** Parses a save, falling back to defaults for anything missing or malformed. */

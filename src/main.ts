@@ -31,7 +31,7 @@ import type { LocationId } from './game/locations';
 import { locationName, showBranchMap } from './ui/branch-map';
 import { businessSeconds, formatBusinessClock, formatBusinessDuration } from './game/business-clock';
 import { expectedCustomers, menuItems, tipMultiplier, unlockedItems } from './game/economy';
-import { blocksNextTable, canPlace, evictBlocked, moveFurniture, placeFurniture, storeFurniture } from './game/furniture';
+import { blocksNextTable, canPlace, evictBlocked, moveFurniture, moveToSpot, openSpots, placeFurniture, settleInBuilding, standFurniture, storeFurniture } from './game/furniture';
 import { formatDuration, formatMoney, formatTransactionMoney } from './game/format';
 import { CAT_SPOT, MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, sceneHeight, setSceneHeight } from './game/layout';
 import { adjacentArea, buildShare, isAreaOpen, mainTableCount, regionOffset, type AreaId } from './game/regions';
@@ -202,6 +202,9 @@ const canvas = $<HTMLCanvasElement>('scene');
 // instead of the pixel room. A trial: its art loads from assets/, which only the dev server serves.
 const floorsView = new URLSearchParams(location.search).has('floors');
 const CafeRenderer = floorsView ? FloorsGame : CafeGame;
+/** The building has spots of its own for furniture: pieces on the pixel room's grid move to them. Returns how many found none. */
+const settleFurniture = () => (floorsView ? settleInBuilding(state) : 0);
+const unsettledFurniture = settleFurniture();
 const stage = $('stage');
 let roomViewport: RoomViewport | undefined;
 let mobileHud: MobileCafeHud | undefined;
@@ -488,8 +491,10 @@ function showArrange(): void {
   arrangeBar.hidden = !arrange;
   if (!arrange) return;
   const moving = arrange.mode === 'place' && arrange.moving >= 0;
-  arrangeText.textContent =
-    arrange.mode === 'browse' ? t('arrange.browse') : t('arrange.place', { name: decorName(arrange.id) });
+  const name = arrange.mode === 'place' ? decorName(arrange.id) : '';
+  arrangeText.textContent = arrange.mode === 'browse' ? t('arrange.browse')
+    : !floorsView ? t('arrange.place', { name })
+    : t(openSpots(state, arrange.id, arrange.moving).length ? 'arrange.spot' : 'arrange.full', { name });
   arrangeStore.hidden = !moving;
   arrangeStore.textContent = t('arrange.store');
   arrangeDone.textContent = arrange.mode === 'browse' ? t('arrange.done') : t('arrange.cancel');
@@ -498,6 +503,12 @@ function showArrange(): void {
 /** Picks a piece up: the ghost starts where it is, or at the first free spot for a new one. */
 function holdPiece(id: string, moving: number, fromBrowse: boolean): void {
   arrange = { mode: 'place', id, moving, fromBrowse };
+  if (floorsView) {
+    // A new piece starts at the free spot nearest the middle of the screen (floors-scene.ts).
+    scene.ghost = { id, col: -99, row: -99, skip: moving, spot: state.decor.placed[moving]?.spot };
+    showArrange();
+    return;
+  }
   let at = moving >= 0 ? state.decor.placed[moving] : null;
   const start = regionOffset(scene.area) / CELL;
   if (at && (at.col < start || at.col >= start + COLS)) at = null;
@@ -562,6 +573,19 @@ function arrangeTap(x: number, y: number): void {
     return;
   }
   for (let i = 0; i < 6; i++) scene.sparkle(x + (Math.random() - 0.5) * 16, y - Math.random() * 16);
+  releasePiece();
+}
+
+/** In the building: a spot was tapped for the piece in hand. */
+function arrangeSpot(spot: string): void {
+  if (arrange?.mode !== 'place') return;
+  if (!(arrange.moving >= 0 ? moveToSpot(state, arrange.moving, spot) : standFurniture(state, arrange.id, spot))) {
+    // Show where it was tapped, in red, so it's clear why.
+    scene.ghost = { ...scene.ghost!, spot };
+    toast(t('arrange.blocked'));
+    return;
+  }
+  sparkleRoom('main');
   releasePiece();
 }
 
@@ -1083,6 +1107,7 @@ function startBranch(location: LocationId): void {
   if (arrange) { arrange = null; scene.ghost = null; showArrange(); }
   playFlow.cancelPantry();
   state = next;
+  settleFurniture();
   sim.reset();
   moments.reset();
   scene.livingCats.reset();
@@ -1101,6 +1126,7 @@ panelRoot.addEventListener('open-branch', openBranchMap);
 function resetGame(): void {
   playFlow.cancelPantry();
   state = createInitialState(Date.now());
+  settleFurniture();
   storage.setPreference(HINT_KEY, '');
   guide.reset();
   sim.reset();
@@ -1479,6 +1505,8 @@ const cafe = new CafeRenderer(canvas, scene, sim, () => state, {
     else if (target.kind === 'partner') showPartners(state, sim, saveGame, target.id);
     else helpBrew();
   },
+  arrangeSpot,
+  arrangePiece: (index) => { if (arrange?.mode === 'browse' && state.decor.placed[index]) holdPiece(state.decor.placed[index].id, index, true); },
   loadingProgress: (loaded, total) => loading.progress(loaded, total),
 });
 // The floors view scrolls itself; the room zoom stays off there but keeps its place in the HUD.
@@ -1519,6 +1547,10 @@ waitForStartupReady(cafe.ready, document.fonts.ready, () => `${cafe.startupStatu
     if (movedFurniture > 0) {
       saveGame();
       toast(t('toast.furnitureMovedOnLoad', { n: movedFurniture }));
+    }
+    if (unsettledFurniture > 0) {
+      saveGame();
+      toast(t('toast.furnitureSettled', { n: unsettledFurniture }));
     }
     if (session.migratedStreetShops) {
       saveGame();

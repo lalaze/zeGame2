@@ -6,6 +6,8 @@
 // Points are pixels of their floor's plate (assets/generated/floor-sample-v1/kits/angle-plate-*),
 // with the floor they are on; `worldPoint` stacks them into one tall scene.
 
+import { BUILDING_SPOTS, storeys, type BuildingSpot } from '../../game/building-spots';
+
 export type FloorId = 'roof' | 'floor-3' | 'floor-2' | 'ground' | 'basement';
 export interface Point { x: number; y: number }
 export interface FloorPoint extends Point { floor: FloorId }
@@ -47,15 +49,9 @@ export interface Building {
   height: number;
 }
 
-/**
- * The floors a café has: the ground floor seats its first two tables, a floor above opens for
- * tables three to five and another for six to eight; the basement kitchen comes with the kitchen.
- */
+/** The floors a café has: the storeys of its tables (game/building-spots.ts), and the basement kitchen with the kitchen. */
 export function building(tables: number, kitchen: boolean): Building {
-  const floors: FloorId[] = ['roof'];
-  if (tables > 5) floors.push('floor-3');
-  if (tables > 2) floors.push('floor-2');
-  floors.push('ground');
+  const floors: FloorId[] = storeys(tables);
   if (kitchen) floors.push('basement');
   const offsets: Partial<Record<FloorId, number>> = {};
   let height = FLOOR_ART.roof.above ?? 0, street = 0;
@@ -112,10 +108,10 @@ export const BARISTAS: FloorPoint[] = [[770, 470], [1015, 462], [640, 470], [893
 export const SERVICE: Spot[] = BARISTAS.map(b => spot('ground', b.x, 566, GROUND_AISLE));
 /**
  * Where finished table orders wait for a server, and where idle servers stand: spread about the
- * floor, by the stairs, either side of the way in and by the window seat, clear of the cake display.
+ * floor either side of the way in, then along the cake display, clear of the furniture spots.
  */
 export const PASS = spot('ground', 1085, 600, GROUND_AISLE);
-export const SERVER_HOMES: Spot[] = [[1368, 684], [916, 716], [300, 744], [762, 716], [1240, 668], [1120, 660]]
+export const SERVER_HOMES: Spot[] = [[916, 716], [762, 716], [1036, 680], [1256, 668], [1150, 662], [650, 690]]
   .map(([x, y]) => spot('ground', x, y, GROUND_AISLE));
 /** The counter, the cake display and what stands on them hide the staff from the waist down. */
 export const COUNTER_FRONT: FloorPoint = { floor: 'ground', x: 0, y: 525 };
@@ -264,55 +260,41 @@ export const walkPace = (left: number, seconds: number): number =>
 // ------------------------------------------------------------ furniture
 
 /**
- * Where furniture goes in the building. The game keeps its own furniture grid (game/furniture.ts)
- * and its rules; this building shows floor pieces at a few open spots, each tied to one cell of
- * that grid, and wall pieces on the ground floor's back wall either side of the space above the
- * counter, where the game's two free stretches of wall map (the build clears the fixed decor there).
+ * Where each of the building's furniture spots (game/building-spots.ts) is on its floor's plate.
+ * A floor piece stands with its foot at x, y and may be `room` wide; a wall piece hangs in `box`.
+ * Floor spots keep off seats, the folded doors and the way in, and stand behind the paths people and cats take
+ * along the front edge; wall boxes keep under the awning and over the staff's heads.
  */
-export interface FurnitureSpot {
-  /** The grid column the piece is centred on and the row its front edge is in. */
-  col: number;
-  row: number;
-  floor: FloorId;
-  /** Where the piece stands on its floor's plate, and how wide it may be there. */
+export interface FurnitureSpot extends BuildingSpot {
+  floor: Exclude<FloorId, 'basement'>;
   x: number;
   y: number;
   room: number;
+  box?: { x: number; y: number; w: number; h: number };
 }
-export const FURNITURE_SPOTS: readonly FurnitureSpot[] = [
-  { col: 3, row: 17, floor: 'ground', x: 160, y: 868, room: 230 },
-  { col: 8, row: 17, floor: 'ground', x: 845, y: 872, room: 130 },
-  { col: 13, row: 17, floor: 'ground', x: 1468, y: 872, room: 230 },
-  { col: 26, row: 17, floor: 'floor-2', x: 180, y: 862, room: 250 },
-  { col: 31, row: 17, floor: 'floor-2', x: 470, y: 868, room: 270 },
-  { col: 36, row: 17, floor: 'floor-2', x: 1250, y: 868, room: 380 },
-];
-/** The cell (top-left of the footprint) a piece `w` by `h` cells takes at a spot. */
-export const spotCell = (spot: FurnitureSpot, w: number, h: number) => ({ col: spot.col - Math.floor(w / 2), row: spot.row - h + 1 });
-/** The spot a placed piece stands at, if its cell is one of theirs. */
-export function spotOf(col: number, row: number, w: number, h: number): FurnitureSpot | undefined {
-  return FURNITURE_SPOTS.find(spot => { const cell = spotCell(spot, w, h); return cell.col === col && cell.row === row; });
-}
-
-const WALL_ZONES = [{ game: [72, 112], plate: [520, 760] }, { game: [216, 248], plate: [770, 962] }];
-const GAME_WALL = [6, 46], WALL_PLATE = [60, 300];
-const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-
-/** A rectangle of the main café's wall (game pixels) on the ground floor's back wall, or null off the free stretches. */
-export function gameWallRectToPlate(r: { x: number; y: number; w: number; h: number }): { x: number; y: number; w: number; h: number } | null {
-  const zone = WALL_ZONES.find(z => r.x >= z.game[0] - .5 && r.x + r.w <= z.game[1] + .5);
-  if (!zone) return null;
-  const sx = (zone.plate[1] - zone.plate[0]) / (zone.game[1] - zone.game[0]), sy = (WALL_PLATE[1] - WALL_PLATE[0]) / (GAME_WALL[1] - GAME_WALL[0]);
-  return { x: zone.plate[0] + (r.x - zone.game[0]) * sx, y: WALL_PLATE[0] + (r.y - GAME_WALL[0]) * sy, w: r.w * sx, h: r.h * sy };
-}
-
-/** The game wall point under a point of the ground floor's plate, or null off the free stretches. */
-export function plateToGameWall(p: Point): Point | null {
-  if (p.y < WALL_PLATE[0] || p.y > WALL_PLATE[1]) return null;
-  const zone = WALL_ZONES.find(z => p.x >= z.plate[0] && p.x <= z.plate[1]);
-  if (!zone) return null;
-  return {
-    x: lerp(zone.game[0], zone.game[1], (p.x - zone.plate[0]) / (zone.plate[1] - zone.plate[0])),
-    y: lerp(GAME_WALL[0], GAME_WALL[1], (p.y - WALL_PLATE[0]) / (WALL_PLATE[1] - WALL_PLATE[0])),
-  };
-}
+type Where = [x: number, y: number, room: number] | { x: number; y: number; w: number; h: number };
+const SEATING_SPOTS: Record<string, Where> = {
+  'front-1': [156, 864, 190], 'front-2': [346, 866, 188], 'front-3': [540, 868, 190],
+  'front-4': [1110, 866, 190], 'front-5': [1480, 866, 190], window: [230, 690, 200],
+  'wall-1': { x: 548, y: 244, w: 124, h: 112 }, 'wall-2': { x: 910, y: 262, w: 114, h: 108 }, 'wall-3': { x: 326, y: 236, w: 78, h: 150 },
+};
+const SPOTS: Partial<Record<FloorId, Record<string, Where>>> = {
+  ground: {
+    left: [272, 872, 168], right: [1402, 874, 164],
+    'wall-1': { x: 560, y: 108, w: 190, h: 100 }, 'wall-2': { x: 770, y: 108, w: 180, h: 100 },
+  },
+  'floor-2': SEATING_SPOTS,
+  'floor-3': SEATING_SPOTS,
+  roof: {
+    'front-1': [425, 885, 190], 'front-2': [615, 887, 180], 'front-3': [1005, 885, 200], back: [775, 566, 150],
+    'wall-1': { x: 392, y: 256, w: 200, h: 108 }, 'wall-2': { x: 738, y: 250, w: 112, h: 108 },
+  },
+};
+export const FURNITURE_SPOTS: readonly FurnitureSpot[] = BUILDING_SPOTS.map(spot => {
+  const where = SPOTS[spot.storey]![spot.id.slice(spot.storey.length + 1)];
+  return Array.isArray(where)
+    ? { ...spot, floor: spot.storey, x: where[0], y: where[1], room: where[2] }
+    : { ...spot, floor: spot.storey, x: where.x + where.w / 2, y: where.y + where.h / 2, room: where.w, box: where };
+});
+const SPOT_BY_ID = new Map(FURNITURE_SPOTS.map(spot => [spot.id, spot]));
+export const furnitureSpot = (id: string | undefined): FurnitureSpot | undefined => (id === undefined ? undefined : SPOT_BY_ID.get(id));

@@ -100,6 +100,9 @@ export interface CafeHooks {
    * not use the Sim's floor plan (render/floors): the waiting moment, a named partner, or the café.
    */
   tapTarget?(target: CafeTapTarget): void;
+  /** While arranging in the building: the spot tapped for the piece in hand, and the placed piece tapped to pick up. */
+  arrangeSpot?(spot: string): void;
+  arrangePiece?(index: number): void;
 }
 
 export type CafeTapTarget = { kind: 'moment' } | { kind: 'partner'; id: string } | { kind: 'cafe' };
@@ -729,7 +732,7 @@ export class CafeScene extends Phaser.Scene {
         p.drawMenuBoard(state, this.motionPreference.matches ? 0 : t);
         state.decor.placed.forEach((piece, i) => {
           const def = furnitureDef(piece.id);
-          if (def?.surface === 'wall' && piece.col < COLS && i !== skip) p.withPlane(MAIN_WALL_PLANE, () => paintWallFurniture(p.ctx, piece.id, piece.col * CELL, WALL_TOP + piece.row * CELL, t, now));
+          if (def?.surface === 'wall' && piece.spot === undefined && piece.col < COLS && i !== skip) p.withPlane(MAIN_WALL_PLANE, () => paintWallFurniture(p.ctx, piece.id, piece.col * CELL, WALL_TOP + piece.row * CELL, t, now));
         });
         p.drawFloor(decor.floor, decor.rug, light, H);
         p.drawBackBar(state, decor.counter);
@@ -953,7 +956,7 @@ export class CafeScene extends Phaser.Scene {
     // Furniture the player placed, and the potted figs either side of the front door.
     state.decor.placed.forEach((p, i) => {
       const def = furnitureDef(p.id);
-      if (def?.surface !== 'floor' || i === skip) return;
+      if (def?.surface !== 'floor' || p.spot !== undefined || i === skip) return;
       const { cx, foot } = floorAnchor(def, p.col, p.row);
       this.floorPiece(p.id, cx, foot, DEPTH.floor + foot + 0.3);
     });

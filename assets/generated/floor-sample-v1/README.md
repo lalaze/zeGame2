@@ -63,12 +63,17 @@ the ground floor's café chair, which sets the scale of everything else on that 
 
     uv run --with pillow --with numpy python scripts/art-gen/floor-furniture-build.py
 
-cuts them into `build/furniture/<id>.webp` and `build/furniture/furniture.json`. The game's furniture
-grid and rules stay as they are: floor pieces show at six spots (`FURNITURE_SPOTS` in
-`src/render/floors/floors-layout.ts`, three downstairs and three on the seating floor), each tied to
-a cell that is free under the game's rules; wall pieces hang on the ground floor's back wall where the
-game's two free stretches of wall map. The decor build clears the fixed decor there and the potted
-plants in the front corners.
+cuts them into `build/furniture/<id>.webp` and `build/furniture/furniture.json`. The building has spots
+of its own for them (`src/game/building-spots.ts`: what may stand where; `FURNITURE_SPOTS` in
+`src/render/floors/floors-layout.ts`: where each is on its plate), one piece each, on every storey but
+the basement: 6 on the floor and 4 on the wall with two tables, 12 and 7 from three, 18 and 10 from six.
+A piece at one is saved with its `spot` (save v27) and takes no cell of the pixel room's grid, so tables
+never push it out and the Sim walks through it; the pixel room (`?pixel`) does not draw it. Pieces still
+on the grid move in when the floors view opens (`settleInBuilding`): to where the building showed them
+before, else the first free spot, the cosiest first; those left over go to storage. Pieces are drawn no
+wider than their spot. If a plate, the awning, the folded doors or the seats move, check the spots
+against them (`floors-layout.test.ts`, `building-spots.test.ts`). The decor build clears the fixed decor
+on the ground floor's back wall and the potted plants in the front corners.
 
 ## The building's frame and outer walls
 
