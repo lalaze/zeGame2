@@ -1,4 +1,5 @@
-// Runs all Godot B0 automated tests (GDScript headless suite + TS data/font drift tests).
+// Runs the Godot tests: data drift, save files, the game as it starts, and everything against TypeScript (the long
+// comparisons in their quick form; `npm run godot:lockstep` and `npm run godot:session` run all of them).
 // Exits non-zero on any failure.
 import { existsSync } from 'node:fs';
 import { join, resolve } from 'node:path';
@@ -21,12 +22,11 @@ function run(cmd, args, label) {
   }
 }
 
-function runGodotTests() {
-  const label = 'Godot GDScript unit & simulation tests';
+function runGodotTests(script, label, summary) {
   console.log(`\n==> ${label}`);
   const res = spawnSync(
     GODOT_BIN,
-    ['--headless', '--path', GODOT_DIR, '--script', 'res://tests/run_tests.gd'],
+    ['--headless', '--path', GODOT_DIR, '--script', `res://tests/${script}`],
     { cwd: ROOT, stdio: ['ignore', 'pipe', 'pipe'], encoding: 'utf8' },
   );
   const stdout = res.stdout ?? '';
@@ -53,9 +53,9 @@ function runGodotTests() {
     process.exit(1);
   }
 
-  const summaryMatch = stdout.match(/^GODOT_TESTS_SUMMARY:\s+passed=(\d+)\s+failed=(\d+)\s*$/m);
+  const summaryMatch = stdout.match(new RegExp(`^${summary}:\\s+passed=(\\d+)\\s+failed=(\\d+)\\s*$`, 'm'));
   if (!summaryMatch) {
-    console.error(`${label} failed: missing GODOT_TESTS_SUMMARY line (process may have exited early)`);
+    console.error(`${label} failed: missing ${summary} line (process may have exited early)`);
     process.exit(1);
   }
   const passed = Number(summaryMatch[1]);
@@ -70,12 +70,19 @@ if (!existsSync(join(GODOT_DIR, '.godot'))) {
   run(GODOT_BIN, ['--headless', '--path', GODOT_DIR, '--import'], 'Godot headless import');
 }
 
-runGodotTests();
+runGodotTests('run_store_tests.gd', 'Save files', 'STORE_SUMMARY');
+runGodotTests('run_app_tests.gd', 'The game as it starts', 'APP_SUMMARY');
 
 run(
   'npx',
-  ['vitest', 'run', 'scripts/godot-data.test.ts'],
+  ['vitest', 'run', 'scripts/godot-fonts.test.ts', 'scripts/godot-rules-data.test.ts'],
   'TS data drift & font charset coverage tests',
 );
+
+run('node', ['scripts/godot-parity.mjs'], 'TS <-> GDScript rules parity');
+run('node', ['scripts/godot-lockstep.mjs', '--quick'], 'Simulation step by step');
+run('node', ['scripts/godot-session.mjs', '--quick'], 'Careers as main.ts plays them');
+run('node', ['scripts/godot-view.mjs'], 'The building as the floors view draws it');
+run('node', ['scripts/godot-ui.mjs'], 'The screens as the page shows them');
 
 console.log('\nAll godot:test checks passed.');

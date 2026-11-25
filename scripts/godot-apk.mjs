@@ -1,6 +1,9 @@
-// Exports the Godot B0 Android debug APK into gitignored `godot/build/`.
-// Does NOT download export templates; fails cleanly if templates are not yet installed.
-import { existsSync, mkdirSync, statSync } from 'node:fs';
+// Exports the app into gitignored `godot/build/`.
+//   npm run godot:apk               Android arm64-v8a, debug
+//   npm run godot:apk -- --release  Android arm64-v8a, release, signed with the same debug key: it installs over the other
+//   npm run godot:ios               the Xcode project (`godot/build/ios/`), to build and sign in Xcode
+// Needs Godot 4.7.2's export templates; does not download them.
+import { existsSync, mkdirSync, readFileSync, rmSync, statSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -8,61 +11,55 @@ import { spawnSync } from 'node:child_process';
 const ROOT = resolve(import.meta.dirname, '..');
 const GODOT_DIR = join(ROOT, 'godot');
 const BUILD_DIR = join(GODOT_DIR, 'build');
-const APK_OUT = join(BUILD_DIR, 'tiny-bean-cafe-b0.apk');
 const GODOT_BIN = process.env.GODOT_BIN || '/opt/homebrew/bin/godot';
-const TEMPLATES_DIR = join(
-  homedir(),
-  'Library/Application Support/Godot/export_templates/4.7.2.stable',
-);
+const GODOT_HOME = join(homedir(), 'Library/Application Support/Godot');
+const ios = process.argv.includes('--ios'), release = process.argv.includes('--release');
+const template = join(GODOT_HOME, 'export_templates/4.7.2.stable', ios ? 'ios.zip' : release ? 'android_release.apk' : 'android_debug.apk');
+const out = join(BUILD_DIR, ios ? 'ios/TinyBeanCafe.xcodeproj' : release ? 'tiny-bean-cafe-release.apk' : 'tiny-bean-cafe.apk');
 
-const debugTemplate = join(TEMPLATES_DIR, 'android_debug.apk');
-if (!existsSync(debugTemplate)) {
-  console.error(`Android export template not found: ${debugTemplate}`);
-  console.error('Install Godot 4.7.2.stable export templates first, then re-run `npm run godot:apk`.');
+function stop(...why) {
+  console.error(...why);
+  process.exit(1);
+}
+
+function run(cmd, args, env = {}) {
+  const done = spawnSync(cmd, args, { cwd: ROOT, stdio: 'inherit', env: { ...process.env, ...env } });
+  if (done.error) stop(done.error.message);
+  if (done.status !== 0) process.exit(done.status ?? 1);
+}
+
+/** The key the editor signs debug builds with, for the release build too. */
+function releaseKey() {
+  const settings = readFileSync(join(GODOT_HOME, 'editor_settings-4.7.tres'), 'utf8');
+  const of = (name) => settings.match(new RegExp(`export/android/${name} = "(.*)"`))?.[1];
+  const path = of('debug_keystore');
+  if (!path || !existsSync(path)) stop('No debug keystore in the editor settings.');
+  return { GODOT_ANDROID_KEYSTORE_RELEASE_PATH: path, GODOT_ANDROID_KEYSTORE_RELEASE_USER: of('debug_keystore_user') ?? 'androiddebugkey', GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD: of('debug_keystore_pass') ?? 'android' };
+}
+
+if (!existsSync(template)) {
+  console.error(`Export template not found: ${template}`);
+  console.error('Install Godot 4.7.2.stable export templates first, then run this again.');
   process.exit(2);
 }
-
-// Ensure synced art & data exist before exporting
-const syncRes = spawnSync('node', [join(ROOT, 'scripts/godot-sync.mjs')], {
-  cwd: ROOT,
-  stdio: 'inherit',
-});
-if (syncRes.status !== 0) process.exit(syncRes.status ?? 1);
-
-// Ensure Godot resource import cache is up to date
-const impRes = spawnSync(GODOT_BIN, ['--headless', '--path', GODOT_DIR, '--import'], {
-  cwd: ROOT,
-  stdio: 'inherit',
-});
-if (impRes.status !== 0) process.exit(impRes.status ?? 1);
-
-mkdirSync(BUILD_DIR, { recursive: true });
-const expRes = spawnSync(
-  GODOT_BIN,
-  ['--headless', '--path', GODOT_DIR, '--export-debug', 'Android', 'build/tiny-bean-cafe-b0.apk'],
-  { cwd: ROOT, stdio: 'inherit' },
-);
-if (expRes.status !== 0) process.exit(expRes.status ?? 1);
-
-if (!existsSync(APK_OUT)) {
-  console.error(`Expected APK not found at ${APK_OUT}`);
-  process.exit(1);
+// The art and data, and the engine's own copies of them.
+run('node', [join(ROOT, 'scripts/godot-sync.mjs')]);
+run(GODOT_BIN, ['--headless', '--path', GODOT_DIR, '--import']);
+mkdirSync(join(out, '..'), { recursive: true });
+if (!ios) rmSync(out, { force: true });
+run(GODOT_BIN, ['--headless', '--path', GODOT_DIR, release ? '--export-release' : '--export-debug', ios ? 'iOS' : 'Android', out], release && !ios ? releaseKey() : {});
+if (!existsSync(out)) stop(`Nothing was exported to ${out}`);
+if (ios) {
+  console.log(`Xcode project: ${out}`);
+  process.exit(0);
 }
 
-// Verify test scripts and godot/tests/ were NOT packaged into the APK
-const listRes = spawnSync('unzip', ['-Z1', APK_OUT], { cwd: ROOT, encoding: 'utf8' });
-if (listRes.status !== 0) {
-  console.error('Failed to inspect APK contents with unzip:', listRes.stderr);
-  process.exit(1);
-}
-const apkEntries = listRes.stdout.split('\n').filter(Boolean);
-const leakedTests = apkEntries.filter(
-  (entry) => /(^|\/)tests\//i.test(entry) || /run_tests|run_baseline/i.test(entry),
-);
-if (leakedTests.length > 0) {
-  console.error('ERROR: Test files leaked into APK:', leakedTests);
-  process.exit(1);
-}
-
-const sizeMb = (statSync(APK_OUT).size / (1024 * 1024)).toFixed(2);
-console.log(`APK exported: ${APK_OUT} (${sizeMb} MB, ${apkEntries.length} entries, 0 test files)`);
+// Tests stay out of the app, and what it cannot start without is in it.
+const list = spawnSync('unzip', ['-Z1', out], { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 << 20 });
+if (list.status !== 0) stop('The APK cannot be read:', list.stderr);
+const entries = list.stdout.split('\n').filter(Boolean);
+const leaked = entries.filter((e) => /(^|\/)tests\//i.test(e) || /\/(run|bench)_\w+\.gd/i.test(e) || /\.parity/.test(e));
+if (leaked.length > 0) stop('Tests are in the APK:', leaked);
+const missing = ['assets/scenes/cafe.tscn', 'assets/data/rules.json', 'assets/data/locale-zh.json', 'assets/data/locale-en.json', 'assets/icudt_godot.dat', 'lib/arm64-v8a/libgodot_android.so'].filter((e) => !entries.includes(e) && !entries.includes(`${e}.remap`));
+if (missing.length > 0) stop('Missing from the APK:', missing);
+console.log(`APK: ${out} (${(statSync(out).size / (1024 * 1024)).toFixed(1)} MB, ${entries.length} entries)`);

@@ -1,20 +1,11 @@
-// Syncs floor-sample-v1 art (full + half-size presets), TS-derived JSON data,
-// and deterministic subsetted Nunito + Noto Sans SC fonts into `godot/`.
+// Syncs the building's art (full and half size), the rules' data and the words from TypeScript,
+// and deterministic subsets of Nunito and Noto Sans SC into `godot/`.
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { createServer } from 'vite';
 import subsetFont from 'subset-font';
-import {
-  buildGameData,
-  buildI18nData,
-  buildLayoutData,
-  collectNunitoChars,
-  collectRequiredChars,
-  isCjkCodepoint,
-  readTsSources,
-  readTtfCodepoints,
-} from './godot-data-export.mjs';
+import { collectNunitoChars, collectRequiredChars, isCjkCodepoint, readTtfCodepoints } from './godot-fonts.mjs';
+import { exportRulesJson } from './godot-rules-export.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const SRC_ART = join(ROOT, 'assets/generated/floor-sample-v1/build');
@@ -50,206 +41,68 @@ function copyIfNewer(src, dst) {
   return true;
 }
 
-async function loadTsModules() {
-  const server = await createServer({
-    root: ROOT,
-    logLevel: 'error',
-    server: { middlewareMode: true },
-    appType: 'custom',
-  });
-  try {
-    const [data, economy, state, clock, traffic, sim, customerCast, gameLayout, layout, decorLayers, floorsUpgrades] = await Promise.all([
-      server.ssrLoadModule('/src/game/data.ts'),
-      server.ssrLoadModule('/src/game/economy.ts'),
-      server.ssrLoadModule('/src/game/state.ts'),
-      server.ssrLoadModule('/src/game/business-clock.ts'),
-      server.ssrLoadModule('/src/game/traffic.ts'),
-      server.ssrLoadModule('/src/game/sim.ts'),
-      server.ssrLoadModule('/src/game/customer-cast.ts'),
-      server.ssrLoadModule('/src/game/layout.ts'),
-      server.ssrLoadModule('/src/render/floors/floors-layout.ts'),
-      server.ssrLoadModule('/src/render/floors/floors-decor-layers.ts'),
-      server.ssrLoadModule('/src/render/floors/floors-upgrades.ts'),
-    ]);
-    return { data, economy, state, clock, traffic, sim, customerCast, gameLayout, layout, decorLayers, floorsUpgrades };
-  } finally {
-    await server.close();
-  }
+/** What only the screens show (the street, the branch map, the lists' thumbnails): full size only. */
+const SCREENS = ['street/', 'map/', 'thumbs/'];
+
+/** The app's icons: in the game, on the phone's home screen, and what Android cuts to its own shape. */
+const APP_ICONS = [['icon-512.png', 'app-icon.png'], ['icon-192.png', 'app-icon-192.png'], ['icon-maskable-512.png', 'app-icon-maskable.png']];
+
+/** The picture while the app starts, as PNG: the engine shows it before it can read WebP. */
+function syncLoadingPicture() {
+  const from = join(SRC_ART, 'app/loading.webp'), to = join(FULL_ART, 'app-loading.png');
+  if (existsSync(to) && statSync(to).mtimeMs >= statSync(from).mtimeMs) return;
+  execFileSync('uv', ['run', '--with', 'pillow', 'python', '-c', 'import sys\nfrom PIL import Image\nImage.open(sys.argv[1]).convert("RGBA").save(sys.argv[2], "PNG")', from, to]);
 }
 
-function syncArtFiles(equippedDecor) {
-  const sheets = JSON.parse(readFileSync(join(SRC_ART, 'sheets.json'), 'utf8'));
-  const decorManifest = JSON.parse(readFileSync(join(SRC_ART, 'decor/decor.json'), 'utf8'));
-  const frameManifest = JSON.parse(readFileSync(join(SRC_ART, 'frame/frame.json'), 'utf8'));
-  const piecesManifest = JSON.parse(readFileSync(join(SRC_ART, 'upgrades/pieces.json'), 'utf8'));
-  const fxManifest = JSON.parse(readFileSync(join(SRC_ART, 'fx/fx.json'), 'utf8'));
-  const itemsManifest = JSON.parse(readFileSync(join(SRC_ART, 'fx/items.json'), 'utf8'));
-  const iconsManifest = JSON.parse(readFileSync(join(SRC_ART, 'icons/icons.json'), 'utf8'));
-
-  const regularImages = new Set();
-  const stripImages = new Map();
-
-  const wantedSheets = [
-    'owner',
-    'barista',
-    'cook-chef',
-    'cook-scarf',
-    'guest-beret',
-    'guest-beret-moves',
-    'guest-hoodie',
-    'guest-hoodie-moves',
-    'guest-cardigan',
-    'guest-cardigan-moves',
-    'guest-curls',
-    'guest-curls-moves',
-  ];
-  for (let i = 0; i < 36; i++) {
-    const id = `cast-${String(i).padStart(2, '0')}`;
-    wantedSheets.push(id, `${id}-moves`);
-  }
-  const exportedSheets = {};
-  for (const key of wantedSheets) {
-    const meta = sheets[key];
-    if (!meta) throw new Error(`Missing sheet metadata for ${key}`);
-    exportedSheets[key] = meta;
-    stripImages.set(`${key}.webp`, { key, ...meta });
-  }
-
-  for (const name of [
-    'attic',
-    'sky',
-    'pillar',
-    'beam',
-    'street',
-    'soil',
-    'awning',
-    'door-left',
-    'door-right',
-    'step',
-    'side-window',
-    'stairs-hall',
-    'stairs-rail',
-  ]) {
-    regularImages.add(`frame/${name}.webp`);
-  }
-
-  for (const floorKind of ['1f', '2f']) {
-    const entry = decorManifest[floorKind];
-    for (const p of [...entry.back, ...entry.front]) regularImages.add(p);
-    for (const [slot, items] of Object.entries(entry.slots)) {
-      const chosen = equippedDecor[slot];
-      if (chosen && items[chosen]) regularImages.add(items[chosen]);
-    }
-  }
-
-  regularImages.add('upgrades/basement-bare.webp');
-  regularImages.add('upgrades/pieces.webp');
-  regularImages.add('fx/fx.webp');
-  regularImages.add('fx/items.webp');
-
-  for (const file of readdirSync(join(SRC_ART, 'icons')).sort()) {
-    if ((file.startsWith('item-') || file.startsWith('ing-')) && file.endsWith('.webp')) {
-      regularImages.add(`icons/${file}`);
-    }
-  }
-
-  let copied = 0;
-  if (copyIfNewer(join(SRC_ART, 'app/icon-512.png'), join(FULL_ART, 'app-icon.png'))) copied++;
-  for (const rel of [...regularImages, ...stripImages.keys()]) {
-    if (copyIfNewer(join(SRC_ART, rel), join(FULL_ART, rel))) copied++;
-  }
-  writeJson(join(FULL_ART, 'sheets.json'), exportedSheets);
-  writeJson(join(FULL_ART, 'decor/decor.json'), decorManifest);
-  writeJson(join(FULL_ART, 'frame/frame.json'), frameManifest);
-  writeJson(join(FULL_ART, 'upgrades/pieces.json'), piecesManifest);
-  writeJson(join(FULL_ART, 'fx/fx.json'), fxManifest);
-  writeJson(join(FULL_ART, 'fx/items.json'), itemsManifest);
-  writeJson(join(FULL_ART, 'icons/icons.json'), iconsManifest);
-  writeJson(join(FULL_ART, 'preset.json'), { preset: 'full', scale: 1.0 });
-
-  const halfSheets = {};
-  const resizeJobs = [];
-  for (const [rel, meta] of stripImages.entries()) {
-    const newFw = Math.max(1, Math.round(meta.frameWidth / 2));
-    const newFh = Math.max(1, Math.round(meta.frameHeight / 2));
-    halfSheets[meta.key] = { frameWidth: newFw, frameHeight: newFh, frames: meta.frames };
-    const src = join(SRC_ART, rel);
-    const dst = join(HALF_ART, rel);
-    if (!existsSync(dst) || statSync(dst).mtimeMs < statSync(src).mtimeMs) {
-      resizeJobs.push({
-        type: 'strip',
-        src,
-        dst,
-        fw: meta.frameWidth,
-        fh: meta.frameHeight,
-        frames: meta.frames,
-        newFw,
-        newFh,
-      });
-    }
-  }
-  for (const rel of regularImages) {
-    const src = join(SRC_ART, rel);
-    const dst = join(HALF_ART, rel);
-    if (!existsSync(dst) || statSync(dst).mtimeMs < statSync(src).mtimeMs) {
-      resizeJobs.push({ type: 'image', src, dst });
-    }
-  }
-
-  const scaleObj = (o) => {
-    const out = {};
-    for (const [k, v] of Object.entries(o)) {
-      if (typeof v === 'number') out[k] = Math.round(v / 2);
-      else if (Array.isArray(v)) out[k] = v.map((n) => (typeof n === 'number' ? Math.round(n / 2) : n));
-      else if (v && typeof v === 'object') out[k] = scaleObj(v);
-      else out[k] = v;
-    }
-    return out;
+/** Every picture under build/ the game draws, full size and half size, and every manifest (always in full-size pixels). */
+function syncArtFiles() {
+  const listed = readdirSync(SRC_ART, { recursive: true }).map((f) => String(f).replaceAll('\\', '/')).sort();
+  const pictures = listed.filter((f) => f.endsWith('.webp')), manifests = listed.filter((f) => f.endsWith('.json'));
+  const json = (f) => JSON.parse(readFileSync(join(SRC_ART, f), 'utf8'));
+  const sheets = json('sheets.json'), staff = json('staff/staff.json'), cats = json('cats/cats.json');
+  /** The cells of a strip, and how many rows of them (a mask has two). */
+  const cells = (f) => {
+    const key = f.slice(0, -5), style = staff.styles[key.replace(/^staff\/|-mask$/g, '')] ?? staff.cooks[key.replace(/^staff\/|-mask$/g, '')];
+    if (key.startsWith('staff/') && style) return { ...style, rows: key.endsWith('-mask') ? 2 : 1 };
+    if (key.startsWith('cats/') && cats.cats[key.slice(5)]) return { ...cats.cats[key.slice(5)], frames: cats.frames.length, rows: 1 };
+    return sheets[key] ? { ...sheets[key], rows: 1 } : null;
   };
-  writeJson(join(HALF_ART, 'sheets.json'), halfSheets);
-  writeJson(join(HALF_ART, 'decor/decor.json'), decorManifest);
-  writeJson(join(HALF_ART, 'frame/frame.json'), scaleObj(frameManifest));
-  writeJson(join(HALF_ART, 'upgrades/pieces.json'), scaleObj(piecesManifest));
-  writeJson(join(HALF_ART, 'fx/fx.json'), scaleObj(fxManifest));
-  writeJson(join(HALF_ART, 'fx/items.json'), scaleObj(itemsManifest));
-  writeJson(join(HALF_ART, 'icons/icons.json'), iconsManifest);
-  writeJson(join(HALF_ART, 'preset.json'), { preset: 'half', scale: 0.5 });
-
-  if (resizeJobs.length > 0) {
-    const pyScript = `
+  let copied = 0;
+  for (const [from, to] of APP_ICONS) if (copyIfNewer(join(SRC_ART, 'app', from), join(FULL_ART, to))) copied++;
+  syncLoadingPicture();
+  for (const f of pictures) if (copyIfNewer(join(SRC_ART, f), join(FULL_ART, f))) copied++;
+  for (const f of manifests) copyIfNewer(join(SRC_ART, f), join(GODOT_DIR, 'art/data', f));
+  const jobs = pictures.flatMap((f) => {
+    if (SCREENS.some((x) => f.startsWith(x))) return [];
+    const src = join(SRC_ART, f), dst = join(HALF_ART, f), strip = cells(f);
+    if (existsSync(dst) && statSync(dst).mtimeMs >= statSync(src).mtimeMs) return [];
+    return [{ src, dst, strip: strip && { fw: strip.frameWidth, fh: strip.frameHeight, frames: strip.frames, rows: strip.rows } }];
+  });
+  if (jobs.length > 0) {
+    const script = `
 import json, os, sys
 from PIL import Image
 
-jobs = json.loads(sys.stdin.read())
-for job in jobs:
+for job in json.loads(sys.stdin.read()):
     os.makedirs(os.path.dirname(job["dst"]), exist_ok=True)
     im = Image.open(job["src"]).convert("RGBA")
-    if job["type"] == "strip":
-        fw, fh, frames = job["fw"], job["fh"], job["frames"]
-        nfw, nfh = job["newFw"], job["newFh"]
-        out = Image.new("RGBA", (nfw * frames, nfh), (0, 0, 0, 0))
-        for i in range(frames):
-            cell = im.crop((i * fw, 0, (i + 1) * fw, fh))
-            cell = cell.resize((nfw, nfh), Image.Resampling.LANCZOS)
-            out.paste(cell, (i * nfw, 0))
-        out.save(job["dst"], "WEBP", quality=92, method=4)
+    strip = job["strip"]
+    if strip:
+        fw, fh = strip["fw"], strip["fh"]
+        # As floor(x + 0.5), the way Godot rounds the cells.
+        nw, nh = max(1, (fw + 1) // 2), max(1, (fh + 1) // 2)
+        out = Image.new("RGBA", (nw * strip["frames"], nh * strip["rows"]), (0, 0, 0, 0))
+        for row in range(strip["rows"]):
+            for i in range(strip["frames"]):
+                cell = im.crop((i * fw, row * fh, (i + 1) * fw, (row + 1) * fh))
+                out.paste(cell.resize((nw, nh), Image.Resampling.LANCZOS), (i * nw, row * nh))
     else:
-        nw = max(1, round(im.width / 2))
-        nh = max(1, round(im.height / 2))
-        out = im.resize((nw, nh), Image.Resampling.LANCZOS)
-        out.save(job["dst"], "WEBP", quality=92, method=4)
-print(f"Resized {len(jobs)} half-preset WebP files")
+        out = im.resize((max(1, round(im.width / 2)), max(1, round(im.height / 2))), Image.Resampling.LANCZOS)
+    out.save(job["dst"], "WEBP", quality=92, method=4)
 `;
-    const out = execFileSync('uv', ['run', '--with', 'pillow', 'python', '-c', pyScript], {
-      input: JSON.stringify(resizeJobs),
-      encoding: 'utf8',
-    });
-    process.stdout.write(out);
+    execFileSync('uv', ['run', '--with', 'pillow', 'python', '-c', script], { input: JSON.stringify(jobs), encoding: 'utf8' });
   }
-
-  console.log(
-    `godot/art synced: ${regularImages.size + stripImages.size} full (${copied} updated), ${resizeJobs.length} half generated`,
-  );
+  console.log(`godot/art synced: ${pictures.length} pictures (${copied} updated), ${jobs.length} halved, ${manifests.length} manifests`);
 }
 
 function instantiateStaticFont(ttfPath, weight) {
@@ -274,10 +127,10 @@ font.save(path)
   });
 }
 
-async function syncFonts(i18nData) {
+async function syncFonts() {
   ensureDir(FONTS_DIR);
-  const requiredText = collectRequiredChars(i18nData);
-  const nunitoChars = collectNunitoChars(i18nData);
+  const requiredText = collectRequiredChars(GODOT_DIR);
+  const nunitoChars = collectNunitoChars(requiredText);
   const nunitoOut = join(FONTS_DIR, 'nunito-latin.ttf');
   const notoOut = join(FONTS_DIR, 'noto-sans-sc.ttf');
   const nunitoOfl = join(FONTS_DIR, 'OFL-Nunito.txt');
@@ -333,22 +186,11 @@ async function syncFonts(i18nData) {
 }
 
 async function main() {
-  const mods = await loadTsModules();
-  const sources = readTsSources(ROOT);
-  const zhRaw = JSON.parse(readFileSync(join(ROOT, 'src/locales/zh.json'), 'utf8'));
-  const enRaw = JSON.parse(readFileSync(join(ROOT, 'src/locales/en.json'), 'utf8'));
-
-  const gameData = buildGameData(mods, sources);
-  const layoutData = buildLayoutData(mods, sources);
-  const i18nData = buildI18nData(mods, zhRaw, enRaw);
-
-  writeJson(join(DATA_DIR, 'game.json'), gameData);
-  writeJson(join(DATA_DIR, 'layout.json'), layoutData);
-  writeJson(join(DATA_DIR, 'i18n.json'), i18nData);
-  console.log('godot/data/*.json exported from TS sources');
-
-  await syncFonts(i18nData);
-  syncArtFiles(gameData.starterState.equippedDecor);
+  await exportRulesJson(ROOT);
+  console.log('godot/data/rules.json exported from TS sources');
+  for (const locale of ['zh', 'en']) copyFileSync(join(ROOT, `src/locales/${locale}.json`), join(DATA_DIR, `locale-${locale}.json`));
+  await syncFonts();
+  syncArtFiles();
 }
 
 main().catch((err) => {

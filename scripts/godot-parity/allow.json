@@ -1,0 +1,217 @@
+{
+ "modules": [
+  "data",
+  "building-spots",
+  "business-clock",
+  "locations",
+  "chain-bonuses",
+  "signature-drinks",
+  "flavors",
+  "conditions",
+  "customer-cast",
+  "customer-demand",
+  "regions",
+  "layout",
+  "furniture",
+  "decor",
+  "navigation",
+  "traffic",
+  "taste",
+  "reputation",
+  "regular-wishes",
+  "regular-guests-content",
+  "trial-sales",
+  "partners",
+  "partner-stories",
+  "pets",
+  "format",
+  "promotion",
+  "orders",
+  "manager",
+  "room-projects",
+  "streets",
+  "chain",
+  "styles",
+  "kitchen",
+  "cat-gifts",
+  "regular-guests",
+  "guest-memories",
+  "goals",
+  "milestones",
+  "first-service",
+  "day",
+  "state",
+  "economy",
+  "settlement-advice",
+  "recovery",
+  "operations",
+  "sim",
+  "sim-snapshot",
+  "moments",
+  "living-cats",
+  "save-session",
+  "storage"
+ ],
+ "functions": {
+  "conditions.conditionPatience": {
+   "outcomes": 2,
+   "reason": "只有 0 和 15 两种耐心"
+  },
+  "layout.setKitchenLevel": {
+   "outcomes": 1,
+   "reason": "没有返回值也不改参数；改动的模块状态随每个用例一起比较（g）"
+  },
+  "layout.setSceneHeight": {
+   "outcomes": 1,
+   "reason": "没有返回值也不改参数；改动的模块状态随每个用例一起比较（g）"
+  },
+  "locations.specialtyPriceMultiplier": {
+   "outcomes": 2,
+   "reason": "只有 1 和 1.2 两种"
+  },
+  "locations.specialtyWeight": {
+   "outcomes": 2,
+   "reason": "只有 1 和 1.5 两种"
+  },
+  "partners.partnerTraySize": {
+   "outcomes": 2,
+   "reason": "只有 1 和 3 两种"
+  },
+  "regular-wishes.minaReservedTable": {
+   "outcomes": 2,
+   "reason": "只有 0 号桌和没有两种"
+  },
+  "streets.streetYieldMultiplier": {
+   "outcomes": 2,
+   "reason": "只有 1 和 1.2 两种"
+  },
+  "styles.styleArrivalMultiplier": {
+   "outcomes": 2,
+   "reason": "只有 1 和 0.9 两种"
+  },
+  "styles.styleComboChance": {
+   "outcomes": 2,
+   "reason": "只有默认值和 0.5 两种"
+  },
+  "styles.stylePrepMultiplier": {
+   "outcomes": 2,
+   "reason": "只有 1 和 1.12 两种"
+  },
+  "styles.styleServerMultiplier": {
+   "outcomes": 2,
+   "reason": "只有 1 和 1.15 两种"
+  },
+  "styles.styleStationMultiplier": {
+   "outcomes": 2,
+   "reason": "只有 1 和 0.9 两种"
+  },
+  "styles.styleTablePatienceExtra": {
+   "outcomes": 2,
+   "reason": "只有 0 和 10 两种"
+  },
+  "cat-gifts.giftInterval": {
+   "outcomes": 2,
+   "reason": "只有有无“窗台”特权两种"
+  }
+ },
+ "constants": {
+  "save-session.SAVE_LOCK": "浏览器多标签页锁的名字；手机上同时只有一个游戏在跑"
+ },
+ "branches": {
+  "layout:105: ?? []": "roomRoute 的兜底：任意两个区域之间都有路",
+  "flavors:81: ?? []": "口味表的兜底：菜单上每道菜都有口味",
+  "conditions:67: ?? CONDITIONS[0]": "天气概率之和覆盖 [0,1)，抽签不会落空",
+  "kitchen:317: ?? 0": "shelveBatch 前面已要求在制数量不小于 n，n 至少为 1，此处必有值",
+  "economy:89: n--;": "对数取整误差的保护循环，几万组随机数据没有触发",
+  "economy:359: ? SERVER_TRIPS.length - 1": "全部房间都开时平均路程也不超过表的最后一档",
+  "economy:568: : morning": "前一行已跳过没有厨房的烘焙品",
+  "economy:602: : 0": "前面已在缺口为 0 时返回，此处 q.cost 必大于 0",
+  "styles:148: ?? Infinity": "前一步已确认每样都是咖啡或茶，必有制作时间",
+  "milestones:110: ?? 0": "调用前都检查过章节序号在范围内",
+  "day:75: ?? 0": "bestSeller 就来自 today.sales 的键",
+  "regular-guests:122: return { order, extra };": "常客的偏爱饮品都在饮品分类里",
+  "recovery:185: return false;": "最便宜的食材 1 元，这里现金必小于 1 元，缺口不可能买得起",
+  "recovery:193: catch { return false; }": "GDScript 没有异常；Godot 先检查结构再计算",
+  "recovery:181: ?? 0": "inProduction 里没有 undefined 值",
+  "kitchen:263: ?? 0": "dayDemand 的键就是菜单，烘焙品必在其中",
+  "kitchen:265: ?? 0": "同上",
+  "economy:251: ?? 0": "只对非特调菜品取等级，items 里必有",
+  "day:47: ?? 0": "dayDemand 的键就是菜单",
+  "furniture:306: ?? 0": "摆着的都是已知家具",
+  "settlement-advice:48: ?? 0": "stale 里没有 undefined",
+  "settlement-advice:125: ?? 0": "前面已要求 bakePlan[item] 大于 0",
+  "recovery:147: return false;": "家具多到放不下时的搜索剪枝，TS 没有导出这个函数；Godot 的同一搜索由 run_parity_selftest.gd 用暴力枚举验证",
+  "recovery:155: return false;": "家具多到放不下时的搜索剪枝，TS 没有导出这个函数；Godot 的同一搜索由 run_parity_selftest.gd 用暴力枚举验证",
+  "recovery:163: if (search(candidate.groupEnd, shortfall, occupied, 0)) return true; impossible.add(key); ": "家具多到放不下时的搜索剪枝，TS 没有导出这个函数；Godot 的同一搜索由 run_parity_selftest.gd 用暴力枚举验证"
+ },
+ "lockstepBranches": {
+  "living-cats:188: ?? 0": "每只猫入场时就设好了冷却时间",
+  "living-cats:215: : []": "没有宠物记录的猫在同一次 update 开头已经删掉",
+  "living-cats:237: { delete actor.interaction; return; }": "interaction 和 guestBindings 总是同时设置、同时删除",
+  "living-cats:250: { this.cancelGuestInteraction(actor, state); return; }": "走完路线的猫正好站在终点；布局一变这次互动已先被取消",
+  "living-cats:302: ?? []": "geometry 里每个区域都有",
+  "living-cats:318: ?? []": "geometry 里每个区域都有",
+  "living-cats:346: return null;": "roomRoute 的门口坐标正好在门的中线上",
+  "living-cats:350: ?? []": "geometry 里每个区域都有",
+  "living-cats:356: : null": "一条路线不会超过 100 个点",
+  "living-cats:400: ?? []": "被人挡住才会重新规划，没有人就不会走到这里",
+  "living-cats:432: : []": "没有宠物记录的猫在同一次 update 开头已经删掉",
+  "living-cats:443: ?? []": "geometry 里每个区域都有",
+  "living-cats:464: ?? \"watch\"": "有路线的猫总有到达后的动作",
+  "sim:312: ?? []": "navigationObstacles 里每个区域都有",
+  "sim:522: (r) => ({ ...r })": "MAIN_CUPBOARDS 目前是空表",
+  "sim:628: ?? []": "navigationObstacles 里每个区域都有",
+  "sim:657: return;": "菜单空了会先打烊，不再进客",
+  "sim:716: return;": "队列里的 id 都有对应的客人",
+  "sim:837: continue;": "队列里的 id 都有对应的客人",
+  "sim:955: ?? \"main\"": "店员总在某个区域里",
+  "sim:994: : null": "端着的盘子在这之前已按客人是否还在过滤",
+  "sim:1222: ?? \"main\"": "店员总在某个区域里",
+  "sim:1271: ?? 0": "营业中有试饮品就有 trialSales.active",
+  "sim:1280: return false;": "canOfferTrialTo 已经检查过同样的条件",
+  "sim:1335: : 0": "盘子的客人都有座位，座位都有区域",
+  "moments:218: ?? kinds[kinds.length - 1]": "随机数小于 1，权重减完必有一项为负",
+  "moments:255: ?? 0": "常客来店时一定已有进度记录",
+  "living-cats:341: return null;": "roomRoute 的相邻两站总有门相通"
+ },
+ "sessionBranches": {
+  "main-session:settleFurniture: : 0": "像素视图（?pixel）才走这边，Godot 只有楼房视图",
+  "main-session:fitCanvas: || 1": "浏览器的像素密度，Godot 自己处理",
+  "main-session:areaSelected: { arrange = null; scene.ghost = null; showArrange(); }": "楼房视图只会选中 main，main 总是开着；摆放中的家具由 B3 的摆放界面处理",
+  "main-session:areaSelected: holdPiece(arrange.id, arrange.moving, arrange.fromBrowse);": "楼房视图只会选中 main，main 总是开着；摆放中的家具由 B3 的摆放界面处理",
+  "main-session:makeGame: ?? 1": "按钮只有三档速度，找不到的情况不会发生",
+  "main-session:confirmStock: () => guide.confirmStock()": "新手引导的界面回调，B3",
+  "main-session:onClick: () => { showPanelTab(recommendedTab); if (advice.claimableGoal) $(\"goal\").querySelector(\"[": "结算单上打开管理面板的按钮，只动界面，B3",
+  "main-session:onDone: ?.()": "startOnboarding 没有别的调用者传 then",
+  "main-session:locateResident: else { regionsUI.select(actor.area); scene.focusResidentCat(id, reducedMotion.matches); }": "猫还没进楼房画面时 TS 才走这边（换房间、放大找猫），属于画面，B2 处理",
+  "main-session:openMoment 3: return;": "营业中、有猫的时刻时 tidy 不会返回空",
+  "main-session:makeGame: () => `${cafe.startupStatus}; ${loading.describe()}`": "网页启动等待的说明文字",
+  "main-session:makeGame: catch (error) { reject(error); }": "网页启动失败的处理",
+  "main-session:makeGame: () => $(\"loader\").remove()": "网页的加载画面",
+  "main-session:makeGame: (error) => { startupComplete = false; document.body.classList.remove(\"ready\"); clearInterv": "网页启动失败的处理",
+  "save-session:SaveSession: : new GuardedStorage(() => storage)": "main.ts 传进来的总是 GuardedStorage",
+  "save-session:SaveSession.storage: () => storage": "main.ts 传进来的总是 GuardedStorage",
+  "save-session:save: catch { return \"unavailable\"; }": "序列化自己的状态不会抛异常；Godot 没有异常",
+  "save-session:acquireSaveSession: throw new DOMException(\"Aborted\", \"AbortError\");": "浏览器多标签页的锁和页面离开时的取消，手机上没有",
+  "save-session:acquireSaveSession: return temporary();": "浏览器不支持锁时的退路，手机上没有",
+  "save-session:acquireSaveSession: : new GuardedStorage(() => storage)": "main.ts 传进来的总是 GuardedStorage",
+  "save-session:acquireSaveSession: throw error;": "浏览器多标签页的锁和页面离开时的取消，手机上没有",
+  "save-session:guarded: () => storage": "main.ts 传进来的总是 GuardedStorage"
+ },
+ "notPorted": {},
+ "elsewhere": {
+  "operations.operationStatus": "参数是正在跑的模拟；lockstep 每 10 步比较一次它的结果",
+  "moments.recommendOptions": "参数是正在跑的模拟和随机源；lockstep 通过 MomentDirector 每一步比较",
+  "moments.deliveryGift": "参数是随机源；lockstep 通过 MomentDirector 每一步比较",
+  "save-session.acquireSaveSession": "参数是存储和浏览器锁；会话对照每次启动都用它",
+  "save-session.watchSavePage": "只挂浏览器的 pagehide/pageshow 事件，没有移植；Godot 由 CoreGameSession.close 在退出时存档",
+  "state.consumeFurnitureMovesOnLoad": "读的是挂在状态对象上的弱引用；会话对照的导览里有旧存档",
+  "customer-cast.CustomerCastCycle": "类：parity 按调用序列比较（objects）",
+  "operations.OperationMonitor": "类：lockstep 每一步比较内部状态",
+  "sim.Sim": "类：lockstep 每一步比较内部状态，公开方法都要有人调用",
+  "moments.MomentDirector": "类：lockstep 每一步比较内部状态",
+  "living-cats.LivingCats": "类：lockstep 每一步比较内部状态",
+  "save-session.SaveSession": "类：会话对照按分支要求全部走到（sessionBranches）",
+  "storage.GuardedStorage": "类：会话对照按分支要求全部走到（sessionBranches）"
+ }
+}

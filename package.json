@@ -27,8 +27,15 @@
     "balance:routes:progression": "CAFESTYLE_PROGRESSION=1 vitest run scripts/cafe-style-progression.test.ts --silent=false --disableConsoleIntercept",
     "godot:sync": "node scripts/godot-sync.mjs",
     "godot:test": "node scripts/godot-test.mjs",
+    "godot:parity": "node scripts/godot-parity.mjs",
+    "godot:lockstep": "node scripts/godot-lockstep.mjs",
+    "godot:session": "node scripts/godot-session.mjs",
+    "godot:view": "node scripts/godot-view.mjs",
+    "godot:ui": "node scripts/godot-ui.mjs",
+    "godot:bench": "node scripts/godot-lockstep.mjs --bench",
     "godot:apk": "node scripts/godot-apk.mjs",
-    "godot:baseline": "GODOT_BASELINE=1 vitest run scripts/godot-baseline.test.ts --silent=false --disableConsoleIntercept"
+    "godot:ios": "node scripts/godot-apk.mjs --ios",
+    "godot:move": "node scripts/godot-move-save.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",

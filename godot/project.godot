@@ -10,13 +10,20 @@ config_version=5
 
 [application]
 
-config/name="Tiny Bean Café B0"
-run/main_scene="res://scenes/main.tscn"
+config/name="Tiny Bean Café"
+config/name_localized={
+"zh": "小豆咖啡馆"
+}
+config/version="0.4.0"
+run/main_scene="res://scenes/cafe.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://art/full/app-icon.png"
 config/auto_accept_quit=false
 config/quit_on_go_back=false
 run/delta_smoothing=false
+boot_splash/bg_color=Color(0.984314, 0.952941, 0.894118, 1)
+boot_splash/image="res://art/full/app-loading.png"
+boot_splash/stretch_mode=0
 
 [display]
 
@@ -25,10 +32,15 @@ window/size/viewport_height=915
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
+window/energy_saving/keep_screen_on=false
 
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+
+[internationalization]
+
+locale/include_text_server_data=true
 
 [rendering]
 
