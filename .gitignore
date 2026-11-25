@@ -54,3 +54,9 @@ src/assets/round-latin.woff2
 /docs/**/*.webm
 /docs/**/*.mp4
 /docs/**/*.zip
+
+# Godot B0 sample generated art, engine cache, font download cache, and APK exports
+/godot/.godot/
+/godot/art/
+/godot/build/
+/godot/.font-cache/

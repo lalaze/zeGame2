@@ -24,7 +24,11 @@
     "balance:restore": "node scripts/restore-economy-evidence.mjs",
     "balance:routes": "vitest run scripts/cafe-style-balance.test.ts --silent=false --disableConsoleIntercept",
     "balance:routes:full": "CAFE_STYLE_LAB=1 vitest run scripts/cafe-style-balance.test.ts --silent=false --disableConsoleIntercept",
-    "balance:routes:progression": "CAFESTYLE_PROGRESSION=1 vitest run scripts/cafe-style-progression.test.ts --silent=false --disableConsoleIntercept"
+    "balance:routes:progression": "CAFESTYLE_PROGRESSION=1 vitest run scripts/cafe-style-progression.test.ts --silent=false --disableConsoleIntercept",
+    "godot:sync": "node scripts/godot-sync.mjs",
+    "godot:test": "node scripts/godot-test.mjs",
+    "godot:apk": "node scripts/godot-apk.mjs",
+    "godot:baseline": "GODOT_BASELINE=1 vitest run scripts/godot-baseline.test.ts --silent=false --disableConsoleIntercept"
   },
   "devDependencies": {
     "@types/node": "^26.6.5",
