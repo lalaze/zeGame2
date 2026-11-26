@@ -12,9 +12,9 @@ import type { GameState } from '../../game/state';
 import type { CafeView } from '../cafe-view';
 import type { CafeHooks } from '../phaser/cafe-scene';
 import {
-  BARISTAS, COUNTER_FRONT, DISPLAY, DOOR, FLOOR_ART, LIFT_HATCH, LIFT_TOP, OVEN_MOUTH, PASS, QUEUE, SERVER_HOMES, SERVICE, STEAM,
-  FRAME, FURNITURE_SPOTS, PARCEL, TABLE_FRONT, WALK, WORLD_W, building, cookHome, furnitureSpot, kitchenPlace, kitchenSpot,
-  GROUND_SHIFT, STAIRS_HALL, STAIRS_RAIL, inWell, nextTableSpot, restFocus, route, stepsLength, tableSeats, walkPace, wellSink, worldPoint,
+  BARISTAS, COUNTER_FRONT, DISPLAY, DOOR, FLOOR_ART, FLOOR_TABLES, LIFT_HATCH, LIFT_TOP, OVEN_MOUTH, PASS, QUEUE, SERVICE, STEAM,
+  FRAME, FURNITURE_SPOTS, PARCEL, TABLE_FRONT, WALK, WORLD_W, baristaIdlePose, building, cookHome, furnitureSpot, kitchenPlace, kitchenSpot,
+  GROUND_SHIFT, STAIRS_HALL, STAIRS_RAIL, inWell, nextTableSpot, restFocus, route, serverHome, stepsLength, tableSeats, walkPace, wellSink, worldPoint,
   type Building, type FloorId, type FloorPoint, type FurnitureSpot, type KitchenPlace, type Spot, type Step,
 } from './floors-layout';
 import { BACK_LAYERS, FRONT_LAYERS, HALL_DEPTH, IN_WELL_DEPTH, LAYER_DEPTH, LAYER_STEP, type DecorFloor, type DecorManifest } from './floors-decor-layers';
@@ -34,6 +34,9 @@ export interface SheetSize { frameWidth: number; frameHeight: number }
 const DECOR_FLOORS: Partial<Record<FloorId, DecorFloor>> = { ground: '1f', 'floor-2': '2f', 'floor-3': '2f' };
 /** Wall furniture hangs between the shadows and the fixtures. */
 const WALL_FURNITURE_DEPTH = LAYER_DEPTH + LAYER_STEP * (BACK_LAYERS.indexOf('fixtures') - .4);
+/** Back layers repeated per table at the table's own depth so people behind a table are hidden by it. */
+const TABLE_LAYERS = ['fixtures', 'tablecloth', 'centerpiece'] as const;
+const TABLE_LAYER_STEP = .05;
 /** Sprite size and surface of each furniture piece (scripts/art-gen/floor-furniture-build.py). */
 export type FurnitureManifest = Record<string, { width: number; height: number; surface: 'floor' | 'wall' }>;
 const furnitureKey = (id: string) => `furniture/${id}.webp`;
@@ -114,6 +117,8 @@ export class FloorsScene extends Phaser.Scene {
   private ready = false;
   private built: Building | null = null;
   private floorImages: Phaser.GameObjects.Image[] = [];
+  /** Cropped copies of each table's fixtures, cloth and centerpiece, sorted with the people on its floor. */
+  private tablePieces: Phaser.GameObjects.Image[] = [];
   /** The decor layers the building is drawn with, and those still loading. */
   private decorSignature = '';
   private loadingDecor = new Set<string>();
@@ -153,6 +158,8 @@ export class FloorsScene extends Phaser.Scene {
   private moods = new Map<number, string | null>();
   private rack: unknown = null;
   private steamTimer = 0;
+  /** Deterministic play clock for idle staff turns (baristas and servers), paused with the café. */
+  private staffClock = 0;
   /** The staff's own looks, painted as they are first seen (floors-looks.ts). */
   private staff!: StaffTextures;
   /** Guest looks with their sheets and walks ready, and those on their way. */
@@ -428,18 +435,43 @@ export class FloorsScene extends Phaser.Scene {
     if (before && sameFloors && (signature === this.decorSignature || missing.length)) return before;
     if (next.offsets.basement !== undefined) this.upgrades.updateKitchen(state);
     for (const image of this.floorImages) image.destroy();
+    for (const piece of this.tablePieces) piece.destroy();
+    this.tablePieces = [];
     const counterDepth = worldPoint(next, COUNTER_FRONT).y;
     this.floorImages = next.floors.flatMap(floor => {
       const y = next.offsets[floor]!, decor = layers(floor).filter(l => this.textures.exists(l.key));
       if (!decor.length) return [this.add.image(0, y - (FLOOR_ART[floor].above ?? 0), FLOOR_ART[floor].image).setOrigin(0, 0).setDepth(LAYER_DEPTH)];
-      return decor.map(l => {
-        const fixtures = floor === 'ground' && BACK_LAYERS[l.order] === 'fixtures' && !l.front;
-        const image = this.add.image(0, y, fixtures ? this.upgrades.fixturesTexture(l.key, state.upgrades.machine) : l.key).setOrigin(0, 0)
+      const tables = FLOOR_TABLES[floor];
+      const images: Phaser.GameObjects.Image[] = [];
+      for (const l of decor) {
+        const name = !l.front ? BACK_LAYERS[l.order] : '';
+        const step = tables ? TABLE_LAYERS.indexOf(name as typeof TABLE_LAYERS[number]) : -1;
+        if (tables && step >= 0) {
+          if (name === 'fixtures') {
+            const split = this.upgrades.fixturesTables(l.key, tables, floor === 'ground' ? state.upgrades.machine : 0);
+            images.push(this.add.image(0, y, split.back).setOrigin(0, 0).setDepth(LAYER_DEPTH + l.order * LAYER_STEP));
+            tables.forEach((table, i) => {
+              const top = table.fixturesY ?? table.y;
+              const depth = worldPoint(next, { floor, x: 0, y: table.seatY }).y - 1;
+              this.tablePieces.push(this.add.image(table.x, y + top, split.pieces[i]).setOrigin(0, 0).setDepth(depth));
+            });
+          } else {
+            // tablecloth and centerpiece have zero pixels outside the table masks, so draw them only as pieces.
+            for (const table of tables) {
+              const depth = worldPoint(next, { floor, x: 0, y: table.seatY }).y - 1 + step * TABLE_LAYER_STEP;
+              this.tablePieces.push(this.add.image(0, y, l.key).setOrigin(0, 0)
+                .setCrop(table.x, table.y, table.w, table.h).setDepth(depth));
+            }
+          }
+          continue;
+        }
+        const image = this.add.image(0, y, l.key).setOrigin(0, 0)
           .setDepth(l.front ? counterDepth + l.order * .01 : LAYER_DEPTH + l.order * LAYER_STEP);
-        const shift = floor === 'ground' && !l.front ? GROUND_SHIFT[equipped[BACK_LAYERS[l.order]] ?? ''] : undefined;
+        const shift = floor === 'ground' && !l.front ? GROUND_SHIFT[equipped[name] ?? ''] : undefined;
         if (shift) image.setPosition(shift.dx, y + shift.dy).setCrop(shift.crop.x, shift.crop.y, shift.crop.w, shift.crop.h);
-        return image;
-      });
+        images.push(image);
+      }
+      return images;
     });
     this.decorSignature = missing.length ? '' : signature;
     // A seating floor's stairs, over every layer (some left specks on the old staircase they were painted around),
@@ -482,6 +514,7 @@ export class FloorsScene extends Phaser.Scene {
     this.skyFx.update(dt, state, b);
     const active = activeTableIndices(state);
     const step = this.view.paused ? 0 : dt;
+    this.staffClock += step;
     this.tempo = state.phase === 'prep' ? 1 : state.speed;
     this.syncCustomers(b, active, step);
     this.syncBaristas(b, step);
@@ -884,10 +917,15 @@ export class FloorsScene extends Phaser.Scene {
       if (art && sprite.texture.key !== art) sprite.setTexture(art);
       sprite.setVisible(!!art);
       const p = worldPoint(b, { ...spot, x: spot.x + Math.floor(i / BARISTAS.length) * 60 });
+      const calling = barista.calling > 0;
       const working = barista.customerId !== null && barista.total > 0 && barista.remaining > 0;
       brewing ||= working;
-      sprite.setPosition(p.x, p.y).setDepth(p.y).setFrame(barista.calling > 0 ? SIDE.happy : working ? SIDE.side : SIDE.front);
-      const calling = barista.calling > 0;
+      let frame: number = SIDE.front, flip = false;
+      if (calling) frame = SIDE.happy;
+      else if (working) { frame = SIDE.side; flip = p.x > STEAM.x; }
+      else if (barista.customerId !== null) frame = SIDE.front;
+      else { const idle = baristaIdlePose(i, this.staffClock); frame = SIDE[idle.pose]; flip = idle.flip; }
+      sprite.setPosition(p.x, p.y).setDepth(p.y).setFrame(frame).setFlipX(flip);
       if (calling && !this.calling[i]) this.bubble('bubble-coffee', { x: p.x, y: p.y - sprite.displayHeight - 4 }, 900);
       this.calling[i] = calling;
     });
@@ -904,13 +942,13 @@ export class FloorsScene extends Phaser.Scene {
     const list = this.sim.servers;
     while (this.servers.length > list.length) this.remove(this.servers.pop()!);
     list.forEach((server, i) => {
-      const home = SERVER_HOMES[i % SERVER_HOMES.length];
+      const home = serverHome(i, b.floors), homeGoal = `home-${home.id}`;
       let actor = this.servers[i];
-      if (!actor) { actor = this.makeActor('barista', home, 'home'); this.servers[i] = actor; }
+      if (!actor) { actor = this.makeActor('barista', home, homeGoal); this.servers[i] = actor; }
       const art = this.staff.texture(server.look, 'barista');
       if (art) actor.art = art;
       actor.sprite.setVisible(!!art);
-      let goal = 'home', spot: Spot = home;
+      let goal = homeGoal, spot: Spot = home;
       if (server.phase === 'toPass') { goal = 'pass'; spot = PASS; }
       else if (server.phase === 'delivering' && server.plates.length) {
         const c = this.sim.customers.find(customer => customer.id === server.plates[0].customerId);
@@ -923,7 +961,15 @@ export class FloorsScene extends Phaser.Scene {
       this.aim(actor, goal, spot);
       const way = this.walk(actor, dt, simSeconds(server, SERVER_SPEED));
       if (way) this.play(actor, `${actor.art}-side`, actor.rate);
-      else { actor.sprite.stop(); actor.sprite.setTexture(actor.art, server.phase === 'idle' ? SIDE.front : SIDE.side); }
+      else {
+        actor.sprite.stop();
+        if (server.phase === 'idle') {
+          const glance = (this.staffClock + i * 2.1) % 7.2 < 1.6;
+          actor.sprite.setTexture(actor.art, glance ? SIDE.front : SIDE.side).setFlipX(glance ? false : home.faceLeft);
+        } else {
+          actor.sprite.setTexture(actor.art, SIDE.side);
+        }
+      }
       this.place(b, actor, server.phase === 'delivering');
     });
   }

@@ -19,6 +19,9 @@ const _MOVES := {"down": [0, 1, 2, 3], "up": [4, 5, 6, 7], "sit": 8, "hold": 9, 
 const _DECOR_FLOORS := {"ground": "1f", "floor-2": "2f", "floor-3": "2f"}
 ## Wall furniture hangs between the shadows and the fixtures.
 const _WALL_FURNITURE_DEPTH := FloorsArt.LAYER_DEPTH + FloorsArt.LAYER_STEP * (5.0 - 0.4)
+## Back layers repeated per table at the table's own depth so people behind a table are hidden by it.
+const _TABLE_LAYERS: Array[String] = ["fixtures", "tablecloth", "centerpiece"]
+const _TABLE_LAYER_STEP := 0.05
 ## These four general looks stand in for a guest's own look while it loads.
 const GUEST_ART: Array[String] = ["guest-beret", "guest-hoodie", "guest-cardigan", "guest-curls"]
 ## How long a new guest waits unseen at the door for their own look before borrowing one.
@@ -95,6 +98,8 @@ var wall_alpha := 0.0
 var walls: Array[FloorsPic] = []
 var arranging := false
 var _floor_pics: Array[FloorsPic] = []
+## Cropped copies of each table's fixtures, cloth and centerpiece, sorted with the people on its floor.
+var _table_pics: Array[FloorsPic] = []
 var _decor_signature := ""
 var _placed: Array = []
 var _placed_signature := ""
@@ -120,6 +125,8 @@ var _calling: Array[bool] = []
 var _moods: Dictionary = {}
 var _rack: Variant = null
 var _steam := 0.0
+## Deterministic play clock for idle staff turns (baristas and servers), paused with the café.
+var _staff_clock := 0.0
 var _tempo := 1.0
 var _rng := RandomNumberGenerator.new()
 ## A number in [0, 1) for choices people would notice; tests set it.
@@ -392,6 +399,9 @@ func _layout_building() -> Dictionary:
 	for p in _floor_pics:
 		p.queue_free()
 	_floor_pics.clear()
+	for p in _table_pics:
+		p.queue_free()
+	_table_pics.clear()
 	var counter_depth := FloorsLayout.world_point(next, FloorsLayout.COUNTER_FRONT).y
 	for floor_id: String in next["floors"]:
 		_lay_floor(next, floor_id, layers[floor_id], equipped, counter_depth)
@@ -432,14 +442,32 @@ func _lay_floor(b: Dictionary, floor_id: String, layers: Array, equipped: Dictio
 		var art: Dictionary = FloorsLayout.FLOOR_ART[floor_id]
 		_floor_pics.append(pic(art["image"], 0, Vector2.ZERO, FloorsArt.LAYER_DEPTH, Vector2(0.0, y - art.get("above", 0.0))))
 		return
+	var tables: Array = FloorsLayout.FLOOR_TABLES.get(floor_id, [])
 	for l: Dictionary in layers:
 		var order: int = l["order"]
 		var key: String = l["key"]
-		if floor_id == "ground" and not l["front"] and FloorsArt.BACK_LAYERS[order] == "fixtures":
-			key = upgrades.fixtures(key, state()["upgrades"]["machine"])
+		var layer_name: String = "" if l["front"] else FloorsArt.BACK_LAYERS[order]
+		var step := _TABLE_LAYERS.find(layer_name) if not tables.is_empty() else -1
+		if not tables.is_empty() and step >= 0:
+			if layer_name == "fixtures":
+				var split := upgrades.fixtures_tables(key, tables, state()["upgrades"]["machine"] if floor_id == "ground" else 0.0)
+				_floor_pics.append(pic(split["back"], 0, Vector2.ZERO, FloorsArt.LAYER_DEPTH + order * FloorsArt.LAYER_STEP, Vector2(0.0, y)))
+				for i in tables.size():
+					var table: Dictionary = tables[i]
+					var top: float = table.get("fixturesY", table["y"])
+					var depth := FloorsLayout.world_y(b, floor_id, table["seatY"]) - 1.0
+					_table_pics.append(pic(split["pieces"][i], 0, Vector2.ZERO, depth, Vector2(table["x"], y + top)))
+			else:
+				# tablecloth and centerpiece have zero pixels outside the table masks, so draw them only as pieces.
+				for table: Dictionary in tables:
+					var depth := FloorsLayout.world_y(b, floor_id, table["seatY"]) - 1.0 + step * _TABLE_LAYER_STEP
+					var tp := pic(key, 0, Vector2.ZERO, depth, Vector2(0.0, y))
+					tp.crop = Rect2(table["x"], table["y"], table["w"], table["h"])
+					_table_pics.append(tp)
+			continue
 		var p := pic(key, 0, Vector2.ZERO, counter_depth + order * 0.01 if l["front"] else FloorsArt.LAYER_DEPTH + order * FloorsArt.LAYER_STEP, Vector2(0.0, y))
 		if floor_id == "ground" and not l["front"]:
-			var shift: Variant = FloorsLayout.GROUND_SHIFT.get(equipped.get(FloorsArt.BACK_LAYERS[order], ""))
+			var shift: Variant = FloorsLayout.GROUND_SHIFT.get(equipped.get(layer_name, ""))
 			if shift != null:
 				p.place = Vector2(shift["dx"], y + shift["dy"])
 				p.crop = Rect2(shift["crop"]["x"], shift["crop"]["y"], shift["crop"]["w"], shift["crop"]["h"])
@@ -463,6 +491,7 @@ func update(dt: float) -> void:
 	sky.update(dt, s, b)
 	var active := CoreRegions.active_table_indices(s)
 	var step := 0.0 if feed.paused else dt
+	_staff_clock += step
 	_tempo = 1.0 if s["phase"] == "prep" else s["speed"]
 	_sync_customers(b, active, step)
 	_sync_baristas(b, step)
@@ -1013,14 +1042,28 @@ func _sync_baristas(b: Dictionary, dt: float) -> void:
 		# Everyone wears their own look, the owner the one the player designed.
 		var art := staff.look(profile["look"] if i == 0 and profile != null else barista["look"], "owner" if i == 0 else "barista")
 		var at := Vector2(spot["x"] + floorf(i / float(FloorsLayout.BARISTAS.size())) * 60.0, FloorsLayout.world_y(b, spot["floor"], spot["y"]))
+		var calling: bool = barista["calling"] > 0.0
 		var working: bool = barista["customerId"] != null and barista["total"] > 0.0 and barista["remaining"] > 0.0
 		brewing = brewing or working
+		var frame: int = _SIDE["front"]
+		var flip := false
+		if calling:
+			frame = _SIDE["happy"]
+		elif working:
+			frame = _SIDE["side"]
+			flip = at.x > FloorsLayout.STEAM["x"]
+		elif barista["customerId"] != null:
+			frame = _SIDE["front"]
+		else:
+			var idle := FloorsLayout.barista_idle_pose(i, _staff_clock)
+			frame = _SIDE[idle["pose"]]
+			flip = idle["flip"]
 		p.visible = not art.is_empty()
 		if p.visible:
-			p.show_frame(art, _SIDE["happy"] if barista["calling"] > 0.0 else (_SIDE["side"] if working else _SIDE["front"]))
+			p.show_frame(art, frame)
+		p.flip = flip
 		p.depth = at.y
 		p.place = at
-		var calling: bool = barista["calling"] > 0.0
 		if calling and not _calling[i]:
 			bubble("bubble-coffee", head(p), 0.9)
 		_calling[i] = calling
@@ -1044,15 +1087,16 @@ func _sync_servers(b: Dictionary, active: Array, dt: float) -> void:
 		_remove(servers.pop_back())
 	for i in list.size():
 		var server: Dictionary = list[i]
-		var home: Dictionary = FloorsLayout.SERVER_HOMES[i % FloorsLayout.SERVER_HOMES.size()]
+		var home: Dictionary = FloorsLayout.server_home(i, b["floors"])
+		var home_goal := "home-%s" % home["id"]
 		if i >= servers.size():
-			servers.append(_make_actor("barista", home, "home"))
+			servers.append(_make_actor("barista", home, home_goal))
 		var actor := servers[i]
 		var art := staff.look(server["look"], "barista")
 		if not art.is_empty():
 			actor.art = art
 		actor.pic.visible = not art.is_empty()
-		var goal := "home"
+		var goal := home_goal
 		var spot := home
 		if server["phase"] == "toPass":
 			goal = "pass"
@@ -1070,7 +1114,12 @@ func _sync_servers(b: Dictionary, active: Array, dt: float) -> void:
 			_play_way(actor, "side")
 		else:
 			actor.pic.stop()
-			actor.pic.show_frame(actor.art, _SIDE["front"] if server["phase"] == "idle" else _SIDE["side"])
+			if server["phase"] == "idle":
+				var glance := fmod(_staff_clock + i * 2.1, 7.2) < 1.6
+				actor.pic.show_frame(actor.art, _SIDE["front"] if glance else _SIDE["side"])
+				actor.pic.flip = false if glance else home["faceLeft"]
+			else:
+				actor.pic.show_frame(actor.art, _SIDE["side"])
 		_put(b, actor, server["phase"] == "delivering", dt)
 
 

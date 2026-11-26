@@ -180,6 +180,8 @@ func _seen() -> Dictionary:
 		"ghost": _feed.ghost.get("spot") if _feed.ghost != null else null,
 		"glow": _scene.get("_glow").visible, "look": [look["outside"], look["room"], look["lamps"]], "lamps": _scene.sky.get("_lamps").map(func(l: Dictionary) -> Array: return [l["pic"].place.x, l["pic"].place.y, l["pic"].shown_size().x, l["pic"].alpha, float(l["pic"].tint.to_rgba32() >> 8)]),
 		"depths": _scene.customers.values().map(func(a: FloorsScene.Actor) -> float: return fmod(a.pic.depth, FloorsDepth.FRAME)),
+		"tables": _scene.get("_table_pics").map(func(p: FloorsPic) -> Array: return [p.key, p.place.x, p.place.y, [p.crop.position.x, p.crop.position.y, p.crop.size.x, p.crop.size.y] if p.crop.size != Vector2.ZERO else null, p.size.x, p.size.y, p.depth]),
+		"backs": _scene.get("_floor_pics").map(func(p: FloorsPic) -> Array: return [p.key, p.place.x, p.place.y, p.depth]),
 	}
 
 

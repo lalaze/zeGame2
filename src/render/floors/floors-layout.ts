@@ -149,21 +149,138 @@ export const SHOP_SIGN = { x: 583, y: 286, cup: 92 } as const;
 /** Six places in line, the head nearest the till; the tail reaches towards the window seat. */
 export const QUEUE: Spot[] = [[612, 606], [510, 608], [408, 610], [318, 614], [246, 598], [186, 584]]
   .map(([x, y]) => spot('ground', x, y, GROUND_AISLE));
-/** Behind the counter: the owner in the middle, then the hired baristas, a head's width apart. */
-export const BARISTAS: FloorPoint[] = [[770, 470], [1015, 462], [640, 470], [893, 466]].map(([x, y]) => ({ floor: 'ground', x, y }));
+/** Behind the counter: the owner near the middle, then the hired baristas, staggered in depth and spacing. */
+export const BARISTAS: FloorPoint[] = [[758, 478], [1028, 452], [626, 464], [886, 458]].map(([x, y]) => ({ floor: 'ground', x, y }));
 /** Where a guest orders from each barista. */
 export const SERVICE: Spot[] = BARISTAS.map(b => spot('ground', b.x, 566, GROUND_AISLE));
 /**
- * Where finished table orders wait for a server, and where idle servers stand: spread about the
- * floor either side of the way in, then along the cake display, clear of the furniture spots.
+ * Where finished table orders wait for a server, and where idle servers stand. On the ground floor
+ * at most two servers wait once upper seating floors open (the rest wait upstairs); when a floor
+ * does not exist yet, extra servers fall back to staggered ground spots clear of the queue, counter,
+ * tables, doorway, stairs and floor furniture spots.
  */
 export const PASS = spot('ground', 1085, 600, GROUND_AISLE);
-export const SERVER_HOMES: Spot[] = [[916, 716], [762, 716], [1036, 680], [1256, 668], [1150, 662], [650, 690]]
-  .map(([x, y]) => spot('ground', x, y, GROUND_AISLE));
+export interface ServerHome extends Spot { id: string; faceLeft: boolean }
+const serverSpot = (id: string, floor: FloorId, x: number, y: number, aisle: number, faceLeft: boolean): ServerHome =>
+  ({ id, floor, x, y, aisle, faceLeft });
+export const SERVER_HOMES: readonly ServerHome[] = [
+  serverSpot('ground-display', 'ground', 1288, 582, GROUND_AISLE, true),
+  serverSpot('ground-left', 'ground', 468, 548, GROUND_AISLE, false),
+  serverSpot('ground-center', 'ground', 714, 620, GROUND_AISLE, false),
+  serverSpot('ground-pass', 'ground', 1110, 550, GROUND_AISLE, true),
+  serverSpot('ground-right', 'ground', 958, 592, GROUND_AISLE, true),
+  serverSpot('ground-tables', 'ground', 1186, 622, GROUND_AISLE, true),
+];
+const FLOOR_2_HOMES: readonly ServerHome[] = [
+  serverSpot('floor-2-center', 'floor-2', 804, 540, 630, false),
+  serverSpot('floor-2-stairs', 'floor-2', 1378, 860, 875, true),
+];
+const FLOOR_3_HOMES: readonly ServerHome[] = [
+  serverSpot('floor-3-center', 'floor-3', 840, 546, 630, true),
+  serverSpot('floor-3-stairs', 'floor-3', 1384, 856, 875, true),
+];
+/**
+ * The idle home of server `i` in a building with `floors`: two stay on the ground floor, and
+ * further servers take spots on the seating floors as they open, falling back to staggered ground
+ * spots before those floors exist.
+ */
+export function serverHome(i: number, floors: readonly FloorId[]): ServerHome {
+  const has2 = floors.includes('floor-2'), has3 = floors.includes('floor-3');
+  const order: readonly ServerHome[] = has2 && has3
+    ? [SERVER_HOMES[0], SERVER_HOMES[1], FLOOR_2_HOMES[0], FLOOR_3_HOMES[0], FLOOR_2_HOMES[1], FLOOR_3_HOMES[1]]
+    : has2
+      ? [SERVER_HOMES[0], SERVER_HOMES[1], FLOOR_2_HOMES[0], SERVER_HOMES[2], FLOOR_2_HOMES[1], SERVER_HOMES[3]]
+      : SERVER_HOMES;
+  return order[i % order.length];
+}
 /** The counter, the cake display and what stands on them hide the staff from the waist down. */
 export const COUNTER_FRONT: FloorPoint = { floor: 'ground', x: 0, y: 525 };
 export const STEAM: FloorPoint = { floor: 'ground', x: 1190, y: 196 };
 export const DISPLAY = { floor: 'ground' as const, left: 1095, right: 1320, top: 315, bottom: 515 };
+
+/**
+ * A dining table with its two chairs on a floor's decor layers (layer-image pixels; plate y = y +
+ * FLOOR_ART[floor].top). Measured from the alpha union of `fixtures.webp`, all `tablecloth_*.webp`,
+ * and all `centerpiece_*.webp` under `assets/generated/floor-sample-v1/build/decor/1f|2f/`, padded
+ * to even coordinates so half-size art splits along exact texels. `fixturesY` trims wall fixtures
+ * painted above the tables while keeping taller centerpieces in `y..y+h`; `exclude` keeps
+ * neighbouring fixtures (plant pot, sideboard, bookcase, front chair tips) out of a table's mask.
+ */
+export interface Rect { x: number; y: number; w: number; h: number }
+export interface TableRect extends Rect { fixturesY?: number; seatY: number; exclude?: readonly Rect[] }
+const UPPER_TABLE_RECTS: readonly TableRect[] = [
+  {
+    x: 362, y: 360, w: 340, h: 238, fixturesY: 384, seatY: 578,
+    exclude: [
+      { x: 450, y: 384, w: 42, h: 16 }, // plant pot base
+      { x: 678, y: 384, w: 24, h: 82 }, // sideboard edge
+      { x: 634, y: 590, w: 68, h: 8 },  // front table's left chair top
+    ],
+  },
+  {
+    x: 934, y: 360, w: 348, h: 238, fixturesY: 384, seatY: 578,
+    exclude: [
+      { x: 1028, y: 384, w: 254, h: 82 }, // bookcase base
+      { x: 934, y: 590, w: 78, h: 8 },    // front table's right chair top
+    ],
+  },
+  { x: 634, y: 572, w: 378, h: 264, fixturesY: 590, seatY: 795 },
+];
+export const FLOOR_TABLES: Partial<Record<FloorId, readonly TableRect[]>> = {
+  ground: [
+    { x: 346, y: 602, w: 444, h: 246, seatY: 812 },
+    { x: 904, y: 602, w: 420, h: 246, seatY: 812 },
+  ],
+  'floor-2': UPPER_TABLE_RECTS,
+  'floor-3': UPPER_TABLE_RECTS,
+};
+
+/** Non-overlapping rectangles covering a table's fixtures mask (`fixturesY..y+h` minus `exclude`). */
+export function tableMaskRects(table: TableRect): Rect[] {
+  const top = table.fixturesY ?? table.y;
+  let rects: Rect[] = [{ x: table.x, y: top, w: table.w, h: table.y + table.h - top }];
+  for (const ex of table.exclude ?? []) {
+    const next: Rect[] = [];
+    const ex1 = ex.x + ex.w, ey1 = ex.y + ex.h;
+    for (const r of rects) {
+      const rx1 = r.x + r.w, ry1 = r.y + r.h;
+      const ix0 = Math.max(r.x, ex.x), iy0 = Math.max(r.y, ex.y);
+      const ix1 = Math.min(rx1, ex1), iy1 = Math.min(ry1, ey1);
+      if (ix0 >= ix1 || iy0 >= iy1) { next.push(r); continue; }
+      if (r.y < iy0) next.push({ x: r.x, y: r.y, w: r.w, h: iy0 - r.y });
+      if (iy1 < ry1) next.push({ x: r.x, y: iy1, w: r.w, h: ry1 - iy1 });
+      if (r.x < ix0) next.push({ x: r.x, y: iy0, w: ix0 - r.x, h: iy1 - iy0 });
+      if (ix1 < rx1) next.push({ x: ix1, y: iy0, w: rx1 - ix1, h: iy1 - iy0 });
+    }
+    rects = next;
+  }
+  return rects;
+}
+
+/**
+ * Deterministic idle pose for barista `i` behind the counter at play time `clock`: one barista
+ * turns per beat so they never move in unison, no more than two share a pose, adjacent baristas
+ * (by x, for 2, 3 or 4 baristas) never share a pose, and front glances stay occasional.
+ */
+export type IdlePoseKind = 'back' | 'side' | 'front';
+export interface StaffPose { pose: IdlePoseKind; flip: boolean }
+const BARISTA_IDLE_BEAT = 1.9;
+// Indexed by barista slot [0, 1, 2, 3] (left-to-right x order is 2, 0, 3, 1).
+// B = back, R = side right, L = side left, F = front glance.
+const BARISTA_IDLE_CYCLE: readonly string[] = [
+  'RLBB', 'RLBF', 'RBBF', 'RBBL', 'RBLL',
+  'FBLL', 'FRLL', 'BRLL', 'BRRL', 'BFRL',
+  'BFRR', 'BLRR', 'FLRR', 'FBRR', 'LBRR',
+  'LBFR', 'LBBR', 'FBBR', 'FLBR', 'FLBB',
+];
+export function baristaIdlePose(i: number, clock: number): StaffPose {
+  const n = BARISTA_IDLE_CYCLE.length;
+  const step = ((Math.floor(clock / BARISTA_IDLE_BEAT) % n) + n) % n;
+  const code = BARISTA_IDLE_CYCLE[step][((i % 4) + 4) % 4];
+  if (code === 'B') return { pose: 'back', flip: false };
+  if (code === 'F') return { pose: 'front', flip: false };
+  return { pose: 'side', flip: code === 'L' };
+}
 
 /** A seat: where a seated guest's feet go and which way they face, towards their table. */
 export interface Seat extends Spot { faceLeft: boolean }

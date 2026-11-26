@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { STATION_SECONDS, type Station } from '../../game/kitchen';
 import { BUILDING_SPOTS } from '../../game/building-spots';
-import { BARISTAS, CATCH_UP, DISPLAY, DOOR, FLOOR_ART, FRAME, FURNITURE_SPOTS, PARCEL, QUEUE, SERVER_HOMES, SERVICE, STAIRS_HALL, STAIRS_RAIL, WALK, WORLD_W, building, cookHome, inWell, kitchenPlace, kitchenSpot, restFocus, route, stairsOf, stepsLength, tableSeats, walkPace, wellSink, worldPoint, type KitchenPlace } from './floors-layout';
+import { BARISTAS, CATCH_UP, COUNTER_FRONT, DOOR, FLOOR_ART, FLOOR_TABLES, FRAME, FURNITURE_SPOTS, PARCEL, PASS, QUEUE, SERVER_HOMES, SERVICE, STAIRS_HALL, STAIRS_RAIL, WALK, WORLD_W, baristaIdlePose, building, cookHome, inWell, kitchenPlace, kitchenSpot, restFocus, route, serverHome, stairsOf, stepsLength, tableMaskRects, tableSeats, walkPace, wellSink, worldPoint, type FloorId, type KitchenPlace } from './floors-layout';
 
 describe('a parcel at the door', () => {
   it('stands on the front step, beside where guests come and go', () => {
@@ -179,19 +179,192 @@ describe('floors camera', () => {
 });
 
 describe('floors staff', () => {
-  it('stands every barista a head apart, the owner near the middle of the counter', () => {
+  it('staggers baristas in depth and spacing behind the counter, with the owner near the middle', () => {
     const xs = BARISTAS.map(b => b.x).sort((a, b) => a - b);
     expect(xs).toHaveLength(4);
-    for (let i = 1; i < xs.length; i++) expect(xs[i] - xs[i - 1]).toBeGreaterThanOrEqual(120);
+    const gaps = xs.slice(1).map((x, i) => x - xs[i]);
+    for (const gap of gaps) expect(gap).toBeGreaterThanOrEqual(120);
+    expect(new Set(gaps).size).toBeGreaterThan(1);
     expect(BARISTAS[0].x).toBe(xs[1]);
+    const ys = BARISTAS.map(b => b.y);
+    expect(Math.max(...ys) - Math.min(...ys)).toBeGreaterThanOrEqual(20);
+    for (const [i, b] of BARISTAS.entries()) {
+      expect(b.y).toBeLessThanOrEqual(COUNTER_FRONT.y - 40);
+      expect(SERVICE[i].x).toBe(b.x);
+      expect(SERVICE[i].y).toBeGreaterThan(COUNTER_FRONT.y);
+    }
   });
 
-  it('keeps the first servers apart and out of the way of the cake display', () => {
+  it('varies idle barista poses deterministically so neighbours never match and at most two share a pose', () => {
+    const poseKey = (p: ReturnType<typeof baristaIdlePose>) => (p.pose === 'side' ? (p.flip ? 'side-left' : 'side-right') : p.pose);
+    for (const count of [2, 3, 4]) {
+      const byX = Array.from({ length: count }, (_, i) => i).sort((a, b) => BARISTAS[a].x - BARISTAS[b].x);
+      const seenPerBarista = Array.from({ length: count }, () => new Set<string>());
+      const frontCounts = Array.from({ length: count }, () => 0);
+      let samples = 0;
+      let zeroFrontSamples = 0;
+      let prev: string[] | null = null;
+      for (let clock = 0; clock < 200; clock += 0.25) {
+        samples++;
+        const poses = byX.map(i => poseKey(baristaIdlePose(i, clock)));
+        const freq = new Map<string, number>();
+        for (const p of poses) freq.set(p, (freq.get(p) ?? 0) + 1);
+        for (const [p, n] of freq) {
+          expect(n, `count=${count} clock=${clock} pose=${p}`).toBeLessThanOrEqual(2);
+        }
+        expect(freq.get('front') ?? 0, `count=${count} clock=${clock} front`).toBeLessThanOrEqual(1);
+        if (!freq.has('front')) zeroFrontSamples++;
+        for (let k = 0; k + 1 < poses.length; k++) {
+          expect(poses[k], `count=${count} clock=${clock} neighbours ${byX[k]},${byX[k + 1]}`).not.toBe(poses[k + 1]);
+        }
+        if (prev) {
+          const changed = poses.filter((p, k) => p !== prev![k]).length;
+          expect(changed, `count=${count} clock=${clock} simultaneous turns`).toBeLessThanOrEqual(1);
+        }
+        prev = poses;
+        byX.forEach((i, k) => {
+          seenPerBarista[i].add(poses[k]);
+          if (poses[k] === 'front') frontCounts[i]++;
+        });
+      }
+      // Every idle barista cycles through back, both side facings, and an occasional front glance.
+      for (let i = 0; i < count; i++) {
+        expect(seenPerBarista[i], `count=${count} barista ${i}`).toEqual(new Set(['back', 'side-right', 'side-left', 'front']));
+        expect(frontCounts[i] / samples, `count=${count} barista ${i} front share`).toBeLessThan(0.4);
+      }
+      expect(zeroFrontSamples, `count=${count} zero-front moments`).toBeGreaterThan(0);
+    }
+  });
+
+  it('spreads idle servers across floors, staggered in depth and clear of obstacles', () => {
     expect(SERVER_HOMES.length).toBeGreaterThanOrEqual(6);
-    for (const [i, a] of SERVER_HOMES.entries()) for (const b of SERVER_HOMES.slice(i + 1)) expect(Math.hypot(a.x - b.x, a.y - b.y)).toBeGreaterThan(100);
-    for (const home of SERVER_HOMES.slice(0, 3)) expect(home.x + 50 < DISPLAY.left || home.x - 50 > DISPLAY.right - 10, String(home.x)).toBe(true);
-    // Nobody waits in the doorway.
-    for (const home of SERVER_HOMES) expect(Math.abs(home.x - DOOR.x)).toBeGreaterThan(70);
+    const insideWellHole = (p: { x: number; y: number }) => {
+      const share = (p.y - 546) / 230;
+      return share > .03 && share < 1 && p.x > 1306 + 46 * share && p.x < 1444 + 82 * share;
+    };
+    const tallest = 281;
+    const configs: readonly FloorId[][] = [
+      building(2, false).floors,
+      building(3, false).floors,
+      building(6, true).floors,
+    ];
+    for (const floors of configs) {
+      const homes = Array.from({ length: 6 }, (_, i) => serverHome(i, floors));
+      expect(new Set(homes.map(h => h.id)).size, floors.join(',')).toBe(6);
+      if (floors.includes('floor-2') && floors.includes('floor-3')) {
+        expect(homes.filter(h => h.floor === 'ground').length).toBeLessThanOrEqual(3);
+        expect(homes.filter(h => h.floor === 'floor-2').length).toBeGreaterThanOrEqual(1);
+        expect(homes.filter(h => h.floor === 'floor-3').length).toBeGreaterThanOrEqual(1);
+      }
+      // Group by floor: spacing and no three within 24 px of feet y.
+      for (const floor of floors) {
+        const onFloor = homes.filter(h => h.floor === floor);
+        for (const [i, a] of onFloor.entries()) for (const b of onFloor.slice(i + 1)) {
+          expect(Math.hypot(a.x - b.x, a.y - b.y), `${a.id} vs ${b.id}`).toBeGreaterThan(100);
+        }
+        const ys = onFloor.map(h => h.y).sort((a, b) => a - b);
+        for (let i = 0; i + 2 < ys.length; i++) {
+          expect(ys[i + 2] - ys[i], `${floor} in ${floors.join(',')}`).toBeGreaterThan(24);
+        }
+      }
+      // Every home keeps clear of tables/chairs, queue, ordering spots, door lane, stairs and furniture spots.
+      for (const home of homes) {
+        expect(floors).toContain(home.floor);
+        const top = FLOOR_ART[home.floor].top;
+        for (const table of FLOOR_TABLES[home.floor] ?? []) {
+          const inTable = home.x >= table.x && home.x <= table.x + table.w
+            && home.y >= table.y + top && home.y <= table.y + table.h + top;
+          expect(inTable, `${home.id} inside table`).toBe(false);
+        }
+        if (home.floor === 'ground') {
+          for (const q of QUEUE) expect(Math.hypot(home.x - q.x, home.y - q.y), `${home.id} vs queue`).toBeGreaterThan(55);
+          for (const s of SERVICE) expect(Math.hypot(home.x - s.x, home.y - s.y), `${home.id} vs service`).toBeGreaterThan(55);
+          expect(Math.abs(home.x - DOOR.x), `${home.id} vs door`).toBeGreaterThan(70);
+          const inDoorLane = home.x >= 776 && home.x <= 896 && home.y >= DOOR.aisle;
+          expect(inDoorLane, `${home.id} in door lane`).toBe(false);
+          const stairs = stairsOf('ground')!;
+          expect(Math.hypot(home.x - stairs.landing.x, home.y - stairs.landing.y), `${home.id} vs stairs landing`).toBeGreaterThan(55);
+          expect(home.x, `${home.id} clear of ground stairs`).toBeLessThan(1345);
+        } else {
+          const stairs = stairsOf(home.floor)!;
+          expect(inWell(home), `${home.id} in well`).toBe(false);
+          expect(insideWellHole(home), `${home.id} in well hole`).toBe(false);
+          expect(Math.hypot(home.x - stairs.well!.out.x, home.y - stairs.well!.out.y), `${home.id} vs well out`).toBeGreaterThan(55);
+          expect(Math.abs(home.x - 1288), `${home.id} vs hub`).toBeGreaterThan(50);
+          if (home.x >= 1288) expect(Math.abs(home.y - stairs.landing.y), `${home.id} vs upper landing route`).toBeGreaterThan(40);
+          // Walking from pass to home never walks through the stairwell hole outside the steps.
+          let at: { floor: string; x: number; y: number } = PASS;
+          for (const step of route(PASS, PASS.aisle, home)) {
+            if (!step.jump && at.floor === step.floor && (step.floor === 'floor-2' || step.floor === 'floor-3')) {
+              for (let k = 0; k <= 20; k++) {
+                const p = { floor: step.floor, x: at.x + (step.x - at.x) * k / 20, y: at.y + (step.y - at.y) * k / 20 };
+                if (insideWellHole(p)) expect(inWell(p), `route to ${home.id} at ${Math.round(p.x)},${Math.round(p.y)}`).toBe(true);
+              }
+            }
+            at = step;
+          }
+        }
+        for (const spot of FURNITURE_SPOTS) {
+          if (spot.box || spot.floor !== home.floor) continue;
+          if (home.y <= spot.y && spot.y - tallest <= home.y) {
+            expect(Math.abs(home.x - spot.x), `${home.id} behind ${spot.id}`).toBeGreaterThan(spot.room / 2);
+          }
+        }
+      }
+    }
+  });
+});
+
+describe('floors table rectangles', () => {
+  it('covers each table and both of its chairs within its floor layer', () => {
+    const active = [0, 1, 2, 3, 4, 5, 6, 7];
+    const byFloor: Record<'ground' | 'floor-2' | 'floor-3', number[]> = { ground: [0, 1], 'floor-2': [2, 3, 4], 'floor-3': [5, 6, 7] };
+    for (const [floor, indices] of Object.entries(byFloor) as ['ground' | 'floor-2' | 'floor-3', number[]][]) {
+      const rects = FLOOR_TABLES[floor]!;
+      const art = FLOOR_ART[floor];
+      expect(rects, floor).toHaveLength(indices.length);
+      for (const [k, tableIndex] of indices.entries()) {
+        const rect = rects[k], [left, right] = tableSeats(tableIndex, active);
+        expect(rect.x, `${floor}[${k}]`).toBeGreaterThanOrEqual(0);
+        expect(rect.x + rect.w, `${floor}[${k}]`).toBeLessThanOrEqual(WORLD_W);
+        expect(rect.y, `${floor}[${k}]`).toBeGreaterThanOrEqual(0);
+        expect(rect.y + rect.h, `${floor}[${k}]`).toBeLessThanOrEqual(art.height);
+        if (rect.fixturesY !== undefined) {
+          expect(rect.fixturesY).toBeGreaterThanOrEqual(rect.y);
+          expect(rect.fixturesY).toBeLessThan(rect.y + rect.h);
+        }
+        expect(rect.seatY).toBe(Math.min(left.y, right.y));
+        const plateTop = rect.y + art.top, plateBottom = rect.y + rect.h + art.top;
+        for (const seat of [left, right]) {
+          // Both seats and the chairs around them sit inside the measured rectangle.
+          expect(seat.x - 55, `${floor}[${k}] left chair`).toBeGreaterThanOrEqual(rect.x);
+          expect(seat.x + 55, `${floor}[${k}] right chair`).toBeLessThanOrEqual(rect.x + rect.w);
+          expect(seat.y - 120, `${floor}[${k}] chair back`).toBeGreaterThanOrEqual(plateTop);
+          expect(seat.y, `${floor}[${k}] chair feet`).toBeLessThanOrEqual(plateBottom);
+        }
+        // Even coordinates so half-size art splits along exact texel boundaries.
+        const top = rect.fixturesY ?? rect.y;
+        for (const v of [rect.x, rect.y, rect.w, rect.h, top]) {
+          expect(v % 2, `${floor}[${k}] even ${v}`).toBe(0);
+        }
+        for (const ex of rect.exclude ?? []) {
+          for (const v of [ex.x, ex.y, ex.w, ex.h]) expect(v % 2, `${floor}[${k}] exclude even ${v}`).toBe(0);
+          expect(ex.x).toBeGreaterThanOrEqual(rect.x);
+          expect(ex.x + ex.w).toBeLessThanOrEqual(rect.x + rect.w);
+          expect(ex.y).toBeGreaterThanOrEqual(top);
+          expect(ex.y + ex.h).toBeLessThanOrEqual(rect.y + rect.h);
+        }
+      }
+      // Table fixtures masks on a floor are pairwise disjoint.
+      const allStrips = rects.flatMap((rect, k) => tableMaskRects(rect).map(strip => ({ k, strip })));
+      for (let i = 0; i < allStrips.length; i++) {
+        for (let j = i + 1; j < allStrips.length; j++) {
+          const a = allStrips[i].strip, b = allStrips[j].strip;
+          const overlaps = a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+          expect(overlaps, `${floor} strip overlap between table ${allStrips[i].k} and ${allStrips[j].k}`).toBe(false);
+        }
+      }
+    }
   });
 });
 

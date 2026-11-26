@@ -24,8 +24,24 @@ const actor = (a: Any) => [a.at.floor, n2(a.at.x), n2(a.at.y), a.goal, a.steps.l
 /** What was to be seen in the frames that are compared; a film that shows none of it proves nothing about it. */
 const occurred = new Set<string>();
 function note(seen: Any): void {
-  const list = (kind: string, of: Any[], goal: number, texture: number) => { for (const a of of) { occurred.add(`${kind} at ${String(a[goal]).replace(/[\d-]+$/, '').replace(/^seat-.*/, 'seat')}`); if (a[texture + 3] !== false) occurred.add(`${kind} drawn ${a[texture] === a[texture].replace(/-work$/, '') ? 'plain' : 'working'}`); if (a[4 + (goal - 3)] > 0) occurred.add(`${kind} walking`); } };
+  const list = (kind: string, of: Any[], goal: number, texture: number) => { for (const a of of) { occurred.add(`${kind} at ${String(a[goal]).replace(/^home-.*/, 'home').replace(/^seat-.*/, 'seat').replace(/[\d-]+$/, '')}`); if (a[texture + 3] !== false) occurred.add(`${kind} drawn ${a[texture] === a[texture].replace(/-work$/, '') ? 'plain' : 'working'}`); if (a[4 + (goal - 3)] > 0) occurred.add(`${kind} walking`); } };
   list('guest', seen.customers, 4, 8); list('server', seen.servers, 3, 7); list('cook', seen.cooks, 3, 7);
+  for (const a of seen.servers) if (String(a[3]).startsWith('home-') && (a[0] === 'floor-2' || a[0] === 'floor-3') && a[4] === 0) occurred.add('server idle upstairs');
+  for (const b of seen.baristas) if (b) { if (b[1] === '7') occurred.add('barista idle back'); if (b[1] === '6') occurred.add('barista side'); }
+  if (seen.tables.length) {
+    occurred.add('table piece');
+    for (const c of seen.customers) {
+      const cx = c[2], cy = c[3], floor = c[1];
+      if (floor !== 'ground' && floor !== 'floor-2' && floor !== 'floor-3') continue;
+      for (const t of seen.tables) {
+        const crop = t[3];
+        if (!crop) continue;
+        // t[6] is table world depth; check customer standing behind a table whose x overlaps the table crop.
+        const py = t[2] + cy - 24;
+        if (cx >= crop[0] && cx <= crop[0] + crop[2] && py < t[6] && py > t[2]) occurred.add('behind table');
+      }
+    }
+  }
   for (const a of seen.cooks) if (String(a[7]).endsWith('-work')) occurred.add(`cook ${String(a[7]).replace(/^.*?(chef|scarf).*$/, '$1')} cell ${a[8]}`);
   for (const p of seen.pool) occurred.add(`prop ${String(p[0]).replace(/:.*$/, '').replace(/\d+$/, '')}`);
   for (const c of seen.cats) occurred.add(`cat ${c[4]}${c[7] ? ' hopping' : ''}`);
@@ -73,6 +89,8 @@ async function film(name: string, shot: Shot, frames: number, script: (i: number
       visitor: scene.cats.visitor ? [scene.cats.visitor.plan, scene.cats.visitor.happy, String(scene.cats.visitor.sprite?.frame.name ?? '')] : null, gifts: [...scene.cats.gifts.values()].map((g: Any) => [g.id, n2(g.at.x), n2(g.at.y)]), spill: scene.cats.spill ? [scene.cats.spill.at.floor, n2(scene.cats.spill.at.x), n2(scene.cats.spill.at.y), n2(scene.cats.spill.image.depth), scene.cats.spill.image.flipX] : null,
       cue: scene.cue?.visible ? [scene.cue.texture.key, n2(scene.cue.x), n2(scene.cue.y)] : null, speaking: [...scene.thoughts.speaking], focus: n2(scene.focusY), wall: n2(scene.wallAlpha), floors: scene.built.floors, placed: scene.placed.map((p: Any) => [p.index, n2(p.sprite.x), n2(p.sprite.y), n2(p.sprite.scaleX), p.sprite.visible]), ghost: view.ghost?.spot ?? null,
       glow: scene.glow.visible, look: [scene.skyFx.look.outside, scene.skyFx.look.room, n2(scene.skyFx.look.lamps)], lamps: scene.skyFx.lamps.map((l: Any) => [n2(l.image.x), n2(l.image.y), n2(l.image.displayWidth), n2(l.image.alpha), l.image.tint]), depths: [...(scene.customers as Map<number, Any>)].map(([, a]) => n2(a.sprite.depth % 50000)),
+      tables: (scene.tablePieces as GameObject[]).map((o) => [o.texture.key, n2(o.x), n2(o.y), o.crop ? o.crop.map(n2) : null, n2(o.width), n2(o.height), n2(o.depth)]),
+      backs: (scene.floorImages as GameObject[]).map((o) => [o.texture.key, n2(o.x), n2(o.y), n2(o.depth)]),
     };
     note(seen);
     lines.push(JSON.stringify({ ...(ops.length ? { ops: ops.splice(0) } : {}), dt: wire(dt), seen }));
@@ -125,7 +143,7 @@ void EPOCH;
 const MUST = ['cat groom', 'cat nap', 'cat nap hopping', 'cat roam', 'cat roam hopping', 'cat watch', 'cook at home', 'cook at station-cold', 'cook at station-dough', 'cook at station-dry', 'cook at station-lift', 'cook at station-oven',
   ...[0, 1, 2, 4, 5, 6, 7].map((n) => `cook chef cell ${n}`), ...[0, 1, 2, 3, 4, 5, 6, 7].map((n) => `cook scarf cell ${n}`), 'cook drawn plain', 'cook drawn working', 'cook walking', 'cue', 'ghost', 'gift',
   'guest at counter', 'guest at door', 'guest at queue', 'guest at seat', 'guest walking', 'oven glow', ...['ack', 'bake', 'batch', 'bell', 'brew', 'case', 'dish', 'drink', 'drop', 'food', 'jar', 'made', 'map', 'order', 'out', 'parcel', 'pass', 'say', 'tent', 'think', 'tray', 'vip'].map((p) => `prop ${p}`),
-  'server at home', 'server at pass', 'server at table', 'server walking', 'spill', 'thought', 'visitor groom', 'visitor watch', 'wall'];
+  'server at home', 'server at pass', 'server at table', 'server idle upstairs', 'server walking', 'barista idle back', 'barista side', 'table piece', 'behind table', 'spill', 'thought', 'visitor groom', 'visitor watch', 'wall'];
 const missing = only ? [] : MUST.filter((m) => !occurred.has(m));
 if (missing.length) { console.error(`Never seen in any film: ${missing.join(', ')}`); process.exit(1); }
 console.log(JSON.stringify({ films: done, frames }));

@@ -65,21 +65,72 @@ const BOARD := {"x": 1546.0, "y": 134.0, "w": 210.0, "h": 244.0}
 const SHOP_SIGN := {"x": 583.0, "y": 286.0, "cup": 92.0}
 ## Six places in line, the head nearest the till; the tail reaches towards the window seat.
 const _QUEUE: Array = [[612.0, 606.0], [510.0, 608.0], [408.0, 610.0], [318.0, 614.0], [246.0, 598.0], [186.0, 584.0]]
-## Behind the counter: the owner in the middle, then the hired baristas, a head's width apart.
-const _BARISTAS: Array = [[770.0, 470.0], [1015.0, 462.0], [640.0, 470.0], [893.0, 466.0]]
+## Behind the counter: the owner near the middle, then the hired baristas, staggered in depth and spacing.
+const _BARISTAS: Array = [[758.0, 478.0], [1028.0, 452.0], [626.0, 464.0], [886.0, 458.0]]
 ## Where finished table orders wait for a server, and where idle servers stand.
 const PASS := {"floor": "ground", "x": 1085.0, "y": 600.0, "aisle": _GROUND_AISLE}
-const _SERVER_HOMES: Array = [[916.0, 716.0], [762.0, 716.0], [1036.0, 680.0], [1256.0, 668.0], [1150.0, 662.0], [650.0, 690.0]]
+const _SERVER_HOMES: Array = [
+	["ground-display", "ground", 1288.0, 582.0, _GROUND_AISLE, true],
+	["ground-left", "ground", 468.0, 548.0, _GROUND_AISLE, false],
+	["ground-center", "ground", 714.0, 620.0, _GROUND_AISLE, false],
+	["ground-pass", "ground", 1110.0, 550.0, _GROUND_AISLE, true],
+	["ground-right", "ground", 958.0, 592.0, _GROUND_AISLE, true],
+	["ground-tables", "ground", 1186.0, 622.0, _GROUND_AISLE, true],
+]
+const _FLOOR_2_HOMES: Array = [
+	["floor-2-center", "floor-2", 804.0, 540.0, 630.0, false],
+	["floor-2-stairs", "floor-2", 1378.0, 860.0, 875.0, true],
+]
+const _FLOOR_3_HOMES: Array = [
+	["floor-3-center", "floor-3", 840.0, 546.0, 630.0, true],
+	["floor-3-stairs", "floor-3", 1384.0, 856.0, 875.0, true],
+]
 ## The counter, the cake display and what stands on them hide the staff from the waist down.
 const COUNTER_FRONT := {"floor": "ground", "x": 0.0, "y": 525.0}
 const STEAM := {"floor": "ground", "x": 1190.0, "y": 196.0}
 const DISPLAY := {"floor": "ground", "left": 1095.0, "right": 1320.0, "top": 315.0, "bottom": 515.0}
+## Dining tables with their chairs on each decorated floor's layers (layer-image pixels; plate y = y + FLOOR_ART[floor].top).
+const _UPPER_TABLE_RECTS: Array = [
+	{
+		"x": 362.0, "y": 360.0, "w": 340.0, "h": 238.0, "fixturesY": 384.0, "seatY": 578.0,
+		"exclude": [
+			{"x": 450.0, "y": 384.0, "w": 42.0, "h": 16.0},
+			{"x": 678.0, "y": 384.0, "w": 24.0, "h": 82.0},
+			{"x": 634.0, "y": 590.0, "w": 68.0, "h": 8.0},
+		],
+	},
+	{
+		"x": 934.0, "y": 360.0, "w": 348.0, "h": 238.0, "fixturesY": 384.0, "seatY": 578.0,
+		"exclude": [
+			{"x": 1028.0, "y": 384.0, "w": 254.0, "h": 82.0},
+			{"x": 934.0, "y": 590.0, "w": 78.0, "h": 8.0},
+		],
+	},
+	{"x": 634.0, "y": 572.0, "w": 378.0, "h": 264.0, "fixturesY": 590.0, "seatY": 795.0},
+]
+const FLOOR_TABLES := {
+	"ground": [
+		{"x": 346.0, "y": 602.0, "w": 444.0, "h": 246.0, "seatY": 812.0},
+		{"x": 904.0, "y": 602.0, "w": 420.0, "h": 246.0, "seatY": 812.0},
+	],
+	"floor-2": _UPPER_TABLE_RECTS,
+	"floor-3": _UPPER_TABLE_RECTS,
+}
+const _BARISTA_IDLE_BEAT := 1.9
+const _BARISTA_IDLE_CYCLE: Array[String] = [
+	"RLBB", "RLBF", "RBBF", "RBBL", "RBLL",
+	"FBLL", "FRLL", "BRLL", "BRRL", "BFRL",
+	"BFRR", "BLRR", "FLRR", "FBRR", "LBRR",
+	"LBFR", "LBBR", "FBBR", "FLBR", "FLBB",
+]
 
 static var QUEUE: Array = _QUEUE.map(func(p: Array) -> Dictionary: return _spot("ground", p[0], p[1], _GROUND_AISLE))
 static var BARISTAS: Array = _BARISTAS.map(func(p: Array) -> Dictionary: return {"floor": "ground", "x": p[0], "y": p[1]})
 ## Where a guest orders from each barista.
 static var SERVICE: Array = _BARISTAS.map(func(p: Array) -> Dictionary: return _spot("ground", p[0], 566.0, _GROUND_AISLE))
-static var SERVER_HOMES: Array = _SERVER_HOMES.map(func(p: Array) -> Dictionary: return _spot("ground", p[0], p[1], _GROUND_AISLE))
+static var SERVER_HOMES: Array = _SERVER_HOMES.map(func(p: Array) -> Dictionary: return _server_spot(p))
+static var _FLOOR_2_SERVER_HOMES: Array = _FLOOR_2_HOMES.map(func(p: Array) -> Dictionary: return _server_spot(p))
+static var _FLOOR_3_SERVER_HOMES: Array = _FLOOR_3_HOMES.map(func(p: Array) -> Dictionary: return _server_spot(p))
 ## Every table's two seats, in the order the café opens them. The two back tables upstairs are reached from behind
 ## the front one, the front table from in front of it.
 static var TABLES: Array = [
@@ -134,6 +185,65 @@ static var _spot_by_id: Dictionary = {}
 
 static func _spot(floor_id: String, x: float, y: float, aisle: float) -> Dictionary:
 	return {"floor": floor_id, "x": x, "y": y, "aisle": aisle}
+
+
+static func _server_spot(p: Array) -> Dictionary:
+	return {"id": p[0], "floor": p[1], "x": p[2], "y": p[3], "aisle": p[4], "faceLeft": p[5]}
+
+
+## The idle home of server `i` in a building with `floors`.
+static func server_home(i: int, floors: Array) -> Dictionary:
+	var has2 := floors.has("floor-2")
+	var has3 := floors.has("floor-3")
+	var order: Array
+	if has2 and has3:
+		order = [SERVER_HOMES[0], SERVER_HOMES[1], _FLOOR_2_SERVER_HOMES[0], _FLOOR_3_SERVER_HOMES[0], _FLOOR_2_SERVER_HOMES[1], _FLOOR_3_SERVER_HOMES[1]]
+	elif has2:
+		order = [SERVER_HOMES[0], SERVER_HOMES[1], _FLOOR_2_SERVER_HOMES[0], SERVER_HOMES[2], _FLOOR_2_SERVER_HOMES[1], SERVER_HOMES[3]]
+	else:
+		order = SERVER_HOMES
+	return order[i % order.size()]
+
+
+## Non-overlapping rectangles covering a table's fixtures mask (`fixturesY..y+h` minus `exclude`).
+static func table_mask_rects(table: Dictionary) -> Array:
+	var top: float = table.get("fixturesY", table["y"])
+	var rects: Array = [{"x": table["x"], "y": top, "w": table["w"], "h": table["y"] + table["h"] - top}]
+	for ex: Dictionary in table.get("exclude", []):
+		var next: Array = []
+		var ex1: float = ex["x"] + ex["w"]
+		var ey1: float = ex["y"] + ex["h"]
+		for r: Dictionary in rects:
+			var rx1: float = r["x"] + r["w"]
+			var ry1: float = r["y"] + r["h"]
+			var ix0 := maxf(r["x"], ex["x"])
+			var iy0 := maxf(r["y"], ex["y"])
+			var ix1 := minf(rx1, ex1)
+			var iy1 := minf(ry1, ey1)
+			if ix0 >= ix1 or iy0 >= iy1:
+				next.append(r)
+				continue
+			if r["y"] < iy0:
+				next.append({"x": r["x"], "y": r["y"], "w": r["w"], "h": iy0 - r["y"]})
+			if iy1 < ry1:
+				next.append({"x": r["x"], "y": iy1, "w": r["w"], "h": ry1 - iy1})
+			if r["x"] < ix0:
+				next.append({"x": r["x"], "y": iy0, "w": ix0 - r["x"], "h": iy1 - iy0})
+			if ix1 < rx1:
+				next.append({"x": ix1, "y": iy0, "w": rx1 - ix1, "h": iy1 - iy0})
+		rects = next
+	return rects
+
+
+## Deterministic idle pose for barista `i` behind the counter at play time `clock`.
+static func barista_idle_pose(i: int, clock: float) -> Dictionary:
+	var step := posmod(int(floor(clock / _BARISTA_IDLE_BEAT)), _BARISTA_IDLE_CYCLE.size())
+	var code := _BARISTA_IDLE_CYCLE[step][posmod(i, 4)]
+	if code == "B":
+		return {"pose": "back", "flip": false}
+	if code == "F":
+		return {"pose": "front", "flip": false}
+	return {"pose": "side", "flip": code == "L"}
 
 
 ## A seat: where a seated guest's feet go and which way they face, towards their table.

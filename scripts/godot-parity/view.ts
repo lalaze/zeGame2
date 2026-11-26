@@ -37,7 +37,7 @@ const hexNumber = (hex: string) => parseInt(hex.slice(1), 16);
 // ---------------------------------------------------------------- constants
 const constants: Record<string, unknown> = {
   'layout.FRAME': layout.FRAME, 'layout.WORLD_W': layout.WORLD_W, 'layout.GROUND_SHIFT': layout.GROUND_SHIFT, 'layout.DOOR': layout.DOOR, 'layout.PARCEL': layout.PARCEL, 'layout.BOARD': layout.BOARD, 'layout.SHOP_SIGN': layout.SHOP_SIGN,
-  'layout.QUEUE': layout.QUEUE, 'layout.BARISTAS': layout.BARISTAS, 'layout.SERVICE': layout.SERVICE, 'layout.PASS': layout.PASS, 'layout.SERVER_HOMES': layout.SERVER_HOMES, 'layout.COUNTER_FRONT': layout.COUNTER_FRONT, 'layout.STEAM': layout.STEAM, 'layout.DISPLAY': layout.DISPLAY,
+  'layout.QUEUE': layout.QUEUE, 'layout.BARISTAS': layout.BARISTAS, 'layout.SERVICE': layout.SERVICE, 'layout.PASS': layout.PASS, 'layout.SERVER_HOMES': layout.SERVER_HOMES, 'layout.COUNTER_FRONT': layout.COUNTER_FRONT, 'layout.STEAM': layout.STEAM, 'layout.DISPLAY': layout.DISPLAY, 'layout.FLOOR_TABLES': layout.FLOOR_TABLES,
   'layout.LIFT': layout.LIFT, 'layout.LIFT_HATCH': layout.LIFT_HATCH, 'layout.LIFT_TOP': layout.LIFT_TOP, 'layout.OVEN_MOUTH': layout.OVEN_MOUTH, 'layout.TABLE_FRONT': layout.TABLE_FRONT, 'layout.STAIRS_HALL': layout.STAIRS_HALL, 'layout.STAIRS_RAIL': layout.STAIRS_RAIL,
   'layout.WALK': layout.WALK, 'layout.CATCH_UP': layout.CATCH_UP, 'layout.FURNITURE_SPOTS': layout.FURNITURE_SPOTS, 'layout.FLOOR_ART': layout.FLOOR_ART,
   'cats.CAT_FRAMES': cats.CAT_FRAMES, 'cats.CAT_FLOORS': cats.CAT_FLOORS, 'cats.GIFT_PLACES': cats.GIFT_PLACES,
@@ -61,9 +61,21 @@ for (const s of [...IDS.station, 'door', 'other']) test('layout.kitchenPlace', l
 const PLACES = ['oven', 'dough', 'cold', 'dry', 'lift'] as const;
 for (const p of PLACES) for (let i = 0; i < 5; i++) test('layout.kitchenSpot', layout.kitchenSpot as Any, [p, i]);
 for (let i = 0; i < 7; i++) test('layout.cookHome', layout.cookHome as Any, [i]);
+for (const floors of [['roof', 'ground'], ['roof', 'floor-2', 'ground'], ['roof', 'floor-3', 'floor-2', 'ground']] as layout.FloorId[][]) {
+  for (let i = 0; i < 8; i++) test('layout.serverHome', layout.serverHome as Any, [i, floors]);
+}
+for (const floor of ['ground', 'floor-2'] as layout.FloorId[]) {
+  for (const rect of layout.FLOOR_TABLES[floor]!) test('layout.tableMaskRects', layout.tableMaskRects as Any, [rect]);
+}
+for (let i = 0; i < 5; i++) {
+  for (const clock of [0, 0.5, 1.89, 1.9, 3.8, 5.7, 9.5, 15.2, 22.8, 37.9, 38, 75.5]) {
+    test('layout.baristaIdlePose', layout.baristaIdlePose as Any, [i, clock]);
+  }
+}
 for (const id of [...IDS.spot, 'nowhere']) put('layout.furnitureSpot', [id], layout.furnitureSpot(id) ?? null);
 const tables = Array.from({ length: 8 }, (_, i) => i);
-const spots: layout.Spot[] = [layout.DOOR, ...layout.QUEUE, ...layout.SERVICE, layout.PASS, ...layout.SERVER_HOMES, layout.LIFT, ...tables.flatMap((t) => [...layout.tableSeats(t, tables)]), ...PLACES.flatMap((p) => [0, 1, 2].map((i) => layout.kitchenSpot(p, i)))];
+const allServerHomes = Array.from({ length: 6 }, (_, i) => layout.serverHome(i, ['roof', 'floor-3', 'floor-2', 'ground']));
+const spots: layout.Spot[] = [layout.DOOR, ...layout.QUEUE, ...layout.SERVICE, layout.PASS, ...layout.SERVER_HOMES, ...allServerHomes, layout.LIFT, ...tables.flatMap((t) => [...layout.tableSeats(t, tables)]), ...PLACES.flatMap((p) => [0, 1, 2].map((i) => layout.kitchenSpot(p, i)))];
 const routes: { from: layout.FloorPoint; steps: layout.Step[] }[] = [];
 for (let n = 0; n < 900; n++) {
   const from = r.pick(spots), to = { ...r.pick(spots), ...(r.chance(0.2) ? { fadeOut: true } : {}) };

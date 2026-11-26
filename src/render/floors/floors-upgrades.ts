@@ -5,7 +5,7 @@
 import type Phaser from 'phaser';
 import { installedEquipment } from '../../game/kitchen';
 import type { GameState } from '../../game/state';
-import { FLOOR_ART } from './floors-layout';
+import { FLOOR_ART, tableMaskRects, type TableRect } from './floors-layout';
 
 /** The basement's table, which stands in front of whoever is behind it: where it is in the picture, and its outline. */
 export const TABLE = 'upgrades/table';
@@ -39,8 +39,8 @@ export function kitchenPieces(equipment: ReadonlySet<string>, expanded: number):
 
 export class FloorsUpgrades {
   private kitchen: { texture: Phaser.Textures.CanvasTexture; table: Phaser.Textures.CanvasTexture; signature: string } | null = null;
-  /** There is one such layer, whatever the décor. */
-  private fixtures: { texture: Phaser.Textures.CanvasTexture; tier: number } | null = null;
+  /** Per fixtures layer: the back texture (machine composited, table masks cleared) and per-table piece textures. */
+  private splitFixtures = new Map<string, { back: string; tier: number; pieces: string[] }>();
   private timer = 0;
 
   constructor(private scene: Phaser.Scene) {}
@@ -80,22 +80,85 @@ export class FloorsUpgrades {
     this.kitchen.table.refresh();
   }
 
-  /** The ground floor's fixtures layer `key` with the machine of this level in it; the layer itself at the first. */
-  fixturesTexture(key: string, level: number): string {
-    const tier = machineTier(level), name = `${key}|machine`;
-    if (!tier) return key;
+  /**
+   * Splits a floor's `fixtures` layer into a back texture (with every table mask cleared, and on
+   * the ground floor the espresso machine of `level` composited in) and one piece texture per table
+   * containing only that table's masked pixels. Generated once per layer and refreshed only when
+   * the machine tier changes.
+   */
+  fixturesTables(key: string, tables: readonly TableRect[], level = 0): { back: string; pieces: string[] } {
+    const tier = machineTier(level);
+    const cached = this.splitFixtures.get(key);
+    if (cached && cached.tier === tier) return { back: cached.back, pieces: cached.pieces };
     const source = this.scene.textures.get(key).getSourceImage() as HTMLImageElement;
-    this.fixtures ??= { texture: this.scene.textures.createCanvas(name, source.width, source.height)!, tier: 0 };
-    if (tier !== this.fixtures.tier) {
-      this.fixtures.tier = tier;
-      const c = this.fixtures.texture.getContext(), [x0, y0, x1, y1] = this.manifest.clear;
-      c.clearRect(0, 0, source.width, source.height);
-      c.drawImage(source, 0, 0);
+    let pieces = cached?.pieces;
+    if (!pieces) {
+      pieces = tables.map((table, i) => {
+        const pieceKey = `${key}|table-${i}`;
+        const top = table.fixturesY ?? table.y, h = table.y + table.h - top;
+        const tex = this.scene.textures.createCanvas(pieceKey, table.w, h)!;
+        const c = tex.getContext();
+        c.clearRect(0, 0, table.w, h);
+        c.drawImage(source, table.x, top, table.w, h, 0, 0, table.w, h);
+        for (const ex of table.exclude ?? []) c.clearRect(ex.x - table.x, ex.y - top, ex.w, ex.h);
+        tex.refresh();
+        return pieceKey;
+      });
+    }
+    const backKey = `${key}|back-${tier}`;
+    if (cached && cached.back !== backKey && this.scene.textures.exists(cached.back)) {
+      this.scene.textures.remove(cached.back);
+    }
+    const backTex = this.scene.textures.createCanvas(backKey, source.width, source.height)!;
+    const c = backTex.getContext();
+    c.clearRect(0, 0, source.width, source.height);
+    c.drawImage(source, 0, 0);
+    if (tier > 0) {
+      const [x0, y0, x1, y1] = this.manifest.clear;
       c.clearRect(x0, y0, x1 - x0, y1 - y0);
       this.put(c, `machine-${tier}`);
-      this.fixtures.texture.refresh();
     }
-    return name;
+    for (const table of tables) {
+      for (const r of tableMaskRects(table)) c.clearRect(r.x, r.y, r.w, r.h);
+      // Along opaque interior cuts (chair overlapping sideboard/bookcase), keep a 1px opaque guard
+      // in the back texture under the piece so bilinear filtering never leaks background along the cut.
+      const top = table.fixturesY ?? table.y, bottom = table.y + table.h, right = table.x + table.w;
+      for (const ex of table.exclude ?? []) {
+        const edges: [number, number, number, number, boolean][] = [
+          [ex.x - 1, ex.x, ex.y, ex.y + ex.h, true],
+          [ex.x + ex.w, ex.x + ex.w - 1, ex.y, ex.y + ex.h, true],
+          [ex.y - 1, ex.y, ex.x, ex.x + ex.w, false],
+          [ex.y + ex.h, ex.y + ex.h - 1, ex.x, ex.x + ex.w, false],
+        ];
+        for (const [inC, exC, lo, hi, vertical] of edges) {
+          if (vertical && (inC < table.x || inC >= right || exC < table.x || exC >= right)) continue;
+          if (!vertical && (inC < top || inC >= bottom || exC < top || exC >= bottom)) continue;
+          const len = hi - lo;
+          if (len <= 0) continue;
+          const x0 = vertical ? Math.min(inC, exC) : lo, y0 = vertical ? lo : Math.min(inC, exC);
+          const w = vertical ? 2 : len, h = vertical ? len : 2;
+          const tmp = this.scene.textures.get(key).getSourceImage() as HTMLImageElement;
+          // Read alpha from a 2px strip of source to find opaque-on-both-sides cut pixels.
+          const strip = document.createElement('canvas');
+          strip.width = w; strip.height = h;
+          const sc = strip.getContext('2d')!;
+          sc.drawImage(tmp, x0, y0, w, h, 0, 0, w, h);
+          const data = sc.getImageData(0, 0, w, h).data;
+          const inOff = vertical ? (inC > exC ? 1 : 0) : (inC > exC ? 1 : 0);
+          for (let k = 0; k < len; k++) {
+            const iA = (vertical ? (k * 2 + inOff) : (inOff * len + k)) * 4 + 3;
+            const iB = (vertical ? (k * 2 + (1 - inOff)) : ((1 - inOff) * len + k)) * 4 + 3;
+            if (data[iA] >= 252 && data[iB] >= 252) {
+              const px = vertical ? inC : lo + k, py = vertical ? lo + k : inC;
+              c.drawImage(source, px, py, 1, 1, px, py, 1, 1);
+            }
+          }
+        }
+      }
+    }
+    backTex.refresh();
+    this.splitFixtures.set(key, { back: backKey, tier, pieces });
+    return { back: backKey, pieces };
   }
 
   /** Keeps the kitchen up to date; what it holds changes rarely, so it looks twice a second. */
