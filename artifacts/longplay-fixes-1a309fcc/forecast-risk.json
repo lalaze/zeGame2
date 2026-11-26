@@ -6,7 +6,7 @@
       "seed": 1,
       "window": 180,
       "quote": 146,
-      "served": 38,
+      "served": 35,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -16,7 +16,7 @@
       "seed": 2,
       "window": 180,
       "quote": 146,
-      "served": 35,
+      "served": 38,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -26,10 +26,12 @@
       "seed": 3,
       "window": 180,
       "quote": 146,
-      "served": 35,
-      "soldOut": 0,
+      "served": 38,
+      "soldOut": 1,
       "extraLost": 0,
-      "shortages": {}
+      "shortages": {
+        "roll": 1
+      }
     },
     {
       "stage": 1,
@@ -37,25 +39,15 @@
       "window": 180,
       "quote": 146,
       "served": 40,
-      "soldOut": 1,
+      "soldOut": 0,
       "extraLost": 1,
       "shortages": {
-        "roll": 2
+        "roll": 1
       }
     },
     {
       "stage": 1,
       "seed": 5,
-      "window": 180,
-      "quote": 146,
-      "served": 42,
-      "soldOut": 0,
-      "extraLost": 0,
-      "shortages": {}
-    },
-    {
-      "stage": 1,
-      "seed": 6,
       "window": 180,
       "quote": 146,
       "served": 39,
@@ -65,10 +57,20 @@
     },
     {
       "stage": 1,
+      "seed": 6,
+      "window": 180,
+      "quote": 146,
+      "served": 37,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
       "seed": 7,
       "window": 180,
       "quote": 146,
-      "served": 40,
+      "served": 43,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -78,7 +80,7 @@
       "seed": 8,
       "window": 180,
       "quote": 146,
-      "served": 36,
+      "served": 35,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -108,7 +110,7 @@
       "seed": 11,
       "window": 180,
       "quote": 146,
-      "served": 34,
+      "served": 38,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -118,23 +120,21 @@
       "seed": 12,
       "window": 180,
       "quote": 146,
-      "served": 41,
-      "soldOut": 1,
-      "extraLost": 3,
-      "shortages": {
-        "roll": 4
-      }
+      "served": 37,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
     },
     {
       "stage": 1,
       "seed": 13,
       "window": 180,
       "quote": 146,
-      "served": 31,
-      "soldOut": 2,
+      "served": 36,
+      "soldOut": 0,
       "extraLost": 1,
       "shortages": {
-        "roll": 3
+        "roll": 1
       }
     },
     {
@@ -142,17 +142,19 @@
       "seed": 14,
       "window": 180,
       "quote": 146,
-      "served": 41,
+      "served": 36,
       "soldOut": 0,
-      "extraLost": 0,
-      "shortages": {}
+      "extraLost": 1,
+      "shortages": {
+        "roll": 1
+      }
     },
     {
       "stage": 1,
       "seed": 15,
       "window": 180,
       "quote": 146,
-      "served": 37,
+      "served": 40,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -162,7 +164,7 @@
       "seed": 16,
       "window": 180,
       "quote": 146,
-      "served": 39,
+      "served": 36,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -182,7 +184,7 @@
       "seed": 18,
       "window": 180,
       "quote": 146,
-      "served": 38,
+      "served": 39,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -192,10 +194,12 @@
       "seed": 19,
       "window": 180,
       "quote": 146,
-      "served": 35,
-      "soldOut": 0,
-      "extraLost": 0,
-      "shortages": {}
+      "served": 39,
+      "soldOut": 1,
+      "extraLost": 2,
+      "shortages": {
+        "roll": 3
+      }
     },
     {
       "stage": 1,
@@ -212,7 +216,7 @@
       "seed": 21,
       "window": 180,
       "quote": 146,
-      "served": 40,
+      "served": 35,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -222,44 +226,16 @@
       "seed": 22,
       "window": 180,
       "quote": 146,
-      "served": 38,
-      "soldOut": 0,
+      "served": 36,
+      "soldOut": 2,
       "extraLost": 0,
-      "shortages": {}
+      "shortages": {
+        "roll": 2
+      }
     },
     {
       "stage": 1,
       "seed": 23,
-      "window": 180,
-      "quote": 146,
-      "served": 35,
-      "soldOut": 0,
-      "extraLost": 0,
-      "shortages": {}
-    },
-    {
-      "stage": 1,
-      "seed": 24,
-      "window": 180,
-      "quote": 146,
-      "served": 36,
-      "soldOut": 0,
-      "extraLost": 0,
-      "shortages": {}
-    },
-    {
-      "stage": 1,
-      "seed": 25,
-      "window": 180,
-      "quote": 146,
-      "served": 39,
-      "soldOut": 0,
-      "extraLost": 0,
-      "shortages": {}
-    },
-    {
-      "stage": 1,
-      "seed": 26,
       "window": 180,
       "quote": 146,
       "served": 40,
@@ -269,22 +245,50 @@
     },
     {
       "stage": 1,
+      "seed": 24,
+      "window": 180,
+      "quote": 146,
+      "served": 35,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 25,
+      "window": 180,
+      "quote": 146,
+      "served": 36,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
+      "seed": 26,
+      "window": 180,
+      "quote": 146,
+      "served": 38,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
+    },
+    {
+      "stage": 1,
       "seed": 27,
       "window": 180,
       "quote": 146,
-      "served": 42,
+      "served": 40,
       "soldOut": 0,
-      "extraLost": 1,
-      "shortages": {
-        "roll": 1
-      }
+      "extraLost": 0,
+      "shortages": {}
     },
     {
       "stage": 1,
       "seed": 28,
       "window": 180,
       "quote": 146,
-      "served": 39,
+      "served": 36,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -294,19 +298,17 @@
       "seed": 29,
       "window": 180,
       "quote": 146,
-      "served": 38,
-      "soldOut": 3,
-      "extraLost": 3,
-      "shortages": {
-        "roll": 6
-      }
+      "served": 39,
+      "soldOut": 0,
+      "extraLost": 0,
+      "shortages": {}
     },
     {
       "stage": 1,
       "seed": 30,
       "window": 180,
       "quote": 146,
-      "served": 36,
+      "served": 37,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -326,7 +328,7 @@
       "seed": 2,
       "window": 180,
       "quote": 203,
-      "served": 38,
+      "served": 39,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -336,7 +338,7 @@
       "seed": 3,
       "window": 180,
       "quote": 203,
-      "served": 44,
+      "served": 41,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -346,7 +348,7 @@
       "seed": 4,
       "window": 180,
       "quote": 203,
-      "served": 44,
+      "served": 41,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -356,23 +358,21 @@
       "seed": 5,
       "window": 180,
       "quote": 203,
-      "served": 42,
-      "soldOut": 2,
+      "served": 45,
+      "soldOut": 0,
       "extraLost": 0,
-      "shortages": {
-        "roll": 2
-      }
+      "shortages": {}
     },
     {
       "stage": 2,
       "seed": 6,
       "window": 180,
       "quote": 203,
-      "served": 43,
-      "soldOut": 3,
-      "extraLost": 0,
+      "served": 45,
+      "soldOut": 1,
+      "extraLost": 1,
       "shortages": {
-        "roll": 3
+        "roll": 2
       }
     },
     {
@@ -380,12 +380,10 @@
       "seed": 7,
       "window": 180,
       "quote": 203,
-      "served": 42,
-      "soldOut": 1,
+      "served": 44,
+      "soldOut": 0,
       "extraLost": 0,
-      "shortages": {
-        "latte": 1
-      }
+      "shortages": {}
     },
     {
       "stage": 2,
@@ -394,17 +392,15 @@
       "quote": 203,
       "served": 44,
       "soldOut": 0,
-      "extraLost": 2,
-      "shortages": {
-        "roll": 2
-      }
+      "extraLost": 0,
+      "shortages": {}
     },
     {
       "stage": 2,
       "seed": 9,
       "window": 180,
       "quote": 203,
-      "served": 41,
+      "served": 42,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -414,10 +410,12 @@
       "seed": 10,
       "window": 180,
       "quote": 203,
-      "served": 42,
-      "soldOut": 0,
+      "served": 41,
+      "soldOut": 2,
       "extraLost": 0,
-      "shortages": {}
+      "shortages": {
+        "roll": 2
+      }
     },
     {
       "stage": 2,
@@ -436,15 +434,17 @@
       "quote": 203,
       "served": 45,
       "soldOut": 0,
-      "extraLost": 0,
-      "shortages": {}
+      "extraLost": 1,
+      "shortages": {
+        "roll": 1
+      }
     },
     {
       "stage": 2,
       "seed": 13,
       "window": 180,
       "quote": 203,
-      "served": 40,
+      "served": 43,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -464,11 +464,11 @@
       "seed": 15,
       "window": 180,
       "quote": 203,
-      "served": 40,
-      "soldOut": 2,
-      "extraLost": 2,
+      "served": 45,
+      "soldOut": 0,
+      "extraLost": 1,
       "shortages": {
-        "roll": 4
+        "roll": 1
       }
     },
     {
@@ -486,7 +486,7 @@
       "seed": 17,
       "window": 180,
       "quote": 203,
-      "served": 39,
+      "served": 41,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -508,19 +508,21 @@
       "quote": 203,
       "served": 41,
       "soldOut": 0,
-      "extraLost": 0,
-      "shortages": {}
+      "extraLost": 1,
+      "shortages": {
+        "roll": 1
+      }
     },
     {
       "stage": 2,
       "seed": 20,
       "window": 180,
       "quote": 203,
-      "served": 44,
-      "soldOut": 0,
-      "extraLost": 2,
+      "served": 42,
+      "soldOut": 2,
+      "extraLost": 1,
       "shortages": {
-        "roll": 2
+        "roll": 3
       }
     },
     {
@@ -528,22 +530,22 @@
       "seed": 21,
       "window": 180,
       "quote": 203,
-      "served": 42,
-      "soldOut": 1,
+      "served": 39,
+      "soldOut": 0,
       "extraLost": 0,
-      "shortages": {
-        "roll": 1
-      }
+      "shortages": {}
     },
     {
       "stage": 2,
       "seed": 22,
       "window": 180,
       "quote": 203,
-      "served": 43,
+      "served": 47,
       "soldOut": 0,
-      "extraLost": 0,
-      "shortages": {}
+      "extraLost": 1,
+      "shortages": {
+        "roll": 1
+      }
     },
     {
       "stage": 2,
@@ -560,7 +562,7 @@
       "seed": 24,
       "window": 180,
       "quote": 203,
-      "served": 43,
+      "served": 42,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -570,7 +572,7 @@
       "seed": 25,
       "window": 180,
       "quote": 203,
-      "served": 40,
+      "served": 43,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -580,7 +582,7 @@
       "seed": 26,
       "window": 180,
       "quote": 203,
-      "served": 45,
+      "served": 44,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -590,7 +592,7 @@
       "seed": 27,
       "window": 180,
       "quote": 203,
-      "served": 43,
+      "served": 44,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -600,7 +602,7 @@
       "seed": 28,
       "window": 180,
       "quote": 203,
-      "served": 42,
+      "served": 46,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}
@@ -620,7 +622,7 @@
       "seed": 30,
       "window": 180,
       "quote": 203,
-      "served": 42,
+      "served": 44,
       "soldOut": 0,
       "extraLost": 0,
       "shortages": {}

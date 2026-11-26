@@ -252,6 +252,22 @@ describe('simulation obstacle-aware routes', () => {
         expect(state.served).toBeGreaterThan(20);
       }
     }
+    // With MAX_ARRIVAL_RATE=0.9, four fast espresso baristas outpace arrivals and rarely fill the queue;
+    // also sample a single-barista rush on slow drinks so every queue slot (up to MAX_QUEUE) is exercised.
+    for (const height of [MIN_SCENE_H, MAX_SCENE_H]) {
+      setSceneHeight(height);
+      const state = fullShop(4);
+      state.upgrades.barista = 0;
+      state.items.pourover = 1;
+      state.onMenu = ['pourover'];
+      const sim = new Sim(seeded(height + 19));
+      for (let tick = 0; tick < 3000; tick++) {
+        const before = sampleWalkers(sim);
+        sim.update(state, 0.05);
+        fullQueueSeen ||= sim.queue.length === MAX_QUEUE;
+        assertWalkersClear(sim, before, activeTableIndices(state), 0.05);
+      }
+    }
     expect(fullQueueSeen).toBe(true);
   }, 30000);
 

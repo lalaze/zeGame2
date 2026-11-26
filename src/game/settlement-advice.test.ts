@@ -155,9 +155,9 @@ describe('honest cost explanations', () => {
 
   it('diagnoses real table timeouts after normal draining as delivery/production checks', () => {
     const state = ready(); state.pantry.beans = 10000; state.coins = 1000;
-    state.regions = ['reading', 'greenhouse', 'terrace'];
+    state.regions = ['reading', 'greenhouse', 'terrace', 'workshop', 'observatory'];
     state.upgrades.tables = 6; state.upgrades.barista = 3;
-    state.upgrades.machine = 20; state.upgrades.marketing = 25;
+    state.upgrades.machine = 20; state.upgrades.marketing = 25; state.upgrades.pass = 2;
     let seed = 92;
     const sim = new Sim(() => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; });
     openShop(state);

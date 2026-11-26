@@ -25,7 +25,7 @@ export const SESSION_TRAPS = [
   ['core/game_session.gd', /if not street_open:\n/, 'if true:\n', 'everything-1 everything-2 grow-1'],
   ['core/game_session.gd', /\tif not open:\n\t\tmonitor\.reset\(\)\n/, '', 'everything-1'],
   ['core/save_session.gd', /payload\["runtime"\] = sim\.snapshot\(to_save\)/, 'sim.snapshot(to_save)', 'everything-1'],
-  ['core/save_session.gd', /\tif not _same\(current\["value"\], _expected\):\n\t\tclose\(\)\n\t\treturn "conflict"\n/, '', 'everything-1 everything-2 everything-3 everything-4 grow-1 grow-2'],
+  ['core/save_session.gd', /\tif not _same\(current\["value"\], _expected\):\n\t\tclose\(\)\n\t\treturn "conflict"\n/, '', 'everything-1 everything-2 everything-3 everything-4 grow-1 grow-2 tour-1'],
   ['core/game_session.gd', /\t\tarranging = false\n/, '', 'tour-1'],
   ['core/game_session.gd', /\tpanel_collapsed = true\n/, '', 'tour-1'],
   ['core/game_session.gd', /\tscene_area = "main"\n/, '', 'tour-1'],
@@ -34,7 +34,7 @@ export const SESSION_TRAPS = [
   ['core/game_session.gd', /\tif unsettled_furniture > 0\.0:\n/, '\tif false:\n', 'tour-1'],
   ['core/save_session.gd', /\["reserved"\] = 0\.0/, '["reserved"] += 0.0', 'tour-1'],
   ['core/day.gd', /state\["dayTime"\] = 0\.0\n(?![\s\S]*state\["dayTime"\] = 0\.0)/, 'state["dayTime"] = 0\n', 'careful-1'],
-  ['core/storage.gd', /"ok": not fail_reads/, '"ok": true', 'everything-1 everything-2 everything-3 grow-1'],
+  ['core/storage.gd', /"ok": not fail_reads/, '"ok": true', 'everything-1 everything-2 everything-3 grow-1 tour-1'],
 ];
 
 /** Runs every trap; returns the first that nothing noticed, or null. `where` finds the folder of a recorded run. */

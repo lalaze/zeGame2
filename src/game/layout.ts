@@ -153,11 +153,12 @@ export const baristaSpot = (i: number) => ({ x: 116 + i * 25, y: 100 });
 /** Where a barista works at the back bar, making an order, with their back to the room. */
 export const baristaWorkSpot = (i: number) => ({ x: baristaSpot(i).x, y: 87 });
 export const serviceSpot = (i: number) => ({ x: 116 + i * 25, y: 145 });
-/** Six waiting positions form a compact horseshoe in the entrance forecourt.
+/** Four waiting positions form a compact horseshoe in the entrance forecourt, with
+ * overflow spots kept valid for legacy 5-6 person queues restored from older saves.
  * The centre stays open for arrivals and departures; the head faces the till. */
 export const queueSpot = (i: number) => ({
-  x: i < 3 ? 144 : 176,
-  y: floorY(158 + (i < 3 ? i : 5 - i) * 21),
+  x: i < 2 || i === 4 ? 144 : 176,
+  y: floorY(i >= 4 ? 210 : 158 + (i === 1 || i === 2 ? 28 : 0)),
 });
 
 /**

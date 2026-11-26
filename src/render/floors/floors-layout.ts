@@ -146,8 +146,8 @@ export const PARCEL: FloorPoint = { floor: 'ground', x: 986, y: 932 };
 export const BOARD = { x: 1546, y: 134, w: 210, h: 244 } as const;
 /** The middle of the blank hanging sign on the ground floor's front wall (pixels of build/frame/wall-ground.webp), and the cup on it. */
 export const SHOP_SIGN = { x: 583, y: 286, cup: 92 } as const;
-/** Six places in line, the head nearest the till; the tail reaches towards the window seat. */
-export const QUEUE: Spot[] = [[612, 606], [510, 608], [408, 610], [318, 614], [246, 598], [186, 584]]
+/** Four well-spaced places in line, the head nearest the till; clear of ordering spots and front tables. */
+export const QUEUE: Spot[] = [[596, 610], [468, 614], [340, 614], [212, 598]]
   .map(([x, y]) => spot('ground', x, y, GROUND_AISLE));
 /** Behind the counter: the owner near the middle, then the hired baristas, staggered in depth and spacing. */
 export const BARISTAS: FloorPoint[] = [[758, 478], [1028, 452], [626, 464], [886, 458]].map(([x, y]) => ({ floor: 'ground', x, y }));

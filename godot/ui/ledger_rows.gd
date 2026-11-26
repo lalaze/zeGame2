@@ -381,7 +381,7 @@ func _tradeoff(s: Dictionary, def: Dictionary, level: float, eligible: bool, on:
 
 func _upgrade_effect(s: Dictionary, id: String) -> String:
 	match id:
-		"marketing": return _t("effect.marketing", {"n": JsMath.js_round(CoreEconomy.arrival_rate(s) * CoreData.DAY_SECONDS)})
+		"marketing": return _t("effect.marketingCapped" if CoreEconomy.is_traffic_capped(s) else "effect.marketing", {"n": JsMath.js_round(CoreEconomy.arrival_rate(s) * CoreData.DAY_SECONDS)})
 		"machine": return _t("effect.machine", {"n": UiWords.fixed(1.0 / CoreEconomy.prep_multiplier(s), 2)})
 		"barista": return _t("effect.barista", {"n": CoreEconomy.barista_count(s)})
 		"server": return _t("effect.server", {"n": CoreEconomy.server_count(s)})
@@ -415,7 +415,8 @@ func _update_upgrade(r: Dictionary) -> void:
 	after["upgrades"][id] = minf(most, level + q["count"])
 	# A locked upgrade has no "after" to show, and money is not what it is waiting for.
 	var locked := CoreEconomy.upgrade_locked(s, id)
-	r["sub"].text = "%s · %s%s%s" % [_upgrade_desc(id), _upgrade_effect(s, id), "" if maxed or locked else " → %s" % _upgrade_effect(after, id), " · %s" % _t("upgrade.server.roomLimit") if maxed and most < def["max"] else ""]
+	var capped_marketing := id == "marketing" and CoreEconomy.is_traffic_capped(s)
+	r["sub"].text = "%s · %s%s%s" % [_upgrade_desc(id), _upgrade_effect(s, id), "" if maxed or locked or capped_marketing else " → %s" % _upgrade_effect(after, id), " · %s" % _t("upgrade.server.roomLimit") if maxed and most < def["max"] else ""]
 	Paper.set_priced(r["buy"], _t("btn.maxed") if maxed else ("+%s" % JsMath.number_to_string(q["count"]) if q["count"] > 1.0 else _t("btn.buy")), "" if maxed else _money(q["cost"]), not maxed and q["affordable"])
 	_update_details(r, q["cost"], maxed or locked)
 	if r.has("tablePreview"):

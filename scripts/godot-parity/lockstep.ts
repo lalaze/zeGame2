@@ -171,7 +171,7 @@ function socialOps(s: GameState, sim: Sim, r: Random, { moments, cats }: Social,
     const kind = r.chance(0.12) ? r.pick(Object.keys(answers)) : active.kind, fn = r.chance(0.08) ? 'dismiss' : answers[kind];
     if ((active.kind === 'cat' || active.kind === 'photo') && r.chance(0.06)) list.push(['$STATE', 'onMenu', []], ['$STATE', 'signatureDrinks', { ...s.signatureDrinks, recipes: [] }]); // Nothing to tip for.
     if (r.chance(0.04)) list.push(['$STATE', 'onMenu', s.onMenu.filter((id) => !active.options.slice(1).includes(id as never))]);
-    list.push(['$MOM', fn, ...(fn === 'recommend' ? ['$S', '$SIM', active.options.length && r.chance(0.93) ? r.pick(active.options) : r.pick(IDS.menu)] : fn === 'dismiss' ? [] : fn === 'tidy' || fn === 'signDelivery' ? ['$S'] : ['$S', '$SIM'])]);
+    list.push(['$MOM', fn, ...(fn === 'recommend' ? ['$S', '$SIM', active.options.length && r.chance(0.93) ? (active.options.length > 1 && r.chance(0.6) ? active.options[1] : r.pick(active.options)) : r.pick(IDS.menu)] : fn === 'dismiss' ? [] : fn === 'tidy' || fn === 'signDelivery' ? ['$S'] : ['$S', '$SIM'])]);
   }
   if (r.chance(chance * 0.2)) list.push(['$LOOK', r.chance(0.5) ? 'main' : r.chance(0.1) ? '' : r.pick(areas)]);
   if (r.chance(chance * 0.01)) list.push(['$MOM', 'reset']);
@@ -240,6 +240,15 @@ const edge = (chance: number): Run['ops'] => (_i, s, sim, r) => {
   const list: Op[] = [];
   if (sim.customers.length && r.chance(chance * 2)) { const c = r.pick(sim.customers); list.push(['$GUESTS', ...(r.pick<[string, unknown]>([['patience', 0.01], ['patience', 0.01], ['timer', 0.01], ['x', r.pick([c.x + 3, 2, 318, 420])], ['extra', r.pick([null, ...s.onMenu])], ['reviewed', true], ['hasCup', true], ['rememberedOrder', c.extra ?? c.order]]).flatMap((v, n) => (n ? [c.id, v] : [v])) as [string, number, unknown])]); }
   if (r.chance(chance * 0.15)) list.push(['$SIM', 'closeShop', '$S']);
+  if (s.phase !== 'open' && r.chance(0.2)) list.push(['$SIM', 'beginClosing', '$S']);
+  const waitingForBarista = sim.customers.find((c) => c.phase === 'waiting' && sim.baristas.some((b) => b.customerId === c.id && b.remaining > 0.2));
+  if (waitingForBarista && r.chance(0.4)) list.push(['$GUESTS', 'timer', waitingForBarista.id, 0.01]);
+  const withExtra = sim.customers.find((c) => c.phase === 'toCounter' && c.extra !== null);
+  if (withExtra && r.chance(0.4)) {
+    list.push(['$GUESTS', 'rememberedOrder', withExtra.id, withExtra.extra]);
+    if (call('economy', 'isBakery', [withExtra.extra])) list.push(['$PUT', 'shelf', withExtra.extra!, 0]);
+    else list.push(...(call('economy', 'recipe', [withExtra.extra]) as [string, number][]).map(([id]) => ['$PUT', 'pantry', id, 0] as Op));
+  }
   if (s.phase === 'prep' && r.chance(0.05)) list.push(['economy', 'restock', '$S'], ['day', 'openShop', '$S']);
   if (r.chance(chance * 0.5)) list.push(['$TIME', 'step', r.pick([0, -1, NaN, Infinity, 0.4, 1.7, 0.0125])]);
   if (r.chance(chance * 0.3)) list.push(['$PUT', 'pantry', r.pick(IDS.ingredient), r.pick([0, 0, 1, 3, 200])]);
@@ -250,7 +259,7 @@ const edge = (chance: number): Run['ops'] => (_i, s, sim, r) => {
   if (r.chance(chance * 0.15)) list.push(['$PUT', 'upgrades', 'cook', Math.max(s.upgrades.cook, r.int(5))], ['$STATE', 'kitchen', true]);
   if (r.chance(chance * 0.15)) list.push(['$PUT', 'upgrades', r.pick(['barista', 'server', 'tables', 'pass']), r.int(3)]);
   const reserved = sim.customers.some((c) => c.trialSale === 'reserved' && c.extra && c.extra === s.trialSales.active?.item && (c.phase === 'toCounter' || c.phase === 'ordering'));
-  if (reserved && r.chance(0.3)) { const extra = sim.customers.find((c) => c.trialSale === 'reserved' && c.extra)!; list.push(...(call('economy', 'recipe', [extra.extra]) as [string, number][]).map(([id]) => ['$PUT', 'pantry', id, 0] as Op)); }
+  if (reserved && r.chance(0.8)) { const extra = sim.customers.find((c) => c.trialSale === 'reserved' && c.extra)!; list.push(...(call('economy', 'recipe', [extra.extra]) as [string, number][]).map(([id]) => ['$PUT', 'pantry', id, 0] as Op)); }
   if (sim.customers.some((c) => c.order.startsWith('sig:') && !c.hasCup) && r.chance(chance * 0.3)) list.push(['$STATE', 'signatureDrinks', { ...s.signatureDrinks, recipes: [] }]);
   if (r.chance(chance * 0.1)) list.push(['$SIM', 'offerTrialTo', '$S', sim.customers.length ? r.pick(sim.customers).id : 2]);
   return list;
@@ -286,10 +295,29 @@ for (let seed = 1; seed <= 24; seed++) {
 for (let seed = 1; seed <= 4; seed++) {
   const base = structuredClone(r0.pick(prepShots).state);
   base.kitchen = false; base.onMenu = ['roll'] as GameState['onMenu']; base.signatureDrinks.recipes = []; base.trialSales.selected = null;
+  base.pets = seed === 1 ? [{ id: 'ginger', careSeconds: 0, autoRefill: false }] as GameState['pets'] : [];
+  if (seed === 1) base.upgrades.tables = 0;
   base.items.roll = 5; base.shelf.roll = 400; base.cafeStyle.bakeryTrialDay = base.day;
   for (const id of IDS.ingredient) (base.pantry as Dict)[id] = 100;
-  day(`bakery-${seed}`, openable(base), seed + 1300, 240, (_i, s, sim, r, x) => [...socialOps(s, sim, r, x, 0.02),
+  day(`bakery-${seed}`, openable(base), seed + 1300, 240, (_i, s, sim, r, x) => [...(seed === 1 ? [] : socialOps(s, sim, r, x, 0.02)),
     ...(sim.customers.some((c) => c.phase === 'ordering') && r.chance(0.01) ? [['$STATE', 'cafeStyle', { ...structuredClone(s.cafeStyle), bakeryTrialDay: r.chance(0.5) ? null : s.day }] as Op] : [])], 3000);
+}
+// Unbaked shelf with kitchen open + bakery-main guest offered a trial drink (covers first-bake shelve, extra=trial, and extra-trial stockout).
+{
+  const base = structuredClone(r0.pick(prepShots).state);
+  base.kitchen = true; base.items.espresso = 5; base.items.roll = 5; base.items.latte = 5;
+  base.onMenu = ['espresso', 'roll'] as GameState['onMenu']; base.signatureDrinks.recipes = [];
+  base.bakePlan = { roll: 0 }; base.shelf = { roll: 0 }; base.upgrades.barista = 0; base.upgrades.marketing = 6;
+  for (const id of IDS.ingredient) (base.pantry as Dict)[id] = 300;
+  call('trial-sales', 'selectTrialSale', [base, 'latte']);
+  day('trial-extra-1', openable(base), 1701, 240, (i, s, sim, r) => {
+    const out: Op[] = [];
+    const bakeryGuest = sim.customers.find((c) => c.phase === 'queue' && c.order === 'roll' && c.extra === 'espresso' && sim.canOfferTrialTo(s, c.id));
+    if (bakeryGuest) out.push(['$SIM', 'offerTrialTo', '$S', bakeryGuest.id]);
+    const toZero = sim.customers.find((c) => c.phase === 'toCounter' && c.trialSale === 'reserved' && c.extra === 'latte');
+    if (toZero && i > 400) out.push(['$PUT', 'pantry', 'milk', 0]);
+    return out;
+  }, 2400);
 }
 // Days with a trial drink offered to whoever may have it.
 for (let n = 0, seed = 1; n < 400 && seed <= 10; n++) {
@@ -316,9 +344,44 @@ for (let n = 0; n < 320; n++) {
   if (n % 4 === 0) snap = older(snap, r0);
   else if (n % 4 === 1) { // Someone stands elsewhere.
     const people = [...(snap.customers as Dict[]), ...(snap.servers as Dict[]), ...(snap.cooks as Dict[])], who = people.length ? r0.pick(people) : {};
-    if (r0.chance(0.3)) { who.x = -100 + r0.int(120); who.y = r0.pick([80, 138, 140, 170, 200]); } else { who.x = (who.x as number) + r0.int(120) - 60; who.y = (who.y as number) + r0.int(120) - 60; }
+    if (n % 20 === 1 && (snap.cooks as Dict[]).length) { (snap.cooks as Dict[])[0].x = -319; (snap.cooks as Dict[])[0].y = 110; }
+    else if (r0.chance(0.3)) { who.x = -100 + r0.int(120); who.y = r0.pick([80, 138, 140, 170, 200]); } else { who.x = (who.x as number) + r0.int(120) - 60; who.y = (who.y as number) + r0.int(120) - 60; }
   } else snap = damage(snap, r0, 1) as Dict;
   runs.push({ name: `torn-${n}`, state: shot.state, seed: n + 900, dt: 0.05, height: r0.pick([240, 300, 360]), clock: shot.now, steps: 6, ops: quiet, resume: snap });
+}
+// Shelving when inProduction was cleared before first bake + guest rerouting from off-map x (covers sim:1061 and sim:596).
+{
+  const base = structuredClone(prepShots[0].state);
+  base.kitchen = true; base.upgrades.cook = 1; base.items.espresso = 5; base.items.roll = 5;
+  base.onMenu = ['espresso', 'roll'] as GameState['onMenu']; base.signatureDrinks.recipes = [];
+  base.bakePlan = { roll: 0 }; base.shelf = { roll: 0 }; base.upgrades.marketing = 6;
+  for (const id of IDS.ingredient) (base.pantry as Dict)[id] = 300;
+  day('extra-branches-1', openable(base), 1702, 240, (i, s, sim) => {
+    const out: Op[] = [];
+    if (i === 1) out.push(['$PUT', 'shelf', 'roll', 0], ['$PUT', 'bakePlan', 'roll', 6]);
+    const baking = sim.cooks.find((c) => c.batch && !s.today.baked[c.batch.item] && (s.inProduction[c.batch.item] ?? 0) > 0);
+    if (baking?.batch) out.push(['$PUT', 'inProduction', baking.batch.item, 0]);
+    if (i >= 600 && s.phase === 'open') {
+      const c = sim.customers.find((g) => g.phase === 'queue');
+      if (c) out.push(['$GUESTS', 'x', c.id, -500], ['$SIM', 'beginClosing', '$S']);
+    }
+    return out;
+  }, 1500);
+}
+// Legacy v1 snapshot with a cook mid-batch (covers sim:299 cook.batch ? stationSpot(...)).
+{
+  const base = structuredClone(prepShots[0].state);
+  base.kitchen = true; base.upgrades.cook = 1; base.items.roll = 5;
+  base.onMenu = ['roll'] as GameState['onMenu']; base.signatureDrinks.recipes = [];
+  base.bakePlan = { roll: 0 }; base.shelf = { roll: 0 };
+  for (const id of IDS.ingredient) (base.pantry as Dict)[id] = 300;
+  const s = openable(base)!;
+  call('day', 'openShop', [s]);
+  s.shelf.roll = 0; s.bakePlan.roll = 6;
+  layout.setSceneHeight(240); layout.setKitchenLevel(1);
+  const tmp = new (MODS.sim.Sim as new (rng: () => number) => Sim)(lcg(1703));
+  for (let i = 0; i < 400 && !tmp.cooks.some((c) => c.batch); i++) tmp.update(s, 0.05);
+  runs.push({ name: 'extra-v1-cook', state: s, seed: 1703, dt: 0.05, height: 240, clock: EPOCH + 5e9, steps: 20, ops: quiet, resume: older(tmp.snapshot(s) as unknown as Dict, r0) });
 }
 const chosen = runs.filter((spec, i) => i % parts === part && (!only || only.split(',').some((o) => spec.name === o || spec.name.startsWith(o.endsWith('*') ? o.slice(0, -1) : `${o}-`))));
 // Every method must be used by some run: coverage alone does not report what was never called.

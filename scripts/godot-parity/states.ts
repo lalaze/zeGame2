@@ -79,6 +79,17 @@ export function cosyGoal(s: GameState, r: Random): GameState {
   out.decor.placed = []; out.decor.stored = Object.fromEntries(some(cosy, r.pick([0.06, 0.1, 0.15, 0.3, 0.7]), r).map((id) => [id, 1]));
   for (const u of IDS.upgrade) set(out.upgrades, u, 0);
   out.upgrades.tables = r.pick([0, 3, 6, 6]);
+  // Full 8-table main room with varied stored floor-only pieces: total comfort >= target, zero legal floor placements (hits !masks.length and return false, distinct keys so replay misses the 32-entry cache).
+  if (out.upgrades.tables === 6 && out.regions.length === 0 && !out.decor.building && Object.keys(out.decor.stored).length % 2 === 0) {
+    const base = call('state', 'createInitialState', [1]) as GameState;
+    const floor = new Set((MODS.furniture.FURNITURE as { id: string; surface: string }[]).filter((f) => f.surface === 'floor').map((f) => f.id));
+    const stored = { piano: 1, ...Object.fromEntries(Object.entries(out.decor.stored).filter(([id]) => floor.has(id))) };
+    out.items = base.items;
+    out.decor = base.decor;
+    delete out.decor.building;
+    out.decor.placed = [];
+    out.decor.stored = stored;
+  }
   return out;
 }
 

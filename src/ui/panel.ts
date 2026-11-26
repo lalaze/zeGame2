@@ -37,6 +37,7 @@ import {
   dayNeeds,
   expectedCustomers,
   ingredientDef,
+  isTrafficCapped,
   neededIngredients,
   recipe,
   restock,
@@ -167,7 +168,7 @@ function iconUrl(key: string, make: () => HTMLCanvasElement): string {
 function upgradeEffect(state: GameState, id: UpgradeId): string {
   switch (id) {
     case 'marketing':
-      return t('effect.marketing', { n: Math.round(arrivalRate(state) * DAY_SECONDS) });
+      return t(isTrafficCapped(state) ? 'effect.marketingCapped' : 'effect.marketing', { n: Math.round(arrivalRate(state) * DAY_SECONDS) });
     case 'machine':
       return t('effect.machine', { n: (1 / prepMultiplier(state)).toFixed(2) });
     case 'barista':
@@ -1430,7 +1431,8 @@ export class Panel {
         const after = { ...s, upgrades: { ...s.upgrades, [def.id]: Math.min(max, level + q.count) } };
         // A locked upgrade has no "after" to preview, and money is not what it is waiting for.
         const locked = upgradeLocked(s, def.id);
-        refs.sub.textContent = `${upgradeDesc(def.id)} · ${upgradeEffect(s, def.id)}${maxed || locked ? '' : ` → ${upgradeEffect(after, def.id)}`}${maxed && roomBound ? ` · ${t('upgrade.server.roomLimit')}` : ''}`;
+        const cappedMarketing = def.id === 'marketing' && isTrafficCapped(s);
+        refs.sub.textContent = `${upgradeDesc(def.id)} · ${upgradeEffect(s, def.id)}${maxed || locked || cappedMarketing ? '' : ` → ${upgradeEffect(after, def.id)}`}${maxed && roomBound ? ` · ${t('upgrade.server.roomLimit')}` : ''}`;
         refs.btnLabel.textContent = maxed ? t('btn.maxed') : q.count > 1 ? `+${q.count}` : t('btn.buy');
         refs.btnCost.textContent = maxed ? '' : formatMoney(q.cost);
         this.updateMoneyDetails(refs, q.cost, maxed || locked);

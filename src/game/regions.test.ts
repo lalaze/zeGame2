@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { openShop } from './day';
-import { arrivalRate, buyUpgrade, tableCount } from './economy';
+import { arrivalCap, arrivalRate, buyUpgrade, tableCount, trafficDemand } from './economy';
 import { canPlace, placeFurniture } from './furniture';
 import { MAX_SCENE_H, MIN_SCENE_H, SCENE_W, areaAtPoint, areaOrigin, setSceneHeight, tablePos } from './layout';
 import { MIN_BUILD_SHARE, REGIONS, activeTableIndices, buildSeconds, buildShare, constructionLeft, finishConstruction, mainTableCount, parseConstruction, regionBlock, regionDef, startConstruction, unlockRegion } from './regions';
@@ -26,7 +26,10 @@ describe('connected café areas', () => {
     expect(unlockRegion(s, 'greenhouse')).toBe(true);
     expect(unlockRegion(s, 'terrace')).toBe(true);
     expect(tableCount(s)).toBe(14);
-    expect(arrivalRate(s)).toBeCloseTo(arrivalRate(createInitialState(0)) * 1.45);
+    // Unlocking three rooms without extra servers lowers tableServiceCapacity, which caps arrivalRate;
+    // verify the uncapped trafficDemand grows by 1.45x and actual arrivals respect the cap.
+    expect(trafficDemand(s)).toBeCloseTo(trafficDemand(createInitialState(0)) * 1.45);
+    expect(arrivalRate(s)).toBeCloseTo(Math.min(trafficDemand(s), arrivalCap(s)));
   });
 
   it('keeps room seat indices stable when more main café tables are bought', () => {

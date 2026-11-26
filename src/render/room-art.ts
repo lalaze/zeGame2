@@ -14,7 +14,7 @@ import { paintCozyService, paintCozyCakeDome } from './cozy-service-art';
 // Canvas painters for the parts of a room that are baked into textures: the main
 // café's back wall, floor, back bar and counter, the front wall along the bottom
 // edge, and the props (tables, chairs, crates) that the Phaser scene places.
-import { isDrink } from '../game/data';
+import { isDrink, MAX_QUEUE } from '../game/data';
 import { itemPrice, menuItems } from '../game/economy';
 import {
   BACK_BAR,
@@ -1002,7 +1002,7 @@ export class RoomPainter {
 
   /** Small brass queue dots leave the shared cross-aisle and central exit clear. */
   private drawQueueMarks(): void {
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < MAX_QUEUE; i++) {
       const { x, y } = queueSpot(i);
       this.r(x - 2, y - 1, 5, 2, '#b79b70');
       this.r(x - 1, y - 1, 3, 1, '#ecd8ac');

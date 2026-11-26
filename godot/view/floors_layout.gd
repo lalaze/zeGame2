@@ -63,8 +63,8 @@ const PARCEL := {"floor": "ground", "x": 986.0, "y": 932.0}
 const BOARD := {"x": 1546.0, "y": 134.0, "w": 210.0, "h": 244.0}
 ## The middle of the blank hanging sign on the ground floor's front wall (pixels of frame/wall-ground), and its cup.
 const SHOP_SIGN := {"x": 583.0, "y": 286.0, "cup": 92.0}
-## Six places in line, the head nearest the till; the tail reaches towards the window seat.
-const _QUEUE: Array = [[612.0, 606.0], [510.0, 608.0], [408.0, 610.0], [318.0, 614.0], [246.0, 598.0], [186.0, 584.0]]
+## Four well-spaced places in line, the head nearest the till; clear of ordering spots and front tables.
+const _QUEUE: Array = [[596.0, 610.0], [468.0, 614.0], [340.0, 614.0], [212.0, 598.0]]
 ## Behind the counter: the owner near the middle, then the hired baristas, staggered in depth and spacing.
 const _BARISTAS: Array = [[758.0, 478.0], [1028.0, 452.0], [626.0, 464.0], [886.0, 458.0]]
 ## Where finished table orders wait for a server, and where idle servers stand.

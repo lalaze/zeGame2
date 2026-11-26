@@ -914,6 +914,7 @@
   ]
  },
  "data": {
+  "ARRIVAL_CAPACITY_RATIO": 1.1,
   "BAKE_STEP": 5,
   "BASE_ARRIVAL_RATE": 0.2,
   "CATEGORIES": [
@@ -983,9 +984,10 @@
   ],
   "ITEM_COST_GROWTH": 1.12,
   "LEVEL_COST_MULTIPLIER": 10,
+  "MAX_ARRIVAL_RATE": 0.9,
   "MAX_COOK_BATCH": 10,
   "MAX_PASS_SLOTS": 18,
-  "MAX_QUEUE": 6,
+  "MAX_QUEUE": 4,
   "MAX_VARIETY_BONUS": 0.6,
   "MENU": [
    {
@@ -1383,6 +1385,12 @@
    150,
    200,
    300
+  ],
+  "QUEUE_BALK_CHANCE": [
+   0,
+   0.05,
+   0.15,
+   0.45
   ],
   "RECIPES": {
    "espresso": {

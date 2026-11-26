@@ -9,7 +9,7 @@ import { recordGuestMemory, rememberedOrder } from './guest-memories';
 import { CUSTOMER_CAST, CustomerCastCycle } from './customer-cast';
 import { updatePromotion } from './promotion';
 import { updatePetCare } from './pets';
-import { CUSTOMER_WALK_SPEED, DAY_SECONDS, MAX_QUEUE, RING_AGAIN, VIP_CHANCE, type ItemId } from './data';
+import { CUSTOMER_WALK_SPEED, DAY_SECONDS, MAX_QUEUE, QUEUE_BALK_CHANCE, RING_AGAIN, VIP_CHANCE, type ItemId } from './data';
 import { finishDay, type DayReport } from './day';
 import { CELL, furnitureDef } from './furniture';
 import { routeFloorSegment, segmentCrossesObstacle, type FloorObstacle, type FloorPoint } from './navigation';
@@ -934,7 +934,7 @@ export class Sim {
       this.charge(state, c, events);
       if (unpaid && c.hasCup) recordPartnerWork(state, server.partnerId);
       c.phase = 'sitting';
-      c.timer = 6 + this.rng() * 8 + styleDwellExtra(state, c.extra ? [c.order, c.extra] : [c.order]);
+      c.timer = 38 + this.rng() * 12 + styleDwellExtra(state, c.extra ? [c.order, c.extra] : [c.order]);
     }
     server.plates.shift();
     this.headOut(server);
@@ -1099,8 +1099,8 @@ export class Sim {
       // prevents arrivals after the player selects dishes and opens again.
       this.spawnTimer = rate > 0 ? (0.5 + this.rng()) / rate : 1;
       if (state.phase === 'open') {
-        if (this.queue.length < MAX_QUEUE) this.spawn(state);
-        else state.today.doorLost++;
+        const balk = this.queue.length < MAX_QUEUE ? QUEUE_BALK_CHANCE[this.queue.length] : 1;
+        if (balk <= 0 || balk < 1 && this.rng() >= balk) this.spawn(state); else state.today.doorLost++;
       }
     }
 

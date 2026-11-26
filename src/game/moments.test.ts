@@ -32,8 +32,10 @@ function cafe(): GameState {
 /** A café with a line of plain guests; appearance 2 likes chocolate and avoids milk. */
 function line(): { state: GameState; sim: Sim; guest: Customer } {
   const state = cafe(), sim = new Sim(seeded(3));
-  for (let n = 0; n < 4000 && sim.queue.length < 4; n++) sim.update(state, 0.05);
-  expect(sim.queue.length).toBeGreaterThanOrEqual(4);
+  // With MAX_QUEUE=4, balking, and capacity-capped arrivals, wait for 3 queued guests
+  // (still leaving guests ahead of the tail guest during moment triggers).
+  for (let n = 0; n < 3500 && sim.queue.length < 3; n++) sim.update(state, 0.05);
+  expect(sim.queue.length).toBeGreaterThanOrEqual(3);
   for (const c of sim.customers) { delete c.regularGuestId; delete c.regularGuestVisitId; c.patience = 5; }
   const guest = sim.customers.find((c) => c.id === sim.queue.at(-1))!;
   Object.assign(guest, { appearanceId: 2, order: 'espresso', extra: null, patience: 60 });

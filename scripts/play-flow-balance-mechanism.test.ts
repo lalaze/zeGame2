@@ -30,7 +30,12 @@ function sample(scenario: typeof scenarios[number], seed: number, refill: boolea
   startDay(0);
   const firstUpdateHash = objectHash(s);
   const settled: DayReport[] = [];
-  let peakQueue = 0;
+  let peakQueue = 0, queueRemovedAtClosing = 0;
+  const beginClosing = sim.beginClosing.bind(sim);
+  sim.beginClosing = (state) => {
+    if (state.phase === 'open') queueRemovedAtClosing += sim.customers.filter(c => c.phase === 'queue').length;
+    beginClosing(state);
+  };
   for (let tick = 0; tick < 180 / STYLE_DT; tick++) {
     // Match the reference's exact-clock policy when a bakery sells out and
     // finishes closing before the horizon: settle, restock and open the next day.
@@ -50,7 +55,7 @@ function sample(scenario: typeof scenarios[number], seed: number, refill: boolea
   const cashLedgerError = s.coins - (setup.initialCash + revenue - totalCashOut);
   if (Math.abs(reconciliationError) > 1e-4 || Math.abs(cashLedgerError) > 1e-4) throw new Error('Unreconciled mechanism ledger');
   const pending = sim.customers.filter(c => !c.hasCup && !['sitting', 'exiting'].includes(c.phase)).length;
-  const unmetDemand = missed + doorLost, arrivalAttempts = served + unmetDemand + pending;
+  const unmetDemand = missed + doorLost + queueRemovedAtClosing, arrivalAttempts = served + unmetDemand + pending;
   return { scenarioId: scenario.id, seed, seconds: 180, refill, initialHash, firstUpdateHash, receipts, revenue, operatingProfit,
     ingredientExpense, careExpense, promotionExpense, ingredientsPurchased, promotionsPurchased, carePurchased, totalCashOut,
     assets, netLiquidProfit, cashProfit: s.coins - setup.initialCash, reconciliationError, cashLedgerError,

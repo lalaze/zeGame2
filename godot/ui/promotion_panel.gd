@@ -49,11 +49,15 @@ func update() -> void:
 	var campaign: Variant = s["promotion"]
 	# Rates are guests per business day, the same unit as the opening forecast.
 	var base := CoreEconomy.base_arrival_rate(s) * CoreData.DAY_SECONDS
+	var base_demand := CoreEconomy.base_traffic_demand(s)
+	var cap := CoreEconomy.arrival_cap(s)
+	var capped := CoreEconomy.is_traffic_capped(s)
 	var capacity := CoreEconomy.service_capacity(s) * CoreData.DAY_SECONDS
 	var menu := CoreEconomy.menu_items(s)
+	var base_capped := not menu.is_empty() and base_demand >= cap
 	var empty_stock := menu.any(func(m: Dictionary) -> bool: return CoreEconomy.servings_left(s, m["id"]) < 1.0)
 	_summary.text = _t("promo.summary", {"cost": CoreFormat.format_account_money(s["today"]["promotionCost"])})
-	_pressure.text = _t("promo.pressure", {"arrivals": JsMath.js_round(CoreEconomy.arrival_rate(s) * CoreData.DAY_SECONDS), "capacity": JsMath.js_round(capacity)})
+	_pressure.text = _t("promo.pressureCapped" if capped else "promo.pressure", {"arrivals": JsMath.js_round(CoreEconomy.arrival_rate(s) * CoreData.DAY_SECONDS), "capacity": JsMath.js_round(capacity)})
 	_active.visible = campaign != null
 	if campaign != null:
 		var plan: Dictionary = CorePromotion.promotion_plan(campaign["id"])
@@ -64,9 +68,9 @@ func update() -> void:
 		_pause.text = _t("promo.resume" if campaign["paused"] else "promo.pause")
 	for row: Dictionary in _rows:
 		var plan: Dictionary = row["plan"]
-		var boosted: float = base * (1.0 + plan["boost"])
+		var boosted: float = JsMath.js_min(base_demand * (1.0 + plan["boost"]), cap) * CoreData.DAY_SECONDS
 		row["estimate"].text = _t("promo.estimate", {"before": JsMath.js_round(base), "after": JsMath.js_round(boosted)})
-		var risk := "noMenu" if menu.is_empty() else ("stock" if empty_stock else ("overload" if boosted > capacity else ("busy" if boosted > capacity * 0.85 else "headroom")))
+		var risk := "noMenu" if menu.is_empty() else ("stock" if empty_stock else ("capped" if base_capped else ("overload" if boosted > capacity else ("busy" if boosted > capacity * 0.85 else "headroom"))))
 		row["risk"].text = _t("promo.%s" % risk)
 		row["risk"].add_theme_color_override("font_color", Paper.MUTED if risk == "headroom" else Paper.DANGER)
 		row["button"].disabled = campaign != null or s["phase"] == "closing" or menu.is_empty() or s["coins"] < plan["cost"]

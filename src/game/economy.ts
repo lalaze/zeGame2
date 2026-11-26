@@ -11,7 +11,7 @@ import { conditionPatience, conditionSeating, conditionTraffic } from './conditi
 import { demandPlan, demandEnabled, guestComboChance, guestPairWeights, guestSeatingMultiplier, type GuestKind, type MainChoice } from './customer-demand';
 import { queueSpot, serviceSpot, roomRoute, tableArea } from './layout';
 import {
-  BASE_ARRIVAL_RATE,
+  ARRIVAL_CAPACITY_RATIO, BASE_ARRIVAL_RATE, MAX_ARRIVAL_RATE,
   MAX_VARIETY_BONUS,
   VARIETY_BONUS,
   isDrink,
@@ -205,8 +205,8 @@ export const varietyBonus = (s: GameState) =>
 /** Menu-driven arrivals, independent of stock, staff, promotion and reputation. */
 export const menuTrafficMultiplier = (s: GameState, items = menuItems(s)) => demandPlan(s, items).traffic;
 export const baseArrivalRate = (s: GameState) =>
-  BASE_ARRIVAL_RATE * placeTrafficMultiplier(s) * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * menuTrafficMultiplier(s) * reputationTraffic(s.reputation) * petTraffic(s) * styleArrivalMultiplier(s) * conditionTraffic(s, menuItems(s));
-export const arrivalRate = (s: GameState) => baseArrivalRate(s) * promotionTraffic(s);
+  Math.min(baseTrafficDemand(s), arrivalCap(s));
+export const arrivalRate = (s: GameState) => Math.min(trafficDemand(s), arrivalCap(s));
 export const tipMultiplier = (s: GameState) => 1 + comfort(s) / 100;
 /** Chain stars from earlier branches raise every price, permanently, unless spent on perks. */
 export const chainMultiplier = (s: GameState) => 1 + CHAIN_STAR_BONUS * starsFree(s);
@@ -352,7 +352,7 @@ const DINE_IN_SHARE = 0.52, BASE_SEAT_CHANCE = 0.6;
 /** A larger pass lets servers leave with fuller trays and baristas keep working through rushes. */
 const PASS_FLOW = [1, 1.3, 1.7] as const;
 /** Roughly how long a guest holds a seat: walking over, waiting for the order and eating it. */
-const SEAT_SECONDS = 30;
+const SEAT_SECONDS = 55;
 
 function serverTrip(route: number): { seconds: number; plates: number } {
   const i = SERVER_TRIPS.findIndex(([r]) => r >= route);
@@ -537,11 +537,11 @@ export function buyIngredient(state: GameState, id: IngredientId, count: number)
 export function expectedCustomers(state: GameState): number {
   const items = menuItems(state);
   if (items.length === 0) return 0;
-  const capacity = serviceCapacity(state, items);
+  const capacity = Math.min(serviceCapacity(state, items), MAX_ARRIVAL_RATE);
   const promotedSeconds = state.promotion && !state.promotion.paused ? Math.min(DAY_SECONDS, state.promotion.remaining) : 0;
   const careForecast = forecastPetTraffic(state) / petTraffic(state);
-  return Math.ceil(Math.min(arrivalRate(state) * careForecast, capacity) * promotedSeconds
-    + Math.min(baseArrivalRate(state) * careForecast, capacity) * (DAY_SECONDS - promotedSeconds));
+  return Math.ceil(Math.min(trafficDemand(state) * careForecast, capacity) * promotedSeconds
+    + Math.min(baseTrafficDemand(state) * careForecast, capacity) * (DAY_SECONDS - promotedSeconds));
 }
 
 /** Servings of each dish a full day on today's menu sells, roughly. */
@@ -635,3 +635,17 @@ export function restock(state: GameState): boolean {
 
 /** Menu dishes the pantry can't make a single serving of. */
 export const soldOutItems = (state: GameState) => menuItems(state).filter((m) => servingsLeft(state, m.id) < 1);
+
+/** Uncapped potential foot traffic per second before shop capacity and floor limits. */
+export const baseTrafficDemand = (s: GameState) =>
+  BASE_ARRIVAL_RATE * placeTrafficMultiplier(s) * (1 + 0.2 * s.upgrades.marketing) * (1 + 0.1 * s.upgrades.tables + regionDemand(s)) * menuTrafficMultiplier(s) * reputationTraffic(s.reputation) * petTraffic(s) * styleArrivalMultiplier(s) * conditionTraffic(s, menuItems(s));
+/** Uncapped potential foot traffic per second including any active promotion. */
+export const trafficDemand = (s: GameState) => baseTrafficDemand(s) * promotionTraffic(s);
+/** Maximum actual arrivals per second the café admits: bounded by staff capacity and floor size. */
+export const arrivalCap = (s: GameState, items = menuItems(s)) =>
+  Math.min(serviceCapacity(s, items) * ARRIVAL_CAPACITY_RATIO, MAX_ARRIVAL_RATE);
+/** Whether potential foot traffic has already reached the café's arrival cap. */
+export const isTrafficCapped = (s: GameState) => {
+  const items = menuItems(s);
+  return items.length > 0 && trafficDemand(s) >= arrivalCap(s, items);
+};

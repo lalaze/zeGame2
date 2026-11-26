@@ -1,5 +1,5 @@
 import { uiIcon } from './pixel-icons';
-import { arrivalRate, baseArrivalRate, menuItems, serviceCapacity, servingsLeft } from '../game/economy';
+import { arrivalCap, arrivalRate, baseArrivalRate, baseTrafficDemand, isTrafficCapped, menuItems, serviceCapacity, servingsLeft } from '../game/economy';
 import { formatAccountMoney, formatDuration, formatTransactionMoney as formatMoney } from '../game/format';
 import { SECONDS_PER_BUSINESS_HOUR, businessSeconds } from '../game/business-clock';
 import { DAY_SECONDS } from '../game/data';
@@ -68,11 +68,15 @@ export class PromotionPanel {
     const campaign = s.promotion;
     // Rates are guests per business day, the same unit as the opening forecast.
     const base = baseArrivalRate(s) * DAY_SECONDS;
+    const baseDemand = baseTrafficDemand(s);
+    const cap = arrivalCap(s);
+    const capped = isTrafficCapped(s);
     const capacity = serviceCapacity(s) * DAY_SECONDS;
     const menu = menuItems(s);
+    const baseCapped = menu.length > 0 && baseDemand >= cap;
     const emptyStock = menu.some((item) => servingsLeft(s, item.id) < 1);
     this.summary.textContent = t('promo.summary', { cost: formatAccountMoney(s.today.promotionCost) });
-    this.pressure.textContent = t('promo.pressure', { arrivals: Math.round(arrivalRate(s) * DAY_SECONDS), capacity: Math.round(capacity) });
+    this.pressure.textContent = t(capped ? 'promo.pressureCapped' : 'promo.pressure', { arrivals: Math.round(arrivalRate(s) * DAY_SECONDS), capacity: Math.round(capacity) });
     this.active.hidden = !campaign;
     if (campaign) {
       const plan = promotionPlan(campaign.id)!;
@@ -83,9 +87,9 @@ export class PromotionPanel {
       this.pause.textContent = t(campaign.paused ? 'promo.resume' : 'promo.pause');
     }
     for (const row of this.rows) {
-      const boosted = base * (1 + row.plan.boost);
+      const boosted = Math.min(baseDemand * (1 + row.plan.boost), cap) * DAY_SECONDS;
       row.estimate.textContent = t('promo.estimate', { before: Math.round(base), after: Math.round(boosted) });
-      const risk = !menu.length ? 'noMenu' : emptyStock ? 'stock' : boosted > capacity ? 'overload' : boosted > capacity * 0.85 ? 'busy' : 'headroom';
+      const risk = !menu.length ? 'noMenu' : emptyStock ? 'stock' : baseCapped ? 'capped' : boosted > capacity ? 'overload' : boosted > capacity * 0.85 ? 'busy' : 'headroom';
       row.risk.textContent = t(`promo.${risk}`);
       row.risk.classList.toggle('warn', risk !== 'headroom');
       row.btn.disabled = !!campaign || s.phase === 'closing' || !menu.length || s.coins < row.plan.cost;

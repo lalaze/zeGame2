@@ -1080,6 +1080,7 @@ func _play() -> void:
 	root.size = Vector2i(screen)
 	_app.call("_resized")
 	await _slices()
+	await _crowd_limits()
 	await _moving()
 	s = _app.session
 	ui = _app.ui
@@ -1096,3 +1097,97 @@ func _play() -> void:
 	await process_frame
 	print("APP_SUMMARY: passed=%d failed=%d" % [passed, failed])
 	quit(0 if failed == 0 and passed > 0 else 1)
+
+
+func _all_labels_text(node: Node) -> String:
+	var parts := PackedStringArray()
+	for l: Node in node.find_children("*", "Label", true, false):
+		if (l as Label).is_visible_in_tree() and not l.is_queued_for_deletion():
+			parts.append((l as Label).text)
+	return "\n".join(parts)
+
+
+## A5 (traffic-cap notice in upgrades and promotion panels) and A7 (legacy 6-person queue snapshot restore).
+func _crowd_limits() -> void:
+	var s: CoreGameSession = _app.session
+	var ui: CafeUi = _app.ui
+	var saved_locale := I18n.locale
+	var saved_state: Dictionary = s.state.duplicate(true)
+
+	# A5: below cap vs at/above cap in both zh and en.
+	for pair: Array in [["zh", "客流已满"], ["en", "traffic capped"]]:
+		I18n.locale = pair[0]
+		var needle: String = pair[1]
+		var fresh := CoreState.create_initial_state(0.0)
+		s.state = fresh
+		s.sim.reset()
+		ui.set_ledger(true)
+		ui.ledger.show_tab("upgrades")
+		ui.refresh()
+		await _frames(1)
+		_check("uncapped marketing hides cap hint (%s)" % pair[0], not _all_labels_text(ui.ledger).to_lower().contains(needle))
+		ui.ledger.show_tab("promotion")
+		ui.refresh()
+		await _frames(1)
+		_check("uncapped promotion hides cap hint (%s)" % pair[0], not _all_labels_text(ui.ledger).to_lower().contains(needle))
+
+		var capped := CoreState.create_initial_state(0.0)
+		capped["coins"] = 1e9
+		capped["upgrades"]["marketing"] = 20.0
+		capped["upgrades"]["barista"] = 3.0
+		capped["upgrades"]["server"] = 5.0
+		capped["upgrades"]["machine"] = 14.0
+		capped["upgrades"]["tables"] = 6.0
+		capped["regions"] = ["reading", "greenhouse", "terrace"]
+		for ing: Dictionary in CoreData.INGREDIENTS:
+			capped["pantry"][ing["id"]] = 1000.0
+		s.state = capped
+		ui.ledger.show_tab("upgrades")
+		ui.refresh()
+		await _frames(1)
+		_check("capped marketing shows cap hint (%s)" % pair[0], _all_labels_text(ui.ledger).to_lower().contains(needle))
+		ui.ledger.show_tab("promotion")
+		ui.refresh()
+		await _frames(1)
+		var promo_text := _all_labels_text(ui.ledger)
+		_check("capped promotion shows cap hint (%s)" % pair[0], promo_text.to_lower().contains(needle) and promo_text.contains(I18n.t("promo.capped")))
+
+	# A7: legacy 6-person queue snapshot restores cleanly and drains naturally.
+	var legacy_state := CoreState.create_initial_state(0.0)
+	legacy_state["pantry"]["beans"] = 1000.0
+	CoreDay.open_shop(legacy_state)
+	var sim_rng := RandomNumberGenerator.new()
+	sim_rng.seed = 11
+	var legacy_sim := CoreSim.new(sim_rng.randf)
+	legacy_sim.update(legacy_state, 0.05)
+	var snap := legacy_sim.snapshot(legacy_state)
+	var custs := []
+	for i in 6:
+		var spot := CoreLayout.queue_spot(float(i))
+		custs.append({
+			"id": float(i + 1), "x": spot["x"], "y": spot["y"], "tx": spot["x"], "ty": spot["y"],
+			"via": [], "journey": [], "pathBlocked": false, "stride": 0.0,
+			"look": {"skin": 0.0, "hair": 0.0, "hairStyle": 0.0, "shirt": 0.0, "pants": 0.0},
+			"order": "espresso", "extra": null, "phase": "queue",
+			"patience": 40.0, "timer": 0.0, "spot": -1.0, "seat": -1.0,
+			"vip": false, "mood": null, "moodTimer": 0.0, "hasCup": false, "soldOut": false, "dineIn": false,
+			"reviewed": false, "waitSeconds": 0.0, "missingExtra": false,
+		})
+	snap["customers"] = custs
+	snap["queue"] = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0]
+	snap["nextId"] = 7.0
+	_check("legacy 6-queue snapshot is valid", CoreSimSnapshot.valid_snapshot(snap, legacy_state))
+	var restored := CoreSim.new(sim_rng.randf)
+	_check("legacy 6-queue snapshot restores", restored.restore(snap, legacy_state))
+	_check("legacy 6-queue keeps all 6 guests", restored.queue.size() == 6 and restored.customers.size() == 6, restored.queue.size())
+	for _step in 600:
+		if restored.queue.is_empty():
+			break
+		restored.update(legacy_state, 0.05)
+	_check("legacy 6-queue drains naturally", restored.queue.is_empty() and legacy_state["today"]["served"] >= 4.0, [restored.queue.size(), legacy_state["today"]["served"]])
+
+	I18n.locale = saved_locale
+	s.state = saved_state
+	ui.set_ledger(false)
+	ui.refresh()
+	await _frames(1)

@@ -228,8 +228,8 @@ static func service_spot(i: float) -> Dictionary:
 
 static func queue_spot(i: float) -> Dictionary:
 	return {
-		"x": 144.0 if i < 3.0 else 176.0,
-		"y": floor_y(158.0 + (i if i < 3.0 else (5.0 - i)) * 21.0),
+		"x": 144.0 if i < 2.0 or i == 4.0 else 176.0,
+		"y": floor_y(210.0 if i >= 4.0 else 158.0 + (28.0 if i == 1.0 or i == 2.0 else 0.0)),
 	}
 
 static func resize_room_point(point: Dictionary, from_height: float) -> Dictionary:

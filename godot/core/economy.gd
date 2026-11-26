@@ -13,7 +13,7 @@ const _SERVER_TRIPS := [[0.0, 5.8, 1.96], [4.0, 14.7, 2.01], [9.0, 21.4, 2.43], 
 const _DINE_IN_SHARE := 0.52
 const _BASE_SEAT_CHANCE := 0.6
 const _PASS_FLOW := [1.0, 1.3, 1.7]
-const _SEAT_SECONDS := 30.0
+const _SEAT_SECONDS := 55.0
 
 
 static func _by_id(list: Array) -> Dictionary:
@@ -243,13 +243,34 @@ static func _or_menu(s: Dictionary, items: Variant) -> Array:
 	return items if items is Array else menu_items(s)
 
 
-static func base_arrival_rate(s: Dictionary) -> float:
+static func base_traffic_demand(s: Dictionary) -> float:
 	var f := _forecast(s)
 	return f["menuArrivals"] * CoreReputation.reputation_traffic(s["reputation"]) * CorePets.pet_traffic(s) * f["style"] * f["condition"]
 
 
+static func traffic_demand(s: Dictionary) -> float:
+	return base_traffic_demand(s) * CorePromotion.promotion_traffic(s)
+
+
+static func arrival_cap(s: Dictionary, items: Variant = null) -> float:
+	var capacity: float = service_capacity(s, items) if items is Array else _forecast(s)["capacity"]
+	return JsMath.js_min(capacity * CoreData.ARRIVAL_CAPACITY_RATIO, CoreData.MAX_ARRIVAL_RATE)
+
+
+static func is_traffic_capped(s: Dictionary) -> bool:
+	var f := _forecast(s)
+	if f["empty"]:
+		return false
+	var demand: float = f["menuArrivals"] * CoreReputation.reputation_traffic(s["reputation"]) * CorePets.pet_traffic(s) * f["style"] * f["condition"] * CorePromotion.promotion_traffic(s)
+	return demand >= JsMath.js_min(f["capacity"] * CoreData.ARRIVAL_CAPACITY_RATIO, CoreData.MAX_ARRIVAL_RATE)
+
+
+static func base_arrival_rate(s: Dictionary) -> float:
+	return JsMath.js_min(base_traffic_demand(s), arrival_cap(s))
+
+
 static func arrival_rate(s: Dictionary) -> float:
-	return base_arrival_rate(s) * CorePromotion.promotion_traffic(s)
+	return JsMath.js_min(traffic_demand(s), arrival_cap(s))
 
 
 static func tip_multiplier(s: Dictionary) -> float:
@@ -795,13 +816,14 @@ static func _customers(state: Dictionary, forecast: Dictionary) -> float:
 	if forecast["empty"]:
 		return 0.0
 	var capacity: float = forecast["capacity"]
+	var effective_cap := JsMath.js_min(capacity, CoreData.MAX_ARRIVAL_RATE)
 	var promotion: Variant = state["promotion"]
 	var promoted: float = minf(CoreData.DAY_SECONDS, promotion["remaining"]) if promotion is Dictionary and not promotion["paused"] else 0.0
 	var pets := CorePets.pet_traffic(state)
 	var care: float = CorePets.forecast_pet_traffic(state) / pets
 	var base: float = forecast["menuArrivals"] * CoreReputation.reputation_traffic(state["reputation"]) * pets * forecast["style"] * forecast["condition"]
-	return ceil(JsMath.js_min(base * CorePromotion.promotion_traffic(state) * care, capacity) * promoted
-		+ JsMath.js_min(base * care, capacity) * (CoreData.DAY_SECONDS - promoted))
+	return ceil(JsMath.js_min(base * CorePromotion.promotion_traffic(state) * care, effective_cap) * promoted
+		+ JsMath.js_min(base * care, effective_cap) * (CoreData.DAY_SECONDS - promoted))
 
 
 ## Servings of each dish a full day on today's menu sells, roughly.

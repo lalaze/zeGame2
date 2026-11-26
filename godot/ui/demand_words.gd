@@ -25,7 +25,7 @@ static func prep(s: Dictionary, items: Array, open: bool, turned: Callable) -> C
 	var suited := plan["guests"].filter(func(g: Dictionary) -> bool: return g["coverage"] >= 0.8).map(func(g: Dictionary) -> String: return kind(g["kind"])) as Array
 	var details := Paper.col([Paper.words(_t("demand.explain"), "muted")], 6)
 	for g: Dictionary in plan["guests"]:
-		details.add_child(Paper.col([Paper.line([Paper.words(kind(g["kind"]), "strong"), Paper.words("%s · %s" % [_suits(g["coverage"]), _t("demand.share", {"pct": JsMath.js_round(g["share"] * 100.0)})], "small", false)]), Paper.words(_t("demand.wants.%s" % g["kind"]), "muted")], 2))
+		details.add_child(Paper.col([Paper.words(kind(g["kind"]), "strong"), Paper.words("%s · %s" % [_suits(g["coverage"]), _t("demand.share", {"pct": JsMath.js_round(g["share"] * 100.0)})], "small"), Paper.words(_t("demand.wants.%s" % g["kind"]), "muted")], 2))
 	for effect: String in UiWords.condition_effects(condition):
 		details.add_child(Paper.words(effect, "muted"))
 	details.add_child(Paper.words(_t("demand.forecastNote"), "muted"))

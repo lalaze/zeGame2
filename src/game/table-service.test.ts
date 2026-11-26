@@ -61,6 +61,8 @@ describe('table service', () => {
   it('only stops a barista once the pass, however large, is full', () => {
     const run = (pass: number) => {
       const s = grown();
+      // Hire full servers so tableServiceCapacity does not cap arrivals while the test holds servers away.
+      s.upgrades.server = 5;
       s.upgrades.pass = pass;
       openShop(s);
       const sim = new Sim(seeded(4));

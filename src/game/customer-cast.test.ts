@@ -62,6 +62,10 @@ describe('thirty-six-customer cast', () => {
         expect(c.look).not.toBe(CUSTOMER_CAST[c.appearanceId!].look);
         seen.set(c.id, c.appearanceId!);
       }
+      if (state.phase === 'closing' && sim.finishedService) {
+        sim.closeShop(state);
+        openShop(state);
+      }
     }
     expect(seen.size).toBeGreaterThanOrEqual(36);
     expect(new Set([...seen.values()].slice(0, 36)).size).toBe(36);

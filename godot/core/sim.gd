@@ -976,7 +976,7 @@ func _deliver(state: Dictionary, server: Dictionary, events: Array) -> bool:
 		if unpaid and c["hasCup"]:
 			CorePartners.record_partner_work(state, server.get("partnerId", JsUtil.UNDEFINED))
 		c["phase"] = "sitting"
-		c["timer"] = 6.0 + _rng.call() * 8.0 + CoreStyles.style_dwell_extra(state, _meal(c))
+		c["timer"] = 38.0 + _rng.call() * 12.0 + CoreStyles.style_dwell_extra(state, _meal(c))
 	server["plates"].pop_front()
 	_head_out(server)
 	return true
@@ -1189,7 +1189,8 @@ func update(state: Dictionary, dt: float) -> Array:
 		# An empty menu must not leave an infinite saved timer.
 		_spawn_timer = (0.5 + _rng.call()) / rate if rate > 0.0 else 1.0
 		if state["phase"] == "open":
-			if queue.size() < CoreData.MAX_QUEUE:
+			var balk: float = CoreData.QUEUE_BALK_CHANCE[queue.size()] if queue.size() < CoreData.MAX_QUEUE else 1.0
+			if balk <= 0.0 or balk < 1.0 and _rng.call() >= balk:
 				_spawn(state)
 			else:
 				state["today"]["doorLost"] += 1.0

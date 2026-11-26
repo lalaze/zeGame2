@@ -176,8 +176,14 @@ export const LEVEL_COST_MULTIPLIER = 10;
 /** Every item level listed here doubles that item's price. */
 export const PRICE_MILESTONES = [10, 25, 50, 100, 150, 200, 300] as const;
 
-export const MAX_QUEUE = 6;
+export const MAX_QUEUE = 4;
+/** Chance an arriving guest walks away on seeing N people already in line (index = queue length). */
+export const QUEUE_BALK_CHANCE: readonly number[] = [0, 0.05, 0.15, 0.45];
 export const BASE_ARRIVAL_RATE = 0.2; // customers per second
+/** Upper bound on actual arrivals per second so late-game foot traffic fits the ground floor. */
+export const MAX_ARRIVAL_RATE = 0.9;
+/** Arrivals also stay within this multiple of current service capacity. */
+export const ARRIVAL_CAPACITY_RATIO = 1.1;
 export const VIP_CHANCE = 0.03;
 export const VIP_MULTIPLIER = 5;
 /**

@@ -168,7 +168,7 @@ describe('gentle closing and saved service', () => {
   // The doorway case waits for a cook between the kitchen door and its x=12 waypoint,
   // rather than trusting a seed to stop there: any change to guest routes shifts the timing.
   const inDoorway = (cook: Cook) => cook.x >= 0 && cook.x < 12 && cook.y === doorwayY('kitchen', 'right') && cook.tx === 12;
-  it.each([{ seed: 12, doorway: false }, { seed: 291, doorway: true }])('refreshes mid-close with in-flight plates and batches without consuming ingredients twice (seed $seed)', ({ seed, doorway }) => {
+  it.each([{ seed: 12, doorway: false }, { seed: 5, doorway: true }])('refreshes mid-close with in-flight plates and batches without consuming ingredients twice (seed $seed)', ({ seed, doorway }) => {
     const random = vi.spyOn(Math, 'random').mockImplementation(rng(seed));
     try {
       const store = storage();

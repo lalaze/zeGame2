@@ -7,7 +7,7 @@ import {
 } from './conditions';
 import { INGREDIENTS, type ItemId } from './data';
 import { openShop } from './day';
-import { arrivalRate, dayDemand, menuItems, orderShares, patienceSeconds, tablePatience } from './economy';
+import { arrivalRate, dayDemand, menuItems, orderShares, patienceSeconds, tablePatience, trafficDemand } from './economy';
 import { Sim } from './sim';
 import { createInitialState, type GameState } from './state';
 import { thoughtCandidates } from '../render/thoughts';
@@ -86,7 +86,10 @@ describe('daily conditions', () => {
 
   it('bring a bigger takeaway crowd on market day and a calm, patient one on a quiet day', () => {
     const market = cafe(dayOf('market')), quiet = cafe(dayOf('quiet')), fair = cafe(dayOf('fair'));
-    expect(arrivalRate(market) / arrivalRate(fair)).toBeCloseTo(1.2, 9);
+    // Arrival rate is capped at 1.1x service capacity, so compare uncapped trafficDemand for exact weather ratios.
+    expect(trafficDemand(market) / trafficDemand(fair)).toBeCloseTo(1.2, 9);
+    expect(trafficDemand(quiet) / trafficDemand(fair)).toBeCloseTo(0.85, 9);
+    expect(arrivalRate(market)).toBeGreaterThanOrEqual(arrivalRate(fair));
     expect(arrivalRate(quiet) / arrivalRate(fair)).toBeCloseTo(0.85, 9);
     expect(patienceSeconds(quiet) - patienceSeconds(fair)).toBe(15);
     expect(tablePatience(quiet) - tablePatience(fair)).toBe(15);

@@ -426,7 +426,12 @@ async function tour(k: Kit): Promise<void> {
   const drink = IDS.menu.find((id) => call('trial-sales', 'canTrialDrink', [s(), id])) ?? (await act(['economy', 'setOnMenu', '$S', 'latte', false]), 'latte');
   const serving = async () => { if (s().phase === 'open' && s().dayTime < 120) return; await finish(); await act(['trial-sales', 'selectTrialSale', '$S', drink]); await openDay(); await act(['$G', 'speed', 1]); };
   for (let round = 0; round < 8; round++) {
-    await serving(); await queueUp(3); const guests = k.page.game.sim.queueChoices(); if (guests.length) await act(['$GUEST', 'mark', guests[guests.length - 1].id, 'cookie']);
+    await serving(); await queueUp(2); const guests = k.page.game.sim.queueChoices(); if (guests.length) await act(['$GUEST', 'mark', guests[guests.length - 1].id, 'cookie']);
+    const trialIdx = k.page.game.serviceHelpOptions().findIndex((o) => o.title.startsWith('flow.helpTrial'));
+    if (trialIdx >= 0) { await act(['$G', round % 2 === 0 ? 'helpTwice' : 'help', trialIdx]); line(0.1, 90); }
+    await queueUp(2);
+    const queueIdx = k.page.game.serviceHelpOptions().findIndex((o) => o.title.startsWith('flow.helpQueue'));
+    if (queueIdx >= 0) { await act(['$G', 'help', queueIdx]); line(0.1, 90); }
     for (let n = 0; n < 5; n++) { await act(['$G', n === 0 ? 'helpLate' : n === 1 ? 'helpTwice' : 'help', n + round]); await act(['$G', 'help', 0]); line(0.1, 14); }
     for (const flag of ['arrange', 'panning', 'overview', 'drawer']) { await ui(flag, true); line(0.1, 2); await act(['$G', 'help', round]); await act(['$G', 'helpBrew']); await act(['$G', 'openMoment']); await ui(flag, false); }
   }
@@ -472,10 +477,14 @@ async function tour(k: Kit): Promise<void> {
   await set('manager', { ...structuredClone(s().manager), auto: false });
 
   // ---- Sold out without a manager: restock, or leave it.
+  await finish();
+  await act(['$G', 'speed', 1]);
   for (const choice of ['soldOutResume', 'soldOutFinish']) {
-    await openDay(); line(0.1, 30); await set('pantry', Object.fromEntries(Object.keys(s().pantry).map((id) => [id, 0]))); await set('shelf', {});
+    await openDay(); line(0.1, 30); await set('pantry', Object.fromEntries(Object.keys(s().pantry).map((id) => [id, 0]))); await set('shelf', {}); await set('inProduction', {});
     for (let n = 0; n < 60 && !k.page.soldOut && s().phase === 'open'; n++) line(0.25, 10);
-    await closeDialog(); if (k.page.soldOut) { await act(['economy', 'earn', '$S', 1e5]); await act(['$G', choice]); k.page.soldOut = null; } line(0.1, 10); await finish();
+    await closeDialog(); if (k.page.soldOut) { await act(['economy', 'earn', '$S', 1e5]); await act(['$G', choice]); k.page.soldOut = null; }
+    if (choice === 'soldOutFinish') { for (let n = 0; n < 40 && s().phase === 'closing'; n++) line(0.25, 10); await closeDialog(); }
+    line(0.1, 10); await finish();
   }
 
   // ---- Away: the till, franchises, an order, a street shop and gifts, on their own, together, and behind a dialog.
