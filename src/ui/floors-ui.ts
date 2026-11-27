@@ -29,6 +29,21 @@ export const FLOORS_ICONS = {
   kitchen: 'M7 20v-6.2A4 4 0 0 1 6.6 6a5.6 5.6 0 0 1 10.8 0 4 4 0 0 1-.4 7.8V20zM7 16.8h10',
   clock: 'M20 12a8 8 0 1 1-16 0 8 8 0 0 1 16 0zM12 7.5V12l3 2',
   spark: 'M12 3.5l1.9 5.2 5.6.3-4.4 3.5 1.5 5.4L12 14.8 7.4 17.9l1.5-5.4L4.5 9l5.6-.3z',
+  bell: 'M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20a2 2 0 0 0 4 0M12 3v2',
+  sun: 'M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6 19 19M5 19l1.4-1.4M17.6 6.4 19 5',
+  rain: 'M7 15h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 8a3.5 3.5 0 0 0 1 7zM8 18l-1 2M12 18l-1 2M16 18l-1 2',
+  cloud: 'M7 18h10a4 4 0 0 0 .5-8A6 6 0 0 0 6 11a3.5 3.5 0 0 0 1 7z',
+  leaf: 'M5 19c0-8 5-13 14-14-1 9-6 14-14 14zM5 19 13 11',
+  bag: 'M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2',
+  brush: 'M14 4l6 6-8 8H6v-6zM11 7l6 6',
+  gear: 'M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1',
+  heart: 'M12 19s-7-4.4-7-9.2A3.8 3.8 0 0 1 12 7.6a3.8 3.8 0 0 1 7 2.2c0 4.8-7 9.2-7 9.2z',
+  heartfill: { fill: 'M12 19.5s-7.5-4.7-7.5-9.7A4.1 4.1 0 0 1 12 7.2a4.1 4.1 0 0 1 7.5 2.6c0 5-7.5 9.7-7.5 9.7z' },
+  check: 'M5 12.5 10 17l9-10',
+  lock: 'M7.5 11V8a4.5 4.5 0 0 1 9 0v3M6 11h12a1.5 1.5 0 0 1 1.5 1.5v7A1.5 1.5 0 0 1 18 21H6a1.5 1.5 0 0 1-1.5-1.5v-7A1.5 1.5 0 0 1 6 11z',
+  ground: 'M3.5 19.5h17M7.5 19.5V11h9v8.5M6 11h12',
+  wallframe: 'M5 6.5h14v12H5zM9 6.5 12 3.5l3 3M8.5 14l2.5-2.8 2.2 2.2 1.8-1.8 1.5 2.4',
+  trophy: 'M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M9 20h6',
 } as const satisfies Record<string, IconSpec>;
 export type FloorsIcon = keyof typeof FLOORS_ICONS;
 
@@ -43,10 +58,10 @@ export function floorsIconUrl(name: FloorsIcon): string {
 
 /** Controls that always carry an icon here, whether or not the pixel HUD marked them. */
 const ICON_HOMES: Record<string, FloorsIcon> = {
-  '#room-zoom-reset': 'map', '#open-btn': 'menu', '#panel-toggle': 'book', '#mobile-cafe-more': 'more',
+  '#room-zoom-reset': 'map', '#open-btn': 'bell', '[data-play-help]': 'help', '#panel-toggle': 'book', '#mobile-cafe-more': 'more',
   '#coins': 'coin', '#drawer-balance': 'coin', '#drawer-close': 'close', '.mobile-tools-heading button': 'close',
-  '#settings-btn': 'settings', '#cafe-style-btn': 'decor', '#reputation-btn': 'star',
-  '#partners-btn': 'people', '#regular-guests-btn': 'people',
+  '#settings-btn': 'gear', '#cafe-style-btn': 'brush', '#reputation-btn': 'star',
+  '#partners-btn': 'people', '#regular-guests-btn': 'heart',
   '[data-tab="menu"]': 'menu', '[data-tab="pantry"]': 'pantry', '[data-tab="upgrades"]': 'upgrades',
   '[data-tab="decor"]': 'decor', '[data-tab="pets"]': 'pets', '[data-tab="promotion"]': 'promotion',
 };

@@ -47,6 +47,9 @@ describe('kitchen expansion upgrade', () => {
     showUpgrades(state);
     expect(cookButton().disabled).toBe(true);
     expect(cookRow().querySelector('.lv')!.textContent).toBe('');
+    const details = cookRow().querySelector<HTMLDetailsElement>('.urow-details')!;
+    details.open = true;
+    details.dispatchEvent(new Event('toggle'));
     expect(cookRow().textContent).toContain(t('effect.cookLocked'));
     // No "locked → locked" preview, and no money hint: the kitchen, not cash, is the blocker.
     expect(cookRow().querySelector('.sub')!.textContent).not.toContain('→');
@@ -63,6 +66,9 @@ describe('kitchen expansion upgrade', () => {
     const state = createInitialState(0);
     showUpgrades(state);
     const row = document.querySelector('[data-buy="upgrade:marketing"]')!.closest<HTMLElement>('.row')!;
+    const details = row.querySelector<HTMLDetailsElement>('.urow-details')!;
+    details.open = true;
+    details.dispatchEvent(new Event('toggle'));
     const after = { ...state, upgrades: { ...state.upgrades, marketing: 1 } };
     expect(row.textContent).toContain(`${t('effect.marketing', { n: Math.round(arrivalRate(state) * DAY_SECONDS) })} → ${t('effect.marketing', { n: Math.round(arrivalRate(after) * DAY_SECONDS) })}`);
     expect(row.textContent).not.toContain('/min');
@@ -85,8 +91,11 @@ describe('kitchen expansion upgrade', () => {
     expect(state.coins).toBe(0);
     expect(cookCount(state)).toBe(3);
     expect(cookRow().querySelector('.lv')!.textContent).toBe('Stage 3/3');
+    expect(cookButton().hidden).toBe(true);
     expect(cookButton().disabled).toBe(true);
-    expect(cookButton().textContent).toContain(t('btn.maxed'));
+    const stamp = cookRow().querySelector<HTMLElement>('.urow-stamp')!;
+    expect(stamp.hidden).toBe(false);
+    expect(stamp.textContent).toBe(t('btn.maxed'));
     cookButton().click();
     expect(state.upgrades.cook).toBe(2);
     expect(state.coins).toBe(0);

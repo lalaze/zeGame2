@@ -7,7 +7,7 @@ import { PARITY_DIR, ROOT } from './bundle.mjs';
 
 /** What `godot/core/game_session.gd` ports: functions of `startGame`, then its variables, then its statements. */
 const FUNCTIONS = ['saveGame', 'fitCanvas', 'tickCatGifts', 'pickUpGift', 'announceReadyOrder', 'settleLegacyInterior', 'updateDayHud', 'startDay', 'managerStartDay', 'managerTick', 'managerReport',
-  'leaveCafe', 'settleAway', 'prepareDay', 'closeDay', 'showReport', 'applyProfile', 'startOnboarding', 'startBranch', 'resetGame', 'locateResident', 'greetResident', 'openMoment', 'momentStage',
+  'leaveCafe', 'settleAway', 'prepareDay', 'closeDay', 'showReport', 'onPanelChange', 'applyProfile', 'startOnboarding', 'startBranch', 'resetGame', 'locateResident', 'greetResident', 'openMoment', 'momentStage',
   'serviceHelpAllowed', 'serviceHelpOptions', 'helpBrew', 'frame', 'setPanelCollapsed'];
 const VARIABLES = ['startupComplete', 'managerWait', 'managerCounting', 'state', 'sim', 'cuedMoment', 'awaySettled', 'settleFurniture', 'unsettledFurniture', 'announcedOrder', 'menuEmpty', 'uiTimer', 'shownCoins', 'shownRate', 'autosaveTimer'];
 const TOP = ['HINT_KEY', 'MOMENT_HINT_KEY', 'AUTOSAVE_MS', 'MANAGER_DELAY', 'SIM_STEP'];
@@ -18,7 +18,7 @@ const STATEMENTS = ['for (const b of speedBtns)', "document.addEventListener('vi
 const PAGE = ['session', 'storage', 'moments', 'scene', 'panel', 'drawer', 'toast', 't', 'showModal', 'isModalOpen', 'document', '$', 'sessionNotice', 'chinese', 'stage', 'sign', 'stats', 'cafe',
   'fitFullscreenRoom', 'window', 'roomViewport', 'guide', 'regionsUI', 'playFlow', 'operationMonitor', 'operationBtn', 'openBtn', 'closeBtn', 'speedBtns', 'hint', 'dayClockBase', 'dayClockTraffic',
   'trafficSummary', 'dayClock', 'trafficHud', 'conditionHud', 'updateLedgerTheme', 'updateReputationButton', 'updateRegularGuestsButton', 'updatePartnersButton', 'updateCafeStyleButton', 'updateGuide',
-  'showPrepare', 'showFirstOpening', 'settlementHtml', 'guestMemoryReport', 'trialResultCard', 'closingStory', 'ownerIcon', 'showPanelTab', 'showOnboarding', 'rememberLocale', 'updateBrand',
+  'showPrepare', 'showFirstOpening', 'showSettlement', 'ownerIcon', 'showPanelTab', 'showOnboarding', 'rememberLocale', 'updateBrand',
   'itemName', 'displayItemName', 'milestoneName', 'showRecommendation', 'locateCat', 'reducedMotion', 'catLocateExit', 'updateRoomProjectsBook', 'updateStreetMap', 'updateStats', 'cafeLife', 'coinsEl',
   'drawerBalance', 'rateEl', 'showSoldOut', 'panelRoot', 'previewExit', 'sceneWrap', 'arrangeFocus', 'restoreTitle', 'updateAwayTitle', 'setInterval', 'waitForStartupReady', 'loading',
   'requestAnimationFrame', 'setTimeout', 'savePage', 'formatDuration', 'updatePanelVisibility', 'showArrange', 'startArrange', 'clearInterval', 'floorsView', 'cafeInteractionEnabled', 'canvas', 'areaName', 'holdPiece'];

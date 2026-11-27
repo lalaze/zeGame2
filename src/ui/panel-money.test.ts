@@ -53,13 +53,18 @@ describe('purchase amount presentation', () => {
     const state = createInitialState(0); state.coins = 1000;
     const { panel } = panelFor(state);
     const row = button('[data-buy="item:espresso"]').closest('.row')!;
+    const cardDetails = row.querySelector<HTMLDetailsElement>('.card-details')!;
+    expect(cardDetails.open).toBe(false);
+    cardDetails.open = true;
+    cardDetails.dispatchEvent(new Event('toggle'));
+    expect(row.classList.contains('is-expanded')).toBe(true);
     const current = row.querySelector<HTMLElement>('.sub')!;
     const preview = row.querySelector<HTMLElement>('.menu-upgrade-preview')!;
     const price = (level: number) => formatTransactionMoney(itemPrice(menuItem('espresso'), level) * tipMultiplier(state));
     const unchanged = serialize(state);
     expect(current.textContent).toBe(t('row.each', { price: price(1), cost: formatTransactionMoney(servingCost('espresso')), time: prepTime(state, 'espresso').toFixed(1) }));
     expect(preview.textContent).toBe(t('row.afterUpgrade', { price: price(2) }));
-    expect(button('[data-price-details="item:espresso"]').closest('.row-actions')).not.toBeNull();
+    expect(button('[data-price-details="item:espresso"]').closest('.card-more')).not.toBeNull();
     for (const [amount, quantity] of [['10', 10], ['max', 'max']] as const) {
       button(`[data-amount="${amount}"]`).click();
       expect(preview.textContent).toBe(t('row.afterUpgrade', { price: price(1 + quoteItem(state, 'espresso', quantity).count) }));
@@ -109,6 +114,9 @@ describe('purchase amount presentation', () => {
     document.body.insertAdjacentHTML('beforeend', '<div id="modal-root"></div>');
     const buy = button('[data-buy="item:espresso"]');
     const cost = quoteItem(state, 'espresso', 1).cost;
+    const cardDetails = buy.closest('.row')!.querySelector<HTMLDetailsElement>('.card-details')!;
+    cardDetails.open = true;
+    cardDetails.dispatchEvent(new Event('toggle'));
     const details = button('[data-price-details="item:espresso"]');
     expect(buy.disabled).toBe(true);
     expect(buy.querySelector('.cost')!.textContent).toBe(formatTransactionMoney(cost));
@@ -131,6 +139,9 @@ describe('purchase amount presentation', () => {
     const { panel } = panelFor(state);
     document.body.insertAdjacentHTML('beforeend', '<div id="modal-root"></div>');
     const before = serialize(state);
+    const espressoDetails = button('[data-buy="item:espresso"]').closest('.row')!.querySelector<HTMLDetailsElement>('.card-details')!;
+    espressoDetails.open = true;
+    espressoDetails.dispatchEvent(new Event('toggle'));
     for (const amount of ['10', 'max']) {
       button(`[data-amount="${amount}"]`).click();
       const quote = quoteItem(state, 'espresso', amount === 'max' ? 'max' : 10);
@@ -139,8 +150,14 @@ describe('purchase amount presentation', () => {
       closeModal();
     }
     panel.showTab('upgrades');
+    const mktDetails = button('[data-buy="upgrade:marketing"]').closest('.row')!.querySelector<HTMLDetailsElement>('.urow-details')!;
+    mktDetails.open = true;
+    mktDetails.dispatchEvent(new Event('toggle'));
     expect(button('[data-price-details="upgrade:marketing"]').textContent).toBeTruthy();
     panel.showTab('pantry');
+    const beansDetails = button('[data-buy="ing:beans"]').closest('.row')!.querySelector<HTMLDetailsElement>('.card-details')!;
+    beansDetails.open = true;
+    beansDetails.dispatchEvent(new Event('toggle'));
     expect(button('[data-price-details="ing:beans"]').textContent).toBeTruthy();
     expect(serialize(state)).toBe(before);
   });
@@ -154,6 +171,9 @@ describe('purchase amount presentation', () => {
     state.coins = 300;
     const liveCost = quoteItem(state, 'espresso', 'max').cost;
     expect(liveCost).not.toBe(oldCost);
+    const espressoDetails = button('[data-buy="item:espresso"]').closest('.row')!.querySelector<HTMLDetailsElement>('.card-details')!;
+    espressoDetails.open = true;
+    espressoDetails.dispatchEvent(new Event('toggle'));
     button('[data-price-details="item:espresso"]').click();
     expect(query('[role="dialog"]').textContent).toContain('Price: $' + String(liveCost));
     expect(query('[role="dialog"]').textContent).toContain('Balance: $300');

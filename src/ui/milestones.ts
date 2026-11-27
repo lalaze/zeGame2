@@ -33,16 +33,20 @@ export function cafeTitle(s: GameState): string {
  * open chapter's closest milestone. Returns a signature to skip identical repaints.
  */
 export function milestoneCard(s: GameState): { html: string; done: boolean; sig: string } {
+  const leaf = '<span class="tape-leaf" data-floors-icon="leaf" aria-hidden="true"></span>';
   const book = `<button type="button" class="chip milestone-book-btn" data-milestone-book>${escape(t('milestone.card.book'))}</button>`;
   const ready = claimableChapter(s);
   if (ready !== null) {
     const chapter = CHAPTERS[ready];
     return { done: true, sig: `ready:${ready}`, html: `
-      <div class="goal-head">${escape(t('milestone.card.chapter', { n: ready + 1, total: CHAPTERS.length, title: chapterTitle(chapter) }))}</div>
-      <div class="goal-text">${escape(t('milestone.card.ready'))}</div>
-      <div class="goal-actions">
-        <button type="button" class="pixel-btn small claim" data-claim-chapter>${escape(t('milestone.card.claim', { title: chapterTitle(chapter), finish: finishName(chapter) }))}</button>
-        ${book}
+      ${leaf}
+      <div class="tape-body">
+        <div class="goal-head">${escape(t('milestone.card.chapter', { n: ready + 1, total: CHAPTERS.length, title: chapterTitle(chapter) }))}</div>
+        <div class="goal-text">${escape(t('milestone.card.ready'))}</div>
+        <div class="goal-actions">
+          <button type="button" class="pixel-btn small claim" data-claim-chapter>${escape(t('milestone.card.claim', { title: chapterTitle(chapter), finish: finishName(chapter) }))}</button>
+          ${book}
+        </div>
       </div>` };
   }
   // The unfinished milestone closest to done across the open chapters; ties keep the listed order.
@@ -51,16 +55,24 @@ export function milestoneCard(s: GameState): { html: string; done: boolean; sig:
   if (!next) {
     const title = cafeTitle(s);
     return { done: false, sig: `finished:${title}`, html: `
-      <div class="goal-head">${escape(title)}</div>
-      <div class="goal-main"><div class="goal-text">${escape(t('milestone.card.finished'))}</div>${book}</div>` };
+      ${leaf}
+      <div class="tape-body">
+        <div class="goal-head">${escape(title)}</div>
+        <div class="goal-text">${escape(t('milestone.card.finished'))}</div>
+      </div>
+      ${book}` };
   }
   const index = next.index, chapter = CHAPTERS[index];
   const count = chapter.milestones.filter((m) => milestoneDone(s, m.id)).length;
   return { done: false, sig: `open:${index}:${count}:${next.m.id}:${next.text}`, html: `
-    <div class="goal-head">${escape(t('milestone.card.chapter', { n: index + 1, total: CHAPTERS.length, title: chapterTitle(chapter) }))}</div>
-    <div class="goal-main"><div class="goal-text">${escape(milestoneName(next.m.id))}</div>${book}</div>
-    <div class="bar"><i style="width:${next.share * 100}%"></i></div>
-    <div class="goal-progress">${escape(next.text)} · ${escape(t('milestone.card.progress', { n: count, total: chapter.milestones.length }))}</div>` };
+    ${leaf}
+    <div class="tape-body">
+      <div class="goal-head">${escape(t('milestone.card.chapter', { n: index + 1, total: CHAPTERS.length, title: chapterTitle(chapter) }))}</div>
+      <div class="goal-text">${escape(milestoneName(next.m.id))}</div>
+      <div class="bar"><i style="width:${next.share * 100}%"></i></div>
+      <div class="goal-progress">${escape(next.text)} · ${escape(t('milestone.card.progress', { n: count, total: chapter.milestones.length }))}</div>
+    </div>
+    ${book}` };
 }
 
 /** Claims the ready chapter and says what the café got. */

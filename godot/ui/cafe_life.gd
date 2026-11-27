@@ -15,14 +15,19 @@ func _init(ui: CafeUi) -> void:
 	_ui = ui
 	theme = Paper.theme()
 	visible = false
-	add_theme_stylebox_override("panel", Paper.box(Paper.PAPER, Paper.LINE, 2, 16, Vector2(10, 4), Paper.STAMP, 3.0))
+	add_theme_stylebox_override("panel", Paper.strip_box(Vector2(10, 4)))
 	_hear = Paper.button("", "link", func() -> void:
 		_dismiss()
 		_read.call())
+	_hear.add_theme_color_override("font_color", Paper.INK_A)
+	_hear.add_theme_color_override("font_hover_color", Paper.INK_A)
+	_hear.add_theme_color_override("font_pressed_color", Paper.INK_A)
+	_hear.add_theme_font_size_override("font_size", 13)
 	_hear.mouse_filter = Control.MOUSE_FILTER_STOP
 	var later := Paper.button("", "flat", _dismiss, "close", 14)
+	later.add_theme_color_override("icon_normal_color", Paper.INK_LIGHT)
 	later.mouse_filter = Control.MOUSE_FILTER_STOP
-	add_child(Paper.line([_hear, later], 2))
+	add_child(Paper.line([Paper.mark("heart", 16.0, Paper.ROSE_A), _hear, later], 4))
 
 
 static func _t(key: String, params: Dictionary = {}) -> String:

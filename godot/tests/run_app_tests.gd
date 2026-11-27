@@ -615,15 +615,25 @@ func _long_menu() -> void:
 	_app.ui.show_tab("menu")
 	await _frames(1)
 	var list: Control = ledger.get("_list")
+	var part: LedgerRows = ledger.get("_part")
 	var keys: Array = ledger.call("_visible_keys")
-	_check("the menu opens with a screenful", list.get_child_count() < keys.size(), [list.get_child_count(), keys.size()])
+	_check("the menu opens with a screenful", (part.get("_nodes") as Dictionary).size() < keys.size(), [(part.get("_nodes") as Dictionary).size(), keys.size()])
 	for _i in 200:
 		await process_frame
-		if list.get_child_count() == keys.size() and (ledger.get("_part") as LedgerRows).get("_stale").is_empty():
+		if (part.get("_nodes") as Dictionary).size() == keys.size() and (part.get("_pending") as Array).is_empty() and (part.get("_stale") as Array).is_empty():
 			break
-	var rows: Dictionary = (ledger.get("_part") as LedgerRows).get("_rows")
-	_check("and is whole a little later", list.get_child_count() == keys.size() and rows.values().all(func(r: Dictionary) -> bool: return r["level"].text == "Lv 3" and not (r["buy"].get_child(0).get_child(2) as Label).text.is_empty()))
-	_check("in its order", range(keys.size()).all(func(i: int) -> bool: return (ledger.get("_part") as LedgerRows).get("_nodes")[keys[i]].get_index() == i))
+	var rows: Dictionary = part.get("_rows")
+	var nodes: Dictionary = part.get("_nodes")
+	_check("and is whole a little later", nodes.size() == keys.size() and rows.values().all(func(r: Dictionary) -> bool: return r["level"].text == "Lv 3" and not (r["buy"].get_child(0).get_child(2) as Label).text.is_empty()))
+	var flat: Array = []
+	for child in list.get_children():
+		if child in nodes.values():
+			flat.append(child)
+		else:
+			for sub in child.get_children():
+				if sub in nodes.values():
+					flat.append(sub)
+	_check("in its order", flat.size() == keys.size() and range(keys.size()).all(func(i: int) -> bool: return flat[i] == nodes[keys[i]]))
 	# What changes out of sight is kept up too.
 	for m: Dictionary in CoreData.MENU:
 		s["items"][m["id"]] = 4.0
@@ -646,7 +656,7 @@ func _ledger_touch() -> void:
 	var scroll: ScrollContainer = ui.ledger.get("_scroll")
 	var at := scroll.get_global_rect().get_center()
 	for b: Button in _buttons(scroll):
-		if scroll.get_global_rect().grow(-20.0).encloses(b.get_global_rect()) and b.get_global_rect().position.y > scroll.get_global_rect().get_center().y - 100.0:
+		if scroll.get_global_rect().grow_individual(-2.0, -20.0, -2.0, -20.0).encloses(b.get_global_rect()) and b.get_global_rect().position.y > scroll.get_global_rect().get_center().y - 100.0:
 			at = b.get_global_rect().get_center()
 	var pressed := [0]
 	for b: Button in _buttons(scroll):
@@ -979,9 +989,9 @@ func _play() -> void:
 			break
 	_check("the day ends", s.state["day"] >= 2.0, "%s %s" % [s.state["phase"], s.state["dayTime"]])
 	_check("with nothing left lying about", nodes < 700, nodes)
-	_check("and its report", _title() == _t("report.title", {"n": 1.0}), _title())
+	_check("and its report", ui.dialogs.is_open() and _all_labels_text(ui.dialogs.get("_box")).contains(_t("report.closedHeading", {"n": 1.0})), _title())
 	await _press(_t("report.next"))
-	_check("the next day starts with its menu", _title() == _t("prep.title", {"n": 2.0}), _title())
+	_check("the next day starts with its menu", _title() == _t("prep.boardTitle"), _title())
 	await _press(_t("prep.later"))
 	await _between_ledger_and_room()
 	await _ledger_touch()
@@ -1081,6 +1091,9 @@ func _play() -> void:
 	_app.call("_resized")
 	await _slices()
 	await _crowd_limits()
+	await _stage3_ledger()
+	await _stage4_prepare()
+	await _stage5_settlement()
 	await _moving()
 	s = _app.session
 	ui = _app.ui
@@ -1123,6 +1136,7 @@ func _crowd_limits() -> void:
 		s.sim.reset()
 		ui.set_ledger(true)
 		ui.ledger.show_tab("upgrades")
+		ui.ledger.expanded_cards["upgrade:marketing"] = true
 		ui.refresh()
 		await _frames(1)
 		_check("uncapped marketing hides cap hint (%s)" % pair[0], not _all_labels_text(ui.ledger).to_lower().contains(needle))
@@ -1143,6 +1157,7 @@ func _crowd_limits() -> void:
 			capped["pantry"][ing["id"]] = 1000.0
 		s.state = capped
 		ui.ledger.show_tab("upgrades")
+		ui.ledger.expanded_cards["upgrade:marketing"] = true
 		ui.refresh()
 		await _frames(1)
 		_check("capped marketing shows cap hint (%s)" % pair[0], _all_labels_text(ui.ledger).to_lower().contains(needle))
@@ -1189,5 +1204,391 @@ func _crowd_limits() -> void:
 	I18n.locale = saved_locale
 	s.state = saved_state
 	ui.set_ledger(false)
+	ui.refresh()
+	await _frames(1)
+
+
+## Stage 3 ledger checks: upgrade grouping, ops tiles toggle, decor comfort without tiers, cat buttons, menu check >= 40x40.
+func _stage3_ledger() -> void:
+	var s: CoreGameSession = _app.session
+	var ui: CafeUi = _app.ui
+	var saved_locale := I18n.locale
+	var saved_state: Dictionary = s.state.duplicate(true)
+	I18n.locale = "zh"
+
+	var test_state := CoreState.create_initial_state(0.0)
+	test_state["day"] = 5.0
+	test_state["coins"] = 50000.0
+	CorePets.adopt_cat(test_state, "ginger")
+	s.state = test_state
+	s.sim.reset()
+	s.cats.reset()
+	s.cats.update(test_state, 0.05)
+	ui.set_ledger(true)
+
+	# 1. Upgrades 3-group order + ops tiles expand / switch / collapse.
+	ui.ledger.show_tab("upgrades")
+	ui.refresh()
+	await _frames(2)
+	var expected_keys := ["ugrp:staff", "upgrade:barista", "upgrade:server", "upgrade:cook", "ugrp:shop", "upgrade:marketing", "upgrade:machine", "upgrade:tables", "upgrade:pass", "room-projects", "ugrp:ops", "ops-grid"]
+	_check("upgrades keys follow 3-group order", ui.ledger.call("_visible_keys") == expected_keys, ui.ledger.call("_visible_keys"))
+	var cards_part: LedgerCards = ui.ledger.get("_part").get("_cards")
+	var detail: Control = cards_part.get("_detail")
+	var tiles: Dictionary = cards_part.get("_tiles")
+	var ops_cards: Dictionary = cards_part.get("_cards")
+	_check("ops tiles start collapsed", not detail.visible and ui.ledger.open_ops_tile.is_empty())
+	var ops_scroll: ScrollContainer = ui.ledger.get("_scroll")
+	ops_scroll.scroll_vertical = 0
+	await _frames(1)
+	var shut_bottom: float = (tiles["manager"]["button"] as Button).get_global_rect().end.y
+	(tiles["manager"]["button"] as Button).pressed.emit()
+	# Real frames: the panel lays out, then the scroll moves, then the list is placed again.
+	for _i in 3:
+		await _frames(1)
+	_check("tapping manager tile expands manager card", detail.visible and (ops_cards["manager"] as Control).visible and not (ops_cards["orders"] as Control).visible)
+	# The tiles are at the foot of the page: the panel they open must be scrolled onto the screen.
+	var page := ops_scroll.get_global_rect().grow(1.0)
+	var panel := detail.get_global_rect()
+	_check("the opened tile's panel is scrolled onto the screen", shut_bottom + panel.size.y > page.end.y and page.encloses(panel), [shut_bottom, ops_scroll.scroll_vertical, page, panel])
+	(tiles["orders"]["button"] as Button).pressed.emit()
+	await _frames(1)
+	_check("tapping orders tile switches to orders card", detail.visible and (ops_cards["orders"] as Control).visible and not (ops_cards["manager"] as Control).visible)
+	(tiles["orders"]["button"] as Button).pressed.emit()
+	await _frames(1)
+	_check("tapping active tile collapses detail", not detail.visible and ui.ledger.open_ops_tile.is_empty())
+
+	# 2. Decor tab shows comfort + tip % with no next-tier text or progress bar.
+	ui.ledger.show_tab("decor")
+	ui.refresh()
+	await _frames(2)
+	var decor_list: VBoxContainer = ui.ledger.get("_list")
+	var comfort_card: Control = decor_list.get_child(0)
+	var comfort_text := _all_labels_text(comfort_card)
+	_check("decor comfort card shows comfort & tips without next-tier hint or bar",
+		comfort_text.contains(I18n.t("decor.comfortLabel")) and comfort_text.contains("%")
+		and not comfort_text.contains("下一档") and not comfort_text.contains("升到")
+		and comfort_card.find_children("*", "ProgressBar", true, false).is_empty(), comfort_text)
+
+	# 3. Cats tab shows Adopt for unowned and In shop · Find for adopted.
+	ui.ledger.show_tab("pets")
+	ui.refresh()
+	await _frames(2)
+	var pet_rows: Dictionary = ui.ledger.get("_part").get("_rows")
+	var tuxedo_adopt: Button = pet_rows["tuxedo"]["adopt"]
+	var tuxedo_home: Button = pet_rows["tuxedo"]["homeLocate"]
+	var ginger_adopt: Button = pet_rows["ginger"]["adopt"]
+	var ginger_home: Button = pet_rows["ginger"]["homeLocate"]
+	_check("unowned cat shows adopt button only", tuxedo_adopt.visible and not tuxedo_home.visible)
+	_check("adopted cat shows in-shop locate button", not ginger_adopt.visible and ginger_home.visible and ginger_home.text == I18n.t("pet.inShop") and not ginger_home.disabled, [ginger_home.text, ginger_home.disabled])
+
+	# 4. Menu on-sale checkmark button has >= 40x40 touch target.
+	ui.ledger.show_tab("menu")
+	ui.refresh()
+	await _frames(3)
+	var checks := ui.ledger.find_children("*", "PaperCheckButton", true, false)
+	var check_ok := false
+	for ch: Node in checks:
+		if (ch as Control).is_visible_in_tree():
+			var sz := (ch as Control).get_global_rect().size
+			check_ok = sz.x >= 40.0 and sz.y >= 40.0
+			break
+	_check("menu on-sale check button hit target >= 40x40", check_ok, checks.size())
+
+	I18n.locale = saved_locale
+	s.state = saved_state
+	s.sim.reset()
+	s.cats.reset()
+	s.cats.update(saved_state, 0.05)
+	ui.set_ledger(false)
+	ui.refresh()
+	await _frames(1)
+
+
+## Stage 4 prepare chalkboard checks: 4 primary button cases, direct open, tile tap toggle, guest shares, off/kitchen tiles, back key.
+func _stage4_prepare() -> void:
+	var s: CoreGameSession = _app.session
+	var ui: CafeUi = _app.ui
+	var saved_locale := I18n.locale
+	var saved_state: Dictionary = s.state.duplicate(true)
+	I18n.locale = "zh"
+
+	var open_prep := func(st: Dictionary) -> void:
+		s.state = st
+		s.sim.reset()
+		ui.dialogs.close()
+		ui.dialogs.hush()
+		ui.show_prepare()
+
+	# 1. Empty menu: primary button says prep.start and is disabled; prep.emptyMenu shown; no direct button.
+	var st1 := CoreState.create_initial_state(0.0)
+	st1["day"] = 3.0
+	st1["onMenu"] = []
+	open_prep.call(st1)
+	await _frames(2)
+	var go1: Array = _buttons().filter(func(b: Button) -> bool: return b is PaperChalkboard.GoButton)
+	_check("stage4 empty menu disables GoButton with start label", go1.size() == 1 and (go1[0] as Button).disabled and _words_of(go1[0]) == _t("prep.start"), go1.map(_words_of))
+	_check("stage4 empty menu shows emptyMenu notice and hides openDirect", _all_labels_text(ui.dialogs.get("_box")).contains(_t("prep.emptyMenu")) and _buttons().filter(func(b: Button) -> bool: return _words_of(b) == _t("prep.openDirect")).is_empty())
+	# Back key closes prepare chalkboard and resets raised header.
+	_check("stage4 header raised while chalkboard open", (ui.hud.get("_header") as Control).z_index == 1)
+	_check("stage4 back closes chalkboard", ui.back() and not ui.dialogs.is_open() and (ui.hud.get("_header") as Control).z_index == 0)
+
+	# 2. Full stock: GoButton says prep.start, enabled, no openDirect; pressing opens without spending coins.
+	var st2 := CoreState.create_initial_state(0.0)
+	st2["day"] = 3.0
+	st2["coins"] = 500.0
+	st2["pantry"]["beans"] = 500.0
+	open_prep.call(st2)
+	await _frames(2)
+	var go2: Array = _buttons().filter(func(b: Button) -> bool: return b is PaperChalkboard.GoButton)
+	_check("stage4 full stock enables start GoButton without openDirect", go2.size() == 1 and not (go2[0] as Button).disabled and _words_of(go2[0]) == _t("prep.start") and _buttons().filter(func(b: Button) -> bool: return _words_of(b) == _t("prep.openDirect")).is_empty())
+	await _press(_t("prep.start"))
+	_check("stage4 full stock opens shop without spending coins", s.state["phase"] == "open" and s.state["coins"] == 500.0 and not ui.dialogs.is_open())
+
+	# 3a. Missing stock with full budget: GoButton says prep.restockOpen; pressing buys stock, opens day, shows receipt in toast.
+	var st3 := CoreState.create_initial_state(0.0)
+	st3["day"] = 3.0
+	st3["coins"] = 500.0
+	st3["pantry"]["beans"] = 0.0
+	var plan3 := CoreEconomy.restock_plan(st3)
+	open_prep.call(st3)
+	await _frames(2)
+	var go3: Array = _buttons().filter(func(b: Button) -> bool: return b is PaperChalkboard.GoButton)
+	var expect_restock_label := _t("prep.restockOpen", {"price": UiWords.money(plan3["cost"])})
+	_check("stage4 restockOpen label matches plan cost", go3.size() == 1 and _words_of(go3[0]) == expect_restock_label, [_words_of(go3[0]), expect_restock_label])
+	await _press(expect_restock_label)
+	var note3: Label = ui.dialogs.get("_note")
+	_check("stage4 restockOpen buys stock, spends coins, opens shop, toasts receipt", s.state["phase"] == "open" and s.state["pantry"]["beans"] > 0.0 and s.state["coins"] < 500.0 and note3.visible and note3.text.contains(_t("toast.opened", {"n": 3.0})) and note3.text.contains(_t("prep.bought", {"items": "%s ×%s" % [UiWords.ingredient("beans"), JsMath.number_to_string(s.state["pantry"]["beans"])]})), [s.state["phase"], s.state["pantry"]["beans"], note3.text])
+
+	# 3b. Partial budget: GoButton says prep.budgetOpen; pressing buys partial amount and opens day.
+	var st3b := CoreState.create_initial_state(0.0)
+	st3b["day"] = 3.0
+	st3b["coins"] = 3.0
+	st3b["pantry"]["beans"] = 0.0
+	open_prep.call(st3b)
+	await _frames(2)
+	var go3b: Array = _buttons().filter(func(b: Button) -> bool: return b is PaperChalkboard.GoButton)
+	var expect_budget_label := _t("prep.budgetOpen", {"price": UiWords.money(3.0)})
+	_check("stage4 budgetOpen label shown when partial budget", go3b.size() == 1 and _words_of(go3b[0]) == expect_budget_label, [_words_of(go3b[0]), expect_budget_label])
+	await _press(expect_budget_label)
+	_check("stage4 budgetOpen buys affordable stock and opens shop", s.state["phase"] == "open" and s.state["pantry"]["beans"] == 3.0 and s.state["coins"] == 0.0)
+
+	# 3c. Open without restocking (prep.openDirect): opens day without buying anything.
+	var st3c := CoreState.create_initial_state(0.0)
+	st3c["day"] = 3.0
+	st3c["coins"] = 500.0
+	st3c["pantry"]["beans"] = 2.0
+	open_prep.call(st3c)
+	await _frames(2)
+	_check("stage4 openDirect shown when restock is available", CoreEconomy.restock_quote(st3c)["cost"] > 0.0)
+	await _press(_t("prep.openDirect"))
+	_check("stage4 openDirect opens shop without buying stock", s.state["phase"] == "open" and s.state["pantry"]["beans"] == 2.0 and s.state["coins"] == 500.0, [s.state["phase"], s.state["pantry"]["beans"], s.state["coins"]])
+
+	# 4. Missing stock, cannot afford anything: GoButton says prep.start, no openDirect, unmet warning shown.
+	var st4 := CoreState.create_initial_state(0.0)
+	st4["day"] = 3.0
+	st4["coins"] = 0.0
+	st4["pantry"]["beans"] = 0.0
+	open_prep.call(st4)
+	await _frames(2)
+	var go4: Array = _buttons().filter(func(b: Button) -> bool: return b is PaperChalkboard.GoButton)
+	_check("stage4 broke missing stock shows start without openDirect", go4.size() == 1 and not (go4[0] as Button).disabled and _words_of(go4[0]) == _t("prep.start") and _buttons().filter(func(b: Button) -> bool: return _words_of(b) == _t("prep.openDirect")).is_empty())
+	ui.dialogs.close()
+
+	# 5. Tile tap toggle, guest share bars matching demand_plan, off-menu & needs-kitchen tiles.
+	var st5 := CoreState.create_initial_state(0.0)
+	st5["day"] = 5.0
+	st5["coins"] = 500.0
+	st5["items"]["latte"] = 1.0
+	st5["items"]["blacktea"] = 1.0
+	st5["items"]["roll"] = 1.0
+	st5["onMenu"] = ["espresso", "latte", "roll"]
+	open_prep.call(st5)
+	await _frames(2)
+	var box5: Control = ui.dialogs.get("_box")
+	var txt5 := _all_labels_text(box5)
+	var expected_plan := CoreCustomerDemand.demand_plan(st5, CoreEconomy.menu_items(st5))
+	var shares_ok := true
+	for g: Dictionary in expected_plan["guests"]:
+		var pct_str := "%d%%" % int(JsMath.js_round(g["share"] * 100.0))
+		if not txt5.contains(pct_str) or not txt5.contains(DemandWords.kind(g["kind"])):
+			shares_ok = false
+	_check("stage4 guest share bars match demand_plan percentages", shares_ok, txt5)
+	_check("stage4 off-menu tile says menu.off and blocked food says needsKitchenShort", txt5.contains(_t("menu.off")) and txt5.contains(_t("prep.needsKitchenShort")))
+	# Tap the blacktea dish tile directly to toggle it onto the menu.
+	var tea_tile: PanelContainer = null
+	var roll_box: CheckBox = null
+	for p: Node in box5.find_children("*", "PanelContainer", true, false):
+		if p.get_meta("dish_id", "") == "blacktea":
+			tea_tile = p as PanelContainer
+		elif p.get_meta("dish_id", "") == "roll":
+			var cbs := p.find_children("*", "CheckBox", true, false)
+			if not cbs.is_empty():
+				roll_box = cbs[0] as CheckBox
+	_check("stage4 needs-kitchen dish checkbox is disabled and unchecked", roll_box != null and roll_box.disabled and not roll_box.button_pressed)
+	_check("stage4 blacktea tile found for tap toggle", tea_tile != null)
+	if tea_tile != null:
+		var center := tea_tile.get_global_rect().get_center()
+		var down := InputEventMouseButton.new()
+		down.button_index = MOUSE_BUTTON_LEFT
+		down.pressed = true
+		down.global_position = center
+		var up := InputEventMouseButton.new()
+		up.button_index = MOUSE_BUTTON_LEFT
+		up.pressed = false
+		up.global_position = center
+		tea_tile.gui_input.emit(down)
+		tea_tile.gui_input.emit(up)
+		await _frames(2)
+		_check("stage4 tapping dish tile toggles dish onto menu", "blacktea" in s.state["onMenu"], s.state["onMenu"])
+
+	ui.dialogs.close()
+	ui.dialogs.hush()
+	I18n.locale = saved_locale
+	s.state = saved_state
+	s.sim.reset()
+	s.save_game()
+	ui.refresh()
+	await _frames(1)
+
+
+## Stage 5 closing receipt checks: direct goal & chapter claim, profit/loss stamp, top 3 sellers, top loss row, tomorrow sticky note, next day flow.
+func _stage5_settlement() -> void:
+	var s: CoreGameSession = _app.session
+	var ui: CafeUi = _app.ui
+	var saved_locale := I18n.locale
+	var saved_state: Dictionary = s.state.duplicate(true)
+	I18n.locale = "zh"
+
+	var make_report := func(overrides: Dictionary = {}) -> Dictionary:
+		var r := CoreState.empty_day()
+		r.merge({
+			"day": 1.0, "duration": 120.0, "rating": 4.0, "ratingCount": 2.0, "ratingTraffic": 1.02,
+			"served": 10.0, "revenue": 30.0, "ingredientCost": 10.0, "profit": 20.0,
+			"sales": {"espresso": 10.0}, "bestSeller": "espresso",
+			"outOfStock": [], "shelfSoldOut": [], "stale": {}, "staleCost": 0.0,
+		}, true)
+		r.merge(overrides, true)
+		return r
+
+	# 1. Direct claim goal: coins & goal index match ledger claim, bar switches to claimed & disabled, dialog stays open.
+	var st_goal := CoreState.create_initial_state(0.0)
+	st_goal["day"] = 2.0
+	var st_expected := st_goal.duplicate(true)
+	var expected_reward := CoreGoals.claim_goal(st_expected)
+	s.state = st_goal
+	s.sim.reset()
+	ui.dialogs.close()
+	ui.dialogs.hush()
+	SettlementDialog.show_report(ui, make_report.call())
+	await _frames(2)
+	var claim_label := _t("report.claimGoalBtn", {"reward": UiWords.money(expected_reward)})
+	var claimed_label := _t("report.claimedGoalBtn", {"reward": UiWords.money(expected_reward)})
+	await _press(claim_label)
+	var claimed_btns := _buttons().filter(func(b: Button) -> bool: return _words_of(b) == claimed_label)
+	var note_goal: Label = ui.dialogs.get("_note")
+	_check("stage5 direct goal claim matches ledger coins and goal index", s.state["coins"] == st_expected["coins"] and s.state["goal"] == st_expected["goal"], [s.state["coins"], st_expected["coins"], s.state["goal"]])
+	_check("stage5 direct goal claim disables button, shows claimed text, keeps dialog open, toasts", ui.dialogs.is_open() and claimed_btns.size() == 1 and (claimed_btns[0] as Button).disabled and note_goal.visible, [ui.dialogs.is_open(), claimed_btns.size()])
+
+	# 2. Direct claim chapter: matches MilestoneBook / CoreMilestones.claim_chapter, disables button, keeps dialog open.
+	var st_chap := CoreState.create_initial_state(0.0)
+	st_chap["goal"] = float(CoreGoals.GOALS.size())
+	st_chap["day"] = 12.0
+	var done_ids := []
+	for m: Dictionary in CoreMilestones.CHAPTERS[0]["milestones"]:
+		done_ids.append(m["id"])
+	st_chap["milestones"]["done"] = done_ids
+	var st_chap_exp := st_chap.duplicate(true)
+	CoreMilestones.claim_chapter(st_chap_exp)
+	s.state = st_chap
+	ui.dialogs.close()
+	ui.dialogs.hush()
+	SettlementDialog.show_report(ui, make_report.call({"day": 11.0}))
+	await _frames(2)
+	await _press(_t("report.claimChapterBtn"))
+	var chap_claimed := _buttons().filter(func(b: Button) -> bool: return _words_of(b) == _t("report.claimedChapterBtn"))
+	_check("stage5 direct chapter claim matches ledger claim and keeps dialog open", ui.dialogs.is_open() and s.state["milestones"]["claimed"] == st_chap_exp["milestones"]["claimed"] and s.state["decor"]["owned"] == st_chap_exp["decor"]["owned"] and chap_claimed.size() == 1 and (chap_claimed[0] as Button).disabled, [s.state["milestones"]["claimed"], chap_claimed.size()])
+
+	# 3. Stamp wording for profit >= 0 vs profit < 0, plus DAY N.
+	var st_stamp := CoreState.create_initial_state(0.0)
+	st_stamp["goal"] = float(CoreGoals.GOALS.size())
+	s.state = st_stamp
+	ui.dialogs.close()
+	SettlementDialog.show_report(ui, make_report.call({"day": 5.0, "profit": 0.0}))
+	await _frames(2)
+	var txt_good := _all_labels_text(ui.dialogs.get("_box"))
+	_check("stage5 profit stamp shows stampGood and DAY N", txt_good.contains(_t("report.stampGood")) and txt_good.contains(_t("report.stampDay", {"n": 5.0})), txt_good)
+	ui.dialogs.close()
+	SettlementDialog.show_report(ui, make_report.call({"day": 5.0, "profit": -15.0}))
+	await _frames(2)
+	var txt_loss := _all_labels_text(ui.dialogs.get("_box"))
+	_check("stage5 loss stamp shows stampLoss and lostToday", txt_loss.contains(_t("report.stampLoss")) and txt_loss.contains(_t("report.lostToday")), txt_loss)
+
+	# 4. Top 3 best sellers order from report.sales, and report.none when empty.
+	var r_sales: Dictionary = make_report.call({"sales": {"americano": 12.0, "latte": 52.0, "espresso": 40.0, "croissant": 31.0}, "bestSeller": "latte"})
+	var sellers := SettlementDialog.top_sellers(r_sales)
+	_check("stage5 top 3 best sellers match report.sales order", sellers.size() == 3 and sellers[0][0] == "latte" and sellers[1][0] == "espresso" and sellers[2][0] == "croissant", sellers)
+	ui.dialogs.close()
+	SettlementDialog.show_report(ui, r_sales)
+	await _frames(2)
+	var txt_sales := _all_labels_text(ui.dialogs.get("_box"))
+	_check("stage5 receipt displays top 3 counts in order", txt_sales.find("×52") >= 0 and txt_sales.find("×52") < txt_sales.find("×40") and txt_sales.find("×40") < txt_sales.find("×31"), txt_sales)
+	ui.dialogs.close()
+	SettlementDialog.show_report(ui, make_report.call({"sales": {}, "bestSeller": null, "served": 0.0}))
+	await _frames(2)
+	_check("stage5 empty sales falls back to report.none", _all_labels_text(ui.dialogs.get("_box")).contains(_t("report.none")))
+
+	# 5. Red loss row selects max > 0 among the 5 loss fields; hidden when all 0.
+	var r_noloss: Dictionary = make_report.call({"missed": 0.0, "queueLost": 0.0, "tableLost": 0.0, "extraLost": 0.0, "doorLost": 0.0})
+	_check("stage5 top_loss empty when all loss counts are zero", SettlementDialog.top_loss(r_noloss).is_empty())
+	ui.dialogs.close()
+	SettlementDialog.show_report(ui, r_noloss)
+	await _frames(2)
+	var txt_noloss := _all_labels_text(ui.dialogs.get("_box"))
+	_check("stage5 receipt hides loss row when all 5 losses are zero", not txt_noloss.contains(_t("report.doorLost")) and not txt_noloss.contains(_t("report.queueLost")))
+	var r_door: Dictionary = make_report.call({"missed": 5.0, "queueLost": 2.0, "tableLost": 1.0, "extraLost": 3.0, "doorLost": 12.0})
+	var picked := SettlementDialog.top_loss(r_door)
+	_check("stage5 top_loss picks largest loss field", picked.get("key") == "report.doorLost" and picked.get("count") == 12.0, picked)
+	ui.dialogs.close()
+	SettlementDialog.show_report(ui, r_door)
+	await _frames(2)
+	var txt_door := _all_labels_text(ui.dialogs.get("_box"))
+	_check("stage5 receipt shows picked largest loss row", txt_door.contains(_t("report.doorLost")) and txt_door.contains("12"))
+
+	# 6. Tomorrow sticky note: hidden on day 1, weather heading when tomorrow has weather, demand.tomorrow when fair.
+	ui.dialogs.close()
+	SettlementDialog.show_report(ui, make_report.call({"day": 1.0}))
+	await _frames(2)
+	var txt_d1 := _all_labels_text(ui.dialogs.get("_box"))
+	_check("stage5 day 1 hides tomorrow sticky note", not txt_d1.contains(_t("demand.tomorrow")) and not txt_d1.contains(_t("demand.hint.fair")))
+	var wx_day := 2.0
+	while CoreConditions.condition_on(st_stamp, wx_day + 1.0) == "fair":
+		wx_day += 1.0
+	var fair_day := 2.0
+	while CoreConditions.condition_on(st_stamp, fair_day + 1.0) != "fair":
+		fair_day += 1.0
+	var wx_cond: Dictionary = CoreConditions.condition_def(CoreConditions.condition_on(st_stamp, wx_day + 1.0))
+	ui.dialogs.close()
+	SettlementDialog.show_report(ui, make_report.call({"day": wx_day}))
+	await _frames(2)
+	var txt_wx := _all_labels_text(ui.dialogs.get("_box"))
+	_check("stage5 tomorrow sticky note shows weather title and hint", txt_wx.contains(_t("report.tomorrowWeather", {"name": UiWords.condition_name(wx_cond)})) and txt_wx.contains(_t("demand.hint.%s" % wx_cond["id"])), txt_wx)
+	ui.dialogs.close()
+	SettlementDialog.show_report(ui, make_report.call({"day": fair_day}))
+	await _frames(2)
+	var txt_fair := _all_labels_text(ui.dialogs.get("_box"))
+	_check("stage5 tomorrow sticky note shows demand.tomorrow on fair day", txt_fair.contains(_t("demand.tomorrow")) and txt_fair.contains(_t("demand.hint.fair")), txt_fair)
+
+	# 7. Golden button "Plan tomorrow" closes settlement and opens the prepare chalkboard.
+	s.state["phase"] = "prep"
+	s.state["day"] = fair_day + 1.0
+	await _press(_t("report.next"))
+	_check("stage5 Plan tomorrow opens prepare chalkboard", ui.dialogs.is_open() and _title() == _t("prep.boardTitle"), _title())
+
+	ui.dialogs.close()
+	ui.dialogs.hush()
+	I18n.locale = saved_locale
+	s.state = saved_state
+	s.sim.reset()
+	s.save_game()
 	ui.refresh()
 	await _frames(1)

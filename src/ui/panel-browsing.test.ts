@@ -49,15 +49,22 @@ function resetScrollOnRebuild(list: HTMLElement, scroller = list) {
   });
 }
 
-it('keeps a compact goal expandable across progress updates and exposes claimable rewards', () => {
+it('shows the compact goal tape only on the Menu tab and exposes claimable rewards without duplicating the title', () => {
   const { panel, state } = panelFor();
-  expect(button('[data-goal-toggle]').getAttribute('aria-expanded')).toBe('false');
-  button('[data-goal-toggle]').click();
-  expect(button('[data-goal-toggle]').getAttribute('aria-expanded')).toBe('true');
-  panel.update(); expect(button('[data-goal-toggle]').getAttribute('aria-expanded')).toBe('true');
-  button('[data-goal-toggle]').click();
+  const goal = query('#goal');
+  expect(goal.hidden).toBe(false);
+  expect(goal.querySelector('[data-goal-toggle]')).toBeNull();
+  expect(goal.querySelectorAll('.goal-text').length).toBe(1);
+  expect(goal.querySelector('.goal-head')).not.toBeNull();
+  expect(goal.querySelector('.goal-progress')).not.toBeNull();
+  for (const other of ['pantry', 'upgrades', 'decor', 'pets', 'promotion'] as const) {
+    panel.showTab(other);
+    expect(goal.hidden).toBe(true);
+  }
+  panel.showTab('menu');
+  expect(goal.hidden).toBe(false);
   state.day = 2; panel.update();
-  expect(button('[data-goal-toggle]').getAttribute('aria-expanded')).toBe('true');
+  expect(goal.classList.contains('done')).toBe(true);
   expect(button('[data-claim]')).not.toBeNull();
 });
 
@@ -260,12 +267,13 @@ describe('panel browsing position', () => {
     expect(query('#panel').classList.contains('intro-mode')).toBe(false);
     expect(document.activeElement).toBe(button('#guide'));
     state.day = 2;
-    panel.update();
+    panel.showTab('menu');
     const goal = button('[data-claim]');
     expect(goal).not.toBeNull();
     goal.focus();
     panel.showTab('upgrades');
-    expect(document.activeElement).toBe(goal);
+    expect(query('#goal').hidden).toBe(true);
+    expect(document.activeElement).toBe(button('[data-tab="upgrades"]'));
   });
 });
 
@@ -280,30 +288,28 @@ describe('cat browsing choices', () => {
     const scroller = mobile ? query('.panel-scroll') : fixture.list;
     const scrollIntoView = vi.spyOn(HTMLElement.prototype, 'scrollIntoView').mockImplementation(() => {});
     button('[data-pet-group="longhair"]').click();
-    button('[data-choose-cat="mainecoon"]').click();
+    const details = query<HTMLDetailsElement>('[data-pet="mainecoon"] .card-details');
+    details.open = true;
+    details.dispatchEvent(new Event('toggle'));
     scrollIntoView.mockClear();
     return { ...fixture, scroller, scrollIntoView };
   }
 
-  function expectBrowsing(mode: 'catalog' | 'owned', selected = 'mainecoon', group = 'longhair') {
-    expect(button(`[data-pet-view="${mode}"]`).getAttribute('aria-pressed')).toBe('true');
+  function expectBrowsing(group = 'longhair', expandedId = 'mainecoon') {
     expect(button(`[data-pet-group="${group}"]`).getAttribute('aria-pressed')).toBe('true');
-    expect(button(`[data-choose-cat="${selected}"]`).getAttribute('aria-pressed')).toBe('true');
-    expect(query('.pet-catalog').hidden).toBe(mode === 'owned');
-    expect(query('.pet-filters').hidden).toBe(mode === 'owned');
-    if (mode === 'catalog') {
-      const visibleCards = [...document.querySelectorAll<HTMLElement>('[data-pet]')].filter((card) => !card.hidden);
-      expect(visibleCards.map((card) => card.dataset.pet)).toEqual([selected]);
-      expect(button(`[data-choose-cat="${selected}"]`).hidden).toBe(false);
+    const visibleCards = [...document.querySelectorAll<HTMLElement>('[data-pet]:not([hidden])')];
+    expect(visibleCards.length).toBeGreaterThan(0);
+    if (expandedId) {
+      expect(query<HTMLDetailsElement>(`[data-pet="${expandedId}"] .card-details`).open).toBe(true);
+      expect(query(`[data-pet="${expandedId}"]`).classList.contains('is-expanded')).toBe(true);
     }
   }
 
   it.each([
-    ['desktop', false, 'catalog'], ['desktop', false, 'owned'],
-    ['mobile', true, 'catalog'], ['mobile', true, 'owned'],
-  ] as const)('retains %s browsing across repeated tabs (mobile=%s, view=%s)', (_layout, mobile, mode) => {
+    ['desktop', false],
+    ['mobile', true],
+  ] as const)('retains %s cat filter and expanded card across repeated tabs (mobile=%s)', (_layout, mobile) => {
     const { panel, list, state, scroller, scrollIntoView } = catsFor(mobile);
-    button(`[data-pet-view="${mode}"]`).click();
     scroller.scrollTop = 425;
     resetScrollOnRebuild(list, scroller);
     const before = serialize(state);
@@ -313,27 +319,26 @@ describe('cat browsing choices', () => {
       scroller.scrollTop = 180;
       button('[data-tab="pets"]').focus();
       button('[data-tab="pets"]').click();
-      expectBrowsing(mode);
+      expectBrowsing();
       expect(scroller.scrollTop).toBe(425);
       expect(document.activeElement).toBe(button('[data-tab="pets"]'));
     }
-    button(`[data-pet-view="${mode}"]`).focus();
-    button(`[data-pet-view="${mode}"]`).click();
+    button('[data-pet-group="longhair"]').focus();
+    button('[data-pet-group="longhair"]').click();
     panel.showTab('pets');
     panel.update();
     expect(scroller.scrollTop).toBe(425);
-    expect(document.activeElement).toBe(button(`[data-pet-view="${mode}"]`));
+    expect(document.activeElement).toBe(button('[data-pet-group="longhair"]'));
     expect(scrollIntoView).not.toHaveBeenCalled();
     expect(serialize(state)).toBe(before);
   });
 
   it.each([
-    ['desktop', false, 'catalog'], ['desktop', false, 'owned'],
-    ['mobile', true, 'catalog'], ['mobile', true, 'owned'],
-  ] as const)('preserves %s room/locale refresh focus and scroll (mobile=%s, view=%s)', (_layout, mobile, mode) => {
+    ['desktop', false],
+    ['mobile', true],
+  ] as const)('preserves %s room/locale refresh focus and scroll (mobile=%s)', (_layout, mobile) => {
     const { panel, list, state, scroller, scrollIntoView } = catsFor(mobile);
-    button(`[data-pet-view="${mode}"]`).click();
-    const selector = mode === 'catalog' ? '[data-choose-cat="mainecoon"]' : '[data-pet="ginger"] input';
+    const selector = '[data-pet-group="longhair"]';
     query(selector).focus();
     scroller.scrollTop = 425;
     resetScrollOnRebuild(list, scroller);
@@ -343,7 +348,7 @@ describe('cat browsing choices', () => {
     for (const locale of ['en', 'zh', 'en'] as const) {
       setLocale(locale);
       panel.refresh();
-      expectBrowsing(mode);
+      expectBrowsing();
       expect(scroller.scrollTop).toBe(425);
       expect(document.activeElement).toBe(query(selector));
       expect(focus).toHaveBeenLastCalledWith({ preventScroll: true });
@@ -352,30 +357,30 @@ describe('cat browsing choices', () => {
     expect(scrollIntoView).not.toHaveBeenCalled();
   });
 
-  it('retains catalog selection across state replacement and applies actions only to the replacement', () => {
+  it('retains group filter across state replacement and applies actions only to the replacement', () => {
     const purchased = vi.fn();
     const { panel, state, list } = catsFor(false, purchased);
     const before = serialize(state);
     const replacement = createInitialState(1);
     replacement.coins = 50000;
     const replacementBefore = serialize(replacement);
-    button('[data-choose-cat="mainecoon"]').focus();
+    button('[data-pet-group="longhair"]').focus();
     list.scrollTop = 380;
     resetScrollOnRebuild(list);
     panel.setState(replacement);
-    expectBrowsing('catalog');
+    expectBrowsing('longhair', 'mainecoon');
     expect(list.scrollTop).toBe(380);
-    expect(document.activeElement).toBe(button('[data-choose-cat="mainecoon"]'));
+    expect(document.activeElement).toBe(button('[data-pet-group="longhair"]'));
     expect(serialize(state)).toBe(before);
     expect(serialize(replacement)).toBe(replacementBefore);
     button('[data-pet="mainecoon"] [data-adopt]').click();
     expect(replacement.pets.map((pet) => pet.id)).toEqual(['mainecoon']);
     expect(purchased).toHaveBeenCalledWith('pet', 'mainecoon');
     expect(serialize(state)).toBe(before);
-    expectBrowsing('catalog');
+    expectBrowsing('longhair', 'mainecoon');
   });
 
-  it('keeps an adopted catalog cat selected and moves focus off the hidden adoption control', () => {
+  it('keeps an adopted cat card expanded, swaps adopt to in-shop locate, and moves focus off hidden adopt', () => {
     const { panel, state, list, scrollIntoView } = catsFor();
     const adopt = button('[data-pet="mainecoon"] [data-adopt]');
     adopt.focus();
@@ -384,8 +389,9 @@ describe('cat browsing choices', () => {
     const focus = vi.spyOn(HTMLElement.prototype, 'focus');
     adopt.click();
     expect(state.pets.map((pet) => pet.id)).toEqual(['ginger', 'mainecoon']);
-    expectBrowsing('catalog');
+    expectBrowsing('longhair', 'mainecoon');
     expect(adopt.hidden).toBe(true);
+    expect(button('[data-pet="mainecoon"] [data-home-locate="mainecoon"]').hidden).toBe(false);
     expect(button('[data-pet="mainecoon"] [data-refill]').hidden).toBe(false);
     expect(document.activeElement).toBe(button('[data-tab="pets"]'));
     expect(focus).toHaveBeenLastCalledWith({ preventScroll: true });
@@ -394,36 +400,30 @@ describe('cat browsing choices', () => {
     panel.refresh();
     panel.showTab('decor');
     panel.showTab('pets');
-    expectBrowsing('catalog');
+    expectBrowsing('longhair', 'mainecoon');
     expect(scrollIntoView).not.toHaveBeenCalled();
   });
 
-  it('keeps an empty owned view reachable when replacing a save removes the focused cat', () => {
+  it('keeps adopted summary paws synced when replacing a save removes or changes adopted cats', () => {
     const { panel, list } = catsFor();
-    button('[data-pet-view="owned"]').click();
+    button('[data-pet-group="all"]').click();
+    const gingerDetails = query<HTMLDetailsElement>('[data-pet="ginger"] .card-details');
+    gingerDetails.open = true;
+    gingerDetails.dispatchEvent(new Event('toggle'));
     button('[data-pet="ginger"] [data-refill]').focus();
     list.scrollTop = 260;
     resetScrollOnRebuild(list);
     const replacement = createInitialState(1);
     const before = serialize(replacement);
     panel.setState(replacement);
-    expectBrowsing('owned');
-    expect(document.querySelectorAll('[data-pet]:not([hidden])')).toHaveLength(0);
-    expect(query('.pet-catalog + .note').hidden).toBe(false);
+    expect(document.querySelectorAll('[data-jump-cat]:not([hidden])')).toHaveLength(0);
     expect(document.activeElement).toBe(button('[data-tab="pets"]'));
     expect(list.scrollTop).toBe(260);
-    panel.showTab('decor');
-    panel.refresh();
-    panel.showTab('pets');
-    expectBrowsing('owned');
-    button('[data-pet-view="catalog"]').click();
-    expectBrowsing('catalog');
     expect(serialize(replacement)).toBe(before);
   });
 
-  it('retains choices while another tab receives a replacement save and locale refresh', () => {
+  it('retains breed filter while another tab receives a replacement save and locale refresh', () => {
     const { panel } = catsFor();
-    button('[data-pet-view="owned"]').click();
     panel.showTab('decor');
     const replacement = createInitialState(1);
     replacement.coins = 50000;
@@ -433,24 +433,22 @@ describe('cat browsing choices', () => {
     setLocale('zh');
     panel.refresh();
     panel.showTab('pets');
-    expectBrowsing('owned');
+    expectBrowsing('longhair', 'mainecoon');
     expect(query('[data-pet="persian"]').hidden).toBe(false);
     expect(query('[data-pet="ginger"]').hidden).toBe(true);
-    button('[data-pet-view="catalog"]').click();
-    expectBrowsing('catalog');
     expect(serialize(replacement)).toBe(before);
   });
 
-  it('changes incompatible group selections safely without losing the remembered choices on refresh', () => {
+  it('changes group selections safely without losing the remembered group on refresh', () => {
     const { panel, state, list, scrollIntoView } = catsFor();
     const before = serialize(state);
     button('[data-pet-group="shorthair"]').focus();
     button('[data-pet-group="shorthair"]').click();
-    expectBrowsing('catalog', 'british', 'shorthair');
+    expectBrowsing('shorthair', '');
     list.scrollTop = 210;
     button('[data-pet-group="shorthair"]').click();
     panel.refresh();
-    expectBrowsing('catalog', 'british', 'shorthair');
+    expectBrowsing('shorthair', '');
     expect(document.activeElement).toBe(button('[data-pet-group="shorthair"]'));
     expect(list.scrollTop).toBe(210);
     expect(scrollIntoView).not.toHaveBeenCalled();

@@ -29,7 +29,9 @@ describe('customer demand in preparation and settlement', () => {
     const state = cafe();
     showPrepare(state, vi.fn(), vi.fn());
     expect(document.querySelectorAll('.prep-condition')).toHaveLength(1);
-    expect(document.querySelector('.prep-demand')!.textContent).toContain(t('condition.rain.name'));
+    expect(document.querySelector('.prep-condition')!.textContent).toContain(t('condition.rain.name'));
+    expect(document.querySelector('.prep-condition')!.textContent).toContain(t('demand.hint.rain'));
+    expect(document.querySelectorAll('.prep-guest')).toHaveLength(3);
     const before = document.querySelector('.demand-match')!.textContent;
     expect(before).toContain(t('demand.kind.commuter'));
     expect(before).not.toContain(t('demand.kind.leisure'));

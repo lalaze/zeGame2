@@ -15,13 +15,14 @@ import { requestServiceHelp, type ServiceHelpOption } from './ui/service-help';
 import { pantryTaskContext } from './ui/play-flow-context';
 import { trafficHud } from './ui/traffic-status';
 import { showSoldOut } from './ui/sold-out';
-import { CafeLife, closingStory } from './ui/cafe-life';
-import { trialResultCard } from './ui/trial-sales';
-import { guestMemoryReport } from './ui/guest-memories';
+import { CafeLife } from './ui/cafe-life';
 import { showLivingCat } from './ui/living-cats';
 import { catView, locateCat } from './ui/cat-art';
 import { petActive, type CatId } from './game/pets';
 import { DAY_SECONDS, SPEEDS } from './game/data';
+import { todayCondition } from './game/conditions';
+import { partnerUnread } from './game/partners';
+import { regularGuestUnreadCount } from './game/regular-guests';
 import { openShop, type DayReport } from './game/day';
 import { AWAY_MIN_SECONDS, OVERFLOW_SHARE, awayHourly, collectAwayEarnings, managerOpen, managerRestock, managerRunsDays, tillSeconds } from './game/manager';
 import { FRANCHISE_SHARE, canOpenBranch, chainBonusPercent, collectFranchises, openBranch, starsOnBranch } from './game/chain';
@@ -94,7 +95,7 @@ window.dispatchEvent(new Event('cafe:bootstrap-ready'));
 trackVisualViewport();
 // The building's icon and loading screen; the pixel view (`?pixel`) keeps the page's own.
 if (isFloorsView()) installFloorsIdentity();
-import { settlementHtml } from './ui/settlement';
+import { showSettlement } from './ui/settlement';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 
@@ -278,10 +279,11 @@ function updateDrawerLabels(): void {
   panelSimplifiedTabs?.(shortcuts.available);
   previewExit.textContent = chinese() ? '返回升级' : 'Back to upgrades';
   catLocateExit.textContent = chinese() ? '返回猫咪详情' : 'Back to cats';
-  $('drawer-title').textContent = t('panel.title');
+  const activeTab = panelRoot.querySelector<HTMLElement>('[data-tab].active')?.dataset.tab ?? 'menu';
+  $('drawer-title').textContent = floorsView ? t(`tab.${activeTab}` as Parameters<typeof t>[0]) : t('panel.title');
   $('drawer-close').setAttribute('aria-label', chinese() ? '关闭管理' : 'Close management');
-  $('drawer-pause').textContent = chinese() ? '已暂停 · 关闭后继续' : 'Paused · close to resume';
-  panelToggle.textContent = chinese() ? '管理' : 'Manage';
+  $('drawer-pause').textContent = floorsView ? t('ledger.paused') : (chinese() ? '已暂停 · 关闭后继续' : 'Paused · close to resume');
+  panelToggle.textContent = chinese() ? '手账' : 'Manage';
   const folded = panelCollapsed && shortcuts.available;
   panelToggle.title = t(!panelCollapsed ? 'panel.collapseTitle' : !folded ? 'panel.expandTitle'
     : shortcuts.expanded ? 'panel.hideShortcuts' : 'panel.showShortcuts');
@@ -318,25 +320,26 @@ panelToggle.addEventListener('click', () => {
 });
 updatePanelVisibility();
 
+function onPanelChange(kind: string, id: string): void {
+  // A new table takes its spot (and the next one is reserved): clear any furniture in the way.
+  if (kind === 'upgrade' && id === 'tables') {
+    if (arrange) startArrange({ kind: 'arrange' });
+    const moved = evictBlocked(state, mainTableCount(state));
+    if (moved > 0) toast(t('toast.evicted', { n: moved }));
+  }
+  saveGame();
+  const burst = kind === 'goal' ? 14 : 5;
+  for (let i = 0; i < burst; i++) scene.sparkle(20 + Math.random() * 150, 30 + Math.random() * 40);
+  if (kind === 'goal') toast(t('goal.claimed', { reward: formatMoney(Number(id)) }));
+  // A claimed chapter gives the café a new title.
+  if (kind === 'milestone') updateBrand();
+}
 const panel = new Panel(
   panelRoot,
   $('list'),
   $('goal'),
   state,
-  (kind, id) => {
-    // A new table takes its spot (and the next one is reserved): clear any furniture in the way.
-    if (kind === 'upgrade' && id === 'tables') {
-      if (arrange) startArrange({ kind: 'arrange' });
-      const moved = evictBlocked(state, mainTableCount(state));
-      if (moved > 0) toast(t('toast.evicted', { n: moved }));
-    }
-    saveGame();
-    const burst = kind === 'goal' ? 14 : 5;
-    for (let i = 0; i < burst; i++) scene.sparkle(20 + Math.random() * 150, 30 + Math.random() * 40);
-    if (kind === 'goal') toast(t('goal.claimed', { reward: formatMoney(Number(id)) }));
-    // A claimed chapter gives the café a new title.
-    if (kind === 'milestone') updateBrand();
-  },
+  onPanelChange,
   (request) => startArrange(request),
   {
     getActor: (id) => catView(id) ?? scene.livingCats.actors.get(id),
@@ -726,7 +729,8 @@ function updateDayHud(): void {
   playFlow.update();
   mobileHud?.update(state.profile?.cafeName ?? 'Tiny Bean Café',
     `${t('day.label', { n: state.day })} · ${open ? clock : t('day.closed')}`,
-    !open, text, condition, state.speed);
+    !open, text, condition, state.speed, state.dayTime / DAY_SECONDS,
+    todayCondition(state).id, partnerUnread(state) + regularGuestUnreadCount(state));
 }
 
 for (const b of speedBtns) {
@@ -923,27 +927,12 @@ function showReport(report: DayReport): void {
   saveGame();
   panel.refresh();
   updateDayHud();
-  const { body, recommendedTab, advice } = settlementHtml(report, state);
-  const reportBody = document.createElement('div');
-  reportBody.innerHTML = body;
-  const memories = guestMemoryReport(state, report.day);
-  if (memories) reportBody.querySelector('[data-memory-report]')?.append(memories);
-  if (report.trialSale) {
-    const trial = trialResultCard(state, () => { saveGame(); panel.refresh(); updateDayHud(); }, report.trialSale);
-    if (trial) reportBody.querySelector('[data-trial-report]')?.append(trial);
-  }
-  const story = closingStory(state, report, saveGame);
-  if (story) reportBody.querySelector('.report-summary')?.after(story);
-  showModal({
-    title: t('report.title', { n: report.day }), icon: ownerIcon(), body: reportBody,
-    buttons: [
-      { label: t('report.next'), primary: true, onClick: () => { if (!managerRunsDays(state)) prepareDay(); } },
-      { label: advice.claimableGoal || advice.action.kind === 'claimChapter' ? t('guide.viewReward') : t(`tab.${recommendedTab}`), onClick: () => {
-        showPanelTab(recommendedTab);
-        if (advice.claimableGoal) $('goal').querySelector<HTMLButtonElement>('[data-claim]')?.focus();
-        else if (advice.action.kind === 'claimChapter') $('goal').querySelector<HTMLButtonElement>('[data-claim-chapter]')?.focus();
-      } },
-    ],
+  showSettlement(report, state, {
+    onNext: () => { if (!managerRunsDays(state)) prepareDay(); },
+    onTab: showPanelTab,
+    onClaim: (kind, id) => { onPanelChange(kind, id); panel.refresh(); updateDayHud(); },
+    onTrialChange: () => { saveGame(); panel.refresh(); updateDayHud(); },
+    onStorySave: saveGame,
   });
 }
 
@@ -1500,7 +1489,7 @@ function frame(dt: number): void {
   const coins = formatTransactionMoney(state.coins);
   coinsEl.setAttribute('aria-label', t('money.balanceDetails', { money: coins }));
   drawerBalance.setAttribute('aria-label', t('money.balanceDetails', { money: coins }));
-  drawerBalance.textContent = t('money.balance', { money: coins });
+  drawerBalance.textContent = coins;
   if (coins !== shownCoins) coinsEl.textContent = shownCoins = coins;
   uiTimer -= dt;
   if (uiTimer <= 0) {
@@ -1554,6 +1543,7 @@ mobileHud = new MobileCafeHud($('app'), {
   people: document.querySelector<HTMLElement>('.cafe-status-bar')!, style: $('cafe-style-btn'),
   settings: $<HTMLButtonElement>('settings-btn'), pantry: playFlow.pantryButton, help: playFlow.helpButton,
   open: openBtn, manage: panelToggle, zoom: $('room-zoom-controls'), overview: $<HTMLButtonElement>('room-zoom-reset'),
+  wall: document.getElementById('floors-wall-btn') as HTMLButtonElement | null,
 });
 // The HUD's own controls came after the floors view put its icons on the page.
 if (floorsView) markFloorsIcons($('app'));

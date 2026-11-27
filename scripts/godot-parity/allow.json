@@ -181,7 +181,7 @@
   "main-session:areaSelected: holdPiece(arrange.id, arrange.moving, arrange.fromBrowse);": "楼房视图只会选中 main，main 总是开着；摆放中的家具由 B3 的摆放界面处理",
   "main-session:makeGame: ?? 1": "按钮只有三档速度，找不到的情况不会发生",
   "main-session:confirmStock: () => guide.confirmStock()": "新手引导的界面回调，B3",
-  "main-session:onClick: () => { showPanelTab(recommendedTab); if (advice.claimableGoal) $(\"goal\").querySelector(\"[": "结算单上打开管理面板的按钮，只动界面，B3",
+  "main-session:onClaim: (kind, id) => { onPanelChange(kind, id); panel.refresh(); updateDayHud(); }": "结算单上直接领目标/章节后的界面刷新，领奖规则与 panelChanged 共用 onPanelChange，B3",
   "main-session:onDone: ?.()": "startOnboarding 没有别的调用者传 then",
   "main-session:locateResident: else { regionsUI.select(actor.area); scene.focusResidentCat(id, reducedMotion.matches); }": "猫还没进楼房画面时 TS 才走这边（换房间、放大找猫），属于画面，B2 处理",
   "main-session:openMoment 3: return;": "营业中、有猫的时刻时 tidy 不会返回空",

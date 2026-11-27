@@ -1,45 +1,227 @@
-/* Keep stock decisions beside opening, even when the recipe list scrolls. */
-.prep-modal .prep-stock-footer {
+/* Menu preparation layout (shared by pixel view and Direction A chalkboard). */
+.prep-modal .modal-actions { display: none; }
+.prep-modal .prep-slate {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.prep-modal .prep-head {
   flex: 0 0 auto;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 10px;
-  margin-top: 10px;
-  padding: 10px 0 0;
-  border-top: 1px solid var(--paper-shadow);
+  gap: 8px;
 }
-.prep-modal .prep-stock-summary {
-  flex: 1 1 0;
-  min-width: 0;
+.prep-modal .prep-head-copy { flex: 1 1 auto; min-width: 0; }
+.prep-modal .prep-head-copy h2 { margin: 0; border: 0; padding: 0; }
+.prep-modal .prep-sub { margin: 3px 0 0; font-size: 12px; opacity: .75; line-height: 1.3; }
+.prep-modal .prep-sticky {
+  flex: 0 0 148px;
+  padding: 10px 11px 9px;
+  background: #fff1a6;
+  color: #5b4430;
+  font-size: 11.5px;
+  line-height: 1.4;
+  border-radius: 2px;
+  box-shadow: 0 6px 12px rgb(0 0 0 / .35);
+}
+.prep-modal .prep-sticky b { display: block; font-size: 13px; margin-bottom: 2px; }
+.prep-modal .prep-sticky p { margin: 0; }
+.prep-modal .prep-hr { border: 0; border-top: 2px dashed var(--paper-shadow); margin: 10px 0; flex: 0 0 auto; }
+.prep-modal .prep-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 8px;
+  max-height: none;
+  overflow: visible;
   margin: 0;
-  font-size: 12px;
-  line-height: 1.45;
+  padding: 0;
+}
+.prep-modal .prep-row {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 5px;
+  padding: 5px 6px;
+  min-width: 0;
+}
+.prep-modal .prep-row.bake-open { grid-column: 1 / -1; }
+.prep-modal .prep-select {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  min-height: 38px;
+  cursor: pointer;
+}
+.prep-modal .prep-row.locked .prep-select { cursor: default; }
+.prep-modal .prep-select img { width: 34px; height: 34px; flex: 0 0 34px; object-fit: contain; }
+.prep-modal .prep-name { flex: 1 1 0; min-width: 0; gap: 1px; }
+.prep-modal .prep-name b {
+  font-size: 13px;
+  line-height: 1.2;
   overflow-wrap: anywhere;
 }
-.prep-modal .prep-stock-footer button {
-  flex: 0 1 auto;
-  max-width: 54%;
-  min-height: 44px;
-  margin: 0;
-  white-space: normal;
+.prep-modal .prep-subline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px 5px;
 }
-.prep-modal .prep-stock-footer.stock-ready { justify-content: flex-start; }
-.prep-modal .prep-stock-footer.stock-ready button { max-width: 100%; opacity: 1; color: var(--green-dark); }
-.prep-modal .modal-actions { border-top: 0; padding-top: 0; margin-top: 10px; }
-.prep-modal .prep-menu-hint { margin: 0 0 10px; }
-.prep-modal .prep-shared-stock { margin: 8px 0; padding: 8px; background: var(--sage-paper); color: var(--green-dark); border-radius: 3px; }
-.prep-modal .prep-disclosure { margin-top: 10px; border: 1px solid var(--paper-shadow); border-radius: 3px; }
-.prep-modal .prep-disclosure > summary { padding: 10px; cursor: pointer; color: var(--green-dark); line-height: 1.5; }
+.prep-modal .prep-subline small { font-size: 11px; line-height: 1.25; }
+.prep-modal .prep-low-tag {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.25;
+  background: rgb(232 122 93 / .24);
+  color: #b5452e;
+}
+.prep-modal .prep-row .bake {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding-top: 5px;
+  border-top: 1px dashed var(--paper-shadow);
+}
+.prep-modal .prep-row .bake .bake-input { width: 64px; min-height: 34px; padding: 4px 6px; text-align: center; }
+.prep-modal .prep-row .bake .bake-btn { min-height: 34px; padding: 4px 10px; }
+.prep-modal .prep-forecast-btn { margin-top: 8px; }
+.prep-modal .prep-dish-details-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 10px;
+}
+.prep-modal .prep-dish-detail { display: flex; flex-direction: column; gap: 2px; }
+.prep-modal .prep-dish-detail + .prep-dish-detail {
+  padding-top: 7px;
+  border-top: 1px dashed var(--paper-shadow);
+}
+.prep-modal .prep-dish-detail p,
+.prep-modal .prep-dish-detail small { margin: 0; font-size: 12px; line-height: 1.4; }
+.prep-modal .prep-sec-title { margin: 0 0 8px; font-size: 13px; font-weight: 800; line-height: 1.3; }
+.prep-modal .prep-guests { display: flex; flex-direction: column; gap: 7px; margin-bottom: 6px; }
+.prep-modal .prep-guest {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  line-height: 1.25;
+}
+.prep-modal .prep-guest .gn { flex: 0 0 auto; min-width: 54px; font-weight: 700; }
+.prep-modal .prep-guest .gb {
+  flex: 1 1 36px;
+  min-width: 32px;
+  height: 9px;
+  border-radius: 5px;
+  background: rgb(0 0 0 / .12);
+  overflow: hidden;
+}
+.prep-modal .prep-guest .gb i { display: block; height: 100%; border-radius: 5px; opacity: .92; }
+.prep-modal .prep-guest .gp {
+  flex: 0 0 34px;
+  text-align: right;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.prep-modal .prep-guest .gf {
+  flex: 0 1 auto;
+  text-align: center;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 8px;
+  border: 1.5px dashed var(--paper-shadow);
+  line-height: 1.25;
+}
+.prep-modal .prep-guest .gf.ok { border-style: solid; border-color: var(--green); color: var(--green-dark); }
+.prep-modal .prep-pantry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 6px;
+}
+.prep-modal .prep-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px 3px 4px;
+  border-radius: 14px;
+  background: rgb(0 0 0 / .07);
+  border: 1.5px solid transparent;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.prep-modal .prep-pill img { width: 24px; height: 24px; object-fit: contain; }
+.prep-modal .prep-pill.missing { border-color: #e87a5d; }
+.prep-modal .prep-disclosure { margin-top: 8px; border: 1px solid var(--paper-shadow); border-radius: 8px; }
+.prep-modal .prep-disclosure > summary { padding: 8px 10px; cursor: pointer; color: var(--green-dark); line-height: 1.4; }
 .prep-modal .prep-disclosure > .prep-style,
 .prep-modal .prep-disclosure > .regular-wish { margin: 0; border: 0; border-top: 1px solid var(--paper-shadow); box-shadow: none; }
 .prep-modal .prep-disclosure > .regular-wish > h3 { display: none; }
-@media (max-width: 480px) {
-  .prep-modal .prep-stock-footer { gap: 8px; margin-top: 8px; padding-top: 8px; }
-  .prep-modal .prep-stock-footer button { font-size: 12px; padding: 8px; }
-  .prep-modal .modal-actions { margin-top: 8px; }
+.prep-modal .prep-status:empty { display: none; }
+.prep-modal .prep-stock-footer {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--paper-shadow);
 }
-@media (max-height: 540px) and (orientation: landscape) {
-  .prep-modal .prep-stock-footer { margin-top: 4px; padding-top: 4px; }
-  .prep-modal .modal-actions { margin-top: 4px; }
+.prep-modal .prep-stock-summary {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.prep-modal .prep-go-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 48px;
+  padding: 8px 14px;
+  margin: 0;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.prep-modal .prep-direct-btn {
+  width: 100%;
+  min-height: 34px;
+  padding: 5px 12px;
+  margin: 0;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.prep-modal .prep-later-btn {
+  align-self: center;
+  min-height: 30px;
+  padding: 4px 16px;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  font-size: 13px;
+  cursor: pointer;
+}
+@media (max-width: 390px) {
+  .prep-modal .prep-list { gap: 6px 7px; }
+  .prep-modal .prep-select img { width: 30px; height: 30px; flex-basis: 30px; }
+  .prep-modal .prep-sticky { flex-basis: 132px; font-size: 11px; padding: 8px 9px; }
 }

@@ -12,30 +12,25 @@ import { livingCatActivity, livingCatPersonality, livingCatPreference, type Livi
 
 /** Transient browsing choices, owned by Panel rather than the game save. */
 export interface PetBrowsingState {
-  mode: 'catalog' | 'owned';
   group: CatGroup | 'all';
-  selected: CatId;
+  expanded: Record<string, boolean>;
 }
 
-export function createPetBrowsingState(state: GameState): PetBrowsingState {
-  return {
-    mode: 'catalog',
-    group: 'all',
-    selected: CATS.find((cat) => !state.pets.some((pet) => pet.id === cat.id))?.id ?? CATS[0].id,
-  };
+export function createPetBrowsingState(_state?: GameState): PetBrowsingState {
+  return { group: 'all', expanded: {} };
 }
 
 export class PetPanel {
-  private summary: HTMLElement;
+  private summaryCount: HTMLElement;
+  private summaryStats: HTMLElement;
   /** The cats' treasure box: gift kinds found so far (game/cat-gifts). */
   private treasure: HTMLElement;
+  private paws: { btn: HTMLButtonElement; img: HTMLImageElement; empty: HTMLElement }[];
   private rows;
-  private tiles;
   private filters: HTMLElement;
   private grid: HTMLElement;
-  private empty: HTMLElement;
-  private tabs: HTMLButtonElement[];
   private portraitUrls = new WeakMap<HTMLCanvasElement, { scale: number; url: string }>();
+  private catUrls = new Map<CatId, string>();
 
   constructor(
     root: HTMLElement,
@@ -44,25 +39,67 @@ export class PetPanel {
     private living: LivingCatControls = {},
     private browsing: PetBrowsingState = createPetBrowsingState(state),
   ) {
-    const intro = document.createElement('div');
-    intro.className = 'pet-intro';
-    intro.innerHTML = `<h3>${t('pet.title')}</h3><p class="note">${t('pet.intro', { count: CATS.length, max: MAX_PETS })}</p><p class="pet-summary" role="status"></p><p class="note pet-treasure"></p><details class="note"><summary>${t('pet.careHelp')}</summary><p>${t('pet.accounting')}</p></details>`;
-    root.append(intro);
-    this.summary = intro.querySelector('.pet-summary')!;
-    this.treasure = intro.querySelector('.pet-treasure')!;
-    const nav = document.createElement('div');
-    nav.className = 'pet-tabs';
-    this.tabs = (['catalog', 'owned'] as const).map((mode) => {
+    // Top peach summary card: 3 circular slots + adopted/traffic/care stats + treasure box.
+    const summary = document.createElement('section');
+    summary.className = 'catsum';
+    const top = document.createElement('div');
+    top.className = 'catsum-top';
+    const pawsEl = document.createElement('div');
+    pawsEl.className = 'paws';
+    this.paws = [];
+    for (let i = 0; i < MAX_PETS; i++) {
       const btn = document.createElement('button');
-      btn.className = 'chip'; btn.textContent = t(`pet.${mode}`); btn.dataset.petView = mode;
-      btn.addEventListener('click', () => { this.browsing.mode = mode; this.update(); });
-      nav.append(btn); return btn;
-    });
-    root.append(nav);
-    this.filters = document.createElement('div'); this.filters.className = 'pet-filters';
+      btn.type = 'button';
+      btn.className = 'paw f';
+      btn.hidden = true;
+      const img = document.createElement('img');
+      img.alt = '';
+      btn.append(img);
+      btn.addEventListener('click', () => {
+        const catId = btn.dataset.jumpCat as CatId | undefined;
+        if (!catId) return;
+        const cat = CATS.find((c) => c.id === catId);
+        if (!cat) return;
+        if (this.browsing.group !== 'all' && cat.group !== this.browsing.group) this.browsing.group = 'all';
+        this.browsing.expanded[catId] = true;
+        this.update();
+        this.rows.find((row) => row.cat.id === catId)?.el.scrollIntoView({ block: 'nearest' });
+      });
+      const empty = document.createElement('span');
+      empty.className = 'paw';
+      empty.setAttribute('aria-hidden', 'true');
+      pawsEl.append(btn, empty);
+      this.paws.push({ btn, img, empty });
+    }
+    const info = document.createElement('div');
+    info.className = 'catsum-info';
+    this.summaryCount = document.createElement('div');
+    this.summaryCount.className = 'catsum-count';
+    this.summaryCount.setAttribute('role', 'status');
+    this.summaryStats = document.createElement('div');
+    this.summaryStats.className = 'catsum-stats';
+    info.append(this.summaryCount, this.summaryStats);
+    top.append(pawsEl, info);
+    this.treasure = document.createElement('p');
+    this.treasure.className = 'note pet-treasure';
+    summary.append(top, this.treasure);
+    root.append(summary);
+
+    // Care & accounting help fold (also holds the former heading and intro copy).
+    const help = document.createElement('details');
+    help.className = 'pantry-help pet-help';
+    help.innerHTML = `<summary>${t('pet.careHelp')}</summary><div class="note"><h4>${t('pet.title')}</h4><p>${t('pet.intro', { count: CATS.length, max: MAX_PETS })}</p><p>${t('pet.accounting')}</p></div>`;
+    root.append(help);
+
+    // Breed filter chips.
+    this.filters = document.createElement('div');
+    this.filters.className = 'pet-filters';
     for (const group of ['all', ...CAT_GROUPS] as const) {
       const btn = document.createElement('button');
-      btn.className = 'chip'; btn.textContent = t(`pet.group.${group}`); btn.dataset.petGroup = group;
+      btn.type = 'button';
+      btn.className = 'chip';
+      btn.textContent = group === 'all' ? `${t('pet.group.all')} ${CATS.length}` : t(`pet.group.${group}`);
+      btn.dataset.petGroup = group;
       btn.addEventListener('click', () => {
         this.browsing.group = group;
         this.update();
@@ -70,128 +107,166 @@ export class PetPanel {
       this.filters.append(btn);
     }
     root.append(this.filters);
-    this.grid = document.createElement('div'); this.grid.className = 'pet-catalog';
+
+    // 2-column cat card grid (tap card to expand full-width details).
+    this.grid = document.createElement('div');
+    this.grid.className = 'card-grid pet-grid';
     this.grid.setAttribute('aria-label', t('pet.catalog'));
-    this.tiles = CATS.map((cat) => {
-      const btn = document.createElement('button'); btn.className = 'pet-choice'; btn.dataset.chooseCat = cat.id;
-      btn.innerHTML = `<img alt="" /><b>${t(`pet.${cat.id}.name`)}</b><span>${formatMoney(cat.adoption)} · +${Math.round(cat.traffic * 100)}%</span><small></small>`;
-      btn.addEventListener('click', () => {
-        this.browsing.selected = cat.id; this.update();
-        this.rows.find((row) => row.cat.id === cat.id)!.el.scrollIntoView({ block: 'nearest' });
-      });
-      this.grid.append(btn); return { cat, btn, frames: catFrames(cat.id), portrait: btn.querySelector('img')!, badge: btn.querySelector('small')! };
-    });
-    root.append(this.grid);
-    this.empty = document.createElement('p'); this.empty.className = 'note'; this.empty.textContent = t('pet.empty'); root.append(this.empty);
     this.rows = CATS.map((cat) => {
       const el = document.createElement('section');
       el.className = 'pet-card';
       el.dataset.pet = cat.id;
-      el.innerHTML = `<div class="pet-heading"><img alt="" /><div><h3>${t(`pet.${cat.id}.name`)}</h3><p class="note">${t(`pet.${cat.id}.desc`)}</p></div><span class="pet-bonus">+${Math.round(cat.traffic * 100)}%</span></div>
-        <p class="note">${t('pet.cost', { cost: formatMoney(cat.careCost), hours: CARE_SECONDS / SECONDS_PER_BUSINESS_HOUR })}</p>
-        <p class="pet-status"></p><progress max="${MAX_CARE_SECONDS}" value="0" aria-label="${t('pet.supplies')}"></progress>
-        <div class="pet-actions"><button class="pixel-btn small" data-adopt>${t('pet.adopt', { cost: formatMoney(cat.adoption) })}</button><button class="pixel-btn small ghost" data-refill>${t('pet.refill', { cost: formatMoney(cat.careCost) })}</button></div>
-        <label class="pet-auto"><input type="checkbox" /> ${t('pet.auto')}</label>`;
-      const life = document.createElement('div');
-      life.className = 'pet-living';
-      const personality = document.createElement('p'); personality.className = 'note';
-      const preference = document.createElement('p'); preference.className = 'note';
-      const activity = document.createElement('p'); activity.className = 'pet-living-activity';
-      const actions = document.createElement('div'); actions.className = 'pet-actions';
-      const locate = document.createElement('button');
-      locate.className = 'pixel-btn small ghost'; locate.dataset.locateCat = cat.id;
-      locate.textContent = t('pet.living.locate');
-      const interact = document.createElement('button');
-      interact.className = 'pixel-btn small'; interact.dataset.petCat = cat.id;
-      interact.textContent = t('pet.living.pet'); interact.title = t('pet.living.petHint');
-      for (const button of [locate, interact]) { button.style.minHeight = '44px'; button.style.minWidth = '44px'; }
-      locate.addEventListener('click', () => this.living.locate?.(cat.id));
-      interact.addEventListener('click', () => { this.living.interact?.(cat.id); this.update(); });
-      actions.append(locate, interact);
-      life.append(personality, preference, activity, actions);
-      el.append(life);
-      root.append(el);
+      const expanded = !!this.browsing.expanded[cat.id];
+      if (expanded) el.classList.add('is-expanded');
+      el.innerHTML = `<span class="pet-heart" data-floors-icon="heartfill" aria-hidden="true" hidden></span>
+        <details class="card-details"${expanded ? ' open' : ''}>
+          <summary class="card-face">
+            <div class="pet-win"><img alt="" /></div>
+            <h3 class="pet-name">${t(`pet.${cat.id}.name`)}</h3>
+            <span class="pet-bonus">${t('pet.cardTraffic', { pct: Math.round(cat.traffic * 100) })}</span>
+          </summary>
+          <div class="card-more">
+            <p class="note">${t(`pet.${cat.id}.desc`)}</p>
+            <p class="note">${t('pet.cost', { cost: formatMoney(cat.careCost), hours: CARE_SECONDS / SECONDS_PER_BUSINESS_HOUR })}</p>
+            <p class="pet-status"></p>
+            <progress max="${MAX_CARE_SECONDS}" value="0" aria-label="${t('pet.supplies')}"></progress>
+            <div class="pet-actions"><button class="pixel-btn small ghost" data-refill>${t('pet.refill', { cost: formatMoney(cat.careCost) })}</button></div>
+            <label class="pet-auto"><input type="checkbox" /> ${t('pet.auto')}</label>
+            <div class="pet-living">
+              <p class="note pet-personality"></p>
+              <p class="note pet-preference"></p>
+              <p class="pet-living-activity"></p>
+              <div class="pet-actions">
+                <button class="pixel-btn small ghost" data-locate-cat="${cat.id}">${t('pet.living.locate')}</button>
+                <button class="pixel-btn small" data-pet-cat="${cat.id}" title="${t('pet.living.petHint')}">${t('pet.living.pet')}</button>
+              </div>
+            </div>
+          </div>
+        </details>
+        <div class="pet-card-foot">
+          <button class="pixel-btn small pet-adopt-btn" data-adopt>${t('pet.adopt', { cost: formatMoney(cat.adoption) })}</button>
+          <button class="pixel-btn small ghost pet-home-btn" data-home-locate="${cat.id}">${t('pet.inShop')}</button>
+        </div>`;
+      const details = el.querySelector<HTMLDetailsElement>('.card-details')!;
+      details.addEventListener('toggle', () => {
+        if (details.open) this.browsing.expanded[cat.id] = true;
+        else delete this.browsing.expanded[cat.id];
+        el.classList.toggle('is-expanded', details.open);
+      });
       const adopt = el.querySelector<HTMLButtonElement>('[data-adopt]')!;
+      const homeLocate = el.querySelector<HTMLButtonElement>('[data-home-locate]')!;
       const refill = el.querySelector<HTMLButtonElement>('[data-refill]')!;
       const auto = el.querySelector<HTMLInputElement>('input')!;
+      const locate = el.querySelector<HTMLButtonElement>('[data-locate-cat]')!;
+      const interact = el.querySelector<HTMLButtonElement>('[data-pet-cat]')!;
+      for (const button of [locate, interact]) { button.style.minHeight = '44px'; button.style.minWidth = '44px'; }
       adopt.addEventListener('click', () => { if (adoptCat(state, cat.id)) onChange(cat.id); });
+      homeLocate.addEventListener('click', () => this.living.locate?.(cat.id));
       refill.addEventListener('click', () => { if (refillPet(state, cat.id)) onChange(cat.id); });
+      locate.addEventListener('click', () => this.living.locate?.(cat.id));
+      interact.addEventListener('click', () => { this.living.interact?.(cat.id); this.update(); });
       auto.addEventListener('change', () => {
         const pet = state.pets.find((pet) => pet.id === cat.id);
         if (pet) { pet.autoRefill = auto.checked; onChange(cat.id); }
       });
-      return { cat, el, portrait: el.querySelector('img')!, adopt, refill, auto, life, personality, preference, activity, locate, interact, status: el.querySelector<HTMLElement>('.pet-status')!, progress: el.querySelector('progress')! };
+      this.grid.append(el);
+      return {
+        cat, el, frames: catFrames(cat.id), details,
+        heart: el.querySelector<HTMLElement>('.pet-heart')!,
+        portrait: el.querySelector<HTMLImageElement>('.pet-win img')!,
+        adopt, homeLocate, refill, auto,
+        life: el.querySelector<HTMLElement>('.pet-living')!,
+        personality: el.querySelector<HTMLElement>('.pet-personality')!,
+        preference: el.querySelector<HTMLElement>('.pet-preference')!,
+        activity: el.querySelector<HTMLElement>('.pet-living-activity')!,
+        locate, interact,
+        status: el.querySelector<HTMLElement>('.pet-status')!,
+        progress: el.querySelector('progress')!,
+      };
     });
+    root.append(this.grid);
     this.update();
   }
 
   private updatePortraits(): void {
     const adapter = getGeneratedCatAdapter();
-    this.tiles.forEach((tile, index) => {
+    for (const row of this.rows) {
       // The floors view shows its painted cats (ui/cat-art.ts).
-      const painted = catPortrait(tile.cat.id);
+      const painted = catPortrait(row.cat.id);
+      let url: string;
       if (painted) {
-        for (const portrait of [tile.portrait, this.rows[index].portrait]) {
-          if (portrait.getAttribute('src') !== painted) portrait.src = painted;
+        url = painted;
+      } else {
+        const resolved = adapter?.ready ? adapter.resolve(row.cat.id, row.frames) : { frames: row.frames, generated: false };
+        // Keep legacy portraits exact, but export generated pixels from their
+        // detailed backing rather than upscaling the low-resolution logical frame.
+        const art = resolved.generated ? fineSpriteArt(resolved.frames.idle) : { canvas: resolved.frames.idle, density: 1 };
+        const scale = Math.max(1, 4 / art.density);
+        let cached = this.portraitUrls.get(art.canvas);
+        if (!cached || cached.scale !== scale) {
+          cached = { scale, url: toDataURL(art.canvas, scale) };
+          this.portraitUrls.set(art.canvas, cached);
         }
-        return;
+        url = cached.url;
       }
-      const resolved = adapter?.ready ? adapter.resolve(tile.cat.id, tile.frames) : { frames: tile.frames, generated: false };
-      // Keep legacy portraits exact, but export generated pixels from their
-      // detailed backing rather than upscaling the low-resolution logical frame.
-      const art = resolved.generated ? fineSpriteArt(resolved.frames.idle) : { canvas: resolved.frames.idle, density: 1 };
-      const scale = Math.max(1, 4 / art.density);
-      let cached = this.portraitUrls.get(art.canvas);
-      if (!cached || cached.scale !== scale) {
-        cached = { scale, url: toDataURL(art.canvas, scale) };
-        this.portraitUrls.set(art.canvas, cached);
-      }
-      // Readiness can change after construction or a Scene reload. Only a new
-      // backing needs encoding; both views reuse its URL on ordinary updates.
-      for (const portrait of [tile.portrait, this.rows[index].portrait]) {
-        if (portrait.src !== cached.url) portrait.src = cached.url;
-      }
-    });
+      this.catUrls.set(row.cat.id, url);
+      if (row.portrait.getAttribute('src') !== url) row.portrait.src = url;
+    }
   }
 
   update(): void {
     this.updatePortraits();
     const s = this.state;
-    // A catalog change or stale selection must never leave the detail pane empty.
-    // Adoption does not invalidate a catalog entry: keep showing that cat's care.
-    if (this.browsing.mode !== 'catalog' && this.browsing.mode !== 'owned') this.browsing.mode = 'catalog';
     if (this.browsing.group !== 'all' && !CAT_GROUPS.includes(this.browsing.group)) this.browsing.group = 'all';
-    const candidates = CATS.filter((cat) => this.browsing.group === 'all' || cat.group === this.browsing.group);
-    if (!candidates.some((cat) => cat.id === this.browsing.selected)) this.browsing.selected = candidates[0].id;
-    const { mode, group, selected } = this.browsing;
+    if (!this.browsing.expanded || typeof this.browsing.expanded !== 'object') this.browsing.expanded = {};
+    const { group } = this.browsing;
+
+    for (let i = 0; i < this.paws.length; i++) {
+      const slot = this.paws[i];
+      const pet = s.pets[i];
+      slot.btn.hidden = !pet;
+      slot.empty.hidden = !!pet;
+      if (pet) {
+        slot.btn.dataset.jumpCat = pet.id;
+        slot.btn.setAttribute('aria-label', t(`pet.${pet.id}.name`));
+        const url = this.catUrls.get(pet.id) ?? '';
+        if (url && slot.img.getAttribute('src') !== url) slot.img.src = url;
+      } else {
+        delete slot.btn.dataset.jumpCat;
+      }
+    }
+    this.summaryCount.textContent = t('pet.summaryCount', { n: s.pets.length, max: MAX_PETS });
+    this.summaryStats.textContent = t('pet.summaryStats', { pct: Math.round((petTraffic(s) - 1) * 100), cost: formatAccountMoney(s.today.petCost) });
     const picked = Object.values(s.catGifts.found).reduce((n, v) => n + (v ?? 0), 0);
     this.treasure.textContent = picked ? t('gift.box', { n: giftKindsFound(s), total: GIFT_KINDS.length, count: picked }) : t('gift.boxHint');
-    this.summary.textContent = t('pet.summary', { n: s.pets.length, max: MAX_PETS, pct: Math.round((petTraffic(s) - 1) * 100), cost: formatAccountMoney(s.today.petCost) });
-    this.grid.hidden = this.filters.hidden = mode !== 'catalog';
-    this.empty.hidden = mode !== 'owned' || s.pets.length > 0;
-    for (const btn of this.tabs) btn.setAttribute('aria-pressed', String(btn.dataset.petView === mode));
-    for (const btn of this.filters.querySelectorAll('button')) btn.setAttribute('aria-pressed', String(btn.dataset.petGroup === group));
-    for (const tile of this.tiles) {
-      tile.btn.hidden = group !== 'all' && tile.cat.group !== group;
-      tile.btn.setAttribute('aria-pressed', String(tile.cat.id === selected));
-      tile.badge.textContent = s.pets.some((pet) => pet.id === tile.cat.id) ? t('pet.adopted') : t('pet.choose');
+    for (const btn of this.filters.querySelectorAll('button')) {
+      const active = btn.dataset.petGroup === group;
+      btn.setAttribute('aria-pressed', String(active));
+      btn.classList.toggle('active', active);
     }
+
     for (const r of this.rows) {
-      const pet = s.pets.find((pet) => pet.id === r.cat.id);
-      r.el.hidden = mode === 'owned' ? !pet : r.cat.id !== selected;
-      r.adopt.hidden = !!pet && !pet.fosterUntilDay;
-      r.adopt.disabled = s.pets.length >= MAX_PETS && !pet?.fosterUntilDay || s.phase !== 'prep' || s.coins < r.cat.adoption;
-      r.refill.hidden = !pet;
-      r.auto.parentElement!.hidden = !pet;
-      r.progress.hidden = !pet;
+      const pet = s.pets.find((p) => p.id === r.cat.id);
+      const foster = !!pet && !!pet.fosterUntilDay;
+      const expanded = !!this.browsing.expanded[r.cat.id];
+      r.el.hidden = group !== 'all' && r.cat.group !== group;
+      if (r.details.open !== expanded) r.details.open = expanded;
+      r.el.classList.toggle('is-expanded', expanded);
       r.el.classList.toggle('adopted', !!pet);
+      r.heart.hidden = !pet;
+      r.adopt.hidden = !!pet && !foster;
+      r.adopt.disabled = (s.pets.length >= MAX_PETS && !foster) || s.phase !== 'prep' || s.coins < r.cat.adoption;
+      const actor = pet ? this.living.getActor?.(pet.id) : undefined;
+      r.homeLocate.hidden = !pet || foster;
+      r.homeLocate.disabled = !this.living.locate || !actor;
+      r.refill.hidden = !pet || foster;
+      r.auto.parentElement!.hidden = !pet || foster;
+      r.progress.hidden = !pet;
       r.life.hidden = !pet;
-      r.el.querySelector('h3')!.textContent = `${pet ? `${s.pets.indexOf(pet) + 1}. ` : ''}${t(`pet.${r.cat.id}.name`)}`;
       if (!pet) {
         r.status.textContent = t(s.pets.length >= MAX_PETS ? 'pet.full' : s.phase !== 'prep' ? 'pet.closedOnly' : s.coins < r.cat.adoption ? 'pet.unaffordable' : 'pet.included', { max: MAX_PETS });
         continue;
       }
-      const actor = this.living.getActor?.(pet.id);
       r.personality.textContent = livingCatPersonality(pet);
       r.preference.textContent = livingCatPreference(pet);
       r.activity.textContent = livingCatActivity(actor);
@@ -199,8 +274,7 @@ export class PetPanel {
       r.interact.disabled = !this.living.interact || !actor || !petActive(pet);
       r.interact.title = t(petActive(pet) ? 'pet.living.petHint' : 'pet.living.needsCare');
       const time = formatNumber(Math.ceil(pet.careSeconds / SECONDS_PER_BUSINESS_HOUR * 10) / 10);
-      r.status.textContent = pet.fosterUntilDay ? t('pet.foster') : petActive(pet) ? t('pet.ready', { time }) : t('pet.resting');
-      r.refill.hidden = r.auto.parentElement!.hidden = !!pet.fosterUntilDay;
+      r.status.textContent = foster ? t('pet.foster') : petActive(pet) ? t('pet.ready', { time }) : t('pet.resting');
       r.progress.value = pet.careSeconds;
       r.auto.checked = pet.autoRefill;
       r.refill.disabled = s.coins < r.cat.careCost || pet.careSeconds + CARE_SECONDS > MAX_CARE_SECONDS + 1e-8;

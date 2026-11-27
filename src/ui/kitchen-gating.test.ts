@@ -71,7 +71,10 @@ it('keeps legacy food disabled in preparation without changing its plan', () => 
   const food = document.querySelector<HTMLInputElement>('[data-dish="roll"]')!;
   expect(food.disabled).toBe(true);
   expect(food.checked).toBe(false);
-  expect(food.closest('label')!.textContent).toContain(t('menu.requiresKitchen'));
+  expect(food.closest('label')!.textContent).toContain(t('prep.needsKitchenShort'));
+  const dishDetails = document.querySelector<HTMLDetailsElement>('.prep-dish-details')!;
+  dishDetails.open = true;
+  expect(dishDetails.querySelector('[data-dish-detail="roll"]')!.textContent).toContain(t('menu.requiresKitchen'));
   expect(document.querySelector('[data-bake="roll:1"]')).toBeNull();
   expect(document.querySelector<HTMLInputElement>('[data-dish="espresso"]')!.checked).toBe(true);
   expect(state.bakePlan.roll).toBe(20);

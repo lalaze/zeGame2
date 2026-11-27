@@ -115,6 +115,10 @@ body.fullscreen-cafe .panel .tab.active { background: var(--accent); border-colo
 body.fullscreen-cafe .panel .tab.active::before { filter: brightness(0) invert(94%) sepia(12%); }
 body.fullscreen-cafe .panel .panel-scroll { padding: 6px 0 0; scrollbar-gutter: stable; }
 .panel .list { padding: 10px 8px 22px; gap: 12px; }
+.panel .card-grid { display: contents; }
+.panel .card-details { grid-column: 1 / -1; border: 0; }
+.panel .card-face { display: flex; align-items: center; gap: 10px; background: none; padding: 0; min-height: 0; }
+.panel .card-face::before { display: none; }
 .panel .goal {
   position: relative; margin: 6px 8px 14px; padding: 12px 14px; background: #fffaf17a;
   border: 1px solid #d9c5a5; border-radius: 1px; box-shadow: 1px 3px 0 #d9c5a533, 0 3px 7px #62442e0d;

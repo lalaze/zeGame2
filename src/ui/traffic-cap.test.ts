@@ -71,10 +71,13 @@ describe('traffic cap notice in upgrades and promotion panels (A5)', () => {
     const p1 = mountPanel(uncapped);
     p1.showTab('upgrades');
     const mktUncapped = document.querySelector('[data-buy="upgrade:marketing"]')!.closest<HTMLElement>('.row')!;
+    const d1 = mktUncapped.querySelector<HTMLDetailsElement>('.urow-details')!;
+    d1.open = true; d1.dispatchEvent(new Event('toggle'));
     expect(mktUncapped.textContent!.toLowerCase()).not.toContain(needle);
 
     p1.showTab('promotion');
     expect(document.getElementById('list')!.textContent!.toLowerCase()).not.toContain(needle);
+    expect(document.querySelector<HTMLElement>('.promo-capped-badge')!.hidden).toBe(true);
 
     // At/above cap: late-game café.
     const capped = cappedState();
@@ -84,11 +87,14 @@ describe('traffic cap notice in upgrades and promotion panels (A5)', () => {
     const p2 = mountPanel(capped);
     p2.showTab('upgrades');
     const mktCapped = document.querySelector('[data-buy="upgrade:marketing"]')!.closest<HTMLElement>('.row')!;
+    const d2 = mktCapped.querySelector<HTMLDetailsElement>('.urow-details')!;
+    d2.open = true; d2.dispatchEvent(new Event('toggle'));
     expect(mktCapped.textContent!.toLowerCase()).toContain(needle);
     expect(mktCapped.querySelector('.sub')!.textContent).not.toContain('→');
 
     p2.showTab('promotion');
     const promoText = document.getElementById('list')!.textContent!;
+    expect(document.querySelector<HTMLElement>('.promo-capped-badge')!.hidden).toBe(false);
     expect(promoText.toLowerCase()).toContain(needle);
     expect(promoText).toContain(t('promo.capped'));
     const cappedDaily = Math.round(arrivalRate(capped) * DAY_SECONDS);
@@ -101,8 +107,12 @@ describe('traffic cap notice in upgrades and promotion panels (A5)', () => {
     s.onMenu = [];
     const p = mountPanel(s);
     p.showTab('upgrades');
+    const mkt = document.querySelector('[data-buy="upgrade:marketing"]')!.closest<HTMLElement>('.row')!;
+    const d = mkt.querySelector<HTMLDetailsElement>('.urow-details')!;
+    d.open = true; d.dispatchEvent(new Event('toggle'));
     expect(document.getElementById('list')!.textContent).not.toContain('客流已满');
     p.showTab('promotion');
+    expect(document.querySelector<HTMLElement>('.promo-capped-badge')!.hidden).toBe(true);
     expect(document.getElementById('list')!.textContent).not.toContain('客流已满');
   });
 });

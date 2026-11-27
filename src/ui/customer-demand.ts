@@ -11,13 +11,37 @@ const text = (key: string, params?: Record<string, number | string>) => t(key as
 const name = (kind: GuestKind) => text(`demand.kind.${kind}`);
 const suitability = (coverage: number) => text(coverage >= .8 ? 'demand.good' : coverage >= .5 ? 'demand.some' : 'demand.limited');
 
+export const GUEST_BAR_COLORS: Record<GuestKind, string> = {
+  commuter: '#d8b25a',
+  leisure: '#d98a7a',
+  teaTime: '#8fb0cc',
+};
+
+export function prepWeatherStickyHtml(state: GameState): string {
+  if (!demandEnabled(state)) return '';
+  const condition = todayCondition(state);
+  const heading = condition.id === 'fair' ? t('demand.title') : conditionName(condition);
+  return `<aside class="prep-sticky prep-condition condition-${condition.id}" aria-label="${heading}">
+    <b>${heading}</b><p>${text(`demand.hint.${condition.id}`)}</p>
+  </aside>`;
+}
+
 export function prepDemandHtml(state: GameState, items: readonly MenuItemDef[]): string {
   if (!demandEnabled(state)) return '';
   const plan = demandPlan(state, items);
   const condition = todayCondition(state);
   const suited = plan.guests.filter(guest => guest.coverage >= .8).map(guest => name(guest.kind));
-  return `<section class="prep-demand prep-condition condition-${condition.id}" aria-label="${t('demand.title')}">
-    <b>${condition.id === 'fair' ? t('demand.title') : `${conditionName(condition)} · ${t('demand.title')}`}</b><p>${text(`demand.hint.${condition.id}`)}</p>
+  const bars = plan.guests.length
+    ? `<div class="prep-guests">${plan.guests.map(guest => {
+        const pct = Math.round(guest.share * 100);
+        const ok = guest.coverage >= .8;
+        const color = GUEST_BAR_COLORS[guest.kind] ?? '#9ec296';
+        return `<div class="prep-guest" data-guest-kind="${guest.kind}"><span class="gn">${name(guest.kind)}</span><span class="gb"><i style="width:${pct}%;background:${color}"></i></span><span class="gp">${pct}%</span><span class="gf${ok ? ' ok' : ''}">${suitability(guest.coverage)}</span></div>`;
+      }).join('')}</div>`
+    : '';
+  return `<section class="prep-demand condition-${condition.id}" aria-label="${t('prep.guestsTitle')}">
+    <h3 class="prep-sec-title">${t('prep.guestsTitle')}</h3>
+    ${bars}
     <p class="note demand-match">${!items.length ? t('demand.empty') : suited.length ? t('demand.suited', { groups: suited.join(t('list.sep')) }) : t('demand.limitedMenu')}</p>
     <details class="demand-details"><summary data-focus="demand-details">${t('demand.details')}</summary>
       <p class="note">${t('demand.explain')}</p>

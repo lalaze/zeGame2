@@ -1,8 +1,8 @@
 class_name LedgerRows
 extends RefCounted
 
-## The ledger's lists (src/ui/panel.ts): the dishes of the menu, the pantry's ingredients, and the upgrades with the
-## manager, the orders and the chain.
+## The ledger's lists (src/ui/panel.ts): 2-column Menu dish cards & Pantry ingredient cards with collapsible
+## full-width details, plus grouped Upgrades with compact fold rows and 3-tile Operations section.
 
 ## Everything at once; tests ask for it. Otherwise what is out of sight is made and kept up a little each frame.
 static var at_once := false
@@ -16,11 +16,16 @@ var _nodes: Dictionary = {}
 var _keys: Array = []
 var _pending: Array = []
 var _stale: Array = []
+var _pair_rows: Array[Control] = []
+var _open_pair: HBoxContainer = null
+var _open_spacer: Control = null
+var _can_append := false
 ## What every dish's row needs, worked out once for all of them.
 var _today: Array = []
 var _average := 0.0
 var _cards: LedgerCards
-var _projects: Button = null
+var _projects_label: Label = null
+var _ops_hint: Label = null
 var _variety: Label = null
 var _bake_all: Button = null
 var _forecast: Label = null
@@ -37,48 +42,115 @@ func _init(list: VBoxContainer, ledger: CafeLedger, ui: CafeUi, keys: Array) -> 
 	sync(keys)
 
 
+static func _is_grid_key(key: String) -> bool:
+	var kind := key.get_slice(":", 0)
+	return kind in ["item", "teaser", "ing"]
+
+
 ## Shows these rows, keeping those that are there already.
 func sync(keys: Array) -> void:
 	for key: String in _nodes.keys():
 		# A heading counts its dishes, so it is made anew.
 		if key not in keys or key.begins_with("cat:"):
-			_list.remove_child(_nodes[key])
-			_nodes[key].queue_free()
+			var node: Control = _nodes[key]
+			if node.get_parent() != null:
+				node.get_parent().remove_child(node)
+			node.queue_free()
 			_nodes.erase(key)
 			_rows.erase(key)
 	_keys = keys
 	_pending = keys.filter(func(key: String) -> bool: return not _nodes.has(key))
+	_stale.clear()
+	# Build one screenful synchronously (6 dish cards on Menu), and everything on smaller lists.
+	var cards_left := 6
+	while not _pending.is_empty():
+		var next_kind: String = _pending[0].get_slice(":", 0)
+		if not at_once and next_kind in ["item", "cat", "teaser"] and cards_left <= 0:
+			break
+		var k: String = _pending.pop_front()
+		_make(k)
+		if next_kind in ["item", "teaser"]:
+			cards_left -= 1
+	_relayout()
+	var highest_built := -1
 	for i in _keys.size():
 		if _nodes.has(_keys[i]):
-			_list.move_child(_nodes[_keys[i]], mini(i, _list.get_child_count() - 1))
-	_stale.clear()
-	# A screenful at once, and all of what is few.
-	var first := 8
-	while not _pending.is_empty() and (at_once or first > 0 or _pending[0].get_slice(":", 0) not in ["item", "cat", "teaser"]):
-		_make(_pending.pop_front())
-		first -= 1
+			highest_built = i
+	_can_append = true
+	for pk: String in _pending:
+		if _keys.find(pk) < highest_built:
+			_can_append = false
+			break
 
 
 func _make(key: String) -> void:
-	_add(key)
-	var node: Control = _list.get_child(_list.get_child_count() - 1)
-	_nodes[key] = node
-	var before := 0
+	_nodes[key] = _build_node(key)
+
+
+## Places all built `_nodes` into `_list` in `_keys` order, pairing collapsed Menu/Pantry cards 2-by-2.
+func _relayout() -> void:
+	for node: Control in _nodes.values():
+		var p := node.get_parent()
+		if p != null:
+			p.remove_child(node)
+	for row: Control in _pair_rows:
+		if row.get_parent() != null:
+			row.get_parent().remove_child(row)
+		row.queue_free()
+	_pair_rows.clear()
+	_open_pair = null
+	_open_spacer = null
 	for k: String in _keys:
-		if k == key:
-			break
-		if _nodes.has(k):
-			before += 1
-	_list.move_child(node, before)
+		if not _nodes.has(k):
+			continue
+		_append_to_list(k)
+
+
+## O(1) incremental append of one newly built node into the existing 2-column / full-width layout.
+func _append_to_list(k: String) -> void:
+	var node: Control = _nodes[k]
+	if _is_grid_key(k) and not _ledger.expanded_cards.has(k):
+		node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		node.size_flags_vertical = Control.SIZE_FILL
+		if _open_pair != null and _open_spacer != null:
+			_open_pair.remove_child(_open_spacer)
+			_open_spacer.queue_free()
+			_open_spacer = null
+			_open_pair.add_child(node)
+			_open_pair = null
+		else:
+			var pair := HBoxContainer.new()
+			pair.add_theme_constant_override("separation", 8)
+			pair.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			pair.add_child(node)
+			var spacer := Control.new()
+			spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			pair.add_child(spacer)
+			_list.add_child(pair)
+			_pair_rows.append(pair)
+			_open_pair = pair
+			_open_spacer = spacer
+	else:
+		_open_pair = null
+		_open_spacer = null
+		if _is_grid_key(k):
+			node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_list.add_child(node)
 
 
 ## A little of what is left to make or to keep up; whether there is more.
 func work(milliseconds: float) -> bool:
 	var until := Time.get_ticks_usec() + int(milliseconds * 1000.0)
+	var need_relayout := false
 	while Time.get_ticks_usec() < until:
 		if not _pending.is_empty():
 			var key: String = _pending.pop_front()
 			_make(key)
+			if _can_append:
+				_append_to_list(key)
+			else:
+				need_relayout = true
 			if _rows.has(key):
 				_update_row(_rows[key])
 		elif not _stale.is_empty():
@@ -86,7 +158,11 @@ func work(milliseconds: float) -> bool:
 			if _rows.has(key):
 				_update_row(_rows[key])
 		else:
+			if need_relayout:
+				_relayout()
 			return false
+	if need_relayout:
+		_relayout()
 	return true
 
 
@@ -98,95 +174,361 @@ static func _money(n: float) -> String:
 	return CoreFormat.format_transaction_money(n)
 
 
-func _add(key: String) -> void:
+func _build_node(key: String) -> Control:
 	var s := _session.state
 	var kind := key.get_slice(":", 0)
 	var id := key.trim_prefix("%s:" % kind)
 	match kind:
+		"ugrp":
+			var hint: Label = null
+			if id == "ops":
+				hint = Paper.words(_t("upgrade.group.opsHint"), "tiny", false)
+				hint.add_theme_font_size_override("font_size", 10)
+				hint.add_theme_color_override("font_color", Paper.INK_LIGHT)
+				_ops_hint = hint
+			return Paper.section_head(_t("upgrade.group.%s" % id), hint)
 		"room-projects":
-			_projects = Paper.button("", "ghost", _ui.open_street)
-			_list.add_child(_projects)
+			return _build_projects_entry()
+		"ops-grid":
+			return _cards.build_ops_grid()
 		"signature-workbench":
-			var entry := Paper.button(_t("signature.entry"), "flat", func() -> void: SignatureLab.show_lab(_ui, func() -> void:
+			var entry := Paper.button(_t("signature.entry"), "chip", func() -> void: SignatureLab.show_lab(_ui, func() -> void:
 				_session.panel_changed("recipe", "signature")
 				_ledger.refresh()))
-			entry.alignment = HORIZONTAL_ALIGNMENT_LEFT
-			_list.add_child(Paper.col([entry, Paper.seam()], 2))
-		"style-prices": _list.add_child(Paper.words(_t("style.menu.prices"), "muted"))
-		"pantry": _pantry_intro()
-		"manager", "orders", "chain": _list.add_child(_cards.build(kind))
+			entry.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+			entry.custom_minimum_size = Vector2(0.0, 30.0)
+			entry.add_theme_font_size_override("font_size", 11)
+			var sb := Paper.cached_box(Color.WHITE, Paper.LINE_A, 2, 12, Vector2(11, 4))
+			for st: String in ["normal", "hover", "focus", "pressed", "hover_pressed"]:
+				entry.add_theme_stylebox_override(st, sb)
+			return entry
+		"style-prices":
+			var note := Paper.words(_t("style.menu.prices"), "small")
+			note.add_theme_color_override("font_color", Paper.INK_LIGHT)
+			return note
+		"pantry":
+			return _pantry_intro()
 		"variety":
-			_variety = Paper.words("", "muted")
-			_bake_all = Paper.button(_t("bake.all"), "ghost", func() -> void:
+			_variety = Paper.words("", "small")
+			_variety.add_theme_color_override("font_color", Paper.INK_LIGHT)
+			_bake_all = Paper.button(_t("bake.all"), "chip", func() -> void:
 				CoreEconomy.bake_for_forecast(s)
 				_ledger.bought("menu", "bake"))
 			_bake_all.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-			_list.add_child(Paper.col([_variety, _bake_all], 8))
+			_bake_all.custom_minimum_size = Vector2(0.0, 28.0)
+			_bake_all.add_theme_font_size_override("font_size", 11)
+			return Paper.col([_variety, _bake_all], 4)
 		"cat":
 			var chain := CoreData.MENU.filter(func(m: Dictionary) -> bool: return m["category"] == id)
 			var owned := chain.filter(func(m: Dictionary) -> bool: return s["items"][m["id"]] > 0.0)
-			var head := Paper.line([Paper.words(_t("cat.%s" % id), "h3")])
+			var cnt: Label = null
 			if not _ledger.intro:
-				head.add_child(Paper.words("%d/%d" % [owned.size(), chain.size()], "small", false))
-			_list.add_child(Paper.col([Paper.space(4.0), head, Paper.seam()], 4))
+				cnt = Paper.words("%d/%d" % [owned.size(), chain.size()], "tiny", false)
+				cnt.add_theme_color_override("font_color", Paper.INK_LIGHT)
+			return Paper.section_head(_t("cat.%s" % id), cnt)
 		"teaser":
-			var card := Paper.card("row")
-			card.modulate.a = 0.6
-			card.add_child(Paper.line([Paper.words("?", "h1", false), Paper.col([Paper.words("???", "name"), Paper.words(_t("row.teaser"), "muted")], 2)], 18))
-			_list.add_child(card)
-		_: _add_row(key, kind, id)
+			var card := Paper.panel(Paper.cached_box(Color(1.0, 1.0, 1.0, 0.65), Color.TRANSPARENT, 0, 14, Vector2(8, 12)), Color8(0xd9, 0xc6, 0xa6), 1.0, 14.0)
+			card.modulate.a = 0.65
+			var q := Paper.words("?", "h2", false)
+			q.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			q.add_theme_color_override("font_color", Paper.INK_LIGHT)
+			var q_box := Paper.panel(Paper.cached_box(Paper.CREAM_A, Color.TRANSPARENT, 0, 22, Vector2(12, 4)))
+			q_box.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+			q_box.add_child(q)
+			var nm := Paper.words("???", "strong")
+			nm.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			var sub := Paper.words(_t("row.teaser"), "tiny")
+			sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			var col := Paper.col([q_box, nm, sub], 4)
+			col.alignment = BoxContainer.ALIGNMENT_CENTER
+			card.add_child(col)
+			return card
+		"item":
+			return _build_item_card(key, id)
+		"ing":
+			return _build_ing_card(key, id)
+		_:
+			return _build_upgrade_row(key, id)
 
 
-func _add_row(key: String, kind: String, id: String) -> void:
+func _build_projects_entry() -> Button:
+	var b := Button.new()
+	b.focus_mode = Control.FOCUS_NONE
+	b.mouse_filter = Control.MOUSE_FILTER_PASS
+	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	b.custom_minimum_size = Vector2(0.0, 38.0)
+	var sb := Paper.card_a_box(Paper.LINE_A, Paper.CREAM_A, Vector2(10, 6))
+	for st: String in ["normal", "hover", "focus", "pressed", "hover_pressed"]:
+		b.add_theme_stylebox_override(st, sb)
+	_projects_label = Paper.words("", "strong")
+	_projects_label.add_theme_font_override("font", Paper.font(700))
+	_projects_label.add_theme_font_size_override("font_size", 12)
+	_projects_label.add_theme_color_override("font_color", Paper.INK_A)
+	var row := Paper.line([Paper.mark("map", 17.0, Paper.INK_LIGHT), _projects_label, Paper.mark("chevron", 15.0, Paper.INK_LIGHT)], 8)
+	row.alignment = BoxContainer.ALIGNMENT_CENTER
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var pad := Paper.padded(row, 10, 6)
+	pad.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	pad.set_anchors_preset(Control.PRESET_FULL_RECT)
+	b.add_child(pad)
+	pad.minimum_size_changed.connect(func() -> void: b.custom_minimum_size.y = maxf(38.0, pad.get_combined_minimum_size().y))
+	b.pressed.connect(func() -> void:
+		Paper._finish_typing(b)
+		_ui.open_street())
+	return b
+
+
+func _wire_card_fold(face: Control, key: String, r: Dictionary, relayout_on_toggle: bool = true) -> void:
+	face.set_meta("fold", true)
+	face.mouse_filter = Control.MOUSE_FILTER_PASS
+	var state := {"down": false, "pos": Vector2.ZERO}
+	face.gui_input.connect(func(e: InputEvent) -> void:
+		if not (e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT):
+			return
+		if e.pressed:
+			state["down"] = true
+			state["pos"] = e.global_position
+			return
+		var dragged: bool = state["down"] and (e.global_position - (state["pos"] as Vector2)).length() > 12.0
+		state["down"] = false
+		if dragged:
+			return
+		Paper._finish_typing(face)
+		var open: bool = not _ledger.expanded_cards.has(key)
+		if open:
+			_ledger.expanded_cards[key] = true
+		else:
+			_ledger.expanded_cards.erase(key)
+		r["more"].visible = open
+		if r.has("desc"):
+			var desc: Label = r["desc"]
+			desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART if open else TextServer.AUTOWRAP_OFF
+			desc.clip_text = not open
+			desc.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING if open else TextServer.OVERRUN_TRIM_ELLIPSIS
+		if open:
+			_update_row(r)
+		if relayout_on_toggle:
+			_relayout())
+
+
+func _build_item_card(key: String, id: String) -> Control:
 	var s := _session.state
-	var r := {"kind": kind, "id": id}
-	var card := Paper.card("row")
+	var r := {"kind": "item", "id": id, "key": key}
+	var card := Paper.panel(Paper.card_a_box(Paper.CARD_BORDER, Color.WHITE, Vector2(8, 8)))
 	r["card"] = card
-	var is_item := kind == "item"
-	var name: String = I18n.item_name(id) if is_item else (UiWords.ingredient(id) if kind == "ing" else _t("upgrade.%s.name" % id))
-	var head := Paper.flow([Paper.fitting(name, "name", 200.0)], 6)
-	if is_item and CoreLocations.is_specialty(s, id):
-		head.add_child(Paper.words(_t("menu.specialty"), "good", false))
-	r["level"] = Paper.words("", "muted", false)
-	head.add_child(r["level"])
-	r["sub"] = Paper.words("", "muted")
-	var info := Paper.col([head, r["sub"]], 4)
+	# Card face (clickable fold summary; no buttons inside so run_ui.gd merges text into 1 fold token).
+	var pic := Portraits.icon("item:%s" % id, 52.0)
+	pic.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	var name_lbl := Paper.fitting(I18n.item_name(id), "strong", 112.0)
+	name_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_lbl.add_theme_font_override("font", Paper.font(800))
+	name_lbl.add_theme_font_size_override("font_size", 13)
+	name_lbl.add_theme_color_override("font_color", Paper.INK_A)
+	var name_row := Paper.flow([name_lbl], 4)
+	name_row.alignment = FlowContainer.ALIGNMENT_CENTER
+	if CoreLocations.is_specialty(s, id):
+		var sp := Paper.words(_t("menu.specialty"), "tiny", false)
+		sp.add_theme_color_override("font_color", Paper.SAGE_A_DARK)
+		name_row.add_child(sp)
+	r["level"] = Paper.words("", "tiny", false)
+	r["level"].add_theme_color_override("font_color", Paper.INK_LIGHT)
+	name_row.add_child(r["level"])
+	r["price"] = Paper.words("", "strong", false)
+	r["price"].horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	r["price"].add_theme_font_override("font", Paper.font(800))
+	r["price"].add_theme_font_size_override("font_size", 16)
+	r["price"].add_theme_color_override("font_color", Paper.CARD_PRICE)
+	r["bar"] = Paper.progress_a(0.0, 5.0, Paper.HONEY, Paper.TRACK_A)
+	r["badgeLabel"] = Paper.words("", "tiny", true)
+	r["badgeLabel"].horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	r["badgeLabel"].add_theme_font_override("font", Paper.font(800))
+	r["badgeLabel"].add_theme_color_override("font_color", Paper.BADGE_INK)
+	r["badge"] = Paper.panel(Paper.cached_box(Paper.BADGE_BG, Color.TRANSPARENT, 0, 8, Vector2(6, 2)))
+	r["badge"].size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	r["badge"].add_child(r["badgeLabel"])
+	r["badge"].visible = false
+	var face := Paper.col([pic, name_row, r["price"], Paper.padded(r["bar"], 4, 2, 4, 2), r["badge"]], 2)
+	face.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	# Collapsible details body (shown full-width when card is expanded).
+	r["sub"] = Paper.words("", "small")
+	r["sub"].add_theme_color_override("font_color", Paper.INK_LIGHT)
+	r["tradeoff"] = Paper.words("", "small")
+	r["tradeoff"].add_theme_color_override("font_color", Paper.INK_LIGHT)
+	r["preview"] = Paper.words("", "good")
+	r["preview"].add_theme_font_size_override("font_size", 12)
 	r["details"] = Paper.button("", "link", _price_details.bind(r))
 	r["details"].size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	if is_item:
-		r["tradeoff"] = Paper.words("", "muted")
-		info.add_child(r["tradeoff"])
-		info.add_child(_recipe(r, id))
-		info.add_child(_taste(r, id))
-		if CoreEconomy.is_bakery(id):
-			info.add_child(_bake(r, id))
-	else:
-		info.add_child(r["details"])
-	if kind != "upgrade":
-		r["bar"] = Paper.progress(0.0, 4.0)
-		info.add_child(r["bar"])
-	var picture := Paper.panel(Paper.box(Color8(0xf6, 0xe7, 0xcc), Color.TRANSPARENT, 0, 12, Vector2(4, 4)))
-	picture.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
-	picture.add_child(Portraits.icon("%s:%s" % [kind, id], 40.0))
-	var body := Paper.col([Paper.line([picture, info], 12)], 10)
-	if is_item:
-		r["preview"] = Paper.words("", "good")
-		r["details"].size_flags_horizontal = Control.SIZE_SHRINK_END
-		body.add_child(Paper.line([r["preview"], Paper.spring(), r["details"]]))
-	if kind == "upgrade" and id == "tables":
-		r["tablePreview"] = Paper.button("", "chip", _preview_table)
-		body.add_child(r["tablePreview"])
-	var actions := Paper.line([], 8)
-	if is_item:
-		r["toggle"] = Paper.button("", "selling", _toggle.bind(id))
-		r["toggle"].size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		actions.add_child(r["toggle"])
-	r["buy"] = Paper.priced("primary", _buy.bind(r))
-	actions.add_child(r["buy"])
-	body.add_child(actions)
+	r["details"].add_theme_font_size_override("font_size", 12)
+	var more_items: Array = [PaperSeam.new(Paper.CARD_BORDER), r["sub"], r["tradeoff"], _recipe(r, id), _taste(r, id)]
+	if CoreEconomy.is_bakery(id):
+		more_items.append(_bake(r, id))
+	more_items.append(r["preview"])
+	more_items.append(r["details"])
+	var more := Paper.col(more_items, 6)
+	more.visible = _ledger.expanded_cards.has(key)
+	r["more"] = more
+	_wire_card_fold(face, key, r, true)
+	# Buy / Upgrade / Unlock pill button at card bottom.
+	r["buy"] = Paper.card_buy(_buy.bind(r))
+	var body := Paper.col([face, more, r["buy"]], 6)
 	card.add_child(body)
+	# Overlay child holds top-right circular on-sale checkmark button (40x40 touch target, 26x26 visual circle).
+	var overlay := Control.new()
+	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	overlay.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	overlay.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var toggle := PaperCheckButton.new(_toggle.bind(id))
+	toggle.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	toggle.offset_left = -36.0
+	toggle.offset_right = 4.0
+	toggle.offset_top = -4.0
+	toggle.offset_bottom = 36.0
+	r["toggle"] = toggle
+	overlay.add_child(toggle)
+	card.add_child(overlay)
 	_rows[key] = r
-	_list.add_child(card)
+	return card
+
+
+func _build_ing_card(key: String, id: String) -> Control:
+	var r := {"kind": "ing", "id": id, "key": key}
+	var card := Paper.panel(Paper.card_a_box(Paper.CARD_BORDER, Color.WHITE, Vector2(8, 8)))
+	r["card"] = card
+	var pic := Portraits.icon("ing:%s" % id, 48.0)
+	pic.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	var name_lbl := Paper.words(UiWords.ingredient(id), "strong")
+	name_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_lbl.add_theme_font_override("font", Paper.font(800))
+	name_lbl.add_theme_font_size_override("font_size", 13)
+	name_lbl.add_theme_color_override("font_color", Paper.INK_A)
+	r["stock"] = Paper.words("", "h2", false)
+	r["stock"].horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	r["stock"].add_theme_font_override("font", Paper.font(800))
+	r["stock"].add_theme_font_size_override("font_size", 19)
+	r["stock"].add_theme_color_override("font_color", Paper.INK_A)
+	r["unit"] = Paper.words("", "tiny")
+	r["unit"].horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	r["unit"].add_theme_color_override("font_color", Paper.INK_LIGHT)
+	r["bar"] = Paper.progress_a(0.0, 5.0, Paper.HONEY, Paper.TRACK_A)
+	var face := Paper.col([pic, name_lbl, r["stock"], r["unit"], Paper.padded(r["bar"], 4, 2, 4, 2)], 2)
+	face.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	r["need"] = Paper.words("", "strong")
+	r["need"].add_theme_font_size_override("font_size", 12)
+	r["need"].add_theme_color_override("font_color", Paper.INK_A)
+	r["sub"] = Paper.words("", "small")
+	r["sub"].add_theme_color_override("font_color", Paper.INK_LIGHT)
+	r["details"] = Paper.button("", "link", _price_details.bind(r))
+	r["details"].size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	r["details"].add_theme_font_size_override("font_size", 12)
+	var more := Paper.col([PaperSeam.new(Paper.CARD_BORDER), r["need"], r["sub"], r["details"]], 6)
+	more.visible = _ledger.expanded_cards.has(key)
+	r["more"] = more
+	_wire_card_fold(face, key, r, true)
+	r["buy"] = Paper.card_buy(_buy.bind(r))
+	card.add_child(Paper.col([face, more, r["buy"]], 6))
+	_rows[key] = r
+	return card
+
+
+func _build_upgrade_row(key: String, id: String) -> Control:
+	var def: Dictionary = CoreEconomy.upgrade_def(id)
+	var use_pips: bool = def["max"] <= 6.0
+	var expanded: bool = _ledger.expanded_cards.has(key)
+	var r := {"kind": "upgrade", "id": id, "key": key}
+	var card := Paper.panel(Paper.card_a_box(Paper.CARD_BORDER, Color.WHITE, Vector2(9, 7)))
+	r["card"] = card
+	# Left icon in cream rounded square.
+	var picture := Paper.panel(Paper.cached_box(Color8(0xfb, 0xf0, 0xda), Color.TRANSPARENT, 0, 10, Vector2(3, 3)))
+	picture.custom_minimum_size = Vector2(40.0, 40.0)
+	picture.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	picture.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	picture.add_child(Portraits.icon("upgrade:%s" % id, 34.0))
+	# Middle info column: name + level pill, pips or thin bar, 1-line description.
+	var name_lbl := Paper.words(_t("upgrade.%s.name" % id), "strong", false)
+	name_lbl.add_theme_font_override("font", Paper.font(800))
+	name_lbl.add_theme_font_size_override("font_size", 13)
+	name_lbl.add_theme_color_override("font_color", Paper.INK_A)
+	name_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	name_lbl.clip_text = true
+	name_lbl.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	var lv_lbl := Paper.words("", "tiny", false)
+	lv_lbl.add_theme_font_override("font", Paper.font(700))
+	lv_lbl.add_theme_font_size_override("font_size", 10)
+	lv_lbl.add_theme_color_override("font_color", Paper.INK_LIGHT)
+	var lv_pill := Paper.panel(Paper.cached_box(Paper.LV_PILL_BG, Color.TRANSPARENT, 0, 7, Vector2(5, 1)))
+	lv_pill.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	lv_pill.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	lv_pill.add_child(lv_lbl)
+	r["level"] = lv_lbl
+	r["levelPill"] = lv_pill
+	var head := Paper.line([name_lbl, lv_pill], 5)
+	head.alignment = BoxContainer.ALIGNMENT_CENTER
+	head.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var prog: Control
+	if use_pips:
+		var pips := Paper.PipsBar.new(int(def["max"] + 1.0) if id == "cook" else int(def["max"]))
+		r["pips"] = pips
+		prog = pips
+	else:
+		var bar := Paper.progress_a(0.0, 5.0, Paper.SAGE_A, Color8(0xe8, 0xdb, 0xc5))
+		r["bar"] = bar
+		prog = bar
+	var desc := Paper.words(_upgrade_desc(id), "tiny", expanded)
+	desc.add_theme_font_size_override("font_size", 11)
+	desc.add_theme_color_override("font_color", Paper.INK_LIGHT)
+	desc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	desc.clip_text = not expanded
+	desc.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING if expanded else TextServer.OVERRUN_TRIM_ELLIPSIS
+	r["desc"] = desc
+	var mid := Paper.col([head, prog, desc], 2)
+	mid.alignment = BoxContainer.ALIGNMENT_CENTER
+	mid.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var face_row := Paper.line([picture, mid], 8)
+	face_row.alignment = BoxContainer.ALIGNMENT_CENTER
+	face_row.custom_minimum_size.y = 44.0
+	face_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var face := Paper.padded(face_row, 0, 0, 84, 0)
+	# Collapsible full-width details below face (effects, money details, optional table preview).
+	r["sub"] = Paper.words("", "small")
+	r["sub"].add_theme_color_override("font_color", Paper.INK_LIGHT)
+	r["details"] = Paper.button("", "link", _price_details.bind(r))
+	r["details"].size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	r["details"].add_theme_font_size_override("font_size", 12)
+	var more_actions := Paper.flow([r["details"]], 8)
+	if id == "tables":
+		var tp := Paper.button("", "chip", _preview_table)
+		tp.custom_minimum_size = Vector2(0.0, 30.0)
+		tp.add_theme_font_size_override("font_size", 11)
+		r["tablePreview"] = tp
+		more_actions.add_child(tp)
+	var more := Paper.col([PaperSeam.new(Paper.CARD_BORDER), r["sub"], more_actions], 6)
+	more.visible = expanded
+	r["more"] = more
+	_wire_card_fold(face, key, r, false)
+	card.add_child(Paper.col([face, more], 6))
+	# Overlay child holds right-side 2-line buy button OR tilted red-brown MaxStamp (visited after fold/more, matching Web DOM).
+	var overlay := Control.new()
+	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	overlay.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	overlay.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var action_slot := Control.new()
+	action_slot.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	action_slot.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	action_slot.offset_left = -76.0
+	action_slot.offset_right = 0.0
+	action_slot.offset_top = 0.0
+	action_slot.offset_bottom = 44.0
+	r["buy"] = Paper.two_line_buy(_buy.bind(r), 76.0)
+	r["buy"].set_anchors_preset(Control.PRESET_FULL_RECT)
+	r["stamp"] = Paper.MaxStamp.new(_t("btn.maxed"))
+	r["stamp"].set_anchors_preset(Control.PRESET_FULL_RECT)
+	r["stamp"].visible = false
+	action_slot.add_child(r["buy"])
+	action_slot.add_child(r["stamp"])
+	overlay.add_child(action_slot)
+	card.add_child(overlay)
+	_rows[key] = r
+	return card
 
 
 func _recipe(r: Dictionary, id: String) -> Control:
@@ -203,13 +545,22 @@ func _recipe(r: Dictionary, id: String) -> Control:
 
 func _taste(r: Dictionary, id: String) -> Control:
 	r["tasteLabel"] = Paper.words("", "strong")
-	r["tasteProgress"] = Paper.words("", "small")
-	var b := Paper.button("", "flat", func() -> void: TasteDialog.show_taste(_ui.dialogs, _session, id, func() -> void: _ledger.bought("recipe", id)))
-	var copy := Paper.col([r["tasteLabel"], r["tasteProgress"]], 0)
+	r["tasteLabel"].add_theme_font_size_override("font_size", 12)
+	r["tasteLabel"].add_theme_color_override("font_color", Paper.SAGE_A_DARK)
+	r["tasteProgress"] = Paper.words("", "tiny")
+	r["tasteProgress"].add_theme_color_override("font_color", Paper.INK_LIGHT)
+	var b := Paper.button("", "selling", func() -> void: TasteDialog.show_taste(_ui.dialogs, _session, id, func() -> void: _ledger.bought("recipe", id)))
+	var sb := Paper.cached_box(Paper.SAGE_SOFT, Color8(0xcb, 0xd9, 0xc3), 2, 10, Vector2(10, 5))
+	for st: String in ["normal", "hover", "focus", "pressed", "hover_pressed"]:
+		b.add_theme_stylebox_override(st, sb)
+	var copy := Paper.col([r["tasteLabel"], r["tasteProgress"]], 2)
+	var pad := Paper.padded(copy, 10, 6)
 	copy.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	copy.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	b.add_child(copy)
-	b.custom_minimum_size.y = 46.0
+	pad.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	pad.set_anchors_preset(Control.PRESET_FULL_RECT)
+	b.add_child(pad)
+	pad.minimum_size_changed.connect(func() -> void: b.custom_minimum_size.y = maxf(48.0, pad.get_combined_minimum_size().y))
+	b.custom_minimum_size.y = 48.0
 	r["taste"] = b
 	return b
 
@@ -220,6 +571,8 @@ func _bake(r: Dictionary, id: String) -> Control:
 	r["bakeNote"] = Paper.words("", "small", false)
 	r["bakeLess"] = Paper.button("−", "chip", _set_bake.bind(id, -CoreData.BAKE_STEP))
 	r["bakeMore"] = Paper.button("+", "chip", _set_bake.bind(id, CoreData.BAKE_STEP))
+	for btn: Button in [r["bakeLess"], r["bakeMore"]]:
+		btn.custom_minimum_size = Vector2(32.0, 32.0)
 	r["bake"] = Paper.flow([r["bakeLabel"], r["bakeLess"], r["bakeN"], r["bakeMore"], r["bakeNote"]], 6)
 	return r["bake"]
 
@@ -272,8 +625,10 @@ func _price_details(r: Dictionary) -> void:
 
 func update() -> void:
 	var s := _session.state
-	if _projects != null:
-		_projects.text = StreetMap.entry_label(s, CoreClock.now())
+	if _projects_label != null:
+		_projects_label.text = StreetMap.entry_label(s, CoreClock.now())
+	if _ops_hint != null:
+		_ops_hint.visible = not s["manager"]["hired"]
 	_cards.update()
 	if _forecast != null:
 		_update_pantry()
@@ -297,6 +652,7 @@ func update() -> void:
 func _update_row(r: Dictionary) -> void:
 	match r["kind"]:
 		"item": _update_item(r)
+		"ing": _update_ing(r, CoreEconomy.day_needs(_session.state))
 		"upgrade": _update_upgrade(r)
 
 
@@ -313,36 +669,46 @@ func _update_item(r: Dictionary) -> void:
 	var prep: bool = s["phase"] == "prep"
 	var q := CoreEconomy.quote_item(s, id, _ledger.amount())
 	var eligible := CoreEconomy.can_prepare_item(s, id)
+	var bakery := CoreEconomy.is_bakery(id)
+	var left := CoreEconomy.servings_left(s, id)
+	var display_price := _price_at(def, level) if level > 0.0 else _money(def["basePrice"] * CoreEconomy.tip_multiplier(s))
 	Paper.say(r["level"], "Lv %s" % JsMath.number_to_string(level) if level > 0.0 else "")
-	if not eligible:
-		r["sub"].text = _t("menu.requiresKitchen")
-	elif level > 0.0:
-		r["sub"].text = _t("row.each", {"price": _price_at(def, level), "time": UiWords.fixed(CoreEconomy.prep_time(s, id), 1), "cost": _money(CoreEconomy.serving_cost(id))})
-	else:
-		r["sub"].text = _t("row.sellsFor", {"price": _money(def["basePrice"] * CoreEconomy.tip_multiplier(s))})
+	r["price"].text = display_price
 	var next: Variant = CoreEconomy.next_milestone(level)
 	var before := 0.0
 	for m: float in CoreData.PRICE_MILESTONES:
 		if m <= level:
 			before = m
 	r["bar"].value = (level - before) / (next - before) if next != null else 1.0
-	Paper.set_priced(r["buy"], _t("btn.unlock") if level == 0.0 else ("+%s" % JsMath.number_to_string(q["count"]) if q["count"] > 1.0 else _t("btn.levelUp")), _money(q["cost"]), q["affordable"])
-	_update_details(r, q["cost"])
-	Paper.say(r["preview"], "" if not eligible or (level == 0.0 and q["count"] <= 1.0) else _t("row.afterUpgrade" if level > 0.0 else "row.afterUnlock", {"price": _price_at(def, level + q["count"])}))
+	var badge := ""
+	if not eligible:
+		badge = _t("menu.requiresKitchen")
+	elif level > 0.0 and left < 1.0:
+		badge = _t("bake.canBake" if bakery else "menu.left", {"n": CoreFormat.format_number(left)})
+	r["badge"].visible = not badge.is_empty()
+	if not badge.is_empty():
+		r["badgeLabel"].text = badge
+	Paper.set_card_buy(r["buy"], _t("btn.unlock") if level == 0.0 else ("+%s" % JsMath.number_to_string(q["count"]) if q["count"] > 1.0 else _t("btn.levelUp")), _money(q["cost"]), q["affordable"])
 	var on: bool = eligible and id in s["onMenu"]
-	r["card"].modulate.a = 0.75 if level > 0.0 and not on else 1.0
+	r["card"].modulate.a = 0.65 if (level > 0.0 and not on) else (0.78 if level == 0.0 else 1.0)
+	var toggle: PaperCheckButton = r["toggle"]
+	toggle.visible = level > 0.0
+	toggle.text = _t("menu.on" if on else "menu.off")
+	toggle.active = on
+	toggle.disabled = not prep or not eligible
+	# Details inside the fold only need updating when open.
+	if not r["more"].visible:
+		return
+	r["sub"].visible = eligible
+	if eligible:
+		r["sub"].text = _t("row.each", {"price": display_price, "time": UiWords.fixed(CoreEconomy.prep_time(s, id), 1), "cost": _money(CoreEconomy.serving_cost(id))}) if level > 0.0 else _t("row.sellsFor", {"price": display_price})
 	Paper.say(r["tradeoff"], _tradeoff(s, def, level, eligible, on))
-	r["toggle"].visible = level > 0.0
-	r["toggle"].text = _t("menu.on" if on else "menu.off")
-	Paper.dress(r["toggle"], "selling" if on else "chip")
-	r["toggle"].disabled = not prep or not eligible
+	r["recipe"].visible = eligible
+	r["left"].text = _t("bake.canBake" if bakery else "menu.left", {"n": CoreFormat.format_number(left)}) if eligible else ""
+	r["left"].add_theme_color_override("font_color", Paper.DANGER if left < 1.0 else Paper.MUTED)
 	r["taste"].visible = level > 0.0
 	r["tasteLabel"].text = TasteDialog.label(s, id)
 	r["tasteProgress"].text = TasteDialog.progress(s, id)
-	var left := CoreEconomy.servings_left(s, id)
-	r["recipe"].visible = eligible
-	r["left"].text = _t("bake.canBake" if CoreEconomy.is_bakery(id) else "menu.left", {"n": CoreFormat.format_number(left)}) if eligible else ""
-	r["left"].add_theme_color_override("font_color", Paper.DANGER if left < 1.0 else Paper.MUTED)
 	if r.has("bake"):
 		r["bake"].visible = level > 0.0 and on
 		r["bakeLess"].visible = prep
@@ -361,6 +727,8 @@ func _update_item(r: Dictionary) -> void:
 			r["bakeNote"].text = ""
 			short = shelf == 0.0
 		r["bakeN"].add_theme_color_override("font_color", Paper.DANGER if short else Paper.INK)
+	Paper.say(r["preview"], "" if not eligible or (level == 0.0 and q["count"] <= 1.0) else _t("row.afterUpgrade" if level > 0.0 else "row.afterUnlock", {"price": _price_at(def, level + q["count"])}))
+	_update_details(r, q["cost"])
 
 
 ## Both demand and price, for a dish that is off the menu: a lower average need not mean lower earnings.
@@ -406,25 +774,34 @@ func _update_upgrade(r: Dictionary) -> void:
 	# Servers are limited by the rooms opened so far; the card says what opens more.
 	var most := CoreEconomy.upgrade_max(s, id)
 	var maxed := level >= most
-	if id == "cook":
-		Paper.say(r["level"], _t("upgrade.cook.stage", {"n": level + 1.0, "total": def["max"] + 1.0}) if s["kitchen"] else "")
-	else:
-		r["level"].text = "%s/%s" % [JsMath.number_to_string(level), JsMath.number_to_string(most)]
-	var after := s.duplicate(false)
-	after["upgrades"] = s["upgrades"].duplicate()
-	after["upgrades"][id] = minf(most, level + q["count"])
-	# A locked upgrade has no "after" to show, and money is not what it is waiting for.
-	var locked := CoreEconomy.upgrade_locked(s, id)
-	var capped_marketing := id == "marketing" and CoreEconomy.is_traffic_capped(s)
-	r["sub"].text = "%s · %s%s%s" % [_upgrade_desc(id), _upgrade_effect(s, id), "" if maxed or locked or capped_marketing else " → %s" % _upgrade_effect(after, id), " · %s" % _t("upgrade.server.roomLimit") if maxed and most < def["max"] else ""]
-	Paper.set_priced(r["buy"], _t("btn.maxed") if maxed else ("+%s" % JsMath.number_to_string(q["count"]) if q["count"] > 1.0 else _t("btn.buy")), "" if maxed else _money(q["cost"]), not maxed and q["affordable"])
-	_update_details(r, q["cost"], maxed or locked)
+	var lv_text := (_t("upgrade.cook.stage", {"n": level + 1.0, "total": def["max"] + 1.0}) if s["kitchen"] else "") if id == "cook" else ("%s/%s" % [JsMath.number_to_string(level), JsMath.number_to_string(most)])
+	r["level"].text = lv_text
+	r["levelPill"].visible = not lv_text.is_empty()
+	if r.has("pips"):
+		var total_pips := int(def["max"] + 1.0) if id == "cook" else int(most)
+		var filled_pips := (int(level + 1.0) if s["kitchen"] else 0) if id == "cook" else int(level)
+		r["pips"].set_progress(filled_pips, total_pips)
+	elif r.has("bar"):
+		r["bar"].value = minf(1.0, level / maxf(1.0, most))
+	r["buy"].visible = not maxed
+	r["stamp"].visible = maxed
+	Paper.set_two_line_buy(r["buy"], "+%s" % JsMath.number_to_string(q["count"]) if q["count"] > 1.0 else _t("btn.buy"), _money(q["cost"]), not maxed and q["affordable"])
+	# Details inside the fold: update always if open (cheap enough, and ensures table_preview clears if phase changes).
 	if r.has("tablePreview"):
 		var available: bool = s["phase"] == "prep" and CoreRegions.main_table_count(s) < CoreLayout.MAX_TABLES
 		if not available:
 			_ledger.table_preview = false
 		r["tablePreview"].visible = available
 		r["tablePreview"].text = _t("upgrade.tables.hidePreview" if _ledger.table_preview else "upgrade.tables.preview")
+	if not r["more"].visible:
+		return
+	var after := s.duplicate(false)
+	after["upgrades"] = s["upgrades"].duplicate()
+	after["upgrades"][id] = minf(most, level + q["count"])
+	var locked := CoreEconomy.upgrade_locked(s, id)
+	var capped_marketing := id == "marketing" and CoreEconomy.is_traffic_capped(s)
+	r["sub"].text = "%s%s%s" % [_upgrade_effect(s, id), "" if maxed or locked or capped_marketing else " → %s" % _upgrade_effect(after, id), " · %s" % _t("upgrade.server.roomLimit") if maxed and most < def["max"] else ""]
+	_update_details(r, q["cost"], maxed or locked)
 
 
 func _update_details(r: Dictionary, cost: float, hidden: bool = false) -> void:
@@ -435,16 +812,23 @@ func _update_details(r: Dictionary, cost: float, hidden: bool = false) -> void:
 
 # ---------------------------------------------------------------- the pantry
 
-func _pantry_intro() -> void:
-	_forecast = Paper.words("", "h3")
+func _pantry_intro() -> Control:
+	_forecast = Paper.words("", "strong")
+	_forecast.add_theme_font_size_override("font_size", 13)
+	_forecast.add_theme_color_override("font_color", Paper.INK_A)
 	_restock = Paper.button("", "primary", func() -> void:
 		var bought := Restocking.restock(_session)
 		if not bought.is_empty():
 			_ui.dialogs.note(_t("prep.bought", {"items": bought}))
 			_ledger.bought("ingredient", "restock"))
 	_restock.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_restock_reason = Paper.words("", "muted")
-	_list.add_child(Paper.col([_forecast, Paper.words(_t("guide.pantryIntro" if _ledger.intro else "pantry.intro"), "muted"), _restock, _restock_reason], 8))
+	_restock.custom_minimum_size.y = 40.0
+	_restock_reason = Paper.words("", "small")
+	_restock_reason.add_theme_color_override("font_color", Paper.INK_LIGHT)
+	var note := Paper.words(_t("guide.pantryIntro" if _ledger.intro else "pantry.intro"), "small")
+	note.add_theme_color_override("font_color", Paper.INK_LIGHT)
+	var help := Paper.help_fold(_t("pantry.noteLabel"), note, _ledger.pantry_help_open, func(open: bool) -> void: _ledger.pantry_help_open = open)
+	return Paper.col([_forecast, _restock, _restock_reason, help], 6)
 
 
 func _update_pantry() -> void:
@@ -458,16 +842,37 @@ func _update_pantry() -> void:
 	_restock.disabled = full or plan["cost"] <= 0.0
 	Paper.say(_restock_reason, "" if full else Restocking.reason(plan))
 	for r: Dictionary in _rows.values():
-		var id: String = r["id"]
-		var def: Dictionary = CoreEconomy.ingredient_def(id)
-		var stock: float = s["pantry"][id]
-		var need: float = needs.get(id, 0.0)
-		var cost: float = def["cost"] * _ledger.pantry_amount()
-		var names := CoreEconomy.used_by(s, id).map(func(m: Dictionary) -> String: return I18n.item_name(m["id"]))
-		r["sub"].text = "%s\n%s" % [_t("pantry.stock", {"n": CoreFormat.format_number(stock), "price": _money(def["cost"])}), _t("pantry.usedBy", {"items": UiWords.join(names)})]
-		r["level"].visible = false
-		r["bar"].value = minf(1.0, stock / need) if need > 0.0 else 1.0
-		r["sub"].add_theme_color_override("font_color", Paper.DANGER if need > 0.0 and stock < need else Paper.MUTED)
-		Paper.set_priced(r["buy"], _t("pantry.buy", {"n": _ledger.pantry_amount()}), _money(cost), cost <= s["coins"])
-		_update_details(r, cost)
-		r["card"].add_theme_stylebox_override("panel", Paper.row_box(_ledger.shortfall(id)))
+		_update_ing(r, needs)
+
+
+func _update_ing(r: Dictionary, needs: Dictionary) -> void:
+	var s := _session.state
+	var id: String = r["id"]
+	var def: Dictionary = CoreEconomy.ingredient_def(id)
+	var stock: float = s["pantry"][id]
+	var need: float = needs.get(id, 0.0)
+	var cost: float = def["cost"] * _ledger.pantry_amount()
+	var low: bool = need > 0.0 and stock < need
+	var focus: bool = _ledger.shortfall(id)
+	r["stock"].text = CoreFormat.format_number(stock)
+	r["stock"].add_theme_color_override("font_color", Paper.BADGE_INK if low else Paper.INK_A)
+	r["unit"].text = "%s · %s" % [_t("pantry.stockLabel"), _t("pantry.unitPrice", {"price": _money(def["cost"])})]
+	r["bar"].value = minf(1.0, stock / need) if need > 0.0 else 1.0
+	var low_now: bool = low
+	if r.get("_bar_low") != low_now:
+		r["_bar_low"] = low_now
+		var fill_col := Color8(0xc9, 0x5d, 0x4c) if low_now else Paper.HONEY
+		r["bar"].add_theme_stylebox_override("fill", Paper.cached_box(fill_col, Color.TRANSPARENT, 0, 2.5, Vector2.ZERO))
+	Paper.set_card_buy(r["buy"], _t("pantry.buy", {"n": _ledger.pantry_amount()}), _money(cost), cost <= s["coins"])
+	var border_key := 2 if focus else (1 if low_now else 0)
+	if r.get("_border_key") != border_key:
+		r["_border_key"] = border_key
+		var border := Paper.DANGER if focus else (Paper.ROSE_A if low_now else Paper.CARD_BORDER)
+		var fill := Color8(0xff, 0xf6, 0xf3) if focus else Color.WHITE
+		r["card"].add_theme_stylebox_override("panel", Paper.card_a_box(border, fill, Vector2(8, 8)))
+	if not r["more"].visible:
+		return
+	r["need"].text = _t("pantry.need", {"n": CoreFormat.format_number(need)})
+	var names := CoreEconomy.used_by(s, id).map(func(m: Dictionary) -> String: return I18n.item_name(m["id"]))
+	r["sub"].text = _t("pantry.usedBy", {"items": UiWords.join(names)})
+	_update_details(r, cost)

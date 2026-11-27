@@ -69,8 +69,10 @@ it('retains the controls behind a dialog so its trigger can regain focus', () =>
   close.addEventListener('click', () => overlay.remove()); close.click();
   expect(hud.expanded).toBe(true);
   setLocale('en'); hud.update('Bean', 'Day 1 · 08:00', false, 'Open');
-  expect(button('mobile-cafe-more').textContent).toBe('More');
+  expect(button('mobile-cafe-more').textContent).toBe('Close');
   expect(button('settings').textContent).toBe('Settings');
+  hud.close();
+  expect(button('mobile-cafe-more').textContent).toBe('More');
 });
 
 it('keeps the selected service speed visible after More closes, and removes it while preparing', () => {
@@ -102,4 +104,47 @@ it('keeps the current settings language when rotating back to desktop', () => {
   expect(button('settings').textContent).toBe('Settings');
   setLocale('zh'); mobile = true; change(); mobile = false; change();
   expect(button('settings').textContent).toBe('设置');
+});
+
+it('hosts the outer-wall button on the shelf, updates sign weather/progress, and tracks unread on More', () => {
+  hud.destroy();
+  const wall = document.createElement('button'); wall.id = 'wall'; wall.textContent = '外墙';
+  get('stage').append(wall);
+  hud = new MobileCafeHud(get('app'), {
+    money: get('money'), people: get('people'), settings: button('settings'), manage: button('manage'),
+    day: get('day'), status: get('status'), style: get('style'), open: button('open'), zoom: get('zoom'),
+    overview: button('overview'), help: button('help'), pantry: button('pantry'), wall,
+  });
+  const dock = document.querySelector<HTMLElement>('.mobile-cafe-dock')!;
+  expect(wall.closest('.mobile-cafe-dock')).toBe(dock);
+  expect([...dock.children].filter(el => el.tagName === 'BUTTON' || el.classList.contains('mobile-cafe-primary')).map(el => el.id || el.className))
+    .toEqual(['overview', 'manage', 'mobile-cafe-primary', 'wall', 'mobile-cafe-more']);
+
+  hud.update('豆豆店', '第 2 天 · 12:00', false, '第 2 天营业中', '小雨', 2, 0.5, 'rain', 3);
+  const wx = document.querySelector<HTMLElement>('.mobile-sign-wx')!;
+  const daybar = document.querySelector<HTMLElement>('.mobile-daybar')!;
+  const fill = document.querySelector<HTMLElement>('.mobile-daybar-fill')!;
+  const dot = document.querySelector<HTMLElement>('.mobile-more-dot')!;
+  expect(wx.dataset.floorsIcon).toBe('rain');
+  expect(wx.dataset.condition).toBe('rain');
+  expect(daybar.hidden).toBe(false);
+  expect(fill.style.width).toBe('50%');
+  expect(dot.hidden).toBe(false);
+  expect(button('mobile-cafe-more').textContent).toBe('更多');
+  expect(button('mobile-cafe-more').dataset.floorsIcon).toBe('more');
+
+  button('mobile-cafe-more').click();
+  expect(dot.hidden).toBe(true);
+  expect(button('mobile-cafe-more').textContent).toBe('收起');
+  expect(button('mobile-cafe-more').dataset.floorsIcon).toBe('close');
+  hud.close();
+  expect(dot.hidden).toBe(false);
+  expect(button('mobile-cafe-more').textContent).toBe('更多');
+
+  hud.update('豆豆店', '第 3 天 · 休息中', true, '第 3 天休息中', '晴天', 1, 0, 'fair', 0);
+  expect(daybar.hidden).toBe(true);
+  expect(dot.hidden).toBe(true);
+
+  mobile = false; change();
+  expect(wall.parentElement).toBe(get('stage'));
 });

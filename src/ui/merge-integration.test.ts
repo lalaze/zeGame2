@@ -2,6 +2,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { MENU } from '../game/data';
 import { suggestedBake } from '../game/economy';
+import { formatTransactionMoney } from '../game/format';
 import { FURNITURE } from '../game/furniture';
 import { adoptCat } from '../game/pets';
 import { bookPromotion } from '../game/promotion';
@@ -53,7 +54,12 @@ describe('merged preparation and progression', () => {
       const input = query<HTMLInputElement>(`[data-dish="${id}"]`);
       expect(input.disabled).toBe(true);
       expect(input.checked).toBe(false);
-      expect(input.closest('label')!.textContent).toContain(t('menu.requiresKitchen'));
+      expect(input.closest('label')!.textContent).toContain(t('prep.needsKitchenShort'));
+    }
+    const dishDetails = query<HTMLDetailsElement>('.prep-dish-details');
+    dishDetails.open = true;
+    for (const id of ['ciabatta', 'affogato', 'matchafloat']) {
+      expect(dishDetails.querySelector(`[data-dish-detail="${id}"]`)!.textContent).toContain(t('menu.requiresKitchen'));
     }
     expect(document.querySelector('[data-amount="ciabatta"]')).toBeNull();
     expect(query<HTMLButtonElement>('[data-start]').disabled).toBe(true);
@@ -95,28 +101,33 @@ describe('merged preparation and progression', () => {
   it('reports only purchased stock when the preparation budget is partial', () => {
     const state = createInitialState(0); state.coins = 2;
     for (const id of Object.keys(state.pantry) as (keyof GameState['pantry'])[]) state.pantry[id] = 0;
-    const change = vi.fn(); showPrepare(state, vi.fn(), change);
-    query<HTMLButtonElement>('[data-restock]').click();
+    const start = vi.fn(); const change = vi.fn(); showPrepare(state, start, change);
+    const go = query<HTMLButtonElement>('[data-start]');
+    expect(go.hasAttribute('data-restock-open')).toBe(true);
+    expect(go.textContent).toBe(t('prep.budgetOpen', { price: formatTransactionMoney(2) }));
+    go.click();
     expect(state.coins).toBe(0);
     expect(state.pantry.beans).toBe(2);
-    expect(query('.prep [role="status"]').textContent).toContain(t('prep.bought', { items: `${t('ing.beans')} ×2` }));
-    expect(query<HTMLButtonElement>('[data-restock]').disabled).toBe(true);
-    query<HTMLButtonElement>('[data-restock]').click();
+    expect(start).toHaveBeenCalledTimes(1);
     expect(change).toHaveBeenCalledTimes(1);
+    expect(query('#toast').textContent).toContain(t('prep.bought', { items: `${t('ing.beans')} ×2` }));
   });
 
   it('lets a one-coin mixed-menu budget buy a complete espresso through preparation', () => {
     const state = createInitialState(0); state.coins = 1;
     state.items.latte = 1; state.onMenu = ['espresso', 'latte'];
     for (const id of Object.keys(state.pantry) as (keyof GameState['pantry'])[]) state.pantry[id] = 0;
-    const change = vi.fn(); showPrepare(state, vi.fn(), change);
-    expect(query<HTMLButtonElement>('[data-restock]').disabled).toBe(false);
-    query<HTMLButtonElement>('[data-restock]').click();
+    const start = vi.fn(); const change = vi.fn(); showPrepare(state, start, change);
+    const go = query<HTMLButtonElement>('[data-start]');
+    expect(go.disabled).toBe(false);
+    expect(go.hasAttribute('data-restock-open')).toBe(true);
+    go.click();
     expect(state.coins).toBe(0);
     expect(state.pantry.beans).toBe(1);
     expect(state.pantry.milk).toBe(0);
-    expect(query('.prep [role="status"]').textContent).toContain(t('prep.bought', { items: `${t('ing.beans')} ×1` }));
+    expect(query('#toast').textContent).toContain(t('prep.bought', { items: `${t('ing.beans')} ×1` }));
     expect(change).toHaveBeenCalledTimes(1);
+    expect(start).toHaveBeenCalledTimes(1);
   });
 
   it.each(['en', 'zh'] as const)('includes taste, reputation, pet and promotion forecasts in %s', (locale) => {
@@ -125,6 +136,8 @@ describe('merged preparation and progression', () => {
     expect(adoptCat(state, 'ginger')).toBe(true);
     expect(bookPromotion(state, 'clipLocal')).toBe(true);
     showPrepare(state, vi.fn(), vi.fn());
+    query<HTMLDetailsElement>('.prep-details').open = true;
+    query<HTMLDetailsElement>('.prep-dish-details').open = true;
     const text = query('.prep').textContent!;
     expect(text).toContain(t('prep.menuHint'));
     expect(text).toContain(t('rating.prep', { pct: '±0' }));
@@ -148,6 +161,8 @@ describe('merged preparation and progression', () => {
     expect(purchase).toHaveBeenCalledWith('recipe', 'ciabatta');
     panel.showTab('upgrades');
     const row = query('[data-buy="upgrade:cook"]').closest('.row')!;
+    const cookDetails = row.querySelector<HTMLDetailsElement>('.urow-details')!;
+    cookDetails.open = true; cookDetails.dispatchEvent(new Event('toggle'));
     expect(row.textContent).toContain('Stage 1/3');
     expect(row.textContent).toContain('1 in the kitchen → 2 in the kitchen');
     query<HTMLButtonElement>('[data-amount="max"]').click();
@@ -173,7 +188,8 @@ describe('merged management tabs', () => {
   it('keeps cat browsing free and allows only one creator booking, including while paused', () => {
     const state = createInitialState(0); state.coins = 10000;
     const panel = panelFor(state); panel.showTab('pets');
-    query<HTMLButtonElement>('[data-choose-cat="ginger"]').click();
+    const gingerDetails = query<HTMLDetailsElement>('[data-pet="ginger"] .card-details');
+    gingerDetails.open = true; gingerDetails.dispatchEvent(new Event('toggle'));
     expect(state.coins).toBe(10000);
     query<HTMLButtonElement>('[data-pet="ginger"] [data-adopt]').click();
     const afterAdoption = state.coins;

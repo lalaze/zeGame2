@@ -75,7 +75,7 @@ body.fullscreen-cafe .mobile-cafe-header .money {
 body.fullscreen-cafe .mobile-cafe-header .money .coins { font-size: 20px; padding: 0; gap: 4px; }
 body.fullscreen-cafe .mobile-cafe-header .money .rate { display: none; }
 body .mobile-cafe-dock {
-  grid-template-columns: .85fr 1.5fr .85fr .85fr; gap: 4px; padding: 6px;
+  grid-template-columns: .85fr .85fr 1.5fr .85fr; gap: 4px; padding: 6px;
   background: var(--game-wood) !important; border: 0 !important; border-bottom: 4px solid #b4844b !important;
 }
 body.fullscreen-cafe .mobile-cafe-dock button {

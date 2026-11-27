@@ -32,7 +32,7 @@ describe.each(['en', 'zh'] as const)('trial preparation and results in %s', loca
   beforeEach(() => setLocale(locale));
   it('selects a separate trial, preserves focus and refreshes the payable stock quote', () => {
     const s = cafe(); s.pantry.milk = 0; s.coins = 1000;
-    const change = vi.fn(); showPrepare(s, vi.fn(), change);
+    const start = vi.fn(); const change = vi.fn(); showPrepare(s, start, change);
     expect(picker().value).toBe('');
     expect([...picker().options].map(option => option.value)).not.toContain('espresso');
     picker().focus(); picker().value = 'latte'; picker().dispatchEvent(new Event('change', { bubbles: true }));
@@ -40,12 +40,17 @@ describe.each(['en', 'zh'] as const)('trial preparation and results in %s', loca
     expect(document.activeElement).toBe(picker()); expect(change).toHaveBeenCalledOnce();
     expect(document.querySelector('.trial-sales')!.textContent).toContain(t('trial.stock', { n: 0, limit: 5 }));
     expect(document.querySelector('.prep')!.textContent).toContain(t('ing.milk'));
-    expect(document.querySelector<HTMLButtonElement>('[data-start]')!.disabled).toBe(false);
+    const go = document.querySelector<HTMLButtonElement>('[data-start]')!;
+    expect(go.disabled).toBe(false);
+    expect(go.hasAttribute('data-restock-open')).toBe(true);
     expect(s.coins).toBe(1000); expect(s.pantry.milk).toBe(0);
-    document.querySelector<HTMLButtonElement>('[data-restock]')!.click();
-    expect(s.pantry.milk).toBe(5); expect(s.coins).toBeLessThan(1000);
     const latte = document.querySelector<HTMLInputElement>('[data-dish="latte"]')!; latte.click();
     expect(s.onMenu).toContain('latte'); expect(s.trialSales.selected).toBeNull();
+    // Putting latte back off menu and selecting it as trial again lets restock-and-open buy its trial milk.
+    document.querySelector<HTMLInputElement>('[data-dish="latte"]')!.click();
+    picker().value = 'latte'; picker().dispatchEvent(new Event('change', { bubbles: true }));
+    document.querySelector<HTMLButtonElement>('[data-start]')!.click();
+    expect(s.pantry.milk).toBe(5); expect(s.coins).toBeLessThan(1000); expect(start).toHaveBeenCalledOnce();
   });
 
   it('presents actual delivered feedback, waste and practice, then supports explicit repeat and promotion', () => {

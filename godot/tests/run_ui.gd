@@ -215,7 +215,7 @@ func _seen() -> Array:
 	elif _ui.street != null:
 		_gather(_ui.street, out)
 	elif _ui.ledger.visible:
-		for part: String in ["_tab_row", "_task", "_scroll"]:
+		for part: String in ["_tab_row", "_task", "_scroll", "_footer"]:
 			_gather(_ui.ledger.get(part), out)
 	return out
 

@@ -1,11 +1,15 @@
 class_name LedgerCards
 extends RefCounted
 
-## The three cards over the upgrades (src/ui/panel.ts): the shop's manager, catering orders, and the chain.
+## The operations group at the bottom of Upgrades (src/ui/panel.ts):
+## 3 compact tiles (shop manager, catering orders, café chain) + one shared collapsible full-width detail card below.
 
 var _ledger: CafeLedger
 var _ui: CafeUi
 var _session: CoreGameSession
+var _tiles: Dictionary = {}
+var _detail: VBoxContainer = null
+var _cards: Dictionary = {}
 var _manager: Dictionary = {}
 var _orders: Dictionary = {}
 var _chain: Dictionary = {}
@@ -25,24 +29,129 @@ static func _money(n: float) -> String:
 	return CoreFormat.format_transaction_money(n)
 
 
-func build(kind: String) -> Control:
-	match kind:
-		"manager": return _build_manager()
-		"orders": return _build_orders()
-	return _build_chain()
+func build_ops_grid() -> Control:
+	_tiles.clear()
+	_cards.clear()
+	var row := Paper.line([], 6)
+	for kind: String in ["manager", "orders", "chain"]:
+		var tile := _build_tile(kind)
+		row.add_child(tile["button"])
+		_tiles[kind] = tile
+	_detail = Paper.col([], 0)
+	_cards["manager"] = _build_manager()
+	_cards["orders"] = _build_orders()
+	_cards["chain"] = _build_chain()
+	for kind: String in ["manager", "orders", "chain"]:
+		_cards[kind].visible = _ledger.open_ops_tile == kind
+		_detail.add_child(_cards[kind])
+	_detail.visible = not _ledger.open_ops_tile.is_empty()
+	return Paper.col([row, _detail], 8)
+
+
+func _build_tile(kind: String) -> Dictionary:
+	var b := Button.new()
+	b.focus_mode = Control.FOCUS_NONE
+	b.mouse_filter = Control.MOUSE_FILTER_PASS
+	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	b.custom_minimum_size = Vector2(0.0, 74.0)
+	var icon_rect := Paper.mark("lock", 20.0, Paper.INK_LIGHT)
+	icon_rect.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	var name_lbl := Paper.words(_t("%s.name" % kind), "strong")
+	name_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_lbl.add_theme_font_override("font", Paper.font(800))
+	name_lbl.add_theme_font_size_override("font_size", 12)
+	name_lbl.add_theme_color_override("font_color", Paper.INK_A)
+	var status_lbl := Paper.words("", "tiny")
+	status_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	status_lbl.add_theme_font_override("font", Paper.font(700))
+	status_lbl.add_theme_font_size_override("font_size", 10)
+	status_lbl.add_theme_color_override("font_color", Paper.INK_LIGHT)
+	var inside := Paper.col([icon_rect, name_lbl, status_lbl], 3)
+	inside.alignment = BoxContainer.ALIGNMENT_CENTER
+	inside.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var pad := Paper.padded(inside, 4, 7)
+	pad.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	pad.set_anchors_preset(Control.PRESET_FULL_RECT)
+	b.add_child(pad)
+	pad.minimum_size_changed.connect(func() -> void: b.custom_minimum_size.y = maxf(74.0, pad.get_combined_minimum_size().y))
+	b.pressed.connect(func() -> void:
+		Paper._finish_typing(b)
+		_ledger.open_ops_tile = "" if _ledger.open_ops_tile == kind else kind
+		update()
+		# The tiles sit at the foot of the page, so the panel they open can land below the screen.
+		if not _ledger.open_ops_tile.is_empty():
+			_ledger.reveal_below(_detail))
+	return {"button": b, "icon": icon_rect, "name": name_lbl, "status": status_lbl, "styleKey": ""}
+
+
+func _style_tile(kind: String, icon_name: String, status_text: String, locked: bool, open: bool, active: bool) -> void:
+	var tile: Dictionary = _tiles[kind]
+	var icon_rect: TextureRect = tile["icon"]
+	icon_rect.texture = Paper.icon(icon_name, 20)
+	icon_rect.modulate = Paper.SAGE_A_DARK if open else Paper.INK_LIGHT
+	tile["status"].text = status_text
+	tile["name"].add_theme_color_override("font_color", Paper.INK_LIGHT if locked else Paper.INK_A)
+	tile["status"].add_theme_color_override("font_color", Paper.CARD_PRICE if open else Paper.INK_LIGHT)
+	var style_key := "%s|%s|%s" % [locked, open, active]
+	if tile["styleKey"] == style_key:
+		return
+	tile["styleKey"] = style_key
+	var b: Button = tile["button"]
+	var fill := Color8(0xf3, 0xf9, 0xef) if open else (Color(1.0, 1.0, 1.0, 0.58) if locked else Color.WHITE)
+	var border := Paper.BOOK_COVER if active else (Paper.SAGE_A if open else (Color8(0xd6, 0xc4, 0xa8) if locked else Paper.LINE_A))
+	var sb: StyleBoxFlat
+	if locked and not active:
+		sb = Paper.cached_box(fill, border, 1, 12, Vector2(4, 6))
+	else:
+		sb = Paper.card_a_box(border, fill, Vector2(4, 6))
+	for st: String in ["normal", "hover", "focus", "pressed", "hover_pressed"]:
+		b.add_theme_stylebox_override(st, sb)
 
 
 func update() -> void:
-	if not _manager.is_empty():
+	if _tiles.is_empty():
+		return
+	var s := _session.state
+	var now := CoreClock.now()
+	# Manager tile state
+	var m_unlocked: bool = CoreManager.manager_unlocked(s)
+	var m_hired: bool = s["manager"]["hired"]
+	var m_waiting: float = CoreChain.franchise_earnings(s, now)["amount"] if not s["chain"]["franchises"].is_empty() else 0.0
+	var m_locked: bool = not m_hired and not m_unlocked
+	var m_open: bool = (not m_hired and m_unlocked and float(s["coins"]) >= CoreManager.MANAGER_COST) or (m_hired and m_waiting > 0.0)
+	var m_status := _t("manager.tile.locked", {"n": CoreManager.MANAGER_UNLOCK_DAY}) if m_locked else (
+		"%s %s" % [_t("manager.hire"), _money(CoreManager.MANAGER_COST)] if not m_hired else (
+		_t("manager.tile.collect", {"money": _money(m_waiting)}) if m_waiting > 0.0 else _t("manager.hired")))
+	_style_tile("manager", "lock" if m_locked else "people", m_status, m_locked, m_open, _ledger.open_ops_tile == "manager")
+	# Orders tile state
+	var active: Variant = s["orders"]["active"]
+	var ready: bool = CoreOrders.order_ready(s, now)
+	var o_locked: bool = not m_hired
+	var o_open: bool = not o_locked and active != null and ready
+	var o_status := _t("orders.tile.locked") if o_locked else (
+		(_t("orders.tile.claim", {"money": _money(active["payout"])}) if ready else _duration(CoreOrders.order_left(s, now))) if active != null else _t("orders.tile.idle"))
+	_style_tile("orders", "lock" if o_locked else "bag", o_status, o_locked, o_open, _ledger.open_ops_tile == "orders")
+	# Chain tile state
+	var c_unlocked: bool = CoreChain.branch_unlocked(s)
+	var c_can_open: bool = CoreChain.can_open_branch(s)
+	var c_locked: bool = not c_unlocked
+	var c_status := _t("chain.tile.locked") if c_locked else (
+		_t("chain.tile.open") if c_can_open else _t("chain.tile.stars", {"n": s["chain"]["stars"]}))
+	_style_tile("chain", "lock" if c_locked else "star", c_status, c_locked, c_can_open, _ledger.open_ops_tile == "chain")
+	# Show at most one detail card below the 3 tiles.
+	_detail.visible = not _ledger.open_ops_tile.is_empty()
+	for kind: String in ["manager", "orders", "chain"]:
+		_cards[kind].visible = _ledger.open_ops_tile == kind
+	if _ledger.open_ops_tile == "manager":
 		_update_manager()
-	if not _orders.is_empty():
+	elif _ledger.open_ops_tile == "orders":
 		_update_orders()
-	if not _chain.is_empty():
+	elif _ledger.open_ops_tile == "chain":
 		_update_chain()
 
 
 static func _card(children: Array) -> Control:
-	var card := Paper.card("row")
+	var card := Paper.panel(Paper.card_a_box(Paper.LINE_A, Color.WHITE, Vector2(12, 10)))
 	card.add_child(Paper.col(children, 8))
 	return card
 
@@ -74,7 +183,7 @@ func _build_manager() -> Control:
 			_ledger.bought("upgrade", "manager")),
 	}
 	var m := _manager
-	return _card([Paper.words(_t("manager.name"), "name"), m["sub"], m["away"], m["franchise"], m["hire"], m["till"], m["collect"], m["auto"]])
+	return _card([Paper.words(_t("manager.name"), "h3"), m["sub"], m["away"], m["franchise"], m["hire"], m["till"], m["collect"], m["auto"]])
 
 
 func _update_manager() -> void:
@@ -107,7 +216,7 @@ func _update_manager() -> void:
 func _build_orders() -> Control:
 	var s := _session.state
 	_orders = {"sub": Paper.words("", "muted"), "status": Paper.words("", "muted"), "options": {}}
-	var children: Array = [Paper.words(_t("orders.name"), "name"), _orders["sub"], _orders["status"]]
+	var children: Array = [Paper.words(_t("orders.name"), "h3"), _orders["sub"], _orders["status"]]
 	for o: Dictionary in CoreOrders.ORDERS:
 		var kind: String = o["id"]
 		var b := _button("primary", func() -> void:
@@ -161,7 +270,7 @@ func _build_chain() -> Control:
 	_chain["perksButton"] = _button("ghost", func() -> void: ChainDialogs.show_perks(_ui.dialogs, _session.state, func() -> void:
 		_ledger.bought("upgrade", "perk")))
 	var c := _chain
-	return _card([Paper.words(_t("chain.name"), "name"), c["sub"], c["status"], c["perks"], c["gain"], c["handover"], c["note"], c["places"], c["complete"], c["open"], c["perksButton"]])
+	return _card([Paper.words(_t("chain.name"), "h3"), c["sub"], c["status"], c["perks"], c["gain"], c["handover"], c["note"], c["places"], c["complete"], c["open"], c["perksButton"]])
 
 
 func _update_chain() -> void:

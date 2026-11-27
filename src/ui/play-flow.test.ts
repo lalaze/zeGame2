@@ -130,14 +130,15 @@ describe('reversible service Pantry task', () => {
     f.setCollapsed(false); expect(readPanelScroll(f.list, f.wrapper)).toBe(674);
   });
 
-  it('preserves Cats owned/catalog choices and furnishing category through rebuilding', () => {
+  it('preserves Cats filter/expanded choices and furnishing category through rebuilding', () => {
     const f = fixture(liveState()); f.state.pets = [{ id: 'ginger', careSeconds: 120, autoRefill: true }];
-    f.panel.showTab('pets'); button('[data-pet-group="longhair"]').click(); button('[data-choose-cat="persian"]').click();
-    button('[data-pet-view="owned"]').click(); button('[data-pet-view="owned"]').focus(); f.list.scrollTop = 306;
+    f.panel.showTab('pets'); button('[data-pet-group="longhair"]').click();
+    const persianDetails = q<HTMLDetailsElement>('[data-pet="persian"] .card-details');
+    persianDetails.open = true; persianDetails.dispatchEvent(new Event('toggle'));
+    button('[data-pet-group="longhair"]').focus(); f.list.scrollTop = 306;
     f.flow.openPantry(); f.flow.returnToPrevious(); expect(f.list.scrollTop).toBe(306);
-    expect(button('[data-pet-view="owned"]').getAttribute('aria-pressed')).toBe('true');
     expect(button('[data-pet-group="longhair"]').getAttribute('aria-pressed')).toBe('true');
-    expect(button('[data-choose-cat="persian"]').getAttribute('aria-pressed')).toBe('true');
+    expect(q<HTMLDetailsElement>('[data-pet="persian"] .card-details').open).toBe(true);
     f.panel.showTab('decor'); button('[data-decor-category="furniture"]').click(); f.list.scrollTop = 710;
     f.flow.openPantry(); f.flow.returnToPrevious(); expect(f.list.scrollTop).toBe(710);
     expect(button('[data-decor-category="furniture"]').classList.contains('active')).toBe(true);

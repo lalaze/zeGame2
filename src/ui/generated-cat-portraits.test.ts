@@ -54,42 +54,41 @@ function adapterFor(idle: HTMLCanvasElement, ready = true) {
   };
 }
 const portraits = (breed: CatId) => [
-  document.querySelector<HTMLImageElement>(`[data-choose-cat="${breed}"] img`)!,
-  document.querySelector<HTMLImageElement>(`[data-pet="${breed}"] img`)!,
+  document.querySelector<HTMLImageElement>(`[data-pet="${breed}"] .pet-win img`)!,
 ];
 const urls = (breed: CatId) => portraits(breed).map(img => img.src);
 const button = (selector: string) => document.querySelector<HTMLButtonElement>(selector)!;
 
 describe('shared generated cat portraits', () => {
-  it('retains twelve distinct legacy portraits and encodes each only once across both views and repeated updates', () => {
+  it('retains twelve distinct legacy portraits and encodes each only once across filters and repeated updates', () => {
     const state = createInitialState(0), before = serialize(state), onChange = vi.fn();
     const panel = new PetPanel(document.querySelector('#pets')!, state, onChange);
     for (const cat of CATS) {
-      expect(urls(cat.id)).toEqual(Array(2).fill(`data:image/png;legacy-${cat.id};72x56;base64,`));
+      expect(urls(cat.id)).toEqual([`data:image/png;legacy-${cat.id};72x56;base64,`]);
       expect(toDataURL).toHaveBeenCalledWith(catFrames(cat.id).idle, 4);
     }
     expect(new Set(CATS.map(cat => urls(cat.id)[0])).size).toBe(12);
     for (let i = 0; i < 100; i++) panel.update();
-    button('[data-pet-view="owned"]').click(); button('[data-pet-view="catalog"]').click();
+    button('[data-pet-group="shorthair"]').click(); button('[data-pet-group="all"]').click();
     expect(toDataURL).toHaveBeenCalledTimes(12);
     expect(serialize(state)).toBe(before); expect(onChange).not.toHaveBeenCalled();
   });
 
-  it('uses the ready Siamese 4× backing once in both views without remapping the other eleven breeds', () => {
+  it('uses the ready Siamese 4× backing in card and summary paw without remapping the other eleven breeds', () => {
     const { idle, backing } = generatedIdle(), adapter = adapterFor(idle);
     vi.mocked(getGeneratedCatAdapter).mockReturnValue(adapter);
     const state = createInitialState(0); state.pets = [{ id: 'siamese', careSeconds: 180, autoRefill: false }];
     const before = serialize(state);
     const panel = new PetPanel(document.querySelector('#pets')!, state, vi.fn());
-    expect(urls('siamese')).toEqual(Array(2).fill('data:image/png;generated-siamese;96x72;base64,'));
+    expect(urls('siamese')).toEqual(['data:image/png;generated-siamese;96x72;base64,']);
+    expect(document.querySelector<HTMLImageElement>('[data-jump-cat="siamese"] img')!.src).toBe('data:image/png;generated-siamese;96x72;base64,');
     expect(toDataURL).toHaveBeenCalledWith(backing, 1);
     expect(toDataURL).not.toHaveBeenCalledWith(idle, 4);
     expect(toDataURL).not.toHaveBeenCalledWith(catFrames('siamese').idle, 4);
     for (const cat of CATS.filter(cat => cat.id !== 'siamese')) {
-      expect(urls(cat.id)).toEqual(Array(2).fill(`data:image/png;legacy-${cat.id};72x56;base64,`));
+      expect(urls(cat.id)).toEqual([`data:image/png;legacy-${cat.id};72x56;base64,`]);
       expect(adapter.resolve).toHaveBeenCalledWith(cat.id, catFrames(cat.id));
     }
-    button('[data-pet-view="owned"]').click();
     expect(document.querySelector<HTMLElement>('[data-pet="siamese"]')!.hidden).toBe(false);
     for (let i = 0; i < 100; i++) panel.update();
     expect(toDataURL).toHaveBeenCalledTimes(12); expect(serialize(state)).toBe(before);
@@ -104,7 +103,7 @@ describe('shared generated cat portraits', () => {
     expect(adapter.resolve).not.toHaveBeenCalled(); expect(urls('siamese')).toEqual(legacyUrls);
     adapter.ready = true; panel.update();
     const generatedUrls = urls('siamese');
-    expect(generatedUrls).not.toEqual(legacyUrls); expect(generatedUrls[0]).toBe(generatedUrls[1]);
+    expect(generatedUrls).not.toEqual(legacyUrls);
     expect(toDataURL).toHaveBeenCalledTimes(13);
     vi.mocked(getGeneratedCatAdapter).mockReturnValue(null); panel.update();
     expect(urls('siamese')).toEqual(legacyUrls);
@@ -123,11 +122,11 @@ describe('shared generated cat portraits', () => {
     const replacement = generatedIdle('replacement');
     registerFineSpriteArt(first.idle, replacement.backing, 4);
     panel.update();
-    expect(urls('siamese')).toEqual(Array(2).fill('data:image/png;replacement;96x72;base64,'));
+    expect(urls('siamese')).toEqual(['data:image/png;replacement;96x72;base64,']);
     expect(toDataURL).toHaveBeenCalledTimes(13);
     const reloaded = generatedIdle('reloaded');
     vi.mocked(getGeneratedCatAdapter).mockReturnValue(adapterFor(reloaded.idle)); panel.update();
-    expect(urls('siamese')).toEqual(Array(2).fill('data:image/png;reloaded;96x72;base64,'));
+    expect(urls('siamese')).toEqual(['data:image/png;reloaded;96x72;base64,']);
     panel.update(); expect(toDataURL).toHaveBeenCalledTimes(14);
   });
 
@@ -139,12 +138,15 @@ describe('shared generated cat portraits', () => {
     button('[data-pet="siamese"] [data-adopt]').click(); panel.update();
     expect(state.pets).toHaveLength(1); expect(state.pets[0].id).toBe('siamese');
     expect(state.coins).toBe(coins - cat.adoption);
+    const details = document.querySelector<HTMLDetailsElement>('[data-pet="siamese"] .card-details')!;
+    details.open = true; details.dispatchEvent(new Event('toggle'));
     const seconds = state.pets[0].careSeconds;
     button('[data-pet="siamese"] [data-refill]').click(); panel.update();
     expect(state.pets[0].careSeconds).toBe(seconds + CARE_SECONDS);
     expect(state.coins).toBe(coins - cat.adoption - cat.careCost);
     expect(onChange.mock.calls).toEqual([['siamese'], ['siamese']]);
-    expect(urls('siamese')).toEqual(Array(2).fill('data:image/png;generated-siamese;96x72;base64,'));
+    expect(urls('siamese')).toEqual(['data:image/png;generated-siamese;96x72;base64,']);
+    expect(document.querySelector<HTMLImageElement>('[data-jump-cat="siamese"] img')!.src).toBe('data:image/png;generated-siamese;96x72;base64,');
     expect(toDataURL).toHaveBeenCalledTimes(13);
   });
 });

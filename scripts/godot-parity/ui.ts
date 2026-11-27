@@ -57,7 +57,7 @@ function tokens(root: Any): Token[] {
     if (node.nodeType !== 1 || node.hidden || node.getAttribute('hidden') !== null) return;
     const has = (c: string) => node.classList.contains(c);
     // Kept out of sight on a phone by the stylesheets.
-    if (has('life-full-label') || has('play-flow-help-hint') || (has('goal-details') && !node.parentElement.classList.contains('goal-expanded'))) return;
+    if (has('life-full-label') || has('play-flow-help-hint')) return;
     if (node.parentElement?.classList.contains('street-shop-caption') && node.tagName === 'STRONG' && (['open', 'building'].includes(node.closest('.street-shop').dataset.status) || node.closest('.street-home'))) return;
     // The sheet's close button stands after its title.
     if (has('street-detail-close') && !after) return;
@@ -82,7 +82,7 @@ const tabs = ['menu', 'pantry', 'upgrades', 'decor', 'pets', 'promotion'] as con
 const cats = ['all', 'coffee', 'tea', 'bread', 'pastry'];
 function markup(): void {
   document.body.innerHTML = `<aside class="panel mobile-panel" id="management-panel"><nav class="tabs" role="tablist">${tabs.map((id) => `<button role="tab" data-tab="${id}" class="tab">${t(`tab.${id}` as Any)}</button>`).join('')}</nav>
-    <div class="panel-scroll"><div class="goal" id="goal" hidden></div><div class="ledger-tools"><div class="buy-amount"><span>${t('buy.label')}</span><button data-amount="1" class="chip active">x1</button><button data-amount="10" class="chip">x10</button><button data-amount="max" class="chip">${t('buy.max')}</button></div>
+    <div class="panel-scroll"><div class="goal" id="goal" hidden></div><div class="ledger-tools"><div class="buy-amount"><span>${t('buy.label')}</span><button data-amount="1" class="chip active">×1</button><button data-amount="10" class="chip">×10</button><button data-amount="max" class="chip">${t('buy.max')}</button></div>
     <div class="menu-filter">${cats.map((c) => `<button data-cat="${c}" class="chip">${t((c === 'all' ? 'cat.all' : `catShort.${c}`) as Any)}</button>`).join('')}</div></div>
     <div class="buy-amount pantry-amount" hidden><span>${t('buy.label')}</span>${[10, 50, 200].map((n) => `<button data-pantry-amount="${n}" class="chip">${n}</button>`).join('')}</div><div class="list" id="list"></div></div></aside>
     <button id="partners-btn"></button><button id="regular-guests-btn"></button><button id="cafe-style-btn"></button><div id="modal-root"></div><div id="toast" hidden></div>`;
@@ -129,14 +129,17 @@ function startDay(w: Walk): void {
 }
 function prepare(w: Walk): void { if (w.state.phase === 'prep') ui.showPrepare(w.state, () => startDay(w), changed(w)); }
 function report(w: Walk, of: Any): void {
-  const { body, recommendedTab, advice } = ui.settlementHtml(of, w.state);
-  const reportBody = document.createElement('div'); reportBody.innerHTML = body;
-  const memories = ui.guestMemoryReport(w.state, of.day); if (memories) reportBody.querySelector('[data-memory-report]')?.append(memories);
-  if (of.trialSale) { const trial = ui.trialResultCard(w.state, changed(w), of.trialSale); if (trial) reportBody.querySelector('[data-trial-report]')?.append(trial); }
-  const story = ui.closingStory(w.state, of, () => save(w)); if (story) reportBody.querySelector('.report-summary')?.after(story);
-  showModal({ title: t('report.title', { n: of.day }), body: reportBody, buttons: [
-    { label: t('report.next'), primary: true, onClick: () => { if (!call('manager', 'managerRunsDays', [w.state])) prepare(w); } },
-    { label: advice.claimableGoal || advice.action.kind === 'claimChapter' ? t('guide.viewReward') : t(`tab.${recommendedTab}` as Any), onClick: () => { w.ledger = true; w.panel.showTab(recommendedTab); } }] });
+  ui.showSettlement(of, w.state, {
+    onNext: () => { if (!call('manager', 'managerRunsDays', [w.state])) prepare(w); },
+    onTab: (tab: string) => { w.ledger = true; w.panel.showTab(tab); },
+    onClaim: (kind: string, id: string) => {
+      save(w);
+      if (kind === 'goal') toast(t('goal.claimed', { reward: formatMoney(Number(id)) }));
+      w.panel.refresh();
+    },
+    onTrialChange: changed(w),
+    onStorySave: () => save(w),
+  });
 }
 
 // ---------------------------------------------------------------- the screens

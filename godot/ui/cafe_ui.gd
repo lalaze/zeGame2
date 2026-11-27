@@ -64,6 +64,7 @@ func _init(core: CoreGameSession, told: FloorsFeed, building: FloorsScene) -> vo
 	_root.add_child(dialogs)
 	_build_notices()
 	dialogs.changed.connect(_flags.unbind(1))
+	dialogs.header_raised.connect(hud.set_header_raised)
 	hud.opened.connect(_opened)
 	session.ui.connect(_told)
 	scene.tapped.connect(_tapped)
@@ -82,25 +83,26 @@ func inset(top: float, bottom: float) -> void:
 	_bottom = bottom
 	hud.inset(top, bottom)
 	_lift()
-	dialogs.note_top = top + 84.0
+	dialogs.note_top = top + 114.0
+	dialogs.set_note_at_bottom(ledger.visible, bottom)
 	if street != null:
 		street.inset(top, bottom)
 	guide.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
 	guide.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	guide.offset_left = 12.0
 	guide.offset_right = -12.0
-	guide.offset_bottom = -92.0 - bottom
-	guide.offset_top = -92.0 - bottom
+	guide.offset_bottom = -108.0 - bottom
+	guide.offset_top = -108.0 - bottom
 	life.set_anchors_preset(Control.PRESET_BOTTOM_LEFT)
 	life.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	life.offset_left = 12.0
-	life.offset_bottom = -92.0 - bottom
-	life.offset_top = -92.0 - bottom
+	life.offset_bottom = -108.0 - bottom
+	life.offset_top = -108.0 - bottom
 	_arrange_bar.offset_bottom = -14.0 - bottom
 	_arrange_bar.offset_top = -14.0 - bottom
 	_temporary.offset_top = top
-	_return.offset_bottom = -92.0 - bottom
-	_return.offset_top = -92.0 - bottom
+	_return.offset_bottom = -108.0 - bottom
+	_return.offset_top = -108.0 - bottom
 
 
 ## On the first day the ledger shows only what the day needs, until the guide or the player goes further.
@@ -337,6 +339,7 @@ func set_ledger(open: bool) -> void:
 		hud.set_expanded(false)
 		_return.visible = false
 	ledger.set_open(open)
+	dialogs.set_note_at_bottom(open, _bottom)
 	_flags()
 
 

@@ -37,7 +37,7 @@ describe('floors UI', () => {
     installFloorsUi(document.body);
     expect(document.body.classList.contains('floors-view')).toBe(true);
     for (const name of names) expect(document.body.style.getPropertyValue(`--floors-icon-${name}`)).toBe(floorsIconUrl(name));
-    expect(document.getElementById('open-btn')!.dataset.floorsIcon).toBe('menu');
+    expect(document.getElementById('open-btn')!.dataset.floorsIcon).toBe('bell');
     expect(document.querySelector<HTMLElement>('[data-tab="pets"]')!.dataset.floorsIcon).toBe('pets');
     // A mark already set by the page is kept.
     expect(document.getElementById('panel-toggle')!.dataset.floorsIcon).toBe('spark');

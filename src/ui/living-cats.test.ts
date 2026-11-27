@@ -29,12 +29,16 @@ describe('living cat cards', () => {
     const interact = vi.fn();
     const onChange = vi.fn();
     new PetPanel(document.getElementById('pets')!, state, onChange, { getActor: () => actor, locate, interact });
-    document.querySelector<HTMLButtonElement>('[data-pet-view="owned"]')!.click();
     const card = document.querySelector<HTMLElement>('[data-pet="ginger"]')!;
     const other = document.querySelector<HTMLElement>('[data-pet="tuxedo"]')!;
     expect(card.hidden).toBe(false);
-    expect(card.querySelector('h3')!.textContent).toBe(`1. ${t('pet.ginger.name')}`);
-    expect(other.querySelector('h3')!.textContent).toBe(`2. ${t('pet.tuxedo.name')}`);
+    expect(card.querySelector('h3')!.textContent).toBe(t('pet.ginger.name'));
+    expect(other.querySelector('h3')!.textContent).toBe(t('pet.tuxedo.name'));
+    for (const el of [card, other]) {
+      const details = el.querySelector<HTMLDetailsElement>('.card-details')!;
+      details.open = true;
+      details.dispatchEvent(new Event('toggle'));
+    }
     expect(card.textContent).toContain('Playful');
     expect(card.textContent).toContain('Exploring');
     expect(card.textContent).toContain('Napping');
@@ -42,6 +46,12 @@ describe('living cat cards', () => {
     expect(other.textContent).toContain('Reading nook');
     const before = JSON.stringify(state);
     const traffic = petTraffic(state);
+    const homeLocate = card.querySelector<HTMLButtonElement>('[data-home-locate="ginger"]')!;
+    expect(homeLocate.hidden).toBe(false);
+    expect(homeLocate.disabled).toBe(false);
+    homeLocate.click();
+    expect(locate).toHaveBeenCalledWith('ginger');
+    locate.mockClear();
     for (const selector of ['[data-locate-cat="ginger"]', '[data-pet-cat="ginger"]']) {
       const button = document.querySelector<HTMLButtonElement>(selector)!;
       expect(button.style.minHeight).toBe('44px');

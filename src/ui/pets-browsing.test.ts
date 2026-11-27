@@ -1,6 +1,6 @@
 // @vitest-environment happy-dom
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { CATS, type CatId } from '../game/pets';
+import { CATS } from '../game/pets';
 import { createInitialState, serialize } from '../game/state';
 import { setLocale } from '../i18n';
 import { PetPanel, createPetBrowsingState, type PetBrowsingState } from './pets';
@@ -22,53 +22,46 @@ afterEach(() => {
 const button = (selector: string) => document.querySelector<HTMLButtonElement>(selector)!;
 
 describe('transient pet browsing state', () => {
-  it('starts with the first unowned cat and shares all explicit choices with its owner', () => {
+  it('starts with all breeds collapsed and shares explicit filter and expand choices with its owner', () => {
     const state = createInitialState(0);
     state.pets = [{ id: 'ginger', careSeconds: 180, autoRefill: true }];
     const before = serialize(state);
     const browsing = createPetBrowsingState(state);
-    expect(browsing).toEqual({ mode: 'catalog', group: 'all', selected: 'tuxedo' });
+    expect(browsing).toEqual({ group: 'all', expanded: {} });
     new PetPanel(document.querySelector('#pets')!, state, vi.fn(), {}, browsing);
     vi.spyOn(HTMLElement.prototype, 'scrollIntoView').mockImplementation(() => {});
     button('[data-pet-group="longhair"]').click();
-    button('[data-choose-cat="persian"]').click();
-    button('[data-pet-view="owned"]').click();
-    expect(browsing).toEqual({ mode: 'owned', group: 'longhair', selected: 'persian' });
+    const details = document.querySelector<HTMLDetailsElement>('[data-pet="persian"] .card-details')!;
+    details.open = true;
+    details.dispatchEvent(new Event('toggle'));
+    expect(browsing).toEqual({ group: 'longhair', expanded: { persian: true } });
+    // Tapping an adopted cat's summary paw resets incompatible group filter and expands that cat.
+    button('[data-jump-cat="ginger"]').click();
+    expect(browsing.group).toBe('all');
+    expect(browsing.expanded.ginger).toBe(true);
     expect(serialize(state)).toBe(before);
   });
 
-  it('falls back to a visible cat when a remembered ID no longer exists', () => {
+  it('repairs stale group values without leaving the cat grid blank', () => {
     const state = createInitialState(0);
-    const before = serialize(state);
-    const browsing: PetBrowsingState = { mode: 'catalog', group: 'longhair', selected: 'retired-cat' as CatId };
+    const browsing = { group: 'removed-group', expanded: {} } as unknown as PetBrowsingState;
     new PetPanel(document.querySelector('#pets')!, state, vi.fn(), {}, browsing);
-    expect(browsing).toEqual({ mode: 'catalog', group: 'longhair', selected: 'ragdoll' });
-    expect(button('[data-choose-cat="ragdoll"]').getAttribute('aria-pressed')).toBe('true');
-    expect(button('[data-choose-cat="ragdoll"]').hidden).toBe(false);
-    expect([...document.querySelectorAll<HTMLElement>('[data-pet]:not([hidden])')].map((card) => card.dataset.pet)).toEqual(['ragdoll']);
-    expect(serialize(state)).toBe(before);
+    expect(browsing).toEqual({ group: 'all', expanded: {} });
+    expect(button('[data-pet-group="all"]').getAttribute('aria-pressed')).toBe('true');
+    expect(document.querySelectorAll('[data-pet]:not([hidden])')).toHaveLength(CATS.length);
   });
 
-  it('repairs stale view and group values without leaving the catalog blank', () => {
+  it('filters visible cards by breed group and restores expanded state on ordinary updates', () => {
     const state = createInitialState(0);
-    const browsing = { mode: 'removed-view', group: 'removed-group', selected: 'removed-cat' } as unknown as PetBrowsingState;
-    new PetPanel(document.querySelector('#pets')!, state, vi.fn(), {}, browsing);
-    expect(browsing).toEqual({ mode: 'catalog', group: 'all', selected: CATS[0].id });
-    expect(button('[data-pet-view="catalog"]').getAttribute('aria-pressed')).toBe('true');
-    expect(document.querySelectorAll('[data-choose-cat]:not([hidden])')).toHaveLength(CATS.length);
-    expect(document.querySelectorAll('[data-pet]:not([hidden])')).toHaveLength(1);
-  });
-
-  it('revalidates a stale selection on an ordinary update and preserves owned mode', () => {
-    const state = createInitialState(0);
-    const browsing: PetBrowsingState = { mode: 'owned', group: 'shorthair', selected: 'american' };
+    const browsing: PetBrowsingState = { group: 'shorthair', expanded: { american: true } };
     const panel = new PetPanel(document.querySelector('#pets')!, state, vi.fn(), {}, browsing);
-    browsing.selected = 'retired-cat' as CatId;
+    expect(button('[data-pet-group="shorthair"]').getAttribute('aria-pressed')).toBe('true');
+    const visible = [...document.querySelectorAll<HTMLElement>('[data-pet]:not([hidden])')].map((el) => el.dataset.pet);
+    expect(visible).toEqual(CATS.filter((c) => c.group === 'shorthair').map((c) => c.id));
+    expect(document.querySelector<HTMLDetailsElement>('[data-pet="american"] .card-details')!.open).toBe(true);
+    browsing.group = 'removed-group' as PetBrowsingState['group'];
     panel.update();
-    expect(browsing).toEqual({ mode: 'owned', group: 'shorthair', selected: 'british' });
-    expect(button('[data-pet-view="owned"]').getAttribute('aria-pressed')).toBe('true');
-    expect(document.querySelectorAll('[data-pet]:not([hidden])')).toHaveLength(0);
-    button('[data-pet-view="catalog"]').click();
-    expect(document.querySelector<HTMLElement>('[data-pet="british"]')!.hidden).toBe(false);
+    expect(browsing.group).toBe('all');
+    expect(document.querySelectorAll('[data-pet]:not([hidden])')).toHaveLength(CATS.length);
   });
 });

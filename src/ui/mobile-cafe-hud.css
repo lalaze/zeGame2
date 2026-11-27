@@ -1,5 +1,6 @@
 .life-compact-label { display: none; }
 .mobile-cafe-hud[hidden] { display: none; }
+.mobile-sign-rope, .mobile-sign-wx, .mobile-daybar, .mobile-shelf-board, .mobile-tools-tape, .mobile-tools-tail, .mobile-more-dot { display: none; }
 
 /* Phone chrome stays outside the enlarged, draggable room. */
 body.fullscreen-cafe.mobile-cafe-layout {
@@ -37,7 +38,7 @@ body.fullscreen-cafe .mobile-cafe-header .money .rate { font-size: 10px; white-s
 
 .mobile-cafe-dock {
   position: absolute; bottom: var(--edge-bottom); left: var(--edge-left); right: var(--edge-right);
-  display: grid; grid-template-columns: 1fr 1.55fr 1fr .85fr; gap: 6px;
+  display: grid; grid-template-columns: .9fr .9fr 1.55fr .85fr; gap: 6px;
   padding: 6px; border: 2px solid var(--wood-light); background: var(--paper-grain), var(--cream);
   box-shadow: var(--paper-card); pointer-events: auto;
 }
@@ -60,6 +61,7 @@ body.fullscreen-cafe .mobile-cafe-dock #mobile-cafe-more[aria-expanded="true"] {
 .mobile-tools-heading strong { font-size: 16px; }
 .mobile-tools-heading button { min-height: 44px; min-width: 44px; font-size: 22px; margin: 0; }
 .mobile-service-tools { display: flex; flex-wrap: wrap; gap: 6px; padding-bottom: 10px; border-bottom: 1px solid var(--wood-light); }
+.mobile-service-tools[hidden] { display: none; }
 body.fullscreen-cafe .mobile-cafe-tools .day-hud {
   position: static; flex: 1 0 100%; max-width: none; width: 100%; display: flex; flex-wrap: wrap;
   align-items: center; padding: 6px 0; gap: 6px; border: 0; box-shadow: none; background: none;
